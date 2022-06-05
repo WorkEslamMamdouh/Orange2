@@ -2308,6 +2308,7 @@ var I_Sls_TR_Invoice = /** @class */ (function (_super) {
         _this.ItemDiscountTotal = 0;
         _this.ItemVatTotal = 0;
         _this.RoundingAmount = 0;
+        _this.SalesPersonId = 0;
         return _this;
     }
     return I_Sls_TR_Invoice;
@@ -2457,6 +2458,7 @@ var IQ_GetSlsInvoiceStatistic = /** @class */ (function (_super) {
         _this.ChargeCode = 0;
         _this.InvoiceTypeCode = 0;
         _this.InvoiceTransCode = 0;
+        _this.SalesPersonId = 0;
         _this.DocNo = "";
         _this.TrTime = "";
         _this.DocUUID = "";

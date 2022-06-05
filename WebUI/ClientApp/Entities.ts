@@ -3806,6 +3806,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
         this.ItemDiscountTotal = 0;
         this.ItemVatTotal = 0;
         this.RoundingAmount = 0;
+        this.SalesPersonId = 0;
     }
     public InvoiceID: number;
     public TrNo: number;
@@ -3889,6 +3890,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
     public ItemDiscountTotal: number;
     public ItemVatTotal: number;
     public RoundingAmount: number;
+    public SalesPersonId: number;
 }
 
 class I_Sls_TR_InvoiceItems extends SecurityClass {
@@ -4083,6 +4085,7 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
         this.ChargeCode = 0;
         this.InvoiceTypeCode = 0;
         this.InvoiceTransCode = 0;
+        this.SalesPersonId = 0;
         this.DocNo = "";
         this.TrTime = "";
         this.DocUUID = "";
@@ -4173,6 +4176,7 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
     public ChargeCode: number;
     public InvoiceTypeCode: number;
     public InvoiceTransCode: number;
+    public SalesPersonId: number;
     public DocNo: string;
     public TrTime: string;
     public DocUUID: string;
