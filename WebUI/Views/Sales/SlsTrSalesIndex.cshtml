@@ -1,0 +1,839 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_SlsSales;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+
+    .backcolor {
+        background-color: #fbebdc !important;
+    }
+</style>
+
+<link href="~/Style_design/SlsTRSales.css" rel="stylesheet" />
+
+<div class="col-lg-12    borderred backcolor">
+
+
+
+
+    <div class="col-lg-3">
+        <nav class="">
+            <div class=" ">
+
+                <ul class="nav navbar-nav">
+                    <li id="btndiv_1" class="border_li"><a style="color: #0a0a0a !important;" id="btndiv_1" href="#"> @SystemResource.App_Home </a></li>
+                    <li id="btndiv_2" class="border_li"><a style="color: #0a0a0a !important;" id="btndiv_2" href="#"> @SystemResource.Invoice_details </a></li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="condtionbtn2" class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-4  "></div>
+        <button id="btnSave" type="button" class="btn btn-success ">@SystemResource.App_save <span class="glyphicon glyphicon-floppy-saved"></span></button>
+        <label type="button" id="btnPrintSlip" class="btn btn-warning " style="background-color: #f89814;">@SystemResource.SavePrintNegation      </label>
+        <label type="button" id="btnPrintTransaction" class="btn btn-warning " style="background-color: #f89814;">@SystemResource.Saveprintinvoice</label>
+        <button id="btnAdd" type="button" class="btn btn-success display_none ">@SystemResource.App_Add <span class="glyphicon glyphicon-save"></span></button>
+        <button id="btnBack" type="button" class="btn btn-info  ">@SystemResource.App_back   <span class="glyphicon glyphicon-save"></span>                    </button>
+
+    </div>
+    <div id="div_1" class="col-lg-12  display_none">
+        <div id="Men_Sales_1" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 backcolor">
+            <div id="informtionReserved" class="col-lg-12 col-md-12 col-xl-12 col-xs-12   ">
+                <div id="condtionbtn1" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button id="btnChanege_1" type="button" class="btn btn-black">
+                        <span class="glyphicon glyphicon-arrow-left" style="margin-top: -27px;"></span> @SystemResource.Screenchange
+                    </button>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 name_subscribe">
+                    <label id="lblMessage" style="font-size:16px;"> </label>
+                </div>
+
+
+                <div id="General_Div" class="disabledDiv col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12 margingred">
+
+
+
+                    <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+
+                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4 marginstenig pading_lep  pading_2  "> @SystemResource.DownloadOfferPrice </label>
+                        <div class="col-lg-2  col-sm-3 col-xs-8 ">
+                            <input type="text" class="form-control input-sm" disabled name="" id="txt_Offer_Price">
+                        </div>
+                        <div class="col-xs-1">
+                            <button style=" left: 21%;" type="button" class="src-btn btn btn-warning" id="btnOffer_PriceSearch" name="Search">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                        <label class="col-lg-1 col-sm-1  col-sm-3 col-xs-4  marginstenig pading_lep  pading_2   text-center   ">@SystemResource.App_date</label>
+
+                        <div class="col-lg-2 col-md-3  col-sm-3 col-xs-8  ">
+                            <input type="date" class="form-control input-sm" disabled="disabled" name="" id="txtDate">
+                        </div>
+                        <div class="col-lg-1  hidden-md hidden-sm hidden-xs name_subscribe">
+                        </div>
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xs-4  marginstenig pading_lep  pading_2 text-center  ">  @SystemResource.App_approved  </label>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-8">
+                            <input type="checkbox" class="checkbox" id="chkActive" name="CUSTOM6" />
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+
+
+                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   ">@SystemResource.App_Type</label>
+                        <div class="col-lg-3 col-sm-3 col-xs-8">
+                            <select id="ddlCashType" class="form-control input-sm" name=""></select>
+                        </div>
+
+
+                        <label class="col-lg-1  col-md-1 col-sm-1 col-xs-4  marginstenig pading_lep  pading_2 text-center ">@SystemResource.App_Cutomer</label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
+                            <input type="text" class="form-control input-sm" name="" id="txtCustomerName">
+                        </div>
+                        <label class="col-lg-1 col-md-1  col-sm-1 col-xs-4  marginstenig pading_lep  pading_2 text-center ">@SystemResource.App_Mobile</label>
+                        <div class="col-lg-3 col-md-2  col-sm-2 col-xs-8">
+                            <input type="number" class="form-control input-sm" maxlength="20" name="" id="txtCustomerMobile">
+                        </div>
+
+
+                    </div>
+                    <div class=" col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center ">  @SystemResource.App_Cutomer  </label>
+                        <div class="col-lg-3 col-md-3 col-sm-3  col-xs-8">
+                            <select id='ddlCustomer' style="width:100%!important" class="form-control input-sm" disabled>
+                                <option value="null">@SystemResource.Choosecustomer </option>
+                            </select>
+                        </div>
+
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xs-4  marginstenig pading_lep  pading_2 text-center"> @SystemResource.App_Salesman </label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-8">
+                            <select id="ddlSalesman" name="" class="form-control input-sm"></select>
+                        </div>
+
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xs-4  marginstenig pading_lep  pading_2 text-center "> @SystemResource.App_Store </label>
+                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-8">
+                            <select id="ddlStore" name="" class="form-control input-sm"></select>
+                        </div>
+                    </div>
+                    <div id="Div_Money" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 display_none ">
+                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center ">  @SystemResource.App_CashPaid   </label>
+                        <div class="col-md-3 col-sm-4 col-xs-10">
+                            <input type="number" class="form-control" name="" id="txtCashMoney" style="font-size: 16px !important;">
+                        </div>
+
+                        <label id="LabCardMoney" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading  "> @SystemResource.App_CardPaid </label>
+                        <div class="col-md-3 col-sm-4 col-xs-10">
+                            <input type="number" class="form-control" name="" id="txtCardMoney" style="font-size: 16px !important;">
+                        </div>
+                    </div>
+
+
+
+
+                    <br />
+                    <br />
+
+                    <div id="DivMassage" class="col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12  margingred  borderred display_none">
+
+                        <h4 id="Text_Massage" style=""> رساله </h4>
+
+                    </div>
+                    <br />
+                    <br />
+                    <div id="DivShow">
+                        <div id=" " class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-6 font_header ">
+                            <br />
+                            <div class="col-lg-1 col-sm-2 col-xs-12 text-center " style="width: 6%;">
+                                <label class="pading_2 ">@SystemResource.App_serial</label>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-12 text-center " style="width: 8%;">
+                                <label class="pading_2 ">@SystemResource.App_Type</label>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-12 text-center" style="width: 20%;">
+                                <label class="pading_2 ">@SystemResource.App_Item</label>
+                            </div>
+                            <div class="col-lg-1 col-sm-1 col-xs-12 text-center" style="width: 16%;">
+                                <label class="pading_2 ">@SystemResource.App_Quantity </label>
+                            </div>
+                            <div class="col-lg-1 col-sm-2 col-xs-12 lifteSlsTrSales">
+                                <label class="pading_2 ">@SystemResource.App_Price</label>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-12 lifteSlsTrSales">
+                                <label class="pading_2 ">@SystemResource.PriceWithVat</label>
+
+                            </div>
+                            <div class="col-lg-1 col-sm-1 col-xs-12">
+                                <label class="pading_2 ">@SystemResource.App_total</label>
+                            </div>
+                            <div class="col-lg-1 col-sm-2 col-xs-12 ">
+                                <label class="pading_2 ">@SystemResource.tax_rate</label>
+                            </div>
+                            <div class="col-lg-1 col-sm-2 col-xs-12 ">
+                                <label class="pading_2 ">@SystemResource.App_Tax</label>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-12 txtTotAfterTax">
+                                <label class="pading_2 ">@SystemResource.App_TotAfterTax</label>
+                            </div>
+                        </div>
+
+                        <div class=" col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-6">
+
+
+                            <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" id="div_Data">
+
+
+                            </div>
+                            <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign"></span>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row  " style="padding-top:50px">
+                        <div class="col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-6 style_border " style="bottom: 5px; ">
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_ItemsCount</label>
+                            </div>
+                            <div class="col-lg-2 col-sm-2   col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_PackageCount</label>
+                            </div>
+
+                            <div class="col-lg-1 col-sm-1   col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_Commission</label>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2  col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_total</label>
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_Tax</label>
+
+                            </div>
+                            <div class="col-lg-1 col-sm-1 col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_Net</label>
+                            </div>
+
+                            <div class="col-lg-1 col-sm-2 col-xs-12">
+                                <label class="textcentr_pading pading_2 ">@SystemResource.App_Cashbox</label>
+                            </div>
+                        </div>
+
+
+                        <div id="div_BasicData" class="col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-6">
+
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+
+                                <input id="txtItemCount" name="" disabled type="number" class="form-control input-sm text_Display">
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+
+                                <input id="txtPackageCount" name="" disabled type="number" class="form-control input-sm text_Display">
+                            </div>
+
+                            <div class="col-lg-1 col-sm-1 col-xs-12">
+
+                                <input id="txtCommission" name="" value="0" type="number" class="form-control input-sm text_Display">
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+
+                                <input id="txtTotal" name="" disabled type="number" class="form-control input-sm text_Display">
+
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+                                <input id="txtTax" name="" disabled type="number" class="form-control input-sm text_Display">
+                            </div>
+
+                            <div class="col-lg-1 col-sm-1 col-xs-12">
+
+                                <input id="txtNet" name="" disabled type="number" class="form-control input-sm text_Display">
+                            </div>
+
+                            <div class="col-lg-2 col-sm-2 col-xs-12">
+                                <select style="width:100%" id="ddlCashBox" name="" class="form-control input-sm text_Display"></select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12 display_none" id="divCreationPanel">
+                        <label class="col-lg-1 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Create </label>
+                        <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="col-lg-1 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2  borderbottom ">
+                        <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="col-lg-2 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2 style_borderbottom">
+                        <div class="col-lg-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="Men_Sales_2" class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12  animated zoomIn backcolor" style="display: none;">
+            <div class="container-fluid" style="padding-left: 57px;">
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="chat-button">
+                            <span1>
+                                <span data-toggle="collapse" id="Basket" data-target="" class=" Basket display_none animated zoomInLeft">
+                                    <i id="" class="" style="background-color: black;color: antiquewhite;width: 51px;height: 36px;text-align: center;border-radius: 85px;">
+                                        <i id="remo" class="fa fa-shopping-cart" style="margin-top: 10px;font-size: 29px;"></i>
+                                    </i>
+                                </span>
+                                <span data-toggle="collapse" id="CChat" data-target="" style="display: none;" class=" Basket Num_Basket animated zoomInDown">
+                                    <i id="x" class="" style="color: antiquewhite;">
+                                        <i id="remo" class="fa" style="margin-top: 0px;font-size: 21px;">0</i>
+                                    </i>
+                                </span>
+
+                                <span data-toggle="collapse" id="Total_Basket" data-target="" style=" display: none; " class=" Basket Total_Basket animated zoomInRight">
+                                    <i id="" class="" style="color: antiquewhite; ">
+                                        @*<i id="" class="fa fa-paperclip" style="font-weight: bold;"> </i>*@
+                                        <i id="All_Total_Basket" class="" style="font-weight: bold;"> الاجمالي= 59</i>
+                                    </i>
+                                </span>
+
+                            </span1>
+
+                        </div>
+                        <div id="chat" class="collapse chat-box-wrap shadow-reset animated zoomInLeft" style="width: 28%;border-radius: 16px;">
+                            <div class="chat-main-list">
+                                @*<div class="chat-heading">        </div>*@
+
+                                <div id="txx" class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+                                    <a class="compose-discard-bt btn_reset_delete col-lg-3 col-md-3 col-sm-3 col-xs-3" href="#" style="background: #bd0000;"><i id="remo" class="fa fa-trash-o"></i></a>
+                                    <a style="padding-top:5px!important;" id="Finsh_Order" class="btn_reset_save col-lg-3 col-md-3 col-sm-3 col-xs-3 " href="#"> حفظ <i id="remo" class="glyphicon glyphicon-save"></i></a>
+                                    <label id="Num_Item" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center"> @SystemResource.Commission </label>
+                                    <input id="txtCommission_Basket" name="" value="0" type="number" style="" class="col-lg-3 col-md-3 col-sm-3 col-xs-3  input-sm">
+
+
+                                </div>
+                                @*<div id="txx" class="view-mail-action col-lg-7 col-md-8 col-sm-8 col-xs-8 ">
+
+
+                                        <a class="compose-discard-bt btn_reset_delete col-lg-3" href="#" style="background: #bd0000;"><i id="remo" class="fa fa-trash-o"></i></a>
+                                        <a style="padding-top:5px!important;" id="Finsh_Order" class="btn_reset_save col-lg-3 col-md-7 col-sm-4 col-xs-3 " href="#"> حفظ <i id="remo" class="glyphicon glyphicon-save"></i></a>
+                                        <a class="compose-discard-bt btn_reset_delete col-lg-3" href="#" style="background: #bd0000;">
+                                            <input id="txtCommission_Basket" name="" value="0" type="number" style="" class="Commission">
+
+                                        </a>
+                                        <a class="compose-discard-bt btn_reset_delete col-lg-3" href="#" style="background: #bd0000;">
+                                            <h2 id="Num_Item" style="font-weight: bold;border-top-left-radius: 13px;border-top-right-radius: 13px">@SystemResource.Commission</h2>
+
+                                        </a>
+
+
+                                    </div>*@
+                                <div class="chat-content chat-scrollbar">
+
+                                    @*<%------------------------------------------------------------------------------------------------%>*@
+
+
+
+                                    @*<%------------------------------------------------------------------------------------------------%>*@
+                                </div>
+                                <style type="text/css">
+                                    #txx .tx {
+                                        float: left;
+                                        /* margin-left: 1em; */
+                                        margin-top: 1em;
+                                        font-size: 16px;
+                                        /* background: #1b7eab; */
+                                        background: linear-gradient(to right, #00e173 0%, rgb(14, 24, 27) 100%);
+                                        color: #fff;
+                                        padding: 4px 20px;
+                                        display: inline-block;
+                                        margin-left: 59px;
+                                        width: 148px;
+                                        border-radius: 56px;
+                                        text-align: center;
+                                    }
+                                </style>
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="informtionReserved" class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+
+                        <div class="col-lg-2">
+                            <button id="btnChanege_2" type="button" class="btn btn-info " style="background-color: #000000;">
+                                <span class="glyphicon glyphicon-arrow-left" style="margin-top: -27px;"></span> @SystemResource.Screenchange
+                            </button>
+
+                        </div>
+
+                        <div id="div_Category" class="col-lg-9">
+                            <button id="All_item" type="button" class="btn btn-info Style_Category" style="">
+                                @SystemResource.Allitems <span class="glyphicon glyphicon-download-alt" style="margin-top: -27px;"></span>
+                            </button>
+
+                        </div>
+
+                        <div id="contentContainer" class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" style="left: 12px!important;">
+                            <ul id="uul" class="" style=" list-style: outside none none;margin: -1px;padding: 0px;">
+                                @*<%--__________________________________________________________________________________________________________________--%>*@
+
+
+
+
+
+
+                                @*<%--__________________________________________________________________________________________________________________--%>*@
+                                <li style="margin-bottom:15px"></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div id="div_2" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12   display_none" style="background-color: #fbebdc!important;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <div id="div_lapel2" class=" col-lg-9">
+                <div class="col-lg-3 col-xs-2" style="width: 25%;"></div>
+                <div class="  col-lg-3 col-xs-2">
+                    <label class=" pading_lep    centeralign"> @SystemResource.value </label>
+                </div>
+                <div class="  col-lg-3 col-xs-2">
+                    <label class=" pading_lep    centeralign"> @SystemResource.App_Tax </label>
+                </div>
+                <div class="  col-lg-3 col-xs-2">
+                    <label class=" pading_lep    centeralign"> @SystemResource.App_TotAfterTax </label>
+                </div>
+            </div>
+            <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class=" pading_lep centeralign"> @SystemResource.Tot_value_of_items </label>
+                </div>
+                <div class="col-lg-1 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Tax_TotalInvoice">  </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Tax_InvoiceVAT">  </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Tax_AfterTotalInvoiceVAT">  </label>
+                </div>
+            </div>
+            <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
+                <div class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class=" pading_lep    centeralign"> @SystemResource.Discount </label>
+                </div>
+                <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <input id="txt_Tax_Discount" name="" type="number" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">%</label>
+                    <input id="txt_Tax_total_Discount" name="" type="number" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <input id="txt_Tax_total_AfterDiscount" name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                </div>
+                <div class=" col-lg-2 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                </div>
+                <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <input id="txt_Tax_Vat" disabled name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                </div>
+                <div class=" col-lg-1 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                </div>
+                <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <input id="txt_Tax_AfterTotalVAT" disabled name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                </div>
+
+            </div>
+            <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
+                <div class=" col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class=" pading_lep centeralign ">@SystemResource.Fraction_difference  </label>
+                </div>
+                <div class=" col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign " id="Close_AllTotalSale">  </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Close_AllTotalSaleVAT">  </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="txtFraction_difference">  </label>
+                </div>
+
+
+            </div>
+            <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
+                <div class=" col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class=" pading_lep centeralign ">@SystemResource.net </label>
+                </div>
+                <div class=" col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign " id="Tax_Net_total_AfterDiscount"> 100 </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Tax_Net_VAT"> 100  </label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                    <label class=" pading_lep centeralign" id="Tax_Net_AfterTotalVAT"> 100  </label>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="background-color: #fbebdc!important;">
+            <div id="" class="  col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.contract_number  </label>
+                    <div class="col-lg-2 col-sm-2 col-xs-2">
+                        <input type="number" class="form-control input-sm" maxlength="20" name="" id="txtContract_NO">
+                    </div>
+                    <label class="col-lg-1 col-sm-1  col-sm-3 col-xs-4  marginstenig pading_lep  pading_2   text-center   ">@SystemResource.Pur_order_No</label>
+                    <div class="col-lg-2 col-md-3  col-sm-3 col-xs-8  ">
+                        <input type="text" class="form-control input-sm" name="" id="txtPurchase_order_No">
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.date_of_supply</label>
+                    <div class="col-lg-2 col-sm-2 col-xs-2">
+                        <input type="date" class="form-control input-sm" name="" id="txtDate_of_supply">
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.Supply_end_date</label>
+                    <div class="col-lg-2 col-sm-2 col-xs-2">
+                        <input type="date" class="form-control input-sm" name="" id="txtSupply_end_Date">
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.Terms_of_payment</label>
+                    <div class="col-lg-5 col-sm-5 col-xs-5">
+                        <textarea rows="2" type="text" class="form-control input-sm" name="" id="txtTerms_of_Payment"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="animated zoomIn krkr " id="thing" style="display:none;">
+        <div id="" style="display:block;" class="">
+            <ul id="ul_Menu"></ul>
+        </div>
+    </div>
+
+    @*--------------------------------------------------------Basket-------------------------------*@
+
+    @*--------------------------------------------------------Basket-------------------------------*@
+
+
+    <div class="modal fade" id="PopupDialog" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div id="PopupBody" class=" modal-body col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
+                    <div id="Men_popu" class="popu animated zoomInLeft" style="display:block;">
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <h2 id="id_Labol" style="text-align: center;"></h2>
+
+                        </div>
+
+                        @*<div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-3 col-xs-4">
+
+                                </div>
+                                <div class="col-lg-5 col-xs-12">
+                                </div>
+                                <div class="col-lg-4 col-xs-12" style="">
+                                </div>
+
+                            </div>*@
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" style="">
+
+                            <div class="col-lg-1 col-xs-2">
+
+                            </div>
+                            <div class="col-lg-3 col-xs-4">
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" style="text-align:center!important">
+                                    <span class="" style="font-size: 22px;font-weight: bold;">@SystemResource.App_Quantity</span>
+
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                                    <div class="input-group " style="">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #4CAF50; " class="btn btn-default btn-number10" id="btnminus_Quantity" data-type="minus" data-field="quant[1]">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" style="height:36px;" id="txtQuantity" name="quant[1]" class="  form-control   font1" value="1" min="1" max="1000" step="1">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #f44336;" id="btnplus_Quantity" class="btn btn-default btn-number10" data-type="plus" data-field="quant[1]">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-xs-4">
+
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" style="text-align:center!important">
+                                    <span class="" style="font-size: 22px;font-weight: bold;">@SystemResource.App_Price</span>
+
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+
+                                    <div class="input-group ">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #4CAF50; " class="btn btn-default btn-number20" id="btnminus_price" data-type="minus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" style="height: 37px;" maxlength="10" id="txtPrice" name="quant[2]" class="  form-control   font1" value="0.5" min="0" max="1000" step="0.5">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #f44336;" id="btnplus_price" class="btn btn-default btn-number20" data-type="plus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-xs-4">
+
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12" style="text-align:center!important">
+                                    <span class="" style="font-size: 22px;font-weight: bold;">@SystemResource.PriceWithVat</span>
+
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+
+                                    <div class="input-group ">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #4CAF50; " class="btn btn-default btn-number20" id="btnminus_priceWithVat" data-type="minus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-minus"></span>
+                                            </button>
+                                        </span>
+                                        <input type="text" style="height: 37px;" maxlength="10" id="txtUnitpriceWithVat" name="quant[2]" class="  form-control   font1" value="0.5" min="0" max="1000" step="0.5">
+                                        <span class="input-group-btn">
+                                            <button type="button" style="background-color: #f44336;" id="btnplus_priceWithVat" class="btn btn-default btn-number20" data-type="plus" data-field="quant[2]">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class=" col-lg-2 col-xs-1">
+
+                            </div>
+                            <div class=" col-lg-2 col-xs-3">
+                                <span class="" style="font-size: 15px;font-weight: bold;">
+                                    <span class="">@SystemResource.App_total </span>
+                                </span>
+
+                            </div>
+                            <div class="col-lg-2 col-xs-3">
+                                <span class="" style="font-size: 15px;font-weight: bold;">
+                                    <span class="">@SystemResource.tax_rate</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-2 col-xs-3">
+                                <span class="" style="font-size: 15px;font-weight: bold;">
+                                    <span class="">@SystemResource.App_Tax </span>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 col-xs-3">
+                                <span class="" style="font-size: 15px;font-weight: bold;">@SystemResource.App_TotAfterTax</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+
+                            <div class=" col-lg-1 col-xs-1">
+
+                            </div>
+                            <div class="col-lg-3 col-xs-3">
+                                <input id="txtTotal_Popu" disabled type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-2 col-xs-3">
+                                <input id="txtTax_Rate_Popu" disabled type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-2 col-xs-3">
+                                <input id="txtTax_Popu" disabled type="text" class="form-control">
+                            </div>
+                            <div class="col-lg-4 col-xs-3">
+                                <input id="txtTotAfterTax_Popu" disabled type="text" class="form-control">
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-4 col-xs-3">
+
+                            </div>
+                            <div class="col-lg-2 col-xs-2">
+                                <button id="btn_Edit_Basket" type="button" class="btn btn-success" style="display:none;">
+                                    <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
+                                </button>
+                                <button id="btn_Add_Basket" type="button" class="btn btn-info " style="display:block;">
+                                    <span class="glyphicon glyphicon-download"></span> @SystemResource.App_Add
+                                </button>
+                            </div>
+                            <div class="col-lg-1 col-xs-1">
+
+                            </div>
+                            <div class="col-lg-1 col-xs-2">
+                                <button id="btn_cancel_Popu" type="button" class="btn btn-info " style="background-color: brown;">
+                                    <span class="glyphicon glyphicon-remove"></span> @SystemResource.Cancel
+                                </button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="Popup_Passowrd" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div id="PopupBody" class=" modal-body col-lg-12 col-xs-12 ">
+                    <div id="popu_Passowrd" class="popu animated zoomInLeft" style="display:block;">
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <h2 id="id_Labol" style="text-align: center;">@SystemResource.Passwordmust</h2>
+
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-2 col-xs-4">
+
+                            </div>
+                            <div class="col-lg-5 col-xs-12">
+                                <span class="" style="font-size: 22px;font-weight: bold;">@SystemResource.App_Password</span>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+
+                            <div class=" col-lg-1 col-xs-4">
+
+                            </div>
+
+
+                            <div class="col-lg-4 col-xs-3">
+                                <input id="txt_ApprovePass" type="password" class="form-control input-sm">
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-1 col-xs-5">
+
+                            </div>
+                            <div class="col-lg-2 col-xs-2">
+                                <button id="btn_Approveprice" type="button" class="btn btn-info " style="display:block;">
+                                    <span class="glyphicon glyphicon-download"></span> @SystemResource.App_approved
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-xs-2">
+                                <button id="btn_Exit_Approveprice" type="button" class="btn btn-info " style="background-color: brown;">
+                                    <span class="glyphicon glyphicon-remove"></span> @SystemResource.Cancel
+                                </button>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-5 col-xs-5">
+
+                            </div>
+                            <div class="col-lg-4 col-xs-5">
+                                <div id="" class="List_MinUnitPrice_in_poup_pass">
+                                    <ul id="Ul_List_MinUnitPrice">
+                                        <li id="li_List_MinUnitPrice0" class="st_border_li_List_MinUnitPrice"></li>
+                                        <li id="li_List_MinUnitPrice1" class="st_border_li_List_MinUnitPrice"></li>
+                                        <li id="li_List_MinUnitPrice2" class="st_border_li_List_MinUnitPrice"></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div> 
+
+<script>
+    $(document).ready(function () {
+
+        // Initialize select2
+        $("#ddlCustomer").select2();
+        //$("#ddlSalesman").select2();
+
+        // $("#ddlCashType").select2();
+
+
+        // Read selected option
+        $('#but_read').click(function () {
+            var username = $('#ddlCustomer option:selected').text();
+            var userid = $('#ddlCustomer').val();
+
+            //var username = $('#ddlSalesman option:selected').text();
+            //var userid = $('#ddlSalesman').val();
+
+            //var username = $('#ddlCashType option:selected').text();
+            //var userid = $('#ddlCashType').val();
+
+
+
+            $('#result').html("id : " + userid + ", name : " + username);
+        });
+    });
+</script>
+<script>
+    $('#lepnotifications').on('click', function () {
+        $('#divnotifications').toggleClass('showdiv');
+        $('#spanlepnotifications').toggleClass('fa-caret-left');
+        $('#spanlepnotifications').toggleClass('fa-caret-down');
+
+    });
+
+</script>
+<script src="~/ClientApp/Sales/SlsTrSales.js"></script>
+
+

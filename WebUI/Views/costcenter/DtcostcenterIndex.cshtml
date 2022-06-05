@@ -1,0 +1,227 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_GenDefCustomerCat;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    .inner tr td {
+        border-top: none !important;
+    }
+
+    .style_pading {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .table_11 tr td:nth-child(3) {
+        width: 200px;
+    }
+
+    .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
+        width: 120px;
+    }
+
+    .table_11 {
+        margin-bottom: 0px;
+    }
+
+    .auto-style1 {
+        background-color: #F5F5F5;
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    #btnAddDetails {
+        font-size: 40px;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+
+    #btnAddDetails2 {
+        font-size: 40px;
+    }
+
+        #btnAddDetails2:hover {
+            color: #24b414;
+        }
+
+    #btnAddDetails3 {
+        font-size: 40px;
+    }
+
+        #btnAddDetails3:hover {
+            color: #24b414;
+        }
+
+    .glyphicon-remove-sign:hover {
+        color: red
+    }
+
+    .minus_btn {
+    }
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+</style>
+
+@*******************************asmaa*@
+<div id="divMasterGridiv" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   display_none ">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3" style="margin-bottom: 4px;margin-right: 27px;margin-top: 9px;">
+        <input id="searchbutmemreport" name="" type="text" class="form-control  text_Display" placeholder=" @SystemResource.Search ">
+    </div>
+    @*<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pr-0 ">
+        <button style="width:100%" id="btnShow" type="button" class="btn btn-info">@SystemResource.App_Show   <span class="glyphicon glyphicon-save"></span></button>
+    </div>*@
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <table id="divMasterGrid"></table>
+    </div>
+
+</div>
+@********************************@
+
+
+
+
+
+<div class="col-xs-12    borderred " id="div_Master">
+    <div class="col-lg-9  " style="position:fixed!important;top:7%!important ;	">
+        <div id="DivMassage" class="col-lg-12  display_none">
+
+            <h4 id="Text_Massage" class="col-lg-10" style=""> رساله </h4>
+
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.App_Code  </label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+            <input type="text" class="form-control input-sm " disabled="disabled" name="CCDT_TYPE" id="txtCCDT_TYPE" style="font-size: 16px !important;">
+        </div>
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1   marginstenig pading_lep  pading_2 text-end ">  @SystemResource.App_DescA   </label>
+        <div class="col-lg-3 col-md-3 col-sm-2 col-xl-3 col-xs-3">
+            <input type="text" class="form-control input-sm " disabled="disabled" name="DescA" id="txtDescA" style="font-size: 16px !important;">
+        </div>
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 text-end ">@SystemResource.App_DescE  </label>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+            <input type="text" class="form-control input-sm " disabled="disabled" name="DescE" id="txtDescE" style="font-size: 16px !important;">
+        </div>
+
+       
+
+        <div class="col-xs-2 p-0">
+            <button type="button" class="btn btn-warning" id="btnAdd">
+                <span class="glyphicon glyphicon-backward"></span> @SystemResource.App_Add
+            </button>
+
+            <button type="button" class="btn btn-warning display_none" id="btnBack">
+                <span class="glyphicon glyphicon-backward"></span> @SystemResource.App_back
+            </button>
+
+            <button type="button" class="btn btn-primary float_left_right display_none" id="btnEdit">
+                <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
+            </button>
+            <button id="btnSave" type="button" class="btn btn-success display_none">
+                @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+            <button id="btnDelete" type="button" class="btn btn-success display_none">
+                @SystemResource.App_Delete  <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+        </div>
+    </div>
+    @*asmaa*@
+    <div>
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 text-end ">@SystemResource.App_Notes  </label>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+            <input type="text" class="form-control input-sm " disabled="disabled" name="Remarks" id="txtRemarks" style="font-size: 16px !important;">
+        </div>
+    </div>
+</div>
+ 
+
+<div id="div_ACC" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+    <label id="lepContentData" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepContentData" class="ifontowsam fa fa-caret-left"></span> @SystemResource.Linked_accounts</label>
+    <button type="button" class="btn btn-warning display_none" id="btnBackAcc">
+        <span class="glyphicon glyphicon-backward"></span> @SystemResource.App_back
+    </button>
+
+    <button type="button" class="btn btn-primary float_left_right display_none" id="btnEditAcc">
+        <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
+    </button>
+    <button id="btnSaveAcc" type="button" class="btn btn-success display_none">
+        @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
+    </button>
+    <div id="div_ContentData" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0  ">
+        <div class="col-xs-12 font_codenumberGenDefCustomerCat">
+            <div class="col-xs-2">
+                <span style="    padding-right: 3px;" class="">@SystemResource.p_account_number</span>
+            </div>
+            <div class="col-xs-3">
+                <span class="">@SystemResource.App_DescA</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 " id="div_Data">
+                    </div>
+                    <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  display_none"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divCCDT" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+    <label id="lepContentData2" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepContentData2" class="ifontowsam fa fa-caret-left"></span>  @SystemResource.SubCenters   </label>
+    <button type="button" class="btn btn-warning display_none" id="btnBackCCDT">
+        <span class="glyphicon glyphicon-backward"></span> @SystemResource.App_back
+    </button>
+
+    <button type="button" class="btn btn-primary float_left_right display_none" id="btnEditCCDT">
+        <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
+    </button>
+    <button id="btnSaveCCDT" type="button" class="btn btn-success display_none">
+        @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
+    </button>
+    <div id="div_ContentData2" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0  ">
+        <div class="col-xs-12 font_codenumberGenDefCustomerCat">
+            <div class="col-xs-2">
+                <span class="">@SystemResource.App_Code</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="">@SystemResource.App_DescA</span>
+            </div>
+            <div class="col-xs-4">
+                <span class="">@SystemResource.App_DescE</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <div class="col-xs-12 " id="div_Data2">
+                    </div>
+                    <span id="btnAddDetails2" class="glyphicon glyphicon-plus-sign display_none"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $('#lepContentData').on('click', function () {
+        $('#div_ContentData').toggleClass('showdiv');
+        $('#spanlepContentData').toggleClass('fa-caret-left');
+        $('#spanlepContentData').toggleClass('fa-caret-down');
+    });
+    $('#lepdContentData2').on('click', function () {
+        $('#div_ContentData2').toggleClass('showdiv');
+        $('#spanlepContentData2').toggleClass('fa-caret-left');
+        $('#spanlepContentData2').toggleClass('fa-caret-down');
+    });
+</script>
+<script src="~/ClientApp/costcenter/Dtcostcenter.js"></script>

@@ -1,0 +1,57 @@
+﻿@using Inv.WebUI.Resources
+@*//eslam 1 nov 2020*@
+@*Sales*@
+@{
+    ViewBag.Title = "LoginIndex";
+    Layout = "~/Views/Shared/LoginLayout.cshtml";
+}
+ 
+<input type="hidden" id="OnLogged" name="name" value="@Url.Action("OnLogged","Login")" />
+<input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
+
+ 
+
+ 
+<div class="container-fluid" style="padding:0%">
+    <div class="content">
+        <div id="large-header" class="large-header" style="height:797px;">
+            <div class="col-xs-12" id="center">
+
+                <div class="container_login" id="divLogin" style="position: fixed;top: 25%;z-index: 100;left:29%;">
+                    <div id="back_circle"></div>
+                    <div id="content_login">
+                        <div id="img_title">
+                            <h1> System login</h1>
+
+                        </div>
+                        <div id="padding">
+                              
+                             <input type="checkbox" id="chkRemember">
+                            <label>Remember me</label>
+ 
+
+                        </div>
+
+                    </div>
+
+                    <div class="clear"></div>
+                    <div id="shadow"></div> 
+                 </div>
+            </div> 
+        </div> 
+    </div> 
+</div> 
+<div class="container_login flip" id="divCompanies" style="display: none;
+    position: fixed;
+        top: 25%;
+    z-index: 100;left:29%;">
+    
+    <div class="clear"></div>
+    <div id="shadow"></div>
+    <div class="clear"></div>
+</div>
+
+ 
+ 
+ 
+ 

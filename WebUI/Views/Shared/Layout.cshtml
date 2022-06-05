@@ -1,0 +1,522 @@
+﻿@using Inv.WebUI.Resources
+
+<!doctype html>
+<html id="body_img" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/images/logokids.png">
+    <title>@SystemResource.App_Home</title>
+    @Styles.Render("~/Bundles/AppStyle2")
+    <link id="bootstrap_rtl" href="~/Style_design/bootstrap-rtl.css" rel="stylesheet" />
+    <link id="Style_Arabic" href="~/Style_design/Style_Arabic.css" rel="stylesheet" />
+    @*<script src="http://code.jquery.com/jquery-3.0.0.js"></script>*@
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Style_design/js/jquery-3.4.1.js"></script>
+    @Scripts.Render("~/Bundles/AppScript2")
+    <script src="~/Style_design/jquery.cookie.min.js"></script>
+    @Scripts.Render("~/Bundles/AppScript3")
+    <link href="~/Style_design/Stylelayout.css" rel="stylesheet" />
+    <link href="~/Style_design/LodBut/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body id="main-menu" class=" materialdesign">
+    <div class="card-body">
+    </div>
+    <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
+    <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
+    <div class="wrapper-pro">
+        <!-- Header top area start المنيو اللي في الجنب  -->
+        <div class="left-sidebar-pro  ">
+            <nav id="sidebar" class="scroll" style="">
+                <div class="sidebar-header">
+
+                    <a href="#">
+
+                        <img src="~/images/logokids.png" alt="" />
+                    </a>
+                    <a href="#">
+                        <i hidden id="i_toolpar" class="glyphicon glyphicon-share-alt"></i>
+                    </a>
+                </div>
+                <div class="left-custom-menu-adp-wrap">
+                    <ul id="main_menu" name="main_menu" class="nav navbar-nav left-sidebar-menu-pro">
+                        <li class="liItem  nav-item">
+                            <a id="btnHome" href="#" data-toggle="dropdown" role="button" aria-expanded="false" class=" liItem nav-link dropdown-toggle">  <i id="btnHome" class="glyphicon glyphicon-home"></i>    <span id="btnHome" class="mini-dn">@SystemResource.Men_Home</span></a>
+
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnSales">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-shopping-cart"></i> <span class="mini-dn">@SystemResource.Men_Sales</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnSlsTrShowPrice" key="SlsTrShowPrice"><a id="btnSlsTrShowPrice" href="#">@SystemResource.showPrice </a></li>
+                                    <li class="liItem dropdown-item" id="btnSlsTrSales" key="SlsTrSales"><a id="btnSlsTrSales">@SystemResource.Men_SlsSales</a></li>
+                                    <li class="liItem dropdown-item" id="btnSlsTrSalesManager" key="SlsTrSalesManager"><a id="btnSlsTrSalesManager" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
+                                    <li class="liItem dropdown-item" id="btnSlsTrReturn" key="btnSlsTrReturn"><a id="btnSlsTrReturn">@SystemResource.Men_SlsTrReturn</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnPurchase">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-usd"></i>  <span class="mini-dn">@SystemResource.Purchase</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnPurOrder" key="PurOrder"><a id="btnPurOrder">@SystemResource.Men_PurOrder</a></li>
+                                    <li class="liItem dropdown-item" id="btnPurTrReceive" key="PurTrReceive"><a id="btnPurTrReceive">@SystemResource.Purchase_Recieve</a></li>
+                                    <li class="liItem dropdown-item" id="btnPurTrReturn" key="PurTrReturn"><a id="btnPurTrReturn">@SystemResource.Purchase_Return</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnInventory">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-equalizer"></i>  <span class="mini-dn">@SystemResource.Inventory  </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnDirecttransfer" key="Directtransfer"><a id="btnDirecttransfer"> @SystemResource.Directtransfer </a></li>
+                                    <li class="liItem dropdown-item" id="btnSTKAdjust" key="STKAdjust"><a id="btnSTKAdjust">@SystemResource.Stocksettlement</a></li>
+                                    <li class="liItem dropdown-item" id="btnCollectUnit" key="CollectUnit"><a id="btnCollectUnit">@SystemResource.Inv_CollectUnit</a></li>
+                                    <li class="liItem dropdown-item" id="btnReceiveTransfer" key="ReceiveTransfer"><a id="btnReceiveTransfer"> @SystemResource.Receipttransfer </a></li>
+                                    <li class="liItem dropdown-item" id="btnsendTransfer" key="sendTransfer"><a id="btnsendTransfer"> @SystemResource.Sendtransfer  </a></li>
+                                    <li class="liItem dropdown-item" id="btnStkDefItems" key="StkDefItems"><a id="btnStkDefItems">@SystemResource.Men_StkDefItems</a></li>
+                                    <li class="liItem dropdown-item" id="btnStkDefItemType" key="StkDefItemType"><a id="btnStkDefItemType">@SystemResource.Men_StkDefItemType</a></li>
+                                    <li class="liItem dropdown-item" id="btnStkDefCategory" key="StkDefCategory"><a id="btnStkDefCategory" href="#">@SystemResource.Men_StkDefCategory</a></li>
+                                    
+                                    <li class="liItem dropdown-item" id="btnStkDefItemsNew" key="StkDefItemsNew"><a id="btnStkDefItemsNew">@SystemResource.Men_StkDefItems  </a></li>
+                                    <li class="liItem dropdown-item" id="btnIssueToCC" key="IssueToCC"><a id="btnIssueToCC" href="#">@SystemResource.PaymentOrder</a></li>
+
+
+                                    @*<li class="liItem dropdown-item" id="btnDefStore" key="DefStore"><a id="btnDefStore" href="#"> @SystemResource.Men_StkDefStore</a></li>
+                                    <li class="liItem dropdown-item" id="btnPeriodManagement" key="PeriodManagement"><a id="btnPeriodManagement" href="#"> @SystemResource.PeriodManagement </a></li>
+                                    <li class="liItem dropdown-item" id="btnPaymentType" key="PaymentType"><a id="btnPaymentType" href="#">@SystemResource.PaymentTypes</a></li>*@
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnReportMenu">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-print"></i>  <span class="mini-dn"> @SystemResource.Reports</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+
+                                    <li class="liItem dropdown-item" id="btnInventorymove" key="Inventorymove"><a id="btnInventorymove" href="#"> @SystemResource.Inventorymove </a></li>
+                                    <li class="liItem dropdown-item" id="btnInventoryvalue" key="Inventoryvalue"><a id="btnInventoryvalue" href="#"> @SystemResource.Inventoryvalue </a></li>
+                                    <li class="liItem dropdown-item" id="btnIncomeoperations" key="Incomeoperations"><a id="btnIncomeoperations" href="#"> @SystemResource.Incomeoperations </a></li>
+                                    <li class="liItem dropdown-item" id="btnItemsalesSum" key="ItemsalesSum"><a id="btnItemsalesSum" href="#"> @SystemResource.ItemsalesSum </a></li>
+                                    <li class="liItem dropdown-item" id="btnItemPurchase" key="ItemPurchase"><a id="btnItemPurchase" href="#"> @SystemResource.ItemPurchase </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnCashBoxDefinitions">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-hourglass"></i>  <span class="mini-dn">@SystemResource.Men_FundMovement </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnAccTrInvReceipt" key="AccTrInvReceipt"><a id="btnAccTrInvReceipt">@SystemResource.Men_AccTrInvReceipt</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccTrReceiptNote" key="AccTrReceiptNote"><a id="btnAccTrReceiptNote">@SystemResource.Men_AccTrReceiptNote</a></li>
+                                    <li class="liItem dropdown-item" id="btnPurTrpaymemt" key="PurTrpaymemt"><a id="btnPurTrpaymemt">@SystemResource.Men_PurTrpaymemt</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccTrPaymentNote" key="AccTrPaymentNote"><a id="btnAccTrPaymentNote">@SystemResource.Men_AccTrPaymentNote</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccTrCustomerAdjust" key="AccTrCustomerAdjust"><a id="btnAccTrCustomerAdjust"> @SystemResource.Men_AccTrCustomerAdjust</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccTrVendorAdjust" key="AccTrVendorAdjust"><a id="btnAccTrVendorAdjust">@SystemResource.Men_AccTrVendorAdjust</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnCashBoxReports">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-hourglass"></i>  <span class="mini-dn">@SystemResource.Box_Report </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnCollectedaccstat" key="Collectedaccstat"><a id="btnCollectedaccstat" href="#"> @SystemResource.Combined_account </a></li>
+                                    <li class="liItem dropdown-item" id="btnSupplieraccstat" key="Supplieraccstat"><a id="btnSupplieraccstat" href="#"> @SystemResource.Suppliertstatment </a></li>
+                                    <li class="liItem dropdown-item" id="btnClientaccstat" key="Clientaccstat"><a id="btnClientaccstat" href="#"> @SystemResource.Clientstatment </a></li>
+                                    <li class="liItem dropdown-item" id="btnCashBoxAccount" key="CashBoxAccount"><a id="btnCashBoxAccount">@SystemResource.AccountCashBox</a></li>
+                                    <li class="liItem dropdown-item" id="btnCashBankAccount" key="CashBankAccount"><a id="btnCashBankAccount">@SystemResource.AccountCashbank</a></li>
+                                    <li class="liItem dropdown-item" id="btnAgingCust" key="AgingCust"><a id="btnAgingCust">@SystemResource.AgingCust</a></li>
+                                    <li class="liItem dropdown-item" id="btnAgingVend" key="AgingVend"><a id="btnAgingVend">@SystemResource.AgingVend</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none" id="btnProcessesMenu">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-random"></i>  <span class="mini-dn">@SystemResource.Processes</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnProcesses" key="Processes"><a id="btnProcesses" href="#"> @SystemResource.operationsmanagment</a></li>
+                                    <li class="liItem dropdown-item" id="btnsalesTrans" key="salesTrans"><a id="btnSalesTrans" href="#"> @SystemResource.Men_SalesTransf</a></li>
+                                    <li class="liItem dropdown-item" id="btnProcSalesMgr" key="ProcSalesMgr"><a id="btnProcSalesMgr" href="#">@SystemResource.Men_ProcessMan</a></li>
+                                    <li class="liItem dropdown-item" id="btnProcSalesInvoice" key="ProcSalesInvoice"><a id="btnProcSalesInvoice" href="#">@SystemResource.Men_ProcInvoice</a></li>
+                                    <li class="liItem dropdown-item" id="btnProcSalesRet" key="ProcSalesRet"><a id="btnProcSalesRet" href="#">@SystemResource.Men_ProcReturn</a></li>
+                                    <li class="liItem dropdown-item" id="btnOperationScrap" key="OperationScrap"><a id="btnOperationScrap" href="#">@SystemResource.OperationScrap </a></li>
+                                    <li class="liItem dropdown-item" id="btnCloseProcesses" key="CloseProcesses"><a id="btnCloseProcesses" href="#"> @SystemResource.Close_process</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnservicesystem">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-usd"></i>  <span class="mini-dn">@SystemResource.ServicesSystem</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnServiceCategories" key="ServiceCategories"><a id="btnServiceCategories">@SystemResource.ServiceCategory</a></li>
+                                    <li class="liItem dropdown-item" id="btnServices" key="Services"><a id="btnServices"> @SystemResource.Services</a></li>
+                                    <li class="liItem dropdown-item" id="btnSales_Services" key="Sales_Services"><a id="btnSales_Services"> @SystemResource.SalesInvoice</a></li>
+                                    <li class="liItem dropdown-item" id="btnSer_Return_Sales" key="Ser_Return_Sales"><a id="btnSer_Return_Sales"> @SystemResource.SalesReturn</a></li>
+                                    <li class="liItem dropdown-item" id="btnSer_Purchasing" key="Ser_Purchasing"><a id="btnSer_Purchasing"> @SystemResource.Purchase  </a></li>
+                                    <li class="liItem dropdown-item" id="btnSer_Return_Pur" key="Ser_Return_Pur"><a id="btnSer_Return_Pur"> @SystemResource.Purchase_Return  </a></li>
+                                    <li class="liItem dropdown-item" id="btnSer_Sales_Report" key="Ser_Sales_Report"><a id="btnSer_Sales_Report">    @SystemResource.ServicesSlsReport    </a></li>
+                                    <li class="liItem dropdown-item" id="btnSer_Pur_Report" key="Ser_Pur_Report"><a id="btnSer_Pur_Report">    @SystemResource.ServicespurReport    </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnGeneralledgerMenu">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-pencil"></i>  <span class="mini-dn"> @SystemResource.mnue_generalteacher  </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnGLDefAccount" key="GLDefAccount"><a id="btnGLDefAccount" href="#">  @SystemResource.meue_Accounts </a></li>
+                                    <li class="liItem dropdown-item" id="btnJournalVoucher" key="JournalVoucher"><a id="btnJournalVoucher" href="#">  @SystemResource.Men_JournalVoucher </a></li>
+                                    <li class="liItem dropdown-item" id="btnReceiptVoucher" key="ReceiptVoucher"><a id="btnReceiptVoucher" href="#">  @SystemResource.Men_ReceiptVoucher </a></li>
+                                    <li class="liItem dropdown-item" id="btnPaymentVoucher" key="PaymentVoucher"><a id="btnPaymentVoucher" href="#">  @SystemResource.Men_PaymentVoucher </a></li>
+                                    <li class="liItem dropdown-item" id="btnManagementVoucher" key="ManagementVoucher"><a id="btnManagementVoucher" href="#">   @SystemResource.mnue_Bondmanagement    </a></li>
+                                    <li class="liItem dropdown-item" id="btnCostCenter" key="CostCenter"><a id="btnCostCenter" href="#">   @SystemResource.menu_Costcenter    </a></li>
+                                    <li class="liItem dropdown-item" id="btnAccountstatement" key="Accountstatement"><a id="btnAccountstatement" href="#"> @SystemResource.mnue_Accountstatement  </a></li>
+                                    <li class="liItem dropdown-item" id="btnAccountbalances" key="Accountbalances"><a id="btnAccountbalances" href="#"> @SystemResource.mnue_generalteacher  </a></li>
+                                    <li class="liItem dropdown-item" id="btnfinancialreports" key="financialreports"><a id="btnfinancialreports" href="#">  @SystemResource.mnue_financialreports  </a></li>
+                                    <li class="liItem dropdown-item" id="btnCcdtAccState" key="CcdtAccState"><a id="btnCcdtAccState" href="#">@SystemResource.Men_CcdtAccState</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        @*<li class="liItem MED nav-item display_none " id="btnStkDefinitionMenu">
+                                <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-home"></i>  <span class="mini-dn">@SystemResource.StkDefItemsMen</span>  </a>
+                                <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                    <ul id=" ">
+                                        <li class="liItem dropdown-item" id="btnStkDefItems" key="StkDefItems"><a id="btnStkDefItems">@SystemResource.Men_StkDefItems</a></li>
+                                        <li class="liItem dropdown-item" id="btnStkDefItemType" key="StkDefItemType"><a id="btnStkDefItemType">@SystemResource.Men_StkDefItemType</a></li>
+                                        <li class="liItem dropdown-item" id="btnStkDefCategory" key="StkDefCategory"><a id="btnStkDefCategory" href="#">@SystemResource.Men_StkDefCategory</a></li>
+                                        <li class="liItem dropdown-item" id="btnDefStore" key="DefStore"><a id="btnDefStore" href="#"> @SystemResource.Men_StkDefStore</a></li>
+                                        <li class="liItem dropdown-item" id="btnStkDefItemsNew" key="StkDefItemsNew"><a id="btnStkDefItemsNew">@SystemResource.Men_StkDefItems  </a></li>
+                                    </ul>
+                                </div>
+                            </li>*@
+                        <li class="liItem MED nav-item display_none" id="btnAccDefinitionMen">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-briefcase"></i>  <span class="mini-dn">@SystemResource.Men_AccDefinitionMen</span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnAccDefCustomer" key="AccDefCustomer"><a id="btnAccDefCustomer" href="#">@SystemResource.Men_AccDefCustomer</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccDefSalesmen" key="AccDefSalesmen"><a id="" href="#">@SystemResource.Men_AccDefSalesmen</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccDefExpenses" key="AccDefExpenses"><a id="btnAccDefExpenses" href="#"> @SystemResource.Men_AccDefExpenses </a></li>
+                                    <li class="liItem dropdown-item" id="btnAccDefReceipts" key="AccDefReceipts"><a id="btnAccDefReceipts" href="#"> @SystemResource.Men_AccDefReceipts </a></li>
+                                    <li class="liItem dropdown-item" id="btnAccDefVendor" key="AccDefVendor"><a id="btnAccDefVendor">@SystemResource.Men_AccDefVendor</a></li>
+                                    <li class="liItem dropdown-item" id="btnAccDefBox" key="AccDefBox"><a id="btnAccDefBox">@SystemResource.Men_AccDefBox</a></li>
+                                    <li class="liItem dropdown-item" id="btnDtcostcenter" key="Dtcostcenter"><a id="btnDtcostcenter" href="#">@SystemResource.costsubcenters</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none " id="btnGenDefinitionMen">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-cog"></i>  <span class="mini-dn">@SystemResource.Men_GenDefinitionMen</span> </a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnGenDefCustomerCat" key="GenDefCustomerCat"><a id="btnGenDefCustomerCat">@SystemResource.Men_GenDefCustomerCat</a></li>
+                                    <li class="liItem dropdown-item" id="btnGendefCustomerGroup" key="GendefCustomerGroup"><a id="btnGendefCustomerGroup" href="#">@SystemResource.Men_GendefCustomerGroup</a></li>
+                                    <li class="liItem dropdown-item" id="btnGenDefCustomerAdjust" key="GenDefCustomerAdjust"><a id="btnGenDefCustomerAdjust" href="#">@SystemResource.Men_GenDefCustomerAdjust</a></li>
+                                    <li class="liItem dropdown-item" id="btnGenDefVendorCat" key="GenDefVendorCat"><a id="btnGenDefVendorCat">@SystemResource.Men_GenDefVendorCat</a></li>
+                                    <li class="liItem dropdown-item" id="btnGendefVendorGroup" key="GendefVendorGroup"><a id="btnGendefVendorGroup" href="#"> @SystemResource.Men_GendefVendorGroup</a></li>
+                                    <li class="liItem dropdown-item" id="btnGenDefVendorAdjust" key="GenDefVendorAdjust"><a id="btnGenDefVendorAdjust" href="#"> @SystemResource.Men_GenDefVendorAdjust</a></li>
+                                    <li class="liItem dropdown-item" id="btnGenDefAdd" key="GenDefAdd"><a id="" href="#">@SystemResource.Men_Addition</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="liItem MED nav-item display_none" id="btnToolsMenu">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-wrench"></i>  <span class="mini-dn"> @SystemResource.mnue_Tools </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+
+                                    <li class="liItem dropdown-item" id="btnPeriodManagement" key="PeriodManagement"><a id="btnPeriodManagement" href="#"> @SystemResource.PeriodManagement </a></li>
+                                    <li class="liItem dropdown-item" id="btnItemPeriodSummary" key="ItemPeriodSummary"><a id="btnItemPeriodSummary" href="#"> @SystemResource.ItemPeriodSummary </a></li>
+                                    <li class="liItem dropdown-item" id="btnDefStore" key="DefStore"><a id="btnDefStore" href="#"> @SystemResource.Men_StkDefStore</a></li>
+                                    <li class="liItem dropdown-item" id="btnIssueType" key="IssueType"><a id="btnIssueType" href="#">@SystemResource.PaymentTypes</a></li>
+                                    <li class="liItem dropdown-item" id="btnTranPosting" key="TranPosting"><a id="TranPosting" href="#">  @SystemResource.Transfer_accounts   </a></li>
+                                    <li class="liItem dropdown-item" id="btnLnkvarBranch" key="LnkvarBranch"><a id="btnLnkvarBranch" href="#">  @SystemResource.Branch_accounts   </a></li>
+                                    <li class="liItem dropdown-item" id="btnLnkTransVoucher" key="LnkTransVoucher"><a id="btnLnkTransVoucher" href="#">@SystemResource.Designconstraints</a></li>
+                                    <li class="liItem dropdown-item" id="btnUSERS" key="USERS"><a id="btnUSERS" href="#">  @SystemResource.User </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="liItem MED nav-item display_none" id="btnTaxSystem">
+                            <a id=" " href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <i class="glyphicon glyphicon-wrench"></i>  <span class="mini-dn"> @SystemResource.Men_TaxSystem </span></a>
+                            <div id=" " role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <ul id=" ">
+                                    <li class="liItem dropdown-item" id="btnVatReport" key="VatReport"><a id="btnVatReport" href="#">    @SystemResource.Men_VatReport  </a></li>
+                                    <li class="liItem dropdown-item" id="btnVatLists" key="VatLists"><a id="btnVatLists" href="#"> @SystemResource.Men_VatList </a></li>
+                                    <li class="liItem dropdown-item" id="btnVatSetting" key="VatSetting"><a id="btnVatSetting" href="#">@SystemResource.Men_VatSettings </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- Header top area start المنيو اللي فوق  -->
+        <div class="content-inner-all fixed-header-top">
+            <div class="header-top-area">
+                <div class="fixed-header-top">
+                    <div class="container-fluid">
+                        <div class="row">
+                            @*<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+                            </div>*@
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sidebarCollapse margin-right_5">
+                                <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn   navbar-btn">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <i class="fa fa-question-circle styleHelp" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal">  </i>
+                                </div>
+                                <button type="button" id="sidebarCollapse2" class="btn bar-button-pro header-drl-controller-btn  navbar-btn btn_toolpar">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                            </div>
+                            <div class="  col-lg-2 col-md-2 col-sm-3 col-xs-3  posation_titel_top_par">
+                                <div class="header-top-menu tabl-d-n">
+                                    <label id="Screen_name" class="pading_titelpag"></label>
+                                    <label id="TitleSpan" class="pading_titelpag"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 pl-0 pr-0">
+                                <div class="header-top-menu tabl-d-n">
+                                    <label id="camp_name" class="pading_titelpag col-lg-12col-md-12 col-sm-12 col-xs-12 pl-0 pr-0"></label>
+                                    <label id="TitleSpan" class="pading_titelpag"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 pl-0 pr-0">
+                                <div class="header-top-menu tabl-d-n">
+                                    <select id="ddbra" class="col-lg-10 styleddbra"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12 posation_control posation_  top29 ">
+                                <div class="header-right-info">
+                                    <ul class="col-lg-12 nav navbar-nav mai-top-nav header-right-menu pading_top_15px classright208 ">
+                                        <li class="liItem" key="tol_Dashboard" id="tol_Dashboard">
+                                            <img class="charimg" src="~/images/chart.png" title="DashBoard" />
+                                        </li>
+                                        <li class="liItem nav-item dropdown " key="tol_messagestoppar" id="tol_messagestoppar" style="display:none">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="adminpro-icon adminpro-chat-pro"></span><span class="indicator-nt"></span>@*<span class="indicator-ms"></span>*@</a>
+                                            <div role="menu" class="admintab-wrap menu-setting-wrap menu-setting-wrap-bg dropdown-menu animated flipInX">
+                                                <ul class="nav nav-tabs custon-set-tab">
+                                                    <li class="active">
+                                                        <a data-toggle="tab" href="#Notes">  @SystemResource.tol_Notifications</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#Projects"> @SystemResource.tol_messages </a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    @*____________________  اشعارات ____________________*@
+                                                    <div id="Notes" class="tab-pane fade in active">
+                                                        <div class="notes-area-wrap">
+                                                            <div class="note-heading-indicate">
+                                                                <h2>
+                                                                    <i class="fa fa-bell-o">
+                                                                    </i>
+                                                                </h2>
+                                                            </div>
+                                                            <div class="notes-list-area notes-menu-scrollbar">
+                                                                <ul class="notes-menu-list" id="creatnotesmassg"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @*______________رسائل  ____________________*@
+                                                    <div id="Projects" class="tab-pane fade rtl-menu">
+                                                        <div class="projects-settings-wrap">
+                                                            <div class="note-heading-indicate">
+                                                                <i class="adminpro-icon adminpro-chat-pro" style="color:#fff;font-weight: bold;font-size: 20px;">
+                                                                </i>
+                                                            </div>
+                                                            <div class="project-st-list-area project-st-menu-scrollbar">
+                                                                <ul class="projects-st-menu-list" id="creatmassg"></ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="liItem nav-item " id="tol_allnotification" key="tol_allnotification" style="display:none">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                            <div role="menu" class="notification-author dropdown-menu animated flipInX">
+                                                <div class="notification-single-top">
+                                                    <h1 style="color:white!important">@SystemResource.tol_Notifications</h1>
+                                                </div>
+                                                <div class="notifcations" id="notification">
+                                                    <div class="notic_triangle"></div>
+                                                    <ul class="list-unstyled" id="notificationUL"></ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="liItem nav-item" id="tol_Userstoppar">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                                <span id="Admin_name" class="admin-name"></span>
+                                                <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                            </a>
+                                            <ul role="menu" class="liItem dropdown-header-top author-log dropdown-menu animated flipInX">
+                                                <li>
+                                                    <a class="liItem" href="#" id="LanguageButtonHome"> <span id="LanguageButtonHome" class="adminpro-icon adminpro-money author-log-ic"></span> </a>
+                                                </li>
+                                                <li>
+                                                    <a class="liItem" href="#" id="btnUsers" data-toggle="modal" data-target="#user_setting"> @SystemResource.tol_change_Password<span id="btn_G_User" class="adminpro-icon adminpro-locked author-log-ic"></span>  </a>
+                                                </li>
+                                                <li>
+                                                    <a class="liItem" id="btn_loguotuser" href="#">  تسجيل الخروج @*@SystemResource.l_Log_Out*@<span class="adminpro-icon adminpro-reload author-log-ic"></span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header top area end-->
+            <!-- Mobile Menu start  موبيل منيو -->
+            <!-- Mobile Menu end -->
+            <!-- Breadcome End-->
+        </div>
+        <div id="cont" class="divcont">
+            @RenderBody()
+        </div>
+    </div>
+    <!--..............................user setting..................................................-->
+    <div class="modal fade" id="user_setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@SystemResource.App_UserSetting </h4>
+                </div>
+                <div class="user_2">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">@SystemResource.App_OldPassword </label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="txtOldPassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label"> @SystemResource.App_NewPassword</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="txtNewPassword">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" id="btnChangePassword" class="btn btn-danger">@SystemResource.App_Confirm </button>
+                        <button type="button" class="btn btn-primary btn_back">@SystemResource.App_Return</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">@SystemResource.App_Close </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="glyphicon glyphicon-arrow-up	"></i></a>
+    <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
+    <input type="hidden" id="ModelPreview" name="name" value="" />
+    <input type="hidden" id="SearchControlName" name="name" value="" />
+    <div class="modal fade messagealert" id="MessageBoxDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="MessageBoxTitle">حذف!!</h4>
+                </div>
+                <div class="modal-body" style="max-height:200px; overflow:auto;">
+                    <div class="col-xs-7"> <h3 id="MessageBoxMessage">هل تريد حقا الحذف ؟</h3></div>
+                    <div class="col-xs-5 text-center">
+                        <i class="glyphicon btn-danger"></i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="MessageBoxOk" class="btn btn-danger">@SystemResource.App_Confirm</button>
+                    <button type="button" id="MessageBoxCancel" class="btn btn-warning" data-dismiss="modal">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="help-pop modal fade in" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@SystemResource.App_Help</h4>
+                </div>
+                <div class="modal-body content content-8" id="modalHelpRep">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">@SystemResource.App_Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="SearchBox" class=" fade styleserch" style="display:none;z-index:999999999;">
+        <div style="background-color:#ef6603!important; position:absolute;top:0px;left:0px;width:100%;height:40px;cursor:move;border-top-right-radius: 13px!important;border-top-left-radius: 13px!important;">
+            <input type="button" onclick="$('#SearchBox').modal('hide');" id="btnCloseSearch" name="name" value="x" class="btn colose_lay_btn btn-danger" style="height: 40px;
+              width: 38px;font-size: 20px;float: left;border-color: #ef6603!important;background-color: #ef6603!important;" />
+            <h4 id="searchTitle" class="col-xs-3" style="color: #fff;line-height: 36px;text-align:right"></h4>
+        </div>
+        <div style="overflow-x:scroll;overflow-y:scroll;padding-left: 1%; margin-top:20px;width:100%;left:0px;left: 0px; position: absolute; width: 100%; height: 85%;">
+            <div id="tableDiv" class="table table-bordered table-hover" style="width:100%;"></div>
+        </div>
+    </div>
+    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRep">
+            Launch demo modal
+        </button>*@
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalRep" tabindex="-1" role="dialog" aria-labelledby="ModalRep" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title col-xs-11" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close col-xs-1" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="col-xs-12">
+                        <h2 class="pageheader__title col-xs-4 ">فاتورة الطلب</h2>
+                        <button class="btn btn-success btn-sm col-xs-2" onclick="window.print();" style="float:left">
+                            طباعة                <i class="fa fa-print"></i>
+                        </button>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-body" id="datarepmodel">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="caret_script" style="display:none!important">
+    </div>
+
+
+
+
+    @*<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
+    @Scripts.Render("~/Bundles/AppScript4")
+    <script>
+        $('#sidebarCollapse').on('click', function () {
+            $('#cont').toggleClass('colapsdivcont');
+        });
+        $('#chinng_languag').on('click', function () {
+            $('#main-menu').toggleClass('rtl-menu');
+        });
+    </script>
+    <script src="~/Style_design/LodBut/Loder.js"></script>
+</body>
+</html>

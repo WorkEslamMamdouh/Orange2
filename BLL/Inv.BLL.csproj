@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FAB4E0B7-AA99-44F2-A5F5-44B9D54A89B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Inv.BLL</RootNamespace>
+    <AssemblyName>Inv.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccDefAccounts\AccDefAccountsService.cs" />
+    <Compile Include="Services\AccDefAccounts\IAccDefAccountsService.cs" />
+    <Compile Include="Services\AccDefBox\AccDefBoxService.cs" />
+    <Compile Include="Services\AccDefBox\IAccDefBoxService.cs" />
+    <Compile Include="Services\AccDefCustomer\AccDefCustomerService.cs" />
+    <Compile Include="Services\AccDefCustomer\IAccDefCustomerService.cs" />
+    <Compile Include="Services\AccDtCostCenters\A_CCDT_COSTCENTERSService.cs" />
+    <Compile Include="Services\AccDtCostCenters\IA_CCDT_COSTCENTERSService.cs" />
+    <Compile Include="Services\AccDtTypes\A_CCDT_TypesService.cs" />
+    <Compile Include="Services\AccDtTypes\IA_CCDT_TypesService.cs" />
+    <Compile Include="Services\AVATCONTROL\AVAT_CONTROLService.cs" />
+    <Compile Include="Services\AVATCONTROL\IAVAT_CONTROLService.cs" />
+    <Compile Include="Services\AVatDService\AVatDServiceService.cs" />
+    <Compile Include="Services\AVatDService\IAVatDServiceService.cs" />
+    <Compile Include="Services\AVATPeriodDetail\AVAT_PeriodDetailService.cs" />
+    <Compile Include="Services\AVATPeriodDetail\IAVAT_PeriodDetailService.cs" />
+    <Compile Include="Services\AVATPERIOD\AVAT_PERIODService.cs" />
+    <Compile Include="Services\AVATPERIOD\IAVAT_PERIODService.cs" />
+    <Compile Include="Services\AVATPurInvoiceRetDetail\AVATPurInvoiceRetDetailService.cs" />
+    <Compile Include="Services\AVATPurInvoiceRetDetail\IAVATPurInvoiceRetDetailService.cs" />
+    <Compile Include="Services\AVAT_D_Service\AVAT_D_ServiceService.cs" />
+    <Compile Include="Services\AVAT_D_Service\IAVAT_D_ServiceService.cs" />
+    <Compile Include="Services\AVATSrvCategory\AVATSrvCategoryService.cs" />
+    <Compile Include="Services\AVATSrvCategory\IAVATSrvCategoryService.cs" />
+    <Compile Include="Services\AVATPurInvoiceRet\AVATPurInvoiceRetService.cs" />
+    <Compile Include="Services\AVATPurInvoiceRet\IAVATPurInvoiceRetService.cs" />
+    <Compile Include="Services\AVATTRANS\AVATTRANService.cs" />
+    <Compile Include="Services\AVATTRANS\IAVATTRANSService.cs" />
+    <Compile Include="Services\CashVoucher\ICashVoucherService.cs" />
+    <Compile Include="Services\CashVoucher\CashVoucherService.cs" />
+    <Compile Include="Services\GAlertControl\G_AlertControlService.cs" />
+    <Compile Include="Services\GAlertControl\IG_AlertControlService.cs" />
+    <Compile Include="Services\GCompany\GCompanyService.cs" />
+    <Compile Include="Services\GCompany\IGCompanyService.cs" />
+    <Compile Include="Services\G_Branch\IG_BranchService.cs" />
+    <Compile Include="Services\G_Branch\G_BranchService.cs" />
+    <Compile Include="Services\ITRCollectDetail\II_TR_CollectDetailService.cs" />
+    <Compile Include="Services\ITRCollectDetail\I_TR_CollectDetailService.cs" />
+    <Compile Include="Services\operationItemsSum\IOperationItemsSum.cs" />
+    <Compile Include="Services\operationItemsSum\OperationItemsSum.cs" />
+    <Compile Include="Services\ServiceTRInvoice\IServiceTRInvoiceService.cs" />
+    <Compile Include="Services\ServiceTRInvoice\ServiceTRInvoiceService.cs" />
+    <Compile Include="Services\ITRCollect\II_TR_CollectService.cs" />
+    <Compile Include="Services\ITRCollect\I_TR_CollectService.cs" />
+    <Compile Include="Services\ServPurInvoiceHeader\IServPurInvoiceHeaderService.cs" />
+    <Compile Include="Services\ServPurInvoiceHeader\ServPurInvoiceHeaderService.cs" />
+    <Compile Include="Services\ServPurInvoiceDetail\IServPurInvoiceDetailService.cs" />
+    <Compile Include="Services\ServPurInvoiceDetail\ServPurInvoiceDetailService.cs" />
+    <Compile Include="Services\ServPurInvoice\IServPurInvoiceService.cs" />
+    <Compile Include="Services\ServPurInvoice\ServPurInvoiceService.cs" />
+    <Compile Include="Services\ServSlsInvoiceItems\IServSlsInvoiceItemsService.cs" />
+    <Compile Include="Services\ServSlsInvoiceItems\ServSlsInvoiceItemsService.cs" />
+    <Compile Include="Services\I_PeriodSer\II_PeriodService.cs" />
+    <Compile Include="Services\I_PeriodSer\I_PeriodService.cs" />
+    <Compile Include="Services\STK_TR_ISSUECC\ISTK_TR_ISSUECCService.cs" />
+    <Compile Include="Services\STK_TR_ISSUECC\STK_TR_ISSUECCService.cs" />
+    <Compile Include="Services\VatNature\VatNatureService.cs" />
+    <Compile Include="Services\VatNature\IVatNatureService.cs" />
+    <Compile Include="Services\OperationSalesmanItem\IOperationSalesmanItemsService.cs" />
+    <Compile Include="Services\OperationSalesmanItem\OperationSalesmanItemsService.cs" />
+    <Compile Include="Services\SalesTrans\SalesTransService.cs" />
+    <Compile Include="Services\SalesTrans\ISalesTransService.cs" />
+    <Compile Include="Services\GenDefAdd\GenDefAddService.cs" />
+    <Compile Include="Services\GenDefAdd\IGenDefAddService.cs" />
+    <Compile Include="Services\PurOrder\IPurOrderService.cs" />
+    <Compile Include="Services\PurOrder\PurOrderService.cs" />
+    <Compile Include="Services\StckAdjust\StckAdjustService.cs" />
+    <Compile Include="Services\StckAdjust\IStckAdjust.cs" />
+    <Compile Include="Services\DirectTransfer\DirectTransferService.cs" />
+    <Compile Include="Services\DirectTransfer\IDirectTransferService.cs" />
+    <Compile Include="Services\AccDefSalesMen\AccDefSalesMenService.cs" />
+    <Compile Include="Services\AccDefSalesMen\IAccDefSalesMenService.cs" />
+    <Compile Include="Services\AccDefVendor\AccDefVendorService.cs" />
+    <Compile Include="Services\AccDefVendor\IAccDefVendorService.cs" />
+    <Compile Include="Services\AccTrAdjust\AccTrAdjustService.cs" />
+    <Compile Include="Services\AccTrAdjust\IAccTrAdjustService.cs" />
+    <Compile Include="Services\AccTrReceipt\AccTrReceiptService.cs" />
+    <Compile Include="Services\AccTrReceipt\IAccTrReceiptService.cs" />
+    <Compile Include="Services\AD_VAT_TYPE\A_D_VAT_TypeService.cs" />
+    <Compile Include="Services\AD_VAT_TYPE\IA_D_VAT_TypeService.cs" />
+    <Compile Include="Services\CompStatus\II_VW_GetCompStatusService.cs" />
+    <Compile Include="Services\CompStatus\I_VW_GetCompStatusService.cs" />
+    <Compile Include="Services\DefStoree\IDefStoreService.cs" />
+    <Compile Include="Services\DefStoree\DefStoreService.cs" />
+    <Compile Include="Services\USER_BRANCH\G_USER_BRANCHService.cs" />
+    <Compile Include="Services\USER_BRANCH\IG_USER_BRANCHService.cs" />
+    <Compile Include="Services\G_LnkVar\G_LnkVar.cs" />
+    <Compile Include="Services\G_LnkVar\IG_LnkVarService.cs" />
+    <Compile Include="Services\G_LnkTransVariable\G_LnkTransVariable.cs" />
+    <Compile Include="Services\G_LnkTransVariable\IG_LnkTransService.cs" />
+    <Compile Include="Services\G_LnkTrans\G_LnkTrans.cs" />
+    <Compile Include="Services\G_LnkTrans\IG_LnkTransService.cs" />
+    <Compile Include="Services\G_SubSystem\G_SubSystem.cs" />
+    <Compile Include="Services\G_SubSystem\IG_SubSystemService.cs" />
+    <Compile Include="Services\GlnktransTemp\GlnktransTempService.cs" />
+    <Compile Include="Services\GlnktransTemp\IGlnktransTempService.cs" />
+    <Compile Include="Services\Glnktrans\GlnktransService.cs" />
+    <Compile Include="Services\Glnktrans\IGlnktransService.cs" />
+    <Compile Include="Services\G_Control\G_ControlService.cs" />
+    <Compile Include="Services\G_Control\IG_ControlService.cs" />
+    <Compile Include="Services\GCostCenter\GCostCenterService.cs" />
+    <Compile Include="Services\GCostCenter\IGCostCenterService.cs" />
+    <Compile Include="Services\GenDefAdjustment\GenDefAdjustmentService.cs" />
+    <Compile Include="Services\GenDefAdjustment\IGenDefAdjustmentService.cs" />
+    <Compile Include="Services\GenDefCategory\GenDefCategoryService.cs" />
+    <Compile Include="Services\GenDefCategory\IGenDefCategoryService.cs" />
+    <Compile Include="Services\GenDefGroup\GenDefGroupService.cs" />
+    <Compile Include="Services\GenDefGroup\IGenDefGroupService.cs" />
+    <Compile Include="Services\GenVatType\GenVatTypeService.cs" />
+    <Compile Include="Services\GenVatType\IGenVatTypeService.cs" />
+    <Compile Include="Services\GLDefAccount_year\GLDefAccount_yearService.cs" />
+    <Compile Include="Services\GLDefAccount_year\IGLDefAccount_yearService.cs" />
+    <Compile Include="Services\GLDefAccount\GLDefAccountService.cs" />
+    <Compile Include="Services\GLDefAccount\IGLDefAccountService.cs" />
+    <Compile Include="Services\GLTrVoucher\GLTrVoucherService.cs" />
+    <Compile Include="Services\GLTrVoucher\IGLTrVoucherService.cs" />
+    <Compile Include="Services\GRoleUsers\GRoleUsersService.cs" />
+    <Compile Include="Services\GRoleUsers\IGRoleUsersService.cs" />
+    <Compile Include="Services\GRole\GRoleService.cs" />
+    <Compile Include="Services\GRole\IGRoleService.cs" />
+    <Compile Include="Services\GUSERS\G_USERSService.cs" />
+    <Compile Include="Services\GUSERS\IG_USERSService.cs" />
+    <Compile Include="Services\IControl\II_ControlService.cs" />
+    <Compile Include="Services\IControl\I_ControlService.cs" />
+    <Compile Include="Services\IGCodes\IGCodesService.cs" />
+    <Compile Include="Services\IGCodes\IIGCodesService.cs" />
+    <Compile Include="Services\ItemDefYear\IItemDefYearService.cs" />
+    <Compile Include="Services\ItemDefYear\ItemDefYearService.cs" />
+    <Compile Include="Services\ItemDef\IItemDefService.cs" />
+    <Compile Include="Services\ItemDef\ItemDefService.cs" />
+    <Compile Include="Services\JournalDetail\IJournalDetailService.cs" />
+    <Compile Include="Services\JournalDetail\JournalDetailService.cs" />
+    <Compile Include="Services\G_LnkTransVoucher\G_LnkTransVoucherService.cs" />
+    <Compile Include="Services\G_LnkTransVoucher\IG_LnkTransVoucherService.cs" />
+    <Compile Include="Services\LnkVarBranch\G_LnkVarBranchService.cs" />
+    <Compile Include="Services\LnkVarBranch\IG_LnkVarBranchService.cs" />
+    <Compile Include="Services\VchrTemplateDetail\IVchrTemplateDetailService.cs" />
+    <Compile Include="Services\VchrTemplateDetail\VchrTemplateDetailService.cs" />
+    <Compile Include="Services\VchrTemplateHeader\IVchrTemplateHeaderService.cs" />
+    <Compile Include="Services\VchrTemplateHeader\VchrTemplateHeaderService.cs" />
+    <Compile Include="Services\JournalHeader\IJornalHeaderService.cs" />
+    <Compile Include="Services\JournalHeader\JornalHeaderService.cs" />
+    <Compile Include="Services\Nationalities\INationalityService.cs" />
+    <Compile Include="Services\Nationalities\NationalityService.cs" />
+    <Compile Include="Services\OperationCharges\IOperationCharges.cs" />
+    <Compile Include="Services\OperationCharges\OperationCharges.cs" />
+    <Compile Include="Services\OperationDeposit\IOperationDeposit.cs" />
+    <Compile Include="Services\OperationDeposit\OperationDeposit.cs" />
+    <Compile Include="Services\OperationItems\IOperationItems.cs" />
+    <Compile Include="Services\OperationItems\OperationItems.cs" />
+    <Compile Include="Services\Processes\IProcesses.cs" />
+    <Compile Include="Services\Processes\Processes.cs" />
+    <Compile Include="Services\PurDefCharges\IPurDefChargesService.cs" />
+    <Compile Include="Services\PurDefCharges\PurDefChargesService.cs" />
+    <Compile Include="Services\PurInvoiceItems\IPurTRReceiveItemsService.cs" />
+    <Compile Include="Services\PurInvoiceItems\PurTRReceiveItemsService.cs" />
+    <Compile Include="Services\PurTRCharges\IPurTRChargesService.cs" />
+    <Compile Include="Services\PurTRCharges\PurTRChargesService.cs" />
+    <Compile Include="Services\PurTrReceive\IPurTrReceiveService.cs" />
+    <Compile Include="Services\PurTrReceive\PurTrReceiveService.cs" />
+    <Compile Include="Services\SlsInvoiceItems\ISlsInvoiceItemsService.cs" />
+    <Compile Include="Services\SlsInvoiceItems\SlsInvoiceItemsService.cs" />
+    <Compile Include="Services\ISlsTRInvoice\IISlsTRInvoiceService.cs" />
+    <Compile Include="Services\ISlsTRInvoice\ISlsTRInvoiceService.cs" />
+    <Compile Include="Services\StkDefCategory\IStkDefCategoryService.cs" />
+    <Compile Include="Services\StkDefCategory\StkDefCategoryService.cs" />
+    <Compile Include="Services\StkDefItemType\IStkDefItemTypeService.cs" />
+    <Compile Include="Services\StkDefItemType\StkDefItemTypeService.cs" />
+    <Compile Include="Services\StkDefStore\IStkDefStoreService.cs" />
+    <Compile Include="Services\StkDefStore\StkDefStoreService.cs" />
+    <Compile Include="Services\StkDefUnit\IStkDefUnitService.cs" />
+    <Compile Include="Services\StkDefUnit\StkDefUnitService.cs" />
+    <Compile Include="Services\TmpVoucherProcess\ITmpVoucherProcessService.cs" />
+    <Compile Include="Services\TmpVoucherProcess\TmpVoucherProcessService.cs" />
+    <Compile Include="Services\GBRANCH\IGBRANCHService.cs" />
+    <Compile Include="Services\GBRANCH\GBRANCHService.cs" />
+    <Compile Include="Services\VoucherType\IVoucherTypeService.cs" />
+    <Compile Include="Services\VoucherType\VoucherTypeService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Inv.DAL\Inv.DAL.csproj">
+      <Project>{4a500666-7d24-47e3-a374-2f4a28cb26b5}</Project>
+      <Name>Inv.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

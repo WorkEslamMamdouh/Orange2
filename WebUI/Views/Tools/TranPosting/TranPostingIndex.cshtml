@@ -1,0 +1,381 @@
+﻿@using Inv.WebUI.Resources
+@{
+                /**/
+
+
+                Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<style>
+    input[type=checkbox] {
+        margin: 0px 0 0 !important;
+    }
+
+    body {
+        /*direction: rtl!important;*/
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    .ckeck {
+        bottom: 5px;
+    }
+
+    .LEPEL_CENTER {
+        text-align: left
+    }
+
+
+    .LEPEL_padingright {
+        padding-right: 25px !important
+    }
+
+    .pading_lep {
+        padding-right: 7px;
+    }
+
+    .pading_R_L {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .loc {
+        padding-top: 4%;
+    }
+
+    .location {
+        padding-top: 3px;
+        border: solid 1px black;
+        border-radius: 29px;
+        padding: 5px 0px 10px 0px;
+    }
+
+    #map {
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+    }
+
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    .highte {
+        height: 40px;
+    }
+
+        .highte:hover {
+            zoom: 1.1;
+            background-color: #5bc0de;
+        }
+
+    .fontitm3 {
+        float: right;
+        margin: 5px -15px 0px 0px !important;
+        font-size: 25px !important;
+        position: absolute;
+    }
+
+    #btnAddDetails {
+        font-size: 31px;
+        float: right;
+        margin: 5px -26px 0px 0px !important;
+        position: absolute;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+
+    .glyphicon-remove-sign:hover {
+        color: red
+    }
+
+    .LEPEL_padingright2 {
+        padding-right: 39px !important;
+    }
+
+    .pading_2 {
+        padding: 6px 18px 0px 0px !important;
+    }
+
+    .scrollx {
+        top: 0px !important;
+        overflow-x: scroll !important;
+        overflow-x: hidden !important;
+        height: 224px;
+    }
+
+
+    .borderred_1 {
+        margin-left: 0% !important;
+        left: 2% !important;
+    }
+
+    .borderred_2 {
+        margin-left: 0% !important;
+        left: 1% !important;
+    }
+
+    .borderred_3 {
+        margin-left: 0% !important;
+        left: 0% !important;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:focus {
+        color: black;
+        background-color: #fbebdc;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        color: black;
+        background-color: transparent;
+    }
+
+    .navbar-header {
+        border-left: solid 2px #ff0808;
+    }
+
+    .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+        margin-right: -5px !important;
+        margin-left: auto !important;
+    }
+
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #0a0a0a;
+    }
+
+    .Actiev {
+        font-weight: bold !important;
+        color: #0a0a0a !important;
+        background-color: #fbebdc;
+        border: inset !important;
+    }
+
+    .border_li {
+        border: outset 1px;
+    }
+
+    .navbar-inverse {
+        background-color: #fbebdc !important;
+        border-color: #fbebdc !important;
+    }
+</style>
+
+
+
+
+<div class="col-lg-12 margingred borderred borderred_3">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <label class="col-lg-1 col-xs-4 pading_2 ">  @SystemResource.App_BranchName  </label>
+        <div class="col-lg-3 col-xs-8">
+            <select id="ddlBranch" class="form-control input-sm">
+                <option value=""></option>
+            </select>
+        </div>
+
+    </div>
+    <div class="col-lg-12">
+        <label class="col-lg-1 col-xs-4 pading_2">@SystemResource.App_FromDate</label>
+        <div class="col-lg-2 col-xs-8">
+            <input id="txtFromDate" name="" type="date" class="form-control input-sm ">
+        </div>
+        <label class="col-lg-1 col-xs-4 pading_2  text-center">@SystemResource.App_ToDate</label>
+        <div class="col-lg-2 col-xs-8">
+            <input id="txtToDate" name="" type="date" class="form-control input-sm ">
+        </div>
+        <label class="col-lg-1 col-xs-4 pading_2 text-center"> @SystemResource.fromnum</label>
+        <div class="col-lg-2 col-xs-8">
+            <input id="txtFromNumber" name="" type="number" class="form-control input-sm ">
+        </div>
+        <label class="col-lg-1 col-xs-4 pading_2  text-center">@SystemResource.tonum</label>
+        <div class="col-lg-2 col-xs-8">
+            <input id="txtToNumber" name="" type="number" class="form-control input-sm ">
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-12 margingred">
+        <div class="col-lg-3 ">
+            <button id="btnLoad" type="button" class="float_left btn btn-info">  @SystemResource.Download_move   <i class="glyphicon glyphicon-save"></i> </button>
+        </div>
+        <div class="col-lg-1 ">
+            <button style="background-color:#ff7900" id="btnShowVouchers" type="button" class="  btn btn-info">  @SystemResource.View_restrictions  <i class="glyphicon glyphicon-search"></i> </button>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-1">
+            <button id="btnCreateVoucher" type="button" class="  btn btn-success">  @SystemResource.create_restrictions  <i class="glyphicon glyphicon-plus-sign"></i> </button>
+        </div>
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-1">
+            <button id="" type="button" class=" btn btn-warning">  @SystemResource.View_reports <i class="glyphicon glyphicon-plus-sign"></i> </button>
+        </div>
+    </div>
+
+
+</div>
+<div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
+
+    <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+
+</div>
+<div class="col-lg-12 margingred  borderred">
+    <div class="col-lg-6">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+
+                <ul class="nav navbar-nav">
+                    <li id="btndiv_3" class="border_li"><a id="btndiv_3" href="#"> @SystemResource.App_TrType </a></li>
+                    <li id="btndiv_1" class="border_li"><a id="btndiv_1" href="#"> @SystemResource.Movments </a></li>
+                    <li id="btndiv_2" class="border_li"><a id="btndiv_2" href="#"> @SystemResource.View_restrictions </a></li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="div_1" class="col-lg-12    borderred display_none">
+        <label id="lepfarest" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  @SystemResource.Movments </label>
+        <div class="col-lg-12">
+
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <button id="btnSelectAll" type="button" class="float_left btn btn-success">   @SystemResource.App_All <i class="fa fa-check" aria-hidden="true"></i> </button>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <button id="btnReverseSelection" type="button" class="float_left btn btn-warning">  @SystemResource.Reverse_selection   <i class='fa fa-sync'></i> </button>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-1">
+                <button id="btnUnSelectAll" type="button" class="float_left btn btn-danger">     @SystemResource.Not_choosing_everyone    <i class="fas fa-unlink	"></i> </button>
+            </div>
+        </div>
+        <div id="TransactionsGrid" class="margingred col-lg-12">
+
+
+        </div>
+
+    </div>
+    <div id="div_2" class="col-lg-12    borderred display_none">
+        <label id="lepfarest" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  @SystemResource.View_restrictions  </label>
+        <div class=" col-lg-12">
+            <label id="" class="col-lg-1 col-xs-2    pading_2 text-center"> @SystemResource.App_Registration_Number   </label>
+            <label id="lblVoucherNum" class="col-lg-2 col-xs-4  marginstenig pading_2 text-center">    </label>
+
+
+            <div id="" class=" col-lg-12">
+                <label id="" class="col-lg-1 col-xs-2    pading_2 text-center"> @SystemResource.App_desc   </label>
+                <textarea id="txtDesc" type="text" class="form-control input-sm col-lg-6 col-xs-3  "> </textarea>
+            </div>
+        </div>
+        <div id="VoucherDetailGrid" class=" col-lg-12 margingred">
+
+        </div>
+        <div id="" class=" col-lg-12">
+            <label id="" class="col-lg-2 col-xs-2    pading_2 text-left"> @SystemResource.App_total   </label>
+            <input style="background-color:#fed5d5;    width: 15%;" id="txtDebit" disabled type="text" class="form-control input-sm col-lg-2 col-xs-3  " />
+
+            <input style="background-color:#d3f3d0;  width: 15%" id="txtCedit" disabled type="text" class="form-control input-sm col-lg-2 col-xs-3  " />
+            <label id="" class="col-lg-1 col-xs-2    pading_2  text-left" style="left: 4%;"> @SystemResource.Itm_Diff   </label>
+            <input style="left: 4%;  width: 15%" id="txtDiff" disabled type="text" class="form-control input-sm col-lg-2 col-xs-3  " />
+        </div>
+    </div>
+    <div id="div_3" class="col-lg-12    borderred display_none">
+        <div class="col-lg-6">
+            <label id="lepfarest" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  @SystemResource.Movments   </label>
+
+            <table id="SubSystemGrid"></table>
+
+        </div>
+        <div class="col-lg-1">
+        </div>
+
+    </div>
+</div>
+<br />
+<br />
+
+
+<script src="~/ClientApp/CustomEntities.js"></script>
+<script src="~/ClientApp/Tools/TranPosting/TranPosting.js"></script>
+<style>
+    #TransactionsGrid {
+        width: 100% !important;
+        border: solid 2px black;
+        border-radius: 15px;
+    }
+
+    #PagesGrid {
+        border: solid 2px black;
+        border-radius: 15px;
+        left: 35px !important;
+    }
+
+    #SubSystemGrid {
+        border: solid 2px black !important;
+        border-radius: 15px;
+    }
+
+
+    #grid4 {
+        width: 100% !important;
+        border: solid 2px black;
+        border-radius: 15px;
+    }
+
+    #VoucherDetailGrid {
+        width: 100% !important;
+        border: solid 2px black;
+        border-radius: 15px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+
+
+        $('#btndiv_1').on('click', function () {
+            $("#btndiv_1").addClass("Actiev");
+            $("#btndiv_2").removeClass("Actiev");
+            $("#btndiv_3").removeClass("Actiev");
+
+            $("#div_1").removeClass("display_none");
+            $("#div_2").addClass("display_none");
+            $("#div_3").addClass("display_none");
+        });
+
+        $('#btndiv_2').on('click', function () {
+            $("#btndiv_1").removeClass("Actiev");
+            $("#btndiv_3").removeClass("Actiev");
+            $("#btndiv_2").addClass("Actiev");
+
+            $("#div_1").addClass("display_none");
+            $("#div_3").addClass("display_none");
+            $("#div_2").removeClass("display_none");
+        });
+        $('#btndiv_3').on('click', function () {
+            $("#btndiv_1").removeClass("Actiev");
+            $("#btndiv_2").removeClass("Actiev");
+            $("#btndiv_3").addClass("Actiev");
+
+            $("#div_3").removeClass("display_none");
+            $("#div_1").addClass("display_none");
+            $("#div_2").addClass("display_none");
+        });
+
+    });
+</script>

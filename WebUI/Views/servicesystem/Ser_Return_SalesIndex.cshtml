@@ -1,0 +1,512 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_AccTrInvReceipt;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    #btnAddDetails {
+        font-size: 40px;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+
+    .btnplasandmines {
+        display: inline-block;
+        padding: 2px 4px;
+        height: 36px;
+        margin-bottom: 0;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.428571;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+
+
+    .popu {
+        position: fixed;
+        /* top: 22%; */
+        /* height: 25%; */
+        width: 100%;
+        /* margin-right: 23%; */
+        border: solid 1px #f3f3f3 !important;
+        border-radius: 30px;
+        padding: 12px 11px;
+        background-color: #e3e3e3 !important;
+        box-shadow: 0px 4px 6px 0;
+    }
+
+    .List_MinUnitPrice_in_poup_pass {
+        display: block;
+        margin-top: -52%;
+        background-color: beige;
+        border-radius: 16px;
+        width: 191%;
+        height: 146px;
+        overflow-y: scroll;
+    }
+
+        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            background-color: beige;
+            /*border-radius: 16px;*/
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+        }
+
+        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 16px;
+        }
+
+            .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+    .st_border_li_List_MinUnitPrice {
+        width: 100% !important;
+        border-bottom: solid 1px !important;
+        padding: 2px 7px 3px 4px !important;
+        margin-left: 0px !important;
+        margin-top: 0px !important;
+        font-weight: bold !important;
+        font-size: 15px;
+    }
+
+    .col-lg-1 {
+    }
+
+    .left_right {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+
+    .fontitm3 {
+        float: right;
+        margin: 5px 8px 0px 0px !important;
+        font-size: 25px !important;
+        position: absolute;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#ddlCashBox").select2();
+        $("#ddlCustomer").select2();
+        $("#ddlCustomer2").select2();
+        $('#but_read').click(function () {
+            var username = $('#ddlCashBox option:selected').text();
+            var userid = $('#ddlCashBox').val();
+            var username = $('#ddlCustomer option:selected').text();
+            var userid = $('#ddlCustomer').val();
+            var username = $('#ddlInvoiceCustomer option:selected').text();
+            var userid = $('#ddlInvoiceCustomer').val();
+            $('#result').html("id : " + userid + ", name : " + username);
+        });
+    });
+</script>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+    <div class="modal fade" id="Popup_Passowrd" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="PopupBody" class=" modal-body col-lg-12 col-xs-12 ">
+                    <div id="popu_Passowrd" class="popu animated zoomInLeft" style="display:block;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <h2 id="id_Labol" style="text-align: center;">يجب ادخال الباسور حتي ياتم عملية البيع</h2>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5">
+                                <span class="" style="font-size: 22px;font-weight: bold;">Password</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                                <input id="txt_ApprovePass" type="password" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                                <button id="btn_Approveprice" type="button" class="btn btn-info " style="display:block;">
+                                    <span class="glyphicon glyphicon-download"></span> @SystemResource.App_approved
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                                <button id="btn_Exit_Approveprice" type="button" class="btn btn-info " style="background-color: brown;">
+                                    <span class="glyphicon glyphicon-remove"></span> @SystemResource.Cancel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                                <div id="" class="List_MinUnitPrice_in_poup_pass">
+                                    <ul id="Ul_List_MinUnitPrice"><li id="li_List_MinUnitPrice0" class="st_border_li_List_MinUnitPrice">-( بخارة ابيض افريقي 5 ك فله ) السعر (9) الحد (0350)</li><li id="li_List_MinUnitPrice1" class="st_border_li_List_MinUnitPrice">-( كاكا لبناني وسط 2 دور ) السعر (7) الحد (02550)</li><li id="li_List_MinUnitPrice2" class="st_border_li_List_MinUnitPrice">-( تفاح احمر صندوق سوري ) السعر (8) الحد (01250)</li></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="cotrolDiv">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager">@SystemResource.App_Cutomer</label>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <select id="ddlCustomer" name="" class="form-control input-sm" style='width: 100%;border-radius: 30px;'></select>
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager ">@SystemResource.App_FromDate</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input type="date" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtStartDate">
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager ">@SystemResource.App_ToDate</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input type="date" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtEndDate">
+            </div>
+            <div class="col-md-2 col-md-2 col-sm-2 col-xs-2 p-sm-0">
+                <button id="btnShow" type="button" class="btn btn-info">
+                    @SystemResource.App_Show  <span class="glyphicon glyphicon-save   sm-6 xs-6 hidden-sm hidden-md hidden-xs"></span>
+                </button>
+                <button type="button" class="btn btn-success" id="btnAdd">
+                    @SystemResource.App_Add  <span class="glyphicon glyphicon-plus-sign  sm-6 xs-6 hidden-sm hidden-md hidden-xs"></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager">@SystemResource.App_State</label>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <select id="ddlStateType" name="" class="form-control input-sm" style='width: 100%;border-radius: 30px;'></select>
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager">  @SystemResource.App_invoiceType</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id='ddlInvoiceType' class="form-control input-sm" style='width: 100%;border-radius: 30px;'></select>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" style="background-color: #f89814;" data-toggle="dropdown">
+                        @SystemResource.App_Print <span class="glyphicon glyphicon-hand-down"></span>
+                    </button>
+                    <div class="dropdown-menu" role="menu" style="border-radius:15px">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrview" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.Print_Report      </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>   @SystemResource.Download_PDF     </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span> @SystemResource.Download_EXCEL   </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 display_none" id="divShow">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <input id="searchbutmemreport" name="" type="text" class="form-control input-sm  text_Display" placeholder="@SystemResource.App_srch">
+            </div>
+            <div class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <table id="divGridDetails"></table>
+            </div>
+        </div>
+    </div>
+    <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none">
+        <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+    </div>
+    <div id="DivInvoiceDetails" class="display_none">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="    margin-top: 22px!important;">
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  " style="font-size: 16px !important;">  @SystemResource.App_ReturnNum  </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input class=" form-control input-sm  text_Display " id="txtReturnNumber" disabled="disabled" style="font-size: 16px !important;">
+            </div>
+
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager">  @SystemResource.App_invoiceType</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id='ddlType' class="form-control input-sm" disabled style='width: 100%;border-radius: 30px;'>
+                    <option value="null">اختر النوع</option>
+                    <option value="0">علي الحساب</option>
+                    <option value="1"> نقدي</option>
+                </select>
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  " style="text-align:end">@SystemResource.App_date</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input type="date" class="form-control input-sm" disabled name="" id="txtInvoiceDate" style="font-size: 16px !important;">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                <button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
+                    <span class="glyphicon"></span> @SystemResource.App_PrintInvoice
+                </button>
+                <div class="btn-group" id="div_btnPrint">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                        @SystemResource.App_Print  <span class="glyphicon glyphicon-hand-down"></span>
+                    </button>
+                    <div class="dropdown-menu" role="menu" style="border-radius:15px">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.Print_Report      </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
+                        </div>
+                    </div>
+                </div>
+                <button id="btnSave" type="button" class="btn btn-success  display_none float-left">
+                    @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
+                </button>
+                <button id="btnBack" type="button" class="btn btn-warning  display_none float-left">
+                    <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
+                </button>
+                <button id="btnUpdate" type="button" class="btn btn-primary display_none float-left">
+                    <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
+                </button>
+                <button id="btnpreview" type="button" class="btn btn-primary display_none">
+                    <span class="glyphicon glyphicon-save"></span> @SystemResource.Preview_results
+                </button>
+            </div>
+
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager2">  @SystemResource.App_Cutomer  </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0" style="">
+                    <button type="button" disabled class="src-btn btn btn-warning col-xs-12 p-0" id="btnCustomerSrch" name="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10 p-0">
+                    <input type="text" class="form-control input-sm" disabled id="txtCustomerCode" style="font-size: 16px !important;width: 100%;border-radius: 30px;">
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <input type="text" class="form-control input-sm" disabled id="txtCustomerName" style="font-size: 16px !important;width: 100%;border-radius: 30px;">
+            </div>
+            <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4 marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager text-end"> @SystemResource.App_Invoice </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 ">
+                <button type="button" disabled class="src-btn btn btn-warning col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0" id="btnInvoiceSearch" name="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+                <input type="text" class="form-control input-sm col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10" disabled name="" id="txtInvoiceID">
+            </div>
+
+
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 " style="text-align:end">  @SystemResource.App_approved  </label>
+            <div class="col-xs-1 col-sm-1" style="top:7px">
+                <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 ">  @SystemResource.App_CashAccount  </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <button type="button" disabled class="src-btn btn btn-warning p-0 col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" id="btnAccSearch" name="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <input type="text" class="form-control input-sm col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10 p-0" disabled id="txtCashAccount" style="font-size: 16px !important;">
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <input type="text" class="form-control input-sm" disabled id="txtCashAccountName" style="font-size: 16px !important;width: 100%;border-radius: 30px;">
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1   marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager2 text-end ">  @SystemResource.App_Registration_Number  </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input type="text" class="form-control input-sm" disabled name="VoucherNo" id="txtVoucherNo" style="font-size: 16px !important;">
+            </div>
+        </div>
+        <br />
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont" style="overflow:scroll">
+            <div id=" " class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 font_header" style="text-align:center!important;bottom: 5px;font-size: 13px;font-weight: bold; ">
+                <br />
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width: 4%;">
+                    <span class="">@SystemResource.serial</span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">
+                    <span class="">@SystemResource.Inv_ServiceCode</span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <span class="">@SystemResource.App_Service</span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                    <span class="">@SystemResource.App_soldQty </span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">
+                    <span class="">@SystemResource.App_returnQty</span>
+                </div>
+                <div class="col-lg-1  " style="text-align: center;">
+                    <span class="">@SystemResource.App_Price</span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">
+                    <span class="">@SystemResource.DiscountPercentage</span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  ">
+                    <span class="">@SystemResource.Discount </span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0 ">
+                    <span class="">@SystemResource.Priceafterdiscount</span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  ">
+                    <span class="">@SystemResource.App_total</span>
+
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  ">
+
+                    <span class="">@SystemResource.tax_rate</span>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 " style="position:absolute;right:98.5%">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  ">
+                        <span class="">@SystemResource.App_Tax</span>
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  ">
+                        <span class="">@SystemResource.App_Net</span>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6  ">
+                        <span class="">@SystemResource.SHT_Name</span>
+                    </div>
+                </div>
+                @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pull-0  " style="position:absolute;right:142.5%">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  ">
+                        <span class="">الملاحظات</span>
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="row " id="div_Data">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred ">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_total</label>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                    <input style="width: 127%;" type="text" class="form-control input-sm" disabled name="TotalAmount" id="txtTotalbefore">
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  marginstenig pading_lep  pading_2 text-center ">@SystemResource.Discount</label>
+                    <input type="text" class="form-control input-sm col-xs-7" disabled name="ItemDiscountTotal" id="txtTotalDiscount">
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0">
+                    <label class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 marginstenig pading_lep  pading_2 ">@SystemResource.Netafterdiscount</label>
+                    <input type="text" class="form-control input-sm col-lg-3" disabled name="ItemTotal" id="txtTotal">
+
+                    <label class="col-lg-2 col-md-2 col-sm-5 col-xl-5 col-xs-5  marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager2">@SystemResource.App_Tax</label>
+                    <input type="text" class="form-control input-sm col-lg-3" disabled name="VatAmount" id="txtTax">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0">
+                    <label class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  marginstenig pading_lep  pading_2 text-center">@SystemResource.Itm_Diff</label>
+                    @*<input id="txtDiscountPrcnt" name="" type="number" class="form-control input-sm  col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">*@
+                    @*<label class=" pading_lep centeralign col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">%</label>*@
+                    <input id="txtDiscountValue" disabled name="" type="number" class="form-control input-sm col-lg-7">
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0">
+                    <label class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5   marginstenig pading_lep  pading_2 text-center">@SystemResource.App_Net</label>
+                    <input type="text" class="form-control input-sm col-lg-7" disabled name="NetAfterVat" id="txtNet">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   "> @SystemResource.App_ItemsCount</label>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:10.5%">
+                    <input type="text" class="form-control input-sm" disabled name="Line_Count" id="txtItemCount">
+                </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager2 ">@SystemResource.App_PackageCount	</label>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:10.5%">
+                    <input type="text" class="form-control input-sm" disabled name="Tot_Qty" id="txtPackageCount">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 p-0">
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  pading_2Processes  ">@SystemResource.App_Notes</label>
+                    <div class="col-md-10 col-sm-5 col-xs-10">
+                        <textarea type="text" class="form-control disabled input-sm addable editable " disabled name="Remark" id="txt_Remarks"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.contract_number </label>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                            <input type="text" class="form-control input-sm" disabled name=" " id="txtContractNo">
+                        </div>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.Pur_order_No</label>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                            <input type="text" class="form-control input-sm" disabled name=" " id="txtPurchaseorderNo">
+                        </div>
+                    </div>
+
+                    <div class=" display_none col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   "> @SystemResource.date_of_supply</label>
+                        @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   "> من</label>*@
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                            <input type="date" class="form-control input-sm" disabled name=" " id="txtDeliveryDate" style="font-size: 16px !important;">
+                        </div>
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   "> @SystemResource.Endsupply</label>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                            <input type="date" class="form-control input-sm" disabled name=" " id="txtDeliveryEndDate" style="font-size: 16px !important;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Seller </label>
+                <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom ">
+                <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="col-lg-2 col-xs-4  marginstenig pading_lep  pading_2 style_borderbottom">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2"> </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom text-center"> @SystemResource.App_Update  </label>
+                <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
+                <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="col-lg-2 col-xs-4  marginstenig pading_lep  pading_2 style_borderbottom">
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+<script src="~/ClientApp/servicesystem/SlsTrServicesReturn.js"></script>

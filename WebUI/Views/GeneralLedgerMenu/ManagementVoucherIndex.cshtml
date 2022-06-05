@@ -1,0 +1,212 @@
+﻿
+@using Inv.WebUI.Resources
+@{
+    /**/
+
+    ViewBag.Title = "ManagementVoucher";
+
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.45;
+    }
+
+    .style_contrctddr {
+        margin-right: 8%;
+    }
+
+    .class_btn_drop {
+        background-color: #c8c8c8;
+        padding: 6px 10px 2px 10px;
+    }
+
+    .dropdown-item:hover {
+        cursor: pointer !important;
+        background-color: #c8c8c8 !important;
+    }
+
+    .pading_3 {
+        padding: 0px 50px 0px !important
+    }
+
+
+    .textcentr_pading {
+        padding-right: 29px !important;
+    }
+
+    .src-btn {
+        border-radius: 18px !important;
+    }
+
+    .dropdown-menu {
+        border-radius: 11px;
+    }
+
+    .borderbottom {
+        border: 2px inset;
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    .style_borderbottom {
+        border: 2px inset;
+        text-align: center;
+    }
+
+    .st_drop_text {
+        position: absolute !important;
+        top: 0px;
+        z-index: 100;
+    }
+
+    .radiocontrol {
+        top: -10px;
+    }
+
+    .font_heder {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .fontitm3 {
+        float: right;
+        margin: 5px -25px 0px 0px !important;
+        font-size: 25px !important;
+        position: absolute;
+    }
+
+    .btnplas {
+        margin-top: 9px;
+        margin-left: 6px;
+        margin-right: 9px;
+    }
+
+
+
+    glyphicon-minus-sign :hover {
+        color: #ff0000
+    }
+
+    #btnAddDetails {
+        font-size: 30px;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred ">
+    <div class="row" id="divFilter">
+        <div id="divnotifications" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher ">@SystemResource.App_FromDate</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <input id="txtFromDate" name="" type="date" class="form-control  text_Display">
+                    </div>
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher ">@SystemResource.App_ToDate</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <input id="txtToDate" name="" type="date" class="form-control  text_Display">
+                    </div>
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher ">@SystemResource.App_Status</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <select id="ddlStatusFilter" name="" type="text" class="form-control  text_Display"></select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher ">@SystemResource.source</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <select id="ddlVoucherSourceFilter" name="" type="text" class="form-control  text_Display"></select>
+                    </div>
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher">@SystemResource.App_Type</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <select id="ddlVoucherTypeFilter" name="" type="text" class="form-control  text_Display"></select>
+                    </div>
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textalignJournalVoucher">@SystemResource.User</label>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                        <select id="ddluserFilter" name="" type="text" class="form-control  text_Display"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                        @SystemResource.App_Print    <span class="glyphicon glyphicon-hand-down"></span>
+                    </button>
+                    <div class="dropdown-menu" role="menu" style="border-radius:15px">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrview" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.Print_Report      </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>   @SystemResource.Download_PDF     </button>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <button style="width:100%" id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span> @SystemResource.Download_EXCEL   </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-info" id="btnShow">
+                    @SystemResource.App_Show  <span class="glyphicon glyphicon-save "></span>
+                </button>
+            </div>
+            <div id="div_grid" style="position: relative;height: auto;width: 100%;">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred  display_none" id="divGridShow">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                <input id="txtSearch" name="" type="text" class="form-control  text_Display" placeholder="@SystemResource.Search">
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6" style="border: solid 3px;border-radius: 33px;">
+                <button id="btnReverse_Selection" type="button" class="marginbtn btn btn-custon-four   primary-btn-cl" style=" background-color: green;color: aliceblue;"><span class="adminpro-icon  adminpro-refresh-button "></span>@SystemResource.Reverse_selection</button>
+                <button id="btnFalse_Everyone" type="button" class="marginbtn btn btn-custon-four   primary-btn-cl" style="background-color: green;color: aliceblue;"><span class="fa fa-times"></span>@SystemResource.Not_choosing_everyone</button>
+                <button id="btnTrue_Everyone" type="button" class="marginbtn btn btn-custon-four   primary-btn-cl" style="background-color: green;color: aliceblue;"><span class=" fa fa-check"></span>@SystemResource.choose_all</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6" style="border: solid 3px;border-radius: 33px;">
+                <button id="btnPost" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl" style="margin-right: 10%;"><span class="adminpro-icon  adminpro-airplay "></span>  تصديق </button>
+                <button id="btnUnpost" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>@SystemResource.release_ratification</button>
+                <button id="btnAuthorize" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon  adminpro-download-arrow"></span>    @SystemResource.relay  </button>
+                <button id="btnUnauthorize" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon  adminpro-download-arrow"></span>@SystemResource.Decoder_relay</button>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+            <table id="divGridDetails"></table>
+        </div>
+    </div>
+    <label id="lbgridSelect" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="color: blue; text-align: center;font-size: large;">@SystemResource.double_clicking</label>
+    <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none">
+        <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+    </div>
+</div>
+<script>
+    $('#lepnotifications').on('click', function () {
+        $('#divnotifications').toggleClass('showdiv');
+        $('#spanlepnotifications').toggleClass('fa-caret-left');
+        $('#spanlepnotifications').toggleClass('fa-caret-down');
+    });
+</script>
+<script>
+    $('#btnReserveID').on('click', function () {
+        $('#drpsearchReserve').toggleClass('display_none');
+    });
+    $('#btnCloseNo').on('click', function () {
+        $('#drpCloseNo').toggleClass('display_none');
+
+    }); $('#btnContractRentID').on('click', function () {
+        $('#drpContractRent').toggleClass('display_none');
+    });
+</script>
+<script src="~/ClientApp/GeneralLedger/ManagementVoucher.js"></script>

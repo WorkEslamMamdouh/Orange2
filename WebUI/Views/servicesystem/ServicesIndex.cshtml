@@ -1,0 +1,161 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_AccTrReceiptNote;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+    .class_btn_drop {
+        background-color: #c8c8c8;
+        padding: 6px 10px 2px 10px;
+    }
+
+    .dropdown-item:hover {
+        cursor: pointer !important;
+        background-color: #c8c8c8 !important;
+    }
+
+    .pading_3 {
+        padding: 0px 50px 0px !important
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    .textalign {
+        text-align: center
+    }
+
+    .src-btn {
+        border-radius: 18px !important;
+    }
+
+    .dropdown-menu {
+        border-radius: 11px;
+    }
+
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#txt_D_CashBox").select2();
+        $('#but_read').click(function () {
+            var username = $('#txt_D_CashBox option:selected').text();
+            var userid = $('#txt_D_CashBox').val();
+            $('#result').html("id : " + userid + ", name : " + username);
+        });
+    });
+</script>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred">
+         <div class="row">
+            <div id="informtionReserved" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  ">
+                <div id="id_div_Add">
+                    <div id="id_ReportGrid" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred display_none" style="">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
+                                <input id="searchbutmemreport" name="" type="text" class="form-control input-sm text_Display " placeholder="@SystemResource.App_SearchbyCode">
+                            </div>
+                            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2  text-end"> @SystemResource.APP_Category</label>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                                <select id="ddlServCateroryFilter" name="" class="form-control input-sm  text_Display ">
+                                    <option value="null">@SystemResource.APP_Category</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
+                                <label class="col-xs-3  pading_ServiceCat text-end">  @SystemResource.Purchase   </label>
+                                <div class="col-xs-3">
+                                    <input type="radio" class="form-control input-sm addable editable" name="Type" id="IsPur">
+                                </div>
+                                <label class="col-xs-3  pading_ServiceCat text-end">@SystemResource.Men_Sales  </label>
+                                <div class="col-xs-3">
+                                    <input type="radio" class="form-control input-sm addable editable" name="Type" id="IsSls">
+                                </div> 
+                            </div>
+                            <div class="col-xs-2">
+                             </div>
+                            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  ">
+                                <button type="button" class="btn btn-success" id="btnAdd">
+                                    @SystemResource.App_Add  <span class="glyphicon glyphicon-plus-sign"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <table id="ReportGrid"></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred  display_none">
+                    <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+                </div>
+                <h4 style="text-align: center;font-weight: bold;color: #0088c7;"><i class="glyphicon glyphicon-hand-up"></i> @SystemResource.App_DoubleDisplay <i class="glyphicon glyphicon-hand-up"></i></h4>
+
+                <div id="Div_control" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred   " style="margin-bottom: 19px;margin-top: 20px;">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 float_left_right style_btton " style="width: 26%;">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4" style="padding:0px!important">
+
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8">
+                            <button type="button" class="btn btn-primary" id="btnedit">@SystemResource.App_Update <span class="glyphicon glyphicon-edit"></span></button>
+                            <button id="btnsave" type="button" style="margin-right: 18%!important;" class=" btn btn-success display_none">@SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span></button>
+                            <button id="btnback" type="button" class="  btn btn-warning display_none">@SystemResource.App_back  <span class="glyphicon glyphicon-backward"></span></button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat">@SystemResource.App_Code</label>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 ">
+                            <input id="txt_CODE" disabled name="ItemCode" type="text" class="form-control input-sm  text_Display" placeholder="@SystemResource.App_Number">
+                        </div>
+                        <div class="col-xs-1 ">
+                         </div>
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat text-end">   @SystemResource.APP_Category    </label>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 ">
+                            <select id="ddlServCaterory" disabled name="SrvCategoryID" class="form-control input-sm  text_Display "></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1   pading_ServiceCat">@SystemResource.App_DescA </label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
+                            <input id="txt_DeskA" disabled name="DescA" type="text" class="form-control input-sm   text_Display" placeholder="@SystemResource.App_DescA">
+                        </div>
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat text-end"> @SystemResource.App_Price  </label>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 ">
+                            <input id="txtunitprice" name="UnitPrice" disabled="disabled" type="number" maxlength="10" class=" form-control input-sm  text_Display" value="1176">
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1   pading_ServiceCat">@SystemResource.App_DescE </label>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
+                            <input id="txt_DeskE" disabled name="DescL" type="text" class="form-control input-sm  text_Display" placeholder="@SystemResource.App_DescE">
+                        </div>                      
+                       
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat text-end"> @SystemResource.Itm_Uom </label>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                            <select id="txt_unit" disabled name="UomID" class="form-control input-sm  text_Display "></select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat  borderbottom "> @SystemResource.App_Create </label>
+                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat  borderbottom ">
+                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2   pading_ServiceCat style_borderbottom">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2"> </div>
+                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat  borderbottom "> @SystemResource.App_Update </label>
+                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_ServiceCat  borderbottom">
+                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2   pading_ServiceCat style_borderbottom">
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+<script src="~/ClientApp/servicesystem/Services.js"></script>
+<script>
+    $('#lepnotifications').on('click', function () {
+        $('#divnotifications').toggleClass('showdiv');
+        $('#spanlepnotifications').toggleClass('fa-caret-left');
+        $('#spanlepnotifications').toggleClass('fa-caret-down');
+    });
+</script> 

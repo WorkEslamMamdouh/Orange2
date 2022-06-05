@@ -1,0 +1,173 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_GenDefCustomerCat;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<style>
+    .inner tr td {
+        border-top: none !important;
+    }
+
+    .style_pading {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .table_11 tr td:nth-child(3) {
+        width: 200px;
+    }
+
+    .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
+        width: 120px;
+    }
+
+    .table_11 {
+        margin-bottom: 0px;
+    }
+
+    .auto-style1 {
+        background-color: #F5F5F5;
+    }
+
+    .display_none {
+        display: none !important;
+    }
+
+    #btnAddDetails {
+        font-size: 40px;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+
+    #btnAddDetails2 {
+        font-size: 40px;
+    }
+
+        #btnAddDetails2:hover {
+            color: #24b414;
+        }
+
+    #btnAddDetails3 {
+        font-size: 40px;
+    }
+
+        #btnAddDetails3:hover {
+            color: #24b414;
+        }
+
+    .glyphicon-remove-sign:hover {
+        color: red
+    }
+
+    .minus_btn {
+    }
+</style>
+<div class="col-xs-12    borderred ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.App_FromDate </label>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <input type="date" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtFromDate" />
+        </div>
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.App_ToDate</label>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <input type="date" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtToDate" />
+        </div>
+        <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1"> </div>
+        <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.Summary </label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" class="form-control input-sm addable editable" name="reptype" id="rpSummary" />
+        </div>
+        <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.Detailed</label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" name="reptype" class="form-control input-sm addable editable" id="rpDetail" />
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        @*<label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">توزيع حساب </label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" class="form-control input-sm addable editable" name="price" id="rdAccount" />
+        </div>
+        <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">مركز فرعي</label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" name="price" class="form-control input-sm addable editable" id="rdCostCntr" />
+        </div>
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep p-0" style="padding-top:6px!important">إخفاء البيانات الصفرية</label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+            <input type="checkbox" class="form-control input-sm addable editable" name="GosiJoinDate" id="chkHideZeros" />
+        </div>*@
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.p_account_number   </label>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 style_pading">
+            <button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnAccountSearch" name="ColSearch">
+                <i class="fa fa-search"></i>
+            </button>
+            <input id="txtAccountCode" type="text" class="form-control input-sm col-xs-9 right2 ">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-2 col-xl-3 col-xs-3">
+            <input type="text" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtAcountName" disabled="disabled">
+        </div>
+        <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1"></div>
+        <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.account_distribution </label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" class="form-control input-sm addable editable" name="price" id="rdAccount" />
+        </div>
+        <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2   ">@SystemResource.BU </label>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">
+            <input type="radio" name="price" class="form-control input-sm addable editable" id="rdCostCntr" />
+        </div>
+
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.BU_Number    </label>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 style_pading">
+            <button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnCostCntrSearch" name="ColSearch">
+                <i class="fa fa-search"></i>
+            </button>
+            <input id="txtCCcode" type="text" class="form-control input-sm col-xs-9 right2 ">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+            <input type="text" class="form-control input-sm addable editable" name="" id="txtCCName" disabled="disabled">
+        </div>
+        @*<div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1"></div>*@
+
+       
+        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep p-0" style="padding-top:6px!important">@SystemResource.Hide_ZeroData</label>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                <input type="checkbox" class="form-control input-sm addable editable" name="" id="chkHideZeros" />
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep p-0" style="padding-top:6px!important">@SystemResource.Includevalidatedentries</label>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                <input type="checkbox" class="form-control input-sm addable editable" name="" id="chkIsAuthVchr" />
+            </div>
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep p-0" style="padding-top:6px!important">@SystemResource.Inclusionnewrestrictions</label>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                <input type="checkbox" class="form-control input-sm addable editable" name="" id="chkIsNewVchr" />
+            </div>
+
+        </div>
+    </div>
+<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none">
+    <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+</div>
+<div id=" " class=" col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred">
+    <div class=" col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <div class="col-lg-1 hidden-md hidden-sm hidden-xs ">  </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10 borderred">
+            <div class="col-lg-1 hidden-md hidden-sm hidden-xs "></div>
+            <button id="btnReset" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl "><span class="adminpro-icon  search-choice-focus "></span>@SystemResource.new_search</button>
+            <button id="btnviewresult" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl floatleftPurOrder" style="margin-right: 1%;display:none"> @SystemResource.Preview_results  <span class="adminpro-icon adminpro-paint-roller"></span>   </button>
+            <div class="col-lg-1 hidden-md hidden-sm hidden-xs "></div>
+            <button id="btnPrintTrview" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl">@SystemResource.Print_Report <span class="adminpro-icon adminpro-airplay"></span></button>
+            <button id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"> @SystemResource.Download_PDF <span class="adminpro-icon adminpro-download-arrow"></span></button>
+            <button id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl">@SystemResource.Download_EXCEL <span class="adminpro-icon adminpro-download-arrow"></span></button>
+            <button id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"> @SystemResource.App_Print <span class="adminpro-icon adminpro-paint-roller"></span> </button>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/ClientApp/costcenter/CcdtAccState.js"></script>
