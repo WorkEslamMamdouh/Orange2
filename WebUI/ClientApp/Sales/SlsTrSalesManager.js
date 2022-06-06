@@ -17,10 +17,12 @@ var SlsTrSalesManager;
     var ddlStore;
     var ddlCustomer;
     var ddlSalesmanFilter;
+    var ddlSalesman;
+    var ddlSalesPersonFilter;
+    var ddlSalesPerson;
     var ddlStateType;
     var ddlInvoiceType;
     var ddlInvoiceCustomer;
-    var ddlSalesman;
     var ddlType;
     var ddlCashBox;
     // Arrays
@@ -171,9 +173,11 @@ var SlsTrSalesManager;
         ddlStore = document.getElementById("ddlStore");
         ddlCustomer = document.getElementById("ddlCustomer");
         ddlSalesmanFilter = document.getElementById("ddlSalesmanFilter");
+        ddlSalesman = document.getElementById("ddlSalesman");
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter");
+        ddlSalesPerson = document.getElementById("ddlSalesPerson");
         ddlStateType = document.getElementById("ddlStateType");
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer");
-        ddlSalesman = document.getElementById("ddlSalesman");
         ddlCashBox = document.getElementById("ddlCashBox");
         ddlInvoiceType = document.getElementById("ddlInvoiceType");
         ddlType = document.getElementById("ddlType");
@@ -676,6 +680,7 @@ var SlsTrSalesManager;
         txtInvoiceCustomerName.value = '';
         txtCustomerMobile.value = '';
         ddlSalesman.value = 'null';
+        ddlSalesPerson.value = 'null';
         txtRefNo.value = "";
         txtRemarks.value = "";
         SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3 ? ($('#ddlStore option[value="null"]').remove()) : $('#ddlStore').prop('selectedIndex', 1);
@@ -706,6 +711,7 @@ var SlsTrSalesManager;
         TypeFlag = true;
         txtInvoiceCustomerName.disabled = false;
         ddlSalesman.disabled = false;
+        ddlSalesPerson.disabled = false;
         ddlStore.disabled = false;
         ddlType.disabled = false;
         txtCommission.disabled = false;
@@ -860,6 +866,7 @@ var SlsTrSalesManager;
         }
         $("#ddlInvoiceCustomer").removeAttr("disabled");
         $("#ddlSalesman").removeAttr("disabled");
+        $("#ddlSalesPerson").removeAttr("disabled");
         $("#txtRefNo").removeAttr("disabled");
         $("#txtRemarks").removeAttr("disabled");
         $("#txtInvoiceCustomerName").removeAttr("disabled");
@@ -972,6 +979,15 @@ var SlsTrSalesManager;
                     }
                     SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3 ? ($('#ddlSalesman option[value="null"]').remove()) : $('#ddlSalesman').prop('selectedIndex', 0);
                     SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3 ? ($('#ddlSalesmanFilter option[value="null"]').remove()) : $('#ddlSalesmanFilter').prop('selectedIndex', 0);
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
                 }
             }
         });
@@ -1169,12 +1185,16 @@ var SlsTrSalesManager;
         var customerId = 0;
         var status = 0;
         var ddlSalesmanFilterValue = 0;
+        var ddlSalesPersonFilterValue = 0;
         var IsCash = 0;
         if (ddlCustomer.value != "null") {
             customerId = Number(ddlCustomer.value.toString());
         }
         if (ddlSalesmanFilter.value != "null") {
             ddlSalesmanFilterValue = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            ddlSalesPersonFilterValue = Number(ddlSalesPersonFilter.value.toString());
         }
         if (ddlStateType.value != "null") {
             status = Number(ddlStateType.value.toString());
@@ -1191,7 +1211,7 @@ var SlsTrSalesManager;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("SlsTrSales", "GetAllSlsInvoiceReviewStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, SalesPerson: ddlSalesPersonFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -1261,7 +1281,9 @@ var SlsTrSalesManager;
                 //$('#ddlInvoiceCustomer').val(InvoiceStatisticsModel[0].CustomerId.toString());
             }
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
+            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
+            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
@@ -1318,16 +1340,15 @@ var SlsTrSalesManager;
         $("#btnBack").addClass("display_none");
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
+        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
-        //ddlInvoiceCustomer.disabled = true;
-        ddlSalesman.disabled = true;
+        //ddlInvoiceCustomer.disabled = true; 
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
-        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
@@ -2045,6 +2066,11 @@ var SlsTrSalesManager;
             Errorinput(ddlSalesman);
             return false;
         }
+        else if (ddlSalesPerson.value == "null") {
+            DisplayMassage(" برجاء اختيار البائع", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesPerson);
+            return false;
+        }
         else if (ddlStore.value == "null" && NewAdd == true) {
             DisplayMassage(" برجاء اختيار المستودع", "Please select a Store", MessageType.Error);
             Errorinput(ddlStore);
@@ -2210,6 +2236,7 @@ var SlsTrSalesManager;
         ///////////////
         InvoiceModel.InvoiceID = GlobalinvoiceID;
         InvoiceModel.SalesmanId = Number(ddlSalesman.value);
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.StoreId = Number(ddlStore.value);
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
@@ -2469,6 +2496,8 @@ var SlsTrSalesManager;
             }
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
+            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
@@ -2525,16 +2554,14 @@ var SlsTrSalesManager;
         $("#btnBack").addClass("display_none");
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
+        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
-        //ddlInvoiceCustomer.disabled = true;
-        ddlSalesman.disabled = true;
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
-        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
@@ -2614,6 +2641,8 @@ var SlsTrSalesManager;
             }
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
+            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
@@ -2669,16 +2698,14 @@ var SlsTrSalesManager;
         $("#btnBack").addClass("display_none");
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
+        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
-        //ddlInvoiceCustomer.disabled = true;
-        ddlSalesman.disabled = true;
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
-        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
@@ -2770,6 +2797,7 @@ var SlsTrSalesManager;
         InvoiceModel.SlsInvType = 1; //  retail 
         InvoiceModel.StoreId = StoreID; //main store
         InvoiceModel.SalesmanId = Number(ddlSalesman.value);
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.StoreId = Number(ddlStore.value);
         InvoiceModel.RefTrID = null;
         InvoiceModel.Status = 0;

@@ -249,7 +249,7 @@ namespace Inv.API.Controllers
 
        
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, string UserCode, string Token)
+        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
         { 
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
@@ -257,6 +257,8 @@ namespace Inv.API.Controllers
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
+                if (SalesPerson != 0 && SalesPerson != null)
+                    condition = condition + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
                 if (SalesMan != 0 && SalesMan != null)
                     condition = condition + " and SalesmanId =" + SalesMan;// and Status = " + Status
                 if (Status == 2)
