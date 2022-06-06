@@ -104,6 +104,7 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> ItemDiscountTotal { get; set; }
         public Nullable<decimal> ItemVatTotal { get; set; }
         public Nullable<decimal> RoundingAmount { get; set; }
+        public Nullable<int> FinYear { get; set; }
         public Nullable<int> SalesPersonId { get; set; }
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
