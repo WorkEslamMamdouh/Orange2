@@ -14,10 +14,12 @@ namespace ProcSalesMgr {
     //ddl
     var ddlCustomer: HTMLSelectElement;
     var ddlSalesmanFilter: HTMLSelectElement;
+    var ddlSalesPersonFilter: HTMLSelectElement;
     var ddlStateType: HTMLSelectElement;
     var ddlInvoiceType: HTMLSelectElement;
     var ddlInvoiceCustomer: HTMLSelectElement;
     var ddlSalesman: HTMLSelectElement;
+    var ddlSalesPerson: HTMLSelectElement;
     var ddlType: HTMLSelectElement;
     var ddlOPerationMaster: HTMLInputElement;
     var txtRemarks: HTMLInputElement;
@@ -155,7 +157,7 @@ namespace ProcSalesMgr {
         $('#btnPrint').addClass('display_none');
         $('#btnPrintInvoicePrice').addClass('display_none');
 
-
+        fillddlSalesPerson();
 
     }
     function InitalizeControls() {
@@ -170,9 +172,11 @@ namespace ProcSalesMgr {
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer") as HTMLSelectElement;
         ddlSalesmanFilter = document.getElementById("ddlSalesmanFilter") as HTMLSelectElement;
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter") as HTMLSelectElement;
         ddlStateType = document.getElementById("ddlStateType") as HTMLSelectElement;
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer") as HTMLSelectElement;
         ddlSalesman = document.getElementById("ddlSalesman") as HTMLSelectElement;
+        ddlSalesPerson = document.getElementById("ddlSalesPerson") as HTMLSelectElement;
         ddlInvoiceType = document.getElementById("ddlInvoiceType") as HTMLSelectElement;
         ddlType = document.getElementById("ddlType") as HTMLSelectElement;
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster") as HTMLInputElement;
@@ -340,7 +344,34 @@ namespace ProcSalesMgr {
 
     }
 
+    function fillddlSalesPerson() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefSalesMen", "GetAllSalesPeople"),// GetAllSalesPeople(int CompCode, bool IsSalesEnable, string UserCode, string Token)
+            data: {
+                CompCode: compcode, BranchCode: BranchCode, IsSalesEnable: true, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
 
+                    SalesmanDetails = result.Response as Array<I_Sls_D_Salesman>;
+                  
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
+
+                }
+            }
+        });
+    }
     function fillddlOperation() {
         Ajax.Callsync({
             type: "Get",
@@ -789,6 +820,11 @@ namespace ProcSalesMgr {
             Errorinput(ddlSalesman);
             return false
         }
+        else if (ddlSalesPerson.value == "null") {
+            DisplayMassage(" برجاء اختيار البائع", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesPerson);
+            return false
+        }
         else if (txtInvoiceDate.value == "") {
             DisplayMassage(" برجاء ادخال التاريخ ", "Please enter the date", MessageType.Error);
             Errorinput(txtInvoiceDate);
@@ -854,10 +890,12 @@ namespace ProcSalesMgr {
         $("#txtInvoiceDate").prop("value", GetDate());
         $('#ddlInvoiceCustomer option[value=null]').prop('selected', 'selected').change();
         $("#ddlSalesman").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         $("#txtInvoiceCustomerName").prop("value", "");
         $("#txtCashMoney").prop("value", "");
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -2061,6 +2099,7 @@ namespace ProcSalesMgr {
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.RefNO = txtRefNo.value;
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.Remark = txtRemarks.value;
 
 
@@ -2396,6 +2435,7 @@ namespace ProcSalesMgr {
         txtNet.disabled = true;
         txtCommission.disabled = false;
         txtRefNo.disabled = false;
+        ddlSalesPerson.disabled = false;
         txtRemarks.disabled = false;
 
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
@@ -2459,6 +2499,7 @@ namespace ProcSalesMgr {
         txtNet.disabled = true;
         txtCommission.disabled = true;
         txtRefNo.disabled = true;
+        ddlSalesPerson.disabled = true;
         txtRemarks.disabled = true;
 
     }

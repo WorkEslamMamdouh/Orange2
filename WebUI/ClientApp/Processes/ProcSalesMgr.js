@@ -12,10 +12,12 @@ var ProcSalesMgr;
     //ddl
     var ddlCustomer;
     var ddlSalesmanFilter;
+    var ddlSalesPersonFilter;
     var ddlStateType;
     var ddlInvoiceType;
     var ddlInvoiceCustomer;
     var ddlSalesman;
+    var ddlSalesPerson;
     var ddlType;
     var ddlOPerationMaster;
     var txtRemarks;
@@ -137,6 +139,7 @@ var ProcSalesMgr;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
         $('#btnPrintInvoicePrice').addClass('display_none');
+        fillddlSalesPerson();
     }
     ProcSalesMgr.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -151,9 +154,11 @@ var ProcSalesMgr;
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer");
         ddlSalesmanFilter = document.getElementById("ddlSalesmanFilter");
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter");
         ddlStateType = document.getElementById("ddlStateType");
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer");
         ddlSalesman = document.getElementById("ddlSalesman");
+        ddlSalesPerson = document.getElementById("ddlSalesPerson");
         ddlInvoiceType = document.getElementById("ddlInvoiceType");
         ddlType = document.getElementById("ddlType");
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster");
@@ -284,6 +289,30 @@ var ProcSalesMgr;
                     $('#ddlOPerationMaster').val(operationDetailsList[0].TrNo);
                     OperaID = operationDetailsList[0].OperationID;
                     ddlOPerationMaster_onchange();
+                }
+            }
+        });
+    }
+    function fillddlSalesPerson() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefSalesMen", "GetAllSalesPeople"),
+            data: {
+                CompCode: compcode, BranchCode: BranchCode, IsSalesEnable: true, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    SalesmanDetails = result.Response;
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
                 }
             }
         });
@@ -699,6 +728,11 @@ var ProcSalesMgr;
             Errorinput(ddlSalesman);
             return false;
         }
+        else if (ddlSalesPerson.value == "null") {
+            DisplayMassage(" برجاء اختيار البائع", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesPerson);
+            return false;
+        }
         else if (txtInvoiceDate.value == "") {
             DisplayMassage(" برجاء ادخال التاريخ ", "Please enter the date", MessageType.Error);
             Errorinput(txtInvoiceDate);
@@ -761,10 +795,12 @@ var ProcSalesMgr;
         $("#txtInvoiceDate").prop("value", GetDate());
         $('#ddlInvoiceCustomer option[value=null]').prop('selected', 'selected').change();
         $("#ddlSalesman").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         $("#txtInvoiceCustomerName").prop("value", "");
         $("#txtCashMoney").prop("value", "");
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -1788,6 +1824,7 @@ var ProcSalesMgr;
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.RefNO = txtRefNo.value;
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.Remark = txtRemarks.value;
         //------------------------------------------------------
         InvoiceModel.AllowVatNatID = null;
@@ -2073,6 +2110,7 @@ var ProcSalesMgr;
         txtNet.disabled = true;
         txtCommission.disabled = false;
         txtRefNo.disabled = false;
+        ddlSalesPerson.disabled = false;
         txtRemarks.disabled = false;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
@@ -2119,6 +2157,7 @@ var ProcSalesMgr;
         txtNet.disabled = true;
         txtCommission.disabled = true;
         txtRefNo.disabled = true;
+        ddlSalesPerson.disabled = true;
         txtRemarks.disabled = true;
     }
     //------------------------------------------------------Poup_Pass------------------------
