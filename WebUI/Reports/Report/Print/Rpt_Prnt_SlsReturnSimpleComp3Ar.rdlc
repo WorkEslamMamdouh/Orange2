@@ -2442,7 +2442,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!RefNO.Value, "Rpt_Prnt_SlsReturnSimpleComp3Ar")</Value>
+                <Value>=First(Fields!Inv_RefNo.Value, "Rpt_Prnt_SlsReturnSimpleComp3Ar")</Value>
                 <Style>
                   <Format>yyyy/MM/dd</Format>
                 </Style>
@@ -2926,14 +2926,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Field>
         <Field Name="AmountinWords">
           <DataField>AmountinWords</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Status1">
-          <DataField>Status1</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="RefNO">
-          <DataField>RefNO</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Sper_code">

@@ -1157,6 +1157,7 @@ namespace ProcSalesMgr {
         var customerId = 0;
         var status = 0;
         var ddlSalesmanFilterValue = 0;
+        var SalesPersonFilter = 0;
         var IsCash: number = 0;
         var operationId = 0;
         if (ddlCustomer.value != "null") {
@@ -1169,6 +1170,11 @@ namespace ProcSalesMgr {
         if (ddlSalesmanFilter.value != "null") {
             ddlSalesmanFilterValue = Number(ddlSalesmanFilter.value.toString());
         }
+
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPersonFilter = Number(ddlSalesPersonFilter.value.toString());
+        }
+
         status = Number(ddlStateType.value.toString());
         IsCash = Number(ddlInvoiceType.value);
 
@@ -1199,7 +1205,7 @@ namespace ProcSalesMgr {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("OperationInvoice", "GetAllSlsInvoiceReviewStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, SalesPerson: SalesPersonFilter , IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1253,6 +1259,7 @@ namespace ProcSalesMgr {
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
+            ddlSalesPerson.value = Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString();
 
             if (InvoiceStatisticsModel[0].CustomerId != null) {
                 $('#ddlInvoiceCustomer option[value=' + InvoiceStatisticsModel[0].CustomerId.toString() + ']').prop('selected', 'selected').change();
@@ -1642,14 +1649,14 @@ namespace ProcSalesMgr {
 
                 var res = false;
                 var NumberRowid = $("#InvoiceItemID" + cnt).val();
-                res = checkRepeatedItems(itemID, NumberRowid);
+                //res = checkRepeatedItems(itemID, NumberRowid);
 
-                if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    $("#txtPrice" + cnt).val("1");
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
-                    Errorinput($(dropddlItem));
-                } else {
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    $("#txtPrice" + cnt).val("1");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
+                //    Errorinput($(dropddlItem));
+                //} else {
 
                     Tax_Rate = NumberSelect[0].VatPrc;
                     Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
@@ -1684,7 +1691,7 @@ namespace ProcSalesMgr {
                     var totalAfterVat = Number(vatAmount) + Number(total);
                     $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
 
-                }
+                //}
             }
             ComputeTotals();
         });
@@ -2056,15 +2063,25 @@ namespace ProcSalesMgr {
     }
     function Insert_Serial() {
 
+        let Chack_Flag = false;
+        let flagval = "";
         let Ser = 1;
         for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m") {
+            flagval = $("#txt_StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
             }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag" + i).val() != 'i' && $("#txt_StatusFlag" + i).val() != 'm' && $("#txt_StatusFlag" + i).val() != 'd') {
+                    $("#txt_StatusFlag" + i).val('u');
+                }
+            }
         }
-
+         
     }
     //------------------------------------------------------ main Functions Region -----------------------------------
     function Assign() {

@@ -26,6 +26,7 @@ namespace Supplieraccstat {
     var txtVendorType: HTMLSelectElement;
     var Rddetails: HTMLInputElement;
     var Rd_sum: HTMLInputElement;
+    var Rd_Ladger: HTMLInputElement;
     var txtDateFrom: HTMLInputElement;
     var txtDateTo: HTMLInputElement;
     var btnReset;
@@ -85,6 +86,7 @@ namespace Supplieraccstat {
         txtDateTo = document.getElementById("txtToDate") as HTMLInputElement;
         Rddetails = document.getElementById("Rd_detail") as HTMLInputElement;
         Rd_sum = document.getElementById("Rd_sum") as HTMLInputElement;
+        Rd_Ladger = document.getElementById("Rd_Ladger") as HTMLInputElement;
 
 
         btnReset = document.getElementById("btnReset") as HTMLButtonElement;
@@ -444,6 +446,7 @@ namespace Supplieraccstat {
         }
         else { rp.orderby = 3 }
 
+
         //  Rd_detail
         if (Rddetails.checked == true) {//******  تقرير تفصيلي 
             rp.check = 1;
@@ -460,7 +463,7 @@ namespace Supplieraccstat {
                 }
             })
         }
-        if (Rd_sum.checked == true) {//******  تقرير ملخص
+          if (Rd_sum.checked == true) {//******  تقرير ملخص
 
             rp.check = 2;
             Ajax.Callsync({
@@ -475,7 +478,7 @@ namespace Supplieraccstat {
                 }
             })
         }
-        else {//******  تقرير استاذ الموردين   
+        if (Rd_Ladger.checked == true) {//******  تقرير استاذ الموردين   
 
             rp.check = 2;
             Ajax.Callsync({

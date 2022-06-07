@@ -12,6 +12,8 @@ var ProcSalesRet;
     //ddl
     var ddlCustomer;
     var ddlSalesMan;
+    var ddlSalesPerson;
+    var ddlSalesPersonFilter;
     var ddlStateType;
     var ddlInvoiceCustomer;
     var ddlFreeSalesman;
@@ -132,6 +134,7 @@ var ProcSalesRet;
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
+        fillddlSalesPerson();
     }
     ProcSalesRet.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -144,6 +147,8 @@ var ProcSalesRet;
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer");
         ddlSalesMan = document.getElementById("ddlSalesMan");
+        ddlSalesPerson = document.getElementById("ddlSalesPerson");
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter");
         ddlStateType = document.getElementById("ddlStateType");
         ddlReturnType = document.getElementById("ddlReturnType");
         ddlReturnTypeShow = document.getElementById("ddlReturnTypeShow");
@@ -479,6 +484,7 @@ var ProcSalesRet;
     function AddNewReturn_onclick() {
         if (ddlOPerationMaster.value == "null" || ddlOPerationMaster.value == "") {
             DisplayMassage(" يجب اختيار العملية", "The process must be selected", MessageType.Worning);
+            Errorinput(ddlOPerationMaster);
         }
         else {
             if (chkOpenProcess.checked == false) {
@@ -512,6 +518,7 @@ var ProcSalesRet;
                 ddlInvoiceCustomer.value = "null";
                 ddlReturnTypeShow.value = "0";
                 ddlFreeSalesman.value = "null";
+                ddlSalesPerson.value = "null";
                 txtCashAmount.value = "";
                 txtRefNo.value = "";
                 txtRemarks.value = "";
@@ -530,6 +537,7 @@ var ProcSalesRet;
                 txtRemarks.disabled = false;
                 txtInvoiceDate.value = GetDate();
                 $("#ddlFreeSalesman").attr("disabled", "disabled");
+                $("#ddlSalesPerson").attr("disabled", "disabled");
                 InsertFlag = false;
                 EditFlag = false;
             }
@@ -558,6 +566,7 @@ var ProcSalesRet;
             $("#ddlInvoiceCustomer").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
+            $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#btnAddDetails").addClass("display_none");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#txtCustomerName").attr("disabled", "disabled");
@@ -569,6 +578,30 @@ var ProcSalesRet;
         }
     }
     //-----------------------------------------------------------------------  DropDownList Region ----------------------------------
+    function fillddlSalesPerson() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefSalesMen", "GetAllSalesPeople"),
+            data: {
+                CompCode: compcode, BranchCode: BranchCode, IsSalesEnable: true, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    SalesmanDetails = result.Response;
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
+                }
+            }
+        });
+    }
     function fillddlOperation() {
         if (chkOpenProcess.checked == true) {
             operationDetails = operationDetailsWithoutStatus.filter(function (s) { return s.Status == 2; });
@@ -783,9 +816,11 @@ var ProcSalesRet;
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
+        ddlSalesPerson.value = "null";
         $("#txtCustomerName").prop("value", "");
         $("#txtCustomerName").attr("disabled", "disabled");
         ddlFreeSalesman.disabled = true;
+        ddlSalesPerson.disabled = true;
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
         $('#txtUpdatedBy').prop("value", "");
@@ -860,6 +895,7 @@ var ProcSalesRet;
         var returnType = 0;
         var SalesMan = 0;
         var operationId = 0;
+        var SalesPersonFilter = 0;
         if (ddlOPerationMaster.value != "null") {
             operationId = Number(ddlOPerationMaster.value.toString());
         }
@@ -869,12 +905,15 @@ var ProcSalesRet;
         if (ddlSalesMan.value != "null") {
             SalesMan = Number(ddlSalesMan.value.toString());
         }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPersonFilter = Number(ddlSalesPersonFilter.value.toString());
+        }
         status = Number(ddlStateType.value.toString());
         returnType = Number(ddlReturnType.value.toString());
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("OperationInvoice", "GetAllOperationReturnStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, operationId: operationId, StartDate: startDate, EndDate: endDate, Status: status, returnType: returnType, CustId: customerId, SalesMan: SalesMan, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, operationId: operationId, SalesPerson: SalesPersonFilter, StartDate: startDate, EndDate: endDate, Status: status, returnType: returnType, CustId: customerId, SalesMan: SalesMan, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -950,6 +989,7 @@ var ProcSalesRet;
                 $('#ddlReturnTypeShow').prop("value", "0");
             }
             $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId == null ? "null" : InvoiceStatisticsModel[0].SalesmanId.toString());
+            $('#ddlSalesPerson').prop("value", InvoiceStatisticsModel[0].SalesPersonId == null ? "null" : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
                 btnEdit.disabled = true;
@@ -984,7 +1024,7 @@ var ProcSalesRet;
                         CountGrid = SlsInvoiceItemsDetails.length;
                         CountItems = SlsInvoiceItemsDetails.length;
                         ComputeTotals();
-                        Insert_Serial();
+                        //Insert_Serial();
                     }
                 }
             });
@@ -1012,7 +1052,7 @@ var ProcSalesRet;
             '<div class="col-lg-1">' +
             '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
             '</div></div></div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+            '<input id="vatnatid' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
         //script
         $('.btn-number2' + cnt).click(function (e) {
@@ -1297,7 +1337,7 @@ var ProcSalesRet;
                     }
                 }
             }
-            Insert_Serial();
+            //Insert_Serial();
             ComputeTotals();
         });
         // text change
@@ -1411,6 +1451,8 @@ var ProcSalesRet;
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemTotal);
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
+            $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
+            $("#vatnatid" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
             $("#txtTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatAmount.RoundToSt(2));
             $("#txtTotAfterTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetAfterVat.RoundToSt(2));
             $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
@@ -1425,6 +1467,8 @@ var ProcSalesRet;
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
+            $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
+            $("#vatnatid" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
             $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
             $("#txtTotAfterTax" + cnt).prop("value", (vat + total).RoundToSt(2));
             $("#InvoiceItemID" + cnt).prop("value", 0);
@@ -1708,6 +1752,7 @@ var ProcSalesRet;
                     vatType = InvoiceStatisticsModel[0].VatType;
                     GetVatPercentage();
                     ddlFreeSalesman.value = InvoiceStatisticsModel[0].SalesmanId.toString();
+                    ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
                     if (InvoiceStatisticsModel[0].CustomerId != null) {
                         ddlInvoiceCustomer.value = InvoiceStatisticsModel[0].CustomerId.toString();
                         var customerName = InvoiceStatisticsModel[0].Cus_NameA.toString();
@@ -1785,6 +1830,7 @@ var ProcSalesRet;
         InvoiceModel.SlsInvSrc = 2; // 1 from store 2 from van 
         InvoiceModel.SlsInvType = 1; //  retail 
         InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.CompCode = Number(compcode);
         InvoiceModel.BranchCode = Number(BranchCode);
         InvoiceModel.OperationId = operationGlobalID; //main store
@@ -1833,8 +1879,8 @@ var ProcSalesRet;
                 invoiceItemSingleModel.VatPrc = VatPrc;
                 //-----------------------------------------------------
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
-                invoiceItemSingleModel.UomID = 1; //----------->
-                invoiceItemSingleModel.VatNatID = VatNatID; //----------->
+                invoiceItemSingleModel.VatNatID = $("#vatnatid" + i).val();
+                invoiceItemSingleModel.UomID = 1; //-----------> 
                 invoiceItemSingleModel.NetUnitPriceWithVat = $("#txtUnitpriceWithVat" + i).val();
                 invoiceItemSingleModel.BaseQty = 1;
                 invoiceItemSingleModel.BaseQtyPrice = $("#txtPrice" + i).val();
@@ -1871,7 +1917,7 @@ var ProcSalesRet;
                 //-----------------------------------------------------
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.UomID = 1; //----------->
-                invoiceItemSingleModel.VatNatID = VatNatID; //----------->
+                invoiceItemSingleModel.VatNatID = $("#vatnatid" + i).val();
                 invoiceItemSingleModel.NetUnitPriceWithVat = $("#txtUnitpriceWithVat" + i).val();
                 invoiceItemSingleModel.BaseQty = 1;
                 invoiceItemSingleModel.BaseQtyPrice = $("#txtPrice" + i).val();
@@ -1975,8 +2021,10 @@ var ProcSalesRet;
         if (txtInvoiceNumber.value.toString() == "") {
             InvoiceModel.RefTrID = null;
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
+            InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         }
         else {
+            InvoiceModel.SalesPersonId = InvoiceStatisticsModel[0].SalesPersonId;
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
             InvoiceModel.RefTrID = InvoiceStatisticsModel[0].RefTrID;
         }
@@ -2032,8 +2080,10 @@ var ProcSalesRet;
         if (txtInvoiceNumber.value.toString() == "") {
             InvoiceModel.RefTrID = null;
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
+            InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         }
         else {
+            InvoiceModel.SalesPersonId = InvoiceStatisticsModel[0].SalesPersonId;
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
             InvoiceModel.RefTrID = InvoiceStatisticsModel[0].RefTrID;
         }
