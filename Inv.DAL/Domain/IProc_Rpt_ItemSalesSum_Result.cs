@@ -38,6 +38,8 @@ namespace Inv.DAL.Domain
         public string Par_ItemDSE { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
+        public string Par_InvoiceTypeDSA { get; set; }
+        public string Par_InvoiceTypeDSE { get; set; }
         public string Cus_Code { get; set; }
         public string Cus_NameA { get; set; }
         public string Cus_NameE { get; set; }

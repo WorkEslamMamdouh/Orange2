@@ -37,6 +37,8 @@ namespace Inv.DAL.Domain
         public string Par_ItemDSE { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
+        public string Par_InvoiceTypeDSA { get; set; }
+        public string Par_InvoiceTypeDSE { get; set; }
         public Nullable<int> TrNo { get; set; }
         public string RefNO { get; set; }
         public Nullable<System.DateTime> TrDate { get; set; }
