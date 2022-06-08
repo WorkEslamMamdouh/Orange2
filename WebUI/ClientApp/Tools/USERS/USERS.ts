@@ -75,7 +75,7 @@ namespace USERS {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
-
+        debugger
         $('#btnPrintTransaction').addClass('hidden_Control');
         $('#btnPrintTrview').addClass('hidden_Control');
         $('#btnPrintTrPDF').addClass('hidden_Control');
@@ -102,6 +102,7 @@ namespace USERS {
 
     }
     function InitalizeControls() {
+        debugger
         btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
