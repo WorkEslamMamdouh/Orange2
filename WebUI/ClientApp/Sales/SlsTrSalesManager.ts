@@ -2792,7 +2792,7 @@ namespace SlsTrSalesManager {
                 invoiceItemSingleModel.TotRetQty = $("#txtReturnQuantity" + i).val();
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
 
-
+                
 
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
 
@@ -2829,6 +2829,7 @@ namespace SlsTrSalesManager {
                 invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
                 invoiceItemSingleModel.VatAmount = invoiceItemSingleModel.ItemTotal * invoiceItemSingleModel.VatPrc / 100;
                 invoiceItemSingleModel.NetAfterVat = invoiceItemSingleModel.ItemTotal + invoiceItemSingleModel.VatAmount;
+                 
 
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
 

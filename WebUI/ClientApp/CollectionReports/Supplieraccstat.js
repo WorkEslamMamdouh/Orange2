@@ -20,6 +20,7 @@ var Supplieraccstat;
     var txtVendorType;
     var Rddetails;
     var Rd_sum;
+    var Rd_Ladger;
     var txtDateFrom;
     var txtDateTo;
     var btnReset;
@@ -65,6 +66,7 @@ var Supplieraccstat;
         txtDateTo = document.getElementById("txtToDate");
         Rddetails = document.getElementById("Rd_detail");
         Rd_sum = document.getElementById("Rd_sum");
+        Rd_Ladger = document.getElementById("Rd_Ladger");
         btnReset = document.getElementById("btnReset");
         Rd_Code = document.getElementById("Rd_Code");
         Rd_Name = document.getElementById("Rd_Name");
@@ -378,7 +380,7 @@ var Supplieraccstat;
                 }
             });
         }
-        else { //******  تقرير استاذ الموردين   
+        if (Rd_Ladger.checked == true) { //******  تقرير استاذ الموردين   
             rp.check = 2;
             Ajax.Callsync({
                 url: Url.Action("IProc_Rpt_AccVendorLedger", "GeneralReports"),

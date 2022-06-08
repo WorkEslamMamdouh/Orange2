@@ -24,6 +24,7 @@ var Clientaccstat;
     var txtDateTo;
     var Rddetails;
     var Rd_sum;
+    var Rd_custmastr;
     var btnReset;
     var Rd_Code;
     var Rd_Name;
@@ -68,6 +69,7 @@ var Clientaccstat;
         txtDateTo = document.getElementById("txtToDate");
         Rddetails = document.getElementById("Rd_detail");
         Rd_sum = document.getElementById("Rd_sum");
+        Rd_custmastr = document.getElementById("Rd_custmastr");
         Rd_Code = document.getElementById("Rd_Code");
         Rd_Name = document.getElementById("Rd_Name");
         Rd_Bal = document.getElementById("Rd_Bal");
@@ -390,7 +392,7 @@ var Clientaccstat;
                 }
             });
         }
-        else if (Rd_sum.checked == true) { //******  تقرير ملخص
+        if (Rd_sum.checked == true) { //******  تقرير ملخص
             rp.check = 2;
             Ajax.Callsync({
                 url: Url.Action("IProc_Rpt_AccCustomerDetail", "GeneralReports"),
@@ -401,7 +403,7 @@ var Clientaccstat;
                 }
             });
         }
-        else { //******  تقرير استاذ العملاء
+        if (Rd_custmastr.checked == true) { //******  تقرير استاذ العملاء
             rp.check = 3;
             Ajax.Callsync({
                 url: Url.Action("IProc_Rpt_AccCustomerLedger", "GeneralReports"),

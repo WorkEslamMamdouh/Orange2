@@ -504,7 +504,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.21599cm</Top>
-        <Left>10.48753cm</Left>
+        <Left>11.44003cm</Left>
         <Height>0.6cm</Height>
         <Width>1.9224cm</Width>
         <ZIndex>14</ZIndex>
@@ -538,7 +538,7 @@
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>0.21599cm</Top>
-        <Left>8.07359cm</Left>
+        <Left>9.02609cm</Left>
         <Height>0.6cm</Height>
         <Width>2.41394cm</Width>
         <ZIndex>15</ZIndex>
@@ -1279,7 +1279,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>0.21599cm</Top>
-        <Left>5.93027cm</Left>
+        <Left>6.88277cm</Left>
         <Height>0.6cm</Height>
         <Width>2.14332cm</Width>
         <ZIndex>19</ZIndex>
@@ -1315,7 +1315,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.91124cm</Top>
-        <Left>10.4942cm</Left>
+        <Left>11.4467cm</Left>
         <Height>0.6cm</Height>
         <Width>1.91573cm</Width>
         <ZIndex>20</ZIndex>
@@ -1349,9 +1349,9 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>0.91124cm</Top>
-        <Left>5.93027cm</Left>
-        <Height>0.6cm</Height>
-        <Width>4.5216cm</Width>
+        <Left>9.02609cm</Left>
+        <Height>0.53975cm</Height>
+        <Width>2.37828cm</Width>
         <ZIndex>21</ZIndex>
         <Style>
           <Border>
@@ -1816,15 +1816,18 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Slsm_DescA3">
+      <Textbox Name="Textbox20">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value EvaluationMode="Constant" />
-                <Style />
+                <Value>البائع</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -1832,11 +1835,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             </Style>
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>2.42169cm</Top>
-        <Left>3.7473cm</Left>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>2.41543cm</Top>
+        <Left>8.52281cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.87088cm</Width>
+        <Width>1.79931cm</Width>
         <ZIndex>36</ZIndex>
         <Style>
           <Border>
@@ -1848,7 +1851,41 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox22">
+      <Textbox Name="Textbox25">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!SPer_NameA.Value, "Rpt_Prnt_SlsInvoiceSimpleAr")</Value>
+                <Style>
+                  <FontSize>11pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>2.41543cm</Top>
+        <Left>4.35914cm</Left>
+        <Height>0.6cm</Height>
+        <Width>4.09312cm</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox32">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
@@ -1867,11 +1904,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.36849cm</Top>
-        <Left>8.73283cm</Left>
-        <Height>0.6532cm</Height>
-        <Width>1.71904cm</Width>
-        <ZIndex>37</ZIndex>
+        <Top>0.89792cm</Top>
+        <Left>7.03855cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.80576cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TrDate5">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Inv_RefNo.Value, "Rpt_Prnt_SlsInvoiceSimpleAr")</Value>
+                <Style>
+                  <Format>yyyy/MM/dd</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TrDate</rd:DefaultName>
+        <Top>0.92182cm</Top>
+        <Left>4.09655cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.79736cm</Width>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2701,6 +2772,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <DataField>Status</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="Inv_RefNo">
+          <DataField>Inv_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="op_TrNo">
           <DataField>op_TrNo</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -2715,6 +2790,22 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Field>
         <Field Name="Op_RefNo">
           <DataField>Op_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AmountinWords">
+          <DataField>AmountinWords</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_code">
+          <DataField>Sper_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SPer_NameA">
+          <DataField>SPer_NameA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_nameE">
+          <DataField>Sper_nameE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

@@ -16,6 +16,7 @@ namespace SlsTrSalesReturn {
     var ddlStateType: HTMLSelectElement;
     var ddlInvoiceCustomer: HTMLSelectElement;
     var ddlFreeSalesman: HTMLSelectElement;
+    var ddlSalesPerson: HTMLSelectElement;
     var ddlReturnType: HTMLSelectElement;
     var ddlReturnTypeShow: HTMLSelectElement;
     var ddlShowFreeReturn: HTMLSelectElement;
@@ -160,6 +161,7 @@ namespace SlsTrSalesReturn {
         ddlReturnTypeShow = document.getElementById("ddlReturnTypeShow") as HTMLSelectElement;
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer") as HTMLSelectElement;
         ddlFreeSalesman = document.getElementById("ddlFreeSalesman") as HTMLSelectElement;
+        ddlSalesPerson = document.getElementById("ddlSalesPerson") as HTMLSelectElement;
         ddlShowFreeReturn = document.getElementById("ddlShowFreeReturn") as HTMLSelectElement;
         ddlCashBox = document.getElementById("ddlCashBox") as HTMLSelectElement;
         ddlTaxTypeHeader = document.getElementById("ddlTaxTypeHeader") as HTMLSelectElement;
@@ -249,14 +251,14 @@ namespace SlsTrSalesReturn {
         else
             $("#txtCustomerName").prop("value", custObj[0].NAMEE);
 
-        ddlFreeSalesman.value = custObj[0].SalesmanId.toString();
+        ddlFreeSalesman.value = custObj[0].SalesmanId.toString(); 
 
     }
     function ddlReturnTypeShow_onchange() {
 
         if (ddlReturnTypeShow.value == "1") {
             $("#DivCashBox1").removeClass("display_none");
-            $("#DivCashBox2").removeClass("display_none");        
+            $("#DivCashBox2").removeClass("display_none");
             $("#txtCashAmount").prop("value", "");
             fillddlCashBox();
             var cashCustomers = VendorDetails.filter(s => s.IsCreditCustomer == false)
@@ -271,7 +273,7 @@ namespace SlsTrSalesReturn {
         }
         else if (ddlReturnTypeShow.value == "0") {
             $("#DivCashBox1").addClass("display_none");
-            $("#DivCashBox2").addClass("display_none");  
+            $("#DivCashBox2").addClass("display_none");
             $("#txtCashAmount").prop("value", "");
 
             var creditCustomers = VendorDetails.filter(s => s.IsCreditCustomer == true);
@@ -297,6 +299,7 @@ namespace SlsTrSalesReturn {
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
+        ddlSalesPerson.value = "null";
 
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
@@ -330,6 +333,7 @@ namespace SlsTrSalesReturn {
                     vatType = InvoiceStatisticsModel[0].VatType;
                     //GetVatPercentage();
                     ddlFreeSalesman.value = InvoiceStatisticsModel[0].SalesmanId.toString();
+                    ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
                     if (InvoiceStatisticsModel[0].CustomerId != null) {
                         ddlInvoiceCustomer.value = InvoiceStatisticsModel[0].CustomerId.toString();
                         var customerName = InvoiceStatisticsModel[0].Cus_NameA.toString();
@@ -349,14 +353,14 @@ namespace SlsTrSalesReturn {
                     if (InvoiceStatisticsModel[0].IsCash == true) {
                         $('#ddlReturnTypeShow').prop("value", 1);
                         $("#DivCashBox1").removeClass("display_none");
-                        $("#DivCashBox2").removeClass("display_none");   
+                        $("#DivCashBox2").removeClass("display_none");
                         $("#txtCashAmount").val("");
 
                     } else {
                         $('#ddlReturnTypeShow').prop("value", 0);
                         $("#DivCashBox1").addClass("display_none");
                         $("#DivCashBox2").addClass("display_none");
-                        
+
                         $("#txtCashAmount").val("");
                     }
                     $('#divCreationPanel').removeClass("display_none");
@@ -509,32 +513,39 @@ namespace SlsTrSalesReturn {
         setTimeout(function () {
 
             finishSave('btnsave');
-        btnInvoiceSearch.disabled = false;
-        if (!ValidationHeader())
-            return;
+            btnInvoiceSearch.disabled = false;
+            if (!ValidationHeader())
+                return;
 
-        Assign();
-        if (EditFlag == true) {
-            if (!SysSession.CurrentPrivileges.EDIT) return;
+            Assign();
+            if (EditFlag == true) {
+                if (!SysSession.CurrentPrivileges.EDIT) return;
 
-            for (let i = 0; i < CountGrid; i++) {
-                if (!ValidationGrid(i))
-                    return
-            }
-            Update();
-        }
-        else {
-            if (!SysSession.CurrentPrivileges.AddNew) return;
-
-            if (invoiceItemsModel.length > 0) {
-                Insert();
+                for (let i = 0; i < CountGrid; i++) {
+                    if (!ValidationGrid(i))
+                        return
+                }
+                Update();
             }
             else {
-                DisplayMassage('( يجب أضافه قيمه للكمية المرتجعه ع الفاتورة)', 'you must add value to the return quantity', MessageType.Error);
-            }
-        }
+                if (!SysSession.CurrentPrivileges.AddNew) return;
 
-    }, 100);
+                if (invoiceItemsModel.length > 0) {
+                    Insert();
+                }
+                else {
+                    DisplayMassage('( يجب أضافه قيمه للكمية المرتجعه ع الفاتورة)', 'you must add value to the return quantity', MessageType.Error);
+                    for (var i = 0; i < CountGrid; i++) {
+                        if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                            if (Number($("#txtReturnQuantity" + i).val()) == 0) {
+                                Errorinput($("#txtReturnQuantity" + i)); 
+                            }
+                        }
+                    }
+                }
+            }
+
+        }, 100);
     }
     function btnBack_onclick() {
         if (InsertFlag == false) {
@@ -559,6 +570,7 @@ namespace SlsTrSalesReturn {
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
+            $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#btnEdit").addClass("display_none");
             $('#btnPrint').removeClass("display_none");
@@ -566,21 +578,21 @@ namespace SlsTrSalesReturn {
             $('#btnPrintTransaction').removeClass("display_none");
             $('#btnBack').addClass("display_none");
             $('#btnEdit').removeClass("display_none");
-            globalInvoiceID = 0; 
+            globalInvoiceID = 0;
             globalRefTrID = 0;
             $("#ddlCashBox").attr("disabled", "disabled");
             $("#txtCashAmount").attr("disabled", "disabled");
             $("#btnInvoiceSearch").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#chkActive").attr("disabled", "disabled");
-      
+
             try {
                 if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
                     var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
                     var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
                     ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID.toString();
                     $("#txtCashAmount").prop("value", cashAmount);
-                } else {                                         
+                } else {
                     $("#txtCashAmount").val('');
                 }
             } catch (e) {
@@ -642,6 +654,7 @@ namespace SlsTrSalesReturn {
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
+        ddlSalesPerson.value = "null";
         txtCashAmount.value = "";
         ddlTaxTypeHeader.value = "null";
         $("#txtCustomerName").prop("value", "");
@@ -660,6 +673,7 @@ namespace SlsTrSalesReturn {
 
         fillddlCashBox();
         $("#ddlFreeSalesman").attr("disabled", "disabled");
+        $("#ddlSalesPerson").attr("disabled", "disabled");
 
 
         InsertFlag = false;
@@ -695,6 +709,7 @@ namespace SlsTrSalesReturn {
             $("#ddlInvoiceCustomer").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
+            $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#txtCustomerName").attr("disabled", "disabled");
 
@@ -804,7 +819,12 @@ namespace SlsTrSalesReturn {
                         DocumentActions.FillCombowithdefult(SalesmanDetails, ddlFreeSalesman, "SalesmanId", "NameA", "اختر المندوب");
                     }
 
-
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select salesman");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                    } 
 
                 }
             }
@@ -917,7 +937,7 @@ namespace SlsTrSalesReturn {
     function FillddlItem(ItemFamilyID: number) {
         ItemDetails = ItemFamilyDetails.filter(x => x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreID);
 
- 
+
     }
     //------------------------------------------------------ Get Functions Region -----------------------------------
     function GetAllIItem() {
@@ -1103,22 +1123,24 @@ namespace SlsTrSalesReturn {
                 if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
                     var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
                     var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
-                    ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID.toString();   
+                    ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID.toString();
                     $("#txtCashAmount").prop("value", cashAmount);
                 }
                 else {
                     $("#ddlCashBox").attr("disabled", "disabled");
-                    $("#txtCashAmount").attr("disabled", "disabled");      
+                    $("#txtCashAmount").attr("disabled", "disabled");
                     $("#txtCashAmount").prop("value", "");
                 }
 
             } else {
                 $("#DivCashBox1").addClass("display_none");
                 $("#DivCashBox2").addClass("display_none");
-                $('#ddlReturnTypeShow').prop("value", "0");   
+                $('#ddlReturnTypeShow').prop("value", "0");
                 $("#txtCashAmount").prop("value", "");
             }
             $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId.toString());
+
+            $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
                 btnEdit.disabled = true;
@@ -1141,6 +1163,7 @@ namespace SlsTrSalesReturn {
 
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
+            $("#ddlSalesPerson").attr("disabled", "disabled");
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
 
@@ -1208,7 +1231,7 @@ namespace SlsTrSalesReturn {
             '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
             '</div></div></div>' +
 
-            '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+            '<input id="vatnatid' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
 
         //script
@@ -1709,8 +1732,7 @@ namespace SlsTrSalesReturn {
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
 
             $("#UnitCost" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].StockUnitCost);
-
-            //$("#txtReturnQuantity" + cnt).prop("value",'0');
+            $("#vatnatid" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
 
             $("#txtTotal" + cnt).prop("value", 0);
             $("#txtTax" + cnt).prop("value", 0);
@@ -1779,11 +1801,14 @@ namespace SlsTrSalesReturn {
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
+        ddlSalesPerson.value = "null";
+
 
         $("#txtCustomerName").prop("value", "");
         $("#txtCustomerName").attr("disabled", "disabled");
 
         ddlFreeSalesman.disabled = true;
+        ddlSalesPerson.disabled = true;
 
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
@@ -1796,6 +1821,7 @@ namespace SlsTrSalesReturn {
 
         $("#ddlReturnTypeShow").attr("disabled", "disabled");
         $("#ddlFreeSalesman").attr("disabled", "disabled");
+        $("#ddlSalesPerson").attr("disabled", "disabled");
 
         $("#ddlCashBox").attr("disabled", "disabled");
         $("#txtCashAmount").attr("disabled", "disabled");
@@ -1941,7 +1967,7 @@ namespace SlsTrSalesReturn {
         InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
         InvoiceModel.RefNO = txtRefNo.value;
         InvoiceModel.Remark = txtRemarks.value;
-        InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
@@ -1967,6 +1993,7 @@ namespace SlsTrSalesReturn {
             var Qty = Number($('#txtReturnQuantity' + i).val());
             if (StatusFlag == "i") {
                 invoiceItemSingleModel.InvoiceItemID = 0;
+                invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 invoiceItemSingleModel.SoldQty = $('#txtReturnQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtReturnQuantity' + i).val();
@@ -1982,6 +2009,7 @@ namespace SlsTrSalesReturn {
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
 
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
+                invoiceItemSingleModel.VatNatID = Number($("#vatnatid" + i).val())
 
                 if (Qty != 0) {
                     invoiceItemsModel.push(invoiceItemSingleModel);
@@ -1990,6 +2018,7 @@ namespace SlsTrSalesReturn {
             if (StatusFlag == "u") {
                 var invoiceItemId = $("#InvoiceItemID" + i).val()
                 invoiceItemSingleModel.InvoiceItemID = invoiceItemId;
+                invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
                 invoiceItemSingleModel.SoldQty = $('#txtReturnQuantity' + i).val();
@@ -2005,6 +2034,7 @@ namespace SlsTrSalesReturn {
                 invoiceItemSingleModel.VatAmount = invoiceItemSingleModel.ItemTotal * invoiceItemSingleModel.VatPrc / 100;
                 invoiceItemSingleModel.NetAfterVat = invoiceItemSingleModel.ItemTotal + invoiceItemSingleModel.VatAmount;
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
+                invoiceItemSingleModel.VatNatID = Number($("#vatnatid" + i).val())
 
                 if (Qty != 0) {
                     invoiceItemsModel.push(invoiceItemSingleModel);
@@ -2065,7 +2095,7 @@ namespace SlsTrSalesReturn {
 
     }
     function Success() {
-         
+
         globalInvoiceID = 0;
         globalRefTrID = 0;
         InitializeGrid();
@@ -2197,7 +2227,7 @@ namespace SlsTrSalesReturn {
         });
 
     }
-    //----------------------------------------------------------PRint region---------------------------------------
+    //----------------------------------------------------------Print region---------------------------------------
     export function PrintReport(OutType: number) {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
@@ -2256,17 +2286,17 @@ namespace SlsTrSalesReturn {
     function PrintTransaction() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
-       
+
         rp.Type = 0;
         rp.Repdesign = 1;
         debugger
         rp.TRId = GlobalReturnID;
-                                                                        
-            rp.Name_function = "rptInvoiceNoteRet";
-            localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-            localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-             window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+        rp.Name_function = "rptInvoiceNoteRet";
+        localStorage.setItem("Report_Data", JSON.stringify(rp));
+
+        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 
     function DownloadInvoicePdf() {

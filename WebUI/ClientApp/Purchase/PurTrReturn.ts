@@ -488,18 +488,13 @@ namespace PurTrReturn {
                     if (result.IsSuccess) {
                         SlsInvoiceItemsDetails = result.Response as Array<IQ_GetPurReceiveItem>;
                         var buildedRows: number = 0;
-                        for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
-                            if ((SlsInvoiceItemsDetails[i].RecQty - SlsInvoiceItemsDetails[i].TotRetQty) > 0) {
-                                BuildControls(i);
-                                buildedRows++;
-                            }
-                            if (buildedRows == 0) {
-                                clear();
-                                txtInvoiceNumber.value = "";
-                                DisplayMassage('( لا توجد اصناف علي هذه الفاتورة)', 'there is no items on this invoice', MessageType.Error);
-                                btnShow_onclick();
-                            }
 
+                        SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.filter(x => (x.RecQty - x.TotRetQty ) > 0)
+
+                        for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
+                           
+                            BuildControls(i); 
+                             
                         }
                         CountGrid = SlsInvoiceItemsDetails.length;
                         CountItems = SlsInvoiceItemsDetails.length;
@@ -1010,6 +1005,10 @@ namespace PurTrReturn {
         html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-xs-12" style="right: 3%;" > ' +
             '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
             '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+
+            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;margin-right: -4%;">' +
+            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
+
             '<div class="col-xs-2 p-0">' +
             '<select id="ddlFamily' + cnt + '" class="form-control"><option>النوع</option></select></div>' +
             '<div class="col-xs-3 p-0">' +
@@ -1447,11 +1446,12 @@ namespace PurTrReturn {
             $("#ddlFamily" + cnt).prop("value", FamilyID); 
             FillddlItem(FamilyID, InvoiceStatisticsModel[0].StoreID); 
             for (var i = 0; i < ItemDetails.length; i++) {
-                $('#ddlItem' + cnt).append('<option value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
+                $('#ddlItem' + cnt).append('<option data-UomID="' + ItemDetails[i].UomID + '" value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
             }
             debugger
             var itemcode = SlsInvoiceItemsDetails[cnt].ItemID;
-            $("#ddlItem" + cnt).prop("value", itemcode.toString()); 
+            $("#ddlItem" + cnt).prop("value", itemcode.toString());
+            $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ReceiveRecQty);
             $("#txtQuantity" + cnt).attr("data-ReceiveRecQty", SlsInvoiceItemsDetails[cnt].ReceiveRecQty); 
             var price = SlsInvoiceItemsDetails[cnt].RecUnitPrice;
@@ -1500,7 +1500,8 @@ namespace PurTrReturn {
             ComputeTotals();
         });
     }
-    function ComputeTotals() { 
+    function ComputeTotals() {
+        debugger
         PackageCount = 0;
         CountTotal = 0;
         TaxCount = 0;
@@ -1675,7 +1676,8 @@ namespace PurTrReturn {
             invoiceItemSingleModel.VatPrc = VatPrc;
             var Qty: number = Number($('#txtReturnQuantity' + i).val());
      
-            if (StatusFlag == "i") { 
+            if (StatusFlag == "i") {
+                invoiceItemSingleModel.Serial = Number($('#txtSerial' + i).val());
                 invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
                 invoiceItemSingleModel.ReceiveID = 0;
                 invoiceItemSingleModel.ItemID = Number($("#ddlItem" + i).val());
@@ -1686,12 +1688,14 @@ namespace PurTrReturn {
                 var ItemTotal = invoiceItemSingleModel.RecUnitPrice * invoiceItemSingleModel.RecQty;
                 invoiceItemSingleModel.VatAmount = (ItemTotal * VatPrc) / 100; 
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString(); 
+                invoiceItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 if (Qty != 0) {
                     invoiceItemsModel.push(invoiceItemSingleModel);
                 } 
             }
             if (StatusFlag == "u") {
-              
+
+                invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.ReciveDetailsID =   $("#ReciveDetailsID" + i).val();
                 invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
                 invoiceItemSingleModel.ItemID = Number($("#ddlItem" + i).val());
@@ -1702,6 +1706,8 @@ namespace PurTrReturn {
                 var ItemTotal = invoiceItemSingleModel.RecUnitPrice * invoiceItemSingleModel.RecQty;
                 invoiceItemSingleModel.VatAmount = (ItemTotal * VatPrc) / 100;
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString(); 
+                invoiceItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
+
                 if (Qty != 0) {
                     invoiceItemsModel.push(invoiceItemSingleModel);
                 } 

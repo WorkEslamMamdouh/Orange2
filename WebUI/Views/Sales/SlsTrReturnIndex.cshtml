@@ -207,8 +207,10 @@
                 <input type="text" class="  form-control " disabled id="lblReturnNumber" />
 
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width: 5%;">
             </div>
+
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn ">@SystemResource.App_date</label>
 
             <div class="col-lg-2 col-md-3 col-sm-3 col-xl-3 col-xs-3">
@@ -219,21 +221,13 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style=" left: 3%;">
                 <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
             </div>
+
         </div>
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
 
-
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">@SystemResource.App_retutnType</label>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlReturnTypeShow" disabled name="" class="form-control" style='width: 100%;'></select>
-
-            </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-            </div>
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_InvoiceNum  </label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width: 13%;">
                 <input type="number" class="form-control" disabled name="" id="txtInvoiceNumber">
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
@@ -242,42 +236,52 @@
                 </button>
             </div>
 
-            <div class=" display_none" id="DivCashBox1">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_Cashbox  </label>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <select id='ddlCashBox' class="form-control" style='width: 100%;border-radius: 30px;'></select>
-                </div>
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn ">@SystemResource.App_retutnType</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id="ddlReturnTypeShow" disabled name="" class="form-control" style='width: 100%;'></select>
             </div>
 
+
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_TaxType   </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id="ddlTaxTypeHeader" disabled="disabled" name="" class="form-control" style="width: 100%;border-radius: 30px;">
+                    <option value="null">@SystemResource.Choosetax</option>
+                </select>
+            </div>
+
+
         </div>
+
 
 
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <div id="divFreeSalesman">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_Salesman </label>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <select id='ddlFreeSalesman' class="form-control" style='width: 100%;border-radius: 30px;'></select>
-                </div>
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_Salesman </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id='ddlFreeSalesman' class="form-control" style='width: 100%;border-radius: 30px;'></select>
+            </div>
+
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width: 5%;">
+            </div>
+
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn"> البائع</label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id='ddlSalesPerson' class="form-control" style='width: 100%;border-radius: 30px;'></select>
+            </div>
+
+            <label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn  "> @SystemResource.App_ReferenceNumber </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo" style="font-size: 16px !important;">
             </div>
 
 
-            @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">    </label>*@
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                <label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   " style="width:32%;"> @SystemResource.App_ReferenceNumber </label>
-                <div class="col-md-8 col-sm-4 col-xs-10">
-                    <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo" style="font-size: 16px !important;">
-                </div>
-
-            </div>
-
-            <div class="display_none" id="DivCashBox2">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_PaidMoney  </label>
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    <input type="number" class="form-control" name="" id="txtCashAmount">
-                </div>
-            </div>
 
         </div>
+
+
+
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_Cutomer  </label>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
@@ -286,20 +290,32 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
                 <input type="text" class="form-control" disabled name="" id="txtCustomerName">
             </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_TaxType   </label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlTaxTypeHeader" disabled="disabled" name="" class="form-control" style="width: 100%;border-radius: 30px;">
-                    <option value="null">@SystemResource.Choosetax</option>
-                </select>
-            </div>
+             
+
         </div>
 
-        <div class="col-md-12 col-sm-4 col-xs-10">
-            <label id="LabtxtRemarks" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading  "> @SystemResource.App_Notes </label>
-            <div class="col-md-9 col-sm-4 col-xs-10">
-                <input type="text" class="form-control" disabled name="Remark" id="txtRemarks" style="font-size: 16px !important;">
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+
+            <div class=" display_none" id="DivCashBox1">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_Cashbox  </label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <select id='ddlCashBox' class="form-control" style='width: 100%;border-radius: 30px;'></select>
+                </div>
             </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width: 5%;">
+            </div>
+            <div class="display_none" id="DivCashBox2">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_padingSlsTrReturn">  @SystemResource.App_PaidMoney  </label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="number" class="form-control" name="" id="txtCashAmount">
+                </div>
+            </div>
+
         </div>
+
+
 
         <br />
 
@@ -353,11 +369,19 @@
             </div>
         </div>
 
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <br />
+            <label id="LabtxtRemarks" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading  "> @SystemResource.App_Notes </label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <textarea type="text" class="form-control" disabled name="Remark" id="txtRemarks" style="font-size: 16px !important;">
+                    </textarea>
+            </div>
+
+        </div>
+
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred ">
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <table id="divGridDetails"></table>
-            </div>
+
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  "> @SystemResource.App_ItemsCount</label>

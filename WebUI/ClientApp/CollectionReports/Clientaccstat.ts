@@ -29,6 +29,7 @@ namespace Clientaccstat {
     var txtDateTo: HTMLInputElement;
     var Rddetails: HTMLInputElement;
     var Rd_sum: HTMLInputElement;
+    var Rd_custmastr: HTMLInputElement;
     var btnReset;
 
     var Rd_Code: HTMLInputElement;
@@ -89,6 +90,7 @@ namespace Clientaccstat {
         txtDateTo = document.getElementById("txtToDate") as HTMLInputElement;
         Rddetails = document.getElementById("Rd_detail") as HTMLInputElement;
         Rd_sum = document.getElementById("Rd_sum") as HTMLInputElement;
+        Rd_custmastr = document.getElementById("Rd_custmastr") as HTMLInputElement;
 
         Rd_Code = document.getElementById("Rd_Code") as HTMLInputElement;
         Rd_Name = document.getElementById("Rd_Name") as HTMLInputElement;
@@ -505,7 +507,7 @@ namespace Clientaccstat {
             })
         }
 
-        else if (Rd_sum.checked == true) {//******  تقرير ملخص
+        if (Rd_sum.checked == true) {//******  تقرير ملخص
 
             rp.check = 2;
 
@@ -521,7 +523,7 @@ namespace Clientaccstat {
                 }
             })
         }
-        else  {//******  تقرير استاذ العملاء
+        if (Rd_custmastr.checked == true) {//******  تقرير استاذ العملاء
 
             rp.check = 3;
 
