@@ -10726,23 +10726,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="FromDate" Mode="In" Type="String" />
             <Parameter Name="Todate" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="IProc_Rpt_AccCustomerAging" ReturnType="Collection(InvModel.IProc_Rpt_AccCustomerAging_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="CatID" Mode="In" Type="Int32" />
-            <Parameter Name="GroupID" Mode="In" Type="Int32" />
-            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
-            <Parameter Name="status" Mode="In" Type="Int32" />
-            <Parameter Name="BalType" Mode="In" Type="Int32" />
-            <Parameter Name="Todate" Mode="In" Type="String" />
-            <Parameter Name="Agtype" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="IProc_Rep_OperationItemSales" ReturnType="Collection(InvModel.IProc_Rep_OperationItemSales_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
             <Parameter Name="bra" Mode="In" Type="Int32" />
@@ -11044,23 +11027,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="I_Stk_TR_IssueToCCDetails" EntityType="InvModel.I_Stk_TR_IssueToCCDetails" />
           <EntitySet Name="IQ_GetStkIssueCC" EntityType="InvModel.IQ_GetStkIssueCC" />
           <EntitySet Name="IQ_GetStkIssueCCDetail" EntityType="InvModel.IQ_GetStkIssueCCDetail" />
-          <FunctionImport Name="IProc_Rpt_AccVendorAging" ReturnType="Collection(InvModel.IProc_Rpt_AccVendorAging_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="CatID" Mode="In" Type="Int32" />
-            <Parameter Name="GroupID" Mode="In" Type="Int32" />
-            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
-            <Parameter Name="status" Mode="In" Type="Int32" />
-            <Parameter Name="BalType" Mode="In" Type="Int32" />
-            <Parameter Name="Todate" Mode="In" Type="String" />
-            <Parameter Name="Agtype" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="IQ_GetVendor" EntityType="InvModel.IQ_GetVendor" />
           <FunctionImport Name="IProc_Rep_AccVendorList" ReturnType="Collection(InvModel.IProc_Rep_AccVendorList_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
@@ -11322,6 +11288,40 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Rpt_AccCustomerAging" ReturnType="Collection(InvModel.IProc_Rpt_AccCustomerAging_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="CatID" Mode="In" Type="Int32" />
+            <Parameter Name="GroupID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="BalType" Mode="In" Type="Int32" />
+            <Parameter Name="Todate" Mode="In" Type="String" />
+            <Parameter Name="Agtype" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Rpt_AccVendorAging" ReturnType="Collection(InvModel.IProc_Rpt_AccVendorAging_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="CatID" Mode="In" Type="Int32" />
+            <Parameter Name="GroupID" Mode="In" Type="Int32" />
+            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="BalType" Mode="In" Type="Int32" />
+            <Parameter Name="Todate" Mode="In" Type="String" />
+            <Parameter Name="Agtype" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -18886,48 +18886,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="EndBalcash" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="EndBalcard" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <ComplexType Name="IProc_Rpt_AccCustomerAging_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_BalTypeDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_BalTypeDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CatDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CatDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_GroupDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_GroupDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CustDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CustDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="NameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
-          <Property Type="Decimal" Name="CreditLimit" Nullable="true" Precision="18" Scale="6" />
-          <Property Type="Decimal" Name="balance" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="credit" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m1" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q4" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y4" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y5" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y6" Nullable="true" Precision="19" Scale="2" />
-        </ComplexType>
         <ComplexType Name="IProc_Rep_OperationItemSales_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
           <Property Type="Int32" Name="Bra" Nullable="true" />
@@ -20372,48 +20330,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="UomCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="uom_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="IProc_Rpt_AccVendorAging_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_BalTypeDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_BalTypeDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CatDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CatDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_GroupDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_GroupDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CustDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CustDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="25" />
-          <Property Type="String" Name="NameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="CreditLimit" Nullable="true" Precision="18" Scale="6" />
-          <Property Type="Decimal" Name="balance" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="credit" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m1" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="m3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="q4" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y2" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y3" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y4" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y5" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="y6" Nullable="true" Precision="19" Scale="2" />
-        </ComplexType>
         <EntityType Name="IQ_GetVendor">
           <Key>
             <PropertyRef Name="VendorID" />
@@ -21439,6 +21355,92 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="Sper_code" Nullable="true" MaxLength="25" />
           <Property Type="String" Name="SPer_NameA" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Sper_nameE" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="IProc_Rpt_AccCustomerAging_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_BalTypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_BalTypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_GroupDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_GroupDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CustDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CustDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="NameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="CreditLimit" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="balance" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="credit" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m1" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q4" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y4" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y5" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y6" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="DateTime" Name="LastDate" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="IProc_Rpt_AccVendorAging_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_BalTypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_BalTypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_GroupDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_GroupDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CustDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CustDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="NameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="CreditLimit" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="balance" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="credit" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m1" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="m3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="q4" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y2" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y3" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y4" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y5" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="y6" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="DateTime" Name="LastDate" Nullable="true" Precision="16" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -29140,52 +29142,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Rpt_AccCustomerAging" FunctionName="InvModel.Store.IProc_Rpt_AccCustomerAging">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_AccCustomerAging_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
-                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
-                <ScalarProperty Name="Par_BalTypeDSA" ColumnName="Par_BalTypeDSA" />
-                <ScalarProperty Name="Par_BalTypeDSE" ColumnName="Par_BalTypeDSE" />
-                <ScalarProperty Name="Par_CatDSA" ColumnName="Par_CatDSA" />
-                <ScalarProperty Name="Par_CatDSE" ColumnName="Par_CatDSE" />
-                <ScalarProperty Name="Par_GroupDSA" ColumnName="Par_GroupDSA" />
-                <ScalarProperty Name="Par_GroupDSE" ColumnName="Par_GroupDSE" />
-                <ScalarProperty Name="Par_CustDSA" ColumnName="Par_CustDSA" />
-                <ScalarProperty Name="Par_CustDSE" ColumnName="Par_CustDSE" />
-                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
-                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="NameA" ColumnName="NameA" />
-                <ScalarProperty Name="NameE" ColumnName="NameE" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="credit" ColumnName="credit" />
-                <ScalarProperty Name="m1" ColumnName="m1" />
-                <ScalarProperty Name="m2" ColumnName="m2" />
-                <ScalarProperty Name="m3" ColumnName="m3" />
-                <ScalarProperty Name="q2" ColumnName="q2" />
-                <ScalarProperty Name="q3" ColumnName="q3" />
-                <ScalarProperty Name="q4" ColumnName="q4" />
-                <ScalarProperty Name="y2" ColumnName="y2" />
-                <ScalarProperty Name="y3" ColumnName="y3" />
-                <ScalarProperty Name="y4" ColumnName="y4" />
-                <ScalarProperty Name="y5" ColumnName="y5" />
-                <ScalarProperty Name="y6" ColumnName="y6" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="IProc_Rep_OperationItemSales" FunctionName="InvModel.Store.IProc_Rep_OperationItemSales">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InvModel.IProc_Rep_OperationItemSales_Result">
@@ -30715,52 +30671,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Rpt_AccVendorAging" FunctionName="InvModel.Store.IProc_Rpt_AccVendorAging">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_AccVendorAging_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
-                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
-                <ScalarProperty Name="Par_BalTypeDSA" ColumnName="Par_BalTypeDSA" />
-                <ScalarProperty Name="Par_BalTypeDSE" ColumnName="Par_BalTypeDSE" />
-                <ScalarProperty Name="Par_CatDSA" ColumnName="Par_CatDSA" />
-                <ScalarProperty Name="Par_CatDSE" ColumnName="Par_CatDSE" />
-                <ScalarProperty Name="Par_GroupDSA" ColumnName="Par_GroupDSA" />
-                <ScalarProperty Name="Par_GroupDSE" ColumnName="Par_GroupDSE" />
-                <ScalarProperty Name="Par_CustDSA" ColumnName="Par_CustDSA" />
-                <ScalarProperty Name="Par_CustDSE" ColumnName="Par_CustDSE" />
-                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
-                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="NameA" ColumnName="NameA" />
-                <ScalarProperty Name="NameE" ColumnName="NameE" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
-                <ScalarProperty Name="balance" ColumnName="balance" />
-                <ScalarProperty Name="credit" ColumnName="credit" />
-                <ScalarProperty Name="m1" ColumnName="m1" />
-                <ScalarProperty Name="m2" ColumnName="m2" />
-                <ScalarProperty Name="m3" ColumnName="m3" />
-                <ScalarProperty Name="q2" ColumnName="q2" />
-                <ScalarProperty Name="q3" ColumnName="q3" />
-                <ScalarProperty Name="q4" ColumnName="q4" />
-                <ScalarProperty Name="y2" ColumnName="y2" />
-                <ScalarProperty Name="y3" ColumnName="y3" />
-                <ScalarProperty Name="y4" ColumnName="y4" />
-                <ScalarProperty Name="y5" ColumnName="y5" />
-                <ScalarProperty Name="y6" ColumnName="y6" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="IQ_GetVendor">
             <EntityTypeMapping TypeName="InvModel.IQ_GetVendor">
               <MappingFragment StoreEntitySet="IQ_GetVendor">
@@ -31858,6 +31768,100 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="Sper_code" ColumnName="Sper_code" />
                 <ScalarProperty Name="SPer_NameA" ColumnName="SPer_NameA" />
                 <ScalarProperty Name="Sper_nameE" ColumnName="Sper_nameE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Rpt_AccCustomerAging" FunctionName="InvModel.Store.IProc_Rpt_AccCustomerAging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_AccCustomerAging_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_BalTypeDSA" ColumnName="Par_BalTypeDSA" />
+                <ScalarProperty Name="Par_BalTypeDSE" ColumnName="Par_BalTypeDSE" />
+                <ScalarProperty Name="Par_CatDSA" ColumnName="Par_CatDSA" />
+                <ScalarProperty Name="Par_CatDSE" ColumnName="Par_CatDSE" />
+                <ScalarProperty Name="Par_GroupDSA" ColumnName="Par_GroupDSA" />
+                <ScalarProperty Name="Par_GroupDSE" ColumnName="Par_GroupDSE" />
+                <ScalarProperty Name="Par_CustDSA" ColumnName="Par_CustDSA" />
+                <ScalarProperty Name="Par_CustDSE" ColumnName="Par_CustDSE" />
+                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
+                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameA" ColumnName="NameA" />
+                <ScalarProperty Name="NameE" ColumnName="NameE" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="m1" ColumnName="m1" />
+                <ScalarProperty Name="m2" ColumnName="m2" />
+                <ScalarProperty Name="m3" ColumnName="m3" />
+                <ScalarProperty Name="q2" ColumnName="q2" />
+                <ScalarProperty Name="q3" ColumnName="q3" />
+                <ScalarProperty Name="q4" ColumnName="q4" />
+                <ScalarProperty Name="y2" ColumnName="y2" />
+                <ScalarProperty Name="y3" ColumnName="y3" />
+                <ScalarProperty Name="y4" ColumnName="y4" />
+                <ScalarProperty Name="y5" ColumnName="y5" />
+                <ScalarProperty Name="y6" ColumnName="y6" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Rpt_AccVendorAging" FunctionName="InvModel.Store.IProc_Rpt_AccVendorAging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_AccVendorAging_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_BalTypeDSA" ColumnName="Par_BalTypeDSA" />
+                <ScalarProperty Name="Par_BalTypeDSE" ColumnName="Par_BalTypeDSE" />
+                <ScalarProperty Name="Par_CatDSA" ColumnName="Par_CatDSA" />
+                <ScalarProperty Name="Par_CatDSE" ColumnName="Par_CatDSE" />
+                <ScalarProperty Name="Par_GroupDSA" ColumnName="Par_GroupDSA" />
+                <ScalarProperty Name="Par_GroupDSE" ColumnName="Par_GroupDSE" />
+                <ScalarProperty Name="Par_CustDSA" ColumnName="Par_CustDSA" />
+                <ScalarProperty Name="Par_CustDSE" ColumnName="Par_CustDSE" />
+                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
+                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameA" ColumnName="NameA" />
+                <ScalarProperty Name="NameE" ColumnName="NameE" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="balance" ColumnName="balance" />
+                <ScalarProperty Name="credit" ColumnName="credit" />
+                <ScalarProperty Name="m1" ColumnName="m1" />
+                <ScalarProperty Name="m2" ColumnName="m2" />
+                <ScalarProperty Name="m3" ColumnName="m3" />
+                <ScalarProperty Name="q2" ColumnName="q2" />
+                <ScalarProperty Name="q3" ColumnName="q3" />
+                <ScalarProperty Name="q4" ColumnName="q4" />
+                <ScalarProperty Name="y2" ColumnName="y2" />
+                <ScalarProperty Name="y3" ColumnName="y3" />
+                <ScalarProperty Name="y4" ColumnName="y4" />
+                <ScalarProperty Name="y5" ColumnName="y5" />
+                <ScalarProperty Name="y6" ColumnName="y6" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

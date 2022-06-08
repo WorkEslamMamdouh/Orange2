@@ -3153,71 +3153,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccBoxSummary_Result>("IProc_Rpt_AccBoxSummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, boxidParameter, statusParameter, fromDateParameter, todateParameter);
         }
     
-        public virtual ObjectResult<IProc_Rpt_AccCustomerAging_Result> IProc_Rpt_AccCustomerAging(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> groupID, Nullable<int> customerID, Nullable<int> status, Nullable<int> balType, string todate, Nullable<int> agtype)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var catIDParameter = catID.HasValue ?
-                new ObjectParameter("CatID", catID) :
-                new ObjectParameter("CatID", typeof(int));
-    
-            var groupIDParameter = groupID.HasValue ?
-                new ObjectParameter("GroupID", groupID) :
-                new ObjectParameter("GroupID", typeof(int));
-    
-            var customerIDParameter = customerID.HasValue ?
-                new ObjectParameter("CustomerID", customerID) :
-                new ObjectParameter("CustomerID", typeof(int));
-    
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
-            var balTypeParameter = balType.HasValue ?
-                new ObjectParameter("BalType", balType) :
-                new ObjectParameter("BalType", typeof(int));
-    
-            var todateParameter = todate != null ?
-                new ObjectParameter("Todate", todate) :
-                new ObjectParameter("Todate", typeof(string));
-    
-            var agtypeParameter = agtype.HasValue ?
-                new ObjectParameter("Agtype", agtype) :
-                new ObjectParameter("Agtype", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccCustomerAging_Result>("IProc_Rpt_AccCustomerAging", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, groupIDParameter, customerIDParameter, statusParameter, balTypeParameter, todateParameter, agtypeParameter);
-        }
-    
         public virtual ObjectResult<IProc_Rep_OperationItemSales_Result> IProc_Rep_OperationItemSales(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
@@ -4306,71 +4241,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_ItemSalesDetail_Result>("IProc_Rpt_ItemSalesDetail", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, customeridParameter, payTypeParameter, groupTypeParameter, salesTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, statusParameter, fromDateParameter, todateParameter);
         }
     
-        public virtual ObjectResult<IProc_Rpt_AccVendorAging_Result> IProc_Rpt_AccVendorAging(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> groupID, Nullable<int> customerID, Nullable<int> status, Nullable<int> balType, string todate, Nullable<int> agtype)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var catIDParameter = catID.HasValue ?
-                new ObjectParameter("CatID", catID) :
-                new ObjectParameter("CatID", typeof(int));
-    
-            var groupIDParameter = groupID.HasValue ?
-                new ObjectParameter("GroupID", groupID) :
-                new ObjectParameter("GroupID", typeof(int));
-    
-            var customerIDParameter = customerID.HasValue ?
-                new ObjectParameter("CustomerID", customerID) :
-                new ObjectParameter("CustomerID", typeof(int));
-    
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("status", status) :
-                new ObjectParameter("status", typeof(int));
-    
-            var balTypeParameter = balType.HasValue ?
-                new ObjectParameter("BalType", balType) :
-                new ObjectParameter("BalType", typeof(int));
-    
-            var todateParameter = todate != null ?
-                new ObjectParameter("Todate", todate) :
-                new ObjectParameter("Todate", typeof(string));
-    
-            var agtypeParameter = agtype.HasValue ?
-                new ObjectParameter("Agtype", agtype) :
-                new ObjectParameter("Agtype", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccVendorAging_Result>("IProc_Rpt_AccVendorAging", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, groupIDParameter, customerIDParameter, statusParameter, balTypeParameter, todateParameter, agtypeParameter);
-        }
-    
         public virtual ObjectResult<IProc_Rep_AccVendorList_Result> IProc_Rep_AccVendorList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> isCredit, Nullable<int> catID, Nullable<int> groupID, Nullable<int> vendType, Nullable<int> balStatus)
         {
             var compParameter = comp.HasValue ?
@@ -5332,6 +5202,136 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("TRId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_SlsInvoice_Result>("IProc_Prnt_SlsInvoice", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rpt_AccCustomerAging_Result> IProc_Rpt_AccCustomerAging(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> groupID, Nullable<int> customerID, Nullable<int> status, Nullable<int> balType, string todate, Nullable<int> agtype)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var catIDParameter = catID.HasValue ?
+                new ObjectParameter("CatID", catID) :
+                new ObjectParameter("CatID", typeof(int));
+    
+            var groupIDParameter = groupID.HasValue ?
+                new ObjectParameter("GroupID", groupID) :
+                new ObjectParameter("GroupID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var balTypeParameter = balType.HasValue ?
+                new ObjectParameter("BalType", balType) :
+                new ObjectParameter("BalType", typeof(int));
+    
+            var todateParameter = todate != null ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(string));
+    
+            var agtypeParameter = agtype.HasValue ?
+                new ObjectParameter("Agtype", agtype) :
+                new ObjectParameter("Agtype", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccCustomerAging_Result>("IProc_Rpt_AccCustomerAging", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, groupIDParameter, customerIDParameter, statusParameter, balTypeParameter, todateParameter, agtypeParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rpt_AccVendorAging_Result> IProc_Rpt_AccVendorAging(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> groupID, Nullable<int> customerID, Nullable<int> status, Nullable<int> balType, string todate, Nullable<int> agtype)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var catIDParameter = catID.HasValue ?
+                new ObjectParameter("CatID", catID) :
+                new ObjectParameter("CatID", typeof(int));
+    
+            var groupIDParameter = groupID.HasValue ?
+                new ObjectParameter("GroupID", groupID) :
+                new ObjectParameter("GroupID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            var balTypeParameter = balType.HasValue ?
+                new ObjectParameter("BalType", balType) :
+                new ObjectParameter("BalType", typeof(int));
+    
+            var todateParameter = todate != null ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(string));
+    
+            var agtypeParameter = agtype.HasValue ?
+                new ObjectParameter("Agtype", agtype) :
+                new ObjectParameter("Agtype", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccVendorAging_Result>("IProc_Rpt_AccVendorAging", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, groupIDParameter, customerIDParameter, statusParameter, balTypeParameter, todateParameter, agtypeParameter);
         }
     }
 }
