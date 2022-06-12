@@ -17,8 +17,9 @@ namespace Inv.WebUI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                    defaults: new { controller = "Login", action = "HomePage", id = UrlParameter.Optional }
-            //   defaults: new { controller = "Home", action = "AdminBarIndex", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "HomePage", id = UrlParameter.Optional }
+                //defaults: new { controller = "Home", action = "HomeIndex", id = UrlParameter.Optional }
+            //  defaults: new { controller = "Home", action = "AdminBarIndex", id = UrlParameter.Optional }
             );
         }
     }

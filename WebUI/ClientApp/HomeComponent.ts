@@ -152,8 +152,16 @@ namespace HomeComponent {
         });
         Language();
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-        { document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyNameAr + " - " + SysSession.CurrentEnvironment.CurrentYear; }
-        else { document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyName + " - "+SysSession.CurrentEnvironment.CurrentYear; }
+        {
+            $("#camp_name").val(SysSession.CurrentEnvironment.CompanyNameAr);
+
+           // document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyNameAr + " - " + SysSession.CurrentEnvironment.CurrentYear;
+        }
+        else {
+            document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyName + " - " + SysSession.CurrentEnvironment.CurrentYear;
+            $("#camp_name").val(SysSession.CurrentEnvironment.CompanyNameAr);
+
+        }
          
         //GetBackgroundImage(); 
          //GetNotificationData();
@@ -186,16 +194,16 @@ namespace HomeComponent {
         $("#LanguageButtonHome").click(() => {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { // English Mode  
                 RemoveStyleSheet("bootstrap-rtl");
-                RemoveStyleSheet("mainAR");
-                RemoveStyleSheet("Style_Arabic");
-                RemoveStyleSheet("style");
-                RemoveStyleSheet("StyleNewmassege");
-                RemoveStyleSheet("responsive_AR");
+                //RemoveStyleSheet("mainAR");
+                //RemoveStyleSheet("Style_Arabic");
+                //RemoveStyleSheet("style");
+                //RemoveStyleSheet("StyleNewmassege");
+                //RemoveStyleSheet("responsive_AR");
 
-                AppendStyleSheet("bootstrap.min");
-                AppendStyleSheet("main");
-                AppendStyleSheet("responsive");
-                AppendStyleSheet("StyleEn");
+                //AppendStyleSheet("bootstrap.min");
+                //AppendStyleSheet("main");
+                //AppendStyleSheet("responsive");
+                //AppendStyleSheet("StyleEn");
                 SysSession.CurrentEnvironment.ScreenLanguage = "en";
 
                 $('#LanguageButtonHome').text(" تغير اللغة  ");
@@ -205,17 +213,17 @@ namespace HomeComponent {
             }
             else { // Arabic Mode
 
-                RemoveStyleSheet("StyleEn");
-                RemoveStyleSheet("bootstrap.min");
-                RemoveStyleSheet("main");
-                RemoveStyleSheet("responsive");
+                //RemoveStyleSheet("StyleEn");
+                //RemoveStyleSheet("bootstrap.min");
+                //RemoveStyleSheet("main");
+                //RemoveStyleSheet("responsive");
 
-                AppendStyleSheet("bootstrap-rtl");
-                AppendStyleSheet("StyleNewmassege");
-                AppendStyleSheet("mainAR");
-                AppendStyleSheet("style");
-                AppendStyleSheet("Style_Arabic");
-                AppendStyleSheet("responsive_AR");
+                //AppendStyleSheet("bootstrap-rtl");
+                //AppendStyleSheet("StyleNewmassege");
+                //AppendStyleSheet("mainAR");
+                //AppendStyleSheet("style");
+                //AppendStyleSheet("Style_Arabic");
+                //AppendStyleSheet("responsive_AR");
 
                 SysSession.CurrentEnvironment.ScreenLanguage = "ar";
 
@@ -335,7 +343,7 @@ namespace HomeComponent {
                     li.className = "liItem";
                 }
             } else {
-                alert("wrong code  " + singleUserModule.MODULE_CODE)
+                //alert("wrong code  " + singleUserModule.MODULE_CODE)
             }
         }
         $('.MED').removeClass('display_none');
@@ -685,33 +693,33 @@ namespace HomeComponent {
     export function Language() {
          if (SysSession.CurrentEnvironment.ScreenLanguage == "en") { 
             RemoveStyleSheet("bootstrap-rtl");
-            RemoveStyleSheet("responsive_AR");
-            RemoveStylejs("mainAR");
-            RemoveStyleSheet("Style_Arabic");
-            RemoveStyleSheet("style");
-            RemoveStyleSheet("StyleNewmassege");
-            $("#bootstrap_rtl").remove();
-            $("#Style_Arabic").remove();
+            //RemoveStyleSheet("responsive_AR");
+            //RemoveStylejs("mainAR");
+            //RemoveStyleSheet("Style_Arabic");
+            //RemoveStyleSheet("style");
+            //RemoveStyleSheet("StyleNewmassege");
+            //$("#bootstrap_rtl").remove();
+            //$("#Style_Arabic").remove();
 
-            AppendStyleSheet("bootstrap.min");
-            AppendStylejs("main");
-            AppendStyleSheet("responsive");
-            AppendStyleSheet("StyleEn");
+            //AppendStyleSheet("bootstrap.min");
+            //AppendStylejs("main");
+            //AppendStyleSheet("responsive");
+            //AppendStyleSheet("StyleEn");
             SysSession.CurrentEnvironment.ScreenLanguage = "en"
             $("#btn_loguotuser").text("Logout");
         }
         else {
-            RemoveStyleSheet("StyleEn");
-            RemoveStyleSheet("bootstrap.min");
-            RemoveStylejs("main");
-            RemoveStyleSheet("responsive");
+            //RemoveStyleSheet("StyleEn");
+            //RemoveStyleSheet("bootstrap.min");
+            //RemoveStylejs("main");
+            //RemoveStyleSheet("responsive");
 
             AppendStyleSheet("bootstrap-rtl");
-            AppendStyleSheet("StyleNewmassege");
-            AppendStylejs("mainAR");
-            AppendStyleSheet("style");
-            AppendStyleSheet("Style_Arabic");
-            AppendStyleSheet("responsive_AR");
+            //AppendStyleSheet("StyleNewmassege");
+            //AppendStylejs("mainAR");
+            //AppendStyleSheet("style");
+            //AppendStyleSheet("Style_Arabic");
+            //AppendStyleSheet("responsive_AR");
             //$('#langImg').attr('src', '../images/english.png');
              SysSession.CurrentEnvironment.ScreenLanguage = "ar"
 

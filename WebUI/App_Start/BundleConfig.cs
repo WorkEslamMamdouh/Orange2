@@ -65,22 +65,25 @@ namespace Inv.WebUI.App_Start
 
 
             bundles.Add(new StyleBundle("~/Bundles/AppStyle2")
-                .Include(
+                .Include("~/New/vendor/jquery/jquery.min.js",
+              "~/New/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "~/New/vendor/jquery-easing/jquery.easing.min.js",
+              "~/New/js/sb-admin-2.min.js",
                  "~/css/select2.min.css",
-                 "~/Style_design/css/bootstrap.min.css",
+                 //"~/Style_design/css/bootstrap.min.css",
                  "~/Style_design/css/font-awesome.min.css",
-                 "~/Style_design/css/adminpro-custon-icon.css",
-                 "~/Style_design/css/meanmenu.min.css",
-                 "~/Style_design/css/jquery.mCustomScrollbar.min.css",
-                 "~/Style_design/css/animate.css",
-                 "~/Style_design/css/summernote.css",
-                 "~/Style_design/css/normalize.css",
-                 "~/Style_design/New_Style.css",
-                 "~/Style_design/Home_Style.css",
-                 "~/Style_design/textStyle.css",
-                 "~/Style_design/buttonStyle.css",
-                 "~/Style_design/responsive_AR.css",
-                 "~/Style_design/style.css",
+                 //"~/Style_design/css/adminpro-custon-icon.css",
+                 //"~/Style_design/css/meanmenu.min.css",
+                 //"~/Style_design/css/jquery.mCustomScrollbar.min.css",
+                 //"~/Style_design/css/animate.css",
+                 //"~/Style_design/css/summernote.css",
+                 //"~/Style_design/css/normalize.css",
+                 //"~/Style_design/New_Style.css",
+                 //"~/Style_design/Home_Style.css",
+                 //"~/Style_design/textStyle.css",
+                 //"~/Style_design/buttonStyle.css",
+                 //"~/Style_design/responsive_AR.css",
+                 //"~/Style_design/style.css",
                    
                  "~/Scripts/IgGrid/infragistics.css",
                  "~/Scripts/jsgrid/jsgrid.min.css",
@@ -89,24 +92,22 @@ namespace Inv.WebUI.App_Start
                  "~/Content/DataTables/css/jquery.dataTables.min.css"));
 
             bundles.Add(new ScriptBundle("~/Bundles/AppScript2")
-              .Include("~/Style_design/js/vendor/jquery-3.4.1.js",
-                "~/Style_design/js/vendor/jquery-1.11.3.min.js",
-                "~/js/my_js.js",
-                "~/Style_design/js/bootstrap.min.js",
-                "~/Style_design/js/jquery.meanmenu.js",
-                "~/Style_design/js/jquery.mCustomScrollbar.concat.min.js",
-                "~/Style_design/js/jquery.sticky.js",
-                "~/Style_design/js/jquery.scrollUp.min.js",
-                "~/Style_design/js/counterup/jquery.counterup.min.js",
-                "~/Style_design/js/counterup/waypoints.min.js",
-                "~/Style_design/js/dropzone.js",
-                "~/Style_design/js/multiple-email/multiple-email-active.js",
-                "~/Style_design/js/summernote.min.js",
-                "~/Style_design/js/summernote-active.js"));
+              .Include("~/New/vendor/jquery/jquery.min.js",
+              "~/New/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "~/New/vendor/jquery-easing/jquery.easing.min.js",
+              "~/New/js/sb-admin-2.min.js",
+              //"~/New/vendor/chart.js/Chart.min.js",
+              //"~/New/js/demo/chart-area-demo.js",
+              //"~/New/js/demo/chart-pie-demo.js",
+              "~/Style_design/LodBut/Loder.js",
+              "~/js/select2.min.js",
+              "~/Scripts/DataTables/jquery.dataTables.min.js"
+
+
+               ));
 
             bundles.Add(new ScriptBundle("~/Bundles/AppScript3")
-              .Include("~/Style_design/js/vendor/modernizr-2.8.3.min.js",
-                "~/ClientApp/Entities.js",
+              .Include("~/ClientApp/Entities.js",
                 "~/ClientApp/Shared.js",
                 "~/ClientApp/App.js",
                 "~/ClientApp/JsGrid.js",

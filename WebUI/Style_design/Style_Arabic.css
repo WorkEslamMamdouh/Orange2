@@ -5,7 +5,7 @@
     padding: 12px 11px;
     /* width: 98%; */
     margin-left: 0%;
-    background-color: #fbebdc !important;
+    /*background-color: #fbebdc !important;*/
     box-shadow: 0px 4px 6px 0px #cabfbf;
 }
 
@@ -62,7 +62,7 @@ input[class=checkbox]:checked:before {
     /*background-color: #f7e4e4;*/
     background-image: none;
     border: 1px solid #a5c1dd;
-    border-radius: 15px;
+    border-radius: 10px;
     color: black;
     display: block;
     padding: 3px 12px;
