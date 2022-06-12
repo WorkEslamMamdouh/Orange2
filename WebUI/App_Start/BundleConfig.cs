@@ -65,11 +65,7 @@ namespace Inv.WebUI.App_Start
 
 
             bundles.Add(new StyleBundle("~/Bundles/AppStyle2")
-                .Include("~/New/vendor/jquery/jquery.min.js",
-              "~/New/vendor/bootstrap/js/bootstrap.bundle.min.js",
-              "~/New/vendor/jquery-easing/jquery.easing.min.js",
-              "~/New/js/sb-admin-2.min.js",
-                 "~/css/select2.min.css",
+                .Include("~/css/select2.min.css",
                  //"~/Style_design/css/bootstrap.min.css",
                  "~/Style_design/css/font-awesome.min.css",
                  //"~/Style_design/css/adminpro-custon-icon.css",

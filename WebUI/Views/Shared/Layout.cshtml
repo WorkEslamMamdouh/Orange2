@@ -16,7 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="~/images/logokids.png">
     <title>@SystemResource.App_Home</title>
-    @*@Scripts.Render("~/Bundles/AppScript2")*@
 
     <link href="~/Style_design/LodBut/font-awesome.min.css" rel="stylesheet" />
 
@@ -585,10 +584,12 @@
     <script src="~/New/vendor/jquery/jquery.min.js"></script>
     <script src="~/New/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/New/vendor/jquery-easing/jquery.easing.min.js"></script>
-      @Scripts.Render("~/Bundles/AppScript3")
-    @Scripts.Render("~/Bundles/AppScript4")
-    @RenderSection("Script", required: false)
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    @Scripts.Render("~/Bundles/AppScript2")
+    @Scripts.Render("~/Bundles/AppScript3")
+    @Scripts.Render("~/Bundles/AppScript4")
+
+    @RenderSection("Script", required: false)
 
     <!-- Core plugin JavaScript-->
     <!-- Custom scripts for all pages-->
