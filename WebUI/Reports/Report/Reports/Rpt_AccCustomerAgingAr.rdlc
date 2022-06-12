@@ -6,43 +6,80 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.82903in</Width>
+              <Width>0.88469in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.86734in</Width>
+              <Width>0.74264in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89809in</Width>
+              <Width>0.73928in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.90648in</Width>
+              <Width>0.7492in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.88507in</Width>
+              <Width>0.77842in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89585in</Width>
+              <Width>0.77785in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.93473in</Width>
+              <Width>0.81988in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.97349in</Width>
+              <Width>0.80667in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98099in</Width>
+              <Width>0.9496in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.77557in</Width>
+              <Width>0.9571in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6464in</Width>
+              <Width>1.75168in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.62251in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
               <Height>0.25in</Height>
               <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>تاريخ اخر سداد</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox12">
@@ -424,6 +461,40 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="LastDate">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!LastDate.Value</Value>
+                              <Style>
+                                <Format>dd/MM/yyyy</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>LastDate</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox15">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -799,6 +870,40 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox18">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1165,6 +1270,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1186,9 +1292,15 @@
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rpt_AccCustomerAgingAr</DataSetName>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!balance.Value</Value>
+            <Direction>Descending</Direction>
+          </SortExpression>
+        </SortExpressions>
         <Top>0.05556in</Top>
         <Height>0.75in</Height>
-        <Width>10.59304in</Width>
+        <Width>10.57952in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1199,7 +1311,7 @@
     <Height>2.25779cm</Height>
     <Style />
   </Body>
-  <Width>26.90632cm</Width>
+  <Width>26.97215cm</Width>
   <Page>
     <PageHeader>
       <Height>4.1637cm</Height>
@@ -2370,6 +2482,10 @@
         <Field Name="y6">
           <DataField>y6</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="LastDate">
+          <DataField>LastDate</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

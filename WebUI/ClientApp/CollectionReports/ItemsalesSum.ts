@@ -384,6 +384,7 @@ namespace ItemsalesSum {
             rp.CustomerID = MCustomerId;
         }
         rp.PaymentType = Number($('#txt_PaymentType').val());
+        rp.invType = Number($('#invType').val());
         if (reptp1.checked == true) {  //------------By_Cust
             rp.check = 1;
 

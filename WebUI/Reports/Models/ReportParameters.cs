@@ -274,6 +274,7 @@ namespace Inv.WebUI.Reports.Models
         public int FromSls { get; set; }
         public int ToSls { get; set; }
         public int stat { get; set; }
+        public int invType { get; set; }
         public int ISimport { get; set; }
         public Boolean checkedprint { get; set; }
         public int CustomercatID { get; set; }

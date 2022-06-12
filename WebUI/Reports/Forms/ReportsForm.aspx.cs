@@ -5222,6 +5222,9 @@ namespace RS.WebUI.Reports.Forms
             int CustomerID = int.Parse(RepPar.CustomerID.ToString());
             SqlParameter spCustomerID = new SqlParameter("@customerid", CustomerID == -1 ? System.Data.SqlTypes.SqlInt32.Null : CustomerID);
 
+            int invType = int.Parse(RepPar.invType.ToString());
+            SqlParameter spinvType = new SqlParameter("@invType", invType);
+ 
             int PaymentType = int.Parse(RepPar.PaymentType.ToString());
             SqlParameter spPaymentType = new SqlParameter("@PayType", PaymentType);
 
@@ -5270,7 +5273,8 @@ namespace RS.WebUI.Reports.Forms
            ", @ItemID = " + spItemID.Value +
            ", @status = " + spStatus.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
-           ", @Todate = '" + sptoDate.Value + "'";
+           ", @Todate = '" + sptoDate.Value + "'"+
+           ", @invType = '" + spinvType.Value + "'";
 
             List<IProc_Rpt_ItemSalesDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesDetail_Result>(_Query).ToList();
             ReportsDetails();
@@ -5296,6 +5300,9 @@ namespace RS.WebUI.Reports.Forms
 
             int CustomerID = int.Parse(RepPar.CustomerID.ToString());
             SqlParameter spCustomerID = new SqlParameter("@customerid", CustomerID == -1 ? System.Data.SqlTypes.SqlInt32.Null : CustomerID);
+
+            int invType = int.Parse(RepPar.invType.ToString());
+            SqlParameter spinvType = new SqlParameter("@invType", invType);
 
             int PaymentType = int.Parse(RepPar.PaymentType.ToString());
             SqlParameter spPaymentType = new SqlParameter("@PayType", PaymentType);
@@ -5345,7 +5352,8 @@ namespace RS.WebUI.Reports.Forms
            ", @ItemID = " + spItemID.Value +
            ", @status = " + spStatus.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
-           ", @Todate = '" + sptoDate.Value + "'";
+           ", @Todate = '" + sptoDate.Value + "'"+
+           ", @invType = '" + spinvType.Value + "'";
 
             List<IProc_Rpt_ItemSalesSum_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesSum_Result>(_Query).ToList();
             ReportsDetails();
@@ -5374,7 +5382,10 @@ namespace RS.WebUI.Reports.Forms
 
             int PaymentType = int.Parse(RepPar.PaymentType.ToString());
             SqlParameter spPaymentType = new SqlParameter("@PayType", PaymentType);
-             
+
+            int invType = int.Parse(RepPar.invType.ToString());
+            SqlParameter spinvType = new SqlParameter("@invType", invType);
+
             int GroupType = int.Parse(RepPar.check.ToString());
             SqlParameter spGroupType = new SqlParameter("@GroupType", GroupType); 
 
@@ -5416,7 +5427,8 @@ namespace RS.WebUI.Reports.Forms
            ", @ItemID = " + spItemID.Value +
            ", @status = " + spStatus.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
-           ", @Todate = '" + sptoDate.Value + "'";
+           ", @Todate = '" + sptoDate.Value + "'"+
+            ", @invType = '" + spinvType.Value + "'";
 
             List<IProc_Rpt_ItemPurchaseSum_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseSum_Result>(_Query).ToList();
             ReportsDetails();
@@ -5445,7 +5457,10 @@ namespace RS.WebUI.Reports.Forms
 
             int PaymentType = int.Parse(RepPar.PaymentType.ToString());
             SqlParameter spPaymentType = new SqlParameter("@PayType", PaymentType);
-             
+
+            int invType = int.Parse(RepPar.invType.ToString());
+            SqlParameter spinvType = new SqlParameter("@invType", invType);
+
             int GroupType = int.Parse(RepPar.check.ToString());
             SqlParameter spGroupType = new SqlParameter("@GroupType", GroupType); 
 
@@ -5487,7 +5502,8 @@ namespace RS.WebUI.Reports.Forms
            ", @ItemID = " + spItemID.Value +
            ", @status = " + spStatus.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
-           ", @Todate = '" + sptoDate.Value + "'";
+           ", @Todate = '" + sptoDate.Value + "'"+
+            ", @invType = '" + spinvType.Value + "'";
 
             List<IProc_Rpt_ItemPurchaseDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseDetail_Result>(_Query).ToList();
             ReportsDetails();

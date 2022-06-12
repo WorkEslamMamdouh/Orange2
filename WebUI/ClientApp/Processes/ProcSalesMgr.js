@@ -630,20 +630,33 @@ var ProcSalesMgr;
     }
     function chkActive_onchecked() {
         //debugger
+        GetOPeration(Selecteditem[0].OperationId);
         if (ddlInvoiceCustomer.disabled == true) {
             if (chkOpenProcess.checked == true) {
                 if (chkActive.checked == false) {
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفواتير لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
             }
             else {
                 if (SysSession.CurrentPrivileges.CUSTOM3 == true) {
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
                 else {
-                    DisplayMassage(" لايمكن تعديل الفواتير عل العمليات المغلقه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
                     chkActive.checked = true;
                 }
             }
@@ -836,6 +849,13 @@ var ProcSalesMgr;
                 var net = Number(txtNet.value);
                 if (!Check_CreditLimit_Custom(net))
                     return;
+            }
+            if (chkActive.checked == true) {
+                GetOPeration(InvoiceModel.OperationId);
+                if (operationDetailsList[0].Status != 2) {
+                    DisplayMassage(" لايمكن اعتماد الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    return;
+                }
             }
             if (Validation_Insert == 1) {
                 Open_poup_Pass();

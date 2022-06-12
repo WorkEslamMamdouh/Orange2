@@ -442,6 +442,19 @@ namespace ProcSalesRet {
                 return;
 
             Assign();
+
+
+
+            if (chkActive.checked == true) { 
+                let operationDetailsList = operationDetailsWithoutStatus.filter(x => x.OperationID == operationGlobalID);
+                if (operationDetailsList[0].Status != 2) {
+                    DisplayMassage(" لايمكن اعتماد الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    return;
+                }
+            }
+
+
+
             var returnValueFlag: boolean = false;
             if (invoiceItemsModel.length > 0) {
                 for (let i = 0; i < invoiceItemsModel.length; i++) {
@@ -1827,7 +1840,18 @@ namespace ProcSalesRet {
             chkActive.checked = true;
         } else {
             if (chkActive.checked == false && ddlInvoiceCustomer.disabled == true) {
-                openReturn();
+
+                let operationDetailsList = operationDetailsWithoutStatus.filter(x => x.OperationID == operationGlobalID);
+                if (operationDetailsList[0].Status != 2) {
+                    DisplayMassage(" لايمكن اعتماد مرتجع لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    Errorinput(ddlOPerationMaster);
+                    return;
+                }
+                else {
+                    openReturn();
+
+                }
+
             }
         }
     }

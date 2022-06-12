@@ -2165,7 +2165,7 @@
   <Width>19.79319cm</Width>
   <Page>
     <PageHeader>
-      <Height>1.94111cm</Height>
+      <Height>2.65549cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2542,10 +2542,45 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="ExecutionTime3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Par_InvoiceTypeDSA.Value, "Rpt_ItemSalesDetailByCustomerAr")</Value>
+                      <Style>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>1.89701cm</Top>
+              <Left>7.27721cm</Left>
+              <Height>0.60938cm</Height>
+              <Width>3.93361cm</Width>
+              <ZIndex>11</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Top>0.03092in</Top>
-          <Height>1.86257cm</Height>
+          <Height>2.50639cm</Height>
           <Width>19.79318cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
@@ -2593,11 +2628,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>fb0a2837-ba90-4867-a841-31c4373a3fe9</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="InvDALDomain1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>1e84e412-657b-4ee3-8132-96201b787868</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Rpt_ItemSalesDetailByCustomerAr">
       <Query>
-        <DataSourceName>InvDALDomain</DataSourceName>
+        <DataSourceName>InvDALDomain1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -2701,6 +2743,14 @@
           <DataField>Par_Todate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_InvoiceTypeDSA">
+          <DataField>Par_InvoiceTypeDSA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_InvoiceTypeDSE">
+          <DataField>Par_InvoiceTypeDSE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="TrNo">
           <DataField>TrNo</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -2781,6 +2831,10 @@
           <DataField>It_DescA</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SERIAL">
+          <DataField>SERIAL</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="It_DescE">
           <DataField>It_DescE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2826,7 +2880,7 @@
         <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
         <rd:TableName>InvEntities</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>IProc_Rpt_ItemSalesDetail</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemSalesDetail_Result] IProc_Rpt_ItemSalesDetail(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemSalesDetail_Result] IProc_Rpt_ItemSalesDetail(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
         <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>

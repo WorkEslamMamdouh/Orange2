@@ -1575,6 +1575,7 @@ namespace Inv.WebUI.Controllers
                 rep.AddParameter("Status", rp.Status);
                 rep.AddParameter("FromDate", rp.FromDate);
                 rep.AddParameter("ToDate", rp.ToDate);
+                rep.AddParameter("invType", rp.invType);
 
                 string url = rep.GetReportUrl("Rpt_ItemSalesSum");
 
@@ -1595,6 +1596,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("Status", rp.Status);
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("invType", rp.invType);
 
             string url = rep.GetReportUrl("Rpt_ItemSalesDetail");
 
@@ -1615,6 +1617,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("Status", rp.Status);
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("invType", rp.invType);
 
             string url = rep.GetReportUrl("Rpt_ItemPurchaseSum");
 
@@ -1635,6 +1638,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("Status", rp.Status);
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("invType", rp.invType);
 
             string url = rep.GetReportUrl("Rpt_ItemPurchaseDetail");
 
