@@ -71,6 +71,7 @@ var USERS;
     var CountGridBarnch = 0;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        debugger;
         $('#btnPrintTransaction').addClass('hidden_Control');
         $('#btnPrintTrview').addClass('hidden_Control');
         $('#btnPrintTrPDF').addClass('hidden_Control');
@@ -97,6 +98,7 @@ var USERS;
     }
     USERS.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
+        debugger;
         btnEdit = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");

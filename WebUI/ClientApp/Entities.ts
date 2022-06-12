@@ -149,6 +149,7 @@ class ReportParameters {
     public ExpID: number;//---
     public SrvId: number;
     public SrvCatId: number;
+    public invType: number;
 
     public ShiftId: number;
     public Sex: number;

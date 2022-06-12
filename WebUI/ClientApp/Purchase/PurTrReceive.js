@@ -1085,8 +1085,9 @@ var PurTrReceive;
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            ComputeTotals();
             CountGrid++;
+            Insert_Serial();
+            ComputeTotals();
         }
     }
     function BuildControls(cnt) {
@@ -1094,12 +1095,14 @@ var PurTrReceive;
         html = '<div id= "No_Row' + cnt + '" class=" style_border" > <div class="col-xs-12 p-0" > <div class="col-lg-xs-12" > ' +
             '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurTrReceive display_none"></span>' +
             '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-            '<div class="col-xs-2 pl-0">' +
+            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
+            '<input id="txtSerialH' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
+            '<div class="col-xs-2 pl-0" style="margin-right: -1%;width: 15%;" >' +
             '<select id="ddlFamily' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
-            '<div class="col-xs-2 p-0">' +
+            '<div class="col-xs-2 p-0"    style="width: 15%;">' +
             '<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
-            '<div class="col-xs-1 "><input type="number"  id="txtQuantity' + cnt + '" name="quant[10]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
-            '<div class="col-xs-1 ">' +
+            '<div class="col-xs-1 " style="width: 8%;"><input type="number"  id="txtQuantity' + cnt + '" name="quant[10]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
+            '<div class="col-xs-1 " style="width: 7%;" >' +
             '<input id="txtQuantityReturnValue' + cnt + '" type="number" class="form-control input-sm right2"  disabled value="0"/></div>' +
             '<div class="col-xs-1 "><input type="number"  id="txtPriceFc' + cnt + '" name="quant[20]" class="form-control input-sm  font1" value="1" min="0" max="1000" step="0.5"> </div>' +
             '<div class="col-xs-1 ">' +
@@ -1272,7 +1275,7 @@ var PurTrReceive;
                 $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
                 FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
                 for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
-                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
+                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '"data-UomID="' + ItemBaesdFamilyDetails[i].UomID + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
                 }
             }
             else {
@@ -1300,27 +1303,26 @@ var PurTrReceive;
                 var FamilyID = Number(selectedFamily);
                 var res = false;
                 var NumberRowid = $("#ReciveDetailsID" + cnt).val();
-                res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
-                if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    $("#txtPrice" + cnt).val("1");
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                }
-                else {
-                    $("#txtPriceFc" + cnt).val("1");
-                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
-                    var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
-                    var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-                    $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
-                    var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
-                    $("#txtPrice" + cnt).val(txtPriceValue);
-                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                    $("#txtTotal" + cnt).val(total);
-                    var vatAmount = Number(total) * VatPrc / 100;
-                    $("#txtTax" + cnt).val(vatAmount);
-                    var totalAfterVat = Number(vatAmount) + Number(total);
-                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-                }
+                //res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    $("#txtPrice" + cnt).val("1");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+                //} else {
+                $("#txtPriceFc" + cnt).val("1");
+                var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
+                var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
+                $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
+                var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
+                $("#txtPrice" + cnt).val(txtPriceValue);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total);
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount);
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                //}
             }
             ComputeTotals();
         });
@@ -1415,13 +1417,13 @@ var PurTrReceive;
             //bind Data
             //$("#txt_StatusFlag" + cnt).val("u");
             for (var i = 0; i < FamilyDetails.length; i++) {
-                $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
+                $('#ddlFamily' + cnt).append('<option   value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
             }
             var FamilyID = Number(ItemDetails[cnt].ItemFamilyID);
             $("#ddlFamily" + cnt).prop("value", FamilyID);
             FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
             for (var i = 0; i < ItemDetails.length; i++) {
-                $('#ddlItem' + cnt).append('<option  value="' + ItemDetails[i].ItemID + '">' + (lang == "ar" ? ItemDetails[i].it_DescA : ItemDetails[i].It_DescE) + '</option>');
+                $('#ddlItem' + cnt).append('<option data-UomID="' + ItemDetails[i].UnitID + '"   value="' + ItemDetails[i].ItemID + '">' + (lang == "ar" ? ItemDetails[i].it_DescA : ItemDetails[i].It_DescE) + '</option>');
             }
             var itemcode = ItemDetails[cnt].ItemID;
             $("#UnitCost" + cnt).prop("value", ItemDetails[cnt].StockUnitCost);
@@ -1429,6 +1431,7 @@ var PurTrReceive;
             $("#txtQuantity" + cnt).prop("value", ((ItemDetails[cnt].RecQty == null || undefined) ? 0 : ItemDetails[cnt].RecQty));
             $("#txtQuantityReturnValue" + cnt).prop("value", ((ItemDetails[cnt].TotRetQty == null || undefined) ? 0 : ItemDetails[cnt].TotRetQty));
             $("#txtPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPrice == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPrice.RoundToSt(2));
+            $("#txtSerialH" + cnt).prop("value", (ItemDetails[cnt].Serial == null || undefined) ? 0 : ItemDetails[cnt].Serial.RoundToSt(2));
             $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
             $("#txtAddons" + cnt).prop("value", (ItemDetails[cnt].UnitAddCost == null || undefined) ? 0 : ItemDetails[cnt].UnitAddCost.RoundToSt(2));
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
@@ -1576,8 +1579,30 @@ var PurTrReceive;
             $("#txtTax" + RecNo).val("0");
             $("#No_Row" + RecNo).attr("hidden", "true");
             $("#txtCode" + RecNo).val("000");
+            Insert_Serial();
             ComputeTotals();
         });
+    }
+    function Insert_Serial() {
+        debugger;
+        var Chack_Flag = false;
+        var flagval = "";
+        var Ser = 1;
+        for (var i = 0; i < CountGrid; i++) {
+            flagval = $("#txt_StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#txtSerialH" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true;
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag" + i).val() != 'i' && $("#txt_StatusFlag" + i).val() != 'm' && $("#txt_StatusFlag" + i).val() != 'd') {
+                    $("#txt_StatusFlag" + i).val('u');
+                }
+            }
+        }
     }
     //---------------------------------------------------------------- Charges Grid Controls  region----------------------------------------------------
     function AddNewRowCharge() {
@@ -1597,6 +1622,7 @@ var PurTrReceive;
             $("#btn_minus1" + CountGridCharge).removeAttr("disabled");
             ComputeTotalsCharge();
             CountGridCharge++;
+            Insert_SerialCharge();
         }
     }
     function BuildControlsCharges(cnt) {
@@ -1865,14 +1891,7 @@ var PurTrReceive;
             $("#No_Row1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
             //////////////
-            var counter = 1;
-            for (var i = 0; i < CountGridCharge; i++) { //$("#txt_StatusFlag" + cnt).val() != "i"
-                var flagvalue = $("#txt_StatusFlag1" + i).val();
-                if (flagvalue != "d" && flagvalue != "m") {
-                    $("#txtSerial" + i).prop("value", counter);
-                    counter = counter + 1;
-                }
-            }
+            Insert_SerialCharge();
             /////////////
         });
     }
@@ -1906,6 +1925,27 @@ var PurTrReceive;
         $("#txtTotalPurchaseWithTax").val((txtValueChargeTot + txtTotalVal).RoundToSt(2));
         var txtTaxlVal = Number($("#txtTax").val());
         $("#txtTotalTax").val((txtTaxlVal + txtVatChargeTot).RoundToSt(2));
+    }
+    function Insert_SerialCharge() {
+        debugger;
+        var Chack_Flag = false;
+        var flagval = "";
+        var Ser = 1;
+        for (var i = 0; i < CountGridCharge; i++) {
+            flagval = $("#txt_StatusFlag1" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#txtSerial" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true;
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag1" + i).val() != 'i' && $("#txt_StatusFlag1" + i).val() != 'm' && $("#txt_StatusFlag1" + i).val() != 'd') {
+                    $("#txt_StatusFlag1" + i).val('u');
+                }
+            }
+        }
     }
     //---------------------------------------------------------------- Validation && Clear && Enable && disable  region----------------------------------------------------
     function clear() {
@@ -2220,6 +2260,7 @@ var PurTrReceive;
             StatusFlag = $("#txt_StatusFlag" + i).val();
             if (StatusFlag == "i") {
                 ReceiveItemSingleModel.ReciveDetailsID = 0;
+                ReceiveItemSingleModel.Serial = $("#txtSerialH" + i).val();
                 ReceiveItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 ReceiveItemSingleModel.StatusFlag = StatusFlag.toString();
                 ReceiveItemSingleModel.RecQty = $('#txtQuantity' + i).val();
@@ -2232,12 +2273,14 @@ var PurTrReceive;
                 ReceiveItemSingleModel.VatAmount = $("#txtTax" + i).val();
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val());
                 ReceiveItemSingleModel.VatPrc = VatPrc;
+                ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
                 ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
             }
             if (StatusFlag == "u") {
                 var RecItemId = $("#ReciveDetailsID" + i).val();
                 ReceiveItemSingleModel.ReciveDetailsID = RecItemId;
+                ReceiveItemSingleModel.Serial = $("#txtSerialH" + i).val();
                 ReceiveItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 ReceiveItemSingleModel.StatusFlag = StatusFlag.toString();
                 ReceiveItemSingleModel.RecQty = $('#txtQuantity' + i).val();
@@ -2250,6 +2293,7 @@ var PurTrReceive;
                 ReceiveItemSingleModel.VatAmount = $("#txtTax" + i).val();
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val());
                 ReceiveItemSingleModel.VatPrc = VatPrc;
+                ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
                 ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
             }

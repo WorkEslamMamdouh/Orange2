@@ -100,8 +100,6 @@ namespace Inv.DAL.Domain
         public string Op_TruckNo { get; set; }
         public string Op_RefNo { get; set; }
         public string AmountinWords { get; set; }
-        public Nullable<int> Status1 { get; set; }
-        public string RefNO { get; set; }
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
         public string Sper_nameE { get; set; }

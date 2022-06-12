@@ -3565,6 +3565,7 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBoxSummaryAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankSummaryEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBoxSummaryEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorLedgerAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

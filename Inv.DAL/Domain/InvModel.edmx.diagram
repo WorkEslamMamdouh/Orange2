@@ -69,7 +69,6 @@
         <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveChargeSum" Width="1.5" PointX="14.75" PointY="31.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveItem" Width="1.5" PointX="26.75" PointY="31.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItem" Width="1.5" PointX="32.75" PointY="32.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceStatistic" Width="1.5" PointX="16.75" PointY="33.75" />
         <EntityTypeShape EntityType="InvModel.I_Pur_TR_Receive" Width="1.5" PointX="33.375" PointY="0.75" />
         <EntityTypeShape EntityType="InvModel.G_ReportWebSetting" Width="1.5" PointX="3.375" PointY="33.75" />
         <EntityTypeShape EntityType="InvModel.GQ_ReportWebSetting" Width="1.5" PointX="5.375" PointY="34.75" />
@@ -197,6 +196,8 @@
         <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCC" Width="1.5" PointX="27.75" PointY="23.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCCDetail" Width="1.5" PointX="0.75" PointY="28.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetVendor" Width="1.5" PointX="21.375" PointY="44.75" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceList" Width="1.5" PointX="56.375" PointY="31.75" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceStatistic" Width="1.5" PointX="44.375" PointY="56.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

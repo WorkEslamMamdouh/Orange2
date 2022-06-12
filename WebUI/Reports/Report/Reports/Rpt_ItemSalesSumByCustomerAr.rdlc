@@ -1308,7 +1308,7 @@
             <Value>=Fields!ItemCode.Value</Value>
           </SortExpression>
         </SortExpressions>
-        <Top>3.23976cm</Top>
+        <Top>3.23975cm</Top>
         <Left>0cm</Left>
         <Height>3cm</Height>
         <Width>19.45205cm</Width>
@@ -1337,7 +1337,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>17.59085cm</Left>
         <Height>0.6cm</Height>
         <Width>1.8612cm</Width>
@@ -1371,7 +1371,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>17.62613cm</Left>
         <Height>0.6cm</Height>
         <Width>1.82592cm</Width>
@@ -1405,7 +1405,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>11.8365cm</Left>
         <Height>0.6cm</Height>
         <Width>1.83389cm</Width>
@@ -1439,7 +1439,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>3.78326cm</Left>
         <Height>0.6cm</Height>
         <Width>1.75888cm</Width>
@@ -1473,7 +1473,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>1.62333cm</Top>
+        <Top>1.65507cm</Top>
         <Left>17.59085cm</Left>
         <Height>0.6cm</Height>
         <Width>1.8612cm</Width>
@@ -1507,7 +1507,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>11.8365cm</Left>
         <Height>0.6cm</Height>
         <Width>1.83389cm</Width>
@@ -1539,7 +1539,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_FromDate</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>14.03728cm</Left>
         <Height>0.6cm</Height>
         <Width>3.52182cm</Width>
@@ -1571,7 +1571,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_Todate</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>14.03728cm</Left>
         <Height>0.6cm</Height>
         <Width>3.52182cm</Width>
@@ -1603,7 +1603,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_CatDSA</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>5.84296cm</Left>
         <Height>0.6cm</Height>
         <Width>5.99354cm</Width>
@@ -1635,7 +1635,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_FamilyDSA</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>5.84296cm</Left>
         <Height>0.6cm</Height>
         <Width>5.95826cm</Width>
@@ -1667,7 +1667,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_ItemDSA</rd:DefaultName>
-        <Top>1.62333cm</Top>
+        <Top>1.65507cm</Top>
         <Left>6.06521cm</Left>
         <Height>0.6cm</Height>
         <Width>11.49389cm</Width>
@@ -1699,7 +1699,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
-        <Top>0.17639cm</Top>
+        <Top>0.20813cm</Top>
         <Left>0.66566cm</Left>
         <Height>0.6cm</Height>
         <Width>3.11762cm</Width>
@@ -1733,7 +1733,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>2.39972cm</Top>
+        <Top>2.43146cm</Top>
         <Left>17.55112cm</Left>
         <Height>0.6cm</Height>
         <Width>1.90093cm</Width>
@@ -1765,7 +1765,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_CatDSA</rd:DefaultName>
-        <Top>2.39972cm</Top>
+        <Top>2.43146cm</Top>
         <Left>6.09696cm</Left>
         <Height>0.6cm</Height>
         <Width>11.46214cm</Width>
@@ -1799,7 +1799,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox13</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>3.78326cm</Left>
         <Height>0.6cm</Height>
         <Width>1.75888cm</Width>
@@ -1831,7 +1831,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
-        <Top>0.9175cm</Top>
+        <Top>0.94924cm</Top>
         <Left>0.58066cm</Left>
         <Height>0.6cm</Height>
         <Width>3.20262cm</Width>
@@ -1853,7 +1853,7 @@
   <Width>19.58435cm</Width>
   <Page>
     <PageHeader>
-      <Height>2.12456cm</Height>
+      <Height>2.70135cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2231,10 +2231,45 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="ExecutionTime3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Par_InvoiceTypeDSA.Value, "Rpt_ItemSalesSumByCustomerAr")</Value>
+                      <Style>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>2.01696cm</Top>
+              <Left>8.04524cm</Left>
+              <Height>0.60585cm</Height>
+              <Width>3.42221cm</Width>
+              <ZIndex>11</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Top>0.03092in</Top>
-          <Height>2.04602cm</Height>
+          <Height>2.62281cm</Height>
           <Width>19.45205cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
@@ -2282,11 +2317,18 @@
       </ConnectionProperties>
       <rd:DataSourceID>fb0a2837-ba90-4867-a841-31c4373a3fe9</rd:DataSourceID>
     </DataSource>
+    <DataSource Name="InvDALDomain1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>0fffbc1e-dc17-40da-a18c-cb21aeb942df</rd:DataSourceID>
+    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Rpt_ItemSalesSumByCustomerAr">
       <Query>
-        <DataSourceName>InvDALDomain</DataSourceName>
+        <DataSourceName>InvDALDomain1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -2390,6 +2432,14 @@
           <DataField>Par_Todate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_InvoiceTypeDSA">
+          <DataField>Par_InvoiceTypeDSA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_InvoiceTypeDSE">
+          <DataField>Par_InvoiceTypeDSE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Cus_Code">
           <DataField>Cus_Code</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2491,7 +2541,7 @@
         <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
         <rd:TableName>InvEntities</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>IProc_Rpt_ItemSalesSum</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemSalesSum_Result] IProc_Rpt_ItemSalesSum(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemSalesSum_Result] IProc_Rpt_ItemSalesSum(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
         <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>

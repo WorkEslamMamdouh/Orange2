@@ -12,10 +12,12 @@ var ProcSalesMgr;
     //ddl
     var ddlCustomer;
     var ddlSalesmanFilter;
+    var ddlSalesPersonFilter;
     var ddlStateType;
     var ddlInvoiceType;
     var ddlInvoiceCustomer;
     var ddlSalesman;
+    var ddlSalesPerson;
     var ddlType;
     var ddlOPerationMaster;
     var txtRemarks;
@@ -137,6 +139,7 @@ var ProcSalesMgr;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
         $('#btnPrintInvoicePrice').addClass('display_none');
+        fillddlSalesPerson();
     }
     ProcSalesMgr.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -151,9 +154,11 @@ var ProcSalesMgr;
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer");
         ddlSalesmanFilter = document.getElementById("ddlSalesmanFilter");
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter");
         ddlStateType = document.getElementById("ddlStateType");
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer");
         ddlSalesman = document.getElementById("ddlSalesman");
+        ddlSalesPerson = document.getElementById("ddlSalesPerson");
         ddlInvoiceType = document.getElementById("ddlInvoiceType");
         ddlType = document.getElementById("ddlType");
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster");
@@ -284,6 +289,30 @@ var ProcSalesMgr;
                     $('#ddlOPerationMaster').val(operationDetailsList[0].TrNo);
                     OperaID = operationDetailsList[0].OperationID;
                     ddlOPerationMaster_onchange();
+                }
+            }
+        });
+    }
+    function fillddlSalesPerson() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefSalesMen", "GetAllSalesPeople"),
+            data: {
+                CompCode: compcode, BranchCode: BranchCode, IsSalesEnable: true, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    SalesmanDetails = result.Response;
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
                 }
             }
         });
@@ -601,20 +630,33 @@ var ProcSalesMgr;
     }
     function chkActive_onchecked() {
         //debugger
+        GetOPeration(Selecteditem[0].OperationId);
         if (ddlInvoiceCustomer.disabled == true) {
             if (chkOpenProcess.checked == true) {
                 if (chkActive.checked == false) {
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفواتير لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
             }
             else {
                 if (SysSession.CurrentPrivileges.CUSTOM3 == true) {
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
                 else {
-                    DisplayMassage(" لايمكن تعديل الفواتير عل العمليات المغلقه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
                     chkActive.checked = true;
                 }
             }
@@ -699,6 +741,11 @@ var ProcSalesMgr;
             Errorinput(ddlSalesman);
             return false;
         }
+        else if (ddlSalesPerson.value == "null") {
+            DisplayMassage(" برجاء اختيار البائع", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesPerson);
+            return false;
+        }
         else if (txtInvoiceDate.value == "") {
             DisplayMassage(" برجاء ادخال التاريخ ", "Please enter the date", MessageType.Error);
             Errorinput(txtInvoiceDate);
@@ -761,10 +808,12 @@ var ProcSalesMgr;
         $("#txtInvoiceDate").prop("value", GetDate());
         $('#ddlInvoiceCustomer option[value=null]').prop('selected', 'selected').change();
         $("#ddlSalesman").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         $("#txtInvoiceCustomerName").prop("value", "");
         $("#txtCashMoney").prop("value", "");
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -800,6 +849,13 @@ var ProcSalesMgr;
                 var net = Number(txtNet.value);
                 if (!Check_CreditLimit_Custom(net))
                     return;
+            }
+            if (chkActive.checked == true) {
+                GetOPeration(InvoiceModel.OperationId);
+                if (operationDetailsList[0].Status != 2) {
+                    DisplayMassage(" لايمكن اعتماد الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    return;
+                }
             }
             if (Validation_Insert == 1) {
                 Open_poup_Pass();
@@ -990,6 +1046,7 @@ var ProcSalesMgr;
         var customerId = 0;
         var status = 0;
         var ddlSalesmanFilterValue = 0;
+        var SalesPersonFilter = 0;
         var IsCash = 0;
         var operationId = 0;
         if (ddlCustomer.value != "null") {
@@ -1000,6 +1057,9 @@ var ProcSalesMgr;
         }
         if (ddlSalesmanFilter.value != "null") {
             ddlSalesmanFilterValue = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPersonFilter = Number(ddlSalesPersonFilter.value.toString());
         }
         status = Number(ddlStateType.value.toString());
         IsCash = Number(ddlInvoiceType.value);
@@ -1028,7 +1088,7 @@ var ProcSalesMgr;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("OperationInvoice", "GetAllSlsInvoiceReviewStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, SalesPerson: SalesPersonFilter, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -1077,6 +1137,7 @@ var ProcSalesMgr;
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
+            ddlSalesPerson.value = Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString();
             if (InvoiceStatisticsModel[0].CustomerId != null) {
                 $('#ddlInvoiceCustomer option[value=' + InvoiceStatisticsModel[0].CustomerId.toString() + ']').prop('selected', 'selected').change();
                 $('#txtInvoiceCustomerName').prop("value", (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA : InvoiceStatisticsModel[0].Cus_NameE));
@@ -1418,35 +1479,34 @@ var ProcSalesMgr;
                 var NumberSelect = ItemDetails.filter(function (s) { return s.ItemID == itemID; });
                 var res = false;
                 var NumberRowid = $("#InvoiceItemID" + cnt).val();
-                res = checkRepeatedItems(itemID, NumberRowid);
-                if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    $("#txtPrice" + cnt).val("1");
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
-                    Errorinput($(dropddlItem));
-                }
-                else {
-                    Tax_Rate = NumberSelect[0].VatPrc;
-                    Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
-                    Tax_Rate = Tax_Type_Model.Prc;
-                    VatPrc = Tax_Rate;
-                    $("#txtTax_Rate" + cnt).attr('Data-VatNatID', Tax_Type_Model.Nature);
-                    $("#txtTax_Rate" + cnt).val(VatPrc);
-                    var NumberSelect = ItemDetails.filter(function (s) { return s.ItemID == itemID; });
-                    var GetUnitprice = Get_PriceWithVAT(NumberSelect[0].Est_SalesPrice, VatPrc, flag_PriceWithVAT);
-                    var itemPrice = GetUnitprice.unitprice;
-                    $("#txtPrice" + cnt).val(itemPrice);
-                    $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
-                    //UomID = NumberSelect[0]
-                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
-                    var txtPriceValue = $("#txtPrice" + cnt).val();
-                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                    $("#txtTotal" + cnt).val(total.RoundToSt(2));
-                    var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-                    $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
-                    var totalAfterVat = Number(vatAmount) + Number(total);
-                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-                }
+                //res = checkRepeatedItems(itemID, NumberRowid);
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    $("#txtPrice" + cnt).val("1");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
+                //    Errorinput($(dropddlItem));
+                //} else {
+                Tax_Rate = NumberSelect[0].VatPrc;
+                Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
+                Tax_Rate = Tax_Type_Model.Prc;
+                VatPrc = Tax_Rate;
+                $("#txtTax_Rate" + cnt).attr('Data-VatNatID', Tax_Type_Model.Nature);
+                $("#txtTax_Rate" + cnt).val(VatPrc);
+                var NumberSelect = ItemDetails.filter(function (s) { return s.ItemID == itemID; });
+                var GetUnitprice = Get_PriceWithVAT(NumberSelect[0].Est_SalesPrice, VatPrc, flag_PriceWithVAT);
+                var itemPrice = GetUnitprice.unitprice;
+                $("#txtPrice" + cnt).val(itemPrice);
+                $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
+                //UomID = NumberSelect[0]
+                var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                var txtPriceValue = $("#txtPrice" + cnt).val();
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));
+                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                //}
             }
             ComputeTotals();
         });
@@ -1746,12 +1806,22 @@ var ProcSalesMgr;
         }
     }
     function Insert_Serial() {
+        var Chack_Flag = false;
+        var flagval = "";
         var Ser = 1;
         for (var i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m") {
+            flagval = $("#txt_StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true;
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag" + i).val() != 'i' && $("#txt_StatusFlag" + i).val() != 'm' && $("#txt_StatusFlag" + i).val() != 'd') {
+                    $("#txt_StatusFlag" + i).val('u');
+                }
             }
         }
     }
@@ -1788,6 +1858,7 @@ var ProcSalesMgr;
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.RefNO = txtRefNo.value;
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.Remark = txtRemarks.value;
         //------------------------------------------------------
         InvoiceModel.AllowVatNatID = null;
@@ -2073,6 +2144,7 @@ var ProcSalesMgr;
         txtNet.disabled = true;
         txtCommission.disabled = false;
         txtRefNo.disabled = false;
+        ddlSalesPerson.disabled = false;
         txtRemarks.disabled = false;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
@@ -2119,6 +2191,7 @@ var ProcSalesMgr;
         txtNet.disabled = true;
         txtCommission.disabled = true;
         txtRefNo.disabled = true;
+        ddlSalesPerson.disabled = true;
         txtRemarks.disabled = true;
     }
     //------------------------------------------------------Poup_Pass------------------------

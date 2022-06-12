@@ -110,7 +110,7 @@
             <div class="col-lg-2 col-sm-3 col-xs-3">
                 <select id="ddlOPerationMaster" name="" class="form-control input-sm"></select>
             </div>
-            <label class="col-lg-1 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2  ">@SystemResource.process_opened </label>
+            <label class="col-lg-1 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2  ">العمليات المفتوحه   </label>
             <div class="col-lg-1 col-sm-3 col-xs-3">
                 <input type="checkbox" class="checkbox" id="chkOpenProcess" name="CUSTOM6" />
             </div>
@@ -137,7 +137,14 @@
                 <input type="date" class="form-control input-sm addable editable" name="GosiJoinDate" id="txtEndDate">
             </div>
 
-           
+            <div class="col-lg-1 col-xs-1"  ></div>
+            <div class="col-lg-1 col-xs-1"  >
+
+                <button id="btnAddReturn" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Add
+                </button>
+            </div>
+
         </div>
 
         <div class="col-lg-12">
@@ -157,11 +164,14 @@
                 <select id="ddlStateType" name="" class="form-control input-sm"></select>
             </div>
 
-            <select id="ddlShowFreeReturn" name="" class="form-control display_none input-sm "></select>
-            
+            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading">بائع</label>
+            <div class="col-lg-2  col-xs-8">
+                <select id="ddlSalesPersonFilter" name="" class="form-control input-sm"></select>
+            </div>
 
+          
             
-            <div class="col-xs-3 ">
+            <div class="col-xs-1 ">
 
                 <button style="float:left!important" id="btnAddFreeReturn" type="button" class="btn btn-warning display_none">
                     <span class="glyphicon glyphicon-save"></span> @SystemResource.btn_AddFreeReturn
@@ -194,12 +204,8 @@
                     @SystemResource.App_Show  <span class="glyphicon glyphicon-save"></span>
                 </button>
             </div>
-            <div class="col-lg-1 col-xs-8" style="float:left!important">
+          
 
-                <button id="btnAddReturn" type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Add
-                </button>
-            </div>
         </div>
 
         <div class="form-group display_none " id="divShow">
@@ -269,9 +275,11 @@
             <div class="col-md-2 col-sm-5 col-xs-10">
                 <input type="date" class="form-control input-sm" disabled name="" id="txtInvoiceDate" style="font-size: 16px !important;">
             </div>
+            <div class="col-xs-1">
+            </div>
 
-            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading  ">  @SystemResource.App_approved  </label>
-            <div class="col-xs-1" style=" left: 3%;">
+            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2    ">  @SystemResource.App_approved  </label>
+            <div class="col-xs-1">
                 <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
             </div>
         </div>
@@ -285,23 +293,29 @@
                 <select id="ddlReturnTypeShow" disabled name="" class="form-control input-sm"></select>
 
             </div>
+
             <div class="col-xs-1">
             </div>
+
             <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_InvoiceNum  </label>
-            <div class="col-lg-2 col-xs-8">
+            <div class="col-lg-2 col-xs-2" style="width: 13.7%;">
                 <input type="number" class="form-control input-sm" disabled name="" id="txtInvoiceNumber">
             </div>
-            <div class="col-xs-1"style="width:3%">
+
+            <div class="col-xs-1" style="width:3%">
                 <button style=" left: 21%;" type="button" class="src-btn btn btn-warning" id="btnProcessInvoiceSearch" name="InvoiceSearch">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <div class="col-xs-2">
-                <label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   " style="width:29%;"> @SystemResource.refTrTransNo </label>
-                <div class="col-md-8 col-sm-4 col-xs-10">
-                    <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo" style="">
-                </div>
+
+            <div class="col-xs-1">
             </div>
+
+            <label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.App_ReferenceNumber </label>
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <input type="text" class="form-control input-sm" disabled name="RefNO" id="txtRefNo" style="">
+            </div>
+
         </div>
 
         <div class="col-lg-12 ">
@@ -310,17 +324,23 @@
                 <select id='ddlFreeSalesman' class="form-control input-sm"></select>
             </div>
 
-            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_PaidMoney  </label>
-            <div class="col-lg-2 col-xs-8">
-                <input type="number" class="form-control input-sm" name="" id="txtCashAmount">
+            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_padingSlsTrSalesManager  ">بائع </label>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                <select id="ddlSalesPerson" disabled class="form-control input-sm" style='width: 100%;border-radius: 30px;'></select>
             </div>
-            <div class="col-xs-1" style="width:4%">
+
+
+
+
+            <div class="col-xs-1">
             </div>
-                <label class="col-lg-1 col-sm-3 col-xs-3  marginstenig pading_lep  pading_2  " style="width:4%"> @SystemResource.process</label>
-            <div class="col-lg-2 col-sm-3 col-xs-3">
-                <input type="text" id="txtOPerationDetail" disabled="disabled" name="" class="form-control col-lg-8 input-sm" />
+            <label class="col-lg-1 col-sm-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.process</label>
+            <div class="col-lg-2 col-sm-2 col-xs-2">
+                <input type="text" id="txtOPerationDetail" disabled="disabled" name="" class="form-control input-sm" />
             </div>
+
         </div>
+
 
 
 
@@ -333,8 +353,10 @@
             <div class="col-lg-3 col-xs-8">
                 <input type="text" class="form-control input-sm" disabled name="" id="txtCustomerName">
             </div>
-            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading"> @SystemResource.App_TaxType</label>
-            <div class="col-lg-2 col-xs-8">
+            <div class="col-xs-1">
+            </div>
+            <label class="col-lg-1 col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.App_TaxType</label>
+            <div class="col-lg-2 col-xs-2">
                 <select id="ddlTaxTypeHeader" disabled="disabled" name="" class="form-control input-sm">
                     <option value="null">@SystemResource.tax_select</option>
                 </select>
@@ -342,12 +364,17 @@
 
         </div>
 
-        <div class="col-md-12 col-sm-4 col-xs-10">
-            <label id="LabtxtRemarks" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading  "> @SystemResource.App_Notes </label>
-            <div class="col-md-9 col-sm-4 col-xs-10">
-                <input type="text" class="form-control" disabled name="Remark" id="txtRemarks" style="font-size: 16px !important;">
+
+        <div class="col-lg-12"> 
+            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_PaidMoney  </label>
+            <div class="col-lg-2 col-xs-8">
+                <input type="number" class="form-control input-sm" name="" id="txtCashAmount">
             </div>
+
         </div>
+
+
+
         <div class=" margingred col-lg-12 border_gridCont">
             <div id=" " class="col-lg-12 font_header" style="bottom: 5px;font-size: 13px;font-weight: bold;margin-top: .5%;text-align: center!important">
 
@@ -395,13 +422,17 @@
 
         </div>
 
-        <div class="col-lg-12 margingred ">
-
-            <div id=" " class="col-lg-12    ">
-                <div class="col-lg-12 ">
-                    <table id="divGridDetails"></table>
-                </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <br />
+            <label id="LabtxtRemarks" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading  "> @SystemResource.App_Notes </label>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <textarea type="text" class="form-control" disabled name="Remark" id="txtRemarks" style="font-size: 16px !important;">
+                    </textarea>
             </div>
+
+        </div>
+
+        <div class="col-lg-12 margingred ">
 
             <div class="col-md-12 col-sm-5 col-xs-10">
                 <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  "> @SystemResource.App_ItemsCount</label>

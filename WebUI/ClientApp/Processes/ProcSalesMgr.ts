@@ -14,10 +14,12 @@ namespace ProcSalesMgr {
     //ddl
     var ddlCustomer: HTMLSelectElement;
     var ddlSalesmanFilter: HTMLSelectElement;
+    var ddlSalesPersonFilter: HTMLSelectElement;
     var ddlStateType: HTMLSelectElement;
     var ddlInvoiceType: HTMLSelectElement;
     var ddlInvoiceCustomer: HTMLSelectElement;
     var ddlSalesman: HTMLSelectElement;
+    var ddlSalesPerson: HTMLSelectElement;
     var ddlType: HTMLSelectElement;
     var ddlOPerationMaster: HTMLInputElement;
     var txtRemarks: HTMLInputElement;
@@ -155,7 +157,7 @@ namespace ProcSalesMgr {
         $('#btnPrint').addClass('display_none');
         $('#btnPrintInvoicePrice').addClass('display_none');
 
-
+        fillddlSalesPerson();
 
     }
     function InitalizeControls() {
@@ -170,9 +172,11 @@ namespace ProcSalesMgr {
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer") as HTMLSelectElement;
         ddlSalesmanFilter = document.getElementById("ddlSalesmanFilter") as HTMLSelectElement;
+        ddlSalesPersonFilter = document.getElementById("ddlSalesPersonFilter") as HTMLSelectElement;
         ddlStateType = document.getElementById("ddlStateType") as HTMLSelectElement;
         ddlInvoiceCustomer = document.getElementById("ddlInvoiceCustomer") as HTMLSelectElement;
         ddlSalesman = document.getElementById("ddlSalesman") as HTMLSelectElement;
+        ddlSalesPerson = document.getElementById("ddlSalesPerson") as HTMLSelectElement;
         ddlInvoiceType = document.getElementById("ddlInvoiceType") as HTMLSelectElement;
         ddlType = document.getElementById("ddlType") as HTMLSelectElement;
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster") as HTMLInputElement;
@@ -340,7 +344,34 @@ namespace ProcSalesMgr {
 
     }
 
+    function fillddlSalesPerson() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefSalesMen", "GetAllSalesPeople"),// GetAllSalesPeople(int CompCode, bool IsSalesEnable, string UserCode, string Token)
+            data: {
+                CompCode: compcode, BranchCode: BranchCode, IsSalesEnable: true, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
 
+                    SalesmanDetails = result.Response as Array<I_Sls_D_Salesman>;
+
+                    //------------------------------------------------- ddlSalesPerson-----------------------------
+
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select Salesman");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameE", "Select Category");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPersonFilter, "SalesmanId", "NameA", "اختر البائع");
+                    }
+
+                }
+            }
+        });
+    }
     function fillddlOperation() {
         Ajax.Callsync({
             type: "Get",
@@ -502,7 +533,7 @@ namespace ProcSalesMgr {
                 ddlType.options.add(newoption);
             }
         }
- 
+
     }
     function FillddlItem() {
         debugger
@@ -555,7 +586,7 @@ namespace ProcSalesMgr {
             if (editOrAddFlag == 1) {
                 chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
             }
-            
+
         } else {
             txtInvoiceCustomerName.value = "";
             //ddlInvoiceCustomer_onchange();
@@ -683,21 +714,36 @@ namespace ProcSalesMgr {
     }
     function chkActive_onchecked() {
         //debugger
+
+        GetOPeration(Selecteditem[0].OperationId)
+
         if (ddlInvoiceCustomer.disabled == true) {
             if (chkOpenProcess.checked == true) {
                 if (chkActive.checked == false) {
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفواتير لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
             } else {
 
                 if (SysSession.CurrentPrivileges.CUSTOM3 == true) {
 
-                    openInvoice();
-                    $("#chkActive").attr("disabled", "disabled");
+                    if (operationDetailsList[0].Status == 2) {
+                        openInvoice();
+                        $("#chkActive").attr("disabled", "disabled");
+                    }
+                    else {
+                        DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                        chkActive.checked = true;
+                    }
                 }
                 else {
-                    DisplayMassage(" لايمكن تعديل الفواتير عل العمليات المغلقه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    DisplayMassage(" لايمكن الاضافه او التعديل علي الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
                     chkActive.checked = true;
                 }
 
@@ -789,6 +835,11 @@ namespace ProcSalesMgr {
             Errorinput(ddlSalesman);
             return false
         }
+        else if (ddlSalesPerson.value == "null") {
+            DisplayMassage(" برجاء اختيار البائع", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesPerson);
+            return false
+        }
         else if (txtInvoiceDate.value == "") {
             DisplayMassage(" برجاء ادخال التاريخ ", "Please enter the date", MessageType.Error);
             Errorinput(txtInvoiceDate);
@@ -854,10 +905,12 @@ namespace ProcSalesMgr {
         $("#txtInvoiceDate").prop("value", GetDate());
         $('#ddlInvoiceCustomer option[value=null]').prop('selected', 'selected').change();
         $("#ddlSalesman").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         $("#txtInvoiceCustomerName").prop("value", "");
         $("#txtCashMoney").prop("value", "");
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
+        $("#ddlSalesPerson").prop("value", "null");
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -902,6 +955,18 @@ namespace ProcSalesMgr {
                 if (!Check_CreditLimit_Custom(net))
                     return;
             }
+
+
+
+            if (chkActive.checked == true) {
+
+                GetOPeration(InvoiceModel.OperationId)
+                if (operationDetailsList[0].Status != 2) {
+                    DisplayMassage(" لايمكن اعتماد الفاتوره لان العمليه غير مفتوحه", "Invoices cannot be modified on closed Processes", MessageType.Worning);
+                    return;
+                }
+            }
+
 
 
             if (Validation_Insert == 1) { Open_poup_Pass(); }
@@ -965,8 +1030,8 @@ namespace ProcSalesMgr {
                 $('#txtCardMoney').addClass('display_none');
                 SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
 
-                 
-                if (SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef == 2	) {
+
+                if (SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef == 2) {
 
                     txtInvoiceCustomerName.value = "";
                     $('#LabCashMoney').addClass('display_none');
@@ -990,13 +1055,13 @@ namespace ProcSalesMgr {
                     $('#LabCardMoney').removeClass('display_none');
                     $('#txtCardMoney').removeClass('display_none');
                     $('#txtCashMoney').val('0');
-                    $('#txtCardMoney').val('0'); 
+                    $('#txtCardMoney').val('0');
 
                     ddlType.value = '1'
                     chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
                     chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
                 }
-             
+
 
                 filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
                 DocumentActions.FillCombowithdefult(filterCustomerDetails, ddlInvoiceCustomer, "CustomerId", (lang == "ar" ? "NAMEA" : "NAMEE"), (lang == "ar" ? "اختر العميل" : "Select customer"));
@@ -1119,6 +1184,7 @@ namespace ProcSalesMgr {
         var customerId = 0;
         var status = 0;
         var ddlSalesmanFilterValue = 0;
+        var SalesPersonFilter = 0;
         var IsCash: number = 0;
         var operationId = 0;
         if (ddlCustomer.value != "null") {
@@ -1131,6 +1197,11 @@ namespace ProcSalesMgr {
         if (ddlSalesmanFilter.value != "null") {
             ddlSalesmanFilterValue = Number(ddlSalesmanFilter.value.toString());
         }
+
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPersonFilter = Number(ddlSalesPersonFilter.value.toString());
+        }
+
         status = Number(ddlStateType.value.toString());
         IsCash = Number(ddlInvoiceType.value);
 
@@ -1161,7 +1232,7 @@ namespace ProcSalesMgr {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("OperationInvoice", "GetAllSlsInvoiceReviewStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, OperationID: OperaID, SalesPerson: SalesPersonFilter, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1215,6 +1286,7 @@ namespace ProcSalesMgr {
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
+            ddlSalesPerson.value = Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString();
 
             if (InvoiceStatisticsModel[0].CustomerId != null) {
                 $('#ddlInvoiceCustomer option[value=' + InvoiceStatisticsModel[0].CustomerId.toString() + ']').prop('selected', 'selected').change();
@@ -1604,49 +1676,49 @@ namespace ProcSalesMgr {
 
                 var res = false;
                 var NumberRowid = $("#InvoiceItemID" + cnt).val();
-                res = checkRepeatedItems(itemID, NumberRowid);
+                //res = checkRepeatedItems(itemID, NumberRowid);
 
-                if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    $("#txtPrice" + cnt).val("1");
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
-                    Errorinput($(dropddlItem));
-                } else {
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    $("#txtPrice" + cnt).val("1");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be duplicated on the invoice', MessageType.Error);
+                //    Errorinput($(dropddlItem));
+                //} else {
 
-                    Tax_Rate = NumberSelect[0].VatPrc;
-                    Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
-                    Tax_Rate = Tax_Type_Model.Prc
-                    VatPrc = Tax_Rate;
-                    $("#txtTax_Rate" + cnt).attr('Data-VatNatID', Tax_Type_Model.Nature);
-                    $("#txtTax_Rate" + cnt).val(VatPrc);
-
-
-
-                    var NumberSelect = ItemDetails.filter(s => s.ItemID == itemID);
-
-           
-
-
-                    let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NumberSelect[0].Est_SalesPrice, VatPrc, flag_PriceWithVAT);
-                    var itemPrice = GetUnitprice.unitprice;
-                    $("#txtPrice" + cnt).val(itemPrice);
-                    $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
+                Tax_Rate = NumberSelect[0].VatPrc;
+                Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
+                Tax_Rate = Tax_Type_Model.Prc
+                VatPrc = Tax_Rate;
+                $("#txtTax_Rate" + cnt).attr('Data-VatNatID', Tax_Type_Model.Nature);
+                $("#txtTax_Rate" + cnt).val(VatPrc);
 
 
 
-                    //UomID = NumberSelect[0]
+                var NumberSelect = ItemDetails.filter(s => s.ItemID == itemID);
 
-                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
-                    var txtPriceValue = $("#txtPrice" + cnt).val();
 
-                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                    $("#txtTotal" + cnt).val(total.RoundToSt(2));
-                    var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-                    $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
-                    var totalAfterVat = Number(vatAmount) + Number(total);
-                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
 
-                }
+
+                let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NumberSelect[0].Est_SalesPrice, VatPrc, flag_PriceWithVAT);
+                var itemPrice = GetUnitprice.unitprice;
+                $("#txtPrice" + cnt).val(itemPrice);
+                $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
+
+
+
+                //UomID = NumberSelect[0]
+
+                var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                var txtPriceValue = $("#txtPrice" + cnt).val();
+
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));
+                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+
+                //}
             }
             ComputeTotals();
         });
@@ -2018,12 +2090,22 @@ namespace ProcSalesMgr {
     }
     function Insert_Serial() {
 
+        let Chack_Flag = false;
+        let flagval = "";
         let Ser = 1;
         for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m") {
+            flagval = $("#txt_StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag" + i).val() != 'i' && $("#txt_StatusFlag" + i).val() != 'm' && $("#txt_StatusFlag" + i).val() != 'd') {
+                    $("#txt_StatusFlag" + i).val('u');
+                }
             }
         }
 
@@ -2061,6 +2143,7 @@ namespace ProcSalesMgr {
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.RefNO = txtRefNo.value;
+        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.Remark = txtRemarks.value;
 
 
@@ -2200,8 +2283,14 @@ namespace ProcSalesMgr {
                 }
             }
         }
+
         MasterDetailsModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
+
+
+
+
+
     }
     function Update() {
 
@@ -2396,6 +2485,7 @@ namespace ProcSalesMgr {
         txtNet.disabled = true;
         txtCommission.disabled = false;
         txtRefNo.disabled = false;
+        ddlSalesPerson.disabled = false;
         txtRemarks.disabled = false;
 
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
@@ -2459,6 +2549,7 @@ namespace ProcSalesMgr {
         txtNet.disabled = true;
         txtCommission.disabled = true;
         txtRefNo.disabled = true;
+        ddlSalesPerson.disabled = true;
         txtRemarks.disabled = true;
 
     }

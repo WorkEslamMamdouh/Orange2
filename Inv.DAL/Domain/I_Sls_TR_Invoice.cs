@@ -97,5 +97,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> ItemVatTotal { get; set; }
         public Nullable<decimal> RoundingAmount { get; set; }
         public Nullable<int> SalesPersonId { get; set; }
+        public Nullable<int> FinYear { get; set; }
     }
 }
