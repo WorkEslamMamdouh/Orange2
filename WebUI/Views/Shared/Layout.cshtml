@@ -5,456 +5,331 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Free Web tutorials">
-    <meta name="keywords" content="HTML, CSS, JavaScript">
-    <meta name="author" content="John Doe">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="~/images/logokids.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@SystemResource.App_Home</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/favicon.png" />
 
-    <link href="~/Style_design/LodBut/font-awesome.min.css" rel="stylesheet" />
 
-    @*<link href="~/css/select2.min.css" rel="stylesheet" />*@
-    <link href="~/New/css/sb-admin-2AR.css" rel="stylesheet" />
-    <!-- Custom fonts for this template-->
-    <link href="~/New/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-    <!-- Custom styles for this template-->
-    @*<link href="~/New/css/sb-admin-2.min.css" rel="stylesheet" />*@
+
 </head>
 
 <body id="page-top">
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    <div class="container-scroller">
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
         <!-- Header top area start المنيو اللي في الجنب  -->
+        <!-- Header top area start المنيو اللي فوق  -->
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                <a class="sidebar-brand brand-logo" href="index.html"><img src="~/Newtemplate/template/assets/images/logo.svg" alt="logo" /></a>
+                <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item profile">
+                    <div class="profile-desc">
+                        <div class="profile-pic">
+                            <div class="count-indicator">
+                                <img class="img-xs rounded-circle " src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
+                                <span class="count bg-success"></span>
+                            </div>
+                            <div class="profile-name">
+                                <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                                <span>Gold Member</span>
+                            </div>
+                        </div>
+                        <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-settings text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-calendar-today text-success"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
 
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Dashboard -->
-            @*<li class="nav-item active">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                <li class="nav-item menu-items " id="btnSales">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#MSales" aria-expanded="false" aria-controls="MSales">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-laptop"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Men_Sales</span>
+                        <i class="menu-arrow"></i>
                     </a>
-                </li>*@
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-            <!-- Nav Item - Pages Collapse Menu -->
+                    <div class="collapse" id="MSales">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item"> <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a></li>
+                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item"> <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a></li>
+                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item"> <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
+                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item"> <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a></li>
 
-
-            <li id="btnSales" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#liMen_Sales" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Men_Sales</span>
-
-                </a>
-                <div id="liMen_Sales" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnSlsTrShowPrice" key="SlsTrShowPrice"><i id="btnSlsTrShowPrice" href="#">@SystemResource.showPrice 1</i></a>
-                            <a class="collapse-item" id="btnSlsTrSales" key="SlsTrSales"><i id="btnSlsTrSales" href="#">@SystemResource.Men_SlsSales 2</i></a>
-                            <a class="collapse-item" id="btnSlsTrSalesManager" key="SlsTrSalesManager"><i id="btnSlsTrSalesManager" href="#">@SystemResource.Men_SlsTrSalesManager 3</i></a>
-                            <a class="collapse-item" id="btnSlsTrReturn" key="SlsTrReturn"><i id="btnSlsTrReturn" href="#">@SystemResource.Men_SlsTrReturn 4</i></a>
-
-                        </div>
-
+                        </ul>
                     </div>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_navbar.html -->
+            <nav class="navbar p-0 fixed-top d-flex flex-row">
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>
                 </div>
-            </li>
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li id="btnPurchase" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#liPurchase" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Purchase</span>
-                </a>
-                <div id="liPurchase" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnPurOrder" key="PurOrder"><i id="btnPurOrder" href="#">@SystemResource.Men_PurOrder </i></a>
-                            <a class="collapse-item" id="btnPurTrReceive" key="PurTrReceive"><i id="btnPurTrReceive" href="#">@SystemResource.Purchase_Recieve </i></a>
-                            <a class="collapse-item" id="btnPurTrReturn" key="PurTrReturn"><i id="btnPurTrReturn" href="#">@SystemResource.Purchase_Return </i></a>
-
-                        </div>
-
-                    </div>
-                </div>
-            </li>
-
-            <li id="btnInventory" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#libtnInventory" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Inventory</span>
-                </a>
-                <div id="libtnInventory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnDirecttransfer" key="Directtransfer"><i id="btnDirecttransfer" href="#">@SystemResource.Directtransfer </i></a>
-                            <a class="collapse-item" id="btnSTKAdjust" key="STKAdjust"><i id="btnSTKAdjust" href="#">@SystemResource.Stocksettlement </i></a>
-                            <a class="collapse-item" id="btnCollectUnit" key="CollectUnit"><i id="btnCollectUnit" href="#">@SystemResource.Inv_CollectUnit </i></a>
-                            <a class="collapse-item" id="btnReceiveTransfer" key="ReceiveTransfer"><i id="btnReceiveTransfer" href="#">@SystemResource.Receipttransfer </i></a>
-                            <a class="collapse-item" id="btnsendTransfer" key="sendTransfer"><i id="btnsendTransfer" href="#">@SystemResource.Sendtransfer </i></a>
-                            <a class="collapse-item" id="btnStkDefItems" key="StkDefItems"><i id="btnStkDefItems" href="#">@SystemResource.Men_StkDefItems </i></a>
-                            <a class="collapse-item" id="btnStkDefItemType" key="StkDefItemType"><i id="btnStkDefItemType" href="#">@SystemResource.Men_StkDefItemType </i></a>
-                            <a class="collapse-item" id="btnStkDefCategory" key="StkDefCategory"><i id="btnStkDefCategory" href="#">@SystemResource.Men_StkDefCategory </i></a>
-                            <a class="collapse-item" id="btnStkDefItemsNew" key="StkDefItemsNew"><i id="btnStkDefItemsNew" href="#">@SystemResource.Men_StkDefItems </i></a>
-                            <a class="collapse-item" id="btnIssueToCC" key="IssueToCC"><i id="btnIssueToCC" href="#">@SystemResource.PaymentOrder </i></a>
-
-                        </div>
-
-                    </div>
-                </div>
-            </li>
-            <li id="btnReportMenu" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#liReports" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Reports</span>
-                </a>
-                <div id="liReports" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnInventorymove" key="Inventorymove"><i id="btnInventorymove" href="#">@SystemResource.Inventorymove </i></a>
-                            <a class="collapse-item" id="btnInventoryvalue" key="Inventoryvalue"><i id="btnInventoryvalue" href="#">@SystemResource.Inventoryvalue </i></a>
-                            <a class="collapse-item" id="btnIncomeoperations" key="Incomeoperations"><i id="btnIncomeoperations" href="#">@SystemResource.Incomeoperations </i></a>
-                            <a class="collapse-item" id="btnItemsalesSum" key="ItemsalesSum"><i id="btnItemsalesSum" href="#">@SystemResource.ItemsalesSum </i></a>
-                            <a class="collapse-item" id="btnItemPurchase" key="ItemPurchase"><i id="btnItemPurchase" href="#">@SystemResource.ItemPurchase </i></a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li id="btnCashBoxDefinitions" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#li" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Men_FundMovement</span>
-                </a>
-                <div id="libtnCashBoxDefinitions" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnAccTrInvReceipt" key="AccTrInvReceipt"><i id="btnAccTrInvReceipt" href="#">@SystemResource.Men_AccTrInvReceipt </i></a>
-                            <a class="collapse-item" id="btnAccTrReceiptNote" key="AccTrReceiptNote"><i id="btnAccTrReceiptNote" href="#">@SystemResource.Men_AccTrReceiptNote </i></a>
-                            <a class="collapse-item" id="btnPurTrpaymemt" key="PurTrpaymemt"><i id="btnPurTrpaymemt" href="#">@SystemResource.Men_PurTrpaymemt </i></a>
-                            <a class="collapse-item" id="btnAccTrPaymentNote" key="AccTrPaymentNote"><i id="btnAccTrPaymentNote" href="#">@SystemResource.Men_AccTrPaymentNote </i></a>
-                            <a class="collapse-item" id="btnAccTrCustomerAdjust" key="AccTrCustomerAdjust"><i id="btnAccTrCustomerAdjust" href="#">@SystemResource.Men_AccTrCustomerAdjust </i></a>
-                            <a class="collapse-item" id="btnAccTrVendorAdjust" key="AccTrVendorAdjust"><i id="btnAccTrVendorAdjust" href="#">@SystemResource.Men_AccTrVendorAdjust </i></a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-
-            <li id="btnCashBoxReports" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#libtnCashBoxReports" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Box_Report</span>
-                </a>
-                <div id="libtnCashBoxReports" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnCollectedaccstat" key="Collectedaccstat"><i id="btnCollectedaccstat" href="#">@SystemResource.Combined_account </i></a>
-                            <a class="collapse-item" id="btnSupplieraccstat" key="Supplieraccstat"><i id="btnSupplieraccstat" href="#">@SystemResource.Suppliertstatment </i></a>
-                            <a class="collapse-item" id="btnClientaccstat" key="Clientaccstat"><i id="btnClientaccstat" href="#">@SystemResource.Clientstatment </i></a>
-                            <a class="collapse-item" id="btnCashBoxAccount" key="CashBoxAccount"><i id="btnCashBoxAccount" href="#">@SystemResource.AccountCashBox </i></a>
-                            <a class="collapse-item" id="btnAgingCust" key="AgingCust"><i id="btnAgingCust" href="#">@SystemResource.AgingCust </i></a>
-                            <a class="collapse-item" id="btnAgingVend" key="AgingVend"><i id="btnAgingVend" href="#">@SystemResource.AgingVend </i></a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <p class="text-center mb-2"><strong>Orange</strong> version:2</p>
-            </div>
-        </ul>
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Header top area start المنيو اللي فوق  -->
-            <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="mdi mdi-menu"></span>
                     </button>
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input id="Screen_name" type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
-                            <input id="camp_name" type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
-
-                        </div>
-                    </form>
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="~/New/img/undraw_profile.svg">
-                            </a>
+                    <ul class="navbar-nav w-100">
+                        <li class="nav-item w-50">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                <input id="Screen_name" type="text" class="form-control">
+                            </form>
                         </li>
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                               placeholder="Search for..." aria-label="Search"
-                                               aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                        <li class="nav-item w-50">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                <input id="camp_name" type="text" class="form-control">
+                            </form>
                         </li>
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                    </ul>
+                    <ul class="navbar-nav navbar-nav-right">
+                        <li class="nav-item dropdown d-none d-lg-block">
+                            <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-bs-toggle="dropdown" aria-expanded="false" href="#">+ Create New Project</a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
+                                <h6 class="p-3 mb-0">Projects</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-file-outline text-primary"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Software Development</p>
                                     </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="~/New/img/undraw_profile_1.svg"
-                                             alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">
-                                            Hi there! I am wondering if you can help me with a
-                                            problem I've been having.
-                                        </div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="~/New/img/undraw_profile_2.svg"
-                                             alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">
-                                            I have the photos that you ordered last month, how
-                                            would you like them sent to you?
-                                        </div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="~/New/img/undraw_profile_3.svg"
-                                             alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">
-                                            Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!
-                                        </div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                             alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">
-                                            Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...
-                                        </div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span id="Admin_name" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img class="img-profile rounded-circle"
-                                     src="~/New/img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a id="btn_loguotuser" class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-web text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">UI Development</p>
+                                    </div>
                                 </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-layers text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Software Testing</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">See all projects</p>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-settings d-none d-lg-block">
+                            <a class="nav-link" href="#">
+                                <i class="mdi mdi-view-grid"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown border-left">
+                            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-email"></i>
+                                <span class="count bg-success"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                <h6 class="p-3 mb-0">Messages</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/Newtemplate/template/assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
+                                        <p class="text-muted mb-0"> 1 Minutes ago </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/Newtemplate/template/assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
+                                        <p class="text-muted mb-0"> 15 Minutes ago </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/Newtemplate/template/assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
+                                        <p class="text-muted mb-0"> 18 Minutes ago </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">4 new messages</p>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown border-left">
+                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                                <i class="mdi mdi-bell"></i>
+                                <span class="count bg-danger"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                <h6 class="p-3 mb-0">Notifications</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Event today</p>
+                                        <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1" id=""></p>
+                                        <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-link-variant text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Launch Admin</p>
+                                        <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">See all notifications</p>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                                <div class="navbar-profile">
+                                    <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name" id="Admin_name">Henry Klein</p>
+                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                                <h6 class="p-3 mb-0">Profile</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-logout text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">Advanced settings</p>
                             </div>
                         </li>
                     </ul>
-                </nav>
-
-
-                <div @*id="cont" class="divcont"*@>
-                    @RenderBody()
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                        <span class="mdi mdi-format-line-spacing"></span>
+                    </button>
                 </div>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                    </div>
+                </footer>
+                <!-- partial -->
             </div>
+            <!-- main-panel ends -->
         </div>
     </div>
     <!--..............................user setting..................................................-->
@@ -539,11 +414,7 @@
             <div id="tableDiv" class="table table-bordered table-hover" style="width:100%;"></div>
         </div>
     </div>
-    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalRep">
-            Launch demo modal
-        </button>*@
 
-    <!-- Modal -->
     <div class="modal fade" id="ModalRep" tabindex="-1" role="dialog" aria-labelledby="ModalRep" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -577,15 +448,29 @@
 
 
 
-    @*<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
 
+    <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/Newtemplate/template/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/Newtemplate/template/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="~/Newtemplate/template/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/Newtemplate/template/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Newtemplate/template/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <script src="~/Newtemplate/template/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Newtemplate/template/assets/js/off-canvas.js"></script>
+    <script src="~/Newtemplate/template/assets/js/hoverable-collapse.js"></script>
+    <script src="~/Newtemplate/template/assets/js/misc.js"></script>
+    <script src="~/Newtemplate/template/assets/js/settings.js"></script>
+    <script src="~/Newtemplate/template/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
+    <!-- End custom js for this page -->
 
-
-    <script src="~/New/vendor/jquery/jquery.min.js"></script>
-    <script src="~/New/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/New/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-     @Scripts.Render("~/Bundles/AppScript3")
+    @Scripts.Render("~/Bundles/AppScript3")
     @Scripts.Render("~/Bundles/AppScript4")
     <link href="~/Scripts/IgGrid/infragistics.css" rel="stylesheet" />
     <link href="~/Scripts/IgGrid/theme.css" rel="stylesheet" />
@@ -595,15 +480,13 @@
     <link href="~/Scripts/jsgrid/jsgrid.min.css" rel="stylesheet" />
     @RenderSection("Script", required: false)
 
-    <!-- Core plugin JavaScript-->
-    <!-- Custom scripts for all pages-->
-    <script src="~/New/js/sb-admin-2.min.js"></script>
-    <!-- Page level plugins -->
+
 
     <script src="~/Style_design/LodBut/Loder.js"></script>
     <script src="~/js/select2.min.js"></script>
-
-
-
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <input hidden="hidden" id="proBanner" />
+    <input hidden="hidden" id="bannerClose" />
+ 
 </body>
 </html>

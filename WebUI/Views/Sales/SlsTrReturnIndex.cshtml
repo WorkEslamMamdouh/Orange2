@@ -16,7 +16,7 @@
         display: none !important;
     }
 
-    
+
 
     #btnAddDetails {
         font-size: 40px;
@@ -57,15 +57,15 @@
         position: absolute;
     }
 </style>
- <script>
+<script>
     $(document).ready(function () {
-         
+
         $("#ddlSeller").select2();
         $("#ddlCustomer").select2();
         $("#ddlCustomer2").select2();
 
         // Read selected option
-        $('#but_read').click(function () { 
+        $('#but_read').click(function () {
             var username = $('#ddlSeller option:selected').text();
             var userid = $('#ddlSeller').val();
 
@@ -290,7 +290,7 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
                 <input type="text" class="form-control" disabled name="" id="txtCustomerName">
             </div>
-             
+
 
         </div>
 
@@ -425,6 +425,8 @@
             <br />
             <br />
         </div>
-    </div> 
-</div> 
-<script src="~/ClientApp/Sales/SlsTrSalesReturn.js"></script>
+    </div>
+</div>
+
+@section Script{
+<script src="~/ClientApp/Sales/SlsTrSalesReturn.js"></script>}
