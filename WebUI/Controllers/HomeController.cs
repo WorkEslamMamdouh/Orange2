@@ -381,6 +381,13 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/Tools/LnkvarBranch/LnkvarBranchIndex.cshtml");
         }
 
+
+        public ActionResult DashboardIndex()
+        {
+            return View("~/Views/Dashboard/DashboardIndex.cshtml");
+        
+        }
+
         public ActionResult LnkTransVoucherIndex()
         {
             return View("~/Views/Tools/LnkTransVoucher/LnkTransVoucherIndex.cshtml");

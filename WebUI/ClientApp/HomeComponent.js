@@ -462,6 +462,7 @@ var HomeComponent;
         $("#btnStkDefUnit").click(function () { OpenPage(Modules.StkDefUnit); });
         $("#btnStkDefItemType").click(function () { OpenPage(Modules.StkDefItemType); });
         $("#btnStkDefStore").click(function () { OpenPage(Modules.StkDefStore); });
+        $("#btnDashboard").click(function () { OpenPage(Modules.Dashboard); });
         $("#btnAccDefVendor").click(function () { OpenPage(Modules.AccDefVendor); });
         $("#btnAccDefCustomer").click(function () { OpenPage(Modules.AccDefCustomer); });
         $("#btnAccDefSalesmen").click(function () { OpenPage(Modules.AccDefSalesmen); });

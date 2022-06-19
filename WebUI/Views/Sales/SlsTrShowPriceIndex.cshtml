@@ -108,6 +108,7 @@
         padding-left: 0px !important;
         padding-right: 0px !important;
     }
+
     .fontitm3SlsTrShowPrice {
         position: absolute;
         float: right;
@@ -124,9 +125,11 @@
     input[type=checkbox], input[type=radio] {
         margin: 4% 0 0 !important;
     }
+
     #div_Data .col-xs-1 {
         padding: 0px !important;
     }
+
     #div_Data .col-xs-2 {
         padding: 0px !important;
     }
@@ -241,9 +244,9 @@
             </div>
             @*<div class="col-md-1 col-sm-5 col-xs-10">
 
-        </div>*@
+                </div>*@
             <div class="btn-group">
-                 <button type="button" class="btn btn-warning dropdown-toggle" style="background-color: #f89814;" data-toggle="dropdown">
+                <button type="button" class="btn btn-warning dropdown-toggle" style="background-color: #f89814;" data-toggle="dropdown">
                     @SystemResource.App_Print  <span class="glyphicon glyphicon-hand-down"></span>
                 </button>
                 <div class="dropdown-menu" role="menu" style="border-radius:15px">
@@ -458,5 +461,11 @@
     </div>
 
 </div>
+
+
+
+@section Script{
+    <script src="~/ClientApp/Sales/SlsTrShowPrice.js"></script>
+}
+
  
-<script src="~/ClientApp/Sales/SlsTrShowPrice.js"></script>

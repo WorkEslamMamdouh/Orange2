@@ -58,7 +58,8 @@ var Modules = {
     ItemPurchase: "ItemPurchase",
     IssueType: "IssueType",
     IssueToCC: "IssueToCC",
-
+     
+    Dashboard: "Dashboard",
 
     JournalVoucher: "JournalVoucher",
     ReceiptVoucher: "ReceiptVoucher",

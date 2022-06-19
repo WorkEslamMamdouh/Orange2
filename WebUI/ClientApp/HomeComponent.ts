@@ -539,6 +539,7 @@ namespace HomeComponent {
         $("#btnStkDefUnit").click(() => { OpenPage(Modules.StkDefUnit); })
         $("#btnStkDefItemType").click(() => { OpenPage(Modules.StkDefItemType); })
         $("#btnStkDefStore").click(() => { OpenPage(Modules.StkDefStore); })
+        $("#btnDashboard").click(() => { OpenPage(Modules.Dashboard); })
 
         $("#btnAccDefVendor").click(() => { OpenPage(Modules.AccDefVendor); })
         $("#btnAccDefCustomer").click(() => { OpenPage(Modules.AccDefCustomer); })

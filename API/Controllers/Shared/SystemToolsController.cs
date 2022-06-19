@@ -49,7 +49,7 @@ namespace Inv.API.Controllers
 
     public class SystemToolsController : BaseController
     {
-        
+
         [HttpGet]
         public string GetDesciptionByCode(string tableName, string codeField, string codeValue, string descs, string language)
         {
@@ -555,7 +555,7 @@ namespace Inv.API.Controllers
                 comp.IsActive = Convert.ToBoolean(company.IsActive);
                 companiesList.Add(comp);
             };
-            return Ok(companiesList); 
+            return Ok(companiesList);
         }
 
 
@@ -569,7 +569,7 @@ namespace Inv.API.Controllers
                 return Ok(new BaseResponse(query));
             }
             return BadRequest(ModelState);
-            
+
 
         }
 
@@ -614,7 +614,7 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetNotifications(int comCode, int BraCode,int yearid ,  string SystemCode, string SubSystemCode)
+        public IHttpActionResult GetNotifications(int comCode, int BraCode, int yearid, string SystemCode, string SubSystemCode)
         {
             if (ModelState.IsValid)
             {
@@ -629,7 +629,7 @@ namespace Inv.API.Controllers
                 return Ok(res);
             }
             return BadRequest(ModelState);
- 
+
         }
 
         [HttpGet]
@@ -677,10 +677,10 @@ namespace Inv.API.Controllers
         public IHttpActionResult GetUserPrivilage(int year, int compCode, int branchCode, string UserCode, string SystemCode, string Modulecode)
         {
 
-            var query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," +compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode   + "','" + Modulecode + "')";
+            var query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + Modulecode + "')";
 
             var result = db.Database.SqlQuery<UserPrivilege>(query).FirstOrDefault();
-            
+
             //result = result.ToJsonString();
             return Ok(result.ToJsonString());
         }
@@ -1023,7 +1023,7 @@ namespace Inv.API.Controllers
             return obj.ToString();
         }
 
-        public static string GenerateQRCode(string compNameA,string BraVatno,string TrDate,string NetAfterVat,string VatAmount)
+        public static string GenerateQRCode(string compNameA, string BraVatno, string TrDate, string NetAfterVat, string VatAmount)
         {
 
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
@@ -1153,25 +1153,25 @@ namespace Inv.API.Controllers
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 //KQ_G_CustomerInfo student = new KQ_G_CustomerInfo();
-            //    student.Country = table.Rows[i]["Country"].ToString();
-            //    student.CustomerNameA = table.Rows[i]["CustomerNameA"].ToString();
-            //    student.Address = table.Rows[i]["Address"].ToString();
-            //    student.DetailedInfo = table.Rows[i]["DetailedInfo"].ToString();
-            //    student.CityID = Convert.ToInt32(table.Rows[i]["CityID"]);
-            //    student.DistrictId = Convert.ToInt32(table.Rows[i]["DistrictId"]);
-            //    student.Dist_DescE = table.Rows[i]["Dist_DescE"].ToString();
-            //    student.Dist_DescA = table.Rows[i]["Dist_DescA"].ToString();
-            //    student.CustomerNameE = table.Rows[i]["CustomerNameE"].ToString();
-            //    student.City_descA = table.Rows[i]["City_descA"].ToString();
-            //    student.City_DescE = table.Rows[i]["City_DescE"].ToString();
-            //    //student.CompCode= Convert.ToInt32(table.Rows[i]["CompCode"]);
-            //    //student.BranchCode= Convert.ToInt32(table.Rows[i]["BranchCode"]);
-            //    student.ContactInfo = table.Rows[i]["ContactInfo"].ToString();
-            //    student.CustomerId = Convert.ToInt32(table.Rows[i]["CustomerId"]);
-            //    student.Tel = table.Rows[i]["Tel"].ToString();
-            //    student.WebSite = table.Rows[i]["WebSite"].ToString();
-            //    //student.Otherinfo= table.Rows[i]["Otherinfo"].ToString();
-            //    studentList.Add(student);
+                //    student.Country = table.Rows[i]["Country"].ToString();
+                //    student.CustomerNameA = table.Rows[i]["CustomerNameA"].ToString();
+                //    student.Address = table.Rows[i]["Address"].ToString();
+                //    student.DetailedInfo = table.Rows[i]["DetailedInfo"].ToString();
+                //    student.CityID = Convert.ToInt32(table.Rows[i]["CityID"]);
+                //    student.DistrictId = Convert.ToInt32(table.Rows[i]["DistrictId"]);
+                //    student.Dist_DescE = table.Rows[i]["Dist_DescE"].ToString();
+                //    student.Dist_DescA = table.Rows[i]["Dist_DescA"].ToString();
+                //    student.CustomerNameE = table.Rows[i]["CustomerNameE"].ToString();
+                //    student.City_descA = table.Rows[i]["City_descA"].ToString();
+                //    student.City_DescE = table.Rows[i]["City_DescE"].ToString();
+                //    //student.CompCode= Convert.ToInt32(table.Rows[i]["CompCode"]);
+                //    //student.BranchCode= Convert.ToInt32(table.Rows[i]["BranchCode"]);
+                //    student.ContactInfo = table.Rows[i]["ContactInfo"].ToString();
+                //    student.CustomerId = Convert.ToInt32(table.Rows[i]["CustomerId"]);
+                //    student.Tel = table.Rows[i]["Tel"].ToString();
+                //    student.WebSite = table.Rows[i]["WebSite"].ToString();
+                //    //student.Otherinfo= table.Rows[i]["Otherinfo"].ToString();
+                //    studentList.Add(student);
             }
 
             //return Ok(new BaseResponse(studentList));
@@ -1564,8 +1564,6 @@ namespace Inv.API.Controllers
             return BadRequest();
         }
 
-      
-
         [HttpGet]
         public string ConvertToGDate(string date)
         {
@@ -1637,6 +1635,41 @@ namespace Inv.API.Controllers
             } while (1 == 1);
             return formattedDate;
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetDashboard(int _Type, int comp, int bracode)
+        {
+            string query = "";
+
+            object res = new object();
+
+
+            if (_Type == 0)
+            {
+                query = "exec Iproc_DashOperation " + comp + " ";
+                res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
+
+            }
+            if (_Type == 1)
+            {
+                query = "exec Iproc_DashSales " + comp + " ";
+                res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
+
+            }
+            else
+            {
+                query = "exec Iproc_DashPurchase " + comp + " ";
+                res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
+            }
+
+
+
+            return Ok(new BaseResponse(res));
+
+        }
+
+
+
 
     }
 }

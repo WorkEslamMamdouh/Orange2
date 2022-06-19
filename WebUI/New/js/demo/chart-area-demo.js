@@ -1,4 +1,4 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
+﻿// Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -32,8 +32,8 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
+      labels: ["يناير", "فبراير", "مارس", "ابريل", "مايو ", "يونية ", "يويو ", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر", "الرصيد"],
+    ذdatasets: [{
       label: "Earnings",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
