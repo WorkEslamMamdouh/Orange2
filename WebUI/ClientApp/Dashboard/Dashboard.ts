@@ -69,6 +69,19 @@ namespace Dashboard {
     //flags :  
     var NewAdd = false;
 
+    var totVal1 = 0;
+    var totVal2 = 0;
+    var totVal3 = 0;
+    var totVal4 = 0;
+    var totVal5 = 0;
+    var totVal6 = 0;
+    var totVal7 = 0;
+    var totVal8 = 0;
+    var totVal9 = 0;
+    var totVal10 = 0;
+    var totVal11 = 0;
+    var totVal12 = 0;
+
     export function InitalizeComponent() {
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -91,6 +104,19 @@ namespace Dashboard {
 
         let _Type = 0;
 
+        totVal1 = 0;
+        totVal2 = 0;
+        totVal3 = 0;
+        totVal4 = 0;
+        totVal5 = 0;
+        totVal6 = 0;
+        totVal7 = 0;
+        totVal8 = 0;
+        totVal9 = 0;
+        totVal10 = 0;
+        totVal11 = 0;
+        totVal12 = 0;
+
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("SystemTools", "GetDashboard"),
@@ -107,6 +133,10 @@ namespace Dashboard {
                     DisplayGrid(i, IprocDash[i], _Type);
                     CountGrid++;
                 }
+
+                DisplayTotal(CountGrid + 1);
+
+
             }
         });
 
@@ -227,6 +257,39 @@ namespace Dashboard {
         $('#Total' + i).html(_Data.Total.toString());
 
 
+        totVal1 += _Data.Val1 ;
+        totVal2 += _Data.Val2 ;
+        totVal3 += _Data.Val3 ;
+        totVal4 += _Data.Val4 ;
+        totVal5 += _Data.Val5 ;
+        totVal6 += _Data.Val6 ;
+        totVal7 += _Data.Val7 ;
+        totVal8 += _Data.Val8 ;
+        totVal9 += _Data.Val9 ;
+        totVal10 += _Data.Val10 ;
+        totVal11 += _Data.Val11 ;
+        totVal12 += _Data.Val12 ;
+
+
     }
 
+    function DisplayTotal(cnt: number) { 
+        InitializeGrid(cnt);
+
+        $('#titel' + cnt).html('الاجمالي');
+        $('#Val1' + cnt).html(totVal1.toString());
+        $('#Val2' + cnt).html(totVal1.toString());
+        $('#Val3' + cnt).html(totVal1.toString());
+        $('#Val4' + cnt).html(totVal1.toString());
+        $('#Val5' + cnt).html(totVal1.toString());
+        $('#Val6' + cnt).html(totVal1.toString());
+        $('#Val7' + cnt).html(totVal1.toString());
+        $('#Val8' + cnt).html(totVal1.toString());
+        $('#Val9' + cnt).html(totVal1.toString());
+        $('#Val10' + cnt).html(totVal1.toString());
+        $('#Val11' + cnt).html(totVal1.toString());
+        $('#Val12' + cnt).html(totVal1.toString());
+        $('#Total' + cnt).html(totVal1.toString());
+
+    }
 }

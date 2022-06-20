@@ -1656,7 +1656,7 @@ namespace Inv.API.Controllers
                 res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
 
             }
-            else
+            if (_Type == 2)
             {
                 query = "exec Iproc_DashPurchase " + comp + " ";
                 res = db.Database.SqlQuery<Iproc_DashPurchase_Result>(query).ToList();
