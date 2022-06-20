@@ -10521,3 +10521,40 @@ class I_D_IssueType extends SecurityClass {
     public StatusFlag: string;
 }
 
+ 
+class Iproc_Dash extends SecurityClass {
+    constructor() {
+        super();
+        this.rowno = 0;
+        this.Val1 = 0;
+        this.Val2 = 0;
+        this.Val3 = 0;
+        this.Val4 = 0;
+        this.Val5 = 0;
+        this.Val6 = 0;
+        this.Val7 = 0;
+        this.Val8 = 0;
+        this.Val9 = 0;
+        this.Val10 = 0;
+        this.Val11 = 0;
+        this.Val12 = 0;
+        this.Total = 0;
+      
+    }
+    public rowno: number;
+    public Val1: number;
+    public Val2: number;
+    public Val3: number;
+    public Val4: number;
+    public Val5: number;
+    public Val6: number;
+    public Val7: number;
+    public Val8: number;
+    public Val9: number;
+    public Val10: number;
+    public Val11: number;
+    public Val12: number;
+    public Total: number;
+   
+}
+

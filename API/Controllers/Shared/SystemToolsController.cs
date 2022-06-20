@@ -1647,7 +1647,7 @@ namespace Inv.API.Controllers
             if (_Type == 0)
             {
                 query = "exec Iproc_DashOperation " + comp + " ";
-                res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
+                res = db.Database.SqlQuery<Iproc_DashOperation_Result>(query).ToList();
 
             }
             if (_Type == 1)
@@ -1659,7 +1659,7 @@ namespace Inv.API.Controllers
             else
             {
                 query = "exec Iproc_DashPurchase " + comp + " ";
-                res = db.Database.SqlQuery<IProc_DashSales_Result>(query).ToList();
+                res = db.Database.SqlQuery<Iproc_DashPurchase_Result>(query).ToList();
             }
 
 

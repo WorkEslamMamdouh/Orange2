@@ -20,13 +20,13 @@ namespace Dashboard {
     //var ServicesDetails: Array<AQVAT_GetService> = new Array<AQVAT_GetService>();
     //var GlobInvoiceModel: AQ_ServSlsInvoiceMasterDetails = new AQ_ServSlsInvoiceMasterDetails();
     //var DetailsAssetList: Array<F_Asset> = new Array<F_Asset>();
-    //var All_Asset: Array<F_Asset> = new Array<F_Asset>();
     //var DisposalDetailModel: Array<F_Tr_DisposalDetail> = new Array<F_Tr_DisposalDetail>();
     ////Models
     //var DisposalDetailSingleModel: F_Tr_DisposalDetail = new F_Tr_DisposalDetail;
     //var DisposalHeaderModel: F_Tr_DisposalHeader = new F_Tr_DisposalHeader;
     //var CustDetails: IQ_GetCustomerBalance = new IQ_GetCustomerBalance;
     //var _DisposalMasterDetail: DisposalMasterDetail = new DisposalMasterDetail();
+    var IprocDash: Array<Iproc_Dash> = new Array<Iproc_Dash>();
 
 
     //ddl  
@@ -76,12 +76,7 @@ namespace Dashboard {
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         InitalizeControls();
         InitializeEvents();
-        $("#dataTable_1").html('');
-        for (var i = 0; i < 10; i++) {
-
-            InitializeGrid(i);
-            DisplayGrid(i);
-        }
+        GetDashboard();
 
     }
     function InitalizeControls() {
@@ -94,6 +89,26 @@ namespace Dashboard {
 
     function GetDashboard() {
 
+        let _Type = 0;
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("SystemTools", "GetDashboard"),
+            data: { _Type: _Type, comp: compcode, bracode: BranchCode },
+            success: (d) => {
+                let result = d as BaseResponse;
+                IprocDash = result.Response as Array<Iproc_Dash>;
+                CountGrid = 0;
+
+                $("#dataTable_1").html('');
+
+                for (var i = 0; i < IprocDash.length; i++) {
+                    InitializeGrid(i);
+                    DisplayGrid(i, IprocDash[i], _Type);
+                    CountGrid++;
+                }
+            }
+        });
 
 
 
@@ -115,67 +130,67 @@ namespace Dashboard {
             '</td>' +
 
 
-            '<td  > ' +
+            '<td  id="Val1' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
-            '<td   > ' +
+            '<td  id="Val2' + cnt + '"  > ' +
             '10000' +
             '</td>' +
 
-            '<td   > ' +
-            '10000' +
-            '</td>' +
-
-
-            '<td  > ' +
+            '<td  id="Val3' + cnt + '"  > ' +
             '10000' +
             '</td>' +
 
 
-
-            '<td  > ' +
+            '<td id="Val4' + cnt + '"  > ' +
             '10000' +
             '</td>' +
 
 
 
-            '<td  > ' +
+            '<td id="Val5' + cnt + '"  > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+
+            '<td id="Val6' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val7' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val8' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val9' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val10' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val11' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
 
-            '<td  > ' +
+            '<td id="Val12' + cnt + '" > ' +
+            '10000' +
+            '</td>' +
+
+
+            '<td id="Total' + cnt + '" > ' +
             '10000' +
             '</td>' +
 
@@ -185,12 +200,31 @@ namespace Dashboard {
         $("#dataTable_1").append(html);
 
 
-    } 
-    function DisplayGrid(i: number) {
-
-
-        $('#titel' + i).html('Eslam' + i);
+    }
+    function DisplayGrid(i: number, _Data: Iproc_Dash, _Type: number) {
+        debugger
         $('#titel' + i).addClass('th_Style');
+        let titel = '';
+
+        if (_Type == 0) { // عمليات
+            titel = _Data.rowno == 1 ? 'عدد التريلات' : _Data.rowno == 2 ? 'مغلق' : _Data.rowno == 3 ? 'مفتوح' : _Data.rowno == 4 ? 'المبيعات' : _Data.rowno == 5 ? 'المشتريات' : _Data.rowno == 6 ? 'المصاريف' : _Data.rowno == 7 ? 'دعم المورد' : _Data.rowno == 8 ? '  التبريد' : _Data.rowno == 9 ? '  التسويق' : _Data.rowno == 10 ? '  الكمسيون' : '';             
+        }
+
+
+        $('#titel' + i).html(titel);
+        $('#Val1' + i).html(_Data.Val1.toString());
+        $('#Val2' + i).html(_Data.Val2.toString());
+        $('#Val3' + i).html(_Data.Val3.toString());
+        $('#Val4' + i).html(_Data.Val4.toString());
+        $('#Val5' + i).html(_Data.Val5.toString());
+        $('#Val6' + i).html(_Data.Val6.toString());
+        $('#Val7' + i).html(_Data.Val7.toString());
+        $('#Val8' + i).html(_Data.Val8.toString());
+        $('#Val9' + i).html(_Data.Val9.toString());
+        $('#Val10' + i).html(_Data.Val10.toString());
+        $('#Val11' + i).html(_Data.Val11.toString());
+        $('#Val12' + i).html(_Data.Val12.toString());
+        $('#Total' + i).html(_Data.Total.toString());
 
 
     }

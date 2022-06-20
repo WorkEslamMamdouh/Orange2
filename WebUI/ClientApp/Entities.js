@@ -6216,4 +6216,26 @@ var I_D_IssueType = /** @class */ (function (_super) {
     }
     return I_D_IssueType;
 }(SecurityClass));
+var Iproc_Dash = /** @class */ (function (_super) {
+    __extends(Iproc_Dash, _super);
+    function Iproc_Dash() {
+        var _this = _super.call(this) || this;
+        _this.rowno = 0;
+        _this.Val1 = 0;
+        _this.Val2 = 0;
+        _this.Val3 = 0;
+        _this.Val4 = 0;
+        _this.Val5 = 0;
+        _this.Val6 = 0;
+        _this.Val7 = 0;
+        _this.Val8 = 0;
+        _this.Val9 = 0;
+        _this.Val10 = 0;
+        _this.Val11 = 0;
+        _this.Val12 = 0;
+        _this.Total = 0;
+        return _this;
+    }
+    return Iproc_Dash;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map
