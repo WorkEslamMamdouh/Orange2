@@ -20,10 +20,13 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Layout styles -->
-    <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">
+    @* <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">*@
+    <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/favicon.png" />
+    <link rel="shortcut icon" href="/images/logokids.png" />
 
 
 
@@ -34,13 +37,15 @@
     <div class="container-scroller">
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
-        <!-- Header top area start المنيو اللي في الجنب  -->
-        <!-- Header top area start المنيو اللي فوق  -->
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                <a class="sidebar-brand brand-logo" href="index.html"><img src="~/Newtemplate/template/assets/images/logo.svg" alt="logo" /></a>
-                <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>
+                @*<a class="sidebar-brand brand-logo" href="index.html"><img src="~/Newtemplate/template/assets/images/logo.svg" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>*@
+
+        <a class="sidebar-brand brand-logo" href="#">Orange</a>
+      @*  <a class="sidebar-brand brand-logo-mini" href="#"><img src="/images/logokids.png" alt="logo" /></a>*@
+        <a class="sidebar-brand brand-logo-mini" href="#">O</a>
             </div>
             <ul class="nav">
                 <li class="nav-item profile">
@@ -51,8 +56,7 @@
                                 <span class="count bg-success"></span>
                             </div>
                             <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                                <span>Gold Member</span>
+                                <h5 class="mb-0 font-weight-normal" id="Admin_name"></h5>
                             </div>
                         </div>
                         <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
@@ -60,162 +64,118 @@
                             <a href="#" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-settings text-primary"></i>
+                                        <i class="fas fa-globe-africa text-light-blue"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">Change Language</p>
                                 </div>
                             </a>
-                            <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                        <i class="fas fa-lock-alt text-light-blue"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small">تغيير كلمه السر</p>
                                 </div>
                             </a>
-                            <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item preview-item">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar-today text-success"></i>
+                                        <i class="fas fa-sign-out text-light-blue"></i>
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
+                                    <p class="preview-subject ellipsis mb-1 text-small" id="btn_loguotuser"></p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </li>
 
+                <li class="nav-item menu-items " id="btnSales">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#MSales" aria-expanded="false" aria-controls="MSales">
+                        <span class="menu-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Men_Sales</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MSales">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item"> <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a></li>
+                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item"> <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a></li>
+                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item"> <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
+                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item"> <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a></li>
 
-            <li id="btnCashBoxReports" class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#libtnCashBoxReports" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>@SystemResource.Box_Report</span>
-                </a>
-                <div id="libtnCashBoxReports" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" id="btnCollectedaccstat" key="Collectedaccstat"><i id="btnCollectedaccstat" href="#">@SystemResource.Combined_account </i></a>
-                            <a class="collapse-item" id="btnSupplieraccstat" key="Supplieraccstat"><i id="btnSupplieraccstat" href="#">@SystemResource.Suppliertstatment </i></a>
-                            <a class="collapse-item" id="btnClientaccstat" key="Clientaccstat"><i id="btnClientaccstat" href="#">@SystemResource.Clientstatment </i></a>
-                            <a class="collapse-item" id="btnCashBoxAccount" key="CashBoxAccount"><i id="btnCashBoxAccount" href="#">@SystemResource.AccountCashBox </i></a>
-                            <a class="collapse-item" id="btnAgingCust" key="AgingCust"><i id="btnAgingCust" href="#">@SystemResource.AgingCust </i></a>
-                            <a class="collapse-item" id="btnAgingVend" key="AgingVend"><i id="btnAgingVend" href="#">@SystemResource.AgingVend </i></a>
-                        </div>
+                        </ul>
                     </div>
-                </div>
-            </li>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li>
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <p class="text-center mb-2"><strong>Orange</strong> version:2</p>
-            </div>
-        </ul>
-        <div id="content-wrapper" class="d-flex flex-column">
+                <li class="nav-item menu-items " id="btnSales">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MPurchase">
+                        <span class="menu-icon">
+                            <i class="fas fa-cash-register"></i>
+                        </span>
+                        <span class="menu-title">مشتريات</span> 
 
-            <!-- Header top area start المنيو اللي فوق  -->
-            <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                        <i class="menu-arrow"></i>
+
+                    </a>
+                    <div class="collapse" id="MPurchase">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item"> <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a></li>
+                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item"> <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a></li>
+                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item"> <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
+                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item"> <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_navbar.html -->
+            <nav class="navbar p-0 fixed-top d-flex flex-row">
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                    @* <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>*@
+           
+                   @* <a class="navbar-brand brand-logo-mini"  href="#"><img src="/images/logokids.png" alt="logo" /></a>*@
+                    <a class="navbar-brand brand-logo-mini"  href="#">O</a>
+                </div>
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <i class="fas fa-bars fa-lg"></i>
                     </button>
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input id="Screen_name" type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
-                            <input id="camp_name" type="text" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
-
-                        </div>
-                    </form>
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="~/New/img/undraw_profile.svg">
-                            </a>
+                    <ul class="navbar-nav w-100">
+                        <li class="nav-item w-50">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex">
+                                <label id="Screen_name"></label>
+                            </form>
                         </li>
+                        <li class="nav-item w-50">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex">
+                                <label id="camp_name"></label>
+ 
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item nav-settings d-none d-lg-block">
                             <a class="nav-link" href="#">
-                                <i class="mdi mdi-view-grid"></i>
+                                <i class="fas fa-chart-bar"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown border-left">
                             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-email"></i>
+                                <i class="fas fa-envelope"></i>
                                 <span class="count bg-success"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                                 <h6 class="p-3 mb-0">Messages</h6>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <img src="~/Newtemplate/template/assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
@@ -225,7 +185,6 @@
                                         <p class="text-muted mb-0"> 1 Minutes ago </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <img src="~/Newtemplate/template/assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
@@ -235,7 +194,6 @@
                                         <p class="text-muted mb-0"> 15 Minutes ago </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <img src="~/Newtemplate/template/assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
@@ -245,22 +203,20 @@
                                         <p class="text-muted mb-0"> 18 Minutes ago </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center">4 new messages</p>
                             </div>
                         </li>
                         <li class="nav-item dropdown border-left">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                                <i class="mdi mdi-bell"></i>
+                                <i class="far fa-bell"></i>
                                 <span class="count bg-danger"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                                 <h6 class="p-3 mb-0">Notifications</h6>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-calendar text-success"></i>
+                                        <div class="preview-icon bg-dark-blue rounded-circle">
+                                            <i class="mdi mdi-calendar text-light-blue"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -268,11 +224,10 @@
                                         <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-danger"></i>
+                                        <div class="preview-icon bg-dark-blue rounded-circle">
+                                            <i class="mdi mdi-settings text-light-blue"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -280,11 +235,10 @@
                                         <p class="text-muted ellipsis mb-0"> Update dashboard </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-link-variant text-warning"></i>
+                                        <div class="preview-icon bg-dark-blue rounded-circle">
+                                            <i class="mdi mdi-link-variant text-light-blue"></i>
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
@@ -292,46 +246,50 @@
                                         <p class="text-muted ellipsis mb-0"> New admin wow! </p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center">See all notifications</p>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                                <div class="navbar-profile">
-                                    <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name" id="Admin_name">Henry Klein</p>
-                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                                </div>
+                        <li class="nav-item nav-settings d-none d-lg-block">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-info"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                                <h6 class="p-3 mb-0">Profile</h6>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-settings text-success"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">Settings</p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <div class="preview-thumbnail">
-                                        <div class="preview-icon bg-dark rounded-circle">
-                                            <i class="mdi mdi-logout text-danger"></i>
-                                        </div>
-                                    </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <p class="p-3 mb-0 text-center">Advanced settings</p>
-                            </div>
                         </li>
+                        @*<li class="nav-item dropdown">
+            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                <div class="navbar-profile">
+                    <i class="fas fa-caret-down fa-xs"></i>
+                    <p class="mb-0 d-none d-sm-block pe-2 navbar-profile-name" id="Admin_name"></p>
+                    <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                <h6 class="p-3 mb-0">Profile</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="mdi mdi-settings text-success"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Settings</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="fas fa-sign-out-alt text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <p class="p-3 mb-0 text-center">Advanced settings</p>
+            </div>
+        </li>*@
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing"></span>
@@ -344,14 +302,7 @@
                     @RenderBody()
 
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Orange V:2</span>
-                     </div>
-                </footer>
-                <!-- partial -->
+
             </div>
             <!-- main-panel ends -->
         </div>
@@ -450,7 +401,8 @@
                     <div class="col-xs-12">
                         <h2 class="pageheader__title col-xs-4 ">فاتورة الطلب</h2>
                         <button class="btn btn-success btn-sm col-xs-2" onclick="window.print();" style="float:left">
-                            طباعة                <i class="fa fa-print"></i>
+                            طباعة          
+                            <i class="fa fa-print"></i>
                         </button>
                     </div>
 
@@ -494,11 +446,7 @@
     <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
 
-    <script src="~/New/vendor/jquery/jquery.min.js"></script>
-    <script src="~/New/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/New/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-     @Scripts.Render("~/Bundles/AppScript3")
+    @Scripts.Render("~/Bundles/AppScript3")
     @Scripts.Render("~/Bundles/AppScript4")
     <link href="~/Scripts/IgGrid/infragistics.css" rel="stylesheet" />
     <link href="~/Scripts/IgGrid/theme.css" rel="stylesheet" />
@@ -513,8 +461,8 @@
     <script src="~/Style_design/LodBut/Loder.js"></script>
     <script src="~/js/select2.min.js"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <input hidden="hidden" id="proBanner" />
-    <input hidden="hidden" id="bannerClose" />
+    @*<input hidden="hidden" id="proBanner"  />
+    <input hidden="hidden" id="bannerClose" />*@
  
 </body>
 </html>
