@@ -81,6 +81,7 @@ namespace Dashboard {
     var totVal10 = 0;
     var totVal11 = 0;
     var totVal12 = 0;
+    var totalVal = 0;
 
     export function InitalizeComponent() {
 
@@ -116,6 +117,7 @@ namespace Dashboard {
         totVal10 = 0;
         totVal11 = 0;
         totVal12 = 0;
+        totalVal = 0;
 
         Ajax.Callsync({
             type: "Get",
@@ -126,7 +128,7 @@ namespace Dashboard {
                 IprocDash = result.Response as Array<Iproc_Dash>;
                 CountGrid = 0;
 
-                $("#dataTable_1").html('');
+                $("#dataTable_0").html('');
 
                 for (var i = 0; i < IprocDash.length; i++) {
                     InitializeGrid(i);
@@ -160,74 +162,74 @@ namespace Dashboard {
             '</td>' +
 
 
-            '<td  id="Val1' + cnt + '" > ' +
-            '10000' +
+            '<td  id="Val1_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
-            '<td  id="Val2' + cnt + '"  > ' +
-            '10000' +
+            '<td  id="Val2_' + cnt + '"  > ' +
+            '0' +
             '</td>' +
 
-            '<td  id="Val3' + cnt + '"  > ' +
-            '10000' +
-            '</td>' +
-
-
-            '<td id="Val4' + cnt + '"  > ' +
-            '10000' +
+            '<td  id="Val3_' + cnt + '"  > ' +
+            '0' +
             '</td>' +
 
 
-
-            '<td id="Val5' + cnt + '"  > ' +
-            '10000' +
+            '<td id="Val4_' + cnt + '"  > ' +
+            '0' +
             '</td>' +
 
 
 
-            '<td id="Val6' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val5_' + cnt + '"  > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val7' + cnt + '" > ' +
-            '10000' +
+
+            '<td id="Val6_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val8' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val7_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val9' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val8_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val10' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val9_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val11' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val10_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Val12' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val11_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
-            '<td id="Total' + cnt + '" > ' +
-            '10000' +
+            '<td id="Val12_' + cnt + '" > ' +
+            '0' +
+            '</td>' +
+
+
+            '<td id="Total_' + cnt + '" > ' +
+            '0' +
             '</td>' +
 
 
             '</tr>';
 
-        $("#dataTable_1").append(html);
+        $("#dataTable_0").append(html);
 
 
     }
@@ -242,19 +244,19 @@ namespace Dashboard {
 
 
         $('#titel' + i).html(titel);
-        $('#Val1' + i).html(_Data.Val1.toString());
-        $('#Val2' + i).html(_Data.Val2.toString());
-        $('#Val3' + i).html(_Data.Val3.toString());
-        $('#Val4' + i).html(_Data.Val4.toString());
-        $('#Val5' + i).html(_Data.Val5.toString());
-        $('#Val6' + i).html(_Data.Val6.toString());
-        $('#Val7' + i).html(_Data.Val7.toString());
-        $('#Val8' + i).html(_Data.Val8.toString());
-        $('#Val9' + i).html(_Data.Val9.toString());
-        $('#Val10' + i).html(_Data.Val10.toString());
-        $('#Val11' + i).html(_Data.Val11.toString());
-        $('#Val12' + i).html(_Data.Val12.toString());
-        $('#Total' + i).html(_Data.Total.toString());
+        $('#Val1_' + i).html(_Data.Val1.toString());
+        $('#Val2_' + i).html(_Data.Val2.toString());
+        $('#Val3_' + i).html(_Data.Val3.toString());
+        $('#Val4_' + i).html(_Data.Val4.toString());
+        $('#Val5_' + i).html(_Data.Val5.toString());
+        $('#Val6_' + i).html(_Data.Val6.toString());
+        $('#Val7_' + i).html(_Data.Val7.toString());
+        $('#Val8_' + i).html(_Data.Val8.toString());
+        $('#Val9_' + i).html(_Data.Val9.toString());
+        $('#Val10_' + i).html(_Data.Val10.toString());
+        $('#Val11_' + i).html(_Data.Val11.toString());
+        $('#Val12_' + i).html(_Data.Val12.toString());
+        $('#Total_' + i).html(_Data.Total.toString());
 
 
         totVal1 += _Data.Val1 ;
@@ -269,27 +271,29 @@ namespace Dashboard {
         totVal10 += _Data.Val10 ;
         totVal11 += _Data.Val11 ;
         totVal12 += _Data.Val12 ;
+        totalVal += _Data.Total ;
 
 
     }
 
     function DisplayTotal(cnt: number) { 
         InitializeGrid(cnt);
+        $('#titel' + cnt).addClass('th_Style');
 
         $('#titel' + cnt).html('الاجمالي');
-        $('#Val1' + cnt).html(totVal1.toString());
-        $('#Val2' + cnt).html(totVal1.toString());
-        $('#Val3' + cnt).html(totVal1.toString());
-        $('#Val4' + cnt).html(totVal1.toString());
-        $('#Val5' + cnt).html(totVal1.toString());
-        $('#Val6' + cnt).html(totVal1.toString());
-        $('#Val7' + cnt).html(totVal1.toString());
-        $('#Val8' + cnt).html(totVal1.toString());
-        $('#Val9' + cnt).html(totVal1.toString());
-        $('#Val10' + cnt).html(totVal1.toString());
-        $('#Val11' + cnt).html(totVal1.toString());
-        $('#Val12' + cnt).html(totVal1.toString());
-        $('#Total' + cnt).html(totVal1.toString());
+        $('#Val1_' + cnt).html(totVal1.RoundToSt(2));
+        $('#Val2_' + cnt).html(totVal2.RoundToSt(2));
+        $('#Val3_' + cnt).html(totVal3.RoundToSt(2));
+        $('#Val4_' + cnt).html(totVal4.RoundToSt(2));
+        $('#Val5_' + cnt).html(totVal5.RoundToSt(2));
+        $('#Val6_' + cnt).html(totVal6.RoundToSt(2));
+        $('#Val7_' + cnt).html(totVal7.RoundToSt(2));
+        $('#Val8_' + cnt).html(totVal8.RoundToSt(2));
+        $('#Val9_' + cnt).html(totVal9.RoundToSt(2));
+        $('#Val10_' + cnt).html(totVal10.RoundToSt(2));
+        $('#Val11_' + cnt).html(totVal11.RoundToSt(2));
+        $('#Val12_' + cnt).html(totVal12.RoundToSt(2));
+        $('#Total_' + cnt).html(totalVal.RoundToSt(2));
 
     }
 }
