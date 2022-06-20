@@ -8,66 +8,11 @@ namespace Dashboard {
     var BranchCode: number;
     var sys: SystemTools = new SystemTools();
 
-    // giedView
-    var Grid: JsGrid = new JsGrid();
-    var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-
-    // Arrays 
-    //var Selected_Data: Array<FQ_GetDisposalHeader> = new Array<FQ_GetDisposalHeader>();
-    //var SearchDetails: Array<FQ_GetDisposalHeader> = new Array<FQ_GetDisposalHeader>();
-    //var Disposallist: Array<FQ_GetDisposalHeader> = new Array<FQ_GetDisposalHeader>();
-    //var DisposalDetail: Array<FQ_GetDisposalDetail> = new Array<FQ_GetDisposalDetail>();
-    //var ServicesDetails: Array<AQVAT_GetService> = new Array<AQVAT_GetService>();
-    //var GlobInvoiceModel: AQ_ServSlsInvoiceMasterDetails = new AQ_ServSlsInvoiceMasterDetails();
-    //var DetailsAssetList: Array<F_Asset> = new Array<F_Asset>();
-    //var DisposalDetailModel: Array<F_Tr_DisposalDetail> = new Array<F_Tr_DisposalDetail>();
-    ////Models
-    //var DisposalDetailSingleModel: F_Tr_DisposalDetail = new F_Tr_DisposalDetail;
-    //var DisposalHeaderModel: F_Tr_DisposalHeader = new F_Tr_DisposalHeader;
-    //var CustDetails: IQ_GetCustomerBalance = new IQ_GetCustomerBalance;
-    //var _DisposalMasterDetail: DisposalMasterDetail = new DisposalMasterDetail();
+    // giedView 
     var IprocDash: Array<Iproc_Dash> = new Array<Iproc_Dash>();
-
-
-    //ddl  
-    //TextBoxes 
-    var ddlType: HTMLSelectElement;
-    var txt_Remarks: HTMLInputElement;
-    var txtStartDate: HTMLInputElement;
-    var txtEndDate: HTMLInputElement;
-    var txtCustomerCode: HTMLInputElement;
-    var txtCustomerName: HTMLInputElement;
-    var NameCustomer: HTMLInputElement;
-    var searchbutmemreport: HTMLInputElement;
-    //checkbox  
-    var chkCertified: HTMLInputElement;
-    //buttons   
-    var btnInvoiceSearch: HTMLButtonElement;
-    var btnAddDetails: HTMLButtonElement;
-    var btnCustomerSrchFltr: HTMLButtonElement;
-    var btnCustomerSrch: HTMLButtonElement;
-    var btnAdd: HTMLButtonElement;
-    var btnShow: HTMLButtonElement;
-    var btnUpdate: HTMLButtonElement;
-    var btnBack: HTMLButtonElement;// btnBack btnSave
-    var btnSave: HTMLButtonElement;
-    //print buttons     
-    var btnPrintTrview: HTMLButtonElement;
-    var btnPrintTrPDF: HTMLButtonElement;
-    var btnPrintTrEXEL: HTMLButtonElement;
-    var btnPrintTransaction: HTMLButtonElement;
-
-    //global    
-    var Finyear: number;
-    var GlobalinvoiceID: number = 0;
-    var DisposalId: number = 0;
-    var CustomerId: number = 0;
-    var HCustomerId: number = 0;
-    var CountGrid = 0;
-    var BookValue = 0;
-    var glopalAssetID = 0;
-    //flags :  
-    var NewAdd = false;
+     
+    //global     
+    var CountGrid = 0; 
 
     var totVal1 = 0;
     var totVal2 = 0;
@@ -86,11 +31,12 @@ namespace Dashboard {
     export function InitalizeComponent() {
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
-        BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
-        Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
+        BranchCode = Number(SysSession.CurrentEnvironment.BranchCode); 
         InitalizeControls();
         InitializeEvents();
-        GetDashboard();
+        GetDashboard(0);
+        GetDashboard(1);
+        GetDashboard(2);
 
     }
     function InitalizeControls() {
@@ -100,11 +46,8 @@ namespace Dashboard {
 
 
     }
-
-    function GetDashboard() {
-
-        let _Type = 0;
-
+    function GetDashboard(_Type: number) {
+         
         totVal1 = 0;
         totVal2 = 0;
         totVal3 = 0;
@@ -128,24 +71,22 @@ namespace Dashboard {
                 IprocDash = result.Response as Array<Iproc_Dash>;
                 CountGrid = 0;
 
-                $("#dataTable_0").html('');
+                $("#dataTable_" + _Type).html('');
 
                 for (var i = 0; i < IprocDash.length; i++) {
-                    InitializeGrid(i);
-                    DisplayGrid(i, IprocDash[i], _Type);
+                    InitializeGrid(Number(i + '' + _Type + ''), _Type);
+                    DisplayGrid(Number(i + '' + _Type + ''), IprocDash[i], _Type);
                     CountGrid++;
                 }
 
-                DisplayTotal(CountGrid + 1);
-
+                DisplayTotal(Number((CountGrid + 1) + '' + _Type + ''), _Type);
+                
 
             }
         });
-
-
-
+         
     }
-    function InitializeGrid(cnt: number) {
+    function InitializeGrid(cnt: number , _Type: number) {
 
         var html;
 
@@ -229,7 +170,7 @@ namespace Dashboard {
 
             '</tr>';
 
-        $("#dataTable_0").append(html);
+        $("#dataTable_" + _Type).append(html);
 
 
     }
@@ -242,6 +183,15 @@ namespace Dashboard {
             titel = _Data.rowno == 1 ? 'عدد التريلات' : _Data.rowno == 2 ? 'مغلق' : _Data.rowno == 3 ? 'مفتوح' : _Data.rowno == 4 ? 'المبيعات' : _Data.rowno == 5 ? 'المشتريات' : _Data.rowno == 6 ? 'المصاريف' : _Data.rowno == 7 ? 'دعم المورد' : _Data.rowno == 8 ? '  التبريد' : _Data.rowno == 9 ? '  التسويق' : _Data.rowno == 10 ? '  الكمسيون' : '';             
         }
 
+
+        if (_Type == 1) { // العملاء
+            titel = _Data.rowno == 1 ? '  مبيعات نقدية' : _Data.rowno == 2 ? 'مبيعات اجلة' : _Data.rowno == 3 ? 'تحصيل' : _Data.rowno == 4 ? 'تسويات' : _Data.rowno == 5 ? 'الرصيد' : '';
+        }
+
+
+        if (_Type == 2) { // الموردين
+            titel = _Data.rowno == 1 ? 'المشتريات نقدي  ' : _Data.rowno == 2 ? 'خدمات نقدي' : _Data.rowno == 3 ? 'مشتريات اجل' : _Data.rowno == 4 ? 'خدمات اجل' : _Data.rowno == 5 ? 'عمليات' : _Data.rowno == 6 ? 'السداد ' : _Data.rowno == 7 ? 'تسويات  ' : _Data.rowno == 8 ? '  الرصيد' : '';
+        }
 
         $('#titel' + i).html(titel);
         $('#Val1_' + i).html(_Data.Val1.toString());
@@ -274,10 +224,9 @@ namespace Dashboard {
         totalVal += _Data.Total ;
 
 
-    }
-
-    function DisplayTotal(cnt: number) { 
-        InitializeGrid(cnt);
+    } 
+    function DisplayTotal(cnt: number, _Type: number) { 
+        InitializeGrid(cnt, _Type);
         $('#titel' + cnt).addClass('th_Style');
 
         $('#titel' + cnt).html('الاجمالي');
