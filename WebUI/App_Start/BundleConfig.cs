@@ -116,8 +116,7 @@ namespace Inv.WebUI.App_Start
 
             bundles.Add(new ScriptBundle("~/Bundles/AppScript4")
              .Include("~/ClientApp/DataTable.js",
-               "~/Scripts/DataTables/dataTables.bootstrap.js",
-               "~/js/select2.min.js"));
+                "~/js/select2.min.js"));
             bundles.Add(new ScriptBundle("~/Bundles/AppScript3Admin")
              .Include("~/Style_design/js/vendor/modernizr-2.8.3.min.js",
                "~/ClientApp/Entities.js",
