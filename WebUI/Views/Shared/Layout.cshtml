@@ -152,19 +152,19 @@
                     </button>
                     <ul class="navbar-nav w-100">
                         <li class="nav-item w-50">
-                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex">
+                            <div class="nav-link mt-2 mt-md-0  d-sm-flex">
                                 <label id="Screen_name"></label>
-                            </form>
+                            </div>
                         </li>
                         <li class="nav-item w-50">
-                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex">
+                            <div class="nav-link mt-2 mt-md-0 d-none d-sm-flex">
                                 <label id="camp_name"></label>
  
-                            </form>
+                            </div>
                         </li>
                     </ul>
                     <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item nav-settings d-none d-lg-block">
+                        <li class="nav-item nav-settings  d-block">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-chart-bar"></i>
                             </a>
@@ -249,7 +249,7 @@
                                 <p class="p-3 mb-0 text-center">See all notifications</p>
                             </div>
                         </li>
-                        <li class="nav-item nav-settings d-none d-lg-block">
+                        <li class="nav-item nav-settings d-block">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-info"></i>
                             </a>
@@ -299,6 +299,14 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                    @* Error Alert Message *@
+                    <div class="d-flex justify-content-center" >
+                        <div id="DivMassage" class="alert alert-danger alert-message text-center" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4 id="Text_Massage" class="d-inline-block" style=""> يوجد خطا فى البيانات </h4>
+                        </div>
+                    </div>
+                  
                     @RenderBody()
 
                 </div>
