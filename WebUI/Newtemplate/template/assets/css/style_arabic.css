@@ -28788,7 +28788,7 @@ div.tagsinput {
     position: relative;
 }
     .search-content .form-control {
-        padding-right: 21%;
+        padding-right: 30%;
     }
     .search-content .btn-search {
         position: absolute;
@@ -29013,8 +29013,18 @@ input[type=number] {
     border: none;
     background-color: transparent;
     font-size: .99rem;
+    margin-right: -0.9rem;
+}
+.search-content .form-control[disabled] {
+    margin-right: -3.9rem;
 }
 
+.form-control[type=date][disabled] {
+    margin-right: -6.9rem;
+}
+.search-content .form-control[disabled] + .btn-search {
+    display: none;
+}
 select.form-control[disabled] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -29075,6 +29085,6 @@ input[class=checkbox]:before {
 }
 
 input[class=checkbox]:checked:before {
-    left: -2em;
+    left: 4em;
 }
 
