@@ -167,7 +167,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">رقم المرتجع</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control" id="lblReturnNumber">
+                                            <input disabled type="text" class="form-control " id="lblReturnNumber">
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">العميل</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlInvoiceCustomer"></select>
+                                            <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -190,10 +190,12 @@
                                 </div>
                                 <div class="col-8  col-md-3">
                                     <div class="d-flex justify-content-end ">
-                                        <div class="switchToggle">
+                                        <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
+
+                                        @*<div class="switchToggle">
                                             <input id="chkActive" class="checkbox-input certified" type="checkbox">
                                             <label for="switch"></label>
-                                        </div>
+                                        </div>*@
 
                                     </div>
                                 </div>
@@ -201,7 +203,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">نوع المرتجع</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlReturnTypeShow"></select>
+                                            <select  disabled  class="form-control" id="ddlReturnTypeShow"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -212,8 +214,8 @@
                                         <div class="col-8">
 
                                             <div class="search-content">
-                                                <input type="text" class="form-control" id="txtInvoiceNumber">
-                                                <button id="btnInvoiceSearch" class="btn btn-main btn-search">
+                                                <input  disabled  type="text" class="form-control" id="txtInvoiceNumber">
+                                                <button  disabled  id="btnInvoiceSearch" class="btn btn-main btn-search">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
@@ -226,7 +228,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">الصندوق</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlCashBox"></select>
+                                            <select  disabled class="form-control" id="ddlCashBox"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +236,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">المندوب</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlFreeSalesman"></select>
+                                            <select  disabled class="form-control" id="ddlFreeSalesman"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +244,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">رقم المرجعى</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control" name="RefNO" id="txtRefNo">
+                                            <input  disabled type="text" class="form-control" name="RefNO" id="txtRefNo">
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +252,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center special p-md-0">المبلغ المسدد</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control special-field" id="txtCashAmount">
+                                            <input  disabled type="text" class="form-control special-field" id="txtCashAmount">
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +260,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">العميل</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlInvoiceCustomer"></select>
+                                            <select  disabled class="form-control" id="ddlInvoiceCustomer"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -273,7 +275,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">نوع الضريبه</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlTaxTypeHeader"></select>
+                                            <select  disabled class="form-control" id="ddlTaxTypeHeader"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +283,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 col-md-2 align-self-center p-md-0">ملاحظات</label>
                                         <div class="col-8 col-md-10">
-                                            <input type="text" class="form-control" name="Remark" id="txtRemarks">
+                                            <input  disabled type="text" class="form-control" name="Remark" id="txtRemarks">
                                         </div>
                                     </div>
                                 </div>

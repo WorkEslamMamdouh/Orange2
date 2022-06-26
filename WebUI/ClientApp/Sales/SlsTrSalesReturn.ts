@@ -1181,6 +1181,7 @@ namespace SlsTrSalesReturn {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItem>;
                     $("#div_Data").html('');
                     CountGrid = 0;
+                    debugger
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }
@@ -1206,14 +1207,14 @@ namespace SlsTrSalesReturn {
 	                <td>
 		                <div class="form-group">
                             <select id="ddlFamily${cnt}" class="form-control">
-                                <option value="null"> (lang == "ar" ? "النوع" : "Type")</option>
+                                <option value="null"> ${(lang == "ar" ? "النوع" : "Type")}</option>
                             </select>
 		                </div>
 	                </td>
 	                <td>
 		                <div class="form-group">
                             <select id="ddlItem${cnt}" class="form-control">
-                                <option value="null">(lang == "ar" ? "الصنف" : "Item") </option>
+                                <option value="null">${(lang == "ar" ? "الصنف" : "Item")} </option>
                             </select>
 		                </div>
 	                </td>
@@ -1301,6 +1302,7 @@ namespace SlsTrSalesReturn {
         //    '</div></div></div>' +
 
         //    '<input id="vatnatid' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        //$("#div_Data").append(html);
       //  $("#div_Data").append(html);
 
         //script
