@@ -28921,7 +28921,11 @@ div.tagsinput {
         color: var(--main-blue);
 
     }
-  
+    .inside-table tbody td{
+        margin:0;
+        padding:0;
+    }
+
     .inside-table .form-control {
         padding: 5px;
     }
@@ -29013,14 +29017,15 @@ input[type=number] {
     border: none;
     background-color: transparent;
     font-size: .99rem;
-    margin-right: -0.9rem;
+    text-align: center;
+    /*margin-right: -0.9rem;*/
 }
 .search-content .form-control[disabled] {
-    margin-right: -3.9rem;
+    margin-right: -7.9rem;
 }
 
 .form-control[type=date][disabled] {
-    margin-right: -6.9rem;
+    margin-right: -3.9rem;
 }
 .search-content .form-control[disabled] + .btn-search {
     display: none;
