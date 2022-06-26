@@ -29075,6 +29075,6 @@ input[class=checkbox]:before {
 }
 
 input[class=checkbox]:checked:before {
-    right: 3em;
+    left: -2em;
 }
 
