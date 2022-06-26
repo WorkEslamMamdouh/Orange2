@@ -1216,8 +1216,7 @@ namespace SlsTrSalesReturn {
 
             '<div class=" col-lg-1"><input type="text"  class="form-control" id="txtUnitpriceWithVat' + cnt + '" name="quant[3]" class="form-control   font1" value="0" min="0" step="1"></div>' +
 
-            //'<div class=" col-lg-2" style="width: 12.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="number" min="0"   style="height:36px;" disabled id="txtPrice' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-
+ 
             '<div class="col-lg-1">' +
             '<input id="txtTotal' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
 

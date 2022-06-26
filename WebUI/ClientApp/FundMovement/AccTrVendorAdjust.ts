@@ -704,7 +704,7 @@ namespace AccTrVendorAdjust {
         //$('#txt_ID_CustmNew').prop("value", Selecteditem[0].VendorId);
         $('#btnVnd').prop("value", Selecteditem[0].VendorId);
 
-        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatType);
+        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatNo);
 
         //var openbalance = Number($('option:selected', txt_ID_CustmNew).attr('data-openbalance'));
         //if (txt_ID_CustmNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance); }

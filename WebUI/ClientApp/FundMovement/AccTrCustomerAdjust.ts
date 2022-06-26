@@ -657,7 +657,7 @@ namespace AccTrCustomerAdjust {
         $('#txt_Settlement_typeNew').prop("value", Selecteditem[0].AdustmentTypeID);
         //$('#txt_ID_CustmNew').prop("value", Selecteditem[0].CustomerId);
         $('#btnCust').prop("value", Selecteditem[0].CustomerId);
-        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatPerc);
+        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatNo);
 
         //var openbalance = Number($('option:selected', txt_ID_CustmNew).attr('data-openbalance'));
         //if (txt_ID_CustmNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance); }
