@@ -15476,6 +15476,8 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 .toast-body {
     padding: 0.75rem;
     word-wrap: break-word;
+    font-size:1.25rem;
+    width:90%;
 }
 
 .modal {
@@ -27462,16 +27464,16 @@ div.tagsinput {
         margin: auto;
         vertical-align: middle;
     }
-    /*Nahla*/
     .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini {
         display: none;
         font-family: 'Dancing Script', cursive;
     }
 
         .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
-            width: calc(70px - 50px);
+            /*logo test*/
+            width: calc(120px - 50px);
             max-width: 100%;
-            height: 28px;
+            height: 60px;
             margin: auto;
         }
 
@@ -27515,21 +27517,21 @@ div.tagsinput {
         box-shadow: none;
     }
 
-    .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-left) {
+    .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
         font-size: 0.875rem;
     }
 
 @media (max-width: 991px) {
-    .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-left) {
+    .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
         display: none;
     }
 }
 
 @media (max-width: 991px) {
     .navbar .navbar-menu-wrapper .navbar-toggler.navbar-toggler-right {
-        padding-right: 15px;
-        padding-left: 11px;
-        border-left: none;
+        padding-left: 15px;
+        padding-right: 11px;
+        border-right: none;
     }
 }
 
@@ -27870,6 +27872,8 @@ div.tagsinput {
         background: var(--main-blue);
         width: 244px;
         height: 70px;
+        /*logo test*/
+        padding-right:2.5rem;
     }
 
 @media (max-width: 991px) {
@@ -27879,21 +27883,22 @@ div.tagsinput {
 }
 .sidebar .sidebar-brand-wrapper .sidebar-brand {
     color: var(--main-orange);
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     line-height: 48px;
     margin-left: 0;
-    padding: 0rem 1.3rem 0rem 0rem;
+    padding: 0rem ;
     width: 100%;
     font-family: 'Dancing Script', cursive;
+    text-decoration: none;
 }
     .sidebar .sidebar-brand-wrapper .sidebar-brand:active, .sidebar .sidebar-brand-wrapper .sidebar-brand:focus, .sidebar .sidebar-brand-wrapper .sidebar-brand:hover {
         color: var(--bs-light);
     }
 
     .sidebar .sidebar-brand-wrapper .sidebar-brand img {
-        width: calc(244px - 120px);
+        width: calc(200px - 120px);
         max-width: 100%;
-        height: 28px;
+        height: 70px;
         margin: auto;
         vertical-align: middle;
     }
@@ -27901,13 +27906,22 @@ div.tagsinput {
     .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini {
         display: none;
     }
-
         .sidebar .sidebar-brand-wrapper .sidebar-brand.brand-logo-mini img {
-            width: calc(70px - 50px);
-            max-width: 100%;
-            height: 28px;
+            /*width: calc(100px - 50px);*/
+            max-width: 130%;
+            height: 50px;
+            /*logo test*/
             margin: auto;
+            padding-right: 0;
+            margin-right: -1rem;
         }
+.sidebar .sidebar-brand-wrapper .logo-text {
+    font-size: 3rem;
+    margin-left: -1.25rem;
+    color: #f08002;
+    /*Logo test*/
+    line-height:3rem;
+}
 
 .sidebar .nav {
     overflow: hidden;
@@ -28317,7 +28331,7 @@ div.tagsinput {
     }
 
         .sidebar-offcanvas.active {
-            left: 0;
+            right: 0;
         }
 }
 
@@ -28648,6 +28662,7 @@ div.tagsinput {
     left: -60px;
     transition: all 0.5s ease-in-out;
     z-index: 9999;
+    cursor: pointer;
 }
     .main-iconbar .icon-bar:hover,
     .details-iconbar .icon-bar:hover {
@@ -29001,17 +29016,11 @@ select.form-control[disabled] {
     display: none;
 }
 /*Error Alert Message*/
-.alert-message {
-      position: fixed;
-      z-index:999;
-      width: 95%;
-      margin: 0 2.5%;
-      
-}
 
 .alert-message {
     position: fixed;
-    z-index: 999;
-    width: 95%;
-    margin: 0 2.5%;
+    z-index: 10;
+    width: 78%;
+    background-color: var(--main-orange);
 }
+  

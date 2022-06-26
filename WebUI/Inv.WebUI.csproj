@@ -337,6 +337,8 @@
     <Content Include="Newtemplate\template\assets\images\lightbox\thumb-v-y-1.jpg" />
     <Content Include="Newtemplate\template\assets\images\lightbox\thumb-v-y-2.jpg" />
     <Content Include="Newtemplate\template\assets\images\logo-mini.svg" />
+    <Content Include="Newtemplate\template\assets\images\logo.ico" />
+    <Content Include="Newtemplate\template\assets\images\logo.png" />
     <Content Include="Newtemplate\template\assets\images\logo.svg" />
     <Content Include="Newtemplate\template\assets\images\samples\1280x768\1.jpg" />
     <Content Include="Newtemplate\template\assets\images\samples\1280x768\10.jpg" />
