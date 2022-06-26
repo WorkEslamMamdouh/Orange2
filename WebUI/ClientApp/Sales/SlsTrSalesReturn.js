@@ -1102,7 +1102,7 @@ var SlsTrSalesReturn;
         //    '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
         //    '</div></div></div>' +
         //    '<input id="vatnatid' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
-        $("#div_Data").append(html);
+        //  $("#div_Data").append(html);
         //script
         $('.btn-number2' + cnt).click(function (e) {
             e.preventDefault();

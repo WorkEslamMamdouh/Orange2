@@ -28781,7 +28781,7 @@ div.tagsinput {
     position: relative;
 }
     .search-content .form-control {
-        padding-right: 21%;
+        padding-right: 30%;
     }
     .search-content .btn-search {
         position: absolute;
@@ -29006,6 +29006,7 @@ input[type=number] {
     border: none;
     background-color: transparent;
     font-size: .99rem;
+    margin-right: -2.9rem;
 }
 
 select.form-control[disabled] {
