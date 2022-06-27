@@ -205,6 +205,10 @@ var Processes;
         $('#btnPrint2').addClass('display_none');
         $('#btnPrint3').addClass('display_none');
         $('#btnPrint4').addClass('display_none');
+        debugger;
+        if (SysSession.CurrentPrivileges.CUSTOM5 == false) {
+            $('#DivInformationCloce').addClass('display_none');
+        }
     }
     Processes.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
