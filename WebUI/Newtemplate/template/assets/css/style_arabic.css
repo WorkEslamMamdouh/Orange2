@@ -10032,7 +10032,7 @@ progress {
 
 .g-0,
 .gx-0 {
-    --bs-gutter-x: 0;
+    --bs-gutter-x: 0 ;
 }
 
 .g-0,
@@ -11174,6 +11174,7 @@ progress {
     color: #ffffff;
     vertical-align: top;
     border-color: #2c2e33;
+ 
 }
 
     .table > :not(caption) > * > *, .jsgrid .jsgrid-table > :not(caption) > * > * {
@@ -28663,7 +28664,8 @@ div.tagsinput {
     font-size: 1.25rem;
     text-decoration: none;
     Color: white;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 16px;
     border-radius: 0px 25px 25px 0px;
     left: -60px;
@@ -28671,9 +28673,15 @@ div.tagsinput {
     z-index: 9999;
     cursor: pointer;
 }
-    .main-iconbar .icon-bar:hover,
-    .details-iconbar .icon-bar:hover {
+.details-iconbar .icon-bar {
+    left: -76px;
+}
+    .main-iconbar .icon-bar:hover {
         left: 0px;
+        background-color: var(--main-orange);
+    }
+    .details-iconbar .icon-bar:hover {
+        left: -17px;
         background-color: var(--main-orange);
     }
 
@@ -28683,11 +28691,14 @@ div.tagsinput {
 .print,
 .pdf,
 .excel,
-.modify,
+.edit,
+.save,
+.back
 .print-details {
     width: 100px;
     height: 50px;
 }
+
 
 .view {
     top: 100px;
@@ -28708,26 +28719,20 @@ div.tagsinput {
 .excel {
     top: 340px;
 }
-
-.modify {
-    top: 800px;
-}
-
-.print-details {
-    top: 880px;
-}
-
-
-/*.main-iconbar .setting {
-    left: -480px;
-}
-
-.setting {
+.edit {
     top: 400px;
-    width: 520px;
-    height: 50px;
-}*/
-     
+}
+.print-details {
+    top: 460px;
+}
+.save {
+    top: 400px;
+}
+
+.back {
+    top: 460px;
+}
+
 /*Table Style*/
 .table-blue {
     --bs-table-bg: var(--light-blue);
@@ -28911,7 +28916,6 @@ div.tagsinput {
       
     }
     .inside-table .table {
-        /*table-layout: fixed;*/
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
@@ -28992,6 +28996,9 @@ div.tagsinput {
     font-size: 0.85rem;
     padding-left: 0;
 }
+.row.editor-details {
+    --bs-gutter-x: 0 !important;
+}
 /*Date input*/
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -29017,15 +29024,14 @@ input[type=number] {
     border: none;
     background-color: transparent;
     font-size: .99rem;
-    text-align: center;
-    /*margin-right: -2.9rem;*/
+    margin-right: -.9rem;
 }
 .search-content .form-control[disabled] {
-    margin-right: -7.9rem;
+    margin-right: -3.9rem;
 }
 
 .form-control[type=date][disabled] {
-    margin-right: -3.9rem;
+    margin-right: -6.9rem;
 }
 .search-content .form-control[disabled] + .btn-search {
     display: none;
@@ -29037,8 +29043,12 @@ select.form-control[disabled] {
 .counter[disabled] ~ .value-button {
     display: none;
 }
+.inside-table .form-control[disabled] {
+    text-align: center;
+    margin-right: 0.1rem;
+    padding: 0;
+}
 /*Error Alert Message*/
-
 .alert-message {
     position: fixed;
     z-index: 10;
@@ -29092,4 +29102,3 @@ input[class=checkbox]:before {
 input[class=checkbox]:checked:before {
     left: 4em;
 }
-
