@@ -17945,6 +17945,8 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 .bg-light-blue {
     background-color: var(--Lighter-blue);
+     border: outset;
+    border-radius: 25px;
 }
 .bg-dark-blue {
     background-color: var(--dark-blue);
@@ -23211,7 +23213,8 @@ code {
 
 /* Cards */
 .card {
-    border-radius: 0.25rem;
+    border-radius: 1.25rem;
+    
 }
 
     .card .card-body {
@@ -23701,7 +23704,8 @@ code {
     font-weight: normal;
     font-size: 1rem;
     padding: 0.25rem 0.25rem;
-    background-color: transparent;
+    /*background-color: transparent;*/
+    background-color: #a7d3fd;
     border-radius: 5px;
     color: var(--dark-blue);
 }
@@ -28649,7 +28653,7 @@ div.tagsinput {
 }
 
 .content-wrapper {
-    background: var(--bs-light);
+    background: #cae5ff;
     padding: 1.875rem 1rem;
     width: 100%;
     -webkit-flex-grow: 1;
@@ -28771,10 +28775,10 @@ div.tagsinput {
     content: '';
     height: 50%;
     width: 50%;
-    border: 5px solid var(--main-blue);
+    /*border: 5px solid var(--main-blue);
     border-right: none;
     border-bottom: none;
-    border-radius: 50px 0 0 0;
+    border-radius: 50px 0 0 0;*/
     position: absolute;
     left: 0;
     top: 0;
@@ -29091,7 +29095,7 @@ input[class=checkbox]:before {
     z-index: 2;
     width: 24px;
     height: 23px;
-    top: 38%;
+    top: 46%;
     margin-top: -0.8em;
     background: #eee;
     border-radius: 1em;
