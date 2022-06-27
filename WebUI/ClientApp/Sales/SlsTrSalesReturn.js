@@ -269,7 +269,7 @@ var SlsTrSalesReturn;
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
-        ddlSalesPerson.value = "null";
+        // ddlSalesPerson.value = "null";
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
         $('#txtUpdatedBy').prop("value", "");
@@ -299,7 +299,7 @@ var SlsTrSalesReturn;
                     vatType = InvoiceStatisticsModel[0].VatType;
                     //GetVatPercentage();
                     ddlFreeSalesman.value = InvoiceStatisticsModel[0].SalesmanId.toString();
-                    ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
+                    // ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
                     if (InvoiceStatisticsModel[0].CustomerId != null) {
                         ddlInvoiceCustomer.value = InvoiceStatisticsModel[0].CustomerId.toString();
                         var customerName = InvoiceStatisticsModel[0].Cus_NameA.toString();
@@ -512,7 +512,7 @@ var SlsTrSalesReturn;
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-            $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#btnEdit").addClass("display_none");
             $('#btnPrint').removeClass("display_none");
@@ -594,7 +594,7 @@ var SlsTrSalesReturn;
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
-        ddlSalesPerson.value = "null";
+        // ddlSalesPerson.value = "null";
         txtCashAmount.value = "";
         ddlTaxTypeHeader.value = "null";
         $("#txtCustomerName").prop("value", "");
@@ -609,7 +609,7 @@ var SlsTrSalesReturn;
         txtInvoiceDate.value = GetDate();
         fillddlCashBox();
         $("#ddlFreeSalesman").attr("disabled", "disabled");
-        $("#ddlSalesPerson").attr("disabled", "disabled");
+        // $("#ddlSalesPerson").attr("disabled", "disabled");
         InsertFlag = false;
         EditFlag = false;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
@@ -638,7 +638,7 @@ var SlsTrSalesReturn;
             $("#ddlInvoiceCustomer").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-            $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#txtInvoiceDate").removeAttr("disabled");
@@ -735,12 +735,12 @@ var SlsTrSalesReturn;
                     else {
                         DocumentActions.FillCombowithdefult(SalesmanDetails, ddlFreeSalesman, "SalesmanId", "NameA", "اختر المندوب");
                     }
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
-                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select salesman");
-                    }
-                    else {
-                        DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
-                    }
+                    //if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                    //    DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameE", "Select salesman");
+                    //}
+                    //else {
+                    //    DocumentActions.FillCombowithdefult(SalesmanDetails, ddlSalesPerson, "SalesmanId", "NameA", "اختر البائع");
+                    //} 
                 }
             }
         });
@@ -1032,7 +1032,7 @@ var SlsTrSalesReturn;
                 $("#txtCashAmount").prop("value", "");
             }
             $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId.toString());
-            $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
+            // $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
                 btnEdit.disabled = true;
@@ -1050,7 +1050,7 @@ var SlsTrSalesReturn;
             $('#txtUpdatedAt').prop("value", InvoiceStatisticsModel[0].UpdatedAt);
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-            $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
             $("#btnInvoiceSearch").attr("disabled", "disabled");
@@ -1598,11 +1598,11 @@ var SlsTrSalesReturn;
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
-        ddlSalesPerson.value = "null";
+        //ddlSalesPerson.value = "null";
         $("#txtCustomerName").prop("value", "");
         $("#txtCustomerName").attr("disabled", "disabled");
         ddlFreeSalesman.disabled = true;
-        ddlSalesPerson.disabled = true;
+        //ddlSalesPerson.disabled = true;
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
         $('#txtUpdatedBy').prop("value", "");
@@ -1611,7 +1611,7 @@ var SlsTrSalesReturn;
         $("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlReturnTypeShow").attr("disabled", "disabled");
         $("#ddlFreeSalesman").attr("disabled", "disabled");
-        $("#ddlSalesPerson").attr("disabled", "disabled");
+        //$("#ddlSalesPerson").attr("disabled", "disabled");
         $("#ddlCashBox").attr("disabled", "disabled");
         $("#txtCashAmount").attr("disabled", "disabled");
         $("#ddlCashBox").prop("value", "null");
@@ -1733,7 +1733,7 @@ var SlsTrSalesReturn;
         InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
         InvoiceModel.RefNO = txtRefNo.value;
         InvoiceModel.Remark = txtRemarks.value;
-        InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
+        // InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
