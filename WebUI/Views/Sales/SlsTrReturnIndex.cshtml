@@ -3,7 +3,7 @@
     ViewBag.Title = @SystemResource.Men_SlsTrReturn;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@*<style>
+<style>
         .disabledDiv {
             pointer-events: none;
             opacity: 0.4;
@@ -53,7 +53,7 @@
             font-size: 25px !important;
             position: absolute;
         }
-    </style>*@
+    </style>
 <script>
     $(document).ready(function () {
 
@@ -132,6 +132,8 @@
                                 <select class="form-control" id="ddlStateType"></select>
                             </div>
                         </div>
+                        <select id="ddlShowFreeReturn" name="" class="form-control display_none  " style='width: 100%;border-radius: 30px;'></select>
+
                     </div>
 
                 </div>
@@ -143,21 +145,20 @@
     <div class="col-12">
         <div class="card bg-light-blue">
             <div class="card-body">
-
-                <div class="form-group row mb-2">
-                    <label class="col-3 col-sm-2  col-xl-1 align-self-center p-md-0">بحث</label>
-                    <div class="col-9 col-sm-4 col-xl-3">
-                        <input type="text" class="form-control" id="">
+                <div class="col-12" id="divShow">
+                    <div class="form-group row mb-2">
+                        <label class="col-3 col-sm-2  col-xl-1 align-self-center p-md-0">بحث</label>
+                        <div class="col-9 col-sm-4 col-xl-3">
+                            <input id="searchbutmemreport" type="text" class="form-control" >
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div class="table-responsive">
+                        <table id="divGridDetails_View" class="table table-blue table-hover  table-bordered"></table>
                     </div>
                 </div>
-                <!-- Table  -->
-
-
-                <div class="table-responsive">
-                    <table id="divGridDetails_View" class="table table-blue table-hover  table-bordered"></table>
-                </div>
                 <!-- Details  -->
-                <div class="row">
+                <div id="divReturnDetails" class="row display_none">
                     <div class="col-12 service-content">
                         <div class="serviceBox mt-5">
 
@@ -166,25 +167,32 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">رقم المرتجع</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control" id="lblReturnNumber">
+                                            <input disabled type="text" class="form-control " id="lblReturnNumber">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4">
+                        
+
+                                <div class="col-8 col-md-4">
                                     <div class="form-group row">
-                                        <label class="col-4 align-self-center p-md-0">العميل</label>
-                                        <div class="col-8 ">
-                                            <select class="form-control" id="ddlInvoiceCustomer"></select>
+                                        <label class="col-4 align-self-center p-md-0">تاريخ المرتجع</label>
+                                        <div class="col-8">
+                                            <input type="date" class="form-control" id="txtInvoiceDate">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 d-md-none"></div>
                                 <div class="col-8  col-md-4">
-                                    <div class="d-flex justify-content-end ">
-                                        <div class="switchToggle">
-                                            <input id="chkActive" class="checkbox-input certified" type="checkbox">
-                                            <label for="switch"></label>
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0">اعتماد</label>
+                                        <div class="col-8">
+                                            <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
                                         </div>
+                       
+
+                                        @*<div class="switchToggle">
+            <input id="chkActive" class="checkbox-input certified" type="checkbox">
+            <label for="switch"></label>
+        </div>*@
 
                                     </div>
                                 </div>
@@ -192,7 +200,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">نوع المرتجع</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlReturnTypeShow"></select>
+                                            <select disabled class="form-control" id="ddlReturnTypeShow"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -203,8 +211,8 @@
                                         <div class="col-8">
 
                                             <div class="search-content">
-                                                <input type="text" class="form-control" id="txtInvoiceNumber">
-                                                <button id="btnInvoiceSearch" class="btn btn-main btn-search">
+                                                <input disabled type="text" class="form-control" id="txtInvoiceNumber">
+                                                <button disabled id="btnInvoiceSearch" class="btn btn-main btn-search">
                                                     <i class="fas fa-search"></i>
                                                 </button>
                                             </div>
@@ -217,7 +225,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">الصندوق</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlCashBox"></select>
+                                            <select disabled class="form-control" id="ddlCashBox"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +233,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">المندوب</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlFreeSalesman"></select>
+                                            <select disabled class="form-control" id="ddlFreeSalesman"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -233,7 +241,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">رقم المرجعى</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control" name="RefNO" id="txtRefNo">
+                                            <input disabled type="text" class="form-control" name="RefNO" id="txtRefNo">
                                         </div>
                                     </div>
                                 </div>
@@ -241,15 +249,16 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center special p-md-0">المبلغ المسدد</label>
                                         <div class="col-8">
-                                            <input type="text" class="form-control special-field" id="txtCashAmount">
+                                            <input disabled type="text" class="form-control special-field" id="txtCashAmount">
                                         </div>
                                     </div>
                                 </div>
+  
                                 <div class="col-12 col-md-4">
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">العميل</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlInvoiceCustomer"></select>
+                                            <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +273,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0">نوع الضريبه</label>
                                         <div class="col-8 ">
-                                            <select class="form-control" id="ddlTaxTypeHeader"></select>
+                                            <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +281,7 @@
                                     <div class="form-group row">
                                         <label class="col-4 col-md-2 align-self-center p-md-0">ملاحظات</label>
                                         <div class="col-8 col-md-10">
-                                            <input type="text" class="form-control" name="Remark" id="txtRemarks">
+                                            <input disabled type="text" class="form-control" name="Remark" id="txtRemarks">
                                         </div>
                                     </div>
                                 </div>
@@ -283,6 +292,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 3%">م</th>
+                                                    <th style="width: 20%">النوع</th>
                                                     <th style="width: 20%">النوع</th>
                                                     <th style="width: 20%" class="text-wrap">الصنف</th>
                                                     <th style="width: 5%" class="text-wrap">الكميه المباعه</th>
@@ -296,76 +306,76 @@
 
                                                 </tr>
                                             </thead>
-                                            <tbody id="">
-                                                <tr>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control no-border" id="" value="1">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <select class="form-control" id="">
-                                                                <option>قصب سكر</option>
-                                                                <option>اختيار 1</option>
-                                                                <option>اختيار 2</option>
-                                                            </select>
+                                            <tbody id="div_Data">
+                                                @*<tr>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control no-border" id="" value="1">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <select class="form-control" id="">
+                                        <option>قصب سكر</option>
+                                        <option>اختيار 1</option>
+                                        <option>اختيار 2</option>
+                                    </select>
 
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <select class="form-control" id="">
-                                                                <option>الصنف</option>
-                                                                <option>اختيار 1</option>
-                                                                <option>اختيار 2</option>
-                                                            </select>
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="200">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group ps-1">
-                                                            <input class="counter" type="number" data-id="number" id="" value="0" min="0" />
-                                                            <div class="value-button decrease-button" id="decrease">-</div>
-                                                            <div class="value-button increase-button" id="increase">+</div>
-                                                        </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <select class="form-control" id="">
+                                        <option>الصنف</option>
+                                        <option>اختيار 1</option>
+                                        <option>اختيار 2</option>
+                                    </select>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="200">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group ps-1">
+                                    <input class="counter" type="number" data-id="number" id="" value="0" min="0" />
+                                    <div class="value-button decrease-button" id="decrease">-</div>
+                                    <div class="value-button increase-button" id="increase">+</div>
+                                </div>
 
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="2000">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="2200">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="2400">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="10">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="2400">
-                                                        </div>
-                                                    </th>
-                                                    <th>
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" id="" value="2400">
-                                                        </div>
-                                                    </th>
-                                                </tr>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="2000">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="2200">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="2400">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="10">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="2400">
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="" value="2400">
+                                </div>
+                            </th>
+                        </tr>*@
                                             </tbody>
                                         </table>
                                     </div>
@@ -438,7 +448,7 @@
             <span class="align-self-center mb-2">  اضافه</span>
         </a>
 
-        <a class="icon-bar d-flex justify-content-between print" id="btnPrint">
+        <a class="icon-bar d-flex justify-content-between print" id="btnPrintTrview">
             <i class="fas fa-print side-icon ms-1"></i>
             <span class="align-self-center mb-2">  طباعه</span>
         </a>
@@ -461,6 +471,10 @@
     </div>
     <div class="details-iconbar d-flex justify-content-start">
         <a class="icon-bar d-flex justify-content-between modify" id="btnEdit">
+            <i class="fas fa-edit side-icon ms-1"></i>
+            <span class="align-self-center mb-2">  تعديل</span>
+        </a>
+        <a class="icon-bar d-flex justify-content-between modify" id="btnSave">
             <i class="fas fa-edit side-icon ms-1"></i>
             <span class="align-self-center mb-2">  تعديل</span>
         </a>
@@ -573,7 +587,7 @@
 
         </div>
 
-        <div id="divReturnDetails" class=" display_none">
+        <div id="divReturnDetails display_none" class=" display_none">
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="margin-top: 8px!important;">
 

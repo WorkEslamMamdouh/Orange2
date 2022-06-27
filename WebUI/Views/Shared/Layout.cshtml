@@ -26,7 +26,8 @@
     @* <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">*@
     <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="/images/logokids.png" />
+   @* <link rel="shortcut icon" href="/images/logokids.png" />*@
+    <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/logo.ico" />
 
 
 
@@ -40,12 +41,15 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-                @*<a class="sidebar-brand brand-logo" href="index.html"><img src="~/Newtemplate/template/assets/images/logo.svg" alt="logo" /></a>
-        <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>*@
+  
 
-        <a class="sidebar-brand brand-logo" href="#">Orange</a>
-      @*  <a class="sidebar-brand brand-logo-mini" href="#"><img src="/images/logokids.png" alt="logo" /></a>*@
-        <a class="sidebar-brand brand-logo-mini" href="#">O</a>
+            @* <a class="sidebar-brand brand-logo" href="#">Orange</a>*@
+            <a class="sidebar-brand brand-logo" href="#">
+                <span class="logo-text">range</span>
+                <img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" />
+            </a>
+            @*<a class="sidebar-brand brand-logo-mini" href="#">O</a>*@
+            <a class="sidebar-brand brand-logo-mini" href="#"> <img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" /></a>
             </div>
             <ul class="nav">
                 <li class="nav-item profile">
@@ -141,13 +145,14 @@
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar p-0 fixed-top d-flex flex-row">
                 <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                    @* <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/Newtemplate/template/assets/images/logo-mini.svg" alt="logo" /></a>*@
-           
-                   @* <a class="navbar-brand brand-logo-mini"  href="#"><img src="/images/logokids.png" alt="logo" /></a>*@
-                    <a class="navbar-brand brand-logo-mini"  href="#">O</a>
+                    <a class="navbar-brand brand-logo-mini" href="#"><img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" /></a>
+                    @* <a class="navbar-brand brand-logo-mini"  href="#">O</a>*@
                 </div>
                 <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                         <i class="fas fa-bars fa-lg"></i>
                     </button>
                     <ul class="navbar-nav w-100">
@@ -158,8 +163,9 @@
                         </li>
                         <li class="nav-item w-50">
                             <div class="nav-link mt-2 mt-md-0 d-none d-sm-flex">
+                                @* Change type script value *@
                                 <label id="camp_name"></label>
- 
+
                             </div>
                         </li>
                     </ul>
@@ -255,63 +261,77 @@
                             </a>
                         </li>
                         @*<li class="nav-item dropdown">
-            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                <div class="navbar-profile">
-                    <i class="fas fa-caret-down fa-xs"></i>
-                    <p class="mb-0 d-none d-sm-block pe-2 navbar-profile-name" id="Admin_name"></p>
-                    <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
-                </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                <h6 class="p-3 mb-0">Profile</h6>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <div class="preview-icon bg-dark rounded-circle">
-                            <i class="mdi mdi-settings text-success"></i>
+                        <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                            <div class="navbar-profile">
+                                <i class="fas fa-caret-down fa-xs"></i>
+                                <p class="mb-0 d-none d-sm-block pe-2 navbar-profile-name" id="Admin_name"></p>
+                                <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                            <h6 class="p-3 mb-0">Profile</h6>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-settings text-success"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Settings</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="fas fa-sign-out-alt text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <p class="p-3 mb-0 text-center">Advanced settings</p>
                         </div>
-                    </div>
-                    <div class="preview-item-content">
-                        <p class="preview-subject mb-1">Settings</p>
-                    </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                        <div class="preview-icon bg-dark rounded-circle">
-                            <i class="fas fa-sign-out-alt text-danger"></i>
-                        </div>
-                    </div>
-                    <div class="preview-item-content">
-                        <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
-                    </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <p class="p-3 mb-0 text-center">Advanced settings</p>
-            </div>
-        </li>*@
+                    </li>*@
                     </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-format-line-spacing"></span>
-                    </button>
+
                 </div>
             </nav>
             <!-- partial -->
-            <div class="main-panel" >
+            <div class="main-panel">
                 <div class="content-wrapper">
                     @* Error Alert Message *@
-                    <div class="d-flex justify-content-center" style="display:none!important">
-                        <div id="DivMassage" class="alert alert-danger alert-message text-center" role="alert">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <h4 id="Text_Massage" class="d-inline-block" style=""> يوجد خطا فى البيانات </h4>
+                    @*<div class="d-flex justify-content-center" style="display:none!important">*@
+                    @*<div class="d-flex justify-content-center alert-container">
+                <div id="DivMassage" class="alert alert-danger alert-message text-center" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4 id="Text_Massage" class="d-inline-block" style=""> يوجد خطا فى البيانات </h4>
+                </div>
+            </div>*@
+                    <div class="d-flex justify-content-center d-none">
+                        <div id="alert-message" class="toast  align-items-center text-white border-0  alert-message" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>خطا فى البيانات </span>
+                                </div>
+
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto align-self-start" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
                         </div>
                     </div>
-                  
+           
+
+
                     @RenderBody()
 
                 </div>
-
+    
             </div>
+       
             <!-- main-panel ends -->
         </div>
     </div>
@@ -432,7 +452,6 @@
 
 
 
-
     <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -452,6 +471,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
+    @*<script src="~/Newtemplate/template/assets/js/counter.js"></script>*@
     <!-- End custom js for this page -->
 
     @Scripts.Render("~/Bundles/AppScript3")
