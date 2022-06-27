@@ -17906,6 +17906,11 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.bg-orange {
+    --bs-bg-opacity: 1;
+    background-color: var(--main-orange) !important;
+}
+
 .bg-body {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
@@ -28725,17 +28730,16 @@ div.tagsinput {
     top: 340px;
 }
 .edit {
-    top: 600px;
+    top: 800px;
 }
 .print-details {
-    top: 660px;
+    top: 860px;
 }
 .save {
-    top: 600px;
+    top: 800px;
 }
-
 .back {
-    top: 660px;
+    top: 860px;
 }
 
 /*Table Style*/
