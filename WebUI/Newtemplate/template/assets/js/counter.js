@@ -21,6 +21,5 @@ if (increaseButton != null) {
     });
 }
 /*Alert Message*/
-var myAlert = document.getElementById('alert-message');
-var bsAlert = new bootstrap.Toast(myAlert);
-bsAlert.show();
+var myAlert = document.getElementById('Text_Massage');
+var bsAlert = new bootstrap.Toast(myAlert).show();
