@@ -9,10 +9,6 @@
             opacity: 0.4;
         }
 
-        .display_none {
-            display: none !important;
-        }
-
         #btnAddDetails {
             font-size: 40px;
         }
@@ -385,7 +381,7 @@
                                         <div class="form-group row">
                                             <label class="col-5 align-self-center p-md-0"> الاصناف</label>
                                             <div class="col-7">
-                                                <input type="text" class="form-control" id="txtItemCount">
+                                                <input disabled type="text" class="form-control" id="txtItemCount">
                                             </div>
                                         </div>
                                     </div>
@@ -393,7 +389,7 @@
                                         <div class="form-group row">
                                             <label class="col-5 align-self-center p-md-0"> العبوات</label>
                                             <div class="col-7">
-                                                <input type="text" class="form-control" id="txtPackageCount">
+                                                <input disabled type="text" class="form-control" id="txtPackageCount">
                                             </div>
                                         </div>
                                     </div>
@@ -401,7 +397,7 @@
                                         <div class="form-group row">
                                             <label class="col-5 col-md-4 align-self-center p-md-0">الاجمالى</label>
                                             <div class="col-7 col-md-8">
-                                                <input type="text" class="form-control" id="txtTotal">
+                                                <input disabled type="text" class="form-control" id="txtTotal">
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +405,7 @@
                                         <div class="form-group row">
                                             <label class="col-5 align-self-center p-md-0">الضريبه</label>
                                             <div class="col-7">
-                                                <input type="text" class="form-control" id="txtTax">
+                                                <input disabled type="text" class="form-control" id="txtTax">
                                             </div>
                                         </div>
                                     </div>
@@ -417,7 +413,7 @@
                                         <div class="form-group row">
                                             <label class="col-5 align-self-center p-md-0">الصافى </label>
                                             <div class="col-7">
-                                                <input type="text" class="form-control" id="txtNet">
+                                                <input disabled type="text" class="form-control" id="txtNet">
                                             </div>
                                         </div>
                                     </div>
@@ -453,81 +449,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Details Side Icon Bar -->
-                    <div class="details-iconbar d-flex justify-content-start">
-                        <a class="icon-bar d-flex justify-content-between edit" id="btnEdit">
-                            <i class="fas fa-edit side-icon ms-1"></i>
-                            <span class="align-self-center mb-2">  تعديل</span>
-                        </a>
-                        <a class="icon-bar d-flex justify-content-between print-details" id="btnPrintTransaction">
-                            <i class="fas fa-print side-icon ms-1"></i>
-                            <span class="align-self-center mb-2">  طباعه</span>
-                        </a>
-                        <a class="icon-bar d-flex justify-content-between save" id="btnSave">
-                            <i class="fas fa-save  side-icon ms-1"></i>
-                            <span class="align-self-center mb-2">  حفظ</span>
-                        </a>
-                        <a class="icon-bar d-flex justify-content-between back" id="btnBack">
-                            <i class="fas fa-backspace side-icon ms-1"></i>
-                            <span class="align-self-center mb-2">  تراجع</span>
-                        </a>
-                    </div>
-
-
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Side Icon Bar -->
-    <div class="main-iconbar">
-        <a class="icon-bar d-flex justify-content-between view " id="btnShow">
-            <i class="fas fa-eye side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  عرض</span>
-        </a>
-
-        <a class="icon-bar d-flex justify-content-between add" id="btnAddReturn">
-            <i class="fas fa-folder-plus side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  اضافه</span>
-        </a>
-
-        <a class="icon-bar d-flex justify-content-between print" id="btnPrintTrview">
-            <i class="fas fa-print side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  طباعه</span>
-        </a>
-
-        <a class="icon-bar d-flex justify-content-between pdf" id="btnPrintTrPDF">
-            <i class="fas fa-file-pdf side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  Pdf</span>
-        </a>
-
-        <a class="icon-bar d-flex justify-content-between excel" id="btnPrintTrEXEL">
-            <i class="fas fa-file-csv side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  Excel</span>
-        </a>
-    </div>
-    @* Error Alert Message *@
-    @*<div id="DivMassage" class="d-flex justify-content-center display_none">
-            <div  class="toast  align-items-center text-white border-0  alert-message" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span id="Text_Massage">خطا فى البيانات </span>
-                    </div>
-
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto align-self-start" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>
-        </div>*@
-    @*<div class="d-flex justify-content-center" style="display:none!important">*@
-    <div id="DivMassage" class="d-flex justify-content-center alert-container display_none">
-        <div id="DivMassage" class="alert alert-danger alert-message text-center" role="alert">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h4 id="Text_Massage" class="d-inline-block" style=""> يوجد خطا فى البيانات </h4>
         </div>
     </div>
 
@@ -883,6 +806,5 @@
     </div>*@
 
 @section Script{
-    @*<script src="~/Newtemplate/template/assets/js/counter.js"></script>*@
     <script src="~/ClientApp/Sales/SlsTrSalesReturn.js"></script>
 }

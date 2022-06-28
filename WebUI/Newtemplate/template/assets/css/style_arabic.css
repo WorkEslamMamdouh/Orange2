@@ -17906,6 +17906,11 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
 
+.bg-orange {
+    --bs-bg-opacity: 1;
+    background-color: var(--main-orange) !important;
+}
+
 .bg-body {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !important;
@@ -28653,7 +28658,7 @@ div.tagsinput {
 }
 
 .content-wrapper {
-    background: #cae5ff;
+    background: var(--Lighter-blue);
     padding: 1.875rem 1rem;
     width: 100%;
     -webkit-flex-grow: 1;
@@ -28677,17 +28682,18 @@ div.tagsinput {
     z-index: 9999;
     cursor: pointer;
 }
-.details-iconbar .icon-bar {
+/*.details-iconbar .icon-bar {
     left: -76px;
-}
-    .main-iconbar .icon-bar:hover {
+}*/
+    .main-iconbar .icon-bar:hover,
+    .details-iconbar .icon-bar:hover {
         left: 0px;
         background-color: var(--main-orange);
     }
-    .details-iconbar .icon-bar:hover {
+    /*.details-iconbar .icon-bar:hover {
         left: -17px;
         background-color: var(--main-orange);
-    }
+    }*/
 
 
 .view,
@@ -28724,17 +28730,16 @@ div.tagsinput {
     top: 340px;
 }
 .edit {
-    top: 400px;
+    top: 800px;
 }
 .print-details {
-    top: 460px;
+    top: 860px;
 }
 .save {
-    top: 400px;
+    top: 800px;
 }
-
 .back {
-    top: 460px;
+    top: 860px;
 }
 
 /*Table Style*/
@@ -29105,4 +29110,8 @@ input[class=checkbox]:before {
 
 input[class=checkbox]:checked:before {
     left: 4em;
+}
+
+.display_none {
+    display: none !important;
 }
