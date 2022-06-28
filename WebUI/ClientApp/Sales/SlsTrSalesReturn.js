@@ -432,6 +432,7 @@ var SlsTrSalesReturn;
         //$("#txtInvoiceDate").attr("disabled","disabled");
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
+        $("#searchbutmemreport").attr("disabled", "disabled").off('click');
         $("#div_hedr").addClass("disabledDiv");
         $("#div_hedr").attr("disabled", "disabled").off('click');
         txtRemarks.disabled = false;
@@ -446,6 +447,7 @@ var SlsTrSalesReturn;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
     function btnInvoiceSearch_onclick() {
+        debugger;
         var sys = new SystemTools();
         sys.FindKey(Modules.SlsTrReturn, "btnInvoiceSearch", "CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
@@ -479,7 +481,7 @@ var SlsTrSalesReturn;
                     Insert();
                 }
                 else {
-                    DisplayMassage('( يجب أضافه قيمه للكمية المرتجعه ع الفاتورة)', 'you must add value to the return quantity', MessageType.Error);
+                    DisplayMassage('يجب أضافه قيمه للكمية المرتجعه ع الفاتورة', 'you must add value to the return quantity', MessageType.Error);
                     for (var i = 0; i < CountGrid; i++) {
                         if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
                             if (Number($("#txtReturnQuantity" + i).val()) == 0) {
@@ -496,8 +498,9 @@ var SlsTrSalesReturn;
             $("#divReturnDetails").addClass("display_none");
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
-            $('#btnPrintTransaction').removeClass("display_none");
+            $('#btnPrintTransaction').addClass("display_none");
             $("#divGridDetails_View").removeClass("disabledDiv");
+            $("#searchbutmemreport").removeAttr("disabled");
             $("#div_hedr").removeAttr("disabled");
             $("#div_hedr").removeClass("disabledDiv");
             $("#chkActive").attr("disabled", "disabled");
@@ -510,6 +513,7 @@ var SlsTrSalesReturn;
             $('#condtionbtn2').removeClass("col-lg-2");
             $('#condtionbtn2').addClass("col-lg-4");
             $("#divGridDetails_View").removeClass("disabledDiv");
+            $("#searchbutmemreport").removeAttr("disabled");
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
             // $("#ddlSalesPerson").attr("disabled", "disabled");
@@ -562,10 +566,12 @@ var SlsTrSalesReturn;
         $("#divShow").removeClass("display_none");
         $("#divReturnDetails").addClass("display_none");
         $("#divGridDetails_View").removeClass("disabledDiv");
+        $("#searchbutmemreport").removeAttr("disabled");
     }
     function AddNewReturn_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
+        $("#searchbutmemreport").attr("disabled", "disabled").off('click');
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
         $("#div_hedr").addClass("disabledDiv");
@@ -586,9 +592,9 @@ var SlsTrSalesReturn;
         txtTotal.value = "";
         txtTax.value = "";
         txtNet.value = "";
-        txtInvoiceNumber.value = "";
         txtRefNo.value = "";
         txtRemarks.value = "";
+        txtInvoiceNumber.value = "";
         lblReturnNumber.value = "";
         txtInvoiceDate.value = "";
         ddlInvoiceCustomer.value = "null";
@@ -622,7 +628,7 @@ var SlsTrSalesReturn;
         lblReturnNumber.value = "";
         unApprovedReturn = checkUnApprovedReturns(globalRefTrID);
         if (unApprovedReturn == true) {
-            DisplayMassage('( لا يمكن اضافه مرتجع علي الفاتورة قبل اعتماد المرتجعات السابقه)', 'you cannot add new return on invoice before approve previous one ', MessageType.Error);
+            DisplayMassage('لا يمكن اضافه مرتجع علي الفاتورة قبل اعتماد المرتجعات السابقه', 'you cannot add new return on invoice before approve previous one ', MessageType.Error);
         }
         else {
             Show = false;
@@ -1870,6 +1876,7 @@ var SlsTrSalesReturn;
         $("#divShow").removeClass("display_none");
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#divGridDetails_View").removeClass("display_none");
+        $("#searchbutmemreport").removeAttr("disabled");
         for (var i = 0; i < CountGrid; i++) {
             $("#txtReturnQuantity" + i).attr("disabled", "disabled");
             $('.btn-number1' + i).attr("disabled", "disabled");

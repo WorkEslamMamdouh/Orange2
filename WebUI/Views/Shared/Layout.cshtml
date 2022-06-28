@@ -34,6 +34,54 @@
 </head>
 
 <body id="page-top">
+    <div class="iconbar-container">
+        <!-- Side Icon Bar -->
+        <div class="main-iconbar">
+            <a class="icon-bar d-flex justify-content-between view " id="btnShow">
+                <i class="fas fa-eye fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  عرض</span>
+            </a>
+
+            <a class="icon-bar d-flex justify-content-between add " id="btnAddReturn">
+                <i class="fas fa-folder-plus fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  اضافه</span>
+            </a>
+
+            <a class="icon-bar d-flex justify-content-between print " id="btnPrintTrview">
+                <i class="fas fa-print fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  طباعه</span>
+            </a>
+
+            <a class="icon-bar d-flex justify-content-between pdf " id="btnPrintTrPDF">
+                <i class="fas fa-file-pdf fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  Pdf</span>
+            </a>
+
+            <a class="icon-bar d-flex justify-content-between excel " id="btnPrintTrEXEL">
+                <i class="fas fa-file-csv fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  Excel</span>
+            </a>
+        </div>
+        <!-- Details Side Icon Bar -->
+        <div class="details-iconbar d-flex justify-content-start">
+            <a class="icon-bar d-flex justify-content-between edit display_none" id="btnEdit">
+                <i class="fas fa-edit fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  تعديل</span>
+            </a>
+            <a class="icon-bar d-flex justify-content-between print-details display_none" id="btnPrintTransaction">
+                <i class="fas fa-print fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  طباعه</span>
+            </a>
+            <a class="icon-bar d-flex justify-content-between save display_none" id="btnSave">
+                <i class="fas fa-save fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  حفظ</span>
+            </a>
+            <a class="icon-bar d-flex justify-content-between back display_none" id="btnBack">
+                <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  تراجع</span>
+            </a>
+        </div>
+    </div>
     <!-- Page Wrapper -->
     <div class="container-scroller">
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
@@ -312,16 +360,16 @@
                             </div>
                         </div>*@
                     <div id="DivMassage" class="d-flex justify-content-center display_none">
-                            <div class="toast  align-items-center text-white border-0  alert-message show  " role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="d-flex">
-                                    <div class="toast-body">
-                                        <i class="fas fa-exclamation-triangle"></i>
-                                        <span id="Text_Massage">خطا فى البيانات </span>
-                                    </div>
+                        <div class="toast  align-items-center text-white border-0  alert-message show  " role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span id="Text_Massage">خطا فى البيانات </span>
+                                </div>
 
                                 @*    <button type="button" class="btn-close btn-close-white me-2 m-auto align-self-start" data-bs-dismiss="toast" aria-label="Close"></button>*@
-                                </div>
                             </div>
+                        </div>
                     </div>
 
 
@@ -335,52 +383,9 @@
             <!-- main-panel ends -->
         </div>
     </div>
-    <!-- Side Icon Bar -->
-    <div class="main-iconbar">
-        <a class="icon-bar d-flex justify-content-between view " id="btnShow">
-            <i class="fas fa-eye side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  عرض</span>
-        </a>
 
-        <a class="icon-bar d-flex justify-content-between add display_none" id="btnAddReturn">
-            <i class="fas fa-folder-plus side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  اضافه</span>
-        </a>
 
-        <a class="icon-bar d-flex justify-content-between print display_none" id="btnPrintTrview">
-            <i class="fas fa-print side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  طباعه</span>
-        </a>
 
-        <a class="icon-bar d-flex justify-content-between pdf display_none" id="btnPrintTrPDF">
-            <i class="fas fa-file-pdf side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  Pdf</span>
-        </a>
-
-        <a class="icon-bar d-flex justify-content-between excel display_none" id="btnPrintTrEXEL">
-            <i class="fas fa-file-csv side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  Excel</span>
-        </a>
-    </div>
-    <!-- Details Side Icon Bar -->
-    <div class="details-iconbar d-flex justify-content-start">
-        <a class="icon-bar d-flex justify-content-between edit display_none" id="btnEdit">
-            <i class="fas fa-edit side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  تعديل</span>
-        </a>
-        <a class="icon-bar d-flex justify-content-between print-details display_none" id="btnPrintTransaction">
-            <i class="fas fa-print side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  طباعه</span>
-        </a>
-        <a class="icon-bar d-flex justify-content-between save display_none" id="btnSave">
-            <i class="fas fa-save  side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  حفظ</span>
-        </a>
-        <a class="icon-bar d-flex justify-content-between back display_none" id="btnBack">
-            <i class="fas fa-backspace side-icon ms-1"></i>
-            <span class="align-self-center mb-2">  تراجع</span>
-        </a>
-    </div>
 
     <!--..............................user setting..................................................-->
     <div class="modal fade" id="user_setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -454,7 +459,7 @@
             </div>
         </div>
     </div>
-    <div id="SearchBox" class=" fade styleserch" style="display:none;z-index:999999999;">
+    <div id="SearchBox" class="fade styleserch" style="display:none;z-index:999999999;">
         <div style="background-color:#ef6603!important; position:absolute;top:0px;left:0px;width:100%;height:40px;cursor:move;border-top-right-radius: 13px!important;border-top-left-radius: 13px!important;">
             <input type="button" onclick="$('#SearchBox').modal('hide');" id="btnCloseSearch" name="name" value="x" class="btn colose_lay_btn btn-danger" style="height: 40px;
               width: 38px;font-size: 20px;float: left;border-color: #ef6603!important;background-color: #ef6603!important;" />
@@ -518,7 +523,6 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
-    @*<script src="~/Newtemplate/template/assets/js/counter.js"></script>*@
     <script src="~/Newtemplate/template/assets/js/counter.js"></script>
     <!-- End custom js for this page -->
 

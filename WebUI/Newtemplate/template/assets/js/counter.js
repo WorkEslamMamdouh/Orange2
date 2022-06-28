@@ -20,8 +20,3 @@ if (increaseButton != null) {
         document.querySelector('[data-id="number"]').value = value;
     });
 }
-/*Alert Message*/
-//var myAlert = document.getElementById('Text_Massage');
-var myAlert = document.getElementById('test');
-var bsAlert = new bootstrap.Toast(myAlert);
-bsAlert.show();

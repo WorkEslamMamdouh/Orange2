@@ -126,8 +126,8 @@ var HomeComponent;
         });
         Language();
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            $("#camp_name").val(SysSession.CurrentEnvironment.CompanyNameAr);
-            // document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyNameAr + " - " + SysSession.CurrentEnvironment.CurrentYear;
+            //$("#camp_name").val(SysSession.CurrentEnvironment.CompanyNameAr);
+            document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyNameAr + " - " + SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             document.getElementById('camp_name').innerHTML = SysSession.CurrentEnvironment.CompanyName + " - " + SysSession.CurrentEnvironment.CurrentYear;
