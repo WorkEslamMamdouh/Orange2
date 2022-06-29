@@ -1,5 +1,4 @@
-﻿//var decreaseButton = document.getElementById("decrease");
-//var increaseButton = document.getElementById("increase");
+﻿
 var decreaseButton = document.querySelector('[data-id="decrease"]');
 var increaseButton = document.querySelector('[data-id="increase"]');
 if (decreaseButton != null) {
