@@ -915,10 +915,7 @@ pading_2Processes {
 .textcentr_AccTrReceiptNote {
     padding-right: 29px !important;
 }
-.back-to-top.active {
-    visibility: visible;
-    opacity: 1;
-}
+
 
 .fontitm3SlsTrSales {
     float: right !important;
@@ -940,6 +937,10 @@ pading_2Processes {
     border-radius: 50px;
     transition: all 0.4s;
 }
+    .back-to-top.active {
+        visibility: visible;
+        opacity: 1;
+    }
 .right_SlsTrSalesManager {
     left: 31px !important;
 }

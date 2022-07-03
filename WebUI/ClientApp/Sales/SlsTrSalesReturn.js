@@ -66,11 +66,11 @@ var SlsTrSalesReturn;
     var chkActive;
     //buttons 
     var btnShow;
-    var btnAddReturn;
+    var btnAdd;
     var btnBack; // btnBack btnSave
     var btnSave;
     var btnInvoiceSearch;
-    var btnEdit;
+    var btnUpdate;
     //print buttons 
     var btnPrintTrview;
     var btnPrintTrPDF;
@@ -173,11 +173,11 @@ var SlsTrSalesReturn;
         chkActive = document.getElementById("chkActive");
         //button
         btnShow = document.getElementById("btnShow");
-        btnAddReturn = document.getElementById("btnAddReturn");
+        btnAdd = document.getElementById("btnAdd");
         btnBack = document.getElementById("btnBack");
         btnSave = document.getElementById("btnSave");
         btnInvoiceSearch = document.getElementById("btnInvoiceSearch");
-        btnEdit = document.getElementById("btnEdit");
+        btnUpdate = document.getElementById("btnUpdate");
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
@@ -188,12 +188,12 @@ var SlsTrSalesReturn;
     function InitializeEvents() {
         chkActive.onclick = chkActive_onchecked;
         btnShow.onclick = btnShow_onclick;
-        btnAddReturn.onclick = AddNewReturn_onclick;
+        btnAdd.onclick = AddNewReturn_onclick;
         btnBack.onclick = btnBack_onclick;
         btnSave.onclick = btnSave_onclick;
         txtInvoiceNumber.onchange = txtInvoiceNumber_onchange;
         btnInvoiceSearch.onclick = btnInvoiceSearch_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         ddlInvoiceCustomer.onchange = ddlInvoiceCustomer_onchange;
         ddlReturnTypeShow.onchange = ddlReturnTypeShow_onchange;
         ddlCustomer.onchange = ddlCustomer_onchange;
@@ -376,7 +376,7 @@ var SlsTrSalesReturn;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
     function chkActive_onchecked() {
-        if (btnEdit.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
+        if (btnUpdate.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
             openReturn();
             $('#btnPrintTransaction').removeClass("display_none");
         }
@@ -385,13 +385,13 @@ var SlsTrSalesReturn;
         try {
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkActive.checked = true;
             }
             else {
                 chkActive.disabled = true;
                 chkActive.checked = false;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
             }
         }
         catch (e) {
@@ -417,7 +417,7 @@ var SlsTrSalesReturn;
         return res;
     }
     //------------------------------------------------------ buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         EditFlag = true;
@@ -425,7 +425,7 @@ var SlsTrSalesReturn;
         btnInvoiceSearch.disabled = true;
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $('#btnEdit').addClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
         $("#ddlCashBox").removeAttr("disabled");
         $("#txtCashAmount").removeAttr("disabled");
@@ -454,7 +454,7 @@ var SlsTrSalesReturn;
             globalRefTrID = id;
             btnInvoiceSearch.disabled = true;
             txtInvoiceNumber_onchange();
-            btnAddReturn_onclick();
+            btnAdd_onclick();
         });
     }
     function btnSave_onclick() {
@@ -518,12 +518,12 @@ var SlsTrSalesReturn;
             $("#ddlFreeSalesman").attr("disabled", "disabled");
             // $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $('#btnPrint').removeClass("display_none");
             $("#btnSave").addClass("display_none");
             $('#btnPrintTransaction').removeClass("display_none");
             $('#btnBack').addClass("display_none");
-            $('#btnEdit').removeClass("display_none");
+            $('#btnUpdate').removeClass("display_none");
             globalInvoiceID = 0;
             globalRefTrID = 0;
             $("#ddlCashBox").attr("disabled", "disabled");
@@ -583,7 +583,7 @@ var SlsTrSalesReturn;
         $("#divReturnDetails").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrint").addClass("display_none");
         $('#div_Data').html("");
@@ -620,7 +620,7 @@ var SlsTrSalesReturn;
         EditFlag = false;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
-    function btnAddReturn_onclick() {
+    function btnAdd_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
         txtInvoiceDate.value = GetDate();
@@ -635,7 +635,7 @@ var SlsTrSalesReturn;
             $("#btnBack").removeClass("display_none");
             $("#btnSave").removeClass("display_none");
             $("#btnPrint").addClass("display_none");
-            $('#btnEdit').addClass("display_none");
+            $('#btnUpdate').addClass("display_none");
             for (var i = 0; i < CountGrid; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
                 $('.btn-number3' + i).removeAttr("disabled");
@@ -1041,12 +1041,12 @@ var SlsTrSalesReturn;
             // $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkActive.checked = true;
             }
             else {
                 chkActive.disabled = true;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
                 chkActive.checked = false;
             }
             $('#divCreationPanel').removeClass("display_none");
@@ -1866,7 +1866,7 @@ var SlsTrSalesReturn;
         $('#btnPrint').removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $('#btnBack').addClass("display_none");
-        $('#btnEdit').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $("#div_hedr").removeAttr("disabled");
         $("#div_hedr").removeClass("disabledDiv");
         txtInvoiceDate.disabled = true;
@@ -1960,13 +1960,13 @@ var SlsTrSalesReturn;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
                     GlobalReturnID = res.InvoiceID;
-                    btnEdit.disabled = false;
+                    btnUpdate.disabled = false;
                     Success();
                     AfterInsertOrUpdateFlag = true;
                     Grid_RowDoubleClicked();
                 }
                 else {
-                    btnEdit.disabled = true;
+                    btnUpdate.disabled = true;
                 }
             }
         });

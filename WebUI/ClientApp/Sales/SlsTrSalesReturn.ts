@@ -70,11 +70,11 @@ namespace SlsTrSalesReturn {
 
     //buttons 
     var btnShow: HTMLButtonElement;
-    var btnAddReturn: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnBack: HTMLButtonElement;// btnBack btnSave
     var btnSave: HTMLButtonElement;
     var btnInvoiceSearch: HTMLButtonElement;
-    var btnEdit: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
     //print buttons 
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
@@ -187,11 +187,11 @@ namespace SlsTrSalesReturn {
 
         //button
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
-        btnAddReturn = document.getElementById("btnAddReturn") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnInvoiceSearch = document.getElementById("btnInvoiceSearch") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnEdit") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
@@ -202,12 +202,12 @@ namespace SlsTrSalesReturn {
     function InitializeEvents() {
         chkActive.onclick = chkActive_onchecked;
         btnShow.onclick = btnShow_onclick;
-        btnAddReturn.onclick = AddNewReturn_onclick;
+        btnAdd.onclick = AddNewReturn_onclick;
         btnBack.onclick = btnBack_onclick;
         btnSave.onclick = btnSave_onclick;
         txtInvoiceNumber.onchange = txtInvoiceNumber_onchange;
         btnInvoiceSearch.onclick = btnInvoiceSearch_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         ddlInvoiceCustomer.onchange = ddlInvoiceCustomer_onchange;
         ddlReturnTypeShow.onchange = ddlReturnTypeShow_onchange;
         ddlCustomer.onchange = ddlCustomer_onchange;
@@ -418,7 +418,7 @@ namespace SlsTrSalesReturn {
     }
     function chkActive_onchecked() {
 
-        if (btnEdit.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
+        if (btnUpdate.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
             openReturn();
             $('#btnPrintTransaction').removeClass("display_none");
         }
@@ -429,13 +429,13 @@ namespace SlsTrSalesReturn {
 
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkActive.checked = true;
             }
             else {
                 chkActive.disabled = true;
                 chkActive.checked = false;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
             }
         } catch (e) {
 
@@ -461,14 +461,14 @@ namespace SlsTrSalesReturn {
         return res;
     }
     //------------------------------------------------------ buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         EditFlag = true;
         InsertFlag = true;
         btnInvoiceSearch.disabled = true;
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $('#btnEdit').addClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
 
         $("#ddlCashBox").removeAttr("disabled");
@@ -507,7 +507,7 @@ namespace SlsTrSalesReturn {
             globalRefTrID = id;
             btnInvoiceSearch.disabled = true;
             txtInvoiceNumber_onchange();
-            btnAddReturn_onclick();
+            btnAdd_onclick();
         });
     }
     function btnSave_onclick() {
@@ -577,12 +577,12 @@ namespace SlsTrSalesReturn {
             $("#ddlFreeSalesman").attr("disabled", "disabled");
            // $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $('#btnPrint').removeClass("display_none");
             $("#btnSave").addClass("display_none");
             $('#btnPrintTransaction').removeClass("display_none");
             $('#btnBack').addClass("display_none");
-            $('#btnEdit').removeClass("display_none");
+            $('#btnUpdate').removeClass("display_none");
             globalInvoiceID = 0;
             globalRefTrID = 0;
             $("#ddlCashBox").attr("disabled", "disabled");
@@ -642,7 +642,7 @@ namespace SlsTrSalesReturn {
         $("#divReturnDetails").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrint").addClass("display_none");
 
@@ -689,7 +689,7 @@ namespace SlsTrSalesReturn {
 
 
     }
-    function btnAddReturn_onclick() {
+    function btnAdd_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
         txtInvoiceDate.value = GetDate();
         var unApprovedReturn: boolean = false;
@@ -704,7 +704,7 @@ namespace SlsTrSalesReturn {
             $("#btnBack").removeClass("display_none");
             $("#btnSave").removeClass("display_none");
             $("#btnPrint").addClass("display_none");
-            $('#btnEdit').addClass("display_none");
+            $('#btnUpdate').addClass("display_none");
 
             for (let i = 0; i < CountGrid; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
@@ -1150,12 +1150,12 @@ namespace SlsTrSalesReturn {
            // $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkActive.checked = true;
             }
             else {
                 chkActive.disabled = true;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
                 chkActive.checked = false;
             }
 
@@ -2184,7 +2184,7 @@ namespace SlsTrSalesReturn {
         $('#btnPrint').removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $('#btnBack').addClass("display_none");
-        $('#btnEdit').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
 
         $("#div_hedr").removeAttr("disabled");
         $("#div_hedr").removeClass("disabledDiv");
@@ -2295,12 +2295,12 @@ namespace SlsTrSalesReturn {
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Sls_TR_Invoice;
                     GlobalReturnID = res.InvoiceID;
-                    btnEdit.disabled = false;
+                    btnUpdate.disabled = false;
                     Success();
                     AfterInsertOrUpdateFlag = true;
                     Grid_RowDoubleClicked();
                 } else {
-                    btnEdit.disabled = true;
+                    btnUpdate.disabled = true;
                 }
             }
         });

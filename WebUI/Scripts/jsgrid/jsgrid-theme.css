@@ -119,9 +119,9 @@
     background: #fff !important;
 }
 
-    .jsgrid-alt-row > .jsgrid-cell:hover {
+    /*.jsgrid-alt-row > .jsgrid-cell:hover {
         background: #ffe1c6 !important;
-    }
+    }*/
  
 .jsgrid-header-row > .jsgrid-header-cell {
     background: #f9f9f9;
@@ -140,8 +140,8 @@
 }
 
 .jsgrid-selected-row > .jsgrid-cell {
-    background: #c4e2ff;
-    border-color: #c4e2ff;
+    background: #c4e2ff ;
+    border-color: #c4e2ff ;
 }
 
 .jsgrid-nodata-row > .jsgrid-cell {

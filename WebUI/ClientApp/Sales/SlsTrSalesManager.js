@@ -255,9 +255,9 @@ var SlsTrSalesManager;
     }
     function btndiv_1_onclick() {
         $("#btndiv_1").addClass("Actiev");
-        $("#btndiv_1").removeClass("navbar navbar-inverse");
+        //  $("#btndiv_1").removeClass("navbar navbar-inverse");
         $("#btndiv_2").removeClass("Actiev");
-        $("#btndiv_2").addClass("navbar navbar-inverse");
+        //  $("#btndiv_2").addClass("navbar navbar-inverse");
         $("#div_1").removeClass("display_none");
         $("#div_2").addClass("display_none");
     }
@@ -280,9 +280,9 @@ var SlsTrSalesManager;
             }
         }
         $("#btndiv_1").removeClass("Actiev");
-        $("#btndiv_1").addClass("navbar navbar-inverse");
+        //$("#btndiv_1").addClass("navbar navbar-inverse");
         $("#btndiv_2").addClass("Actiev");
-        $("#btndiv_2").removeClass("navbar navbar-inverse");
+        //$("#btndiv_2").removeClass("navbar navbar-inverse");
         $("#div_1").addClass("display_none");
         $("#div_2").removeClass("display_none");
         if ($("#btnUpdate").attr('class') == 'btn btn-primary float_left display_none') {

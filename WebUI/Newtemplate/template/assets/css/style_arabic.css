@@ -11177,12 +11177,13 @@ progress {
  
 }
 
-    .table > :not(caption) > * > *, .jsgrid .jsgrid-table > :not(caption) > * > * {
-        padding: 0.5rem 0.5rem;
-        background-color: var(--bs-table-bg);
-        border-bottom-width: 1px;
-        box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-    }
+
+.table > :not(caption) > * > *, .jsgrid .jsgrid-table > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
 
     .table > tbody, .jsgrid .jsgrid-table > tbody {
         vertical-align: inherit;
@@ -13037,12 +13038,13 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     color: var(--bs-light);
     background-color: var(--main-blue);
     border-color: var(--main-blue);
+    transition: all .5s ease-in-out;
 }
 
     .btn-main:hover {
-        color: var(--Lighter-blue);
-        background-color: var(--dark-blue);
-        border-color: var(--dark-blue);
+        /*color: var(--Lighter-blue);*/
+        background-color: var(--main-orange);
+        border-color: var(--main-orange);
     }
 .btn-gray {
     color: var(--bs-light);
@@ -28703,8 +28705,10 @@ div.tagsinput {
     z-index: 9999;
     cursor: pointer;
 }
-    .main-iconbar .icon-bar:hover,
-    .details-iconbar .icon-bar:hover {
+.details-iconbar .icon-bar {
+    position: fixed;
+}
+    .main-iconbar .icon-bar:hover, .details-iconbar .icon-bar:hover {
         left: 0px;
         background-color: var(--main-orange);
     }
@@ -28762,19 +28766,49 @@ div.tagsinput {
 .back {
     top: 760px;
 }
-
-/*Table Style*/
-.table-blue {
-    --bs-table-bg: var(--light-blue);
-    --bs-table-striped-bg: var(--light-blue);
-    --bs-table-striped-color: var(--bs-black);
-    --bs-table-active-bg: #373b3e;
-    --bs-table-active-color: #fff;
-    --bs-table-hover-bg: var(--main-blue);
-    --bs-table-hover-color: var(--bs-light);
-    color: var(--main-blue);
-    border-color: var(--bs-gray-800);
+/*Top Button*/
+.top-container {
+    position: relative;
 }
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 1rem;
+    right: 16rem;
+    z-index: 99999;
+    transition: all 0.4s;
+}
+.sidebar-icon-only .page-body-wrapper .back-to-top {
+    right: 5rem;
+}
+
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+}
+    .back-to-top i{
+        color : var(--main-orange);
+        font-size: 2.5rem;
+    }
+@media screen and (max-width: 992px) {
+    .back-to-top {
+        z-index: 9;
+        right: 1rem;
+    }
+}
+    /*Table Style*/
+    .table-blue {
+        --bs-table-bg: var(--light-blue);
+        --bs-table-striped-bg: var(--light-blue);
+        --bs-table-striped-color: var(--bs-black);
+        --bs-table-active-bg: #373b3e;
+        --bs-table-active-color: #fff;
+        --bs-table-hover-bg: var(--main-blue);
+        --bs-table-hover-color: var(--bs-light);
+        color: var(--main-blue);
+        border-color: var(--bs-gray-800);
+    }
     .table-blue thead th {
         background-color: var(--main-blue);
         color: var(--bs-light);
@@ -29081,15 +29115,19 @@ select.form-control[disabled] {
     -moz-appearance: none;
     appearance: none;
 }*/
+.active{
+    display: flex;
+}
 .display_none {
     display: none !important;
 }
+
 .form-control[disabled]:not(.search-control) {
     border: none;
     background-color: transparent;
     font-size: .9rem;
     margin-right: -.9rem;
-    text-align:right;
+    text-align: right;
 }
 .inside-table .form-control[disabled],
 .inside-table .counter[disabled] {
@@ -29182,4 +29220,32 @@ input[class=checkbox]:checked:before {
         width: 50%;
     }
 }
+/*Change Search Table Style*/
 
+
+.jsgrid .jsgrid-table th {
+    white-space: normal;
+    padding: .5em;
+    padding-left: 0;
+    padding-right: 0;
+    font-size:12px;
+    text-align: center;
+}
+.jsgrid .jsgrid-table td {
+    padding: .5em;
+}
+.jsgrid .jsgrid-pager-container {
+    direction: ltr;
+    font-size: 12px;
+}
+.jsgrid-pager{
+    color: var(--main-blue);
+}
+.jsgrid-selected-row > .jsgrid-cell,
+.jsgrid-alt-row.jsgrid-selected-row > .jsgrid-cell {
+    background: var(--Light-orange) !important;
+    border-color: var(--Light-orange) !important;
+}
+/*.jsgrid-table {
+    table-layout:auto !important;
+}*/
