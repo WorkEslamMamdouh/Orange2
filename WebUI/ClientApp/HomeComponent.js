@@ -156,6 +156,7 @@ var HomeComponent;
         else {
             $('#LanguageButtonHome').text(" تغير اللغة  ");
         }
+        debugger;
         btn_loguotuser = DocumentActions.GetElementById("btn_loguotuser");
         btn_loguotuser.onclick = LogoutUserApi;
         //CheckTime(); 

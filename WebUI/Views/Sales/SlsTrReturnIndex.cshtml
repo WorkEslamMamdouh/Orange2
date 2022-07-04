@@ -4,72 +4,51 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
-        .disabledDiv {
-            pointer-events: none;
-            opacity: 0.4;
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    #btnAddDetails {
+        font-size: 40px;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
         }
 
-        #btnAddDetails {
-            font-size: 40px;
-        }
+    .btnplasandmines {
+        display: inline-block;
+        padding: 2px 4px;
+        height: 36px;
+        margin-bottom: 0;
+        font-size: 10px;
+        font-weight: 400;
+        line-height: 1.428571;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        font-weight: bold;
+    }
 
-            #btnAddDetails:hover {
-                color: #24b414;
-            }
+    .fontitm3 {
+        float: right;
+        margin: 5px -13px 0px 0px !important;
+        font-size: 25px !important;
+        position: absolute;
+    }
+</style>
 
-        .btnplasandmines {
-            display: inline-block;
-            padding: 2px 4px;
-            height: 36px;
-            margin-bottom: 0;
-            font-size: 10px;
-            font-weight: 400;
-            line-height: 1.428571;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-image: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .fontitm3 {
-            float: right;
-            margin: 5px -13px 0px 0px !important;
-            font-size: 25px !important;
-            position: absolute;
-        }
-    </style>
-<script>
-    $(document).ready(function () {
-
-        $("#ddlSeller").select2();
-        $("#ddlCustomer").select2();
-        $("#ddlCustomer2").select2();
-
-        // Read selected option
-        $('#but_read').click(function () {
-            var username = $('#ddlSeller option:selected').text();
-            var userid = $('#ddlSeller').val();
-
-            var username = $('#ddlCustomer option:selected').text();
-            var userid = $('#ddlCustomer').val();
-
-            var username = $('#ddlInvoiceCustomer option:selected').text();
-            var userid = $('#ddlInvoiceCustomer').val();
-
-            $('#result').html("id : " + userid + ", name : " + username);
-        });
-    });
-</script>
 
 <div class="row gy-3">
 
@@ -136,7 +115,7 @@
     </div>
 
     <!-- Details Container -->
-    <div class="col-12" >
+    <div class="col-12">
         <div class="display_none" id="divShow">
             <div class="card bg-light-blue">
                 <div class="card-body">
@@ -151,303 +130,303 @@
                 </div>
             </div>
         </div>
-                <!-- Details  -->
-                <div id="divReturnDetails" class="row display_none">
-                    <div class="col-12 service-content">
-                        <div class="serviceBox mt-5">
+        <!-- Details  -->
+        <div id="divReturnDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox mt-5">
 
-                            <div class="row g-0">
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرتجع</label>
-                                        <div class="col-9 col-md-7">
-                                            <input disabled type="text" class="form-control " id="lblReturnNumber">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4 col-md-5 align-self-center p-md-0">تاريخ المرتجع</label>
-                                        <div class="col-8 col-md-7 ">
-                                            <input type="date" class="form-control" id="txtInvoiceDate">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12  col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">اعتماد</label>
-                                        <div class="col-9 col-md-7">
-                                            <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
-                                        </div>
-
-
-                                        @*<div class="switchToggle">
-                                                <input id="chkActive" class="checkbox-input certified" type="checkbox">
-                                                <label for="switch"></label>
-                                            </div>*@
-
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">نوع المرتجع</label>
-                                        <div class="col-9 col-md-7">
-                                            <select disabled class="form-control" id="ddlReturnTypeShow"></select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">رقم الفاتورة</label>
-                                        <div class="col-9 col-md-7">
-
-                                            <div class="search-content">
-                                                <input disabled type="number" class="form-control search-control" id="txtInvoiceNumber">
-                                                <button type="button" name="InvoiceSearch" id="btnInvoiceSearch" class="btn btn-main btn-search">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">الصندوق</label>
-                                        <div class="col-9 col-md-7 ">
-                                            <select disabled class="form-control" id="ddlCashBox"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">المندوب</label>
-                                        <div class="col-9 col-md-7">
-                                            <select disabled class="form-control" id="ddlFreeSalesman"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرجعى</label>
-                                        <div class="col-9 col-md-7">
-                                            <input disabled type="text" class="form-control" name="RefNO" id="txtRefNo">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">المبلغ المسدد</label>
-                                        <div class="col-9 col-md-7">
-                                            <input disabled type="text" class="form-control special-field" id="txtCashAmount">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 ">
-                                    <div class="form-group row g-0">
-                                        <label class="col-2 align-self-center p-md-0">العميل</label>
-                                        <div class="col-5 ">
-                                            <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
-                                        </div>
-                                        <div class="col-5">
-                                            <input type="text" class="form-control" id="txtCustomerName">
-                                        </div>
-                                    </div>
-                                </div>
-                 
-                                <div class="col-12 col-md-3 offset-md-2 ">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">نوع الضريبه</label>
-                                        <div class="col-9 col-md-7">
-                                            <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group row g-0">
-                                        <label class="col-2 col-md-1  align-self-center p-md-0">ملاحظات</label>
-                                        <div class="col-8 col-md-11 ">
-                                            <input disabled type="text" class="form-control" name="Remark" id="txtRemarks">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Inside Table  -->
-                                <div class="inside-table my-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless ">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 3%">م</th>
-                                                    <th style="width: 20%">النوع</th>
-                                                    <th style="width: 20%" class="text-wrap">الصنف</th>
-                                                    <th style="width: 5%" class="text-wrap">الكميه المباعه</th>
-                                                    <th style="width: 7%" class="text-wrap">الكميه المرتجعه</th>
-                                                    <th style="width: 8%" class="text-wrap">السعر</th>
-                                                    <th style="width: 8%" class="text-wrap">السعر بالضريبه</th>
-                                                    <th style="width: 8%" class="text-wrap">الاجمالى</th>
-                                                    <th style="width: 5%" class="text-wrap">نسبه الضريبه</th>
-                                                    <th style="width: 8%" class="text-wrap"> الضريبه</th>
-                                                    <th style="width: 8%" class="text-wrap"> الصافى</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody id="div_Data">
-                                                @*<tr>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control no-border" id="" value="1">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <select class="form-control" id="">
-                                                                    <option>قصب سكر</option>
-                                                                    <option>اختيار 1</option>
-                                                                    <option>اختيار 2</option>
-                                                                </select>
-
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <select class="form-control" id="">
-                                                                    <option>الصنف</option>
-                                                                    <option>اختيار 1</option>
-                                                                    <option>اختيار 2</option>
-                                                                </select>
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="200">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group ps-1">
-                                                                <input class="counter" type="number" data-id="number" id="" value="0" min="0" />
-                                                                <div class="value-button decrease-button" id="decrease">-</div>
-                                                                <div class="value-button increase-button" id="increase">+</div>
-                                                            </div>
-
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="2000">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="2200">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="2400">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="10">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="2400">
-                                                            </div>
-                                                        </th>
-                                                        <th>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" value="2400">
-                                                            </div>
-                                                        </th>
-                                                    </tr>*@
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!-- Total -->
-                                <div class="row total-details">
-                                    <div class="col-12 col-md-2">
-
-                                        <div class="form-group row">
-                                            <label class="col-5 align-self-center p-md-0"> الاصناف</label>
-                                            <div class="col-7">
-                                                <input disabled type="text" class="form-control" id="txtItemCount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-2">
-                                        <div class="form-group row">
-                                            <label class="col-5 align-self-center p-md-0"> العبوات</label>
-                                            <div class="col-7">
-                                                <input disabled type="text" class="form-control" id="txtPackageCount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12  col-md-3">
-                                        <div class="form-group row">
-                                            <label class="col-5 col-md-4 align-self-center p-md-0">الاجمالى</label>
-                                            <div class="col-7 col-md-8">
-                                                <input disabled type="text" class="form-control" id="txtTotal">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12  col-md-2">
-                                        <div class="form-group row">
-                                            <label class="col-5 align-self-center p-md-0">الضريبه</label>
-                                            <div class="col-7">
-                                                <input disabled type="text" class="form-control" id="txtTax">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12  col-md-3">
-                                        <div class="form-group row">
-                                            <label class="col-5 align-self-center p-md-0">الصافى </label>
-                                            <div class="col-7">
-                                                <input disabled type="text" class="form-control" id="txtNet">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Editors Details -->
-                                <div class="row editor-details">
-                                    <div class="col-12 col-md-6">
-
-                                        <div class="form-group row g-0">
-                                            <label class="col-2 align-self-center p-md-0"> البائع</label>
-                                            <div class="col-5 editor-input">
-                                                <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
-                                            </div>
-                                            <div class="col-5 editor-input">
-                                                <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-2 align-self-center p-md-0"> تعديل</label>
-                                            <div class="col-5 editor-input">
-                                                <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
-                                            </div>
-                                            <div class="col-5 editor-input">
-
-                                                <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
-                                            </div>
-                                        </div>
-                                    </div>
-
+                    <div class="row g-0">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرتجع</label>
+                                <div class="col-9 col-md-7">
+                                    <input disabled type="text" class="form-control " id="lblReturnNumber">
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">تاريخ المرتجع</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input type="date" class="form-control" id="txtInvoiceDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12  col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">اعتماد</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
+                                </div>
+
+
+                                @*<div class="switchToggle">
+                                        <input id="chkActive" class="checkbox-input certified" type="checkbox">
+                                        <label for="switch"></label>
+                                    </div>*@
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">نوع المرتجع</label>
+                                <div class="col-9 col-md-7">
+                                    <select disabled class="form-control" id="ddlReturnTypeShow"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">رقم الفاتورة</label>
+                                <div class="col-9 col-md-7">
+
+                                    <div class="search-content">
+                                        <input disabled type="number" class="form-control search-control" id="txtInvoiceNumber">
+                                        <button type="button" name="InvoiceSearch" id="btnInvoiceSearch" class="btn btn-main btn-search">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">الصندوق</label>
+                                <div class="col-9 col-md-7 ">
+                                    <select disabled class="form-control" id="ddlCashBox"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">المندوب</label>
+                                <div class="col-9 col-md-7">
+                                    <select disabled class="form-control" id="ddlFreeSalesman"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرجعى</label>
+                                <div class="col-9 col-md-7">
+                                    <input disabled type="text" class="form-control" name="RefNO" id="txtRefNo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">المبلغ المسدد</label>
+                                <div class="col-9 col-md-7">
+                                    <input disabled type="text" class="form-control special-field" id="txtCashAmount">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 ">
+                            <div class="form-group row g-0">
+                                <label class="col-2 align-self-center p-md-0">العميل</label>
+                                <div class="col-5 ">
+                                    <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" class="form-control" id="txtCustomerName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3 offset-md-2 ">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">نوع الضريبه</label>
+                                <div class="col-9 col-md-7">
+                                    <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-2 col-md-1  align-self-center p-md-0">ملاحظات</label>
+                                <div class="col-8 col-md-11 ">
+                                    <input disabled type="text" class="form-control" name="Remark" id="txtRemarks">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Inside Table  -->
+                        <div class="inside-table my-4">
+                            <div class="table-responsive">
+                                <table class="table table-borderless ">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%">م</th>
+                                            <th style="width: 20%">النوع</th>
+                                            <th style="width: 20%" class="text-wrap">الصنف</th>
+                                            <th style="width: 5%" class="text-wrap">الكميه المباعه</th>
+                                            <th style="width: 7%" class="text-wrap">الكميه المرتجعه</th>
+                                            <th style="width: 8%" class="text-wrap">السعر</th>
+                                            <th style="width: 8%" class="text-wrap">السعر بالضريبه</th>
+                                            <th style="width: 8%" class="text-wrap">الاجمالى</th>
+                                            <th style="width: 5%" class="text-wrap">نسبه الضريبه</th>
+                                            <th style="width: 8%" class="text-wrap"> الضريبه</th>
+                                            <th style="width: 8%" class="text-wrap"> الصافى</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="div_Data">
+                                        @*<tr>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control no-border" id="" value="1">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="">
+                                                            <option>قصب سكر</option>
+                                                            <option>اختيار 1</option>
+                                                            <option>اختيار 2</option>
+                                                        </select>
+
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <select class="form-control" id="">
+                                                            <option>الصنف</option>
+                                                            <option>اختيار 1</option>
+                                                            <option>اختيار 2</option>
+                                                        </select>
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="200">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group ps-1">
+                                                        <input class="counter" type="number" data-id="number" id="" value="0" min="0" />
+                                                        <div class="value-button decrease-button" id="decrease">-</div>
+                                                        <div class="value-button increase-button" id="increase">+</div>
+                                                    </div>
+
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="2000">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="2200">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="2400">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="10">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="2400">
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="" value="2400">
+                                                    </div>
+                                                </th>
+                                            </tr>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Total -->
+                        <div class="row total-details">
+                            <div class="col-12 col-md-2">
+
+                                <div class="form-group row">
+                                    <label class="col-5 align-self-center p-md-0"> الاصناف</label>
+                                    <div class="col-7">
+                                        <input disabled type="text" class="form-control" id="txtItemCount">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="form-group row">
+                                    <label class="col-5 align-self-center p-md-0"> العبوات</label>
+                                    <div class="col-7">
+                                        <input disabled type="text" class="form-control" id="txtPackageCount">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12  col-md-3">
+                                <div class="form-group row">
+                                    <label class="col-5 col-md-4 align-self-center p-md-0">الاجمالى</label>
+                                    <div class="col-7 col-md-8">
+                                        <input disabled type="text" class="form-control" id="txtTotal">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12  col-md-2">
+                                <div class="form-group row">
+                                    <label class="col-5 align-self-center p-md-0">الضريبه</label>
+                                    <div class="col-7">
+                                        <input disabled type="text" class="form-control" id="txtTax">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12  col-md-3">
+                                <div class="form-group row">
+                                    <label class="col-5 align-self-center p-md-0">الصافى </label>
+                                    <div class="col-7">
+                                        <input disabled type="text" class="form-control" id="txtNet">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Editors Details -->
+                        <div class="row editor-details">
+                            <div class="col-12 col-md-6">
+
+                                <div class="form-group row g-0">
+                                    <label class="col-2 align-self-center p-md-0"> البائع</label>
+                                    <div class="col-5 editor-input">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
+                                    </div>
+                                    <div class="col-5 editor-input">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group row g-0">
+                                    <label class="col-2 align-self-center p-md-0"> تعديل</label>
+                                    <div class="col-5 editor-input">
+                                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
+                                    </div>
+                                    <div class="col-5 editor-input">
+
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            @*</div>
-        </div>*@
+            </div>
+        </div>
+        @*</div>
+            </div>*@
     </div>
 
 </div>
@@ -803,4 +782,26 @@
 
 @section Script{
     <script src="~/ClientApp/Sales/SlsTrSalesReturn.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#ddlSeller").select2();
+            $("#ddlCustomer").select2();
+            $("#ddlCustomer2").select2();
+
+            // Read selected option
+            $('#but_read').click(function () {
+                var username = $('#ddlSeller option:selected').text();
+                var userid = $('#ddlSeller').val();
+
+                var username = $('#ddlCustomer option:selected').text();
+                var userid = $('#ddlCustomer').val();
+
+                var username = $('#ddlInvoiceCustomer option:selected').text();
+                var userid = $('#ddlInvoiceCustomer').val();
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
 }

@@ -2796,9 +2796,9 @@ var SlsTrSalesManager;
         InvoiceModel.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         InvoiceModel.UpdatedAt = DateTimeFormat(Date().toString());
         InvoiceModel.CustomerName = $("#ddlInvoiceCustomer option:selected").text();
-        InvoiceModel.TrType = 0; //0 invoice 1 return
+        InvoiceModel.TrType = 0; // invoice 1 return
         InvoiceModel.SlsInvSrc = 1; // 1 from store 2 from van 
-        InvoiceModel.SlsInvType = 1; //  retail 
+        InvoiceModel.SlsInvType = 1; // retail 
         InvoiceModel.StoreId = StoreID; //main store
         InvoiceModel.SalesmanId = Number(ddlSalesman.value);
         InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
