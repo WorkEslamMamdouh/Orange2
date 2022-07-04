@@ -160,7 +160,7 @@
         });
     });
 </script>
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred">
+<div class="col-12  borderred">
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -212,8 +212,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="cotrolDiv">
-
+    <div class="col-12" id="cotrolDiv">
+        @* Main Filter *@
         <div class="col-12">
             <div class="card bg-light-blue">
                 <div class="card-body">
@@ -318,16 +318,14 @@
         <div class="display_none" id="divShow">
             <div class="card bg-light-blue">
                 <div class="card-body">
-                    <div class="form-group row mb-2">
-                        <label class="col-3 col-sm-2  col-xl-1 align-self-center p-md-0">بحث</label>
-                        <div class="col-9 col-sm-4 col-xl-3">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
                             <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.Search">
                         </div>
                     </div>
                     <!-- Table  -->
-                    <div id="divGridDetails" class="table-responsive main-table">
-                        <table id="divGridDetails"></table>
-                    </div>
+                     <table id="divGridDetails"></table>
                 </div>
             </div>
         </div>
@@ -400,7 +398,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-2">
                             <div class="form-group row g-0">
                                 <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
                                 <div class="col-8 ">
@@ -621,7 +619,7 @@
                                     <input disabled class="form-control" name="Tot_Qty" id="txtPackageCount" />
                                 </div>
                                 <div class="col-4 ">
-                                    <select id="ddlCashBox"class="form-control"></select>
+                                    <select id="ddlCashBox" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
@@ -703,8 +701,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
         <div id="div_2" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 Div_Bar display_none" style="background-color: #fbebdc!important;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                 <div id="div_lapel2" class=" col-lg-9">
@@ -827,10 +823,11 @@
             </div>
             <br>
         </div>
-
-    </div>
+    </div>     
 
 </div>
+
+
 
 
 @section Script{

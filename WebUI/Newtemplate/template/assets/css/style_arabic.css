@@ -29137,6 +29137,11 @@ select.form-control[disabled] {
     margin-right: -.9rem;
     text-align: right;
 }
+
+label.form-control[disabled]:not(.search-control) {
+    font-weight: normal;
+   padding-top:1rem;
+}
 .inside-table .form-control[disabled],
 .inside-table .counter[disabled] {
     border: none;

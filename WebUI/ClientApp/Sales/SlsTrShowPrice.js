@@ -108,7 +108,7 @@ var SlsTrShowPrice;
     var AutherizeFlag = false;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].SalesPriceWithVAT);
-    var btnPrint;
+    //   var btnPrint: HTMLInputElement;
     var Tax_Rate = 0;
     function InitalizeComponent() {
         // VatPrc
@@ -147,11 +147,11 @@ var SlsTrShowPrice;
         txtNet.value = NetCount.toString();
         txtCommission.value = commissionCount.toString();
         GetAllIItem();
-        $('#btnPrint').addClass('display_none');
+        // $('#btnPrint').addClass('display_none');
     }
     SlsTrShowPrice.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
-        btnPrint = document.getElementById("btnPrint");
+        //  btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
         // Drop down lists
         ddlStore = document.getElementById("ddlStore");
         ddlCustomer = document.getElementById("ddlCustomer");
@@ -214,7 +214,7 @@ var SlsTrShowPrice;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        //    btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick;
         //////debugger
@@ -876,32 +876,33 @@ var SlsTrShowPrice;
     function BuildControls(cnt) {
         var html;
         //debugger;
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="col-xs-12 " > <div class="col-xs-12> ' +
-            '<div class="col-xs-1">' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3SlsTrShowPrice"></span></div>' +
-            '<div class="col-xs-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled /></div>' +
-            '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control input-sm   right2 display_none"  />' +
-            '<div class="col-xs-2">' +
-            '<select id="ddlFamily' + cnt + '" class="form-control input-sm  "><option value="null">' + (lang == "ar" ? "النوع" : "Type") + '</option></select></div>' +
-            '<div class="col-xs-2">' +
-            '<select id="ddlItem' + cnt + '" class="form-control input-sm  "><option value="null">' + (lang == "ar" ? "الصنف" : "Item") + '</option></select></div>' +
-            '<div class="col-xs-1 left_right"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number1' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[1]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:30px;" id="txtQuantity' + cnt + '" name="quant[1]" class="form-control input-sm     font1" value="1" min="1" max="1000" step="1"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus1"   class="btnplasandmines btn-default btn-number1' + cnt + '" data-type="plus" data-field="quant[1]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class="col-xs-1" style="width: 6%;"><input type="text"  class="form-control input-sm  " id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control input-sm    font1" value="0" min="0" max="1000" step="1"></div>' +
-            '<div class="col-xs-1"><input type="text"  class="form-control input-sm  " id="txtPrice' + cnt + '" name="quant[3]" class="form-control input-sm     font1" value="0" min="0" step="1"></div>' +
-            '<div class="col-xs-1"><input type="text"  class="form-control input-sm  " id="txtUnitpriceWithVat' + cnt + '" name="quant[3]" class="form-control input-sm     font1" value="0" min="0" step="1"></div>' +
-            //'<div class=" col-lg-1" style="width: 12.666667%;" ><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:36px;" id="txtPrice' + cnt + '" name="quant[2]" class="form-control input-sm     font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class="col-xs-1" style="width: 4%;">' +
-            '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled /></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTotal' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTax' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
-            '</div></div></div>' +
-            '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control input-sm  "/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm  "/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm  " />';
+        html = "<tr>\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control right2 display_none\"  />\n\t                <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control input-sm right2\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlFamily" + cnt + "\" class=\"form-control\">\n                                 <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                              <option value=\"null\">  " + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#div_Data").append(html);
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="col-xs-12 " > <div class="col-xs-12> ' +
+        //    '<div class="col-xs-1">' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3SlsTrShowPrice"></span></div>' +
+        //    '<div class="col-xs-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
+        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled /></div>' +
+        //    '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control input-sm   right2 display_none"  />' +
+        //    '<div class="col-xs-2">' +
+        //    '<select id="ddlFamily' + cnt + '" class="form-control input-sm  "><option value="null">' + (lang == "ar" ? "النوع" : "Type") + '</option></select></div>' +
+        //    '<div class="col-xs-2">' +
+        //    '<select id="ddlItem' + cnt + '" class="form-control input-sm  "><option value="null">' + (lang == "ar" ? "الصنف" : "Item") + '</option></select></div>' +
+        //    '<div class="col-xs-1 left_right"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number1' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[1]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:30px;" id="txtQuantity' + cnt + '" name="quant[1]" class="form-control input-sm     font1" value="1" min="1" max="1000" step="1"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus1"   class="btnplasandmines btn-default btn-number1' + cnt + '" data-type="plus" data-field="quant[1]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
+        //    '<div class="col-xs-1" style="width: 6%;"><input type="text"  class="form-control input-sm  " id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control input-sm    font1" value="0" min="0" max="1000" step="1"></div>' +
+        //    '<div class="col-xs-1"><input type="text"  class="form-control input-sm  " id="txtPrice' + cnt + '" name="quant[3]" class="form-control input-sm     font1" value="0" min="0" step="1"></div>' +
+        //    '<div class="col-xs-1"><input type="text"  class="form-control input-sm  " id="txtUnitpriceWithVat' + cnt + '" name="quant[3]" class="form-control input-sm     font1" value="0" min="0" step="1"></div>' +
+        //    //'<div class=" col-lg-1" style="width: 12.666667%;" ><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:36px;" id="txtPrice' + cnt + '" name="quant[2]" class="form-control input-sm     font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
+        //    '<div class="col-xs-1" style="width: 4%;">' +
+        //    '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotal' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTax' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control input-sm   right2" disabled /></div>' +
+        //    '</div></div></div>' +
+        //    '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control input-sm  "/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm  "/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm  " />';
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
             var fieldName = $(this).attr('data-field');
