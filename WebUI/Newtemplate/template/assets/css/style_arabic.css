@@ -27453,7 +27453,8 @@ div.tagsinput {
 .navbar {
     font-weight: normal;
     background: var(--main-blue);
-    right: 244px;
+    /*right: 244px;*/
+    right: 195px;
     transition: right 0.25s ease;
     -webkit-transition: right 0.25s ease;
     -moz-transition: right 0.25s ease;
@@ -27472,7 +27473,8 @@ div.tagsinput {
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: var(--main-blue);
-    width: 244px;
+    /*width: 244px;*/
+    width: 195px;
     height: 70px;
 }
 @media (max-width: 991px) {
@@ -27495,7 +27497,8 @@ div.tagsinput {
     }
 
     .navbar .navbar-brand-wrapper .navbar-brand img {
-        width: calc(244px - 120px);
+        /*width: calc(244px - 120px);*/
+        width: calc(195px - 120px);
         max-width: 100%;
         height: 28px;
         margin: auto;
@@ -27894,7 +27897,8 @@ div.tagsinput {
     background: var(--main-blue);
     font-weight: normal;
     padding: 0;
-    width: 244px;
+    /*width: 244px;*/
+    width: 195px;
     z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -27907,7 +27911,8 @@ div.tagsinput {
         -moz-transition: width 0.25s ease, background 0.25s ease;
         -ms-transition: width 0.25s ease, background 0.25s ease;
         background: var(--main-blue);
-        width: 244px;
+        /*width: 244px;*/
+        width: 195px;
         height: 70px;
         /*logo test*/
         padding-right:2.5rem;
@@ -27933,9 +27938,9 @@ div.tagsinput {
     }
 
     .sidebar .sidebar-brand-wrapper .sidebar-brand img {
-        width: calc(200px - 120px);
+        width: calc(170px - 120px);
         max-width: 100%;
-        height: 70px;
+        height: 60px;
         margin: auto;
         vertical-align: middle;
     }
@@ -28361,7 +28366,8 @@ div.tagsinput {
         top: 70px;
         bottom: 0;
         overflow: auto;
-        left: -244px;
+        /*left: -244px;*/
+        left: -195px;
         -webkit-transition: all 0.25s ease-out;
         -o-transition: all 0.25s ease-out;
         transition: all 0.25s ease-out;
@@ -28371,7 +28377,12 @@ div.tagsinput {
             right: 0;
         }
 }
+@media screen and (max-width: 710px) {
+    .sidebar-offcanvas {
+        top: 135px;
+    }
 
+}
 .sidebar-tinted .sidebar {
     background: #fa424a;
 }
@@ -28640,7 +28651,8 @@ div.tagsinput {
     padding-right: 0;
     padding-left: 0;
     transition: all 0.25s ease;
-    width: calc(100% - 244px);
+    /*width: calc(100% - 244px);*/
+    width: calc(100% - 195px);
 }
 
     .page-body-wrapper.full-page-wrapper {
@@ -29115,13 +29127,9 @@ select.form-control[disabled] {
     -moz-appearance: none;
     appearance: none;
 }*/
-.active{
-    display: flex;
-}
 .display_none {
     display: none !important;
 }
-
 .form-control[disabled]:not(.search-control) {
     border: none;
     background-color: transparent;
@@ -29249,3 +29257,10 @@ input[class=checkbox]:checked:before {
 /*.jsgrid-table {
     table-layout:auto !important;
 }*/
+.nav-link select {
+    background-color: var(--main-blue);
+    color: var(--bs-white);
+    border: none;
+    padding:.5rem;
+
+}
