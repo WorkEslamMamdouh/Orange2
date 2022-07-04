@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
-    .disabledDiv {
+    /*.disabledDiv {
         pointer-events: none;
         opacity: 0.4;
     }
@@ -114,7 +114,7 @@
         float: right;
         margin: 5px -22px 0px 0px !important;
         font-size: 25px !important;
-    }
+    }*/
 
     /*.fontitm3 {
         float: right;
@@ -267,6 +267,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-12  display_none" id="divShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.Search">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <table id="divGridDetails"></table>
+                </div>
+            </div>
+        </div>
     </div>
 
     @* old Filter *@
@@ -335,20 +349,7 @@
         </div>*@
 
 
-    <div class="col-12  display_none" id="divShow">
-        <div class="card bg-light-blue">
-            <div class="card-body">
-                <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
-                    <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
-                    <div class="col-8 col-lg-8 col-md-10">
-                        <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.Search">
-                    </div>
-                </div>
-                <!-- Table  -->
-                <table id="divGridDetails"></table>
-            </div>
-        </div>
-    </div>
+
 
     @* Old Pop up Message *@
     @*<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred display_none">

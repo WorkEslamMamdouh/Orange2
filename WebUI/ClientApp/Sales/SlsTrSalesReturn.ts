@@ -468,7 +468,7 @@ namespace SlsTrSalesReturn {
         btnInvoiceSearch.disabled = true;
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $('#btnUpdate').addClass("display_none");
+        $('#btnUpdate').addClass("display_none"); 
         $('#btnPrintTransaction').addClass("display_none");
 
         $("#ddlCashBox").removeAttr("disabled");
@@ -478,8 +478,13 @@ namespace SlsTrSalesReturn {
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
         $("#searchbutmemreport").attr("disabled", "disabled").off('click');
-        $("#div_hedr").addClass("disabledDiv");
-        $("#div_hedr").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#cotrolDiv").addClass("disabledDiv");
+        $("#cotrolDiv").attr("disabled", "disabled").off('click');
+
+
+
         txtRemarks.disabled = false;
         txtRefNo.disabled = false;
     
@@ -559,23 +564,35 @@ namespace SlsTrSalesReturn {
             $('#btnPrintTransaction').addClass("display_none");
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#searchbutmemreport").removeAttr("disabled");
-            $("#div_hedr").removeAttr("disabled");
-            $("#div_hedr").removeClass("disabledDiv");
+            $("#div_iconbar").removeAttr("disabled");
+            $("#div_iconbar").removeClass("disabled-iconbar");
             $("#chkActive").attr("disabled", "disabled");
+            $("#cotrolDiv").removeAttr("disabled");
+            $("#cotrolDiv").removeClass("disabledDiv");
+
+
         }
         else {
 
-            $("#div_hedr").removeAttr("disabled")
-            $("#div_hedr").removeClass("disabledDiv");
+            $("#div_iconbar").removeAttr("disabled")
+            $("#div_iconbar").removeClass("disabled-iconbar");
+
+            $("#cotrolDiv").removeAttr("disabled")
+            $("#cotrolDiv").removeClass("disabledDiv");
             $('#condtionbtn1').removeClass("col-lg-10");
             $('#condtionbtn1').addClass("col-lg-8");
             $('#condtionbtn2').removeClass("col-lg-2");
             $('#condtionbtn2').addClass("col-lg-4");
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#searchbutmemreport").removeAttr("disabled");
+
+
+
+
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
            // $("#ddlSalesPerson").attr("disabled", "disabled");
+
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#btnUpdate").addClass("display_none");
             $('#btnPrint').removeClass("display_none");
@@ -626,15 +643,26 @@ namespace SlsTrSalesReturn {
 
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#searchbutmemreport").removeAttr("disabled");
+
+        $("#ddlCustomer").removeAttr("disabled");
+        $("#txtStartDate").removeAttr("disabled");
+        $("#txtEndDate").removeAttr("disabled");
+        $("#ddlSalesMan").removeAttr("disabled");
+        $("#ddlReturnType").removeAttr("disabled");
+        $("#ddlStateType").removeAttr("disabled");
     }
     function AddNewReturn_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
         $("#searchbutmemreport").attr("disabled", "disabled").off('click');
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
-        $("#div_hedr").addClass("disabledDiv");
-        $("#div_hedr").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
 
+        $("#cotrolDiv").addClass("disabledDiv");
+        $("#cotrolDiv").attr("disabled", "disabled").off('click');
+
+     
         $("#divShow").removeClass("display_none");
         btnInvoiceSearch.disabled = false;
         txtRefNo.disabled = false;
@@ -2186,8 +2214,11 @@ namespace SlsTrSalesReturn {
         $('#btnBack').addClass("display_none");
         $('#btnUpdate').removeClass("display_none");
 
-        $("#div_hedr").removeAttr("disabled");
-        $("#div_hedr").removeClass("disabledDiv");
+        $("#div_iconbar").removeAttr("disabled");
+        $("#div_iconbar").removeClass("disabled-iconbar");
+
+        $("#cotrolDiv").removeAttr("disabled");
+        $("#cotrolDiv").removeClass("disabledDiv");
         txtInvoiceDate.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
@@ -2196,6 +2227,9 @@ namespace SlsTrSalesReturn {
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#divGridDetails_View").removeClass("display_none");
         $("#searchbutmemreport").removeAttr("disabled");
+
+
+
         for (let i = 0; i < CountGrid; i++) {
 
             $("#txtReturnQuantity" + i).attr("disabled", "disabled");

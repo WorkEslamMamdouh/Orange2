@@ -417,6 +417,7 @@ var SlsTrShowPrice;
         if (NewAdd == true) { //add
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#div_iconbar").removeClass("disabled-iconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -431,6 +432,7 @@ var SlsTrShowPrice;
         else { //Edit
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#div_iconbar").removeClass("disabled-iconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -585,6 +587,8 @@ var SlsTrShowPrice;
         CountItems = 0;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
         Show = false;
         NewAdd = true;
         AddNewRow();
@@ -601,6 +605,8 @@ var SlsTrShowPrice;
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
@@ -1711,6 +1717,7 @@ var SlsTrShowPrice;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#div_iconbar").removeClass("disabled-iconbar");
         Show = true;
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
@@ -1833,6 +1840,7 @@ var SlsTrShowPrice;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#div_iconbar").removeClass("disabled-iconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
         //open_success();
@@ -2233,6 +2241,7 @@ var SlsTrShowPrice;
                 if (result.IsSuccess == true) {
                     btnUpdate.disabled = false;
                     $("#cotrolDiv").removeClass("disabledDiv");
+                    $("#div_iconbar").removeClass("disabled-iconbar");
                     BindStatisticGridData();
                     open_success();
                 }

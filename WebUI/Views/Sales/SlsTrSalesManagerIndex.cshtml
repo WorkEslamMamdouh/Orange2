@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
-    /*.disabledDiv {
+  /*  .disabledDiv {
         pointer-events: none;
         opacity: 0.4;
     }
@@ -280,6 +280,21 @@
                 </div>
             </div>
         </div>
+        <div class="display_none" id="divShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.Search">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <table id="divGridDetails"></table>
+                </div>
+            </div>
+        </div>
+
         @* Side button *@
         @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 d-none">
             <div class="col-md-2 col-md-2 col-sm-2 col-xs-2 p-sm-0 f-sm">
@@ -315,20 +330,7 @@
             </div>
         </div>*@
 
-        <div class="display_none" id="divShow">
-            <div class="card bg-light-blue">
-                <div class="card-body">
-                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
-                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
-                        <div class="col-8 col-lg-8 col-md-10">
-                            <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.Search">
-                        </div>
-                    </div>
-                    <!-- Table  -->
-                     <table id="divGridDetails"></table>
-                </div>
-            </div>
-        </div>
+
 
         <!--old Table  -->
         @*<div class="form-group  margingred  card bg-light-blue  display_none col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="divShow">
