@@ -21,14 +21,21 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Font Awesome-->
+    <link href="~/Scripts/IgGrid/infragistics.css" rel="stylesheet" />
+    <link href="~/Scripts/IgGrid/theme.css" rel="stylesheet" />
+    <link href="~/Scripts/jsgrid/jsgrid-theme.css" rel="stylesheet" />
+    <link href="~/Scripts/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
+    <link href="~/Scripts/jsgrid/jsgrid.css" rel="stylesheet" />
+    <link href="~/Scripts/jsgrid/jsgrid.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Layout styles -->
     @* <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">*@
     <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <!-- End layout styles -->
-   @* <link rel="shortcut icon" href="/images/logokids.png" />*@
+    @* <link rel="shortcut icon" href="/images/logokids.png" />*@
     <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/logo.ico" />
 
+    <link href="~/Newtemplate/template/assets/vendors/select2/select2.min.css" rel="stylesheet" />
 
 
 </head>
@@ -169,27 +176,24 @@
                         </ul>
                     </div>
                 </li>
-
-                <li class="nav-item menu-items " id="btnSales">
+                <li class="nav-item menu-items " id="btnPurchase">
                     <a class="nav-link" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MPurchase">
                         <span class="menu-icon">
-                            <i class="fas fa-cash-register"></i>
+                            <i class="fas fa-shopping-cart"></i>
                         </span>
-                        <span class="menu-title">اعداد حسابات</span>
-
+                        <span class="menu-title">@SystemResource.Purchase</span>
                         <i class="menu-arrow"></i>
-
                     </a>
                     <div class="collapse" id="MPurchase">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item"> <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a></li>
-                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item"> <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a></li>
-                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item"> <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
-                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item"> <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a></li>
+                            <li id="btnPurOrder" key="PurOrder" class="nav-item"> <a id="btnPurOrder" class="nav-link" href="#">@SystemResource.Men_PurOrder</a></li>
+                            <li id="btnPurTrReceive" key="PurTrReceive" class="nav-item"> <a id="btnPurTrReceive" class="nav-link" href="#">@SystemResource.Purchase_Recieve</a></li>
+                            <li id="btnPurTrReturn" key="PurTrReturn" class="nav-item"> <a id="btnPurTrReturn" class="nav-link" href="#">@SystemResource.Purchase_Return</a></li>
 
                         </ul>
                     </div>
                 </li>
+
 
             </ul>
         </nav>
@@ -453,7 +457,7 @@
 
 
     <!--Pop Up Help Window-->
-   <div class="help-pop modal fade in" id="myModal">
+    <div class="help-pop modal fade in" id="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -518,6 +522,7 @@
 
 
     <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
+    @*<script src="~/Newtemplate/template/assets/js/misc.js"></script>*@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="~/Newtemplate/template/assets/vendors/chart.js/Chart.min.js"></script>
@@ -530,7 +535,6 @@
     <!-- inject:js -->
     <script src="~/Newtemplate/template/assets/js/off-canvas.js"></script>
     <script src="~/Newtemplate/template/assets/js/hoverable-collapse.js"></script>
-    <script src="~/Newtemplate/template/assets/js/misc.js"></script>
     <script src="~/Newtemplate/template/assets/js/settings.js"></script>
     <script src="~/Newtemplate/template/assets/js/todolist.js"></script>
     <!-- endinject -->
@@ -541,12 +545,7 @@
 
     @Scripts.Render("~/Bundles/AppScript3")
     @Scripts.Render("~/Bundles/AppScript4")
-    <link href="~/Scripts/IgGrid/infragistics.css" rel="stylesheet" />
-    <link href="~/Scripts/IgGrid/theme.css" rel="stylesheet" />
-    <link href="~/Scripts/jsgrid/jsgrid-theme.css" rel="stylesheet" />
-    <link href="~/Scripts/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
-    <link href="~/Scripts/jsgrid/jsgrid.css" rel="stylesheet" />
-    <link href="~/Scripts/jsgrid/jsgrid.min.css" rel="stylesheet" />
+   
     @RenderSection("Script", required: false)
 
 
@@ -556,6 +555,12 @@
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     @*<input hidden="hidden" id="proBanner"  />
         <input hidden="hidden" id="bannerClose" />*@
+    @*<link href="~/css/select2.min.css" rel="stylesheet" />
+        <script src="~/js/select2.min.js"></script>
+        <script src="~/Newtemplate/template/assets/vendors/select2/select2.min.js"></script>
+        <script src="~/Newtemplate/template/assets/js/select2.js"></script>
+        <script src="~/js/select2.min.js"></script>*@
+    <script src="~/Newtemplate/template/assets/vendors/select2/select2.min.js"></script>
 
 </body>
 </html>

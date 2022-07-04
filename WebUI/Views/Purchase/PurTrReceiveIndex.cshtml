@@ -97,35 +97,7 @@
         padding-left: 0px !important
     }
 </style>
-<script>
-    $(document).ready(function () {
-        // Initialize select2
-        $("#ddlCashBox").select2();
-        $("#ddlSalesman").select2();
-        //  $("#ddlStateType").select2();
-        $("#ddlSeller").select2();
-        $("#ddlCustomer").select2();
-        $("#ddlCustomer2").select2();
-        // Read selected option
-        $('#but_read').click(function () {
-            var username = $('#ddlCashBox option:selected').text();
-            var userid = $('#ddlCashBox').val();
 
-            var username = $('#ddlSalesman option:selected').text();
-            var userid = $('#ddlSalesman').val();
-
-            var username = $('#ddlSeller option:selected').text();
-            var userid = $('#ddlSeller').val();
-
-            var username = $('#ddlCustomer option:selected').text();
-            var userid = $('#ddlCustomer').val();
-
-            var username = $('#ddlCustomer2 option:selected').text();
-            var userid = $('#ddlCustomer2').val();
-            $('#result').html("id : " + userid + ", name : " + username);
-        });
-    });
-</script>
 <div class="col-xs-12    borderred">
     <div id="DivFilter" class="col-xs-12">
         <div class="col-xs-12">
@@ -306,9 +278,9 @@
                 <div id="DivShow" class="col-xs-12 border_gridCont" style="overflow:auto ;">
                     <br />
                     <div id=" " class="col-xs-12 font_header" style="bottom: 5px;font-weight:bold!important">
-                        <div class="col-xs-2"  style="width: 5%;">
+                        <div class="col-xs-2" style="width: 5%;">
                             <span class="">م </span>
-                        </div>   
+                        </div>
                         <div class="col-xs-2" style="width: 10%;">
                             <span class="">@SystemResource.App_Type</span>
                         </div>
@@ -501,10 +473,40 @@
         </div>
     </div>
 </div>
- 
+
 
 @section Script{
-    <script src="~/ClientApp/Purchase/purtrreceive.js"></script>}
+    <script src="~/ClientApp/Purchase/purtrreceive.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize select2
+            $("#ddlCashBox").select2();
+            $("#ddlSalesman").select2();
+            //  $("#ddlStateType").select2();
+            $("#ddlSeller").select2();
+            $("#ddlCustomer").select2();
+            $("#ddlCustomer2").select2();
+            // Read selected option
+            $('#but_read').click(function () {
+                var username = $('#ddlCashBox option:selected').text();
+                var userid = $('#ddlCashBox').val();
+
+                var username = $('#ddlSalesman option:selected').text();
+                var userid = $('#ddlSalesman').val();
+
+                var username = $('#ddlSeller option:selected').text();
+                var userid = $('#ddlSeller').val();
+
+                var username = $('#ddlCustomer option:selected').text();
+                var userid = $('#ddlCustomer').val();
+
+                var username = $('#ddlCustomer2 option:selected').text();
+                var userid = $('#ddlCustomer2').val();
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
+}
 
 <style>
     #divMasterGrid {

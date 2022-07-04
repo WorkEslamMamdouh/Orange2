@@ -1,6 +1,7 @@
 $(document).ready(function () {
     //HomeComponent.Language();
     BackgroundImage.GetBackgroundImage();
+    $('.main-iconbar').addClass('display_none');
 });
 var BackgroundImage;
 (function (BackgroundImage) {

@@ -10,6 +10,7 @@ var Report_Page;
     var succes;
     function InitalizeComponent() {
         $('#div_Reports').removeClass('display_none');
+        $('.main-iconbar').addClass('display_none');
         succes = localStorage.getItem("result");
         InitalizeControls();
         InitalizeEvents();

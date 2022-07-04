@@ -12,6 +12,7 @@ namespace Report_Page {
 
     export function InitalizeComponent() {
         $('#div_Reports').removeClass('display_none');
+        $('.main-iconbar').addClass('display_none');
 
         succes = localStorage.getItem("result");
 
