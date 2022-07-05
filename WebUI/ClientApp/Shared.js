@@ -21,7 +21,7 @@ var SharedWork = /** @class */ (function () {
             //this.SetClientSession("PageIndex", value);
             localStorage.setItem("PageIndex", value.toString());
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(SharedWork, "ModelCount", {
@@ -46,7 +46,7 @@ var SharedWork = /** @class */ (function () {
         },
         set: function (value) {
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     SharedWork.Render = function () {
@@ -263,6 +263,22 @@ function GetSystemSession(Mod) {
                     if (result.Access == true) {
                         $("#btnHelpRep").click(function () { ScreenHelp(Mod); });
                         SysSession.CurrentPrivileges = result;
+                        if (!result.VIEW) {
+                            $('#btnShow').addClass('hidden_Control');
+                            $('#btnPrint').addClass('hidden_Control');
+                            $('#btnPrintTrview').addClass('hidden_Control');
+                            $('#btnPrintTrPDF').addClass('hidden_Control');
+                            $('#btnPrintTrEXEL').addClass('hidden_Control');
+                        }
+                        if (!result.AddNew) {
+                            $('#btnAdd').addClass('hidden_Control');
+                        }
+                        if (!result.PrintOut) {
+                            $('#btnPrintTransaction').addClass('hidden_Control');
+                        }
+                        if (!result.EDIT) {
+                            $('#btnUpdate').addClass('hidden_Control');
+                        }
                     }
                     else {
                         MessageBox.Show("No Inv1_Privilage", Mod);

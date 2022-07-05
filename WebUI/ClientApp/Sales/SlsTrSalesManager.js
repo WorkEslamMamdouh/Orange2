@@ -610,7 +610,7 @@ var SlsTrSalesManager;
         if (NewAdd == true) { //add
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#divIconbar").removeClass("disabledIconbar");
+            $("#div_iconbar").removeClass("disabled-iconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -640,7 +640,7 @@ var SlsTrSalesManager;
         else { //Edit
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#divIconbar").removeClass("disabledIconbar");
+            $("#div_iconbar").removeClass("disabled-iconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -731,8 +731,8 @@ var SlsTrSalesManager;
         CountItems = 0;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#divIconbar").attr("disabled", "disabled").off('click');
-        $("#divIconbar").addClass("disabledIconbar");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
         Show = false;
         NewAdd = true;
         $('#txtCreatedBy').prop("value", SysSession.CurrentEnvironment.UserCode);
@@ -827,15 +827,15 @@ var SlsTrSalesManager;
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#divIconbar").removeClass("disabledIconbar");
+        $("#div_iconbar").removeClass("disabled-iconbar");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#divIconbar").attr("disabled", "disabled").off('click');
-        $("#divIconbar").addClass("disabledIconbar");
+        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#div_iconbar").addClass("disabled-iconbar");
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
@@ -1387,35 +1387,9 @@ var SlsTrSalesManager;
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt) {
         var html;
-        html = "<tr>\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control right2 display_none\"  />\n\t                <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control input-sm right2\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                 <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                              <option value=\"null\">  " + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
+        html = "<tr>\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control right2 display_none\"  />\n\t                <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control input-sm right2\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                 <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                              <option value=\"null\">  " + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#div_Data").append(html);
-        //var tr;
-        // tr = '<select id="ddlFamily' + cnt + '" class="form-control"><option value="null">' + (lang == "ar" ? "النوع" : "Type") + '</option></select>';
-        /*Old Table data*/
-        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" > ' +
-        //   '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3SlsTrSalesManager display_none"></span>' +
-        //    '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-        //    '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-        //    '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">' +
-        //    '<select id="ddlFamily' + cnt + '" class="form-control"><option value="null">' + (lang == "ar" ? "النوع" : "Type") + '</option></select></div>' +
-        //    '<div class="col-lg-2">' +
-        //    '<select id="ddlItem' + cnt + '" class="form-control"><option value="null">' + (lang == "ar" ? "الصنف" : "Item") + '</option></select></div>' +
-        //  '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 left_right"> <div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number1' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[1]">    <span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:36px;" id="txtQuantity' + cnt + '" name="quant[1]" class="form-control   font1" value="1" min="1" max="1000" step="1"> <span class="input-group-btn"> <button type="button" style="background-color: #f44336;" id="btnplus1"   class="btnplasandmines btn-default btn-number1' + cnt + '" data-type="plus" data-field="quant[1]"><span class="glyphicon glyphicon-plus"> </span> </button></span>    </div>   </div>' +
-        //    '<div class=" col-lg-1" style="width: 6%;"><input type="text"  class="form-control" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control   font1" value="0" min="0" max="1000" step="1"></div>' +
-        //    '<div class=" col-lg-1"><input type="text"  class="form-control" id="txtPrice' + cnt + '" name="quant[3]" class="form-control   font1" value="0" min="0" step="1"></div>' +
-        //    '<div class=" col-lg-1"><input type="text"  class="form-control" id="txtUnitpriceWithVat' + cnt + '" name="quant[3]" class="form-control   font1" value="0" min="0" step="1"></div>' +
-        //    //'<div class=" col-lg-1" style="width: 12.666667%;" ><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text"   style="height:36px;" id="txtPrice' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-        //    '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-        //    '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-        //    '<input id="txtTotal' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-        //    '<input id="txtTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-        //    '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-        //    '</div></div></div>' +
-        //    '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        $(".select_").select2();
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
             var fieldName = $(this).attr('data-field');
@@ -1903,7 +1877,6 @@ var SlsTrSalesManager;
         $("#btn_minus" + cnt).click(function (e) {
             DeleteRow(cnt);
         });
-        $(".select_").select2();
         return;
     }
     function DeleteRow(RecNo) {
@@ -2461,7 +2434,7 @@ var SlsTrSalesManager;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#divIconbar").removeClass("disabledIconbar");
+        $("#div_iconbar").removeClass("disabled-iconbar");
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
@@ -2605,7 +2578,7 @@ var SlsTrSalesManager;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#divIconbar").removeClass("disabledIconbar");
+        $("#div_iconbar").removeClass("disabled-iconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
     }
