@@ -29243,8 +29243,6 @@ input[class=checkbox]:checked:before {
     }
 }
 /*Change Search Table Style*/
-
-
 .jsgrid .jsgrid-table th {
     white-space: normal;
     padding: .5em;
@@ -29276,5 +29274,5 @@ input[class=checkbox]:checked:before {
     color: var(--bs-white);
     border: none;
     padding:.5rem;
-
 }
+/*Change Select List Style*/
