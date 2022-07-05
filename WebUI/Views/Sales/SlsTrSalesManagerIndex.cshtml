@@ -4,162 +4,11 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
-    /*.disabledDiv {
-        pointer-events: none;
-        opacity: 0.4;
-    }
+     
 
-    .display_none {
-        display: none !important;
-    }
-
-    #btnAddDetails {
-        font-size: 40px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    .btnplasandmines {
-        display: inline-block;
-        padding: 2px 4px;
-        height: 36px;
-        margin-bottom: 0;
-        font-size: 10px;
-        font-weight: 400;
-        line-height: 1.428571;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-
-    .popu {
-        position: fixed;
-        //top: 22%; 
-        // height: 25%; 
-        width: 100%;
-        // margin-right: 23%; 
-        border: solid 1px #f3f3f3 !important;
-        border-radius: 30px;
-        padding: 12px 11px;
-        background-color: #e3e3e3 !important;
-        box-shadow: 0px 4px 6px 0;
-    }
-
-    .List_MinUnitPrice_in_poup_pass {
-        display: block;
-        margin-top: -52%;
-        background-color: beige;
-        border-radius: 16px;
-        width: 191%;
-        height: 146px;
-        overflow-y: scroll;
-    }
-
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            background-color: beige;
-            //border-radius: 16px;
-            border-top-left-radius: 24px;
-            border-bottom-left-radius: 24px;
-        }
-
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 16px;
-        }
-
-            .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-
-    .st_border_li_List_MinUnitPrice {
-        width: 100% !important;
-        border-bottom: solid 1px !important;
-        padding: 2px 7px 3px 4px !important;
-        margin-left: 0px !important;
-        margin-top: 0px !important;
-        font-weight: bold !important;
-        font-size: 15px;
-    }
-
-    .col-lg-1 {
-    }
-
-    .left_right {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-
-    .fontitm3 {
-        float: right;
-        margin: 5px 8px 0px 0px !important;
-        font-size: 25px !important;
-        position: absolute;
-    }
-
-    .a_Tap {
-        color: #0a0a0a !important;
-        font-weight: bold;
-    }
-
-    .Div_Bar {
-        border: outset;
-        border-radius: 29px;
-    }
-
-    .nav > li > a:focus, .nav > li > a:hover {
-        background-color: #fbebdc !important;
-        //border-color: #0a0a0a !important;
-        color: #0a0a0a !important;
-        border: outset !important;
-    }
-
-    .navbar-inverse {
-        background-color: #f4f5da !important;
-        //border-color: #f4f5da !important;
-        color: #0a0a0a !important;
-        border: outset;
-    }*/
-
-    /*.Actiev {
-       background-color: #fbebdc !important;
-        border-color: #0a0a0a !important;
-        color: #0a0a0a !important;
-        border: outset;
-    }*/
+     
 </style>
-<script>
-    $(document).ready(function () {
-        //$("#ddlCustomer").select2();
-        $("#ddlInvoiceCustomer").select2();
-        $('#but_read').click(function () {
-            var username = $('#ddlSalesman option:selected').text();
-            var userid = $('#ddlSalesman').val();
 
-            var username = $('#ddlInvoiceCustomer option:selected').text();
-            var userid = $('#ddlInvoiceCustomer').val();
-
-            $('#result').html("id : " + userid + ", name : " + username);
-        });
-    });
-</script>
 <div class="col-12  borderred">
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
         <div class="modal-dialog">
@@ -831,5 +680,26 @@
 
 
 @section Script{
-    <script src="~/ClientApp/Sales/SlsTrSalesManager.js"></script>}
+    <script src="~/ClientApp/Sales/SlsTrSalesManager.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#ddlCustomer").select2();
+            $("#ddlInvoiceCustomer").select2();
+            $("#ddlSalesman").select2();
+
+            $('#but_read').click(function () {
+                var username = $('#ddlSalesman option:selected').text();
+                var userid = $('#ddlSalesman').val();
+
+                var username = $('#ddlInvoiceCustomer option:selected').text();
+                var userid = $('#ddlInvoiceCustomer').val();
+
+                var username = $('#ddlCustomer option:selected').text();
+                var userid = $('#ddlCustomer').val();
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>}
 
