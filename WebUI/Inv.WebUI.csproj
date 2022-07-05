@@ -2237,6 +2237,9 @@
     <Content Include="Views\Shared\NewLayout.cshtml" />
     <Content Include="Views\ViewPage1.cshtml" />
     <Content Include="Views\Dashboard\DashboardIndex.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Iconbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

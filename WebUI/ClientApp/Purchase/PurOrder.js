@@ -72,7 +72,7 @@ var PurOrder;
     var btnAddDetails;
     var btnSave;
     var btnBack;
-    var btnadd;
+    var btnAdd;
     //flags
     var GlobalPurOrderID = 0;
     var ModeType = 2; //1 view , 2 insert , 3 update 
@@ -89,8 +89,8 @@ var PurOrder;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
-    var btnPrint;
-    var btnPrintPurchaseDemand;
+    //   var btnPrint: HTMLButtonElement;           
+    var btnPrintTransaction;
     //------------------------------------------------------------- main regions-------------------------------------
     function InitalizeComponent() {
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -118,7 +118,7 @@ var PurOrder;
         GetAllItems();
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        $('#btnPrint').addClass('display_none');
+        //  $('#btnPrint').addClass('display_none');
     }
     PurOrder.InitalizeComponent = InitalizeComponent;
     function IntializeEvents() {
@@ -128,14 +128,14 @@ var PurOrder;
         btnUpdate.onclick = btnupdate_onclick;
         btnSave.onclick = saveFunc;
         btnBack.onclick = backFunc;
-        btnadd.onclick = addFunc;
+        btnAdd.onclick = addFunc;
         chkActive.onclick = chkActive_onchecked;
         // print----*
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }          
-        btnPrintPurchaseDemand.onclick = btnPrintPurchaseDemand_onclick;
+        btnPrintTransaction.onclick = btnPrintPurchaseDemand_onclick;
         txtSearchBox.onkeyup = _SearchBox_Change;
     }
     function InitalizeControls() {
@@ -143,8 +143,8 @@ var PurOrder;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
-        btnPrint = document.getElementById("btnPrint");
-        btnPrintPurchaseDemand = document.getElementById("btnPrintPurchaseDemand");
+        //  btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;                       
+        btnPrintTransaction = document.getElementById("btnPrintTransaction");
         //Drop Downlists
         ddlStateType = document.getElementById("ddlStateType");
         ddlcashType = document.getElementById("ddlcashType");
@@ -182,7 +182,7 @@ var PurOrder;
         btnUpdate = document.getElementById("btnUpdate");
         btnBack = document.getElementById("btnBack");
         btnSave = document.getElementById("btnSave");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "أمر شراء";
         }
@@ -270,7 +270,7 @@ var PurOrder;
     function MasterGridDoubleClick() {
         clear();
         ShowFlag = true;
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#PurOrderDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
@@ -346,6 +346,7 @@ var PurOrder;
     function backFunc() {
         InitializeGrid();
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divDetails").addClass("display_none");
         $("#divMasterGridiv").removeClass("display_none");
@@ -378,7 +379,7 @@ var PurOrder;
              {
                 Update();
             }
-            $("#btnPrintPurchaseDemand").removeClass("display_none");
+            $("#btnPrintTransaction").removeClass("display_none");
         }, 100);
     }
     function addFunc() {
@@ -401,6 +402,8 @@ var PurOrder;
         $("#btnSave").removeClass("display_none");
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         $('#ddlCurrency').prop("value", GlobalCurrency);
         EnableControls();
     }
@@ -409,7 +412,7 @@ var PurOrder;
             return;
         ShowFlag = false;
         ModeType = 3; //update                               
-        $("#btnPrintPurchaseDemand").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         EnableControls();
         $("#divMasterGridiv").addClass("disabledDiv");
         $("#btnBack").removeClass("display_none");
@@ -418,6 +421,8 @@ var PurOrder;
         $("#divEdit").removeClass("display_none");
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         chkActive.disabled = false;
         txtDateHeader.disabled = true;
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
@@ -685,7 +690,7 @@ var PurOrder;
     }
     function DisableControls() {
         $("#PurOrderDetails :input").attr("disabled", "disabled");
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $('#btnBack').addClass("display_none");
         $('#btnSave').addClass("display_none");
         $("#btnUpdate").removeClass("display_none");
@@ -806,7 +811,7 @@ var PurOrder;
     }
     function clear() {
         $("#div_Data").html('');
-        $("#btnPrintPurchaseDemand").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         CountGrid = 0;
         txtDliveryConditions.value = "";
         txtValidityPeriod.value = "";
@@ -858,30 +863,31 @@ var PurOrder;
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-xs-12" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurOrder display_none"></span>' +
-            '<input id="txtPurOrderDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<input id="txtItemNumber' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<input id="txtSerial' + cnt + '" type="hidden" class="form-control right2 display_none" value=' + cnt + '  />' +
-            '<div class="col-xs-1" style="width:4%!important;">' +
-            '<button type="button" class=" src-btn btn btn-warning input-sm col-xs-12" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' + '</div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /> </div>' +
-            '<div class="col-xs-3 p-0">' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-xs-1"><input type="number"  id="txtRequiredQty' + cnt + '" name="quant[10]" class="form-control   font1" value="1" min="1" max="1000" step="1"></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtReceivedQty' + cnt + '" type="number" class="form-control right2"  disabled value="0"/></div>' +
-            '<div class="col-xs-1"><input type="number" style="height:36px;" id="txtPrice' + cnt + '" name="quant[20]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"> </div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"  value="0"/></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTax' + cnt + '" disabled type="text" class="form-control right2"  value="0"/></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control right2"  /></div>' +
-            '</div></div></div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"txtPurOrderDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <input id=\"txtItemNumber" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />                   \n                    <input id=\"txtSerial" + cnt + "\" type=\"hidden\" class=\"form-control display_none\" value='" + cnt + "'  />\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n                            <div class=\"search-content\">\n                                <input id=\"txtItemCode" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control  text_Display\" />\n                                <button type=\"button\" name=\"InvoiceSearch\" id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\" class=\"btn btn-main btn-search\">\n                                    <i class=\"fas fa-search\"></i>\n                                </button>\n                            </div>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtItemName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control  text_Display\" />\n\t\t                </div>\n\t                </th>\n\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtRequiredQty" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </th>\n\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtReceivedQty" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </th>\n\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtPrice" + cnt + "\" type=\"number\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\"/>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotal" + cnt + "\" type=\"number\"  class=\"form-control\" value=\"0\" />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"Tax" + cnt + "\" type=\"Text\"  class=\"form-control\" value=\"0\"/>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"Text\"  class=\"form-control\" value=\"0\"/>\n\t\t                </div>\n\t                </th>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-xs-12" > ' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurOrder display_none"></span>' +
+        //    '<input id="txtPurOrderDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+        //    '<input id="txtItemNumber' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+        //    '<input id="txtSerial' + cnt + '" type="hidden" class="form-control right2 display_none" value=' + cnt + '  />' +
+        //    '<div class="col-xs-1" style="width:4%!important;">' +
+        //  '<button type="button" class=" src-btn btn btn-warning input-sm col-xs-12" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search"></i></button>' + '</div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /> </div>' +
+        //    '<div class="col-xs-3 p-0">' +
+        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-xs-1"><input type="number"  id="txtRequiredQty' + cnt + '" name="quant[10]" class="form-control   font1" value="1" min="1" max="1000" step="1"></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtReceivedQty' + cnt + '" type="number" class="form-control right2"  disabled value="0"/></div>' +
+        //    '<div class="col-xs-1"><input type="number" style="height:36px;" id="txtPrice' + cnt + '" name="quant[20]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"> </div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTax' + cnt + '" disabled type="text" class="form-control right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control right2"  /></div>' +
+        //    '</div></div></div>' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -1272,6 +1278,7 @@ var PurOrder;
         AfterInsertOrUpdateFlag = true;
         MasterGridDoubleClick();
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
         $("#divDetails").removeClass("display_none");

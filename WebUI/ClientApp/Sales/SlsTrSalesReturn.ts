@@ -478,8 +478,8 @@ namespace SlsTrSalesReturn {
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
         $("#searchbutmemreport").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
 
@@ -564,8 +564,8 @@ namespace SlsTrSalesReturn {
             $('#btnPrintTransaction').addClass("display_none");
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#searchbutmemreport").removeAttr("disabled");
-            $("#div_iconbar").removeAttr("disabled");
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeAttr("disabled");
+            $("#divIconbar").removeClass("disabledIconbar");
             $("#chkActive").attr("disabled", "disabled");
             $("#cotrolDiv").removeAttr("disabled");
             $("#cotrolDiv").removeClass("disabledDiv");
@@ -574,8 +574,8 @@ namespace SlsTrSalesReturn {
         }
         else {
 
-            $("#div_iconbar").removeAttr("disabled")
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeAttr("disabled")
+            $("#divIconbar").removeClass("disabledIconbar");
 
             $("#cotrolDiv").removeAttr("disabled")
             $("#cotrolDiv").removeClass("disabledDiv");
@@ -656,8 +656,8 @@ namespace SlsTrSalesReturn {
         $("#searchbutmemreport").attr("disabled", "disabled").off('click');
         $("#divGridDetails_View").addClass("disabledDiv");
         $("#divGridDetails_View").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
 
         $("#cotrolDiv").addClass("disabledDiv");
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
@@ -2214,8 +2214,8 @@ namespace SlsTrSalesReturn {
         $('#btnBack').addClass("display_none");
         $('#btnUpdate').removeClass("display_none");
 
-        $("#div_iconbar").removeAttr("disabled");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeAttr("disabled");
+        $("#divIconbar").removeClass("disabledIconbar");
 
         $("#cotrolDiv").removeAttr("disabled");
         $("#cotrolDiv").removeClass("disabledDiv");

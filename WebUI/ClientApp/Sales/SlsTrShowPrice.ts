@@ -473,7 +473,7 @@ namespace SlsTrShowPrice {
 
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -492,7 +492,7 @@ namespace SlsTrShowPrice {
 
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -667,8 +667,8 @@ namespace SlsTrShowPrice {
 
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
 
         Show = false;
 
@@ -688,8 +688,8 @@ namespace SlsTrShowPrice {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
@@ -989,7 +989,7 @@ namespace SlsTrShowPrice {
         var html;
         //debugger;
         html = `<tr>
-                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control right2 display_none"  />
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <th>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
@@ -997,19 +997,19 @@ namespace SlsTrShowPrice {
 	                </th>
                     <th>
 		                <div class="form-group">
-			                <input id="txtSerial${cnt}" type="text" class="form-control input-sm right2" disabled />
+			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </th>
                     <th>
 		                <div class="form-group">
-			                <select id="ddlFamily${cnt}" class="form-control">
+			                <select id="ddlFamily${cnt}" class="form-control select_">
                                  <option value="null"> ${(lang == "ar" ? "النوع" : "Type")} </option>
                             </select>
 		                </div>
 	                </th>
                      <th>
 		                <div class="form-group">
-			                <select id="ddlItem${cnt}" class="form-control">
+			                <select id="ddlItem${cnt}" class="form-control select_">
                               <option value="null">  ${(lang == "ar" ? "الصنف" : "Item")} </option>
                             </select>
 		                </div>
@@ -1666,6 +1666,7 @@ namespace SlsTrShowPrice {
             DeleteRow(cnt);
             // alert('delete');
         });
+        $(".select_").select2();
         return;
     }
     function Display_Category() {
@@ -2022,7 +2023,7 @@ namespace SlsTrShowPrice {
         btnShow_onclick();
 
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeClass("disabledIconbar");
         Show = true;
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
@@ -2160,7 +2161,7 @@ namespace SlsTrShowPrice {
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
         //open_success();
@@ -2614,7 +2615,7 @@ namespace SlsTrShowPrice {
                     btnUpdate.disabled = false;
 
                     $("#cotrolDiv").removeClass("disabledDiv");
-                    $("#div_iconbar").removeClass("disabled-iconbar");
+                    $("#divIconbar").removeClass("disabledIconbar");
                     BindStatisticGridData();
                     open_success();
 

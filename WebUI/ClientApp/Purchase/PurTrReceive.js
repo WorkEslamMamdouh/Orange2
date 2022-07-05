@@ -84,9 +84,9 @@ var PurTrReceive;
     var txtTotalAddons;
     var btnSave;
     var btnBack;
-    var btnadd;
+    var btnAdd;
     var btnPurOrderSearch;
-    var btnPrntPrice;
+    var btnPrintInvoicePrice;
     var btnVendorSearch;
     //flags && global
     var GlobalReceiveID = 0;
@@ -149,7 +149,7 @@ var PurTrReceive;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrint = document.getElementById("btnPrint");
         btnPrintReceive = document.getElementById("btnPrintReceive");
-        btnPrntPrice = document.getElementById("btnPrntPrice");
+        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice");
         //----------------------------------------------------------------------------------------//
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -192,7 +192,7 @@ var PurTrReceive;
         btnUpdate = document.getElementById("btnUpdate");
         btnBack = document.getElementById("btnBack");
         btnSave = document.getElementById("btnSave");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
         btnPurOrderSearch = document.getElementById("btnPurOrderSearch");
         btnVendorSearch = document.getElementById("btnVendorSearch");
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -211,7 +211,7 @@ var PurTrReceive;
         btnUpdate.onclick = btnupdate_onclick;
         btnSave.onclick = saveFunc;
         btnBack.onclick = backFunc;
-        btnadd.onclick = addFunc;
+        btnAdd.onclick = addFunc;
         chkActive.onclick = chkActive_onchecked;
         btnPurOrderSearch.onclick = btnPurOrderSearch_onclick;
         txtPurOrderNum.onchange = txtPurOrderNum_onchange;
@@ -223,7 +223,7 @@ var PurTrReceive;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintReceive.onclick = btnPrintReceive_onclick;
-        btnPrntPrice.onclick = btnPrntPrice_onclick;
+        btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     //---------------------------------------------------------------- normal region----------------------------------------------------
@@ -436,6 +436,7 @@ var PurTrReceive;
     }
     function backFunc() {
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
         if (ModeType == 3) {
@@ -1956,7 +1957,7 @@ var PurTrReceive;
         $("#txtTotalTax").prop("value", "");
         $("#txtTotalPurchaseWithTax").prop("value", "");
         $("#btnPrintReceive").addClass("display_none");
-        $("#btnPrintPurchaseDemand").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         CountGrid = 0;
         CountGridCharge = 0;
         CountItems = 0;
@@ -2127,14 +2128,15 @@ var PurTrReceive;
         $("#divEdit").removeClass("display_none");
         $("#divTotalSatistics").removeClass("display_none");
         $("#DivFilter").addClass("disabledDiv");
+        $("#divIconbar").addClass("disabledIconbar");
         $("#divMasterGridiv").addClass("disabledDiv");
         $("#rowData :input").removeAttr("disabled");
         $("#divTotalSatistics :input").attr("disabled", "disabled");
         $("#btnAddDetails").removeClass("display_none");
         $("#btnAddDetailsCharge").removeClass("display_none");
         $("#btnPrintReceive").addClass("display_none");
-        $("#btnPrintPurchaseDemand").addClass("display_none");
-        $("#btnPrntPrice").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnPrintInvoicePrice").addClass("display_none");
         $("#btnUpdate").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -2177,13 +2179,14 @@ var PurTrReceive;
         $("#divDetails").removeClass("display_none");
         $("#divTotalSatistics").removeClass("display_none");
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#rowData :input").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetailsCharge").addClass("display_none");
         $("#btnPrintReceive").removeClass("display_none");
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
-        $("#btnPrntPrice").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnPrintInvoicePrice").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
@@ -2462,6 +2465,7 @@ var PurTrReceive;
     }
     function Success(ReceiveID) {
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
         DisableControls();
@@ -2498,7 +2502,7 @@ var PurTrReceive;
         $("#rowData").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#btnPrintReceive").removeClass("display_none");
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
     }
     function openInvoice() {
         if (!CheckPeriodDate(txtDateHeader.value, "I")) {
@@ -2548,7 +2552,7 @@ var PurTrReceive;
         debugger;
         ShowFlag = true;
         $("#btnPrintReceive").removeClass("display_none");
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         GlobalReceiveID = receiveid;
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == receiveid; });
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
