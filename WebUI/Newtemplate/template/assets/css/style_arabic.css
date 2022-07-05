@@ -29002,7 +29002,7 @@ div.tagsinput {
         color: var(--main-blue);
 
     }
-    .inside-table tbody td{
+    .inside-table tbody th{
         margin:0;
         padding:0;
     }
@@ -29069,7 +29069,8 @@ div.tagsinput {
         margin: 0;
     }
     .inside-table .form-group {
-        margin-left: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .inside-table .btn-minus,
     .inside-table .btn-plus {
@@ -29130,6 +29131,13 @@ select.form-control[disabled] {
 }*/
 .display_none {
     display: none !important;
+}
+.disabledDiv {
+    pointer-events: none;
+    opacity: 0.4;
+}
+.disabled-iconbar .icon-bar {
+    opacity: 0.4;
 }
 .form-control[disabled]:not(.search-control) {
     border: none;
@@ -29235,8 +29243,6 @@ input[class=checkbox]:checked:before {
     }
 }
 /*Change Search Table Style*/
-
-
 .jsgrid .jsgrid-table th {
     white-space: normal;
     padding: .5em;
@@ -29268,5 +29274,5 @@ input[class=checkbox]:checked:before {
     color: var(--bs-white);
     border: none;
     padding:.5rem;
-
 }
+/*Change Select List Style*/
