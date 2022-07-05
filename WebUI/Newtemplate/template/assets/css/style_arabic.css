@@ -28718,9 +28718,9 @@ div.tagsinput {
     z-index: 9999;
     cursor: pointer;
 }
-.details-iconbar .icon-bar {
+/*.details-iconbar .icon-bar {
     position: fixed;
-}
+}*/
     .main-iconbar .icon-bar:hover, .details-iconbar .icon-bar:hover {
         left: 0px;
         background-color: var(--main-orange);
@@ -28762,7 +28762,6 @@ div.tagsinput {
 .excel {
     top: 340px;
 }
-
 
 .edit {
     top: 700px;
@@ -29136,11 +29135,10 @@ select.form-control[disabled] {
     pointer-events: none;
     opacity: 0.4;
 }
-.disabled-iconbar .icon-bar {
+.disabledIconbar .icon-bar {
     opacity: 0.4;
 }
 .form-control[disabled]:not(.search-control) {
-    border: none;
     background-color: transparent;
     font-size: .9rem;
     margin-right: -.9rem;

@@ -91,7 +91,7 @@ namespace PurTrReceive {
     var txtTotalAddons: HTMLInputElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
-    var btnadd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnPurOrderSearch: HTMLButtonElement;
     var btnPrntPrice: HTMLButtonElement;
     var btnVendorSearch: HTMLButtonElement;
@@ -206,7 +206,7 @@ namespace PurTrReceive {
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnadd") as HTMLButtonElement;
         btnPurOrderSearch = document.getElementById("btnPurOrderSearch") as HTMLButtonElement;
         btnVendorSearch = document.getElementById("btnVendorSearch") as HTMLButtonElement;
 
@@ -485,6 +485,7 @@ namespace PurTrReceive {
     }
     function backFunc() {
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
 
@@ -2446,6 +2447,7 @@ namespace PurTrReceive {
         $("#divTotalSatistics").removeClass("display_none");
 
         $("#DivFilter").addClass("disabledDiv");
+        $("#divIconbar").addClass("disabledIconbar");
         $("#divMasterGridiv").addClass("disabledDiv");
 
         $("#rowData :input").removeAttr("disabled");
@@ -2510,6 +2512,7 @@ namespace PurTrReceive {
         $("#divTotalSatistics").removeClass("display_none");
 
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
 
         $("#rowData :input").attr("disabled", "disabled");
@@ -2820,6 +2823,7 @@ namespace PurTrReceive {
     function Success(ReceiveID: number) {
 
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
         DisableControls();

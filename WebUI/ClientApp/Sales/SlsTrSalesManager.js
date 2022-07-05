@@ -610,7 +610,7 @@ var SlsTrSalesManager;
         if (NewAdd == true) { //add
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -640,7 +640,7 @@ var SlsTrSalesManager;
         else { //Edit
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
-            $("#div_iconbar").removeClass("disabled-iconbar");
+            $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#ddlType").attr("disabled", "disabled");
@@ -731,8 +731,8 @@ var SlsTrSalesManager;
         CountItems = 0;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         Show = false;
         NewAdd = true;
         $('#txtCreatedBy').prop("value", SysSession.CurrentEnvironment.UserCode);
@@ -827,15 +827,15 @@ var SlsTrSalesManager;
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeClass("disabledIconbar");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#div_iconbar").attr("disabled", "disabled").off('click');
-        $("#div_iconbar").addClass("disabled-iconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
@@ -2460,7 +2460,7 @@ var SlsTrSalesManager;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeClass("disabledIconbar");
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
@@ -2604,7 +2604,7 @@ var SlsTrSalesManager;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#div_iconbar").removeClass("disabled-iconbar");
+        $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
     }

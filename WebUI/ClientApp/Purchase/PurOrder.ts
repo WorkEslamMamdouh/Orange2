@@ -79,7 +79,7 @@ namespace PurOrder {
     var btnAddDetails: HTMLButtonElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
-    var btnadd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
 
     //flags
     var GlobalPurOrderID: number = 0;
@@ -99,8 +99,8 @@ namespace PurOrder {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-    var btnPrint: HTMLButtonElement;           
-    var btnPrintPurchaseDemand: HTMLButtonElement;
+ //   var btnPrint: HTMLButtonElement;           
+    var btnPrintTransaction: HTMLButtonElement;
     //------------------------------------------------------------- main regions-------------------------------------
     export function InitalizeComponent() {
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -135,7 +135,7 @@ namespace PurOrder {
        
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        $('#btnPrint').addClass('display_none');
+      //  $('#btnPrint').addClass('display_none');
     }
     function IntializeEvents() {
         btnShow.onclick = btnShow_onclick;
@@ -144,14 +144,14 @@ namespace PurOrder {
         btnUpdate.onclick = btnupdate_onclick;
         btnSave.onclick = saveFunc;
         btnBack.onclick = backFunc;
-        btnadd.onclick = addFunc;
+        btnAdd.onclick = addFunc;
         chkActive.onclick = chkActive_onchecked;
         // print----*
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }          
-        btnPrintPurchaseDemand.onclick = btnPrintPurchaseDemand_onclick;
+        btnPrintTransaction.onclick = btnPrintPurchaseDemand_onclick;
 
         txtSearchBox.onkeyup = _SearchBox_Change;
 
@@ -161,8 +161,8 @@ namespace PurOrder {
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;                       
-        btnPrintPurchaseDemand = document.getElementById("btnPrintPurchaseDemand") as HTMLButtonElement;
+      //  btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;                       
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
         
         //Drop Downlists
         ddlStateType = document.getElementById("ddlStateType") as HTMLSelectElement;
@@ -203,7 +203,7 @@ namespace PurOrder {
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "أمر شراء";
@@ -306,7 +306,7 @@ namespace PurOrder {
     function MasterGridDoubleClick() {
         clear();
         ShowFlag = true;                                        
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#PurOrderDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
@@ -394,6 +394,7 @@ namespace PurOrder {
     function backFunc() {
         InitializeGrid();
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
 
         $("#divDetails").addClass("display_none");
@@ -433,7 +434,7 @@ namespace PurOrder {
             Update();
         }
                                                             
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
 
     }, 100);
     }
@@ -462,6 +463,9 @@ namespace PurOrder {
 
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         $('#ddlCurrency').prop("value", GlobalCurrency);
         EnableControls();
     }
@@ -469,7 +473,7 @@ namespace PurOrder {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         ShowFlag = false;
         ModeType = 3;//update                               
-        $("#btnPrintPurchaseDemand").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
 
 
         EnableControls();
@@ -484,6 +488,9 @@ namespace PurOrder {
 
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+
+        $("#divIconbar").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
         chkActive.disabled = false;
         txtDateHeader.disabled = true;
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
@@ -787,7 +794,7 @@ namespace PurOrder {
     function DisableControls() {
         $("#PurOrderDetails :input").attr("disabled", "disabled");
                                                                
-        $("#btnPrintPurchaseDemand").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
 
         $('#btnBack').addClass("display_none");
         $('#btnSave').addClass("display_none");
@@ -920,7 +927,7 @@ namespace PurOrder {
     function clear() {
 
         $("#div_Data").html('');                          
-        $("#btnPrintPurchaseDemand").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
 
         CountGrid = 0;
         txtDliveryConditions.value = "";
@@ -980,41 +987,100 @@ namespace PurOrder {
     }
     function BuildControls(cnt: number) {
         var html;
+        html = `<tr id= "No_Row${cnt}">
+                    <input id="txtPurOrderDetailsID${cnt}" type="hidden" class="form-control display_none"  />
+	                <input id="txtItemNumber${cnt}" type="hidden" class="form-control display_none"  />                   
+                    <input id="txtSerial${cnt}" type="hidden" class="form-control display_none" value='${cnt}'  />
+                    <th>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <div class="search-content">
+                                <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control  text_Display" />
+                                <button type="button" name="InvoiceSearch" id="btnSearchItems${cnt}" name="ColSearch" class="btn btn-main btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtItemName${cnt}" name="" disabled type="text" class="form-control  text_Display" />
+		                </div>
+	                </th>
 
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-xs-12" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurOrder display_none"></span>' +
-            '<input id="txtPurOrderDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<input id="txtItemNumber' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<input id="txtSerial' + cnt + '" type="hidden" class="form-control right2 display_none" value=' + cnt + '  />' +
+                    <th>
+		                <div class="form-group">
+			                <input type="number"  id="txtRequiredQty${cnt}" name="quant[10]" class="form-control" value="1" min="1" max="1000" step="1">
+		                </div>
+	                </th>
+
+                    <th>
+		                <div class="form-group">
+			                <input id="txtReceivedQty${cnt}" type="number" class="form-control"  disabled value="0"/>
+		                </div>
+	                </th>
+
+                    <th>
+		                <div class="form-group">
+			                <input id="txtPrice${cnt}" type="number" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtTotal${cnt}" type="number"  class="form-control" value="0" />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="Tax${cnt}" type="Text"  class="form-control" value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtTotAfterTax${cnt}" type="Text"  class="form-control" value="0"/>
+		                </div>
+	                </th>
+                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
+                </tr>`;
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-xs-12" > ' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurOrder display_none"></span>' +
+        //    '<input id="txtPurOrderDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+        //    '<input id="txtItemNumber' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+        //    '<input id="txtSerial' + cnt + '" type="hidden" class="form-control right2 display_none" value=' + cnt + '  />' +
             
-            '<div class="col-xs-1" style="width:4%!important;">' +
-          '<button type="button" class=" src-btn btn btn-warning input-sm col-xs-12" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' + '</div>' +
+        //    '<div class="col-xs-1" style="width:4%!important;">' +
+        //  '<button type="button" class=" src-btn btn btn-warning input-sm col-xs-12" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search"></i></button>' + '</div>' +
 
-            '<div class="col-xs-1">' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /> </div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /> </div>' +
 
-            '<div class="col-xs-3 p-0">' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-xs-3 p-0">' +
+        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
 
-            '<div class="col-xs-1"><input type="number"  id="txtRequiredQty' + cnt + '" name="quant[10]" class="form-control   font1" value="1" min="1" max="1000" step="1"></div>' +
+        //    '<div class="col-xs-1"><input type="number"  id="txtRequiredQty' + cnt + '" name="quant[10]" class="form-control   font1" value="1" min="1" max="1000" step="1"></div>' +
 
-            '<div class="col-xs-1">' +
-            '<input id="txtReceivedQty' + cnt + '" type="number" class="form-control right2"  disabled value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtReceivedQty' + cnt + '" type="number" class="form-control right2"  disabled value="0"/></div>' +
 
-            '<div class="col-xs-1"><input type="number" style="height:36px;" id="txtPrice' + cnt + '" name="quant[20]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"> </div>' +
+        //    '<div class="col-xs-1"><input type="number" style="height:36px;" id="txtPrice' + cnt + '" name="quant[20]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"> </div>' +
 
-            '<div class="col-xs-1">' +
-            '<input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"  value="0"/></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTax' + cnt + '" disabled type="text" class="form-control right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTax' + cnt + '" disabled type="text" class="form-control right2"  value="0"/></div>' +
 
-            '<div class="col-xs-1">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control right2"  /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control right2"  /></div>' +
 
-            '</div></div></div>' +
+        //    '</div></div></div>' +
 
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
 
         $("#div_Data").append(html);
 
@@ -1451,6 +1517,7 @@ namespace PurOrder {
         MasterGridDoubleClick();
         
         $("#DivFilter").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
 
