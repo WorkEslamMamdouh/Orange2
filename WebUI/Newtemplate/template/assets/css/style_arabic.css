@@ -15558,23 +15558,16 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     outline: 0;
 }
 
-.modal-backdrop {
+#SearchBox {
+    z-index: 1041;
     position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1050;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000000;
+    padding-top: 19px;
+    background-color: white;
+    border-radius: 15px;
+    -moz-box-shadow: black 5px 4px 18px 0px;
+    -webkit-box-shadow: black 5px 4px 18px 0px;
+    box-shadow: black 5px 4px 18px 0px;
 }
-
-    .modal-backdrop.fade {
-        opacity: 0;
-    }
-
-    .modal-backdrop.show {
-        opacity: 0.5;
-    }
 
 .modal-header {
     display: flex;
