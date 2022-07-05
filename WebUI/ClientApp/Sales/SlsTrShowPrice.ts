@@ -1002,14 +1002,14 @@ namespace SlsTrShowPrice {
 	                </th>
                     <th>
 		                <div class="form-group">
-			                <select id="ddlFamily${cnt}" class="form-control">
+			                <select id="ddlFamily${cnt}" class="form-control select_">
                                  <option value="null"> ${(lang == "ar" ? "النوع" : "Type")} </option>
                             </select>
 		                </div>
 	                </th>
                      <th>
 		                <div class="form-group">
-			                <select id="ddlItem${cnt}" class="form-control">
+			                <select id="ddlItem${cnt}" class="form-control select_">
                               <option value="null">  ${(lang == "ar" ? "الصنف" : "Item")} </option>
                             </select>
 		                </div>
@@ -1666,6 +1666,7 @@ namespace SlsTrShowPrice {
             DeleteRow(cnt);
             // alert('delete');
         });
+        $(".select_").select2();
         return;
     }
     function Display_Category() {
