@@ -386,6 +386,22 @@ function GetSystemSession(Mod: string): SystemSession {
                         $("#btnHelpRep").click(() => { ScreenHelp(Mod); })
 
                         SysSession.CurrentPrivileges = result;
+                        if (!result.VIEW) {
+                            $('#btnShow').addClass('hidden_Control');
+                            $('#btnPrint').addClass('hidden_Control');
+                            $('#btnPrintTrview').addClass('hidden_Control');
+                            $('#btnPrintTrPDF').addClass('hidden_Control');
+                            $('#btnPrintTrEXEL').addClass('hidden_Control');
+                        }
+                        if (!result.AddNew) {
+                            $('#btnAdd').addClass('hidden_Control');
+                        }
+                        if (!result.PrintOut) {
+                            $('#btnPrintTransaction').addClass('hidden_Control');
+                        }
+                        if (!result.EDIT) {
+                            $('#btnUpdate').addClass('hidden_Control');
+                        }
 
                     }
                     else {
