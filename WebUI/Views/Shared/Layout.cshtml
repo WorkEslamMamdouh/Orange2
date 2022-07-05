@@ -10,7 +10,7 @@
     <title>@SystemResource.App_Home</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/css/vendor.bundle.base.css">
+    @*<link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/css/vendor.bundle.base.css">*@
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="~/Newtemplate/template/assets/vendors/jvectormap/jquery-jvectormap.css">
@@ -475,7 +475,7 @@
         </div>
     </div>
 
-    <div id="SearchBox" class="fade styleserch" style="display:none;z-index:999999999;">
+    <div id="SearchBox" class=" modal fade " style="z-index:999999999;">
         <div style="background-color:#ef6603!important; position:absolute;top:0px;left:0px;width:100%;height:40px;cursor:move;border-top-right-radius: 13px!important;border-top-left-radius: 13px!important;">
             <input type="button" onclick="$('#SearchBox').modal('hide');" id="btnCloseSearch" name="name" value="x" class="btn colose_lay_btn btn-danger" style="height: 40px;
               width: 38px;font-size: 20px;float: left;border-color: #ef6603!important;background-color: #ef6603!important;" />
@@ -519,10 +519,8 @@
 
 
 
-
     <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
-    @*<script src="~/Newtemplate/template/assets/js/misc.js"></script>*@
-    <!-- endinject -->
+     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="~/Newtemplate/template/assets/vendors/chart.js/Chart.min.js"></script>
     <script src="~/Newtemplate/template/assets/vendors/progressbar.js/progressbar.min.js"></script>
@@ -541,25 +539,19 @@
     <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
     <script src="~/Newtemplate/template/assets/js/counter.js"></script>
     <!-- End custom js for this page -->
-
+    @Scripts.Render("~/Bundles/AppScript2")
     @Scripts.Render("~/Bundles/AppScript3")
     @Scripts.Render("~/Bundles/AppScript4")
-   
+
     @RenderSection("Script", required: false)
 
 
 
     <script src="~/Style_design/LodBut/Loder.js"></script>
-    <script src="~/js/select2.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    @*<input hidden="hidden" id="proBanner"  />
-        <input hidden="hidden" id="bannerClose" />*@
-    @*<link href="~/css/select2.min.css" rel="stylesheet" />
-        <script src="~/js/select2.min.js"></script>
-        <script src="~/Newtemplate/template/assets/vendors/select2/select2.min.js"></script>
-        <script src="~/Newtemplate/template/assets/js/select2.js"></script>
-        <script src="~/js/select2.min.js"></script>*@
-    <script src="~/Newtemplate/template/assets/vendors/select2/select2.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
+
+    @*@Scripts.Render("~/Bundles/AppScript2")*@
 
 </body>
 </html>

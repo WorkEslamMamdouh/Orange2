@@ -174,8 +174,12 @@
                 SearchGrid.SearchDataGrid.Bind();
 
                 SearchGrid.SearchDataGrid.OnDoubleClick = () => {
-                    console.log(SearchGrid.SearchDataGrid.SelectedKey);
+                    debugger
+                     console.log(SearchGrid.SearchDataGrid.SelectedKey);
+                    $("#SearchBox").removeClass("show")
+                    $("#SearchBox").removeClass("modal-backdrop")
                     $("#SearchBox").modal("hide");//.css("display", "none");
+                    $("#SearchBox").addClass("modal");
                     OnSearchSelected();
                 };
 
@@ -197,6 +201,9 @@
 
                 $("#SearchBox").modal("show");//.css("display", "");//
                 // $("#SearchBox").addClass("in");//.css("display", "");//
+                $("#SearchBox").addClass("show")
+                $("#SearchBox").removeClass("modal")
+                $("#SearchBox").addClass("modal-backdrop")
 
                 $("#SearchDataTable").css("width", "100%");
                 $("#SearchDataTable").css("height", "100%");
