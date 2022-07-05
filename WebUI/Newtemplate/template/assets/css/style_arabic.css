@@ -29134,12 +29134,12 @@ select.form-control[disabled] {
 .form-control[disabled]:not(.search-control) {
     background-color: transparent;
     font-size: .9rem;
-    margin-right: -.9rem;
+    line-height: 1rem;
     text-align: right;
 }
 
 label.form-control[disabled]:not(.search-control) {
-    font-weight: normal;
+   font-weight: normal;
    padding-top:1rem;
 }
 .inside-table .form-control[disabled],
