@@ -2239,7 +2239,7 @@
     <Content Include="Views\Dashboard\DashboardIndex.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Iconbar.cshtml" />
+    <Content Include="Views\Shared\_Iconsbar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
