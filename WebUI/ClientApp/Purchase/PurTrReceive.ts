@@ -1238,50 +1238,124 @@ namespace PurTrReceive {
     }
     function BuildControls(cnt: number) {
         var html;
+        html = `<tr id= "No_Row${cnt}">
+                    <input id="ReciveDetailsID${cnt}" type="hidden" class="form-control display_none"  />
+	                <th>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <select id="ddlFamily${cnt}" class="form-control select_">
+                                <option value="null">${(lang == "ar" ? "اختر" : "Choose")}</option>
+                            </select>
+		                </div>
+	                </th>
+                     <th>
+		                <div class="form-group">
+                        <select id="ddlItem${cnt}" class="form-control select_">
+                            <option value="null">${ (lang == "ar" ? "اختر" : "Choose") }</option>
+                        </select>
+		                </div>
+	                </th>
+                     <th>
+		                <div class="form-group">
+			                <input type="number"  id="txtQuantity${cnt}" name="quant[10]" class="form-control" value="1" min="1" max="1000" step="1">
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtQuantityReturnValue${cnt}" type="number" class="form-control"  disabled value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input type="number"  id="txtPriceFc${cnt}" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5">
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			              <input id="txtTotalFc${cnt}" type="number" disabled class="form-control"  value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			              <input id="txtPrice${cnt}" disabled type="text" class="form-control"  value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			              <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			               <input id="txtTax${cnt}" type="text" disabled class="form-control" data_VatPrc="${((VatPrc == null || undefined) ? 0 : VatPrc) }"  value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtTotAfterTax${cnt}" type="text" disabled value="0" class="form-control"  />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			             <input id="txtAddons${cnt}" type="text" disabled class="form-control"  value="0" />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			             <input id="txtTotAddons${cnt}" type="text" disabled class="form-control"  value="0" />
+		                </div>
+	                </th>
+                <input id="UnitCost${cnt}" name = " " type = "hidden" class="form-control "/>
+                <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control input-sm"/>
+                <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control input-sm" />';
+                </tr>`;
+        //html = '<div id= "No_Row' + cnt + '" class=" style_border" > <div class="col-xs-12 p-0" > <div class="col-lg-xs-12" > ' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurTrReceive display_none"></span>' +
+        //    '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
 
-        html = '<div id= "No_Row' + cnt + '" class=" style_border" > <div class="col-xs-12 p-0" > <div class="col-lg-xs-12" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurTrReceive display_none"></span>' +
-            '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
+        //    '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
+        //    '<input id="txtSerialH' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
 
-            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-            '<input id="txtSerialH' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
+        //    '<div class="col-xs-2 pl-0" style="margin-right: -1%;width: 15%;" >' +
+        //    '<select id="ddlFamily' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
 
-            '<div class="col-xs-2 pl-0" style="margin-right: -1%;width: 15%;" >' +
-            '<select id="ddlFamily' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
+        //    '<div class="col-xs-2 p-0"    style="width: 15%;">' +
+        //    '<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
 
-            '<div class="col-xs-2 p-0"    style="width: 15%;">' +
-            '<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
+        //    '<div class="col-xs-1 " style="width: 8%;"><input type="number"  id="txtQuantity' + cnt + '" name="quant[10]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
 
-            '<div class="col-xs-1 " style="width: 8%;"><input type="number"  id="txtQuantity' + cnt + '" name="quant[10]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
+        //    '<div class="col-xs-1 " style="width: 7%;" >' +
+        //    '<input id="txtQuantityReturnValue' + cnt + '" type="number" class="form-control input-sm right2"  disabled value="0"/></div>' +
 
-            '<div class="col-xs-1 " style="width: 7%;" >' +
-            '<input id="txtQuantityReturnValue' + cnt + '" type="number" class="form-control input-sm right2"  disabled value="0"/></div>' +
+        //    '<div class="col-xs-1 "><input type="number"  id="txtPriceFc' + cnt + '" name="quant[20]" class="form-control input-sm  font1" value="1" min="0" max="1000" step="0.5"> </div>' +
 
-            '<div class="col-xs-1 "><input type="number"  id="txtPriceFc' + cnt + '" name="quant[20]" class="form-control input-sm  font1" value="1" min="0" max="1000" step="0.5"> </div>' +
+        //    '<div class="col-xs-1 ">' +
+        //    '<input id="txtTotalFc' + cnt + '" type="number" disabled class="form-control input-sm right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
 
-            '<div class="col-xs-1 ">' +
-            '<input id="txtTotalFc' + cnt + '" type="number" disabled class="form-control input-sm right2"  value="0"/></div>' +
-            '<div class="col-xs-1">' +
+        //    '<input id="txtPrice' + cnt + '" disabled type="text" class="form-control input-sm right2"  value="0"/></div>' +
+        //    '<div class="col-xs-1" >' +
+        //    '<input id="txtTotal' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTax' + cnt + '" type="text" disabled class="form-control input-sm right2" data_VatPrc="' + ((VatPrc == null || undefined) ? 0 : VatPrc) + '"  value="0"/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"  /></div>' +
 
-            '<input id="txtPrice' + cnt + '" disabled type="text" class="form-control input-sm right2"  value="0"/></div>' +
-            '<div class="col-xs-1" >' +
-            '<input id="txtTotal' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTax' + cnt + '" type="text" disabled class="form-control input-sm right2" data_VatPrc="' + ((VatPrc == null || undefined) ? 0 : VatPrc) + '"  value="0"/></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"  /></div>' +
+        //    '<div class="col-xs-2 "style="position:absolute;right:100%">' +
+        //    '<div class="col-xs-6 ">' +
+        //    '<input id="txtAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
+        //    '<div class="col-xs-6 p-0 ">' +
+        //    '<input id="txtTotAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0"/></div>' +
+        //    '</div>' +
+        //    '</div>' +
 
-            '<div class="col-xs-2 "style="position:absolute;right:100%">' +
-            '<div class="col-xs-6 ">' +
-            '<input id="txtAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
-            '<div class="col-xs-6 p-0 ">' +
-            '<input id="txtTotAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0"/></div>' +
-            '</div>' +
-            '</div>' +
+        //    '</div></div></div>' +
 
-            '</div></div></div>' +
-
-            '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
+        //    '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
 
 
         $("#div_Data").append(html);
@@ -1739,7 +1813,7 @@ namespace PurTrReceive {
             $("#ReciveDetailsID" + cnt).prop("value", 0);
 
         }
-    
+        $(".select_").select2();
         return;
 
     }
@@ -1883,36 +1957,109 @@ namespace PurTrReceive {
     }
     function BuildControlsCharges(cnt: number) {
         var html;
-        html = '<div id= "No_Row1' + cnt + '" class="style_border" > <div class="row" > <div class="col-xs-12 gridPurTrReceive" > ' +
-            '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive "></span>' +
-            '<div class="col-xs-1">' +
-            '<input id="ReceiveExpensesID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
-            '<div class="col-xs-2">' +
-            '<select id="txtAddonsCharge' + cnt + '" class="form-control input-sm" value="null" ></select></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control input-sm right2" disabled value=" "/></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtValueCharge' + cnt + '" type="text"   class="form-control input-sm right2"  value="0"/></div>' +
-            '<div class="col-xs-2">' +
-            '<select id="txtVatType' + cnt + '" class="form-control input-sm" value="null" ></select></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtVatCharge' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"  /></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtValueAfterVatCharge' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0" /></div>' +
-            '<div class="col-xs-1"style="width: 12%!important;">' +
-            '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control input-sm"  ></select></div>' +
-            '<div class="col-xs-1">' +
-            '<input id="txtInvoiceNumberCharge' + cnt + '" type="text" class="form-control input-sm right2"  value="0"/></div>' +
-            '</div>' +
-            '<div class="col-xs-2 txtInvoiceDateCharge">' +
-            '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control input-sm right2"  /></div>' +
-            '<div class="col-xs-2 txtVendorCharge">' +
-            '<select id="txtVendorCharge' + cnt + '" class="form-control input-sm"  ></select></div>' +
-            '<div class="col-xs-2 txt_D_CashBox ">' +
-            '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control input-sm   " tabindex="-1" aria-hidden="true"><option value="Null"> ' + (lang == "ar" ? "الصنوق" : "CashBox") + '  </option></select></div>' +
-            ' </div></div>' +
-            '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
+        html = `<tr id= "No_Row1${cnt}">
+                    <input id="ReceiveExpensesID${cnt}" type="hidden" class="form-control display_none"  />
+	                <th>
+		                <div class="form-group">
+			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <input id="txtSerial${cnt}" type="text" class="form-control" disabled value="${CountItemsCharge}"/>
+		                </div>
+	                </th>
+                     <th>
+		                <div class="form-group">
+                            <select id="txtAddonsCharge${cnt}" class="form-control" value="null" ></select>
+		                </div>
+	                </th>
+                     <th>
+		                <div class="form-group">
+			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=" "/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+			                <input id="txtValueCharge${cnt}" type="text" class="form-control"  value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <select id="txtVatType${cnt}" class="form-control " value="null" ></select>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <input id="txtVatCharge${cnt}" type="text" disabled value="0" class="form-control "  />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <input id="txtValueAfterVatCharge${cnt}" type="text" disabled class="form-control"   value="0" />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <select id="txtVendorIsCheckCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <input id="txtInvoiceNumberCharge${cnt}" type="text" class="form-control"  value="0"/>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <input id="txtInvoiceDateCharge${cnt}" type="date" class="form-control"  />
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <select id="txtVendorCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </th>
+                    <th>
+		                <div class="form-group">
+                            <select id="txt_D_CashBox${cnt}" name=""  disabled="disabled" class="form-control" tabindex="-1" aria-hidden="true">
+                             <option value="Null">${ (lang == "ar" ? "الصنوق" : "CashBox") }  </option>
+                            </select>
+		                </div>
+	                </th>
+                    <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control" />;
+
+                </tr>`;
+        //html = '<div id= "No_Row1' + cnt + '" class="style_border" > <div class="row" > <div class="col-xs-12 gridPurTrReceive" > ' +
+        //    '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive "></span>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="ReceiveExpensesID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
+        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
+        //    '<div class="col-xs-2">' +
+        //    '<select id="txtAddonsCharge' + cnt + '" class="form-control input-sm" value="null" ></select></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control input-sm right2" disabled value=" "/></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtValueCharge' + cnt + '" type="text"   class="form-control input-sm right2"  value="0"/></div>' +
+        //    '<div class="col-xs-2">' +
+        //    '<select id="txtVatType' + cnt + '" class="form-control input-sm" value="null" ></select></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtVatCharge' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"  /></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtValueAfterVatCharge' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0" /></div>' +
+        //    '<div class="col-xs-1"style="width: 12%!important;">' +
+        //    '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control input-sm"  ></select></div>' +
+        //    '<div class="col-xs-1">' +
+        //    '<input id="txtInvoiceNumberCharge' + cnt + '" type="text" class="form-control input-sm right2"  value="0"/></div>' +
+        //    '</div>' +
+        //    '<div class="col-xs-2 txtInvoiceDateCharge">' +
+        //    '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control input-sm right2"  /></div>' +
+        //    '<div class="col-xs-2 txtVendorCharge">' +
+        //    '<select id="txtVendorCharge' + cnt + '" class="form-control input-sm"  ></select></div>' +
+        //    '<div class="col-xs-2 txt_D_CashBox ">' +
+        //    '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control input-sm   " tabindex="-1" aria-hidden="true"><option value="Null"> ' + (lang == "ar" ? "الصنوق" : "CashBox") + '  </option></select></div>' +
+        //    ' </div></div>' +
+        //    '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
 
         $("#div_ChargesData").append(html);
 

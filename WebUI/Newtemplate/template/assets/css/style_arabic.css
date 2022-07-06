@@ -23727,6 +23727,7 @@ code {
         box-shadow: 0 0 4pt 0.4pt var(--main-blue);
         background-color: var(--Light-blue);
         color: var(--dark-blue);
+        
     }
 
     .form-control.form-control-lg, .form-control-lg.asColorPicker-input, .dataTables_wrapper select.form-control-lg, .jsgrid .jsgrid-table .jsgrid-filter-row input.form-control-lg[type=text],
@@ -29144,7 +29145,6 @@ label.form-control[disabled]:not(.search-control) {
 }
 .inside-table .form-control[disabled],
 .inside-table .counter[disabled] {
-    border: none;
     background-color: transparent;
     text-align: center;
     margin-right: 0.1rem;
@@ -29266,7 +29266,68 @@ input[class=checkbox]:checked:before {
     border: none;
     padding:.5rem;
 }
-/*Change Select List Style*/
 .hidden_Control {
     display: none !important;
+}
+/*Change Select List Style*/
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-dropdown,
+.select2-container--default .select2-selection--multiple {
+    background: transparent;
+    border: none;
+}
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: var(--dark-blue);
+        line-height: 20px;
+    }
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: transparent;
+    cursor: default;
+}
+
+.select2-hidden-accessible[disabled] + .select2-container {
+    background-color: transparent;
+}
+.select2-hidden-accessible[disabled] + .select2-container--default[dir="rtl"] .select2-selection--single .select2-selection__arrow {
+    display: none
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: var(--dark-blue) transparent transparent transparent;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 5px;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: gray;
+    color: #fff;
+}
+ .select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background: var(--dark-blue);
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+    background-color: var(--Light-blue);
+}
+
+.select2-container:not(.select2) {
+   max-width: 0 !important;
+   width: 0 !important;
+   border: none;
+}
+.select2-container--default .select2-selection--single .select2-search__field,
+.select2-container--default .select2-dropdown .select2-search__field, 
+.select2-container--default .select2-selection--multiple .select2-search__field{
+    border-color: var(--dark-blue);
+    border-radius: 5px;
+}
+
+.select2-container--default .select2-selection--single:focus {
+    box-shadow: none;
+    background-color: transparent;
+    color: var(--dark-blue);
 }
