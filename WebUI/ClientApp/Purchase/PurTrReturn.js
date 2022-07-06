@@ -73,7 +73,7 @@ var PurTrReturn;
     var btnEdit;
     var btnSave;
     var btnBack;
-    var btnadd;
+    var btnAdd;
     var btnRecieveSearch;
     //flags
     var Show = true;
@@ -151,7 +151,7 @@ var PurTrReturn;
         btnSave.onclick = btnSave_onclick;
         btnRecieveSearch.onclick = btnRecieveSearch_onclick;
         btnEdit.onclick = btnEdit_onclick;
-        btnadd.onclick = AddNewReturn_onclick;
+        btnAdd.onclick = AddNewReturn_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         // print Button
         btnPrintTrview.onclick = function () { PrintReport(1); };
@@ -211,7 +211,7 @@ var PurTrReturn;
         btnSave = document.getElementById("btnSave");
         btnRecieveSearch = document.getElementById("btnRecieveSearch");
         btnEdit = document.getElementById("btnUpdate");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
     }
     //-----------------------------------------------------------------------  DropDownList Region ----------------------------------
     function FillddlVendorMaster() {
@@ -977,26 +977,27 @@ var PurTrReturn;
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt) {
         var html;
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-xs-12" style="right: 3%;" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
-            '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;margin-right: -4%;">' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-            '<div class="col-xs-2 p-0">' +
-            '<select id="ddlFamily' + cnt + '" class="form-control"><option>النوع</option></select></div>' +
-            '<div class="col-xs-3 p-0">' +
-            '<select id="ddlItem' + cnt + '" class="form-control"><option>الصنف</option></select></div>' +
-            '<div class=" col-xs-1 p-0">  <input type="text" class="form-control"    disabled id="txtQuantity' + cnt + '" name="quant[1]" class="form-control " value="0" min="0" max="1000" ></div>' +
-            '<div class=" col-xs-1 p-0" style="width: 9.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number3' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[3]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="number" min="1"   style="height:36px;" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control   font1" value="1" min="0" max="1000" step="1"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus3"   class="btnplasandmines btn-default btn-number3' + cnt + '" data-type="plus" data-field="quant[3]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class=" col-xs-2 p-0" style="width: 12.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" min="0"   style="height:36px;" disabled id="txtPrice' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txtTotal' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txtTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '</div></div></div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = "<tr id=\"No_Row" + cnt + "\">\n \n\t                <td>\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"display_none\"  />\n\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\">" + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQuantity" + cnt + "\" type=\"text\" class=\"form-control\" name=\"quant[1]\" value=\"0\" min=\"0\" max=\"1000\" disabled />\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group ps-1\">\n\t\t\t                <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                <div class=\"value-button decrease-button btn-number3" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[3]\">-</div>\n\t\t\t                <div class=\"value-button increase-button btn-number3" + cnt + "\" data-id=\"increase\" id=\"btnplus3\" data-type=\"plus\" data-field=\"quant[3]\">+</div>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" value=\"0\" min=\"0\" step=\"1\"/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtUnitpriceWithVat" + cnt + "\" value=\"0\" min=\"0\" step=\"1\"/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotal" + cnt + "\" disabled />\n\t\t                </div>\n\t                </td>\n\t                \n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTax" + cnt + "\" disabled/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotAfterTax" + cnt + "\" disabled />\n\t\t                </div>\n                        <input id=\"vatnatid" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"UnitCost" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_StatusFlag" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_ID" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t                </td>\n\t        \n                </tr>";
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-xs-12" style="right: 3%;" > ' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
+        //    '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
+        //    '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;margin-right: -4%;">' +
+        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
+        //    '<div class="col-xs-2 p-0">' +
+        //    '<select id="ddlFamily' + cnt + '" class="form-control"><option>النوع</option></select></div>' +
+        //    '<div class="col-xs-3 p-0">' +
+        //    '<select id="ddlItem' + cnt + '" class="form-control"><option>الصنف</option></select></div>' +
+        //    '<div class=" col-xs-1 p-0">  <input type="text" class="form-control"    disabled id="txtQuantity' + cnt + '" name="quant[1]" class="form-control " value="0" min="0" max="1000" ></div>' +
+        //    '<div class=" col-xs-1 p-0" style="width: 9.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number3' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[3]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="number" min="1"   style="height:36px;" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control   font1" value="1" min="0" max="1000" step="1"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus3"   class="btnplasandmines btn-default btn-number3' + cnt + '" data-type="plus" data-field="quant[3]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
+        //    '<div class=" col-xs-2 p-0" style="width: 12.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" min="0"   style="height:36px;" disabled id="txtPrice' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
+        //    '<div class="col-xs-1 p-0">' +
+        //    '<input id="txtTotal' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
+        //    '<div class="col-xs-1 p-0">' +
+        //    '<input id="txtTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
+        //    '<div class="col-xs-1 p-0">' +
+        //    '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
+        //    '</div></div></div>' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
         //script
         $('.btn-number2' + cnt).click(function (e) {
