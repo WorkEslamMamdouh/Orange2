@@ -28712,9 +28712,13 @@ div.tagsinput {
     z-index: 9999;
     cursor: pointer;
 }
-/*.details-iconbar .icon-bar {
-    position: fixed;
-}*/
+.details-iconbar{
+    position:absolute;
+    top: 10%;
+}
+.details-iconbar .icon-bar {
+    position: sticky;
+}
     .main-iconbar .icon-bar:hover, .details-iconbar .icon-bar:hover {
         left: 0px;
         background-color: var(--main-orange);
