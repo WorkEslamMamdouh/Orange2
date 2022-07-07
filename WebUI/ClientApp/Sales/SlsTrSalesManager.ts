@@ -1667,17 +1667,17 @@ namespace SlsTrSalesManager {
         $("#div_btnPrint").removeClass("display_none");
         //$("#btnPrintInvoicePrice").removeClass("display_none");
         debugger
-        //if (InvoiceStatisticsModel[0].Status == 1) { 
-        //    btnUpdate.disabled = true; 
-        //    $('#btnUpdate').attr("disabled", "disabled")
-        //    $('#btnUpdate').addClass("display_none")
+        if (InvoiceStatisticsModel[0].Status == 1) { 
+            btnUpdate.disabled = true; 
+            $('#btnUpdate').attr("disabled", "disabled")
+            $('#btnUpdate').addClass("display_none")
 
-        // } else {
-        //    btnUpdate.disabled = btnUpdate.disabled = false;
-        //    $('#btnUpdate').removeAttr("disabled")
-        //    $('#btnUpdate').removeClass("display_none")
+         } else {
+            btnUpdate.disabled = btnUpdate.disabled = false;
+            $('#btnUpdate').removeAttr("disabled")
+            $('#btnUpdate').removeClass("display_none")
 
-        //}
+        }
         //if (InvoiceStatisticsModel[0].Status == 1) {
         //    btnUpdate.disabled = true;
         //    $('#btnUpdate').addClass("display_none");
