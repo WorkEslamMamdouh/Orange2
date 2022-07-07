@@ -28670,6 +28670,21 @@ div.tagsinput {
 .iconbar-container{
     position: relative;
 }
+/*.content-icon-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:1;
+}
+.icon-bar-input {
+    background-color: transparent;
+    width: 125%;
+    height: 100%;
+    margin-top: -1rem;
+    padding: 1.2rem;
+    z-index: 9999999999999999999999;
+    background-color: var(--main-blue);
+}*/
 .main-iconbar .icon-bar,
 .details-iconbar .icon-bar {
     background-color: var(--main-blue);
@@ -28685,6 +28700,7 @@ div.tagsinput {
     transition: all 0.5s ease-in-out;
     z-index: 9999;
     cursor: pointer;
+    border:none;
 }
     .main-iconbar .icon-bar:hover,
     .details-iconbar .icon-bar:hover {
@@ -28996,8 +29012,9 @@ div.tagsinput {
     position:absolute;
     top:-2rem;
 }
-.table.satistics-tables thead th {
+.table.satistics-table thead th {
     color: var(--main-blue);
+    padding-bottom:1rem;
 }
     /*Counter*/
     .inside-table .counter {
