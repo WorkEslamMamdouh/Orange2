@@ -892,7 +892,7 @@ Fields!Tot_PrevCredit.Value )</Value>
                                 <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
-                                <Color>=iif(Fields!AccGroup.Value=4 ,IIf(Fields!Tot_EndDebit.Value &gt;=0,
+                                <Color>=iif(Fields!AccGroup.Value=4 ,IIf(Fields!Tot_EndCredit.Value &gt;=0,
 "LimeGreen","Red") , "Black")</Color>
                               </Style>
                             </TextRun>
