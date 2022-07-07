@@ -28686,7 +28686,7 @@ div.tagsinput {
     transition: all 0.5s ease-in-out;
     z-index: 9999;
     cursor: pointer;
-    border:none;
+    border: none;
 }
     .main-iconbar .icon-bar:disabled,
     .details-iconbar .icon-bar:disabled {
@@ -28727,10 +28727,10 @@ div.tagsinput {
 }
 
 .edit {
-    bottom: 50%;
+    top: 700px;
 }
 .print-details {
-    bottom: 55%;
+    top: 760px;
 }
 
 .save {
