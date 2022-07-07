@@ -281,52 +281,7 @@
             </div>
         </div>
 
-        @* Side button *@
-        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 d-none">
-                <div class="col-md-2 col-md-2 col-sm-2 col-xs-2 p-sm-0 f-sm">
-                    <button id="btnShow" type="button" class="btn btn-info f-sm">
-                        @SystemResource.App_Show  <span class="glyphicon glyphicon-save   sm-6 xs-6 hidden-sm hidden-md hidden-xs"></span>
-                    </button>
-                    <button type="button" class="btn btn-success" id="btnAdd">
-                        @SystemResource.App_Add  <span class="glyphicon glyphicon-plus-sign  sm-6 xs-6 hidden-sm hidden-md hidden-xs"></span>
-                    </button>
-                </div>
-            </div>*@
-        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 d-none">
-                <div class="btn-group">
-                    <label type="button" class="btn btn-warning" style="background-color: #f89814;">@SystemResource.App_Print</label>
-                    <button type="button" class="btn btn-warning dropdown-toggle" style="background-color: #f89814;" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-hand-down w-100"></span>
-                    </button>
-                    <div class="dropdown-menu" role="menu" style="border-radius:15px">
-                        <div class="col-lg-12 ">
-                            <button style="width:100%" id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                        </div>
-                        <div class="col-lg-12">
-                            <button style="width:100%" id="btnPrintTrview" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                        </div>
-                        <div class="col-lg-12">
-                            <button style="width:100%" id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>   @SystemResource.Download_PDF     </button>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <button style="width:100%" id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span> @SystemResource.Download_EXCEL   </button>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
-
-
-        <!--old Table  -->
-        @*<div class="form-group  margingred  card bg-light-blue  display_none col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="divShow">
-                <div class="col-lg-3 col-sm-3 col-xs-8" style="margin-bottom: 4px;margin-right: 27px;margin-top: 9px;">
-                    <input id="searchbutmemreport" name="" type="text" class="form-control  input-sm text_Display" placeholder="@SystemResource.Search">
-                </div>
-                <div class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    <table id="divGridDetails"></table>
-                </div>
-            </div>*@
+       
 
     </div>
     @* Error Message *@
@@ -613,7 +568,7 @@
                         </div>
 
                         <!-- Editors Details -->
-                        <div class="row editor-details">
+                        <div class="insettext row editor-details">
                             <div class="col-12 col-md-6">
 
                                 <div class="form-group row g-0">
@@ -779,7 +734,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="background-color: #fbebdc!important;">
+            <div class=" col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="background-color: #fbebdc!important;">
                 <div id="" class="  col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
                     <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
                         <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.contract_number  </label>
@@ -830,6 +785,7 @@
             $("#ddlSalesman").select2();
             $("#ddlCashBox").select2();
             $(".select_").select2();
+            $(".select_2").select2();
 
 
             $('#but_read').click(function () {
@@ -839,6 +795,12 @@
                 var username = $('#ddlInvoiceCustomer option:selected').text();
                 var userid = $('#ddlInvoiceCustomer').val();
 
+
+                var username = $('.select_ option:selected').text();
+                var userid = $('.select_').val();
+
+                var username = $('.select_2 option:selected').text();
+                var userid = $('.select_2').val();
                 $('#result').html("id : " + userid + ", name : " + username);
             });
         });

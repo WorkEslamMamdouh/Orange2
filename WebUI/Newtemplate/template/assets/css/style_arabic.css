@@ -29400,3 +29400,6 @@ input[class=checkbox]:checked:before {
     width: 45%;
 }
 
+.insettext input {
+    border: inset!important;
+}

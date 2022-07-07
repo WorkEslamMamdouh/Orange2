@@ -1227,7 +1227,21 @@ namespace SlsTrSalesReturn {
         });
 
         $('#btnPrintTransaction').removeClass("display_none");
+        if (InvoiceStatisticsModel[0].Status == 1) { 
+            btnUpdate.disabled = true;
+            $('#btnUpdate').addClass("display_none"); 
+         }
+        else {
+            if (!SysSession.CurrentPrivileges.EDIT) {
+                $('#btnUpdate').addClass("display_none");
 
+            } else {
+                $('#btnUpdate').removeClass("display_none");
+
+            }
+            
+
+         }
     }
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt: number) {
