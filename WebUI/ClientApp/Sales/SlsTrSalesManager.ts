@@ -1034,6 +1034,7 @@ namespace SlsTrSalesManager {
         $("#divIconbar").removeClass("disabledIconbar");
     }
     function btnUpdate_onclick() {
+        debugger
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
@@ -1546,13 +1547,15 @@ namespace SlsTrSalesManager {
             var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
             $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
-
+            debugger
             if (InvoiceStatisticsModel[0].Status == 1) {
-                chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
+                btnUpdate.disabled = true;// !SysSession.CurrentPrivileges.EDIT;
+                $('#btnUpdate').attr("disabled","disabled")
+                chkActive.checked = true;
             } else {
                 chkActive.checked = false;
-                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = btnUpdate.disabled = false;//!SysSession.CurrentPrivileges.EDIT;
                 chkActive.disabled = true;
             }
             if (InvoiceStatisticsModel[0].IsCash == true) {
@@ -1633,14 +1636,16 @@ namespace SlsTrSalesManager {
         txtCommission.disabled = true;
         ddlStore.disabled = true;
 
-
+        debugger
         if (InvoiceStatisticsModel[0].Status == 1) {
             if (!SysSession.CurrentPrivileges.CUSTOM2) {
                 AutherizeFlag = false;
                 $("#btnUpdate").addClass("display_none");
+                $("#btnUpdate").attr("disabled","disabled");
             } else {
                 AutherizeFlag = true;
                 $("#btnUpdate").removeClass("display_none");
+                $("#btnUpdate").attr("disabled", "disabled");
 
             }
         }
@@ -1661,6 +1666,34 @@ namespace SlsTrSalesManager {
         btndiv_1_onclick();
         $("#div_btnPrint").removeClass("display_none");
         //$("#btnPrintInvoicePrice").removeClass("display_none");
+        debugger
+        //if (InvoiceStatisticsModel[0].Status == 1) { 
+        //    btnUpdate.disabled = true; 
+        //    $('#btnUpdate').attr("disabled", "disabled")
+        //    $('#btnUpdate').addClass("display_none")
+
+        // } else {
+        //    btnUpdate.disabled = btnUpdate.disabled = false;
+        //    $('#btnUpdate').removeAttr("disabled")
+        //    $('#btnUpdate').removeClass("display_none")
+
+        //}
+        //if (InvoiceStatisticsModel[0].Status == 1) {
+        //    btnUpdate.disabled = true;
+        //    $('#btnUpdate').addClass("display_none");
+        //}
+        //else {
+        //    if (!SysSession.CurrentPrivileges.EDIT) {
+        //        $('#btnUpdate').addClass("display_none");
+
+        //    } else {
+        //        $('#btnUpdate').removeClass("display_none");
+
+        //    }
+
+
+        //}
+
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt: number) {
@@ -1686,7 +1719,7 @@ namespace SlsTrSalesManager {
 	                </th>
                      <th>
 		                <div class="form-group">
-			                <select id="ddlItem${cnt}" class="form-control select_">
+			                <select id="ddlItem${cnt}" class="form-control select_2">
                               <option value="null">  ${(lang == "ar" ? "الصنف" : "Item")} </option>
                             </select>
 		                </div>
@@ -1741,7 +1774,14 @@ namespace SlsTrSalesManager {
                 </tr>`;
         $("#div_Data").append(html);
         $(".select_").select2();
- 
+        $(".select_2").select2();
+        var username = $('.select_ option:selected').text();
+        var userid = $('.select_').val();
+
+        var username = $('.select_2 option:selected').text();
+        var userid = $('.select_2').val();
+        $('#result').html("id : " + userid + ", name : " + username);
+
 
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
@@ -2336,6 +2376,14 @@ namespace SlsTrSalesManager {
             DeleteRow(cnt);
         });
         $(".select_").select2();
+        $(".select_2").select2();
+         
+        var username = $('.select_ option:selected').text();
+        var userid = $('.select_').val();
+
+        var username = $('.select_2 option:selected').text();
+        var userid = $('.select_2').val();
+        $('#result').html("id : " + userid + ", name : " + username);
         return;
     }
     function DeleteRow(RecNo: number) {
@@ -3126,6 +3174,7 @@ namespace SlsTrSalesManager {
 
 
         if (InvoiceStatisticsModel[0].Status == 1) {
+            debugger
             if (!SysSession.CurrentPrivileges.CUSTOM2) {
                 AutherizeFlag = false;
                 $("#btnUpdate").addClass("display_none");
