@@ -29039,8 +29039,8 @@ div.tagsinput {
         margin: 0;
     }
     .inside-table .form-group {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 2px;
+        margin-right: 2px;
     }
     .inside-table .btn-minus,
     .inside-table .btn-plus {
@@ -29128,6 +29128,8 @@ label.form-control[disabled]:not(.search-control) {
     text-align: center;
     margin-right: 0.1rem;
     padding: 0;
+    width:100%;
+    border-radius: 5px;
 }
     .counter[disabled] ~ .value-button {
         display: none;
@@ -29265,6 +29267,9 @@ input[class=checkbox]:checked:before {
     display: none !important;
 }
 /*Change Select List Style*/
+.select2-container{
+    max-width:100% !important;
+}
 .select2-container--default .select2-selection--single,
 .select2-container--default .select2-dropdown,
 .select2-container--default .select2-selection--multiple {
