@@ -93,7 +93,7 @@ namespace PurTrReceive {
     var btnBack: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnPurOrderSearch: HTMLButtonElement;
-    var btnPrintInvoicePrice: HTMLButtonElement;
+    //var btnPrintInvoicePrice: HTMLButtonElement;
     var btnVendorSearch: HTMLButtonElement;
 
     //flags && global
@@ -120,7 +120,7 @@ namespace PurTrReceive {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
-    var btnPrintReceive: HTMLButtonElement; 
+    var btnPrintTransaction: HTMLButtonElement; 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     //---------------------------------------------------------------- main region----------------------------------------------------
     export function InitalizeComponent() {
@@ -158,8 +158,8 @@ namespace PurTrReceive {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
-        btnPrintReceive = document.getElementById("btnPrintReceive") as HTMLButtonElement; 
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement; 
+        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
         //----------------------------------------------------------------------------------------//
@@ -240,8 +240,8 @@ namespace PurTrReceive {
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintReceive.onclick = btnPrintReceive_onclick; 
-        btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
+        btnPrintTransaction.onclick = btnPrintTransaction_onclick; 
+        //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
 
@@ -2418,7 +2418,7 @@ namespace PurTrReceive {
         $("#txtTotalTax").prop("value", "");
         $("#txtTotalPurchaseWithTax").prop("value", "");
 
-        $("#btnPrintReceive").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
 
         CountGrid = 0;
@@ -2604,9 +2604,9 @@ namespace PurTrReceive {
         $("#btnAddDetails").removeClass("display_none");
         $("#btnAddDetailsCharge").removeClass("display_none");
 
-        $("#btnPrintReceive").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintInvoicePrice").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
+        //$("#btnPrintInvoicePrice").addClass("display_none");
 
         $("#btnUpdate").addClass("display_none");
 
@@ -2667,9 +2667,9 @@ namespace PurTrReceive {
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetailsCharge").addClass("display_none");
 
-        $("#btnPrintReceive").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintInvoicePrice").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
+        //$("#btnPrintInvoicePrice").removeClass("display_none");
 
         $("#btnUpdate").removeClass("display_none");
 
@@ -3013,7 +3013,7 @@ namespace PurTrReceive {
         $("#rowData").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
 
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
     }
 
@@ -3069,7 +3069,7 @@ namespace PurTrReceive {
     function BindAfterInsertorUpdate(receiveid: number) {
         debugger
         ShowFlag = true;
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         GlobalReceiveID = receiveid;
 
@@ -3148,7 +3148,7 @@ namespace PurTrReceive {
             }
         })
     }
-    function btnPrintReceive_onclick() {
+    function btnPrintTransaction_onclick() {
         //
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();

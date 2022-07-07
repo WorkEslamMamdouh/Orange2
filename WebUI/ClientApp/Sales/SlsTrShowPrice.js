@@ -84,7 +84,7 @@ var SlsTrShowPrice;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
-    var btnPrintInvoicePrice;
+    //var btnPrintInvoicePrice: HTMLButtonElement;
     var btnPrintslip;
     // giedView
     var Grid = new JsGrid();
@@ -195,7 +195,7 @@ var SlsTrShowPrice;
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
         btnPrintslip = document.getElementById("btnPrintslip");
         //////debugger
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice");
+        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
     }
     function InitializeEvents() {
         chkActive.onclick = chkActive_onchecked;
@@ -218,7 +218,7 @@ var SlsTrShowPrice;
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick;
         //////debugger
-        btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
+        //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     function Check_on_user_type() {
@@ -385,7 +385,7 @@ var SlsTrShowPrice;
                         updateWithProcess();
                     }
                     IsSuccess = false;
-                    $("#btnPrintInvoicePrice").removeClass("display_none");
+                    //$("#btnPrintInvoicePrice").removeClass("display_none");   
                 }
             }
         }, 100);
@@ -423,7 +423,7 @@ var SlsTrShowPrice;
             $("#ddlType").attr("disabled", "disabled");
             $("#chkActive").attr("disabled", "disabled");
             $("#txtCommission").attr("disabled", "disabled");
-            $("#btnPrintInvoicePrice").removeClass("display_none");
+            //$("#btnPrintInvoicePrice").removeClass("display_none");      
             $("#btnUpdate").removeClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
             $("#btnBack").addClass("display_none");
@@ -438,7 +438,7 @@ var SlsTrShowPrice;
             $("#ddlType").attr("disabled", "disabled");
             $("#chkActive").attr("disabled", "disabled");
             $("#txtCommission").attr("disabled", "disabled");
-            $("#btnPrintInvoicePrice").removeClass("display_none");
+            //$("#btnPrintInvoicePrice").removeClass("display_none");    
             $("#btnUpdate").removeClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
             $("#btnBack").addClass("display_none");
@@ -578,7 +578,7 @@ var SlsTrShowPrice;
         $("#btnAddDetails").removeClass("display_none");
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintInvoicePrice").addClass("display_none");
+        //$("#btnPrintInvoicePrice").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -610,7 +610,7 @@ var SlsTrShowPrice;
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintInvoicePrice").addClass("display_none");
+        //$("#btnPrintInvoicePrice").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -2389,32 +2389,31 @@ var SlsTrShowPrice;
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
-    function btnPrintInvoicePrice_onclick() {
-        //////debugger
-        if (!SysSession.CurrentPrivileges.PrintOut)
-            return;
-        var rp = new ReportParameters();
-        rp.Type = 0;
-        rp.FromDate = DateFormatRep(txtStartDate.value);
-        rp.ToDate = DateFormatRep(txtEndDate.value);
-        if (ddlSalesmanFilter.selectedIndex > 0)
-            rp.SalesmanID = Number($("#ddlSalesmanFilter").val());
-        else
-            rp.SalesmanID = -1;
-        if ($("#ddlCustomer").val() == "null")
-            rp.CustomerID = -1;
-        else
-            rp.CustomerID = Number($("#ddlCustomer").val());
-        rp.CashType = Number($("#ddlInvoiceType").val());
-        rp.Status = Number($("#ddlStateType").val());
-        rp.TrType = TrType;
-        rp.Typ = 1;
-        rp.TRId = GlobalinvoiceID;
-        rp.Name_function = "rptInvoiceNote";
-        localStorage.setItem("Report_Data", JSON.stringify(rp));
-        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
-    }
+    //function btnPrintInvoicePrice_onclick() {
+    //    //////debugger
+    //    if (!SysSession.CurrentPrivileges.PrintOut) return;
+    //    let rp: ReportParameters = new ReportParameters();
+    //    rp.Type = 0;
+    //    rp.FromDate = DateFormatRep(txtStartDate.value);
+    //    rp.ToDate = DateFormatRep(txtEndDate.value);
+    //    if (ddlSalesmanFilter.selectedIndex > 0)
+    //        rp.SalesmanID = Number($("#ddlSalesmanFilter").val());
+    //    else
+    //        rp.SalesmanID = -1;
+    //    if ($("#ddlCustomer").val() == "null")
+    //        rp.CustomerID = -1;
+    //    else
+    //        rp.CustomerID = Number($("#ddlCustomer").val());
+    //    rp.CashType = Number($("#ddlInvoiceType").val());
+    //    rp.Status = Number($("#ddlStateType").val());
+    //    rp.TrType = TrType;
+    //    rp.Typ = 1;
+    //    rp.TRId = GlobalinvoiceID;
+    //        rp.Name_function = "rptInvoiceNote";
+    //        localStorage.setItem("Report_Data", JSON.stringify(rp));
+    //        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+    //         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+    //}
     function btnPrintslip_onclick() {
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;

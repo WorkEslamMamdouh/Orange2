@@ -386,9 +386,7 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="row">
-                            <div class="col-12">
-                                @* Empty Div To Make Screen Responsive *@
-                            </div>
+                  
                             <div class="form-group col-12 row g-0">
                                 <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
                                 <div class="col-8 ">
@@ -410,30 +408,58 @@
                                 </div>
                             </div>
                         </div>
-                     
+
 
                     </div>
 
-
-                    <div class="col-12 col-md-8">
-
+                    <div class="col-12 col-md-8 position-relative">
+                        <table class="table table-borderless satistics-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>@SystemResource.PurchaseWithLocalcurrency</th>
+                                    <th>@SystemResource.App_Adds</th>
+                                    <th>@SystemResource.App_total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@SystemResource.App_total</td>
+                                    <td>  <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotal"></td>
+                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddons"></td>
+                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithoutTax"></td>
+                                </tr>
+                                <tr>
+                                    <td>@SystemResource.App_Tax</td>
+                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTax"></td>
+                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddonsTax"></td>
+                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalTax"></td>
+                                </tr>
+                                <tr>
+                                    <td>@SystemResource.TotalafterVat</td>
+                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalFamily"></td>
+                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalAddons"></td>
+                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithTax"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
-
+          
 
                 <div id="divTotalSatistics" class="col-xs-12 container-fluid margingred display_none">
                     @*<div class="col-xs-12  " id="divType">
-                        <label class="col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_Notes</label>
-                        <div class="col-xs-11">
-                            <textarea type="text" class="form-control input-sm" name="" id="txtNotes" disabled="disabled" style="font-size: 16px !important;"></textarea>
-                        </div>
-                    </div>
-                    <div id=" " class="col-xs-12  margingred  borderred ">
-                        <div class="col-xs-12 ">
-                            <table id="divGridDetails"></table>
-                        </div>
-                    </div>*@
+                <label class="col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_Notes</label>
+                <div class="col-xs-11">
+                    <textarea type="text" class="form-control input-sm" name="" id="txtNotes" disabled="disabled" style="font-size: 16px !important;"></textarea>
+                </div>
+            </div>
+            <div id=" " class="col-xs-12  margingred  borderred ">
+                <div class="col-xs-12 ">
+                    <table id="divGridDetails"></table>
+                </div>
+            </div>*@
 
                     <div class="col-xs-12 margingred">
 
@@ -493,6 +519,7 @@
                         <div class="col-xs-2">
                             <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtLocalTotalFooter">
                         </div>
+
                         <label class="col-xs-2 bad_PurTrReceive marginstenig pading_lep  pading_2  ">@SystemResource.TotalafterVat  </label>
                         <div class="col-xs-2">
                             <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalFamily">
@@ -622,7 +649,7 @@
                 <table id="divMasterGrid"></table>
             </div>
         </div>*@
-    <div id="divDetails" class="col-xs-12 p-0">
+    @*<div id="divDetails" class="col-xs-12 p-0">
         <div class="col-xs-12 p-0 display_none " id="divEdit">
             <div class="col-xs-2 ckekPurOrder" style="position: absolute;top: 117%;">
                 <label class="col-xs-6  marginstenig pading_lep  pading_2 text-end ">  @SystemResource.App_approved  </label>
@@ -647,9 +674,9 @@
         <div id="rowData" class="col-xs-12 display_none ">
             @*<div id="DivMassage" class="col-xs-12  margingred  borderred display_none">
                 <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
-            </div>*@
+            </div>
             <div class="col-xs-12 ">
-                @*<div id="MasterDropDowns">
+                <div id="MasterDropDowns">
                     <div class="col-xs-11">
                         <label class="col-xs-1   marginstenig pading_lep  pading_2  " style="font-size: 16px !important;">  @SystemResource.App_InvoiceNum  </label>
                         <label class="col-xs-2  marginstenig pading_lep  pading_2 textcentr_padingPurTrReceive" id="lblInvoiceNumber" style="font-size: 16px !important;"></label>
@@ -730,8 +757,8 @@
                             <input id="txtCurrencyRate" type="number" name="" disabled="disabled" class="form-control input-sm" style='width: 100%;border-radius: 30px;' />
                         </div>
                     </div>
-                </div>*@
-                @*<div id="DivShow" class="col-xs-12 border_gridCont" style="overflow:auto ;">
+                </div>
+                <div id="DivShow" class="col-xs-12 border_gridCont" style="overflow:auto ;">
                     <br />
                     <div id=" " class="col-xs-12 font_header" style="bottom: 5px;font-weight:bold!important">
                         <div class="col-xs-2" style="width: 5%;">
@@ -781,8 +808,8 @@
                         </div>
                         <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign"></span>
                     </div>
-                </div>*@
-                @*<div id="DivChargesShow" class="col-xs-12 border_gridCont " style="overflow:auto ;">
+                </div>
+               <div id="DivChargesShow" class="col-xs-12 border_gridCont " style="overflow:auto ;">
                     <div id=" " class="col-xs-12 font_header" style="bottom: 5px; right:88px;font-weight:bold">
                         <br />
                         <div class="col-xs-1 App_serialPurTrReceive">
@@ -829,7 +856,7 @@
                             <span id="btnAddDetailsCharge" class="glyphicon glyphicon-plus-sign"></span>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <div id="divTotalSatistics" class="col-xs-12 container-fluid margingred display_none">
                     <div class="col-xs-12  " id="divType">
                         <label class="col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_Notes</label>
@@ -915,7 +942,7 @@
 
                     <br />
                     <br />
-                    @*<div class="col-xs-12">
+                    <div class="col-xs-12">
                         <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Pur </label>
                         <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom ">
                         <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
@@ -923,11 +950,11 @@
                         <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Update  </label>
                         <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
                         <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
-                    </div>*@
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
 
 

@@ -69,8 +69,8 @@
             </a>
         </div>
         <!-- Details Side Icon Bar -->
-        <div class="details-iconbar d-flex justify-content-start">
-            <a class="icon-bar d-flex justify-content-between edit display_none" id="btnUpdate">
+        <div class="details-iconbar d-flex justify-content-start" id="icon-bar">
+            <a class="icon-bar d-flex justify-content-between edit display_none " id="btnUpdate">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  تعديل</span>
             </a>
@@ -78,10 +78,10 @@
                 <i class="fas fa-print fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  طباعه</span>
             </a>
-            <a class="icon-bar d-flex justify-content-between print-InvoicePrice display_none" id="btnPrintInvoicePrice">
+            @*<a class="icon-bar d-flex justify-content-between print-InvoicePrice display_none" id="btnPrintInvoicePrice">
                 <i class="fas fa-print fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">   طباعه عرض اسعار</span>
-            </a>
+            </a>*@
             <a class="icon-bar d-flex justify-content-between save display_none" id="btnSave">
                 <i class="fas fa-save fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  حفظ</span>
@@ -91,6 +91,13 @@
                 <span class="align-self-center mb-3">  تراجع</span>
             </a>
         </div>
+        @*<div class="sidehoverbar">
+            <div href="#" class="side-bar setting">
+
+                <i class="fas fa-cog side-icon"></i>
+            </div>
+        </div>*@
+
     </div>
     <!-- Page Wrapper -->
     <div class="container-scroller">
@@ -159,26 +166,40 @@
                     </div>
                 </li>
 
-                <li class="nav-item menu-items " id="btnSales">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#MSales" aria-expanded="false" aria-controls="MSales">
+                <li class="nav-item menu-items" id="btnSales">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MSales" aria-expanded="false" aria-controls="MSales">
                         <span class="menu-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </span>
                         <span class="menu-title">@SystemResource.Men_Sales</span>
+
                         <i class="menu-arrow"></i>
+                        
                     </a>
                     <div class="collapse" id="MSales">
-                        <ul class="nav flex-column sub-menu">
-                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item"> <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a></li>
-                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item"> <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a></li>
-                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item"> <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a></li>
-                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item"> <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a></li>
+                        <ul class="nav flex-column sub-menu mt-3">
+                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item d-flex justify-content-between mb-1">
+                                <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a>
+                                <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                            </li>
+                            <li id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
+                                <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
+                                <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                            </li>
+                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item d-flex justify-content-between mb-1"> 
+                                <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
+                                <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                            </li>
+                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item d-flex justify-content-between mb-1">
+                                <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a>
+                                <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                            </li>
 
                         </ul>
                     </div>
                 </li>
                 <li class="nav-item menu-items " id="btnPurchase">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MPurchase">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MPurchase">
                         <span class="menu-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </span>
@@ -502,13 +523,13 @@
         </div>
     </div>
 
-    <div id="SearchBox" class=" modal fade " style="z-index:999999999;">
-        <div style="background-color:#ef6603!important; position:absolute;top:0px;left:0px;width:100%;height:40px;cursor:move;border-top-right-radius: 13px!important;border-top-left-radius: 13px!important;">
-            <input type="button" onclick="$('#SearchBox').modal('hide');" id="btnCloseSearch" name="name" value="x" class="btn colose_lay_btn btn-danger" style="height: 40px;
-              width: 38px;font-size: 20px;float: left;border-color: #ef6603!important;background-color: #ef6603!important;" />
-            <h4 id="searchTitle" class="col-xs-3" style="color: #fff;line-height: 36px;text-align:right"></h4>
+
+    <div id="SearchBox" class="modal fade search-box">
+        <div class="search-content">
+            <input type="button" onclick="$('#SearchBox').modal('hide');" class="close close-search-box" data-dismiss="modal" aria-label="Close" id="btnCloseSearch" name="name" value="x" />
+            <h4 id="searchTitle" class="col-xs-3 search-title"></h4>
         </div>
-        <div style="overflow-x:scroll;overflow-y:scroll;padding-left: 1%; margin-top:20px;width:100%;left:0px;left: 0px; position: absolute; width: 100%; height: 85%;">
+        <div class="table-serach-container">
             <div id="tableDiv" class="table table-bordered table-hover" style="width:100%;"></div>
         </div>
     </div>
@@ -565,7 +586,9 @@
     <!-- Custom js for this page -->
     <script src="~/Newtemplate/template/assets/js/dashboard.js"></script>
     <script src="~/Newtemplate/template/assets/js/counter.js"></script>
+   <script src="~/Newtemplate/template/assets/js/scrollTop.js"></script>
     <!-- End custom js for this page -->
+
     @Scripts.Render("~/Bundles/AppScript2")
     @Scripts.Render("~/Bundles/AppScript3")
     @Scripts.Render("~/Bundles/AppScript4")
@@ -580,7 +603,7 @@
 
     @*@Scripts.Render("~/Bundles/AppScript2")*@
 
- 
+
 
 </body>
 </html>
