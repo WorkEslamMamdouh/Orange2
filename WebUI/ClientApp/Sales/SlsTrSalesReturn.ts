@@ -251,7 +251,7 @@ namespace SlsTrSalesReturn {
         else
             $("#txtCustomerName").prop("value", custObj[0].NAMEE);
 
-        ddlFreeSalesman.value = custObj[0].SalesmanId.toString(); 
+        ddlFreeSalesman.value = custObj[0].SalesmanId.toString();
 
     }
     function ddlReturnTypeShow_onchange() {
@@ -299,7 +299,7 @@ namespace SlsTrSalesReturn {
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
-       // ddlSalesPerson.value = "null";
+        // ddlSalesPerson.value = "null";
 
         $('#txtCreatedBy').prop("value", "");
         $('#txtCreatedAt').prop("value", "");
@@ -333,7 +333,7 @@ namespace SlsTrSalesReturn {
                     vatType = InvoiceStatisticsModel[0].VatType;
                     //GetVatPercentage();
                     ddlFreeSalesman.value = InvoiceStatisticsModel[0].SalesmanId.toString();
-                   // ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
+                    // ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
                     if (InvoiceStatisticsModel[0].CustomerId != null) {
                         ddlInvoiceCustomer.value = InvoiceStatisticsModel[0].CustomerId.toString();
                         var customerName = InvoiceStatisticsModel[0].Cus_NameA.toString();
@@ -468,7 +468,7 @@ namespace SlsTrSalesReturn {
         btnInvoiceSearch.disabled = true;
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $('#btnUpdate').addClass("display_none"); 
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
 
         $("#ddlCashBox").removeAttr("disabled");
@@ -487,7 +487,7 @@ namespace SlsTrSalesReturn {
 
         txtRemarks.disabled = false;
         txtRefNo.disabled = false;
-    
+
 
         chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
 
@@ -546,7 +546,7 @@ namespace SlsTrSalesReturn {
                     for (var i = 0; i < CountGrid; i++) {
                         if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
                             if (Number($("#txtReturnQuantity" + i).val()) == 0) {
-                                Errorinput($("#txtReturnQuantity" + i)); 
+                                Errorinput($("#txtReturnQuantity" + i));
                             }
                         }
                     }
@@ -591,7 +591,7 @@ namespace SlsTrSalesReturn {
 
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-           // $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
 
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#btnUpdate").addClass("display_none");
@@ -662,7 +662,7 @@ namespace SlsTrSalesReturn {
         $("#cotrolDiv").addClass("disabledDiv");
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
 
-     
+
         $("#divShow").removeClass("display_none");
         btnInvoiceSearch.disabled = false;
         txtRefNo.disabled = false;
@@ -689,7 +689,7 @@ namespace SlsTrSalesReturn {
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
         ddlFreeSalesman.value = "null";
-       // ddlSalesPerson.value = "null";
+        // ddlSalesPerson.value = "null";
         txtCashAmount.value = "";
         ddlTaxTypeHeader.value = "null";
         $("#txtCustomerName").prop("value", "");
@@ -708,7 +708,7 @@ namespace SlsTrSalesReturn {
 
         fillddlCashBox();
         $("#ddlFreeSalesman").attr("disabled", "disabled");
-       // $("#ddlSalesPerson").attr("disabled", "disabled");
+        // $("#ddlSalesPerson").attr("disabled", "disabled");
 
 
         InsertFlag = false;
@@ -744,7 +744,7 @@ namespace SlsTrSalesReturn {
             $("#ddlInvoiceCustomer").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-           // $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#txtCustomerName").attr("disabled", "disabled");
 
@@ -1175,7 +1175,7 @@ namespace SlsTrSalesReturn {
             }
             $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId.toString());
 
-           // $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
+            // $('#ddlSalesPerson').prop("value", Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
                 btnUpdate.disabled = true;
@@ -1198,7 +1198,7 @@ namespace SlsTrSalesReturn {
 
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
-           // $("#ddlSalesPerson").attr("disabled", "disabled");
+            // $("#ddlSalesPerson").attr("disabled", "disabled");
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
 
@@ -1227,21 +1227,7 @@ namespace SlsTrSalesReturn {
         });
 
         $('#btnPrintTransaction').removeClass("display_none");
-        if (InvoiceStatisticsModel[0].Status == 1) { 
-            btnUpdate.disabled = true;
-            $('#btnUpdate').addClass("display_none"); 
-         }
-        else {
-            if (!SysSession.CurrentPrivileges.EDIT) {
-                $('#btnUpdate').addClass("display_none");
 
-            } else {
-                $('#btnUpdate').removeClass("display_none");
-
-            }
-            
-
-         }
     }
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt: number) {
@@ -1316,7 +1302,7 @@ namespace SlsTrSalesReturn {
 	        
                 </tr>`;
         $("#div_Data").append(html);
-        
+
         //script
         $('.btn-number2' + cnt).click(function (e) {
             e.preventDefault();
@@ -2050,7 +2036,7 @@ namespace SlsTrSalesReturn {
         InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
         InvoiceModel.RefNO = txtRefNo.value;
         InvoiceModel.Remark = txtRemarks.value;
-       // InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
+        // InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
