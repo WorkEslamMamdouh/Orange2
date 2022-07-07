@@ -93,7 +93,7 @@ namespace PurTrReceive {
     var btnBack: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnPurOrderSearch: HTMLButtonElement;
-    var btnPrintInvoicePrice: HTMLButtonElement;
+    //var btnPrintInvoicePrice: HTMLButtonElement;
     var btnVendorSearch: HTMLButtonElement;
 
     //flags && global
@@ -159,7 +159,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintReceive = document.getElementById("btnPrintReceive") as HTMLButtonElement; 
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
         //----------------------------------------------------------------------------------------//
@@ -241,7 +241,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintReceive.onclick = btnPrintReceive_onclick; 
-        btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
+        //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
 
@@ -2606,7 +2606,7 @@ namespace PurTrReceive {
 
         $("#btnPrintReceive").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintInvoicePrice").addClass("display_none");
+        //$("#btnPrintInvoicePrice").addClass("display_none");
 
         $("#btnUpdate").addClass("display_none");
 
@@ -2669,7 +2669,7 @@ namespace PurTrReceive {
 
         $("#btnPrintReceive").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintInvoicePrice").removeClass("display_none");
+        //$("#btnPrintInvoicePrice").removeClass("display_none");
 
         $("#btnUpdate").removeClass("display_none");
 

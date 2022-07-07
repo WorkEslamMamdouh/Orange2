@@ -86,7 +86,7 @@ var PurTrReceive;
     var btnBack;
     var btnAdd;
     var btnPurOrderSearch;
-    var btnPrintInvoicePrice;
+    //var btnPrintInvoicePrice: HTMLButtonElement;
     var btnVendorSearch;
     //flags && global
     var GlobalReceiveID = 0;
@@ -149,7 +149,7 @@ var PurTrReceive;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrint = document.getElementById("btnPrint");
         btnPrintReceive = document.getElementById("btnPrintReceive");
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice");
+        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
         //----------------------------------------------------------------------------------------//
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -223,7 +223,7 @@ var PurTrReceive;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintReceive.onclick = btnPrintReceive_onclick;
-        btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
+        //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     //---------------------------------------------------------------- normal region----------------------------------------------------
@@ -2139,7 +2139,7 @@ var PurTrReceive;
         $("#btnAddDetailsCharge").removeClass("display_none");
         $("#btnPrintReceive").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintInvoicePrice").addClass("display_none");
+        //$("#btnPrintInvoicePrice").addClass("display_none");
         $("#btnUpdate").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -2189,7 +2189,7 @@ var PurTrReceive;
         $("#btnAddDetailsCharge").addClass("display_none");
         $("#btnPrintReceive").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintInvoicePrice").removeClass("display_none");
+        //$("#btnPrintInvoicePrice").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
