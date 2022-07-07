@@ -28317,7 +28317,8 @@ div.tagsinput {
             background: transparent;
         }
 
-.sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-category):not(.account-dropdown) > .nav-link {
+.sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-category):not(.account-dropdown) > .nav-link,
+.sidebar .nav:not(.sub-menu) > .nav-item:not(.nav-category):not(.account-dropdown) > .nav-link:not(.collapsed) {
     background: var(--main-orange);
     color: var(--bs-light);
 }
@@ -28325,22 +28326,6 @@ div.tagsinput {
 .sidebar .nav .menu-items .nav-link .menu-icon i {
     color: var(--Lighter-blue);
 }
-
-/*.sidebar .nav .menu-items:nth-child(5n+2) .nav-link .menu-icon i {
-    color: #00d25b;
-}
-
-.sidebar .nav .menu-items:nth-child(5n+3) .nav-link .menu-icon i {
-    color: #8f5fe8;
-}
-
-.sidebar .nav .menu-items:nth-child(5n+4) .nav-link .menu-icon i {
-    color: #ffab00;
-}
-
-.sidebar .nav .menu-items:nth-child(5n+5) .nav-link .menu-icon i {
-    color: #fc424a;
-}*/
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {
@@ -28719,15 +28704,6 @@ div.tagsinput {
     height: 50px;
 }
 
-/*.details-iconbar .icon-bar.print-InvoicePrice {
-    width: 210px;
-    height: 50px;
-    left: -170px;
-}
-
-    .details-iconbar .icon-bar.print-InvoicePrice:hover {
-        left: 0px;
-    }*/
 .view {
     top: 100px;
 }
@@ -28745,14 +28721,12 @@ div.tagsinput {
 }
 
 .edit {
-        bottom: 15%;
-    }
+    bottom: 50%;
+}
 .print-details {
-    bottom: 10%;
+    bottom: 55%;
 }
-.print-InvoicePrice {
-    top: 820px;
-}
+
 .save {
     bottom: 25%;
 }
@@ -28760,7 +28734,7 @@ div.tagsinput {
     bottom: 20%;
 }
 /*Other Icon Bar*/
-.sidehoverbar .side-bar {
+/*.sidehoverbar .side-bar {
     background-color: #143f6b;
     position: absolute;
     font-size: 22px;
@@ -28785,7 +28759,7 @@ div.tagsinput {
     top: 350px;
     width: 520px;
     height: 30px;
-}
+}*/
 /*Top Button*/
 .top-container {
     position: relative;
@@ -29017,7 +28991,15 @@ div.tagsinput {
         .inside-table .form-control.no-border {
             border: none;
         }
-/*Counter*/
+
+.satistics-table{
+    position:absolute;
+    top:-2rem;
+}
+.table.satistics-tables thead th {
+    color: var(--main-blue);
+}
+    /*Counter*/
     .inside-table .counter {
         background-color: transparent;
         text-align: center;
@@ -29244,13 +29226,29 @@ input[class=checkbox]:checked:before {
         width: 50%;
     }
 }
+.new-tab-link{
+    position:relative;
+}
+.new-tab {
+    margin-left: -0.5rem;
+    margin-right: 0.25rem;
+    color: var(--bs-light);
+    cursor: pointer;
+    color: var(--bs-gray-light);
+    position: absolute;
+    top: 5px;
+    left: -8px;
+}
+.new-tab:hover {
+    color: var(--Light-orange);
+}
 /*Change Search Table Style*/
 .jsgrid .jsgrid-table th {
     white-space: normal;
     padding: .5em;
     padding-left: 0;
     padding-right: 0;
-    font-size:12px;
+    font-size: 12px;
     text-align: center;
 }
 .jsgrid .jsgrid-table td {

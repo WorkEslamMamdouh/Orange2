@@ -109,7 +109,7 @@ var PurTrReceive;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrint;
-    var btnPrintReceive;
+    var btnPrintTransaction;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     //---------------------------------------------------------------- main region----------------------------------------------------
     function InitalizeComponent() {
@@ -148,7 +148,7 @@ var PurTrReceive;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrint = document.getElementById("btnPrint");
-        btnPrintReceive = document.getElementById("btnPrintReceive");
+        btnPrintTransaction = document.getElementById("btnPrintTransaction");
         //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
         //----------------------------------------------------------------------------------------//
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -222,7 +222,7 @@ var PurTrReceive;
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintReceive.onclick = btnPrintReceive_onclick;
+        btnPrintTransaction.onclick = btnPrintTransaction_onclick;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
@@ -1959,7 +1959,7 @@ var PurTrReceive;
         $("#txtTotalPurchaseWithoutTax").prop("value", "");
         $("#txtTotalTax").prop("value", "");
         $("#txtTotalPurchaseWithTax").prop("value", "");
-        $("#btnPrintReceive").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         CountGrid = 0;
         CountGridCharge = 0;
@@ -2137,7 +2137,7 @@ var PurTrReceive;
         $("#divTotalSatistics :input").attr("disabled", "disabled");
         $("#btnAddDetails").removeClass("display_none");
         $("#btnAddDetailsCharge").removeClass("display_none");
-        $("#btnPrintReceive").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         //$("#btnPrintInvoicePrice").addClass("display_none");
         $("#btnUpdate").addClass("display_none");
@@ -2187,7 +2187,7 @@ var PurTrReceive;
         $("#rowData :input").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetailsCharge").addClass("display_none");
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         //$("#btnPrintInvoicePrice").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
@@ -2504,7 +2504,7 @@ var PurTrReceive;
         VatPrc = VatDetails.filter(function (x) { return x.CODE == RetrivedPurchaseModel[0].VATType; })[0].VatPerc;
         $("#rowData").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
     }
     function openInvoice() {
@@ -2554,7 +2554,7 @@ var PurTrReceive;
     function BindAfterInsertorUpdate(receiveid) {
         debugger;
         ShowFlag = true;
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         GlobalReceiveID = receiveid;
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == receiveid; });
@@ -2620,7 +2620,7 @@ var PurTrReceive;
             }
         });
     }
-    function btnPrintReceive_onclick() {
+    function btnPrintTransaction_onclick() {
         //
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
