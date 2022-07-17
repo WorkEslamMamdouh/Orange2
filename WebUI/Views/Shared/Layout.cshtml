@@ -251,7 +251,7 @@
                     @* <a class="navbar-brand brand-logo-mini"  href="#">O</a>*@
                 </div>
                 <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-                    <button id="minimize" class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    @*<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <i class="fas fa-bars fa-lg"></i>
                     </button>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
@@ -489,9 +489,6 @@
                 </div>
                 <div class="modal-body" style="max-height:200px; overflow:auto;">
                     <div class="col-12"> <h3 id="MessageBoxMessage">هل تريد حقا الحذف ؟</h3></div>
-                    @*<div class="col-xs-5 text-center">
-                            <i class="glyphicon btn-danger"></i>
-                        </div>*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="MessageBoxOk" class="btn btn-danger">@SystemResource.App_Confirm</button>
@@ -503,13 +500,14 @@
 
 
     <!--Pop Up Help Window-->
-    <div class="help-pop modal fade in" id="myModal">
+    <div class="help-pop modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>*@
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h4 class="modal-title" id="myModalLabel">@SystemResource.App_Help</h4>
                 </div>
                 <div class="modal-body content content-8" id="modalHelpRep">
@@ -603,20 +601,6 @@
     @*@Scripts.Render("~/Bundles/AppScript2")*@
 
 
-    <script>
-
-        $('#minimize').on('click', function () {
-            $('body').toggleClass('sidebar-icon-only');
-
-        });
-        $('#btnCloseSearch').on('click', function () {
-            $("#SearchBox").removeClass("show")
-            $("#SearchBox").removeClass("modal-backdrop")
-            $("#SearchBox").modal("hide");//.css("display", "none");
-            $("#SearchBox").addClass("modal");
-        });
-        
-    </script>
 
 </body>
 </html>
