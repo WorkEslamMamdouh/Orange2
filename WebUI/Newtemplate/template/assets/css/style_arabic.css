@@ -29062,8 +29062,8 @@ div.tagsinput {
         margin: 0;
     }
     .inside-table .form-group {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-left: 1px;
+        margin-right: 1px;
     }
     .inside-table .btn-minus,
     .inside-table .btn-plus {
