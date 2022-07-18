@@ -37,6 +37,9 @@
     <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/logo.ico" />
 
+    <link href="~/Content/Loading/src/css/preloader.css" rel="stylesheet" />
+    @*<link href="~/Style_design/css/preloader/preloader-style.css" rel="stylesheet" />*@
+
 </head>
 
 <body id="page-top">
@@ -67,6 +70,10 @@
                 <i class="fas fa-file-csv fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  Excel</span>
             </button>
+            <div class="col-md-2 col-xs-2 StyleNew_Toolbar display_none">
+                <input id="NewAdd_Falg" />
+                <input id="Mod_Flag" />
+            </div>
         </div>
         <!-- Details Side Icon Bar -->
         <div class="details-iconbar d-flex justify-content-start" id="icon-bar">
@@ -99,6 +106,9 @@
             </div>*@
 
     </div>
+
+
+
     <!-- Page Wrapper -->
     <div class="container-scroller">
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
@@ -564,6 +574,15 @@
 
 
 
+   @* <div class="modal-dialog" role="document">*@
+
+        <div id="Loading_Div" style="position: fixed;top: 75%;left: 40%;">
+
+        </div>
+
+    @*</div>*@
+
+
     <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -599,6 +618,119 @@
 
 
     @*@Scripts.Render("~/Bundles/AppScript2")*@
+
+
+
+
+
+    <script>
+        $("#NewAdd_Falg").val(0);
+        $("#Mod_Flag").val(0);
+
+
+        $("#btnAdd").click(function () {
+            debugger
+
+            $("#divIconbar").fadeIn(3000);
+
+            $('#divIconbar').addClass('display_none');
+            $("#NewAdd_Falg").val(1);
+            $("#Mod_Flag").val(1);
+
+
+
+
+            $('#btnPrintTransaction').addClass('display_none');
+
+            $('#icon-bar').removeClass('display_none');
+            $('#btnUpdate').addClass('display_none');
+            $('#btnBack').removeClass('display_none');
+            $('#btnSave').removeClass('display_none');
+
+
+            $('#btnPrintslip').addClass('display_none');
+            $('#btnPrintTransaction').addClass('display_none');
+
+
+        });
+
+        $("#btnBack").click(function () {
+            debugger
+            if ($("#NewAdd_Falg").val() == 1) {
+                $('#icon-bar').addClass('display_none');
+            }
+
+            $('#divIconbar').removeClass('display_none');
+
+
+            $('#btnPrintTransaction').removeClass('display_none');
+            $('#btnUpdate').removeClass('display_none');
+
+            $('#btnBack').addClass('display_none');
+            $('#btnSave').addClass('display_none');
+
+            $('#btnPrintslip').removeClass('display_none');
+            $('#btnPrintTransaction').removeClass('display_none');
+
+            $("#NewAdd_Falg").val('0');
+            $("#Mod_Flag").val('0');
+        });
+
+        $("#btnUpdate").click(function () {
+
+            $('#divIconbar').addClass('display_none');
+
+            $('#btnPrintTransaction').addClass('display_none');
+            $('#btnUpdate').addClass('display_none');
+
+
+            $('#btnBack').removeClass('display_none');
+            $('#btnSave').removeClass('display_none');
+
+            $('#btnPrintslip').addClass('display_none');
+            $('#btnPrintTransaction').addClass('display_none');
+
+            $("#Mod_Flag").val(1);
+        });
+
+
+
+
+        $("#btnShow").click(function () {
+
+            $('#icon-bar').addClass('display_none');
+
+        });
+
+        $("#btnSave").click(function () {
+
+        });
+
+
+                //$("#btnUpdate_Def").click(function () {
+
+                //    $('#btnUpdate_Def').addClass('display_none');
+                //    $('#btnBack_Def').removeClass('display_none');
+                //    $('#btnSave_Def').removeClass('display_none');
+
+                //});
+
+                //$("#btnBack_Def").click(function () {
+
+                //    $('#btnUpdate_Def').removeClass('display_none');
+                //    $('#btnBack_Def').addClass('display_none');
+                //    $('#btnSave_Def').addClass('display_none');
+                //});
+
+
+                //$("#btnSave_Def").click(function () {
+
+                //});
+
+
+
+
+    </script>
 
 
 
