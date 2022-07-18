@@ -1787,7 +1787,6 @@ var Processes;
                     return txt;
                 }
             },
-            //{ title: res.Remaining_quantity, name: "OnhandQty", type: "text", width: "22%" },
         ];
     }
     function check_OnhandQty(id_Num) {

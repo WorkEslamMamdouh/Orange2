@@ -71,7 +71,7 @@ namespace DirectTransfer {
     //buttons
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
-    var btnEdit: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
@@ -150,7 +150,7 @@ namespace DirectTransfer {
         //buttons
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnEdit") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnAddDetails = DocumentActions.GetElementById<HTMLButtonElement>("btnAddDetails");
@@ -178,7 +178,7 @@ namespace DirectTransfer {
         ddlToStoreAdd.onchange = ddlToStoreAdd_onchange;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         btnAddDetails.onclick = AddNewRow;
         txtSearch.onkeyup = txtSearch_onKeyup;
         chkApproved.onclick = chkApproved_checked;
@@ -194,7 +194,7 @@ namespace DirectTransfer {
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
     }
     //------------------------------------------------------ Buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         ddlSourceStoreAdd_onchange();
         ddlToStoreAdd_onchange();
@@ -232,8 +232,9 @@ namespace DirectTransfer {
         chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
     }
     function btnShow_onclick() {
+        $("#divShow").removeClass("display_none");
         $("#div_Approve").addClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
 
         $("#divTransferDetails").addClass("display_none");
         $("#divGridShow").removeClass("display_none");
@@ -242,6 +243,8 @@ namespace DirectTransfer {
     }
     function btnBack_onclick() {
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
 
@@ -250,7 +253,7 @@ namespace DirectTransfer {
         } else {
             $("#divTransferDetails").addClass("display_none");
             $("#div_Approve").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             DisableControls();
             Clear();
             $("#btnPrintTransaction").addClass("display_none");
@@ -378,7 +381,7 @@ namespace DirectTransfer {
         Clear();
         $("#divTransferDetails").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#div_Approve").removeClass("display_none");
 
         SelectedTransferModel = IQ_DirectTransferDetail.filter(x => x.TransfareID == Number(Grid.SelectedKey));
@@ -452,12 +455,12 @@ namespace DirectTransfer {
 
             if (SelectedTransferModel[0].IsSent == true) {
                 chkApproved.checked = true;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
             } else {
                 chkApproved.checked = false;
                 chkApproved.disabled = true;
-                btnEdit.disabled = false;
+                btnUpdate.disabled = false;
             }
 
         }
@@ -804,19 +807,21 @@ namespace DirectTransfer {
         txtTransferDate.disabled = true;
     }
     function HideButtons() {
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
 
         $("#btnSave").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
     }
     function ShowButons() {
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
 
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
     }
     function DisableDiv() {
         $("#div_hedr").addClass("disabledDiv");
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divShow").addClass("disabledDiv");
         $("#divTransferDetails").removeClass("disabledDiv");
         $("#divTransferDetails").removeClass("display_none");
     }
@@ -864,34 +869,87 @@ namespace DirectTransfer {
     }
     function BuildControls(cnt: number) {
         var html = "";
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-            '<input id="TransfareDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-            '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3DirectTransfer "></span>' +
-            '</div>' +
-            '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (CountGrid + 1) + '" class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:4%!important;">' +
-            '<button type="button" class="col-lg-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            '<input id="txtItemNumber' + cnt + '" name="" disabled type="hidden" class="col-lg-9  form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" >' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 Acc" >' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" >' +
-            '<input id="txtUntitName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
-            '<input id="txtSrcQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
-            '<input id="txtToQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" >' +
-            '<input id="txtConvertedQnty' + cnt + '" name="" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-            '<input  id="txtUnitID' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OnhandQty' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="UnitCost' + cnt + '" name = " " type ="hidden"  />' +
-            '</div>';
+        html = `<tr id= "No_Row${cnt}">
+                    <input id="TransfareDetailID${cnt}" type="hidden" class="form-control display_none"  />                
+                    <input id="txtSerial${cnt}" type="hidden" name="FromDate" class="form-control display_none" value="${(CountGrid + 1)}"  />
+                    <input id="txtItemNumber${cnt}" type="hidden" name="FromDate" class="form-control display_none" value="${(CountGrid + 1)}"  />
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+
+                    <td>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-main input-sm" id="btnSearchItems${cnt}" name="ColSearch">
+                                    <i class="fas fa-search"></i>
+                            </button>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtItemCode${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtItemName${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtUntitName${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtSrcQty${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtToQty${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtConvertedQnty${cnt}" type="number" value="0"  min="0" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+               <input id="txtUnitID${cnt}" type="hidden"   />
+               <input id="txt_StatusFlag${cnt}" type="hidden"   />
+               <input id="txt_OnhandQty${cnt}" type="hidden"   />
+               <input id="UnitCost${cnt}" type="hidden"   />
+                </tr>`;
         $("#div_Data").append(html);
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
+        //    '<input id="TransfareDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
+        //    '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3DirectTransfer "></span>' +
+        //    '</div>' +
+        //    '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (CountGrid + 1) + '" class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:4%!important;">' +
+        //    '<button type="button" class="col-lg-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search"></i></button>' +
+        //    '<input id="txtItemNumber' + cnt + '" name="" disabled type="hidden" class="col-lg-9  form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" >' +
+        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 Acc" >' +
+        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" >' +
+        //    '<input id="txtUntitName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
+        //    '<input id="txtSrcQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
+        //    '<input id="txtToQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" >' +
+        //    '<input id="txtConvertedQnty' + cnt + '" name="" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
+        //    '<input  id="txtUnitID' + cnt + '" name = " " type ="hidden"  />' +
+        //    '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
+        //    '<input  id="txt_OnhandQty' + cnt + '" name = " " type ="hidden"  />' +
+        //    '<input  id="UnitCost' + cnt + '" name = " " type ="hidden"  />' +
+        //    '</div>';
+       
 
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -1294,7 +1352,7 @@ namespace DirectTransfer {
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
                     chkApproved.disabled = true;
-                    btnEdit.disabled = false;
+                    btnUpdate.disabled = false;
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }
@@ -1305,6 +1363,8 @@ namespace DirectTransfer {
     function Save() {
         InitializeGrid();
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
         DisableControls();

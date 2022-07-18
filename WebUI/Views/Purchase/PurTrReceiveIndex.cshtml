@@ -5,9 +5,9 @@
 }
  
 
-<div class="col-12 ">
+<div class="row gy-3">
+    <!-- Filter Container -->
     <div id="DivFilter" class="col-12">
-        @* Main Filter *@
         <div class="col-12">
             <div class="card bg-light-blue">
                 <div class="card-body">
@@ -61,7 +61,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  display_none" id="divMasterGridiv">
+    </div>
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divMasterGridiv">
             <div class="card bg-light-blue">
                 <div class="card-body">
                     <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
@@ -75,420 +79,421 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="divDetails" class="display_none">
-        <div class="col-12 service-content">
-            <div class="serviceBox">
-                @*  <div class="bg-light-blue row g-0">*@
+        <!-- Details -->
+        <div id="divDetails" class="display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox">
+                    @*  <div class="bg-light-blue row g-0">*@
 
-                <div class="row g-0" id="MasterDropDowns">
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum   </label>
-                            <div class="col-8">
-                                <label disabled type="text" class="form-control" id="lblInvoiceNumber"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                            <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Men_PurOrder</label>
-                            <div class="col-9 col-md-7">
-                                <div class="search-content">
-                                    <input disabled type="number" class="form-control search-control" id="txtPurOrderNum">
-                                    <button type="button" name="InvoiceSearch" id="btnPurOrderSearch" class="btn btn-main btn-search">
-                                        <i class="fas fa-search"></i>
-                                    </button>
+                    <div class="row g-0" id="MasterDropDowns">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum   </label>
+                                <div class="col-8">
+                                    <label disabled type="text" class="form-control" id="lblInvoiceNumber"></label>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-md-2">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
-                            <div class="col-8 ">
-                                <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
-                            <div class="col-8">
-                                <input disabled type="date" class="form-control" id="txtDateHeader">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Recieve_type</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlReciveTypeHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Store</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlStoreHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                            <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.I_Vendor</label>
-                            <div class="col-9 col-md-7">
-
-                                <div class="search-content">
-                                    <input disabled type="number" class="form-control search-control" id="txtVendorName">
-                                    <button type="button" name="InvoiceSearch" id="btnVendorSearch" class="btn btn-main btn-search">
-                                        <i class="fas fa-search"></i>
-                                    </button>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Men_PurOrder</label>
+                                <div class="col-9 col-md-7">
+                                    <div class="search-content">
+                                        <input disabled type="number" class="form-control search-control" id="txtPurOrderNum">
+                                        <button type="button" name="InvoiceSearch" id="btnPurOrderSearch" class="btn btn-main btn-search">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlIsCash"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Vendor_invoice  </label>
-                            <div class="col-8">
-                                <input disabled type="text" class="form-control" id="VendorRecieptID">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlSalesmanHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cashbox</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlCashBoxH"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Currency</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlCurrency"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.TransferFactor</label>
-                            <div class="col-8 ">
-                                <input id="txtCurrencyRate" type="number" name="" disabled class="form-control" />
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <!-- Inside Table  -->
-                <div class="inside-table my-4" id="DivShow">
-                    <div class="table-responsive">
-                        <table class="table table-borderless ">
-                            <thead>
-                                <tr>
-                                    <th style="width: 4%"></th>
-                                    <th style="width: 16%">@SystemResource.App_Type</th>
-                                    <th style="width: 16%">@SystemResource.App_Item</th>
-                                    <th style="width: 6%">@SystemResource.purchase_quantity</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.App_returnQty</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.App_Price</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.App_total</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.LocalPrice</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.LocalTotal</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.App_Tax</th>
-                                    <th style="width: 6%" class="text-wrap">@SystemResource.App_TotAfterTax</th>
-                                    <th style="width: 6%" class="text-wrap"> @SystemResource.I_Additions</th>
-                                    <th style="width: 10%" class="text-wrap"> @SystemResource.unit_after_adding</th>
-
-                                </tr>
-                            </thead>
-                            <tbody id="div_Data"></tbody>
-
-                        </table>
-                        <span id="btnAddDetails" class="d-flex mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
-                    </div>
-                </div>
-
-                <div class="inside-table my-4" id="DivChargesShow">
-                    <div class="table-responsive">
-                        <table class="table table-borderless ">
-                            <thead>
-                                <tr>
-                                    <th style="width: 4%"></th>
-                                    <th style="width: 5%">@SystemResource.App_adding</th>
-                                    <th style="width: 15%">@SystemResource.add_type</th>
-                                    <th style="width: 7%">@SystemResource.value</th>
-                                    <th style="width: 7%" class="text-wrap">@SystemResource.App_TaxType</th>
-                                    <th style="width: 10%" class="text-wrap">@SystemResource.App_Tax</th>
-                                    <th style="width: 7%" class="text-wrap">@SystemResource.Value_after_tax</th>
-                                    <th style="width: 7%" class="text-wrap">@SystemResource.Cash_credit</th>
-                                    <th style="width: 10%" class="text-wrap">@SystemResource.App_InvoiceNum</th>
-                                    <th style="width: 7%" class="text-wrap">@SystemResource.Invoice_Date</th>
-                                    <th style="width: 15%" class="text-wrap">@SystemResource.I_Vendor</th>
-                                    <th style="width: 15%" class="text-wrap"> @SystemResource.App_Cashbox</th>
-
-
-                                </tr>
-                            </thead>
-                            <tbody id="div_ChargesData"></tbody>
-
-                        </table>
-                        <span id="btnAddDetailsCharge" class="d-flex mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
-                    </div>
-                </div>
-
-                <!-- Total Details -->
-                <div class="row g-0" id="divTotalSatistics">
-                    <div class="col-12 mb-5">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                            <div class="col-8 ">
-                                <textarea disabled class="form-control" name="" id="txtNotes"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="row">
-                  
-                            <div class="form-group col-12 row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
                                 <div class="col-8 ">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
+                                <div class="col-8">
+                                    <input disabled type="date" class="form-control" id="txtDateHeader">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Recieve_type</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlReciveTypeHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Store</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlStoreHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                                <div class="col-9 col-md-7">
+
+                                    <div class="search-content">
+                                        <input disabled type="number" class="form-control search-control" id="txtVendorName">
+                                        <button type="button" name="InvoiceSearch" id="btnVendorSearch" class="btn btn-main btn-search">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlIsCash"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Vendor_invoice  </label>
+                                <div class="col-8">
+                                    <input disabled type="text" class="form-control" id="VendorRecieptID">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlSalesmanHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cashbox</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlCashBoxH"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Currency</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlCurrency"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.TransferFactor</label>
+                                <div class="col-8 ">
+                                    <input id="txtCurrencyRate" type="number" name="" disabled class="form-control" />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Inside Table  -->
+                    <div class="inside-table my-4" id="DivShow">
+                        <div class="table-responsive">
+                            <table class="table table-borderless ">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 4%"></th>
+                                        <th style="width: 16%">@SystemResource.App_Type</th>
+                                        <th style="width: 16%">@SystemResource.App_Item</th>
+                                        <th style="width: 6%">@SystemResource.purchase_quantity</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.App_returnQty</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.App_Price</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.App_total</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.LocalPrice</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.LocalTotal</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.App_Tax</th>
+                                        <th style="width: 6%" class="text-wrap">@SystemResource.App_TotAfterTax</th>
+                                        <th style="width: 6%" class="text-wrap"> @SystemResource.I_Additions</th>
+                                        <th style="width: 10%" class="text-wrap"> @SystemResource.unit_after_adding</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="div_Data"></tbody>
+
+                            </table>
+                            <div class="d-flex justify-content-start mr-1">
+                                <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-table my-4" id="DivChargesShow">
+                        <div class="table-responsive">
+                            <table class="table table-borderless ">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 4%"></th>
+                                        <th style="width: 5%">@SystemResource.App_adding</th>
+                                        <th style="width: 15%">@SystemResource.add_type</th>
+                                        <th style="width: 7%">@SystemResource.value</th>
+                                        <th style="width: 7%" class="text-wrap">@SystemResource.App_TaxType</th>
+                                        <th style="width: 10%" class="text-wrap">@SystemResource.App_Tax</th>
+                                        <th style="width: 7%" class="text-wrap">@SystemResource.Value_after_tax</th>
+                                        <th style="width: 7%" class="text-wrap">@SystemResource.Cash_credit</th>
+                                        <th style="width: 10%" class="text-wrap">@SystemResource.App_InvoiceNum</th>
+                                        <th style="width: 7%" class="text-wrap">@SystemResource.Invoice_Date</th>
+                                        <th style="width: 15%" class="text-wrap">@SystemResource.I_Vendor</th>
+                                        <th style="width: 15%" class="text-wrap"> @SystemResource.App_Cashbox</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="div_ChargesData"></tbody>
+
+                            </table>
+                            <div class="d-flex justify-content-start mr-1">
+                                <span id="btnAddDetailsCharge" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Details -->
+                    <div class="row g-0" id="divTotalSatistics">
+                        <div class="col-12 mb-5">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-8 ">
+                                    <textarea disabled class="form-control" name="" id="txtNotes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="row">
+
+                                <div class="form-group col-12 row g-0">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
+                                    <div class="col-8 ">
+                                        <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtFamilyType">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 row g-0">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
+                                    <div class="col-8 ">
+                                        <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtItemsNumber">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 row g-0">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.ForignTotal</label>
+                                    <div class="col-8 ">
+                                        <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtLocalTotalFooter">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-12 col-md-8 position-relative">
+                            <table class="table table-borderless satistics-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>@SystemResource.PurchaseWithLocalcurrency</th>
+                                        <th>@SystemResource.App_Adds</th>
+                                        <th>@SystemResource.App_total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@SystemResource.App_total</td>
+                                        <td>  <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotal"></td>
+                                        <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddons"></td>
+                                        <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithoutTax"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>@SystemResource.App_Tax</td>
+                                        <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTax"></td>
+                                        <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddonsTax"></td>
+                                        <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalTax"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>@SystemResource.TotalafterVat</td>
+                                        <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalFamily"></td>
+                                        <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalAddons"></td>
+                                        <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithTax"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                    @*<div id="divTotalSatistics" class="col-xs-12 container-fluid margingred display_none">
+                            <div class="col-xs-12  " id="divType">
+                        <label class="col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_Notes</label>
+                        <div class="col-xs-11">
+                            <textarea type="text" class="form-control input-sm" name="" id="txtNotes" disabled="disabled" style="font-size: 16px !important;"></textarea>
+                        </div>
+                    </div>
+                    <div id=" " class="col-xs-12  margingred  borderred ">
+                        <div class="col-xs-12 ">
+                            <table id="divGridDetails"></table>
+                        </div>
+                    </div>
+
+                            <div class="col-xs-12 margingred">
+
+                                <div class="col-xs-4">
+
+                                </div>
+                                <label class="col-xs-3 bad_PurTrReceive  marginstenig pading_lep  pading_2  " style="text-align: center;"> @SystemResource.PurchaseWithLocalcurrency</label>
+
+                                <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  ">@SystemResource.App_Adds</label>
+
+                                <div class="col-xs-2">
+
+                                </div>
+                                <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  "> @SystemResource.App_total</label>
+
+                                <div class="col-xs-2">
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 margingred">
+                                <label class="col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.App_ItemsCount</label>
+                                <div class="col-xs-2">
                                     <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtFamilyType">
                                 </div>
+                                <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  ">@SystemResource.App_total</label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotal">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtAddons">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" value="0" disabled="disabled" name="" id="txtTotalPurchaseWithoutTax">
+                                </div>
                             </div>
+                            <div class="col-xs-12">
+                                <label class="col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.App_PackageCount	</label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtItemsNumber">
+                                </div>
+                                <label class="col-xs-2 bad_PurTrReceive marginstenig pading_lep  pading_2  ">@SystemResource.App_Tax</label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTax">
+                                </div>
 
-                            <div class="form-group col-12 row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
-                                <div class="col-8 ">
-                                    <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtItemsNumber">
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtAddonsTax">
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalTax">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label class="col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.ForignTotal </label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtLocalTotalFooter">
+                                </div>
+
+                                <label class="col-xs-2 bad_PurTrReceive marginstenig pading_lep  pading_2  ">@SystemResource.TotalafterVat  </label>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalFamily">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalAddons">
+                                </div>
+                                <div class="col-xs-2">
+                                    <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithTax">
                                 </div>
                             </div>
 
-                            <div class="form-group col-12 row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.ForignTotal</label>
-                                <div class="col-8 ">
-                                    <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtLocalTotalFooter">
+                            <br />
+                            <br />
+                            @*<div class="col-xs-12">
+                        <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Pur </label>
+                        <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom ">
+                        <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
+                        <div class="col-xs-2"> </div>
+                        <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Update  </label>
+                        <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
+                        <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
+                    </div>
+                        </div>*@
+                    <!-- Editors Details -->
+                    <div class="insettext row editor-details">
+                        <div class="col-12 col-lg-6">
+
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Pur</label>
+                                <div class="col-4 col-xl-4 editor-input">
+                                    <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                </div>
+                                <div class="col-4 col-xl-6 editor-input">
+                                    <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                <div class="col-4 col-xl-4 editor-input">
+                                    <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                </div>
+                                <div class="col-4 col-xl-6 editor-input">
+
+                                    <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
                                 </div>
                             </div>
                         </div>
 
-
                     </div>
-
-                    <div class="col-12 col-md-8 position-relative">
-                        <table class="table table-borderless satistics-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>@SystemResource.PurchaseWithLocalcurrency</th>
-                                    <th>@SystemResource.App_Adds</th>
-                                    <th>@SystemResource.App_total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@SystemResource.App_total</td>
-                                    <td>  <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotal"></td>
-                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddons"></td>
-                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithoutTax"></td>
-                                </tr>
-                                <tr>
-                                    <td>@SystemResource.App_Tax</td>
-                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTax"></td>
-                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddonsTax"></td>
-                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalTax"></td>
-                                </tr>
-                                <tr>
-                                    <td>@SystemResource.TotalafterVat</td>
-                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalFamily"></td>
-                                    <td><input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalAddons"></td>
-                                    <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithTax"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
                 </div>
-          
-
-                @*<div id="divTotalSatistics" class="col-xs-12 container-fluid margingred display_none">
-                    <div class="col-xs-12  " id="divType">
-                <label class="col-xs-1  marginstenig pading_lep  pading_2 ">@SystemResource.App_Notes</label>
-                <div class="col-xs-11">
-                    <textarea type="text" class="form-control input-sm" name="" id="txtNotes" disabled="disabled" style="font-size: 16px !important;"></textarea>
-                </div>
-            </div>
-            <div id=" " class="col-xs-12  margingred  borderred ">
-                <div class="col-xs-12 ">
-                    <table id="divGridDetails"></table>
-                </div>
-            </div>
-
-                    <div class="col-xs-12 margingred">
-
-                        <div class="col-xs-4">
-
-                        </div>
-                        <label class="col-xs-3 bad_PurTrReceive  marginstenig pading_lep  pading_2  " style="text-align: center;"> @SystemResource.PurchaseWithLocalcurrency</label>
-
-                        <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  ">@SystemResource.App_Adds</label>
-
-                        <div class="col-xs-2">
-
-                        </div>
-                        <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  "> @SystemResource.App_total</label>
-
-                        <div class="col-xs-2">
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 margingred">
-                        <label class="col-xs-1  marginstenig pading_lep  pading_2  "> @SystemResource.App_ItemsCount</label>
-                        <div class="col-xs-2">
-                            <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtFamilyType">
-                        </div>
-                        <label class="col-xs-2 bad_PurTrReceive  marginstenig pading_lep  pading_2  ">@SystemResource.App_total</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotal">
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtAddons">
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" value="0" disabled="disabled" name="" id="txtTotalPurchaseWithoutTax">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <label class="col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.App_PackageCount	</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtItemsNumber">
-                        </div>
-                        <label class="col-xs-2 bad_PurTrReceive marginstenig pading_lep  pading_2  ">@SystemResource.App_Tax</label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTax">
-                        </div>
-
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtAddonsTax">
-                        </div>
-
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalTax">
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <label class="col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.ForignTotal </label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtLocalTotalFooter">
-                        </div>
-
-                        <label class="col-xs-2 bad_PurTrReceive marginstenig pading_lep  pading_2  ">@SystemResource.TotalafterVat  </label>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalFamily">
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalAddons">
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="text" class="form-control input-sm" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithTax">
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    @*<div class="col-xs-12">
-                <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Pur </label>
-                <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom ">
-                <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
-                <div class="col-xs-2"> </div>
-                <label class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Update  </label>
-                <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
-                <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
-            </div>
-                </div>*@
-                <!-- Editors Details -->
-                <div class="insettext row editor-details">
-                    <div class="col-12 col-md-6">
-
-                        <div class="form-group row g-0">
-                            <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Pur</label>
-                            <div class="col-5 editor-input">
-                                <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="p-0">
-                            </div>
-                            <div class="col-5 editor-input">
-                                <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="p-0">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="form-group row g-0">
-                            <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
-                            <div class="col-5 editor-input">
-                                <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="p-0">
-                            </div>
-                            <div class="col-5 editor-input">
-
-                                <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="p-0">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
             </div>
         </div>
     </div>
-     
+
+
+
 </div>
 
 

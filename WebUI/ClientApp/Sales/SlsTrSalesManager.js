@@ -610,6 +610,7 @@ var SlsTrSalesManager;
         if (NewAdd == true) { //add
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -640,6 +641,7 @@ var SlsTrSalesManager;
         else { //Edit
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -731,6 +733,8 @@ var SlsTrSalesManager;
         CountItems = 0;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -827,6 +831,7 @@ var SlsTrSalesManager;
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
     }
     function btnUpdate_onclick() {
@@ -834,6 +839,8 @@ var SlsTrSalesManager;
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -2438,6 +2445,7 @@ var SlsTrSalesManager;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
@@ -2582,6 +2590,7 @@ var SlsTrSalesManager;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();

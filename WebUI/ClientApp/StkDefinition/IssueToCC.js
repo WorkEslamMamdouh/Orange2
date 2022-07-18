@@ -33,7 +33,7 @@ var IssueToCC;
     var btnBack;
     var btnUpdate;
     //******PrintButton******
-    var btnPrint;
+    // var btnPrint: HTMLButtonElement;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -95,7 +95,7 @@ var IssueToCC;
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
         //******PrintButton******
-        btnPrint = document.getElementById("btnPrint");
+        // btnPrint = document.getElementById("btnPrint") as  HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
@@ -132,10 +132,10 @@ var IssueToCC;
         btnUpdate.onclick = btnUpdate_onclick;
         btnSave.onclick = btnsave_onClick;
         btnAddDetails.onclick = AddNewRow;
-        btnPrint.onclick = function () { PrintReport(1); };
-        btnPrintTrview.onclick = function () { PrintReport(2); };
-        btnPrintTrPDF.onclick = function () { PrintReport(3); };
-        btnPrintTrEXEL.onclick = function () { PrintReport(4); };
+        //btnPrint.onclick = () => { PrintReport(1); }
+        btnPrintTrview.onclick = function () { PrintReport(1); };
+        btnPrintTrPDF.onclick = function () { PrintReport(2); };
+        btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
     }
     //------------------------------------------------------------------------------* E V E N T S * -----------------------------    
@@ -148,6 +148,8 @@ var IssueToCC;
         $('#id_divGridDetails').removeClass('display_none');
         $("#div_dis").addClass("disabledDiv");
         $("#div_dis").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#id_divMasterGrid").addClass("disabledDiv");
         $("#id_divMasterGrid").attr("disabled", "disabled").off('click');
         $('#btnUpdate').addClass('display_none');
@@ -162,6 +164,8 @@ var IssueToCC;
         $('#id_divGridDetails').removeClass('display_none');
         $("#div_dis").addClass("disabledDiv");
         $("#div_dis").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#id_divMasterGrid").addClass("disabledDiv");
         $("#id_divMasterGrid").attr("disabled", "disabled").off('click');
         $('#btnUpdate').addClass('display_none');
@@ -177,6 +181,7 @@ var IssueToCC;
         $("#id_divMasterGrid").removeClass("disabledDiv");
         $("#id_divMasterGrid").removeAttr("disabled").off('click');
         $("#div_dis").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         $('#btnUpdate').removeClass('display_none');
         $('#btnPrintTransaction').removeClass('display_none');
         $('#btnBack').addClass('display_none');
@@ -424,33 +429,7 @@ var IssueToCC;
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id="No_Row' + cnt + '" class=" ">' +
-            '<div class="col-xs-12 ">' +
-            '<div class="col-xs-12">' +
-            '<div class="col-xs-1"style="width: 3%;right :3%;">' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3SlsTrShowPrice"></span>' +
-            '<input id="ItemID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-            '</div>' +
-            '<div class="col-lg-1  col-md-3 col-sm-3 col-xs-3" style="width:5%;">' +
-            '<input id="txtSerial' + cnt + '" type="number" value="' + (cnt + 1) + '" class="form-control input-sm   input-sm right2" disabled />' +
-            '</div> ' +
-            '<div class="col-lg-1  col-md-3 col-sm-3 col-xs-3" style="width:3%;">' +
-            '<button type="button" class="col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            '</div>' +
-            '<div class="col-lg-2  col-md-3 col-sm-3 col-xs-3">' +
-            '<input id="txtCode' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled />' +
-            '</div> ' +
-            '<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">' +
-            '<input id="txtItemName' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled />' +
-            '</div>' +
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"style="width:13%;">' +
-            '<input id="txtUnitName' + cnt + '" type="text" class="form-control input-sm   input-sm right2" disabled />' +
-            '</div>' +
-            '<div class="col-lg-2  col-md-2 col-sm-2 col-xs-2" >' +
-            '<input id="txtQTY' + cnt + '" type="number" class="form-control input-sm   input-sm right2" disabled />' +
-            '</div></div></div></div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm  " /> <input id="IssueToCcDetailID' + cnt + '" name = " " type = "hidden" class="form-control input-sm  " /><input id="txtUnitID' + cnt + '" name = " " type = "hidden" class="form-control input-sm  " /> ';
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtSerial" + cnt + "\" type=\"number\"  value=\"" + (cnt + 1) + "\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <button type=\"button\" class=\"btn btn-main input-sm\" id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\">\n                                <i class=\"fas fa-search\"></i>\n                            </button>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUntitName" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQTY" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"IssueToCcDetailID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txtUnitID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data").append(html);
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -739,6 +718,7 @@ var IssueToCC;
         $("#id_divMasterGrid").removeClass("disabledDiv");
         $("#id_divMasterGrid").removeAttr("disabled").off('click');
         $("#div_dis").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
         DocumentActions.RenderFromModel(IssueToCC);
         txTrDate.value = IssueToCC.TrDate;
         IssueToCcID = IssueToCC.IssueToCcID;

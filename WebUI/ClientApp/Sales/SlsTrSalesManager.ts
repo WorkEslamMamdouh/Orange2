@@ -752,6 +752,7 @@ namespace SlsTrSalesManager {
 
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -791,6 +792,7 @@ namespace SlsTrSalesManager {
 
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -902,6 +904,8 @@ namespace SlsTrSalesManager {
 
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
 
@@ -1031,12 +1035,15 @@ namespace SlsTrSalesManager {
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
 
@@ -2987,6 +2994,7 @@ namespace SlsTrSalesManager {
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true;//   ////
         $("#btnUpdate").removeClass("display_none");
@@ -3159,6 +3167,7 @@ namespace SlsTrSalesManager {
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();

@@ -4,10 +4,8 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
-    .text_off {
-    }
-
-    .disabledDiv {
+  
+    /*.disabledDiv {
         pointer-events: none;
         opacity: 0.4;
     }
@@ -93,162 +91,254 @@
 
     .Actiev {
         background-color: #fbebdc !important;
-        /* border-color: #0a0a0a !important; */
+        // border-color: #0a0a0a !important; 
         color: #0a0a0a !important;
         border: outset;
     }
 
     .navbar-inverse {
         background-color: #f4f5da !important;
-        /* border-color: #f4f5da !important; */
+        // border-color: #f4f5da !important; 
         color: #0a0a0a !important;
         border: outset;
-    }
+    }*/
 </style>
-
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred ">
-    <div id="div_hedr">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_STKAdjust ">@SystemResource.Trns_Store</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select class="form-control input-sm addable editable" name="StoreId" id="drp_Store"></select>
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_STKAdjust ">@SystemResource.App_FromDate</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <input type="date" class="form-control input-sm addable editable" name="FromDate" id="txtFromDate">
-            </div>
-
-
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_STKAdjust ">@SystemResource.App_ToDate</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <input type="date" class="form-control input-sm addable editable" name="ToDate" id="txtToDate">
-            </div>
-
-
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_STKAdjust"> @SystemResource.Choose_Status  </label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlstatus" name="" class="form-control">
-                    <option value="0">@SystemResource.App_Not_Certified</option>
-                    <option value="1">@SystemResource.App_Certified</option>
-                    <option value="null">@SystemResource.App_All</option>
-                </select>
-            </div>
-
-
-            <div class="col-xs-3 p-0 float_left_right">
-
-                <button id="btnShow" type="button" class="btn btn-info  ">
-                    @SystemResource.App_Show  <span class="glyphicon glyphicon-save "></span>
-                </button>
-
-                <button id="btnAdd" type="button" class="btn btn-success   ">
-                    @SystemResource.App_Add  <span class="glyphicon glyphicon-plus "></span>
-                </button>
-                <div class="btn-group ">
-                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                        @SystemResource.App_Print  <span class="glyphicon glyphicon-hand-down"></span>
-                    </button>
-                    <div class="dropdown-menu" role="menu" style="border-radius:15px">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl display_none"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
+<div class="row gy-3 ">
+    <!-- Filter Container -->
+    <div id="div_hedr" class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_Store</label>
+                            <div class="col-8 ">
+                                <select class="form-control" id="drp_Store"></select>
+                            </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrintTrview" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.Print_Report      </button>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="FromDate" id="txtFromDate">
+                            </div>
                         </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>   @SystemResource.Download_PDF     </button>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="ToDate" id="txtToDate">
+                            </div>
                         </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span> @SystemResource.Download_EXCEL   </button>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Choose_Status</label>
+                            <div class="col-8 ">
+                                <select id="ddlstatus" name="" class="form-control">
+                                    <option value="0">@SystemResource.App_Not_Certified</option>
+                                    <option value="1">@SystemResource.App_Certified</option>
+                                    <option value="null">@SystemResource.App_All</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-
-
+    </div>
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <!-- Table  -->
+                    <div id="divGridDetails"></div>
+                </div>
+            </div>
 
         </div>
-        @*/////////////new*@
-        <div class="        borderred  col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <!-- Details  -->
+        <div id="divTransferDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox mt-5">
+                    <div class="row g-0">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="text" class="form-control" id="txtTrNo" name="TrNo">
+                                    <input type="hidden" class="  form-control " disabled id="hd_CollectID" name="CollectID" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_date </label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="date" class="form-control" name="TrDate" id="txtTransferDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12  col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="checkbox" class="checkbox" id="chkStatus" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0 ">
+                                <label id="LabtxtRemarks" class="col-4 col-md-5  align-self-center p-md-0">@SystemResource.App_Notes </label>
+                                <div class="col-8  col-md-7 ">
+                                    <textarea rows="2" type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
+                                </div>
+                            </div>
+                        </div>
 
-            <div id="divShow" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12 display_none  ">
-                <table id="divGridDetails"></table>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Inv_LabourCost</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="text" class="form-control" id="txtLabourCost" name="LabourCost">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Inv_MaterialCost</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="text" class="form-control" id="txtMaterialCost" name="MaterialCost">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                @*<div class="navbar-nav d-flex justify-content-start">  *@
+                <div class=" d-flex justify-content-start">
+                    <div id="btndiv_1">
+                        <a class="btn btn-main" id="btndiv_1" href="#"> المدخلات </a>
+                    </div>
+                    <div id="btndiv_2" class="border_li">
+                        <a class="btn btn-main" id="btndiv_2" href="#"> المخرجات </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Show  div-1 of input -->
+            <div id="div_1" class="col-lg-12">
+                <div class="card bg-light-blue px-4 mb-4">
+                    <div class="form-group pt-3">
+                        <label class="align-self-center p-md-0 " id="lepfarest">
+                            <i class="fas fa-angle-double-left"></i>
+                            @SystemResource.Inv_Inputs
+                        </label>
+                    </div>
+                    <!-- Inside Table  -->
+                    <div class="inside-table my-4" id="divInputs">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%"></th>
+                                        <th style="width: 5%"></th>
+                                        <th style="width: 10%"> @SystemResource.Itm_ItemCode</th>
+                                        <th style="width: 15%"> @SystemResource.TransDesc</th>
+                                        <th style="width: 10%"> @SystemResource.Itm_Uom</th>
+                                        <th style="width: 10%"> @SystemResource.App_Quantity</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="div_Data"></tbody>
+
+                            </table>
+                            <div class="d-flex justify-content-start mr-1">
+                                <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+           <!-- Show  div-2 of output -->
+            <div id="div_2" class="col-lg-12">
+                <div class="card bg-light-blue px-4 mb-4">
+                    <div class="form-group pt-3">
+                        <label class="align-self-center p-md-0 " id="lepfarest">
+                            <i class="fas fa-angle-double-left"></i>
+                            @SystemResource.Inv_Outputs
+                        </label>
+                    </div>
+                    <!-- Inside Table  -->
+                    <div class="inside-table my-4" id="divInputs">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%"></th>
+                                        <th style="width: 5%"></th>
+                                        <th style="width: 10%"> @SystemResource.Itm_ItemNum</th>
+                                        <th style="width: 15%"> @SystemResource.TransDesc</th>
+                                        <th style="width: 10%"> @SystemResource.App_Quantity</th>
+                                        <th style="width: 10%"> @SystemResource.Inv_CostPrc</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="div_Data2"></tbody>
+
+                            </table>
+                            <div class="d-flex justify-content-start mr-1">
+                                <span id="btnAddDetails2" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Editors Details -->
+            <div class="insettext row editor-details">
+                <div class="col-12 col-lg-6">
+
+                    <div class="form-group row g-0">
+                        <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
+                        <div class="col-4 col-xl-4 editor-input">
+                            <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                        </div>
+                        <div class="col-4 col-xl-6 editor-input">
+                            <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="form-group row g-0">
+                        <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
+                        <div class="col-4 col-xl-4 editor-input">
+                            <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                        </div>
+                        <div class="col-4 col-xl-6 editor-input">
+
+                            <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-        @*////////*@
+    </div>
+</div>
 
-    </div>
-    <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none ">
-        <h4 id="Text_Massage" style=""> رساله </h4>
-    </div>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 floatleftcollect">
-        <button id="btnSave" type="button" class="btn btn-success  display_none ">
-            @SystemResource.App_save    <span class="glyphicon glyphicon-floppy-saved"></span>
-        </button>
-        <button id="btnBack" type="button" class="btn btn-warning display_none  ">
-            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
-        </button>
-        <button id="btnPrintTransaction" type="button" class="btn btn-warning   display_none ">
-            <span class="glyphicon glyphicon-print"></span> @SystemResource.App_Print
-        </button>
-        <button id="btnUpdate" type="button" class="btn btn-primary float_left_right  display_none ">
-            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
-        </button>
-    </div>
-</div>
+@* Old HTML *@
+
 <div id="divTransferDetails" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred display_none ">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_STKAdjust   ">@SystemResource.Trns_TrNO  </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <input type="text" class="  form-control " disabled id="txtTrNo" name="TrNo" />
-                <input type="hidden" class="  form-control " disabled id="hd_CollectID" name="CollectID" />
-
-            </div>
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_STKAdjust ">@SystemResource.App_date</label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <input type="date" class="form-control" disabled name="TrDate" id="txtTransferDate" style="font-size: 16px !important;">
-            </div>
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_STKAdjust"> @SystemResource.App_Notes </label>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10">
-                <textarea type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7  marginstenig pading_lep  pading_2 textcentr_STKAdjust2  ">@SystemResource.App_approved	</label>
-                <input type="checkbox" class="checkbox" id="chkStatus" style=" margin-top: -2px;top: 2px;" />
-            </div>
-        </div>
-
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_STKAdjust">@SystemResource.Inv_LabourCost </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <input type="text" class="  form-control " disabled id="txtLabourCost" name="LabourCost" />
-            </div>
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_STKAdjust">@SystemResource.Inv_MaterialCost </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <input type="text" class="  form-control " disabled id="txtMaterialCost" name="MaterialCost" />
-            </div>
-        </div>
-    </div>
-    <br />
-
-    <div class="col-lg-12">
+    @*<div class="col-lg-12">
         <nav class="">
             <div class=" ">
 
@@ -259,9 +349,11 @@
                 </ul>
             </div>
         </nav>
-    </div>
-    <div id="div_1" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred   display_none" style="background-color: #fbebdc!important;">
-        <label id="lepfarest" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  @SystemResource.Inv_Inputs   </label>
+    </div>*@
+    @*<div id="div_1" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred   display_none" style="background-color: #fbebdc!important;">
+        <label id="lepfarest" class="col-lg-12 labeltitel ">
+        <i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  
+        @SystemResource.Inv_Inputs   </label>
         <div id="divInputs" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 font_header border_gridCont" style="bottom: 5px;font-size: 13px;   ">
             <br />
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
@@ -274,7 +366,7 @@
             </div>
             <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  disabledplus"></span>
         </div>
-    </div>
+    </div>*@
     <div id="div_2" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred   display_none" style="background-color: #fbebdc!important;">
 
         <label id="lepfarest2" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>  @SystemResource.Inv_Outputs   </label>
@@ -292,7 +384,7 @@
             <span id="btnAddDetails2" class="glyphicon glyphicon-plus-sign disabledplus "></span>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
         <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom  "> @SystemResource.App_Create </label>
         <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  borderbottom ">
         <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 marginstenig pading_lep  pading_2 style_borderbottom">
@@ -300,8 +392,10 @@
         <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Update  </label>
         <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
         <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 marginstenig pading_lep  pading_2 style_borderbottom">
-    </div>
+    </div>*@
 </div>
+@section Script{
+    <script src="~/ClientApp/Inventory/CollectUnit.js"></script>
+}
 
-<script src="~/ClientApp/Inventory/CollectUnit.js"></script>
 

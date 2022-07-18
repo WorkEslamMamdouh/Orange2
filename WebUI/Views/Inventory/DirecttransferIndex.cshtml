@@ -1,228 +1,273 @@
-﻿
-
-
-@using Inv.WebUI.Resources
+﻿@using Inv.WebUI.Resources
 @{
     ViewBag.Title = @SystemResource.Men_SlsTrReturn;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred">
-    <div id="div_hedr">
-        <div class="col-12">
+<div class="row gy-3 ">
+    <!-- Filter Container -->
+    <div id="div_hedr" class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_State  </label>
+                            <div class="col-8">
+                                <select id="ddlStatusFilter" name="" class="form-control">
+                                    <option value="0">@SystemResource.App_new</option>
+                                    <option value="1">@SystemResource.Trns_IsSent</option>
+                                    <option value="2">@SystemResource.App_All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_SrcBranch</label>
+                            <div class="col-8 ">
+                                <select class="form-control" id="ddlSourceBranch"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_SrcStore</label>
+                            <div class="col-8 ">
+                                <select class="form-control" id="ddlSourceStore"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_ToBranch</label>
+                            <div class="col-8 ">
+                                <select class="form-control" id="ddlToBranch"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_ToStore</label>
+                            <div class="col-8 ">
+                                <select class="form-control" id="ddlToStore"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Details  Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divShow">
             <div class="card bg-light-blue">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                                <div class="col-8 ">
-                                    <input type="date" class="form-control" id="txtFromDate">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="txtSearch" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div id="divGridDetails_View"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Details  -->
+        <div id="divTransferDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox mt-5">
+
+                    <div class="row g-0">
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="text" class="form-control" id="txtTrNo">
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                                <div class="col-8">
-                                    <input type="date" class="form-control" id="txtToDate">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_State  </label>
-                                <div class="col-8">
-                                    <select id="ddlStatusFilter" name="" class="form-control">
-                                        <option value="0">@SystemResource.App_new</option>
-                                        <option value="1">@SystemResource.Trns_IsSent</option>
-                                        <option value="2">@SystemResource.App_All</option>
-
-                                    </select>                    
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="date" class="form-control" id="txtTransferDate">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">المندوب</label>
-                                <div class="col-8 ">
-                                    <select class="form-control" id="ddlSalesmanFilter"></select>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Trns_RefNum</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input disabled type="text" class="form-control" id="txtRefNumber">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">الحاله</label>
-                                <div class="col-8 ">
-                                    <select class="form-control" id="ddlStateType"></select>
+                        <div class="col-12  col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Trns_IsTransfered</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="checkbox" class="checkbox" id="chkApproved" />
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0"> بائع  </label>
-                                <div class="col-8 ">
-                                    <select class="form-control" id="ddlSalesPersonFilter"></select>
+                        @* special Flides *@
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="row special-group">
+                                        <div class="form-group">
+                                            <label class="col-12 align-self-center p-md-0 ">@SystemResource.Trns_TransFrom</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3  align-self-center p-md-0">@SystemResource.App_Branch</label>
+                                                <div class="col-9 ">
+                                                    <select disabled class="form-control" id="ddlSourceBranchAdd"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3 align-self-center p-md-0"> @SystemResource.Trns_Store</label>
+                                                <div class="col-9 ">
+                                                    <select disabled class="form-control" id="ddlSourceStoreAdd"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row special-group">
+                                        <div class="form-group">
+                                            <label class="col-12 align-self-center p-md-0 fw-bolder">@SystemResource.Trns_TransTo</label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3  align-self-center p-md-0">@SystemResource.App_Branch</label>
+                                                <div class="col-9 ">
+                                                    <select disabled class="form-control" id="ddlToBranchAdd"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3  align-self-center p-md-0"> @SystemResource.Trns_Store</label>
+                                                <div class="col-9 ">
+                                                    <select disabled class="form-control" id="ddlToStoreAdd"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        @* End special Flides *@
+                        <div class="col-12">
+                            <div class="form-group row g-0 ">
+                                <label id="LabtxtRemarks" class="col-4 col-md-1  align-self-center p-md-0">@SystemResource.Trns_ApprovedBy </label>
+                                <div class="col-8 col-md-11 ">
+                                    <input type="text" class="form-control" disabled name="Remark" id="txtApprovedBy">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row g-0 ">
+                                <label id="LabtxtRemarks" class="col-4 col-md-1  align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-8 col-md-11 ">
+                                    <textarea rows="2" type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inside Table  -->
+                        <div class="inside-table my-4">
+                            <div class="table-responsive">
+                                <table class="table table-borderless ">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%"></th>
+                                            <th style="width: 10%"> @SystemResource.Itm_ItemCode</th>
+                                            <th style="width: 15%"></th>
+                                            <th style="width: 25%">@SystemResource.Itm_Item</th>
+                                            <th style="width: 10%"> @SystemResource.Itm_Uom</th>
+                                            <th style="width: 10%" class="text-wrap">@SystemResource.Itm_QunityFromStore</th>
+                                            <th style="width: 10%" class="text-wrap"> @SystemResource.Itm_QunityToStore</th>
+                                            <th style="width: 10%" class="text-wrap">@SystemResource.Itm_ConvertedQuntity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="div_Data"></tbody>
+
+                                </table>
+                                <div class="d-flex justify-content-start mr-1">
+                                    <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Editors Details -->
+                        <div class="insettext row editor-details">
+                            <div class="col-12 col-lg-6">
+
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
+                                    <div class="col-4 col-xl-4 editor-input">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                                    </div>
+                                    <div class="col-4 col-xl-6 editor-input">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
+                                    <div class="col-4 col-xl-4 editor-input">
+                                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                                    </div>
+                                    <div class="col-4 col-xl-6 editor-input">
+
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> 
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 "> @SystemResource.Trns_SrcBranch</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlSourceBranch" name="" class="form-control"></select>
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_DirectTransfer"> @SystemResource.Trns_SrcStore</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlSourceStore" name="" class="form-control"></select>
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_DirectTransfer ">@SystemResource.Trns_ToBranch</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlToBranch" name="" class="form-control"></select>
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_DirectTransfer2">@SystemResource.Trns_ToStore</label>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <select id="ddlToStore" name="" class="form-control"></select>
-            </div>
-        </div>
-
-        <div class="form-group" id="divShow">
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 display_none" id="divGridShow">
-                <input type="text" class="  form-control  col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4" placeholder="@SystemResource.App_Search" id="txtSearch" />
-                <table id="divGridDetails_View"></table>
-            </div>
-
         </div>
     </div>
-    <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred  borderred display_none ">
-
-        <h4 id="Text_Massage" style="">  @SystemResource.App_Message </h4>
-
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <div class="display_none col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 floatleftPurOrder" id="div_Approve">
-            <label class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6  marginstenig pading_lep  pading_2 textcentr_DirectTransfer font-weight-bold  ">@SystemResource.Trns_IsTransfered</label>
-            <div class="col-xs-3">
-                <input type="checkbox" class="checkbox" id="chkApproved" />
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 floatleftPurOrder">
-            <button id="btnSave" type="button" class="btn btn-success  display_none ">
-                @SystemResource.App_save    <span class="glyphicon glyphicon-floppy-saved"></span>
-            </button>
-            <button id="btnBack" type="button" class="btn btn-warning display_none  ">
-                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
-            </button>
-            <button id="btnPrintTransaction" type="button" class="btn btn-success   display_none ">
-                <span class="glyphicon glyphicon-print"></span> @SystemResource.App_Print
-            </button>
-            <button id="btnEdit" type="button" class="btn btn-primary float_left_right  display_none ">
-                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
-            </button>
-        </div>
-    </div>
-    <div id="divTransferDetails" class="display_none  ">
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2 textcentr_DirectTransfer   ">@SystemResource.Trns_TrNO</label>
-            <div class="col-xs-2">
-                <input type="text" class="  form-control " disabled id="txtTrNo" />
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_DirectTransfer ">@SystemResource.App_date</label>
-            <div class="col-md-2 col-sm-5 col-xs-10">
-                <input type="date" class="form-control" disabled name="" id="txtTransferDate" style="font-size: 16px !important;">
-            </div>
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_DirectTransfer   ">@SystemResource.Trns_RefNum </label>
-            <div class="col-xs-2">
-                <input type="text" class="  form-control " disabled id="txtRefNumber" />
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont">
-            <label class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 col-xs-12  marginstenig pading_lep  pading_2 " style="font-size:15px">@SystemResource.Trns_TransFrom</label>
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 marginstenig pading_lep  pading_2 textcentr_DirectTransfer"> @SystemResource.App_Branch </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <select id='ddlSourceBranchAdd' class="form-control"></select>
-            </div>
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_DirectTransfer"> @SystemResource.Trns_Store </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <select id='ddlSourceStoreAdd' class="form-control"></select>
-            </div>
-
-        </div>
-        <div class=" col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont">
-            <label class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 col-xs-12  marginstenig pading_lep  pading_2 " style="font-size:15px">@SystemResource.Trns_TransTo  </label>
-
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_DirectTransfer">@SystemResource.App_Branch </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <select id='ddlToBranchAdd' class="form-control"></select>
-            </div>
-            <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 textcentr_DirectTransfer">  @SystemResource.Trns_Store </label>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                <select id='ddlToStoreAdd' class="form-control"></select>
-            </div>
-
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " style="    margin-top: 0.5%;">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  ">@SystemResource.Trns_ApprovedBy </label>
-            <input id="txtApprovedBy" name="" type="text" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 marginstenig   pading_2 form-control " style="height:40px">
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " style="    margin-top: 0.5%;">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  ">@SystemResource.App_Notes</label>
-            <textarea id="txtRemarks" name="" type="text" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  marginstenig   pading_2 form-control "></textarea>
-        </div>
-
-        <br />
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 font_header border_gridCont" style="bottom: 5px;font-size: 13px;   ">
-            <br />
-            <div id="div_label" class="  col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2"> @SystemResource.Itm_ItemCode  </label>
-                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">     @SystemResource.Itm_Item  </label>
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">    @SystemResource.Itm_Uom    </label>
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1"> @SystemResource.Itm_QunityFromStore</label>
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">   @SystemResource.Itm_QunityToStore </label>
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">@SystemResource.Itm_ConvertedQuntity </label>
-
-
-            </div>
-
-
-            <div class=" " id="div_Data">
-
-            </div>
-            <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  "></span>
-
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Create </label>
-            <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 marginstenig pading_lep  pading_2  borderbottom ">
-            <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2"> </div>
-            <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  borderbottom "> @SystemResource.App_Update  </label>
-            <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2  borderbottom">
-            <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2  marginstenig pading_lep  pading_2 style_borderbottom">
-        </div>
-
-    </div>
-
-    <br />
-    <br />
 </div>
-
 @section Script{
     <script src="~/ClientApp/Inventory/DirectTransfer.js"></script>
-    }
+}
