@@ -833,6 +833,8 @@ var SlsTrSalesManager;
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -2486,6 +2488,7 @@ var SlsTrSalesManager;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
@@ -2630,6 +2633,7 @@ var SlsTrSalesManager;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
