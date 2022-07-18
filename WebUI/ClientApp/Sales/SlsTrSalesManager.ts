@@ -1687,6 +1687,12 @@ namespace SlsTrSalesManager {
             '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
 
+        $(".select_").select2(); 
+        var username = $('.select_ option:selected').text();
+        var userid = $('.select_').val();
+        $('#result').html("id : " + userid + ", name : " + username);
+
+
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
             var fieldName = $(this).attr('data-field');
@@ -1963,7 +1969,7 @@ namespace SlsTrSalesManager {
                     if ($("#txtPrice" + cnt).val() == 0) {
                         $('#txtTax_Rate' + cnt).val(Tax_Rate);
 
-                        var total = Number(txtQuantityValue.RoundToSt(2)) * 1;
+                        var total = Number(txtQuantityValue) * 1;
                         $("#txtTotal" + cnt).val(total.RoundToSt(2));
                         VatPrc = $("#txtTax_Rate" + cnt).val();
                         var vatAmount = Number(total) * VatPrc / 100;
