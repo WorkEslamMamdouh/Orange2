@@ -76,8 +76,8 @@ var Dashboard;
                 var result = d;
                 DashBalances = result.Response;
                 if (DashBalances.length > 0) {
-                    $('#BalancesSales').html('رصيد سابق: ' + DashBalances[0].CustOp);
-                    $('#BalancesPurchase').html('رصيد سابق: ' + DashBalances[0].VndOp);
+                    $('#BalancesSales').html('رصيد سابق: ' + DashBalances[0].CustOp.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+                    $('#BalancesPurchase').html('رصيد سابق: ' + DashBalances[0].VndOp.toLocaleString('en-US', { maximumFractionDigits: 1 }));
                 }
             }
         });
@@ -180,19 +180,19 @@ var Dashboard;
             titel = _Data.rowno == 1 ? 'المشتريات نقدي  ' : _Data.rowno == 2 ? 'خدمات نقدي' : _Data.rowno == 3 ? 'مشتريات اجل' : _Data.rowno == 4 ? 'خدمات اجل' : _Data.rowno == 5 ? 'عمليات' : _Data.rowno == 6 ? 'السداد ' : _Data.rowno == 7 ? 'تسويات  ' : _Data.rowno == 8 ? '  الرصيد' : '';
         }
         $('#titel' + i).html(titel);
-        $('#Val1_' + i).html(_Data.Val1.toString());
-        $('#Val2_' + i).html(_Data.Val2.toString());
-        $('#Val3_' + i).html(_Data.Val3.toString());
-        $('#Val4_' + i).html(_Data.Val4.toString());
-        $('#Val5_' + i).html(_Data.Val5.toString());
-        $('#Val6_' + i).html(_Data.Val6.toString());
-        $('#Val7_' + i).html(_Data.Val7.toString());
-        $('#Val8_' + i).html(_Data.Val8.toString());
-        $('#Val9_' + i).html(_Data.Val9.toString());
-        $('#Val10_' + i).html(_Data.Val10.toString());
-        $('#Val11_' + i).html(_Data.Val11.toString());
-        $('#Val12_' + i).html(_Data.Val12.toString());
-        $('#Total_' + i).html(_Data.Total.toString());
+        $('#Val1_' + i).html(_Data.Val1.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val2_' + i).html(_Data.Val2.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val3_' + i).html(_Data.Val3.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val4_' + i).html(_Data.Val4.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val5_' + i).html(_Data.Val5.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val6_' + i).html(_Data.Val6.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val7_' + i).html(_Data.Val7.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val8_' + i).html(_Data.Val8.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val9_' + i).html(_Data.Val9.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val10_' + i).html(_Data.Val10.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val11_' + i).html(_Data.Val11.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val12_' + i).html(_Data.Val12.toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Total_' + i).html(_Data.Total.toLocaleString('en-US', { maximumFractionDigits: 1 }));
         var totplus = 0;
         if (_Type == 1) // sales
          {
@@ -252,7 +252,7 @@ var Dashboard;
         InitializeGrid(cnt, _Type);
         $('#titel' + cnt).addClass('th_Style');
         $('#titel' + cnt).html('الرصيد');
-        $('#Val1_' + cnt).html(totVal1.RoundToSt(2));
+        $('#Val1_' + cnt).html(((totVal1.RoundToNum(2)) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
         $('#Val2_' + cnt).html((Number(totVal2.RoundToSt(2)) + Number(totVal1.RoundToSt(2)) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
         $('#Val3_' + cnt).html((Number(totVal3.RoundToSt(2)) + Number($('#Val2_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
         $('#Val4_' + cnt).html((Number(totVal4.RoundToSt(2)) + Number($('#Val3_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
@@ -278,6 +278,19 @@ var Dashboard;
         Number($('#Val11_' + cnt).html()) >= 0 ? $('#Val11_' + cnt).addClass('Total_Style_scss') : $('#Val11_' + cnt).addClass('Total_Style_Worng');
         Number($('#Val12_' + cnt).html()) >= 0 ? $('#Val12_' + cnt).addClass('Total_Style_scss') : $('#Val12_' + cnt).addClass('Total_Style_Worng');
         Number($('#Total_' + cnt).html()) >= 0 ? $('#Total_' + cnt).addClass('Total_Style_scss') : $('#Total_' + cnt).addClass('Total_Style_Worng');
+        $('#Val1_' + cnt).html(Number($('#Val1_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val2_' + cnt).html(Number($('#Val2_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val3_' + cnt).html(Number($('#Val3_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val4_' + cnt).html(Number($('#Val4_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val5_' + cnt).html(Number($('#Val5_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val6_' + cnt).html(Number($('#Val6_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val7_' + cnt).html(Number($('#Val7_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val8_' + cnt).html(Number($('#Val8_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val9_' + cnt).html(Number($('#Val9_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val10_' + cnt).html(Number($('#Val10_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val11_' + cnt).html(Number($('#Val11_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Val12_' + cnt).html(Number($('#Val12_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+        $('#Total_' + cnt).html(Number($('#Total_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
     }
     function GetDataCashAndBank() {
         Ajax.Callsync({
@@ -330,7 +343,7 @@ var Dashboard;
     function DisplayGridCashOrBank(i, _Data, _Type, Ser) {
         $('#Ser' + i).html(Ser.toString());
         $('#CBDescA_' + i).html(_Data.acc_DescA.toString());
-        $('#CBBalance_' + i).html(_Data.EndBalance.toString() + '<i class="mdi mdi-arrow-up"></i>');
+        $('#CBBalance_' + i).html(_Data.EndBalance.toLocaleString('en-US', { maximumFractionDigits: 1 }) /*+ '<i class="mdi mdi-arrow-up"></i>'*/);
         if (Ser == 1 && _Data.EndBalance > 0) {
             $('#CBprogress_' + i).attr('style', 'width: 80%');
             _Type == 1 ? BigBalanceBank = _Data.EndBalance : BigBalanceCash = _Data.EndBalance;
@@ -348,7 +361,7 @@ var Dashboard;
             if (progress > 1 && progress < 25) {
                 $('#CBprogress_' + i).attr('class', 'progress-bar bg-warning');
                 $('#CBBalance_' + i).attr('class', 'text-warning');
-                $('#CBBalance_' + i).html(_Data.EndBalance.toString() + '<i class="mdi mdi-arrow-top-left"></i>');
+                $('#CBBalance_' + i).html(_Data.EndBalance.toLocaleString('en-US', { maximumFractionDigits: 1 }) /*+'<i class="mdi mdi-arrow-top-left"></i>'*/);
             }
             if (progress > 25 && progress < 60) {
                 $('#CBprogress_' + i).attr('class', 'progress-bar bg-primary');
@@ -361,7 +374,7 @@ var Dashboard;
             $('#CBprogress_' + i).attr('style', 'width: ' + progress + '%');
             if (_Data.EndBalance < 0) {
                 $('#CBBalance_' + i).attr('class', 'text-danger');
-                $('#CBBalance_' + i).html(_Data.EndBalance.toString() + '<i class="mdi mdi-arrow-down"></i>');
+                $('#CBBalance_' + i).html(_Data.EndBalance.toLocaleString('en-US', { maximumFractionDigits: 1 }) /*+'<i class="mdi mdi-arrow-down"></i>'*/);
             }
         }
     }
