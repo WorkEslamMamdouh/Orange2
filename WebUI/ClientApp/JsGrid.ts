@@ -322,11 +322,52 @@ class JsGrid {
                     this.OnRefreshed();
             },
             rowDoubleClick: (e) => {
-                this.SelectedIndex = this.DataSource.indexOf(e.item);// e.itemIndex;
-                this.SelectedItem = e.item;
-                this.SelectedKey = e.item[this.PrimaryKey];
-                if (this.OnRowDoubleClicked != null)
-                    this.OnRowDoubleClicked();
+                debugger
+
+
+                var _this = this;
+                var e_item = e.item;
+                var _this_PrimaryKey = this.PrimaryKey;
+                var e_item_PrimaryKey = e_item[_this_PrimaryKey];
+
+
+                _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;
+                _this.SelectedItem = e_item;
+                _this.SelectedKey = e_item_PrimaryKey;
+                if (_this.OnRowDoubleClicked != null)
+                    _this.OnRowDoubleClicked();
+
+                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;"></i>');
+
+                setTimeout(function () {
+            
+            
+
+                    if ($("#Mod_Flag").val() != 1) {
+                        $('#icon-bar').removeClass('display_none');
+                        //$("#footer_1").animate({ "left": "-85%", });
+                        $("#divIconbar").fadeIn(3000);
+                        $("#NewAdd_Falg").val(0);
+
+                        $('#btnPrintTransaction').removeClass('display_none');
+                        $('#btnUpdate').removeClass('display_none');
+                        $('#btnBack').addClass('display_none');
+                        $('#btnSave').addClass('display_none');
+
+                        $('#Loading_Div').html('');
+                    }
+
+
+
+                    document.body.scrollTop = 600;
+                    document.documentElement.scrollTop = 600;
+
+                }, 150);
+
+
+
+            
+
             },
 
             onRefreshing: (arg) => {

@@ -1083,7 +1083,7 @@ caption {
 }
 
 th {
-    text-align: right;
+    /*text-align: right;*/
 }
 
 @media screen and (max-width: 767px) {

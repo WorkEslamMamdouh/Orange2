@@ -61,7 +61,7 @@ var JsGrid = /** @class */ (function () {
         //}
     };
     JsGrid.prototype.Bind = function () {
-        var _this = this;
+        var _this_1 = this;
         $(".jsgrid-grid-body").css("max-height", this.Height);
         $(".jsgrid-grid-body").css("height", this.Height);
         if (this.SwitchingLanguageEnabled == true) {
@@ -225,68 +225,89 @@ var JsGrid = /** @class */ (function () {
                 $(".jsgrid-row").removeClass("SelectedRowF");
                 $(".jsgrid-alt-row").removeClass("SelectedRowF");
                 row.className += " SelectedRowF";
-                _this.SelectedIndex = _this.DataSource.indexOf(e.item); // e.itemIndex;
-                _this.SelectedItem = e.item;
-                if (_this.OnRowSelected != null)
-                    _this.OnRowSelected();
+                _this_1.SelectedIndex = _this_1.DataSource.indexOf(e.item); // e.itemIndex;
+                _this_1.SelectedItem = e.item;
+                if (_this_1.OnRowSelected != null)
+                    _this_1.OnRowSelected();
                 //  this.OnItemEditing(e);
             },
             filterValue: function () {
                 return this.filterControl.val();
             },
             onDataLoaded: function () {
-                if (_this.OnDataLoaded != null)
-                    _this.OnDataLoaded();
+                if (_this_1.OnDataLoaded != null)
+                    _this_1.OnDataLoaded();
             },
             onRefreshed: function () {
-                if (_this.OnRefreshed != null)
-                    _this.OnRefreshed();
+                if (_this_1.OnRefreshed != null)
+                    _this_1.OnRefreshed();
             },
             rowDoubleClick: function (e) {
-                _this.SelectedIndex = _this.DataSource.indexOf(e.item); // e.itemIndex;
-                _this.SelectedItem = e.item;
-                _this.SelectedKey = e.item[_this.PrimaryKey];
+                debugger;
+                var _this = _this_1;
+                var e_item = e.item;
+                var _this_PrimaryKey = _this_1.PrimaryKey;
+                var e_item_PrimaryKey = e_item[_this_PrimaryKey];
+                _this.SelectedIndex = _this.DataSource.indexOf(e_item); // e.itemIndex;
+                _this.SelectedItem = e_item;
+                _this.SelectedKey = e_item_PrimaryKey;
                 if (_this.OnRowDoubleClicked != null)
                     _this.OnRowDoubleClicked();
+                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;"></i>');
+                setTimeout(function () {
+                    if ($("#Mod_Flag").val() != 1) {
+                        $('#icon-bar').removeClass('display_none');
+                        //$("#footer_1").animate({ "left": "-85%", });
+                        $("#divIconbar").fadeIn(3000);
+                        $("#NewAdd_Falg").val(0);
+                        $('#btnPrintTransaction').removeClass('display_none');
+                        $('#btnUpdate').removeClass('display_none');
+                        $('#btnBack').addClass('display_none');
+                        $('#btnSave').addClass('display_none');
+                        $('#Loading_Div').html('');
+                    }
+                    document.body.scrollTop = 600;
+                    document.documentElement.scrollTop = 600;
+                }, 150);
             },
             onRefreshing: function (arg) {
             },
             onItemInserting: function (arg) {
-                if (_this.OnItemInserting != null) {
-                    if (_this.InsertionMode == JsGridInsertionMode.Binding)
+                if (_this_1.OnItemInserting != null) {
+                    if (_this_1.InsertionMode == JsGridInsertionMode.Binding)
                         arg.cancel = true;
                     var e = new JsGridInsertEventArgs();
                     e.Item = arg.item;
-                    _this.OnItemInserting(e);
+                    _this_1.OnItemInserting(e);
                 }
             },
             onItemInserted: function (arg) {
                 //$("#" + this.ElementName).jsGrid('option', 'inserting', false);
                 //$("#" + this.ElementName).jsGrid("refresh");
-                if (_this.OnItemInserted != null)
-                    _this.OnItemInserted();
+                if (_this_1.OnItemInserted != null)
+                    _this_1.OnItemInserted();
             },
             onItemUpdating: function (arg) {
-                if (_this.OnItemUpdating != null) {
+                if (_this_1.OnItemUpdating != null) {
                     var e = new JsGridUpdateEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
                     e.PreviousItem = arg.previousItem;
                     e.Row = arg.row;
-                    _this.OnItemUpdating(e);
+                    _this_1.OnItemUpdating(e);
                 }
             },
             onItemEditing: function (arg) {
-                if (_this.OnItemEditing != null) {
+                if (_this_1.OnItemEditing != null) {
                     var e = new JsGridEditEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
                     e.Row = arg.row;
-                    _this.OnItemEditing(e);
+                    _this_1.OnItemEditing(e);
                 }
             },
             onItemDeleting: function (arg) {
-                if (_this.OnItemDeleting != null) {
+                if (_this_1.OnItemDeleting != null) {
                     var e = new JsGridDeleteEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
@@ -298,7 +319,7 @@ var JsGrid = /** @class */ (function () {
                     //    () => {
                     //        arg.Cancel = true;
                     //    });
-                    _this.OnItemDeleting(e);
+                    _this_1.OnItemDeleting(e);
                 }
                 //else
                 //    arg.cancel = true;

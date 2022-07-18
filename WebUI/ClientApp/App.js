@@ -476,6 +476,17 @@ function finishSave(NameBtn) {
         $('#' + NameBtn + '').removeAttr('disabled');
     }, 100);
 }
+function Save_Succ_But() {
+    $('#divIconbar').removeClass('display_none');
+    $('#btnPrintTransaction').removeClass('display_none');
+    $('#btnUpdate').removeClass('display_none');
+    $('#btnBack').addClass('display_none');
+    $('#btnSave').addClass('display_none');
+    $('#btnPrintslip').removeClass('display_none');
+    $('#btnPrintTransaction').removeClass('display_none');
+    $("#NewAdd_Falg").val('0');
+    $("#Mod_Flag").val('0');
+}
 function run_waitMe() {
     $('.please_wait').waitMe({
         effect: "win8",
