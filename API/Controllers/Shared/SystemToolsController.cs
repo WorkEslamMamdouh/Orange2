@@ -30,6 +30,7 @@ using System.Drawing;
 using Inv.API.Models.CustomEntities;
 using Microsoft.VisualBasic;
 using QRCoder;
+using Inv.API.Models.CustomModel;
 
 namespace Inv.API.Controllers
 {
@@ -1668,6 +1669,52 @@ namespace Inv.API.Controllers
 
         }
 
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetDataCashAndBank(int comp, int bracode)
+        {
+            string query = "";
+
+            query = "exec IProc_DashAccounts " + comp + " , " + bracode + " ";
+            var res = db.Database.SqlQuery<IProc_DashAccounts_Result>(query).ToList();
+              
+            return Ok(new BaseResponse(res));
+
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetDashBalances()
+        {
+            string query = "";
+
+            //object res = new object();
+
+
+            query = @"
+                        DECLARE @return_value int,
+                                @CustOp numeric(19, 2),
+                        		@CustEnd numeric(19, 2),
+                        		@VndOp numeric(19, 2),
+                        		@VndEnd numeric(19, 2)
+                        
+                        EXEC @return_value = [dbo].[Iproc_DashBalances]
+                        
+                                @comp = 3,
+                        		@CustOp = @CustOp OUTPUT,
+                        		@CustEnd = @CustEnd OUTPUT,
+                        		@VndOp = @VndOp OUTPUT,
+                        		@VndEnd = @VndEnd OUTPUT
+                        
+                        SELECT  @CustOp as N'CustOp',
+                        		@CustEnd as N'CustEnd',
+                        		@VndOp as N'VndOp',
+                        		@VndEnd as N'VndEnd'";
+            var res = db.Database.SqlQuery<DashBalances>(query).ToList();
+
+
+            return Ok(new BaseResponse(res));
+
+        }
 
 
 

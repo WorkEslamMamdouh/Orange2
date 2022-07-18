@@ -6238,4 +6238,29 @@ var Iproc_Dash = /** @class */ (function (_super) {
     }
     return Iproc_Dash;
 }(SecurityClass));
+var DashBalances = /** @class */ (function (_super) {
+    __extends(DashBalances, _super);
+    function DashBalances() {
+        var _this = _super.call(this) || this;
+        _this.CustOp = 0;
+        _this.CustEnd = 0;
+        _this.VndOp = 0;
+        _this.VndEnd = 0;
+        return _this;
+    }
+    return DashBalances;
+}(SecurityClass));
+var IProc_DashAccounts = /** @class */ (function (_super) {
+    __extends(IProc_DashAccounts, _super);
+    function IProc_DashAccounts() {
+        var _this = _super.call(this) || this;
+        _this.Typ = 0;
+        _this.acc_Code = '';
+        _this.acc_DescA = '';
+        _this.Acc_DescL = '';
+        _this.EndBalance = 0;
+        return _this;
+    }
+    return IProc_DashAccounts;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map

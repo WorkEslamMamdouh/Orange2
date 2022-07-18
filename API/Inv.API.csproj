@@ -336,6 +336,7 @@
     <Compile Include="Models\CustomModel\ServSlsInvoiceMasterDetails.cs" />
     <Compile Include="Models\CustomModel\IQVendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\Rec_D_CustomerDetail.cs" />
+    <Compile Include="Models\CustomModel\DashBalances.cs" />
     <Compile Include="Models\CustomModel\SystemClass.cs" />
     <Compile Include="Models\CustomModel\VendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\ListOperationDepositDetail.cs" />
