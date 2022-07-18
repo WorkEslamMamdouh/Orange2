@@ -417,6 +417,7 @@ var SlsTrShowPrice;
         if (NewAdd == true) { //add
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -432,6 +433,7 @@ var SlsTrShowPrice;
         else { //Edit
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -587,6 +589,8 @@ var SlsTrShowPrice;
         CountItems = 0;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -599,12 +603,15 @@ var SlsTrShowPrice;
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -1718,6 +1725,7 @@ var SlsTrShowPrice;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true;
         $("#btnUpdate").removeClass("display_none");
@@ -1841,6 +1849,7 @@ var SlsTrShowPrice;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
@@ -2242,6 +2251,7 @@ var SlsTrShowPrice;
                 if (result.IsSuccess == true) {
                     btnUpdate.disabled = false;
                     $("#cotrolDiv").removeClass("disabledDiv");
+                    $("#divShow").removeClass("disabledDiv");
                     $("#divIconbar").removeClass("disabledIconbar");
                     BindStatisticGridData();
                     open_success();

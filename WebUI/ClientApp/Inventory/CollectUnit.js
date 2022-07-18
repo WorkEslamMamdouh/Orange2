@@ -138,31 +138,7 @@ var CollectUnit;
     //***********************************************Grid Controls*******************************************//
     function BuildControls(cnt) {
         var html = "";
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-            '<input id="txtCollectDetailID' + cnt + '" name="" disabled type="hidden" value="0" class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-            '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3STKAdjust "></span>' +
-            '</div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width:3%!important;">' +
-            '<button type="button" class="col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button> </div>' +
-            //'<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtItemCode' + cnt + '" name=""  type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control text_off text_Display" /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txt_u_DescA' + cnt + '" name=""  type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txtQuantity' + cnt + '" name=""  type="number" class="form-control  text_Display" /></div>' +
-            '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_ItemID' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OnhandQty' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_GlobalCost' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_UnitID' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_StockOnhandQty' + cnt + '" name = " " type ="hidden" />' +
-            '<input  id="txt_StkUnitCost' + cnt + '" name = " " type ="hidden"  />' +
-            '</div>';
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"txtCollectDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <button type=\"button\" class=\"btn btn-main input-sm\" id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\">\n                                <i class=\"fas fa-search\"></i>\n                            </button>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txt_u_DescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQuantity" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OnhandQty" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_GlobalCost" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_UnitID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_StockOnhandQty" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_StkUnitCost" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data").append(html);
         $("#btnSearchItems" + cnt).on('click', function () {
             btnSrchItem_onclick(cnt);
@@ -263,30 +239,7 @@ var CollectUnit;
     }
     function BuildControls2(cnt) {
         var html = "";
-        html = '<div id= "No_OUT_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-            '<input id="txt_OUT_CollectDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-            '<span id="btn_minus2' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3STKAdjust "></span>' +
-            '</div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width:3%!important;">' +
-            '<button type="button" class="col-xs-12 src-btn btn btn-warning input-sm" id="btn_OUT_SearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button></div>' +
-            '<div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txt_OUT_ItemCode' + cnt + '" name=""  type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">' +
-            '<input id="txt_OUT_ItemName' + cnt + '" name="" disabled type="text" class="form-control text_off text_Display" /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txt_OUT_Quantity' + cnt + '" name=""  type="number" class="form-control  text_Display" /></div>' +
-            '<div class="col-xs-1 p-0">' +
-            '<input id="txt_OUT_CostFactorPrc' + cnt + '" name=""  type="number" class="form-control  text_Display" /></div>' +
-            '<input  id="txt_OUT_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OUT_ItemID' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OUT_OnhandQty' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OUT_GlobalCost' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OUT_UnitID' + cnt + '" name = " " type ="hidden" />' +
-            '<input  id="txt_OUT_StockOnhandQty' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_OUT_StkUnitCost' + cnt + '" name = " " type ="hidden"  />' +
-            '</div>';
+        html = "<tr id= \"No_OUT_Row" + cnt + "\">\n                    <input id=\"txt_OUT_CollectDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus2" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <button type=\"button\" class=\"btn btn-main input-sm\" id=\"btn_OUT_SearchItems" + cnt + "\" name=\"ColSearch\">\n                                <i class=\"fas fa-search\"></i>\n                            </button>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txt_OUT_ItemCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txt_OUT_ItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txt_OUT_Quantity" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txt_OUT_CostFactorPrc" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\"  />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_OUT_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OUT_ItemID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OUT_GlobalCost" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OUT_UnitID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OUT_StockOnhandQty" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OUT_StkUnitCost" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data2").append(html);
         $("#btn_OUT_SearchItems" + cnt).on('click', function () {
             btn_OUT_SrchItem_onclick(cnt);
@@ -413,6 +366,8 @@ var CollectUnit;
         }
         $("#div_hedr").removeClass("disabledDiv");
         $("#div_hedr").removeAttr("disabled").off('click');
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divIconbar").removeAttr("disabled").off('click');
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetails2").addClass("display_none");
     }
@@ -839,6 +794,8 @@ var CollectUnit;
         $("#divGridDetails").attr("disabled", "disabled").off('click');
         $("#div_hedr").addClass("disabledDiv");
         $("#div_hedr").attr("disabled", "disabled").off('click');
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#btnAddDetails").removeClass("disabledplus");
         $("#btnAddDetails2").removeClass("disabledplus");
         $("#divInputs :input").prop("disabled", false);
@@ -1110,6 +1067,8 @@ var CollectUnit;
         $("#btnAddDetails2").addClass("display_none");
         $("#div_hedr").removeClass("disabledDiv");
         $("#div_hedr").removeAttr("disabled").off('click');
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divIconbar").removeAttr("disabled").off('click');
     }
     function open() {
         if (!CheckPeriodDate(txtTransferDate.value, "I")) {
@@ -1196,17 +1155,21 @@ var CollectUnit;
     CollectUnit.PrintReport = PrintReport;
     function btndiv_1_onclick() {
         $("#btndiv_1").addClass("Actiev");
-        $("#btndiv_1").removeClass("navbar navbar-inverse");
+        //Edit
+        $("#btndiv_1").removeClass(" navbar-inverse");
         $("#btndiv_2").removeClass("Actiev");
-        $("#btndiv_2").addClass("navbar navbar-inverse");
+        //Edit
+        $("#btndiv_2").addClass("navbar-inverse");
         $("#div_1").removeClass("display_none");
         $("#div_2").addClass("display_none");
     }
     function btndiv_2_onclick() {
         $("#btndiv_1").removeClass("Actiev");
-        $("#btndiv_1").addClass("navbar navbar-inverse");
+        //Edit
+        $("#btndiv_1").addClass(" navbar-inverse");
         $("#btndiv_2").addClass("Actiev");
-        $("#btndiv_2").removeClass("navbar navbar-inverse");
+        //Edit
+        $("#btndiv_2").removeClass(" navbar-inverse");
         $("#div_1").addClass("display_none");
         $("#div_2").removeClass("display_none");
     }

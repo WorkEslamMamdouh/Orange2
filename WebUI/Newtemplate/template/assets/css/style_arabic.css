@@ -28979,6 +28979,12 @@ div.tagsinput {
     position:absolute;
     top:-2rem;
 }
+@media (max-width: 768px) {
+    .satistics-table {
+        position: static;
+    }
+}
+
 .table.satistics-table thead th {
     color: var(--main-blue);
     padding-bottom:1rem;
@@ -29058,8 +29064,12 @@ div.tagsinput {
         font-size: 0.85rem;
         padding-left: 0;
     }
-.row.editor-details {
+/*.row.editor-details {
     --bs-gutter-x: 0 !important;
+}*/
+.editor-details input {
+    width: -webkit-fill-available;
+}
 }
 /*Date input*/
 input[type="date"]::-webkit-inner-spin-button,
@@ -29079,7 +29089,11 @@ input[type=number] {
 .special-field{
     border: .5px solid var(--main-orange);
 }
-
+.special-group {
+    border: .5px solid var(--main-orange);
+    border-radius: 5px;
+    padding-top:10px;
+}
 /*Disabled Style*/
 /*
 .form-control[disabled] {
@@ -29199,19 +29213,19 @@ input[class=checkbox]:checked:before {
 /*Global Style*/
 .editor-input {
     flex: 0;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 @media (max-width: 1300px) {
     .editor-input {
         flex: 0 0 auto;
-        width: 41.66667%;
+        /*width: 41.66667%;*/
     }
 }
 @media (max-width: 768px) {
     .editor-input {
         flex: 0;
-        width: 50%;
+        /*width: 50%;*/
     }
 }
 .new-tab-link{

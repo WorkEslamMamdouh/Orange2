@@ -18,7 +18,7 @@ namespace StkDefItems {
     var IsLocalSalePrice: boolean;
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
@@ -32,7 +32,7 @@ namespace StkDefItems {
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var BranchCode: number;//SharedSession.CurrentEnvironment.BranchCode;
-    var btnback: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
 
     var catId;
     var catId_type_change;
@@ -79,13 +79,13 @@ namespace StkDefItems {
 
     }
 
-    $('#btnedite').on('click', function () {
+    $('#btnUpdate').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $(".SelectDIS").attr("disabled", "disabled");
 
             if ($('#drpitem_family').val() == "null") {
@@ -104,10 +104,10 @@ namespace StkDefItems {
 
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
 
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -136,9 +136,9 @@ namespace StkDefItems {
     function InitalizeControls() {
         // 
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
 
         // Buton privialges for single record page
@@ -154,8 +154,8 @@ namespace StkDefItems {
         //$("#drpPaymentType").attr("disabled", "disabled");
 
         btnAddDetails.onclick = AddNewRow;//
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
         btnShow.onclick = btnShow_onclick;
         //btnShow.onkeyup = btnShow_onclick;
 
@@ -281,7 +281,7 @@ namespace StkDefItems {
             CountGrid++;
         }
 
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
 
     }
 
@@ -445,11 +445,11 @@ namespace StkDefItems {
     }
 
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
@@ -919,21 +919,21 @@ namespace StkDefItems {
     function btnback_onclick() {
 
 
-        if ($('#btnback').attr('class') != "btn btn-warning display_none") {
-            $('#btnback').toggleClass("display_none");
+        if ($('#btnBack').attr('class') != "btn btn-warning display_none") {
+            $('#btnBack').toggleClass("display_none");
         }
-        if ($('#btnsave').attr('class') != "btn btn-success display_none") {
-            $('#btnsave').toggleClass("display_none");
+        if ($('#btnSave').attr('class') != "btn btn-success display_none") {
+            $('#btnSave').toggleClass("display_none");
         }
 
 
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none')
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
 
-        $("#btnback").removeAttr("disabled");
-        $("#btnsave").removeAttr("disabled");
+        $("#btnBack").removeAttr("disabled");
+        $("#btnSave").removeAttr("disabled");
 
         CountGrid = 0;
         $("#div_Data").html("");

@@ -3,112 +3,11 @@
     ViewBag.Title = @SystemResource.Purchase_Recieve;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-<style>
-    /*.margin_right_30 {
-        margin-right: -12px;
-    }
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.4;
-    }
-
-    #div_Data .col-xs-1 {
-        width: 9% !important;
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-
-    #div_Data .col-xs-2 {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-
-    #div_label .col-lg-1 {
-        width: 11.5% !important;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    .wid {
-        width: 90px;
-    }
 
 
-    .btnplasandmines {
-        display: inline-block;
-        padding: 2px 4px;
-        height: 36px;
-        margin-bottom: 0;
-        font-size: 10px;
-        font-weight: 400;
-        line-height: 1.428571;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-
-
-    .fontitm4 {
-        float: right;
-        margin: 5px 0px 0px 0px !important;
-        font-size: 25px !important;
-        position: absolute;
-        z-index: 999 !important;
-    }
-
-    #btnAddDetails {
-        font-size: 35px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    #btnAddDetailsCharge {
-        font-size: 35px;
-        right: .8% !important;
-    }
-
-        #btnAddDetailsCharge:hover {
-            color: #24b414;
-        }
-
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-
-    .pading_ {
-        padding-right: 0px !important;
-        padding-left: 0px !important
-    }
-
-    #divtotal_ .col-lg-1 {
-        padding-right: 0px !important;
-        padding-left: 0px !important
-    }
-
-    input[type=checkbox], input[type=radio] {
-        margin: 14% 0 0 !important;
-    }*/
-</style>
-
-<div class="col-12">
+<div class="row gy-3 ">
+    <!-- Filter/Searc Container -->
     <div id="DivFilter" class="col-12">
-        @* Main Filter *@
         <div class="col-12">
             <div class="card bg-light-blue">
                 <div class="card-body">
@@ -166,7 +65,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  display_none" id="divMasterGridiv">
+    </div>
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divMasterGridiv">
             <div class="card bg-light-blue">
                 <div class="card-body">
                     <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
@@ -180,218 +82,216 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="PurOrderDetails" class="display_none">
-        <div class="col-12 service-content">
-            <div class="serviceBox">
-                @*  <div class="bg-light-blue row g-0">*@
-                <div class="row g-0">
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Pur_TRNO   </label>
-                            <div class="col-8">
-                                <input disabled type="text" class="form-control" id="txtPurTrNo">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date   </label>
-                            <div class="col-8">
-                                <input disabled type="date" class="form-control" id="txtDateHeader">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Trns_RefNum   </label>
-                            <div class="col-8">
-                                <input disabled type="text" class="form-control" id="txtRefNum">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <div class="form-group row g-0">
-                            <label class="col-5 align-self-center p-md-0">@SystemResource.App_approved</label>
-                            <div class="col-7 ">
-                                <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM6" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlVendorHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlIsCash"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Currency</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlCurrency"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-2">
-                        <div class="form-group row g-0">
-                            <label class="col-5 align-self-center p-md-0">@SystemResource.Isrecieved </label>
-                            <div class="col-7 ">
-                                <input type="checkbox" class="checkbox" id="chkReceived" name="IsReceived" disabled />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlSalesmanHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
-                            <div class="col-8 ">
-                                <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Inside Table  -->
-                    <div class="inside-table my-4">
-                        <div class="table-responsive">
-                            <table class="table table-borderless ">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 3%"></th>
-                                        <th style="width: 15%">@SystemResource.Itm_ItemCode</th>
-                                        <th style="width: 20%">@SystemResource.App_Item</th>
-                                        <th style="width: 20%">@SystemResource.Pur_RequiredQty</th>
-                                        <th style="width: 8%" class="text-wrap">@SystemResource.Itm_ReceivedQuntity</th>
-                                        <th style="width: 8%" class="text-wrap">@SystemResource.App_Price</th>
-                                        <th style="width: 8%" class="text-wrap">@SystemResource.App_total</th>
-                                        <th style="width: 8%" class="text-wrap">@SystemResource.App_Tax</th>
-                                        <th style="width: 10%" class="text-wrap">@SystemResource.App_TotAfterTax</th>
-
-
-                                    </tr>
-                                </thead>
-                                <tbody id="div_Data"></tbody>
-
-                            </table>
-                            <span id="btnAddDetails" class="d-flex mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
-                        </div>
-                    </div>
-
-                    <!-- Total Details -->
-
-                    <div class="col-4 col-xs-offset-8">
-                        <div class="form-group row g-0" id="divtotal_">
-                            <label class="col-3 align-self-center p-md-0">@SystemResource.I_Total</label>
-                            <div class="col-3 ">
-                                <input type="text" disabled class="form-control" name="" id="txtTotal" />
-                            </div>
-                            <div class="col-3 ">
-                                <input type="text" disabled class="form-control" name="" id="txtVatTotal" />
-                            </div>
-                            <div class="col-3 ">
-                                <input type="text" disabled class="form-control" name="" id="txtNetTotal" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_ExpirePeriod</label>
-                            <div class="col-8 ">
-                                <input type="text" class="form-control" id="txtValidityPeriod" disabled>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Termsofsupply</label>
-                            <div class="col-8 ">
-                                <textarea type="text" class="form-control" id="txtDliveryConditions" disabled></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Shippingterms</label>
-                            <div class="col-8 ">
-                                <textarea type="text" class="form-control" id="txtShipmentConditions" disabled></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-group row g-0">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                            <div class="col-8 ">
-                                <textarea type="text" class="form-control"  id="txtNotes" disabled></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Editors Details -->
-                    <div class="insettext row editor-details">
-                        <div class="col-12 col-md-6">
-
+        <!-- Details Container -->
+        <div id="PurOrderDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox">
+                    @*  <div class="bg-light-blue row g-0">*@
+                    <div class="row g-0">
+                        <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Pur</label>
-                                <div class="col-5 editor-input">
-                                    <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled class="p-0">
-                                </div>
-                                <div class="col-5 editor-input">
-                                    <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled class="p-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Pur_TRNO   </label>
+                                <div class="col-8">
+                                    <input disabled type="text" class="form-control" id="txtPurTrNo">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="form-group row g-0">
-                                <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
-                                <div class="col-5 editor-input">
-                                    <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled class="p-0">
-                                </div>
-                                <div class="col-5 editor-input">
 
-                                    <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled class="p-0">
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date   </label>
+                                <div class="col-8">
+                                    <input disabled type="date" class="form-control" id="txtDateHeader">
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Trns_RefNum   </label>
+                                <div class="col-8">
+                                    <input disabled type="text" class="form-control" id="txtRefNum">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-5 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-7 ">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM6" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlVendorHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlIsCash"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Currency</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlCurrency"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-5 align-self-center p-md-0">@SystemResource.Isrecieved </label>
+                                <div class="col-7 ">
+                                    <input type="checkbox" class="checkbox" id="chkReceived" name="IsReceived" disabled />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlSalesmanHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
+                                <div class="col-8 ">
+                                    <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inside Table  -->
+                        <div class="inside-table my-4">
+                            <div class="table-responsive">
+                                <table class="table table-borderless ">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th style="width: 15%">@SystemResource.Itm_ItemCode</th>
+                                            <th style="width: 20%">@SystemResource.App_Item</th>
+                                            <th style="width: 20%">@SystemResource.Pur_RequiredQty</th>
+                                            <th style="width: 8%" class="text-wrap">@SystemResource.Itm_ReceivedQuntity</th>
+                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_Price</th>
+                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_total</th>
+                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_Tax</th>
+                                            <th style="width: 10%" class="text-wrap">@SystemResource.App_TotAfterTax</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="div_Data"></tbody>
+
+                                </table>
+                                <div class="d-flex justify-content-start mr-1">
+                                    <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Details -->
+
+                        <div class="col-4 col-xs-offset-8">
+                            <div class="form-group row g-0" id="divtotal_">
+                                <label class="col-3 align-self-center p-md-0">@SystemResource.I_Total</label>
+                                <div class="col-3 ">
+                                    <input type="text" disabled class="form-control" name="" id="txtTotal" />
+                                </div>
+                                <div class="col-3 ">
+                                    <input type="text" disabled class="form-control" name="" id="txtVatTotal" />
+                                </div>
+                                <div class="col-3 ">
+                                    <input type="text" disabled class="form-control" name="" id="txtNetTotal" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_ExpirePeriod</label>
+                                <div class="col-8 ">
+                                    <input type="text" class="form-control" id="txtValidityPeriod" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Termsofsupply</label>
+                                <div class="col-8 ">
+                                    <textarea type="text" class="form-control" id="txtDliveryConditions" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Shippingterms</label>
+                                <div class="col-8 ">
+                                    <textarea type="text" class="form-control" id="txtShipmentConditions" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-8 ">
+                                    <textarea type="text" class="form-control" id="txtNotes" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Editors Details -->
+                        <div class="insettext row editor-details">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Pur</label>
+                                    <div class="col-4 col-xl-4 editor-input">
+                                        <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                    </div>
+                                    <div class="col-4 col-xl-6  editor-input">
+                                        <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-xl-2 align-self-center "> @SystemResource.App_Update</label>
+                                    <div class="col-4 col-xl-4  editor-input">
+                                        <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                    </div>
+                                    <div class="col-4 col-xl-6 editor-input">
+                                        <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
 
                     </div>
-
-
                 </div>
+            </div>
         </div>
     </div>
-   
-    
-    
-   
-</div>
+ 
 </div>
 @*<script src="~/New/vendor/jquery/jquery.min.js"></script>
     <script src="~/New/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@

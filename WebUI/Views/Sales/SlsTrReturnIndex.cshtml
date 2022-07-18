@@ -8,8 +8,6 @@
         pointer-events: none;
         opacity: 0.4;
     }
-
-     
 </style>
 
 
@@ -29,7 +27,7 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">من تاريخ</label>
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
                             <div class="col-8">
                                 <input type="date" class="form-control" id="txtStartDate">
                             </div>
@@ -77,6 +75,8 @@
 
     <!-- Details Container -->
     <div class="col-12">
+
+        <!--Search Table-->
         <div class="display_none" id="divShow">
             <div class="card bg-light-blue">
                 <div class="card-body">
@@ -120,7 +120,7 @@
                                 <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
                                 <div class="col-9 col-md-7">
                                     <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
-                                </div> 
+                                </div>
 
                             </div>
                         </div>
@@ -230,9 +230,7 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody id="div_Data">
-                                        
-                                    </tbody>
+                                    <tbody id="div_Data"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -282,27 +280,27 @@
                         </div>
                         <!-- Editors Details -->
                         <div class="insettext row editor-details">
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-lg-6">
 
                                 <div class="form-group row g-0">
-                                    <label class="col-2 align-self-center p-md-0"> البائع</label>
-                                    <div class="col-5 editor-input">
-                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
+                                    <label class="col-4 col-xl-2 align-self-center"> البائع</label>
+                                    <div class="col-4 col-xl-4 editor-input">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
                                     </div>
-                                    <div class="col-5 editor-input">
-                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
+                                    <div class="col-4 col-xl-6 editor-input">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-2 align-self-center p-md-0"> تعديل</label>
-                                    <div class="col-5 editor-input">
-                                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled class="p-0">
+                                    <label class="col-4 col-xl-2 align-self-center p-md-0"> تعديل</label>
+                                    <div class="col-4 col-xl-4 editor-input">
+                                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
                                     </div>
-                                    <div class="col-5 editor-input">
+                                    <div class="col-4 col-xl-6 editor-input">
 
-                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -312,8 +310,7 @@
                 </div>
             </div>
         </div>
-        @*</div>
-            </div>*@
+
     </div>
 
 </div>

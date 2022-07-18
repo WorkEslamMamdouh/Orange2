@@ -55,7 +55,7 @@ var STKAdjust;
     var btnRefash;
     var btnShow;
     var btnAdd;
-    var btnEdit;
+    var btnUpdate;
     var btnSave;
     var btnBack;
     var btnAddDetails;
@@ -125,7 +125,7 @@ var STKAdjust;
         btnRefash = document.getElementById("btnRefash");
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnEdit");
+        btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
         btnAddDetails = DocumentActions.GetElementById("btnAddDetails");
@@ -148,7 +148,7 @@ var STKAdjust;
         ddlSourceStoreAdd.onchange = ddlToStoreAdd_onchange;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         btnAddDetails.onclick = AddNewRow;
         txtSearch.onkeyup = txtSearch_onKeyup;
         chkApproved.onclick = chkApproved_checked;
@@ -161,7 +161,7 @@ var STKAdjust;
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
     }
     //------------------------------------------------------ Buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         FlagAddOrEdit = 2;
@@ -195,14 +195,17 @@ var STKAdjust;
         $("#btnRefash").addClass("display_none");
     }
     function btnShow_onclick() {
+        $("#divShow").removeClass("display_none");
         $("#div_Approve").addClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#divTransferDetails").addClass("display_none");
         $("#divGridShow").removeClass("display_none");
         InitializeGrid();
     }
     function btnBack_onclick() {
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
         if (FlagAddOrEdit == 2) {
@@ -210,7 +213,7 @@ var STKAdjust;
         }
         else {
             $("#divTransferDetails").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             DisableControls();
             Clear();
             $("#btnPrintTransaction").addClass("display_none");
@@ -418,7 +421,7 @@ var STKAdjust;
                     Save();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
-                    btnEdit_onclick();
+                    btnUpdate_onclick();
                 }
                 else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -487,7 +490,7 @@ var STKAdjust;
         Clear();
         CountGrid = 0;
         $("#divTransferDetails").removeClass("display_none");
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         $("#div_Approve").removeClass("display_none");
         SelectedStockModel = new Array();
@@ -552,13 +555,13 @@ var STKAdjust;
             });
             if (SelectedStockModel[0].Status == 1) {
                 chkApproved.checked = true;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
             }
             else {
                 chkApproved.checked = false;
                 chkApproved.disabled = true;
-                btnEdit.disabled = false;
+                btnUpdate.disabled = false;
             }
         }
         $('#btnRefash').removeClass('display_none');
@@ -870,17 +873,19 @@ var STKAdjust;
         }
     }
     function HideButtons() {
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnSave").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
     }
     function ShowButons() {
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
     }
     function DisableDiv() {
         $("#div_hedr").addClass("disabledDiv");
+        $("#divIconbar").addClass("disabledIconbar");
+        $("#divShow").addClass("disabledDiv");
         $("#divTransferDetails").removeClass("disabledDiv");
         $("#divTransferDetails").removeClass("display_none");
     }
@@ -933,38 +938,7 @@ var STKAdjust;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-            '<input id="txtAdjustDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-            '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3STKAdjust "></span>' +
-            '</div>' +
-            '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (cnt + 1) + '" class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width:4%!important;">' +
-            '<button type="button" class="col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            '<input id="txtItemNumber' + cnt + '" name="" disabled type="hidden" class="col-lg-9  form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtUntitName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  p-0">' +
-            '<input id="txtOnhandQty' + cnt + '" name="" disabled type="number" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Qty  p-0">' +
-            '<input id="txtCountedQty' + cnt + '" name="" disabled type="number" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0 Qty" >' +
-            '<input id="txtDiffQty' + cnt + '" name="" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0 ">' +
-            '<input id="txtUnitCost' + cnt + '" name="" disabled type="number" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Cost p-0">' +
-            '<input id="txtNewCost' + cnt + '" name="" disabled type="number" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Cost p-0">' +
-            '<input id="txtDiffCost' + cnt + '" name="" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-            '<input  id="txtUnitID' + cnt + '" name = " " type ="hidden"  />' +
-            '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-            // '<input  id="txt_OnhandQty' + cnt + '" name = " " type ="hidden"  />' +
-            '</div>';
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"txtAdjustDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />                \n                    <input id=\"txtSerial" + cnt + "\" type=\"hidden\" name=\"FromDate\" class=\"form-control display_none\" value=\"" + (CountGrid + 1) + "\"  />\n                    <input id=\"txtItemNumber" + cnt + "\" type=\"hidden\" name=\"FromDate\" class=\"form-control display_none\" value=\"" + (CountGrid + 1) + "\"  />\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n\n                    <td>\n                        <div class=\"form-group\">\n                            <button type=\"button\" class=\"btn btn-main input-sm\" id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\">\n                                <i class=\"fas fa-search\"></i>\n                            </button>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUntitName" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtOnhandQty" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCountedQty" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDiffQty" + cnt + "\" type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUnitCost" + cnt + "\" type=\"number\"  class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group Cost\">\n                            <input id=\"txtNewCost" + cnt + "\" type=\"number\"  class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group Cost\">\n                            <input id=\"txtDiffCost" + cnt + "\" type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n               <input id=\"txtUnitID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_OnhandQty" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data").append(html);
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -1261,11 +1235,11 @@ var STKAdjust;
                     GridRowDoubleClick();
                     if (res.Status == 1) {
                         chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                        btnEdit.disabled = true;
+                        btnUpdate.disabled = true;
                     }
                     else {
                         chkApproved.disabled = true;
-                        btnEdit.disabled = false;
+                        btnUpdate.disabled = false;
                     }
                 }
                 else {
@@ -1302,11 +1276,11 @@ var STKAdjust;
                     GridRowDoubleClick();
                     if (res.Status == 1) {
                         chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                        btnEdit.disabled = true;
+                        btnUpdate.disabled = true;
                     }
                     else {
                         chkApproved.disabled = true;
-                        btnEdit.disabled = false;
+                        btnUpdate.disabled = false;
                     }
                 }
                 else {
@@ -1351,7 +1325,7 @@ var STKAdjust;
                     InitializeGrid();
                     GridRowDoubleClick();
                     chkApproved.disabled = true;
-                    btnEdit.disabled = false;
+                    btnUpdate.disabled = false;
                 }
                 else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -1362,6 +1336,8 @@ var STKAdjust;
     function Save() {
         InitializeGrid();
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divIconbar").removeClass("disabledIconbar");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
         DisableControls();

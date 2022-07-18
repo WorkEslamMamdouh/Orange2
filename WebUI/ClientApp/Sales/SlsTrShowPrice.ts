@@ -473,6 +473,7 @@ namespace SlsTrShowPrice {
 
             $("#DivInvoiceDetails").addClass("display_none");
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -492,6 +493,7 @@ namespace SlsTrShowPrice {
 
             Grid_RowDoubleClicked();
             $("#cotrolDiv").removeClass("disabledDiv");
+            $("#divShow").removeClass("disabledDiv");
             $("#divIconbar").removeClass("disabledIconbar");
             $("#txtInvoiceCustomerName").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
@@ -667,6 +669,8 @@ namespace SlsTrShowPrice {
 
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
 
@@ -683,11 +687,14 @@ namespace SlsTrShowPrice {
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
+        $("#divShow").attr("disabled", "disabled").off('click');
+        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -2023,6 +2030,7 @@ namespace SlsTrShowPrice {
         btnShow_onclick();
 
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true;
         $("#btnUpdate").removeClass("display_none");
@@ -2161,6 +2169,7 @@ namespace SlsTrShowPrice {
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
@@ -2615,6 +2624,7 @@ namespace SlsTrShowPrice {
                     btnUpdate.disabled = false;
 
                     $("#cotrolDiv").removeClass("disabledDiv");
+                    $("#divShow").removeClass("disabledDiv");
                     $("#divIconbar").removeClass("disabledIconbar");
                     BindStatisticGridData();
                     open_success();
