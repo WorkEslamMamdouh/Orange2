@@ -10557,4 +10557,38 @@ class Iproc_Dash extends SecurityClass {
     public Total: number;
    
 }
+ 
+
+class DashBalances extends SecurityClass {
+    constructor() {
+        super();
+        this.CustOp = 0;
+        this.CustEnd = 0;
+        this.VndOp = 0;
+        this.VndEnd = 0; 
+    }
+    public CustOp: number;
+    public CustEnd: number;
+    public VndOp: number;
+    public VndEnd: number; 
+   
+}
+
+
+class IProc_DashAccounts extends SecurityClass {
+    constructor() {
+        super();
+        this.Typ = 0;
+        this.acc_Code = '';
+        this.acc_DescA= '';
+        this.Acc_DescL = ''; 
+        this.EndBalance = 0; 
+    }
+    public Typ: number;
+    public acc_Code: string;
+    public acc_DescA: string;
+    public Acc_DescL: string; 
+    public EndBalance: number; 
+   
+}
 

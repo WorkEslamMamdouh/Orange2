@@ -1614,4 +1614,42 @@ function Cheak_UserTokenlog() {
     });
 }
 ;
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a, b) {
+        /* next line works with strings and numbers,
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    };
+}
+function printDiv(divName) {
+    //var printContents = document.getElementById(divName).innerHTML;
+    //var originalContents = document.body.innerHTML; 
+    //document.body.innerHTML = printContents;
+    //window.print();
+    //document.body.innerHTML = originalContents;
+    var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
+    sOption += "scrollbars=yes,width=775,height=600,left=10,top=25";
+    var mywindow = window.open('', 'PRINT', sOption);
+    mywindow.document.write(document.getElementById(divName).innerHTML);
+    //document.getElementById('header').style.display = 'none';
+    //document.getElementById('footer').style.display = 'none';
+    //mywindow.document.styl
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/ 
+    mywindow.pageXOffset; // necessary for IE >= 10*/ 
+    mywindow.history.back();
+    mywindow.onload = function () {
+        mywindow.moveTo(0, 0);
+        mywindow.resizeTo(640, 480);
+    };
+    mywindow.print();
+    mywindow.close();
+}
 //# sourceMappingURL=App.js.map

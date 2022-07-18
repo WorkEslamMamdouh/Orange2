@@ -150,50 +150,6 @@ namespace Report_Page {
 
 
 
-    function printDiv(divName: string) {
-
-
-        //var printContents = document.getElementById(divName).innerHTML;
-        //var originalContents = document.body.innerHTML; 
-        //document.body.innerHTML = printContents;
-
-        //window.print();
-
-        //document.body.innerHTML = originalContents;
-        var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
-        sOption += "scrollbars=yes,width=775,height=600,left=10,top=25";
-
-        var mywindow = window.open('', 'PRINT', sOption);
-
-        mywindow.document.write(document.getElementById(divName).innerHTML);
-
-        //document.getElementById('header').style.display = 'none';
-        //document.getElementById('footer').style.display = 'none';
-        //mywindow.document.styl
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/ 
-        mywindow.pageXOffset; // necessary for IE >= 10*/ 
-
-        mywindow.history.back();
-
-        mywindow.onload = function () {
-
-
-            mywindow.moveTo(0, 0);
-            mywindow.resizeTo(640, 480);
-
-
-        }
-
-        mywindow.print();
-        mywindow.close();
-
-
-
-
-
-
-    }
 
     //function ImagetoPrint(source: string) {
 
