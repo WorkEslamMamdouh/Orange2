@@ -13,6 +13,10 @@ var Dashboard;
     var IprocDash = new Array();
     var DashBalances = new Array();
     var print_1;
+    var print_2;
+    var print_3;
+    var print_4;
+    var print_5;
     //global     
     var CountGrid = 0;
     var totVal1 = 0;
@@ -32,6 +36,10 @@ var Dashboard;
     var BigBalanceCash = 0;
     function InitalizeComponent() {
         print_1 = document.getElementById('print_1');
+        print_2 = document.getElementById('print_2');
+        print_3 = document.getElementById('print_3');
+        print_4 = document.getElementById('print_4');
+        print_5 = document.getElementById('print_5');
         $('#divIconbar').addClass('display_none');
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -44,7 +52,11 @@ var Dashboard;
     }
     Dashboard.InitalizeComponent = InitalizeComponent;
     function InitializeEvents() {
-        print_1.onclick = print;
+        print_1.onclick = function () { print(1); };
+        print_2.onclick = function () { print(2); };
+        print_3.onclick = function () { print(3); };
+        print_4.onclick = function () { print(4); };
+        print_5.onclick = function () { print(5); };
         TimerRun(10000);
     }
     function TimerRun(Time) {
@@ -353,8 +365,8 @@ var Dashboard;
             }
         }
     }
-    function print() {
-        var divToPrint = document.getElementById("dataTable_11");
+    function print(type) {
+        var divToPrint = document.getElementById("Table_" + type);
         var newWin = window.open("");
         newWin.document.write(divToPrint.outerHTML);
         newWin.print();

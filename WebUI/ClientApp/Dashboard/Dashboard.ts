@@ -14,6 +14,10 @@ namespace Dashboard {
     var DashBalances: Array<DashBalances> = new Array<DashBalances>();
 
     var print_1: HTMLButtonElement;
+    var print_2: HTMLButtonElement;
+    var print_3: HTMLButtonElement;
+    var print_4: HTMLButtonElement;
+    var print_5: HTMLButtonElement;
 
     //global     
     var CountGrid = 0;
@@ -38,6 +42,10 @@ namespace Dashboard {
     export function InitalizeComponent() {
 
         print_1 = document.getElementById('print_1') as HTMLButtonElement;
+        print_2 = document.getElementById('print_2') as HTMLButtonElement;
+        print_3 = document.getElementById('print_3') as HTMLButtonElement;
+        print_4 = document.getElementById('print_4') as HTMLButtonElement;
+        print_5 = document.getElementById('print_5') as HTMLButtonElement;
 
         $('#divIconbar').addClass('display_none')
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -51,9 +59,14 @@ namespace Dashboard {
 
     }
     function InitializeEvents() {
-        print_1.onclick = print;
 
-        TimerRun(10000)
+        print_1.onclick = () => { print(1)}
+        print_2.onclick = () => { print(2)}
+        print_3.onclick = () => { print(3)}
+        print_4.onclick = () => { print(4)}
+        print_5.onclick = () => { print(5)}
+         
+        TimerRun(10000);
     }
     function TimerRun(Time: number) {
         setTimeout(function () {
@@ -500,10 +513,10 @@ namespace Dashboard {
 
     }
 
-    function print() {
+    function print(type: number) {
         
 
-        var divToPrint = document.getElementById("dataTable_11");
+        var divToPrint = document.getElementById("Table_" + type);
         var newWin = window.open("");
         newWin.document.write(divToPrint.outerHTML);
         newWin.print();
