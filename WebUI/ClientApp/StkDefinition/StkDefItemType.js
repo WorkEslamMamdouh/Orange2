@@ -401,6 +401,7 @@ var StkDefItemType;
             $("#txtRefItemCode" + i).val(BilldDetail[i].RefItemCode);
             $("#txtBarCodePrefix" + i).val(BilldDetail[i].BarCodePrefix);
             $("#txtLastBarCodeSeq" + i).val(BilldDetail[i].LastBarCodeSeq);
+            $("#btn_minus" + i).removeClass("display_none");
             //for (var s = 0; s < Display_Type.length; s++) {
             //    //debugger;
             //    $('#select_Type_Item' + i).append('<option value="' + Display_Type[s].CatID + '">' + Display_Type[s].DescA + '</option>');

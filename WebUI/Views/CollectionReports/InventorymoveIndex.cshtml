@@ -60,6 +60,7 @@
     .text-center {
         text-align: center !important;
     }
+
     .allradio .col-lg-4 {
         padding-left: 2px !important;
         padding-right: 2px !important;
@@ -80,7 +81,7 @@
         // Initialize select2
         $("#drpitem_family").select2();
         $("#txt_ID_APP_Type").select2();
-       
+
         // Read selected option
         $('#but_read').click(function () {
             var username = $('#drpitem_family option:selected').text();
@@ -89,7 +90,7 @@
             var username = $('#txt_ID_APP_Type option:selected').text();
             var userid = $('#txt_ID_APP_Type').val();
 
-           
+
             $('#result').html("id : " + userid + ", name : " + username);
         });
     });
@@ -175,10 +176,10 @@
                             <label for="" class="col-lg-9 col-md-3 col-xs-4  " style="color:black"> @SystemResource.Detailed </label>
 
                         </div>
-                       
+
 
                     </div>
-                    
+
 
 
 
@@ -226,30 +227,32 @@
         </div>
     </div>
 </div>
+@section Script{
+    <script src="~/ClientApp/CollectionReports/Inventorymove.js"></script>
+
+    <script>
+
+        function myclaer() {
+
+
+            $("#ShiftName option:selected").prop("selected", false);
+            $("#ShiftName option:first").prop("selected", "selected");
+
+            $("#PeriodName option:selected").prop("selected", false);
+            $("#PeriodName option:first").prop("selected", "selected");
+
+            $("#SrvTypeName").value = "";
+            $("#SrvTypeCode").value = "";
+            $("#ShiftCode").value = "";
+            $("#PeriodCode").value = "";
 
 
 
-<script src="~/ClientApp/CollectionReports/Inventorymove.js"></script>
+        }
 
-<script>
-
-    function myclaer() {
-
-
-        $("#ShiftName option:selected").prop("selected", false);
-        $("#ShiftName option:first").prop("selected", "selected");
-
-        $("#PeriodName option:selected").prop("selected", false);
-        $("#PeriodName option:first").prop("selected", "selected");
-
-        $("#SrvTypeName").value = "";
-        $("#SrvTypeCode").value = "";
-        $("#ShiftCode").value = "";
-        $("#PeriodCode").value = "";
+    </script>
+}
 
 
 
-    }
-
-</script>
 
