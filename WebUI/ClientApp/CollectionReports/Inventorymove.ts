@@ -41,6 +41,10 @@ namespace Inventorymove {
             document.getElementById('Screen_name').innerHTML = "Inventory Movement";
 
         }
+        $("#btnAdd").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         reptp1.checked = true;

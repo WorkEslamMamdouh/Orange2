@@ -46,6 +46,10 @@ namespace Incomeoperations {
         } else {
             document.getElementById('Screen_name').innerHTML = "Income Operation";
         }        
+        $("#btnAdd").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         //Display_Salesman()

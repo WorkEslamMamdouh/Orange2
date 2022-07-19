@@ -28688,6 +28688,11 @@ div.tagsinput {
     cursor: pointer;
     border: none;
 }
+.reset.icon-bar,
+.viewresult.icon-bar,
+.print-report.icon-bar{
+    left: -120px;
+}
     .main-iconbar .icon-bar:disabled,
     .details-iconbar .icon-bar:disabled,
     .main-iconbar .icon-bar:disabled:hover,
@@ -28712,16 +28717,25 @@ div.tagsinput {
     width: 100px;
     height: 50px;
 }
+.reset,
+.viewresult,
+.print-report{
+    width: 160px;
+    height: 50px;
+}
 
-.view {
+.view,
+.viewresult{
     top: 100px;
 }
-.add {
+.add,
+.reset {
     top: 160px;
 }
 .print {
     top: 220px;
 }
+
 .pdf {
     top: 280px;
 }
@@ -29401,4 +29415,11 @@ input[class=checkbox]:checked:before {
 
 .insettext input {
     border: inset!important;
+}
+/*Radio Button*/
+.form-radio {
+    width: 1em;
+    height: 1em;
+    margin-top: 0;
+    vertical-align: initial;
 }
