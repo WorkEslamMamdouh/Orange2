@@ -176,7 +176,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item menu-items" id="btnSales">
+                <li class="nav-item menu-items MED display_none" id="btnSales">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MSales" aria-expanded="false" aria-controls="MSales">
                         <span class="menu-icon">
                             <i class="fas fa-shopping-cart"></i>
@@ -193,8 +193,8 @@
                                 @*<a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
                             @*<li style="display:none" id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
-                                   <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
-                                </li>*@
+                       <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
+                    </li>*@
                             <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item d-flex justify-content-between mb-1">
                                 <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
                                 @*   <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
@@ -207,7 +207,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item menu-items " id="btnPurchase">
+                <li class="nav-item menu-items MED display_none" id="btnPurchase">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MPurchase">
                         <span class="menu-icon">
                             <i class="fas fa-cash-register"></i>
@@ -224,7 +224,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item menu-items " id="btnInventory">
+                <li class="nav-item menu-items MED display_none" id="btnInventory">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MInventory" aria-expanded="false" aria-controls="MInventory">
                         <span class="menu-icon">
                             <i class="fas fa-store"></i>
@@ -249,7 +249,25 @@
                     </div>
                 </li>
 
+                <li class="nav-item menu-items MED display_none" id="btnReportMenu">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MPurchase" aria-expanded="false" aria-controls="MbtnReportMenu">
+                        <span class="menu-icon">
+                            <i class="fas fa-cash-register"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Purchase</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MbtnReportMenu">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnInventorymove" key="Inventorymove" class="nav-item"> <a id="btnInventorymove" class="nav-link" href="#">@SystemResource.Inventorymove</a></li>
+                            <li id="btnInventoryvalue" key="Inventoryvalue" class="nav-item"> <a id="btnInventoryvalue" class="nav-link" href="#">@SystemResource.Inventoryvalue</a></li>
+                            <li id="btnIncomeoperations" key="Incomeoperations" class="nav-item"> <a id="btnIncomeoperations" class="nav-link" href="#">@SystemResource.Incomeoperations</a></li>
+                            <li id="btnItemsalesSum" key="ItemsalesSum" class="nav-item"> <a id="btnItemsalesSum" class="nav-link" href="#">@SystemResource.ItemsalesSum</a></li>
+                            <li id="btnItemPurchase" key="ItemPurchase" class="nav-item"> <a id="btnItemPurchase" class="nav-link" href="#">@SystemResource.ItemPurchase</a></li>
 
+                        </ul>
+                    </div>
+                </li>
 
             </ul>
         </nav>
