@@ -1667,12 +1667,12 @@ namespace SlsTrSalesManager {
         var html;
         html = `<tr id="No_Row${cnt}">
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control right2 display_none"  />
-	                <th>
+	                <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
 			                <button type="button" class="style_ButSearch" id="btnSearchItems{cnt}">
                             <i class="fa fa-search  "></i>
@@ -1680,27 +1680,27 @@ namespace SlsTrSalesManager {
 
                          
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtSerial${cnt}" type="text" class="form-control input-sm right2" disabled />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <select id="ddlFamily${cnt}" class="form-control select_">
                                  <option value="null"> ${(lang == "ar" ? "النوع" : "Type")} </option>
                             </select>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
 			                <select id="ddlItem${cnt}" class="form-control select_">
                               <option value="null">  ${(lang == "ar" ? "الصنف" : "Item")} </option>
                             </select>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
 			                <div class="form-group ps-1">
 			                    <input class="counter" type="number" data-id="number" id="txtQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
@@ -1708,42 +1708,42 @@ namespace SlsTrSalesManager {
 			                    <div class="value-button increase-button btn-number1${cnt}" data-id="increase" id="btnplus1" data-type="plus" data-field="quant[1]">+</div>
 		                    </div>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input type="text"  class="form-control" id="txtReturnQuantity${cnt}" name="quant[3]" class="form-control" value="0" min="0" max="1000" step="1">
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input type="text"  class="form-control" id="txtPrice${cnt}" name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			               <input id="txtUnitpriceWithVat${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTax_Rate${cnt}" type="text" class="form-control" disabled />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			            <input id="txtTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTotAfterTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
-	                </th>
+	                </td>
                     <input id="UnitCost${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />

@@ -48,6 +48,12 @@ var StkDefItems;
         else {
             document.getElementById('Screen_name').innerHTML = "Items";
         }
+        $("#btnAdd").addClass("display_none");
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         IsLocalSalePrice = sys.SysSession.CurrentEnvironment.I_Control[0].IsLocalSalePrice;
@@ -199,30 +205,31 @@ var StkDefItems;
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id="No_Row' + cnt + '" class="container-fluid ">' +
-            '<div class="col-lg-12">' +
-            '<div class="col-lg-12">' +
-            '<span id = "btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none" disabled = "disabled"> </span>' +
-            '<div class="col-lg-1"><input id="txtCode' + cnt + '" type="text" class="form-control right2" disabled=""></div>' +
-            '<div id="DescA' + cnt + '" class="col-lg-3"><input id="txtDescA' + cnt + '" type="text" class="form-control right2 position_DescAE" disabled=""></div> ' +
-            //'<div id="DescL' + cnt + '" class="col-lg-3"></div> ' +
-            '<div class="col-lg-1"><select id="select_Type_Item' + cnt + '" class="form-control" disabled=""></select></div> ' +
-            '<div class="col-lg-1"><select id="select_ItemFamily' + cnt + '" class="form-control " disabled=""></select></div> ' +
-            '<div class="col-lg-2"><input id="txtRefItemCode' + cnt + '" type="number" class="form-control right2" disabled=""></div> ' +
-            '<div class="col-lg-1"><input id="txtOnhandQty' + cnt + '" type="text" disabled="" class="form-control right2 SelectDIS"></div> ' +
-            '<div class="col-lg-1"><input id="txtUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
-            '<div class="col-lg-1"><input id="txtMinUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
-            '<div class="col-lg-1  "><select id="txt_UOM' + cnt + '" class="form-control" disabled=""></select></div> ' +
-            '<div class="col-lg-4 position_DescEStkDefItems">' +
-            '<div class="col-lg-8  "><input id="txtDescL' + cnt + '" type="text" class="form-control position_DescEE " disabled=""></div> ' +
-            '<div class="col-lg-4  "><input id="Check_isActive' + cnt + '" type="checkbox" class="form-control right2 " disabled ></div> ' +
-            '</div>' +
-            '</div> ' +
-            '<input id="txt_StatusFlag' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-            '<input id="txt_ID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-            '<input id="txt_ItemYearID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-            '<input id="txt_ItemStoreID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-            '</div> ';
+        html = "<tr id= \"No_Row" + cnt + "\">ass=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\" disabled ></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_Type_Item" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_ItemFamily" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtOnhandQty" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtMinUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"txt_UOM" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Check_isActive" + cnt + "\" type=\"checkbox\" class=\"form-check-input\" disabled  />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemYearID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemStoreID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
+        //html = '<div id="No_Row' + cnt + '" class="container-fluid ">' +
+        //    '<div class="col-lg-12">' +
+        //    '<div class="col-lg-12">' +
+        //    '<span id = "btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none" disabled = "disabled"> </span>' +
+        //    '<div class="col-lg-1"><input id="txtCode' + cnt + '" type="text" class="form-control right2" disabled=""></div>' +
+        //    '<div id="DescA' + cnt + '" class="col-lg-3"><input id="txtDescA' + cnt + '" type="text" class="form-control right2 position_DescAE" disabled=""></div> ' +
+        //    //'<div id="DescL' + cnt + '" class="col-lg-3"></div> ' +
+        //    '<div class="col-lg-1"><select id="select_Type_Item' + cnt + '" class="form-control" disabled=""></select></div> ' +
+        //    '<div class="col-lg-1"><select id="select_ItemFamily' + cnt + '" class="form-control " disabled=""></select></div> ' +
+        //    '<div class="col-lg-2"><input id="txtRefItemCode' + cnt + '" type="number" class="form-control right2" disabled=""></div> ' +
+        //    '<div class="col-lg-1"><input id="txtOnhandQty' + cnt + '" type="text" disabled="" class="form-control right2 SelectDIS"></div> ' +
+        //    '<div class="col-lg-1"><input id="txtUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
+        //    '<div class="col-lg-1"><input id="txtMinUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
+        //    '<div class="col-lg-1  "><select id="txt_UOM' + cnt + '" class="form-control" disabled=""></select></div> ' +
+        //    '<div class="col-lg-4 position_DescEStkDefItems">' +
+        //    '<div class="col-lg-8  "><input id="txtDescL' + cnt + '" type="text" class="form-control position_DescEE " disabled=""></div> ' +
+        //    '<div class="col-lg-4  "><input id="Check_isActive' + cnt + '" type="checkbox" class="form-control right2 " disabled ></div> ' +
+        //    '</div>' + 
+        //    '</div> ' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
+        //    '<input id="txt_ID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
+        //    '<input id="txt_ItemYearID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
+        //    '<input id="txt_ItemStoreID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
+        //    '</div> ';
         $("#div_Data").append(html);
         //(lang == "ar" ? $('#DescL' + cnt).addClass('display_none') : $('#DescA' + cnt).addClass('display_none')); 
         $('#select_Type_Item' + cnt).append('<option value="null">' + (lang == "ar" ? "أختر الفئة" : "Choose category") + '</option>');

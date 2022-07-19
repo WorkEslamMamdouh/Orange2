@@ -1240,75 +1240,75 @@ namespace PurTrReceive {
         var html;
         html = `<tr id= "No_Row${cnt}">
                     <input id="ReciveDetailsID${cnt}" type="hidden" class="form-control display_none"  />
-	                <th>
+	                <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <select id="ddlFamily${cnt}" class="form-control select_">
                                 <option value="null">${(lang == "ar" ? "اختر" : "Choose")}</option>
                             </select>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
                         <select id="ddlItem${cnt}" class="form-control select_">
                             <option value="null">${ (lang == "ar" ? "اختر" : "Choose") }</option>
                         </select>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
 			                <input type="number"  id="txtQuantity${cnt}" name="quant[10]" class="form-control" value="1" min="1" max="1000" step="1">
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtQuantityReturnValue${cnt}" type="number" class="form-control"  disabled value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input type="number"  id="txtPriceFc${cnt}" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5">
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTotalFc${cnt}" type="number" disabled class="form-control"  value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtPrice${cnt}" disabled type="text" class="form-control"  value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			               <input id="txtTax${cnt}" type="text" disabled class="form-control" data_VatPrc="${((VatPrc == null || undefined) ? 0 : VatPrc) }"  value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtTotAfterTax${cnt}" type="text" disabled value="0" class="form-control"  />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			             <input id="txtAddons${cnt}" type="text" disabled class="form-control"  value="0" />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			             <input id="txtTotAddons${cnt}" type="text" disabled class="form-control"  value="0" />
 		                </div>
-	                </th>
+	                </td>
                 <input id="UnitCost${cnt}" name = " " type = "hidden" class="form-control "/>
                 <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control input-sm"/>
                 <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control input-sm" />';
@@ -1959,73 +1959,73 @@ namespace PurTrReceive {
         var html;
         html = `<tr id= "No_Row1${cnt}">
                     <input id="ReceiveExpensesID${cnt}" type="hidden" class="form-control display_none"  />
-	                <th>
+	                <td>
 		                <div class="form-group">
 			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <input id="txtSerial${cnt}" type="text" class="form-control" disabled value="${CountItemsCharge}"/>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
                             <select id="txtAddonsCharge${cnt}" class="form-control" value="null" ></select>
 		                </div>
-	                </th>
-                     <th>
+	                </td>
+                     <td>
 		                <div class="form-group">
 			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=" "/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtValueCharge${cnt}" type="text" class="form-control"  value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <select id="txtVatType${cnt}" class="form-control " value="null" ></select>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <input id="txtVatCharge${cnt}" type="text" disabled value="0" class="form-control "  />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <input id="txtValueAfterVatCharge${cnt}" type="text" disabled class="form-control"   value="0" />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <select id="txtVendorIsCheckCharge${cnt}" class="form-control"  ></select>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <input id="txtInvoiceNumberCharge${cnt}" type="text" class="form-control"  value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <input id="txtInvoiceDateCharge${cnt}" type="date" class="form-control"  />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <select id="txtVendorCharge${cnt}" class="form-control"  ></select>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <select id="txt_D_CashBox${cnt}" name=""  disabled="disabled" class="form-control" tabindex="-1" aria-hidden="true">
                              <option value="Null">${ (lang == "ar" ? "الصنوق" : "CashBox") }  </option>
                             </select>
 		                </div>
-	                </th>
+	                </td>
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control" />;
 
