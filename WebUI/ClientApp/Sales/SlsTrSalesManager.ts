@@ -1520,7 +1520,7 @@ namespace SlsTrSalesManager {
 
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.RoundToSt(2);
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
+            //ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             //InvoiceTransCode = InvoiceStatisticsModel[0].InvoiceTransCode;
             lblInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
@@ -1543,9 +1543,9 @@ namespace SlsTrSalesManager {
             }
 
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
-            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            //var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
-            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
+            //$('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
 
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
@@ -1615,25 +1615,24 @@ namespace SlsTrSalesManager {
 
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
-        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
 
-        //ddlInvoiceCustomer.disabled = true; 
+        //ddlInvoiceCustomer.disabled = true;
+        ddlSalesman.disabled = true;
 
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
 
+        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
         txtCommission.disabled = true;
         ddlStore.disabled = true;
-
-
         if (InvoiceStatisticsModel[0].Status == 1) {
             if (!SysSession.CurrentPrivileges.CUSTOM2) {
                 AutherizeFlag = false;
@@ -1645,7 +1644,7 @@ namespace SlsTrSalesManager {
             }
         }
         DocumentActions.RenderFromModel(InvoiceStatisticsModel[0]);
-
+        txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
         $('#txtContract_NO').val(InvoiceStatisticsModel[0].ContractNo);
         $('#txtPurchase_order_No').val(InvoiceStatisticsModel[0].PurchaseorderNo);
         $('#txtTerms_of_Payment').val(InvoiceStatisticsModel[0].TaxNotes);
@@ -2493,31 +2492,36 @@ namespace SlsTrSalesManager {
                 $("#txtTax_Rate" + i).attr('data-VatNatID', Tax_Type_Model.Nature);
                 $('#txtTax_Rate' + i).val(Tax_Rate);
 
+                if (flag_PriceWithVAT == true) {
+
+                    $("#txtPrice" + i).val(Number($("#txtUnitpriceWithVat" + i).val()) * 100 / (Tax_Rate + 100))
+
+                } else {
+
+                    $("#txtUnitpriceWithVat" + i).val((Number($("#txtPrice" + i).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
+                }
                 var txtQuantityValue = $("#txtQuantity" + i).val();
                 var txtPriceValue = $("#txtPrice" + i).val();
-
                 var total = Number(txtQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + i).val(total.RoundToSt(2));
                 VatPrc = $("#txtTax_Rate" + i).val();
-                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                var vatAmount = Number(total) * VatPrc / 100;
                 $("#txtTax" + i).val(vatAmount.RoundToSt(2));
-                var totalAfterVat = Number(vatAmount) + Number(total);
+                var totalAfterVat = vatAmount.RoundToNum(2) + total.RoundToNum(2);
                 $("#txtTotAfterTax" + i).val(totalAfterVat.RoundToSt(2));
 
 
-
-
                 PackageCount += Number($("#txtQuantity" + i).val());
-                PackageCount = Number(PackageCount.RoundToSt(2).toString());
+                //PackageCount = Number(PackageCount.RoundToSt(2).toString());
 
                 CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal.RoundToSt(2).toString());
+                //CountTotal = Number(CountTotal.RoundToSt(2).toString());
 
                 TaxCount += Number($("#txtTax" + i).val());
-                TaxCount = Number(TaxCount.RoundToSt(2).toString());
+                //TaxCount = Number(TaxCount.RoundToSt(2).toString());
 
                 NetCount += Number($("#txtTotAfterTax" + i).val());
-                NetCount = Number(NetCount.RoundToSt(2).toString());
+                //NetCount = Number(NetCount.RoundToSt(2).toString());
             }
         }
 

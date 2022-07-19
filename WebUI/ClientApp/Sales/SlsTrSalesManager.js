@@ -834,8 +834,6 @@ var SlsTrSalesManager;
             return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
-        $("#divShow").attr("disabled", "disabled").off('click');
-        $("#divShow").addClass("disabledDiv");
         $("#divIconbar").attr("disabled", "disabled").off('click');
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
@@ -1270,7 +1268,7 @@ var SlsTrSalesManager;
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat == null ? '' : InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.RoundToSt(2);
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
+            //ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             //InvoiceTransCode = InvoiceStatisticsModel[0].InvoiceTransCode;
             lblInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
@@ -1290,9 +1288,9 @@ var SlsTrSalesManager;
                 //$('#ddlInvoiceCustomer').val(InvoiceStatisticsModel[0].CustomerId.toString());
             }
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
-            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            //var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
-            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
+            //$('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
@@ -1349,15 +1347,16 @@ var SlsTrSalesManager;
         $("#btnBack").addClass("display_none");
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
-        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
-        //ddlInvoiceCustomer.disabled = true; 
+        //ddlInvoiceCustomer.disabled = true;
+        ddlSalesman.disabled = true;
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
+        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
@@ -1374,6 +1373,7 @@ var SlsTrSalesManager;
             }
         }
         DocumentActions.RenderFromModel(InvoiceStatisticsModel[0]);
+        txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
         $('#txtContract_NO').val(InvoiceStatisticsModel[0].ContractNo);
         $('#txtPurchase_order_No').val(InvoiceStatisticsModel[0].PurchaseorderNo);
         $('#txtTerms_of_Payment').val(InvoiceStatisticsModel[0].TaxNotes);
@@ -2007,23 +2007,29 @@ var SlsTrSalesManager;
                 VatPrc = Tax_Rate;
                 $("#txtTax_Rate" + i).attr('data-VatNatID', Tax_Type_Model.Nature);
                 $('#txtTax_Rate' + i).val(Tax_Rate);
+                if (flag_PriceWithVAT == true) {
+                    $("#txtPrice" + i).val(Number($("#txtUnitpriceWithVat" + i).val()) * 100 / (Tax_Rate + 100));
+                }
+                else {
+                    $("#txtUnitpriceWithVat" + i).val((Number($("#txtPrice" + i).val()) * (Tax_Rate + 100) / 100).RoundToNum(2));
+                }
                 txtQuantityValue = $("#txtQuantity" + i).val();
                 txtPriceValue = $("#txtPrice" + i).val();
                 total = Number(txtQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + i).val(total.RoundToSt(2));
                 VatPrc = $("#txtTax_Rate" + i).val();
-                vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                vatAmount = Number(total) * VatPrc / 100;
                 $("#txtTax" + i).val(vatAmount.RoundToSt(2));
-                totalAfterVat = Number(vatAmount) + Number(total);
+                totalAfterVat = vatAmount.RoundToNum(2) + total.RoundToNum(2);
                 $("#txtTotAfterTax" + i).val(totalAfterVat.RoundToSt(2));
                 PackageCount += Number($("#txtQuantity" + i).val());
-                PackageCount = Number(PackageCount.RoundToSt(2).toString());
+                //PackageCount = Number(PackageCount.RoundToSt(2).toString());
                 CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal.RoundToSt(2).toString());
+                //CountTotal = Number(CountTotal.RoundToSt(2).toString());
                 TaxCount += Number($("#txtTax" + i).val());
-                TaxCount = Number(TaxCount.RoundToSt(2).toString());
+                //TaxCount = Number(TaxCount.RoundToSt(2).toString());
                 NetCount += Number($("#txtTotAfterTax" + i).val());
-                NetCount = Number(NetCount.RoundToSt(2).toString());
+                //NetCount = Number(NetCount.RoundToSt(2).toString());
             }
         };
         var flagvalue, txtQuantityValue, txtPriceValue, total, vatAmount, totalAfterVat;
@@ -2468,7 +2474,6 @@ var SlsTrSalesManager;
         btnBack_onclick();
         btnShow_onclick();
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
@@ -2613,7 +2618,6 @@ var SlsTrSalesManager;
     }
     function success() {
         $("#cotrolDiv").removeClass("disabledDiv");
-        $("#divShow").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         BindStatisticGridData();
         Grid_RowDoubleClicked();
