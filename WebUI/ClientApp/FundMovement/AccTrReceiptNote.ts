@@ -52,11 +52,11 @@ namespace AccTrReceiptNote {
     var txt_CardAmount: HTMLInputElement;
     var txt_ReceiptDesc: HTMLInputElement;
 
-    var btnback: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
-    var btnEdit: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
     var chkActive: HTMLInputElement;
     var chkIsDeffered: HTMLInputElement;
 
@@ -116,7 +116,7 @@ namespace AccTrReceiptNote {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-    var btnPrint: HTMLButtonElement;
+    //var btnPrint: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
 
     //-----------------------------------------------------------------------------
@@ -192,9 +192,9 @@ namespace AccTrReceiptNote {
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
 
 
 
@@ -234,7 +234,7 @@ namespace AccTrReceiptNote {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
 
         //////////////////////////////donia
@@ -253,9 +253,9 @@ namespace AccTrReceiptNote {
 
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         chkActive.onchange = chkStatus_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
@@ -274,7 +274,7 @@ namespace AccTrReceiptNote {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); }
+        //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         //btnPrintslip. = btnPrintslip;
         btnPrintslip.onclick = btnPrintslip_onclick;
@@ -318,7 +318,7 @@ namespace AccTrReceiptNote {
 
         if (chkIsDeffered.checked == true) {
 
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
 
         }
         else {
@@ -353,7 +353,7 @@ namespace AccTrReceiptNote {
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
 
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
 
 
         }
@@ -368,7 +368,7 @@ namespace AccTrReceiptNote {
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
 
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
 
         }
 
@@ -412,14 +412,14 @@ namespace AccTrReceiptNote {
                     ReceiptID = Selecteditem[0].ReceiptID;
                     if (Selecteditem[0].Status == 1) {
                         chkActive.checked = true;
-                        btnEdit.disabled = true;
+                        btnUpdate.disabled = true;
                         chkActive.disabled = false;
                         chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2
                     }
                     else {
                         chkActive.checked = false;
                         chkActive.disabled = true;
-                        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
+                        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT
                     }
                 }
             }
@@ -454,9 +454,9 @@ namespace AccTrReceiptNote {
         // 
         if (!EDIT) {
 
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnUpdate').attr('class', 'btn btn-primary display_none');
+            $('#btnSave').attr('class', 'btn btn-success display_none');
+            $('#btnBack').attr('class', 'btn btn-success display_none');
 
         }
         if (!AddNew) { $('#btnAdd').attr('class', 'btn btn-primary display_none'); }
@@ -561,17 +561,17 @@ namespace AccTrReceiptNote {
 
     }
 
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
 
         if (!SysSession.CurrentPrivileges.EDIT) return;
         IsNew = false;
         IsEdite = true;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
             $("#txt_Amount").attr("disabled", "disabled");
@@ -592,10 +592,10 @@ namespace AccTrReceiptNote {
 
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
 
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
 
             $(".btn-group").removeClass("display_none");
 
@@ -673,11 +673,11 @@ namespace AccTrReceiptNote {
     }
 
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
         CashAmount = Number($('#txt_CashAmount').val());
         if (!Validation()) {
             return;
@@ -768,13 +768,13 @@ namespace AccTrReceiptNote {
         ////// 
 
         $('#btnAddDetails').toggleClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
         //$("#drpPaymentType").removeAttr("disabled");
         $("#drp_G_Store").removeAttr("disabled");
         txt_disabled();
@@ -897,7 +897,6 @@ namespace AccTrReceiptNote {
         else {
             Display();
         }
-
     }
 
     function btnback_onclick() {
@@ -905,13 +904,13 @@ namespace AccTrReceiptNote {
 
         if (IsNew == true) {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -952,27 +951,27 @@ namespace AccTrReceiptNote {
 
 
         Update_claenData = 0;
-        //$('#btnsave').toggleClass("display_none");
-        //$('#btnback').toggleClass("display_none");
+        //$('#btnSave').toggleClass("display_none");
+        //$('#btnBack').toggleClass("display_none");
 
         reference_Page();
 
         ////// 
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
 
         // 
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
-            btnEdit.disabled = true;
+            btnUpdate.disabled = true;
             chkActive.disabled = false;
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2
         }
         else {
             chkActive.checked = false;
             chkActive.disabled = true;
-            btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT
         }
 
         $("#Div_control").removeClass("display_none");
@@ -1142,9 +1141,9 @@ namespace AccTrReceiptNote {
 
         $("#Div_control").removeClass("display_none");
 
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
 
         $('#txt_ReceiptNoteNew').prop("selectedIndex", 0);
         //$('#txt_ID_beneficiaryNew').prop("selectedIndex", 0);
@@ -1287,7 +1286,8 @@ namespace AccTrReceiptNote {
 
 
         let res: any = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        //$("#id_ReportGrid").attr("style", "");
+        $('#id_ReportGrid').removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "ReceiptID";
@@ -1495,27 +1495,27 @@ namespace AccTrReceiptNote {
 
 
         Update_claenData = 0;
-        //$('#btnsave').toggleClass("display_none");
-        //$('#btnback').toggleClass("display_none");
+        //$('#btnSave').toggleClass("display_none");
+        //$('#btnBack').toggleClass("display_none");
 
         reference_Page();
 
         ////// 
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
 
         // 
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
-            btnEdit.disabled = true;
+            btnUpdate.disabled = true;
             chkActive.disabled = false;
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2
         }
         else {
             chkActive.checked = false;
             chkActive.disabled = true;
-            btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT
         }
 
         $("#Div_control").removeClass("display_none");
