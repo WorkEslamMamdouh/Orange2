@@ -331,17 +331,17 @@ class JsGrid {
                 var e_item_PrimaryKey = e_item[_this_PrimaryKey];
 
 
-                _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;
-                _this.SelectedItem = e_item;
-                _this.SelectedKey = e_item_PrimaryKey;
-                if (_this.OnRowDoubleClicked != null)
-                    _this.OnRowDoubleClicked();
-
-                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;"></i>');
+             
+                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
 
                 setTimeout(function () {
             
-            
+                    _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;
+                    _this.SelectedItem = e_item;
+                    _this.SelectedKey = e_item_PrimaryKey;
+                    if (_this.OnRowDoubleClicked != null)
+                        _this.OnRowDoubleClicked();
+
 
                     if ($("#Mod_Flag").val() != 1) {
                         $('#icon-bar').removeClass('display_none');

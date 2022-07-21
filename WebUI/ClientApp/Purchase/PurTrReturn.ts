@@ -152,8 +152,10 @@ namespace PurTrReturn {
         $('#ddlReturnType').prop("value", 2);
         GetAllIItem();
         txtStartDate.value = DateStartMonth();
-        txtEndDate.value =   ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
+
+        btnShow_onclick();
         $('#btnPrint').addClass('display_none');
     }
     function IntializeEvents() { 
@@ -1844,6 +1846,7 @@ namespace PurTrReturn {
                     btnBack_onclick();
                     btnShow_onclick();
                     Display_Grid(res.ReceiveID);
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                     flag_Insert = 0;
@@ -2030,6 +2033,7 @@ namespace PurTrReturn {
                     flag_Insert = 1;
                     btnShow_onclick();
                     Display_Grid(res.ReceiveID);
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطـأ", '(Error)', MessageType.Error);
                     flag_Insert = 0;

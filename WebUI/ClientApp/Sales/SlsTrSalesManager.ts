@@ -1054,6 +1054,7 @@ namespace SlsTrSalesManager {
             $("#ddlFamily" + i).removeAttr("disabled");
             $("#ddlItem" + i).removeAttr("disabled");
             $("#txtQuantity" + i).removeAttr("disabled");
+            $("#btnSearchItems" + i).removeAttr("disabled");
             if (flag_PriceWithVAT == true) {
 
                 $("#txtUnitpriceWithVat" + i).removeAttr("disabled");
@@ -1674,7 +1675,7 @@ namespace SlsTrSalesManager {
 	                </th>
                      <th>
 		                <div class="form-group">
-			                <button type="button" class="style_ButSearch" id="btnSearchItems{cnt}">
+			                <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" disabled>
                             <i class="fa fa-search  "></i>
                              </button>
 
@@ -1947,32 +1948,107 @@ namespace SlsTrSalesManager {
         //script
 
         $('#btnSearchItems' + cnt).click(function (e) {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
             let sys: SystemTools = new SystemTools();
 
             var storeId = Number(ddlStore.value);//and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
-            sys.FindKey(Modules.IssueToCC, "btnSearchItems", "StoreId=" + storeId + " and IsStock = 1 and FinYear = " + FinYear, () => {
+            let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsStock = 1 and FinYear = " + FinYear;
+
+            sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
 
-                var res = false;
                 debugger
-                //var NumberRowid = Number($("#txtSerial" + cnt).val());
-                //res = checkRepeatedItems(id, NumberRowid);
-                if (res == false) {
 
-                    ItemDetails = ItemFamilyDetails.filter(x => x.ItemID == id );
+                ItemDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
-                } else {
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف )', 'The same items cannot be repeated ', MessageType.Error);
-                    $('#ItemID' + cnt).val("");
-                    $('#txtCode' + cnt).val("");
-                    Errorinput(('#txtCode' + cnt));
-                    $('#txtItemName' + cnt).val("");
-                    $('#txtUnitID' + cnt).val("");
-                    $('#txtUnitName' + cnt).val("");
-                    $('#txtQTY' + cnt).val("");
-                    $('#txtDetailID' + cnt).val("");
+                //$('#ddlFamily' + cnt).val(ItemDetails[0].ItemFamilyID);
+
+                $('#ddlFamily' + cnt + ' option[value=' + ItemDetails[0].ItemFamilyID+']').prop('selected', 'selected').change();
+
+
+                let searchItemID = ItemDetails[0].ItemID;
+
+                var selectedFamily = $('#ddlFamily' + cnt + '  option:selected').attr('value');
+                FillddlItem(Number(selectedFamily));
+                $('#ddlItem' + cnt).empty();
+                $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
+                for (var i = 0; i < ItemDetails.length; i++) {
+                    //$('#ddlItem' + cnt).append('<option value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
+                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemDetails[i].MinUnitPrice + '"data-UomID="' + ItemDetails[i].UomID + '" data-OnhandQty="' + ItemDetails[i].OnhandQty + '" value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
                 }
+                $("#txtQuantity" + cnt).val("1");
+                $("#txtPrice" + cnt).val("1");
+                $("#txtUnitpriceWithVat" + cnt).val("1");
+                $("#txtTotal" + cnt).val("0");
+                $("#txtTax" + cnt).val("0");
+                $("#txtTotAfterTax" + cnt).val("0");
+
+                $('#ddlItem' + cnt).val(searchItemID);
+
+                var selectedItem = $('#ddlItem' + cnt).val();
+                var selectedFamily = $(drop + ' option:selected').attr('value');
+                //
+                var itemID = Number(selectedItem);
+                var FamilyID = Number(selectedFamily);
+                var NumberSelect: Array<IQ_GetItemStoreInfo> = ItemDetails.filter(s => s.ItemID == itemID);
+
+                //var res = false;
+                //res = checkRepeatedItems(itemID, FamilyID, cnt);
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    $("#txtPrice" + cnt).val("1");
+                //    $("#txtUnitpriceWithVat" + cnt).val("1");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', '(Error)', MessageType.Error);
+                //} else {
+                if (NumberSelect.length > 0) {
+                    debugger
+
+                    if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
+                        $("#UnitCost" + cnt).prop("value", NumberSelect[0].GlobalCost);
+                    }
+                    else {
+                        $("#UnitCost" + cnt).prop("value", NumberSelect[0].LocalCost);
+                    }
+
+
+
+                    let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NumberSelect[0].UnitPrice, VatPrc, flag_PriceWithVAT);
+
+                    var itemPrice = GetUnitprice.unitprice;
+
+                    $("#txtPrice" + cnt).val(itemPrice);
+                    $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
+                    //
+                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                    var txtPriceValue = $("#txtPrice" + cnt).val();
+                    if ($("#txtPrice" + cnt).val() == 0) {
+                        $('#txtTax_Rate' + cnt).val(Tax_Rate);
+
+                        var total = Number(txtQuantityValue.RoundToSt(2)) * 1;
+                        $("#txtTotal" + cnt).val(total.RoundToSt(2));
+                        VatPrc = $("#txtTax_Rate" + cnt).val();
+                        var vatAmount = Number(total) * VatPrc / 100;
+                        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                        var totalAfterVat = Number(vatAmount) + Number(total);
+                        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                    } else {
+                        $('#txtTax_Rate' + cnt).val(Tax_Rate);
+                        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                        $("#txtTotal" + cnt).val(total.RoundToSt(2));
+                        VatPrc = $("#txtTax_Rate" + cnt).val();
+                        var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                        var totalAfterVat = Number(vatAmount) + Number(total);
+                        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                    }
+                }
+
+                ComputeTotals();
+
+
             });
         });
          
@@ -2441,6 +2517,7 @@ namespace SlsTrSalesManager {
             $("#ddlItem" + CountGrid).removeAttr("disabled");
             $("#txtQuantity" + CountGrid).removeAttr("disabled");
             $("#txtPrice" + CountGrid).removeAttr("disabled");
+            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
 
             $("#txtReturnQuantity" + CountGrid).attr("disabled", "disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");

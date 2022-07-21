@@ -651,7 +651,8 @@
             $('#btnPrintslip').addClass('display_none');
             $('#btnPrintTransaction').addClass('display_none');
 
-
+            setTimeout(function () { document.body.scrollTop = 600; document.documentElement.scrollTop = 600; }, 300);
+             
         });
 
         $("#btnBack").click(function () {
@@ -732,7 +733,7 @@
 
     </script>
 
-
+    <script src="~/Style_design/LodBut/Loder.js"></script>
 
 </body>
 </html>

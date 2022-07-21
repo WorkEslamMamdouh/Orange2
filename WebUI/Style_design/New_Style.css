@@ -16,6 +16,13 @@
 
 
 
+
+.text_Mandatory {
+    background-color: #f39c9c !important;
+}
+ 
+
+
 .li3:active{
     background-color:#edce17;
     color:black

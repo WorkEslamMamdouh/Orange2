@@ -58,7 +58,7 @@ var Modules = {
     ItemPurchase: "ItemPurchase",
     IssueType: "IssueType",
     IssueToCC: "IssueToCC",
-     
+
     Dashboard: "Dashboard",
 
     JournalVoucher: "JournalVoucher",
@@ -610,6 +610,14 @@ function OpenPartial(ModuleCode: string, DivName: string) {
 }
 function loading(NameBtn: string) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
+
+    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+
+    setTimeout(function () {
+         
+            $('#Loading_Div').html('');
+    }, 150);
+
 }
 function finishSave(NameBtn: string) {
     setTimeout(function () {
@@ -1376,14 +1384,15 @@ function DisplayMassage(msg_Ar: string, msg_En: string, msg_type: string, OnOk?:
     else
         $('#Text_Massage').html(msg_Ar);
     $('#DivMassage').removeClass("display_none");
-    if (msg_type == '1') { 
-        $('#DivMassage .alert-message').addClass("bg-success");
+    if (msg_type == '1') {
+        
+        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-success");
     }
-    else if (msg_type == '2') { 
-        $('#DivMassage .alert-message').addClass("bg-danger");
+    else if (msg_type == '2') {
+        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-danger");
     }
     else if (msg_type == '3') {
-        $('#DivMassage .alert-message').addClass("bg-orange");
+        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-orange");
     }
     setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
 }
@@ -1425,6 +1434,8 @@ function DisplayMassage_Processes(msg_Ar: string, msg_En: string, msg_type: stri
 
 function Errorinput(input: any) {
 
+    debugger
+    var id = '';
     if (input.selector != null) {
 
         $('' + input.selector + '').addClass('text_Mandatory');
@@ -1432,9 +1443,24 @@ function Errorinput(input: any) {
         setTimeout(function () { $('' + input.selector + '').removeClass('text_Mandatory'); }, 5000);
     }
     else {
-        input.classList.add('text_Mandatory');
-        input.focus();
-        setTimeout(function () { input.classList.remove('text_Mandatory'); }, 5000);
+
+        try {
+
+            id = input.getAttribute('id');
+        } catch (e) {
+
+            id = input[0].id;
+        }
+
+
+        $('#' + id + '').addClass('text_Mandatory');
+        $('#' + id + '').focus();
+        setTimeout(function () { $('#' + id + '').removeClass('text_Mandatory'); }, 5000);
+
+        $('#select2-' + id + '-container').addClass('text_Mandatory');
+        $('#select2-' + id + '-container').focus();
+        setTimeout(function () { $('#select2-' + id + '-container').removeClass('text_Mandatory'); }, 5000);
+
     }
 
 }
@@ -1922,7 +1948,7 @@ function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
                                 res = false
                             }
 
-                        } 
+                        }
 
                     }
                 }

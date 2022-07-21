@@ -434,8 +434,6 @@ namespace PurOrder {
             Update();
         }
                                                             
-        $("#btnPrintTransaction").removeClass("display_none");
-
     }, 100);
     }
     function addFunc() {
@@ -1434,7 +1432,9 @@ namespace PurOrder {
                     GlobalPurOrderID = res.PurOrderID;
                     InitializeGrid();
                     BindAfterInsertorUpdate();
-                  
+
+                    $("#btnPrintTransaction").removeClass("display_none");
+                    Save_Succ_But();
                 } else {
 
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);
@@ -1470,6 +1470,9 @@ namespace PurOrder {
                     GlobalPurOrderID = res.PurOrderID;
                     InitializeGrid();
                     BindAfterInsertorUpdate();
+
+                    $("#btnPrintTransaction").removeClass("display_none");
+                    Save_Succ_But();
                 } else {
 
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);

@@ -328,8 +328,14 @@ var PurTrReceive;
             btnUpdate.disabled = false;
         }
         VatPrc = VatDetails.filter(function (x) { return x.CODE == RetrivedPurchaseModel[0].VATType; })[0].VatPerc;
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
+        txtNotes.disabled = true;
+        ddlCashBoxH.disabled = true;
+        txtDateHeader.disabled = true;
+        txtPurOrderNum.disabled = true;
+        btnVendorSearch.disabled = true;
+        btnPurOrderSearch.disabled = true;
     }
     function DataHeader() {
         if (RetrivedPurchaseModel.length > 0) {
@@ -2126,14 +2132,15 @@ var PurTrReceive;
         return true;
     }
     function EnableControls() {
+        debugger;
         $("#divDetails").removeClass("display_none");
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#divTotalSatistics").removeClass("display_none");
         $("#DivFilter").addClass("disabledDiv");
         $("#divIconbar").addClass("disabledIconbar");
         $("#divMasterGridiv").addClass("disabledDiv");
-        $("#rowData :input").removeAttr("disabled");
+        $("#divDetails :input").removeAttr("disabled");
         $("#divTotalSatistics :input").attr("disabled", "disabled");
         $("#btnAddDetails").removeClass("display_none");
         $("#btnAddDetailsCharge").removeClass("display_none");
@@ -2173,18 +2180,16 @@ var PurTrReceive;
         $("#txtCreatedBy").prop("disabled", "disabled");
         $("#txtUpdatedAt").prop("disabled", "disabled");
         $("#txtUpdatedBy").prop("disabled", "disabled");
-        if (true) {
-        }
     }
     function DisableControls() {
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
         $("#divTotalSatistics").removeClass("display_none");
         $("#DivFilter").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
-        $("#rowData :input").attr("disabled", "disabled");
+        $("#divDetails :input").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetailsCharge").addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
@@ -2214,6 +2219,12 @@ var PurTrReceive;
             $("#btn_minus1" + i).addClass("display_none");
             $("#btn_minus1" + i).removeAttr("disabled");
         }
+        txtNotes.disabled = true;
+        ddlCashBoxH.disabled = true;
+        txtDateHeader.disabled = true;
+        txtPurOrderNum.disabled = true;
+        btnVendorSearch.disabled = true;
+        btnPurOrderSearch.disabled = true;
     }
     //---------------------------------------------------------------- main functions  region----------------------------------------------------
     function Assign() {
@@ -2420,6 +2431,7 @@ var PurTrReceive;
                     //    chkActive.disabled = true;
                     //    btnUpdate.disabled = false;
                     //}
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);
@@ -2459,6 +2471,7 @@ var PurTrReceive;
                     //    chkActive.disabled = true;
                     //    btnUpdate.disabled = false;
                     //}
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);
@@ -2471,7 +2484,7 @@ var PurTrReceive;
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
-        DisableControls();
+        //DisableControls();
         clear();
         $("#divDetails").addClass("display_none");
         ShowFlag = true;
@@ -2502,7 +2515,7 @@ var PurTrReceive;
             btnUpdate.disabled = false;
         }
         VatPrc = VatDetails.filter(function (x) { return x.CODE == RetrivedPurchaseModel[0].VATType; })[0].VatPerc;
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");

@@ -358,8 +358,15 @@ namespace PurTrReceive {
         }
         VatPrc = VatDetails.filter(x => x.CODE == RetrivedPurchaseModel[0].VATType)[0].VatPerc;
 
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
+
+        txtNotes.disabled = true;
+        ddlCashBoxH.disabled = true;
+        txtDateHeader.disabled = true;
+        txtPurOrderNum.disabled = true;
+        btnVendorSearch.disabled = true;
+        btnPurOrderSearch.disabled = true;
  
     }
     function DataHeader() {
@@ -1142,7 +1149,7 @@ namespace PurTrReceive {
         }
         PurOrderDetailModel = new IQ_PurchaseOrderWithDetail();
     } 
-    function getVendorByID() {
+    function getVendorByID() { 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefVendor", "GetById"),
@@ -1153,8 +1160,9 @@ namespace PurTrReceive {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     VendorModel = new A_Pay_D_Vendor();
-                    VendorModel = result.Response as A_Pay_D_Vendor;
+                    VendorModel = result.Response as A_Pay_D_Vendor; 
                     txtVendorName.value = (lang == "ar" ? VendorModel.NAMEA : VendorModel.NAMEL);
+                     
                     vatpriceVendor = VendorModel.VATType;
                     ddlTaxTypeHeader.value = VendorModel.VATType.toString();
                   
@@ -2588,9 +2596,10 @@ namespace PurTrReceive {
         return true;
 
     }
-    function EnableControls() {
+    function EnableControls() { 
+        debugger
         $("#divDetails").removeClass("display_none");
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         $("#divTotalSatistics").removeClass("display_none");
 
@@ -2598,7 +2607,7 @@ namespace PurTrReceive {
         $("#divIconbar").addClass("disabledIconbar");
         $("#divMasterGridiv").addClass("disabledDiv");
 
-        $("#rowData :input").removeAttr("disabled");
+        $("#divDetails :input").removeAttr("disabled");
         $("#divTotalSatistics :input").attr("disabled", "disabled");
 
         $("#btnAddDetails").removeClass("display_none");
@@ -2648,12 +2657,10 @@ namespace PurTrReceive {
         $("#txtCreatedBy").prop("disabled", "disabled");
         $("#txtUpdatedAt").prop("disabled", "disabled");
         $("#txtUpdatedBy").prop("disabled", "disabled");
-        if (true) {
-            
-        }
+     
     }
     function DisableControls() {
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
 
         $("#divDetails").removeClass("display_none");
@@ -2663,7 +2670,7 @@ namespace PurTrReceive {
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
 
-        $("#rowData :input").attr("disabled", "disabled");
+        $("#divDetails :input").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetailsCharge").addClass("display_none");
 
@@ -2702,6 +2709,13 @@ namespace PurTrReceive {
             $("#btn_minus1" + i).removeAttr("disabled");
 
         }
+
+        txtNotes.disabled = true;
+        ddlCashBoxH.disabled = true;
+        txtDateHeader.disabled = true;
+        txtPurOrderNum.disabled = true;
+        btnVendorSearch.disabled = true;
+        btnPurOrderSearch.disabled = true;
 
     }
     //---------------------------------------------------------------- main functions  region----------------------------------------------------
@@ -2913,6 +2927,7 @@ namespace PurTrReceive {
                     //    chkActive.disabled = true;
                     //    btnUpdate.disabled = false;
                     //}
+                    Save_Succ_But();
                 } else {
 
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);
@@ -2959,6 +2974,7 @@ namespace PurTrReceive {
                     //    chkActive.disabled = true;
                     //    btnUpdate.disabled = false;
                     //}
+                    Save_Succ_But();
                 } else {
 
                     DisplayMassage(" هناك خطـأ  ", "Error", MessageType.Error);
@@ -2974,7 +2990,7 @@ namespace PurTrReceive {
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("display_none");
-        DisableControls();
+        //DisableControls();
         clear();
         $("#divDetails").addClass("display_none");
 
@@ -3010,11 +3026,13 @@ namespace PurTrReceive {
         }
         VatPrc = VatDetails.filter(x => x.CODE == RetrivedPurchaseModel[0].VATType)[0].VatPerc;
 
-        $("#rowData").removeClass("display_none");
+        $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
 
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+
+  
     }
 
     function openInvoice() {
@@ -3065,6 +3083,8 @@ namespace PurTrReceive {
                 }
             }
         });
+
+    
     }
     function BindAfterInsertorUpdate(receiveid: number) {
         debugger

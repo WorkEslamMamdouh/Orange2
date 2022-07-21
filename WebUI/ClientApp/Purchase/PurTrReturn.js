@@ -140,6 +140,7 @@ var PurTrReturn;
         GetAllIItem();
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        btnShow_onclick();
         $('#btnPrint').addClass('display_none');
     }
     PurTrReturn.InitalizeComponent = InitalizeComponent;
@@ -1731,6 +1732,7 @@ var PurTrReturn;
                     btnBack_onclick();
                     btnShow_onclick();
                     Display_Grid(res.ReceiveID);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -1919,6 +1921,7 @@ var PurTrReturn;
                     flag_Insert = 1;
                     btnShow_onclick();
                     Display_Grid(res.ReceiveID);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("هناك خطـأ", '(Error)', MessageType.Error);

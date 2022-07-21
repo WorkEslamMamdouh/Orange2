@@ -24986,6 +24986,13 @@ div.tagsinput {
         font-size: 20px;
     }
 
+
+
+.text_Mandatory {
+    background-color: #f39c9c !important;
+}
+ 
+
 /* Tables */
 .table, .jsgrid .jsgrid-table {
     margin-bottom: 0;
