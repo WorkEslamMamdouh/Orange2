@@ -64,11 +64,11 @@ namespace AccTrVendorAdjust {
     var btnPrintTransaction: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
     //----------------------------------------------------------------
-    var btnback: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
     var chkActive: HTMLInputElement;
 
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
@@ -205,9 +205,9 @@ namespace AccTrVendorAdjust {
 
     function Displaymode() {
 
-        //$('#btnsave').attr('class', 'btn btn-success display_none');
-        //$('#btnback').attr('class', 'btn btn-success display_none');
-        //$('#btnedite').attr('class', 'btn btn-primary');
+        //$('#btnSave').attr('class', 'btn btn-success display_none');
+        //$('#btnBack').attr('class', 'btn btn-success display_none');
+        //$('#btnUpdate').attr('class', 'btn btn-primary');
         //$('#btnAdd').attr('class', 'btn btn-primary');
         ////$("#divnotifications :input").prop("disabled", false);
         //btnAdd.disabled = !SysSession.CurrentPrivileges.AddNew
@@ -219,10 +219,10 @@ namespace AccTrVendorAdjust {
 
         if (!EDIT) {
 
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
+            $('#btnUpdate').attr('class', 'btn btn-primary display_none');
             $('#btnPrintTransaction').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnSave').attr('class', 'btn btn-success display_none');
+            $('#btnBack').attr('class', 'btn btn-success display_none');
 
         }
         //if (!AddNew) { $('#btnAdd').attr('class', 'btn btn-primary display_none'); }
@@ -236,9 +236,9 @@ namespace AccTrVendorAdjust {
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
 
 
 
@@ -291,8 +291,8 @@ namespace AccTrVendorAdjust {
 
         btnShow.onclick = Display;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
         btnEdit.onclick = btnEdit_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         chkActive.onchange = chkStatus_onchange;
@@ -361,10 +361,10 @@ namespace AccTrVendorAdjust {
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').removeClass("display_none");
-            $('#btnback').removeClass("display_none");
+            $('#btnSave').removeClass("display_none");
+            $('#btnBack').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#btnPrintTransaction").addClass("display_none");
 
             $("#txt_CODE").attr("disabled", "disabled");
@@ -373,17 +373,20 @@ namespace AccTrVendorAdjust {
             //$("#txt_Type_of_tax").attr("disabled", "disabled");
 
             $("#id_div_Add").attr("disabled", "disabled").off('click');
+            $("#id_ReportGrid").attr("disabled", "disabled").off('click');
             var x1 = $("#id_div_Add").hasClass("disabledDiv");
+            var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
 
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+            (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
 
         }
         else {
-            $('#btnsave').addClass("display_none");
-            $('#btnback').addClass("display_none");
+            $('#btnSave').addClass("display_none");
+            $('#btnBack').addClass("display_none");
 
             $("#btnPrintTransaction").removeClass("display_none");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -416,9 +419,12 @@ namespace AccTrVendorAdjust {
         //txt_Settlement_typeNew.setAttribute("disabled", "disabled");
 
         $("#id_div_Add").attr("disabled", "disabled").off('click');
+        $("#id_ReportGrid").attr("disabled", "disabled").off('click');
         var x1 = $("#id_div_Add").hasClass("disabledDiv");
+        var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
 
         (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+        (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
 
         reference_Page();
         chkActive.checked = false;
@@ -427,11 +433,11 @@ namespace AccTrVendorAdjust {
     }
 
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
         if (IsNew == true) {
 
             Validation();
@@ -599,17 +605,19 @@ namespace AccTrVendorAdjust {
     function btnback_onclick() {
 
         $('#btnAddDetails').addClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeAttr("disabled");
         $("#btnPrintTransaction").removeAttr("disabled");
         $("#drp_G_Store").removeAttr("disabled");
         txt_disabled();
         $("#id_div_Add").attr("disabled", "");
         $("#id_div_Add").removeClass("disabledDiv");
+        $("#id_ReportGrid").attr("disabled", "");
+        $("#id_ReportGrid").removeClass("disabledDiv");
         EDIT = SysSession.CurrentPrivileges.EDIT;
         AddNew = SysSession.CurrentPrivileges.AddNew;
         CUSTOM1 = SysSession.CurrentPrivileges.CUSTOM1;
@@ -670,11 +678,11 @@ namespace AccTrVendorAdjust {
         reference_Page(); 
 
         $('#Div_control').removeClass("display_none");
-        $('#btnedite').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $('#btnPrintTransaction').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         $('#btnPrintTransaction').removeAttr("disabled");
 
         if (Selecteditem[0].Status == 1) {
@@ -848,9 +856,9 @@ namespace AccTrVendorAdjust {
     function EnableControls() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
  
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
 
         $('#txt_Movement_typeNew').prop("selectedIndex", 0);
@@ -976,7 +984,7 @@ namespace AccTrVendorAdjust {
     function InitializeGrid() {
 
         let res: any = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $("#id_ReportGrid").removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "AdjustmentID";
@@ -1145,11 +1153,11 @@ namespace AccTrVendorAdjust {
         reference_Page();
 
         $('#Div_control').removeClass("display_none");
-        $('#btnedite').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $('#btnPrintTransaction').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         $('#btnPrintTransaction').removeAttr("disabled");
 
         if (Selecteditem[0].Status == 1) {

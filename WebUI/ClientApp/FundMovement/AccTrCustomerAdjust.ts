@@ -352,9 +352,12 @@ namespace AccTrCustomerAdjust {
             //$("#txt_Type_of_tax").attr("disabled", "disabled");
 
             $("#id_div_Add").attr("disabled", "disabled").off('click');
+            $("#id_ReportGrid").attr("disabled", "disabled").off('click');
             var x1 = $("#id_div_Add").hasClass("disabledDiv");
+            var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
 
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+            (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
 
         }
         else {
@@ -395,9 +398,12 @@ namespace AccTrCustomerAdjust {
         //txt_Settlement_typeNew.setAttribute("disabled", "disabled");
 
         $("#id_div_Add").attr("disabled", "disabled").off('click');
+        $("#id_ReportGrid").attr("disabled", "disabled").off('click');
         var x1 = $("#id_div_Add").hasClass("disabledDiv");
+        var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
 
         (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+        (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
 
         reference_Page();
         chkActive.checked = false;
@@ -458,6 +464,8 @@ namespace AccTrCustomerAdjust {
         txt_disabled();
         $("#id_div_Add").attr("disabled", "");
         $("#id_div_Add").removeClass("disabledDiv");
+        $("#id_ReportGrid").attr("disabled", "");
+        $("#id_ReportGrid").removeClass("disabledDiv");
         EDIT = SysSession.CurrentPrivileges.EDIT;
         AddNew = SysSession.CurrentPrivileges.AddNew;
         CUSTOM1 = SysSession.CurrentPrivileges.CUSTOM1;
