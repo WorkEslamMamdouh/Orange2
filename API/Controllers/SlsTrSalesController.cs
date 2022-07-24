@@ -207,7 +207,9 @@ namespace Inv.API.Controllers
                                obj.I_Sls_TR_Invoice.TrNo=int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
-                            return Ok(new BaseResponse(obj.I_Sls_TR_Invoice));
+
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -399,7 +401,9 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj.I_Sls_TR_Invoice));
+
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -443,8 +447,9 @@ namespace Inv.API.Controllers
                         if (result.ResponseState == true)
                         {
                             //Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
-                            dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj.I_Sls_TR_Invoice));
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
+                        
                         }
                         else
                         {

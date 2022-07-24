@@ -5349,5 +5349,63 @@ namespace Inv.DAL.Domain
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_ItemPurchaseSum_Result>("IProc_Rpt_ItemPurchaseSum", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, vendoridParameter, payTypeParameter, groupTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, statusParameter, fromDateParameter, todateParameter, invTypeParameter);
         }
+    
+        public virtual int IProc_GetLastPurchasePrice(Nullable<int> comp, Nullable<int> bra, Nullable<int> itemid, Nullable<int> vendorid, Nullable<int> storeid, Nullable<int> invid, ObjectParameter vndLastPrice, ObjectParameter vndLastTr, ObjectParameter vndLastDate, ObjectParameter lastPurchase, ObjectParameter curcost)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var itemidParameter = itemid.HasValue ?
+                new ObjectParameter("itemid", itemid) :
+                new ObjectParameter("itemid", typeof(int));
+    
+            var vendoridParameter = vendorid.HasValue ?
+                new ObjectParameter("vendorid", vendorid) :
+                new ObjectParameter("vendorid", typeof(int));
+    
+            var storeidParameter = storeid.HasValue ?
+                new ObjectParameter("storeid", storeid) :
+                new ObjectParameter("storeid", typeof(int));
+    
+            var invidParameter = invid.HasValue ?
+                new ObjectParameter("invid", invid) :
+                new ObjectParameter("invid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("IProc_GetLastPurchasePrice", compParameter, braParameter, itemidParameter, vendoridParameter, storeidParameter, invidParameter, vndLastPrice, vndLastTr, vndLastDate, lastPurchase, curcost);
+        }
+    
+        public virtual int IProc_GetLastSalePrice(Nullable<int> comp, Nullable<int> bra, Nullable<int> itemid, Nullable<int> customerid, Nullable<int> storeid, Nullable<int> invid, ObjectParameter custLastPrice, ObjectParameter custLastTr, ObjectParameter custLastDate, ObjectParameter lastPrice, ObjectParameter lastPurchase, ObjectParameter curcost)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var itemidParameter = itemid.HasValue ?
+                new ObjectParameter("itemid", itemid) :
+                new ObjectParameter("itemid", typeof(int));
+    
+            var customeridParameter = customerid.HasValue ?
+                new ObjectParameter("customerid", customerid) :
+                new ObjectParameter("customerid", typeof(int));
+    
+            var storeidParameter = storeid.HasValue ?
+                new ObjectParameter("storeid", storeid) :
+                new ObjectParameter("storeid", typeof(int));
+    
+            var invidParameter = invid.HasValue ?
+                new ObjectParameter("invid", invid) :
+                new ObjectParameter("invid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("IProc_GetLastSalePrice", compParameter, braParameter, itemidParameter, customeridParameter, storeidParameter, invidParameter, custLastPrice, custLastTr, custLastDate, lastPrice, lastPurchase, curcost);
+        }
     }
 }

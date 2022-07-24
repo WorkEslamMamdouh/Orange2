@@ -6094,6 +6094,33 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="itemid" Type="int" Mode="In" />
           <Parameter Name="OK" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="IProc_GetLastPurchasePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="itemid" Type="int" Mode="In" />
+          <Parameter Name="vendorid" Type="int" Mode="In" />
+          <Parameter Name="storeid" Type="int" Mode="In" />
+          <Parameter Name="invid" Type="int" Mode="In" />
+          <Parameter Name="VndLastPrice" Type="numeric" Mode="InOut" />
+          <Parameter Name="VndLastTr" Type="int" Mode="InOut" />
+          <Parameter Name="VndLastDate" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="LastPurchase" Type="numeric" Mode="InOut" />
+          <Parameter Name="Curcost" Type="numeric" Mode="InOut" />
+        </Function>
+        <Function Name="IProc_GetLastSalePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="itemid" Type="int" Mode="In" />
+          <Parameter Name="customerid" Type="int" Mode="In" />
+          <Parameter Name="storeid" Type="int" Mode="In" />
+          <Parameter Name="invid" Type="int" Mode="In" />
+          <Parameter Name="CustLastPrice" Type="numeric" Mode="InOut" />
+          <Parameter Name="CustLastTr" Type="int" Mode="InOut" />
+          <Parameter Name="custLastDate" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="LastPrice" Type="numeric" Mode="InOut" />
+          <Parameter Name="LastPurchase" Type="numeric" Mode="InOut" />
+          <Parameter Name="Curcost" Type="numeric" Mode="InOut" />
+        </Function>
         <Function Name="IProc_Prnt_AccAdjust" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
           <Parameter Name="bra" Type="int" Mode="In" />
@@ -11330,6 +11357,33 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="FromDate" Mode="In" Type="String" />
             <Parameter Name="Todate" Mode="In" Type="String" />
             <Parameter Name="invType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_GetLastPurchasePrice">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="itemid" Mode="In" Type="Int32" />
+            <Parameter Name="vendorid" Mode="In" Type="Int32" />
+            <Parameter Name="storeid" Mode="In" Type="Int32" />
+            <Parameter Name="invid" Mode="In" Type="Int32" />
+            <Parameter Name="VndLastPrice" Mode="InOut" Type="Decimal" />
+            <Parameter Name="VndLastTr" Mode="InOut" Type="Int32" />
+            <Parameter Name="VndLastDate" Mode="InOut" Type="String" />
+            <Parameter Name="LastPurchase" Mode="InOut" Type="Decimal" />
+            <Parameter Name="Curcost" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_GetLastSalePrice">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="itemid" Mode="In" Type="Int32" />
+            <Parameter Name="customerid" Mode="In" Type="Int32" />
+            <Parameter Name="storeid" Mode="In" Type="Int32" />
+            <Parameter Name="invid" Mode="In" Type="Int32" />
+            <Parameter Name="CustLastPrice" Mode="InOut" Type="Decimal" />
+            <Parameter Name="CustLastTr" Mode="InOut" Type="Int32" />
+            <Parameter Name="custLastDate" Mode="InOut" Type="String" />
+            <Parameter Name="LastPrice" Mode="InOut" Type="Decimal" />
+            <Parameter Name="LastPurchase" Mode="InOut" Type="Decimal" />
+            <Parameter Name="Curcost" Mode="InOut" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -31889,6 +31943,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_GetLastPurchasePrice" FunctionName="InvModel.Store.IProc_GetLastPurchasePrice" />
+          <FunctionImportMapping FunctionImportName="IProc_GetLastSalePrice" FunctionName="InvModel.Store.IProc_GetLastSalePrice" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
