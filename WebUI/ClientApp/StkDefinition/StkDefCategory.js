@@ -22,9 +22,9 @@ var StkDefCategory;
     var AccountDetail = new Array();
     //-------------------------------------------------------------------*** B U T T O N S ***--------------------------       
     var btnAdd;
-    var btnback;
-    var btnsave;
-    var btnedite;
+    var btnBack;
+    var btnSave;
+    var btnUpdate;
     //-------------------------------------------------------------------*** I N P U T S ***--------------------------    
     var searchbutmemreport;
     var txtCatCode;
@@ -67,6 +67,10 @@ var StkDefCategory;
         else {
             document.getElementById('Screen_name').innerHTML = "Item Category";
         }
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         branchcode = Number(SysSession.CurrentEnvironment.BranchCode);
         FIN_YEAR = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -83,9 +87,9 @@ var StkDefCategory;
     function InitalizeControls() {
         //-------------------------------------------------------------------*** B U T T O N S ***--------------------------     
         btnAdd = document.getElementById("btnAdd");
-        btnedite = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnUpdate = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         //-------------------------------------------------------------------*** I N P U T S ***--------------------------    
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtCatCode = document.getElementById("txtCatCode");
@@ -118,9 +122,9 @@ var StkDefCategory;
         DivGrid = document.getElementById("DivGrid");
     }
     function InitalizeEvents() {
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
+        btnUpdate.onclick = btnedite_onclick;
         DrpItemType.onchange = DrpItemType_onchange;
         TxtItemType.onchange = TxtItemType_onchange;
         btnAdd.onclick = btnAdd_onclick;
@@ -210,9 +214,9 @@ var StkDefCategory;
         }
     }
     function DrpItemType_onchange() {
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");
         DivDetails.classList.add("display_none");
         if (DrpItemType.value == "null") {
             Grid.DataSource = Details;
@@ -317,9 +321,9 @@ var StkDefCategory;
         Isnew = false;
         EnabledInput();
         validationEnabel();
-        btnedite.classList.add("display_none");
-        btnback.classList.remove("display_none");
-        btnsave.classList.remove("display_none");
+        btnUpdate.classList.add("display_none");
+        btnBack.classList.remove("display_none");
+        btnSave.classList.remove("display_none");
         btnAdd.setAttribute("disabled", "disabled");
         DivDetails.classList.remove("display_none");
         DrpItemType.setAttribute("disabled", "disabled");
@@ -329,9 +333,9 @@ var StkDefCategory;
     }
     function btnback_onclick() {
         DisabledInput();
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");
@@ -348,9 +352,9 @@ var StkDefCategory;
         Isnew = true;
         Clear();
         EnabledInput();
-        btnedite.classList.add("display_none");
-        btnback.classList.remove("display_none");
-        btnsave.classList.remove("display_none");
+        btnUpdate.classList.add("display_none");
+        btnBack.classList.remove("display_none");
+        btnSave.classList.remove("display_none");
         DivDetails.classList.remove("display_none");
         DrpItemType.setAttribute("disabled", "disabled");
         searchbutmemreport.setAttribute("disabled", "disabled");
@@ -359,9 +363,9 @@ var StkDefCategory;
         TxtItemType_onchange();
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             Assign();
             if (Isnew == true) {
                 Insert();
@@ -435,9 +439,9 @@ var StkDefCategory;
             MessageBox.Show("Done", "");
         }
         DisabledInput();
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");

@@ -46,11 +46,11 @@ var AccTrReceiptNote;
     var txt_CashAmount;
     var txt_CardAmount;
     var txt_ReceiptDesc;
-    var btnback;
+    var btnBack;
     var btnShow;
     var btnAdd;
-    var btnEdit;
-    var btnsave;
+    var btnUpdate;
+    var btnSave;
     var chkActive;
     var chkIsDeffered;
     ////////////////////////////////////////////donia 
@@ -99,7 +99,7 @@ var AccTrReceiptNote;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
-    var btnPrint;
+    //var btnPrint: HTMLButtonElement;
     var btnPrintslip;
     //-----------------------------------------------------------------------------
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
@@ -158,9 +158,9 @@ var AccTrReceiptNote;
         //////// 
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnUpdate = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         //textBoxes
         txt_CODE = document.getElementById("txt_CODE");
         txt_ReceiptNote = document.getElementById("txt_ReceiptNote");
@@ -191,7 +191,7 @@ var AccTrReceiptNote;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
-        btnPrint = document.getElementById("btnPrint");
+        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip");
         //////////////////////////////donia
         btnBen = document.getElementById("btnBen");
@@ -205,9 +205,9 @@ var AccTrReceiptNote;
         ////// 
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         chkActive.onchange = chkStatus_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
@@ -223,7 +223,7 @@ var AccTrReceiptNote;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         //btnPrintslip. = btnPrintslip;
         btnPrintslip.onclick = btnPrintslip_onclick;
@@ -260,7 +260,7 @@ var AccTrReceiptNote;
     }
     function chkIsDeffered_onchange() {
         if (chkIsDeffered.checked == true) {
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
         }
         else {
             $('#txtDueDate').attr('disabled', 'disabled');
@@ -290,7 +290,7 @@ var AccTrReceiptNote;
             $('#txt_CheckNo').addClass('display_none');
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
         }
         else {
             $('#Bank_Div').removeClass('display_none');
@@ -302,7 +302,7 @@ var AccTrReceiptNote;
             $('#txt_CheckNo').removeClass('display_none');
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
-            $('#btnedite').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
         }
         chkIsDeffered_onchange();
     }
@@ -338,14 +338,14 @@ var AccTrReceiptNote;
                     ReceiptID = Selecteditem[0].ReceiptID;
                     if (Selecteditem[0].Status == 1) {
                         chkActive.checked = true;
-                        btnEdit.disabled = true;
+                        btnUpdate.disabled = true;
                         chkActive.disabled = false;
                         chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
                     }
                     else {
                         chkActive.checked = false;
                         chkActive.disabled = true;
-                        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
                     }
                 }
             }
@@ -378,9 +378,9 @@ var AccTrReceiptNote;
     function reference_Page() {
         // 
         if (!EDIT) {
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnUpdate').attr('class', 'btn btn-primary display_none');
+            $('#btnSave').attr('class', 'btn btn-success display_none');
+            $('#btnBack').attr('class', 'btn btn-success display_none');
         }
         if (!AddNew) {
             $('#btnAdd').attr('class', 'btn btn-primary display_none');
@@ -464,17 +464,17 @@ var AccTrReceiptNote;
             //Displaybeneficiary();
         }
     }
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         IsNew = false;
         IsEdite = true;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
             $("#txt_Amount").attr("disabled", "disabled");
@@ -489,9 +489,9 @@ var AccTrReceiptNote;
             $(".btn-group").addClass("display_none");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $(".btn-group").removeClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -551,9 +551,9 @@ var AccTrReceiptNote;
         }
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             CashAmount = Number($('#txt_CashAmount').val());
             if (!Validation()) {
                 return;
@@ -616,13 +616,13 @@ var AccTrReceiptNote;
     function AddDisabled() {
         ////// 
         $('#btnAddDetails').toggleClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
         //$("#drpPaymentType").removeAttr("disabled");
         $("#drp_G_Store").removeAttr("disabled");
         txt_disabled();
@@ -728,13 +728,13 @@ var AccTrReceiptNote;
         IsEdite = false;
         if (IsNew == true) {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -765,24 +765,24 @@ var AccTrReceiptNote;
         BranchCode = Selecteditem[0].BranchCode;
         //chkActive.disabled = true;
         Update_claenData = 0;
-        //$('#btnsave').toggleClass("display_none");
-        //$('#btnback').toggleClass("display_none");
+        //$('#btnSave').toggleClass("display_none");
+        //$('#btnBack').toggleClass("display_none");
         reference_Page();
         ////// 
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         // 
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
-            btnEdit.disabled = true;
+            btnUpdate.disabled = true;
             chkActive.disabled = false;
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         }
         else {
             chkActive.checked = false;
             chkActive.disabled = true;
-            btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         }
         $("#Div_control").removeClass("display_none");
         Amount_onchange();
@@ -910,9 +910,9 @@ var AccTrReceiptNote;
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
         $("#Div_control").removeClass("display_none");
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#txt_ReceiptNoteNew').prop("selectedIndex", 0);
         //$('#txt_ID_beneficiaryNew').prop("selectedIndex", 0);
         $('#txt_Receiving_Fund').prop("selectedIndex", 0);
@@ -1072,7 +1072,8 @@ var AccTrReceiptNote;
     }
     function InitializeGrid() {
         var res = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        //$("#id_ReportGrid").attr("style", "");
+        $('#id_ReportGrid').removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "ReceiptID";
@@ -1324,24 +1325,24 @@ var AccTrReceiptNote;
         BranchCode = Selecteditem[0].BranchCode;
         //chkActive.disabled = true;
         Update_claenData = 0;
-        //$('#btnsave').toggleClass("display_none");
-        //$('#btnback').toggleClass("display_none");
+        //$('#btnSave').toggleClass("display_none");
+        //$('#btnBack').toggleClass("display_none");
         reference_Page();
         ////// 
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         // 
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
-            btnEdit.disabled = true;
+            btnUpdate.disabled = true;
             chkActive.disabled = false;
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         }
         else {
             chkActive.checked = false;
             chkActive.disabled = true;
-            btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         }
         $("#Div_control").removeClass("display_none");
     }

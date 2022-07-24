@@ -11709,13 +11709,13 @@ textarea.form-control-lg {
 
     .form-check .form-check-input {
         float: right;
-        margin-right: -1.5em;
+        margin-right: 0;
     }
 
 .form-check-input {
-    width: 1em;
-    height: 1em;
-    margin-top: 0.25em;
+    width: 2em;
+    height: 2em;
+    margin-top: -1rem;
     vertical-align: top;
     background-color: #fff;
     background-repeat: no-repeat;
@@ -24996,7 +24996,7 @@ div.tagsinput {
 /* Tables */
 .table, .jsgrid .jsgrid-table {
     margin-bottom: 0;
-    color: #8a99ea;
+    color: var(--main-blue);
 }
 
     .table thead th, .jsgrid .jsgrid-table thead th {
@@ -25715,8 +25715,9 @@ body.avgrund-active {
 
     .dataTables_wrapper .dataTables_length select {
         min-width: 65px;
-        margin-right: .25rem;
-        margin-left: .25rem;
+        margin-right: .5rem;
+        margin-left: .5rem;
+        height: 2rem;
     }
 
     .dataTables_wrapper .dataTable .btn, .dataTables_wrapper .dataTable .fc button, .fc .dataTables_wrapper .dataTable button, .dataTables_wrapper .dataTable .ajax-upload-dragdrop .ajax-file-upload, .ajax-upload-dragdrop .dataTables_wrapper .dataTable .ajax-file-upload, .dataTables_wrapper .dataTable .swal2-modal .swal2-buttonswrapper .swal2-styled, .swal2-modal .swal2-buttonswrapper .dataTables_wrapper .dataTable .swal2-styled {
@@ -25726,6 +25727,7 @@ body.avgrund-active {
 
     .dataTables_wrapper .dataTable thead th {
         border-bottom-width: 0;
+        color: var(--bs-black);
     }
 
     .dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting:after,
@@ -28695,6 +28697,11 @@ div.tagsinput {
     cursor: pointer;
     border: none;
 }
+.reset.icon-bar,
+.viewresult.icon-bar,
+.print-report.icon-bar{
+    left: -120px;
+}
     .main-iconbar .icon-bar:disabled,
     .details-iconbar .icon-bar:disabled,
     .main-iconbar .icon-bar:disabled:hover,
@@ -28719,16 +28726,25 @@ div.tagsinput {
     width: 100px;
     height: 50px;
 }
+.reset,
+.viewresult,
+.print-report{
+    width: 160px;
+    height: 50px;
+}
 
-.view {
+.view,
+.viewresult{
     top: 100px;
 }
-.add {
+.add,
+.reset {
     top: 160px;
 }
 .print {
     top: 220px;
 }
+
 .pdf {
     top: 280px;
 }
@@ -29402,10 +29418,64 @@ input[class=checkbox]:checked:before {
 }
 .dataTables_length,
 .dataTables_filter {
-    display: inline-block;
+    display: inline-flex;
     width: 45%;
+    justify-content: center;
 }
+    .dataTables_length label {
+        display: inline-flex;
+        line-height: 2rem;
+    }
 
-.insettext input {
-    border: inset!important;
+    .dataTables_filter input[type="search"] {
+        border-radius: 5px;
+        border: 1px solid var(--main-blue);
+        margin-right: 8px;
+    }
+.search-box .dataTable {
+    margin: 1rem;
+}
+.search-box .dataTables_wrapper .dataTable thead th,
+.dataTables_wrapper .dataTable tbody td {
+    font-size: 1.125rem;
+}
+.search-box .dataTables_wrapper .dataTable tr {
+    border-width: 0.5px;
+}
+.search-box .dataTables_wrapper .dataTable thead {
+    background-color: var(--bs-gray-500);
+}
+.search-box .dataTables_wrapper .dataTable tbody .odd {
+    background-color: var(--Light-blue);
+}
+.search-box .dataTables_wrapper .dataTable tbody .even {
+    background-color: var(--bs-gray-200);
+}
+.search-box .dataTables_wrapper .dataTables_paginate {
+    display: flex;
+    justify-content: center;
+}
+    .search-box .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: var(--bs-white);
+        border: 1px solid var(--main-orange);
+        background-color: var(--main-orange);
+        border-radius: 5px;
+        padding:10px;
+
+    }
+        .search-box .dataTables_wrapper .dataTables_paginate .paginate_button.previous,
+        .search-box .dataTables_wrapper .dataTables_paginate .paginate_button.next {
+            background-color: var(--bs-gray-200);
+            color: var(--bs-black);
+            border: 1px solid var(--bs-gray-200);
+        }
+.search-box .insettext input {
+    border: inset !important;
+}
+/*Radio Button*/
+.form-radio {
+    width: 1em;
+    height: 1em;
+    margin-top: 0;
+    vertical-align: initial;
 }

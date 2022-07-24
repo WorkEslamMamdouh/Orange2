@@ -113,7 +113,7 @@ namespace AccTrPaymentNote {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-    var btnPrint: HTMLButtonElement;
+   // var btnPrint: HTMLButtonElement;
     //------------------------------------------------------------------
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var BranchCode: Number;//SharedSession.CurrentEnvironment.BranchCode;
@@ -258,7 +258,7 @@ namespace AccTrPaymentNote {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+    //    btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
 
         //textBoxes
         txt_CODE = document.getElementById("txt_CODE") as HTMLInputElement;
@@ -327,7 +327,7 @@ namespace AccTrPaymentNote {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); }
+       // btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         txt_CashAmount.onchange = Amount_onchange;
         txt_CardAmount.onchange = Amount_onchange;
@@ -1288,7 +1288,7 @@ namespace AccTrPaymentNote {
 
 
         let res: any = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $('#id_ReportGrid').removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "ReceiptID";

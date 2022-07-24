@@ -1,6 +1,4 @@
-﻿
-
-@using Inv.WebUI.Resources
+﻿@using Inv.WebUI.Resources
 @{
     ViewBag.Title = @SystemResource.Men_StkDefItems;
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -94,6 +92,7 @@
         padding: 10px 0px 4px 0px;
     }*/
 </style>
+
 <div class="row gy-3 " id="div_ContentData">
     <!-- Filter Container -->
     <div class="col-12">
@@ -150,42 +149,72 @@
             </div>
         </div>
     </div>
+    <!-- Table  -->
+    <div class="col-12">
+        <div class="inside-table my-4">
+            <div class="table-responsive">
+                <table class="table table-borderless ">
+                    <thead>
+                        <tr id="div_Data_devolte">
+                            <th style="width: 3%"></th>
+                            <th style="width: 5%"> @SystemResource.App_Code </th>
+                            <th style="width: 10%"> @SystemResource.App_DescA</th>
+                            <th style="width: 10%">@SystemResource.APP_Category </th>
+                            <th style="width: 10%"> @SystemResource.App_Type</th>
+                            <th style="width: 5%">@SystemResource.App_AvailableQuantity</th>
+                            <th style="width: 5%" >@SystemResource.App_Price</th>
+                            <th style="width: 5%">@SystemResource.App_LessPrice</th>
+                            <th style="width: 5%">@SystemResource.App_MeasuringUnit</th>
+                            <th style="width: 10%">@SystemResource.App_DescE</th>
+                            <th style="width: 3%"> فعال ؟ </th>
+                        </tr>
+                    </thead>
+                    <tbody id="div_Data"></tbody>
+
+                </table>
+                <div class="d-flex justify-content-start mr-1">
+                    <span id="btnAddDetails" class="mb-3 display_none"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
 
 
-<div class="panel-body" id="div_ContentData">
+@*<div class="panel-body" id="div_ContentData">
     <div class="row">
         <div class="col-lg-12">
 
-            @*<div class="col-lg-1 pad_">
+            <div class="col-lg-1 pad_">
                     <label class=" style_pading_lepel2 ">@SystemResource.Men_StkDefStore</label>
                 </div>
                 <div class="col-lg-3">
                     <select id="drp_G_Store" class="form-control">
                     <option value="null">@SystemResource.Men_StkDefStore</option>
                     </select>
-                </div>*@
-            @*<div class="col-lg-1 pad_">
+                </div>
+            <div class="col-lg-1 pad_">
                     <label class=" style_pading_lepel2 ">@SystemResource.APP_Category</label>
                 </div>
                 <div class="col-lg-3">
                     <select id="drpPaymentType" class="form-control">
                     <option value="null">@SystemResource.APP_Category</option>
                     </select>
-                </div>*@
-            @*<div class="col-lg-1 pad_">
+                </div>
+            <div class="col-lg-1 pad_">
                     <label class=" style_pading_lepel2 ">@SystemResource.App_Type</label>
                 </div>
                 <div class="col-lg-3">
                     <select id="drpitem_family" class="form-control"><option value="null">@SystemResource.App_Type</option></select>
-                </div>*@
+                </div>
 
 
         </div>
         <div class="col-lg-12">
-            @*<div class="col-lg-1 pad_">
+            <div class="col-lg-1 pad_">
                 <label class=" style_pading_lepel2 ">@SystemResource.APP_Stoke</label>
             </div>
             <div class="col-lg-3">
@@ -199,7 +228,7 @@
             </div>
             <div class="col-lg-4 pad_">
 
-            </div>*@
+            </div>
             <div class="col-lg-2">
                 <button type="button" class="btn btn-info" id="btnShow">
                     @SystemResource.App_Show  <span class="glyphicon glyphicon-save "></span>
@@ -268,7 +297,7 @@
         </div>
 
     </div>
-</div>
+</div>*@
 
 @section Script{
 <script src="~/ClientApp/StkDefinition/StkDefItems.js"></script>

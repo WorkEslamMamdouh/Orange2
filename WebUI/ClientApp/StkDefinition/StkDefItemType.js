@@ -12,7 +12,7 @@ var StkDefItemType;
     var Detail_Model = new Array();
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service;
-    var btnsave;
+    var btnSave;
     var btnAddDetails;
     var btnEdit;
     var sys = new SystemTools();
@@ -21,7 +21,7 @@ var StkDefItemType;
     var Model = new I_ItemFamily();
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
-    var btnback;
+    var btnBack;
     var catId;
     var catId_type_change;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -33,6 +33,12 @@ var StkDefItemType;
         else {
             document.getElementById('Screen_name').innerHTML = "ItemType";
         }
+        $("#btnAdd").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -40,17 +46,17 @@ var StkDefItemType;
         //Display();
     }
     StkDefItemType.InitalizeComponent = InitalizeComponent;
-    $('#btnedite').on('click', function () {
+    $('#btnUpdate').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -70,16 +76,16 @@ var StkDefItemType;
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnEdit = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow; //
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
         $("#drpPaymentType").on('change', function () {
             catId = $('#drpPaymentType').val();
             btnback_onclick();
@@ -116,28 +122,29 @@ var StkDefItemType;
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             //$(".minus_btn").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
             CountGrid++;
             //$('#select_Type_Item' + CountGrid).prop("value", catId);
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
     }
     function BuildControls(cnt) {
         var html;
-        html = '  <div id="No_Row' + cnt + '" class="container-fluid  ">' +
-            '<div class="col-lg-12">' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
-            '<div class="col-lg-1 pad_"><input disabled id="txtCode' + cnt + '" type="text" class="form-control right2"></div>' +
-            '<div class="col-lg-3 pad_"><input disabled id="txtDescA' + cnt + '" type="text" class="form-control right2"></div>' +
-            '<div class="col-lg-3 pad_"><input disabled id="txtDescL' + cnt + '" type="text" class="form-control right2"></div>' +
-            '<div class="col-lg-1 pad_"><select disabled id="select_Type_Item' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + '</option></select></div>' +
-            '<div class="col-lg-2 pad_"><input disabled id="txtRefItemCode' + cnt + '" type="number" class="form-control right2"></div>' +
-            '<div class="col-lg-1 pad_"><input disabled id="txtBarCodePrefix' + cnt + '" type="text" class="form-control right2"></div>' +
-            '<div class="col-lg-1 pad_"><input disabled id="txtLastBarCodeSeq' + cnt + '" type="number" class="form-control right2"></div>' +
-            '</div>' +
-            '</div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <select disabled id=\"select_Type_Item" + cnt + "\" class=\"form-control\"> \n                           <option value=\"Null\"> " + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + "</option>\n                        </select>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtRefItemCode" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtBarCodePrefix" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtLastBarCodeSeq" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data").append(html);
+        //html = '  <div id="No_Row' + cnt + '" class="container-fluid  ">' +
+        //    '<div class="col-lg-12">' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
+        //    '<div class="col-lg-1 pad_"><input disabled id="txtCode' + cnt + '" type="text" class="form-control right2"></div>' +
+        //    '<div class="col-lg-3 pad_"><input disabled id="txtDescA' + cnt + '" type="text" class="form-control right2"></div>' +
+        //    '<div class="col-lg-3 pad_"><input disabled id="txtDescL' + cnt + '" type="text" class="form-control right2"></div>' +
+        //    '<div class="col-lg-1 pad_"><select disabled id="select_Type_Item' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + '</option></select></div>' +
+        //    '<div class="col-lg-2 pad_"><input disabled id="txtRefItemCode' + cnt + '" type="number" class="form-control right2"></div>' +
+        //    '<div class="col-lg-1 pad_"><input disabled id="txtBarCodePrefix' + cnt + '" type="text" class="form-control right2"></div>' +
+        //    '<div class="col-lg-1 pad_"><input disabled id="txtLastBarCodeSeq' + cnt + '" type="number" class="form-control right2"></div>' +
+        //    '</div>' +
+        //'</div>' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         for (var i = 0; i < Display_Type.length; i++) {
             //debugger;
             $('#select_Type_Item' + cnt).append('<option value="' + Display_Type[i].CatID + '">' + (lang == "ar" ? Display_Type[i].DescA : Display_Type[i].DescL) + '</option>');
@@ -186,9 +193,9 @@ var StkDefItemType;
         return;
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             var CanAdd = true;
             if (CountGrid > 0) {
                 for (var i = 0; i < CountGrid; i++) {
@@ -394,6 +401,7 @@ var StkDefItemType;
             $("#txtRefItemCode" + i).val(BilldDetail[i].RefItemCode);
             $("#txtBarCodePrefix" + i).val(BilldDetail[i].BarCodePrefix);
             $("#txtLastBarCodeSeq" + i).val(BilldDetail[i].LastBarCodeSeq);
+            $("#btn_minus" + i).removeClass("display_none");
             //for (var s = 0; s < Display_Type.length; s++) {
             //    //debugger;
             //    $('#select_Type_Item' + i).append('<option value="' + Display_Type[s].CatID + '">' + Display_Type[s].DescA + '</option>');
@@ -415,11 +423,11 @@ var StkDefItemType;
         });
     }
     function btnback_onclick() {
-        if ($('#btnback').attr('class') != "btn btn-warning display_none") {
-            $('#btnback').toggleClass("display_none");
+        if ($('#btnBack').attr('class') != "btn btn-warning display_none") {
+            $('#btnBack').toggleClass("display_none");
         }
-        if ($('#btnsave').attr('class') != "btn btn-success display_none") {
-            $('#btnsave').toggleClass("display_none");
+        if ($('#btnSave').attr('class') != "btn btn-success display_none") {
+            $('#btnSave').toggleClass("display_none");
         }
         //if ($('#btnAddDetails').attr('class') != "glyphicon glyphicon-plus-sign  display_none") {
         //    $('#btnAddDetails').toggleClass("display_none");
@@ -427,8 +435,8 @@ var StkDefItemType;
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none');
         $("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
         $("#drpPaymentType").removeAttr("disabled");
         CountGrid = 0;
         $("#div_Data").html("");

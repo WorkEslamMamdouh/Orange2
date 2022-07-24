@@ -37,6 +37,10 @@ var Inventoryvalue;
         else {
             document.getElementById('Screen_name').innerHTML = "Inventory Value";
         }
+        $("#btnAdd").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         Display_DrpPaymentType();

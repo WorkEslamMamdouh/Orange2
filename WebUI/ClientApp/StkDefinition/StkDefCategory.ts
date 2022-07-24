@@ -24,9 +24,9 @@ namespace StkDefCategory {
 
     //-------------------------------------------------------------------*** B U T T O N S ***--------------------------       
     var btnAdd: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
-    var btnedite: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
     //-------------------------------------------------------------------*** I N P U T S ***--------------------------    
     var searchbutmemreport: HTMLInputElement;
     var txtCatCode: HTMLInputElement;
@@ -70,6 +70,10 @@ namespace StkDefCategory {
             document.getElementById('Screen_name').innerHTML = "Item Category";
 
         }
+        $("#btnShow").addClass("display_none");
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         branchcode = Number(SysSession.CurrentEnvironment.BranchCode);
         FIN_YEAR = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -85,9 +89,9 @@ namespace StkDefCategory {
     function InitalizeControls() {
          //-------------------------------------------------------------------*** B U T T O N S ***--------------------------     
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         //-------------------------------------------------------------------*** I N P U T S ***--------------------------    
         searchbutmemreport = document.getElementById("searchbutmemreport") as  HTMLInputElement;
         txtCatCode = document.getElementById("txtCatCode") as  HTMLInputElement;
@@ -120,9 +124,9 @@ namespace StkDefCategory {
         DivGrid = document.getElementById("DivGrid") as HTMLDivElement;
     }
     function InitalizeEvents() {
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
+        btnUpdate.onclick = btnedite_onclick;
         DrpItemType.onchange = DrpItemType_onchange;
         TxtItemType.onchange = TxtItemType_onchange;
         btnAdd.onclick = btnAdd_onclick;
@@ -215,9 +219,9 @@ namespace StkDefCategory {
         }
     }
     function DrpItemType_onchange() { 
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");    
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");    
         DivDetails.classList.add("display_none");    
 
         if (DrpItemType.value == "null") {
@@ -326,9 +330,9 @@ namespace StkDefCategory {
         Isnew = false;
         EnabledInput();
         validationEnabel();
-        btnedite.classList.add("display_none");
-        btnback.classList.remove("display_none");
-        btnsave.classList.remove("display_none");
+        btnUpdate.classList.add("display_none");
+        btnBack.classList.remove("display_none");
+        btnSave.classList.remove("display_none");
         btnAdd.setAttribute("disabled", "disabled");
         DivDetails.classList.remove("display_none");
         DrpItemType.setAttribute("disabled", "disabled");
@@ -338,9 +342,9 @@ namespace StkDefCategory {
     }
     function btnback_onclick() {
         DisabledInput();
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");
@@ -356,23 +360,23 @@ namespace StkDefCategory {
         Isnew = true;
         Clear();
         EnabledInput();
-        btnedite.classList.add("display_none");
-        btnback.classList.remove("display_none");
-        btnsave.classList.remove("display_none");
+        btnUpdate.classList.add("display_none");
+        btnBack.classList.remove("display_none");
+        btnSave.classList.remove("display_none");
         DivDetails.classList.remove("display_none");
         DrpItemType.setAttribute("disabled", "disabled");
-        searchbutmemreport.setAttribute("disabled", "disabled");  
+        searchbutmemreport.setAttribute("disabled", "disabled");
         $("#divGridDetails").addClass("disabledDiv");
         $("#divGridDetails").attr("disabled", "disabled").off('click');
         TxtItemType_onchange();
     }
     function btnsave_onClick() {
 
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
             Assign();
             if (Isnew == true) {
                
@@ -448,9 +452,9 @@ namespace StkDefCategory {
             MessageBox.Show("Done", "");
         }
         DisabledInput();
-        btnedite.classList.remove("display_none");
-        btnback.classList.add("display_none");
-        btnsave.classList.add("display_none");
+        btnUpdate.classList.remove("display_none");
+        btnBack.classList.add("display_none");
+        btnSave.classList.add("display_none");
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");

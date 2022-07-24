@@ -989,12 +989,12 @@ namespace PurOrder {
                     <input id="txtPurOrderDetailsID${cnt}" type="hidden" class="form-control display_none"  />
 	                <input id="txtItemNumber${cnt}" type="hidden" class="form-control display_none"  />                   
                     <input id="txtSerial${cnt}" type="hidden" class="form-control display_none" value='${cnt}'  />
-                    <th>
+                    <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
                             <div class="search-content">
                                 <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control  text_Display" />
@@ -1003,45 +1003,45 @@ namespace PurOrder {
                                 </button>
                             </div>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtItemName${cnt}" name="" disabled type="text" class="form-control  text_Display" />
 		                </div>
-	                </th>
+	                </td>
 
-                    <th>
+                    <td>
 		                <div class="form-group">
 			                <input type="number"  id="txtRequiredQty${cnt}" name="quant[10]" class="form-control" value="1" min="1" max="1000" step="1">
 		                </div>
-	                </th>
+	                </td>
 
-                    <th>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtReceivedQty${cnt}" type="number" class="form-control"  disabled value="0"/>
 		                </div>
-	                </th>
+	                </td>
 
-                    <th>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtPrice${cnt}" type="number" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtTotal${cnt}" type="number"  class="form-control" value="0" />
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="Tax${cnt}" type="Text"  class="form-control" value="0"/>
 		                </div>
-	                </th>
-                    <th>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			                <input id="txtTotAfterTax${cnt}" type="Text"  class="form-control" value="0"/>
 		                </div>
-	                </th>
+	                </td>
                     <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
                 </tr>`;
