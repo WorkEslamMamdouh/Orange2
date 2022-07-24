@@ -87,6 +87,7 @@ var StkDefItemType;
         btnSave.onclick = btnsave_onClick;
         btnBack.onclick = btnback_onclick;
         $("#drpPaymentType").on('change', function () {
+            $("#divShow").removeClass("display_none");
             catId = $('#drpPaymentType').val();
             btnback_onclick();
             //debugger;

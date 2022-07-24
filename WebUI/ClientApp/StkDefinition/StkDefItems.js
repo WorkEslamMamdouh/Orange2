@@ -54,6 +54,8 @@ var StkDefItems;
         $("#btnPrintTrEXEL").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").css("bottom", "25%;");
+        $("#btnBack").css("bottom", "20%;");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         IsLocalSalePrice = sys.SysSession.CurrentEnvironment.I_Control[0].IsLocalSalePrice;
@@ -71,6 +73,7 @@ var StkDefItems;
     StkDefItems.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
+            $('#divShow').removeClass("display_none");
             $('#btnSave').toggleClass("display_none");
             $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
@@ -155,6 +158,7 @@ var StkDefItems;
         });
     }
     function btnShow_onclick() {
+        $("#divShow").removeClass("display_none");
         debugger;
         storeCode = $('#drp_G_Store').val();
         catId = $('#drpPaymentType').val();
