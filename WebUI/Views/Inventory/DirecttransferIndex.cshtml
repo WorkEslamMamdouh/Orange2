@@ -269,5 +269,12 @@
     </div>
 </div>
 @section Script{
+    <script>
+        $(document).ready(function () {
+            $("#ddlSourceStore").select2();
+            $("#ddlToStore").select2();
+      
+        });
+    </script>
     <script src="~/ClientApp/Inventory/DirectTransfer.js"></script>
 }

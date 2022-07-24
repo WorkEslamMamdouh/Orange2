@@ -48,11 +48,11 @@ var AccTrCustomerAdjust;
     var txt_The_tax_amount;
     var txt_Total_after_tax;
     var txt_ReceiptDesc;
-    var btnback;
+    var btnBack;
     var btnShow;
     var btnAdd;
     var btnEdit;
-    var btnsave;
+    var btnSave;
     var chkActive;
     //---------------------------------------------------------------print buttons 
     var btnPrintTrview;
@@ -168,9 +168,9 @@ var AccTrCustomerAdjust;
         });
     }
     function Displaymode() {
-        //$('#btnsave').attr('class', 'btn btn-success display_none');
-        //$('#btnback').attr('class', 'btn btn-success display_none');
-        //$('#btnedite').attr('class', 'btn btn-primary');
+        //$('#btnSave').attr('class', 'btn btn-success display_none');
+        //$('#btnBack').attr('class', 'btn btn-success display_none');
+        //$('#btnUpdate').attr('class', 'btn btn-primary');
         //$('#btnAdd').attr('class', 'btn btn-primary');
         ////$("#divnotifications :input").prop("disabled", false);
         //btnAdd.disabled = !SysSession.CurrentPrivileges.AddNew
@@ -178,10 +178,10 @@ var AccTrCustomerAdjust;
     }
     function reference_Page() {
         if (!EDIT) {
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
+            $('#btnUpdate').attr('class', 'btn btn-primary display_none');
             $('#btnPrintTransaction').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnSave').attr('class', 'btn btn-success display_none');
+            $('#btnBack').attr('class', 'btn btn-success display_none');
         }
         //if (!AddNew) { $('#btnAdd').attr('class', 'btn btn-primary display_none'); }
         //if (CUSTOM1) { $("#chkStatus").removeAttr("disabled"); }
@@ -191,9 +191,9 @@ var AccTrCustomerAdjust;
         ////;
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnEdit = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         //textBoxes
         txt_CODE = document.getElementById("txt_CODE");
         txt_ID_Custm = document.getElementById("txt_ID_Custm");
@@ -232,8 +232,8 @@ var AccTrCustomerAdjust;
         //
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnsave_onClick;
+        btnBack.onclick = btnback_onclick;
         btnEdit.onclick = btnEdit_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         chkActive.onchange = chkStatus_onchange;
@@ -287,10 +287,10 @@ var AccTrCustomerAdjust;
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#btnPrintTransaction").toggleClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
@@ -301,9 +301,9 @@ var AccTrCustomerAdjust;
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#div_btnprint").css("right:8%");
             $("#btnPrintTransaction").toggleClass("display_none");
         }
@@ -338,9 +338,9 @@ var AccTrCustomerAdjust;
         $('#Div_control').removeClass("display_none");
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (IsNew == true) {
                 Validation();
                 if (Valid == 1) {
@@ -364,12 +364,12 @@ var AccTrCustomerAdjust;
     }
     function btnback_onclick() {
         $('#btnAddDetails').addClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeAttr("disabled");
         $("#btnPrintTransaction").removeAttr("disabled");
         $("#drp_G_Store").removeAttr("disabled");
         txt_disabled();
@@ -515,11 +515,11 @@ var AccTrCustomerAdjust;
         Update_claenData = 0;
         reference_Page();
         $('#Div_control').removeClass("display_none");
-        $('#btnedite').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $('#btnPrintTransaction').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         $('#btnPrintTransaction').removeAttr("disabled");
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
@@ -708,9 +708,9 @@ var AccTrCustomerAdjust;
     function EnableControls() {
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
         txt_Movement_typeNew.selectedIndex = 0;
         txt_Settlement_typeNew.selectedIndex = 0;
@@ -813,7 +813,7 @@ var AccTrCustomerAdjust;
     }
     function InitializeGrid() {
         var res = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $("#id_ReportGrid").removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "AdjustmentID";
@@ -960,11 +960,11 @@ var AccTrCustomerAdjust;
         Update_claenData = 0;
         reference_Page();
         $('#Div_control').removeClass("display_none");
-        $('#btnedite').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $('#btnPrintTransaction').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         $('#btnPrintTransaction').removeAttr("disabled");
         if (Selecteditem[0].Status == 1) {
             chkActive.checked = true;
