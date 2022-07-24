@@ -94,7 +94,7 @@ namespace ProcSalesMgr {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-    var btnPrintInvoicePrice: HTMLButtonElement;
+  //  var btnPrintInvoicePrice: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
 
 
@@ -119,7 +119,7 @@ namespace ProcSalesMgr {
 
     //flags
     var Show: boolean = true;
-    var btnPrint: HTMLInputElement;
+  //  var btnPrint: HTMLInputElement;
     var editOrAddFlag: number = 0;//1 add  - 2 edit
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].OperationPriceWithVAT);
@@ -154,15 +154,15 @@ namespace ProcSalesMgr {
 
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        $('#btnPrint').addClass('display_none');
-        $('#btnPrintInvoicePrice').addClass('display_none');
+       // $('#btnPrint').addClass('display_none');
+    //   $('#btnPrintInvoicePrice').addClass('display_none');
 
         fillddlSalesPerson();
 
     }
     function InitalizeControls() {
         //debugger
-        btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
+      //  btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فواتير العمليات ";
         }
@@ -225,7 +225,7 @@ namespace ProcSalesMgr {
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
         ////debugger
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+    //    btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
     }
     function InitializeEvents() {
