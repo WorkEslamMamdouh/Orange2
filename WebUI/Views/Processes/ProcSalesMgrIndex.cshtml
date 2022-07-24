@@ -8,6 +8,7 @@
     input[type=checkbox], input[type=radio] {
         margin: 7% 0 0 !important;
     }
+
     .disabledDiv {
         pointer-events: none;
         opacity: 0.4;
@@ -17,7 +18,7 @@
         display: none !important;
     }
 
-  
+
     #btnAddDetails {
         font-size: 40px;
     }
@@ -50,7 +51,7 @@
         font-weight: bold;
     }
 
-    
+
 
     .popu {
         position: fixed;
@@ -123,38 +124,186 @@
         font-size: 25px !important;
         position: absolute;
     }
+
     select {
         width: 100% !important;
     }
 </style>
-@*<link href="~/Style_design/Stylecheckbox.css" rel="stylesheet" />*@
-<script>
-    $(document).ready(function () {
+<div class="row gy-3 ">
+    <!-- Filter Container -->
+    <div id="DivFilter" class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
+                            <div class="col-8 ">
+                                <select id="ddlSalesmanFilter" name="" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.process </label>
+                            <div class="col-9 col-md-8">
+                                <div class="search-content">
+                                    <input type="text" class="form-control search-control" id="ddlOPerationMaster">
+                                    <button type="button" id="btnOPerationSearch" name="Search" class="btn btn-main btn-search">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12  col-md-3">
+                        <div class="form-group row g-0">
+                            <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.process_opened</label>
+                            <div class="col-9 col-md-7">
+                                <input type="checkbox" class="checkbox" id="chkOpenProcess" name="CUSTOM6" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row g-0">
+                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Process_status</label>
+                            <div class="col-8 col-md-7 ">
+                                <input type="text" class="form-control" disabled name="OperationStatusMaster" id="txtOperationStatusMaster">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
+                            <div class="col-8 ">
+                                <select id="ddlCustomer" name="" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row g-0">
+                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-8 col-md-7 ">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtStartDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row g-0">
+                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-8 col-md-7 ">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtEndDate">
+                            </div>
+                        </div>
+                    </div>
 
-         $("#ddlCashBox").select2();
-        $("#ddlInvoiceCustomer").select2();
-         
-        $("#ddlCustomer").select2();
-        $("#ddlCustomer2").select2(); 
-        $('#but_read').click(function () {
-           
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_State</label>
+                            <div class="col-8 ">
+                                <select id="ddlStateType" name="" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
+                            <div class="col-8 ">
+                                <select id='ddlInvoiceType' class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">البائع</label>
+                            <div class="col-8 ">
+                                <select id="ddlSalesPersonFilter" name="" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="searchbutmemreport" type="text" class="form-control" placeholder=" @SystemResource.search_ins">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div id="divGridDetails"></div>
+                </div>
+            </div>
 
-            var username = $('#ddlCashBox option:selected').text();
-            var userid = $('#ddlCashBox').val();
+        </div>
+     <!-- Details  -->
+        <div id="DivInvoiceDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox mt-5">
+                    <div class="row g-0">
+                        @* Change Place *@
+                        <div class="col-6">
+                            <button id="btnPrintslip" type="button" class="btn btn-main float-right">
+                                <span class="align-self-center mb-3">  @SystemResource.App_Print_slip</span>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-3 display_none" id="div_btnUpdate">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-9 col-md-7">
+                                    <input class="checkbox" type="checkbox" id="chkActive" disabled name="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @* Empty Div for Responsive *@
+                        </div>
+                        <div class="col-12 col-md-3 display_none" id="div_btnUpdate">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
+                                <div class="col-9 col-md-7">
+                                    <label class="form-control" id="lblInvoiceNumber"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input type="date" class="form-control" disabled name="" id="txtInvoiceDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_invoiceType </label>
+                                <div class="col-8 col-md-7 ">
+                                    <select id='ddlType' class="form-control" disabled></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_ReferenceNumber</label>
+                                <div class="col-8 col-md-7 ">
+                                    <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-            var username = $('#ddlSalesman option:selected').text();
-            var userid = $('#ddlSalesman').val();
- 
-            var username = $('#ddlCustomer option:selected').text();
-            var userid = $('#ddlCustomer').val();
-
-            var username = $('#ddlInvoiceCustomer option:selected').text();
-            var userid = $('#ddlInvoiceCustomer').val();
-
-            $('#result').html("id : " + userid + ", name : " + username);
-        });
-    });
-</script>
 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  borderred">
 
 
@@ -174,14 +323,14 @@
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                                 <span class="" style="font-size: 22px;font-weight: bold;">@SystemResource.App_Password</span>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                             <div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                            </div> 
+                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
                                 <input id="txt_ApprovePass" type="password" class="form-control">
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
@@ -212,15 +361,15 @@
         </div>
     </div>
     <div id="DivFilter">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading "> @SystemResource.App_Salesman </label>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
                 <select id="ddlSalesmanFilter" name="" class="form-control"></select>
             </div>
-             
+
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading "> @SystemResource.process</label>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                <input type="text" id="ddlOPerationMaster"  disabled name="" class="form-control" />
+                <input type="text" id="ddlOPerationMaster" disabled name="" class="form-control" />
             </div>
             <div class="col-xs-1">
                 <button style=" left: 21%;" type="button" class="src-btn btn btn-warning" id="btnOPerationSearch" name="Search">
@@ -235,8 +384,8 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                 <input type="text" class="form-control input-sm addable editable" disabled="disabled" name="OperationStatusMaster" id="txtOperationStatusMaster">
             </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        </div>*@
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading">@SystemResource.App_Cutomer</label>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
                 <select id="ddlCustomer" name="" class="form-control"></select>
@@ -262,9 +411,9 @@
                 </button>
             </div>
 
-            </div>
+        </div>*@
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
 
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading">@SystemResource.App_State</label>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
@@ -280,7 +429,7 @@
             <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                 <select id="ddlSalesPersonFilter" name="" class="form-control"></select>
             </div>
-            
+
             <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                 <div class="btn-group float_left_right">
                     <label type="button" class="btn btn-warning"> @SystemResource.App_Print</label>
@@ -315,9 +464,9 @@
                 </button>
             </div>
 
-        </div>
-        </div>
-    <div class="form-group display_none" id="divShow">
+        </div>*@
+    </div>
+    @*<div class="form-group display_none" id="divShow">
 
         <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 ">
             <input id="searchbutmemreport" name="" type="text" class="form-control  text_Display" placeholder=" @SystemResource.search_ins ">
@@ -327,14 +476,14 @@
         </div>
 
 
-    </div>
+    </div>*@
 
-    <div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred display_none">
+    @*<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred display_none">
 
         <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
 
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12margingred display_none" id="div_btnUpdate">
+    </div>*@
+    @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12margingred display_none" id="div_btnUpdate">
         <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_approved  </label>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="top:7px">
             <input class="checkbox" type="checkbox" id="chkActive" disabled name="" />
@@ -377,42 +526,42 @@
             </button>
         </div>
 
-    </div>
+    </div>*@
     <div id="DivInvoiceDetails" class="display_none">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading " style="font-size: 15px !important;">  @SystemResource.App_InvoiceNum  </label>
+            @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading " style="font-size: 15px !important;">  @SystemResource.App_InvoiceNum  </label>
             <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2    marginstenig pading_lep  pading_2 textcentr_pading" id="lblInvoiceNumber" style="font-size: 16px !important;"></label>
 
             <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading ">@SystemResource.App_date</label>
 
             <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                 <input type="date" class="form-control" disabled name="" id="txtInvoiceDate" style="font-size: 16px !important;">
-            </div>
+            </div>*@
 
 
             @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
-                    @SystemResource.App_PrintInvoice    <span class="glyphicon glyphicon-print"></span>
-                </button>
-                <button id="btnPrintInvoicePrice" type="button" class="btn btn-info ">
-                    @SystemResource.App_PrintPrice    <span class="glyphicon glyphicon-print"></span>
-                </button>
-
-                <div class="btn-group" id="div_btnPrint">
-                    <label type="button" class="btn btn-warning">@SystemResource.App_Print</label>
-                    <button type="button" class="btn btn-warning dropdown-toggle" id="btnShowPrint" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-hand-down"></span>
+                    <button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
+                        @SystemResource.App_PrintInvoice    <span class="glyphicon glyphicon-print"></span>
                     </button>
-                    <div class="dropdown-menu" role="menu" style="border-radius:15px;">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                            <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
+                    <button id="btnPrintInvoicePrice" type="button" class="btn btn-info ">
+                        @SystemResource.App_PrintPrice    <span class="glyphicon glyphicon-print"></span>
+                    </button>
+
+                    <div class="btn-group" id="div_btnPrint">
+                        <label type="button" class="btn btn-warning">@SystemResource.App_Print</label>
+                        <button type="button" class="btn btn-warning dropdown-toggle" id="btnShowPrint" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-hand-down"></span>
+                        </button>
+                        <div class="dropdown-menu" role="menu" style="border-radius:15px;">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                                <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                                <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@ 
+                </div>*@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
 
@@ -428,10 +577,10 @@
             </div>
 
 
-            <label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   " > @SystemResource.App_ReferenceNumber </label>
+            @*<label id="LabtxtRefNo" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2   "> @SystemResource.App_ReferenceNumber </label>
             <div class="col-md-2 col-sm-2 col-xs-2">
                 <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo" style="font-size: 16px !important;">
-            </div>
+            </div>*@
 
         </div>
 
@@ -449,10 +598,10 @@
             </div>
 
 
-            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_invoiceType</label>
+            @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2 textcentr_pading">  @SystemResource.App_invoiceType</label>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                 <select id='ddlType' class="form-control" disabled></select>
-            </div>
+            </div>*@
 
         </div>
 
@@ -582,5 +731,34 @@
             <br />
         </div>
     </div>
-</div> 
+</div>
+@section Script{
+    <script>
+        $(document).ready(function () {
+
+            $("#ddlCashBox").select2();
+            $("#ddlInvoiceCustomer").select2();
+
+            $("#ddlCustomer").select2();
+            $("#ddlCustomer2").select2();
+            $('#but_read').click(function () {
+
+
+                var username = $('#ddlCashBox option:selected').text();
+                var userid = $('#ddlCashBox').val();
+
+                var username = $('#ddlSalesman option:selected').text();
+                var userid = $('#ddlSalesman').val();
+
+                var username = $('#ddlCustomer option:selected').text();
+                var userid = $('#ddlCustomer').val();
+
+                var username = $('#ddlInvoiceCustomer option:selected').text();
+                var userid = $('#ddlInvoiceCustomer').val();
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
     <script src="~/ClientApp/Processes/ProcSalesMgr.js"></script>
+    }

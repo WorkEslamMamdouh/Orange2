@@ -84,7 +84,7 @@ var ProcSalesMgr;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
-    var btnPrintInvoicePrice;
+    //  var btnPrintInvoicePrice: HTMLButtonElement;
     var btnPrintslip;
     // giedView
     var Grid = new JsGrid();
@@ -105,7 +105,7 @@ var ProcSalesMgr;
     var InvoiceTransCode = 0;
     //flags
     var Show = true;
-    var btnPrint;
+    //  var btnPrint: HTMLInputElement;
     var editOrAddFlag = 0; //1 add  - 2 edit
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].OperationPriceWithVAT);
@@ -137,14 +137,14 @@ var ProcSalesMgr;
         //fillddlOperation();
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        $('#btnPrint').addClass('display_none');
-        $('#btnPrintInvoicePrice').addClass('display_none');
+        // $('#btnPrint').addClass('display_none');
+        //   $('#btnPrintInvoicePrice').addClass('display_none');
         fillddlSalesPerson();
     }
     ProcSalesMgr.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         //debugger
-        btnPrint = document.getElementById("btnPrint");
+        //  btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فواتير العمليات ";
         }
@@ -201,7 +201,7 @@ var ProcSalesMgr;
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
         btnPrintslip = document.getElementById("btnPrintslip");
         ////debugger
-        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice");
+        //    btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
     }
     function InitializeEvents() {
         chkActive.onclick = chkActive_onchecked;
@@ -224,7 +224,7 @@ var ProcSalesMgr;
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick;
-        btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
+        //  btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         ddlSalesmanFilter.onchange = ddlSalesmanFilter_onchange;
         chkOpenProcess.onclick = ddlSalesmanFilter_onchange;
