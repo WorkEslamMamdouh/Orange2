@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="Div_Money" class="col-12 py-0 display_none ">
+                        <div  class="col-12 py-0   ">
                             <div class="col-12 col-md-4 py-0">
                                 <div class="form-group row g-0">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
@@ -255,23 +255,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4 py-0">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
-                                    <div class="col-8 ">
-                                        <input disabled class="form-control" name="" id="txtCashMoney" />
+                            <div id="Div_Money">
+                                <div class="col-12 col-md-4 py-0">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
+                                        <div class="col-8 ">
+                                            <input disabled class="form-control" name="" id="txtCashMoney" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 py-0">
+                                    <div class="form-group row g-0">
+                                        <label id="LabCardMoney" class="col-4 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
+                                        <div class="col-8 ">
+                                            <input disabled class="form-control" name="" id="txtCardMoney" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4 py-0">
-                                <div class="form-group row g-0">
-                                    <label id="LabCardMoney" class="col-4 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
-                                    <div class="col-8 ">
-                                        <input disabled class="form-control" name="" id="txtCardMoney" />
-                                    </div>
-                                </div>
-                            </div>
-
+                        </div>
                         </div>
 
 
@@ -693,16 +695,16 @@
             $("#ddlSalesmanFilter").select2();
             $("#ddlSalesPersonFilter").select2();
             $("#ddlInvoiceCustomer").select2();
-            $("#ddlSalesPerson").select2();
-            $("#ddlSalesman").select2();
+            //$("#ddlSalesPerson").select2();
+            //$("#ddlSalesman").select2();
             $("#ddlCashBox").select2();
             $(".select_").select2();
             $(".select_2").select2();
 
 
             $('#but_read').click(function () {
-                var username = $('#ddlSalesman option:selected').text();
-                var userid = $('#ddlSalesman').val();
+                //var username = $('#ddlSalesman option:selected').text();
+                //var userid = $('#ddlSalesman').val();
 
                 var username = $('#ddlInvoiceCustomer option:selected').text();
                 var userid = $('#ddlInvoiceCustomer').val();

@@ -343,6 +343,7 @@ class JsGrid {
                         _this.OnRowDoubleClicked();
 
 
+
                     if ($("#Mod_Flag").val() != 1) {
                         $('#icon-bar').removeClass('display_none');
                         //$("#footer_1").animate({ "left": "-85%", });

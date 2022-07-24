@@ -24987,6 +24987,16 @@ div.tagsinput {
     }
 
 
+.style_ButSearch {
+    border-radius: 25px 25px 25px 25px;
+    height: 33px;
+    width: 34px;
+    background-color: orange;
+    color: whitesmoke;
+    font-weight: bold;
+    box-shadow: black;
+    box-shadow: 3px 3px #888888;
+}
 
 .text_Mandatory {
     background-color: #f39c9c !important;
