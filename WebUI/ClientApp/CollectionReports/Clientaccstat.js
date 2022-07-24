@@ -45,6 +45,10 @@ var Clientaccstat;
             document.getElementById('Screen_name').innerHTML == "Client Account Statment";
         }
         $('#btnPrint').addClass('display_none');
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);

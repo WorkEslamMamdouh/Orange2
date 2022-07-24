@@ -42,7 +42,10 @@ namespace CashBankAccount {
             document.getElementById('Screen_name').innerHTML == "Bank Account Statment";
 
         }
-
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
 
         InitalizeControls();
         InitalizeEvents();

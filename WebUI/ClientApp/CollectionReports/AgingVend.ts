@@ -62,6 +62,10 @@ namespace AgingVend {
             document.getElementById('Screen_name').innerHTML = "Vendors Aging";
 
         }
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();

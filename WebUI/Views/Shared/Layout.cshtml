@@ -45,16 +45,33 @@
 <body id="page-top">
     <div class="iconbar-container">
         <!-- Side Icon Bar -->
-        <div class="main-iconbar" id="divIconbar">
-            <button class="icon-bar d-flex justify-content-between view " id="btnShow">
-                <i class="fas fa-eye fa-fw side-icon ms-1"></i>
-                <span class="align-self-center mb-3">  @SystemResource.App_Show</span>
-            </button>
+        <div class="main-iconbar " id="divIconbar">
+            <div id="iconMainPages">
+                <button class="icon-bar d-flex justify-content-between view " id="btnShow">
+                    <i class="fas fa-eye fa-fw side-icon ms-1"></i>
+                    <span class="align-self-center mb-3">  @SystemResource.App_Show</span>
+                </button>
 
-            <button class="icon-bar d-flex justify-content-between add " id="btnAdd">
-                <i class="fas fa-folder-plus fa-fw side-icon ms-1"></i>
-                <span class="align-self-center mb-3">  @SystemResource.App_Add</span>
-            </button>
+                <button class="icon-bar d-flex justify-content-between add " id="btnAdd">
+                    <i class="fas fa-folder-plus fa-fw side-icon ms-1"></i>
+                    <span class="align-self-center mb-3">  @SystemResource.App_Add</span>
+                </button>
+            </div>
+            <div id="iconReportPages" class="d-none">
+                <button class="icon-bar d-flex justify-content-between reset " id="btnReset">
+                    <i class="fas fa-search-plus fa-fw side-icon ms-1"></i>
+                    <span class="align-self-center mb-3"> @SystemResource.new_search</span>
+                </button>
+                <button class="icon-bar d-flex justify-content-between viewresult d-none" id="btnviewresult">
+                    <i class="fas fa-eye fa-fw side-icon ms-1"></i>
+                    <span class="align-self-center mb-3">   @SystemResource.Preview_results </span>
+                </button>
+                <button class="icon-bar d-flex justify-content-between display_none" id="btnPrint">
+                    <i class="fas fa-eye fa-fw side-icon ms-1"></i>
+                    <span class="align-self-center mb-3">   @SystemResource.App_Print </span>
+                </button>
+            </div>
+          
 
             <button class="icon-bar d-flex justify-content-between print " id="btnPrintTrview">
                 <i class="fas fa-print fa-fw side-icon ms-1"></i>
@@ -70,7 +87,7 @@
                 <i class="fas fa-file-csv fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  Excel</span>
             </button>
-            @RenderSection("Viewresult" , required: false)
+              
             <div class="col-md-2 col-xs-2 StyleNew_Toolbar display_none">
                 <input id="NewAdd_Falg" />
                 <input id="Mod_Flag" />
@@ -95,8 +112,6 @@
                 <span class="align-self-center mb-3">   @SystemResource.App_back</span>
             </button>
         </div>
-    
-
     </div>
 
 
@@ -257,7 +272,7 @@
                         </ul>
                     </div>
                 </li>
-                 
+
                 <li class="nav-item menu-items MED display_none" id="btnCashBoxDefinitions">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnCashBoxDefinitions" aria-expanded="false" aria-controls="MbtnCashBoxDefinitions">
                         <span class="menu-icon">
@@ -275,6 +290,26 @@
                             <li id="btnAccTrCustomerAdjust" key="AccTrCustomerAdjust" class="nav-item"> <a id="btnAccTrCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrCustomerAdjust</a></li>
                             <li id="btnAccTrVendorAdjust" key="AccTrVendorAdjust" class="nav-item"> <a id="btnAccTrVendorAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrVendorAdjust</a></li>
 
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item menu-items MED display_none" id="btnCashBoxReports">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnCashBoxReports" aria-expanded="false" aria-controls="MbtnCashBoxReports">
+                        <span class="menu-icon">
+                              <i class="fas fa-file-contract"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Box_Report</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MbtnCashBoxReports">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnCollectedaccstat" key="Collectedaccstat" class="nav-item"> <a id="btnCollectedaccstat" class="nav-link" href="#">@SystemResource.Combined_account</a></li>
+                            <li id="btnSupplieraccstat" key="Supplieraccstat" class="nav-item"> <a id="btnSupplieraccstat" class="nav-link" href="#">@SystemResource.Suppliertstatment</a></li>
+                            <li id="btnClientaccstat" key="Clientaccstat" class="nav-item"> <a id="btnClientaccstat" class="nav-link" href="#">@SystemResource.Clientstatment</a></li>
+                            <li id="btnCashBoxAccount" key="CashBoxAccount" class="nav-item"> <a id="btnCashBoxAccount" class="nav-link" href="#">@SystemResource.AccountCashBox</a></li>
+                            <li id="btnCashBankAccount" key="CashBankAccount" class="nav-item"> <a id="btnCashBankAccount" class="nav-link" href="#">@SystemResource.AccountCashbank</a></li>
+                            <li id="btnAgingCust" key="AgingCust" class="nav-item"> <a id="btnAgingCust" class="nav-link" href="#">@SystemResource.AgingCust</a></li>
+                            <li id="btnAgingVend" key="AgingVend" class="nav-item"> <a id="btnAgingVend" class="nav-link" href="#">@SystemResource.AgingVend</a></li>
                         </ul>
                     </div>
                 </li>

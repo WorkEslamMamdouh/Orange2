@@ -60,7 +60,10 @@ namespace Clientaccstat {
         }
         $('#btnPrint').addClass('display_none');
 
-
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();   
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);

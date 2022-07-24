@@ -46,8 +46,8 @@ var ItemsalesSum;
         else {
             document.getElementById('Screen_name').innerHTML = "Customer Sales";
         }
-        $("#btnAdd").addClass("display_none");
-        $("#btnShow").addClass("display_none");
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
         $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();

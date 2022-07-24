@@ -44,6 +44,10 @@ var Supplieraccstat;
         else {
             document.getElementById('Screen_name').innerHTML = "Supplier Account Statement";
         }
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);

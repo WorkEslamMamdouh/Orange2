@@ -3,21 +3,7 @@
 @{
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@section Viewresult{
-    <button class="icon-bar d-flex justify-content-between reset " id="btnReset">
-        <i class="fas fa-search-plus fa-fw side-icon ms-1"></i>
-        <span class="align-self-center mb-3"> @SystemResource.new_search</span>
-    </button>
-    <button class="icon-bar d-flex justify-content-between viewresult d-none" id="btnviewresult">
-        <i class="fas fa-eye fa-fw side-icon ms-1"></i>
-        <span class="align-self-center mb-3">   @SystemResource.Preview_results </span>
-    </button>
-    <button class="icon-bar d-flex justify-content-between display_none" id="btnPrint">
-        <i class="fas fa-eye fa-fw side-icon ms-1"></i>
-        <span class="align-self-center mb-3">   @SystemResource.App_Print </span>
-    </button>
 
-}
 <label for="rpTitle" style="display:none" id="rpTitle">@*@SystemResource.Rep_PayRecieptList*@</label>
 
 <div class="row gy-3" id="content_report">

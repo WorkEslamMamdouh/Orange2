@@ -1269,7 +1269,7 @@ var SlsTrSalesManager;
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat == null ? '' : InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.RoundToSt(2);
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
+            //ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             //InvoiceTransCode = InvoiceStatisticsModel[0].InvoiceTransCode;
             lblInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
@@ -1289,9 +1289,9 @@ var SlsTrSalesManager;
                 //$('#ddlInvoiceCustomer').val(InvoiceStatisticsModel[0].CustomerId.toString());
             }
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
-            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            //var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
-            $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
+            //$('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.checked = true;
                 chkPreivilegeToEditApprovedInvoice();
@@ -1348,15 +1348,16 @@ var SlsTrSalesManager;
         $("#btnBack").addClass("display_none");
         //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
         $("#ddlSalesman").attr("disabled", "disabled");
-        $("#ddlSalesPerson").attr("disabled", "disabled");
         $("#txtCashMoney").attr("disabled", "disabled");
         $("#txtCardMoney").attr("disabled", "disabled");
         $('#ddlCashBox').attr('disabled', 'disabled');
-        //ddlInvoiceCustomer.disabled = true; 
+        //ddlInvoiceCustomer.disabled = true;
+        ddlSalesman.disabled = true;
         txtInvoiceDate.disabled = true;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
+        ddlSalesman.disabled = true;
         txtRefNo.disabled = true;
         txtRemarks.disabled = true;
         ddlType.disabled = true;
@@ -1373,6 +1374,7 @@ var SlsTrSalesManager;
             }
         }
         DocumentActions.RenderFromModel(InvoiceStatisticsModel[0]);
+        txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
         $('#txtContract_NO').val(InvoiceStatisticsModel[0].ContractNo);
         $('#txtPurchase_order_No').val(InvoiceStatisticsModel[0].PurchaseorderNo);
         $('#txtTerms_of_Payment').val(InvoiceStatisticsModel[0].TaxNotes);
@@ -1388,7 +1390,7 @@ var SlsTrSalesManager;
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt) {
         var html;
-        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control right2 display_none\"  />\n\t                <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n\n                         \n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control input-sm right2\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                 <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                              <option value=\"null\">  " + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </th>\n                     <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <th>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </th>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control right2 display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n\n                         \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control input-sm right2\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                 <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + " </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                              <option value=\"null\">  " + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#div_Data").append(html);
         $(".select_").select2();
         var username = $('.select_ option:selected').text();
@@ -2063,23 +2065,29 @@ var SlsTrSalesManager;
                 VatPrc = Tax_Rate;
                 $("#txtTax_Rate" + i).attr('data-VatNatID', Tax_Type_Model.Nature);
                 $('#txtTax_Rate' + i).val(Tax_Rate);
+                if (flag_PriceWithVAT == true) {
+                    $("#txtPrice" + i).val(Number($("#txtUnitpriceWithVat" + i).val()) * 100 / (Tax_Rate + 100));
+                }
+                else {
+                    $("#txtUnitpriceWithVat" + i).val((Number($("#txtPrice" + i).val()) * (Tax_Rate + 100) / 100).RoundToNum(2));
+                }
                 txtQuantityValue = $("#txtQuantity" + i).val();
                 txtPriceValue = $("#txtPrice" + i).val();
                 total = Number(txtQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + i).val(total.RoundToSt(2));
                 VatPrc = $("#txtTax_Rate" + i).val();
-                vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                vatAmount = Number(total) * VatPrc / 100;
                 $("#txtTax" + i).val(vatAmount.RoundToSt(2));
-                totalAfterVat = Number(vatAmount) + Number(total);
+                totalAfterVat = vatAmount.RoundToNum(2) + total.RoundToNum(2);
                 $("#txtTotAfterTax" + i).val(totalAfterVat.RoundToSt(2));
                 PackageCount += Number($("#txtQuantity" + i).val());
-                PackageCount = Number(PackageCount.RoundToSt(2).toString());
+                //PackageCount = Number(PackageCount.RoundToSt(2).toString());
                 CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal.RoundToSt(2).toString());
+                //CountTotal = Number(CountTotal.RoundToSt(2).toString());
                 TaxCount += Number($("#txtTax" + i).val());
-                TaxCount = Number(TaxCount.RoundToSt(2).toString());
+                //TaxCount = Number(TaxCount.RoundToSt(2).toString());
                 NetCount += Number($("#txtTotAfterTax" + i).val());
-                NetCount = Number(NetCount.RoundToSt(2).toString());
+                //NetCount = Number(NetCount.RoundToSt(2).toString());
             }
         };
         var flagvalue, txtQuantityValue, txtPriceValue, total, vatAmount, totalAfterVat;
