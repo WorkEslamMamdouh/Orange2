@@ -31,6 +31,10 @@ var OperationScrap;
         else {
             document.getElementById('Screen_name').innerHTML = "Record the rest";
         }
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);

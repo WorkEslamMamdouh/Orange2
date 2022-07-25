@@ -57,6 +57,7 @@ var ProcSalesRet;
     var txtTax;
     var txtNet;
     var txtCashAmount;
+    var txtCashAmountLabel;
     var txtRefNo;
     var txtRemarks;
     var txtInvoiceDate;
@@ -66,17 +67,16 @@ var ProcSalesRet;
     var txtOperationStatusMaster;
     //checkbox
     var chkActive;
-    var chkAddFreeReturn;
     var chkOpenProcess;
     //buttons 
     var btnShow;
-    var btnAddReturn;
+    var btnAdd;
     var btnAddDetails;
     var btnBack; // 
     var btnSave;
     var btnProcessInvoiceSearch;
-    var btnEdit;
-    var btnAddFreeReturn;
+    var btnUpdate;
+    //var btnAddFreeReturn: HTMLButtonElement;
     //print buttons 
     var btnPrintTrview;
     var btnPrintTrPDF;
@@ -103,7 +103,7 @@ var ProcSalesRet;
     var InvoiceFlag = false;
     var AfterInsertOrUpdateFlag = false;
     var FlagTochooseWhichOperationID = false;
-    var btnPrint;
+    //  var btnPrint: HTMLInputElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].OperationPriceWithVAT);
     //------------------------------------------------------ Main Region -----------------------------------
@@ -133,7 +133,7 @@ var ProcSalesRet;
         txtNet.value = NetCount.toString();
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        $('#btnPrint').addClass('display_none');
+        //    $('#btnPrint').addClass('display_none');   
         fillddlSalesPerson();
     }
     ProcSalesRet.InitalizeComponent = InitalizeComponent;
@@ -170,49 +170,48 @@ var ProcSalesRet;
         txtInvoiceNumber = document.getElementById("txtInvoiceNumber");
         lblReturnNumber = document.getElementById("lblReturnNumber");
         txtCashAmount = document.getElementById("txtCashAmount");
+        txtCashAmountLabel = document.getElementById("txtCashAmountLabel");
         txtRefNo = document.getElementById("txtRefNo");
         txtRemarks = document.getElementById("txtRemarks");
         //checkbox
         chkActive = document.getElementById("chkActive");
-        chkAddFreeReturn = document.getElementById("chkAddFreeReturn");
         chkOpenProcess = document.getElementById("chkOpenProcess");
         //button
         btnShow = document.getElementById("btnShow");
-        btnAddReturn = document.getElementById("btnAddReturn");
+        btnAdd = document.getElementById("btnAdd");
         btnAddDetails = document.getElementById("btnAddDetails"); // btnBack btnSave
         btnBack = document.getElementById("btnBack");
         btnSave = document.getElementById("btnSave");
         btnProcessInvoiceSearch = document.getElementById("btnProcessInvoiceSearch");
-        btnEdit = document.getElementById("btnEdit");
-        btnAddFreeReturn = document.getElementById("btnAddFreeReturn");
+        btnUpdate = document.getElementById("btnUpdate");
+        // btnAddFreeReturn = document.getElementById("btnAddFreeReturn") as HTMLButtonElement;
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
-        btnPrint = document.getElementById("btnPrint");
+        //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
         //labels
         txtOperationStatusMaster = document.getElementById("txtOperationStatusMaster");
     }
     function InitializeEvents() {
         chkActive.onclick = chkActive_onchecked;
         btnShow.onclick = btnShow_onclick;
-        btnAddReturn.onclick = AddNewReturn_onclick;
+        btnAdd.onclick = AddNewReturn_onclick;
         btnBack.onclick = btnBack_onclick;
         btnSave.onclick = btnSave_onclick;
         txtInvoiceNumber.onchange = txtInvoiceNumber_onchange;
         btnProcessInvoiceSearch.onclick = btnProcessInvoiceSearch_onclick;
-        btnAddFreeReturn.onclick = btnAddFreeReturn_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        // btnAddFreeReturn.onclick = btnAddFreeReturn_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         ddlInvoiceCustomer.onchange = ddlInvoiceCustomer_onchange;
         ddlReturnTypeShow.onchange = ddlReturnTypeShow_onchange;
-        chkAddFreeReturn.onchange = chkAddFreeReturn_onchange;
         ddlCustomer.onchange = ddlCustomer_onchange;
         //print
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        //   btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         ddlSalesMan.onchange = ddlSalesman_onchange;
@@ -288,7 +287,7 @@ var ProcSalesRet;
         });
     }
     //------------------------------------------------------ Buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         if (chkOpenProcess.checked == false) {
@@ -300,9 +299,10 @@ var ProcSalesRet;
             btnProcessInvoiceSearch.disabled = true;
             $("#btnBack").removeClass("display_none");
             $("#btnSave").removeClass("display_none");
-            $('#btnEdit').addClass("display_none");
+            $('#btnUpdate').addClass("display_none");
             $('#btnPrintTransaction').addClass("display_none");
             $("#txtCashAmount").removeAttr("disabled");
+            $("#txtCashAmountLabel").removeAttr("disabled");
             txtRefNo.disabled = false;
             txtRemarks.disabled = false;
             $("#divGridDetails_View").addClass("disabledDiv");
@@ -324,11 +324,11 @@ var ProcSalesRet;
             return;
         $("#divShow").removeClass("display_none");
         txtInvoiceNumber.value = "";
-        $('#btnEdit').addClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
-        $("#btnPrint").addClass("display_none");
+        // $("#btnPrint").addClass("display_none");
         btnProcessInvoiceSearch.disabled = true;
         txtInvoiceDate.value = GetDate();
         clear();
@@ -343,7 +343,6 @@ var ProcSalesRet;
         txtRemarks.disabled = false;
     }
     function btnProcessInvoiceSearch_onclick() {
-        chkAddFreeReturn.checked = false;
         InvoiceFlag = true;
         var sys = new SystemTools();
         var operatiodID = Number(ddlOPerationMaster.value);
@@ -353,7 +352,7 @@ var ProcSalesRet;
             RefTrID = id;
             txtInvoiceNumber_onchange();
             if (AddReturn != false) {
-                btnAddReturn_onclick();
+                btnAdd_onclick();
                 ComputeTotals();
                 $("#btnProcessInvoiceSearch").removeAttr("disabled");
             }
@@ -445,12 +444,13 @@ var ProcSalesRet;
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
-            $("#btnEdit").addClass("display_none");
-            $('#btnPrint').removeClass("display_none");
+            $("#btnUpdate").addClass("display_none");
+            //    $('#btnPrint').removeClass("display_none");
             $("#btnSave").addClass("display_none");
             $('#btnBack').addClass("display_none");
-            $('#btnEdit').removeClass("display_none");
+            $('#btnUpdate').removeClass("display_none");
             $("#txtCashAmount").attr("disabled", "disabled");
+            $("#txtCashAmountLabel").attr("disabled", "disabled");
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
             $("#btnProcessInvoiceSearch").attr("disabled", "disabled");
@@ -489,6 +489,7 @@ var ProcSalesRet;
         $("#divGridDetails_View").removeClass("disabledDiv");
     }
     function AddNewReturn_onclick() {
+        debugger;
         if (ddlOPerationMaster.value == "null" || ddlOPerationMaster.value == "") {
             DisplayMassage(" يجب اختيار العملية", "The process must be selected", MessageType.Worning);
             Errorinput(ddlOPerationMaster);
@@ -510,9 +511,9 @@ var ProcSalesRet;
                 $("#divReturnDetails").removeClass("display_none");
                 $("#btnBack").removeClass("display_none");
                 $("#btnSave").removeClass("display_none");
-                $("#btnEdit").addClass("display_none");
+                $("#btnUpdate").addClass("display_none");
                 $("#btnPrintTransaction").addClass("display_none");
-                $("#btnPrint").addClass("display_none");
+                //   $("#btnPrint").addClass("display_none");
                 $('#div_Data').html("");
                 txtItemCount.value = "";
                 txtPackageCount.value = "";
@@ -550,7 +551,8 @@ var ProcSalesRet;
             }
         }
     }
-    function btnAddReturn_onclick() {
+    function btnAdd_onclick() {
+        debugger;
         txtInvoiceDate.value = GetDate();
         var unApprovedReturn = false;
         lblReturnNumber.value = "";
@@ -562,8 +564,8 @@ var ProcSalesRet;
             Show = false;
             $("#btnBack").removeClass("display_none");
             $("#btnSave").removeClass("display_none");
-            $("#btnPrint").addClass("display_none");
-            $('#btnEdit').addClass("display_none");
+            //  $("#btnPrint").addClass("display_none");
+            $('#btnUpdate').addClass("display_none");
             var items = Number(txtItemCount.value);
             for (var i = 0; i < items; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
@@ -579,6 +581,7 @@ var ProcSalesRet;
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#txtInvoiceDate").removeAttr("disabled");
             $("#txtCashAmount").removeAttr("disabled");
+            $("#txtCashAmountLabel").removeAttr("disabled");
             $("#txtRefNo").removeAttr("disabled");
             $("#txtRemarks").removeAttr("disabled");
             btnProcessInvoiceSearch.disabled = true;
@@ -838,13 +841,14 @@ var ProcSalesRet;
         $("#ddlFreeSalesman").attr("disabled", "disabled");
         /// $("#ddlCashBox").attr("disabled", "disabled");
         $("#txtCashAmount").attr("disabled", "disabled");
+        $("#txtCashAmountLabel").attr("disabled", "disabled");
         //$("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
         $("#ddlTaxTypeHeader").prop("value", "null");
         // $("#chkActive").attr("disabled", "disabled");
         $("#btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
-        $("#btnPrint").addClass("display_none");
+        // $("#btnPrint").addClass("display_none");
         for (var cnt = 0; cnt <= CountGrid; cnt++) {
             //  $("#ddlFamily" + cnt).attr("disabled", "disabled");
             $("#ddlItem" + cnt).attr("disabled", "disabled");
@@ -963,10 +967,6 @@ var ProcSalesRet;
             if (InvoiceStatisticsModel[0].RefTrID != null) {
                 var RefID = InvoiceStatisticsModel[0].RefTrID;
                 GetInvoiceByID(RefID);
-                chkAddFreeReturn.checked = false;
-            }
-            else {
-                chkAddFreeReturn.checked = true;
             }
             var ReturnNum = InvoiceStatisticsModel[0].TrNo.toString();
             lblReturnNumber.value = ReturnNum;
@@ -986,6 +986,7 @@ var ProcSalesRet;
             if (InvoiceStatisticsModel[0].IsCash == true) {
                 $('#ddlReturnTypeShow').prop("value", "1");
                 $("#txtCashAmount").removeClass("display_none");
+                $("#txtCashAmountLabel").removeClass("display_none");
                 if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
                     var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
                     $("#txtCashAmount").prop("value", cashAmount);
@@ -993,18 +994,19 @@ var ProcSalesRet;
             }
             else {
                 $("#txtCashAmount").addClass("display_none");
+                $("#txtCashAmountLabel").addClass("display_none");
                 $('#ddlReturnTypeShow').prop("value", "0");
             }
             $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId == null ? "null" : InvoiceStatisticsModel[0].SalesmanId.toString());
             $('#ddlSalesPerson').prop("value", InvoiceStatisticsModel[0].SalesPersonId == null ? "null" : InvoiceStatisticsModel[0].SalesPersonId.toString());
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkActive.checked = true;
             }
             else {
                 chkActive.disabled = true;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
                 chkActive.checked = false;
             }
             $('#divCreationPanel').removeClass("display_none");
@@ -1040,26 +1042,7 @@ var ProcSalesRet;
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt) {
         var html;
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12" style="right: 3%;" > ' +
-            '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-            '<div class="col-lg-3" style="width: 19%;">' +
-            '<select id="ddlItem' + cnt + '" class="form-control"><option>الصنف</option></select></div>' +
-            '<div class=" col-lg-1">  <input type="text" class="form-control"    disabled id="txtQuantity' + cnt + '" name="quant[1]" class="form-control " value="0" min="0" max="1000" ></div>' +
-            '<div class=" col-lg-1" style="width: 9.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number3' + cnt + '"  id="btnminus1" data-type="minus" data-field="quant[3]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" min="1"   style="height:36px;" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control   font1" value="1" min="0" max="1000" step="1"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus3"   class="btnplasandmines btn-default btn-number3' + cnt + '" data-type="plus" data-field="quant[3]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class=" col-lg-2" style="width: 12.666667%;"><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number2' + cnt + '"  id="btnminus2" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="text" min="0"   style="height:36px;" disabled id="txtPrice' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus2' + cnt + '"   class="btnplasandmines btn-default btn-number2' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class=" col-lg-2" style="width: 12.666667%;" ><div class="input-group " ><span class="input-group-btn"><button type="button" style="background-color: #4CAF50; "   class="btnplasandmines btn-default btn-number4' + cnt + '"  id="btnminus3" data-type="minus" data-field="quant[2]"><span class="glyphicon glyphicon-minus"></span></button></span><input type="number"   style="height:36px;" id="txtUnitpriceWithVat' + cnt + '" name="quant[2]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"><span class="input-group-btn"><button type="button" style="background-color: #f44336;" id="btnplus3' + cnt + '"   class="btnplasandmines btn-default btn-number3' + cnt + '" data-type="plus" data-field="quant[2]"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>' +
-            '<div class="col-lg-1">' +
-            '<input id="txtTotal' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 3%;">' +
-            '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-            '<div class="col-lg-1">' +
-            '<input id="txtTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '<div class="col-lg-1">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control right2" disabled /></div>' +
-            '</div></div></div>' +
-            '<input id="vatnatid' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"display_none\"><i class=\"fas fa-minus-circle fs-4 btn-minus \"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                                <option>\u0627\u0644\u0635\u0646\u0641</option>\n                            </select>\n                        </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[1]\"  value=\"0\" min=\"1\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtPrice" + cnt + "\" name=\"quant[2]\"  value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number2" + cnt + "\" data-id=\"decrease\" id=\"btnminus2\" data-type=\"minus\" data-field=\"quant[2]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number2" + cnt + "\" data-id=\"increase\" id=\"btnplus2\" data-type=\"plus\" data-field=\"quant[2]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group ps-1\">\n\t\t\t                    <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtUnitpriceWithVat" + cnt + "\" name=\"quant[2]\"  value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number3" + cnt + "\" data-id=\"decrease\" id=\"btnminus3\" data-type=\"minus\" data-field=\"quant[2]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number3" + cnt + "\" data-id=\"increase\" id=\"btnplus3\" data-type=\"plus\" data-field=\"quant[2]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtTotal" + cnt + "\"  class=\"form-control\" disabled>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax_Rate" + cnt + "\" type=\"text\"  class=\"form-control\"  disabled>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id=\"vatnatid" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#div_Data").append(html);
         //script
         $('.btn-number2' + cnt).click(function (e) {
@@ -1404,7 +1387,7 @@ var ProcSalesRet;
             var txtQuantityValue = $("#txtQuantity" + cnt).val();
             var txtReturnQuantityValue = $("#txtReturnQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
-            if (Number(txtReturnQuantityValue) <= Number(txtQuantityValue) && chkAddFreeReturn.checked == false) {
+            if (Number(txtReturnQuantityValue) <= Number(txtQuantityValue)) {
                 var total = Number(txtReturnQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 var vatAmount = Number(total) * VatPrc / 100;
@@ -1640,11 +1623,11 @@ var ProcSalesRet;
         try {
             if (InvoiceStatisticsModel[0].Status == 1) {
                 chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = SysSession.CurrentPrivileges.EDIT;
             }
             else {
                 chkActive.disabled = SysSession.CurrentPrivileges.CUSTOM2;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
             }
         }
         catch (e) {
@@ -1668,21 +1651,6 @@ var ProcSalesRet;
             }
         });
         return res;
-    }
-    function chkAddFreeReturn_onchange() {
-        if (chkAddFreeReturn.checked == true) {
-            btnProcessInvoiceSearch.disabled = true;
-            $("#divReturnDetails").removeClass("display_none");
-        }
-        else {
-            btnProcessInvoiceSearch.disabled = false;
-            $('#div_Data').html("");
-            txtItemCount.value = "";
-            $("#btnAddDetails").addClass("display_none");
-        }
-        $("#txtCustomerName").removeAttr("disabled");
-        $("#ddlFreeSalesman").removeAttr("disabled");
-        ddlFreeSalesman.disabled = false;
     }
     function ddlCustomer_onchange() {
         var customerID = Number(ddlCustomer.value);
@@ -1785,11 +1753,13 @@ var ProcSalesRet;
                     }
                     if (InvoiceStatisticsModel[0].IsCash == true) {
                         $('#ddlReturnTypeShow').prop("value", 1);
+                        $("#txtCashAmountLabel").removeClass("display_none");
                         $("#txtCashAmount").removeClass("display_none");
                         $("#txtCashAmount").val("");
                     }
                     else {
                         $('#ddlReturnTypeShow').prop("value", 0);
+                        $("#txtCashAmountLabel").addClass("display_none");
                         $("#txtCashAmount").addClass("display_none");
                         $("#txtCashAmount").val("");
                     }
@@ -2006,11 +1976,12 @@ var ProcSalesRet;
         InitializeGrid();
         $("#divReturnDetails").removeClass("display_none");
         $("#txtCashAmount").attr("disabled", "disabled");
+        $("#txtCashAmountLabel").attr("disabled", "disabled");
         $("#btnProcessInvoiceSearch").attr("disabled", "disabled");
-        $('#btnPrint').removeClass("display_none");
+        //  $('#btnPrint').removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $('#btnBack').addClass("display_none");
-        $('#btnEdit').removeClass("display_none");
+        $('#btnUpdate').removeClass("display_none");
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#div_hedr").removeAttr("disabled");
         $("#div_hedr").removeClass("disabledDiv");

@@ -70,7 +70,7 @@ var Processes;
     var btnExpenses;
     var btnOpen;
     var btnShow;
-    var btnadd;
+    var btnAdd;
     var btnUpdate_1;
     var btnSave_1;
     var btnBack_1;
@@ -142,7 +142,7 @@ var Processes;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
-    var btnPrint;
+    //    var btnPrint: HTMLButtonElement;
     //------------------------------------report print 1------------------------------
     var btnPrintTrview1;
     var btnPrintTrPDF1;
@@ -182,6 +182,10 @@ var Processes;
         $("#divProcessClose").addClass("disabledDiv");
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
+        $("#btnUpdate").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
+        $("#btnSave").addClass("d-none");
+        $("#btnBack").addClass("d-none");
         InitalizeControls();
         IntializeEvents();
         FillddlVendorMaster();
@@ -200,7 +204,7 @@ var Processes;
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         fillddlVatType();
-        $('#btnPrint').addClass('display_none');
+        //   $('#btnPrint').addClass('display_none');
         $('#btnPrint1').addClass('display_none');
         $('#btnPrint2').addClass('display_none');
         $('#btnPrint3').addClass('display_none');
@@ -255,7 +259,7 @@ var Processes;
         btnOpen = document.getElementById("btnOpen");
         // btnclosingprocessing = document.getElementById("btnclosingprocessing") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
         btnUpdate_1 = document.getElementById("btnUpdate_1");
         btnBack_1 = document.getElementById("btnBack_1");
         btnSave_1 = document.getElementById("btnSave_1");
@@ -275,7 +279,7 @@ var Processes;
         btnAddDetailsCharge = document.getElementById("btnAddDetailsCharge");
         btnAddDetailslebel = document.getElementById("btnAddDetailslebel");
         //--------------------------- print Button  
-        btnPrint = document.getElementById("btnPrint");
+        //   btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
@@ -317,7 +321,7 @@ var Processes;
         btnAddDetailslebel.onclick = AddNewRowlebel;
         btnAddDetails.onclick = AddNewRow;
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnAdd_onclick;
+        btnAdd.onclick = btnAdd_onclick;
         btnPresent.onclick = btnPresent_onclick;
         btnClose.onclick = btnClose_onclick;
         btnClose_Focus.onclick = btnClose_Focus_onclick;
@@ -357,7 +361,7 @@ var Processes;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        // btnPrint.onclick = () => { PrintReport(4); }
         //--------------------------- print Button1  
         btnPrintTrview1.onclick = function () { PrintReport1(1); };
         btnPrintTrPDF1.onclick = function () { PrintReport1(2); };
@@ -2728,7 +2732,7 @@ var Processes;
         $("#btnClose").attr("disabled", "disabled").off('click');
         $("#btnPresent").removeAttr("disabled");
         $("#btnClose").attr("style", "");
-        $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;");
+        $("#btnPresent").attr("style", "background-color: #fa7809");
     }
     function Processes_Ready() {
         $("#divProcessClose").attr("disabled", "disabled").off('click');
@@ -2813,7 +2817,7 @@ var Processes;
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("style", "");
-        $("#btnPresent").attr("style", "margin-right: 8%;");
+        //  $("#btnPresent").attr("style", "margin-right: 8%;")
         $("#btnClose").removeAttr("disabled");
         $("#btnClose").attr("style", "background-color: #fdb0b0;");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
@@ -2842,7 +2846,7 @@ var Processes;
         btnUpdate_5.classList.add('display_none');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
-        $("#btnPresent").attr("style", " margin-right: 8%;");
+        //   $("#btnPresent").attr("style", " margin-right: 8%;")
         $("#btnClose").attr("style", " ");
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
@@ -3089,7 +3093,7 @@ var Processes;
         $("#OerSalesman").attr("disabled", "disabled").off('click');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
-        $("#btnPresent").attr("style", "  margin-right: 8%;");
+        //  $("#btnPresent").attr("style", "  margin-right: 8%;")
         $("#btnClose").attr("style", "");
         $("#btnOpen").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("style", "");
@@ -3160,7 +3164,7 @@ var Processes;
                 //btnUpdate_3.focus();
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;");
+                $("#btnPresent").attr("style", "background-color: #fa7809");
                 $("#btnClose").attr("style", "");
             }
             else {
@@ -3488,7 +3492,7 @@ var Processes;
             Processes_Close();
             $("#btnPresent").attr("disabled", "disabled").off('click');
             $("#btnClose").attr("disabled", "disabled").off('click');
-            $("#btnPresent").attr("style", "  margin-right: 8%;");
+            //    $("#btnPresent").attr("style", "  margin-right: 8%;");
             $("#btnClose").attr("style", "");
             $("#btnView_load").focus();
             Display();
