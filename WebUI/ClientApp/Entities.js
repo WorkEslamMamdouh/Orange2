@@ -6263,4 +6263,18 @@ var IProc_DashAccounts = /** @class */ (function (_super) {
     }
     return IProc_DashAccounts;
 }(SecurityClass));
+var ModelLastPrice = /** @class */ (function (_super) {
+    __extends(ModelLastPrice, _super);
+    function ModelLastPrice() {
+        var _this = _super.call(this) || this;
+        _this.CustLastPrice = 0;
+        _this.CustLastTr = 0;
+        _this.custLastDate = '';
+        _this.LastPrice = 0;
+        _this.LastPurchase = 0;
+        _this.Curcost = 0;
+        return _this;
+    }
+    return ModelLastPrice;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map

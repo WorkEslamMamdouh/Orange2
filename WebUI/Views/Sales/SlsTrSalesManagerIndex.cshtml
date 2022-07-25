@@ -74,6 +74,30 @@
     .collapsible-content p {
         margin-bottom: 0;
     }
+
+
+
+    .btnCustLastPrice {
+        direction: ltr !important;
+        bottom: 204px !important;
+        left: 97% !important;
+        right: -97% ;
+        border-radius: 72px 0px 0px 71px !important;
+        height: 53px !important;
+        padding-top: 5px !important;
+        padding-right: 0px !important;
+        width: 100%;
+    }
+
+    .areatable {
+         
+        width: 75px;
+    }
+	
+	
+	
+
+     
 </style>
 
 <div class="col-12  borderred">
@@ -377,56 +401,66 @@
                             <span id="btnAddDetails" class="d-flex mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
                         </div>
                     </div>
-                    <!-- Total Details -->
+
+
+                    @*----------------------------------------------------------------------------------------------------------*@
+
                     <div class="col-12">
-                        <div class="wrap-collabsible">
-                            <input id="collapsible3" class="toggle" type="checkbox">
-                            <label for="collapsible3" class="lbl-toggle" tabindex="0">أخر سعر بيع للعميل </label>
-                            <div class="collapsible-content">
-                                <div class="content-inner">
+                        <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
+                            <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice" style="">
+                                <i class="mdi mdi-account-search" style="font-size: 24px;"></i>
+                             
 
+                                <div class="table-responsive" style="margin-right: 11%;direction: rtl;">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
 
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                   
-                                                    <th>اخر سعر بيع للعميل</th>
-                                                    <th>اخر رقم فاتوره للعميل </th>
-                                                    <th> اخر تاريخ </th>
-                                                    <th> اخر سعر بيع </th>
-                                                    <th>  اخر سعر شراء   </th>
-                                                    <th> التكلفة   </th> 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                              
-                                                    <td> 02312 </td>
-                                                    <td> 02312 </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> Dashboard </td>
-                                                    <td> Credit card </td>
-                                                   
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                <th>اخر سعر بيع للعميل</th>
+                                                <th class="areatable">   </th>
+                                                <th>اخر رقم فاتوره للعميل </th>
+                                                <th class="areatable">   </th>
+                                                <th> اخر تاريخ </th>
+                                                <th class="areatable">   </th>
+                                                <th> اخر سعر بيع </th>
+                                                <th class="areatable">   </th>
+                                                <th>  اخر سعر شراء   </th>
+                                                <th class="areatable">   </th>
+                                                <th> التكلفة   </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: antiquewhite;">
+                                            <tr>
 
+                                                <td id="CustLastPrice"> 02312 </td>
+                                                <td class="areatable">  </td>
+                                                <td id="CustLastTr"> 02312 </td>
+                                                <td class="areatable">  </td>
+                                                <td id="custLastDate"> 04 Dec 2019 </td>
+                                                <td class="areatable">  </td>
+                                                <td id="LastPrice"> $14,500 </td>
+                                                <td class="areatable">  </td>
+                                                <td id="LastPurchase"> Dashboard </td>
+                                                <td class="areatable">  </td>
+                                                <td id="Curcost"> Credit card </td>
 
-                                    @*<p> Careen fluke jolly boat keel topgallant Admiral of the Black barkadeer sloop poop deck salmagundi. Avast red ensign parley clap of thunder no prey, no pay killick stern clipper execution dock splice the main brace. Grog blossom yardarm bilge water marooned cog wherry tackle aye Shiver me timbers come about.</p>*@
+                                            </tr>
 
-
-
-
-
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div>
-                        </div>
 
+
+                            </div>
+                            <br />
+                        </div>
                     </div>
+
+
+
+
+
+                    @*----------------------------------------------------------------------------------------------------------*@
 
                     <div class="col-12">
                         <div class="form-group row g-0 ">
@@ -524,20 +558,20 @@
 
                     <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 p-0 ">
                         @*<button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
-                                <span class="glyphicon"></span> @SystemResource.App_PrintInvoice
-                            </button>
-                            <button id="btnPrintInvoicePrice" type="button" class="btn btn-warning ">
-                                <span class="glyphicon"></span> @SystemResource.App_PrintPrice
-                            </button>
-                            <div class="btn-group" id="div_btnPrint">
-                                <label type="button" class="btn btn-warning">@SystemResource.App_Print</label>
-                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-hand-down"></span>
-                                </button>*@
+                <span class="glyphicon"></span> @SystemResource.App_PrintInvoice
+            </button>
+            <button id="btnPrintInvoicePrice" type="button" class="btn btn-warning ">
+                <span class="glyphicon"></span> @SystemResource.App_PrintPrice
+            </button>
+            <div class="btn-group" id="div_btnPrint">
+                <label type="button" class="btn btn-warning">@SystemResource.App_Print</label>
+                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-hand-down"></span>
+                </button>*@
                         <div class="dropdown-menu" role="menu" style="border-radius:15px">
                             @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                                    <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                                </div>*@
+                    <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
+                </div>*@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                                 <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
                             </div>
@@ -545,14 +579,14 @@
                     </div>
 
                     @*<button id="btnSave" type="button" class="btn btn-success  display_none float_left">
-                            @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
-                        </button>
-                        <button id="btnBack" type="button" class="btn btn-warning  display_none float_left">
-                            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
-                        </button>
-                        <button id="btnUpdate" type="button" class="btn btn-primary display_none float_left">
-                            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
-                        </button>*@
+            @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
+        </button>
+        <button id="btnBack" type="button" class="btn btn-warning  display_none float_left">
+            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
+        </button>
+        <button id="btnUpdate" type="button" class="btn btn-primary display_none float_left">
+            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
+        </button>*@
                 </div>
             </div>
         </div>
@@ -802,8 +836,7 @@
             <br>
         </div>*@
 </div>
-
-</div>
+ 
 
 
 
@@ -842,7 +875,8 @@
 
 
 
-        let myLabels = document.querySelectorAll('.lbl-toggle'); Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); }); 
+        //let myLabels = document.querySelectorAll('.lbl-toggle');
+        //Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); }); 
 
     </script>
 }

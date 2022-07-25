@@ -15,6 +15,7 @@ namespace SlsTrSalesManager {
     //ddl
     var btndiv_1: HTMLButtonElement;
     var btndiv_2: HTMLButtonElement;
+    var btnCustLastPrice: HTMLButtonElement;
     var ddlStore: HTMLSelectElement;
     var ddlCustomer: HTMLSelectElement;
     var ddlSalesmanFilter: HTMLSelectElement;
@@ -61,6 +62,7 @@ namespace SlsTrSalesManager {
     var List_MinUnitPrice: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
     var ItemFamilyDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
     var MasterDetailModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
+    var ModelPrice: ModelLastPrice = new ModelLastPrice();
     var storeDetails: Array<G_STORE> = new Array<G_STORE>();
 
 
@@ -144,6 +146,7 @@ namespace SlsTrSalesManager {
 
     var Page = true;
     let pageIndex;
+    var flagLastPrice = 2;
 
     //------------------------------------------------------ Main Region------------------------
     export function InitalizeComponent() {
@@ -233,6 +236,7 @@ namespace SlsTrSalesManager {
         //button
         btndiv_1 = document.getElementById("btndiv_1") as HTMLButtonElement;
         btndiv_2 = document.getElementById("btndiv_2") as HTMLButtonElement;
+        btnCustLastPrice = document.getElementById("btnCustLastPrice") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
@@ -281,6 +285,51 @@ namespace SlsTrSalesManager {
 
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
+        btnCustLastPrice.onclick = LastPrice_onclick;
+    }
+    function LastPrice_onclick() {
+
+        if (flagLastPrice % 2 === 0) {
+
+            $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
+            timerHiddenLastPrice();
+           
+        }
+        else {
+
+            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+        }
+        flagLastPrice++;
+    }
+    function timerHiddenLastPrice() {
+        setTimeout(function () {
+            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+            flagLastPrice = 2;
+        }, 5000);
+    }
+    function GetLastPrice(itemid: number) {
+         
+        let customerid = 0
+        let storeid = 0
+        let invid = 0
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+            data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    ModelPrice = result.Response as ModelLastPrice;
+                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
+                    $("#CustLastPrice").html(ModelPrice.CustLastTr.toString())
+                    $("#CustLastPrice").html(ModelPrice.LastPrice.toString())
+                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
+               
+                }
+            }
+        });
+
     }
     function btndiv_1_onclick() {
         $("#btndiv_1").addClass("Actiev");
@@ -1435,7 +1484,7 @@ namespace SlsTrSalesManager {
             { title: res.App_invoiceType, name: "IsCashDesciption", type: "text", width: "16%" },
             { title: res.App_Certified, name: "statusDesciption", type: "text", width: "17%" },
         ];
-        
+
     }
     function BindStatisticGridData() {
         var startDate = DateFormatRep(txtStartDate.value).toString();
@@ -3141,7 +3190,7 @@ namespace SlsTrSalesManager {
                     IsSuccess = true;
 
                     if (res.Status == 1) {
-                        setTimeout(function () { DownloadInvoicePdf(); }, 500); 
+                        setTimeout(function () { DownloadInvoicePdf(); }, 500);
                     }
 
 
@@ -3401,7 +3450,7 @@ namespace SlsTrSalesManager {
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.sort(dynamicSort("TrNo"));
 
 
-        InitializeGrid(); 
+        InitializeGrid();
         Grid.DataSource = SlsInvoiceStatisticsDetails;
         Grid.Bind();
         $("#divShow").removeClass("display_none");

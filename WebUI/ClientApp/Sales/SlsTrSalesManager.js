@@ -14,6 +14,7 @@ var SlsTrSalesManager;
     //ddl
     var btndiv_1;
     var btndiv_2;
+    var btnCustLastPrice;
     var ddlStore;
     var ddlCustomer;
     var ddlSalesmanFilter;
@@ -57,6 +58,7 @@ var SlsTrSalesManager;
     var List_MinUnitPrice = new Array();
     var ItemFamilyDetails = new Array();
     var MasterDetailModel = new SlsInvoiceMasterDetails();
+    var ModelPrice = new ModelLastPrice();
     var storeDetails = new Array();
     //TextBoxes
     var txt_Tax_total_Discount;
@@ -128,6 +130,7 @@ var SlsTrSalesManager;
     var InvoiceTransCode = 0;
     var Page = true;
     var pageIndex;
+    var flagLastPrice = 2;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -208,6 +211,7 @@ var SlsTrSalesManager;
         //button
         btndiv_1 = document.getElementById("btndiv_1");
         btndiv_2 = document.getElementById("btndiv_2");
+        btnCustLastPrice = document.getElementById("btnCustLastPrice");
         btnAdd = document.getElementById("btnAdd");
         btnShow = document.getElementById("btnShow");
         btnUpdate = document.getElementById("btnUpdate");
@@ -253,6 +257,43 @@ var SlsTrSalesManager;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
+        btnCustLastPrice.onclick = LastPrice_onclick;
+    }
+    function LastPrice_onclick() {
+        if (flagLastPrice % 2 === 0) {
+            $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
+            timerHiddenLastPrice();
+        }
+        else {
+            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+        }
+        flagLastPrice++;
+    }
+    function timerHiddenLastPrice() {
+        setTimeout(function () {
+            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+            flagLastPrice = 2;
+        }, 5000);
+    }
+    function GetLastPrice(itemid) {
+        var customerid = 0;
+        var storeid = 0;
+        var invid = 0;
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+            data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    ModelPrice = result.Response;
+                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
+                    $("#CustLastPrice").html(ModelPrice.CustLastTr.toString());
+                    $("#CustLastPrice").html(ModelPrice.LastPrice.toString());
+                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
+                }
+            }
+        });
     }
     function btndiv_1_onclick() {
         $("#btndiv_1").addClass("Actiev");

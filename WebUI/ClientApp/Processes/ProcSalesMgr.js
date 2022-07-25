@@ -84,7 +84,7 @@ var ProcSalesMgr;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
-    //  var btnPrintInvoicePrice: HTMLButtonElement;
+    var btnPrintInvoicePrice;
     var btnPrintslip;
     // giedView
     var Grid = new JsGrid();
@@ -224,7 +224,7 @@ var ProcSalesMgr;
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick;
-        //  btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
+        btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         ddlSalesmanFilter.onchange = ddlSalesmanFilter_onchange;
         chkOpenProcess.onclick = ddlSalesmanFilter_onchange;

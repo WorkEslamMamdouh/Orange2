@@ -94,7 +94,7 @@ namespace ProcSalesMgr {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-  //  var btnPrintInvoicePrice: HTMLButtonElement;
+    var btnPrintInvoicePrice: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
 
 
