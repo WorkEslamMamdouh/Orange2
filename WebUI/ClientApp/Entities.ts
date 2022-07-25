@@ -10592,3 +10592,23 @@ class IProc_DashAccounts extends SecurityClass {
    
 }
 
+class ModelLastPrice extends SecurityClass {
+    constructor() {
+        super();
+        this.CustLastPrice = 0; 
+        this.CustLastTr = 0; 
+        this.custLastDate = ''; 
+        this.LastPrice = 0; 
+        this.LastPurchase = 0; 
+        this.Curcost = 0; 
+    }
+    public CustLastPrice: number; 
+    public CustLastTr: number;
+    public custLastDate: string;  
+    public LastPrice: number; 
+    public LastPurchase: number; 
+    public Curcost: number; 
+   
+}
+ 
+

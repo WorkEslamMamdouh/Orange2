@@ -1123,5 +1123,39 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
 
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetLastPrice(int CompCode, int BranchCode, int itemid, int customerid, int storeid, int invid)
+        {
+
+            string query = @"  DECLARE	@return_value int,
+                                      		@CustLastPrice numeric(18, 2),
+                                      		@CustLastTr int,
+                                      		@custLastDate nvarchar(20),
+                                      		@LastPrice numeric(18, 2),
+                                      		@LastPurchase numeric(18, 2),
+                                      		@Curcost numeric(18, 2);
+                                      
+                                      EXEC	@return_value = [dbo].[IProc_GetLastSalePrice] ";
+                           query = query + CompCode.ToString() + "," + BranchCode.ToString() + "," + itemid.ToString() + "," + customerid.ToString() + "," + storeid.ToString() + "," + invid.ToString();
+                 
+                           query = query + @"@CustLastPrice = @CustLastPrice OUTPUT,
+                                      		@CustLastTr = @CustLastTr OUTPUT,
+                                      		@custLastDate = @custLastDate OUTPUT,
+                                      		@LastPrice = @LastPrice OUTPUT,
+                                      		@LastPurchase = @LastPurchase OUTPUT,
+                                      		@Curcost = @Curcost OUTPUT;
+                                      
+                                     SELECT	@CustLastPrice as N'CustLastPrice',
+                                      		@CustLastTr as N'CustLastTr',
+                                      		@custLastDate as N'custLastDate',
+                                      		@LastPrice as N'LastPrice',
+                                      		@LastPurchase as N'LastPurchase',
+                                      		@Curcost as N'Curcost'  ";
+             
+                var res = db.Database.SqlQuery<ModelLastPrice>(query).FirstOrDefault();
+                return Ok(new BaseResponse(res));
+           
+        }
     }
 }
