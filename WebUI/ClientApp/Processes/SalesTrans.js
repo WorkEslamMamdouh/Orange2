@@ -60,7 +60,7 @@ var SalesTrans;
     //buttons
     var btnShow;
     var btnAdd;
-    var btnEdit;
+    var btnUpdate;
     var btnSave;
     var btnBack;
     var btnAddDetails;
@@ -128,7 +128,7 @@ var SalesTrans;
         //buttons
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnEdit");
+        btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
         btnAddDetails = DocumentActions.GetElementById("btnAddDetails");
@@ -146,7 +146,7 @@ var SalesTrans;
         btnShow.onclick = btnShow_onclick;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnEdit_onclick;
         btnAddDetails.onclick = AddNewRow;
         txtSearch.onkeyup = txtSearch_onKeyup;
         chkApproved.onclick = chkApproved_checked;
@@ -215,18 +215,19 @@ var SalesTrans;
             Errorinput(ddlOPerationMaster);
             $("#divTransferDetails").addClass("display_none");
             $("#div_Approve").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#btnPrintTransaction").addClass("display_none");
         }
     }
     function btnShow_onclick() {
         if (ddlOPerationMaster.value != "null") {
             $("#div_Approve").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#btnPrintTransaction").addClass("display_none");
             $("#divTransferDetails").addClass("display_none");
             $("#divGridShow").removeClass("display_none");
             InitializeGrid();
+            $("#divShow").removeClass("display_none");
         }
         else {
             DisplayMassage("يجب اختيار العملية", "Please Select Operation", MessageType.Error);
@@ -235,6 +236,7 @@ var SalesTrans;
     }
     function btnBack_onclick() {
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
         if (FlagAddOrEdit == 2) {
@@ -243,7 +245,7 @@ var SalesTrans;
         else {
             $("#divTransferDetails").addClass("display_none");
             $("#div_Approve").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             DisableControls();
             Clear();
             $("#btnPrintTransaction").addClass("display_none");
@@ -282,7 +284,7 @@ var SalesTrans;
     }
     function ddlOPerationMaster_onchange() {
         $("#div_Approve").addClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         $("#divTransferDetails").addClass("display_none");
         $("#divGridShow").addClass("display_none");
@@ -372,7 +374,7 @@ var SalesTrans;
         Clear();
         $("#divTransferDetails").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#div_Approve").removeClass("display_none");
         SelectedModel = IQ_SalesOperTransferWithDetail.IQ_GetOperationTF.filter(function (x) { return x.OperationTFID == Number(Grid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
@@ -413,13 +415,13 @@ var SalesTrans;
             DisableControls();
             if (SelectedModel[0].IsSent == true) {
                 chkApproved.checked = true;
-                btnEdit.disabled = true;
+                btnUpdate.disabled = true;
                 chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
             }
             else {
                 chkApproved.checked = false;
                 chkApproved.disabled = true;
-                btnEdit.disabled = false;
+                btnUpdate.disabled = false;
             }
         }
     }
@@ -705,17 +707,18 @@ var SalesTrans;
         txtTrNo.disabled = true;
     }
     function HideButtons() {
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnSave").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
     }
     function ShowButons() {
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
     }
     function DisableDiv() {
         $("#div_hedr").addClass("disabledDiv");
+        $("#divShow").addClass("disabledDiv");
         $("#divTransferDetails").removeClass("disabledDiv");
         $("#divTransferDetails").removeClass("display_none");
     }
@@ -748,27 +751,28 @@ var SalesTrans;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">' +
-            '<input id="txtOperationTFDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-            '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3DirectTransfer "></span>' +
-            '</div>' +
-            '<input id="txtOperationItemID' + cnt + '" name="FromDate" disabled type="hidden"  class="form-control  text_Display" />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:4%!important;">' +
-            '<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            '<input id="txtItemID' + cnt + '" name="" disabled type="hidden" class="col-lg-9 col-md-9 col-sm-9 col-xl-9 col-xs-9  form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" >' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 Acc" >' +
-            '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
-            //'<div class="col-lg-1 Acc" style=" ">' +
-            //'<input id="txtSendQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
-            '<input id="txtRecQty' + cnt + '" name="" disabled type="number" class="form-control text_Display" /></div>' +
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type ="hidden" />' +
-            '<input id="txt_OnhandQty' + cnt + '" name = " " type ="hidden" />' +
-            '</div>';
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"txtOperationTFDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtOperationItemID" + cnt + "\" type=\"hidden\" name=\"FromDate\" class=\"form-control display_none\"  />\n                    <input id=\"txtItemID" + cnt + "\" type=\"hidden\" name=\"FromDate\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"display_none\"><i class=\"fas fa-minus-circle fs-4 btn-minus \"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <div class=\"search-content\">\n                                <input id=\"txtItemCode" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n                                <button type=\"button\" name=\"InvoiceSearch\" id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\" class=\"btn btn-main btn-search\">\n                                    <i class=\"fas fa-search\"></i>\n                                </button>\n                            </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtItemName" + cnt + "\" disabled>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtRecQty" + cnt + "\" type=\"number\"  class=\"form-control\"  disabled>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_OnhandQty" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">' +
+        //    '<input id="txtOperationTFDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
+        //    '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3DirectTransfer "></span>' +
+        //    '</div>' +
+        //    '<input id="txtOperationItemID' + cnt + '" name="FromDate" disabled type="hidden"  class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:4%!important;">' +
+        //    '<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search"></i></button>' +
+        //    '<input id="txtItemID' + cnt + '" name="" disabled type="hidden" class="col-lg-9 col-md-9 col-sm-9 col-xl-9 col-xs-9  form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" >' +
+        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
+        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 Acc" >' +
+        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
+        //    //'<div class="col-lg-1 Acc" style=" ">' +
+        //    //'<input id="txtSendQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
+        //    '<input id="txtRecQty' + cnt + '" name="" disabled type="number" class="form-control text_Display" /></div>' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type ="hidden" />' +
+        //    '<input id="txt_OnhandQty' + cnt + '" name = " " type ="hidden" />' +
+        //    '</div>';
         $("#div_Data").append(html);
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -1071,7 +1075,7 @@ var SalesTrans;
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
                     chkApproved.disabled = true;
-                    btnEdit.disabled = false;
+                    btnUpdate.disabled = false;
                 }
                 else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -1082,6 +1086,7 @@ var SalesTrans;
     function Save() {
         InitializeGrid();
         $("#div_hedr").removeClass("disabledDiv");
+        $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
         DisableControls();

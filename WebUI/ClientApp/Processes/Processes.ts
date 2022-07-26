@@ -208,6 +208,12 @@ namespace Processes {
         $("#btnPrintTransaction").addClass("d-none");
         $("#btnSave").addClass("d-none");
         $("#btnBack").addClass("d-none");
+        $("#btnPrintTrview").addClass("print-list");
+        $("#btnPrintTrPDF").addClass("print-list");
+        $("#btnPrintTrEXEL").addClass("print-list");
+        $("#btnPrintTrview span").text("طباعه قائمه عمليات");
+        $("#btnPrintTrPDF span").text("PDF 'قائمه عمليات'");
+        $("#btnPrintTrEXEL span").text("Excel 'قائمه عمليات'");
         InitalizeControls();
         IntializeEvents();
         FillddlVendorMaster();
@@ -890,7 +896,7 @@ namespace Processes {
             $("#btnClose").attr("style", "")
 
             $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "")
+            $("#btnPresent").attr("style", "");
         }
         else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
             Processes_Close();
@@ -974,7 +980,7 @@ namespace Processes {
 
         showdiv();
 
-        $('#divlepRentdata_1').removeClass('showdiv');
+        $('#divlepRentdata_1').removeClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -2872,7 +2878,7 @@ namespace Processes {
 
                     if (Status == 1 || Status == 2) {
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('showdiv');
+                        $('#divlepRentdata_1').removeClass('display_none');
                         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3370,7 +3376,7 @@ namespace Processes {
         $("#btnPresent").removeAttr("disabled");
 
         $("#btnClose").attr("style", "")
-        $("#btnPresent").attr("style", "background-color: #fa7809")
+        $("#btnPresent").attr("style", "background-color: #198754")
 
 
 
@@ -3383,7 +3389,7 @@ namespace Processes {
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
+        $('#divlepRentdata_1').addClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3590,7 +3596,7 @@ namespace Processes {
 
                         if (Status == 1 || Status == 2) {
                             showdiv();
-                            $('#divlepRentdata_1').removeClass('showdiv');
+                            $('#divlepRentdata_1').removeClass('display_none');
                             $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                             $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3820,7 +3826,7 @@ namespace Processes {
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
+        $('#divlepRentdata_1').addClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3937,7 +3943,7 @@ namespace Processes {
                 btnShow_onclick();
 
                 MasterGridBiuld();
-                $('#divlepRentdata_1').removeClass('showdiv');
+                $('#divlepRentdata_1').removeClass('display_none');
                 $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                 $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3951,7 +3957,7 @@ namespace Processes {
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #fa7809")
+                $("#btnPresent").attr("style", "background-color: #198754")
                 $("#btnClose").attr("style", "")
 
             }
@@ -4669,7 +4675,7 @@ namespace Processes {
 
 
         $('#Payload_data').on('click', function () {
-            $('#divlepRentdata_1').toggleClass('showdiv');
+            $('#divlepRentdata_1').toggleClass('display_none');
             $('#spanlepRentdata_1').toggleClass('fa-caret-left');
             $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
