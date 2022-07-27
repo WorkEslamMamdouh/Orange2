@@ -21,13 +21,14 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="~/Scripts/IgGrid/infragistics.css" rel="stylesheet" />
     <link href="~/Scripts/IgGrid/theme.css" rel="stylesheet" />
     <link href="~/Scripts/jsgrid/jsgrid-theme.css" rel="stylesheet" />
     <link href="~/Scripts/jsgrid/jsgrid-theme.min.css" rel="stylesheet" />
     <link href="~/Scripts/jsgrid/jsgrid.css" rel="stylesheet" />
     <link href="~/Scripts/jsgrid/jsgrid.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Layout styles -->
     @* <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style.css">*@
 
@@ -62,7 +63,7 @@
                     <i class="fas fa-search-plus fa-fw side-icon ms-1"></i>
                     <span class="align-self-center mb-3"> @SystemResource.new_search</span>
                 </button>
-                <button class="icon-bar d-flex justify-content-between viewresult d-none" id="btnviewresult">
+                <button class="icon-bar d-flex justify-content-between viewresult display_none" id="btnviewresult">
                     <i class="fas fa-eye fa-fw side-icon ms-1"></i>
                     <span class="align-self-center mb-3">   @SystemResource.Preview_results </span>
                 </button>
@@ -296,7 +297,7 @@
                 <li class="nav-item menu-items MED display_none" id="btnCashBoxReports">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnCashBoxReports" aria-expanded="false" aria-controls="MbtnCashBoxReports">
                         <span class="menu-icon">
-                              <i class="fas fa-file-contract"></i>
+                            <i class="fas fa-file-contract"></i>
                         </span>
                         <span class="menu-title">@SystemResource.Box_Report</span>
                         <i class="menu-arrow"></i>
@@ -324,12 +325,33 @@
                     <div class="collapse" id="MbtnProcessesMenu">
                         <ul class="nav flex-column sub-menu">
                             <li id="btnProcesses" key="Processes" class="nav-item"> <a id="btnProcesses" class="nav-link" href="#">@SystemResource.operationsmanagment</a></li>
-                            <li id="btnsalesTrans" key="salesTrans" class="nav-item"> <a id="btnsalesTrans" class="nav-link" href="#">@SystemResource.Men_SalesTransf</a></li>
+                            <li id="btnSalesTrans" key="SalesTrans" class="nav-item"> <a id="btnSalesTrans" class="nav-link" href="#">@SystemResource.Men_SalesTransf</a></li>
                             <li id="btnProcSalesMgr" key="ProcSalesMgr" class="nav-item"> <a id="btnProcSalesMgr" class="nav-link" href="#">@SystemResource.Men_ProcessMan</a></li>
                             <li id="btnProcSalesInvoice" key="ProcSalesInvoice" class="nav-item"> <a id="btnProcSalesInvoice" class="nav-link" href="#">@SystemResource.Men_ProcInvoice</a></li>
                             <li id="btnProcSalesRet" key="ProcSalesRet" class="nav-item"> <a id="btnProcSalesRet" class="nav-link" href="#">@SystemResource.Men_ProcReturn</a></li>
                             <li id="btnOperationScrap" key="OperationScrap" class="nav-item"> <a id="btnOperationScrap" class="nav-link" href="#">@SystemResource.OperationScrap</a></li>
                             <li id="btnCloseProcesses" key="CloseProcesses" class="nav-item"> <a id="btnCloseProcesses" class="nav-link" href="#">@SystemResource.Close_process</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item menu-items MED display_none" id="btnservicesystem">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#Mbtnservicesystem" aria-expanded="false" aria-controls="Mbtnservicesystem">
+                        <span class="menu-icon">
+                            <i class="fas fa-coins"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.ServicesSystem</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="Mbtnservicesystem">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnServiceCategories" key="ServiceCategories" class="nav-item"> <a id="btnServiceCategories" class="nav-link" href="#">@SystemResource.ServiceCategory</a></li>
+                            <li id="btnServices" key="Services" class="nav-item"> <a id="btnServices" class="nav-link" href="#">@SystemResource.Services</a></li>
+                            <li id="btnSales_Services" key="Sales_Services" class="nav-item"> <a id="btnSales_Services" class="nav-link" href="#">@SystemResource.SalesInvoice</a></li>
+                            <li id="btnSer_Return_Sales" key="Ser_Return_Sales" class="nav-item"> <a id="btnSer_Return_Sales" class="nav-link" href="#">@SystemResource.SalesReturn</a></li>
+                            <li id="btnSer_Purchasing" key="Ser_Purchasing" class="nav-item"> <a id="btnSer_Purchasing" class="nav-link" href="#">@SystemResource.Purchase</a></li>
+                            <li id="btnSer_Return_Pur" key="Ser_Return_Pur" class="nav-item"> <a id="btnSer_Return_Pur" class="nav-link" href="#">@SystemResource.Purchase_Return</a></li>
+                            <li id="btnSer_Sales_Report" key="Ser_Sales_Report" class="nav-item"> <a id="btnSer_Sales_Report" class="nav-link" href="#">@SystemResource.ServicesSlsReport</a></li>
+                            <li id="btnSer_Pur_Report" key="Ser_Pur_Report" class="nav-item"> <a id="btnSer_Pur_Report" class="nav-link" href="#">@SystemResource.ServicespurReport</a></li>
                         </ul>
                     </div>
                 </li>

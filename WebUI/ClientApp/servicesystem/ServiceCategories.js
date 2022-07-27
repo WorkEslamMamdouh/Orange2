@@ -34,9 +34,9 @@ var ServiceCategories;
     //buttons
     var btnShow;
     var btnAdd;
-    var btnback;
-    var btnedite;
-    var btnsave;
+    var btnBack;
+    var btnUpdate;
+    var btnSave;
     var btnSaleNO;
     var btnreturnNO;
     var btndiscountNO;
@@ -53,6 +53,11 @@ var ServiceCategories;
     var txtCreatedAt;
     var id1;
     function InitalizeComponent() {
+        $("#btnShow").addClass("d-none");
+        $("#btnPrintTrview").addClass("d-none");
+        $("#btnPrintTrPDF").addClass("d-none");
+        $("#btnPrintTrEXEL").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
         InitalizeControls();
         IntializeEvents();
         TypeS.checked = true;
@@ -64,10 +69,10 @@ var ServiceCategories;
     function IntializeEvents() {
         // btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnback.onclick = btnback_onclick;
+        btnBack.onclick = btnback_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
-        btnedite.onclick = btnedite_onclick;
-        btnsave.onclick = btnsave_onclick;
+        btnUpdate.onclick = btnedite_onclick;
+        btnSave.onclick = btnsave_onclick;
         btnSaleNO.onclick = btnSaleNO_onclick;
         btnreturnNO.onclick = btnreturnNO_onclick;
         btndiscountNO.onclick = btndiscountNO_onclick;
@@ -139,9 +144,9 @@ var ServiceCategories;
         //buttons
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnback = document.getElementById("btnback");
-        btnedite = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
+        btnBack = document.getElementById("btnBack");
+        btnUpdate = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
         btnSaleNO = document.getElementById("btnSaleNO");
         btnreturnNO = document.getElementById("btnreturnNO");
         btndiscountNO = document.getElementById("btndiscountNO");
@@ -437,17 +442,17 @@ var ServiceCategories;
             $("#id_div_Add").removeClass("disabledDiv");
             $("#Div_control").addClass("display_none");
             textdel();
-            $("#btnedite").addClass("display_none");
-            $("#btnsave").addClass("display_none");
-            $("#btnback").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
+            $("#btnSave").addClass("display_none");
+            $("#btnBack").addClass("display_none");
             adddis();
         }
         else {
             $("#id_div_Add").removeAttr("disabled").off('click');
             $("#id_div_Add").removeClass("disabledDiv");
-            $("#btnedite").removeClass("display_none");
-            $("#btnsave").addClass("display_none");
-            $("#btnback").addClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnSave").addClass("display_none");
+            $("#btnBack").addClass("display_none");
             adddis();
             doubleclick();
         }
@@ -458,15 +463,15 @@ var ServiceCategories;
         flag = true;
         removedis();
         $("#txt_CODE").attr("disabled", "disabled");
-        $("#btnedite").addClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnback").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnBack").removeClass("display_none");
         IsNew = false;
     }
     function btnsave_onclick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (!validation())
                 return;
             if (flag == true) {
@@ -480,24 +485,24 @@ var ServiceCategories;
         }, 100);
     }
     function success() {
-        $("#btnedite").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
         BindStatisticGridData();
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(function (x) { return x.SrvCategoryID == Number(SrvCategoryID); });
         DocumentActions.RenderFromModel(SelecteData[0]);
         SrvCategoryID = SelecteData[0].SrvCategoryID;
         adddis();
     }
     function insertsuccess() {
-        $("#btnedite").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
         BindStatisticGridData();
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(function (x) { return x.SrvCategoryID == Number(SrvCategoryID); });
         DocumentActions.RenderFromModel(SelecteData[0]);
         SrvCategoryID = SelecteData[0].SrvCategoryID;
@@ -603,9 +608,9 @@ var ServiceCategories;
         }
     }
     function textdel() {
-        $("#btnedite").addClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnback").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnBack").removeClass("display_none");
         $("#txt_CODE").val("");
         $("#txt_descA").val("");
         $("#txt_descE").val("");
@@ -656,7 +661,7 @@ var ServiceCategories;
             $("#lebtxtSaleNO").html("رقم حساب المبيعات");
         }
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(function (x) { return x.SrvCategoryID == Number(Grid.SelectedKey); });
         getAccountById(SelecteData[0].SALES_ACC_CODE, 1);
         getAccountById(SelecteData[0].RETURN_ACC_CODE, 2);

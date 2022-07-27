@@ -17,9 +17,9 @@ namespace Services {
 
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
-    var btnedit: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
 
     var txt_CODE: HTMLInputElement;
     var txt_DeskA: HTMLInputElement;
@@ -53,6 +53,12 @@ namespace Services {
         else {
             document.getElementById('Screen_name').innerHTML = "Services";
         }
+
+        $("#btnShow").addClass("d-none");
+        $("#btnPrintTrview").addClass("d-none");
+        $("#btnPrintTrPDF").addClass("d-none");
+        $("#btnPrintTrEXEL").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -77,9 +83,9 @@ namespace Services {
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnedit = document.getElementById("btnedit") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
 
         txt_CODE = document.getElementById("txt_CODE") as HTMLInputElement;
         txt_DeskA = document.getElementById("txt_DeskA") as HTMLInputElement;
@@ -98,9 +104,9 @@ namespace Services {
     function IntializeEvents() {
      //   btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnedit.onclick = btnedit_onclick;
-        btnsave.onclick = btnsave_onclick;
-        btnback.onclick = btnback_onclick;
+        btnUpdate.onclick = btnedit_onclick;
+        btnSave.onclick = btnsave_onclick;
+        btnBack.onclick = btnback_onclick;
         IsPur.onchange = btnShow_Clk;
         IsSls.onchange = btnShow_Clk;
         searchbutmemreport.onkeyup = SearchBox;
@@ -256,9 +262,9 @@ namespace Services {
     }
 
     function Insert() {
-        $("#btnedit").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none")
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none")
 
         Ajax.Callsync({
             type: "POST",
@@ -285,9 +291,9 @@ namespace Services {
 
     function Update() {
         Assign();
-        $("#btnedit").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
 
         Ajax.Callsync({
             type: "POST",
@@ -315,7 +321,7 @@ namespace Services {
         BindGrid();
         Disabled();
         $("#Div_control").removeClass("display_none");
-        $("#btnedit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#id_div_Add").removeClass("disabledDiv");
 
         SelecteData = AQvatServiceDetails.filter(x => x.Itemid == Number(Itemid));
@@ -350,7 +356,7 @@ namespace Services {
     function ServiceGridDoubleClick() {
 
         $("#Div_control").removeClass("display_none");
-        $("#btnedit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         //   $("#id_div_Add").removeClass("disabledDiv");
 
         SelecteData = AQvatServiceDetails.filter(x => x.Itemid == Number(Grid.SelectedKey));
@@ -372,9 +378,9 @@ namespace Services {
         Clear();
         Enabled();
         $('#Div_control').removeClass("display_none");
-        $("#btnback").removeClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnedit").addClass("display_none");
+        $("#btnBack").removeClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#id_div_Add").addClass("disabledDiv");
         txtCreatedAt.value = DateTimeFormat(GetDate().toString());
         txtCreatedBy.value = SysSession.CurrentEnvironment.UserCode;
@@ -383,9 +389,9 @@ namespace Services {
 
     function btnedit_onclick() {
         $('#Div_control').removeClass("display_none");
-        $("#btnback").removeClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnedit").addClass("display_none");
+        $("#btnBack").removeClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#id_div_Add").addClass("disabledDiv");
         Enabled();
         IsNew = false;
@@ -394,11 +400,11 @@ namespace Services {
     }
 
     function btnsave_onclick() {
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
 
         if (!validation())
             return;
@@ -420,16 +426,16 @@ namespace Services {
 
     function btnback_onclick() {
         Disabled();
-        $("#btnback").addClass("display_none");
-        $("#btnsave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $("#btnSave").addClass("display_none");
         if (IsNew == true) {
             $('#Div_control').addClass("display_none");
-            $("#btnedit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
         }
         else {
             ServiceGridDoubleClick();
-            $("#btnedit").removeClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
 
         }

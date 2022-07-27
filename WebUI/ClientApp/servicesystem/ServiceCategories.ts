@@ -36,9 +36,9 @@ namespace ServiceCategories {
     //buttons
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
-    var btnedite: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
     var btnSaleNO: HTMLButtonElement;
     var btnreturnNO: HTMLButtonElement;
     var btndiscountNO: HTMLButtonElement;
@@ -59,6 +59,12 @@ namespace ServiceCategories {
 
     var id1;
     export function InitalizeComponent() {
+        $("#btnShow").addClass("d-none");
+        $("#btnPrintTrview").addClass("d-none");
+        $("#btnPrintTrPDF").addClass("d-none");
+        $("#btnPrintTrEXEL").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
+
 
         InitalizeControls();
         IntializeEvents();
@@ -70,10 +76,10 @@ namespace ServiceCategories {
     function IntializeEvents() {
         // btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnback.onclick = btnback_onclick;
+        btnBack.onclick = btnback_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
-        btnedite.onclick = btnedite_onclick;
-        btnsave.onclick = btnsave_onclick;
+        btnUpdate.onclick = btnedite_onclick;
+        btnSave.onclick = btnsave_onclick;
         btnSaleNO.onclick = btnSaleNO_onclick;
         btnreturnNO.onclick = btnreturnNO_onclick;
         btndiscountNO.onclick = btndiscountNO_onclick;
@@ -165,9 +171,9 @@ namespace ServiceCategories {
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnSaleNO = document.getElementById("btnSaleNO") as HTMLButtonElement;
         btnreturnNO = document.getElementById("btnreturnNO") as HTMLButtonElement;
         btndiscountNO = document.getElementById("btndiscountNO") as HTMLButtonElement;
@@ -547,16 +553,16 @@ namespace ServiceCategories {
             $("#id_div_Add").removeClass("disabledDiv");
             $("#Div_control").addClass("display_none");
             textdel();
-            $("#btnedite").addClass("display_none");
-            $("#btnsave").addClass("display_none");
-            $("#btnback").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
+            $("#btnSave").addClass("display_none");
+            $("#btnBack").addClass("display_none");
             adddis();
         } else {
             $("#id_div_Add").removeAttr("disabled").off('click');
             $("#id_div_Add").removeClass("disabledDiv");
-            $("#btnedite").removeClass("display_none");
-            $("#btnsave").addClass("display_none");
-            $("#btnback").addClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnSave").addClass("display_none");
+            $("#btnBack").addClass("display_none");
             adddis();
             doubleclick();
         }
@@ -569,17 +575,17 @@ namespace ServiceCategories {
         removedis();
         $("#txt_CODE").attr("disabled", "disabled");
 
-        $("#btnedite").addClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnback").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnBack").removeClass("display_none");
         IsNew = false;
     }
     function btnsave_onclick() {
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
 
 
         if (!validation())
@@ -601,14 +607,14 @@ namespace ServiceCategories {
     }
     function success() {
 
-        $("#btnedite").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none")
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none")
 
         BindStatisticGridData();
 
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(x => x.SrvCategoryID == Number(SrvCategoryID));
         DocumentActions.RenderFromModel(SelecteData[0]);
         SrvCategoryID = SelecteData[0].SrvCategoryID;
@@ -618,14 +624,14 @@ namespace ServiceCategories {
     }
     function insertsuccess() {
 
-        $("#btnedite").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none")
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none")
 
         BindStatisticGridData();
 
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(x => x.SrvCategoryID == Number(SrvCategoryID));
         DocumentActions.RenderFromModel(SelecteData[0]);
         SrvCategoryID = SelecteData[0].SrvCategoryID;
@@ -745,9 +751,9 @@ namespace ServiceCategories {
         }
     }
     function textdel() {
-        $("#btnedite").addClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnback").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnBack").removeClass("display_none");
         $("#txt_CODE").val("");
         $("#txt_descA").val("");
         $("#txt_descE").val("");
@@ -810,7 +816,7 @@ namespace ServiceCategories {
 
         }
         $("#Div_control").removeClass("display_none");
-        $("#btnedite").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         SelecteData = SlsInvoiceStatisticsDetails.filter(x => x.SrvCategoryID == Number(Grid.SelectedKey));
         getAccountById(SelecteData[0].SALES_ACC_CODE, 1);
         getAccountById(SelecteData[0].RETURN_ACC_CODE, 2);

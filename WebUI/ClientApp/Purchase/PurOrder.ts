@@ -1006,7 +1006,7 @@ namespace PurOrder {
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input id="txtItemName${cnt}" name="" disabled type="text" class="form-control  text_Display" />
+			                <input id="txtItemName${cnt}" name="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 

@@ -15,9 +15,9 @@ var Services;
     var searchbutmemreport;
     var btnShow;
     var btnAdd;
-    var btnedit;
-    var btnsave;
-    var btnback;
+    var btnUpdate;
+    var btnSave;
+    var btnBack;
     var txt_CODE;
     var txt_DeskA;
     var txt_DeskE;
@@ -44,6 +44,11 @@ var Services;
         else {
             document.getElementById('Screen_name').innerHTML = "Services";
         }
+        $("#btnShow").addClass("d-none");
+        $("#btnPrintTrview").addClass("d-none");
+        $("#btnPrintTrPDF").addClass("d-none");
+        $("#btnPrintTrEXEL").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -63,9 +68,9 @@ var Services;
         ddlServCateroryFilter = document.getElementById("ddlServCateroryFilter");
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnedit = document.getElementById("btnedit");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnUpdate = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         txt_CODE = document.getElementById("txt_CODE");
         txt_DeskA = document.getElementById("txt_DeskA");
         txt_DeskE = document.getElementById("txt_DeskE");
@@ -81,9 +86,9 @@ var Services;
     function IntializeEvents() {
         //   btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnedit.onclick = btnedit_onclick;
-        btnsave.onclick = btnsave_onclick;
-        btnback.onclick = btnback_onclick;
+        btnUpdate.onclick = btnedit_onclick;
+        btnSave.onclick = btnsave_onclick;
+        btnBack.onclick = btnback_onclick;
         IsPur.onchange = btnShow_Clk;
         IsSls.onchange = btnShow_Clk;
         searchbutmemreport.onkeyup = SearchBox;
@@ -212,9 +217,9 @@ var Services;
         }
     }
     function Insert() {
-        $("#btnedit").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AVatDService", "Insert"),
@@ -238,9 +243,9 @@ var Services;
     }
     function Update() {
         Assign();
-        $("#btnedit").removeClass("display_none");
-        $("#btnsave").addClass("display_none");
-        $("#btnback").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AVatDService", "Update"),
@@ -265,7 +270,7 @@ var Services;
         BindGrid();
         Disabled();
         $("#Div_control").removeClass("display_none");
-        $("#btnedit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#id_div_Add").removeClass("disabledDiv");
         SelecteData = AQvatServiceDetails.filter(function (x) { return x.Itemid == Number(Itemid); });
         txt_DeskA.value = SelecteData[0].Itm_DescA;
@@ -292,7 +297,7 @@ var Services;
     }
     function ServiceGridDoubleClick() {
         $("#Div_control").removeClass("display_none");
-        $("#btnedit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         //   $("#id_div_Add").removeClass("disabledDiv");
         SelecteData = AQvatServiceDetails.filter(function (x) { return x.Itemid == Number(Grid.SelectedKey); });
         DocumentActions.RenderFromModel(SelecteData[0]);
@@ -312,18 +317,18 @@ var Services;
         Clear();
         Enabled();
         $('#Div_control').removeClass("display_none");
-        $("#btnback").removeClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnedit").addClass("display_none");
+        $("#btnBack").removeClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#id_div_Add").addClass("disabledDiv");
         txtCreatedAt.value = DateTimeFormat(GetDate().toString());
         txtCreatedBy.value = SysSession.CurrentEnvironment.UserCode;
     }
     function btnedit_onclick() {
         $('#Div_control').removeClass("display_none");
-        $("#btnback").removeClass("display_none");
-        $("#btnsave").removeClass("display_none");
-        $("#btnedit").addClass("display_none");
+        $("#btnBack").removeClass("display_none");
+        $("#btnSave").removeClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#id_div_Add").addClass("disabledDiv");
         Enabled();
         IsNew = false;
@@ -331,9 +336,9 @@ var Services;
         txtUpdatedBy.value = SysSession.CurrentEnvironment.UserCode;
     }
     function btnsave_onclick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (!validation())
                 return;
             Assign();
@@ -351,16 +356,16 @@ var Services;
     }
     function btnback_onclick() {
         Disabled();
-        $("#btnback").addClass("display_none");
-        $("#btnsave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $("#btnSave").addClass("display_none");
         if (IsNew == true) {
             $('#Div_control').addClass("display_none");
-            $("#btnedit").addClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
         }
         else {
             ServiceGridDoubleClick();
-            $("#btnedit").removeClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
         }
     }

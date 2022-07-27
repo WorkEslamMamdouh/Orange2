@@ -1747,7 +1747,7 @@ namespace SlsTrSalesManager {
     function BuildControls(cnt: number) {
         var html;
         html = `<tr id="No_Row${cnt}">
-                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control right2 display_none"  />
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
@@ -1764,7 +1764,7 @@ namespace SlsTrSalesManager {
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input id="txtSerial${cnt}" type="text" class="form-control input-sm right2" disabled />
+			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>

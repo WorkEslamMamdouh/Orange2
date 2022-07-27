@@ -75,7 +75,7 @@ namespace Processes {
     var btnExpenses: HTMLButtonElement;
     var btnOpen: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
-    var btnadd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnUpdate_1: HTMLButtonElement;
     var btnSave_1: HTMLButtonElement;
     var btnBack_1: HTMLButtonElement;
@@ -150,7 +150,7 @@ namespace Processes {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-    var btnPrint: HTMLButtonElement;
+//    var btnPrint: HTMLButtonElement;
     //------------------------------------report print 1------------------------------
     var btnPrintTrview1: HTMLButtonElement;
     var btnPrintTrPDF1: HTMLButtonElement;
@@ -204,6 +204,16 @@ namespace Processes {
 
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
+        $("#btnUpdate").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
+        $("#btnSave").addClass("d-none");
+        $("#btnBack").addClass("d-none");
+        $("#btnPrintTrview").addClass("print-list");
+        $("#btnPrintTrPDF").addClass("print-list");
+        $("#btnPrintTrEXEL").addClass("print-list");
+        $("#btnPrintTrview span").text("طباعه قائمه عمليات");
+        $("#btnPrintTrPDF span").text("PDF 'قائمه عمليات'");
+        $("#btnPrintTrEXEL span").text("Excel 'قائمه عمليات'");
         InitalizeControls();
         IntializeEvents();
         FillddlVendorMaster();
@@ -224,7 +234,7 @@ namespace Processes {
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         fillddlVatType();
-        $('#btnPrint').addClass('display_none');
+     //   $('#btnPrint').addClass('display_none');
         $('#btnPrint1').addClass('display_none');
         $('#btnPrint2').addClass('display_none');
         $('#btnPrint3').addClass('display_none');
@@ -287,7 +297,7 @@ namespace Processes {
 
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnUpdate_1 = document.getElementById("btnUpdate_1") as HTMLButtonElement;
         btnBack_1 = document.getElementById("btnBack_1") as HTMLButtonElement;
         btnSave_1 = document.getElementById("btnSave_1") as HTMLButtonElement;
@@ -309,7 +319,7 @@ namespace Processes {
         btnAddDetailslebel = document.getElementById("btnAddDetailslebel") as HTMLButtonElement;
 
         //--------------------------- print Button  
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+     //   btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
@@ -352,7 +362,7 @@ namespace Processes {
         btnAddDetailslebel.onclick = AddNewRowlebel;
         btnAddDetails.onclick = AddNewRow;
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnAdd_onclick;
+        btnAdd.onclick = btnAdd_onclick;
 
         btnPresent.onclick = btnPresent_onclick;
         btnClose.onclick = btnClose_onclick;
@@ -406,7 +416,7 @@ namespace Processes {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); }
+       // btnPrint.onclick = () => { PrintReport(4); }
         //--------------------------- print Button1  
         btnPrintTrview1.onclick = () => { PrintReport1(1); }
         btnPrintTrPDF1.onclick = () => { PrintReport1(2); }
@@ -886,7 +896,7 @@ namespace Processes {
             $("#btnClose").attr("style", "")
 
             $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "")
+            $("#btnPresent").attr("style", "");
         }
         else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
             Processes_Close();
@@ -970,7 +980,7 @@ namespace Processes {
 
         showdiv();
 
-        $('#divlepRentdata_1').removeClass('showdiv');
+        $('#divlepRentdata_1').removeClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -2868,7 +2878,7 @@ namespace Processes {
 
                     if (Status == 1 || Status == 2) {
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('showdiv');
+                        $('#divlepRentdata_1').removeClass('display_none');
                         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3366,7 +3376,7 @@ namespace Processes {
         $("#btnPresent").removeAttr("disabled");
 
         $("#btnClose").attr("style", "")
-        $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+        $("#btnPresent").attr("style", "background-color: #198754")
 
 
 
@@ -3379,7 +3389,7 @@ namespace Processes {
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
+        $('#divlepRentdata_1').addClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3490,7 +3500,7 @@ namespace Processes {
         $("#btnOpen").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("style", "")
 
-        $("#btnPresent").attr("style", "margin-right: 8%;")
+      //  $("#btnPresent").attr("style", "margin-right: 8%;")
         $("#btnClose").removeAttr("disabled");
         $("#btnClose").attr("style", "background-color: #fdb0b0;");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
@@ -3531,7 +3541,7 @@ namespace Processes {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-        $("#btnPresent").attr("style", " margin-right: 8%;")
+     //   $("#btnPresent").attr("style", " margin-right: 8%;")
         $("#btnClose").attr("style", " ")
 
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
@@ -3586,7 +3596,7 @@ namespace Processes {
 
                         if (Status == 1 || Status == 2) {
                             showdiv();
-                            $('#divlepRentdata_1').removeClass('showdiv');
+                            $('#divlepRentdata_1').removeClass('display_none');
                             $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                             $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3816,7 +3826,7 @@ namespace Processes {
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
+        $('#divlepRentdata_1').addClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-caret-left');
         $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3854,7 +3864,7 @@ namespace Processes {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-        $("#btnPresent").attr("style", "  margin-right: 8%;")
+      //  $("#btnPresent").attr("style", "  margin-right: 8%;")
         $("#btnClose").attr("style", "")
 
         $("#btnOpen").attr("disabled", "disabled").off('click');
@@ -3933,7 +3943,7 @@ namespace Processes {
                 btnShow_onclick();
 
                 MasterGridBiuld();
-                $('#divlepRentdata_1').removeClass('showdiv');
+                $('#divlepRentdata_1').removeClass('display_none');
                 $('#spanlepRentdata_1').toggleClass('fa-caret-left');
                 $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 
@@ -3947,7 +3957,7 @@ namespace Processes {
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+                $("#btnPresent").attr("style", "background-color: #198754")
                 $("#btnClose").attr("style", "")
 
             }
@@ -4357,7 +4367,7 @@ namespace Processes {
             Processes_Close();
             $("#btnPresent").attr("disabled", "disabled").off('click');
             $("#btnClose").attr("disabled", "disabled").off('click');
-            $("#btnPresent").attr("style", "  margin-right: 8%;");
+        //    $("#btnPresent").attr("style", "  margin-right: 8%;");
             $("#btnClose").attr("style", "")
 
 
@@ -4665,7 +4675,7 @@ namespace Processes {
 
 
         $('#Payload_data').on('click', function () {
-            $('#divlepRentdata_1').toggleClass('showdiv');
+            $('#divlepRentdata_1').toggleClass('display_none');
             $('#spanlepRentdata_1').toggleClass('fa-caret-left');
             $('#spanlepRentdata_1').toggleClass('fa-caret-down');
 

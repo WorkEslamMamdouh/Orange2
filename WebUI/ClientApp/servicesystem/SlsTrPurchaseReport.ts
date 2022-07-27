@@ -68,6 +68,11 @@ namespace SlsTrPurchaseReport {
         else {
             document.getElementById('Screen_name').innerHTML = "Services Purchase Report";
         }
+
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview span").text("عرض تقرير");
+        $("#btnPrintTrview").addClass("print-report");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 
