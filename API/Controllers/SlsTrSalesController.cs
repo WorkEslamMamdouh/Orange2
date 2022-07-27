@@ -1125,9 +1125,14 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetLastPrice(int CompCode, int BranchCode, int itemid, int customerid, int storeid, int invid)
+        public IHttpActionResult GetLastPrice(int CompCode, int BranchCode, int itemid, int customerid, int storeid, int? invid)
         {
+            //if (invid == 0) invid = null;
 
+            try
+            {
+
+          
             string query = @"  DECLARE	@return_value int,
                                       		@CustLastPrice numeric(18, 2),
                                       		@CustLastTr int,
@@ -1137,9 +1142,9 @@ namespace Inv.API.Controllers
                                       		@Curcost numeric(18, 2);
                                       
                                       EXEC	@return_value = [dbo].[IProc_GetLastSalePrice] ";
-                           query = query + CompCode.ToString() + "," + BranchCode.ToString() + "," + itemid.ToString() + "," + customerid.ToString() + "," + storeid.ToString() + "," + invid.ToString();
+            query = query + CompCode.ToString() + "," + BranchCode.ToString() + "," + itemid.ToString() + "," + customerid.ToString() + "," + storeid.ToString() + "," + (invid == 0 ? "null" : invid.ToString());
                  
-                           query = query + @"@CustLastPrice = @CustLastPrice OUTPUT,
+                           query = query + @" ,@CustLastPrice = @CustLastPrice OUTPUT,
                                       		@CustLastTr = @CustLastTr OUTPUT,
                                       		@custLastDate = @custLastDate OUTPUT,
                                       		@LastPrice = @LastPrice OUTPUT,
@@ -1155,7 +1160,14 @@ namespace Inv.API.Controllers
              
                 var res = db.Database.SqlQuery<ModelLastPrice>(query).FirstOrDefault();
                 return Ok(new BaseResponse(res));
-           
+
+            }
+            catch (Exception ex)
+            { 
+                return Ok(new BaseResponse(ex)); 
+            }
+
+
         }
     }
 }

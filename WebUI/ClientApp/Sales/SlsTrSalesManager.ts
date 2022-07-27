@@ -191,6 +191,9 @@ namespace SlsTrSalesManager {
         GetAllIItem();
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
+
+        //GetLastPrice(3236)
+
     }
     function InitalizeControls() {
         btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
@@ -293,7 +296,7 @@ namespace SlsTrSalesManager {
 
             $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
             timerHiddenLastPrice();
-           
+
         }
         else {
 
@@ -305,30 +308,53 @@ namespace SlsTrSalesManager {
         setTimeout(function () {
             $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
             flagLastPrice = 2;
-        }, 5000);
+        }, 6000);
     }
-    function GetLastPrice(itemid: number) {
-         
-        let customerid = 0
-        let storeid = 0
-        let invid = 0
+    function GetLastPrice(itemid: number, Name: string) {
+        debugger
+        let customerid = ddlInvoiceCustomer.value;
+        let storeid = ddlStore.value;
+        let invid = GlobalinvoiceID
 
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
-            data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    ModelPrice = result.Response as ModelLastPrice;
-                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
-                    $("#CustLastPrice").html(ModelPrice.CustLastTr.toString())
-                    $("#CustLastPrice").html(ModelPrice.LastPrice.toString())
-                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
-               
+
+        //@itemid = 3236,
+
+        if (itemid.toString() != 'null') {
+             
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
+                success: (d) => {
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+                        ModelPrice = result.Response as ModelLastPrice;
+                        $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
+                        $("#CustLastTr").html(ModelPrice.CustLastTr.toString())
+                        $("#LastPrice").html(ModelPrice.LastPrice.toString())
+                        $("#LastPurchase").html(ModelPrice.LastPurchase.toString())
+                        $("#Curcost").html(ModelPrice.Curcost.toString())
+                        $("#custLastDate").html(ModelPrice.custLastDate.toString())
+                        $("#Name_Item").html(Name)
+
+                    }
                 }
-            }
-        });
+            });
+
+        }
+        else
+        {
+
+            $("#CustLastPrice").html("-----")
+            $("#CustLastTr").html("-----")
+            $("#LastPrice").html("-----")
+            $("#LastPurchase").html("-----")
+            $("#Curcost").html("-----")
+            $("#custLastDate").html("-----")
+            $("#Name_Item").html("-----")
+
+        }
+
 
     }
     function btndiv_1_onclick() {
@@ -2509,6 +2535,13 @@ namespace SlsTrSalesManager {
 
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
+        });
+
+        $("#No_Row" + cnt).on('click', function () {
+            let item = $('#ddlItem' + cnt).val();
+
+            GetLastPrice(item, $("#ddlItem" + cnt + " option:selected").text())
+
         });
 
         if (SysSession.CurrentPrivileges.Remove) {
