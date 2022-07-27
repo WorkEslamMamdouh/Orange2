@@ -985,11 +985,11 @@ namespace CloseProcesses {
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_2').removeClass('showdiv');
+        $('#divlepRentdata_2').removeClass('display_none');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').removeClass('showdiv');
+        $('#divlepRentdata_3').removeClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -1088,25 +1088,59 @@ namespace CloseProcesses {
 
     function BuildControls(cnt: number) {
         var html;
-        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
-        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
-
-        //    '<div class="col-lg-2">' +
-        //    '<select id="ddlItem' + cnt + '" class="form-control" disabled  ><option  value="null">اختر</option></select></div>' +
-        //    '<div class="col-lg-1" style=""><input id="txtQuantity' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    '<div class="col-lg-1" style=""><input id="txtSoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    '<div class="col-lg-1" style=""><input id="txtScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-
-        //    '<div class="col-lg-1" style=""><input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    //'<div class="col-lg-1" style=""><input id="txtAvailableQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-
-        //    '<div class="col-lg-1" style=""><input id="txtClose_SoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    '<div class="col-lg-1" style=""><input id="txtClose_ScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    '<div class="col-lg-1" style=""><input id="txtClose_TotalSales' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-        //    '</div></div></div>' +
-
-        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
-
+      
+        html = `<tr id="No_Row${cnt}">
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <select id="ddlItem${cnt}" class="form-control" disabled  >
+			                    <option  value="null">اختر</option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtQuantity${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtSoldQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtScrapQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtTotal${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtClose_SoldQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtClose_ScrapQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtClose_TotalSales${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
+                </tr>`;
         $("#div_Data").append(html);
 
         // 
@@ -1551,53 +1585,124 @@ namespace CloseProcesses {
 
     function BuildControlsCharges(cnt: number) {
         var html;
-        html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
-            '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
-            '<div class="col-lg-1">' +
-            '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
+        //html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
+        //    '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
+        //    '<div class="col-lg-1">' +
+        //    '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
+        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
 
-            '<div class="col-lg-2">' +
-            '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
+        //    '<div class="col-lg-2">' +
+        //    '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
 
-            '<div class="col-lg-1">' +
+        //    '<div class="col-lg-1">' +
 
-            '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
-            '<div class="col-lg-1">' +
-            '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-            '<div class="col-lg-2">' +
-            '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
+        //    '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
+        //    '<div class="col-lg-1">' +
+        //    '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
+        //    '<div class="col-lg-2">' +
+        //    '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
 
-            '<div class="col-lg-1">' +
-            '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
+        //    '<div class="col-lg-1">' +
+        //    '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
 
-            '<div class="col-lg-1">' +
-            '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
+        //    '<div class="col-lg-1">' +
+        //    '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
 
-            '<div class="col-lg-1"style="width: 12%!important;">' +
-            '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
+        //    '<div class="col-lg-1"style="width: 12%!important;">' +
+        //    '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
 
-            '<div class="col-lg-1">' +
-            '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-
-
-            '</div>' +
-
-            '<div class="col-lg-6 positiongridProcesses1"style="">' +
-            '<div class="col-lg-4">' +
-            '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
-            '<div class="col-lg-4">' +
-            '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
-
-            '<div class="col-lg-4">' +
-            '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
+        //    '<div class="col-lg-1">' +
+        //    '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
 
 
-            ' </div></div></div>' +
+        //    '</div>' +
+
+        //    '<div class="col-lg-6 positiongridProcesses1"style="">' +
+        //    '<div class="col-lg-4">' +
+        //    '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
+        //    '<div class="col-lg-4">' +
+        //    '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
+
+        //    '<div class="col-lg-4">' +
+        //    '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
 
 
-            '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        //    ' </div></div></div>' +
 
+
+        //    '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = `<tr id="No_Row1${cnt}">
+                    <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtSerial${cnt}" type="text" class="form-control" disabled value="${CountItemsCharge}"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="txtAddonsCharge${cnt}" class="form-control" value="null" ></select>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=" "/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                 <input id="txtValueCharge${cnt}" type="number" class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="txtVatType${cnt}" class="form-control" value="null" ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtVatCharge${cnt}" type="text" value="0" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtValueAfterVatCharge${cnt}" type="text" class="form-control"  disabled  value="0" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <select id="txtVendorIsCheckCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtInvoiceNumberCharge${cnt}" type="number" class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtInvoiceDateCharge${cnt}" type="date" class="form-control"  />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <select id="txtVendorCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <select id="txt_D_CashBox${cnt}" name=""  disabled class="form-control" tabindex="-1" aria-hidden="true">
+			                    <option value="Null"> الصندوق  </option>
+			              </select>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
         $("#div_ChargesData").append(html);
 
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
@@ -2878,11 +2983,11 @@ namespace CloseProcesses {
                         $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_2').removeClass('showdiv');
+                        $('#divlepRentdata_2').removeClass('display_none');
                         $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_3').removeClass('showdiv');
+                        $('#divlepRentdata_3').removeClass('display_none');
                         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -3325,7 +3430,7 @@ namespace CloseProcesses {
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
 
-        $('#divlepRentdata_3').addClass('showdiv');
+        $('#divlepRentdata_3').addClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -3388,11 +3493,11 @@ namespace CloseProcesses {
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_2').addClass('showdiv');
+        $('#divlepRentdata_2').addClass('display_none');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').addClass('showdiv');
+        $('#divlepRentdata_3').addClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -3469,7 +3574,7 @@ namespace CloseProcesses {
         //$("#Div_Money").attr("disabled", "disabled").off('click');
 
 
-        //$('#divlepRentdata_3').addClass('showdiv');
+        //$('#divlepRentdata_3').addClass('display_none');
         //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -3512,7 +3617,7 @@ namespace CloseProcesses {
         }
 
 
-        //$('#divlepRentdata_3').addClass('showdiv');
+        //$('#divlepRentdata_3').addClass('display_none');
         //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
         //$("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -3574,7 +3679,7 @@ namespace CloseProcesses {
 
        
 
-        $('#divlepRentdata_3').removeClass('showdiv');
+        $('#divlepRentdata_3').removeClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
         $("#Processshutdown").removeAttr("disabled");
@@ -3633,7 +3738,7 @@ namespace CloseProcesses {
             $("#btnOpen").attr("disabled", "disabled");
             $("#btnOpen").attr("style", "")
 
-            $('#divlepRentdata_3').addClass('showdiv');
+            $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
             $("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -3701,11 +3806,11 @@ namespace CloseProcesses {
                         $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_2').removeClass('showdiv');
+                        $('#divlepRentdata_2').removeClass('display_none');
                         $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_3').addClass('showdiv');
+                        $('#divlepRentdata_3').addClass('display_none');
                         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
                         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -3815,7 +3920,7 @@ namespace CloseProcesses {
 
                 debugger
                 $("#Processshutdown").removeAttr("disabled");
-                $('#divlepRentdata_3').removeClass('showdiv');
+            $('#divlepRentdata_3').removeClass('display_none');
                 $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
                 $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
                 btnUpdate_4.classList.remove('display_none');
@@ -3891,11 +3996,11 @@ namespace CloseProcesses {
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
 
-        $('#divlepRentdata_2').addClass('showdiv');
+        $('#divlepRentdata_2').addClass('display_none');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').addClass('showdiv');
+        $('#divlepRentdata_3').addClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -4008,7 +4113,7 @@ namespace CloseProcesses {
                 $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
                 $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                $('#divlepRentdata_2').removeClass('showdiv');
+                $('#divlepRentdata_2').removeClass('display_none');
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
@@ -4441,7 +4546,7 @@ namespace CloseProcesses {
 
             $("#Processshutdown").attr("disabled", "disabled").off('click');
 
-            $('#divlepRentdata_3').addClass('showdiv');
+            $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
@@ -4700,7 +4805,7 @@ namespace CloseProcesses {
         });
 
         $('#Expenses').on('click', function () {
-            $('#divlepRentdata_2').toggleClass('showdiv');
+            $('#divlepRentdata_2').toggleClass('display_none');
             $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
@@ -4715,7 +4820,7 @@ namespace CloseProcesses {
 
 
         $('#Processshutdown').on('click', function () {
-            $('#divlepRentdata_3').toggleClass('showdiv');
+            $('#divlepRentdata_3').toggleClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
