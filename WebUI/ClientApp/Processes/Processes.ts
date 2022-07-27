@@ -981,29 +981,29 @@ namespace Processes {
         showdiv();
 
         $('#divlepRentdata_1').removeClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_2').removeClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').removeClass('display_none');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').removeClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').removeClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-        $('#lepRentdata').removeClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#lepRentdata').removeClass('display_none');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
 
-        $('#divlOerSalesman_2').removeClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#divlOerSalesman_2').removeClass('display_none');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
-        $('#lepMoney').removeClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#lepMoney').removeClass('display_none');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         IsGenerated = Selected_Data[0].IsGenerated;
 
@@ -1088,32 +1088,70 @@ namespace Processes {
     function BuildControls(cnt: number) {
         var html;
 
-
-
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
-            '<div class="col-lg-2"style="left:1%!important">' +
-            '<select id="ddlFamily' + cnt + '" class="form-control" disabled  ><option value="null">اختر</option></select></div>' +
-            '<div class="col-lg-2"style="left: 1%;">' +
-            '<select id="ddlItem' + cnt + '" class="form-control" disabled  ><option  value="null">اختر</option></select></div>' +
-            '<div class="col-lg-1" style=""><input id="txtQuantity' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtPrice' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtMinPrice' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtSoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtAvailableQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-   
-
-            '<div class="col-lg-4 positiongridProcesses_item"style="">' +
-            '<div class="col-lg-10">' +
-            '<input id="txtRemark_item' + cnt + '" type="text" disabled class="form-control right2"   value=""/></div>' +
-   
-            ' </div></div></div>' +
-
-
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
-
+        html = `<tr id="No_Row${cnt}">
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <select id="ddlFamily${cnt}" class="form-control" disabled  >
+				                <option value="null">اختر</option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <select id="ddlItem${cnt}" class="form-control" disabled  >
+				                <option  value="null">اختر</option>
+				           </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtQuantity${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtPrice${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtMinPrice${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTotal${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtSoldQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtScrapQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtAvailableQty${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtRemark_item${cnt}" type="text" disabled class="form-control"   value=""/>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
         $("#div_Data").append(html);
 
         // 
@@ -1628,53 +1666,79 @@ namespace Processes {
 
     function BuildControlsCharges(cnt: number) {
         var html;
-        html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
-            '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
-            '<div class="col-lg-1">' +
-            '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
-
-            '<div class="col-lg-2">' +
-            '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
-
-            '<div class="col-lg-1">' +
-
-            '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
-            '<div class="col-lg-1">' +
-            '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-            '<div class="col-lg-2">' +
-            '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
-
-            '<div class="col-lg-1">' +
-            '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
-
-            '<div class="col-lg-1">' +
-            '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
-
-            '<div class="col-lg-1"style="width: 12%!important;">' +
-            '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
-
-            '<div class="col-lg-1">' +
-            '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-
-
-            '</div>' +
-
-            '<div class="col-lg-6 positiongridProcesses1"style="">' +
-            '<div class="col-lg-4">' +
-            '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
-            '<div class="col-lg-4">' +
-            '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
-
-            '<div class="col-lg-4">' +
-            '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
-
-
-            ' </div></div></div>' +
-
-
-            '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
-
+      
+        html = `<tr id="No_Row1${cnt}">
+                    <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtSerial${cnt}" type="text" class="form-control" disabled value="${CountItemsCharge}"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="txtAddonsCharge${cnt}" class="form-control" value="null" ></select>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=" "/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                 <input id="txtValueCharge${cnt}" type="number" class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="txtVatType${cnt}" class="form-control" value="null" ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtVatCharge${cnt}" type="text" value="0" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtValueAfterVatCharge${cnt}" type="text" class="form-control"  disabled  value="0" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <select id="txtVendorIsCheckCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtInvoiceNumberCharge${cnt}" type="number" class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtInvoiceDateCharge${cnt}" type="date" class="form-control"  />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <select id="txtVendorCharge${cnt}" class="form-control"  ></select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <select id="txt_D_CashBox${cnt}" name=""  disabled class="form-control" tabindex="-1" aria-hidden="true">
+			                    <option value="Null"> الصندوق  </option>
+			              </select>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
         $("#div_ChargesData").append(html);
 
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
@@ -2089,23 +2153,23 @@ namespace Processes {
 
 
         $('#Financialsituation').on('click', function () {
-            $('#lepRentdata').toggleClass('showdiv');
+            $('#lepRentdata').toggleClass('display_none');
 
-            $('#spanlepRentdata_4').addClass('fa-caret-down');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
 
         });
 
         $('#Div_Money').on('click', function () {
-            $('#lepMoney').toggleClass('showdiv');
+            $('#lepMoney').toggleClass('display_none');
 
-            $('#spanlepMoney_4').toggleClass('fa-caret-down');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         });
 
-        $('#lepRentdata').removeClass('showdiv');
-        $('#lepMoney').removeClass('showdiv');
-        $('#spanlepRentdata_4').addClass('fa-caret-left');
-        //$('#spanlepRentdata_4').addClass('fa-caret-down');
+        $('#lepRentdata').removeClass('display_none');
+        $('#lepMoney').removeClass('display_none');
+        $('#spanlepRentdata_4').addClass('fa-angle-double-left');
+        //$('#spanlepRentdata_4').addClass('fa-angle-double-down');
 
 
 
@@ -2237,18 +2301,75 @@ namespace Processes {
 
     function BuildControlslebel(cnt: number) {
         var html;
-        html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
-            '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
-            '<div class="col-lg-1" ><input id="txtSerial3' + cnt + '" type="number" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><input type="date" id="DepositDate' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><select id="Salesman' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + '</option> </select ></div>' +
-            '<div class="col-lg-1" style=""><input id="DepositAmount' + cnt + '" type="number" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><select id="ACC_type' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + '</option> <option value="0"> ' + (lang == "ar" ? "بنك" : "Bank") + '</option> <option value="1"> ' + (lang == "ar" ? "صندوق" : "Cash box") + '</option> </select ></div>' +
-            '<div id="Acc_Code_div' + cnt + '" class="col-lg-2" style=""><select id="Acc_Code' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "رقم الحساب" : "Account Number") + '</option></select ></div>' +
-            '<div id="CashBox_div' + cnt + '" class="col-lg-2 display_none" style=""><select id="CashBox' + cnt + '" class="form-control display_none"> <option value="Null"> ' + (lang == "ar" ? "الصندوق" : "CashBox") + '</option></select ></div>' +
-            '<div class="col-lg-2" style=""><textarea rows="2"  id="Remarks' + cnt + '" class="form-control"></textarea></div> ' +
-            '<div class="col-lg-2" style=""><input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="DepositID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
-
+        //html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
+        //    '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
+        //    '<div class="col-lg-1" ><input id="txtSerial3' + cnt + '" type="number" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style=""><input type="date" id="DepositDate' + cnt + '" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style=""><select id="Salesman' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + '</option> </select ></div>' +
+        //    '<div class="col-lg-1" style=""><input id="DepositAmount' + cnt + '" type="number" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style=""><select id="ACC_type' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + '</option> <option value="0"> ' + (lang == "ar" ? "بنك" : "Bank") + '</option> <option value="1"> ' + (lang == "ar" ? "صندوق" : "Cash box") + '</option> </select ></div>' +
+        //    '<div id="Acc_Code_div' + cnt + '" class="col-lg-2" style=""><select id="Acc_Code' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "رقم الحساب" : "Account Number") + '</option></select ></div>' +
+        //    '<div id="CashBox_div' + cnt + '" class="col-lg-2 display_none" style=""><select id="CashBox' + cnt + '" class="form-control display_none"> <option value="Null"> ' + (lang == "ar" ? "الصندوق" : "CashBox") + '</option></select ></div>' +
+        //    '<div class="col-lg-2" style=""><textarea rows="2"  id="Remarks' + cnt + '" class="form-control"></textarea></div> ' +
+        //    '<div class="col-lg-2" style=""><input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="DepositID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+        html = `<tr id="row_font_header${cnt}">
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtSerial3${cnt}" type="number" class="form-control">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input type="date" id="DepositDate${cnt}" class="form-control">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="Salesman${cnt}" class="form-control"> 
+			                    <option value="null"> ${ (lang == "ar" ? "اختار المندوب" : "Choose Salesman")} </option> 
+			                </select >
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="DepositAmount${cnt}" type="number" class="form-control">
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			               	<select id="ACC_type${cnt}" class="form-control"> 
+			                    <option value="Null"> ${ (lang == "ar" ? "النوع الحساب  " : "Account Type ")}  </option> 
+                                <option value="0"> ${ (lang == "ar" ? "بنك" : "Bank")} </option>
+                                <option value="1"> ${ (lang == "ar" ? "صندوق" : "Cash box") } </option> 
+			                </select >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group" id="Acc_Code_div${cnt}">
+			               <select id="Acc_Code' + ${cnt}" class="form-control"> 
+			                    <option value="Null"> ${ (lang == "ar" ? "رقم الحساب" : "Account Number")} </option>
+			               </select >
+		                </div>
+                        <div class="form-group display_none" id="CashBox_div${cnt}">
+			                <select id="CashBox${cnt}" class="form-control display_none"> 
+			                    <option value="Null"> ${(lang == "ar" ? "الصندوق" : "CashBox") }</option>
+			                </select >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <textarea rows="2"  id="Remarks${cnt}" class="form-control"></textarea>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag2${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="DepositID${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
         $("#data_lebel").append(html);
 
 
@@ -2879,24 +3000,24 @@ namespace Processes {
                     if (Status == 1 || Status == 2) {
                         showdiv();
                         $('#divlepRentdata_1').removeClass('display_none');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_2').removeClass('showdiv');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_2').removeClass('display_none');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-                        $('#divlepRentdata_3').removeClass('showdiv');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_3').removeClass('display_none');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-                        $('#lepRentdata').removeClass('showdiv');
-                        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+                        $('#lepRentdata').removeClass('display_none');
+                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-                        $('#lepMoney').removeClass('showdiv');
-                        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-                        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+                        $('#lepMoney').removeClass('display_none');
+                        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+                        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
                         Processes_Open();
                         Status = 2;
@@ -3330,21 +3451,21 @@ namespace Processes {
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
 
-        $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-        $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#lepRentdata').addClass('display_none');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-        $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#lepMoney').addClass('display_none');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
-        $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#divlOerSalesman_2').addClass('display_none');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -3390,28 +3511,28 @@ namespace Processes {
         $("#data_lebel").addClass("disabledDiv");
 
         $('#divlepRentdata_1').addClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_2').addClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').addClass('display_none');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-        $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#lepRentdata').addClass('display_none');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-        $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#lepMoney').addClass('display_none');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
-        $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#divlOerSalesman_2').addClass('display_none');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Payload_data").attr("disabled", "disabled").off('click');
@@ -3474,17 +3595,17 @@ namespace Processes {
         //$("#Div_Money").attr("disabled", "disabled").off('click');
 
 
-        $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-        //$('#lepRentdata').addClass('showdiv');
-        //$('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        //$('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        //$('#lepRentdata').addClass('display_none');
+        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-        //$('#lepMoney').addClass('showdiv');
-        //$('#spanlepMoney_4').toggleClass('fa-caret-left');
-        //$('#spanlepMoney_4').toggleClass('fa-caret-down');
+        //$('#lepMoney').addClass('display_none');
+        //$('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        //$('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         btnUpdate_1.classList.remove('display_none');
         btnUpdate_2.classList.remove('display_none');
@@ -3556,9 +3677,9 @@ namespace Processes {
             $("#btnOpen").attr("disabled", "disabled");
             $("#btnOpen").attr("style", "")
 
-            $('#divlepRentdata_3').addClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#divlepRentdata_3').addClass('display_none');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
             $("#Processshutdown").attr("disabled", "disabled").off('click');
         } else {
             btnClose.disabled = false;
@@ -3597,24 +3718,24 @@ namespace Processes {
                         if (Status == 1 || Status == 2) {
                             showdiv();
                             $('#divlepRentdata_1').removeClass('display_none');
-                            $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                            $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                            $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                            $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                            $('#divlepRentdata_2').removeClass('showdiv');
-                            $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                            $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                            $('#divlepRentdata_2').removeClass('display_none');
+                            $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                            $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-                            $('#divlepRentdata_3').removeClass('showdiv');
-                            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                            $('#divlepRentdata_3').removeClass('display_none');
+                            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-                            $('#lepRentdata').removeClass('showdiv');
-                            $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-                            $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+                            $('#lepRentdata').removeClass('display_none');
+                            $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+                            $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-                            $('#lepMoney').removeClass('showdiv');
-                            $('#spanlepMoney_4').toggleClass('fa-caret-left');
-                            $('#spanlepMoney_4').toggleClass('fa-caret-down');
+                            $('#lepMoney').removeClass('display_none');
+                            $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+                            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
                             Processes_Open();
                             Status = 2;
@@ -3667,11 +3788,11 @@ namespace Processes {
             $("#Financialsituation").removeAttr("disabled");
             $("#Div_Money").removeAttr("disabled");
 
-            $('#lepRentdata').removeClass('showdiv');
-            $('#spanlepRentdata_4').addClass('fa-caret-down');
+            $('#lepRentdata').removeClass('display_none');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
 
-            $('#lepMoney').removeClass('showdiv');
-            $('#spanlepMoney_4').addClass('fa-caret-down');
+            $('#lepMoney').removeClass('display_none');
+            $('#spanlepMoney_4').addClass('fa-angle-double-down');
 
             let cnt = 1;
             let ii = 0;
@@ -3714,9 +3835,9 @@ namespace Processes {
 
                 debugger
                 //$("#Processshutdown").removeAttr("disabled");
-                //$('#divlepRentdata_3').removeClass('showdiv');
-                //$('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                //$('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                //$('#divlepRentdata_3').removeClass('display_none');
+                //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
                 //btnUpdate_4.classList.remove('display_none');
                 //btnUpdate_4.focus();
                 //Update_4_onclick();
@@ -3827,29 +3948,29 @@ namespace Processes {
         $("#DivHederMaster").addClass("disabledDiv");
 
         $('#divlepRentdata_1').addClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
 
-        $('#divlepRentdata_2').addClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').addClass('display_none');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
-        $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
-        $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#lepRentdata').addClass('display_none');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
-        $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#lepMoney').addClass('display_none');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
-        $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#divlOerSalesman_2').addClass('display_none');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Payload_data").attr("disabled", "disabled").off('click');
@@ -3944,12 +4065,12 @@ namespace Processes {
 
                 MasterGridBiuld();
                 $('#divlepRentdata_1').removeClass('display_none');
-                $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
-                $('#divlepRentdata_2').removeClass('showdiv');
-                $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                $('#divlepRentdata_2').removeClass('display_none');
+                $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
                 //Update_2_onclick();
                 //Update_3_onclick();
@@ -4430,9 +4551,9 @@ namespace Processes {
 
             $("#Processshutdown").attr("disabled", "disabled").off('click');
 
-            $('#divlepRentdata_3').addClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#divlepRentdata_3').addClass('display_none');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
@@ -4676,45 +4797,45 @@ namespace Processes {
 
         $('#Payload_data').on('click', function () {
             $('#divlepRentdata_1').toggleClass('display_none');
-            $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_1').toggleClass('fa-caretfa-angle-double-down');
 
         });
 
         $('#Expenses').on('click', function () {
-            $('#divlepRentdata_2').toggleClass('showdiv');
-            $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+            $('#divlepRentdata_2').toggleClass('display_none');
+            $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
         });
 
         $('#OerSalesman').on('click', function () {
-            $('#divlOerSalesman_2').toggleClass('showdiv');
-            $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-            $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+            $('#divlOerSalesman_2').toggleClass('display_none');
+            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
         });
 
 
         $('#Processshutdown').on('click', function () {
-            $('#divlepRentdata_3').toggleClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#divlepRentdata_3').toggleClass('display_none');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         });
 
 
         $('#Financialsituation').on('click', function () {
-            $('#lepRentdata').toggleClass('showdiv');
-            $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+            $('#lepRentdata').toggleClass('display_none');
+            $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         });
 
         $('#Div_Money').on('click', function () {
-            $('#lepMoney').toggleClass('showdiv');
-            $('#spanlepMoney_4').toggleClass('fa-caret-left');
-            $('#spanlepMoney_4').toggleClass('fa-caret-down');
+            $('#lepMoney').toggleClass('display_none');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         });
 

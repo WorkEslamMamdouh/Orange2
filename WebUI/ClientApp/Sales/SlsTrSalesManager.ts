@@ -1805,8 +1805,6 @@ namespace SlsTrSalesManager {
 			                <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" disabled>
                             <i class="fa fa-search  "></i>
                              </button>
-
-                         
 		                </div>
 	                </td>
                     <td>
