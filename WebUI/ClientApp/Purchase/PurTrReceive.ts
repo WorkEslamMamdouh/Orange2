@@ -44,7 +44,7 @@ namespace PurTrReceive {
     var ReceiveItemSingleModel: I_Pur_TR_ReceiveItems = new I_Pur_TR_ReceiveItems();
     var MasterDetailModel: PurReceiveMasterDetails = new PurReceiveMasterDetails();
     var AllPurReceiveMasterDetailModel: IQ_GetPurReceiveMasterDisplay = new IQ_GetPurReceiveMasterDisplay();
-
+    var ModelPrice: ModelLastPrice = new ModelLastPrice();
 
     //DropDownlist
     var ddlStateType: HTMLSelectElement;
@@ -70,6 +70,7 @@ namespace PurTrReceive {
     var txtCurrencyRate: HTMLInputElement;
 
     //buttons 
+    var btnCustLastPrice: HTMLButtonElement;
     var btnUpdate: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var ddlIsCash: HTMLSelectElement;
@@ -122,6 +123,9 @@ namespace PurTrReceive {
     var btnPrint: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement; 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+
+    var flagLastPrice = 2;
+    var itemid_LastPrice = 0;
     //---------------------------------------------------------------- main region----------------------------------------------------
     export function InitalizeComponent() {
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -203,6 +207,7 @@ namespace PurTrReceive {
         chkActive = document.getElementById("chkActive") as HTMLInputElement;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
         btnAddDetailsCharge = document.getElementById("btnAddDetailsCharge") as HTMLButtonElement;
+        btnCustLastPrice = document.getElementById("btnCustLastPrice") as HTMLButtonElement;
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
@@ -225,6 +230,7 @@ namespace PurTrReceive {
         ddlIsCash.onchange = ddlIsCashOnchange;
         btnAddDetailsCharge.onclick = AddNewRowCharge;
         btnAddDetails.onclick = AddNewRow;
+        btnCustLastPrice.onclick = LastPrice_onclick;
         btnUpdate.onclick = btnupdate_onclick;
         btnSave.onclick = saveFunc;
         btnBack.onclick = backFunc;
@@ -244,6 +250,121 @@ namespace PurTrReceive {
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
+
+    }
+
+    //-----------------------------------------------------------------------------------------------------------------------------
+    function LastPrice_onclick() {
+
+        if (txtVendorName.value.trim() == "") {
+            DisplayMassage('(برجاء اختيار الموارد)', '(Please select a customer)', MessageType.Error);
+            Errorinput(txtVendorName);
+            return false
+        }
+
+        if (ddlStoreHeader.value == "null") {
+            DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
+            Errorinput(ddlStoreHeader);
+
+            return false
+        }
+
+        let ChackCount = 0;
+        for (var i = 0; i < CountGrid; i++) {
+            let StatusFlag = $("#txt_StatusFlag" + i).val();
+            if (StatusFlag != "d" && StatusFlag != "m") {
+                if (ChackCount == 0) {
+                    itemid_LastPrice = $('#ddlItem' + i).val();
+                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text())
+                }
+
+                ChackCount++;
+            }
+        }
+
+        if (ChackCount == 0) {
+            DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
+            Errorinput(btnAddDetails);
+            return false
+        }
+
+
+
+        if (flagLastPrice % 2 === 0) {
+
+            $("#btnCustLastPrice").animate({ right: '-2%' }, 'slow');
+            timerHiddenLastPrice();
+
+        }
+        else {
+
+            $("#btnCustLastPrice").animate({ right: '-98%' }, 'slow');
+        }
+
+        flagLastPrice++;
+    }
+    function timerHiddenLastPrice() {
+        setTimeout(function () {
+            $("#btnCustLastPrice").animate({ right: '-98%' }, 'slow');
+            flagLastPrice = 2;
+        }, 20000);
+    }
+    function GetLastPrice(itemid: number, Name: string) {
+        debugger
+        let VendorID = globalVendorID;
+        let storeid = ddlStoreHeader.value;
+        //let invid = 0;
+        let invid = GlobalReceiveID
+
+
+        //@itemid = 3236,
+        let flagPrice = true;
+        if (itemid.toString() == 'null') {
+            flagPrice = false
+        }
+        if (ddlStoreHeader.value.toString() == 'null') {
+            flagPrice = false
+        }
+        if (txtVendorName.value.trim() == '') {
+            flagPrice = false
+        }
+
+
+        if (flagPrice == true) {
+
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, VendorID: VendorID, storeid: storeid, invid: invid },
+                success: (d) => {
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+                        ModelPrice = result.Response as ModelLastPrice;
+                        $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
+                        $("#CustLastTr").html(ModelPrice.CustLastTr.toString())
+                        $("#LastPrice").html(ModelPrice.LastPrice.toString())
+                        $("#LastPurchase").html(ModelPrice.LastPurchase.toString())
+                        $("#Curcost").html(ModelPrice.Curcost.toString())
+                        $("#custLastDate").html(ModelPrice.custLastDate.toString())
+                        $("#Name_Item").html(Name)
+
+                    }
+                }
+            });
+
+        }
+        else {
+
+            $("#CustLastPrice").html("-----")
+            $("#CustLastTr").html("-----")
+            $("#LastPrice").html("-----")
+            $("#LastPurchase").html("-----")
+            $("#Curcost").html("-----")
+            $("#custLastDate").html("-----")
+            $("#Name_Item").html("-----")
+
+        }
+
 
     }
     //---------------------------------------------------------------- normal region----------------------------------------------------
@@ -494,7 +615,7 @@ namespace PurTrReceive {
         $("#DivFilter").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
-        $("#divMasterGridiv").removeClass("display_none");
+        //$("#divMasterGridiv").removeClass("display_none");
 
         if (ModeType == 3) {
             MasterGridDoubleClick();
@@ -1231,7 +1352,7 @@ namespace PurTrReceive {
             $("#txtQuantity" + CountGrid).removeAttr("disabled");
             $("#txtPrice" + CountGrid).attr("disabled", "disabled");
             $("#txtPriceFc" + CountGrid).removeAttr("disabled");
-
+            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
@@ -1251,6 +1372,14 @@ namespace PurTrReceive {
 	                <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" disabled>
+                            <i class="fa fa-search  "></i>
+                             </button>
+ 
 		                </div>
 	                </td>
                     <td>
@@ -1512,6 +1641,78 @@ namespace PurTrReceive {
                 e.preventDefault();
             }
         });
+
+        $('#btnSearchItems' + cnt).click(function (e) {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            debugger
+            let sys: SystemTools = new SystemTools();
+
+            var storeId = Number(ddlStoreHeader.value);//and OnhandQty > 0
+            var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
+            let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
+          
+            sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
+                let id = SearchGrid.SearchDataGrid.SelectedKey
+
+                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+
+                $('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+
+                let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
+
+                FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
+                $('#ddlItem' + cnt).empty();
+                $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
+                for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
+                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
+                }
+
+                $('#ddlItem' + cnt).val(searchItemID);
+
+
+
+                var selectedItem = $(dropddlItem + ' option:selected').attr('value');
+                var selectedFamily = $(drop + ' option:selected').attr('value');
+
+                var itemID = Number(selectedItem);
+                var FamilyID = Number(selectedFamily);
+                var res = false;
+                var NumberRowid = $("#ReciveDetailsID" + cnt).val();
+                res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+                if (res == true) {
+                    $("#ddlItem" + cnt).val("null");
+                    $("#txtPrice" + cnt).val("1");
+                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+                } else {
+                    $("#txtPriceFc" + cnt).val("1");
+                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                    var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
+                    var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
+                    $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
+
+
+                    var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
+                    $("#txtPrice" + cnt).val(txtPriceValue);
+                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                    $("#txtTotal" + cnt).val(total);
+
+                    var vatAmount = Number(total) * VatPrc / 100;
+                    $("#txtTax" + cnt).val(vatAmount);
+                    var totalAfterVat = Number(vatAmount) + Number(total);
+                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+
+
+                }
+                ComputeTotals();
+
+
+
+
+            });
+        });
+
 
         //script
         //fill dropdownlist
@@ -2635,6 +2836,7 @@ namespace PurTrReceive {
 
             $("#btn_minus" + i).removeClass("display_none");
             $("#btn_minus" + i).removeAttr("disabled");
+            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
         }
         for (var i = 0; i < CountGridCharge; i++) {
             $("#txtSerial" + i).prop("disabled", true);

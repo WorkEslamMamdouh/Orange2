@@ -43,6 +43,7 @@ var PurTrReceive;
     var ReceiveItemSingleModel = new I_Pur_TR_ReceiveItems();
     var MasterDetailModel = new PurReceiveMasterDetails();
     var AllPurReceiveMasterDetailModel = new IQ_GetPurReceiveMasterDisplay();
+    var ModelPrice = new ModelLastPrice();
     //DropDownlist
     var ddlStateType;
     var ddlSalesmanMaster;
@@ -63,6 +64,7 @@ var PurTrReceive;
     var txtVendorName;
     var txtCurrencyRate;
     //buttons 
+    var btnCustLastPrice;
     var btnUpdate;
     var btnShow;
     var ddlIsCash;
@@ -111,6 +113,8 @@ var PurTrReceive;
     var btnPrint;
     var btnPrintTransaction;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var flagLastPrice = 2;
+    var itemid_LastPrice = 0;
     //---------------------------------------------------------------- main region----------------------------------------------------
     function InitalizeComponent() {
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -189,6 +193,7 @@ var PurTrReceive;
         chkActive = document.getElementById("chkActive");
         btnAddDetails = document.getElementById("btnAddDetails");
         btnAddDetailsCharge = document.getElementById("btnAddDetailsCharge");
+        btnCustLastPrice = document.getElementById("btnCustLastPrice");
         btnUpdate = document.getElementById("btnUpdate");
         btnBack = document.getElementById("btnBack");
         btnSave = document.getElementById("btnSave");
@@ -208,6 +213,7 @@ var PurTrReceive;
         ddlIsCash.onchange = ddlIsCashOnchange;
         btnAddDetailsCharge.onclick = AddNewRowCharge;
         btnAddDetails.onclick = AddNewRow;
+        btnCustLastPrice.onclick = LastPrice_onclick;
         btnUpdate.onclick = btnupdate_onclick;
         btnSave.onclick = saveFunc;
         btnBack.onclick = backFunc;
@@ -225,6 +231,96 @@ var PurTrReceive;
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------
+    function LastPrice_onclick() {
+        if (txtVendorName.value.trim() == "") {
+            DisplayMassage('(برجاء اختيار الموارد)', '(Please select a customer)', MessageType.Error);
+            Errorinput(txtVendorName);
+            return false;
+        }
+        if (ddlStoreHeader.value == "null") {
+            DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
+            Errorinput(ddlStoreHeader);
+            return false;
+        }
+        var ChackCount = 0;
+        for (var i = 0; i < CountGrid; i++) {
+            var StatusFlag = $("#txt_StatusFlag" + i).val();
+            if (StatusFlag != "d" && StatusFlag != "m") {
+                if (ChackCount == 0) {
+                    itemid_LastPrice = $('#ddlItem' + i).val();
+                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text());
+                }
+                ChackCount++;
+            }
+        }
+        if (ChackCount == 0) {
+            DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
+            Errorinput(btnAddDetails);
+            return false;
+        }
+        if (flagLastPrice % 2 === 0) {
+            $("#btnCustLastPrice").animate({ right: '-2%' }, 'slow');
+            timerHiddenLastPrice();
+        }
+        else {
+            $("#btnCustLastPrice").animate({ right: '-98%' }, 'slow');
+        }
+        flagLastPrice++;
+    }
+    function timerHiddenLastPrice() {
+        setTimeout(function () {
+            $("#btnCustLastPrice").animate({ right: '-98%' }, 'slow');
+            flagLastPrice = 2;
+        }, 20000);
+    }
+    function GetLastPrice(itemid, Name) {
+        debugger;
+        var VendorID = globalVendorID;
+        var storeid = ddlStoreHeader.value;
+        //let invid = 0;
+        var invid = GlobalReceiveID;
+        //@itemid = 3236,
+        var flagPrice = true;
+        if (itemid.toString() == 'null') {
+            flagPrice = false;
+        }
+        if (ddlStoreHeader.value.toString() == 'null') {
+            flagPrice = false;
+        }
+        if (txtVendorName.value.trim() == '') {
+            flagPrice = false;
+        }
+        if (flagPrice == true) {
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, VendorID: VendorID, storeid: storeid, invid: invid },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        ModelPrice = result.Response;
+                        $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
+                        $("#CustLastTr").html(ModelPrice.CustLastTr.toString());
+                        $("#LastPrice").html(ModelPrice.LastPrice.toString());
+                        $("#LastPurchase").html(ModelPrice.LastPurchase.toString());
+                        $("#Curcost").html(ModelPrice.Curcost.toString());
+                        $("#custLastDate").html(ModelPrice.custLastDate.toString());
+                        $("#Name_Item").html(Name);
+                    }
+                }
+            });
+        }
+        else {
+            $("#CustLastPrice").html("-----");
+            $("#CustLastTr").html("-----");
+            $("#LastPrice").html("-----");
+            $("#LastPurchase").html("-----");
+            $("#Curcost").html("-----");
+            $("#custLastDate").html("-----");
+            $("#Name_Item").html("-----");
+        }
     }
     //---------------------------------------------------------------- normal region----------------------------------------------------
     function ddlIsCashOnchange() {
@@ -444,7 +540,7 @@ var PurTrReceive;
         $("#DivFilter").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divMasterGridiv").removeClass("disabledDiv");
-        $("#divMasterGridiv").removeClass("display_none");
+        //$("#divMasterGridiv").removeClass("display_none");
         if (ModeType == 3) {
             MasterGridDoubleClick();
         }
@@ -1089,6 +1185,7 @@ var PurTrReceive;
             $("#txtQuantity" + CountGrid).removeAttr("disabled");
             $("#txtPrice" + CountGrid).attr("disabled", "disabled");
             $("#txtPriceFc" + CountGrid).removeAttr("disabled");
+            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
@@ -1099,7 +1196,7 @@ var PurTrReceive;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                            <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc" + cnt + "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc" + cnt + "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax" + cnt + "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"" + ((VatPrc == null || undefined) ? 0 : VatPrc) + "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                            <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc" + cnt + "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc" + cnt + "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax" + cnt + "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"" + ((VatPrc == null || undefined) ? 0 : VatPrc) + "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>";
         //html = '<div id= "No_Row' + cnt + '" class=" style_border" > <div class="col-xs-12 p-0" > <div class="col-lg-xs-12" > ' +
         //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurTrReceive display_none"></span>' +
         //    '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
@@ -1266,6 +1363,56 @@ var PurTrReceive;
             if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                 e.preventDefault();
             }
+        });
+        $('#btnSearchItems' + cnt).click(function (e) {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+            debugger;
+            var sys = new SystemTools();
+            var storeId = Number(ddlStoreHeader.value); //and OnhandQty > 0
+            var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
+            var qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
+            sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, function () {
+                var id = SearchGrid.SearchDataGrid.SelectedKey;
+                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
+                $('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+                var searchItemID = ItemBaesdFamilyDetails[0].ItemID;
+                FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
+                $('#ddlItem' + cnt).empty();
+                $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
+                for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
+                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
+                }
+                $('#ddlItem' + cnt).val(searchItemID);
+                var selectedItem = $(dropddlItem + ' option:selected').attr('value');
+                var selectedFamily = $(drop + ' option:selected').attr('value');
+                var itemID = Number(selectedItem);
+                var FamilyID = Number(selectedFamily);
+                var res = false;
+                var NumberRowid = $("#ReciveDetailsID" + cnt).val();
+                res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+                if (res == true) {
+                    $("#ddlItem" + cnt).val("null");
+                    $("#txtPrice" + cnt).val("1");
+                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+                }
+                else {
+                    $("#txtPriceFc" + cnt).val("1");
+                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
+                    var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
+                    var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
+                    $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
+                    var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
+                    $("#txtPrice" + cnt).val(txtPriceValue);
+                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                    $("#txtTotal" + cnt).val(total);
+                    var vatAmount = Number(total) * VatPrc / 100;
+                    $("#txtTax" + cnt).val(vatAmount);
+                    var totalAfterVat = Number(vatAmount) + Number(total);
+                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                }
+                ComputeTotals();
+            });
         });
         //script
         //fill dropdownlist
@@ -2161,6 +2308,7 @@ var PurTrReceive;
             $("#txtTotAfterTax" + i).prop("disabled", true);
             $("#btn_minus" + i).removeClass("display_none");
             $("#btn_minus" + i).removeAttr("disabled");
+            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
         }
         for (var i = 0; i < CountGridCharge; i++) {
             $("#txtSerial" + i).prop("disabled", true);

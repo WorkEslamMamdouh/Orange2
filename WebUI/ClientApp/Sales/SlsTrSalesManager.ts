@@ -147,6 +147,7 @@ namespace SlsTrSalesManager {
     var Page = true;
     let pageIndex;
     var flagLastPrice = 2;
+    var itemid_LastPrice = 0;
 
     //------------------------------------------------------ Main Region------------------------
     export function InitalizeComponent() {
@@ -292,6 +293,40 @@ namespace SlsTrSalesManager {
     }
     function LastPrice_onclick() {
 
+        if (ddlInvoiceCustomer.value == "null") {
+            DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
+            Errorinput(ddlInvoiceCustomer);
+            return false
+        }
+
+        if (ddlStore.value == "null") {
+            DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
+            Errorinput(ddlStore);
+            
+            return false
+        }
+
+        let ChackCount = 0;
+        for (var i = 0; i < CountGrid; i++) {
+            let StatusFlag = $("#txt_StatusFlag" + i).val();
+            if (StatusFlag != "d" && StatusFlag != "m") {
+                if (ChackCount == 0) {
+                    itemid_LastPrice = $('#ddlItem' + i).val();
+                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text()) 
+                }
+               
+                ChackCount++;
+            }
+        }
+
+        if (ChackCount == 0) {
+            DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
+            Errorinput(btnAddDetails);
+            return false
+        }
+
+
+
         if (flagLastPrice % 2 === 0) {
 
             $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
@@ -302,25 +337,38 @@ namespace SlsTrSalesManager {
 
             $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
         }
+
         flagLastPrice++;
     }
     function timerHiddenLastPrice() {
         setTimeout(function () {
             $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
             flagLastPrice = 2;
-        }, 6000);
+        }, 20000);
     }
     function GetLastPrice(itemid: number, Name: string) {
         debugger
         let customerid = ddlInvoiceCustomer.value;
         let storeid = ddlStore.value;
+        //let invid = 0;
         let invid = GlobalinvoiceID
 
 
         //@itemid = 3236,
+        let flagPrice = true;
+        if (itemid.toString() == 'null') {
+            flagPrice = false
+        }
+        if (ddlStore.value.toString() == 'null') {
+            flagPrice = false
+        }
+        if (ddlInvoiceCustomer.value.toString() == 'null') {
+            flagPrice = false
+        }
 
-        if (itemid.toString() != 'null') {
-             
+
+        if (flagPrice == true) {
+
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
@@ -342,8 +390,7 @@ namespace SlsTrSalesManager {
             });
 
         }
-        else
-        {
+        else {
 
             $("#CustLastPrice").html("-----")
             $("#CustLastTr").html("-----")
@@ -2234,6 +2281,10 @@ namespace SlsTrSalesManager {
                     }
                 }
                 // }
+
+                itemid_LastPrice = $('#ddlItem' + cnt).val();
+                GetLastPrice(itemid_LastPrice, $("#ddlItem" + cnt + " option:selected").text())
+
             }
             ComputeTotals();
         });
@@ -2538,9 +2589,9 @@ namespace SlsTrSalesManager {
         });
 
         $("#No_Row" + cnt).on('click', function () {
-            let item = $('#ddlItem' + cnt).val();
+            itemid_LastPrice = $('#ddlItem' + cnt).val();
 
-            GetLastPrice(item, $("#ddlItem" + cnt + " option:selected").text())
+            GetLastPrice(itemid_LastPrice, $("#ddlItem" + cnt + " option:selected").text())
 
         });
 
@@ -2687,15 +2738,13 @@ namespace SlsTrSalesManager {
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode 
             $("#ddlFamily" + CountGrid).removeAttr("disabled");
             $("#ddlItem" + CountGrid).removeAttr("disabled");
-            $("#txtQuantity" + CountGrid).removeAttr("disabled");
-            $("#txtPrice" + CountGrid).removeAttr("disabled");
+            $("#txtQuantity" + CountGrid).removeAttr("disabled"); 
             $("#btnSearchItems" + CountGrid).removeAttr("disabled");
 
             $("#txtReturnQuantity" + CountGrid).attr("disabled", "disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            CountGrid++;
-            Insert_Serial();
+        
 
             if (flag_PriceWithVAT == true) {
 
@@ -2706,6 +2755,9 @@ namespace SlsTrSalesManager {
                 $("#txtPrice" + CountGrid).removeAttr("disabled");
                 $("#txtUnitpriceWithVat" + CountGrid).attr("disabled", "disabled");
             }
+
+            CountGrid++;
+            Insert_Serial();
         }
     }
     function checkRepeatedItems(itemValue: number, familyValue: number, cnt: number) {
