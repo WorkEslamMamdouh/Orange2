@@ -79,7 +79,7 @@ namespace CloseProcesses {
    var btnExpenses: HTMLButtonElement;
     var btnOpen: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
-    var btnadd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnUpdate_1: HTMLButtonElement;
     var btnSave_1: HTMLButtonElement;
     var btnBack_1: HTMLButtonElement;
@@ -218,6 +218,16 @@ namespace CloseProcesses {
 
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
+        $("#btnUpdate").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
+        $("#btnSave").addClass("d-none");
+        $("#btnBack").addClass("d-none");
+        $("#btnPrintTrview").addClass("print-list");
+        $("#btnPrintTrPDF").addClass("print-list");
+        $("#btnPrintTrEXEL").addClass("print-list");
+        $("#btnPrintTrview span").text("طباعه قائمه عمليات");
+        $("#btnPrintTrPDF span").text("PDF 'قائمه عمليات'");
+        $("#btnPrintTrEXEL span").text("Excel 'قائمه عمليات'");
         InitalizeControls();
         IntializeEvents();
         FillddlVendorMaster();
@@ -299,7 +309,7 @@ namespace CloseProcesses {
 
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnUpdate_1 = document.getElementById("btnUpdate_1") as HTMLButtonElement;
         btnBack_1 = document.getElementById("btnBack_1") as HTMLButtonElement;
         btnSave_1 = document.getElementById("btnSave_1") as HTMLButtonElement;
@@ -366,7 +376,7 @@ namespace CloseProcesses {
         btnAddDetailslebel.onclick = AddNewRowlebel;
         //btnAddDetails.onclick = AddNewRow;
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnAdd_onclick;
+        btnAdd.onclick = btnAdd_onclick;
 
         btnReCalculation.onclick = btnReCalculation_onclick;
         btnPresent.onclick = btnPresent_onclick;
@@ -971,30 +981,30 @@ namespace CloseProcesses {
 
         showdiv();
 
-        $('#divlepRentdata_1').removeClass('showdiv');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_1').removeClass('display_none');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
         $('#divlepRentdata_2').removeClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
         $('#divlepRentdata_3').removeClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         $('#lepRentdata').removeClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
 
         $('#divlOerSalesman_2').removeClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
         $('#lepMoney').removeClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         IsGenerated = Selected_Data[0].IsGenerated;
 
@@ -1078,27 +1088,24 @@ namespace CloseProcesses {
 
     function BuildControls(cnt: number) {
         var html;
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
+        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
 
+        //    '<div class="col-lg-2">' +
+        //    '<select id="ddlItem' + cnt + '" class="form-control" disabled  ><option  value="null">اختر</option></select></div>' +
+        //    '<div class="col-lg-1" style=""><input id="txtQuantity' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1" style=""><input id="txtSoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1" style=""><input id="txtScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
 
+        //    '<div class="col-lg-1" style=""><input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    //'<div class="col-lg-1" style=""><input id="txtAvailableQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
 
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
+        //    '<div class="col-lg-1" style=""><input id="txtClose_SoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1" style=""><input id="txtClose_ScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1" style=""><input id="txtClose_TotalSales' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '</div></div></div>' +
 
-            '<div class="col-lg-2">' +
-            '<select id="ddlItem' + cnt + '" class="form-control" disabled  ><option  value="null">اختر</option></select></div>' +
-            '<div class="col-lg-1" style=""><input id="txtQuantity' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtSoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-
-            '<div class="col-lg-1" style=""><input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            //'<div class="col-lg-1" style=""><input id="txtAvailableQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-
-            '<div class="col-lg-1" style=""><input id="txtClose_SoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtClose_ScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-1" style=""><input id="txtClose_TotalSales' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '</div></div></div>' +
-
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
 
         $("#div_Data").append(html);
 
@@ -2008,20 +2015,20 @@ namespace CloseProcesses {
         $('#Financialsituation').on('click', function () {
             $('#lepRentdata').toggleClass('showdiv');
 
-            $('#spanlepRentdata_4').addClass('fa-caret-down');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
 
         });
 
         $('#Div_Money').on('click', function () {
             $('#lepMoney').toggleClass('showdiv');
 
-            $('#spanlepMoney_4').toggleClass('fa-caret-down');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         });
 
         $('#lepRentdata').removeClass('showdiv');
         $('#lepMoney').removeClass('showdiv');
-        $('#spanlepRentdata_4').addClass('fa-caret-left');
+        $('#spanlepRentdata_4').addClass('fa-angle-double-left');
 
 
     }
@@ -2867,25 +2874,25 @@ namespace CloseProcesses {
 
                     if (Status == 1 || Status == 2) {
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('showdiv');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_1').removeClass('display_none');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
                         $('#divlepRentdata_2').removeClass('showdiv');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
                         $('#divlepRentdata_3').removeClass('showdiv');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
                         $('#lepRentdata').removeClass('showdiv');
-                        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
                         $('#lepMoney').removeClass('showdiv');
-                        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-                        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+                        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+                        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
                         Processes_Open();
                         Status = 2;
@@ -3319,20 +3326,20 @@ namespace CloseProcesses {
         $("#data_lebel").addClass("disabledDiv");
 
         $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -3377,29 +3384,29 @@ namespace CloseProcesses {
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_1').addClass('display_none');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
         $('#divlepRentdata_2').addClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
         $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Payload_data").attr("disabled", "disabled").off('click');
@@ -3463,16 +3470,16 @@ namespace CloseProcesses {
 
 
         //$('#divlepRentdata_3').addClass('showdiv');
-        //$('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        //$('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         //$('#lepRentdata').addClass('showdiv');
-        //$('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        //$('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         //$('#lepMoney').addClass('showdiv');
-        //$('#spanlepMoney_4').toggleClass('fa-caret-left');
-        //$('#spanlepMoney_4').toggleClass('fa-caret-down');
+        //$('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        //$('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         btnUpdate_1.classList.add('display_none');
 
@@ -3506,8 +3513,8 @@ namespace CloseProcesses {
 
 
         //$('#divlepRentdata_3').addClass('showdiv');
-        //$('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        //$('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
         //$("#Processshutdown").attr("disabled", "disabled").off('click');
 
 
@@ -3568,8 +3575,8 @@ namespace CloseProcesses {
        
 
         $('#divlepRentdata_3').removeClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
         $("#Processshutdown").removeAttr("disabled");
 
 
@@ -3627,8 +3634,8 @@ namespace CloseProcesses {
             $("#btnOpen").attr("style", "")
 
             $('#divlepRentdata_3').addClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
             $("#Processshutdown").attr("disabled", "disabled").off('click');
         } else {
             btnClose.disabled = false;
@@ -3690,17 +3697,17 @@ namespace CloseProcesses {
 
 
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('showdiv');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_1').removeClass('display_none');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
                         $('#divlepRentdata_2').removeClass('showdiv');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
                         $('#divlepRentdata_3').addClass('showdiv');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
 
                         Processes_Open();
@@ -3762,10 +3769,10 @@ namespace CloseProcesses {
             $("#Div_Money").removeAttr("disabled");
 
             $('#lepRentdata').removeClass('showdiv');
-            $('#spanlepRentdata_4').addClass('fa-caret-down');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
 
             $('#lepMoney').removeClass('showdiv');
-            $('#spanlepMoney_4').addClass('fa-caret-down');
+            $('#spanlepMoney_4').addClass('fa-angle-double-down');
 
             let cnt = 1;
             let ii = 0;
@@ -3809,8 +3816,8 @@ namespace CloseProcesses {
                 debugger
                 $("#Processshutdown").removeAttr("disabled");
                 $('#divlepRentdata_3').removeClass('showdiv');
-                $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-                $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+                $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+                $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
                 btnUpdate_4.classList.remove('display_none');
                 btnUpdate_4.focus();
                 Update_4_onclick();
@@ -3879,30 +3886,30 @@ namespace CloseProcesses {
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
 
-        $('#divlepRentdata_1').addClass('showdiv');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_1').addClass('display_none');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
 
         $('#divlepRentdata_2').addClass('showdiv');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
         $('#divlepRentdata_3').addClass('showdiv');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-caret-left');
-        $('#spanlepMoney_4').toggleClass('fa-caret-down');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
 
         $("#Payload_data").attr("disabled", "disabled").off('click');
@@ -3997,13 +4004,13 @@ namespace CloseProcesses {
                 btnShow_onclick();
 
                 MasterGridBiuld();
-                $('#divlepRentdata_1').removeClass('showdiv');
-                $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-                $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                $('#divlepRentdata_1').removeClass('display_none');
+                $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+                $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
                 $('#divlepRentdata_2').removeClass('showdiv');
-                $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-                $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+                $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
 
                 $("#btnPresent").removeAttr("disabled");
@@ -4435,8 +4442,8 @@ namespace CloseProcesses {
             $("#Processshutdown").attr("disabled", "disabled").off('click');
 
             $('#divlepRentdata_3').addClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
@@ -4686,46 +4693,46 @@ namespace CloseProcesses {
 
 
         $('#Payload_data').on('click', function () {
-            $('#divlepRentdata_1').toggleClass('showdiv');
-            $('#spanlepRentdata_1').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+            $('#divlepRentdata_1').toggleClass('display_none');
+            $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
 
         });
 
         $('#Expenses').on('click', function () {
             $('#divlepRentdata_2').toggleClass('showdiv');
-            $('#spanlepRentdata_2').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
         });
 
         $('#OerSalesman').on('click', function () {
             $('#divlOerSalesman_2').toggleClass('showdiv');
-            $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
-            $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
+            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
+            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
 
         });
 
 
         $('#Processshutdown').on('click', function () {
             $('#divlepRentdata_3').toggleClass('showdiv');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
         });
 
 
         $('#Financialsituation').on('click', function () {
             $('#lepRentdata').toggleClass('showdiv');
-            $('#spanlepRentdata_4').toggleClass('fa-caret-left');
-            $('#spanlepRentdata_4').toggleClass('fa-caret-down');
+            $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
+            $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
 
         });
 
         $('#Div_Money').on('click', function () {
             $('#lepMoney').toggleClass('showdiv');
-            $('#spanlepMoney_4').toggleClass('fa-caret-left');
-            $('#spanlepMoney_4').toggleClass('fa-caret-down');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
+            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
         });
 

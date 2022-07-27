@@ -17879,7 +17879,6 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
 }
-
 .bg-light {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
@@ -28783,7 +28782,8 @@ div.tagsinput {
 .div-iconbar {
     position:relative;
 }
-    .div-iconbar .icon-bar {
+    .div-iconbar .icon-bar,
+    .div-iconbar .icon-bar2 {
         background-color: var(--main-blue);
         position: absolute;
         font-size: 1.25rem;
@@ -28799,15 +28799,13 @@ div.tagsinput {
         cursor: pointer;
         border: none;
     }
-    .div-iconbar .icon-bar {
+    .div-iconbar .icon-bar2 {
         left: -104px;
     }
+
 .btn-update,
 .btn-save,
-.btn-back,
-.btn-update-sm,
-.btn-save-sm,
-.btn-back-sm {
+.btn-back {
     width: 100px;
     height: 50px;
 }
@@ -28815,31 +28813,35 @@ div.tagsinput {
     width: 230px;
     height: 50px;
 }
-.btn-update {
+.icon-bar.btn-update {
     top: 70px;
 }
-.btn-save {
+.icon-bar.btn-save {
     top: 120px;
 }
-.btn-back {
+.icon-bar.btn-back {
     top: 180px;
 }
-.btn-update-sm {
-    top: -32px;
+
+.icon-bar2.btn-update {
+    top: -30px;
 }
 
-.btn-save-sm {
-    top: 100px;
+.icon-bar2.btn-save {
+    top: 20px;
 }
 
-.btn-back-sm {
-    top: 160px;
+.icon-bar2.btn-back {
+    top: 80px;
 }
 .div-iconbar .icon-bar:hover {
     left: -35px;
     background-color: var(--main-orange);
 }
-
+.div-iconbar .icon-bar2:hover {
+    left: -45px;
+    background-color: var(--main-orange);
+}
 .print-list.icon-bar {
     left: -190px;
 }
@@ -29074,31 +29076,48 @@ div.tagsinput {
         .inside-table .form-control.no-border {
             border: none;
         }
-
-.satistics-table{
-    position:absolute;
-    top:-2rem;
+.satistics-table {
+    position: absolute;
+    top: -2rem;
 }
 @media (max-width: 768px) {
     .satistics-table {
         position: static;
     }
 }
-
 .table.satistics-table thead th {
     color: var(--main-blue);
     padding-bottom:1rem;
 }
+/*Custom-table*/
+.custom-table .table thead th {
+    color: var(--main-blue);
+    font-size: 1.125rem;
+    padding-bottom:20px;
+}
+.custom-table .table th{
+    font-size: 1.125rem;
+    padding-bottom: 10px;
+}
+/*.custom-table .table tr:not(:last-child) td:first-child,
+.custom-table .table tr:nth-last-child(2) td:nth-child(2) {
+    font-size: 1.125rem;
+    font-weight: 500;
+}*/
+.custom-table .table  td:first-child{
+    font-size: 1.125rem;
+    font-weight: 500;
+}
     /*Counter*/
     .inside-table .counter {
-        background-color: transparent;
-        text-align: center;
-        margin: 6px;
-        width: 40px;
-        height: 40px;
-        border: .5px solid var(--main-blue);
-        color: var(--dark-blue);
-    }
+    background-color: transparent;
+    text-align: center;
+    margin: 6px;
+    width: 40px;
+    height: 40px;
+    border: .5px solid var(--main-blue);
+    color: var(--dark-blue);
+}
 
         .inside-table .counter:focus {
             background-color: var(--Light-blue);
