@@ -280,7 +280,7 @@ var SlsTrSalesManager;
         debugger;
         var customerid = ddlInvoiceCustomer.value;
         var storeid = ddlStore.value;
-        var invid = 0;
+        var invid = GlobalinvoiceID;
         //@itemid = 3236,
         if (itemid.toString() != 'null') {
             Ajax.Callsync({
