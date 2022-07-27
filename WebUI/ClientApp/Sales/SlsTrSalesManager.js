@@ -169,6 +169,7 @@ var SlsTrSalesManager;
         GetAllIItem();
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
+        //GetLastPrice(3236)
     }
     SlsTrSalesManager.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -273,27 +274,43 @@ var SlsTrSalesManager;
         setTimeout(function () {
             $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
             flagLastPrice = 2;
-        }, 5000);
+        }, 6000);
     }
-    function GetLastPrice(itemid) {
-        var customerid = 0;
-        var storeid = 0;
-        var invid = 0;
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
-            data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    ModelPrice = result.Response;
-                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
-                    $("#CustLastPrice").html(ModelPrice.CustLastTr.toString());
-                    $("#CustLastPrice").html(ModelPrice.LastPrice.toString());
-                    $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
+    function GetLastPrice(itemid, Name) {
+        debugger;
+        var customerid = ddlInvoiceCustomer.value;
+        var storeid = ddlStore.value;
+        var invid = GlobalinvoiceID;
+        //@itemid = 3236,
+        if (itemid.toString() != 'null') {
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
+                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, customerid: customerid, storeid: storeid, invid: invid },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        ModelPrice = result.Response;
+                        $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString());
+                        $("#CustLastTr").html(ModelPrice.CustLastTr.toString());
+                        $("#LastPrice").html(ModelPrice.LastPrice.toString());
+                        $("#LastPurchase").html(ModelPrice.LastPurchase.toString());
+                        $("#Curcost").html(ModelPrice.Curcost.toString());
+                        $("#custLastDate").html(ModelPrice.custLastDate.toString());
+                        $("#Name_Item").html(Name);
+                    }
                 }
-            }
-        });
+            });
+        }
+        else {
+            $("#CustLastPrice").html("-----");
+            $("#CustLastTr").html("-----");
+            $("#LastPrice").html("-----");
+            $("#LastPurchase").html("-----");
+            $("#Curcost").html("-----");
+            $("#custLastDate").html("-----");
+            $("#Name_Item").html("-----");
+        }
     }
     function btndiv_1_onclick() {
         $("#btndiv_1").addClass("Actiev");
@@ -1997,6 +2014,10 @@ var SlsTrSalesManager;
         });
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
+        });
+        $("#No_Row" + cnt).on('click', function () {
+            var item = $('#ddlItem' + cnt).val();
+            GetLastPrice(item, $("#ddlItem" + cnt + " option:selected").text());
         });
         if (SysSession.CurrentPrivileges.Remove) {
             $("#btn_minus" + cnt).addClass("display_none");
