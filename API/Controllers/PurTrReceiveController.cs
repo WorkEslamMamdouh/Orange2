@@ -730,6 +730,54 @@ namespace Inv.API.Controllers
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }
+
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetLastPrice(int CompCode, int BranchCode, int itemid, int vendorid, int storeid, int? invid)
+        {
+            //if (invid == 0) invid = null;
+
+            try
+            {
+
+
+                string query = @" DECLARE	@return_value int,
+                        	   @VndLastPrice numeric(18, 2),
+                        	   @VndLastTr int,
+                        	   @VndLastDate nvarchar(20),
+                        	   @LastPurchase numeric(18, 2),
+                        	   @Curcost numeric(18, 2)
+                        
+                        EXEC	@return_value = [dbo].[IProc_GetLastPurchasePrice]";
+                query = query + CompCode.ToString() + "," + BranchCode.ToString() + "," + itemid.ToString() + "," + vendorid.ToString() + "," + storeid.ToString() + "," + (invid == 0 ? "null" : invid.ToString());
+
+                query = query + @"         ,@VndLastPrice = @VndLastPrice OUTPUT,
+                                      		@VndLastTr = @VndLastTr OUTPUT,
+                                      		@VndLastDate = @VndLastDate OUTPUT,
+                                      		@LastPurchase = @LastPurchase OUTPUT,
+                                      		@Curcost = @Curcost OUTPUT;
+                                      		 
+                                    SELECT	@VndLastPrice as N'VndLastPrice',
+                                    		@VndLastTr as N'VndLastTr',
+                                    		@VndLastDate as N'VndLastDate',
+                                    		@LastPurchase as N'LastPurchase',
+                                    		@Curcost as N'Curcost' ";
+
+
+                var res = db.Database.SqlQuery<ModelLastPurchase>(query).FirstOrDefault();
+                return Ok(new BaseResponse(res));
+
+            }
+            catch (Exception ex)
+            {
+                return Ok(new BaseResponse(ex));
+            }
+
+
+        }
+
+
         #endregion
 
         #region Purchase Order 

@@ -376,7 +376,7 @@ var SlsTrSalesReturn;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
     function chkActive_onchecked() {
-        if (btnUpdate.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
+        if (txtRemarks.disabled == true) {
             openReturn();
             $('#btnPrintTransaction').removeClass("display_none");
         }

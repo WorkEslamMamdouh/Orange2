@@ -6277,4 +6277,17 @@ var ModelLastPrice = /** @class */ (function (_super) {
     }
     return ModelLastPrice;
 }(SecurityClass));
+var ModelLastPurchase = /** @class */ (function (_super) {
+    __extends(ModelLastPurchase, _super);
+    function ModelLastPurchase() {
+        var _this = _super.call(this) || this;
+        _this.VndLastPrice = 0;
+        _this.VndLastTr = 0;
+        _this.VndLastDate = '';
+        _this.LastPurchase = 0;
+        _this.Curcost = 0;
+        return _this;
+    }
+    return ModelLastPurchase;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map

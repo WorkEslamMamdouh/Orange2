@@ -418,7 +418,7 @@ namespace SlsTrSalesReturn {
     }
     function chkActive_onchecked() {
 
-        if (btnUpdate.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
+        if (txtRemarks.disabled == true) {
             openReturn();
             $('#btnPrintTransaction').removeClass("display_none");
         }

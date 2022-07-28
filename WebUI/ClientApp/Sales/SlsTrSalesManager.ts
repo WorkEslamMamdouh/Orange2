@@ -293,41 +293,43 @@ namespace SlsTrSalesManager {
     }
     function LastPrice_onclick() {
 
-        if (ddlInvoiceCustomer.value == "null") {
-            DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
-            Errorinput(ddlInvoiceCustomer);
-            return false
-        }
-
-        if (ddlStore.value == "null") {
-            DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
-            Errorinput(ddlStore);
-            
-            return false
-        }
-
-        let ChackCount = 0;
-        for (var i = 0; i < CountGrid; i++) {
-            let StatusFlag = $("#txt_StatusFlag" + i).val();
-            if (StatusFlag != "d" && StatusFlag != "m") {
-                if (ChackCount == 0) {
-                    itemid_LastPrice = $('#ddlItem' + i).val();
-                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text()) 
-                }
-               
-                ChackCount++;
-            }
-        }
-
-        if (ChackCount == 0) {
-            DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
-            Errorinput(btnAddDetails);
-            return false
-        }
-
+    
 
 
         if (flagLastPrice % 2 === 0) {
+
+            if (ddlInvoiceCustomer.value == "null") {
+                DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
+                Errorinput(ddlInvoiceCustomer);
+                return false
+            }
+
+            if (ddlStore.value == "null") {
+                DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
+                Errorinput(ddlStore);
+
+                return false
+            }
+
+            let ChackCount = 0;
+            for (var i = 0; i < CountGrid; i++) {
+                let StatusFlag = $("#txt_StatusFlag" + i).val();
+                if (StatusFlag != "d" && StatusFlag != "m") {
+                    if (ChackCount == 0) {
+                        itemid_LastPrice = $('#ddlItem' + i).val();
+                        GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text())
+                    }
+
+                    ChackCount++;
+                }
+            }
+
+            if (ChackCount == 0) {
+                DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
+                Errorinput(btnAddDetails);
+                return false
+            }
+
 
             $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
             timerHiddenLastPrice();
