@@ -10,10 +10,10 @@ class SharedWork {
     public static CurrentMode: ScreenModes; // = ScreenModes.Query;
     public static SharedNavText: HTMLInputElement;
     public static UserFavorits: Array<FavModules> = new Array<FavModules>();
-  
-   
 
-   
+
+
+
     public static set PageIndex(value: number) {
 
         //this.SetClientSession("PageIndex", value);
@@ -144,7 +144,7 @@ class SharedWork {
                 $("[name=nav]").prop('disabled', false);
                 break;
         }
-      //  ControlsButtons.ModuleEffects();
+        //  ControlsButtons.ModuleEffects();
         SharedWork.CurrentMode = mode;
         if (SharedWork.OnSwitchModes != null)
             SharedWork.OnSwitchModes();
@@ -155,7 +155,7 @@ class SharedWork {
 
 
 class UserPrivilege {
-    public MODULE_CODE: string;   
+    public MODULE_CODE: string;
     public Access?: boolean;
     public AddNew?: boolean;
     public EDIT: boolean;
@@ -205,16 +205,16 @@ class SystemEnvironment {
     public IsBiLingual?: any;
     public Token: string;
 
-    public IsNotificaitonActive: boolean; 
-    public IsDashboardActive: boolean;     
-    public StartDate: string;     
-    public EndDate: string;     
+    public IsNotificaitonActive: boolean;
+    public IsDashboardActive: boolean;
+    public StartDate: string;
+    public EndDate: string;
     public InvoiceTypeCode: number;
     public InvoiceTransCode: number;
     //public ActionLastDate: string;     
     //public SysTimeOut: number;
     public NationalityID: number;
-    public Currencyid: number; 
+    public Currencyid: number;
     public GL_VoucherCCDT_Type: number;
     public InvoiceWithoutCust: boolean;
     public IvoiceDateEditable: boolean;
@@ -224,9 +224,9 @@ class SystemEnvironment {
     public InvoiceTotalCharge: boolean;
     public OperationPriceWithVAT: boolean;
     public SalesPriceWithVAT: boolean;
-    public IsLocalBranchCustomer: boolean; 
+    public IsLocalBranchCustomer: boolean;
     public VatNo: string;
-     }
+}
 class sysInternal_Comm {
     public static Source: string;
     public static Destination: string;
@@ -238,7 +238,7 @@ class sysInternal_Comm {
     public static IsUploadPic: boolean;   // if true used can upload 
     public static IsdownloadPic: boolean;  // user can download 
     public static IsAutoSave: boolean;  // user can download 
-    
+
     public static MsgReplyID: number;
     public static slected_MemberID: number = 0;
     public static period_ID: number = 0;
@@ -349,17 +349,21 @@ function GetSystemEnvironment(): SystemEnvironment {
 
 
 function GetSystemSession(Mod: string): SystemSession {
+    if (Mod != "Home") {
+
+        $('#divIconbar').removeClass('hidden_Control');
+    }
     if (document.cookie.length > 0) {
-         
+
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
         if (Mod == "Home")
             return SysSession;
 
         var sys: SystemTools = new SystemTools();
-       
+
         let compCode = SysSession.CurrentEnvironment.CompCode;
-        if (!(compCode == "Undefied") ) {
+        if (!(compCode == "Undefied")) {
 
 
             let branchCode = SysSession.CurrentEnvironment.BranchCode;
@@ -374,9 +378,9 @@ function GetSystemSession(Mod: string): SystemSession {
                 url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
                 data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode, SystemCode: SystemCode, Modulecode: Mod },
                 success: (d) => {
-          
+
                     let result = JSON.parse(d) as UserPrivilege;
-                   
+
                     if (result == null || result.Access != true) {
                         MessageBox.Show("Access denied", Mod);
                         return;
@@ -416,7 +420,7 @@ function GetSystemSession(Mod: string): SystemSession {
 //function GetMemberComm(): Kids_Comm {
 //    if (document.cookie.length > 0) {
 //        // 
- //       let kids = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
+//       let kids = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
 //        //Kids_Comm = Kids
 //        return Kids;
 //    }

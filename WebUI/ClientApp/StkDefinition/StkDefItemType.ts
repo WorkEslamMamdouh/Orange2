@@ -16,7 +16,7 @@ namespace StkDefItemType {
 
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnSave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
@@ -26,7 +26,7 @@ namespace StkDefItemType {
 
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
-    var btnBack: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var catId;
     var catId_type_change;
@@ -37,7 +37,9 @@ namespace StkDefItemType {
 
     export function InitalizeComponent() {
         ////debugger;
-
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "أنواع الأصناف";
 
@@ -45,12 +47,7 @@ namespace StkDefItemType {
             document.getElementById('Screen_name').innerHTML = "ItemType";
 
         }
-        $("#btnAdd").addClass("display_none");
-        $("#btnShow").addClass("display_none");
-        $("#btnPrintTrview").addClass("display_none");
-        $("#btnPrintTrPDF").addClass("display_none");
-        $("#btnPrintTrEXEL").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
+       
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -59,19 +56,19 @@ namespace StkDefItemType {
         //Display();
     }
 
-    $('#btnUpdate').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate_Def").addClass("display_none");
         }
         else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave_Def').addClass("display_none");
+            $('#btnBack_Def').addClass("display_none");
 
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -96,9 +93,9 @@ namespace StkDefItemType {
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
-        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
-        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -109,15 +106,15 @@ namespace StkDefItemType {
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow;//
-        btnSave.onclick = btnsave_onClick;
-        btnBack.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnSave_Def_onClick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
         $("#drpPaymentType").on('change', function () {
             $("#divShow").removeClass("display_none");
 
             catId = $('#drpPaymentType').val();
 
 
-            btnback_onclick();
+            btnBack_Def_onclick();
           
 
 
@@ -161,13 +158,13 @@ namespace StkDefItemType {
             $("#btn_minus" + CountGrid).removeAttr("disabled");
 
             //$(".minus_btn").addClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
             CountGrid++;
             //$('#select_Type_Item' + CountGrid).prop("value", catId);
         }
 
-        $("#btnUpdate").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
 
     }
      
@@ -299,12 +296,12 @@ namespace StkDefItemType {
         return;
     }
 
-    function btnsave_onClick() {
-        loading('btnSave');
+    function btnSave_Def_onClick() {
+        loading('btnSave_Def');
 
         setTimeout(function () {
 
-            finishSave('btnSave');
+            finishSave('btnSave_Def');
 
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
@@ -412,7 +409,7 @@ namespace StkDefItemType {
                     } else {
                         MessageBox.Show("Done", "");
                     }
-                    btnback_onclick();
+                    btnBack_Def_onclick();
 
                     refresh();
 
@@ -608,23 +605,16 @@ namespace StkDefItemType {
         });
     }
 
-    function btnback_onclick() {
+    function btnBack_Def_onclick() {
         
+        $('#btnBack_Def').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
 
-        if ($('#btnBack').attr('class') != "btn btn-warning display_none") {
-            $('#btnBack').toggleClass("display_none");
-        }
-        if ($('#btnSave').attr('class') != "btn btn-success display_none") {
-            $('#btnSave').toggleClass("display_none");
-        }
-        //if ($('#btnAddDetails').attr('class') != "glyphicon glyphicon-plus-sign  display_none") {
-        //    $('#btnAddDetails').toggleClass("display_none");
-        //}
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none')
         $("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnUpdate").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $("#drpPaymentType").removeAttr("disabled");
 
         CountGrid = 0;

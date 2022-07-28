@@ -219,9 +219,10 @@ namespace StkDefCategory {
         }
     }
     function DrpItemType_onchange() { 
-        btnUpdate.classList.remove("display_none");
-        btnBack.classList.add("display_none");
-        btnSave.classList.add("display_none");    
+        //btnUpdate.classList.remove("display_none");
+        //btnBack.classList.add("display_none");
+        //btnSave.classList.add("display_none");    
+  
         DivDetails.classList.add("display_none");    
 
         if (DrpItemType.value == "null") {
@@ -234,6 +235,21 @@ namespace StkDefCategory {
             Grid.DataSource = Detailsfilter;
             Grid.Bind();
         }
+         
+        $('#icon-bar').addClass('display_none');
+        $('#divIconbar').removeClass('display_none');
+        $('#btnPrintTransaction').removeClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
+
+        $('#btnBack').addClass('display_none');
+        $('#btnSave').addClass('display_none');
+
+        $('#btnPrintslip').removeClass('display_none');
+        $('#btnPrintTransaction').removeClass('display_none');
+
+        $("#NewAdd_Falg").val('0');
+        $("#Mod_Flag").val('0');
+
     }
     //-------------------------------------------------------------------*** D I S P L A Y ***-------------------------------
     function InitializeGrid() {
@@ -452,9 +468,10 @@ namespace StkDefCategory {
             MessageBox.Show("Done", "");
         }
         DisabledInput();
-        btnUpdate.classList.remove("display_none");
-        btnBack.classList.add("display_none");
-        btnSave.classList.add("display_none");
+        //btnUpdate.classList.remove("display_none");
+        //btnBack.classList.add("display_none");
+        //btnSave.classList.add("display_none");
+        Save_Succ_But();
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");

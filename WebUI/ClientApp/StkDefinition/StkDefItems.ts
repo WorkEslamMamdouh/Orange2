@@ -18,7 +18,7 @@ namespace StkDefItems {
     var IsLocalSalePrice: boolean;
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnSave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
@@ -32,7 +32,7 @@ namespace StkDefItems {
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var BranchCode: number;//SharedSession.CurrentEnvironment.BranchCode;
-    var btnBack: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var catId;
     var catId_type_change;
@@ -48,6 +48,9 @@ namespace StkDefItems {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     export function InitalizeComponent() {
         // 
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الاصناف";
 
@@ -55,14 +58,7 @@ namespace StkDefItems {
             document.getElementById('Screen_name').innerHTML = "Items";
 
         }
-        $("#btnAdd").addClass("display_none");
-        $("#btnPrintTrview").addClass("display_none");
-        $("#btnPrintTrPDF").addClass("display_none");
-        $("#btnPrintTrEXEL").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnSave").css("bottom", "25%;");
-        $("#btnBack").css("bottom", "20%;");
+       
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         IsLocalSalePrice = sys.SysSession.CurrentEnvironment.I_Control[0].IsLocalSalePrice;
@@ -86,15 +82,15 @@ namespace StkDefItems {
 
     }
 
-    $('#btnUpdate').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
 
             $('#divShow').removeClass("display_none");
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate_Def").addClass("display_none");
             $(".SelectDIS").attr("disabled", "disabled");
 
             if ($('#drpitem_family').val() == "null") {
@@ -113,10 +109,10 @@ namespace StkDefItems {
 
         }
         else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave_Def').addClass("display_none");
+            $('#btnBack_Def').addClass("display_none");
 
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -145,9 +141,9 @@ namespace StkDefItems {
     function InitalizeControls() {
         // 
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
-        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
-        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
 
         // Buton privialges for single record page
@@ -163,8 +159,8 @@ namespace StkDefItems {
         //$("#drpPaymentType").attr("disabled", "disabled");
 
         btnAddDetails.onclick = AddNewRow;//
-        btnSave.onclick = btnsave_onClick;
-        btnBack.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnSave_Def_onClick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
         btnShow.onclick = btnShow_onclick;
         //btnShow.onkeyup = btnShow_onclick;
 
@@ -199,7 +195,7 @@ namespace StkDefItems {
                 ItemFamilyID = $('#drpitem_family').val();
 
                 //Display_All();
-                //btnback_onclick();
+                //btnBack_Def_onclick();
 
             }
 
@@ -220,7 +216,7 @@ namespace StkDefItems {
 
 
 
-            //btnback_onclick();
+            //btnBack_Def_onclick();
 
 
 
@@ -246,7 +242,7 @@ namespace StkDefItems {
         }
         else {
 
-            btnback_onclick();
+            btnBack_Def_onclick();
         }
 
     }
@@ -290,7 +286,7 @@ namespace StkDefItems {
             CountGrid++;
         }
 
-        $("#btnUpdate").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
 
     }
 
@@ -515,12 +511,12 @@ namespace StkDefItems {
         return;
     }
 
-    function btnsave_onClick() {
-        loading('btnSave');
+    function btnSave_Def_onClick() {
+        loading('btnSave_Def');
 
         setTimeout(function () {
 
-            finishSave('btnSave');
+            finishSave('btnSave_Def');
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
@@ -708,7 +704,7 @@ namespace StkDefItems {
 
                     OK == 0 ? DisplayMassage_Processes('خطاء الصنف مستخدم بالفغل ', 'Wrong the Item is already used ', MessageType.Worning) : DisplayMassage_Processes('تم الحفظ', 'Done', MessageType.Succeed);
 
-                    btnback_onclick(); 
+                    btnBack_Def_onclick(); 
                     flag_Assign = 0;
                 }
                 else {
@@ -987,24 +983,18 @@ namespace StkDefItems {
         $('#select_ItemFamily' + RecNo).prop("selectedIndex", 0);
     }
 
-    function btnback_onclick() {
-
-
-        if ($('#btnBack').attr('class') != "btn btn-warning display_none") {
-            $('#btnBack').toggleClass("display_none");
-        }
-        if ($('#btnSave').attr('class') != "btn btn-success display_none") {
-            $('#btnSave').toggleClass("display_none");
-        }
-
+    function btnBack_Def_onclick() {
+         
+        $('#btnBack_Def').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
 
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none')
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnUpdate").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
 
-        $("#btnBack").removeAttr("disabled");
-        $("#btnSave").removeAttr("disabled");
+        $("#btnBack_Def").removeAttr("disabled");
+        $("#btnSave_Def").removeAttr("disabled");
 
         CountGrid = 0;
         $("#div_Data").html("");
