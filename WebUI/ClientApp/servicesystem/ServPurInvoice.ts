@@ -12,7 +12,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var sys: SystemTools = new SystemTools();
     var VatPrc;
     //****controls
-    var btnadd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
@@ -96,8 +96,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-    var btnPrintReceive: HTMLButtonElement;
-    var btnPrint: HTMLButtonElement;
+    var btnPrintTransaction: HTMLButtonElement;
+    //var btnPrint: HTMLButtonElement;
     //------------------------------------------------------ Main Region------------------------
     export function InitializeComponent() {
         //     system
@@ -127,7 +127,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     function InitializeControls() {
         drpSrchStatus = document.getElementById("drpSrchStatus") as HTMLSelectElement;
         drpImportInvoiceFilter = document.getElementById("drpImportInvoiceFilter") as HTMLSelectElement;
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
@@ -163,14 +163,14 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
-        btnPrintReceive = document.getElementById("btnPrintReceive") as HTMLButtonElement;
-        btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+     //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
 
 
     }
     function InitializeEvents() {
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnadd_onclick;
+        btnAdd.onclick = btnadd_onclick;
         btnSave.onclick = btnSave_onclick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
@@ -183,8 +183,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintReceive.onclick = btnPrintReceive_onclick;
+       // btnPrint.onclick = () => { PrintReport(4); }
+        btnPrintTransaction.onclick = btnPrintReceive_onclick;
 
 
     }
@@ -252,13 +252,13 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             EditModeFlag = false;
             MasterGridDoubleClick();
         }
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
 
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#DivChargesShow2").addClass("display_none");
-        $("#btnPrintReceive").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         EditModeFlag = true;
         isNew = false;
         showFlag = false;
@@ -2395,7 +2395,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         EditModeFlag = false;
         isNew = false;
         CurrentVendorSerial = 0;
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
 
         }, 100);
     }

@@ -13,7 +13,7 @@ var ServPurInvoice;
     var sys = new SystemTools();
     var VatPrc;
     //****controls
-    var btnadd;
+    var btnAdd;
     var btnShow;
     var btnSave;
     var btnBack;
@@ -91,8 +91,8 @@ var ServPurInvoice;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
-    var btnPrintReceive;
-    var btnPrint;
+    var btnPrintTransaction;
+    //var btnPrint: HTMLButtonElement;
     //------------------------------------------------------ Main Region------------------------
     function InitializeComponent() {
         //     system
@@ -123,7 +123,7 @@ var ServPurInvoice;
     function InitializeControls() {
         drpSrchStatus = document.getElementById("drpSrchStatus");
         drpImportInvoiceFilter = document.getElementById("drpImportInvoiceFilter");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
         btnShow = document.getElementById("btnShow");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
@@ -154,12 +154,12 @@ var ServPurInvoice;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
-        btnPrintReceive = document.getElementById("btnPrintReceive");
-        btnPrint = document.getElementById("btnPrint");
+        btnPrintTransaction = document.getElementById("btnPrintTransaction");
+        //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
     }
     function InitializeEvents() {
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnadd_onclick;
+        btnAdd.onclick = btnadd_onclick;
         btnSave.onclick = btnSave_onclick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
@@ -171,8 +171,8 @@ var ServPurInvoice;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
-        btnPrintReceive.onclick = btnPrintReceive_onclick;
+        // btnPrint.onclick = () => { PrintReport(4); }
+        btnPrintTransaction.onclick = btnPrintReceive_onclick;
     }
     //--------------------------------------------------- butttons Region----------------------------------------------
     function btnShow_onclick() {
@@ -231,13 +231,13 @@ var ServPurInvoice;
             EditModeFlag = false;
             MasterGridDoubleClick();
         }
-        $("#btnPrintReceive").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
         $("#DivChargesShow2").addClass("display_none");
-        $("#btnPrintReceive").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
         EditModeFlag = true;
         isNew = false;
         showFlag = false;
@@ -2127,7 +2127,7 @@ var ServPurInvoice;
             EditModeFlag = false;
             isNew = false;
             CurrentVendorSerial = 0;
-            $("#btnPrintReceive").removeClass("display_none");
+            $("#btnPrintTransaction").removeClass("display_none");
         }, 100);
     }
     function DeleteRowCharge(RecNo) {

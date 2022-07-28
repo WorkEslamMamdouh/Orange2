@@ -112,7 +112,7 @@ namespace SlsTrServices {
     var NewAdd: boolean = true;
     var FlagAfterInsertOrUpdate: boolean = false;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-    var btnPrint: HTMLInputElement;
+    //var btnPrint: HTMLInputElement;
     var Tax_Rate = 0;
     var Tax_Type_Model: Tax_Type = new Tax_Type();
 
@@ -161,7 +161,7 @@ namespace SlsTrServices {
 
     }
     function InitalizeControls() {
-        btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
+      //  btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
 
         // Drop down lists
         ddlCustomer = document.getElementById("ddlCustomer") as HTMLSelectElement;
@@ -236,7 +236,7 @@ namespace SlsTrServices {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); }
+     //   btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick;
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
@@ -981,63 +981,106 @@ namespace SlsTrServices {
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt: number) {
         var html;
-
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row " > <div class="col-lg-12" > ' +
-
-            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3SlsTrSalesManager2 display_none"></span>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width: 4%;">' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm input-sm right2" disabled /></div>' +
-
-            '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-
-            //'<div class="col-lg-2">' +
-            //'<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "الخدمه" : "Service") + '</option></select></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width: 11%;">' +
-            '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchService' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search  "></i></button>' +
-            '<input id="txtServiceCode' + cnt + '" name="" disabled type="text" class="col-lg-9 form-control input-sm  text_Display  " />' +
-            '</div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
-            '<input id="txtServiceName' + cnt + '" name="FromDate" disabled type="text" class="form-control input-sm  text_Display" /></div>' +
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"><input type="number" id="txtQuantity' + cnt + '" name="quant[1]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"><input type="text"  class="form-control input-sm" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="1"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number"  id="txtPrice' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="1" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number"  id="txtDiscountPrc' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number"  id="txtDiscountAmount' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number" disabled id="txtNetUnitPrice' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTotal' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-
-            '<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="position:absolute; right:97%">' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTax' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-            ' <div class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0" style="width:12%;">' +
-            '  <button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearchCostCenter' + cnt + '" name="ColSearch" disabled="disabled"> <i class="fa fa-search  "></i></button>' +
-            ' <input id="txtCostCntrNum' + cnt + '" name="" disabled="disabled" type="text" class="col-lg-9 form-control input-sm  text_Display  "></div>' +
-            ' <div class="col-lg-2 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0"><input id="txtCostCntrName' + cnt + '" name="FromDate" disabled="" type="text" class="form-control input-sm  text_Display"></div>' +
-
-            //'<div class="col-lg-4 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            //'<input id="txtRemarks' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '</div></div></div></div>' +
-
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
+        html = `<tr id="No_Row${cnt}">
+                    '<input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />'
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch" id="btnSearchService${cnt}" name="ColSearch" disabled>
+                                <i class="fa fa-search"></i>
+                             </button>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                 <input id="txtServiceCode${cnt}" name="" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                  <input id="txtServiceName${cnt}" name="FromDate" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number" id="txtQuantity${cnt}" name="quant[1]" class="form-control" value="1" min="1" max="1000" step="1">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input type="text"  class="form-control" id="txtReturnQuantity${cnt}" name="quant[3]" class="form-control" value="0" min="0" max="1000" step="1">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input type="number"  id="txtPrice${cnt}" name="quant[2]" class="form-control" value="1" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number"  id="txtDiscountPrc${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number"  id="txtDiscountAmount${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			                <input type="number" disabled id="txtNetUnitPrice${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTax_Rate${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTax${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTotAfterTax${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch" id="btnSearchCostCenter${cnt}" name="ColSearch" disabled>
+                                <i class="fa fa-search"></i>
+                             </button>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtCostCntrNum${cnt}" name="" disabledtype="text" class="form-control">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control">
+		                </div>
+	                </td>
+                  
+                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
+        
         $("#div_Data").append(html);
 
         //Search Region

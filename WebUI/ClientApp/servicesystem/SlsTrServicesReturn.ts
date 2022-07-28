@@ -886,60 +886,88 @@ namespace SlsTrServicesReturn {
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt: number) {
         var html;
-
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row " > <div class="col-lg-12" > ' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" style="width: 4%;">' +
-            '<input id="txtSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<input id="InvoiceItemID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtServicCode' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0">' +
-            '<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "الخدمه" : "Service") + '</option></select></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"><input type="text"    id="txtQuantity' + cnt + '" class="form-control   input-sm font1" value="1" min="1" max="1000" step="1"></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"><input type="text"  class="form-control input-sm" id="txtReturnQuantity' + cnt + '" name="quant[3]" class="form-control   font1" value="0" min="0" max="1000" step="1"></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0" ><input type="text"   id="txtPrice' + cnt + '" class="form-control input-sm   font1" value="1" min="0" max="1000" step="0.5"></div>' +
-
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number" disabled id="txtDiscountPrc' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number"disabled  id="txtDiscountAmount' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-            '<div class=" col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0"  ><input type="number" disabled id="txtNetUnitPrice' + cnt + '" name="quant[2]" class="form-control input-sm   font1" value="0" min="0" max="1000" step="0.5"></div>' +
-
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTotal' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtTax_Rate' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 p-0" style="position:absolute; right:95.5%">' +
-
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0">' +
-            '<input id="txtTax' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 p-0">' +
-            '<input id="txtTotAfterTax' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0 ">' +
-            '<select id="ddlCostCenter' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "مركز التكلفة" : "cost Center") + '</option></select></div>' +
-
-            //'<div class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5 p-0">' +
-            //'<input id="txtRemarks' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-
-            '</div>' +
-
-
-            '</div></div></div>' +
-
-            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control  input-sm"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
+        html = `<tr id="No_Row${cnt}">
+                    '<input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />'
+                    <td>
+		                <div class="form-group">
+			               <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                 <input id="txtServicCode${cnt}" name="" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="ddlItem${cnt}" class="form-control">
+                                <option value="null">${(lang == "ar" ? "الخدمه" : "Service") }</option>
+                            </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number" id="txtQuantity${cnt}" name="quant[1]" class="form-control" value="1" min="1" max="1000" step="1">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input type="text"  class="form-control" id="txtReturnQuantity${cnt}" name="quant[3]" class="form-control" value="0" min="0" max="1000" step="1">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input type="number"  id="txtPrice${cnt}" name="quant[2]" class="form-control" value="1" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number"  id="txtDiscountPrc${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input type="number"  id="txtDiscountAmount${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			                <input type="number" disabled id="txtNetUnitPrice${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTax_Rate${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTax${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtTotAfterTax${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    
+                    <td>
+		                <div class="form-group">
+			                <select id="ddlCostCenter${cnt}" class="form-control input-sm">
+                                 <option value="null">${(lang == "ar" ? "مركز التكلفة" : "cost Center")}</option>
+                            </select>
+		                </div>
+	                </td>
+                  
+                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
+                </tr>`;
+       
         $("#div_Data").append(html);
 
         //fill dropdownlist

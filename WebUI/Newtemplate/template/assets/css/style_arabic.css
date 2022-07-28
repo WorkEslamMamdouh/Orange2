@@ -28783,7 +28783,8 @@ div.tagsinput {
     position:relative;
 }
     .div-iconbar .icon-bar,
-    .div-iconbar .icon-bar2 {
+    .div-iconbar .icon-bar2,
+    .div-iconbar .icon-bar3{
         background-color: var(--main-blue);
         position: absolute;
         font-size: 1.25rem;
@@ -28801,6 +28802,9 @@ div.tagsinput {
     }
     .div-iconbar .icon-bar2 {
         left: -104px;
+    }
+    .div-iconbar .icon-bar3 {
+        left: -158px;
     }
 
 .btn-update,
@@ -28834,13 +28838,27 @@ div.tagsinput {
 .icon-bar2.btn-back {
     top: 80px;
 }
-.div-iconbar .icon-bar:hover {
+.icon-bar3.btn-update {
+    top: -73px;
+}
+
+.icon-bar3.btn-save {
+    top: -20px;
+}
+
+.icon-bar3.btn-back {
+    top: 34px;
+}
+.div-iconbar .icon-bar:hover,
+.div-iconbar .icon-bar2:hover,
+.div-iconbar .icon-bar3:hover {
     left: -35px;
-    background-color: var(--main-orange);
 }
 .div-iconbar .icon-bar2:hover {
     left: -45px;
-    background-color: var(--main-orange);
+}
+.div-iconbar .icon-bar3:hover {
+    left: -105px;
 }
 .print-list.icon-bar {
     left: -190px;

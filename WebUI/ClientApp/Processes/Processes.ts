@@ -2301,17 +2301,7 @@ namespace Processes {
 
     function BuildControlslebel(cnt: number) {
         var html;
-        //html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
-        //    '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
-        //    '<div class="col-lg-1" ><input id="txtSerial3' + cnt + '" type="number" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style=""><input type="date" id="DepositDate' + cnt + '" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style=""><select id="Salesman' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + '</option> </select ></div>' +
-        //    '<div class="col-lg-1" style=""><input id="DepositAmount' + cnt + '" type="number" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style=""><select id="ACC_type' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + '</option> <option value="0"> ' + (lang == "ar" ? "بنك" : "Bank") + '</option> <option value="1"> ' + (lang == "ar" ? "صندوق" : "Cash box") + '</option> </select ></div>' +
-        //    '<div id="Acc_Code_div' + cnt + '" class="col-lg-2" style=""><select id="Acc_Code' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "رقم الحساب" : "Account Number") + '</option></select ></div>' +
-        //    '<div id="CashBox_div' + cnt + '" class="col-lg-2 display_none" style=""><select id="CashBox' + cnt + '" class="form-control display_none"> <option value="Null"> ' + (lang == "ar" ? "الصندوق" : "CashBox") + '</option></select ></div>' +
-        //    '<div class="col-lg-2" style=""><textarea rows="2"  id="Remarks' + cnt + '" class="form-control"></textarea></div> ' +
-        //    '<div class="col-lg-2" style=""><input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="DepositID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+      
         html = `<tr id="row_font_header${cnt}">
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>

@@ -2264,17 +2264,65 @@ namespace CloseProcesses {
 
     function BuildControlslebel(cnt: number) {
         var html;
-        html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
-            '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
-            '<div class="col-lg-1" ><input id="txtSerial3' + cnt + '" type="number" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><input type="date" id="DepositDate' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><select id="Salesman' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + '</option> </select ></div>' +
-            '<div class="col-lg-1" style=""><input id="DepositAmount' + cnt + '" type="number" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><select id="ACC_type' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + '</option> <option value="0"> ' + (lang == "ar" ? "بنك" : "Bank") + '</option> <option value="1"> ' + (lang == "ar" ? "صندوق" : "Cash box") + '</option> </select ></div>' +
-            '<div id="Acc_Code_div' + cnt + '" class="col-lg-2" style=""><select id="Acc_Code' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "رقم الحساب" : "Account Number") + '</option></select ></div>' +
-            '<div id="CashBox_div' + cnt + '" class="col-lg-2 display_none" style=""><select id="CashBox' + cnt + '" class="form-control display_none"> <option value="Null"> ' + (lang == "ar" ? "الصندوق" : "CashBox") + '</option></select ></div>' +
-            '<div class="col-lg-2" style=""><textarea rows="2"  id="Remarks' + cnt + '" class="form-control"></textarea></div> ' +
-            '<div class="col-lg-2" style=""><input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="DepositID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+
+        html = `<tr id="row_font_header${cnt}">
+                    <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtSerial3${cnt}" type="number" class="form-control">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input type="date" id="DepositDate${cnt}" class="form-control">
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <select id="Salesman${cnt}" class="form-control"> 
+			                    <option value="null"> ${ (lang == "ar" ? "اختار المندوب" : "Choose Salesman")} </option> 
+			                </select >
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="DepositAmount${cnt}" type="number" class="form-control">
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			               	<select id="ACC_type${cnt}" class="form-control"> 
+			                    <option value="Null"> ${ (lang == "ar" ? "النوع الحساب  " : "Account Type ")}  </option> 
+                                <option value="0"> ${ (lang == "ar" ? "بنك" : "Bank")} </option>
+                                <option value="1"> ${ (lang == "ar" ? "صندوق" : "Cash box")} </option> 
+			                </select >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group" id="Acc_Code_div${cnt}">
+			               <select id="Acc_Code' + ${cnt}" class="form-control"> 
+			                    <option value="Null"> ${ (lang == "ar" ? "رقم الحساب" : "Account Number")} </option>
+			               </select >
+		                </div>
+                        <div class="form-group display_none" id="CashBox_div${cnt}">
+			                <select id="CashBox${cnt}" class="form-control display_none"> 
+			                    <option value="Null"> ${(lang == "ar" ? "الصندوق" : "CashBox")}</option>
+			                </select >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <textarea rows="2"  id="Remarks${cnt}" class="form-control"></textarea>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag2${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="DepositID${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
 
         $("#data_lebel").append(html);
 
@@ -5358,22 +5406,55 @@ namespace CloseProcesses {
 
     function BuildControlsItemsData(cnt: number, cntch: number) {
         var html;
+        html = `<tr id="No_RowItemSumID${cnt}">
+	                <td>
+		                <div class="form-group">
+			                <span id="btn_minusclous${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txt_SoldQty${cnt}" type="number"  disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               	<input id="txt_UnitPrice${cnt}" type="number" disabled  class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               	<input id="txt_Total${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			               	<input id="txt_Remark${cnt}" type="text" disabled class="form-control"/>
+		                </div>
+	                </td>
+                    
+                    <input id="txt_StatusFlagItemsData${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txtOperationItemSumID${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txtOperationItemID${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txtOperationID${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txtItemID${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
+                </tr>`;
+        //html = '<div id= "No_RowItemSumID' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
+        //    '<span id="btn_minusclous' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
+        //    '<div class="col-lg-2" style=""><input id="txt_SoldQty' + cnt + '" type="number"  disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-2" style=""><input id="txt_UnitPrice' + cnt + '" type="number" disabled  class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-2" style=""><input id="txt_Total' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+        //    '<div class="col-lg-4" style=""><input id="txt_Remark' + cnt + '" type="text" disabled class="form-control right2"/></div>' +
+        //    '<input id="txt_StatusFlagItemsData' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
+        //    '<input id="txtOperationItemSumID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
+        //    '<input id="txtOperationItemID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
+        //    '<input id="txtOperationID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
+        //    '<input id="txtItemID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
 
-        html = '<div id= "No_RowItemSumID' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
-            '<span id="btn_minusclous' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
-            '<div class="col-lg-2" style=""><input id="txt_SoldQty' + cnt + '" type="number"  disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-2" style=""><input id="txt_UnitPrice' + cnt + '" type="number" disabled  class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-2" style=""><input id="txt_Total' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
-            '<div class="col-lg-4" style=""><input id="txt_Remark' + cnt + '" type="text" disabled class="form-control right2"/></div>' +
-            '<input id="txt_StatusFlagItemsData' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
-            '<input id="txtOperationItemSumID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
-            '<input id="txtOperationItemID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
-            '<input id="txtOperationID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
-            '<input id="txtItemID' + cnt + '" name = " " type = "hidden" class="form-control"/>' +
 
-
-            ' <input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />' +
-            '</div></div>';
+        //    ' <input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />' +
+        //    '</div></div>';
            
         $("#div_ItemsData").append(html);
 
