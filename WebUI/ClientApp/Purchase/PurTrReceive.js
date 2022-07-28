@@ -2565,6 +2565,7 @@ var PurTrReceive;
                 if (result.IsSuccess == true) {
                     debugger;
                     var res = result.Response;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number" + res.I_Pur_TR_Receive.TrNo + "has been issued", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
                     GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
@@ -2605,6 +2606,7 @@ var PurTrReceive;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم تعديل فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number " + res.I_Pur_TR_Receive.TrNo + "has been editied", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
                     GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;

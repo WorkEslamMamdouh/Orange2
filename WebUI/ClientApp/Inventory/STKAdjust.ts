@@ -1427,6 +1427,7 @@ namespace STKAdjust {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Adjust;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  تسوية رقم " + res.Tr_No, ' Adjustment No ' + res.Tr_No + ' has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalAdjustID = res.AdjustID;
@@ -1469,6 +1470,7 @@ namespace STKAdjust {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Adjust;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Edited Successfully ' + res.Tr_No, MessageType.Succeed);
                     GlobalAdjustID = res.AdjustID;
                     Save();

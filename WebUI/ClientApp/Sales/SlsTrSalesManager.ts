@@ -3264,6 +3264,7 @@ namespace SlsTrSalesManager {
                 if (result.IsSuccess == true) {
                     debugger
                     let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     invoiceID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");
@@ -3316,6 +3317,7 @@ namespace SlsTrSalesManager {
                 if (result.IsSuccess == true) {
                     debugger
                     let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     invoiceID = res.InvoiceID;
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "An invoice number has been issued ", MessageType.Succeed);
                     GlobalDocNo = res.DocNo;

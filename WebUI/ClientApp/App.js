@@ -1600,22 +1600,6 @@ function CheckPeriodDate(Tr_Date, Type_Period) {
     }
     return res;
 }
-function DateSetsSccess(TxtDateProcesses, TxtDatefrom) {
-    var DateProcesses = $('#' + TxtDateProcesses + '').val();
-    var Datefrom = $('#' + TxtDatefrom + '').val();
-    var check = Date.parse(DateProcesses);
-    var from = Date.parse(Datefrom);
-    if ((check < from)) {
-        $('#' + TxtDateProcesses + '').val(DateProcesses);
-        $('#' + TxtDatefrom + '').val(DateProcesses);
-        return DateProcesses;
-    }
-    else {
-        $('#' + TxtDateProcesses + '').val(DateProcesses);
-        $('#' + TxtDatefrom + '').val(Datefrom);
-        return Datefrom;
-    }
-}
 function Cheak_UserTokenlog() {
     var SysSession = GetSystemEnvironment();
     var compCode = SysSession.CompCode;
@@ -1677,5 +1661,25 @@ function printDiv(divName) {
     };
     mywindow.print();
     mywindow.close();
+}
+function DateSetsSccess(TxtDateProcesses, TxtDatefrom, TxtDateend) {
+    var DateProcesses = $('#' + TxtDateProcesses + '').val();
+    var Datefrom = $('#' + TxtDatefrom + '').val();
+    var Dateend = $('#' + TxtDateend + '').val();
+    var check = Date.parse(DateProcesses);
+    var from = Date.parse(Datefrom);
+    var End = Date.parse(Dateend);
+    if ((check < from)) {
+        $('#' + TxtDatefrom + '').val(DateProcesses);
+    }
+    else {
+        $('#' + TxtDatefrom + '').val(Datefrom);
+    }
+    if ((check > End)) {
+        $('#' + TxtDateend + '').val(DateProcesses);
+    }
+    else {
+        $('#' + TxtDateend + '').val(Dateend);
+    }
 }
 //# sourceMappingURL=App.js.map

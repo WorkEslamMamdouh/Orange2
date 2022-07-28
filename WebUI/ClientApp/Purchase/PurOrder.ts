@@ -496,7 +496,7 @@ namespace PurOrder {
 
 
     }
-       //-------------------------------------------------------------- Events Region-------------------------------------------------------------
+  //-------------------------------------------------------------- Events Region-------------------------------------------------------------
     function TaxTypeOnchange() {
         let fltr = VatDetails.filter(x => (x.CODE == (ddlTaxTypeHeader.value == "null" ? DefVatType : ddlTaxTypeHeader.value)));
         if (fltr.length != 0)
@@ -774,6 +774,7 @@ namespace PurOrder {
             $("#txtTotal" + i).attr("disabled", "disabled");
             $("#txtTax" + i).attr("disabled", "disabled");
             $("#txtTotAfterTax" + i).attr("disabled", "disabled");
+            $("#Tax" + i).attr("disabled", "disabled");
 
 
             $("#btn_minus" + i).removeClass("display_none");
@@ -979,6 +980,15 @@ namespace PurOrder {
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
 
+          
+            $("#txtItemName" + CountGrid).attr("disabled", "disabled");  
+            $("#Tax" + CountGrid).attr("disabled", "disabled");
+            $("#txtTotal" + CountGrid).attr("disabled", "disabled");
+            $("#txtTax" + CountGrid).attr("disabled", "disabled");
+            $("#txtTotAfterTax" + CountGrid).attr("disabled", "disabled");
+
+             
+
             ComputeTotals();
             CountGrid++;
         }
@@ -1034,7 +1044,7 @@ namespace PurOrder {
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input id="Tax${cnt}" type="Text"  class="form-control" value="0"/>
+			                <input id="txtTax${cnt}" type="Text"  class="form-control" value="0"/>
 		                </div>
 	                </td>
                     <td>
@@ -1186,6 +1196,29 @@ namespace PurOrder {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            var txtRequiredQtyVal: number = Number($("#txtRequiredQty" + cnt).val());
+            $("#txtReceivedQty" + cnt).val(txtRequiredQtyVal)
+            var txtReceivedQtyVal: number = Number($("#txtReceivedQty" + cnt).val());
+
+            var txtPriceValue = $("#txtPrice" + cnt).val();
+            if ($("#txtPrice" + cnt).val() == 0) {
+                var total = (Number(txtReceivedQtyVal) * 0);
+                $("#txtTotal" + cnt).val(total);
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount);
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat);
+            } else {
+                var total = (Number(txtReceivedQtyVal) * Number(txtPriceValue));
+                $("#txtTotal" + cnt).val(total);
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount);
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat);
+            }
+
+            ComputeTotals();
+
         });
 
         $("#txtPrice" + cnt).on('keyup', function () {
@@ -1229,6 +1262,7 @@ namespace PurOrder {
             $("#btn_minus" + cnt).attr("disabled", "disabled");
         }// $("#txtDiscoutnval" + cnt).on('keyup', function (e)
         $("#txtReceivedQty" + cnt).on('keyup', function () {
+            debugger
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             var txtReceivedQtyVal: number = Number($("#txtReceivedQty" + cnt).val());
@@ -1427,6 +1461,7 @@ namespace PurOrder {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Pur_Tr_PurchaseOrder;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم اصدار  أمر شراء رقم  " + res.TrNo + " ", "Succeed" + res.TrNo, MessageType.Succeed);
                     txtPurTrNo.innerText = res.TrNo.toString();
                     GlobalPurOrderID = res.PurOrderID;
@@ -1464,6 +1499,7 @@ namespace PurOrder {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Pur_Tr_PurchaseOrder;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم تعديل امر  شراء  رقم  " + res.TrNo + " ", "Modified" + res.TrNo, MessageType.Succeed);
 
                     txtPurTrNo.innerText = res.TrNo.toString();

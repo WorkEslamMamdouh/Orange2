@@ -3124,6 +3124,7 @@ namespace PurTrReceive {
                 if (result.IsSuccess == true) {
                     debugger
                     let res = result.Response as PurReceiveMasterDetails;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number" + res.I_Pur_TR_Receive.TrNo + "has been issued", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
                     GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
@@ -3170,6 +3171,7 @@ namespace PurTrReceive {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as PurReceiveMasterDetails;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
 
                     DisplayMassage(" تم تعديل فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number " + res.I_Pur_TR_Receive.TrNo + "has been editied", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();

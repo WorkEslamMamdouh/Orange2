@@ -1079,6 +1079,7 @@ var DirectTransfer;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  تحويل رقم " + res.Tr_No, 'Transfer number ' + res.Tr_No + 'has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.TransfareID;
@@ -1113,6 +1114,7 @@ var DirectTransfer;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Editied successfully' + res.Tr_No, MessageType.Succeed);
                     Save();
                     AfterInsertOrUpdateFlag = true;

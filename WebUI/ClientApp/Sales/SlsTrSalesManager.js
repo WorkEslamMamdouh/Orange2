@@ -2629,6 +2629,7 @@ var SlsTrSalesManager;
                 if (result.IsSuccess == true) {
                     debugger;
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     invoiceID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");
@@ -2666,6 +2667,7 @@ var SlsTrSalesManager;
                 if (result.IsSuccess == true) {
                     debugger;
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     invoiceID = res.InvoiceID;
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "An invoice number has been issued ", MessageType.Succeed);
                     GlobalDocNo = res.DocNo;

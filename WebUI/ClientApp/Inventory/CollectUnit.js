@@ -1011,6 +1011,7 @@ var CollectUnit;
                 var result = d;
                 if (result.IsSuccess) {
                     Model = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم الحفظ", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
                     Success();
@@ -1036,6 +1037,7 @@ var CollectUnit;
                 var result = d;
                 if (result.IsSuccess) {
                     Model = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
                     Success();

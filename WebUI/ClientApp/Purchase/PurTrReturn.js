@@ -116,7 +116,6 @@ var PurTrReturn;
         IntializeEvents();
         txtFromDate.value = GetDate();
         txtToDate.value = GetDate();
-        $("#txtDateHeader").val(GetDate());
         FillddlVendorMaster();
         FillddlSalesmanMaster();
         FillddlReturnType();
@@ -1691,6 +1690,7 @@ var PurTrReturn;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return has been created' + res.TrNo, MessageType.Succeed);
                     lblReturnNumber.value = res.TrNo.toString();
                     $('#divCreationPanel').removeClass("display_none");

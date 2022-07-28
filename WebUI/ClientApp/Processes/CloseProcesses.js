@@ -74,7 +74,7 @@ var CloseProcesses;
     var btnExpenses;
     var btnOpen;
     var btnShow;
-    var btnAdd;
+    var btnadd;
     var btnUpdate_1;
     var btnSave_1;
     var btnBack_1;
@@ -194,16 +194,6 @@ var CloseProcesses;
         $("#divProcessClose").addClass("disabledDiv");
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
-        $("#btnUpdate").addClass("d-none");
-        $("#btnPrintTransaction").addClass("d-none");
-        $("#btnSave").addClass("d-none");
-        $("#btnBack").addClass("d-none");
-        $("#btnPrintTrview").addClass("print-list");
-        $("#btnPrintTrPDF").addClass("print-list");
-        $("#btnPrintTrEXEL").addClass("print-list");
-        $("#btnPrintTrview span").text("طباعه قائمه عمليات");
-        $("#btnPrintTrPDF span").text("PDF 'قائمه عمليات'");
-        $("#btnPrintTrEXEL span").text("Excel 'قائمه عمليات'");
         InitalizeControls();
         IntializeEvents();
         FillddlVendorMaster();
@@ -274,7 +264,7 @@ var CloseProcesses;
         btnExpenses = document.getElementById("btnExpenses");
         btnOpen = document.getElementById("btnOpen");
         btnShow = document.getElementById("btnShow");
-        btnAdd = document.getElementById("btnAdd");
+        btnadd = document.getElementById("btnadd");
         btnUpdate_1 = document.getElementById("btnUpdate_1");
         btnBack_1 = document.getElementById("btnBack_1");
         btnSave_1 = document.getElementById("btnSave_1");
@@ -338,7 +328,7 @@ var CloseProcesses;
         btnAddDetailslebel.onclick = AddNewRowlebel;
         //btnAddDetails.onclick = AddNewRow;
         btnShow.onclick = btnShow_onclick;
-        btnAdd.onclick = btnAdd_onclick;
+        btnadd.onclick = btnAdd_onclick;
         btnReCalculation.onclick = btnReCalculation_onclick;
         btnPresent.onclick = btnPresent_onclick;
         btnClose.onclick = btnClose_onclick;
@@ -823,24 +813,24 @@ var CloseProcesses;
         var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val() + Number($('#textClose_Coolingandstorage').val())) + Number(txtClose_Adjustment.value)) - Number($('#textClose_AdjTotalSales').val())));
         $('#txtNetsales').val(Netsales);
         showdiv();
-        $('#divlepRentdata_1').removeClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_2').removeClass('display_none');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_3').removeClass('display_none');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $('#divlepRentdata_1').removeClass('showdiv');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').removeClass('showdiv');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').removeClass('showdiv');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         $('#lepRentdata').removeClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
         $('#divlOerSalesman_2').removeClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
         $('#lepMoney').removeClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+        $('#spanlepMoney_4').toggleClass('fa-caret-left');
+        $('#spanlepMoney_4').toggleClass('fa-caret-down');
         IsGenerated = Selected_Data[0].IsGenerated;
         //txtTotal.value = "0";
         txtTotalValueCharge.value = "0";
@@ -901,7 +891,20 @@ var CloseProcesses;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"ddlItem" + cnt + "\" class=\"form-control\" disabled  >\n\t\t\t                    <option  value=\"null\">\u0627\u062E\u062A\u0631</option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtQuantity" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSoldQty" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtScrapQty" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotal" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtClose_SoldQty" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtClose_ScrapQty" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtClose_TotalSales" + cnt + "\" type=\"number\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
+        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class=""> <div class="col-lg-12" > ' +
+            '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm6Processes display_none"></span>' +
+            '<div class="col-lg-2">' +
+            '<select id="ddlItem' + cnt + '" class="form-control" disabled  ><option  value="null">اختر</option></select></div>' +
+            '<div class="col-lg-1" style=""><input id="txtQuantity' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtSoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            //'<div class="col-lg-1" style=""><input id="txtAvailableQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtClose_SoldQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtClose_ScrapQty' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '<div class="col-lg-1" style=""><input id="txtClose_TotalSales' + cnt + '" type="number" disabled class="form-control right2"   value="0"/></div>' +
+            '</div></div></div>' +
+            '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_Data").append(html);
         // 
         $('.btn-number1' + cnt).click(function (e) {
@@ -1272,38 +1275,37 @@ var CloseProcesses;
     }
     function BuildControlsCharges(cnt) {
         var html;
-        //html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
-        //    '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
-        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
-        //    '<div class="col-lg-2">' +
-        //    '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-        //    '<div class="col-lg-2">' +
-        //    '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
-        //    '<div class="col-lg-1"style="width: 12%!important;">' +
-        //    '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-        //    '</div>' +
-        //    '<div class="col-lg-6 positiongridProcesses1"style="">' +
-        //    '<div class="col-lg-4">' +
-        //    '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
-        //    '<div class="col-lg-4">' +
-        //    '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
-        //    '<div class="col-lg-4">' +
-        //    '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
-        //    ' </div></div></div>' +
-        //    '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
-        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
+            '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
+            '<div class="col-lg-1">' +
+            '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
+            '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
+            '<div class="col-lg-2">' +
+            '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
+            '<div class="col-lg-1">' +
+            '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
+            '<div class="col-lg-1">' +
+            '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
+            '<div class="col-lg-2">' +
+            '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
+            '<div class="col-lg-1">' +
+            '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
+            '<div class="col-lg-1">' +
+            '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
+            '<div class="col-lg-1"style="width: 12%!important;">' +
+            '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
+            '<div class="col-lg-1">' +
+            '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
+            '</div>' +
+            '<div class="col-lg-6 positiongridProcesses1"style="">' +
+            '<div class="col-lg-4">' +
+            '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
+            '<div class="col-lg-4">' +
+            '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
+            '<div class="col-lg-4">' +
+            '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
+            ' </div></div></div>' +
+            '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
         $("#div_ChargesData").append(html);
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
         // 
@@ -1628,15 +1630,15 @@ var CloseProcesses;
         $("#Div_Money").removeAttr("disabled");
         $('#Financialsituation').on('click', function () {
             $('#lepRentdata').toggleClass('showdiv');
-            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+            $('#spanlepRentdata_4').addClass('fa-caret-down');
         });
         $('#Div_Money').on('click', function () {
             $('#lepMoney').toggleClass('showdiv');
-            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+            $('#spanlepMoney_4').toggleClass('fa-caret-down');
         });
         $('#lepRentdata').removeClass('showdiv');
         $('#lepMoney').removeClass('showdiv');
-        $('#spanlepRentdata_4').addClass('fa-angle-double-left');
+        $('#spanlepRentdata_4').addClass('fa-caret-left');
     }
     function DisplayOperSaleMaster(SalesmanId) {
         SalesmanItem_Data = new Array();
@@ -2302,21 +2304,21 @@ var CloseProcesses;
                     $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
                     if (Status == 1 || Status == 2) {
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('display_none');
-                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-                        $('#divlepRentdata_2').removeClass('display_none');
-                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
-                        $('#divlepRentdata_3').removeClass('display_none');
-                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+                        $('#divlepRentdata_1').removeClass('showdiv');
+                        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_2').removeClass('showdiv');
+                        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_3').removeClass('showdiv');
+                        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
                         $('#lepRentdata').removeClass('showdiv');
-                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+                        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
                         $('#lepMoney').removeClass('showdiv');
-                        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-                        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+                        $('#spanlepMoney_4').toggleClass('fa-caret-left');
+                        $('#spanlepMoney_4').toggleClass('fa-caret-down');
                         Processes_Open();
                         Status = 2;
                         $('#txtStatus').val('مفتوحة');
@@ -2682,18 +2684,18 @@ var CloseProcesses;
         $("#divProcessClose").addClass("disabledDiv");
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
-        $('#divlepRentdata_3').addClass('display_none');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $('#divlepRentdata_3').addClass('showdiv');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+        $('#spanlepMoney_4').toggleClass('fa-caret-left');
+        $('#spanlepMoney_4').toggleClass('fa-caret-down');
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
         $("#Processshutdown").attr("disabled", "disabled").off('click');
         $("#Financialsituation").attr("disabled", "disabled").off('click');
         $("#Div_Money").attr("disabled", "disabled").off('click');
@@ -2718,24 +2720,24 @@ var CloseProcesses;
         $("#divProcessClose").addClass("disabledDiv");
         $("#data_lebel").attr("disabled", "disabled").off('click');
         $("#data_lebel").addClass("disabledDiv");
-        $('#divlepRentdata_1').addClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_2').addClass('display_none');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_3').addClass('display_none');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $('#divlepRentdata_1').addClass('showdiv');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').addClass('showdiv');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('showdiv');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+        $('#spanlepMoney_4').toggleClass('fa-caret-left');
+        $('#spanlepMoney_4').toggleClass('fa-caret-down');
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
         $("#Payload_data").attr("disabled", "disabled").off('click');
         $("#Expenses").attr("disabled", "disabled").off('click');
         $("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -2776,15 +2778,15 @@ var CloseProcesses;
         //$("#Processshutdown").attr("disabled", "disabled").off('click');
         //$("#Financialsituation").attr("disabled", "disabled").off('click');
         //$("#Div_Money").attr("disabled", "disabled").off('click');
-        //$('#divlepRentdata_3').addClass('display_none');
-        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        //$('#divlepRentdata_3').addClass('showdiv');
+        //$('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        //$('#spanlepRentdata_3').toggleClass('fa-caret-down');
         //$('#lepRentdata').addClass('showdiv');
-        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-        //$('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+        //$('#spanlepRentdata_4').toggleClass('fa-caret-left');
+        //$('#spanlepRentdata_4').toggleClass('fa-caret-down');
         //$('#lepMoney').addClass('showdiv');
-        //$('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-        //$('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+        //$('#spanlepMoney_4').toggleClass('fa-caret-left');
+        //$('#spanlepMoney_4').toggleClass('fa-caret-down');
         btnUpdate_1.classList.add('display_none');
         btnUpdate_3.classList.remove('display_none');
         btnUpdate_4.classList.add('display_none');
@@ -2807,9 +2809,9 @@ var CloseProcesses;
         else {
             btnClose.disabled = false;
         }
-        //$('#divlepRentdata_3').addClass('display_none');
-        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        //$('#divlepRentdata_3').addClass('showdiv');
+        //$('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        //$('#spanlepRentdata_3').toggleClass('fa-caret-down');
         //$("#Processshutdown").attr("disabled", "disabled").off('click');
     }
     function Processes_Close() {
@@ -2845,9 +2847,9 @@ var CloseProcesses;
             $("#btnOpen").removeAttr("disabled");
             $("#btnOpen").attr("style", "background-color: #00e927");
         }
-        $('#divlepRentdata_3').removeClass('display_none');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $('#divlepRentdata_3').removeClass('showdiv');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         $("#Processshutdown").removeAttr("disabled");
         $("#btnClose").attr("disabled", "disabled");
         $("#btnClose").attr("style", "");
@@ -2880,9 +2882,9 @@ var CloseProcesses;
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
             $("#btnOpen").attr("style", "");
-            $('#divlepRentdata_3').addClass('display_none');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_3').addClass('showdiv');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
             $("#Processshutdown").attr("disabled", "disabled").off('click');
         }
         else {
@@ -2929,15 +2931,15 @@ var CloseProcesses;
                         $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
                         btnBack_1_onclick();
                         showdiv();
-                        $('#divlepRentdata_1').removeClass('display_none');
-                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-                        $('#divlepRentdata_2').removeClass('display_none');
-                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
-                        $('#divlepRentdata_3').addClass('display_none');
-                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-                        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+                        $('#divlepRentdata_1').removeClass('showdiv');
+                        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_2').removeClass('showdiv');
+                        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+                        $('#divlepRentdata_3').addClass('showdiv');
+                        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+                        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
                         Processes_Open();
                         $("#btnOpen").attr("disabled", "disabled");
                         $("#btnOpen").attr("style", "");
@@ -2982,9 +2984,9 @@ var CloseProcesses;
             $("#Financialsituation").removeAttr("disabled");
             $("#Div_Money").removeAttr("disabled");
             $('#lepRentdata').removeClass('showdiv');
-            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+            $('#spanlepRentdata_4').addClass('fa-caret-down');
             $('#lepMoney').removeClass('showdiv');
-            $('#spanlepMoney_4').addClass('fa-angle-double-down');
+            $('#spanlepMoney_4').addClass('fa-caret-down');
             var cnt = 1;
             var ii = 0;
             $("#OerSalesmanGrid_Detail").jsGrid("option", "pageIndex", cnt);
@@ -3015,9 +3017,9 @@ var CloseProcesses;
             //else {
             debugger;
             $("#Processshutdown").removeAttr("disabled");
-            $('#divlepRentdata_3').removeClass('display_none');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_3').removeClass('showdiv');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
             btnUpdate_4.classList.remove('display_none');
             btnUpdate_4.focus();
             Update_4_onclick();
@@ -3073,24 +3075,24 @@ var CloseProcesses;
         $("#DivHederMaster").addClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
-        $('#divlepRentdata_1').addClass('display_none');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_2').addClass('display_none');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
-        $('#divlepRentdata_3').addClass('display_none');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $('#divlepRentdata_1').addClass('showdiv');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+        $('#divlepRentdata_2').addClass('showdiv');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_2').toggleClass('fa-caret-down');
+        $('#divlepRentdata_3').addClass('showdiv');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         $('#lepRentdata').addClass('showdiv');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-        $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+        $('#spanlepRentdata_4').toggleClass('fa-caret-down');
         $('#lepMoney').addClass('showdiv');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-        $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+        $('#spanlepMoney_4').toggleClass('fa-caret-left');
+        $('#spanlepMoney_4').toggleClass('fa-caret-down');
         $('#divlOerSalesman_2').addClass('showdiv');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
-        $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
+        $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
         $("#Payload_data").attr("disabled", "disabled").off('click');
         $("#Expenses").attr("disabled", "disabled").off('click');
         $("#Processshutdown").attr("disabled", "disabled").off('click');
@@ -3160,12 +3162,12 @@ var CloseProcesses;
                 $('#ddlStateType option[value=111]').prop('selected', 'selected').change();
                 btnShow_onclick();
                 MasterGridBiuld();
-                $('#divlepRentdata_1').removeClass('display_none');
-                $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-                $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
-                $('#divlepRentdata_2').removeClass('display_none');
-                $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-                $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
+                $('#divlepRentdata_1').removeClass('showdiv');
+                $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+                $('#spanlepRentdata_1').toggleClass('fa-caret-down');
+                $('#divlepRentdata_2').removeClass('showdiv');
+                $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+                $('#spanlepRentdata_2').toggleClass('fa-caret-down');
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
                 $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;");
@@ -3496,9 +3498,9 @@ var CloseProcesses;
             $('#Close_AllAfterTotalSaleVAT').text(Number(AfterTotalSalesCreditVAT.RoundToSt(2)) + Number(AfterTotalSalesCashVAT.RoundToSt(2)));
             $("#btnClose").focus();
             $("#Processshutdown").attr("disabled", "disabled").off('click');
-            $('#divlepRentdata_3').addClass('display_none');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_3').addClass('showdiv');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnUpdate_5.disabled = false;
@@ -3689,34 +3691,34 @@ var CloseProcesses;
         $("#Financialsituation").removeAttr("disabled");
         $("#Div_Money").removeAttr("disabled");
         $('#Payload_data').on('click', function () {
-            $('#divlepRentdata_1').toggleClass('display_none');
-            $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_1').toggleClass('showdiv');
+            $('#spanlepRentdata_1').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_1').toggleClass('fa-caret-down');
         });
         $('#Expenses').on('click', function () {
-            $('#divlepRentdata_2').toggleClass('display_none');
-            $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_2').toggleClass('showdiv');
+            $('#spanlepRentdata_2').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_2').toggleClass('fa-caret-down');
         });
         $('#OerSalesman').on('click', function () {
             $('#divlOerSalesman_2').toggleClass('showdiv');
-            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-left');
-            $('#spanlOerSalesman_2').toggleClass('fa-angle-double-down');
+            $('#spanlOerSalesman_2').toggleClass('fa-caret-left');
+            $('#spanlOerSalesman_2').toggleClass('fa-caret-down');
         });
         $('#Processshutdown').on('click', function () {
-            $('#divlepRentdata_3').toggleClass('display_none');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+            $('#divlepRentdata_3').toggleClass('showdiv');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_3').toggleClass('fa-caret-down');
         });
         $('#Financialsituation').on('click', function () {
             $('#lepRentdata').toggleClass('showdiv');
-            $('#spanlepRentdata_4').toggleClass('fa-angle-double-left');
-            $('#spanlepRentdata_4').toggleClass('fa-angle-double-down');
+            $('#spanlepRentdata_4').toggleClass('fa-caret-left');
+            $('#spanlepRentdata_4').toggleClass('fa-caret-down');
         });
         $('#Div_Money').on('click', function () {
             $('#lepMoney').toggleClass('showdiv');
-            $('#spanlepMoney_4').toggleClass('fa-angle-double-left');
-            $('#spanlepMoney_4').toggleClass('fa-angle-double-down');
+            $('#spanlepMoney_4').toggleClass('fa-caret-left');
+            $('#spanlepMoney_4').toggleClass('fa-caret-down');
         });
     }
     function divGridDetails_onclick() {
