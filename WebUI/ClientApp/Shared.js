@@ -236,6 +236,9 @@ function GetSystemEnvironment() {
 //    }
 //}
 function GetSystemSession(Mod) {
+    if (Mod != "Home") {
+        $('#divIconbar').removeClass('hidden_Control');
+    }
     if (document.cookie.length > 0) {
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));

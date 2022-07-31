@@ -41,12 +41,33 @@
     <link href="~/Content/Loading/src/css/preloader.css" rel="stylesheet" />
     @*<link href="~/Style_design/css/preloader/preloader-style.css" rel="stylesheet" />*@
 
+    <style>
+        .hidden_Control {
+            display:none!important;
+        }
+
+    </style>
 </head>
 
 <body id="page-top">
     <div class="iconbar-container">
+        <!--   Icon Bar Definition -->
+        <div class="details-iconbar d-flex justify-content-start hidden_Control" id="iconbar_Definition">
+            <button class="icon-bar d-flex justify-content-between view   " style="position: fixed;" id="btnUpdate_Def">
+                <i class="fas fa-edit fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">@SystemResource.App_Update</span>
+            </button> 
+            <button class="icon-bar d-flex justify-content-between add display_none" style="position: fixed;" id="btnSave_Def">
+                <i class="fas fa-save fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">@SystemResource.App_save</span>
+            </button>
+            <button class="icon-bar d-flex justify-content-between viewresult display_none" style="position: fixed;" id="btnBack_Def">
+                <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">@SystemResource.App_back</span>
+            </button>
+        </div>
         <!-- Side Icon Bar -->
-        <div class="main-iconbar " id="divIconbar">
+        <div class="main-iconbar hidden_Control " id="divIconbar">
             <div id="iconMainPages">
                 <button class="icon-bar d-flex justify-content-between view " id="btnShow">
                     <i class="fas fa-eye fa-fw side-icon ms-1"></i>
@@ -72,7 +93,7 @@
                     <span class="align-self-center mb-3">   @SystemResource.App_Print </span>
                 </button>
             </div>
-          
+
 
             <button class="icon-bar d-flex justify-content-between print " id="btnPrintTrview">
                 <i class="fas fa-print fa-fw side-icon ms-1"></i>
@@ -88,7 +109,7 @@
                 <i class="fas fa-file-csv fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  Excel</span>
             </button>
-              
+
             <div class="col-md-2 col-xs-2 StyleNew_Toolbar display_none">
                 <input id="NewAdd_Falg" />
                 <input id="Mod_Flag" />
@@ -819,25 +840,21 @@
         });
 
 
-                //$("#btnUpdate_Def").click(function () {
 
-                //    $('#btnUpdate_Def').addClass('display_none');
-                //    $('#btnBack_Def').removeClass('display_none');
-                //    $('#btnSave_Def').removeClass('display_none');
-
-                //});
-
-                //$("#btnBack_Def").click(function () {
-
-                //    $('#btnUpdate_Def').removeClass('display_none');
-                //    $('#btnBack_Def').addClass('display_none');
-                //    $('#btnSave_Def').addClass('display_none');
-                //});
-
-
-                //$("#btnSave_Def").click(function () {
-
-                //});
+        $("#btnUpdate_Def").click(function () { 
+            $('#btnUpdate_Def').addClass('display_none');
+            $('#btnBack_Def').removeClass('display_none');
+            $('#btnSave_Def').removeClass('display_none'); 
+        }); 
+        $("#btnBack_Def").click(function () { 
+            $('#btnUpdate_Def').removeClass('display_none');
+            $('#btnBack_Def').addClass('display_none');
+            $('#btnSave_Def').addClass('display_none');
+        });
+         
+        $("#btnSave_Def").click(function () {
+            $("#Mod_Flag").val(0);
+        });
 
 
 

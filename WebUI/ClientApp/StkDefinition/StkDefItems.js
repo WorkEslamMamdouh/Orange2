@@ -15,7 +15,7 @@ var StkDefItems;
     var IsLocalSalePrice;
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service;
-    var btnSave;
+    var btnSave_Def;
     var btnAddDetails;
     var btnEdit;
     var btnShow;
@@ -28,7 +28,7 @@ var StkDefItems;
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
     var BranchCode; //SharedSession.CurrentEnvironment.BranchCode;
-    var btnBack;
+    var btnBack_Def;
     var catId;
     var catId_type_change;
     var ItemFamilyID_change;
@@ -42,20 +42,14 @@ var StkDefItems;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         // 
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الاصناف";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Items";
         }
-        $("#btnAdd").addClass("display_none");
-        $("#btnPrintTrview").addClass("display_none");
-        $("#btnPrintTrPDF").addClass("display_none");
-        $("#btnPrintTrEXEL").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnSave").css("bottom", "25%;");
-        $("#btnBack").css("bottom", "20%;");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         IsLocalSalePrice = sys.SysSession.CurrentEnvironment.I_Control[0].IsLocalSalePrice;
@@ -71,13 +65,13 @@ var StkDefItems;
         //Display_I_ItemFamily();
     }
     StkDefItems.InitalizeComponent = InitalizeComponent;
-    $('#btnUpdate').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
             $('#divShow').removeClass("display_none");
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate_Def").addClass("display_none");
             $(".SelectDIS").attr("disabled", "disabled");
             if ($('#drpitem_family').val() == "null") {
                 $("#drpitem_family").attr("disabled", "disabled");
@@ -92,9 +86,9 @@ var StkDefItems;
             $("#btnShow").attr("disabled", "disabled");
         }
         else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
-            $("#btnUpdate").toggleClass("display_none");
+            $('#btnSave_Def').addClass("display_none");
+            $('#btnBack_Def').addClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -113,9 +107,9 @@ var StkDefItems;
     function InitalizeControls() {
         // 
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnEdit = document.getElementById("btnUpdate");
-        btnSave = document.getElementById("btnSave");
-        btnBack = document.getElementById("btnBack");
+        btnEdit = document.getElementById("btnUpdate_Def");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         btnShow = document.getElementById("btnShow");
         // Buton privialges for single record page
     }
@@ -124,8 +118,8 @@ var StkDefItems;
         $("#drpitem_family").attr("disabled", "disabled");
         //$("#drpPaymentType").attr("disabled", "disabled");
         btnAddDetails.onclick = AddNewRow; //
-        btnSave.onclick = btnsave_onClick;
-        btnBack.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnSave_Def_onClick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
         btnShow.onclick = btnShow_onclick;
         //btnShow.onkeyup = btnShow_onclick;
         $("#drp_G_Store").on('change', function () {
@@ -148,13 +142,13 @@ var StkDefItems;
                 //Display();
                 ItemFamilyID = $('#drpitem_family').val();
                 //Display_All();
-                //btnback_onclick();
+                //btnBack_Def_onclick();
             }
         });
         $("#drpitem_family").on('change', function () {
             //$('#drpitem_family').html("");
             ItemFamilyID = $('#drpitem_family').val();
-            //btnback_onclick();
+            //btnBack_Def_onclick();
         });
     }
     function btnShow_onclick() {
@@ -169,7 +163,7 @@ var StkDefItems;
             Errorinput($("#drpPaymentType"));
         }
         else {
-            btnback_onclick();
+            btnBack_Def_onclick();
         }
     }
     function AddNewRow() {
@@ -205,7 +199,7 @@ var StkDefItems;
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
             CountGrid++;
         }
-        $("#btnUpdate").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
     function BuildControls(cnt) {
         var html;
@@ -321,10 +315,10 @@ var StkDefItems;
         }
         return;
     }
-    function btnsave_onClick() {
-        loading('btnSave');
+    function btnSave_Def_onClick() {
+        loading('btnSave_Def');
         setTimeout(function () {
-            finishSave('btnSave');
+            finishSave('btnSave_Def');
             var CanAdd = true;
             if (CountGrid > 0) {
                 for (var i = 0; i < CountGrid; i++) {
@@ -459,7 +453,7 @@ var StkDefItems;
                 if (result.IsSuccess == true) {
                     var OK = result.Response;
                     OK == 0 ? DisplayMassage_Processes('خطاء الصنف مستخدم بالفغل ', 'Wrong the Item is already used ', MessageType.Worning) : DisplayMassage_Processes('تم الحفظ', 'Done', MessageType.Succeed);
-                    btnback_onclick();
+                    btnBack_Def_onclick();
                     flag_Assign = 0;
                 }
                 else {
@@ -671,19 +665,15 @@ var StkDefItems;
         $('#select_Type_Item' + RecNo).prop("selectedIndex", 0);
         $('#select_ItemFamily' + RecNo).prop("selectedIndex", 0);
     }
-    function btnback_onclick() {
-        if ($('#btnBack').attr('class') != "btn btn-warning display_none") {
-            $('#btnBack').toggleClass("display_none");
-        }
-        if ($('#btnSave').attr('class') != "btn btn-success display_none") {
-            $('#btnSave').toggleClass("display_none");
-        }
+    function btnBack_Def_onclick() {
+        $('#btnBack_Def').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none');
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnUpdate").removeAttr("disabled");
-        $("#btnBack").removeAttr("disabled");
-        $("#btnSave").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
+        $("#btnBack_Def").removeAttr("disabled");
+        $("#btnSave_Def").removeAttr("disabled");
         CountGrid = 0;
         $("#div_Data").html("");
         if ($("#drpitem_family").val() == "0") {

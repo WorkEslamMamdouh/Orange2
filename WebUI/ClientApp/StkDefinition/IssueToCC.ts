@@ -53,8 +53,7 @@ namespace IssueToCC {
     var txtEndDate: HTMLInputElement;
     var searchbutmemreport: HTMLInputElement;
     var txtTr_No: HTMLInputElement;
-    var txTrDate: HTMLInputElement;
-    var txTrDate: HTMLInputElement;
+    var txTrDate: HTMLInputElement; 
     var txRefNo: HTMLInputElement;
     var txtRemark: HTMLInputElement;
     var txtCreatedBy: HTMLInputElement;
@@ -119,8 +118,7 @@ namespace IssueToCC {
         txtStartDate = document.getElementById("txtStartDate") as HTMLInputElement;
         txtEndDate = document.getElementById("txtEndDate") as HTMLInputElement;
         txtTr_No = document.getElementById("txtTr_No") as HTMLInputElement;
-        txTrDate = document.getElementById("txTrDate") as HTMLInputElement;
-        txTrDate = document.getElementById("txTrDate") as HTMLInputElement;
+        txTrDate = document.getElementById("txTrDate") as HTMLInputElement; 
         txRefNo = document.getElementById("txRefNo") as HTMLInputElement;
         txtRemark = document.getElementById("txtRemark") as HTMLInputElement;
         txtCreatedBy = document.getElementById("txtCreatedBy") as HTMLInputElement;
@@ -161,14 +159,11 @@ namespace IssueToCC {
             $('#id_divGridDetails').removeClass('display_none');
             $("#div_dis").addClass("disabledDiv");
             $("#div_dis").attr("disabled", "disabled").off('click');
-            $("#divIconbar").addClass("disabledIconbar");
-            $("#divIconbar").attr("disabled", "disabled").off('click');
+         
             $("#id_divMasterGrid").addClass("disabledDiv");
             $("#id_divMasterGrid").attr("disabled", "disabled").off('click');
-            $('#btnUpdate').addClass('display_none');
-        $('#btnPrintTransaction').addClass('display_none');
-            $('#btnBack').removeClass('display_none');
-            $('#btnSave').removeClass('display_none');
+            $('#btnPrintTransaction').addClass('display_none'); 
+
             Clear();
             EnableInputs();
             $('#btnAddDetails').removeClass('display_none');       

@@ -13,7 +13,8 @@ namespace BackgroundImage {
   
 
   export  function GetBackgroundImage() {
-
+     
+       
         $.ajax({
             type: "GET",
             async: false,
