@@ -4,154 +4,404 @@
 
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-<style>
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.45;
-    }
-
-    .BtnHide {
-        WIDTH: 159PX;
-    }
-
-    .ccType {
-    }
-
-    .ccTypeBranch {
-    }
-
-    .Acc {
-    }
-
-    .costcntr {
-    }
-
-    .costcntrCCDt {
-    }
-
-    .style_contrctddr {
-        margin-right: 8%;
-    }
-
-    .class_btn_drop {
-        background-color: #c8c8c8;
-        padding: 6px 10px 2px 10px;
-    }
-
-    .dropdown-item:hover {
-        cursor: pointer !important;
-        background-color: #c8c8c8 !important;
-    }
-
-    .pading_3 {
-        padding: 0px 50px 0px !important
-    }
-
-
-
-    .textcentr_pading {
-        padding-right: 29px !important;
-    }
-
-    .src-btn {
-        border-radius: 18px !important;
-    }
-
-    .dropdown-menu {
-        border-radius: 11px;
-    }
-
-    .borderbottom {
-        border: 2px inset;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    .style_borderbottom {
-        border: 2px inset;
-        text-align: center;
-    }
-
-    .st_drop_text {
-        position: absolute !important;
-        top: 0px;
-        z-index: 100;
-    }
-
-    .radiocontrol {
-        top: -10px;
-    }
-
-    .font_heder {
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .fontitm3 {
-        float: right;
-        margin: 0px -14px 0px 0px !important;
-        font-size: 21px !important;
-        padding: 2px;
-    }
-
-    .fontitm4 {
-        font-size: 25px !important;
-        position: absolute;
-    }
-
-
-
-
-    .btnplas {
-        margin-top: 9px;
-        margin-left: 6px;
-        margin-right: 9px;
-    }
-
-
-
-    glyphicon-minus-sign :hover {
-        color: #ff0000
-    }
-
-
-
-    .btn-search {
-        color: #fff;
-        background-color: #f0ad4e;
-        /* border-color: #eea236; */
-    }
-
-        .btn-search :hover {
-            color: black;
+@*<style>
+        .disabledDiv {
+            pointer-events: none;
+            opacity: 0.45;
         }
 
-    #btnAddDetails {
-        font-size: 30px;
-    }
+        .BtnHide {
+            WIDTH: 159PX;
+        }
 
-        #btnAddDetails:hover {
-            color: #24b414;
+        .ccType {
+        }
+
+        .ccTypeBranch {
+        }
+
+        .Acc {
+        }
+
+        .costcntr {
+        }
+
+        .costcntrCCDt {
+        }
+
+        .style_contrctddr {
+            margin-right: 8%;
+        }
+
+        .class_btn_drop {
+            background-color: #c8c8c8;
+            padding: 6px 10px 2px 10px;
+        }
+
+        .dropdown-item:hover {
+            cursor: pointer !important;
+            background-color: #c8c8c8 !important;
+        }
+
+        .pading_3 {
+            padding: 0px 50px 0px !important
         }
 
 
-    #content_data .col-lg-1 {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
 
-    #content_data .col-lg-2 {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
+        .textcentr_pading {
+            padding-right: 29px !important;
+        }
 
-    #content_data .col-lg-3 {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-</style>
+        .src-btn {
+            border-radius: 18px !important;
+        }
+
+        .dropdown-menu {
+            border-radius: 11px;
+        }
+
+        .borderbottom {
+            border: 2px inset;
+        }
+
+        .display_none {
+            display: none !important;
+        }
+
+        .style_borderbottom {
+            border: 2px inset;
+            text-align: center;
+        }
+
+        .st_drop_text {
+            position: absolute !important;
+            top: 0px;
+            z-index: 100;
+        }
+
+        .radiocontrol {
+            top: -10px;
+        }
+
+        .font_heder {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .fontitm3 {
+            float: right;
+            margin: 0px -14px 0px 0px !important;
+            font-size: 21px !important;
+            padding: 2px;
+        }
+
+        .fontitm4 {
+            font-size: 25px !important;
+            position: absolute;
+        }
+
+
+
+
+        .btnplas {
+            margin-top: 9px;
+            margin-left: 6px;
+            margin-right: 9px;
+        }
+
+
+
+        glyphicon-minus-sign :hover {
+            color: #ff0000
+        }
+
+
+
+        .btn-search {
+            color: #fff;
+            background-color: #f0ad4e;
+            /* border-color: #eea236; */
+        }
+
+            .btn-search :hover {
+                color: black;
+            }
+
+        #btnAddDetails {
+            font-size: 30px;
+        }
+
+            #btnAddDetails:hover {
+                color: #24b414;
+            }
+
+
+        #content_data .col-lg-1 {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+
+        #content_data .col-lg-2 {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+
+        #content_data .col-lg-3 {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    </style>*@
+<div class="row gy-3 ">
+    <div class="col-12" id="divFilter">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row" id="divnotifications">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-8 ">
+                                <input id="txtFromDate" name="" type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-8 ">
+                                <input id="txtToDate" name="" type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Status</label>
+                            <div class="col-8 ">
+                                <select id="ddlStatusFilter" name="" type="text" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.source</label>
+                            <div class="col-8 ">
+                                <select id="ddlVoucherSourceFilter" name="" type="text" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Type</label>
+                            <div class="col-8 ">
+                                <select id="ddlVoucherTypeFilter" name="" type="text" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divGridShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="txtSearch" name="" type="text" class="form-control" placeholder=" @SystemResource.Search ">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <table id="divGridDetails"></table>
+                </div>
+                <div class="d-flex justify-content-center text-blue text-center fw-bold mb-3">
+                    @SystemResource.App_DoubleDisplay
+                </div>
+            </div>
+        </div>
+        <!-- Restriction form  -->
+        <div class="card bg-light-blue display_none mt-2" id="divTempHeader">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <label id="div_contentliest" class="text-blue fs-5 fw-bold">
+                            <span id="spandiv_contentliest"></span>
+                            @SystemResource.Restriction_form
+                        </label>
+                    </div>
+                    <div class="col-12 service-content" id="DivTemplate">
+                        <div class="serviceBox display_none" id="divTemplateData">
+                            <div class="row g-0 ">
+                                @* Screen Button *@
+                                <div class="d-flex justify-content-start mb-2">
+                                    <div class="">
+                                        <button id="btnCreateTemplate" type="button" class="btn btn-main me-3 display_none">
+                                            @SystemResource.Create_form
+                                        </button>
+                                        <button id="btnDeleteTemplate" type="button" class="btn btn-main me-3 display_none">
+                                            @SystemResource.Delete_form
+                                        </button>
+                                        <button id="btnEditTemplate" type="button" class="btn btn-main me-3 display_none">
+                                            @SystemResource.Modify_form
+                                        </button>
+                                        <button id="btnLoadTemplate" type="button" class="btn btn-main display_none">
+                                            @SystemResource.Download_form
+                                        </button>
+                                    </div>
+                                    @* Screen Button Controll *@
+                                    <div class="ms-auto">
+                                        <button id="btnBackTemp" type="button" class="btn btn-main me-3 ">
+                                            @SystemResource.App_back
+                                        </button>
+                                        <button id="btnSaveTemp" type="button" class="btn btn-main ">
+                                            @SystemResource.App_save
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Form_name  </label>
+                                        <div class="col-8">
+                                            <input id="txtTempName" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Form_num  </label>
+                                        <div class="col-8">
+                                            <input id="txtTempNumber" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="form-check d-inline-flex">
+                                        <input type="radio" class="form-check-input form-radio" id="rdSaveValue" name="rd" checked>
+                                        <label class="form-check-label label-radio" for="reptp1"> @SystemResource.Save_vale </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="form-check d-inline-flex">
+                                        <input type="radio" class="form-check-input form-radio" id="rdSaveDesc" name="rd">
+                                        <label class="form-check-label label-radio" for="reptp1"> @SystemResource.Save_desc </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Details  -->
+        <div class="row">
+            <div class="col-12 service-content">
+                <div class="serviceBox">
+                    <div class="row g-0 display_none" id="divJournalDetail">
+                        <div class="col-12" id="div_BasicData">
+                            <div class="row g-0">
+                                @* Screen Button *@
+                                <div class="d-flex justify-content-start mb-2">
+                                    <button id="btnUnAuthorize" type="button" class="btn btn-main me-3 ">
+                                        @SystemResource.Decode_adoption
+                                    </button>
+                                    <button id="btnAuthorize" type="button" class="btn btn-main me-3 ">
+                                        @SystemResource.App_approved
+                                    </button>
+                                    <button id="btnPost" type="button" class="btn btn-main me-3 display_none">
+                                        @SystemResource.relay
+                                    </button>
+                                    <button id="btnReverseVoucher" type="button" class="btn btn-main me-3">
+                                        @SystemResource.opposite_current_restriction
+                                    </button>
+                                </div>
+                                
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Number  </label>
+                                        <div class="col-8">
+                                            <input id="txtJouranlNumber" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
+                                        <div class="col-8">
+                                            <input id="txtJouranlDate" name="" disabled type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Type  </label>
+                                        <div class="col-8">
+                                            <select id="ddlJournalType" name="" disabled type="text" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3 ">
+                                    <div class="form-group row">
+                                        <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Status</label>
+                                        <div class="col-10 ">
+                                            <div class="form-check d-inline-flex">
+                                                <input class="form-check-input form-radio" type="radio" id="rdNew"  checked>
+                                                <label class="form-check-label" for="rdNew"> @SystemResource.App_new </label>
+                                            </div>
+                                            <div class="form-check d-inline-flex">
+                                                <input class="form-check-input form-radio" type="radio" id="rdAuthorized" >
+                                                <label class="form-check-label" for="rdAuthorized"> @SystemResource.Certified</label>
+                                            </div>
+                                            <div class="form-check d-inline-flex">
+                                                <input class="form-check-input form-radio" type="radio" id="rdPosted" >
+                                                <label class="form-check-label" for="rdPosted"> @SystemResource.deported</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group row g-0">
+                                        <label class="col-2 align-self-center p-md-0"> @SystemResource.App_desc  </label>
+                                        <div class="col-10">
+                                            <textarea id="txtJournalDescripton" name="" disabled type="text" class="form-control  h-100"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.refTrTransNo  </label>
+                                        <div class="col-8">
+                                            <input id="txtRefNumber" name="" disabled type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.source  </label>
+                                        <div class="col-8">
+                                            <input id="txtResource" name="" disabled type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred ">
     <div class="row" id="divFilter">
         <div id="divnotifications" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
@@ -257,13 +507,13 @@
                                 @SystemResource.Create_form  <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
-                         
+
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
                             <button type="button" class="btn btn-danger  BtnHide" id="btnDeleteTemplate">
                                 @SystemResource.Delete_form  <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
-                        
+
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
@@ -500,33 +750,34 @@
     </div>
 </div>
 
-
-<script>
-    //$('#lepnotifications').on('click', function () {
-    //    $('#divnotifications').toggleClass('showdiv');
-    //    $('#spanlepnotifications').toggleClass('fa-caret-left');
-    //    $('#spanlepnotifications').toggleClass('fa-caret-down');
-    //});
-    //$('#div_contentliest').on('click', function () {
-    //    $('#DivTemplate').toggleClass('showdiv');
-    //    $('#spandiv_contentliest').toggleClass('fa-caret-left');
-    //    $('#spandiv_contentliest').toggleClass('fa-caret-down');
-    //});
-</script>
-<script>
-    $('#btnReserveID').on('click', function () {
-        $('#drpsearchReserve').toggleClass('display_none');
-    });
-    $('#btnCloseNo').on('click', function () {
-        $('#drpCloseNo').toggleClass('display_none');
-    }); $('#btnContractRentID').on('click', function () {
-        $('#drpContractRent').toggleClass('display_none');
-    });
-</script>
-<script src="~/ClientApp/GeneralLedger/JournalVoucher.js"></script>
-<style>
+@section Script{
+    <script>
+        //$('#lepnotifications').on('click', function () {
+        //    $('#divnotifications').toggleClass('showdiv');
+        //    $('#spanlepnotifications').toggleClass('fa-caret-left');
+        //    $('#spanlepnotifications').toggleClass('fa-caret-down');
+        //});
+        //$('#div_contentliest').on('click', function () {
+        //    $('#DivTemplate').toggleClass('showdiv');
+        //    $('#spandiv_contentliest').toggleClass('fa-caret-left');
+        //    $('#spandiv_contentliest').toggleClass('fa-caret-down');
+        //});
+    </script>
+    <script>
+        $('#btnReserveID').on('click', function () {
+            $('#drpsearchReserve').toggleClass('display_none');
+        });
+        $('#btnCloseNo').on('click', function () {
+            $('#drpCloseNo').toggleClass('display_none');
+        }); $('#btnContractRentID').on('click', function () {
+            $('#drpContractRent').toggleClass('display_none');
+        });
+    </script>
+    <script src="~/ClientApp/GeneralLedger/JournalVoucher.js"></script>
+}
+@*<style>
     .glyphicon-duplicate :hover {
         color: red !important;
         cursor: copy !important;
     }
-</style>
+</style>*@

@@ -141,6 +141,7 @@ var PurTrReturn;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         btnShow_onclick();
         $('#btnPrint').addClass('display_none');
+        $('#divMasterGridiv').addClass('display_none');
     }
     PurTrReturn.InitalizeComponent = InitalizeComponent;
     function IntializeEvents() {
@@ -542,6 +543,8 @@ var PurTrReturn;
         }
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+        $("#divMasterGridiv").attr("disabled", "disabled").off('click');
+        $("#divMasterGridiv").addClass("disabledDiv");
         ddlCashBox.disabled = true;
         txtCashAmount.disabled = true;
         IsNew = false;
@@ -611,6 +614,7 @@ var PurTrReturn;
             }
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#DivFilter").removeClass("disabledDiv");
+            $("#divMasterGridiv").removeClass("disabledDiv");
             $("#ddlVendorDetails").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
@@ -623,6 +627,7 @@ var PurTrReturn;
         if (EditFlag == true) {
             BindStatisticGridData();
             $("#DivFilter").removeClass("disabledDiv");
+            $("#divMasterGridiv").removeClass("disabledDiv");
             $("#Data_heder").addClass("disabledDiv");
             $('#btnSave').toggleClass("display_none");
             $('#btnBack').toggleClass("display_none");
@@ -647,6 +652,7 @@ var PurTrReturn;
             lblReturnNumber.value = "";
             clear();
             $("#DivFilter").removeClass("disabledDiv");
+            $("#divMasterGridiv").removeClass("disabledDiv");
             $("#rowData").addClass("display_none");
             $("#divTotalSatistics").addClass("display_none");
             $('#btnSave').toggleClass("display_none");
@@ -697,6 +703,8 @@ var PurTrReturn;
         $("#divTotalSatistics").removeClass("display_none");
         $("#DivFilter").attr("disabled", "disabled").off('click');
         $("#DivFilter").addClass("disabledDiv");
+        $("#divMasterGridiv").attr("disabled", "disabled").off('click');
+        $("#divMasterGridiv").addClass("disabledDiv");
         $("#btnUpdate").addClass("display_none");
         $("#txtCreatedAt").prop("value", DateTimeFormat(Date().toString()));
         $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);

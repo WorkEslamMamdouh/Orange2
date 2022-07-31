@@ -29185,17 +29185,24 @@ div.tagsinput {
         margin-left: 1px;
         margin-right: 1px;
     }
-    .inside-table .btn-minus,
-    .inside-table .btn-plus {
-        transition: all 0.2s ease-in-out;
-        color: var(--bs-gray);
-    }
+.inside-table .btn-minus,
+.inside-table .btn-plus,
+.inside-table .btn-down {
+    transition: all 0.2s ease-in-out;
+    color: var(--bs-gray);
+}
         .inside-table .btn-minus:hover {
             color: darkred;
         }
     .inside-table .btn-plus:hover {
         color: green;
     }
+    .inside-table .btn-down:hover {
+        color: var(--main-blue);
+    }
+.inside-table .form-check {
+    margin-bottom: -5px;
+}
     /*Total Details*/
     .total-details .form-group label {
         font-size: 0.85rem;

@@ -664,59 +664,106 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     //------------------------------------------------------ first Controls Grid Region------------------------
     function BuildControls_Header(cnt: number) {
         var html;
-        html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
-            '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
-            '<span id="btn_arrowdown' + cnt + '" class="styledown glyphicon glyphicon-circle-arrow-down   "></span>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 ">' +
-            '<input id="txtInvoiceHeaderID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="VND_SERIAL' + cnt + '" type="hidden"  class="form-control input-sm right2 display_none"/>' +
-
-            '<input id="txtInvSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">' +
-            '<input id="txtDocNum' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<input id="txtInvTrNO' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + (0) + '"/></div>' +
-            '<div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">' +
-            '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm  btn-warning" id="btnVendorSrch' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search  "></i></button>' +
-            '<input id="txtVndrCode' + cnt + '" name="" disabled type="text" class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 form-control input-sm  text_Display  "/>' +
-            '<input id="txtVendoeName' + cnt + '" name="" disabled type="text" class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7  form-control input-sm  text_Display"/>' +
-            '</div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<Input id="chkCash' + cnt + '" type="checkbox" class="form-control input-sm right2" disabled value=" "/></div>' +
-
-            '<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">' +
-            '<input id="txtInvoiceDate' + cnt + '" type="date" disabled class="form-control input-sm right2"   value=' + GetDate() + ' /></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<input id="txtInvtotal' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-
-            "<div class='col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10' style='position: absolute; right: 99% '>" +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<input id="txtInvVat' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
-
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<input id="txtDiscoutnval' + cnt + '" type="number" disabled value="0" class="form-control input-sm right2"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">' +
-            '<input id="txtInvNet' + cnt + '" type="number" disabled class="form-control input-sm right2"   value="0"/></div>' +
-            '<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6">' +
-
-            '<button type="button" disabled class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm  btn-warning" id="btnAccSearch' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search  "></i></button>' +
-            '<input id="txtAccCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
-            '<input id="txtAccDesc' + cnt + '" name="" disabled type="text" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 form-control input-sm  text_Display"/> </div>' +
-
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">' +
-            '<input id="txtInvoiceDesc' + cnt + '" type="text" disabled class="form-control input-sm right2"   /></div>' +
-            '</div>' +
-            "</div>" +
-            ' </div></div>' +
-
-            '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
-
+        html = `<tr id="No_Row1${cnt}">
+                    <input id="txtInvoiceHeaderID${cnt}" type="hidden" class="form-control display_none"  />
+                    <input id="VND_SERIAL${cnt}" type="hidden" class="form-control display_none"  />
+	             <td>
+		                <div class="form-group">
+			                <span id="btn_arrowdown${cnt}"><i class="fas fa-arrow-alt-circle-down fs-4 btn-down"></i></span>
+		                </div>
+	                </td>    
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtInvSerial${cnt}" type="text" class="form-control" disabled value="${cnt}"/>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			               <input id="txtDocNum${cnt}" type="text" disabled value="0" class="form-control"/>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			              <input id="txtInvTrNO${cnt}" type="text" class="form-control" disabled value="${(0)}"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group d-flex">
+                            <div>
+			                    <button type="button" class="style_ButSearch" id="btnVendorSrch${cnt}" name="ColSearch" disabled>
+                                    <i class="fa fa-search"></i>
+                                 </button>
+                            </div>
+                            <div>
+                                <input id="txtVndrCode${cnt}" name="" disabled type="text" class="form-control" />
+		                    </div>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtVendoeName${cnt}" name="FromDate" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-check">
+                            <input id="chkCash${cnt}" class="form-check-input" type="checkbox"  disabled value=" "/>
+                        </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtInvoiceDate${cnt}" type="date" disabled class="form-control"   value='${GetDate()}' />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtInvtotal${cnt}" type="text" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtInvVat${cnt}" type="text" disabled value="0" class="form-control"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtDiscoutnval${cnt}" type="number" disabled value="0" class="form-control"/>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			                <input id="txtInvNet${cnt}" type="number" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group d-flex">
+                            <div>
+			                    <button type="button" class="style_ButSearch" id="btnAccSearch${cnt}" name="ColSearch" disabled>
+                                    <i class="fa fa-search"></i>
+                                 </button>
+                            </div>
+                            <div>
+                                <input id="txtAccCode${cnt}" name="" disabled type="text" class="form-control" />
+		                    </div>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtAccDesc${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtInvoiceDesc${cnt}" type="text" disabled class="form-control"   />
+	                    </div>
+                    </td>
+                    <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
+		            <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
         $("#divData_Header").append(html);
 
         //// Vendor Search
@@ -1095,46 +1142,133 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     //------------------------------------------------------ Second Controls Grid Region------------------------
     function BuildControls_Details(cnt: number) {
         var html;
-        html = '<div id= "No_Row2' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
-            '<span id="btn_minus2' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtInvoiceDetailID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="VND_SERIALDetail' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            //**new
-            '<input id="txtTR_SERIAL' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            //***
-            '<input id="txtDetailSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
+        html = `<tr id="No_Row2${cnt}">
+                    <input id="txtInvoiceDetailID${cnt}" type="hidden" class="form-control display_none"  />
+                    <input id="VND_SERIALDetail${cnt}" type="hidden" class="form-control display_none"  /> 
+                    <input id="txtTR_SERIAL${cnt}" type="hidden" class="form-control display_none"/>    
+<td>
+		                <div class="form-group">
+			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			               <input id="txtDetailSerial${cnt}" type="text" disabled value="0" class="form-control"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group d-flex">
+                            <div>
+			                    <button type="button" class="style_ButSearch" id="btnServicSrch${cnt}" name="ColSearch" disabled>
+                                    <i class="fa fa-search"></i>
+                                 </button>
+                            </div>
+                            <div>
+                                <input id="txtServCode${cnt}" name="" disabled type="text" class="form-control" />
+		                    </div>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			              <input id="txtServName${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtQty${cnt}" type="number" class="form-control" disabled value="1 "/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtPrice${cnt}" type="text" disabled  class="form-control"  value="0"/>
+                        </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			               <input id="txtDetailTotal${cnt}" type="text"  disabled class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="txtVatPrc${cnt}" type="text" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtVatAmount${cnt}" type="text" disabled value="0" class="form-control"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <input id="txtDetailNet${cnt}" type="text" disabled class="form-control"   value="0"/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group d-flex">
+                            <div>
+			                    <button type="button" class="style_ButSearch" id="btnCostCntrSrch${cnt}" name="ColSearch" disabled>
+                                    <i class="fa fa-search"></i>
+                                 </button>
+                            </div>
+                            <div>
+                                <input id="txtCCcode${cnt}" name="" disabled type="text" class="form-control"/>
+		                    </div>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			                <input id="txtCCName${cnt}" name="" disabled type="text" class="form-control"/>
+		                </div>
+	                </td>
+	                <td>
+		                <div class="form-group">
+			                <input id="txtCRemarks${cnt}" name="" disabled type="text" class="form-control"/>
+		                </div>
+	                </td>
+                    <input id="txt_StatusFlag2${cnt}" name = " " type = "hidden" class="form-control"/>
+		<input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
+                </tr>`;
 
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
-            '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm  btn-warning " id="btnServicSrch' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search  "></i></button>' +
-            '<input id="txtServCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
-            '<input id="txtServName' + cnt + '" name="" disabled type="text" class="form-control col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 input-sm  text_Display"/>' +
-            '</div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtQty' + cnt + '" type="number" class="form-control input-sm right2" disabled value="1 "/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtPrice' + cnt + '" type="text" disabled  class="form-control input-sm right2"  value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtDetailTotal' + cnt + '" type="text"  disabled class="form-control input-sm right2"  value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtVatPrc' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtVatAmount' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtDetailNet' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-            "<div class='col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8' style='position: absolute; right: 82% '>" +
-            '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm btn-warning " id="btnCostCntrSrch' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search  "></i></button>' +
-            '<input id="txtCCcode' + cnt + '" name="" disabled type="text" class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 form-control input-sm  text_Display  "/>' +
-            '<input id="txtCCName' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  text_Display"/>' +
-            '<input id="txtCRemarks' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  text_Display"/>' +
-            "</div>" +
+        //html = '<div id= "No_Row2' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
+        //    '<span id="btn_minus2' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtInvoiceDetailID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    '<input id="VND_SERIALDetail' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    //**new
+        //    '<input id="txtTR_SERIAL' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    //***
+        //    '<input id="txtDetailSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
 
-            '</div>' +
+        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
+        //    '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm  btn-warning " id="btnServicSrch' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search  "></i></button>' +
+        //    '<input id="txtServCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
+        //    '<input id="txtServName' + cnt + '" name="" disabled type="text" class="form-control col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 input-sm  text_Display"/>' +
+        //    '</div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtQty' + cnt + '" type="number" class="form-control input-sm right2" disabled value="1 "/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtPrice' + cnt + '" type="text" disabled  class="form-control input-sm right2"  value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtDetailTotal' + cnt + '" type="text"  disabled class="form-control input-sm right2"  value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtVatPrc' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtVatAmount' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtDetailNet' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
+        //    "<div class='col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8' style='position: absolute; right: 82% '>" +
+        //    '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm btn-warning " id="btnCostCntrSrch' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search  "></i></button>' +
+        //    '<input id="txtCCcode' + cnt + '" name="" disabled type="text" class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 form-control input-sm  text_Display  "/>' +
+        //    '<input id="txtCCName' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  text_Display"/>' +
+        //    '<input id="txtCRemarks' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  text_Display"/>' +
+        //    "</div>" +
 
-            ' </div></div>' +
-            '<input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
+        //    '</div>' +
+
+        //    ' </div></div>' +
+        //    '<input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
 
         $("#div_Data").append(html);
 
@@ -1726,8 +1860,9 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     //}
     function clear() {
         $("#div_Master :input").val("");
-
+        $("#divData_Header :input").val("");
         $("#divData_Header").html("");
+        $("#div_Data :input").val("");
         $("#div_Data").html("");
 
         txtTR_DATE.value = GetDate(); 

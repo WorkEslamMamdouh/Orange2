@@ -8,7 +8,7 @@ var ServPurInvoiceRet;
     var sys = new SystemTools();
     var VatPrc;
     //***********controls
-    var btnadd;
+    var btnAdd;
     var btnShow;
     var btnSave;
     var btnAddDetails;
@@ -42,7 +42,7 @@ var ServPurInvoiceRet;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintReceive;
-    var btnPrint;
+    // var btnPrint: HTMLButtonElement;
     //***********Arrays
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var List_Status = new Array();
@@ -93,7 +93,7 @@ var ServPurInvoiceRet;
         drpSrchVendor = document.getElementById("drpSrchVendor");
         drpSrchType = document.getElementById("drpSrchType");
         drpTrType = document.getElementById("drpTrType");
-        btnadd = document.getElementById("btnadd");
+        btnAdd = document.getElementById("btnAdd");
         btnShow = document.getElementById("btnShow");
         btnSave = document.getElementById("btnSave");
         btnInvSearch = document.getElementById("btnInvSearch");
@@ -121,11 +121,11 @@ var ServPurInvoiceRet;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintReceive = document.getElementById("btnPrintReceive");
-        btnPrint = document.getElementById("btnPrint");
+        // btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
     }
     function InitializeEvents() {
         btnShow.onclick = btnShow_onclick;
-        btnadd.onclick = btnadd_onclick;
+        btnAdd.onclick = btnadd_onclick;
         btnSave.onclick = btnSave_onclick;
         btnInvSearch.onclick = btnInvSearch_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
@@ -135,7 +135,7 @@ var ServPurInvoiceRet;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        // btnPrint.onclick = () => { PrintReport(4); }
         searchbutmemreport.onkeyup = _SearchBox_Change;
         btnPrintReceive.onclick = btnPrintReceive_onclick;
     }
@@ -167,47 +167,48 @@ var ServPurInvoiceRet;
     }
     function BuildControls_Details(cnt) {
         var html;
-        html = '<div id= "No_Row2' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
-            '<span id="btn_minus2' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtInvoiceRetDetailid' + cnt + '" type="hidden" class="form-control input-sm right2 display_none " value="0" />' +
-            '<input id="txtInvoiceRetID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="txtInvoiceDetailID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="txtItemid' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="txtUomID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-            '<input id="txtTR_SERIAL' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
-            '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
-            '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
-            '<input id="txtitm_DescA' + cnt + '" name="" disabled type="text" class="form-control col-lg-9 col-md-9 col-sm-9 col-xl-9 col-xs-9 input-sm  text_Display"/>' +
-            '</div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtQTY_SOLD' + cnt + '" type="text" class="form-control input-sm right2" disabled value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtQTY_RET' + cnt + '" type="text" class="form-control input-sm right2 ReturnQtyCss"  value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtUnitprice' + cnt + '" type="text"   class="form-control input-sm right2" disabled value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtItemTotal' + cnt + '" type="text"   class="form-control input-sm right2" disabled value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtVatPrc' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtVatAmount' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
-            '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-            '<input id="txtNet' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-            "<div class='col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 positionSer_Return_Pur' style=''>" +
-            '<input id="txtCCcode' + cnt + '" name="" disabled type="text" class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5 form-control input-sm  text_Display  "/>' +
-            '<input id="txtCC_DESCA' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  text_Display"/>' +
-            "</div>" +
-            '</div>' +
-            ' </div></div>' +
-            '<input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtVatNatID' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtDiscountPrc' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtDiscountAmount' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtNetUnitPrice' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtREMARK' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtACTUAL_DATE' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
-            '<input id="txtVatApplied' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
+        html = "<tr id=\"No_Row2" + cnt + "\">\n                    <input id=\"txtInvoiceRetDetailid" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtInvoiceRetID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />   \n                    <input id=\"txtInvoiceDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />   \n                    <input id=\"txtItemid" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />   \n                    <input id=\"txtUomID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />   \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus2" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTR_SERIAL" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + cnt + "\"/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              \t<input id=\"txtItemCode" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtitm_DescA" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtQTY_SOLD" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-check\">\n                            <input id=\"txtQTY_RET" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n                        </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtUnitprice" + cnt + "\" type=\"text\"   class=\"form-control\" disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtItemTotal" + cnt + "\" type=\"text\"   class=\"form-control\" disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtVatPrc" + cnt + "\" type=\"text\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatAmount" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtNet" + cnt + "\" type=\"text\" disabled class=\"form-control\"   value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCCcode" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCC_DESCA" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"/>\n\t                    </div>\n                    </td>\n                    <input id=\"txt_StatusFlag2" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txtVatNatID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                     <input id=\"txtDiscountPrc" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                     <input id=\"txtDiscountAmount" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                     <input id=\"txtNetUnitPrice" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                     <input id=\"txtREMARK" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txtACTUAL_DATE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txtVatApplied" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        //html = '<div id= "No_Row2' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
+        //    '<span id="btn_minus2' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtInvoiceRetDetailid' + cnt + '" type="hidden" class="form-control input-sm right2 display_none " value="0" />' +
+        //    '<input id="txtInvoiceRetID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    '<input id="txtInvoiceDetailID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    '<input id="txtItemid' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    '<input id="txtUomID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
+        //    '<input id="txtTR_SERIAL' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
+        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
+        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
+        //    '<input id="txtitm_DescA' + cnt + '" name="" disabled type="text" class="form-control col-lg-9 col-md-9 col-sm-9 col-xl-9 col-xs-9 input-sm  text_Display"/>' +
+        //    '</div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtQTY_SOLD' + cnt + '" type="text" class="form-control input-sm right2" disabled value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtQTY_RET' + cnt + '" type="text" class="form-control input-sm right2 ReturnQtyCss"  value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtUnitprice' + cnt + '" type="text"   class="form-control input-sm right2" disabled value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtItemTotal' + cnt + '" type="text"   class="form-control input-sm right2" disabled value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtVatPrc' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtVatAmount' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
+        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
+        //    '<input id="txtNet' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
+        //    "<div class='col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 positionSer_Return_Pur' style=''>" +
+        //    '<input id="txtCCcode' + cnt + '" name="" disabled type="text" class="col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5 form-control input-sm  text_Display  "/>' +
+        //    '<input id="txtCC_DESCA' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  text_Display"/>' +
+        //    "</div>" +
+        //    '</div>' +
+        //    ' </div></div>' +
+        //    '<input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtVatNatID' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtDiscountPrc' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtDiscountAmount' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtNetUnitPrice' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtREMARK' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtACTUAL_DATE' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>' +
+        //    '<input id="txtVatApplied' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
         $("#div_Data").append(html);
         $("#txtQTY_RET" + cnt).on('change', function () {
             //***Validaion
@@ -883,7 +884,7 @@ var ServPurInvoiceRet;
         }
     }
     function Button_privialges() {
-        btnadd.disabled = !SysSession.CurrentPrivileges.AddNew;
+        btnAdd.disabled = !SysSession.CurrentPrivileges.AddNew;
         btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
     }
     //*************************Print**************************//

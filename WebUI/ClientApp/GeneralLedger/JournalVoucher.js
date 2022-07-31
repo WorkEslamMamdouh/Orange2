@@ -76,7 +76,7 @@ var JournalVoucher;
     //buttons
     var btnShow;
     var btnAdd;
-    var btnEdit;
+    var btnUpdate;
     var btnSave;
     var btnSaveTemp;
     var btnBackTemp;
@@ -176,7 +176,7 @@ var JournalVoucher;
         //buttons
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnEdit");
+        btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnSaveTemp = document.getElementById("btnSaveTemp");
         btnBackTemp = document.getElementById("btnBackTemp");
@@ -207,7 +207,7 @@ var JournalVoucher;
         btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnEdit_onclick;
         btnAddDetails.onclick = AddNewRow;
         txtSearch.onkeyup = txtSearch_onKeyup;
         btnAuthorize.onclick = btnAuthorize_onclick;
@@ -353,7 +353,7 @@ var JournalVoucher;
         $("#btnAuthorize").attr("disabled", "disabled");
         $("#btnUnAuthorize").addClass("display_none");
         $("#btnPost").attr("disabled", "disabled");
-        $("#btnEdit").attr("disabled", "disabled");
+        $("#btnUpdate").attr("disabled", "disabled");
         $('#DivTemplate').removeClass('showdiv');
         $('#spandiv_contentliest').removeClass('fa-caret-left');
         $('#spandiv_contentliest').addClass('fa-caret-down');
@@ -602,8 +602,8 @@ var JournalVoucher;
             $("#btnUnAuthorize").addClass("display_none");
             $("#btnAuthorize").removeClass("display_none");
             $("#btnPost").attr("disabled", "disabled");
-            $("#btnEdit").removeAttr("disabled");
-            btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+            $("#btnUpdate").removeAttr("disabled");
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
             btnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
             txtAuthorizedBy.value = "";
             txtAuthorizedAt.value = "";
@@ -619,7 +619,7 @@ var JournalVoucher;
             btnUnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM3;
             $("#btnAuthorize").addClass("display_none");
             btnPost.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-            $("#btnEdit").attr("disabled", "disabled");
+            $("#btnUpdate").attr("disabled", "disabled");
             txtPostedBy.value = "";
             txtPostedAt.value = "";
         }
@@ -634,7 +634,7 @@ var JournalVoucher;
             $("#btnUnAuthorize").addClass("display_none");
             $("#btnAuthorize").removeClass("display_none");
             $("#btnPost").attr("disabled", "disabled");
-            $("#btnEdit").attr("disabled", "disabled");
+            $("#btnUpdate").attr("disabled", "disabled");
         }
     }
     //------------------------------------------------------ Validation Region -----------------------------------
@@ -887,7 +887,7 @@ var JournalVoucher;
     function HideButtons() {
         $("#btnReverseVoucher").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnAuthorize").addClass("display_none");
         $("#btnUnAuthorize").addClass("display_none");
         $("#btnPost").addClass("display_none");
@@ -897,7 +897,7 @@ var JournalVoucher;
     function ShowButons() {
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnReverseVoucher").removeClass("display_none");
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnAuthorize").removeClass("display_none");
         $("#btnUnAuthorize").addClass("display_none");
         $("#btnPost").removeClass("display_none");
@@ -1811,7 +1811,7 @@ var JournalVoucher;
                     var res = result.Response;
                     if (AuthorizeFlag == true) {
                         DisplayMassage('تم التصديق بنجاح', '(Success)', MessageType.Succeed);
-                        $("#btnEdit").attr("disabled", "disabled");
+                        $("#btnUpdate").attr("disabled", "disabled");
                         $("#btnAuthorize").removeAttr("disabled");
                         $("#btnPost").removeAttr("disabled");
                         $("#btnAuthorize").addClass("display_none");
@@ -1820,7 +1820,7 @@ var JournalVoucher;
                     }
                     else if (PostFlag == true) {
                         DisplayMassage('تم الترحيل  بنجاح', '(success)', MessageType.Succeed);
-                        $("#btnEdit").attr("disabled", "disabled");
+                        $("#btnUpdate").attr("disabled", "disabled");
                         $("#btnAuthorize").attr("disabled", "disabled");
                         $("#btnPost").attr("disabled", "disabled");
                         $("#btnAuthorize").removeClass("display_none");
@@ -1887,7 +1887,7 @@ var JournalVoucher;
                     GlobalVoucherID = res.VoucherID;
                     DisplayMassage('تم فك الاعتماد بنجاح', '(Success)', MessageType.Succeed);
                     rdNew.checked = true;
-                    $("#btnEdit").removeAttr("disabled");
+                    $("#btnUpdate").removeAttr("disabled");
                     $("#btnAuthorize").removeAttr("disabled");
                     $("#btnPost").attr("disabled", "disabled");
                     $("#btnAuthorize").removeClass("display_none");
