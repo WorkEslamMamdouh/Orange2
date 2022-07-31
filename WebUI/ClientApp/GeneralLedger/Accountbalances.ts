@@ -56,7 +56,10 @@ namespace Accountbalances {
         {
             document.getElementById('Screen_name').innerHTML == "general ledger";  
         }
-
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
          
         InitalizeControls();
         InitalizeEvents();
