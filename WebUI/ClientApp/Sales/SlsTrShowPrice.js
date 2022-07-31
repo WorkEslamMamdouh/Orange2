@@ -681,6 +681,7 @@ var SlsTrShowPrice;
             TypeFlag = false;
         }
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
+        ddlStore.disabled = false;
     }
     function InitializeGrid() {
         var res = GetResourceList("");
@@ -1654,6 +1655,7 @@ var SlsTrShowPrice;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     $('#divCreationPanel').removeClass("display_none");
                     $('#txtUpdatedBy').prop("value", res.UpdatedBy);
@@ -2166,7 +2168,7 @@ var SlsTrShowPrice;
         });
     }
     function chkActive_onchecked() {
-        if (btnUpdate.getAttribute('class') != 'btn btn-primary display_none') {
+        if (txtInvoiceCustomerName.disabled == true) {
             if (chkActive.checked == false) {
                 openInvoice();
             }

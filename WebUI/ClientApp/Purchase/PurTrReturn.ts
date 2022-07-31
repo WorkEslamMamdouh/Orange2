@@ -127,8 +127,7 @@ namespace PurTrReturn {
         InitalizeControls();
         IntializeEvents();        
         txtFromDate.value = GetDate();
-        txtToDate.value = GetDate();
-        $("#txtDateHeader").val(GetDate());
+        txtToDate.value = GetDate(); 
         FillddlVendorMaster();
         FillddlSalesmanMaster();
         FillddlReturnType();
@@ -1805,6 +1804,7 @@ namespace PurTrReturn {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Pur_TR_Receive;
+                    DateSetsSccess("txtInvoiceDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return has been created' + res.TrNo, MessageType.Succeed);
                     lblReturnNumber.value =   res.TrNo.toString();
                     $('#divCreationPanel').removeClass("display_none");

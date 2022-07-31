@@ -1966,29 +1966,7 @@ function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
 }
 
 
-
-
-
-function DateSetsSccess(TxtDateProcesses: string, TxtDatefrom: string): string {
-
-    let DateProcesses = $('#' + TxtDateProcesses + '').val()
-    let Datefrom = $('#' + TxtDatefrom + '').val()
-
-    var check = Date.parse(DateProcesses);
-    var from = Date.parse(Datefrom);
-
-    if ((check < from)) {
-        $('#' + TxtDateProcesses + '').val(DateProcesses)
-        $('#' + TxtDatefrom + '').val(DateProcesses)
-        return DateProcesses;
-    }
-    else {
-        $('#' + TxtDateProcesses + '').val(DateProcesses)
-        $('#' + TxtDatefrom + '').val(Datefrom)
-        return Datefrom;
-    }
-
-}
+ 
 
 function Cheak_UserTokenlog() {
     var SysSession = GetSystemEnvironment();
@@ -2079,3 +2057,42 @@ function printDiv(divName: string) {
 
 
 }
+
+
+
+
+function DateSetsSccess(TxtDateProcesses: string, TxtDatefrom: string, TxtDateend: string) {
+
+    let DateProcesses = $('#' + TxtDateProcesses + '').val()
+    let Datefrom = $('#' + TxtDatefrom + '').val()
+    let Dateend = $('#' + TxtDateend + '').val()
+
+    var check = Date.parse(DateProcesses);
+    var from = Date.parse(Datefrom);
+    var End = Date.parse(Dateend);
+
+    if ((check < from)) {
+
+        $('#' + TxtDatefrom + '').val(DateProcesses)
+
+    }
+    else {
+
+        $('#' + TxtDatefrom + '').val(Datefrom)
+
+    }
+
+    if ((check > End)) {
+
+        $('#' + TxtDateend + '').val(DateProcesses)
+
+    }
+    else {
+
+        $('#' + TxtDateend + '').val(Dateend)
+
+    }
+
+
+}
+

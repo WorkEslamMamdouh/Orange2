@@ -771,7 +771,7 @@ namespace SlsTrShowPrice {
             TypeFlag = false;
         }
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
-
+        ddlStore.disabled = false;
     }
     function InitializeGrid() {
         let res: any = GetResourceList("");
@@ -1941,6 +1941,7 @@ namespace SlsTrShowPrice {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Sls_TR_Invoice;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
 
                     $('#divCreationPanel').removeClass("display_none");
@@ -2525,7 +2526,7 @@ namespace SlsTrShowPrice {
     }
     function chkActive_onchecked() {
 
-        if (btnUpdate.getAttribute('class') != 'btn btn-primary display_none') {
+        if (txtInvoiceCustomerName.disabled == true) {
             if (chkActive.checked == false) {
                 openInvoice();
             }

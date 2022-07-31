@@ -326,7 +326,8 @@
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
-    <Compile Include="Models\CustomModel\LastPrice.cs" />
+    <Compile Include="Models\CustomModel\ModelLastPurchase.cs" />
+    <Compile Include="Models\CustomModel\ModelLastPrice.cs" />
     <Compile Include="Models\CustomModel\Stk_TR_IssueToCCMasterDetails.cs" />
     <Compile Include="Models\CustomModel\ICollectMasterDetails.cs" />
     <Compile Include="Models\CustomModel\IQCollectMasterDetails.cs" />

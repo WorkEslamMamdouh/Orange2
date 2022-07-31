@@ -1268,6 +1268,7 @@ namespace DirectTransfer {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Transfer;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  تحويل رقم " + res.Tr_No, 'Transfer number ' + res.Tr_No + 'has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.TransfareID;
@@ -1302,6 +1303,7 @@ namespace DirectTransfer {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Transfer;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Editied successfully' + res.Tr_No, MessageType.Succeed);
                     Save();
                     AfterInsertOrUpdateFlag = true;

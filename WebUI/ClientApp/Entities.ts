@@ -10610,5 +10610,24 @@ class ModelLastPrice extends SecurityClass {
     public Curcost: number; 
    
 }
- 
+
+
+
+class ModelLastPurchase extends SecurityClass {
+    constructor() {
+        super();
+        this.VndLastPrice = 0;
+        this.VndLastTr = 0;
+        this.VndLastDate = ''; 
+        this.LastPurchase = 0;
+        this.Curcost = 0;
+    }
+    public VndLastPrice: number;
+    public VndLastTr: number;
+    public VndLastDate: string; 
+    public LastPurchase: number;
+    public Curcost: number;
+
+}
+
 

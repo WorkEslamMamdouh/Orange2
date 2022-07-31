@@ -1007,6 +1007,7 @@ var ReceiveTransfer;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  استلام رقم " + res.Tr_No, 'Receipt number ' + res.Tr_No + ' has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.TransfareID;
@@ -1041,6 +1042,7 @@ var ReceiveTransfer;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'editied Successfully' + res.Tr_No, MessageType.Succeed);
                     GlobalTransferID = res.TransfareID;
                     Save();

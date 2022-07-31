@@ -44,7 +44,7 @@ namespace PurTrReceive {
     var ReceiveItemSingleModel: I_Pur_TR_ReceiveItems = new I_Pur_TR_ReceiveItems();
     var MasterDetailModel: PurReceiveMasterDetails = new PurReceiveMasterDetails();
     var AllPurReceiveMasterDetailModel: IQ_GetPurReceiveMasterDisplay = new IQ_GetPurReceiveMasterDisplay();
-    var ModelPrice: ModelLastPrice = new ModelLastPrice();
+    var ModelPurchase: ModelLastPurchase = new ModelLastPurchase();
 
     //DropDownlist
     var ddlStateType: HTMLSelectElement;
@@ -256,41 +256,45 @@ namespace PurTrReceive {
     //-----------------------------------------------------------------------------------------------------------------------------
     function LastPrice_onclick() {
 
-        if (txtVendorName.value.trim() == "") {
-            DisplayMassage('(برجاء اختيار الموارد)', '(Please select a customer)', MessageType.Error);
-            Errorinput(txtVendorName);
-            return false
-        }
-
-        if (ddlStoreHeader.value == "null") {
-            DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
-            Errorinput(ddlStoreHeader);
-
-            return false
-        }
-
-        let ChackCount = 0;
-        for (var i = 0; i < CountGrid; i++) {
-            let StatusFlag = $("#txt_StatusFlag" + i).val();
-            if (StatusFlag != "d" && StatusFlag != "m") {
-                if (ChackCount == 0) {
-                    itemid_LastPrice = $('#ddlItem' + i).val();
-                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text())
-                }
-
-                ChackCount++;
-            }
-        }
-
-        if (ChackCount == 0) {
-            DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
-            Errorinput(btnAddDetails);
-            return false
-        }
+      
 
 
 
         if (flagLastPrice % 2 === 0) {
+
+
+            if (txtVendorName.value.trim() == "") {
+                DisplayMassage('(برجاء اختيار الموارد)', '(Please select a customer)', MessageType.Error);
+                Errorinput(txtVendorName);
+                return false
+            }
+
+            if (ddlStoreHeader.value == "null") {
+                DisplayMassage('(برجاء اختيار المستودع)', '(Please select a customer)', MessageType.Error);
+                Errorinput(ddlStoreHeader);
+
+                return false
+            }
+
+            let ChackCount = 0;
+            for (var i = 0; i < CountGrid; i++) {
+                let StatusFlag = $("#txt_StatusFlag" + i).val();
+                if (StatusFlag != "d" && StatusFlag != "m") {
+                    if (ChackCount == 0) {
+                        itemid_LastPrice = $('#ddlItem' + i).val();
+                        GetLastPrice(itemid_LastPrice, $("#ddlItem" + i + " option:selected").text())
+                    }
+
+                    ChackCount++;
+                }
+            }
+
+            if (ChackCount == 0) {
+                DisplayMassage('(برجاء ادخال الاصناف الفاتوره)', '(Please select a customer)', MessageType.Error);
+                Errorinput(btnAddDetails);
+                return false
+            }
+
 
             $("#btnCustLastPrice").animate({ right: '-2%' }, 'slow');
             timerHiddenLastPrice();
@@ -312,12 +316,10 @@ namespace PurTrReceive {
     function GetLastPrice(itemid: number, Name: string) {
         debugger
         let VendorID = globalVendorID;
-        let storeid = ddlStoreHeader.value;
-        //let invid = 0;
+        let storeid = ddlStoreHeader.value; 
         let invid = GlobalReceiveID
 
-
-        //@itemid = 3236,
+         
         let flagPrice = true;
         if (itemid.toString() == 'null') {
             flagPrice = false
@@ -334,18 +336,17 @@ namespace PurTrReceive {
 
             Ajax.Callsync({
                 type: "Get",
-                url: sys.apiUrl("SlsTrSales", "GetLastPrice"),
-                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, VendorID: VendorID, storeid: storeid, invid: invid },
+                url: sys.apiUrl("PurTrReceive", "GetLastPrice"),
+                data: { CompCode: compcode, BranchCode: BranchCode, itemid: itemid, vendorid: VendorID, storeid: storeid, invid: invid },
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
-                        ModelPrice = result.Response as ModelLastPrice;
-                        $("#CustLastPrice").html(ModelPrice.CustLastPrice.toString())
-                        $("#CustLastTr").html(ModelPrice.CustLastTr.toString())
-                        $("#LastPrice").html(ModelPrice.LastPrice.toString())
-                        $("#LastPurchase").html(ModelPrice.LastPurchase.toString())
-                        $("#Curcost").html(ModelPrice.Curcost.toString())
-                        $("#custLastDate").html(ModelPrice.custLastDate.toString())
+                        ModelPurchase = result.Response as ModelLastPurchase;
+                        $("#VndLastPrice").html(ModelPurchase.VndLastPrice.toString())
+                        $("#VndLastTr").html(ModelPurchase.VndLastTr.toString()) 
+                        $("#LastPurchase").html(ModelPurchase.LastPurchase.toString())
+                        $("#Curcost").html(ModelPurchase.Curcost.toString())
+                        $("#VndLastDate").html(ModelPurchase.VndLastDate.toString())
                         $("#Name_Item").html(Name)
 
                     }
@@ -355,12 +356,11 @@ namespace PurTrReceive {
         }
         else {
 
-            $("#CustLastPrice").html("-----")
-            $("#CustLastTr").html("-----")
-            $("#LastPrice").html("-----")
+            $("#VndLastPrice").html("-----")
+            $("#VndLastTr").html("-----") 
             $("#LastPurchase").html("-----")
             $("#Curcost").html("-----")
-            $("#custLastDate").html("-----")
+            $("#VndLastDate").html("-----")
             $("#Name_Item").html("-----")
 
         }
@@ -1791,6 +1791,10 @@ namespace PurTrReceive {
                         $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
 
                     //}
+
+                    itemid_LastPrice = $('#ddlItem' + cnt).val();
+                    GetLastPrice(itemid_LastPrice, $("#ddlItem" + cnt + " option:selected").text())
+
                 }
                 ComputeTotals();
             });
@@ -1880,6 +1884,14 @@ namespace PurTrReceive {
                 $("#txt_StatusFlag" + cnt).val("u");
             $("#txtTotAddons" + cnt).val((Number($("#txtAddons" + cnt).val()) + Number($("#txtPrice" + cnt).val())));
             ComputeTotals();
+        });
+
+
+        $("#No_Row" + cnt).on('click', function () {
+            itemid_LastPrice = $('#ddlItem' + cnt).val();
+
+            GetLastPrice(itemid_LastPrice, $("#ddlItem" + cnt + " option:selected").text())
+
         });
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2166,7 +2178,7 @@ namespace PurTrReceive {
     }
     function BuildControlsCharges(cnt: number) {
         var html;
-        html = `<tr id= "No_Row1${cnt}">
+        html = `<tr id= "No_Row_1${cnt}">
                     <input id="ReceiveExpensesID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
@@ -2547,7 +2559,7 @@ namespace PurTrReceive {
             $("#txtInvoiceNumberCharge" + RecNo).val("0");
             $("#txtInvoiceDateCharge" + RecNo).val("0");
             $("#txtVendorCharge" + RecNo).val("Null");
-            $("#No_Row1" + RecNo).attr("hidden", "true");
+            $("#No_Row_1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
 
             //////////////
@@ -3112,6 +3124,7 @@ namespace PurTrReceive {
                 if (result.IsSuccess == true) {
                     debugger
                     let res = result.Response as PurReceiveMasterDetails;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number" + res.I_Pur_TR_Receive.TrNo + "has been issued", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
                     GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
@@ -3158,6 +3171,7 @@ namespace PurTrReceive {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     let res = result.Response as PurReceiveMasterDetails;
+                    DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
 
                     DisplayMassage(" تم تعديل فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number " + res.I_Pur_TR_Receive.TrNo + "has been editied", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();

@@ -1204,6 +1204,7 @@ namespace CollectUnit {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Model = result.Response as I_TR_Collect; 
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم الحفظ", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
                     Success();
@@ -1231,6 +1232,7 @@ namespace CollectUnit {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Model = result.Response as I_TR_Collect;
+                    DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم التعديل", "Saved Succesfully", MessageType.Succeed); 
                     gloplCollectID = Model.CollectID;
                     Success();

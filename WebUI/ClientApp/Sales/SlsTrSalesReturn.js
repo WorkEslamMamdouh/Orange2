@@ -376,7 +376,7 @@ var SlsTrSalesReturn;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
     }
     function chkActive_onchecked() {
-        if (btnUpdate.getAttribute('class') != 'btn btn-primary  float_left_right display_none') {
+        if (txtRemarks.disabled == true) {
             openReturn();
             $('#btnPrintTransaction').removeClass("display_none");
         }
@@ -1834,6 +1834,7 @@ var SlsTrSalesReturn;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return Number ' + res.TrNo + "has been issued", MessageType.Succeed);
                     var returnValue = res.TrNo.toString();
                     lblReturnNumber.value = returnValue.toString();
@@ -1914,6 +1915,7 @@ var SlsTrSalesReturn;
                 var result = d;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
+                    DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     GlobalReturnID = res.InvoiceID;
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", 'Return number ' + res.TrNo + ' modified Successfully', MessageType.Succeed);
                     $('#txtUpdatedBy').prop("value", res.UpdatedBy);
