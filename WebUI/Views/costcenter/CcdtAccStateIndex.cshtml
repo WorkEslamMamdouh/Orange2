@@ -26,19 +26,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-2 offset-md-2">
-                        <div class="form-check d-inline-flex">
-                            <label class="form-check-label my-auto me-4" for="rpSummary"> @SystemResource.Summary </label>
-                            <input class="form-check-input form-radio special-radio" type="radio" name="reptype" id="rpSummary" checked>
+                    <div class="col-12 col-md-2 offset-2">
+                        <div class="form-check row g-0">
+                            <label class="col-6 col-md-6  form-check-label " for="rpSummary"> @SystemResource.Summary</label>
+                            <div class="col-6 col-md-6 ">
+                                <input class="form-check-input form-radio special-radio" type="radio" name="reptype" id="rpSummary" checked>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-2">
-                        <div class="form-check d-inline-flex">
-                            <label class="form-check-label my-auto me-4" for="rpDetail"> @SystemResource.Detailed</label>
-                            <input class="form-check-input form-radio special-radio" type="radio" id="rpDetail" name="reptype">
+                        <div class="form-check row g-0">
+                            <label class="col-6 col-md-6  form-check-label" for="rpDetail"> @SystemResource.Detailed</label>
+                            <div class="col-6 col-md-6 ">
+                                <input class="form-check-input form-radio special-radio" type="radio" id="rpDetail" name="reptype">
+                            </div>
                         </div>
                     </div>
-
 
                     <div class="col-12 col-md-3">
                         <div class="form-group row g-0 d-flex justify-content-center align-items-center">
@@ -61,16 +64,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-2 offset-md-2 ">
-                        <div class="form-check d-inline-flex">
-                            <label class="form-check-label my-auto ms-3" for="rdAccount"> @SystemResource.account_distribution </label>
-                            <input class="form-check-input form-radio special-radio" type="radio" naname="price" id="rdAccount" checked>
+                    <div class="col-12 col-md-2 offset-2">
+                        <div class="form-check row g-0">
+                            <label class="col-6 col-md-6  form-check-label" for="price"> @SystemResource.account_distribution</label>
+                            <div class="col-6 col-md-6 ">
+                                <input class="form-check-input form-radio special-radio" type="radio" naname="price" id="rdAccount"  checked>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-2">
-                        <div class="form-check d-inline-flex">
-                            <label class="form-check-label my-auto ms-3" for="rpDetail"> @SystemResource.BU</label>
-                            <input class="form-check-input form-radio special-radio" type="radio" id="rdCostCntr" name="price">
+                        <div class="form-check row g-0">
+                            <label class="col-6 col-md-6  form-check-label" for="rdCostCntr"> @SystemResource.BU</label>
+                            <div class="col-6 col-md-6 ">
+                                <input class="form-check-input form-radio special-radio" type="radio" id="rdCostCntr" name="price">
+                            </div>
                         </div>
                     </div>
 
@@ -132,10 +139,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 @section Script{
     <script src="~/ClientApp/costcenter/CcdtAccState.js"></script>
     }

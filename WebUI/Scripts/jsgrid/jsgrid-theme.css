@@ -101,6 +101,8 @@
 .jsgrid-grid-body .jsgrid-row:first-child .jsgrid-cell,
 .jsgrid-grid-body .jsgrid-alt-row:first-child .jsgrid-cell {
     border-top: none;
+    white-space: pre-line;
+    line-height: 1rem;
 }
 
 .jsgrid-grid-body .jsgrid-cell:first-child {

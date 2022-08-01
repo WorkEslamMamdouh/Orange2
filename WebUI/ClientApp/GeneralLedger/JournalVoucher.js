@@ -964,45 +964,46 @@ var JournalVoucher;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-            '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-            '<div class="col-lg-1" style="width:6%">' +
-            '<span title="حذف(Delete) " id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3 "></span>' +
-            '<span title="نسخ(Copy)" id=btn_Copy' + cnt + ' class=" glyphicon  glyphicon-duplicate fontitm5 hover1JournalVoucher"></span>' +
-            '<span title="ادراج(Add)" id=btn_Insert' + cnt + ' class=" glyphicon  glyphicon-share	 fontitm5 hover1JournalVoucher "></span>' +
-            '</div>' +
-            '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (CountGrid + 1) + '" class="form-control  text_Display" />' +
-            '<div class="col-lg-1" style="width:11.5%;">' +
-            '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearchAcc' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            '<input id="txtAccNumber' + cnt + '" name="" disabled type="text" class="col-lg-9 form-control  text_Display" /></div>' +
-            '<div class="col-lg-2 Acc" style=" ">' +
-            '<input id="txtAccName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1" style="width:11.5%;">' +
-            '<input id="txtDebit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1" style="width:11.5%;">' +
-            '<input id="txtCredit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-            '<div class="col-lg-1 ccType" style="width: 11%;">' +
-            '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCostCenter' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search ccType "></i></button>' +
-            '<input id="txtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
-            '</div>' +
-            '<div class="col-lg-2 ccType costcntr ">' +
-            '<input id="txtCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
-            //////////////
-            '<div id="divJouralHide' + cnt + '" class="col-lg-9 JournalVouchergred">' +
-            '<div class="col-lg-2 ccTypeBranch">' +
-            '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCCdtTypes' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search ccTypeBranch "></i></button>' +
-            '<input id="txtCCDtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
-            '</div>' +
-            '<div class="col-lg-4 p-0 ccTypeBranch costcntrCCDt ">' +
-            '<input id="txtCCDTCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
-            '<div class="col-lg-6 p-0">' +
-            '<input id="Notes' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display" /></div>' +
-            '</div>' +
-            '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-            '</div>';
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"" + (CountGrid + 1) + "\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t\t                <span id=\"btn_Copy" + cnt + "\"><i class=\"fas fa-clone fs-4 btn-copy\"></i></span>\n\t\t\t                <span id=\"btn_Insert" + cnt + "\"><i class=\"fas fa-plus-circle fs-4 btn-plus\"></i></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCCdtTypes" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCCDtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCCDTCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
+        //    '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1" style="width:6%">' +
+        //    '<span title="حذف(Delete) " id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3 "></span>' +
+        //    '<span title="نسخ(Copy)" id=btn_Copy' + cnt + ' class=" glyphicon  glyphicon-duplicate fontitm5 hover1JournalVoucher"></span>' +
+        //    '<span title="ادراج(Add)" id=btn_Insert' + cnt + ' class=" glyphicon  glyphicon-share	 fontitm5 hover1JournalVoucher "></span>' +
+        //    '</div>' +
+        //    '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (CountGrid + 1) + '" class="form-control  text_Display" />' +
+        //    '<div class="col-lg-1" style="width:11.5%;">' +
+        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearchAcc' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search"></i></button>' +
+        //    '<input id="txtAccNumber' + cnt + '" name="" disabled type="text" class="col-lg-9 form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-2 Acc" style=" ">' +
+        //    '<input id="txtAccName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1" style="width:11.5%;">' +
+        //    '<input id="txtDebit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1" style="width:11.5%;">' +
+        //    '<input id="txtCredit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
+        //    '<div class="col-lg-1 ccType" style="width: 11%;">' +
+        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCostCenter' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search ccType "></i></button>' +
+        //    '<input id="txtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
+        //    '</div>' +
+        //    '<div class="col-lg-2 ccType costcntr ">' +
+        //    '<input id="txtCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
+        //    ////////////
+        //    '<div id="divJouralHide' + cnt + '" class="col-lg-9 JournalVouchergred">' +
+        //    '<div class="col-lg-2 ccTypeBranch">' +
+        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCCdtTypes' + cnt + '" name="ColSearch">   ' +
+        //    '<i class="fa fa-search ccTypeBranch "></i></button>' +
+        //    '<input id="txtCCDtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
+        //    '</div>' +
+        //    '<div class="col-lg-4 p-0 ccTypeBranch costcntrCCDt ">' +
+        //    '<input id="txtCCDTCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
+        //    '<div class="col-lg-6 p-0">' +
+        //    '<input id="Notes' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display" /></div>' +
+        //    '</div>' +
+        //    '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
+        //    '</div>';
         $("#div_Data").append(html);
         //// First Search
         $('#btnSearchAcc' + cnt).click(function (e) {

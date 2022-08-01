@@ -23380,7 +23380,6 @@ code {
         display: block;
         padding-right: 0.625rem;
         font-size: 1rem;
-        line-height: 1;
         font-weight:bold;
         color: var(--main-blue);
     }
@@ -29187,6 +29186,7 @@ div.tagsinput {
     }
 .inside-table .btn-minus,
 .inside-table .btn-plus,
+.inside-table .btn-copy,
 .inside-table .btn-down {
     transition: all 0.2s ease-in-out;
     color: var(--bs-gray);
@@ -29197,7 +29197,8 @@ div.tagsinput {
     .inside-table .btn-plus:hover {
         color: green;
     }
-    .inside-table .btn-down:hover {
+    .inside-table .btn-down:hover,
+    .inside-table .btn-copy:hover {
         color: var(--main-blue);
     }
 .inside-table .form-check {
@@ -29578,14 +29579,16 @@ input[class=checkbox]:checked:before {
 .special-field {
     border: .5px solid var(--main-orange);
 }
-
 .special-group {
     border: .5px solid var(--main-orange);
     border-radius: 5px;
     padding-right: 10px;
 }
-
 .special-radio {
     height: 2rem;
     width: 2rem;
+}
+/*Cursor*/
+.cursor-pointer{
+    cursor: pointer;
 }
