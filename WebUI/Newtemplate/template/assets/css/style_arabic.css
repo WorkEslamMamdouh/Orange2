@@ -29230,33 +29230,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
-.special-field{
-    border: .5px solid var(--main-orange);
-}
-.special-group {
-    border: .5px solid var(--main-orange);
-    border-radius: 5px;
-    padding-right:10px;
-}
 /*Disabled Style*/
-/*
-.form-control[disabled] {
-    background-color: #dadada;
-    opacity: 1;
-    border: none;
-    font-size: .9rem;
-}
-.search-content .form-control[disabled] + .btn-search {
-    display: none;
-}
-.search-content .form-control[disabled] {
-    padding-right: 7%;
-}
-select.form-control[disabled] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}*/
 .display_none {
     display: none !important;
 }
@@ -29272,8 +29246,6 @@ select.form-control[disabled] {
     font-size: .9rem;
     line-height: 1rem;
     text-align: right;
-    /*margin-top:-.25rem;
-    margin-bottom:-.25rem;*/
 }
 
 label.form-control[disabled]:not(.search-control) {
@@ -29601,4 +29573,19 @@ input[class=checkbox]:checked:before {
     height: 1em;
     margin-top: 0;
     vertical-align: initial;
+}
+/*Special Style*/
+.special-field {
+    border: .5px solid var(--main-orange);
+}
+
+.special-group {
+    border: .5px solid var(--main-orange);
+    border-radius: 5px;
+    padding-right: 10px;
+}
+
+.special-radio {
+    height: 2rem;
+    width: 2rem;
 }

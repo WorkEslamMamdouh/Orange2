@@ -4,67 +4,6 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-@*<style>
-        .inner tr td {
-            border-top: none !important;
-        }
-
-        .style_pading {
-            padding-left: 1px;
-            padding-right: 1px;
-        }
-
-        .table_11 tr td:nth-child(3) {
-            width: 200px;
-        }
-
-        .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
-            width: 120px;
-        }
-
-        .table_11 {
-            margin-bottom: 0px;
-        }
-
-        .auto-style1 {
-            background-color: #F5F5F5;
-        }
-
-        .display_none {
-            display: none !important;
-        }
-
-        #btnAddDetails {
-            font-size: 40px;
-        }
-
-            #btnAddDetails:hover {
-                color: #24b414;
-            }
-
-        #btnAddDetails2 {
-            font-size: 40px;
-        }
-
-            #btnAddDetails2:hover {
-                color: #24b414;
-            }
-
-        #btnAddDetails3 {
-            font-size: 40px;
-        }
-
-            #btnAddDetails3:hover {
-                color: #24b414;
-            }
-
-        .glyphicon-remove-sign:hover {
-            color: red
-        }
-
-        .minus_btn {
-        }
-    </style>*@
 <div class="row gy-3" id="divnotifications">
     <!-- Filter Container -->
     <div id="div_dis" class="col-12">
@@ -87,33 +26,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-3 col-md-offset-3">
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-check d-inline-flex">
-                                            <input class="form-check-input form-radio" type="radio" name="reptype" id="rpSummary" checked>
-                                            <label class="form-check-label" for="rpSummary"> @SystemResource.Summary </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-check d-inline-flex">
-                                            <input class="form-check-input form-radio" type="radio" id="rpDetail" name="reptype">
-                                            <label class="form-check-label" for="rpDetail"> @SystemResource.Detailed</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-12 col-md-2 offset-md-2">
+                        <div class="form-check d-inline-flex">
+                            <label class="form-check-label my-auto me-4" for="rpSummary"> @SystemResource.Summary </label>
+                            <input class="form-check-input form-radio special-radio" type="radio" name="reptype" id="rpSummary" checked>
                         </div>
                     </div>
+                    <div class="col-12 col-md-2">
+                        <div class="form-check d-inline-flex">
+                            <label class="form-check-label my-auto me-4" for="rpDetail"> @SystemResource.Detailed</label>
+                            <input class="form-check-input form-radio special-radio" type="radio" id="rpDetail" name="reptype">
+                        </div>
+                    </div>
+
 
                     <div class="col-12 col-md-3">
                         <div class="form-group row g-0 d-flex justify-content-center align-items-center">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.p_account_number </label>
                             <div class="col-9 col-md-8">
                                 <div class="search-content">
-                                    <input id="txtAccountCode" name="" type="text" class="form-control" >
+                                    <input id="txtAccountCode" name="" type="text" class="form-control">
                                     <button type="button" id="btnAccountSearch" name="ColSearch" class="btn btn-main btn-search">
                                         <i class="fas fa-search"></i>
                                     </button>
@@ -129,24 +61,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-3 col-md-offset-3">
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-check d-inline-flex">
-                                            <input class="form-check-input form-radio" type="radio" naname="price" id="rdAccount" checked>
-                                            <label class="form-check-label" for="rdAccount"> @SystemResource.account_distribution </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-check d-inline-flex">
-                                            <input class="form-check-input form-radio" type="radio" id="rdCostCntr" name="price">
-                                            <label class="form-check-label" for="rpDetail"> @SystemResource.BU</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-12 col-md-2 offset-md-2 ">
+                        <div class="form-check d-inline-flex">
+                            <label class="form-check-label my-auto ms-3" for="rdAccount"> @SystemResource.account_distribution </label>
+                            <input class="form-check-input form-radio special-radio" type="radio" naname="price" id="rdAccount" checked>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <div class="form-check d-inline-flex">
+                            <label class="form-check-label my-auto ms-3" for="rpDetail"> @SystemResource.BU</label>
+                            <input class="form-check-input form-radio special-radio" type="radio" id="rdCostCntr" name="price">
                         </div>
                     </div>
 

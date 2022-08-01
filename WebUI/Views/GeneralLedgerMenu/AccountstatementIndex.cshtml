@@ -1,9 +1,6 @@
 ﻿@using Inv.WebUI.Resources
 @{
-    /**/
-
     ViewBag.Title = "Accountstatement";
-
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
@@ -29,17 +26,29 @@
                             </div>
                         </div>
                     </div>
+          
+
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.insert_restrictions</label>
-                            <div class="col-8">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="chk_Certified" name="CUSTOM6" checked>
-                                    <label class="form-check-label" for="reptp1"> @SystemResource.Certification </label>
-                                </div>
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="chk_New" name="CUSTOM6">
-                                    <label class="form-check-label" for="reptp2"> @SystemResource.newest</label>
+                            <label class="col-2 col-md-2 align-self-center p-md-0"> @SystemResource.insert_restrictions</label>
+                            <div class="col-10 col-md-10">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-check row g-0">
+                                            <label class="col-6 col-md-6  form-check-label align-self-center p-md-0" for="chk_Certified"> @SystemResource.Certification</label>
+                                            <div class="col-6 col-md-6 ">
+                                                <input class="form-check-input" type="checkbox" id="chk_Certified" name="CUSTOM6">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-check row g-0">
+                                            <label class="col-6 col-md-6 form-check-label align-self-center p-md-0" for="chk_New"> @SystemResource.newest</label>
+                                            <div class="col-6 col-md-6 ">
+                                                <input class="form-check-input" type="checkbox" id="chk_New" name="CUSTOM6">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +121,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4 offset-2">
                         <div class="form-check row g-0">
                             <label class="col-5 col-md-4 form-check-label align-self-center p-md-0" for="txtIsPurchase"> @SystemResource.Hide_zero_accounts</label>
                             <div class="col-7 col-md-7 mr-4">
