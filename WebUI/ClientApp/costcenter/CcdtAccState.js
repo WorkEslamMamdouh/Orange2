@@ -83,6 +83,10 @@ var CcdtAccState;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
     }
     function InitalizeEvents() {
         btnAccountSearch.onclick = btnAccountSearch_onclick;

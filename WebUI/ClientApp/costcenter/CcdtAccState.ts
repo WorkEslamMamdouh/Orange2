@@ -100,7 +100,10 @@ namespace CcdtAccState {
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
-
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");ss
 
     }
     function InitalizeEvents() {

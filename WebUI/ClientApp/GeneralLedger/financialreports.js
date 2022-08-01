@@ -34,6 +34,10 @@ var financialreports;
         else {
             document.getElementById('Screen_name').innerHTML == "[Financial Reports";
         }
+        $("#iconMainPages").addClass("d-none");
+        $("#iconReportPages").removeClass("d-none");
+        $("#btnPrintTrview").addClass("print-report");
+        $("#btnPrintTrview span").text("عرض تقرير");
         InitalizeControls();
         InitalizeEvents();
         txtFromDate.value = DateStartMonth();
