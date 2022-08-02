@@ -55,6 +55,7 @@ namespace ManagementVoucher {
     var btnUnauthorize: HTMLButtonElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     export function InitalizeComponent() {
+        $("#Mod_Flag").val('1')
         //System
         //debugger
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -98,6 +99,12 @@ namespace ManagementVoucher {
         InitializeGrid();
         btnShow_onclick();
         $('#btnPrint').addClass('display_none');     
+        $('#btnAdd').addClass('display_none');  
+        $('#icon-bar').addClass('display_none');  
+        $('#btnUpdate').addClass('display_none');  
+        $('#btnPrintTransaction').addClass('display_none');  
+        $('#btnSave').addClass('display_none');  
+        $('#btnBack').addClass('display_none');  
 
     }
     //------------------------------------------------------ Main Region -----------------------------------
@@ -303,7 +310,7 @@ namespace ManagementVoucher {
                     txt.id = "" + item.VOUCHER_CODE + "";
 
                     txt.style.height = "25px";
-                    txt.style.width = "70px";
+                    txt.style.width = "25px";
                     txt.onclick = (e) => {
                         //item.s = Number(txt.value);
                          
@@ -338,13 +345,13 @@ namespace ManagementVoucher {
                     return txt;
                 }
             },
-            { title: res.App_Registration_Number, name: "VOUCHER_CODE", type: "text", width: "100px" },
+            { title: res.App_Registration_Number, name: "VOUCHER_CODE", type: "text", width: "50px" },
             { title: res.App_date, name: "VOUCHER_DATE", type: "text", width: "100px" },
-            { title: res.App_desc, name: "VOUCHER_DESC", type: "text", width: "100px" },
+            { title: res.App_desc, name: "VOUCHER_DESC", type: "text", width: "200px" },
             { title: res.source, name: (lang == "ar" ? "Src_DescA" : "Src_DescE"), type: "text", width: "100px" },
             { title: res.App_Type, name: (lang == "ar" ? "TYPE_DESCA" : "TYPE_DESCE"), type: "text", width: "100px" },
             //  { title: "الاجمالي", name: "Openbalance", type: "text", width: "100px" },
-            { title: res.App_State, name: (lang == "ar" ? "St_DescA" : "St_DescE"), type: "text", width: "100px" },
+            { title: res.App_State, name: (lang == "ar" ? "St_DescA" : "St_DescE"), type: "text", width: "50px" },
 
         ];
  

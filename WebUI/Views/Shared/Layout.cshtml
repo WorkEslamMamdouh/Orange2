@@ -53,15 +53,15 @@
     <div class="iconbar-container">
         <!--   Icon Bar Definition -->
         <div class="details-iconbar d-flex justify-content-start hidden_Control" id="iconbar_Definition">
-            <button class="icon-bar d-flex justify-content-between view   " style="position: fixed;" id="btnUpdate_Def">
+            <button class="icon-bar d-flex justify-content-between  btnUpdate_Def " style="position: fixed;" id="btnUpdate_Def">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_Update</span>
             </button> 
-            <button class="icon-bar d-flex justify-content-between add display_none" style="position: fixed;" id="btnSave_Def">
+            <button class="icon-bar d-flex justify-content-between btnSave_Def display_none" style="position: fixed;" id="btnSave_Def">
                 <i class="fas fa-save fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_save</span>
             </button>
-            <button class="icon-bar d-flex justify-content-between viewresult display_none" style="position: fixed;" id="btnBack_Def">
+            <button class="icon-bar d-flex justify-content-between  btnBack_Def display_none" style="position: fixed;" id="btnBack_Def">
                 <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_back</span>
             </button>
@@ -217,8 +217,8 @@
                                 @*<a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
                             @*<li style="display:none" id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
-                                   <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
-                            </li>*@
+                           <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
+                    </li>*@
                             <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item d-flex justify-content-between mb-1">
                                 <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
                                 @*   <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
@@ -257,7 +257,7 @@
                     </a>
                     <div class="collapse" id="MInventory">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnDirecttransfer"  key="Directtransfer" class="nav-item"> <a id="btnDirecttransfer" class="nav-link" href="#">@SystemResource.Directtransfer</a></li>
+                            <li id="btnDirecttransfer" key="Directtransfer" class="nav-item"> <a id="btnDirecttransfer" class="nav-link" href="#">@SystemResource.Directtransfer</a></li>
                             <li id="btnSTKAdjust" key="STKAdjust" class="nav-item"> <a id="btnSTKAdjust" class="nav-link" href="#">@SystemResource.Stocksettlement</a></li>
                             <li id="btnCollectUnit" key="CollectUnit" class="nav-item"> <a id="btnCollectUnit" class="nav-link" href="#">@SystemResource.Inv_CollectUnit</a></li>
                             <li id="btnReceiveTransfer" key="ReceiveTransfer" class="nav-item"> <a id="btnReceiveTransfer" class="nav-link" href="#">@SystemResource.Receipttransfer</a></li>
@@ -270,7 +270,7 @@
                         </ul>
                     </div>
                 </li>
-            
+
                 <li class="nav-item menu-items MED display_none" id="btnReportMenu">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnReportMenu" aria-expanded="false" aria-controls="MbtnReportMenu">
                         <span class="menu-icon">
@@ -374,7 +374,7 @@
                 <li class="nav-item menu-items MED display_none" id="btnGeneralledgerMenu">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnGeneralledgerMenu" aria-expanded="true" aria-controls="Mbtnservicesystem">
                         <span class="menu-icon">
-                            <i class="fas fa-coins"></i>
+                            <i class="fas fa-user-edit"></i>
                         </span>
                         <span class="menu-title">@SystemResource.mnue_generalteacher</span>
                         <i class="menu-arrow"></i>
@@ -393,7 +393,29 @@
                             <li id="btnCcdtAccState" key="CcdtAccState" class="nav-item"> <a id="btnCcdtAccState" class="nav-link" href="#">@SystemResource.Men_CcdtAccState</a></li>
                         </ul>
                     </div>
-                </li>            </ul>
+                </li>
+
+                <li class="nav-item menu-items MED display_none" id="btnAccDefinitionMen">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnAccDefinitionMen" aria-expanded="true" aria-controls="MbtnAccDefinitionMen">
+                        <span class="menu-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Men_AccDefinitionMen</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MbtnAccDefinitionMen">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnAccDefCustomer" key="AccDefCustomer" class="nav-item"> <a id="btnAccDefCustomer" class="nav-link" href="#">@SystemResource.Men_AccDefCustomer</a></li>
+                            <li id="btnAccDefSalesmen" key="AccDefSalesmen" class="nav-item"> <a id="btnAccDefSalesmen" class="nav-link" href="#">@SystemResource.Men_AccDefSalesmen</a></li>
+                            <li id="btnAccDefExpenses" key="AccDefExpenses" class="nav-item"> <a id="btnAccDefExpenses" class="nav-link" href="#">@SystemResource.Men_AccDefExpenses</a></li>
+                            <li id="btnAccDefReceipts" key="AccDefReceipts" class="nav-item"> <a id="btnAccDefReceipts" class="nav-link" href="#">@SystemResource.Men_AccDefReceipts</a></li>
+                            <li id="btnAccDefVendor" key="AccDefVendor" class="nav-item"> <a id="btnAccDefVendor" class="nav-link" href="#">@SystemResource.Men_AccDefVendor</a></li>
+                            <li id="btnAccDefBox" key="AccDefBox" class="nav-item"> <a id="btnAccDefBox" class="nav-link" href="#">@SystemResource.Men_AccDefBox</a></li>
+                            <li id="btnDtcostcenter" key="Dtcostcenter" class="nav-item"> <a id="btnDtcostcenter" class="nav-link" href="#">@SystemResource.costsubcenters</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </nav>
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_navbar.html -->

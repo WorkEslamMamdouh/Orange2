@@ -63,6 +63,8 @@ namespace CostCenter {
             document.getElementById('Screen_name').innerHTML = "Cost Center";
 
         }
+        $('#divIconbar').addClass("display_none");
+        $('#icon-bar').addClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -174,11 +176,11 @@ namespace CostCenter {
         }
 
         if (Detail == 0) {
-            class_Plus = 'glyphicon-plus glyphicon-plusicon-white glyphicon ';
+            class_Plus = 'fas fa-plus-circle ';
         }
         else {
-            class_Plus = '  glyphicon-plusicon-white ';
-            style_Plus = 'height: 18px;width: 21px; background-color: #05af1a;';
+            class_Plus = 'fas fa-plus-circle ';
+            style_Plus = 'height: 1.25rem;width: 1.25rem; background-color: var(--dark-blue) ;  border-radius:50%; margin:auto;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');
@@ -342,7 +344,7 @@ namespace CostCenter {
                 document.getElementById('span_1' + CC_CODE).setAttribute('style', ' ');
                 var i_1 = document.createElement('i');     //icon +
                 i_1.setAttribute('id', 'i_' + CC_CODE);
-                i_1.setAttribute('class', 'glyphicon-plus glyphicon-plusicon-white glyphicon');
+                i_1.setAttribute('class', 'fas fa-plus-circle');
                 document.getElementById('span_1' + CC_CODE).appendChild(i_1);
             }
             document.getElementById(CC_CODE).setAttribute('data-detail', '0');

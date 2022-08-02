@@ -4,67 +4,92 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<style>
-    .inner tr td {
-        border-top: none !important;
-    }
-
-
-
-
-
-    .style_pading {
-        padding-left: 1px;
-        padding-right: 1px;
-    }
-
-    .table_11 tr td:nth-child(3) {
-        width: 200px;
-    }
-
-    .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
-        width: 120px;
-    }
-
-    .table_11 {
-        margin-bottom: 0px;
-    }
-
-    .auto-style1 {
-        background-color: #F5F5F5;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    #btnAddDetails {
-        font-size: 40px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
+@*<style>
+        .inner tr td {
+            border-top: none !important;
         }
 
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
+        .style_pading {
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        .table_11 tr td:nth-child(3) {
+            width: 200px;
+        }
+
+        .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
+            width: 120px;
+        }
+
+        .table_11 {
+            margin-bottom: 0px;
+        }
+
+        .auto-style1 {
+            background-color: #F5F5F5;
+        }
+
+        .display_none {
+            display: none !important;
+        }
+
+        #btnAddDetails {
+            font-size: 40px;
+        }
+
+            #btnAddDetails:hover {
+                color: #24b414;
+            }
+
+        .glyphicon-remove-sign:hover {
+            color: red
+        }
 
 
 
-    .font_codenumber {
-        font-size: 15px;
-        font-weight: bold;
-        text-align:center
-    }
-</style>
+        .font_codenumber {
+            font-size: 15px;
+            font-weight: bold;
+            text-align:center
+        }
+    </style>*@
+
+
+<div class="row gy-3" id="div_ContentData">
+    <!-- Table  -->
+    <div class="col-12 display_none" id="divShow">
+        <div class="inside-table my-4">
+            <div class="table-responsive">
+                <table class="table table-borderless ">
+                    <thead>
+                        <tr>
+                            <th style="width: 3%"></th>
+                            <th> @SystemResource.p_itemA </th>
+                            <th>@SystemResource.App_Petty_Cash</th>
+                            <th>@SystemResource.p_account_number </th>
+                            <th> @SystemResource.App_account_numbe</th>
+                            <th> @SystemResource.App_Active ?</th>
+                            <th> @SystemResource.App_openBalance</th>
+                            <th> تاريخ الرصيد</th>
+                        </tr>
+                    </thead>
+                    <tbody id="div_Data"></tbody>
+
+                </table>
+                <div class="d-flex justify-content-start mr-1">
+                    <span id="btnAddDetails" class="mb-3 display_none"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-
-<div class="panel panel-default">
+@*<div class="panel panel-default">
     <div class="panel-heading panel_me">
-        @*<i class="glyphicon glyphicon-pencil icon_panel"></i><label class="span_item"> @SystemResource.Men_AccDefBox</label><label class="span_item"></label>*@
+        @*<i class="glyphicon glyphicon-pencil icon_panel"></i><label class="span_item"> @SystemResource.Men_AccDefBox</label><label class="span_item"></label>
     </div>
 
     <div class="panel-body" id="div_ContentData">
@@ -111,7 +136,7 @@
             </div>
             <div class="col-lg-2">
                 <span class="">@SystemResource.App_openBalance</span>
-            </div> 
+            </div>
             <div class="col-lg-2">
                 <span class="">تاريخ الرصيد</span>
             </div>
@@ -126,7 +151,8 @@
     </div>
 
 
-</div>
+</div>*@
 
- 
-<script src="~/ClientApp/AccDefinition/AccDefBox.js"></script>
+@section Script{
+    <script src="~/ClientApp/AccDefinition/AccDefBox.js"></script>
+}

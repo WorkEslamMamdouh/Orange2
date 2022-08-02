@@ -64,7 +64,7 @@ namespace GLDefAccount {
     export function InitalizeComponent() {
 
 
-        $('#cont').toggleClass('colapsdivcont');
+       $('#cont').toggleClass('colapsdivcont');
         $('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             $("body").toggleClass("mini-navbar_Arbec");
@@ -276,7 +276,7 @@ namespace GLDefAccount {
         else {
             class_Plus = 'fa-plus-circle';
           //  class_Plus = 'glyphicon-plusicon-white';
-            //style_Plus = 'height: 18px;width: 21px; background-color: #05af1a;';
+            style_Plus = 'height: 1.25rem;width:1.25rem; background-color: var(--dark-blue); border-radius:50%; margin:auto;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');

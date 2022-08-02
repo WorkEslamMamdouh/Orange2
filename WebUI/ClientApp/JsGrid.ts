@@ -322,7 +322,7 @@ class JsGrid {
                     this.OnRefreshed();
             },
             rowDoubleClick: (e) => {
-                debugger
+                 
 
 
                 var _this = this;
@@ -330,10 +330,10 @@ class JsGrid {
                 var _this_PrimaryKey = this.PrimaryKey;
                 var e_item_PrimaryKey = e_item[_this_PrimaryKey];
 
+                if ($("#Mod_Flag").val() != 1) {
 
-             
-                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
-
+                    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+                }
                 setTimeout(function () {
             
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;

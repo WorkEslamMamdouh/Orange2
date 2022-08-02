@@ -12,16 +12,16 @@ var AccDefBox;
     var Details_NetworkAcount = new Array();
     //var Details: Array<G_USERS> = new Array<G_USERS>();
     var btnNew_sub_Add_service;
-    var btnsave;
+    var btnSave_Def;
     var btnAddDetails;
-    var btnedite;
+    var btnUpdate_Def;
     var sys = new SystemTools();
     var SysSession = GetSystemSession(Modules.AccDefBox);
     var Model = new A_RecPay_D_CashBox();
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
     var BranchCode; //SharedSession.CurrentEnvironment.BranchCode;
-    var btnback;
+    var btnBack_Def;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -30,6 +30,9 @@ var AccDefBox;
         else {
             document.getElementById('Screen_name').innerHTML = "Fund definition";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
@@ -42,17 +45,17 @@ var AccDefBox;
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnedite = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnUpdate_Def = document.getElementById("btnUpdate_Def");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow; //
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnSave_Def_onClick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
+        btnUpdate_Def.onclick = btnUpdate_Def_onclick;
     }
     function AddNewRow() {
         if (!SysSession.CurrentPrivileges.AddNew)
@@ -85,11 +88,11 @@ var AccDefBox;
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             $("#txtopenDate" + CountGrid).val(GetDate());
             //$(".minus_btn").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
             //$("#txtCode" + CountGrid).attr("disabled", "disabled");
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
     function BuildControls(cnt) {
         var html;
@@ -192,10 +195,10 @@ var AccDefBox;
             }
         });
     }
-    function btnsave_onClick() {
-        loading('btnsave');
+    function btnSave_Def_onClick() {
+        loading('btnSave_Def');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
             var CanAdd = true;
             if (CountGrid == 0) {
                 WorningMessage('يجب الاضافة للحفظ', 'Must Add for saving', 'خطاء', 'Erorr');
@@ -217,13 +220,13 @@ var AccDefBox;
             }
         }, 100);
     }
-    function btnedite_onclick() {
+    function btnUpdate_Def_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
+        $('#btnSave_Def').removeClass("display_none");
+        $('#btnBack_Def').removeClass("display_none");
         $("#div_ContentData :input").removeAttr("disabled");
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
         $(".disable").attr("disabled", "disabled");
         if (SysSession.CurrentPrivileges.Remove == true) {
             $(".minus_btn").removeClass("display_none");
@@ -293,13 +296,13 @@ var AccDefBox;
             //$("#txtCode" + RecNo).val("000");
         });
     }
-    function btnback_onclick() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+    function btnBack_Def_onclick() {
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         DisplayAccDefBox();
@@ -450,12 +453,12 @@ var AccDefBox;
         });
     }
     function success() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         Display();

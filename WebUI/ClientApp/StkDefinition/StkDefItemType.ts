@@ -215,22 +215,6 @@ namespace StkDefItemType {
                <input id="txt_StatusFlag${cnt}" type="hidden"   />
                 </tr>`;
         $("#div_Data").append(html);
-        //html = '  <div id="No_Row' + cnt + '" class="container-fluid  ">' +
-            
-        //    '<div class="col-lg-12">' +
-        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
-
-        //    '<div class="col-lg-1 pad_"><input disabled id="txtCode' + cnt + '" type="text" class="form-control right2"></div>' +
-        //    '<div class="col-lg-3 pad_"><input disabled id="txtDescA' + cnt + '" type="text" class="form-control right2"></div>' +
-        //    '<div class="col-lg-3 pad_"><input disabled id="txtDescL' + cnt + '" type="text" class="form-control right2"></div>' +
-        //    '<div class="col-lg-1 pad_"><select disabled id="select_Type_Item' + cnt + '" class="form-control"> <option value="Null"> ' + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + '</option></select></div>' +
-        //    '<div class="col-lg-2 pad_"><input disabled id="txtRefItemCode' + cnt + '" type="number" class="form-control right2"></div>' +
-        //    '<div class="col-lg-1 pad_"><input disabled id="txtBarCodePrefix' + cnt + '" type="text" class="form-control right2"></div>' +
-        //    '<div class="col-lg-1 pad_"><input disabled id="txtLastBarCodeSeq' + cnt + '" type="number" class="form-control right2"></div>' +
-        //    '</div>' +
-        //'</div>' +
-        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
-      
 
         for (var i = 0; i < Display_Type.length; i++) {
             //debugger;

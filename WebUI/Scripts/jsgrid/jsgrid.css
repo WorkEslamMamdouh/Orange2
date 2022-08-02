@@ -18,6 +18,7 @@
 .jsgrid textarea,
 .jsgrid select {
     font-size: 1em;
+    margin:auto;
 }
 
 .jsgrid-grid-header {

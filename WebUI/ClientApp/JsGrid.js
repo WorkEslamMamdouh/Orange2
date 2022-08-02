@@ -61,7 +61,7 @@ var JsGrid = /** @class */ (function () {
         //}
     };
     JsGrid.prototype.Bind = function () {
-        var _this_1 = this;
+        var _this = this;
         $(".jsgrid-grid-body").css("max-height", this.Height);
         $(".jsgrid-grid-body").css("height", this.Height);
         if (this.SwitchingLanguageEnabled == true) {
@@ -225,30 +225,31 @@ var JsGrid = /** @class */ (function () {
                 $(".jsgrid-row").removeClass("SelectedRowF");
                 $(".jsgrid-alt-row").removeClass("SelectedRowF");
                 row.className += " SelectedRowF";
-                _this_1.SelectedIndex = _this_1.DataSource.indexOf(e.item); // e.itemIndex;
-                _this_1.SelectedItem = e.item;
-                if (_this_1.OnRowSelected != null)
-                    _this_1.OnRowSelected();
+                _this.SelectedIndex = _this.DataSource.indexOf(e.item); // e.itemIndex;
+                _this.SelectedItem = e.item;
+                if (_this.OnRowSelected != null)
+                    _this.OnRowSelected();
                 //  this.OnItemEditing(e);
             },
             filterValue: function () {
                 return this.filterControl.val();
             },
             onDataLoaded: function () {
-                if (_this_1.OnDataLoaded != null)
-                    _this_1.OnDataLoaded();
+                if (_this.OnDataLoaded != null)
+                    _this.OnDataLoaded();
             },
             onRefreshed: function () {
-                if (_this_1.OnRefreshed != null)
-                    _this_1.OnRefreshed();
+                if (_this.OnRefreshed != null)
+                    _this.OnRefreshed();
             },
             rowDoubleClick: function (e) {
-                debugger;
-                var _this = _this_1;
+                var _this = _this;
                 var e_item = e.item;
-                var _this_PrimaryKey = _this_1.PrimaryKey;
+                var _this_PrimaryKey = _this.PrimaryKey;
                 var e_item_PrimaryKey = e_item[_this_PrimaryKey];
-                $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+                if ($("#Mod_Flag").val() != 1) {
+                    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+                }
                 setTimeout(function () {
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item); // e.itemIndex;
                     _this.SelectedItem = e_item;
@@ -273,41 +274,41 @@ var JsGrid = /** @class */ (function () {
             onRefreshing: function (arg) {
             },
             onItemInserting: function (arg) {
-                if (_this_1.OnItemInserting != null) {
-                    if (_this_1.InsertionMode == JsGridInsertionMode.Binding)
+                if (_this.OnItemInserting != null) {
+                    if (_this.InsertionMode == JsGridInsertionMode.Binding)
                         arg.cancel = true;
                     var e = new JsGridInsertEventArgs();
                     e.Item = arg.item;
-                    _this_1.OnItemInserting(e);
+                    _this.OnItemInserting(e);
                 }
             },
             onItemInserted: function (arg) {
                 //$("#" + this.ElementName).jsGrid('option', 'inserting', false);
                 //$("#" + this.ElementName).jsGrid("refresh");
-                if (_this_1.OnItemInserted != null)
-                    _this_1.OnItemInserted();
+                if (_this.OnItemInserted != null)
+                    _this.OnItemInserted();
             },
             onItemUpdating: function (arg) {
-                if (_this_1.OnItemUpdating != null) {
+                if (_this.OnItemUpdating != null) {
                     var e = new JsGridUpdateEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
                     e.PreviousItem = arg.previousItem;
                     e.Row = arg.row;
-                    _this_1.OnItemUpdating(e);
+                    _this.OnItemUpdating(e);
                 }
             },
             onItemEditing: function (arg) {
-                if (_this_1.OnItemEditing != null) {
+                if (_this.OnItemEditing != null) {
                     var e = new JsGridEditEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
                     e.Row = arg.row;
-                    _this_1.OnItemEditing(e);
+                    _this.OnItemEditing(e);
                 }
             },
             onItemDeleting: function (arg) {
-                if (_this_1.OnItemDeleting != null) {
+                if (_this.OnItemDeleting != null) {
                     var e = new JsGridDeleteEventArgs();
                     e.Item = arg.item;
                     e.ItemIndex = arg.itemIndex;
@@ -319,7 +320,7 @@ var JsGrid = /** @class */ (function () {
                     //    () => {
                     //        arg.Cancel = true;
                     //    });
-                    _this_1.OnItemDeleting(e);
+                    _this.OnItemDeleting(e);
                 }
                 //else
                 //    arg.cancel = true;

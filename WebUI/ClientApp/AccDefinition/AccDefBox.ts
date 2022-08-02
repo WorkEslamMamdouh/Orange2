@@ -14,9 +14,9 @@ namespace AccDefBox {
     var Details_NetworkAcount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     //var Details: Array<G_USERS> = new Array<G_USERS>();
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
-    var btnedite: HTMLButtonElement;
+    var btnUpdate_Def: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();    
     var SysSession: SystemSession = GetSystemSession(Modules.AccDefBox);
     var Model: A_RecPay_D_CashBox = new A_RecPay_D_CashBox();
@@ -24,7 +24,7 @@ namespace AccDefBox {
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var BranchCode: Number;//SharedSession.CurrentEnvironment.BranchCode;
-    var btnback: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -36,7 +36,12 @@ namespace AccDefBox {
         } else {
             document.getElementById('Screen_name').innerHTML = "Fund definition";
 
-        }                
+        }     
+
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
@@ -53,9 +58,9 @@ namespace AccDefBox {
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnUpdate_Def = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -66,9 +71,9 @@ namespace AccDefBox {
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow;//
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnSave_Def_onClick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
+        btnUpdate_Def.onclick = btnUpdate_Def_onclick;
     }
 
     function AddNewRow() {        
@@ -108,12 +113,12 @@ namespace AccDefBox {
             $("#txtopenDate" + CountGrid).val(GetDate());
 
             //$(".minus_btn").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
             //$("#txtCode" + CountGrid).attr("disabled", "disabled");
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
 
 
@@ -248,12 +253,12 @@ namespace AccDefBox {
         });
     }
 
-    function btnsave_onClick() {   
-        loading('btnsave');     
+    function btnSave_Def_onClick() {   
+        loading('btnSave_Def');     
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
 
         var CanAdd: boolean = true;
         if (CountGrid == 0) {
@@ -276,13 +281,13 @@ namespace AccDefBox {
             }
         }, 100);
     }     
-    function btnedite_onclick() {      
+    function btnUpdate_Def_onclick() {      
         if (!SysSession.CurrentPrivileges.EDIT) return;    
 
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
+        $('#btnSave_Def').removeClass("display_none");
+        $('#btnBack_Def').removeClass("display_none");
         $("#div_ContentData :input").removeAttr("disabled");
-        $("#btnedite").addClass("display_none");    
+        $("#btnUpdate_Def").addClass("display_none");    
         $(".disable").attr("disabled", "disabled");   
 
         if (SysSession.CurrentPrivileges.Remove ==true) {
@@ -364,14 +369,14 @@ namespace AccDefBox {
         });
     }
 
-    function btnback_onclick() {   
+    function btnBack_Def_onclick() {   
          
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");      
         $("#btnAddDetails").addClass("display_none");
         DisplayAccDefBox();
@@ -553,12 +558,12 @@ namespace AccDefBox {
         });
     }     
     function success() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         Display();
