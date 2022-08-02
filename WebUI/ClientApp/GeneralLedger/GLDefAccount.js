@@ -65,6 +65,8 @@ var GLDefAccount;
         else {
             document.getElementById('Screen_name').innerHTML = "Accounts";
         }
+        $('#divIconbar').addClass("display_none");
+        $('#icon-bar').addClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -214,11 +216,12 @@ var GLDefAccount;
             id_ul = 'sub-item-' + NodeParent;
         }
         if (Detail == 0) {
-            class_Plus = 'glyphicon-plus glyphicon-plusicon-white glyphicon ';
+            class_Plus = 'fas fa-plus-circle';
         }
         else {
-            class_Plus = '  glyphicon-plusicon-white ';
-            style_Plus = 'height: 18px;width: 21px; background-color: #05af1a;';
+            class_Plus = 'fa-plus-circle';
+            //  class_Plus = 'glyphicon-plusicon-white';
+            //style_Plus = 'height: 18px;width: 21px; background-color: #05af1a;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');
@@ -399,7 +402,7 @@ var GLDefAccount;
                 document.getElementById('span_1' + ACC_CODE).setAttribute('style', ' ');
                 var i_1 = document.createElement('i'); //icon +
                 i_1.setAttribute('id', 'i_' + ACC_CODE);
-                i_1.setAttribute('class', 'glyphicon-plus glyphicon-plusicon-white glyphicon');
+                i_1.setAttribute('class', 'fas fa-plus-circle');
                 document.getElementById('span_1' + ACC_CODE).appendChild(i_1);
             }
             document.getElementById(ACC_CODE).setAttribute('data-detail', '0');

@@ -28734,7 +28734,12 @@ div.tagsinput {
 .edit,
 .save,
 .back,
-.print-details {
+.print-details,
+.btnadd,
+.btnDelete,
+.btnedite,
+.btnsave,
+.btnback {
     width: 100px;
     height: 50px;
 }
@@ -28746,21 +28751,25 @@ div.tagsinput {
 }
 
 .view,
-.viewresult{
+.viewresult,
+.btnadd {
     top: 100px;
 }
 .add,
-.reset {
+.reset,
+.btnDelete {
     top: 160px;
 }
-.print {
+.print,
+.btnedite {
     top: 220px;
 }
-
-.pdf {
+.pdf,
+.btnsave {
     top: 280px;
 }
-.excel {
+.excel,
+.btnback {
     top: 340px;
 }
 
@@ -29591,4 +29600,162 @@ input[class=checkbox]:checked:before {
 /*Cursor*/
 .cursor-pointer{
     cursor: pointer;
+}
+/*Account Menu Style*/
+/*used*/
+.account-menu ul.menu {
+    list-style: none;
+}
+
+    .account-menu ul.menu ul,
+    .account-menu ul.menu ul li {
+        list-style: none !important;
+        list-style-type: none !important;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        margin-right: 5%;
+    }
+
+    .account-menu ul.menu ul {
+        padding-left: 0;
+        width: auto;
+    }
+
+        .account-menu ul.menu ul.children {
+            padding-left: 12px;
+            width: auto;
+        }
+
+            .account-menu ul.menu ul.children li {
+                margin-left: 0px;
+            }
+
+    .account-menu ul.menu li a:hover {
+        text-decoration: none;
+    }
+
+    .account-menu ul.menu li.current > a .lbl {
+        color: #fff !important;
+    }
+
+    /* parent item */
+    .account-menu ul.menu li.parent a {
+        padding: 0px;
+        font-weight: bold;
+    }
+    /*used*/
+    .account-menu ul.menu > li.parent > a {
+        color: var(--main-blue);
+        border-radius: 22px;
+        padding: .5rem 0;
+    }
+    /*used*/
+    .account-menu ul.menu li.parent a:hover{
+        color: var(--main-orange);
+    }
+    /*used*/
+    .account-menu ul.menu li.parent a:active,
+    .account-menu ul.menu li.parent a:focus {
+        background-color: var(--Light-orange);
+        color: var(--main-blue);
+        border-radius: 5px;
+        
+    }
+
+
+    /* link tag (a)*/
+    .account-menu ul.menu li.parent ul li a {
+        color: #222;
+        border: none;
+        display: block;
+        padding-left: 5px;
+    }
+
+/* used*/
+.Refrash:hover {
+    color: var(--main-orange);
+}
+/* used*/
+.Refrash:active {
+    color: var(--bs-dark);
+}
+
+.account-menu ul.menu li.parent ul li a:hover {
+    color: #4dc82f;
+}
+
+.account-menu ul.menu li.parent ul li a:active {
+    background-color: #000000;
+    color: #ca2c2c;
+}
+
+/* used*/
+.account-menu ul.menu li .sign {
+    display: inline-block;
+    padding: 1px 5px;
+    font-size: 1.25rem;
+}
+
+
+/* label */
+.account-menu ul.menu li .lbl {
+    padding: 5px 12px;
+    display: inline-block;
+}
+/*used*/
+.account-menu ul.menu li a .lbl {
+    font-size: 1rem;
+}
+
+/* THEMATIQUE------------------------- */
+/* theme 1 */
+.account-menu ul.menu > li.item-1 li.current > a .lbl {
+    /*background-color: #ff6307;*/
+    color: #fff !important;
+}
+
+/* theme 2 */
+.account-menu ul.menu > li.item-8.parent > a {
+    border: solid 1px #51c3eb;
+}
+
+.account-menu ul.menu > li.item-8 .lbl {
+    color: #51c3eb;
+}
+
+.account-menu ul.menu > li.item-8 li.current > a .lbl {
+    color: #fff !important;
+}
+
+/* theme 3 */
+.account-menu ul.menu > li.item-15.parent > a {
+    border: solid 1px #94cf00;
+}
+
+.account-menu ul.menu > li.item-15 .lbl {
+    color: #94cf00;
+}
+
+.account-menu ul.menu > li.item-15 li.current > a .lbl {
+    color: #fff !important;
+}
+
+/* theme 4 */
+.account-menu ul.menu > li.item-22.parent > a {
+    border: solid 1px #ef409c;
+}
+
+.account-menu ul.menu > li.item-22 .lbl {
+    color: #ef409c;
+}
+
+.account-menu ul.menu > li.item-22 li.current > a .lbl {
+    color: #fff !important;
+}
+/*Used*/
+.ModAdd,
+.ModEdit {
+    background-color: var(--main-blue);
+    color: var(--bs-white);
+    border-radius: 5px;
 }

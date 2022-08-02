@@ -3,343 +3,539 @@
     ViewBag.Title = @SystemResource.Men_AccDefCustomer;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-<style>
-    .class_btn_drop {
-        background-color: #c8c8c8;
-        padding: 6px 10px 2px 10px;
-    }
-
-    .dropdown-item:hover {
-        cursor: pointer !important;
-        /*background-color: #c8c8c8 !important;*/
-    }
-
-    .pading_3 {
-        padding: 0px 50px 0px !important
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    .textalign {
-        text-align: center
-    }
-
-
-
-    .src-btn {
-        border-radius: 18px !important;
-    }
-
-    .dropdown-menu {
-        border-radius: 11px;
-    }
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    .styleborder {
-        border: solid 1px;
-        border-radius: 33px;
-        left: 0.4%;
-    }
-
-    /* MENU-LEFT
-            -------------------------- */
-    /* layout */
-
-
-
-    .Div_Tree {
-        height: 590px;
-        background-color: #f9ffef !important;
-        width: 40%;
-        overflow-y: scroll;
-    }
-
-        .Div_Tree::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+@*<style>
+        .class_btn_drop {
+            background-color: #c8c8c8;
+            padding: 6px 10px 2px 10px;
         }
 
-        /* Track */
-        .Div_Tree::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            background-color: beige;
-            border-radius: 16px;
-            /*border-top-left-radius: 24px;*/
-            /*border-bottom-left-radius: 24px;*/
+        .dropdown-item:hover {
+            cursor: pointer !important;
+            /*background-color: #c8c8c8 !important;*/
         }
 
-        /* Handle */
-        .Div_Tree::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 16px;
+        .pading_3 {
+            padding: 0px 50px 0px !important
         }
 
-            /* Handle on hover */
-            .Div_Tree::-webkit-scrollbar-thumb:hover {
-                background: #555;
+        .display_none {
+            display: none !important;
+        }
+
+        .textalign {
+            text-align: center
+        }
+
+
+
+        .src-btn {
+            border-radius: 18px !important;
+        }
+
+        .dropdown-menu {
+            border-radius: 11px;
+        }
+
+        .disabledDiv {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .styleborder {
+            border: solid 1px;
+            border-radius: 33px;
+            left: 0.4%;
+        }
+
+        /* MENU-LEFT
+                -------------------------- */
+        /* layout */
+
+
+
+        .Div_Tree {
+            height: 590px;
+            background-color: #f9ffef !important;
+            width: 40%;
+            overflow-y: scroll;
+        }
+
+            .Div_Tree::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
             }
 
+            /* Track */
+            .Div_Tree::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                background-color: beige;
+                border-radius: 16px;
+                /*border-top-left-radius: 24px;*/
+                /*border-bottom-left-radius: 24px;*/
+            }
+
+            /* Handle */
+            .Div_Tree::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 16px;
+            }
+
+                /* Handle on hover */
+                .Div_Tree::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
 
 
 
-    #left ul.nav {
-        margin-bottom: 2px;
-        font-size: 12px; /* to change font-size, please change instead .lbl */
-    }
 
-        #left ul.nav ul,
-        #left ul.nav ul li {
-            list-style: none !important;
-            list-style-type: none !important;
-            margin-top: 1px;
-            margin-bottom: 1px;
-            margin-right: 5%;
+        #left ul.menu {
+            margin-bottom: 2px;
+            font-size: 12px; /* to change font-size, please change instead .lbl */
         }
 
-        #left ul.nav ul {
-            padding-left: 0;
-            width: auto;
-        }
+            #left ul.menu ul,
+            #left ul.menu ul li {
+                list-style: none !important;
+                list-style-type: none !important;
+                margin-top: 1px;
+                margin-bottom: 1px;
+                margin-right: 5%;
+            }
 
-            #left ul.nav ul.children {
-                padding-left: 12px;
+            #left ul.menu ul {
+                padding-left: 0;
                 width: auto;
             }
 
-                #left ul.nav ul.children li {
-                    margin-left: 0px;
+                #left ul.menu ul.children {
+                    padding-left: 12px;
+                    width: auto;
                 }
 
-        #left ul.nav li a:hover {
-            text-decoration: none;
-        }
+                    #left ul.menu ul.children li {
+                        margin-left: 0px;
+                    }
 
-            #left ul.nav li a:hover .lbl {
-                /*color: #999 !important;*/
+            #left ul.menu li a:hover {
+                text-decoration: none;
             }
 
-        #left ul.nav li.current > a .lbl {
-            /*background-color: #999;*/
-            color: #fff !important;
+                #left ul.menu li a:hover .lbl {
+                    /*color: #999 !important;*/
+                }
+
+            #left ul.menu li.current > a .lbl {
+                /*background-color: #999;*/
+                color: #fff !important;
+            }
+
+            /* parent item */
+            #left ul.menu li.parent a {
+                padding: 0px;
+                /*color: #ccc;*/
+                font-weight: bold;
+            }
+
+            #left ul.menu > li.parent > a {
+                /*border: solid 1px #999;
+                                    text-transform: uppercase;*/
+                background-color: #00000000 !important;
+                color: #970000;
+                /*border-radius: 19px;*/
+                /*border-radius: 19px 50% 50% 19px;*/
+                border-radius: 22px;
+            }
+
+            #left ul.menu li.parent a:hover {
+                /*background-color: #fff;*/
+                color: #4dc82f;
+                /*-webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+                                    -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+                                    box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);*/
+                background-color: #00000000 !important;
+                /*border-radius: 19px;*/
+            }
+
+            #left ul.menu li.parent a:active {
+                background-color: #000000;
+                color: #ca2c2c;
+            }
+
+            #left ul.menu li.parent a:focus {
+                color: #000000;
+                background-color: #f1cd8b !important;
+                border-radius: 19px;
+            }
+
+            /* link tag (a)*/
+            #left ul.menu li.parent ul li a {
+                color: #222;
+                border: none;
+                display: block;
+                padding-left: 5px;
+            }
+
+
+
+        .Refrash:hover {
+            background-color: bisque;
+            border-radius: 19px;
         }
 
-        /* parent item */
-        #left ul.nav li.parent a {
-            padding: 0px;
-            /*color: #ccc;*/
-            font-weight: bold;
+        .Refrash:active {
+            background-color: black;
+            color: aliceblue;
+            border-radius: 19px;
         }
 
-        #left ul.nav > li.parent > a {
-            /*border: solid 1px #999;
-                                text-transform: uppercase;*/
-            background-color: #00000000 !important;
-            color: #970000;
-            /*border-radius: 19px;*/
-            /*border-radius: 19px 50% 50% 19px;*/
-            border-radius: 22px;
-        }
-
-        #left ul.nav li.parent a:hover {
+        #left ul.menu li.parent ul li a:hover {
             /*background-color: #fff;*/
             color: #4dc82f;
-            /*-webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
-                                -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
-                                box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);*/
-            background-color: #00000000 !important;
-            /*border-radius: 19px;*/
+            /*-webkit-box-shadow: none;
+                                        -moz-box-shadow: none;
+                                        box-shadow: none;*/
         }
 
-        #left ul.nav li.parent a:active {
+        #left ul.menu li.parent ul li a:active {
             background-color: #000000;
             color: #ca2c2c;
         }
 
-        #left ul.nav li.parent a:focus {
-            color: #000000;
-            background-color: #f1cd8b !important;
+        /* sign for parent item */
+        #left ul.menu li .sign {
+            display: inline-block;
+            /*width: 2px;*/
+            padding: 1px 5px;
+            /*background-color: #74af00;*/
+            /* color: #dc0606; */
             border-radius: 19px;
         }
 
-        /* link tag (a)*/
-        #left ul.nav li.parent ul li a {
-            color: #222;
-            border: none;
-            display: block;
-            padding-left: 5px;
+        #left ul.menu li.parent > a > .sign {
+            margin-left: 0px;
+            background-color: #2756ad;
+            /*background-color: #62ad27;*/
+            /*background-color: #999;*/
         }
 
+        /* label */
+        #left ul.menu li .lbl {
+            padding: 5px 12px;
+            display: inline-block;
+        }
 
+        #left ul.menu li.current > a > .lbl {
+            /*color: #ff6307;*/
+        }
 
-    .Refrash:hover {
-        background-color: bisque;
-        border-radius: 19px;
-    }
+        #left ul.menu li a .lbl {
+            font-size: 13px;
+        }
 
-    .Refrash:active {
-        background-color: black;
-        color: aliceblue;
-        border-radius: 19px;
-    }
+        /* THEMATIQUE
+                ------------------------- */
+        /* theme 1 */
+        #left ul.menu > li.item-1.parent > a {
+            /*border: solid 1px #ff6307;*/
+        }
 
-    #left ul.nav li.parent ul li a:hover {
-        /*background-color: #fff;*/
-        color: #4dc82f;
-        /*-webkit-box-shadow: none;
-                                    -moz-box-shadow: none;
-                                    box-shadow: none;*/
-    }
+            #left ul.menu > li.item-1.parent > a > .sign,
+            #left ul.menu > li.item-1 li.parent > a > .sign {
+                margin-left: 0px;
+                /*background-color: #ff6307;*/
+            }
 
-    #left ul.nav li.parent ul li a:active {
-        background-color: #000000;
-        color: #ca2c2c;
-    }
+        /*#left ul.menu > li.item-1 .lbl {
+            color: #ff6307;
+        }*/
 
-    /* sign for parent item */
-    #left ul.nav li .sign {
-        display: inline-block;
-        /*width: 2px;*/
-        padding: 1px 5px;
-        /*background-color: #74af00;*/
-        /* color: #dc0606; */
-        border-radius: 19px;
-    }
-
-    #left ul.nav li.parent > a > .sign {
-        margin-left: 0px;
-        background-color: #2756ad;
-        /*background-color: #62ad27;*/
-        /*background-color: #999;*/
-    }
-
-    /* label */
-    #left ul.nav li .lbl {
-        padding: 5px 12px;
-        display: inline-block;
-    }
-
-    #left ul.nav li.current > a > .lbl {
-        /*color: #ff6307;*/
-    }
-
-    #left ul.nav li a .lbl {
-        font-size: 13px;
-    }
-
-    /* THEMATIQUE
-            ------------------------- */
-    /* theme 1 */
-    #left ul.nav > li.item-1.parent > a {
-        /*border: solid 1px #ff6307;*/
-    }
-
-        #left ul.nav > li.item-1.parent > a > .sign,
-        #left ul.nav > li.item-1 li.parent > a > .sign {
-            margin-left: 0px;
+        #left ul.menu > li.item-1 li.current > a .lbl {
             /*background-color: #ff6307;*/
+            color: #fff !important;
         }
 
-    /*#left ul.nav > li.item-1 .lbl {
-        color: #ff6307;
-    }*/
+        /* theme 2 */
+        #left ul.menu > li.item-8.parent > a {
+            border: solid 1px #51c3eb;
+        }
 
-    #left ul.nav > li.item-1 li.current > a .lbl {
-        /*background-color: #ff6307;*/
-        color: #fff !important;
-    }
+            #left ul.menu > li.item-8.parent > a > .sign,
+            #left ul.menu > li.item-8 li.parent > a > .sign {
+                margin-left: 0px;
+                /*background-color: #51c3eb;*/
+            }
 
-    /* theme 2 */
-    #left ul.nav > li.item-8.parent > a {
-        border: solid 1px #51c3eb;
-    }
+        #left ul.menu > li.item-8 .lbl {
+            color: #51c3eb;
+        }
 
-        #left ul.nav > li.item-8.parent > a > .sign,
-        #left ul.nav > li.item-8 li.parent > a > .sign {
-            margin-left: 0px;
+        #left ul.menu > li.item-8 li.current > a .lbl {
             /*background-color: #51c3eb;*/
+            color: #fff !important;
         }
 
-    #left ul.nav > li.item-8 .lbl {
-        color: #51c3eb;
-    }
+        /* theme 3 */
+        #left ul.menu > li.item-15.parent > a {
+            border: solid 1px #94cf00;
+        }
 
-    #left ul.nav > li.item-8 li.current > a .lbl {
-        /*background-color: #51c3eb;*/
-        color: #fff !important;
-    }
+            #left ul.menu > li.item-15.parent > a > .sign,
+            #left ul.menu > li.item-15 li.parent > a > .sign {
+                margin-left: 0px;
+                /*background-color: #94cf00;*/
+            }
 
-    /* theme 3 */
-    #left ul.nav > li.item-15.parent > a {
-        border: solid 1px #94cf00;
-    }
+        #left ul.menu > li.item-15 .lbl {
+            color: #94cf00;
+        }
 
-        #left ul.nav > li.item-15.parent > a > .sign,
-        #left ul.nav > li.item-15 li.parent > a > .sign {
-            margin-left: 0px;
+        #left ul.menu > li.item-15 li.current > a .lbl {
             /*background-color: #94cf00;*/
+            color: #fff !important;
         }
 
-    #left ul.nav > li.item-15 .lbl {
-        color: #94cf00;
-    }
+        /* theme 4 */
+        #left ul.menu > li.item-22.parent > a {
+            border: solid 1px #ef409c;
+        }
 
-    #left ul.nav > li.item-15 li.current > a .lbl {
-        /*background-color: #94cf00;*/
-        color: #fff !important;
-    }
+            #left ul.menu > li.item-22.parent > a > .sign,
+            #left ul.menu > li.item-22 li.parent > a > .sign {
+                margin-left: 0px;
+                /*background-color: #ef409c;*/
+            }
 
-    /* theme 4 */
-    #left ul.nav > li.item-22.parent > a {
-        border: solid 1px #ef409c;
-    }
+        #left ul.menu > li.item-22 .lbl {
+            color: #ef409c;
+        }
 
-        #left ul.nav > li.item-22.parent > a > .sign,
-        #left ul.nav > li.item-22 li.parent > a > .sign {
-            margin-left: 0px;
+        #left ul.menu > li.item-22 li.current > a .lbl {
             /*background-color: #ef409c;*/
+            color: #fff !important;
         }
 
-    #left ul.nav > li.item-22 .lbl {
-        color: #ef409c;
-    }
+        .sign i {
+            /*color: #000000 !important;*/
+            color: #ffffff !important;
+        }
 
-    #left ul.nav > li.item-22 li.current > a .lbl {
-        /*background-color: #ef409c;*/
-        color: #fff !important;
-    }
+        .ModAdd {
+            background-color: green;
+            color: white;
+            border-radius: 19px;
+        }
 
-    .sign i {
-        /*color: #000000 !important;*/
-        color: #ffffff !important;
-    }
+        .ModEdit {
+            background-color: #12b8e9;
+            color: white;
+            border-radius: 19px;
+        }
+    </style>*@
 
-    .ModAdd {
-        background-color: green;
-        color: white;
-        border-radius: 19px;
-    }
-
-    .ModEdit {
-        background-color: #12b8e9;
-        color: white;
-        border-radius: 19px;
-    }
-</style>
-
-
-<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred display_none">
-
-    <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
-
+<!-- Side Icon Bar -->
+<div class="main-iconbar" id="Div_control">
+    <button class="icon-bar d-flex justify-content-between btnadd" disabled id="btnadd">
+        <i class="fas fa-folder-plus fa-fw side-icon ms-1"></i>
+        <span class="align-self-center mb-3">  @SystemResource.App_Add</span>
+    </button>
+    <button class="icon-bar d-flex justify-content-between btnDelete" disabled id="btnDelete">
+        <i class="fas fa-trash-alt fa-fw side-icon ms-1"></i>
+        <span class="align-self-center mb-3"> @SystemResource.App_Delete</span>
+    </button>
+    <button class="icon-bar d-flex justify-content-between btnedite" disabled id="btnedite">
+        <i class="fas fa-edit side-icon ms-1"></i>
+        <span class="align-self-center mb-3">   @SystemResource.App_Update </span>
+    </button>
+    <button class="icon-bar d-flex justify-content-between btnsave display_none" id="btnsave">
+        <i class="fas fa-save fa-fw side-icon ms-1"></i>
+        <span class="align-self-center mb-3">   @SystemResource.App_save </span>
+    </button>
+    <button class="icon-bar d-flex justify-content-between btnback display_none" id="btnback">
+        <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
+        <span class="align-self-center mb-3">  @SystemResource.App_Show</span>
+    </button>
 </div>
-<div id="content_report" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred   borderred " style="height: 620px;">
 
+<div class="row gy-3" id="content_report">
+    <div class="col-12 col-md-4">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div data-toggle="collapse" class="d-flex justify-content-end">
+                        <a id="Refrash" class="Refrash" href="#" title="Refrash">
+                            <span data-toggle="collapse">
+                                <i id="RE" class="fas fa-sync-alt fs-5 text-blue"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div id="left" class="col-12 account-menu">
+                        <ul id="menu-group-1" class="menu"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.App_account_numbe</label>
+                            <div class="col-10 ">
+                                <input id="txt_ACC_CODE" disabled name="ACC_CODE" type="text" class="form-control" placeholder=" @SystemResource.App_account_numbe ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 offset-md-1">
+                        <div class="form-group row g-0">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Active</label>
+                            <div class="col-8 ">
+                                <input type="checkbox" class="checkbox" id="chkeck_active" disabled name="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.App_DescA</label>
+                            <div class="col-10 ">
+                                <input id="txt_NAME_A" disabled name="NAMEA" type="text" class="form-control" placeholder=" @SystemResource.App_DescA ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.App_DescE</label>
+                            <div class="col-10 ">
+                                <input id="txt_NAME_E" disabled name="NAMEA" type="text" class="form-control" placeholder=" @SystemResource.App_DescE  ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.account_type</label>
+                            <div class="col-10 ">
+                                <select id="txt_Type" name="" disabled class="form-control">
+                                    <option value="null"> نوع الحساب </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.OriginNode</label>
+                            <div class="col-10 ">
+                                <label id="Name_Acc"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group row">
+                            <label class="col-2 align-self-center p-md-0">@SystemResource.instructions</label>
+                            <div class="col-10 ">
+                                <textarea id="txt_note" disabled name="REMARKS" type="text" class="form-control" placeholder="@SystemResource.instructions"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.Balancelimit</label>
+                            <div class="col-8 ">
+                                <input id="txt_CreditLimit" disabled name="CreditLimit" type="number" class="form-control" placeholder=" @SystemResource.Balancelimit  ">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 my-4" id="div_Balance">
+                        <div class="row special-group">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_openBalance</label>
+                                    <div class="col-8 ">
+                                        <input id="txt_Openbalance" disabled name="Openbalance" type="number" class="form-control" placeholder=" @SystemResource.App_openBalance">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_Debtor</label>
+                                    <div class="col-8 ">
+                                        <input id="txt_Debit" disabled name="Debit" type="number" class="form-control" placeholder="@SystemResource.App_Debtor">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_Creditor</label>
+                                    <div class="col-8 ">
+                                        <input id="txt_DebitFC" disabled name="Credit" type="number" class="form-control" placeholder="  @SystemResource.App_Creditor ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_Balanc</label>
+                                    <div class="col-8 ">
+                                        <input id="txt_balance" disabled name="" type="number" class="form-control" placeholder="@SystemResource.App_Balanc">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.level</label>
+                                    <div class="col-8 ">
+                                        <input id="txt_level" disabled name="" type="number" class="form-control" placeholder="@SystemResource.level">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 offset-md-1">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.Detailed</label>
+                                    <div class="col-8 ">
+                                        <input type="checkbox" class="checkbox" id="chkeck_Detailed" disabled name="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Editors Details -->
+                    <div class="insettext row editor-details">
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
+                                <div class="col-4 col-xl-4 editor-input">
+                                    <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                </div>
+                                <div class="col-4 col-xl-6 editor-input">
+                                    <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group row g-0">
+                                <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
+                                <div class="col-4 col-xl-4  editor-input">
+                                    <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                </div>
+                                <div class="col-4 col-xl-6 editor-input">
+                                    <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div id="DivMassage" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12    borderred display_none">
+        <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+    </div>*@
+@*<div id="content_report" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12  margingred   borderred " style="height: 620px;">
     <div class="container  col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4  margingred   borderred Div_Tree">
         <span data-toggle="collapse" class="Refrash">
             <a id="Refrash" href="#" title="Refrash">
@@ -350,9 +546,11 @@
         </span>
         <div id="left" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 Refrashleft span3">
 
-            <ul id="menu-group-1" class="nav menu"></ul>
+            <ul id="menu-group-1" class="menu menu"></ul>
         </div>
     </div>
+
+
 
     <div class="container col-lg-8 margingred   borderred " style="height: 590px; background-color: #f9ffef !important; width: 58%;left: -1%;">
 
@@ -513,28 +711,25 @@
 
     </div>
 
-    <script>
+</div>*@
+<script>
+    !function ($) {
 
 
+        $(document).on("click", "#left ul.menu li.parent > a > span.sign", function () {
 
-        !function ($) {
+            //$(this).find('i:first').toggleClass("glyphicon glyphicon glyphicon-minus");
+            $(this).find('i:first').toggleClass("fas fa-minus-circle");
+        });
 
+        // Open Le current menu
 
-            $(document).on("click", "#left ul.nav li.parent > a > span.sign", function () {
+        //$("#left ul.menu li.parent.active > a > span.sign").find('i:first').addClass("glyphicon glyphicon glyphicon-minus");
+        $("#left ul.menu li.parent.active > a > span.sign").find('i:first').addClass("fas fa-minus-circle");
+        $("#left ul.menu li.current").parents('ul.children').addClass("in");
 
-                $(this).find('i:first').toggleClass("glyphicon glyphicon glyphicon-minus");
-            });
-
-            // Open Le current menu
-
-            $("#left ul.nav li.parent.active > a > span.sign").find('i:first').addClass("glyphicon glyphicon glyphicon-minus");
-            $("#left ul.nav li.current").parents('ul.children').addClass("in");
-
-        }(window.jQuery);
-    </script>
-
-
-</div>
-
-
-<script src="~/ClientApp/GeneralLedger/GLDefAccount.js"></script>
+    }(window.jQuery);
+</script>
+@section Script{
+    <script src="~/ClientApp/GeneralLedger/GLDefAccount.js"></script>
+}
