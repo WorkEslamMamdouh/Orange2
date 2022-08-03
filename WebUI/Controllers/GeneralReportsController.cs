@@ -940,6 +940,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("IsAuthVchr", rp.IsAuthVchr);
             rep.AddParameter("IsNewVchr", rp.IsNewVchr);
             rep.AddParameter("exzero", rp.exzero);
+            rep.AddParameter("IncludeInvTR", rp.IncludeInvTR);
 
 
             string url = rep.GetReportUrl("Rpt_GLAccountStatment");

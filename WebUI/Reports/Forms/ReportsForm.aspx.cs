@@ -2912,6 +2912,12 @@ namespace RS.WebUI.Reports.Forms
 
             int IsNewVchr = int.Parse(RepPar.IsNewVchr.ToString());
             SqlParameter spIsNewVchr = new SqlParameter("@IsNewVchr", IsNewVchr);
+
+
+            int IncludeInvTR = int.Parse(RepPar.IncludeInvTR.ToString());
+            SqlParameter spIncludeInvTR = new SqlParameter("@IncludeInvTR ", IncludeInvTR);
+
+
             int exzero = int.Parse(RepPar.exzero.ToString());
             SqlParameter spexzero = new SqlParameter("@exzero", exzero);
 
@@ -2939,6 +2945,7 @@ namespace RS.WebUI.Reports.Forms
            ", @ToAccCode ='" + sptoacc.Value + "'" +
            ", @IsAuthVchr = " + spIsAuthVchr.Value +
            ", @IsNewVchr = " + spIsNewVchr.Value +
+           ", @IncludeInvTR  = " + spIncludeInvTR.Value +
            ", @ExZero = " + spexzero.Value;
 
 

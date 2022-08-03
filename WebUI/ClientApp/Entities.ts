@@ -145,6 +145,7 @@ class ReportParameters {
     public stat: number;
     public MemId: number;
     public Shift: number;
+    public IncludeInvTR : number;
     public CatId: number;//---
     public ExpID: number;//---
     public SrvId: number;
