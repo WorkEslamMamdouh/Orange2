@@ -26,13 +26,17 @@ namespace Inv.DAL.Domain
         public string Par_StNewDSE { get; set; }
         public string Par_StAuthDSA { get; set; }
         public string Par_StAuthDSE { get; set; }
+        public string Par_incinvDSA { get; set; }
+        public string Par_incinvDSE { get; set; }
         public string Par_ZeroDSA { get; set; }
         public string Par_ZeroDSE { get; set; }
         public string Par_FromAcc { get; set; }
         public string Par_ToAccCode { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
-        public int typ { get; set; }
+        public Nullable<int> typ { get; set; }
+        public string typ_DESCA { get; set; }
+        public string typ_DESCE { get; set; }
         public Nullable<int> VOUCHER_CODE { get; set; }
         public Nullable<System.DateTime> VOUCHER_DATE { get; set; }
         public string Acc_Code { get; set; }
