@@ -112,7 +112,7 @@ namespace AccDefBox {
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             $("#txtopenDate" + CountGrid).val(GetDate());
 
-            //$(".minus_btn").addClass("display_none");
+            //$(".btn-minus").addClass("display_none");
             $("#btnUpdate_Def").removeClass("display_none");
 
             //$("#txtCode" + CountGrid).attr("disabled", "disabled");
@@ -125,7 +125,58 @@ namespace AccDefBox {
     function BuildControls(cnt: number) {
         var html;
         ////debugger;
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3AccDefBox  minus_btn"></span><div class="col-lg-1 style_pading"><input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-1 style_pading"><input id="IsRecPayAccount' + cnt + '" type="checkbox" class="form-control right2 " disabled="disabled" ></div><div class="col-lg-3 style_pading"><select id="txtAcount' + cnt + '" class="form-control"  disabled="disabled"><option value="Null">' + (lang == "ar" ? "رقم الحساب" : "Account number") + '</option></select ></div><div class="col-lg-2 style_pading"><select id="txtAcount_Code' + cnt + '" class="form-control"  disabled="disabled"><option value="Null">' + (lang == "ar" ? "رقم الحساب الشبكة" : "Network account number") + '</option></select ></div><div class="col-lg-1 style_pading"><input id="checkbox' + cnt + '" type="checkbox" class="form-control right2 " disabled="disabled"></div><div class="col-lg-2 style_pading"><input id="txtopenbalance' + cnt + '" type= "number" class="form-control right3" disabled="disabled"/></div><div class="col-lg-2 style_pading"><input id="txtopenDate' + cnt + '" type= "date" class="form-control right3" disabled="disabled"/></div><div class="col-lg-1"><input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-1"><input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+       // html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3AccDefBox  btn-minus"></span><div class="col-lg-1 style_pading"><input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-1 style_pading"><input id="IsRecPayAccount' + cnt + '" type="checkbox" class="form-control right2 " disabled="disabled" ></div><div class="col-lg-3 style_pading"><select id="txtAcount' + cnt + '" class="form-control"  disabled="disabled"><option value="Null">' + (lang == "ar" ? "رقم الحساب" : "Account number") + '</option></select ></div><div class="col-lg-2 style_pading"><select id="txtAcount_Code' + cnt + '" class="form-control"  disabled="disabled"><option value="Null">' + (lang == "ar" ? "رقم الحساب الشبكة" : "Network account number") + '</option></select ></div><div class="col-lg-1 style_pading"><input id="checkbox' + cnt + '" type="checkbox" class="form-control right2 " disabled="disabled"></div><div class="col-lg-2 style_pading"><input id="txtopenbalance' + cnt + '" type= "number" class="form-control right3" disabled="disabled"/></div><div class="col-lg-2 style_pading"><input id="txtopenDate' + cnt + '" type= "date" class="form-control right3" disabled="disabled"/></div><div class="col-lg-1"><input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-1"><input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        html = `<tr id= "No_Row${cnt}"> 
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="IsRecPayAccount${cnt}" type="checkbox" class="form-check-input" disabled >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <select id="txtAcount${cnt}" class="form-control"  disabled>
+		                        <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number") }</option>
+	                        </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <select id="txtAcount_Code${cnt}" class="form-control"  disabled="disabled">
+		                        <option value="Null">${ (lang == "ar" ? "رقم الحساب الشبكة" : "Network account number") }</option>
+	                        </select >
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="checkbox${cnt}" type="checkbox" class="form-check-input" disabled>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtopenbalance${cnt}" type= "number" class="form-control" disabled/>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtopenDate${cnt}" type= "date" class="form-control" disabled/>
+		                </div>
+	                </td>
+                    
+               <input id = "txt_StatusFlag${cnt}" name = " " type = "hidden" disabled class="form-control"/>
+               <input id = "txt_ID${cnt}" name = " " type = "hidden" disabled class="form-control"/>
+                </tr>`;
+
+
         $("#div_Data").append(html);
 
 
@@ -291,10 +342,10 @@ namespace AccDefBox {
         $(".disable").attr("disabled", "disabled");   
 
         if (SysSession.CurrentPrivileges.Remove ==true) {
-            $(".minus_btn").removeClass("display_none");    
+            $(".btn-minus").removeClass("display_none");    
         }
         else {  
-            $(".minus_btn").addClass("display_none");   
+            $(".btn-minus").addClass("display_none");   
         }
         debugger
         if (SysSession.CurrentPrivileges.AddNew == true) {
@@ -374,7 +425,7 @@ namespace AccDefBox {
         $('#btnSave_Def').addClass("display_none");
         $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
+        $(".btn-minus").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");
         $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");      
@@ -561,7 +612,7 @@ namespace AccDefBox {
         $('#btnSave_Def').addClass("display_none");
         $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
+        $(".btn-minus").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");
         $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");

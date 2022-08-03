@@ -52,11 +52,11 @@ var AccDefExpenses;
             $("#btnUpdate_Def").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
-            $("#btnAddDetails").removeAttr("disabled");
+            $(".btnAddDetails").removeAttr("disabled");
             $('#btnAddDetails').toggleClass("display_none");
         }
         else {
-            $("#btnAddDetails").attr("disabled", "disabled");
+            $(".btnAddDetails").attr("disabled", "disabled");
         }
         if (SysSession.CurrentPrivileges.Remove) {
             $(".btn-minus").removeClass("display_none");
@@ -77,7 +77,7 @@ var AccDefExpenses;
         ////debugger;
         btnAddDetails.onclick = AddNewRow; //
         btnSave_Def.onclick = btnSave_onClick;
-        btnBack_Def.onclick = btnBack_onclick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
     }
     function AddNewRow() {
         ////debugger
@@ -117,7 +117,7 @@ var AccDefExpenses;
     function BuildControls(cnt) {
         var html;
         ////debugger;
-        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <select id=\"txtAcount_Code' + cnt + '\" class=\"form-control ddlAcc\"  disabled=\"disabled\"> \n\t\t\t                <option value=\"Null\">" + (lang == "ar" ? "رقم الحساب" : "Account number") + "</option>\n\t\t\t            </select >\n\t                </td>\n                    \n               <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n               <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select id=\"txtAcount_Code' + cnt + '\" class=\"form-control ddlAcc\"  disabled=\"disabled\"> \n\t\t\t                    <option value=\"Null\">" + (lang == "ar" ? "رقم الحساب" : "Account number") + "</option>\n\t\t\t                </select>\n                         </div>\n\t                </td>\n                    \n               <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n               <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n                </tr>";
         $("#div_Data").append(html);
         for (var i = 0; i < Details_Acount.length; i++) {
             //debugger;
@@ -212,7 +212,7 @@ var AccDefExpenses;
                 var result = d;
                 if (result.IsSuccess == true) {
                     MessageBox.Show("تم الحفظ", "الحفظ");
-                    btnBack_onclick();
+                    btnBack_Def_onclick();
                     refresh();
                 }
                 else {
@@ -361,7 +361,7 @@ var AccDefExpenses;
             $("#txtCode" + RecNo).val("000");
         });
     }
-    function btnBack_onclick() {
+    function btnBack_Def_onclick() {
         $('#btnAddDetails').toggleClass("display_none");
         $('#btnSave_Def').toggleClass("display_none");
         $('#btnBack_Def').toggleClass("display_none");

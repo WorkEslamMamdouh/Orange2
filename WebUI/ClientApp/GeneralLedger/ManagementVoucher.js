@@ -211,14 +211,14 @@ var ManagementVoucher;
         //console.log(TmpVoucherProcessDetails);
     }
     function btnFalse_Everyone_onclick() {
-        $('.checkbox').prop("checked", false);
+        $('.form-check-input').prop("checked", false);
         for (var i = 0; i < TmpVoucherProcessDetails.length; i++) {
             TmpVoucherProcessDetails[i].Selected = false;
         }
         //console.log(TmpVoucherProcessDetails);
     }
     function btnTrue_Everyone_onclick() {
-        $('.checkbox').prop("checked", true);
+        $('.form-check-input').prop("checked", true);
         for (var i = 0; i < TmpVoucherProcessDetails.length; i++) {
             TmpVoucherProcessDetails[i].Selected = true;
         }
@@ -253,7 +253,7 @@ var ManagementVoucher;
             {
                 title: res.choose, css: "ColumPadding", name: "checkbox", width: "6%",
                 itemTemplate: function (s, item) {
-                    var txt = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    var txt = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.id = "" + item.VOUCHER_CODE + "";
                     txt.style.height = "25px";
                     txt.style.width = "25px";

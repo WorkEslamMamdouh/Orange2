@@ -260,7 +260,7 @@ namespace ManagementVoucher {
 
     }
     function btnFalse_Everyone_onclick() {
-        $('.checkbox').prop("checked", false);
+        $('.form-check-input').prop("checked", false);
         for (var i = 0; i < TmpVoucherProcessDetails.length; i++) {
             TmpVoucherProcessDetails[i].Selected = false;
         }
@@ -269,7 +269,7 @@ namespace ManagementVoucher {
 
     }
     function btnTrue_Everyone_onclick() {
-        $('.checkbox').prop("checked", true);
+        $('.form-check-input').prop("checked", true);
         for (var i = 0; i < TmpVoucherProcessDetails.length; i++) {
             TmpVoucherProcessDetails[i].Selected = true;
         }
@@ -306,7 +306,7 @@ namespace ManagementVoucher {
             {
                 title: res.choose, css: "ColumPadding", name: "checkbox", width: "6%",
                 itemTemplate: (s: string, item: A_TmpVoucherProcess): HTMLInputElement => {
-                    let txt: HTMLInputElement = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    let txt: HTMLInputElement = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.id = "" + item.VOUCHER_CODE + "";
 
                     txt.style.height = "25px";

@@ -24,7 +24,7 @@ namespace AccDefExpenses {
 
     var CountGrid = 0;
     var compcode: number;//SharedSession.CurrentEnvironment.CompCode;
-    var btnBack: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -108,7 +108,7 @@ namespace AccDefExpenses {
         ////debugger;
         btnAddDetails.onclick = AddNewRow;//
         btnSave_Def.onclick = btnSave_onClick;
-        btnBack_Def.onclick = btnBack_onclick;
+        btnBack_Def.onclick = btnBack_Def_onclick;
     }
 
     function AddNewRow() {
@@ -180,9 +180,11 @@ namespace AccDefExpenses {
 		                </div>
 	                </td>
                     <td>
-                        <select id="txtAcount_Code' + cnt + '" class="form-control ddlAcc"  disabled="disabled"> 
-			                <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
-			            </select >
+                        <div class="form-group">
+                            <select id="txtAcount_Code' + cnt + '" class="form-control ddlAcc"  disabled="disabled"> 
+			                    <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
+			                </select>
+                         </div>
 	                </td>
                     
                <input id = "txt_StatusFlag${cnt}" name = " " type = "hidden" disabled class="form-control"/>
@@ -308,7 +310,7 @@ namespace AccDefExpenses {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     MessageBox.Show("تم الحفظ", "الحفظ");
-                    btnBack_onclick();
+                    btnBack_Def_onclick();
                     refresh();
                 }
                 else {
@@ -493,7 +495,7 @@ namespace AccDefExpenses {
         });
     }
 
-    function btnBack_onclick() {
+    function btnBack_Def_onclick() {
 
         $('#btnAddDetails').toggleClass("display_none");
         $('#btnSave_Def').toggleClass("display_none");

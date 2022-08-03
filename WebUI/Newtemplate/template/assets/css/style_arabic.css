@@ -11726,9 +11726,12 @@ textarea.form-control-lg {
     appearance: none;
     color-adjust: exact;
 }
-
+.inside-table .form-check-input {
+    margin-top: 0;
+}
     .form-check-input[type="checkbox"] {
         border-radius: 0.25em;
+        display:flex;
     }
 
     .form-check-input[type="radio"] {
@@ -29191,10 +29194,10 @@ div.tagsinput {
         -webkit-appearance: none;
         margin: 0;
     }
-    .inside-table .form-group {
-        margin-left: 1px;
-        margin-right: 1px;
-    }
+.inside-table .form-group {
+    display: flex;
+    justify-content: center;
+}
 .inside-table .btn-minus,
 .inside-table .btn-plus,
 .inside-table .btn-copy,
@@ -29335,7 +29338,7 @@ input[class=checkbox]:checked:before {
     left: -3em;
 }
 /*CheckBox in table*/
-.jsgrid-table .jsgrid-cell {
+/*.jsgrid-table .jsgrid-cell {
     position: relative;
 }
 
@@ -29346,8 +29349,8 @@ input[class=checkbox]:checked:before {
         position: absolute;
         color: var(--dark-blue);
         top: 5px;
-        left: 5px;
-    }
+        left: 4px;
+    }*/
 /* ==  End Checkbox ==*/
 /* ==  Start Global Style ==*/
 .editor-input {

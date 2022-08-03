@@ -72,6 +72,7 @@ namespace AccDefSalesmen {
 
         }
 
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 
