@@ -13,11 +13,11 @@ var AccDefSalesmen;
     var SysSession = GetSystemSession(Modules.AccDefSalesmen);
     var ddlNationality;
     var txt_CC_Code;
-    var btnback;
+    var btnBack;
     var btnShow;
     var btnAdd;
     var btnEdit;
-    var btnsave;
+    var btnSave;
     var txt_CustomerCODE;
     var txt_NAME;
     var txt_NAMEE;
@@ -59,6 +59,10 @@ var AccDefSalesmen;
         else {
             document.getElementById('Screen_name').innerHTML = "Salesmen";
         }
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
+        $("#btnPrintTransaction").addClass("d-none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
@@ -75,9 +79,9 @@ var AccDefSalesmen;
         //debugger;
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnEdit = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         //textBoxes
         txt_CustomerCODE = document.getElementById("txt_CustomerCODE");
         txt_NAME = document.getElementById("txt_NAME");
@@ -103,19 +107,19 @@ var AccDefSalesmen;
     }
     function reference_Page() {
         if (!SysSession.CurrentPrivileges.EDIT) {
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnUpdate').attr('class', 'display_none');
+            $('#btnSave').attr('class', 'display_none');
+            $('#btnBack').attr('class', 'display_none');
         }
         if (!SysSession.CurrentPrivileges.AddNew) {
-            $('#btnAdd').attr('class', 'btn btn-primary display_none');
+            $('#btnAdd').attr('class', 'display_none');
         }
     }
     function InitalizeEvents() {
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnSave_onClick;
+        btnBack.onclick = btnBack_onclick;
         btnEdit.onclick = btnEdit_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
@@ -123,10 +127,10 @@ var AccDefSalesmen;
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#txt_CustomerCODE").attr("disabled", "disabled");
             $("#txt_Debit").attr("disabled", "disabled");
             $("#txt_DebitFC").attr("disabled", "disabled");
@@ -136,9 +140,9 @@ var AccDefSalesmen;
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -164,22 +168,22 @@ var AccDefSalesmen;
         reference_Page();
         chkActive.checked = true;
     }
-    function btnsave_onClick() {
-        loading('btnsave');
+    function btnSave_onClick() {
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (!Validation())
                 return;
             if (IsNew == true) {
                 Insert();
                 Update_claenData = 0;
-                btnback_onclick();
+                btnBack_onclick();
                 Display();
             }
             else {
                 Update();
                 Update_claenData = 1;
-                btnback_onclick();
+                btnBack_onclick();
                 Display();
             }
         }, 100);
@@ -322,19 +326,19 @@ var AccDefSalesmen;
         Details_ISOperationEnable = document.querySelector("input[name=ISOperationEnable]:checked");
         Display();
     }
-    function btnback_onclick() {
+    function btnBack_onclick() {
         Selecteditem = Details.filter(function (x) { return x.SalesmanId == Number(ReportGrid.SelectedKey); });
         if (Selecteditem.length == 0) {
             IsNew = true;
         }
         if (IsNew == true) {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -344,12 +348,12 @@ var AccDefSalesmen;
         }
         else {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -387,10 +391,10 @@ var AccDefSalesmen;
                 chkActive.checked = false;
         }
         DisplayData(Selecteditem);
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         chkActive.disabled = true;
         chk_IsPurchaseEnable.disabled = true;
         chk_IsSalesEnable.disabled = true;
@@ -399,11 +403,11 @@ var AccDefSalesmen;
         chk_PurchaseLimit.disabled = true;
         IsNew = false;
         Update_claenData = 0;
-        btnback_onclick();
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        btnBack_onclick();
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
         reference_Page();
-        $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
+        //$("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
     }
     function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem[0]);
@@ -494,9 +498,9 @@ var AccDefSalesmen;
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
         $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#txt_Category').prop("selectedIndex", 0);
         $('#txt_Cust_Type').prop("selectedIndex", 0);
         $('#ddlNationality').prop("selectedIndex", 0);

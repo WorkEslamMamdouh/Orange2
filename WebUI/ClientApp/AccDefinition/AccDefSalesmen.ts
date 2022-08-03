@@ -16,11 +16,11 @@ namespace AccDefSalesmen {
     var ddlNationality: HTMLSelectElement;
     var txt_CC_Code: HTMLSelectElement;
      
-    var btnback: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
 
     var txt_CustomerCODE: HTMLInputElement;
     var txt_NAME: HTMLInputElement;
@@ -71,7 +71,10 @@ namespace AccDefSalesmen {
             document.getElementById('Screen_name').innerHTML = "Salesmen";
 
         }
-
+        $("#btnPrintTrview").addClass("display_none");
+        $("#btnPrintTrPDF").addClass("display_none");
+        $("#btnPrintTrEXEL").addClass("display_none");
+        $("#btnPrintTransaction").addClass("d-none");
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -90,9 +93,9 @@ namespace AccDefSalesmen {
 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
 
 
 
@@ -133,16 +136,12 @@ namespace AccDefSalesmen {
     } 
     function reference_Page() {
         if (!SysSession.CurrentPrivileges.EDIT) {
-
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
-
+            $('#btnUpdate').attr('class', 'display_none');
+            $('#btnSave').attr('class', 'display_none');
+            $('#btnBack').attr('class', 'display_none');
         }
         if (!SysSession.CurrentPrivileges.AddNew) {
-
-            $('#btnAdd').attr('class', 'btn btn-primary display_none');
-
+            $('#btnAdd').attr('class', 'display_none');
         }
     } 
     function InitalizeEvents() {
@@ -150,8 +149,8 @@ namespace AccDefSalesmen {
   
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave.onclick = btnSave_onClick;
+        btnBack.onclick = btnBack_onclick;
         btnEdit.onclick = btnEdit_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
  
@@ -160,10 +159,10 @@ namespace AccDefSalesmen {
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#txt_CustomerCODE").attr("disabled", "disabled");
             $("#txt_Debit").attr("disabled", "disabled");
             $("#txt_DebitFC").attr("disabled", "disabled");
@@ -176,10 +175,10 @@ namespace AccDefSalesmen {
 
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
 
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -220,12 +219,12 @@ namespace AccDefSalesmen {
 
 
     } 
-    function btnsave_onClick() {
+    function btnSave_onClick() {
         
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
-            finishSave('btnsave');  
+            finishSave('btnSave');  
 
         if (!Validation())
             return;
@@ -235,7 +234,7 @@ namespace AccDefSalesmen {
            
                 Insert();
                 Update_claenData = 0;
-                btnback_onclick();
+                btnBack_onclick();
                 Display(); 
           
             
@@ -245,7 +244,7 @@ namespace AccDefSalesmen {
          
                 Update();
                 Update_claenData = 1;
-                btnback_onclick();
+                btnBack_onclick();
                 Display();        
            
              
@@ -422,7 +421,7 @@ namespace AccDefSalesmen {
 
        
     } 
-    function btnback_onclick() {
+    function btnBack_onclick() {
 
         Selecteditem = Details.filter(x => x.SalesmanId == Number(ReportGrid.SelectedKey));
         if (Selecteditem.length == 0) {
@@ -430,12 +429,12 @@ namespace AccDefSalesmen {
         }
         if (IsNew == true) {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -445,12 +444,12 @@ namespace AccDefSalesmen {
         }
         else {
             $('#btnAddDetails').toggleClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
@@ -487,10 +486,10 @@ namespace AccDefSalesmen {
 
         }
         DisplayData(Selecteditem);
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         chkActive.disabled = true;
         chk_IsPurchaseEnable.disabled = true;
         chk_IsSalesEnable.disabled = true;
@@ -501,13 +500,13 @@ namespace AccDefSalesmen {
 
 
         Update_claenData = 0;
-        btnback_onclick();
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        btnBack_onclick();
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
 
         reference_Page();
 
-        $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
+        //$("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
     } 
     function DisplayData(Selecteditem: Array<IQ_GetSalesMan>) {
 
@@ -625,9 +624,9 @@ namespace AccDefSalesmen {
 
         $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
 
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
 
         $('#txt_Category').prop("selectedIndex", 0);
         $('#txt_Cust_Type').prop("selectedIndex", 0);
