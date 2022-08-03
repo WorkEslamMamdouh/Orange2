@@ -72,7 +72,7 @@ var AccDefCustomer;
     var pageIndex;
     var Newcount = 0;
     //--- Print Buttons
-    var btnPrint;
+    // var btnPrint: HTMLButtonElement;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -97,7 +97,7 @@ var AccDefCustomer;
         FillddlNationality();
         GetCardTypes();
         GetAllCurrency();
-        $('#btnPrint').addClass('display_none');
+        //  $('#btnPrint').addClass('display_none');   
     }
     AccDefCustomer.InitalizeComponent = InitalizeComponent;
     function reference_Page() {
@@ -112,7 +112,7 @@ var AccDefCustomer;
     }
     function InitalizeControls() {
         //--- Print Buttons
-        btnPrint = document.getElementById("btnPrint");
+        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
@@ -163,7 +163,7 @@ var AccDefCustomer;
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
-        btnPrint.onclick = function () { PrintReport(4); };
+        // btnPrint.onclick = () => { PrintReport(4); } 
     }
     function txt_Cust_Type_onchange() {
         if (txt_Cust_Type.value == "1" || txt_Cust_Type.value == "Null") {
@@ -1030,7 +1030,7 @@ var AccDefCustomer;
     }
     function InitializeGrid() {
         var res = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $("#id_ReportGrid").removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "CustomerId";

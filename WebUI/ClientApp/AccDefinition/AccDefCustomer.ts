@@ -80,7 +80,7 @@ namespace AccDefCustomer {
     var Newcount = 0;
 
     //--- Print Buttons
-    var btnPrint: HTMLButtonElement;
+   // var btnPrint: HTMLButtonElement;
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
@@ -107,7 +107,7 @@ namespace AccDefCustomer {
         FillddlNationality();
         GetCardTypes();
         GetAllCurrency();
-        $('#btnPrint').addClass('display_none');   
+      //  $('#btnPrint').addClass('display_none');   
     }
     function reference_Page() {
         if (!SysSession.CurrentPrivileges.EDIT) {
@@ -126,7 +126,7 @@ namespace AccDefCustomer {
     function InitalizeControls() {
         //--- Print Buttons
 
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
@@ -179,7 +179,7 @@ namespace AccDefCustomer {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        btnPrint.onclick = () => { PrintReport(4); } 
+       // btnPrint.onclick = () => { PrintReport(4); } 
     }
     function txt_Cust_Type_onchange() {
 
@@ -1188,12 +1188,10 @@ namespace AccDefCustomer {
             $("#ReportGrid").jsGrid("option", "pageIndex", pageIndex);
 
         }
-
-
     }
     function InitializeGrid() {
         let res: any = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $("#id_ReportGrid").removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "CustomerId";

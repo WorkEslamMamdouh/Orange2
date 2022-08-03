@@ -16,6 +16,7 @@ namespace Accountstatement {
     var chkview: HTMLInputElement
     var chk_Certified: HTMLInputElement
     var chk_New: HTMLInputElement
+    var chk_New2: HTMLInputElement
 
      var btnReset;
     // Print Buttons
@@ -58,6 +59,7 @@ namespace Accountstatement {
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_New2.checked = false;
         $('#btnPrint').addClass('display_none');     
         txtFromAcc_ID.disabled = false;
         txtToAcc_ID.disabled = false;
@@ -84,6 +86,7 @@ namespace Accountstatement {
         chkview = document.getElementById("chkview") as HTMLInputElement;
         chk_Certified = document.getElementById("chk_Certified") as HTMLInputElement;
         chk_New = document.getElementById("chk_New") as HTMLInputElement;
+        chk_New2 = document.getElementById("chk_New2") as HTMLInputElement;
 
         btnReset = document.getElementById("btnReset") as HTMLButtonElement;
 
@@ -289,6 +292,7 @@ namespace Accountstatement {
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_New2.checked = false;
         //txtFromAcc_ID.disabled = false;
         //txtFromAcc_ID.value = "";
         //txtFromAcc_DESC.value = "";
@@ -348,15 +352,11 @@ namespace Accountstatement {
             rp.fromacc = $('#txtFromAcc_ID').val();
         }
 
-
         if ($('#txtToAcc_ID').val() == "") {
             rp.toacc = "-1";
         } else {
             rp.toacc = $('#txtToAcc_ID').val();
         }
-
-
-
 
         if ($('#txtCenter_Cost_ID').val() == "") {
             rp.cc_code = "-1";

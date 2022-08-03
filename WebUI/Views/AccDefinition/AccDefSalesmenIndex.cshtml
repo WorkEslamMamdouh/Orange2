@@ -3,56 +3,6 @@
     ViewBag.Title = @SystemResource.Men_AccDefSalesmen;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@*<style>
-        .class_btn_drop {
-            background-color: #c8c8c8;
-            padding: 6px 10px 2px 10px;
-        }
-
-        .dropdown-item:hover {
-            cursor: pointer !important;
-            background-color: #c8c8c8 !important;
-        }
-
-        .pading_3 {
-            padding: 0px 50px 0px !important
-        }
-
-        .display_none {
-            display: none !important;
-        }
-
-        .textalign {
-            text-align: center
-        }
-
-        .textcentr_pading {
-            padding-right: 29px !important;
-        }
-
-        .src-btn {
-            border-radius: 18px !important;
-        }
-
-        .dropdown-menu {
-            border-radius: 11px;
-        }
-
-        .disabledDiv {
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        #gg .MineBar {
-            width: 1% !important;
-        }
-
-        .border_radio {
-            border: 1px solid;
-            border-radius: 24px;
-             text-align: center;
-        }
-    </style>*@
 <div class="row gy-3" d="informtionReserved">
     <!-- Filter Container -->
     <div id="id_div_Add" class="col-12">
@@ -135,7 +85,7 @@
                                 <div class="form-check  row">
                                     <label class="col-12 text-blue">@SystemResource.App_He_has_no_right</label>
                                     <div class="col-12">
-                                        <input class="form-check-input form-radio special-radio" type="radio" id="ISOperationEnable" name="ISOperationEnable" value="All">
+                                        <input class="form-check-input form-radio special-radio" type="radio" id="" name="ISOperationEnable" value="false">
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +93,7 @@
                                 <div class="form-check  row">
                                     <label class="col-12 text-blue">@SystemResource.App_Everybody</label>
                                     <div class="col-12">
-                                        <input class="form-check-input form-radio special-radio" type="radio" id="IsSalesEnable" name="IsSalesEnable" value="All">
+                                        <input class="form-check-input form-radio special-radio" type="radio" id="ISOperationEnable" name="ISOperationEnable" value="All">
                                     </div>
                                 </div>
                             </div>
@@ -176,16 +126,148 @@
         </div>
         <!-- Details  -->
         <div class="row">
-            <div class="col-12 service-content">
+            <div class="col-12 service-content display_none" id="Div_control" >
                 <div class="serviceBox">
-                    <div class="row g-0 display_none" id="divJournalDetail">
-                        <div class="col-12" id="div_BasicData">
+                    <div class="row g-0" >
+                        <div class="col-12" >
                             <div class="row g-0">
                                 <div class="col-12 col-md-3">
                                     <div class="form-group row g-0">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.App_SalesmanCode  </label>
                                         <div class="col-8">
                                             <input id="txt_CustomerCODE" name="SalesmanCode" type="number" class="form-control" placeholder="@SystemResource.App_SalesmanCode" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Name_Arabic  </label>
+                                        <div class="col-8">
+                                            <input id="txt_NAME" name="NameA" type="text" class="form-control" placeholder="@SystemResource.Name_Arabic ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Name_English  </label>
+                                        <div class="col-8">
+                                            <input id="txt_NAMEE" name="NameE" type="text" class="form-control" placeholder="@SystemResource.Name_English  ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2 offset-md-1">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_Active</label>
+                                        <div class="col-8 ">
+                                            <input type="checkbox" class="checkbox" id="id_chkcustom6" disabled name="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                @* Column  *@
+                                <div class="col-12 col-md-4 ">
+                                    <div class="row h-100">
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3 align-self-center p-md-0"> @SystemResource.App_Mobile  </label>
+                                                <div class="col-9">
+                                                    <input id="txt_MOBILE" name="MOBILE" type="number" class="form-control" placeholder="@SystemResource.App_Mobile">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3 align-self-center p-md-0"> @SystemResource.App_address  </label>
+                                                <div class="col-9">
+                                                    <input id="txt_ADDRESS" name="ADDRESS" type="text" class="form-control" placeholder="@SystemResource.App_address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* Column *@
+                                <div class="col-12 col-md-4 mt-2">
+                                    <div class="row special-group g-2 pb-2">
+                                        <div class="col-12 ">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_AuthToPurchase</label>
+                                                <div class="col-8 ">
+                                                    <input type="checkbox" class="checkbox" id="chk_IsPurchaseEnable" name="CUSTOM6" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_AuthTosellfor</label>
+                                                <div class="col-8 ">
+                                                    <input type="checkbox" class="checkbox" id="chk_IsSalesEnable" name="CUSTOM6" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_AuthTheCommission</label>
+                                                <div class="col-8 ">
+                                                    <input type="checkbox" class="checkbox" id="chk_ISOperationEnable" name="CUSTOM6" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* Column *@
+                                <div class="col-12 col-md-4">
+                                    <div class="row special-group h-100">
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_SaleTheInvoice  </label>
+                                                <div class="col-8">
+                                                    <input id="chk_PurchaseLimit" name="PurchaseLimit" type="number" class="form-control" placeholder="@SystemResource.App_SaleTheInvoice" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_PurchaseTheInvoice  </label>
+                                                <div class="col-8">
+                                                    <input id="chk_SalesCreditLimit" name="SalesCreditLimit" type="number" class="form-control" placeholder="@SystemResource.App_PurchaseTheInvoice" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 align-self-center p-md-0"> @SystemResource.App_IDNumberOrRecord  </label>
+                                        <div class="col-9">
+                                            <input id="txt_IDNo" name="IDNo" type="text" class="form-control" placeholder="@SystemResource.App_IDNumberOrRecord ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Nationality  </label>
+                                        <div class="col-8">
+                                            <select id="ddlNationality" name="" class="form-control">
+                                                <option value="Null"> @SystemResource.App_Nationality </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.menu_Costcenter  </label>
+                                        <div class="col-8">
+                                            <select id="txt_CC_Code" name="" class="form-control">
+                                                <option value="Null"> @SystemResource.choose_Cost   </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row g-0">
+                                        <label class="col-1 align-self-center p-md-0"> @SystemResource.App_Notes  </label>
+                                        <div class="col-11">
+                                            <textarea id="txt_note" name="REMARKS" type="text" class="form-control" placeholder="@SystemResource.App_Notes"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -199,286 +281,21 @@
     </div>
 </div>
 
-
-
-                        <div class="col-lg-12 borderred">
-                            @*<label id="lepReserved" class="col-lg-12 labeltitel "><span id="spanlepReserved" class="ifontowsam fa fa-caret-left"></span>     </label>*@
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div id="informtionReserved" class="col-lg-12 margingred" style="margin-bottom: 15px;">
-
-                                        <div class="col-lg-12 ">
-
-                                            <div class="col-lg-9 col-xs-8">
-                                            </div>
-                                            <div class="col-lg-2">
-
-
-
-                                            </div>
-                                            <div class="col-lg-1">
-
-
-
-                                            </div>
-                                        </div>
-
-                                        <div id="id_div_Add">
-                                            <div class="col-lg-12">
-                                                <div id="gg" class="">
-                                                    <div class="col-lg-1" style="width: 3%;">
-
-                                                    </div>
-                                                    <div class="col-lg-3 col-xs-8 border_radio">
-
-                                                        <label class="col-lg-12 col-xs-4 pading_2AccDefSalesmen " style="font-size: 19px;">@SystemResource.Men_Sales </label>
-
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <label class="col-lg-4 col-xs-4 pading_2AccDefSalesmen ">@SystemResource.App_He_has_right </label>
-                                                            <label class="col-lg-6 col-xs-4 pading_2AccDefSalesmen ">   @SystemResource.App_He_has_no_right </label>
-                                                            <label class="col-lg-2 col-xs-4 pading_2AccDefSalesmen ">@SystemResource.App_Everybody</label>
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <input class="col-lg-4 col-xs-4 " type="radio" id="" name="IsSalesEnable" value="true">
-                                                            <input class="col-lg-6 col-xs-4 " type="radio" id="" name="IsSalesEnable" value="false">
-                                                            <input class="col-lg-2 col-xs-4 " type="radio" id="IsSalesEnable" name="IsSalesEnable" value="All">
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-xs-1 MineBar">
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-xs-8 border_radio">
-
-                                                        <label class="col-lg-12 col-xs-4 pading_2AccDefSalesmen " style="font-size: 19px;">@SystemResource.Purchase </label>
-
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <label class="col-lg-4 col-xs-4 pading_2AccDefSalesmen ">@SystemResource.App_He_has_right </label>
-                                                            <label class="col-lg-6 col-xs-4 pading_2AccDefSalesmen ">   @SystemResource.App_He_has_no_right </label>
-                                                            <label class="col-lg-2 col-xs-4 pading_2AccDefSalesmen ">@SystemResource.App_Everybody</label>
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <input class="col-lg-4 col-xs-4 " type="radio" id="" name="IsPurchaseEnable" value="true">
-                                                            <input class="col-lg-6 col-xs-4 " type="radio" id="" name="IsPurchaseEnable" value="false">
-                                                            <input class="col-lg-2 col-xs-4 " type="radio" id="IsPurchaseEnable" name="IsPurchaseEnable" value="All">
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-1 MineBar">
-
-                                                    </div>
-
-                                                    <div class="col-lg-3 col-xs-8 border_radio">
-
-                                                        <label class="col-lg-12 col-xs-4 pading_2AccDefSalesmen " style="font-size: 19px;">@SystemResource.App_ISOperationEnable </label>
-
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <label class="col-lg-4 col-xs-4  ">@SystemResource.App_He_has_right </label>
-                                                            <label class="col-lg-6 col-xs-4  ">   @SystemResource.App_He_has_no_right </label>
-                                                            <label class="col-lg-2 col-xs-4  ">@SystemResource.App_Everybody</label>
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-                                                            <input class="col-lg-4 col-xs-4 " type="radio" id="" name="ISOperationEnable" value="true">
-                                                            <input class="col-lg-6 col-xs-4 " type="radio" id="" name="ISOperationEnable" value="false">
-                                                            <input class="col-lg-2 col-xs-4 " type="radio" id="ISOperationEnable" name="ISOperationEnable" value="All">
-                                                        </div>
-                                                        <div class="col-lg-12 col-xs-4">
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="col-lg-2 col-xs-8">
-                                                    <button type="button" class="btn btn-info" id="btnShow">
-                                                        @SystemResource.App_Show   <span class="glyphicon glyphicon-save "></span>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success" id="btnAdd">
-                                                        @SystemResource.App_Add  <span class="glyphicon glyphicon-plus-sign"></span>
-                                                    </button>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div id="id_ReportGrid" class="col-lg-12  margingred   " style="display: none;">
-                                                <div class="col-lg-3 col-xs-8" style="margin-bottom: 4px;margin-right: 27px;margin-top: 9px;">
-                                                    <input id="searchbutmemreport" name="" type="text" class="form-control  text_Display" placeholder="@SystemResource.App_SearchbyNumPh ">
-                                                </div>
-                                                <div class="col-lg-15 ">
-                                                    <table id="ReportGrid"></table>
-
-                                                </div>
-                                                <h4 style="text-align: center;font-weight: bold;color: #0088c7;"><i class="glyphicon glyphicon-hand-up"></i> @SystemResource.App_DoubleDisplay <i class="glyphicon glyphicon-hand-up"></i></h4>
-                                            </div>
-
-                                        </div>
-                                        @*<div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
-
-                                            <h4 id="Text_Massage" style=""> رساله </h4>
-
-                                        </div>*@
-                                        <div id="Div_control" class="col-lg-12 margingred  " style="height: 281px;margin-bottom: 19px;margin-top: 20px;display: none;">
-
-                                            <div class="col-lg-12 " style="padding-top: 3px;margin-top: 13px;">
-
-                                                @*<div class="col-lg-12 " style="margin-bottom: -37px">
-
-                                                    <div class="col-lg-8 col-xs-8">
-                                                    </div>
-                                                    <div class="col-lg-3">
-
-                                                        <button type="button" class="btn btn-warning" id="btnback">
-                                                            <span class="glyphicon glyphicon-backward"></span>  @SystemResource.App_back
-                                                        </button>
-
-                                                        <button id="btnsave" type="button" class="btn btn-success">
-                                                            @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
-                                                        </button>
-
-                                                    </div>
-                                                    <div class="col-lg-1">
-
-
-                                                        <button type="button" class="btn btn-primary display_none" id="btnedite">
-                                                            <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
-                                                        </button>
-                                                    </div>
-                                                </div>*@
-
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">@SystemResource.App_SalesmanCode</label>
-                                                <div class="col-lg-2 col-xs-8">
-                                                    <input id="txt_CustomerCODE" name="SalesmanCode" type="number" class="form-control  text_Display" placeholder="@SystemResource.App_SalesmanCode" disabled="disabled">
-                                                </div>
-                                                <div class="col-lg-1 col-xs-8">
-                                                </div>
-
-
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen textcentr_pading"> @SystemResource.App_Active </label>
-
-                                                <div class="col-xs-1">
-                                                    <input type="checkbox" class="checkbox" id="id_chkcustom6" name="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 ">
-
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">@SystemResource.Name_Arabic</label>
-                                                <div class="col-lg-3 col-xs-8">
-                                                    <input id="txt_NAME" name="NameA" type="text" class="form-control  text_Display" placeholder="@SystemResource.Name_Arabic ">
-                                                </div>
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">@SystemResource.Name_English </label>
-                                                <div class="col-lg-3 col-xs-8">
-                                                    <input id="txt_NAMEE" name="NameE" type="text" class="form-control  text_Display" placeholder="@SystemResource.Name_English  ">
-                                                </div>
-
-                                            </div>
-
-                                            <div class="col-lg-12 ">
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">  @SystemResource.App_Mobile  </label>
-                                                <div class="col-lg-3 col-xs-8">
-                                                    <input id="txt_MOBILE" name="MOBILE" type="number" class="form-control  text_Display" placeholder="@SystemResource.App_Mobile   ">
-                                                </div>
-                                                <div class="col-lg-3 col-xs-8 contrnerAccDefsalesman1" style="">
-
-                                                    <label class="col-lg-7 col-xs-4 pading_2AccDefSalesmen  textcentr_pading3 ">@SystemResource.App_AuthToPurchase </label>
-                                                    <div class="col-xs-2">
-                                                        <input type="checkbox" class="checkbox" checked="checked" id="chk_IsPurchaseEnable" name="CUSTOM6">
-                                                    </div>
-                                                    <label class="col-lg-7 col-xs-4 pading_2AccDefSalesmen textcentr_pading3"> @SystemResource.App_AuthTosellfor   </label>
-                                                    <div class="col-xs-2">
-                                                        <input type="checkbox" class="checkbox" checked="checked" id="chk_IsSalesEnable" name="CUSTOM6">
-                                                    </div>
-                                                    <label class="col-lg-7 col-xs-4 pading_2AccDefSalesmen textcentr_pading3  ">@SystemResource.App_AuthTheCommission</label>
-                                                    <div class="col-xs-2">
-                                                        <input type="checkbox" class="checkbox" checked="checked" id="chk_ISOperationEnable" name="CUSTOM6">
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-lg-3 col-xs-8 contrnerAccDefsalesman2" style="">
-                                                    <div class="col-lg-12 ">
-                                                        <label class="col-lg-4 col-xs-4 Trns_Store ">@SystemResource.App_SaleTheInvoice</label>
-                                                        <div class="col-xs-8">
-
-                                                            <input id="chk_PurchaseLimit" name="PurchaseLimit" type="number" class="form-control  text_Display" placeholder="@SystemResource.App_SaleTheInvoice   " disabled="">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-lg-12 ">
-                                                        <label class="col-lg-4 col-xs-4 Trns_Store">@SystemResource.App_PurchaseTheInvoice </label>
-                                                        <div class="col-xs-8">
-
-                                                            <input id="chk_SalesCreditLimit" name="SalesCreditLimit" type="number" class="form-control  text_Display" placeholder="@SystemResource.App_PurchaseTheInvoice " disabled="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-12 ">
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">   @SystemResource.App_address </label>
-                                                <div class="col-lg-3 col-xs-8">
-                                                    <input id="txt_ADDRESS" name="ADDRESS" type="text" class="form-control  text_Display" placeholder="@SystemResource.App_address  ">
-                                                </div>
-
-                                            </div>
-                                            <div class="col-lg-12 " style="margin-top: 32px;">
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen ">@SystemResource.App_IDNumberOrRecord</label>
-
-                                                <div class="col-lg-3 col-xs-8">
-                                                    <input id="txt_IDNo" name="IDNo" type="text" class="form-control  text_Display" placeholder="@SystemResource.App_IDNumberOrRecord ">
-                                                </div>
-
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen textcentr_pading"> @SystemResource.App_Nationality  </label>
-                                                <div class="col-lg-2 col-xs-8">
-                                                    <select id="ddlNationality" name="" class="form-control  text_Display">
-                                                        <option value="Null"> @SystemResource.App_Nationality </option>
-                                                    </select>
-                                                </div>
-
-
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen textcentr_pading">  @SystemResource.menu_Costcenter   </label>
-                                                <div class="col-lg-2 col-xs-8">
-                                                    <select id="txt_CC_Code" name="" class="form-control  text_Display">
-                                                        <option value="Null"> @SystemResource.choose_Cost   </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <label class="col-lg-1 col-xs-4 pading_2AccDefSalesmen">@SystemResource.App_Notes </label>
-                                                <div class="col-lg-6 col-xs-8">
-                                                    <textarea id="txt_note" name="REMARKS" type="text" class="form-control   " placeholder="@SystemResource.App_Notes"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        @section Script{
-                            <script>
-                                $(document).ready(function () {
-                                    $('#but_read').click(function () {
-                                        $('#result').html("id : " + userid + ", name : " + username);
-                                    });
-                                });
-                            </script>
-                            <script>
-                                $('#lepnotifications').on('click', function () {
-                                    $('#divnotifications').toggleClass('showdiv');
-                                    $('#spanlepnotifications').toggleClass('fa-caret-left');
-                                    $('#spanlepnotifications').toggleClass('fa-caret-down');
-                                });
-
-                            </script>
-                            <script src="~/ClientApp/AccDefinition/AccDefSalesmen.js"></script>
-                        }
+@section Script{
+<script>
+    $(document).ready(function () {
+        $('#but_read').click(function () {
+            $('#result').html("id : " + userid + ", name : " + username);
+        });
+    });
+</script>
+<script>
+    $('#lepnotifications').on('click', function () {
+        $('#divnotifications').toggleClass('showdiv');
+        $('#spanlepnotifications').toggleClass('fa-caret-left');
+        $('#spanlepnotifications').toggleClass('fa-caret-down');
+    });
+
+</script>
+<script src="~/ClientApp/AccDefinition/AccDefSalesmen.js"></script>
+}

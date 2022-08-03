@@ -10,25 +10,23 @@
         <div class="card bg-light-blue" id="informtionReserved">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-3">
                         <div class="form-group row">
-                            <label for="txtFromDate" class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                            <div class="col-8">
+                            <label for="txtFromDate" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8">
                                 <input id="txtFromDate" name="" type="date" data-date="MMMM-DD-YYYY" data-date-format="MMMM-DD-YYYY" class="form-control">
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-3">
                         <div class="form-group row">
-                            <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
-                            <div class="col-8">
+                            <label for="txtToDate" class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8">
                                 <input id="txtToDate" name="" type="date" class="form-control">
                             </div>
                         </div>
                     </div>
-          
-
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-6">
                         <div class="form-group row">
                             <label class="col-2 col-md-2 align-self-center p-md-0"> @SystemResource.insert_restrictions</label>
                             <div class="col-10 col-md-10">
@@ -121,14 +119,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 offset-2">
+                    @*<div class="col-12 col-md-4 offset-2">
                         <div class="form-check row g-0">
                             <label class="col-5 col-md-4 form-check-label align-self-center p-md-0" for="txtIsPurchase"> @SystemResource.Hide_zero_accounts</label>
                             <div class="col-7 col-md-7 mr-4">
                                 <input class="form-check-input" type="checkbox" id="chkview" name="CUSTOM6">
                             </div>
                         </div>
+                    </div>*@
+
+                    <div class="col-12 col-md-6 ">
+                        <div class="form-group row">
+                            <label class="col-2 col-md-2 align-self-center p-md-0"> </label>
+                            <div class="col-10 col-md-10">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-check row g-0">
+                                            <label class="col-6 col-md-7  form-check-label align-self-center p-md-0" for="chkview"> @SystemResource.Hide_zero_accounts</label>
+                                            <div class="col-6 col-md-5 ">
+                                                <input class="form-check-input" type="checkbox" id="chkview" name="CUSTOM6">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-check row g-0">
+                                            <label class="col-6 col-md-7 form-check-label align-self-center p-md-0" for="chk_New2"> ادراج عمليات الفترة من المتاجرة</label>
+                                            <div class="col-6 col-md-5 ">
+                                                <input class="form-check-input" type="checkbox" id="chk_New2" name="CUSTOM6">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
