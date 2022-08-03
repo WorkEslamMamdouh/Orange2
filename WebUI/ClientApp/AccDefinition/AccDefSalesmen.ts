@@ -706,7 +706,7 @@ namespace AccDefSalesmen {
 
 
         let res: any = GetResourceList("");
-        $("#id_ReportGrid").attr("style", "");
+        $("#id_ReportGrid").removeClass("display_none");
         ReportGrid.OnRowDoubleClicked = DriverDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
         ReportGrid.PrimaryKey = "SalesmanId";
