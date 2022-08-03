@@ -12,16 +12,16 @@
               <Width>2.22042cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.23886cm</Width>
+              <Width>2.51966cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.5493cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.55418cm</Width>
+              <Width>5.76585cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>2.21919cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.64853cm</Width>
@@ -980,7 +980,10 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=iif( Sum(Fields!debit.Value) -Sum(Fields!credit.Value) &gt;=0,
 "مدين","دائن")</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1013,6 +1016,8 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=iif( Sum(Fields!debit.Value) -Sum(Fields!credit.Value) &gt;=0,Sum(Fields!debit.Value) -Sum(Fields!credit.Value),-Sum(Fields!debit.Value) +Sum(Fields!credit.Value))</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1047,6 +1052,8 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Sum(Fields!credit.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1081,6 +1088,8 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Sum(Fields!debit.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1115,7 +1124,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>الاجمالى</Value>
                               <Style>
-                                <FontSize>11pt</FontSize>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1197,7 +1206,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         <DataSetName>Rpt_GLAccountStatmentAr</DataSetName>
         <Top>0.09819cm</Top>
         <Height>2.4cm</Height>
-        <Width>19.49824cm</Width>
+        <Width>19.70991cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1208,7 +1217,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
     <Height>1.0625in</Height>
     <Style />
   </Body>
-  <Width>7.67647in</Width>
+  <Width>7.75981in</Width>
   <Page>
     <PageHeader>
       <Height>4.58352cm</Height>

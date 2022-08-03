@@ -27,11 +27,11 @@ var AccDefCustomer;
     var ddlSalesman_New;
     var txt_Country;
     var txt_Currency;
-    var btnback;
+    var btnBack;
     var btnShow;
     var btnAdd;
     var btnEdit;
-    var btnsave;
+    var btnSave;
     var btnAddDetails;
     var txt_CustomerCODE;
     var txt_NAME;
@@ -102,9 +102,9 @@ var AccDefCustomer;
     AccDefCustomer.InitalizeComponent = InitalizeComponent;
     function reference_Page() {
         if (!SysSession.CurrentPrivileges.EDIT) {
-            $('#btnedite').attr('class', 'btn btn-primary display_none');
-            $('#btnsave').attr('class', 'btn btn-success display_none');
-            $('#btnback').attr('class', 'btn btn-success display_none');
+            $('#btnUpdate').attr('class', 'btn btn-primary display_none');
+            $('#btnSave').attr('class', 'btn btn-success display_none');
+            $('#btnBack').attr('class', 'btn btn-success display_none');
         }
         if (!SysSession.CurrentPrivileges.AddNew) {
             $('#btnAdd').attr('class', 'btn btn-primary display_none');
@@ -118,10 +118,10 @@ var AccDefCustomer;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
+        btnEdit = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnback = document.getElementById("btnback");
+        btnBack = document.getElementById("btnBack");
         //textBoxes
         txt_CustomerCODE = document.getElementById("txt_CustomerCODE");
         txt_Cust_Type = document.getElementById("txt_Cust_Type");
@@ -152,9 +152,9 @@ var AccDefCustomer;
     function InitalizeEvents() {
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        btnsave.onclick = btnsave_onClick;
+        btnSave.onclick = btnsave_onClick;
         btnAddDetails.onclick = AddNewRow;
-        btnback.onclick = btnback_onclick;
+        btnBack.onclick = btnback_onclick;
         btnEdit.onclick = btnEdit_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txt_Openbalance.onkeyup = balance_onchange;
@@ -192,10 +192,10 @@ var AccDefCustomer;
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
             $("#txt_CustomerCODE").attr("disabled", "disabled");
             $("#txt_Debit").attr("disabled", "disabled");
             $("#txt_DebitFC").attr("disabled", "disabled");
@@ -212,9 +212,9 @@ var AccDefCustomer;
             }
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
+            $("#btnUpdate").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -255,9 +255,9 @@ var AccDefCustomer;
         SysSession.CurrentEnvironment.I_Control[0].Currencyid != null ? $("#txt_Currency").val(SysSession.CurrentEnvironment.I_Control[0].Currencyid) : $("#txt_Currency").val("null");
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (!Validation())
                 return;
             debugger;
@@ -379,25 +379,25 @@ var AccDefCustomer;
         }
         if (IsNew == true) {
             $('#btnAddDetails').addClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
-            $("#Div_control").attr("style", "margin-bottom: 19px;margin-top: 20px;display: none;");
+            $("#Div_control").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
             $('#Div_DOC').addClass("display_none");
             $('#Div_ADDRESS').addClass("display_none");
         }
         else {
             $('#btnAddDetails').addClass("display_none");
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave').toggleClass("display_none");
+            $('#btnBack').toggleClass("display_none");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
-            $("#btnedite").removeAttr("disabled");
+            $("#btnUpdate").removeClass("display_none");
+            $("#btnUpdate").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
             if (Update_claenData != 1) {
@@ -489,18 +489,17 @@ var AccDefCustomer;
         $('#Div_DOC').removeClass("display_none");
         $('#Div_ADDRESS').removeClass("display_none");
         DisplayData(Selecteditem);
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         chkActive.disabled = true;
         IsNew = false;
         Update_claenData = 0;
         btnback_onclick();
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
         reference_Page();
-        $("#Div_control").attr("style", "margin-bottom: 19px;margin-top: 20px;");
     }
     function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem[0]);
@@ -552,16 +551,17 @@ var AccDefCustomer;
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
-            '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
-            '<div class="col-lg-2" style = "width: 14%;"><select disabled id="CusIDTypeCode' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + '</option> </select ></div>' +
-            '<div class="col-lg-1" style = "width: 17%;" ><input disabled id="IDNo' + cnt + '" type="number" class="form-control"></div>' +
-            '<div class="col-lg-1" style = "width: 13%;"><input disabled id="IDIssuePlace' + cnt + '" type="text" class="form-control"></div>' +
-            '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDIssueDate' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDIssueDateH' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDExpireDate' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDExpireDateH' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="CustomerDocID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+        //html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
+        //    '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
+        //    '<div class="col-lg-2" style = "width: 14%;"><select disabled id="CusIDTypeCode' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + '</option> </select ></div>' +
+        //    '<div class="col-lg-1" style = "width: 17%;" ><input disabled id="IDNo' + cnt + '" type="number" class="form-control"></div>' +
+        //    '<div class="col-lg-1" style = "width: 13%;"><input disabled id="IDIssuePlace' + cnt + '" type="text" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDIssueDate' + cnt + '" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDIssueDateH' + cnt + '" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDExpireDate' + cnt + '" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDExpireDateH' + cnt + '" class="form-control"></div>' +
+        //    '<div class="col-lg-2" style=""><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="CustomerDocID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+        html = "<tr id= \"row_font_header" + cnt + "\">\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select disabled id=\"CusIDTypeCode" + cnt + "\" class=\"form-control\"> \n\t\t                        <option value=\"null\">" + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + "</option> \n\t\t                     </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDNo" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDIssuePlace" + cnt + "\" type=\"text\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input type=\"date\" disabled id=\"IDIssueDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDIssueDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"date\" disabled id=\"IDExpireDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDExpireDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n             <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n\t\t    <input id=\"CustomerDocID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#data_lebel").append(html);
         for (var i = 0; i < CodesTypes.length; i++) {
             $('#CusIDTypeCode' + cnt).append('<option value="' + CodesTypes[i].CodeValue + '">' + (lang == "ar" ? CodesTypes[i].DescA : CodesTypes[i].DescE) + '</option>');
@@ -908,10 +908,10 @@ var AccDefCustomer;
     function EnableControls() {
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
-        $("#Div_control").attr("style", " margin-bottom: 19px;margin-top: 20px;");
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
-        $('#btnedite').addClass("display_none");
+        $("#Div_control").removeClass("display_none");
+        $('#btnSave').removeClass("display_none");
+        $('#btnBack').removeClass("display_none");
+        $('#btnUpdate').addClass("display_none");
         $('#txt_Category').prop("selectedIndex", 0);
         $('#txt_Cust_Type').prop("selectedIndex", 0);
         $('#txt_tax').prop("selectedIndex", 0);
@@ -1224,11 +1224,11 @@ var AccDefCustomer;
     function success_Insert() {
         Display();
         $('#btnAddDetails').addClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
         $(".fa-minus-circle").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
         $("#drp_G_Store").removeAttr("disabled");
         txt_disabled();
         $("#id_div_Add").attr("disabled", "");
@@ -1248,14 +1248,14 @@ var AccDefCustomer;
         $('#Div_DOC').removeClass("display_none");
         $('#Div_ADDRESS').removeClass("display_none");
         DisplayData(Selecteditem);
-        $('#btnedite').removeClass("display_none");
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
-        $('#btnedite').removeAttr("disabled");
+        $('#btnUpdate').removeClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $('#btnUpdate').removeAttr("disabled");
         chkActive.disabled = true;
         IsNew = false;
         reference_Page();
-        $("#Div_control").attr("style", "margin-bottom: 19px;margin-top: 20px;");
+        $("#Div_control").removeClass("display_none");
         $("#Div_ADDRESS :input").attr("disabled", "disabled");
     }
     function validateEmail(email) {
