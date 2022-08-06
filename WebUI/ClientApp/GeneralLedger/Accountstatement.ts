@@ -16,6 +16,7 @@ namespace Accountstatement {
     var chkview: HTMLInputElement
     var chk_Certified: HTMLInputElement
     var chk_New: HTMLInputElement
+    var chk_IncludeInvTR: HTMLInputElement
 
      var btnReset;
     // Print Buttons
@@ -58,6 +59,7 @@ namespace Accountstatement {
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         $('#btnPrint').addClass('display_none');     
         txtFromAcc_ID.disabled = false;
         txtToAcc_ID.disabled = false;
@@ -84,6 +86,7 @@ namespace Accountstatement {
         chkview = document.getElementById("chkview") as HTMLInputElement;
         chk_Certified = document.getElementById("chk_Certified") as HTMLInputElement;
         chk_New = document.getElementById("chk_New") as HTMLInputElement;
+        chk_IncludeInvTR = document.getElementById("chk_IncludeInvTR") as HTMLInputElement;
 
         btnReset = document.getElementById("btnReset") as HTMLButtonElement;
 
@@ -289,6 +292,7 @@ namespace Accountstatement {
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         //txtFromAcc_ID.disabled = false;
         //txtFromAcc_ID.value = "";
         //txtFromAcc_DESC.value = "";
@@ -342,21 +346,19 @@ namespace Accountstatement {
         rp.FromDate = DateFormatRep(txtFromDate.value);
         rp.ToDate = DateFormatRep(txtToDate.value);
 
+        rp.IncludeInvTR = chk_IncludeInvTR.checked == true ? 1 : 0;
+
         if ($('#txtFromAcc_ID').val() == "") {
             rp.fromacc = "-1";
         } else {
             rp.fromacc = $('#txtFromAcc_ID').val();
         }
 
-
         if ($('#txtToAcc_ID').val() == "") {
             rp.toacc = "-1";
         } else {
             rp.toacc = $('#txtToAcc_ID').val();
         }
-
-
-
 
         if ($('#txtCenter_Cost_ID').val() == "") {
             rp.cc_code = "-1";

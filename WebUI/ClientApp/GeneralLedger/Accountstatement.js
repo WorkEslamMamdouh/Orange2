@@ -14,6 +14,7 @@ var Accountstatement;
     var chkview;
     var chk_Certified;
     var chk_New;
+    var chk_IncludeInvTR;
     var btnReset;
     // Print Buttons
     var btnPrint;
@@ -49,6 +50,7 @@ var Accountstatement;
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         $('#btnPrint').addClass('display_none');
         txtFromAcc_ID.disabled = false;
         txtToAcc_ID.disabled = false;
@@ -70,6 +72,7 @@ var Accountstatement;
         chkview = document.getElementById("chkview");
         chk_Certified = document.getElementById("chk_Certified");
         chk_New = document.getElementById("chk_New");
+        chk_IncludeInvTR = document.getElementById("chk_IncludeInvTR");
         btnReset = document.getElementById("btnReset");
         //---------------------------------------------------------------------- Print Buttons
         btnPrint = document.getElementById("btnPrint");
@@ -220,6 +223,7 @@ var Accountstatement;
         chkview.checked = false;
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         //txtFromAcc_ID.disabled = false;
         //txtFromAcc_ID.value = "";
         //txtFromAcc_DESC.value = "";
@@ -266,6 +270,7 @@ var Accountstatement;
         rp.RepType = OutType; //output report as View
         rp.FromDate = DateFormatRep(txtFromDate.value);
         rp.ToDate = DateFormatRep(txtToDate.value);
+        rp.IncludeInvTR = chk_IncludeInvTR.checked == true ? 1 : 0;
         if ($('#txtFromAcc_ID').val() == "") {
             rp.fromacc = "-1";
         }

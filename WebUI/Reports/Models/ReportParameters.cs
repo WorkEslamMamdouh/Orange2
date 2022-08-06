@@ -223,6 +223,7 @@ namespace Inv.WebUI.Reports.Models
         public string BankCode { get; set; }
         public int RepType { get; set; }
         public int TrType { get; set; }
+        public int IncludeInvTR{ get; set; }
         public int RecType { get; set; }
         public string BnfID { get; set; }
         public string BnfDesc { get; set; }

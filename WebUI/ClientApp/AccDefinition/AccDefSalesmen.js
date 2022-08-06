@@ -142,6 +142,7 @@ var AccDefSalesmen;
         else {
             $('#btnSave').toggleClass("display_none");
             $('#btnBack').toggleClass("display_none");
+            $('#Div_control').toggleClass("display_none");
             $("#btnUpdate").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -342,7 +343,8 @@ var AccDefSalesmen;
             //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
-            $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;display: none;");
+            //$("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;display: none;");
+            $("#Div_control").addClass("display_none");
             $("#id_div_Add").attr("disabled", "");
             $("#id_div_Add").removeClass("disabledDiv");
         }
@@ -394,6 +396,7 @@ var AccDefSalesmen;
         $('#btnUpdate').removeClass("display_none");
         $('#btnSave').addClass("display_none");
         $('#btnBack').addClass("display_none");
+        $('#Div_control').removeClass("display_none");
         $('#btnUpdate').removeAttr("disabled");
         chkActive.disabled = true;
         chk_IsPurchaseEnable.disabled = true;
@@ -497,7 +500,8 @@ var AccDefSalesmen;
     function EnableControls() {
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
-        $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
+        // $("#Div_control").attr("style", "height: 281px;margin-bottom: 19px;margin-top: 20px;");
+        $("#Div_control").removeClass("display_none");
         $('#btnSave').removeClass("display_none");
         $('#btnBack').removeClass("display_none");
         $('#btnUpdate').addClass("display_none");
