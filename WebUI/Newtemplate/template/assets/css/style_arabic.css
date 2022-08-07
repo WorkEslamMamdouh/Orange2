@@ -28829,6 +28829,7 @@ div.tagsinput {
 .btn-Update,
 .btn-Save,
 .btn-Back,
+.btn-Delete,
 .btn-update,
 .btn-save,
 .btn-back {
@@ -28861,9 +28862,11 @@ div.tagsinput {
 .icon-bar2.btn-back {
     top: 90px;
 }
-
 .icon-bar2.btn-Back {
     top: 150px;
+}
+.icon-bar2.btn-Delete {
+    top: 210px;
 }
 .icon-bar3.btn-update {
     top: -73px;
