@@ -38,7 +38,7 @@ var Dtcostcenter;
     //*************************Initialization************************//
     function InitializeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "مراكز التكلفة الفرعية";
+            document.getElementById('Screen_name').innerHTML = "وحدات النشاط";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Detail Cost Center Types ";

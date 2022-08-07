@@ -8,7 +8,7 @@ var GendefVendorGroup;
     var Details = new Array();
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service;
-    var btnsave;
+    var btnSave_Def;
     var btnAddDetails;
     var btnEdit;
     var sys = new SystemTools();
@@ -17,7 +17,7 @@ var GendefVendorGroup;
     var Model = new A_RecPay_D_Group();
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
-    var btnback;
+    var btnBack_Def;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -26,23 +26,26 @@ var GendefVendorGroup;
         else {
             document.getElementById('Screen_name').innerHTML = "Suppliers Groups";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
         Display();
     }
     GendefVendorGroup.InitalizeComponent = InitalizeComponent;
-    $('#btnedite').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
             $("#div_Data :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
-            $("#btnedite").toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -52,23 +55,23 @@ var GendefVendorGroup;
             $(".btnAddDetails").attr("disabled", "disabled");
         }
         if (SysSession.CurrentPrivileges.Remove) {
-            $(".minus_btn").removeClass("display_none");
+            $(".btn-minus").removeClass("display_none");
         }
         else {
-            $(".minus_btn").addClass("display_none");
+            $(".btn-minus").addClass("display_none");
         }
     });
     function InitalizeControls() {
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnEdit = document.getElementById("btnUpdate_Def");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
         btnAddDetails.onclick = AddNewRow; //
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
     }
     function AddNewRow() {
         if (!SysSession.CurrentPrivileges.AddNew)
@@ -92,14 +95,15 @@ var GendefVendorGroup;
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            //$(".minus_btn").addClass("display_none");
-            //$("#btnedite").removeClass("display_none");
+            //$(".btn-minus").addClass("display_none");
+            //$("#btnUpdate_Def").removeClass("display_none");
             CountGrid++;
         }
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GendefVendorGroup  minus_btn"></span><div class="col-lg-1 col-xs-2 style_pading"> <input id="txtCode' + cnt + '" type= "text" class="form-control right2 " disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control right4" disabled="disabled" /></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        // html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GendefVendorGroup  btn-minus"></span><div class="col-lg-1 col-xs-2 style_pading"> <input id="txtCode' + cnt + '" type= "text" class="form-control right2 " disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control right4" disabled="disabled" /></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n\t\t        <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n\t\t        <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n                </tr>";
         $("#div_Data").append(html);
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
@@ -128,9 +132,9 @@ var GendefVendorGroup;
         return;
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave_Def');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
             var CanAdd = true;
             if (CountGrid > 0) {
                 for (var i = 0; i < CountGrid; i++) {
@@ -275,12 +279,12 @@ var GendefVendorGroup;
     }
     function btnback_onclick() {
         $('#btnAddDetails').toggleClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave_Def').toggleClass("display_none");
+        $('#btnBack_Def').toggleClass("display_none");
         $("#div_Data :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         CountGrid = 0;
         $("#div_Data").html("");
         Display();

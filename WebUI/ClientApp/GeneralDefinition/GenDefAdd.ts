@@ -12,7 +12,7 @@ namespace GenDefAdd {
 
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
@@ -24,7 +24,7 @@ namespace GenDefAdd {
     var AccDataDatacode: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();    
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
-    var btnback: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -38,6 +38,10 @@ namespace GenDefAdd {
             document.getElementById('Screen_name').innerHTML = "Purchase Outlay";
 
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -47,21 +51,21 @@ namespace GenDefAdd {
         Display();
     }
 
-    $('#btnedite').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
             $("#div_Data :input").removeAttr("disabled");
             $("#Defaultperc").removeAttr("disabled");
             $("#VatType").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
 
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -87,9 +91,9 @@ namespace GenDefAdd {
     function InitalizeControls() {
         // ;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -100,8 +104,8 @@ namespace GenDefAdd {
     function InitalizeEvents() {
         // ;
         btnAddDetails.onclick = AddNewRow;//
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
     }
 
     function AddNewRow() {
@@ -131,12 +135,12 @@ namespace GenDefAdd {
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
             CountGrid++;
         }
 
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
 
         $(document).ready(function () {
             // Initialize select2
@@ -161,18 +165,72 @@ namespace GenDefAdd {
     function BuildControls(cnt: number) {
         var html;
         // ;
-        html = html = '<div id="No_Row' + cnt + '" class="col-lg-12 p-0">' +
-            '<input id="txt_ID' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
-            '<span id="btn_minus' + cnt + '"  class="glyphicon glyphicon-remove-sign fontitm3GenDefAdd  minus_btn display_none"></span>' +
-            '<input id="txt_StatusFlag' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
-            ' <input id="txtCode' + cnt + '" type= "text" class="form-control right2  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" disabled="disabled"/>' +
-            '<input id="txtDescA' + cnt + '" type= "text" class="form-control right3  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled"/>' +
-            '<input id="txtDescL' + cnt + '" type= "text" class="form-control right4  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled" />' +
-            '<input id="Defaultperc' + cnt + '"disabled type= "Number" class="form-control right4  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1"    />' +
-            '<select id="VatType' + cnt + '" disabled   class="form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر الضريبه" : "Choose Tax")+'</option></select>' +
-            '<select style="display: none;"  id="ddlAcc' + cnt + '" disabled   class="ddlAcc form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
-            '<select style="display: none;"  id="ddlAccop' + cnt + '" disabled   class="ddlAccop form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
-            '</div>';
+        html = `<tr id= "No_Row${cnt}"> 
+		             <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/></div>
+		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/></div>
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtCode${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescL${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="Defaultperc${cnt}" type="Number" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+                        <div class="form-group">
+                            <select id="VatType${cnt}" disabled   class="form-control ">
+			                      <option value="Null">${(lang == "ar" ? "اختر الضريبه" : "Choose Tax")}</option>
+			                </select>
+                        </div>
+	                </td>
+                    <td>
+                        <div class="form-group">
+                            <select style="display: none;"  id="ddlAcc${cnt}" disabled   class="form-control ">
+			                  <option value="Null">${(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")}</option>
+			                </select>
+                        </div>
+	                </td>
+                    <td>
+                        <div class="form-group">
+                            <select style="display: none;"  id="ddlAccop${cnt}" disabled   class="form-control">
+			                  <option value="Null">${(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")}</option>
+			                </select>
+                        </div>
+	                </td>
+                    
+
+                </tr>`;
+
+
+        //html = html = '<div id="No_Row' + cnt + '" class="col-lg-12 p-0">' +
+        //    '<input id="txt_ID' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
+        //    '<span id="btn_minus' + cnt + '"  class="glyphicon glyphicon-remove-sign fontitm3GenDefAdd  minus_btn display_none"></span>' +
+        //    '<input id="txt_StatusFlag' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
+        //    ' <input id="txtCode' + cnt + '" type= "text" class="form-control right2  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" disabled="disabled"/>' +
+        //    '<input id="txtDescA' + cnt + '" type= "text" class="form-control right3  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled"/>' +
+        //    '<input id="txtDescL' + cnt + '" type= "text" class="form-control right4  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled" />' +
+        //    '<input id="Defaultperc' + cnt + '"disabled type= "Number" class="form-control right4  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1"    />' +
+        //    '<select id="VatType' + cnt + '" disabled   class="form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر الضريبه" : "Choose Tax")+'</option></select>' +
+        //    '<select style="display: none;"  id="ddlAcc' + cnt + '" disabled   class="ddlAcc form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
+        //    '<select style="display: none;"  id="ddlAccop' + cnt + '" disabled   class="ddlAccop form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
+        //    '</div>';
 
         //class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/ > </div></div > </div>';
         $("#div_Data").append(html);
@@ -261,11 +319,11 @@ namespace GenDefAdd {
     }
 
     function btnsave_onClick() { 
-        loading('btnsave');
+        loading('btnSave_Def');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
         var CanAdd: boolean = true;
         if (CountGrid > 0)
         {
@@ -527,12 +585,12 @@ namespace GenDefAdd {
 
     function btnback_onclick() {
         $('#btnAddDetails').toggleClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave_Def').toggleClass("display_none");
+        $('#btnBack_Def').toggleClass("display_none");
         $("#div_Data :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $("#Defaultperc").attr("disabled", "disabled");
         $("#VatType").attr("disabled", "disabled");
         $("#ddlAcc").attr("disabled", "disabled");

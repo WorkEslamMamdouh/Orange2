@@ -4,150 +4,60 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<style>
-    .inner tr td {
-        border-top: none !important;
-    }
 
-    .btn-info {
-        color: #fff;
-        background-color: #5bc0de;
-        border-color: #46b8da;
-        padding: 10px 16px;
-        font-size: 18px;
-        line-height: 1.3333333;
-        border-radius: 6px;
-    }
+<div class="row gy-3" id="div_ContentData">
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <!-- Table  -->
+                <div class="custom-table my-4">
+                    <div class="table-responsive">
+                        <table class="table table-borderless ">
+                            <thead>
+                                <tr>
+                                    <th style="width: 1%"></th>
+                                    <th style="width: 5%"> @SystemResource.App_Code </th>
+                                    <th style="width: 20%">@SystemResource.App_DescA</th>
+                                    <th style="width: 20%">@SystemResource.App_DescE </th>
+                                    <th style="width: 20%"> @SystemResource.app_prc</th>
+                                    <th style="width: 20%"> @SystemResource.App_Tax</th>
+                                    <th style="width: 20%"> @SystemResource.PurchaseAccount</th>
+                                    <th style="width: 20%"> @SystemResource.ProcessesAccount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="div_Data"></tbody>
 
-    /*.fontitm3 {
-        float: right;
-        margin: 5px -15px 0px 0px !important;
-        font-size: 25px !important;
-    }*/
-    .fontitm3 {
-        float: right;
-        margin: -7px -12px 0px 0px !important;
-        font-size: 25px !important;
-        top: 12px;
-        /*position: absolute;*/
-        /* right: -3px; */
-    }
-
-    .style_pading {
-        padding-left: 1px;
-        padding-right: 1px;
-    }
-
-    .table_11 tr td:nth-child(3) {
-        width: 200px;
-    }
-
-    .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
-        width: 120px;
-    }
-
-    .table_11 {
-        margin-bottom: 0px;
-    }
-
-    .auto-style1 {
-        background-color: #F5F5F5;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    #btnAddDetails {
-        font-size: 40px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-
-    .minus_btn {
-    }
-
-    .font_codenumber {
-        font-size: 19px;
-        font-weight: bold;
-    }
-    .ddlAccop {
-       width:15%!important
-    }
-    .ddlAcc {
-        width: 15% !important
-    }
-</style>
-
-<script>
-    $(document).ready(function () {
-        // Initialize select2
-        $(".ddlAcc").select2();
-        $(".ddlAccop").select2(); 
-
-        // Read selected option
-        $('#but_read').click(function () {
-            var username = $('.ddlAcc option:selected').text();
-            var userid = $('.ddlAcc').val();
-
-            var username = $('.ddlAccop option:selected').text();
-            var userid = $('.ddlAccop').val();            
-
-            $('#result').html("id : " + userid + ", name : " + username);
-        });
-    });
-</script>
-
-<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="div_ContentData">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <div class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10">
+                        </table>
+                        <div class="d-flex justify-content-start mr-1">
+                            <span id="btnAddDetails" class="mb-3 display_none"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <button type="button" class="btn btn-warning display_none" id="btnback">
-                <span class="glyphicon glyphicon-backward"></span> @SystemResource.App_back
-            </button>
-            <button type="button" class="btn btn-primary" id="btnedite">
-                <span class="glyphicon glyphicon-edit"></span> @SystemResource.App_Update
-            </button>
-            <button id="btnsave" type="button" class="btn btn-success display_none">
-                @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
-            </button>
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 font_codenumber">
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-            <span class="">@SystemResource.App_Code</span>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <span class="">@SystemResource.App_DescA</span>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <span class="">@SystemResource.App_DescE</span>
-        </div>
-        <div style="width:10%" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">
-            <span class="">@SystemResource.app_prc </span>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <span class="">@SystemResource.App_Tax</span>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <span class="">  @SystemResource.PurchaseAccount </span>
-        </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width: 15%;">
-            <span class="">  @SystemResource.ProcessesAccount </span>
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0" id="div_Data">
-        </div>
-        <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  display_none"></span>
     </div>
 </div>
 
-<script src="~/ClientApp/GeneralDefinition/GenDefAdd.js"></script>
+
+
+@section Script{
+    <script>
+        $(document).ready(function () {
+            // Initialize select2
+            $(".ddlAcc").select2();
+            $(".ddlAccop").select2();
+
+            // Read selected option
+            $('#but_read').click(function () {
+                var username = $('.ddlAcc option:selected').text();
+                var userid = $('.ddlAcc').val();
+
+                var username = $('.ddlAccop option:selected').text();
+                var userid = $('.ddlAccop').val();
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
+    <script src="~/ClientApp/GeneralDefinition/GenDefAdd.js"></script>
+}

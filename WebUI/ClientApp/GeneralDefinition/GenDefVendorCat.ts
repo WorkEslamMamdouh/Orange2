@@ -14,7 +14,7 @@ namespace GenDefVendorCat {
     var Details_Acount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
 
     var btnNew_sub_Add_service: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
@@ -24,7 +24,7 @@ namespace GenDefVendorCat {
 
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
-    var btnback: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -40,7 +40,9 @@ namespace GenDefVendorCat {
 
         }
 
-
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         //
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
@@ -49,19 +51,19 @@ namespace GenDefVendorCat {
         Display();
     }
 
-    $('#btnedite').on('click', function () {
+    $('#btnUpdate_Def').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
         }
         else {
-            $('#btnsave').toggleClass("display_none");
-            $('#btnback').toggleClass("display_none");
+            $('#btnSave_Def').toggleClass("display_none");
+            $('#btnBack_Def').toggleClass("display_none");
 
-            $("#btnedite").toggleClass("display_none");
+            $("#btnUpdate_Def").toggleClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
@@ -73,12 +75,12 @@ namespace GenDefVendorCat {
 
         }
         if (SysSession.CurrentPrivileges.Remove) {
-            $(".minus_btn").removeClass("display_none");
+            $(".btn-minus").removeClass("display_none");
 
         }
         else {
 
-            $(".minus_btn").addClass("display_none");
+            $(".btn-minus").addClass("display_none");
 
         }
 
@@ -87,9 +89,9 @@ namespace GenDefVendorCat {
     function InitalizeControls() {
         //
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -100,8 +102,8 @@ namespace GenDefVendorCat {
     function InitalizeEvents() {
         //
         btnAddDetails.onclick = AddNewRow;//
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
     }
 
     function AddNewRow() {
@@ -130,12 +132,12 @@ namespace GenDefVendorCat {
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
 
-            //$(".minus_btn").addClass("display_none");
-            $("#btnedite").removeClass("display_none");
+            //$(".btn-minus").addClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
 
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
 
         $(document).ready(function () {
             // Initialize select2
@@ -156,7 +158,40 @@ namespace GenDefVendorCat {
     function BuildControls(cnt: number) {
         var html;
         //
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GenDefVendorCat  minus_btn"></span><div class="col-lg-1 style_pading"> <input id="txtCode' + cnt + '" type= "number" class="form-control right2 " disabled="disabled"/></div><div class="col-lg-4 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-4 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control right4" disabled="disabled" /></div><div class="col-lg-2 style_pading"> <select id="txtAcount_Code' + cnt + '" class="form-control ddlAcc"  disabled="disabled"> <option value="Null">' +(lang == "ar" ? "رقم الحساب" : "Account number")+'</option></select ></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+   //     html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GenDefVendorCat  btn-minus"></span><div class="col-lg-1 style_pading"> <input id="txtCode' + cnt + '" type= "number" class="form-control right2 " disabled="disabled"/></div><div class="col-lg-4 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-4 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control right4" disabled="disabled" /></div><div class="col-lg-2 style_pading"> <select id="txtAcount_Code' + cnt + '" class="form-control ddlAcc"  disabled="disabled"> <option value="Null">' +(lang == "ar" ? "رقم الحساب" : "Account number")+'</option></select ></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        html = `<tr id= "No_Row${cnt}"> 
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtCode${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescL${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+                        <div class="form-group">
+                            	<select id="txtAcount_Code${cnt}" class="form-control"  disabled> 
+		                            <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
+		                        </select >
+                        </div>
+	                </td>
+                    
+		        <input id = "txt_StatusFlag${cnt}" name = " " type = "hidden" disabled class="form-control"/></div>
+		        <input id = "txt_ID${cnt}" name = " " type = "hidden" disabled class="form-control"/></div>
+                </tr>`;
+
         $("#div_Data").append(html);
 
         for (var i = 0; i < Details_Acount.length; i++) {
@@ -224,11 +259,11 @@ namespace GenDefVendorCat {
     }
 
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave_Def');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
 
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
@@ -472,12 +507,12 @@ namespace GenDefVendorCat {
 
     function btnback_onclick() {
         $('#btnAddDetails').toggleClass("display_none");
-        $('#btnsave').toggleClass("display_none");
-        $('#btnback').toggleClass("display_none");
+        $('#btnSave_Def').toggleClass("display_none");
+        $('#btnBack_Def').toggleClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
 
 
         CountGrid = 0;

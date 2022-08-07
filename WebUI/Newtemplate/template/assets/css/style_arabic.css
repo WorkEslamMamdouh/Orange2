@@ -29625,8 +29625,14 @@ input[class=checkbox]:checked:before {
     height: 2rem;
     width: 2rem;
 }
+.form-check .special-label {
+    line-height: 2;
+}
+/*.line-height-2 {
+    
+}*/
 /*Cursor*/
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 /*Account Menu Style*/

@@ -135,7 +135,7 @@ var SlsTrSalesManager;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "إصدار الفواتير ";
+            document.getElementById('Screen_name').innerHTML = "فواتير التجزئه ";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Retail invoices";
