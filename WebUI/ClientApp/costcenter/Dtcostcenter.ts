@@ -44,7 +44,11 @@ namespace Dtcostcenter {
         } else {
             document.getElementById('Screen_name').innerHTML = "Detail Cost Center Types ";
         }
-
+        //$("#btnShow").addClass("display_none");
+        //$("#btnPrintTrview").addClass("display_none");
+        //$("#btnPrintTrPDF").addClass("display_none");
+        //$("#btnPrintTrEXEL").addClass("display_none");
+        //$("#btnPrintTransaction").addClass("display_none");
         InitializeControls();
         InitializeEvents();
         InitializeGrid();

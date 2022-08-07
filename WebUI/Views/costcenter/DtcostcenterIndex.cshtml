@@ -4,91 +4,110 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<style>
-    .inner tr td {
-        border-top: none !important;
-    }
-
-    .style_pading {
-        padding-left: 1px;
-        padding-right: 1px;
-    }
-
-    .table_11 tr td:nth-child(3) {
-        width: 200px;
-    }
-
-    .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
-        width: 120px;
-    }
-
-    .table_11 {
-        margin-bottom: 0px;
-    }
-
-    .auto-style1 {
-        background-color: #F5F5F5;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    #btnAddDetails {
-        font-size: 40px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
+@*<style>
+        .inner tr td {
+            border-top: none !important;
         }
 
-    #btnAddDetails2 {
-        font-size: 40px;
-    }
-
-        #btnAddDetails2:hover {
-            color: #24b414;
+        .style_pading {
+            padding-left: 1px;
+            padding-right: 1px;
         }
 
-    #btnAddDetails3 {
-        font-size: 40px;
-    }
-
-        #btnAddDetails3:hover {
-            color: #24b414;
+        .table_11 tr td:nth-child(3) {
+            width: 200px;
         }
 
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
+        .table_11 tr th:nth-child(12), .table_11 tr td:nth-child(12) {
+            width: 120px;
+        }
 
-    .minus_btn {
-    }
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.4;
-    }
-</style>
+        .table_11 {
+            margin-bottom: 0px;
+        }
 
+        .auto-style1 {
+            background-color: #F5F5F5;
+        }
+
+        .display_none {
+            display: none !important;
+        }
+
+        #btnAddDetails {
+            font-size: 40px;
+        }
+
+            #btnAddDetails:hover {
+                color: #24b414;
+            }
+
+        #btnAddDetails2 {
+            font-size: 40px;
+        }
+
+            #btnAddDetails2:hover {
+                color: #24b414;
+            }
+
+        #btnAddDetails3 {
+            font-size: 40px;
+        }
+
+            #btnAddDetails3:hover {
+                color: #24b414;
+            }
+
+        .glyphicon-remove-sign:hover {
+            color: red
+        }
+
+        .minus_btn {
+        }
+        .disabledDiv {
+            pointer-events: none;
+            opacity: 0.4;
+        }
+    </style>*@
+<div class="row gy-3">
+      <!-- Details  Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divMasterGridiv">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="searchbutmemreport" type="text" class="form-control" placeholder="@SystemResource.Search ">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div class="col-12">
+                        <div id="divMasterGrid"></div>
+                    </div>
+                    <div class="d-flex justify-content-center text-blue text-center fw-bold mt-4">
+                        @SystemResource.App_DoubleDisplay
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @*******************************asmaa*@
 <div id="divMasterGridiv" class="col-lg-12 col-md-12 col-sm-12 col-xs-12   display_none ">
     <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3" style="margin-bottom: 4px;margin-right: 27px;margin-top: 9px;">
         <input id="searchbutmemreport" name="" type="text" class="form-control  text_Display" placeholder=" @SystemResource.Search ">
     </div>
     @*<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pr-0 ">
-        <button style="width:100%" id="btnShow" type="button" class="btn btn-info">@SystemResource.App_Show   <span class="glyphicon glyphicon-save"></span></button>
-    </div>*@
+            <button style="width:100%" id="btnShow" type="button" class="btn btn-info">@SystemResource.App_Show   <span class="glyphicon glyphicon-save"></span></button>
+        </div>*@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <table id="divMasterGrid"></table>
     </div>
 
 </div>
 @********************************@
-
-
-
-
-
 <div class="col-xs-12    borderred " id="div_Master">
     <div class="col-lg-9  " style="position:fixed!important;top:7%!important ;	">
         <div id="DivMassage" class="col-lg-12  display_none">
@@ -111,7 +130,7 @@
             <input type="text" class="form-control input-sm " disabled="disabled" name="DescE" id="txtDescE" style="font-size: 16px !important;">
         </div>
 
-       
+
 
         <div class="col-xs-2 p-0">
             <button type="button" class="btn btn-warning" id="btnAdd">
@@ -141,8 +160,6 @@
         </div>
     </div>
 </div>
- 
-
 <div id="div_ACC" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
     <label id="lepContentData" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepContentData" class="ifontowsam fa fa-caret-left"></span> @SystemResource.Linked_accounts</label>
     <button type="button" class="btn btn-warning display_none" id="btnBackAcc">
@@ -210,18 +227,19 @@
         </div>
     </div>
 </div>
-<script>
 
-
-    $('#lepContentData').on('click', function () {
-        $('#div_ContentData').toggleClass('showdiv');
-        $('#spanlepContentData').toggleClass('fa-caret-left');
-        $('#spanlepContentData').toggleClass('fa-caret-down');
-    });
-    $('#lepdContentData2').on('click', function () {
-        $('#div_ContentData2').toggleClass('showdiv');
-        $('#spanlepContentData2').toggleClass('fa-caret-left');
-        $('#spanlepContentData2').toggleClass('fa-caret-down');
-    });
-</script>
-<script src="~/ClientApp/costcenter/Dtcostcenter.js"></script>
+@section Script{
+    <script>
+        $('#lepContentData').on('click', function () {
+            $('#div_ContentData').toggleClass('showdiv');
+            $('#spanlepContentData').toggleClass('fa-caret-left');
+            $('#spanlepContentData').toggleClass('fa-caret-down');
+        });
+        $('#lepdContentData2').on('click', function () {
+            $('#div_ContentData2').toggleClass('showdiv');
+            $('#spanlepContentData2').toggleClass('fa-caret-left');
+            $('#spanlepContentData2').toggleClass('fa-caret-down');
+        });
+    </script>
+    <script src="~/ClientApp/costcenter/Dtcostcenter.js"></script>
+}

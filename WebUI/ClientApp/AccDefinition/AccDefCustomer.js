@@ -85,6 +85,7 @@ var AccDefCustomer;
             document.getElementById('Screen_name').innerHTML = "Customers";
         }
         debugger;
+        $('#btnPrintTransaction').addClass('d-none');
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
@@ -551,16 +552,6 @@ var AccDefCustomer;
     }
     function BuildControls(cnt) {
         var html;
-        //html = '<div id="row_font_header' + cnt + '" class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">' +
-        //    '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm7Processes lebelminus"></span>' +
-        //    '<div class="col-lg-2" style = "width: 14%;"><select disabled id="CusIDTypeCode' + cnt + '" class="form-control"> <option value="null"> ' + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + '</option> </select ></div>' +
-        //    '<div class="col-lg-1" style = "width: 17%;" ><input disabled id="IDNo' + cnt + '" type="number" class="form-control"></div>' +
-        //    '<div class="col-lg-1" style = "width: 13%;"><input disabled id="IDIssuePlace' + cnt + '" type="text" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDIssueDate' + cnt + '" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDIssueDateH' + cnt + '" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style = "width: 14%;"><input type="date" disabled id="IDExpireDate' + cnt + '" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style = "width: 14%;"><input type="text" disabled id="IDExpireDateH' + cnt + '" class="form-control"></div>' +
-        //    '<div class="col-lg-2" style=""><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="CustomerDocID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
         html = "<tr id= \"row_font_header" + cnt + "\">\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select disabled id=\"CusIDTypeCode" + cnt + "\" class=\"form-control\"> \n\t\t                        <option value=\"null\">" + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + "</option> \n\t\t                     </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDNo" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDIssuePlace" + cnt + "\" type=\"text\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input type=\"date\" disabled id=\"IDIssueDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDIssueDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"date\" disabled id=\"IDExpireDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDExpireDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n             <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n\t\t    <input id=\"CustomerDocID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
         $("#data_lebel").append(html);
         for (var i = 0; i < CodesTypes.length; i++) {
