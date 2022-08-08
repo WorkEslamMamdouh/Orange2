@@ -125,7 +125,7 @@ namespace VATReport {
     }
      function InitializeSalesGrid() {
         
-        let res: any = GetResourceList("");
+         let res: any = GetResourceList("");
         SalesGrid.ElementName = "divSalesGrid";
         SalesGrid.Paging = true;
         SalesGrid.PageSize = 10;
@@ -145,8 +145,11 @@ namespace VATReport {
             { title: res.Update_Sales, name: "Upd_Amount", type: "text", width: "20%" },
             { title: res.App_Tax, name: "VAT_Amount", type: "text", width: "20%" }
         ];
-        SalesGrid.Bind();
+         SalesGrid.Bind();
+     
+
     }
+    
      function InitializePurGrid() {
 
          let res: any = GetResourceList("");
@@ -188,7 +191,6 @@ namespace VATReport {
                     let SlsPeriodDet = VatPeriodDetail.filter(x => x.TYPE == 1).sort(function (a, b) {return a.LineOrder - b.LineOrder;} )  ;
                     SalesGrid.DataSource = SlsPeriodDet;
                     SalesGrid.Bind();
-                    
                     let AmountValueSum:number = 0;
                     let AmountUpdtSum = 0;
                     let AmountVatSum = 0;
@@ -487,6 +489,7 @@ namespace VATReport {
         VatPeriodDetail = new Array<AQVAT_GetPeriodDetail>();
         SalesGrid.DataSource = VatPeriodDetail;
         SalesGrid.Bind();
+
         PurGrid.DataSource = VatPeriodDetail;
         PurGrid.Bind();
     }
