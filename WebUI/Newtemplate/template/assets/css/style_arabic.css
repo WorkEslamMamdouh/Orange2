@@ -29114,7 +29114,7 @@ div.tagsinput {
         }
 .satistics-table {
     position: absolute;
-    top: -2rem;
+    top: 2.75rem;
 }
 @media (max-width: 768px) {
     .satistics-table {
@@ -29153,24 +29153,26 @@ div.tagsinput {
         .inside-table .counter:focus {
             background-color: var(--Light-blue);
         }
-    .inside-table .value-button {
-        display: inline-block;
-        border: none;
-        margin: -2px 17px 0 17px;
-        width: 19px;
-        height: 40px;
-        text-align: center;
-        vertical-align: middle;
-        padding: 14px 0;
-        background: #eee;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        color: var(--bs-light);
-    }
+.inside-table .value-button {
+    display: inline-block;
+    border: none;
+    margin: -2px 17px 0 17px;
+    width: 19px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 14px 0;
+    background: #eee;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--bs-light);
+    margin-left: 27px;
+    margin-top: 6px;
+}
    
 .inside-table .value-button:hover {
     cursor: pointer;
