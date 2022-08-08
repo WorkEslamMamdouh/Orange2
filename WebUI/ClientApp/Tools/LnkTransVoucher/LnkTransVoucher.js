@@ -23,9 +23,9 @@ var LnkTransVoucher;
     var CountGrid = 0;
     var btnAddDetails;
     var btnShow;
-    var btnsave;
-    var btnback;
-    var btnedite;
+    var btnSave_Def;
+    var btnBack_Def;
+    var btnUpdate_Def;
     var btn_minus;
     var drpuserType;
     var drpStatus;
@@ -39,6 +39,10 @@ var LnkTransVoucher;
         else {
             document.getElementById('Screen_name').innerHTML = "Design link constraints";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('icon-bar');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitializeEvents();
@@ -55,10 +59,10 @@ var LnkTransVoucher;
     LnkTransVoucher.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         btnShow = document.getElementById("btnShow");
-        btnedite = document.getElementById("btnedite");
+        btnUpdate_Def = document.getElementById("btnUpdate_Def");
         btn_minus = document.getElementById("btn_minus");
         drpuserType = document.getElementById("drpuserType");
         drpStatus = document.getElementById("drpStatus");
@@ -67,9 +71,9 @@ var LnkTransVoucher;
         btnAddDetails.onclick = AddNewRow;
         //btnShow.onclick = Display_All;
         drpStatus.onchange = Display_All;
-        btnsave.onclick = btnsave_onclick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnsave_onclick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
     }
     function fillddlBranch() {
         Ajax.Callsync({
@@ -212,10 +216,10 @@ var LnkTransVoucher;
         for (var i = 0; i < Details.length; i++) {
             validation(i);
         }
-        $('#btnedite').addClass('display_none');
-        $('#btnback').removeClass('display_none');
+        $('#btnUpdate_Def').addClass('display_none');
+        $('#btnBack_Def').removeClass('display_none');
         $('#title_grid1').removeClass('display_none');
-        $('#btnsave').removeClass('display_none');
+        $('#btnSave_Def').removeClass('display_none');
         $('#btnAddDetails').removeClass('display_none');
         $('#btnShow').addClass('display_none');
         $('#drpStatus').attr('disabled', 'disabled');
@@ -226,9 +230,9 @@ var LnkTransVoucher;
             validationdis(i);
         }
         Display_All();
-        $('#btnedite').removeClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
+        $('#btnBack_Def').addClass('display_none');
+        $('#btnSave_Def').addClass('display_none');
         $('#btnAddDetails').addClass('display_none');
         //$('#btnShow').removeClass('display_none');
         $('#drpuserType').removeAttr('disabled');
@@ -550,7 +554,7 @@ var LnkTransVoucher;
                 $("#IsCollective" + i).val("True");
             }
         }
-        $('#btnedite').removeClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
     }
     function AddNewRow() {
         if (!SysSession.CurrentPrivileges.AddNew)
@@ -601,7 +605,7 @@ var LnkTransVoucher;
             }
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
     function Assign() {
         //
@@ -705,9 +709,9 @@ var LnkTransVoucher;
                 var result = d;
                 if (result.IsSuccess) {
                     MessageBox.Show('تم الحفظ', 'تم');
-                    $('#btnedite').removeClass('display_none');
-                    $('#btnback').addClass('display_none');
-                    $('#btnsave').addClass('display_none');
+                    $('#btnUpdate_Def').removeClass('display_none');
+                    $('#btnBack_Def').addClass('display_none');
+                    $('#btnSave_Def').addClass('display_none');
                     //$('#btnShow').removeClass('display_none');
                     $('#btnAddDetails').addClass('display_none');
                     $('#drpuserType').removeAttr('disabled');

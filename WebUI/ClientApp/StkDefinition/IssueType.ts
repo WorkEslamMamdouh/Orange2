@@ -7,16 +7,16 @@ namespace IssueType {
 
     var Details: Array<I_D_IssueType> = new Array<I_D_IssueType>();   
     var DisplayDetail: Array<I_D_IssueType> = new Array<I_D_IssueType>();   
-    var btnsave: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
-    var btnedite: HTMLButtonElement;
+    var btnUpdate_Def: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();    
     var SysSession: SystemSession = GetSystemSession(Modules.IssueType);
     var Model: I_D_IssueType = new I_D_IssueType();
     var AccDataData: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
-    var btnback: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -28,7 +28,10 @@ namespace IssueType {
         } else {
             document.getElementById('Screen_name').innerHTML = "Payment Type";
 
-        }                
+        }   
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);    
         InitalizeControls();
         InitalizeEvents();     
@@ -42,9 +45,9 @@ namespace IssueType {
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnUpdate_Def = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -55,9 +58,9 @@ namespace IssueType {
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow;//
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
     }
 
     function AddNewRow() {        
@@ -85,10 +88,10 @@ namespace IssueType {
             $("#Txt_Remarks" + CountGrid).removeAttr("disabled");    
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            $("#btnedite").removeClass("display_none"); 
+            $("#btnUpdate_Def").removeClass("display_none"); 
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
 
 
@@ -96,7 +99,41 @@ namespace IssueType {
 
         var html="";
 
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12"><div class="col-lg-12"><div class="col-lg-1 style_pading" style="width:1%;"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3AccDefBox  minus_btn"></span></div><div class="col-lg-3 style_pading"><input id="txtDescA' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-3 style_pading"><input id="txtDescE' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-2 style_pading "><select id="ddlAcc' + cnt + '" style="display: none; width:100%" disabled class="ddlAcc col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">' + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + '</option></select></div><div class="col-lg-3 style_pading" style="width:30%;"><input id="Txt_Remarks' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-1"><input id="txt_StatusFlag' + cnt + '" name=" " type="hidden" disabled class="form-control" /></div><div class="col-lg-1"><input id="IssueTypeID' + cnt + '" name=" " type="hidden" class="form-control" /></div></div></div>';
+        html = `<tr id= "No_Row${cnt}"> 
+		    
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescE${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <select id="ddlAcc${cnt}"  class="form-control ">
+		                        <option value="Null">${(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")}</option>
+		                    </select>
+
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="Txt_Remarks${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+		            <input id = "IssueTypeID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+
+                </tr>`;
+
 
       
         $("#div_Data").append(html);
@@ -154,11 +191,11 @@ namespace IssueType {
     }
 
     function btnsave_onClick() {   
-        loading('btnsave');     
+        loading('btnSave_Def');     
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
 
         var CanAdd: boolean = true;
         if (CountGrid == 0) {
@@ -185,17 +222,17 @@ namespace IssueType {
     function btnedite_onclick() {      
         if (!SysSession.CurrentPrivileges.EDIT) return;    
 
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
+        $('#btnSave_Def').removeClass("display_none");
+        $('#btnBack_Def').removeClass("display_none");
         $("#div_ContentData :input").removeAttr("disabled");
-        $("#btnedite").addClass("display_none");    
+        $("#btnUpdate_Def").addClass("display_none");    
         $(".disable").attr("disabled", "disabled");   
 
         if (SysSession.CurrentPrivileges.Remove ==true) {
-            $(".minus_btn").removeClass("display_none");    
+            $(".btn-minus").removeClass("display_none");    
         }
         else {  
-            $(".minus_btn").addClass("display_none");   
+            $(".btn-minus").addClass("display_none");   
         }
         debugger
         if (SysSession.CurrentPrivileges.AddNew == true) {
@@ -262,12 +299,12 @@ namespace IssueType {
 
     function btnback_onclick() {   
          
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");      
         $("#btnAddDetails").addClass("display_none");
        // DisplayAccDefBox();
@@ -386,12 +423,12 @@ namespace IssueType {
         });
     }     
     function success() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         Display();

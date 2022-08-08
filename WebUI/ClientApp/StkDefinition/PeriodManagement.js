@@ -35,6 +35,9 @@ var PeriodManagement;
         else {
             document.getElementById('Screen_name').innerHTML = "Period Management";
         }
+        $("#iconbar_Definition").addClass("d-none");
+        $("#divIconbar").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         FinYear = Number(SysSession.CurrentEnvironment.CurrentYear);
         InitalizeControls();
@@ -105,7 +108,7 @@ var PeriodManagement;
                     txt.disabled = false;
                     txt.id = "FixQty" + item.PERIOD_CODE;
                     txt.name = "FixQty";
-                    txt.className = "form-control input-sm dis";
+                    txt.className = "form-check-input";
                     txt.onchange = function (e) {
                         //  check_Account(item.Ser);
                         UpdateFixzQty_Cost(item.PERIOD_CODE, txt.checked, true);
@@ -124,7 +127,7 @@ var PeriodManagement;
                     txt.disabled = false;
                     txt.id = "FixCost" + item.PERIOD_CODE;
                     txt.name = "FixCost";
-                    txt.className = "form-control input-sm dis";
+                    txt.className = "form-check-input";
                     txt.onchange = function (e) {
                         //  check_Account(item.Ser);
                         UpdateFixzQty_Cost(item.PERIOD_CODE, txt.checked, false);
@@ -141,7 +144,7 @@ var PeriodManagement;
                     txt.type = "button";
                     txt.value = (lang == "ar" ? "اغلاق" : "Close");
                     txt.id = "butClose" + item.PERIOD_CODE;
-                    txt.className = "src-btn btn btn-warning input-sm dis";
+                    txt.className = "btn btn-main";
                     txt.disabled = item.Status == 1 ? true : false;
                     txt.onclick = function (e) {
                         UpdateClose_ReOpen(item.PERIOD_CODE, true);
@@ -156,7 +159,7 @@ var PeriodManagement;
                     txt.type = "button";
                     txt.value = (lang == "ar" ? "اعادة الفتح" : "ReOpen");
                     txt.id = "butOpen" + item.PERIOD_CODE;
-                    txt.className = "src-btn btn btn-warning input-sm dis";
+                    txt.className = "btn btn-main";
                     txt.disabled = item.Status == 1 ? false : true;
                     txt.onclick = function (e) {
                         UpdateClose_ReOpen(item.PERIOD_CODE, false);

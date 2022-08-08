@@ -164,10 +164,10 @@ namespace GenDefAdd {
 
     function BuildControls(cnt: number) {
         var html;
-        // ;
+       
         html = `<tr id= "No_Row${cnt}"> 
-		             <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/></div>
-		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/></div>
+		             <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
                     <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
@@ -219,20 +219,6 @@ namespace GenDefAdd {
                 </tr>`;
 
 
-        //html = html = '<div id="No_Row' + cnt + '" class="col-lg-12 p-0">' +
-        //    '<input id="txt_ID' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
-        //    '<span id="btn_minus' + cnt + '"  class="glyphicon glyphicon-remove-sign fontitm3GenDefAdd  minus_btn display_none"></span>' +
-        //    '<input id="txt_StatusFlag' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 display_none" />' +
-        //    ' <input id="txtCode' + cnt + '" type= "text" class="form-control right2  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" disabled="disabled"/>' +
-        //    '<input id="txtDescA' + cnt + '" type= "text" class="form-control right3  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled"/>' +
-        //    '<input id="txtDescL' + cnt + '" type= "text" class="form-control right4  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" disabled="disabled" />' +
-        //    '<input id="Defaultperc' + cnt + '"disabled type= "Number" class="form-control right4  col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1"    />' +
-        //    '<select id="VatType' + cnt + '" disabled   class="form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر الضريبه" : "Choose Tax")+'</option></select>' +
-        //    '<select style="display: none;"  id="ddlAcc' + cnt + '" disabled   class="ddlAcc form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
-        //    '<select style="display: none;"  id="ddlAccop' + cnt + '" disabled   class="ddlAccop form-control input-sm  col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">'+(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")+'</option></select>' +
-        //    '</div>';
-
-        //class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/ > </div></div > </div>';
         $("#div_Data").append(html);
 
         $("#btn_minus" + cnt).on('click', function () {

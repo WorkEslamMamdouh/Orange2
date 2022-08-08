@@ -32,9 +32,9 @@ namespace LnkTransVoucher {
 
     var btnAddDetails: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
-    var btnedite: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
+    var btnUpdate_Def: HTMLButtonElement;
     var btn_minus: HTMLButtonElement;
 
     var drpuserType: HTMLSelectElement;
@@ -46,6 +46,11 @@ namespace LnkTransVoucher {
     export function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = " تصميم قيود الربط  "; }
         else { document.getElementById('Screen_name').innerHTML = "Design link constraints"; }
+
+        $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('icon-bar');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
@@ -64,10 +69,10 @@ namespace LnkTransVoucher {
     function InitalizeControls() {
 
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
+        btnUpdate_Def = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
         btn_minus = document.getElementById("btn_minus") as HTMLButtonElement;
 
         drpuserType = document.getElementById("drpuserType") as HTMLSelectElement;
@@ -77,9 +82,9 @@ namespace LnkTransVoucher {
         btnAddDetails.onclick = AddNewRow;
         //btnShow.onclick = Display_All;
         drpStatus.onchange = Display_All ;
-        btnsave.onclick = btnsave_onclick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnsave_onclick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
 
 
 
@@ -268,10 +273,10 @@ namespace LnkTransVoucher {
 
         }
 
-        $('#btnedite').addClass('display_none');
-        $('#btnback').removeClass('display_none');
+        $('#btnUpdate_Def').addClass('display_none');
+        $('#btnBack_Def').removeClass('display_none');
         $('#title_grid1').removeClass('display_none');
-        $('#btnsave').removeClass('display_none');
+        $('#btnSave_Def').removeClass('display_none');
         $('#btnAddDetails').removeClass('display_none');
         $('#btnShow').addClass('display_none');
         $('#drpStatus').attr('disabled', 'disabled');
@@ -285,9 +290,9 @@ namespace LnkTransVoucher {
 
         }
         Display_All();
-        $('#btnedite').removeClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
+        $('#btnBack_Def').addClass('display_none');
+        $('#btnSave_Def').addClass('display_none');
         $('#btnAddDetails').addClass('display_none');
         //$('#btnShow').removeClass('display_none');
         $('#drpuserType').removeAttr('disabled');
@@ -731,7 +736,7 @@ namespace LnkTransVoucher {
             }
 
         }
-        $('#btnedite').removeClass('display_none')
+        $('#btnUpdate_Def').removeClass('display_none')
 
 
 
@@ -809,7 +814,7 @@ namespace LnkTransVoucher {
             CountGrid++;
         }
 
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
 
 
 
@@ -922,9 +927,9 @@ namespace LnkTransVoucher {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     MessageBox.Show('تم الحفظ', 'تم')
-                    $('#btnedite').removeClass('display_none');
-                    $('#btnback').addClass('display_none');
-                    $('#btnsave').addClass('display_none');
+                    $('#btnUpdate_Def').removeClass('display_none');
+                    $('#btnBack_Def').addClass('display_none');
+                    $('#btnSave_Def').addClass('display_none');
                     //$('#btnShow').removeClass('display_none');
                     $('#btnAddDetails').addClass('display_none');
                     $('#drpuserType').removeAttr('disabled');

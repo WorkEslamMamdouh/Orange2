@@ -4,126 +4,39 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-
-<style>
-
-    .display_none {
-        display: none !important;
-    }
-
-
-
-    .LEPEL_padingright {
-        padding-right: 25px !important
-    }
-
-    .pading_lep {
-        padding-right: 7px;
-    }
-
-
-
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.8;
-    }
-
-
-
-    .fontitm3 {
-        float: right;
-        margin: 1px -21px 0px 0px !important;
-        font-size: 25px !important;
-        position: absolute;
-    }
-
-    #btnAddDetails {
-        font-size: 31px;
-        float: right;
-        margin: 5px -26px 0px 0px !important;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-
-    .LEPEL_padingright2 {
-        padding-right: 39px !important;
-    }
-
-    .pading_2 {
-        padding: 6px 18px 0px 0px !important;
-    }
-</style>
-<div class="container-fluid">
-
-    <div class="col-lg-12 margingred" id="div_ALLData">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            <label class="col-lg-1 col-xs-4      pading_2  "> @SystemResource.App_SubSystem </label>
-            <div class="col-lg-3 col-xs-8">
-                <select id="drpuserType" class="form-control input-sm"> 
-                    <option value="Null">@SystemResource.choose_branch</option>
-                </select>
-            </div>
-            
-            <div class="col-lg-6 pading_0">
-
-            </div>
-            <div class="col-lg-2 pading_0">
-                <button id="btnback" type="button" class=" btn btn-warning btn btn-custon-four primary-btn-cl display_none ">  @SystemResource.App_back  <span class="adminpro-icon adminpro-caret-down"></span></button>
-                <button id="btnsave" type="button" class="  btn btn-success  btn btn-custon-four display_none ">  @SystemResource.App_save  <i class="fa fa-check-square-o"></i></button>
-                <button id="btnedite" type="button" class="btn-edite btn btn-primary  ">   @SystemResource.App_Update <i class="fa fa-edit"></i>  </button>
-
-            </div>
-
-        </div>
-        <div class="col-lg-12 margingred  borderred  ">
-
-            <div class="col-lg-12    ">
-
-                <table id="ReportGrid1" class="border_gridCont"> </table>
-
-            </div>
-
-        </div>
-        <div class="col-lg-12 margingred  borderred   ">
-            <div class="col-lg-12  ">
-
-                <table id="ReportGrid2" class="border_gridCont"> </table>
-
+<div class="row gy-3" id="div_ContentData">
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="form-group d-flex">
+                            <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">@SystemResource.App_SubSystem</label>
+                            <div class="col-8 col-lg-8 col-md-10">
+                                <select id="drpuserType" class="form-control">
+                                    <option value="Null">@SystemResource.choose_branch</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
-
-            <h4 id="Text_Massage" style=""> رساله </h4>
-
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <!-- Table 1 -->
+                <div id="ReportGrid1" class="mt-4"></div>
+            </div>
         </div>
-
-
-        <br />
-        <br />
-
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <!-- Table 2 -->
+                <div id="ReportGrid2" class="mt-4"></div>
+            </div>
+        </div>
     </div>
-</div> 
-<script src="~/ClientApp/Tools/LnkvarBranch/LnkvarBranch.js"></script>
-<style>
+</div>
 
-    #ReportGrid2 {
-        width: 100% !important;
-        border: solid 2px black;
-        border-radius: 15px;
+@section Script{
+    <script src="~/ClientApp/Tools/LnkvarBranch/LnkvarBranch.js"></script>
     }
-
-    #ReportGrid1 {
-        width: 100% !important;
-        border: solid 2px black;
-        border-radius: 15px;
-    }
-
-</style>

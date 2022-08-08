@@ -1,120 +1,73 @@
 ﻿@using Inv.WebUI.Resources
 @{
-
     Layout = "~/Views/Shared/Layout.cshtml";
-} 
-<style>
+}
 
-    .display_none {
-        display: none !important;
-    }
+<div class="row gy-3" id="div_ALLData">
+    <!-- Filter Container -->
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_PeriodName</label>
+                            <div class="col-8 ">
+                                <input type="text" class="form-control" name="" id="txtPerDesc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_PeriodLong</label>
+                            <div class="col-8 ">
+                                <input type="text" class="form-control" name="" id="txtPerLong">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row ">
+                            <div class="col-4 offset-4">
+                                <div class="form-check d-inline-flex mt-0">
+                                    <input class="form-check-input form-radio special-radio" type="radio" id="Rd_Day" name="RD" value="1">
+                                    <label class="form-check-label special-label" for="Rd_Day"> @SystemResource.App_Day </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-check d-inline-flex mt-0">
+                                    <input class="form-check-input form-radio special-radio" type="radio" id="Rd_Month" name="RD" value="2">
+                                    <label class="form-check-label special-label" for="Rd_Month"> @SystemResource.App_Month</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="d-flex justify-content-end">
+                            <button id="btnGen" type="button" class="btn btn-main">
+                                @SystemResource.App_GeneratePer
+                            </button>
+                        </div>
+                    </div>
 
-
-
-    .LEPEL_padingright {
-        padding-right: 25px !important
-    }
-
-    .pading_lep {
-        padding-right: 7px;
-    }
-
-
-
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.8;
-    }
-
-
-
-    .fontitm3 {
-        float: right;
-        margin: 1px -21px 0px 0px !important;
-        font-size: 25px !important;
-        position: absolute;
-    }
-
-    #btnAddDetails {
-        font-size: 31px;
-        float: right;
-        margin: 5px -26px 0px 0px !important;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-
-    .LEPEL_padingright2 {
-        padding-right: 39px !important;
-    }
-
-    .pading_2 {
-        padding: 6px 18px 0px 0px !important;
-    }
-    #ReportGrid {
-        width: 100% !important;
-        border: solid 2px black;
-        border-radius: 15px;
-    }
-</style>
-<div class="container-fluid"> 
-    <div class="col-lg-12 margingred" id="div_ALLData">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margingred borderred ">
-
-
-            <div class="col-lg-12 pt-2">
-                @*<label class="col-lg-2 col-xs-6 pading_lep  pading_2 pt-3" style="width:10%;"> @SystemResource.Period_start_date </label>
-        <div class="col-xs-2 ">
-            <input type="date" class="input-sm    form-control  text-center" name="" id="txtFromDate" style="height: 33px;">
-        </div>*@
-                <label class="col-md-1 pt-2" style="width:6%;"> @SystemResource.App_PeriodName  </label>
-                <div class="col-xs-2 ">
-                    <input type="text" class="input-sm  form-control text-center" name="" id="txtPerDesc" style="height: 33px;">
                 </div>
-                <div class="col-xs-1 pt-1" style="width:10%;"></div>
-                <label class="col-md-1 pt-2" style="width:6%;"> @SystemResource.App_PeriodLong</label>
-                <div class="col-xs-3">
-                    <div class="col-lg-4 col-xs-3">
-                        <input type="text" class="input-sm  form-control text-center" name="" id="txtPerLong" style="height: 33px;">
-                    </div>
-                    <div class="col-lg-4 col-xs-3">
-                        <label for="" class="col-lg-8 col-md-3 col-xs-4  pading_lep  pading_2  " style="color:black; ">@SystemResource.App_Day </label>
-                        <input style="width:28%;" class="col-lg-4 form-control input-sm" type="radio" id="Rd_Day" name="RD" value="1">
-                    </div>
-                    <div class="col-lg-4 col-xs-3">
-                        <label for="" class="col-lg-8 col-md-3 col-xs-4 pading_lep  pading_2  " style="color:black;"> @SystemResource.App_Month </label>
-                        <input style="width:28%;" class="col-lg-4 form-control input-sm" type="radio" id="Rd_Month" name="RD" value="2">
-                    </div>
-                </div>
-                <div class="col-xs-3 pt-1" style=""></div>
-                <button id="btnGen" type="button" style="width:7%;" class=" btn btn-warning btn btn-custon-four primary-btn-cl  ">  @SystemResource.App_GeneratePer  </button>
-
             </div>
-
-            @*<div class="col-lg-10 pading_0">
-
-        </div>*@
-            @*<div class="col-lg-2 pading_0 ">
-            <button id="btnback" type="button" class=" btn btn-warning btn btn-custon-four primary-btn-cl display_none ">  @SystemResource.App_back  <span class="adminpro-icon adminpro-caret-down"></span></button>
-            <button id="btnsave" type="button" class="  btn btn-success  btn btn-custon-four display_none ">  @SystemResource.App_save  <i class="fa fa-check-square-o"></i></button>
-            <button id="btnedite" type="button" class="btn-edite btn btn-warning  " style="background-color:#fbb248; color:white;">   @SystemResource.App_Update <i class="fa fa-edit"></i>  </button>
-        </div>*@
         </div>
-        <div id="DivMassage" class="col-lg-12  margingred  borderred display_none"> 
-            <h4 id="Text_Massage" style=""> رساله </h4> 
+    </div>
+
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <!-- Table  -->
+                <table id="ReportGrid" class="text-center"></table>
+            </div>
         </div>
-        <div class="col-lg-12 margingred  borderred  "> 
-            <div class="col-lg-12"> 
-                <table id="ReportGrid" class=""> </table> 
-            </div> 
-        </div> 
     </div>
 </div>
-<script src="~/ClientApp/StkDefinition/PeriodManagement.js"></script>
- 
+
+
+
+
+@section Script{
+    <script src="~/ClientApp/StkDefinition/PeriodManagement.js"></script>
+    }

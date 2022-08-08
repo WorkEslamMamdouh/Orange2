@@ -17,11 +17,11 @@ namespace DefStore {
     var sys: SystemTools = new SystemTools();
 
     //buttons
-    var btnsave: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
-    var btnadd: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
+    var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
 
     var checkactive: HTMLInputElement;
@@ -52,6 +52,10 @@ namespace DefStore {
             document.getElementById('Screen_name').innerHTML = " Warehouses";
 
         }
+        $('#btnPrintTransaction').addClass('d-none');
+        $('#btnPrintTrview').addClass('d-none');
+        $('#btnPrintTrPDF').addClass('d-none');
+        $('#btnPrintTrEXEL').addClass('d-none');
         InitalizeControls();
         InitalizeEvents();
         FilldrpinventoryAccount();
@@ -59,10 +63,10 @@ namespace DefStore {
     }
     function InitalizeControls() {
 
-        btnadd = document.getElementById("btnadd") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnedite") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
+        btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement;
+        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
+        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
 
         searchbutmemreport = document.getElementById("searchbutmemreport") as HTMLInputElement;
@@ -75,11 +79,11 @@ namespace DefStore {
 
     }
     function InitalizeEvents() {
-        btnsave.onclick = btnsave_onClick;
+        btnSave.onclick = btnsave_onClick;
         btnShow.onclick = Displaystore;
         btnEdit.onclick = btnEdit_onclick;
-        btnback.onclick = btnback_onclick;
-        btnadd.onclick = btnadd_onclick;
+        btnBack.onclick = btnback_onclick;
+        btnAdd.onclick = btnadd_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
 
 
@@ -203,9 +207,9 @@ namespace DefStore {
     function MasterGridDoubleClick() {
 
 
-        $('#btnedite').removeClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
+        $('#btnBack').addClass('display_none');
+        $('#btnSave').addClass('display_none');
         Selected_Data = new Array<GQ_GetStore>();
         Selected_Data = detailstore.filter(x => x.StoreId == Number(ReportGrid.SelectedKey));
         $('#StoreDetail').removeClass('display_none');
@@ -250,10 +254,10 @@ namespace DefStore {
     function btnEdit_onclick() {
         debugger
         flag = true;
-        $('#btnsave').removeClass('display_none');
-        $('#btnback').removeClass('display_none');
-        $('#btnedite').addClass('display_none');
-        $('#btnadd').addClass('display_none');
+        $('#btnSave').removeClass('display_none');
+        $('#btnBack').removeClass('display_none');
+        $('#btnUpdate').addClass('display_none');
+        $('#btnAdd').addClass('display_none');
 
         $("#masterdiv").attr("disabled", "disabled").off('click');
         $("#masterdiv").addClass("disabledDiv");
@@ -263,11 +267,11 @@ namespace DefStore {
     function btnback_onclick() {
 
         $('#StoreDetail').addClass('display_none');
-        $('#btnsave').addClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnedite').removeClass('display_none');
+        $('#btnSave').addClass('display_none');
+        $('#btnBack').addClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
         $('#btnShow').removeClass('display_none');
-        $('#btnadd').removeClass('display_none');
+        $('#btnAdd').removeClass('display_none');
         $("#masterdiv").removeAttr("disabled");
         $("#masterdiv").removeClass("disabledDiv");
         Displaystore();
@@ -279,11 +283,11 @@ namespace DefStore {
     function btnadd_onclick() {
         flag = false;
         $('#btnShow').addClass('display_none');
-        $('#btnsave').removeClass('display_none');
-        $('#btnback').removeClass('display_none');
+        $('#btnSave').removeClass('display_none');
+        $('#btnBack').removeClass('display_none');
         $("#masterdiv").attr("disabled", "disabled").off('click');
         $("#masterdiv").addClass("disabledDiv");
-        $('#btnedite').addClass('display_none');
+        $('#btnUpdate').addClass('display_none');
         $('#StoreDetail').removeClass('display_none');
         checkactive.checked = false;
         Cleartxt();
@@ -292,11 +296,11 @@ namespace DefStore {
     //---------------------------------------------------------------------------Save button
     function btnsave_onClick() {
 
-        loading('btnsave');
+        loading('btnSave');
 
         setTimeout(function () {
 
-            finishSave('btnsave');
+            finishSave('btnSave');
 
         if (!validations())
             return
@@ -374,7 +378,7 @@ namespace DefStore {
                     btnback_onclick();
                     Displaystore();
 
-                    $('#btnedite').removeClass('display_none');
+                    $('#btnUpdate').removeClass('display_none');
                     Selected_Data = new Array<GQ_GetStore>();
                     Selected_Data = detailstore.filter(x => x.StoreId == Number(storeID));
                     $('#StoreDetail').removeClass('display_none');
