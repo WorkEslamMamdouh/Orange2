@@ -323,38 +323,115 @@ namespace LnkTransVoucher {
     function BuildControls(cnt: number) {
 
         var html;
-        html = '<div id="rowhead' + cnt + '" class="col-lg-12"><div class="col-lg-12">' +
-            '<span id="btn_minus' + cnt + '"  class="fa fa-minus-circle fonLnkTransVoucher display_none"></span>' +
-            '<input id="txt_StatusFlag' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-xs-2 display_none" />' +
-            '<input id="serial_none' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-xs-2 display_none" />' +
-            '<input id="ser' + cnt + '" name="" disabled type="number" class="form-control input-sm col-lg-1 col-xs-2" />' +
-            '<input id="txtLineRemarkA' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-2 col-xs-2" />' +
-            '<input id="txtLineRemarkE' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-2 col-xs-2" />' +
-            '<select id="Val' + cnt + '" disabled  class="form-control input-sm col-lg-3 col-xs-4 pading_2 Val"><option value="Null">' + (lang == "ar" ? " القيمة " : "Value") + ' </option></select>' +
-            '<select id="ISDebit' + cnt + '" disabled  class="form-control input-sm col-lg-1 col-xs-4 pading_2  ISDebit"><option value="True">' + (lang == "ar" ? "مدين" : "Debit") + '</option><option value="False">' + (lang == "ar" ? "دائن" : "Credit") + '</option></select>' +
-           
+        html = `<tr id= "rowhead${cnt}">
+                    <input id="txt_StatusFlag${cnt}" disabled type="text" class="form-control display_none"  />  
+                    <input id="serial_none${cnt}" disabled type="text" class="form-control display_none"  />  
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus display_none"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="ser${cnt}" type="number"  value="${(cnt + 1)}" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtLineRemarkA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtLineRemarkE${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           <select id="Val${cnt}" disabled  class="form-control">
+			                     <option value="Null">${ (lang == "ar" ? " القيمة " : "Value") } </option>
+			               </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="ISDebit${cnt}" disabled  class="form-control">
+			                    <option value="True">${(lang == "ar" ? "مدين" : "Debit") }</option>
+			                    <option value="False">${(lang == "ar" ? "دائن" : "Credit") }</option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           <select id="AccType${cnt}"disabled class="form-control">
+			                    <option value="1">${ (lang == "ar" ? " حساب ثابت" : "Fixed Account") }</option>
+			                    <option value="2">${ (lang == "ar" ? "حساب متغير" : "variable account") }</option>
+			                    <option value="3">${ (lang == "ar" ? "حساب فرع" : "Branch Account") } </option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           <select id="FixAcc${cnt}" disabled   class="form-control">
+			                    <option value="Null">  </option>
+			               </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           <select id="VarAcc${cnt}" disabled  class="form-control">
+			                    <option value="Null">  </option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           <select id="BrAcc${cnt}" disabled class="form-control">
+			                    <option value="Null">   </option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="CCType${cnt}" disabled  class="form-control">
+			                    <option value="Null"> 
+			                    <option value="1">${ (lang == "ar" ? "مركز تكلفة ثابت" : "Fixed Cost Center") }</option>
+			                    <option value="2">${ (lang == "ar" ? "مركز تكلفة متغير" : "Varible Cost center") }</option>
+			                    <option value="3">${ (lang == "ar" ? "مركز تكلفة فرع" : "Branch Cost Center") }</option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="Fixcc${cnt}"disabled class="form-control">
+			                    <option value="Null"> </option>
+			                 </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="VarCC${cnt}" disabled  class="form-control">
+			                  <option value="Null"> </option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="BrCC${cnt}" disabled class="form-control">
+			                  <option value="Null">   </option>
+			                </select>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                           	<select id="IsCollective${cnt}" disabled class="form-control">
+			                 <option value="False">${(lang == "ar" ? "إفرادي" : "individual") } </option>
+			                <select>
+		                </div>
+	                </td>
           
-            '</div>' +
-            '<div class="col-lg-12 labelgridLnkTransVoucher" style="position:absolute;">' +
-            '<select id="AccType' + cnt + '"disabled class="form-control input-sm col-lg-2 col-xs-4 pading_2  AccType"><option value="1">' + (lang == "ar" ? " حساب ثابت" : "Fixed Account") + '</option><option value="2">' + (lang == "ar" ? "حساب متغير" : "variable account") + '</option><option value="3">' + (lang == "ar" ? "حساب فرع" : "Branch Account") + ' </option></select>' +
-            '<select id="FixAcc' + cnt + '"disabled   class="form-control input-sm col-lg-2 col-xs-4 pading_2 FixAcc"><option value="Null">  </option></select>' +
-            '<select id="VarAcc' + cnt + '" disabled  class="form-control input-sm col-lg-2 col-xs-4 pading_2 VarAcc"><option value="Null">  </option></select>' +
-            '<select id="BrAcc' + cnt + '" disabled class="form-control input-sm col-lg-2 col-xs-4 pading_2  BrAcc"><option value="Null">   </option></select>' +
-            '<select id="CCType' + cnt + '"disabled  class="form-control input-sm col-lg-2 col-xs-4 pading_2  CCType"><option value="Null"> <option value="1">' + (lang == "ar" ? "مركز تكلفة ثابت" : "Fixed Cost Center") + '</option><option value="2">' + (lang == "ar" ? "مركز تكلفة متغير" : "Varible Cost center") + '</option></option><option value="3">' + (lang == "ar" ? "مركز تكلفة فرع" : "Branch Cost Center") + '</option></select>' +
-            '<select id="Fixcc' + cnt + '"disabled class="form-control input-sm col-lg-2  col-xs-4 pading_2  Fixcc"><option value="Null"> </option></select>' +
-          
-            '</div>' +
+                </tr>`;
 
-            '<div class="col-lg-8" style="position:absolute; left:-139.5%">' +
-
-            '<select id="VarCC' + cnt + '"disabled  class="form-control input-sm col-lg-3  col-xs-4 VarCC"><option value="Null"> </option></select>' +
-            '<select id="BrCC' + cnt + '" disabled class="form-control input-sm col-lg-3  col-xs-4  BrCC"><option value="Null">   </option></select> ' +
-            '<select id="IsCollective' + cnt + '" disabled class="form-control input-sm col-lg-3 col-xs-4"><option value="False">' + (lang == "ar" ? "إفرادي" : "individual") + ' </option>select>' +
-
-            '</div>' +
-
-            
-            '< /div>';
         $("#div_Data").append(html);
 
 
