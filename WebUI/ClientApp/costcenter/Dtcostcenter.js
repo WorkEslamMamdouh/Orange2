@@ -9,13 +9,13 @@ var Dtcostcenter;
     //***********controls
     var btnAddDetails;
     var btnAddDetails2;
-    var btnAdd;
-    var btnEdit;
-    var btnSave;
+    var btn_Add;
+    var btn_Update;
+    var btn_Save;
     var MasterGrid = new JsGrid();
     //var btnShow: HTMLButtonElement;
     var searchbutmemreport;
-    var btnBack;
+    var btn_Back;
     var btnDelete;
     var btnEditAcc;
     var btnSaveAcc;
@@ -38,11 +38,13 @@ var Dtcostcenter;
     //*************************Initialization************************//
     function InitializeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "مراكز التكلفة الفرعية";
+            document.getElementById('Screen_name').innerHTML = "وحدات النشاط";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Detail Cost Center Types ";
         }
+        $("#divIconbar").addClass("hidden_Control");
+        $("#icon-bar").addClass("hidden_Control");
         InitializeControls();
         InitializeEvents();
         InitializeGrid();
@@ -53,11 +55,11 @@ var Dtcostcenter;
     function InitializeControls() {
         btnAddDetails = document.getElementById("btnAddDetails");
         btnAddDetails2 = document.getElementById("btnAddDetails2");
-        btnAdd = document.getElementById("btnAdd");
-        btnEdit = document.getElementById("btnEdit");
+        btn_Add = document.getElementById("btn_Add");
+        btn_Update = document.getElementById("btn_Update");
         //btnShow = document.getElementById("btnShow") as HTMLButtonElement;
-        btnSave = document.getElementById("btnSave");
-        btnBack = document.getElementById("btnBack");
+        btn_Save = document.getElementById("btn_Save");
+        btn_Back = document.getElementById("btn_Back");
         btnDelete = document.getElementById("btnDelete");
         searchbutmemreport = document.getElementById("searchbutmemreport");
         btnEditAcc = document.getElementById("btnEditAcc");
@@ -69,14 +71,14 @@ var Dtcostcenter;
         txtCCDT_TYPE = document.getElementById("txtCCDT_TYPE");
     }
     function InitializeEvents() {
-        btnAdd.onclick = btnAdd_onclick;
+        btn_Add.onclick = btnAdd_onclick;
         btnAddDetails.onclick = btnAddDetails_onclick;
         btnAddDetails2.onclick = btnAddDetails2_onclick;
         //btnShow.onclick = btnShow_onclick;
-        btnEdit.onclick = btnEdit_onclick;
-        btnSave.onclick = btnSave_onclick;
+        btn_Update.onclick = btnEdit_onclick;
+        btn_Save.onclick = btnSave_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
-        btnBack.onclick = btnBack_onclick;
+        btn_Back.onclick = btnBack_onclick;
         btnEditAcc.onclick = btnEditAcc_onclick;
         btnSaveAcc.onclick = btnSaveAcc_onclick;
         btnEditCCDT.onclick = btnEditCCDT_onclick;
@@ -109,13 +111,7 @@ var Dtcostcenter;
     }
     function Build_ACC_Controls(cnt) {
         var html;
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GenDefCustomerCat  minus_btn"></span>' +
-            '<div class="col-xs-2 style_pading">' +
-            '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearchAcc' + cnt + '" name="ColSearch">   ' +
-            '<i class="fa fa-search"></i></button>' +
-            ' <input id="txtCode' + cnt + '" type= "text" class="form-control col-xs-9 right2 " disabled="disabled"/></div>' +
-            '<div class="col-lg-4 col-xs-3 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div>' +
-            '<div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group d-flex\">\n                            <button type=\"button\" class=\"btn btn-main btn-search\" id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" >\n                                <i class=\"fas fa-search\"></i>\n                            </button>\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n\n                </tr>";
         $("#div_Data").append(html);
         $("#btnSearchAcc" + cnt).on('click', function () {
             Search_Account_onclick(cnt);
@@ -127,14 +123,7 @@ var Dtcostcenter;
     }
     function Build_CCDT_Controls(cnt) {
         var html;
-        html = '<div id="No_Row_CCDT' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus_CCDt' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GenDefCustomerCat  CCDtminus_btn"></span>' +
-            '<div class="col-xs-2 style_pading">' +
-            //'<button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearch_CCDT' + cnt + '" name="ColSearch">   ' +
-            //'<i class="fa fa-search"></i></button>' +
-            ' <input id="txtCCDT_CODE' + cnt + '" type= "text" disabled=disabled class="form-control col-xs-9 right2 "  "/></div>' +
-            '<div class="col-xs-4 style_pading"> <input id="txtCCDT_DESCA' + cnt + '" type= "text"  disabled class="form-control right3 CCDtControl"/></div>' +
-            '<div class="col-xs-4 style_pading"> <input id="txtCCDT_DESCE' + cnt + '" type= "text" disabled  class="form-control right3 CCDtControl"/></div>' +
-            '<div class="col-lg-12"> <input id = "txt_StatusFlag_CCdt' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txtCCDT_TYPE' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
+        html = "<tr id= \"No_Row_CCDT" + cnt + "\">\n                    <input id=\"ItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus_CCDt" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus btn-minus-CCDt\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group \">\n                            <input id=\"txtCCDT_CODE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCCDT_DESCA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCCDT_DESCE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id = \"txt_StatusFlag_CCdt" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n                    <input id = \"txtCCDT_TYPE" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/>\n\n                </tr>";
         $("#div_Data2").append(html);
         $("#btnSearch_CCDT" + cnt).on('click', function () {
             Search_CCDT_onclick(cnt);
@@ -161,7 +150,7 @@ var Dtcostcenter;
         clear();
         EnableControls();
         $("#DivFilter").addClass("disabledDiv");
-        $("#divMasterGridiv").addClass("disabledDiv");
+        $("#divGrid").addClass("disabledDiv");
         $('#btnPrintReceive').addClass('display_none');
         Mode = "Add";
     }
@@ -171,7 +160,7 @@ var Dtcostcenter;
         EnableControls();
         $("#txtCCDT_TYPE").prop("disabled", true);
         Mode = "Edit";
-        $("#divMasterGridiv").addClass("disabledDiv");
+        $("#divGrid").addClass("disabledDiv");
     }
     function btnEditAcc_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -179,9 +168,9 @@ var Dtcostcenter;
         $("#btnBackAcc").removeClass("display_none");
         $("#btnSaveAcc").removeClass("display_none");
         $("#btnAddDetails").removeClass("display_none");
-        $(".minus_btn").removeClass("display_none");
+        $(".btn-minus").removeClass("display_none");
         $("#btnEditAcc").addClass("display_none");
-        $("#divMasterGridiv").addClass("disabledDiv");
+        $("#divGrid").addClass("disabledDiv");
         $("#div_Master").addClass("disabledDiv");
         $("#divCCDT").addClass("disabledDiv");
         $(".btn-search").removeClass("display_none");
@@ -193,10 +182,10 @@ var Dtcostcenter;
         $("#btnBackCCDT").removeClass("display_none");
         $("#btnSaveCCDT").removeClass("display_none");
         $("#btnAddDetails2").removeClass("display_none");
-        $(".CCDtminus_btn").removeClass("display_none");
+        $(".btn-minus-CCDt").removeClass("display_none");
         $("#btnEditCCDT").addClass("display_none");
         $('.CCDtControl').removeAttr("disabled");
-        $("#divMasterGridiv").addClass("disabledDiv");
+        $("#divGrid").addClass("disabledDiv");
         $("#div_Master").addClass("disabledDiv");
         $("#div_ACC").addClass("disabledDiv");
         Mode = "Edit";
@@ -259,9 +248,9 @@ var Dtcostcenter;
             clear();
             QueryMode();
             btnShow_onclick();
-            $("#btnSave").addClass("display_none");
-            $("#btnBack").addClass("display_none");
-            $("#btnEdit").addClass("display_none");
+            $("#btn_Save").addClass("display_none");
+            $("#btn_Back").addClass("display_none");
+            $("#btn_Update").addClass("display_none");
             $("#btnEditAcc").addClass("display_none");
             $("#btnEditCCDT").addClass("display_none");
             // $("#btnDelete").addClass("display_none");
@@ -269,7 +258,7 @@ var Dtcostcenter;
     }
     function btnBackAcc_onclick() {
         btnBack_onclick();
-        $("#divMasterGridiv").removeClass("disabledDiv");
+        $("#divGrid").removeClass("disabledDiv");
         $("#div_Master").removeClass("disabledDiv");
         $("#divCCDT").removeClass("disabledDiv");
     }
@@ -605,8 +594,8 @@ var Dtcostcenter;
         return true;
     }
     function Button_privialges() {
-        btnAdd.disabled = !SysSession.CurrentPrivileges.AddNew;
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+        btn_Add.disabled = !SysSession.CurrentPrivileges.AddNew;
+        btn_Update.disabled = !SysSession.CurrentPrivileges.EDIT;
     }
     //***********************Functions*****************************//
     function clear() {
@@ -619,19 +608,19 @@ var Dtcostcenter;
     function QueryMode() {
         $("#divDetails").removeClass("display_none");
         $("#div_Master :input").prop("disabled", true);
-        $("#btnEdit").removeClass("display_none");
-        $("#btnSave").addClass("display_none");
-        $("#btnBack").addClass("display_none");
-        $("#btnAdd").removeClass("display_none");
-        btnEdit.disabled = false;
-        btnAdd.disabled = false;
+        $("#btn_Update").removeClass("display_none");
+        $("#btn_Save").addClass("display_none");
+        $("#btn_Back").addClass("display_none");
+        $("#btn_Add").removeClass("display_none");
+        btn_Update.disabled = false;
+        btn_Add.disabled = false;
         btnDelete.disabled = false;
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetails2").addClass("display_none");
-        $(".minus_btn").addClass("display_none");
-        $(".CCDtminus_btn").addClass("display_none");
+        $(".btn-minus").addClass("display_none");
+        $(".btn-minus-CCDt").addClass("display_none");
         $(".btn-search").addClass("display_none");
-        $("#divMasterGridiv").removeClass("disabledDiv");
+        $("#divGrid").removeClass("disabledDiv");
         $("#btnEditAcc").removeClass("display_none");
         $("#btnSaveAcc").addClass("display_none");
         $("#btnBackAcc").addClass("display_none");
@@ -646,14 +635,14 @@ var Dtcostcenter;
     function EnableControls() {
         $("#div_Master :input").prop("disabled", false);
         $("#divDetails").removeClass("display_none");
-        $("#btnSave").removeClass("display_none");
-        $("#btnBack").removeClass("display_none");
-        $("#btnEdit").addClass("display_none");
-        $("#btnAdd").addClass("display_none");
+        $("#btn_Save").removeClass("display_none");
+        $("#btn_Back").removeClass("display_none");
+        $("#btn_Update").addClass("display_none");
+        $("#btn_Add").addClass("display_none");
         $("#btnAddDetails").addClass("display_none");
         $("#btnAddDetails2").addClass("display_none");
-        $(".minus_btn").removeClass("display_none");
-        $(".CCDtminus_btn").removeClass("display_none");
+        $(".btn-minus").removeClass("display_none");
+        $(".btn-minus-CCDt").removeClass("display_none");
         $(".btn-search").removeClass("display_none");
         $("#btnEditAcc").addClass("display_none");
         $("#btnEditCCDT").addClass("display_none");

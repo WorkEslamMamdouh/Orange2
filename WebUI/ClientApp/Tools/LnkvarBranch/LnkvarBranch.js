@@ -22,9 +22,9 @@ var LnkvarBranch;
     var BranchDetails = new Array();
     var CostCenterDetails = new Array();
     var AccountDetails = new Array();
-    var btnedite;
-    var btnback;
-    var btnsave;
+    var btnUpdate_Def;
+    var btnBack_Def;
+    var btnSave_Def;
     var btnAddDetails;
     var drpuserType;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -52,17 +52,21 @@ var LnkvarBranch;
         else {
             document.getElementById('Screen_name').innerHTML = "Branch Link Accounts";
         }
-        btnedite = document.getElementById("btnedite");
-        btnback = document.getElementById("btnback");
-        btnsave = document.getElementById("btnsave");
+        $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('icon-bar');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
+        btnUpdate_Def = document.getElementById("btnUpdate_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
+        btnSave_Def = document.getElementById("btnSave_Def");
         btnAddDetails = document.getElementById("btnAddDetails");
         drpuserType = document.getElementById("drpuserType");
     }
     function InitializeEvents() {
         drpuserType.onchange = Display;
-        btnedite.onclick = btnedite_onclick;
-        btnback.onclick = btnback_onclick;
-        btnsave.onclick = btnsave_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnsave_onclick;
     }
     function check_Account(Ser) {
         debugger;
@@ -132,9 +136,9 @@ var LnkvarBranch;
     }
     function btnedite_onclick() {
         if ($('#drpuserType').val() != "Null") {
-            $('#btnback').removeClass('display_none');
-            $('#btnsave').removeClass('display_none');
-            $('#btnedite').addClass('display_none');
+            $('#btnBack_Def').removeClass('display_none');
+            $('#btnSave_Def').removeClass('display_none');
+            $('#btnUpdate_Def').addClass('display_none');
             $('.dis').removeAttr('disabled');
             $(".acc_Cod").removeAttr('disabled');
         }
@@ -144,9 +148,9 @@ var LnkvarBranch;
         }
     }
     function btnback_onclick() {
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
-        $('#btnedite').removeClass('display_none');
+        $('#btnBack_Def').addClass('display_none');
+        $('#btnSave_Def').addClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
         $('.dis').attr('disabled', 'disabled');
         Display();
     }
@@ -207,9 +211,9 @@ var LnkvarBranch;
                         var result = d;
                         if (result.IsSuccess == true) {
                             MessageBox.Show('تم الحفظ', '');
-                            $('#btnback').addClass('display_none');
-                            $('#btnsave').addClass('display_none');
-                            $('#btnedite').removeClass('display_none');
+                            $('#btnBack_Def').addClass('display_none');
+                            $('#btnSave_Def').addClass('display_none');
+                            $('#btnUpdate_Def').removeClass('display_none');
                             $('.dis').attr('disabled', 'disabled');
                             Display();
                         }
@@ -312,13 +316,13 @@ var LnkvarBranch;
                     //txt.disabled = false;
                     txt.id = "text_AccountCode" + item.Ser;
                     txt.name = "GLAccountCode";
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main  display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
                         txt.disabled = true;
                     }
-                    txt.className = "form-control input-sm acc_Cod dis";
+                    txt.className = "form-control";
                     txt.onchange = function (e) {
                         check_Account(item.Ser);
                     };
@@ -337,7 +341,7 @@ var LnkvarBranch;
                     txt.disabled = true;
                     txt.name = (lang == "ar" ? "Acc_DescA" : "Acc_DescL");
                     txt.value = item.GLAcc_DescA;
-                    txt.className = "form-control input-sm";
+                    txt.className = "form-control";
                     return txt;
                 }
             },
@@ -348,8 +352,8 @@ var LnkvarBranch;
                     txt.type = "button";
                     txt.value = (lang == "ar" ? "بحث" : "Search");
                     txt.id = "but" + item.Ser;
-                    txt.className = "dis src-btn btn btn-warning input-sm";
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    txt.className = "btn btn-main";
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
@@ -438,13 +442,13 @@ var LnkvarBranch;
                     txt.disabled = true;
                     txt.name = "CC_Code";
                     txt.value = item.CC_Code;
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
                         txt.disabled = true;
                     }
-                    txt.className = "form-control input-sm acc_Cod dis";
+                    txt.className = "form-control";
                     txt.onchange = function (e) {
                         check_ccenter(item.Ser);
                     };
@@ -461,7 +465,7 @@ var LnkvarBranch;
                     txt.disabled = true;
                     txt.name = (lang == "ar" ? "CC_DescA" : "CC_DescE");
                     txt.value = item.GSt_DescA;
-                    txt.className = "form-control input-sm";
+                    txt.className = "form-control";
                     return txt;
                 }
             },
@@ -474,8 +478,8 @@ var LnkvarBranch;
                     txt.disabled = false;
                     txt.id = "but" + item.Ser;
                     txt.disabled = true;
-                    txt.className = "dis src-btn btn btn-warning input-sm";
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    txt.className = "btn btn-main";
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {

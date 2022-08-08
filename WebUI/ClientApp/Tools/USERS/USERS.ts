@@ -145,7 +145,7 @@ namespace USERS {
             $("#btnAdd").addClass("display_none");
 
         btnAddDetails.disabled = false;
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+    //    btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
     }
     function InitalizeEvents() {
         btnShow.onclick = btnShow_onclick;

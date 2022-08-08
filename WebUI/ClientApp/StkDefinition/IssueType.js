@@ -5,16 +5,16 @@ var IssueType;
 (function (IssueType) {
     var Details = new Array();
     var DisplayDetail = new Array();
-    var btnsave;
+    var btnSave_Def;
     var btnAddDetails;
-    var btnedite;
+    var btnUpdate_Def;
     var sys = new SystemTools();
     var SysSession = GetSystemSession(Modules.IssueType);
     var Model = new I_D_IssueType();
     var AccDataData = new Array();
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
-    var btnback;
+    var btnBack_Def;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -23,6 +23,9 @@ var IssueType;
         else {
             document.getElementById('Screen_name').innerHTML = "Payment Type";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
@@ -33,17 +36,17 @@ var IssueType;
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnedite = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnUpdate_Def = document.getElementById("btnUpdate_Def");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow; //
-        btnsave.onclick = btnsave_onClick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
     }
     function AddNewRow() {
         if (!SysSession.CurrentPrivileges.AddNew)
@@ -67,14 +70,14 @@ var IssueType;
             $("#Txt_Remarks" + CountGrid).removeAttr("disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            $("#btnedite").removeClass("display_none");
+            $("#btnUpdate_Def").removeClass("display_none");
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
     function BuildControls(cnt) {
         var html = "";
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12"><div class="col-lg-12"><div class="col-lg-1 style_pading" style="width:1%;"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3AccDefBox  minus_btn"></span></div><div class="col-lg-3 style_pading"><input id="txtDescA' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-3 style_pading"><input id="txtDescE' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-2 style_pading "><select id="ddlAcc' + cnt + '" style="display: none; width:100%" disabled class="ddlAcc col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2"><option value="Null">' + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + '</option></select></div><div class="col-lg-3 style_pading" style="width:30%;"><input id="Txt_Remarks' + cnt + '" type="text" class="form-control right3" disabled="disabled" /></div><div class="col-lg-1"><input id="txt_StatusFlag' + cnt + '" name=" " type="hidden" disabled class="form-control" /></div><div class="col-lg-1"><input id="IssueTypeID' + cnt + '" name=" " type="hidden" class="form-control" /></div></div></div>';
+        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t    \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlAcc" + cnt + "\"  class=\"form-control \">\n\t\t                        <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t                    </select>\n\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Txt_Remarks" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"IssueTypeID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\n                </tr>";
         $("#div_Data").append(html);
         if (SysSession.CurrentPrivileges.Remove) {
             $("#btn_minus" + cnt).addClass("display_none");
@@ -122,9 +125,9 @@ var IssueType;
         return;
     }
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave_Def');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave_Def');
             var CanAdd = true;
             if (CountGrid == 0) {
                 WorningMessage('يجب الاضافة للحفظ', 'Must Add for saving', 'خطاء', 'Erorr');
@@ -149,16 +152,16 @@ var IssueType;
     function btnedite_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
             return;
-        $('#btnsave').removeClass("display_none");
-        $('#btnback').removeClass("display_none");
+        $('#btnSave_Def').removeClass("display_none");
+        $('#btnBack_Def').removeClass("display_none");
         $("#div_ContentData :input").removeAttr("disabled");
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
         $(".disable").attr("disabled", "disabled");
         if (SysSession.CurrentPrivileges.Remove == true) {
-            $(".minus_btn").removeClass("display_none");
+            $(".btn-minus").removeClass("display_none");
         }
         else {
-            $(".minus_btn").addClass("display_none");
+            $(".btn-minus").addClass("display_none");
         }
         debugger;
         if (SysSession.CurrentPrivileges.AddNew == true) {
@@ -217,12 +220,12 @@ var IssueType;
         });
     }
     function btnback_onclick() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         // DisplayAccDefBox();
@@ -322,12 +325,12 @@ var IssueType;
         });
     }
     function success() {
-        $('#btnsave').addClass("display_none");
-        $('#btnback').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
-        $(".minus_btn").addClass("display_none");
-        $("#btnedite").removeClass("display_none");
-        $("#btnedite").removeAttr("disabled");
+        $(".btn-minus").addClass("display_none");
+        $("#btnUpdate_Def").removeClass("display_none");
+        $("#btnUpdate_Def").removeAttr("disabled");
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         Display();

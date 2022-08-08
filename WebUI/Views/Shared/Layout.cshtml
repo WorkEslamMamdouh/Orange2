@@ -53,15 +53,15 @@
     <div class="iconbar-container">
         <!--   Icon Bar Definition -->
         <div class="details-iconbar d-flex justify-content-start hidden_Control" id="iconbar_Definition">
-            <button class="icon-bar d-flex justify-content-between  btnUpdate_Def " style="position: fixed;" id="btnUpdate_Def">
+            <button class="icon-bar d-flex justify-content-between  btnUpdate_Def position-fixed" id="btnUpdate_Def">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_Update</span>
             </button> 
-            <button class="icon-bar d-flex justify-content-between btnSave_Def display_none" style="position: fixed;" id="btnSave_Def">
+            <button class="icon-bar d-flex justify-content-between btnSave_Def display_none position-fixed"  id="btnSave_Def">
                 <i class="fas fa-save fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_save</span>
             </button>
-            <button class="icon-bar d-flex justify-content-between  btnBack_Def display_none" style="position: fixed;" id="btnBack_Def">
+            <button class="icon-bar d-flex justify-content-between  btnBack_Def display_none position-fixed" id="btnBack_Def">
                 <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_back</span>
             </button>
@@ -270,7 +270,6 @@
                         </ul>
                     </div>
                 </li>
-
                 <li class="nav-item menu-items MED display_none" id="btnReportMenu">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnReportMenu" aria-expanded="false" aria-controls="MbtnReportMenu">
                         <span class="menu-icon">
@@ -394,7 +393,6 @@
                         </ul>
                     </div>
                 </li>
-
                 <li class="nav-item menu-items MED display_none" id="btnAccDefinitionMen">
                     <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnAccDefinitionMen" aria-expanded="true" aria-controls="MbtnAccDefinitionMen">
                         <span class="menu-icon">
@@ -412,6 +410,48 @@
                             <li id="btnAccDefVendor" key="AccDefVendor" class="nav-item"> <a id="btnAccDefVendor" class="nav-link" href="#">@SystemResource.Men_AccDefVendor</a></li>
                             <li id="btnAccDefBox" key="AccDefBox" class="nav-item"> <a id="btnAccDefBox" class="nav-link" href="#">@SystemResource.Men_AccDefBox</a></li>
                             <li id="btnDtcostcenter" key="Dtcostcenter" class="nav-item"> <a id="btnDtcostcenter" class="nav-link" href="#">@SystemResource.costsubcenters</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item menu-items MED display_none" id="btnGenDefinitionMen">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnGenDefinitionMen" aria-expanded="true" aria-controls="MbtnGenDefinitionMen">
+                        <span class="menu-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.Men_GenDefinitionMen</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MbtnGenDefinitionMen">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnGenDefCustomerCat" key="GenDefCustomerCat" class="nav-item"> <a id="btnGenDefCustomerCat" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerCat</a></li>
+                            <li id="btnGendefCustomerGroup" key="GendefCustomerGroup" class="nav-item"> <a id="btnGendefCustomerGroup" class="nav-link" href="#">@SystemResource.Men_GendefCustomerGroup</a></li>
+                            <li id="btnGenDefCustomerAdjust" key="GenDefCustomerAdjust" class="nav-item"> <a id="btnGenDefCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerAdjust</a></li>
+                            <li id="btnGenDefVendorCat" key="GenDefVendorCat" class="nav-item"> <a id="btnGenDefVendorCat" class="nav-link" href="#">@SystemResource.Men_GenDefVendorCat</a></li>
+                            <li id="btnGendefVendorGroup" key="GendefVendorGroup" class="nav-item"> <a id="btnGendefVendorGroup" class="nav-link" href="#">@SystemResource.Men_GendefVendorGroup</a></li>
+                            <li id="btnGenDefVendorAdjust" key="GenDefVendorAdjust" class="nav-item"> <a id="btnGenDefVendorAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefVendorAdjust</a></li>
+                            <li id="btnGenDefAdd" key="GenDefAdd" class="nav-item"> <a id="btnGenDefAdd" class="nav-link" href="#">@SystemResource.Men_Addition</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item menu-items MED display_none" id="btnToolsMenu">
+                    <a class="nav-link collapsed" data-bs-toggle="collapse" href="#MbtnToolsMenu" aria-expanded="true" aria-controls="MbtnToolsMenu">
+                        <span class="menu-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </span>
+                        <span class="menu-title">@SystemResource.mnue_Tools</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="MbtnToolsMenu">
+                        <ul class="nav flex-column sub-menu">
+                            <li id="btnPeriodManagement" key="PeriodManagement" class="nav-item"> <a id="btnPeriodManagement" class="nav-link" href="#">@SystemResource.PeriodManagement</a></li>
+                            <li id="btnItemPeriodSummary" key="ItemPeriodSummary" class="nav-item"> <a id="btnItemPeriodSummary" class="nav-link" href="#">@SystemResource.ItemPeriodSummary</a></li>
+                            <li id="btnDefStore" key="DefStore" class="nav-item"> <a id="btnDefStore" class="nav-link" href="#">@SystemResource.Men_StkDefStore</a></li>
+                            <li id="btnIssueType" key="IssueType" class="nav-item"> <a id="btnIssueType" class="nav-link" href="#">@SystemResource.PaymentTypes</a></li>
+                            <li id="btnTranPosting" key="TranPosting" class="nav-item"> <a id="btnTranPosting" class="nav-link" href="#">@SystemResource.Transfer_accounts</a></li>
+                            <li id="btnLnkvarBranch" key="LnkvarBranch" class="nav-item"> <a id="btnLnkvarBranch" class="nav-link" href="#">@SystemResource.Branch_accounts</a></li>
+                            <li id="btnLnkTransVoucher" key="LnkTransVoucher" class="nav-item"> <a id="btnLnkTransVoucher" class="nav-link" href="#">@SystemResource.Designconstraints</a></li>
+                            <li id="btnUSERS" key="USERS" class="nav-item"> <a id="btnUSERS" class="nav-link" href="#">@SystemResource.User</a></li>
                         </ul>
                     </div>
                 </li>

@@ -913,14 +913,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ItFm_DescA">
+                    <Textbox Name="it_itemCode">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ItFm_DescE.Value</Value>
+                              <Value>=Fields!it_itemCode.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -929,7 +929,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ItFm_DescA</rd:DefaultName>
+                      <rd:DefaultName>it_itemCode</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -3020,7 +3020,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!IsCash.Value=1,"Cash", "Credit")</Value>
+                <Value>=iif(Fields!IsCash.Value=0,"Cash", "Credit")</Value>
                 <Style>
                   <Format>dd/MM/yyyy</Format>
                 </Style>
@@ -3401,7 +3401,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Receipt  Purchases</Value>
+                      <Value>Purchases Receive </Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>

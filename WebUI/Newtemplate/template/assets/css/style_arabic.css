@@ -28825,6 +28825,11 @@ div.tagsinput {
         left: -158px;
     }
 
+.btn-Add,
+.btn-Update,
+.btn-Save,
+.btn-Back,
+.btn-Delete,
 .btn-update,
 .btn-save,
 .btn-back {
@@ -28845,16 +28850,23 @@ div.tagsinput {
     top: 180px;
 }
 
+.icon-bar2.btn-Add,
 .icon-bar2.btn-update {
     top: -30px;
 }
-
+.icon-bar2.btn-Update,
 .icon-bar2.btn-save {
-    top: 20px;
+    top: 30px;
 }
-
+.icon-bar2.btn-Save,
 .icon-bar2.btn-back {
-    top: 80px;
+    top: 90px;
+}
+.icon-bar2.btn-Back {
+    top: 150px;
+}
+.icon-bar2.btn-Delete {
+    top: 210px;
 }
 .icon-bar3.btn-update {
     top: -73px;
@@ -29200,21 +29212,23 @@ div.tagsinput {
     display: flex;
     justify-content: center;
 }
-.inside-table .btn-minus,
-.inside-table .btn-plus,
-.inside-table .btn-copy,
-.inside-table .btn-down {
+.btn-minus,
+.btn-minus-CCDt,
+.btn-plus,
+.btn-copy,
+.btn-down {
     transition: all 0.2s ease-in-out;
     color: var(--bs-gray);
 }
-        .inside-table .btn-minus:hover {
-            color: darkred;
-        }
-    .inside-table .btn-plus:hover {
+    .btn-minus:hover,
+    .btn-minus-CCDt:hover {
+        color: darkred;
+    }
+     .btn-plus:hover {
         color: green;
     }
-    .inside-table .btn-down:hover,
-    .inside-table .btn-copy:hover {
+     .btn-down:hover,
+     .btn-copy:hover {
         color: var(--main-blue);
     }
 .inside-table .form-check {
@@ -29613,8 +29627,14 @@ input[class=checkbox]:checked:before {
     height: 2rem;
     width: 2rem;
 }
+.form-check .special-label {
+    line-height: 2;
+}
+/*.line-height-2 {
+    
+}*/
 /*Cursor*/
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 /*Account Menu Style*/

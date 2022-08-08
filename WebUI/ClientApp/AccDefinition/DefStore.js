@@ -14,11 +14,11 @@ var DefStore;
     var ReportGrid = new JsGrid();
     var sys = new SystemTools();
     //buttons
-    var btnsave;
-    var btnback;
-    var btnadd;
+    var btnSave;
+    var btnBack;
+    var btnAdd;
     var btnEdit;
-    var btnback;
+    var btnBack;
     var btnShow;
     var checkactive;
     var searchbutmemreport;
@@ -43,6 +43,10 @@ var DefStore;
         else {
             document.getElementById('Screen_name').innerHTML = " Warehouses";
         }
+        $('#btnPrintTransaction').addClass('d-none');
+        $('#btnPrintTrview').addClass('d-none');
+        $('#btnPrintTrPDF').addClass('d-none');
+        $('#btnPrintTrEXEL').addClass('d-none');
         InitalizeControls();
         InitalizeEvents();
         FilldrpinventoryAccount();
@@ -50,10 +54,10 @@ var DefStore;
     }
     DefStore.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
-        btnadd = document.getElementById("btnadd");
-        btnEdit = document.getElementById("btnedite");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnAdd = document.getElementById("btnAdd");
+        btnEdit = document.getElementById("btnUpdate");
+        btnSave = document.getElementById("btnSave");
+        btnBack = document.getElementById("btnBack");
         btnShow = document.getElementById("btnShow");
         searchbutmemreport = document.getElementById("searchbutmemreport");
         checkactive = document.getElementById("checkactive");
@@ -61,11 +65,11 @@ var DefStore;
         drpinventoryAccount = document.getElementById("drpinventoryAccount");
     }
     function InitalizeEvents() {
-        btnsave.onclick = btnsave_onClick;
+        btnSave.onclick = btnsave_onClick;
         btnShow.onclick = Displaystore;
         btnEdit.onclick = btnEdit_onclick;
-        btnback.onclick = btnback_onclick;
-        btnadd.onclick = btnadd_onclick;
+        btnBack.onclick = btnback_onclick;
+        btnAdd.onclick = btnadd_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     //---------------------------------------------------------------------------Inventory Account
@@ -158,9 +162,9 @@ var DefStore;
         ReportGrid.Bind();
     }
     function MasterGridDoubleClick() {
-        $('#btnedite').removeClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
+        $('#btnBack').addClass('display_none');
+        $('#btnSave').addClass('display_none');
         Selected_Data = new Array();
         Selected_Data = detailstore.filter(function (x) { return x.StoreId == Number(ReportGrid.SelectedKey); });
         $('#StoreDetail').removeClass('display_none');
@@ -193,10 +197,10 @@ var DefStore;
     function btnEdit_onclick() {
         debugger;
         flag = true;
-        $('#btnsave').removeClass('display_none');
-        $('#btnback').removeClass('display_none');
-        $('#btnedite').addClass('display_none');
-        $('#btnadd').addClass('display_none');
+        $('#btnSave').removeClass('display_none');
+        $('#btnBack').removeClass('display_none');
+        $('#btnUpdate').addClass('display_none');
+        $('#btnAdd').addClass('display_none');
         $("#masterdiv").attr("disabled", "disabled").off('click');
         $("#masterdiv").addClass("disabledDiv");
         VALIDATEDIS();
@@ -204,11 +208,11 @@ var DefStore;
     //---------------------------------------------------------------------------Back button
     function btnback_onclick() {
         $('#StoreDetail').addClass('display_none');
-        $('#btnsave').addClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnedite').removeClass('display_none');
+        $('#btnSave').addClass('display_none');
+        $('#btnBack').addClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
         $('#btnShow').removeClass('display_none');
-        $('#btnadd').removeClass('display_none');
+        $('#btnAdd').removeClass('display_none');
         $("#masterdiv").removeAttr("disabled");
         $("#masterdiv").removeClass("disabledDiv");
         Displaystore();
@@ -220,11 +224,11 @@ var DefStore;
     function btnadd_onclick() {
         flag = false;
         $('#btnShow').addClass('display_none');
-        $('#btnsave').removeClass('display_none');
-        $('#btnback').removeClass('display_none');
+        $('#btnSave').removeClass('display_none');
+        $('#btnBack').removeClass('display_none');
         $("#masterdiv").attr("disabled", "disabled").off('click');
         $("#masterdiv").addClass("disabledDiv");
-        $('#btnedite').addClass('display_none');
+        $('#btnUpdate').addClass('display_none');
         $('#StoreDetail').removeClass('display_none');
         checkactive.checked = false;
         Cleartxt();
@@ -232,9 +236,9 @@ var DefStore;
     }
     //---------------------------------------------------------------------------Save button
     function btnsave_onClick() {
-        loading('btnsave');
+        loading('btnSave');
         setTimeout(function () {
-            finishSave('btnsave');
+            finishSave('btnSave');
             if (!validations())
                 return;
             Modelstore = new G_STORE();
@@ -297,7 +301,7 @@ var DefStore;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     btnback_onclick();
                     Displaystore();
-                    $('#btnedite').removeClass('display_none');
+                    $('#btnUpdate').removeClass('display_none');
                     Selected_Data = new Array();
                     Selected_Data = detailstore.filter(function (x) { return x.StoreId == Number(storeID); });
                     $('#StoreDetail').removeClass('display_none');

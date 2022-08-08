@@ -23,9 +23,9 @@ var LnkTransVoucher;
     var CountGrid = 0;
     var btnAddDetails;
     var btnShow;
-    var btnsave;
-    var btnback;
-    var btnedite;
+    var btnSave_Def;
+    var btnBack_Def;
+    var btnUpdate_Def;
     var btn_minus;
     var drpuserType;
     var drpStatus;
@@ -39,6 +39,10 @@ var LnkTransVoucher;
         else {
             document.getElementById('Screen_name').innerHTML = "Design link constraints";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('icon-bar');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitializeEvents();
@@ -55,10 +59,10 @@ var LnkTransVoucher;
     LnkTransVoucher.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnsave = document.getElementById("btnsave");
-        btnback = document.getElementById("btnback");
+        btnSave_Def = document.getElementById("btnSave_Def");
+        btnBack_Def = document.getElementById("btnBack_Def");
         btnShow = document.getElementById("btnShow");
-        btnedite = document.getElementById("btnedite");
+        btnUpdate_Def = document.getElementById("btnUpdate_Def");
         btn_minus = document.getElementById("btn_minus");
         drpuserType = document.getElementById("drpuserType");
         drpStatus = document.getElementById("drpStatus");
@@ -67,9 +71,9 @@ var LnkTransVoucher;
         btnAddDetails.onclick = AddNewRow;
         //btnShow.onclick = Display_All;
         drpStatus.onchange = Display_All;
-        btnsave.onclick = btnsave_onclick;
-        btnback.onclick = btnback_onclick;
-        btnedite.onclick = btnedite_onclick;
+        btnSave_Def.onclick = btnsave_onclick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
     }
     function fillddlBranch() {
         Ajax.Callsync({
@@ -212,10 +216,10 @@ var LnkTransVoucher;
         for (var i = 0; i < Details.length; i++) {
             validation(i);
         }
-        $('#btnedite').addClass('display_none');
-        $('#btnback').removeClass('display_none');
+        $('#btnUpdate_Def').addClass('display_none');
+        $('#btnBack_Def').removeClass('display_none');
         $('#title_grid1').removeClass('display_none');
-        $('#btnsave').removeClass('display_none');
+        $('#btnSave_Def').removeClass('display_none');
         $('#btnAddDetails').removeClass('display_none');
         $('#btnShow').addClass('display_none');
         $('#drpStatus').attr('disabled', 'disabled');
@@ -226,9 +230,9 @@ var LnkTransVoucher;
             validationdis(i);
         }
         Display_All();
-        $('#btnedite').removeClass('display_none');
-        $('#btnback').addClass('display_none');
-        $('#btnsave').addClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
+        $('#btnBack_Def').addClass('display_none');
+        $('#btnSave_Def').addClass('display_none');
         $('#btnAddDetails').addClass('display_none');
         //$('#btnShow').removeClass('display_none');
         $('#drpuserType').removeAttr('disabled');
@@ -251,30 +255,7 @@ var LnkTransVoucher;
     }
     function BuildControls(cnt) {
         var html;
-        html = '<div id="rowhead' + cnt + '" class="col-lg-12"><div class="col-lg-12">' +
-            '<span id="btn_minus' + cnt + '"  class="fa fa-minus-circle fonLnkTransVoucher display_none"></span>' +
-            '<input id="txt_StatusFlag' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-xs-2 display_none" />' +
-            '<input id="serial_none' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-1 col-xs-2 display_none" />' +
-            '<input id="ser' + cnt + '" name="" disabled type="number" class="form-control input-sm col-lg-1 col-xs-2" />' +
-            '<input id="txtLineRemarkA' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-2 col-xs-2" />' +
-            '<input id="txtLineRemarkE' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-2 col-xs-2" />' +
-            '<select id="Val' + cnt + '" disabled  class="form-control input-sm col-lg-3 col-xs-4 pading_2 Val"><option value="Null">' + (lang == "ar" ? " القيمة " : "Value") + ' </option></select>' +
-            '<select id="ISDebit' + cnt + '" disabled  class="form-control input-sm col-lg-1 col-xs-4 pading_2  ISDebit"><option value="True">' + (lang == "ar" ? "مدين" : "Debit") + '</option><option value="False">' + (lang == "ar" ? "دائن" : "Credit") + '</option></select>' +
-            '</div>' +
-            '<div class="col-lg-12 labelgridLnkTransVoucher" style="position:absolute;">' +
-            '<select id="AccType' + cnt + '"disabled class="form-control input-sm col-lg-2 col-xs-4 pading_2  AccType"><option value="1">' + (lang == "ar" ? " حساب ثابت" : "Fixed Account") + '</option><option value="2">' + (lang == "ar" ? "حساب متغير" : "variable account") + '</option><option value="3">' + (lang == "ar" ? "حساب فرع" : "Branch Account") + ' </option></select>' +
-            '<select id="FixAcc' + cnt + '"disabled   class="form-control input-sm col-lg-2 col-xs-4 pading_2 FixAcc"><option value="Null">  </option></select>' +
-            '<select id="VarAcc' + cnt + '" disabled  class="form-control input-sm col-lg-2 col-xs-4 pading_2 VarAcc"><option value="Null">  </option></select>' +
-            '<select id="BrAcc' + cnt + '" disabled class="form-control input-sm col-lg-2 col-xs-4 pading_2  BrAcc"><option value="Null">   </option></select>' +
-            '<select id="CCType' + cnt + '"disabled  class="form-control input-sm col-lg-2 col-xs-4 pading_2  CCType"><option value="Null"> <option value="1">' + (lang == "ar" ? "مركز تكلفة ثابت" : "Fixed Cost Center") + '</option><option value="2">' + (lang == "ar" ? "مركز تكلفة متغير" : "Varible Cost center") + '</option></option><option value="3">' + (lang == "ar" ? "مركز تكلفة فرع" : "Branch Cost Center") + '</option></select>' +
-            '<select id="Fixcc' + cnt + '"disabled class="form-control input-sm col-lg-2  col-xs-4 pading_2  Fixcc"><option value="Null"> </option></select>' +
-            '</div>' +
-            '<div class="col-lg-8" style="position:absolute; left:-139.5%">' +
-            '<select id="VarCC' + cnt + '"disabled  class="form-control input-sm col-lg-3  col-xs-4 VarCC"><option value="Null"> </option></select>' +
-            '<select id="BrCC' + cnt + '" disabled class="form-control input-sm col-lg-3  col-xs-4  BrCC"><option value="Null">   </option></select> ' +
-            '<select id="IsCollective' + cnt + '" disabled class="form-control input-sm col-lg-3 col-xs-4"><option value="False">' + (lang == "ar" ? "إفرادي" : "individual") + ' </option>select>' +
-            '</div>' +
-            '< /div>';
+        html = "<tr id= \"rowhead" + cnt + "\">\n                    <input id=\"txt_StatusFlag" + cnt + "\" disabled type=\"text\" class=\"form-control display_none\"  />  \n                    <input id=\"serial_none" + cnt + "\" disabled type=\"text\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"ser" + cnt + "\" type=\"number\"  value=\"" + (cnt + 1) + "\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtLineRemarkA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtLineRemarkE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <select id=\"Val" + cnt + "\" disabled  class=\"form-control\">\n\t\t\t                     <option value=\"Null\">" + (lang == "ar" ? " القيمة " : "Value") + " </option>\n\t\t\t               </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"ISDebit" + cnt + "\" disabled  class=\"form-control\">\n\t\t\t                    <option value=\"True\">" + (lang == "ar" ? "مدين" : "Debit") + "</option>\n\t\t\t                    <option value=\"False\">" + (lang == "ar" ? "دائن" : "Credit") + "</option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <select id=\"AccType" + cnt + "\"disabled class=\"form-control\">\n\t\t\t                    <option value=\"1\">" + (lang == "ar" ? " حساب ثابت" : "Fixed Account") + "</option>\n\t\t\t                    <option value=\"2\">" + (lang == "ar" ? "حساب متغير" : "variable account") + "</option>\n\t\t\t                    <option value=\"3\">" + (lang == "ar" ? "حساب فرع" : "Branch Account") + " </option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <select id=\"FixAcc" + cnt + "\" disabled   class=\"form-control\">\n\t\t\t                    <option value=\"Null\">  </option>\n\t\t\t               </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <select id=\"VarAcc" + cnt + "\" disabled  class=\"form-control\">\n\t\t\t                    <option value=\"Null\">  </option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <select id=\"BrAcc" + cnt + "\" disabled class=\"form-control\">\n\t\t\t                    <option value=\"Null\">   </option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"CCType" + cnt + "\" disabled  class=\"form-control\">\n\t\t\t                    <option value=\"Null\"> \n\t\t\t                    <option value=\"1\">" + (lang == "ar" ? "مركز تكلفة ثابت" : "Fixed Cost Center") + "</option>\n\t\t\t                    <option value=\"2\">" + (lang == "ar" ? "مركز تكلفة متغير" : "Varible Cost center") + "</option>\n\t\t\t                    <option value=\"3\">" + (lang == "ar" ? "مركز تكلفة فرع" : "Branch Cost Center") + "</option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"Fixcc" + cnt + "\"disabled class=\"form-control\">\n\t\t\t                    <option value=\"Null\"> </option>\n\t\t\t                 </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"VarCC" + cnt + "\" disabled  class=\"form-control\">\n\t\t\t                  <option value=\"Null\"> </option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"BrCC" + cnt + "\" disabled class=\"form-control\">\n\t\t\t                  <option value=\"Null\">   </option>\n\t\t\t                </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select id=\"IsCollective" + cnt + "\" disabled class=\"form-control\">\n\t\t\t                 <option value=\"False\">" + (lang == "ar" ? "إفرادي" : "individual") + " </option>\n\t\t\t                <select>\n\t\t                </div>\n\t                </td>\n          \n                </tr>";
         $("#div_Data").append(html);
         $("#IsCollective" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
@@ -550,7 +531,7 @@ var LnkTransVoucher;
                 $("#IsCollective" + i).val("True");
             }
         }
-        $('#btnedite').removeClass('display_none');
+        $('#btnUpdate_Def').removeClass('display_none');
     }
     function AddNewRow() {
         if (!SysSession.CurrentPrivileges.AddNew)
@@ -601,7 +582,7 @@ var LnkTransVoucher;
             }
             CountGrid++;
         }
-        $("#btnedite").addClass("display_none");
+        $("#btnUpdate_Def").addClass("display_none");
     }
     function Assign() {
         //
@@ -705,9 +686,9 @@ var LnkTransVoucher;
                 var result = d;
                 if (result.IsSuccess) {
                     MessageBox.Show('تم الحفظ', 'تم');
-                    $('#btnedite').removeClass('display_none');
-                    $('#btnback').addClass('display_none');
-                    $('#btnsave').addClass('display_none');
+                    $('#btnUpdate_Def').removeClass('display_none');
+                    $('#btnBack_Def').addClass('display_none');
+                    $('#btnSave_Def').addClass('display_none');
                     //$('#btnShow').removeClass('display_none');
                     $('#btnAddDetails').addClass('display_none');
                     $('#drpuserType').removeAttr('disabled');

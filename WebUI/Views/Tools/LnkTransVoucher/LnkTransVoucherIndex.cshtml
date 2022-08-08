@@ -4,105 +4,68 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
+<div class="row gy-3" id="div_ContentData">
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group d-flex">
+                            <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">@SystemResource.App_SubSystem</label>
+                            <div class="col-8 col-lg-8 col-md-10">
+                                <select id="drpuserType" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group d-flex">
+                            <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">@SystemResource.App_MovementType</label>
+                            <div class="col-8 col-lg-8 col-md-10">
+                                <select id="drpStatus" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-light-blue" id="title_grid1">
+            <div class="card-body">
+                <!-- Table  -->
+                <div class="custom-table my-4">
+                    <div class="table-responsive">
+                        <table class="table table-borderless ">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%"></th>
+                                    <th style="width: 5%"> @SystemResource.serial </th>
+                                    <th style="width: 7%">@SystemResource.Name_Arabic</th>
+                                    <th style="width: 7%">@SystemResource.Name_English </th>
+                                    <th style="width: 7%" > @SystemResource.value</th>
+                                    <th style="width: 7%"> @SystemResource.cred_deb</th>
+                                    <th style="width: 7%"> @SystemResource.account_type</th>
+                                    <th style="width: 7%"> @SystemResource.Fixed_account</th>
+                                    <th style="width: 7%"> @SystemResource.Variable_account</th>
+                                    <th style="width: 7%"> @SystemResource.Acc_bra</th>
+                                    <th style="width: 7%"> @SystemResource.Center_type</th>
+                                    <th style="width: 7%"> @SystemResource.Fixed_center</th>
+                                    <th style="width: 7%"> @SystemResource.Variable_center</th>
+                                    <th style="width: 7%"> @SystemResource.center_bra</th>
+                                    <th style="width: 7%"> @SystemResource.Grouping</th>
+                                </tr>
+                            </thead>
+                            <tbody id="div_Data"></tbody>
 
-<style>
-
-    .display_none {
-        display: none !important;
-    } 
-
-    .pading_lep {
-        padding-right: 7px;
-    } 
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.8;
-    } 
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-
-    .LEPEL_padingright2 {
-        padding-right: 39px !important;
-    }
-
-   
-</style>
-<div class="col-lg-9  " style="position:fixed!important;top:10%!important ;	">
-    <div id="DivMassage" class="col-lg-12  display_none">
-
-        <h4 id="Text_Massage" class="col-lg-10" style=""> رساله </h4>
-
+                        </table>
+                        <div class="d-flex justify-content-start mr-1">
+                            <span id="btnAddDetails" class="mb-3 display_none"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="container-fluid">
 
-    <div class="col-lg-12 margingred" id="div_ALLData">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-            <label class="col-lg-1 col-xs-4      pading_2LnkTransVoucher "> @SystemResource.App_SubSystem </label>
-            <div class="col-lg-3 col-xs-8">
-                <select id="drpuserType" class="form-control input-sm"></select>
-            </div>
-            <label class="col-lg-1 col-xs-4      pading_2LnkTransVoucher LEPEL_padingrightLnkTransVoucher"> @SystemResource.App_MovementType   </label>
-            <div class="col-lg-3 col-xs-8">
-                <select id="drpStatus" class="form-control input-sm">
-                </select>
-            </div>
-
-            <div class="col-lg-1 pading_0">
-
-            </div>
-            <div class="col-lg-1"><button type="button" class="btn btn-info display_none" id="btnShow">@SystemResource.App_Show  <span class="glyphicon glyphicon-save "></span></button></div>
-            <div class="col-lg-2 pading_0">
-
-                <button id="btnback" type="button" class="  btn btn-warning  btn btn-custon-four primary-btn-cl display_none ">  @SystemResource.App_back  <span class="adminpro-icon adminpro-caret-down"></span></button>
-                <button id="btnsave" type="button" class="  btn btn-success  btn btn-custon-four display_none ">  @SystemResource.App_save  <i class="fa fa-check-square-o"></i></button>
-                <button id="btnedite" type="button" class="btn-edite btn btn-primary  ">   @SystemResource.App_Update <i class="fa fa-edit"></i>  </button>
-
-            </div>
-
-        </div>
-        <div id="title_grid1" class="col-lg-12 border_gridCont display_none" style="overflow:scroll;height:655px">
-            <div class="col-lg-12 ">
-                <label class="col-lg-1 col-xs-2 pading_2">  @SystemResource.serial </label>
-                <label class="col-lg-2 col-xs-2 pading_2">  @SystemResource.Name_Arabic </label>
-                <label class="col-lg-3 col-xs-2 pading_2">  @SystemResource.Name_English </label> 
-                <label class="col-lg-2 col-xs-6 pading_2">  @SystemResource.value  </label>
-                <label class="col-lg-1 col-xs-4 pading_2">  @SystemResource.cred_deb  </label>
-              
-            </div>
-            <div class="col-lg-12 labelgridLnkTransVoucher" style="position:absolute; ">
-                <label class="col-lg-2 col-xs-4 pading_2">  @SystemResource.account_type   </label>
-                <label class="col-lg-2 col-xs-4 pading_2">  @SystemResource.Fixed_account  </label>
-                <label class="col-lg-2 col-xs-4 pading_2">  @SystemResource.Variable_account   </label>
-                <label class="col-lg-2 col-xs-4 pading_2">  @SystemResource.Acc_bra   </label>
-                <label class="col-lg-2 col-xs-4 pading_2">  @SystemResource.Center_type   </label>
-                <label class="col-lg-1 col-xs-4 pading_2">  @SystemResource.Fixed_center   </label>
-
-            </div>
-            <div class="col-lg-8" style="position:absolute; left:-139.5%">
-
-                <label class="col-lg-3 col-xs-4 pading_2">  @SystemResource.Variable_center  </label>
-                <label class="col-lg-3 col-xs-4 pading_2">  @SystemResource.center_bra   </label>
-                <label class="col-lg-3 col-xs-4 pading_2">  @SystemResource.Grouping  </label>
-            </div>
-                <div class="col-lg-12" id="div_Data">
-
-                </div>
-
-                <span id="btnAddDetails" class=" btnAddDetailsLnkTransVoucher glyphicon glyphicon-plus-sign display_none"></span>
-            </div>
-
-            <div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
-
-                <h4 id="Text_Massage" style="">  @SystemResource.App_Message </h4>
-
-            </div>
-
-            <br />
-            <br />
-
-        </div>
-</div> 
-
- <script src="~/ClientApp/Tools/LnkTransVoucher/LnkTransVoucher.js"></script>
+@section Script{
+    <script src="~/ClientApp/Tools/LnkTransVoucher/LnkTransVoucher.js"></script>
+}

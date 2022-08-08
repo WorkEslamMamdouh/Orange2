@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<div class="row gy-3" d="informtionReserved">
+<div class="row gy-3" id="informtionReserved">
     <!-- Filter Container -->
     <div id="id_div_Add" class="col-12">
         <div class="card bg-light-blue">
@@ -85,7 +85,7 @@
                     <div class="col-12">
                         <div id="ReportGrid"></div>
                     </div>
-                    <div class="d-flex justify-content-center text-blue text-center fw-bold mb-3">
+                    <div class="d-flex justify-content-center text-blue text-center fw-bold mt-4">
                         @SystemResource.App_DoubleDisplay
                     </div>
                 </div>
@@ -342,91 +342,130 @@
                             <div class="row g-0">
                                 <label class="col-12 text-blue fw-bold fs-4 text-center ">   @SystemResource.App_address </label>
 
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 col-md-4">
-                                            <div class="form-group row g-0">
-                                                <label class="col-4  align-self-center p-md-0">@SystemResource.Country</label>
-                                                <div class="col-8 ">
-                                                    <select id="txt_Country" disabled name="" class="form-control">
-                                                        <option value="null">  @SystemResource.Country </option>
-                                                    </select>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-4">
+                                                                <div class="form-group row g-0">
+                                                                    <label class="col-4  align-self-center p-md-0">@SystemResource.Country</label>
+                                                                    <div class="col-8 ">
+                                                                        <select id="txt_Country" disabled name="" class="form-control">
+                                                                            <option value="null">  @SystemResource.Country </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4 align-self-center p-md-0">@SystemResource.District</label>
+                                                            <div class="col-8  ">
+                                                                <input id="txt_Address_District" disabled name="Address_District" type="text" class="form-control" placeholder="  @SystemResource.District ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4  align-self-center p-md-0">@SystemResource.City</label>
+                                                            <div class="col-8  ">
+                                                                <input id="txt_Address_City" disabled name="Address_City" type="text" class="form-control" placeholder="  @SystemResource.City ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4  align-self-center p-md-0">@SystemResource.preserving</label>
+                                                            <div class="col-8 ">
+                                                                <input id="txt_Address_Province" disabled name="Address_Province" type="text" class="form-control" placeholder="  @SystemResource.preserving ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4  align-self-center p-md-0">@SystemResource.postbox</label>
+                                                            <div class="col-8  ">
+                                                                <input id="txt_Address_postal" disabled name="Address_postal" type="text" class="form-control" placeholder="  @SystemResource.postbox ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4  align-self-center p-md-0">@SystemResource.Building_1</label>
+                                                            <div class="col-8  ">
+                                                                <input id="txt_Address_BuildingNo" disabled name="Address_BuildingNo" type="text" class="form-control" placeholder="@SystemResource.Building_1 ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-4 align-self-center p-md-0">@SystemResource.Building_2</label>
+                                                            <div class="col-8 ">
+                                                                <input id="txt_Address_Build_Additional" disabled name="Address_Build_Additional" type="text" class="form-control" placeholder="@SystemResource.Building_2 ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-md-6">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-2 align-self-center p-md-0">@SystemResource.Street_1</label>
+                                                            <div class="col-9 ms-4">
+                                                                <input id="txt_Address_Street" disabled name="Address_Street" type="text" class="form-control" placeholder=" @SystemResource.Street_1  ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <div class="form-group row g-0">
+                                                            <label class="col-2 align-self-center p-md-0">@SystemResource.Street_2</label>
+                                                            <div class="col-10">
+                                                                <input id="txt_Address_Str_Additional" disabled name="Address_Str_Additional" type="text" class="form-control" placeholder=" @SystemResource.Street_2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <!-- Div_DOC -->
+                            <div id="Div_DOC" class="row display_none">
+                                <div class="col-12">
+                                    <div class="card bg-light-blue">
+                                        <div class="card-body">
+                                            <!-- Inside Table  -->
+                                            <div class="inside-table my-4">
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 5%"></th>
+                                                                <th> @SystemResource.identity_type</th>
+                                                                <th>@SystemResource.card_number</th>
+                                                                <th> @SystemResource.place_issue_of_identity</th>
+                                                                <th>@SystemResource.ID_issuance_date</th>
+                                                                <th> @SystemResource.ID_issuance_date_H</th>
+                                                                <th>@SystemResource.ID_expiration_date</th>
+                                                                <th>@SystemResource.ID_expiration_date_H</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="data_lebel"></tbody>
 
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4 align-self-center p-md-0">@SystemResource.District</label>
-                                        <div class="col-8  ">
-                                            <input id="txt_Address_District" disabled name="Address_District" type="text" class="form-control" placeholder="  @SystemResource.District ">
+                                                    </table>
+                                                    <div class="d-flex justify-content-start mr-1">
+                                                        <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4  align-self-center p-md-0">@SystemResource.City</label>
-                                        <div class="col-8  ">
-                                            <input id="txt_Address_City" disabled name="Address_City" type="text" class="form-control" placeholder="  @SystemResource.City ">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4  align-self-center p-md-0">@SystemResource.preserving</label>
-                                        <div class="col-8 ">
-                                            <input id="txt_Address_Province" disabled name="Address_Province" type="text" class="form-control" placeholder="  @SystemResource.preserving ">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4  align-self-center p-md-0">@SystemResource.postbox</label>
-                                        <div class="col-8  ">
-                                            <input id="txt_Address_postal" disabled name="Address_postal" type="text" class="form-control" placeholder="  @SystemResource.postbox ">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4  align-self-center p-md-0">@SystemResource.Building_1</label>
-                                        <div class="col-8  ">
-                                            <input id="txt_Address_BuildingNo" disabled name="Address_BuildingNo" type="text" class="form-control" placeholder="@SystemResource.Building_1 ">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-4 align-self-center p-md-0">@SystemResource.Building_2</label>
-                                        <div class="col-8 ">
-                                            <input id="txt_Address_Build_Additional" disabled name="Address_Build_Additional" type="text" class="form-control" placeholder="@SystemResource.Building_2 ">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group row g-0">
-                                        <label class="col-2 align-self-center p-md-0">@SystemResource.Street_1</label>
-                                        <div class="col-9 ms-4">
-                                            <input id="txt_Address_Street" disabled name="Address_Street" type="text" class="form-control" placeholder=" @SystemResource.Street_1  ">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group row g-0">
-                                        <label class="col-2 align-self-center p-md-0">@SystemResource.Street_2</label>
-                                        <div class="col-10">
-                                            <input id="txt_Address_Str_Additional" disabled name="Address_Str_Additional" type="text" class="form-control" placeholder=" @SystemResource.Street_2">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -434,39 +473,7 @@
             </div>
         </div>
 
-        <!-- Div_DOC -->
-        <div id="Div_DOC" class="row display_none">
-            <div class="col-12">
-                <div class="card bg-light-blue">
-                        <div class="card-body">
-                            <!-- Inside Table  -->
-                            <div class="inside-table my-4">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless ">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 5%"></th>
-                                                <th> @SystemResource.identity_type</th>
-                                                <th>@SystemResource.card_number</th>
-                                                <th> @SystemResource.place_issue_of_identity</th>
-                                                <th>@SystemResource.ID_issuance_date</th>
-                                                <th> @SystemResource.ID_issuance_date_H</th>
-                                                <th>@SystemResource.ID_expiration_date</th>
-                                                <th>@SystemResource.ID_expiration_date_H</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="data_lebel"></tbody>
-
-                                    </table>
-                                    <div class="d-flex justify-content-start mr-1">
-                                        <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
+       
      </div>
 </div>
 

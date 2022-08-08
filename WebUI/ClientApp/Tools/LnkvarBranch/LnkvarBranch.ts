@@ -31,9 +31,9 @@ namespace LnkvarBranch {
     var AccountDetails: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
 
 
-    var btnedite: HTMLButtonElement;
-    var btnback: HTMLButtonElement;
-    var btnsave: HTMLButtonElement;
+    var btnUpdate_Def: HTMLButtonElement;
+    var btnBack_Def: HTMLButtonElement;
+    var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
 
 
@@ -60,10 +60,14 @@ namespace LnkvarBranch {
     function InitalizeControls() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = " حسابات ربط الفروع  "; } else { document.getElementById('Screen_name').innerHTML = "Branch Link Accounts"; }
 
+        $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('icon-bar');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
 
-        btnedite = document.getElementById("btnedite") as HTMLButtonElement;
-        btnback = document.getElementById("btnback") as HTMLButtonElement;
-        btnsave = document.getElementById("btnsave") as HTMLButtonElement;
+        btnUpdate_Def = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
+        btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
 
 
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
@@ -72,9 +76,9 @@ namespace LnkvarBranch {
     }
     function InitializeEvents() {
         drpuserType.onchange = Display;
-        btnedite.onclick = btnedite_onclick;
-        btnback.onclick = btnback_onclick;
-        btnsave.onclick = btnsave_onclick;
+        btnUpdate_Def.onclick = btnedite_onclick;
+        btnBack_Def.onclick = btnback_onclick;
+        btnSave_Def.onclick = btnsave_onclick;
     }
 
     function check_Account(Ser: number) {
@@ -166,9 +170,9 @@ namespace LnkvarBranch {
 
     function btnedite_onclick() {
         if ($('#drpuserType').val() != "Null") {
-            $('#btnback').removeClass('display_none')
-            $('#btnsave').removeClass('display_none')
-            $('#btnedite').addClass('display_none')
+            $('#btnBack_Def').removeClass('display_none')
+            $('#btnSave_Def').removeClass('display_none')
+            $('#btnUpdate_Def').addClass('display_none')
             $('.dis').removeAttr('disabled');
             $(".acc_Cod").removeAttr('disabled');
         } else {
@@ -182,9 +186,9 @@ namespace LnkvarBranch {
 
     }
     function btnback_onclick() {
-        $('#btnback').addClass('display_none')
-        $('#btnsave').addClass('display_none')
-        $('#btnedite').removeClass('display_none')
+        $('#btnBack_Def').addClass('display_none')
+        $('#btnSave_Def').addClass('display_none')
+        $('#btnUpdate_Def').removeClass('display_none')
         $('.dis').attr('disabled', 'disabled');
         Display();
     }
@@ -265,9 +269,9 @@ namespace LnkvarBranch {
                         let result = d as BaseResponse;
                         if (result.IsSuccess == true) {
                             MessageBox.Show('تم الحفظ', '');
-                            $('#btnback').addClass('display_none')
-                            $('#btnsave').addClass('display_none')
-                            $('#btnedite').removeClass('display_none')
+                            $('#btnBack_Def').addClass('display_none')
+                            $('#btnSave_Def').addClass('display_none')
+                            $('#btnUpdate_Def').removeClass('display_none')
                             $('.dis').attr('disabled', 'disabled');
                             Display();
                         }
@@ -397,14 +401,14 @@ namespace LnkvarBranch {
                     //txt.disabled = false;
                     txt.id = "text_AccountCode" + item.Ser;
                     txt.name = "GLAccountCode";
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main  display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
 
                         txt.disabled = true;
                     }
-                    txt.className = "form-control input-sm acc_Cod dis";
+                    txt.className = "form-control";
                     txt.onchange = (e) => {
                         check_Account(item.Ser);
 
@@ -424,7 +428,7 @@ namespace LnkvarBranch {
                     txt.disabled = true;
                     txt.name = (lang == "ar" ? "Acc_DescA" : "Acc_DescL");
                     txt.value = item.GLAcc_DescA;
-                    txt.className = "form-control input-sm";
+                    txt.className = "form-control";
 
 
                     return txt;
@@ -437,9 +441,9 @@ namespace LnkvarBranch {
                     txt.type = "button";
                     txt.value = (lang == "ar" ? "بحث" : "Search");
                     txt.id = "but" + item.Ser;
-                    txt.className = "dis src-btn btn btn-warning input-sm";
+                    txt.className = "btn btn-main";
 
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
@@ -547,14 +551,14 @@ namespace LnkvarBranch {
                     txt.disabled = true;
                     txt.name = "CC_Code";
                     txt.value = item.CC_Code;  
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else
                     {
                           txt.disabled = true;
                     }
-                    txt.className = "form-control input-sm acc_Cod dis";
+                    txt.className = "form-control";
                     txt.onchange = (e) => {
                     check_ccenter(item.Ser);
                     };
@@ -571,7 +575,7 @@ namespace LnkvarBranch {
                     txt.disabled = true;
                     txt.name = (lang == "ar" ? "CC_DescA" : "CC_DescE");
                     txt.value = item.GSt_DescA;
-                    txt.className = "form-control input-sm";  
+                    txt.className = "form-control";  
                     return txt;
                 }
             },
@@ -585,9 +589,9 @@ namespace LnkvarBranch {
                     txt.disabled = false;
                     txt.id = "but" + item.Ser;
                     txt.disabled = true;
-                    txt.className = "dis src-btn btn btn-warning input-sm"; 
+                    txt.className = "btn btn-main"; 
 
-                    if (btnedite.getAttribute('class') == 'btn-edite btn btn-primary   display_none' || btnedite.getAttribute('class') == 'btn-edite btn btn-primary display_none') {
+                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
                     else {
