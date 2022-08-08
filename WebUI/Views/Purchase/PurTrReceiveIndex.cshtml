@@ -7,7 +7,7 @@
 <style>
     .btnCustLastPrice {
         direction: ltr !important;
-        bottom: 403px !important;
+        bottom: 443px !important;
         left: 97% !important;
         right: -97%;
         border-radius: 72px 0px 0px 71px !important;
@@ -257,6 +257,9 @@
                                         <th style="width: 6%">@SystemResource.purchase_quantity</th>
                                         <th style="width: 6%" class="text-wrap">@SystemResource.App_returnQty</th>
                                         <th style="width: 6%" class="text-wrap">@SystemResource.App_Price</th>
+                                        <th style="width: 7%" class="text-wrap">نسبة الخصم </th>
+                                        <th style="width: 7%" class="text-wrap">الخصم  </th>
+                                        <th style="width: 7%" class="text-wrap">السعر بعدالخصم  </th>
                                         <th style="width: 6%" class="text-wrap">@SystemResource.App_total</th>
                                         <th style="width: 6%" class="text-wrap">@SystemResource.LocalPrice</th>
                                         <th style="width: 6%" class="text-wrap">@SystemResource.LocalTotal</th>
@@ -372,8 +375,8 @@
                     <div class="row g-0" id="divTotalSatistics">
                         <div class="col-12 mb-5">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                <div class="col-8 ">
+                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-8 col-md-11">
                                     <textarea disabled class="form-control" name="" id="txtNotes"></textarea>
                                 </div>
                             </div>
@@ -392,6 +395,19 @@
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
                                     <div class="col-8 ">
                                         <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtItemsNumber">
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 row g-0">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                                    <div class="col-8 ">
+                                        <input type="text" disabled="disabled" class="form-control input-sm" name="ItemTotal" value="0" id="txtTotalbefore">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 row g-0">
+                                    <label class="col-4 align-self-center p-md-0">الخصم</label>
+                                    <div class="col-8 ">
+                                        <input type="text" disabled="disabled" class="form-control input-sm" name="ItemDiscountTotal" value="0" id="txtTotalDiscount">
                                     </div>
                                 </div>
 
@@ -418,7 +434,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>@SystemResource.App_total</td>
+                                        @*<td>@SystemResource.App_total</td>*@
+                                        <td>
+                                            الاجمالي بعد الخصم
+                                        </td>
                                         <td>  <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotal"></td>
                                         <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtAddons"></td>
                                         <td> <input type="text" class="form-control" disabled="disabled" value="0" name="" id="txtTotalPurchaseWithoutTax"></td>
@@ -441,7 +460,7 @@
 
                     </div>
                     <!-- Editors Details -->
-                    <div class="insettext row editor-details">
+                    <div class="insettext row editor-details mt-5">
                         <div class="col-12 col-lg-6">
 
                             <div class="form-group row g-0">

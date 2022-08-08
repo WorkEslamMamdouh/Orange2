@@ -90,6 +90,8 @@ namespace PurTrReceive {
     var txtAddonsTax: HTMLInputElement;
     var txtTotalFamily: HTMLInputElement;
     var txtTotalAddons: HTMLInputElement;
+    var txtTotalbefore: HTMLInputElement;
+    var txtTotalDiscount: HTMLInputElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
@@ -121,7 +123,7 @@ namespace PurTrReceive {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
-    var btnPrintTransaction: HTMLButtonElement; 
+    var btnPrintTransaction: HTMLButtonElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     var flagLastPrice = 2;
@@ -131,7 +133,7 @@ namespace PurTrReceive {
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         InitalizeControls();
         GlobalCurrency = SysSession.CurrentEnvironment.I_Control[0].Currencyid;
-       // VatPrc = SysSession.CurrentEnvironment.I_Control[0].DefPurVatType;
+        // VatPrc = SysSession.CurrentEnvironment.I_Control[0].DefPurVatType;
         $("#txtDateHeader").val(GetDate());
         IntializeEvents();
         FillddlCashBox();
@@ -162,7 +164,7 @@ namespace PurTrReceive {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
-        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement; 
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
         //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
@@ -197,6 +199,8 @@ namespace PurTrReceive {
         txtAddonsTax = document.getElementById("txtAddonsTax") as HTMLInputElement;
         txtTotalFamily = document.getElementById("txtTotalFamily") as HTMLInputElement;
         txtTotalAddons = document.getElementById("txtTotalAddons") as HTMLInputElement;
+        txtTotalDiscount = document.getElementById("txtTotalDiscount") as HTMLInputElement;
+        txtTotalbefore = document.getElementById("txtTotalbefore") as HTMLInputElement;
         txtPurOrderNum = document.getElementById("txtPurOrderNum") as HTMLInputElement;
         txtVendorName = document.getElementById("txtVendorName") as HTMLInputElement;
         txtCurrencyRate = document.getElementById("txtCurrencyRate") as HTMLInputElement;
@@ -246,7 +250,7 @@ namespace PurTrReceive {
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintTransaction.onclick = btnPrintTransaction_onclick; 
+        btnPrintTransaction.onclick = btnPrintTransaction_onclick;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
@@ -256,7 +260,7 @@ namespace PurTrReceive {
     //-----------------------------------------------------------------------------------------------------------------------------
     function LastPrice_onclick() {
 
-      
+
 
 
 
@@ -313,13 +317,12 @@ namespace PurTrReceive {
             flagLastPrice = 2;
         }, 20000);
     }
-    function GetLastPrice(itemid: number, Name: string) {
-        debugger
+    function GetLastPrice(itemid: number, Name: string) { 
         let VendorID = globalVendorID;
-        let storeid = ddlStoreHeader.value; 
+        let storeid = ddlStoreHeader.value;
         let invid = GlobalReceiveID
 
-         
+
         let flagPrice = true;
         if (itemid.toString() == 'null') {
             flagPrice = false
@@ -343,7 +346,7 @@ namespace PurTrReceive {
                     if (result.IsSuccess) {
                         ModelPurchase = result.Response as ModelLastPurchase;
                         $("#VndLastPrice").html(ModelPurchase.VndLastPrice.toString())
-                        $("#VndLastTr").html(ModelPurchase.VndLastTr.toString()) 
+                        $("#VndLastTr").html(ModelPurchase.VndLastTr.toString())
                         $("#LastPurchase").html(ModelPurchase.LastPurchase.toString())
                         $("#Curcost").html(ModelPurchase.Curcost.toString())
                         $("#VndLastDate").html(ModelPurchase.VndLastDate.toString())
@@ -357,7 +360,7 @@ namespace PurTrReceive {
         else {
 
             $("#VndLastPrice").html("-----")
-            $("#VndLastTr").html("-----") 
+            $("#VndLastTr").html("-----")
             $("#LastPurchase").html("-----")
             $("#Curcost").html("-----")
             $("#VndLastDate").html("-----")
@@ -370,7 +373,7 @@ namespace PurTrReceive {
     //---------------------------------------------------------------- normal region----------------------------------------------------
     function ddlIsCashOnchange() {
         if (ddlIsCash.value == '0') {
-            $('#ddlCashBoxH').attr('disabled','disabled');;
+            $('#ddlCashBoxH').attr('disabled', 'disabled');;
         } else {
             $('#ddlCashBoxH').removeAttr('disabled');
         }
@@ -439,7 +442,7 @@ namespace PurTrReceive {
                             GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
                             GetPurReceiveStaisticData[i].Tot_VAT = Number(GetPurReceiveStaisticData[i].Tot_VAT.toFixed(2));
                             GetPurReceiveStaisticData[i].Tot_Net = Number(GetPurReceiveStaisticData[i].Tot_Net.toFixed(2));
-                          
+
                             GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "غير معتمد" : "معتمد";
 
                         }
@@ -455,7 +458,7 @@ namespace PurTrReceive {
             }
         });
 
-       
+
     }
     function MasterGridDoubleClick() {
         debugger
@@ -488,7 +491,7 @@ namespace PurTrReceive {
         txtPurOrderNum.disabled = true;
         btnVendorSearch.disabled = true;
         btnPurOrderSearch.disabled = true;
- 
+
     }
     function DataHeader() {
 
@@ -503,7 +506,7 @@ namespace PurTrReceive {
             txtNotes.value = RetrivedPurchaseModel[0].Remarks.toString();
             ddlReciveTypeHeader.value = RetrivedPurchaseModel[0].PurRecType.toString();
             VendorRecieptID.value = RetrivedPurchaseModel[0].VendorInvNo.toString();
-         
+
             txtCurrencyRate.value = RetrivedPurchaseModel[0].CurrencyRate.RoundToSt(6);
             if (RetrivedPurchaseModel[0].CurrencyID != null)
                 ddlCurrency.value = RetrivedPurchaseModel[0].CurrencyID.toString();
@@ -550,7 +553,7 @@ namespace PurTrReceive {
         $("#txtTotalPurchaseWithTax").val(FullAllPRiceWithTaxVal.RoundToSt(2));
 
         //TaxTypeOnchange();
-        
+
         if (RetrivedPurchaseModel[0].IsCash == true) { ddlIsCash.value = '1'; $('#ddlCashBoxH').removeAttr('disabled'); }
         else { ddlIsCash.value = '0'; $('#ddlCashBoxH').attr('disabled', 'disabled');; }
 
@@ -635,36 +638,36 @@ namespace PurTrReceive {
             finishSave('btnsave');
 
 
-        if (!ValidationHeader())
-            return;
-
-        for (let i = 0; i < CountGrid; i++) {
-            if (!Validation_Grid(i))
+            if (!ValidationHeader())
                 return;
-        }
 
-        for (let i = 0; i < CountGridCharge; i++) {
-            if (!ValidationCharge_Grid(i))
-                return;
-        }
+            for (let i = 0; i < CountGrid; i++) {
+                if (!Validation_Grid(i))
+                    return;
+            }
 
-        if (ddlIsCash.value == "0") {
-            $('#ddlCashBoxH').removeAttr('disabled');
-            let net = Number($('#txtTotalPurchaseWithTax').val());
-            if (!Check_CreditLimit_Vendor(net))
-                return;
-        }
+            for (let i = 0; i < CountGridCharge; i++) {
+                if (!ValidationCharge_Grid(i))
+                    return;
+            }
 
-        Assign();
-        if (ModeType == 2)//Insert
-        {
-            Insert();
-        }
-        else if (ModeType == 3)//update
-        {
-            Update();
-        }
-      
+            if (ddlIsCash.value == "0") {
+                $('#ddlCashBoxH').removeAttr('disabled');
+                let net = Number($('#txtTotalPurchaseWithTax').val());
+                if (!Check_CreditLimit_Vendor(net))
+                    return;
+            }
+
+            Assign();
+            if (ModeType == 2)//Insert
+            {
+                Insert();
+            }
+            else if (ModeType == 3)//update
+            {
+                Update();
+            }
+
 
         }, 100);
     }
@@ -704,7 +707,7 @@ namespace PurTrReceive {
         $("#txtUpdatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         txtPurOrderNum.disabled = false;
 
- 
+
 
     }
     function btnPurOrderSearch_onclick() {
@@ -731,7 +734,7 @@ namespace PurTrReceive {
     //---------------------------------------------------------------- Events region----------------------------------------------------
     function TaxTypeOnchange() {
         //////;
-        
+
         let fltr = VatDetails.filter(x => (x.CODE == (ddlTaxTypeHeader.value == "null" ? DefVatType : ddlTaxTypeHeader.value)));
         if (fltr.length != 0)
             VatPrc = fltr[0].VatPerc;
@@ -741,7 +744,7 @@ namespace PurTrReceive {
 
         if (ModeType != 2) {
 
-             for (var cnt = 0; cnt < CountGrid; cnt++) {
+            for (var cnt = 0; cnt < CountGrid; cnt++) {
                 //////;
                 //
                 var txtQuantityValue = $("#txtQuantity" + cnt).val();
@@ -793,7 +796,7 @@ namespace PurTrReceive {
         }
     }
     function txtCurrencyRate_onkeyup() {
-        currencrRate =1 
+        currencrRate = 1
         var txtQuantityVal: number = 0;
         var txtPriceVal: number = 0;
         var txtPriceValFc: number = 0;
@@ -840,14 +843,14 @@ namespace PurTrReceive {
         });
     }
     function FillddlItems(ItemFamilyID: number, StoreId: number) {
-        
+
         ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreId);
 
-           
+
         if (ModeType == 2)//Insert
         {
             ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreId && x.IsActive == true && x.IsPurchase == true);
-        } 
+        }
         else {
             if (ShowFlag == true || PurOrderShowFlag == true) {
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreId);
@@ -856,7 +859,7 @@ namespace PurTrReceive {
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreId && x.IsActive == true && x.IsPurchase == true);
             }
         }
-        
+
     }
     function FillddlCashBox() {
         Ajax.Callsync({
@@ -867,10 +870,10 @@ namespace PurTrReceive {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     CashboxDetails = result.Response as Array<A_RecPay_D_CashBox>;
-                    
-                    $('#ddlCashBoxH').append('<option value="null">' + (lang == "ar" ?"اختر الصندوق" : "choose Box") + '</option>');
 
-                    for (var i = 0; i < CashboxDetails.length; i++) {    
+                    $('#ddlCashBoxH').append('<option value="null">' + (lang == "ar" ? "اختر الصندوق" : "choose Box") + '</option>');
+
+                    for (var i = 0; i < CashboxDetails.length; i++) {
                         $('#ddlCashBoxH').append('<option value="' + CashboxDetails[i].CashBoxID + '">' + (lang == "ar" ? CashboxDetails[i].CashBox_DescA : CashboxDetails[i].CashBox_DescE) + '</option>');
                     }
                 }
@@ -1253,7 +1256,7 @@ namespace PurTrReceive {
             txtPurOrderNum.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].TrNo.toString()
             ddlTaxTypeHeader.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VATType.toString()
             txtNotes.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].Remarks.toString();
-            if (PurOrderDetailModel.IQ_GetPurchaseOrder[0].IsCash == true) { ddlIsCash.value = '1'; $('#ddlCashBoxH').attr('disabled','disabled');; }
+            if (PurOrderDetailModel.IQ_GetPurchaseOrder[0].IsCash == true) { ddlIsCash.value = '1'; $('#ddlCashBoxH').attr('disabled', 'disabled');; }
             else { ddlIsCash.value = '0'; $('#ddlCashBoxH').removeAttr('disabled'); }
             PurOrderShowFlag = true;
             ShowFlag = false;
@@ -1269,8 +1272,8 @@ namespace PurTrReceive {
             $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         }
         PurOrderDetailModel = new IQ_PurchaseOrderWithDetail();
-    } 
-    function getVendorByID() { 
+    }
+    function getVendorByID() {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefVendor", "GetById"),
@@ -1281,12 +1284,12 @@ namespace PurTrReceive {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     VendorModel = new A_Pay_D_Vendor();
-                    VendorModel = result.Response as A_Pay_D_Vendor; 
+                    VendorModel = result.Response as A_Pay_D_Vendor;
                     txtVendorName.value = (lang == "ar" ? VendorModel.NAMEA : VendorModel.NAMEL);
-                     
+
                     vatpriceVendor = VendorModel.VATType;
                     ddlTaxTypeHeader.value = VendorModel.VATType.toString();
-                  
+
                     let fltr = VatDetails.filter(x => (x.CODE == (ddlTaxTypeHeader.value == "null" ? DefVatType : ddlTaxTypeHeader.value)));
                     if (fltr.length != 0)
                         VatPrc = fltr[0].VatPerc;
@@ -1295,7 +1298,7 @@ namespace PurTrReceive {
                         VatPrc = VatDetails.filter(x => x.CODE == Number(DefVatType))[0].VatPerc;
 
                     if (ModeType == 2 || ModeType == 3) {
-                      
+
                         for (var cnt = 0; cnt < CountGrid; cnt++) {
                             //////;
                             //
@@ -1356,7 +1359,7 @@ namespace PurTrReceive {
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-         
+
 
             CountGrid++;
 
@@ -1392,7 +1395,7 @@ namespace PurTrReceive {
                      <td>
 		                <div class="form-group">
                         <select id="ddlItem${cnt}" class="form-control select_">
-                            <option value="null">${ (lang == "ar" ? "اختر" : "Choose") }</option>
+                            <option value="null">${ (lang == "ar" ? "اختر" : "Choose")}</option>
                         </select>
 		                </div>
 	                </td>
@@ -1412,6 +1415,21 @@ namespace PurTrReceive {
 		                </div>
 	                </td>
                     <td>
+		                <div class="form-group" >
+			               <input id="txtDiscountPrc${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>
+                    <td>
 		                <div class="form-group">
 			              <input id="txtTotalFc${cnt}" type="number" disabled class="form-control"  value="0"/>
 		                </div>
@@ -1428,7 +1446,7 @@ namespace PurTrReceive {
 	                </td>
                     <td>
 		                <div class="form-group">
-			               <input id="txtTax${cnt}" type="text" disabled class="form-control" data_VatPrc="${((VatPrc == null || undefined) ? 0 : VatPrc) }"  value="0"/>
+			               <input id="txtTax${cnt}" type="text" disabled class="form-control" data_VatPrc="${((VatPrc == null || undefined) ? 0 : VatPrc)}"  value="0"/>
 		                </div>
 	                </td>
                     <td>
@@ -1496,7 +1514,7 @@ namespace PurTrReceive {
 
 
         $("#div_Data").append(html);
-        
+
 
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
@@ -1652,13 +1670,15 @@ namespace PurTrReceive {
             var storeId = Number(ddlStoreHeader.value);//and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
             let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
-          
+
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
 
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
-                $('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+                //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+
+                $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID+']').prop('selected', 'selected').change();
 
                 let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
 
@@ -1681,31 +1701,17 @@ namespace PurTrReceive {
                 var res = false;
                 var NumberRowid = $("#ReciveDetailsID" + cnt).val();
                 res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+                $("#txtPrice" + cnt).val("1");
+                $("#txtPriceFc" + cnt).val("1");
+                $("#txtQuantity" + cnt).val("1");
+                $("#txtDiscountPrc" + cnt).val("0");
+                $("#txtDiscountAmount" + cnt).val("0"); 
                 if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    $("#txtPrice" + cnt).val("1");
+                $("#ddlItem" + cnt).val("null");  
                     DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                } else {
-                    $("#txtPriceFc" + cnt).val("1");
-                    var txtQuantityValue = $("#txtQuantity" + cnt).val();
-                    var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
-                    var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-                    $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
-
-
-                    var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
-                    $("#txtPrice" + cnt).val(txtPriceValue);
-                    var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                    $("#txtTotal" + cnt).val(total);
-
-                    var vatAmount = Number(total) * VatPrc / 100;
-                    $("#txtTax" + cnt).val(vatAmount);
-                    var totalAfterVat = Number(vatAmount) + Number(total);
-                    $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-
-                }
-                ComputeTotals();
+                } 
+              
+                totalRow(cnt, true); 
 
 
 
@@ -1726,7 +1732,7 @@ namespace PurTrReceive {
             () => {
                 if ($("#txt_StatusFlag" + cnt).val() != "i")
                     $("#txt_StatusFlag" + cnt).val("u");
-                
+
                 if ($('#ddlFamily' + cnt).val() != "null" && ddlStoreHeader.value != "null") {
                     $('#ddlItem' + cnt).empty();
                     $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
@@ -1758,45 +1764,22 @@ namespace PurTrReceive {
                     $("#txtTotalFc" + cnt).val("0");
                     $("#txtTax" + cnt).val("0");
                     $("#txtTotAfterTax" + cnt).val("0");
+                    $("#txtNetUnitPrice" + cnt).val("0");
+                    ComputeTotals();
                 } else {
-                    var selectedItem = $(dropddlItem + ' option:selected').attr('value');
-                    var selectedFamily = $(drop + ' option:selected').attr('value');
+               
+                    $("#txtPriceFc" + cnt).val("1");
+                    $("#txtQuantity" + cnt).val("1");
+                    $("#txtDiscountPrc" + cnt).val("0");
+                    $("#txtDiscountAmount" + cnt).val("0");
 
-                    var itemID = Number(selectedItem);
-                    var FamilyID = Number(selectedFamily);
-                    var res = false;
-                    var NumberRowid = $("#ReciveDetailsID" + cnt).val();
-                    //res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
-                   
-                    //if (res == true) {
-                    //    $("#ddlItem" + cnt).val("null");
-                    //    $("#txtPrice" + cnt).val("1");
-                    //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                    //} else {
-                        $("#txtPriceFc" + cnt).val("1");
-                        var txtQuantityValue = $("#txtQuantity" + cnt).val();
-                        var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
-                        var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-                        $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
-                        
+                    totalRow(cnt, true);
 
-                        var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
-                        $("#txtPrice" + cnt).val(txtPriceValue);
-                        var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                        $("#txtTotal" + cnt).val(total);
-
-                        var vatAmount = Number(total) * VatPrc / 100;
-                        $("#txtTax" + cnt).val(vatAmount);
-                        var totalAfterVat = Number(vatAmount) + Number(total);
-                        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-                    //}
 
                     itemid_LastPrice = $('#ddlItem' + cnt).val();
                     GetLastPrice(itemid_LastPrice, $("#ddlItem" + cnt + " option:selected").text())
 
                 }
-                ComputeTotals();
             });
 
         // text change
@@ -1807,23 +1790,9 @@ namespace PurTrReceive {
                 $("#txt_StatusFlag" + cnt).val("u");
 
 
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
-            var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-            $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
 
+            totalRow(cnt, true);
 
-            var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
-            $("#txtPrice" + cnt).val(txtPriceValue);
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total);
-
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount);
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            ComputeTotals();
 
         });
 
@@ -1832,25 +1801,9 @@ namespace PurTrReceive {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
-            var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-            $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
 
 
-            var txtPriceValue = $("#txtPriceFc" + cnt).val() * currencrRate;
-            $("#txtPrice" + cnt).val(txtPriceValue);
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total);
-
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount);
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            debugger
-
-            ComputeTotals();
+            totalRow(cnt, true);
 
         });
 
@@ -1870,20 +1823,45 @@ namespace PurTrReceive {
             debugger
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
-            ComputeTotals();
+            totalRow(cnt, true);
+             
         });
 
         $("#txtPrice" + cnt).change(() => {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
-            ComputeTotals();
+            totalRow(cnt, true);
+
+        });
+
+        $("#txtDiscountPrc" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            totalRow(cnt, true);
+        });
+        $("#txtDiscountAmount" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+
+            let txtPrice = Number($("#txtPrice" + cnt).val());
+            let txtDiscountAmount = Number($("#txtDiscountAmount" + cnt).val());
+
+            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2));
+
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
+
+
+            totalRow(cnt, false);
+
         });
 
         $("#txtAddons" + cnt).change(() => {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             $("#txtTotAddons" + cnt).val((Number($("#txtAddons" + cnt).val()) + Number($("#txtPrice" + cnt).val())));
-            ComputeTotals();
+            totalRow(cnt, true); 
         });
 
 
@@ -1965,14 +1943,14 @@ namespace PurTrReceive {
             var tax = $("#txtTax" + cnt).val();
             var totalAfterTax = (Number(total) + Number(tax)).RoundToSt(2);
             $("#txtTotal" + cnt).prop("value", total);
-            $("#txtTotalFc" + cnt).prop("value", totalfc.RoundToSt(2)); 
-            $("#txtTotAfterTax" + cnt).prop("value", totalAfterTax); 
+            $("#txtTotalFc" + cnt).prop("value", totalfc.RoundToSt(2));
+            $("#txtTotAfterTax" + cnt).prop("value", totalAfterTax);
             var ReciveDetailsID = ItemDetails[cnt].ReciveDetailsID;
             $("#ReciveDetailsID" + cnt).prop("value", ReciveDetailsID);
 
         }
         if (PurOrderShowFlag == true) {
-            
+
             // disabled
             $("#txtQuantityReturnValue" + cnt).attr("disabled", "disabled");
             $("#txtAddons" + cnt).attr("disabled", "disabled");
@@ -2038,8 +2016,58 @@ namespace PurTrReceive {
         return;
 
     }
+
+    function totalRow(cnt: number, flagDiscountAmount: boolean) {
+        debugger
+
+         
+        let txtPrice = Number($("#txtPriceFc" + cnt).val());
+        let txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
+
+        if (flagDiscountAmount) {
+            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100).RoundToSt(2));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)).RoundToSt(2));
+        }
+        else {
+
+            let txtDiscountAmount = Number($("#txtDiscountAmount" + cnt).val());
+            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
+        }
+
+
+
+
+        var txtQuantityValue = $("#txtQuantity" + cnt).val();
+        var txtPriceValueFc = $("#txtNetUnitPrice" + cnt).val();
+
+
+
+        //var txtQuantityValue = $("#txtQuantity" + cnt).val();
+        //var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
+        var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
+        $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
+
+
+        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * currencrRate;
+        $("#txtPrice" + cnt).val(txtPriceValue);
+        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+        $("#txtTotal" + cnt).val(total);
+
+        var vatAmount = Number(total) * VatPrc / 100;
+        $("#txtTax" + cnt).val(vatAmount);
+        var totalAfterVat = Number(vatAmount) + Number(total);
+        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+
+
+        ComputeTotals();
+
+
+    }
     function ComputeTotals() {
-        
+
+        var Totalbefore: number = 0;
+        var TotalDiscount: number = 0;
         var txtQuantityVal: number = 0;
         var txtPriceVal: number = 0;
         var Totallll: number = 0;
@@ -2053,18 +2081,27 @@ namespace PurTrReceive {
         for (let i = 0; i < CountGrid; i++) {
             debugger
             var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m" ) {
+            if (flagvalue != "d" && flagvalue != "m") {
                 txtQuantityVal += Number($("#txtQuantity" + i).val()); // عدد العبوات
-                txtPriceVal = Number($("#txtPriceFc" + i).val() * currencrRate);
+                txtPriceVal = Number($("#txtNetUnitPrice" + i).val() * currencrRate);
                 Totallll += Number((Number($("#txtQuantity" + i).val()) * txtPriceVal));
 
-                txtPriceValFc = Number($("#txtPriceFc" + i).val());
+                txtPriceValFc = Number($("#txtNetUnitPrice" + i).val());
                 TotalFc += Number((Number($("#txtQuantity" + i).val()) * txtPriceValFc).RoundToSt(2));
 
                 txtTaxVal += Number($("#txtTax" + i).val());
                 txtTotAfterTaxVal += Number($("#txtTotAfterTax" + i).val());
                 txtAddonsVal += Number($("#txtAddons" + i).val());
                 FullAddons += txtAddonsVal * txtQuantityVal;
+
+
+
+                Totalbefore += (Number($("#txtQuantity" + i).val()) * Number($("#txtPriceFc" + i).val()));
+                Totalbefore = Number(Totalbefore.RoundToSt(2).toString());
+
+                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
+                TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
+
             }
         }
         $("#txtLocalTotalFooter").val(TotalFc);
@@ -2088,6 +2125,9 @@ namespace PurTrReceive {
         var txtValueChargeTot = Number($("#txtTotalAddons").val());
         var txtTotalVal = Number($("#txtTotalFamily").val());
         $("#txtTotalPurchaseWithTax").val((txtValueChargeTot + txtTotalVal).RoundToSt(2));
+         
+        txtTotalDiscount.value = TotalDiscount.toString();
+        txtTotalbefore.value = Totalbefore.toString();
 
         ComputeTotalsCharge();
 
@@ -2114,7 +2154,7 @@ namespace PurTrReceive {
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
             CountItems = CountItems - 1;
-            
+
             $("#ddlFamily" + RecNo).val("Null");
             $("#ddlItem" + RecNo).val("Null");
             $("#txtQuantity" + RecNo).val("1");
@@ -2243,7 +2283,7 @@ namespace PurTrReceive {
                     <td>
 		                <div class="form-group">
                             <select id="txt_D_CashBox${cnt}" name=""  disabled="disabled" class="form-control" tabindex="-1" aria-hidden="true">
-                             <option value="Null">${ (lang == "ar" ? "الصنوق" : "CashBox") }  </option>
+                             <option value="Null">${ (lang == "ar" ? "الصنوق" : "CashBox")}  </option>
                             </select>
 		                </div>
 	                </td>
@@ -2517,7 +2557,7 @@ namespace PurTrReceive {
 
             $("#txtVatType" + cnt).val(PurReceiveChargeData[cnt].VatType);
             $("#txtVatType" + cnt).attr('data-VatPerc', PurReceiveChargeData[cnt].VatPrc);
-            
+
 
             //IsCash
 
@@ -2664,7 +2704,7 @@ namespace PurTrReceive {
         lblInvoiceNumber.innerText = "";
         ddlTaxTypeHeader.value = "null";
         txtNotes.value = "";
-        $("#ddlIsCash").prop("value", "0");    
+        $("#ddlIsCash").prop("value", "0");
         $('#ddlCashBoxH').removeAttr('disabled');
 
         ddlReciveTypeHeader.value = "null";
@@ -2809,7 +2849,7 @@ namespace PurTrReceive {
         return true;
 
     }
-    function EnableControls() { 
+    function EnableControls() {
         debugger
         $("#divDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
@@ -2871,7 +2911,7 @@ namespace PurTrReceive {
         $("#txtCreatedBy").prop("disabled", "disabled");
         $("#txtUpdatedAt").prop("disabled", "disabled");
         $("#txtUpdatedBy").prop("disabled", "disabled");
-     
+
     }
     function DisableControls() {
         $("#divDetails").removeClass("display_none");
@@ -2962,7 +3002,7 @@ namespace PurTrReceive {
         ReceiveModel.CurrencyRate = Number(txtCurrencyRate.value);
         ReceiveModel.TotalFC = Number($("#txtLocalTotalFooter").val());
         ReceiveModel.Remarks = txtNotes.value;
-        if (ddlIsCash.value == '1') {  
+        if (ddlIsCash.value == '1') {
             ReceiveModel.CashBoxID = Number(ddlCashBoxH.value);
             ReceiveModel.IsCash = true;
         } else {
@@ -2979,13 +3019,16 @@ namespace PurTrReceive {
         ReceiveModel.VatAmount = Number(txtTax.value);
         ReceiveModel.Total = Number(txtTotal.value);
 
+        //ReceiveModel.ItemTotal = Number(txtTotalbefore.value);
+        ReceiveModel.DiscountAmount = Number(txtTotalDiscount.value);
+
         // Details Receive items
-        
+
         for (var i = 0; i < CountGrid; i++) {
             ReceiveItemSingleModel = new I_Pur_TR_ReceiveItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
 
-             
+
 
             if (StatusFlag == "i") {
                 ReceiveItemSingleModel.ReciveDetailsID = 0;
@@ -3003,7 +3046,12 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
-                
+
+                //ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
+                //ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                //ReceiveItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
+
+
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
 
                 ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
@@ -3027,7 +3075,7 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
- 
+
                 ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
 
             }
@@ -3045,7 +3093,7 @@ namespace PurTrReceive {
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_Pur_Tr_ReceiveCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-            
+
 
             if (StatusFlag == "i") {
                 chargesingleModel.ReceiveExpensesID = 0;
@@ -3150,10 +3198,10 @@ namespace PurTrReceive {
             }
         });
 
-    }        
+    }
     function Update() {
-        
-        
+
+
         MasterDetailModel.I_Pur_TR_Receive.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.I_Pur_TR_Receive.UpdatedAt = DateTimeFormat(Date().toString());
 
@@ -3248,7 +3296,7 @@ namespace PurTrReceive {
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
 
-  
+
     }
 
     function openInvoice() {
@@ -3300,7 +3348,7 @@ namespace PurTrReceive {
             }
         });
 
-    
+
     }
     function BindAfterInsertorUpdate(receiveid: number) {
         debugger
@@ -3388,33 +3436,33 @@ namespace PurTrReceive {
         //
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
-       
+
         rp.Type = 0;
         rp.Repdesign = 0;
         rp.TRId = GlobalReceiveID;
-                                    
-            rp.Name_function = "IProc_Prnt_PurReceive";
-            localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-            localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-             window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+        rp.Name_function = "IProc_Prnt_PurReceive";
+        localStorage.setItem("Report_Data", JSON.stringify(rp));
+
+        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
 
-    } 
+    }
     function btnPrntPrice_onclick() {
         //
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
-          rp.Type = 0;
+        rp.Type = 0;
         rp.Repdesign = 1;
         rp.TRId = GlobalReceiveID;
-                                                                               
 
-            rp.Name_function = "IProc_Prnt_PurReceivePrice";
-            localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-            localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-             window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+        rp.Name_function = "IProc_Prnt_PurReceivePrice";
+        localStorage.setItem("Report_Data", JSON.stringify(rp));
+
+        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
 
     }

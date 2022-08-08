@@ -447,6 +447,7 @@ namespace Inv.API.Controllers
                         if (result.ResponseState == true)
                         {
                             //Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
+                            dbTransaction.Commit(); 
                             var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         

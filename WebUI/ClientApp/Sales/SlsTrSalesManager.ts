@@ -1,4 +1,4 @@
-﻿/// <reference path="../processes/procsalesmgr.ts" />
+﻿
 $(document).ready(() => {
 
     SlsTrSalesManager.InitalizeComponent();
@@ -73,6 +73,8 @@ namespace SlsTrSalesManager {
     var txtStartDate: HTMLInputElement;
     var txtEndDate: HTMLInputElement;
     var txtItemCount: HTMLInputElement;
+    var txtTotalbefore: HTMLInputElement;
+    var txtTotalDiscount: HTMLInputElement;
     var txtPackageCount: HTMLInputElement;
     var txtTotal: HTMLInputElement;
     var txtTax: HTMLInputElement;
@@ -222,6 +224,8 @@ namespace SlsTrSalesManager {
         txt_Tax_total_AfterDiscount = document.getElementById("txt_Tax_total_AfterDiscount") as HTMLInputElement;
         txtEndDate = document.getElementById("txtEndDate") as HTMLInputElement;
         txtItemCount = document.getElementById("txtItemCount") as HTMLInputElement;
+        txtTotalDiscount = document.getElementById("txtTotalDiscount") as HTMLInputElement;
+        txtTotalbefore = document.getElementById("txtTotalbefore") as HTMLInputElement;
         txtPackageCount = document.getElementById("txtPackageCount") as HTMLInputElement;
         txtTotal = document.getElementById("txtTotal") as HTMLInputElement;
         txtTax = document.getElementById("txtTax") as HTMLInputElement;
@@ -293,7 +297,7 @@ namespace SlsTrSalesManager {
     }
     function LastPrice_onclick() {
 
-    
+
 
 
         if (flagLastPrice % 2 === 0) {
@@ -349,7 +353,6 @@ namespace SlsTrSalesManager {
         }, 20000);
     }
     function GetLastPrice(itemid: number, Name: string) {
-        debugger
         let customerid = ddlInvoiceCustomer.value;
         let storeid = ddlStore.value;
         //let invid = 0;
@@ -1181,10 +1184,13 @@ namespace SlsTrSalesManager {
             $("#ddlItem" + i).removeAttr("disabled");
             $("#txtQuantity" + i).removeAttr("disabled");
             $("#btnSearchItems" + i).removeAttr("disabled");
+            $("#txtDiscountPrc" + i).removeAttr("disabled");
+            $("#txtDiscountAmount" + i).removeAttr("disabled");
+            $("#txtNetUnitPrice" + i).removeAttr("disabled");
             if (flag_PriceWithVAT == true) {
 
                 $("#txtUnitpriceWithVat" + i).removeAttr("disabled");
-                $("#txtPrice" + i).attr("disabled", "disabled");
+                $("#txtPrice" + i).removeAttr("disabled");
 
             } else {
                 $("#txtPrice" + i).removeAttr("disabled");
@@ -1249,7 +1255,7 @@ namespace SlsTrSalesManager {
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
 
 
-
+        debugger
         let CustID = Number(ddlInvoiceCustomer.value);
         let Cust = CustomerDetails.filter(x => x.CustomerId == CustID);
         filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
@@ -1548,7 +1554,15 @@ namespace SlsTrSalesManager {
             { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
             { title: res.App_Cutomer, name: "Cus_NameA", type: "text", width: "25%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "20%" },
+            //{ title: res.App_date, name: "TrDate", type: "text", width: "20%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
             { title: res.Men_StkDefItems, name: "Line_Count", type: "text", width: "12%" },
             { title: res.App_Package, name: "Tot_Qty", type: "text", width: "12%" },
             { title: res.App_total, name: "TotalAmount", type: "text", width: "15%" },
@@ -1556,8 +1570,24 @@ namespace SlsTrSalesManager {
             { title: res.App_Net, name: "NetAfterVat", type: "text", width: "13%" },
             { title: res.App_Commission, name: "CommitionAmount", type: "text", width: "15%" },
             { title: res.App_TobePaid, name: "RemainAmount", type: "text", width: "17%", css: "classfont" },
-            { title: res.App_invoiceType, name: "IsCashDesciption", type: "text", width: "16%" },
-            { title: res.App_Certified, name: "statusDesciption", type: "text", width: "17%" },
+            //{ title: res.App_invoiceType, name: "IsCashDesciption", type: "text", width: "16%" },
+            //{ title: res.App_Certified, name: "statusDesciption", type: "text", width: "17%" },
+            {
+                title: res.App_invoiceType, css: "ColumPadding", name: "IsCashDesciption", width: "17%",
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = item.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
+                    return txt;
+                }
+            },
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
+                    return txt;
+                }
+            },
         ];
 
     }
@@ -1599,11 +1629,11 @@ namespace SlsTrSalesManager {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
-                    for (let i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
-                        SlsInvoiceStatisticsDetails[i].TrDate = DateFormat(SlsInvoiceStatisticsDetails[i].TrDate.toString());
-                        SlsInvoiceStatisticsDetails[i].statusDesciption = SlsInvoiceStatisticsDetails[i].Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
-                        SlsInvoiceStatisticsDetails[i].IsCashDesciption = SlsInvoiceStatisticsDetails[i].IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
-                    }
+                    //for (let i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
+                    //    //SlsInvoiceStatisticsDetails[i].TrDate = DateFormat(SlsInvoiceStatisticsDetails[i].TrDate.toString());
+                    //    SlsInvoiceStatisticsDetails[i].statusDesciption = SlsInvoiceStatisticsDetails[i].Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
+                    //    SlsInvoiceStatisticsDetails[i].IsCashDesciption = SlsInvoiceStatisticsDetails[i].IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
+                    //}
                     Grid.DataSource = SlsInvoiceStatisticsDetails;
                     Grid.Bind();
                 }
@@ -1848,27 +1878,43 @@ namespace SlsTrSalesManager {
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
+		                <div class="form-group" >
 			               <input id="txtUnitpriceWithVat${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
-	                </td>
+	                </td> 
                     <td>
-		                <div class="form-group">
+		                <div class="form-group" >
+			               <input id="txtDiscountPrc${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>
+
+                    <td>
+		                <div class="form-group" >
 			              <input id="txtTax_Rate${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
+		                <div class="form-group" style="width: 84px;" >
 			              <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
+		                <div class="form-group"style="width: 84px;" >
 			            <input id="txtTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
+		                <div class="form-group" style="width: 84px;" >
 			              <input id="txtTotAfterTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
@@ -2319,36 +2365,8 @@ namespace SlsTrSalesManager {
 
                 }
             }
-            var quntity = Number(Number(txtQuantityValue).RoundToSt(2));
-            if ($("#txtPrice" + cnt).val() == 0) { total = quntity * 1; }
-            else { total = quntity * Number(txtPriceValue); }
-            //$('#txtTax_Rate' + cnt).val(Tax_Rate);
 
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
-            VatPrc = $("#txtTax_Rate" + cnt).val();
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
-            $("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
-
-            ComputeTotals();
-
+            totalRow(cnt, true);
 
 
         });
@@ -2382,34 +2400,8 @@ namespace SlsTrSalesManager {
                 }
 
             }
-            if ($("#txtPrice" + cnt).val() == 0) { total = Number(txtQuantityValue) * 1; }
-            else { total = Number(txtQuantityValue) * Number(txtPriceValue); }
-            //$('#txtTax_Rate' + cnt).val(Tax_Rate);
 
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
-            VatPrc = $("#txtTax_Rate" + cnt).val();
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
-            $("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
-
-            ComputeTotals();
+            totalRow(cnt, true);
 
 
         });
@@ -2422,40 +2414,8 @@ namespace SlsTrSalesManager {
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
-
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat)
-            //$("#txtPrice" + cnt).val(GetUnitprice.unitprice);
-
-
-
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValue = $("#txtPrice" + cnt).val();
-
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
-
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
-
-            ComputeTotals();
-
+            totalRow(cnt, true);
         });
 
         $("#txtPrice" + cnt).on('keyup', function () {
@@ -2466,37 +2426,30 @@ namespace SlsTrSalesManager {
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat)
-            //$("#txtPrice" + cnt).val(GetUnitprice.unitprice);
+            totalRow(cnt, true);
+
+        });
+
+        $("#txtDiscountPrc" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            totalRow(cnt, true);
+        });
+        $("#txtDiscountAmount" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
 
 
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValue = $("#txtPrice" + cnt).val();
+            let txtPrice = Number($("#txtPrice" + cnt).val());
+            let txtDiscountAmount = Number($("#txtDiscountAmount" + cnt).val());
 
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
+            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2));
 
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
 
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
 
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
-
-            ComputeTotals();
-
+            totalRow(cnt, false);
 
         });
 
@@ -2511,35 +2464,7 @@ namespace SlsTrSalesManager {
             //$("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat)
             $("#txtPrice" + cnt).val(GetUnitprice.unitprice);
 
-
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValue = $("#txtPrice" + cnt).val();
-
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
-
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
-
-            ComputeTotals();
-
+            totalRow(cnt, true);
         });
 
         $("#txtUnitpriceWithVat" + cnt).on('keyup', function () {
@@ -2553,35 +2478,7 @@ namespace SlsTrSalesManager {
             //$("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat)
             $("#txtPrice" + cnt).val(GetUnitprice.unitprice);
 
-
-            var txtQuantityValue = $("#txtQuantity" + cnt).val();
-            var txtPriceValue = $("#txtPrice" + cnt).val();
-
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtTotal" + cnt).val(total.RoundToSt(2));
-
-            var totalAfterVat = Number(vatAmount) + Number(total);
-            $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-
-            Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-            Tax_Rate = Tax_Type_Model.Prc
-            VatPrc = Tax_Rate;
-            $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
-            $('#txtTax_Rate' + cnt).val(Tax_Rate);
-
-            $("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
-
-            ComputeTotals();
-
+            totalRow(cnt, true);
         });
 
         $("#btn_minus" + cnt).on('click', function () {
@@ -2617,7 +2514,8 @@ namespace SlsTrSalesManager {
             $("#txtTotal" + cnt).attr("disabled", "disabled");
             $("#txtTax" + cnt).attr("disabled", "disabled");
             $("#txtTotAfterTax" + cnt).attr("disabled", "disabled");
-
+            $("#txtDiscountPrc" + cnt).attr("disabled", "disabled");
+            $("#txtDiscountAmount" + cnt).attr("disabled", "disabled");
 
             $('.btn-number1' + cnt).attr("disabled", "disabled");
             $('.input-number1' + cnt).attr("disabled", "disabled");
@@ -2653,7 +2551,7 @@ namespace SlsTrSalesManager {
             $("#ddlItem" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemID);
             $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SoldQty);
-            $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetUnitPrice);
+            $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Unitprice);
 
 
             if (SlsInvoiceItemsDetails[cnt].UnitpriceWithVat == null || SlsInvoiceItemsDetails[cnt].UnitpriceWithVat == 0) {
@@ -2666,6 +2564,9 @@ namespace SlsTrSalesManager {
             }
 
             //$("#txtUnitpriceWithVat" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].UnitpriceWithVat);
+            $("#txtDiscountPrc" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].DiscountPrc);
+            $("#txtDiscountAmount" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].DiscountAmount);
+            $("#txtNetUnitPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetUnitPrice);
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
             $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].TotRetQty);
             $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemTotal);
@@ -2679,8 +2580,76 @@ namespace SlsTrSalesManager {
             DeleteRow(cnt);
         });
         $(".select_").select2();
+
+
+
+        //Resizable_Table();
+
         return;
     }
+
+    function totalRow(cnt: number, flagDiscountAmount: boolean) {
+        debugger
+
+
+
+        let CatID = Number($('option:selected', $('#ddlFamily' + cnt)).attr('data-CatID'));
+        let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
+        let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
+        Tax_Rate = VatNature[0].VatPrc;
+
+        Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
+
+        Tax_Rate = Tax_Type_Model.Prc
+        VatPrc = Tax_Rate;
+        $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
+        $('#txtTax_Rate' + cnt).val(Tax_Rate);
+
+        //$("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
+        //$("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
+
+        //-------------------------
+
+
+        let txtPrice = Number($("#txtPrice" + cnt).val());
+        let txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
+
+        if (flagDiscountAmount) {
+            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100).RoundToSt(2));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)).RoundToSt(2));
+        }
+        else {
+
+            let txtDiscountAmount = Number($("#txtDiscountAmount" + cnt).val()); 
+            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2)); 
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
+        }
+
+
+
+
+        var txtQuantityValue = $("#txtQuantity" + cnt).val();
+        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val();
+
+
+
+        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+        VatPrc = $("#txtTax_Rate" + cnt).val();
+        var vatAmount = Number(total) * VatPrc / 100;
+        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+        $("#txtTotal" + cnt).val(total.RoundToSt(2));
+
+        var totalAfterVat = Number(vatAmount.RoundToSt(2)) + Number(total.RoundToSt(2));
+        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+
+
+
+        ComputeTotals();
+
+
+    }
+
     function DeleteRow(RecNo: number) {
         debugger
         if (!SysSession.CurrentPrivileges.Remove) return;
@@ -2738,18 +2707,18 @@ namespace SlsTrSalesManager {
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode 
             $("#ddlFamily" + CountGrid).removeAttr("disabled");
             $("#ddlItem" + CountGrid).removeAttr("disabled");
-            $("#txtQuantity" + CountGrid).removeAttr("disabled"); 
+            $("#txtQuantity" + CountGrid).removeAttr("disabled");
             $("#btnSearchItems" + CountGrid).removeAttr("disabled");
 
             $("#txtReturnQuantity" + CountGrid).attr("disabled", "disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-        
+
 
             if (flag_PriceWithVAT == true) {
 
                 $("#txtUnitpriceWithVat" + CountGrid).removeAttr("disabled");
-                $("#txtPrice" + CountGrid).attr("disabled", "disabled");
+                $("#txtPrice" + CountGrid).removeAttr("disabled");
 
             } else {
                 $("#txtPrice" + CountGrid).removeAttr("disabled");
@@ -2772,72 +2741,41 @@ namespace SlsTrSalesManager {
     }
     function ComputeTotals() {
         debugger
-
-
-
         PackageCount = 0;
         CountTotal = 0;
+        let TotalDiscount = 0;
+        let Totalbefore = 0;
         TaxCount = 0;
         NetCount = 0;
         for (let i = 0; i < CountGrid; i++) {
             var flagvalue = $("#txt_StatusFlag" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
-
-                let CatID = Number($('option:selected', $('#ddlFamily' + i)).attr('data-CatID'));
-                let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-                let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-                Tax_Rate = VatNature[0].VatPrc;
-
-                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-                Tax_Rate = Tax_Type_Model.Prc
-                VatPrc = Tax_Rate;
-                $("#txtTax_Rate" + i).attr('data-VatNatID', Tax_Type_Model.Nature);
-                $('#txtTax_Rate' + i).val(Tax_Rate);
-
-
-                //if (flag_PriceWithVAT == true) {
-
-                //    $("#txtPrice" + i).val(Number($("#txtUnitpriceWithVat" + i).val()) * 100 / (Tax_Rate + 100))
-
-                //} else {
-
-                //    $("#txtUnitpriceWithVat" + i).val((Number($("#txtPrice" + i).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
-                //}
-
-                var txtQuantityValue = $("#txtQuantity" + i).val();
-                var txtPriceValue = $("#txtPrice" + i).val();
-                var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                $("#txtTotal" + i).val(total.RoundToSt(2));
-                VatPrc = $("#txtTax_Rate" + i).val();
-                var vatAmount = Number(total) * VatPrc / 100;
-                $("#txtTax" + i).val(vatAmount.RoundToSt(2));
-                var totalAfterVat = vatAmount.RoundToNum(2) + total.RoundToNum(2);
-                $("#txtTotAfterTax" + i).val(totalAfterVat.RoundToSt(2));
-
-
-
-
                 PackageCount += Number($("#txtQuantity" + i).val());
-                //PackageCount = Number(PackageCount.RoundToSt(2).toString());
+                PackageCount = Number(PackageCount.RoundToSt(2).toString());
+
+                Totalbefore += (Number($("#txtQuantity" + i).val()) * Number($("#txtPrice" + i).val()));
+                Totalbefore = Number(Totalbefore.RoundToSt(2).toString());
+
+                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
+                TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
 
                 CountTotal += Number($("#txtTotal" + i).val());
-                //CountTotal = Number(CountTotal.RoundToSt(2).toString());
+                CountTotal = Number(CountTotal.RoundToSt(2).toString());
 
                 TaxCount += Number($("#txtTax" + i).val());
-                //TaxCount = Number(TaxCount.RoundToSt(2).toString());
+                TaxCount = Number(TaxCount.RoundToSt(2).toString());
 
                 NetCount += Number($("#txtTotAfterTax" + i).val());
-                //NetCount = Number(NetCount.RoundToSt(2).toString());
+
             }
         }
-
-        txtItemCount.value = CountItems.RoundToSt(2);
-        txtPackageCount.value = PackageCount.RoundToSt(2);
-        txtTotal.value = CountTotal.RoundToSt(2);
-        txtTax.value = TaxCount.RoundToSt(2);
-        txtCommission.value = commissionCount.RoundToSt(2);
-        txtNet.value = (Number(NetCount) - Number(txtCommission.value)).RoundToSt(2);
+        txtItemCount.value = CountItems.toString();
+        txtPackageCount.value = PackageCount.toString();
+        txtTotalDiscount.value = TotalDiscount.toString();
+        txtTotalbefore.value = Totalbefore.toString();
+        txtTotal.value = CountTotal.toString();
+        txtTax.value = TaxCount.toString();
+        txtNet.value = (Number(NetCount.RoundToSt(2))).RoundToSt(2);
     }
 
     function Insert_Serial() {
@@ -3088,6 +3026,8 @@ namespace SlsTrSalesManager {
         InvoiceModel.StoreId = Number(ddlStore.value);
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
+        InvoiceModel.ItemTotal = Number(txtTotalbefore.value);
+        InvoiceModel.ItemDiscountTotal = Number(txtTotalDiscount.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
         InvoiceModel.CustomerName = txtInvoiceCustomerName.value;
         InvoiceModel.CustomerMobileNo = txtCustomerMobile.value;
@@ -3152,6 +3092,28 @@ namespace SlsTrSalesManager {
             invoiceItemSingleModel = new I_Sls_TR_InvoiceItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
 
+            //--------------------------------------------------------------**** VatNatID = null ****----------------------------------------------------
+            debugger
+            if (StatusFlag != 'd' && StatusFlag != 'm') {
+
+                let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
+                if (isNaN(NatID) == true || NatID == 0) {
+                    var itemID = Number($("#ddlItem" + i).val());
+                    var NumberSelect = ItemFamilyDetails.filter(s => s.ItemID == itemID);
+                    Tax_Rate = NumberSelect[0].VatPrc;
+                    Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
+                    Tax_Rate = Tax_Type_Model.Prc
+                    VatPrc = Tax_Rate;
+                    $("#txtTax_Rate" + i).attr('Data-VatNatID', Tax_Type_Model.Nature);
+                    $("#txtTax_Rate" + i).val(VatPrc);
+                    if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
+                        StatusFlag = "u";
+                    }
+                }
+            }
+
+            //------------------------------------------------------------------------------------------------------------
+
             invoiceItemSingleModel.Name_Item = $("#ddlItem" + i + " option:selected").text();
             invoiceItemSingleModel.MinUnitPrice = Number($('option:selected', $("#ddlItem" + i)).attr('data-MinUnitPrice'));
 
@@ -3165,10 +3127,12 @@ namespace SlsTrSalesManager {
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
-                invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val();//
-                invoiceItemSingleModel.NetUnitPrice = $("#txtPrice" + i).val();
+                invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val();// 
                 invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+                invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
+                invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
                 //-----------------------------------------------------
                 invoiceItemSingleModel.UomID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 invoiceItemSingleModel.NetUnitPriceWithVat = $("#txtUnitpriceWithVat" + i).val();
@@ -3205,9 +3169,11 @@ namespace SlsTrSalesManager {
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val();//
                 invoiceItemSingleModel.TotRetQty = $('#txtReturnQuantity' + i).val();
-                invoiceItemSingleModel.NetUnitPrice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+                invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
+                invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
                 //-----------------------------------------------------
                 invoiceItemSingleModel.UomID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 invoiceItemSingleModel.NetUnitPriceWithVat = $("#txtUnitpriceWithVat" + i).val();
