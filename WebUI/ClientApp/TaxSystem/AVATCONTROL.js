@@ -46,11 +46,8 @@ var AVATCONTROL;
             document.getElementById('Screen_name').innerHTML = "Vat Control Setting";
             Period = [{ id: 1, value: 'Every Month' }, { id: 2, value: 'Every 3 Month' }];
         }
-        $("#icon-bar").addClass("display_none");
-        $("#btnShow").addClass("display_none");
-        $("#btnAdd").addClass("display_none");
-        $("#btnPrintTrview").addClass("viewresult");
-        $("#btnPrintTrview span").html("عرض تقرير");
+        $("#divIconbar").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
         InitializeControls();
         InitializeEvents();
         InitializeGrid();
