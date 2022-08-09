@@ -2206,7 +2206,7 @@ var SlsTrSalesManager;
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
             }
-            if (flagval == 'd' || flagval == 'm') {
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
                 Chack_Flag = true;
             }
             if (Chack_Flag) {
