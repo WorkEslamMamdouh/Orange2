@@ -41,6 +41,14 @@ namespace AccDefVendor {
     var btnSave: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
 
+    var btnCust: HTMLButtonElement;
+    var Is_Vendor: boolean;
+    var txt_CustCode: HTMLInputElement;
+    var txt_CustName: HTMLInputElement;
+    var btnsearchACC: HTMLButtonElement;
+    var txt_ACCCode: HTMLInputElement;
+    var txt_ACCName: HTMLInputElement;
+
     var txt_CustomerCODE: HTMLInputElement;
     var txt_NAME: HTMLInputElement;
     var txt_NAMEE: HTMLInputElement;
@@ -65,10 +73,7 @@ namespace AccDefVendor {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-
-    var btnCust: HTMLButtonElement;
-    var txt_CustCode: HTMLButtonElement;
-    var txt_CustName: HTMLInputElement;
+     
 
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var IsNew;
@@ -87,6 +92,7 @@ namespace AccDefVendor {
     var ShowFlag: boolean = false;
     var PurchaserId;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
 
     var AccountDetails: A_Rec_D_Customer = new A_Rec_D_Customer();
     //---------------------------------------------------------- main region---------------------------------------------------------------
@@ -133,6 +139,11 @@ namespace AccDefVendor {
         ////debugger;
 
         //--- Print Buttons
+
+        //--- Print Buttons
+        btnsearchACC = document.getElementById("btnsearchACC") as HTMLButtonElement;
+        txt_ACCCode = document.getElementById("txt_ACCCode") as HTMLInputElement;
+        txt_ACCName = document.getElementById("txt_ACCName") as HTMLInputElement;
 
       //  btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
@@ -212,6 +223,44 @@ namespace AccDefVendor {
         //txt_CustCode.onchange = txt_CustCode_onchange;
         //txt_CustomerCODE.onkeyup = txt_CustomerCODE_keyup;
         txtOperationser.onkeyup = txtOperationser_keyup;
+        txt_ACCCode.onchange = txt_ACCCode_onchange;
+        btnsearchACC.onclick = btnsearchACC_onclick;
+    }
+    function btnsearchACC_onclick() {
+        debugger
+        sys.FindKey(Modules.AccDefCustomer, "btncustSearch", "COMP_CODE= " + compcode + " and DETAIL = 1", () => {
+            var id = SearchGrid.SearchDataGrid.SelectedKey;
+            getAccountvenById(id);
+        });
+    }
+    function getAccountvenById(custId: string) {
+        debugger
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefCustomer", "GetCustomerACC"),
+            data: { Id: custId, COMP_CODE: SysSession.CurrentEnvironment.CompCode, FIN_YEAR: FinYear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                ;
+                if (result.IsSuccess) {
+                    var AccountDeta = result.Response as Array<AQ_GetAccount>;
+                    if (AccountDeta.length == 0) {
+                        txt_ACCCode.value = "";
+                        txt_ACCName.value = "";
+                        Errorinput(txt_ACCCode);
+                        DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
+                    }
+                    else {
+                        $('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
+                        $('#txt_ACCName').val(AccountDeta[0].ACC_DESCA);
+                    }
+                }
+            }
+        });
+    }
+    function txt_ACCCode_onchange() {
+        txt_ACCName.value = "";
+        getAccountvenById(txt_ACCCode.value);
     }
     //---------------------------------------------------------- Events region---------------------------------------------------------------
     //function txt_CustomerCODE_keyup() {
@@ -259,6 +308,15 @@ namespace AccDefVendor {
 
         if (txt_Cust_Type.value == "1" || txt_Cust_Type.value == "Null") {
             $('#div_Balance').removeClass("display_none");
+            Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
+            if (Is_Vendor == true) {
+                $('#divAccount').removeClass('display_none');
+            }
+            else {
+                $('#txt_CustCode').val('');
+                $('#txt_CustName').val('');
+                $('#divAccount').addClass('display_none');
+            }
         }
         else {
             $('#div_Balance').addClass("display_none");
@@ -269,7 +327,9 @@ namespace AccDefVendor {
             txt_balance.value = "0";
             Debit = 0;
             Credit = 0;
-
+            $('#txt_CustCode').val('');
+            $('#txt_CustName').val('');
+            $('#divAccount').addClass('display_none');
         }
 
     }
@@ -286,6 +346,9 @@ namespace AccDefVendor {
     //---------------------------------------------------------- enable && disable &&validation && Search  region---------------------------------------------------------------
     function txt_disabled() {
         //debugger;
+
+        $("#txt_ACCCode").attr("disabled", "disabled");
+        $("#btnsearchACC").attr("disabled", "disabled");
 
         $("#txt_CustomerCODE").attr("disabled", "disabled");
         $("#txt_Cust_Type").attr("disabled", "disabled");
@@ -328,6 +391,9 @@ namespace AccDefVendor {
     }
     function removedisabled() {
         //debugger;
+
+        $("#txt_ACCCode").removeAttr("disabled");
+        $("#btnsearchACC").removeAttr("disabled");
 
         $("#txt_CustomerCODE").removeAttr("disabled");
         $("#txt_Cust_Type").removeAttr("disabled");
@@ -405,6 +471,12 @@ namespace AccDefVendor {
         if (txtResName.value.trim() == "") {
             DisplayMassage("يجب ادخال المسئول ", "The responsible must be entered", MessageType.Worning);
             Errorinput(txtResName);
+            return false;
+        }
+        Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+            DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
+            Errorinput($('#txt_AccountCode'));
             return false;
         }
         if (txtResMobile.value.trim() == "") {
@@ -684,10 +756,10 @@ namespace AccDefVendor {
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave').removeClass("display_none");
+            $('#btnBack').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#txt_CustomerCODE").attr("disabled", "disabled");
             $("#txt_Debit").attr("disabled", "disabled");
             $("#txt_DebitFC").attr("disabled", "disabled");
@@ -699,15 +771,15 @@ namespace AccDefVendor {
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
         }
         else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave').addClass("display_none");
+            $('#btnBack').addClass("display_none");
 
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate").removeClass("display_none");
 
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
+            $('#btnAddDetails').removeClass("display_none");
         }
         else {
             $(".btnAddDetails").attr("disabled", "disabled");
@@ -756,6 +828,13 @@ namespace AccDefVendor {
         SysSession.CurrentEnvironment.I_Control[0].Currencyid != null ? $("#ddlCurrency").val(SysSession.CurrentEnvironment.I_Control[0].Currencyid) : $("#ddlCurrency").val("null");
 
         $('#btnAddDetails').removeClass("display_none");
+
+        Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+            DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
+            Errorinput($('#txt_AccountCode'));
+            return false;
+        }
 
     }
     function btnsave_onClick() {
@@ -1043,6 +1122,23 @@ namespace AccDefVendor {
         $('#txt_balance').val(Selecteditem[0].Balance.RoundToSt(2));
         $('#txt_Debit').val(Selecteditem[0].Debit.RoundToSt(2));
         $('#txt_DebitFC').val(Selecteditem[0].DebitFC.RoundToSt(2));
+
+        debugger
+        Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
+        if (Is_Vendor == true && Selecteditem[0].IsCreditVendor == true) {
+            debugger;
+            if (Selecteditem[0].VendorID != null && Selecteditem[0].BankAccountNo != "0" && Selecteditem[0].BankAccountNo != "") {
+                getAccountvenById(Selecteditem[0].BankAccountNo);
+            }
+            else {
+                $('#txt_ACCCode').val('');
+                $('#txt_ACCName').val('');
+            }
+            $('#divAccount').removeClass('display_none');
+        }
+        else {
+            $('#divAccount').addClass('display_none');
+        }
     }
     function Display_CustomerGroup() {
         Ajax.Callsync({
@@ -1194,6 +1290,9 @@ namespace AccDefVendor {
         Model.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
         Model.VendorCode= $('#txt_CustomerCODE').val();
         Model.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
+        if (txt_Cust_Type.value == "1") {
+            Model.BankAccountNo = $("#txt_ACCCode").val();
+        }
 
         if (IsNew == true) {
             //var code: string = $('#txt_CustomerCODE').val();

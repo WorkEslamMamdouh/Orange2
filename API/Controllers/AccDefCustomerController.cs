@@ -365,5 +365,22 @@ namespace Inv.API.Controllers
 
         }
 
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetCustomerACC(string Id, int COMP_CODE, int FIN_YEAR , string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                string s = "select * from  AQ_GetAccount  where ACC_CODE = '" + Id + "' and COMP_CODE=" + COMP_CODE + "  and FIN_YEAR = "+ FIN_YEAR;
+
+                string query = s;
+                var res = db.Database.SqlQuery<AQ_GetAccount>(query).ToList();
+                return Ok(new BaseResponse(res));
+            }
+            return BadRequest(ModelState);
+
+        }
+
     }
 }
