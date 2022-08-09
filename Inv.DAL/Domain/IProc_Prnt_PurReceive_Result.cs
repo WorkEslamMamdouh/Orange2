@@ -87,6 +87,10 @@ namespace Inv.DAL.Domain
         public string cur_DescE { get; set; }
         public string CurrencyCode { get; set; }
         public int recType { get; set; }
+        public Nullable<decimal> ItemDiscountTotalFC { get; set; }
+        public Nullable<decimal> ItemTotal { get; set; }
+        public Nullable<decimal> ItemVatTotal { get; set; }
+        public Nullable<decimal> ItemDiscountTotal { get; set; }
         public Nullable<int> Serial { get; set; }
         public string It_DescE { get; set; }
         public string it_DescA { get; set; }
@@ -114,5 +118,8 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> ReceiveRecQty { get; set; }
         public Nullable<decimal> StockUnitCost { get; set; }
         public Nullable<decimal> TotRetQty { get; set; }
+        public Nullable<decimal> OrgUnitpriceFC { get; set; }
+        public Nullable<decimal> itm_discountPrc { get; set; }
+        public Nullable<decimal> itm_discAmount { get; set; }
     }
 }

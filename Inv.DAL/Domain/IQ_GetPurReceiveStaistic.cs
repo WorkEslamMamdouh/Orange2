@@ -79,5 +79,10 @@ namespace Inv.DAL.Domain
         public Nullable<System.DateTime> PO_TrDate { get; set; }
         public Nullable<int> CurrencyID { get; set; }
         public Nullable<decimal> Tot_AmountFC { get; set; }
+        public Nullable<decimal> ItemTotalFC { get; set; }
+        public Nullable<decimal> ItemDiscountTotalFC { get; set; }
+        public Nullable<decimal> ItemTotal { get; set; }
+        public Nullable<decimal> ItemVatTotal { get; set; }
+        public Nullable<decimal> ItemDiscountTotal { get; set; }
     }
 }

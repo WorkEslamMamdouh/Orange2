@@ -51,5 +51,8 @@ namespace Inv.DAL.Domain
         public int ItemFamilyID { get; set; }
         public Nullable<decimal> ReceiveRecQty { get; set; }
         public Nullable<decimal> RecUnitPriceFC { get; set; }
+        public Nullable<decimal> DiscountAmount { get; set; }
+        public Nullable<decimal> DiscountPrc { get; set; }
+        public Nullable<decimal> OrgUnitpriceFC { get; set; }
     }
 }

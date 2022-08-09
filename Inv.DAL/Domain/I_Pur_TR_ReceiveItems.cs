@@ -36,5 +36,8 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> UnitAddCost { get; set; }
         public Nullable<decimal> ReceiveRecQty { get; set; }
         public Nullable<decimal> RecUnitPriceFC { get; set; }
+        public Nullable<decimal> OrgUnitpriceFC { get; set; }
+        public Nullable<decimal> DiscountPrc { get; set; }
+        public Nullable<decimal> DiscountAmount { get; set; }
     }
 }
