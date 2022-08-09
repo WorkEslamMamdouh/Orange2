@@ -29630,9 +29630,6 @@ input[class=checkbox]:checked:before {
 .form-check .special-label {
     line-height: 2;
 }
-/*.line-height-2 {
-    
-}*/
 /*Cursor*/
 .cursor-pointer {
     cursor: pointer;

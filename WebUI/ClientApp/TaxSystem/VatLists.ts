@@ -47,6 +47,11 @@ namespace VatLists {
             document.getElementById('Screen_name').innerHTML = "Vat Lists";
 
         }
+        $("#icon-bar").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnAdd").addClass("display_none");
+        $("#btnPrintTrview").addClass("viewresult");
+        $("#btnPrintTrview span").html("عرض تقرير");
         InitializeControls();
         InitializeEvents();
         debugger
