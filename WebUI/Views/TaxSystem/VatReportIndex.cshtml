@@ -10,6 +10,17 @@
         <div class="card bg-light-blue">
             <div class="card-body">
                 <div class="row">
+                    <!-- Details Side Icon Bar -->
+                    <div class="div-iconbar">
+                        <button class="icon-bar2 d-flex justify-content-between btn-update" id="btnUpdate_3">
+                            <i class="fas fa-edit fa-fw side-icon ms-1"></i>
+                            <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
+                        </button>
+                        <button class="icon-bar2 d-flex justify-content-between btn-save display_none" id="btnSave_3">
+                            <i class="fas fa-save fa-fw side-icon ms-1"></i>
+                            <span class="align-self-center mb-3">  @SystemResource.App_save</span>
+                        </button>
+                    </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
                             <label for="txtFromDate" class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Vat_Period</label>
@@ -85,11 +96,24 @@
                     <label id="LbSales" class="text-center text-blue fs-5 fw-bold mb-3">@SystemResource.Men_Sales</label>
                     <!-- Table  -->
                     <div id="divSalesGrid">  </div>
+                    <div class="col-12 table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr class="fw-bold">
+                                    <td width="10%"></td>
+                                    <td width="30%" class="fs-6">@SystemResource.Total_sales</td>
+                                    <td width="20%" class="fs-6"><label id="LbSlsAmount">0</label></td>
+                                    <td width="20%" class="fs-6"><label id="LbSlsChanges">0</label></td>
+                                    <td width="20%" class="fs-6"><label id="LbSlsVat">0</label></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Table Sales -->
+    <!-- Table Purchase -->
     <div class="col-12">
         <div class="card bg-light-blue">
             <div class="card-body">
@@ -97,6 +121,21 @@
                     <label id="LbSales" class="text-center text-blue fs-5 fw-bold mb-3">@SystemResource.Purchase</label>
                     <!-- Table  -->
                     <div id="divPurGrid">  </div>
+                    <div class="col-12 table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr class="fw-bold">
+                                    <td width="10%"></td>
+                                    <td width="30%" class="fs-6">@SystemResource.Inv_TotalPurchases</td>
+                                    <td width="20%" class="fs-6"><label id="LbPurAmount">0</label></td>
+                                    <td width="20%" class="fs-6"><label id="LbPurChanges">0</label></td>
+                                    <td width="20%" class="fs-6"><label id="LbPurVat">0</label></td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -171,7 +210,7 @@
         </div>
         <div class="col-xs-1 ">
         </div>
-        <dvi class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 border_gridCont">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 border_gridCont">
             <div class=" col-xs-4 p-0" style="color:#1cb3f9;font-weight:bold">
                 <label class=" col-xs-9 pading_2 pr-0 pl-0">@SystemResource.open</label>
                 <input class="input-sm form-control col-xs-3  pr-0 pl-0" type="radio" disabled="disabled" id="rd_Open" name="status" value="2">
@@ -184,7 +223,7 @@
                 <label class=" col-xs-9 pt-2 pr-1 pl-0">@SystemResource.Authorization_submitted</label>
                 <input class="input-sm form-control col-xs-3  pr-0 pl-0" type="radio" disabled="disabled" id="rd_delivered" name="status" value="2">
             </div>
-        </dvi>
+        </div>
         <div class="col-xs-1 ">
         </div>
         <div class="col-lg-5 col-md-1 col-sm-6 col-xl-6 col-xs-6 ">

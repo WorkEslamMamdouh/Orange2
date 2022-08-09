@@ -61,6 +61,8 @@ var VATReport;
         btnClose.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
         btnReopen.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         $('#btnPrint').addClass('display_none');
+        $("#btnShow").addClass("d-none");
+        $("#btnAdd").addClass("d-none");
     }
     VATReport.InitializeComponent = InitializeComponent;
     function InitializeControls() {

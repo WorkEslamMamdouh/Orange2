@@ -28,7 +28,7 @@ var AVATCONTROL;
     var btnAccountSearch_CR;
     var btnAccountSearch_Acc;
     var btnSave;
-    var btnEdit;
+    var btnUpdate;
     var btnBack;
     var btnSls_DISC_ACC_CODE;
     var btnPur_DISC_ACC_CODE;
@@ -46,6 +46,11 @@ var AVATCONTROL;
             document.getElementById('Screen_name').innerHTML = "Vat Control Setting";
             Period = [{ id: 1, value: 'Every Month' }, { id: 2, value: 'Every 3 Month' }];
         }
+        $("#icon-bar").addClass("display_none");
+        $("#btnShow").addClass("display_none");
+        $("#btnAdd").addClass("display_none");
+        $("#btnPrintTrview").addClass("viewresult");
+        $("#btnPrintTrview span").html("عرض تقرير");
         InitializeControls();
         InitializeEvents();
         InitializeGrid();
@@ -55,7 +60,7 @@ var AVATCONTROL;
         LoadControlSetting();
         Load_VatPeriod();
         //Button_privialges();
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         chkSetting.disabled = true;
     }
     AVATCONTROL.InitializeComponent = InitializeComponent;
@@ -70,7 +75,7 @@ var AVATCONTROL;
         txtVAT_DB_ACC = document.getElementById("txtVAT_DB_ACC");
         txtVAT_CR_ACC = document.getElementById("txtVAT_CR_ACC");
         txtVAT_ACCURUAL_ACC = document.getElementById("txtVAT_ACCURUAL_ACC");
-        btnEdit = document.getElementById("btnEdit");
+        btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
         btnAccountSearch_DB = document.getElementById("btnAccountSearch_DB");
@@ -84,7 +89,7 @@ var AVATCONTROL;
         txtPur_DISC = document.getElementById("txtPur_DISC");
     }
     function InitializeEvents() {
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnEdit_onclick;
         btnSave.onclick = btnSave_onclick;
         btnBack.onclick = btnBack_onclick;
         chkSetting.onchange = AllowSetting;
@@ -477,7 +482,7 @@ var AVATCONTROL;
         btnAccountSearch_CR.disabled = false;
         btnAccountSearch_Acc.disabled = false;
         txtVAT_PREVBAL.disabled = false;
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
         btnSls_DISC_ACC_CODE.disabled = false;
@@ -487,7 +492,7 @@ var AVATCONTROL;
         //chkSetting.disabled = false;
     }
     function btnBack_onclick() {
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
         txtVAT_PREVBAL.disabled = true;
@@ -559,7 +564,7 @@ var AVATCONTROL;
         return true;
     }
     function Button_privialges() {
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
     }
 })(AVATCONTROL || (AVATCONTROL = {}));
 //# sourceMappingURL=AVATCONTROL.js.map
