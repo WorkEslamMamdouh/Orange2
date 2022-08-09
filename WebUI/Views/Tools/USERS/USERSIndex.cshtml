@@ -1,133 +1,242 @@
 ﻿@using Inv.WebUI.Resources
 @{
-
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-
-<style>
-
-    body {
-        /*direction: rtl!important;*/
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-    .ckeck {
-        bottom: 5px;
-    }
-
-    .LEPEL_CENTER {
-        text-align: left
-    }
-
-
-
-
-    .pading_lep {
-        padding-right: 7px;
-    }
-
-    .pading_R_L {
-        padding-left: 2px;
-        padding-right: 2px;
-    }
-
-    .loc {
-        padding-top: 4%;
-    }
-
-    .location {
-        padding-top: 3px;
-        border: solid 1px black;
-        border-radius: 29px;
-        padding: 5px 0px 10px 0px;
-    }
-
-    #map {
-        height: 400px; /* The height is 400 pixels */
-        width: 100%; /* The width is the width of the web page */
-    }
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.8;
-    }
-
-    .highte {
-        height: 40px;
-    }
-
-        .highte:hover {
-            zoom: 1.1;
-            background-color: #5bc0de;
-        }
-
-
-
-
-    .btnAddDetailsuser:hover {
-        color: #24b414;
-    }
-
-    .glyphicon-remove-sign:hover {
-        color: red
-    }
-</style>
-
-<div class="col-lg-12    borderred">
-
-    <div class="col-lg-12" id="div_ALLData">
-        <div class="col-lg-12  margingred  ">
-            <label class="col-lg-1 col-xs-4      pading_2  "> @SystemResource.user_type </label>
-            <div class="col-lg-3 col-xs-8">
-                <select id="drpuserType" class="form-control input-sm">
-                    <option value=""></option>
-                </select>
+<div class="row gy-3" id="div_ALLData">
+    <!-- Filter Container -->
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.user_type</label>
+                            <div class="col-8">
+                                <select id="drpuserType" class="form-control">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Status</label>
+                            <div class="col-8">
+                                <select id="drpStatus" class="form-control">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <label class="col-lg-1 col-xs-4      pading_2 LEPEL_padingrightuser"> @SystemResource.App_Status </label>
-            <div class="col-lg-2 col-xs-8">
-                <select id="drpStatus" class="form-control input-sm">
-                    <option value=""></option>
-                </select>
-            </div>
-
-            <div class="col-lg-2 pading_0" style=" ">
-
-            </div>
-            <div class="col-lg-1 pading_0">
-
-            </div>
-
-            <div class="col-lg-1 pading_0" style=" ">
-                <button id="btnShow" type="button" class="  btn btn-info    ">@SystemResource.App_Show <i class="glyphicon glyphicon-search"></i> </button>
-            </div>
-            <div class="col-lg-1 pading_0">
-                <button id="btnAdd" type="button" class="   btn btn-success  btn btn-custon-four primary-btn-cl ">  @SystemResource.App_Add <i class="fa fa-plus-circle"></i></button>
-            </div>
-
         </div>
-
-
-        <div id="id_UsersGrid" class="col-lg-12  margingred  borderred  display_none" style="">
-            <div class="col-lg-3 col-xs-8" style="margin-bottom: 4px;">
-                <input id="searchbutmemreport" name="" type="text" class="form-control input-sm text_Display" placeholder="@SystemResource.App_SearchbyNumPh ">
+    </div>
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="id_UsersGrid">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0" placeholder="@SystemResource.App_SearchbyNumPh ">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="searchbutmemreport" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div id="div_grid"></div>
+                    <div class="col-12 text-blue text-center fw-bold mt-3">
+                        @SystemResource.App_DoubleDisplay
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-15 ">
-                <table id="div_grid"></table>
-
-            </div>
-            <h4 style="text-align: center;font-weight: bold;color: #0088c7;"><i class="glyphicon glyphicon-hand-up"></i> @SystemResource.App_DoubleDisplay <i class="glyphicon glyphicon-hand-up"></i></h4>
         </div>
+     <!-- Details  -->
+        <div id="div_BasicData" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox mt-5">
+                    <div class="row g-0">
+                        <label id="lepfarest" class="text-blue text-right">
+                            <i id="spanlepfarest" class="fas fa-angle-double-left" aria-hidden="true"></i>
+                            @SystemResource.User_data
+                        </label>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Active </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="chk_IsActive" disabled type="checkbox" class="checkbox-input" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
+                                        <div class="col-8 col-md-7 ">
+                                            <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+    <div class="col-lg-12    borderred">
+
+        <div class="col-lg-12" id="div_ALLData">
+            <div class="col-lg-12  margingred  ">
+                <label class="col-lg-1 col-xs-4      pading_2  "> @SystemResource.user_type </label>
+                <div class="col-lg-3 col-xs-8">
+                    <select id="drpuserType" class="form-control input-sm">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <label class="col-lg-1 col-xs-4      pading_2 LEPEL_padingrightuser"> @SystemResource.App_Status </label>
+                <div class="col-lg-2 col-xs-8">
+                    <select id="drpStatus" class="form-control input-sm">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="col-lg-2 pading_0" style=" ">
+
+                </div>
+                <div class="col-lg-1 pading_0">
+
+                </div>
+
+                <div class="col-lg-1 pading_0" style=" ">
+                    <button id="btnShow" type="button" class="  btn btn-info    ">@SystemResource.App_Show <i class="glyphicon glyphicon-search"></i> </button>
+                </div>
+                <div class="col-lg-1 pading_0">
+                    <button id="btnAdd" type="button" class="   btn btn-success  btn btn-custon-four primary-btn-cl ">  @SystemResource.App_Add <i class="fa fa-plus-circle"></i></button>
+                </div>
+
+            </div>
 
 
-        <div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
+            <div id="id_UsersGrid" class="col-lg-12  margingred  borderred  display_none" style="">
+                <div class="col-lg-3 col-xs-8" style="margin-bottom: 4px;">
+                    <input id="searchbutmemreport" name="" type="text" class="form-control input-sm text_Display" placeholder="@SystemResource.App_SearchbyNumPh ">
+                </div>
+                <div class="col-lg-15 ">
+                    <table id="div_grid"></table>
 
-            <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+                </div>
+                <h4 style="text-align: center;font-weight: bold;color: #0088c7;"><i class="glyphicon glyphicon-hand-up"></i> @SystemResource.App_DoubleDisplay <i class="glyphicon glyphicon-hand-up"></i></h4>
+            </div>
 
-        </div> 
+
+            @*<div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
+
+                    <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+
+                </div>*@
             <div id="div_BasicData" class="col-lg-12 margingred  borderred display_none">
                 <label id="lepfarest" class="col-lg-12 labeltitel "><i id="spanlepfarest" class="ifontowsam fa fa-caret-left" aria-hidden="true"></i>@SystemResource.User_data </label>
                 <div class="container-fluid">
@@ -166,7 +275,7 @@
                                     <div class="col-lg-2 col-xs-8">
                                         <input id="txtDepartmentName" name="DepartmentName" disabled type="text" class="form-control input-sm text_Display">
                                     </div>
-                                  
+
 
                                 </div>
 
@@ -234,7 +343,7 @@
 
 
                                 </div>
- 
+
                                 <div class="col-lg-12">
                                     <div class="col-lg-2 col-xs-8">
 
@@ -341,7 +450,7 @@
 
                             <div class="col-lg-12">
                                 <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  borderbottom "> انشاء </label>
-                                <input id="txtCreatedBy" name="CreatedBy"  type="text" disabled="" class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  borderbottom ">
+                                <input id="txtCreatedBy" name="CreatedBy" type="text" disabled="" class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  borderbottom ">
                                 <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled="" class="col-lg-2 col-xs-4  marginstenig pading_lep  pading_2 style_borderbottom">
                                 <div class="col-lg-2"> </div>
                                 <label class="col-lg-1 col-xs-4  marginstenig pading_lep  pading_2  borderbottom "> تعديل </label>
@@ -354,24 +463,21 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
 
-        <br />
-        <br />
+            <br />
+            <br />
+
+        </div>
 
     </div>
 
-</div>
-<script src="~/ClientApp/CustomEntities.js"></script>
-<script src="~/ClientApp/Tools/USERS/USERS.js"></script>
+    @section Script{
+        <script src="~/ClientApp/CustomEntities.js"></script>
+        <script src="~/ClientApp/Tools/USERS/USERS.js"></script>
+    }
 
-<style>
-    /*#div_grid {
-            width: 100% !important;
-            border: solid 2px black;
-            border-radius: 15px;
-        }*/
-</style>
+
 
 

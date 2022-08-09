@@ -68,11 +68,14 @@ var TranPosting;
         // InitializePagesGrid();
         InitializeTransactionsGrid();
         InitializeVoucherDetailGrid();
+        $("#divIconbar").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
         $("#btndiv_3").addClass("Actiev");
         $("#btndiv_1").removeClass("Actiev");
         $("#btndiv_2").removeClass("Actiev");
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
+        $("#div_2").addClass("display_none");
         $("#div_2").addClass("display_none");
     }
     TranPosting.InitalizeComponent = InitalizeComponent;
@@ -233,9 +236,9 @@ var TranPosting;
                             txtDesc.value = "breif of transaction" + txtBranch[0].BRA_DESC + " period from date " + txtFromDate.value + " to date " + txtToDate.value;
                         VoucherDetailGrid.Bind();
                         RefreshTransactions();
-                        $("#btndiv_3").removeClass("Actiev");
-                        $("#btndiv_1").removeClass("Actiev");
-                        $("#btndiv_2").addClass("Actiev");
+                        //$("#btndiv_3").removeClass("Actiev");
+                        //$("#btndiv_1").removeClass("Actiev");
+                        //$("#btndiv_2").addClass("Actiev");
                         $("#div_3").addClass("display_none");
                         $("#div_1").addClass("display_none");
                         $("#div_2").removeClass("display_none");
@@ -351,9 +354,9 @@ var TranPosting;
             {
                 title: res.TransSelect, css: "ColumPadding", name: "checkbox", width: "6%",
                 itemTemplate: function (s, item) {
-                    var txt = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    var txt = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.style.height = "25px";
-                    txt.style.width = "70px";
+                    txt.style.width = "25px";
                     txt.onclick = function (e) {
                         if (txt.checked == true) {
                             item.Selected = true;
@@ -418,9 +421,9 @@ var TranPosting;
             {
                 title: res.appSelect, css: "ColumPadding", name: "IsSelected", width: "6%",
                 itemTemplate: function (s, item) {
-                    var txt = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    var txt = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.style.height = "25px";
-                    txt.style.width = "70px";
+                    txt.style.width = "25px";
                     txt.onclick = function (e) {
                         if (txt.checked == true) {
                             debugger;

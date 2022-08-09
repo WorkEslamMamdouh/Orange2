@@ -88,6 +88,9 @@ namespace TranPosting {
         InitializeTransactionsGrid();
         InitializeVoucherDetailGrid();
 
+        $("#divIconbar").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
+
         $("#btndiv_3").addClass("Actiev");
         $("#btndiv_1").removeClass("Actiev");
         $("#btndiv_2").removeClass("Actiev");
@@ -95,6 +98,8 @@ namespace TranPosting {
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
         $("#div_2").addClass("display_none"); 
+        $("#div_2").addClass("display_none");
+        
 
     }
     function InitalizeControls() {
@@ -277,9 +282,9 @@ namespace TranPosting {
                         VoucherDetailGrid.Bind();
                         RefreshTransactions();
 
-                        $("#btndiv_3").removeClass("Actiev");
-                        $("#btndiv_1").removeClass("Actiev");
-                        $("#btndiv_2").addClass("Actiev");
+                        //$("#btndiv_3").removeClass("Actiev");
+                        //$("#btndiv_1").removeClass("Actiev");
+                        //$("#btndiv_2").addClass("Actiev");
 
                         $("#div_3").addClass("display_none");
                         $("#div_1").addClass("display_none");
@@ -410,9 +415,9 @@ namespace TranPosting {
             {
                 title: res.TransSelect, css: "ColumPadding", name: "checkbox", width: "6%",
                 itemTemplate: (s: string, item: G_LnkTrans): HTMLInputElement => {
-                    let txt: HTMLInputElement = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    let txt: HTMLInputElement = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.style.height = "25px";
-                    txt.style.width = "70px";
+                    txt.style.width = "25px";
                     txt.onclick = (e) => {
                         if (txt.checked == true) {
                             item.Selected = true;
@@ -482,9 +487,9 @@ namespace TranPosting {
             {
                 title: res.appSelect, css: "ColumPadding", name: "IsSelected", width: "6%",
                 itemTemplate: (s: string, item: G_LnkTrans_Temp): HTMLInputElement => {
-                    let txt: HTMLInputElement = CreateElement("checkbox", "form-control checkbox", " ", " ", "", " ");
+                    let txt: HTMLInputElement = CreateElement("checkbox", "form-check-input", " ", " ", "", " ");
                     txt.style.height = "25px";
-                    txt.style.width = "70px";
+                    txt.style.width = "25px";
                     txt.onclick = (e) => {
                         if (txt.checked == true) {
                             debugger
