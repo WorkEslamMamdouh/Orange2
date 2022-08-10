@@ -498,16 +498,54 @@ namespace USERS {
 
     function BuildControlsBarnch(cnt: number) {
         var html;
-        html = '<div id="row_font_header' + cnt + '" class=" font_header col-lg-12" style="bottom: 5px;font-weight:bold">' +
-            '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm4user lebelminus"></span>' +
-            '<div class="col-lg-1" style=""><input disabled id="BRA_CODE' + cnt + '" type="text" class="form-control"></div>' +
-            '<div class="col-lg-2" style=""><input type="text" disabled id="BRA_DESC' + cnt + '" class="form-control"></div>' +
-            '<div class="col-lg-1 style_pading"> <input disabled id="EXECUTE' + cnt + '"  type= "checkbox"  class="form-control "   /></div>' +
-            '<div class="col-lg-1 style_pading"> <input disabled id="CREATE' + cnt + '"  type= "checkbox"  class="form-control "   /></div>' +
-            '<div class="col-lg-1 style_pading"> <input disabled id="EDIT' + cnt + '"  type= "checkbox"  class="form-control "   /></div>' +
-            '<div class="col-lg-1 style_pading"> <input disabled id="DELETE' + cnt + '"  type= "checkbox"  class="form-control "   /></div>' +
-            '<div class="col-lg-1 style_pading"> <input disabled id="PRINT' + cnt + '"  type= "checkbox"  class="form-control "   /></div>' +
-            '<div class="col-lg-1" style=""><input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="DepositID' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+        html = `<tr id= "row_font_header${cnt}">
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="BRA_CODE${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="BRA_DESC${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="EXECUTE${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="CREATE${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="EDIT${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="DELETE${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="PRINT${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                   
+                    
+               <input id="txt_StatusFlag2${cnt}" type="hidden"   />
+               <input id="DepositID${cnt}" type="hidden"   />
+                </tr>`;
+
 
         $("#div_Data_BRANCH").append(html);
 
@@ -611,14 +649,36 @@ namespace USERS {
 
     function BuildControls(cnt: number) {
         var html;
-        html = '<div id="No_Row' + cnt + '" class="col-lg-12" >' +
-            '<span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3user  minus_btn display_none"></span>' +
-            '<div class="col-lg-3 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control  " disabled="disabled"/></div>' +
-            '<div class="col-lg-7 style_pading"> <input id="txtRemarks' + cnt + '" type= "text" class="form-control " disabled="disabled"/></div>' +
-            '<div class="col-lg-2 style_pading"> <input id="CheckISActive' + cnt + '"  type= "checkbox"  class="form-control " disabled="disabled" /></div>' +
-            '<div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden"   class="form-control"/></div>' +
-            '<div class="col-lg-12"> <input id = "txtRoleId' + cnt + '" name = " " type = "hidden" class="form-control"/></div>' +
-            '</div>';
+        html = `<tr id= "No_Row${cnt}">
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtDescA${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtRemarks${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="CheckISActive${cnt}" type="checkbox" class="form-check-input" name="" disabled />
+		                </div>
+	                </td>
+                   
+                    
+               <input id="txt_StatusFlag${cnt}" type="hidden"   />
+               <input id="txtRoleId${cnt}" type="hidden"   />
+                </tr>`;
+
+
+
         $("#div_Data").append(html);
         $("#btn_minus" + cnt).on('click', function () {
             WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
@@ -1302,7 +1362,7 @@ namespace USERS {
             if (SysSession.CurrentPrivileges.AddNew)
                 $("#btnAdd").removeClass("display_none");
 
-            $(".minus_btn").addClass("display_none");
+            $(". btn-minus").addClass("display_none");
             $("#div_Data").addClass("disabledDiv");
             $("#btnBlock_permissions").attr("disabled", "disabled");
             $("#btnGive_assignments").attr("disabled", "disabled");

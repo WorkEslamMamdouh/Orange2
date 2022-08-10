@@ -4,103 +4,9 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<style>
-    /*input[type='checkbox'] {
-        display: none;
-    }*/
-
-    .wrap-collabsible {
-        margin: 1.2rem 0;
-    }
-
-    .lbl-toggle {
-        display: block;
-        font-weight: bold;
-        font-family: monospace;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 1rem;
-        color: #DDD;
-        background: #0069ff;
-        cursor: pointer;
-        border-radius: 7px;
-        transition: all 0.25s ease-out;
-    }
-
-        .lbl-toggle:hover {
-            color: #FFF;
-        }
-
-        .lbl-toggle::before {
-            content: ' ';
-            display: inline-block;
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            border-left: 5px solid currentColor;
-            vertical-align: middle;
-            margin-right: .7rem;
-            transform: translateY(-2px);
-            transition: transform .2s ease-out;
-        }
-
-    .toggle:checked + .lbl-toggle::before {
-        transform: rotate(90deg) translateX(-3px);
-    }
-
-    .collapsible-content {
-        max-height: 0px;
-        overflow: hidden;
-        transition: max-height .25s ease-in-out;
-    }
-
-    .toggle:checked + .lbl-toggle + .collapsible-content {
-        max-height: 350px;
-    }
-
-    .toggle:checked + .lbl-toggle {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .collapsible-content .content-inner {
-        background: rgba(0, 105, 255, .2);
-        border-bottom: 1px solid rgba(0, 105, 255, .45);
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px;
-        padding: .5rem 1rem;
-    }
-
-    .collapsible-content p {
-        margin-bottom: 0;
-    }
-
-
-
-    .btnCustLastPrice {
-        direction: ltr !important;
-        bottom: 204px !important;
-        left: 97% !important;
-        right: -97% ;
-        border-radius: 72px 0px 0px 71px !important;
-        height: 53px !important;
-        padding-top: 5px !important;
-        padding-right: 0px !important;
-        width: 100%;
-    }
-
-    .areatable {
-         
-        width: 70px;
-    }
-	
-	
-	
-
-     
-</style>
 
 <div class="col-12  borderred">
+    @* Old HTML *@
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -404,15 +310,43 @@
                     </div>
 
 
-                    @*----------------------------------------------------------------------------------------------------------*@
+                    @*Right Side Icon Last Price*@
 
                     <div class="col-12">
                         <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
-                            <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice" style="">
-                                <i class="mdi mdi-account-search" style="font-size: 24px;"></i>
+                            <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice">
+                                <i class="mdi mdi-account-search fs-3"></i>
 
+                                <div class="table-responsive sideIcon-table flex-grow-1 mx-5">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th> اسم الصنف</th>
+                                                <th>اخر سعر بيع للعميل</th>
+                                                <th>اخر رقم فاتوره للعميل </th>
+                                                <th> اخر تاريخ </th>
+                                                <th> اخر سعر بيع </th>
+                                                <th>  اخر سعر شراء   </th>
+                                                <th> التكلفة   </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="Name_Item"> 02312 </td>
+                                                <td id="CustLastPrice"> 02312 </td>
+                                                <td id="CustLastTr"> 02312 </td>
+                                                <td id="custLastDate"> 04 Dec 2019 </td>
+                                                <td id="LastPrice"> $14,500 </td>
+                                                <td id="LastPurchase"> Dashboard </td>
+                                                <td id="Curcost"> Credit card </td>
 
-                                <div class="table-responsive" style="margin-right: 6%;direction: rtl;">
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                @*<div class="table-responsive" style="margin-right: 6%;direction: rtl;">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -453,7 +387,7 @@
 
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>*@
 
 
                             </div>
@@ -551,7 +485,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
 
 
