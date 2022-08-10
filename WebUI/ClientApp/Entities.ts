@@ -5255,7 +5255,9 @@ class IQ_GetPurReceiveItem extends SecurityClass {
         this.ItemFamilyID = 0;
         this.ReceiveRecQty = 0;
         this.RecUnitPriceFC = 0;
-
+        this.DiscountAmount = 0;
+        this.DiscountPrc = 0;
+        this.OrgUnitpriceFC = 0; 
     }
     public ItemID: number;
     public VatPrc: number;
@@ -5294,6 +5296,10 @@ class IQ_GetPurReceiveItem extends SecurityClass {
     public ItemFamilyID: number;
     public ReceiveRecQty: number;
     public RecUnitPriceFC: number;
+    public DiscountAmount: number;
+    public DiscountPrc: number;
+    public OrgUnitpriceFC: number;
+     
 }
 class IQ_GetPurReceiveCharge extends SecurityClass {
     constructor() {
@@ -5449,6 +5455,11 @@ class I_Pur_TR_Receive extends SecurityClass {
         this.CurrencyID = 0;
         this.CurrencyRate = 0;
         this.TotalFC = 0;
+        this.ItemTotalFC = 0;
+        this.ItemDiscountTotalFC = 0;
+        this.ItemTotal = 0;
+        this.ItemDiscountTotal = 0;
+        this.ItemVatTotal = 0;
     }
     public ReceiveID: number;
     public TrNo: number;
@@ -5491,6 +5502,11 @@ class I_Pur_TR_Receive extends SecurityClass {
     public CurrencyID: number;
     public CurrencyRate: number;
     public TotalFC: number;
+    public ItemTotalFC: number;
+    public ItemDiscountTotalFC: number;
+    public ItemTotal: number;
+    public ItemDiscountTotal: number;
+    public ItemVatTotal: number; 
 }
 
 
@@ -5595,6 +5611,7 @@ class I_Pur_Tr_PurchaseOrderDetail extends SecurityClass {
     public StockAvailableQty: number;
     public StockUnitCost: number;
     public TotRecQty: number;
+
     public StatusFlag: string;
 }
 
@@ -5625,6 +5642,11 @@ class I_Pur_TR_ReceiveItems extends SecurityClass {
         this.TotRetQty = 0;
         this.UnitAddCost = 0;
         this.RecUnitPriceFC = 0;
+
+        this.OrgUnitpriceFC = 0; 
+        this.DiscountPrc = 0; 
+        this.DiscountAmount = 0; 
+
         this.StatusFlag = "";
     }
     public ReciveDetailsID: number;
@@ -5649,6 +5671,11 @@ class I_Pur_TR_ReceiveItems extends SecurityClass {
     public TotRetQty: number;
     public UnitAddCost: number;
     public RecUnitPriceFC: number;
+
+    public OrgUnitpriceFC: number;
+    public DiscountPrc: number;
+    public DiscountAmount: number;
+
     public StatusFlag: string;
 }
 class I_Pur_Tr_ReceiveCharges extends SecurityClass {

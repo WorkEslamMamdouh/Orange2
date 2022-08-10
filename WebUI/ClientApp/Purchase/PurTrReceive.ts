@@ -555,7 +555,7 @@ namespace PurTrReceive {
         //TaxTypeOnchange();
 
         if (RetrivedPurchaseModel[0].IsCash == true) { ddlIsCash.value = '1'; $('#ddlCashBoxH').removeAttr('disabled'); }
-        else { ddlIsCash.value = '0'; $('#ddlCashBoxH').attr('disabled', 'disabled');; }
+        else { ddlIsCash.value = '0'; $('#ddlCashBoxH').attr('disabled', 'disabled'); }
 
     }
     function AllGetPurReceiveItemsCharge() {
@@ -1929,10 +1929,18 @@ namespace PurTrReceive {
 
             $("#txtPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPrice == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPrice.RoundToSt(2));
             $("#txtSerialH" + cnt).prop("value", (ItemDetails[cnt].Serial == null || undefined) ? 0 : ItemDetails[cnt].Serial.RoundToSt(2));
-            $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
 
             $("#txtAddons" + cnt).prop("value", (ItemDetails[cnt].UnitAddCost == null || undefined) ? 0 : ItemDetails[cnt].UnitAddCost.RoundToSt(2));
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
+
+            debugger
+             
+            $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2)); 
+            $("#txtNetUnitPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
+            $("#txtDiscountPrc" + cnt).prop("value", (ItemDetails[cnt].DiscountPrc == null || undefined) ? 0 : ItemDetails[cnt].DiscountPrc.RoundToSt(2)); 
+            $("#txtDiscountAmount" + cnt).prop("value", (ItemDetails[cnt].DiscountAmount == null || undefined) ? 0 : ItemDetails[cnt].DiscountAmount.RoundToSt(2));
+
+        
 
             $("#txtTax" + cnt).prop("value", (ItemDetails[cnt].VatAmount == null || undefined) ? 0 : ItemDetails[cnt].VatAmount.RoundToSt(2));
             var price: number = ItemDetails[cnt].RecUnitPrice;
@@ -1999,7 +2007,7 @@ namespace PurTrReceive {
 
             $("#txtTax" + cnt).prop("value", (ItemDetails[cnt].VatAmount == null || undefined) ? 0 : ItemDetails[cnt].VatAmount.RoundToSt(2));
             var price: number = PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].UnitPrice;
-
+              
             var total: number = 0;
             if (PurQuantity > 0)
                 total = price * PurQuantity;
@@ -3019,6 +3027,9 @@ namespace PurTrReceive {
         ReceiveModel.VatAmount = Number(txtTax.value);
         ReceiveModel.Total = Number(txtTotal.value);
 
+        ReceiveModel.ItemTotalFC = Number(txtTotalbefore.value);
+        ReceiveModel.ItemDiscountTotalFC = Number(txtTotalDiscount.value);
+
         //ReceiveModel.ItemTotal = Number(txtTotalbefore.value);
         ReceiveModel.DiscountAmount = Number(txtTotalDiscount.value);
 
@@ -3039,7 +3050,6 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.RecStockQty = $('#txtQuantity' + i).val();//
                 ReceiveItemSingleModel.TotRetQty = $("#txtQuantityReturnValue" + i).val();
                 ReceiveItemSingleModel.RecUnitPrice = $("#txtPrice" + i).val();
-                ReceiveItemSingleModel.RecUnitPriceFC = $("#txtPriceFc" + i).val();
                 ReceiveItemSingleModel.UnitAddCost = $("#txtAddons" + i).val();
                 ReceiveItemSingleModel.NetUnitCost = $("#txtTotAddons" + i).val();
                 ReceiveItemSingleModel.VatAmount = $("#txtTax" + i).val();
@@ -3047,9 +3057,11 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
 
-                //ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
-                //ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
-                //ReceiveItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
+                ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
+                ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                ReceiveItemSingleModel.OrgUnitpriceFC = Number($("#txtPriceFc" + i).val());
+                ReceiveItemSingleModel.RecUnitPriceFC = $("#txtNetUnitPrice" + i).val();
+                //ReceiveItemSingleModel.RecUnitPriceFC = $("#txtPriceFc" + i).val();
 
 
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
@@ -3067,11 +3079,17 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.RecStockQty = $('#txtQuantity' + i).val();//
                 ReceiveItemSingleModel.TotRetQty = $("#txtQuantityReturnValue" + i).val();
                 ReceiveItemSingleModel.RecUnitPrice = $("#txtPrice" + i).val();
-                ReceiveItemSingleModel.RecUnitPriceFC = $("#txtPriceFc" + i).val();
                 ReceiveItemSingleModel.UnitAddCost = $("#txtAddons" + i).val();
                 ReceiveItemSingleModel.NetUnitCost = $("#txtTotAddons" + i).val();
                 ReceiveItemSingleModel.VatAmount = $("#txtTax" + i).val();
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
+
+                ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
+                ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                ReceiveItemSingleModel.OrgUnitpriceFC = Number($("#txtPriceFc" + i).val());
+                ReceiveItemSingleModel.RecUnitPriceFC = Number($("#txtNetUnitPrice" + i).val());
+                //ReceiveItemSingleModel.RecUnitPriceFC = $("#txtPriceFc" + i).val();
+
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
                 chargesingleModel.VatPrc = Number($("#txtVatType" + i).attr('data-VatPerc'));
