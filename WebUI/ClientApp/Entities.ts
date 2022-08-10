@@ -5146,6 +5146,11 @@ class IQ_GetPurReceiveStaistic extends SecurityClass {
         this.TotalFC = 0;
         this.CurrencyRate = 0;
         this.Tot_AmountFC = 0;
+        this.ItemTotalFC = 0;
+        this.ItemDiscountTotalFC = 0;
+        this.ItemTotal = 0;
+        this.ItemVatTotal = 0;
+        this.ItemDiscountTotal = 0;
     }
     public ReceiveID: number;
     public TrNo: number;
@@ -5213,7 +5218,13 @@ class IQ_GetPurReceiveStaistic extends SecurityClass {
     public PO_TrDate: string;
     public TotalFC: number;
     public CurrencyRate: number;
-    public Tot_AmountFC: number;
+    public Tot_AmountFC: number; 
+    public ItemTotalFC: number;
+    public ItemTotal: number;
+    public ItemDiscountTotalFC: number;
+    public ItemVatTotal: number;
+    public ItemDiscountTotal: number;
+      
 }
 class IQ_GetPurReceiveItem extends SecurityClass {
     constructor() {

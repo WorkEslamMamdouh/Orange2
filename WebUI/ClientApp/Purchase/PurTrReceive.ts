@@ -400,9 +400,11 @@ namespace PurTrReceive {
             { title: res.App_date, name: "TrDate", type: "text", width: "10%" },
             { title: res.Men_StkDefItems, name: "Item_Count", type: "text", width: "4%" },
             { title: res.App_Package, name: "Tot_Qty", type: "text", width: "5%" },
-            { title: res.I_Total, name: "Total", type: "text", width: "7%" },
-            { title: res.App_Tax, name: "Tot_VAT", type: "text", width: "7%" },
-            { title: res.App_Net, name: "Tot_Net", type: "text", width: "7%" },
+            { title: "اجمالي الاصناف ", name: "ItemTotalFC", type: "text", width: "7%" },
+            { title: "  الخصم ", name: "ItemDiscountTotalFC", type: "text", width: "7%" },
+            { title: "  الاجمالي بعد الخصم	 ", name: "Total", type: "text", width: "7%" },
+            { title: res.App_Tax, name: "VatAmount", type: "text", width: "7%" },
+            { title: "الاجمالي بعد الضريبة	", name: "NetDue", type: "text", width: "7%" },
             { title: res.I_Additions, name: "TotAdd", type: "text", width: "7%" },
             { title: res.I_Additions_Tax, name: "TotAddVat", type: "text", width: "8%" },
             { title: res.App_State, name: "StatusDesc", type: "text", width: "5%" },
@@ -539,6 +541,11 @@ namespace PurTrReceive {
         txtTax.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].VatAmount.toString()) == true ? "0" : RetrivedPurchaseModel[0].VatAmount.toString());
         txtAddonsTax.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].NetAdditionVat.toString()) == true ? "0" : RetrivedPurchaseModel[0].NetAdditionVat.toString());
         txtTotalFamily.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].NetDue.toString()) == true ? "0" : RetrivedPurchaseModel[0].NetDue.toString());
+
+        txtTotalbefore.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].ItemTotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].ItemTotalFC.toString());
+        txtTotalDiscount.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].ItemDiscountTotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].ItemDiscountTotalFC.toString());
+        $("#txtLocalTotalFooter").val(IsNullOrEmpty(RetrivedPurchaseModel[0].TotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].TotalFC.toString());
+
         var v = RetrivedPurchaseModel[0].TotAddAfterVat;
         if (v != null)
             txtTotalAddons.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].TotAddAfterVat.toString()) == true ? "0" : RetrivedPurchaseModel[0].TotAddAfterVat.toString());
@@ -805,26 +812,12 @@ namespace PurTrReceive {
             var flagvalue = $("#txt_StatusFlag" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
 
-                txtQuantityVal = $("#txtQuantity" + i).val();
-                txtPriceValFc = $("#txtPriceFc" + i).val();
-                TotalFc = Number(txtQuantityVal) * Number(txtPriceValFc);
-                $("#txtTotalFc" + i).val(Number(TotalFc).toFixed(2));
-
-
-                txtPriceVal = $("#txtPriceFc" + i).val() * currencrRate;
-                $("#txtPrice" + i).val(txtPriceVal);
-                var total = Number(txtQuantityVal) * Number(txtPriceVal);
-                $("#txtTotal" + i).val(total);
-
-                var vatAmount = Number(total) * VatPrc / 100;
-                $("#txtTax" + i).val(vatAmount);
-                var totalAfterVat = Number(vatAmount) + Number(total);
-                $("#txtTotAfterTax" + i).val(totalAfterVat.RoundToSt(2));
+                totalRow(i, true)
 
             }
         }
 
-        ComputeTotals();
+        
     }
     //---------------------------------------------------------------- Fill Drop Down region----------------------------------------------------
     function FillddlFamily() {
@@ -1830,6 +1823,7 @@ namespace PurTrReceive {
         $("#txtPrice" + cnt).change(() => {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+
             totalRow(cnt, true);
 
         });
@@ -2029,11 +2023,11 @@ namespace PurTrReceive {
         debugger
 
          
-        let txtPrice = Number($("#txtPriceFc" + cnt).val());
+        let txtPrice = Number($("#txtPriceFc" + cnt).val()) 
         let txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
 
         if (flagDiscountAmount) {
-            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100).RoundToSt(2));
+            $("#txtDiscountAmount" + cnt).val( ((txtDiscountPrc * txtPrice) / 100).toString());
             $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)).RoundToSt(2));
         }
         else {
@@ -2057,7 +2051,7 @@ namespace PurTrReceive {
         $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
 
 
-        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * currencrRate;
+        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * (Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val()));
         $("#txtPrice" + cnt).val(txtPriceValue);
         var total = Number(txtQuantityValue) * Number(txtPriceValue);
         $("#txtTotal" + cnt).val(total);
