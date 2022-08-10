@@ -1284,6 +1284,21 @@ namespace SlsTrSalesReturn {
 			                <input type="text" class="form-control" id="txtUnitpriceWithVat${cnt}" value="0" min="0" step="1"/>
 		                </div>
 	                </td>
+                    <td>
+		                <div class="form-group" >
+			               <input id="txtDiscountPrc${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtDiscountAmount${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>  
+                    <td>
+		                <div class="form-group"style="width: 84px;" >
+			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
+		                </div>
+	                </td>
 	                <td>
 		                <div class="form-group">
 			                <input type="text" class="form-control" id="txtTotal${cnt}" disabled />
@@ -1555,6 +1570,9 @@ namespace SlsTrSalesReturn {
                 $("#txtReturnQuantity" + cnt).val("1");
                 $("#txtPrice" + cnt).val("1");
                 $("#txtUnitpriceWithVat" + cnt).val("1");
+                $("#txtDiscountAmount" + cnt).val("1");
+                $("#txtDiscountPrc" + cnt).val("1");
+                $("#txtNetUnitPrice" + cnt).val("1");
                 $("#txtTotal" + cnt).val("0");
                 $("#txtTax" + cnt).val("0");
                 $("#txtTotAfterTax" + cnt).val("0");
@@ -1573,6 +1591,9 @@ namespace SlsTrSalesReturn {
                     $("#ddlItem" + cnt).val("null");
                     $("#txtPrice" + cnt).val("1");
                     $("#txtUnitpriceWithVat" + cnt).val("1");
+                    $("#txtDiscountAmount" + cnt).val("1");
+                    $("#txtDiscountPrc" + cnt).val("1");
+                    $("#txtNetUnitPrice" + cnt).val("1");
                     DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'the same items cannot be repeated', MessageType.Error);
                 } else {
 
@@ -1808,6 +1829,10 @@ namespace SlsTrSalesReturn {
             $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SoldQty - SoldQty);
             $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
+
+            $("#txtDiscountAmount" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].DiscountAmount);
+            $("#txtDiscountPrc" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].DiscountPrc);
+            $("#txtNetUnitPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetUnitPrice);
 
             $("#UnitCost" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].StockUnitCost);
             $("#vatnatid" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
@@ -2080,6 +2105,12 @@ namespace SlsTrSalesReturn {
                 invoiceItemSingleModel.NetUnitPrice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+
+                invoiceItemSingleModel.DiscountAmount = $("#txtDiscountAmount" + i).val();
+                invoiceItemSingleModel.DiscountPrc = $("#txtDiscountPrc" + i).val();
+                invoiceItemSingleModel.NetUnitPrice = $("#txtNetUnitPrice" + i).val();
+                 
+
                 VatPrc = Number($("#txtTax_Rate" + i).val());
                 invoiceItemSingleModel.VatPrc = VatPrc;
                 invoiceItemSingleModel.VatAmount = $("#txtTax" + i).val();
@@ -2106,6 +2137,12 @@ namespace SlsTrSalesReturn {
                 invoiceItemSingleModel.NetUnitPrice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+                 
+                invoiceItemSingleModel.DiscountAmount = $("#txtDiscountAmount" + i).val();
+                invoiceItemSingleModel.DiscountPrc = $("#txtDiscountPrc" + i).val();
+                invoiceItemSingleModel.NetUnitPrice = $("#txtNetUnitPrice" + i).val();
+
+
                 VatPrc = Number($("#txtTax_Rate" + i).val());
                 invoiceItemSingleModel.VatPrc = VatPrc;
                 invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
