@@ -182,30 +182,50 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-2 py-0">
+                        <div id="checkShowPrice" class="col-12 col-md-2 ">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
-                                <div class="col-8 ">
-                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-2 col-md-8">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled="" name="">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 py-0">
+                        @*<div class="col-12 col-md-2 py-0">
+            <div class="form-group row g-0">
+                <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                <div class="col-8 ">
+                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
+                </div>
+            </div>
+        </div>*@
+                        @*<div class="col-12 col-md-4 py-0">
+            <div class="form-group row g-0">
+                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
+                <div class="col-8 ">
+                    <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
+                </div>
+            </div>
+        </div>*@
+                        @*<div class="col-12 col-md-4 py-0">
+            <div class="form-group row g-0">
+                <label class="align-self-center p-md-0"></label>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="txtInvoiceCustomerName">
+                </div>
+            </div>
+        </div>*@
+                        <div class="col-12 col-md-8">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
-                                <div class="col-8 ">
-                                    <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
+                                <label class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
+                                <div class="col-4 col-md-4 px-0">
+                                    <select disabled class="form-control me-3" id="ddlInvoiceCustomer"></select>
+                                </div>
+                                <div class="col-4 col-md-6 px-0">
+                                    <input type="text" disabled class="form-control" id="txtInvoiceCustomerName">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4 py-0">
-                            <div class="form-group row g-0">
-                                <label class="align-self-center p-md-0"></label>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="txtInvoiceCustomerName">
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-12 col-md-4 py-0">
                             <div class="form-group row g-0">
                                 <label class="col-4 align-self-center p-md-0">@SystemResource.App_Mobile</label>
@@ -247,33 +267,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 py-0   ">
-                            <div class="col-12 col-md-4 py-0">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
-                                    <div class="col-8 ">
-                                        <select disabled class="form-control" id="ddlType"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="Div_Money">
+                        <div class="col-12 py-0">
+                            <div class="row">
                                 <div class="col-12 col-md-4 py-0">
                                     <div class="form-group row g-0">
-                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
                                         <div class="col-8 ">
-                                            <input disabled class="form-control" name="" id="txtCashMoney" />
+                                            <select disabled class="form-control" id="ddlType"></select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-4 py-0">
-                                    <div class="form-group row g-0">
-                                        <label id="LabCardMoney" class="col-4 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
-                                        <div class="col-8 ">
-                                            <input disabled class="form-control" name="" id="txtCardMoney" />
+
+                                <div class="col-12 col-md-8" id="Div_Money">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 py-0">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
+                                                <div class="col-8 ">
+                                                    <input disabled class="form-control" name="" id="txtCashMoney" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 py-0">
+                                            <div class="form-group row g-0">
+                                                <label id="LabCardMoney" class="col-4 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
+                                                <div class="col-8 ">
+                                                    <input disabled class="form-control" name="" id="txtCardMoney" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
+                           
                         </div>
                     </div>
 
@@ -345,66 +372,17 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                @*<div class="table-responsive" style="margin-right: 6%;direction: rtl;">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-
-                                                <th> اسم الصنف</th>
-                                                <th class="areatable">   </th>
-                                                <th>اخر سعر بيع للعميل</th>
-                                                <th class="areatable">   </th>
-                                                <th>اخر رقم فاتوره للعميل </th>
-                                                <th class="areatable">   </th>
-                                                <th> اخر تاريخ </th>
-                                                <th class="areatable">   </th>
-                                                <th> اخر سعر بيع </th>
-                                                <th class="areatable">   </th>
-                                                <th>  اخر سعر شراء   </th>
-                                                <th class="areatable">   </th>
-                                                <th> التكلفة   </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="color: antiquewhite;">
-                                            <tr>
-
-                                                <td id="Name_Item"> 02312 </td>
-                                                <td class="areatable">  </td>
-                                                <td id="CustLastPrice"> 02312 </td>
-                                                <td class="areatable">  </td>
-                                                <td id="CustLastTr"> 02312 </td>
-                                                <td class="areatable">  </td>
-                                                <td id="custLastDate"> 04 Dec 2019 </td>
-                                                <td class="areatable">  </td>
-                                                <td id="LastPrice"> $14,500 </td>
-                                                <td class="areatable">  </td>
-                                                <td id="LastPurchase"> Dashboard </td>
-                                                <td class="areatable">  </td>
-                                                <td id="Curcost"> Credit card </td>
-
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>*@
-
-
                             </div>
                             <br />
                         </div>
                     </div>
-
-
-
-
 
                     @*----------------------------------------------------------------------------------------------------------*@
                     <div class="row">
                         <div class="col-12 col-md-9">
                             <div class="form-group row g-0 ">
                                 <label id="LabtxtRemarks" class="col-4 col-md-1  align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                <div class="col-8 col-md-11 ">
+                                <div class="col-8 col-md-11 px-0">
                                     <textarea rows="2" type="text" class="form-control " disabled name="Remark" id="txtRemarks">                    </textarea>
                                 </div>
                             </div>
@@ -486,30 +464,27 @@
                         </div>
                     </div>
 
-
-
-
                     <!-- Editors Details -->
                     <div class="insettext row editor-details">
                         <div class="col-12 col-md-6">
 
                             <div class="form-group row g-0">
-                                <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Seller</label>
-                                <div class="col-5 editor-input">
+                                <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Seller</label>
+                                <div class="col-4 col-md-5 editor-input px-0">
                                     <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                 </div>
-                                <div class="col-5 editor-input">
+                                <div class="col-4 col-md-5 editor-input px-0">
                                     <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group row g-0">
-                                <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
-                                <div class="col-5 editor-input">
+                                <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                <div class="col-4 col-md-5 editor-input px-0">
                                     <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                 </div>
-                                <div class="col-5 editor-input">
+                                <div class="col-4 col-md-5 editor-input px-0">
 
                                     <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                                 </div>

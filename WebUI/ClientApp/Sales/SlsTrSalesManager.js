@@ -292,17 +292,20 @@ var SlsTrSalesManager;
                 Errorinput(btnAddDetails);
                 return false;
             }
-            $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
+            //   $("#btnCustLastPrice").animate({ right: '-1%' }, 'slow');
+            $("#btnCustLastPrice").addClass("active");
             timerHiddenLastPrice();
         }
         else {
-            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+            //$("#btnCustLastPrice").animate({ right: '-87%' }, 'slow');
+            $("#btnCustLastPrice").removeClass("active");
         }
         flagLastPrice++;
     }
     function timerHiddenLastPrice() {
         setTimeout(function () {
-            $("#btnCustLastPrice").animate({ right: '-97%' }, 'slow');
+            //   $("#btnCustLastPrice").animate({ right: '-87%' }, 'slow');
+            $("#btnCustLastPrice").removeClass("active");
             flagLastPrice = 2;
         }, 20000);
     }

@@ -25780,6 +25780,7 @@ body.avgrund-active {
 
     .dataTables_wrapper .dataTables_info {
         font-size: 0.875rem;
+        padding-right:1rem;
     }
 
 /* Dropify */
@@ -29272,14 +29273,20 @@ input[type=number] {
 .form-control[disabled]:not(.search-control) {
     background-color: transparent;
     font-size: .9rem;
-    line-height: 1rem;
+    line-height: 1.125rem;
     text-align: right;
 }
-
-label.form-control[disabled]:not(.search-control) {
-   font-weight: normal;
-   padding-top:1rem;
+.form-control[disabled]:not(.search-control) {
+    padding-right: 1rem;
 }
+.form-control[type="date"][disabled]:not(.search-control) {
+    padding-right:0;
+}
+
+    label.form-control[disabled]:not(.search-control) {
+        font-weight: normal;
+        padding-top: 1rem;
+    }
 .inside-table .form-control[disabled],
 .inside-table .counter[disabled] {
     background-color: transparent;
@@ -29584,25 +29591,32 @@ input[class=checkbox]:checked:before {
 .search-box .dataTables_wrapper .dataTable tbody .even {
     background-color: var(--bs-gray-200);
 }
+.search-box .dataTables_wrapper .dataTable tbody tr:hover {
+    background-color: var(--Light-orange);
+}
+
 .search-box .dataTables_wrapper .dataTables_paginate {
     display: flex;
     justify-content: center;
-
 }
     .search-box .dataTables_wrapper .dataTables_paginate .paginate_button {
         color: var(--bs-white);
-        border: 1px solid var(--main-orange);
-        background-color: var(--main-orange);
+        border: 1px solid var(--main-blue);
+        background-color: var(--main-blue);
         border-radius: 5px;
-        padding:10px;
+        padding: 10px;
         margin: 0 .25rem;
-
     }
+        
         .search-box .dataTables_wrapper .dataTables_paginate .paginate_button.previous,
         .search-box .dataTables_wrapper .dataTables_paginate .paginate_button.next {
             background-color: var(--bs-gray-200);
             color: var(--bs-black);
             border: 1px solid var(--bs-gray-200);
+        }
+        .search-box .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            border: 1px solid var(--main-orange);
+            background-color: var(--main-orange);
         }
 .search-box .insettext input {
     border: inset !important;
@@ -29931,23 +29945,54 @@ input[class=checkbox]:checked:before {
     direction: ltr !important;
     bottom: 204px !important;
     left: 97% !important;
-    right: -97%;
+    /*right: -87%;*/
     border-radius: 72px 0px 0px 71px !important;
     height: 53px !important;
     padding-top: 5px !important;
     padding-right: 0px !important;
-    width: 100%;
+    width: 90%;
+}
+    .btnCustLastPrice.active {
+        right: -1%;
+        transition: all 1s ease-in-out;
+    }
+
+
+@media (max-width: 576px) {
+    .btnCustLastPrice {
+        right: -82%;
+    }
+}
+@media (min-width: 577px) {
+    .btnCustLastPrice {
+        right: -84%;
+    }
+}
+@media (min-width: 768px) {
+    .btnCustLastPrice {
+        right: -85%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .btnCustLastPrice {
+        right: -87.5%;
+    }
 }
 
 .sideIcon-table {
     margin-right: 6%;
     direction: rtl;
 }
-    .sideIcon-table table tr{
+    .sideIcon-table .table tr{
         color: var(--bs-white);
     }
-    .sideIcon-table table tr th,
-    .sideIcon-table table tr td {
-        padding:0.125rem;
+        .sideIcon-table .table tr th,
+        .sideIcon-table .table tr td {
+            padding: 0.125rem;
+            border-bottom: none;
+        }
+    .sideIcon-table .table thead tr {
+        border-bottom:1px solid var(--bs-gray-200);
     }
 /*End Right Side Icon Price List*/

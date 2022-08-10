@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-3">
                             <div class="form-group row g-0">
                                 <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
                                 <div class="col-8 ">
@@ -186,17 +186,27 @@
                                             <th style="width: 15%">@SystemResource.Itm_ItemCode</th>
                                             <th style="width: 20%">@SystemResource.App_Item</th>
                                             <th style="width: 8%">@SystemResource.Pur_RequiredQty</th>
-                                            <th style="width: 8%" class="text-wrap">@SystemResource.Itm_ReceivedQuntity</th>
-                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_Price</th>
-                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_total</th>
-                                            <th style="width: 8%" class="text-wrap">@SystemResource.App_Tax</th>
-                                            <th style="width: 10%" class="text-wrap">@SystemResource.App_TotAfterTax</th>
-
-
+                                            <th style="width: 8%" >@SystemResource.Itm_ReceivedQuntity</th>
+                                            <th style="width: 8%" >@SystemResource.App_Price</th>
+                                            <th style="width: 8%" >@SystemResource.App_total</th>
+                                            <th style="width: 8%" >@SystemResource.App_Tax</th>
+                                            <th style="width: 10%" >@SystemResource.App_TotAfterTax</th>
                                         </tr>
                                     </thead>
                                     <tbody id="div_Data"></tbody>
-
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th  class="fw-bold fs-6">@SystemResource.App_total</th>
+                                            <th><input type="text" disabled class="form-control fs-6  border-3" name="" id="txtTotal" /></th>
+                                            <th><input type="text" disabled class="form-control fs-6 border-3" name="" id="txtVatTotal" /></th>
+                                            <th><input type="text" disabled class="form-control fs-6 border-3" name="" id="txtNetTotal" /></th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                                 <div class="d-flex justify-content-start mr-1">
                                     <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
@@ -205,26 +215,10 @@
                         </div>
 
                         <!-- Total Details -->
-
-                        <div class="col-4 col-xs-offset-8">
-                            <div class="form-group row g-0" id="divtotal_">
-                                <label class="col-3 align-self-center p-md-0">@SystemResource.I_Total</label>
-                                <div class="col-3 ">
-                                    <input type="text" disabled class="form-control" name="" id="txtTotal" />
-                                </div>
-                                <div class="col-3 ">
-                                    <input type="text" disabled class="form-control" name="" id="txtVatTotal" />
-                                </div>
-                                <div class="col-3 ">
-                                    <input type="text" disabled class="form-control" name="" id="txtNetTotal" />
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-12">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_ExpirePeriod</label>
-                                <div class="col-8 ">
+                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.Pur_ExpirePeriod</label>
+                                <div class="col-8 col-md-3">
                                     <input type="text" class="form-control" id="txtValidityPeriod" disabled>
                                 </div>
                             </div>
@@ -232,8 +226,8 @@
 
                         <div class="col-12">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Termsofsupply</label>
-                                <div class="col-8 ">
+                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.Pur_Termsofsupply</label>
+                                <div class="col-8 col-md-11">
                                     <textarea type="text" class="form-control" id="txtDliveryConditions" disabled></textarea>
                                 </div>
                             </div>
@@ -241,8 +235,8 @@
 
                         <div class="col-12">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_Shippingterms</label>
-                                <div class="col-8 ">
+                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.Pur_Shippingterms</label>
+                                <div class="col-8 col-md-11">
                                     <textarea type="text" class="form-control" id="txtShipmentConditions" disabled></textarea>
                                 </div>
                             </div>
@@ -250,8 +244,8 @@
 
                         <div class="col-12">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                <div class="col-8 ">
+                                <label class="col-4 col-md-1  align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-8 col-md-11 ">
                                     <textarea type="text" class="form-control" id="txtNotes" disabled></textarea>
                                 </div>
                             </div>
@@ -259,32 +253,30 @@
 
                         <!-- Editors Details -->
                         <div class="insettext row editor-details">
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Pur</label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Pur</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6  editor-input">
-                                        <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center "> @SystemResource.App_Update</label>
-                                    <div class="col-4 col-xl-4  editor-input">
-                                        <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-                                        <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
-                                    </div>
-                                </div>
-                            </div>
+                                    <div class="col-4 col-md-5 editor-input px-0">
 
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

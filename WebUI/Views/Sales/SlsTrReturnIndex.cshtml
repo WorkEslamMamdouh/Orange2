@@ -3,13 +3,6 @@
     ViewBag.Title = @SystemResource.Men_SlsTrReturn;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-<style>
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.4;
-    }
-</style>
-
 
 <div class="row gy-3">
     <!-- Filter Container -->
@@ -80,7 +73,7 @@
         <div class="display_none" id="divShow">
             <div class="card bg-light-blue">
                 <div class="card-body">
-                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2 px-0">
                         <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
                         <div class="col-8 col-lg-8 col-md-10">
                             <input id="searchbutmemreport" type="text" class="form-control">
@@ -99,8 +92,8 @@
                     <div class="row g-0">
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرتجع</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4  align-self-center p-md-0">رقم المرتجع</label>
+                                <div class="col-8">
                                     <input disabled type="text" class="form-control " id="lblReturnNumber">
                                 </div>
                             </div>
@@ -109,25 +102,33 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">تاريخ المرتجع</label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-4  align-self-center p-md-0">تاريخ المرتجع</label>
+                                <div class="col-8  ">
                                     <input type="date" class="form-control" id="txtInvoiceDate">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12  col-md-2">
+                        <div  class="col-12 col-md-2 ">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-2 col-md-8">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled="" name="CUSTOM2">
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-12  col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-4  align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-9 ">
                                     <input type="checkbox" class="checkbox" id="chkActive" disabled name="CUSTOM2" />
                                 </div>
 
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">نوع المرتجع</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">نوع المرتجع</label>
+                                <div class="col-8 ">
                                     <select disabled class="form-control" id="ddlReturnTypeShow"></select>
                                 </div>
                             </div>
@@ -135,76 +136,83 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.App_InvoiceNum  </label>
-                                <div class="col-9 col-md-7">
-
+                                <label class="col-4  align-self-center p-md-0"> @SystemResource.App_InvoiceNum  </label>
+                                <div class="col-8 ">
                                     <div class="search-content">
                                         <input disabled type="number" class="form-control search-control" id="txtInvoiceNumber">
                                         <button type="button" name="InvoiceSearch" id="btnInvoiceSearch" class="btn btn-main btn-search">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Cashbox</label>
-                                <div class="col-9 col-md-7 ">
+                                <label class="col-4  align-self-center p-md-0">@SystemResource.App_Cashbox</label>
+                                <div class="col-8 ">
                                     <select disabled class="form-control" id="ddlCashBox"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">المندوب</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">المندوب</label>
+                                <div class="col-8 ">
                                     <select disabled class="form-control" id="ddlFreeSalesman"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">رقم المرجعى</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">رقم المرجعى</label>
+                                <div class="col-8 ">
                                     <input disabled type="text" class="form-control" name="RefNO" id="txtRefNo">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">المبلغ المسدد</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">المبلغ المسدد</label>
+                                <div class="col-8 ">
                                     <input disabled type="text" class="form-control special-field" id="txtCashAmount">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-6 ">
+                        @*<div class="col-12 col-md-6 ">
+            <div class="form-group row g-0">
+                <label class="col-2 align-self-center p-md-0">العميل</label>
+                <div class="col-5 ">
+                    <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
+                </div>
+                <div class="col-5">
+                    <input type="text" class="form-control" id="txtCustomerName">
+                </div>
+            </div>
+        </div>*@
+                        <div class="col-12 col-md-8">
                             <div class="form-group row g-0">
-                                <label class="col-2 align-self-center p-md-0">العميل</label>
-                                <div class="col-5 ">
-                                    <select disabled class="form-control" id="ddlInvoiceCustomer"></select>
+                                <label class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
+                                <div class="col-4 col-md-4 px-0">
+                                    <select disabled class="form-control me-3" id="ddlInvoiceCustomer"></select>
                                 </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control" id="txtCustomerName">
+                                <div class="col-4 col-md-6 px-0">
+                                    <input type="text" disabled class="form-control" id="txtInvoiceCustomerName">
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-12 col-md-3 offset-md-2 ">
+                        <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.App_TaxType  </label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4  align-self-center p-md-0"> @SystemResource.App_TaxType  </label>
+                                <div class="col-8 ">
                                     <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group row g-0">
-                                <label class="col-2 col-md-1  align-self-center p-md-0">ملاحظات</label>
+                                <label class="col-4 col-md-1  align-self-center p-md-0">ملاحظات</label>
                                 <div class="col-8 col-md-11 ">
                                     <input disabled type="text" class="form-control" name="Remark" id="txtRemarks">
                                 </div>
@@ -239,40 +247,40 @@
                             <div class="col-12 col-md-2">
 
                                 <div class="form-group row">
-                                    <label class="col-5 align-self-center p-md-0"> @SystemResource.Men_StkDefItemsNumber</label>
-                                    <div class="col-7">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.Men_StkDefItemsNumber</label>
+                                    <div class="col-8 col-md-7">
                                         <input disabled type="text" class="form-control" id="txtItemCount">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-2">
                                 <div class="form-group row">
-                                    <label class="col-5 align-self-center p-md-0"> @SystemResource.App_PackageCount</label>
-                                    <div class="col-7">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.App_PackageCount</label>
+                                    <div class="col-8 col-md-7">
                                         <input disabled type="text" class="form-control" id="txtPackageCount">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12  col-md-3">
                                 <div class="form-group row">
-                                    <label class="col-5 col-md-4 align-self-center p-md-0">@SystemResource.App_total</label>
-                                    <div class="col-7 col-md-8">
+                                    <label class="col-4 col-md-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                                    <div class="col-8 col-md-8">
                                         <input disabled type="text" class="form-control" id="txtTotal">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12  col-md-2">
                                 <div class="form-group row">
-                                    <label class="col-5 align-self-center p-md-0">@SystemResource.App_Tax</label>
-                                    <div class="col-7">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Tax</label>
+                                    <div class="col-8 col-md-7">
                                         <input disabled type="text" class="form-control" id="txtTax">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12  col-md-3">
                                 <div class="form-group row">
-                                    <label class="col-5 align-self-center p-md-0">@SystemResource.net </label>
-                                    <div class="col-7">
+                                    <label class="col-4 col-md-5  align-self-center p-md-0">@SystemResource.net </label>
+                                    <div class="col-8 col-md-7">
                                         <input disabled type="text" class="form-control " id="txtNet">
                                     </div>
                                 </div>
@@ -280,32 +288,33 @@
                         </div>
                         <!-- Editors Details -->
                         <div class="insettext row editor-details">
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
 
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center"> البائع</label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Seller</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center p-md-0"> تعديل</label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
+                                    <div class="col-4 col-md-5 editor-input px-0">
 
-                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -317,8 +326,6 @@
  
  
 @section Script{
-
-
     <script src="~/ClientApp/Sales/SlsTrSalesReturn.js"></script>
 
     <script>
