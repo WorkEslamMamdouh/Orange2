@@ -2443,6 +2443,11 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRate" Type="numeric" Precision="18" Scale="6" />
           <Property Name="TotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="numeric" Precision="19" Scale="2" />
         </EntityType>
         <EntityType Name="I_Pur_Tr_ReceiveCharges">
           <Key>
@@ -2489,6 +2494,9 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="TotRetQty" Type="numeric" Precision="18" Scale="5" />
           <Property Name="UnitAddCost" Type="numeric" Precision="18" Scale="5" />
           <Property Name="RecUnitPriceFC" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="OrgUnitpriceFC" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="DiscountPrc" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="DiscountAmount" Type="numeric" Precision="18" Scale="5" />
         </EntityType>
         <EntityType Name="I_Sls_D_Salesman">
           <Key>
@@ -5013,6 +5021,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetPurReceiveItem' does not have
           <Property Name="ItemFamilyID" Type="int" Nullable="false" />
           <Property Name="ReceiveRecQty" Type="numeric" Precision="18" Scale="5" />
           <Property Name="RecUnitPriceFC" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="DiscountAmount" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="DiscountPrc" Type="numeric" Precision="18" Scale="5" />
+          <Property Name="OrgUnitpriceFC" Type="numeric" Precision="18" Scale="5" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetPurReceiveList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5074,6 +5085,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetPurReceiveList' does not have
           <Property Name="CurrencyID" Type="int" />
           <Property Name="CurrencyRate" Type="numeric" Precision="18" Scale="6" />
           <Property Name="TotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="numeric" Precision="19" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetPurReceiveStaistic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5147,6 +5163,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetPurReceiveStaistic' does not 
           <Property Name="PO_TrDate" Type="smalldatetime" />
           <Property Name="CurrencyID" Type="int" />
           <Property Name="Tot_AmountFC" Type="numeric" Precision="38" Scale="10" />
+          <Property Name="ItemTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="numeric" Precision="19" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetSalesMan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -9091,7 +9112,10 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetPurReceiveItem].[TotItemCost] AS [TotItemCost], 
     [IQ_GetPurReceiveItem].[ItemFamilyID] AS [ItemFamilyID], 
     [IQ_GetPurReceiveItem].[ReceiveRecQty] AS [ReceiveRecQty], 
-    [IQ_GetPurReceiveItem].[RecUnitPriceFC] AS [RecUnitPriceFC]
+    [IQ_GetPurReceiveItem].[RecUnitPriceFC] AS [RecUnitPriceFC], 
+    [IQ_GetPurReceiveItem].[DiscountAmount] AS [DiscountAmount], 
+    [IQ_GetPurReceiveItem].[DiscountPrc] AS [DiscountPrc], 
+    [IQ_GetPurReceiveItem].[OrgUnitpriceFC] AS [OrgUnitpriceFC]
     FROM [dbo].[IQ_GetPurReceiveItem] AS [IQ_GetPurReceiveItem]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetPurReceiveList" EntityType="Self.IQ_GetPurReceiveList" store:Type="Views" store:Schema="dbo">
@@ -9148,7 +9172,12 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetPurReceiveList].[PO_TrDate] AS [PO_TrDate], 
     [IQ_GetPurReceiveList].[CurrencyID] AS [CurrencyID], 
     [IQ_GetPurReceiveList].[CurrencyRate] AS [CurrencyRate], 
-    [IQ_GetPurReceiveList].[TotalFC] AS [TotalFC]
+    [IQ_GetPurReceiveList].[TotalFC] AS [TotalFC], 
+    [IQ_GetPurReceiveList].[ItemTotalFC] AS [ItemTotalFC], 
+    [IQ_GetPurReceiveList].[ItemDiscountTotalFC] AS [ItemDiscountTotalFC], 
+    [IQ_GetPurReceiveList].[ItemTotal] AS [ItemTotal], 
+    [IQ_GetPurReceiveList].[ItemVatTotal] AS [ItemVatTotal], 
+    [IQ_GetPurReceiveList].[ItemDiscountTotal] AS [ItemDiscountTotal]
     FROM [dbo].[IQ_GetPurReceiveList] AS [IQ_GetPurReceiveList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetPurReceiveStaistic" EntityType="Self.IQ_GetPurReceiveStaistic" store:Type="Views" store:Schema="dbo">
@@ -9217,7 +9246,12 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetPurReceiveStaistic].[PO_TrNo] AS [PO_TrNo], 
     [IQ_GetPurReceiveStaistic].[PO_TrDate] AS [PO_TrDate], 
     [IQ_GetPurReceiveStaistic].[CurrencyID] AS [CurrencyID], 
-    [IQ_GetPurReceiveStaistic].[Tot_AmountFC] AS [Tot_AmountFC]
+    [IQ_GetPurReceiveStaistic].[Tot_AmountFC] AS [Tot_AmountFC], 
+    [IQ_GetPurReceiveStaistic].[ItemTotalFC] AS [ItemTotalFC], 
+    [IQ_GetPurReceiveStaistic].[ItemDiscountTotalFC] AS [ItemDiscountTotalFC], 
+    [IQ_GetPurReceiveStaistic].[ItemTotal] AS [ItemTotal], 
+    [IQ_GetPurReceiveStaistic].[ItemVatTotal] AS [ItemVatTotal], 
+    [IQ_GetPurReceiveStaistic].[ItemDiscountTotal] AS [ItemDiscountTotal]
     FROM [dbo].[IQ_GetPurReceiveStaistic] AS [IQ_GetPurReceiveStaistic]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetSalesMan" EntityType="Self.IQ_GetSalesMan" store:Type="Views" store:Schema="dbo">
@@ -10216,23 +10250,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="CashType" Mode="In" Type="Int32" />
             <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="IProc_Rpt_PurReceiveList" ReturnType="Collection(InvModel.IProc_Rpt_PurReceiveList_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="TrType" Mode="In" Type="Int32" />
-            <Parameter Name="FromDate" Mode="In" Type="String" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
-            <Parameter Name="VendorID" Mode="In" Type="Int32" />
-            <Parameter Name="SalesmanID" Mode="In" Type="Int32" />
-            <Parameter Name="CashType" Mode="In" Type="Int32" />
-            <Parameter Name="Status" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="IProc_Rpt_StkAdjustList" ReturnType="Collection(InvModel.IProc_Rpt_StkAdjustList_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
             <Parameter Name="bra" Mode="In" Type="Int32" />
@@ -10761,16 +10778,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="vendorid" Mode="In" Type="Int32" />
-            <Parameter Name="TRId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="IProc_Prnt_PurReceive" ReturnType="Collection(InvModel.IProc_Prnt_PurReceive_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="IProc_Prnt_VATSlsInvoice" ReturnType="Collection(InvModel.IProc_Prnt_VATSlsInvoice_Result)">
@@ -11386,6 +11393,33 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
             <Parameter Name="ExZero" Mode="In" Type="Int32" />
             <Parameter Name="IncludeInvTR" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Prnt_PurReceive" ReturnType="Collection(InvModel.IProc_Prnt_PurReceive_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Rpt_PurReceiveList" ReturnType="Collection(InvModel.IProc_Rpt_PurReceiveList_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="TrType" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="VendorID" Mode="In" Type="Int32" />
+            <Parameter Name="SalesmanID" Mode="In" Type="Int32" />
+            <Parameter Name="CashType" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -12376,6 +12410,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="UnitAddCost" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="ReceiveRecQty" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="RecUnitPriceFC" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="OrgUnitpriceFC" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountPrc" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="5" />
         </EntityType>
         <EntityType Name="I_Sls_TR_Invoice">
           <Key>
@@ -12879,6 +12916,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="ItemFamilyID" Type="Int32" Nullable="false" />
           <Property Name="ReceiveRecQty" Type="Decimal" Precision="18" Scale="5" />
           <Property Name="RecUnitPriceFC" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountPrc" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="OrgUnitpriceFC" Type="Decimal" Precision="18" Scale="5" />
         </EntityType>
         <EntityType Name="IQ_GetSlsInvoiceItem">
           <Key>
@@ -13011,6 +13051,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="CurrencyID" Type="Int32" />
           <Property Name="CurrencyRate" Type="Decimal" Precision="18" Scale="6" />
           <Property Name="TotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="Decimal" Precision="19" Scale="2" />
         </EntityType>
         <EntityType Name="G_ReportWebSetting">
           <Key>
@@ -13130,6 +13175,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="CurrencyID" Type="Int32" />
           <Property Name="CurrencyRate" Type="Decimal" Precision="18" Scale="6" />
           <Property Name="TotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="Decimal" Precision="19" Scale="2" />
         </EntityType>
         <EntityType Name="IQ_GetPurReceiveStaistic">
           <Key>
@@ -13201,6 +13251,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="PO_TrDate" Type="DateTime" Precision="0" />
           <Property Name="CurrencyID" Type="Int32" />
           <Property Name="Tot_AmountFC" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="ItemTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotalFC" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemVatTotal" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ItemDiscountTotal" Type="Decimal" Precision="19" Scale="2" />
         </EntityType>
         <EntityType Name="I_TR_Operation">
           <Key>
@@ -16690,80 +16745,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="ShipmentConditions" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="ValidityPeriod" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="IProc_Rpt_PurReceiveList_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CashTypeDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CashTypeDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_VNDDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_VNDDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_SalesmanDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_SalesmanDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="ReceiveID" Nullable="false" />
-          <Property Type="Int32" Name="TrNo" Nullable="true" />
-          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
-          <Property Type="Boolean" Name="IsCash" Nullable="true" />
-          <Property Type="Int32" Name="TrType" Nullable="true" />
-          <Property Type="Int32" Name="SalesmanId" Nullable="true" />
-          <Property Type="Int32" Name="StoreID" Nullable="true" />
-          <Property Type="Decimal" Name="VatAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Byte" Name="VATType" Nullable="true" />
-          <Property Type="Decimal" Name="DiscountAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Byte" Name="Status" Nullable="true" />
-          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
-          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
-          <Property Type="Int32" Name="BranchCode" Nullable="true" />
-          <Property Type="Int32" Name="CompCode" Nullable="true" />
-          <Property Type="String" Name="Slsm_Code" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="Slsm_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Slsm_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Box_DescA" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Box_DescE" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="VendorID" Nullable="true" />
-          <Property Type="String" Name="VendorInvNo" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PoDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="PoNo" Nullable="true" MaxLength="10" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="200" />
-          <Property Type="Decimal" Name="DiscountPrcnt" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="NetDue" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="NetAdditionCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="String" Name="VendorCode" Nullable="false" MaxLength="25" />
-          <Property Type="Int32" Name="PurRecType" Nullable="true" />
-          <Property Type="Int32" Name="CashBoxID" Nullable="true" />
-          <Property Type="Decimal" Name="NetAdditionVat" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Int32" Name="Line_Count" Nullable="true" />
-          <Property Type="Int32" Name="Item_Count" Nullable="true" />
-          <Property Type="Decimal" Name="Tot_Qty" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Amount" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="Tot_VAT" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Net" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="tot_RetQty" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Add" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="TotAdd" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="TotAddVat" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="TotAddAfterVat" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="String" Name="Vnd_NameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Vnd_NameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Type_DescE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="type_DescA" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="CashPaidAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="RemainAmount" Nullable="true" Precision="20" Scale="2" />
-          <Property Type="Int32" Name="RetRec_No" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="IProc_Rpt_StkAdjustList_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
           <Property Type="Int32" Name="Bra" Nullable="true" />
@@ -19013,109 +18994,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="ivit_total" Nullable="true" Precision="38" Scale="10" />
           <Property Type="Decimal" Name="ivit_VatAmount" Nullable="true" Precision="38" Scale="5" />
           <Property Type="Decimal" Name="ivit_NetAfterVat" Nullable="true" Precision="38" Scale="10" />
-        </ComplexType>
-        <ComplexType Name="IProc_Prnt_PurReceive_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="ReceiveID" Nullable="false" />
-          <Property Type="Int32" Name="TrNo" Nullable="true" />
-          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
-          <Property Type="Boolean" Name="IsCash" Nullable="true" />
-          <Property Type="Int32" Name="TrType" Nullable="true" />
-          <Property Type="Int32" Name="SalesmanId" Nullable="true" />
-          <Property Type="Int32" Name="StoreID" Nullable="true" />
-          <Property Type="Decimal" Name="VatAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Byte" Name="VATType" Nullable="true" />
-          <Property Type="Decimal" Name="DiscountAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Byte" Name="Status" Nullable="true" />
-          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
-          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
-          <Property Type="Int32" Name="BranchCode" Nullable="true" />
-          <Property Type="Int32" Name="CompCode" Nullable="true" />
-          <Property Type="String" Name="Slsm_Code" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="Slsm_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Slsm_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Box_DescA" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Box_DescE" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="VendorID" Nullable="true" />
-          <Property Type="String" Name="VendorInvNo" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PoDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="PoNo" Nullable="true" MaxLength="10" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="200" />
-          <Property Type="Decimal" Name="DiscountPrcnt" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="NetDue" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="NetAdditionCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="String" Name="VendorCode" Nullable="false" MaxLength="25" />
-          <Property Type="Int32" Name="PurRecType" Nullable="true" />
-          <Property Type="Int32" Name="CashBoxID" Nullable="true" />
-          <Property Type="Decimal" Name="NetAdditionVat" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Int32" Name="Line_Count" Nullable="true" />
-          <Property Type="Int32" Name="Item_Count" Nullable="true" />
-          <Property Type="Decimal" Name="Tot_Qty" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Amount" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="Tot_VAT" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Net" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="tot_RetQty" Nullable="true" Precision="38" Scale="5" />
-          <Property Type="Decimal" Name="Tot_Add" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="TotAdd" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="TotAddVat" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="TotAddAfterVat" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="String" Name="Vnd_NameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Vnd_NameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Type_DescE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="type_DescA" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="CashPaidAmount" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="RemainAmount" Nullable="true" Precision="20" Scale="2" />
-          <Property Type="Int32" Name="RetRec_No" Nullable="true" />
-          <Property Type="Decimal" Name="Tot_AmountFC" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="CurrencyRate" Nullable="true" Precision="18" Scale="6" />
-          <Property Type="Decimal" Name="TotalFC" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Int32" Name="PO_TrNo" Nullable="true" />
-          <Property Type="DateTime" Name="PO_TrDate" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="CurDescA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="cur_DescE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="recType" Nullable="false" />
-          <Property Type="Int32" Name="Serial" Nullable="true" />
-          <Property Type="String" Name="It_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="it_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="it_itemCode" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="ItFm_Code" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ItFm_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ItFm_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Cat_Code" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Cat_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Cat_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Uom_Code" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="Uom_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Uom_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="Decimal" Name="RecQty" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="RecUnitPrice" Nullable="true" Precision="21" Scale="5" />
-          <Property Type="Decimal" Name="itm_VatPrc" Nullable="true" Precision="21" Scale="5" />
-          <Property Type="Decimal" Name="itm_VatAmount" Nullable="true" Precision="21" Scale="5" />
-          <Property Type="Decimal" Name="RecStockQty" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="NetUnitCost" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="RecUnitPriceFC" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="StockAvailableQty" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="NewUnitCost" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="UnitAddCost" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="TotItemCost" Nullable="true" Precision="38" Scale="10" />
-          <Property Type="Decimal" Name="ReceiveRecQty" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="StockUnitCost" Nullable="true" Precision="18" Scale="5" />
-          <Property Type="Decimal" Name="TotRetQty" Nullable="true" Precision="18" Scale="5" />
         </ComplexType>
         <ComplexType Name="IProc_Prnt_VATSlsInvoice_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
@@ -21518,6 +21396,195 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="ACC_DESCA" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="ACC_DESCL" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="IProc_Prnt_PurReceive_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ReceiveID" Nullable="false" />
+          <Property Type="Int32" Name="TrNo" Nullable="true" />
+          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsCash" Nullable="true" />
+          <Property Type="Int32" Name="TrType" Nullable="true" />
+          <Property Type="Int32" Name="SalesmanId" Nullable="true" />
+          <Property Type="Int32" Name="StoreID" Nullable="true" />
+          <Property Type="Decimal" Name="VatAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Byte" Name="VATType" Nullable="true" />
+          <Property Type="Decimal" Name="DiscountAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Byte" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="String" Name="Slsm_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Slsm_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Slsm_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Box_DescA" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Box_DescE" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="VendorID" Nullable="true" />
+          <Property Type="String" Name="VendorInvNo" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PoDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="PoNo" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="DiscountPrcnt" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NetDue" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NetAdditionCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="VendorCode" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="PurRecType" Nullable="true" />
+          <Property Type="Int32" Name="CashBoxID" Nullable="true" />
+          <Property Type="Decimal" Name="NetAdditionVat" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Int32" Name="Line_Count" Nullable="true" />
+          <Property Type="Int32" Name="Item_Count" Nullable="true" />
+          <Property Type="Decimal" Name="Tot_Qty" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Amount" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="Tot_VAT" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Net" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="tot_RetQty" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Add" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="TotAdd" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotAddVat" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotAddAfterVat" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Vnd_NameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Vnd_NameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Type_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="type_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="CashPaidAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="RemainAmount" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Int32" Name="RetRec_No" Nullable="true" />
+          <Property Type="Decimal" Name="Tot_AmountFC" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="CurrencyRate" Nullable="true" Precision="18" Scale="6" />
+          <Property Type="Decimal" Name="TotalFC" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Int32" Name="PO_TrNo" Nullable="true" />
+          <Property Type="DateTime" Name="PO_TrDate" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CurDescA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="cur_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CurrencyCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="recType" Nullable="false" />
+          <Property Type="Decimal" Name="ItemDiscountTotalFC" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemTotal" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemVatTotal" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemDiscountTotal" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Int32" Name="Serial" Nullable="true" />
+          <Property Type="String" Name="It_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="it_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="it_itemCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="ItFm_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItFm_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ItFm_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Cat_Code" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Cat_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Cat_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Uom_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Uom_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Uom_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="RecQty" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="RecUnitPrice" Nullable="true" Precision="21" Scale="5" />
+          <Property Type="Decimal" Name="itm_VatPrc" Nullable="true" Precision="21" Scale="5" />
+          <Property Type="Decimal" Name="itm_VatAmount" Nullable="true" Precision="21" Scale="5" />
+          <Property Type="Decimal" Name="RecStockQty" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="NetUnitCost" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="RecUnitPriceFC" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="StockAvailableQty" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="NewUnitCost" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="UnitAddCost" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="TotItemCost" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="ReceiveRecQty" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="StockUnitCost" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="TotRetQty" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="OrgUnitpriceFC" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="itm_discountPrc" Nullable="true" Precision="18" Scale="5" />
+          <Property Type="Decimal" Name="itm_discAmount" Nullable="true" Precision="18" Scale="5" />
+        </ComplexType>
+        <ComplexType Name="IProc_Rpt_PurReceiveList_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CashTypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CashTypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_VNDDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_VNDDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_SalesmanDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_SalesmanDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="ReceiveID" Nullable="false" />
+          <Property Type="Int32" Name="TrNo" Nullable="true" />
+          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="IsCash" Nullable="true" />
+          <Property Type="Int32" Name="TrType" Nullable="true" />
+          <Property Type="Int32" Name="SalesmanId" Nullable="true" />
+          <Property Type="Int32" Name="StoreID" Nullable="true" />
+          <Property Type="Decimal" Name="VatAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Byte" Name="VATType" Nullable="true" />
+          <Property Type="Decimal" Name="DiscountAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Byte" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="String" Name="Slsm_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Slsm_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Slsm_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Box_DescA" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Box_DescE" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="VendorID" Nullable="true" />
+          <Property Type="String" Name="VendorInvNo" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PoDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="PoNo" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="DiscountPrcnt" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NetDue" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NetAdditionCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="VendorCode" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="PurRecType" Nullable="true" />
+          <Property Type="Int32" Name="CashBoxID" Nullable="true" />
+          <Property Type="Decimal" Name="NetAdditionVat" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Int32" Name="Line_Count" Nullable="true" />
+          <Property Type="Int32" Name="Item_Count" Nullable="true" />
+          <Property Type="Decimal" Name="Tot_Qty" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Amount" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="Tot_VAT" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Net" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="tot_RetQty" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="Tot_Add" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="TotAdd" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotAddVat" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TotAddAfterVat" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="String" Name="Vnd_NameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Vnd_NameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Type_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="type_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="CashPaidAmount" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="RemainAmount" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Int32" Name="RetRec_No" Nullable="true" />
+          <Property Type="Decimal" Name="ItemTotalFC" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemDiscountTotalFC" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemTotal" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemVatTotal" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="ItemDiscountTotal" Nullable="true" Precision="19" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22501,6 +22568,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Pur_TR_ReceiveItems">
             <EntityTypeMapping TypeName="InvModel.I_Pur_TR_ReceiveItems">
               <MappingFragment StoreEntitySet="I_Pur_TR_ReceiveItems">
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DiscountPrc" ColumnName="DiscountPrc" />
+                <ScalarProperty Name="OrgUnitpriceFC" ColumnName="OrgUnitpriceFC" />
                 <ScalarProperty Name="RecUnitPriceFC" ColumnName="RecUnitPriceFC" />
                 <ScalarProperty Name="ReceiveRecQty" ColumnName="ReceiveRecQty" />
                 <ScalarProperty Name="UnitAddCost" ColumnName="UnitAddCost" />
@@ -22967,6 +23037,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetPurReceiveItem">
             <EntityTypeMapping TypeName="InvModel.IQ_GetPurReceiveItem">
               <MappingFragment StoreEntitySet="IQ_GetPurReceiveItem">
+                <ScalarProperty Name="OrgUnitpriceFC" ColumnName="OrgUnitpriceFC" />
+                <ScalarProperty Name="DiscountPrc" ColumnName="DiscountPrc" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
                 <ScalarProperty Name="RecUnitPriceFC" ColumnName="RecUnitPriceFC" />
                 <ScalarProperty Name="ReceiveRecQty" ColumnName="ReceiveRecQty" />
                 <ScalarProperty Name="ItemFamilyID" ColumnName="ItemFamilyID" />
@@ -23107,6 +23180,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Pur_TR_Receive">
             <EntityTypeMapping TypeName="InvModel.I_Pur_TR_Receive">
               <MappingFragment StoreEntitySet="I_Pur_TR_Receive">
+                <ScalarProperty Name="ItemVatTotal" ColumnName="ItemVatTotal" />
+                <ScalarProperty Name="ItemDiscountTotal" ColumnName="ItemDiscountTotal" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="ItemDiscountTotalFC" ColumnName="ItemDiscountTotalFC" />
+                <ScalarProperty Name="ItemTotalFC" ColumnName="ItemTotalFC" />
                 <ScalarProperty Name="TotalFC" ColumnName="TotalFC" />
                 <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
@@ -23212,6 +23290,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetPurReceiveList">
             <EntityTypeMapping TypeName="InvModel.IQ_GetPurReceiveList">
               <MappingFragment StoreEntitySet="IQ_GetPurReceiveList">
+                <ScalarProperty Name="ItemDiscountTotal" ColumnName="ItemDiscountTotal" />
+                <ScalarProperty Name="ItemVatTotal" ColumnName="ItemVatTotal" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="ItemDiscountTotalFC" ColumnName="ItemDiscountTotalFC" />
+                <ScalarProperty Name="ItemTotalFC" ColumnName="ItemTotalFC" />
                 <ScalarProperty Name="TotalFC" ColumnName="TotalFC" />
                 <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
@@ -23271,6 +23354,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetPurReceiveStaistic">
             <EntityTypeMapping TypeName="InvModel.IQ_GetPurReceiveStaistic">
               <MappingFragment StoreEntitySet="IQ_GetPurReceiveStaistic">
+                <ScalarProperty Name="ItemDiscountTotal" ColumnName="ItemDiscountTotal" />
+                <ScalarProperty Name="ItemVatTotal" ColumnName="ItemVatTotal" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="ItemDiscountTotalFC" ColumnName="ItemDiscountTotalFC" />
+                <ScalarProperty Name="ItemTotalFC" ColumnName="ItemTotalFC" />
                 <ScalarProperty Name="Tot_AmountFC" ColumnName="Tot_AmountFC" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="PO_TrDate" ColumnName="PO_TrDate" />
@@ -26843,84 +26931,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Rpt_PurReceiveList" FunctionName="InvModel.Store.IProc_Rpt_PurReceiveList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_PurReceiveList_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
-                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
-                <ScalarProperty Name="Par_CashTypeDSA" ColumnName="Par_CashTypeDSA" />
-                <ScalarProperty Name="Par_CashTypeDSE" ColumnName="Par_CashTypeDSE" />
-                <ScalarProperty Name="Par_VNDDSA" ColumnName="Par_VNDDSA" />
-                <ScalarProperty Name="Par_VNDDSE" ColumnName="Par_VNDDSE" />
-                <ScalarProperty Name="Par_SalesmanDSA" ColumnName="Par_SalesmanDSA" />
-                <ScalarProperty Name="Par_SalesmanDSE" ColumnName="Par_SalesmanDSE" />
-                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
-                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
-                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
-                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
-                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
-                <ScalarProperty Name="IsCash" ColumnName="IsCash" />
-                <ScalarProperty Name="TrType" ColumnName="TrType" />
-                <ScalarProperty Name="SalesmanId" ColumnName="SalesmanId" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
-                <ScalarProperty Name="VATType" ColumnName="VATType" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="Slsm_Code" ColumnName="Slsm_Code" />
-                <ScalarProperty Name="Slsm_DescA" ColumnName="Slsm_DescA" />
-                <ScalarProperty Name="Slsm_DescE" ColumnName="Slsm_DescE" />
-                <ScalarProperty Name="Box_DescA" ColumnName="Box_DescA" />
-                <ScalarProperty Name="Box_DescE" ColumnName="Box_DescE" />
-                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
-                <ScalarProperty Name="VendorInvNo" ColumnName="VendorInvNo" />
-                <ScalarProperty Name="PoDate" ColumnName="PoDate" />
-                <ScalarProperty Name="PoNo" ColumnName="PoNo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="DiscountPrcnt" ColumnName="DiscountPrcnt" />
-                <ScalarProperty Name="NetDue" ColumnName="NetDue" />
-                <ScalarProperty Name="NetAdditionCost" ColumnName="NetAdditionCost" />
-                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
-                <ScalarProperty Name="PurRecType" ColumnName="PurRecType" />
-                <ScalarProperty Name="CashBoxID" ColumnName="CashBoxID" />
-                <ScalarProperty Name="NetAdditionVat" ColumnName="NetAdditionVat" />
-                <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
-                <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
-                <ScalarProperty Name="Tot_Qty" ColumnName="Tot_Qty" />
-                <ScalarProperty Name="Tot_Amount" ColumnName="Tot_Amount" />
-                <ScalarProperty Name="Tot_VAT" ColumnName="Tot_VAT" />
-                <ScalarProperty Name="Tot_Net" ColumnName="Tot_Net" />
-                <ScalarProperty Name="tot_RetQty" ColumnName="tot_RetQty" />
-                <ScalarProperty Name="Tot_Add" ColumnName="Tot_Add" />
-                <ScalarProperty Name="TotAdd" ColumnName="TotAdd" />
-                <ScalarProperty Name="TotAddVat" ColumnName="TotAddVat" />
-                <ScalarProperty Name="TotAddAfterVat" ColumnName="TotAddAfterVat" />
-                <ScalarProperty Name="Vnd_NameA" ColumnName="Vnd_NameA" />
-                <ScalarProperty Name="Vnd_NameE" ColumnName="Vnd_NameE" />
-                <ScalarProperty Name="Type_DescE" ColumnName="Type_DescE" />
-                <ScalarProperty Name="type_DescA" ColumnName="type_DescA" />
-                <ScalarProperty Name="CashPaidAmount" ColumnName="CashPaidAmount" />
-                <ScalarProperty Name="RemainAmount" ColumnName="RemainAmount" />
-                <ScalarProperty Name="RetRec_No" ColumnName="RetRec_No" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="IProc_Rpt_StkAdjustList" FunctionName="InvModel.Store.IProc_Rpt_StkAdjustList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_StkAdjustList_Result">
@@ -29283,113 +29293,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="ivit_total" ColumnName="ivit_total" />
                 <ScalarProperty Name="ivit_VatAmount" ColumnName="ivit_VatAmount" />
                 <ScalarProperty Name="ivit_NetAfterVat" ColumnName="ivit_NetAfterVat" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Prnt_PurReceive" FunctionName="InvModel.Store.IProc_Prnt_PurReceive">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Prnt_PurReceive_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
-                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
-                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
-                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
-                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
-                <ScalarProperty Name="IsCash" ColumnName="IsCash" />
-                <ScalarProperty Name="TrType" ColumnName="TrType" />
-                <ScalarProperty Name="SalesmanId" ColumnName="SalesmanId" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
-                <ScalarProperty Name="VATType" ColumnName="VATType" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="Slsm_Code" ColumnName="Slsm_Code" />
-                <ScalarProperty Name="Slsm_DescA" ColumnName="Slsm_DescA" />
-                <ScalarProperty Name="Slsm_DescE" ColumnName="Slsm_DescE" />
-                <ScalarProperty Name="Box_DescA" ColumnName="Box_DescA" />
-                <ScalarProperty Name="Box_DescE" ColumnName="Box_DescE" />
-                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
-                <ScalarProperty Name="VendorInvNo" ColumnName="VendorInvNo" />
-                <ScalarProperty Name="PoDate" ColumnName="PoDate" />
-                <ScalarProperty Name="PoNo" ColumnName="PoNo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="DiscountPrcnt" ColumnName="DiscountPrcnt" />
-                <ScalarProperty Name="NetDue" ColumnName="NetDue" />
-                <ScalarProperty Name="NetAdditionCost" ColumnName="NetAdditionCost" />
-                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
-                <ScalarProperty Name="PurRecType" ColumnName="PurRecType" />
-                <ScalarProperty Name="CashBoxID" ColumnName="CashBoxID" />
-                <ScalarProperty Name="NetAdditionVat" ColumnName="NetAdditionVat" />
-                <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
-                <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
-                <ScalarProperty Name="Tot_Qty" ColumnName="Tot_Qty" />
-                <ScalarProperty Name="Tot_Amount" ColumnName="Tot_Amount" />
-                <ScalarProperty Name="Tot_VAT" ColumnName="Tot_VAT" />
-                <ScalarProperty Name="Tot_Net" ColumnName="Tot_Net" />
-                <ScalarProperty Name="tot_RetQty" ColumnName="tot_RetQty" />
-                <ScalarProperty Name="Tot_Add" ColumnName="Tot_Add" />
-                <ScalarProperty Name="TotAdd" ColumnName="TotAdd" />
-                <ScalarProperty Name="TotAddVat" ColumnName="TotAddVat" />
-                <ScalarProperty Name="TotAddAfterVat" ColumnName="TotAddAfterVat" />
-                <ScalarProperty Name="Vnd_NameA" ColumnName="Vnd_NameA" />
-                <ScalarProperty Name="Vnd_NameE" ColumnName="Vnd_NameE" />
-                <ScalarProperty Name="Type_DescE" ColumnName="Type_DescE" />
-                <ScalarProperty Name="type_DescA" ColumnName="type_DescA" />
-                <ScalarProperty Name="CashPaidAmount" ColumnName="CashPaidAmount" />
-                <ScalarProperty Name="RemainAmount" ColumnName="RemainAmount" />
-                <ScalarProperty Name="RetRec_No" ColumnName="RetRec_No" />
-                <ScalarProperty Name="Tot_AmountFC" ColumnName="Tot_AmountFC" />
-                <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
-                <ScalarProperty Name="TotalFC" ColumnName="TotalFC" />
-                <ScalarProperty Name="PO_TrNo" ColumnName="PO_TrNo" />
-                <ScalarProperty Name="PO_TrDate" ColumnName="PO_TrDate" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CurDescA" ColumnName="CurDescA" />
-                <ScalarProperty Name="cur_DescE" ColumnName="cur_DescE" />
-                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
-                <ScalarProperty Name="recType" ColumnName="recType" />
-                <ScalarProperty Name="Serial" ColumnName="Serial" />
-                <ScalarProperty Name="It_DescE" ColumnName="It_DescE" />
-                <ScalarProperty Name="it_DescA" ColumnName="it_DescA" />
-                <ScalarProperty Name="it_itemCode" ColumnName="it_itemCode" />
-                <ScalarProperty Name="ItFm_Code" ColumnName="ItFm_Code" />
-                <ScalarProperty Name="ItFm_DescA" ColumnName="ItFm_DescA" />
-                <ScalarProperty Name="ItFm_DescE" ColumnName="ItFm_DescE" />
-                <ScalarProperty Name="Cat_Code" ColumnName="Cat_Code" />
-                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
-                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
-                <ScalarProperty Name="Uom_Code" ColumnName="Uom_Code" />
-                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
-                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
-                <ScalarProperty Name="RecQty" ColumnName="RecQty" />
-                <ScalarProperty Name="RecUnitPrice" ColumnName="RecUnitPrice" />
-                <ScalarProperty Name="itm_VatPrc" ColumnName="itm_VatPrc" />
-                <ScalarProperty Name="itm_VatAmount" ColumnName="itm_VatAmount" />
-                <ScalarProperty Name="RecStockQty" ColumnName="RecStockQty" />
-                <ScalarProperty Name="NetUnitCost" ColumnName="NetUnitCost" />
-                <ScalarProperty Name="RecUnitPriceFC" ColumnName="RecUnitPriceFC" />
-                <ScalarProperty Name="StockAvailableQty" ColumnName="StockAvailableQty" />
-                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
-                <ScalarProperty Name="UnitAddCost" ColumnName="UnitAddCost" />
-                <ScalarProperty Name="TotItemCost" ColumnName="TotItemCost" />
-                <ScalarProperty Name="ReceiveRecQty" ColumnName="ReceiveRecQty" />
-                <ScalarProperty Name="StockUnitCost" ColumnName="StockUnitCost" />
-                <ScalarProperty Name="TotRetQty" ColumnName="TotRetQty" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -31952,6 +31855,203 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="DESCL" ColumnName="DESCL" />
                 <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
                 <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Prnt_PurReceive" FunctionName="InvModel.Store.IProc_Prnt_PurReceive">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Prnt_PurReceive_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="IsCash" ColumnName="IsCash" />
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
+                <ScalarProperty Name="SalesmanId" ColumnName="SalesmanId" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
+                <ScalarProperty Name="VATType" ColumnName="VATType" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="Slsm_Code" ColumnName="Slsm_Code" />
+                <ScalarProperty Name="Slsm_DescA" ColumnName="Slsm_DescA" />
+                <ScalarProperty Name="Slsm_DescE" ColumnName="Slsm_DescE" />
+                <ScalarProperty Name="Box_DescA" ColumnName="Box_DescA" />
+                <ScalarProperty Name="Box_DescE" ColumnName="Box_DescE" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorInvNo" ColumnName="VendorInvNo" />
+                <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+                <ScalarProperty Name="PoNo" ColumnName="PoNo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="DiscountPrcnt" ColumnName="DiscountPrcnt" />
+                <ScalarProperty Name="NetDue" ColumnName="NetDue" />
+                <ScalarProperty Name="NetAdditionCost" ColumnName="NetAdditionCost" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="PurRecType" ColumnName="PurRecType" />
+                <ScalarProperty Name="CashBoxID" ColumnName="CashBoxID" />
+                <ScalarProperty Name="NetAdditionVat" ColumnName="NetAdditionVat" />
+                <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
+                <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
+                <ScalarProperty Name="Tot_Qty" ColumnName="Tot_Qty" />
+                <ScalarProperty Name="Tot_Amount" ColumnName="Tot_Amount" />
+                <ScalarProperty Name="Tot_VAT" ColumnName="Tot_VAT" />
+                <ScalarProperty Name="Tot_Net" ColumnName="Tot_Net" />
+                <ScalarProperty Name="tot_RetQty" ColumnName="tot_RetQty" />
+                <ScalarProperty Name="Tot_Add" ColumnName="Tot_Add" />
+                <ScalarProperty Name="TotAdd" ColumnName="TotAdd" />
+                <ScalarProperty Name="TotAddVat" ColumnName="TotAddVat" />
+                <ScalarProperty Name="TotAddAfterVat" ColumnName="TotAddAfterVat" />
+                <ScalarProperty Name="Vnd_NameA" ColumnName="Vnd_NameA" />
+                <ScalarProperty Name="Vnd_NameE" ColumnName="Vnd_NameE" />
+                <ScalarProperty Name="Type_DescE" ColumnName="Type_DescE" />
+                <ScalarProperty Name="type_DescA" ColumnName="type_DescA" />
+                <ScalarProperty Name="CashPaidAmount" ColumnName="CashPaidAmount" />
+                <ScalarProperty Name="RemainAmount" ColumnName="RemainAmount" />
+                <ScalarProperty Name="RetRec_No" ColumnName="RetRec_No" />
+                <ScalarProperty Name="Tot_AmountFC" ColumnName="Tot_AmountFC" />
+                <ScalarProperty Name="CurrencyRate" ColumnName="CurrencyRate" />
+                <ScalarProperty Name="TotalFC" ColumnName="TotalFC" />
+                <ScalarProperty Name="PO_TrNo" ColumnName="PO_TrNo" />
+                <ScalarProperty Name="PO_TrDate" ColumnName="PO_TrDate" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CurDescA" ColumnName="CurDescA" />
+                <ScalarProperty Name="cur_DescE" ColumnName="cur_DescE" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="recType" ColumnName="recType" />
+                <ScalarProperty Name="ItemDiscountTotalFC" ColumnName="ItemDiscountTotalFC" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="ItemVatTotal" ColumnName="ItemVatTotal" />
+                <ScalarProperty Name="ItemDiscountTotal" ColumnName="ItemDiscountTotal" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="It_DescE" ColumnName="It_DescE" />
+                <ScalarProperty Name="it_DescA" ColumnName="it_DescA" />
+                <ScalarProperty Name="it_itemCode" ColumnName="it_itemCode" />
+                <ScalarProperty Name="ItFm_Code" ColumnName="ItFm_Code" />
+                <ScalarProperty Name="ItFm_DescA" ColumnName="ItFm_DescA" />
+                <ScalarProperty Name="ItFm_DescE" ColumnName="ItFm_DescE" />
+                <ScalarProperty Name="Cat_Code" ColumnName="Cat_Code" />
+                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
+                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
+                <ScalarProperty Name="Uom_Code" ColumnName="Uom_Code" />
+                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
+                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
+                <ScalarProperty Name="RecQty" ColumnName="RecQty" />
+                <ScalarProperty Name="RecUnitPrice" ColumnName="RecUnitPrice" />
+                <ScalarProperty Name="itm_VatPrc" ColumnName="itm_VatPrc" />
+                <ScalarProperty Name="itm_VatAmount" ColumnName="itm_VatAmount" />
+                <ScalarProperty Name="RecStockQty" ColumnName="RecStockQty" />
+                <ScalarProperty Name="NetUnitCost" ColumnName="NetUnitCost" />
+                <ScalarProperty Name="RecUnitPriceFC" ColumnName="RecUnitPriceFC" />
+                <ScalarProperty Name="StockAvailableQty" ColumnName="StockAvailableQty" />
+                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
+                <ScalarProperty Name="UnitAddCost" ColumnName="UnitAddCost" />
+                <ScalarProperty Name="TotItemCost" ColumnName="TotItemCost" />
+                <ScalarProperty Name="ReceiveRecQty" ColumnName="ReceiveRecQty" />
+                <ScalarProperty Name="StockUnitCost" ColumnName="StockUnitCost" />
+                <ScalarProperty Name="TotRetQty" ColumnName="TotRetQty" />
+                <ScalarProperty Name="OrgUnitpriceFC" ColumnName="OrgUnitpriceFC" />
+                <ScalarProperty Name="itm_discountPrc" ColumnName="itm_discountPrc" />
+                <ScalarProperty Name="itm_discAmount" ColumnName="itm_discAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Rpt_PurReceiveList" FunctionName="InvModel.Store.IProc_Rpt_PurReceiveList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_PurReceiveList_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_CashTypeDSA" ColumnName="Par_CashTypeDSA" />
+                <ScalarProperty Name="Par_CashTypeDSE" ColumnName="Par_CashTypeDSE" />
+                <ScalarProperty Name="Par_VNDDSA" ColumnName="Par_VNDDSA" />
+                <ScalarProperty Name="Par_VNDDSE" ColumnName="Par_VNDDSE" />
+                <ScalarProperty Name="Par_SalesmanDSA" ColumnName="Par_SalesmanDSA" />
+                <ScalarProperty Name="Par_SalesmanDSE" ColumnName="Par_SalesmanDSE" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="IsCash" ColumnName="IsCash" />
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
+                <ScalarProperty Name="SalesmanId" ColumnName="SalesmanId" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
+                <ScalarProperty Name="VATType" ColumnName="VATType" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="Slsm_Code" ColumnName="Slsm_Code" />
+                <ScalarProperty Name="Slsm_DescA" ColumnName="Slsm_DescA" />
+                <ScalarProperty Name="Slsm_DescE" ColumnName="Slsm_DescE" />
+                <ScalarProperty Name="Box_DescA" ColumnName="Box_DescA" />
+                <ScalarProperty Name="Box_DescE" ColumnName="Box_DescE" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="VendorInvNo" ColumnName="VendorInvNo" />
+                <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+                <ScalarProperty Name="PoNo" ColumnName="PoNo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="DiscountPrcnt" ColumnName="DiscountPrcnt" />
+                <ScalarProperty Name="NetDue" ColumnName="NetDue" />
+                <ScalarProperty Name="NetAdditionCost" ColumnName="NetAdditionCost" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="PurRecType" ColumnName="PurRecType" />
+                <ScalarProperty Name="CashBoxID" ColumnName="CashBoxID" />
+                <ScalarProperty Name="NetAdditionVat" ColumnName="NetAdditionVat" />
+                <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
+                <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
+                <ScalarProperty Name="Tot_Qty" ColumnName="Tot_Qty" />
+                <ScalarProperty Name="Tot_Amount" ColumnName="Tot_Amount" />
+                <ScalarProperty Name="Tot_VAT" ColumnName="Tot_VAT" />
+                <ScalarProperty Name="Tot_Net" ColumnName="Tot_Net" />
+                <ScalarProperty Name="tot_RetQty" ColumnName="tot_RetQty" />
+                <ScalarProperty Name="Tot_Add" ColumnName="Tot_Add" />
+                <ScalarProperty Name="TotAdd" ColumnName="TotAdd" />
+                <ScalarProperty Name="TotAddVat" ColumnName="TotAddVat" />
+                <ScalarProperty Name="TotAddAfterVat" ColumnName="TotAddAfterVat" />
+                <ScalarProperty Name="Vnd_NameA" ColumnName="Vnd_NameA" />
+                <ScalarProperty Name="Vnd_NameE" ColumnName="Vnd_NameE" />
+                <ScalarProperty Name="Type_DescE" ColumnName="Type_DescE" />
+                <ScalarProperty Name="type_DescA" ColumnName="type_DescA" />
+                <ScalarProperty Name="CashPaidAmount" ColumnName="CashPaidAmount" />
+                <ScalarProperty Name="RemainAmount" ColumnName="RemainAmount" />
+                <ScalarProperty Name="RetRec_No" ColumnName="RetRec_No" />
+                <ScalarProperty Name="ItemTotalFC" ColumnName="ItemTotalFC" />
+                <ScalarProperty Name="ItemDiscountTotalFC" ColumnName="ItemDiscountTotalFC" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="ItemVatTotal" ColumnName="ItemVatTotal" />
+                <ScalarProperty Name="ItemDiscountTotal" ColumnName="ItemDiscountTotal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

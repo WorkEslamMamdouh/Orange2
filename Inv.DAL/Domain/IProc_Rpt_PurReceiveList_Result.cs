@@ -85,5 +85,10 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> CashPaidAmount { get; set; }
         public Nullable<decimal> RemainAmount { get; set; }
         public Nullable<int> RetRec_No { get; set; }
+        public Nullable<decimal> ItemTotalFC { get; set; }
+        public Nullable<decimal> ItemDiscountTotalFC { get; set; }
+        public Nullable<decimal> ItemTotal { get; set; }
+        public Nullable<decimal> ItemVatTotal { get; set; }
+        public Nullable<decimal> ItemDiscountTotal { get; set; }
     }
 }

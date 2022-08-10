@@ -27,7 +27,7 @@ namespace AVATCONTROL {
     var btnAccountSearch_CR: HTMLButtonElement;
     var btnAccountSearch_Acc: HTMLButtonElement;
     var btnSave: HTMLButtonElement;
-    var btnEdit: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
 
     var btnSls_DISC_ACC_CODE: HTMLButtonElement;
@@ -48,6 +48,8 @@ namespace AVATCONTROL {
             document.getElementById('Screen_name').innerHTML = "Vat Control Setting";
             Period = [{ id: 1, value: 'Every Month' }, { id: 2, value: 'Every 3 Month' }];
         }
+        $("#divIconbar").addClass("d-none");
+        $("#btnPrintTransaction").addClass("d-none");
 
         InitializeControls();
         InitializeEvents();
@@ -58,7 +60,7 @@ namespace AVATCONTROL {
         LoadControlSetting();
         Load_VatPeriod();
         //Button_privialges();
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         chkSetting.disabled = true;
     }
 
@@ -73,7 +75,7 @@ namespace AVATCONTROL {
         txtVAT_DB_ACC = document.getElementById("txtVAT_DB_ACC") as HTMLInputElement;
         txtVAT_CR_ACC = document.getElementById("txtVAT_CR_ACC") as HTMLInputElement;
         txtVAT_ACCURUAL_ACC = document.getElementById("txtVAT_ACCURUAL_ACC") as HTMLInputElement;
-        btnEdit = document.getElementById("btnEdit") as HTMLButtonElement;
+        btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnAccountSearch_DB = document.getElementById("btnAccountSearch_DB") as HTMLButtonElement;
@@ -90,7 +92,7 @@ namespace AVATCONTROL {
     }
 
     function InitializeEvents() {
-        btnEdit.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnEdit_onclick;
         btnSave.onclick = btnSave_onclick;
         btnBack.onclick = btnBack_onclick;
         chkSetting.onchange = AllowSetting;
@@ -489,7 +491,7 @@ namespace AVATCONTROL {
         btnAccountSearch_Acc.disabled = false;
         txtVAT_PREVBAL.disabled = false;
 
-        $("#btnEdit").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
 
@@ -502,7 +504,7 @@ namespace AVATCONTROL {
     }
 
     function btnBack_onclick() {
-        $("#btnEdit").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
         txtVAT_PREVBAL.disabled = true;
@@ -582,7 +584,7 @@ namespace AVATCONTROL {
     }
 
     function Button_privialges() {
-        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+        btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
     }
 
 }

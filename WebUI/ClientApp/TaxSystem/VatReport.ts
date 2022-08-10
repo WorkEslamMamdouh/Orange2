@@ -62,8 +62,10 @@ namespace VATReport {
         btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
         btnClose.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
         btnReopen.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-        $('#btnPrint').addClass('display_none');   
-
+        $('#btnPrint').addClass('display_none');
+        $("#btnShow").addClass("d-none");
+        $("#btnAdd").addClass("d-none");
+    
     }
     function InitializeControls() {
         drpVatPeriod = document.getElementById("drpVatPeriod") as HTMLSelectElement;
@@ -149,7 +151,7 @@ namespace VATReport {
      
 
     }
-    
+
      function InitializePurGrid() {
 
          let res: any = GetResourceList("");
@@ -191,6 +193,7 @@ namespace VATReport {
                     let SlsPeriodDet = VatPeriodDetail.filter(x => x.TYPE == 1).sort(function (a, b) {return a.LineOrder - b.LineOrder;} )  ;
                     SalesGrid.DataSource = SlsPeriodDet;
                     SalesGrid.Bind();
+
                     let AmountValueSum:number = 0;
                     let AmountUpdtSum = 0;
                     let AmountVatSum = 0;

@@ -55,5 +55,10 @@ namespace Inv.DAL.Domain
         public Nullable<int> CurrencyID { get; set; }
         public Nullable<decimal> CurrencyRate { get; set; }
         public Nullable<decimal> TotalFC { get; set; }
+        public Nullable<decimal> ItemTotalFC { get; set; }
+        public Nullable<decimal> ItemDiscountTotalFC { get; set; }
+        public Nullable<decimal> ItemTotal { get; set; }
+        public Nullable<decimal> ItemDiscountTotal { get; set; }
+        public Nullable<decimal> ItemVatTotal { get; set; }
     }
 }
