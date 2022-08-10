@@ -3025,6 +3025,11 @@ var IQ_GetPurReceiveStaistic = /** @class */ (function (_super) {
         _this.TotalFC = 0;
         _this.CurrencyRate = 0;
         _this.Tot_AmountFC = 0;
+        _this.ItemTotalFC = 0;
+        _this.ItemDiscountTotalFC = 0;
+        _this.ItemTotal = 0;
+        _this.ItemVatTotal = 0;
+        _this.ItemDiscountTotal = 0;
         return _this;
     }
     return IQ_GetPurReceiveStaistic;
