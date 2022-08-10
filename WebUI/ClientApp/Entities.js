@@ -3070,6 +3070,9 @@ var IQ_GetPurReceiveItem = /** @class */ (function (_super) {
         _this.ItemFamilyID = 0;
         _this.ReceiveRecQty = 0;
         _this.RecUnitPriceFC = 0;
+        _this.DiscountAmount = 0;
+        _this.DiscountPrc = 0;
+        _this.OrgUnitpriceFC = 0;
         return _this;
     }
     return IQ_GetPurReceiveItem;
@@ -3188,6 +3191,11 @@ var I_Pur_TR_Receive = /** @class */ (function (_super) {
         _this.CurrencyID = 0;
         _this.CurrencyRate = 0;
         _this.TotalFC = 0;
+        _this.ItemTotalFC = 0;
+        _this.ItemDiscountTotalFC = 0;
+        _this.ItemTotal = 0;
+        _this.ItemDiscountTotal = 0;
+        _this.ItemVatTotal = 0;
         return _this;
     }
     return I_Pur_TR_Receive;
@@ -3280,6 +3288,9 @@ var I_Pur_TR_ReceiveItems = /** @class */ (function (_super) {
         _this.TotRetQty = 0;
         _this.UnitAddCost = 0;
         _this.RecUnitPriceFC = 0;
+        _this.OrgUnitpriceFC = 0;
+        _this.DiscountPrc = 0;
+        _this.DiscountAmount = 0;
         _this.StatusFlag = "";
         return _this;
     }
