@@ -56,8 +56,8 @@
             <button class="icon-bar d-flex justify-content-between  btnUpdate_Def position-fixed" id="btnUpdate_Def">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_Update</span>
-            </button> 
-            <button class="icon-bar d-flex justify-content-between btnSave_Def display_none position-fixed"  id="btnSave_Def">
+            </button>
+            <button class="icon-bar d-flex justify-content-between btnSave_Def display_none position-fixed" id="btnSave_Def">
                 <i class="fas fa-save fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_save</span>
             </button>
@@ -193,8 +193,8 @@
                                         <i class="fas fa-sign-out-alt text-light-blue"></i>
                                     </div>
                                 </div>
-                                <div class="preview-item-content"  id="btn_loguotuser">
-                                    <p class="preview-subject ellipsis mb-1 text-small" ></p>
+                                <div class="preview-item-content" id="btn_loguotuser">
+                                    <p class="preview-subject ellipsis mb-1 text-small"></p>
                                 </div>
                             </a>
                         </div>
@@ -216,8 +216,8 @@
                                 @*<a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
                             @*<li style="display:none" id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
-                           <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
-                    </li>*@
+                                       <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
+                                </li>*@
                             <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item d-flex justify-content-between mb-1">
                                 <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
                                 @*   <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
@@ -750,22 +750,15 @@
         </div>
     </div>
 
-
+    <!-- Search Box Modal-->
     <div id="SearchBox" class="modal fade search-box">
         <div class="search-content">
-            <input type="button" onclick="$('#SearchBox').modal('hide');" class="close close-search-box" data-dismiss="modal" aria-label="Close" id="btnCloseSearch" name="name" value="x" />
+            <input type="button" onclick="$('#SearchBox').removeClass('show');" class="close close-search-box" data-dismiss="modal" aria-label="Close" id="btnCloseSearch" name="name" value="x" />
             <h4 id="searchTitle" class="col-xs-3 search-title"></h4>
         </div>
         <div class="table-serach-container">
-            <div id="tableDiv" class="table table-bordered table-hover" style="width:100%;"></div>
+            <div id="tableDiv" class="table table-bordered table-hover w-100"></div>
         </div>
-      
-        @*<div class="table-responsive">
-                <table  id="tableDiv" class="table table-borderless ">
-
-                </table>
-           
-        </div>*@
     </div>
 
     <div class="modal fade" id="ModalRep" tabindex="-1" role="dialog" aria-labelledby="ModalRep" aria-hidden="true">
@@ -801,11 +794,11 @@
 
 
 
-   @* <div class="modal-dialog" role="document">*@
+    @* <div class="modal-dialog" role="document">*@
 
-        <div id="Loading_Div" style="position: fixed;top: 75%;left: 40%;">
+    <div id="Loading_Div" style="position: fixed;top: 75%;left: 40%;">
 
-        </div>
+    </div>
 
     @*</div>*@
 
@@ -874,7 +867,7 @@
             $('#btnPrintTransaction').addClass('display_none');
 
             setTimeout(function () { document.body.scrollTop = 600; document.documentElement.scrollTop = 600; }, 300);
-             
+
         });
 
         $("#btnBack").click(function () {
@@ -928,17 +921,17 @@
 
 
 
-        $("#btnUpdate_Def").click(function () { 
+        $("#btnUpdate_Def").click(function () {
             $('#btnUpdate_Def').addClass('display_none');
             $('#btnBack_Def').removeClass('display_none');
-            $('#btnSave_Def').removeClass('display_none'); 
-        }); 
-        $("#btnBack_Def").click(function () { 
+            $('#btnSave_Def').removeClass('display_none');
+        });
+        $("#btnBack_Def").click(function () {
             $('#btnUpdate_Def').removeClass('display_none');
             $('#btnBack_Def').addClass('display_none');
             $('#btnSave_Def').addClass('display_none');
         });
-         
+
         $("#btnSave_Def").click(function () {
             $("#Mod_Flag").val(0);
         });
