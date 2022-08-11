@@ -114,6 +114,7 @@ var Keys = {
 };
 
 function IsNullOrEmpty(value: string): boolean {
+   
     if (value == null || value == "")
         return true;
     else
@@ -209,6 +210,12 @@ interface Number {
     RoundToSt: (dec: number) => string;
 }
 
+interface HTMLInputElement {
+
+    setVal: (dec: any) => string;      
+
+}
+
 interface IIgGridColumn {
     key?: string;
     dataType?: string;
@@ -270,6 +277,13 @@ namespace App {
     Number.prototype.RoundToSt = function (dec: number): string {
         let num = this;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    };
+
+    HTMLInputElement.prototype.setVal = function (value: any): any {
+        debugger
+        let Input = this;
+        Input.value == null || Input.value.trim() == '' ? Input.value = '' : Input.value = value; 
+        return value;
     };
 
 

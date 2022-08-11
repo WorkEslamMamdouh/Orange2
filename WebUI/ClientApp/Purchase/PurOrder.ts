@@ -337,9 +337,10 @@ namespace PurOrder {
         txtDliveryConditions.value = RetrivedPurOrderModel.DliveryConditions.toString();
         txtShipmentConditions.value = RetrivedPurOrderModel.ShipmentConditions.toString();
 
-        txtTotal.value = RetrivedPurOrderModel.Total.toString();
-        txtVatTotal.value = RetrivedPurOrderModel.VatAmount.toString();
-        txtNetTotal.value = RetrivedPurOrderModel.NetDue.toString();
+        txtTotal.setVal(RetrivedPurOrderModel.Total);
+        txtVatTotal.setVal(RetrivedPurOrderModel.VatAmount)
+        txtNetTotal.setVal(RetrivedPurOrderModel.NetDue)
+
         if (RetrivedPurOrderModel.CurrencyID != null)
             ddlCurrency.value = RetrivedPurOrderModel.CurrencyID.toString();
         if (RetrivedPurOrderModel.IsCash == true) { ddlIsCash.value = '1'; }
