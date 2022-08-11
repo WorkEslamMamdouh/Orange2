@@ -472,12 +472,10 @@ var PurTrReceive;
         txtTax.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].VatAmount.toString()) == true ? "0" : RetrivedPurchaseModel[0].VatAmount.toString());
         txtAddonsTax.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].NetAdditionVat.toString()) == true ? "0" : RetrivedPurchaseModel[0].NetAdditionVat.toString());
         txtTotalFamily.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].NetDue.toString()) == true ? "0" : RetrivedPurchaseModel[0].NetDue.toString());
-        txtTotalbefore.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].ItemTotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].ItemTotalFC.toString());
-        txtTotalDiscount.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].ItemDiscountTotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].ItemDiscountTotalFC.toString());
+        txtTotalbefore.setVal(RetrivedPurchaseModel[0].ItemTotalFC);
+        txtTotalDiscount.setVal(RetrivedPurchaseModel[0].ItemDiscountTotalFC);
         $("#txtLocalTotalFooter").val(IsNullOrEmpty(RetrivedPurchaseModel[0].TotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].TotalFC.toString());
-        var v = RetrivedPurchaseModel[0].TotAddAfterVat;
-        if (v != null)
-            txtTotalAddons.value = (IsNullOrEmpty(RetrivedPurchaseModel[0].TotAddAfterVat.toString()) == true ? "0" : RetrivedPurchaseModel[0].TotAddAfterVat.toString());
+        txtTotalAddons.setVal(RetrivedPurchaseModel[0].TotAddAfterVat);
         var FullAllPriceWithoutTaxval = Number(txtTotal.value) + Number(txtAddons.value);
         $("#txtTotalPurchaseWithoutTax").val(FullAllPriceWithoutTaxval.RoundToSt(2));
         var FullAllTaxval = Number(txtTax.value) + Number(txtAddonsTax.value);

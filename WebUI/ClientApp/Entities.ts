@@ -4053,17 +4053,26 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
         this.Cus_NameE = "";
         this.Box_DescA = "";
         this.Box_DescE = "";
-        this.Line_Count = 0;
-        this.Item_Count = 0;
-        this.Tot_Qty = 0;
-        this.Tot_Amount = 0;
-        this.Tot_VAT = 0;
-        this.Tot_Net = 0;
-        this.tot_RetQty = 0;
-        this.returnTypeDesciption = "";
-        this.statusDesciption = "";
-        this.IsCashDesciption = "";
-        this.operationName = "";
+        this.DocNo = "";
+        this.DocUUID = "";
+        this.TrTime = "";
+        this.InvoiceTypeCode = 0;
+        this.InvoiceTransCode = 0;
+        this.TaxNotes = "";
+        this.TaxCurrencyID = 0;
+        this.InvoiceCurrenyID = 0;
+        this.ContractNo = "";
+        this.PurchaseorderNo = "";
+        this.GlobalInvoiceCounter = 0;
+        this.PrevInvoiceHash
+        this.QRCode
+        this.CryptographicStamp
+        this.DeliveryDate = "";
+        this.DeliveryEndDate = "";
+        this.PaymentMeansTypeCode = 0;
+        this.CRDBReasoncode = 0;
+        this.PaymentTerms = "";
+        this.PaymentTermsID = 0;
         this.AllowAmount = 0;
         this.AllowPrc = 0;
         this.AllowBase = 0;
@@ -4079,21 +4088,26 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
         this.ChargeVatPrc = 0;
         this.ChargeAfterVat = 0;
         this.ChargeReason = "";
-        this.ContractNo = "";
-        this.PurchaseorderNo = "";
-        this.DeliveryDate = "";
-        this.DeliveryEndDate = "";
-        this.TaxNotes = "";
         this.ChargeCode = 0;
-        this.InvoiceTypeCode = 0;
-        this.InvoiceTransCode = 0;
+        this.ItemTotal = 0;
+        this.ItemAllowTotal = 0;
+        this.ItemDiscountTotal = 0;
+        this.ItemVatTotal = 0;
+        this.RoundingAmount = 0;
+        this.Line_Count = 0;
+        this.Item_Count = 0;
+        this.Tot_Qty = 0;
+        this.Tot_Amount = 0;
+        this.Tot_VAT = 0;
+        this.Tot_Net = 0;
+        this.tot_RetQty = 0;
         this.SalesPersonId = 0;
-        this.DocNo = "";
-        this.TrTime = "";
-        this.DocUUID = "";
-
-
-
+        this.Sper_code = "";
+        this.SPer_NameA = "";
+        this.Sper_nameE = "";
+        this.returnTypeDesciption = "";
+        this.statusDesciption = "";
+        this.IsCashDesciption = "";
     }
     public InvoiceID: number;
     public TrNo: number;
@@ -4144,17 +4158,26 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
     public Cus_NameE: string;
     public Box_DescA: string;
     public Box_DescE: string;
-    public Line_Count: number;
-    public Item_Count: number;
-    public Tot_Qty: number;
-    public Tot_Amount: number;
-    public Tot_VAT: number;
-    public Tot_Net: number;
-    public tot_RetQty: number;
-    public returnTypeDesciption: string;
-    public statusDesciption: string;
-    public IsCashDesciption: string;
-    public operationName: string;
+    public DocNo: string;
+    public DocUUID: string;
+    public TrTime: string;
+    public InvoiceTypeCode: number;
+    public InvoiceTransCode: number;
+    public TaxNotes: string;
+    public TaxCurrencyID: number;
+    public InvoiceCurrenyID: number;
+    public ContractNo: string;
+    public PurchaseorderNo: string;
+    public GlobalInvoiceCounter: number;
+    public PrevInvoiceHash: any;
+    public QRCode: any;
+    public CryptographicStamp: any;
+    public DeliveryDate: string;
+    public DeliveryEndDate: string;
+    public PaymentMeansTypeCode: number;
+    public CRDBReasoncode: number;
+    public PaymentTerms: string;
+    public PaymentTermsID: number;
     public AllowAmount: number;
     public AllowPrc: number;
     public AllowBase: number;
@@ -4170,20 +4193,29 @@ class IQ_GetSlsInvoiceStatistic extends SecurityClass {
     public ChargeVatPrc: number;
     public ChargeAfterVat: number;
     public ChargeReason: string;
-    public ContractNo: string;
-    public PurchaseorderNo: string;
-    public DeliveryDate: string;
-    public DeliveryEndDate: string;
-    public TaxNotes: string;
     public ChargeCode: number;
-    public InvoiceTypeCode: number;
-    public InvoiceTransCode: number;
+    public ItemTotal: number;
+    public ItemAllowTotal: number;
+    public ItemDiscountTotal: number;
+    public ItemVatTotal: number;
+    public RoundingAmount: number;
+    public Line_Count: number;
+    public Item_Count: number;
+    public Tot_Qty: number;
+    public Tot_Amount: number;
+    public Tot_VAT: number;
+    public Tot_Net: number;
+    public tot_RetQty: number;
     public SalesPersonId: number;
-    public DocNo: string;
-    public TrTime: string;
-    public DocUUID: string;
-
+    public Sper_code: string;
+    public SPer_NameA: string;
+    public Sper_nameE: string;
+    public statusDesciption: string;
+    public returnTypeDesciption: string;
+    public IsCashDesciption: string;
 }
+
+
 
 class IQ_GetSlsInvoiceItem extends SecurityClass {
     constructor() {
