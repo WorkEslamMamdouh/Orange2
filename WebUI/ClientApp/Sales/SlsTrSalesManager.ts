@@ -3262,20 +3262,13 @@ namespace SlsTrSalesManager {
     }
     function insert() {
         InvoiceModel.InvoiceID = 0;
-
-
-
-
-
+         
         if (!CheckDate(DateFormat(txtInvoiceDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
 
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             return
         }
-
-
-
-        console.log(MasterDetailsModel);
+         
 
         Ajax.Callsync({
             type: "POST",
