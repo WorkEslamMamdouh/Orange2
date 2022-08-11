@@ -3050,6 +3050,7 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
+               
 
                 ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
