@@ -92,9 +92,9 @@ namespace SlsTrShowPrice {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
+   // var btnPrintTransaction: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-    //var btnPrintInvoicePrice: HTMLButtonElement;
-    var btnPrintslip: HTMLButtonElement;
+   // var btnPrintslip: HTMLButtonElement;
 
 
     // giedView
@@ -211,10 +211,10 @@ namespace SlsTrShowPrice {
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
-        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
+      //  btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+      //  btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
         //////debugger
-        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
 
     }
     function InitializeEvents() {
@@ -236,10 +236,10 @@ namespace SlsTrShowPrice {
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
     //    btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintTransaction.onclick = PrintTransaction;
-        btnPrintslip.onclick = btnPrintslip_onclick;
+     //   btnPrintTransaction.onclick = PrintTransaction;
+     //   btnPrintslip.onclick = btnPrintslip_onclick;
         //////debugger
-        //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
+        btnPrintTransaction.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     function Check_on_user_type() {
@@ -437,7 +437,7 @@ namespace SlsTrShowPrice {
                 }
 
                 IsSuccess = false;
-                //$("#btnPrintInvoicePrice").removeClass("display_none");   
+                $("#btnPrintTransaction").removeClass("display_none");   
             }
             }
 
@@ -481,10 +481,10 @@ namespace SlsTrShowPrice {
             $("#chkActive").attr("disabled", "disabled");
             $("#txtCommission").attr("disabled", "disabled");
 
-            //$("#btnPrintInvoicePrice").removeClass("display_none");      
+            $("#btnPrintTransaction").removeClass("display_none");      
 
             $("#btnUpdate").removeClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
+           // $("#btnPrintTransaction").removeClass("display_none");
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
 
@@ -501,10 +501,10 @@ namespace SlsTrShowPrice {
             $("#chkActive").attr("disabled", "disabled");
             $("#txtCommission").attr("disabled", "disabled");
 
-            //$("#btnPrintInvoicePrice").removeClass("display_none");    
+            $("#btnPrintTransaction").removeClass("display_none");    
 
             $("#btnUpdate").removeClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
+          //  $("#btnPrintTransaction").removeClass("display_none");
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
 
@@ -656,8 +656,8 @@ namespace SlsTrShowPrice {
 
         $("#btnAddDetails").removeClass("display_none");
         $("#btnUpdate").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
-        //$("#btnPrintInvoicePrice").addClass("display_none");
+     //   $("#btnPrintTransaction").addClass("display_none");
+       $("#btnPrintTransaction").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -699,8 +699,8 @@ namespace SlsTrShowPrice {
         $("#divIconbar").addClass("disabledIconbar");
         Show = false;
         $("#btnUpdate").addClass("display_none");
+       // $("#btnPrintTransaction").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
-        //$("#btnPrintInvoicePrice").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -853,7 +853,7 @@ namespace SlsTrShowPrice {
         //debugger
         Show = true;//   //////debugger;
         $("#btnUpdate").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+       // $("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
@@ -2005,7 +2005,7 @@ namespace SlsTrShowPrice {
         $("#divIconbar").removeClass("disabledIconbar");
         Show = true;
         $("#btnUpdate").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        //$("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
@@ -2150,7 +2150,7 @@ namespace SlsTrShowPrice {
 
         Show = true;//    
         $("#btnUpdate").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+       // $("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
@@ -2772,43 +2772,43 @@ namespace SlsTrShowPrice {
             localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
              window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
-    //function btnPrintInvoicePrice_onclick() {
-    //    //////debugger
-    //    if (!SysSession.CurrentPrivileges.PrintOut) return;
+    function btnPrintInvoicePrice_onclick() {
+        //////debugger
+        if (!SysSession.CurrentPrivileges.PrintOut) return;
 
-    //    let rp: ReportParameters = new ReportParameters();
+        let rp: ReportParameters = new ReportParameters();
         
-    //    rp.Type = 0;
-    //    rp.FromDate = DateFormatRep(txtStartDate.value);
-    //    rp.ToDate = DateFormatRep(txtEndDate.value);
+        rp.Type = 0;
+        rp.FromDate = DateFormatRep(txtStartDate.value);
+        rp.ToDate = DateFormatRep(txtEndDate.value);
          
       
-    //    if (ddlSalesmanFilter.selectedIndex > 0)
+        if (ddlSalesmanFilter.selectedIndex > 0)
 
-    //        rp.SalesmanID = Number($("#ddlSalesmanFilter").val());
-    //    else
-    //        rp.SalesmanID = -1;
+            rp.SalesmanID = Number($("#ddlSalesmanFilter").val());
+        else
+            rp.SalesmanID = -1;
 
-    //    if ($("#ddlCustomer").val() == "null")
-    //        rp.CustomerID = -1;
-    //    else
-    //        rp.CustomerID = Number($("#ddlCustomer").val());
+        if ($("#ddlCustomer").val() == "null")
+            rp.CustomerID = -1;
+        else
+            rp.CustomerID = Number($("#ddlCustomer").val());
 
 
-    //    rp.CashType = Number($("#ddlInvoiceType").val());
-    //    rp.Status = Number($("#ddlStateType").val());
+        rp.CashType = Number($("#ddlInvoiceType").val());
+        rp.Status = Number($("#ddlStateType").val());
        
-    //    rp.TrType = TrType;
+        rp.TrType = TrType;
          
-    //    rp.Typ = 1;
-    //    rp.TRId = GlobalinvoiceID;
+        rp.Typ = 1;
+        rp.TRId = GlobalinvoiceID;
         
-    //        rp.Name_function = "rptInvoiceNote";
-    //        localStorage.setItem("Report_Data", JSON.stringify(rp));
+            rp.Name_function = "rptInvoiceNote";
+            localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-    //        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-    //         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
-    //}
+            localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+             window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+    }
     function btnPrintslip_onclick() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
 

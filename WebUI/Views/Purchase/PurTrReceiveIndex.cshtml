@@ -7,7 +7,6 @@
 <style>
     .btnCustLastPrice {
         direction: ltr !important;
-        /*bottom: 443px !important;*/
         left: 97% !important;
         right: -97%;
         border-radius: 72px 0px 0px 71px !important;
@@ -19,6 +18,9 @@
     }
     .areatable {
         width: 90px;
+    }
+    #divMasterGrid {
+        width: 100% !important
     }
 	
 </style>
@@ -388,34 +390,34 @@
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtFamilyType">
+                                        <input type="text" disabled class="form-control" name="" value="0" id="txtFamilyType">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabled="disabled" class="form-control input-sm" name="" value="0" id="txtItemsNumber">
+                                        <input type="text" disabled class="form-control" name="" value="0" id="txtItemsNumber">
                                     </div>
                                 </div>
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabled="disabled" class="form-control input-sm" name="ItemTotalFC" value="0" id="txtTotalbefore">
+                                        <input type="text" disabled class="form-control" name="ItemTotalFC" value="0" id="txtTotalbefore">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">الخصم</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabled="disabled" class="form-control input-sm" name="ItemDiscountTotalFC" value="0" id="txtTotalDiscount">
+                                        <input type="text" disabledclass="form-control" name="ItemDiscountTotalFC" value="0" id="txtTotalDiscount">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.ForignTotal</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabled="disabled" class="form-control input-sm" name="TotalFC" value="0" id="txtLocalTotalFooter">
+                                        <input type="text" disabled class="form-control" name="TotalFC" value="0" id="txtLocalTotalFooter">
                                     </div>
                                 </div>
                             </div>
@@ -532,8 +534,3 @@
     </script>
 }
 
-<style>
-    #divMasterGrid {
-        width: 100% !important
-    }
-</style>

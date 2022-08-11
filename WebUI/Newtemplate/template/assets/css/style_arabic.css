@@ -11421,12 +11421,9 @@ progress {
     border-radius: 2px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .form-control, .asColorPicker-input, .dataTables_wrapper select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
-    .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead,
-    .tt-query,
-    .tt-hint {
+    
+    @media (prefers-reduced-motion: reduce) {
+        .form-control, .asColorPicker-input, .dataTables_wrapper select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text], .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
         transition: none;
     }
 }
@@ -15503,7 +15500,9 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     overflow-y: auto;
     outline: 0;
 }
-
+.modal-open {
+    padding-right: 0 !important;
+}
 .modal-dialog {
     position: relative;
     width: auto;
@@ -15541,6 +15540,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 
     .modal-dialog-scrollable .modal-body {
         overflow-y: auto;
+     
     }
 
 .modal-dialog-centered {
@@ -15590,6 +15590,8 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     padding: 0.9375rem;
     background-color: var(--bs-white);
     color: var(--main-blue);
+    max-height: 200px;
+    overflow: auto;
 }
 
 .modal-footer {
@@ -23705,7 +23707,6 @@ code {
     font-weight: normal;
     font-size: 1rem;
     padding: 0.25rem 0.25rem;
-    /*background-color: transparent;*/
     background-color: #a7d3fd;
     border-radius: 5px;
     color: var(--dark-blue);
@@ -24990,21 +24991,26 @@ div.tagsinput {
 
 
 .style_ButSearch {
-    border-radius: 25px 25px 25px 25px;
-    height: 33px;
-    width: 34px;
-    background-color: orange;
-    color: whitesmoke;
+    border-radius: 50%;
+    min-height: 35px;
+    min-width: 35px;
+    background-color: var(--main-orange);
+    color: var(--bs-white);
     font-weight: bold;
     box-shadow: black;
     box-shadow: 3px 3px #888888;
+    border: none;
 }
-
-.text_Mandatory {
-    background-color: #f39c9c !important;
-}
- 
-
+    .style_ButSearch:hover:not(:disabled) {
+        background-color: var(--main-blue);
+    }
+    .style_ButSearch:disabled {
+        background-color: var(--bs-gray-500);
+        box-shadow: none;
+    }
+    .text_Mandatory {
+        background-color: #f39c9c !important;
+    }
 /* Tables */
 .table, .jsgrid .jsgrid-table {
     margin-bottom: 0;
@@ -29170,8 +29176,8 @@ div.tagsinput {
 .inside-table .value-button {
     display: inline-block;
     border: none;
-    margin: -2px 17px 0 17px;
-    width: 19px;
+    margin: -2px 13px 0 13px;
+    width: 20px;
     height: 40px;
     text-align: center;
     vertical-align: middle;
@@ -29193,13 +29199,13 @@ div.tagsinput {
 }
 
     .inside-table .decrease-button {
-        margin-right: -67px;
+        margin-right: -66px;
         border-radius: 0 8px 8px 0;
         background-color: darkred;
     }
 
     .inside-table .increase-button {
-        margin-left: -4px;
+        margin-left: -11px;
         border-radius: 8px 0 0 8px;
         background-color: forestgreen;
     }
@@ -29420,6 +29426,7 @@ input[class=checkbox]:checked:before {
 }
 .jsgrid .jsgrid-table td {
     padding: .5em;
+    white-space:pre-wrap;
 }
 .jsgrid .jsgrid-pager-container {
     direction: ltr;
@@ -29439,6 +29446,7 @@ input[class=checkbox]:checked:before {
     color: var(--bs-white);
     border: none;
     padding:.5rem;
+    line-height:3rem;
 }
 .hidden_Control {
     display: none !important;
@@ -29520,6 +29528,10 @@ input[class=checkbox]:checked:before {
     -webkit-box-shadow: black 5px 4px 18px 0px;
     box-shadow: black 5px 4px 18px 0px;
 }
+    .search-box:not(.show) {
+        position: static;
+        display: none;
+    }
     .search-box .search-content {
         background-color: var(--main-blue);
         position: absolute;
@@ -29638,6 +29650,14 @@ input[class=checkbox]:checked:before {
     border: .5px solid var(--main-orange);
     border-radius: 5px;
     padding-right: 10px;
+    padding: 10px 10px 10px 0;
+    height:100%;
+}
+/*.form-control.text-wrap {*/
+.form-control {
+    white-space: pre-wrap;
+    height: fit-content;
+    min-height: calc(2.25rem + 2px);
 }
 .special-radio {
     height: 2rem;
@@ -29998,6 +30018,6 @@ input[class=checkbox]:checked:before {
         border-bottom:1px solid var(--bs-gray-200);
     }
 /*End Right Side Icon Price List*/
-.fade.in {
+/*.fade.in {
     opacity: 1;
-}
+}*/
