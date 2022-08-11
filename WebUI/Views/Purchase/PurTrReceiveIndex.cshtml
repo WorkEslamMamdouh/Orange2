@@ -4,27 +4,6 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
  
-<style>
-    .btnCustLastPrice {
-        direction: ltr !important;
-        left: 97% !important;
-        right: -97%;
-        border-radius: 72px 0px 0px 71px !important;
-        height: 53px !important;
-        padding-top: 5px !important;
-        padding-right: 0px !important;
-        width: 100%;
-        top: 28.1rem !important;
-    }
-    .areatable {
-        width: 90px;
-    }
-    #divMasterGrid {
-        width: 100% !important
-    }
-	
-</style>
-
 <div class="row gy-3">
     <!-- Filter Container -->
     <div id="DivFilter" class="col-12">
@@ -34,8 +13,8 @@
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlVendorMaster" class="form-control"></select>
                                 </div>
                             </div>
@@ -43,8 +22,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
                                 </div>
                             </div>
@@ -52,8 +31,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
                                 </div>
                             </div>
@@ -61,8 +40,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Men_AccDefSalesmen</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Men_AccDefSalesmen</label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlSalesmanMaster" class="form-control"></select>
                                 </div>
                             </div>
@@ -70,8 +49,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_State</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_State</label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlStateType" class="form-control"></select>
                                 </div>
                             </div>
@@ -107,8 +86,8 @@
                     <div class="row g-0" id="MasterDropDowns">
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum   </label>
-                                <div class="col-8">
+                                <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum   </label>
+                                <div class="col-9 col-md-8">
                                     <label disabled type="text" class="form-control" id="lblInvoiceNumber"></label>
                                 </div>
                             </div>
@@ -116,8 +95,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Men_PurOrder</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Men_PurOrder</label>
+                                <div class="col-9 col-md-8 p-0">
                                     <div class="search-content">
                                         <input disabled type="number" class="form-control search-control" id="txtPurOrderNum">
                                         <button type="button" name="InvoiceSearch" id="btnPurOrderSearch" class="btn btn-main btn-search">
@@ -139,8 +118,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
-                                <div class="col-8">
+                                <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
+                                <div class="col-9 col-md-8">
                                     <input disabled type="date" class="form-control" id="txtDateHeader">
                                 </div>
                             </div>
@@ -148,8 +127,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Recieve_type</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.Recieve_type</label>
+                                <div class="col-9 col-md-8 ">
                                     <select disabled class="form-control" id="ddlReciveTypeHeader"></select>
                                 </div>
                             </div>
@@ -157,8 +136,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Store</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Store</label>
+                                <div class="col-9 col-md-8">
                                     <select disabled class="form-control" id="ddlStoreHeader"></select>
                                 </div>
                             </div>
@@ -166,9 +145,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.I_Vendor</label>
-                                <div class="col-9 col-md-7">
-
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                                <div class="col-9 col-md-8 p-0">
                                     <div class="search-content">
                                         <input disabled type="text" class="form-control search-control" id="txtVendorName">
                                         <button type="button" name="InvoiceSearch" id="btnVendorSearch" class="btn btn-main btn-search">
@@ -181,8 +159,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Pur_PaymentType</label>
+                                <div class="col-9 col-md-8 ">
                                     <select disabled class="form-control" id="ddlIsCash"></select>
                                 </div>
                             </div>
@@ -190,8 +168,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Vendor_invoice  </label>
-                                <div class="col-8">
+                                <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.Vendor_invoice  </label>
+                                <div class="col-9 col-md-8">
                                     <input disabled type="text" class="form-control" id="VendorRecieptID">
                                 </div>
                             </div>
@@ -199,8 +177,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Salesman</label>
+                                <div class="col-9 col-md-8 ">
                                     <select disabled class="form-control" id="ddlSalesmanHeader"></select>
                                 </div>
                             </div>
@@ -208,8 +186,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_TaxType</label>
+                                <div class="col-9 col-md-8 ">
                                     <select disabled class="form-control" id="ddlTaxTypeHeader"></select>
                                 </div>
                             </div>
@@ -218,8 +196,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cashbox</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cashbox</label>
+                                <div class="col-9 col-md-8">
                                     <select disabled class="form-control" id="ddlCashBoxH"></select>
                                 </div>
                             </div>
@@ -227,8 +205,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.Currency</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Currency</label>
+                                <div class="col-9 col-md-8 ">
                                     <select disabled class="form-control" id="ddlCurrency"></select>
                                 </div>
                             </div>
@@ -236,8 +214,8 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.TransferFactor</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.TransferFactor</label>
+                                <div class="col-9 col-md-8 ">
                                     <input id="txtCurrencyRate" type="number" name="" disabled class="form-control" />
 
                                 </div>
@@ -283,63 +261,42 @@
                     </div>
 
 
-                    @*----------------------------------------------------------------------------------------------------------*@
+                    @*Right Side Icon Last Price*@
 
                     <div class="col-12">
                         <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
-                            <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice" style="">
-                                <i class="mdi mdi-account-search" style="font-size: 24px;"></i>
+                            <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice">
+                                <i class="mdi mdi-account-search fs-3"></i>
 
 
-                                <div class="table-responsive" style="margin-right: 6%;direction: rtl;">
+                                <div class="table-responsive sideIcon-table flex-grow-1 mx-5">
                                     <table class="table">
                                         <thead>
                                             <tr>
-
                                                 <th> اسم الصنف</th>
-                                                <th class="areatable">   </th>
                                                 <th>اخر سعر شراء للمورد</th>
-                                                <th class="areatable">   </th>
                                                 <th>اخر رقم فاتوره للمورد </th>
-                                                <th class="areatable">   </th>
                                                 <th> اخر تاريخ </th>
-                                                <th class="areatable">   </th>
-                                                <th> اخر سعر شراء </th> 
-                                                <th class="areatable">   </th>
+                                                <th> اخر سعر شراء </th>
                                                 <th> التكلفة   </th>
                                             </tr>
                                         </thead>
-                                        <tbody style="color: antiquewhite;">
+                                        <tbody>
                                             <tr>
-
                                                 <td id="Name_Item"> 02312 </td>
-                                                <td class="areatable">  </td>
                                                 <td id="VndLastPrice"> 02312 </td>
-                                                <td class="areatable">  </td>
                                                 <td id="VndLastTr"> 02312 </td>
-                                                <td class="areatable">  </td>
                                                 <td id="VndLastDate"> 04 Dec 2019 </td>
-                                                <td class="areatable">  </td> 
                                                 <td id="LastPurchase"> Dashboard </td>
-                                                <td class="areatable">  </td>
                                                 <td id="Curcost"> Credit card </td>
-
                                             </tr>
 
                                         </tbody>
                                     </table>
                                 </div>
-
-
                             </div>
-                            <br />
                         </div>
                     </div>
-
-
-
-
-
                     @*----------------------------------------------------------------------------------------------------------*@
 
 
@@ -361,7 +318,7 @@
                                         <th style="width: 7%" class="text-wrap">@SystemResource.Invoice_Date</th>
                                         <th style="width: 15%" class="text-wrap">@SystemResource.I_Vendor</th>
                                         <th style="width: 15%" class="text-wrap"> @SystemResource.App_Cashbox</th>
-
+                                        <th style="width: 15%" class="text-wrap"> @SystemResource.App_Cashbox</th>
 
                                     </tr>
                                 </thead>
@@ -378,8 +335,8 @@
                     <div class="row g-0" id="divTotalSatistics">
                         <div class="col-12 mb-5">
                             <div class="form-group row g-0">
-                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                <div class="col-8 col-md-11">
+                                <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-9 col-md-11">
                                     <textarea disabled class="form-control" name="" id="txtNotes"></textarea>
                                 </div>
                             </div>
@@ -410,7 +367,7 @@
                                 <div class="form-group col-12 row g-0">
                                     <label class="col-4 align-self-center p-md-0">الخصم</label>
                                     <div class="col-8 ">
-                                        <input type="text" disabledclass="form-control" name="ItemDiscountTotalFC" value="0" id="txtTotalDiscount">
+                                        <input type="text" disabled class="form-control" name="ItemDiscountTotalFC" value="0" id="txtTotalDiscount">
                                     </div>
                                 </div>
 

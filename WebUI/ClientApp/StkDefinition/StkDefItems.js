@@ -455,6 +455,7 @@ var StkDefItems;
                     OK == 0 ? DisplayMassage_Processes('خطاء الصنف مستخدم بالفغل ', 'Wrong the Item is already used ', MessageType.Worning) : DisplayMassage_Processes('تم الحفظ', 'Done', MessageType.Succeed);
                     btnBack_Def_onclick();
                     flag_Assign = 0;
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage_Processes('خطأ', 'Wrong', MessageType.Worning);

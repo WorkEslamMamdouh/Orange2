@@ -706,6 +706,7 @@ namespace StkDefItems {
 
                     btnBack_Def_onclick(); 
                     flag_Assign = 0;
+                    Save_Succ_But();
                 }
                 else {
                 

@@ -190,12 +190,6 @@ var App;
         var num = this;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
-    HTMLInputElement.prototype.setVal = function (value) {
-        debugger;
-        var Input = this;
-        Input.value == null || Input.value.trim() == '' ? Input.value = '' : Input.value = value;
-        return value;
-    };
     var branchCodeSelected = "";
     var LanguageButton;
     function AssignLoginInformation() {

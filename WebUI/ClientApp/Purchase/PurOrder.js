@@ -296,9 +296,9 @@ var PurOrder;
         txtValidityPeriod.value = RetrivedPurOrderModel.ValidityPeriod.toString();
         txtDliveryConditions.value = RetrivedPurOrderModel.DliveryConditions.toString();
         txtShipmentConditions.value = RetrivedPurOrderModel.ShipmentConditions.toString();
-        txtTotal.setVal(RetrivedPurOrderModel.Total);
-        txtVatTotal.setVal(RetrivedPurOrderModel.VatAmount);
-        txtNetTotal.setVal(RetrivedPurOrderModel.NetDue);
+        txtTotal.value = RetrivedPurOrderModel.Total.toString();
+        txtVatTotal.value = RetrivedPurOrderModel.VatAmount.toString();
+        txtNetTotal.value = RetrivedPurOrderModel.NetDue.toString();
         if (RetrivedPurOrderModel.CurrencyID != null)
             ddlCurrency.value = RetrivedPurOrderModel.CurrencyID.toString();
         if (RetrivedPurOrderModel.IsCash == true) {

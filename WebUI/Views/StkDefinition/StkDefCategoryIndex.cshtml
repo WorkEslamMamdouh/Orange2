@@ -46,64 +46,64 @@
                 <div class="row g-0">
                     <div class="col-12 col-md-3">
                         <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.App_Code</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_Code</label>
+                            <div class="col-9 col-md-8 ">
                                 <input disabled type="text" class="form-control" id="txtCatCode" name="CatCode">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.App_DescA</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_DescA</label>
+                            <div class="col-9 col-md-8 ">
                                 <input disabled type="text" class="form-control" id="txtDescA" name="DescA">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-5">
                         <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.App_DescE</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_DescE</label>
+                            <div class="col-9 col-md-8 ">
                                 <input disabled type="text" class="form-control" name="DescL" id="txtDescL">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Item_Type </label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Item_Type </label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="TxtItemType" name="ItemTypeID" class="form-control"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Tax </label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Tax </label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="DrpVatNat" name="VatNatID" class="form-control"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-5">
                         <div class="form-group row g-0 ">
-                            <label id="LabtxtRemarks" class="col-4 col-md-5  align-self-center p-md-0">@SystemResource.App_Notes</label>
-                            <div class="col-8 col-md-7 ">
+                            <label id="LabtxtRemarks" class="col-3 col-md-4  align-self-center p-md-0">@SystemResource.App_Notes</label>
+                            <div class="col-9 col-md-8 ">
                                 <textarea rows="1" type="text" class="form-control" disabled name="Remarks" id="txtRemarks"> </textarea>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-check row g-0">
-                            <label class="col-4 col-md-5 form-check-label align-self-center p-md-0" for="txtIsPurchase"> @SystemResource.IsPurchase</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 form-check-label align-self-center p-md-0" for="txtIsPurchase"> @SystemResource.IsPurchase</label>
+                            <div class="col-9 col-md-8 ">
                                 <input class="form-check-input" type="checkbox" id="txtIsPurchase" name="IsPurchase">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-check row g-0">
-                            <label class="col-4 col-md-5 form-check-label align-self-center p-md-0" for="txtIsStock"> @SystemResource.IsStock</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 form-check-label align-self-center p-md-0" for="txtIsStock"> @SystemResource.IsStock</label>
+                            <div class="col-9 col-md-8 ">
                                 <input class="form-check-input" type="checkbox" id="txtIsStock" name="IsStock">
                             </div>
                         </div>
@@ -111,123 +111,132 @@
 
                     <div class="col-12 col-md-4">
                         <div class="form-check row g-0">
-                            <label class="col-4 col-md-5 form-check-label align-self-center p-md-0" for="txtISSales"> @SystemResource.IsPurchase</label>
-                            <div class="col-8 col-md-7 ">
+                            <label class="col-3 col-md-4 form-check-label align-self-center p-md-0" for="txtISSales"> @SystemResource.IsPurchase</label>
+                            <div class="col-9 col-md-8 ">
                                 <input class="form-check-input" type="checkbox" id="txtISSales" name="ISSales">
                             </div>
                         </div>
                     </div>
-                    @* 1 *@
+                    @*  *@
                     <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.PurchasingAccount </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpPurchasingAccount" name="Pur_ACC_CODE" class="form-control"></select>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.PurchasingAccount </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpPurchasingAccount" name="Pur_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.PurchaseReturnAccount </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpPurchaseReturnAccount" name="PurRet_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.DiscountAccount</label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpDiscountPur" name="PurDisc_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.CashSalesAccount</label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpCashSalesAccount" name="CashSales_ACC_CODE" class="form-control"></select>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.CashSalesAccount</label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpCashSalesAccount" name="CashSales_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.CashReturnAccount  </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpCashReturnAccount" name="CashSalesRet_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.DiscountAccount </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpDiscountCash" name="CashSalesDisc_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.CreditSalesAccount</label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpCreditSalesAccount" name="CreditSales_ACC_CODE" class="form-control"></select>
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.CreditSalesAccount</label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpCreditSalesAccount" name="CreditSales_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0">  @SystemResource.CreditReturnAccount </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpCreditReturnAccount" name="CreditSalesRet_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 ">
+                                <div class="form-group row g-0">
+                                    <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.DiscountAccount  </label>
+                                    <div class="col-8 col-md-7 ">
+                                        <select id="DrpDiscountCredit" name="CreditSalesDisc_ACC_CODE" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+      
+                    
+                   
 
-                    @*2*@
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.PurchaseReturnAccount </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpPurchaseReturnAccount" name="PurRet_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.CashReturnAccount  </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpCashReturnAccount" name="CashSalesRet_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">  @SystemResource.CreditReturnAccount </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpCreditReturnAccount" name="CreditSalesRet_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    @* 3 *@
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.DiscountAccount</label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpDiscountPur" name="PurDisc_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.DiscountAccount </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpDiscountCash" name="CashSalesDisc_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="form-group row g-0">
-                            <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.DiscountAccount  </label>
-                            <div class="col-8 col-md-7 ">
-                                <select id="DrpDiscountCredit" name="CreditSalesDisc_ACC_CODE" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
         <!-- Editors Details -->
-        <div class="insettext row editor-details"  id="DivCreat_Update">
-            <div class="col-12 col-lg-6" id="divCreationPanel">
-
+        <div class="insettext row editor-details" id="DivCreat_Update">
+            <div class="col-12 col-md-6">
                 <div class="form-group row g-0">
-                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
-                    <div class="col-4 col-xl-4 editor-input">
-                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Create</label>
+                    <div class="col-4 col-md-5 editor-input px-0">
+                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                     </div>
-                    <div class="col-4 col-xl-6 editor-input">
-                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                    <div class="col-4 col-md-5 editor-input px-0">
+                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-6" id="divCreationPanel">
+            <div class="col-12 col-md-6">
                 <div class="form-group row g-0">
-                    <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
-                    <div class="col-4 col-xl-4 editor-input">
-                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                    <div class="col-4 col-md-5 editor-input px-0">
+                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                     </div>
-                    <div class="col-4 col-xl-6 editor-input">
-
-                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                    <div class="col-4 col-md-5 editor-input px-0">
+                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                     </div>
                 </div>
             </div>
-
         </div>
+
+
 
     </div>
 

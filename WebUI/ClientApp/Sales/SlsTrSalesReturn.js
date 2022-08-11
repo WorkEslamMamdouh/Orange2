@@ -55,8 +55,6 @@ var SlsTrSalesReturn;
     var txtEndDate;
     var txtItemCount;
     var txtPackageCount;
-    var txtTotalbefore;
-    var txtTotalDiscount;
     var txtTotal;
     var txtTax;
     var txtNet;
@@ -164,8 +162,6 @@ var SlsTrSalesReturn;
         txtEndDate = document.getElementById("txtEndDate");
         txtItemCount = document.getElementById("txtItemCount");
         txtPackageCount = document.getElementById("txtPackageCount");
-        txtTotalDiscount = document.getElementById("txtTotalDiscount");
-        txtTotalbefore = document.getElementById("txtTotalbefore");
         txtTotal = document.getElementById("txtTotal");
         txtTax = document.getElementById("txtTax");
         txtNet = document.getElementById("txtNet");
@@ -302,7 +298,6 @@ var SlsTrSalesReturn;
                     ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID == null ? 'null' : InvoiceStatisticsModel[0].CashBoxID.toString();
                     vatType = InvoiceStatisticsModel[0].VatType;
                     //GetVatPercentage();
-                    $('#txtInvoiceCustomerName').val(InvoiceStatisticsModel[0].CustomerName);
                     ddlFreeSalesman.value = InvoiceStatisticsModel[0].SalesmanId.toString();
                     // ddlSalesPerson.value = InvoiceStatisticsModel[0].SalesPersonId.toString();
                     if (InvoiceStatisticsModel[0].CustomerId != null) {
@@ -1018,17 +1013,15 @@ var SlsTrSalesReturn;
             GlobalReturnID = Number(InvoiceStatisticsModel[0].InvoiceID);
             GlobalDocNo = InvoiceStatisticsModel[0].DocNo;
             globalRefTrID = Number(InvoiceStatisticsModel[0].RefTrID);
+            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
+            txtPackageCount.value = InvoiceStatisticsModel[0].Tot_Qty.toString();
+            txtTotal.value = InvoiceStatisticsModel[0].TotalAmount.toString();
+            txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString();
+            txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.toString();
             txtRefNo.value = InvoiceStatisticsModel[0].RefNO.toString();
             txtRemarks.value = InvoiceStatisticsModel[0].Remark.toString();
             StoreID = InvoiceStatisticsModel[0].StoreId;
             ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VatType.toString();
-            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
-            txtPackageCount.value = InvoiceStatisticsModel[0].Tot_Qty.toString();
-            txtTotalDiscount.value = InvoiceStatisticsModel[0].ItemDiscountTotal.toString();
-            txtTotalbefore.value = InvoiceStatisticsModel[0].ItemTotal.toString();
-            txtTotal.value = InvoiceStatisticsModel[0].TotalAmount.toString();
-            txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString();
-            txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.toString();
             if (InvoiceStatisticsModel[0].RefTrID != null) {
                 var RefID = InvoiceStatisticsModel[0].RefTrID;
                 GetInvoiceByID(RefID);
@@ -1403,8 +1396,8 @@ var SlsTrSalesReturn;
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             var txtQuantityValue = $("#txtReturnQuantity" + cnt).val();
-            var txtPriceValue = $("#txtNetUnitPrice" + cnt).val();
-            if ($("#txtNetUnitPrice" + cnt).val() == 0) {
+            var txtPriceValue = $("#txtPrice" + cnt).val();
+            if ($("#txtPrice" + cnt).val() == 0) {
                 var total = Number(txtQuantityValue) * 1;
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 VatPrc = Number($("#txtTax_Rate" + cnt).val());
@@ -1456,7 +1449,7 @@ var SlsTrSalesReturn;
                 $("#txt_StatusFlag" + cnt).val("u");
             var txtQuantityValue = $("#txtQuantity" + cnt).val();
             var txtReturnQuantityValue = $("#txtReturnQuantity" + cnt).val();
-            var txtPriceValue = $("#txtNetUnitPrice" + cnt).val();
+            var txtPriceValue = $("#txtPrice" + cnt).val();
             if (Number(txtReturnQuantityValue) <= Number(txtQuantityValue)) { //acept qty 
                 var total = Number(txtReturnQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2)); //= total;
@@ -1485,7 +1478,7 @@ var SlsTrSalesReturn;
                 $("#txt_StatusFlag" + cnt).val("u");
             var txtQuantityValue = $("#txtQuantity" + cnt).val();
             var txtReturnQuantityValue = $("#txtReturnQuantity" + cnt).val();
-            var txtPriceValue = $("#txtNetUnitPrice" + cnt).val();
+            var txtPriceValue = $("#txtPrice" + cnt).val();
             if (Number(txtReturnQuantityValue) <= Number(txtQuantityValue)) { //acept qty 
                 var total = Number(txtReturnQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2)); //= total;
@@ -1544,7 +1537,7 @@ var SlsTrSalesReturn;
                 SoldQty = SoldQty * -1;
             }
             $("#txtQuantity" + cnt).prop("value", SoldQty);
-            $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Unitprice);
+            $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetUnitPrice);
             if (SlsInvoiceItemsDetails[cnt].UnitpriceWithVat == null || SlsInvoiceItemsDetails[cnt].UnitpriceWithVat == 0) {
                 var GetUnitprice = Get_PriceWithVAT(SlsInvoiceItemsDetails[cnt].Unitprice, SlsInvoiceItemsDetails[cnt].VatPrc, false);
                 $("#txtUnitpriceWithVat" + cnt).prop("value", GetUnitprice.unitpricewithvat);
@@ -1565,7 +1558,7 @@ var SlsTrSalesReturn;
             $("#txtTotAfterTax" + cnt).prop("value", 0);
             $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
         }
-        var total = Number($("#txtReturnQuantity" + cnt).val()) * Number($("#txtNetUnitPrice" + cnt).val());
+        var total = Number($("#txtReturnQuantity" + cnt).val()) * Number($("#txtPrice" + cnt).val());
         $("#txtTotal" + cnt).val(total.RoundToSt(2));
         VatPrc = Number($("#txtTax_Rate" + cnt).val());
         var vatAmount = Number(total) * VatPrc / 100;
@@ -1581,18 +1574,12 @@ var SlsTrSalesReturn;
             CountTotal = 0;
             TaxCount = 0;
             NetCount = 0;
-            var TotalDiscount = 0;
-            var Totalbefore = 0;
             for (var i = 0; i < CountGrid; i++) {
                 var flagvalue = $("#txt_StatusFlag" + i).val();
                 if (flagvalue != "d" || flagvalue != "m") {
                     var ReturnQty = Number($("#txtReturnQuantity" + i).val());
                     PackageCount += ReturnQty;
                     PackageCount = Number(PackageCount);
-                    Totalbefore += (Number($("#txtQuantity" + i).val()) * Number($("#txtPrice" + i).val()));
-                    Totalbefore = Number(Totalbefore.RoundToSt(2).toString());
-                    TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
-                    TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
                     CountTotal += Number($("#txtTotal" + i).val()) == null ? 0 : Number($("#txtTotal" + i).val());
                     CountTotal = Number(CountTotal.RoundToSt(2).toString()) == null ? 0 : Number(CountTotal.RoundToSt(2).toString());
                     TaxCount += Number($("#txtTax" + i).val()) == null ? 0 : Number($("#txtTax" + i).val());
@@ -1606,8 +1593,6 @@ var SlsTrSalesReturn;
             txtTotal.value = CountTotal.toString();
             txtTax.value = TaxCount.toString();
             txtNet.value = NetCount.toString();
-            txtTotalDiscount.value = TotalDiscount.toString();
-            txtTotalbefore.value = Totalbefore.toString();
         }
     }
     //------------------------------------------------------ Validation  && clear Region -----------------------------------
@@ -1763,8 +1748,6 @@ var SlsTrSalesReturn;
         InvoiceModel.Remark = txtRemarks.value;
         // InvoiceModel.SalesPersonId = Number(ddlSalesPerson.value);
         InvoiceModel.TrDate = txtInvoiceDate.value;
-        InvoiceModel.ItemTotal = Number(txtTotalbefore.value);
-        InvoiceModel.ItemDiscountTotal = Number(txtTotalDiscount.value);
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.CashAmount = Number(txtNet.value);
