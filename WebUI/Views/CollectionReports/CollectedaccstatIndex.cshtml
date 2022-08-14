@@ -26,17 +26,38 @@
                             </div>
                         </div>
                     </div>
+                    @*<div class="col-12 col-md-4">
+            <div class="form-group row">
+                <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.App_report_type</label>
+                <div class="col-8">
+                    <div class="form-check d-inline-flex">
+                        <input class="form-check-input form-radio" type="radio" id="Rd_detail" name="details" value="1" checked>
+                        <label class="form-check-label" for="reptp1"> @SystemResource.Detailed </label>
+                    </div>
+                    <div class="form-check d-inline-flex">
+                        <input class="form-check-input form-radio" type="radio" id="Rd_sum" name="details" value="2">
+                        <label class="form-check-label" for="reptp2"> @SystemResource.Summary</label>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                     <div class="col-12 col-md-4">
-                        <div class="form-group row">
-                            <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.App_report_type</label>
-                            <div class="col-8">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="Rd_detail" name="details" value="1" checked>
-                                    <label class="form-check-label" for="reptp1"> @SystemResource.Detailed </label>
-                                </div>
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="Rd_sum" name="details" value="2">
-                                    <label class="form-check-label" for="reptp2"> @SystemResource.Summary</label>
+                        <div class="row mt-n3">
+                            <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_report_type</label>
+                            <div class="form-group col-8 col-md-10">
+                                <div class="row">
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4 offset-xl-3">
+                                        <div class="form-check d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="Rd_detail" name="details" value="1" checked>
+                                            <label class="form-check-label my-auto me-3" for="Rd_detail"> @SystemResource.Detailed </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                        <div class="form-check  d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="Rd_sum" name="details" value="2">
+                                            <label class="form-check-label my-auto me-3" for="Rd_sum"> @SystemResource.Summary</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -14,43 +14,52 @@
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label for="txtFromDate" class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                            <div class="col-8">
+                            <label for="txtFromDate" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8">
                                 <input type="date" class="form-control" name="txtFromDate" id="txtFromDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
-                            <div class="col-8">
+                            <label for="txtToDate" class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8">
                                 <input type="date" class="form-control" name="txtToDate" id="txtToDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="form-group row">
-                            <label for="txtToDate" class="col-2 align-self-center p-md-0"> @SystemResource.CollectedBy</label>
-                            <div class="col-10">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="reptp1" name="reptp" value="3" checked>
-                                    <label class="form-check-label" for="reptp1"> @SystemResource.by_cat </label>
-                                </div>
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="reptp2" name="reptp" value="2">
-                                    <label class="form-check-label" for="reptp2"> @SystemResource.by_type</label>
-                                </div>
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="reptp3" name="reptp" value="1">
-                                    <label class="form-check-label" for="reptp3">@SystemResource.by_item </label>
+                        <div class="row mt-n3">
+                            <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.CollectedBy</label>
+                            <div class="form-group col-8 col-md-10">
+                                <div class="row">
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                        <div class="form-check d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="reptp1" name="reptp" value="3" checked>
+                                            <label class="form-check-label my-auto me-3" for="reptp1"> @SystemResource.by_cat </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                        <div class="form-check  d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="reptp2" name="reptp" value="2">
+                                            <label class="form-check-label my-auto me-3" for="reptp2"> @SystemResource.by_type</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12  col-xl-4">
+                                        <div class="form-check d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="reptp3" name="reptp" value="1">
+                                            <label class="form-check-label my-auto me-3" for="reptp3"> @SystemResource.by_item</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_indebtedness</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_indebtedness</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="txt_indebtedness" name="" class="form-control">
                                     <option value="All">@SystemResource.App_All</option>
                                     <option value=">">@SystemResource.App_He_Owes_Him</option>
@@ -62,8 +71,8 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Status</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Status</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="txt_ID_status" name="" class="form-control">
                                     <option value="1">@SystemResource.prepared</option>
                                     <option value="0">@SystemResource.unprepared</option>
@@ -72,25 +81,47 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="form-group row ">
-                            <label for="txtToDate" class="col-2 align-self-center p-md-0">@SystemResource.App_report_type</label>
-                            <div class="col-10 special-group pt-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="reptype2" name="reptype" onclick="radiochange(1)" value="2">
-                                    <label class="form-check-label" for="reptp1"> @SystemResource.Summary </label>
+                        <div class="row mt-n3">
+                            <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_report_type</label>
+                            <div class="form-group col-8 col-md-10">
+                                <div class="row special-group">
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                        <div class="form-check  d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="reptype2" name="reptype" onclick="radiochange(1)" value="2">
+                                            <label class="form-check-label my-auto me-3" for="reptp2"> @SystemResource.Summary</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12  col-xl-4">
+                                        <div class="form-check d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="reptype1" name="reptype" onclick="radiochange(2)" value="1">
+                                            <label class="form-check-label my-auto me-3" for="reptp3"> @SystemResource.Detailed</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="reptype1" name="reptype" onclick="radiochange(2)" value="1">
-                                    <label class="form-check-label" for="reptp2"> @SystemResource.Detailed</label>
-                                </div>
-
                             </div>
                         </div>
                     </div>
+
+                    @*<div class="col-12 col-md-4">
+            <div class="form-group row ">
+                <label for="txtToDate" class="col-2 align-self-center p-md-0">@SystemResource.App_report_type</label>
+                <div class="col-10 special-group pt-0">
+                    <div class="form-check d-inline-flex">
+                        <input class="form-check-input form-radio" type="radio" id="reptype2" name="reptype" onclick="radiochange(1)" value="2">
+                        <label class="form-check-label" for="reptp1"> @SystemResource.Summary </label>
+                    </div>
+                    <div class="form-check d-inline-flex">
+                        <input class="form-check-input form-radio" type="radio" id="reptype1" name="reptype" onclick="radiochange(2)" value="1">
+                        <label class="form-check-label" for="reptp2"> @SystemResource.Detailed</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>*@
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.choose_Cat</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.choose_Cat</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="drpPaymentType" name="" class="form-control">
                                     <option value="Null"> @SystemResource.choose_Cat  </option>
                                 </select>
@@ -99,16 +130,16 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Type</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Type</label>
+                            <div class="col-9 col-md-8">
                                 <select id="drpitem_family" name="" class="form-control"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Item</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Item</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="txt_ID_APP_Type" name="" class="form-control" disabled></select>
                             </div>
                         </div>

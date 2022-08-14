@@ -190,6 +190,12 @@ var App;
         var num = this;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
+    HTMLInputElement.prototype.setVal = function (value) {
+        debugger;
+        var Input = this;
+        Input.value == null || Input.value.trim() == '' ? Input.value = '' : Input.value = value;
+        return value;
+    };
     var branchCodeSelected = "";
     var LanguageButton;
     function AssignLoginInformation() {
@@ -1130,23 +1136,33 @@ function DisplayMassage_Processes(msg_Ar, msg_En, msg_type, OnOk) {
     else
         $('#Text_Massage').html(msg_Ar);
     if (msg_type == '1') {
-        $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
-        $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #5cb702; background-color : #000000 !important	');
-        $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #5cb702;margin-top: 14px; font-size: 24px; margin-left: 10%; margin-right: 6%;');
-        setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #5cb702; display: none; '); }, 7000);
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-success");
     }
     else if (msg_type == '2') {
-        $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
-        $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; background-color : #000000 !important	');
-        $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #e41b1b;margin-top: 14px; font-size: 24px; margin-left: 10%;  margin-right: 6%;');
-        setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; display: none; '); }, 7000);
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-danger");
     }
     else if (msg_type == '3') {
-        $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
-        $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #f0ad4e; background-color : #000000 !important	');
-        $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #f0ad4e;margin-top: 14px; font-size: 24px; margin-left: 10%;  margin-right: 6%;');
-        setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; display: none; '); }, 7000);
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-orange");
     }
+    setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
+    //if (msg_type == '1') {
+    //    $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
+    //    $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #5cb702; background-color : #000000 !important	');
+    //    $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #5cb702;margin-top: 14px; font-size: 24px; margin-left: 10%; margin-right: 6%;');
+    //    setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #5cb702; display: none; '); }, 7000);
+    //}
+    //else if (msg_type == '2') {
+    //    $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
+    //    $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; background-color : #000000 !important	');
+    //    $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #e41b1b;margin-top: 14px; font-size: 24px; margin-left: 10%;  margin-right: 6%;');
+    //    setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; display: none; '); }, 7000);
+    //}
+    //else if (msg_type == '3') {
+    //    $('#DivMassage').attr('class', 'col-lg-12  margingred  borderred');
+    //    $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #f0ad4e; background-color : #000000 !important	');
+    //    $('#Text_Massage').attr('style', 'text-align: center;font-weight: bold;color: #f0ad4e;margin-top: 14px; font-size: 24px; margin-left: 10%;  margin-right: 6%;');
+    //    setTimeout(function () { $('#DivMassage').attr('style', ' border-style: solid;border: solid;border-color: #e41b1b; display: none; '); }, 7000);
+    //}
 }
 function Errorinput(input) {
     debugger;
