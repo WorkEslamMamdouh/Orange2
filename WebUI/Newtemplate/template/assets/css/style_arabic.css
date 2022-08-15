@@ -29675,6 +29675,9 @@ input[class=checkbox]:checked:before {
 .form-check .special-label {
     line-height: 2;
 }
+.inside-table .form-check {
+    margin-top: 0;
+}
 /*Cursor*/
 .cursor-pointer {
     cursor: pointer;

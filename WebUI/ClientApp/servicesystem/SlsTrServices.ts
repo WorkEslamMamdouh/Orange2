@@ -1003,11 +1003,7 @@ namespace SlsTrServices {
                      <td>
 		                <div class="form-group">
 			                 <input id="txtServiceCode${cnt}" name="" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-			                  <input id="txtServiceName${cnt}" name="FromDate" disabled type="text" class="form-control" />
+                             <input id="txtServiceName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
                     <td>
@@ -1890,6 +1886,7 @@ namespace SlsTrServices {
                     if (res.Status == 1) {
                         DownloadInvoicePdf();
                     }
+                    Save_Succ_But();
 
                 } else {
                     DisplayMassage("الرجاء تحديث الصفحة واعادت تكرارالمحاولة مره اخري ", "Please refresh the page and try again", MessageType.Error);

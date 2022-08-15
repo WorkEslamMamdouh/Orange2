@@ -3,132 +3,6 @@
     ViewBag.Title = @SystemResource.Men_AccTrInvReceipt;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@*<style>
-
-    input[type=checkbox], input[type=radio] {
-        margin: 7% 0 0 !important;
-    }
-
-    .disabledDiv {
-        pointer-events: none;
-        opacity: 0.4;
-    }
-
-    .display_none {
-        display: none !important;
-    }
-
-
-    #btnAddDetails {
-        font-size: 40px;
-    }
-
-        #btnAddDetails:hover {
-            color: #24b414;
-        }
-
-    .btnplasandmines {
-        display: inline-block;
-        padding: 2px 4px;
-        height: 36px;
-        margin-bottom: 0;
-        font-size: 10px;
-        font-weight: 400;
-        line-height: 1.428571;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        -ms-touch-action: manipulation;
-        touch-action: manipulation;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-
-
-
-    .popu {
-        position: fixed;
-        /* top: 22%; */
-        /* height: 25%; */
-        width: 100%;
-        /* margin-right: 23%; */
-        border: solid 1px #f3f3f3 !important;
-        border-radius: 30px;
-        padding: 12px 11px;
-        background-color: #e3e3e3 !important;
-        box-shadow: 0px 4px 6px 0;
-    }
-
-    .List_MinUnitPrice_in_poup_pass {
-        display: block;
-        margin-top: -52%;
-        background-color: beige;
-        border-radius: 16px;
-        width: 191%;
-        height: 146px;
-        overflow-y: scroll;
-    }
-
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        /* Track */
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            background-color: beige;
-            /*border-radius: 16px;*/
-            border-top-left-radius: 24px;
-            border-bottom-left-radius: 24px;
-        }
-
-        /* Handle */
-        .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 16px;
-        }
-
-            /* Handle on hover */
-            .List_MinUnitPrice_in_poup_pass::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
-
-    .st_border_li_List_MinUnitPrice {
-        width: 100% !important;
-        border-bottom: solid 1px !important;
-        padding: 2px 7px 3px 4px !important;
-        margin-left: 0px !important;
-        margin-top: 0px !important;
-        font-weight: bold !important;
-        font-size: 15px;
-    }
-
-    .col-lg-1 {
-    }
-
-    .left_right {
-        padding-left: 0px !important;
-        padding-right: 0px !important;
-    }
-
-    .fontitm3 {
-        float: right;
-        margin: 5px -14px 0px 0px !important;
-        font-size: 25px !important;
-        position: absolute;
-    }
-
-    select {
-        width: 100% !important;
-    }
-</style>*@
 <div class="row gy-3 ">
     <!-- Filter Container -->
     <div id="DivFilter" class="col-12">
@@ -256,8 +130,8 @@
                         </div>
                         <div class="col-12 col-md-3 display_none" id="div_btnUpdate">
                             <div class="form-group row ">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-9 col-md-8">
                                     <input class="checkbox" type="checkbox" id="chkActive" disabled name="" />
                                 </div>
                             </div>
@@ -267,84 +141,84 @@
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
-                                <label class="col-8 col-md-7 text-right" id="lblInvoiceNumber"></label>
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
+                                <label class="col-9 col-md-8 text-right" id="lblInvoiceNumber"></label>
                                 
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_date</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="date" class="form-control" disabled name="" id="txtInvoiceDate">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_invoiceType </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_invoiceType </label>
+                                <div class="col-9 col-md-8 ">
                                     <select id='ddlType' class="form-control" disabled></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_ReferenceNumber</label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ReferenceNumber</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="RefNO" id="txtRefNo">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Cutomer </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cutomer </label>
+                                <div class="col-9 col-md-8 ">
                                     <select id='ddlInvoiceCustomer' disabled class="form-control"></select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8 offset-4 offset-md-0 col-md-6 col-lg-3">
+                        <div class="col-9 offset-3 offset-md-0 col-md-6 col-lg-3">
                             <div class="form-group ">
                                 <input type="text" class="form-control" disabled name="" id="txtInvoiceCustomerName">
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Salesman </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Salesman </label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlSalesman" disabled class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">البائع </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">البائع </label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlSalesPerson" disabled class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label id="LabCashMoney" class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
-                                <div class="col-8 col-md-7 ">
+                                <label id="LabCashMoney" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_CashPaid</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="" id="txtCashMoney">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row ">
-                                <label id="LabCardMoney" class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
-                                <div class="col-8 col-md-7 ">
+                                <label id="LabCardMoney" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_CardPaid</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="" id="txtCardMoney">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes </label>
-                                <div class="col-8 col-md-11 ">
+                                <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes </label>
+                                <div class="col-9 col-md-11 ">
                                     <textarea type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
                                 </div>
                             </div>
@@ -378,24 +252,24 @@
                         <!-- Total Details -->
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="TotalAmount" id="txtTotal">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Tax</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Tax</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="VatAmount" id="txtTax">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Net</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Net</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="NetAfterVat" id="txtNet">
                                 </div>
                             </div>
@@ -403,24 +277,24 @@
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Commission</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Commission</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="CommitionAmount" id="txtCommission">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
+                                <div class="col-9 col-md-8">
                                     <input type="text" class="form-control" disabled name="Line_Count" id="txtItemCount">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
-                                <div class="col-8 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
+                                <div class="col-9 col-md-8 ">
                                     <input type="text" class="form-control" disabled name="Tot_Qty" id="txtPackageCount">
                                 </div>
                             </div>
@@ -450,8 +324,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                    
                     </div>
                 </div>
             </div>

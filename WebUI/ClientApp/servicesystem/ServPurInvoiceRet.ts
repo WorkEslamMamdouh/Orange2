@@ -555,7 +555,7 @@ namespace ServPurInvoiceRet {
                     btnShow_onclick();
                     QueryMode();
                     DisplayProcessedRecord();
-
+                    Save_Succ_But();
                 }
             }
         });
@@ -581,7 +581,7 @@ namespace ServPurInvoiceRet {
                     btnShow_onclick();
                     QueryMode();
                     DisplayProcessedRecord();
-
+                    Save_Succ_But();
                 }
             }
         });

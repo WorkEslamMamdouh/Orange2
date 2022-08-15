@@ -353,6 +353,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     MasterGridDoubleClick();
                     FlagAfterInsertOrUpdate = false;
                     DisplayMassage(" تم اصدار  قائمة رقم  " + res.TR_NO + " ", "An Menu " + res.TR_NO + "number has been issued ", MessageType.Succeed);
+                    Save_Succ_But();
                 }
             }
         });
@@ -389,6 +390,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     MasterGridDoubleClick();
                     FlagAfterInsertOrUpdate = false;
                     DisplayMassage(" تم تعديل  قائمة رقم  " + res.TR_NO + " ", "The Menu " + res.TR_NO + "menu number has been editied ", MessageType.Succeed);
+                    Save_Succ_But();
                 }
             }
         });

@@ -63,40 +63,40 @@
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="ddlCustomer" name="" class="form-control" ></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8 ">
                                 <input type="date" class="form-control" name="GosiJoinDate" id="txtStartDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8 ">
                                 <input type="date" class="form-control" name="GosiJoinDate" id="txtEndDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_State</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_State</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id="ddlStateType" name="" class="form-control" ></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_invoiceType</label>
+                            <div class="col-9 col-md-8 ">
                                 <select id='ddlInvoiceType' class="form-control"></select>
                             </div>
                         </div>
@@ -137,118 +137,126 @@
                             </button>
                         </div>
                         @* Details *@
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum  </label>
-                                <div class="col-8">
-                                    <input class=" form-control" id="lblInvoiceNumber" disabled>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_InvoiceNum  </label>
+                                        <div class="col-9 col-md-8">
+                                            <input class=" form-control" id="lblInvoiceNumber" disabled>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_DocumentNo  </label>
-                                <div class="col-8">
-                                    <input class=" form-control" id="txtDocNum" disabled>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_DocumentNo  </label>
+                                        <div class="col-9 col-md-8">
+                                            <input class=" form-control" id="txtDocNum" disabled>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
-                                <div class="col-8">
-                                    <input type="date" class="form-control" disabled name="" id="txtInvoiceDate">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
+                                        <div class="col-9 col-md-8">
+                                            <input type="date" class="form-control" disabled name="" id="txtInvoiceDate">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_approved</label>
-                                <div class="col-8 ">
-                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="" />
+                                <div class="col-12 col-md-6 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                        <div class="col-2 col-md-7 ">
+                                            <input type="checkbox" class="checkbox" id="chkActive" disabled name="">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                    
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cutomer </label>
-                                <div class="col-9 col-md-8">
-                                    <div class="search-content">
-                                        <input type="text" class="form-control" disabled id="txtCustomerCode" >
-                                        <button type="button" id="btnCustomerSrch" name="Search" class="btn btn-main btn-search">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cutomer </label>
+                                        <div class="col-9 col-md-8">
+                                            <div class="search-content">
+                                                <input type="text" class="form-control search-control" disabled id="txtCustomerCode">
+                                                <button type="button" id="btnCustomerSrch" name="Search" class="btn btn-main btn-search">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <div class="col-9 offset-3 col-md-12 offset-md-0">
+                                            <input type="text" class="form-control" disabled id="txtCustomerName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4  align-self-center p-md-0"> @SystemResource.App_invoiceType  </label>
+                                        <div class="col-9 col-md-8">
+                                            <select id='ddlType' class="form-control" disabled></select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" disabled id="txtCustomerName" >
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_CashAccount </label>
+                                        <div class="col-9 col-md-8">
+                                            <div class="search-content">
+                                                <input type="text" class="form-control search-control" disabled id="txtCashAccount">
+                                                <button type="button" id="btnAccSearch" name="Search" class="btn btn-main btn-search">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_invoiceType  </label>
-                                <div class="col-8">
-                                    <select id='ddlType' class="form-control" disabled></select>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <div class="col-9 offset-3 col-md-12 offset-md-0">
+                                            <input type="text" class="form-control" disabled id="txtCashAccountName">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        
-                         <div class="col-12 col-md-3">@* Empty for Responsive *@ </div>
-                       
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_CashAccount </label>
-                                <div class="col-9 col-md-8">
-                                    <div class="search-content">
-                                        <input type="text" class="form-control" disabled id="txtCashAccount">
-                                        <button type="button" id="btnAccSearch" name="Search" class="btn btn-main btn-search">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0"> رقم القيد </label>
+                                        <div class="col-9 col-md-8">
+                                            <input type="text" class="form-control" disabled name="VoucherNo" id="txtVoucherNo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0"> طريقة السداد </label>
+                                        <div class="col-9 col-md-8">
+                                            <input type="text" class="form-control" disabled name="PaymentTerms" id="txtPaymentTerms">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" disabled id="txtCashAccountName">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> رقم القيد </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="VoucherNo" id="txtVoucherNo">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> طريقة السداد </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="PaymentTerms" id="txtPaymentTerms">
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- Inside Table  -->
                         <div class="inside-table my-4">
                             <div class="table-responsive">
                                 <table class="table table-borderless ">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%"></th>
+                                            <th style="width: 3%"></th>
                                             <th style="width: 3%">@SystemResource.serial</th>
                                             <th style="width: 3%"></th>
-                                            <th style="width: 6%">@SystemResource.App_Service</th>
-                                            <th style="width: 9%"></th>
+                                            <th style="width: 15%">@SystemResource.App_Service</th>
                                             <th style="width: 6%">@SystemResource.App_soldQty</th>
                                             <th style="width: 6%">@SystemResource.App_returnQty</th>
                                             <th style="width: 6%">@SystemResource.App_Price</th>
@@ -262,7 +270,6 @@
                                             <th style="width: 3%"> </th>
                                             <th style="width: 6%"> @SystemResource.Costcenter_name</th>
                                             <th style="width: 9%"> @SystemResource.SHT_Name</th>
-
                                         </tr>
                                     </thead>
                                     <tbody id="div_Data"></tbody>
@@ -274,76 +281,82 @@
                             </div>
                         </div>
                         <!-- Total Details -->
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_total   </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="ItemTotal" id="txtTotalbefore">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_total   </label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="ItemTotal" id="txtTotalbefore">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Discount   </label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="ItemDiscountTotal" id="txtTotalDiscount">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Netafterdiscount   </label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="TotalAmount" id="txtTotal">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Tax   </label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="VatAmount" id="txtTax">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">الفرق</label>
+                                        <div class="col-8">
+                                            <input id="txtDiscountValue" name="" type="number" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-2">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_Net</label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="NetAfterVat" id="txtNet">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Discount   </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="ItemDiscountTotal" id="txtTotalDiscount">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="Line_Count" id="txtItemCount">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" disabled name="Tot_Qty" id="txtPackageCount">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.Netafterdiscount   </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="TotalAmount" id="txtTotal">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Tax   </label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="VatAmount" id="txtTax">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">الفرق</label>
-                                <div class="col-8">
-                                    <input id="txtDiscountValue" name="" type="number" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_Net</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="NetAfterVat" id="txtNet">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="Line_Count" id="txtItemCount">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group row g-0">
-                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" disabled name="Tot_Qty" id="txtPackageCount">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">@* Empty Div for Responsive *@</div>
 
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-lg-6 order-2 order-lg-1">
                                     <div class="form-group row g-0">
                                         <label class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_Notes</label>
                                         <div class="col-8 col-10">
@@ -351,70 +364,72 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 align-self-center p-md-0">@SystemResource.date_of_supply</label>
-                                            <div class="col-8">
-                                                <input type="date" class="form-control" disabled name=" " id="txtDeliveryDate">
+                                <div class="col-12 col-lg-6  order-1 order-lg-2">
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.date_of_supply</label>
+                                                <div class="col-8">
+                                                    <input type="date" class="form-control" disabled name=" " id="txtDeliveryDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.Endsupply</label>
+                                                <div class="col-8">
+                                                    <input type="date" class="form-control" disabled name=" " id="txtDeliveryEndDate">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.contract_number</label>
+                                                <div class="col-8">
+                                                    <input type="text" class="form-control" disabled name=" " id="txtContractNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_order_No</label>
+                                                <div class="col-8">
+                                                    <input type="text" class="form-control" disabled name=" " id="txtPurchaseorderNo">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 align-self-center p-md-0">@SystemResource.Endsupply</label>
-                                            <div class="col-8">
-                                                <input type="date" class="form-control" disabled name=" " id="txtDeliveryEndDate">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 align-self-center p-md-0">@SystemResource.contract_number</label>
-                                            <div class="col-8">
-                                                <input type="text" class="form-control" disabled name=" " id="txtContractNo">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 align-self-center p-md-0">@SystemResource.Pur_order_No</label>
-                                            <div class="col-8">
-                                                <input type="text" class="form-control" disabled name=" " id="txtPurchaseorderNo">
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         <!-- Editors Details -->
                         <div class="insettext row editor-details">
-                            <div class="col-12 col-lg-6">
-
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Seller</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-                                        <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
-                                    <div class="col-4 col-xl-4  editor-input">
-                                        <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-
-                                        <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
+
                     </div>
                 </div>
             </div>
