@@ -76,17 +76,11 @@ namespace Inv.DAL.Domain
         public Nullable<int> BranchCode { get; set; }
         public string Slsm_Code { get; set; }
         public string Slsm_DescA { get; set; }
-        public string Slsm_DescE { get; set; }
         public string Cus_Code { get; set; }
         public string Box_DescA { get; set; }
-        public string Box_DescE { get; set; }
         public Nullable<int> Line_Count { get; set; }
         public Nullable<int> Item_Count { get; set; }
         public Nullable<decimal> Tot_Qty { get; set; }
-        public Nullable<decimal> Tot_Amount { get; set; }
-        public Nullable<decimal> Tot_VAT { get; set; }
-        public Nullable<decimal> Tot_Net { get; set; }
-        public Nullable<decimal> tot_RetQty { get; set; }
         public Nullable<int> Ref_TrNo { get; set; }
         public Nullable<System.DateTime> Ref_TrDate { get; set; }
         public string CustomerMobileNo { get; set; }

@@ -57,12 +57,9 @@ namespace Inv.DAL.Domain
         public Nullable<int> BranchCode { get; set; }
         public string Slsm_Code { get; set; }
         public string Slsm_DescA { get; set; }
-        public string Slsm_DescE { get; set; }
         public string Cus_Code { get; set; }
         public string Cus_NameA { get; set; }
-        public string Cus_NameE { get; set; }
         public string Box_DescA { get; set; }
-        public string Box_DescE { get; set; }
         public string DocNo { get; set; }
         public string DocUUID { get; set; }
         public Nullable<System.TimeSpan> TrTime { get; set; }
@@ -108,6 +105,8 @@ namespace Inv.DAL.Domain
         public Nullable<int> SalesPersonId { get; set; }
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
-        public string Sper_nameE { get; set; }
+        public Nullable<decimal> QtyTotal { get; set; }
+        public Nullable<int> ItemCount { get; set; }
+        public Nullable<int> LineCount { get; set; }
     }
 }
