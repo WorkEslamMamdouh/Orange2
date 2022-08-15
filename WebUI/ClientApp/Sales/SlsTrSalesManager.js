@@ -2625,7 +2625,6 @@ var SlsTrSalesManager;
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             return;
         }
-        console.log(MasterDetailsModel);
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "InsertInvoiceMasterDetail"),
