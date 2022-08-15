@@ -98,5 +98,8 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> RoundingAmount { get; set; }
         public Nullable<int> SalesPersonId { get; set; }
         public Nullable<int> FinYear { get; set; }
+        public Nullable<decimal> QtyTotal { get; set; }
+        public Nullable<int> ItemCount { get; set; }
+        public Nullable<int> LineCount { get; set; }
     }
 }
