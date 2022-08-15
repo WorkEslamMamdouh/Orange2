@@ -417,6 +417,7 @@ var StkDefCategory;
                 if (result.IsSuccess == true) {
                     DocObj = result.Response;
                     success();
+                    Save_Succ_But();
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");
@@ -434,6 +435,7 @@ var StkDefCategory;
                 if (result.IsSuccess == true) {
                     DocObj = result.Response;
                     success();
+                    Save_Succ_But();
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");

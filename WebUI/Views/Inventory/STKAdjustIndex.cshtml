@@ -12,40 +12,40 @@
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                            <div class="col-8">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8">
                                 <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                            <div class="col-8">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8">
                                 <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_Settlement_type</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Settlement_type</label>
+                            <div class="col-9 col-md-8 ">
                                 <select class="form-control" id="ddlStatusFilter"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_Store</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_Store</label>
+                            <div class="col-9 col-md-8 ">
                                 <select class="form-control" id="ddlSourceStore"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Choose_Status</label>
-                            <div class="col-8 ">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Choose_Status</label>
+                            <div class="col-9 col-md-8 ">
                                 <select class="form-control" id="ddlstatus">
                                     <option value="0">@SystemResource.App_Not_Certified</option>
                                     <option value="1">@SystemResource.App_Certified</option>
@@ -90,93 +90,91 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="form-group row g-0">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
+                                <div class="col-9 col-md-8 ">
                                     <input disabled type="text" class="form-control" id="txtTrNo">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_date </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_date </label>
+                                <div class="col-9 col-md-8 ">
                                     <input disabled type="date" class="form-control" id="txtTransferDate">
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="form-group row g-0">
-                                <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Trns_Store </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_Store </label>
+                                <div class="col-9 col-md-8 ">
                                     <select id="ddlSourceStoreAdd" name="" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12  col-md-2">
+                     
+                        <div class="col-12 col-md-2 ">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_approved</label>
-                                <div class="col-9 col-md-7">
-                                    <input type="checkbox" class="checkbox" id="chkApproved" />
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-2 col-md-8">
+                                    <input type="checkbox" class="checkbox" id="chkApproved">
                                 </div>
                             </div>
                         </div>
-                        @* special Flides *@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="form-group row g-0">
-                                                <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.Choose_Status</label>
-                                                <div class="col-8 col-md-7 ">
+                                                <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.Choose_Status</label>
+                                                <div class="col-9 col-md-7 ">
                                                     <select disabled class="form-control" id="ddlStatusAdd"></select>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group row g-0">
-                                                <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.Trns_RefNum</label>
-                                                <div class="col-8 col-md-7 ">
+                                                <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.Trns_RefNum</label>
+                                                <div class="col-9 col-md-7 ">
                                                     <input disabled type="text" class="form-control" id="txtRefNumber">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group row g-0 ">
-                                                <label id="LabtxtRemarks" class="col-4 col-md-1  align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                                <div class="col-8 col-md-11 ">
+                                                <label id="LabtxtRemarks" class="col-3 col-md-2  align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                                <div class="col-9 col-md-10 ">
                                                     <textarea rows="2" type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+                                @* special Flides *@
                                 <div class="col-12 col-md-6">
                                     <div class="row special-group">
                                         <div class="form-group">
                                             <label class="col-12 align-self-center p-md-0 text-center">  @SystemResource.Download_items   </label>
                                         </div>
-                                        <div class="col-12 col-md-8">
+                                        <div class="col-12 col-md-8 order-3 order-md-1">
                                             <div class="form-group row g-0">
-                                                <label class="col-4  align-self-center p-md-0">@SystemResource.APP_Category</label>
-                                                <div class="col-8 ">
+                                                <label class="col-3 col-md-4  align-self-center p-md-0">@SystemResource.APP_Category</label>
+                                                <div class="col-9 col-md-8 ">
                                                     <select disabled class="form-control" id="ddlCategory"></select>
                                                 </div>
                                             </div>
-
                                         </div>
-                                        <div class="col-12 col-md-4">
+                                        <div class="col-12 col-md-4 order-1 order-md-2">
                                             <button id="btnLoad" type="button" class="btn btn-main">
                                                 @SystemResource.Download
                                                 <i class="fas fa-save"></i>
                                             </button>
                                         </div>
-                                        <div class="col-8">
-                                            <div class="form-group row g-0">
-                                                <label class="col-4  align-self-center p-md-0">@SystemResource.Itm_MainItem</label>
-                                                <div class="col-8 ">
+                                        <div class="col-12 col-md-8 order-2 order-md-3">
+                                            <div class="form-group row g-0 ">
+                                                <label class="col-3 col-md-4  align-self-center p-md-0">@SystemResource.Itm_MainItem</label>
+                                                <div class="col-9 col-md-8">
                                                     <select disabled class="form-control" id="ddlFamily"></select>
                                                 </div>
                                             </div>
@@ -187,9 +185,6 @@
                             </div>
                         </div>
                         @* End special Flides *@
-
-
-
                     </div>
                 </div>
             </div>
@@ -200,17 +195,17 @@
                     <table class="table table-borderless ">
                         <thead>
                             <tr>
-                                <th style="width: 5%"></th>
+                                <th style="width: 2%"></th>
                                 <th style="width: 5%"></th>
                                 <th style="width: 10%"> @SystemResource.Itm_ItemCode</th>
-                                <th style="width: 15%">@SystemResource.Itm_Item</th>
+                                <th style="width: 20%">@SystemResource.Itm_Item</th>
                                 <th style="width: 10%"> @SystemResource.Itm_Uom</th>
-                                <th style="width: 10%" class="text-wrap">@SystemResource.Itm_CountedQuntity</th>
-                                <th style="width: 10%" class="text-wrap"> @SystemResource.Itm_ActualQuntity</th>
-                                <th style="width: 10%" class="text-wrap">@SystemResource.Itm_Diff</th>
-                                <th style="width: 10%" class="text-wrap">@SystemResource.ItemCurCost</th>
-                                <th style="width: 10%" class="text-wrap Cost">@SystemResource.ItemNewCost</th>
-                                <th style="width: 10%" class="text-wrap Cost">@SystemResource.Itm_Diff</th>
+                                <th style="width: 10%" >@SystemResource.Itm_CountedQuntity</th>
+                                <th style="width: 10%" > @SystemResource.Itm_ActualQuntity</th>
+                                <th style="width: 10%" >@SystemResource.Itm_Diff</th>
+                                <th style="width: 10%" >@SystemResource.ItemCurCost</th>
+                                <th style="width: 10%" class="Cost">@SystemResource.ItemNewCost</th>
+                                <th style="width: 10%" class="Cost">@SystemResource.Itm_Diff</th>
 
 
                             </tr>
@@ -225,34 +220,31 @@
             </div>
             <!-- Editors Details -->
             <div class="insettext row editor-details">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6">
 
                     <div class="form-group row g-0">
-                        <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
-                        <div class="col-4 col-xl-4 editor-input">
-                            <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Create</label>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                         </div>
-                        <div class="col-4 col-xl-6 editor-input">
-                            <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-md-6">
                     <div class="form-group row g-0">
-                        <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
-                        <div class="col-4 col-xl-4 editor-input">
-                            <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                         </div>
-                        <div class="col-4 col-xl-6 editor-input">
+                        <div class="col-4 col-md-5 editor-input px-0">
 
-                            <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                            <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </div>

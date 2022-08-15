@@ -435,7 +435,8 @@ namespace StkDefCategory {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     DocObj = result.Response as I_D_Category;
-                    success();   
+                    success();  
+                    Save_Succ_But();
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");
@@ -453,7 +454,7 @@ namespace StkDefCategory {
                 if (result.IsSuccess == true) {
                     DocObj = result.Response as I_D_Category;
                     success();
-
+                    Save_Succ_But();
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");

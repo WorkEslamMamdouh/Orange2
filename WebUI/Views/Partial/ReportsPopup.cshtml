@@ -1,10 +1,12 @@
-﻿
-@using Inv.WebUI.Resources
+﻿@using Inv.WebUI.Resources
 @{
     ViewBag.Title = @SystemResource.Purchase_Recieve;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <style>
+    .page-body-wrapper{
+        width:100%;
+    }
     svg {
         background-color: #fff !important;
         border: solid 1px #000000 !important;
@@ -54,10 +56,6 @@
         padding: 8px;
     }
 
-    button {
-        border: 1px solid black;
-    }
-
     tr:nth-child(even) {
         background-color: #dddddd;
     }
@@ -80,8 +78,20 @@
             display: none;
         }
 </style>
-
-<div id="div_Reports" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0   borderred" style="direction: ltr!important; text-align: center; background-color:#143f6b  !important;  ">
+<div id="div_Reports" class="d-flex justify-content-center" style="direction: ltr!important">
+    <div class="row">
+        <div id="DivFilter" class="d-flex justify-content-center mb-5">
+            <button id="btnPrint" class="btn btn-main" style="z-index:999999999">  طبـــــاعة  <i class="fa fa-print"></i></button>
+        </div>
+        <div id="printableArea" class="d-flex justify-content-center">
+            <div class="lds-ring"></div>
+        </div>
+        <div id="BackError" class="display_none"> </div>
+        <div id="editor"></div>
+    </div>
+    
+</div>
+@*<div id="div_Reports" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0   borderred" style="direction: ltr!important; text-align: center; background-color:#143f6b  !important;  ">
     <div id="DivFilter" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
 
@@ -92,7 +102,7 @@
                 </div>
                 <div class="col-xs-4">
 
-                    <button id="btnPrint" class="btn btn-success btn-sm" style="z-index:999999999">  طبـــــاعة  <i class="fa fa-print"></i></button>
+                    <button id="btnPrint" class="btn btn-main" style="z-index:999999999">  طبـــــاعة  <i class="fa fa-print"></i></button>
                 </div>
                 <div class="col-xs-1">
                 </div>
@@ -105,7 +115,7 @@
         </div>
 
     </div>
-    <div id="printableArea" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" @*style="height:650px"*@>
+    <div id="printableArea" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" >
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 
     </div>
@@ -114,7 +124,7 @@
     </div>
 
     <div id="editor"></div>
-</div>
+</div>*@
 
 
 <script>

@@ -919,6 +919,7 @@ var AccTrCustomerAdjust;
                     AdjustmentID = res.AdjustmentID;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -944,6 +945,7 @@ var AccTrCustomerAdjust;
                     AdjustmentID = res.AdjustmentID;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);

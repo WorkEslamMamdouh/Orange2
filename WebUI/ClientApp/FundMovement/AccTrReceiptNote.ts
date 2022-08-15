@@ -1442,7 +1442,7 @@ namespace AccTrReceiptNote {
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
-
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
@@ -1470,6 +1470,7 @@ namespace AccTrReceiptNote {
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
                     $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                     Update_claenData = 0;

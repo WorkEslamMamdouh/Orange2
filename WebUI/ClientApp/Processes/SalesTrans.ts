@@ -851,17 +851,18 @@ namespace SalesTrans {
 			                <span id="btn_minus${cnt}" class="display_none"><i class="fas fa-minus-circle fs-4 btn-minus "></i></span>
 		                </div>
 	                </td>
+                   
                     <td>
-		                <div class="form-group">
-                            <div class="search-content">
-                                <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control" />
-                                <button type="button" name="InvoiceSearch" id="btnSearchItems${cnt}" name="ColSearch" class="btn btn-main btn-search">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-		                </div>
-	                </td>
-                    <td>
+	                    <div class="form-group">
+		                    <div class="search-content d-flex justify-content-start align-items-center">
+			                    <button type="button" name="InvoiceSearch" id="btnSearchItems${cnt}" name="ColSearch" class="style_ButSearch me-1">
+				                    <i class="fas fa-search"></i>
+			                    </button>
+			                    <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control" />
+		                    </div>
+	                    </div>
+                    </td>
+                        <td>
 		                <div class="form-group">
 			                <input type="text"  class="form-control" id="txtItemName${cnt}" disabled>
 		                </div>
@@ -1160,6 +1161,7 @@ namespace SalesTrans {
                     Save();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }
@@ -1194,6 +1196,7 @@ namespace SalesTrans {
                     InitializeGrid();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }

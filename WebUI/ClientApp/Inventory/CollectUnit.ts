@@ -150,12 +150,12 @@ namespace CollectUnit {
 		                </div>
 	                </td>
                     <td>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-main input-sm" id="btnSearchItems${cnt}" name="ColSearch">
-                                <i class="fas fa-search"></i>
-                            </button>
-		                </div>
-	                </td>
+	                    <div class="form-group">
+		                    <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" name="ColSearch">
+		                    <i class="fa fa-search  "></i>
+		                     </button>
+	                    </div>
+                    </td>
                     <td>
 		                <div class="form-group">
                             <input id="txtItemCode${cnt}" type="text" class="form-control" name=""  />
@@ -315,12 +315,13 @@ namespace CollectUnit {
 		                </div>
 	                </td>
                     <td>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-main input-sm" id="btn_OUT_SearchItems${cnt}" name="ColSearch">
-                                <i class="fas fa-search"></i>
-                            </button>
-		                </div>
-	                </td>
+	                    <div class="form-group">
+		                    <button type="button" class="style_ButSearch" id="btn_OUT_SearchItems${cnt}" name="ColSearch">
+		                    <i class="fa fa-search  "></i>
+		                     </button>
+	                    </div>
+                    </td>
+                   
                     <td>
 		                <div class="form-group">
                             <input id="txt_OUT_ItemCode${cnt}" type="text" class="form-control" name=""  />
@@ -1208,7 +1209,7 @@ namespace CollectUnit {
                     DisplayMassage("تم الحفظ", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
                     Success();
-
+                    Save_Succ_But();
                 }
             }
         });
@@ -1236,7 +1237,7 @@ namespace CollectUnit {
                     DisplayMassage("تم التعديل", "Saved Succesfully", MessageType.Succeed); 
                     gloplCollectID = Model.CollectID;
                     Success();
-                
+                    Save_Succ_But();
             
                 }
             }

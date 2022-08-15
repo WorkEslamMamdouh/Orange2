@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-
 <div class="col-12  borderred">
     @* Old HTML *@
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
@@ -141,8 +140,6 @@
             </div>
         </div>
     </div>
-
-
     <div id="DivInvoiceDetails" class="display_none">
         <!-- Details  -->
         <div id="div_1" class="row display_none">
@@ -186,11 +183,11 @@
                             <div class="form-group row g-0">
                                 <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
                                 <div class="col-2 col-md-8">
-                                    <input type="checkbox" class="checkbox" id="chkActive" disabled="" name="">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="">
                                 </div>
                             </div>
                         </div>
-          
+
                         <div class="col-12 col-md-8">
                             <div class="form-group row g-0">
                                 <label class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
@@ -277,7 +274,7 @@
 
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
 
@@ -470,43 +467,13 @@
 
                     </div>
 
-                    @*-----------------------------Side Button---------------------------------*@
 
-                    <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 p-0 ">
-                        @*<button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
-                <span class="glyphicon"></span> @SystemResource.App_PrintInvoice
-            </button>
-            <button id="btnPrintInvoicePrice" type="button" class="btn btn-warning ">
-                <span class="glyphicon"></span> @SystemResource.App_PrintPrice
-            </button>
-            <div class="btn-group" id="div_btnPrint">
-                <label type="button" class="btn btn-warning">@SystemResource.App_Print</label>
-                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-hand-down"></span>
-                </button>*@
-                        <div class="dropdown-menu" role="menu" style="border-radius:15px">
-                            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                </div>*@
-                            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
-                </div>*@
-                        </div>
-                    </div>
-
-                    @*<button id="btnSave" type="button" class="btn btn-success  display_none float_left">
-            @SystemResource.App_save  <span class="glyphicon glyphicon-floppy-saved"></span>
-        </button>
-        <button id="btnBack" type="button" class="btn btn-warning  display_none float_left">
-            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
-        </button>
-        <button id="btnUpdate" type="button" class="btn btn-primary display_none float_left">
-            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
-        </button>*@
                 </div>
             </div>
         </div>
     </div>
+
+    @* Old HTML *@
     <div id="div_2" class="row display_none">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
             <div id="div_lapel2" class=" col-lg-9">
@@ -629,128 +596,7 @@
         </div>
         <br>
     </div>
-    @*<div id="div_2" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 Div_Bar display_none" style="background-color: #fbebdc!important;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <div id="div_lapel2" class=" col-lg-9">
-                    <div class="col-lg-3 col-xs-2" style="width: 25%;"></div>
-                    <div class="  col-lg-3 col-xs-2">
-                        <label class=" pading_lep    centeralign"> @SystemResource.value </label>
-                    </div>
-                    <div class="  col-lg-3 col-xs-2">
-                        <label class=" pading_lep    centeralign"> @SystemResource.App_Tax </label>
-                    </div>
-                    <div class="  col-lg-3 col-xs-2">
-                        <label class=" pading_lep    centeralign"> @SystemResource.App_TotAfterTax </label>
-                    </div>
-                </div>
-                <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <label class=" pading_lep centeralign"> @SystemResource.Tot_value_of_items </label>
-                    </div>
-                    <div class="col-lg-1 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Tax_TotalInvoice">  </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Tax_InvoiceVAT">  </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Tax_AfterTotalInvoiceVAT">  </label>
-                    </div>
-                </div>
-                <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
-                    <div class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <label class=" pading_lep    centeralign"> @SystemResource.Discount </label>
-                    </div>
-                    <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <input id="txt_Tax_Discount" name="" type="number" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">%</label>
-                        <input id="txt_Tax_total_Discount" name="" type="number" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <input id="txt_Tax_total_AfterDiscount" name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                    </div>
-                    <div class=" col-lg-2 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    </div>
-                    <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <input id="txt_Tax_Vat" disabled name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                    </div>
-                    <div class=" col-lg-1 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                    </div>
-                    <div class=" col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <input id="txt_Tax_AfterTotalVAT" disabled name="" type="number" class="form-control input-sm col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                    </div>
 
-                </div>
-                <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
-                    <div class=" col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <label class=" pading_lep centeralign ">@SystemResource.Fraction_difference  </label>
-                    </div>
-                    <div class=" col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign " id="Close_AllTotalSale">  </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Close_AllTotalSaleVAT">  </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="txtFraction_difference">  </label>
-                    </div>
-
-
-                </div>
-                <div class="div_lapel col-lg-9 col-md-7 col-sm-7 col-xl-7 col-xs-7">
-                    <div class=" col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <label class=" pading_lep centeralign ">@SystemResource.net </label>
-                    </div>
-                    <div class=" col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign " id="Tax_Net_total_AfterDiscount"> 100 </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Tax_Net_VAT"> 100  </label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                        <label class=" pading_lep centeralign" id="Tax_Net_AfterTotalVAT"> 100  </label>
-                    </div>
-
-
-                </div>
-
-            </div>
-            <div class=" col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="background-color: #fbebdc!important;">
-                <div id="" class="  col-lg-12  col-md-12 col-xl-12 col-sm-12 col-xs-12 ">
-                    <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
-                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.contract_number  </label>
-                        <div class="col-lg-2 col-sm-2 col-xs-2">
-                            <input type="number" class="form-control input-sm" maxlength="20" name="" id="txtContract_NO">
-                        </div>
-                        <label class="col-lg-1 col-sm-1  col-sm-3 col-xs-4  marginstenig pading_lep  pading_2   text-center   ">@SystemResource.Pur_order_No</label>
-                        <div class="col-lg-2 col-md-3  col-sm-3 col-xs-8  ">
-                            <input type="text" class="form-control input-sm" name="" id="txtPurchase_order_No">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
-                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.date_of_supply</label>
-                        <div class="col-lg-2 col-sm-2 col-xs-2">
-                            <input type="date" class="form-control input-sm" name="" id="txtDate_of_supply">
-                        </div>
-                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.Supply_end_date</label>
-                        <div class="col-lg-2 col-sm-2 col-xs-2">
-                            <input type="date" class="form-control input-sm" name="" id="txtSupply_end_Date">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-xl-12 col-sm-12 col-xs-12">
-                        <label class="col-lg-1 col-md-2 col-sm-2 col-xs-4  marginstenig pading_lep  pading_2 text_md_center   "> @SystemResource.Terms_of_payment</label>
-                        <div class="col-lg-5 col-sm-5 col-xs-5">
-                            <textarea rows="2" type="text" class="form-control input-sm" name="" id="txtTerms_of_Payment"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </div>*@
 </div>
  
 

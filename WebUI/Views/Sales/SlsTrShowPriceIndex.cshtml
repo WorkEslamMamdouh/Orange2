@@ -162,7 +162,7 @@
                             <div class="form-group row g-0">
                                 <label class="col-3 col-md-4 align-self-center p-md-0">اعتماد</label>
                                 <div class="col-2 col-md-8">
-                                    <input type="checkbox" class="checkbox" id="chkActive" disabled="" name="">
+                                    <input type="checkbox" class="checkbox" id="chkActive" disabled name="">
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
                                 <table class="table table-borderless ">
                                     <thead>
                                         <tr>
-                                            <th style="width: 5%"></th>
+                                            <th style="width: 2%"></th>
                                             <th style="width: 3%">@SystemResource.serial</th>
                                             <th style="width: 18%">@SystemResource.App_Type</th>
                                             <th style="width: 18%">@SystemResource.App_Item</th>
@@ -326,32 +326,6 @@
             </div>
         </div>
     </div>
-
-    @* Old HTml *@
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" style="    margin-top: 22px!important;">
-
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-            <button id="btnPrintInvoice" type="button" class="btn btn-info display_none">
-                <span class="glyphicon"></span> @SystemResource.App_PrintInvoice
-            </button>
-
-            <div class="btn-group" id="div_btnPrint">
-                <button type="button" class="btn btn-warning dropdown-toggle display_none" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-hand-down"></span>
-                </button>
-                <div class="dropdown-menu" role="menu" style="border-radius:15px">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                        <button style="width:100%" id="btnPrintTransaction" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl display_none"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                        <button style="width:100%" id="btnPrintslip" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl display_none"><span class="adminpro-icon adminpro-paint-roller"></span>          @SystemResource.App_Print_slip       </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 </div>
 @section Script{
     <script src="~/ClientApp/Sales/SlsTrShowPrice.js"></script>

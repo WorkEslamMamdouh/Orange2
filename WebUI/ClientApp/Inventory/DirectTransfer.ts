@@ -878,14 +878,13 @@ namespace DirectTransfer {
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
-
                     <td>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-main input-sm" id="btnSearchItems${cnt}" name="ColSearch">
-                                    <i class="fas fa-search"></i>
-                            </button>
-		                </div>
-	                </td>
+	                    <div class="form-group">
+		                    <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" name="ColSearch" disabled>
+		                         <i class="fa fa-search  "></i>
+		                     </button>
+	                    </div>
+                    </td>
                     <td>
 		                <div class="form-group">
                             <input id="txtItemCode${cnt}" type="text" class="form-control" name="" disabled />
@@ -1275,6 +1274,7 @@ namespace DirectTransfer {
                     Save();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }
@@ -1308,6 +1308,7 @@ namespace DirectTransfer {
                     Save();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }

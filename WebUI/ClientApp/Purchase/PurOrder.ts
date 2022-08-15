@@ -1007,11 +1007,11 @@ namespace PurOrder {
 	                </td>
                     <td>
 		                <div class="form-group">
-                            <div class="search-content">
-                                <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control  text_Display" />
-                                <button type="button" name="InvoiceSearch" id="btnSearchItems${cnt}" name="ColSearch" class="btn btn-main btn-search">
+                            <div class="search-content d-flex justify-content-start align-items-center">
+                                <button type="button" name="InvoiceSearch" id="btnSearchItems${cnt}" name="ColSearch" class="style_ButSearch me-1">
                                     <i class="fas fa-search"></i>
                                 </button>
+                                <input id="txtItemCode${cnt}" name="" disabled type="text" class="form-control  text_Display" />
                             </div>
 		                </div>
 	                </td>

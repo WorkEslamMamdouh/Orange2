@@ -11,63 +11,72 @@
         <div class="card bg-light-blue">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.process</label>
-                            <div class="col-8 ">
-                                <select id="ddlOPerationMaster" name="" class="form-control"></select>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.process</label>
+                                    <div class="col-8 ">
+                                        <select id="ddlOPerationMaster" name="" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.Process_status</label>
+                                    <div class="col-8 ">
+                                        <input type="text" class="form-control" disabled name="OperationStatusMaster" id="txtOPerationStatus">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_State</label>
+                                    <div class="col-8 ">
+                                        <select id="ddlStatusFilter" name="" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.Process_status</label>
-                            <div class="col-8 ">
-                                <input type="text" class="form-control" disabled name="OperationStatusMaster" id="txtOPerationStatus">
+                    
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                                    <div class="col-8 ">
+                                        <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                                    <div class="col-8 ">
+                                        <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.fromSales</label>
+                                    <div class="col-8 ">
+                                        <select id="ddlSourceSalesman" name="" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.ToSales</label>
+                                    <div class="col-8 ">
+                                        <select id="ddlToSalesman" name="" class="form-control"></select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_State</label>
-                            <div class="col-8 ">
-                                <select id="ddlStatusFilter" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">@* Empty Div for Responsive *@</div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                            <div class="col-8 ">
-                                <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                            <div class="col-8 ">
-                                <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.fromSales</label>
-                            <div class="col-8 ">
-                                <select id="ddlSourceSalesman" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.ToSales</label>
-                            <div class="col-8 ">
-                                <select id="ddlToSalesman" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -95,62 +104,68 @@
             <div class="col-12 service-content">
                 <div class="serviceBox mt-5">
                     <div class="row g-0">
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
+                                <div class="col-8">
                                     <input type="text" class="  form-control " disabled id="txtTrNo" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.App_date</label>
+                                <div class="col-8">
                                     <input type="date" class="form-control" disabled name="" id="txtTransferDate">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-6 col-lg-3">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Trns_RefNum</label>
-                                <div class="col-9 col-md-7">
+                                <label class="col-4 align-self-center p-md-0">@SystemResource.Trns_RefNum</label>
+                                <div class="col-8">
                                     <input type="text" class="  form-control " disabled id="txtRefNumber" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-2">
+                        <div class="col-12 col-md-2 ">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Trns_IsTransfered</label>
-                                <div class="col-9 col-md-7">
-                                    <input type="checkbox" class="checkbox" id="chkApproved" />
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_IsTransfered</label>
+                                <div class="col-2 col-md-8">
+                                    <input type="checkbox" class="checkbox" id="chkApproved" >
                                 </div>
                             </div>
                         </div>
                         @* Special Group *@
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-md-6 special-group">
-                                    <label class="col-12 text-blue fw-bold text-right">@SystemResource.Trns_TransFrom</label>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.fromSales</label>
-                                            <div class="col-9 col-md-7">
-                                                <select id='ddlSourceSalesmanAdd' class="form-control"></select>
+                                <div class="col-md-6 mt-3 mt-md-0">
+                                    <div class="row special-group">
+                                        <label class="col-12 text-blue fw-bold text-right">@SystemResource.Trns_TransFrom</label>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3 col-xl-2 align-self-center p-md-0">@SystemResource.fromSales</label>
+                                                <div class="col-9 col-xl-10">
+                                                    <select id='ddlSourceSalesmanAdd' class="form-control"></select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="col-md-6 special-group">
-                                    <label class="col-12 text-blue fw-bold text-right">@SystemResource.Trns_TransTo</label>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.ToSales</label>
-                                            <div class="col-9 col-md-7">
-                                                <select id='ddlToSalesmanAdd' class="form-control"></select>
+                                <div class="col-md-6 mt-3 mt-md-0 ">
+                                    <div class="row special-group">
+                                        <label class="col-12 text-blue fw-bold text-right">@SystemResource.Trns_TransTo</label>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-3 col-xl-2 align-self-center p-md-0">@SystemResource.ToSales</label>
+                                                <div class="col-9 col-xl-10">
+                                                    <select id='ddlToSalesmanAdd' class="form-control"></select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -177,10 +192,10 @@
                                 <table class="table table-borderless ">
                                     <thead id="div_label">
                                         <tr>
-                                            <th style="width: 3%"></th>
-                                            <th style="width: 20%">@SystemResource.Itm_ItemCode</th>
-                                            <th style="width: 20%">@SystemResource.App_Item</th>
-                                            <th style="width: 10%">@SystemResource.App_soldQty</th>
+                                            <th style="width: 2%"></th>
+                                            <th style="width: 10%">@SystemResource.Itm_ItemCode</th>
+                                            <th style="width: 40%">@SystemResource.App_Item</th>
+                                            <th style="width: 40%">@SystemResource.App_soldQty</th>
                                         </tr>
                                     </thead>
                                     <tbody id="div_Data"></tbody>

@@ -42,6 +42,8 @@ namespace CashBoxAccount {
             document.getElementById('Screen_name').innerHTML == "Box Account Statment";
 
         }
+        $('#btnPrint').addClass('display_none');
+
         $("#iconMainPages").addClass("d-none");
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
