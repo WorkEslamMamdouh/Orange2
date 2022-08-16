@@ -282,6 +282,7 @@ var DefStore;
                     btnback_onclick();
                     Displaystore();
                     MasterGridDoubleClick();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -306,6 +307,7 @@ var DefStore;
                     Selected_Data = detailstore.filter(function (x) { return x.StoreId == Number(storeID); });
                     $('#StoreDetail').removeClass('display_none');
                     DisplayData(Selected_Data);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);

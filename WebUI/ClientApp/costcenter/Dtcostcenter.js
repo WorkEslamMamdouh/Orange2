@@ -383,6 +383,7 @@ var Dtcostcenter;
                     btnShow_onclick();
                     QueryMode();
                     Mode = "Query";
+                    Save_Succ_But();
                 }
             }
         });
@@ -408,6 +409,7 @@ var Dtcostcenter;
                     QueryMode();
                     DisplayProcessedRecord();
                     Mode = "Query";
+                    Save_Succ_But();
                 }
             }
         });

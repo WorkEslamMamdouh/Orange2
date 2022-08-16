@@ -31,6 +31,7 @@ var AccDefBox;
             document.getElementById('Screen_name').innerHTML = "Fund definition";
         }
         $('#divIconbar').addClass('hidden_Control');
+        $("#icon-bar").addClass("d-none");
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -444,6 +445,7 @@ var AccDefBox;
                 if (result.IsSuccess == true) {
                     WorningMessage("تم الحفظ!", "Saved!", "تحذير", "worning");
                     success();
+                    Save_Succ_But();
                 }
                 else {
                     //debugger;

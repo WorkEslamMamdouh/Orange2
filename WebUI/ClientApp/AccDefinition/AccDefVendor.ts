@@ -1133,7 +1133,7 @@ namespace AccDefVendor {
                 getAccountvenById(Selecteditem[0].BankAccountNo);
             }
             else {
-                $('#txt_ACCCode').val('');
+               // $('#txt_ACCCode').val('');
                 $('#txt_ACCName').val('');
             }
             $('#divAccount').removeClass('display_none');

@@ -27,6 +27,7 @@ var GendefCustomerGroup;
             document.getElementById('Screen_name').innerHTML = "Customers Groups";
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
         // ;
@@ -179,6 +180,7 @@ var GendefCustomerGroup;
                     }
                     btnBack_Def_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     ;

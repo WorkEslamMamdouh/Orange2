@@ -39,6 +39,7 @@ namespace AccDefBox {
         }     
 
         $('#divIconbar').addClass('hidden_Control');
+        $("#icon-bar").addClass("d-none");
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
 
@@ -599,6 +600,8 @@ namespace AccDefBox {
                 if (result.IsSuccess == true) {
                     WorningMessage("تم الحفظ!", "Saved!", "تحذير", "worning");
                     success();
+                    Save_Succ_But();
+
                 }
                 else {
                     //debugger;

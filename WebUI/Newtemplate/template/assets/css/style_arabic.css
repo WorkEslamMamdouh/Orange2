@@ -26109,6 +26109,7 @@ body.avgrund-active {
 .jsgrid .jsgrid-grid-header {
     border: none;
     border-top: 0;
+    overflow-x: auto;
 }
 
 .jsgrid .jsgrid-grid-body {

@@ -39,6 +39,7 @@ namespace GenDefCustomerCat {
         }
 
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
 
@@ -302,6 +303,8 @@ namespace GenDefCustomerCat {
                     
                     btnBack_Def_onclick();
                     refresh();
+                    Save_Succ_But();
+
                 }
                 else {
                      

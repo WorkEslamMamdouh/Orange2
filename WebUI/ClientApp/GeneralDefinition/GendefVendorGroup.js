@@ -27,6 +27,7 @@ var GendefVendorGroup;
             document.getElementById('Screen_name').innerHTML = "Suppliers Groups";
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -174,6 +175,7 @@ var GendefVendorGroup;
                     }
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");

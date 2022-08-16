@@ -39,7 +39,10 @@ namespace GenDefVendorAdjust {
             document.getElementById('Screen_name').innerHTML = "Types of Suppliers Adjustment";
 
         }
-
+        $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
 
 
         ////debugger;
@@ -90,9 +93,7 @@ namespace GenDefVendorAdjust {
     });
 
     function InitalizeControls() {
-        $('#divIconbar').addClass('hidden_Control');
-        $('#iconbar_Definition').removeClass('hidden_Control');
-        $("#divShow").removeClass("display_none");
+    
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
         btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
@@ -398,6 +399,8 @@ namespace GenDefVendorAdjust {
                     }
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
+
                 }
                 else {
                     //debugger;
