@@ -12,23 +12,23 @@
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                                    <div class="col-8 col-md-10">
+                                    <label for="txtFromDate" class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                                    <div class="col-9 col-md-10">
                                         <input type="date" class="form-control" name="" id="txtStartDate">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                                    <div class="col-8 col-md-10">
+                                    <label for="txtFromDate" class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                                    <div class="col-9 col-md-10">
                                         <input type="date" class="form-control" name=" " id="txtEndDate">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_Branch</label>
                                     <div class="col-9 col-md-10">
                                         <div class="search-content">
@@ -41,8 +41,8 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-9 offset-3 col-md-12 offset-md-0">
                                         <input id="txtbranchDesc" type="text" autofocus="autofocus" class="form-control" disabled>
                                     </div>
                                 </div>
@@ -50,25 +50,25 @@
 
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_System</label>
-                                    <div class="col-8 col-md-10">
+                                    <label for="txtFromDate" class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_System</label>
+                                    <div class="col-9 col-md-10">
                                         <select id="drpSystem" name="" class="form-control"></select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.Movment</label>
-                                    <div class="col-8 col-md-10">
+                                    <label for="txtFromDate" class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.Movment</label>
+                                    <div class="col-9 col-md-10">
                                         <select id="drpTrans" name="" class="form-control"></select>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-12 col-lg-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_TaxType</label>
-                                    <div class="col-8 col-md-10">
+                                    <label for="txtFromDate" class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_TaxType</label>
+                                    <div class="col-9 col-md-10">
                                         <select id="drpSalesVatTp" name="" class="form-control"></select>
                                         <select id="drpPurVatTp" name="" class="form-control display_none"></select>
                                     </div>
@@ -78,7 +78,7 @@
                             <div class="col-12">
                                 <div class="form-group row special-group">
                                     <div class="col-12 col-md-4">
-                                        <div class="form-check row g-0 d-flex">
+                                        <div class="form-check row  d-flex">
                                             <label class="col-6 col-md-3  form-check-label align-self-center p-md-0" for="rd_SummeryRpt"> @SystemResource.Summary</label>
                                             <div class="col-6 col-md-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" checked="checked" id="rd_SummeryRpt" name="ReportTp" value="2">
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <div class="form-check row g-0 d-flex">
+                                        <div class="form-check row  d-flex">
                                             <label class="col-6 col-md-3 form-check-label align-self-center p-md-0" for="rd_DetailRpt"> @SystemResource.Detailed</label>
                                             <div class="col-6 col-md-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_DetailRpt" name="ReportTp" value="2">
@@ -94,7 +94,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4 display_none" id="div_Landscape">
-                                        <div class="form-check row g-0 d-flex">
+                                        <div class="form-check row  d-flex">
                                             <label class="col-6 col-md-6  form-check-label align-self-center p-md-0" for="chk_Certified"> @SystemResource.width_Print</label>
                                             <div class="col-6 col-md-6 ">
                                                 <input class="form-check-input mt-0" type="checkbox" id="chkLandscapePrint" autofocus="autofocus">
@@ -107,37 +107,37 @@
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="row">
+                        <div class="row gy-3">
                             <div class="col-12">
-                                <div class="form-group row special-group">
+                                <div class="form-group row  special-group">
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4  form-check-label align-self-center p-md-0" for="rd_SalesInvoice"> @SystemResource.Sales_Invoice</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6  form-check-label align-self-center p-md-0" for="rd_SalesInvoice"> @SystemResource.Sales_Invoice</label>
+                                            <div class="col-6 col-md-4 col-lg-6">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_SalesInvoice" checked="checked" name="Group1" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4 form-check-label align-self-center p-md-0" for="rd_SalesUpdates"> @SystemResource.Update_Sales</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6 form-check-label align-self-center p-md-0" for="rd_SalesUpdates"> @SystemResource.Update_Sales</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_SalesUpdates" name="Group1" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4 form-check-label align-self-center p-md-0" for="rd_PurchaseInvoice"> @SystemResource.Purshase_Invoice</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6 form-check-label align-self-center p-md-0" for="rd_PurchaseInvoice"> @SystemResource.Purshase_Invoice</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_PurchaseInvoice" name="Group1" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4 form-check-label align-self-center p-md-0" for="rd_PurchaseUpdates"> @SystemResource.Update_Purshase</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6 form-check-label align-self-center p-md-0" for="rd_PurchaseUpdates"> @SystemResource.Update_Purshase</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_PurchaseUpdates" name="Group1" value="2">
                                             </div>
                                         </div>
@@ -149,25 +149,25 @@
                             <div class="col-12" id="div_summery" >
                                 <div class="form-group row special-group">
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4  form-check-label align-self-center p-md-0" for="rd_SummeryRpt"> @SystemResource.Collect_Benf</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6  form-check-label align-self-center p-md-0" for="rd_SummeryRpt"> @SystemResource.Collect_Benf</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" checked="checked" id="rd_Customer" name="Type" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4 form-check-label align-self-center p-md-0" for="rd_DetailRpt"> @SystemResource.Collect_Process</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6 form-check-label align-self-center p-md-0" for="rd_DetailRpt"> @SystemResource.Collect_Process</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_Process" name="Type" value="2">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check row g-0 d-flex my-0">
-                                            <label class="col-6 col-md-4 form-check-label align-self-center p-md-0" for="rd_DetailRpt"> @SystemResource.Collect_branch</label>
-                                            <div class="col-6 col-md-8 ">
+                                        <div class="form-check row  d-flex my-0">
+                                            <label class="col-6 col-md-4 col-lg-6 form-check-label align-self-center p-md-0" for="rd_DetailRpt"> @SystemResource.Collect_branch</label>
+                                            <div class="col-6 col-md-4 col-lg-6 ">
                                                 <input class="form-check-input form-radio special-radio" type="radio" id="rd_branch" name="Type" value="2">
                                             </div>
                                         </div>
