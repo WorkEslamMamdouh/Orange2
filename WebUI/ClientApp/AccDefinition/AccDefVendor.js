@@ -1231,6 +1231,7 @@ var AccDefVendor;
                     Display();
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);
@@ -1255,6 +1256,7 @@ var AccDefVendor;
                     Display();
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);

@@ -29,6 +29,7 @@ var AccDefReceipts;
             document.getElementById('Screen_name').innerHTML = "Revenue Accounts";
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
         ////debugger;
@@ -212,6 +213,7 @@ var AccDefReceipts;
                     MessageBox.Show("تم الحفظ", "الحفظ");
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     //debugger;

@@ -39,6 +39,7 @@ namespace AccDefReceipts {
 
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#divIconbar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
 
@@ -310,6 +311,7 @@ namespace AccDefReceipts {
                     MessageBox.Show("تم الحفظ", "الحفظ");
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     //debugger;
