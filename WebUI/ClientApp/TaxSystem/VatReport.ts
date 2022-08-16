@@ -17,9 +17,9 @@ namespace VATReport {
     var drpVatPeriod: HTMLSelectElement;
     var txtFromDate: HTMLInputElement;
     var txtToDate: HTMLInputElement;
-    var btnSave: HTMLButtonElement;
+    var btn_Save: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
-    var btnBack: HTMLButtonElement;
+    var btn_Back: HTMLButtonElement;
     var btnLoad: HTMLButtonElement;
     var txtCORRECTIONS: HTMLInputElement;
     var txtVAT_PREVBALANCE: HTMLInputElement;
@@ -65,6 +65,7 @@ namespace VATReport {
         $('#btnPrint').addClass('display_none');
         $("#btnShow").addClass("d-none");
         $("#btnAdd").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
     
     }
     function InitializeControls() {
@@ -89,8 +90,8 @@ namespace VATReport {
         //txtVAT_CR_ACC = document.getElementById("txtVAT_CR_ACC") as HTMLInputElement;
         //txtVAT_ACCURUAL_ACC = document.getElementById("txtVAT_ACCURUAL_ACC") as HTMLInputElement;
         btnEdit = document.getElementById("btnEdit") as HTMLButtonElement;
-        btnSave = document.getElementById("btnSave") as HTMLButtonElement;
-        btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btn_Save = document.getElementById("btn_Save") as HTMLButtonElement;
+        btn_Back = document.getElementById("btn_Back") as HTMLButtonElement;
        
         //btnAccountSearch_DB = document.getElementById("btnAccountSearch_DB") as HTMLButtonElement;
         //btnAccountSearch_CR = document.getElementById("btnAccountSearch_CR") as HTMLButtonElement;
@@ -118,8 +119,8 @@ namespace VATReport {
         txtVAT_PREVBALANCE.onchange = txtVAT_PREVBALANCE_onchange;
         txtCORRECTIONS.onchange = txtCORRECTIONS_onchange;
         btnEdit.onclick = btnEdit_onclick;
-        btnSave.onclick = btnSave_onclick;
-        btnBack.onclick = btnBack_onclick;
+        btn_Save.onclick = btnSave_onclick;
+        btn_Back.onclick = btnBack_onclick;
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
@@ -389,8 +390,8 @@ namespace VATReport {
     }
     function btnEdit_onclick()
     {
-        $("#btnSave").removeClass("display_none");
-        $("#btnBack").removeClass("display_none");
+        $("#btn_Save").removeClass("display_none");
+        $("#btn_Back").removeClass("display_none");
         $("#btnEdit").addClass("display_none");
         $("#btnClose").addClass("display_none");
         $("#btnLoad").removeClass("display_none");
@@ -431,8 +432,8 @@ namespace VATReport {
         if (rd_Open.checked)
         {
             $("#btnEdit").removeClass("display_none");
-            $("#btnSave").addClass("display_none");
-            $("#btnBack").addClass("display_none");
+            $("#btn_Save").addClass("display_none");
+            $("#btn_Back").addClass("display_none");
             $("#btnClose").removeClass("display_none");
             $("#btnLoad").addClass("display_none");
             $("#btnReopen").addClass("display_none");
@@ -445,19 +446,19 @@ namespace VATReport {
             $("#btnDeliveringReport").removeClass("display_none");
             $("#btnprint").removeClass("display_none");
             $("#btnEdit").addClass("display_none");
-            $("#btnSave").addClass("display_none");
+            $("#btn_Save").addClass("display_none");
             $("#btnClose").addClass("display_none");
             $("#btnLoad").addClass("display_none");
-            $("#btnBack").addClass("display_none");
+            $("#btn_Back").addClass("display_none");
         }
         else if (rd_delivered.checked) {
             $("#btnEdit").addClass("display_none");
-            $("#btnSave").addClass("display_none");
+            $("#btn_Save").addClass("display_none");
             $("#btnClose").addClass("display_none");
             $("#btnLoad").addClass("display_none");
             $("#btnReopen").addClass("display_none");
             $("#btnDeliveringReport").addClass("display_none");
-            $("#btnBack").addClass("display_none");
+            $("#btn_Back").addClass("display_none");
             $("#btnprint").removeClass("display_none");
            
         }

@@ -11,16 +11,17 @@
             <div class="card-body">
                 <div class="row">
                     <!-- Details Side Icon Bar -->
-                    <div class="div-iconbar">
-                        <button class="icon-bar2 d-flex justify-content-between btn-update" id="btnUpdate_3">
-                            <i class="fas fa-edit fa-fw side-icon ms-1"></i>
-                            <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
-                        </button>
-                        <button class="icon-bar2 d-flex justify-content-between btn-save display_none" id="btnSave_3">
-                            <i class="fas fa-save fa-fw side-icon ms-1"></i>
-                            <span class="align-self-center mb-3">  @SystemResource.App_save</span>
-                        </button>
-                    </div>
+                    @*<div class="div-iconbar">
+            <button class="icon-bar2 d-flex justify-content-between btn-update" id="btnUpdate_3">
+                <i class="fas fa-edit fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
+            </button>
+            <button class="icon-bar2 d-flex justify-content-between btn-save display_none" id="btnSave_3">
+                <i class="fas fa-save fa-fw side-icon ms-1"></i>
+                <span class="align-self-center mb-3">  @SystemResource.App_save</span>
+            </button>
+        </div>*@
+
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
                             <label for="txtFromDate" class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Vat_Period</label>
@@ -29,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-md-4">
                         <div class="form-group row special-group">
                             <div class="col-12 col-md-4">
                                 <div class="form-check row g-0 d-flex my-0">
@@ -58,7 +59,66 @@
 
                         </div>
                     </div>
-
+                    @*Start Buttons div *@
+                    <div class="col-12 col-md-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button id="btnReopen" type="button" class="btn btn-green btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-lock-open"></i>
+                                            @SystemResource.Reopen
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="btnDeliveringReport" type="button" class="btn btn-design btn-orange h-100 w-100 display_none">
+                                            <i class="fas fa-file-import"></i>
+                                            @SystemResource.Progress_Ratification
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button id="btnEdit" type="button" class="btn btn-blue btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-marker"></i>
+                                            @SystemResource.App_Update
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="btnClose" type="button" class="btn btn-red btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-lock"></i>
+                                            اغلاق
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button id="btn_Save" type="button" class="btn btn-green btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-save"></i>
+                                            @SystemResource.App_save
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="btn_Back" type="button" class="btn btn-orange btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-backspace"></i>
+                                            @SystemResource.App_back
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="btnLoad" type="button" class="btn btn-blue btn-design h-100 w-100 display_none">
+                                            <i class="fas fa-file-download"></i>
+                                            @SystemResource.Download
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*End Buttons div *@
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
                             <label for="txtFromDate" class="col-4  align-self-center p-md-0">@SystemResource.Period_start_date</label>
@@ -200,199 +260,6 @@
     </div>
 </div>
 
-
-
-<div id="content_report" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12   borderred ">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <label for="txtToDate" class="col-xs-2 pading_2 textcentr_padingVatSettingVatSetting">@SystemResource.Vat_Period</label>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pr-0">
-            <select id="drpVatPeriod" name="" class="form-control input-sm text_Display"></select>
-        </div>
-        <div class="col-xs-1 ">
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 border_gridCont">
-            <div class=" col-xs-4 p-0" style="color:#1cb3f9;font-weight:bold">
-                <label class=" col-xs-9 pading_2 pr-0 pl-0">@SystemResource.open</label>
-                <input class="input-sm form-control col-xs-3  pr-0 pl-0" type="radio" disabled="disabled" id="rd_Open" name="status" value="2">
-            </div>
-            <div class=" col-xs-4 p-0" style="color:#1cb3f9;font-weight:bold">
-                <label class=" col-xs-9 pading_2 pr-0 pl-0">@SystemResource.close</label>
-                <input class="input-sm form-control col-xs-3  pr-0 pl-0" type="radio" disabled="disabled" id="rd_close" name="status" value="2">
-            </div>
-            <div class=" col-xs-4 p-0" style="color:#1cb3f9;font-weight:bold">
-                <label class=" col-xs-9 pt-2 pr-1 pl-0">@SystemResource.Authorization_submitted</label>
-                <input class="input-sm form-control col-xs-3  pr-0 pl-0" type="radio" disabled="disabled" id="rd_delivered" name="status" value="2">
-            </div>
-        </div>
-        <div class="col-xs-1 ">
-        </div>
-        <div class="col-lg-5 col-md-1 col-sm-6 col-xl-6 col-xs-6 ">
-            <button id="btnEdit" type="button" class="btn btn-info display_none"> @SystemResource.App_Update  <span class="glyphicon glyphicon-save"></span></button>
-
-            <button id="btnSave" type="button" class="btn btn-success display_none">
-                @SystemResource.App_save  <span class="glyphicon glyphicon-plus-sign "></span>
-            </button>
-
-            <button id="btnBack" type="button" class="btn btn-warning display_none"> @SystemResource.App_back <span class="glyphicon glyphicon-backward"></span></button>
-
-            <button id="btnLoad" type="button" class="btn btn-info display_none"> @SystemResource.Download  <span class="glyphicon glyphicon-save"></span></button>
-
-            <button id="btnReopen" type="button" class="btn btn-success display_none">@SystemResource.Reopen  <span class="glyphicon glyphicon-earphone"></span></button>
-
-            <button id="btnDeliveringReport" type="button" class="btn btn-warning display_none"> @SystemResource.Progress_Ratification   <span class="glyphicon glyphicon-export"></span></button>
-
-            <button id="btnClose" type="button" class="btn btn-danger display_none"> اغلاق  <span class="glyphicon glyphicon-folder-close"></span></button>
-
-            @*<button id="btnprint" type="button" class="btn btn-danger "> طباعة  <span class="glyphicon glyphicon-folder-close"></span></button>*@
-
-            @*********************@
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-
-                <div class="6col-xs-6 float-left">
-                    <div class="btn-group ">
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                            @SystemResource.App_Print  <span class="glyphicon glyphicon-hand-down"></span>
-                        </button>
-                        <div class="dropdown-menu" role="menu" style="border-radius:15px">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                                <button style="width:100%" id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.App_Print      </button>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                                <button style="width:100%" id="btnPrintTrview" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span>           @SystemResource.Print_Report      </button>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                                <button style="width:100%" id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>   @SystemResource.Download_PDF     </button>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                                <button style="width:100%" id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span> @SystemResource.Download_EXCEL   </button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <button id="btnAddFreeReturn" type="button" class="btn btn-warning display_none">
-                        <span class="glyphicon glyphicon-save"></span> @SystemResource.btn_AddFreeReturn
-                    </button>
-                </div>
-
-            </div>
-
-
-
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2 textcentr_padingVatSettingVatSetting">@SystemResource.Period_start_date</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input type="date" class="input-sm form-control " disabled="disabled" name="FROM_DATE" id="txtFromDate">
-        </div>
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2 textcentr_padingVatSettingVatSetting">@SystemResource.Period_start_date</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input type="date" class="input-sm  form-control " disabled="disabled" name="TO_DATE" id="txtToDate">
-        </div>
-
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2 text-center">@SystemResource.App_Registration_Number</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input type="text" class="input-sm  form-control " disabled="disabled" name="VOUCHER_CODE" id="txtVOUCHER_CODE">
-        </div>
-
-        @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 ">
-                <label for="txtToDate" class="col-xs-7 pading_2 text-center ">تطبيق الضريبة   </label>
-                <div class=" col-xs-4">
-                    <input type="checkbox" class="checkbox" id="chkActive" name="CUSTOM6" />
-                </div>
-            </div>*@
-    </div>
-
-    <div class="col-xs-12 border_gridCont">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label id="LbSales">@SystemResource.Men_Sales</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table id="divSalesGrid"></table>
-        </div>
-        <div class="col-xs-12">
-
-            <div class="col-2">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_2 text-center">@SystemResource.Total_sales</label>
-            </div>
-
-            <div class="col-lg-4 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbSlsAmount" class="col-lg-2">0</label>
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbSlsChanges" class="col-lg-2">0</label>
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbSlsVat" class="col-lg-2">0</label>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="col-lg-12 border_gridCont">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-            <label id="LbPurch">@SystemResource.Purchase</label>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <table id="divPurGrid"></table>
-        </div>
-        <div class="col-lg-12">
-
-            <div class="col-2">
-                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_2 text-center">@SystemResource.Inv_TotalPurchases</label>
-            </div>
-
-            <div class="col-lg-4 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbPurAmount" class="col-lg-2">0</label>
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbPurChanges" class="col-lg-2">0</label>
-            </div>
-
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label id="LbPurVat" class="col-lg-2">0</label>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_lep  pading_2 textcentr_padingVatSettingVatSetting ">@SystemResource.Net_tax</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input id="txtTOTALPERIODVAT" name="TOTALPERIODVAT" type="text" disabled="disabled" autofocus="autofocus" class="form-control input-sm   ">
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_2 textcentr_padingVatSettingVatSetting">@SystemResource.previous_balance</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input id="txtVAT_PREVBALANCE" name="VAT_PREVBALANCE" disabled="disabled" type="text" autofocus="autofocus" class="form-control input-sm   ">
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_lep  pading_2 textcentr_padingVatSettingVatSetting ">@SystemResource.Adjustments</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input id="txtCORRECTIONS" name="CORRECTIONS" type="text" disabled="disabled" autofocus="autofocus" class="form-control input-sm   ">
-        </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  pading_2 textcentr_padingVatSettingVatSetting">@SystemResource.tax_due</label>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-            <input id="txtNETVAT_AMOUNT" name="NETVAT_AMOUNT" type="text" disabled="disabled" autofocus="autofocus" class="form-control input-sm   ">
-        </div>
-    </div>
-</div>
 @section Script{
     <script src="~/ClientApp/TaxSystem/VATReport.js"></script> 
 }

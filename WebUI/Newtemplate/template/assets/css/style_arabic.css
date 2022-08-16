@@ -13040,11 +13040,41 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     color: var(--bs-light);
     background-color: var(--main-blue);
     border-color: var(--main-blue);
-    transition: all .5s ease-in-out;
-    
+    transition: all .5s ease-in-out;  
+}
+.btn-gray {
+    color: var(--bs-light);
+    background-color: var(--bs-gray);
+    border-color: var(--bs-gray);
+}
+.btn-green {
+    color: var(--bs-light);
+    background-color: green;
+    border-color: green;
+}
+.btn-dark-green {
+    color: var(--bs-light);
+    background-color: #004d00;
+    border-color: #004d00;
+}
+.btn-orange {
+    color: var(--bs-light);
+    background-color: #ff4000;
+    border-color: #ff4000;
+}
+.btn-red {
+    color: var(--bs-light);
+    background-color: #b30000;
+    border-color: #b30000;
+}
+.btn-blue {
+    color: var(--bs-light);
+    background-color: var(--main-blue);
+    border-color: var(--main-blue);
 }
     .btn-main:not(.btn-search),
-    .btn-style {
+    .btn-style,
+    .btn-design{
         padding: 1rem;
         border-radius: 10px;
     }
@@ -13054,12 +13084,23 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     background-color: var(--main-orange);
     border-color: var(--main-orange);
 }
-.btn-gray {
-    color: var(--bs-light);
-    background-color: var(--bs-gray);
-    border-color: var(--bs-gray);
+.btn-green:hover {
+    background-color: darkgreen;
+    border-color: darkgreen;
+}
+.btn-orange:hover {
+    background-color: #992600;
+    border-color: #992600;
+}
+.btn-red:hover {
+    background-color: #660000;
+    border-color: #660000;
 }
 
+.btn-blue:hover {
+    background-color: var(--dark-blue);
+    border-color: var(--dark-blue);
+}
     .btn-gray:hover {
         color: var(--Lighter-blue);
         background-color: var(--bs-gray-dark);

@@ -2,62 +2,6 @@
 @{
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-@*<style>
-        .display_none {
-            display: none;
-        }
-
-        .font {
-            font-size: larger;
-        }
-
-        .font2 {
-            font-size: 25px;
-        }
-
-        .border_gridCont {
-            margin-top: 0%;
-        }
-
-        .text-center {
-            text-align: center !important;
-        }
-
-        input[type=radio] {
-            height: 25px !important;
-        }
-
-        .inputvat {
-            background: url('data:image/svg+xml;utf8,% width="40" height="30"><text x="5" y="19" style="font: bold 16px Arial;">Age:</text></svg>') no-repeat;
-            border: 1px solid #555;
-            box-sizing: border-box;
-            padding-left: 50px;
-        }
-
-        .input-box {
-            position: relative;
-        }
-
-        .input {
-            display: block;
-            border: 1px solid #d7d6d6;
-            background: #fff;
-            padding: 10px 10px 10px 20px;
-            width: 195px;
-        }
-
-        .unit {
-            position: absolute;
-            display: block;
-            left: 18px;
-            top: 10px;
-            z-index: 9;
-            font-weight: bold;
-        }
-    </style>*@
-
-
-
 <div class="row gy-3" id="Div_Control">
     <!-- Filter Container -->
     <div class="col-12">
@@ -66,8 +10,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <div  class="col-4 offset-4 mb-3">
-                                <div class="form-group row g-0">
+                            <div  class="col-12 col-md-4 offset-md-4 offset-0 mb-3">
+                                <div class="form-group row ">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.Tax_enforcement</label>
                                     <div class="col-8 ">
                                         <input type="checkbox" class="checkbox" id="chkSetting" name="CUSTOM6" />
@@ -137,11 +81,11 @@
                     <div class="col-12 col-md-7">
                         <div class="row">
                             <div class="col-12 col-md-7 p-0">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-6 col-md-7 align-self-center p-md-0">@SystemResource.VAT_debit_Account</label>
                                     <div class="col-6 col-md-5">
                                         <div class="search-content">
-                                            <input id="txtVAT_DB_ACC" type="text" autofocus="autofocus" disabled name="VAT_DB_ACC" class="form-control">
+                                            <input id="txtVAT_DB_ACC" type="text" autofocus="autofocus" disabled name="VAT_DB_ACC" class="form-control search-control">
                                             <button type="button" id="btnAccountSearch_DB" name="ColSearch" class="btn btn-main btn-search" disabled>
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -150,19 +94,19 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-5 p-0">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-6 offset-6 col-md-12 offset-md-0">
                                         <input id="txtAccountdesc_Db" type="text" autofocus="autofocus" disabled class="form-control">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-7 p-0">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-6 col-md-7 align-self-center p-md-0">@SystemResource.Calculation_value_added_tax_of_creditor</label>
                                     <div class="col-6 col-md-5">
                                         <div class="search-content">
-                                            <input id="txtVAT_CR_ACC" type="text" autofocus="autofocus" disabled name="VAT_CR_ACC" class="form-control">
+                                            <input id="txtVAT_CR_ACC" type="text" autofocus="autofocus" disabled name="VAT_CR_ACC" class="form-control search-control">
                                             <button type="button" id="btnAccountSearch_CR" name="ColSearch" class="btn btn-main btn-search" disabled>
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -171,19 +115,19 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-5 p-0">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-6 offset-6 col-md-12 offset-md-0">
                                         <input id="txtAccountdesc_CR" type="text" autofocus="autofocus" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-7 p-0">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-6 col-md-7 align-self-center p-md-0">@SystemResource.Calculation_VAT_due</label>
                                     <div class="col-6 col-md-5">
                                         <div class="search-content">
-                                            <input id="txtVAT_ACCURUAL_ACC" type="text" autofocus="autofocus" name="VAT_ACCURUAL_ACC" disabled class="form-control">
+                                            <input id="txtVAT_ACCURUAL_ACC" type="text" autofocus="autofocus" name="VAT_ACCURUAL_ACC" disabled class="form-control search-control">
                                             <button type="button" id="btnAccountSearch_Acc" name="ColSearch" class="btn btn-main btn-search" disabled>
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -192,19 +136,19 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-5 p-0">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-6 offset-6 col-md-12 offset-md-0">
                                         <input id="txtAccountdesc_Acc" type="text" autofocus="autofocus" class="form-control" disabled>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-7 p-0">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-6 col-md-7 align-self-center p-md-0">@SystemResource.Calculation_Sls_Desc_AccCode</label>
                                     <div class="col-6 col-md-5">
                                         <div class="search-content">
-                                            <input id="txtSls_DISC_ACC_CODE" type="text" autofocus="autofocus" disabled class="form-control">
+                                            <input id="txtSls_DISC_ACC_CODE" type="text" autofocus="autofocus" disabled class="form-control search-control">
                                             <button type="button" id="btnSls_DISC_ACC_CODE" name="ColSearch" class="btn btn-main btn-search" disabled>
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -213,19 +157,19 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-5 p-0">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-6 offset-6 col-md-12 offset-md-0">
                                         <input id="txtSls_DISC" type="text" autofocus="autofocus" disabled class="form-control">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-7 p-0">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-6 col-md-7 align-self-center p-md-0">@SystemResource.Calculation_Pur_Desc_AccCode</label>
                                     <div class="col-6 col-md-5">
                                         <div class="search-content">
-                                            <input id="txtPur_DISC_ACC_CODE" type="text" autofocus="autofocus" disabled class="form-control">
+                                            <input id="txtPur_DISC_ACC_CODE" type="text" autofocus="autofocus" disabled class="form-control search-control">
                                             <button type="button" id="btnPur_DISC_ACC_CODE" name="ColSearch" class="btn btn-main btn-search" disabled>
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -234,8 +178,8 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-5 p-0">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-6 offset-6 col-md-12 offset-md-0">
                                         <input id="txtPur_DISC" type="text" autofocus="autofocus" class="form-control" disabled>
                                     </div>
                                 </div>
