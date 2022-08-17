@@ -2993,17 +2993,15 @@ namespace PurTrReceive {
 
         ReceiveModel.ItemTotalFC = Number(txtTotalbefore.value);
         ReceiveModel.ItemDiscountTotalFC = Number(txtTotalDiscount.value);
-
-        //ReceiveModel.ItemTotal = Number(txtTotalbefore.value);
         ReceiveModel.DiscountAmount = Number(txtTotalDiscount.value);
 
+        //ReceiveModel.ItemTotal = Number(txtTotalbefore.value);
         // Details Receive items
 
         for (var i = 0; i < CountGrid; i++) {
             ReceiveItemSingleModel = new I_Pur_TR_ReceiveItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-
-
+             
 
             if (StatusFlag == "i") {
                 ReceiveItemSingleModel.ReciveDetailsID = 0;

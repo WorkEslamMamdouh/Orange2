@@ -1446,7 +1446,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2388,7 +2387,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>الخصم</Value>
+                <Value>الخصم الاصناف</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -2401,7 +2400,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox9</rd:DefaultName>
         <Top>9.3501cm</Top>
-        <Left>20.07253cm</Left>
+        <Left>20.03828cm</Left>
         <Height>0.6cm</Height>
         <Width>2.39255cm</Width>
         <ZIndex>14</ZIndex>
@@ -4288,7 +4287,7 @@
         <Top>5.20002cm</Top>
         <Left>0.0635cm</Left>
         <Height>1.8cm</Height>
-        <Width>28.20566cm</Width>
+        <Width>28.20568cm</Width>
         <ZIndex>35</ZIndex>
         <Style>
           <Border>
@@ -4303,7 +4302,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>الإجمالي</Value>
+                <Value>الإجمالي الاصناف</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -4830,7 +4829,7 @@
     <Height>4.29214in</Height>
     <Style />
   </Body>
-  <Width>11.12959in</Width>
+  <Width>11.1296in</Width>
   <Page>
     <PageHeader>
       <Height>1.90351cm</Height>
