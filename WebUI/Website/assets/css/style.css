@@ -1598,3 +1598,19 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+/*Message Box Style*/
+.modal .modal-header {
+    background-color: #143F6B;
+    color: #fff;
+}
+.modal .btn-close {
+    color: #fff;
+    background-color: #fff;
+}
+.modal .modal-body {
+   text-align: center;
+   margin: 2rem 0;
+}
+.modal .modal-footer {
+    border: none;
+}

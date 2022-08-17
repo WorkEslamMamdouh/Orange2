@@ -1354,22 +1354,22 @@ namespace CollectUnit {
     }
 
     function btndiv_1_onclick() {
-        $("#btndiv_1").addClass("Actiev");
+        $("#btndiv_1").addClass("btn-active");
+        $("#btndiv_11").removeClass("btn-main");
         //Edit
-        $("#btndiv_1").removeClass(" navbar-inverse");
-        $("#btndiv_2").removeClass("Actiev");
+        $("#btndiv_2").removeClass("btn-active");
+        $("#btndiv_22").addClass("btn-main");
         //Edit
-        $("#btndiv_2").addClass("navbar-inverse");
         $("#div_1").removeClass("display_none");
         $("#div_2").addClass("display_none");
     }
     function btndiv_2_onclick() {
-        $("#btndiv_1").removeClass("Actiev");
+        $("#btndiv_1").removeClass("btn-active");
+        $("#btndiv_11").addClass("btn-main");
         //Edit
-        $("#btndiv_1").addClass(" navbar-inverse");
-        $("#btndiv_2").addClass("Actiev");
+        $("#btndiv_2").addClass("btn-active");
+        $("#btndiv_22").removeClass("btn-main");
         //Edit
-        $("#btndiv_2").removeClass(" navbar-inverse");
         $("#div_1").addClass("display_none");
         $("#div_2").removeClass("display_none");
 

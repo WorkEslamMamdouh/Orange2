@@ -2697,11 +2697,14 @@ var CloseProcesses;
         btnUpdate_2.removeAttribute('disabled');
         btnUpdate_3.removeAttribute('disabled');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
+        $("#btnOpen").removeClass("btn-dark-green");
+        // $("#btnOpen").attr("style", "")
         $("#btnClose").attr("disabled", "disabled").off('click');
         $("#btnPresent").removeAttr("disabled");
-        $("#btnClose").attr("style", "");
-        $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;");
+        // $("#btnClose").attr("style", "")
+        //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+        $("#btnClose").removeClass("btn-red");
+        $("#btnPresent").addClass("btn-green");
     }
     function Processes_Ready() {
         /* $("#divProcessClose").attr("disabled", "disabled").off*/ ('click');
@@ -2786,10 +2789,13 @@ var CloseProcesses;
         btnUpdate_3.removeAttribute('disabled');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
-        $("#btnPresent").attr("style", "margin-right: 8%;");
+        // $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
+        //$("#btnPresent").attr("style", "margin-right: 8%;")
+        //$("#btnClose").attr("style", "background-color: #fdb0b0;");
         $("#btnClose").removeAttr("disabled");
-        $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").addClass("btn-red");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
         if (SysSession.CurrentPrivileges.CUSTOM1 == false) {
             btnClose.disabled = true;
@@ -2821,28 +2827,34 @@ var CloseProcesses;
         btnUpdate_2.style.display = 'none';
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
-        $("#btnPresent").attr("style", " margin-right: 8%;");
-        $("#btnClose").attr("style", " ");
+        //$("#btnPresent").attr("style", " margin-right: 8%;")
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").removeClass("btn-red");
+        //  $("#btnClose").attr("style", " ")
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "");
+            //  $("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
         }
         else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927");
+            //$("#btnOpen").attr("style", "background-color: #00e927")
+            $("#btnOpen").addClass("btn-dark-green");
         }
         $('#divlepRentdata_3').removeClass('display_none');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
         $("#Processshutdown").removeAttr("disabled");
         $("#btnClose").attr("disabled", "disabled");
-        $("#btnClose").attr("style", "");
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
         $("#btnPresent").attr("disabled", "disabled");
-        $("#btnPresent").attr("style", "");
+        // $("#btnPresent").attr("style", "")
+        $("#btnPresent").removeClass("btn-green");
         //Calculation_Close();
     }
     function Processes_itemClose() {
@@ -2862,14 +2874,17 @@ var CloseProcesses;
         btnUpdate_5.classList.add('display_none');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
-        $("#btnPresent").attr("style", " margin-right: 8%;");
-        $("#btnClose").attr("style", " ");
+        // $("#btnPresent").attr("style", " margin-right: 8%;")
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").removeClass("btn-red");
+        //$("#btnClose").attr("style", " ")
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "");
+            //$("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
             $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
@@ -2878,7 +2893,8 @@ var CloseProcesses;
         else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927");
+            // $("#btnOpen").attr("style", "background-color: #00e927")
+            $("#btnOpen").addClass("btn-dark-green");
         }
     }
     //-------------------------------------------------------button---Processes--------------------------------------
@@ -2930,9 +2946,11 @@ var CloseProcesses;
                         $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
                         Processes_Open();
                         $("#btnOpen").attr("disabled", "disabled");
-                        $("#btnOpen").attr("style", "");
+                        //  $("#btnOpen").attr("style", "")
+                        $("#btnOpen").removeClass("btn-dark-green");
                         $("#btnPresent").attr("disabled", "disabled");
-                        $("#btnPresent").attr("style", "");
+                        // $("#btnPresent").attr("style", "")
+                        $("#btnPresent").removeClass("btn-green");
                         flag_Back = false;
                     }
                     else {
@@ -3089,13 +3107,16 @@ var CloseProcesses;
         $("#OerSalesman").attr("disabled", "disabled").off('click');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
-        $("#btnPresent").attr("style", "  margin-right: 8%;");
-        $("#btnClose").attr("style", "");
+        //$("#btnPresent").attr("style", "  margin-right: 8%;")
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
+        $("#btnPresent").removeClass("btn-green");
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
+        //$("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
         //$("#txtNumber").removeAttr("disabled");
-        $("#txtDate").removeAttr("disabled");
         //$("#txtReferenceNumber").removeAttr("disabled");
+        $("#txtDate").removeAttr("disabled");
         $("#txtTruckNumber").removeAttr("disabled");
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
@@ -3158,8 +3179,10 @@ var CloseProcesses;
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;");
-                $("#btnClose").attr("style", "");
+                //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+                //$("#btnClose").attr("style", "")
+                $("#btnPresent").addClass("btn-green");
+                $("#btnClose").removeClass("btn-red");
             }
             else {
                 $("#div_Master_Hedr").addClass("display_none");
