@@ -890,7 +890,7 @@ namespace Processes {
 
 
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
 
             $("#btnClose").attr("disabled", "disabled");
             $("#btnClose").attr("style", "")
@@ -903,10 +903,12 @@ namespace Processes {
             $('#btnClose').attr('disabled', 'disabled');
              
             $("#btnClose").attr("disabled", "disabled");
-            $("#btnClose").attr("style", "")
+            //$("#btnClose").attr("style", "")
+            $("#btnClose").removeClass("btn-red");
 
             $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "")
+            $("#btnPresent").removeClass("btn-green");
+            //$("#btnPresent").attr("style", "")
         }
 
         flag_Add = false;
@@ -3481,13 +3483,16 @@ namespace Processes {
         btnUpdate_3.removeAttribute('disabled');
 
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+        // $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
 
         $("#btnClose").attr("disabled", "disabled").off('click');
         $("#btnPresent").removeAttr("disabled");
 
-        $("#btnClose").attr("style", "")
-        $("#btnPresent").attr("style", "background-color: #198754")
+        // $("#btnClose").attr("style", "");
+        $("#btnClose").removeClass("btn-red");
+        //$("#btnPresent").attr("style", "background-color: #198754")
+        $("#btnPresent").addClass("btn-green");
 
 
 
@@ -3609,11 +3614,13 @@ namespace Processes {
 
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+      //  $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
 
       //  $("#btnPresent").attr("style", "margin-right: 8%;")
         $("#btnClose").removeAttr("disabled");
-        $("#btnClose").attr("style", "background-color: #fdb0b0;");
+       // $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        $("#btnClose").addClass("btn-red");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
 
 
@@ -3653,7 +3660,8 @@ namespace Processes {
         $("#btnClose").attr("disabled", "disabled").off('click');
 
      //   $("#btnPresent").attr("style", " margin-right: 8%;")
-        $("#btnClose").attr("style", " ")
+        //   $("#btnClose").attr("style", " ")
+        $("#btnClose").removeClass("btn-red");
 
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
@@ -3665,7 +3673,8 @@ namespace Processes {
 
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "")
+            // $("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
 
             $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
@@ -3674,7 +3683,8 @@ namespace Processes {
         } else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927")
+           // $("#btnOpen").attr("style", "background-color:   ")
+            $("#btnOpen").addClass("btn-dark-green");
 
 
         }
@@ -3976,10 +3986,11 @@ namespace Processes {
         $("#btnClose").attr("disabled", "disabled").off('click');
 
       //  $("#btnPresent").attr("style", "  margin-right: 8%;")
-        $("#btnClose").attr("style", "")
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
 
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
 
         //$("#txtNumber").removeAttr("disabled");
         $("#txtDate").removeAttr("disabled");
@@ -4068,8 +4079,10 @@ namespace Processes {
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #198754")
-                $("#btnClose").attr("style", "")
+             //   $("#btnPresent").attr("style", "background-color: #198754")
+                $("#btnPresent").addClass("btn-green");
+              //  $("#btnClose").attr("style", "")
+                $("#btnClose").addClass("btn-red");
 
             }
             else {
@@ -4479,7 +4492,8 @@ namespace Processes {
             $("#btnPresent").attr("disabled", "disabled").off('click');
             $("#btnClose").attr("disabled", "disabled").off('click');
         //    $("#btnPresent").attr("style", "  margin-right: 8%;");
-            $("#btnClose").attr("style", "")
+            // $("#btnClose").attr("style", "")
+            $("#btnClose").removeClass("btn-red");
 
 
             $("#btnView_load").focus();

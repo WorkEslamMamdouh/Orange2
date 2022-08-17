@@ -1462,51 +1462,7 @@ namespace PurTrReceive {
                 <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control input-sm"/>
                 <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control input-sm" />';
                 </tr>`;
-        //html = '<div id= "No_Row' + cnt + '" class=" style_border" > <div class="col-xs-12 p-0" > <div class="col-lg-xs-12" > ' +
-        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurTrReceive display_none"></span>' +
-        //    '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"  />' +
-
-        //    '<div class="col-lg-1  col-md-1 col-sm-1 col-xs-12" style="width: 4%;">' +
-        //    '<input id="txtSerialH' + cnt + '" type="text" class="form-control input-sm right2" disabled /></div>' +
-
-        //    '<div class="col-xs-2 pl-0" style="margin-right: -1%;width: 15%;" >' +
-        //    '<select id="ddlFamily' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
-
-        //    '<div class="col-xs-2 p-0"    style="width: 15%;">' +
-        //    '<select id="ddlItem' + cnt + '" class="form-control input-sm"><option value="null">' + (lang == "ar" ? "اختر" : "Choose") + '</option></select></div>' +
-
-        //    '<div class="col-xs-1 " style="width: 8%;"><input type="number"  id="txtQuantity' + cnt + '" name="quant[10]" class="form-control input-sm   font1" value="1" min="1" max="1000" step="1"></div>' +
-
-        //    '<div class="col-xs-1 " style="width: 7%;" >' +
-        //    '<input id="txtQuantityReturnValue' + cnt + '" type="number" class="form-control input-sm right2"  disabled value="0"/></div>' +
-
-        //    '<div class="col-xs-1 "><input type="number"  id="txtPriceFc' + cnt + '" name="quant[20]" class="form-control input-sm  font1" value="1" min="0" max="1000" step="0.5"> </div>' +
-
-        //    '<div class="col-xs-1 ">' +
-        //    '<input id="txtTotalFc' + cnt + '" type="number" disabled class="form-control input-sm right2"  value="0"/></div>' +
-        //    '<div class="col-xs-1">' +
-
-        //    '<input id="txtPrice' + cnt + '" disabled type="text" class="form-control input-sm right2"  value="0"/></div>' +
-        //    '<div class="col-xs-1" >' +
-        //    '<input id="txtTotal' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtTax' + cnt + '" type="text" disabled class="form-control input-sm right2" data_VatPrc="' + ((VatPrc == null || undefined) ? 0 : VatPrc) + '"  value="0"/></div>' +
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"  /></div>' +
-
-        //    '<div class="col-xs-2 "style="position:absolute;right:100%">' +
-        //    '<div class="col-xs-6 ">' +
-        //    '<input id="txtAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0" /></div>' +
-        //    '<div class="col-xs-6 p-0 ">' +
-        //    '<input id="txtTotAddons' + cnt + '" type="text" disabled class="form-control input-sm right2"  value="0"/></div>' +
-        //    '</div>' +
-        //    '</div>' +
-
-        //    '</div></div></div>' +
-
-        //    '<input id="UnitCost' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm" />';
-
-
+       
         $("#div_Data").append(html);
 
 
@@ -2238,9 +2194,9 @@ namespace PurTrReceive {
                             <select id="txtAddonsCharge${cnt}" class="form-control" value="null" ></select>
 		                </div>
 	                </td>
-                     <td>
+                    <td>
 		                <div class="form-group">
-			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=" "/>
+			                <input id="txtAddonsTypeCharge${cnt}" type="text" class="form-control" disabled value=""/>
 		                </div>
 	                </td>
                     <td>
@@ -2285,7 +2241,7 @@ namespace PurTrReceive {
 	                </td>
                     <td>
 		                <div class="form-group">
-                            <select id="txt_D_CashBox${cnt}" name=""  disabled="disabled" class="form-control" tabindex="-1" aria-hidden="true">
+                            <select id="txt_D_CashBox${cnt}" name=""  disabled class="form-control" tabindex="-1" aria-hidden="true">
                              <option value="Null">${ (lang == "ar" ? "الصندوق" : "CashBox")}  </option>
                             </select>
 		                </div>

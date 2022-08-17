@@ -747,7 +747,7 @@ var Processes;
         else if (Selected_Data[0].Status == 3) { //مغلق
             Processes_Close();
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "");
+            $("#btnOpen").removeClass("btn-dark-green");
             $("#btnClose").attr("disabled", "disabled");
             $("#btnClose").attr("style", "");
             $("#btnPresent").attr("disabled", "disabled");
@@ -757,9 +757,11 @@ var Processes;
             Processes_Close();
             $('#btnClose').attr('disabled', 'disabled');
             $("#btnClose").attr("disabled", "disabled");
-            $("#btnClose").attr("style", "");
+            //$("#btnClose").attr("style", "")
+            $("#btnClose").removeClass("btn-red");
             $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "");
+            $("#btnPresent").removeClass("btn-green");
+            //$("#btnPresent").attr("style", "")
         }
         flag_Add = false;
     }
@@ -2677,11 +2679,14 @@ var Processes;
         btnUpdate_2.removeAttribute('disabled');
         btnUpdate_3.removeAttribute('disabled');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
+        // $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
         $("#btnClose").attr("disabled", "disabled").off('click');
         $("#btnPresent").removeAttr("disabled");
-        $("#btnClose").attr("style", "");
-        $("#btnPresent").attr("style", "background-color: #198754");
+        // $("#btnClose").attr("style", "");
+        $("#btnClose").removeClass("btn-red");
+        //$("#btnPresent").attr("style", "background-color: #198754")
+        $("#btnPresent").addClass("btn-green");
     }
     function Processes_Ready() {
         $("#divProcessClose").attr("disabled", "disabled").off('click');
@@ -2765,10 +2770,12 @@ var Processes;
         btnUpdate_3.removeAttribute('disabled');
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
+        //  $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
         //  $("#btnPresent").attr("style", "margin-right: 8%;")
         $("#btnClose").removeAttr("disabled");
-        $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        // $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        $("#btnClose").addClass("btn-red");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
         if (SysSession.CurrentPrivileges.CUSTOM1 == false) {
             btnClose.disabled = true;
@@ -2796,13 +2803,15 @@ var Processes;
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
         //   $("#btnPresent").attr("style", " margin-right: 8%;")
-        $("#btnClose").attr("style", " ");
+        //   $("#btnClose").attr("style", " ")
+        $("#btnClose").removeClass("btn-red");
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "");
+            // $("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
             $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
@@ -2811,7 +2820,8 @@ var Processes;
         else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927");
+            // $("#btnOpen").attr("style", "background-color:   ")
+            $("#btnOpen").addClass("btn-dark-green");
         }
     }
     //-------------------------------------------------------button---Processes--------------------------------------
@@ -3043,9 +3053,10 @@ var Processes;
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
         //  $("#btnPresent").attr("style", "  margin-right: 8%;")
-        $("#btnClose").attr("style", "");
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "");
+        $("#btnOpen").removeClass("btn-dark-green");
         //$("#txtNumber").removeAttr("disabled");
         $("#txtDate").removeAttr("disabled");
         //$("#txtReferenceNumber").removeAttr("disabled");
@@ -3113,8 +3124,10 @@ var Processes;
                 //btnUpdate_3.focus();
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #198754");
-                $("#btnClose").attr("style", "");
+                //   $("#btnPresent").attr("style", "background-color: #198754")
+                $("#btnPresent").addClass("btn-green");
+                //  $("#btnClose").attr("style", "")
+                $("#btnClose").addClass("btn-red");
             }
             else {
                 $("#div_Master_Hedr").addClass("display_none");
@@ -3442,7 +3455,8 @@ var Processes;
             $("#btnPresent").attr("disabled", "disabled").off('click');
             $("#btnClose").attr("disabled", "disabled").off('click');
             //    $("#btnPresent").attr("style", "  margin-right: 8%;");
-            $("#btnClose").attr("style", "");
+            // $("#btnClose").attr("style", "")
+            $("#btnClose").removeClass("btn-red");
             $("#btnView_load").focus();
             Display();
             MasterGridBiuld();

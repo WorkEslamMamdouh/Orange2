@@ -10,32 +10,32 @@
         <div class="card bg-light-blue" >
             <div class="card-body" >
                 <div class="row">
-                    <div class="col-12 col-md-8">
+                    <div class="col-12 col-lg-8">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtFromDate" class="col-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
-                                    <div class="col-8">
+                                    <label for="txtFromDate" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                                    <div class="col-9 col-md-8">
                                         <input id="txtFromDate" name="" type="date" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="form-group row">
-                                    <label for="txtToDate" class="col-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
-                                    <div class="col-8">
+                                    <label for="txtToDate" class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
+                                    <div class="col-9 col-md-8">
                                         <input id="txtToDate" name="" type="date" class="form-control">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row d-flex justify-content-center align-items-center">
                                     <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Professor_account_No </label>
                                     <div class="col-9 col-md-8">
 
                                         <div class="search-content">
-                                            <input id="txtFromAcc_ID" name="" type="text" class="form-control" disabled="disabled">
+                                            <input id="txtFromAcc_ID" name="" type="text" class="form-control" disabled>
                                             <button type="button" id="btnFromAccSearch" name="InvoiceSearch" class="btn btn-main btn-search">
                                                 <i class="fas fa-search"></i>
                                             </button>
@@ -44,15 +44,15 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row ">
+                                    <div class="col-9 offset-3 col-md-12 offset-md-0">
                                         <input id="txtFromAcc_DESC" name="" type="text" class="form-control" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                                <div class="form-group row d-flex justify-content-center align-items-center">
                                     <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.menu_Costcenter </label>
                                     <div class="col-9 col-md-8">
 
@@ -66,8 +66,8 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <div class="form-group row g-0">
-                                    <div class="col-12">
+                                <div class="form-group row">
+                                    <div class="col-9 offset-3 col-md-12 offset-md-0">
                                         <input id="txtCenter_Cost_DESC" name="" type="text" class="form-control" disabled="disabled">
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
 
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-lg-4">
                         <div class="form-group row">
                             <label class="col-4"> @* Empty For Responsive*@ </label>
                             <div class="col-8  special-group">
@@ -125,16 +125,16 @@
                             <div class="col-8  special-group">
                                 <div class="row">
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio" type="radio" id="" name="IsF_termEnable" value="D">
+                                        <input class="form-check-input form-radio special-radio" type="radio" id="" name="IsF_termEnable" value="D">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsF_termEnable" value="C">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsF_termEnable" value="C">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsF_termEnable" value="Z">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsF_termEnable" value="Z">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="IsF_AEnable" name="IsF_termEnable" value="A">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="IsF_AEnable" name="IsF_termEnable" value="A">
                                     </div>
                                 </div>
                             </div>
@@ -144,16 +144,16 @@
                             <div class="col-8  special-group">
                                 <div class="row">
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio" type="radio" id="" name="IsMoveEnable" value="D">
+                                        <input class="form-check-input form-radio special-radio" type="radio" id="" name="IsMoveEnable" value="D">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsMoveEnable" value="C">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsMoveEnable" value="C">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsMoveEnable" value="Z">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsMoveEnable" value="Z">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="IsM_AEnable" name="IsMoveEnable" value="A">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="IsM_AEnable" name="IsMoveEnable" value="A">
                                     </div>
                                 </div>
                             </div>
@@ -163,16 +163,16 @@
                             <div class="col-8  special-group">
                                 <div class="row">
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio" type="radio" id="" name="IsE_termEnable" value="D">
+                                        <input class="form-check-input form-radio special-radio" type="radio" id="" name="IsE_termEnable" value="D">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsE_termEnable" value="C">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsE_termEnable" value="C">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="" name="IsE_termEnable" value="Z">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="" name="IsE_termEnable" value="Z">
                                     </div>
                                     <div class="form-check col-3 d-flex justify-content-center">
-                                        <input class="form-check-input form-radio m-auto" type="radio" id="IsE_AEnable" name="IsE_termEnable" value="A">
+                                        <input class="form-check-input form-radio special-radio m-auto" type="radio" id="IsE_AEnable" name="IsE_termEnable" value="A">
                                     </div>
                                 </div>
                             </div>

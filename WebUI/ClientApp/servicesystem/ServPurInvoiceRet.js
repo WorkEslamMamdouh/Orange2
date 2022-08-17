@@ -443,6 +443,7 @@ var ServPurInvoiceRet;
                     btnShow_onclick();
                     QueryMode();
                     DisplayProcessedRecord();
+                    Save_Succ_But();
                 }
             }
         });
@@ -467,6 +468,7 @@ var ServPurInvoiceRet;
                     btnShow_onclick();
                     QueryMode();
                     DisplayProcessedRecord();
+                    Save_Succ_But();
                 }
             }
         });

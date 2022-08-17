@@ -57,34 +57,34 @@
         <div id="div_BasicData" class="row display_none">
             <div class="col-12 service-content">
                 <div class="serviceBox mt-5">
-                    <div class="row g-0">
+                    <div class="row">
                         <label id="lepfarest" class="text-blue text-right fs-6 fw-bold mb-3">
                             <i id="spanlepfarest" class="fas fa-angle-double-left" aria-hidden="true"></i>
                             @SystemResource.User_data
                         </label>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Access_code </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtUSER_CODE" name="USER_CODEE" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Password </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtUSER_PASSWORD" name="USER_CODEE" disabled type="password" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12  col-md-2 offset-md-4">
-                                    <div class="form-group row g-0">
-                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Trns_IsTransfered</label>
+                                <div class="col-12 col-md-3 col-lg-2 offset-xl-4">
+                                    <div class="form-group row ">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Active</label>
                                         <div class="col-9 col-md-7">
-                                            <input type="checkbox" class="checkbox" id="chkApproved" />
+                                            <input type="checkbox" class="checkbox" id="chk_IsActive" />
                                         </div>
                                     </div>
                                 </div>
@@ -92,16 +92,16 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_UserName </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtUSER_NAME" name="USER_NAMEE" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.department </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtDepartmentName" name="DepartmentName" disabled type="text" class="form-control">
@@ -112,8 +112,8 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="ccol-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.user_type </label>
                                         <div class="col-8 col-md-7 ">
                                             <select id="drpuserType_2" class="form-control" disabled>
@@ -125,7 +125,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="row display_none" id="selsman">
                                         <div class="col-12 col-md-6">
-                                            <div class="form-group row g-0">
+                                            <div class="form-group row ">
                                                 <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Salesman </label>
                                                 <div class="col-8 col-md-7 ">
                                                     <select id="ddlSalesman" class="form-control" disabled>
@@ -135,7 +135,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <div class="form-group row g-0">
+                                            <div class="form-group row ">
                                                 <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Store </label>
                                                 <div class="col-8 col-md-7 ">
                                                     <select id="ddlStore" class="form-control" disabled>
@@ -146,8 +146,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="cashbox" class="col-12 col-md-3 display_none">
-                                    <div class="form-group row g-0">
+                                <div id="cashbox" class="col-12 col-md-6 col-lg-3 display_none">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Cashbox </label>
                                         <div class="col-8 col-md-7 ">
                                             <select id="ddlCashBox" class="form-control" disabled>
@@ -161,24 +161,24 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Job </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtJobTitle" name="JobTitle" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.App_Mobile </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtMobile" name="Mobile" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Email </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtEmail" name="Email" disabled type="text" class="form-control">
@@ -189,16 +189,16 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Date_First_login </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtFirstLogin" name="FirstLogin" disabled type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="form-group row ">
                                         <label class="col-4 col-md-5 align-self-center p-md-0">@SystemResource.Date_Last_login </label>
                                         <div class="col-8 col-md-7 ">
                                             <input id="txtLastLogin" name="LastLogin" disabled type="text" class="form-control">
@@ -209,15 +209,18 @@
                         </div>
                         <!--Icons -->
                         <div class="col-12 mt-3">
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-around">
                                 <button id="btnGive_assignments" type="button" class="btn  btn-main h-100" disabled>
                                     @SystemResource.Give_All_powers
+                                    <i class="fas fa-check-circle"></i>
                                 </button>
                                 <button id="btnLoadRoles" type="button" class=" btn btn-main h-100" disabled>
                                     @SystemResource.Download_all_tasks
+                                    <i class="fas fa-plus-circle"></i>
                                 </button>
                                 <button id="btnBlock_permissions" type="button" class="btn btn-main h-100" disabled>
                                     @SystemResource.Block_All_powers
+                                    <i class="fas fa-lock"></i>
                                 </button>
                             </div>
                         </div>
@@ -289,7 +292,7 @@
                         <div class="insettext row editor-details">
                             <div class="col-12 col-lg-6">
 
-                                <div class="form-group row g-0">
+                                <div class="form-group row ">
                                     <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
                                     <div class="col-4 col-xl-4 editor-input">
                                         <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
@@ -300,7 +303,7 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6">
-                                <div class="form-group row g-0">
+                                <div class="form-group row ">
                                     <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
                                     <div class="col-4 col-xl-4 editor-input">
                                         <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>

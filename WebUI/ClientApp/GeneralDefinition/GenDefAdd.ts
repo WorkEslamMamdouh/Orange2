@@ -39,6 +39,7 @@ namespace GenDefAdd {
 
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
 
@@ -358,6 +359,8 @@ namespace GenDefAdd {
                     }
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
+
                 }
                 else { 
                     MessageBox.Show(result.ErrorMessage, "خطأ");

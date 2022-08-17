@@ -704,9 +704,8 @@ namespace ServiceCategories {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
-
                     success();
-
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
 

@@ -2049,7 +2049,7 @@ namespace JournalVoucher {
                     $('#DivTemplate').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
-
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }
@@ -2153,7 +2153,7 @@ namespace JournalVoucher {
                     $('#DivTemplate').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
-
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }

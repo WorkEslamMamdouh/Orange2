@@ -907,27 +907,27 @@ namespace SlsTrServicesReturn {
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input type="number" id="txtQuantity${cnt}" name="quant[1]" class="form-control" value="1" min="1" max="1000" step="1">
+			                <input type="text" disabled id="txtQuantity${cnt}" name="quant[1]" class="form-control" value="1" min="1" max="1000" step="1">
 		                </div>
 	                </td>
                     <td>
 		                <div class="form-group">
-			               <input type="text"  class="form-control" id="txtReturnQuantity${cnt}" name="quant[3]" class="form-control" value="0" min="0" max="1000" step="1">
+			               <input type="text" disabled class="form-control" id="txtReturnQuantity${cnt}" name="quant[3]" class="form-control" value="0" min="0" max="1000" step="1">
 		                </div>
 	                </td>
                     <td>
 		                <div class="form-group">
-			              <input type="number"  id="txtPrice${cnt}" name="quant[2]" class="form-control" value="1" min="0" max="1000" step="0.5">
+			              <input type="text" disabled id="txtPrice${cnt}" name="quant[2]" class="form-control" value="1" min="0" max="1000" step="0.5">
 		                </div>
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input type="number"  id="txtDiscountPrc${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+			                <input type="number" disabled id="txtDiscountPrc${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
 		                </div>
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <input type="number"  id="txtDiscountAmount${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
+			                <input type="number" disabled id="txtDiscountAmount${cnt}" name="quant[2]" class="form-control" value="0" min="0" max="1000" step="0.5">
 		                </div>
 	                </td>
 	                <td>
@@ -1703,7 +1703,7 @@ namespace SlsTrServicesReturn {
                     InitializeGrid();
                     Grid_RowDoubleClicked();
                     FlagAfterInsertOrUpdate = false;
-
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("الرجاء تحديث الصفحة واعادت تكرارالمحاولة مره اخري ", "Please refresh the page and try again", MessageType.Error);
                 }
@@ -1738,6 +1738,7 @@ namespace SlsTrServicesReturn {
                     $("#cotrolDiv").removeClass("disabledDiv");
                     $("#btnInvoiceSearch").attr("disabled", "disabled");
                     DownloadInvoicePdf();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("الرجاء تحديث الصفحة واعادت تكرارالمحاولة مره اخري", "Please refresh the page and try again", MessageType.Error);
                 }

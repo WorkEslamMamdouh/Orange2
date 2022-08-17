@@ -29,6 +29,7 @@ var AccDefExpenses;
             document.getElementById('Screen_name').innerHTML = "expense accounts";
         }
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
         ////debugger;
@@ -214,6 +215,7 @@ var AccDefExpenses;
                     MessageBox.Show("تم الحفظ", "الحفظ");
                     btnBack_Def_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     //debugger;

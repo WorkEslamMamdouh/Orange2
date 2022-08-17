@@ -2270,6 +2270,7 @@ namespace ProcSalesRet {
                     BindStatisticGridData();
                     DownloadInvoicePdf();
                     $('#btnPrintTransaction').removeClass("display_none");
+                    Save_Succ_But();
 
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -2360,6 +2361,7 @@ namespace ProcSalesRet {
                     Success();
                     AfterInsertOrUpdateFlag = true;
                     Grid_RowDoubleClicked();
+                    Save_Succ_But();
 
                 } else {
                     DisplayMassage("هناك خطـأ", '(Error)', MessageType.Error);

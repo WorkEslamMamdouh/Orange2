@@ -171,7 +171,7 @@
                                 </div>
                                 @* Details *@
                                 <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                    <div class="form-group row">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Number  </label>
                                         <div class="col-8">
                                             <input id="txtJouranlNumber" name="" disabled type="text" class="form-control">
@@ -179,7 +179,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                    <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
                                         <div class="col-8">
                                             <input id="txtJouranlDate" name="" disabled type="date" class="form-control">
@@ -187,43 +187,52 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                    <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Type  </label>
                                         <div class="col-8">
                                             <select id="ddlJournalType" name="" disabled type="text" class="form-control"></select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-3 ">
-                                    <div class="form-group row">
-                                        <label class="col-2 align-self-center p-md-0"> @SystemResource.App_Status</label>
-                                        <div class="col-10 ">
-                                            <div class="form-check d-inline-flex ms-4">
-                                                <input class="form-check-input form-radio" type="radio" id="rdNew" checked>
-                                                <label class="form-check-label" for="rdNew"> @SystemResource.App_new </label>
-                                            </div>
-                                            <div class="form-check d-inline-flex ms-4">
-                                                <input class="form-check-input form-radio" type="radio" id="rdAuthorized">
-                                                <label class="form-check-label" for="rdAuthorized"> @SystemResource.Certified</label>
-                                            </div>
-                                            <div class="form-check d-inline-flex ms-4">
-                                                <input class="form-check-input form-radio" type="radio" id="rdPosted">
-                                                <label class="form-check-label" for="rdPosted"> @SystemResource.deported</label>
+                
+                                <div class="col-12 col-md-3">
+                                    <div class="row mt-n3 ">
+                                        <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_Status</label>
+                                        <div class="form-group col-8 col-md-10">
+                                            <div class="row">
+                                                <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                    <div class="form-check d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdNew"  checked>
+                                                        <label class="form-check-label my-auto me-3" for="reptp1"> @SystemResource.App_new </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                    <div class="form-check  d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdAuthorized" >
+                                                        <label class="form-check-label my-auto me-3" for="reptp2"> @SystemResource.Certified</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12  col-xl-4">
+                                                    <div class="form-check d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdPosted" >
+                                                        <label class="form-check-label my-auto me-3" for="reptp3"> @SystemResource.deported</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-md-6">
-                                    <div class="form-group row g-0">
-                                        <label class="col-2 align-self-center p-md-0"> @SystemResource.App_desc  </label>
-                                        <div class="col-10">
+                                    <div class="form-group row">
+                                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_desc  </label>
+                                        <div class="col-8 col-md-10">
                                             <textarea id="txtJournalDescripton" name="" disabled type="text" class="form-control  h-100"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                    <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.refTrTransNo  </label>
                                         <div class="col-8">
                                             <input id="txtRefNumber" name="" disabled type="text" class="form-control" />
@@ -231,7 +240,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <div class="form-group row g-0">
+                                    <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.source  </label>
                                         <div class="col-8">
                                             <input id="txtResource" name="" disabled type="text" class="form-control" />
@@ -245,7 +254,7 @@
                                         <table class="table table-borderless ">
                                             <thead>
                                                 <tr>
-                                                    <th width="5%"></th>
+                                                    <th width="3%"></th>
                                                     <th></th>
                                                     <th class="cursor-pointer text-right" id="divAccNumber">@SystemResource.p_account_number <i class="fas fa-arrows-alt-h"></i></th>
                                                     <th>@SystemResource.SHT_Name</th>
@@ -300,7 +309,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="row">
                                             <div class="col-12 col-md-" id="divAccountNameFooter">
-                                                <div class="form-group row g-0" >
+                                                <div class="form-group row g-0">
                                                     <label class="col-2 align-self-center p-md-0"> @SystemResource.p_account_number  </label>
                                                     <div class="col-10">
                                                         <input id="txtAccountNameFooter" name="" value="" disabled type="text" class="form-control" />
@@ -317,7 +326,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <!-- Editors Details -->
                                 <div class="insettext row editor-details">

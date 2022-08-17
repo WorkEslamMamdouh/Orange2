@@ -2369,6 +2369,7 @@ namespace ProcSalesMgr {
 
                     if (res.Status == 1) {
                         DownloadInvoicePdf();
+                        Save_Succ_But();
                     }
 
                 } else {
@@ -2400,8 +2401,8 @@ namespace ProcSalesMgr {
                     Grid_RowDoubleClicked();
                     $("#btnUpdate").removeClass("display_none");
                     if (res.Status == 1) {
-
                         DownloadInvoicePdf();
+                        Save_Succ_But();
                     }
 
                 } else {

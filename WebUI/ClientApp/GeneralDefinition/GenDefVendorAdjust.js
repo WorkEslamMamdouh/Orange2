@@ -30,6 +30,10 @@ var GenDefVendorAdjust;
         else {
             document.getElementById('Screen_name').innerHTML = "Types of Suppliers Adjustment";
         }
+        $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('d-none');
+        $('#iconbar_Definition').removeClass('hidden_Control');
+        $("#divShow").removeClass("display_none");
         ////debugger;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
@@ -66,9 +70,6 @@ var GenDefVendorAdjust;
         }
     });
     function InitalizeControls() {
-        $('#divIconbar').addClass('hidden_Control');
-        $('#iconbar_Definition').removeClass('hidden_Control');
-        $("#divShow").removeClass("display_none");
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails");
         btnEdit = document.getElementById("btnUpdate_Def");
@@ -260,6 +261,7 @@ var GenDefVendorAdjust;
                     }
                     btnback_onclick();
                     refresh();
+                    Save_Succ_But();
                 }
                 else {
                     //debugger;

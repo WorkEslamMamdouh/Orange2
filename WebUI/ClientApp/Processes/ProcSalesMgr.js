@@ -1997,6 +1997,7 @@ var ProcSalesMgr;
                     Grid_RowDoubleClicked();
                     if (res.Status == 1) {
                         DownloadInvoicePdf();
+                        Save_Succ_But();
                     }
                 }
                 else {
@@ -2025,6 +2026,7 @@ var ProcSalesMgr;
                     $("#btnUpdate").removeClass("display_none");
                     if (res.Status == 1) {
                         DownloadInvoicePdf();
+                        Save_Succ_But();
                     }
                 }
                 else {

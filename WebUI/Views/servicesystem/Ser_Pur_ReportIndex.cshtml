@@ -10,204 +10,241 @@ Layout = "~/Views/Shared/Layout.cshtml";
         <div class="card bg-light-blue" id="informtionReserved">
             <div class="card-body" id="id_div_Add">
                 <div class="row">
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Branch </label>
-                            <div class="col-8">
-                                <select id="ddlBranch" name="" class="form-control">
-                                    <option value="null">الجميع</option>
-                                    <option value="1">الفرع الاول</option>
-                                    <option value="2">الفرع الثاني</option>
-                                    <option value="3">الثالث</option>
-                                    <option value="4">الفرع الرابع</option>
-                                    <option value="1122">sdds</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.Branch </label>
-                            <div class="col-8">
-                                <select id="ddlCostCenter" name="" class="form-control">
-                                    <option value="null">@SystemResource.choose_Cost</option>
-                                    <option value="0104">مركز تكلفة 04</option>
-                                    <option value="1">مركز تكلفه 1</option>
-                                    <option value="2">مركز تكلفة 2</option>
-                                    <option value="3">مركز تكلفة 3</option>
-                                    <option value="4">مركز تكلفة 4</option>
-                                    <option value="5">مركز تكلفة 5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 offset-md-3">
-                        <div class="form-group row special-group">
-                            <div class="col-4 py-0 align-self-center p-md-0">
-                                <label> @SystemResource.App_invoiceType</label>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdInvoice" name="details3" value="1">
-                                    <label class="form-check-label" for="rdInvoice">@SystemResource.App_Invoice </label>
-                                </div>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdReturn" name="details3" value="2">
-                                    <label class="form-check-label" for="rdReturn"> @SystemResource.Return</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_FromDate </label>
-                            <div class="col-8">
-                                <input type="date" class="form-control" name="" id="txtStartDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.App_ToDate </label>
-                            <div class="col-8">
-                                <input type="date" class="form-control" name="" id="txtEndDate">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 offset-md-3">
-                        <div class="form-group row special-group">
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="RdCredit" name="details2" value="1" checked>
-                                    <label class="form-check-label" for="RdCredit">@SystemResource.AppCheck </label>
-                                </div>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="RdCash" name="details2" value="2">
-                                    <label class="form-check-label" for="RdCash"> @SystemResource.Cash</label>
-                                </div>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="RdAll" name="details2" value="2">
-                                    <label class="form-check-label" for="RdAll"> @SystemResource.App_All</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.VendorCategory </label>
-                            <div class="col-8">
-                                <select id="ddlCategory" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.VendorGroups </label>
-                            <div class="col-8">
-                                <select id="ddlGroup" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.I_Vendor </label>
-                            <div class="col-8">
-                                <select id="ddlFromVendor" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row special-group">
-                            <div class="col-4 py-0 align-self-center p-md-0">
-                                <label> @SystemResource.App_Status</label>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdNew" name="details1" value="1">
-                                    <label class="form-check-label" for="rdNew"> @SystemResource.App_All</label>
-                                </div>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdExecuted" name="details1" value="2">
-                                    <label class="form-check-label" for="rdExecuted"> @SystemResource.prepared</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0"> @SystemResource.ServiceCategory </label>
-                            <div class="col-8">
-                                <select id="ddlItemCategory" name="" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Services</label>
-                            <div class="col-9 col-md-8">
-
-                                <div class="search-content">
-                                    <input type="text" class="form-control search-control" id="txtServiceCode">
-                                    <button type="button" id="btnServiceSrch" name="ColSearch" class="btn btn-main btn-search">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row g-0">
+                    <div class="col-12 col-md-6 col-lg-9">
+                        <div class="row">
                             <div class="col-12">
-                                <input type="text" class="form-control" disabled id="txtServiceName">
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-4 ">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.Branch </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlBranch" name="" class="form-control">
+                                                    <option value="null">الجميع</option>
+                                                    <option value="1">الفرع الاول</option>
+                                                    <option value="2">الفرع الثاني</option>
+                                                    <option value="3">الثالث</option>
+                                                    <option value="4">الفرع الرابع</option>
+                                                    <option value="1122">sdds</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4 ">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.CostCenter </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlCostCenter" name="" class="form-control">
+                                                    <option value="null">@SystemResource.choose_Cost</option>
+                                                    <option value="0104">مركز تكلفة 04</option>
+                                                    <option value="1">مركز تكلفه 1</option>
+                                                    <option value="2">مركز تكلفة 2</option>
+                                                    <option value="3">مركز تكلفة 3</option>
+                                                    <option value="4">مركز تكلفة 4</option>
+                                                    <option value="5">مركز تكلفة 5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-4 ">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_FromDate </label>
+                                            <div class="col-9 col-md-8">
+                                                <input type="date" class="form-control" name="" id="txtStartDate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4 ">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_ToDate </label>
+                                            <div class="col-9 col-md-8">
+                                                <input type="date" class="form-control" name="" id="txtEndDate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.VendorCategory </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlCategory" name="" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.VendorGroups </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlGroup" name="" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.I_Vendor </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlFromVendor" name="" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.ServiceCategory </label>
+                                            <div class="col-9 col-md-8">
+                                                <select id="ddlItemCategory" name="" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row d-flex justify-content-center align-items-center">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Services</label>
+                                            <div class="col-9 col-md-8">
+                                                <div class="search-content">
+                                                    <input disabled type="text" class="form-control search-control" id="txtServiceCode">
+                                                    <button type="button" id="btnServiceSrch" name="ColSearch" class="btn btn-main btn-search">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-4">
+                                        <div class="form-group row">
+                                            <div class="col-9 offset-3 col-lg-12 offset-lg-0">
+                                                <select id="txtServiceName" name="" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group row special-group">
-                            <div class="col-4 py-0 align-self-center p-md-0">
-                                <label> @SystemResource.Inv_ImportInvoice</label>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdyes" name="rdname" value="1">
-                                    <label class="form-check-label" for="rdyes"> @SystemResource.Yes</label>
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="row gy-1">
+                            <div class="col-12">
+                                <div class="row  special-group">
+                                    <label class="col-4 col-md-4 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_invoiceType</label>
+                                    <div class="form-group col-8 col-md-8">
+                                        <div class="row">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-6">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdInvoice" name="details3" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="rdInvoice"> @SystemResource.App_Invoice </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-xl-0 col-xl-6">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdReturn" name="details3" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="rdReturn"> @SystemResource.Return</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdno" name="rdname" value="2">
-                                    <label class="form-check-label" for="rdno"> @SystemResource.No</label>
+                            <div class="col-12">
+                                <div class="row special-group">
+                                    <div class="form-group col-8 offset-4 col-xl-12 offset-xl-0">
+                                        <div class="row">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="RdCredit" name="details2" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="RdCredit"> @SystemResource.AppCheck </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="RdCash" name="details2" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="RdCash"> @SystemResource.Cash</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-xl-0 col-xl-4">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="RdAll" name="details2" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="RdAll"> @SystemResource.App_All</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 offset-md-9">
-                        <div class="form-group row special-group">
-                            <div class="col-4 py-0 align-self-center p-md-0">
-                                <label> @SystemResource.App_report_type</label>
-                            </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdsummary" name="details4" value="1">
-                                    <label class="form-check-label" for="rdsummary"> @SystemResource.Summary</label>
+                            <div class="col-12 ">
+                                <div class="row  special-group">
+                                    <label class="col-4 col-md-4 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_State</label>
+                                    <div class="form-group col-8 col-md-8">
+                                        <div class="row">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-6">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdNew" name="details1" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="rdNew"> @SystemResource.App_All </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12  mb-xl-0 col-xl-6">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdExecuted" name="details1" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="rdExecuted"> @SystemResource.prepared</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4 py-0">
-                                <div class="form-check d-inline-flex">
-                                    <input class="form-check-input form-radio" type="radio" id="rdDetail" name="details4" value="2">
-                                    <label class="form-check-label" for="rdDetail"> @SystemResource.Detailed</label>
+                            <div class="col-12">
+                                <div class="row  special-group">
+                                    <label class="col-4 col-md-4 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.Inv_ImportInvoice</label>
+                                    <div class="form-group col-8 col-md-8">
+                                        <div class="row">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-6">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdyes" name="rdname" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="rdyes"> @SystemResource.Yes </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12  mb-xl-0 col-xl-6">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdno" name="rdname" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="rdno"> @SystemResource.No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row  special-group">
+                                    <label class="col-4 col-md-4 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_report_type</label>
+                                    <div class="form-group col-8 col-md-8">
+                                        <div class="row">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-6">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdsummary" name="details4" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="rdsummary"> @SystemResource.Summary </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12  mb-xl-0 col-xl-6">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="rdDetail" name="details4" value="2">
+                                                    <label class="form-check-label my-auto me-3" for="rdDetail"> @SystemResource.Detailed</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

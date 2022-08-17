@@ -43,7 +43,7 @@ var AccDefVendor;
     var Is_Vendor;
     var txt_CustCode;
     var txt_CustName;
-    var btnsearchACC;
+    //var btnsearchACC: HTMLButtonElement;
     var txt_ACCCode;
     var txt_ACCName;
     var txt_CustomerCODE;
@@ -126,9 +126,9 @@ var AccDefVendor;
         ////debugger;
         //--- Print Buttons
         //--- Print Buttons
-        btnsearchACC = document.getElementById("btnsearchACC");
-        txt_ACCCode = document.getElementById("txt_ACCCode");
-        txt_ACCName = document.getElementById("txt_ACCName");
+        // btnsearchACC = document.getElementById("btnsearchACC") as HTMLButtonElement;
+        // txt_ACCCode = document.getElementById("txt_ACCCode") as HTMLInputElement;
+        // txt_ACCName = document.getElementById("txt_ACCName") as HTMLInputElement;
         //  btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
@@ -195,16 +195,16 @@ var AccDefVendor;
         //txt_CustCode.onchange = txt_CustCode_onchange;
         //txt_CustomerCODE.onkeyup = txt_CustomerCODE_keyup;
         txtOperationser.onkeyup = txtOperationser_keyup;
-        txt_ACCCode.onchange = txt_ACCCode_onchange;
-        btnsearchACC.onclick = btnsearchACC_onclick;
+        //  txt_ACCCode.onchange = txt_ACCCode_onchange;
+        // btnsearchACC.onclick = btnsearchACC_onclick;
     }
-    function btnsearchACC_onclick() {
-        debugger;
-        sys.FindKey(Modules.AccDefCustomer, "btncustSearch", "COMP_CODE= " + compcode + " and DETAIL = 1", function () {
-            var id = SearchGrid.SearchDataGrid.SelectedKey;
-            getAccountvenById(id);
-        });
-    }
+    //function btnsearchACC_onclick() {
+    //    debugger
+    //    sys.FindKey(Modules.AccDefCustomer, "btncustSearch", "COMP_CODE= " + compcode + " and DETAIL = 1", () => {
+    //        var id = SearchGrid.SearchDataGrid.SelectedKey;
+    //        getAccountvenById(id);
+    //    });
+    //}
     function getAccountvenById(custId) {
         debugger;
         Ajax.Callsync({
@@ -217,23 +217,23 @@ var AccDefVendor;
                 if (result.IsSuccess) {
                     var AccountDeta = result.Response;
                     if (AccountDeta.length == 0) {
-                        txt_ACCCode.value = "";
+                        // txt_ACCCode.value = "";
                         txt_ACCName.value = "";
-                        Errorinput(txt_ACCCode);
+                        // Errorinput(txt_ACCCode);
                         DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
                     }
                     else {
-                        $('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
+                        //$('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
                         $('#txt_ACCName').val(AccountDeta[0].ACC_DESCA);
                     }
                 }
             }
         });
     }
-    function txt_ACCCode_onchange() {
-        txt_ACCName.value = "";
-        getAccountvenById(txt_ACCCode.value);
-    }
+    //function txt_ACCCode_onchange() {
+    //    txt_ACCName.value = "";
+    //    getAccountvenById(txt_ACCCode.value);
+    //}
     //---------------------------------------------------------- Events region---------------------------------------------------------------
     //function txt_CustomerCODE_keyup() {
     //    var codeLength = txt_CustomerCODE.value.length;
@@ -251,7 +251,7 @@ var AccDefVendor;
     }
     function btnCust_OnClick() {
         debugger;
-        sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + "", function () {
+        sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + " and DETAIL = 1", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountById(id);
         });
@@ -310,8 +310,8 @@ var AccDefVendor;
     //---------------------------------------------------------- enable && disable &&validation && Search  region---------------------------------------------------------------
     function txt_disabled() {
         //debugger;
-        $("#txt_ACCCode").attr("disabled", "disabled");
-        $("#btnsearchACC").attr("disabled", "disabled");
+        //   $("#txt_ACCCode").attr("disabled", "disabled");
+        //  $("#btnsearchACC").attr("disabled", "disabled");
         $("#txt_CustomerCODE").attr("disabled", "disabled");
         $("#txt_Cust_Type").attr("disabled", "disabled");
         $("#id_chkcustom6").attr("disabled", "disabled");
@@ -352,8 +352,8 @@ var AccDefVendor;
     }
     function removedisabled() {
         //debugger;
-        $("#txt_ACCCode").removeAttr("disabled");
-        $("#btnsearchACC").removeAttr("disabled");
+        //   $("#txt_ACCCode").removeAttr("disabled");
+        //   $("#btnsearchACC").removeAttr("disabled");
         $("#txt_CustomerCODE").removeAttr("disabled");
         $("#txt_Cust_Type").removeAttr("disabled");
         $("#id_chkcustom6").removeAttr("disabled");
@@ -427,9 +427,10 @@ var AccDefVendor;
             return false;
         }
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
-            Errorinput($('#txt_AccountCode'));
+            Errorinput($('#txt_CustCode'));
             return false;
         }
         if (txtResMobile.value.trim() == "") {
@@ -742,9 +743,10 @@ var AccDefVendor;
         SysSession.CurrentEnvironment.I_Control[0].Currencyid != null ? $("#ddlCurrency").val(SysSession.CurrentEnvironment.I_Control[0].Currencyid) : $("#ddlCurrency").val("null");
         $('#btnAddDetails').removeClass("display_none");
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
-            Errorinput($('#txt_AccountCode'));
+            Errorinput($('#txt_CustCode'));
             return false;
         }
     }
@@ -996,7 +998,7 @@ var AccDefVendor;
                 getAccountvenById(Selecteditem[0].BankAccountNo);
             }
             else {
-                $('#txt_ACCCode').val('');
+                // $('#txt_ACCCode').val('');
                 $('#txt_ACCName').val('');
             }
             $('#divAccount').removeClass('display_none');
@@ -1231,6 +1233,7 @@ var AccDefVendor;
                     Display();
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);
@@ -1255,6 +1258,7 @@ var AccDefVendor;
                     Display();
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);

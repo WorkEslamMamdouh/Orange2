@@ -96,12 +96,12 @@ var PeriodManagement;
         Grid.SelectedIndex = 1;
         Grid.OnItemEditing = function () { };
         Grid.Columns = [
-            { title: res.App_PeriodCode, name: "PERIOD_CODE", type: "number", width: "6%" },
+            { title: res.App_PeriodCode, name: "PERIOD_CODE", type: "number", width: "2%" },
             { title: res.App_PeriodName, name: "PERIOD_DESC", type: "text", width: "6%" },
             { title: res.App_FromDate, name: "FROM_DATE", type: "text", width: "8%" },
             { title: res.App_ToDate, name: "TO_DATE", type: "text", width: "8%" },
             {
-                title: res.App_FixQty, name: "FixQty", type: "text", width: "7%",
+                title: res.App_FixQty, name: "FixQty", type: "text", width: "5%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
                     txt.type = "checkbox";
@@ -120,7 +120,7 @@ var PeriodManagement;
                 }
             },
             {
-                title: res.App_FixCost, name: "FixCost", type: "text", width: "7%",
+                title: res.App_FixCost, name: "FixCost", type: "text", width: "5%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
                     txt.type = "checkbox";
@@ -138,7 +138,7 @@ var PeriodManagement;
                 }
             },
             {
-                title: res.App_Close, width: "5%",
+                title: res.App_Close, width: "15%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
                     txt.type = "button";
@@ -153,7 +153,7 @@ var PeriodManagement;
                 }
             },
             {
-                title: res.Reopen, width: "7%",
+                title: res.Reopen, width: "15%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
                     txt.type = "button";

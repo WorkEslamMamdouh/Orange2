@@ -1349,16 +1349,16 @@ namespace AccDefCustomer {
         ReportGrid.SelectedIndex = 1;
         ReportGrid.OnItemEditing = () => { };
         ReportGrid.Columns = [
-            { title: "الرقم", name: "CustomerId", type: "text", width: "10%", visible: false },
+            { title: "الرقم", name: "CustomerId", type: "text", width: "8%", visible: false },
             { title: res.App_CustomerCODE, name: "CustomerCODE", type: "text", width: "10%" },
-            { title: res.SHT_Name, name: (lang == "ar" ? "NAMEA" : "NAMEE"), type: "text", width: "30%" },
+            { title: res.SHT_Name, name: (lang == "ar" ? "NAMEA" : "NAMEE"), type: "text", width: "20%" },
             { title: res.App_Mobile, name: "MOBILE", type: "text", width: "12%" },
-            { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "100px" },
-            { title: res.App_CreditLimit, name: "CreditLimit", type: "text", width: "100px" },
-            { title: res.App_openBalance, name: "Openbalance", type: "text", width: "100px" },
-            { title: res.App_Debtor, name: "Debit", type: "text", width: "100px" },
-            { title: res.App_Creditor, name: "Credit", type: "text", width: "100px" },
-            { title: res.App_Balanc, name: "Balance", type: "text", width: "100px" },
+            { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "10%" },
+            { title: res.App_CreditLimit, name: "CreditLimit", type: "text", width: "10%" },
+            { title: res.App_openBalance, name: "Openbalance", type: "text", width: "10%" },
+            { title: res.App_Debtor, name: "Debit", type: "text", width: "10%" },
+            { title: res.App_Creditor, name: "Credit", type: "text", width: "10%" },
+            { title: res.App_Balanc, name: "Balance", type: "text", width: "10%" },
         ];
         ReportGrid.Bind();
     }
@@ -1513,11 +1513,10 @@ namespace AccDefCustomer {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     CustomerId = result.Response as A_Rec_D_Customer;
-                     
-
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     success_Insert();
                     Valid = 0;
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
@@ -1533,11 +1532,10 @@ namespace AccDefCustomer {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-
                     CustomerId = d.result as number;
-
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
                     success();
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }

@@ -828,6 +828,7 @@ namespace AccDefSalesmen {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Valid = 0;
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
@@ -844,6 +845,7 @@ namespace AccDefSalesmen {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }

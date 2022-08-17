@@ -1091,6 +1091,8 @@ namespace USERS {
                         DisplayData_Header();
                         Display_RoleUsers();
                         Disbly_BuildControlsBarnch();
+                        Save_Succ_But();
+
                     }
                     else {
                         $('#div_Data').html("");

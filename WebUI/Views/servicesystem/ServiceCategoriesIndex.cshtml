@@ -15,25 +15,33 @@
                         <div class="col-12 col-md-4">
                             <input id="searchbutmemreport" name="" type="text" class="form-control" placeholder="@SystemResource.App_SearchbyCode">
                         </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-check d-inline-flex">
-                                <input type="radio" class="form-check-input form-radio" name="Type" id="TypeS" checked>
-                                <label class="form-check-label label-radio" for="reptp1"> @SystemResource.Purchase </label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-check d-inline-flex">
-                                <input type="radio" class="form-check-input form-radio" name="Type" id="TypeP">
-                                <label class="form-check-label label-radio" for="reptp2"> @SystemResource.Men_Sales</label>
+                        <div class="col-12 col-md-4">
+                            <div class="row mt-n3">
+                                <div class="form-group col-8 col-md-10">
+                                    <div class="row">
+                                        <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                            <div class="form-check d-inline-flex">
+                                                <input class="form-check-input form-radio special-radio" type="radio"name="Type" id="TypeS" checked>
+                                                <label class="form-check-label my-auto me-3" for="TypeS"> @SystemResource.Purchase </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                            <div class="form-check  d-inline-flex">
+                                                <input class="form-check-input form-radio special-radio" type="radio" name="Type" id="TypeP">
+                                                <label class="form-check-label my-auto me-3" for="TypeP"> @SystemResource.Men_Sales</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div id="ReportGrid"></div>
                         </div>
                         <div class="col-12 text-blue text-center fw-bold mt-3">
-                                @SystemResource.App_DoubleDisplay
+                            @SystemResource.App_DoubleDisplay
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -45,145 +53,166 @@
             <div class="col-12 service-content">
                 <div class="serviceBox mt-2">
                     <div class="row g-0">
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Code</label>
-                                <div class="col-9 col-md-7">
-                                    <input id="txt_CODE" disabled name="CAT_CODE" type="number" class="form-control" placeholder="@SystemResource.App_Number">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Code</label>
+                                        <div class="col-9 col-md-7">
+                                            <input id="txt_CODE" disabled name="CAT_CODE" type="number" class="form-control" placeholder="@SystemResource.App_Number">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_DescA</label>
-                                <div class="col-9 col-md-7">
-                                    <input id="txt_descA" disabled name="DescA" type="text" class="form-control" placeholder="@SystemResource.App_DescA">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_DescA</label>
+                                        <div class="col-9 col-md-7">
+                                            <input id="txt_descA" disabled name="DescA" type="text" class="form-control" placeholder="@SystemResource.App_DescA">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_DescE</label>
-                                <div class="col-9 col-md-7">
-                                    <input id="txt_descE" disabled name="DescE" type="text" class="form-control" placeholder="@SystemResource.App_DescE">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.PurAccNo</label>
-                                <div class="col-9 col-md-7">
-                                    <div class="search-content">
-                                        <input id="txtSaleNO" name="SALES_ACC_CODE" disabled type="text" class="form-control">
-                                        <button type="button" id="btnSaleNO" name="ColSearch" class="btn btn-main btn-search">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_DescE</label>
+                                        <div class="col-9 col-md-7">
+                                            <input id="txt_descE" disabled name="DescE" type="text" class="form-control " placeholder="@SystemResource.App_DescE">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <div class="col-12">
-                                    <input id="txtSaleD" name="ACC_DESCA" disabled type="text" class="form-control">
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row  d-flex justify-content-center align-items-center">
+                                        <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.PurAccNo</label>
+                                        <div class="col-9 col-md-7">
+                                            <div class="search-content">
+                                                <input id="txtSaleNO" name="SALES_ACC_CODE" disabled type="text" class="form-control search-control">
+                                                <button type="button" id="btnSaleNO" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.vat_natuer</label>
-                                <div class="col-9 col-md-7">
-                                    <select id="txtvat_natuer" disabled name="VatNatID" class="form-control"></select>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <div class="col-9 offset-3 col-md-12 offset-md-0">
+                                            <input id="txtSaleD" name="ACC_DESCA" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.return_accno</label>
-                                <div class="col-9 col-md-7">
-                                    <div class="search-content">
-                                        <input id="txtreturnNO" name="RETURN_ACC_CODE" disabled="disabled" type="text" class="form-control">
-                                        <button type="button" id="btnreturnNO" name="ColSearch" class="btn btn-main btn-search">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.vat_natuer</label>
+                                        <div class="col-9 col-md-7">
+                                            <select id="txtvat_natuer" disabled name="VatNatID" class="form-control"></select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <div class="col-12">
-                                    <input id="txtreturnD" name=" " disabled type="text" class="form-control">
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row  d-flex justify-content-center align-items-center">
+                                        <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.return_accno</label>
+                                        <div class="col-9 col-md-7">
+                                            <div class="search-content">
+                                                <input id="txtreturnNO" name="RETURN_ACC_CODE" disabled type="text" class="form-control search-control">
+                                                <button type="button" id="btnreturnNO" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">@* Empty Div for Responsive *@</div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.PurAccNo</label>
-                                <div class="col-9 col-md-7">
-                                    <div class="search-content">
-                                        <input id="txtdiscountNO" name="DISC_ACC_CODE" disabled="disabled" type="text" class="form-control">
-                                        <button type="button" id="btndiscountNO" name="ColSearch" class="btn btn-main btn-search">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row">
+                                        <div class="col-9 offset-3 col-md-12 offset-md-0">
+                                            <input id="txtreturnD" name=" " disabled type="text" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <div class="col-12">
-                                    <input id="txtdiscountD" name="" disabled="disabled" type="text" class="form-control">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row d-flex justify-content-center align-items-center">
+                                        <label id="lebtxtSaleNO" class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.PurAccNo</label>
+                                        <div class="col-9 col-md-7">
+                                            <div class="search-content">
+                                                <input id="txtdiscountNO" name="DISC_ACC_CODE" disabled type="text" class="form-control search-control">
+                                                <button type="button" id="btndiscountNO" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row">
+                                        <div class="col-9 offset-3 col-md-12 offset-md-0">
+                                            <input id="txtdiscountD" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">@* Empty Div for Responsive *@</div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Service_prefix</label>
-                                <div class="col-9 col-md-7">
-                                    <input id="txtService_prefix" disabled name="ItemFormatFix" type="text" class="form-control" placeholder="@SystemResource.Service_prefix">
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Service_prefix</label>
+                                        <div class="col-9 col-md-7">
+                                            <input id="txtService_prefix" disabled name="ItemFormatFix" type="text" class="form-control" placeholder="@SystemResource.Service_prefix">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-3 col-md-5 align-self-center p-md-0">
+                                            @SystemResource.Service_serial
+                                        </label>
+                                        <div class="col-9 col-md-7">
+                                            <input id="txtService_serial" disabled name="ItemFormatSerial" type="text" class="form-control" placeholder="@SystemResource.Service_serial">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group row g-0">
-                                <label class="col-3 col-md-5 align-self-center p-md-0">
-                                    @SystemResource.Service_serial
-                                </label>
-                                <div class="col-9 col-md-7">
-                                    <input id="txtService_serial" disabled name="ItemFormatSerial" type="text" class="form-control" placeholder="@SystemResource.Service_serial">
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- Editors Details -->
-                        <div class="insettext row editor-details mt-3">
-                            <div class="col-12 col-lg-6">
-
+                        <div class="insettext row editor-details">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Create</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6">
+                            <div class="col-12 col-md-6">
                                 <div class="form-group row g-0">
-                                    <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
-                                    <div class="col-4 col-xl-4 editor-input">
-                                        <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
-
-                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
+                                    <div class="col-4 col-md-5 editor-input px-0">
+                                        <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
              </div>
             </div>

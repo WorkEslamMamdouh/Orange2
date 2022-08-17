@@ -349,9 +349,8 @@ namespace DefStore {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     btnback_onclick();
                     Displaystore();
-
                     MasterGridDoubleClick();
-
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -382,8 +381,8 @@ namespace DefStore {
                     Selected_Data = new Array<GQ_GetStore>();
                     Selected_Data = detailstore.filter(x => x.StoreId == Number(storeID));
                     $('#StoreDetail').removeClass('display_none');
-
                     DisplayData(Selected_Data);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
