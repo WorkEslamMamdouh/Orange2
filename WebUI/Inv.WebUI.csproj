@@ -337,9 +337,6 @@
     <Content Include="Newtemplate\template\assets\images\home\slider\3.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\4.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\5.png" />
-    <Content Include="Newtemplate\template\assets\images\home\slider\6.png" />
-    <Content Include="Newtemplate\template\assets\images\home\slider\7.png" />
-    <Content Include="Newtemplate\template\assets\images\home\slider\8.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\new.svg" />
     <Content Include="Newtemplate\template\assets\images\home\why-us\business-solutions-1.svg" />
     <Content Include="Newtemplate\template\assets\images\home\why-us\computer-130.svg" />
