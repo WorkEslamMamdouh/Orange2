@@ -256,6 +256,7 @@ namespace Inv.API.Controllers
                         ///
 
                         var tstamp = DateTime.Now;
+                        DateTime data1 = DateTime.Now;
 
                         if (obj.I_Sls_TR_Invoice.Status == 1)
                         {
@@ -267,7 +268,12 @@ namespace Inv.API.Controllers
                             QrRec.Total = obj.I_Sls_TR_Invoice.TotalAmount;
                             QrRec.Vat = obj.I_Sls_TR_Invoice.VatAmount;
                             //QrRec.TrDate = tstamp;
-                            QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
+
+                            data1 = Convert.ToDateTime(obj.I_Sls_TR_Invoice.TrDate);
+                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+
+                            QrRec.TrDate = tstamp;
+                            //QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
 
 
 
@@ -295,7 +301,9 @@ namespace Inv.API.Controllers
                         {
                             obj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(obj.I_Sls_TR_Invoice));
+
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -329,7 +337,10 @@ namespace Inv.API.Controllers
                         //var tm = DateTime.Now.ToString("HH:mm:ss");
                         //updatedObj.I_Sls_TR_Invoice.TrTime = TimeSpan.Parse(tm);
 
-                        var tstamp = DateTime.Now;
+                        DateTime tstamp = DateTime.Now;
+                        DateTime data1 = DateTime.Now;
+
+                        tstamp = QRGeneratorController.AddTimeIndata(data1, updatedObj.I_Sls_TR_Invoice.TrTime.ToString());
 
                         if (updatedObj.I_Sls_TR_Invoice.Status == 1)
                         {
@@ -341,9 +352,13 @@ namespace Inv.API.Controllers
                             QrRec.Total = updatedObj.I_Sls_TR_Invoice.TotalAmount;
                             QrRec.Vat = updatedObj.I_Sls_TR_Invoice.VatAmount;
                             //QrRec.TrDate = tstamp;
-                            QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
+                            data1 = Convert.ToDateTime(updatedObj.I_Sls_TR_Invoice.TrDate);
+                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
 
-                             
+                            QrRec.TrDate = tstamp;
+                            //QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
+
+
                             string QrCode = QRGeneratorController.QrGenerator(QrRec);
 
                             string st = SystemToolsController.GenerateGuid();
@@ -389,7 +404,9 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj.I_Sls_TR_Invoice));
+
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -450,7 +467,10 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
-                            return Ok(new BaseResponse(Sls_TR_Invoice));
+
+
+                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -585,8 +605,8 @@ namespace Inv.API.Controllers
                     try
                     {
 
-
                         var tstamp = DateTime.Now;
+                        DateTime data1 = DateTime.Now;
 
                         if (obj.I_Sls_TR_Invoice.Status == 1)
                         {
@@ -598,7 +618,11 @@ namespace Inv.API.Controllers
                             QrRec.Total = obj.I_Sls_TR_Invoice.TotalAmount;
                             QrRec.Vat = obj.I_Sls_TR_Invoice.VatAmount;
                             //QrRec.TrDate = tstamp;
-                            QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
+                            data1 = Convert.ToDateTime(obj.I_Sls_TR_Invoice.TrDate);
+                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+
+                            QrRec.TrDate = tstamp;
+                            //QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
 
 
 
@@ -676,7 +700,11 @@ namespace Inv.API.Controllers
 
 
 
-                        var tstamp = DateTime.Now;
+                        DateTime tstamp = DateTime.Now;
+                        DateTime data1 = DateTime.Now;
+
+                        tstamp = QRGeneratorController.AddTimeIndata(data1, updatedObj.I_Sls_TR_Invoice.TrTime.ToString());
+
 
                         if (updatedObj.I_Sls_TR_Invoice.Status == 1)
                         {
@@ -688,7 +716,11 @@ namespace Inv.API.Controllers
                             QrRec.Total = updatedObj.I_Sls_TR_Invoice.TotalAmount;
                             QrRec.Vat = updatedObj.I_Sls_TR_Invoice.VatAmount;
                             //QrRec.TrDate = tstamp;
-                            QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
+                            data1 = Convert.ToDateTime(updatedObj.I_Sls_TR_Invoice.TrDate);
+                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+
+                            QrRec.TrDate = tstamp;
+                            //QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
 
 
                             string QrCode = QRGeneratorController.QrGenerator(QrRec);

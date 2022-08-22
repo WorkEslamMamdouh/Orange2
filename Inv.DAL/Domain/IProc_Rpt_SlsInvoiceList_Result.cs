@@ -86,8 +86,7 @@ namespace Inv.DAL.Domain
         public Nullable<int> op_TrNo { get; set; }
         public Nullable<System.DateTime> Op_TrDate { get; set; }
         public string Op_TruckNo { get; set; }
-        public string Op_RefNo { get; set; }
-        public string RefNO1 { get; set; }
+        public string Op_RefNo { get; set; } 
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
     }

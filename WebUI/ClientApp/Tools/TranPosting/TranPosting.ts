@@ -175,10 +175,10 @@ namespace TranPosting {
                 return;
             }
 
-            var StartDate:string = DateFormatRep(txtFromDate.value);
-            var EndDate:  string = DateFormatRep(txtToDate.value);
-            var FromNum:  number =  0;
-            var ToNum:    number =  0;
+            var StartDate: string = DateFormatRep(txtFromDate.value);
+            var EndDate: string = DateFormatRep(txtToDate.value);
+            var FromNum: number = 0;
+            var ToNum: number = 0;
             if (txtFromNumber.value != "") {
                 FromNum = Number(txtFromNumber.value);
             }
@@ -282,9 +282,9 @@ namespace TranPosting {
                         VoucherDetailGrid.Bind();
                         RefreshTransactions();
 
-                        //$("#btndiv_3").removeClass("Actiev");
-                        //$("#btndiv_1").removeClass("Actiev");
-                        //$("#btndiv_2").addClass("Actiev");
+                        $("#btndiv_3").removeClass("Actiev");
+                        $("#btndiv_1").removeClass("Actiev");
+                        $("#btndiv_2").addClass("Actiev");
 
                         $("#div_3").addClass("display_none");
                         $("#div_1").addClass("display_none");
@@ -301,49 +301,69 @@ namespace TranPosting {
         }
     }
     function btnSelectAll_onclick() {
-        for (let i = 0; i < LnkTransDetails.length; i++) {
-            LnkTransDetails[i].IsSelected = true;
-            updateselect(LnkTransDetails[i].ROW_ID, 1);
-        }
+        const newArr = LnkTransDetails.map(object => {
+            if (object.IsSelected === false) {
+                return { ...object, IsSelected: true };
+            }
+            return object;
+        });
+        LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
     }
     function btnReverseSelection_onclick() {
-        for (let i = 0; i < LnkTransDetails.length; i++) {
-            if (LnkTransDetails[i].IsSelected == true) {
-                LnkTransDetails[i].IsSelected = false;
-                updateselect(LnkTransDetails[i].ROW_ID, 0)
-            } else if (LnkTransDetails[i].IsSelected == false) {
-                LnkTransDetails[i].IsSelected = true;
-                updateselect(LnkTransDetails[i].ROW_ID, 1)
+
+        const newArr = LnkTransDetails.map(object => {
+            if (object.IsSelected === false) {
+                return { ...object, IsSelected: true };
+            } else {
+                return { ...object, IsSelected: false };
             }
-        }
+        });
+        LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
 
 
     }
     function btnUnSelectAll_onclick() {
-        for (let i = 0; i < LnkTransDetails.length; i++) {
-            LnkTransDetails[i].IsSelected = false;
-            updateselect(LnkTransDetails[i].ROW_ID, 0);
-        }
+
+        const newArr = LnkTransDetails.map(object => {
+            if (object.IsSelected === true) {
+                return { ...object, IsSelected: false };
+            }
+            return object;
+        });
+
+        LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
 
     }
     function btnCreateVoucher_onclick() {
+        debugger
+        //updateselect();
         if (txtDesc.value == " ") {
             DisplayMassage("يجب ادخال الوصف", "you must enter description", MessageType.Error);
             Errorinput(txtDesc);
             return;
         }
+        debugger;
         var isGeneratedFlag: boolean = false;
-        for (let i = 0; i < LnkTransDetails.length; i++) {
-            if (LnkTransDetails[i].IsGenerated == true) {
+        //for (let i = 0; i < LnkTransDetails.length; i++) {
+        //    if (LnkTransDetails[i].IsGenerated == true) {
+        //        isGeneratedFlag = true;
+        //    }
+        //}
+
+        const newArr = LnkTransDetails.map(object => {
+            if (object.IsGenerated === true) {
                 isGeneratedFlag = true;
             }
-        }
+        });
+
+
+
         if (isGeneratedFlag == false) {
             DisplayMassage("لا يوجد حركات للترحيل", "there is no transactions for posting", MessageType.Error);
             return;
@@ -362,6 +382,7 @@ namespace TranPosting {
         }
 
         var Desc: string = txtDesc.value;
+        let lstTrans = JSON.stringify(LnkTransDetails);
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GenerateVoucher"),
@@ -493,10 +514,8 @@ namespace TranPosting {
                     txt.onclick = (e) => {
                         if (txt.checked == true) {
                             debugger
-                            item.IsSelected = true;
-                            updateselect(item.ROW_ID, 1)
-                        } else {
-                            updateselect(item.ROW_ID, 0)
+                            item.IsSelected = true; 
+                        } else { 
                             item.IsSelected = false;
                         }
                     };
@@ -512,21 +531,21 @@ namespace TranPosting {
         ];
 
     }
-    function updateselect(Rowid: string, isselect: number) {
-        debugger
-        let branchcode = Number(ddlBranch.value);
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("TranPosting", "Updateselect"),
-            data: {
-                Comp: compcode, branchCode: branchcode, ROW_ID: Rowid, Isselect: isselect, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: (d) => {
-                let result = d as BaseResponse;
+    //function updateselect(Rowid: string, isselect: number) {
+    //    debugger
+    //    let branchcode = Number(ddlBranch.value);
+    //    Ajax.Callsync({
+    //        type: "Get",
+    //        url: sys.apiUrl("TranPosting", "Updateselect"),
+    //        data: {
+    //            Comp: compcode, branchCode: branchcode, ROW_ID: Rowid, Isselect: isselect, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+    //        },
+    //        success: (d) => {
+    //            let result = d as BaseResponse;
 
-            }
-        });
-    }
+    //        }
+    //    });
+    //}
     function InitializeVoucherDetailGrid() {
         let res: any = GetResourceList("");
         VoucherDetailGrid.ElementName = "VoucherDetailGrid";

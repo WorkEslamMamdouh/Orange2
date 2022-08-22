@@ -172,6 +172,7 @@ var SlsTrSalesManager;
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
         //GetLastPrice(3236)
+        InitializeGrid();
     }
     SlsTrSalesManager.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -925,7 +926,6 @@ var SlsTrSalesManager;
         }
     }
     function btnShow_onclick() {
-        InitializeGrid();
         BindStatisticGridData();
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
@@ -1281,7 +1281,6 @@ var SlsTrSalesManager;
             { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
             { title: res.App_Cutomer, name: "Cus_NameA", type: "text", width: "25%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
-            //{ title: res.App_date, name: "TrDate", type: "text", width: "20%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
                 itemTemplate: function (s, item) {
@@ -2458,6 +2457,8 @@ var SlsTrSalesManager;
         InvoiceModel.DeliveryDate = $('#txtDate_of_supply').val();
         InvoiceModel.DeliveryEndDate = $('#txtSupply_end_Date').val();
         InvoiceModel.TaxNotes = $('#txtTerms_of_Payment').val();
+        InvoiceModel.QtyTotal = $('#txtPackageCount').val();
+        InvoiceModel.LineCount = $('#txtItemCount').val();
         InvoiceModel.CashBoxID = Number($('#ddlCashBox').val()) == 0 ? null : Number($('#ddlCashBox').val());
         //InvoiceModel.CashBoxID = Number($('#ddlCashBox').val());
         //InvoiceModel.CashBoxID = 20;
@@ -2813,7 +2814,6 @@ var SlsTrSalesManager;
         res.IsCashDesciption = res.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
         SlsInvoiceStatisticsDetails.push(res);
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.sort(dynamicSort("TrNo"));
-        InitializeGrid();
         Grid.DataSource = SlsInvoiceStatisticsDetails;
         Grid.Bind();
         $("#divShow").removeClass("display_none");

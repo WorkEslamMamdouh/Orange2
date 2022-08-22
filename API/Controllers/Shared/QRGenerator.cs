@@ -54,6 +54,23 @@ namespace Inv.API.Controllers
             public string Value { get; set; }
             public string HexVal { get; set; }
         }
+
+        public static DateTime MargeTime_in_Date(DateTime dateTime, DateTime Time)
+        {
+
+            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, Time.Hour, Time.Minute, Time.Second);
+        }
+
+        public static DateTime AddTimeIndata(DateTime dateTime, string stringTime)
+        {
+
+            //string stringTime = Time.ToString();
+            string[] values = stringTime.Split(':');
+
+            return new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, Convert.ToInt16(values[0]), Convert.ToInt16(values[1]), 0);
+        }
+
+
         public static string QrGenerator(QrModel Model)
         {
             // Test Case 

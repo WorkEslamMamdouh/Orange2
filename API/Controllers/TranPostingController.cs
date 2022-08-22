@@ -59,10 +59,30 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
-
         [HttpPost, AllowAnonymous]
         public IHttpActionResult UpdateTransactions([FromBody]List<G_LnkTrans_Temp> lnkTempList)
         {
+            db.Database.ExecuteSqlCommand("Update G_LnkTrans_Temp set IsSelected = 0 where User_Code = '" + lnkTempList[0].User_Code + "'");
+            string ID = "";
+            string Code = "";
+            int i = 0;
+            foreach (var item in lnkTempList)
+            {
+                if (i == 0)
+                {
+                    ID = "" + item.ROW_ID + "";
+                    Code = "'" + item.ROW_ID + "'";
+                }
+                else
+                {
+                    ID = ID + "," + item.ROW_ID + "";
+                    Code = Code + ",'" + item.TR_CODE + "'";
+
+                }
+                i = 1;
+            }
+            db.Database.ExecuteSqlCommand("Update G_LnkTrans_Temp set IsSelected = 1 where ROW_ID in (" + ID + ") and TR_CODE in (" + Code + ") and User_Code = '" + lnkTempList[0].User_Code + "' ");
+
             if (ModelState.IsValid)
             {
                 //GlnktransTempService.UpdateList(lnkTempList);
@@ -76,16 +96,16 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
-        [HttpGet, AllowAnonymous]
-        public IHttpActionResult Updateselect(int Comp, int branchCode, string ROW_ID, int Isselect, string UserCode, string Token)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Database.ExecuteSqlCommand("update G_LnKTrans_Temp set IsSelected = " + Isselect + " where COMP_CODE = " + Comp + " and BRA_CODE = " + branchCode + " and ROW_ID = '" + ROW_ID + "'");
+        //[HttpGet, AllowAnonymous]
+        //public IHttpActionResult Updateselect(int Comp, int branchCode, string ROW_ID, int Isselect, string UserCode, string Token)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Database.ExecuteSqlCommand("update G_LnKTrans_Temp set IsSelected = " + Isselect + " where COMP_CODE = " + Comp + " and BRA_CODE = " + branchCode + " and ROW_ID = '" + ROW_ID + "'");
 
-            }
-            return BadRequest(ModelState);
-        }
+        //    }
+        //    return BadRequest(ModelState);
+        //}
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetTransactions(string UserCode, string Token)
         {
