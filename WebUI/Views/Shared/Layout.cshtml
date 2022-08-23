@@ -43,9 +43,8 @@
 
     <style>
         .hidden_Control {
-            display:none!important;
+            display: none !important;
         }
-
     </style>
 </head>
 
@@ -484,9 +483,9 @@
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <i class="fas fa-bars fa-lg"></i>
                     </button>
-                    @*<button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                            <i class="fas fa-bars fa-lg"></i>
-                        </button>*@
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
                     <ul class="navbar-nav w-100">
                         <li class="nav-item me-lg-5 me-md-3 me-sm-1 me-0">
                             <div class="nav-link mt-2 mt-md-0  d-sm-flex">
@@ -591,7 +590,7 @@
                             </div>
                         </li>
                         <li class="nav-item nav-settings d-block">
-                            <a class="nav-link" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal" href="#">
+                            <a class="nav-link" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal">
                                 <i class="fas fa-info"></i>
                             </a>
                         </li>
@@ -802,7 +801,6 @@
 
     @*</div>*@
 
-
     <script src="~/Newtemplate/template/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -816,6 +814,7 @@
     <!-- inject:js -->
     <script src="~/Newtemplate/template/assets/js/off-canvas.js"></script>
     <script src="~/Newtemplate/template/assets/js/hoverable-collapse.js"></script>
+    <script src="~/Newtemplate/template/assets/js/misc.js"></script>
     <script src="~/Newtemplate/template/assets/js/settings.js"></script>
     <script src="~/Newtemplate/template/assets/js/todolist.js"></script>
     <!-- endinject -->
@@ -838,11 +837,6 @@
 
 
     @*@Scripts.Render("~/Bundles/AppScript2")*@
-
-
-
-
-
     <script>
         $("#NewAdd_Falg").val(0);
         $("#Mod_Flag").val(0);

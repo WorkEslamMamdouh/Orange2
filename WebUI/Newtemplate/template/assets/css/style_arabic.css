@@ -13036,11 +13036,11 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     font-size: 0.875rem;
     border-radius: 0.1875rem;
 }
-.btn-main {
+.btn-main{
     color: var(--bs-light);
     background-color: var(--main-blue);
-    border-color: var(--main-blue);
-    transition: all .5s ease-in-out;  
+    border: 3px solid var(--main-blue);
+    transition: all .5s ease-in-out;
 }
 .btn-gray {
     color: var(--bs-light);
@@ -13054,8 +13054,8 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 .btn-dark-green {
     color: var(--bs-light);
-    background-color: #004d00;
-    border-color: #004d00;
+    background-color: #003300;
+    border-color: #003300;
 }
 .btn-orange {
     color: var(--bs-light);
@@ -13100,6 +13100,11 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 .btn-blue:hover {
     background-color: var(--dark-blue);
     border-color: var(--dark-blue);
+}
+.btn-dark-green:hover {
+    color: var(--bs-light);
+    background-color: green;
+    border-color: green;
 }
     .btn-gray:hover {
         color: var(--Lighter-blue);
@@ -28428,7 +28433,7 @@ div.tagsinput {
 }
 @media screen and (max-width: 710px) {
     .sidebar-offcanvas {
-        top: 135px;
+        top: 70px;
     }
 
 }
@@ -30133,7 +30138,15 @@ input[class=checkbox]:checked:before {
         border-bottom:1px solid var(--bs-gray-200);
     }
 /*End Right Side Icon Price List*/
-/*.fade.in {
-    opacity: 1;
-}*/
-
+/*Start Switch Button tab*/
+.btn-active a {
+    background-color: transparent;
+    color: var(--main-blue);
+    border: 3px solid var(--main-blue);
+    padding: 1rem;
+    border-radius: 10px;
+    font-weight:bolder;
+}
+    .btn-active a:hover {
+        color: var(--main-blue);
+    }

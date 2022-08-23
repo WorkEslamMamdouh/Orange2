@@ -3518,13 +3518,16 @@ namespace CloseProcesses {
         btnUpdate_3.removeAttribute('disabled');
 
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
+       // $("#btnOpen").attr("style", "")
 
         $("#btnClose").attr("disabled", "disabled").off('click');
         $("#btnPresent").removeAttr("disabled");
 
-        $("#btnClose").attr("style", "")
-        $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+       // $("#btnClose").attr("style", "")
+        //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+        $("#btnClose").removeClass("btn-red");
+        $("#btnPresent").addClass("btn-green");
 
 
 
@@ -3650,11 +3653,14 @@ namespace CloseProcesses {
 
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+        // $("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
 
-        $("#btnPresent").attr("style", "margin-right: 8%;")
+        //$("#btnPresent").attr("style", "margin-right: 8%;")
+        //$("#btnClose").attr("style", "background-color: #fdb0b0;");
         $("#btnClose").removeAttr("disabled");
-        $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").addClass("btn-red");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
 
 
@@ -3701,8 +3707,10 @@ namespace CloseProcesses {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-        $("#btnPresent").attr("style", " margin-right: 8%;")
-        $("#btnClose").attr("style", " ")
+        //$("#btnPresent").attr("style", " margin-right: 8%;")
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").removeClass("btn-red");
+      //  $("#btnClose").attr("style", " ")
 
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
@@ -3714,13 +3722,15 @@ namespace CloseProcesses {
 
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "")
+            //  $("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
 
     
         } else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927")
+            //$("#btnOpen").attr("style", "background-color: #00e927")
+            $("#btnOpen").addClass("btn-dark-green");
 
 
         }
@@ -3736,10 +3746,12 @@ namespace CloseProcesses {
  
 
         $("#btnClose").attr("disabled", "disabled");
-        $("#btnClose").attr("style", "")
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
 
         $("#btnPresent").attr("disabled", "disabled");
-        $("#btnPresent").attr("style", "")
+       // $("#btnPresent").attr("style", "")
+        $("#btnPresent").removeClass("btn-green")
 
         //Calculation_Close();
 
@@ -3771,8 +3783,10 @@ namespace CloseProcesses {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-        $("#btnPresent").attr("style", " margin-right: 8%;")
-        $("#btnClose").attr("style", " ")
+        // $("#btnPresent").attr("style", " margin-right: 8%;")
+        $("#btnPresent").removeClass("btn-green");
+        $("#btnClose").removeClass("btn-red");
+        //$("#btnClose").attr("style", " ")
 
         OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
         OerSalesmanGrid_Detail.Bind();
@@ -3784,7 +3798,8 @@ namespace CloseProcesses {
 
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").attr("style", "")
+            //$("#btnOpen").attr("style", "")
+            $("#btnOpen").removeClass("btn-dark-green");
 
             $('#divlepRentdata_3').addClass('display_none');
             $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
@@ -3793,7 +3808,8 @@ namespace CloseProcesses {
         } else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-            $("#btnOpen").attr("style", "background-color: #00e927")
+           // $("#btnOpen").attr("style", "background-color: #00e927")
+            $("#btnOpen").addClass("btn-dark-green");
 
 
         }
@@ -3868,11 +3884,13 @@ namespace CloseProcesses {
 
 
                         $("#btnOpen").attr("disabled", "disabled");
-                        $("#btnOpen").attr("style", "")
+                      //  $("#btnOpen").attr("style", "")
+                        $("#btnOpen").removeClass("btn-dark-green");
 
 
                         $("#btnPresent").attr("disabled", "disabled");
-                        $("#btnPresent").attr("style", "")
+                        // $("#btnPresent").attr("style", "")
+                        $("#btnPresent").removeClass("btn-green");
 
 
                         flag_Back = false;
@@ -4077,15 +4095,18 @@ namespace CloseProcesses {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-        $("#btnPresent").attr("style", "  margin-right: 8%;")
-        $("#btnClose").attr("style", "")
+        //$("#btnPresent").attr("style", "  margin-right: 8%;")
+        //$("#btnClose").attr("style", "")
+        $("#btnClose").removeClass("btn-red");
+        $("#btnPresent").removeClass("btn-green");
 
         $("#btnOpen").attr("disabled", "disabled").off('click');
-        $("#btnOpen").attr("style", "")
+        //$("#btnOpen").attr("style", "")
+        $("#btnOpen").removeClass("btn-dark-green");
 
         //$("#txtNumber").removeAttr("disabled");
-        $("#txtDate").removeAttr("disabled");
         //$("#txtReferenceNumber").removeAttr("disabled");
+        $("#txtDate").removeAttr("disabled");
         $("#txtTruckNumber").removeAttr("disabled");
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
@@ -4168,8 +4189,10 @@ namespace CloseProcesses {
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                $("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
-                $("#btnClose").attr("style", "")
+                //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
+                //$("#btnClose").attr("style", "")
+                $("#btnPresent").addClass("btn-green");
+                $("#btnClose").removeClass("btn-red");
 
             }
             else {

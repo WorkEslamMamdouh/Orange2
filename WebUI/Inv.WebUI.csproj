@@ -238,6 +238,7 @@
     <Content Include="Newtemplate\preview.jpg" />
     <Content Include="Newtemplate\template\assets\css\style.css" />
     <Content Include="Newtemplate\template\assets\css\style_arabic.css" />
+    <Content Include="Newtemplate\template\assets\css\style_home.css" />
     <Content Include="Newtemplate\template\assets\images\auth\lockscreen-bg.jpg" />
     <Content Include="Newtemplate\template\assets\images\auth\login-bg.jpg" />
     <Content Include="Newtemplate\template\assets\images\auth\Login_bg.jpg" />
@@ -331,6 +332,20 @@
     <Content Include="Newtemplate\template\assets\images\file-icons\64\006-record.png" />
     <Content Include="Newtemplate\template\assets\images\file-icons\64\007-folder.png" />
     <Content Include="Newtemplate\template\assets\images\file-icons\64\008-archive.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\1.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\2.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\3.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\4.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\5.png" />
+    <Content Include="Newtemplate\template\assets\images\home\slider\new.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\business-solutions-1.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\computer-130.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\internet-51.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\security-40.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\special-integral-setting-base-sales.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\thematic-management.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\website-performance.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\why-us\why-us-1.svg" />
     <Content Include="Newtemplate\template\assets\images\lightbox\play-button.png" />
     <Content Include="Newtemplate\template\assets\images\lightbox\thumb-v-v-1.jpg" />
     <Content Include="Newtemplate\template\assets\images\lightbox\thumb-v-v-2.jpg" />
@@ -414,6 +429,8 @@
     <Content Include="Newtemplate\template\assets\js\codeEditor.js" />
     <Content Include="Newtemplate\template\assets\js\codemirror.js" />
     <Content Include="Newtemplate\template\assets\js\context-menu.js" />
+    <Content Include="Newtemplate\template\assets\js\main.js" />
+    <Content Include="Newtemplate\template\assets\js\scrollreveal.min.js" />
     <Content Include="Newtemplate\template\assets\js\sideIcons.js" />
     <Content Include="Newtemplate\template\assets\js\counter.js" />
     <Content Include="Newtemplate\template\assets\js\cropper.js" />
