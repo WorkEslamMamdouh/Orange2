@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = @SystemResource.Men_AccTrInvReceipt;
     Layout = "~/Views/Shared/Layout.cshtml";
-}
-
+} 
 <div class="col-12  borderred">
     @* Old HTML *@
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
@@ -287,12 +286,12 @@
                                     <tr>
                                         <th style="width: 3%"></th>
                                         <th style="width: 3%"></th>
-                                        <th style="width: 3%">@SystemResource.serial</th>
-                                        <th style="width: 16%">@SystemResource.App_Type</th>
+                                        <th style="width: 3%" class="px-3"> @SystemResource.serial </th>
+                                        <th style="width: 16%" class="pt-5">@SystemResource.App_Type</th>
                                         <th style="width: 16%">@SystemResource.App_Item</th>
-                                        <th style="width: 7%" class=" ">@SystemResource.App_soldQty</th>
+                                        <th style="width: 8%" class="px-3"> @SystemResource.App_soldQty</th>
                                         <th style="width: 1%" class=" ">المرتجع</th>
-                                        <th style="width: 10%" class=" ">@SystemResource.App_Price</th>
+                                        <th style="width: 10%" class="px-5">  @SystemResource.App_Price  </th>
                                         <th style="width: 7%" class=" ">السعر بالضريبه</th>
                                         <th style="width: 7%" class=" ">نسبة الخصم </th>
                                         <th style="width: 7%" class=" ">الخصم  </th>
@@ -316,7 +315,8 @@
                     <div class="col-12">
                         <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
                             <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice">
-                                <i class="mdi mdi-account-search fs-3"></i>
+                                <i class="mdi mdi-cash-usd fs-3"></i>
+
 
                                 <div class="table-responsive sideIcon-table flex-grow-1 mx-5">
                                     <table class="table">

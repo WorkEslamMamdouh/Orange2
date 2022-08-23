@@ -304,7 +304,7 @@ namespace SlsTrSalesManager {
         if (flagLastPrice % 2 === 0) {
 
             if (ddlInvoiceCustomer.value == "null") {
-                DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
+                DisplayMassage('( لا يوجد عميل علي الفاتوره برجاء اختيار العميل اولاً )', '(Please select a customer)', MessageType.Error);
                 Errorinput(ddlInvoiceCustomer);
                 return false
             }
@@ -1187,6 +1187,7 @@ namespace SlsTrSalesManager {
             $("#ddlFamily" + i).removeAttr("disabled");
             $("#ddlItem" + i).removeAttr("disabled");
             $("#txtQuantity" + i).removeAttr("disabled");
+            $("#txtQuantity" + i).removeClass("px-3");
             $("#btnSearchItems" + i).removeAttr("disabled");
             $("#txtDiscountPrc" + i).removeAttr("disabled");
             $("#txtDiscountAmount" + i).removeAttr("disabled");
@@ -1864,7 +1865,7 @@ namespace SlsTrSalesManager {
                      <td>
 		                <div class="form-group">
 			                <div class="form-group ps-1">
-			                    <input class="counter" type="number" data-id="number" id="txtQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
+			                    <input class="counter px-3" type="number" data-id="number" id="txtQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
 			                    <div class="value-button decrease-button btn-number1${cnt}" data-id="decrease" id="btnminus1" data-type="minus" data-field="quant[1]">-</div>
 			                    <div class="value-button increase-button btn-number1${cnt}" data-id="increase" id="btnplus1" data-type="plus" data-field="quant[1]">+</div>
 		                    </div>
@@ -2712,7 +2713,7 @@ namespace SlsTrSalesManager {
             $("#ddlItem" + CountGrid).removeAttr("disabled");
             $("#txtQuantity" + CountGrid).removeAttr("disabled");
             $("#btnSearchItems" + CountGrid).removeAttr("disabled");
-
+            $("#txtQuantity" + i).removeClass("px-3");
             $("#txtReturnQuantity" + CountGrid).attr("disabled", "disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
@@ -3125,7 +3126,9 @@ namespace SlsTrSalesManager {
             invoiceItemSingleModel.Name_Item = $("#ddlItem" + i + " option:selected").text();
             invoiceItemSingleModel.MinUnitPrice = Number($('option:selected', $("#ddlItem" + i)).attr('data-MinUnitPrice'));
 
-            if (Number($("#txtPrice" + i).val()) < Number($('option:selected', $("#ddlItem" + i)).attr('data-MinUnitPrice'))) {
+            let MinPrice = $('option:selected', $("#ddlItem" + i)).attr('data-MinUnitPrice');
+            
+            if (Number($("#txtPrice" + i).val()) < Number(MinPrice)) {
                 List_MinUnitPrice.push(invoiceItemSingleModel);
                 Validation_Insert = 1;
             }
@@ -3791,11 +3794,14 @@ namespace SlsTrSalesManager {
                     invoiceID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");
                     $('#txtUpdatedBy').prop("value", res.UpdatedBy);
-                    $('#txtUpdatedAt').prop("value", res.UpdatedAt);
-                    displayDate_speed(invoiceID, res);
-                    success_insert();
-                    IsSuccess = true;
+                    $('#txtUpdatedAt').prop("value", res.UpdatedAt); 
 
+                    displayDate_speed(invoiceID, res)
+                     
+                    chkActive.checked = false;
+                    chkActive.disabled = true;
+
+                    btnUpdate.disabled = false;
                 } else {
                     btnUpdate.disabled = true;  
                 }

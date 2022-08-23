@@ -306,7 +306,7 @@ namespace PurTrReceive {
 
         }
         else {
-           // $("#btnCustLastPrice").animate({ right: '-88%' }, 'slow');
+            // $("#btnCustLastPrice").animate({ right: '-88%' }, 'slow');
             $("#btnCustLastPrice").removeClass("active");
         }
 
@@ -314,12 +314,12 @@ namespace PurTrReceive {
     }
     function timerHiddenLastPrice() {
         setTimeout(function () {
-          //  $("#btnCustLastPrice").animate({ right: '-88%' }, 'slow');
+            //  $("#btnCustLastPrice").animate({ right: '-88%' }, 'slow');
             $("#btnCustLastPrice").removeClass("active");
             flagLastPrice = 2;
         }, 20000);
     }
-    function GetLastPrice(itemid: number, Name: string) { 
+    function GetLastPrice(itemid: number, Name: string) {
         let VendorID = globalVendorID;
         let storeid = ddlStoreHeader.value;
         let invid = GlobalReceiveID
@@ -546,10 +546,10 @@ namespace PurTrReceive {
 
         txtTotalbefore.setVal(RetrivedPurchaseModel[0].ItemTotalFC)
         txtTotalDiscount.setVal(RetrivedPurchaseModel[0].ItemDiscountTotalFC);
-         
+
         $("#txtLocalTotalFooter").val(IsNullOrEmpty(RetrivedPurchaseModel[0].TotalFC.toString()) == true ? "0" : RetrivedPurchaseModel[0].TotalFC.toString());
-         
-            txtTotalAddons.setVal(RetrivedPurchaseModel[0].TotAddAfterVat);
+
+        txtTotalAddons.setVal(RetrivedPurchaseModel[0].TotAddAfterVat);
 
         var FullAllPriceWithoutTaxval = Number(txtTotal.value) + Number(txtAddons.value);
         $("#txtTotalPurchaseWithoutTax").val(FullAllPriceWithoutTaxval.RoundToSt(2));
@@ -702,7 +702,8 @@ namespace PurTrReceive {
         AddNewRow();
         txtPurOrderNum.disabled = false;
 
-
+        PurOrderShowFlag = false;
+        ShowFlag = false;
 
     }
     function btnupdate_onclick() {
@@ -818,7 +819,7 @@ namespace PurTrReceive {
             }
         }
 
-        
+
     }
     //---------------------------------------------------------------- Fill Drop Down region----------------------------------------------------
     function FillddlFamily() {
@@ -1254,13 +1255,15 @@ namespace PurTrReceive {
             else { ddlIsCash.value = '0'; $('#ddlCashBoxH').removeAttr('disabled'); }
             PurOrderShowFlag = true;
             ShowFlag = false;
+            CountGrid = 0;
             for (var i = 0; i < PurOrderDetailModel.IQ_GetPurchaseOrderDetail.length; i++) {
                 VatPrc = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VATType;
                 BuildControls(i);
+                CountGrid++
             }
-            PurOrderShowFlag = false;
-            CountGrid = PurOrderDetailModel.IQ_GetPurchaseOrderDetail.length;
-            CountItems = PurOrderDetailModel.IQ_GetPurchaseOrderDetail.length;
+            PurOrderShowFlag = false; 
+            CountItems = CountGrid;
+            Insert_Serial();
             ComputeTotals();
             $("#txtCreatedAt").prop("value", DateTimeFormat(Date().toString()));
             $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
@@ -1333,34 +1336,31 @@ namespace PurTrReceive {
         }
 
         if (!SysSession.CurrentPrivileges.AddNew) return;
-        var CanAdd: boolean = true;
-        if (CountGrid > 0) {
-            var LastRowNo = CountGrid - 1;
-            CanAdd = Validation_Grid(LastRowNo);
-        }
-        if (CanAdd) {
-
-            CountItems = CountItems + 1;
-            BuildControls(CountGrid);
-            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
-            $("#txtFamilyType").val(CountItems); //In Insert mode
-            $("#ddlFamily" + CountGrid).removeAttr("disabled");
-            $("#ddlItem" + CountGrid).removeAttr("disabled");
-            $("#txtQuantity" + CountGrid).removeAttr("disabled");
-            $("#txtPrice" + CountGrid).attr("disabled", "disabled");
-            $("#txtPriceFc" + CountGrid).removeAttr("disabled");
-            $("#btnSearchItems" + CountGrid).removeAttr("disabled");
-            // can delete new inserted record  without need for delete privilage
-            $("#btn_minus" + CountGrid).removeClass("display_none");
-            $("#btn_minus" + CountGrid).removeAttr("disabled");
 
 
-            CountGrid++;
+        PurOrderShowFlag = false;
+        ShowFlag = false;
 
-            Insert_Serial();
-            ComputeTotals();
+        CountItems = CountItems + 1;
+        BuildControls(CountGrid);
+        $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
+        $("#txtFamilyType").val(CountItems); //In Insert mode
+        $("#ddlFamily" + CountGrid).removeAttr("disabled");
+        $("#ddlItem" + CountGrid).removeAttr("disabled");
+        $("#txtQuantity" + CountGrid).removeAttr("disabled");
+        $("#txtPrice" + CountGrid).attr("disabled", "disabled");
+        $("#txtPriceFc" + CountGrid).removeAttr("disabled");
+        $("#btnSearchItems" + CountGrid).removeAttr("disabled");
+        // can delete new inserted record  without need for delete privilage
+        $("#btn_minus" + CountGrid).removeClass("display_none");
+        $("#btn_minus" + CountGrid).removeAttr("disabled");
 
-        }
+
+        CountGrid++;
+
+        Insert_Serial();
+        ComputeTotals();
+
     }
     function BuildControls(cnt: number) {
         var html;
@@ -1377,6 +1377,11 @@ namespace PurTrReceive {
                             <i class="fa fa-search  "></i>
                              </button>
  
+		                </div>
+	                </td>
+                     <td>
+		                <div class="form-group">
+			                <input id="txtSerialH${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
@@ -1462,7 +1467,7 @@ namespace PurTrReceive {
                 <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control input-sm"/>
                 <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control input-sm" />';
                 </tr>`;
-       
+
         $("#div_Data").append(html);
 
 
@@ -1628,7 +1633,7 @@ namespace PurTrReceive {
 
                 //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
 
-                $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID+']').prop('selected', 'selected').change();
+                $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
 
                 let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
 
@@ -1655,13 +1660,13 @@ namespace PurTrReceive {
                 $("#txtPriceFc" + cnt).val("1");
                 $("#txtQuantity" + cnt).val("1");
                 $("#txtDiscountPrc" + cnt).val("0");
-                $("#txtDiscountAmount" + cnt).val("0"); 
+                $("#txtDiscountAmount" + cnt).val("0");
                 if (res == true) {
-                $("#ddlItem" + cnt).val("null");  
+                    $("#ddlItem" + cnt).val("null");
                     DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                } 
-              
-                totalRow(cnt, true); 
+                }
+
+                totalRow(cnt, true);
 
 
 
@@ -1717,7 +1722,7 @@ namespace PurTrReceive {
                     $("#txtNetUnitPrice" + cnt).val("0");
                     ComputeTotals();
                 } else {
-               
+
                     $("#txtPriceFc" + cnt).val("1");
                     $("#txtQuantity" + cnt).val("1");
                     $("#txtDiscountPrc" + cnt).val("0");
@@ -1774,7 +1779,7 @@ namespace PurTrReceive {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             totalRow(cnt, true);
-             
+
         });
 
         $("#txtPrice" + cnt).change(() => {
@@ -1812,7 +1817,7 @@ namespace PurTrReceive {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             $("#txtTotAddons" + cnt).val((Number($("#txtAddons" + cnt).val()) + Number($("#txtPrice" + cnt).val())));
-            totalRow(cnt, true); 
+            totalRow(cnt, true);
         });
 
 
@@ -1824,6 +1829,7 @@ namespace PurTrReceive {
         });
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         if (ShowFlag == true) {
             // disabled
             $("#txtQuantity" + cnt).attr("disabled", "disabled");
@@ -1885,13 +1891,13 @@ namespace PurTrReceive {
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
 
             debugger
-             
-            $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2)); 
+
+            $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2));
             $("#txtNetUnitPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
-            $("#txtDiscountPrc" + cnt).prop("value", (ItemDetails[cnt].DiscountPrc == null || undefined) ? 0 : ItemDetails[cnt].DiscountPrc.RoundToSt(2)); 
+            $("#txtDiscountPrc" + cnt).prop("value", (ItemDetails[cnt].DiscountPrc == null || undefined) ? 0 : ItemDetails[cnt].DiscountPrc.RoundToSt(2));
             $("#txtDiscountAmount" + cnt).prop("value", (ItemDetails[cnt].DiscountAmount == null || undefined) ? 0 : ItemDetails[cnt].DiscountAmount.RoundToSt(2));
 
-        
+
 
             $("#txtTax" + cnt).prop("value", (ItemDetails[cnt].VatAmount == null || undefined) ? 0 : ItemDetails[cnt].VatAmount.RoundToSt(2));
             var price: number = ItemDetails[cnt].RecUnitPrice;
@@ -1909,8 +1915,6 @@ namespace PurTrReceive {
 
         }
         if (PurOrderShowFlag == true) {
-
-            // disabled
             $("#txtQuantityReturnValue" + cnt).attr("disabled", "disabled");
             $("#txtAddons" + cnt).attr("disabled", "disabled");
             $("#txtTotAddons" + cnt).attr("disabled", "disabled");
@@ -1920,6 +1924,8 @@ namespace PurTrReceive {
             $("#txtTax" + cnt).attr("disabled", "disabled");
             $("#txtTotAfterTax" + cnt).attr("disabled", "disabled");
 
+
+            $('#btnSearchItems' + cnt).removeAttr("disabled");
 
             $('.btn-number1' + cnt).removeAttr("disabled");
             $('.input-number1' + cnt).removeAttr("disabled");
@@ -1956,9 +1962,9 @@ namespace PurTrReceive {
 
             $("#txtPrice" + cnt).prop("value", (PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].UnitPrice == null || undefined) ? 0 : PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].UnitPrice.RoundToSt(2));
 
-            $("#txtTax" + cnt).prop("value", (ItemDetails[cnt].VatAmount == null || undefined) ? 0 : ItemDetails[cnt].VatAmount.RoundToSt(2));
+            $("#txtTax" + cnt).prop("value", (PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].VatAmount == null || PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].VatAmount == undefined) ? 0 : PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].VatAmount.RoundToSt(2));
             var price: number = PurOrderDetailModel.IQ_GetPurchaseOrderDetail[cnt].UnitPrice;
-              
+
             var total: number = 0;
             if (PurQuantity > 0)
                 total = price * PurQuantity;
@@ -1979,12 +1985,12 @@ namespace PurTrReceive {
     function totalRow(cnt: number, flagDiscountAmount: boolean) {
         debugger
 
-         
-        let txtPrice = Number($("#txtPriceFc" + cnt).val()) 
+
+        let txtPrice = Number($("#txtPriceFc" + cnt).val())
         let txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
 
         if (flagDiscountAmount) {
-            $("#txtDiscountAmount" + cnt).val( ((txtDiscountPrc * txtPrice) / 100).toString());
+            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100).toString());
             $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)).RoundToSt(2));
         }
         else {
@@ -2084,7 +2090,7 @@ namespace PurTrReceive {
         var txtValueChargeTot = Number($("#txtTotalAddons").val());
         var txtTotalVal = Number($("#txtTotalFamily").val());
         $("#txtTotalPurchaseWithTax").val((txtValueChargeTot + txtTotalVal).RoundToSt(2));
-         
+
         txtTotalDiscount.value = TotalDiscount.toString();
         txtTotalbefore.value = Totalbefore.toString();
 
@@ -2957,7 +2963,7 @@ namespace PurTrReceive {
         for (var i = 0; i < CountGrid; i++) {
             ReceiveItemSingleModel = new I_Pur_TR_ReceiveItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-             
+
 
             if (StatusFlag == "i") {
                 ReceiveItemSingleModel.ReciveDetailsID = 0;
@@ -2974,7 +2980,7 @@ namespace PurTrReceive {
                 ReceiveItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
                 ReceiveItemSingleModel.VatPrc = VatPrc;
                 ReceiveItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
-               
+
 
                 ReceiveItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 ReceiveItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());

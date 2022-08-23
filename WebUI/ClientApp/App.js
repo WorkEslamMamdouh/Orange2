@@ -193,7 +193,13 @@ var App;
     HTMLInputElement.prototype.setVal = function (value) {
         debugger;
         var Input = this;
-        Input.value == null || Input.value.trim() == '' ? Input.value = '' : Input.value = value;
+        value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+        return value;
+    };
+    HTMLSelectElement.prototype.SetValSelect = function (value) {
+        debugger;
+        var Input = this;
+        value == null || value == '' || value == 0 || value == '0' ? Input.value = 'null' : Input.value = value;
         return value;
     };
     var branchCodeSelected = "";

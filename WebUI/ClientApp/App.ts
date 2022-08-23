@@ -216,6 +216,14 @@ interface HTMLInputElement {
 
 }
 
+
+interface HTMLSelectElement {
+
+    SetValSelect: (dec: any) => string;
+
+}
+
+
 interface IIgGridColumn {
     key?: string;
     dataType?: string;
@@ -282,9 +290,17 @@ namespace App {
     HTMLInputElement.prototype.setVal = function (value: any): any {
         debugger
         let Input = this;
-        Input.value == null || Input.value.trim() == '' ? Input.value = '' : Input.value = value; 
+        value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
+
+    HTMLSelectElement.prototype.SetValSelect = function (value: any): any {
+        debugger
+        let Input = this;
+        value == null || value == '' || value == 0 || value == '0' ? Input.value = 'null' : Input.value = value;
+        return value;
+    };
+
 
 
     let branchCodeSelected: string = "";

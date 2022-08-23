@@ -240,30 +240,20 @@ var SlsTrShowPrice;
             ddlType.value = "1";
         }
         else {
-            var custID = Number(ddlInvoiceCustomer.value);
-            var customer = VendorDetails.filter(function (s) { return s.CustomerId == custID; });
-            vatType = customer[0].VATType;
-            txtInvoiceCustomerName.value = customer[0].NAMEA.toString();
-            txtCustomerMobile.value = customer[0].MOBILE;
-            if (SysSession.CurrentEnvironment.UserType != 1 && SysSession.CurrentEnvironment.UserType != 3) {
-                ddlSalesman.value = customer[0].SalesmanId == null ? 'null' : customer[0].SalesmanId.toString();
-                if (ddlSalesman.value == '') {
-                    ddlSalesman.value = 'null';
-                }
-            }
         }
-        if (CountItems > 0) {
-            DisplayMassage("من فضلك اعادة ادخال  بيانات الفاتورة مره أخري", "Please re-enter the billing information again", MessageType.Worning);
-        }
-        CountItems = 0;
-        PackageCount = 0;
-        CountTotal = 0;
-        TaxCount = 0;
-        NetCount = 0;
-        CountGrid = 0;
-        $('#div_Data').html("");
+        //if (NewAdd == true) {
+        //    if (CountItems > 0) {
+        //        DisplayMassage("من فضلك اعادة ادخال  بيانات الفاتورة مره أخري", "Please re-enter the billing information again", MessageType.Worning);
+        //    }
+        //}
+        //CountItems = 0;
+        //PackageCount = 0;
+        //CountTotal = 0;
+        //TaxCount = 0;
+        //NetCount = 0;
+        //CountGrid = 0;
+        //$('#div_Data').html("");
         ComputeTotals();
-        AddNewRow();
     }
     function ddlType_onchange() {
         if (ddlType.value == "1") { //نقدي 
@@ -276,15 +266,25 @@ var SlsTrShowPrice;
                 txtCustomerMobile.value = "";
             }
             txtCustomerMobile.value = "";
-            //$('#ddlInvoiceCustomer option[value=null]').prop('selected', 'selected').change();
             $('#ddlInvoiceCustomer').val('null');
-            $("#ddlInvoiceCustomer").attr("disabled", "disabled");
+            //$("#ddlInvoiceCustomer").attr("disabled", "disabled");
             $("#txtCustomerMobile").attr("disabled", "disabled");
             $("#txtInvoiceCustomerName").removeAttr("disabled");
+            SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3 ? ($('#ddlCashBox').prop('selectedIndex', 1), $("#Div_Money").removeClass("display_none")) : $('#ddlCashBox').prop('selectedIndex', 0);
+            $('#ddlCashBox').attr('disabled', 'disabled');
+            $("#Div_Money").removeClass("display_none");
             vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType; //From Session
+            $('#ddlCashBox').removeAttr("disabled");
+            $("#txtCashMoney").val("");
+            $("#txtCardMoney").val("");
             TypeFlag = true;
+            if (NewAdd == true) {
+                chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
+            }
         }
         else { //علي الحساب
+            $("#txtCashMoney").val("");
+            $("#txtCardMoney").val("");
             $('#ddlCashBox').prop('selectedIndex', 0);
             $('#ddlCashBox').attr('disabled', 'disabled');
             txtInvoiceCustomerName.value = "";
@@ -292,18 +292,22 @@ var SlsTrShowPrice;
             $("#ddlInvoiceCustomer").removeAttr("disabled");
             $("#txtCustomerMobile").removeAttr("disabled");
             TypeFlag = false;
+            $("#Div_Money").addClass("display_none");
             //fillddlCustomer();
+            if (NewAdd == true) {
+                chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCreditInvoiceDefAuth;
+            }
         }
-        if (CountItems > 0) {
-            DisplayMassage("من فضلك اعادة ادخال  بيانات الفاتورة مره أخري", "Please re-enter the billing information again", MessageType.Worning);
-        }
-        CountItems = 0;
-        PackageCount = 0;
-        CountTotal = 0;
-        TaxCount = 0;
-        NetCount = 0;
-        CountGrid = 0;
-        $('#div_Data').html("");
+        //if (CountItems > 0) {
+        //    DisplayMassage("من فضلك اعادة ادخال  بيانات الفاتورة مره أخري", "Please re-enter the billing information again", MessageType.Worning);
+        //}
+        //CountItems = 0;
+        //PackageCount = 0;
+        //CountTotal = 0;
+        //TaxCount = 0;
+        //NetCount = 0;
+        //CountGrid = 0;
+        //$('#div_Data').html("");
         ComputeTotals();
     }
     function txtCommission_onchange() {
@@ -378,14 +382,7 @@ var SlsTrShowPrice;
                     InvoiceModel.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
                     InvoiceModel.UpdatedAt = DateTimeFormat(Date().toString());
                     MasterDetailsModel.I_Sls_TR_Invoice = InvoiceModel;
-                    if (AutherizeFlag == false) {
-                        Update();
-                    }
-                    else {
-                        updateWithProcess();
-                    }
-                    IsSuccess = false;
-                    $("#btnPrintTransaction").removeClass("display_none");
+                    Update();
                 }
             }
         }, 100);
@@ -784,7 +781,6 @@ var SlsTrShowPrice;
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.toString();
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.toString();
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
@@ -874,6 +870,7 @@ var SlsTrShowPrice;
         ddlSalesman.disabled = true;
         ddlType.disabled = true;
         txtCommission.disabled = true;
+        ddlStore.disabled = true;
         if (InvoiceStatisticsModel[0].Status == 1) {
             if (!SysSession.CurrentPrivileges.CUSTOM2) {
                 AutherizeFlag = false;
@@ -1662,6 +1659,7 @@ var SlsTrShowPrice;
                     $('#txtUpdatedAt').prop("value", res.UpdatedAt);
                     success();
                     IsSuccess = true;
+                    Save_Succ_But();
                 }
                 else {
                     IsSuccess = false;
@@ -1689,6 +1687,7 @@ var SlsTrShowPrice;
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "An invoice number has been issued ", MessageType.Succeed);
                     success_insert();
                     IsSuccess = true;
+                    Save_Succ_But();
                 }
                 else {
                     IsSuccess = false;
@@ -1721,7 +1720,6 @@ var SlsTrShowPrice;
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.toString();
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.toString();
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
@@ -1810,6 +1808,7 @@ var SlsTrShowPrice;
         ddlInvoiceCustomer.disabled = true;
         txtInvoiceCustomerName.disabled = true;
         txtCustomerMobile.disabled = true;
+        ddlStore.disabled = true;
         ddlType.disabled = true;
         txtCommission.disabled = true;
         if (InvoiceStatisticsModel[0].Status == 1) {
@@ -1850,7 +1849,6 @@ var SlsTrShowPrice;
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat.toString();
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.toString();
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
-            ComputeTotals();
             GlobalinvoiceID = InvoiceStatisticsModel[0].InvoiceID;
             lblInvoiceNumber.innerText = InvoiceStatisticsModel[0].TrNo.toString();
             txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
@@ -2027,6 +2025,8 @@ var SlsTrShowPrice;
         InvoiceModel.CommitionAmount = Number(txtCommission.value);
         InvoiceModel.VatType = vatType;
         InvoiceModel.VatAmount = Number(txtTax.value);
+        InvoiceModel.QtyTotal = $('#txtPackageCount').val();
+        InvoiceModel.LineCount = $('#txtItemCount').val();
         InvoiceModel.TaxCurrencyID = Number(SysSession.CurrentEnvironment.I_Control[0].Currencyid);
         InvoiceModel.InvoiceCurrenyID = Number(SysSession.CurrentEnvironment.I_Control[0].Currencyid);
         InvoiceModel.InvoiceTypeCode = Number(SysSession.CurrentEnvironment.InvoiceTypeCode);

@@ -291,6 +291,7 @@ function GetSystemSession(Mod) {
         }
         return SysSession;
     }
+    document.body.style.zoom = "90%";
 }
 //function GetMemberComm(): Kids_Comm {
 //    if (document.cookie.length > 0) {

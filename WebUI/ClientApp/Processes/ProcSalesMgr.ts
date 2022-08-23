@@ -240,7 +240,7 @@ namespace ProcSalesMgr {
         btnBack.onclick = btnBack_onclick;
         btnSave.onclick = btnSave_onclick;
         btnAdd.onclick = btnAdd_onclick;
-        txtCommission.onchange = txtCommission_onchange;
+        txtCommission.onkeyup = txtCommission_onchange;
         ddlType.onchange = ddlType_onchange;
         btn_Approveprice.onclick = btn_Approveprice_onclick;
         btn_Exit_Approveprice.onclick = btn_Exit_Approveprice_onclick;
@@ -640,6 +640,8 @@ namespace ProcSalesMgr {
             ddlOPerationMaster.value = opVal;
             txtOperationStatusMaster.value = "";
         }
+
+        Back();
     }
     function ddlOPerationMaster_onchange() {
 
@@ -880,7 +882,7 @@ namespace ProcSalesMgr {
             Errorinput(txtInvoiceDate);
             return false
         }
-        else if (chkActive.checked == true && ddlType.value == "1" && (totalAmount != NetAmount)) {
+        else if (  ddlType.value == "1" && (totalAmount != NetAmount)) {
             DisplayMassage(" يجب ان يكون مجموع المبلغ المسدد بالكارت مع المسدد نقدا مساويا لصافي الفاتورة  ", "The total amount paid in the card together with the cash paid must be equal to the net invoice", MessageType.Error);
             Errorinput(txtNet);
             Errorinput($('#txtCashMoney'));
@@ -1027,9 +1029,11 @@ namespace ProcSalesMgr {
             $("#DivInvoiceDetails").addClass("display_none");
             $("#div_btnUpdate").addClass("display_none");
             Errorinput(ddlOPerationMaster);
+            Back();
         } else {
             if (chkOpenProcess.checked == false) {
                 DisplayMassage(" لايمكن اضافه فواتير على العمليات المغلقه", "It is not possible to add invoices to closed transactions", MessageType.Worning);
+                Back();
             } else {
                 clear();
                 FillddlItem();
@@ -1101,6 +1105,28 @@ namespace ProcSalesMgr {
 
         }
         GlobalInvoiceCounter = 0;
+
+    }
+    function Back() {
+
+
+        $('#icon-bar').addClass('display_none');
+
+
+        $('#divIconbar').removeClass('display_none');
+
+
+        $('#btnPrintTransaction').removeClass('display_none');
+        $('#btnUpdate').removeClass('display_none');
+
+        $('#btnBack').addClass('display_none');
+        $('#btnSave').addClass('display_none');
+
+        $('#btnPrintslip').removeClass('display_none');
+        $('#btnPrintTransaction').removeClass('display_none');
+
+        $("#NewAdd_Falg").val('0');
+        $("#Mod_Flag").val('0');
 
     }
     function btnBack_onclick() {
@@ -1441,21 +1467,14 @@ namespace ProcSalesMgr {
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
-			                <div class="form-group ps-1">
-			                    <input class="counter" type="number" data-id="number" id="txtPrice${cnt}" name="quant[2]"  value="1" min="0" max="1000" step="0.5"/>
-			                    <div class="value-button decrease-button btn-number2${cnt}" data-id="decrease" id="btnminus2" data-type="minus" data-field="quant[2]">-</div>
-			                    <div class="value-button increase-button btn-number2${cnt}" data-id="increase" id="btnplus2" data-type="plus" data-field="quant[2]">+</div>
-		                    </div>
+		                <div class="form-group"> 
+			                    <input class="form-control" type="number" data-id="number" id="txtPrice${cnt}" name="quant[2]"  value="1" min="0" max="1000" step="0.5"/>
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group">
-			                <div class="form-group ps-1">
-			                    <input class="counter" type="number" data-id="number" id="txtUnitpriceWithVat${cnt}" name="quant[2]"  value="1" min="0" max="1000" step="0.5"/>
-			                    <div class="value-button decrease-button btn-number3${cnt}" data-id="decrease" id="btnminus3" data-type="minus" data-field="quant[2]">-</div>
-			                    <div class="value-button increase-button btn-number3${cnt}" data-id="increase" id="btnplus3" data-type="plus" data-field="quant[2]">+</div>
-		                    </div>
+		                <div class="form-group"> 
+			                    <input class="form-control" type="number" data-id="number" id="txtUnitpriceWithVat${cnt}" name="quant[2]"  value="1" min="0" max="1000" step="0.5"/>
+			                     
 		                </div>
 	                </td>
                     <td>
@@ -1484,6 +1503,7 @@ namespace ProcSalesMgr {
                 </tr>`;
         $("#div_Data").append(html);
         $(".select_").select2();
+
 
         //script
         $('.btn-number1' + cnt).click(function (e) {
@@ -1669,7 +1689,7 @@ namespace ProcSalesMgr {
             e.preventDefault();
             var fieldName = $(this).attr('data-field');
             var type = $(this).attr('data-type');
-            var input = $("#txtReturnQuantity" + cnt);
+            var input = $("#txtUnitpriceWithVat" + cnt);
             var currentVal = parseFloat(input.val());
             if (!isNaN(currentVal)) {
                 if (type == 'minus') {
@@ -1786,7 +1806,7 @@ namespace ProcSalesMgr {
 
                 let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NumberSelect[0].Est_SalesPrice, VatPrc, flag_PriceWithVAT);
                 var itemPrice = GetUnitprice.unitprice;
-                $("#txtPrice" + cnt).val(itemPrice);
+                $("#txtPrice" + cnt).val(itemPrice.RoundToSt(2));
                 $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
 
 
@@ -1799,7 +1819,7 @@ namespace ProcSalesMgr {
                 var total = Number(txtQuantityValue) * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-                $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
                 var totalAfterVat = Number(vatAmount) + Number(total);
                 $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
 
@@ -1841,9 +1861,12 @@ namespace ProcSalesMgr {
 
             $("#txtTotal" + cnt).val(total.RoundToSt(2));
             var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
+            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
             var totalAfterVat = Number(vatAmount) + Number(total);
             $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+
+
+
             ComputeTotals();
 
 
@@ -1875,7 +1898,7 @@ namespace ProcSalesMgr {
             total = Number(txtQuantityValue) * Number(txtPriceValue);
             $("#txtTotal" + cnt).val(total.RoundToSt(2));
             var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtTax" + cnt).val(vatAmount.RoundToSt(4));
+            $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
             var totalAfterVat = Number(vatAmount) + Number(total);
             $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
             ComputeTotals();
@@ -2276,6 +2299,9 @@ namespace ProcSalesMgr {
         InvoiceModel.SlsInvType = 1 //  retail 
         InvoiceModel.OperationId = OperaID;
 
+        InvoiceModel.QtyTotal = $('#txtPackageCount').val();
+        InvoiceModel.LineCount = $('#txtItemCount').val();
+
         InvoiceModel.GlobalInvoiceCounter = GlobalInvoiceCounter;
         InvoiceModel.CashBoxID = null;
         InvoiceModel.RefTrID = null;
@@ -2581,7 +2607,7 @@ namespace ProcSalesMgr {
 
 
                     displayDate_speed(GlobalinvoiceID, res)
-                     
+
                     chkActive.checked = false;
                     chkActive.disabled = true;
                     btnUpdate.disabled = false;
@@ -2610,13 +2636,16 @@ namespace ProcSalesMgr {
         Grid.DataSource = SlsInvoiceStatisticsDetails;
         Grid.Bind();
 
+
+
+    }
+    function Success() {
+
         $("#divShow").removeClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
 
-    }
-    function Success() {
         AfterInsertOrUpdateFlag = true;
         Grid_RowDoubleClicked();
         $("#btnUpdate").removeClass("display_none");

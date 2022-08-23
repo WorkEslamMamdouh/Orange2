@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="form-group row">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-      <!-- Details Container -->
+    <!-- Details Container -->
     <div class="col-12">
         <!-- Search Table -->
         <div class="display_none" id="divShow">
@@ -117,16 +117,18 @@
             </div>
 
         </div>
-     <!-- Details  -->
+        <!-- Details  -->
         <div id="DivInvoiceDetails" class="row display_none">
             <div class="col-12 service-content">
                 <div class="serviceBox mt-5">
                     <div class="row g-0">
                         @* Change Place *@
-                        <div class="col-6 mb-3">
-                            <button id="btnPrintslip" type="button" class="btn btn-main float-right">
-                                <span class="align-self-center mb-3">  @SystemResource.App_Print_slip</span>
-                            </button>
+                        <div class="col-6 mb-3 ">
+                            <div class="display_none ">
+                                <button id="btnPrintslip" type="button" class="btn btn-main float-right ">
+                                    <span class="align-self-center mb-3">  @SystemResource.App_Print_slip</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="col-12 col-md-3 display_none" id="div_btnUpdate">
                             <div class="form-group row ">
@@ -143,7 +145,7 @@
                             <div class="form-group row ">
                                 <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
                                 <label class="col-9 col-md-8 text-right" id="lblInvoiceNumber"></label>
-                                
+
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
@@ -234,13 +236,13 @@
                                             <th style="width: 3%">@SystemResource.App_serial</th>
                                             <th style="width: 20%">@SystemResource.App_Item</th>
                                             <th style="width: 7%">@SystemResource.App_soldQty</th>
-                                            <th style="width: 10%">@SystemResource.App_returnQty</th>
-                                            <th style="width: 11%">@SystemResource.App_Price</th>
-                                            <th style="width: 11%">السعر بالضريبه</th>
-                                            <th style="width: 6%">@SystemResource.App_total</th>
+                                            <th style="width: 3%">@SystemResource.App_returnQty</th>
+                                            <th style="width: 8%">@SystemResource.App_Price</th>
+                                            <th style="width: 8%">السعر بالضريبه</th>
+                                            <th style="width: 8%">@SystemResource.App_total</th>
                                             <th style="width: 3%">@SystemResource.tax_rate</th>
-                                            <th style="width: 6%">@SystemResource.App_Tax</th>
-                                            <th style="width: 6%">@SystemResource.App_Net</th>
+                                            <th style="width: 8%">@SystemResource.App_Tax</th>
+                                            <th style="width: 8%">@SystemResource.App_Net</th>
                                         </tr>
                                     </thead>
                                     <tbody id="div_Data"></tbody>
@@ -413,4 +415,4 @@
         });
     </script>
     <script src="~/ClientApp/Processes/ProcSalesMgr.js"></script>
-    }
+}

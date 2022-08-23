@@ -609,34 +609,7 @@ namespace Inv.API.Controllers
                         // update master
                         PurTrReceiveService.Update(updatedObj.I_Pur_TR_Receive);
 
-
-                        //update I_Pur_TR_ReceiveItems 
-                        var insertedRecordsReceiveItems = updatedObj.I_Pur_TR_ReceiveItems.Where(x => x.StatusFlag == 'i').ToList();
-                        var updatedRecordsReceiveItems = updatedObj.I_Pur_TR_ReceiveItems.Where(x => x.StatusFlag == 'u').ToList();
-                        var deletedRecordsReceiveItems = updatedObj.I_Pur_TR_ReceiveItems.Where(x => x.StatusFlag == 'd').ToList();
-
-
-                        //loop insered  I_Pur_TR_ReceiveItems
-                        foreach (var item in insertedRecordsReceiveItems)
-                        {
-                            item.ReceiveID = updatedObj.I_Pur_TR_Receive.ReceiveID;
-                            var InsertedRec = PurTRReceiveItemsService.Insert(item);
-                        }
-
-                        //loop Update  I_Pur_TR_ReceiveItems
-                        foreach (var item in updatedRecordsReceiveItems)
-                        {
-                            item.ReceiveID = updatedObj.I_Pur_TR_Receive.ReceiveID;
-                            var updatedRec = PurTRReceiveItemsService.Update(item);
-                        }
-
-                        //loop Delete  I_Pur_TR_ReceiveItems
-                        foreach (var item in deletedRecordsReceiveItems)
-                        {
-                            int deletedId = item.ReciveDetailsID;
-                            PurTRReceiveItemsService.Delete(deletedId);
-                        }
-
+                         
                         
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(updatedObj.I_Pur_TR_Receive.CompCode), Convert.ToInt32(updatedObj.I_Pur_TR_Receive.BranchCode), updatedObj.I_Pur_TR_Receive.ReceiveID, "PurReturn", "Open", db);
                         if (res.ResponseState == true)

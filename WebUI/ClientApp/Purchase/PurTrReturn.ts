@@ -154,6 +154,7 @@ namespace PurTrReturn {
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
 
+        InitializeGrid();
         btnShow_onclick();
         $('#btnPrint').addClass('display_none');
         $('#divMasterGridiv').addClass('display_none');
@@ -493,13 +494,13 @@ namespace PurTrReturn {
 
                         SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.filter(x => (x.RecQty - x.TotRetQty ) > 0)
 
+                        CountGrid = 0;
                         for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                            
                             BuildControls(i); 
-                             
-                        }
-                        CountGrid = SlsInvoiceItemsDetails.length;
-                        CountItems = SlsInvoiceItemsDetails.length;
+                            CountGrid++;
+                        } 
+                        CountItems = CountGrid;
                     }
                 }
             });
@@ -538,8 +539,8 @@ namespace PurTrReturn {
  //------------------------------------------------------ Buttons Region -----------------------------------
     function btnShow_onclick() {
         ShowFlag = true;
-        $("#divMasterGridiv").removeClass("display_none");
-        InitializeGrid();
+        $("#divMasterGridiv").removeClass("display_none"); 
+        BindStatisticGridData();
         $("#MasterDropDowns").removeClass("display_none");
         $("#divGridWithDetail").removeClass("display_none");
         $("#DivShow").removeClass("display_none");
@@ -616,11 +617,7 @@ namespace PurTrReturn {
                 MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
                 MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
                 Update();
-                if (flag_Insert == 1) {
-                    EditFlag = false;
-                    //receiveID = 0;
-                    flag_Insert = 0;
-                }
+             
             }
             else {
                 DisplayMassage('( يجب أضافه قيمه للكمية المرتجعه ع الفاتورة)', '(A value must be added to the returned quantity on the invoice)', MessageType.Error);
@@ -634,26 +631,12 @@ namespace PurTrReturn {
             if (invoiceItemsModel.length > 0) {
                 MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
                 MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-                Insert();
-                if (flag_Insert == 1) {
-                    //receiveID = 0;
-                    flag_Insert = 0;
-                }
+                Insert(); 
             }
             else {
                 DisplayMassage('( يجب اختيار الفاتورة وأضافه قيمه للكمية المرتجعه ع الفاتورة)', '(A value must be added to the returned quantity on the invoice)', MessageType.Error);
             }
         }
-        $("#divGridDetails_View").removeClass("disabledDiv");
-        $("#DivFilter").removeClass("disabledDiv");
-         $("#divMasterGridiv").removeClass("disabledDiv");
-        $("#ddlVendorDetails").attr("disabled", "disabled");
-        $("#ddlReturnTypeShow").attr("disabled", "disabled");
-        $("#ddlFreeSalesman").attr("disabled", "disabled");
-        //$("#txt_note").attr("disabled", "disabled");
-        $("#ddlCashBox").attr("disabled", "disabled");
-            $("#txtCashAmount").attr("disabled", "disabled");
-
 
         }, 100);
     }
@@ -661,8 +644,7 @@ namespace PurTrReturn {
         if (EditFlag == true) {
             BindStatisticGridData();
             $("#DivFilter").removeClass("disabledDiv");
-            $("#divMasterGridiv").removeClass("disabledDiv");
-            $("#Data_heder").addClass("disabledDiv");
+            $("#divMasterGridiv").removeClass("disabledDiv"); 
             $('#btnSave').toggleClass("display_none");
             $('#btnBack').toggleClass("display_none");
             $("#btnUpdate").removeClass("display_none");
@@ -792,7 +774,14 @@ namespace PurTrReturn {
         divMasterGrid.Columns = [
             { title: "ID", name: "ReceiveID", type: "text", width: "2%", visible: false },
             { title: res.App_ReturnNum, name: "TrNo", type: "text", width: "10%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "18%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                itemTemplate: (s: string, item: IQ_GetPurReceiveStaistic): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
             { title: res.I_Vendor, name: (lang == "ar" ? "Vnd_NameA" :"Vnd_NameE"), type: "text", width: "25%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
             { title: res.Men_StkDefItems, name: "Line_Count", type: "text", width: "10%" },
@@ -800,9 +789,15 @@ namespace PurTrReturn {
             { title: res.I_Total, name: "Total", type: "text", width: "12%" },
             { title: res.App_Tax, name: "VatAmount", type: "text", width: "12%" },
             { title: res.App_Net, name: "NetDue", type: "text", width: "12%" },
-            { title: res.App_State, name: "StatusDesc", type: "text", width: "17%", css: "classfont" } 
-        ];
-        BindStatisticGridData();
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                itemTemplate: (s: string, item: IQ_GetPurReceiveStaistic): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
+                    return txt;
+                }
+            },
+        ]; 
     }
     function BindStatisticGridData() {
         var startdt = DateFormatRep(txtFromDate.value).toString();
@@ -822,15 +817,15 @@ namespace PurTrReturn {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     GetPurReceiveStaisticData = result.Response as Array<IQ_GetPurReceiveStaistic>; 
-                    for (var i = 0; i < GetPurReceiveStaisticData.length; i++) {
-                        GetPurReceiveStaisticData[i].TrDate = DateFormat(GetPurReceiveStaisticData[i].TrDate);
-                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-                          //  GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
-                            GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "غير معتمد" : "معتمد"; }
-                        else {
-                          //  GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameE;
-                            GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "Non Certified" : "Certified"; }
-                    }
+                    //for (var i = 0; i < GetPurReceiveStaisticData.length; i++) {
+                    //    GetPurReceiveStaisticData[i].TrDate = DateFormat(GetPurReceiveStaisticData[i].TrDate);
+                    //    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                    //      //  GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
+                    //        GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "غير معتمد" : "معتمد"; }
+                    //    else {
+                    //      //  GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameE;
+                    //        GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "Non Certified" : "Certified"; }
+                    //}
                     divMasterGrid.DataSource = GetPurReceiveStaisticData;
                     divMasterGrid.Bind();
                 }
@@ -927,11 +922,13 @@ namespace PurTrReturn {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetPurReceiveItem>;
+                    CountGrid = 0; 
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
+                        CountGrid++;
                     }
-                    CountGrid = SlsInvoiceItemsDetails.length;
-                    CountItems = SlsInvoiceItemsDetails.length;
+                    
+                    CountItems = CountGrid;
 
                     //SlsInvoiceItemsDetails[0].ItemID;
                 }
@@ -1013,8 +1010,15 @@ namespace PurTrReturn {
         var html;
         html = `<tr id="No_Row${cnt}">
  
-	                <td>
                     <input id="InvoiceItemID${cnt}" type="hidden" class="display_none"  />
+                    <input id="ReciveDetailsID${cnt}" type="hidden" class="display_none"  />
+
+                    <td>
+		                <div class="form-group">
+			                <input id="txtSerialH${cnt}" type="text" class="form-control" disabled />
+		                </div>
+	                </td>
+	                <td>
 
 		                <div class="form-group">
                             <select id="ddlFamily${cnt}" class="form-control">
@@ -1487,7 +1491,7 @@ namespace PurTrReturn {
             $("#btn_minus" + cnt).addClass("display_none");
             $("#btn_minus" + cnt).attr("disabled", "disabled");
         } 
-        if (Show == true) { 
+        if (Show == true) {
             $("#ddlFamily" + cnt).attr("disabled", "disabled");
             $("#ddlItem" + cnt).attr("disabled", "disabled");
             $("#txtQuantity" + cnt).attr("disabled", "disabled");
@@ -1495,58 +1499,65 @@ namespace PurTrReturn {
             $("#txtReturnQuantity" + cnt).attr("disabled", "disabled");
             $("#txtTotal" + cnt).attr("disabled", "disabled");
             $("#txtTax" + cnt).attr("disabled", "disabled");
-            $("#txtTotAfterTax" + cnt).attr("disabled", "disabled"); 
+            $("#txtTotAfterTax" + cnt).attr("disabled", "disabled");
             $('.btn-number1' + cnt).attr("disabled", "disabled");
-            $('.input-number1' + cnt).attr("disabled", "disabled"); 
+            $('.input-number1' + cnt).attr("disabled", "disabled");
             $('.btn-number2' + cnt).attr("disabled", "disabled");
-            $('.input-number2' + cnt).attr("disabled", "disabled"); 
+            $('.input-number2' + cnt).attr("disabled", "disabled");
             $('.btn-number3' + cnt).attr("disabled", "disabled");
-            $('.input-number3' + cnt).attr("disabled", "disabled"); 
-            $("#btnAddDetails").addClass("display_none"); 
+            $('.input-number3' + cnt).attr("disabled", "disabled");
+            $("#btnAddDetails").addClass("display_none");
             $("#btn_minus" + cnt).addClass("display_none");
-            $("#btn_minus" + cnt).attr("disabled", "disabled"); 
-            $("#txt_StatusFlag" + cnt).val("u"); 
+            $("#btn_minus" + cnt).attr("disabled", "disabled");
+            $("#txt_StatusFlag" + cnt).val("u");
             for (var i = 0; i < FamilyDetails.length; i++) {
                 $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + FamilyDetails[i].DescA + '</option>');
-            } 
+            }
             var FamilyID: number = Number(SlsInvoiceItemsDetails[cnt].ItemFamilyID);
-            $("#ddlFamily" + cnt).prop("value", FamilyID); 
-            FillddlItem(FamilyID, InvoiceStatisticsModel[0].StoreID); 
+            $("#ddlFamily" + cnt).prop("value", FamilyID);
+            FillddlItem(FamilyID, InvoiceStatisticsModel[0].StoreID);
             for (var i = 0; i < ItemDetails.length; i++) {
-                $('#ddlItem' + cnt).append('<option data-UomID="' + ItemDetails[i].UomID + '" value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
+                $('#ddlItem' + cnt).append('<option value="' + ItemDetails[i].ItemID + '">' + ItemDetails[i].Itm_DescA + '</option>');
             }
             debugger
             var itemcode = SlsInvoiceItemsDetails[cnt].ItemID;
             $("#ddlItem" + cnt).prop("value", itemcode.toString());
-            $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ReceiveRecQty);
-            $("#txtQuantity" + cnt).attr("data-ReceiveRecQty", SlsInvoiceItemsDetails[cnt].ReceiveRecQty); 
+            $("#txtQuantity" + cnt).attr("data-ReceiveRecQty", SlsInvoiceItemsDetails[cnt].ReceiveRecQty);
             var price = SlsInvoiceItemsDetails[cnt].RecUnitPrice;
-            $("#txtPrice" + cnt).prop("value", price); 
+            $("#txtPrice" + cnt).prop("value", price);
             $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].RecQty);
-            $("#txtReturnQuantity" + cnt).attr("data-RecQty", SlsInvoiceItemsDetails[cnt].RecQty); 
+            $("#txtReturnQuantity" + cnt).attr("data-RecQty", SlsInvoiceItemsDetails[cnt].RecQty);
             var itemTotal = SlsInvoiceItemsDetails[cnt].RecQty * Number(price);
-            $("#txtTotal" + cnt).prop("value", itemTotal); 
+            $("#txtTotal" + cnt).prop("value", itemTotal);
             var tax = SlsInvoiceItemsDetails[cnt].VatAmount;
-            $("#txtTax" + cnt).prop("value", tax); 
+            $("#txtTax" + cnt).prop("value", tax);
             var Net = itemTotal + tax;
-            $("#txtTotAfterTax" + cnt).prop("value", Net); 
+            $("#txtTotAfterTax" + cnt).prop("value", Net);
             var ReciveDetailsIDVal = SlsInvoiceItemsDetails[cnt].ReciveDetailsID;
             $("#ReciveDetailsID" + cnt).prop("value", ReciveDetailsIDVal);
+            $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
         }
         $("#btn_minus" + cnt).click(function (e) {
             //  alert("hi");
             DeleteRow(cnt);
-        }); 
+        });
         if (InvoiceFlag == true) {
-            var SoldQty = SlsInvoiceItemsDetails[cnt].RecQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
-            $("#txtQuantity" + cnt).prop("value", SoldQty); 
-            var price = SlsInvoiceItemsDetails[cnt].RecUnitPrice;
-            $("#txtPrice" + cnt).prop("value", price); 
-            $("#txtReturnQuantity" + cnt).prop("value", 0); 
-            $("#txtTotal" + cnt).prop("value", "0"); 
-            $("#txtTax" + cnt).prop("value", "0"); 
-            $("#txtTotAfterTax" + cnt).prop("value", "0"); 
+            debugger 
+            $("#txt_StatusFlag" + cnt).val("i");
+            let InvoiceSoldQty = SlsInvoiceItemsDetails[cnt].RecQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
+            let total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].RecUnitPriceFC;
+            let vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
+            $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
+            $("#txtReturnQuantity" + cnt).prop("value", InvoiceSoldQty);
+            $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
+            $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
+            $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
+            $("#txtTotAfterTax" + cnt).prop("value", (vat + total).RoundToSt(2));
+            $("#InvoiceItemID" + cnt).prop("value", 0);
+            $("#txtReturnQuantity" + cnt).removeAttr("disabled");
+ 
+            ComputeTotals();
         }
 
         return;
@@ -1692,15 +1703,15 @@ namespace PurTrReturn {
         } else { divMasterGrid.DataSource = GetPurReceiveStaisticData; divMasterGrid.Bind(); }
     }
   //--------------------------------------------------- Main Functions-----------------------------------------------
-    function Assign() { 
+    function Assign() {
         var StatusFlag: String;
-        MasterDetailModel = new PurReceiveMasterDetails();  
+        MasterDetailModel = new PurReceiveMasterDetails();
         if (ddlReturnTypeShow.value == "0") {
-            InvoiceModel.IsCash = false; 
+            InvoiceModel.IsCash = false;
             InvoiceModel.VendorID = $("#ddlVendorDetails").val();
         }
         else {
-            InvoiceModel.IsCash = true; 
+            InvoiceModel.IsCash = true;
             InvoiceModel.CashPaidAmount = 0;
             if ($("#txtCashAmount").val() == null) {
                 $("#txtCashAmount").val(0);
@@ -1712,7 +1723,7 @@ namespace PurTrReturn {
                 InvoiceModel.CashPaidAmount = $("#txtCashAmount").val();
                 InvoiceModel.CashBoxID = Number(ddlCashBox.value);
             }
-        } 
+        }
 
         InvoiceModel.CompCode = Number(compcode);
         InvoiceModel.BranchCode = Number(BranchCode);
@@ -1727,62 +1738,66 @@ namespace PurTrReturn {
         InvoiceModel.PurRecType = PurRecType;
         InvoiceModel.Total = Number(txtTotal.value);
         InvoiceModel.VatAmount = Number(txtTax.value);
-        InvoiceModel.NetAdditionVat = Number(txtNet.value); 
+        InvoiceModel.NetAdditionVat = Number(txtNet.value);
 
         if (chkActive.checked == true) {
             InvoiceModel.Status = 1;
         } else {
             InvoiceModel.Status = 0;
-        } 
-        invoiceItemsModel = new Array<I_Pur_TR_ReceiveItems>(); 
-        for (var i = 0; i < CountGrid; i++) { 
-            invoiceItemSingleModel = new I_Pur_TR_ReceiveItems(); 
-            StatusFlag = $("#txt_StatusFlag" + i).val(); 
+        }
+        invoiceItemsModel = new Array<I_Pur_TR_ReceiveItems>();
+        for (var i = 0; i < CountGrid; i++) {
+            invoiceItemSingleModel = new I_Pur_TR_ReceiveItems();
+            StatusFlag = $("#txt_StatusFlag" + i).val();
             invoiceItemSingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             invoiceItemSingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             invoiceItemSingleModel.VatPrc = VatPrc;
             var Qty: number = Number($('#txtReturnQuantity' + i).val());
-     
-            if (StatusFlag == "i") {
-                invoiceItemSingleModel.Serial = Number($('#txtSerial' + i).val());
-                invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
-                invoiceItemSingleModel.ReceiveID = 0;
-                invoiceItemSingleModel.ItemID = Number($("#ddlItem" + i).val());
-                invoiceItemSingleModel.TotRetQty = 0
-                invoiceItemSingleModel.RecStockQty = Number($('#txtReturnQuantity' + i).val());
-                invoiceItemSingleModel.ReceiveRecQty = Number($('#txtQuantity' + i).val());
-                invoiceItemSingleModel.RecUnitPrice = $("#txtPrice" + i).val();
-                var ItemTotal = invoiceItemSingleModel.RecUnitPrice * invoiceItemSingleModel.RecQty;
-                invoiceItemSingleModel.VatAmount = (ItemTotal * VatPrc) / 100; 
-                invoiceItemSingleModel.StatusFlag = StatusFlag.toString(); 
-                invoiceItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
-                if (Qty != 0) {
-                    invoiceItemsModel.push(invoiceItemSingleModel);
-                } 
-            }
-            if (StatusFlag == "u") {
 
-                invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
-                invoiceItemSingleModel.ReciveDetailsID =   $("#ReciveDetailsID" + i).val();
-                invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
+            if (StatusFlag == "i") { 
+                invoiceItemSingleModel.ReceiveID = 0;
+                invoiceItemSingleModel.ReciveDetailsID = Number($("#ReciveDetailsID" + i).val());
                 invoiceItemSingleModel.ItemID = Number($("#ddlItem" + i).val());
-                invoiceItemSingleModel.TotRetQty = 0
-                invoiceItemSingleModel.RecStockQty = Number($('#txtReturnQuantity' + i).val());
+                invoiceItemSingleModel.Serial = Number($("#txtSerialH" + i).val());
+
+               
+                invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
                 invoiceItemSingleModel.ReceiveRecQty = Number($('#txtQuantity' + i).val());
+                invoiceItemSingleModel.RecStockQty = Number($('#txtReturnQuantity' + i).val());
+                 
                 invoiceItemSingleModel.RecUnitPrice = $("#txtPrice" + i).val();
                 var ItemTotal = invoiceItemSingleModel.RecUnitPrice * invoiceItemSingleModel.RecQty;
                 invoiceItemSingleModel.VatAmount = (ItemTotal * VatPrc) / 100;
-                invoiceItemSingleModel.StatusFlag = StatusFlag.toString(); 
-                invoiceItemSingleModel.UnitID = Number($('option:selected', $("#ddlItem" + i)).attr('data-UomID'));
-
+                invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
                 if (Qty != 0) {
                     invoiceItemsModel.push(invoiceItemSingleModel);
-                } 
+                }
+            }
+            if (StatusFlag == "u") {
+
+                invoiceItemSingleModel.Serial = Number($("#txtSerialH" + i).val()); 
+                invoiceItemSingleModel.ReciveDetailsID = $("#ReciveDetailsID" + i).val();
+                invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
+                invoiceItemSingleModel.ItemID = Number($("#ddlItem" + i).val());
+                
+                invoiceItemSingleModel.RecQty = Number($('#txtReturnQuantity' + i).val());
+                invoiceItemSingleModel.ReceiveRecQty = Number($('#txtQuantity' + i).val());
+                invoiceItemSingleModel.RecStockQty = Number($('#txtReturnQuantity' + i).val());
+
+                invoiceItemSingleModel.RecUnitPrice = $("#txtPrice" + i).val();
+                var ItemTotal = invoiceItemSingleModel.RecUnitPrice * invoiceItemSingleModel.RecQty;
+                invoiceItemSingleModel.VatAmount = (ItemTotal * VatPrc) / 100;
+                invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
+                if (Qty != 0) {
+                    invoiceItemsModel.push(invoiceItemSingleModel);
+                }
             }
             if (StatusFlag == "d") {
                 if (EditFlag == true) {
                     if ($("#InvoiceItemID" + i).val() != "") {
+                        invoiceItemSingleModel.Serial = Number($("#txtSerialH" + i).val());
                         var deletedID = $("#InvoiceItemID" + i).val();
+                        invoiceItemSingleModel.ReciveDetailsID = Number($("#ReciveDetailsID" + i).val());
                         invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
                         invoiceItemSingleModel.ReceiveID = deletedID;
                         invoiceItemsModel.push(invoiceItemSingleModel);
@@ -1814,46 +1829,7 @@ namespace PurTrReturn {
                     let res = result.Response as I_Pur_TR_Receive;
                     DateSetsSccess("txtInvoiceDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return has been created' + res.TrNo, MessageType.Succeed);
-                    lblReturnNumber.value =   res.TrNo.toString();
-                    $('#divCreationPanel').removeClass("display_none");
-                    $('#txtCreatedBy').prop("value", SysSession.CurrentEnvironment.UserCode);
-                    $('#txtCreatedAt').prop("value", DateTimeFormat(Date().toString())); 
-                    $("#btnSave").addClass("display_none");
-                    $("#btnBack").addClass("display_none");
-                    $("#btnAddDetails").addClass("display_none");
-                    BindStatisticGridData(); 
-                    $("#txtCustomerName").attr("disabled", "disabled");
-                    ddlFreeSalesman.disabled = true; 
-                    $("#txtInvoiceDate").attr("disabled", "disabled");
-                    $("#ddlInvoiceCustomer").attr("disabled", "disabled"); 
-                    $("#ddlReturnTypeShow").attr("disabled", "disabled");
-                    $("#ddlFreeSalesman").attr("disabled", "disabled"); 
-                    $("#chkActive").attr("disabled", "disabled"); 
-                    $("#btnAddDetails").attr("disabled", "disabled");
-                    $("#btnAddDetails").addClass("display_none"); 
-                    for (let cnt = 0; cnt <= CountGrid; cnt++) {
-                        $("#ddlFamily" + cnt).attr("disabled", "disabled");
-                        $("#ddlItem" + cnt).attr("disabled", "disabled");
-                        $("#txtQuantity" + cnt).attr("disabled", "disabled");
-                        $("#txtPrice" + cnt).attr("disabled", "disabled");
-                        $("#txtReturnQuantity" + cnt).attr("disabled", "disabled");
-                        $("#txtTotal" + cnt).attr("disabled", "disabled");
-                        $("#txtTax" + cnt).attr("disabled", "disabled");
-                        $("#txtTotAfterTax" + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number1' + cnt).attr("disabled", "disabled");
-                        $('.input-number1' + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number2' + cnt).attr("disabled", "disabled");
-                        $('.input-number2' + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number3' + cnt).attr("disabled", "disabled");
-                        $('.input-number3' + cnt).attr("disabled", "disabled"); 
-                        $("#btn_minus" + cnt).addClass("display_none");
-                        $("#btn_minus" + cnt).attr("disabled", "disabled"); 
-                    }
-                    txtInvoiceDate.value = GetDate();
-                    flag_Insert = 1;
-                    btnBack_onclick();
-                    btnShow_onclick();
-                    Display_Grid(res.ReceiveID);
+                    Success(res.ReceiveID);
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -1862,110 +1838,6 @@ namespace PurTrReturn {
             }
         });
 
-    }
-    function Display_Grid(RecID: number) {
-        CountGrid = 0;
-        Show = true;
-        InvoiceFlag = false;
-        $("#divReturnDetails").removeClass("display_none");
-        $("#btnBack").addClass("display_none");
-        $("#btnSave").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
-        $('#div_Data').html("");
-        $("#ddlCashBox").prop("value", "null");
-        $("#txtCashAmount").prop("value", "");
-        let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(RecID));
-        receiveID = Number(Selecteditem[0].ReceiveID);
-        InvoiceStatisticsModel = Selecteditem;
-        if (InvoiceStatisticsModel.length) {
-
-            txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
-            ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
-            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
-            txtPackageCount.value = InvoiceStatisticsModel[0].tot_RetQty.toString();
-            txtTotal.value = InvoiceStatisticsModel[0].Total.toString();
-            if (InvoiceStatisticsModel[0].VatAmount != null) { txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString(); }
-            else { txtTax.value = '0'; }
-            if (InvoiceStatisticsModel[0].NetDue != null) { txtNet.value = InvoiceStatisticsModel[0].NetDue.toString(); }
-            else { txtNet.value = '0'; }
-            vatType = InvoiceStatisticsModel[0].VATType;
-            PurRecType = InvoiceStatisticsModel[0].PurRecType;
-            if (InvoiceStatisticsModel[0].RefTrID != null) {
-                txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
-                RefTrID = InvoiceStatisticsModel[0].RefTrID.toString();
-             
-            } else {
-              
-            }
-            var ReturnNum = InvoiceStatisticsModel[0].TrNo.toString();
-            lblReturnNumber.value = ReturnNum;
-            txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
-            if (InvoiceStatisticsModel[0].VendorID != null) {
-                $('#ddlVendorDetails option[value=' + InvoiceStatisticsModel[0].VendorID + ']').prop('selected', 'selected').change();
-                $('#txt_note').val(InvoiceStatisticsModel[0].Remarks);
-            } else {
-                $('#ddlVendorDetails option[value=Null]').prop('selected', 'selected').change();
-            }
-            if (InvoiceStatisticsModel[0].IsCash == true) {
-                $('#ddlReturnTypeShow').prop("value", "1");
-                $("#DivCashBox1").removeClass("display_none");
-                $("#DivCashBox2").removeClass("display_none");
-                $("#rowData").removeClass("display_none");
-                $("#divTotalSatistics").removeClass("display_none");
-                if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
-                    var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
-                    var cashAmount = InvoiceStatisticsModel[0].CashPaidAmount.toString();
-                    $('#ddlCashBox option[value=' + BoxID + ']').prop('selected', 'selected').change();
-                    $("#txtCashAmount").prop("value", cashAmount);
-                }
-            } else {
-                $("#DivCashBox1").addClass("display_none");
-                $("#DivCashBox2").addClass("display_none");
-                $("#rowData").addClass("display_none");
-                $("#divTotalSatistics").addClass("display_none");
-                $('#ddlReturnTypeShow').prop("value", "0");
-            }
-            $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId.toString());
-            $('#btnUpdate').removeClass("display_none");
-            $('#btnsave').addClass("display_none");
-            $('#btnback').addClass("display_none");
-            if (InvoiceStatisticsModel[0].Status == 1) {
-                chkActive.checked = true;
-                btnEdit.disabled = true;
-                chkActive.disabled = false;
-                FalgOpen = true;
-                chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-            } else {
-                chkActive.checked = false;
-                chkActive.disabled = true;
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
-            }
-            $('#divCreationPanel').removeClass("display_none");
-            $('#txtCreatedBy').prop("value", InvoiceStatisticsModel[0].CreatedBy);
-            $('#txtCreatedAt').prop("value", InvoiceStatisticsModel[0].CreatedAt);
-            $('#txtUpdatedBy').prop("value", InvoiceStatisticsModel[0].UpdatedBy);
-            $('#txtUpdatedAt').prop("value", InvoiceStatisticsModel[0].UpdatedAt);
-        }
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    SlsInvoiceItemsDetails = result.Response as Array<IQ_GetPurReceiveItem>;
-                    for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
-                        BuildControls(i);
-                    }
-                    CountGrid = SlsInvoiceItemsDetails.length;
-                    CountItems = SlsInvoiceItemsDetails.length;
-                }
-            }
-        });
-
-        $("#rowData").removeClass("display_none");
-        $("#divTotalSatistics").removeClass("display_none");
     }
     function Update() { 
         InvoiceModel.ReceiveID = receiveID;
@@ -2002,45 +1874,8 @@ namespace PurTrReturn {
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Pur_TR_Receive;
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", '(The return has been modified successfully)', MessageType.Succeed);  
-                    $('#divCreationPanel').removeClass("display_none"); 
-                    $('#txtUpdatedBy').prop("value", res.UpdatedBy);
-                    $('#txtUpdatedAt').prop("value", res.UpdatedAt); 
-                    $("#btnSave").addClass("display_none");
-                    $("#btnBack").addClass("display_none");
-                    $("#btnAddDetails").addClass("display_none");
-                    $("#btnEdit").addClass("display_none");
-                    $("#txtCustomerName").attr("disabled", "disabled");
-                    ddlFreeSalesman.disabled = true; 
-                    $("#txtInvoiceDate").attr("disabled", "disabled");
-                    $("#ddlInvoiceCustomer").attr("disabled", "disabled"); 
-                    $("#ddlReturnTypeShow").attr("disabled", "disabled");
-                    $("#ddlFreeSalesman").attr("disabled", "disabled"); 
-                    $("#chkActive").attr("disabled", "disabled"); 
-                    $("#btnAddDetails").attr("disabled", "disabled");
-                    $("#btnAddDetails").addClass("display_none"); 
-                    for (let cnt = 0; cnt <= CountGrid; cnt++) {
-                        $("#ddlFamily" + cnt).attr("disabled", "disabled");
-                        $("#ddlItem" + cnt).attr("disabled", "disabled");
-                        $("#txtQuantity" + cnt).attr("disabled", "disabled");
-                        $("#txtPrice" + cnt).attr("disabled", "disabled");
-                        $("#txtReturnQuantity" + cnt).attr("disabled", "disabled");
-                        $("#txtTotal" + cnt).attr("disabled", "disabled");
-                        $("#txtTax" + cnt).attr("disabled", "disabled");
-                        $("#txtTotAfterTax" + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number1' + cnt).attr("disabled", "disabled");
-                        $('.input-number1' + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number2' + cnt).attr("disabled", "disabled");
-                        $('.input-number2' + cnt).attr("disabled", "disabled"); 
-                        $('.btn-number3' + cnt).attr("disabled", "disabled");
-                        $('.input-number3' + cnt).attr("disabled", "disabled"); 
-                        $("#btn_minus" + cnt).addClass("display_none");
-                        $("#btn_minus" + cnt).attr("disabled", "disabled");
-
-                    } 
-                    txtInvoiceDate.value = GetDate();
-                    flag_Insert = 1;
-                    btnShow_onclick();
-                    Display_Grid(res.ReceiveID);
+                     
+                    Success(res.ReceiveID);
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطـأ", '(Error)', MessageType.Error);
@@ -2048,32 +1883,134 @@ namespace PurTrReturn {
                 }
             }
         });
+         
+    }
+     
+    function Success(RecID: number) {
+        btnShow_onclick();
+        $("#DivFilter").removeClass("disabledDiv");
+        $("#divMasterGridiv").removeClass("disabledDiv"); 
+        $('#btnSave').toggleClass("display_none");
+        $('#btnBack').toggleClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
 
-        $("txtInvoiceDate").attr("disabled", "disabled");
-        $("ddlInvoiceCustomer").attr("disabled", "disabled");
-        $("chkActive").attr("disabled", "disabled");
-        $("ddlSalesMan").attr("disabled", "disabled"); 
-    
-        for (let i = 0; i < CountGrid; i++) {
-            $("#ddlFamily" + i).attr("disabled", "disabled");
-            $("#ddlItem" + i).attr("disabled", "disabled");
-            $("#txtQuantity" + i).attr("disabled", "disabled");
-            $("#txtPrice" + i).attr("disabled", "disabled");
-            $("#txtReturnQuantity" + i).attr("disabled", "disabled");
-            $("#txtTotal" + i).attr("disabled", "disabled");
-            $("#txtTax" + i).attr("disabled", "disabled");
-            $("#txtTotAfterTax" + i).attr("disabled", "disabled"); 
-            $('.btn-number1' + i).attr("disabled", "disabled");
-            $('.input-number1' + i).attr("disabled", "disabled"); 
-            $('.btn-number2' + i).attr("disabled", "disabled");
-            $('.input-number2' + i).attr("disabled", "disabled"); 
-            $('.btn-number3' + i).attr("disabled", "disabled");
-            $('.input-number3' + i).attr("disabled", "disabled"); 
-            $("#btnAddDetails").addClass("display_none"); 
-            $("#btn_minus" + i).addClass("display_none");
-            $("#btn_minus" + i).attr("disabled", "disabled");
+        CountGrid = 0;
+        Show = true;
+        InvoiceFlag = false;
+        $("#divReturnDetails").removeClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $("#btnSave").addClass("display_none");
+        $("#btnEdit").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
+        clear();
+        $("#ddlCashBox").prop("value", "null");
+        $("#txtCashAmount").prop("value", "");
+        let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(RecID));
+        receiveID = Number(Selecteditem[0].ReceiveID);
+        InvoiceStatisticsModel = Selecteditem;
+        if (InvoiceStatisticsModel.length > 0) {
+
+            txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
+            ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
+            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
+            txtPackageCount.value = InvoiceStatisticsModel[0].Tot_Qty.toString();
+            txtTotal.value = InvoiceStatisticsModel[0].Total.toString();
+            StoreID = InvoiceStatisticsModel[0].StoreID;
+            if (InvoiceStatisticsModel[0].VatAmount != null) { txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString(); }
+            else { txtTax.value = '0'; }
+            if (InvoiceStatisticsModel[0].NetDue != null) { txtNet.value = InvoiceStatisticsModel[0].NetDue.toString(); }
+            else { txtNet.value = '0'; }
+            vatType = InvoiceStatisticsModel[0].VATType;
+            PurRecType = InvoiceStatisticsModel[0].PurRecType;
+            if (InvoiceStatisticsModel[0].RefTrID != null) {
+                txtInvoiceNumber.value = InvoiceStatisticsModel[0].RefTrID.toString();
+                RefTrID = InvoiceStatisticsModel[0].RefTrID.toString();
+                GetPurReceiveCharge(InvoiceStatisticsModel[0].RefTrID);
+            }
+
+            var ReturnNum = InvoiceStatisticsModel[0].TrNo.toString();
+            lblReturnNumber.value = ReturnNum;
+            txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
+            if (InvoiceStatisticsModel[0].VendorID != null) {
+                $('#ddlVendorDetails option[value=' + InvoiceStatisticsModel[0].VendorID + ']').prop('selected', 'selected').change();
+                $('#txt_note').val(InvoiceStatisticsModel[0].Remarks);
+            } else { $('#ddlVendorDetails option[value=Null]').prop('selected', 'selected').change(); }
+            if (InvoiceStatisticsModel[0].IsCash == true) {
+                $('#ddlReturnTypeShow').prop("value", "1");
+                $("#DivCashBox1").removeClass("display_none");
+                $("#DivCashBox2").removeClass("display_none");
+                $("#rowData").removeClass("display_none");
+                $("#divTotalSatistics").removeClass("display_none");
+                if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
+                    var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
+                    var cashAmount = InvoiceStatisticsModel[0].CashPaidAmount;
+                    $('#ddlCashBox option[value=' + BoxID + ']').prop('selected', 'selected').change();
+                    $("#txtCashAmount").prop("value", cashAmount);
+                }
+            } else {
+                $("#DivCashBox1").addClass("display_none");
+                $("#DivCashBox2").addClass("display_none");
+                $("#rowData").addClass("display_none");
+                $("#divTotalSatistics").addClass("display_none");
+                $('#ddlReturnTypeShow').prop("value", "0");
+            }
+            $('#ddlFreeSalesman').prop("value", InvoiceStatisticsModel[0].SalesmanId.toString());
+            $('#btnUpdate').removeClass("display_none");
+            $('#btnsave').addClass("display_none");
+            $('#btnback').addClass("display_none");
+            if (InvoiceStatisticsModel[0].Status == 1) {
+                chkActive.checked = true;
+                btnEdit.disabled = true;
+                FalgOpen = true;
+                chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
+            } else {
+                chkActive.checked = false;
+                chkActive.disabled = true;
+                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+            }
+            $('#divCreationPanel').removeClass("display_none");
+            $('#txtCreatedBy').prop("value", InvoiceStatisticsModel[0].CreatedBy);
+            $('#txtCreatedAt').prop("value", InvoiceStatisticsModel[0].CreatedAt);
+            $('#txtUpdatedBy').prop("value", InvoiceStatisticsModel[0].UpdatedBy);
+            $('#txtUpdatedAt').prop("value", InvoiceStatisticsModel[0].UpdatedAt);
+
         }
-        EditFlag = false;
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
+            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    SlsInvoiceItemsDetails = result.Response as Array<IQ_GetPurReceiveItem>;
+                    CountGrid = 0;
+                    for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
+                        BuildControls(i);
+                        CountGrid++;
+                    }
+
+                    CountItems = CountGrid;
+
+                    //SlsInvoiceItemsDetails[0].ItemID;
+                }
+            }
+        });
+        $("#rowData").removeClass("display_none");
+        $("#divTotalSatistics").removeClass("display_none");
+        ComputeTotals();
+
+        $("#divGridDetails_View").removeClass("disabledDiv");
+        $("#DivFilter").removeClass("disabledDiv");
+        $("#divMasterGridiv").removeClass("disabledDiv");
+        $("#ddlVendorDetails").attr("disabled", "disabled");
+        $("#ddlReturnTypeShow").attr("disabled", "disabled");
+        $("#ddlFreeSalesman").attr("disabled", "disabled");
+        //$("#txt_note").attr("disabled", "disabled");
+        $("#ddlCashBox").attr("disabled", "disabled");
+        $("#txtCashAmount").attr("disabled", "disabled");
+
+
     }
     function openReturn() {
 
@@ -2109,11 +2046,13 @@ namespace PurTrReturn {
             url: sys.apiUrl("PurTrReceive", "OpenReturn"),
             data: JSON.stringify(MasterDetailModel),
             success: (d) => {
-                let res = d.Response as I_Pur_TR_Receive;
-                BindStatisticGridData();
-                receiveID = res.ReceiveID;
-                Display_Grid(res.ReceiveID);
-                btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                let result = d as BaseResponse;
+                if (result.IsSuccess == true) {
+                    let res = result.Response as I_Pur_TR_Receive; 
+                    receiveID = res.ReceiveID;
+                    Success(res.ReceiveID);
+                    btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                }
             }
         });
     }

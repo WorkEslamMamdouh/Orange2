@@ -349,6 +349,7 @@ function GetSystemEnvironment(): SystemEnvironment {
 
 
 function GetSystemSession(Mod: string): SystemSession {
+
     if (Mod != "Home") {
 
         $('#divIconbar').removeClass('hidden_Control');
@@ -416,6 +417,8 @@ function GetSystemSession(Mod: string): SystemSession {
         }
         return SysSession;
     }
+
+    document.body.style.zoom = "90%";
 }
 //function GetMemberComm(): Kids_Comm {
 //    if (document.cookie.length > 0) {
