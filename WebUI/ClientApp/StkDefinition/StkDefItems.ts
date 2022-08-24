@@ -21,7 +21,7 @@ namespace StkDefItems {
     var btnSave_Def: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
-    var btnShow: HTMLButtonElement;
+    var btnShow_Def: HTMLButtonElement;
     //var btnView: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
     //var sys: _shared = new _shared();
@@ -49,7 +49,9 @@ namespace StkDefItems {
     export function InitalizeComponent() {
         // 
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('hidden_Control');
         $('#iconbar_Definition').removeClass('hidden_Control');
+        $('#btnShow_Def').removeClass('hidden_Control');
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الاصناف";
@@ -104,7 +106,7 @@ namespace StkDefItems {
             $("#drpPaymentType").attr("disabled", "disabled");
             $("#drpitem_family").attr("disabled", "disabled");
             $("#drp_StocK").attr("disabled", "disabled");
-            $("#btnShow").attr("disabled", "disabled");
+            $("#btnShow_Def").attr("disabled", "disabled");
 
 
         }
@@ -144,7 +146,7 @@ namespace StkDefItems {
         btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
         btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
         btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
-        btnShow = document.getElementById("btnShow") as HTMLButtonElement;
+        btnShow_Def = document.getElementById("btnShow_Def") as HTMLButtonElement;
 
         // Buton privialges for single record page
 
@@ -161,8 +163,8 @@ namespace StkDefItems {
         btnAddDetails.onclick = AddNewRow;//
         btnSave_Def.onclick = btnSave_Def_onClick;
         btnBack_Def.onclick = btnBack_Def_onclick;
-        btnShow.onclick = btnShow_onclick;
-        //btnShow.onkeyup = btnShow_onclick;
+        btnShow_Def.onclick = btnShow_Def_onclick;
+        //btnShow_Def.onkeyup = btnShow_Def_onclick;
 
         $("#drp_G_Store").on('change', function () {
             $("#drpPaymentType").removeAttr("disabled");
@@ -228,7 +230,7 @@ namespace StkDefItems {
 
     }
 
-    function btnShow_onclick() {
+    function btnShow_Def_onclick() {
         $("#divShow").removeClass("display_none");
         debugger
         storeCode = $('#drp_G_Store').val();
@@ -312,12 +314,12 @@ namespace StkDefItems {
 	                </td>
                     <td>
 		               <div class="form-group">
-			                <select id="select_Type_Item${cnt}" class="form-control"></select>
+			                <select id="select_Type_Item${cnt}" class="form-control" disabled></select>
 		                </div>
 	                </td>
                     <td>
 		               <div class="form-group">
-			                <select id="select_ItemFamily${cnt}" class="form-control"></select>
+			                <select id="select_ItemFamily${cnt}" class="form-control" disabled></select>
 		                </div>
 	                </td>
                     <td>
@@ -337,7 +339,7 @@ namespace StkDefItems {
 	                </td>
                     <td>
 		               <div class="form-group">
-			                <select id="txt_UOM${cnt}" class="form-control"></select>
+			                <select id="txt_UOM${cnt}" class="form-control" disabled></select>
 		                </div>
 	                </td>
                      <td>
@@ -1011,7 +1013,7 @@ namespace StkDefItems {
         $("#drpPaymentType").removeAttr("disabled");
         $("#drpitem_family").removeAttr("disabled");
         $("#drp_StocK").removeAttr("disabled");
-        $("#btnShow").removeAttr("disabled");
+        $("#btnShow_Def").removeAttr("disabled");
 
 
     }

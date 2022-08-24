@@ -1,16 +1,14 @@
 ﻿using Inv.API.Models;
+using Inv.API.Models.CustomModel;
 using Inv.API.Tools;
 using Inv.BLL.Services.Stk_TR_IssueToCC;
 using Inv.DAL.Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Inv.API.Controllers;
-using Inv.API.Models.CustomModel; 
-using Newtonsoft.Json;
 
 namespace Inv.API.Controllers
 {
@@ -22,8 +20,8 @@ namespace Inv.API.Controllers
 
         public Stk_TR_IssueToCCController(IStk_TR_IssueToCCService _Stk_TR_IssueToCCService, G_USERSController _Control)
         {
-            this.Stk_TR_IssueToCCService = _Stk_TR_IssueToCCService;
-            this.UserControl = _Control;
+            Stk_TR_IssueToCCService = _Stk_TR_IssueToCCService;
+            UserControl = _Control;
         }
 
         [HttpGet, AllowAnonymous]
@@ -31,7 +29,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var category = Stk_TR_IssueToCCService.GetAll(x => x.CompCode == CompCode).ToList();
+                List<I_Stk_TR_IssueToCC> category = Stk_TR_IssueToCCService.GetAll(x => x.CompCode == CompCode).ToList();
 
                 return Ok(new BaseResponse(category));
             }
@@ -58,29 +56,29 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetFiltered(int CompCode,int BranchCode ,string FromDate ,string ToDate ,int TRType,int StoreID, string CC_CODE, int Status, string UserCode, string Token)
+        public IHttpActionResult GetFiltered(int CompCode, int BranchCode, string FromDate, string ToDate, int TRType, int StoreID, string CC_CODE, int Status, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
-            {  
+            {
                 string cond = "";
                 cond = "select * from IQ_GetStkIssueCC where CompCode = " + CompCode + " and BranchCode = " + BranchCode + " and TrDate >= '" + FromDate + "' and TrDate <= '" + ToDate + "'";
                 if (StoreID != 0)
                 {
-                    cond = cond + " and StoreID = "+ StoreID + "";
+                    cond = cond + " and StoreID = " + StoreID + "";
                 }
-                if (TRType != 0 )
+                if (TRType != 0)
                 {
                     cond = cond + " and TRType = " + TRType + "";
                 }
-                if (Status != 0 )
+                if (Status != 0)
                 {
                     cond = cond + " and Status = " + Status + "";
                 }
-                if (CC_CODE != "0" )
+                if (CC_CODE != "0")
                 {
                     cond = cond + " and CC_CODE = '" + CC_CODE + "'";
-                } 
-                 var StkIssueCC = db.Database.SqlQuery<IQ_GetStkIssueCC>(cond).ToList(); 
+                }
+                List<IQ_GetStkIssueCC> StkIssueCC = db.Database.SqlQuery<IQ_GetStkIssueCC>(cond).ToList();
                 return Ok(new BaseResponse(StkIssueCC));
             }
             return BadRequest(ModelState);
@@ -92,8 +90,8 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 string Query = "select * from IQ_GetStkIssueCCDetail where IssueToCcID = " + IssueToCcID + "";
-                
-                var StkIssueCCDetail = db.Database.SqlQuery<IQ_GetStkIssueCCDetail>(Query).ToList();
+
+                List<IQ_GetStkIssueCCDetail> StkIssueCCDetail = db.Database.SqlQuery<IQ_GetStkIssueCCDetail>(Query).ToList();
                 return Ok(new BaseResponse(StkIssueCCDetail));
             }
             return BadRequest(ModelState);
@@ -105,7 +103,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var TR_IssueToCC = Stk_TR_IssueToCCService.GetById(id);
+                I_Stk_TR_IssueToCC TR_IssueToCC = Stk_TR_IssueToCCService.GetById(id);
 
                 return Ok(new BaseResponse(TR_IssueToCC));
             }
@@ -120,20 +118,20 @@ namespace Inv.API.Controllers
 
             if (ModelState.IsValid && UserControl.CheckUser(Obj.Token, Obj.UserCode))
             {
-                using (var dbTransaction = db.Database.BeginTransaction())
+                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        var IssueToCC = Stk_TR_IssueToCCService.Insert(Obj.I_Stk_TR_IssueToCC);
+                        I_Stk_TR_IssueToCC IssueToCC = Stk_TR_IssueToCCService.Insert(Obj.I_Stk_TR_IssueToCC);
 
-                        foreach (var item in Obj.I_Stk_TR_IssueToCCDetails)
+                        foreach (I_Stk_TR_IssueToCCDetails item in Obj.I_Stk_TR_IssueToCCDetails)
                         {
                             item.IssueToCcID = IssueToCC.IssueToCcID;
                             Stk_TR_IssueToCCService.Insert(item);
                         }
                         int comp = Convert.ToInt16(IssueToCC.CompCode);
                         int Branch = Convert.ToInt16(IssueToCC.BranchCode);
-                        var res = Shared.TransactionProcess(comp, Branch, IssueToCC.IssueToCcID, "PayOrder", "ADD", db);
+                        ResponseResult res = Shared.TransactionProcess(comp, Branch, IssueToCC.IssueToCcID, "PayOrder", "ADD", db);
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
@@ -162,31 +160,31 @@ namespace Inv.API.Controllers
 
             if (ModelState.IsValid && UserControl.CheckUser(Obj.Token, Obj.UserCode))
             {
-                using (var dbTransaction = db.Database.BeginTransaction())
+                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        var IssueToCC = Stk_TR_IssueToCCService.Update(Obj.I_Stk_TR_IssueToCC);
+                        I_Stk_TR_IssueToCC IssueToCC = Stk_TR_IssueToCCService.Update(Obj.I_Stk_TR_IssueToCC);
 
-                        var insertedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'i').ToList();
-                        var updatedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'u').ToList();
-                        var deletedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'd').ToList();
+                        List<I_Stk_TR_IssueToCCDetails> insertedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'i').ToList();
+                        List<I_Stk_TR_IssueToCCDetails> updatedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'u').ToList();
+                        List<I_Stk_TR_IssueToCCDetails> deletedObjects = Obj.I_Stk_TR_IssueToCCDetails.Where(x => x.StatusFlag == 'd').ToList();
 
-                        foreach (var item in insertedObjects)
+                        foreach (I_Stk_TR_IssueToCCDetails item in insertedObjects)
                         {
                             Stk_TR_IssueToCCService.Insert(item);
                         }
-                        foreach (var item in updatedObjects)
+                        foreach (I_Stk_TR_IssueToCCDetails item in updatedObjects)
                         {
                             Stk_TR_IssueToCCService.Update(item);
                         }
-                        foreach (var item in deletedObjects)
+                        foreach (I_Stk_TR_IssueToCCDetails item in deletedObjects)
                         {
                             Stk_TR_IssueToCCService.Delete(item.IssueToCcDetailID);
                         }
                         int comp = Convert.ToInt16(IssueToCC.CompCode);
                         int Branch = Convert.ToInt16(IssueToCC.BranchCode);
-                        var res = Shared.TransactionProcess(comp, Branch, IssueToCC.IssueToCcID, "PayOrder", "Update", db);
+                        ResponseResult res = Shared.TransactionProcess(comp, Branch, IssueToCC.IssueToCcID, "PayOrder", "Update", db);
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
@@ -197,7 +195,7 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Rollback();
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ""));
-                        } 
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -217,7 +215,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
+                List<I_D_IssueType> category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
 
                 return Ok(new BaseResponse(category));
             }
@@ -230,46 +228,47 @@ namespace Inv.API.Controllers
             {
                 List<I_D_IssueType> category = new List<I_D_IssueType>();
 
-               
-                    category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
-                
+
+                category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
+
                 return Ok(new BaseResponse(category));
             }
             return BadRequest(ModelState);
-        } 
+        }
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult UpdateLISTIssueTypes(string stringDetail)
         {
             List<I_D_IssueType> Obj = JsonConvert.DeserializeObject<List<I_D_IssueType>>(stringDetail);
 
-            if (ModelState.IsValid && UserControl.CheckUser(Obj[0].Token, Obj[0].UserCode))
-            {
-                try
-                { 
-                    var insertedObjects = Obj.Where(x => x.StatusFlag == 'i').ToList();
-                    var updatedObjects = Obj.Where(x => x.StatusFlag == 'u').ToList();
-                    var deletedObjects = Obj.Where(x => x.StatusFlag == 'd').ToList();
 
-                    foreach (var item in insertedObjects)
-                    {
-                        Stk_TR_IssueToCCService.InsertIssueTypes(item);
-                    }
-                    foreach (var item in updatedObjects)
-                    {
-                        Stk_TR_IssueToCCService.UpdateIssueTypes(item);
-                    }
-                    foreach (var item in deletedObjects)
-                    {
-                        Stk_TR_IssueToCCService.DeleteIssueTypes(item.IssueTypeID);
-                    }
-                }
-                catch (Exception ex)
+            try
+            {
+                List<I_D_IssueType> insertedObjects = Obj.Where(x => x.StatusFlag == 'i').ToList();
+                List<I_D_IssueType> updatedObjects = Obj.Where(x => x.StatusFlag == 'u').ToList();
+                List<I_D_IssueType> deletedObjects = Obj.Where(x => x.StatusFlag == 'd').ToList();
+
+                foreach (I_D_IssueType item in insertedObjects)
                 {
-                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                    Stk_TR_IssueToCCService.InsertIssueTypes(item);
                 }
+                foreach (I_D_IssueType item in updatedObjects)
+                {
+                    Stk_TR_IssueToCCService.UpdateIssueTypes(item);
+                }
+                foreach (I_D_IssueType item in deletedObjects)
+                {
+                    Stk_TR_IssueToCCService.DeleteIssueTypes(item.IssueTypeID);
+                }
+
+
+                return Ok(new BaseResponse(100));
             }
-            return BadRequest(ModelState);
+            catch (Exception ex)
+            {
+                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+            }
+
         }
 
 

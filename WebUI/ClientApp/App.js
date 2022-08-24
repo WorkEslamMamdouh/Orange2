@@ -412,7 +412,7 @@ var Ajax = {
         }
     },
     CallAsync: function (settings) {
-        CheckTime();
+        //CheckTime();
         //run_waitMe();
         $.ajax({
             type: settings.type,
@@ -431,7 +431,7 @@ var Ajax = {
         });
     },
     Callsync: function (settings) {
-        CheckTime();
+        //CheckTime();
         //run_waitMe();
         $.ajax({
             type: settings.type,

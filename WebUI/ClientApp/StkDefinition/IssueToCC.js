@@ -522,6 +522,7 @@ var IssueToCC;
                 if (result.IsSuccess == true) {
                     IssueToCC = result.Response;
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage_Processes('خطأ', 'Wrong', MessageType.Worning);
@@ -540,6 +541,7 @@ var IssueToCC;
                 if (result.IsSuccess == true) {
                     IssueToCC = result.Response;
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage_Processes('خطأ', 'Wrong', MessageType.Worning);
@@ -713,7 +715,7 @@ var IssueToCC;
         $("#div_dis").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         DocumentActions.RenderFromModel(IssueToCC);
-        txTrDate.value = IssueToCC.TrDate;
+        txTrDate.value = DateFormat(IssueToCC.TrDate);
         IssueToCcID = IssueToCC.IssueToCcID;
         bindDetails();
     }

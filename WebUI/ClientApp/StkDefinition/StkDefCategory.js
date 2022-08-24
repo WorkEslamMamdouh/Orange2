@@ -454,7 +454,6 @@ var StkDefCategory;
         //btnUpdate.classList.remove("display_none");
         //btnBack.classList.add("display_none");
         //btnSave.classList.add("display_none");
-        Save_Succ_But();
         btnAdd.removeAttribute("disabled");
         DrpItemType.removeAttribute("disabled");
         searchbutmemreport.removeAttribute("disabled");

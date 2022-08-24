@@ -78,7 +78,7 @@ var IssueType;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t    \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlAcc" + cnt + "\"  class=\"form-control \">\n\t\t                        <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t                    </select>\n\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Txt_Remarks" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"IssueTypeID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t    \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle fs-4 \"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescE" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlAcc" + cnt + "\"  class=\"form-control \" disabled>\n\t\t                        <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t                    </select>\n\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Txt_Remarks" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n\n                     <td class=\"display_none\">\n\t\t                <input id =\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id =\"IssueTypeID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\n\t                </td>\n                   \n                </tr>";
         $("#div_Data").append(html);
         if (SysSession.CurrentPrivileges.Remove) {
             $("#btn_minus" + cnt).addClass("display_none");
@@ -186,6 +186,8 @@ var IssueType;
                 var result = d;
                 if (result.IsSuccess) {
                     DisplayDetail = result.Response;
+                    CountGrid = 0;
+                    $("#div_Data").html('');
                     for (var i = 0; i < DisplayDetail.length; i++) {
                         debugger;
                         BuildControls(i);
@@ -194,6 +196,7 @@ var IssueType;
                         $("#txtDescE" + i).val(DisplayDetail[i].DescE);
                         $('#ddlAcc' + i + '  option[value=' + DisplayDetail[i].GL_Acc_Code + ']').prop('selected', 'selected').change();
                         $("#Txt_Remarks" + i).val(DisplayDetail[i].Remarks);
+                        $("#txt_StatusFlag" + i).val("");
                         CountGrid++;
                     }
                 }
@@ -287,24 +290,22 @@ var IssueType;
                 Model.DescE = $("#txtDescE" + i).val();
                 Model.GL_Acc_Code = $("#ddlAcc" + i).val();
                 Model.Remarks = $("#Txt_Remarks" + i).val();
-                Model.CreatedAt = Details[i].CreatedAt;
-                Model.CreatedBy = Details[i].CreatedBy;
+                Model.CreatedAt = GetDate();
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
                 Model.UpdatedAt = GetDate();
                 Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
                 Details.push(Model);
             }
             if (StatusFlag == "d") {
-                if ($("#IssueTypeID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(function (x) { return x.CompCode == $("#IssueTypeID" + i).val(); });
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                }
+                Model.StatusFlag = StatusFlag;
+                Model.IssueTypeID = Number($("#IssueTypeID" + i).val());
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                Details.push(Model);
             }
         }
     }
     function Update() {
         Assign();
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
         console.log(Details);
         var stringDetail = JSON.stringify(Details);
         Ajax.Callsync({

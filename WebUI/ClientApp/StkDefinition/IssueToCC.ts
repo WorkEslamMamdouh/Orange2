@@ -5,7 +5,7 @@
 namespace IssueToCC {
     //------------------------------------------------------------------------------* G L O B A L * ----------------------------- 
     var SysSession: SystemSession = GetSystemSession(Modules.IssueToCC);
-    var CountGrid :number = 0;
+    var CountGrid: number = 0;
     var compcode: number;
     var BranchCode: number;
     var GlobalStoreCode: number = 0;
@@ -24,7 +24,7 @@ namespace IssueToCC {
     var StkIssueCCDetail: Array<IQ_GetStkIssueCCDetail> = new Array<IQ_GetStkIssueCCDetail>();
     var ModelMaster: I_Stk_TR_IssueToCC = new I_Stk_TR_IssueToCC();
     var ModelDetail: Array<I_Stk_TR_IssueToCCDetails> = new Array<I_Stk_TR_IssueToCCDetails>();
-    var SingleModelDetail: I_Stk_TR_IssueToCCDetails = new I_Stk_TR_IssueToCCDetails();        
+    var SingleModelDetail: I_Stk_TR_IssueToCCDetails = new I_Stk_TR_IssueToCCDetails();
     //------------------------------------------------------------------------------* B U T T O N S * --------------------------- 
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
@@ -33,7 +33,7 @@ namespace IssueToCC {
     var btnBack: HTMLButtonElement;
     var btnUpdate: HTMLButtonElement;
     //******PrintButton******
-   // var btnPrint: HTMLButtonElement;
+    // var btnPrint: HTMLButtonElement;
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
@@ -53,13 +53,13 @@ namespace IssueToCC {
     var txtEndDate: HTMLInputElement;
     var searchbutmemreport: HTMLInputElement;
     var txtTr_No: HTMLInputElement;
-    var txTrDate: HTMLInputElement; 
+    var txTrDate: HTMLInputElement;
     var txRefNo: HTMLInputElement;
     var txtRemark: HTMLInputElement;
     var txtCreatedBy: HTMLInputElement;
     var txtCreatedAt: HTMLInputElement;
     var txtUpdatedBy: HTMLInputElement;
-    var txtUpdatedAt: HTMLInputElement;   
+    var txtUpdatedAt: HTMLInputElement;
     var txtStoreCode: HTMLInputElement;
     var chkStatus: HTMLInputElement;
 
@@ -99,12 +99,12 @@ namespace IssueToCC {
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         //******PrintButton******
-       // btnPrint = document.getElementById("btnPrint") as  HTMLButtonElement;
-        btnPrintTrview = document.getElementById("btnPrintTrview") as  HTMLButtonElement;
-        btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as  HTMLButtonElement;
-        btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as  HTMLButtonElement;
-        btnPrintTransaction = document.getElementById("btnPrintTransaction") as  HTMLButtonElement;
-    //***********************
+        // btnPrint = document.getElementById("btnPrint") as  HTMLButtonElement;
+        btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
+        btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
+        btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
+        btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+        //***********************
         //------------------------------------------------------------------------------* D R O P D O W N S * ----------------------- 
         drp_C_Center = document.getElementById("drp_C_Center") as HTMLSelectElement;
         drp_Pay_Type = document.getElementById("drp_Pay_Type") as HTMLSelectElement;
@@ -118,13 +118,13 @@ namespace IssueToCC {
         txtStartDate = document.getElementById("txtStartDate") as HTMLInputElement;
         txtEndDate = document.getElementById("txtEndDate") as HTMLInputElement;
         txtTr_No = document.getElementById("txtTr_No") as HTMLInputElement;
-        txTrDate = document.getElementById("txTrDate") as HTMLInputElement; 
+        txTrDate = document.getElementById("txTrDate") as HTMLInputElement;
         txRefNo = document.getElementById("txRefNo") as HTMLInputElement;
         txtRemark = document.getElementById("txtRemark") as HTMLInputElement;
         txtCreatedBy = document.getElementById("txtCreatedBy") as HTMLInputElement;
         txtCreatedAt = document.getElementById("txtCreatedAt") as HTMLInputElement;
         txtUpdatedBy = document.getElementById("txtUpdatedBy") as HTMLInputElement;
-        txtUpdatedAt = document.getElementById("txtUpdatedAt") as HTMLInputElement;  
+        txtUpdatedAt = document.getElementById("txtUpdatedAt") as HTMLInputElement;
         txtStoreCode = document.getElementById("txtStoreCode") as HTMLInputElement;
         chkStatus = document.getElementById("chkStatus") as HTMLInputElement;
 
@@ -153,20 +153,20 @@ namespace IssueToCC {
 
     }
 
-    function btnAdd_onclick() {   
-            txtStoreCode.value = $("#txtStoreID").find(':selected').attr('data-storecode');     
-            IsNew = true;
-            $('#id_divGridDetails').removeClass('display_none');
-            $("#div_dis").addClass("disabledDiv");
-            $("#div_dis").attr("disabled", "disabled").off('click');
-         
-            $("#id_divMasterGrid").addClass("disabledDiv");
-            $("#id_divMasterGrid").attr("disabled", "disabled").off('click');
-            $('#btnPrintTransaction').addClass('display_none'); 
+    function btnAdd_onclick() {
+        txtStoreCode.value = $("#txtStoreID").find(':selected').attr('data-storecode');
+        IsNew = true;
+        $('#id_divGridDetails').removeClass('display_none');
+        $("#div_dis").addClass("disabledDiv");
+        $("#div_dis").attr("disabled", "disabled").off('click');
 
-            Clear();
-            EnableInputs();
-            $('#btnAddDetails').removeClass('display_none');       
+        $("#id_divMasterGrid").addClass("disabledDiv");
+        $("#id_divMasterGrid").attr("disabled", "disabled").off('click');
+        $('#btnPrintTransaction').addClass('display_none');
+
+        Clear();
+        EnableInputs();
+        $('#btnAddDetails').removeClass('display_none');
     }
 
     function btnUpdate_onclick() {
@@ -246,7 +246,7 @@ namespace IssueToCC {
             }
         }
         if (CanAdd) {
-            BuildControls(CountGrid);                       
+            BuildControls(CountGrid);
             $("#txtCode" + CountGrid).removeAttr("disabled");
             $("#txtQTY" + CountGrid).removeAttr("disabled");
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
@@ -313,7 +313,7 @@ namespace IssueToCC {
                     Display_STORE = result.Response as Array<G_STORE>;
                     for (var i = 0; i < Display_STORE.length; i++) {
                         $('#drp_G_Store').append('<option value="' + Display_STORE[i].StoreId + '">' + (lang == "ar" ? Display_STORE[i].DescA : Display_STORE[i].DescL) + '</option>');
-                        $('#txtStoreID').append('<option value="' + Display_STORE[i].StoreId + '" data-storeCode = "' + Display_STORE[i].STORE_CODE+'">' + (lang == "ar" ? Display_STORE[i].DescA : Display_STORE[i].DescL) + '</option>');
+                        $('#txtStoreID').append('<option value="' + Display_STORE[i].StoreId + '" data-storeCode = "' + Display_STORE[i].STORE_CODE + '">' + (lang == "ar" ? Display_STORE[i].DescA : Display_STORE[i].DescL) + '</option>');
                     }
                 }
             }
@@ -333,7 +333,7 @@ namespace IssueToCC {
                 }
             }
         });
-    }    
+    }
     //------------------------------------------------------------------------------* D I S P L A Y * -----------------------------       
     function Display() {
         debugger;
@@ -401,7 +401,7 @@ namespace IssueToCC {
         ];
     }
     function Grid_RowDoubleClicked() {
-        IsNew = false;                  
+        IsNew = false;
         DocumentActions.RenderFromModel(Grid.SelectedItem);
         IssueToCcID = Number(Grid.SelectedKey);
         bindDetails();
@@ -429,20 +429,20 @@ namespace IssueToCC {
                     for (var i = 0; i < StkIssueCCDetail.length; i++) {
                         BuildControls(i);
                         $('#ItemID' + i).val(StkIssueCCDetail[i].ItemID);
-                        $('#txtSerial' + i).val(i+1);
+                        $('#txtSerial' + i).val(i + 1);
                         $('#txtCode' + i).val(StkIssueCCDetail[i].ItemCode);
                         $('#txtItemName' + i).val(lang == "ar" ? StkIssueCCDetail[i].itm_DescA : StkIssueCCDetail[i].itm_DescE);
                         $('#txtUnitName' + i).val(lang == "ar" ? StkIssueCCDetail[i].uom_DescA : StkIssueCCDetail[i].uom_DescE);
                         $('#txtQTY' + i).val(StkIssueCCDetail[i].ReqQty);
                         $('#IssueToCcDetailID' + i).val(StkIssueCCDetail[i].IssueToCcDetailID);
-                        $('#txtUnitID' + i).val(StkIssueCCDetail[i].UnitID);  
+                        $('#txtUnitID' + i).val(StkIssueCCDetail[i].UnitID);
                         IssueQty = StkIssueCCDetail[i].IssueQty;
                         UnitCost = StkIssueCCDetail[i].UnitCost;
                         TotRetQty = StkIssueCCDetail[i].TotRetQty;
                         IssueedBeforeQty = StkIssueCCDetail[i].IssueedBeforeQty;
                         $('#ddlItem' + i).attr('disabled', 'disabled');
                         $('#txtQTY' + i).attr('disabled', 'disabled');
-                        $('#btn_minus' + i).addClass('display_none');   
+                        $('#btn_minus' + i).addClass('display_none');
                         CountGrid++;
                     }
                 }
@@ -497,49 +497,49 @@ namespace IssueToCC {
                <input id="txtUnitID${cnt}" type="hidden"   />
                 </tr>`;
         $("#div_Data").append(html);
-      
-                                     
+
+
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
-            let sys: SystemTools = new SystemTools();           
+            let sys: SystemTools = new SystemTools();
 
             var storeId = Number(txtStoreID.value);//and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", "StoreId=" + storeId + " and IsStock = 1 and FinYear = " + FinYear, () => {
-                    let id = SearchGrid.SearchDataGrid.SelectedKey
+                let id = SearchGrid.SearchDataGrid.SelectedKey
 
-                    var res = false;
-                    debugger
-                    var NumberRowid = Number($("#txtSerial" + cnt).val());
-                    res = checkRepeatedItems(id, NumberRowid);
-                    if (res == false) {
-                        if ($("#txt_StatusFlag" + cnt).val() != "i")
-                            $("#txt_StatusFlag" + cnt).val("u");
-                        var SrcItem = Display_Item.filter(s => s.ItemID == id);
-                        if (SrcItem != null) {
-                            $('#ItemID' + cnt).val(id);     
-                            $('#txtCode' + cnt).val(SrcItem[0].ItemCode);      
-                            (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
-                            $('#txtUnitID' + cnt).val(SrcItem[0].UomID);   
-                            $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
-                            $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);        
-                        }         
-                    } else {
-                        DisplayMassage('( لايمكن تكرار نفس الاصناف )', 'The same items cannot be repeated ', MessageType.Error);
-                        $('#ItemID' + cnt).val("");
-                        $('#txtCode' + cnt).val("");
-                        Errorinput(('#txtCode' + cnt));
-                        $('#txtItemName' + cnt).val("");
-                        $('#txtUnitID' + cnt).val("");
-                        $('#txtUnitName' + cnt).val("");   
-                        $('#txtQTY' + cnt).val("");
-                        $('#txtDetailID' + cnt).val("");        
+                var res = false;
+                debugger
+                var NumberRowid = Number($("#txtSerial" + cnt).val());
+                res = checkRepeatedItems(id, NumberRowid);
+                if (res == false) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i")
+                        $("#txt_StatusFlag" + cnt).val("u");
+                    var SrcItem = Display_Item.filter(s => s.ItemID == id);
+                    if (SrcItem != null) {
+                        $('#ItemID' + cnt).val(id);
+                        $('#txtCode' + cnt).val(SrcItem[0].ItemCode);
+                        (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
+                        $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
+                        $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);
                     }
-                });           
+                } else {
+                    DisplayMassage('( لايمكن تكرار نفس الاصناف )', 'The same items cannot be repeated ', MessageType.Error);
+                    $('#ItemID' + cnt).val("");
+                    $('#txtCode' + cnt).val("");
+                    Errorinput(('#txtCode' + cnt));
+                    $('#txtItemName' + cnt).val("");
+                    $('#txtUnitID' + cnt).val("");
+                    $('#txtUnitName' + cnt).val("");
+                    $('#txtQTY' + cnt).val("");
+                    $('#txtDetailID' + cnt).val("");
+                }
+            });
         });
         $('#txtCode' + cnt).change(function () {
             var filter = Display_Item.filter(s => s.ItemCode == $('#txtCode' + cnt).val());
-            if (filter.length> 0 ) {
+            if (filter.length > 0) {
                 let id = filter[0].ItemID;
                 var res = false;
                 debugger
@@ -567,9 +567,9 @@ namespace IssueToCC {
                     $('#txtUnitName' + cnt).val("");
                     $('#txtQTY' + cnt).val("");
                     $('#txtDetailID' + cnt).val("");
-                }     
+                }
             } else {
-                DisplayMassage('(كود الصنف غير موجود  )', 'The Code of items not available ', MessageType.Error); 
+                DisplayMassage('(كود الصنف غير موجود  )', 'The Code of items not available ', MessageType.Error);
                 $('#ItemID' + cnt).val("");
                 $('#txtCode' + cnt).val("");
                 Errorinput(('#txtCode' + cnt));
@@ -578,7 +578,7 @@ namespace IssueToCC {
                 $('#txtUnitName' + cnt).val("");
                 $('#txtQTY' + cnt).val("");
                 $('#txtDetailID' + cnt).val("");
-            }      
+            }
         });
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
@@ -596,6 +596,7 @@ namespace IssueToCC {
                 if (result.IsSuccess == true) {
                     IssueToCC = result.Response as I_Stk_TR_IssueToCC;
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage_Processes('خطأ', 'Wrong', MessageType.Worning);
@@ -615,6 +616,7 @@ namespace IssueToCC {
                 if (result.IsSuccess == true) {
                     IssueToCC = result.Response as I_Stk_TR_IssueToCC;
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage_Processes('خطأ', 'Wrong', MessageType.Worning);
@@ -629,9 +631,9 @@ namespace IssueToCC {
         IssueMasterDetails = new Stk_TR_IssueToCCMasterDetails();
         DocumentActions.AssignToModel(ModelMaster);
         ModelMaster.BranchCode = BranchCode;
-        ModelMaster.CompCode = compcode; 
+        ModelMaster.CompCode = compcode;
         ModelMaster.StoreID = Number(txtStoreID.value);
-        ModelMaster.StoreCode = Number(txtStoreCode.value);  
+        ModelMaster.StoreCode = Number(txtStoreCode.value);
         ModelMaster.Status = chkStatus.checked == true ? 1 : 0;
         ModelMaster.TRType = 0;
         var StatusFlag: String;
@@ -697,7 +699,7 @@ namespace IssueToCC {
                     SingleModelDetail.StatusFlag = "d";
                     ModelDetail.push(SingleModelDetail);
                 }
-            }                                             
+            }
             ModelMaster.IssueToCcID = IssueToCcID;
             ModelMaster.Tr_No = Number(txtTr_No.value);
             ModelMaster.CreatedAt = DateFormat(txtCreatedAt.value);
@@ -787,14 +789,15 @@ namespace IssueToCC {
         CountGrid = 0;
         $("#div_Data").html("");
     }
-    function Success() {       
+    function Success() {
         Display();
         $("#id_divMasterGrid").removeClass("disabledDiv");
         $("#id_divMasterGrid").removeAttr("disabled").off('click');
         $("#div_dis").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         DocumentActions.RenderFromModel(IssueToCC);
-        txTrDate.value = IssueToCC.TrDate;
+
+        txTrDate.value = DateFormat(IssueToCC.TrDate);
         IssueToCcID = IssueToCC.IssueToCcID;
         bindDetails();
     }
@@ -833,7 +836,7 @@ namespace IssueToCC {
             }
         }
         return flag;
-    }   
+    }
     //------------------------------------------------------------------------------* P R I N T* -----------------------------
     function PrintReport(OutType: number) {
 
@@ -862,7 +865,7 @@ namespace IssueToCC {
 
 
         if (drp_G_Store.value == "null") { rp.storeID = -1; }
-        else { rp.storeID = Number(drp_G_Store.value);  }
+        else { rp.storeID = Number(drp_G_Store.value); }
 
 
         if (drp_Pay_Type.value == "null") { rp.IssueTypeID = -1; }

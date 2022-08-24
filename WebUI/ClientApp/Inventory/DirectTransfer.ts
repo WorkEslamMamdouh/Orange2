@@ -283,7 +283,10 @@ namespace DirectTransfer {
     }, 100);
     }
     function chkApproved_checked() {
-        if (!SysSession.CurrentPrivileges.CUSTOM2) return;
+        if (!SysSession.CurrentPrivileges.CUSTOM2) {
+            chkApproved.checked = true;
+            return;
+        }
 
         if (txtRemarks.disabled == true) {
             Open();
@@ -478,45 +481,59 @@ namespace DirectTransfer {
 
         if (!CheckDate(DateFormat(txtTransferDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
             DisplayMassage(' لا توجد صلاحيه للتحويل في هذا التاريخ (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'There is no transfer validity at this date ' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), MessageType.Error);
-            txtTransferDate.focus();
+            Errorinput(txtTransferDate); 
             return false
         } else if (ddlSourceBranchAdd.value == "null") {
             DisplayMassage('برجاء اختيار الفرع المحول منه', 'Please choose the branch you are transferring from', MessageType.Error);
-            ddlSourceBranchAdd.focus();
+            
+            Errorinput(ddlSourceBranchAdd);
             return false
         } else if (ddlSourceStoreAdd.value == "null") {
             DisplayMassage('برجاء اختيار المستودع المحول منه', 'Please choose the Store you are transferring from', MessageType.Error);
-            ddlSourceStoreAdd.focus();
+       
+            Errorinput(ddlSourceStoreAdd);
+
             return false
         }
         else if (ddlToBranchAdd.value == "null") {
             DisplayMassage('برجاء اختيار الفرع المحول اليه', 'Please choose the branch you are transferring to', MessageType.Error);
-            ddlToBranchAdd.focus();
+          
+            Errorinput(ddlToBranchAdd);
+
             return false
         }
         else if (ddlToStoreAdd.value == "null") {
             DisplayMassage('برجاء اختيار المستودع المحول اليه', 'Please choose the branch you are transferring to', MessageType.Error);
-            ddlToStoreAdd.focus();
+            
+            Errorinput(ddlToStoreAdd);
+
             return false
         }
         else if ((ddlToStoreAdd.value == ddlSourceStoreAdd.value) && (ddlToBranchAdd.value == ddlSourceBranchAdd.value)) {
             DisplayMassage(' لايمكن ان يحول المستودع و الفرع لنفسه ', 'The store and branch cannot be transferred to itself', MessageType.Error);
-            ddlToStoreAdd.focus();
+            Errorinput(ddlToStoreAdd); 
+            Errorinput(ddlToBranchAdd);
+
             return false
         }
         else if (txtApprovedBy.value == "") {
             DisplayMassage('برجاء ادخال اعتماد بواسطه', 'Please enter Approved by', MessageType.Error);
-            txtApprovedBy.focus();
+ 
+            Errorinput(txtApprovedBy);
+
             return false
         }
         else if (newCount == 0) {
             DisplayMassage('يجب ادخال اصناف التحويل', 'Please enter Transfering Items', MessageType.Error);
+            Errorinput(ddlSourceBranchAdd);
+
             return false
         }
         else if (!CheckPeriodDate(txtTransferDate.value, "I")) {
             debugger
             DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
             Errorinput(txtTransferDate);
+
             return false
         }
         return true;

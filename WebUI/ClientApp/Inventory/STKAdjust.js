@@ -263,26 +263,29 @@ var STKAdjust;
                         if (result.IsSuccess) {
                             ItemsLoadDetails = result.Response;
                             ItemsLoadDetails = ItemsLoadDetails.filter(function (x) { return x.IsStock == true; });
-                            CountGrid = ItemsLoadDetails.length;
-                            $("#div_Data").html("");
-                            for (var i = 0; i < ItemsLoadDetails.length; i++) {
+                            //CountGrid = ItemsLoadDetails.length;
+                            //$("#div_Data").html("");
+                            DeleteAll();
+                            var i = CountGrid;
+                            showFlag = false;
+                            for (var x = 0; x < ItemsLoadDetails.length; x++) {
                                 BuildControls(i);
                                 $('#txtAdjustDetailID' + i).val(0);
-                                $('#txtItemNumber' + i).val(ItemsLoadDetails[i].ItemID);
-                                (lang == "ar" ? $('#txtItemName' + i).val(ItemsLoadDetails[i].Itm_DescA) : $('#txtItemName' + i).val(ItemsLoadDetails[i].Itm_DescE));
-                                $('#txtItemCode' + i).val(ItemsLoadDetails[i].ItemCode);
-                                $('#txtUnitID' + i).val(ItemsLoadDetails[i].UomID);
-                                $('#txtUntitName' + i).val(ItemsLoadDetails[i].Uom_DescA);
-                                $('#txtOnhandQty' + i).val(ItemsLoadDetails[i].OnhandQty);
-                                $('#txtCountedQty' + i).val(ItemsLoadDetails[i].OnhandQty);
+                                $('#txtItemNumber' + i).val(ItemsLoadDetails[x].ItemID);
+                                (lang == "ar" ? $('#txtItemName' + i).val(ItemsLoadDetails[x].Itm_DescA) : $('#txtItemName' + i).val(ItemsLoadDetails[x].Itm_DescE));
+                                $('#txtItemCode' + i).val(ItemsLoadDetails[x].ItemCode);
+                                $('#txtUnitID' + i).val(ItemsLoadDetails[x].UomID);
+                                $('#txtUntitName' + i).val(ItemsLoadDetails[x].Uom_DescA);
+                                $('#txtOnhandQty' + i).val(ItemsLoadDetails[x].OnhandQty);
+                                $('#txtCountedQty' + i).val(ItemsLoadDetails[x].OnhandQty);
                                 $('#txtDiffQty' + i).val(0);
                                 if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                                    $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[0].GlobalCost);
-                                    $("#txtNewCost" + i).prop("value", ItemsLoadDetails[0].GlobalCost);
+                                    $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[x].GlobalCost);
+                                    $("#txtNewCost" + i).prop("value", ItemsLoadDetails[x].GlobalCost);
                                 }
                                 else {
-                                    $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[0].LocalCost);
-                                    $("#txtNewCost" + i).prop("value", ItemsLoadDetails[0].LocalCost);
+                                    $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[x].LocalCost);
+                                    $("#txtNewCost" + i).prop("value", ItemsLoadDetails[x].LocalCost);
                                 }
                                 //$('#txtUnitCost' + i).val(ItemsLoadDetails[i].UnitPrice);                                
                                 //$('#txtNewCost' + i).val(ItemsLoadDetails[i].UnitPrice);
@@ -291,6 +294,8 @@ var STKAdjust;
                                 $("#txtCountedQty" + i).removeAttr("disabled");
                                 $("#txtNewCost" + i).removeAttr("disabled");
                                 $('#txtItemCode' + i).removeAttr("disabled");
+                                CountGrid++;
+                                i++;
                             }
                             var ddlValue = ddlStatusAdd.value;
                             if (ddlValue == "0") {
@@ -329,26 +334,27 @@ var STKAdjust;
                                 ItemsLoadDetails = result.Response;
                                 ItemsLoadDetails = ItemsLoadDetails.filter(function (x) { return x.IsStock == true; });
                                 if (ItemsLoadDetails.length != 0) {
-                                    CountGrid = ItemsLoadDetails.length;
-                                    $("#div_Data").html("");
-                                    for (var i = 0; i < ItemsLoadDetails.length; i++) {
+                                    DeleteAll();
+                                    var i = CountGrid;
+                                    showFlag = false;
+                                    for (var x = 0; x < ItemsLoadDetails.length; x++) {
                                         BuildControls(i);
                                         $('#txtAdjustDetailID' + i).val(0);
-                                        $('#txtItemNumber' + i).val(ItemsLoadDetails[i].ItemID);
-                                        (lang == "ar" ? $('#txtItemName' + i).val(ItemsLoadDetails[i].Itm_DescA) : $('#txtItemName' + i).val(ItemsLoadDetails[i].Itm_DescE));
-                                        $('#txtItemCode' + i).val(ItemsLoadDetails[i].ItemCode);
-                                        $('#txtUnitID' + i).val(ItemsLoadDetails[i].UomID);
-                                        $('#txtUntitName' + i).val(ItemsLoadDetails[i].Uom_DescA);
-                                        $('#txtOnhandQty' + i).val(ItemsLoadDetails[i].OnhandQty);
-                                        $('#txtCountedQty' + i).val(ItemsLoadDetails[i].OnhandQty);
+                                        $('#txtItemNumber' + i).val(ItemsLoadDetails[x].ItemID);
+                                        (lang == "ar" ? $('#txtItemName' + i).val(ItemsLoadDetails[x].Itm_DescA) : $('#txtItemName' + i).val(ItemsLoadDetails[x].Itm_DescE));
+                                        $('#txtItemCode' + i).val(ItemsLoadDetails[x].ItemCode);
+                                        $('#txtUnitID' + i).val(ItemsLoadDetails[x].UomID);
+                                        $('#txtUntitName' + i).val(ItemsLoadDetails[x].Uom_DescA);
+                                        $('#txtOnhandQty' + i).val(ItemsLoadDetails[x].OnhandQty);
+                                        $('#txtCountedQty' + i).val(ItemsLoadDetails[x].OnhandQty);
                                         $('#txtDiffQty' + i).val(0);
                                         if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                                            $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[0].GlobalCost);
-                                            $("#txtNewCost" + i).prop("value", ItemsLoadDetails[0].GlobalCost);
+                                            $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[x].GlobalCost);
+                                            $("#txtNewCost" + i).prop("value", ItemsLoadDetails[x].GlobalCost);
                                         }
                                         else {
-                                            $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[0].LocalCost);
-                                            $("#txtNewCost" + i).prop("value", ItemsLoadDetails[0].LocalCost);
+                                            $("#txtUnitCost" + i).prop("value", ItemsLoadDetails[x].LocalCost);
+                                            $("#txtNewCost" + i).prop("value", ItemsLoadDetails[x].LocalCost);
                                         }
                                         //$('#txtUnitCost' + i).val(ItemsLoadDetails[i].UnitPrice);
                                         //$('#txtNewCost' + i).val(ItemsLoadDetails[i].UnitPrice);
@@ -357,6 +363,8 @@ var STKAdjust;
                                         $("#txtCountedQty" + i).removeAttr("disabled");
                                         $("#txtNewCost" + i).removeAttr("disabled");
                                         $('#txtItemCode' + i).removeAttr("disabled");
+                                        CountGrid++;
+                                        i++;
                                     }
                                     var ddlValue = ddlStatusAdd.value;
                                     if (ddlValue == "0") {
@@ -1128,6 +1136,22 @@ var STKAdjust;
             $("#No_Row" + RecNo).attr("hidden", "true");
         });
     }
+    function DeleteAll() {
+        for (var i = 0; i < CountGrid; i++) {
+            var RecNo = i;
+            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
+            if (statusFlag == "i")
+                $("#txt_StatusFlag" + RecNo).val("m");
+            else
+                $("#txt_StatusFlag" + RecNo).val("d");
+            // ComputeTotals();
+            $("#txtItemNumber" + RecNo).val("99");
+            $("#txtItemName" + RecNo).val("1");
+            $("#txtCountedQty" + RecNo).val("1");
+            $("#txtNewCost" + RecNo).val("1");
+            $("#No_Row" + RecNo).attr("hidden", "true");
+        }
+    }
     //---------------------------------------------- get By id  functions ----------------------------------------
     function GetAllStoreItems(StoreID) {
         Ajax.Callsync({
@@ -1168,6 +1192,12 @@ var STKAdjust;
         for (var i = 0; i < CountGrid; i++) {
             StockDetailSingleModel = new I_Stk_Tr_AdjustDetails();
             StatusFlag = $("#txt_StatusFlag" + i).val();
+            try {
+                StatusFlag.toString();
+            }
+            catch (e) {
+                continue;
+            }
             StockDetailSingleModel.StatusFlag = StatusFlag.toString();
             if (StatusFlag == "i") {
                 StockDetailSingleModel.AdjustDetailID = 0;

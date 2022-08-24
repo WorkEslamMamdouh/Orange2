@@ -18,7 +18,7 @@ var StkDefItems;
     var btnSave_Def;
     var btnAddDetails;
     var btnEdit;
-    var btnShow;
+    var btnShow_Def;
     //var btnView: HTMLButtonElement;
     var sys = new SystemTools();
     //var sys: _shared = new _shared();
@@ -43,7 +43,9 @@ var StkDefItems;
     function InitalizeComponent() {
         // 
         $('#divIconbar').addClass('hidden_Control');
+        $('#icon-bar').addClass('hidden_Control');
         $('#iconbar_Definition').removeClass('hidden_Control');
+        $('#btnShow_Def').removeClass('hidden_Control');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الاصناف";
         }
@@ -83,7 +85,7 @@ var StkDefItems;
             $("#drpPaymentType").attr("disabled", "disabled");
             $("#drpitem_family").attr("disabled", "disabled");
             $("#drp_StocK").attr("disabled", "disabled");
-            $("#btnShow").attr("disabled", "disabled");
+            $("#btnShow_Def").attr("disabled", "disabled");
         }
         else {
             $('#btnSave_Def').addClass("display_none");
@@ -110,7 +112,7 @@ var StkDefItems;
         btnEdit = document.getElementById("btnUpdate_Def");
         btnSave_Def = document.getElementById("btnSave_Def");
         btnBack_Def = document.getElementById("btnBack_Def");
-        btnShow = document.getElementById("btnShow");
+        btnShow_Def = document.getElementById("btnShow_Def");
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
@@ -120,8 +122,8 @@ var StkDefItems;
         btnAddDetails.onclick = AddNewRow; //
         btnSave_Def.onclick = btnSave_Def_onClick;
         btnBack_Def.onclick = btnBack_Def_onclick;
-        btnShow.onclick = btnShow_onclick;
-        //btnShow.onkeyup = btnShow_onclick;
+        btnShow_Def.onclick = btnShow_Def_onclick;
+        //btnShow_Def.onkeyup = btnShow_Def_onclick;
         $("#drp_G_Store").on('change', function () {
             $("#drpPaymentType").removeAttr("disabled");
             storeCode = $('#drp_G_Store').val();
@@ -151,7 +153,7 @@ var StkDefItems;
             //btnBack_Def_onclick();
         });
     }
-    function btnShow_onclick() {
+    function btnShow_Def_onclick() {
         $("#divShow").removeClass("display_none");
         debugger;
         storeCode = $('#drp_G_Store').val();
@@ -203,7 +205,7 @@ var StkDefItems;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\">ass=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\" disabled ></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_Type_Item" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_ItemFamily" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtOnhandQty" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtMinUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"txt_UOM" + cnt + "\" class=\"form-control\"></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Check_isActive" + cnt + "\" type=\"checkbox\" class=\"form-check-input\" disabled  />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemYearID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemStoreID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">ass=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\" disabled ></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_Type_Item" + cnt + "\" class=\"form-control\" disabled></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"select_ItemFamily" + cnt + "\" class=\"form-control\" disabled></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtOnhandQty" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtMinUnitPrice" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t               <div class=\"form-group\">\n\t\t\t                <select id=\"txt_UOM" + cnt + "\" class=\"form-control\" disabled></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Check_isActive" + cnt + "\" type=\"checkbox\" class=\"form-check-input\" disabled  />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemYearID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ItemStoreID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         //html = '<div id="No_Row' + cnt + '" class="container-fluid ">' +
         //    '<div class="col-lg-12">' +
         //    '<div class="col-lg-12">' +
@@ -686,7 +688,7 @@ var StkDefItems;
         $("#drpPaymentType").removeAttr("disabled");
         $("#drpitem_family").removeAttr("disabled");
         $("#drp_StocK").removeAttr("disabled");
-        $("#btnShow").removeAttr("disabled");
+        $("#btnShow_Def").removeAttr("disabled");
     }
     function Validation_Grid(rowcount) {
         if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {

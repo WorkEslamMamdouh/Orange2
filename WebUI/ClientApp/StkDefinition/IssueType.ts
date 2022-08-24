@@ -104,7 +104,7 @@ namespace IssueType {
 		    
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 "></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -119,7 +119,7 @@ namespace IssueType {
 	                </td>
                     <td>
 		                <div class="form-group">
-                            <select id="ddlAcc${cnt}"  class="form-control ">
+                            <select id="ddlAcc${cnt}"  class="form-control " disabled>
 		                        <option value="Null">${(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")}</option>
 		                    </select>
 
@@ -130,9 +130,13 @@ namespace IssueType {
                             <input id="Txt_Remarks${cnt}" type="text" class="form-control" name="" disabled />
 		                </div>
 	                </td>
-                    <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
-		            <input id = "IssueTypeID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
 
+                     <td class="display_none">
+		                <input id ="txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+		            <input id ="IssueTypeID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+
+	                </td>
+                   
                 </tr>`;
 
 
@@ -258,6 +262,9 @@ namespace IssueType {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     DisplayDetail = result.Response as Array<I_D_IssueType>;
+
+                    CountGrid = 0;
+                    $("#div_Data").html('');
                     for (var i = 0; i < DisplayDetail.length; i++) {
 
                         debugger
@@ -267,6 +274,9 @@ namespace IssueType {
                         $("#txtDescE" + i).val(DisplayDetail[i].DescE); 
                         $('#ddlAcc'+ i + '  option[value=' + DisplayDetail[i].GL_Acc_Code + ']').prop('selected', 'selected').change();
                         $("#Txt_Remarks" + i).val(DisplayDetail[i].Remarks);  
+
+                        $("#txt_StatusFlag" + i).val("");
+
                         CountGrid++
                     }
                 }
@@ -382,26 +392,29 @@ namespace IssueType {
                 Model.DescE = $("#txtDescE" + i).val();
                 Model.GL_Acc_Code = $("#ddlAcc" + i).val();
                 Model.Remarks = $("#Txt_Remarks" + i).val();
-                Model.CreatedAt = Details[i].CreatedAt;
-                Model.CreatedBy = Details[i].CreatedBy;
+                Model.CreatedAt = GetDate();
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
                 Model.UpdatedAt = GetDate();
                 Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
 
                 Details.push(Model);  
             }
             if (StatusFlag == "d") {
-                if ($("#IssueTypeID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(x => x.CompCode == $("#IssueTypeID" + i).val())
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                } 
+
+                Model.StatusFlag = StatusFlag;
+                Model.IssueTypeID = Number($("#IssueTypeID" + i).val());
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode); 
+
+                Details.push(Model);  
+
+
             }  
         }
     } 
     function Update() {
         Assign();
 
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+       
         console.log(Details); 
         var stringDetail: string = JSON.stringify(Details);
         Ajax.Callsync({
