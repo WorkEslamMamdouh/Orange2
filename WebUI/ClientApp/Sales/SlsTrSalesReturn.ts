@@ -2450,11 +2450,12 @@ namespace SlsTrSalesReturn {
         Grid.DataSource = SlsInvoiceStatisticsDetails;
         Grid.Bind();
         $("#divShow").removeClass("display_none");
+        
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
         $("#divShow").removeClass("display_none");
-        $("#divReturnDetails").addClass("display_none");
+        //$("#divReturnDetails").addClass("display_none");
 
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#searchbutmemreport").removeAttr("disabled");

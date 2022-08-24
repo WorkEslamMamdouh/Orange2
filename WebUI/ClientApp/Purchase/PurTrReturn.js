@@ -140,9 +140,9 @@ var PurTrReturn;
         txtStartDate.value = DateStartMonth();
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         InitializeGrid();
-        btnShow_onclick();
+        $("#divMasterGridiv").removeClass("display_none");
+        //btnShow_onclick();
         $('#btnPrint').addClass('display_none');
-        $('#divMasterGridiv').addClass('display_none');
     }
     PurTrReturn.InitalizeComponent = InitalizeComponent;
     function IntializeEvents() {
@@ -609,7 +609,6 @@ var PurTrReturn;
     }
     function btnBack_onclick() {
         if (EditFlag == true) {
-            BindStatisticGridData();
             $("#DivFilter").removeClass("disabledDiv");
             $("#divMasterGridiv").removeClass("disabledDiv");
             $('#btnSave').toggleClass("display_none");
@@ -1678,6 +1677,7 @@ var PurTrReturn;
                 }
             }
         }
+        InvoiceModel.TrNo = Number(lblReturnNumber.value);
         MasterDetailModel.I_Pur_TR_Receive = InvoiceModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -1702,6 +1702,7 @@ var PurTrReturn;
                     var res = result.Response;
                     DateSetsSccess("txtInvoiceDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return has been created' + res.TrNo, MessageType.Succeed);
+                    displayDate_speed(res.ReceiveID, res);
                     Success(res.ReceiveID);
                     Save_Succ_But();
                 }
@@ -1742,6 +1743,7 @@ var PurTrReturn;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", '(The return has been modified successfully)', MessageType.Succeed);
+                    displayDate_speed(res.ReceiveID, res);
                     Success(res.ReceiveID);
                     Save_Succ_But();
                 }
@@ -1753,7 +1755,6 @@ var PurTrReturn;
         });
     }
     function Success(RecID) {
-        btnShow_onclick();
         $("#DivFilter").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("disabledDiv");
         $('#btnSave').toggleClass("display_none");
@@ -1914,14 +1915,32 @@ var PurTrReturn;
             data: JSON.stringify(MasterDetailModel),
             success: function (d) {
                 var result = d;
+                var res = result.Response;
                 if (result.IsSuccess == true) {
-                    var res = result.Response;
-                    receiveID = res.ReceiveID;
-                    Success(res.ReceiveID);
-                    btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                    DisplayMassage(" تم فك الاعتماد رقم  " + res.TrNo + " ", "invoice number " + res.TrNo + "has been unapproved", MessageType.Succeed);
+                    btnEdit.disabled = false;
+                    $("#btnEdit").removeClass("display_none");
+                    displayDate_speed(res.ReceiveID, res);
+                    chkActive.checked = false;
+                    chkActive.disabled = true;
+                }
+                else {
+                    btnEdit.disabled = true;
+                    $("#btnEdit").removeClass("display_none");
                 }
             }
         });
+    }
+    function displayDate_speed(RecID, res) {
+        debugger;
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID != RecID; });
+        res.TrDate = DateFormat(res.TrDate.toString());
+        GetPurReceiveStaisticData.push(res);
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.sort(dynamicSort("TrNo"));
+        divMasterGrid.DataSource = GetPurReceiveStaisticData;
+        divMasterGrid.Bind();
+        $("#divMasterGridiv").removeClass("display_none");
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
     }
     //----------------------------------------------------------PRint region---------------------------------------
     function PrintReport(OutType) {

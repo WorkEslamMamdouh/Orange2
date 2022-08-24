@@ -232,7 +232,9 @@ namespace Inv.API.Controllers
                         {
                             obj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(obj));
+
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == Pur_TR_Invoice.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -383,7 +385,8 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj));
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -446,7 +449,8 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Pur_TR_Receive.TrNo = int.Parse(updatedObj.I_Pur_TR_Receive.TrNo.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj));
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -516,7 +520,8 @@ namespace Inv.API.Controllers
                         {
                             obj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(obj.I_Pur_TR_Receive));
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == obj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -579,7 +584,8 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj.I_Pur_TR_Receive));
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -616,7 +622,8 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            return Ok(new BaseResponse(updatedObj.I_Pur_TR_Receive));
+                            var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {

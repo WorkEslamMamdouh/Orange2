@@ -43,8 +43,13 @@ var HomeComponent;
                     }
                     if (result.Access == true) {
                         SysSession.CurrentPrivileges = result;
-                        //document.cookie = "Inv1_Privilage=" + JSON.stringify(result).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                        window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
+                        debugger;
+                        if (newtap == true) {
+                            window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+                        }
+                        else {
+                            window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
+                        }
                     }
                     else {
                         MessageBox.Show("No Inv1_Privilage", moduleCode);
@@ -257,7 +262,9 @@ var HomeComponent;
         });
         // filter moulules where isavailable = false or access = false 
         var li;
+        var li_T;
         for (var i = 0; i < modules.length; i++) {
+            debugger;
             var singleUserModule = modules[i];
             //Notification control
             if (singleUserModule.MODULE_CODE.substring(0, 5) == "Note_") {
@@ -268,19 +275,25 @@ var HomeComponent;
             }
             else {
                 li = document.getElementById("btn" + singleUserModule.MODULE_CODE);
+                li_T = document.getElementById("btn" + singleUserModule.MODULE_CODE + "T");
             }
-            //debugger
             if (li != null) {
                 if (singleUserModule != null) {
-                    if (singleUserModule.Access === false)
+                    if (singleUserModule.Access === false) {
                         li.style.display = "none";
-                    if (singleUserModule.AVAILABLE === false)
+                        li_T.style.display = "none";
+                    }
+                    if (singleUserModule.AVAILABLE === false) {
                         li.style.display = "none";
+                        li_T.style.display = "none";
+                    }
                 }
                 else {
                     var key = li.getAttribute("key");
                     li.style.display = "";
+                    li_T.style.display = "";
                     li.className = "liItem";
+                    li_T.className = "liItem";
                 }
             }
             else {
@@ -454,96 +467,185 @@ var HomeComponent;
     }
     HomeComponent.OpenView = OpenView;
     function InitializePages() {
-        $("#btnHome").click(function () { OpenPage(Modules.Home); });
-        $("#btnStkDefItems").click(function () { OpenPage(Modules.StkDefItems); });
-        $("#btnStkDefItemsNew").click(function () { OpenPage(Modules.StkDefItemsNew); });
-        $("#btnStkDefCategory").click(function () { OpenPage(Modules.StkDefCategory); });
-        $("#btnPeriodManagement").click(function () { OpenPage(Modules.PeriodManagement); }); //
-        $("#btnItemPeriodSummary").click(function () { OpenPage(Modules.ItemPeriodSummary); }); //
-        $("#btnStkDefUnit").click(function () { OpenPage(Modules.StkDefUnit); });
-        $("#btnStkDefItemType").click(function () { OpenPage(Modules.StkDefItemType); });
-        $("#btnStkDefStore").click(function () { OpenPage(Modules.StkDefStore); });
-        $("#btnDashboard").click(function () { OpenPage(Modules.Dashboard); });
-        $("#btnAccDefVendor").click(function () { OpenPage(Modules.AccDefVendor); });
-        $("#btnAccDefCustomer").click(function () { OpenPage(Modules.AccDefCustomer); });
-        $("#btnAccDefSalesmen").click(function () { OpenPage(Modules.AccDefSalesmen); });
-        $("#btnAccDefBox").click(function () { OpenPage(Modules.AccDefBox); });
-        $("#btnAccDefExpenses").click(function () { OpenPage(Modules.AccDefExpenses); });
-        $("#btnAccDefReceipts").click(function () { OpenPage(Modules.AccDefReceipts); });
-        $("#btnCashBankAccount").click(function () { OpenPage(Modules.CashBankAccount); });
-        $("#btnAgingCust").click(function () { OpenPage(Modules.AgingCust); }); //
-        $("#btnAgingVend").click(function () { OpenPage(Modules.AgingVend); }); //
-        $("#btnGenDefCustomerCat").click(function () { OpenPage(Modules.GenDefCustomerCat); });
-        $("#btnGendefCustomerGroup").click(function () { OpenPage(Modules.GendefCustomerGroup); });
-        $("#btnGenDefCustomerAdjust").click(function () { OpenPage(Modules.GenDefCustomerAdjust); });
-        $("#btnGenDefVendorCat").click(function () { OpenPage(Modules.GenDefVendorCat); });
-        $("#btnGendefVendorGroup").click(function () { OpenPage(Modules.GendefVendorGroup); });
-        $("#btnGenDefVendorAdjust").click(function () { OpenPage(Modules.GenDefVendorAdjust); });
-        $("#btnAccTrInvReceipt").click(function () { OpenPage(Modules.AccTrInvReceipt); });
-        $("#btnAccTrReceiptNote").click(function () { OpenPage(Modules.AccTrReceiptNote); });
-        $("#btnAccTrPaymentNote").click(function () { OpenPage(Modules.AccTrPaymentNote); });
-        $("#btnAccTrCustomerAdjust").click(function () { OpenPage(Modules.AccTrCustomerAdjust); });
-        $("#btnAccTrVendorAdjust").click(function () { OpenPage(Modules.AccTrVendorAdjust); });
-        $("#btnSlsTrSales").click(function () { OpenPage(Modules.SlsTrSales); });
-        $("#btnSlsTrReturn").click(function () { OpenPage(Modules.SlsTrReturn); });
-        $("#btnSlsTrSalesManager").click(function () { OpenPage(Modules.SlsTrSalesManager); });
-        $("#btnSlsTrShowPrice").click(function () { OpenPage(Modules.SlsTrShowPrice); });
-        $("#btnPurOrder").click(function () { OpenPage(Modules.PurOrder); });
-        $("#btnPurTrReceive").click(function () { OpenPage(Modules.PurTrReceive); });
-        $("#btnPurTrReturn").click(function () { OpenPage(Modules.PurTrReturn); });
-        $("#btnPurTrpaymemt").click(function () { OpenPage(Modules.PurTrpaymemt); });
-        $("#btnProcesses").click(function () { OpenPage(Modules.Processes); });
-        $("#btnSalesTrans").click(function () { OpenPage(Modules.SalesTrans); });
-        $("#btnProcSalesRet").click(function () { OpenPage(Modules.ProcSalesRet); });
-        $("#btnOperationScrap").click(function () { OpenPage(Modules.OperationScrap); });
-        $("#btnProcSalesInvoice").click(function () { OpenPage(Modules.ProcSalesInvoice); });
-        $("#btnProcSalesMgr").click(function () { OpenPage(Modules.ProcSalesMgr); }); //
-        $("#btnCloseProcesses").click(function () { OpenPage(Modules.CloseProcesses); }); //
-        $("#btnClientaccstat").click(function () { OpenPage(Modules.Clientaccstat); }); //
-        $("#btnCollectedaccstat").click(function () { OpenPage(Modules.Collectedaccstat); }); //
-        $("#btnSupplieraccstat").click(function () { OpenPage(Modules.Supplieraccstat); }); //
-        $("#btnCashBoxAccount").click(function () { OpenPage(Modules.CashBoxAccount); }); //
-        $("#btnInventorymove").click(function () { OpenPage(Modules.Inventorymove); }); //
-        $("#btnInventoryvalue").click(function () { OpenPage(Modules.Inventoryvalue); }); //
-        $("#btnIncomeoperations").click(function () { OpenPage(Modules.Incomeoperations); }); // 
-        $("#Eslam").click(function () { OpenPage(Modules.Incomeoperations); }); // 
-        $("#btnItemsalesSum").click(function () { OpenPage(Modules.ItemsalesSum); }); //
-        $("#btnItemPurchase").click(function () { OpenPage(Modules.ItemPurchase); }); //
-        $("#btnIssueType").click(function () { OpenPage(Modules.IssueType); }); //
-        $("#btnIssueToCC").click(function () { OpenPage(Modules.IssueToCC); }); //
-        $("#btnGLDefAccount").click(function () { OpenPage(Modules.GLDefAccount); }); //
-        $("#btnJournalVoucher").click(function () { OpenPage(Modules.JournalVoucher); });
-        $("#btnReceiptVoucher").click(function () { OpenPage(Modules.ReceiptVoucher); });
-        $("#btnPaymentVoucher").click(function () { OpenPage(Modules.PaymentVoucher); });
-        $("#btnManagementVoucher").click(function () { OpenPage(Modules.ManagementVoucher); }); //
-        $("#btnCostCenter").click(function () { OpenPage(Modules.CostCenter); }); //
-        $("#btnAccountstatement").click(function () { OpenPage(Modules.Accountstatement); }); //
-        $("#btnAccountbalances").click(function () { OpenPage(Modules.Accountbalances); }); //
-        $("#btnfinancialreports").click(function () { OpenPage(Modules.financialreports); }); //
-        $("#btnUSERS").click(function () { OpenPage(Modules.USERS); }); //
-        $("#btnTranPosting").click(function () { OpenPage(Modules.TranPosting); }); //
-        $("#btnLnkvarBranch").click(function () { OpenPage(Modules.LnkvarBranch); }); //
-        $("#btnLnkTransVoucher").click(function () { OpenPage(Modules.LnkTransVoucher); }); //
-        $("#btnDirecttransfer").click(function () { OpenPage(Modules.Directtransfer); });
-        $("#btnSTKAdjust").click(function () { OpenPage(Modules.STKAdjust); });
-        $("#btnReceiveTransfer").click(function () { OpenPage(Modules.ReceiveTransfer); });
-        $("#btnsendTransfer").click(function () { OpenPage(Modules.sendTransfer); });
-        $("#btnGenDefAdd").click(function () { OpenPage(Modules.GenDefAdd); });
-        $("#btnDefStore").click(function () { OpenPage(Modules.DefStore); });
-        $("#btnServiceCategories").click(function () { OpenPage(Modules.ServiceCategories); });
-        $("#btnServices").click(function () { OpenPage(Modules.Services); });
-        $("#btnSales_Services").click(function () { OpenPage(Modules.Sales_Services); });
-        $("#btnSer_Return_Sales").click(function () { OpenPage(Modules.Ser_Return_Sales); });
-        $("#btnSer_Purchasing").click(function () { OpenPage(Modules.Ser_Purchasing); });
-        $("#btnSer_Return_Pur").click(function () { OpenPage(Modules.Ser_Return_Pur); });
-        $("#btnSer_Sales_Report").click(function () { OpenPage(Modules.Ser_Sales_Report); });
-        $("#btnSer_Pur_Report").click(function () { OpenPage(Modules.Ser_Pur_Report); });
-        $("#btnVatLists").click(function () { OpenPage(Modules.VatLists); });
-        $("#btnVatReport").click(function () { OpenPage(Modules.VatReport); });
-        $("#btnVatSetting").click(function () { OpenPage(Modules.VatSetting); });
-        $("#btnDtcostcenter").click(function () { OpenPage(Modules.Dtcostcenter); });
-        $("#btnCcdtAccState").click(function () { OpenPage(Modules.CcdtAccState); });
-        $("#btnCollectUnit").click(function () { OpenPage(Modules.CollectUnit); });
+        $("#btnHome").click(function () { newtap = false; OpenPage(Modules.Home); });
+        $("#btnStkDefItems").click(function () { newtap = false; OpenPage(Modules.StkDefItems); });
+        $("#btnStkDefItemsNew").click(function () { newtap = false; OpenPage(Modules.StkDefItemsNew); });
+        $("#btnStkDefCategory").click(function () { newtap = false; OpenPage(Modules.StkDefCategory); });
+        $("#btnPeriodManagement").click(function () { newtap = false; OpenPage(Modules.PeriodManagement); }); //
+        $("#btnItemPeriodSummary").click(function () { newtap = false; OpenPage(Modules.ItemPeriodSummary); }); //
+        $("#btnStkDefUnit").click(function () { newtap = false; OpenPage(Modules.StkDefUnit); });
+        $("#btnStkDefItemType").click(function () { newtap = false; OpenPage(Modules.StkDefItemType); });
+        $("#btnStkDefStore").click(function () { newtap = false; OpenPage(Modules.StkDefStore); });
+        $("#btnDashboard").click(function () { newtap = false; OpenPage(Modules.Dashboard); });
+        $("#btnAccDefVendor").click(function () { newtap = false; OpenPage(Modules.AccDefVendor); });
+        $("#btnAccDefCustomer").click(function () { newtap = false; OpenPage(Modules.AccDefCustomer); });
+        $("#btnAccDefSalesmen").click(function () { newtap = false; OpenPage(Modules.AccDefSalesmen); });
+        $("#btnAccDefBox").click(function () { newtap = false; OpenPage(Modules.AccDefBox); });
+        $("#btnAccDefExpenses").click(function () { newtap = false; OpenPage(Modules.AccDefExpenses); });
+        $("#btnAccDefReceipts").click(function () { newtap = false; OpenPage(Modules.AccDefReceipts); });
+        $("#btnCashBankAccount").click(function () { newtap = false; OpenPage(Modules.CashBankAccount); });
+        $("#btnAgingCust").click(function () { newtap = false; OpenPage(Modules.AgingCust); }); //
+        $("#btnAgingVend").click(function () { newtap = false; OpenPage(Modules.AgingVend); }); //
+        $("#btnGenDefCustomerCat").click(function () { newtap = false; OpenPage(Modules.GenDefCustomerCat); });
+        $("#btnGendefCustomerGroup").click(function () { newtap = false; OpenPage(Modules.GendefCustomerGroup); });
+        $("#btnGenDefCustomerAdjust").click(function () { newtap = false; OpenPage(Modules.GenDefCustomerAdjust); });
+        $("#btnGenDefVendorCat").click(function () { newtap = false; OpenPage(Modules.GenDefVendorCat); });
+        $("#btnGendefVendorGroup").click(function () { newtap = false; OpenPage(Modules.GendefVendorGroup); });
+        $("#btnGenDefVendorAdjust").click(function () { newtap = false; OpenPage(Modules.GenDefVendorAdjust); });
+        $("#btnAccTrInvReceipt").click(function () { newtap = false; OpenPage(Modules.AccTrInvReceipt); });
+        $("#btnAccTrReceiptNote").click(function () { newtap = false; OpenPage(Modules.AccTrReceiptNote); });
+        $("#btnAccTrPaymentNote").click(function () { newtap = false; OpenPage(Modules.AccTrPaymentNote); });
+        $("#btnAccTrCustomerAdjust").click(function () { newtap = false; OpenPage(Modules.AccTrCustomerAdjust); });
+        $("#btnAccTrVendorAdjust").click(function () { newtap = false; OpenPage(Modules.AccTrVendorAdjust); });
+        $("#btnSlsTrSales").click(function () { newtap = false; OpenPage(Modules.SlsTrSales); });
+        $("#btnSlsTrReturn").click(function () { newtap = false; OpenPage(Modules.SlsTrReturn); });
+        $("#btnSlsTrSalesManager").click(function () { newtap = false; OpenPage(Modules.SlsTrSalesManager); });
+        $("#btnSlsTrShowPrice").click(function () { newtap = false; OpenPage(Modules.SlsTrShowPrice); });
+        $("#btnPurOrder").click(function () { newtap = false; OpenPage(Modules.PurOrder); });
+        $("#btnPurTrReceive").click(function () { newtap = false; OpenPage(Modules.PurTrReceive); });
+        $("#btnPurTrReturn").click(function () { newtap = false; OpenPage(Modules.PurTrReturn); });
+        $("#btnPurTrpaymemt").click(function () { newtap = false; OpenPage(Modules.PurTrpaymemt); });
+        $("#btnProcesses").click(function () { newtap = false; OpenPage(Modules.Processes); });
+        $("#btnSalesTrans").click(function () { newtap = false; OpenPage(Modules.SalesTrans); });
+        $("#btnProcSalesRet").click(function () { newtap = false; OpenPage(Modules.ProcSalesRet); });
+        $("#btnOperationScrap").click(function () { newtap = false; OpenPage(Modules.OperationScrap); });
+        $("#btnProcSalesInvoice").click(function () { newtap = false; OpenPage(Modules.ProcSalesInvoice); });
+        $("#btnProcSalesMgr").click(function () { newtap = false; OpenPage(Modules.ProcSalesMgr); }); //
+        $("#btnCloseProcesses").click(function () { newtap = false; OpenPage(Modules.CloseProcesses); }); // 
+        $("#btnClientaccstat").click(function () { newtap = false; OpenPage(Modules.Clientaccstat); }); //
+        $("#btnCollectedaccstat").click(function () { newtap = false; OpenPage(Modules.Collectedaccstat); }); //
+        $("#btnSupplieraccstat").click(function () { newtap = false; OpenPage(Modules.Supplieraccstat); }); //
+        $("#btnCashBoxAccount").click(function () { newtap = false; OpenPage(Modules.CashBoxAccount); }); //
+        $("#btnInventorymove").click(function () { newtap = false; OpenPage(Modules.Inventorymove); }); //
+        $("#btnInventoryvalue").click(function () { newtap = false; OpenPage(Modules.Inventoryvalue); }); //
+        $("#btnIncomeoperations").click(function () { newtap = false; OpenPage(Modules.Incomeoperations); }); //  
+        $("#btnItemsalesSum").click(function () { newtap = false; OpenPage(Modules.ItemsalesSum); }); //
+        $("#btnItemPurchase").click(function () { newtap = false; OpenPage(Modules.ItemPurchase); }); //
+        $("#btnIssueType").click(function () { newtap = false; OpenPage(Modules.IssueType); }); //
+        $("#btnIssueToCC").click(function () { newtap = false; OpenPage(Modules.IssueToCC); }); // 
+        $("#btnGLDefAccount").click(function () { newtap = false; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnJournalVoucher").click(function () { newtap = false; OpenPage(Modules.JournalVoucher); });
+        $("#btnReceiptVoucher").click(function () { newtap = false; OpenPage(Modules.ReceiptVoucher); });
+        $("#btnPaymentVoucher").click(function () { newtap = false; OpenPage(Modules.PaymentVoucher); });
+        $("#btnManagementVoucher").click(function () { newtap = false; OpenPage(Modules.ManagementVoucher); }); //
+        $("#btnCostCenter").click(function () { newtap = false; OpenPage(Modules.CostCenter); }); //
+        $("#btnAccountstatement").click(function () { newtap = false; OpenPage(Modules.Accountstatement); }); //
+        $("#btnAccountbalances").click(function () { newtap = false; OpenPage(Modules.Accountbalances); }); // 
+        $("#btnfinancialreports").click(function () { newtap = false; OpenPage(Modules.financialreports); }); //
+        $("#btnUSERS").click(function () { newtap = false; OpenPage(Modules.USERS); }); //
+        $("#btnTranPosting").click(function () { newtap = false; OpenPage(Modules.TranPosting); }); //
+        $("#btnLnkvarBranch").click(function () { newtap = false; OpenPage(Modules.LnkvarBranch); }); //
+        $("#btnLnkTransVoucher").click(function () { newtap = false; OpenPage(Modules.LnkTransVoucher); }); // 
+        $("#btnDirecttransfer").click(function () { newtap = false; OpenPage(Modules.Directtransfer); });
+        $("#btnSTKAdjust").click(function () { newtap = false; OpenPage(Modules.STKAdjust); });
+        $("#btnReceiveTransfer").click(function () { newtap = false; OpenPage(Modules.ReceiveTransfer); });
+        $("#btnsendTransfer").click(function () { newtap = false; OpenPage(Modules.sendTransfer); });
+        $("#btnGenDefAdd").click(function () { newtap = false; OpenPage(Modules.GenDefAdd); });
+        $("#btnDefStore").click(function () { newtap = false; OpenPage(Modules.DefStore); });
+        $("#btnServiceCategories").click(function () { newtap = false; OpenPage(Modules.ServiceCategories); });
+        $("#btnServices").click(function () { newtap = false; OpenPage(Modules.Services); });
+        $("#btnSales_Services").click(function () { newtap = false; OpenPage(Modules.Sales_Services); });
+        $("#btnSer_Return_Sales").click(function () { newtap = false; OpenPage(Modules.Ser_Return_Sales); });
+        $("#btnSer_Purchasing").click(function () { newtap = false; OpenPage(Modules.Ser_Purchasing); });
+        $("#btnSer_Return_Pur").click(function () { newtap = false; OpenPage(Modules.Ser_Return_Pur); });
+        $("#btnSer_Sales_Report").click(function () { newtap = false; OpenPage(Modules.Ser_Sales_Report); });
+        $("#btnSer_Pur_Report").click(function () { newtap = false; OpenPage(Modules.Ser_Pur_Report); });
+        $("#btnVatLists").click(function () { newtap = false; OpenPage(Modules.VatLists); });
+        $("#btnVatReport").click(function () { newtap = false; OpenPage(Modules.VatReport); });
+        $("#btnVatSetting").click(function () { newtap = false; OpenPage(Modules.VatSetting); });
+        $("#btnDtcostcenter").click(function () { newtap = false; OpenPage(Modules.Dtcostcenter); });
+        $("#btnCcdtAccState").click(function () { newtap = false; OpenPage(Modules.CcdtAccState); });
+        $("#btnCollectUnit").click(function () { newtap = false; OpenPage(Modules.CollectUnit); });
+        //------------------------------------------------------------------------- N E W T A B -------------------------------------
+        $("#btnHomeT").click(function () { newtap = true; OpenPage(Modules.Home); });
+        $("#btnStkDefItemsT").click(function () { newtap = true; OpenPage(Modules.StkDefItems); });
+        $("#btnStkDefItemsNewT").click(function () { newtap = true; OpenPage(Modules.StkDefItemsNew); });
+        $("#btnStkDefCategoryT").click(function () { newtap = true; OpenPage(Modules.StkDefCategory); });
+        $("#btnPeriodManagementT").click(function () { newtap = true; OpenPage(Modules.PeriodManagement); }); //
+        $("#btnItemPeriodSummaryT").click(function () { newtap = true; OpenPage(Modules.ItemPeriodSummary); }); //
+        $("#btnStkDefUnitT").click(function () { newtap = true; OpenPage(Modules.StkDefUnit); });
+        $("#btnStkDefItemTypeT").click(function () { newtap = true; OpenPage(Modules.StkDefItemType); });
+        $("#btnStkDefStoreT").click(function () { newtap = true; OpenPage(Modules.StkDefStore); });
+        $("#btnDashboardT").click(function () { newtap = true; OpenPage(Modules.Dashboard); });
+        $("#btnAccDefVendorT").click(function () { newtap = true; OpenPage(Modules.AccDefVendor); });
+        $("#btnAccDefCustomerT").click(function () { newtap = true; OpenPage(Modules.AccDefCustomer); });
+        $("#btnAccDefSalesmenT").click(function () { newtap = true; OpenPage(Modules.AccDefSalesmen); });
+        $("#btnAccDefBoxT").click(function () { newtap = true; OpenPage(Modules.AccDefBox); });
+        $("#btnAccDefExpensesT").click(function () { newtap = true; OpenPage(Modules.AccDefExpenses); });
+        $("#btnAccDefReceiptsT").click(function () { newtap = true; OpenPage(Modules.AccDefReceipts); });
+        $("#btnCashBankAccountT").click(function () { newtap = true; OpenPage(Modules.CashBankAccount); });
+        $("#btnAgingCustT").click(function () { newtap = true; OpenPage(Modules.AgingCust); }); //
+        $("#btnAgingVendT").click(function () { newtap = true; OpenPage(Modules.AgingVend); }); //
+        $("#btnGenDefCustomerCatT").click(function () { newtap = true; OpenPage(Modules.GenDefCustomerCat); });
+        $("#btnGendefCustomerGroupT").click(function () { newtap = true; OpenPage(Modules.GendefCustomerGroup); });
+        $("#btnGenDefCustomerAdjustT").click(function () { newtap = true; OpenPage(Modules.GenDefCustomerAdjust); });
+        $("#btnGenDefVendorCatT").click(function () { newtap = true; OpenPage(Modules.GenDefVendorCat); });
+        $("#btnGendefVendorGroupT").click(function () { newtap = true; OpenPage(Modules.GendefVendorGroup); });
+        $("#btnGenDefVendorAdjustT").click(function () { newtap = true; OpenPage(Modules.GenDefVendorAdjust); });
+        $("#btnAccTrInvReceiptT").click(function () { newtap = true; OpenPage(Modules.AccTrInvReceipt); });
+        $("#btnAccTrReceiptNoteT").click(function () { newtap = true; OpenPage(Modules.AccTrReceiptNote); });
+        $("#btnAccTrPaymentNoteT").click(function () { newtap = true; OpenPage(Modules.AccTrPaymentNote); });
+        $("#btnAccTrCustomerAdjustT").click(function () { newtap = true; OpenPage(Modules.AccTrCustomerAdjust); });
+        $("#btnAccTrVendorAdjustT").click(function () { newtap = true; OpenPage(Modules.AccTrVendorAdjust); });
+        $("#btnSlsTrSalesT").click(function () { newtap = true; OpenPage(Modules.SlsTrSales); });
+        $("#btnSlsTrReturnT").click(function () { newtap = true; OpenPage(Modules.SlsTrReturn); });
+        $("#btnSlsTrSalesManagerT").click(function () { newtap = true; OpenPage(Modules.SlsTrSalesManager); });
+        $("#btnSlsTrShowPriceT").click(function () { newtap = true; OpenPage(Modules.SlsTrShowPrice); });
+        $("#btnPurOrderT").click(function () { newtap = true; OpenPage(Modules.PurOrder); });
+        $("#btnPurTrReceiveT").click(function () { newtap = true; OpenPage(Modules.PurTrReceive); });
+        $("#btnPurTrReturnT").click(function () { newtap = true; OpenPage(Modules.PurTrReturn); });
+        $("#btnPurTrpaymemtT").click(function () { newtap = true; OpenPage(Modules.PurTrpaymemt); });
+        $("#btnProcessesT").click(function () { newtap = true; OpenPage(Modules.Processes); });
+        $("#btnSalesTransT").click(function () { newtap = true; OpenPage(Modules.SalesTrans); });
+        $("#btnProcSalesRetT").click(function () { newtap = true; OpenPage(Modules.ProcSalesRet); });
+        $("#btnOperationScrapT").click(function () { newtap = true; OpenPage(Modules.OperationScrap); });
+        $("#btnProcSalesInvoiceT").click(function () { newtap = true; OpenPage(Modules.ProcSalesInvoice); });
+        $("#btnProcSalesMgrT").click(function () { newtap = true; OpenPage(Modules.ProcSalesMgr); }); //
+        $("#btnCloseProcessesT").click(function () { newtap = true; OpenPage(Modules.CloseProcesses); }); // 
+        $("#btnClientaccstatT").click(function () { newtap = true; OpenPage(Modules.Clientaccstat); }); //
+        $("#btnCollectedaccstatT").click(function () { newtap = true; OpenPage(Modules.Collectedaccstat); }); //
+        $("#btnSupplieraccstatT").click(function () { newtap = true; OpenPage(Modules.Supplieraccstat); }); //
+        $("#btnCashBoxAccountT").click(function () { newtap = true; OpenPage(Modules.CashBoxAccount); }); //
+        $("#btnInventorymoveT").click(function () { newtap = true; OpenPage(Modules.Inventorymove); }); //
+        $("#btnInventoryvalueT").click(function () { newtap = true; OpenPage(Modules.Inventoryvalue); }); //
+        $("#btnIncomeoperationsT").click(function () { newtap = true; OpenPage(Modules.Incomeoperations); }); //  
+        $("#btnItemsalesSumT").click(function () { newtap = true; OpenPage(Modules.ItemsalesSum); }); //
+        $("#btnItemPurchaseT").click(function () { newtap = true; OpenPage(Modules.ItemPurchase); }); //
+        $("#btnIssueTypeT").click(function () { newtap = true; OpenPage(Modules.IssueType); }); //
+        $("#btnIssueToCCT").click(function () { newtap = true; OpenPage(Modules.IssueToCC); }); // 
+        $("#btnGLDefAccountT").click(function () { newtap = true; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnJournalVoucherT").click(function () { newtap = true; OpenPage(Modules.JournalVoucher); });
+        $("#btnReceiptVoucherT").click(function () { newtap = true; OpenPage(Modules.ReceiptVoucher); });
+        $("#btnPaymentVoucherT").click(function () { newtap = true; OpenPage(Modules.PaymentVoucher); });
+        $("#btnManagementVoucherT").click(function () { newtap = true; OpenPage(Modules.ManagementVoucher); }); //
+        $("#btnCostCenterT").click(function () { newtap = true; OpenPage(Modules.CostCenter); }); //
+        $("#btnAccountstatementT").click(function () { newtap = true; OpenPage(Modules.Accountstatement); }); //
+        $("#btnAccountbalancesT").click(function () { newtap = true; OpenPage(Modules.Accountbalances); }); // 
+        $("#btnfinancialreportsT").click(function () { newtap = true; OpenPage(Modules.financialreports); }); //
+        $("#btnUSERST").click(function () { newtap = true; OpenPage(Modules.USERS); }); //
+        $("#btnTranPostingT").click(function () { newtap = true; OpenPage(Modules.TranPosting); }); //
+        $("#btnLnkvarBranchT").click(function () { newtap = true; OpenPage(Modules.LnkvarBranch); }); //
+        $("#btnLnkTransVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkTransVoucher); }); // 
+        $("#btnDirecttransferT").click(function () { newtap = true; OpenPage(Modules.Directtransfer); });
+        $("#btnSTKAdjustT").click(function () { newtap = true; OpenPage(Modules.STKAdjust); });
+        $("#btnReceiveTransferT").click(function () { newtap = true; OpenPage(Modules.ReceiveTransfer); });
+        $("#btnsendTransferT").click(function () { newtap = true; OpenPage(Modules.sendTransfer); });
+        $("#btnGenDefAddT").click(function () { newtap = true; OpenPage(Modules.GenDefAdd); });
+        $("#btnDefStoreT").click(function () { newtap = true; OpenPage(Modules.DefStore); });
+        $("#btnServiceCategoriesT").click(function () { newtap = true; OpenPage(Modules.ServiceCategories); });
+        $("#btnServicesT").click(function () { newtap = true; OpenPage(Modules.Services); });
+        $("#btnSales_ServicesT").click(function () { newtap = true; OpenPage(Modules.Sales_Services); });
+        $("#btnSer_Return_SalesT").click(function () { newtap = true; OpenPage(Modules.Ser_Return_Sales); });
+        $("#btnSer_PurchasingT").click(function () { newtap = true; OpenPage(Modules.Ser_Purchasing); });
+        $("#btnSer_Return_PurT").click(function () { newtap = true; OpenPage(Modules.Ser_Return_Pur); });
+        $("#btnSer_Sales_ReportT").click(function () { newtap = true; OpenPage(Modules.Ser_Sales_Report); });
+        $("#btnSer_Pur_ReportT").click(function () { newtap = true; OpenPage(Modules.Ser_Pur_Report); });
+        $("#btnVatListsT").click(function () { newtap = true; OpenPage(Modules.VatLists); });
+        $("#btnVatReportT").click(function () { newtap = true; OpenPage(Modules.VatReport); });
+        $("#btnVatSettingT").click(function () { newtap = true; OpenPage(Modules.VatSetting); });
+        $("#btnDtcostcenterT").click(function () { newtap = true; OpenPage(Modules.Dtcostcenter); });
+        $("#btnCcdtAccStateT").click(function () { newtap = true; OpenPage(Modules.CcdtAccState); });
+        $("#btnCollectUnitT").click(function () { newtap = true; OpenPage(Modules.CollectUnit); });
     }
     function Notifications_Message() {
         var comCode = SysSession.CurrentEnvironment.CompCode;

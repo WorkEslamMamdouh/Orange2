@@ -146,6 +146,7 @@ var PurTrReceive;
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
+        InitializeGrid();
     }
     PurTrReceive.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -353,7 +354,14 @@ var PurTrReceive;
             { title: res.Men_PurOrder, name: "PoNo", type: "text", width: "8%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "Vnd_NameA" : "Vnd_NameE"), type: "text", width: "15%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "15%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "10%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
             { title: res.Men_StkDefItems, name: "Item_Count", type: "text", width: "4%" },
             { title: res.App_Package, name: "Tot_Qty", type: "text", width: "5%" },
             { title: "اجمالي الاصناف ", name: "ItemTotalFC", type: "text", width: "7%" },
@@ -363,9 +371,16 @@ var PurTrReceive;
             { title: "الاجمالي بعد الضريبة	", name: "NetDue", type: "text", width: "7%" },
             { title: res.I_Additions, name: "TotAdd", type: "text", width: "7%" },
             { title: res.I_Additions_Tax, name: "TotAddVat", type: "text", width: "8%" },
-            { title: res.App_State, name: "StatusDesc", type: "text", width: "5%" },
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
+                    ;
+                    return txt;
+                }
+            },
         ];
-        BindStatisticGridData();
     }
     function BindStatisticGridData() {
         var startdt = DateFormatRep(txtFromDate.value).toString();
@@ -388,19 +403,19 @@ var PurTrReceive;
                 var result = d;
                 if (result.IsSuccess) {
                     GetPurReceiveStaisticData = result.Response;
-                    for (var i = 0; i < GetPurReceiveStaisticData.length; i++) {
-                        GetPurReceiveStaisticData[i].TrDate = DateFormat(GetPurReceiveStaisticData[i].TrDate);
-                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-                            GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
-                            GetPurReceiveStaisticData[i].Tot_VAT = Number(GetPurReceiveStaisticData[i].Tot_VAT.toFixed(2));
-                            GetPurReceiveStaisticData[i].Tot_Net = Number(GetPurReceiveStaisticData[i].Tot_Net.toFixed(2));
-                            GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "غير معتمد" : "معتمد";
-                        }
-                        else {
-                            GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
-                            GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "Non Certified" : "Certified";
-                        }
-                    }
+                    //for (var i = 0; i < GetPurReceiveStaisticData.length; i++) {
+                    //    GetPurReceiveStaisticData[i].TrDate = DateFormat(GetPurReceiveStaisticData[i].TrDate);
+                    //    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                    //        GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
+                    //        GetPurReceiveStaisticData[i].Tot_VAT = Number(GetPurReceiveStaisticData[i].Tot_VAT.toFixed(2));
+                    //        GetPurReceiveStaisticData[i].Tot_Net = Number(GetPurReceiveStaisticData[i].Tot_Net.toFixed(2));
+                    //        GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "غير معتمد" : "معتمد";
+                    //    }
+                    //    else {
+                    //        GetPurReceiveStaisticData[i].Vendor_Name = GetPurReceiveStaisticData[i].Vnd_NameA;
+                    //        GetPurReceiveStaisticData[i].StatusDesc = GetPurReceiveStaisticData[i].Status == 0 ? "Non Certified" : "Certified";
+                    //    }
+                    //}
                     divMasterGrid.DataSource = GetPurReceiveStaisticData;
                     divMasterGrid.Bind();
                 }
@@ -449,6 +464,7 @@ var PurTrReceive;
             txtNotes.value = RetrivedPurchaseModel[0].Remarks.toString();
             ddlReciveTypeHeader.value = RetrivedPurchaseModel[0].PurRecType.toString();
             VendorRecieptID.value = RetrivedPurchaseModel[0].VendorInvNo.toString();
+            txtDateHeader.value = DateFormat(RetrivedPurchaseModel[0].TrDate);
             txtCurrencyRate.value = RetrivedPurchaseModel[0].CurrencyRate.RoundToSt(6);
             if (RetrivedPurchaseModel[0].CurrencyID != null)
                 ddlCurrency.value = RetrivedPurchaseModel[0].CurrencyID.toString();
@@ -532,7 +548,7 @@ var PurTrReceive;
     function btnShow_onclick() {
         ShowFlag = true;
         $("#divMasterGridiv").removeClass("display_none");
-        InitializeGrid();
+        BindStatisticGridData();
         $("#divDetails").addClass("display_none");
         $("#MasterDropDowns").removeClass("display_none");
         $("#divGridWithDetail").removeClass("display_none");
@@ -2488,6 +2504,7 @@ var PurTrReceive;
                 }
             }
         }
+        ReceiveModel.TrDate = txtDateHeader.value;
         MasterDetailModel.I_Pur_TR_Receive = ReceiveModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = ReceiveItemsDetailsModel;
         MasterDetailModel.I_Pur_Tr_ReceiveCharges = chargesDetailsModel; //I_Pur_Tr_ReceiveCharges
@@ -2511,22 +2528,11 @@ var PurTrReceive;
                     debugger;
                     var res = result.Response;
                     DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
-                    DisplayMassage(" تم اصدار  فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number" + res.I_Pur_TR_Receive.TrNo + "has been issued", MessageType.Succeed);
-                    lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
-                    GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
-                    Success(res.I_Pur_TR_Receive.ReceiveID);
-                    //InitializeGrid();
-                    //BindAfterInsertorUpdate(res.I_Pur_TR_Receive.ReceiveID);
-                    //DisableControls();
-                    //if (RetrivedPurchaseModel[0].Status == 1) {
-                    //    chkActive.checked = true;
-                    //    chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                    //    btnUpdate.disabled = true;
-                    //} else {
-                    //    chkActive.checked = false;
-                    //    chkActive.disabled = true;
-                    //    btnUpdate.disabled = false;
-                    //}
+                    DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "invoice number" + res.TrNo + "has been issued", MessageType.Succeed);
+                    lblInvoiceNumber.innerText = res.TrNo.toString();
+                    GlobalReceiveID = res.ReceiveID;
+                    displayDate_speed(GlobalReceiveID, res);
+                    Success(res.ReceiveID);
                     Save_Succ_But();
                 }
                 else {
@@ -2552,11 +2558,11 @@ var PurTrReceive;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
                     DateSetsSccess("txtDateHeader", "txtFromDate", "txtToDate");
-                    DisplayMassage(" تم تعديل فاتورة رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number " + res.I_Pur_TR_Receive.TrNo + "has been editied", MessageType.Succeed);
-                    lblInvoiceNumber.innerText = res.I_Pur_TR_Receive.TrNo.toString();
-                    GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
-                    Success(res.I_Pur_TR_Receive.ReceiveID);
-                    //InitializeGrid();
+                    DisplayMassage(" تم تعديل فاتورة رقم  " + res.TrNo + " ", "invoice number " + res.TrNo + "has been editied", MessageType.Succeed);
+                    lblInvoiceNumber.innerText = res.TrNo.toString();
+                    GlobalReceiveID = res.ReceiveID;
+                    displayDate_speed(GlobalReceiveID, res);
+                    Success(res.ReceiveID);
                     //BindAfterInsertorUpdate(res.I_Pur_TR_Receive.ReceiveID);
                     //DisableControls();
                     //if (RetrivedPurchaseModel[0].Status == 1) {
@@ -2586,7 +2592,6 @@ var PurTrReceive;
         $("#divDetails").addClass("display_none");
         ShowFlag = true;
         $("#divMasterGridiv").removeClass("display_none");
-        InitializeGrid();
         $("#divDetails").addClass("display_none");
         $("#MasterDropDowns").removeClass("display_none");
         $("#divGridWithDetail").removeClass("display_none");
@@ -2642,17 +2647,13 @@ var PurTrReceive;
                 var result = d;
                 var res = result.Response;
                 if (result.IsSuccess == true) {
+                    DisplayMassage(" تم فك الاعتماد رقم  " + res.TrNo + " ", "invoice number " + res.TrNo + "has been unapproved", MessageType.Succeed);
                     btnUpdate.disabled = false;
-                    chkActive.disabled = true;
                     $("#btnUpdate").removeClass("display_none");
-                    GlobalReceiveID = res.I_Pur_TR_Receive.ReceiveID;
-                    InitializeGrid();
-                    BindAfterInsertorUpdate(res.I_Pur_TR_Receive.ReceiveID);
-                    DisableControls();
+                    GlobalReceiveID = res.ReceiveID;
+                    displayDate_speed(GlobalReceiveID, res);
                     chkActive.checked = false;
                     chkActive.disabled = true;
-                    btnUpdate.disabled = false;
-                    DisplayMassage(" تم فك الاعتماد رقم  " + res.I_Pur_TR_Receive.TrNo + " ", "invoice number " + res.I_Pur_TR_Receive.TrNo + "has been unapproved", MessageType.Succeed);
                 }
                 else {
                     btnUpdate.disabled = true;
@@ -2660,6 +2661,16 @@ var PurTrReceive;
                 }
             }
         });
+    }
+    function displayDate_speed(RecID, res) {
+        debugger;
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID != RecID; });
+        res.TrDate = DateFormat(res.TrDate.toString());
+        GetPurReceiveStaisticData.push(res);
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.sort(dynamicSort("TrNo"));
+        divMasterGrid.DataSource = GetPurReceiveStaisticData;
+        divMasterGrid.Bind();
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
     }
     function BindAfterInsertorUpdate(receiveid) {
         debugger;

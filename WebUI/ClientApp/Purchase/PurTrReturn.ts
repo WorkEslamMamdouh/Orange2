@@ -155,9 +155,10 @@ namespace PurTrReturn {
 
 
         InitializeGrid();
-        btnShow_onclick();
-        $('#btnPrint').addClass('display_none');
-        $('#divMasterGridiv').addClass('display_none');
+        $("#divMasterGridiv").removeClass("display_none"); 
+
+        //btnShow_onclick();
+        $('#btnPrint').addClass('display_none'); 
     }
     function IntializeEvents() { 
         btnShow.onclick = btnShow_onclick;
@@ -642,7 +643,7 @@ namespace PurTrReturn {
     }
     function btnBack_onclick() {
         if (EditFlag == true) {
-            BindStatisticGridData();
+         
             $("#DivFilter").removeClass("disabledDiv");
             $("#divMasterGridiv").removeClass("disabledDiv"); 
             $('#btnSave').toggleClass("display_none");
@@ -1806,6 +1807,7 @@ namespace PurTrReturn {
             }
 
         }
+        InvoiceModel.TrNo = Number(lblReturnNumber.value); 
         MasterDetailModel.I_Pur_TR_Receive = InvoiceModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -1826,9 +1828,10 @@ namespace PurTrReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as I_Pur_TR_Receive;
+                    let res = result.Response as IQ_GetPurReceiveStaistic;
                     DateSetsSccess("txtInvoiceDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return has been created' + res.TrNo, MessageType.Succeed);
+                    displayDate_speed(res.ReceiveID, res);
                     Success(res.ReceiveID);
                     Save_Succ_But();
                 } else {
@@ -1872,9 +1875,9 @@ namespace PurTrReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as I_Pur_TR_Receive;
+                    let res = result.Response as IQ_GetPurReceiveStaistic;
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", '(The return has been modified successfully)', MessageType.Succeed);  
-                     
+                    displayDate_speed(res.ReceiveID, res);
                     Success(res.ReceiveID);
                     Save_Succ_But();
                 } else {
@@ -1887,7 +1890,7 @@ namespace PurTrReturn {
     }
      
     function Success(RecID: number) {
-        btnShow_onclick();
+      
         $("#DivFilter").removeClass("disabledDiv");
         $("#divMasterGridiv").removeClass("disabledDiv"); 
         $('#btnSave').toggleClass("display_none");
@@ -2047,14 +2050,40 @@ namespace PurTrReturn {
             data: JSON.stringify(MasterDetailModel),
             success: (d) => {
                 let result = d as BaseResponse;
+                let res = result.Response as IQ_GetPurReceiveStaistic;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as I_Pur_TR_Receive; 
-                    receiveID = res.ReceiveID;
-                    Success(res.ReceiveID);
-                    btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
+                    DisplayMassage(" تم فك الاعتماد رقم  " + res.TrNo + " ", "invoice number " + res.TrNo + "has been unapproved", MessageType.Succeed);
+                    btnEdit.disabled = false;
+                    $("#btnEdit").removeClass("display_none");
+                     
+                    displayDate_speed(res.ReceiveID, res)
+
+                    chkActive.checked = false;
+                    chkActive.disabled = true;
+
+                } else {
+                    btnEdit.disabled = true;
+                    $("#btnEdit").removeClass("display_none");
                 }
             }
         });
+    }
+    function displayDate_speed(RecID: number, res: IQ_GetPurReceiveStaistic) {
+
+        debugger
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.filter(x => x.ReceiveID != RecID);
+
+        res.TrDate = DateFormat(res.TrDate.toString());
+
+        GetPurReceiveStaisticData.push(res);
+        GetPurReceiveStaisticData = GetPurReceiveStaisticData.sort(dynamicSort("TrNo"));
+
+        divMasterGrid.DataSource = GetPurReceiveStaisticData;
+        divMasterGrid.Bind();
+
+        $("#divMasterGridiv").removeClass("display_none"); 
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
+
     }
   //----------------------------------------------------------PRint region---------------------------------------
     export function PrintReport(OutType: number) {

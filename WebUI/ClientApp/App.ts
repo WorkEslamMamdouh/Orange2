@@ -555,7 +555,7 @@ var Ajax = {
         }
     },
     CallAsync: <T>(settings: JQueryAjaxSettings) => {
-        CheckTime();
+        //CheckTime();
         //run_waitMe();
         $.ajax({
             type: settings.type,
@@ -577,7 +577,7 @@ var Ajax = {
         })
     },
     Callsync: <T>(settings: JQueryAjaxSettings) => {
-        CheckTime();
+        //CheckTime();
         //run_waitMe();
         $.ajax({
 

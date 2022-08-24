@@ -45,6 +45,9 @@
         .hidden_Control {
             display: none !important;
         }
+         
+    
+
     </style>
 </head>
 
@@ -142,7 +145,7 @@
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
         <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <nav class="sidebar sidebar-offcanvas scroll" id="sidebar">
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
 
                 <a class="sidebar-brand brand-logo" href="#">
@@ -210,20 +213,20 @@
                     </a>
                     <div class="collapse" id="MSales">
                         <ul class="nav flex-column sub-menu mt-3">
-                            <li id="btnSlsTrShowPrice" key="SlsTrShowPrice" class="nav-item d-flex justify-content-between mb-1">
+                            <li key="SlsTrShowPrice" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSlsTrShowPriceT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a>
-                                @*<a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
                             @*<li style="display:none" id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
                                        <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
                                 </li>*@
-                            <li id="btnSlsTrSalesManager" key="SlsTrSalesManager" class="nav-item d-flex justify-content-between mb-1">
+                            <li key="SlsTrSalesManager" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSlsTrSalesManagerT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrSalesManager" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
-                                @*   <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
-                            <li id="btnSlsTrReturn" key="SlsTrReturn" class="nav-item d-flex justify-content-between mb-1">
+                            <li key="SlsTrReturn" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="SlsTrReturnT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrReturn" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a>
-                                @*  <a class="new-tab-link"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>*@
                             </li>
 
                         </ul>
@@ -239,9 +242,18 @@
                     </a>
                     <div class="collapse" id="MPurchase">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnPurOrder" key="PurOrder" class="nav-item"> <a id="btnPurOrder" class="nav-link" href="#">@SystemResource.Men_PurOrder</a></li>
-                            <li id="btnPurTrReceive" key="PurTrReceive" class="nav-item"> <a id="btnPurTrReceive" class="nav-link" href="#">@SystemResource.Purchase_Recieve</a></li>
-                            <li id="btnPurTrReturn" key="PurTrReturn" class="nav-item"> <a id="btnPurTrReturn" class="nav-link" href="#">@SystemResource.Purchase_Return</a></li>
+                            <li id="" key="PurOrder" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPurOrderT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPurOrder" class="nav-link" href="#">@SystemResource.Men_PurOrder</a>
+                            </li>
+                            <li id="" key="PurTrReceive" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPurTrReceiveT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPurTrReceive" class="nav-link" href="#">@SystemResource.Purchase_Recieve</a>
+                            </li>
+                            <li id="" key="PurTrReturn" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPurTrReturnT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPurTrReturn" class="nav-link" href="#">@SystemResource.Purchase_Return</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -255,16 +267,46 @@
                     </a>
                     <div class="collapse" id="MInventory">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnDirecttransfer" key="Directtransfer" class="nav-item"> <a id="btnDirecttransfer" class="nav-link" href="#">@SystemResource.Directtransfer</a></li>
-                            <li id="btnSTKAdjust" key="STKAdjust" class="nav-item"> <a id="btnSTKAdjust" class="nav-link" href="#">@SystemResource.Stocksettlement</a></li>
-                            <li id="btnCollectUnit" key="CollectUnit" class="nav-item"> <a id="btnCollectUnit" class="nav-link" href="#">@SystemResource.Inv_CollectUnit</a></li>
-                            <li id="btnReceiveTransfer" key="ReceiveTransfer" class="nav-item"> <a id="btnReceiveTransfer" class="nav-link" href="#">@SystemResource.Receipttransfer</a></li>
-                            <li id="btnsendTransfer" key="sendTransfer" class="nav-item"> <a id="btnsendTransfer" class="nav-link" href="#">@SystemResource.Sendtransfer</a></li>
-                            <li id="btnStkDefItems" key="StkDefItems" class="nav-item"> <a id="btnStkDefItems" class="nav-link" href="#">@SystemResource.Men_StkDefItems</a></li>
-                            <li id="btnStkDefItemType" key="StkDefItemType" class="nav-item"> <a id="btnStkDefItemType" class="nav-link" href="#">@SystemResource.Men_StkDefItemType</a></li>
-                            <li id="btnStkDefCategory" key="StkDefCategory" class="nav-item"> <a id="btnStkDefCategory" class="nav-link" href="#">@SystemResource.Men_StkDefCategory</a></li>
-                            <li id="btnStkDefItemsNew" key="StkDefItemsNew" class="nav-item"> <a id="btnStkDefItemsNew" class="nav-link" href="#">@SystemResource.Men_StkDefItems</a></li>
-                            <li id="btnIssueToCC" key="IssueToCC" class="nav-item"> <a id="btnIssueToCC" class="nav-link" href="#">@SystemResource.PaymentOrder</a></li>
+                            <li id="" key="Directtransfer" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnDirecttransferT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnDirecttransfer" class="nav-link" href="#">@SystemResource.Directtransfer</a>
+                            </li>
+                            <li id="" key="STKAdjust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSTKAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSTKAdjust" class="nav-link" href="#">@SystemResource.Stocksettlement</a>
+                            </li>
+                            <li id="" key="CollectUnit" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCollectUnitT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCollectUnit" class="nav-link" href="#">@SystemResource.Inv_CollectUnit</a>
+                            </li>
+                            <li id="" key="ReceiveTransfer" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnReceiveTransferT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnReceiveTransfer" class="nav-link" href="#">@SystemResource.Receipttransfer</a>
+                            </li>
+                            <li id="" key="sendTransfer" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnsendTransferT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnsendTransfer" class="nav-link" href="#">@SystemResource.Sendtransfer</a>
+                            </li>
+                            <li id="" key="StkDefItems" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnStkDefItemsT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnStkDefItems" class="nav-link" href="#">@SystemResource.Men_StkDefItems</a>
+                            </li>
+                            <li id="" key="StkDefItemType" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnStkDefItemTypeT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnStkDefItemType" class="nav-link" href="#">@SystemResource.Men_StkDefItemType</a>
+                            </li>
+                            <li id="" key="StkDefCategory" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnStkDefCategoryT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnStkDefCategory" class="nav-link" href="#">@SystemResource.Men_StkDefCategory</a>
+                            </li>
+                            <li id="" key="StkDefItemsNew" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnStkDefItemsNewT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnStkDefItemsNew" class="nav-link" href="#">@SystemResource.Men_StkDefItems</a>
+                            </li>
+                            <li id="" key="IssueToCC" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnIssueToCCT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnIssueToCC" class="nav-link" href="#">@SystemResource.PaymentOrder</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -278,11 +320,26 @@
                     </a>
                     <div class="collapse" id="MbtnReportMenu">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnInventorymove" key="Inventorymove" class="nav-item"> <a id="btnInventorymove" class="nav-link" href="#">@SystemResource.Inventorymove</a></li>
-                            <li id="btnInventoryvalue" key="Inventoryvalue" class="nav-item"> <a id="btnInventoryvalue" class="nav-link" href="#">@SystemResource.Inventoryvalue</a></li>
-                            <li id="btnIncomeoperations" key="Incomeoperations" class="nav-item"> <a id="btnIncomeoperations" class="nav-link" href="#">@SystemResource.Incomeoperations</a></li>
-                            <li id="btnItemsalesSum" key="ItemsalesSum" class="nav-item"> <a id="btnItemsalesSum" class="nav-link" href="#">@SystemResource.ItemsalesSum</a></li>
-                            <li id="btnItemPurchase" key="ItemPurchase" class="nav-item"> <a id="btnItemPurchase" class="nav-link" href="#">@SystemResource.ItemPurchase</a></li>
+                            <li id="" key="Inventorymove" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnInventorymoveT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnInventorymove" class="nav-link" href="#">@SystemResource.Inventorymove</a>
+                            </li>
+                            <li id="" key="Inventoryvalue" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnInventoryvalueT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnInventoryvalue" class="nav-link" href="#">@SystemResource.Inventoryvalue</a>
+                            </li>
+                            <li id="" key="Incomeoperations" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnIncomeoperationsT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnIncomeoperations" class="nav-link" href="#">@SystemResource.Incomeoperations</a>
+                            </li>
+                            <li id="" key="ItemsalesSum" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnItemsalesSumT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnItemsalesSum" class="nav-link" href="#">@SystemResource.ItemsalesSum</a>
+                            </li>
+                            <li id="" key="ItemPurchase" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnItemPurchaseT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnItemPurchase" class="nav-link" href="#">@SystemResource.ItemPurchase</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -297,12 +354,30 @@
                     </a>
                     <div class="collapse" id="MbtnCashBoxDefinitions">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnAccTrInvReceipt" key="AccTrInvReceipt" class="nav-item"> <a id="btnAccTrInvReceipt" class="nav-link" href="#">@SystemResource.Men_AccTrInvReceipt</a></li>
-                            <li id="btnAccTrReceiptNote" key="AccTrReceiptNote" class="nav-item"> <a id="btnAccTrReceiptNote" class="nav-link" href="#">@SystemResource.Men_AccTrReceiptNote</a></li>
-                            <li id="btnPurTrpaymemt" key="PurTrpaymemt" class="nav-item"> <a id="btnPurTrpaymemt" class="nav-link" href="#">@SystemResource.Men_PurTrpaymemt</a></li>
-                            <li id="btnAccTrPaymentNote" key="AccTrPaymentNote" class="nav-item"> <a id="btnAccTrPaymentNote" class="nav-link" href="#">@SystemResource.Men_AccTrPaymentNote</a></li>
-                            <li id="btnAccTrCustomerAdjust" key="AccTrCustomerAdjust" class="nav-item"> <a id="btnAccTrCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrCustomerAdjust</a></li>
-                            <li id="btnAccTrVendorAdjust" key="AccTrVendorAdjust" class="nav-item"> <a id="btnAccTrVendorAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrVendorAdjust</a></li>
+                            <li id="" key="AccTrInvReceipt" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccTrInvReceiptT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccTrInvReceipt" class="nav-link" href="#">@SystemResource.Men_AccTrInvReceipt</a>
+                            </li>
+                            <li id="" key="AccTrReceiptNote" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccTrReceiptNoteT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccTrReceiptNote" class="nav-link" href="#">@SystemResource.Men_AccTrReceiptNote</a>
+                            </li>
+                            <li id="" key="PurTrpaymemt" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPurTrpaymemtT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPurTrpaymemt" class="nav-link" href="#">@SystemResource.Men_PurTrpaymemt</a>
+                            </li>
+                            <li id="" key="AccTrPaymentNote" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccTrPaymentNoteT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccTrPaymentNote" class="nav-link" href="#">@SystemResource.Men_AccTrPaymentNote</a>
+                            </li>
+                            <li id="" key="AccTrCustomerAdjust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccTrCustomerAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccTrCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrCustomerAdjust</a>
+                            </li>
+                            <li id="" key="AccTrVendorAdjust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccTrVendorAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccTrVendorAdjust" class="nav-link" href="#">@SystemResource.Men_AccTrVendorAdjust</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -317,13 +392,34 @@
                     </a>
                     <div class="collapse" id="MbtnCashBoxReports">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnCollectedaccstat" key="Collectedaccstat" class="nav-item"> <a id="btnCollectedaccstat" class="nav-link" href="#">@SystemResource.Combined_account</a></li>
-                            <li id="btnSupplieraccstat" key="Supplieraccstat" class="nav-item"> <a id="btnSupplieraccstat" class="nav-link" href="#">@SystemResource.Suppliertstatment</a></li>
-                            <li id="btnClientaccstat" key="Clientaccstat" class="nav-item"> <a id="btnClientaccstat" class="nav-link" href="#">@SystemResource.Clientstatment</a></li>
-                            <li id="btnCashBoxAccount" key="CashBoxAccount" class="nav-item"> <a id="btnCashBoxAccount" class="nav-link" href="#">@SystemResource.AccountCashBox</a></li>
-                            <li id="btnCashBankAccount" key="CashBankAccount" class="nav-item"> <a id="btnCashBankAccount" class="nav-link" href="#">@SystemResource.AccountCashbank</a></li>
-                            <li id="btnAgingCust" key="AgingCust" class="nav-item"> <a id="btnAgingCust" class="nav-link" href="#">@SystemResource.AgingCust</a></li>
-                            <li id="btnAgingVend" key="AgingVend" class="nav-item"> <a id="btnAgingVend" class="nav-link" href="#">@SystemResource.AgingVend</a></li>
+                            <li id="" key="Collectedaccstat" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCollectedaccstatT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCollectedaccstat" class="nav-link" href="#">@SystemResource.Combined_account</a>
+                            </li>
+                            <li id="" key="Supplieraccstat" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSupplieraccstatT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSupplieraccstat" class="nav-link" href="#">@SystemResource.Suppliertstatment</a>
+                            </li>
+                            <li id="" key="Clientaccstat" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnClientaccstatT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnClientaccstat" class="nav-link" href="#">@SystemResource.Clientstatment</a>
+                            </li>
+                            <li id="" key="CashBoxAccount" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCashBoxAccountT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCashBoxAccount" class="nav-link" href="#">@SystemResource.AccountCashBox</a>
+                            </li>
+                            <li id="" key="CashBankAccount" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCashBankAccountT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCashBankAccount" class="nav-link" href="#">@SystemResource.AccountCashbank</a>
+                            </li>
+                            <li id="" key="AgingCust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAgingCustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAgingCust" class="nav-link" href="#">@SystemResource.AgingCust</a>
+                            </li>
+                            <li id="" key="AgingVend" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAgingVendT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAgingVend" class="nav-link" href="#">@SystemResource.AgingVend</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -337,13 +433,34 @@
                     </a>
                     <div class="collapse" id="MbtnProcessesMenu">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnProcesses" key="Processes" class="nav-item"> <a id="btnProcesses" class="nav-link" href="#">@SystemResource.operationsmanagment</a></li>
-                            <li id="btnSalesTrans" key="SalesTrans" class="nav-item"> <a id="btnSalesTrans" class="nav-link" href="#">@SystemResource.Men_SalesTransf</a></li>
-                            <li id="btnProcSalesMgr" key="ProcSalesMgr" class="nav-item"> <a id="btnProcSalesMgr" class="nav-link" href="#">@SystemResource.Men_ProcessMan</a></li>
-                            <li id="btnProcSalesInvoice" key="ProcSalesInvoice" class="nav-item"> <a id="btnProcSalesInvoice" class="nav-link" href="#">@SystemResource.Men_ProcInvoice</a></li>
-                            <li id="btnProcSalesRet" key="ProcSalesRet" class="nav-item"> <a id="btnProcSalesRet" class="nav-link" href="#">@SystemResource.Men_ProcReturn</a></li>
-                            <li id="btnOperationScrap" key="OperationScrap" class="nav-item"> <a id="btnOperationScrap" class="nav-link" href="#">@SystemResource.OperationScrap</a></li>
-                            <li id="btnCloseProcesses" key="CloseProcesses" class="nav-item"> <a id="btnCloseProcesses" class="nav-link" href="#">@SystemResource.Close_process</a></li>
+                            <li id="" key="Processes" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnProcessesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnProcesses" class="nav-link" href="#">@SystemResource.operationsmanagment</a>
+                            </li>
+                            <li id="" key="SalesTrans" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSalesTransT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSalesTrans" class="nav-link" href="#">@SystemResource.Men_SalesTransf</a>
+                            </li>
+                            <li id="" key="ProcSalesMgr" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnProcSalesMgrT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnProcSalesMgr" class="nav-link" href="#">@SystemResource.Men_ProcessMan</a>
+                            </li>
+                            <li id="" key="ProcSalesInvoice" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnProcSalesInvoiceT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnProcSalesInvoice" class="nav-link" href="#">@SystemResource.Men_ProcInvoice</a>
+                            </li>
+                            <li id="" key="ProcSalesRet" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnProcSalesRetT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnProcSalesRet" class="nav-link" href="#">@SystemResource.Men_ProcReturn</a>
+                            </li>
+                            <li id="" key="OperationScrap" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnOperationScrapT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnOperationScrap" class="nav-link" href="#">@SystemResource.OperationScrap</a>
+                            </li>
+                            <li id="" key="CloseProcesses" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCloseProcessesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCloseProcesses" class="nav-link" href="#">@SystemResource.Close_process</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -357,14 +474,38 @@
                     </a>
                     <div class="collapse" id="Mbtnservicesystem">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnServiceCategories" key="ServiceCategories" class="nav-item"> <a id="btnServiceCategories" class="nav-link" href="#">@SystemResource.ServiceCategory</a></li>
-                            <li id="btnServices" key="Services" class="nav-item"> <a id="btnServices" class="nav-link" href="#">@SystemResource.Services</a></li>
-                            <li id="btnSales_Services" key="Sales_Services" class="nav-item"> <a id="btnSales_Services" class="nav-link" href="#">@SystemResource.SalesInvoice</a></li>
-                            <li id="btnSer_Return_Sales" key="Ser_Return_Sales" class="nav-item"> <a id="btnSer_Return_Sales" class="nav-link" href="#">@SystemResource.SalesReturn</a></li>
-                            <li id="btnSer_Purchasing" key="Ser_Purchasing" class="nav-item"> <a id="btnSer_Purchasing" class="nav-link" href="#">@SystemResource.Purchase</a></li>
-                            <li id="btnSer_Return_Pur" key="Ser_Return_Pur" class="nav-item"> <a id="btnSer_Return_Pur" class="nav-link" href="#">@SystemResource.Purchase_Return</a></li>
-                            <li id="btnSer_Sales_Report" key="Ser_Sales_Report" class="nav-item"> <a id="btnSer_Sales_Report" class="nav-link" href="#">@SystemResource.ServicesSlsReport</a></li>
-                            <li id="btnSer_Pur_Report" key="Ser_Pur_Report" class="nav-item"> <a id="btnSer_Pur_Report" class="nav-link" href="#">@SystemResource.ServicespurReport</a></li>
+                            <li id="" key="ServiceCategories" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnServiceCategoriesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnServiceCategories" class="nav-link" href="#">@SystemResource.ServiceCategory</a>
+                            </li>
+                            <li id="" key="Services" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnServicesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnServices" class="nav-link" href="#">@SystemResource.Services</a>
+                            </li>
+                            <li id="" key="Sales_Services" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSales_ServicesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSales_Services" class="nav-link" href="#">@SystemResource.SalesInvoice</a>
+                            </li>
+                            <li id="" key="Ser_Return_Sales" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSer_Return_SalesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSer_Return_Sales" class="nav-link" href="#">@SystemResource.SalesReturn</a>
+                            </li>
+                            <li id="" key="Ser_Purchasing" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSer_PurchasingT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSer_Purchasing" class="nav-link" href="#">@SystemResource.Purchase</a>
+                            </li>
+                            <li id="" key="Ser_Return_Pur" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSer_Return_PurT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSer_Return_Pur" class="nav-link" href="#">@SystemResource.Purchase_Return</a>
+                            </li>
+                            <li id="" key="Ser_Sales_Report" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSer_Sales_ReportT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSer_Sales_Report" class="nav-link" href="#">@SystemResource.ServicesSlsReport</a>
+                            </li>
+                            <li id="" key="Ser_Pur_Report" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSer_Pur_ReportT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSer_Pur_Report" class="nav-link" href="#">@SystemResource.ServicespurReport</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -378,16 +519,46 @@
                     </a>
                     <div class="collapse" id="MbtnGeneralledgerMenu">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnGLDefAccount" key="GLDefAccount" class="nav-item"> <a id="btnGLDefAccount" class="nav-link" href="#">@SystemResource.meue_Accounts</a></li>
-                            <li id="btnJournalVoucher" key="JournalVoucher" class="nav-item"> <a id="btnJournalVoucher" class="nav-link" href="#">@SystemResource.Men_JournalVoucher</a></li>
-                            <li id="btnReceiptVoucher" key="ReceiptVoucher" class="nav-item"> <a id="btnReceiptVoucher" class="nav-link" href="#">@SystemResource.Men_ReceiptVoucher</a></li>
-                            <li id="btnPaymentVoucher" key="PaymentVoucher" class="nav-item"> <a id="btnPaymentVoucher" class="nav-link" href="#">@SystemResource.Men_PaymentVoucher</a></li>
-                            <li id="btnManagementVoucher" key="ManagementVoucher" class="nav-item"> <a id="btnManagementVoucher" class="nav-link" href="#">@SystemResource.mnue_Bondmanagement</a></li>
-                            <li id="btnCostCenter" key="CostCenter" class="nav-item"> <a id="btnCostCenter" class="nav-link" href="#">@SystemResource.menu_Costcenter</a></li>
-                            <li id="btnAccountstatement" key="Accountstatement" class="nav-item"> <a id="btnAccountstatement" class="nav-link" href="#">@SystemResource.mnue_Accountstatement</a></li>
-                            <li id="btnAccountbalances" key="Accountbalances" class="nav-item"> <a id="btnAccountbalances" class="nav-link" href="#">@SystemResource.mnue_generalteacher</a></li>
-                            <li id="btnfinancialreports" key="financialreports" class="nav-item"> <a id="btnfinancialreports" class="nav-link" href="#">@SystemResource.mnue_financialreports</a></li>
-                            <li id="btnCcdtAccState" key="CcdtAccState" class="nav-item"> <a id="btnCcdtAccState" class="nav-link" href="#">@SystemResource.Men_CcdtAccState</a></li>
+                            <li id="" key="GLDefAccount" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGLDefAccountT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGLDefAccount" class="nav-link" href="#">@SystemResource.meue_Accounts</a>
+                            </li>
+                            <li id="" key="JournalVoucher" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnJournalVoucherT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnJournalVoucher" class="nav-link" href="#">@SystemResource.Men_JournalVoucher</a>
+                            </li>
+                            <li id="" key="ReceiptVoucher" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnReceiptVoucherT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnReceiptVoucher" class="nav-link" href="#">@SystemResource.Men_ReceiptVoucher</a>
+                            </li>
+                            <li id="" key="PaymentVoucher" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPaymentVoucherT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPaymentVoucher" class="nav-link" href="#">@SystemResource.Men_PaymentVoucher</a>
+                            </li>
+                            <li id="" key="ManagementVoucher" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnManagementVoucherT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnManagementVoucher" class="nav-link" href="#">@SystemResource.mnue_Bondmanagement</a>
+                            </li>
+                            <li id="" key="CostCenter" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCostCenterT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCostCenter" class="nav-link" href="#">@SystemResource.menu_Costcenter</a>
+                            </li>
+                            <li id="" key="Accountstatement" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccountstatementT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccountstatement" class="nav-link" href="#">@SystemResource.mnue_Accountstatement</a>
+                            </li>
+                            <li id="" key="Accountbalances" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccountbalancesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccountbalances" class="nav-link" href="#">@SystemResource.mnue_generalteacher</a>
+                            </li>
+                            <li id="" key="financialreports" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnfinancialreportsT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnfinancialreports" class="nav-link" href="#">@SystemResource.mnue_financialreports</a>
+                            </li>
+                            <li id="" key="CcdtAccState" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnCcdtAccStateT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnCcdtAccState" class="nav-link" href="#">@SystemResource.Men_CcdtAccState</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -401,13 +572,34 @@
                     </a>
                     <div class="collapse" id="MbtnAccDefinitionMen">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnAccDefCustomer" key="AccDefCustomer" class="nav-item"> <a id="btnAccDefCustomer" class="nav-link" href="#">@SystemResource.Men_AccDefCustomer</a></li>
-                            <li id="btnAccDefSalesmen" key="AccDefSalesmen" class="nav-item"> <a id="btnAccDefSalesmen" class="nav-link" href="#">@SystemResource.Men_AccDefSalesmen</a></li>
-                            <li id="btnAccDefExpenses" key="AccDefExpenses" class="nav-item"> <a id="btnAccDefExpenses" class="nav-link" href="#">@SystemResource.Men_AccDefExpenses</a></li>
-                            <li id="btnAccDefReceipts" key="AccDefReceipts" class="nav-item"> <a id="btnAccDefReceipts" class="nav-link" href="#">@SystemResource.Men_AccDefReceipts</a></li>
-                            <li id="btnAccDefVendor" key="AccDefVendor" class="nav-item"> <a id="btnAccDefVendor" class="nav-link" href="#">@SystemResource.Men_AccDefVendor</a></li>
-                            <li id="btnAccDefBox" key="AccDefBox" class="nav-item"> <a id="btnAccDefBox" class="nav-link" href="#">@SystemResource.Men_AccDefBox</a></li>
-                            <li id="btnDtcostcenter" key="Dtcostcenter" class="nav-item"> <a id="btnDtcostcenter" class="nav-link" href="#">@SystemResource.costsubcenters</a></li>
+                            <li id="" key="AccDefCustomer" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefCustomerT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefCustomer" class="nav-link" href="#">@SystemResource.Men_AccDefCustomer</a>
+                            </li>
+                            <li id="" key="AccDefSalesmen" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefSalesmenT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefSalesmen" class="nav-link" href="#">@SystemResource.Men_AccDefSalesmen</a>
+                            </li>
+                            <li id="" key="AccDefExpenses" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefExpensesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefExpenses" class="nav-link" href="#">@SystemResource.Men_AccDefExpenses</a>
+                            </li>
+                            <li id="" key="AccDefReceipts" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefReceiptsT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefReceipts" class="nav-link" href="#">@SystemResource.Men_AccDefReceipts</a>
+                            </li>
+                            <li id="" key="AccDefVendor" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefVendorT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefVendor" class="nav-link" href="#">@SystemResource.Men_AccDefVendor</a>
+                            </li>
+                            <li id="" key="AccDefBox" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnAccDefBoxT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnAccDefBox" class="nav-link" href="#">@SystemResource.Men_AccDefBox</a>
+                            </li>
+                            <li id="" key="Dtcostcenter" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnDtcostcenterT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnDtcostcenter" class="nav-link" href="#">@SystemResource.costsubcenters</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -421,13 +613,34 @@
                     </a>
                     <div class="collapse" id="MbtnGenDefinitionMen">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnGenDefCustomerCat" key="GenDefCustomerCat" class="nav-item"> <a id="btnGenDefCustomerCat" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerCat</a></li>
-                            <li id="btnGendefCustomerGroup" key="GendefCustomerGroup" class="nav-item"> <a id="btnGendefCustomerGroup" class="nav-link" href="#">@SystemResource.Men_GendefCustomerGroup</a></li>
-                            <li id="btnGenDefCustomerAdjust" key="GenDefCustomerAdjust" class="nav-item"> <a id="btnGenDefCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerAdjust</a></li>
-                            <li id="btnGenDefVendorCat" key="GenDefVendorCat" class="nav-item"> <a id="btnGenDefVendorCat" class="nav-link" href="#">@SystemResource.Men_GenDefVendorCat</a></li>
-                            <li id="btnGendefVendorGroup" key="GendefVendorGroup" class="nav-item"> <a id="btnGendefVendorGroup" class="nav-link" href="#">@SystemResource.Men_GendefVendorGroup</a></li>
-                            <li id="btnGenDefVendorAdjust" key="GenDefVendorAdjust" class="nav-item"> <a id="btnGenDefVendorAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefVendorAdjust</a></li>
-                            <li id="btnGenDefAdd" key="GenDefAdd" class="nav-item"> <a id="btnGenDefAdd" class="nav-link" href="#">@SystemResource.Men_Addition</a></li>
+                            <li id="" key="GenDefCustomerCat" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGenDefCustomerCatT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGenDefCustomerCat" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerCat</a>
+                            </li>
+                            <li id="" key="GendefCustomerGroup" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGendefCustomerGroupT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGendefCustomerGroup" class="nav-link" href="#">@SystemResource.Men_GendefCustomerGroup</a>
+                            </li>
+                            <li id="" key="GenDefCustomerAdjust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGenDefCustomerAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGenDefCustomerAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefCustomerAdjust</a>
+                            </li>
+                            <li id="" key="GenDefVendorCat" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGenDefVendorCatT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGenDefVendorCat" class="nav-link" href="#">@SystemResource.Men_GenDefVendorCat</a>
+                            </li>
+                            <li id="" key="GendefVendorGroup" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGendefVendorGroupT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGendefVendorGroup" class="nav-link" href="#">@SystemResource.Men_GendefVendorGroup</a>
+                            </li>
+                            <li id="" key="GenDefVendorAdjust" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGenDefVendorAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGenDefVendorAdjust" class="nav-link" href="#">@SystemResource.Men_GenDefVendorAdjust</a>
+                            </li>
+                            <li id="" key="GenDefAdd" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnGenDefAddT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnGenDefAdd" class="nav-link" href="#">@SystemResource.Men_Addition</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -441,14 +654,38 @@
                     </a>
                     <div class="collapse" id="MbtnToolsMenu">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnPeriodManagement" key="PeriodManagement" class="nav-item"> <a id="btnPeriodManagement" class="nav-link" href="#">@SystemResource.PeriodManagement</a></li>
-                            <li id="btnItemPeriodSummary" key="ItemPeriodSummary" class="nav-item"> <a id="btnItemPeriodSummary" class="nav-link" href="#">@SystemResource.ItemPeriodSummary</a></li>
-                            <li id="btnDefStore" key="DefStore" class="nav-item"> <a id="btnDefStore" class="nav-link" href="#">@SystemResource.Men_StkDefStore</a></li>
-                            <li id="btnIssueType" key="IssueType" class="nav-item"> <a id="btnIssueType" class="nav-link" href="#">@SystemResource.PaymentTypes</a></li>
-                            <li id="btnTranPosting" key="TranPosting" class="nav-item"> <a id="btnTranPosting" class="nav-link" href="#">@SystemResource.Transfer_accounts</a></li>
-                            <li id="btnLnkvarBranch" key="LnkvarBranch" class="nav-item"> <a id="btnLnkvarBranch" class="nav-link" href="#">@SystemResource.Branch_accounts</a></li>
-                            <li id="btnLnkTransVoucher" key="LnkTransVoucher" class="nav-item"> <a id="btnLnkTransVoucher" class="nav-link" href="#">@SystemResource.Designconstraints</a></li>
-                            <li id="btnUSERS" key="USERS" class="nav-item"> <a id="btnUSERS" class="nav-link" href="#">@SystemResource.User</a></li>
+                            <li id="" key="PeriodManagement" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnPeriodManagementT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnPeriodManagement" class="nav-link" href="#">@SystemResource.PeriodManagement</a>
+                            </li>
+                            <li id="" key="ItemPeriodSummary" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnItemPeriodSummaryT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnItemPeriodSummary" class="nav-link" href="#">@SystemResource.ItemPeriodSummary</a>
+                            </li>
+                            <li id="" key="DefStore" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnDefStoreT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnDefStore" class="nav-link" href="#">@SystemResource.Men_StkDefStore</a>
+                            </li>
+                            <li id="" key="IssueType" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnIssueTypeT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnIssueType" class="nav-link" href="#">@SystemResource.PaymentTypes</a>
+                            </li>
+                            <li id="" key="TranPosting" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnTranPostingT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnTranPosting" class="nav-link" href="#">@SystemResource.Transfer_accounts</a>
+                            </li>
+                            <li id="" key="LnkvarBranch" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnLnkvarBranchT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnLnkvarBranch" class="nav-link" href="#">@SystemResource.Branch_accounts</a>
+                            </li>
+                            <li id="" key="LnkTransVoucher" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnLnkTransVoucherT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnLnkTransVoucher" class="nav-link" href="#">@SystemResource.Designconstraints</a>
+                            </li>
+                            <li id="" key="USERS" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnUSERST"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnUSERS" class="nav-link" href="#">@SystemResource.User</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -464,9 +701,18 @@
                     </a>
                     <div class="collapse" id="MbtnTaxSystem">
                         <ul class="nav flex-column sub-menu">
-                            <li id="btnVatReport" key="VatReport" class="nav-item"> <a id="btnVatReport" class="nav-link" href="#">@SystemResource.Men_VatReport</a></li>
-                            <li id="btnVatLists" key="VatLists" class="nav-item"> <a id="btnVatLists" class="nav-link" href="#">@SystemResource.Men_VatList</a></li>
-                            <li id="btnVatSetting" key="VatSetting" class="nav-item"> <a id="btnVatSetting" class="nav-link" href="#">@SystemResource.Men_VatSettings</a></li>
+                            <li id="btnVatReport" key="VatReport" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnVatReportT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnVatReport" class="nav-link" href="#">@SystemResource.Men_VatReport</a>
+                            </li>
+                            <li id="" key="VatLists" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnVatListsT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnVatLists" class="nav-link" href="#">@SystemResource.Men_VatList</a>
+                            </li>
+                            <li id="" key="VatSetting" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnVatSettingT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnVatSetting" class="nav-link" href="#">@SystemResource.Men_VatSettings</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -937,7 +1183,7 @@
 
     <script src="~/Style_design/LodBut/Loder.js"></script>
 
-   
+
 </body>
 
 
