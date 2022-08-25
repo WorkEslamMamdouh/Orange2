@@ -1,36 +1,28 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Inv.API.Models;
+﻿using Inv.API.Models;
+using Inv.API.Models.CustomEntities;
+using Inv.API.Models.CustomModel;
 using Inv.API.Tools;
+using Inv.DAL.Domain;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using QRCoder;
+using Security;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
+using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
+using System.Reflection;
+using System.Text;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
-using System.Collections.Specialized;
-using System.Reflection;
-using System.Data.Entity.Core.EntityClient;
-using System.Xml;
-using System.Web;
-using System.Threading.Tasks;
-using Inv.DAL.Domain;
-using Security;
-using System.Data.Entity;
-using System.Text;
-using System.Net.Http.Formatting;
-using System.Data.Entity.Core.Objects;
-using System.IO;
-using System.Drawing;
-using Inv.API.Models.CustomEntities;
-using Microsoft.VisualBasic;
-using QRCoder;
-using Inv.API.Models.CustomModel;
 
 namespace Inv.API.Controllers
 {
@@ -61,7 +53,7 @@ namespace Inv.API.Controllers
 
                 using (SqlCommand command = new SqlCommand())
                 {
-                    string SqlStatement = String.Format("Select top 1 {0} From {1} Where {2} = {3}", descs, tableName, codeField, codeValue);
+                    string SqlStatement = string.Format("Select top 1 {0} From {1} Where {2} = {3}", descs, tableName, codeField, codeValue);
                     command.Connection = connection;
                     command.CommandText = SqlStatement;
                     connection.Open();
@@ -71,14 +63,22 @@ namespace Inv.API.Controllers
                     command.Dispose();
                     connection.Dispose();
                     if (table.Rows.Count == 0)
+                    {
                         return "";
+                    }
+
                     string arDesc = table.Rows[0][descs.Split(',')[0]].ToString();
                     string enDesc = table.Rows[0][descs.Split(',')[1]].ToString();
 
                     if (language == "ar")
+                    {
                         result = arDesc;
+                    }
                     else
+                    {
                         result = enDesc;
+                    }
+
                     return result;
                 }
             }
@@ -102,7 +102,7 @@ namespace Inv.API.Controllers
                     command.Dispose();
                     connection.Dispose();
 
-                    var result = JsonConvert.SerializeObject(table);
+                    string result = JsonConvert.SerializeObject(table);
                     return result;
                 }
             }
@@ -161,7 +161,10 @@ namespace Inv.API.Controllers
         private string Desc(Type type, string lang)
         {
             if (type == null)
+            {
                 return "null";
+            }
+
             string result = string.Empty;
             List<PropertyInfo> properties = new List<PropertyInfo>();
             //var type = typeof(T);
@@ -214,8 +217,7 @@ namespace Inv.API.Controllers
             return "test from system tools";
         }
 
-
-        string returnSubSystems(string strSource, string strStart, string strEnd)
+        private string returnSubSystems(string strSource, string strStart, string strEnd)
         {
             int Start, End;
             if (strSource.Contains(strStart) && strSource.Contains(strEnd))
@@ -245,18 +247,23 @@ namespace Inv.API.Controllers
         [HttpGet]
         public object GetByIndex2(int index, string idField, string TableName, string Condition)
         {
-            var Columns = string.Empty;
+            string Columns = string.Empty;
 
             string cols = string.Empty;
             if (Columns == "")
+            {
                 cols = "*";
+            }
             else
+            {
                 cols = Columns;
-            string cond = String.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
-                " where RowNum = " + index.ToString() + " And " + Condition;
-            var SqlStatment = "Select * From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+            }
 
-            var result = this.Get<object>(SqlStatment);
+            string cond = string.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
+                " where RowNum = " + index.ToString() + " And " + Condition;
+            string SqlStatment = "Select * From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+
+            IEnumerable<object> result = Get<object>(SqlStatment);
             return result.FirstOrDefault();
 
 
@@ -271,9 +278,11 @@ namespace Inv.API.Controllers
             string cond = condition == "" ? "" : " where " + condition;
 
             SqlConnection connection = new SqlConnection(db.Database.Connection.ConnectionString);// System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "Select * From (Select Row_Number() Over (Order By (Select 0)) As RowIndex, * From " + TableName + cond + ") t2 where RowIndex = " + Index;// where " + condition; ;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "Select * From (Select Row_Number() Over (Order By (Select 0)) As RowIndex, * From " + TableName + cond + ") t2 where RowIndex = " + Index// where " + condition; ;
+            };
             //command.CommandText = "Select " + columns.Substring(1) + " From " + TableName;
             connection.Open();
             DataTable table = new DataTable();
@@ -281,7 +290,7 @@ namespace Inv.API.Controllers
             connection.Close();
             connection.Dispose();
             command.Dispose();
-            var jsonResult = JsonConvert.SerializeObject(table);
+            string jsonResult = JsonConvert.SerializeObject(table);
 
             return jsonResult;// JsonConvert.SerializeObject(dicResult);
         }
@@ -328,7 +337,7 @@ namespace Inv.API.Controllers
         [HttpGet]
         public string GetAppSettings(string key)
         {
-            var result =
+            string result =
                 System.Configuration.ConfigurationManager.AppSettings[key];
 
             return result;
@@ -354,20 +363,27 @@ namespace Inv.API.Controllers
         public string GetIndex(int id, string idField, string TableName, string Condition)
         {
             if (!string.IsNullOrEmpty(Condition))
+            {
                 Condition = "where " + Condition;
+            }
 
             string Columns = string.Empty;
             string cols = string.Empty;
             if (Columns == "")
+            {
                 cols = "*";
+            }
             else
+            {
                 cols = Columns;
+            }
+
             string cond = " Where " + idField + "  = " + id.ToString();
 
 
-            var SqlStatment = "Select top 1 RowNum  From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum ," + idField + " From " + TableName + " " + Condition + ") t2" + cond;
+            string SqlStatment = "Select top 1 RowNum  From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum ," + idField + " From " + TableName + " " + Condition + ") t2" + cond;
 
-            string result = this.ExecuteScalar(SqlStatment);
+            string result = ExecuteScalar(SqlStatment);
 
             return result;
         }
@@ -377,36 +393,48 @@ namespace Inv.API.Controllers
         public object GetDataDisplay(string idField, string TableName, string Condition, int id)
         {
             if (!string.IsNullOrEmpty(Condition))
+            {
                 Condition = "where " + Condition;
+            }
 
             string Columns = string.Empty;
             string cols = string.Empty;
             if (Columns == "")
+            {
                 cols = "*";
+            }
             else
+            {
                 cols = Columns;
+            }
+
             string cond = " Where " + idField + "  = " + id;
 
-            var SqlStatment = "Select* From(Select Row_Number() Over (Order By (select 0)) As RowNum, *From " + TableName + " " + Condition + ") t2" + cond;
-            var result = this.Get<object>(SqlStatment);
+            string SqlStatment = "Select* From(Select Row_Number() Over (Order By (select 0)) As RowNum, *From " + TableName + " " + Condition + ") t2" + cond;
+            IEnumerable<object> result = Get<object>(SqlStatment);
             return result.FirstOrDefault();
         }
 
         [HttpGet]
         public object GetIndex(int index, string TableName, string Condition)
         {
-            var Columns = string.Empty;
+            string Columns = string.Empty;
 
             string cols = string.Empty;
             if (Columns == "")
+            {
                 cols = "*";
+            }
             else
+            {
                 cols = Columns;
-            string cond = String.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
-                " where RowNum = " + index.ToString() + " And " + Condition;
-            var SqlStatment = "Select * From (Select Row_Number() Over (Order By (select 0)) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+            }
 
-            var result = this.Get<object>(SqlStatment);
+            string cond = string.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
+                " where RowNum = " + index.ToString() + " And " + Condition;
+            string SqlStatment = "Select * From (Select Row_Number() Over (Order By (select 0)) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+
+            IEnumerable<object> result = Get<object>(SqlStatment);
             return result.FirstOrDefault();
 
 
@@ -415,18 +443,23 @@ namespace Inv.API.Controllers
         [HttpGet]
         public object GetByIndex(int index, string idField, string TableName, string Condition)
         {
-            var Columns = string.Empty;
+            string Columns = string.Empty;
 
             string cols = string.Empty;
             if (Columns == "")
+            {
                 cols = "*";
+            }
             else
+            {
                 cols = Columns;
-            string cond = String.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
-                " where RowNum = " + index.ToString() + " And " + Condition;
-            var SqlStatment = "Select * From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+            }
 
-            var result = this.Get<object>(SqlStatment);
+            string cond = string.IsNullOrEmpty(Condition) ? " Where RowNum = " + index.ToString() :
+                " where RowNum = " + index.ToString() + " And " + Condition;
+            string SqlStatment = "Select * From (Select Row_Number() Over (Order By (" + idField + ")) As RowNum, *  From " + TableName + " where " + Condition + ") t2" + cond;
+
+            IEnumerable<object> result = Get<object>(SqlStatment);
             return result.FirstOrDefault();
 
 
@@ -436,8 +469,8 @@ namespace Inv.API.Controllers
         public object GetModelCount(string TableName, string Condition)
         {
 
-            var SqlStatment = "Select count(*)  From " + TableName + (string.IsNullOrEmpty(Condition) ? "" : " where " + Condition);
-            var result = this.ExecuteScalar(SqlStatment);
+            string SqlStatment = "Select count(*)  From " + TableName + (string.IsNullOrEmpty(Condition) ? "" : " where " + Condition);
+            string result = ExecuteScalar(SqlStatment);
             return result;
 
 
@@ -452,7 +485,7 @@ namespace Inv.API.Controllers
             {
 
                 db.Configuration.ProxyCreationEnabled = false;
-                var user = db.G_USERS.Where(ee => ee.USER_CODE == userName && ee.USER_PASSWORD == userPassword && ee.USER_ACTIVE == true).FirstOrDefault();
+                G_USERS user = db.G_USERS.Where(ee => ee.USER_CODE == userName && ee.USER_PASSWORD == userPassword && ee.USER_ACTIVE == true).FirstOrDefault();
                 return Ok(new BaseResponse(user));
             }
             return BadRequest(ModelState);
@@ -544,16 +577,18 @@ namespace Inv.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAppSettings(string userCode, string SystemCode, string SubSystemCode)
         {
-            var companies = db.Database.SqlQuery<GFun_Companies_Result>("select * from GFun_Companies('" + userCode + "')").ToList();
+            List<GFun_Companies_Result> companies = db.Database.SqlQuery<GFun_Companies_Result>("select * from GFun_Companies('" + userCode + "')").ToList();
             //var companies = db.GFun_Companies(userCode).ToList();
-            var companiesList = new List<SystemParameters>();
-            foreach (var company in companies)
+            List<SystemParameters> companiesList = new List<SystemParameters>();
+            foreach (GFun_Companies_Result company in companies)
             {
-                var comp = new SystemParameters();
-                comp.CompanyCode = company.COMP_CODE.ToString();
-                comp.CompanyNameA = SecuritySystem.Decrypt(company.NameA);
-                comp.CompanyNameE = SecuritySystem.Decrypt(company.NameE);
-                comp.IsActive = Convert.ToBoolean(company.IsActive);
+                SystemParameters comp = new SystemParameters
+                {
+                    CompanyCode = company.COMP_CODE.ToString(),
+                    CompanyNameA = SecuritySystem.Decrypt(company.NameA),
+                    CompanyNameE = SecuritySystem.Decrypt(company.NameE),
+                    IsActive = Convert.ToBoolean(company.IsActive)
+                };
                 companiesList.Add(comp);
             };
             return Ok(companiesList);
@@ -565,7 +600,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var query = db.GQ_GetUserBranch
+                List<GQ_GetUserBranch> query = db.GQ_GetUserBranch
                      .Where(brn => brn.COMP_CODE == compCode & brn.USER_CODE == userCode).ToList();
                 return Ok(new BaseResponse(query));
             }
@@ -580,7 +615,7 @@ namespace Inv.API.Controllers
 
             if (ModelState.IsValid)
             {
-                var model = db.G_ModuleHelp.Where(x => x.MODULE_CODE == ModuleCode).FirstOrDefault();
+                G_ModuleHelp model = db.G_ModuleHelp.Where(x => x.MODULE_CODE == ModuleCode).FirstOrDefault();
                 return Ok(new BaseResponse(model));
             }
             return BadRequest(ModelState);
@@ -619,8 +654,8 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var not = db.G_Noteifications.Where(x => x.SYSTEM_CODE == SystemCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
-                var notCom = db.G_NotificationCompany.Where(x => x.SYSTEM_CODE == SystemCode && x.FIN_YEAR == yearid && x.CompCode == comCode && x.BranchCode == BraCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
+                IQueryable<G_Noteifications> not = db.G_Noteifications.Where(x => x.SYSTEM_CODE == SystemCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
+                IQueryable<G_NotificationCompany> notCom = db.G_NotificationCompany.Where(x => x.SYSTEM_CODE == SystemCode && x.FIN_YEAR == yearid && x.CompCode == comCode && x.BranchCode == BraCode); // && x.SUB_SYSTEM_CODE == SubSystemCode
 
                 var res = (from nt in not
                            join ntc in notCom on nt.MODULE_CODE equals ntc.MODULE_CODE
@@ -678,9 +713,9 @@ namespace Inv.API.Controllers
         public IHttpActionResult GetUserPrivilage(int year, int compCode, int branchCode, string UserCode, string SystemCode, string Modulecode)
         {
 
-            var query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + Modulecode + "')";
+            string query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + Modulecode + "')";
 
-            var result = db.Database.SqlQuery<UserPrivilege>(query).FirstOrDefault();
+            UserPrivilege result = db.Database.SqlQuery<UserPrivilege>(query).FirstOrDefault();
 
             //result = result.ToJsonString();
             return Ok(result.ToJsonString());
@@ -690,9 +725,9 @@ namespace Inv.API.Controllers
         public IHttpActionResult GetUserPrivilage(int compCode, int branchCode, string UserCode, string SystemCode, string SubSystemCode, string Modulecode)
         {
 
-            var query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + SubSystemCode + "','" + Modulecode + "')";
+            string query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + SubSystemCode + "','" + Modulecode + "')";
 
-            var result = db.Database.SqlQuery<UserPrivilege>(query).FirstOrDefault();
+            UserPrivilege result = db.Database.SqlQuery<UserPrivilege>(query).FirstOrDefault();
 
             //result = result.ToJsonString();
             return Ok(result.ToJsonString());
@@ -703,8 +738,8 @@ namespace Inv.API.Controllers
         {
             //+year + ","
             string Modulecode = "";
-            var query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + Modulecode + "')";
-            var result = db.Database.SqlQuery<UserPrivilege>(query).Where(row => row.Access == false || row.AVAILABLE == false).ToList();
+            string query = "SELECT * FROM [dbo].[GFunc_GetPrivilage] (" + year + "," + compCode + "," + branchCode + ",'" + UserCode + "', '" + SystemCode + "','" + Modulecode + "')";
+            List<UserPrivilege> result = db.Database.SqlQuery<UserPrivilege>(query).Where(row => row.Access == false || row.AVAILABLE == false).ToList();
             return Ok(result);
         }
 
@@ -757,7 +792,7 @@ namespace Inv.API.Controllers
         {
 
 
-            var user = db.G_USERS.Where(f => f.USER_CODE == UserCode).FirstOrDefault();
+            G_USERS user = db.G_USERS.Where(f => f.USER_CODE == UserCode).FirstOrDefault();
 
             if (user.USER_PASSWORD != OldPassword)
             {
@@ -811,27 +846,29 @@ namespace Inv.API.Controllers
         public SearchAttruibuts SearchProperties(string moduleCode, string controlName, string SystemCode, string SubSystemCode)
         {
 
-            var searchFormModule = (from module in db.G_SearchFormModule
-                                    where module.SystemCode == SystemCode
-                                    && module.SubSystemCode == SubSystemCode
-                                    && module.ModuleCode == moduleCode
-                                    && (module.ControlCode == controlName || module.ControlCode == "*")
-                                    select module).FirstOrDefault();
+            G_SearchFormModule searchFormModule = (from module in db.G_SearchFormModule
+                                                   where module.SystemCode == SystemCode
+                                                   && module.SubSystemCode == SubSystemCode
+                                                   && module.ModuleCode == moduleCode
+                                                   && (module.ControlCode == controlName || module.ControlCode == "*")
+                                                   select module).FirstOrDefault();
             if (searchFormModule == null)
+            {
                 return new SearchAttruibuts { Columns = new List<G_SearchFormSetting>(), Settings = new G_SearchForm() };
+            }
 
             string SearchFormCode = searchFormModule.SearchFormCode;// db.G_SearchFormModule.Where(f => f.ModuleCode == moduleCode).First().SearchFormCode;
 
-            var columns = (from cols in db.G_SearchFormSetting
-                           orderby cols.FieldSequence
-                           where cols.SearchFormCode == SearchFormCode
-                           select cols).ToList();
+            List<G_SearchFormSetting> columns = (from cols in db.G_SearchFormSetting
+                                                 orderby cols.FieldSequence
+                                                 where cols.SearchFormCode == SearchFormCode
+                                                 select cols).ToList();
 
-            var settings = from searchForm in db.G_SearchForm
-                           where searchForm.SearchFormCode == SearchFormCode
-                           select searchForm;
+            IQueryable<G_SearchForm> settings = from searchForm in db.G_SearchForm
+                                                where searchForm.SearchFormCode == SearchFormCode
+                                                select searchForm;
 
-            var obj = new SearchAttruibuts
+            SearchAttruibuts obj = new SearchAttruibuts
             {
                 Columns = columns as List<G_SearchFormSetting>,
                 Settings = settings.First()
@@ -848,16 +885,22 @@ namespace Inv.API.Controllers
             SqlConnection connection = new SqlConnection(db.Database.Connection.ConnectionString);
             connection.Open();
 
-            var pageSize = db.G_SearchForm.FirstOrDefault(f => f.DataSourceName == TableName).PageSize;
+            int pageSize = db.G_SearchForm.FirstOrDefault(f => f.DataSourceName == TableName).PageSize;
 
             string cond = Condition;
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection
+            };
             if (pageSize == 0)
+            {
                 command.CommandText = "Select " + Columns + " From " + TableName + cond + " Order By " + orderBy;
+            }
             else
+            {
                 command.CommandText = "Select Top " + pageSize.ToString() + " " + Columns + " From " + TableName + cond + " Order By " + orderBy;
+            }
 
             //if (pageSize == 0)
             //    command.CommandText = "Select RowIndex," + Columns + " From (Select Row_Number() Over (Order By (Select 0)) As RowIndex, * From " + TableName + ") t2" + cond + " Order By " + orderBy;
@@ -869,7 +912,7 @@ namespace Inv.API.Controllers
             connection.Close();
             connection.Dispose();
             command.Dispose();
-            var jsonResult = JsonConvert.SerializeObject(table);
+            string jsonResult = JsonConvert.SerializeObject(table);
 
             return jsonResult;
 
@@ -879,22 +922,24 @@ namespace Inv.API.Controllers
         public IHttpActionResult FindKey(string moduleCode, string Condition, string controlName, string SystemCode, string SubSystemCode, string ScreenLanguage)
         {
 
-            var obj = SearchProperties(moduleCode, controlName, SystemCode, SubSystemCode);
+            SearchAttruibuts obj = SearchProperties(moduleCode, controlName, SystemCode, SubSystemCode);
             if (obj.Settings.DataSourceName == null)
             {
                 return Ok();
             }
             string cols = string.Empty;
 
-            List<ColumnObjectStruct> columnsObject = new List<ColumnObjectStruct>();
-            columnsObject.Add(new ColumnObjectStruct()
+            List<ColumnObjectStruct> columnsObject = new List<ColumnObjectStruct>
             {
-                dataType = "number",
-                headerText = "",
-                hidden = true,
-                key = "RowIndex",
-                width = ""
-            });
+                new ColumnObjectStruct()
+                {
+                    dataType = "number",
+                    headerText = "",
+                    hidden = true,
+                    key = "RowIndex",
+                    width = ""
+                }
+            };
             foreach (G_SearchFormSetting column in obj.Columns)
             {
                 if ((column.Language == 0) ||
@@ -902,13 +947,19 @@ namespace Inv.API.Controllers
                     (ScreenLanguage == "ar" && column.Language == 1))
                 {
                     cols += "," + column.AlternateDataMember + " AS " + column.DataMember;  //cols += "," + column.DataMember;
-                    ColumnObjectStruct colObj = new ColumnObjectStruct();
-                    colObj.dataType = column.Datatype == 0 ? "string" : "number";
+                    ColumnObjectStruct colObj = new ColumnObjectStruct
+                    {
+                        dataType = column.Datatype == 0 ? "string" : "number"
+                    };
 
                     if (ScreenLanguage == "en")
+                    {
                         colObj.headerText = column.FieldTitle;
+                    }
                     else
+                    {
                         colObj.headerText = column.FieldTitleA;
+                    }
 
                     colObj.hidden = !column.IsReadOnly;
                     colObj.filterable = false;
@@ -923,14 +974,18 @@ namespace Inv.API.Controllers
             string condition = "";
 
             if (Condition == null || Condition == "")
+            {
                 condition = "";
+            }
             else
+            {
                 condition = " Where " + Condition;
+            }
 
             string columns = cols.Substring(1);
             string orderBy = obj.Settings.ReturnDataPropertyName;
 
-            var result = Find(tableName, condition, columns, orderBy);
+            string result = Find(tableName, condition, columns, orderBy);
 
             var resultObject = new
             {
@@ -949,12 +1004,14 @@ namespace Inv.API.Controllers
         public IHttpActionResult GetIndexByUseId(int idValue, string BaseTableName, string idFieldName, string Condition)
         {
             if (!string.IsNullOrEmpty(Condition))
+            {
                 Condition = "where " + Condition;
+            }
 
             string SqlStatment = "";
             string cond = " Where " + idFieldName + "  = " + idValue.ToString();
             SqlStatment = "Select top 1 RowNum  From (Select Row_Number() Over (Order By (" + idFieldName + ")) As RowNum ," + idFieldName + " From " + BaseTableName + " " + Condition + " " + ") t2" + cond;
-            var result = this.ExecuteScalar(SqlStatment);
+            string result = ExecuteScalar(SqlStatment);
             return Ok(result);
         }
 
@@ -973,7 +1030,7 @@ namespace Inv.API.Controllers
         [HttpGet]
         public IHttpActionResult getBackgroundImage(int CompCode)
         {
-            var result = db.G_COMPANY.Where(f => f.COMP_CODE == CompCode).FirstOrDefault().BkImage1;
+            string result = db.G_COMPANY.Where(f => f.COMP_CODE == CompCode).FirstOrDefault().BkImage1;
             return Ok(result);
             //return Ok();
 
@@ -987,8 +1044,8 @@ namespace Inv.API.Controllers
         [HttpGet]
         public string ConvertToHDate(string date)
         {
-            var c = Convert.ToDateTime(date);
-            var x = c.ToString("dd'/'MM'/'yyyy");
+            DateTime c = Convert.ToDateTime(date);
+            string x = c.ToString("dd'/'MM'/'yyyy");
 
             string sql = "select dbo.G_GetHDate('" + x + "')";
             string t = db.Database.SqlQuery<string>(sql).FirstOrDefault();
@@ -998,8 +1055,8 @@ namespace Inv.API.Controllers
         [HttpGet]
         public string ConvertDate(string date)
         {
-            var c = Convert.ToDateTime(date);
-            var x = c.ToString("dd'/'MM'/'yyyy");
+            DateTime c = Convert.ToDateTime(date);
+            string x = c.ToString("dd'/'MM'/'yyyy");
 
             //string sql = "select dbo.G_GetHDate('" + x + "')";
             //string t = db.Database.SqlQuery<string>(sql).FirstOrDefault();
@@ -1031,7 +1088,7 @@ namespace Inv.API.Controllers
             string plainText = compNameA + BraVatno + TrDate + NetAfterVat + VatAmount;
             QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(plainText, QRCoder.QRCodeGenerator.ECCLevel.Q);
             QRCoder.QRCode qRCode = new QRCoder.QRCode(qRCodeData);
-            var QRcode = "";
+            string QRcode = "";
             using (Bitmap bitmap = qRCode.GetGraphic(2))
             {
                 using (MemoryStream ms = new MemoryStream())
@@ -1069,9 +1126,11 @@ namespace Inv.API.Controllers
 
             connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from G_UpdateLog";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from G_UpdateLog"
+            };
 
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
@@ -1109,9 +1168,13 @@ namespace Inv.API.Controllers
             bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
 
             if (singleDb == false)
+            {
                 sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"] + (DateTime.Now.Year).ToString();
+            }
             else
+            {
                 sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"];
+            }
 
             sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserName"];
             sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPassword"];
@@ -1139,9 +1202,11 @@ namespace Inv.API.Controllers
 
             connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from KQ_G_CustomerInfo";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from KQ_G_CustomerInfo"
+            };
 
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
@@ -1196,9 +1261,11 @@ namespace Inv.API.Controllers
 
             connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from k_G_City";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from k_G_City"
+            };
 
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
@@ -1240,9 +1307,11 @@ namespace Inv.API.Controllers
 
             connection.Open();
 
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from K_G_District";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from K_G_District"
+            };
 
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
@@ -1282,9 +1351,11 @@ namespace Inv.API.Controllers
             SqlConnection connection = new SqlConnection(dd);
 
             connection.Open();
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from G_WebVideo";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from G_WebVideo"
+            };
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
             connection.Close();
@@ -1323,9 +1394,11 @@ namespace Inv.API.Controllers
             SqlConnection connection = new SqlConnection(dd);
 
             connection.Open();
-            SqlCommand command = new SqlCommand();
-            command.Connection = connection;
-            command.CommandText = "select * from G_WebSesction";
+            SqlCommand command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = "select * from G_WebSesction"
+            };
             DataTable table = new DataTable();
             table.Load(command.ExecuteReader());
             connection.Close();
@@ -1361,7 +1434,7 @@ namespace Inv.API.Controllers
             return Ok();
 
         }
-        public string GetPath(string Comp, string Branch, string ModuleCode, string TrNo, string NewSerial, Boolean PathFolderOnly)
+        public string GetPath(string Comp, string Branch, string ModuleCode, string TrNo, string NewSerial, bool PathFolderOnly)
         {
             string result = "";
             string ArchivePath = db.Database.SqlQuery<string>("select ImgPath from K_Control where CompCode = " + Comp).FirstOrDefault();
@@ -1389,15 +1462,15 @@ namespace Inv.API.Controllers
             {
                 try
                 {
-                    var httpPostedFile = HttpContext.Current.Request.Files["UploadedImage"];
-                    var Comp = HttpContext.Current.Request.Files["Comp"];
-                    var Branch = HttpContext.Current.Request.Files["Branch"];
-                    var MouleCode = HttpContext.Current.Request.Files["MouleCode"];
+                    HttpPostedFile httpPostedFile = HttpContext.Current.Request.Files["UploadedImage"];
+                    HttpPostedFile Comp = HttpContext.Current.Request.Files["Comp"];
+                    HttpPostedFile Branch = HttpContext.Current.Request.Files["Branch"];
+                    HttpPostedFile MouleCode = HttpContext.Current.Request.Files["MouleCode"];
 
                     if (httpPostedFile != null)
                     {
                         string strPath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, null, true);
-                        var fileSavePath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, "1", false);
+                        string fileSavePath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, "1", false);
 
                         if (Directory.Exists(strPath))
                         {
@@ -1437,16 +1510,16 @@ namespace Inv.API.Controllers
                 try
                 {
                     // var httpPostedFile = HttpContext.Current.Request.Files["UploadedImage"];
-                    var Comp = HttpContext.Current.Request.Files["Comp"];
-                    var Branch = HttpContext.Current.Request.Files["Branch"];
-                    var MouleCode = HttpContext.Current.Request.Files["MouleCode"];
+                    HttpPostedFile Comp = HttpContext.Current.Request.Files["Comp"];
+                    HttpPostedFile Branch = HttpContext.Current.Request.Files["Branch"];
+                    HttpPostedFile MouleCode = HttpContext.Current.Request.Files["MouleCode"];
                     for (int i = 0; i <= HttpContext.Current.Request.Files.Count - 3; i++)
                     {
-                        var httpPostedFile = HttpContext.Current.Request.Files["UploadedImage" + i];
+                        HttpPostedFile httpPostedFile = HttpContext.Current.Request.Files["UploadedImage" + i];
                         if (httpPostedFile != null)
                         {
                             string strPath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, null, true);
-                            var fileSavePath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, "1", false);
+                            string fileSavePath = GetPath(Comp.FileName, Branch.FileName, MouleCode.FileName, httpPostedFile.FileName, "1", false);
 
                             if (Directory.Exists(strPath))
                             {
@@ -1583,15 +1656,18 @@ namespace Inv.API.Controllers
         public string GetHDate(DateTime? GDate)
         {
             if (!GDate.HasValue)
+            {
                 return "";
+            }
+
             string sqlString;
             string formattedDate = "";
             DateTime lghGDate = new DateTime(); ;
             string monthStamp = "", lghYear = "";
             int counter, ldayh, lmonthh;
             sqlString = "SELECT * FROM dbo.HIJRA_CONVERT WHERE (CONVERT(DATETIME, '" + GDate.Value.ToString("dd/MM/yyyy") + "', 103)>=START_DATE)AND (CONVERT(DATETIME, '" + GDate.Value.ToString("dd/MM/yyyy") + "', 103)-START_DATE)<=360";
-            var Lst = db.Database.SqlQuery<HIJRA_CONVERT>(sqlString).ToList();
-            for (var i = 0; i < Lst.Count; i++)
+            List<HIJRA_CONVERT> Lst = db.Database.SqlQuery<HIJRA_CONVERT>(sqlString).ToList();
+            for (int i = 0; i < Lst.Count; i++)
             {
                 lghGDate = DateTime.Parse(Lst[i].START_DATE.ToString());
                 monthStamp = Lst[i].MONTHSTMAP;
@@ -1606,32 +1682,42 @@ namespace Inv.API.Controllers
             lmonthh = 1;
             do
             {
-                counter = counter + 1;
-                if (monthStamp.Substring(counter - 1, 1) == "1")
+                try
                 {
-                    if (ldayh > 30)
+
+
+                    counter = counter + 1;
+                    if (monthStamp.Substring(counter - 1, 1) == "1")
                     {
-                        ldayh = ldayh - 30;
-                        lmonthh = lmonthh + 1;
+                        if (ldayh > 30)
+                        {
+                            ldayh = ldayh - 30;
+                            lmonthh = lmonthh + 1;
+                        }
+                        else
+                        {
+                            formattedDate = string.Format(@"{0}/{1}/{2}", ldayh.ToString().PadLeft(2, '0'), lmonthh.ToString().PadLeft(2, '0'), lghYear.ToString().PadLeft(4, '0'));
+                            break;
+                        }
                     }
                     else
                     {
-                        formattedDate = string.Format(@"{0}/{1}/{2}", ldayh.ToString().PadLeft(2, '0'), lmonthh.ToString().PadLeft(2, '0'), lghYear.ToString().PadLeft(4, '0'));
-                        break;
+                        if (ldayh > 29)
+                        {
+                            ldayh = ldayh - 29;
+                            lmonthh = lmonthh + 1;
+                        }
+                        else
+                        {
+                            formattedDate = string.Format(@"{0}/{1}/{2}", ldayh.ToString().PadLeft(2, '0'), lmonthh.ToString().PadLeft(2, '0'), lghYear.ToString().PadLeft(4, '0'));
+                            break;
+                        }
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    if (ldayh > 29)
-                    {
-                        ldayh = ldayh - 29;
-                        lmonthh = lmonthh + 1;
-                    }
-                    else
-                    {
-                        formattedDate = string.Format(@"{0}/{1}/{2}", ldayh.ToString().PadLeft(2, '0'), lmonthh.ToString().PadLeft(2, '0'), lghYear.ToString().PadLeft(4, '0'));
-                        break;
-                    }
+
+                    throw;
                 }
             } while (1 == 1);
             return formattedDate;
@@ -1676,8 +1762,8 @@ namespace Inv.API.Controllers
             string query = "";
 
             query = "exec IProc_DashAccounts " + comp + " , " + bracode + " ";
-            var res = db.Database.SqlQuery<IProc_DashAccounts_Result>(query).ToList();
-              
+            List<IProc_DashAccounts_Result> res = db.Database.SqlQuery<IProc_DashAccounts_Result>(query).ToList();
+
             return Ok(new BaseResponse(res));
 
         }
@@ -1709,7 +1795,7 @@ namespace Inv.API.Controllers
                         		@CustEnd as N'CustEnd',
                         		@VndOp as N'VndOp',
                         		@VndEnd as N'VndEnd'";
-            var res = db.Database.SqlQuery<DashBalances>(query).ToList();
+            List<DashBalances> res = db.Database.SqlQuery<DashBalances>(query).ToList();
 
 
             return Ok(new BaseResponse(res));

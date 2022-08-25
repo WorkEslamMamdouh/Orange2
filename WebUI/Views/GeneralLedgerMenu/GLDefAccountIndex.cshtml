@@ -3,6 +3,13 @@
     ViewBag.Title = @SystemResource.Men_AccDefCustomer;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+<style>
+
+    .lbl {
+        font-size: 14px !important;
+    }
+
+</style>
 <!-- Side Icon Bar -->
 <div class="main-iconbar" id="Div_control">
     <button class="icon-bar d-flex justify-content-between btnadd" disabled id="btnadd">
@@ -27,7 +34,7 @@
     </button>
 </div>
 <div class="row  gy-3" id="content_report">
-    <div class="col-12 col-md-4 ">
+    <div class="col-12 col-md-5 ">
         <div class="card bg-light-blue h-100">
             <div class="card-body">
                 <div class="row">
@@ -45,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-8 ">
+    <div class="col-12 col-md-7 ">
         <div class="card bg-light-blue h-100">
             <div class="card-body">
                 <div class="row">
@@ -385,23 +392,7 @@
     </div>*@
 
 @section Script{
+    <script src="~/js/bootstrap.min.js"></script>
     <script src="~/ClientApp/GeneralLedger/GLDefAccount.js"></script>
-    <script>
-        !function ($) {
-
-
-            $(document).on("click", "#left ul.menu li.parent > a > span.sign", function () {
-
-                //$(this).find('i:first').toggleClass("glyphicon glyphicon glyphicon-minus");
-                $(this).find('i:first').toggleClass("fas fa-minus-circle");
-            });
-
-            // Open Le current menu
-
-            //$("#left ul.menu li.parent.active > a > span.sign").find('i:first').addClass("glyphicon glyphicon glyphicon-minus");
-            $("#left ul.menu li.parent.active > a > span.sign").find('i:first').addClass("fas fa-minus-circle");
-            $("#left ul.menu li.current").parents('ul.children').addClass("in");
-
-        }(window.jQuery);
-    </script>
+    
 }

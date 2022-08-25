@@ -94,10 +94,10 @@ namespace GLDefAccount {
         //    $("#txtCCDT_Type").addClass("display_none");
         //    $("#LabelCCDT_Type").addClass("display_none");
         //}
-
-
+        OnClick_Tree();
 
     }
+    
     function InitalizeControls() {
         //--- Print Buttons
 
@@ -141,6 +141,20 @@ namespace GLDefAccount {
     function InitalizeEvents() {
         //// 
 
+        for (var i = 0; i < 100; i++) {
+
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+
+                try {
+                    $("#txt_StatusFlag" + i).val('i')
+
+                } catch (e) {
+                    continue;
+
+                }
+
+            }
+        }
 
         btnDelete.onclick = btnDelete_onclick;
         btnAdd.onclick = btnAdd_onclick;
@@ -151,8 +165,9 @@ namespace GLDefAccount {
         //txt_Openbalance.onkeyup = balance_onchange;
         //txt_Cust_Type.onchange = txt_Cust_Type_onchange;
 
-
+      
     }
+   
     function Refrash_onclick() {
 
         $('#menu-group-1').html('');
@@ -302,13 +317,15 @@ namespace GLDefAccount {
             alert(Node);
         }
 
-
+        
         var span_1 = document.createElement('span');     // span زرار الفتح +
         span_1.setAttribute('id', 'span_1' + Node);
         span_1.setAttribute('data-toggle', 'collapse');
         span_1.setAttribute('data-parent', '#' + id_ul + '');
         span_1.setAttribute('href', '#sub-item-' + Node);
         span_1.setAttribute('class', 'sign collapsed');
+        span_1.setAttribute('aria-expanded', 'false');
+        span_1.setAttribute('Data_I', 'i_' + Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);

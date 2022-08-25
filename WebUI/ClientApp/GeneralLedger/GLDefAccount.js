@@ -78,6 +78,7 @@ var GLDefAccount;
         //    $("#txtCCDT_Type").addClass("display_none");
         //    $("#LabelCCDT_Type").addClass("display_none");
         //}
+        OnClick_Tree();
     }
     GLDefAccount.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -112,6 +113,16 @@ var GLDefAccount;
     }
     function InitalizeEvents() {
         //// 
+        for (var i = 0; i < 100; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                try {
+                    $("#txt_StatusFlag" + i).val('i');
+                }
+                catch (e) {
+                    continue;
+                }
+            }
+        }
         btnDelete.onclick = btnDelete_onclick;
         btnAdd.onclick = btnAdd_onclick;
         btnsave.onclick = btnsave_onClick;
@@ -250,6 +261,8 @@ var GLDefAccount;
         span_1.setAttribute('data-parent', '#' + id_ul + '');
         span_1.setAttribute('href', '#sub-item-' + Node);
         span_1.setAttribute('class', 'sign collapsed');
+        span_1.setAttribute('aria-expanded', 'false');
+        span_1.setAttribute('Data_I', 'i_' + Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);

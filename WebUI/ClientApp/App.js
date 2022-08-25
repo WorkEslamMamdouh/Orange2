@@ -1706,6 +1706,34 @@ function DateSetsSccess(TxtDateProcesses, TxtDatefrom, TxtDateend) {
         $('#' + TxtDateend + '').val(Dateend);
     }
 }
+function OnClick_Tree() {
+    $('span').on('click', function () {
+        //let ul = $(this).attr("href");
+        //alert($('' + ul + '').attr("class"))
+        var expanded = $(this).attr("aria-expanded");
+        if (expanded == 'false') {
+            $(this).attr("aria-expanded", "true");
+            $(this).attr("class", "sign");
+            var data_i = $(this).attr("data_i");
+            var ul = $(this).attr("href");
+            //alert($('' + ul + '').attr("class"))
+            $('#' + data_i + '').attr("class", "fas fa-minus-circle");
+            $('' + ul + '').attr("class", "children nav-child unstyled small ---");
+            $('' + ul + '').attr("aria-expanded", "true");
+            $('' + ul + '').attr("style", "");
+        }
+        else {
+            $(this).attr("aria-expanded", "false");
+            $(this).attr("class", "sign");
+            var data_i = $(this).attr("data_i");
+            var ul = $(this).attr("href");
+            $('#' + data_i + '').attr("class", "fas fa-plus-circle");
+            $('' + ul + '').attr("class", "children nav-child unstyled small collapse in");
+            $('' + ul + '').attr("aria-expanded", "false");
+            $('' + ul + '').attr("style", "height: 0px;");
+        }
+    });
+}
 function Resizable_Table() {
     'use strict';
     var initResizable = function (that) {

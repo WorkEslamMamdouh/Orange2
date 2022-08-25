@@ -57,6 +57,7 @@ var CostCenter;
         InitalizeEvents();
         GetAll_Account();
         Display();
+        OnClick_Tree();
     }
     CostCenter.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -168,6 +169,8 @@ var CostCenter;
         span_1.setAttribute('data-parent', '#' + id_ul + '');
         span_1.setAttribute('href', '#sub-item-' + Node);
         span_1.setAttribute('class', 'sign collapsed');
+        span_1.setAttribute('aria-expanded', 'false');
+        span_1.setAttribute('Data_I', 'i_' + Node);
         span_1.setAttribute('style', style_Plus);
         document.getElementById('a_' + Node).appendChild(span_1);
         if (style_Plus == '') {
@@ -460,11 +463,12 @@ var CostCenter;
     function ValidationHeader() {
         if (txt_CC_CODE.value == "") {
             WorningMessage("برجاء أدخل رقم الحساب!", "Please Enter Account Number!", "خطأ", "Error");
+            Errorinput(txt_CC_CODE);
             return false;
         }
         else if (txt_NAME_A.value == "") {
             WorningMessage("برجاء أدخل الاسم بالعربي!", "Please Enter Arabic Name!", "خطأ", "Error");
-            MessageBox.Show(" برجاء أدخل الاسم بالعربي", "");
+            Errorinput(txt_NAME_A);
             return false;
         }
         return true;
@@ -537,6 +541,7 @@ var CostCenter;
         DetAccLst = Details_G_COST.filter(function (x) { return x.CC_CODE == txt_CC_CODE.value; });
         if (DetAccLst.length > 0) {
             WorningMessage("لا يمكنك تكرار رقم الحساب والاسم !", "You cannot duplicate account number and name!", "تحذير", "worning");
+            Errorinput(txt_CC_CODE);
         }
         else {
             if (Number(txt_level.value) == 1) {
@@ -587,6 +592,7 @@ var CostCenter;
         }
         if (DetAccLst.length > 0) {
             WorningMessage("لا يمكنك تكرار رقم الحساب والاسم !", "You cannot duplicate account number and name!", "تحذير", "worning");
+            Errorinput(txt_CC_CODE);
         }
         else {
             if (CC_CODE == null) {

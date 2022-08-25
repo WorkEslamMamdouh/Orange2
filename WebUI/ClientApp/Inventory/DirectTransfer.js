@@ -459,12 +459,12 @@ var DirectTransfer;
         else {
             if ($("#txtItemName" + rowcount).val() == "") {
                 DisplayMassage('برجاء ادخال الصنف', 'Please enter item', MessageType.Error);
-                $("#txtItemName" + rowcount).focus();
+                Errorinput($("#txtItemName" + rowcount));
                 return false;
             }
             else if (convertQty == 0) {
                 DisplayMassage('برجاء ادخال الكمية المحولة', 'Please enter converted Quantity', MessageType.Error);
-                $("#txtConvertedQnty" + rowcount).focus();
+                Errorinput($("#txtConvertedQnty" + rowcount));
                 return false;
             }
             return true;
@@ -765,16 +765,6 @@ var DirectTransfer;
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
-            var counter = 0;
-            for (var i = 0; i <= CountGrid; i++) {
-                var flagvalue = $("#txt_StatusFlag" + i).val();
-                if (flagvalue != "d" && flagvalue != "m") {
-                    if ($("#txt_StatusFlag" + i).val() != "i")
-                        $("#txt_StatusFlag" + i).val("u");
-                    $("#txtSerial" + i).prop("value", counter + 1);
-                    counter = counter + 1;
-                }
-            }
             CountGrid++;
         }
     }
@@ -952,7 +942,7 @@ var DirectTransfer;
             (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? $('#txtUntitName' + cnt).val(TransferDetailModelFiltered[cnt].uom_DescA) : $('#txtUntitName' + cnt).val(TransferDetailModelFiltered[cnt].uom_DescE);
             $('#txtSrcQty' + cnt).val(TransferDetailModelFiltered[cnt].SrcOhnandQty);
             $('#txtToQty' + cnt).val(TransferDetailModelFiltered[cnt].RecOnhandQty);
-            $('#txt_StatusFlag' + cnt).val("u");
+            $('#txt_StatusFlag' + cnt).val("");
         }
     }
     function DeleteRow(RecNo) {
