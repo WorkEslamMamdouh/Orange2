@@ -502,6 +502,8 @@ function Save_Succ_But() {
     $('#btnPrintTransaction').removeClass('display_none');
     $("#NewAdd_Falg").val('0');
     $("#Mod_Flag").val('0');
+    document.body.scrollTop = 600;
+    document.documentElement.scrollTop = 600;
 }
 function run_waitMe() {
     $('.please_wait').waitMe({

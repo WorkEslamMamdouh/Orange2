@@ -128,6 +128,7 @@ var AccTrVendorAdjust;
                 if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
                     Open();
                     Display();
+                    $('#Div_control').removeClass("display_none");
                     Selecteditem = Details.filter(function (x) { return x.AdjustmentID == Number(ReportGrid.SelectedKey); });
                     AdjustmentID = Selecteditem[0].AdjustmentID;
                     if (Selecteditem[0].Status == 1) {
@@ -299,34 +300,8 @@ var AccTrVendorAdjust;
             $("#btnPrintTransaction").addClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
-            //$("#txt_Amount").attr("disabled", "disabled");
-            //$("#txt_Type_of_tax").attr("disabled", "disabled");
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            $("#id_ReportGrid").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-            var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-            (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
-        }
-        else {
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
-        }
-        if (SysSession.CurrentPrivileges.AddNew) {
-            $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').removeClass("display_none");
-        }
-        else {
-            $(".btnAddDetails").attr("disabled", "disabled");
-        }
-        if (SysSession.CurrentPrivileges.Remove) {
-            //;
-            $(".fa-minus-circle").removeClass("display_none");
-        }
-        else {
-            $(".fa-minus-circle").addClass("display_none");
+            $("#id_div_Add").addClass("disabledDiv");
+            $("#id_ReportGrid").addClass("disabledDiv");
         }
     }
     function btnAdd_onclick() {
@@ -568,7 +543,6 @@ var AccTrVendorAdjust;
         $('#txt_Settlement_typeNew').prop("value", Selecteditem[0].AdustmentTypeID);
         //$('#txt_ID_CustmNew').prop("value", Selecteditem[0].VendorId);
         $('#btnVnd').prop("value", Selecteditem[0].VendorId);
-        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatNo);
         //var openbalance = Number($('option:selected', txt_ID_CustmNew).attr('data-openbalance'));
         //if (txt_ID_CustmNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance); }
         if (btnVnd.value == "Null") {
@@ -580,6 +554,7 @@ var AccTrVendorAdjust;
         var trDate = DateFormat(Selecteditem[0].TrDate);
         txtDateNew.value = trDate;
         Type_ReceiptNote = false;
+        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatType);
     }
     function Display_Settlement_type() {
         Ajax.Callsync({
@@ -758,6 +733,7 @@ var AccTrVendorAdjust;
                         //filter_DataSource();
                         ReportGrid.DataSource = Details;
                         ReportGrid.Bind();
+                        $('#Div_control').addClass("display_none");
                     }
                 }
             });
@@ -863,7 +839,6 @@ var AccTrVendorAdjust;
     }
     function Insert() {
         Assign();
-        alert(DateFormat(SysSession.CurrentEnvironment.EndDate).toString());
         if (!CheckDate(DateFormat(txtDateNew.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
             //MessageBox.Show('  التاريخ ليس متطابق مع تاريخ المتاح (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '');
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
@@ -880,6 +855,7 @@ var AccTrVendorAdjust;
                     AdjustmentID = res.AdjustmentID;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Success();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -905,6 +881,9 @@ var AccTrVendorAdjust;
                     AdjustmentID = res.AdjustmentID;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Success();
+                    $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                    $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -917,6 +896,7 @@ var AccTrVendorAdjust;
         IsNew = true;
         btnback_onclick();
         Display();
+        $('#Div_control').removeClass("display_none");
         Update_claenData = 1;
         Selecteditem = Details.filter(function (x) { return x.AdjustmentID == Number(AdjustmentID); });
         txt_Movement_typeNew.value = Selecteditem[0].IsDebit;

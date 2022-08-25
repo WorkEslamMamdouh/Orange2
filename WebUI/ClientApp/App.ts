@@ -671,6 +671,10 @@ function Save_Succ_But() {
 
     $("#NewAdd_Falg").val('0');
     $("#Mod_Flag").val('0');
+
+
+    document.body.scrollTop = 600;
+    document.documentElement.scrollTop = 600;
 }
 
 

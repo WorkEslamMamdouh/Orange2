@@ -995,7 +995,7 @@ namespace SlsTrServices {
 	                </td>
                     <td>
 		                <div class="form-group">
-			                <button type="button" class="style_ButSearch" id="btnSearchService${cnt}" name="ColSearch" disabled>
+			                <button type="button" class="style_ButSearch" id="btnSearchService${cnt}" name="ColSearch"  >
                                 <i class="fa fa-search"></i>
                              </button>
 		                </div>
@@ -1921,6 +1921,8 @@ namespace SlsTrServices {
                     if (res.Status == 1) {
                         DownloadInvoicePdf(); 
                     }
+
+                    Save_Succ_But();
 
                 } else {
                     DisplayMassage("الرجاء تحديث الصفحة واعادت تكرارالمحاولة مره اخري", "Please refresh the page and try again", MessageType.Error);

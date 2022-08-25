@@ -7,7 +7,7 @@ var CashBankAccount;
     var BranchCode;
     var AccountType = 1;
     var sys = new SystemTools();
-    var SysSession = GetSystemSession();
+    var SysSession = GetSystemSession(Modules.CashBoxAccount);
     //------------------------------------------------------------
     var Details_ACCOUNT = new Array();
     //------------------------------------------------------------
@@ -30,6 +30,7 @@ var CashBankAccount;
         else {
             document.getElementById('Screen_name').innerHTML == "Bank Account Statment";
         }
+        $('#btnPrint').addClass('display_none');
         $("#iconMainPages").addClass("d-none");
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
@@ -97,15 +98,6 @@ var CashBankAccount;
         }
         ReturnedDate = yyyy + '-' + mm + '-' + dd;
         return ReturnedDate;
-    }
-    function GetSystemSession() {
-        if (document.cookie.length > 0) {
-            // 
-            var SysSession = new SystemSession;
-            SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));
-            SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage"));
-            return SysSession;
-        }
     }
     function btnReset_onclick() {
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);

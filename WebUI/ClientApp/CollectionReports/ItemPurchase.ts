@@ -42,7 +42,7 @@ namespace ItemPurchase {
         BranchCode = Number(sys.SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "مبيعات العملاء";
+            document.getElementById('Screen_name').innerHTML = "مشتريات موردين";
 
         } else {
             document.getElementById('Screen_name').innerHTML = "Customer Sales";

@@ -568,21 +568,19 @@ namespace AccTrReceiptNote {
         IsEdite = true;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave').removeClass("display_none");
+            $('#btnBack').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
             $("#txt_Amount").attr("disabled", "disabled");
             $("#txt_Receiving_Fund").attr("disabled", "disabled");
             //$("#txt_Receiving_Fund").attr("disabled", "disabled");
 
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
+            $("#id_div_Add").addClass("disabledDiv");
 
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-            $('#btnPrintTransaction').toggleClass("display_none");
+            $('#btnPrintTransaction').addClass("display_none");
 
 
             txtCashTypeNew.value != '0' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
@@ -591,35 +589,7 @@ namespace AccTrReceiptNote {
 
 
         }
-        else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
-
-            $("#btnUpdate").toggleClass("display_none");
-
-            $(".btn-group").removeClass("display_none");
-
-        }
-        if (SysSession.CurrentPrivileges.AddNew) {
-            $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
-        }
-        else {
-            $(".btnAddDetails").attr("disabled", "disabled");
-
-        }
-        if (SysSession.CurrentPrivileges.Remove) {
-            ////// 
-            $(".fa-minus-circle").removeClass("display_none");
-
-        }
-        else {
-
-            $(".fa-minus-circle").addClass("display_none");
-
-        }
-
-
+         
 
     }
 
@@ -640,10 +610,8 @@ namespace AccTrReceiptNote {
             txt_BenCode.setAttribute("disabled", "disabled");
             btnBen.setAttribute("disabled", "disabled");
 
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+          
+           $("#id_div_Add").addClass("disabledDiv");
 
             if (txt_D_CashBox.value != "Null") { $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value); $("#txt_Receiving_Fund").attr("disabled", "disabled"); }
 
@@ -651,7 +619,7 @@ namespace AccTrReceiptNote {
 
             reference_Page();
             chkActive.checked = false;
-            $('#btnPrintTransaction').toggleClass("display_none");
+            $('#btnPrintTransaction').addClass("display_none");
 
 
             $('#Bank_Div').addClass('display_none');
@@ -767,9 +735,9 @@ namespace AccTrReceiptNote {
     function AddDisabled() {
         ////// 
 
-        $('#btnAddDetails').toggleClass("display_none");
-        $('#btnSave').toggleClass("display_none");
-        $('#btnBack').toggleClass("display_none");
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
@@ -903,9 +871,9 @@ namespace AccTrReceiptNote {
         IsEdite = false;
 
         if (IsNew == true) {
-            $('#btnAddDetails').toggleClass("display_none");
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnAddDetails').addClass("display_none");
+            $('#btnSave').addClass("display_none");
+            $('#btnBack').addClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
@@ -950,10 +918,7 @@ namespace AccTrReceiptNote {
         //chkActive.disabled = true;
 
 
-        Update_claenData = 0;
-        //$('#btnSave').toggleClass("display_none");
-        //$('#btnBack').toggleClass("display_none");
-
+        Update_claenData = 0; 
         reference_Page();
 
         ////// 
@@ -1495,9 +1460,7 @@ namespace AccTrReceiptNote {
         //chkActive.disabled = true;
 
 
-        Update_claenData = 0;
-        //$('#btnSave').toggleClass("display_none");
-        //$('#btnBack').toggleClass("display_none");
+        Update_claenData = 0; 
 
         reference_Page();
 

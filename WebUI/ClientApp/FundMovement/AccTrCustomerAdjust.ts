@@ -121,22 +121,22 @@ namespace AccTrCustomerAdjust {
     var VendorDetails: Array<A_Rec_D_Customer> = new Array<A_Rec_D_Customer>();
     //var Mode: number;
 
-    export function InitalizeComponent() {  
+    export function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = " تسوية عميل";
 
         } else {
             document.getElementById('Screen_name').innerHTML = "Customer Adjustment Note";
 
-        }              
+        }
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
         InitalizeEvents();
-        reference_Page();      
+        reference_Page();
         DisplayAccDefCustomer();
-        filldType_of_tax();      
-        txt_Status.value = "2";   
+        filldType_of_tax();
+        txt_Status.value = "2";
         txtDateFrom.value = DateStartMonth();
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
@@ -153,21 +153,7 @@ namespace AccTrCustomerAdjust {
 
                 if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
                     Open();
-                    Display();
-                    //btnback_onclick();
-                    Selecteditem = Details.filter(x => x.AdjustmentID == Number(ReportGrid.SelectedKey));
-                    AdjustmentID = Selecteditem[0].AdjustmentID;
-                    if (Selecteditem[0].Status == 1) {
-                        chkActive.checked = true;
-                        btnEdit.disabled = true;
-                        chkActive.disabled = false;
-                        chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2
-                    }
-                    else {
-                        chkActive.checked = false;
-                        chkActive.disabled = true;
-                        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
-                    }
+                    
                 }
             }
             else {
@@ -189,6 +175,23 @@ namespace AccTrCustomerAdjust {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     Update_claenData = 1;
+
+                    Display();
+                    //btnback_onclick();
+                    Selecteditem = Details.filter(x => x.AdjustmentID == Number(ReportGrid.SelectedKey));
+                    AdjustmentID = Selecteditem[0].AdjustmentID;
+                    if (Selecteditem[0].Status == 1) {
+                        chkActive.checked = true;
+                        btnEdit.disabled = true;
+                        chkActive.disabled = false;
+                        chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2
+                    }
+                    else {
+                        chkActive.checked = false;
+                        chkActive.disabled = true;
+                        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
+                    }
+
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                     Update_claenData = 0;
@@ -341,52 +344,20 @@ namespace AccTrCustomerAdjust {
         IsNew = false;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave').removeClass("display_none");
+            $('#btnBack').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
-            $("#btnPrintTransaction").toggleClass("display_none");
+            $("#btnUpdate").addClass("display_none");
+            $("#btnPrintTransaction").addClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
-            //$("#txt_Amount").attr("disabled", "disabled");
-            //$("#txt_Type_of_tax").attr("disabled", "disabled");
+        
 
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            $("#id_ReportGrid").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-            var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
-
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-            (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
+            $("#id_div_Add").addClass("disabledDiv");
+            $("#id_ReportGrid").addClass("disabledDiv");
 
         }
-        else {
-
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
-
-            $("#btnUpdate").toggleClass("display_none");
-            $("#div_btnprint").css("right:8%");
-            $("#btnPrintTransaction").toggleClass("display_none");
-        }
-        if (SysSession.CurrentPrivileges.AddNew) {
-            $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
-        }
-        else {
-            $(".btnAddDetails").attr("disabled", "disabled");
-
-        }
-        if (SysSession.CurrentPrivileges.Remove) {
-            //;
-            $(".fa-minus-circle").removeClass("display_none");
-
-        }
-        else {
-
-            $(".fa-minus-circle").addClass("display_none");
-
-        }
+        
 
 
 
@@ -399,19 +370,15 @@ namespace AccTrCustomerAdjust {
 
         $("#id_div_Add").attr("disabled", "disabled").off('click');
         $("#id_ReportGrid").attr("disabled", "disabled").off('click');
-        var x1 = $("#id_div_Add").hasClass("disabledDiv");
-        var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
-
-        (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-        (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
-
+        $("#id_div_Add").addClass("disabledDiv");
+        $("#id_ReportGrid").addClass("disabledDiv");
         reference_Page();
         chkActive.checked = false;
         $('#txt_CustCode').val("");
         $('#txt_CustName').val("");
         $('#txt_Openbalance').val("");
 
-        $('#Div_control').removeClass("display_none"); 
+        $('#Div_control').removeClass("display_none");
     }
     function btnsave_onClick() {
         loading('btnSave');
@@ -419,32 +386,32 @@ namespace AccTrCustomerAdjust {
         setTimeout(function () {
 
             finishSave('btnSave');
-        if (IsNew == true) {
+            if (IsNew == true) {
 
-            Validation();
-            if (Valid == 1) {
+                Validation();
+                if (Valid == 1) {
 
+                }
+                else {
+                    Insert();
+
+                }
             }
             else {
-                Insert();
-              
-            }
-        }
-        else {
-            Validation();
-            if (Valid == 1) {
+                Validation();
+                if (Valid == 1) {
 
-            }
-            else {
+                }
+                else {
 
-                Update();
-            
+                    Update();
+
+                }
             }
-        }
         }, 100);
     }
     function btnShow_onclick() {
-   
+
 
         Display();
 
@@ -654,7 +621,7 @@ namespace AccTrCustomerAdjust {
             btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
         }
 
-        $('#Div_control').removeClass("display_none"); 
+        $('#Div_control').removeClass("display_none");
     }
     function DisplayData(Selecteditem: Array<IQ_GetBoxAdjustmentList>) {
 
@@ -665,7 +632,7 @@ namespace AccTrCustomerAdjust {
         $('#txt_Settlement_typeNew').prop("value", Selecteditem[0].AdustmentTypeID);
         //$('#txt_ID_CustmNew').prop("value", Selecteditem[0].CustomerId);
         $('#btnCust').prop("value", Selecteditem[0].CustomerId);
-        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatNo);
+        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatType);
 
         //var openbalance = Number($('option:selected', txt_ID_CustmNew).attr('data-openbalance'));
         //if (txt_ID_CustmNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance); }
@@ -870,15 +837,15 @@ namespace AccTrCustomerAdjust {
     }
     function EnableControls() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
-         
+
         $('#btnSave').removeClass("display_none");
         $('#btnBack').removeClass("display_none");
         $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
 
-        txt_Movement_typeNew.selectedIndex= 0;
-        txt_Settlement_typeNew.selectedIndex= 0;                 
-        txt_Type_of_tax.selectedIndex= 0;      
+        txt_Movement_typeNew.selectedIndex = 0;
+        txt_Settlement_typeNew.selectedIndex = 0;
+        txt_Type_of_tax.selectedIndex = 0;
 
         txt_CODE.value = "";
         txtDateNew.value = GetDate();

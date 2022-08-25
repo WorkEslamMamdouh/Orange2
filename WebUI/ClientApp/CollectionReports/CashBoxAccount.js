@@ -7,7 +7,7 @@ var CashBoxAccount;
     var BranchCode;
     var AccountType = 1;
     var sys = new SystemTools();
-    var SysSession = GetSystemSession();
+    var SysSession = GetSystemSession(Modules.CashBoxAccount);
     //------------------------------------------------------------
     var Details_Box = new Array();
     //------------------------------------------------------------
@@ -24,6 +24,7 @@ var CashBoxAccount;
     var chk_Certified;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        debugger;
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "كشف حساب صندوق ";
         }
@@ -105,16 +106,6 @@ var CashBoxAccount;
         }
         ReturnedDate = yyyy + '-' + mm + '-' + dd;
         return ReturnedDate;
-    }
-    function GetSystemSession() {
-        if (document.cookie.length > 0) {
-            // 
-            var SysSession = new SystemSession;
-            SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));
-            SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage"));
-            //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
-            return SysSession;
-        }
     }
     function btnReset_onclick() {
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);

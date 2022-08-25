@@ -160,6 +160,7 @@ namespace AccTrVendorAdjust {
                 if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
                     Open();
                     Display(); 
+                    $('#Div_control').removeClass("display_none");
                     Selecteditem = Details.filter(x => x.AdjustmentID == Number(ReportGrid.SelectedKey));
                     AdjustmentID = Selecteditem[0].AdjustmentID;
                     if (Selecteditem[0].Status == 1) {
@@ -368,46 +369,13 @@ namespace AccTrVendorAdjust {
             $("#btnPrintTransaction").addClass("display_none");
 
             $("#txt_CODE").attr("disabled", "disabled");
-            $("#txt_VoucherNo").attr("disabled", "disabled");
-            //$("#txt_Amount").attr("disabled", "disabled");
-            //$("#txt_Type_of_tax").attr("disabled", "disabled");
+            $("#txt_VoucherNo").attr("disabled", "disabled"); 
 
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            $("#id_ReportGrid").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-            var x2 = $("#id_ReportGrid").hasClass("disabledDiv");
-
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-            (x2 == true) ? $("#id_ReportGrid").removeClass("disabledDiv") : $("#id_ReportGrid").addClass("disabledDiv");
+            $("#id_div_Add").addClass("disabledDiv");
+            $("#id_ReportGrid").addClass("disabledDiv");
 
         }
-        else {
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-
-            $("#btnPrintTransaction").removeClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
-
-        }
-        if (SysSession.CurrentPrivileges.AddNew) {
-            $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').removeClass("display_none");
-        }
-        else {
-            $(".btnAddDetails").attr("disabled", "disabled");
-
-        }
-        if (SysSession.CurrentPrivileges.Remove) {
-            //;
-            $(".fa-minus-circle").removeClass("display_none");
-
-        }
-        else {
-
-            $(".fa-minus-circle").addClass("display_none");
-
-        }
-
+       
 
 
     }
@@ -712,7 +680,6 @@ namespace AccTrVendorAdjust {
         //$('#txt_ID_CustmNew').prop("value", Selecteditem[0].VendorId);
         $('#btnVnd').prop("value", Selecteditem[0].VendorId);
 
-        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatNo);
 
         //var openbalance = Number($('option:selected', txt_ID_CustmNew).attr('data-openbalance'));
         //if (txt_ID_CustmNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance); }
@@ -725,6 +692,7 @@ namespace AccTrVendorAdjust {
 
         Type_ReceiptNote = false;
 
+        $('#txt_Type_of_tax').prop("value", Selecteditem[0].VatType);
 
 
 
@@ -952,7 +920,7 @@ namespace AccTrVendorAdjust {
                         //filter_DataSource();
                         ReportGrid.DataSource = Details;
                         ReportGrid.Bind();
-
+                        $('#Div_control').addClass("display_none");
 
                     }
 
@@ -1070,8 +1038,8 @@ namespace AccTrVendorAdjust {
     }
 
     function Insert() {
-        Assign();
-        alert(DateFormat(SysSession.CurrentEnvironment.EndDate).toString())
+        Assign(); 
+
         if (!CheckDate(DateFormat(txtDateNew.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
             //MessageBox.Show('  التاريخ ليس متطابق مع تاريخ المتاح (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '');
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
@@ -1088,6 +1056,10 @@ namespace AccTrVendorAdjust {
                     AdjustmentID = res.AdjustmentID;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Success();
+
+  
+                    Save_Succ_But();
+
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -1115,8 +1087,11 @@ namespace AccTrVendorAdjust {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
 
                     Success();
-              
-             
+
+                    $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                    $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+
+                    Save_Succ_But();
 
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -1132,6 +1107,7 @@ namespace AccTrVendorAdjust {
         btnback_onclick();
 
         Display(); 
+        $('#Div_control').removeClass("display_none");
         Update_claenData = 1;
 
         Selecteditem = Details.filter(x => x.AdjustmentID == Number(AdjustmentID));

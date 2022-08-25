@@ -241,7 +241,7 @@ var AgingCust;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
-            data: { Compcode: compcode, year: sys.SysSession.CurrentEnvironment.CurrentYear, code: code, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { Compcode: compcode, BranchCode: BranchCode, code: code, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {

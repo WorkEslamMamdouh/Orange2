@@ -686,6 +686,7 @@ namespace ServiceCategories {
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     SrvCategoryID = result.Response;
                     insertsuccess();
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);

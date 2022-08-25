@@ -8,8 +8,8 @@ namespace CashBankAccount {
     var compcode: Number;
     var BranchCode: Number;
     var AccountType: Number = 1;
-    var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession();
+    var sys: SystemTools = new SystemTools(); 
+    var SysSession: SystemSession = GetSystemSession(Modules.CashBoxAccount);
     //------------------------------------------------------------
     var Details_ACCOUNT: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
 
@@ -42,6 +42,8 @@ namespace CashBankAccount {
             document.getElementById('Screen_name').innerHTML == "Bank Account Statment";
 
         }
+        $('#btnPrint').addClass('display_none');
+
         $("#iconMainPages").addClass("d-none");
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
@@ -133,16 +135,7 @@ namespace CashBankAccount {
         return ReturnedDate;
     }
 
-    function GetSystemSession(): SystemSession {
-        if (document.cookie.length > 0) {
-            // 
-            var SysSession = new SystemSession;
-            SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
-            SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage")) as UserPrivilege;
-             return SysSession;
-        }
-    }
-
+ 
 
 
     function btnReset_onclick() {

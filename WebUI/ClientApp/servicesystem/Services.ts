@@ -280,6 +280,8 @@ namespace Services {
                     succes();
                     txtCreatedAt.value = DateTimeFormat(GetDate().toString());
                     txtCreatedBy.value = SysSession.CurrentEnvironment.UserCode;
+
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -308,6 +310,8 @@ namespace Services {
                     succes();
                     txtUpdatedAt.value = DateTimeFormat(GetDate().toString());
                     txtUpdatedBy.value = SysSession.CurrentEnvironment.UserCode;
+
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);

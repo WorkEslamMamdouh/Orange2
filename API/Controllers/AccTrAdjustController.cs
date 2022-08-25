@@ -6,10 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Inv.API.Controllers;
-using System.Data.SqlClient;
 
 namespace Inv.API.Controllers
 {
@@ -20,8 +17,8 @@ namespace Inv.API.Controllers
 
         public AccTrAdjustController(G_USERSController _Control, IAccTrAdjustService _IAccTrAdjustService)
         {
-            this.AccTrAdjustService = _IAccTrAdjustService;
-            this.UserControl = _Control;
+            AccTrAdjustService = _IAccTrAdjustService;
+            UserControl = _Control;
         }
         //A_RecPay_Tr_Adjustment
         [HttpGet, AllowAnonymous]
@@ -29,7 +26,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccTrAdjustList = AccTrAdjustService.GetAll(s=>s.CompCode== CompCode).ToList();
+                List<A_RecPay_Tr_Adjustment> AccTrAdjustList = AccTrAdjustService.GetAll(s => s.CompCode == CompCode).ToList();
 
                 return Ok(new BaseResponse(AccTrAdjustList));
             }
@@ -38,7 +35,7 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAccTrAdjustList(int comp,int BranchCode, int? IsDebit, bool isCustomer,int? Status, string fromDate, string ToDate, int? AdustmentTypeID, int? custId, int? vendorId, string UserCode, string Token)
+        public IHttpActionResult GetAccTrAdjustList(int comp, int BranchCode, int? IsDebit, bool isCustomer, int? Status, string fromDate, string ToDate, int? AdustmentTypeID, int? custId, int? vendorId, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
@@ -47,33 +44,49 @@ namespace Inv.API.Controllers
                 if (vendorId == 0) { vendorId = null; }
                 if (vendorId == 0) { vendorId = null; }
                 if (IsDebit == 2) { IsDebit = null; }
-                if (Status == 2) { Status = null; } 
-                string s = "select * from IQ_GetBoxAdjustmentList where IsCustomer='"+ isCustomer + "' and CompCode=" + comp+ " and BranchCode = "+ BranchCode;
+                if (Status == 2) { Status = null; }
+                string s = "select * from IQ_GetBoxAdjustmentList where IsCustomer='" + isCustomer + "' and CompCode=" + comp + " and BranchCode = " + BranchCode;
                 string condition = "";
 
                 if (custId != null)
+                {
                     condition = condition + " and CustomerId =" + custId;
+                }
+
                 if (custId != null)
+                {
                     condition = condition + " and CustomerId =" + custId;
+                }
+
                 if (IsDebit != null)
+                {
                     condition = condition + " and IsDebit=" + IsDebit;
+                }
 
                 if (Status != null)
+                {
                     condition = condition + " and Status=" + Status;
+                }
 
                 if (AdustmentTypeID != null)
+                {
                     condition = condition + " and AdustmentTypeID =" + AdustmentTypeID;
+                }
 
                 if (fromDate != "")
+                {
                     condition = condition + " and TrDate>='" + fromDate + "'";
+                }
 
                 if (ToDate != "")
+                {
                     condition = condition + " and TrDate<='" + ToDate + "'";
+                }
 
                 try
                 {
                     string query = s + condition;
-                    var AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxAdjustmentList>(query).ToList();
+                    List<IQ_GetBoxAdjustmentList> AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxAdjustmentList>(query).ToList();
                     return Ok(new BaseResponse(AccTrReceipList));
                 }
                 catch (Exception e)
@@ -91,7 +104,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccTrReceip = AccTrAdjustService.GetById(id);
+                A_RecPay_Tr_Adjustment AccTrReceip = AccTrAdjustService.GetById(id);
 
                 return Ok(new BaseResponse(AccTrReceip));
             }
@@ -103,7 +116,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Entity.Token, Entity.UserCode))
             {
-                using (var dbTransaction = db.Database.BeginTransaction())
+                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
@@ -112,18 +125,22 @@ namespace Inv.API.Controllers
                         string st = SystemToolsController.GenerateGuid();
                         Entity.DocUUID = st;
 
-                        var tm = DateTime.Now.ToString("HH:mm:ss");
+                        string tm = DateTime.Now.ToString("HH:mm:ss");
                         Entity.TrTime = TimeSpan.Parse(tm); ;
 
-                        var Entity2 = AccTrAdjustService.Insert(Entity);
+                        A_RecPay_Tr_Adjustment Entity2 = AccTrAdjustService.Insert(Entity);
 
                         // call process trans 
-                        
+
                         string Typ;
                         if (Entity2.IsCustomer == true)
+                        {
                             Typ = "AdjCust";
+                        }
                         else
+                        {
                             Typ = "AdjVendor";
+                        }
 
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(Entity.CompCode), Convert.ToInt32(Entity.BranchCode), Convert.ToInt32(Entity2.AdjustmentID), Typ, "Add", db);
                         if (res.ResponseState == true)
@@ -173,18 +190,22 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
             {
-                using (var dbTransaction = db.Database.BeginTransaction())
+                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        var res = AccTrAdjustService.Update(AccTrReceipt);
+                        A_RecPay_Tr_Adjustment res = AccTrAdjustService.Update(AccTrReceipt);
                         // call process trans 
-                        var br = 1;
+                        int br = 1;
                         string Typ;
                         if (res.IsCustomer == true)
+                        {
                             Typ = "AdjCust";
+                        }
                         else
+                        {
                             Typ = "AdjVendor";
+                        }
                         //ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccTrReceipt.CompCode), br, Convert.ToInt32(AccTrReceipt.AdjustmentID),Typ, "Update", db);
                         ResponseResult result = Shared.TransactionProcess(int.Parse(res.CompCode.ToString()), int.Parse(res.BranchCode.ToString()), res.AdjustmentID, Typ, "Update", db);
                         if (result.ResponseState == true)
@@ -198,7 +219,7 @@ namespace Inv.API.Controllers
                             dbTransaction.Rollback();
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
-                      
+
                     }
                     catch (Exception ex)
                     {
@@ -212,48 +233,51 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Open([FromBody]A_RecPay_Tr_Adjustment AccTrReceipt)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
+
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
-                using (var dbTransaction = db.Database.BeginTransaction())
+                try
                 {
-                    try
+                    A_RecPay_Tr_Adjustment Entity2 = AccTrAdjustService.Update(AccTrReceipt);
+                    // call process trans 
+                    int br = 1;
+                    string Typ;
+                    if (Entity2.IsCustomer == true)
                     {
-                        var Entity2 = AccTrAdjustService.Update(AccTrReceipt);
-                        // call process trans 
-                        var br = 1;
-                        string Typ;
-                        if (Entity2.IsCustomer == true)
-                            Typ = "AdjCust";                        
-                        else
-                            Typ = "AdjVendor";
-                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccTrReceipt.CompCode), br, Convert.ToInt32(AccTrReceipt.AdjustmentID), Typ, "Open", db);
-                        if (res.ResponseState == true)
-                        {
-                            AccTrReceipt.TrNo = res.ResponseData.ToString();
-                            dbTransaction.Commit();
-                            return Ok(new BaseResponse(AccTrReceipt.TrNo));
-                        }
-                        else
-                        {
-                            dbTransaction.Rollback();
-                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
-                        }
+                        Typ = "AdjCust";
                     }
-                    catch (Exception ex)
+                    else
+                    {
+                        Typ = "AdjVendor";
+                    }
+
+                    ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccTrReceipt.CompCode), br, Convert.ToInt32(AccTrReceipt.AdjustmentID), Typ, "Open", db);
+                    if (res.ResponseState == true)
+                    {
+                        AccTrReceipt.TrNo = res.ResponseData.ToString();
+                        dbTransaction.Commit();
+                        return Ok(new BaseResponse(AccTrReceipt.TrNo));
+                    }
+                    else
                     {
                         dbTransaction.Rollback();
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
                 }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                }
             }
-            return BadRequest(ModelState);
+
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult TrNoFounBefore(string TrNo,bool isCustomer, int compCode, string UserCode, string Token)
+        public IHttpActionResult TrNoFounBefore(string TrNo, bool isCustomer, int compCode, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefVendor = AccTrAdjustService.GetAll(x => x.CompCode == compCode && x.TrNo == TrNo&&x.IsCustomer==isCustomer);
+                List<A_RecPay_Tr_Adjustment> AccDefVendor = AccTrAdjustService.GetAll(x => x.CompCode == compCode && x.TrNo == TrNo && x.IsCustomer == isCustomer);
 
                 return Ok(new BaseResponse(AccDefVendor));
             }

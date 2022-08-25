@@ -9,7 +9,8 @@ namespace CashBoxAccount {
     var BranchCode: Number;
     var AccountType: Number = 1;
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession();
+
+    var SysSession: SystemSession = GetSystemSession(Modules.CashBoxAccount);
     //------------------------------------------------------------
     var Details_Box: Array<A_RecPay_D_CashBox> = new Array<A_RecPay_D_CashBox>();
 
@@ -35,6 +36,7 @@ namespace CashBoxAccount {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
+        debugger
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "كشف حساب صندوق ";
 
@@ -142,19 +144,7 @@ namespace CashBoxAccount {
         ReturnedDate = yyyy + '-' + mm + '-' + dd;
         return ReturnedDate;
     }
-
-    function GetSystemSession(): SystemSession {
-        if (document.cookie.length > 0) {
-            // 
-            var SysSession = new SystemSession;
-            SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
-            SysSession.CurrentPrivileges = JSON.parse(readCookie("Inv1_Privilage")) as UserPrivilege;
-            //RS.CurrentMemberComm = JSON.parse(getCookie("Inv1_Comm")) as Kids_Comm;
-            return SysSession;
-        }
-    }
-
-
+ 
 
     function btnReset_onclick() {
 

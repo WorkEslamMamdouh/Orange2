@@ -294,8 +294,8 @@ namespace AgingCust {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
-            data: { Compcode: compcode, year: sys.SysSession.CurrentEnvironment.CurrentYear, code: code, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            success: (d) => {
+            data: { Compcode: compcode, BranchCode: BranchCode, code: code, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {//int Compcode,int BranchCode, bool code, string CustomerId, string UserCode, string Token
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     AccountDetails = result.Response as Array<IQ_GetCustomer>;

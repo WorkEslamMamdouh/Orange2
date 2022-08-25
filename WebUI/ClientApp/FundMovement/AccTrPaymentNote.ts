@@ -570,10 +570,10 @@ namespace AccTrPaymentNote {
         IsEdite = true;
         removedisabled();
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnSave').removeClass("display_none");
+            $('#btnBack').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate").toggleClass("display_none");
+            $("#btnUpdate").addClass("display_none");
             $("#txt_CODE").attr("disabled", "disabled");
             $("#txt_VoucherNo").attr("disabled", "disabled");
             $("#txt_Receiving_Fund").attr("disabled", "disabled");
@@ -583,7 +583,7 @@ namespace AccTrPaymentNote {
             var x1 = $("#id_div_Add").hasClass("disabledDiv");
 
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-            $('#btnPrintTransaction').toggleClass("display_none");
+            $('#btnPrintTransaction').addClass("display_none");
 
             if (txtCashTypeNew.value == 'null' || txtCashTypeNew.value == '0') {
 
@@ -595,32 +595,7 @@ namespace AccTrPaymentNote {
             $("#txtDateNew").removeAttr("disabled");
 
         }
-        else {
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
-
-            $("#btnUpdate").toggleClass("display_none");
-
-        }
-        if (SysSession.CurrentPrivileges.AddNew) {
-            $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
-        }
-        else {
-            $(".btnAddDetails").attr("disabled", "disabled");
-
-        }
-        if (SysSession.CurrentPrivileges.Remove) {
-            ////debugger;
-            $(".fa-minus-circle").removeClass("display_none");
-
-        }
-        else {
-
-            $(".fa-minus-circle").addClass("display_none");
-
-        }
-
+          
 
 
     }
@@ -642,16 +617,13 @@ namespace AccTrPaymentNote {
             txt_BenCode.setAttribute("disabled", "disabled");
             btnBen.setAttribute("disabled", "disabled");
 
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+            $("#id_div_Add").addClass("disabledDiv");
 
             if (txt_D_CashBox.value != "Null") { $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value); $("#txt_Receiving_Fund").attr("disabled", "disabled"); }
 
             reference_Page();
             chkActive.checked = false;
-            $('#btnPrintTransaction').toggleClass("display_none");
+            $('#btnPrintTransaction').addClass("display_none");
 
 
             $('#Bank_Div').addClass('display_none');
@@ -874,9 +846,9 @@ namespace AccTrPaymentNote {
     function AddDisabled() {
         ////// 
 
-        $('#btnAddDetails').toggleClass("display_none");
-        $('#btnSave').toggleClass("display_none");
-        $('#btnBack').toggleClass("display_none");
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
@@ -900,9 +872,9 @@ namespace AccTrPaymentNote {
         IsEdite = false;
 
         if (IsNew == true) {
-            $('#btnAddDetails').toggleClass("display_none");
-            $('#btnSave').toggleClass("display_none");
-            $('#btnBack').toggleClass("display_none");
+            $('#btnAddDetails').addClass("display_none");
+            $('#btnSave').addClass("display_none");
+            $('#btnBack').addClass("display_none");
 
             $("#btnPrintTransaction").removeClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
