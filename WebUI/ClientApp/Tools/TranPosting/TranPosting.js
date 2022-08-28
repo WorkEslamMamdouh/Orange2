@@ -61,7 +61,9 @@ var TranPosting;
     var lang;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
-        $('#dir_11').addClass('hidden_Control');
+        $("#iconbar_Definition").addClass("d-none");
+        $("#divIconbar").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
         InitalizeControls();
         //System
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "ترحيل الحسابات" : document.getElementById('Screen_name').innerHTML = "Receipt Voucher";
@@ -79,14 +81,11 @@ var TranPosting;
         // InitializePagesGrid();
         InitializeTransactionsGrid();
         InitializeVoucherDetailGrid();
-        $("#divIconbar").addClass("d-none");
-        $("#icon-bar").addClass("d-none");
         $("#btndiv_3").addClass("Actiev");
         $("#btndiv_1").removeClass("Actiev");
         $("#btndiv_2").removeClass("Actiev");
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
-        $("#div_2").addClass("display_none");
         $("#div_2").addClass("display_none");
     }
     TranPosting.InitalizeComponent = InitalizeComponent;
@@ -195,6 +194,7 @@ var TranPosting;
                         $("#div_3").addClass("display_none");
                         $("#div_1").removeClass("display_none");
                         $("#div_2").addClass("display_none");
+                        $('#btnShowVouchers').removeAttr('disabled');
                     }
                 }
             });
@@ -215,7 +215,7 @@ var TranPosting;
         cerditTot = 0;
         diffTot = 0;
         debugger;
-        LnkTransDetails = new Array();
+        var LnkTransDetails = new Array();
         LnkTransDetails = TransactionsGrid.DataSource;
         selectedLnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsSelected == true; });
         if (selectedLnkTransDetails.length != 0) {
@@ -258,6 +258,14 @@ var TranPosting;
             });
         }
         else {
+            selectedLnkTransDetails = new Array();
+            GetLnkVoucherDetail = new Array();
+            VoucherDetailGrid.DataSource = GetLnkVoucherDetail;
+            VoucherDetailGrid.Bind();
+            txtDesc.value = "";
+            txtDebit.value = "0";
+            txtCedit.value = "0";
+            txtDiff.value = "0";
             DisplayMassage("لا يوجد قيود لعرضها ", "There are no restrictions to display", MessageType.Error);
             return;
         }
@@ -451,7 +459,6 @@ var TranPosting;
                     txt.style.width = "25px";
                     txt.onclick = function (e) {
                         if (txt.checked == true) {
-                            debugger;
                             item.IsSelected = true;
                         }
                         else {
@@ -470,20 +477,16 @@ var TranPosting;
             { title: res.App_Notes, name: "GenRemarks", type: "text", width: "15%" },
         ];
     }
-    //function updateselect(Rowid: string, isselect: number) {
-    //    debugger
-    //    let branchcode = Number(ddlBranch.value);
-    //    Ajax.Callsync({
-    //        type: "Get",
-    //        url: sys.apiUrl("TranPosting", "Updateselect"),
-    //        data: {
-    //            Comp: compcode, branchCode: branchcode, ROW_ID: Rowid, Isselect: isselect, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-    //        },
-    //        success: (d) => {
-    //            let result = d as BaseResponse;
-    //        }
-    //    });
-    //}
+    // function updateselect() {		   
+    //     Ajax.Callsync({
+    //         type: "Get",
+    //url: sys.apiUrl("TranPosting", "Updateselect"),
+    //data: JSON.stringify(LnkTransDetails),
+    //         success: (d) => {
+    //             let result = d as BaseResponse;
+    //         }
+    //     });
+    // }
     function InitializeVoucherDetailGrid() {
         var res = GetResourceList("");
         VoucherDetailGrid.ElementName = "VoucherDetailGrid";

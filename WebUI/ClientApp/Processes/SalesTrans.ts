@@ -219,6 +219,9 @@ namespace SalesTrans {
         if (ddlOPerationMaster.value != "null") {
             if (GlobalOPerationStatus == false) {
                 DisplayMassage("لا يمكن الاضاقة علي عملية مغلقه", "you Cannot Add on Closed Operations", MessageType.Error);
+                Errorinput(ddlOPerationMaster)
+
+                Back();
             } else {
                 CountGrid = 0;
                 Clear();
@@ -239,6 +242,7 @@ namespace SalesTrans {
                 chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
             }
         } else {
+            Back();
             DisplayMassage('يجب اختيار العملية', 'Please choose the operation', MessageType.Error);
             Errorinput(ddlOPerationMaster);
             $("#divTransferDetails").addClass("display_none");
@@ -908,6 +912,7 @@ namespace SalesTrans {
             var Salsman = 0;
             if (ddlSourceSalesmanAdd.value == "null") {
                 DisplayMassage('( يجب اختيار المندوب المحول منه )', 'you must choose transfered from salesman', MessageType.Error);
+                Errorinput(ddlSourceSalesmanAdd)
                 return;
             }
             else
@@ -965,6 +970,8 @@ namespace SalesTrans {
             if (selectedItem[0].OnhandQty < ConvertedQntyVal) {
                 DisplayMassage("لا يمكن تحويل كمية اكبر من الكمية المتاحه ", 'It is not possible to transfer an amount greater than the available quantity', MessageType.Error);
                 $('#txtRecQty' + cnt).val(selectedItem[0].OnhandQty);
+                Errorinput($('#txtRecQty' + cnt))
+
             }
         });
 
@@ -1158,7 +1165,7 @@ namespace SalesTrans {
                     DisplayMassage("تم اصدار  تحويل رقم " + res.Tr_No, 'Transfer number ' + res.Tr_No + 'has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.OperationTFID;
-                    Save();
+                    Save(GlobalTransferID);
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
                     Save_Succ_But();
@@ -1192,7 +1199,7 @@ namespace SalesTrans {
                     let res = result.Response as I_TR_OperationTF;
                     GlobalTransferID = res.OperationTFID
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Editied successfully' + res.Tr_No, MessageType.Succeed);
-                    Save();
+                    Save(GlobalTransferID);
                     InitializeGrid();
                     AfterInsertOrUpdateFlag = true;
                     GridRowDoubleClick();
@@ -1244,13 +1251,77 @@ namespace SalesTrans {
         });
 
     }
-    function Save() {
+    function Save(OperationTFID: number) {
         InitializeGrid();
         $("#div_hedr").removeClass("disabledDiv");
         $("#divShow").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
         ShowButons();
-        DisableControls();
+
+        showFlag = true;
+        Clear();
+        $("#divTransferDetails").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#div_Approve").removeClass("display_none");
+
+        SelectedModel = IQ_SalesOperTransferWithDetail.IQ_GetOperationTF.filter(x => x.OperationTFID == OperationTFID);
+ 
+        if (SelectedModel.length > 0) {
+            GlobalOPerationID = Number(SelectedModel[0].OperationID);
+            GlobalTransferID = Number(SelectedModel[0].OperationTFID);
+            txtTrNo.value = SelectedModel[0].Tr_No.toString();
+            txtTransferDate.value = SelectedModel[0].TrDate;
+            txtApprovedBy.value = SelectedModel[0].VerfiedBy;
+            txtRemarks.value = SelectedModel[0].Remark;
+
+            if (SelectedModel[0].RefNO != null)
+                txtRefNumber.value = SelectedModel[0].RefNO;
+
+            fillddlSourceSalesmanAdd(GlobalOPerationID);
+            fillddlToSalesmanAdd();
+            GetAllOPerationItem(GlobalOPerationID);
+            if (SelectedModel[0].FromSalesmanID != null)
+                ddlSourceSalesmanAdd.value = SelectedModel[0].FromSalesmanID.toString();
+
+            if (SelectedModel[0].ToSalesmanID != null)
+                ddlToSalesmanAdd.value = SelectedModel[0].ToSalesmanID.toString();
+
+            // creation
+            txtCreatedBy.value = SelectedModel[0].CreatedBy;
+            txtCreatedAt.value = SelectedModel[0].CreatedAt;
+
+            // Edit
+            if (SelectedModel[0].UpdatedBy != null) {
+                txtUpdatedBy.value = SelectedModel[0].UpdatedBy;
+                txtUpdatedAt.value = SelectedModel[0].UpdatedAt;
+            }
+
+            // Details
+            DetailModelFiltered = new Array<IQ_GetOperationTFDetail>();
+
+            DetailModelFiltered = IQ_SalesOperTransferWithDetail.IQ_GetOperationTFDetail.filter(s => s.OperationTFID == GlobalTransferID);
+
+            for (let i = 0; i < DetailModelFiltered.length; i++) {
+
+                BuildControls(i);
+            }
+
+            CountGrid = DetailModelFiltered.length;
+            DisableControls();
+
+            if (SelectedModel[0].IsSent == true) {
+                chkApproved.checked = true;
+                btnUpdate.disabled = true;
+                chkApproved.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
+            } else {
+                chkApproved.checked = false;
+                chkApproved.disabled = true;
+                btnUpdate.disabled = false;
+            }
+
+        }
+
     }
 
     //----------------------------------------------------------PRint region---------------------------------------

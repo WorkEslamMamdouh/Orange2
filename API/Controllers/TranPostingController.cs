@@ -71,7 +71,7 @@ namespace Inv.API.Controllers
                 if (i == 0)
                 {
                     ID = "" + item.ROW_ID + "";
-                    Code = "'" + item.ROW_ID + "'";
+                    Code = "'" + item.TR_CODE + "'";
                 }
                 else
                 {

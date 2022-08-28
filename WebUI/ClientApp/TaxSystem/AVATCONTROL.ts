@@ -48,6 +48,7 @@ namespace AVATCONTROL {
             document.getElementById('Screen_name').innerHTML = "Vat Control Setting";
             Period = [{ id: 1, value: 'Every Month' }, { id: 2, value: 'Every 3 Month' }];
         }
+        $("#icon-bar").addClass("d-none");
         $("#divIconbar").addClass("d-none");
         $("#btnPrintTransaction").addClass("d-none");
 

@@ -74,12 +74,12 @@ namespace GenDefVendorAdjust {
 
         }
         if (SysSession.CurrentPrivileges.Remove) {
-            $(".minus_btn").removeClass("display_none");
+            $(".btn-minus").removeClass("display_none");
 
         }
         else {
 
-            $(".minus_btn").addClass("display_none");
+            $(".btn-minus").addClass("display_none");
 
         }
 
@@ -150,7 +150,7 @@ namespace GenDefVendorAdjust {
         html = `<tr id= "No_Row${cnt}"> 
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus display_none" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -244,18 +244,7 @@ namespace GenDefVendorAdjust {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
-        if (SysSession.CurrentPrivileges.Remove) {
-            //$("#btn_minus" + cnt).removeClass("display_none");
-            //$("#btn_minus" + cnt).removeAttr("disabled");
-
-            $("#btn_minus" + cnt).addClass("display_none");
-            $("#btn_minus" + cnt).attr("disabled", "disabled");
-        }
-        else {
-            $("#btn_minus" + cnt).addClass("display_none");
-            $("#btn_minus" + cnt).attr("disabled", "disabled");
-        }
-
+      
 
 
 

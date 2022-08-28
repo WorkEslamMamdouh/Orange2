@@ -43,7 +43,7 @@ var AccDefVendor;
     var Is_Vendor;
     var txt_CustCode;
     var txt_CustName;
-    //var btnsearchACC: HTMLButtonElement;
+    var btnsearchACC;
     var txt_ACCCode;
     var txt_ACCName;
     var txt_CustomerCODE;
@@ -126,9 +126,9 @@ var AccDefVendor;
         ////debugger;
         //--- Print Buttons
         //--- Print Buttons
-        // btnsearchACC = document.getElementById("btnsearchACC") as HTMLButtonElement;
-        // txt_ACCCode = document.getElementById("txt_ACCCode") as HTMLInputElement;
-        // txt_ACCName = document.getElementById("txt_ACCName") as HTMLInputElement;
+        btnsearchACC = document.getElementById("btnsearchACC");
+        txt_ACCCode = document.getElementById("txt_ACCCode");
+        txt_ACCName = document.getElementById("txt_ACCName");
         //  btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
@@ -195,16 +195,16 @@ var AccDefVendor;
         //txt_CustCode.onchange = txt_CustCode_onchange;
         //txt_CustomerCODE.onkeyup = txt_CustomerCODE_keyup;
         txtOperationser.onkeyup = txtOperationser_keyup;
-        //  txt_ACCCode.onchange = txt_ACCCode_onchange;
-        // btnsearchACC.onclick = btnsearchACC_onclick;
+        txt_ACCCode.onchange = txt_ACCCode_onchange;
+        btnsearchACC.onclick = btnsearchACC_onclick;
     }
-    //function btnsearchACC_onclick() {
-    //    debugger
-    //    sys.FindKey(Modules.AccDefCustomer, "btncustSearch", "COMP_CODE= " + compcode + " and DETAIL = 1", () => {
-    //        var id = SearchGrid.SearchDataGrid.SelectedKey;
-    //        getAccountvenById(id);
-    //    });
-    //}
+    function btnsearchACC_onclick() {
+        debugger;
+        sys.FindKey(Modules.AccDefCustomer, "btncustSearch", "COMP_CODE= " + compcode + " and DETAIL = 1", function () {
+            var id = SearchGrid.SearchDataGrid.SelectedKey;
+            getAccountvenById(id);
+        });
+    }
     function getAccountvenById(custId) {
         debugger;
         Ajax.Callsync({
@@ -217,31 +217,31 @@ var AccDefVendor;
                 if (result.IsSuccess) {
                     var AccountDeta = result.Response;
                     if (AccountDeta.length == 0) {
-                        // txt_ACCCode.value = "";
+                        txt_ACCCode.value = "";
                         txt_ACCName.value = "";
-                        // Errorinput(txt_ACCCode);
+                        Errorinput(txt_ACCCode);
                         DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
                     }
                     else {
-                        //$('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
+                        $('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
                         $('#txt_ACCName').val(AccountDeta[0].ACC_DESCA);
                     }
                 }
             }
         });
     }
-    //function txt_ACCCode_onchange() {
-    //    txt_ACCName.value = "";
-    //    getAccountvenById(txt_ACCCode.value);
-    //}
+    function txt_ACCCode_onchange() {
+        txt_ACCName.value = "";
+        getAccountvenById(txt_ACCCode.value);
+    }
     //---------------------------------------------------------- Events region---------------------------------------------------------------
-    //function txt_CustomerCODE_keyup() {
-    //    var codeLength = txt_CustomerCODE.value.length;
-    //    if (codeLength > 3) {
-    //        txt_CustomerCODE.value = "";
-    //        DisplayMassage("يجب الا يزيد الكود عن 3 ارقام", "code must not be more than 3 numbers", MessageType.Error);
-    //    }
-    //}
+    function txt_CustomerCODE_keyup() {
+        var codeLength = txt_CustomerCODE.value.length;
+        if (codeLength > 3) {
+            txt_CustomerCODE.value = "";
+            DisplayMassage("يجب الا يزيد الكود عن 3 ارقام", "code must not be more than 3 numbers", MessageType.Error);
+        }
+    }
     function txtOperationser_keyup() {
         var codeLength = txtOperationser.value.length;
         if (codeLength > 10) {
@@ -251,7 +251,7 @@ var AccDefVendor;
     }
     function btnCust_OnClick() {
         debugger;
-        sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + " and DETAIL = 1", function () {
+        sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + " ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountById(id);
         });
@@ -281,8 +281,8 @@ var AccDefVendor;
                 $('#divAccount').removeClass('display_none');
             }
             else {
-                $('#txt_CustCode').val('');
-                $('#txt_CustName').val('');
+                $('#txt_ACCCode').val('');
+                $('#txt_ACCName').val('');
                 $('#divAccount').addClass('display_none');
             }
         }
@@ -295,8 +295,8 @@ var AccDefVendor;
             txt_balance.value = "0";
             Debit = 0;
             Credit = 0;
-            $('#txt_CustCode').val('');
-            $('#txt_CustName').val('');
+            $('#txt_ACCCode').val('');
+            $('#txt_ACCName').val('');
             $('#divAccount').addClass('display_none');
         }
     }
@@ -310,8 +310,8 @@ var AccDefVendor;
     //---------------------------------------------------------- enable && disable &&validation && Search  region---------------------------------------------------------------
     function txt_disabled() {
         //debugger;
-        //   $("#txt_ACCCode").attr("disabled", "disabled");
-        //  $("#btnsearchACC").attr("disabled", "disabled");
+        $("#txt_ACCCode").attr("disabled", "disabled");
+        $("#btnsearchACC").attr("disabled", "disabled");
         $("#txt_CustomerCODE").attr("disabled", "disabled");
         $("#txt_Cust_Type").attr("disabled", "disabled");
         $("#id_chkcustom6").attr("disabled", "disabled");
@@ -352,8 +352,8 @@ var AccDefVendor;
     }
     function removedisabled() {
         //debugger;
-        //   $("#txt_ACCCode").removeAttr("disabled");
-        //   $("#btnsearchACC").removeAttr("disabled");
+        $("#txt_ACCCode").removeAttr("disabled");
+        $("#btnsearchACC").removeAttr("disabled");
         $("#txt_CustomerCODE").removeAttr("disabled");
         $("#txt_Cust_Type").removeAttr("disabled");
         $("#id_chkcustom6").removeAttr("disabled");
@@ -427,10 +427,10 @@ var AccDefVendor;
             return false;
         }
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+            //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '' ) {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
-            Errorinput($('#txt_CustCode'));
+            Errorinput($('#txt_ACCCode'));
             return false;
         }
         if (txtResMobile.value.trim() == "") {
@@ -569,25 +569,30 @@ var AccDefVendor;
             return true;
         }
         else {
-            if ($("#ddlVendIDTypeCode" + rowcount).val() == "null") {
-                DisplayMassage(" برجاءادخال نوع الهوية", "Please enter the ID Type", MessageType.Error);
-                Errorinput($("#ddlVendIDTypeCode" + rowcount));
-                return false;
+            try {
+                if ($("#ddlVendIDTypeCode" + rowcount).val() == "null") {
+                    DisplayMassage(" برجاءادخال نوع الهوية", "Please enter the ID Type", MessageType.Error);
+                    Errorinput($("#ddlVendIDTypeCode" + rowcount));
+                    return false;
+                }
+                else if (IDNo == 0) {
+                    DisplayMassage(" برجاءادخال  رقم الهوية", "Please enter the ID Number", MessageType.Error);
+                    Errorinput($("#txtIDNo" + rowcount));
+                    return false;
+                }
+                else if ($("#txtIDIssuePlace" + rowcount).val().trim() == "") {
+                    DisplayMassage(" برجاءمكان الاصدار", "Please enter the Issue Place", MessageType.Error);
+                    Errorinput($("#txtIDIssuePlace" + rowcount));
+                    return false;
+                }
+                else if (DateFormat($("#txtIDIssueDate" + rowcount).val()) > DateFormat($("#txtIDExpireDate" + rowcount).val())) {
+                    DisplayMassage(" يجب ان يكون تاريخ الانتهاء بعد تاريخ الاصدار", "Please enter the Issue Place", MessageType.Error);
+                    Errorinput($("#txtIDExpireDate" + rowcount));
+                    return false;
+                }
             }
-            else if (IDNo == 0) {
-                DisplayMassage(" برجاءادخال  رقم الهوية", "Please enter the ID Number", MessageType.Error);
-                Errorinput($("#txtIDNo" + rowcount));
-                return false;
-            }
-            else if ($("#txtIDIssuePlace" + rowcount).val().trim() == "") {
-                DisplayMassage(" برجاءمكان الاصدار", "Please enter the Issue Place", MessageType.Error);
-                Errorinput($("#txtIDIssuePlace" + rowcount));
-                return false;
-            }
-            else if (DateFormat($("#txtIDIssueDate" + rowcount).val()) > DateFormat($("#txtIDExpireDate" + rowcount).val())) {
-                DisplayMassage(" يجب ان يكون تاريخ الانتهاء بعد تاريخ الاصدار", "Please enter the Issue Place", MessageType.Error);
-                Errorinput($("#txtIDExpireDate" + rowcount));
-                return false;
+            catch (e) {
+                return true;
             }
             return true;
         }
@@ -693,14 +698,8 @@ var AccDefVendor;
             $("#txt_Debit").attr("disabled", "disabled");
             $("#txt_DebitFC").attr("disabled", "disabled");
             $("#txt_balance").attr("disabled", "disabled");
-            $("#id_div_Add").attr("disabled", "disabled").off('click');
-            var x1 = $("#id_div_Add").hasClass("disabledDiv");
-            (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
-        }
-        else {
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
+            $("#id_div_Add").addClass("disabledDiv");
+            $("#id_ReportGrid").addClass("disabledDiv");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
@@ -733,18 +732,17 @@ var AccDefVendor;
         $("#txt_Debit").attr("disabled", "disabled");
         $("#txt_DebitFC").attr("disabled", "disabled");
         $("#txt_balance").attr("disabled", "disabled");
-        $("#id_div_Add").attr("disabled", "disabled").off('click');
-        var x1 = $("#id_div_Add").hasClass("disabledDiv");
-        (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+        $("#id_div_Add").addClass("disabledDiv");
+        $("#id_ReportGrid").addClass("disabledDiv");
         reference_Page();
         CountGrid = 0;
-        AddNewRow();
+        //AddNewRow();
         SysSession.CurrentEnvironment.I_Control[0].NationalityID != null ? $("#ddlNationality").val(SysSession.CurrentEnvironment.I_Control[0].NationalityID) : $("#ddlNationality").val("null");
         SysSession.CurrentEnvironment.I_Control[0].Currencyid != null ? $("#ddlCurrency").val(SysSession.CurrentEnvironment.I_Control[0].Currencyid) : $("#ddlCurrency").val("null");
         $('#btnAddDetails').removeClass("display_none");
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+            //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_CustCode'));
             return false;
@@ -797,8 +795,8 @@ var AccDefVendor;
             $("#drp_G_Store").removeAttr("disabled");
             txt_disabled();
             $("#Div_control").addClass("display_none");
-            $("#id_div_Add").attr("disabled", "");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
         }
         else {
             $('#btnAddDetails').addClass("display_none");
@@ -816,8 +814,8 @@ var AccDefVendor;
                 back_Details();
             }
             Update_claenData = 0;
-            $("#id_div_Add").attr("disabled", "");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
         }
     }
     function back_Details() {
@@ -998,7 +996,7 @@ var AccDefVendor;
                 getAccountvenById(Selecteditem[0].BankAccountNo);
             }
             else {
-                // $('#txt_ACCCode').val('');
+                $('#txt_ACCCode').val('');
                 $('#txt_ACCName').val('');
             }
             $('#divAccount').removeClass('display_none');

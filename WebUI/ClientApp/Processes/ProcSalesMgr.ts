@@ -1107,28 +1107,7 @@ namespace ProcSalesMgr {
         GlobalInvoiceCounter = 0;
 
     }
-    function Back() {
-
-
-        $('#icon-bar').addClass('display_none');
-
-
-        $('#divIconbar').removeClass('display_none');
-
-
-        $('#btnPrintTransaction').removeClass('display_none');
-        $('#btnUpdate').removeClass('display_none');
-
-        $('#btnBack').addClass('display_none');
-        $('#btnSave').addClass('display_none');
-
-        $('#btnPrintslip').removeClass('display_none');
-        $('#btnPrintTransaction').removeClass('display_none');
-
-        $("#NewAdd_Falg").val('0');
-        $("#Mod_Flag").val('0');
-
-    }
+   
     function btnBack_onclick() {
         clear();
         DisableControls();

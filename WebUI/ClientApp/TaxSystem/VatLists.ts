@@ -33,8 +33,7 @@ namespace VatLists {
     //print buttons
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
-    var btnPrintTrEXEL: HTMLButtonElement;
-    var btnPrintReceive: HTMLButtonElement;
+    var btnPrintTrEXEL: HTMLButtonElement; 
     var btnPrint: HTMLButtonElement;
 
 
@@ -47,6 +46,7 @@ namespace VatLists {
             document.getElementById('Screen_name').innerHTML = "Vat Lists";
 
         }
+        $("#iconReportPages").removeClass("d-none");
         $("#icon-bar").addClass("display_none");
         $("#btnShow").addClass("display_none");
         $("#btnAdd").addClass("display_none");
@@ -61,8 +61,7 @@ namespace VatLists {
         txtStartDate.value = SysSession.CurrentEnvironment.StartDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         //*****Privilage
-        btnPrint.disabled = !SysSession.CurrentPrivileges.PrintOut;
-        btnPrintReceive.disabled = !SysSession.CurrentPrivileges.PrintOut;
+        btnPrint.disabled = !SysSession.CurrentPrivileges.PrintOut; 
         btnPrintTrEXEL.disabled = !SysSession.CurrentPrivileges.PrintOut;
         btnPrintTrPDF.disabled = !SysSession.CurrentPrivileges.PrintOut;
         btnPrintTrview.disabled = !SysSession.CurrentPrivileges.PrintOut;
@@ -92,8 +91,7 @@ namespace VatLists {
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
-        btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
-        btnPrintReceive = document.getElementById("btnPrintReceive") as HTMLButtonElement;
+        btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement; 
         btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
 
     }
