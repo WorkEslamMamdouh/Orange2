@@ -29501,7 +29501,7 @@ input[class=checkbox]:checked:before {
     background-color: var(--main-blue);
     color: var(--bs-white);
     border: none;
-    padding:.5rem;
+    /*padding:.5rem;*/
     line-height:3rem;
 }
 .hidden_Control {
@@ -29741,7 +29741,7 @@ input[class=checkbox]:checked:before {
         list-style-type: none !important;
         margin-top: 1px;
         margin-bottom: 1px;
-        margin-right: 5%;
+        margin-right: 1%;
     }
 
     .account-menu ul.main-menu ul {
@@ -29814,19 +29814,18 @@ input[class=checkbox]:checked:before {
 }
 
 .account-menu ul.main-menu li.parent ul li a:hover {
-    color: #4dc82f;
+    color: var(--main-orange);
 }
 
-.account-menu ul.main-menu li.parent ul li a:active {
-    background-color: #000000;
-    color: #ca2c2c;
+.account-menu ul.main-menu li.parent ul li a:active:hover {
+    color: var(--main-blue);
 }
 
 /* used*/
 .account-menu ul.main-menu li .sign {
     display: inline-block;
     padding: 1px 5px;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 
@@ -30019,8 +30018,6 @@ input[class=checkbox]:checked:before {
     left: 41% !important;
 }
 
-
-
 .lbl-toggle {
     display: block;
     font-weight: bold;
@@ -30150,3 +30147,4 @@ input[class=checkbox]:checked:before {
     .btn-active a:hover {
         color: var(--main-blue);
     }
+/*End Switch Button tab*/
