@@ -67,12 +67,12 @@ namespace GLDefAccount {
        $('#cont').toggleClass('colapsdivcont');
         $('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            $("body").toggleClass("mini-navbar_Arbec");
+           $("body").toggleClass("mini-navbar_Arbec");
         }
         else {
             $("body").toggleClass("mini-navbar");
         }
-        //// ;
+         ;
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الحسابات";
 
@@ -291,7 +291,7 @@ namespace GLDefAccount {
         else {
             class_Plus = 'fa-plus-circle';
           //  class_Plus = 'glyphicon-plusicon-white';
-            style_Plus = 'height: 1.25rem;width:1.25rem; background-color: var(--dark-blue); border-radius:50%; margin:auto;';
+            style_Plus = 'height: 1rem;width:1rem; background-color: var(--dark-blue); border-radius:50%; margin:auto;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');
