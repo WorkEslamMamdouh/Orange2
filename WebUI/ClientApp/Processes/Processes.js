@@ -232,7 +232,7 @@ var Processes;
         ddlVendorMaster = document.getElementById("ddlVendorMaster");
         txtNationality = document.getElementById("txtNationality");
         txt_tax = document.getElementById("txt_tax");
-        id_divGridDetails = document.getElementById("DivFilter");
+        id_divGridDetails = document.getElementById("divMasterGridiv");
         //textboxes
         txtFromDate = document.getElementById("txtFromDate");
         txtToDate = document.getElementById("txtToDate");
@@ -777,7 +777,7 @@ var Processes;
             flag_Add = true;
             flag_succ_insert = false;
             btnBack_1_onclick();
-            DisplayMassage_Processes('تم الحفظ بنجاح ( برجاء اختيار التاريخ لعرض العمليه)', 'Saved successfully (Please select a date to view the operation)', MessageType.Worning);
+            DisplayMassage('تم الحفظ بنجاح ( برجاء اختيار التاريخ لعرض العمليه)', 'Saved successfully (Please select a date to view the operation)', MessageType.Worning);
             Errorinput(txtToDate);
             return;
         }
@@ -1055,7 +1055,7 @@ var Processes;
                 }
             }
             else {
-                DisplayMassage_Processes("يجب اختيار النوع!", "must choose type!", MessageType.Worning);
+                DisplayMassage("يجب اختيار النوع!", "must choose type!", MessageType.Worning);
                 Errorinput($('#ddlFamily' + cnt));
                 $('#ddlFamily' + cnt).val("null");
             }
@@ -1083,7 +1083,7 @@ var Processes;
                 if (res == true) {
                     $("#ddlItem" + cnt).val("null");
                     $("#txtPrice" + cnt).val("1");
-                    DisplayMassage_Processes("لايمكن تكرار نفس الاصناف علي الفاتورة!", "The same items cannot be duplicated on the invoice!", MessageType.Worning);
+                    DisplayMassage("لايمكن تكرار نفس الاصناف علي الفاتورة!", "The same items cannot be duplicated on the invoice!", MessageType.Worning);
                 }
                 else {
                     $("#txtPrice" + cnt).val("1");
@@ -1145,7 +1145,7 @@ var Processes;
                 $("#txtAvailableQty" + cnt).val(Number($("#txtQuantity" + cnt).val()) - Number($("#txtSoldQty" + cnt).val()) - Number($("#txtScrapQty" + cnt).val()));
             }
             else {
-                DisplayMassage_Processes(' يجب ان يكون كمية الفوارغ بتساوي الكمية الصنف (' + Quantity + ')', 'The amount of voids must be equal to the item quantity(' + Quantity + ')', MessageType.Worning);
+                DisplayMassage(' يجب ان يكون كمية الفوارغ بتساوي الكمية الصنف (' + Quantity + ')', 'The amount of voids must be equal to the item quantity(' + Quantity + ')', MessageType.Worning);
                 $("#txtScrapQty" + cnt).val(Quantity);
                 Errorinput($('#txtScrapQty' + cnt));
                 $("#txtAvailableQty" + cnt).val('0');
@@ -1163,12 +1163,12 @@ var Processes;
                 $("#txt_StatusFlag" + cnt).val("u");
             // 
             if ($("#txtPrice" + cnt).val() == "" || $("#txtPrice" + cnt).val() == 0) {
-                DisplayMassage_Processes('يجب أدخال سعر الصنف اوالاً', 'Item price must be entered first', MessageType.Worning);
+                DisplayMassage('يجب أدخال سعر الصنف اوالاً', 'Item price must be entered first', MessageType.Worning);
                 Errorinput($("#txtPrice" + cnt));
                 $("#txtMinPrice" + cnt).val(0);
             }
             else if (Number($("#txtMinPrice" + cnt).val()) > Number($("#txtPrice" + cnt).val())) {
-                DisplayMassage_Processes('يجب ان يكون أقل سعر اصغر من سعر الصنف', 'The lowest price should be smaller than the item price', MessageType.Worning);
+                DisplayMassage('يجب ان يكون أقل سعر اصغر من سعر الصنف', 'The lowest price should be smaller than the item price', MessageType.Worning);
                 Errorinput($("#txtMinPrice" + cnt));
                 $("#txtMinPrice" + cnt).val($("#txtPrice" + cnt).val() - 1);
             }
@@ -1760,7 +1760,7 @@ var Processes;
         var Onhand = Number(OnhandQty.getAttribute('val')) + Number(ScrapQty.getAttribute('valScrapQty'));
         OnhandQty.value = (Number(Onhand) - Number(ScrapQty.value)).toString();
         if (Number(ScrapQty.value) > Number(Onhand)) {
-            DisplayMassage_Processes(" لا يمكنك تجاوز الكمية المتبقية ( " + Onhand + " )", "You cannot exceed the remaining quantity!", MessageType.Worning);
+            DisplayMassage(" لا يمكنك تجاوز الكمية المتبقية ( " + Onhand + " )", "You cannot exceed the remaining quantity!", MessageType.Worning);
             ScrapQty.value = Onhand.toString();
             OnhandQty.value = "0";
             Errorinput(ScrapQty);
@@ -1800,7 +1800,7 @@ var Processes;
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
                 $("#txt_StatusFlag2" + cnt).val("u");
             if (Number($("#txtSerial3" + cnt).val()) < 0 || Number($("#txtSerial3" + cnt).val()) == 0) {
-                DisplayMassage_Processes("يجب ادخال رقم صحيح", "You must enter a valid number", MessageType.Worning);
+                DisplayMassage("يجب ادخال رقم صحيح", "You must enter a valid number", MessageType.Worning);
                 Errorinput($("#txtSerial3" + cnt));
                 $("#txtSerial3" + cnt).val("");
             }
@@ -1955,47 +1955,47 @@ var Processes;
     }
     function ValidationHeader() {
         if (txtTruckNumber.value == "") {
-            DisplayMassage_Processes(" برجاء أدخل رقم الشاحنة!", "must enter number of truck !", MessageType.Worning);
+            DisplayMassage(" برجاء أدخل رقم الشاحنة!", "must enter number of truck !", MessageType.Worning);
             Errorinput(txtTruckNumber);
             return false;
         }
         else if (txtPortName.value == "") {
-            DisplayMassage_Processes(" برجاء أدخل اسم ميناء الدخول!", "must enter name of Port of entry !", MessageType.Worning);
+            DisplayMassage(" برجاء أدخل اسم ميناء الدخول!", "must enter name of Port of entry !", MessageType.Worning);
             Errorinput(txtPortName);
             return false;
         }
         else if (ddlVendor.value == "null") {
-            DisplayMassage_Processes(" برجاء اختيار المورد!", "must choose Vendor!", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار المورد!", "must choose Vendor!", MessageType.Worning);
             Errorinput(ddlVendor);
             return false;
         }
         else if (txtNationality.value == "null") {
-            DisplayMassage_Processes(" برجاء اختيار  الدولة!", "must choose state!", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار  الدولة!", "must choose state!", MessageType.Worning);
             Errorinput(txtNationality);
             return false;
         }
         else if (txtPaperPurchaseValue.value == "") {
-            DisplayMassage_Processes("برجاء أدخل  قيمة البضاعة المسجلة!", "must enter value of registration goods !", MessageType.Worning);
+            DisplayMassage("برجاء أدخل  قيمة البضاعة المسجلة!", "must enter value of registration goods !", MessageType.Worning);
             Errorinput(txtPaperPurchaseValue);
             return false;
         }
         else if (txtPolice_num.value == "") {
-            DisplayMassage_Processes("برجاء أدخل  رقم البوليصه!", "must enter value of Police NO!", MessageType.Worning);
+            DisplayMassage("برجاء أدخل  رقم البوليصه!", "must enter value of Police NO!", MessageType.Worning);
             Errorinput(txtPolice_num);
             return false;
         }
         else if (txtCustomNo.value == "") {
-            DisplayMassage_Processes("برجاء أدخل  رقم البيان!", "must enter value of Custom NO!", MessageType.Worning);
+            DisplayMassage("برجاء أدخل  رقم البيان!", "must enter value of Custom NO!", MessageType.Worning);
             Errorinput(txtCustomNo);
             return false;
         }
         else if (txt_tax.value == "null") {
-            DisplayMassage_Processes("برجاء أدخل  نوع الضريبه!", "must enter value of Custom NO!", MessageType.Worning);
+            DisplayMassage("برجاء أدخل  نوع الضريبه!", "must enter value of Custom NO!", MessageType.Worning);
             Errorinput(txt_tax);
             return false;
         }
         else if (ddlSalesman.value == "null" && Status == 1) {
-            DisplayMassage_Processes(" برجاء اختيار  البائع!", "must choose seller!", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار  البائع!", "must choose seller!", MessageType.Worning);
             Errorinput(ddlSalesman);
             return false;
         }
@@ -2003,17 +2003,17 @@ var Processes;
     }
     function ValidationClose() {
         if (txtClose_Adjustment.value.trim() == "") {
-            DisplayMassage_Processes(" برجاء أدخل التسويات!", "must enter adjustment !", MessageType.Worning);
+            DisplayMassage(" برجاء أدخل التسويات!", "must enter adjustment !", MessageType.Worning);
             Errorinput(txtClose_Adjustment);
             return false;
         }
         else if (txtClose_CompanyCommitionPrc.value.trim() == "") {
-            DisplayMassage_Processes(" برجاء أدخل عمولة الشركة!", "must enter Company commission !", MessageType.Worning);
+            DisplayMassage(" برجاء أدخل عمولة الشركة!", "must enter Company commission !", MessageType.Worning);
             Errorinput(txtClose_CompanyCommitionPrc);
             return false;
         }
         else if (txtClose_SalesManCommition.value.trim() == "") {
-            DisplayMassage_Processes(" برجاء أدخل عمولة البائع!", "must enter seller commission !", MessageType.Worning);
+            DisplayMassage(" برجاء أدخل عمولة البائع!", "must enter seller commission !", MessageType.Worning);
             Errorinput(txtClose_SalesManCommition);
             return false;
         }
@@ -2021,27 +2021,27 @@ var Processes;
     }
     function Validation_Grid(rowcount) {
         if ($("#ddlFamily" + rowcount).val() == "null" && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("  برجاءادخال النوع!", "must enter Type !", MessageType.Worning);
+            DisplayMassage("  برجاءادخال النوع!", "must enter Type !", MessageType.Worning);
             Errorinput($("#ddlFamily" + rowcount));
             return false;
         }
         else if (($("#ddlItem" + rowcount).val() == "null") && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("برجاءادخال الصنف!", "must enter item !", MessageType.Worning);
+            DisplayMassage("برجاءادخال الصنف!", "must enter item !", MessageType.Worning);
             Errorinput($("#ddlItem" + rowcount));
             return false;
         }
         else if ((Number($("#txtQuantity" + rowcount).val()) < Number($("#txtSoldQty" + rowcount).val())) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" يجب تكون الكميه اكبر من الكمبه المباعه!", "must enter Quantity !", MessageType.Worning);
+            DisplayMassage(" يجب تكون الكميه اكبر من الكمبه المباعه!", "must enter Quantity !", MessageType.Worning);
             Errorinput($("#txtQuantity" + rowcount));
             return false;
         }
         else if (($("#txtPrice" + rowcount).val() == "" || $("#txtPrice" + rowcount).val() == 0) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("  برجاءادخال السعر!", "must enter Price !", MessageType.Worning);
+            DisplayMassage("  برجاءادخال السعر!", "must enter Price !", MessageType.Worning);
             Errorinput($("#txtPrice" + rowcount));
             return false;
         }
         else if (($("#txtMinPrice" + rowcount).val() == "" || $("#txtMinPrice" + rowcount).val() == 0) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاءادخال اقل سعر!", "must enter lowest price !", MessageType.Worning);
+            DisplayMassage(" برجاءادخال اقل سعر!", "must enter lowest price !", MessageType.Worning);
             Errorinput($("#txtMinPrice" + rowcount));
             return false;
         }
@@ -2050,42 +2050,42 @@ var Processes;
     function ValidationCharge_Grid(rowcount) {
         //else
         if ($("#txtAddonsCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء اختيار الإضافة!", "must choose addition!", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار الإضافة!", "must choose addition!", MessageType.Worning);
             Errorinput($("#txtAddonsCharge" + rowcount));
             return false;
         }
         else if ($("#txtAddonsTypeCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء اختيار نوع الإضافة!", "must choose a type addition !", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار نوع الإضافة!", "must choose a type addition !", MessageType.Worning);
             Errorinput($("#txtAddonsTypeCharge" + rowcount));
             return false;
         }
         else if (($("#txtValueCharge" + rowcount).val() == "") || $("#txtValueCharge" + rowcount).val() == "0" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاءادخال القيمة!", "must enter value !", MessageType.Worning);
+            DisplayMassage(" برجاءادخال القيمة!", "must enter value !", MessageType.Worning);
             Errorinput($("#txtValueCharge" + rowcount));
             return false;
         }
         else if ($("#txtVatType" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء اختيار نوع الضريبة!", "must choose a type of tax  !", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار نوع الضريبة!", "must choose a type of tax  !", MessageType.Worning);
             Errorinput($("#txtVatType" + rowcount));
             return false;
         }
         else if ($("#txtVendorIsCheckCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("  برجاءاختيار نقدى ام علي الحساب!", "must choose cash or debit !", MessageType.Worning);
+            DisplayMassage("  برجاءاختيار نقدى ام علي الحساب!", "must choose cash or debit !", MessageType.Worning);
             Errorinput($("#txtVendorIsCheckCharge" + rowcount));
             return false;
         }
         else if (($("#txtInvoiceNumberCharge" + rowcount).val() == "" || $("#txtInvoiceNumberCharge" + rowcount).val() == "0") && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء ادخال رقم الفاتورة!", "must enter number of invoice  !", MessageType.Worning);
+            DisplayMassage(" برجاء ادخال رقم الفاتورة!", "must enter number of invoice  !", MessageType.Worning);
             Errorinput($("#txtInvoiceNumberCharge" + rowcount));
             return false;
         }
         else if ($("#txtVendorCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("برجاءاختيارالمورد!", "must choose vendor !", MessageType.Worning);
+            DisplayMassage("برجاءاختيارالمورد!", "must choose vendor !", MessageType.Worning);
             Errorinput($("#txtVendorCharge" + rowcount));
             return false;
         }
         else if ($("#txt_D_CashBox" + rowcount).val() == "Null" && $("#txtVendorIsCheckCharge" + rowcount).val() == "1" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء اختيار الصندوق!", "must Choose a box  !", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار الصندوق!", "must Choose a box  !", MessageType.Worning);
             Errorinput($("#txt_D_CashBox" + rowcount));
             return false;
         }
@@ -2093,37 +2093,37 @@ var Processes;
     }
     function ValidationDeposit_Grid(rowcount) {
         if ($("#txtSerial3" + rowcount).val() == "" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء ادخال مسلسل!", "must enter serial number  !", MessageType.Worning);
+            DisplayMassage(" برجاء ادخال مسلسل!", "must enter serial number  !", MessageType.Worning);
             Errorinput($("#txtSerial3" + rowcount));
             return false;
         }
         else if ($("#Salesman" + rowcount).val() == "null" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء اختيار المندوب!", "must value of Salesman !", MessageType.Worning);
+            DisplayMassage(" برجاء اختيار المندوب!", "must value of Salesman !", MessageType.Worning);
             Errorinput($("#Salesman" + rowcount));
             return false;
         }
         else if ($("#DepositAmount" + rowcount).val() == "" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء ادخال قيمة المبلغ!", "must value of amount !", MessageType.Worning);
+            DisplayMassage(" برجاء ادخال قيمة المبلغ!", "must value of amount !", MessageType.Worning);
             Errorinput($("#DepositAmount" + rowcount));
             return false;
         }
         else if ($("#ACC_type" + rowcount).val() == "Null" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("برجاء اختيار نوع الحساب !", "must Choose a type of deposit account !", MessageType.Worning);
+            DisplayMassage("برجاء اختيار نوع الحساب !", "must Choose a type of deposit account !", MessageType.Worning);
             Errorinput($("#ACC_type" + rowcount));
             return false;
         }
         else if ($("#Acc_Code" + rowcount).val() == "Null" && $("#ACC_type" + rowcount).val() == "0" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("برجاء اختيار  الحساب البنك!", "must Choose a type of deposit account !", MessageType.Worning);
+            DisplayMassage("برجاء اختيار  الحساب البنك!", "must Choose a type of deposit account !", MessageType.Worning);
             Errorinput($("#Acc_Code" + rowcount));
             return false;
         }
         else if ($("#CashBox" + rowcount).val() == "Null" && $("#ACC_type" + rowcount).val() == "1" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes("برجاء اختيار  الصندوق  !", "must Choose a type of deposit account !", MessageType.Worning);
+            DisplayMassage("برجاء اختيار  الصندوق  !", "must Choose a type of deposit account !", MessageType.Worning);
             Errorinput($("#CashBox" + rowcount));
             return false;
         }
         else if ($("#Remarks" + rowcount).val() == "" && ($("#txt_StatusFlag2" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage_Processes(" برجاء ادخال ملاحظات!", "must enter notes !", MessageType.Worning);
+            DisplayMassage(" برجاء ادخال ملاحظات!", "must enter notes !", MessageType.Worning);
             Errorinput($("#Remarks" + rowcount));
             return false;
         }
@@ -2228,7 +2228,7 @@ var Processes;
     function Insert_1_Processes() {
         // 
         if (!CheckDate(DateFormat(txtDateHeader.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            DisplayMassage_Processes('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', MessageType.Worning);
+            DisplayMassage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', MessageType.Worning);
             Errorinput(txtDateHeader);
             return;
         }
@@ -2240,7 +2240,7 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     OperationID = result.Response;
-                    DisplayMassage_Processes("تم أضافة عملية بنجاح", "Operation added successfully", MessageType.Succeed);
+                    DisplayMassage("تم أضافة عملية بنجاح", "Operation added successfully", MessageType.Succeed);
                     flag_succ_insert = true;
                     $('#txtCreatedBy').val(SysSession.CurrentEnvironment.UserCode);
                     $('#txtCreatedAt').val(DateTimeFormat(Date().toString()));
@@ -2248,7 +2248,7 @@ var Processes;
                     $('#txtUpdatedAt').val("");
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     flag_succ_insert = false;
                 }
             }
@@ -2256,7 +2256,7 @@ var Processes;
     }
     function Update_1_Processes() {
         if (!CheckDate(DateFormat(txtDateHeader.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            DisplayMassage_Processes('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', MessageType.Worning);
+            DisplayMassage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', MessageType.Worning);
             Errorinput(txtDateHeader);
             return;
         }
@@ -2291,18 +2291,18 @@ var Processes;
                         Processes_Open();
                         Status = 2;
                         $('#txtStatus').val('مفتوحة');
-                        //DisplayMassage_Processes("تم فتح العمليه بنجاح!", "Operation opened successfully!", MessageType.Succeed);
-                        DisplayMassage_Processes("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
+                        //DisplayMassage("تم فتح العمليه بنجاح!", "Operation opened successfully!", MessageType.Succeed);
+                        DisplayMassage("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
                     }
                     else if (Status == 3) {
-                        DisplayMassage_Processes("تم غلق العمليه بنجاح!", "Operation close successfully!", MessageType.Succeed);
+                        DisplayMassage("تم غلق العمليه بنجاح!", "Operation close successfully!", MessageType.Succeed);
                     }
                     else {
-                        DisplayMassage_Processes("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
+                        DisplayMassage("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
                     }
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     Ready = 0;
                     flag_Back = false;
                 }
@@ -2367,7 +2367,7 @@ var Processes;
                 OperationItemSingleModel.ScrapQty = $("#txtScrapQty" + i).val();
                 OperationItemModel.push(OperationItemSingleModel);
                 if ($("#txtPrice" + i).val() < $("#txtMinPrice" + i).val()) {
-                    DisplayMassage_Processes("يجب ان يكون السعر اكبر من اقل سعر!", "The price must be greater than the lowest price!", MessageType.Worning);
+                    DisplayMassage("يجب ان يكون السعر اكبر من اقل سعر!", "The price must be greater than the lowest price!", MessageType.Worning);
                     Errorinput($("#txtPrice" + i));
                 }
             }
@@ -2392,10 +2392,10 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     if (Save_Add == true) {
-                        DisplayMassage_Processes("تم أضافة  بيانات الحمولة في العمليه بنجاح!", "Payload data has been added in the process successfully!", MessageType.Succeed);
+                        DisplayMassage("تم أضافة  بيانات الحمولة في العمليه بنجاح!", "Payload data has been added in the process successfully!", MessageType.Succeed);
                     }
                     else {
-                        DisplayMassage_Processes("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", MessageType.Succeed);
+                        DisplayMassage("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", MessageType.Succeed);
                         //WorningMessage("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", "تم", "Done"); 
                     }
                     flag_Success_2 = true;
@@ -2405,7 +2405,7 @@ var Processes;
                     Save_Add = false;
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     flag_Success_2 = false;
                     Save_Add = false;
                 }
@@ -2422,10 +2422,10 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     if (Save_Add == true) {
-                        DisplayMassage_Processes("تم أضافة  بيانات الحمولة في العمليه بنجاح!", "Payload data has been added in the process successfully!", MessageType.Succeed);
+                        DisplayMassage("تم أضافة  بيانات الحمولة في العمليه بنجاح!", "Payload data has been added in the process successfully!", MessageType.Succeed);
                     }
                     else {
-                        DisplayMassage_Processes("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", MessageType.Succeed);
+                        DisplayMassage("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", MessageType.Succeed);
                         //WorningMessage("تم التعديل  بيانات الحمولة بنجاح!", "Payload data has been modified successfully!", "تم", "Done"); 
                     }
                     flag_Success_2 = true;
@@ -2435,7 +2435,7 @@ var Processes;
                     Save_Add = false;
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     flag_Success_2 = false;
                     Save_Add = false;
                 }
@@ -2535,10 +2535,10 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     if (Save_Add == true) {
-                        DisplayMassage_Processes("تم أضافة المصروفات  في العمليه بنجاح!", "Expenses have been added in the process successfully!", MessageType.Succeed);
+                        DisplayMassage("تم أضافة المصروفات  في العمليه بنجاح!", "Expenses have been added in the process successfully!", MessageType.Succeed);
                     }
                     else {
-                        DisplayMassage_Processes("تم التعديل علي المصروفات بنجاح!", "Modified successfully!", MessageType.Succeed);
+                        DisplayMassage("تم التعديل علي المصروفات بنجاح!", "Modified successfully!", MessageType.Succeed);
                     }
                     flag_Success_3 = true;
                     $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
@@ -2547,7 +2547,7 @@ var Processes;
                     Save_Add = false;
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     flag_Success_3 = false;
                     Save_Add = false;
                 }
@@ -2633,13 +2633,13 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     // 
-                    DisplayMassage_Processes("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
+                    DisplayMassage("تم التعديل بنجاح!", "Modified successfully!", MessageType.Succeed);
                     flag_Success_5 = true;
                     $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
                     $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
                 }
                 else {
-                    DisplayMassage_Processes("خطأء!", "Error!", MessageType.Succeed);
+                    DisplayMassage("خطأء!", "Error!", MessageType.Succeed);
                     flag_Success_5 = false;
                 }
             }
@@ -2834,7 +2834,7 @@ var Processes;
                 success: function (d) {
                     var result = d;
                     if (result.IsSuccess) {
-                        DisplayMassage_Processes("تم فتح عملية بنجاح", "Operation added successfully", MessageType.Succeed);
+                        DisplayMassage("تم فتح عملية بنجاح", "Operation added successfully", MessageType.Succeed);
                         flag_Back = true;
                         Ready = 1;
                         $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
@@ -2864,19 +2864,19 @@ var Processes;
                         flag_Back = false;
                     }
                     else {
-                        DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                        DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                     }
                 }
             });
         }
         else {
-            DisplayMassage_Processes("يجب ان تكون العمليه مغلقة", "The process must be under preparation!", MessageType.Worning);
+            DisplayMassage("يجب ان تكون العمليه مغلقة", "The process must be under preparation!", MessageType.Worning);
         }
     }
     function btnPresent_onclick() {
         if (Status == 0) {
             if (CountGrid == -1) {
-                DisplayMassage_Processes("يجب ادخال يبنات الحموله", "Payload data must be entered!", MessageType.Worning);
+                DisplayMassage("يجب ادخال يبنات الحموله", "Payload data must be entered!", MessageType.Worning);
                 btnUpdate_2.focus();
                 Update_2_onclick();
             }
@@ -2887,7 +2887,7 @@ var Processes;
             }
         }
         else {
-            DisplayMassage_Processes("يجب ان تكون العمليه تحت التجهيز", "The process must be under preparation!", MessageType.Worning);
+            DisplayMassage("يجب ان تكون العمليه تحت التجهيز", "The process must be under preparation!", MessageType.Worning);
         }
     }
     function btnClose_onclick() {
@@ -2920,12 +2920,12 @@ var Processes;
                 ii++;
             }
             if (AvailableQty == true) {
-                DisplayMassage_Processes("يجب ان تكون الكمية المتبقية = صفر", "The remaining amount should be = 0!", MessageType.Worning);
+                DisplayMassage("يجب ان تكون الكمية المتبقية = صفر", "The remaining amount should be = 0!", MessageType.Worning);
                 btnUpdate_5.focus();
                 Update_5_onclick();
             }
             else if ($('#lab_Close_CashOnhand').text() != '0') {
-                DisplayMassage_Processes(" يجب ان يكون النقدي لدي المندوب = صفر", "The delegate's cash must be = 0!", MessageType.Worning);
+                DisplayMassage(" يجب ان يكون النقدي لدي المندوب = صفر", "The delegate's cash must be = 0!", MessageType.Worning);
                 btnUpdate_5.focus();
                 Update_5_onclick();
                 Errorinput($("#lab_Close_CashOnhand"));
@@ -2952,7 +2952,7 @@ var Processes;
                     success: function (d) {
                         var result = d;
                         if (result.Response) {
-                            DisplayMassage_Processes("تم تجهيز اغلاق  العملية بنجاح", "Operation added successfully", MessageType.Succeed);
+                            DisplayMassage("تم تجهيز اغلاق  العملية بنجاح", "Operation added successfully", MessageType.Succeed);
                             flag_Success_5 = true;
                             $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
                             $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
@@ -2980,14 +2980,14 @@ var Processes;
                             flag_Success_5 = false;
                         }
                         else {
-                            DisplayMassage_Processes("خطأء!", "Error!", MessageType.Worning);
+                            DisplayMassage("خطأء!", "Error!", MessageType.Worning);
                         }
                     }
                 });
             }
         }
         else {
-            DisplayMassage_Processes("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
+            DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
         }
     }
     function btnClose_Focus_onclick() {
@@ -3024,8 +3024,8 @@ var Processes;
         $("#div_Master").removeClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
-        $("#DivHederMaster").attr("disabled", "disabled").off('click');
-        $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").attr("disabled", "disabled").off('click');
+        $("#div_MasterGird").addClass("disabledDiv");
         $('#divlepRentdata_1').addClass('display_none');
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-left');
         $('#spanlepRentdata_1').toggleClass('fa-angle-double-down');
@@ -3069,6 +3069,7 @@ var Processes;
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPolice_num").removeAttr("disabled");
         $('#ddlSalesman').prop('selectedIndex', 0);
+        Back();
     }
     function Update_1_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -3080,6 +3081,7 @@ var Processes;
         FlagIns_Operation = false;
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").addClass("disabledDiv");
         //$("#txtNumber").removeAttr("disabled");
         $("#txtDate").removeAttr("disabled");
         //$("#txtReferenceNumber").removeAttr("disabled");
@@ -3222,6 +3224,7 @@ var Processes;
         //$("#DivShow").removeClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").addClass("disabledDiv");
         if (Status == 2) {
             $("#btnAddDetails").addClass("display_none");
             $(".fontitm6Processes").addClass("display_none");
@@ -3303,7 +3306,7 @@ var Processes;
             finishSave('btnsave');
             var CanAdd = true;
             if (CountGrid < 0) {
-                DisplayMassage_Processes(" برجاء ادخال بيانات الحمولة", "Please enter the payload data", MessageType.Worning);
+                DisplayMassage(" برجاء ادخال بيانات الحمولة", "Please enter the payload data", MessageType.Worning);
                 Errorinput(btnAddDetails);
                 CanAdd = false;
             }
@@ -3355,6 +3358,7 @@ var Processes;
         //$("#DivChargesShow").removeClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").addClass("disabledDiv");
         Update_3 = true;
         btnBack_1_onclick();
         //btnBack_2_onclick();
@@ -3439,6 +3443,7 @@ var Processes;
         $("#divProcessClose").removeClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
     }
     function btnBack_4_onclick() {
@@ -3536,6 +3541,7 @@ var Processes;
         $(".lebelminus").removeClass("display_none");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
+        $("#div_MasterGird").addClass("disabledDiv");
         Update_5 = true;
         if (Status == 2) { //مفتوحة
             btnBack_2_onclick();
@@ -3676,6 +3682,7 @@ var Processes;
         // 
         if (Update_1 == false && Update_2 == false && Update_3 == false && Update_4 == false && Update_5 == false) {
             $("#DivHederMaster").removeClass("disabledDiv");
+            $("#div_MasterGird").removeClass("disabledDiv");
             //$("#btnPresent").removeAttr("disabled");
             //$("#btnClose").removeAttr("disabled");
         }
@@ -3720,23 +3727,23 @@ var Processes;
     }
     function divGridDetails_onclick() {
         if (Update_1 == true) {
-            DisplayMassage_Processes("  الرجاء التراجع من تعديل العمليه", "Please undo this process", MessageType.Worning);
+            DisplayMassage("  الرجاء التراجع من تعديل العمليه", "Please undo this process", MessageType.Worning);
             btnBack_1.focus();
         }
         else if (Update_2 == true) {
-            DisplayMassage_Processes("  الرجاء التراجع من تعديل  بيانات الحمولة", "Please undo  edit of the payload data", MessageType.Worning);
+            DisplayMassage("  الرجاء التراجع من تعديل  بيانات الحمولة", "Please undo  edit of the payload data", MessageType.Worning);
             btnBack_2.focus();
         }
         else if (Update_3 == true) {
-            DisplayMassage_Processes("  الرجاء التراجع من تعديل المصروفات", "Please undo  edit the expense adjustments", MessageType.Worning);
+            DisplayMassage("  الرجاء التراجع من تعديل المصروفات", "Please undo  edit the expense adjustments", MessageType.Worning);
             btnBack_3.focus();
         }
         else if (Update_4 == true) {
-            DisplayMassage_Processes("  الرجاء التراجع من تعديل اغلاق العملية", "Please undo edit close process", MessageType.Worning);
+            DisplayMassage("  الرجاء التراجع من تعديل اغلاق العملية", "Please undo edit close process", MessageType.Worning);
             btnBack_4.focus();
         }
         else if (Update_5 == true) {
-            DisplayMassage_Processes("  الرجاء التراجع من تعديل الوضع المالي", "Please undo edit the financial status adjustment", MessageType.Worning);
+            DisplayMassage("  الرجاء التراجع من تعديل الوضع المالي", "Please undo edit the financial status adjustment", MessageType.Worning);
             btnBack_5.focus();
         }
     }

@@ -70,7 +70,7 @@
     <div class="col-12">
         <div class="card bg-light-blue display_none" id="divMasterGridiv">
             <!-- Search Table -->
-            <div class="card-body">
+            <div class="card-body" id="div_MasterGird">
                 <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
                     <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
                     <div class="col-8 col-lg-8 col-md-10">
@@ -80,257 +80,260 @@
                 <!-- Table  -->
                 <div id="divMasterGrid"></div>
             </div>
-            <!-- Details Contant -->
-            <div id="id_divGridDetails" class="row">
-                <div class="col-12 service-content display_none" id="div_Master_Hedr">
-                    <div class="serviceBox">
-                        <!-- Details Side Icon Bar -->
-                        <div class="div-iconbar">
-                            <button class="icon-bar d-flex justify-content-between btn-update" id="btnUpdate_1">
-                                <i class="fas fa-edit fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
-                            </button>
-                            <button class="icon-bar d-flex justify-content-between btn-save display_none" id="btnSave_1">
-                                <i class="fas fa-save fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center mb-3">  @SystemResource.App_save</span>
-                            </button>
-                            <button class="icon-bar d-flex justify-content-between btn-back display_none" id="btnBack_1">
-                                <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center mb-3">   @SystemResource.App_back</span>
-                            </button>
-                        </div>
-                        <div class="row gx-3">
-                            @* Buttons Groups *@
-                            <div class="col-12 col-md-6 col-lg-4 ">
-                                <div class="row special-group py-3">
-                                    <div class="col-4">
-                                        <button id="btnPresent" type="button" class="btn  btn-main h-100">
-                                            @SystemResource.Process_Prepared
-                                        </button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button id="btnOpen" type="button" class=" btn btn-main h-100">
-                                            فتح العمليه
-                                        </button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button id="btnClose" type="button" class="btn btn-main h-100">
-                                            تجهيز الاغلاق
-                                        </button>
-                                    </div>
+        </div>
+    </div>
+    <div class="col-12">
+
+        <!-- Details Contant -->
+        <div id="id_divGridDetails" class="row">
+            <div class="col-12 service-content display_none" id="div_Master_Hedr">
+                <div class="serviceBox">
+                    <!-- Details Side Icon Bar -->
+                    <div class="div-iconbar">
+                        <button class="icon-bar d-flex justify-content-between btn-update" id="btnUpdate_1">
+                            <i class="fas fa-edit fa-fw side-icon ms-1"></i>
+                            <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
+                        </button>
+                        <button class="icon-bar d-flex justify-content-between btn-save display_none" id="btnSave_1">
+                            <i class="fas fa-save fa-fw side-icon ms-1"></i>
+                            <span class="align-self-center mb-3">  @SystemResource.App_save</span>
+                        </button>
+                        <button class="icon-bar d-flex justify-content-between btn-back display_none" id="btnBack_1">
+                            <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
+                            <span class="align-self-center mb-3">   @SystemResource.App_back</span>
+                        </button>
+                    </div>
+                    <div class="row gx-3">
+                        @* Buttons Groups *@
+                        <div class="col-12 col-md-6 col-lg-4 ">
+                            <div class="row special-group py-3">
+                                <div class="col-4">
+                                    <button id="btnPresent" type="button" class="btn  btn-main h-100">
+                                        @SystemResource.Process_Prepared
+                                    </button>
                                 </div>
-                            </div>
-                            @* Buttons Groups *@
-                            <div class="col-12 col-md-6 col-lg-4 ">
-                                <div class="row special-group py-3">
-                                    <div class="col-4">
-                                        <button id="btnView_load" type="button" class="btn btn-main h-100">
-                                            @SystemResource.View_load
-                                        </button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button id="btnExpenses" type="button" class=" btn btn-main h-100">
-                                            @SystemResource.Expenses_Tractor_car
-                                        </button>
-                                    </div>
-                                    <div class="col-4">
-                                        <button id="btnClose_Focus" type="button" class="btn btn-main h-100">
-                                            @SystemResource.Closure
-                                        </button>
-                                    </div>
+                                <div class="col-4">
+                                    <button id="btnOpen" type="button" class=" btn btn-main h-100">
+                                        فتح العمليه
+                                    </button>
                                 </div>
-                            </div>
-                            @* Buttons Groups *@
-                            <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-0 m-auto">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <button id="btnPrintsalesrecord" type="button" class="btn btn-dark btn-style h-100">
-                                            سجل المبيعات
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <button id="btnPrintOperationsummary" type="button" class="btn btn-dark btn-style h-100">
-                                            ملخص الدخلي للعملية
-                                        </button>
-                                    </div>
+                                <div class="col-4">
+                                    <button id="btnClose" type="button" class="btn btn-main h-100">
+                                        تجهيز الاغلاق
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row g-0" id="div_Master">
-                            @* Details *@
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Number</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="TrNo" disabled id="txtNumber">
-                                    </div>
+                        @* Buttons Groups *@
+                        <div class="col-12 col-md-6 col-lg-4 ">
+                            <div class="row special-group py-3">
+                                <div class="col-4">
+                                    <button id="btnView_load" type="button" class="btn btn-main h-100">
+                                        @SystemResource.View_load
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button id="btnExpenses" type="button" class=" btn btn-main h-100">
+                                        @SystemResource.Expenses_Tractor_car
+                                    </button>
+                                </div>
+                                <div class="col-4">
+                                    <button id="btnClose_Focus" type="button" class="btn btn-main h-100">
+                                        @SystemResource.Closure
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="date" class="form-control" name="TrDate" id="txtDate">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Consignment_number</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" disabled name="RefNO" id="txtReferenceNumber">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_State</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" disabled name="Status_DescA" id="txtStatus">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Truck_number</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="TruckNo" id="txtTruckNumber">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Name_port_entry</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="PortName" id="txtPortName">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.I_Vendor</label>
-                                    <div class="col-9 col-md-7">
-                                        <select id="ddlVendor" name="" class="form-control">
-                                            <option value="null">اختر المورد</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_State</label>
-                                    <div class="col-9 col-md-7">
-                                        <select id="txtNationality" name="" class="form-control"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Clearance_date</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="date" class="form-control" name="ClearanceDate" id="txtClearanceDate">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Police_num</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="PolicyNo" id="txtPolice_num">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.CustomNo</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="CustomNo" id="txtCustomNo">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.value_goods_registered</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="number" class="form-control" name="PaperPurchaseValue" id="txtPaperPurchaseValue">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_TaxType</label>
-                                    <div class="col-9 col-md-7">
-                                        <select id="txt_tax" name="" class="form-control">
-                                            <option value="null">@SystemResource.tax_select</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.tax_rate</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="VatPrc" id="txtVatPrc">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Tax</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="text" class="form-control" name="VatAmount" id="txtVatAmount">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.TotalafterVat</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="number" disabled class="form-control" name="TotAfterTax" id="txtTotAfterTax">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.Description_Shipment</label>
-                                    <div class="col-9 col-md-11">
-                                        <textarea type="" class="form-control" name="Goods_Desc" id="txtGoods_Desc"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
-                                    <div class="col-9 col-md-11">
-                                        <textarea type="" class="form-control" name="Remark" id="txtRemark"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                       
-                        
-                        <div class="row special-group m-3" id="open_Trill">
-                            @* Open Trill*@
-                            <label class="col-12 text-blue fw-bold mb-3 d-block"> @SystemResource.open_Tractor_car </label>
-                            <div class="col-12 col-md-4">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Seller</label>
-                                    <div class="col-9 col-md-7">
-                                        <select id="ddlSalesman" name="" class="form-control"></select>
-                                    </div>
+                        @* Buttons Groups *@
+                        <div class="col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-0 m-auto">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button id="btnPrintsalesrecord" type="button" class="btn btn-dark btn-style h-100">
+                                        سجل المبيعات
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="btnPrintOperationsummary" type="button" class="btn btn-dark btn-style h-100">
+                                        ملخص الدخلي للعملية
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class="form-group row g-0">
-                                    <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.date_opening</label>
-                                    <div class="col-9 col-md-7">
-                                        <input type="date" class="form-control" name="OpenAt" id="txtdateopening">
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="row g-0" id="div_Master">
+                        @* Details *@
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Number</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="TrNo" disabled id="txtNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_date</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="date" class="form-control" name="TrDate" id="txtDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Consignment_number</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" disabled name="RefNO" id="txtReferenceNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_State</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" disabled name="Status_DescA" id="txtStatus">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Truck_number</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="TruckNo" id="txtTruckNumber">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Name_port_entry</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="PortName" id="txtPortName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                                <div class="col-9 col-md-7">
+                                    <select id="ddlVendor" name="" class="form-control">
+                                        <option value="null">اختر المورد</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_State</label>
+                                <div class="col-9 col-md-7">
+                                    <select id="txtNationality" name="" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Clearance_date</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="date" class="form-control" name="ClearanceDate" id="txtClearanceDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.Police_num</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="PolicyNo" id="txtPolice_num">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.CustomNo</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="CustomNo" id="txtCustomNo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.value_goods_registered</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="number" class="form-control" name="PaperPurchaseValue" id="txtPaperPurchaseValue">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_TaxType</label>
+                                <div class="col-9 col-md-7">
+                                    <select id="txt_tax" name="" class="form-control">
+                                        <option value="null">@SystemResource.tax_select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.tax_rate</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="VatPrc" id="txtVatPrc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Tax</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="text" class="form-control" name="VatAmount" id="txtVatAmount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.TotalafterVat</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="number" disabled class="form-control" name="TotAfterTax" id="txtTotAfterTax">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.Description_Shipment</label>
+                                <div class="col-9 col-md-11">
+                                    <textarea type="" class="form-control" name="Goods_Desc" id="txtGoods_Desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                <div class="col-9 col-md-11">
+                                    <textarea type="" class="form-control" name="Remark" id="txtRemark"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row special-group m-3" id="open_Trill">
+                        @* Open Trill*@
+                        <label class="col-12 text-blue fw-bold mb-3 d-block"> @SystemResource.open_Tractor_car </label>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.App_Seller</label>
+                                <div class="col-9 col-md-7">
+                                    <select id="ddlSalesman" name="" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">@SystemResource.date_opening</label>
+                                <div class="col-9 col-md-7">
+                                    <input type="date" class="form-control" name="OpenAt" id="txtdateopening">
                                 </div>
                             </div>
                         </div>
@@ -338,6 +341,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <div class="row gy-3 ">
@@ -385,7 +389,7 @@
                         <!-- Inside Table  -->
                         <div class="inside-table  my-4" id="DivShow">
                             <div class="table-responsive">
-                                <table  class="table table-borderless ">
+                                <table class="table table-borderless ">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -401,7 +405,7 @@
                                             <th>@SystemResource.App_Notes</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="div_Data"> </tbody> 
+                                    <tbody id="div_Data"> </tbody>
                                     <tfoot>
                                         <tr>
                                             <td></td>
@@ -570,7 +574,7 @@
                     @* Details *@
                     <div class="col-12 display_none" id="divlOerSalesman_2">
                         @* Print Icon *@
-                        <div class="d-flex justify-content-start" >
+                        <div class="d-flex justify-content-start">
                             <div class="">
                                 <button id="btnPrintStock" type="button" class="btn btn-main me-3">
                                     @SystemResource.Distributorstockprinting
@@ -592,15 +596,15 @@
                             </div>
                         </div>
                         <!-- Custom Table  -->
-                        <div class="custom-table my-4" >
+                        <div class="custom-table my-4">
                             <div class="table-responsive">
                                 <table class="table table-borderless ">
                                     <thead>
                                         <tr>
                                             <th width="20%"></th>
-                                            <th >@SystemResource.value</th>
-                                            <th >@SystemResource.App_Tax</th>
-                                            <th >@SystemResource.App_TotAfterTax</th>
+                                            <th>@SystemResource.value</th>
+                                            <th>@SystemResource.App_Tax</th>
+                                            <th>@SystemResource.App_TotAfterTax</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -628,15 +632,15 @@
                                             <td> </td>
                                             <td> </td>
                                         </tr>
-                                        <tr >
+                                        <tr>
                                             <td class="fs-6 fw-normal"><label id="lab_Close_CashOnhand"> Cash On hand</label></td>
-                                            <td class="fs-6 fw-normal"><label  id="lab_Close_CashOnBank"> Cash On Bank </label></td>
+                                            <td class="fs-6 fw-normal"><label id="lab_Close_CashOnBank"> Cash On Bank </label></td>
                                             <td> </td>
                                             <td> </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                               
+
                             </div>
                         </div>
 
@@ -691,7 +695,7 @@
                         <!--  Table  -->
                         <div id="OerSalmanGridivDetail" class="col-12">
                             <div class="d-flex justify-content-center text-blue mb-3">
-                                <h4  id="id_Lapl_Salesman"> @SystemResource.ItemsForVendor </h4>
+                                <h4 id="id_Lapl_Salesman"> @SystemResource.ItemsForVendor </h4>
                             </div>
                             <div>
                                 <table id="OerSalesmanGrid_Detail"></table>
@@ -889,7 +893,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Editors Details -->
                             <div class="insettext row editor-details">
                                 <div class="col-12 col-md-6">
@@ -965,7 +969,7 @@
             });
         });
 
-        
+
     </script>
     <script src="~/ClientApp/JsGrid.js"></script>
     <script src="~/ClientApp/Processes/Processes.js"></script>
