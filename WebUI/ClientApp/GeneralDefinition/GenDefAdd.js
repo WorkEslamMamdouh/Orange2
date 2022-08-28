@@ -46,21 +46,16 @@ var GenDefAdd;
     GenDefAdd.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_Data :input").removeAttr("disabled");
             $("#Defaultperc").removeAttr("disabled");
             $("#VatType").removeAttr("disabled");
-            $("#btnUpdate_Def").toggleClass("display_none");
-        }
-        else {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
-            $("#btnUpdate_Def").toggleClass("display_none");
+            $("#btnUpdate_Def").addClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
+            $('#btnAddDetails').removeClass("display_none");
         }
         else {
             $(".btnAddDetails").attr("disabled", "disabled");
@@ -132,7 +127,7 @@ var GenDefAdd;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t             <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Defaultperc" + cnt + "\" type=\"Number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select id=\"VatType" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                      <option value=\"Null\">" + (lang == "ar" ? "اختر الضريبه" : "Choose Tax") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAcc" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAccop" + cnt + "\" disabled   class=\"form-control\">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    \n\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t             <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Defaultperc" + cnt + "\" type=\"Number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select id=\"VatType" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                      <option value=\"Null\">" + (lang == "ar" ? "اختر الضريبه" : "Choose Tax") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAcc" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAccop" + cnt + "\" disabled   class=\"form-control\">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    \n\n                </tr>";
         $("#div_Data").append(html);
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
@@ -414,9 +409,9 @@ var GenDefAdd;
         });
     }
     function btnback_onclick() {
-        $('#btnAddDetails').toggleClass("display_none");
-        $('#btnSave_Def').toggleClass("display_none");
-        $('#btnBack_Def').toggleClass("display_none");
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_Data :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");

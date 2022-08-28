@@ -58,22 +58,15 @@ namespace GenDefVendorAdjust {
     $('#btnUpdate_Def').on('click', function () {
 
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
-            $("#btnUpdate_Def").toggleClass("display_none");
-        }
-        else {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
-
-            $("#btnUpdate_Def").toggleClass("display_none");
-
-        }
+            $("#btnUpdate_Def").addClass("display_none");
+        } 
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
 
-            $('#btnAddDetails').toggleClass("display_none");
+            $('#btnAddDetails').removeClass("display_none");
 
         }
         else {
@@ -157,7 +150,7 @@ namespace GenDefVendorAdjust {
         html = `<tr id= "No_Row${cnt}"> 
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -580,9 +573,9 @@ namespace GenDefVendorAdjust {
 
     function btnback_onclick() {
 
-        $('#btnAddDetails').toggleClass("display_none");
-        $('#btnSave_Def').toggleClass("display_none");
-        $('#btnBack_Def').toggleClass("display_none");
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_ContentData :input").attr("disabled", "true");
         $(".minus_btn").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");
