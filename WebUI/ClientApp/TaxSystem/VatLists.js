@@ -31,7 +31,6 @@ var VatLists;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
-    var btnPrintReceive;
     var btnPrint;
     //*************************Initialization************************//
     function InitializeComponent() {
@@ -41,6 +40,7 @@ var VatLists;
         else {
             document.getElementById('Screen_name').innerHTML = "Vat Lists";
         }
+        $("#iconReportPages").removeClass("d-none");
         $("#icon-bar").addClass("display_none");
         $("#btnShow").addClass("display_none");
         $("#btnAdd").addClass("display_none");
@@ -56,7 +56,6 @@ var VatLists;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         //*****Privilage
         btnPrint.disabled = !SysSession.CurrentPrivileges.PrintOut;
-        btnPrintReceive.disabled = !SysSession.CurrentPrivileges.PrintOut;
         btnPrintTrEXEL.disabled = !SysSession.CurrentPrivileges.PrintOut;
         btnPrintTrPDF.disabled = !SysSession.CurrentPrivileges.PrintOut;
         btnPrintTrview.disabled = !SysSession.CurrentPrivileges.PrintOut;
@@ -85,7 +84,6 @@ var VatLists;
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
-        btnPrintReceive = document.getElementById("btnPrintReceive");
         btnPrint = document.getElementById("btnPrint");
     }
     function InitializeEvents() {

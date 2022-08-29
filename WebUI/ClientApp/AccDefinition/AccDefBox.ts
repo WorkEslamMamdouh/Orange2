@@ -38,6 +38,7 @@ namespace AccDefBox {
 
         }     
 
+        $('#icon-bar').addClass('hidden_Control');
         $('#divIconbar').addClass('hidden_Control');
         $("#icon-bar").addClass("d-none");
         $('#iconbar_Definition').removeClass('hidden_Control');
@@ -129,7 +130,7 @@ namespace AccDefBox {
         html = `<tr id= "No_Row${cnt}"> 
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

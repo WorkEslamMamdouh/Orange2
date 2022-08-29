@@ -1716,8 +1716,9 @@ namespace Inv.API.Controllers
                 }
                 catch (Exception)
                 {
+                    break;
 
-                    throw;
+                    //throw;
                 }
             } while (1 == 1);
             return formattedDate;

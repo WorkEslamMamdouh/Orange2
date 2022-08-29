@@ -28035,11 +28035,14 @@ div.tagsinput {
 }
 
 .sidebar .nav {
-    overflow: hidden;
+    /*overflow: hidden !important;*/
     flex-wrap: nowrap;
     flex-direction: column;
     margin-bottom: 60px;
     padding-top: 70px;
+    overflow-y: auto;
+    max-height: 100vh;
+    /*overflow-y: hidden !important;*/
 }
 
 @media (max-width: 992px) {
@@ -28047,6 +28050,25 @@ div.tagsinput {
         padding-top: 0;
     }
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #143f6b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
 .sidebar .nav .nav-item {
     -webkit-transition-duration: 0.25s;

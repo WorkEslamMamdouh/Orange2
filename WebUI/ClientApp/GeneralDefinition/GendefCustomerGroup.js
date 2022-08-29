@@ -39,19 +39,14 @@ var GendefCustomerGroup;
     GendefCustomerGroup.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {
         if (SysSession.CurrentPrivileges.EDIT) {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
+            $('#btnSave_Def').removeClass("display_none");
+            $('#btnBack_Def').removeClass("display_none");
             $("#div_Data :input").removeAttr("disabled");
-            $("#btnUpdate_Def").toggleClass("display_none");
-        }
-        else {
-            $('#btnSave_Def').toggleClass("display_none");
-            $('#btnBack_Def').toggleClass("display_none");
-            $("#btnUpdate_Def").toggleClass("display_none");
+            $("#btnUpdate_Def").addClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
-            $('#btnAddDetails').toggleClass("display_none");
+            $('#btnAddDetails').removeClass("display_none");
         }
         else {
             $(".btnAddDetails").attr("disabled", "disabled");
@@ -111,7 +106,7 @@ var GendefCustomerGroup;
         var html;
         // ;
         //   html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GendefCustomerGroup  btn-minus"></span><div class="col-lg-1 col-xs-2 style_pading"> <input id="txtCode' + cnt + '" type= "text" class="form-control input-sm right2 " disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control input-sm  right3" disabled="disabled"/></div><div class="col-lg-4 col-xs-5 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control input-sm right4" disabled="disabled" /></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control input-sm"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/></div></div></div>';
-        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n\t\t        <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n\t\t        <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n\t\t        <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n\t\t        <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n                </tr>";
         $("#div_Data").append(html);
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
@@ -289,9 +284,9 @@ var GendefCustomerGroup;
         });
     }
     function btnBack_Def_onclick() {
-        $('#btnAddDetails').toggleClass("display_none");
-        $('#btnSave_Def').toggleClass("display_none");
-        $('#btnBack_Def').toggleClass("display_none");
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave_Def').addClass("display_none");
+        $('#btnBack_Def').addClass("display_none");
         $("#div_Data :input").attr("disabled", "true");
         $(".btn-minus").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");

@@ -62,7 +62,10 @@ namespace TranPosting {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
-        $('#dir_11').addClass('hidden_Control');
+
+        $("#iconbar_Definition").addClass("d-none");
+        $("#divIconbar").addClass("d-none");
+        $("#icon-bar").addClass("d-none");
 
         InitalizeControls();
         //System
@@ -88,18 +91,13 @@ namespace TranPosting {
         InitializeTransactionsGrid();
         InitializeVoucherDetailGrid();
 
-        $("#divIconbar").addClass("d-none");
-        $("#icon-bar").addClass("d-none");
-
         $("#btndiv_3").addClass("Actiev");
         $("#btndiv_1").removeClass("Actiev");
         $("#btndiv_2").removeClass("Actiev");
 
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
-        $("#div_2").addClass("display_none"); 
         $("#div_2").addClass("display_none");
-        
 
     }
     function InitalizeControls() {
@@ -220,8 +218,8 @@ namespace TranPosting {
                         $("#div_3").addClass("display_none");
                         $("#div_1").removeClass("display_none");
                         $("#div_2").addClass("display_none");
+                        $('#btnShowVouchers').removeAttr('disabled');
                     }
-
                 }
             });
         }
@@ -245,7 +243,7 @@ namespace TranPosting {
         cerditTot = 0;
         diffTot = 0;
         debugger
-        LnkTransDetails = new Array<G_LnkTrans_Temp>();
+        let LnkTransDetails = new Array<G_LnkTrans_Temp>();
         LnkTransDetails = TransactionsGrid.DataSource;
         selectedLnkTransDetails = LnkTransDetails.filter(x => x.IsSelected == true)
         if (selectedLnkTransDetails.length != 0) {
@@ -296,6 +294,15 @@ namespace TranPosting {
             });
         }
         else {
+            selectedLnkTransDetails = new Array<G_LnkTrans_Temp>();
+            GetLnkVoucherDetail = new Array<GQ_GetLnkVoucherDetail>();
+            VoucherDetailGrid.DataSource = GetLnkVoucherDetail;
+            VoucherDetailGrid.Bind();
+            txtDesc.value = "";
+            txtDebit.value = "0";
+            txtCedit.value = "0";
+            txtDiff.value = "0";
+
             DisplayMassage("لا يوجد قيود لعرضها ", "There are no restrictions to display", MessageType.Error);
             return;
         }
@@ -513,9 +520,8 @@ namespace TranPosting {
                     txt.style.width = "25px";
                     txt.onclick = (e) => {
                         if (txt.checked == true) {
-                            debugger
-                            item.IsSelected = true; 
-                        } else { 
+                            item.IsSelected = true;
+                        } else {
                             item.IsSelected = false;
                         }
                     };
@@ -531,21 +537,17 @@ namespace TranPosting {
         ];
 
     }
-    //function updateselect(Rowid: string, isselect: number) {
-    //    debugger
-    //    let branchcode = Number(ddlBranch.value);
-    //    Ajax.Callsync({
-    //        type: "Get",
-    //        url: sys.apiUrl("TranPosting", "Updateselect"),
-    //        data: {
-    //            Comp: compcode, branchCode: branchcode, ROW_ID: Rowid, Isselect: isselect, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-    //        },
-    //        success: (d) => {
-    //            let result = d as BaseResponse;
+    // function updateselect() {		   
+    //     Ajax.Callsync({
+    //         type: "Get",
+    //url: sys.apiUrl("TranPosting", "Updateselect"),
+    //data: JSON.stringify(LnkTransDetails),
+    //         success: (d) => {
+    //             let result = d as BaseResponse;
 
-    //        }
-    //    });
-    //}
+    //         }
+    //     });
+    // }
     function InitializeVoucherDetailGrid() {
         let res: any = GetResourceList("");
         VoucherDetailGrid.ElementName = "VoucherDetailGrid";

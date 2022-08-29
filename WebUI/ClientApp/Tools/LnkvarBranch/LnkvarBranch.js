@@ -152,6 +152,7 @@ var LnkvarBranch;
         $('#btnSave_Def').addClass('display_none');
         $('#btnUpdate_Def').removeClass('display_none');
         $('.dis').attr('disabled', 'disabled');
+        $('.acc_Cod').attr('disabled', 'disabled');
         Display();
     }
     function btnsave_onclick() {
@@ -322,7 +323,7 @@ var LnkvarBranch;
                     else {
                         txt.disabled = true;
                     }
-                    txt.className = "form-control";
+                    txt.className = "form-control acc_Cod";
                     txt.onchange = function (e) {
                         check_Account(item.Ser);
                     };
@@ -352,7 +353,7 @@ var LnkvarBranch;
                     txt.type = "button";
                     txt.value = (lang == "ar" ? "بحث" : "Search");
                     txt.id = "but" + item.Ser;
-                    txt.className = "btn btn-main";
+                    txt.className = "btn btn-main dis";
                     if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
@@ -448,7 +449,7 @@ var LnkvarBranch;
                     else {
                         txt.disabled = true;
                     }
-                    txt.className = "form-control";
+                    txt.className = "form-control acc_Cod";
                     txt.onchange = function (e) {
                         check_ccenter(item.Ser);
                     };
@@ -478,7 +479,7 @@ var LnkvarBranch;
                     txt.disabled = false;
                     txt.id = "but" + item.Ser;
                     txt.disabled = true;
-                    txt.className = "btn btn-main";
+                    txt.className = "btn btn-main dis";
                     if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
                         txt.disabled = false;
                     }
