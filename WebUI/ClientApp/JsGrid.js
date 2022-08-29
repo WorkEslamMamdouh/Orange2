@@ -267,8 +267,10 @@ var JsGrid = /** @class */ (function () {
                         $('#btnSave').addClass('display_none');
                         $('#Loading_Div').html('');
                     }
-                    document.body.scrollTop = 600;
-                    document.documentElement.scrollTop = 600;
+                    if ($("#NoDubleclick").val() == 0) {
+                        document.body.scrollTop = 600;
+                        document.documentElement.scrollTop = 600;
+                    }
                 }, 150);
             },
             onRefreshing: function (arg) {

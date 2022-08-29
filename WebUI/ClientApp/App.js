@@ -1746,6 +1746,12 @@ function Back() {
     $("#NewAdd_Falg").val('0');
     $("#Mod_Flag").val('0');
 }
+function RemoveDisabledToolBar() {
+    $('#divIconbar').removeClass('disabledDiv');
+}
+function DisabledToolBar() {
+    $('#divIconbar').addClass('disabledDiv');
+}
 function Resizable_Table() {
     'use strict';
     var initResizable = function (that) {

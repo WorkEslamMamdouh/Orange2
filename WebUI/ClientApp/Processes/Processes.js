@@ -170,6 +170,7 @@ var Processes;
     var btnPrintOperationsummary;
     var btnPrintsalesrecord;
     function InitalizeComponent() {
+        $("#NoDubleclick").val('1');
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
         //$("#DivShow").attr("disabled", "disabled").off('click');
@@ -3070,6 +3071,7 @@ var Processes;
         $("#txtPolice_num").removeAttr("disabled");
         $('#ddlSalesman').prop('selectedIndex', 0);
         Back();
+        DisabledToolBar();
     }
     function Update_1_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -3103,6 +3105,7 @@ var Processes;
         if (Status == 0) { //تحت التجهيز 
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -3139,6 +3142,7 @@ var Processes;
                 btnBack_1.classList.add("display_none");
             }
             flag_succ_insert = false;
+            RemoveDisabledToolBar();
         }
         else {
             if (flag_Back == true) {
@@ -3181,6 +3185,7 @@ var Processes;
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+            RemoveDisabledToolBar();
         }
         Update_1 = false;
         disabled_divMasterGridiv();
@@ -3252,6 +3257,7 @@ var Processes;
             btnBack_1_onclick();
             btnBack_3_onclick();
         }
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
         if (flag_Add == true) {
@@ -3369,6 +3375,7 @@ var Processes;
         if (Status == 0) { //مفتوحة
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -3445,6 +3452,7 @@ var Processes;
         $("#DivHederMaster").addClass("disabledDiv");
         $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
         if (flag_Back == true) {
@@ -3549,6 +3557,7 @@ var Processes;
             btnBack_1_onclick();
         }
         $(".ScrapQty").removeAttr("disabled");
+        DisabledToolBar();
     }
     function btnBack_5_onclick() {
         if (flag_Success_5 == true) {

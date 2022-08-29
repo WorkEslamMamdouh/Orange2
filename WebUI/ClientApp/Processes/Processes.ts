@@ -185,7 +185,7 @@ namespace Processes {
 
 
     export function InitalizeComponent() {
-
+        $("#NoDubleclick").val('1');
 
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
@@ -371,9 +371,7 @@ namespace Processes {
         btnExpenses.onclick = btnExpenses_onclick;
         btnOpen.onclick = btnOpen_onclick;
         //btnclosingprocessing.onclick = btnclosingprocessingonclick;
-
-
-
+         
         btnUpdate_1.onclick = Update_1_onclick;
         btnBack_1.onclick = btnBack_1_onclick;
         btnSave_1.onclick = btnSave_1_onclick;
@@ -820,6 +818,7 @@ namespace Processes {
         });
     }
 
+   
 
     function _SearchBox_Change() {
 
@@ -4007,6 +4006,8 @@ namespace Processes {
         $('#ddlSalesman').prop('selectedIndex', 0);
 
         Back();
+
+        DisabledToolBar();
     }
 
     function Update_1_onclick() {
@@ -4053,6 +4054,8 @@ namespace Processes {
 
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -4098,6 +4101,8 @@ namespace Processes {
 
             }
             flag_succ_insert = false;
+
+            RemoveDisabledToolBar();
         }
         else {
 
@@ -4141,6 +4146,8 @@ namespace Processes {
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+
+            RemoveDisabledToolBar();
         }
 
 
@@ -4233,7 +4240,7 @@ namespace Processes {
 
 
 
-
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
 
@@ -4387,6 +4394,8 @@ namespace Processes {
         }
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -4481,6 +4490,8 @@ namespace Processes {
         $("#DivHederMaster").addClass("disabledDiv");
         $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
+
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
 
@@ -4620,6 +4631,9 @@ namespace Processes {
 
 
         $(".ScrapQty").removeAttr("disabled");
+
+
+        DisabledToolBar();
 
     }
     function btnBack_5_onclick() {
