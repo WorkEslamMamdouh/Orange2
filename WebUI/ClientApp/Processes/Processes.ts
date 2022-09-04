@@ -185,7 +185,7 @@ namespace Processes {
 
 
     export function InitalizeComponent() {
-
+        $("#NoDubleclick").val('1');
 
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
@@ -371,9 +371,7 @@ namespace Processes {
         btnExpenses.onclick = btnExpenses_onclick;
         btnOpen.onclick = btnOpen_onclick;
         //btnclosingprocessing.onclick = btnclosingprocessingonclick;
-
-
-
+         
         btnUpdate_1.onclick = Update_1_onclick;
         btnBack_1.onclick = btnBack_1_onclick;
         btnSave_1.onclick = btnSave_1_onclick;
@@ -820,6 +818,7 @@ namespace Processes {
         });
     }
 
+   
 
     function _SearchBox_Change() {
 
@@ -912,6 +911,10 @@ namespace Processes {
         }
 
         flag_Add = false;
+
+
+        document.body.scrollTop = 400;
+        document.documentElement.scrollTop = 400;
     }
     function DisplayData(Selected_Data: Array<IQ_GetOperation>) {
         OperationIDglopel = Selected_Data[0].OperationID;
@@ -1673,7 +1676,7 @@ namespace Processes {
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -2308,7 +2311,7 @@ namespace Processes {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus3${cnt}" class="lebelminus"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>
@@ -3917,16 +3920,25 @@ namespace Processes {
     }
     function btnView_load_onclick() {
 
-        $('html, body').animate({
-            scrollTop: $("#txtGoods_Desc").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtGoods_Desc").offset().top
+        //}, 2000);
+
+        document.body.scrollTop = 800;
+        document.documentElement.scrollTop = 800;
+
         btnUpdate_2.focus();
 
     }
     function btnExpenses_onclick() {
-        $('html, body').animate({
-            scrollTop: $("#txtRemark").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtRemark").offset().top
+        //}, 2000);
+
+
+        document.body.scrollTop = 1100;
+        document.documentElement.scrollTop = 1100;
+
         btnUpdate_3.focus();
     }
     //-------------------------------------------------------button---Save and Back and Eidt--------------------------------------
@@ -4007,6 +4019,8 @@ namespace Processes {
         $('#ddlSalesman').prop('selectedIndex', 0);
 
         Back();
+
+        DisabledToolBar();
     }
 
     function Update_1_onclick() {
@@ -4053,6 +4067,8 @@ namespace Processes {
 
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -4098,6 +4114,8 @@ namespace Processes {
 
             }
             flag_succ_insert = false;
+
+            RemoveDisabledToolBar();
         }
         else {
 
@@ -4141,6 +4159,8 @@ namespace Processes {
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+
+            RemoveDisabledToolBar();
         }
 
 
@@ -4233,7 +4253,7 @@ namespace Processes {
 
 
 
-
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
 
@@ -4387,6 +4407,8 @@ namespace Processes {
         }
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -4481,6 +4503,8 @@ namespace Processes {
         $("#DivHederMaster").addClass("disabledDiv");
         $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
+
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
 
@@ -4620,6 +4644,9 @@ namespace Processes {
 
 
         $(".ScrapQty").removeAttr("disabled");
+
+
+        DisabledToolBar();
 
     }
     function btnBack_5_onclick() {
@@ -5043,7 +5070,7 @@ namespace Processes {
                 window.open(result, "_blank");
             }
         })
-    } btnPrintDeposit_onclick
+    }  
     function btnPrintDeposit_onclick() {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;

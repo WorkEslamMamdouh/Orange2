@@ -62,14 +62,22 @@
             <div class="card bg-light-blue">
                 <div class="card-body">
                     <div class="row">
+
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
                                 <label class="col-4 align-self-center p-md-0">العميل</label>
                                 <div class="col-8 ">
-                                    <select id="ddlCustomer" class="form-control"></select>
+                                    <div class="search-content">
+                                        <input type="text" class="form-control search-control" id="txt_CustNameFilter" name="" disabled>
+                                        <button type="button" id="btnCustFilter" name="ColSearch" class="btn btn-main btn-search"  >
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                    <input id="ddlCustomer" class="form-control display_none">
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
                                 <label class="col-4 align-self-center p-md-0">من تاريخ</label>
@@ -191,7 +199,13 @@
                             <div class="form-group row g-0">
                                 <label class="col-4 col-md-2 align-self-center p-md-0">@SystemResource.App_Cutomer</label>
                                 <div class="col-4 col-md-4 px-0">
-                                    <select disabled class="form-control me-3" id="ddlInvoiceCustomer"></select>
+                                    <div class="search-content">
+                                        <input type="text" class="form-control search-control" id="txt_CustCode" name="CustCode" disabled>
+                                        <button type="button" id="btnCust" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                    <input disabled class="form-control me-3 display_none" id="ddlInvoiceCustomer">
                                 </div>
                                 <div class="col-4 col-md-6 px-0">
                                     <input type="text" disabled class="form-control" id="txtInvoiceCustomerName">
@@ -607,10 +621,8 @@
     <script src="~/ClientApp/Sales/SlsTrSalesManager.js"></script>
     <script>
         $(document).ready(function () {
-            $("#ddlCustomer").select2();
-            $("#ddlSalesmanFilter").select2();
-            $("#ddlSalesPersonFilter").select2();
-            $("#ddlInvoiceCustomer").select2();
+         
+            $("#ddlSalesPersonFilter").select2(); 
             //$("#ddlSalesPerson").select2();
             //$("#ddlSalesman").select2(); 
             $(".select_").select2();
@@ -620,10 +632,7 @@
             $('#but_read').click(function () {
                 //var username = $('#ddlSalesman option:selected').text();
                 //var userid = $('#ddlSalesman').val();
-
-                var username = $('#ddlInvoiceCustomer option:selected').text();
-                var userid = $('#ddlInvoiceCustomer').val();
-
+  
 
                 var username = $('.select_ option:selected').text();
                 var userid = $('.select_').val();

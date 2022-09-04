@@ -2207,6 +2207,18 @@ function Back() {
 }
 
 
+function RemoveDisabledToolBar() {
+
+    $('#divIconbar').removeClass('disabledDiv');
+
+}
+
+function DisabledToolBar() {
+
+    $('#divIconbar').addClass('disabledDiv');
+
+} 
+
 function Resizable_Table() {
 
     'use strict';

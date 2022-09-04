@@ -359,7 +359,7 @@ namespace Inv.API.Controllers
                     if (Operation.OperationID != 0 && Operation.OperationID != null)
                     {
 
-                        var chackVendorChang = dbNew.IQ_GetOperation.Where(s => s.OperationID == Operation.OperationID).FirstOrDefault();
+                        IQ_GetOperation chackVendorChang = dbNew.IQ_GetOperation.Where(s => s.OperationID == Operation.OperationID).FirstOrDefault();
                         if (chackVendorChang.VendorID != Operation.VendorID)
                         {
 
@@ -675,65 +675,66 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]//done 
         public IHttpActionResult ListOperationChargesDetail(List<I_TR_OperationCharges> updatedObj)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(updatedObj[0].Token, updatedObj[0].UserCode))
+            if (updatedObj.Count == 0)
             {
-                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+                return Ok(new BaseResponse("ok"));
+            } 
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+            {
+                try
                 {
-                    try
+                    // update master
+                    //OperationItems.Update(I_TR_OperationItems);
+
+
+                    //update I_Pur_TR_ReceiveItems 
+                    List<I_TR_OperationCharges> insertedOperationItems = updatedObj.Where(x => x.StatusFlag == 'i').ToList();
+                    List<I_TR_OperationCharges> updatedOperationItems = updatedObj.Where(x => x.StatusFlag == 'u').ToList();
+                    List<I_TR_OperationCharges> deletedOperationItems = updatedObj.Where(x => x.StatusFlag == 'd').ToList();
+
+                    //loop insered  I_Pur_TR_ReceiveItems
+                    foreach (I_TR_OperationCharges item in insertedOperationItems)
                     {
-                        // update master
-                        //OperationItems.Update(I_TR_OperationItems);
-
-
-                        //update I_Pur_TR_ReceiveItems 
-                        List<I_TR_OperationCharges> insertedOperationItems = updatedObj.Where(x => x.StatusFlag == 'i').ToList();
-                        List<I_TR_OperationCharges> updatedOperationItems = updatedObj.Where(x => x.StatusFlag == 'u').ToList();
-                        List<I_TR_OperationCharges> deletedOperationItems = updatedObj.Where(x => x.StatusFlag == 'd').ToList();
-
-                        //loop insered  I_Pur_TR_ReceiveItems
-                        foreach (I_TR_OperationCharges item in insertedOperationItems)
-                        {
-                            //item.OperationExpensesID = updatedObj[0].OperationItemID;
-                            I_TR_OperationCharges InsertedRec = OperationCharges.Insert(item);
-                        }
-
-                        //loop Update  I_Pur_TR_ReceiveItems
-                        foreach (I_TR_OperationCharges item in updatedOperationItems)
-                        {
-
-                            I_TR_OperationCharges updatedRec = OperationCharges.Update(item);
-                        }
-
-                        //loop Delete  I_Pur_TR_ReceiveItems
-                        foreach (I_TR_OperationCharges item in deletedOperationItems)
-                        {
-                            int deletedId = item.OperationExpensesID;
-                            OperationCharges.Delete(deletedId);
-                        }
-                        int val = updatedObj[0].OperationID;
-                        I_TR_Operation operObj = db.I_TR_Operation.Where(s => s.OperationID == val).FirstOrDefault();
-                        int br = 1;
-                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(operObj.CompCode), br, updatedObj[0].OperationID, "Process", "Update", db);
-                        if (res.ResponseState == true)
-                        {
-                            dbTransaction.Commit();
-                            return Ok(new BaseResponse("ok"));
-                        }
-                        else
-                        {
-                            dbTransaction.Rollback();
-                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
-                        }
-
+                        //item.OperationExpensesID = updatedObj[0].OperationItemID;
+                        I_TR_OperationCharges InsertedRec = OperationCharges.Insert(item);
                     }
-                    catch (Exception ex)
+
+                    //loop Update  I_Pur_TR_ReceiveItems
+                    foreach (I_TR_OperationCharges item in updatedOperationItems)
+                    {
+
+                        I_TR_OperationCharges updatedRec = OperationCharges.Update(item);
+                    }
+
+                    //loop Delete  I_Pur_TR_ReceiveItems
+                    foreach (I_TR_OperationCharges item in deletedOperationItems)
+                    {
+                        int deletedId = item.OperationExpensesID;
+                        OperationCharges.Delete(deletedId);
+                    }
+                    int val = updatedObj[0].OperationID;
+                    I_TR_Operation operObj = db.I_TR_Operation.Where(s => s.OperationID == val).FirstOrDefault();
+                    int br = 1;
+                    ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(operObj.CompCode), br, updatedObj[0].OperationID, "Process", "Update", db);
+                    if (res.ResponseState == true)
+                    {
+                        dbTransaction.Commit();
+                        return Ok(new BaseResponse("ok"));
+                    }
+                    else
                     {
                         dbTransaction.Rollback();
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
+
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
-            return BadRequest(ModelState);
+
         }
 
         [HttpPost, AllowAnonymous]//done 

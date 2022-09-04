@@ -170,6 +170,7 @@ var Processes;
     var btnPrintOperationsummary;
     var btnPrintsalesrecord;
     function InitalizeComponent() {
+        $("#NoDubleclick").val('1');
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
         //$("#DivShow").attr("disabled", "disabled").off('click');
@@ -764,6 +765,8 @@ var Processes;
             //$("#btnPresent").attr("style", "")
         }
         flag_Add = false;
+        document.body.scrollTop = 400;
+        document.documentElement.scrollTop = 400;
     }
     function DisplayData(Selected_Data) {
         OperationIDglopel = Selected_Data[0].OperationID;
@@ -1335,7 +1338,7 @@ var Processes;
     }
     function BuildControlsCharges(cnt) {
         var html;
-        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\" class=\"minusCharges\" ><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         $("#div_ChargesData").append(html);
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
         // 
@@ -1771,7 +1774,7 @@ var Processes;
     }
     function BuildControlslebel(cnt) {
         var html;
-        html = "<tr id=\"row_font_header" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial3" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input type=\"date\" id=\"DepositDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"Salesman" + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"null\"> " + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + " </option> \n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"DepositAmount" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               \t<select id=\"ACC_type" + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + "  </option> \n                                <option value=\"0\"> " + (lang == "ar" ? "بنك" : "Bank") + " </option>\n                                <option value=\"1\"> " + (lang == "ar" ? "صندوق" : "Cash box") + " </option> \n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" id=\"Acc_Code_div" + cnt + "\">\n\t\t\t               <select id=\"Acc_Code' + " + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "رقم الحساب" : "Account Number") + " </option>\n\t\t\t               </select >\n\t\t                </div>\n                        <div class=\"form-group display_none\" id=\"CashBox_div" + cnt + "\">\n\t\t\t                <select id=\"CashBox" + cnt + "\" class=\"form-control display_none\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "الصندوق" : "CashBox") + "</option>\n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <textarea rows=\"2\"  id=\"Remarks" + cnt + "\" class=\"form-control\"></textarea>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag2" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"DepositID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"row_font_header" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\" class=\"lebelminus\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial3" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input type=\"date\" id=\"DepositDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"Salesman" + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"null\"> " + (lang == "ar" ? "اختار المندوب" : "Choose Salesman") + " </option> \n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"DepositAmount" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               \t<select id=\"ACC_type" + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "النوع الحساب  " : "Account Type ") + "  </option> \n                                <option value=\"0\"> " + (lang == "ar" ? "بنك" : "Bank") + " </option>\n                                <option value=\"1\"> " + (lang == "ar" ? "صندوق" : "Cash box") + " </option> \n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" id=\"Acc_Code_div" + cnt + "\">\n\t\t\t               <select id=\"Acc_Code' + " + cnt + "\" class=\"form-control\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "رقم الحساب" : "Account Number") + " </option>\n\t\t\t               </select >\n\t\t                </div>\n                        <div class=\"form-group display_none\" id=\"CashBox_div" + cnt + "\">\n\t\t\t                <select id=\"CashBox" + cnt + "\" class=\"form-control display_none\"> \n\t\t\t                    <option value=\"Null\"> " + (lang == "ar" ? "الصندوق" : "CashBox") + "</option>\n\t\t\t                </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <textarea rows=\"2\"  id=\"Remarks" + cnt + "\" class=\"form-control\"></textarea>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag2" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"DepositID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         $("#data_lebel").append(html);
         var Salsman = AllGetOperationMasterDetailModel.TR_OperationSalesman;
         for (var i = 0; i < Salsman.length; i++) {
@@ -3000,15 +3003,19 @@ var Processes;
         //btnUpdate_2.focus();
     }
     function btnView_load_onclick() {
-        $('html, body').animate({
-            scrollTop: $("#txtGoods_Desc").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtGoods_Desc").offset().top
+        //}, 2000);
+        document.body.scrollTop = 800;
+        document.documentElement.scrollTop = 800;
         btnUpdate_2.focus();
     }
     function btnExpenses_onclick() {
-        $('html, body').animate({
-            scrollTop: $("#txtRemark").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtRemark").offset().top
+        //}, 2000);
+        document.body.scrollTop = 1100;
+        document.documentElement.scrollTop = 1100;
         btnUpdate_3.focus();
     }
     //-------------------------------------------------------button---Save and Back and Eidt--------------------------------------
@@ -3070,6 +3077,7 @@ var Processes;
         $("#txtPolice_num").removeAttr("disabled");
         $('#ddlSalesman').prop('selectedIndex', 0);
         Back();
+        DisabledToolBar();
     }
     function Update_1_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -3103,6 +3111,7 @@ var Processes;
         if (Status == 0) { //تحت التجهيز 
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -3139,6 +3148,7 @@ var Processes;
                 btnBack_1.classList.add("display_none");
             }
             flag_succ_insert = false;
+            RemoveDisabledToolBar();
         }
         else {
             if (flag_Back == true) {
@@ -3181,6 +3191,7 @@ var Processes;
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+            RemoveDisabledToolBar();
         }
         Update_1 = false;
         disabled_divMasterGridiv();
@@ -3252,6 +3263,7 @@ var Processes;
             btnBack_1_onclick();
             btnBack_3_onclick();
         }
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
         if (flag_Add == true) {
@@ -3369,6 +3381,7 @@ var Processes;
         if (Status == 0) { //مفتوحة
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -3445,6 +3458,7 @@ var Processes;
         $("#DivHederMaster").addClass("disabledDiv");
         $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
         if (flag_Back == true) {
@@ -3549,6 +3563,7 @@ var Processes;
             btnBack_1_onclick();
         }
         $(".ScrapQty").removeAttr("disabled");
+        DisabledToolBar();
     }
     function btnBack_5_onclick() {
         if (flag_Success_5 == true) {
@@ -3894,7 +3909,6 @@ var Processes;
             }
         });
     }
-    btnPrintDeposit_onclick;
     function btnPrintDeposit_onclick() {
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;

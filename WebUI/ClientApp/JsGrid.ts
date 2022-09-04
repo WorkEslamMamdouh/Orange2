@@ -72,7 +72,7 @@ class JsGrid {
     }
     public GenerateColumns(objType: any) {
         //let row = this.DataSource[0];
-         
+
         this.Columns = new Array<IJsGridColumn>();
         let fields = Object.getOwnPropertyNames(objType);
         for (var field of fields) {
@@ -257,7 +257,7 @@ class JsGrid {
                 this._setPage(1);
             },
 
-         
+
 
             //filterTemplate: function () {
             //     
@@ -295,7 +295,7 @@ class JsGrid {
 
             //},
             rowClick: (e) => {
-                 let row = e.event.currentTarget as HTMLTableRowElement;
+                let row = e.event.currentTarget as HTMLTableRowElement;
                 $(".jsgrid-row").removeClass("SelectedRowF");
                 $(".jsgrid-alt-row").removeClass("SelectedRowF");
 
@@ -305,7 +305,7 @@ class JsGrid {
                 this.SelectedItem = e.item;
                 if (this.OnRowSelected != null)
                     this.OnRowSelected();
-              //  this.OnItemEditing(e);
+                //  this.OnItemEditing(e);
 
             },
 
@@ -322,7 +322,7 @@ class JsGrid {
                     this.OnRefreshed();
             },
             rowDoubleClick: (e) => {
-                 
+
 
 
                 var _this = this;
@@ -335,7 +335,7 @@ class JsGrid {
                     $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
                 }
                 setTimeout(function () {
-            
+
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;
                     _this.SelectedItem = e_item;
                     _this.SelectedKey = e_item_PrimaryKey;
@@ -359,15 +359,19 @@ class JsGrid {
                     }
 
 
+                    if ($("#NoDubleclick").val() == 0) {
 
-                    document.body.scrollTop = 600;
-                    document.documentElement.scrollTop = 600;
+                        document.body.scrollTop = 600;
+                        document.documentElement.scrollTop = 600;
+
+                    }
+
 
                 }, 150);
 
 
 
-            
+
 
             },
 
@@ -447,13 +451,13 @@ class JsGrid {
 
 
     }
-     
+
 
     //public paginationGoToPage(i: any) {
     //    //$("#" + this.ElementName).jsGrid._firstDisplayingPage = i;
     //    ////$("#" + this.ElementName)._setPage(i); 
     //    //$("#" + this.ElementName).jsGrid._setPage(i);
-        
+
     //    //$("#" + this.ElementName).api.paginationGoToNextPage();
 
     //    var grid = $("#" + this.ElementName);
