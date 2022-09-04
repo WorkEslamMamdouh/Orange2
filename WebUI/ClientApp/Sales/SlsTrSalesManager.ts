@@ -2617,9 +2617,9 @@ namespace SlsTrSalesManager {
 
             $("#txt_StatusFlag" + cnt).val("");
 
-            for (var i = 0; i < FamilyDetails.length; i++) {
-                $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
-            }
+            //for (var i = 0; i < FamilyDetails.length; i++) {
+            //    $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
+            //}
 
             var FamilyID: number = Number(SlsInvoiceItemsDetails[cnt].ItemFamilyID);
             $("#ddlFamily" + cnt).prop("value", FamilyID);

@@ -2075,9 +2075,9 @@ var SlsTrSalesManager;
             $("#btn_minus" + cnt).attr("disabled", "disabled");
             //bind Data
             $("#txt_StatusFlag" + cnt).val("");
-            for (var i = 0; i < FamilyDetails.length; i++) {
-                $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
-            }
+            //for (var i = 0; i < FamilyDetails.length; i++) {
+            //    $('#ddlFamily' + cnt).append('<option value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
+            //}
             var FamilyID = Number(SlsInvoiceItemsDetails[cnt].ItemFamilyID);
             $("#ddlFamily" + cnt).prop("value", FamilyID);
             FillddlItem(FamilyID);
