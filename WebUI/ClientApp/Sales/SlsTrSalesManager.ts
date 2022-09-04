@@ -298,7 +298,8 @@ namespace SlsTrSalesManager {
         btnPrintslip.onclick = btnPrintslip_onclick;
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
-        searchbutmemreport.onkeyup = _SearchBox_Change;
+        searchbutmemreport.onchange = _SearchBox_Change;
+        searchbutmemreport.onkeyup = _SearchBox_Change1;
 
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
@@ -2883,9 +2884,15 @@ namespace SlsTrSalesManager {
 
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
+    function _SearchBox_Change1() {
+        //$("#divGridDetails").jsGrid("option", "pageSize", 1000); 
+    }
     function _SearchBox_Change() {
-
+        debugger
         $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //$("#divGridDetails").jsGrid("option", "pageSize", 10000); 
+
+
         if (searchbutmemreport.value != "") {
 
             let search: string = searchbutmemreport.value.toLowerCase();
@@ -2898,6 +2905,72 @@ namespace SlsTrSalesManager {
             Grid.DataSource = SlsInvoiceStatisticsDetails;
             Grid.Bind();
         }
+
+
+
+
+
+        //let cnt = 1;
+
+        //if (SlsInvoiceStatisticsDetails.length > 0) {
+        //    let ii = 0;
+
+        //    $("#divGridDetails").jsGrid("option", "pageIndex", cnt);
+
+        //    for (var u = 0; u < SlsInvoiceStatisticsDetails.length; u++) {
+        //        debugger
+
+        //        if (ii > $("#divGridDetails").jsGrid("option", "pageSize")) {
+        //            cnt += 1;
+
+        //            $("#divGridDetails").jsGrid("option", "pageIndex", cnt);
+
+        //            ii = 0;
+        //        }
+        //        ii++;
+
+        //        //------------------------------------------------------------------------
+
+
+            
+        //        var  input, filter, table, tr, td, i, txtValue;
+        //        input = document.getElementById("searchbutmemreport");
+        //        filter = input.value.toUpperCase();
+        //        table = document.getElementById("divGridDetails");
+        //        tr = table.getElementsByTagName("tr");
+        //        for (i = 0; i < tr.length; i++) {
+        //            td = tr[i].getElementsByTagName("td")[0];
+        //            if (td) {
+        //                txtValue = td.textContent || td.innerText;
+        //                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //                    tr[i].style.display = ""; 
+        //                } else {
+        //                    tr[i].style.display = "none";
+        //                }
+        //            }
+        //        }
+
+
+        //        //------------------------------------------------------------------------
+
+        //    }
+        //}
+
+
+
+
+
+
+
+        //$('.jsgrid-filter-row').attr('style','display: none;')
+        //$('.jsgrid-insert-row').attr('style','display: none;')
+        
+        ////setTimeout(function () {
+        ////    $("#divGridDetails").jsGrid("option", "pageSize", 10);
+        ////}, 1500);
+
+        
+
     }
     function ValidationHeader() {
 
