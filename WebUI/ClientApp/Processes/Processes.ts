@@ -911,6 +911,10 @@ namespace Processes {
         }
 
         flag_Add = false;
+
+
+        document.body.scrollTop = 400;
+        document.documentElement.scrollTop = 400;
     }
     function DisplayData(Selected_Data: Array<IQ_GetOperation>) {
         OperationIDglopel = Selected_Data[0].OperationID;
@@ -1672,7 +1676,7 @@ namespace Processes {
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -2307,7 +2311,7 @@ namespace Processes {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus3${cnt}" class="lebelminus"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>
@@ -3916,16 +3920,25 @@ namespace Processes {
     }
     function btnView_load_onclick() {
 
-        $('html, body').animate({
-            scrollTop: $("#txtGoods_Desc").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtGoods_Desc").offset().top
+        //}, 2000);
+
+        document.body.scrollTop = 800;
+        document.documentElement.scrollTop = 800;
+
         btnUpdate_2.focus();
 
     }
     function btnExpenses_onclick() {
-        $('html, body').animate({
-            scrollTop: $("#txtRemark").offset().top
-        }, 2000);
+        //$('html, body').animate({
+        //    scrollTop: $("#txtRemark").offset().top
+        //}, 2000);
+
+
+        document.body.scrollTop = 1100;
+        document.documentElement.scrollTop = 1100;
+
         btnUpdate_3.focus();
     }
     //-------------------------------------------------------button---Save and Back and Eidt--------------------------------------
@@ -5057,7 +5070,7 @@ namespace Processes {
                 window.open(result, "_blank");
             }
         })
-    } btnPrintDeposit_onclick
+    }  
     function btnPrintDeposit_onclick() {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;

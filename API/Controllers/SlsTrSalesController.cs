@@ -392,6 +392,9 @@ namespace Inv.API.Controllers
                         {
                             item.InvoiceID = updatedObj.I_Sls_TR_Invoice.InvoiceID;
                             var InsertedRec = SlsInvoiceItemsService.Insert(item);
+
+
+
                         }
 
                         //loop Update  
