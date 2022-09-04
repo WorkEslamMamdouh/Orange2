@@ -382,9 +382,17 @@ var Dashboard;
         var divToPrint = document.getElementById("Table_" + type);
         var newWin = window.open("");
         newWin.document.write(divToPrint.outerHTML);
+        newWin.document.close(); // necessary for IE >= 10
+        newWin.focus(); // necessary for IE >= 10*/ 
+        newWin.pageXOffset; // necessary for IE >= 10*/ 
+        newWin.history.back();
+        newWin.onload = function () {
+            newWin.moveTo(0, 0);
+            newWin.resizeTo(640, 480);
+        };
         newWin.print();
-        //newWin.close();
-        //printDiv('dataTable');
+        newWin.print();
+        //newWin.close(); 
     }
 })(Dashboard || (Dashboard = {}));
 //# sourceMappingURL=Dashboard.js.map

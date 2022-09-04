@@ -25069,7 +25069,7 @@ div.tagsinput {
 /* Tables */
 .table, .jsgrid .jsgrid-table {
     margin-bottom: 0;
-    color: var(--main-blue);
+    color: #aad4ff;
 }
 
     .table thead th, .jsgrid .jsgrid-table thead th {
