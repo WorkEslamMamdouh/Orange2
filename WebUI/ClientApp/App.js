@@ -1127,12 +1127,15 @@ function DisplayMassage(msg_Ar, msg_En, msg_type, OnOk) {
     $('#DivMassage').removeClass("display_none");
     if (msg_type == '1') {
         $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-success");
+        $('#DivMassage #icon_Massage').attr("Class", "fas fa-check-circle pe-3");
     }
     else if (msg_type == '2') {
         $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-danger");
+        $('#DivMassage #icon_Massage').attr("Class", "fas fa-times-circle pe-3");
     }
     else if (msg_type == '3') {
         $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-orange");
+        $('#DivMassage #icon_Massage').attr("Class", "fas fa-exclamation-triangle pe-3");
     }
     setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
 }
