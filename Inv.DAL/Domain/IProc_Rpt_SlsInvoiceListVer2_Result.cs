@@ -10,10 +10,30 @@
 namespace Inv.DAL.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class IQ_GetSlsInvoiceStatistic
+    public partial class IProc_Rpt_SlsInvoiceListVer2_Result
     {
+        public Nullable<int> Comp { get; set; }
+        public Nullable<int> Bra { get; set; }
+        public string CompNameA { get; set; }
+        public string CompNameE { get; set; }
+        public string BraNameA { get; set; }
+        public string BraNameE { get; set; }
+        public string LoginUser { get; set; }
+        public System.DateTime PrintDate { get; set; }
+        public Nullable<int> Par_RepType { get; set; }
+        public string Par_StatusDSA { get; set; }
+        public string Par_StatusDSE { get; set; }
+        public string Par_CashTypeDSA { get; set; }
+        public string Par_CashTypeDSE { get; set; }
+        public string Par_CustDSA { get; set; }
+        public string Par_CustDSE { get; set; }
+        public string Par_SalesmanDSA { get; set; }
+        public string Par_SalesmanDSE { get; set; }
+        public string Par_FromDate { get; set; }
+        public string Par_Todate { get; set; }
+        public string par_op_TRNo { get; set; }
+        public string par_op_shipno { get; set; }
         public int InvoiceID { get; set; }
         public Nullable<int> TrNo { get; set; }
         public string RefNO { get; set; }
@@ -26,8 +46,7 @@ namespace Inv.DAL.Domain
         public Nullable<int> SlsInvSrc { get; set; }
         public Nullable<int> CashBoxID { get; set; }
         public Nullable<int> CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerMobileNo { get; set; }
+        public string Cust_nameA { get; set; }
         public Nullable<int> SalesmanId { get; set; }
         public Nullable<int> StoreId { get; set; }
         public Nullable<int> OperationId { get; set; }
@@ -58,55 +77,18 @@ namespace Inv.DAL.Domain
         public string Slsm_Code { get; set; }
         public string Slsm_DescA { get; set; }
         public string Cus_Code { get; set; }
-        public string Cus_NameA { get; set; }
         public string Box_DescA { get; set; }
-        public string DocNo { get; set; }
-        public string DocUUID { get; set; }
-        public Nullable<System.TimeSpan> TrTime { get; set; }
-        public Nullable<int> InvoiceTypeCode { get; set; }
-        public Nullable<int> InvoiceTransCode { get; set; }
-        public string TaxNotes { get; set; }
-        public Nullable<int> TaxCurrencyID { get; set; }
-        public Nullable<int> InvoiceCurrenyID { get; set; }
-        public string ContractNo { get; set; }
-        public string PurchaseorderNo { get; set; }
-        public Nullable<int> GlobalInvoiceCounter { get; set; }
-        public string PrevInvoiceHash { get; set; }
-        public string QRCode { get; set; }
-        public string CryptographicStamp { get; set; }
-        public Nullable<System.DateTime> DeliveryDate { get; set; }
-        public Nullable<System.DateTime> DeliveryEndDate { get; set; }
-        public Nullable<int> PaymentMeansTypeCode { get; set; }
-        public Nullable<int> CRDBReasoncode { get; set; }
-        public string PaymentTerms { get; set; }
-        public Nullable<int> PaymentTermsID { get; set; }
-        public Nullable<decimal> AllowAmount { get; set; }
-        public Nullable<decimal> AllowPrc { get; set; }
-        public Nullable<decimal> AllowBase { get; set; }
-        public Nullable<int> AllowVatNatID { get; set; }
-        public Nullable<decimal> AllowVatPrc { get; set; }
-        public Nullable<decimal> AllowAfterVat { get; set; }
-        public string AllowReason { get; set; }
-        public Nullable<int> AllowCode { get; set; }
-        public Nullable<decimal> ChargeAmount { get; set; }
-        public Nullable<decimal> ChargePrc { get; set; }
-        public Nullable<decimal> ChargeBase { get; set; }
-        public Nullable<int> ChargeVatNatID { get; set; }
-        public Nullable<decimal> ChargeVatPrc { get; set; }
-        public Nullable<decimal> ChargeAfterVat { get; set; }
-        public string ChargeReason { get; set; }
-        public Nullable<int> ChargeCode { get; set; }
-        public Nullable<decimal> ItemTotal { get; set; }
-        public Nullable<decimal> ItemAllowTotal { get; set; }
-        public Nullable<decimal> ItemDiscountTotal { get; set; }
-        public Nullable<decimal> ItemVatTotal { get; set; }
-        public Nullable<decimal> RoundingAmount { get; set; }
-        public Nullable<int> FinYear { get; set; }
-        public Nullable<int> SalesPersonId { get; set; }
+        public Nullable<int> Line_Count { get; set; }
+        public Nullable<int> Item_Count { get; set; }
+        public Nullable<decimal> Tot_Qty { get; set; }
+        public Nullable<int> Ref_TrNo { get; set; }
+        public Nullable<System.DateTime> Ref_TrDate { get; set; }
+        public Nullable<int> op_TrNo { get; set; }
+        public Nullable<System.DateTime> Op_TrDate { get; set; }
+        public string Op_TruckNo { get; set; }
+        public string Op_RefNo { get; set; }
+        public string RefNO1 { get; set; }
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
-        public Nullable<decimal> Tot_Qty { get; set; }
-        public Nullable<int> Item_Count { get; set; }
-        public Nullable<int> Line_Count { get; set; }
     }
 }

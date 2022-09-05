@@ -629,7 +629,7 @@
     <Compile Include="Domain\IProc_Rpt_PurReceiveList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_SlsInvoiceList_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_SlsInvoiceListVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_StkAdjustList_Result.cs">
@@ -752,10 +752,10 @@
     <Compile Include="Domain\IQ_GetSlsInvoiceItem.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_GetSlsInvoiceList.cs">
+    <Compile Include="Domain\IQ_GetSlsInvoiceListVer2.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IQ_GetSlsInvoiceStatistic.cs">
+    <Compile Include="Domain\IQ_GetSlsInvoiceStatisticVer2.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IQ_GetStkAdjust.cs">
