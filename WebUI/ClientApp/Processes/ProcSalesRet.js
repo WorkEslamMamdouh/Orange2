@@ -976,7 +976,7 @@ var ProcSalesRet;
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
             if (InvoiceStatisticsModel[0].CustomerId != null) {
-                $('#txtCustomerName').prop("value", (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA.toString() : InvoiceStatisticsModel[0].Cus_NameE.toString()));
+                $('#txtCustomerName').prop("value", InvoiceStatisticsModel[0].Cus_NameA.toString());
                 var custId = InvoiceStatisticsModel[0].CustomerId.toString();
                 ddlInvoiceCustomer.value = custId;
             }

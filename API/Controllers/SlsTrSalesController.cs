@@ -33,7 +33,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = db.IQ_GetSlsInvoiceList.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode).ToList();
+                var res = db.IQ_GetSlsInvoiceListVer2.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -44,7 +44,7 @@ namespace Inv.API.Controllers
             //int CompCode , int? Cashierid , string Salescode , int? ispaid
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                List<IQ_GetSlsInvoiceStatistic> res = db.IQ_GetSlsInvoiceStatistic.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode).ToList();
+                List<IQ_GetSlsInvoiceStatisticVer2> res = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode).ToList();
                 // build the linque consition based on parameters 
                 return Ok(new BaseResponse(res));
             }
@@ -67,7 +67,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.IQ_GetSlsInvoiceStatistic.Where(s => s.InvoiceID == invoiceID).ToList();
+                var res = db.IQ_GetSlsInvoiceStatisticVer2.Where(s => s.InvoiceID == invoiceID).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -88,7 +88,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.IQ_GetSlsInvoiceStatistic.Where(s => s.InvoiceID == invoiceID && s.TrType == 1).ToList();
+                var res = db.IQ_GetSlsInvoiceStatisticVer2.Where(s => s.InvoiceID == invoiceID && s.TrType == 1).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -99,7 +99,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatistic where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "  and SlsInvSrc = 1 and TrType= 0  and TrDate =' " + TrDate + "' and IsCash = 'true'  " ;
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "  and SlsInvSrc = 1 and TrType= 0  and TrDate =' " + TrDate + "' and IsCash = 'true'  " ;
                 string condition = "";
                 if (Status == 0)
                     CashBoxid = 0;
@@ -120,7 +120,7 @@ namespace Inv.API.Controllers
                     condition = condition + "";
 
                    string query = s + condition;
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -215,7 +215,7 @@ namespace Inv.API.Controllers
                             dbTransaction.Commit();
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
 
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -262,7 +262,7 @@ namespace Inv.API.Controllers
         { 
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatistic where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
@@ -289,7 +289,7 @@ namespace Inv.API.Controllers
                 }
                 ///////////
                 string query = s + condition + " ORDER BY TrNo ASC;";
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -299,7 +299,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatistic where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + " and SlsInvSrc = 2 and Operationid = " + Operationid + " and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + " ' ";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + " and SlsInvSrc = 2 and Operationid = " + Operationid + " and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + " ' ";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
@@ -324,7 +324,7 @@ namespace Inv.API.Controllers
                 }
                 ///////////
                 string query = s + condition;
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -418,7 +418,7 @@ namespace Inv.API.Controllers
                             updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
 
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -464,7 +464,7 @@ namespace Inv.API.Controllers
                         {
                             //Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
                             dbTransaction.Commit(); 
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         
                         }
@@ -491,7 +491,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 //trtype=2
-                string s = "select * from IQ_GetSlsInvoiceStatistic where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and TrType = 1 and SlsInvSrc = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and TrType = 1 and SlsInvSrc = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
@@ -532,7 +532,7 @@ namespace Inv.API.Controllers
 
 
                 string query = s + condition;
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -543,7 +543,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 //trtype=2
-                string s = "select * from IQ_GetSlsInvoiceStatistic where BranchCode ="+ BranchCode + " and CompCode = " + CompCode + " and SlsInvSrc = 2 and Operationid = " + Operationid + " and TrType = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode ="+ BranchCode + " and CompCode = " + CompCode + " and SlsInvSrc = 2 and Operationid = " + Operationid + " and TrType = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
@@ -585,7 +585,7 @@ namespace Inv.API.Controllers
 
 
                 string query = s + condition;
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -653,7 +653,7 @@ namespace Inv.API.Controllers
 
                             obj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -678,7 +678,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = db.IQ_GetSlsInvoiceList.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode && x.RefTrID==invoiceID && x.Status==0).ToList();
+                var res = db.IQ_GetSlsInvoiceListVer2.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode && x.RefTrID==invoiceID && x.Status==0).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -803,7 +803,7 @@ namespace Inv.API.Controllers
                         {
                             //updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -865,7 +865,7 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             // Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
-                            var displayData = db.IQ_GetSlsInvoiceStatistic.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -891,7 +891,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatistic where TrType = 2 and BranchCode = " + BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + " ' ";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 2 and BranchCode = " + BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + " ' ";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
@@ -916,7 +916,7 @@ namespace Inv.API.Controllers
                 }
                 ///////////
                 string query = s + condition;
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatistic>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);

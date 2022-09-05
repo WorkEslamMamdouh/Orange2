@@ -43,10 +43,10 @@ namespace SlsTrSalesManager {
     var InvoiceDetailsEn: Array<string> = new Array<string>();
     var InvoiceTypeDetailsAr: Array<string> = new Array<string>();
     var InvoiceEyptDetailsEn: Array<string> = new Array<string>();
-    var displayData: IQ_GetSlsInvoiceStatistic = new IQ_GetSlsInvoiceStatistic();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var Selecteditem: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var displayData: IQ_GetSlsInvoiceStatisticVer2 = new IQ_GetSlsInvoiceStatisticVer2();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var Selecteditem: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var SlsInvoiceItemsDetails: Array<IQ_GetSlsInvoiceItem> = new Array<IQ_GetSlsInvoiceItem>();
     var FamilyDetails: Array<I_ItemFamily> = new Array<I_ItemFamily>();
     var ItemDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
@@ -55,7 +55,7 @@ namespace SlsTrSalesManager {
     var SalesmanFilterDetails: Array<I_Sls_D_Salesman> = new Array<I_Sls_D_Salesman>();
 
     //Models
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var InvoiceItemsDetailsModel: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var MasterDetailsModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
@@ -1637,7 +1637,7 @@ namespace SlsTrSalesManager {
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = DateFormat(item.TrDate);
                     return txt;
@@ -1654,7 +1654,7 @@ namespace SlsTrSalesManager {
             //{ title: res.App_Certified, name: "statusDesciption", type: "text", width: "17%" },
             {
                 title: res.App_invoiceType, css: "ColumPadding", name: "IsCashDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
                     return txt;
@@ -1662,7 +1662,7 @@ namespace SlsTrSalesManager {
             },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
                     return txt;
@@ -1708,7 +1708,7 @@ namespace SlsTrSalesManager {
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     //for (let i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
                     //    //SlsInvoiceStatisticsDetails[i].TrDate = DateFormat(SlsInvoiceStatisticsDetails[i].TrDate.toString());
                     //    SlsInvoiceStatisticsDetails[i].statusDesciption = SlsInvoiceStatisticsDetails[i].Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
@@ -1728,8 +1728,8 @@ namespace SlsTrSalesManager {
         clear();
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
-        Selecteditem = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -3459,7 +3459,7 @@ namespace SlsTrSalesManager {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     debugger
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     invoiceID = res.InvoiceID;
@@ -3505,7 +3505,7 @@ namespace SlsTrSalesManager {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     debugger
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     invoiceID = res.InvoiceID;
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "An invoice number has been issued ", MessageType.Succeed);
@@ -3542,8 +3542,8 @@ namespace SlsTrSalesManager {
         $("#DivInvoiceDetails").removeClass("display_none");
         NewAdd = false;
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
-        Selecteditem = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(invoiceID));
         GlobalinvoiceID = Selecteditem[0].InvoiceID;
@@ -3715,7 +3715,7 @@ namespace SlsTrSalesManager {
         $("#txt_CustCode").attr("disabled", "disabled");
 
     }
-    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatistic) {
+    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
 
         NewAdd = true;
         btnBack_onclick();
@@ -3753,8 +3753,8 @@ namespace SlsTrSalesManager {
         $("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
-        Selecteditem = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
@@ -4014,7 +4014,7 @@ namespace SlsTrSalesManager {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
 
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DisplayMassage('( تم فك اعتماد الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     invoiceID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");

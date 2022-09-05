@@ -35,8 +35,8 @@ namespace ProcSalesMgr {
     var InvoiceDetailsEn: Array<string> = new Array<string>();
     var InvoiceTypeDetailsAr: Array<string> = new Array<string>();
     var InvoiceEyptDetailsEn: Array<string> = new Array<string>();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var SlsInvoiceItemsDetails: Array<IQ_GetSlsInvoiceItem> = new Array<IQ_GetSlsInvoiceItem>();
     var mainItemDetails: Array<IQ_GetOperationSalesmanItem> = new Array<IQ_GetOperationSalesmanItem>();
     var ItemDetails: Array<IQ_GetOperationSalesmanItem> = new Array<IQ_GetOperationSalesmanItem>();
@@ -48,7 +48,7 @@ namespace ProcSalesMgr {
     var operationDetailsWithoutStatus: Array<I_TR_Operation> = new Array<I_TR_Operation>();
 
     //Models
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var InvoiceItemsDetailsModel: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var MasterDetailsModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
@@ -1169,7 +1169,7 @@ namespace ProcSalesMgr {
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
+                || x.Slsm_DescA.toLowerCase().search(search) >= 0  );
 
             Grid.DataSource = SearchDetails;
             Grid.Bind();
@@ -1200,7 +1200,7 @@ namespace ProcSalesMgr {
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = DateFormat(item.TrDate);
                     return txt;
@@ -1215,7 +1215,7 @@ namespace ProcSalesMgr {
             { title: res.App_TobePaid, name: "RemainAmount", type: "text", width: "17%", css: "classfont" },
             {
                 title: res.App_invoiceType, css: "ColumPadding", name: "IsCashDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
                     return txt;
@@ -1223,7 +1223,7 @@ namespace ProcSalesMgr {
             },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
                     return txt;
@@ -1290,8 +1290,8 @@ namespace ProcSalesMgr {
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SlsInvoiceStatisticsDetails = new Array<IQ_GetSlsInvoiceStatistic>();
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
 
                     Grid.DataSource = SlsInvoiceStatisticsDetails;
                     Grid.Bind();
@@ -1308,7 +1308,7 @@ namespace ProcSalesMgr {
 
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         SlsInvoiceItemsDetails = new Array<IQ_GetSlsInvoiceItem>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
@@ -1338,7 +1338,7 @@ namespace ProcSalesMgr {
 
             if (InvoiceStatisticsModel[0].CustomerId != null) {
                 $('#ddlInvoiceCustomer option[value=' + InvoiceStatisticsModel[0].CustomerId.toString() + ']').prop('selected', 'selected').change();
-                $('#txtInvoiceCustomerName').prop("value", (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA : InvoiceStatisticsModel[0].Cus_NameE));
+                $('#txtInvoiceCustomerName').prop("value", InvoiceStatisticsModel[0].Cus_NameA );
             } else {
                 $('#txtInvoiceCustomerName').prop("value", InvoiceStatisticsModel[0].CustomerName);
             }
@@ -2487,7 +2487,7 @@ namespace ProcSalesMgr {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DisplayMassage('( تم تعديل الفاتورة بنجاح )', 'The invoice has been successfully modified', MessageType.Succeed);
                     GlobalinvoiceID = res.InvoiceID;
 
@@ -2520,7 +2520,7 @@ namespace ProcSalesMgr {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DisplayMassage(" تم اصدار  فاتورة رقم  " + res.TrNo + " ", "Succeed", MessageType.Succeed);
                     lblInvoiceNumber.innerText = res.TrNo.toString();
                     GlobalinvoiceID = res.InvoiceID;
@@ -2581,7 +2581,7 @@ namespace ProcSalesMgr {
                 if (result.IsSuccess == true) {
                     chkActive.disabled = true;
                     $('#btnUpdate').prop("disabled", false);
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     GlobalinvoiceID = res.InvoiceID;
 
 
@@ -2597,7 +2597,7 @@ namespace ProcSalesMgr {
             }
         });
     }
-    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatistic) {
+    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
 
 
 
@@ -2605,9 +2605,7 @@ namespace ProcSalesMgr {
 
 
         res.TrDate = DateFormat(res.TrDate.toString());
-        res.statusDesciption = res.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
-        res.IsCashDesciption = res.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
-
+      
         SlsInvoiceStatisticsDetails.push(res);
 
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.sort(dynamicSort("TrNo"));

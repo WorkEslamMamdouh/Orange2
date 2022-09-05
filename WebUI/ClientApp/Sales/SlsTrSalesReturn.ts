@@ -31,10 +31,10 @@ namespace SlsTrSalesReturn {
     var AddReturnDetailsEn: Array<string> = new Array<string>();
     var StateDetailsAr: Array<string> = new Array<string>();
     var StateDetailsEn: Array<string> = new Array<string>();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var SlsInvoiceItemsDetails: Array<IQ_GetSlsInvoiceItem> = new Array<IQ_GetSlsInvoiceItem>();
-    var Selecteditem: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var Selecteditem: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var FamilyDetails: Array<I_ItemFamily> = new Array<I_ItemFamily>();
     var ItemDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
     var AD_VatTypeDetails: A_D_VAT_TYPE = new A_D_VAT_TYPE();
@@ -43,8 +43,8 @@ namespace SlsTrSalesReturn {
     var VatDetails: Array<A_D_VAT_TYPE> = new Array<A_D_VAT_TYPE>();
     var ItemFamilyDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
     //Model
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var InvoicemodelForReturn: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var InvoicemodelForReturn: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var MasterDetailModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var invoiceItemsModel: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
@@ -323,7 +323,7 @@ namespace SlsTrSalesReturn {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     debugger
-                    InvoiceStatisticsModel = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    InvoiceStatisticsModel = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
                     txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
                     GlobalDocNo = InvoiceStatisticsModel[0].DocNo;
@@ -1019,7 +1019,7 @@ namespace SlsTrSalesReturn {
             //debugger
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
+                || x.Slsm_DescA.toLowerCase().search(search) >= 0  );
 
             Grid.DataSource = SearchDetails;
             Grid.Bind();
@@ -1052,7 +1052,7 @@ namespace SlsTrSalesReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    InvoicemodelForReturn = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    InvoicemodelForReturn = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     if (InvoicemodelForReturn.length > 0)
                         txtInvoiceNumber.value = InvoicemodelForReturn[0].TrNo.toString();
                 }
@@ -1078,7 +1078,7 @@ namespace SlsTrSalesReturn {
             { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = DateFormat(item.TrDate);
                     return txt;
@@ -1093,7 +1093,7 @@ namespace SlsTrSalesReturn {
             { title: res.App_Net, name: "NetAfterVat", type: "text", width: "10%" },
             {
                 title: res.App_invoiceType, css: "ColumPadding", name: "IsCashDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
                     return txt;
@@ -1101,7 +1101,7 @@ namespace SlsTrSalesReturn {
             },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLLabelElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
                     txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
                     return txt;
@@ -1138,7 +1138,7 @@ namespace SlsTrSalesReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
 
                     Grid.DataSource = SlsInvoiceStatisticsDetails;
                     Grid.Bind();
@@ -1149,7 +1149,7 @@ namespace SlsTrSalesReturn {
     function Grid_RowDoubleClicked() {
         Show = true; 
         $("#divReturnDetails").removeClass("display_none");
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {
@@ -2279,7 +2279,7 @@ namespace SlsTrSalesReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage("تم اصدار  مرتجع رقم " + res.TrNo, 'Return Number ' + res.TrNo + "has been issued", MessageType.Succeed);
                     var returnValue = res.TrNo.toString();
@@ -2357,7 +2357,7 @@ namespace SlsTrSalesReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     GlobalReturnID = res.InvoiceID;
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", 'Return number ' + res.TrNo + ' modified Successfully', MessageType.Succeed);
@@ -2412,7 +2412,7 @@ namespace SlsTrSalesReturn {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) { 
-                    let res = result.Response as IQ_GetSlsInvoiceStatistic;
+                    let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DisplayMassage('( تم فك اعتماد الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);       
                     GlobalReturnID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");
@@ -2432,7 +2432,7 @@ namespace SlsTrSalesReturn {
         });
 
     }
-    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatistic) {
+    function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
           
 
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID != invID);

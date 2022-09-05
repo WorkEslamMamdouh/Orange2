@@ -35,8 +35,8 @@ namespace SlsTrShowPrice {
     var InvoiceTypeDetailsAr: Array<string> = new Array<string>();
     var InvoiceEyptDetailsEn: Array<string> = new Array<string>();
     var DetailsVatNature: Array<G_VatNature> = new Array<G_VatNature>();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var SlsInvoiceItemsDetails: Array<IQ_GetSlsInvoiceItem> = new Array<IQ_GetSlsInvoiceItem>();
     var FamilyDetails: Array<I_ItemFamily> = new Array<I_ItemFamily>();
     var ItemDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
@@ -45,7 +45,7 @@ namespace SlsTrShowPrice {
     var SalesmanFilterDetails: Array<I_Sls_D_Salesman> = new Array<I_Sls_D_Salesman>();
 
     //Models
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var InvoiceItemsDetailsModel: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var MasterDetailsModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
@@ -848,7 +848,7 @@ namespace SlsTrShowPrice {
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     for (let i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
                         SlsInvoiceStatisticsDetails[i].TrDate = DateFormat(SlsInvoiceStatisticsDetails[i].TrDate.toString());
                         SlsInvoiceStatisticsDetails[i].statusDesciption = SlsInvoiceStatisticsDetails[i].Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
@@ -867,7 +867,7 @@ namespace SlsTrShowPrice {
         // $("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         let Selecteditem
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         try {
@@ -1710,7 +1710,7 @@ namespace SlsTrShowPrice {
 
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0 /*|| x.PortName.toLowerCase().search(search) >= 0*/
+                || x.Slsm_DescA.toLowerCase().search(search) >= 0  /*|| x.PortName.toLowerCase().search(search) >= 0*/
               /*  || x.CustomerCODE.toString().search(search) >= 0  || x.CreditLimit.toString().search(search) >= 0 || x.Emp_NameA.toString().search(search) >= 0
                 || x.ContactMobile.toString().search(search) >= 0 /*|| x.DueAmount.toString().search(search) >= 0 *//*|| x.DaysDiff.toString().search(search) >= 0*/);
 
@@ -2024,7 +2024,7 @@ namespace SlsTrShowPrice {
         //$("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         let Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(invoiceID));
         GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
         InvoiceStatisticsModel = Selecteditem;
@@ -2170,7 +2170,7 @@ namespace SlsTrShowPrice {
         // $("#btnPrintTransaction").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         let Selecteditem
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(GlobalinvoiceID));
 

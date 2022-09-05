@@ -34,9 +34,9 @@ namespace ProcSalesRet {
     var AddReturnDetailsEn: Array<string> = new Array<string>();
     var StateDetailsAr: Array<string> = new Array<string>();
     var StateDetailsEn: Array<string> = new Array<string>();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var Selecteditem: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var Selecteditem: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var SlsInvoiceItemsDetails: Array<IQ_GetSlsInvoiceItem> = new Array<IQ_GetSlsInvoiceItem>();
     var operationDetails: Array<I_TR_Operation> = new Array<I_TR_Operation>();
     var operationDetailsWithoutStatus: Array<I_TR_Operation> = new Array<I_TR_Operation>();
@@ -45,8 +45,8 @@ namespace ProcSalesRet {
     var SalesmanDetails: Array<I_Sls_D_Salesman> = new Array<I_Sls_D_Salesman>();
     var VatDetails: Array<A_D_VAT_TYPE> = new Array<A_D_VAT_TYPE>();
     //Model
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var InvoicemodelForReturn: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var InvoicemodelForReturn: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var MasterDetailModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var invoiceItemsModel: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
@@ -309,7 +309,7 @@ namespace ProcSalesRet {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    InvoicemodelForReturn = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    InvoicemodelForReturn = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     if (InvoicemodelForReturn.length > 0)
                         txtInvoiceNumber.value = InvoicemodelForReturn[0].TrNo.toString();
                 }
@@ -1041,7 +1041,7 @@ namespace ProcSalesRet {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     for (var i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
                         SlsInvoiceStatisticsDetails[i].returnTypeDesciption = SlsInvoiceStatisticsDetails[i].IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "على الحساب" : "Credit");
                         SlsInvoiceStatisticsDetails[i].statusDesciption = SlsInvoiceStatisticsDetails[i].Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
@@ -1059,7 +1059,7 @@ namespace ProcSalesRet {
         clear();
         FillddlItem();
         Success();
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
 
@@ -1097,7 +1097,7 @@ namespace ProcSalesRet {
             txtRefNo.disabled = true;
             txtRemarks.disabled = true;
             if (InvoiceStatisticsModel[0].CustomerId != null) {
-                $('#txtCustomerName').prop("value", (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA.toString() : InvoiceStatisticsModel[0].Cus_NameE.toString()));
+                $('#txtCustomerName').prop("value", InvoiceStatisticsModel[0].Cus_NameA.toString());
 
                 var custId = InvoiceStatisticsModel[0].CustomerId.toString();
                 ddlInvoiceCustomer.value = custId;
@@ -2012,7 +2012,7 @@ namespace ProcSalesRet {
 
                 } else if (result.IsSuccess) {
                     AddReturn = true;
-                    InvoiceStatisticsModel = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    InvoiceStatisticsModel = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
                     txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
                     var operationID = Number(InvoiceStatisticsModel[0].OperationId);

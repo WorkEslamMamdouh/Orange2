@@ -39,7 +39,7 @@ var SlsTrSalesManager;
     var InvoiceDetailsEn = new Array();
     var InvoiceTypeDetailsAr = new Array();
     var InvoiceEyptDetailsEn = new Array();
-    var displayData = new IQ_GetSlsInvoiceStatistic();
+    var displayData = new IQ_GetSlsInvoiceStatisticVer2();
     var SlsInvoiceStatisticsDetails = new Array();
     var Selecteditem = new Array();
     var SearchDetails = new Array();

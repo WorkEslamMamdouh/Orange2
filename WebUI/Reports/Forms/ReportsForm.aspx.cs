@@ -778,7 +778,7 @@ namespace RS.WebUI.Reports.Forms
         }
 
         //R_Rpt_SlsInvoiceList
-        public IEnumerable<IProc_Rpt_SlsInvoiceList_Result> R_Rpt_SlsInvoiceList()
+        public IEnumerable<IProc_Rpt_SlsInvoiceListVer2_Result> R_Rpt_SlsInvoiceList()
         {
 
             ReportStandardParameters StandPar = getStandardParameters();
@@ -822,11 +822,11 @@ namespace RS.WebUI.Reports.Forms
             {
                 if (TrType == 0)
                 {
-                    Rep = OpenReport("Rpt_OperationInvoiceList");
+                    Rep = OpenReport("Rpt_OperationInvoiceListVer2");
                 }
                 else
                 {
-                    Rep = OpenReport("Rpt_OperationReturnList");
+                    Rep = OpenReport("Rpt_OperationReturnListVer2");
                 }
 
             }
@@ -834,17 +834,17 @@ namespace RS.WebUI.Reports.Forms
             {
                 if (TrType == 0)
                 {
-                    Rep = OpenReport("Rpt_SlsInvoiceList");
+                    Rep = OpenReport("Rpt_SlsInvoiceListVer2");
                 }
 
                 else
                 {
-                    Rep = OpenReport("Rpt_SlsReturnList");
+                    Rep = OpenReport("Rpt_SlsReturnListVer2");
                 }
             }
             if (Typ == 5)
             {
-                Rep = OpenReport("Rpt_QutationList");
+                Rep = OpenReport("Rpt_QutationListVer2");
             }
 
 
@@ -869,7 +869,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            var query = db.Database.SqlQuery<IProc_Rpt_SlsInvoiceList_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Rpt_SlsInvoiceListVer2_Result>(_Query).ToList();
 
             //if (Type == 1)
             ReportsDetails();
@@ -878,7 +878,7 @@ namespace RS.WebUI.Reports.Forms
         }
 
         // operation invoice list
-        public IEnumerable<IProc_Rpt_SlsInvoiceList_Result> R_Rpt_operationInvoiceList()
+        public IEnumerable<IProc_Rpt_SlsInvoiceListVer2_Result> R_Rpt_operationInvoiceList()
         {
 
             ReportStandardParameters StandPar = getStandardParameters();
@@ -918,11 +918,11 @@ namespace RS.WebUI.Reports.Forms
 
             if (TrType == 0)
             {
-                Rep = OpenReport("Rpt_OperationInvoiceList");
+                Rep = OpenReport("Rpt_OperationInvoiceListVer2");
             }
             else
             {
-                Rep = OpenReport("Rpt_OperationReturnList");
+                Rep = OpenReport("Rpt_OperationReturnListVer2");
             }
 
             string _Query = "execute " + Rep.dataSource +
@@ -946,7 +946,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            var query = db.Database.SqlQuery<IProc_Rpt_SlsInvoiceList_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Rpt_SlsInvoiceListVer2_Result>(_Query).ToList();
 
             //if (Type == 1)
             ReportsDetails();

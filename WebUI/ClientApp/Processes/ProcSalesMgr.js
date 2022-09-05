@@ -1024,7 +1024,7 @@ var ProcSalesMgr;
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0 || x.Slsm_DescE.toLowerCase().search(search_1) >= 0; });
+                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0; });
             Grid.DataSource = SearchDetails;
             Grid.Bind();
         }
@@ -1182,7 +1182,7 @@ var ProcSalesMgr;
             ddlSalesPerson.value = Number(InvoiceStatisticsModel[0].SalesPersonId) == 0 ? 'null' : InvoiceStatisticsModel[0].SalesPersonId.toString();
             if (InvoiceStatisticsModel[0].CustomerId != null) {
                 $('#ddlInvoiceCustomer option[value=' + InvoiceStatisticsModel[0].CustomerId.toString() + ']').prop('selected', 'selected').change();
-                $('#txtInvoiceCustomerName').prop("value", (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA : InvoiceStatisticsModel[0].Cus_NameE));
+                $('#txtInvoiceCustomerName').prop("value", InvoiceStatisticsModel[0].Cus_NameA);
             }
             else {
                 $('#txtInvoiceCustomerName').prop("value", InvoiceStatisticsModel[0].CustomerName);
@@ -2183,8 +2183,6 @@ var ProcSalesMgr;
     function displayDate_speed(invID, res) {
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID != invID; });
         res.TrDate = DateFormat(res.TrDate.toString());
-        res.statusDesciption = res.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
-        res.IsCashDesciption = res.IsCash == true ? (lang == "ar" ? "نقدي" : "Cash") : (lang == "ar" ? "علي الحساب" : "On account");
         SlsInvoiceStatisticsDetails.push(res);
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.sort(dynamicSort("TrNo"));
         Grid.DataSource = SlsInvoiceStatisticsDetails;

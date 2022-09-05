@@ -902,7 +902,7 @@ var SlsTrSalesReturn;
             //debugger
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0 || x.Slsm_DescE.toLowerCase().search(search_1) >= 0; });
+                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0; });
             Grid.DataSource = SearchDetails;
             Grid.Bind();
         }

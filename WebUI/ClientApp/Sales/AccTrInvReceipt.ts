@@ -18,8 +18,8 @@ namespace AccTrInvReceipt {
     var SellerDetails: Array<I_Sls_D_Salesman> = new Array<I_Sls_D_Salesman>();
     var StateDetailsAr: Array<string> = new Array<string>();
     var StateDetailsEn: Array<string> = new Array<string>();
-    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
-    var SearchDetails: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var SlsInvoiceStatisticsDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+    var SearchDetails: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
     var CustomersDetails: Array<A_Rec_D_Customer> = new Array<A_Rec_D_Customer>();
     var Customer: A_Rec_D_Customer = new A_Rec_D_Customer();//
     var G_USERSDetails: Array<G_USERS> = new Array<G_USERS>();
@@ -32,10 +32,10 @@ namespace AccTrInvReceipt {
     var StoreDetails: G_STORE = new G_STORE();//
 
     //Models
-    var SlsInvoiceListModel: Array<IQ_GetSlsInvoiceList> = new Array<IQ_GetSlsInvoiceList>();
+    var SlsInvoiceListModel: Array<IQ_GetSlsInvoiceListVer2> = new Array<IQ_GetSlsInvoiceListVer2>();
     var UpdatedModel: Array<I_Sls_TR_Invoice> = new Array<I_Sls_TR_Invoice>();
     var FilteredModel: Array<I_Sls_TR_Invoice> = new Array<I_Sls_TR_Invoice>();
-    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatistic> = new Array<IQ_GetSlsInvoiceStatistic>();
+    var InvoiceStatisticsModel: Array<IQ_GetSlsInvoiceStatisticVer2> = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
     var InvoiceModel: I_Sls_TR_Invoice = new I_Sls_TR_Invoice();
     var MasterDetailsModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
@@ -319,7 +319,7 @@ namespace AccTrInvReceipt {
             },
             {
                 title: res.App_CashPaid, css: "ColumPadding", name: "CashAmount", width: "14%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLInputElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLInputElement => {
                     let txt: HTMLInputElement = CreateElement("number", "form-control disabled", " ", " ", "", " ");
                     txt.id = "txtcash";
                     //txt.name = SlsInvoiceListModel.indexOf(item).toString();
@@ -359,7 +359,7 @@ namespace AccTrInvReceipt {
             }
             , {//res.Renew_Renew
                 title: res.App_CardPaid, css: "ColumPadding ", name: "CardAmount", width: "14%",
-                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatistic): HTMLInputElement => {
+                itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLInputElement => {
                     let txt: HTMLInputElement = CreateElement("number", " form-control disabled", " ", " ", "", " ");
                     txt.id = "txtcard";
                    
@@ -436,7 +436,7 @@ namespace AccTrInvReceipt {
         txtCashInv.disabled = true;
         txtCardInv.disabled = true;
         ////debugger
-        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatistic>();
+        InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         let Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         invoiceID = Number(Selecteditem[0].InvoiceID);
         InvoiceStatisticsModel = Selecteditem; 
@@ -451,7 +451,7 @@ namespace AccTrInvReceipt {
                 lblInvoiceCustomerMobile.innerText = (lang == "ar" ? "لا يوجد رقم" : "no number");
             }
             if (InvoiceStatisticsModel[0].CustomerId != null) {
-                lblInvoiceCustomer.innerText = (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA.toString() : InvoiceStatisticsModel[0].Cus_NameE.toString());
+                lblInvoiceCustomer.innerText = InvoiceStatisticsModel[0].Cus_NameA.toString();
             } else {
                 lblInvoiceCustomer.innerText = InvoiceStatisticsModel[0].CustomerName.toString();
             }
@@ -583,7 +583,7 @@ namespace AccTrInvReceipt {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     //////debugger;
-                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatistic>;
+                    SlsInvoiceStatisticsDetails = result.Response as Array<IQ_GetSlsInvoiceStatisticVer2>;
                     /////////////////
                     //////debugger;
                     for (let i = 0; i < SlsInvoiceStatisticsDetails.length; i++) {
@@ -922,7 +922,7 @@ namespace AccTrInvReceipt {
         {
             debugger            
             let search: string = txtSearchBox1.value.toLowerCase();
-            SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0 || x.CustomerMobileNo.toLowerCase().search(search) >= 0 || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
+            SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0 || x.CustomerMobileNo.toLowerCase().search(search) >= 0 || x.Slsm_DescA.toLowerCase().search(search) >= 0 );
 
             NetTot = 0;
             CommisionTot = 0;

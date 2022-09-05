@@ -392,7 +392,7 @@ var AccTrInvReceipt;
                 lblInvoiceCustomerMobile.innerText = (lang == "ar" ? "لا يوجد رقم" : "no number");
             }
             if (InvoiceStatisticsModel[0].CustomerId != null) {
-                lblInvoiceCustomer.innerText = (lang == "ar" ? InvoiceStatisticsModel[0].Cus_NameA.toString() : InvoiceStatisticsModel[0].Cus_NameE.toString());
+                lblInvoiceCustomer.innerText = InvoiceStatisticsModel[0].Cus_NameA.toString();
             }
             else {
                 lblInvoiceCustomer.innerText = InvoiceStatisticsModel[0].CustomerName.toString();
@@ -810,7 +810,7 @@ var AccTrInvReceipt;
         if (txtSearchBox1.value != "") {
             debugger;
             var search_1 = txtSearchBox1.value.toLowerCase();
-            SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0 || x.CustomerMobileNo.toLowerCase().search(search_1) >= 0 || x.Slsm_DescA.toLowerCase().search(search_1) >= 0 || x.Slsm_DescE.toLowerCase().search(search_1) >= 0; });
+            SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0 || x.CustomerMobileNo.toLowerCase().search(search_1) >= 0 || x.Slsm_DescA.toLowerCase().search(search_1) >= 0; });
             NetTot = 0;
             CommisionTot = 0;
             PaidAmountTot = 0;
