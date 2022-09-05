@@ -12,7 +12,7 @@ namespace Inv.DAL.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class IQ_GetSlsInvoiceList
+    public partial class IQ_GetSlsInvoiceListVer2
     {
         public int InvoiceID { get; set; }
         public Nullable<int> TrNo { get; set; }

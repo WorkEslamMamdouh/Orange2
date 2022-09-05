@@ -2,11 +2,12 @@
 -- as detail total in invoice header 
 --
 alter table I_Sls_TR_Invoice add
+SalesPersonId	int	,
 QtyTotal	numeric(19, 2)	,
 ItemCount	int	,
 LineCount int 
 go 
-alter view IQ_GetSlsInvoiceList as 
+Create view IQ_GetSlsInvoiceListVer2 as 
 SELECT        inv.InvoiceID, inv.TrNo, inv.RefNO, inv.RefTrID, inv.TrDate, inv.TrDateH, inv.TrType, inv.IsCash, inv.SlsInvType, inv.SlsInvSrc, inv.CashBoxID, inv.CustomerId, inv.CustomerName, inv.CustomerMobileNo, inv.SalesmanId, 
                          inv.StoreId, inv.OperationId, inv.TotalAmount, inv.VatAmount, inv.VatType, inv.DiscountAmount, inv.DiscountPrc, inv.NetAfterVat, inv.CommitionAmount, inv.CashAmount, inv.CardAmount, inv.BankTfAmount, inv.BankAccount, 
                          inv.TotalPaidAmount, inv.RemainAmount, inv.Remark, inv.Status, inv.IsPosted, inv.VoucherNo, inv.VoucherType, inv.CreatedAt, inv.CreatedBy, inv.UpdatedAt, inv.UpdatedBy, inv.CompCode, inv.BranchCode, 
@@ -22,7 +23,7 @@ FROM            dbo.A_Rec_D_Customer AS cus RIGHT OUTER JOIN
                          dbo.I_Sls_D_Salesman AS sper ON inv.SalesPersonId = sper.SalesmanId LEFT OUTER JOIN
                          dbo.A_RecPay_D_CashBox AS Box ON inv.CashBoxID = Box.CashBoxID
 go
-alter view IQ_GetSlsInvoiceStatistic  as 
+Create view IQ_GetSlsInvoiceStatisticVer2  as 
 SELECT        inv.InvoiceID, inv.TrNo, inv.RefNO, inv.RefTrID, inv.TrDate, inv.TrDateH, inv.TrType, inv.IsCash, inv.SlsInvType, inv.SlsInvSrc, inv.CashBoxID, inv.CustomerId, inv.CustomerName, inv.CustomerMobileNo, inv.SalesmanId, 
                          inv.StoreId, inv.OperationId, inv.TotalAmount, inv.VatAmount, inv.VatType, inv.DiscountAmount, inv.DiscountPrc, inv.NetAfterVat, inv.CommitionAmount, inv.CashAmount, inv.CardAmount, inv.BankTfAmount, inv.BankAccount, 
                          inv.TotalPaidAmount, inv.RemainAmount, inv.Remark, inv.Status, inv.IsPosted, inv.VoucherNo, inv.VoucherType, inv.CreatedAt, inv.CreatedBy, inv.UpdatedAt, inv.UpdatedBy, inv.CompCode, inv.BranchCode, 
@@ -55,7 +56,7 @@ go
 -- Create date: <Create Date,,>
 -- Description: invoice Print 
 -- =============================================
-ALTER  PROCEDURE [dbo].[IProc_Rpt_SlsInvoiceList]
+Create  PROCEDURE [dbo].[IProc_Rpt_SlsInvoiceListVer2]
 @comp int , 
 @bra int , 
 @CompNameA nvarchar(100) , 
@@ -110,7 +111,7 @@ select  @comp as Comp , @Bra as Bra , @CompNameA as CompNameA , @CompNameE as Co
         invstat.CreatedBy, invstat.UpdatedAt, invstat.UpdatedBy, invstat.CompCode, invstat.BranchCode, invstat.Slsm_Code, invstat.Slsm_DescA, invstat.Cus_Code, invstat.Box_DescA,  
         invstat.Line_Count, invstat.Item_Count, invstat.Tot_Qty,  ref.TrNo AS Ref_TrNo, ref.TrDate AS Ref_TrDate, op.TrNo AS op_TrNo, op.TrDate AS Op_TrDate, 
         op.TruckNo AS Op_TruckNo, op.RefNO AS Op_RefNo,invstat.RefNO, invstat.Sper_code, invstat.SPer_NameA
-FROM     dbo.IQ_GetSlsInvoiceStatistic AS invstat LEFT OUTER JOIN
+FROM     dbo.IQ_GetSlsInvoiceStatisticVer2 AS invstat LEFT OUTER JOIN
         dbo.I_TR_Operation AS op ON invstat.OperationId = op.OperationID LEFT OUTER JOIN
         dbo.I_Sls_TR_Invoice AS ref ON invstat.RefTrID = ref.InvoiceID
 where    invstat.CompCode = @comp and INVSTAT.BranchCode= @BRA AND  invstat.SlsInvSrc = @SlsInvSrc and  invstat.TrType = @TrType and 

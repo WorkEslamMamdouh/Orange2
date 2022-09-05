@@ -219,8 +219,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetStkIssueCC> IQ_GetStkIssueCC { get; set; }
         public virtual DbSet<IQ_GetStkIssueCCDetail> IQ_GetStkIssueCCDetail { get; set; }
         public virtual DbSet<IQ_GetVendor> IQ_GetVendor { get; set; }
-        public virtual DbSet<IQ_GetSlsInvoiceList> IQ_GetSlsInvoiceList { get; set; }
-        public virtual DbSet<IQ_GetSlsInvoiceStatistic> IQ_GetSlsInvoiceStatistic { get; set; }
+        public virtual DbSet<IQ_GetSlsInvoiceListVer2> IQ_GetSlsInvoiceListVer2 { get; set; }
+        public virtual DbSet<IQ_GetSlsInvoiceStatisticVer2> IQ_GetSlsInvoiceStatisticVer2 { get; set; }
     
         public virtual int G_ProcessTrans(Nullable<int> comp, Nullable<int> branch, string trType, string opMode, Nullable<int> trID, ObjectParameter trNo, ObjectParameter ok)
         {
@@ -5412,7 +5412,7 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_ItemSalesSum_Result>("IProc_Rpt_ItemSalesSum", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, customeridParameter, payTypeParameter, groupTypeParameter, salesTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, statusParameter, fromDateParameter, todateParameter, invTypeParameter);
         }
     
-        public virtual ObjectResult<IProc_Rpt_SlsInvoiceList_Result> IProc_Rpt_SlsInvoiceList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> trType, Nullable<int> slsInvSrc, string fromDate, string toDate, Nullable<int> customerID, Nullable<int> salesmanID, Nullable<int> cashType, Nullable<int> status, Nullable<int> operationID)
+        public virtual ObjectResult<IProc_Rpt_SlsInvoiceListVer2_Result> IProc_Rpt_SlsInvoiceListVer2(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> trType, Nullable<int> slsInvSrc, string fromDate, string toDate, Nullable<int> customerID, Nullable<int> salesmanID, Nullable<int> cashType, Nullable<int> status, Nullable<int> operationID)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -5482,7 +5482,7 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("OperationID", operationID) :
                 new ObjectParameter("OperationID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_SlsInvoiceList_Result>("IProc_Rpt_SlsInvoiceList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, slsInvSrcParameter, fromDateParameter, toDateParameter, customerIDParameter, salesmanIDParameter, cashTypeParameter, statusParameter, operationIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_SlsInvoiceListVer2_Result>("IProc_Rpt_SlsInvoiceListVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, slsInvSrcParameter, fromDateParameter, toDateParameter, customerIDParameter, salesmanIDParameter, cashTypeParameter, statusParameter, operationIDParameter);
         }
     }
 }
