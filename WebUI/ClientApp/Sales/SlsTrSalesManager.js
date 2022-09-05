@@ -270,7 +270,7 @@ var SlsTrSalesManager;
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onchange = _SearchBox_Change;
-        searchbutmemreport.onkeyup = _SearchBox_Change1;
+        //searchbutmemreport.onkeyup = _SearchBox_Change1;
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
         btnCustLastPrice.onclick = LastPrice_onclick;
@@ -1328,6 +1328,7 @@ var SlsTrSalesManager;
     function InitializeGrid() {
         var res = GetResourceList("");
         Grid.ElementName = "divGridDetails";
+        Grid.OnDataLoaded = function () { };
         Grid.Paging = true;
         Grid.PageSize = 10;
         Grid.Sorting = true;
@@ -2284,24 +2285,37 @@ var SlsTrSalesManager;
         }
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
-    function _SearchBox_Change1() {
-        //$("#divGridDetails").jsGrid("option", "pageSize", 1000); 
-    }
     function _SearchBox_Change() {
         debugger;
-        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //debugger
+        //var myarr = $("#divGridDetails").jsGrid("option", "data");
+        //let val = searchbutmemreport.value;
+        //var result = myarr[0].filter(function (e) {
+        //    return e.indexOf(val) !== -1;
+        //});
+        //Grid.DataSource = result;
+        //Grid.Bind();
+        //let a = $("#divGridDetails").jsGrid("option", "data");
+        //var search = new RegExp(term, 'i'); // prepare a regex object
+        //let b = a.filter(item => item.toLowerCase().indexOf(term) > -1);
+        //console.log(b); // ["foo","fool","cool"]
+        //var term = searchbutmemreport.value; // search term (regex pattern)
+        //let ar = $("#divGridDetails").jsGrid("option", "data");
+        //Grid.DataSource = findInArray( ar,term);
+        //Grid.Bind();
+        return;
         //$("#divGridDetails").jsGrid("option", "pageSize", 10000); 
-        if (searchbutmemreport.value != "") {
-            var search_1 = searchbutmemreport.value.toLowerCase();
-            SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0 || x.Slsm_DescE.toLowerCase().search(search_1) >= 0; });
-            Grid.DataSource = SearchDetails;
-            Grid.Bind();
-        }
-        else {
-            Grid.DataSource = SlsInvoiceStatisticsDetails;
-            Grid.Bind();
-        }
+        //if (searchbutmemreport.value != "") {
+        //    let search: string = searchbutmemreport.value.toLowerCase();
+        //    SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
+        //        || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
+        //    Grid.DataSource = SearchDetails;
+        //    Grid.Bind();
+        //} else {
+        //    Grid.DataSource = SlsInvoiceStatisticsDetails;
+        //    Grid.Bind();
+        //}
         //let cnt = 1;
         //if (SlsInvoiceStatisticsDetails.length > 0) {
         //    let ii = 0;
@@ -2334,8 +2348,43 @@ var SlsTrSalesManager;
         //        //------------------------------------------------------------------------
         //    }
         //}
-        //$('.jsgrid-filter-row').attr('style','display: none;')
-        //$('.jsgrid-insert-row').attr('style','display: none;')
+        //if (searchbutmemreport.value.trim() == '') {
+        //    $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //    $('.jsgrid-filter-row').attr('style', 'display: none;')
+        //    $('.jsgrid-insert-row').attr('style', 'display: none;')
+        //}
+        //let pages =( SlsInvoiceStatisticsDetails.length / Number($("#divGridDetails").jsGrid("option", "pageSize"))) + 1;
+        //pages = parseInt(pages.toString());
+        //pages = pages + 1;
+        //alert(pages);
+        //for (var u = 1; u <= pages; u++) {
+        //    var input, filter, table, tr, td, i, txtValue;
+        //    input = document.getElementById("searchbutmemreport");
+        //    filter = input.value.toUpperCase();
+        //    table = document.getElementById("divGridDetails");
+        //    tr = table.getElementsByTagName("tr");
+        //    let flag = 0;
+        //    for (i = 0; i < tr.length; i++) {
+        //        td = tr[i].getElementsByTagName("td")[0];
+        //        if (td) {
+        //            txtValue = td.textContent || td.innerText;
+        //            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //                tr[i].style.display = "";
+        //                flag = 1;
+        //            } else {
+        //                tr[i].style.display = "none";
+        //            }
+        //        }
+        //    }
+        //    if (flag == 1) {
+        //        break;
+        //    }
+        //    else {
+        //        $("#divGridDetails").jsGrid("option", "pageIndex", u); 
+        //    }
+        //}
+        //$('.jsgrid-filter-row').attr('style', 'display: none;')
+        //$('.jsgrid-insert-row').attr('style', 'display: none;')
         ////setTimeout(function () {
         ////    $("#divGridDetails").jsGrid("option", "pageSize", 10);
         ////}, 1500);

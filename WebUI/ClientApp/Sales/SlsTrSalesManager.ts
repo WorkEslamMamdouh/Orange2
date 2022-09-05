@@ -299,7 +299,7 @@ namespace SlsTrSalesManager {
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onchange = _SearchBox_Change;
-        searchbutmemreport.onkeyup = _SearchBox_Change1;
+        //searchbutmemreport.onkeyup = _SearchBox_Change1;
 
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
@@ -338,14 +338,14 @@ namespace SlsTrSalesManager {
     function btnCust_onclick() {
 
         let cond = "";
-        if (SysSession.CurrentEnvironment.I_Control[0].IsLocalBranchCustomer == true) { cond =  " and BranchCode=" + BranchCode; }
+        if (SysSession.CurrentEnvironment.I_Control[0].IsLocalBranchCustomer == true) { cond = " and BranchCode=" + BranchCode; }
 
         sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + " " + cond, () => {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getCustomerById(id, false);
         });
 
-    } 
+    }
     function getCustomerById(custId: string, iscode: boolean) {
         Ajax.Callsync({
             type: "Get",
@@ -356,7 +356,7 @@ namespace SlsTrSalesManager {
                 debugger;
                 if (result.IsSuccess) {
                     AccountDetails = result.Response as Array<IQ_GetCustomer>;
-                    if (AccountDetails.length > 0) { 
+                    if (AccountDetails.length > 0) {
                         $('#txt_CustCode').val(AccountDetails[0].CustomerCODE);
                         ddlInvoiceCustomer.value = AccountDetails[0].CustomerId.toString();
 
@@ -365,11 +365,11 @@ namespace SlsTrSalesManager {
                         txtCustomerMobile.value = AccountDetails[0].MOBILE;
 
                         if (SysSession.CurrentEnvironment.UserType != 1 && SysSession.CurrentEnvironment.UserType != 3) {
-                       
+
                             if (AccountDetails[0].SalesmanId != null && AccountDetails[0].SalesmanId != 0) {
                                 ddlSalesman.value = AccountDetails[0].SalesmanId.toString();
                             }
-                              
+
                         }
 
                     }
@@ -380,11 +380,11 @@ namespace SlsTrSalesManager {
                         $('#txt_CustCode').val('');
                         ddlInvoiceCustomer.value = '';
 
-                        vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType; 
+                        vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
                         txtCustomerMobile.value = '';
 
                     }
-                    
+
                 }
 
             }
@@ -684,12 +684,12 @@ namespace SlsTrSalesManager {
     //------------------------------------------------------ Events Region------------------------
     function txt_CustCode_onchange() {
 
-     
+
         var custID = txt_CustCode.value;
         getCustomerById(custID, true)
-            
 
-         
+
+
         ComputeTotals();
 
 
@@ -1618,6 +1618,8 @@ namespace SlsTrSalesManager {
     function InitializeGrid() {
         let res: any = GetResourceList("");
         Grid.ElementName = "divGridDetails";
+
+        Grid.OnDataLoaded = () => { };
         Grid.Paging = true;
         Grid.PageSize = 10;
         Grid.Sorting = true;
@@ -2884,29 +2886,53 @@ namespace SlsTrSalesManager {
 
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
-    function _SearchBox_Change1() {
-        //$("#divGridDetails").jsGrid("option", "pageSize", 1000); 
-    }
+   
     function _SearchBox_Change() {
         debugger
-        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+        //debugger
+        //var myarr = $("#divGridDetails").jsGrid("option", "data");
+
+        //let val = searchbutmemreport.value;
+
+        //var result = myarr[0].filter(function (e) {
+        //    return e.indexOf(val) !== -1;
+        //});
+
+
+        //Grid.DataSource = result;
+        //Grid.Bind();
+
+
+        //let a = $("#divGridDetails").jsGrid("option", "data");
+        //var search = new RegExp(term, 'i'); // prepare a regex object
+        //let b = a.filter(item => item.toLowerCase().indexOf(term) > -1);
+        //console.log(b); // ["foo","fool","cool"]
+
+        //var term = searchbutmemreport.value; // search term (regex pattern)
+        //let ar = $("#divGridDetails").jsGrid("option", "data");
+
+        //Grid.DataSource = findInArray( ar,term);
+        //Grid.Bind();
+
+        return
         //$("#divGridDetails").jsGrid("option", "pageSize", 10000); 
 
 
-        if (searchbutmemreport.value != "") {
 
-            let search: string = searchbutmemreport.value.toLowerCase();
-            SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
+        //if (searchbutmemreport.value != "") {
 
-            Grid.DataSource = SearchDetails;
-            Grid.Bind();
-        } else {
-            Grid.DataSource = SlsInvoiceStatisticsDetails;
-            Grid.Bind();
-        }
+        //    let search: string = searchbutmemreport.value.toLowerCase();
+        //    SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
+        //        || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
 
-
+        //    Grid.DataSource = SearchDetails;
+        //    Grid.Bind();
+        //} else {
+        //    Grid.DataSource = SlsInvoiceStatisticsDetails;
+        //    Grid.Bind();
+        //}
 
 
 
@@ -2932,7 +2958,7 @@ namespace SlsTrSalesManager {
         //        //------------------------------------------------------------------------
 
 
-            
+
         //        var  input, filter, table, tr, td, i, txtValue;
         //        input = document.getElementById("searchbutmemreport");
         //        filter = input.value.toUpperCase();
@@ -2957,19 +2983,61 @@ namespace SlsTrSalesManager {
         //}
 
 
+        //if (searchbutmemreport.value.trim() == '') {
+        //    $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        //    $('.jsgrid-filter-row').attr('style', 'display: none;')
+        //    $('.jsgrid-insert-row').attr('style', 'display: none;')
+        //}
+
+        //let pages =( SlsInvoiceStatisticsDetails.length / Number($("#divGridDetails").jsGrid("option", "pageSize"))) + 1;
+
+        //pages = parseInt(pages.toString());
+
+        //pages = pages + 1;
+
+        //alert(pages);
+        //for (var u = 1; u <= pages; u++) {
+
+        //    var input, filter, table, tr, td, i, txtValue;
+        //    input = document.getElementById("searchbutmemreport");
+        //    filter = input.value.toUpperCase();
+        //    table = document.getElementById("divGridDetails");
+        //    tr = table.getElementsByTagName("tr");
+        //    let flag = 0;
+        //    for (i = 0; i < tr.length; i++) {
+        //        td = tr[i].getElementsByTagName("td")[0];
+        //        if (td) {
+        //            txtValue = td.textContent || td.innerText;
+        //            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        //                tr[i].style.display = "";
+        //                flag = 1;
+        //            } else {
+        //                tr[i].style.display = "none";
+        //            }
+        //        }
+        //    }
+
+        //    if (flag == 1) {
+        //        break;
+        //    }
+        //    else {
+        //        $("#divGridDetails").jsGrid("option", "pageIndex", u); 
+        //    }
+
+
+        //}
 
 
 
+        //$('.jsgrid-filter-row').attr('style', 'display: none;')
+        //$('.jsgrid-insert-row').attr('style', 'display: none;')
 
-
-        //$('.jsgrid-filter-row').attr('style','display: none;')
-        //$('.jsgrid-insert-row').attr('style','display: none;')
-        
         ////setTimeout(function () {
         ////    $("#divGridDetails").jsGrid("option", "pageSize", 10);
         ////}, 1500);
 
-        
+
+
 
     }
     function ValidationHeader() {
