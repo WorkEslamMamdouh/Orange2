@@ -18,7 +18,7 @@ var HomeComponent;
     G_BRANCHService = GetSystemG_BRANCH();
     function OpenPage(moduleCode) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
-        // //debugger;
+        // // ;
         var compCode = SysSession.CurrentEnvironment.CompCode;
         var branchCode = SysSession.CurrentEnvironment.BranchCode;
         var UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -43,7 +43,6 @@ var HomeComponent;
                     }
                     if (result.Access == true) {
                         SysSession.CurrentPrivileges = result;
-                        debugger;
                         if (newtap == true) {
                             window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
                         }
@@ -161,7 +160,6 @@ var HomeComponent;
         else {
             $('#LanguageButtonHome').text(" تغير اللغة  ");
         }
-        debugger;
         btn_loguotuser = DocumentActions.GetElementById("btn_loguotuser");
         btn_loguotuser.onclick = LogoutUserApi;
         //CheckTime(); 
@@ -224,7 +222,7 @@ var HomeComponent;
             url: sys.apiUrl("G_USERS", "LogoutUser"),
             data: { user: userCode },
             success: function (d) {
-                // //debugger;
+                // // ;
                 if (d !== undefined) {
                     window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
@@ -264,7 +262,6 @@ var HomeComponent;
         var li;
         var li_T;
         for (var i = 0; i < modules.length; i++) {
-            debugger;
             var singleUserModule = modules[i];
             //Notification control
             if (singleUserModule.MODULE_CODE.substring(0, 5) == "Note_") {
@@ -426,7 +423,7 @@ var HomeComponent;
     }
     HomeComponent.HomePrev = HomePrev;
     function OpenView(controllerName, moduleCode) {
-        //debugger;
+        // ;
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
         var compCode = SysSession.CurrentEnvironment.CompCode;
         var branchCode = SysSession.CurrentEnvironment.BranchCode;
@@ -440,7 +437,7 @@ var HomeComponent;
             url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
             success: function (d) {
-                //debugger;
+                // ;
                 if (d == undefined) {
                     window.open(Url.Action("LoginIndex", "Login"), "_self");
                     return;
@@ -753,14 +750,14 @@ var HomeComponent;
     }
     function ScreenHelp() {
         var ModuleCode = SysSession.CurrentPrivileges.MODULE_CODE;
-        //debugger
+        // 
         $.ajax({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetHelp"),
             data: { ModuleCode: ModuleCode },
             async: false,
             success: function (d) {
-                //debugger;
+                // ;
                 var result = d;
                 var res = result.Response;
                 if (res != null) {

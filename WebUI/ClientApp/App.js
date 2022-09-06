@@ -110,6 +110,12 @@ var MessageType = {
 var Keys = {
     Enter: "Enter"
 };
+var setVal = function (value) {
+    debugger;
+    var Input = this;
+    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    return value;
+};
 function IsNullOrEmpty(value) {
     if (value == null || value == "")
         return true;
@@ -189,6 +195,12 @@ var App;
     Number.prototype.RoundToSt = function (dec) {
         var num = this;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    };
+    Number.prototype.setVal = function (value) {
+        debugger;
+        var Input = this;
+        value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+        return value;
     };
     HTMLInputElement.prototype.setVal = function (value) {
         debugger;

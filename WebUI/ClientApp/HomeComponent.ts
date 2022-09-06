@@ -25,7 +25,7 @@ namespace HomeComponent {
     export function OpenPage(moduleCode: string) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
          
-       // //debugger;
+       // // ;
         let compCode = SysSession.CurrentEnvironment.CompCode;
         let branchCode = SysSession.CurrentEnvironment.BranchCode;
         let UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -52,7 +52,7 @@ namespace HomeComponent {
                     }
                     if (result.Access == true) {
                         SysSession.CurrentPrivileges = result;
-                        debugger
+                         
                         if (newtap == true) {
                             window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
 
@@ -192,7 +192,7 @@ namespace HomeComponent {
         else {
             $('#LanguageButtonHome').text(" تغير اللغة  ");
         }
-        debugger
+         
          btn_loguotuser = DocumentActions.GetElementById<HTMLButtonElement>("btn_loguotuser");
         btn_loguotuser.onclick = LogoutUserApi;
         //CheckTime(); 
@@ -274,7 +274,7 @@ namespace HomeComponent {
             url: sys.apiUrl("G_USERS", "LogoutUser"),
             data: { user: userCode },
             success: (d) => {
-               // //debugger;
+               // // ;
 
                 if (d !== undefined) {
                     window.open(Url.Action("HomePage", "Login"), "_self");
@@ -321,7 +321,7 @@ namespace HomeComponent {
         let li_T;
         for (var i = 0; i < modules.length; i++) {
 
-            debugger
+             
 
             let singleUserModule: UserPrivilege = modules[i];
             //Notification control
@@ -504,7 +504,7 @@ namespace HomeComponent {
 
      
     export function OpenView(controllerName: string, moduleCode: string) {
-        //debugger;
+        // ;
             SysSession.CurrentEnvironment.ModuleCode = moduleCode;
  
             let compCode = SysSession.CurrentEnvironment.CompCode;
@@ -520,7 +520,7 @@ namespace HomeComponent {
             url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
             success: (d) => {
-                //debugger;
+                // ;
                 if (d == undefined) {
                     window.open(Url.Action("LoginIndex", "Login"), "_self");
                     return;
@@ -852,7 +852,7 @@ namespace HomeComponent {
     }
     function ScreenHelp() {
         let ModuleCode = SysSession.CurrentPrivileges.MODULE_CODE;
-        //debugger
+        // 
 
         $.ajax({
             type: "GET",
@@ -860,7 +860,7 @@ namespace HomeComponent {
             data: { ModuleCode: ModuleCode },
             async: false,
             success: (d) => {
-                //debugger;
+                // ;
                 let result = d as BaseResponse;
                 let res = result.Response as G_ModuleHelp;
                 if (res != null) {

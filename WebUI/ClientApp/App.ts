@@ -113,6 +113,16 @@ var Keys = {
     Enter: "Enter"
 };
 
+
+var setVal = function (value: any): any {
+    debugger
+    let Input = this;
+    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    return value;
+};
+
+
+
 function IsNullOrEmpty(value: string): boolean {
    
     if (value == null || value == "")
@@ -208,6 +218,7 @@ interface Number {
 
     RoundToNum: (dec: number) => number;
     RoundToSt: (dec: number) => string;
+    setVal: (dec: number) => string;
 }
 
 interface HTMLInputElement {
@@ -285,6 +296,13 @@ namespace App {
     Number.prototype.RoundToSt = function (dec: number): string {
         let num = this;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    };
+
+    Number.prototype.setVal = function (value: any): any {
+        debugger
+        let Input = this;
+        value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+        return value;
     };
 
     HTMLInputElement.prototype.setVal = function (value: any): any {

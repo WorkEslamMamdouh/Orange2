@@ -323,7 +323,7 @@ namespace SlsTrSalesManager {
             data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//int Compcode,int BranchCode, bool code, string CustomerId, string UserCode, string Token
                 let result = d as BaseResponse;
-                debugger;
+                  
                 if (result.IsSuccess) {
                     AccountDetails = result.Response as Array<IQ_GetCustomer>;
                     $('#txt_CustNameFilter').val(AccountDetails[0].NAMEA);
@@ -353,7 +353,7 @@ namespace SlsTrSalesManager {
             data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//int Compcode,int BranchCode, bool code, string CustomerId, string UserCode, string Token
                 let result = d as BaseResponse;
-                debugger;
+                 ;
                 if (result.IsSuccess) {
                     AccountDetails = result.Response as Array<IQ_GetCustomer>;
                     if (AccountDetails.length > 0) {
@@ -558,7 +558,7 @@ namespace SlsTrSalesManager {
 
     }
     function Compute_Invoice() {
-        debugger
+         
 
         $("#Tax_TotalInvoice").text(txtTotal.value);
         $("#Tax_InvoiceVAT").text(txtTax.value);
@@ -603,7 +603,7 @@ namespace SlsTrSalesManager {
         let Net_AfterTotalVAT = Number($("#Tax_AfterTotalInvoiceVAT").text()) - Number($("#txt_Tax_AfterTotalVAT").val())
         $("#Tax_Net_AfterTotalVAT").text(Net_AfterTotalVAT.RoundToSt(2));
 
-        debugger
+         
         var difference_1 = (Number($("#Tax_Net_total_AfterDiscount").text()) * 0.15)
         var difference_2 = difference_1 + Number($("#Tax_Net_total_AfterDiscount").text());
 
@@ -1235,7 +1235,7 @@ namespace SlsTrSalesManager {
     }
     function btnUpdate_onclick() {
 
-        debugger
+         
         if (!SysSession.CurrentPrivileges.EDIT) return;
         $("#cotrolDiv").attr("disabled", "disabled").off('click');
         $("#cotrolDiv").addClass("disabledDiv");
@@ -1333,7 +1333,7 @@ namespace SlsTrSalesManager {
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
 
 
-        debugger
+         
         let CustID = Number(ddlInvoiceCustomer.value);
         //let Cust = CustomerDetails.filter(x => x.CustomerId == CustID);
         //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
@@ -1374,39 +1374,7 @@ namespace SlsTrSalesManager {
 
 
     }
-    function fillddlCustomer() {
-
-        //Ajax.Callsync({
-        //    type: "Get",
-        //    url: sys.apiUrl("AccDefCustomer", "GetAll"),
-        //    data: {
-        //        CompCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-        //    },
-        //    success: (d) => {
-        //        let result = d as BaseResponse;
-        //        if (result.IsSuccess) {
-
-        //            CustomerDetails = result.Response as Array<A_Rec_D_Customer>;
-        //            filterCustomerDetails = result.Response as Array<A_Rec_D_Customer>;
-        //            if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {//ddlInvoiceCustomer
-        //                DocumentActions.FillCombowithdefult(CustomerDetails, ddlCustomer, "CustomerId", "NAMEE", "Select customer");
-        //                //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
-        //                DocumentActions.FillCombowithdefult(CustomerDetails, ddlInvoiceCustomer, "CustomerId", "NAMEE", "Select customer");
-        //            }
-        //            else {
-        //                //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
-        //                DocumentActions.FillCombowithdefult(CustomerDetails, ddlCustomer, "CustomerId", "NAMEA", "اختر العميل");
-        //                DocumentActions.FillCombowithdefult(CustomerDetails, ddlInvoiceCustomer, "CustomerId", "NAMEA", "اختر العميل");
-        //            }
-
-
-
-
-
-        //        }
-        //    }
-        //});
-    }
+    
     function fillddlSalesman() {
         Ajax.Callsync({
             type: "Get",
@@ -1528,7 +1496,7 @@ namespace SlsTrSalesManager {
         });
     }
     function FillddlItem(ItemFamilyID: number) {
-        debugger
+         
         if (NewAdd == true) {
 
             if (ddlStore.value == "null") {
@@ -1784,7 +1752,8 @@ namespace SlsTrSalesManager {
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
             $('#ddlSalesman').prop("value", ddlSalesmanValue);
 
-            var ddlSalesPersonValue = InvoiceStatisticsModel[0].SalesPersonId.toString();
+            
+            var ddlSalesPersonValue = setVal(InvoiceStatisticsModel[0].SalesPersonId);
             $('#ddlSalesPerson').prop("value", ddlSalesPersonValue);
 
             if (InvoiceStatisticsModel[0].Status == 1) {
@@ -2218,7 +2187,7 @@ namespace SlsTrSalesManager {
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
 
-                debugger
+                 
 
                 ItemDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
@@ -2262,7 +2231,7 @@ namespace SlsTrSalesManager {
                 //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', '(Error)', MessageType.Error);
                 //} else {
                 if (NumberSelect.length > 0) {
-                    debugger
+                     
 
                     if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
                         $("#UnitCost" + cnt).prop("value", NumberSelect[0].GlobalCost);
@@ -2315,7 +2284,7 @@ namespace SlsTrSalesManager {
 
         var drop = '#ddlFamily' + cnt;
         $(drop).change(function () {
-            debugger
+             
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
@@ -2370,7 +2339,7 @@ namespace SlsTrSalesManager {
                 //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', '(Error)', MessageType.Error);
                 //} else {
                 if (NumberSelect.length > 0) {
-                    debugger
+                     
 
                     if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
                         $("#UnitCost" + cnt).prop("value", NumberSelect[0].GlobalCost);
@@ -2458,7 +2427,7 @@ namespace SlsTrSalesManager {
 
 
         $("#txtQuantity" + cnt).on('change', function () {
-            debugger
+             
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
@@ -2674,7 +2643,7 @@ namespace SlsTrSalesManager {
     }
 
     function totalRow(cnt: number, flagDiscountAmount: boolean) {
-        debugger
+         
 
 
 
@@ -2736,7 +2705,7 @@ namespace SlsTrSalesManager {
     }
 
     function DeleteRow(RecNo: number) {
-        debugger
+         
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
@@ -2825,7 +2794,7 @@ namespace SlsTrSalesManager {
         return flag;
     }
     function ComputeTotals() {
-        debugger
+         
         PackageCount = 0;
         CountTotal = 0;
         let TotalDiscount = 0;
@@ -2888,10 +2857,10 @@ namespace SlsTrSalesManager {
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
    
     function _SearchBox_Change() {
-        debugger
+         
         //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
 
-        //debugger
+        // 
         //var myarr = $("#divGridDetails").jsGrid("option", "data");
 
         //let val = searchbutmemreport.value;
@@ -2944,7 +2913,7 @@ namespace SlsTrSalesManager {
         //    $("#divGridDetails").jsGrid("option", "pageIndex", cnt);
 
         //    for (var u = 0; u < SlsInvoiceStatisticsDetails.length; u++) {
-        //        debugger
+        //         
 
         //        if (ii > $("#divGridDetails").jsGrid("option", "pageSize")) {
         //            cnt += 1;
@@ -3087,7 +3056,7 @@ namespace SlsTrSalesManager {
         }
 
         else if (!CheckPeriodDate(txtInvoiceDate.value, "I")) {
-            debugger
+             
             DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
             Errorinput(txtInvoiceDate);
             return false
@@ -3182,9 +3151,9 @@ namespace SlsTrSalesManager {
 
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("StkDefItems", "GetAllItemWithoutOnhandQty"),
+            url: sys.apiUrl("StkDefItems", "GetAllItem"),
             data: {
-                CompCode: compcode, FinYear: Finyear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, BraCode: BranchCode , FinYear: Finyear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -3213,7 +3182,7 @@ namespace SlsTrSalesManager {
     }
     //------------------------------------------------------ main Functions  Region------------------------
     function Assign() {
-        debugger
+         
         List_MinUnitPrice = new Array<I_Sls_TR_InvoiceItems>();
         var StatusFlag: String;
         InvoiceModel = new I_Sls_TR_Invoice();
@@ -3321,7 +3290,7 @@ namespace SlsTrSalesManager {
             StatusFlag = $("#txt_StatusFlag" + i).val();
 
             //--------------------------------------------------------------**** VatNatID = null ****----------------------------------------------------
-            debugger
+             
             if (StatusFlag != 'd' && StatusFlag != 'm') {
 
                 let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
@@ -3458,7 +3427,7 @@ namespace SlsTrSalesManager {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    debugger
+                     
                     let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     DisplayMassage('( تم تعديل الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
@@ -3504,7 +3473,7 @@ namespace SlsTrSalesManager {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    debugger
+                     
                     let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
                     DateSetsSccess("txtInvoiceDate", "txtStartDate", "txtEndDate");
                     invoiceID = res.InvoiceID;
@@ -3955,7 +3924,7 @@ namespace SlsTrSalesManager {
     function openInvoice() {
 
         if (!CheckPeriodDate(txtInvoiceDate.value, "I")) {
-            debugger
+             
             DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
             Errorinput(txtInvoiceDate);
             chkActive.checked = true;
@@ -4115,7 +4084,7 @@ namespace SlsTrSalesManager {
     }
     //------------------------------------------------------Print------------------------
     export function PrintReport(OutType: number) {
-        debugger
+         
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
@@ -4299,7 +4268,7 @@ namespace SlsTrSalesManager {
             url: Url.Action("rptInvoiceNote", "Reports_pdf"),
             data: rp,
             success: (d) => {
-                debugger
+                 
                 let result = d as BaseResponse;
 
             }

@@ -191,7 +191,9 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
+
                 var ItemStoreInfoList = IItemDefService.GetAll(x => x.CompCode == CompCode && x.FinYear == FinYear ).ToList();
+                 
 
                 return Ok(new BaseResponse(ItemStoreInfoList));
             }
