@@ -115,7 +115,7 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-    debugger
+     
     let Input = this;
     value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
     return value;
@@ -299,21 +299,21 @@ namespace App {
     };
 
     Number.prototype.setVal = function (value: any): any {
-        debugger
+         
         let Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
 
     HTMLInputElement.prototype.setVal = function (value: any): any {
-        debugger
+         
         let Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
 
     HTMLSelectElement.prototype.SetValSelect = function (value: any): any {
-        debugger
+         
         let Input = this;
         value == null || value == '' || value == 0 || value == '0' ? Input.value = 'null' : Input.value = value;
         return value;
@@ -558,7 +558,7 @@ var Url = {
 var Ajax = {
     Call: <T>(settings: JQueryAjaxSettings): T => {
         try {
-            ////debugger
+            //// 
             let json = $.ajax({
                 url: settings.url,
                 data: settings.data,
@@ -623,7 +623,7 @@ var Ajax = {
 
 
 function GetView(controllerName: string, ModuleCode: string) {
-    //////debugger;
+    ////// ;
     //HomeComponent.UserAcsses(ModuleCode);
 
     let json = Ajax.CallAsync({
@@ -1496,7 +1496,7 @@ function DisplayMassage_Processes(msg_Ar: string, msg_En: string, msg_type: stri
 
 function Errorinput(input: any) {
 
-    debugger
+     
     var id = '';
     if (input.selector != null) {
 
@@ -1772,7 +1772,7 @@ function OpenPopUp(moduleCode: string, PopupBody: string, PopupDialog: string) {
 function CheckDate(TrDate: string, StDt: string, EdDt: string): boolean {
 
 
-    ////debugger
+    //// 
     var check = Date.parse(TrDate);
     var from = Date.parse(StDt);
     var to = Date.parse(EdDt);
@@ -1878,7 +1878,7 @@ function CheckTime() {
 }
 
 function addDaysOrMonth(date, days, Month) {
-    debugger
+     
     var result = new Date(date);
     days != 0 ? result.setDate(result.getDate() + days) : days = 0;
     Month != 0 ? result.setMonth(result.getMonth() + Month) : Month = 0;
@@ -1901,7 +1901,7 @@ function addDaysOrMonth(date, days, Month) {
 
 
 function Get_PriceWithVAT(item_unitprice: number, VatPRc: number, flag_PriceWithVAT: boolean) {
-    //debugger
+    // 
     var Getunitprice: IGetunitprice = new IGetunitprice();
 
     let New_unitprice = 0;
@@ -1937,7 +1937,7 @@ function ScreenHelp(ModuleCode: string) {
         data: { ModuleCode: ModuleCode },
         async: false,
         success: (d) => {
-            //debugger;
+            // ;
             let result = d as BaseResponse;
             let res = result.Response as G_ModuleHelp;
             if (res != null) {
@@ -1958,7 +1958,7 @@ function ScreenHelp(ModuleCode: string) {
 
 function CompareTime(t1: string, t2: string): number {
     // add days 
-    ////debugger;
+    //// ;
 
     var h1: number = Number(t1.slice(0, 2));
     var m1: number = Number(t1.slice(3, 5));
@@ -1974,7 +1974,7 @@ function CompareTime(t1: string, t2: string): number {
 
 
 function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
-    //debugger
+    // 
     var SysSession = GetSystemEnvironment();
     //let date = new Date(Tr_Date);
     //let mm = (date.getMonth() + 1);
@@ -1999,7 +1999,7 @@ function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
                         Details_I_Period = result.Response as Array<I_Period>;
-                        debugger
+                         
                         if (Details_I_Period.length > 0) {
 
                             if (Details_I_Period[0].Status == 0) {

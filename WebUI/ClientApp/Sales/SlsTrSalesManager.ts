@@ -4114,7 +4114,7 @@ namespace SlsTrSalesManager {
         else
             rp.SalesmanID = -1;
 
-        if ($("#ddlCustomer").val() == "null")
+        if (Number($("#ddlCustomer").val()) == 0)
             rp.CustomerID = -1;
         else
             rp.CustomerID = Number($("#ddlCustomer").val());

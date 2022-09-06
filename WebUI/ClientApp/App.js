@@ -111,7 +111,6 @@ var Keys = {
     Enter: "Enter"
 };
 var setVal = function (value) {
-    debugger;
     var Input = this;
     value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
     return value;
@@ -197,19 +196,16 @@ var App;
         return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
     Number.prototype.setVal = function (value) {
-        debugger;
         var Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
     HTMLInputElement.prototype.setVal = function (value) {
-        debugger;
         var Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
     HTMLSelectElement.prototype.SetValSelect = function (value) {
-        debugger;
         var Input = this;
         value == null || value == '' || value == 0 || value == '0' ? Input.value = 'null' : Input.value = value;
         return value;
@@ -408,7 +404,7 @@ var Url = {
 var Ajax = {
     Call: function (settings) {
         try {
-            ////debugger
+            //// 
             var json = $.ajax({
                 url: settings.url,
                 data: settings.data,
@@ -464,7 +460,7 @@ var Ajax = {
     }
 };
 function GetView(controllerName, ModuleCode) {
-    //////debugger;
+    ////// ;
     //HomeComponent.UserAcsses(ModuleCode);
     var json = Ajax.CallAsync({
         //type: "GET",
@@ -1188,7 +1184,6 @@ function DisplayMassage_Processes(msg_Ar, msg_En, msg_type, OnOk) {
     //}
 }
 function Errorinput(input) {
-    debugger;
     var id = '';
     if (input.selector != null) {
         $('' + input.selector + '').addClass('text_Mandatory');
@@ -1450,7 +1445,7 @@ function OpenPopUp(moduleCode, PopupBody, PopupDialog) {
 }
 //to be validated  in insert / update all trnasacations 
 function CheckDate(TrDate, StDt, EdDt) {
-    ////debugger
+    //// 
     var check = Date.parse(TrDate);
     var from = Date.parse(StDt);
     var to = Date.parse(EdDt);
@@ -1535,7 +1530,6 @@ function CheckTime() {
     }
 }
 function addDaysOrMonth(date, days, Month) {
-    debugger;
     var result = new Date(date);
     days != 0 ? result.setDate(result.getDate() + days) : days = 0;
     Month != 0 ? result.setMonth(result.getMonth() + Month) : Month = 0;
@@ -1554,7 +1548,7 @@ function addDaysOrMonth(date, days, Month) {
     return ReturnedDate;
 }
 function Get_PriceWithVAT(item_unitprice, VatPRc, flag_PriceWithVAT) {
-    //debugger
+    // 
     var Getunitprice = new IGetunitprice();
     var New_unitprice = 0;
     if (flag_PriceWithVAT) { //  return unitprice
@@ -1579,7 +1573,7 @@ function ScreenHelp(ModuleCode) {
         data: { ModuleCode: ModuleCode },
         async: false,
         success: function (d) {
-            //debugger;
+            // ;
             var result = d;
             var res = result.Response;
             if (res != null) {
@@ -1595,7 +1589,7 @@ function ScreenHelp(ModuleCode) {
 }
 function CompareTime(t1, t2) {
     // add days 
-    ////debugger;
+    //// ;
     var h1 = Number(t1.slice(0, 2));
     var m1 = Number(t1.slice(3, 5));
     var h2 = Number(t2.slice(0, 2));
@@ -1604,7 +1598,7 @@ function CompareTime(t1, t2) {
     return h3;
 }
 function CheckPeriodDate(Tr_Date, Type_Period) {
-    //debugger
+    // 
     var SysSession = GetSystemEnvironment();
     //let date = new Date(Tr_Date);
     //let mm = (date.getMonth() + 1);
@@ -1623,7 +1617,6 @@ function CheckPeriodDate(Tr_Date, Type_Period) {
                     var result = d;
                     if (result.IsSuccess) {
                         Details_I_Period = result.Response;
-                        debugger;
                         if (Details_I_Period.length > 0) {
                             if (Details_I_Period[0].Status == 0) {
                                 res = true;

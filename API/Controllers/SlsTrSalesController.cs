@@ -131,7 +131,12 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.IQ_GetSlsInvoiceItem.Where(x => x.InvoiceID == invoiceID).ToList();
+                //var res = db.IQ_GetSlsInvoiceItem.Where(x => x.InvoiceID == invoiceID).ToList();
+
+                string query = "select * from IQ_GetSlsInvoiceItem where InvoiceID = " + invoiceID + " ";
+               
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceItem>(query).ToList();
+
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
