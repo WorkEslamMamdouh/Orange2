@@ -408,6 +408,7 @@ var StkDefCategory;
         Model.Token = sys.SysSession.CurrentEnvironment.Token;
     }
     function Insert() {
+        Model.CreatedAt = GetDate();
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefCategory", "Insert"),
@@ -426,6 +427,7 @@ var StkDefCategory;
         });
     }
     function Update() {
+        Model.UpdatedAt = GetDate();
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefCategory", "Update"),

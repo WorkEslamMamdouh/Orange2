@@ -5763,7 +5763,7 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @IssueTypeID= " + spIssueTypeID.Value +
            ", @FromDate = '" + spFromDate.Value +
-           "',@ToDate =' " + spToDate.Value +
+           "',@ToDate ='" + spToDate.Value +
            "',@storeID = " + spstoreID.Value +
            ", @Status = " + spStatus.Value ;
 
