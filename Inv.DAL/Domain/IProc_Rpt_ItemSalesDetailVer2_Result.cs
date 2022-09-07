@@ -11,7 +11,7 @@ namespace Inv.DAL.Domain
 {
     using System;
     
-    public partial class IProc_Rpt_ItemPurchaseDetail_Result
+    public partial class IProc_Rpt_ItemSalesDetailVer2_Result
     {
         public Nullable<int> Comp { get; set; }
         public Nullable<int> Bra { get; set; }
@@ -30,9 +30,10 @@ namespace Inv.DAL.Domain
         public string Par_CatDSE { get; set; }
         public string Par_FamilyDSA { get; set; }
         public string Par_FamilyDSE { get; set; }
-        public string Par_VendDescA { get; set; }
-        public string Par_VendDescE { get; set; }
+        public string Par_CustDescA { get; set; }
+        public string Par_CustDescE { get; set; }
         public Nullable<int> Par_GroupType { get; set; }
+        public string Par_SalesTypeDsA { get; set; }
         public string Par_ItemDSA { get; set; }
         public string Par_ItemDSE { get; set; }
         public string Par_FromDate { get; set; }
@@ -42,21 +43,24 @@ namespace Inv.DAL.Domain
         public Nullable<int> TrNo { get; set; }
         public string RefNO { get; set; }
         public Nullable<System.DateTime> TrDate { get; set; }
+        public string DocNo { get; set; }
         public Nullable<int> TrType { get; set; }
         public Nullable<bool> IsCash { get; set; }
-        public string vendorcode { get; set; }
-        public string vnd_NameA { get; set; }
-        public string vnd_NameE { get; set; }
-        public Nullable<int> vendorId { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public string Cus_Code { get; set; }
+        public string Cus_NameA { get; set; }
+        public string Cus_NameE { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public Nullable<decimal> TotalAmount { get; set; }
         public Nullable<decimal> VatAmount { get; set; }
-        public Nullable<decimal> asNetAfterVat { get; set; }
+        public Nullable<decimal> NetAfterVat { get; set; }
+        public Nullable<decimal> CashAmount { get; set; }
+        public Nullable<decimal> CardAmount { get; set; }
         public string IV_Type { get; set; }
         public string Pay_Type { get; set; }
         public Nullable<int> ItemID { get; set; }
         public string itemCode { get; set; }
         public string It_DescA { get; set; }
-        public Nullable<int> Serial { get; set; }
+        public Nullable<int> SERIAL { get; set; }
         public string It_DescE { get; set; }
         public string ItFm_Code { get; set; }
         public string ItFm_DescA { get; set; }
@@ -66,6 +70,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> dt_ItemTotal { get; set; }
         public Nullable<decimal> dt_VatAmount { get; set; }
         public Nullable<decimal> dt_NetAfterVat { get; set; }
-        public Nullable<decimal> UnitAddCost { get; set; }
+        public Nullable<decimal> StockUnitCost { get; set; }
     }
 }

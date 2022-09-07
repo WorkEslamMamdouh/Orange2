@@ -987,7 +987,7 @@ var AccDefVendor;
         $('#txt_Openbalance').val(Selecteditem[0].Openbalance.RoundToSt(2));
         $('#txt_balance').val(Selecteditem[0].Balance.RoundToSt(2));
         $('#txt_Debit').val(Selecteditem[0].Debit.RoundToSt(2));
-        $('#txt_DebitFC').val(Selecteditem[0].DebitFC.RoundToSt(2));
+        $('#txt_DebitFC').val(Selecteditem[0].Credit.RoundToSt(2));
         debugger;
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
         if (Is_Vendor == true && Selecteditem[0].IsCreditVendor == true) {

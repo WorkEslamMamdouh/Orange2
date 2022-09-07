@@ -255,11 +255,11 @@ var StkDefCategory;
         Grid.Columns = [
             { title: res.App_Number, name: "CatID", type: "text", width: "1%", visible: false },
             { title: res.App_Code, name: "CatCode", type: "number", width: "7%" },
-            { title: res.App_DescA, name: "DescA", type: "text", width: "30%" },
-            { title: res.App_DescE, name: "DescL", type: "text", width: "30%" },
-            { title: res.IsPurchase, name: "IsPurchasedesc", type: "text", width: "11%" },
-            { title: res.IsStock, name: "IsStockdesc", type: "text", width: "11%" },
-            { title: res.ISSales, name: "ISSalesdesc", type: "text", width: "11%" },
+            { title: res.App_DescA, name: "DescA", type: "text", width: "30%", css: "textaligncenter" },
+            { title: res.App_DescE, name: "DescL", type: "text", width: "30%", css: "textaligncenter" },
+            { title: res.IsPurchase, name: "IsPurchasedesc", type: "text", width: "11%", css: "textaligncenter" },
+            { title: res.IsStock, name: "IsStockdesc", type: "text", width: "11%", css: "textaligncenter" },
+            { title: res.ISSales, name: "ISSalesdesc", type: "text", width: "11%", css: "textaligncenter" },
         ];
     }
     function BindGridData() {
@@ -408,6 +408,7 @@ var StkDefCategory;
         Model.Token = sys.SysSession.CurrentEnvironment.Token;
     }
     function Insert() {
+        Model.CreatedAt = GetDate();
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefCategory", "Insert"),
@@ -426,6 +427,7 @@ var StkDefCategory;
         });
     }
     function Update() {
+        Model.UpdatedAt = GetDate();
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefCategory", "Update"),

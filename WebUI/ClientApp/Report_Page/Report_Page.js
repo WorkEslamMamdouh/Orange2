@@ -11,6 +11,7 @@ var Report_Page;
     function InitalizeComponent() {
         $('#div_Reports').removeClass('display_none');
         $('.main-iconbar').addClass('display_none');
+        $('#printableArea').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
         succes = localStorage.getItem("result");
         InitalizeControls();
         InitalizeEvents();

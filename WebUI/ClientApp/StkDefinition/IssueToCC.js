@@ -403,7 +403,7 @@ var IssueToCC;
                         $('#txtSerial' + i).val(i + 1);
                         $('#txtCode' + i).val(StkIssueCCDetail[i].ItemCode);
                         $('#txtItemName' + i).val(lang == "ar" ? StkIssueCCDetail[i].itm_DescA : StkIssueCCDetail[i].itm_DescE);
-                        $('#txtUnitName' + i).val(lang == "ar" ? StkIssueCCDetail[i].uom_DescA : StkIssueCCDetail[i].uom_DescE);
+                        $('#txtUntitName' + i).val(lang == "ar" ? StkIssueCCDetail[i].uom_DescA : StkIssueCCDetail[i].uom_DescE);
                         $('#txtQTY' + i).val(StkIssueCCDetail[i].ReqQty);
                         $('#IssueToCcDetailID' + i).val(StkIssueCCDetail[i].IssueToCcDetailID);
                         $('#txtUnitID' + i).val(StkIssueCCDetail[i].UnitID);
@@ -422,7 +422,7 @@ var IssueToCC;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtSerial" + cnt + "\" type=\"number\"  value=\"" + (cnt + 1) + "\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t                    <div class=\"form-group\">\n\t\t                    <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\" >\n\t\t                    <i class=\"fa fa-search  \"></i>\n\t\t                     </button>\n\t                    </div>\n                    </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUntitName" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQTY" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"IssueToCcDetailID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txtUnitID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />  \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtSerial" + cnt + "\" type=\"number\"  value=\"" + (cnt + 1) + "\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t                    <div class=\"form-group\">\n\t\t                    <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchItems" + cnt + "\" name=\"ColSearch\" >\n\t\t                    <i class=\"fa fa-search  \"></i>\n\t\t                     </button>\n\t                    </div>\n                    </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtItemName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtUntitName" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQTY" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"IssueToCcDetailID" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txtUnitID" + cnt + "\" type=\"hidden\"   />\n                </tr>";
         $("#div_Data").append(html);
         //// Items Search
         $('#btnSearchItems' + cnt).click(function (e) {
@@ -444,7 +444,7 @@ var IssueToCC;
                         $('#txtCode' + cnt).val(SrcItem[0].ItemCode);
                         (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
                         $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                        $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
                         $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);
                     }
                 }
@@ -455,7 +455,7 @@ var IssueToCC;
                     Errorinput(('#txtCode' + cnt));
                     $('#txtItemName' + cnt).val("");
                     $('#txtUnitID' + cnt).val("");
-                    $('#txtUnitName' + cnt).val("");
+                    $('#txtUntitName' + cnt).val("");
                     $('#txtQTY' + cnt).val("");
                     $('#txtDetailID' + cnt).val("");
                 }
@@ -478,7 +478,7 @@ var IssueToCC;
                         $('#txtCode' + cnt).val(SrcItem[0].ItemCode);
                         (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
                         $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                        $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
                         $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);
                     }
                 }
@@ -489,7 +489,7 @@ var IssueToCC;
                     Errorinput(('#txtCode' + cnt));
                     $('#txtItemName' + cnt).val("");
                     $('#txtUnitID' + cnt).val("");
-                    $('#txtUnitName' + cnt).val("");
+                    $('#txtUntitName' + cnt).val("");
                     $('#txtQTY' + cnt).val("");
                     $('#txtDetailID' + cnt).val("");
                 }
@@ -501,7 +501,7 @@ var IssueToCC;
                 Errorinput(('#txtCode' + cnt));
                 $('#txtItemName' + cnt).val("");
                 $('#txtUnitID' + cnt).val("");
-                $('#txtUnitName' + cnt).val("");
+                $('#txtUntitName' + cnt).val("");
                 $('#txtQTY' + cnt).val("");
                 $('#txtDetailID' + cnt).val("");
             }

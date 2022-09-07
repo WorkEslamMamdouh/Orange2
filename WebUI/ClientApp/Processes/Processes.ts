@@ -4313,6 +4313,7 @@ namespace Processes {
 
         ComputeTotals();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_2_onclick() {
         loading('btnsave');
@@ -4461,7 +4462,7 @@ namespace Processes {
         disabled_divMasterGridiv();
         ComputeTotalsCharge();
         //divGridDetails_onclick();
-
+        RemoveDisabledToolBar();
     }
     function btnSave_3_onclick() {
         loading('btnsave');
@@ -4599,6 +4600,7 @@ namespace Processes {
         Update_4 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_4_onclick() {
         loading('btnsave');
@@ -4704,6 +4706,8 @@ namespace Processes {
         Update_5 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+
+        RemoveDisabledToolBar();
     }
     function btnSave_5_onclick() {
         loading('btnsave');
@@ -4820,6 +4824,7 @@ namespace Processes {
             $("#div_MasterGird").removeClass("disabledDiv");
             //$("#btnPresent").removeAttr("disabled");
             //$("#btnClose").removeAttr("disabled");
+            Back();
         }
 
     }

@@ -56,6 +56,13 @@ go
 -- Create date: <Create Date,,>
 -- Description: invoice Print 
 -- =============================================
+
+ 
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description: invoice Print 
+-- =============================================
 Create  PROCEDURE [dbo].[IProc_Rpt_SlsInvoiceListVer2]
 @comp int , 
 @bra int , 
@@ -87,30 +94,30 @@ declare @StatusDSA as nvarchar(100) , @StatusDSE as nvarchar(100) , @CashTypeDSA
 
 		
 if @CustomerID is null  
-	select  @CustDSA= 'Ã„Ì⁄ «·⁄„·«¡' ,  @CustDSE = 'All'
+	select  @CustDSA= '???? ???????' ,  @CustDSE = 'All'
 else 
 	select  @CustDSA= NAMEA ,  @CustDSE = NAMEE from A_Rec_D_Customer where CustomerId =@CustomerID
 
 if @SalesmanID is null  
-	select  @SalesmanDSA= 'Ã„Ì⁄ «·„‰«œÌ»' ,  @SalesmanDSE = 'All'
+	select  @SalesmanDSA= '???? ????????' ,  @SalesmanDSE = 'All'
 else 
 	select  @SalesmanDSA= NAMEA ,  @SalesmanDSE = NAMEE from I_Sls_D_Salesman where SalesmanId =@SalesmanID
 
-select  @StatusDSA= case @status when 0 then '€Ì— „‰›–' when 1 then '„‰›–' when 2 then '«·Ã„Ì⁄' end 
+select  @StatusDSA= case @status when 0 then '??? ????' when 1 then '????' when 2 then '??????' end 
 select  @StatusDSE= case @status when 0 then 'Not authorized' when 1 then 'Authorized' when 2 then 'All' end 
-select  @CashTypeDSA= case @CashType when 0 then '⁄·Ì «·Õ”«»' when 1 then '¬Ã·' when 2 then '«·Ã„Ì⁄' end 
+select  @CashTypeDSA= case @CashType when 0 then '??? ??????' when 1 then '???' when 2 then '??????' end 
 select  @CashTypeDSE= case @CashType when 0 then 'Cash' when 1 then 'Credit' when 2 then 'All' end 
 select  @comp as Comp , @Bra as Bra , @CompNameA as CompNameA , @CompNameE as CompNameE , @BraNameA as BraNameA , @BraNameE as BraNameE , @LoginUser as LoginUser ,  getdate() as PrintDate , @RepType as Par_RepType ,	
         @StatusDSA as Par_StatusDSA , @StatusDSE as Par_StatusDSE , @CashTypeDSA as Par_CashTypeDSA , @CashTypeDSE as Par_CashTypeDSE ,
 		@CustDSA as Par_CustDSA , @CustDSE as Par_CustDSE , @SalesmanDSA as Par_SalesmanDSA , @SalesmanDSE as Par_SalesmanDSE , 
 		@FromDate as Par_FromDate, @Todate as Par_Todate, @OPno as par_op_TRNo , @shipNo as par_op_shipno , 
-        invstat.InvoiceID, invstat.TrNo, invstat.RefNO, invstat.RefTrID, invstat.TrDate, invstat.TrDateH, invstat.TrType, invstat.IsCash, invstat.SlsInvType, invstat.SlsInvSrc, invstat.CashBoxID, invstat.CustomerId, 
+         invstat.InvoiceID, invstat.TrNo, invstat.RefNO, invstat.RefTrID, invstat.TrDate, invstat.TrDateH, invstat.TrType, invstat.IsCash, invstat.SlsInvType, invstat.SlsInvSrc, invstat.CashBoxID, invstat.CustomerId, 
         CASE WHEN invstat.customerid IS NULL THEN invstat.CustomerName ELSE Cus_NameA END AS Cust_nameA, 
         invstat.SalesmanId, invstat.StoreId, invstat.OperationId, invstat.TotalAmount, invstat.VatAmount, invstat.VatType, invstat.DiscountAmount, invstat.DiscountPrc, invstat.NetAfterVat, invstat.CommitionAmount, invstat.CashAmount, 
         invstat.CardAmount, invstat.BankTfAmount, invstat.BankAccount, invstat.TotalPaidAmount, invstat.RemainAmount, invstat.Remark, invstat.Status, invstat.IsPosted, invstat.VoucherNo, invstat.VoucherType, invstat.CreatedAt, 
         invstat.CreatedBy, invstat.UpdatedAt, invstat.UpdatedBy, invstat.CompCode, invstat.BranchCode, invstat.Slsm_Code, invstat.Slsm_DescA, invstat.Cus_Code, invstat.Box_DescA,  
         invstat.Line_Count, invstat.Item_Count, invstat.Tot_Qty,  ref.TrNo AS Ref_TrNo, ref.TrDate AS Ref_TrDate, op.TrNo AS op_TrNo, op.TrDate AS Op_TrDate, 
-        op.TruckNo AS Op_TruckNo, op.RefNO AS Op_RefNo,invstat.RefNO, invstat.Sper_code, invstat.SPer_NameA
+        op.TruckNo AS Op_TruckNo, op.RefNO AS Op_RefNo,invstat.RefNO as RefNO1, invstat.Sper_code, invstat.SPer_NameA
 FROM     dbo.IQ_GetSlsInvoiceStatisticVer2 AS invstat LEFT OUTER JOIN
         dbo.I_TR_Operation AS op ON invstat.OperationId = op.OperationID LEFT OUTER JOIN
         dbo.I_Sls_TR_Invoice AS ref ON invstat.RefTrID = ref.InvoiceID
@@ -119,12 +126,12 @@ where    invstat.CompCode = @comp and INVSTAT.BranchCode= @BRA AND  invstat.SlsI
 		(@SalesmanID is null or invstat.SalesmanId = @SalesmanID) AND 
 		(@CustomerID is null or invstat.CustomerId = @CustomerID) AND 
 		(@status=2  or  invstat.status =   @status )   and 
-		(@OperationID =null or  invstat.OperationId =@OperationID ) and
+		(@OperationID is null or  invstat.OperationId =@OperationID ) and
 		invstat.TrDate between @Fromdate and @Todate 
 
 END
-
-go 
+go
+ 
 GO
 
 
