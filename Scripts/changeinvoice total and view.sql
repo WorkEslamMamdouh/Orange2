@@ -110,7 +110,7 @@ select  @comp as Comp , @Bra as Bra , @CompNameA as CompNameA , @CompNameE as Co
         invstat.CardAmount, invstat.BankTfAmount, invstat.BankAccount, invstat.TotalPaidAmount, invstat.RemainAmount, invstat.Remark, invstat.Status, invstat.IsPosted, invstat.VoucherNo, invstat.VoucherType, invstat.CreatedAt, 
         invstat.CreatedBy, invstat.UpdatedAt, invstat.UpdatedBy, invstat.CompCode, invstat.BranchCode, invstat.Slsm_Code, invstat.Slsm_DescA, invstat.Cus_Code, invstat.Box_DescA,  
         invstat.Line_Count, invstat.Item_Count, invstat.Tot_Qty,  ref.TrNo AS Ref_TrNo, ref.TrDate AS Ref_TrDate, op.TrNo AS op_TrNo, op.TrDate AS Op_TrDate, 
-        op.TruckNo AS Op_TruckNo, op.RefNO AS Op_RefNo,invstat.RefNO, invstat.Sper_code, invstat.SPer_NameA
+        op.TruckNo AS Op_TruckNo, op.RefNO AS Op_RefNo,invstat.RefNO as RefNO1, invstat.Sper_code, invstat.SPer_NameA
 FROM     dbo.IQ_GetSlsInvoiceStatisticVer2 AS invstat LEFT OUTER JOIN
         dbo.I_TR_Operation AS op ON invstat.OperationId = op.OperationID LEFT OUTER JOIN
         dbo.I_Sls_TR_Invoice AS ref ON invstat.RefTrID = ref.InvoiceID
@@ -119,7 +119,7 @@ where    invstat.CompCode = @comp and INVSTAT.BranchCode= @BRA AND  invstat.SlsI
 		(@SalesmanID is null or invstat.SalesmanId = @SalesmanID) AND 
 		(@CustomerID is null or invstat.CustomerId = @CustomerID) AND 
 		(@status=2  or  invstat.status =   @status )   and 
-		(@OperationID =null or  invstat.OperationId =@OperationID ) and
+		(@OperationID is null or  invstat.OperationId =@OperationID ) and
 		invstat.TrDate between @Fromdate and @Todate 
 
 END
