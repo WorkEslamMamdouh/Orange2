@@ -334,6 +334,7 @@ namespace ProcSalesRet {
             txtRefNo.disabled = false;
             txtRemarks.disabled = false;
             $("#divGridDetails_View").addClass("disabledDiv");
+            $("#DivFilter").addClass("disabledDiv");
             $("#divGridDetails_View").attr("disabled", "disabled").off('click');
             $("#div_hedr").addClass("disabledDiv");
             $("#div_hedr").attr("disabled", "disabled").off('click');
@@ -482,6 +483,7 @@ namespace ProcSalesRet {
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
             $("#divGridDetails_View").removeClass("disabledDiv");
+            $("#DivFilter").removeClass("disabledDiv");
             $("#div_hedr").removeAttr("disabled")
             $("#div_hedr").removeClass("disabledDiv");
             $("#chkActive").attr("disabled", "disabled");
@@ -495,6 +497,7 @@ namespace ProcSalesRet {
             $('#condtionbtn2').removeClass("col-lg-2");
             $('#condtionbtn2').addClass("col-lg-4");
             $("#divGridDetails_View").removeClass("disabledDiv");
+            $("#DivFilter").removeClass("disabledDiv");
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
@@ -539,15 +542,19 @@ namespace ProcSalesRet {
         $("#divReturnDetails").addClass("display_none");
 
         $("#divGridDetails_View").removeClass("disabledDiv");
+        $("#DivFilter").removeClass("disabledDiv");
     }
     function AddNewReturn_onclick() {
         debugger
         if (ddlOPerationMaster.value == "null" || ddlOPerationMaster.value == "") {
             DisplayMassage(" يجب اختيار العملية", "The process must be selected", MessageType.Worning);
+            
             Errorinput(ddlOPerationMaster);
+            Back();
         } else {
             if (chkOpenProcess.checked == false) {
                 DisplayMassage(" لا يمكن اضافه مرتجع علي العمليات المغلقة", "It is not possible to add a return on closed processes", MessageType.Worning);
+                Back();
             } else {
                 FlagTochooseWhichOperationID = true;
                 FillddlItem();
@@ -620,7 +627,7 @@ namespace ProcSalesRet {
         unApprovedReturn = checkUnApprovedReturns(RefTrID);
         if (unApprovedReturn == true) {
             DisplayMassage('لا يمكن اضافه مرتجع علي الفاتورة قبل اعتماد المرتجعات السابقه', 'A return cannot be added to the invoice before previous returns are approved', MessageType.Error);
-
+ 
         } else {
             Show = false;
             $("#btnBack").removeClass("display_none");

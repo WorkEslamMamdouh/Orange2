@@ -218,6 +218,8 @@ namespace CloseProcesses {
 
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
+
+        $("#btnAdd").addClass("d-none");
         $("#btnUpdate").addClass("d-none");
         $("#btnPrintTransaction").addClass("d-none");
         $("#btnSave").addClass("d-none");
@@ -4022,7 +4024,7 @@ namespace CloseProcesses {
             DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
         }
 
-
+        DisabledToolBar();
     }
     function btnClose_Focus_onclick() {
         //$('#txtStatus').val(" مفتوحة");
@@ -4184,6 +4186,8 @@ namespace CloseProcesses {
 
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -4347,7 +4351,7 @@ namespace CloseProcesses {
         $(".SoldQty").removeAttr("disabled");
 
 
-
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
         debugger
@@ -4379,6 +4383,7 @@ namespace CloseProcesses {
         $("#div_MasterGird").removeClass("disabledDiv");
 
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_2_onclick() {
         loading('btnsave');
@@ -4481,6 +4486,8 @@ namespace CloseProcesses {
         }
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -4533,7 +4540,7 @@ namespace CloseProcesses {
         disabled_divMasterGridiv();
         ComputeTotalsCharge();
         //divGridDetails_onclick();
-
+        RemoveDisabledToolBar();
     }
     function btnSave_3_onclick() {
         loading('btnsave');
@@ -4578,6 +4585,8 @@ namespace CloseProcesses {
         $("#div_MasterGird").addClass("disabledDiv");
 
         Update_4 = true;
+
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
 
@@ -4666,6 +4675,7 @@ namespace CloseProcesses {
         Update_4 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_4_onclick() {
         loading('btnsave');
@@ -4713,6 +4723,7 @@ namespace CloseProcesses {
 
 
         $(".ScrapQty").removeAttr("disabled");
+        DisabledToolBar();
 
     }
     function btnBack_5_onclick() {
@@ -4770,6 +4781,7 @@ namespace CloseProcesses {
         Update_5 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_5_onclick() {
 
@@ -4893,6 +4905,7 @@ namespace CloseProcesses {
             $("#div_MasterGird").removeClass("disabledDiv");
             //$("#btnPresent").removeAttr("disabled");
             //$("#btnClose").removeAttr("disabled");
+            Back();
         }
 
     }

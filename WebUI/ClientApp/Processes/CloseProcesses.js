@@ -195,6 +195,7 @@ var CloseProcesses;
         $("#divProcessClose").addClass("disabledDiv");
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         // 
+        $("#btnAdd").addClass("d-none");
         $("#btnUpdate").addClass("d-none");
         $("#btnPrintTransaction").addClass("d-none");
         $("#btnSave").addClass("d-none");
@@ -3049,6 +3050,7 @@ var CloseProcesses;
         else {
             DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
         }
+        DisabledToolBar();
     }
     function btnClose_Focus_onclick() {
         //$('#txtStatus').val(" مفتوحة");
@@ -3172,6 +3174,7 @@ var CloseProcesses;
         if (Status == 0) { //تحت التجهيز 
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_1_onclick() {
         if (flag_Add == true) {
@@ -3302,6 +3305,7 @@ var CloseProcesses;
         //btnBack_1_onclick()
         $(".UnitPrice").removeAttr("disabled");
         $(".SoldQty").removeAttr("disabled");
+        DisabledToolBar();
     }
     function btnBack_2_onclick() {
         debugger;
@@ -3327,6 +3331,7 @@ var CloseProcesses;
         $("#DivHederMaster").removeClass("disabledDiv");
         $("#div_MasterGird").removeClass("disabledDiv");
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_2_onclick() {
         loading('btnsave');
@@ -3401,6 +3406,7 @@ var CloseProcesses;
         if (Status == 0) { //مفتوحة
         }
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
+        DisabledToolBar();
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
@@ -3445,6 +3451,7 @@ var CloseProcesses;
         disabled_divMasterGridiv();
         ComputeTotalsCharge();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_3_onclick() {
         loading('btnsave');
@@ -3478,6 +3485,7 @@ var CloseProcesses;
         $("#div_MasterGird").attr("disabled", "disabled").off('click');
         $("#div_MasterGird").addClass("disabledDiv");
         Update_4 = true;
+        DisabledToolBar();
     }
     function btnBack_4_onclick() {
         if (flag_Back == true) {
@@ -3542,6 +3550,7 @@ var CloseProcesses;
         Update_4 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_4_onclick() {
         loading('btnsave');
@@ -3578,6 +3587,7 @@ var CloseProcesses;
             //btnBack_1_onclick();
         }
         $(".ScrapQty").removeAttr("disabled");
+        DisabledToolBar();
     }
     function btnBack_5_onclick() {
         if (flag_Success_5 == true) {
@@ -3619,6 +3629,7 @@ var CloseProcesses;
         Update_5 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_5_onclick() {
         loading('btnsave');
@@ -3718,6 +3729,7 @@ var CloseProcesses;
             $("#div_MasterGird").removeClass("disabledDiv");
             //$("#btnPresent").removeAttr("disabled");
             //$("#btnClose").removeAttr("disabled");
+            Back();
         }
     }
     function showdiv() {

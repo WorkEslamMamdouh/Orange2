@@ -3311,6 +3311,7 @@ var Processes;
         disabled_divMasterGridiv();
         ComputeTotals();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_2_onclick() {
         loading('btnsave');
@@ -3426,6 +3427,7 @@ var Processes;
         disabled_divMasterGridiv();
         ComputeTotalsCharge();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_3_onclick() {
         loading('btnsave');
@@ -3528,6 +3530,7 @@ var Processes;
         Update_4 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_4_onclick() {
         loading('btnsave');
@@ -3606,6 +3609,7 @@ var Processes;
         Update_5 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
+        RemoveDisabledToolBar();
     }
     function btnSave_5_onclick() {
         loading('btnsave');
@@ -3700,6 +3704,7 @@ var Processes;
             $("#div_MasterGird").removeClass("disabledDiv");
             //$("#btnPresent").removeAttr("disabled");
             //$("#btnClose").removeAttr("disabled");
+            Back();
         }
     }
     function showdiv() {
