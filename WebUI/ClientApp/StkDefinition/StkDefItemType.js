@@ -26,7 +26,7 @@ var StkDefItemType;
     var catId_type_change;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
-        ////debugger;
+        ////
         $('#divIconbar').addClass('hidden_Control');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
@@ -63,7 +63,7 @@ var StkDefItemType;
             $(".btnAddDetails").attr("disabled", "disabled");
         }
         if (SysSession.CurrentPrivileges.Remove) {
-            //debugger;
+            //
             $(".fa-minus-circle").removeClass("display_none");
         }
         else {
@@ -71,7 +71,7 @@ var StkDefItemType;
         }
     });
     function InitalizeControls() {
-        ////debugger;
+        ////
         btnAddDetails = document.getElementById("btnAddDetails");
         btnEdit = document.getElementById("btnUpdate_Def");
         btnSave_Def = document.getElementById("btnSave_Def");
@@ -79,7 +79,7 @@ var StkDefItemType;
         // Buton privialges for single record page
     }
     function InitalizeEvents() {
-        ////debugger;
+        ////
         btnAddDetails.onclick = AddNewRow; //
         btnSave_Def.onclick = btnSave_Def_onClick;
         btnBack_Def.onclick = btnBack_Def_onclick;
@@ -87,17 +87,16 @@ var StkDefItemType;
             $("#divShow").removeClass("display_none");
             catId = $('#drpPaymentType').val();
             btnBack_Def_onclick();
-            //debugger;
+            //
         });
     }
     function AddNewRow() {
-        ////debugger
+        ////
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
         var CanAdd = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
-                debugger;
                 CanAdd = Validation_Grid(i);
                 if (CanAdd == false) {
                     break;
@@ -128,10 +127,10 @@ var StkDefItemType;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <select disabled id=\"select_Type_Item" + cnt + "\" class=\"form-control\"> \n                           <option value=\"Null\"> " + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + "</option>\n                        </select>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtRefItemCode" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtBarCodePrefix" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtLastBarCodeSeq" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle fs-4 btn-minus display_none\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <select disabled id=\"select_Type_Item" + cnt + "\" class=\"form-control\"> \n                           <option value=\"Null\"> " + (lang == "ar" ? "اختر الفئة" : " Type_Item ") + "</option>\n                        </select>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtRefItemCode" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtBarCodePrefix" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtLastBarCodeSeq" + cnt + "\" type=\"number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n               <input id=\"txt_StatusFlag" + cnt + "\" type=\"hidden\"   />\n               <input id=\"txt_ID" + cnt + "\" type=\"hidden\"   />\n\n                </tr>";
         $("#div_Data").append(html);
         for (var i = 0; i < Display_Type.length; i++) {
-            //debugger;
+            //
             $('#select_Type_Item' + cnt).append('<option value="' + Display_Type[i].CatID + '">' + (lang == "ar" ? Display_Type[i].DescA : Display_Type[i].DescL) + '</option>');
         }
         $("#btn_minus" + cnt).on('click', function () {
@@ -184,7 +183,6 @@ var StkDefItemType;
             var CanAdd = true;
             if (CountGrid > 0) {
                 for (var i = 0; i < CountGrid; i++) {
-                    debugger;
                     CanAdd = Validation_Grid(i);
                     if (CanAdd == false) {
                         break;
@@ -198,7 +196,7 @@ var StkDefItemType;
     }
     function Display_DrpPaymentType() {
         //var StkDefCategory: Array<I_D_Category> = new Array<I_D_Category>();
-        //debugger; 
+        // 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefCategory", "GetAll"),
@@ -216,7 +214,7 @@ var StkDefItemType;
     }
     function DisplayStkDefCategory() {
         for (var i = 0; i < Display_Type.length; i++) {
-            //debugger; 
+            // 
             $('#drpPaymentType').append('<option value="' + Display_Type[i].CatID + '">' + (lang == "ar" ? Display_Type[i].DescA : Display_Type[i].DescL) + '</option>');
         }
     }
@@ -228,7 +226,7 @@ var StkDefItemType;
     }
     function Update() {
         Assign();
-        //debugger;
+        //
         if (BilldDetail.filter(function (x) { return x.FamilyCode == ""; }).length > 0) {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                 MessageBox.Show("يجب ادخال الكود", "");
@@ -258,13 +256,13 @@ var StkDefItemType;
         }
         Detail_Model[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Detail_Model[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        //debugger;
+        //
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefItemType", "Updatelist"),
             data: JSON.stringify(Detail_Model),
             success: function (d) {
-                //debugger
+                //
                 var result = d;
                 if (result.IsSuccess == true) {
                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -277,7 +275,7 @@ var StkDefItemType;
                     refresh();
                 }
                 else {
-                    //debugger;
+                    //
                     MessageBox.Show(result.ErrorMessage, "خطأ");
                 }
             }
@@ -290,7 +288,7 @@ var StkDefItemType;
             Model = new I_ItemFamily();
             StatusFlag = $("#txt_StatusFlag" + i).val();
             $("#txt_StatusFlag" + i).val("");
-            //debugger;
+            //
             if (StatusFlag == "i") {
                 Model.StatusFlag = StatusFlag.toString();
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -321,41 +319,49 @@ var StkDefItemType;
                 //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
-                var UpdatedDetail = BilldDetail.filter(function (x) { return x.ItemFamilyID == $("#txt_ID" + i).val(); });
-                UpdatedDetail[0].UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                UpdatedDetail[0].FamilyCode = $("#txtCode" + i).val();
-                UpdatedDetail[0].CatID = $('#select_Type_Item' + i).val();
-                UpdatedDetail[0].RefItemCode = $("#txtRefItemCode" + i).val();
-                UpdatedDetail[0].BarCodePrefix = $("#txtBarCodePrefix" + i).val();
-                UpdatedDetail[0].LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
+                Model.StatusFlag = StatusFlag.toString();
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                //Model.AccountType = Number(AccountType);
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                //Model.UpdatedBy = "";
+                Model.ItemFamilyID = $("#txt_ID" + i).val();
+                Model.FamilyCode = $("#txtCode" + i).val();
+                Model.CatID = $('#select_Type_Item' + i).val();
+                Model.RefItemCode = $("#txtRefItemCode" + i).val();
+                Model.BarCodePrefix = $("#txtBarCodePrefix" + i).val();
+                Model.LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
                 if ($("#txtDescA" + i).val() == "") {
-                    UpdatedDetail[0].DescA = $("#txtDescL" + i).val();
+                    Model.DescA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].DescA = $("#txtDescA" + i).val();
+                    Model.DescA = $("#txtDescA" + i).val();
                 }
                 if ($("#txtDescL" + i).val() == "") {
-                    UpdatedDetail[0].DescL = $("#txtDescA" + i).val();
+                    Model.DescL = $("#txtDescA" + i).val();
                     $("#txtDescL" + i).val($("#txtDescA" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].DescL = $("#txtDescL" + i).val();
+                    Model.DescL = $("#txtDescL" + i).val();
                 }
-                Detail_Model.push(UpdatedDetail[0]);
+                Detail_Model.push(Model);
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = BilldDetail.filter(function (x) { return x.ItemFamilyID == $("#txt_ID" + i).val(); });
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                    Detail_Model.push(UpdatedDetail[0]);
+                    Model.StatusFlag = StatusFlag.toString();
+                    Model.ItemFamilyID = $("#txt_ID" + i).val();
+                    Model.FamilyCode = $("#txtCode" + i).val();
+                    Model.CatID = $('#select_Type_Item' + i).val();
+                    Model.RefItemCode = $("#txtRefItemCode" + i).val();
+                    Model.BarCodePrefix = $("#txtBarCodePrefix" + i).val();
+                    Model.LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
+                    Detail_Model.push(Model);
                 }
             }
         }
     }
     function Display() {
-        //debugger
+        //
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefItemType", "GetAll"),
@@ -363,7 +369,7 @@ var StkDefItemType;
                 CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: function (d) {
-                //debugger;
+                //
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
@@ -378,7 +384,7 @@ var StkDefItemType;
         for (var i = 0; i < BilldDetail.length; i++) {
             BuildControls(CountGrid);
             CountGrid++;
-            //debugger
+            //
             $("#txt_ID" + i).val(BilldDetail[i].ItemFamilyID);
             $("#txtCode" + i).val(BilldDetail[i].FamilyCode);
             $("#txtDescA" + i).val(BilldDetail[i].DescA);
@@ -388,7 +394,7 @@ var StkDefItemType;
             $("#txtLastBarCodeSeq" + i).val(BilldDetail[i].LastBarCodeSeq);
             $("#btn_minus" + i).removeClass("display_none");
             //for (var s = 0; s < Display_Type.length; s++) {
-            //    //debugger;
+            //    //
             //    $('#select_Type_Item' + i).append('<option value="' + Display_Type[s].CatID + '">' + Display_Type[s].DescA + '</option>');
             //}
             $("#txt_StatusFlag" + i).val("");
@@ -450,7 +456,7 @@ var StkDefItemType;
         return true;
     }
     function Validate_code(rowno) {
-        //debugger
+        //
         for (var i = 0; i < CountGrid; i++) {
             if (i != rowno) {
                 if ($("#txt_StatusFlag" + i).val() == "d") {
