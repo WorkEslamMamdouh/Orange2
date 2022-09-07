@@ -84,8 +84,8 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Insert([FromBody]I_D_Category category)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(category.Token, category.UserCode))
-            {
+            //if (ModelState.IsValid && UserControl.CheckUser(category.Token, category.UserCode))
+            //{
                 try
                 {
                     var Catg = StkDefCategoryService.Insert(category);
@@ -95,8 +95,8 @@ namespace Inv.API.Controllers
                 {
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
-            }
-            return BadRequest(ModelState);
+            //}
+            //return BadRequest(ModelState);
         }
 
         [HttpGet, AllowAnonymous]

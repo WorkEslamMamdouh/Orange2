@@ -283,6 +283,7 @@ namespace STKAdjust {
         }
     }
     function btnLoad_onclick() {
+        debugger
         if (ddlSourceStoreAdd.value != "null") {
             if (ddlCategory.value != "null") {
 
@@ -296,6 +297,8 @@ namespace STKAdjust {
                         CompCode: compcode, FinYear: FinYear, catID: ddlCategoryID, ItemFamilyID: ddItemFamilyID, storeCode: storeCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                     },
                     success: (d) => {
+                        debugger
+
                           ItemsLoadDetails = new Array<IQ_GetItemStoreInfo>();
                         let result = d as BaseResponse;
                         if (result.IsSuccess) {
@@ -1085,7 +1088,7 @@ namespace STKAdjust {
 	                </td>
                     <td>
 		                <div class="form-group">
-                            <input id="txtUntitName${cnt}" type="number" class="form-control" name="" disabled />
+                            <input id="txtUntitName${cnt}" type="text" class="form-control" name="" disabled />
 		                </div>
 	                </td>
                     <td>

@@ -593,16 +593,16 @@
     <Compile Include="Domain\IProc_Rpt_ItemPeriodSummary_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_ItemPurchaseDetail_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_ItemPurchaseDetailVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_ItemPurchaseSum_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_ItemPurchaseSumVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_ItemSalesDetail_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_ItemSalesDetailVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_ItemSalesSum_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_ItemSalesSumVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_ItemStockDetail_Result.cs">

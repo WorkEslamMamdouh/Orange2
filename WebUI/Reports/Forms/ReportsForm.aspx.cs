@@ -5211,7 +5211,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-        public IEnumerable<IProc_Rpt_ItemSalesDetail_Result> Rpt_ItemSalesDetail()
+        public IEnumerable<IProc_Rpt_ItemSalesDetailVer2_Result> Rpt_ItemSalesDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -5254,11 +5254,11 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spStatus = new SqlParameter("@Status", Status);
             if (GroupType == 1)
             {
-            Rep = OpenReport("Rpt_ItemSalesDetailByCustomer");
+            Rep = OpenReport("Rpt_ItemSalesDetailByCustomerVer2");
             }
             else
             {
-                Rep = OpenReport("Rpt_ItemSalesDetailByItem");
+                Rep = OpenReport("Rpt_ItemSalesDetailByItemVer2");
             }
 
 
@@ -5283,14 +5283,14 @@ namespace RS.WebUI.Reports.Forms
            ", @Todate = '" + sptoDate.Value + "'"+
            ", @invType = '" + spinvType.Value + "'";
 
-            List<IProc_Rpt_ItemSalesDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_ItemSalesDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
 
             return query;
         }
-        public IEnumerable<IProc_Rpt_ItemSalesSum_Result> Rpt_ItemSalesSum()
+        public IEnumerable<IProc_Rpt_ItemSalesSumVer2_Result> Rpt_ItemSalesSum()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -5333,11 +5333,11 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spStatus = new SqlParameter("@Status", Status);
             if (GroupType == 1)
             {
-            Rep = OpenReport("Rpt_ItemSalesSumByCustomer");
+            Rep = OpenReport("Rpt_ItemSalesSumByCustomerVer2");
             }
             else
             {
-                Rep = OpenReport("Rpt_ItemSalesSumByItem");
+                Rep = OpenReport("Rpt_ItemSalesSumByItemVer2");
             }
 
 
@@ -5362,14 +5362,14 @@ namespace RS.WebUI.Reports.Forms
            ", @Todate = '" + sptoDate.Value + "'"+
            ", @invType = '" + spinvType.Value + "'";
 
-            List<IProc_Rpt_ItemSalesSum_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesSum_Result>(_Query).ToList();
+            List<IProc_Rpt_ItemSalesSumVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemSalesSumVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
 
             return query;
         }
-        public IEnumerable<IProc_Rpt_ItemPurchaseSum_Result> Rpt_ItemPurchaseSum()
+        public IEnumerable<IProc_Rpt_ItemPurchaseSumVer2_Result> Rpt_ItemPurchaseSum()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -5409,11 +5409,11 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spStatus = new SqlParameter("@Status", Status);
             if (GroupType == 1)
             {
-            Rep = OpenReport("Rpt_ItemPurchaseSumByCustomer");
+            Rep = OpenReport("Rpt_ItemPurchaseSumByCustomerVer2");
             }
             else
             {
-                Rep = OpenReport("Rpt_ItemPurchaseSumByItem");
+                Rep = OpenReport("Rpt_ItemPurchaseSumByItemVer2");
             }
 
 
@@ -5437,14 +5437,14 @@ namespace RS.WebUI.Reports.Forms
            ", @Todate = '" + sptoDate.Value + "'"+
             ", @invType = '" + spinvType.Value + "'";
 
-            List<IProc_Rpt_ItemPurchaseSum_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseSum_Result>(_Query).ToList();
+            List<IProc_Rpt_ItemPurchaseSumVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseSumVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
 
             return query;
         }
-        public IEnumerable<IProc_Rpt_ItemPurchaseDetail_Result> Rpt_ItemPurchaseDetail()
+        public IEnumerable<IProc_Rpt_ItemPurchaseDetailVer2_Result> Rpt_ItemPurchaseDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -5484,11 +5484,11 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spStatus = new SqlParameter("@Status", Status);
             if (GroupType == 1)
             {
-            Rep = OpenReport("Rpt_ItemPurchaseDetailByCustomer");
+            Rep = OpenReport("Rpt_ItemPurchaseDetailByCustomerVer2");
             }
             else
             {
-                Rep = OpenReport("Rpt_ItemPurchaseDetailByItem");
+                Rep = OpenReport("Rpt_ItemPurchaseDetailByItemVer2");
             }
 
 
@@ -5512,13 +5512,17 @@ namespace RS.WebUI.Reports.Forms
            ", @Todate = '" + sptoDate.Value + "'"+
             ", @invType = '" + spinvType.Value + "'";
 
-            List<IProc_Rpt_ItemPurchaseDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_ItemPurchaseDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemPurchaseDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
 
             return query;
         }
+
+
+
+
 
         public IEnumerable<IProc_Rpt_ItemPeriodSummary_Result> Rpt_ItemPeriodSummary()
         {
@@ -5763,7 +5767,7 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @IssueTypeID= " + spIssueTypeID.Value +
            ", @FromDate = '" + spFromDate.Value +
-           "',@ToDate =' " + spToDate.Value +
+           "',@ToDate ='" + spToDate.Value +
            "',@storeID = " + spstoreID.Value +
            ", @Status = " + spStatus.Value ;
 

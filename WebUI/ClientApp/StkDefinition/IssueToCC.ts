@@ -432,7 +432,7 @@ namespace IssueToCC {
                         $('#txtSerial' + i).val(i + 1);
                         $('#txtCode' + i).val(StkIssueCCDetail[i].ItemCode);
                         $('#txtItemName' + i).val(lang == "ar" ? StkIssueCCDetail[i].itm_DescA : StkIssueCCDetail[i].itm_DescE);
-                        $('#txtUnitName' + i).val(lang == "ar" ? StkIssueCCDetail[i].uom_DescA : StkIssueCCDetail[i].uom_DescE);
+                        $('#txtUntitName' + i).val(lang == "ar" ? StkIssueCCDetail[i].uom_DescA : StkIssueCCDetail[i].uom_DescE);
                         $('#txtQTY' + i).val(StkIssueCCDetail[i].ReqQty);
                         $('#IssueToCcDetailID' + i).val(StkIssueCCDetail[i].IssueToCcDetailID);
                         $('#txtUnitID' + i).val(StkIssueCCDetail[i].UnitID);
@@ -483,7 +483,7 @@ namespace IssueToCC {
 	                </td>
                     <td>
 		                <div class="form-group">
-                            <input id="txtUntitName${cnt}" type="number" class="form-control" name="" disabled />
+                            <input id="txtUntitName${cnt}" type="text" class="form-control" name="" disabled />
 		                </div>
 	                </td>
                     <td>
@@ -521,7 +521,7 @@ namespace IssueToCC {
                         $('#txtCode' + cnt).val(SrcItem[0].ItemCode);
                         (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
                         $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                        $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
                         $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);
                     }
                 } else {
@@ -531,7 +531,7 @@ namespace IssueToCC {
                     Errorinput(('#txtCode' + cnt));
                     $('#txtItemName' + cnt).val("");
                     $('#txtUnitID' + cnt).val("");
-                    $('#txtUnitName' + cnt).val("");
+                    $('#txtUntitName' + cnt).val("");
                     $('#txtQTY' + cnt).val("");
                     $('#txtDetailID' + cnt).val("");
                 }
@@ -554,7 +554,7 @@ namespace IssueToCC {
                         $('#txtCode' + cnt).val(SrcItem[0].ItemCode);
                         (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
                         $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                        $('#txtUnitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
                         $('#txtQTY' + cnt).val(SrcItem[0].OnhandQty);
                     }
                 } else {
@@ -564,7 +564,7 @@ namespace IssueToCC {
                     Errorinput(('#txtCode' + cnt));
                     $('#txtItemName' + cnt).val("");
                     $('#txtUnitID' + cnt).val("");
-                    $('#txtUnitName' + cnt).val("");
+                    $('#txtUntitName' + cnt).val("");
                     $('#txtQTY' + cnt).val("");
                     $('#txtDetailID' + cnt).val("");
                 }
@@ -575,7 +575,7 @@ namespace IssueToCC {
                 Errorinput(('#txtCode' + cnt));
                 $('#txtItemName' + cnt).val("");
                 $('#txtUnitID' + cnt).val("");
-                $('#txtUnitName' + cnt).val("");
+                $('#txtUntitName' + cnt).val("");
                 $('#txtQTY' + cnt).val("");
                 $('#txtDetailID' + cnt).val("");
             }

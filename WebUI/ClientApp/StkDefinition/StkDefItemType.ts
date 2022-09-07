@@ -36,7 +36,7 @@ namespace StkDefItemType {
 
 
     export function InitalizeComponent() {
-        ////debugger;
+        ////
         $('#divIconbar').addClass('hidden_Control');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
@@ -80,7 +80,7 @@ namespace StkDefItemType {
 
         }
         if (SysSession.CurrentPrivileges.Remove) {
-            //debugger;
+            //
             $(".fa-minus-circle").removeClass("display_none");
 
         }
@@ -91,7 +91,7 @@ namespace StkDefItemType {
     });
 
     function InitalizeControls() {
-        ////debugger;
+        ////
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
         btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
         btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
@@ -104,7 +104,7 @@ namespace StkDefItemType {
     }
 
     function InitalizeEvents() {
-        ////debugger;
+        ////
         btnAddDetails.onclick = AddNewRow;//
         btnSave_Def.onclick = btnSave_Def_onClick;
         btnBack_Def.onclick = btnBack_Def_onclick;
@@ -118,7 +118,7 @@ namespace StkDefItemType {
           
 
 
-            //debugger;
+            //
 
 
 
@@ -127,12 +127,12 @@ namespace StkDefItemType {
     }
 
     function AddNewRow() {
-        ////debugger
+        ////
         if (!SysSession.CurrentPrivileges.AddNew) return;
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
-                debugger
+                
                 CanAdd = Validation_Grid(i);
                 if (CanAdd == false) {
                     break;
@@ -213,11 +213,13 @@ namespace StkDefItemType {
 	                </td>
                     
                <input id="txt_StatusFlag${cnt}" type="hidden"   />
+               <input id="txt_ID${cnt}" type="hidden"   />
+
                 </tr>`;
         $("#div_Data").append(html);
 
         for (var i = 0; i < Display_Type.length; i++) {
-            //debugger;
+            //
 
 
             $('#select_Type_Item' + cnt).append('<option value="' + Display_Type[i].CatID + '">' + (lang == "ar" ? Display_Type[i].DescA : Display_Type[i].DescL) + '</option>');
@@ -290,7 +292,7 @@ namespace StkDefItemType {
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
-                debugger
+                
                 CanAdd = Validation_Grid(i);
                 if (CanAdd == false) {
                     break;
@@ -305,7 +307,7 @@ namespace StkDefItemType {
      
     function Display_DrpPaymentType() {
         //var StkDefCategory: Array<I_D_Category> = new Array<I_D_Category>();
-        //debugger; 
+        // 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefCategory", "GetAll"),
@@ -325,7 +327,7 @@ namespace StkDefItemType {
 
     function DisplayStkDefCategory() {
         for (var i = 0; i < Display_Type.length; i++) {
-            //debugger; 
+            // 
 
 
             $('#drpPaymentType').append('<option value="' + Display_Type[i].CatID + '">' + (lang == "ar" ? Display_Type[i].DescA : Display_Type[i].DescL) + '</option>');
@@ -349,7 +351,7 @@ namespace StkDefItemType {
 
     function Update() {
         Assign();
-        //debugger;
+        //
         if (BilldDetail.filter(x => x.FamilyCode == "").length > 0) {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                 MessageBox.Show("يجب ادخال الكود", "");
@@ -378,14 +380,14 @@ namespace StkDefItemType {
         Detail_Model[0].UserCode = SysSession.CurrentEnvironment.UserCode;
 
 
-        //debugger;
+        //
         Ajax.Callsync({
 
             type: "POST",
             url: sys.apiUrl("StkDefItemType", "Updatelist"),
             data: JSON.stringify(Detail_Model),
             success: (d) => {
-                //debugger
+                //
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -399,7 +401,7 @@ namespace StkDefItemType {
 
                 }
                 else {
-                    //debugger;
+                    //
                     MessageBox.Show(result.ErrorMessage, "خطأ");
                 }
             }
@@ -417,7 +419,7 @@ namespace StkDefItemType {
             $("#txt_StatusFlag" + i).val("");
 
 
-            //debugger;
+            //
 
 
             if (StatusFlag == "i") {
@@ -459,43 +461,53 @@ namespace StkDefItemType {
                 //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
+                 
+                Model.StatusFlag = StatusFlag.toString();
 
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                //Model.AccountType = Number(AccountType);
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                //Model.UpdatedBy = "";
 
-                var UpdatedDetail = BilldDetail.filter(x => x.ItemFamilyID == $("#txt_ID" + i).val())
-                UpdatedDetail[0].UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                UpdatedDetail[0].FamilyCode = $("#txtCode" + i).val();
-                UpdatedDetail[0].CatID = $('#select_Type_Item' + i).val();
-                UpdatedDetail[0].RefItemCode = $("#txtRefItemCode" + i).val();
-                UpdatedDetail[0].BarCodePrefix = $("#txtBarCodePrefix" + i).val();
-                UpdatedDetail[0].LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
+                Model.ItemFamilyID = $("#txt_ID" + i).val();
+                Model.FamilyCode = $("#txtCode" + i).val();
+                Model.CatID = $('#select_Type_Item' + i).val();
+                Model.RefItemCode = $("#txtRefItemCode" + i).val();
+                Model.BarCodePrefix = $("#txtBarCodePrefix" + i).val();
+                Model.LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
 
                 if ($("#txtDescA" + i).val() == "") {
-                    UpdatedDetail[0].DescA = $("#txtDescL" + i).val();
+                    Model.DescA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].DescA = $("#txtDescA" + i).val();
+                    Model.DescA = $("#txtDescA" + i).val();
                 }
                 if ($("#txtDescL" + i).val() == "") {
-                    UpdatedDetail[0].DescL = $("#txtDescA" + i).val();
+                    Model.DescL = $("#txtDescA" + i).val();
                     $("#txtDescL" + i).val($("#txtDescA" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].DescL = $("#txtDescL" + i).val();
+                    Model.DescL = $("#txtDescL" + i).val();
                 }
 
 
-
-                Detail_Model.push(UpdatedDetail[0]);
+                Detail_Model.push(Model);
 
             }
             if (StatusFlag == "d") {
 
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = BilldDetail.filter(x => x.ItemFamilyID == $("#txt_ID" + i).val())
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                    Detail_Model.push(UpdatedDetail[0]);
+                    Model.StatusFlag = StatusFlag.toString();
+
+                    Model.ItemFamilyID = $("#txt_ID" + i).val();
+                    Model.FamilyCode = $("#txtCode" + i).val();
+                    Model.CatID = $('#select_Type_Item' + i).val();
+                    Model.RefItemCode = $("#txtRefItemCode" + i).val();
+                    Model.BarCodePrefix = $("#txtBarCodePrefix" + i).val();
+                    Model.LastBarCodeSeq = $("#txtLastBarCodeSeq" + i).val();
+                    Detail_Model.push(Model);
+
                 }
 
             }
@@ -506,7 +518,7 @@ namespace StkDefItemType {
 
     function Display() {
 
-        //debugger
+        //
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefItemType", "GetAll"),
@@ -514,7 +526,7 @@ namespace StkDefItemType {
                 CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: (d) => {
-                //debugger;
+                //
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Details = result.Response as Array<I_ItemFamily>;
@@ -537,7 +549,7 @@ namespace StkDefItemType {
 
             BuildControls(CountGrid);
             CountGrid++;
-            //debugger
+            //
 
             $("#txt_ID" + i).val(BilldDetail[i].ItemFamilyID);
             $("#txtCode" + i).val(BilldDetail[i].FamilyCode);
@@ -549,7 +561,7 @@ namespace StkDefItemType {
             $("#btn_minus" + i).removeClass("display_none");
 
             //for (var s = 0; s < Display_Type.length; s++) {
-            //    //debugger;
+            //    //
 
 
             //    $('#select_Type_Item' + i).append('<option value="' + Display_Type[s].CatID + '">' + Display_Type[s].DescA + '</option>');
@@ -648,7 +660,7 @@ namespace StkDefItemType {
     }
 
     function Validate_code(rowno: number) {
-        //debugger
+        //
         for (var i = 0; i < CountGrid; i++) {
             if (i != rowno) {
 
