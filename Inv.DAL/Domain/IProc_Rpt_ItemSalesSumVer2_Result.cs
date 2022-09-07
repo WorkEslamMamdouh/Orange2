@@ -11,7 +11,7 @@ namespace Inv.DAL.Domain
 {
     using System;
     
-    public partial class IProc_Rpt_ItemSalesSum_Result
+    public partial class IProc_Rpt_ItemSalesSumVer2_Result
     {
         public Nullable<int> Comp { get; set; }
         public Nullable<int> Bra { get; set; }
