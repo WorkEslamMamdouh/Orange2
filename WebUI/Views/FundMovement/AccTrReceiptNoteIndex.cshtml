@@ -69,10 +69,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 pe-md-0">
                         <div class="form-group row  d-flex justify-content-center align-items-center">
-                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_beneficiary</label>
-                            <div class="col-9 col-md-8 ">
+                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_beneficiary</label>
+                            <div class="col-8 pe-md-0">
                                 <div class="search-content">
                                     <input type="text" class="form-control search-control" id="txt_BenCodeH">
                                     <button type="button" id="btnBenH" name="ColSearch" class="btn btn-main btn-search">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <div class="col-9 offset-3 offset-md-0 col-md-12">
+                            <div class="col-8 offset-4 offset-md-0 col-md-12">
                                 <input type="text" class="form-control" disabled name="" id="txt_BenNameH">
                             </div>
                         </div>
@@ -115,7 +115,7 @@
         <!-- Details  -->
         <div id="Div_control" class="row display_none">
             <div class="col-12 service-content">
-                <div class="serviceBox mt-5">
+                <div class="serviceBox">
                     <div class="row ">
                         <div class="d-flex mb-4">
                             <button id="btnPrintslip" type="button" class="btn btn-main">
@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="col-12 col-md-2  offset-l">
                                     <div class="form-group row ">
-                                        <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Certified</label>
+                                        <label class="col-4 col-md-4 align-self-center p-md-0">@SystemResource.App_Certified</label>
                                         <div class="col-2 col-md-8">
                                             <input type="checkbox" class="checkbox" id="chkStatus">
                                         </div>
@@ -191,11 +191,11 @@
                                 <div class="col-12 col-md-6 col-lg-3">
                                     <div class="form-group row  d-flex justify-content-center align-items-center">
                                         <label class="col-4 col-md-3 col-lg-5 align-self-center p-md-0">@SystemResource.App_beneficiary</label>
-                                        <div class="col-8 col-md-9 col-lg-7 p-0">
+                                        <div class="col-8 col-md-9 col-lg-7">
                                             <div class="search-content">
                                                 <input disabled type="text" class="form-control search-control" id="txt_BenCode">
                                                 <button type="button" name="ColSearch" id="btnBen" class="btn btn-main btn-search">
-                                                    <i class="fas fa-search"></i>
+                                                    <i class="fas fa-search ms-n1 mt-n1"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -310,8 +310,8 @@
                         </div>
                         <div class="col-12  col-md-4">
                             <div class="form-group row ">
-                                <label class="col-4 col-md-5 align-self-center p-md-0"> @SystemResource.App_Registration_Number </label>
-                                <div class="col-8 col-md-7 ">
+                                <label class="col-4 col-md-3 align-self-center p-md-0"> @SystemResource.App_Registration_Number </label>
+                                <div class="col-8 col-md-9 ">
                                     <input id="txt_VoucherNo" disabled name="VoucherNo" type="text" class="form-control" placeholder="@SystemResource.App_Registration_Number">
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                             </div>
                         </div>
                         <div class="col-12 my-4">
-                            <label id="txt_AmountCurrency" class="text-blue fw-bold fs-5"> </label>
+                            <label id="txt_AmountCurrency" class="text-blue fw-bold fs-6"> </label>
                         </div>
                         <!-- Editors Details -->
                         <div class="insettext row editor-details">
@@ -333,10 +333,10 @@
 
                                 <div class="form-group row ">
                                     <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Create</label>
-                                    <div class="col-4 col-xl-4 editor-input">
+                                    <div class="col-4 col-xl-4 px-0 editor-input">
                                         <input id="txtCreatedBy" name="CreatedBy" type="text" disabled>
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
+                                    <div class="col-4 col-xl-6 px-0 editor-input">
                                         <input id="txtCreatedAt" name="CreatedAt" type="text" disabled>
                                     </div>
                                 </div>
@@ -344,10 +344,10 @@
                             <div class="col-12 col-lg-6">
                                 <div class="form-group row ">
                                     <label class="col-4 col-xl-2 align-self-center p-md-0"> @SystemResource.App_Update </label>
-                                    <div class="col-4 col-xl-4 editor-input">
+                                    <div class="col-4 col-xl-4 px-0 editor-input">
                                         <input id="txtUpdatedBy" name="UpdatedBy" type="text" disabled>
                                     </div>
-                                    <div class="col-4 col-xl-6 editor-input">
+                                    <div class="col-4 col-xl-6 px-0 editor-input">
 
                                         <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled>
                                     </div>

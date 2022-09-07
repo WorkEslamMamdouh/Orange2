@@ -501,7 +501,7 @@ namespace USERS {
         html = `<tr id= "row_font_header${cnt}">
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -652,7 +652,7 @@ namespace USERS {
         html = `<tr id= "No_Row${cnt}">
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

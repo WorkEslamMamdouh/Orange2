@@ -1002,7 +1002,7 @@ namespace PurOrder {
                     <input id="txtSerial${cnt}" type="hidden" class="form-control display_none" value='${cnt}'  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -1056,40 +1056,6 @@ namespace PurOrder {
                     <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID${cnt}" name = " " type = "hidden" class="form-control" />
                 </tr>`;
-        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-xs-12" > ' +
-        //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3PurOrder display_none"></span>' +
-        //    '<input id="txtPurOrderDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-        //    '<input id="txtItemNumber' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
-        //    '<input id="txtSerial' + cnt + '" type="hidden" class="form-control right2 display_none" value=' + cnt + '  />' +
-            
-        //    '<div class="col-xs-1" style="width:4%!important;">' +
-        //  '<button type="button" class=" src-btn btn btn-warning input-sm col-xs-12" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search"></i></button>' + '</div>' +
-
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /> </div>' +
-
-        //    '<div class="col-xs-3 p-0">' +
-        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-
-        //    '<div class="col-xs-1"><input type="number"  id="txtRequiredQty' + cnt + '" name="quant[10]" class="form-control   font1" value="1" min="1" max="1000" step="1"></div>' +
-
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtReceivedQty' + cnt + '" type="number" class="form-control right2"  disabled value="0"/></div>' +
-
-        //    '<div class="col-xs-1"><input type="number" style="height:36px;" id="txtPrice' + cnt + '" name="quant[20]" class="form-control   font1" value="1" min="0" max="1000" step="0.5"> </div>' +
-
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtTotal' + cnt + '" type="number" disabled class="form-control right2"  value="0"/></div>' +
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtTax' + cnt + '" disabled type="text" class="form-control right2"  value="0"/></div>' +
-
-        //    '<div class="col-xs-1">' +
-        //    '<input id="txtTotAfterTax' + cnt + '" type="text" disabled value="0" class="form-control right2"  /></div>' +
-
-        //    '</div></div></div>' +
-
-        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID' + cnt + '" name = " " type = "hidden" class="form-control" />';
 
         $("#div_Data").append(html);
 

@@ -1097,7 +1097,7 @@ namespace CloseProcesses {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>
@@ -1589,57 +1589,11 @@ namespace CloseProcesses {
 
     function BuildControlsCharges(cnt: number) {
         var html;
-        //html = '<div id= "No_Row1' + cnt + '" class="container-fluid style_border" > <div class="" > <div class="col-lg-12" > ' +
-        //    '<span id="btn_minus1' + cnt + '" class="fa fa-minus-circle minusCharges fontitm4Processes display_none" style="z-index: 9999;"></span>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="OperationExpensesID' + cnt + '" type="text" class="form-control right2" style="display: none;" disabled value=""/>' +
-        //    '<input id="txtSerial' + cnt + '" type="text" class="form-control right2" disabled value="' + (CountItemsCharge) + '"/></div>' +
-
-        //    '<div class="col-lg-2">' +
-        //    '<select id="txtAddonsCharge' + cnt + '" class="form-control" value="null" ></select></div>' +
-
-        //    '<div class="col-lg-1">' +
-
-        //    '<input id="txtAddonsTypeCharge' + cnt + '" type="text" class="form-control right2" disabled value=" "/></div>' +
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtValueCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-        //    '<div class="col-lg-2">' +
-        //    '<select id="txtVatType' + cnt + '" class="form-control" value="null" ></select></div>' +
-
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtVatCharge' + cnt + '" type="text" value="0" class="form-control right2" disabled="disabled"  /></div>' +
-
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtValueAfterVatCharge' + cnt + '" type="text" class="form-control right2"  disabled="disabled"  value="0" /></div>' +
-
-        //    '<div class="col-lg-1"style="width: 12%!important;">' +
-        //    '<select id="txtVendorIsCheckCharge' + cnt + '" class="form-control"  ></select></div>' +
-
-        //    '<div class="col-lg-1">' +
-        //    '<input id="txtInvoiceNumberCharge' + cnt + '" type="number" class="form-control right2"  value="0"/></div>' +
-
-
-        //    '</div>' +
-
-        //    '<div class="col-lg-6 positiongridProcesses1"style="">' +
-        //    '<div class="col-lg-4">' +
-        //    '<input id="txtInvoiceDateCharge' + cnt + '" type="date" class="form-control right2"  /></div>' +
-        //    '<div class="col-lg-4">' +
-        //    '<select id="txtVendorCharge' + cnt + '" class="form-control"  ></select></div>' +
-
-        //    '<div class="col-lg-4">' +
-        //    '<select id="txt_D_CashBox' + cnt + '" name=""  disabled="disabled" class="form-control   " tabindex="-1" aria-hidden="true"><option value="Null"> الصندوق  </option></select></div>' +
-
-
-        //    ' </div></div></div>' +
-
-
-        //    '<input id="txt_StatusFlag1' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control" />';
         html = `<tr id="No_Row1${cnt}">
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -2273,7 +2227,7 @@ namespace CloseProcesses {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus3${cnt}"><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>
@@ -5471,7 +5425,7 @@ namespace CloseProcesses {
         html = `<tr id="No_RowItemSumID${cnt}">
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minusclous${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minusclous${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>

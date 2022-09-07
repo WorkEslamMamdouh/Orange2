@@ -852,7 +852,7 @@ namespace SalesTrans {
                     <input id="txtItemID${cnt}" type="hidden" name="FromDate" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}" class="display_none"><i class="fas fa-minus-circle fs-4 btn-minus "></i></span>
+			                <span id="btn_minus${cnt}" class="display_none"><i class="fas fa-minus-circle  btn-minus "></i></span>
 		                </div>
 	                </td>
                    
@@ -879,27 +879,6 @@ namespace SalesTrans {
                     <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_OnhandQty${cnt}" name = " " type = "hidden" class="form-control"/>
                 </tr>`;
-        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">' +
-        //    '<input id="txtOperationTFDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:1.5%!important">' +
-        //    '<span id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3DirectTransfer "></span>' +
-        //    '</div>' +
-        //    '<input id="txtOperationItemID' + cnt + '" name="FromDate" disabled type="hidden"  class="form-control  text_Display" />' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1" style="width:4%!important;">' +
-        //    '<button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 src-btn btn btn-warning input-sm" id="btnSearchItems' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search"></i></button>' +
-        //    '<input id="txtItemID' + cnt + '" name="" disabled type="hidden" class="col-lg-9 col-md-9 col-sm-9 col-xl-9 col-xs-9  form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" >' +
-        //    '<input id="txtItemCode' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
-        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 Acc" >' +
-        //    '<input id="txtItemName' + cnt + '" name="" disabled type="text" class="form-control text_Display" /></div>' +
-        //    //'<div class="col-lg-1 Acc" style=" ">' +
-        //    //'<input id="txtSendQty' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 Acc" style=" ">' +
-        //    '<input id="txtRecQty' + cnt + '" name="" disabled type="number" class="form-control text_Display" /></div>' +
-        //    '<input id="txt_StatusFlag' + cnt + '" name = " " type ="hidden" />' +
-        //    '<input id="txt_OnhandQty' + cnt + '" name = " " type ="hidden" />' +
-        //    '</div>';
         $("#div_Data").append(html);
 
         //// Items Search

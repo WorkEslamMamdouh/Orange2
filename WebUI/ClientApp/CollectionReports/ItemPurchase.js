@@ -22,6 +22,8 @@ var ItemPurchase;
     var reptp1;
     var chk_Authorized;
     var reptp2;
+    var InvTp1;
+    var InvTp2;
     var btnReset;
     var reptype2;
     var btnVendorSrch;
@@ -52,6 +54,7 @@ var ItemPurchase;
         InitalizeEvents();
         reptp1.checked = true;
         reptype2.checked = true;
+        InvTp1.checked = true;
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         Display_DrpPaymentType();
@@ -79,6 +82,8 @@ var ItemPurchase;
         txtVendorName = document.getElementById("txtVendorName");
         chk_Authorized = document.getElementById("chk_Authorized");
         btnReset = document.getElementById("btnReset");
+        InvTp1 = document.getElementById("InvTp1");
+        InvTp2 = document.getElementById("InvTp2");
     }
     function InitalizeEvents() {
         // Print Buttons
@@ -320,6 +325,16 @@ var ItemPurchase;
         }
         rp.PaymentType = Number($('#txt_PaymentType').val());
         rp.invType = Number($('#invType').val());
+        debugger;
+        if (InvTp1.checked == true) {
+            rp.SLStype = 1;
+        }
+        else if (InvTp2.checked == true) {
+            rp.SLStype = 2;
+        }
+        else {
+            rp.SLStype = 0;
+        }
         if (reptp1.checked == true) { //------------By_Cust
             rp.check = 1;
         }

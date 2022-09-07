@@ -1134,6 +1134,7 @@ namespace AccTrPaymentNote {
 
         txt_BenCode.value = "";
         txt_BenName.value = "";
+       
 
         $('#txt_CheckNo').val("");
         $('#txt_TransferNo').val("");
@@ -1144,6 +1145,7 @@ namespace AccTrPaymentNote {
         $('#txtCreatedAt').val("");
         $('#txtUpdatedBy').val("");
         $('#txtUpdatedAt').val("");
+        $('#txt_AmountCurrency').text("");
 
 
         $('#txt_Openbalance').val('0');
@@ -2206,7 +2208,7 @@ namespace AccTrPaymentNote {
     function btnBenH_onclick() {
         if (txt_ReceiptNote.value == "Null") {
             Errorinput(txt_ReceiptNoteNew);
-            DisplayMassage("اختر نوع الاستلام", "choose ReceiptNote", MessageType.Error);
+            DisplayMassage("اختر نوع الصرف", "choose ReceiptNote", MessageType.Error);
         }
         if (txt_ReceiptNote.value == "1") { btnBenCustH_onclick(); }
         if (txt_ReceiptNote.value == "2") { btnBenVndH_onclick(); }
@@ -2218,7 +2220,7 @@ namespace AccTrPaymentNote {
         if (txt_ReceiptNote.value == "Null") {
             txt_BenCodeH.value = "";
             Errorinput(txt_ReceiptNoteNew);
-            DisplayMassage("اختر نوع الاستلام", "choose ReceiptNote", MessageType.Error);
+            DisplayMassage("اختر نوع الصرف", "choose ReceiptNote", MessageType.Error);
         }
         if (txt_ReceiptNote.value == "1") { txt_BenCustCodeH_onchange(); }
         if (txt_ReceiptNote.value == "2") { txt_BenVndCodeH_onchange(); }

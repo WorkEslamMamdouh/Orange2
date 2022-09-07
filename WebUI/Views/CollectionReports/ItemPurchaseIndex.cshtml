@@ -43,9 +43,9 @@
                                 </div>
                             </div>
                             <div class="col-12  col-xl-4">
-                                <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                    <label class="col-3  align-self-center p-md-0">@SystemResource.Men_AccDefVendor</label>
-                                    <div class="col-9  p-0">
+                                <div class="form-group row d-flex justify-content-center align-items-center">
+                                    <label class="col-3 align-self-center p-md-0">@SystemResource.Men_AccDefVendor</label>
+                                    <div class="col-9">
                                         <div class="search-content">
                                             <input disabled type="text" class="form-control search-control" id="txtVendorCode">
                                             <button type="button" name="Search" id="btnVendorSrch" class="btn btn-main btn-search">
@@ -105,9 +105,37 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                        <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> @SystemResource.Inv_SalesTp</label>
+
+                                    <div class="form-group col-8 col-md-10">
+                                        <div class="row special-group">
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="InvTp1" name="InvTp" value="1" checked>
+                                                    <label class="form-check-label my-auto me-3" for="InvTp1"> @SystemResource.Invoice </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                <div class="form-check  d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="InvTp2" name="InvTp" value="1">
+                                                    <label class="form-check-label my-auto me-3" for="InvTp2"> @SystemResource.process</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-xl-4">
+                                                <div class="form-check d-inline-flex">
+                                                    <input class="form-check-input form-radio special-radio" type="radio" id="InvTp3" name="InvTp" value="1">
+                                                    <label class="form-check-label my-auto me-3" for="InvTp3"> @SystemResource.App_All</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-12 ">
                                 <div class="row ">
-                                    <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.CollectedBy</label>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> @SystemResource.CollectedBy</label>
                                     <div class="form-group col-8 col-md-10">
                                         <div class="row special-group">
                                             <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
@@ -128,7 +156,7 @@
                             </div>
                             <div class="col-12 ">
                                 <div class="row ">
-                                    <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_report_type</label>
+                                    <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> @SystemResource.App_report_type</label>
                                     <div class="form-group col-8 col-md-10">
                                         <div class="row special-group">
                                             <div class="col-12 mb-n3 mb-xl-0 col-xl-4">

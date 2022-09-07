@@ -146,7 +146,7 @@ namespace CollectUnit {
                     <input id="txtCollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -311,7 +311,7 @@ namespace CollectUnit {
                     <input id="txt_OUT_CollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

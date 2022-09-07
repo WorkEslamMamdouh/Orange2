@@ -62,10 +62,10 @@ namespace GLDefAccount {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
-
+        $("body").addClass("sidebar-icon-only");
 
        $('#cont').toggleClass('colapsdivcont');
-        $('#sidebar').toggleClass('active');
+        //$('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
            $("body").toggleClass("mini-navbar_Arbec");
         }

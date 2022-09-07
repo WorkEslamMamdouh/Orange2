@@ -1564,7 +1564,7 @@ namespace AccDefVendor {
                     <input id="txtveddocid${cnt}" type="hidden" max="14" class="form-control">
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

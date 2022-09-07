@@ -1097,7 +1097,7 @@ namespace Processes {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>
@@ -1676,7 +1676,7 @@ namespace Processes {
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circlebtn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -2311,7 +2311,7 @@ namespace Processes {
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus3${cnt}" class="lebelminus"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus3${cnt}" class="lebelminus"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                      <td>

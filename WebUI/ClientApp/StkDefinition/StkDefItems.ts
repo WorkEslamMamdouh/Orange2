@@ -299,7 +299,7 @@ namespace StkDefItems {
         html = `<tr id= "No_Row${cnt}">ass="form-control display_none"  />  
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus display_none" disabled ></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus display_none" disabled ></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -358,34 +358,6 @@ namespace StkDefItems {
                <input id="txt_ItemYearID${cnt}" type="hidden"   />
                <input id="txt_ItemStoreID${cnt}" type="hidden"   />
                 </tr>`;
-        //html = '<div id="No_Row' + cnt + '" class="container-fluid ">' +
-
-        //    '<div class="col-lg-12">' +
-        //    '<div class="col-lg-12">' +
-        //    '<span id = "btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none" disabled = "disabled"> </span>' +
-
-        //    '<div class="col-lg-1"><input id="txtCode' + cnt + '" type="text" class="form-control right2" disabled=""></div>' +
-        //    '<div id="DescA' + cnt + '" class="col-lg-3"><input id="txtDescA' + cnt + '" type="text" class="form-control right2 position_DescAE" disabled=""></div> ' +
-        //    //'<div id="DescL' + cnt + '" class="col-lg-3"></div> ' +
-        //    '<div class="col-lg-1"><select id="select_Type_Item' + cnt + '" class="form-control" disabled=""></select></div> ' +
-        //    '<div class="col-lg-1"><select id="select_ItemFamily' + cnt + '" class="form-control " disabled=""></select></div> ' +
-        //    '<div class="col-lg-2"><input id="txtRefItemCode' + cnt + '" type="number" class="form-control right2" disabled=""></div> ' +
-        //    '<div class="col-lg-1"><input id="txtOnhandQty' + cnt + '" type="text" disabled="" class="form-control right2 SelectDIS"></div> ' +
-        //    '<div class="col-lg-1"><input id="txtUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
-        //    '<div class="col-lg-1"><input id="txtMinUnitPrice' + cnt + '" type="number" disabled="" class="form-control right2"></div> ' +
-        //    '<div class="col-lg-1  "><select id="txt_UOM' + cnt + '" class="form-control" disabled=""></select></div> ' +
-        //    '<div class="col-lg-4 position_DescEStkDefItems">' +
-        //    '<div class="col-lg-8  "><input id="txtDescL' + cnt + '" type="text" class="form-control position_DescEE " disabled=""></div> ' +
-        //    '<div class="col-lg-4  "><input id="Check_isActive' + cnt + '" type="checkbox" class="form-control right2 " disabled ></div> ' +
-            
-        //    '</div>' + 
-          
-        //    '</div> ' +
-        //    '<input id="txt_StatusFlag' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-        //    '<input id="txt_ID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-        //    '<input id="txt_ItemYearID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-        //    '<input id="txt_ItemStoreID' + cnt + '" name=" " type="hidden" class="form-control" value=""> ' +
-        //    '</div> ';
         $("#div_Data").append(html);
 
 
