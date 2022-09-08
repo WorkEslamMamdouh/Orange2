@@ -1140,7 +1140,7 @@ namespace AccTrReceiptNote {
         $('#txtUpdatedAt').val("");
 
         $('#txt_Openbalance').val('0');
-
+        $("#txt_AmountCurrency").text("");
 
     }
 

@@ -173,7 +173,7 @@ namespace StkDefItemType {
         html = `<tr id= "No_Row${cnt}"> 
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus display_none"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle btn-minus display_none"></i></span>
 		                </div>
 	                </td>
                     <td>

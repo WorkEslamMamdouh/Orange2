@@ -24,6 +24,8 @@ namespace ItemPurchase {
     var reptp1: HTMLInputElement;
     var chk_Authorized: HTMLInputElement;
     var reptp2: HTMLInputElement;
+    var InvTp1: HTMLInputElement;
+    var InvTp2: HTMLInputElement;
     var btnReset;
     var reptype2: HTMLInputElement;
     var btnVendorSrch: HTMLButtonElement;
@@ -57,8 +59,8 @@ namespace ItemPurchase {
         InitalizeEvents();
         reptp1.checked = true;
         reptype2.checked = true;
-
-        txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
+        InvTp1.checked = true;
+         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         Display_DrpPaymentType();
@@ -89,7 +91,8 @@ namespace ItemPurchase {
         txtVendorName = document.getElementById("txtVendorName") as HTMLInputElement;
         chk_Authorized = document.getElementById("chk_Authorized") as HTMLInputElement;
         btnReset = document.getElementById("btnReset") as HTMLButtonElement;
-
+        InvTp1 = document.getElementById("InvTp1") as HTMLInputElement;
+        InvTp2 = document.getElementById("InvTp2") as HTMLInputElement;
     }
     
 
@@ -370,7 +373,14 @@ namespace ItemPurchase {
         }
         rp.PaymentType = Number($('#txt_PaymentType').val());
         rp.invType = Number($('#invType').val());
-
+        debugger
+        if (InvTp1.checked == true) {
+            rp.SLStype = 1;
+        } else if (InvTp2.checked == true) {
+            rp.SLStype = 2;
+        } else {
+            rp.SLStype = 0;
+        }
         if (reptp1.checked == true) {  //------------By_Cust
             rp.check = 1;
 

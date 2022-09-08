@@ -1644,7 +1644,8 @@ function Cheak_UserTokenlog() {
         data: { user: userCode, compcode: compCode, Branch_Code: branchCode, Token: "HGFD-" + SysSession.Token },
         success: function (d) {
             if (d == false) {
-                alert("تم تسجيل الخروج من النظام اعد التسجيل مره اخري");
+                //alert("تم تسجيل الخروج من النظام اعد التسجيل مره اخري")
+                DisplayMassage("تم تسجيل الخروج من النظام اعد التسجيل مره اخري", "You logout from the system, Login again", MessageType.Error);
                 localStorage.setItem("OutUesr", "0");
                 document.cookie = "Inv1_systemProperties=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                 document.cookie = "Inv1_Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";

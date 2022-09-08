@@ -104,7 +104,7 @@ namespace IssueType {
 		    
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 "></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle  "></i></span>
 		                </div>
 	                </td>
                     <td>

@@ -165,7 +165,7 @@ namespace GenDefAdd {
 		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

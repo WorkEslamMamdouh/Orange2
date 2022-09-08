@@ -140,11 +140,10 @@ namespace GenDefCustomerCat {
     function BuildControls(cnt: number) {
         var html;
         // 
-       // html = '<div id="No_Row' + cnt + '" class="col-lg-12" ><div class="col-lg-12"><span id="btn_minus' + cnt + '" class="glyphicon glyphicon-remove-sign fontitm3GenDefCustomerCat  btn-minus"></span><div class="col-lg-1 col-xs-2 style_pading"> <input id="txtCode' + cnt + '" type= "text" class="form-control right2 " disabled="disabled"/></div><div class="col-lg-4 col-xs-3 style_pading"> <input id="txtDescA' + cnt + '" type= "text" class="form-control right3" disabled="disabled"/></div><div class="col-lg-4 col-xs-3 style_pading"> <input id="txtDescL' + cnt + '" type= "text" class="form-control right4" disabled="disabled" /></div><div class="col-lg-2 col-xs-3 style_pading"> <select id="txtAcount_Code' + cnt + '" class="form-control"  disabled="disabled"> <option value="Null">'+(lang == "ar" ? "رقم الحساب" : "Account number")+'</option></select ></div><div class="col-lg-12"> <input id = "txt_StatusFlag' + cnt + '" name = " " type = "hidden" disabled class="form-control"/></div><div class="col-lg-12"> <input id = "txt_ID' + cnt + '" name = " " type = "hidden" class="form-control"/></div></div></div>';
         html = `<tr id= "No_Row${cnt}"> 
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}" class="btn-minus"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}" class="btn-minus"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

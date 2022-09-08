@@ -1092,9 +1092,9 @@ namespace JournalVoucher {
                     <input id="txtSerial${cnt}" name="FromDate" disabled type="hidden" value="${(CountGrid + 1)}" class="form-control" />
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
-			                <span id="btn_Copy${cnt}"><i class="fas fa-clone fs-4 btn-copy"></i></span>
-			                <span id="btn_Insert${cnt}"><i class="fas fa-plus-circle fs-4 btn-plus"></i></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
+			                <span id="btn_Copy${cnt}"><i class="fas fa-clone  btn-copy"></i></span>
+                            <span id="btn_Insert${cnt}"><i class="fas fa-share fa-rotate-180 btn-insert"></i></span>
 		                </div>
 	                </td>
                     <td>

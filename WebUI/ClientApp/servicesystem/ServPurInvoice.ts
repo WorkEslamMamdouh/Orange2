@@ -671,12 +671,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     <input id="VND_SERIAL${cnt}" type="hidden" class="form-control display_none"  />
 	             <td>
 		                <div class="form-group">
-			                <span id="btn_arrowdown${cnt}"><i class="fas fa-arrow-alt-circle-down fs-4 btn-down"></i></span>
+			                <span id="btn_arrowdown${cnt}"><i class="fas fa-arrow-alt-circle-down  btn-down"></i></span>
 		                </div>
 	                </td>    
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus1${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -1150,7 +1150,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     <input id="txtTR_SERIAL${cnt}" type="hidden" class="form-control display_none"/>    
 <td>
 		                <div class="form-group">
-			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
 	                <td>

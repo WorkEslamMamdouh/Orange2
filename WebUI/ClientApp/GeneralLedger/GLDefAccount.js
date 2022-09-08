@@ -50,8 +50,9 @@ var GLDefAccount;
     var id_ul = 'menu-group-1';
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        $("body").addClass("sidebar-icon-only");
         $('#cont').toggleClass('colapsdivcont');
-        $('#sidebar').toggleClass('active');
+        //$('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             $("body").toggleClass("mini-navbar_Arbec");
         }

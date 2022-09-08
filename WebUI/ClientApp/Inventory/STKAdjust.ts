@@ -1065,7 +1065,7 @@ namespace STKAdjust {
                     <input id="txtItemNumber${cnt}" type="hidden" name="FromDate" class="form-control display_none" value="${(CountGrid + 1)}"  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>

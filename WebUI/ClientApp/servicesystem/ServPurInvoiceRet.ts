@@ -179,7 +179,7 @@ namespace ServPurInvoiceRet {
                     <input id="txtUomID${cnt}" type="hidden" class="form-control display_none"  />   
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle fs-4 btn-minus"></i></span>
+			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
