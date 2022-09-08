@@ -228,12 +228,12 @@ var GLDefAccount;
             id_ul = 'sub-item-' + NodeParent;
         }
         if (Detail == 0) {
-            class_Plus = 'fas fa-plus-circle';
+            class_Plus = 'fas fa-plus-circle fs-6';
         }
         else {
-            class_Plus = 'fa-plus-circle';
+            class_Plus = 'fa-plus-circle fs-6';
             //  class_Plus = 'glyphicon-plusicon-white';
-            style_Plus = 'height: 1rem;width:1rem; background-color: var(--dark-blue); border-radius:50%; margin:auto;';
+            style_Plus = 'height: 1rem;width:1rem; background-color: var(--dark-blue); border-radius:50%; margin:auto; margin-right: 5px;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');
@@ -416,7 +416,7 @@ var GLDefAccount;
                 document.getElementById('span_1' + ACC_CODE).setAttribute('style', ' ');
                 var i_1 = document.createElement('i'); //icon +
                 i_1.setAttribute('id', 'i_' + ACC_CODE);
-                i_1.setAttribute('class', 'fas fa-plus-circle');
+                i_1.setAttribute('class', 'fas fa-plus-circle fs-6');
                 document.getElementById('span_1' + ACC_CODE).appendChild(i_1);
             }
             document.getElementById(ACC_CODE).setAttribute('data-detail', '0');
@@ -477,7 +477,7 @@ var GLDefAccount;
              {
                 var item = document.getElementById('li_' + txt_ACC_CODE.value);
                 item.parentNode.removeChild(item);
-                document.getElementById('span_1' + DetAccLst[0].PARENT_ACC).setAttribute('style', 'height: 18px;width: 21px; background-color: #05af1a;');
+                document.getElementById('span_1' + DetAccLst[0].PARENT_ACC).setAttribute('style', 'height: 18px;width: 21px;');
                 var icon = document.getElementById('i_' + DetAccLst[0].PARENT_ACC);
                 icon.parentNode.removeChild(icon);
                 document.getElementById(DetAccLst[0].PARENT_ACC).setAttribute('data-detail', '1');

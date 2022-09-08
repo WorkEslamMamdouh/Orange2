@@ -36,8 +36,9 @@ var CostCenter;
     var id_ul = 'menu-group-1';
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        $("body").addClass("sidebar-icon-only");
         $('#cont').toggleClass('colapsdivcont');
-        $('#sidebar').toggleClass('active');
+        //$('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             $("body").toggleClass("mini-navbar_Arbec");
         }
@@ -146,11 +147,11 @@ var CostCenter;
             id_ul = 'sub-item-' + NodeParent;
         }
         if (Detail == 0) {
-            class_Plus = 'fas fa-plus-circle ';
+            class_Plus = 'fas fa-plus-circle fs-6';
         }
         else {
-            class_Plus = 'fas fa-plus-circle ';
-            style_Plus = 'height: 1.25rem;width: 1.25rem; background-color: var(--dark-blue) ;  border-radius:50%; margin:auto;';
+            class_Plus = 'fas fa-plus-circle f-6';
+            style_Plus = 'height: 1rem;width: 1rem; background-color: var(--dark-blue) ;  border-radius:50%; margin:auto; margin-right: 5px;';
         }
         //---------------------------------------------------------li---------------------
         var li_1 = document.createElement('li');
@@ -267,7 +268,7 @@ var CostCenter;
                 document.getElementById('span_1' + CC_CODE).setAttribute('style', ' ');
                 var i_1 = document.createElement('i'); //icon +
                 i_1.setAttribute('id', 'i_' + CC_CODE);
-                i_1.setAttribute('class', 'fas fa-plus-circle');
+                i_1.setAttribute('class', 'fas fa-plus-circle fs-6');
                 document.getElementById('span_1' + CC_CODE).appendChild(i_1);
             }
             document.getElementById(CC_CODE).setAttribute('data-detail', '0');
@@ -310,7 +311,7 @@ var CostCenter;
              {
                 var item = document.getElementById('li_' + txt_CC_CODE.value);
                 item.parentNode.removeChild(item);
-                document.getElementById('span_1' + DetAccLst[0].CC_PARENT).setAttribute('style', 'height: 18px;width: 21px; background-color: #05af1a;');
+                //document.getElementById('span_1' + DetAccLst[0].CC_PARENT).setAttribute('style', 'height: 18px;width: 21px');
                 var icon = document.getElementById('i_' + DetAccLst[0].CC_PARENT);
                 icon.parentNode.removeChild(icon);
                 document.getElementById(DetAccLst[0].CC_PARENT).setAttribute('data-detail', '1');
@@ -540,7 +541,7 @@ var CostCenter;
         DetAccLst = new Array();
         DetAccLst = Details_G_COST.filter(function (x) { return x.CC_CODE == txt_CC_CODE.value; });
         if (DetAccLst.length > 0) {
-            WorningMessage("لا يمكنك تكرار رقم الحساب والاسم !", "You cannot duplicate account number and name!", "تحذير", "worning");
+            WorningMessage("لا يمكنك تكرار رقم المركز !", "You cannot duplicate Cost Center!", "تحذير", "worning");
             Errorinput(txt_CC_CODE);
         }
         else {
@@ -591,7 +592,7 @@ var CostCenter;
             DetAccLst = Details_G_COST.filter(function (x) { return x.CC_CODE == txt_CC_CODE.value; });
         }
         if (DetAccLst.length > 0) {
-            WorningMessage("لا يمكنك تكرار رقم الحساب والاسم !", "You cannot duplicate account number and name!", "تحذير", "worning");
+            WorningMessage("لا يمكنك تكرار رقم المركز  !", "You cannot duplicate account Cost Center!", "تحذير", "worning");
             Errorinput(txt_CC_CODE);
         }
         else {
