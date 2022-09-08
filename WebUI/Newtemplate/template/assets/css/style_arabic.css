@@ -11711,8 +11711,8 @@ textarea.form-control-lg {
     }
 
 .form-check-input {
-    width: 2em;
-    height: 2em;
+    width: 1em;
+    height: 1em;
     margin-top: -1rem;
     vertical-align: top;
     background-color: #fff;
@@ -27670,7 +27670,7 @@ div.tagsinput {
     font-weight: normal;
     background: var(--main-blue);
     /*right: 230px;*/
-    right: 195px;
+    right: 220px;
     transition: right 0.25s ease;
     -webkit-transition: right 0.25s ease;
     -moz-transition: right 0.25s ease;
@@ -27690,7 +27690,7 @@ div.tagsinput {
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: var(--main-blue);
     /*width: 230px;*/
-    width: 195px;
+    width: 220px;
     height: 50px;
 }
 @media (max-width: 991px) {
@@ -27714,7 +27714,7 @@ div.tagsinput {
 
     .navbar .navbar-brand-wrapper .navbar-brand img {
         /*width: calc(230px - 120px);*/
-        width: calc(195px - 120px);
+        width: calc(220px - 120px);
         max-width: 100%;
         height: 28px;
         margin: auto;
@@ -28116,7 +28116,7 @@ div.tagsinput {
     font-weight: normal;
     padding: 0;
     /*width: 230px;*/
-    width: 195px;
+    width: 220px;
     z-index: 11;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -28130,7 +28130,7 @@ div.tagsinput {
         -ms-transition: width 0.25s ease, background 0.25s ease;
         background: var(--main-blue);
         /*width: 230px;*/
-        width: 195px;
+        width: 220px;
         height: 50px;
         /*logo test*/
         padding-right:2.5rem;
@@ -28229,7 +28229,7 @@ div.tagsinput {
     transition-duration: 0.25s;
     transition-property: background;
     -webkit-transition-property: background;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 2px;
 }
 
@@ -28298,7 +28298,7 @@ div.tagsinput {
 .sidebar .nav .nav-item .nav-link .menu-title {
     color: inherit;
     display: inline-block;
-    font-size: .7rem;
+    font-size: .9rem;
     line-height: 1;
     vertical-align: middle;
 }
@@ -28558,7 +28558,7 @@ div.tagsinput {
             color: var(--bs-gray-light);
             padding: 0.4rem 0.35rem;
             position: relative;
-            font-size: .7rem;
+            font-size: .8rem;
             line-height: 1;
             height: auto;
             border-top: 0;
@@ -28597,7 +28597,7 @@ div.tagsinput {
         bottom: 0;
         overflow: auto;
         /*left: -230px;*/
-        left: -195px;
+        left: -220px;
         -webkit-transition: all 0.25s ease-out;
         -o-transition: all 0.25s ease-out;
         transition: all 0.25s ease-out;
@@ -28882,7 +28882,7 @@ div.tagsinput {
     padding-left: 0;
     transition: all 0.25s ease;
     /*width: calc(100% - 230px);*/
-    width: calc(100% - 195px);
+    width: calc(100% - 220px);
 }
 
     .page-body-wrapper.full-page-wrapper {
@@ -29044,12 +29044,10 @@ div.tagsinput {
     .div-iconbar .icon-bar3{
         background-color: var(--main-blue);
         position: absolute;
-        font-size: 1.25rem;
+        font-size: 1rem;
         text-decoration: none;
         Color: white;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 16px;
+        padding: 10px;
         border-radius: 0px 25px 25px 0px;
         left: -88px;
         transition: all 0.5s ease-in-out;
@@ -29073,20 +29071,20 @@ div.tagsinput {
 .btn-save,
 .btn-back {
     width: 100px;
-    height: 50px;
+    height: 35px;
 }
 .print-list {
-    width: 230px;
-    height: 50px;
+    width: 175px;
+    height: 35px;
 }
 .icon-bar.btn-update {
     top: 50px;
 }
 .icon-bar.btn-save {
-    top: 120px;
+    top: 90px;
 }
 .icon-bar.btn-back {
-    top: 180px;
+    top: 130px;
 }
 
 .icon-bar2.btn-Add,
@@ -29095,11 +29093,11 @@ div.tagsinput {
 }
 .icon-bar2.btn-Update,
 .icon-bar2.btn-save {
-    top: 30px;
+    top: 10px;
 }
 .icon-bar2.btn-Save,
 .icon-bar2.btn-back {
-    top: 90px;
+    top: 50px;
 }
 .icon-bar2.btn-Back {
     top: 150px;
@@ -29130,7 +29128,7 @@ div.tagsinput {
     left: -105px;
 }
 .print-list.icon-bar {
-    left: -190px;
+    left: -140px;
 }
 /*End styling sidebar icons */
 /*Start Top Button*/
@@ -29379,24 +29377,24 @@ div.tagsinput {
 /*Custom-table*/
 .custom-table .table thead th {
     color: var(--main-blue);
-    font-size: 1.125rem;
+    font-size: .9rem;
     padding-bottom:20px;
 }
 .custom-table .table th{
-    font-size: 1.125rem;
+    font-size: .9rem;
     padding-bottom: 10px;
 }
 .custom-table .table  td:first-child{
-    font-size: 1.125rem;
+    font-size: .9rem;
     font-weight: 500;
 }
     /*Counter*/
-    .inside-table .counter {
+.inside-table .counter {
     background-color: transparent;
     text-align: center;
     margin: 6px;
-    width: 40px;
-    height: 40px;
+    width: 80%;
+    height: 1.8rem;
     border: .5px solid var(--main-blue);
     color: var(--dark-blue);
 }
@@ -29409,7 +29407,7 @@ div.tagsinput {
     border: none;
     margin: -2px 13px 0 13px;
     width: 20px;
-    height: 40px;
+    height: 1.8rem;
     text-align: center;
     vertical-align: middle;
     padding: 14px 0;
@@ -29423,20 +29421,21 @@ div.tagsinput {
     color: var(--bs-light);
     margin-left: 27px;
     margin-top: 6px;
+    line-height:0;
 }
    
 .inside-table .value-button:hover {
     cursor: pointer;
 }
 
-    .inside-table .decrease-button {
-        margin-right: -66px;
-        border-radius: 0 8px 8px 0;
-        background-color: darkred;
-    }
+.inside-table .decrease-button {
+    margin-right: -86%;
+    border-radius: 0 8px 8px 0;
+    background-color: darkred;
+}
 
     .inside-table .increase-button {
-        margin-left: -11px;
+        margin-left: -10%;
         border-radius: 8px 0 0 8px;
         background-color: forestgreen;
     }
@@ -29450,6 +29449,7 @@ div.tagsinput {
 .inside-table .form-group {
     display: flex;
     justify-content: center;
+    width:100%;
 }
 .btn-minus,
 .btn-minus-CCDt,
@@ -29537,7 +29537,7 @@ input[type=number] {
 
     label.form-control[disabled]:not(.search-control) {
         font-weight: normal;
-        padding-top: 1rem;
+        /*padding-top: 1rem;*/
     }
 .inside-table .form-control[disabled],
 .inside-table .counter[disabled] {
@@ -29703,6 +29703,7 @@ input[class=checkbox]:checked:before {
 .select2-container {
     max-width: 100% !important;
     height: calc(1.7rem + 2px);
+    padding:0;
 }
 .select2-container--default .select2-selection--single,
 .select2-container--default .select2-dropdown,
@@ -29931,6 +29932,9 @@ input[class=checkbox]:checked:before {
 }
 /*Account Menu Style*/
 /*used*/
+#LblAD{
+    color: var(--main-blue);
+}
 .account-menu ul {
     list-style: none;
 }
@@ -29975,7 +29979,7 @@ input[class=checkbox]:checked:before {
     .account-menu ul.main-menu > li.parent > a {
         color: var(--main-blue);
         border-radius: 22px;
-        padding: .5rem 0;
+        padding: .25rem 0;
     }
     /*used*/
     .account-menu ul.main-menu li.parent a:hover {
@@ -30022,23 +30026,16 @@ input[class=checkbox]:checked:before {
 }
 
 /* used*/
-.account-menu ul.main-menu li .sign {
+.account-menu ul.main-menu li .sign,
+.account-menu ul.main-menu li a .lbl {
     display: inline-block;
     padding: 1px 5px;
     font-size: .8rem;
 }
-
-
-/* label */
-.account-menu ul.main-menu li .lbl {
-    padding: 5px 12px;
-    display: inline-block;
-}
-/*used*/
-.account-menu ul.main-menu li a .lbl {
-    font-size: 1rem;
-}
-
+    .account-menu ul.main-menu li .sign .fa-minus-circle,
+    .account-menu ul.main-menu li .sign .fa-plus-circle {
+        font-size: 1rem ;
+    }
 /* THEMATIQUE------------------------- */
 /* theme 1 */
 .account-menu ul.main-menu > li.item-1 li.current > a .lbl {
@@ -30296,9 +30293,11 @@ input[class=checkbox]:checked:before {
         transition: all 1s ease-in-out;
     }
 
-
-@media (max-width: 576px) {
-    .btnCustLastPrice {
+    .btnCustLastPrice i {
+        margin: 0.6rem 1rem;
+    }
+    @media (max-width: 576px) {
+        .btnCustLastPrice {
         right: -82%;
     }
 }
@@ -30360,7 +30359,7 @@ input[class=checkbox]:checked:before {
 
 .nav::-webkit-scrollbar-thumb {
     border-radius: 80px;
-    background-image: linear-gradient(180deg, #081a2b 0%, #081a2b 99%);
+    background-image: linear-gradient(180deg, var(--dark-blue) 0%, var(--dark-blue) 99%);
 }
 .select2-results__options::-webkit-scrollbar {
     width: 10px;
@@ -30368,5 +30367,12 @@ input[class=checkbox]:checked:before {
 .select2-results__options::-webkit-scrollbar-thumb {
     border-radius: 80px;
     background-image: linear-gradient(180deg, #6c757d 0%, #6c757d 99%);
+}
+.table-responsive::-webkit-scrollbar {
+    height:10px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    border-radius: 80px;
+    background-image: linear-gradient(180deg, var(--main-blue) 0%, var(--main-blue) 99%);
 }
 /*End Scroll Bar*/
