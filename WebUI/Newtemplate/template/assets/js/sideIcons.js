@@ -7,21 +7,21 @@ $(document).ready(function () {
         $('.print-details').css('bottom', `${heightIcon}px`);
         $('.edit').css('position', 'fixed');
         $('.edit').css('top', `auto`);
-        $('.edit').css('bottom', `${heightIcon + 50}px`);
+        $('.edit').css('bottom', `${heightIcon + 40}px`);
         $('.back').css('position', 'fixed');
-        $('.back').css('bottom', `${heightIcon + 90}px`);
+        $('.back').css('bottom', `${heightIcon + 80}px`);
         $('.save').css('position', 'fixed');
-        $('.save').css('bottom', `${heightIcon + 140}px`);
+        $('.save').css('bottom', `${heightIcon + 120}px`);
 
     } else {
         $('.print-details').css('position', 'absolute');
         $('.print-details').css('bottom', `${navTop}px`);
         $('.edit').css('position', 'absolute');
-        $('.edit').css('bottom', `${navTop + 50}px`);
+        $('.edit').css('bottom', `${navTop + 40}px`);
         $('.back').css('position', 'absolute');
-        $('.back').css('bottom', `${navTop + 90}px`);
+        $('.back').css('bottom', `${navTop + 80}px`);
         $('.save').css('position', 'absolute');
-        $('.save').css('bottom', `${navTop + 140}px`);
+        $('.save').css('bottom', `${navTop + 120}px`);
 
     }
 });

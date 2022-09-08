@@ -146,7 +146,7 @@ namespace CollectUnit {
                     <input id="txtCollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus display_none"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -311,7 +311,7 @@ namespace CollectUnit {
                     <input id="txt_OUT_CollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
+			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus display_none"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -974,7 +974,7 @@ namespace CollectUnit {
         $("#divInputs :input").prop("disabled", false);
         $("#divOutputs :input").prop("disabled", false);
         txtTrNo.disabled = true;
-        $(".glyphicon-minus-sign").removeClass("display_none");
+        $(".btn-minus").removeClass("display_none");
         $("#txtCreatedBy").attr("disabled", "disabled");
         $("#txtCreatedAt").attr("disabled", "disabled");
         $("#txtUpdatedBy").attr("disabled", "disabled");
