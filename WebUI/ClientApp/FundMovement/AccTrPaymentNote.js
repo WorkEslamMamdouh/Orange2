@@ -1731,7 +1731,7 @@ var AccTrPaymentNote;
         getAccountBankById(txt_BenCode.value, true);
     }
     function btnBenBankH_onclick() {
-        sys.FindKey(Modules.AccTrPaymentNote, "btnbankSearch", "COMP_CODE= " + compcode + "and ACC_TYPE = 2", function () {
+        sys.FindKey(Modules.AccTrPaymentNote, "btnbankSearch", "COMP_CODE= " + compcode + "and ACC_TYPE = 3 and ACC_ACTIVE = 1", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             GlobalBankIDH = id;
             getAccountBankHById(id, true);
@@ -1803,7 +1803,7 @@ var AccTrPaymentNote;
         getAccountAccById(txt_BenCode.value, true);
     }
     function btnBenAccH_onclick() {
-        sys.FindKey(Modules.AccTrPaymentNote, "btnAccBen", "CompCode= " + compcode + " and TrType = 1 ", function () {
+        sys.FindKey(Modules.AccTrPaymentNote, "btnAccBen", "CompCode= " + compcode + " and TrType = 2 ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             GlobalAccIDH = id;
             getAccountAccHById(id, false);

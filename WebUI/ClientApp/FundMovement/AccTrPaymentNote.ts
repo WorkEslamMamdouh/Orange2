@@ -1937,7 +1937,7 @@ namespace AccTrPaymentNote {
 
     function btnBenBankH_onclick() {
 
-        sys.FindKey(Modules.AccTrPaymentNote, "btnbankSearch", "COMP_CODE= " + compcode + "and ACC_TYPE = 2", () => {
+        sys.FindKey(Modules.AccTrPaymentNote, "btnbankSearch", "COMP_CODE= " + compcode + "and ACC_TYPE = 3 and ACC_ACTIVE = 1", () => {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             GlobalBankIDH = id;
             getAccountBankHById(id, true);
@@ -2029,7 +2029,7 @@ namespace AccTrPaymentNote {
 
     function btnBenAccH_onclick() {
 
-        sys.FindKey(Modules.AccTrPaymentNote, "btnAccBen", "CompCode= " + compcode + " and TrType = 1 ", () => {
+        sys.FindKey(Modules.AccTrPaymentNote, "btnAccBen", "CompCode= " + compcode + " and TrType = 2 ", () => {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             GlobalAccIDH = id;
             getAccountAccHById(id, false);
