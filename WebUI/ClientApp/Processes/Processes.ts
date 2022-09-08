@@ -1783,9 +1783,9 @@ namespace Processes {
 
         for (var i = 0; i < AddonsData.length; i++) {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                $('#txtAddonsCharge' + cnt).append('<option value="' + AddonsData[i].ChargeID + '">' + AddonsData[i].DESCA + '</option>');
+                $('#txtAddonsCharge' + cnt).append('<option VatType="' + AddonsData[i].VatType + '" value="' + AddonsData[i].ChargeID + '">' + AddonsData[i].DESCA + '</option>');
             else
-                $('#txtAddonsCharge' + cnt).append('<option value="' + AddonsData[i].ChargeID + '">' + AddonsData[i].DESCL + '</option>');
+                $('#txtAddonsCharge' + cnt).append('<option VatType="' + AddonsData[i].VatType + '" value="' + AddonsData[i].ChargeID + '">' + AddonsData[i].DESCL + '</option>');
         }
 
         var drop = '#txtAddonsCharge' + cnt;
@@ -1901,6 +1901,47 @@ namespace Processes {
                 $("#txt_D_CashBox" + cnt).prop("disabled", false);
             }
             else { $("#txt_D_CashBox" + cnt).prop("disabled", true); $("#txt_D_CashBox" + cnt).prop("value", "Null"); }
+
+        });
+        $("#txtAddonsCharge" + cnt).on('change', function () {
+            // 
+            if ($("#txt_StatusFlag1" + cnt).val() != "i")
+                $("#txt_StatusFlag1" + cnt).val("u");
+
+
+            let ChargeID = $("#txtAddonsCharge" + cnt).val(); 
+            let VatType = AddonsData.filter(x => x.ChargeID == ChargeID)[0].VatType; 
+            $("#txtVatType" + cnt).val(VatType);
+
+
+            var selectedItem = $("#txtVatType" + cnt + ' option:selected').attr('value');
+            if (selectedItem != "null") {
+                var Code = Number(selectedItem);
+                var NumberSelect = VatTypeData.filter(s => s.CODE == Code);
+                $("#txtVatType" + cnt).attr('data-VatPerc', NumberSelect[0].VatPerc)
+                var vatPercentage = Number(NumberSelect[0].VatPerc);
+                var amount = Number($("#txtValueCharge" + cnt).val());
+                if (amount >= 0) {
+                    var vatAmount = (vatPercentage * amount) / 100;
+                    $("#txtVatCharge" + cnt).val(vatAmount.RoundToSt(2));
+
+                    $("#txtValueAfterVatCharge" + cnt).val((vatAmount.RoundToNum(2) + amount.RoundToNum(2)).RoundToSt(2));
+
+                } else {
+
+                    $("#txtVatCharge" + cnt).val("0");
+                    $("#txtValueAfterVatCharge" + cnt).val("0");
+
+                }
+            } else {
+                $("#txtVatCharge" + cnt).val("0");
+                $("#txtValueAfterVatCharge" + cnt).val("0");
+
+            }
+
+
+            //ComputeTotalsCharge();
+            ComputeTotalsCharge();
 
         });
 
