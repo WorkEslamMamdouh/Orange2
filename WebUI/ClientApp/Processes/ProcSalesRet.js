@@ -508,6 +508,7 @@ var ProcSalesRet;
                 FlagTochooseWhichOperationID = true;
                 FillddlItem();
                 ddlFreeSalesman.value = ddlSalesMan.value;
+                $("#DivFilter").addClass("disabledDiv");
                 $("#divGridDetails_View").addClass("disabledDiv");
                 $("#divGridDetails_View").attr("disabled", "disabled").off('click');
                 $("#div_hedr").addClass("disabledDiv");
@@ -805,6 +806,12 @@ var ProcSalesRet;
             DisplayMassage('يجب ان يتساوي المبلغ المسدد مع الصافي', '(The amount paid must be equal to the net)', MessageType.Error);
             Errorinput(txtCashAmount);
             Errorinput(txtNet);
+            return false;
+        }
+        else if ($('#txtRefNo').val()) {
+            debugger;
+            DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
+            Errorinput(txtInvoiceDate);
             return false;
         }
         else if (!CheckPeriodDate(txtInvoiceDate.value, "I")) {
@@ -1990,6 +1997,7 @@ var ProcSalesRet;
         $('#btnBack').addClass("display_none");
         $('#btnUpdate').removeClass("display_none");
         $("#divGridDetails_View").removeClass("disabledDiv");
+        $("#DivFilter").removeClass("disabledDiv");
         $("#div_hedr").removeAttr("disabled");
         $("#div_hedr").removeClass("disabledDiv");
         txtInvoiceDate.disabled = true;

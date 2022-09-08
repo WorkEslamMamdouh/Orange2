@@ -335,6 +335,7 @@ namespace ProcSalesRet {
             txtRemarks.disabled = false;
             $("#divGridDetails_View").addClass("disabledDiv");
             $("#DivFilter").addClass("disabledDiv");
+            
             $("#divGridDetails_View").attr("disabled", "disabled").off('click');
             $("#div_hedr").addClass("disabledDiv");
             $("#div_hedr").attr("disabled", "disabled").off('click');
@@ -357,7 +358,7 @@ namespace ProcSalesRet {
     }
     function btnAddFreeReturn_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
-        $("#divShow").removeClass("display_none");
+        $("#divShow").removeClass("display_none"); 
         txtInvoiceNumber.value = "";
         $('#btnUpdate').addClass("display_none");
         $('#btnPrintTransaction').addClass("display_none");
@@ -484,6 +485,7 @@ namespace ProcSalesRet {
             $("#btnSave").addClass("display_none");
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#DivFilter").removeClass("disabledDiv");
+            
             $("#div_hedr").removeAttr("disabled")
             $("#div_hedr").removeClass("disabledDiv");
             $("#chkActive").attr("disabled", "disabled");
@@ -498,6 +500,7 @@ namespace ProcSalesRet {
             $('#condtionbtn2').addClass("col-lg-4");
             $("#divGridDetails_View").removeClass("disabledDiv");
             $("#DivFilter").removeClass("disabledDiv");
+            
             $("#txtCustomerName").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
@@ -543,6 +546,7 @@ namespace ProcSalesRet {
 
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#DivFilter").removeClass("disabledDiv");
+        
     }
     function AddNewReturn_onclick() {
         debugger
@@ -559,6 +563,7 @@ namespace ProcSalesRet {
                 FlagTochooseWhichOperationID = true;
                 FillddlItem();
                 ddlFreeSalesman.value = ddlSalesMan.value;
+                $("#DivFilter").addClass("disabledDiv");
                 $("#divGridDetails_View").addClass("disabledDiv");
                 $("#divGridDetails_View").attr("disabled", "disabled").off('click');
                 $("#div_hedr").addClass("disabledDiv");
@@ -888,10 +893,21 @@ namespace ProcSalesRet {
         }
     }
     function ValidationHeader() {
+
+
+
         if (chkActive.checked == true && ddlReturnTypeShow.value == "1" && (Number(txtCashAmount.value).RoundToSt(2) != Number(txtNet.value).RoundToSt(2))) {
             DisplayMassage('يجب ان يتساوي المبلغ المسدد مع الصافي', '(The amount paid must be equal to the net)', MessageType.Error);
             Errorinput(txtCashAmount);
             Errorinput(txtNet);
+            return false
+        }
+
+
+        else if ($('#txtRefNo').val()) {
+            debugger
+            DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
+            Errorinput(txtInvoiceDate);
             return false
         }
 
@@ -2298,6 +2314,7 @@ namespace ProcSalesRet {
         $('#btnBack').addClass("display_none");
         $('#btnUpdate').removeClass("display_none");
         $("#divGridDetails_View").removeClass("disabledDiv");
+        $("#DivFilter").removeClass("disabledDiv");
         $("#div_hedr").removeAttr("disabled")
         $("#div_hedr").removeClass("disabledDiv");
         txtInvoiceDate.disabled = true;
