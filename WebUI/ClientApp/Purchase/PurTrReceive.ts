@@ -2429,6 +2429,49 @@ namespace PurTrReceive {
             ComputeTotalsCharge();
         });
 
+        $("#txtAddonsCharge" + cnt).on('change', function () {
+            // 
+            if ($("#txt_StatusFlag1" + cnt).val() != "i")
+                $("#txt_StatusFlag1" + cnt).val("u");
+
+
+            let ChargeID = $("#txtAddonsCharge" + cnt).val();
+            let VatType = AddonsData.filter(x => x.ChargeID == ChargeID)[0].VatType;
+            $("#txtVatType" + cnt).val(VatType);
+
+
+            var selectedItem = $("#txtVatType" + cnt + ' option:selected').attr('value');
+            if (selectedItem != "null") {
+                var Code = Number(selectedItem);
+                var NumberSelect = VatTypeData.filter(s => s.CODE == Code);
+                $("#txtVatType" + cnt).attr('data-VatPerc', NumberSelect[0].VatPerc);
+                var vatPercentage = Number(NumberSelect[0].VatPerc);
+                var amount = Number($("#txtValueCharge" + cnt).val());
+                if (amount >= 0) {
+                    var vatAmount = (vatPercentage * amount) / 100;
+                    $("#txtVatCharge" + cnt).val(vatAmount.RoundToSt(2));
+
+                    $("#txtValueAfterVatCharge" + cnt).val((vatAmount + amount).RoundToSt(2));
+
+                } else {
+
+                    $("#txtVatCharge" + cnt).val("0");
+                    $("#txtValueAfterVatCharge" + cnt).val("0");
+
+                }
+            } else {
+                $("#txtVatCharge" + cnt).val("0");
+                $("#txtValueAfterVatCharge" + cnt).val("0");
+
+            }
+
+
+            ComputeTotalsCharge();
+
+        });
+
+
+
         $("#btn_minus1" + cnt).on('click', function () {
             DeleteRowCharge(cnt);
         });
