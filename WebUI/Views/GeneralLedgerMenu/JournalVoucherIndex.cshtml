@@ -88,16 +88,16 @@
                                 @* Screen Button *@
                                 <div class="d-flex justify-content-start mb-2">
                                     <div class="">
-                                        <button id="btnCreateTemplate" type="button" class="btn btn-main me-3 display_none">
+                                        <button id="btnCreateTemplate" type="button" class="btn btn-main me-3  ">
                                             @SystemResource.Create_form
                                         </button>
-                                        <button id="btnDeleteTemplate" type="button" class="btn btn-main me-3 display_none">
+                                        <button id="btnDeleteTemplate" type="button" class="btn btn-main me-3  ">
                                             @SystemResource.Delete_form
                                         </button>
-                                        <button id="btnEditTemplate" type="button" class="btn btn-main me-3 display_none">
+                                        <button id="btnEditTemplate" type="button" class="btn btn-main me-3  ">
                                             @SystemResource.Modify_form
                                         </button>
-                                        <button id="btnLoadTemplate" type="button" class="btn btn-main display_none">
+                                        <button id="btnLoadTemplate" type="button" class="btn btn-main  ">
                                             @SystemResource.Download_form
                                         </button>
                                     </div>
@@ -416,6 +416,7 @@
         }); $('#btnContractRentID').on('click', function () {
             $('#drpContractRent').toggleClass('display_none');
         });
+
     </script>
     <script src="~/ClientApp/GeneralLedger/JournalVoucher.js"></script>
 }
