@@ -11711,8 +11711,8 @@ textarea.form-control-lg {
     }
 
 .form-check-input {
-    width: 1em;
-    height: 1em;
+    width: 1rem;
+    height: 1rem;
     margin-top: -1rem;
     vertical-align: top;
     background-color: #fff;
@@ -13042,7 +13042,10 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     border: 3px solid var(--main-blue);
     transition: all .5s ease-in-out;
 }
-.btn-gray {
+.switch-div .btn-main {
+    line-height: 1.5rem;
+}
+    .btn-gray {
     color: var(--bs-light);
     background-color: var(--bs-gray);
     border-color: var(--bs-gray);
@@ -30380,3 +30383,4 @@ input[class=checkbox]:checked:before {
     border-radius: 100px;
 }
 /*End Scroll Bar*/
+
