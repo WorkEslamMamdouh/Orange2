@@ -1640,7 +1640,6 @@
     <Content Include="Website\portfolio-details.html" />
     <Content Include="Website\Readme.txt" />
     <Content Include="ClientApp\Report_Page\Report_Page.js.map" />
-    <Content Include="Newtemplate\.DS_Store" />
     <Content Include="Newtemplate\CHANGELOG.md" />
     <Content Include="Newtemplate\LICENSE" />
     <Content Include="Newtemplate\README.md" />
@@ -1773,7 +1772,6 @@
     <Content Include="Newtemplate\template\assets\vendors\mdi\fonts\materialdesignicons-webfont.ttf" />
     <Content Include="Newtemplate\template\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff" />
     <Content Include="Newtemplate\template\assets\vendors\mdi\fonts\materialdesignicons-webfont.woff2" />
-    <Content Include="Newtemplate\template\package-lock.json" />
     <Content Include="Newtemplate\template\package.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\add.png" />

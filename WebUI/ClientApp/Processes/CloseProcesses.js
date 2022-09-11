@@ -4140,9 +4140,16 @@ var CloseProcesses;
                 if (result.IsSuccess) {
                     TR_OperationItemsSum = result.Response;
                     $("#DivShowItemsData").removeClass("display_none");
-                    $("#btnBack_2").addClass("display_none");
-                    $("#btnSave_2").addClass("display_none");
-                    $("#btnUpdate_2").removeClass("display_none");
+                    if (Selected_Data[0].Status != 3) { //مغلق
+                        $("#btnBack_2").addClass("display_none");
+                        $("#btnSave_2").addClass("display_none");
+                        $("#btnUpdate_2").removeClass("display_none");
+                    }
+                    else {
+                        $("#btnBack_2").addClass("display_none");
+                        $("#btnSave_2").addClass("display_none");
+                        $("#btnUpdate_2").addClass("display_none");
+                    }
                     $("#div_ItemsData").html('');
                     CountGridItemsData = 0;
                     for (var i = 0; i < TR_OperationItemsSum.length; i++) {
