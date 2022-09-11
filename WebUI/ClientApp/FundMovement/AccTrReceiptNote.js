@@ -768,6 +768,7 @@ var AccTrReceiptNote;
         Reciept_TrNo = Selecteditem[0].TrNo;
         $('#txtCashTypeNew').prop("value", Selecteditem[0].CashType == null ? "null" : Selecteditem[0].CashType);
         $('#txt_BankAcc_Code').prop("value", Selecteditem[0].BankAcc_Code == null ? "null" : Selecteditem[0].BankAcc_Code);
+        $('#txt_BenName').prop("value", Selecteditem[0].BankName);
         var trDate = DateFormat(Selecteditem[0].TrDate);
         var DueDate = DateFormat(Selecteditem[0].DueDate);
         txtDateNew.value = trDate;
@@ -1152,6 +1153,7 @@ var AccTrReceiptNote;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
+            Model.BankName = $('#txt_BankName').val();
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -1174,6 +1176,7 @@ var AccTrReceiptNote;
             Model.RecPayTypeId = $('#txt_ReceiptNoteNew').val();
             //var beneficiary = $("#txt_ID_beneficiaryNew").val();
             var beneficiary = $("#txt_BenCode").val();
+            Model.BankName = $('#txt_BankName').val();
             if ($('#txt_ReceiptNoteNew').val() == "1") {
                 beneficiary = PurchaserCustId;
                 custId = beneficiary;
@@ -1228,7 +1231,6 @@ var AccTrReceiptNote;
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
         }
-        Model.BankName = '';
     }
     function Insert() {
         Assign();

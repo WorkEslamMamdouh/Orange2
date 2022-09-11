@@ -29951,6 +29951,13 @@ input[class=checkbox]:checked:before {
 }
 .account-menu ul {
     list-style: none;
+  
+}
+
+.main-menu {
+    list-style: none;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
     .account-menu ul.main-menu ul,
@@ -30391,7 +30398,7 @@ input[class=checkbox]:checked:before {
 }
 .table-responsive::-webkit-scrollbar-track {
     background-color: var(--bs-gray-300);
-    border-radius: 100px;
+    border-radius: 100px; 
 }
 
 .main-menu::-webkit-scrollbar {

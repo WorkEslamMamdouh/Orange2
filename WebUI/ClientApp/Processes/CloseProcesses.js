@@ -3389,7 +3389,7 @@ var CloseProcesses;
             }
         }
         $("#btnAddDetailsCharge").removeClass("display_none");
-        $(".minusCharges ").removeClass("display_none");
+        $(".minusCharges").removeClass("display_none");
         //$("#DivChargesShow").removeClass("disabledDiv");
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
@@ -3410,7 +3410,7 @@ var CloseProcesses;
     }
     function btnBack_3_onclick() {
         if (flag_Add == true) {
-            $(".minusCharges ").addClass("display_none");
+            $(".minusCharges").addClass("display_none");
             $("#btnAddDetailsCharge").addClass("display_none");
             btnUpdate_3.classList.remove("display_none");
             btnSave_3.classList.add("display_none");
@@ -3421,7 +3421,7 @@ var CloseProcesses;
         }
         else {
             if (flag_Success_3 == true) {
-                $(".minusCharges ").addClass("display_none");
+                $(".minusCharges").addClass("display_none");
                 $("#btnAddDetailsCharge").addClass("display_none");
                 btnUpdate_3.classList.remove("display_none");
                 btnSave_3.classList.add("display_none");
@@ -3431,7 +3431,7 @@ var CloseProcesses;
                 flag_Success_3 = false;
             }
             else {
-                $(".minusCharges ").addClass("display_none");
+                $(".minusCharges").addClass("display_none");
                 $("#btnAddDetailsCharge").addClass("display_none");
                 btnUpdate_3.classList.remove("display_none");
                 btnSave_3.classList.add("display_none");

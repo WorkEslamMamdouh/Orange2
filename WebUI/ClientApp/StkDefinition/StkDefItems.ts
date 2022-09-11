@@ -128,12 +128,12 @@ namespace StkDefItems {
         }
         if (SysSession.CurrentPrivileges.Remove) {
 
-            $(".fa-minus-circle").removeClass("display_none");
+            $(".fa-minus").removeClass("display_none");
 
         }
         else {
 
-            $(".fa-minus-circle").addClass("display_none");
+            $(".fa-minus").addClass("display_none");
 
         }
 
@@ -299,7 +299,7 @@ namespace StkDefItems {
         html = `<tr id= "No_Row${cnt}">ass="form-control display_none"  />  
                     <td>
 		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus display_none" disabled ></i></span>
+			                <span id="btn_minus${cnt}" class="fa-minus" ><i class="fas fa-minus-circle  btn-minus  " disabled ></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -964,7 +964,7 @@ namespace StkDefItems {
         $('#btnSave_Def').addClass("display_none");
 
         $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none')
-        $(".fa-minus-circle").addClass("display_none");
+        $(".fa-minus").addClass("display_none");
         $("#btnUpdate_Def").removeClass("display_none");
         $("#btnUpdate_Def").removeAttr("disabled");
 
