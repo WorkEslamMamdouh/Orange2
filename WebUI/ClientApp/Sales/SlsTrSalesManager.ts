@@ -1914,7 +1914,7 @@ namespace SlsTrSalesManager {
 	                </td>
                      <td>
 		                <div class="form-group">
-			                <div class="form-group ps-1">
+			                <div class="form-group counter-group ps-1">
 			                    <input class="counter px-3" type="number" data-id="number" id="txtQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
 			                    <div class="value-button decrease-button btn-number1${cnt}" data-id="decrease" id="btnminus1" data-type="minus" data-field="quant[1]">-</div>
 			                    <div class="value-button increase-button btn-number1${cnt}" data-id="increase" id="btnplus1" data-type="plus" data-field="quant[1]">+</div>
@@ -1942,12 +1942,12 @@ namespace SlsTrSalesManager {
 		                </div>
 	                </td>  
                     <td>
-		                <div class="form-group"style="width: 84px;" >
+		                <div class="form-group"  >
 			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
                     <td>
-		                <div class="form-group"style="width: 84px;" >
+		                <div class="form-group" >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>
@@ -1958,17 +1958,17 @@ namespace SlsTrSalesManager {
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group" style="width: 84px;" >
+		                <div class="form-group"  >
 			              <input id="txtTotal${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group"style="width: 84px;" >
+		                <div class="form-group">
 			            <input id="txtTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
                     <td>
-		                <div class="form-group" style="width: 84px;" >
+		                <div class="form-group" >
 			              <input id="txtTotAfterTax${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
