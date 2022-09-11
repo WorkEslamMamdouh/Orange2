@@ -1676,7 +1676,7 @@ namespace Processes {
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
 		                <div class="form-group">
-			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circlebtn-minus"></i></span>
+			                <span id="btn_minus1${cnt}" class="minusCharges" ><i class="fas fa-minus-circle btn-minus"></i></span>
 		                </div>
 	                </td>
                     <td>
@@ -2045,6 +2045,7 @@ namespace Processes {
             $("#txt_StatusFlag1" + CountGridCharge).val("i"); //In Insert mode
             $("#btn_minus1" + CountGridCharge).removeClass("display_none");
             $("#btn_minus1" + CountGridCharge).removeAttr("disabled");
+            $(".minusCharges").removeClass("display_none");
             CountGridCharge += 1;
 
             Insert_Serial();
@@ -4426,7 +4427,7 @@ namespace Processes {
 
 
         $("#btnAddDetailsCharge").removeClass("display_none");
-        $(".minusCharges ").removeClass("display_none");
+        $(".minusCharges").removeClass("display_none");
 
 
         //$("#DivChargesShow").removeClass("disabledDiv");
@@ -4455,7 +4456,7 @@ namespace Processes {
     function btnBack_3_onclick() {
         if (flag_Add == true) {
 
-            $(".minusCharges ").addClass("display_none");
+            $(".minusCharges").addClass("display_none");
             $("#btnAddDetailsCharge").addClass("display_none");
             btnUpdate_3.classList.remove("display_none");
             btnSave_3.classList.add("display_none");
@@ -4469,7 +4470,7 @@ namespace Processes {
 
             if (flag_Success_3 == true) {
 
-                $(".minusCharges ").addClass("display_none");
+                $(".minusCharges").addClass("display_none");
                 $("#btnAddDetailsCharge").addClass("display_none");
                 btnUpdate_3.classList.remove("display_none");
                 btnSave_3.classList.add("display_none");
@@ -4480,7 +4481,7 @@ namespace Processes {
             }
             else {
 
-                $(".minusCharges ").addClass("display_none");
+                $(".minusCharges").addClass("display_none");
                 $("#btnAddDetailsCharge").addClass("display_none");
                 btnUpdate_3.classList.remove("display_none");
                 btnSave_3.classList.add("display_none");

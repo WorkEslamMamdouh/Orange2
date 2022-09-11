@@ -29940,6 +29940,13 @@ input[class=checkbox]:checked:before {
 }
 .account-menu ul {
     list-style: none;
+  
+}
+
+.main-menu {
+    list-style: none;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
     .account-menu ul.main-menu ul,
@@ -30380,7 +30387,23 @@ input[class=checkbox]:checked:before {
 }
 .table-responsive::-webkit-scrollbar-track {
     background-color: var(--bs-gray-300);
-    border-radius: 100px;
+    border-radius: 100px; 
 }
+
+.main-menu::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-menu::-webkit-scrollbar-track {
+    /*background-color: var(--Lighter-blue);*/
+    /*border-radius: 100px;*/
+}
+
+.main-menu::-webkit-scrollbar-thumb {
+    border-radius: 80px;
+    background-image: linear-gradient(180deg, var(--dark-blue) 0%, var(--dark-blue) 99%);
+}
+
+
 /*End Scroll Bar*/
 
