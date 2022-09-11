@@ -954,7 +954,8 @@ namespace AccTrReceiptNote {
 
         $('#txtCashTypeNew').prop("value", Selecteditem[0].CashType == null ? "null" : Selecteditem[0].CashType);
         $('#txt_BankAcc_Code').prop("value", Selecteditem[0].BankAcc_Code == null ? "null" : Selecteditem[0].BankAcc_Code);
-
+        $('#txt_BenName').prop("value", Selecteditem[0].BankName);
+         
         var trDate: string = DateFormat(Selecteditem[0].TrDate);
         var DueDate: string = DateFormat(Selecteditem[0].DueDate);
 
@@ -1329,6 +1330,7 @@ namespace AccTrReceiptNote {
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
+            Model.BankName = $('#txt_BankName').val();
 
         }
         else {
@@ -1349,6 +1351,7 @@ namespace AccTrReceiptNote {
             Model.RecPayTypeId = $('#txt_ReceiptNoteNew').val();
             //var beneficiary = $("#txt_ID_beneficiaryNew").val();
             var beneficiary = $("#txt_BenCode").val();
+            Model.BankName = $('#txt_BankName').val();
 
 
             if ($('#txt_ReceiptNoteNew').val() == "1") { beneficiary = PurchaserCustId; custId = beneficiary; vndid = null; BankCode = null; expid = null; fromBoxid = null; }
@@ -1376,8 +1379,7 @@ namespace AccTrReceiptNote {
 
         }
 
-
-        Model.BankName = '';
+         
 
     }
 
