@@ -379,7 +379,12 @@ namespace JournalVoucher {
         $('#spandiv_contentliest').removeClass('fa-caret-left');
         $('#spandiv_contentliest').addClass('fa-caret-down');
 
+        $("#divTemplateData").removeClass("display_none");
+
+        
+
         $(".BtnHide").removeAttr("disabled");
+
 
         $("#btnSaveTemp").addClass("display_none");
         $("#btnBackTemp").addClass("display_none");
@@ -414,6 +419,8 @@ namespace JournalVoucher {
 
 
         $('#DivTemplate').removeClass('showdiv');
+        $("#divTemplateData").removeClass("display_none");
+
         $('#spandiv_contentliest').removeClass('fa-caret-left');
         $('#spandiv_contentliest').addClass('fa-caret-down');
 
@@ -428,6 +435,7 @@ namespace JournalVoucher {
         $("#divGridShow").removeClass("display_none");
         $("#divTempHeader").removeClass("display_none");
         $("#divJournalDetail").addClass("display_none");
+        Back();
         InitializeGrid();
     }
     function btnBack_onclick() {
@@ -448,12 +456,15 @@ namespace JournalVoucher {
             DisableControls();
             Clear();
             $("#divJournalDetail").addClass("display_none");
+            Back();
         }
         //}
         $("#divFilter").removeClass("disabledDiv");
         $("#divGridShow").removeClass("disabledDiv");
 
         $('#DivTemplate').addClass('showdiv');
+        $("#divTemplateData").addClass("display_none");
+
         $('#spandiv_contentliest').addClass('fa-caret-left');
         $('#spandiv_contentliest').removeClass('fa-caret-down');
         GlobalTemplateID = 0;
@@ -2047,6 +2058,8 @@ namespace JournalVoucher {
                     DisableControls();
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
+                    $('#divTemplateData').addClass('showdiv');
+
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
                     Save_Succ_But();
@@ -2151,6 +2164,7 @@ namespace JournalVoucher {
                     DisableControls();
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
+                    $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
                     Save_Succ_But();

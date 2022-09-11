@@ -295,7 +295,7 @@ var ProcSalesRet;
         }
         else {
             EditFlag = true;
-            InsertFlag = false;
+            InsertFlag = true;
             btnProcessInvoiceSearch.disabled = true;
             $("#btnBack").removeClass("display_none");
             $("#btnSave").removeClass("display_none");
@@ -459,30 +459,8 @@ var ProcSalesRet;
             $("#btnProcessInvoiceSearch").attr("disabled", "disabled");
             $("#txtInvoiceDate").attr("disabled", "disabled");
             $("#chkActive").attr("disabled", "disabled");
-            try {
-                if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
-                    var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
-                    $("#txtCashAmount").prop("value", cashAmount);
-                }
-                else {
-                    $("#txtCashAmount").val('');
-                }
-            }
-            catch (e) {
-            }
-            $("#div_Data").html('');
-            for (var i = 0; i < SlsInvoiceItemsDetails.length; i++) {
-                BuildControls(i);
-            }
-            CountGrid = SlsInvoiceItemsDetails.length;
-            CountItems = SlsInvoiceItemsDetails.length;
-            txtInvoiceDate.value = DateFormat(InvoiceStatisticsModel[0].TrDate.toString());
-            if (InvoiceStatisticsModel[0].Status == 1) {
-                chkActive.checked = true;
-            }
-            else {
-                chkActive.checked = false;
-            }
+            Grid_RowDoubleClicked();
+            $("#divReturnDetails").removeClass("display_none");
         }
     }
     function btnShow_onclick() {
@@ -497,11 +475,13 @@ var ProcSalesRet;
         if (ddlOPerationMaster.value == "null" || ddlOPerationMaster.value == "") {
             DisplayMassage(" يجب اختيار العملية", "The process must be selected", MessageType.Worning);
             Errorinput(ddlOPerationMaster);
+            $("#divReturnDetails").addClass("display_none");
             Back();
         }
         else {
             if (chkOpenProcess.checked == false) {
                 DisplayMassage(" لا يمكن اضافه مرتجع علي العمليات المغلقة", "It is not possible to add a return on closed processes", MessageType.Worning);
+                $("#divReturnDetails").addClass("display_none");
                 Back();
             }
             else {
@@ -1051,6 +1031,7 @@ var ProcSalesRet;
                 }
             });
         }
+        InsertFlag = true;
     }
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt) {
@@ -1602,6 +1583,7 @@ var ProcSalesRet;
         }
     }
     function ddlOPerationMaster_onchange() {
+        Back();
         $("#divReturnDetails").addClass("display_none");
         if (ddlOPerationMaster.value == "null" || ddlOPerationMaster.value == "") {
             txtOperationStatusMaster.value = "";

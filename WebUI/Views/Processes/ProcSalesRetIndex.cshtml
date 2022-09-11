@@ -157,18 +157,24 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0">
-                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ReferenceNumber</label>
+                                <div class="col-9 col-md-8">
+                                    <input type="number" class="form-control" disabled name="" id="txtRefNo">
+                                </div>
+                                
+                                @*<label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_InvoiceNum</label>
                                 <div class="col-9 col-md-8">
                                     <input type="number" class="form-control" disabled name="" id="txtInvoiceNumber">
-                                </div>
+                                </div>*@
+
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row g-0 d-flex justify-content-center align-items-center">
-                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ReferenceNumber </label>
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_InvoiceNum </label>
                                 <div class="col-9 col-md-8">
                                     <div class="search-content">
-                                        <input type="text" class="form-control search-control" name="RefNO" id="txtRefNo">
+                                        <input type="text" class="form-control search-control" disabled name="Tr" id="txtInvoiceNumber">
                                         <button type="button" id="btnProcessInvoiceSearch" name="InvoiceSearch" class="btn btn-main btn-search">
                                             <i class="fas fa-search"></i>
                                         </button>
