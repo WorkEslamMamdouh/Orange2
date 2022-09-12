@@ -3,12 +3,14 @@ const loginBtn = document.getElementById('login_');
 const loginModel = document.getElementById('cta');
 const closeBtn = document.getElementById('close-login');
 const btnOk = document.getElementById('btnOk');
+const btnBack = document.getElementById('btnBack');
 if(loginBtn){
     loginBtn.addEventListener('click', () =>{
         loginModel.classList.remove('display_none');
         loginModel.classList.add('show');
     })
 }
+
 if(closeBtn){
     closeBtn.addEventListener('click', () =>{
         loginModel.classList.add("display_none");
