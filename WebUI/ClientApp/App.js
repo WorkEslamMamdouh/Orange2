@@ -405,6 +405,7 @@ var Ajax = {
     Call: function (settings) {
         try {
             //// 
+            CheckTime();
             var json = $.ajax({
                 url: settings.url,
                 data: settings.data,
@@ -420,7 +421,7 @@ var Ajax = {
         }
     },
     CallAsync: function (settings) {
-        //CheckTime();
+        CheckTime();
         //run_waitMe();
         $.ajax({
             type: settings.type,
@@ -439,7 +440,7 @@ var Ajax = {
         });
     },
     Callsync: function (settings) {
-        //CheckTime();
+        CheckTime();
         //run_waitMe();
         $.ajax({
             type: settings.type,
@@ -1495,40 +1496,38 @@ function convertToG(date) {
         });
     return result;
 }
-function CheckTime() {
-    try {
-        var SysSession = GetSystemEnvironment();
-        var timelogin;
-        var dt = new Date();
-        var timenow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-        var LastAccess = localStorage.getItem("LastAccess");
-        var SysTimeOut = localStorage.getItem("startTimeOut");
-        timelogin = LastAccess;
-        var timeout = CompareTime(timenow, timelogin);
-        localStorage.setItem("LastAccess", timenow);
-        var newSysTimeOut;
-        try {
-            if (SysSession.I_Control[0].SysTimeOut == null) {
-                newSysTimeOut = 10;
-            }
-            else {
-                newSysTimeOut = SysSession.I_Control[0].SysTimeOut;
-            }
-        }
-        catch (e) {
-            newSysTimeOut = 10;
-        }
-        if (timeout > newSysTimeOut || timeout < 0)
-            MessageBox.Show("لقد استنفذت وقت الجلسة، يجب معاودة الدخول مرة اخري ", "System Time out , Please relogin ", function () {
-                document.cookie = "Inv1_systemProperties=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                //document.cookie = "Inv1_Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                //document.cookie = "Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                window.location.href = "/Login/HomePage";
-            }), 1000;
-    }
-    catch (e) {
-    }
-}
+//function CheckTime() {
+//    try {
+//        var SysSession = GetSystemEnvironment();
+//        var timelogin;
+//        var dt = new Date();
+//        var timenow = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+//        var LastAccess = localStorage.getItem("LastAccess");
+//        var SysTimeOut = localStorage.getItem("startTimeOut");
+//        timelogin = LastAccess
+//        var timeout = CompareTime(timenow, timelogin);
+//        localStorage.setItem("LastAccess", timenow)
+//        var newSysTimeOut;
+//        try {
+//            if (SysSession.I_Control[0].SysTimeOut == null) {
+//                newSysTimeOut = 10;
+//            }
+//            else {
+//                newSysTimeOut = SysSession.I_Control[0].SysTimeOut;
+//            }
+//        } catch (e) {
+//            newSysTimeOut = 10;
+//        }
+//        if (timeout > newSysTimeOut || timeout < 0)
+//            MessageBox.Show("لقد استنفذت وقت الجلسة، يجب معاودة الدخول مرة اخري ", "System Time out , Please relogin ", function () {
+//                document.cookie = "Inv1_systemProperties=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+//                //document.cookie = "Inv1_Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+//                //document.cookie = "Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+//                window.location.href = "/Login/HomePage";
+//            }), 1000;
+//    } catch (e) {
+//    }
+//}
 function addDaysOrMonth(date, days, Month) {
     var result = new Date(date);
     days != 0 ? result.setDate(result.getDate() + days) : days = 0;
@@ -1677,6 +1676,7 @@ function printDiv(divName) {
     //document.body.innerHTML = printContents;
     //window.print();
     //document.body.innerHTML = originalContents;
+    debugger;
     var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
     sOption += "scrollbars=yes,width=775,height=600,left=10,top=25";
     var mywindow = window.open('', 'PRINT', sOption);
@@ -1817,5 +1817,24 @@ function Resizable_Table() {
         that.data('bootstrap.table').options.onResizableResize.apply(e);
     };
     $('[data-toggle="table"]').bootstrapTable();
+}
+var outUesr = 0;
+function CheckTime() {
+    var sys = new SystemTools();
+    try {
+        var CheckLogin = document.getElementById('btnLogin');
+        if (CheckLogin != null) {
+            return;
+        }
+        var CheckUesr = sys.SysSession.CurrentEnvironment.UserCode;
+    }
+    catch (e) {
+        outUesr += 1;
+        if (outUesr == 2) {
+            localStorage.setItem("OutUesr", "1");
+            window.open(Url.Action("LoginIndex", "Login"), "_self");
+        }
+        return;
+    }
 }
 //# sourceMappingURL=App.js.map

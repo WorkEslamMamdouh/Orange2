@@ -58,6 +58,18 @@ var LoginComponent;
             //txtYear.value = SharedWork.Session.CurrentYear;
             //cmbLanguage.value = SharedWork.Session.Language;
         }
+        try {
+            var OutUesr = localStorage.getItem("OutUesr");
+            if (OutUesr == "1") {
+                localStorage.setItem("OutUesr", "0");
+                setTimeout(function () {
+                    alert(" لقد استنفذت وقت الجلسة في شاشه اخري الرجاء تسجيل الدخول مره اخري");
+                }, 700);
+            }
+        }
+        catch (e) {
+            localStorage.setItem("OutUesr", "");
+        }
     }
     LoginComponent.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {

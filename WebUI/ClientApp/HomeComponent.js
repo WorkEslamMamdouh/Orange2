@@ -1,13 +1,19 @@
 $(document).ready(function () {
-    //HomeComponent.Language();
-    HomeComponent.InitalizeComponent();
+    try {
+        HomeComponent.InitalizeComponent();
+    }
+    catch (e) {
+        window.open(Url.Action("LoginIndex", "Login"), "_self");
+    }
 });
 var HomeComponent;
 (function (HomeComponent) {
-    //let res: any = GetResourceList("");
+    //let res: any = GetResourceList("");d
+    debugger;
     var sys = new SystemTools();
     var ddbra;
     ddbra = document.getElementById("ddbra");
+    var SelectSession;
     var btnDashboard;
     var btn_loguotuser;
     var SysSession = GetSystemSession('Home');
@@ -104,6 +110,11 @@ var HomeComponent;
         });
     }
     HomeComponent.OpenReportsPopup = OpenReportsPopup;
+    function OutSessionTimer() {
+        if (SelectSession.value == '2') {
+            LogoutUserApi();
+        }
+    }
     function InitalizeComponent() {
         $("#ddbra").on('change', function () {
             selectedbar = $('#ddbra').val();
@@ -113,6 +124,12 @@ var HomeComponent;
             OpenPage(Modules.Home);
         });
         Getbranch();
+        //------------------------------------------------------NewSession---------------------------------------
+        $('#idSession').val(sys.SysSession.CurrentEnvironment.I_Control[0].SysTimeOut);
+        $('#SelectSession option[value=1]').prop('selected', 'selected').change();
+        SelectSession = document.getElementById('SelectSession');
+        SelectSession.onchange = OutSessionTimer;
+        //---------------------------------------------
         $('#sidebarCollapse').on('click', function () {
             $(".left-sidebar-pro").css({ 'display': 'block' });
         });
@@ -275,22 +292,26 @@ var HomeComponent;
                 li_T = document.getElementById("btn" + singleUserModule.MODULE_CODE + "T");
             }
             if (li != null) {
-                if (singleUserModule != null) {
-                    if (singleUserModule.Access === false) {
-                        li.style.display = "none";
-                        li_T.style.display = "none";
+                try {
+                    if (singleUserModule != null) {
+                        if (singleUserModule.Access === false) {
+                            li.style.display = "none";
+                            li_T.style.display = "none";
+                        }
+                        if (singleUserModule.AVAILABLE === false) {
+                            li.style.display = "none";
+                            li_T.style.display = "none";
+                        }
                     }
-                    if (singleUserModule.AVAILABLE === false) {
-                        li.style.display = "none";
-                        li_T.style.display = "none";
+                    else {
+                        var key = li.getAttribute("key");
+                        li.style.display = "";
+                        li_T.style.display = "";
+                        li.className = "liItem";
+                        li_T.className = "liItem";
                     }
                 }
-                else {
-                    var key = li.getAttribute("key");
-                    li.style.display = "";
-                    li_T.style.display = "";
-                    li.className = "liItem";
-                    li_T.className = "liItem";
+                catch (e) {
                 }
             }
             else {
