@@ -90,6 +90,8 @@ namespace Dashboard {
 
                 if (DashBalances.length > 0) {
 
+                     DashBalances[0].VndOp = (DashBalances[0].VndOp * -1);
+
                     $('#BalancesSales').html('رصيد سابق: ' + DashBalances[0].CustOp.toLocaleString('en-US', { maximumFractionDigits: 1 }));
                     $('#BalancesPurchase').html('رصيد سابق: ' + DashBalances[0].VndOp.toLocaleString('en-US', { maximumFractionDigits: 1 }));
 
@@ -233,7 +235,7 @@ namespace Dashboard {
 
     }
     function DisplayGrid(i: number, _Data: Iproc_Dash, _Type: number) {
-        debugger
+         
         $('#titel' + i).addClass('th_Style');
         let titel = '';
 
@@ -270,22 +272,22 @@ namespace Dashboard {
 
         if (_Type == 1) // sales
         {
+            
+            if (_Data.rowno != 1 ) {
 
-            if (_Data.rowno == 3 || _Data.rowno == 4) {
-
-                totVal1 += (_Data.Val1 * -1);
-                totVal2 += (_Data.Val2 * -1);
-                totVal3 += (_Data.Val3 * -1);
-                totVal4 += (_Data.Val4 * -1);
-                totVal5 += (_Data.Val5 * -1);
-                totVal6 += (_Data.Val6 * -1);
-                totVal7 += (_Data.Val7 * -1);
-                totVal8 += (_Data.Val8 * -1);
-                totVal9 += (_Data.Val9 * -1);
-                totVal10 += (_Data.Val10 * -1);
-                totVal11 += (_Data.Val11 * -1);
-                totVal12 += (_Data.Val12 * -1);
-                totalVal += (_Data.Total * -1);
+                totVal1 += (_Data.Val1 * (_Data.rowno == 3 ? -1 : 1))
+                totVal2 += (_Data.Val2 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal3 += (_Data.Val3 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal4 += (_Data.Val4 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal5 += (_Data.Val5 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal6 += (_Data.Val6 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal7 += (_Data.Val7 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal8 += (_Data.Val8 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal9 += (_Data.Val9 * (_Data.rowno == 3 ? -1 : 1))
+                totVal10 += (_Data.Val10 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal11 += (_Data.Val11 * ( _Data.rowno == 3 ?   -1 : 1))
+                totVal12 += (_Data.Val12 * (_Data.rowno == 3 ? -1 : 1))
+                totalVal += (_Data.Total * (_Data.rowno == 3 ? -1 : 1))
                 totplus = 1;
             }
 
@@ -295,42 +297,42 @@ namespace Dashboard {
 
         if (_Type == 2) // Purchase
         {
+            debugger
+            if (_Data.rowno != 1 && _Data.rowno != 2 ) {
 
-            if (_Data.rowno == 6 || _Data.rowno == 7) {
-
-                totVal1 += (_Data.Val1 * -1);
-                totVal2 += (_Data.Val2 * -1);
-                totVal3 += (_Data.Val3 * -1);
-                totVal4 += (_Data.Val4 * -1);
-                totVal5 += (_Data.Val5 * -1);
-                totVal6 += (_Data.Val6 * -1);
-                totVal7 += (_Data.Val7 * -1);
-                totVal8 += (_Data.Val8 * -1);
-                totVal9 += (_Data.Val9 * -1);
-                totVal10 += (_Data.Val10 * -1);
-                totVal11 += (_Data.Val11 * -1);
-                totVal12 += (_Data.Val12 * -1);
-                totalVal += (_Data.Total * -1);
+                totVal1 += (_Data.Val1 * (_Data.rowno == 6 ? -1 : 1))
+                totVal2 += (_Data.Val2 * (_Data.rowno == 6 ? -1 : 1))
+                totVal3 += (_Data.Val3 * (_Data.rowno == 6 ? -1 : 1))
+                totVal4 += (_Data.Val4 * (_Data.rowno == 6 ? -1 : 1))
+                totVal5 += (_Data.Val5 * (_Data.rowno == 6 ? -1 : 1))
+                totVal6 += (_Data.Val6 * (_Data.rowno == 6 ? -1 : 1))
+                totVal7 += (_Data.Val7 * (_Data.rowno == 6 ? -1 : 1))
+                totVal8 += (_Data.Val8 * (_Data.rowno == 6 ? -1 : 1))
+                totVal9 += (_Data.Val9 * (_Data.rowno == 6 ? -1 : 1))
+                totVal10 += (_Data.Val10 *(_Data.rowno == 6 ? -1 : 1))
+                totVal11 += (_Data.Val11 *(_Data.rowno == 6 ? -1 : 1))
+                totVal12 += (_Data.Val12 * (_Data.rowno == 6 ? -1 : 1))
+                totalVal += (_Data.Total * (_Data.rowno == 6 ? -1 : 1))
                 totplus = 1;
             }
 
         }
 
-        if (totplus == 0) {
-            totVal1 += _Data.Val1;
-            totVal2 += _Data.Val2;
-            totVal3 += _Data.Val3;
-            totVal4 += _Data.Val4;
-            totVal5 += _Data.Val5;
-            totVal6 += _Data.Val6;
-            totVal7 += _Data.Val7;
-            totVal8 += _Data.Val8;
-            totVal9 += _Data.Val9;
-            totVal10 += _Data.Val10;
-            totVal11 += _Data.Val11;
-            totVal12 += _Data.Val12;
-            totalVal += _Data.Total;
-        }
+        //if (totplus == 0) {
+        //    totVal1 += _Data.Val1;
+        //    totVal2 += _Data.Val2;
+        //    totVal3 += _Data.Val3;
+        //    totVal4 += _Data.Val4;
+        //    totVal5 += _Data.Val5;
+        //    totVal6 += _Data.Val6;
+        //    totVal7 += _Data.Val7;
+        //    totVal8 += _Data.Val8;
+        //    totVal9 += _Data.Val9;
+        //    totVal10 += _Data.Val10;
+        //    totVal11 += _Data.Val11;
+        //    totVal12 += _Data.Val12;
+        //    totalVal += _Data.Total;
+        //}
 
 
     }
@@ -338,22 +340,22 @@ namespace Dashboard {
         InitializeGrid(cnt, _Type);
         $('#titel' + cnt).addClass('th_Style');
 
-  
 
+        debugger
         $('#titel' + cnt).html('الرصيد');
-        $('#Val1_' + cnt).html(((totVal1.RoundToNum(2)) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val2_' + cnt).html((Number(totVal2.RoundToSt(2)) + Number(totVal1.RoundToSt(2)) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val3_' + cnt).html((Number(totVal3.RoundToSt(2)) + Number($('#Val2_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val4_' + cnt).html((Number(totVal4.RoundToSt(2)) + Number($('#Val3_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val5_' + cnt).html((Number(totVal5.RoundToSt(2)) + Number($('#Val4_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val6_' + cnt).html((Number(totVal6.RoundToSt(2)) + Number($('#Val5_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val7_' + cnt).html((Number(totVal7.RoundToSt(2)) + Number($('#Val6_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val8_' + cnt).html((Number(totVal8.RoundToSt(2)) + Number($('#Val7_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val9_' + cnt).html((Number(totVal9.RoundToSt(2)) + Number($('#Val8_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val10_' + cnt).html((Number(totVal10.RoundToSt(2)) + Number($('#Val9_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val11_' + cnt).html((Number(totVal11.RoundToSt(2)) + Number($('#Val10_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Val12_' + cnt).html((Number(totVal12.RoundToSt(2)) + Number($('#Val11_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
-        $('#Total_' + cnt).html((Number(totalVal.RoundToSt(2)) + Number($('#Val12_' + cnt).html()) + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
+        $('#Val1_' + cnt).html(((totVal1.RoundToNum(2))        + (_Type == 1 ? DashBalances[0].CustOp : DashBalances[0].VndOp)).RoundToSt(2));
+        $('#Val2_' + cnt).html((Number(totVal2.RoundToSt(2))   + Number($('#Val1_' + cnt).html())).RoundToSt(2));
+        $('#Val3_' + cnt).html((Number(totVal3.RoundToSt(2))   + Number($('#Val2_' + cnt).html())).RoundToSt(2));
+        $('#Val4_' + cnt).html((Number(totVal4.RoundToSt(2))   + Number($('#Val3_' + cnt).html())).RoundToSt(2));
+        $('#Val5_' + cnt).html((Number(totVal5.RoundToSt(2))   + Number($('#Val4_' + cnt).html())).RoundToSt(2));
+        $('#Val6_' + cnt).html((Number(totVal6.RoundToSt(2))   + Number($('#Val5_' + cnt).html())).RoundToSt(2));
+        $('#Val7_' + cnt).html((Number(totVal7.RoundToSt(2))   + Number($('#Val6_' + cnt).html())).RoundToSt(2));
+        $('#Val8_' + cnt).html((Number(totVal8.RoundToSt(2))   + Number($('#Val7_' + cnt).html())).RoundToSt(2));
+        $('#Val9_' + cnt).html((Number(totVal9.RoundToSt(2))   + Number($('#Val8_' + cnt).html())).RoundToSt(2));
+        $('#Val10_' + cnt).html((Number(totVal10.RoundToSt(2)) + Number($('#Val9_' + cnt).html()) ).RoundToSt(2));
+        $('#Val11_' + cnt).html((Number(totVal11.RoundToSt(2)) + Number($('#Val10_' + cnt).html())).RoundToSt(2));
+        $('#Val12_' + cnt).html((Number(totVal12.RoundToSt(2)) + Number($('#Val11_' + cnt).html())).RoundToSt(2));
+        $('#Total_' + cnt).html((Number($('#Val12_' + cnt).html())).RoundToSt(2));
 
 
 
@@ -478,7 +480,7 @@ namespace Dashboard {
         }
 
         if (Ser != 1) {
-            debugger
+             
 
             let BigEndBalance = _Type == 1 ? BigBalanceBank : BigBalanceCash
 
