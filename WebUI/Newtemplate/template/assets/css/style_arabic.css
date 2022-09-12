@@ -28466,7 +28466,7 @@ div.tagsinput {
 
         .sidebar .nav .nav-item.profile .profile-desc .profile-pic .count-indicator .count {
             position: absolute;
-            right: 66%;
+            right: 51%;
             width: 10px;
             height: 10px;
             color: #ffffff;
@@ -28474,7 +28474,7 @@ div.tagsinput {
             text-align: center;
             font-size: .625rem;
             line-height: 1.5;
-            top: 26px;
+            top: 15px;
             border: 2px solid #2c2e33;
         }
 

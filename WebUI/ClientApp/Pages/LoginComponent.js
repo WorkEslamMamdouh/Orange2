@@ -19,6 +19,7 @@ var LoginComponent;
     var cmbBranch;
     var cmbCompany;
     var login_;
+    var btnBack;
     var vSysTimeOut = " 30";
     var compData = Array();
     var SystemEnv = new SystemEnvironment();
@@ -30,6 +31,7 @@ var LoginComponent;
         btnLogin = document.getElementById("btnLogin");
         //btnBack = document.getElementById("btnBack");
         login_ = document.getElementById("login_");
+        btnBack = document.getElementById("btnBack");
         cmbLanguage = document.getElementById("cmbLanguage");
         txtYear = document.getElementById("txtYear");
         hLoggedName = DocumentActions.GetElementById("hLoggedName");
@@ -40,6 +42,7 @@ var LoginComponent;
         //btnBack.addEventListener("click", GoBack);
         btnLogin.addEventListener("click", Login);
         login_.addEventListener("click", Gologin);
+        btnBack.addEventListener("click", GoBack);
         cmbCompany.onchange = function () { cmbCompany_Onchange(Number(cmbCompany.value), SystemEnv.ScreenLanguage); };
         //MessageBox
         var loginData = localStorage.getItem("Inv1_Login_Data");
@@ -390,7 +393,11 @@ var LoginComponent;
     }
     function GoBack() {
         $("#divCompanies").addClass("display_none");
-        $("#div_pass").addClass("display_none");
+        $("#div_pass").removeClass("display_none");
+        $("#btn_login_2").removeClass("display_none");
+        $("#btnLogin").removeClass("display_none");
+        $("#divCompanies").attr("style", "");
+        $("#div_pass").attr("style", "");
     }
     function Gologin() {
         $("#div_pass").removeClass("display_none");
