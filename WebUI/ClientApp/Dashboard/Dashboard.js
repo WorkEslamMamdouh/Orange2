@@ -114,6 +114,7 @@ var Dashboard;
                 if (_Type != 0) {
                     DisplayTotal(Number((CountGrid + 1) + '' + _Type + ''), _Type);
                 }
+                DisplayOpenOperation();
             }
         });
     }
@@ -293,6 +294,14 @@ var Dashboard;
         $('#Val11_' + cnt).html(Number($('#Val11_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
         $('#Val12_' + cnt).html(Number($('#Val12_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
         $('#Total_' + cnt).html(Number($('#Total_' + cnt).html()).toLocaleString('en-US', { maximumFractionDigits: 1 }));
+    }
+    function DisplayOpenOperation() {
+        for (var i = 2; i <= 12; i++) {
+            var Aft = i - 1;
+            var NumOpen = (Number($('#Val' + (Aft) + '_20').html()) + Number($('#Val' + i + '_0').html())) - Number($('#Val' + i + '_10').html());
+            $('#Val' + i + '_20').html('' + NumOpen + '');
+        }
+        $('#Total_20').html($('#Val12_20').html().toString());
     }
     function GetDataCashAndBank() {
         Ajax.Callsync({

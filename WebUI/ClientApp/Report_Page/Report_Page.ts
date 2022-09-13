@@ -33,7 +33,7 @@ namespace Report_Page {
     function InitalizeControls() {
 
         btnPDF = document.getElementById("btnPDF") as HTMLButtonElement;
-        btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+        btnPrint = document.getElementById("btnPrintPage") as HTMLButtonElement;
 
 
     }
@@ -128,7 +128,7 @@ namespace Report_Page {
 
     }
     function print() {
-
+      
         printDiv("printableArea");
 
     }

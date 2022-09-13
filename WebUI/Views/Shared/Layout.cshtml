@@ -678,7 +678,7 @@
                                 <a class="new-tab-link" id="btnDefStoreT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnDefStore" class="nav-link" href="#">@SystemResource.Men_StkDefStore</a>
                             </li>
-                        
+
                             <li id="" key="TranPosting" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnTranPostingT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnTranPosting" class="nav-link" href="#">@SystemResource.Transfer_accounts</a>
@@ -759,6 +759,19 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav navbar-nav-right">
+
+                        <li class="nav-item nav-settings  d-block">
+                            @*------------------------------------------------------NewSession---------------------------------------*@
+                            <span id="timeLeft" class="admin-name   display_none" style="color: red;font-weight: bold;margin-right: -35%;font-size: 20px;"></span>
+                            @*<label id="timeLeft" style="color: red" class=" "></label>*@
+                            <input id="idSession" value="10" class="display_none" />
+                            <select id="SelectSession" class="display_none">
+                                <option value="0">off</option>
+                                <option value="1">on</option>
+                                <option value="2">out</option>
+                            </select>
+                            @*---------------------------------------------------------------------------------------------------------------*@
+                        </li>
                         <li class="nav-item nav-settings  d-block">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-chart-bar" id="btnDashboard"></i>
@@ -969,7 +982,7 @@
                     <h5 class="modal-title" id="MessageBoxTitle">حذف!!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body">
                     <div class="col-12"> <h6 id="MessageBoxMessage" class="">هل تريد حقا الحذف ؟</h6></div>
                 </div>
                 <div class="modal-footer">
@@ -1090,6 +1103,10 @@
 
 
     @*@Scripts.Render("~/Bundles/AppScript2")*@
+
+
+
+
     <script>
         $("#NewAdd_Falg").val(0);
         $("#Mod_Flag").val(0);
@@ -1193,6 +1210,154 @@
     </script>
 
     <script src="~/Style_design/LodBut/Loder.js"></script>
+
+
+
+
+
+    @*//------------------------------------------------------NewSession---------------------------------------*@
+    <div class="modal fade messagealert" id="modalSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="MessageBoxTitle">الوقت!!</h4>
+                </div>
+                <div class="modal-body" style="max-height:200px; overflow:auto;">
+                    <div class="col-xs-7"> <h3 id="MessageBoxMessage">لقد استنفذت وقت الجلسة هل تريد الاستمرار </h3></div>
+                    <div class="col-xs-5 text-center">
+                        <i class="glyphicon btn-danger"> </i>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="SessionBoxOk" class="btn btn-danger">نعم</button>
+                    <button type="button" id="SessionBoxCancel" class="btn btn-warning" data-dismiss="modal">لا</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        var timeInSecondsAfterSessionOut = 0;
+        $(function () {
+            $("body").on('mousemove', function () {
+                $("#timeLeft").addClass('display_none');
+                ResetThisSession();
+            });
+        });
+
+        $('#SelectSession').on('change', function () {
+
+
+            timeInSecondsAfterSessionOut = Number($('#idSession').val()) * 60; // change this to change session time out (in seconds).
+
+            $("#timeLeft").html(timeInSecondsAfterSessionOut);
+
+        });
+
+
+
+        timeInSecondsAfterSessionOut = Number($('#idSession').val()) * 60; // change this to change session time out (in seconds).
+
+        $("#timeLeft").html(timeInSecondsAfterSessionOut);
+        var secondTick = 0;
+
+        StartThisSessionTimer();
+
+
+
+
+        function ResetThisSession() {
+            secondTick = 0;
+        }
+
+        var SessionBoxOk = document.getElementById("SessionBoxOk");
+        var SessionBoxCancel = document.getElementById("SessionBoxCancel");
+
+        function StartThisSessionTimer() {
+
+            secondTick++;
+            var timeLeft = ((timeInSecondsAfterSessionOut - secondTick) / 60).RoundToSt(0); // in minutes
+            timeLeft = timeInSecondsAfterSessionOut - secondTick; // override, we have 30 secs only
+
+            if (timeLeft == 9) {
+                $("#timeLeft").removeClass('display_none')
+            }
+            $("#timeLeft").html(timeLeft);
+
+            if (secondTick > timeInSecondsAfterSessionOut) {
+                clearTimeout(tick);
+
+                var chak = false;
+
+                $("#modalSession").modal("show");
+                $("#timeLeft").addClass('display_none');
+                $("#" + SessionBoxOk.id).click(() => {
+
+                    $("#timeLeft").addClass('display_none')
+                    secondTick = 0;
+                    $("#modalSession").modal("hide");
+                    chak = true;
+
+                });
+                $("#" + SessionBoxCancel.id).click(() => {
+
+                    $('#SelectSession option[value=2]').prop('selected', 'selected').change();
+                    $("#modalSession").modal("hide");
+                    chak = false;
+
+                });
+
+                setTimeout(function () {
+
+                    if (chak == false) {
+                        $('#SelectSession option[value=2]').prop('selected', 'selected').change();
+                    }
+
+                }, 10000);
+
+            }
+            tick = setTimeout("StartThisSessionTimer()", 1000);
+        }
+
+        $(document).ready(function () {
+            //$('select').val('null').select2().css("width", "100%");
+
+            $(window).load(function () {
+                $('#MainLoading').fadeOut(1000, function () { $('#MainLoading').remove(); });
+            });
+
+            ChangeColorOfLabel();
+        });
+
+        function ChangeColorOfLabel() {
+            try {
+                let allInputCheckbox = $("input[type='checkbox");
+                let allInputRadio = $("input[type='radio");
+                for (var i = 0; i < allInputCheckbox.length; i++) {
+                    $("label[for=" + allInputCheckbox[i].id + "]").css("color", "#e91a1a");
+                }
+                for (var i = 0; i < allInputRadio.length; i++) {
+                    $("label[for=" + allInputRadio[i].id + "]").css("color", "#e91a1a");
+                }
+            } catch (e) {
+
+            }
+        }
+    </script>
+    @*----------------------------------------------------------------------*@
+
 
 
 </body>

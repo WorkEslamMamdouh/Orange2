@@ -22,7 +22,7 @@ var Report_Page;
     Report_Page.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         btnPDF = document.getElementById("btnPDF");
-        btnPrint = document.getElementById("btnPrint");
+        btnPrint = document.getElementById("btnPrintPage");
     }
     function InitalizeEvents() {
         btnPrint.onclick = print;

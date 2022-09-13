@@ -1,16 +1,21 @@
 ﻿
 $(document).ready(() => {
-    //HomeComponent.Language();
-    HomeComponent.InitalizeComponent();
- 
+    try {
+
+        HomeComponent.InitalizeComponent();
+    } catch (e) {
+        window.open(Url.Action("LoginIndex", "Login"), "_self");
+
+    }
 });
  
 namespace HomeComponent {
-     //let res: any = GetResourceList("");
+    //let res: any = GetResourceList("");d
+    debugger
     var sys: SystemTools = new SystemTools();
     var ddbra: HTMLSelectElement;
     ddbra = document.getElementById("ddbra") as HTMLSelectElement;
-    
+    var SelectSession: HTMLSelectElement;
     var btnDashboard: HTMLButtonElement; 
     var btn_loguotuser: HTMLButtonElement;
     var SysSession: SystemSession = GetSystemSession('Home');
@@ -120,7 +125,15 @@ namespace HomeComponent {
             }
         });
     }
-     
+
+
+    function OutSessionTimer() {
+        if (SelectSession.value == '2') {
+            LogoutUserApi();
+        }
+    }
+
+
     export function InitalizeComponent() {
 
 
@@ -134,6 +147,15 @@ namespace HomeComponent {
 
         });
         Getbranch();
+
+        //------------------------------------------------------NewSession---------------------------------------
+        $('#idSession').val(sys.SysSession.CurrentEnvironment.I_Control[0].SysTimeOut);
+        $('#SelectSession option[value=1]').prop('selected', 'selected').change();
+        
+        SelectSession = document.getElementById('SelectSession') as HTMLSelectElement;
+        SelectSession.onchange = OutSessionTimer;
+        //---------------------------------------------
+
 
         $('#sidebarCollapse').on('click', function () {
             $(".left-sidebar-pro").css({ 'display': 'block' });
@@ -341,26 +363,30 @@ namespace HomeComponent {
             
 
             if (li != null) {
-                if (singleUserModule != null) {
-                    if (singleUserModule.Access === false) {
+                try {
+                    if (singleUserModule != null) {
+                        if (singleUserModule.Access === false) {
 
-                        li.style.display = "none";
-                        li_T.style.display = "none";
+                            li.style.display = "none";
+                            li_T.style.display = "none";
+                        }
+                        if (singleUserModule.AVAILABLE === false) {
+                            li.style.display = "none";
+                            li_T.style.display = "none";
+                        }
                     }
-                    if (singleUserModule.AVAILABLE === false)
-                    {
-                        li.style.display = "none";
-                        li_T.style.display = "none";
+                    else {
+                        let key: string = li.getAttribute("key");
+                        li.style.display = "";
+                        li_T.style.display = "";
+                        li.className = "liItem";
+                        li_T.className = "liItem";
                     }
-                }
-                else {
-                    let key: string = li.getAttribute("key");
-                    li.style.display = "";
-                    li_T.style.display = "";
-                    li.className = "liItem";
-                    li_T.className = "liItem";
-                }
 
+                } catch (e) {
+
+                }
+               
  
 
             } else {
