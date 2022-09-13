@@ -97,6 +97,7 @@ var SlsTrSalesManager;
     var btn_Approveprice;
     var btn_Exit_Approveprice;
     //print buttons 
+    var btnPrintsFrom_To;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -232,6 +233,7 @@ var SlsTrSalesManager;
         btn_Approveprice = document.getElementById("btn_Approveprice");
         btn_Exit_Approveprice = document.getElementById("btn_Exit_Approveprice");
         //print 
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
@@ -271,6 +273,7 @@ var SlsTrSalesManager;
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onchange = _SearchBox_Change;
         //searchbutmemreport.onkeyup = _SearchBox_Change1;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
         btnCustLastPrice.onclick = LastPrice_onclick;
@@ -3388,6 +3391,132 @@ var SlsTrSalesManager;
                 var result = d;
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        if (($('#ToNum').val() == 0 && $('#fromNum').val() == 0) || ($('#ToNum').val() == '' && $('#fromNum').val() == '')) {
+            Errorinput($('#ToNum'));
+            Errorinput($('#fromNum'));
+            return;
+        }
+        if (!SysSession.CurrentPrivileges.PrintOut)
+            return;
+        var rp = new ReportParameters();
+        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
+        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
+        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
+        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
+        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
+        rp.Tokenid = SysSession.CurrentEnvironment.Token;
+        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+        rp.BraNameA = SysSession.CurrentEnvironment.BranchName;
+        rp.BraNameE = SysSession.CurrentEnvironment.BranchName;
+        rp.DocPDFFolder = SysSession.CurrentEnvironment.I_Control[0].DocPDFFolder;
+        rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
+        rp.fromNum = Number($('#fromNum').val());
+        rp.ToNum = Number($('#ToNum').val());
+        rp.FinYear = Number(SysSession.CurrentEnvironment.CurrentYear);
+        Ajax.CallAsync({
+            url: Url.Action("Prnt_From_To", "GeneralRep"),
+            data: rp,
+            success: function (d) {
+                var result = d;
+                debugger;
+                var InvPDFS = JSON.parse(result);
+                DownloadInvTaxPdfNew(InvPDFS, 1);
+                //for (var i = 0; i < InvPDFS.length; i++) {
+                //    console.log(InvPDFS[i]);
+                //    DownloadInvTaxPdf(InvPDFS[i], 1)
+                //}
+            }
+        });
+    }
+    function DownloadInvTaxPdf(result, TrNo) {
+        var bytes = _base64ToArrayBuffer(result);
+        saveByteArray("Invoice (" + TrNo + ")", bytes);
+    }
+    function saveByteArray(reportName, bytes) {
+        debugger;
+        //fetch("data:application/pdf;base64," + bytes)
+        //    .then(function (resp) { return resp.blob() })
+        //    .then(function (blob) {
+        //        var link = document.createElement('a');
+        //        link.href = window.URL.createObjectURL(blob);
+        //        var fileName = reportName;
+        //        link.download = fileName;
+        //        link.click();
+        //    });
+        //debugger
+        //var blob = new Blob([bytes], { type: "application/pdf" });
+        //var link = document.createElement('a');
+        //link.href = window.URL.createObjectURL(blob);
+        //var fileName = reportName;
+        //link.download = fileName;
+        //link.click();
+        debugger;
+        for (var i = 1; i < bytes.length; i++) {
+            var link = document.createElement('a');
+            var blob = new Blob([bytes[i]], { type: "application/pdf" });
+            link.href = window.URL.createObjectURL(blob);
+            var fileName = reportName;
+            link.download = fileName;
+            link.click();
+        }
+        debugger;
+    }
+    ;
+    function bin2String(array) {
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            result += String.fromCharCode(parseInt(array[i], 2));
+        }
+        return result;
+    }
+    function DownloadInvTaxPdfNew(result, TrNo) {
+        var bytes = _base64ToArrayBufferNew_1(result);
+        debugger;
+        saveByteArray("Invoice (" + TrNo + ")", bytes);
+    }
+    function _base64ToArrayBufferNew(base64) {
+        var Listbytes = new Array();
+        var Allbytes;
+        var u = 0;
+        var lenS = 0;
+        var binary_string_S = "";
+        for (var i = 0; i < base64.length; i++) {
+            var binary_string = window.atob(base64[i]);
+            binary_string_S = binary_string_S + " " + binary_string;
+            //var len = binary_string.length;
+            //lenS += len;
+        }
+        var len = binary_string_S.length;
+        Allbytes = new Uint16Array(len);
+        console.log(binary_string_S);
+        for (var x = 0; x < len; x++) {
+            Allbytes[x] = binary_string_S.charCodeAt(x);
+        }
+        debugger;
+        //return bytes.buffer;
+        return Allbytes.buffer;
+    }
+    function _base64ToArrayBufferNew_1(base64) {
+        var Listbytes = new Array();
+        var Allbytes;
+        var u = 0;
+        var lenFarst = 0;
+        for (var i = 0; i < base64.length; i++) {
+            var binary_string = window.atob(base64[i]);
+            var len = binary_string.length;
+            Allbytes = new Uint8Array(len);
+            for (var x = 0; x < len; x++) {
+                Allbytes[x] = binary_string.charCodeAt(x);
+            }
+            Listbytes.push(Allbytes);
+        }
+        debugger;
+        //return bytes.buffer;
+        return Listbytes;
     }
 })(SlsTrSalesManager || (SlsTrSalesManager = {}));
 //# sourceMappingURL=SlsTrSalesManager.js.map

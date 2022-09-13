@@ -891,6 +891,7 @@ namespace CloseProcesses {
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
@@ -923,6 +924,7 @@ namespace CloseProcesses {
 
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate: string = DateFormat(Selected_Data[0].TrDate);
@@ -4007,8 +4009,8 @@ namespace CloseProcesses {
             btnBack_3_onclick();
             btnBack_5_onclick();
 
-            btnUpdate_2.disabled = true;
-            btnUpdate_3.disabled = true;
+            //btnUpdate_2.disabled = true;
+            //btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
             //}
 
@@ -4311,6 +4313,7 @@ namespace CloseProcesses {
 
     function Update_2_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
+
         btnUpdate_2.classList.add("display_none");
         btnSave_2.classList.remove("display_none");
         btnBack_2.classList.remove("display_none");

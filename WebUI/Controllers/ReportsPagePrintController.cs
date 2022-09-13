@@ -315,6 +315,7 @@ namespace Inv.WebUI.Controllers
 
 
         }
+
         public void DownloadDdf(string url)
         {
             try
@@ -423,6 +424,54 @@ namespace Inv.WebUI.Controllers
 
             }
         }
+
+        public byte[] buildReportNew(params object[] models)
+        {
+            string ReportPDFFilename = "Report-" + DateTime.Now + ".pdf";
+            LocalReport localReport = new LocalReport();
+            localReport.DataSources.Clear();
+
+            string[] broken_str = reportName.Split('/');
+
+            ReportDataSource source = new ReportDataSource(broken_str[broken_str.Length - 1], models[0]);
+            localReport.DataSources.Add(source);
+
+
+            if (reportName.Contains("Prnt"))
+            {
+                localReport.ReportPath = Server.MapPath("../Reports/Report/Print/" + reportName + ".rdlc");
+            }
+            else if (reportName.Contains("Slip"))
+            {
+                localReport.ReportPath = Server.MapPath("../Reports/Report/Slip/" + reportName + ".rdlc");
+            }
+            else
+            {
+                localReport.ReportPath = Server.MapPath("../Reports/Report/Reports/" + reportName + ".rdlc");
+            }
+          
+            try
+            {
+ 
+                //Byte[] mybytes = localReport.Render("HTML 4.0");
+
+                byte[] renderdByte;
+                renderdByte = localReport.Render("PDF");
+
+                
+                return renderdByte;
+
+            }
+            catch (Exception ex)
+            {
+                byte[] html = null;
+                return html;
+                throw;
+            }
+
+
+        }
+
 
 
         public string GetFileName(string FileNameWithExtension)

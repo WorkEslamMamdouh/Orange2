@@ -736,6 +736,7 @@ var Processes;
         Selected_Data = new Array();
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
         if (Selected_Data[0].Status == 0) { // تحت التجهيز
             Processes_under_preparing();
@@ -772,6 +773,7 @@ var Processes;
         OperationIDglopel = Selected_Data[0].OperationID;
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate = DateFormat(Selected_Data[0].TrDate);

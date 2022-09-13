@@ -873,6 +873,7 @@ namespace Processes {
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
@@ -921,6 +922,7 @@ namespace Processes {
 
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate: string = DateFormat(Selected_Data[0].TrDate);

@@ -152,6 +152,11 @@ class ReportParameters {
     public SrvCatId: number;
     public invType: number;
 
+    public fromNum: number;
+    public ToNum: number;
+
+     
+
     public ShiftId: number;
     public Sex: number;
     public PeriodId: number;

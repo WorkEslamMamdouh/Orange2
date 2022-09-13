@@ -755,6 +755,7 @@ var CloseProcesses;
         Selected_Data = new Array();
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
         if (Selected_Data[0].Status == 0) { // تحت التجهيز
             Processes_under_preparing();
@@ -778,6 +779,7 @@ var CloseProcesses;
     function DisplayData(Selected_Data) {
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate = DateFormat(Selected_Data[0].TrDate);
@@ -3041,8 +3043,8 @@ var CloseProcesses;
             }
             btnBack_3_onclick();
             btnBack_5_onclick();
-            btnUpdate_2.disabled = true;
-            btnUpdate_3.disabled = true;
+            //btnUpdate_2.disabled = true;
+            //btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
             //}
             Calculation_Close();
