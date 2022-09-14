@@ -431,8 +431,35 @@ namespace Inv.WebUI.Controllers
 
             Model_byte = ConcatenatePdfs(Listbyte);
 
+            DownloadContract(@"H:/GitHub/", "Pdf_Eslam", Model_byte);
+
+
             return Model_byte.ToJsonString();
 
+        }
+
+        private void DownloadContract(string DocPDFFolder, string nid, byte[] contractByte)
+        {
+            try
+            {
+                //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"~/") + @"SavePath\" + nid + " " + ".pdf";
+                //System.IO.File.WriteAllBytes(savePath, contractByte);
+                //string path = @"F:/PDFFolder/" + @"Comp1\" + nid + "" + ".pdf" D:/PDFFolder/;
+
+                //SessionRecord ses = new SessionRecord();
+                //ses.CurrentYear = WebConfigurationManager.AppSettings["DefaultYear"];
+                //ses.ScreenLanguage = WebConfigurationManager.AppSettings["Defaultlanguage"];
+
+                string savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + DocPDFFolder + "") + @"" + nid + "" + ".pdf";
+                System.IO.File.WriteAllBytes(savePath, contractByte);
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         //public static byte[] MergePDFs(List<byte[]> lPdfByteContent)

@@ -3432,6 +3432,13 @@ var SlsTrSalesManager;
             }
         });
     }
+    function bin2String(array) {
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            result += String.fromCharCode(parseInt(array[i], 2));
+        }
+        return result;
+    }
     function DownloadInvTaxPdf(result, TrNo) {
         var bytes = _base64ToArrayBuffer(result);
         saveByteArray("Invoice (" + TrNo + ")", bytes);
@@ -3466,13 +3473,6 @@ var SlsTrSalesManager;
         debugger;
     }
     ;
-    function bin2String(array) {
-        var result = "";
-        for (var i = 0; i < array.length; i++) {
-            result += String.fromCharCode(parseInt(array[i], 2));
-        }
-        return result;
-    }
     function DownloadInvTaxPdfNew(result, TrNo) {
         var bytes = _base64ToArrayBufferNew(result);
         debugger;
@@ -3495,6 +3495,7 @@ var SlsTrSalesManager;
         var link = document.createElement('a');
         var blob = new Blob([bytes], { type: "application/pdf" });
         link.href = window.URL.createObjectURL(blob);
+        alert(link.href);
         var fileName = reportName;
         link.download = fileName;
         link.click();

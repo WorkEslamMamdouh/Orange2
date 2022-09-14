@@ -4319,6 +4319,8 @@ namespace SlsTrSalesManager {
                 debugger
                 var InvPDFS = JSON.parse(result);
 
+            
+
                 DownloadInvTaxPdfNew(InvPDFS, 1)
 
                 //for (var i = 0; i < InvPDFS.length; i++) {
@@ -4333,6 +4335,14 @@ namespace SlsTrSalesManager {
             }
         })
 
+    }
+
+    function bin2String(array) {
+        var result = "";
+        for (var i = 0; i < array.length; i++) {
+            result += String.fromCharCode(parseInt(array[i], 2));
+        }
+        return result;
     }
     function DownloadInvTaxPdf(result: any, TrNo: number) {
 
@@ -4380,16 +4390,7 @@ namespace SlsTrSalesManager {
 
 
     };
-
-    function bin2String(array) {
-        var result = "";
-        for (var i = 0; i < array.length; i++) {
-            result += String.fromCharCode(parseInt(array[i], 2));
-        }
-        return result;
-    }
-
-
+     
     function DownloadInvTaxPdfNew(result: any, TrNo: number) {
 
         var bytes = _base64ToArrayBufferNew(result);
@@ -4412,6 +4413,7 @@ namespace SlsTrSalesManager {
         for (var x = 0; x < len; x++) {
             Allbytes[x] = binary_string.charCodeAt(x); 
         }
+
         debugger
 
         //return bytes.buffer;
@@ -4425,6 +4427,8 @@ namespace SlsTrSalesManager {
         var blob = new Blob([bytes], { type: "application/pdf" });
 
         link.href = window.URL.createObjectURL(blob);
+
+        alert(link.href);
 
         var fileName = reportName;
         link.download = fileName;
