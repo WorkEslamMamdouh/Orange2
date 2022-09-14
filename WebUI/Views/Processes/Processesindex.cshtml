@@ -59,6 +59,7 @@
                                     <option value="1"> @SystemResource.ready</option>
                                     <option value="2">@SystemResource.open</option>
                                     <option value="3">@SystemResource.close</option>
+                                    <option value="4">تجهيز الاغلاق</option>
                                 </select>
                             </div>
                         </div>
@@ -937,8 +938,7 @@
             $("#ddlSalesmanMaster").select2();
             $("#ddlVendorMaster").select2();
             $("#ddlCashBox").select2();
-            $("#ddlSalesman").select2();
-            $("#ddlStateType").select2();
+            $("#ddlSalesman").select2(); 
             $("#ddlSeller").select2();
             $("#ddlCustomer").select2();
             $("#ddlCustomer2").select2();
@@ -952,10 +952,7 @@
 
                 var username = $('#ddlSalesman option:selected').text();
                 var userid = $('#ddlSalesman').val();
-
-                var username = $('#ddlStateType option:selected').text();
-                var userid = $('#ddlStateType').val();
-
+                 
                 var username = $('#ddlSeller option:selected').text();
                 var userid = $('#ddlSeller').val();
 

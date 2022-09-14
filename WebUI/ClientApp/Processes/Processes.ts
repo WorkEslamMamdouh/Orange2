@@ -801,12 +801,7 @@ namespace Processes {
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response as Array<IQ_GetOperation>;
 
-
-                    for (var i = 0; i < Get_IQ_GetOperation.length; i++) {
-                        Get_IQ_GetOperation[i].TrDate = DateFormat(Get_IQ_GetOperation[i].TrDate);
-                        Get_IQ_GetOperation[i].ClearanceDate = DateFormat(Get_IQ_GetOperation[i].ClearanceDate);
-
-                    }
+                     
 
 
 
@@ -857,8 +852,23 @@ namespace Processes {
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "13%" },
-            { title: res.Clearance_date, name: "ClearanceDate", type: "text", width: "13%" },
+         
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
+                itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
+            {
+                title: res.App_date, css: "ColumPadding", name: "ClearanceDate", width: "13%",
+                itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.ClearanceDate);
+                    return txt;
+                }
+            }, 
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -1723,7 +1733,7 @@ namespace Processes {
 	                </td>
                     <td>
 		                <div class="form-group">
-			              <input id="txtInvoiceNumberCharge${cnt}" type="number" class="form-control"  value="0"/>
+			              <input id="txtInvoiceNumberCharge${cnt}" type="text" class="form-control"  value="0"/>
 		                </div>
 	                </td>
                     <td>
@@ -3120,7 +3130,7 @@ namespace Processes {
         for (var i = 0; i <= CountGrid; i++) {
             OperationItemSingleModel = new I_TR_OperationItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
+      
             OperationItemSingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             OperationItemSingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
 
@@ -3265,7 +3275,7 @@ namespace Processes {
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_TR_OperationCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
+   
             chargesingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             chargesingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3377,7 +3387,7 @@ namespace Processes {
         for (var i = 0; i < CountGridDeposit; i++) {
             DepositsingleModel = new I_TR_OperationDeposit();
             StatusFlag = $("#txt_StatusFlag2" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
+ 
             DepositsingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DepositsingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3752,6 +3762,8 @@ namespace Processes {
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
+                        ddlStateType.value = '111';
+
                         DisplayMassage("تم فتح عملية بنجاح", "Operation added successfully", MessageType.Succeed);
 
 
@@ -3906,6 +3918,8 @@ namespace Processes {
                         let result = d as BaseResponse;
 
                         if (result.Response) {
+                            ddlStateType.value = '111';
+
                             DisplayMassage("تم تجهيز اغلاق  العملية بنجاح", "Operation added successfully", MessageType.Succeed);
                             flag_Success_5 = true;
                             $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);

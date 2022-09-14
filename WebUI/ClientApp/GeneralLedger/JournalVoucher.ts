@@ -684,7 +684,7 @@ namespace JournalVoucher {
         CountGrid = JournalDetailModelFiltered.length;
         ComputeTotals();
         DisableControls();
-
+        
         // جديد
         if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
             rdNew.checked = true;
@@ -2055,7 +2055,7 @@ namespace JournalVoucher {
 
                     $("#divFilter").removeClass("disabledDiv");
                     $("#divGridShow").removeClass("disabledDiv");
-                    DisableControls();
+                 
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
                     $('#divTemplateData').addClass('showdiv');
@@ -2160,8 +2160,7 @@ namespace JournalVoucher {
 
 
                     $("#divFilter").removeClass("disabledDiv");
-                    $("#divGridShow").removeClass("disabledDiv");
-                    DisableControls();
+                    $("#divGridShow").removeClass("disabledDiv"); 
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
                     $('#divTemplateData').addClass('showdiv');

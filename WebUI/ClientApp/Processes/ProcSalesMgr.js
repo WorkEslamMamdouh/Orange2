@@ -230,7 +230,7 @@ var ProcSalesMgr;
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         ddlSalesmanFilter.onchange = ddlSalesmanFilter_onchange;
-        chkOpenProcess.onclick = ddlSalesmanFilter_onchange;
+        chkOpenProcess.onclick = chkOpenProcess_onchange;
         ddlSalesman.onchange = ddlSalesman_onchange;
         //ddlOPerationMaster.onchange = ddlOPerationMaster_onchange;
     }
@@ -278,6 +278,7 @@ var ProcSalesMgr;
         sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = " + stat + "", function () {
             var OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             GetOPeration(OperationID);
+            btnShow_onclick();
         });
     }
     function GetOPeration(OperationID) {
@@ -538,33 +539,38 @@ var ProcSalesMgr;
     function ddlSalesmanFilter_onchange() {
         $("#div_btnUpdate").addClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
-        $("#divShow").addClass("display_none");
+        //$("#divShow").addClass("display_none");
         if (ddlSalesmanFilter.value != "null") {
-            var salesmanid = Number(ddlSalesmanFilter.value);
-            //Ajax.Callsync({
-            //    type: "Get",
-            //    url: sys.apiUrl("Processes", "GetAllSalesmanOperations"),
-            //    data: { salesmanId: salesmanid, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            //    success: (d) => {
-            //        let result = d as BaseResponse;
-            //        if (result.IsSuccess) {
-            //            operationDetails = result.Response as Array<IQ_GetOperationSalesman>;
-            //            if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
-            //                DocumentActions.FillCombowithdefult(operationDetails, ddlOPerationMaster, "OperationID", "TrNo", "Select operation");
-            //            }
-            //            else {
-            //                DocumentActions.FillCombowithdefult(operationDetails, ddlOPerationMaster, "OperationID", "TrNo", "اختر العملية");
-            //            }
-            //        }
-            //    }
-            //});
+            btnShow_onclick();
         }
         else {
+            $("#div_btnUpdate").addClass("display_none");
+            $("#DivInvoiceDetails").addClass("display_none");
+            //$("#divShow").addClass("display_none");
             var opVal = ddlOPerationMaster.value;
-            //fillddlOperation();
             ddlOPerationMaster.value = opVal;
             txtOperationStatusMaster.value = "";
+            ddlOPerationMaster.value = "";
+            SlsInvoiceStatisticsDetails = new Array();
+            Grid.DataSource = SlsInvoiceStatisticsDetails;
+            Grid.Bind();
+            $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         }
+        Back();
+    }
+    function chkOpenProcess_onchange() {
+        $("#div_btnUpdate").addClass("display_none");
+        $("#DivInvoiceDetails").addClass("display_none");
+        //$("#divShow").addClass("display_none");
+        var opVal = ddlOPerationMaster.value;
+        ddlOPerationMaster.value = opVal;
+        txtOperationStatusMaster.value = "";
+        ddlOPerationMaster.value = "";
+        SlsInvoiceStatisticsDetails = new Array();
+        Grid.DataSource = SlsInvoiceStatisticsDetails;
+        Grid.Bind();
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        fillddlSalesman();
         Back();
     }
     function ddlOPerationMaster_onchange() {
@@ -1143,6 +1149,7 @@ var ProcSalesMgr;
                     SlsInvoiceStatisticsDetails = result.Response;
                     Grid.DataSource = SlsInvoiceStatisticsDetails;
                     Grid.Bind();
+                    $("#divGridDetails").jsGrid("option", "pageIndex", 1);
                 }
             }
         });
@@ -1168,8 +1175,8 @@ var ProcSalesMgr;
         FillddlItem();
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length) {
-            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
-            txtPackageCount.value = InvoiceStatisticsModel[0].Tot_Qty.toString();
+            txtItemCount.value = setVal(InvoiceStatisticsModel[0].Line_Count);
+            txtPackageCount.value = setVal(InvoiceStatisticsModel[0].Tot_Qty);
             txtTotal.value = InvoiceStatisticsModel[0].TotalAmount.toString();
             txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString();
             txtNet.value = (InvoiceStatisticsModel[0].NetAfterVat - InvoiceStatisticsModel[0].CommitionAmount).RoundToSt(4);
