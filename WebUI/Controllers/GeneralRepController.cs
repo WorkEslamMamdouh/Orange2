@@ -4,9 +4,12 @@ using Inv.WebUI.Reports.Forms;
 using Inv.WebUI.Reports.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Configuration;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
@@ -406,12 +409,13 @@ namespace Inv.WebUI.Controllers
 
 
             string Qury = @"select  InvoiceID from I_Sls_TR_Invoice where SlsInvSrc = 1 and  TrType = 0 and CompCode = " + rp.CompCode + " and BranchCode =" + rp.BranchCode + @" and
-                            TrNo >" + rp.fromNum + " and TrNo <" + rp.ToNum + @" and 
+                            TrNo >= " + rp.fromNum + " and TrNo <=" + rp.ToNum + @" and 
                             (YEAR(TrDate) = " + rp.FinYear + ") ";
 
             List<Invoices_ID> InvID = db.Database.SqlQuery<Invoices_ID>(Qury).ToList();
 
             List<byte[]> Listbyte = new  List<byte[]>();
+            byte[] Model_byte = new byte[] { };
 
             for (int i = 0; i < InvID.Count; i++)
             {
@@ -425,12 +429,103 @@ namespace Inv.WebUI.Controllers
 
             }
 
-            
+            Model_byte = ConcatenatePdfs(Listbyte);
 
-            return Listbyte.ToJsonString();
+            return Model_byte.ToJsonString();
 
         }
 
+        //public static byte[] MergePDFs(List<byte[]> lPdfByteContent)
+        //{
+        //    using (MemoryStream oMemoryStream = new MemoryStream())
+        //    {
+        //        using (PdfWriter oWriter = new PdfWriter(oMemoryStream))
+        //        {
+        //            oWriter.SetSmartMode(true);
+
+        //            using (PdfDocument oMergedPdf = new PdfDocument(oWriter))
+        //            {
+        //                PdfMerger oMerger = new PdfMerger(oMergedPdf, false, false);
+
+        //                for (int i = 0; i < lPdfByteContent.Count; i++)
+        //                {
+        //                    PdfDocument oPdfAux = new PdfDocument(new PdfReader(new MemoryStream(lPdfByteContent[i])));
+        //                    oMerger.SetCloseSourceDocuments(true).Merge(oPdfAux, 1, oPdfAux.GetNumberOfPages());
+        //                }
+        //            }
+        //        }
+        //        return oMemoryStream.ToArray();
+        //    }
+        //}
+
+        public static byte[] ConcatenatePdfs(IEnumerable<byte[]> documents)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var outputDocument = new Document();
+                var writer = new PdfCopy(outputDocument, ms);
+                outputDocument.Open();
+
+                foreach (var doc in documents)
+                {
+                    var reader = new PdfReader(doc);
+                    for (var i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        writer.AddPage(writer.GetImportedPage(reader, i));
+                    }
+                    writer.FreeReader(reader);
+                    reader.Close();
+                }
+
+                writer.Close();
+                outputDocument.Close();
+                var allPagesContent = ms.GetBuffer();
+                ms.Flush();
+
+                return allPagesContent;
+            }
+        }
+
+
+        public static byte[] concatAndAddContent(List<byte[]> pdf)
+        {
+            byte[] all;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document doc = new Document();
+
+                PdfWriter writer = PdfWriter.GetInstance(doc, ms);
+
+                doc.SetPageSize(PageSize.LETTER);
+                doc.Open();
+                PdfContentByte cb = writer.DirectContent;
+                PdfImportedPage page;
+
+                PdfReader reader;
+                foreach (byte[] p in pdf)
+                {
+                    reader = new PdfReader(p);
+                    int pages = reader.NumberOfPages;
+
+                    // loop over document pages
+                    for (int i = 1; i <= pages; i++)
+                    {
+                        doc.SetPageSize(PageSize.LETTER);
+                        doc.NewPage();
+                        page = writer.GetImportedPage(reader, i);
+                        cb.AddTemplate(page, 0, 0);
+                    }
+                }
+
+                doc.Close();
+                all = ms.GetBuffer();
+                ms.Flush();
+                ms.Dispose();
+            }
+
+            return all;
+        }
 
     }
 }

@@ -3474,32 +3474,32 @@ var SlsTrSalesManager;
         return result;
     }
     function DownloadInvTaxPdfNew(result, TrNo) {
-        var bytes = _base64ToArrayBufferNew_1(result);
+        var bytes = _base64ToArrayBufferNew(result);
         debugger;
-        saveByteArray("Invoice (" + TrNo + ")", bytes);
+        saveByteArrayNew("Invoice (" + TrNo + ")", bytes);
     }
     function _base64ToArrayBufferNew(base64) {
-        var Listbytes = new Array();
         var Allbytes;
-        var u = 0;
-        var lenS = 0;
-        var binary_string_S = "";
-        for (var i = 0; i < base64.length; i++) {
-            var binary_string = window.atob(base64[i]);
-            binary_string_S = binary_string_S + " " + binary_string;
-            //var len = binary_string.length;
-            //lenS += len;
-        }
-        var len = binary_string_S.length;
+        var binary_string = window.atob(base64);
+        var len = binary_string.length;
         Allbytes = new Uint16Array(len);
-        console.log(binary_string_S);
         for (var x = 0; x < len; x++) {
-            Allbytes[x] = binary_string_S.charCodeAt(x);
+            Allbytes[x] = binary_string.charCodeAt(x);
         }
         debugger;
         //return bytes.buffer;
         return Allbytes.buffer;
     }
+    function saveByteArrayNew(reportName, bytes) {
+        debugger;
+        var link = document.createElement('a');
+        var blob = new Blob([bytes], { type: "application/pdf" });
+        link.href = window.URL.createObjectURL(blob);
+        var fileName = reportName;
+        link.download = fileName;
+        link.click();
+    }
+    ;
     function _base64ToArrayBufferNew_1(base64) {
         var Listbytes = new Array();
         var Allbytes;
