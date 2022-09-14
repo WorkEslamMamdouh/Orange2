@@ -3424,7 +3424,7 @@ var SlsTrSalesManager;
                 var result = d;
                 debugger;
                 var InvPDFS = JSON.parse(result);
-                DownloadInvTaxPdfNew(InvPDFS, 1);
+                //DownloadInvTaxPdfNew(InvPDFS, 1)
                 //for (var i = 0; i < InvPDFS.length; i++) {
                 //    console.log(InvPDFS[i]);
                 //    DownloadInvTaxPdf(InvPDFS[i], 1)
