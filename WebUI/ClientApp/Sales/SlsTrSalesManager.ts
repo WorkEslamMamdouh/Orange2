@@ -156,7 +156,10 @@ namespace SlsTrSalesManager {
     var itemid_LastPrice = 0;
 
     //------------------------------------------------------ Main Region------------------------
+   
     export function InitalizeComponent() {
+
+          
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فواتير التجزئه ";
         }
@@ -4283,9 +4286,16 @@ namespace SlsTrSalesManager {
     function btnPrintsFrom_To_onclick() {
 
 
+
+        $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
+        $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
+
         if (($('#ToNum').val() == 0 && $('#fromNum').val() == 0) || ($('#ToNum').val() == '' && $('#fromNum').val() == '')) {
             Errorinput($('#ToNum'));
             Errorinput($('#fromNum'));
+
+            $('#btnPrintsFrom_To').attr('style', '')
+            $('#btnPrintsFrom_To').html('طباعة  من الي'); 
             return
         }
 
@@ -4315,23 +4325,15 @@ namespace SlsTrSalesManager {
             data: rp,
             success: (d) => {
 
-                let result = d;
-                debugger
-                var InvPDFS = JSON.parse(result);
+                let result = d; 
+                $('#btnPrintsFrom_To').attr('style', '')
+                $('#btnPrintsFrom_To').html('طباعة  من الي'); 
 
-            
+                alert(result);
 
-                //DownloadInvTaxPdfNew(InvPDFS, 1)
+                window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
 
-                //for (var i = 0; i < InvPDFS.length; i++) {
-
-                //    console.log(InvPDFS[i]);
-
-                //    DownloadInvTaxPdf(InvPDFS[i], 1)
-
-                //}
-
-
+                  
             }
         })
 

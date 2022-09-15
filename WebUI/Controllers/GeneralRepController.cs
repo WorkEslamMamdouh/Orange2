@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Web.Configuration;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using Microsoft.Win32;
 
 namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
@@ -431,14 +432,18 @@ namespace Inv.WebUI.Controllers
 
             Model_byte = ConcatenatePdfs(Listbyte);
 
-            DownloadContract(@"H:/GitHub/", "Pdf_Eslam", Model_byte);
+
+            String path = String.Empty;
 
 
-            return Model_byte.ToJsonString();
+            path =  DownloadContract("Pdf_Eslam", Model_byte);
+
+
+            return path;
 
         }
 
-        private void DownloadContract(string DocPDFFolder, string nid, byte[] contractByte)
+        public string DownloadContract( string nid, byte[] contractByte)
         {
             try
             {
@@ -450,16 +455,31 @@ namespace Inv.WebUI.Controllers
                 //ses.CurrentYear = WebConfigurationManager.AppSettings["DefaultYear"];
                 //ses.ScreenLanguage = WebConfigurationManager.AppSettings["Defaultlanguage"];
 
-                string savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + DocPDFFolder + "") + @"" + nid + "" + ".pdf";
-                System.IO.File.WriteAllBytes(savePath, contractByte);
+                //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"" + DocPDFFolder + "") + @"" + nid + "" + ".pdf";
+                //System.IO.File.WriteAllBytes(savePath, contractByte);
 
 
 
+                String path = String.Empty;
+                RegistryKey rKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Internet Explorer\Main");
+                if (rKey != null)
+                    path = (String)rKey.GetValue("Default Download Directory");
+                if (String.IsNullOrEmpty(path))
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\downloads";
+                path = path + @"\" + nid + "_" + (System.DateTime.Now.ToString("yyyy-MM-dd hh-mm")) + "" + ".pdf";
+
+                System.IO.File.WriteAllBytes(path, contractByte);
+
+
+                return path;
             }
             catch (Exception ex)
             {
 
             }
+
+
+            return "";
         }
 
         //public static byte[] MergePDFs(List<byte[]> lPdfByteContent)

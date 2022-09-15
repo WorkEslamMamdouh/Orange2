@@ -3393,9 +3393,13 @@ var SlsTrSalesManager;
         });
     }
     function btnPrintsFrom_To_onclick() {
+        $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
+        $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
         if (($('#ToNum').val() == 0 && $('#fromNum').val() == 0) || ($('#ToNum').val() == '' && $('#fromNum').val() == '')) {
             Errorinput($('#ToNum'));
             Errorinput($('#fromNum'));
+            $('#btnPrintsFrom_To').attr('style', '');
+            $('#btnPrintsFrom_To').html('طباعة  من الي');
             return;
         }
         if (!SysSession.CurrentPrivileges.PrintOut)
@@ -3422,13 +3426,10 @@ var SlsTrSalesManager;
             data: rp,
             success: function (d) {
                 var result = d;
-                debugger;
-                var InvPDFS = JSON.parse(result);
-                //DownloadInvTaxPdfNew(InvPDFS, 1)
-                //for (var i = 0; i < InvPDFS.length; i++) {
-                //    console.log(InvPDFS[i]);
-                //    DownloadInvTaxPdf(InvPDFS[i], 1)
-                //}
+                $('#btnPrintsFrom_To').attr('style', '');
+                $('#btnPrintsFrom_To').html('طباعة  من الي');
+                alert(result);
+                window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
             }
         });
     }
