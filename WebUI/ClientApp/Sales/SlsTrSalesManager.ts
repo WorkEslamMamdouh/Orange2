@@ -156,10 +156,10 @@ namespace SlsTrSalesManager {
     var itemid_LastPrice = 0;
 
     //------------------------------------------------------ Main Region------------------------
-   
+
     export function InitalizeComponent() {
 
-          
+
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فواتير التجزئه ";
         }
@@ -4283,200 +4283,88 @@ namespace SlsTrSalesManager {
 
     }
 
+
     function btnPrintsFrom_To_onclick() {
 
+        debugger
+        let ToNum = 0;
+        let fromNum = 0;
+
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var SalesPerson = 0;
+        var IsCash: number = 0;
+
+        if (ddlCustomer.value.trim() != "") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+
+        if (ddlSalesmanFilter.value != "null") {
+            SalesMan = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPerson = Number(ddlSalesPersonFilter.value.toString());
+        }
+        if (ddlStateType.value != "null") {
+            status = Number(ddlStateType.value.toString());
+        }
+        if (Number(ddlInvoiceType.value) == 0) {
+            IsCash = 0;
+        } else if (Number(ddlInvoiceType.value) == 1) {
+            IsCash = 1;
+        } else {
+            IsCash = 2;
+        }
 
 
-        $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
-        $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
 
-        if (($('#ToNum').val() == 0 && $('#fromNum').val() == 0) || ($('#ToNum').val() == '' && $('#fromNum').val() == '')) {
-            Errorinput($('#ToNum'));
-            Errorinput($('#fromNum'));
+        try {
 
-            $('#btnPrintsFrom_To').attr('style', '')
-            $('#btnPrintsFrom_To').html('طباعة  من الي'); 
+
+            let Name_ID = 'InvoiceID'
+            let NameTable = 'I_Sls_TR_Invoice'
+            let Condation1 = " SlsInvSrc = 1 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            let Condation2 = " ";
+
+
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesPerson != 0 && SalesPerson != null)
+                Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan;// and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+
+
+
+
+            PrintsFrom_To(Name_ID, NameTable, Condation3)
+
+
+        } catch (e) {
+
             return
         }
 
-        if (!SysSession.CurrentPrivileges.PrintOut) return;
-        let rp: ReportParameters = new ReportParameters();
-
-        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
-        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
-        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
-        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
-        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-        rp.Tokenid = SysSession.CurrentEnvironment.Token;
-        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
-        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
-        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-        rp.BraNameA = SysSession.CurrentEnvironment.BranchName;
-        rp.BraNameE = SysSession.CurrentEnvironment.BranchName;
-        rp.DocPDFFolder = SysSession.CurrentEnvironment.I_Control[0].DocPDFFolder;
-        rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
-
-        rp.fromNum = Number($('#fromNum').val());
-        rp.ToNum = Number($('#ToNum').val());
-        rp.FinYear = Number(SysSession.CurrentEnvironment.CurrentYear);
-
-        Ajax.CallAsync({
-            url: Url.Action("Prnt_From_To", "GeneralRep"),
-            data: rp,
-            success: (d) => {
-
-                let result = d; 
-                $('#btnPrintsFrom_To').attr('style', '')
-                $('#btnPrintsFrom_To').html('طباعة  من الي'); 
-
-                alert(result);
-
-                window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
-
-                  
-            }
-        })
-
     }
-
-    function bin2String(array) {
-        var result = "";
-        for (var i = 0; i < array.length; i++) {
-            result += String.fromCharCode(parseInt(array[i], 2));
-        }
-        return result;
-    }
-    function DownloadInvTaxPdf(result: any, TrNo: number) {
-
-        var bytes = _base64ToArrayBuffer(result);
-        saveByteArray("Invoice (" + TrNo + ")", bytes);
-
-    }
-
-    function saveByteArray(reportName, bytes) {
-        debugger
-        //fetch("data:application/pdf;base64," + bytes)
-        //    .then(function (resp) { return resp.blob() })
-        //    .then(function (blob) {
-        //        var link = document.createElement('a');
-        //        link.href = window.URL.createObjectURL(blob);
-        //        var fileName = reportName;
-        //        link.download = fileName;
-        //        link.click();
-        //    });
-
-        //debugger
-        //var blob = new Blob([bytes], { type: "application/pdf" });
-        //var link = document.createElement('a');
-        //link.href = window.URL.createObjectURL(blob);
-        //var fileName = reportName;
-        //link.download = fileName;
-        //link.click();
-        debugger
-      
-         
-        for (var i = 1; i < bytes.length; i++) {
-            var link = document.createElement('a');
-            var blob = new Blob([bytes[i]], { type: "application/pdf" });
-
-            link.href = window.URL.createObjectURL(blob);
-
-            var fileName = reportName;
-            link.download = fileName;
-            link.click(); 
-        }
- 
-        debugger
-     
-
-
-
-    };
-     
-    function DownloadInvTaxPdfNew(result: any, TrNo: number) {
-
-        var bytes = _base64ToArrayBufferNew(result);
-        debugger
-        saveByteArrayNew("Invoice (" + TrNo + ")", bytes);
-
-    }
-
-    function _base64ToArrayBufferNew(base64) {
-
-         
-
-        var Allbytes: Uint8Array;
-         
-
-        let binary_string = window.atob(base64); 
-        var len = binary_string.length;
-        Allbytes = new Uint16Array(len);
-         
-        for (var x = 0; x < len; x++) {
-            Allbytes[x] = binary_string.charCodeAt(x); 
-        }
-
-        debugger
-
-        //return bytes.buffer;
-        return Allbytes.buffer;
-    }
-
-
-    function saveByteArrayNew(reportName, bytes) {
-        debugger
-        var link = document.createElement('a');
-        var blob = new Blob([bytes], { type: "application/pdf" });
-
-        link.href = window.URL.createObjectURL(blob);
-
-        alert(link.href);
-
-        var fileName = reportName;
-        link.download = fileName;
-        link.click();
-
-
-
-    };
-
-    function _base64ToArrayBufferNew_1(base64) {
-
-
-        var Listbytes: Array<Uint8Array> = new Array<Uint8Array>();
-
-        var Allbytes: Uint8Array;
-
-        let u = 0;
-        let lenFarst = 0; 
-
-
-
-        for (var i = 0; i < base64.length; i++) {
-
-            let binary_string = window.atob(base64[i]);
-
-            var len = binary_string.length;
-            Allbytes = new Uint8Array(len);
- 
-
-            for (var x = 0; x < len; x++) {
-                Allbytes[x] = binary_string.charCodeAt(x);
-
-            }
-
-            Listbytes.push(Allbytes);
-
-        }
-
-      
-        debugger
-
-        //return bytes.buffer;
-        return Listbytes;
-    }
-
-
-
 
 }

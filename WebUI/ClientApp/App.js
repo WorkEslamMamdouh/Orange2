@@ -1846,4 +1846,38 @@ function _base64ToArrayBuffer(base64) {
     }
     return bytes.buffer;
 }
+function PrintsFrom_To(Name_ID, NameTable, Condation) {
+    var SysSession = GetSystemEnvironment();
+    var rp = new ReportParameters();
+    $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
+    $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
+    rp.CompCode = SysSession.CompCode;
+    rp.BranchCode = SysSession.BranchCode;
+    rp.CompNameA = SysSession.CompanyNameAr;
+    rp.CompNameE = SysSession.CompanyName;
+    rp.UserCode = SysSession.UserCode;
+    rp.Tokenid = SysSession.Token;
+    rp.ScreenLanguage = SysSession.ScreenLanguage;
+    rp.SystemCode = SysSession.SystemCode;
+    rp.SubSystemCode = SysSession.SubSystemCode;
+    rp.BraNameA = SysSession.BranchName;
+    rp.BraNameE = SysSession.BranchName;
+    rp.DocPDFFolder = SysSession.I_Control[0].DocPDFFolder;
+    rp.LoginUser = SysSession.UserCode;
+    rp.Name_ID = Name_ID;
+    rp.NameTable = NameTable;
+    rp.Condation = Condation;
+    rp.FinYear = Number(SysSession.CurrentYear);
+    Ajax.CallAsync({
+        url: Url.Action("Prnt_From_To", "GeneralRep"),
+        data: rp,
+        success: function (d) {
+            var result = d;
+            $('#btnPrintsFrom_To').attr('style', '');
+            $('#btnPrintsFrom_To').html('تنزيل ملف بطباعة الحركة المختارية');
+            alert(result);
+            window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
+        }
+    });
+}
 //# sourceMappingURL=App.js.map

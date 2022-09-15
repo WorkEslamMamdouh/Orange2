@@ -134,6 +134,9 @@ class ReportParameters {
     public BraNameE: string;
     public UserCode: string;
     public BranchCode: string;
+    public Condation: string;
+    public Name_ID: string;
+    public NameTable: string;
     public ScreenLanguage: String;
     public SystemCode: String;
     public SubSystemCode: String;

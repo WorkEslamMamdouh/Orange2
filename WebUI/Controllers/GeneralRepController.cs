@@ -409,9 +409,11 @@ namespace Inv.WebUI.Controllers
 
 
 
-            string Qury = @"select  InvoiceID from I_Sls_TR_Invoice where SlsInvSrc = 1 and  TrType = 0 and CompCode = " + rp.CompCode + " and BranchCode =" + rp.BranchCode + @" and
-                            TrNo >= " + rp.fromNum + " and TrNo <=" + rp.ToNum + @" and 
-                            (YEAR(TrDate) = " + rp.FinYear + ") ";
+            string Qury = @"select  "+ rp.Name_ID + " as InvoiceID from " + rp.NameTable + " where  "+ rp.Condation+ "";
+
+            //string Qury = @"select  InvoiceID from I_Sls_TR_Invoice where SlsInvSrc = 1 and  TrType = 0 and CompCode = " + rp.CompCode + " and BranchCode =" + rp.BranchCode + @" and
+            //                TrNo >= " + rp.fromNum + " and TrNo <=" + rp.ToNum + @" and 
+            //                (YEAR(TrDate) = " + rp.FinYear + ") ";
 
             List<Invoices_ID> InvID = db.Database.SqlQuery<Invoices_ID>(Qury).ToList();
 
@@ -465,12 +467,12 @@ namespace Inv.WebUI.Controllers
                 if (rKey != null)
                     path = (String)rKey.GetValue("Default Download Directory");
                 if (String.IsNullOrEmpty(path))
-                    path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\downloads";
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "";
                 path = path + @"\" + nid + "_" + (System.DateTime.Now.ToString("yyyy-MM-dd hh-mm")) + "" + ".pdf";
 
                 System.IO.File.WriteAllBytes(path, contractByte);
 
-
+                 
                 return path;
             }
             catch (Exception ex)

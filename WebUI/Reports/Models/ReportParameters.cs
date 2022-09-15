@@ -233,6 +233,9 @@ namespace Inv.WebUI.Reports.Models
         public int RecType { get; set; }
         public string BnfID { get; set; }
         public string BnfDesc { get; set; }
+        public string Condation { get; set; }
+        public string Name_ID { get; set; }
+        public string NameTable { get; set; }
         public int Status { get; set; }
         public int Repdesign { get; set; }
         public int TRId { get; set; }
