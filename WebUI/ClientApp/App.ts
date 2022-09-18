@@ -108,6 +108,15 @@ var MessageType = {
     Worning: '3',
 }
 
+var TransType = {
+    Invoice: 'Inv',
+    InvoiceReturn: 'Inv_Ret',
+    InvoiceOperation: 'Pro',
+    InvoiceOperationReturn: 'Pro_Ret',
+    Pur_Receive: 'Pur',
+    Pur_Receive_Return: 'Pur_Ret', 
+}
+
 
 var Keys = {
     Enter: "Enter"
@@ -2359,7 +2368,7 @@ function _base64ToArrayBuffer(base64) {
 
 
 
-function PrintsFrom_To(Name_ID: string, NameTable: string, Condation: string, length): string {
+function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, Condation: string, length): string {
 
     if (length <= 0) {
         MessageBox.Show('لا توجد فواتير ', 'تحزير')  
@@ -2393,6 +2402,7 @@ function PrintsFrom_To(Name_ID: string, NameTable: string, Condation: string, le
     rp.LoginUser = SysSession.UserCode;
 
 
+    rp.Type_Trans = Type_Trans;
     rp.Name_ID = Name_ID;
     rp.NameTable = NameTable;
     rp.Condation = Condation;

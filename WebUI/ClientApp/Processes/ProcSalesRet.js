@@ -2257,7 +2257,7 @@ var ProcSalesRet;
             }
             ///////////
             var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
-            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+            PrintsFrom_To(TransType.InvoiceOperationReturn, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
         }
         catch (e) {
             return;

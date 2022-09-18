@@ -134,6 +134,7 @@ class ReportParameters {
     public BraNameE: string;
     public UserCode: string;
     public BranchCode: string;
+    public Type_Trans: string;
     public Condation: string;
     public Name_ID: string;
     public NameTable: string;

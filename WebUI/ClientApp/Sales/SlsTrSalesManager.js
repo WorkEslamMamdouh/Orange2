@@ -3450,7 +3450,7 @@ var SlsTrSalesManager;
             }
             ///////////
             var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
-            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+            PrintsFrom_To(TransType.Invoice, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
         }
         catch (e) {
             return;

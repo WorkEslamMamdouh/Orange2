@@ -107,6 +107,14 @@ var MessageType = {
     Succeed: '1',
     Worning: '3',
 };
+var TransType = {
+    Invoice: 'Inv',
+    InvoiceReturn: 'Inv_Ret',
+    InvoiceOperation: 'Pro',
+    InvoiceOperationReturn: 'Pro_Ret',
+    Pur_Receive: 'Pur',
+    Pur_Receive_Return: 'Pur_Ret',
+};
 var Keys = {
     Enter: "Enter"
 };
@@ -1846,7 +1854,7 @@ function _base64ToArrayBuffer(base64) {
     }
     return bytes.buffer;
 }
-function PrintsFrom_To(Name_ID, NameTable, Condation, length) {
+function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     if (length <= 0) {
         MessageBox.Show('لا توجد فواتير ', 'تحزير');
         return;
@@ -1871,6 +1879,7 @@ function PrintsFrom_To(Name_ID, NameTable, Condation, length) {
     rp.BraNameE = SysSession.BranchName;
     rp.DocPDFFolder = SysSession.I_Control[0].DocPDFFolder;
     rp.LoginUser = SysSession.UserCode;
+    rp.Type_Trans = Type_Trans;
     rp.Name_ID = Name_ID;
     rp.NameTable = NameTable;
     rp.Condation = Condation;

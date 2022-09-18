@@ -2171,6 +2171,7 @@ var SlsTrSalesReturn;
         });
     }
     function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
         var startDate = DateFormatRep(txtStartDate.value).toString();
         var endDate = DateFormatRep(txtEndDate.value).toString();
         var customerId = 0;
@@ -2221,7 +2222,7 @@ var SlsTrSalesReturn;
             }
             ///////////
             var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
-            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+            PrintsFrom_To(TransType.InvoiceReturn, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
         }
         catch (e) {
             return;

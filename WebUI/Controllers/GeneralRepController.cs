@@ -424,9 +424,38 @@ namespace Inv.WebUI.Controllers
             {
                 byte[] Singl_byte = { };
 
-                rp.TRId = InvID[i].InvoiceID; 
-                IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvoice(rp);
-                Singl_byte = buildReportNew(que);
+                rp.TRId = InvID[i].InvoiceID;
+                if (rp.Type_Trans == "Inv")
+                {
+                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvoice(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "Inv_Ret")
+                {
+                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvReturn(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "Pur")
+                {
+                    IEnumerable<IProc_Prnt_PurReceive_Result> que = Rpt_Prnt_PurReceive(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "Pur_Ret")
+                {
+                    IEnumerable<IProc_Prnt_PurReceiveRet_Result> que = Prnt_PurReceiveRet(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "Pro")
+                {
+                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "Pro_Ret")
+                {
+                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+
 
                 Listbyte.Add(Singl_byte); 
 

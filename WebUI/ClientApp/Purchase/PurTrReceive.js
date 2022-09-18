@@ -66,6 +66,7 @@ var PurTrReceive;
     //buttons 
     var btnCustLastPrice;
     var btnUpdate;
+    var btnPrintsFrom_To;
     var btnShow;
     var ddlIsCash;
     var ddlCashBoxH;
@@ -193,6 +194,7 @@ var PurTrReceive;
         txtVendorName = document.getElementById("txtVendorName");
         txtCurrencyRate = document.getElementById("txtCurrencyRate");
         //buttons
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnShow = document.getElementById("btnShow");
         VendorRecieptID = document.getElementById("VendorRecieptID");
         chkActive = document.getElementById("chkActive");
@@ -236,6 +238,7 @@ var PurTrReceive;
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     //-----------------------------------------------------------------------------------------------------------------------------
     function LastPrice_onclick() {
@@ -2796,6 +2799,44 @@ var PurTrReceive;
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        var startdt = DateFormatRep(txtFromDate.value).toString();
+        var enddt = DateFormatRep(txtToDate.value).toString();
+        var salesmanId = 0;
+        var vendorId = 0;
+        var status = 0;
+        if (ddlVendorMaster.value != "null") {
+            vendorId = Number(ddlVendorMaster.value.toString());
+        }
+        if (ddlSalesmanMaster.value != "null") {
+            salesmanId = Number(ddlSalesmanMaster.value.toString());
+        }
+        status = Number(ddlStateType.value.toString());
+        try {
+            var Name_ID = 'ReceiveID';
+            var NameTable = 'IQ_GetPurReceiveStaistic';
+            var Condation1 = "  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startdt + "' and TrDate <= ' " + enddt + " ' ";
+            var Condation2 = " ";
+            if (salesmanId != 0 && salesmanId != null)
+                Condation2 = Condation2 + " and SalesmanId =" + salesmanId;
+            if (vendorId != 0 && vendorId != null)
+                Condation2 = Condation2 + " and VendorID =" + vendorId;
+            if (status == 0 || status == 1) {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            else if (status == 2) {
+                Condation2 = Condation2 + "";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.Pur_Receive, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(PurTrReceive || (PurTrReceive = {}));
 //# sourceMappingURL=PurTrReceive.js.map
