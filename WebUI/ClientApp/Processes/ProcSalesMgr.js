@@ -2531,6 +2531,7 @@ var ProcSalesMgr;
         });
     }
     function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
         var startDate = DateFormatRep(txtStartDate.value).toString();
         var endDate = DateFormatRep(txtEndDate.value).toString();
         var customerId = 0;
@@ -2538,7 +2539,11 @@ var ProcSalesMgr;
         var SalesMan = 0;
         var SalesPerson = 0;
         var IsCash = 0;
-        if (ddlCustomer.value.trim() != "") {
+        var operationId = 0;
+        if (ddlOPerationMaster.value.trim() != "") {
+            operationId = Number(ddlOPerationMaster.value.toString());
+        }
+        if (ddlCustomer.value != "null") {
             customerId = Number(ddlCustomer.value.toString());
         }
         if (ddlSalesmanFilter.value != "null") {
@@ -2547,24 +2552,16 @@ var ProcSalesMgr;
         if (ddlSalesPersonFilter.value != "null") {
             SalesPerson = Number(ddlSalesPersonFilter.value.toString());
         }
-        if (ddlStateType.value != "null") {
-            status = Number(ddlStateType.value.toString());
-        }
-        if (Number(ddlInvoiceType.value) == 0) {
-            IsCash = 0;
-        }
-        else if (Number(ddlInvoiceType.value) == 1) {
-            IsCash = 1;
-        }
-        else {
-            IsCash = 2;
-        }
+        status = Number(ddlStateType.value.toString());
+        IsCash = Number(ddlInvoiceType.value);
         try {
             var Name_ID = 'InvoiceID';
             var NameTable = 'I_Sls_TR_Invoice';
-            var Condation1 = " SlsInvSrc = 1 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+            var Condation1 = " SlsInvSrc = 2 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
                 " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
             var Condation2 = " ";
+            if (operationId != 0 && operationId != null)
+                Condation2 = Condation2 + " and OperationId =" + operationId;
             if (customerId != 0 && customerId != null)
                 Condation2 = Condation2 + " and CustomerId =" + customerId;
             if (SalesPerson != 0 && SalesPerson != null)
