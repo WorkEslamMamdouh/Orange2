@@ -78,6 +78,7 @@ var SlsTrSalesReturn;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
+    var btnPrintsFrom_To;
     // giedView
     var Grid = new JsGrid();
     //global
@@ -188,6 +189,7 @@ var SlsTrSalesReturn;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnPrint = document.getElementById("btnPrint");
     }
     function InitializeEvents() {
@@ -208,6 +210,7 @@ var SlsTrSalesReturn;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
     }
     function Check_on_user_type() {
@@ -2166,6 +2169,63 @@ var SlsTrSalesReturn;
             success: function (d) {
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var IsCash = 0;
+        if (ddlCustomer.value != "null") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+        if (ddlSalesMan.value != "null") {
+            SalesMan = Number(ddlSalesMan.value.toString());
+        }
+        if (ddlStateType.value != "null") {
+            status = Number(ddlStateType.value.toString());
+        }
+        if (Number(ddlReturnType.value) == 0) {
+            IsCash = 0;
+        }
+        else if (Number(ddlReturnType.value) == 1) {
+            IsCash = 1;
+        }
+        else {
+            IsCash = 2;
+        }
+        try {
+            var Name_ID = 'InvoiceID';
+            var NameTable = 'I_Sls_TR_Invoice';
+            var Condation1 = " SlsInvSrc = 1 and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            var Condation2 = " ";
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan; // and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(SlsTrSalesReturn || (SlsTrSalesReturn = {}));
 //# sourceMappingURL=SlsTrSalesReturn.js.map

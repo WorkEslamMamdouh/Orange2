@@ -96,6 +96,7 @@ namespace ProcSalesMgr {
     var btnPrintTransaction: HTMLButtonElement;
     var btnPrintInvoicePrice: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
+    var btnPrintsFrom_To: HTMLButtonElement;
 
 
     // giedView
@@ -227,6 +228,7 @@ namespace ProcSalesMgr {
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
         ////debugger
         //    btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
@@ -259,6 +261,7 @@ namespace ProcSalesMgr {
         chkOpenProcess.onclick = chkOpenProcess_onchange;
         ddlSalesman.onchange = ddlSalesman_onchange;
         //ddlOPerationMaster.onchange = ddlOPerationMaster_onchange;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function Check_on_user_type() {
 
@@ -3041,5 +3044,87 @@ namespace ProcSalesMgr {
 
 
     }
+
+
+
+    function btnPrintsFrom_To_onclick() {
+
+
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var SalesPerson = 0;
+        var IsCash: number = 0;
+
+        if (ddlCustomer.value.trim() != "") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+
+        if (ddlSalesmanFilter.value != "null") {
+            SalesMan = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPerson = Number(ddlSalesPersonFilter.value.toString());
+        }
+        if (ddlStateType.value != "null") {
+            status = Number(ddlStateType.value.toString());
+        }
+        if (Number(ddlInvoiceType.value) == 0) {
+            IsCash = 0;
+        } else if (Number(ddlInvoiceType.value) == 1) {
+            IsCash = 1;
+        } else {
+            IsCash = 2;
+        }
+
+
+
+        try {
+
+
+            let Name_ID = 'InvoiceID'
+            let NameTable = 'I_Sls_TR_Invoice'
+            let Condation1 = " SlsInvSrc = 1 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            let Condation2 = " ";
+
+
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesPerson != 0 && SalesPerson != null)
+                Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan;// and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+
+
+            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
+
+
+
+        } catch (e) {
+
+            return
+        }
+
+    }
+
 
 }

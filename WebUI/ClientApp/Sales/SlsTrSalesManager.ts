@@ -4285,10 +4285,7 @@ namespace SlsTrSalesManager {
 
 
     function btnPrintsFrom_To_onclick() {
-
-        debugger
-        let ToNum = 0;
-        let fromNum = 0;
+        btnShow_onclick();
 
         var startDate = DateFormatRep(txtStartDate.value).toString();
         var endDate = DateFormatRep(txtEndDate.value).toString();
@@ -4355,9 +4352,8 @@ namespace SlsTrSalesManager {
             let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
 
 
-
-
-            PrintsFrom_To(Name_ID, NameTable, Condation3)
+            PrintsFrom_To(Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
+         
 
 
         } catch (e) {

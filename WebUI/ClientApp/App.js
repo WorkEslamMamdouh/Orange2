@@ -1846,7 +1846,14 @@ function _base64ToArrayBuffer(base64) {
     }
     return bytes.buffer;
 }
-function PrintsFrom_To(Name_ID, NameTable, Condation) {
+function PrintsFrom_To(Name_ID, NameTable, Condation, length) {
+    if (length <= 0) {
+        MessageBox.Show('لا توجد فواتير ', 'تحزير');
+        return;
+    }
+    if (length > 100) {
+        MessageBox.Show('الحد الاقصي لي عدد الفواتير ( 100 )', 'تحزير');
+    }
     var SysSession = GetSystemEnvironment();
     var rp = new ReportParameters();
     $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
@@ -1875,9 +1882,15 @@ function PrintsFrom_To(Name_ID, NameTable, Condation) {
             var result = d;
             $('#btnPrintsFrom_To').attr('style', '');
             $('#btnPrintsFrom_To').html('تنزيل ملف بطباعة الحركة المختارية');
-            alert(result);
-            window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
+            //alert(result);
+            //debugger
+            //window.open(result, "blank");
+            var x = Url.Action("OpenPdf", "Home");
+            var UrlPdf = x + "/" + "?" + "path=" + result + "";
+            window.open(UrlPdf, "blank");
+            return result;
         }
     });
+    return '';
 }
 //# sourceMappingURL=App.js.map

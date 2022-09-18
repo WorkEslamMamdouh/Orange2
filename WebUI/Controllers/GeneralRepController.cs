@@ -409,7 +409,7 @@ namespace Inv.WebUI.Controllers
 
 
 
-            string Qury = @"select  "+ rp.Name_ID + " as InvoiceID from " + rp.NameTable + " where  "+ rp.Condation+ "";
+            string Qury = @"select  TOP (100)" + rp.Name_ID + " as InvoiceID from " + rp.NameTable + " where  "+ rp.Condation+ "";
 
             //string Qury = @"select  InvoiceID from I_Sls_TR_Invoice where SlsInvSrc = 1 and  TrType = 0 and CompCode = " + rp.CompCode + " and BranchCode =" + rp.BranchCode + @" and
             //                TrNo >= " + rp.fromNum + " and TrNo <=" + rp.ToNum + @" and 
@@ -438,7 +438,7 @@ namespace Inv.WebUI.Controllers
             String path = String.Empty;
 
 
-            path =  DownloadContract("Pdf_Eslam", Model_byte);
+            path =  DownloadContract("Pdf_Invoices", Model_byte);
 
 
             return path;
@@ -462,17 +462,18 @@ namespace Inv.WebUI.Controllers
 
 
 
-                String path = String.Empty;
+                string path = "";
                 RegistryKey rKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Internet Explorer\Main");
                 if (rKey != null)
                     path = (String)rKey.GetValue("Default Download Directory");
                 if (String.IsNullOrEmpty(path))
-                    path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "";
-                path = path + @"\" + nid + "_" + (System.DateTime.Now.ToString("yyyy-MM-dd hh-mm")) + "" + ".pdf";
+                    path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\downloads";
+                path = path + @"\" + nid + "_" + (System.DateTime.Now.ToString("yyyy-MM-ddhh-mm")) + "" + ".pdf";
 
                 System.IO.File.WriteAllBytes(path, contractByte);
 
-                 
+                path = path.Replace(@"\", "/");
+
                 return path;
             }
             catch (Exception ex)

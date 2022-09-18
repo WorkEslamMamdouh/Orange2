@@ -115,7 +115,7 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-     
+
     let Input = this;
     value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
     return value;
@@ -124,7 +124,7 @@ var setVal = function (value: any): any {
 
 
 function IsNullOrEmpty(value: string): boolean {
-   
+
     if (value == null || value == "")
         return true;
     else
@@ -223,7 +223,7 @@ interface Number {
 
 interface HTMLInputElement {
 
-    setVal: (dec: any) => string;      
+    setVal: (dec: any) => string;
 
 }
 
@@ -299,21 +299,21 @@ namespace App {
     };
 
     Number.prototype.setVal = function (value: any): any {
-         
+
         let Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
 
     HTMLInputElement.prototype.setVal = function (value: any): any {
-         
+
         let Input = this;
         value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
         return value;
     };
 
     HTMLSelectElement.prototype.SetValSelect = function (value: any): any {
-         
+
         let Input = this;
         value == null || value == '' || value == 0 || value == '0' ? Input.value = 'null' : Input.value = value;
         return value;
@@ -663,8 +663,8 @@ function loading(NameBtn: string) {
     $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
 
     setTimeout(function () {
-         
-            $('#Loading_Div').html('');
+
+        $('#Loading_Div').html('');
     }, 150);
 
 }
@@ -1438,15 +1438,15 @@ function DisplayMassage(msg_Ar: string, msg_En: string, msg_type: string, OnOk?:
         $('#Text_Massage').html(msg_Ar);
     $('#DivMassage').removeClass("display_none");
     if (msg_type == '1') {
-        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-success");
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-success");
         $('#DivMassage #icon_Massage').attr("Class", "fas fa-check-circle pe-3");
     }
     else if (msg_type == '2') {
-        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-danger");
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-danger");
         $('#DivMassage #icon_Massage').attr("Class", "fas fa-times-circle pe-3");
     }
     else if (msg_type == '3') {
-        $('#DivMassage .alert-message').attr("Class","toast align-items-center text-white border-0 alert-message show bg-orange");
+        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-orange");
         $('#DivMassage #icon_Massage').attr("Class", "fas fa-exclamation-triangle pe-3");
     }
     setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
@@ -1497,7 +1497,7 @@ function DisplayMassage_Processes(msg_Ar: string, msg_En: string, msg_type: stri
 
 function Errorinput(input: any) {
 
-     
+
     var id = '';
     if (input.selector != null) {
 
@@ -1879,7 +1879,7 @@ function convertToG(date: string) {
 //}
 
 function addDaysOrMonth(date, days, Month) {
-     
+
     var result = new Date(date);
     days != 0 ? result.setDate(result.getDate() + days) : days = 0;
     Month != 0 ? result.setMonth(result.getMonth() + Month) : Month = 0;
@@ -2000,7 +2000,7 @@ function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
                         Details_I_Period = result.Response as Array<I_Period>;
-                         
+
                         if (Details_I_Period.length > 0) {
 
                             if (Details_I_Period[0].Status == 0) {
@@ -2029,7 +2029,7 @@ function CheckPeriodDate(Tr_Date: any, Type_Period: any): boolean {
 }
 
 
- 
+
 
 function Cheak_UserTokenlog() {
     var SysSession = GetSystemEnvironment();
@@ -2079,7 +2079,7 @@ function dynamicSort(property) {
 
 function printDiv(divName: string) {
 
- 
+
     //var printContents = document.getElementById(divName).innerHTML;
     //var originalContents = document.body.innerHTML; 
     //document.body.innerHTML = printContents;
@@ -2124,7 +2124,7 @@ function printDiv(divName: string) {
 
 
 }
- 
+
 function DateSetsSccess(TxtDateProcesses: string, TxtDatefrom: string, TxtDateend: string) {
 
     let DateProcesses = $('#' + TxtDateProcesses + '').val()
@@ -2240,7 +2240,7 @@ function DisabledToolBar() {
 
     $('#divIconbar').addClass('disabledDiv');
 
-} 
+}
 
 function Resizable_Table() {
 
@@ -2359,10 +2359,18 @@ function _base64ToArrayBuffer(base64) {
 
 
 
-function PrintsFrom_To(Name_ID: string, NameTable: string, Condation: string) {
+function PrintsFrom_To(Name_ID: string, NameTable: string, Condation: string, length): string {
+
+    if (length <= 0) {
+        MessageBox.Show('لا توجد فواتير ', 'تحزير')  
+        return
+    }
+    if (length > 100) {
+        MessageBox.Show('الحد الاقصي لي عدد الفواتير ( 100 )', 'تحزير') 
+    }
 
     var SysSession = GetSystemEnvironment();
-     
+
     let rp: ReportParameters = new ReportParameters();
 
 
@@ -2400,12 +2408,24 @@ function PrintsFrom_To(Name_ID: string, NameTable: string, Condation: string) {
             $('#btnPrintsFrom_To').attr('style', '')
             $('#btnPrintsFrom_To').html('تنزيل ملف بطباعة الحركة المختارية');
 
-            alert(result);
 
-            window.open("C:/Users/Bse04/Downloads/1006.pdf", "_blank");
 
+            //alert(result);
+            //debugger
+            //window.open(result, "blank");
+
+            let x = Url.Action("OpenPdf", "Home");
+
+            let UrlPdf = x + "/" + "?" + "path=" + result+"" ; 
+
+            window.open(UrlPdf, "blank");
+
+
+
+            return result
 
         }
     })
 
+    return '';
 }
