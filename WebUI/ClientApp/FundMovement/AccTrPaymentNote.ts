@@ -63,6 +63,7 @@ namespace AccTrPaymentNote {
     var btnBen: HTMLButtonElement;
     var txt_BenCode: HTMLInputElement;
     var txt_BenName: HTMLInputElement;
+    var btnPrintsFrom_To: HTMLButtonElement;
     var btnBenH: HTMLButtonElement;
     var txt_BenCodeH: HTMLInputElement;
     var txt_BenNameH: HTMLInputElement;
@@ -301,6 +302,7 @@ namespace AccTrPaymentNote {
         txt_BenCode = document.getElementById("txt_BenCode") as HTMLInputElement;
         txt_BenName = document.getElementById("txt_BenName") as HTMLInputElement;
 
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
         btnBenH = document.getElementById("btnBenH") as HTMLButtonElement;
         txt_BenCodeH = document.getElementById("txt_BenCodeH") as HTMLInputElement;
         txt_BenNameH = document.getElementById("txt_BenNameH") as HTMLInputElement;
@@ -342,6 +344,8 @@ namespace AccTrPaymentNote {
 
         txt_BenCodeH.onchange = txt_BenCodeH_onchange;
         btnBenH.onclick = btnBenH_onclick;
+
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
 
     function fillddlCashType() {
@@ -2248,6 +2252,87 @@ namespace AccTrPaymentNote {
             }
         });
     }
+
+
+
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+
+        if (custId == 0) { custId = null; }
+        if (vndid == 0) { vndid = null; }
+        if (BankCode == 0) { BankCode = null; }
+        if (expid == 0) { expid = null; }
+        if (fromBoxid == 0) { fromBoxid = null; }
+        if (Boxid == 0) { Boxid = null; }
+        if (RecPayTypeId == 0) { RecPayTypeId = null; }
+        if (CashType == 1001) { CashType = null; }
+        if (Status == "All") { Status = null; }
+
+
+
+        try {
+
+            let Name_ID = 'ReceiptID'
+            let NameTable = 'IQ_GetBoxReceiveList'
+            let Condation1 = "  TrType=" + IQ_TrType + " and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + DateFrom + "' and TrDate <= ' " + DateTo + " ' ";
+            let Condation2 = " ";
+
+
+            if (CashType != null)
+                Condation2 = Condation2 + " and CashType=" + CashType;
+
+            if (Boxid != null)
+                Condation2 = Condation2 + " and CashBoxID=" + Boxid;
+            if (RecPayTypeId != null)
+                Condation2 = Condation2 + " and RecPayTypeId=" + RecPayTypeId;
+            if (GlobalID != 0) {
+                if (RecPayTypeId == 1) {
+                    Condation2 = Condation2 + " and CustomerID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 2) {
+                    Condation2 = Condation2 + " and VendorID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 3) {
+                    Condation2 = Condation2 + " and BankAccountCode ='" + GlobalID + "'";
+                }
+                else if (RecPayTypeId == 4) {
+                    Condation2 = Condation2 + " and ExpenseID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 5) {
+                    Condation2 = Condation2 + " and FromCashBoxID =" + GlobalID;
+                }
+            }
+            if (Status != null)
+                Condation2 = Condation2 + " and Status=" + Status;
+
+            if (custId != null)
+                Condation2 = Condation2 + " and CustomerID=" + GlobalID;
+            if (vndid != null)
+                Condation2 = Condation2 + " and VendorID=" + GlobalID;
+            if (BankCode != null)
+                Condation2 = Condation2 + " and BankAccountCode='" + GlobalID + "'";
+            if (expid != null)
+                Condation2 = Condation2 + " and ExpenseID=" + GlobalID;
+            if (fromBoxid != null)
+                Condation2 = Condation2 + " and FromCashBoxID=" + GlobalID;
+
+
+            ///////////
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+
+
+            PrintsFrom_To(TransType.AccPayment, Name_ID, NameTable, Condation3, Details.length)
+
+
+
+        } catch (e) {
+
+            return
+        }
+
+    }
+
 
 }
 

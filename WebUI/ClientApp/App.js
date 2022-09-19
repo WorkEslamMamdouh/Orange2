@@ -114,6 +114,8 @@ var TransType = {
     InvoiceOperationReturn: 'Pro_Ret',
     Pur_Receive: 'Pur',
     Pur_Receive_Return: 'Pur_Ret',
+    AccReceive: 'AccReceive',
+    AccPayment: 'AccPayment',
 };
 var Keys = {
     Enter: "Enter"
@@ -1883,6 +1885,12 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     rp.Name_ID = Name_ID;
     rp.NameTable = NameTable;
     rp.Condation = Condation;
+    if (Type_Trans == "AccReceive") {
+        rp.Repdesign = 1;
+    }
+    if (Type_Trans == "AccPayment") {
+        rp.Repdesign = 2;
+    }
     rp.FinYear = Number(SysSession.CurrentYear);
     Ajax.CallAsync({
         url: Url.Action("Prnt_From_To", "GeneralRep"),

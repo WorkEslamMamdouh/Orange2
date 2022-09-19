@@ -55,6 +55,7 @@ var AccTrPaymentNote;
     var btnBen;
     var txt_BenCode;
     var txt_BenName;
+    var btnPrintsFrom_To;
     var btnBenH;
     var txt_BenCodeH;
     var txt_BenNameH;
@@ -259,6 +260,7 @@ var AccTrPaymentNote;
         btnBen = document.getElementById("btnBen");
         txt_BenCode = document.getElementById("txt_BenCode");
         txt_BenName = document.getElementById("txt_BenName");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnBenH = document.getElementById("btnBenH");
         txt_BenCodeH = document.getElementById("txt_BenCodeH");
         txt_BenNameH = document.getElementById("txt_BenNameH");
@@ -294,6 +296,7 @@ var AccTrPaymentNote;
         btnBen.onclick = btnBen_onclick;
         txt_BenCodeH.onchange = txt_BenCodeH_onchange;
         btnBenH.onclick = btnBenH_onclick;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function fillddlCashType() {
         Ajax.Callsync({
@@ -2029,6 +2032,84 @@ var AccTrPaymentNote;
                 }
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        if (custId == 0) {
+            custId = null;
+        }
+        if (vndid == 0) {
+            vndid = null;
+        }
+        if (BankCode == 0) {
+            BankCode = null;
+        }
+        if (expid == 0) {
+            expid = null;
+        }
+        if (fromBoxid == 0) {
+            fromBoxid = null;
+        }
+        if (Boxid == 0) {
+            Boxid = null;
+        }
+        if (RecPayTypeId == 0) {
+            RecPayTypeId = null;
+        }
+        if (CashType == 1001) {
+            CashType = null;
+        }
+        if (Status == "All") {
+            Status = null;
+        }
+        try {
+            var Name_ID = 'ReceiptID';
+            var NameTable = 'IQ_GetBoxReceiveList';
+            var Condation1 = "  TrType=" + IQ_TrType + " and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + DateFrom + "' and TrDate <= ' " + DateTo + " ' ";
+            var Condation2 = " ";
+            if (CashType != null)
+                Condation2 = Condation2 + " and CashType=" + CashType;
+            if (Boxid != null)
+                Condation2 = Condation2 + " and CashBoxID=" + Boxid;
+            if (RecPayTypeId != null)
+                Condation2 = Condation2 + " and RecPayTypeId=" + RecPayTypeId;
+            if (GlobalID != 0) {
+                if (RecPayTypeId == 1) {
+                    Condation2 = Condation2 + " and CustomerID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 2) {
+                    Condation2 = Condation2 + " and VendorID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 3) {
+                    Condation2 = Condation2 + " and BankAccountCode ='" + GlobalID + "'";
+                }
+                else if (RecPayTypeId == 4) {
+                    Condation2 = Condation2 + " and ExpenseID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 5) {
+                    Condation2 = Condation2 + " and FromCashBoxID =" + GlobalID;
+                }
+            }
+            if (Status != null)
+                Condation2 = Condation2 + " and Status=" + Status;
+            if (custId != null)
+                Condation2 = Condation2 + " and CustomerID=" + GlobalID;
+            if (vndid != null)
+                Condation2 = Condation2 + " and VendorID=" + GlobalID;
+            if (BankCode != null)
+                Condation2 = Condation2 + " and BankAccountCode='" + GlobalID + "'";
+            if (expid != null)
+                Condation2 = Condation2 + " and ExpenseID=" + GlobalID;
+            if (fromBoxid != null)
+                Condation2 = Condation2 + " and FromCashBoxID=" + GlobalID;
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.AccPayment, Name_ID, NameTable, Condation3, Details.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(AccTrPaymentNote || (AccTrPaymentNote = {}));
 //# sourceMappingURL=AccTrPaymentNote.js.map

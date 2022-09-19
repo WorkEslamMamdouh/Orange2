@@ -74,6 +74,7 @@ var PurTrReturn;
     var btnSave;
     var btnBack;
     var btnAdd;
+    var btnPrintsFrom_To;
     var btnRecieveSearch;
     //flags
     var Show = true;
@@ -161,6 +162,7 @@ var PurTrReturn;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function Check_on_user_type() {
         if (SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3) { //Salesman
@@ -214,6 +216,7 @@ var PurTrReturn;
         btnRecieveSearch = document.getElementById("btnRecieveSearch");
         btnEdit = document.getElementById("btnUpdate");
         btnAdd = document.getElementById("btnAdd");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
     }
     //-----------------------------------------------------------------------  DropDownList Region ----------------------------------
     function FillddlVendorMaster() {
@@ -2015,6 +2018,44 @@ var PurTrReturn;
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        var startdt = DateFormatRep(txtFromDate.value).toString();
+        var enddt = DateFormatRep(txtToDate.value).toString();
+        var salesmanId = 0;
+        var vendorId = 0;
+        var status = 0;
+        if (ddlVendorMaster.value != "null") {
+            vendorId = Number(ddlVendorMaster.value.toString());
+        }
+        if (ddlSalesmanMaster.value != "null") {
+            salesmanId = Number(ddlSalesmanMaster.value.toString());
+        }
+        status = Number(ddlStateType.value.toString());
+        try {
+            var Name_ID = 'ReceiveID';
+            var NameTable = 'IQ_GetPurReceiveStaistic';
+            var Condation1 = "  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startdt + "' and TrDate <= ' " + enddt + " ' ";
+            var Condation2 = " ";
+            if (salesmanId != 0 && salesmanId != null)
+                Condation2 = Condation2 + " and SalesmanId =" + salesmanId;
+            if (vendorId != 0 && vendorId != null)
+                Condation2 = Condation2 + " and VendorID =" + vendorId;
+            if (status == 0 || status == 1) {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            else if (status == 2) {
+                Condation2 = Condation2 + "";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.Pur_Receive_Return, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(PurTrReturn || (PurTrReturn = {}));
 //# sourceMappingURL=PurTrReturn.js.map

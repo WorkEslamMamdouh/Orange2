@@ -114,7 +114,9 @@ var TransType = {
     InvoiceOperation: 'Pro',
     InvoiceOperationReturn: 'Pro_Ret',
     Pur_Receive: 'Pur',
-    Pur_Receive_Return: 'Pur_Ret', 
+    Pur_Receive_Return: 'Pur_Ret',
+    AccReceive: 'AccReceive', 
+    AccPayment: 'AccPayment', 
 }
 
 
@@ -2371,11 +2373,11 @@ function _base64ToArrayBuffer(base64) {
 function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, Condation: string, length): string {
 
     if (length <= 0) {
-        MessageBox.Show('لا توجد فواتير ', 'تحزير')  
+        MessageBox.Show('لا توجد فواتير ', 'تحزير')
         return
     }
     if (length > 100) {
-        MessageBox.Show('الحد الاقصي لي عدد الفواتير ( 100 )', 'تحزير') 
+        MessageBox.Show('الحد الاقصي لي عدد الفواتير ( 100 )', 'تحزير')
     }
 
     var SysSession = GetSystemEnvironment();
@@ -2407,6 +2409,14 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     rp.NameTable = NameTable;
     rp.Condation = Condation;
 
+
+    if (Type_Trans == "AccReceive") {
+        rp.Repdesign = 1;
+    }
+    if (Type_Trans == "AccPayment") {
+        rp.Repdesign = 2;
+    }
+
     rp.FinYear = Number(SysSession.CurrentYear);
 
     Ajax.CallAsync({
@@ -2426,7 +2436,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
             let x = Url.Action("OpenPdf", "Home");
 
-            let UrlPdf = x + "/" + "?" + "path=" + result+"" ; 
+            let UrlPdf = x + "/" + "?" + "path=" + result + "";
 
             window.open(UrlPdf, "blank");
 

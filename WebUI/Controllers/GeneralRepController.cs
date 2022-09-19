@@ -455,7 +455,17 @@ namespace Inv.WebUI.Controllers
                     IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
                     Singl_byte = buildReportNew(que);
                 }
-
+                if (rp.Type_Trans == "AccReceive")
+                {
+                    IEnumerable<IProc_Prnt_AccReceive_Result> que = Rpt_Prnt_AccReceive(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+                if (rp.Type_Trans == "AccPayment")
+                {
+                    IEnumerable<IProc_Prnt_AccReceive_Result> que = Rpt_Prnt_AccReceive(rp);
+                    Singl_byte = buildReportNew(que);
+                }
+ 
 
                 Listbyte.Add(Singl_byte); 
 
