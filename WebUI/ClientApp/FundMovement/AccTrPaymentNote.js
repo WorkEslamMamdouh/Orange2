@@ -1047,15 +1047,11 @@ var AccTrPaymentNote;
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    for (var i = 0; i < Details.length; i++) {
-                        Details[i].TrDate = DateFormat(Details[i].TrDate);
-                        if (Details[i].Status == 1) {
-                            Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified");
-                        }
-                        else {
-                            Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported");
-                        }
-                    }
+                    //for (var i = 0; i < Details.length; i++) {
+                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
+                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified"); }
+                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported"); }
+                    //}
                     InitializeGrid();
                     //filter_DataSource();
                     ReportGrid.DataSource = Details;
@@ -1097,14 +1093,29 @@ var AccTrPaymentNote;
         ReportGrid.Columns = [
             { title: "الرقم", name: "ReceiptID", type: "text", width: "5%", visible: false },
             { title: res.App_InvoiceNum, name: "TrNo", type: "text", width: "8%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "8%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
             { title: res.App_Drainage_Type, name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "20%" },
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "8%" },
             { title: res.App_beneficiary, name: (lang == "ar" ? "Bef_DescA" : "Bef_DescE"), type: "text", width: "15%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "8%" },
             { title: res.App_Cash, name: "CashAmount", type: "text", width: "8%" },
             { title: res.App_Card, name: "CardAmount", type: "text", width: "8%" },
-            { title: res.App_Certified, name: "Status_New", type: "text", width: "8%" },
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
+                    ;
+                    return txt;
+                }
+            },
         ];
         ReportGrid.Bind();
     }

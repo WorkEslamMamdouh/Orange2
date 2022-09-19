@@ -271,7 +271,7 @@ var SlsTrSalesManager;
         btnPrintslip.onclick = btnPrintslip_onclick;
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
-        searchbutmemreport.onchange = _SearchBox_Change;
+        searchbutmemreport.onkeyup = _SearchBox_Change;
         //searchbutmemreport.onkeyup = _SearchBox_Change1;
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
         btndiv_1.onclick = btndiv_1_onclick;
@@ -2249,6 +2249,17 @@ var SlsTrSalesManager;
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+        if (searchbutmemreport.value != "") {
+            var search_1 = searchbutmemreport.value.toLowerCase();
+            SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0
+                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0; });
+            Grid.DataSource = SearchDetails;
+            Grid.Bind();
+        }
+        else {
+            Grid.DataSource = SlsInvoiceStatisticsDetails;
+            Grid.Bind();
+        }
         //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
         // 
         //var myarr = $("#divGridDetails").jsGrid("option", "data");
@@ -2268,16 +2279,6 @@ var SlsTrSalesManager;
         //Grid.Bind();
         return;
         //$("#divGridDetails").jsGrid("option", "pageSize", 10000); 
-        //if (searchbutmemreport.value != "") {
-        //    let search: string = searchbutmemreport.value.toLowerCase();
-        //    SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-        //        || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
-        //    Grid.DataSource = SearchDetails;
-        //    Grid.Bind();
-        //} else {
-        //    Grid.DataSource = SlsInvoiceStatisticsDetails;
-        //    Grid.Bind();
-        //}
         //let cnt = 1;
         //if (SlsInvoiceStatisticsDetails.length > 0) {
         //    let ii = 0;

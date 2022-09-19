@@ -303,7 +303,7 @@ namespace SlsTrSalesManager {
         btnPrintslip.onclick = btnPrintslip_onclick;
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
-        searchbutmemreport.onchange = _SearchBox_Change;
+        searchbutmemreport.onkeyup = _SearchBox_Change;
         //searchbutmemreport.onkeyup = _SearchBox_Change1;
 
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
@@ -2864,6 +2864,23 @@ namespace SlsTrSalesManager {
 
     function _SearchBox_Change() {
 
+
+           if (searchbutmemreport.value != "") {
+
+            let search: string = searchbutmemreport.value.toLowerCase();
+            SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
+                || x.Slsm_DescA.toLowerCase().search(search) >= 0 );
+
+            Grid.DataSource = SearchDetails;
+            Grid.Bind();
+        } else {
+            Grid.DataSource = SlsInvoiceStatisticsDetails;
+            Grid.Bind();
+        }
+
+
+
+
         //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
 
         // 
@@ -2896,19 +2913,7 @@ namespace SlsTrSalesManager {
 
 
 
-        //if (searchbutmemreport.value != "") {
-
-        //    let search: string = searchbutmemreport.value.toLowerCase();
-        //    SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-        //        || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
-
-        //    Grid.DataSource = SearchDetails;
-        //    Grid.Bind();
-        //} else {
-        //    Grid.DataSource = SlsInvoiceStatisticsDetails;
-        //    Grid.Bind();
-        //}
-
+     
 
 
         //let cnt = 1;
