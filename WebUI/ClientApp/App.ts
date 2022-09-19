@@ -2388,6 +2388,13 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
     $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
 
+    setTimeout(function () {
+
+        $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
+        $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnPrintsFrom_To').attr('disabled', 'disabled')
+    }, 200);
+
 
     rp.CompCode = SysSession.CompCode;
     rp.BranchCode = SysSession.BranchCode;
@@ -2426,7 +2433,8 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
             let result = d;
             $('#btnPrintsFrom_To').attr('style', '')
-            $('#btnPrintsFrom_To').html('تنزيل ملف بطباعة الحركة المختارية');
+            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
+            $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
 
