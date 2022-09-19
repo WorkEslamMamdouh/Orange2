@@ -2437,7 +2437,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
-
+       
             //alert(result);
             //debugger
             //window.open(result, "blank");
@@ -2445,6 +2445,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             let x = Url.Action("OpenPdf", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
+          
 
             window.open(UrlPdf, "blank");
 

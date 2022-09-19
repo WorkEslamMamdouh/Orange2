@@ -477,7 +477,17 @@ namespace Inv.WebUI.Controllers
             String path = String.Empty;
 
 
-            path =  DownloadContract("Pdf_Invoices", Model_byte);
+            if (rp.DocPDFFolder == "")
+            {
+                path = Server.MapPath("/SavePath/"); 
+            }
+            else
+            {
+                path = rp.DocPDFFolder; 
+            }
+
+             
+            path =  DownloadContract(path, Model_byte);
 
 
             return path;
@@ -486,6 +496,7 @@ namespace Inv.WebUI.Controllers
 
         public string DownloadContract( string nid, byte[] contractByte)
         {
+            string path = "";
             try
             {
                 //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"~/") + @"SavePath\" + nid + " " + ".pdf";
@@ -499,19 +510,14 @@ namespace Inv.WebUI.Controllers
                 //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"" + DocPDFFolder + "") + @"" + nid + "" + ".pdf";
                 //System.IO.File.WriteAllBytes(savePath, contractByte);
 
+ 
+                string savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + nid + "") + @"Pdf_Invoices" + ".pdf";
 
 
-                string path = "";
-                RegistryKey rKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Internet Explorer\Main");
-                if (rKey != null)
-                    path = (String)rKey.GetValue("Default Download Directory");
-                if (String.IsNullOrEmpty(path))
-                    path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\downloads";
-                path = path + @"\_" + (System.DateTime.Now.ToString("yyyy-MM-ddhh-mm")) + "" + "";
+                System.IO.File.WriteAllBytes(savePath, contractByte);
 
-                  path = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + path + "") + @"" + nid + "" + ".pdf"; ;
-
-                System.IO.File.WriteAllBytes(path, contractByte);
+                path = savePath;
+                //System.IO.File.WriteAllBytes(path, contractByte);
 
                 path = path.Replace(@"\", "/");
 
@@ -519,11 +525,10 @@ namespace Inv.WebUI.Controllers
             }
             catch (Exception ex)
             {
-
+                return path;
             }
 
-
-            return "";
+             
         }
  
         public static byte[] ConcatenatePdfs(IEnumerable<byte[]> documents)

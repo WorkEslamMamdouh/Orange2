@@ -414,10 +414,23 @@ namespace AccTrPaymentNote {
     function txtCashTypeNew_onchange() {
         if (txtCashTypeNew.value == '0') {
             $('#Bank_Div').addClass('display_none');
-            $('#La_CashAmount').removeClass('display_none');
+            $('#La_CashAmount').removeClass('display_none'); 
+            $('#txt_CashAmount').removeClass('display_none'); 
+            $('#La_CardAmount').addClass('display_none'); 
+            $('#txt_CardAmount').addClass('display_none'); 
+            $('#txt_Amount').attr('disabled', 'disabled');
+            $('#txt_CheckNo').val('');
+            $('#txt_TransferNo').val('');
+            $('#txt_BankAcc_Code').val('null');
+            chkIsDeffered.checked = false;
+            txtDueDate.value = GetDate();
+        }
+        else if (txtCashTypeNew.value == '7') {
+            $('#Bank_Div').addClass('display_none');
             $('#La_CardAmount').removeClass('display_none');
-            $('#txt_CashAmount').removeClass('display_none');
-            $('#txt_CardAmount').removeClass('display_none');
+            $('#txt_CardAmount').removeClass('display_none'); 
+            $('#txt_CashAmount').addClass('display_none');
+            $('#La_CashAmount').addClass('display_none');
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
