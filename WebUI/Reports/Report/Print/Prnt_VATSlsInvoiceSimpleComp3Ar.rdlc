@@ -2237,7 +2237,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>فاتورة ضريبية مبسطة</Value>
+                  <Value>فاتورة ضريبية </Value>
                   <Style>
                     <FontSize>16pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -2252,7 +2252,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Simplified Tax Invoice</Value>
+                  <Value>Tax Invoice</Value>
                   <Style>
                     <FontSize>16pt</FontSize>
                     <FontWeight>Bold</FontWeight>

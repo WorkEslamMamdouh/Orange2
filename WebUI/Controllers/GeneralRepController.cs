@@ -507,7 +507,9 @@ namespace Inv.WebUI.Controllers
                     path = (String)rKey.GetValue("Default Download Directory");
                 if (String.IsNullOrEmpty(path))
                     path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\downloads";
-                path = path + @"\" + nid + "_" + (System.DateTime.Now.ToString("yyyy-MM-ddhh-mm")) + "" + ".pdf";
+                path = path + @"\_" + (System.DateTime.Now.ToString("yyyy-MM-ddhh-mm")) + "" + "";
+
+                  path = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + path + "") + @"" + nid + "" + ".pdf"; ;
 
                 System.IO.File.WriteAllBytes(path, contractByte);
 
