@@ -523,30 +523,7 @@ namespace Inv.WebUI.Controllers
 
             return "";
         }
-
-        //public static byte[] MergePDFs(List<byte[]> lPdfByteContent)
-        //{
-        //    using (MemoryStream oMemoryStream = new MemoryStream())
-        //    {
-        //        using (PdfWriter oWriter = new PdfWriter(oMemoryStream))
-        //        {
-        //            oWriter.SetSmartMode(true);
-
-        //            using (PdfDocument oMergedPdf = new PdfDocument(oWriter))
-        //            {
-        //                PdfMerger oMerger = new PdfMerger(oMergedPdf, false, false);
-
-        //                for (int i = 0; i < lPdfByteContent.Count; i++)
-        //                {
-        //                    PdfDocument oPdfAux = new PdfDocument(new PdfReader(new MemoryStream(lPdfByteContent[i])));
-        //                    oMerger.SetCloseSourceDocuments(true).Merge(oPdfAux, 1, oPdfAux.GetNumberOfPages());
-        //                }
-        //            }
-        //        }
-        //        return oMemoryStream.ToArray();
-        //    }
-        //}
-
+ 
         public static byte[] ConcatenatePdfs(IEnumerable<byte[]> documents)
         {
             using (var ms = new MemoryStream())
@@ -574,47 +551,6 @@ namespace Inv.WebUI.Controllers
                 return allPagesContent;
             }
         }
-
-
-        public static byte[] concatAndAddContent(List<byte[]> pdf)
-        {
-            byte[] all;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                Document doc = new Document();
-
-                PdfWriter writer = PdfWriter.GetInstance(doc, ms);
-
-                doc.SetPageSize(PageSize.LETTER);
-                doc.Open();
-                PdfContentByte cb = writer.DirectContent;
-                PdfImportedPage page;
-
-                PdfReader reader;
-                foreach (byte[] p in pdf)
-                {
-                    reader = new PdfReader(p);
-                    int pages = reader.NumberOfPages;
-
-                    // loop over document pages
-                    for (int i = 1; i <= pages; i++)
-                    {
-                        doc.SetPageSize(PageSize.LETTER);
-                        doc.NewPage();
-                        page = writer.GetImportedPage(reader, i);
-                        cb.AddTemplate(page, 0, 0);
-                    }
-                }
-
-                doc.Close();
-                all = ms.GetBuffer();
-                ms.Flush();
-                ms.Dispose();
-            }
-
-            return all;
-        }
-
+         
     }
 }

@@ -100,8 +100,7 @@ namespace Inv.WebUI.Controllers
 
         public ActionResult OpenPdf(string path)
         {
-            //C:\Users\Bse04\downloads\Pdf_Invoices_2022-09-18 03-03.pdf
-            //path = path.Replace(@"\""", "/");
+          
             return File(""+ path + "","application/pdf");
         }
 
