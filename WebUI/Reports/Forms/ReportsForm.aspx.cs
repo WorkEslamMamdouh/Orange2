@@ -647,7 +647,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -755,7 +755,7 @@ namespace RS.WebUI.Reports.Forms
             int Repdesign = RepPar.Repdesign;
 
             Rep = OpenReport("Rpt_Prnt_AccVendorAdjust");
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
             if (Repdesign == 1) { Rep = OpenReport("Rpt_Prnt_AccAdjust"); }
@@ -1101,7 +1101,7 @@ namespace RS.WebUI.Reports.Forms
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
             var TRId = int.Parse(RepPar.TRId.ToString());
@@ -1139,7 +1139,7 @@ namespace RS.WebUI.Reports.Forms
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
             var TRId = int.Parse(RepPar.TRId.ToString());
@@ -1173,7 +1173,7 @@ namespace RS.WebUI.Reports.Forms
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
             var TRId = int.Parse(RepPar.TRId.ToString());
@@ -1207,7 +1207,7 @@ namespace RS.WebUI.Reports.Forms
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
 
-            int Type = int.Parse(RepPar.Type.ToString()); 
+            int Type = int.Parse(RepPar.RepType.ToString()); 
 
             var TRId = int.Parse(RepPar.TRId.ToString());
             SqlParameter spTRId = new SqlParameter("@TRId", TRId);
@@ -1240,7 +1240,7 @@ namespace RS.WebUI.Reports.Forms
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
             var TRId = int.Parse(RepPar.TRId.ToString());
@@ -1333,7 +1333,7 @@ namespace RS.WebUI.Reports.Forms
                 }
             }
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1417,7 +1417,7 @@ namespace RS.WebUI.Reports.Forms
             }
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1487,7 +1487,7 @@ namespace RS.WebUI.Reports.Forms
             }
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1748,7 +1748,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1788,7 +1788,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1847,7 +1847,7 @@ namespace RS.WebUI.Reports.Forms
             Rep = OpenReport("Rpt_PurReceiveReturn");
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1894,7 +1894,7 @@ namespace RS.WebUI.Reports.Forms
 
             Rep = OpenReport("Rpt_Prnt_PurReceiveReturn");
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -1938,7 +1938,7 @@ namespace RS.WebUI.Reports.Forms
             }
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3020,7 +3020,7 @@ namespace RS.WebUI.Reports.Forms
 
 
             Rep = OpenReport("Prnt_JournalVoucher");
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3263,7 +3263,7 @@ namespace RS.WebUI.Reports.Forms
 
 
             Rep = OpenReport("Prnt_StkTransfer");
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3299,7 +3299,7 @@ namespace RS.WebUI.Reports.Forms
 
 
             Rep = OpenReport("Prnt_StkAdjust");
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3382,7 +3382,7 @@ namespace RS.WebUI.Reports.Forms
 
 
             Rep = OpenReport("Prnt_OerationTf");
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3461,7 +3461,7 @@ namespace RS.WebUI.Reports.Forms
             var typ = int.Parse(RepPar.Typ.ToString());
             if (typ == 1) { Rep = OpenReport("Prnt_VATSlsInvoicePrice"); }
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3532,7 +3532,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3587,7 +3587,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3626,7 +3626,7 @@ namespace RS.WebUI.Reports.Forms
             Rep = OpenReport("Prnt_VATPurInvoice");
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 
@@ -3661,7 +3661,7 @@ namespace RS.WebUI.Reports.Forms
             Rep = OpenReport("Prnt_VATPurReturn");
 
 
-            int Type = int.Parse(RepPar.Type.ToString());
+            int Type = int.Parse(RepPar.RepType.ToString());
             if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
             SqlParameter spRepType = new SqlParameter("@RepType", Type);
 

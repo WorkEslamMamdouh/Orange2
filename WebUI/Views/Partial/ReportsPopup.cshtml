@@ -80,8 +80,11 @@
 </style>
 <div id="div_Reports" class="d-flex justify-content-center" style="direction: ltr!important">
     <div class="row">
-        <div id="DivFilter" class="d-flex justify-content-center mb-5">
-            <button id="btnPrintPage" class="btn btn-main" style="z-index:999999999">  طبـــــاعة  <i class="fa fa-print"></i></button>
+        <div id="DivFilter" class="d-flex justify-content-center mb-2">
+            <button id="btnPrintPage" class="btn btn-main display_none" style="z-index:999999999">  طبـــــاعة  <i class="fa fa-print"></i></button>
+            <button id="btnPrintEX" class="btn btn-main  " style="z-index:999999999">  تنزيل EX  <i class="fas fa-file-csv fa-fw side-icon ms-1"></i></button>
+            <label class="col-xs-1"></label>
+            <button id="btnPrintPdf" class="btn btn-main " style="z-index:999999999">  تنزيل Pdf  <i class="fas fa-file-pdf fa-fw side-icon ms-1"></i></button>
         </div>
         <div id="printableArea" class="d-flex justify-content-center">
             <div class="lds-ring"></div>
@@ -89,7 +92,11 @@
         <div id="BackError" class="display_none"> </div>
         <div id="editor"></div>
     </div>
-    
+     
+</div>
+
+<div id="printableAreaNew" class="d-flex justify-content-center" style="">
+
 </div>
 @*<div id="div_Reports" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0   borderred" style="direction: ltr!important; text-align: center; background-color:#143f6b  !important;  ">
     <div id="DivFilter" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0">

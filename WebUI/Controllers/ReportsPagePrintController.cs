@@ -27,7 +27,11 @@ using Spire.Pdf;
 using FileFormat = Spire.Pdf.FileFormat;
 using System.Web.UI.WebControls;
 using System.Text;
-using Microsoft.Win32;
+using Microsoft.Win32; 
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
+
 //using Spire.Xls;
 
 namespace Inv.WebUI.Controllers
@@ -241,6 +245,72 @@ namespace Inv.WebUI.Controllers
         }
 
 
+        public string DownloadContract(string nid, byte[] contractByte)
+        {
+            string path = "";
+            try
+            {
+                //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"~/") + @"SavePath\" + nid + " " + ".pdf";
+                //System.IO.File.WriteAllBytes(savePath, contractByte);
+                //string path = @"F:/PDFFolder/" + @"Comp1\" + nid + "" + ".pdf" D:/PDFFolder/;
+
+                //SessionRecord ses = new SessionRecord();
+                //ses.CurrentYear = WebConfigurationManager.AppSettings["DefaultYear"];
+                //ses.ScreenLanguage = WebConfigurationManager.AppSettings["Defaultlanguage"];
+
+                //string savePath = System.Web.HttpContext.Current.Server.MapPath(@"" + DocPDFFolder + "") + @"" + nid + "" + ".pdf";
+                //System.IO.File.WriteAllBytes(savePath, contractByte);
+
+
+                string savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + nid + "") + @"Pdf_Invoices" + ".pdf";
+
+
+                System.IO.File.WriteAllBytes(savePath, contractByte);
+
+                path = savePath;
+                //System.IO.File.WriteAllBytes(path, contractByte);
+
+                path = path.Replace(@"\", "/");
+
+                return path;
+            }
+            catch (Exception ex)
+            {
+                return path;
+            }
+
+
+        }
+
+        public static byte[] ConcatenatePdfs(IEnumerable<byte[]> documents)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var outputDocument = new Document();
+                var writer = new PdfCopy(outputDocument, ms);
+                outputDocument.Open();
+
+                foreach (var doc in documents)
+                {
+                    var reader = new PdfReader(doc);
+                    for (var i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        writer.AddPage(writer.GetImportedPage(reader, i));
+                    }
+                    writer.FreeReader(reader);
+                    reader.Close();
+                }
+
+                writer.Close();
+                outputDocument.Close();
+                var allPagesContent = ms.GetBuffer();
+                ms.Flush();
+
+                return allPagesContent;
+            }
+        }
+
+
         public string buildReport(params object[] models)
         {
             string ReportPDFFilename = "Report-" + DateTime.Now + ".pdf";
@@ -269,41 +339,30 @@ namespace Inv.WebUI.Controllers
             try
             {
 
-                Random rnd = new Random();
-                int Result = rnd.Next(1, 1000);
-
-
-                if (DocPDFFolder == "")
-                {
-                    Str = Server.MapPath("/SavePath/");
-
-                }
-                else
-                {
-                    Str = DocPDFFolder;
-
-                }
 
                 //Byte[] mybytes = localReport.Render("HTML 4.0");
 
                 byte[] renderdByte;
                 renderdByte = localReport.Render("PDF");
 
-                PdfDocument pdf = new PdfDocument();
-                pdf.LoadFromBytes(renderdByte);
-                try
-                {
-                    pdf.SaveToFile(Str + "Result.html", FileFormat.HTML);
 
-                }
-                catch (Exception)
+                String path = String.Empty;
+
+
+                if (DocPDFFolder == "")
                 {
-                    Str = Server.MapPath("/SavePath/");
-                    pdf.SaveToFile(Str + "Result.html", FileFormat.HTML);
+                    path = Server.MapPath("/SavePath/");
+                }
+                else
+                {
+                    path = DocPDFFolder;
                 }
 
-                string html = System.IO.File.ReadAllText(Str + "Result.html");
-                return html;
+
+                path = DownloadContract(path, renderdByte);
+
+
+                return path;
 
             }
             catch (Exception ex)

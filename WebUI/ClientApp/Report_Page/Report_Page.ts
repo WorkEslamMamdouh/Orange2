@@ -5,7 +5,9 @@ $(document).ready(() => {
 
 namespace Report_Page {
     var SysSession: SystemSession = GetSystemSession(Modules.Home);
-    var btnPDF: HTMLButtonElement;
+    //var btnPDF: HTMLButtonElement;
+    var btnPrintEX: HTMLButtonElement;
+    var btnPrintPdf: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
     var result;
     var succes;
@@ -32,7 +34,9 @@ namespace Report_Page {
 
     function InitalizeControls() {
 
-        btnPDF = document.getElementById("btnPDF") as HTMLButtonElement;
+        //btnPDF = document.getElementById("btnPDF") as HTMLButtonElement;
+        btnPrintPdf = document.getElementById("btnPrintPdf") as HTMLButtonElement;
+        btnPrintEX = document.getElementById("btnPrintEX") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrintPage") as HTMLButtonElement;
 
 
@@ -41,9 +45,57 @@ namespace Report_Page {
     function InitalizeEvents() {
 
         btnPrint.onclick = print;
+
+        btnPrintEX.onclick = () => { ReportDownload(3)};
+        btnPrintPdf.onclick = () => { ReportDownload(2)};
         //btnPDF.onclick = btnPDF_onclick;
 
     }
+
+    function ReportDownload(OutType: number) {
+
+        var ReportData = localStorage.getItem("Report_Data");
+
+        var data_New: ReportParameters = JSON.parse(ReportData);
+        if (ReportData != null) {
+
+            data_New.CompCode = SysSession.CurrentEnvironment.CompCode;
+            data_New.BranchCode = SysSession.CurrentEnvironment.BranchCode;
+            data_New.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
+            data_New.CompNameE = SysSession.CurrentEnvironment.CompanyName;
+            data_New.UserCode = SysSession.CurrentEnvironment.UserCode;
+            data_New.Tokenid = SysSession.CurrentEnvironment.Token;
+            data_New.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
+            data_New.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+            data_New.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+            data_New.BraNameA = SysSession.CurrentEnvironment.BranchName;
+            data_New.BraNameE = SysSession.CurrentEnvironment.BranchName;
+            data_New.DocPDFFolder = SysSession.CurrentEnvironment.I_Control[0].DocPDFFolder;
+            data_New.LoginUser = SysSession.CurrentEnvironment.UserCode;
+            if (data_New.BraNameA == null || data_New.BraNameE == null) {
+
+                data_New.BraNameA = " ";
+                data_New.BraNameE = " ";
+            }
+
+
+            data_New.RepType = OutType;//output report as View
+            data_New.Type = OutType;//output report as View
+
+            Ajax.CallAsync({
+                url: Url.Action("" + data_New.Name_function + "", "GeneralReports"),
+                data: data_New,
+                success: (d) => {  
+                    let result = d.result as string; 
+                    window.open(result, "_blank");
+                }
+            })
+
+        }
+
+
+    }
+
     function GetReport() {
 
         var ReportData = localStorage.getItem("Report_Data");
@@ -76,7 +128,15 @@ namespace Report_Page {
                 data: data_New,
                 success: (d) => {
                     let result = d as BaseResponse;
-                    $('#printableArea').html("" + result + "");
+
+                    //$('#printableArea').html("" + result + "");
+                    $('#printableArea').html("");
+                    let x = Url.Action("OpenPdf", "Home");
+
+                    let UrlPdf = x + "/" + "?" + "path=" + result + "";
+
+                    $('#printableAreaNew').attr("style","direction: ltr!important;height: 90%;overflow: scroll;margin-right: 4%;width: 90%;");
+                    $('#printableAreaNew').append('<iframe src="' + UrlPdf+'" frameBorder="0"scrolling="auto"height="100%" width="100%"></iframe>');
                     
                 }
             })
