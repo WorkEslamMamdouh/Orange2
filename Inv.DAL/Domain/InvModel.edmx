@@ -455,6 +455,8 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="CodePrefex" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="A_RecPay_D_Group">
           <Key>
@@ -1952,6 +1954,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="IsAccPeriodClose" Type="bit" />
           <Property Name="IsInvPeriodClose" Type="bit" />
           <Property Name="IsFasPeriodClose" Type="bit" />
+          <Property Name="IsAutoNoCustVendor" Type="bit" />
         </EntityType>
         <EntityType Name="I_D_Category">
           <Key>
@@ -11544,6 +11547,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
           <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CodePrefex" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="A_RecPay_D_Group">
           <Key>
@@ -17488,6 +17493,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsAccPeriodClose" Type="Boolean" />
           <Property Name="IsInvPeriodClose" Type="Boolean" />
           <Property Name="IsFasPeriodClose" Type="Boolean" />
+          <Property Name="IsAutoNoCustVendor" Type="Boolean" />
         </EntityType>
         <EntityType Name="A_CCDT_COSTCENTERS">
           <Key>
@@ -21676,6 +21682,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="A_RecPay_D_Category">
             <EntityTypeMapping TypeName="InvModel.A_RecPay_D_Category">
               <MappingFragment StoreEntitySet="A_RecPay_D_Category">
+                <ScalarProperty Name="CodePrefex" ColumnName="CodePrefex" />
+                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -27711,6 +27719,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Control">
             <EntityTypeMapping TypeName="InvModel.I_Control">
               <MappingFragment StoreEntitySet="I_Control">
+                <ScalarProperty Name="IsAutoNoCustVendor" ColumnName="IsAutoNoCustVendor" />
                 <ScalarProperty Name="IsFasPeriodClose" ColumnName="IsFasPeriodClose" />
                 <ScalarProperty Name="IsInvPeriodClose" ColumnName="IsInvPeriodClose" />
                 <ScalarProperty Name="IsAccPeriodClose" ColumnName="IsAccPeriodClose" />

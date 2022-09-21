@@ -71,5 +71,6 @@ namespace Inv.DAL.Domain
         public Nullable<bool> IsAccPeriodClose { get; set; }
         public Nullable<bool> IsInvPeriodClose { get; set; }
         public Nullable<bool> IsFasPeriodClose { get; set; }
+        public Nullable<bool> IsAutoNoCustVendor { get; set; }
     }
 }

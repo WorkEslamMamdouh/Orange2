@@ -26,5 +26,7 @@ namespace Inv.DAL.Domain
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        public string LastNumber { get; set; }
+        public string CodePrefex { get; set; }
     }
 }
