@@ -1794,7 +1794,7 @@ Sum(Fields!debit.Value) - Sum(Fields!Credit.Value),
         <Top>0.01979cm</Top>
         <Left>0.08942cm</Left>
         <Height>3cm</Height>
-        <Width>26.71765cm</Width>
+        <Width>26.71766cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2575,6 +2575,14 @@ Sum(Fields!debit.Value) - Sum(Fields!Credit.Value),
           <DataField>Par_BoxTypeDSE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_CashTypeDSA">
+          <DataField>Par_CashTypeDSA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_CashTypeDSE">
+          <DataField>Par_CashTypeDSE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Par_FromDate">
           <DataField>Par_FromDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2631,24 +2639,8 @@ Sum(Fields!debit.Value) - Sum(Fields!Credit.Value),
           <DataField>debit</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="Credit">
-          <DataField>Credit</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="debitcash">
-          <DataField>debitcash</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="Creditcash">
-          <DataField>Creditcash</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="debitcard">
-          <DataField>debitcard</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="Creditcard">
-          <DataField>Creditcard</DataField>
+        <Field Name="credit">
+          <DataField>credit</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
       </Fields>
