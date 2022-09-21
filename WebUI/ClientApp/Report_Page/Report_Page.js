@@ -97,7 +97,7 @@ var Report_Page;
                     $('#printableArea').html("");
                     var x = Url.Action("OpenPdf", "Home");
                     var UrlPdf = x + "/" + "?" + "path=" + result + "";
-                    $('#printableAreaNew').attr("style", "direction: ltr!important;height: 90%;overflow: scroll;margin-right: 4%;width: 90%;");
+                    $('#printableAreaNew').attr("style", "direction: ltr!important;height: 90%;overflow: scroll;margin-right: 4%;width: 90%;  overflow: hidden; ");
                     $('#printableAreaNew').append('<iframe src="' + UrlPdf + '" frameBorder="0"scrolling="auto"height="100%" width="100%"></iframe>');
                 }
             });
