@@ -374,13 +374,13 @@ namespace Inv.WebUI.Controllers
 
         public string IProc_Rpt_AccBoxSummary(RepFinancials rp)
         {
-            IEnumerable<IProc_Rpt_AccBoxSummary_Result> que = Rpt_AccBoxSummary(rp);
+            IEnumerable<IProc_Rpt_AccBoxSummaryVer2_Result> que = Rpt_AccBoxSummary(rp);
             return buildReport(que);
         }
 
         public string IProc_Rpt_AccBoxDetail(RepFinancials rp)
         {
-            IEnumerable<IProc_Rpt_AccBoxDetail_Result> que = Rpt_AccBoxDetail(rp);
+            IEnumerable<IProc_Rpt_AccBoxDetailVer2_Result> que = Rpt_AccBoxDetail(rp);
             return buildReport(que);
         }
 

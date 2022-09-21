@@ -3082,7 +3082,7 @@ namespace Inv.WebUI.Controllers
             return query;
         }
          
-        public IEnumerable<IProc_Rpt_AccBoxSummary_Result> Rpt_AccBoxSummary(RepFinancials RepPar)
+        public IEnumerable<IProc_Rpt_AccBoxSummaryVer2_Result> Rpt_AccBoxSummary(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
             
@@ -3106,7 +3106,7 @@ namespace Inv.WebUI.Controllers
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxSummary");
+            Rep = OpenReport("Rpt_AccBoxSummaryVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -3124,7 +3124,7 @@ namespace Inv.WebUI.Controllers
 
 
 
-            List<IProc_Rpt_AccBoxSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummary_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummaryVer2_Result>(_Query).ToList();
              ReportsDetails();
             reportName = Rep.reportName;
 
@@ -3132,7 +3132,7 @@ namespace Inv.WebUI.Controllers
             return query;
         }
          
-        public IEnumerable<IProc_Rpt_AccBoxDetail_Result> Rpt_AccBoxDetail(RepFinancials RepPar)
+        public IEnumerable<IProc_Rpt_AccBoxDetailVer2_Result> Rpt_AccBoxDetail(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
             
@@ -3156,7 +3156,7 @@ namespace Inv.WebUI.Controllers
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxDetail");
+            Rep = OpenReport("Rpt_AccBoxDetailVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -3174,7 +3174,7 @@ namespace Inv.WebUI.Controllers
 
 
 
-            List<IProc_Rpt_AccBoxDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetailVer2_Result>(_Query).ToList();
              ReportsDetails();
             reportName = Rep.reportName;
 

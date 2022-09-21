@@ -4707,7 +4707,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-        public IEnumerable<IProc_Rpt_AccBoxSummary_Result> Rpt_AccBoxSummary()
+        public IEnumerable<IProc_Rpt_AccBoxSummaryVer2_Result> Rpt_AccBoxSummary()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -4731,7 +4731,7 @@ namespace RS.WebUI.Reports.Forms
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxSummary");
+            Rep = OpenReport("Rpt_AccBoxSummaryVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -4749,7 +4749,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            List<IProc_Rpt_AccBoxSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummary_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummaryVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -4757,7 +4757,7 @@ namespace RS.WebUI.Reports.Forms
         }
 
 
-        public IEnumerable<IProc_Rpt_AccBoxDetail_Result> Rpt_AccBoxDetail()
+        public IEnumerable<IProc_Rpt_AccBoxDetailVer2_Result> Rpt_AccBoxDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -4781,7 +4781,7 @@ namespace RS.WebUI.Reports.Forms
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxDetail");
+            Rep = OpenReport("Rpt_AccBoxDetailVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -4799,7 +4799,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            List<IProc_Rpt_AccBoxDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
