@@ -38,7 +38,7 @@ var HomeComponent;
             data: { year: Number(CurrentYear), compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, Modulecode: Modulecode },
             success: function (d) {
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
                 }
                 else {
@@ -77,7 +77,7 @@ var HomeComponent;
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
             success: function (d) {
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
                 }
                 else {
@@ -420,7 +420,7 @@ var HomeComponent;
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: moduleCode },
             success: function (d) {
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
                 }
                 else {
@@ -460,7 +460,7 @@ var HomeComponent;
             success: function (d) {
                 // ;
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
                 }
                 else {

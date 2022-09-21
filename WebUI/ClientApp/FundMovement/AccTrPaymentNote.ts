@@ -412,12 +412,15 @@ namespace AccTrPaymentNote {
     }
 
     function txtCashTypeNew_onchange() {
+        
+
         if (txtCashTypeNew.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('#La_CashAmount').removeClass('display_none'); 
             $('#txt_CashAmount').removeClass('display_none'); 
             $('#La_CardAmount').addClass('display_none'); 
-            $('#txt_CardAmount').addClass('display_none'); 
+            $('#txt_CardAmount').addClass('display_none');
+            $('#txt_CardAmount').val('0'); 
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
@@ -431,6 +434,7 @@ namespace AccTrPaymentNote {
             $('#txt_CardAmount').removeClass('display_none'); 
             $('#txt_CashAmount').addClass('display_none');
             $('#La_CashAmount').addClass('display_none');
+            $('#txt_CashAmount').val('0'); 
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
@@ -802,12 +806,17 @@ namespace AccTrPaymentNote {
 
             return Valid = 1;
         }
-        if ((txt_CashAmount.value == "0" && txt_CardAmount.value == "0" || txt_CashAmount.value.trim() == "" && txt_CardAmount.value.trim() == "" || txt_CashAmount.value.trim() == "" && txt_CardAmount.value.trim() == "0" || txt_CashAmount.value.trim() == "0" && txt_CardAmount.value.trim() == "") && txtCashTypeNew.value == "0") {
-            DisplayMassage("يجب ادخال نقدي او كارت", "You must enter cash or card ", MessageType.Worning);
-            Errorinput(txt_CardAmount);
+        if (txtCashTypeNew.value == '0' && Number(txt_CashAmount.value) == 0) {
+            DisplayMassage("يجب ادخال نقدي ", "You must enter cash or card ", MessageType.Worning); 
             Errorinput(txt_CashAmount);
             return Valid = 1;
         }
+        if (txtCashTypeNew.value == '7' && Number(txt_CardAmount.value) == 0) {
+            DisplayMassage("يجب ادخال كارت", "You must enter cash or card ", MessageType.Worning);
+            Errorinput(txt_CardAmount); 
+            return Valid = 1;
+        }
+
         if (txt_Amount.value == "0" || txt_Amount.value.trim() == "") {
             DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
             Errorinput($('#txt_Amount'));
@@ -818,20 +827,25 @@ namespace AccTrPaymentNote {
             Errorinput($('#txt_TransferNo'));
             return Valid = 1;
         }
-        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "1" && txtCashTypeNew.value != "2" && $('#txt_CheckNo').val() == '') {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && txtCashTypeNew.value != "1" && txtCashTypeNew.value != "2" && $('#txt_CheckNo').val() == '') {
             DisplayMassage("يجب ادخال  رقم الشيك   ", "The check number must be entered", MessageType.Worning);
             Errorinput($('#txt_CheckNo'));
             return Valid = 1;
         }
 
-        if (txtCashTypeNew.value != "0" && $('#txt_BankName').val() == '') {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && $('#txt_BankName').val() == '') {
             DisplayMassage("يجب ادخال  صادر من بنك  ", "The entry must be issued by a bank", MessageType.Worning);
             Errorinput($('#txt_BankName'));
             return Valid = 1;
         }
-        if (txtCashTypeNew.value != "0" && txt_BankAcc_Code.selectedIndex == 0) {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && txt_BankAcc_Code.selectedIndex == 0) {
             DisplayMassage("يجب اختيار  رقم  حساب الصرف  ", "You must Choose Exchange Account", MessageType.Worning);
             Errorinput(txt_BankAcc_Code);
+            return Valid = 1;
+        }
+        if (txtCashTypeNew.value == '7' && txt_ReceiptNoteNew.value != '3') {
+            DisplayMassage("يجب اختيار  صرف لحساب بنك  ", "You must Choose Exchange Account", MessageType.Worning);
+            Errorinput(txt_ReceiptNoteNew);
             return Valid = 1;
         }
 
@@ -1315,7 +1329,7 @@ namespace AccTrPaymentNote {
             { title: res.App_beneficiary, name: (lang == "ar" ? "Bef_DescA" : "Bef_DescE"), type: "text", width: "15%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "8%" },
             { title: res.App_Cash, name: "CashAmount", type: "text", width: "8%" },
-            { title: res.App_Card, name: "CardAmount", type: "text", width: "8%" },
+            { title: 'شبكه', name: "CardAmount", type: "text", width: "8%" },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
                 itemTemplate: (s: string, item: IQ_GetBoxReceiveList): HTMLLabelElement => {

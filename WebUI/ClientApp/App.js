@@ -1842,7 +1842,7 @@ function CheckTime() {
         outUesr += 1;
         if (outUesr == 2) {
             localStorage.setItem("OutUesr", "1");
-            window.open(Url.Action("LoginIndex", "Login"), "_self");
+            window.open(Url.Action("HomePage", "Login"), "_self");
         }
         return;
     }

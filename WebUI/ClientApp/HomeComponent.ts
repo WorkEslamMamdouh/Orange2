@@ -45,7 +45,7 @@ namespace HomeComponent {
             success: (d) => {
 
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self"); 
                     return;
                 }
                 else {
@@ -90,7 +90,7 @@ namespace HomeComponent {
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
             success: (d) => { 
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self"); 
                     return;
                 }
                 else {
@@ -504,7 +504,7 @@ namespace HomeComponent {
             success: (d) => {
 
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self"); 
                     return;
                 }
                 else { 
@@ -548,7 +548,7 @@ namespace HomeComponent {
             success: (d) => {
                 // ;
                 if (d == undefined) {
-                    window.open(Url.Action("LoginIndex", "Login"), "_self");
+                    window.open(Url.Action("HomePage", "Login"), "_self"); 
                     return;
                 }
                 else {
