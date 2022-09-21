@@ -548,10 +548,10 @@
     <Compile Include="Domain\IProc_Rpt_AccBankSummary_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_AccBoxDetail_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_AccBoxDetailVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Domain\IProc_Rpt_AccBoxSummary_Result.cs">
+    <Compile Include="Domain\IProc_Rpt_AccBoxSummaryVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_AccCustomerAging_Result.cs">
