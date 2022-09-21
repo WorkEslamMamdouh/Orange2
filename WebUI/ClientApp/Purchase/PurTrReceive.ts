@@ -72,6 +72,7 @@ namespace PurTrReceive {
     //buttons 
     var btnCustLastPrice: HTMLButtonElement;
     var btnUpdate: HTMLButtonElement;
+    var btnPrintsFrom_To: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var ddlIsCash: HTMLSelectElement;
     var ddlCashBoxH: HTMLSelectElement;
@@ -208,6 +209,7 @@ namespace PurTrReceive {
         txtCurrencyRate = document.getElementById("txtCurrencyRate") as HTMLInputElement;
 
         //buttons
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         VendorRecieptID = document.getElementById("VendorRecieptID") as HTMLInputElement;
         chkActive = document.getElementById("chkActive") as HTMLInputElement;
@@ -256,6 +258,7 @@ namespace PurTrReceive {
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
 
     }
 
@@ -3474,4 +3477,64 @@ namespace PurTrReceive {
 
 
     }
+
+
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+
+        var startdt = DateFormatRep(txtFromDate.value).toString();
+        var enddt = DateFormatRep(txtToDate.value).toString();
+        var salesmanId = 0;
+        var vendorId = 0;
+        var status = 0;
+
+        if (ddlVendorMaster.value != "null") {
+            vendorId = Number(ddlVendorMaster.value.toString());
+        }
+        if (ddlSalesmanMaster.value != "null") {
+            salesmanId = Number(ddlSalesmanMaster.value.toString());
+        }
+
+        status = Number(ddlStateType.value.toString());
+
+
+
+        try {
+
+
+            let Name_ID = 'ReceiveID'
+            let NameTable = 'IQ_GetPurReceiveStaistic'
+            let Condation1 = "  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startdt + "' and TrDate <= ' " + enddt + " ' ";
+            let Condation2 = " ";
+
+
+            if (salesmanId != 0 && salesmanId != null)
+                Condation2 = Condation2 + " and SalesmanId =" + salesmanId;
+
+            if (vendorId != 0 && vendorId != null)
+                Condation2 = Condation2 + " and VendorID =" + vendorId;
+
+            if (status == 0 || status == 1) {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            else if (status == 2) {
+                Condation2 = Condation2 + "";
+            }
+             
+            ///////////
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+
+
+            PrintsFrom_To(TransType.Pur_Receive, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length)
+
+
+
+        } catch (e) {
+
+            return
+        }
+
+    }
+
 }

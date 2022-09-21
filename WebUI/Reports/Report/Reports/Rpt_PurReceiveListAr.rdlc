@@ -6,49 +6,43 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.4883cm</Width>
+              <Width>1.47832cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.7956cm</Width>
+              <Width>2.12958cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52295cm</Width>
+              <Width>1.80401cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.62132cm</Width>
+              <Width>1.9553cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.72557cm</Width>
+              <Width>2.53351cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.22901cm</Width>
+              <Width>1.56299cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.48352cm</Width>
+              <Width>2.4702cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.16022cm</Width>
+              <Width>1.23638cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.45372cm</Width>
+              <Width>1.34603cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.24636cm</Width>
+              <Width>2.00749cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.18828cm</Width>
+              <Width>4.43097cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.51476cm</Width>
+              <Width>4.57457cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.51491cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>3.76434cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>0.74747cm</Width>
+              <Width>1.08145cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -66,6 +60,7 @@
                             <TextRun>
                               <Value>الحالة</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -100,6 +95,7 @@
                             <TextRun>
                               <Value>صافى الاضافه</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -134,6 +130,7 @@
                             <TextRun>
                               <Value>ض.الاضافة</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -168,6 +165,7 @@
                             <TextRun>
                               <Value>الاضافات</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -200,21 +198,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الاجمالي بعد الضريبه</Value>
+                              <Value>الصافى</Value>
                               <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -249,6 +235,7 @@
                             <TextRun>
                               <Value>الضريبه</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -274,74 +261,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox5">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>الاجمالي بعد الخصم</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>الخصم</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox2</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox50">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -349,8 +268,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>اجمالي الاصناف</Value>
+                              <Value>الاجمالى</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -385,6 +305,7 @@
                             <TextRun>
                               <Value>العبوات</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -419,6 +340,7 @@
                             <TextRun>
                               <Value>الاصناف</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -453,6 +375,7 @@
                             <TextRun>
                               <Value>التاريخ</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -487,6 +410,7 @@
                             <TextRun>
                               <Value>المندوب</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -521,6 +445,7 @@
                             <TextRun>
                               <Value>المورد</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -555,6 +480,7 @@
                             <TextRun>
                               <Value>رقم ف</Value>
                               <Style>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -593,9 +519,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=IIf(Fields!Status.Value =0,"غير معتمد","معتمد")</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -628,7 +552,6 @@
                             <TextRun>
                               <Value>=Fields!TotAddAfterVat.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -663,7 +586,6 @@
                             <TextRun>
                               <Value>=Fields!TotAddVat.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -698,7 +620,6 @@
                             <TextRun>
                               <Value>=Fields!TotAdd.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -724,16 +645,15 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="NetDue">
+                    <Textbox Name="Tot_Net">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!NetDue.Value</Value>
+                              <Value>=Fields!Tot_Net.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -743,7 +663,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>NetDue</rd:DefaultName>
+                      <rd:DefaultName>Tot_Net</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -768,7 +688,6 @@
                             <TextRun>
                               <Value>=Fields!VatAmount.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -794,84 +713,15 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Total">
+                    <Textbox Name="Tot_Amount">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Total.Value</Value>
+                              <Value>=Fields!Tot_Amount.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Total</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="ItemDiscountTotalFC">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!ItemDiscountTotalFC.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>ItemDiscountTotalFC</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="ItemTotalFC">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!ItemTotalFC.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00</Format>
                               </Style>
                             </TextRun>
@@ -881,7 +731,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ItemTotalFC</rd:DefaultName>
+                      <rd:DefaultName>Tot_Amount</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -906,7 +756,6 @@
                             <TextRun>
                               <Value>=Fields!Tot_Qty.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>0;(0)</Format>
                               </Style>
                             </TextRun>
@@ -941,7 +790,6 @@
                             <TextRun>
                               <Value>=Fields!Line_Count.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>0;(0)</Format>
                               </Style>
                             </TextRun>
@@ -976,7 +824,6 @@
                             <TextRun>
                               <Value>=Fields!TrDate.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>dd/MM/yyy</Format>
                               </Style>
                             </TextRun>
@@ -1010,9 +857,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Slsm_DescA.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1044,9 +889,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Vnd_NameA.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1078,9 +921,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!TrNo.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1310,70 +1151,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=sum(Fields!Total.Value)</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox4">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=sum(Fields!ItemDiscountTotalFC.Value)</Value>
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox4</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Tot_Amount2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1466,8 +1243,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -1492,7 +1267,7 @@
         <DataSetName>Rpt_PurReceiveListAr</DataSetName>
         <Top>0.07056cm</Top>
         <Height>1.8cm</Height>
-        <Width>28.45638cm</Width>
+        <Width>28.6108cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1503,7 +1278,7 @@
     <Height>0.77083in</Height>
     <Style />
   </Body>
-  <Width>11.22413in</Width>
+  <Width>11.26409in</Width>
   <Page>
     <PageHeader>
       <Height>3.74037cm</Height>
@@ -2639,30 +2414,6 @@
         </Field>
         <Field Name="RemainAmount">
           <DataField>RemainAmount</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="RetRec_No">
-          <DataField>RetRec_No</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="ItemTotalFC">
-          <DataField>ItemTotalFC</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="ItemDiscountTotalFC">
-          <DataField>ItemDiscountTotalFC</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="ItemTotal">
-          <DataField>ItemTotal</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="ItemVatTotal">
-          <DataField>ItemVatTotal</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="ItemDiscountTotal">
-          <DataField>ItemDiscountTotal</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
       </Fields>

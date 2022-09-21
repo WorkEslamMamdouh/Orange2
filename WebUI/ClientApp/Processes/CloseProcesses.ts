@@ -820,14 +820,7 @@ namespace CloseProcesses {
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response as Array<IQ_GetOperation>;
 
-
-                    for (var i = 0; i < Get_IQ_GetOperation.length; i++) {
-                        Get_IQ_GetOperation[i].TrDate = DateFormat(Get_IQ_GetOperation[i].TrDate);
-                        Get_IQ_GetOperation[i].ClearanceDate = DateFormat(Get_IQ_GetOperation[i].ClearanceDate);
-
-                    }
-
-
+ 
 
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
@@ -875,8 +868,22 @@ namespace CloseProcesses {
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "13%" },
-            { title: res.Clearance_date, name: "ClearanceDate", type: "text", width: "13%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
+                itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
+            {
+                title: res.App_date, css: "ColumPadding", name: "ClearanceDate", width: "13%",
+                itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.ClearanceDate);
+                    return txt;
+                }
+            }, 
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -891,6 +898,7 @@ namespace CloseProcesses {
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
@@ -923,6 +931,7 @@ namespace CloseProcesses {
 
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate: string = DateFormat(Selected_Data[0].TrDate);
@@ -1640,7 +1649,7 @@ namespace CloseProcesses {
 	                </td>
                     <td>
 		                <div class="form-group">
-			              <input id="txtInvoiceNumberCharge${cnt}" type="number" class="form-control"  value="0"/>
+			              <input id="txtInvoiceNumberCharge${cnt}" type="text" class="form-control"  value="0"/>
 		                </div>
 	                </td>
                     <td>
@@ -2987,6 +2996,7 @@ namespace CloseProcesses {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
+                    ddlStateType.value = '111';
                     OperationID = result.Response as I_TR_Operation;
                     DisplayMassage("تم أضافة عملية بنجاح", "Operation added successfully", MessageType.Succeed);
                     flag_succ_insert = true;
@@ -3018,7 +3028,7 @@ namespace CloseProcesses {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-
+                    ddlStateType.value = '111';
 
                     flag_Back = true;
 
@@ -3255,7 +3265,7 @@ namespace CloseProcesses {
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_TR_OperationCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
+   
             chargesingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             chargesingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3367,7 +3377,7 @@ namespace CloseProcesses {
         for (var i = 0; i < CountGridDeposit; i++) {
             DepositsingleModel = new I_TR_OperationDeposit();
             StatusFlag = $("#txt_StatusFlag2" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
+     
             DepositsingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DepositsingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3854,6 +3864,8 @@ namespace CloseProcesses {
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
+                        ddlStateType.value = '111';
+
                         DisplayMassage("تم فتح عملية بنجاح", "Operation added successfully", MessageType.Succeed);
 
 
@@ -4007,8 +4019,8 @@ namespace CloseProcesses {
             btnBack_3_onclick();
             btnBack_5_onclick();
 
-            btnUpdate_2.disabled = true;
-            btnUpdate_3.disabled = true;
+            //btnUpdate_2.disabled = true;
+            //btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
             //}
 
@@ -4311,6 +4323,7 @@ namespace CloseProcesses {
 
     function Update_2_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
+
         btnUpdate_2.classList.add("display_none");
         btnSave_2.classList.remove("display_none");
         btnBack_2.classList.remove("display_none");
@@ -5757,6 +5770,8 @@ namespace CloseProcesses {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
 
+                    
+
                     if (Save_Add == true) {
 
                         DisplayMassage("تم أضافة  بيانات الحمولة في العمليه بنجاح!", "Payload data has been added in the process successfully!", MessageType.Succeed);
@@ -5787,7 +5802,7 @@ namespace CloseProcesses {
                     //Processes_Open();
 
                     let cnt = golabelcnt;
-                    DisplayItemsData(OperationItemsSum[0].OperationItemID, OperationItemsSum[cnt].OperationID, cnt, "");
+                    DisplayItemsData(OperationItemsSum[0].OperationItemID, OperationItemsSum[0].OperationID, cnt, "");
                     $("#nameitem").text(nameGlopl);
                     flag_Success_2 = false;
                     $("#DivHederMaster").removeClass("disabledDiv");

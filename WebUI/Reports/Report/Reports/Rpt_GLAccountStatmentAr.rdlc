@@ -12,19 +12,16 @@
               <Width>2.22042cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.51966cm</Width>
+              <Width>2.5351cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5493cm</Width>
+              <Width>2.99054cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.76585cm</Width>
+              <Width>6.7448cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.21919cm</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.64853cm</Width>
+              <Width>2.22042cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.90292cm</Width>
@@ -191,7 +188,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Acc_Code1">
+                    <Textbox Name="Acc_Code">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -209,7 +206,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Acc_Code1</rd:DefaultName>
+                      <rd:DefaultName>Acc_Code</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -226,10 +223,8 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell />
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox93">
@@ -510,50 +505,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox10">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>نوع الحركة</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox10</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <TopBorder>
-                          <Color>Gray</Color>
-                          <Style>Solid</Style>
-                          <Width>0.25pt</Width>
-                        </TopBorder>
-                        <BottomBorder>
-                          <Color>Gray</Color>
-                          <Style>Solid</Style>
-                          <Width>0.25pt</Width>
-                        </BottomBorder>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox64">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -656,9 +607,7 @@
                             <TextRun>
                               <Value>=iif (RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") &gt;=0 , 
 "مدين" ,"دائن" )</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -698,7 +647,6 @@
 RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
 - RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") )</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -738,7 +686,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Fields!credit.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -778,7 +725,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Fields!debit.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -817,9 +763,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!DESCA.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -848,45 +792,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="typ_DESCA">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!typ_DESCA.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>typ_DESCA</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <TopBorder>
-                          <Color>Gray</Color>
-                          <Style>Solid</Style>
-                          <Width>0.25pt</Width>
-                        </TopBorder>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="VOUCHER_CODE">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -895,9 +800,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!VOUCHER_CODE.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -935,7 +838,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Fields!VOUCHER_DATE.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
                                 <Format>dd/MM/yyyy</Format>
                               </Style>
                             </TextRun>
@@ -980,10 +882,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=iif( Sum(Fields!debit.Value) -Sum(Fields!credit.Value) &gt;=0,
 "مدين","دائن")</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1016,8 +915,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=iif( Sum(Fields!debit.Value) -Sum(Fields!credit.Value) &gt;=0,Sum(Fields!debit.Value) -Sum(Fields!credit.Value),-Sum(Fields!debit.Value) +Sum(Fields!credit.Value))</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1052,8 +949,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Sum(Fields!credit.Value)</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1088,8 +983,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>=Sum(Fields!debit.Value)</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
                               </Style>
                             </TextRun>
@@ -1124,7 +1017,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                             <TextRun>
                               <Value>الاجمالى</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -1146,10 +1039,9 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>4</ColSpan>
+                    <ColSpan>3</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell />
                 <TablixCell />
                 <TablixCell />
               </TablixCells>
@@ -1158,7 +1050,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
-            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1206,7 +1097,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         <DataSetName>Rpt_GLAccountStatmentAr</DataSetName>
         <Top>0.09819cm</Top>
         <Height>2.4cm</Height>
-        <Width>19.70991cm</Width>
+        <Width>19.49824cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1214,10 +1105,10 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.0625in</Height>
+    <Height>1.1875in</Height>
     <Style />
   </Body>
-  <Width>7.75981in</Width>
+  <Width>7.67647in</Width>
   <Page>
     <PageHeader>
       <Height>4.58352cm</Height>
@@ -1972,41 +1863,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Par_incinvDSA">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!Par_incinvDSA.Value, "Rpt_GLAccountStatmentAr")</Value>
-                      <Style>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Par_incinvDSA</rd:DefaultName>
-              <Top>2.14804cm</Top>
-              <Left>0.26668cm</Left>
-              <Height>0.6cm</Height>
-              <Width>5.07664cm</Width>
-              <ZIndex>22</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Height>4.58352cm</Height>
@@ -2116,14 +1972,6 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
           <DataField>Par_StAuthDSE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Par_incinvDSA">
-          <DataField>Par_incinvDSA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Par_incinvDSE">
-          <DataField>Par_incinvDSE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Par_ZeroDSA">
           <DataField>Par_ZeroDSA</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2150,15 +1998,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         </Field>
         <Field Name="typ">
           <DataField>typ</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="typ_DESCA">
-          <DataField>typ_DESCA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="typ_DESCE">
-          <DataField>typ_DESCE</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="VOUCHER_CODE">
           <DataField>VOUCHER_CODE</DataField>

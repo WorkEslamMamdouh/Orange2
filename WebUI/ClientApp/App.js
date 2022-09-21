@@ -107,6 +107,16 @@ var MessageType = {
     Succeed: '1',
     Worning: '3',
 };
+var TransType = {
+    Invoice: 'Inv',
+    InvoiceReturn: 'Inv_Ret',
+    InvoiceOperation: 'Pro',
+    InvoiceOperationReturn: 'Pro_Ret',
+    Pur_Receive: 'Pur',
+    Pur_Receive_Return: 'Pur_Ret',
+    AccReceive: 'AccReceive',
+    AccPayment: 'AccPayment',
+};
 var Keys = {
     Enter: "Enter"
 };
@@ -1836,5 +1846,74 @@ function CheckTime() {
         }
         return;
     }
+}
+function _base64ToArrayBuffer(base64) {
+    var binary_string = window.atob(base64);
+    var len = binary_string.length;
+    var bytes = new Uint8Array(len);
+    for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+    }
+    return bytes.buffer;
+}
+function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
+    if (length <= 0) {
+        MessageBox.Show('لا توجد فواتير ', 'تحزير');
+        return;
+    }
+    if (length > 100) {
+        MessageBox.Show('الحد الاقصي لي عدد الفواتير ( 100 )', 'تحزير');
+    }
+    var SysSession = GetSystemEnvironment();
+    var rp = new ReportParameters();
+    $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
+    $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
+    setTimeout(function () {
+        $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
+        $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnPrintsFrom_To').attr('disabled', 'disabled');
+    }, 200);
+    rp.CompCode = SysSession.CompCode;
+    rp.BranchCode = SysSession.BranchCode;
+    rp.CompNameA = SysSession.CompanyNameAr;
+    rp.CompNameE = SysSession.CompanyName;
+    rp.UserCode = SysSession.UserCode;
+    rp.Tokenid = SysSession.Token;
+    rp.ScreenLanguage = SysSession.ScreenLanguage;
+    rp.SystemCode = SysSession.SystemCode;
+    rp.SubSystemCode = SysSession.SubSystemCode;
+    rp.BraNameA = SysSession.BranchName;
+    rp.BraNameE = SysSession.BranchName;
+    rp.DocPDFFolder = SysSession.I_Control[0].DocPDFFolder;
+    rp.LoginUser = SysSession.UserCode;
+    rp.Type_Trans = Type_Trans;
+    rp.Name_ID = Name_ID;
+    rp.NameTable = NameTable;
+    rp.Condation = Condation;
+    if (Type_Trans == "AccReceive") {
+        rp.Repdesign = 1;
+    }
+    if (Type_Trans == "AccPayment") {
+        rp.Repdesign = 2;
+    }
+    rp.FinYear = Number(SysSession.CurrentYear);
+    Ajax.CallAsync({
+        url: Url.Action("Prnt_From_To", "GeneralRep"),
+        data: rp,
+        success: function (d) {
+            var result = d;
+            $('#btnPrintsFrom_To').attr('style', '');
+            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
+            $('#btnPrintsFrom_To').removeAttr('disabled');
+            //alert(result);
+            //debugger
+            //window.open(result, "blank");
+            var x = Url.Action("OpenPdf", "Home");
+            var UrlPdf = x + "/" + "?" + "path=" + result + "";
+            window.open(UrlPdf, "blank");
+            return result;
+        }
+    });
+    return '';
 }
 //# sourceMappingURL=App.js.map

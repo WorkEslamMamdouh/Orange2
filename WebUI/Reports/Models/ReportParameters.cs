@@ -214,6 +214,12 @@ namespace Inv.WebUI.Reports.Models
         public int stat { get; set; }
     }
 
+    public class Invoices_ID  
+    {
+        public int InvoiceID { get; set; }
+    }
+
+
     public class RepFinancials : StdParamters // Mona Adding  class 
     {
         public string FromDate { get; set; }
@@ -227,6 +233,10 @@ namespace Inv.WebUI.Reports.Models
         public int RecType { get; set; }
         public string BnfID { get; set; }
         public string BnfDesc { get; set; }
+        public string Type_Trans { get; set; }
+        public string Condation { get; set; }
+        public string Name_ID { get; set; }
+        public string NameTable { get; set; }
         public int Status { get; set; }
         public int Repdesign { get; set; }
         public int TRId { get; set; }
@@ -241,6 +251,8 @@ namespace Inv.WebUI.Reports.Models
         public string MobileNo { get; set; }
         public int Typ { get; set; }
         public int Type { get; set; }
+        public int fromNum { get; set; }
+        public int ToNum { get; set; } 
         public int CatId { get; set; }
         public int Groupid { get; set; }
         public int IsCredit { get; set; }

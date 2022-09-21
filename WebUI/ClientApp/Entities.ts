@@ -134,6 +134,10 @@ class ReportParameters {
     public BraNameE: string;
     public UserCode: string;
     public BranchCode: string;
+    public Type_Trans: string;
+    public Condation: string;
+    public Name_ID: string;
+    public NameTable: string;
     public ScreenLanguage: String;
     public SystemCode: String;
     public SubSystemCode: String;
@@ -151,6 +155,11 @@ class ReportParameters {
     public SrvId: number;
     public SrvCatId: number;
     public invType: number;
+
+    public fromNum: number;
+    public ToNum: number;
+
+     
 
     public ShiftId: number;
     public Sex: number;

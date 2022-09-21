@@ -98,6 +98,12 @@ namespace Inv.WebUI.Controllers
 
         #region Open Pages 
 
+        public ActionResult OpenPdf(string path)
+        {
+          
+            return File(""+ path + "","application/pdf");
+        }
+
         public ActionResult AgingCustIndex()
         {
             return View("~/Views/CollectionReports/AgingCustIndex.cshtml");

@@ -3,7 +3,7 @@ $(document).ready(function () {
         HomeComponent.InitalizeComponent();
     }
     catch (e) {
-        window.open(Url.Action("LoginIndex", "Login"), "_self");
+        window.open(Url.Action("HomePage", "Login"), "_self");
     }
 });
 var HomeComponent;

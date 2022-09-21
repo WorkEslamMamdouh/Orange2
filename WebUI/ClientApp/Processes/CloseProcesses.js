@@ -700,10 +700,6 @@ var CloseProcesses;
                 var result = d;
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response;
-                    for (var i = 0; i < Get_IQ_GetOperation.length; i++) {
-                        Get_IQ_GetOperation[i].TrDate = DateFormat(Get_IQ_GetOperation[i].TrDate);
-                        Get_IQ_GetOperation[i].ClearanceDate = DateFormat(Get_IQ_GetOperation[i].ClearanceDate);
-                    }
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
                     divMasterGrid.Bind();
@@ -743,8 +739,22 @@ var CloseProcesses;
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "13%" },
-            { title: res.Clearance_date, name: "ClearanceDate", type: "text", width: "13%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
+            {
+                title: res.App_date, css: "ColumPadding", name: "ClearanceDate", width: "13%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.ClearanceDate);
+                    return txt;
+                }
+            },
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -755,6 +765,7 @@ var CloseProcesses;
         Selected_Data = new Array();
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
+        $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
         if (Selected_Data[0].Status == 0) { // تحت التجهيز
             Processes_under_preparing();
@@ -778,6 +789,7 @@ var CloseProcesses;
     function DisplayData(Selected_Data) {
         CountGrid = -1;
         CountGridCharge = 0;
+        $("#txtVoucherNo").val("");
         DocumentActions.RenderFromModel(Selected_Data[0]);
         try {
             var trDate = DateFormat(Selected_Data[0].TrDate);
@@ -1276,7 +1288,7 @@ var CloseProcesses;
     }
     function BuildControlsCharges(cnt) {
         var html;
-        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\" class=\"minusCharges\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\" class=\"minusCharges\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         $("#div_ChargesData").append(html);
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
         // 
@@ -2261,6 +2273,7 @@ var CloseProcesses;
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
+                    ddlStateType.value = '111';
                     OperationID = result.Response;
                     DisplayMassage("تم أضافة عملية بنجاح", "Operation added successfully", MessageType.Succeed);
                     flag_succ_insert = true;
@@ -2290,6 +2303,7 @@ var CloseProcesses;
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
+                    ddlStateType.value = '111';
                     flag_Back = true;
                     Ready = 1;
                     $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
@@ -2473,7 +2487,6 @@ var CloseProcesses;
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_TR_OperationCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
             chargesingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             chargesingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -2586,7 +2599,6 @@ var CloseProcesses;
         for (var i = 0; i < CountGridDeposit; i++) {
             DepositsingleModel = new I_TR_OperationDeposit();
             StatusFlag = $("#txt_StatusFlag2" + i).val();
-            $("#txt_StatusFlag1" + i).val("");
             DepositsingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DepositsingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -2932,6 +2944,7 @@ var CloseProcesses;
                 success: function (d) {
                     var result = d;
                     if (result.IsSuccess) {
+                        ddlStateType.value = '111';
                         DisplayMassage("تم فتح عملية بنجاح", "Operation added successfully", MessageType.Succeed);
                         flag_Back = true;
                         Ready = 1;
@@ -3041,8 +3054,8 @@ var CloseProcesses;
             }
             btnBack_3_onclick();
             btnBack_5_onclick();
-            btnUpdate_2.disabled = true;
-            btnUpdate_3.disabled = true;
+            //btnUpdate_2.disabled = true;
+            //btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
             //}
             Calculation_Close();
@@ -4423,7 +4436,7 @@ var CloseProcesses;
                     MasterGridBiuld();
                     //Processes_Open();
                     var cnt = golabelcnt;
-                    DisplayItemsData(OperationItemsSum[0].OperationItemID, OperationItemsSum[cnt].OperationID, cnt, "");
+                    DisplayItemsData(OperationItemsSum[0].OperationItemID, OperationItemsSum[0].OperationID, cnt, "");
                     $("#nameitem").text(nameGlopl);
                     flag_Success_2 = false;
                     $("#DivHederMaster").removeClass("disabledDiv");

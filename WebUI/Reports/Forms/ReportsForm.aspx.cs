@@ -2926,7 +2926,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-            Rep = OpenReport("Rpt_GLAccountStatment");
+            Rep = OpenReport("Rpt_GLAccountStatmentVer2");
 
 
             string _Query = "execute " + Rep.dataSource +

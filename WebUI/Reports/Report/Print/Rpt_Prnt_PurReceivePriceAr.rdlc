@@ -205,40 +205,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox18">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>الدفع</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox9</rd:DefaultName>
-        <Top>0.9034cm</Top>
-        <Left>2.85104cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.83854cm</Width>
-        <ZIndex>6</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="TrNo">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -260,7 +226,7 @@
         <Left>15.36346cm</Left>
         <Height>0.6cm</Height>
         <Width>2.07667cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -314,7 +280,7 @@
         <Left>10.82381cm</Left>
         <Height>0.6cm</Height>
         <Width>4.37561cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -368,7 +334,7 @@
         <Left>15.36346cm</Left>
         <Height>0.6cm</Height>
         <Width>2.07666cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -422,7 +388,7 @@
         <Left>10.82381cm</Left>
         <Height>0.6cm</Height>
         <Width>4.37561cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -478,7 +444,7 @@
         <Left>5.07121cm</Left>
         <Height>0.6cm</Height>
         <Width>3.18481cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -532,7 +498,7 @@
         <Left>5.07121cm</Left>
         <Height>0.6cm</Height>
         <Width>3.14559cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -586,7 +552,7 @@
         <Left>0.27872cm</Left>
         <Height>0.6cm</Height>
         <Width>2.53704cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1015,7 +981,7 @@
         <Top>2.4183cm</Top>
         <Height>1.2cm</Height>
         <Width>19.62555cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1045,7 +1011,7 @@
         <Left>17.44366cm</Left>
         <Height>0.6cm</Height>
         <Width>1.93349cm</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1077,7 +1043,7 @@
         <Left>0.11918cm</Left>
         <Height>1.15562cm</Height>
         <Width>17.32271cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1133,7 +1099,7 @@
         <Left>16.17626cm</Left>
         <Height>0.6cm</Height>
         <Width>1.83854cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1167,7 +1133,7 @@
         <Left>9.77477cm</Left>
         <Height>0.6cm</Height>
         <Width>1.83854cm</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1201,7 +1167,7 @@
         <Left>2.91892cm</Left>
         <Height>0.6cm</Height>
         <Width>2.71005cm</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1233,7 +1199,7 @@
         <Left>13.72145cm</Left>
         <Height>0.6cm</Height>
         <Width>2.21446cm</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1289,7 +1255,7 @@
         <Left>7.31996cm</Left>
         <Height>0.6cm</Height>
         <Width>2.21446cm</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1345,61 +1311,7 @@
         <Left>0.70446cm</Left>
         <Height>0.6cm</Height>
         <Width>2.21446cm</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>0.5pt</Width>
-          </Border>
-          <TopBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>0.5pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>0.5pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>0.5pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>0.5pt</Width>
-          </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="CashPaidAmount">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=IIf(First(Fields!CashPaidAmount.Value, "Rpt_Prnt_PurReceivePriceAr")0,"على الحساب","نقدي")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>CashPaidAmount</rd:DefaultName>
-        <Top>0.9034cm</Top>
-        <Left>0.27872cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.57232cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1455,7 +1367,7 @@
         <Left>12.91599cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1489,7 +1401,7 @@
         <Left>3.79766cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1523,7 +1435,7 @@
         <Left>12.91599cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1557,7 +1469,7 @@
         <Left>3.79766cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1591,7 +1503,7 @@
         <Left>14.04454cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1625,7 +1537,7 @@
         <Left>14.04454cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1659,7 +1571,7 @@
         <Left>4.94738cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1693,7 +1605,7 @@
         <Left>4.94738cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1727,7 +1639,7 @@
         <Left>12.91599cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1761,7 +1673,7 @@
         <Left>3.79766cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1793,7 +1705,7 @@
         <Left>15.36912cm</Left>
         <Height>0.6cm</Height>
         <Width>2.07666cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1833,10 +1745,16 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>نوع الفاتورة</Value>
+                <Value>طريقة </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>الدفع</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1846,11 +1764,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.64803cm</Top>
-        <Left>8.21679cm</Left>
+        <Top>0.93162cm</Top>
+        <Left>2.85104cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.31479cm</Width>
-        <ZIndex>35</ZIndex>
+        <Width>1.83854cm</Width>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1868,7 +1786,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!IsCash.Value = 1, "نقدي", "على الحساب")</Value>
+                <Value>=iif(Fields!IsCash.Value = true, "نقدي", "على الحساب")</Value>
                 <Style>
                   <Format>dd/MM/yyyy</Format>
                 </Style>
@@ -1880,11 +1798,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.64803cm</Top>
-        <Left>5.07121cm</Left>
+        <Top>0.93162cm</Top>
+        <Left>0.314cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.18481cm</Width>
-        <ZIndex>36</ZIndex>
+        <Width>2.53704cm</Width>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>

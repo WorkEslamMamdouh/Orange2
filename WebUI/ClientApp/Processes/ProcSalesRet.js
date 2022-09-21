@@ -76,6 +76,7 @@ var ProcSalesRet;
     var btnSave;
     var btnProcessInvoiceSearch;
     var btnUpdate;
+    var btnPrintsFrom_To;
     //var btnAddFreeReturn: HTMLButtonElement;
     //print buttons 
     var btnPrintTrview;
@@ -184,6 +185,7 @@ var ProcSalesRet;
         btnSave = document.getElementById("btnSave");
         btnProcessInvoiceSearch = document.getElementById("btnProcessInvoiceSearch");
         btnUpdate = document.getElementById("btnUpdate");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         // btnAddFreeReturn = document.getElementById("btnAddFreeReturn") as HTMLButtonElement;
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview");
@@ -217,6 +219,7 @@ var ProcSalesRet;
         ddlSalesMan.onchange = ddlSalesman_onchange;
         chkOpenProcess.onclick = ddlSalesman_onchange;
         ddlOPerationMaster.onchange = ddlOPerationMaster_onchange;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function Check_on_user_type() {
         if (SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3) { //Salesman
@@ -2199,6 +2202,66 @@ var ProcSalesRet;
             success: function (d) {
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var SalesPerson = 0;
+        var IsCash = 0;
+        var operationId = 0;
+        if (ddlOPerationMaster.value.trim() != "null") {
+            operationId = Number(ddlOPerationMaster.value.toString());
+        }
+        if (ddlCustomer.value != "null") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+        if (ddlSalesMan.value != "null") {
+            SalesMan = Number(ddlSalesMan.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPerson = Number(ddlSalesPersonFilter.value.toString());
+        }
+        status = Number(ddlStateType.value.toString());
+        IsCash = Number(ddlReturnType.value);
+        try {
+            var Name_ID = 'InvoiceID';
+            var NameTable = 'I_Sls_TR_Invoice';
+            var Condation1 = " SlsInvSrc = 2 and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            var Condation2 = " ";
+            if (operationId != 0 && operationId != null)
+                Condation2 = Condation2 + " and OperationId =" + operationId;
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesPerson != 0 && SalesPerson != null)
+                Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson; // and Status = " + Status   
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan; // and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.InvoiceOperationReturn, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(ProcSalesRet || (ProcSalesRet = {}));
 //# sourceMappingURL=ProcSalesRet.js.map

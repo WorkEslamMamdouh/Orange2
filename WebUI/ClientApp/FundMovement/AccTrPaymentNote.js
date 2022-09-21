@@ -55,6 +55,7 @@ var AccTrPaymentNote;
     var btnBen;
     var txt_BenCode;
     var txt_BenName;
+    var btnPrintsFrom_To;
     var btnBenH;
     var txt_BenCodeH;
     var txt_BenNameH;
@@ -259,6 +260,7 @@ var AccTrPaymentNote;
         btnBen = document.getElementById("btnBen");
         txt_BenCode = document.getElementById("txt_BenCode");
         txt_BenName = document.getElementById("txt_BenName");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnBenH = document.getElementById("btnBenH");
         txt_BenCodeH = document.getElementById("txt_BenCodeH");
         txt_BenNameH = document.getElementById("txt_BenNameH");
@@ -294,6 +296,7 @@ var AccTrPaymentNote;
         btnBen.onclick = btnBen_onclick;
         txt_BenCodeH.onchange = txt_BenCodeH_onchange;
         btnBenH.onclick = btnBenH_onclick;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function fillddlCashType() {
         Ajax.Callsync({
@@ -352,9 +355,22 @@ var AccTrPaymentNote;
         if (txtCashTypeNew.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('#La_CashAmount').removeClass('display_none');
-            $('#La_CardAmount').removeClass('display_none');
             $('#txt_CashAmount').removeClass('display_none');
+            $('#La_CardAmount').addClass('display_none');
+            $('#txt_CardAmount').addClass('display_none');
+            $('#txt_Amount').attr('disabled', 'disabled');
+            $('#txt_CheckNo').val('');
+            $('#txt_TransferNo').val('');
+            $('#txt_BankAcc_Code').val('null');
+            chkIsDeffered.checked = false;
+            txtDueDate.value = GetDate();
+        }
+        else if (txtCashTypeNew.value == '7') {
+            $('#Bank_Div').addClass('display_none');
+            $('#La_CardAmount').removeClass('display_none');
             $('#txt_CardAmount').removeClass('display_none');
+            $('#txt_CashAmount').addClass('display_none');
+            $('#La_CashAmount').addClass('display_none');
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
@@ -1044,15 +1060,11 @@ var AccTrPaymentNote;
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    for (var i = 0; i < Details.length; i++) {
-                        Details[i].TrDate = DateFormat(Details[i].TrDate);
-                        if (Details[i].Status == 1) {
-                            Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified");
-                        }
-                        else {
-                            Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported");
-                        }
-                    }
+                    //for (var i = 0; i < Details.length; i++) {
+                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
+                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified"); }
+                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported"); }
+                    //}
                     InitializeGrid();
                     //filter_DataSource();
                     ReportGrid.DataSource = Details;
@@ -1094,14 +1106,29 @@ var AccTrPaymentNote;
         ReportGrid.Columns = [
             { title: "الرقم", name: "ReceiptID", type: "text", width: "5%", visible: false },
             { title: res.App_InvoiceNum, name: "TrNo", type: "text", width: "8%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "8%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            },
             { title: res.App_Drainage_Type, name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "20%" },
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "8%" },
             { title: res.App_beneficiary, name: (lang == "ar" ? "Bef_DescA" : "Bef_DescE"), type: "text", width: "15%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "8%" },
             { title: res.App_Cash, name: "CashAmount", type: "text", width: "8%" },
             { title: res.App_Card, name: "CardAmount", type: "text", width: "8%" },
-            { title: res.App_Certified, name: "Status_New", type: "text", width: "8%" },
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
+                    ;
+                    return txt;
+                }
+            },
         ];
         ReportGrid.Bind();
     }
@@ -2029,6 +2056,84 @@ var AccTrPaymentNote;
                 }
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        if (custId == 0) {
+            custId = null;
+        }
+        if (vndid == 0) {
+            vndid = null;
+        }
+        if (BankCode == 0) {
+            BankCode = null;
+        }
+        if (expid == 0) {
+            expid = null;
+        }
+        if (fromBoxid == 0) {
+            fromBoxid = null;
+        }
+        if (Boxid == 0) {
+            Boxid = null;
+        }
+        if (RecPayTypeId == 0) {
+            RecPayTypeId = null;
+        }
+        if (CashType == 1001) {
+            CashType = null;
+        }
+        if (Status == "All") {
+            Status = null;
+        }
+        try {
+            var Name_ID = 'ReceiptID';
+            var NameTable = 'IQ_GetBoxReceiveList';
+            var Condation1 = "  TrType=" + IQ_TrType + " and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + DateFrom + "' and TrDate <= ' " + DateTo + " ' ";
+            var Condation2 = " ";
+            if (CashType != null)
+                Condation2 = Condation2 + " and CashType=" + CashType;
+            if (Boxid != null)
+                Condation2 = Condation2 + " and CashBoxID=" + Boxid;
+            if (RecPayTypeId != null)
+                Condation2 = Condation2 + " and RecPayTypeId=" + RecPayTypeId;
+            if (GlobalID != 0) {
+                if (RecPayTypeId == 1) {
+                    Condation2 = Condation2 + " and CustomerID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 2) {
+                    Condation2 = Condation2 + " and VendorID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 3) {
+                    Condation2 = Condation2 + " and BankAccountCode ='" + GlobalID + "'";
+                }
+                else if (RecPayTypeId == 4) {
+                    Condation2 = Condation2 + " and ExpenseID =" + GlobalID;
+                }
+                else if (RecPayTypeId == 5) {
+                    Condation2 = Condation2 + " and FromCashBoxID =" + GlobalID;
+                }
+            }
+            if (Status != null)
+                Condation2 = Condation2 + " and Status=" + Status;
+            if (custId != null)
+                Condation2 = Condation2 + " and CustomerID=" + GlobalID;
+            if (vndid != null)
+                Condation2 = Condation2 + " and VendorID=" + GlobalID;
+            if (BankCode != null)
+                Condation2 = Condation2 + " and BankAccountCode='" + GlobalID + "'";
+            if (expid != null)
+                Condation2 = Condation2 + " and ExpenseID=" + GlobalID;
+            if (fromBoxid != null)
+                Condation2 = Condation2 + " and FromCashBoxID=" + GlobalID;
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.AccPayment, Name_ID, NameTable, Condation3, Details.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(AccTrPaymentNote || (AccTrPaymentNote = {}));
 //# sourceMappingURL=AccTrPaymentNote.js.map

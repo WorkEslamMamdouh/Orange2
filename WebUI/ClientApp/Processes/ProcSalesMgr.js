@@ -86,6 +86,7 @@ var ProcSalesMgr;
     var btnPrintTransaction;
     var btnPrintInvoicePrice;
     var btnPrintslip;
+    var btnPrintsFrom_To;
     // giedView
     var Grid = new JsGrid();
     //global
@@ -203,6 +204,7 @@ var ProcSalesMgr;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
         btnPrintslip = document.getElementById("btnPrintslip");
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         ////debugger
         //    btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
     }
@@ -230,9 +232,10 @@ var ProcSalesMgr;
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         ddlSalesmanFilter.onchange = ddlSalesmanFilter_onchange;
-        chkOpenProcess.onclick = ddlSalesmanFilter_onchange;
+        chkOpenProcess.onclick = chkOpenProcess_onchange;
         ddlSalesman.onchange = ddlSalesman_onchange;
         //ddlOPerationMaster.onchange = ddlOPerationMaster_onchange;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
     function Check_on_user_type() {
         if (SysSession.CurrentEnvironment.UserType == 1 || SysSession.CurrentEnvironment.UserType == 3) { //Salesman
@@ -278,6 +281,7 @@ var ProcSalesMgr;
         sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = " + stat + "", function () {
             var OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             GetOPeration(OperationID);
+            btnShow_onclick();
         });
     }
     function GetOPeration(OperationID) {
@@ -538,33 +542,38 @@ var ProcSalesMgr;
     function ddlSalesmanFilter_onchange() {
         $("#div_btnUpdate").addClass("display_none");
         $("#DivInvoiceDetails").addClass("display_none");
-        $("#divShow").addClass("display_none");
+        //$("#divShow").addClass("display_none");
         if (ddlSalesmanFilter.value != "null") {
-            var salesmanid = Number(ddlSalesmanFilter.value);
-            //Ajax.Callsync({
-            //    type: "Get",
-            //    url: sys.apiUrl("Processes", "GetAllSalesmanOperations"),
-            //    data: { salesmanId: salesmanid, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            //    success: (d) => {
-            //        let result = d as BaseResponse;
-            //        if (result.IsSuccess) {
-            //            operationDetails = result.Response as Array<IQ_GetOperationSalesman>;
-            //            if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
-            //                DocumentActions.FillCombowithdefult(operationDetails, ddlOPerationMaster, "OperationID", "TrNo", "Select operation");
-            //            }
-            //            else {
-            //                DocumentActions.FillCombowithdefult(operationDetails, ddlOPerationMaster, "OperationID", "TrNo", "اختر العملية");
-            //            }
-            //        }
-            //    }
-            //});
+            btnShow_onclick();
         }
         else {
+            $("#div_btnUpdate").addClass("display_none");
+            $("#DivInvoiceDetails").addClass("display_none");
+            //$("#divShow").addClass("display_none");
             var opVal = ddlOPerationMaster.value;
-            //fillddlOperation();
             ddlOPerationMaster.value = opVal;
             txtOperationStatusMaster.value = "";
+            ddlOPerationMaster.value = "";
+            SlsInvoiceStatisticsDetails = new Array();
+            Grid.DataSource = SlsInvoiceStatisticsDetails;
+            Grid.Bind();
+            $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         }
+        Back();
+    }
+    function chkOpenProcess_onchange() {
+        $("#div_btnUpdate").addClass("display_none");
+        $("#DivInvoiceDetails").addClass("display_none");
+        //$("#divShow").addClass("display_none");
+        var opVal = ddlOPerationMaster.value;
+        ddlOPerationMaster.value = opVal;
+        txtOperationStatusMaster.value = "";
+        ddlOPerationMaster.value = "";
+        SlsInvoiceStatisticsDetails = new Array();
+        Grid.DataSource = SlsInvoiceStatisticsDetails;
+        Grid.Bind();
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+        fillddlSalesman();
         Back();
     }
     function ddlOPerationMaster_onchange() {
@@ -1143,6 +1152,7 @@ var ProcSalesMgr;
                     SlsInvoiceStatisticsDetails = result.Response;
                     Grid.DataSource = SlsInvoiceStatisticsDetails;
                     Grid.Bind();
+                    $("#divGridDetails").jsGrid("option", "pageIndex", 1);
                 }
             }
         });
@@ -1168,8 +1178,8 @@ var ProcSalesMgr;
         FillddlItem();
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length) {
-            txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
-            txtPackageCount.value = InvoiceStatisticsModel[0].Tot_Qty.toString();
+            txtItemCount.value = setVal(InvoiceStatisticsModel[0].Line_Count);
+            txtPackageCount.value = setVal(InvoiceStatisticsModel[0].Tot_Qty);
             txtTotal.value = InvoiceStatisticsModel[0].TotalAmount.toString();
             txtTax.value = InvoiceStatisticsModel[0].VatAmount.toString();
             txtNet.value = (InvoiceStatisticsModel[0].NetAfterVat - InvoiceStatisticsModel[0].CommitionAmount).RoundToSt(4);
@@ -2519,6 +2529,66 @@ var ProcSalesMgr;
             success: function (d) {
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var SalesPerson = 0;
+        var IsCash = 0;
+        var operationId = 0;
+        if (ddlOPerationMaster.value.trim() != "") {
+            operationId = Number(ddlOPerationMaster.value.toString());
+        }
+        if (ddlCustomer.value != "null") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+        if (ddlSalesmanFilter.value != "null") {
+            SalesMan = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPerson = Number(ddlSalesPersonFilter.value.toString());
+        }
+        status = Number(ddlStateType.value.toString());
+        IsCash = Number(ddlInvoiceType.value);
+        try {
+            var Name_ID = 'InvoiceID';
+            var NameTable = 'I_Sls_TR_Invoice';
+            var Condation1 = " SlsInvSrc = 2 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            var Condation2 = " ";
+            if (operationId != 0 && operationId != null)
+                Condation2 = Condation2 + " and OperationId =" + operationId;
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesPerson != 0 && SalesPerson != null)
+                Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson; // and Status = " + Status   
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan; // and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.InvoiceOperation, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(ProcSalesMgr || (ProcSalesMgr = {}));
 //# sourceMappingURL=ProcSalesMgr.js.map

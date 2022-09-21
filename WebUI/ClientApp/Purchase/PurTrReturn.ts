@@ -88,6 +88,7 @@ namespace PurTrReturn {
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
+    var btnPrintsFrom_To: HTMLButtonElement;
     var btnRecieveSearch: HTMLButtonElement;
   
     //flags
@@ -177,7 +178,7 @@ namespace PurTrReturn {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
-
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
 
     }
     function Check_on_user_type() {
@@ -239,6 +240,7 @@ namespace PurTrReturn {
         btnRecieveSearch = document.getElementById("btnRecieveSearch") as HTMLButtonElement;
         btnEdit = document.getElementById("btnUpdate") as HTMLButtonElement; 
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
     }
        //-----------------------------------------------------------------------  DropDownList Region ----------------------------------
     function FillddlVendorMaster() {
@@ -2174,6 +2176,65 @@ namespace PurTrReturn {
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
          window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+    }
+
+
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+
+        var startdt = DateFormatRep(txtFromDate.value).toString();
+        var enddt = DateFormatRep(txtToDate.value).toString();
+        var salesmanId = 0;
+        var vendorId = 0;
+        var status = 0;
+
+        if (ddlVendorMaster.value != "null") {
+            vendorId = Number(ddlVendorMaster.value.toString());
+        }
+        if (ddlSalesmanMaster.value != "null") {
+            salesmanId = Number(ddlSalesmanMaster.value.toString());
+        }
+
+        status = Number(ddlStateType.value.toString());
+
+
+
+        try {
+
+
+            let Name_ID = 'ReceiveID'
+            let NameTable = 'IQ_GetPurReceiveStaistic'
+            let Condation1 = "  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startdt + "' and TrDate <= ' " + enddt + " ' ";
+            let Condation2 = " ";
+
+
+            if (salesmanId != 0 && salesmanId != null)
+                Condation2 = Condation2 + " and SalesmanId =" + salesmanId;
+
+            if (vendorId != 0 && vendorId != null)
+                Condation2 = Condation2 + " and VendorID =" + vendorId;
+
+            if (status == 0 || status == 1) {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            else if (status == 2) {
+                Condation2 = Condation2 + "";
+            }
+
+            ///////////
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+
+
+            PrintsFrom_To(TransType.Pur_Receive_Return, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length)
+
+
+
+        } catch (e) {
+
+            return
+        }
+
     }
 
 }

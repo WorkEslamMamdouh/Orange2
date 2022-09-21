@@ -97,6 +97,7 @@ var SlsTrSalesManager;
     var btn_Approveprice;
     var btn_Exit_Approveprice;
     //print buttons 
+    var btnPrintsFrom_To;
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -232,6 +233,7 @@ var SlsTrSalesManager;
         btn_Approveprice = document.getElementById("btn_Approveprice");
         btn_Exit_Approveprice = document.getElementById("btn_Exit_Approveprice");
         //print 
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
@@ -269,8 +271,9 @@ var SlsTrSalesManager;
         btnPrintslip.onclick = btnPrintslip_onclick;
         ////
         //btnPrintInvoicePrice.onclick = btnPrintInvoicePrice_onclick;
-        searchbutmemreport.onchange = _SearchBox_Change;
+        searchbutmemreport.onkeyup = _SearchBox_Change;
         //searchbutmemreport.onkeyup = _SearchBox_Change1;
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
         btnCustLastPrice.onclick = LastPrice_onclick;
@@ -2246,6 +2249,17 @@ var SlsTrSalesManager;
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+        if (searchbutmemreport.value != "") {
+            var search_1 = searchbutmemreport.value.toLowerCase();
+            SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0
+                || x.Slsm_DescA.toLowerCase().search(search_1) >= 0; });
+            Grid.DataSource = SearchDetails;
+            Grid.Bind();
+        }
+        else {
+            Grid.DataSource = SlsInvoiceStatisticsDetails;
+            Grid.Bind();
+        }
         //$("#divGridDetails").jsGrid("option", "pageIndex", 1);
         // 
         //var myarr = $("#divGridDetails").jsGrid("option", "data");
@@ -2265,16 +2279,6 @@ var SlsTrSalesManager;
         //Grid.Bind();
         return;
         //$("#divGridDetails").jsGrid("option", "pageSize", 10000); 
-        //if (searchbutmemreport.value != "") {
-        //    let search: string = searchbutmemreport.value.toLowerCase();
-        //    SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-        //        || x.Slsm_DescA.toLowerCase().search(search) >= 0 || x.Slsm_DescE.toLowerCase().search(search) >= 0);
-        //    Grid.DataSource = SearchDetails;
-        //    Grid.Bind();
-        //} else {
-        //    Grid.DataSource = SlsInvoiceStatisticsDetails;
-        //    Grid.Bind();
-        //}
         //let cnt = 1;
         //if (SlsInvoiceStatisticsDetails.length > 0) {
         //    let ii = 0;
@@ -3388,6 +3392,70 @@ var SlsTrSalesManager;
                 var result = d;
             }
         });
+    }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+        var startDate = DateFormatRep(txtStartDate.value).toString();
+        var endDate = DateFormatRep(txtEndDate.value).toString();
+        var customerId = 0;
+        var status = 0;
+        var SalesMan = 0;
+        var SalesPerson = 0;
+        var IsCash = 0;
+        if (ddlCustomer.value.trim() != "") {
+            customerId = Number(ddlCustomer.value.toString());
+        }
+        if (ddlSalesmanFilter.value != "null") {
+            SalesMan = Number(ddlSalesmanFilter.value.toString());
+        }
+        if (ddlSalesPersonFilter.value != "null") {
+            SalesPerson = Number(ddlSalesPersonFilter.value.toString());
+        }
+        if (ddlStateType.value != "null") {
+            status = Number(ddlStateType.value.toString());
+        }
+        if (Number(ddlInvoiceType.value) == 0) {
+            IsCash = 0;
+        }
+        else if (Number(ddlInvoiceType.value) == 1) {
+            IsCash = 1;
+        }
+        else {
+            IsCash = 2;
+        }
+        try {
+            var Name_ID = 'InvoiceID';
+            var NameTable = 'I_Sls_TR_Invoice';
+            var Condation1 = " SlsInvSrc = 1 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
+            var Condation2 = " ";
+            if (customerId != 0 && customerId != null)
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
+            if (SalesPerson != 0 && SalesPerson != null)
+                Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson; // and Status = " + Status   
+            if (SalesMan != 0 && SalesMan != null)
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan; // and Status = " + Status
+            if (status == 2)
+                Condation2 = Condation2 + "";
+            else {
+                Condation2 = Condation2 + " and Status = " + status;
+            }
+            /////////////' and IsCash = '" + IsCash+"'"
+            if (IsCash == 2)
+                Condation2 = Condation2 + "";
+            else if (IsCash == 0) {
+                Condation2 = Condation2 + " and IsCash = 'False' ";
+            }
+            else if (IsCash == 1) {
+                Condation2 = Condation2 + " and IsCash = 'True' ";
+            }
+            ///////////
+            var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+            PrintsFrom_To(TransType.Invoice, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length);
+        }
+        catch (e) {
+            return;
+        }
     }
 })(SlsTrSalesManager || (SlsTrSalesManager = {}));
 //# sourceMappingURL=SlsTrSalesManager.js.map

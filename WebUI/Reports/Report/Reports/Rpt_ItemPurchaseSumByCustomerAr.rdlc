@@ -2077,7 +2077,7 @@
   <Width>28.63248cm</Width>
   <Page>
     <PageHeader>
-      <Height>2.45209cm</Height>
+      <Height>1.81709cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2455,45 +2455,10 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="ExecutionTime3">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!Par_InvoiceTypeDSA.Value, "Rpt_ItemPurchaseSumByCustomerAr")</Value>
-                      <Style>
-                        <FontSize>11pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>ExecutionTime</rd:DefaultName>
-              <Top>1.62476cm</Top>
-              <Left>12.0494cm</Left>
-              <Height>0.6453cm</Height>
-              <Width>3.68873cm</Width>
-              <ZIndex>11</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Top>0.00222in</Top>
-          <Height>2.40412cm</Height>
+          <Height>1.81145cm</Height>
           <Width>28.63247cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
@@ -2541,18 +2506,11 @@
       </ConnectionProperties>
       <rd:DataSourceID>fb0a2837-ba90-4867-a841-31c4373a3fe9</rd:DataSourceID>
     </DataSource>
-    <DataSource Name="InvDALDomain1">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>38c913b2-f908-4a61-9480-776196139089</rd:DataSourceID>
-    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Rpt_ItemPurchaseSumByCustomerAr">
       <Query>
-        <DataSourceName>InvDALDomain1</DataSourceName>
+        <DataSourceName>InvDALDomain</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -2650,14 +2608,6 @@
         </Field>
         <Field Name="Par_Todate">
           <DataField>Par_Todate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Par_InvoiceTypeDSA">
-          <DataField>Par_InvoiceTypeDSA</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Par_InvoiceTypeDSE">
-          <DataField>Par_InvoiceTypeDSE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="vendorcode">
@@ -2761,7 +2711,7 @@
         <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
         <rd:TableName>InvEntities</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>IProc_Rpt_ItemPurchaseSum</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemPurchaseSum_Result] IProc_Rpt_ItemPurchaseSum(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_ItemPurchaseSum_Result] IProc_Rpt_ItemPurchaseSum(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String)</rd:ObjectDataSourceSelectMethodSignature>
         <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
