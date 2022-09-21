@@ -11,7 +11,7 @@ namespace Inv.DAL.Domain
 {
     using System;
     
-    public partial class IProc_Rpt_AccBoxSummary_Result
+    public partial class IProc_Rpt_AccBoxDetailVer2_Result
     {
         public Nullable<int> Comp { get; set; }
         public Nullable<int> Bra { get; set; }
@@ -26,24 +26,22 @@ namespace Inv.DAL.Domain
         public string Par_StatusDSE { get; set; }
         public string Par_BoxDSA { get; set; }
         public string Par_BoxTypeDSE { get; set; }
+        public string Par_CashTypeDSA { get; set; }
+        public string Par_CashTypeDSE { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
+        public Nullable<int> cashboxid { get; set; }
         public string AccountCode { get; set; }
         public string CashBox_DescA { get; set; }
         public string CashBox_DescE { get; set; }
         public string CardAccountCode { get; set; }
         public string user_code { get; set; }
-        public Nullable<decimal> openBal { get; set; }
-        public Nullable<decimal> openCash { get; set; }
-        public Nullable<decimal> openCard { get; set; }
+        public int OpType { get; set; }
+        public Nullable<System.DateTime> trdate { get; set; }
+        public Nullable<int> trno { get; set; }
+        public string DescA { get; set; }
+        public string DescE { get; set; }
         public Nullable<decimal> debit { get; set; }
         public Nullable<decimal> credit { get; set; }
-        public Nullable<decimal> debitcash { get; set; }
-        public Nullable<decimal> creditcash { get; set; }
-        public Nullable<decimal> debitcard { get; set; }
-        public Nullable<decimal> creditcard { get; set; }
-        public Nullable<decimal> EndBal { get; set; }
-        public Nullable<decimal> EndBalcash { get; set; }
-        public Nullable<decimal> EndBalcard { get; set; }
     }
 }
