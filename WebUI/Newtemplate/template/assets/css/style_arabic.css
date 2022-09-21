@@ -30410,5 +30410,10 @@ input[class=checkbox]:checked:before {
     background-image: linear-gradient(180deg, var(--dark-blue) 0%, var(--dark-blue) 99%);
 }
 
+#btnPrintsFrom_To {
+    font-weight: bold;
+    font-size: 15px;
+}
+
 /*End Scroll Bar*/
 
