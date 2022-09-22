@@ -95,6 +95,7 @@ namespace AccDefVendor {
     var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
 
     var AccountDetails: A_Rec_D_Customer = new A_Rec_D_Customer();
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     //---------------------------------------------------------- main region---------------------------------------------------------------
     export function InitalizeComponent() {
         //debugger;
@@ -444,14 +445,15 @@ namespace AccDefVendor {
                 newCount++;
             }
         }
+         
 
-        if (txt_CustomerCODE.value.trim() == "") {
+        if (txt_CustomerCODE.value.trim() == "" && IsAutoCode == false) {
             DisplayMassage("يجب ادخال رقم المورد", "Vendor number must be entered", MessageType.Worning);
             Errorinput(txt_CustomerCODE);
             return false;
         }
 
-        if (IsNew == true && txt_CustomerCODE.value.trim() != "") {
+        if (IsNew == true && txt_CustomerCODE.value.trim() != ""  ) {
             if (CustomerFoundBefore() == false) {
                 DisplayMassage("رقم المورد موجود من قبل ", "vendor number found before", MessageType.Worning);
                 Errorinput(txt_CustomerCODE);
@@ -832,6 +834,13 @@ namespace AccDefVendor {
             Errorinput($('#txt_CustCode'));
             return false;
         }
+
+
+          
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+        }
+
 
     }
     function btnsave_onClick() {

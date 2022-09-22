@@ -124,6 +124,8 @@ namespace GenDefCustomerCat {
             $("#txtCode" + CountGrid).removeAttr("disabled");
             $("#txtDescA" + CountGrid).removeAttr("disabled");
             $("#txtDescL" + CountGrid).removeAttr("disabled");
+            $("#CodePrefex" + CountGrid).removeAttr("disabled");
+            $("#LastNumber" + CountGrid).removeAttr("disabled");
             $("#txtAcount_Code" + CountGrid).removeAttr("disabled");
              
             $("#btn_minus" + CountGrid).removeClass("display_none");
@@ -160,13 +162,23 @@ namespace GenDefCustomerCat {
 		                <div class="form-group">
                             <input id="txtDescL${cnt}" type="text" class="form-control" name="" disabled />
 		                </div>
-	                </td>
+	                </td> 
                     <td>
                         <div class="form-group">
                             <select id="txtAcount_Code${cnt}" class="form-control"  disabled> 
 		                        <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
 		                    </select >
                         </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="CodePrefex${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="LastNumber${cnt}" type="text" class="form-control" name="" disabled />
+		                </div>
 	                </td>
                     
 		        <input id = "txt_StatusFlag${cnt}" name = " " type = "hidden" disabled class="form-control"/></div>
@@ -192,6 +204,14 @@ namespace GenDefCustomerCat {
                 $("#txt_StatusFlag" + cnt).val("u");
         });
         $("#txtDescL" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CodePrefex" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#LastNumber" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
@@ -312,10 +332,7 @@ namespace GenDefCustomerCat {
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Category();
 
-            StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
-             
-
+            StatusFlag = $("#txt_StatusFlag" + i).val(); 
 
             if (StatusFlag == "i") {
                 Model.StatusFlag = StatusFlag.toString();
@@ -346,6 +363,8 @@ namespace GenDefCustomerCat {
                 else {
                     Model.AccountCode = $("#txtAcount_Code" + i).val();
                 }
+                Model.CodePrefex = $("#CodePrefex" + i).val();
+                Model.LastNumber = $("#LastNumber" + i).val();
                 Details.push(Model);
 
 
@@ -354,40 +373,54 @@ namespace GenDefCustomerCat {
                 //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
+                 
+                Model.StatusFlag = StatusFlag.toString();
 
-                
-                var UpdatedDetail = Details.filter(x => x.CatID == $("#txt_ID" + i).val())
-                UpdatedDetail[0].UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                UpdatedDetail[0].CatCode = $("#txtCode" + i).val();
-                if ($("#txtAcount_Code" + i).val() == "Null")
-                {
-                    UpdatedDetail[0].AccountCode = "0";
-                }
-                else
-                {
-                    UpdatedDetail[0].AccountCode = $("#txtAcount_Code" + i).val();
-                }
+                Model.CatID = Number($("#txt_ID" + i).val());
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                Model.AccountType = Number(AccountType);
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;;
+
+                Model.CatCode = $("#txtCode" + i).val();
                 if ($("#txtDescA" + i).val() == "") {
-                    UpdatedDetail[0].Cat_DescA = $("#txtDescL" + i).val();
+                    Model.Cat_DescA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].Cat_DescA = $("#txtDescA" + i).val();
+                    Model.Cat_DescA = $("#txtDescA" + i).val();
                 }
                 if ($("#txtDescL" + i).val() == "") {
-                    UpdatedDetail[0].Cat_DescE = $("#txtDescA" + i).val();
+                    Model.Cat_DescE = $("#txtDescA" + i).val();
                     $("#txtDescL" + i).val($("#txtDescA" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].Cat_DescE = $("#txtDescL" + i).val();
+                    Model.Cat_DescE = $("#txtDescL" + i).val();
                 }
+                if ($("#txtAcount_Code" + i).val() == "Null") {
+                    Model.AccountCode = "0";
+                }
+                else {
+                    Model.AccountCode = $("#txtAcount_Code" + i).val();
+                }
+                Model.CodePrefex = $("#CodePrefex" + i).val();
+                Model.LastNumber = $("#LastNumber" + i).val();
+                Details.push(Model);
+
+
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "")
                 {
-                var UpdatedDetail = Details.filter(x => x.CatID == $("#txt_ID" + i).val())
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
+
+                    Model.StatusFlag = StatusFlag.toString();
+
+                    Model.CatID = Number($("#txt_ID" + i).val());
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                    Model.AccountType = Number(AccountType);
+                    Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                    Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;;
+
                 }
 
             }
@@ -410,6 +443,8 @@ namespace GenDefCustomerCat {
                 if (result.IsSuccess) {
                     Details = result.Response as Array<A_RecPay_D_Category>;
 
+                    debugger
+                    console.log(Details);
                     DisplayGenDefCategory();
                 }
             }
@@ -425,6 +460,8 @@ namespace GenDefCustomerCat {
             $("#txtCode" + i).val(Details[i].CatCode);
             $("#txtDescA" + i).val(Details[i].Cat_DescA);
             $("#txtDescL" + i).val(Details[i].Cat_DescE);
+            $("#CodePrefex" + i).val(Details[i].CodePrefex);
+            $("#LastNumber" + i).val(Details[i].LastNumber);
 
              
             try {
@@ -491,7 +528,7 @@ namespace GenDefCustomerCat {
             if ($("#txtDescL" + rowcount).val() == "") {
                 $("#txtDescL" + rowcount).val($("#txtDescL" + rowcount).val());
             }
-
+             
             if ($("#txtCode" + rowcount).val() == '') {
 
                 WorningMessage('ادخل كود', 'Enter The code', 'خطاء', 'Erorr');

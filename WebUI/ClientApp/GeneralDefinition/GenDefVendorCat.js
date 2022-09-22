@@ -95,6 +95,8 @@ var GenDefVendorCat;
             $("#txtCode" + CountGrid).removeAttr("disabled");
             $("#txtDescA" + CountGrid).removeAttr("disabled");
             $("#txtDescL" + CountGrid).removeAttr("disabled");
+            $("#CodePrefex" + CountGrid).removeAttr("disabled");
+            $("#LastNumber" + CountGrid).removeAttr("disabled");
             $("#txtAcount_Code" + CountGrid).removeAttr("disabled");
             // can delete new inserted record  without need for delete privilage
             $("#btn_minus" + CountGrid).removeClass("display_none");
@@ -118,7 +120,7 @@ var GenDefVendorCat;
     function BuildControls(cnt) {
         var html;
         //
-        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            \t<select id=\"txtAcount_Code" + cnt + "\" class=\"form-control\"  disabled> \n\t\t                            <option value=\"Null\">" + (lang == "ar" ? "رقم الحساب" : "Account number") + "</option>\n\t\t                        </select >\n                        </div>\n\t                </td>\n                    \n\t\t        <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n\t\t        <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            \t<select id=\"txtAcount_Code" + cnt + "\" class=\"form-control\"  disabled> \n\t\t                            <option value=\"Null\">" + (lang == "ar" ? "رقم الحساب" : "Account number") + "</option>\n\t\t                        </select >\n                        </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"CodePrefex" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"LastNumber" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    \n\t\t        <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n\t\t        <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" disabled class=\"form-control\"/></div>\n                </tr>";
         $("#div_Data").append(html);
         for (var i = 0; i < Details_Acount.length; i++) {
             $('#txtAcount_Code' + cnt).append('<option value="' + Details_Acount[i].ACC_CODE + '">' + (lang == "ar" ? Details_Acount[i].ACC_DESCA : Details_Acount[i].ACC_DESCL) + '</option>');
@@ -134,6 +136,14 @@ var GenDefVendorCat;
                 $("#txt_StatusFlag" + cnt).val("u");
         });
         $("#txtDescL" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CodePrefex" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#LastNumber" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
@@ -226,7 +236,6 @@ var GenDefVendorCat;
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Category();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
             if (StatusFlag == "i") {
                 Model.StatusFlag = StatusFlag.toString();
                 Model.CatID = 0;
@@ -255,40 +264,53 @@ var GenDefVendorCat;
                 else {
                     Model.AccountCode = $("#txtAcount_Code" + i).val();
                 }
+                Model.CodePrefex = $("#CodePrefex" + i).val();
+                Model.LastNumber = $("#LastNumber" + i).val();
                 Details.push(Model);
                 //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
-                var UpdatedDetail = Details.filter(function (x) { return x.CatID == $("#txt_ID" + i).val(); });
-                UpdatedDetail[0].UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                UpdatedDetail[0].CatCode = $("#txtCode" + i).val();
-                //UpdatedDetail[0].AccountCode = $("#txtAcount_Code" + i).val();
-                if ($("#txtAcount_Code" + i).val() == "Null") {
-                    UpdatedDetail[0].AccountCode = "0";
-                }
-                else {
-                    UpdatedDetail[0].AccountCode = $("#txtAcount_Code" + i).val();
-                }
+                Model.StatusFlag = StatusFlag.toString();
+                Model.CatID = Number($("#txt_ID" + i).val());
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                Model.AccountType = Number(AccountType);
+                Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+                ;
+                Model.CatCode = $("#txtCode" + i).val();
                 if ($("#txtDescA" + i).val() == "") {
-                    UpdatedDetail[0].Cat_DescA = $("#txtDescL" + i).val();
+                    Model.Cat_DescA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].Cat_DescA = $("#txtDescA" + i).val();
+                    Model.Cat_DescA = $("#txtDescA" + i).val();
                 }
                 if ($("#txtDescL" + i).val() == "") {
-                    UpdatedDetail[0].Cat_DescE = $("#txtDescA" + i).val();
+                    Model.Cat_DescE = $("#txtDescA" + i).val();
                     $("#txtDescL" + i).val($("#txtDescA" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].Cat_DescE = $("#txtDescL" + i).val();
+                    Model.Cat_DescE = $("#txtDescL" + i).val();
                 }
+                if ($("#txtAcount_Code" + i).val() == "Null") {
+                    Model.AccountCode = "0";
+                }
+                else {
+                    Model.AccountCode = $("#txtAcount_Code" + i).val();
+                }
+                Model.CodePrefex = $("#CodePrefex" + i).val();
+                Model.LastNumber = $("#LastNumber" + i).val();
+                Details.push(Model);
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(function (x) { return x.CatID == $("#txt_ID" + i).val(); });
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = StatusFlag.toString();
+                    Model.CatID = Number($("#txt_ID" + i).val());
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                    Model.AccountType = Number(AccountType);
+                    Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
+                    Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+                    ;
                 }
             }
         }
@@ -317,6 +339,8 @@ var GenDefVendorCat;
             $("#txtCode" + i).val(Details[i].CatCode);
             $("#txtDescA" + i).val(Details[i].Cat_DescA);
             $("#txtDescL" + i).val(Details[i].Cat_DescE);
+            $("#CodePrefex" + i).val(Details[i].CodePrefex);
+            $("#LastNumber" + i).val(Details[i].LastNumber);
             try {
                 for (var u = 0; u < Details_Acount.length; u++) {
                     if (Details[i].AccountCode == Details_Acount[u].ACC_CODE) {
