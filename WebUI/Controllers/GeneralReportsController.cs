@@ -1463,6 +1463,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("BoxId", rp.BoxId);
             rep.AddParameter("Status", rp.Status);
+            rep.AddParameter("CashType", rp.CashType); 
 
             string url = rep.GetReportUrl("Rpt_AccBoxSummary");
 
@@ -1494,6 +1495,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("BoxId", rp.BoxId);
             rep.AddParameter("Status", rp.Status);
+            rep.AddParameter("CashType", rp.CashType);
 
             string url = rep.GetReportUrl("Rpt_AccBoxDetail");
 

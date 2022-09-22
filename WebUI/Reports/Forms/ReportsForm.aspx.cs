@@ -568,7 +568,7 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spRecType = new SqlParameter("@RecType", RecType == -1 ? System.Data.SqlTypes.SqlInt32.Null : RecType);
 
             int CashType = int.Parse(RepPar.CashType.ToString());
-            SqlParameter spCashType = new SqlParameter("@CashType", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);             
 
             string BnfID = RepPar.BnfID.ToString();
             SqlParameter spBnfID = new SqlParameter("@BnfID", BnfID);
@@ -4725,6 +4725,9 @@ namespace RS.WebUI.Reports.Forms
             int BalType = int.Parse(RepPar.BalType.ToString());
             SqlParameter spBalType = new SqlParameter("@BalType", BalType);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType);
+
             string FromDate = RepPar.FromDate.ToString();
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
@@ -4744,6 +4747,7 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @boxid = " + spBoxId.Value +
            ", @status = " + spStatus.Value +
+           ", @CashType = " + spCashType.Value +
            ", @FromDate = '" + spFromDate.Value + "'" +
            ", @Todate = '" + spToDate.Value + "'";
 
@@ -4775,6 +4779,9 @@ namespace RS.WebUI.Reports.Forms
             int BalType = int.Parse(RepPar.BalType.ToString());
             SqlParameter spBalType = new SqlParameter("@BalType", BalType);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType);
+
             string FromDate = RepPar.FromDate.ToString();
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
@@ -4794,6 +4801,7 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @boxid = " + spBoxId.Value +
            ", @status = " + spStatus.Value +
+           ", @CashType = " + spCashType.Value +
            ", @FromDate = '" + spFromDate.Value + "'" +
            ", @Todate = '" + spToDate.Value + "'";
 

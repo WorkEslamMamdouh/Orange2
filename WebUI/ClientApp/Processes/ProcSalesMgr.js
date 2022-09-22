@@ -22,6 +22,7 @@ var ProcSalesMgr;
     var ddlOPerationMaster;
     var txtRemarks;
     var txtRefNo;
+    var txtOperationId;
     // Arrays
     var CustomerDetails = new Array();
     var filterCustomerDetails = new Array();
@@ -168,6 +169,7 @@ var ProcSalesMgr;
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster");
         txtRemarks = document.getElementById("txtRemarks");
         txtRefNo = document.getElementById("txtRefNo");
+        txtOperationId = document.getElementById("txtOperationId");
         //TextBoxes
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtStartDate = document.getElementById("txtStartDate");
@@ -295,6 +297,7 @@ var ProcSalesMgr;
                     operationDetailsList = result.Response;
                     $('#ddlOPerationMaster').val(operationDetailsList[0].TrNo);
                     OperaID = operationDetailsList[0].OperationID;
+                    txtOperationId.value = operationDetailsList[0].OperationID.toString();
                     ddlOPerationMaster_onchange();
                 }
             }
@@ -854,6 +857,7 @@ var ProcSalesMgr;
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
         $("#ddlSalesPerson").prop("value", "null");
+        txtOperationId.value = "";
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -976,6 +980,7 @@ var ProcSalesMgr;
             }
         }
         GlobalInvoiceCounter = 0;
+        txtOperationId.value = operationDetailsList[0].OperationID.toString();
     }
     function btnBack_onclick() {
         clear();
@@ -1922,7 +1927,7 @@ var ProcSalesMgr;
         InvoiceModel.TrType = 0; //0 invoice 1 return
         InvoiceModel.SlsInvSrc = 2; // 1 from store 2 from van 
         InvoiceModel.SlsInvType = 1; //  retail 
-        InvoiceModel.OperationId = OperaID;
+        InvoiceModel.OperationId = Number(txtOperationId.value);
         InvoiceModel.QtyTotal = $('#txtPackageCount').val();
         InvoiceModel.LineCount = $('#txtItemCount').val();
         InvoiceModel.GlobalInvoiceCounter = GlobalInvoiceCounter;

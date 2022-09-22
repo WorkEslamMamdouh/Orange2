@@ -428,7 +428,7 @@ namespace AccTrPaymentNote {
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
         }
-        else if (txtCashTypeNew.value == '7') {
+        else if (txtCashTypeNew.value == '8') {
             $('#Bank_Div').addClass('display_none');
             $('#La_CardAmount').removeClass('display_none');
             $('#txt_CardAmount').removeClass('display_none'); 
@@ -811,7 +811,7 @@ namespace AccTrPaymentNote {
             Errorinput(txt_CashAmount);
             return Valid = 1;
         }
-        if (txtCashTypeNew.value == '7' && Number(txt_CardAmount.value) == 0) {
+        if (txtCashTypeNew.value == '8' && Number(txt_CardAmount.value) == 0) {
             DisplayMassage("يجب ادخال كارت", "You must enter cash or card ", MessageType.Worning);
             Errorinput(txt_CardAmount); 
             return Valid = 1;
@@ -827,23 +827,23 @@ namespace AccTrPaymentNote {
             Errorinput($('#txt_TransferNo'));
             return Valid = 1;
         }
-        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && txtCashTypeNew.value != "1" && txtCashTypeNew.value != "2" && $('#txt_CheckNo').val() == '') {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "8" && txtCashTypeNew.value != "1" && txtCashTypeNew.value != "2" && $('#txt_CheckNo').val() == '') {
             DisplayMassage("يجب ادخال  رقم الشيك   ", "The check number must be entered", MessageType.Worning);
             Errorinput($('#txt_CheckNo'));
             return Valid = 1;
         }
 
-        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && $('#txt_BankName').val() == '') {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "8" && $('#txt_BankName').val() == '') {
             DisplayMassage("يجب ادخال  صادر من بنك  ", "The entry must be issued by a bank", MessageType.Worning);
             Errorinput($('#txt_BankName'));
             return Valid = 1;
         }
-        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "7" && txt_BankAcc_Code.selectedIndex == 0) {
+        if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "8" && txt_BankAcc_Code.selectedIndex == 0) {
             DisplayMassage("يجب اختيار  رقم  حساب الصرف  ", "You must Choose Exchange Account", MessageType.Worning);
             Errorinput(txt_BankAcc_Code);
             return Valid = 1;
         }
-        if (txtCashTypeNew.value == '7' && txt_ReceiptNoteNew.value != '3') {
+        if (txtCashTypeNew.value == '8' && txt_ReceiptNoteNew.value != '3') {
             DisplayMassage("يجب اختيار  صرف لحساب بنك  ", "You must Choose Exchange Account", MessageType.Worning);
             Errorinput(txt_ReceiptNoteNew);
             return Valid = 1;
