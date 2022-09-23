@@ -11,7 +11,7 @@ namespace Inv.DAL.Domain
 {
     using System;
     
-    public partial class IProc_Prnt_SlsInvoice_Result
+    public partial class IProc_Prnt_SlsInvoiceVer2_Result
     {
         public Nullable<int> Comp { get; set; }
         public Nullable<int> Bra { get; set; }
@@ -103,5 +103,11 @@ namespace Inv.DAL.Domain
         public string Sper_code { get; set; }
         public string SPer_NameA { get; set; }
         public string Sper_nameE { get; set; }
+        public Nullable<int> dt_Src { get; set; }
+        public Nullable<int> dt_Storeid { get; set; }
+        public Nullable<int> dt_Operationid { get; set; }
+        public Nullable<int> dtop_TrNo { get; set; }
+        public Nullable<int> dtStore_code { get; set; }
+        public string dtStore_DescA { get; set; }
     }
 }

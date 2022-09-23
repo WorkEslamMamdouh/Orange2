@@ -221,31 +221,7 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetVendor> IQ_GetVendor { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceListVer2> IQ_GetSlsInvoiceListVer2 { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceStatisticVer2> IQ_GetSlsInvoiceStatisticVer2 { get; set; }
-    
-        public virtual int G_ProcessTrans(Nullable<int> comp, Nullable<int> branch, string trType, string opMode, Nullable<int> trID, ObjectParameter trNo, ObjectParameter ok)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var branchParameter = branch.HasValue ?
-                new ObjectParameter("Branch", branch) :
-                new ObjectParameter("Branch", typeof(int));
-    
-            var trTypeParameter = trType != null ?
-                new ObjectParameter("TrType", trType) :
-                new ObjectParameter("TrType", typeof(string));
-    
-            var opModeParameter = opMode != null ?
-                new ObjectParameter("OpMode", opMode) :
-                new ObjectParameter("OpMode", typeof(string));
-    
-            var trIDParameter = trID.HasValue ?
-                new ObjectParameter("TrID", trID) :
-                new ObjectParameter("TrID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("G_ProcessTrans", compParameter, branchParameter, trTypeParameter, opModeParameter, trIDParameter, trNo, ok);
-        }
+        public virtual DbSet<IQ_GetSlsInvoiceItemVer2> IQ_GetSlsInvoiceItemVer2 { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -4513,47 +4489,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_DashSales_Result>("IProc_DashSales", compParameter);
         }
     
-        public virtual ObjectResult<IProc_Prnt_SlsInvoice_Result> IProc_Prnt_SlsInvoice(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var tRIdParameter = tRId.HasValue ?
-                new ObjectParameter("TRId", tRId) :
-                new ObjectParameter("TRId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_SlsInvoice_Result>("IProc_Prnt_SlsInvoice", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
-        }
-    
         public virtual ObjectResult<IProc_Rpt_AccCustomerAging_Result> IProc_Rpt_AccCustomerAging(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> catID, Nullable<int> groupID, Nullable<int> customerID, Nullable<int> status, Nullable<int> balType, string todate, Nullable<int> agtype)
         {
             var compParameter = comp.HasValue ?
@@ -5491,6 +5426,72 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("Todate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccBoxSummaryVer2_Result>("IProc_Rpt_AccBoxSummaryVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, boxidParameter, statusParameter, cashTypeParameter, fromDateParameter, todateParameter);
+        }
+    
+        public virtual int G_ProcessTransVer2(Nullable<int> comp, Nullable<int> branch, string trType, string opMode, Nullable<int> trID, ObjectParameter trNo, ObjectParameter ok)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("Comp", comp) :
+                new ObjectParameter("Comp", typeof(int));
+    
+            var branchParameter = branch.HasValue ?
+                new ObjectParameter("Branch", branch) :
+                new ObjectParameter("Branch", typeof(int));
+    
+            var trTypeParameter = trType != null ?
+                new ObjectParameter("TrType", trType) :
+                new ObjectParameter("TrType", typeof(string));
+    
+            var opModeParameter = opMode != null ?
+                new ObjectParameter("OpMode", opMode) :
+                new ObjectParameter("OpMode", typeof(string));
+    
+            var trIDParameter = trID.HasValue ?
+                new ObjectParameter("TrID", trID) :
+                new ObjectParameter("TrID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("G_ProcessTransVer2", compParameter, branchParameter, trTypeParameter, opModeParameter, trIDParameter, trNo, ok);
+        }
+    
+        public virtual ObjectResult<IProc_Prnt_SlsInvoiceVer2_Result> IProc_Prnt_SlsInvoiceVer2(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_SlsInvoiceVer2_Result>("IProc_Prnt_SlsInvoiceVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     }
 }

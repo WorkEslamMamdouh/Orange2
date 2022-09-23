@@ -198,6 +198,7 @@
         <EntityTypeShape EntityType="InvModel.IQ_GetVendor" Width="1.5" PointX="21.375" PointY="44.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceListVer2" Width="1.5" PointX="56.375" PointY="31.75" />
         <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceStatisticVer2" Width="1.5" PointX="44.375" PointY="56.75" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" Width="1.5" PointX="46.375" PointY="56.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

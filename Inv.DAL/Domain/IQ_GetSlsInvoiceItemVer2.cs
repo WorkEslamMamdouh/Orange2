@@ -12,7 +12,7 @@ namespace Inv.DAL.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class I_Sls_TR_InvoiceItems
+    public partial class IQ_GetSlsInvoiceItemVer2
     {
         public int InvoiceItemID { get; set; }
         public Nullable<int> InvoiceID { get; set; }
@@ -31,6 +31,20 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> StockUnitCost { get; set; }
         public Nullable<int> VatApplied { get; set; }
         public Nullable<decimal> TotRetQty { get; set; }
+        public string it_itemCode { get; set; }
+        public string it_DescA { get; set; }
+        public Nullable<int> CompCode { get; set; }
+        public string It_DescE { get; set; }
+        public string ItFm_Code { get; set; }
+        public string ItFm_DescA { get; set; }
+        public string ItFm_DescE { get; set; }
+        public string Cat_Code { get; set; }
+        public string Cat_DescA { get; set; }
+        public string Cat_DescE { get; set; }
+        public string Uom_Code { get; set; }
+        public string Uom_DescA { get; set; }
+        public string Uom_DescE { get; set; }
+        public int ItemFamilyID { get; set; }
         public Nullable<decimal> InvoiceSoldQty { get; set; }
         public Nullable<int> Serial { get; set; }
         public Nullable<decimal> AllowAmount { get; set; }
@@ -61,5 +75,9 @@ namespace Inv.DAL.Domain
         public Nullable<int> SlsInvSrc { get; set; }
         public Nullable<int> StoreId { get; set; }
         public Nullable<int> OperationId { get; set; }
+        public Nullable<int> op_TrNo { get; set; }
+        public Nullable<byte> op_status { get; set; }
+        public Nullable<int> Store_code { get; set; }
+        public string Store_DescA { get; set; }
     }
 }
