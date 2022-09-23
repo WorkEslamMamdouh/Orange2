@@ -1339,6 +1339,8 @@ class A_RecPay_D_Category extends SecurityClass {
         this.CreatedBy = "";
         this.UpdatedAt = "";
         this.UpdatedBy = "";
+        this.CodePrefex = "";
+        this.LastNumber = "";
         this.StatusFlag = "";
 
 
@@ -1354,7 +1356,9 @@ class A_RecPay_D_Category extends SecurityClass {
     public CreatedAt: string;
     public CreatedBy: string;
     public UpdatedAt: string;
-    public UpdatedBy: string;
+    public UpdatedBy: string; 
+    public CodePrefex: string;
+    public LastNumber: string;
     public StatusFlag: string;
 }
 
@@ -2236,6 +2240,7 @@ class I_Control {
         this.IsAccPeriodClose = false;
         this.IsInvPeriodClose = false;
         this.IsFasPeriodClose = false;
+        this.IsAutoNoCustVendor = false;
 
         this.RetailInvoicePaymentDef = 0;
         this.OperationInvoicePaymentDef = 0;
@@ -2303,6 +2308,7 @@ class I_Control {
     public IsAccPeriodClose: boolean;
     public IsInvPeriodClose: boolean;
     public IsFasPeriodClose: boolean;  
+    public IsAutoNoCustVendor: boolean;  
 
     public RetailInvoicePaymentDef: number;
     public OperationInvoicePaymentDef: number; 

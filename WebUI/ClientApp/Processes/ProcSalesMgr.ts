@@ -24,6 +24,7 @@ namespace ProcSalesMgr {
     var ddlOPerationMaster: HTMLInputElement;
     var txtRemarks: HTMLInputElement;
     var txtRefNo: HTMLInputElement;
+    var txtOperationId: HTMLInputElement;
 
 
     // Arrays
@@ -186,6 +187,7 @@ namespace ProcSalesMgr {
         ddlOPerationMaster = document.getElementById("ddlOPerationMaster") as HTMLInputElement;
         txtRemarks = document.getElementById("txtRemarks") as HTMLInputElement;
         txtRefNo = document.getElementById("txtRefNo") as HTMLInputElement;
+        txtOperationId = document.getElementById("txtOperationId") as HTMLInputElement;
 
         //TextBoxes
         searchbutmemreport = document.getElementById("searchbutmemreport") as HTMLInputElement;
@@ -343,6 +345,8 @@ namespace ProcSalesMgr {
                     $('#ddlOPerationMaster').val(operationDetailsList[0].TrNo);
 
                     OperaID = operationDetailsList[0].OperationID;
+
+                    txtOperationId.value = operationDetailsList[0].OperationID.toString();
 
                     ddlOPerationMaster_onchange();
 
@@ -971,6 +975,7 @@ namespace ProcSalesMgr {
         $("#txtCardMoney").prop("value", "");
         $("#ddlType").prop("value", "null");
         $("#ddlSalesPerson").prop("value", "null");
+        txtOperationId.value = "";
         txtRefNo.value = "";
         txtRemarks.value = "";
         chkActive.checked = false;
@@ -1128,6 +1133,8 @@ namespace ProcSalesMgr {
 
         }
         GlobalInvoiceCounter = 0;
+
+        txtOperationId.value = operationDetailsList[0].OperationID.toString();
 
     }
    
@@ -2303,7 +2310,7 @@ namespace ProcSalesMgr {
         InvoiceModel.TrType = 0//0 invoice 1 return
         InvoiceModel.SlsInvSrc = 2  // 1 from store 2 from van 
         InvoiceModel.SlsInvType = 1 //  retail 
-        InvoiceModel.OperationId = OperaID;
+        InvoiceModel.OperationId = Number(txtOperationId.value);
 
         InvoiceModel.QtyTotal = $('#txtPackageCount').val();
         InvoiceModel.LineCount = $('#txtItemCount').val();

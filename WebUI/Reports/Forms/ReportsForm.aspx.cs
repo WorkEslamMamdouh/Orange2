@@ -568,7 +568,7 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spRecType = new SqlParameter("@RecType", RecType == -1 ? System.Data.SqlTypes.SqlInt32.Null : RecType);
 
             int CashType = int.Parse(RepPar.CashType.ToString());
-            SqlParameter spCashType = new SqlParameter("@CashType", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);             
 
             string BnfID = RepPar.BnfID.ToString();
             SqlParameter spBnfID = new SqlParameter("@BnfID", BnfID);
@@ -4707,7 +4707,7 @@ namespace RS.WebUI.Reports.Forms
 
 
 
-        public IEnumerable<IProc_Rpt_AccBoxSummary_Result> Rpt_AccBoxSummary()
+        public IEnumerable<IProc_Rpt_AccBoxSummaryVer2_Result> Rpt_AccBoxSummary()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -4725,13 +4725,16 @@ namespace RS.WebUI.Reports.Forms
             int BalType = int.Parse(RepPar.BalType.ToString());
             SqlParameter spBalType = new SqlParameter("@BalType", BalType);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType);
+
             string FromDate = RepPar.FromDate.ToString();
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxSummary");
+            Rep = OpenReport("Rpt_AccBoxSummaryVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -4744,12 +4747,13 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @boxid = " + spBoxId.Value +
            ", @status = " + spStatus.Value +
+           ", @CashType = " + spCashType.Value +
            ", @FromDate = '" + spFromDate.Value + "'" +
            ", @Todate = '" + spToDate.Value + "'";
 
 
 
-            List<IProc_Rpt_AccBoxSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummary_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummaryVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -4757,7 +4761,7 @@ namespace RS.WebUI.Reports.Forms
         }
 
 
-        public IEnumerable<IProc_Rpt_AccBoxDetail_Result> Rpt_AccBoxDetail()
+        public IEnumerable<IProc_Rpt_AccBoxDetailVer2_Result> Rpt_AccBoxDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -4775,13 +4779,16 @@ namespace RS.WebUI.Reports.Forms
             int BalType = int.Parse(RepPar.BalType.ToString());
             SqlParameter spBalType = new SqlParameter("@BalType", BalType);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@CashType", CashType);
+
             string FromDate = RepPar.FromDate.ToString();
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
             string ToDate = RepPar.ToDate.ToString();
             SqlParameter spToDate = new SqlParameter("@Todate", ToDate);
 
-            Rep = OpenReport("Rpt_AccBoxDetail");
+            Rep = OpenReport("Rpt_AccBoxDetailVer2");
 
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
@@ -4794,12 +4801,13 @@ namespace RS.WebUI.Reports.Forms
            ", @RepType = " + spRepType.Value +
            ", @boxid = " + spBoxId.Value +
            ", @status = " + spStatus.Value +
+           ", @CashType = " + spCashType.Value +
            ", @FromDate = '" + spFromDate.Value + "'" +
            ", @Todate = '" + spToDate.Value + "'";
 
 
 
-            List<IProc_Rpt_AccBoxDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_AccBoxDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);

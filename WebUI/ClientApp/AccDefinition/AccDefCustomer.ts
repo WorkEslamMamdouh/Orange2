@@ -91,7 +91,7 @@ namespace AccDefCustomer {
     var btnPrintTrEXEL: HTMLButtonElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
-
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     export function InitalizeComponent() {
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -374,6 +374,12 @@ namespace AccDefCustomer {
         else {
             $('#divAccount').addClass('display_none');
         }
+
+         
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+        }
+
 
     }
     function btnsave_onClick() {
@@ -917,13 +923,13 @@ namespace AccDefCustomer {
     }
 
     function Validation() {
-
-        if (txt_CustomerCODE.value.trim() == "") {
-            DisplayMassage("يجب ادخال رقم العميل", "Must insert number of Customer", MessageType.Worning);
+         
+        if (txt_CustomerCODE.value.trim() == "" && IsAutoCode == false) {
+            DisplayMassage("يجب ادخال رقم العميل", "Vendor number must be entered", MessageType.Worning);
             Errorinput(txt_CustomerCODE);
             return false;
-        }
-        if (IsNew == true && txt_CustomerCODE.value != '') {
+        } 
+        if (IsNew == true && txt_CustomerCODE.value != '' ) {
             if (CustomerFoundBefore() == false) {
                 DisplayMassage("رقم العميل موجود من قبل ", "The customer number already exists", MessageType.Worning);
                 Errorinput(txt_CustomerCODE);

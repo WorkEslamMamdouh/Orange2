@@ -89,6 +89,7 @@ var AccDefVendor;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
     var AccountDetails = new A_Rec_D_Customer();
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     //---------------------------------------------------------- main region---------------------------------------------------------------
     function InitalizeComponent() {
         //debugger;
@@ -399,7 +400,7 @@ var AccDefVendor;
                 newCount++;
             }
         }
-        if (txt_CustomerCODE.value.trim() == "") {
+        if (txt_CustomerCODE.value.trim() == "" && IsAutoCode == false) {
             DisplayMassage("يجب ادخال رقم المورد", "Vendor number must be entered", MessageType.Worning);
             Errorinput(txt_CustomerCODE);
             return false;
@@ -746,6 +747,9 @@ var AccDefVendor;
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_CustCode'));
             return false;
+        }
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
         }
     }
     function btnsave_onClick() {

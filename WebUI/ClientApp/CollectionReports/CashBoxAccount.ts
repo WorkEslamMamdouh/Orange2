@@ -21,6 +21,7 @@ namespace CashBoxAccount {
     var txtDateFrom: HTMLInputElement;
     var txtDateTo: HTMLInputElement;
       
+    var CashType: HTMLInputElement;
     var Rd_detail: HTMLInputElement;
     var btnReset: HTMLButtonElement;
 
@@ -61,6 +62,7 @@ namespace CashBoxAccount {
         fillddlBox();
        
         Rd_detail.checked = true;
+        CashType.checked = true;
 
     }
     function InitalizeControls() {
@@ -70,6 +72,7 @@ namespace CashBoxAccount {
         txtDateTo = document.getElementById("txtToDate") as HTMLInputElement;
         btnReset = document.getElementById("btnReset") as HTMLButtonElement;
         Rd_detail = document.getElementById("Rd_detail") as HTMLInputElement;
+        CashType = document.getElementById("CashType") as HTMLInputElement;
         chk_Certified = document.getElementById("chk_Certified") as HTMLInputElement;
 
         //---------------------------------------------------------------------- Print Buttons
@@ -156,6 +159,7 @@ namespace CashBoxAccount {
         
         chk_Certified.checked = true;
         Rd_detail.checked = true;
+        CashType.checked = true;
     }
 
     //----------------------------------------------------( Report )
@@ -197,7 +201,10 @@ namespace CashBoxAccount {
             rp.Status = 3;
         else 
             rp.Status = 1;
-        
+
+
+        rp.CashType = CashType.checked == true ? 1 : 2 ;
+         
 
         if (Rd_detail.checked == true) {//******  تقرير تفصيلي  
             rp.check = 1;

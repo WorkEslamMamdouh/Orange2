@@ -14,6 +14,7 @@ var CashBoxAccount;
     var ddlBox;
     var txtDateFrom;
     var txtDateTo;
+    var CashType;
     var Rd_detail;
     var btnReset;
     //--- Print Buttons
@@ -44,6 +45,7 @@ var CashBoxAccount;
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         fillddlBox();
         Rd_detail.checked = true;
+        CashType.checked = true;
     }
     CashBoxAccount.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -52,6 +54,7 @@ var CashBoxAccount;
         txtDateTo = document.getElementById("txtToDate");
         btnReset = document.getElementById("btnReset");
         Rd_detail = document.getElementById("Rd_detail");
+        CashType = document.getElementById("CashType");
         chk_Certified = document.getElementById("chk_Certified");
         //---------------------------------------------------------------------- Print Buttons
         btnPrint = document.getElementById("btnPrint");
@@ -115,6 +118,7 @@ var CashBoxAccount;
         ddlBox.value = "Null";
         chk_Certified.checked = true;
         Rd_detail.checked = true;
+        CashType.checked = true;
     }
     //----------------------------------------------------( Report )
     function PrintReport(OutType) {
@@ -150,6 +154,7 @@ var CashBoxAccount;
             rp.Status = 3;
         else
             rp.Status = 1;
+        rp.CashType = CashType.checked == true ? 1 : 2;
         if (Rd_detail.checked == true) { //******  تقرير تفصيلي  
             rp.check = 1;
             Ajax.Callsync({

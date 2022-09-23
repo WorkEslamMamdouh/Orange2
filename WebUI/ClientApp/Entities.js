@@ -777,6 +777,8 @@ var A_RecPay_D_Category = /** @class */ (function (_super) {
         _this.CreatedBy = "";
         _this.UpdatedAt = "";
         _this.UpdatedBy = "";
+        _this.CodePrefex = "";
+        _this.LastNumber = "";
         _this.StatusFlag = "";
         return _this;
     }
@@ -1347,6 +1349,7 @@ var I_Control = /** @class */ (function () {
         this.IsAccPeriodClose = false;
         this.IsInvPeriodClose = false;
         this.IsFasPeriodClose = false;
+        this.IsAutoNoCustVendor = false;
         this.RetailInvoicePaymentDef = 0;
         this.OperationInvoicePaymentDef = 0;
     }
