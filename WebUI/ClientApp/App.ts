@@ -37,6 +37,7 @@ var Modules = {
     SlsTrSales: "SlsTrSales",
     SlsTrReturn: "SlsTrReturn",
     SlsTrSalesManager: "SlsTrSalesManager",
+    SlsTrSalesManagerNew: "SlsTrSalesManagerNew",
     PurTrReceive: "PurTrReceive",
     PurTrReturn: "PurTrReturn",
     PurTrpaymemt: "PurTrpaymemt",

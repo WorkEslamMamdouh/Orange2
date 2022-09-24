@@ -94,14 +94,14 @@ namespace Inv.WebUI.Controllers
 
         public string rptInvoiceNote(RepFinancials rp)
         {
-            IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvoice(rp);
+            IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvoice(rp);
             return buildReport(que);
 
         }
 
         public string Prnt_OperationInvoice(RepFinancials rp)
         {
-            IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
+            IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_OperationInvoice(rp);
             return buildReport(que);
 
         }
@@ -142,7 +142,7 @@ namespace Inv.WebUI.Controllers
 
         public string rptInvoiceNoteRet(RepFinancials rp)
         {
-            IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvReturn(rp);
+            IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvReturn(rp);
             return buildReport(que);
 
         }
@@ -175,7 +175,7 @@ namespace Inv.WebUI.Controllers
 
         public string IProc_Prnt_SlsInvoice(RepFinancials rp)
         {
-            IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvoicepr(rp);
+            IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvoicepr(rp);
             return buildReport(que);
         }
 
@@ -427,12 +427,12 @@ namespace Inv.WebUI.Controllers
                 rp.TRId = InvID[i].InvoiceID;
                 if (rp.Type_Trans == "Inv")
                 {
-                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvoice(rp);
+                    IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvoice(rp);
                     Singl_byte = buildReportNew(que);
                 }
                 if (rp.Type_Trans == "Inv_Ret")
                 {
-                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_SlsInvReturn(rp);
+                    IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvReturn(rp);
                     Singl_byte = buildReportNew(que);
                 }
                 if (rp.Type_Trans == "Pur")
@@ -447,12 +447,12 @@ namespace Inv.WebUI.Controllers
                 }
                 if (rp.Type_Trans == "Pro")
                 {
-                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
+                    IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_OperationInvoice(rp);
                     Singl_byte = buildReportNew(que);
                 }
                 if (rp.Type_Trans == "Pro_Ret")
                 {
-                    IEnumerable<IProc_Prnt_SlsInvoice_Result> que = Rpt_Prnt_OperationInvoice(rp);
+                    IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_OperationInvoice(rp);
                     Singl_byte = buildReportNew(que);
                 }
                 if (rp.Type_Trans == "AccReceive")

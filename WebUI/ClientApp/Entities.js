@@ -6320,4 +6320,27 @@ var ModelLastPurchase = /** @class */ (function (_super) {
     }
     return ModelLastPurchase;
 }(SecurityClass));
+var GetItem = /** @class */ (function (_super) {
+    __extends(GetItem, _super);
+    function GetItem() {
+        var _this = _super.call(this) || this;
+        _this.OperationID = 0;
+        _this.ItemID = 0;
+        _this.SoldQty = 0;
+        _this.OnhandQty = 0;
+        _this.ItemCode = "";
+        _this.Itm_DescA = "";
+        _this.Itm_DescE = "";
+        _this.SalesmanId = 0;
+        _this.MinUnitPrice = 0;
+        _this.UnitPrice = 0;
+        _this.VatNatID = 0;
+        _this.VatPrc = 0;
+        _this.GlobalCost = 0;
+        _this.LocalCost = 0;
+        _this.CatID = 0;
+        return _this;
+    }
+    return GetItem;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map

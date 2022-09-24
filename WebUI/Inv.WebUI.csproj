@@ -2247,6 +2247,7 @@
     <Content Include="Views\Shared\NewLayout.cshtml" />
     <Content Include="Views\ViewPage1.cshtml" />
     <Content Include="Views\Dashboard\DashboardIndex.cshtml" />
+    <Content Include="Views\Sales\SlsTrSalesManagerNewIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2281,6 +2282,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Clientaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
+    <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\ItemPeriodSummary.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\ItemPurchase.ts" />

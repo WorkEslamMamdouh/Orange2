@@ -10719,4 +10719,41 @@ class ModelLastPurchase extends SecurityClass {
 
 }
 
+class GetItem extends SecurityClass {
+    constructor() {
+        super(); 
+        this.OperationID = 0;
+        this.ItemID = 0; 
+        this.SoldQty = 0; 
+        this.OnhandQty = 0;
+        this.ItemCode = "";
+        this.Itm_DescA = "";
+        this.Itm_DescE = ""; 
+        this.SalesmanId = 0;
+        this.MinUnitPrice = 0;
+        this.UnitPrice = 0; 
+        this.VatNatID = 0;
+        this.VatPrc = 0;
+        this.GlobalCost = 0;
+        this.LocalCost = 0; 
+        this.CatID = 0; 
+    } 
+    public OperationID: number;
+    public ItemID: number; 
+    public SoldQty: number; 
+    public OnhandQty: number;
+    public ItemCode: string;
+    public Itm_DescA: string;
+    public Itm_DescE: string; 
+    public SalesmanId: number;
+    public MinUnitPrice: number;
+    public UnitPrice: number; 
+    public VatNatID: number;
+    public VatPrc: number;
+    public GlobalCost: number;
+    public LocalCost: number;
+    public CatID: number;
+}
+
+
 
