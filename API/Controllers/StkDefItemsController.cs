@@ -192,6 +192,27 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetItem(int CompCode, int BraCode, int FinYear, string ItemCode, int StoreId, bool Show, string UserCode, string Token)
+        { //CompCode: compcode, BraCode: BranchCode, FinYear: Finyear, ItemID: ItemID , StoreId: StoreId, Show: Show, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            
+                string SQL = "";
+                if (Show)
+                {
+                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + "";
+                }
+                else
+                {
+                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + " and IsActive =1 and ISSales = 1 ";
+                }
+
+                List<IQ_GetItemStoreInfo> ItemList = db.Database.SqlQuery<IQ_GetItemStoreInfo>(SQL).ToList();
+
+                return Ok(new BaseResponse(ItemList));
+           
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllItem(int CompCode, int FinYear, string UserCode, string Token)
         {

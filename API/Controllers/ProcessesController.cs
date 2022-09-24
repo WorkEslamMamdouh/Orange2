@@ -928,6 +928,22 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetOperItem(int operationID, string ItemCode, string UserCode, string Token)
+        {
+            
+               
+            string SQL = "";
+                SQL = "Select *  from IQ_GetOperationSalesmanItem where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "' ";
+           
+            List<IQ_GetOperationSalesmanItem> ItemList = db.Database.SqlQuery<IQ_GetOperationSalesmanItem>(SQL).ToList();
+
+
+            return Ok(new BaseResponse(ItemList));
+
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetOperationByID(int OperationID, string UserCode, string Token)
         {

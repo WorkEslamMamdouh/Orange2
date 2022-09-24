@@ -3970,6 +3970,10 @@ class I_Sls_TR_InvoiceItems extends SecurityClass {
         this.Name_ItemFamily = "";
         this.OnhandQty = 0;
         this.StatusFlag = "";
+        this.SlsInvSrc = 0;
+        this.StoreId = 0;
+        this.OperationId = 0;
+         
 
     }
     public InvoiceItemID: number;
@@ -4021,7 +4025,11 @@ class I_Sls_TR_InvoiceItems extends SecurityClass {
     public MinUnitPrice: number;
     public ItemFamilyID: number;
     public OnhandQty: number;
-    public StatusFlag: string;
+    public StatusFlag: string; 
+    public SlsInvSrc: number;
+    public StoreId: number;
+    public OperationId: number;
+      
 }
 
 class IQ_GetSlsInvoiceStatisticVer2 {
@@ -4481,6 +4489,14 @@ class IQ_GetSlsInvoiceItem extends SecurityClass {
         this.VatNatID = 0;
         this.UnitpriceWithVat = 0;
         this.NetUnitPriceWithVat = 0;
+
+        this.SlsInvSrc = 0;
+        this.StoreId = 0;
+        this.OperationId = 0;
+        this.op_TrNo = 0;
+        this.op_status = 0;
+        this.Store_code = '';
+        this.Store_DescA = '';
     }
     public InvoiceItemID: number;
     public InvoiceID: number;
@@ -4540,6 +4556,156 @@ class IQ_GetSlsInvoiceItem extends SecurityClass {
     public VatNatID: number;
     public UnitpriceWithVat: number;
     public NetUnitPriceWithVat: number;
+
+    public SlsInvSrc: number;
+    public StoreId: number;
+    public OperationId: number;
+    public op_TrNo: number;
+    public op_status: number;
+    public Store_code: string;
+    public Store_DescA: string;
+     
+
+}
+
+class IQ_GetSlsInvoiceItemVer2 extends SecurityClass {
+    constructor() {
+        super();
+        this.InvoiceItemID = 0;
+        this.InvoiceID = 0;
+        this.ItemID = 0;
+        this.UomID = 0;
+        this.SoldQty = 0;
+        this.Unitprice = 0;
+        this.DiscountPrc = 0;
+        this.DiscountAmount = 0;
+        this.NetUnitPrice = 0;
+        this.ItemTotal = 0;
+        this.VatPrc = 0;
+        this.VatAmount = 0;
+        this.NetAfterVat = 0;
+        this.StockSoldQty = 0;
+        this.StockUnitCost = 0;
+        this.VatApplied = 0;
+        this.TotRetQty = 0;
+        this.it_itemCode = "";
+        this.it_DescA = "";
+        this.CompCode = 0;
+        this.It_DescE = "";
+        this.ItFm_Code = "";
+        this.ItFm_DescA = "";
+        this.ItFm_DescE = "";
+        this.Cat_Code = "";
+        this.Cat_DescA = "";
+        this.Cat_DescE = "";
+        this.Uom_Code = "";
+        this.Uom_DescA = "";
+        this.Uom_DescE = "";
+        this.ItemFamilyID = 0;
+        this.InvoiceSoldQty = 0;
+        this.Serial = 0;
+        this.AllowAmount = 0;
+        this.AllowancePrc = 0;
+        this.AllowanceBase = 0;
+        this.AllowReason = "";
+        this.AllowCode = 0;
+        this.BaseQty = 0;
+        this.BaseQtyUomid = 0;
+        this.BaseQtyPrice = 0;
+        this.BaseQtyDiscount = 0;
+        this.DiscountPrcBase = 0;
+        this.DiscountVatNatID = 0;
+        this.Discountreason = "";
+        this.DiscountCode = 0;
+        this.ItemNetAmount = 0;
+        this.ChargeAmount = 0;
+        this.ChargePrc = 0;
+        this.ChargeBase = 0;
+        this.ChargeVatNatID = 0;
+        this.ChargeVatPrc = 0;
+        this.ChargeAfterVat = 0;
+        this.ChargeReason = "";
+        this.ChargeCode = 0;
+        this.VatNatID = 0;
+        this.UnitpriceWithVat = 0;
+        this.NetUnitPriceWithVat = 0;
+
+        this.SlsInvSrc = 0;
+        this.StoreId = 0;
+        this.OperationId = 0;
+        this.op_TrNo = 0;
+        this.op_status = 0;
+        this.Store_code = '';
+        this.Store_DescA = '';
+    }
+    public InvoiceItemID: number;
+    public InvoiceID: number;
+    public ItemID: number;
+    public UomID: number;
+    public SoldQty: number;
+    public Unitprice: number;
+    public DiscountPrc: number;
+    public DiscountAmount: number;
+    public NetUnitPrice: number;
+    public ItemTotal: number;
+    public VatPrc: number;
+    public VatAmount: number;
+    public NetAfterVat: number;
+    public StockSoldQty: number;
+    public StockUnitCost: number;
+    public VatApplied: number;
+    public TotRetQty: number;
+    public it_itemCode: string;
+    public it_DescA: string;
+    public CompCode: number;
+    public It_DescE: string;
+    public ItFm_Code: string;
+    public ItFm_DescA: string;
+    public ItFm_DescE: string;
+    public Cat_Code: string;
+    public Cat_DescA: string;
+    public Cat_DescE: string;
+    public Uom_Code: string;
+    public Uom_DescA: string;
+    public Uom_DescE: string;
+    public ItemFamilyID: number;
+    public InvoiceSoldQty: number;
+    public Serial: number;
+    public AllowAmount: number;
+    public AllowancePrc: number;
+    public AllowanceBase: number;
+    public AllowReason: string;
+    public AllowCode: number;
+    public BaseQty: number;
+    public BaseQtyUomid: number;
+    public BaseQtyPrice: number;
+    public BaseQtyDiscount: number;
+    public DiscountPrcBase: number;
+    public DiscountVatNatID: number;
+    public Discountreason: string;
+    public DiscountCode: number;
+    public ItemNetAmount: number;
+    public ChargeAmount: number;
+    public ChargePrc: number;
+    public ChargeBase: number;
+    public ChargeVatNatID: number;
+    public ChargeVatPrc: number;
+    public ChargeAfterVat: number;
+    public ChargeReason: string;
+    public ChargeCode: number;
+    public VatNatID: number;
+    public UnitpriceWithVat: number;
+    public NetUnitPriceWithVat: number;
+
+    public SlsInvSrc: number;
+    public StoreId: number;
+    public OperationId: number;
+    public op_TrNo: number;
+    public op_status: number;
+    public Store_code: string;
+    public Store_DescA: string;
+     
+
 }
 
 class I_TR_OperationItems extends SecurityClass {
