@@ -918,11 +918,11 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetOperItem(int operationID,int ItemID, string UserCode, string Token)
+        public IHttpActionResult GetOperItem(int operationID,int ItemID,int SalesmanId , string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                List<IQ_GetOperationSalesmanItem> res = db.IQ_GetOperationSalesmanItem.Where(x => x.OperationID == operationID && x.ItemID == ItemID).ToList();
+                List<IQ_GetOperationSalesmanItem> res = db.IQ_GetOperationSalesmanItem.Where(x => x.OperationID == operationID && x.ItemID == ItemID && x.SalesmanId == SalesmanId).ToList();
 
                 return Ok(new BaseResponse(res));
             }
@@ -930,12 +930,12 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetOperItem(int operationID, string ItemCode, string UserCode, string Token)
+        public IHttpActionResult GetOperItem(int operationID, string ItemCode, int SalesmanId ,  string UserCode, string Token)
         {
             
                
             string SQL = "";
-                SQL = "Select *  from IQ_GetOperationSalesmanItem where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "' ";
+                SQL = "Select *  from IQ_GetOperationSalesmanItem where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "'  and SalesmanId = "+ SalesmanId + "";
            
             List<IQ_GetOperationSalesmanItem> ItemList = db.Database.SqlQuery<IQ_GetOperationSalesmanItem>(SQL).ToList();
 

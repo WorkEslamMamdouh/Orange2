@@ -285,8 +285,18 @@ var SlsTrSalesManagerNew;
         //----------------------------------------------------sales_New-------------------------------------------
         ddlTypeInv.onchange = ddlTypeInv_onchange;
         btnOperation.onclick = function () { OPerationSearch(0, false); };
+        ddlSalesman.onchange = ddlSalesman_onchange;
     }
     //----------------------------------------------------sales_New-------------------------------------------
+    function ddlSalesman_onchange() {
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                if (Number($('#txt_OperationId' + i).val()) > 0) {
+                    Clear_Row(i);
+                }
+            }
+        }
+    }
     function ddlTypeInv_onchange() {
         //if (ddlTypeInv.value == '0') {
         //    $('#Store').addClass('display_none')
@@ -301,7 +311,7 @@ var SlsTrSalesManagerNew;
             $('#Operation').removeClass('display_none');
         }
     }
-    function GetItems(id, Type, cnt) {
+    function GetItems(id, SalesmanId, Type, cnt) {
         var ItemID = id;
         if (Type == 1) {
             var StoreId = Number($('#ddlStore' + cnt).val());
@@ -331,7 +341,7 @@ var SlsTrSalesManagerNew;
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemID: ItemID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemID: ItemID, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: function (d) {
                     var result = d;
@@ -348,7 +358,7 @@ var SlsTrSalesManagerNew;
             });
         }
     }
-    function GetItemsbyCode(Code, Type, cnt) {
+    function GetItemsbyCode(Code, SalesmanId, Type, cnt) {
         var ItemCode = Code;
         if (Type == 1) {
             var StoreId = Number($('#ddlStore' + cnt).val());
@@ -378,7 +388,7 @@ var SlsTrSalesManagerNew;
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemCode: ItemCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemCode: ItemCode, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: function (d) {
                     var result = d;
@@ -427,8 +437,15 @@ var SlsTrSalesManagerNew;
         }
     }
     function OPerationSearch(cnt, flagfrom) {
+        if (ddlSalesman.value == 'null') {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesman);
+            modal.style.display = "none";
+            return false;
+        }
+        var SalesmanId = Number(ddlSalesman.value);
         var sys = new SystemTools();
-        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2", function () {
+        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2 and SalesmanId = " + SalesmanId + "", function () {
             var OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             var List_Operation = SearchGrid.SearchDataGrid.dataScr;
             debugger;
@@ -469,7 +486,7 @@ var SlsTrSalesManagerNew;
             ' </div></td>' +
             '</tr>';
         $("#Table_Inv_Type").append(html);
-        $('#ddlStore' + cnt).html('');
+        $('#ddlStore' + cnt).html(' <option value="null"> أختر المستودع  </option>');
         for (var i = 0; i < storeDetails.length; i++) {
             $('#ddlStore' + cnt).append('<option   value="' + storeDetails[i].StoreId + '">' + (lang == "ar" ? storeDetails[i].DescA : storeDetails[i].DescL) + '</option>');
         }
@@ -509,7 +526,7 @@ var SlsTrSalesManagerNew;
         debugger;
         if ($('#ddlTypeInv' + cnt).val() == '1') {
             //$('#ddlStore' + cnt).val(ddlStore.value)
-            $("#btnTypeInv" + cnt).html('المستودع ( ' + $("#ddlStore" + cnt + " option:selected").text() + ' )');
+            $("#btnTypeInv" + cnt).html(' م ( ' + $("#ddlStore" + cnt + " option:selected").text() + ' )');
             $('.StoreGrid').removeClass('display_none');
             $('.ProceGrid').addClass('display_none');
             $('#txt_OperationId' + cnt).val('0');
@@ -518,11 +535,37 @@ var SlsTrSalesManagerNew;
         if ($('#ddlTypeInv' + cnt).val() == '2') {
             //$("#txt_Operation" + cnt).val($("#txt_Operation").val())
             //$("#txt_OperationId" + cnt).val($("#txt_OperationId").val())
-            $("#btnTypeInv" + cnt).html('العمليه رقم ( ' + $("#txt_Operation" + cnt).val() + ' )');
+            $("#btnTypeInv" + cnt).html(' عمليه   ( ' + $("#txt_Operation" + cnt).val() + ' )');
             $('.StoreGrid').addClass('display_none');
             $('.ProceGrid').removeClass('display_none');
             $('#ddlStore' + cnt).val('null');
         }
+    }
+    function ValidationType_Inv(cnt) {
+        if (ddlSalesman.value == 'null') {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesman);
+            return false;
+        }
+        if ($('#ddlStore' + cnt).val() == 'null' && $('#ddlTypeInv' + cnt).val() == '1') {
+            DisplayMassage('برجاء اختيار المستودع', '(Please select a customer)', MessageType.Error);
+            ShowType_Inv(cnt);
+            $('.Row_Type').addClass('display_none');
+            modal.style.display = "block";
+            $('#No_Row_Type' + cnt).removeClass('display_none');
+            Errorinput($('#ddlStore' + cnt));
+            return false;
+        }
+        if ($('#txt_Operation' + cnt).val().trim() == '' && $('#ddlTypeInv' + cnt).val() == '2') {
+            DisplayMassage('برجاء اختيار العمليه', '(Please select a customer)', MessageType.Error);
+            ShowType_Inv(cnt);
+            $('.Row_Type').addClass('display_none');
+            modal.style.display = "block";
+            $('#No_Row_Type' + cnt).removeClass('display_none');
+            Errorinput($('#txt_Operation' + cnt));
+            return false;
+        }
+        return true;
     }
     //-----------------------------------------------------------------------------------------------
     function btnCustFilter_onclick() {
@@ -1787,7 +1830,7 @@ var SlsTrSalesManagerNew;
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt) {
         var html;
-        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\"> \n\t\t\t               <button id=\"btnTypeInv" + cnt + "\" class=\"btn btn-main btn-search\"  style=\"border-radius: 13px;font-weight: bold;font-size: 18px;\"  >   </button>\n\t\t                </div>\n\t                </td> \n                     <td>\n                        <div class=\"search-content\">\n                             <input  type =\"hidden\" class=\"form-control search-control\" id =\"ddlItem" + cnt + "\" name =\"Operation\" disabled >\n                             <button type=\"button\" id =\"btnSearchItems" + cnt + "\" name =\" \" class=\"btn btn-main btn-search\"  style=\"right: 76%;\" >\n                                <i class=\"fas fa-search\"> </i>\n                               </button> \n                             <input type =\"text\" class=\"form-control search-control\" id =\"Code_Item" + cnt + "\" name =\"Operation\"  >\n                         </div>\n                      </td>\n                      <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"Item_Desc" + cnt + "\" disabled class=\"form-control\"  >\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group counter-group ps-1\">\n\t\t\t                    <input class=\"counter px-3\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td> \n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td>\n\t\t                <div class=\"form-group\"  >\n\t\t\t               <input id=\"txtDiscountAmount" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtNetUnitPrice" + cnt + "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\"  >\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\" />\n                </tr>";
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\"> \n\t\t\t               <button id=\"btnTypeInv" + cnt + "\" class=\"btn btn-main btn-operation\" >   </button>\n\t\t                </div>\n\t                </td> \n                     <td>\n                        <div class=\"search-content\">\n                             <input  type =\"hidden\" class=\"form-control search-control\" id =\"ddlItem" + cnt + "\" name =\"Operation\" disabled >\n                             <button type=\"button\" id =\"btnSearchItems" + cnt + "\" name =\" \" class=\"btn btn-main btn-search\"  style=\"right: 76%;\" >\n                                <i class=\"fas fa-search\"> </i>\n                               </button> \n                             <input type =\"text\" class=\"form-control search-control\" id =\"Code_Item" + cnt + "\" name =\"Operation\"  >\n                         </div>\n                      </td>\n                      <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"Item_Desc" + cnt + "\" disabled class=\"form-control\"  >\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <div class=\"form-group counter-group ps-1\">\n\t\t\t                    <input class=\"counter px-3\" type=\"number\" data-id=\"number\" id=\"txtQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                    <div class=\"value-button decrease-button btn-number1" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[1]\">-</div>\n\t\t\t                    <div class=\"value-button increase-button btn-number1" + cnt + "\" data-id=\"increase\" id=\"btnplus1\" data-type=\"plus\" data-field=\"quant[1]\">+</div>\n\t\t                    </div>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\"  class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtUnitpriceWithVat" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td> \n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td>\n\t\t                <div class=\"form-group\"  >\n\t\t\t               <input id=\"txtDiscountAmount" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtNetUnitPrice" + cnt + "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t              <input id=\"txtTax_Rate" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\"  >\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t            <input id=\"txtTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\" >\n\t\t\t              <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <input id=\"UnitCost" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\" />\n                    <input id=\"CatID" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\" />\n                    <input id=\"VatNatID" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\" />\n                    <input id=\"VatPrc" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\" />\n                </tr>";
         $("#div_Data").append(html);
         $(".select_").select2();
         var username = $('.select_ option:selected').text();
@@ -1972,7 +2015,10 @@ var SlsTrSalesManagerNew;
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             var sys = new SystemTools();
-            debugger;
+            if (!ValidationType_Inv(cnt)) {
+                Clear_Row(cnt);
+                return false;
+            }
             var storeId = Number(ddlStore.value); //and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
             var qury = "";
@@ -1992,8 +2038,12 @@ var SlsTrSalesManagerNew;
                 debugger;
                 $('#ddlItem' + cnt).val(searchItemID);
                 var Type_inv = Number($('#ddlTypeInv' + cnt).val());
-                GetItems(searchItemID, Type_inv, cnt);
+                var SalesmanId = Number(ddlSalesman.value);
+                GetItems(searchItemID, SalesmanId, Type_inv, cnt);
                 if (Model_Items.ItemCode != '') {
+                    $('#VatPrc' + cnt).val(Model_Items.VatPrc);
+                    $('#VatNatID' + cnt).val(Model_Items.VatNatID);
+                    $('#CatID' + cnt).val(Model_Items.CatID);
                     $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
                     $('#ddlItem' + cnt).attr('data-UomID', 1);
                     $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
@@ -2040,12 +2090,20 @@ var SlsTrSalesManagerNew;
         $("#Code_Item" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            if (!ValidationType_Inv(cnt)) {
+                Clear_Row(cnt);
+                return false;
+            }
             var Type_inv = Number($('#ddlTypeInv' + cnt).val());
             var Code_Item = $("#Code_Item" + cnt).val();
             debugger;
-            GetItemsbyCode(Code_Item, Type_inv, cnt);
+            var SalesmanId = Number(ddlSalesman.value);
+            GetItemsbyCode(Code_Item, SalesmanId, Type_inv, cnt);
             debugger;
             if (Model_Items.ItemCode != '') {
+                $('#VatPrc' + cnt).val(Model_Items.VatPrc);
+                $('#VatNatID' + cnt).val(Model_Items.VatNatID);
+                $('#CatID' + cnt).val(Model_Items.CatID);
                 $('#ddlItem' + cnt).val(Model_Items.ItemID);
                 $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
                 $('#ddlItem' + cnt).attr('data-UomID', 1);
@@ -2252,11 +2310,13 @@ var SlsTrSalesManagerNew;
             $("#txt_Operation" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].op_TrNo);
             $("#txt_OperationId" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].OperationId);
             ShowType_Inv(cnt);
+            $('#VatPrc' + cnt).val(SlsInvoiceItemsDetails[cnt].VatPrc);
+            $('#VatNatID' + cnt).val(SlsInvoiceItemsDetails[cnt].VatNatID);
+            //$('#CatID' + cnt).val(SlsInvoiceItemsDetails[cnt].CatID)
             $("#ddlItem" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemID);
-            $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
+            $('#ddlItem' + cnt).attr('data-MinUnitPrice', SlsInvoiceItemsDetails[cnt].MinSalesPrice);
             $('#ddlItem' + cnt).attr('data-UomID', 1);
-            $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
-            $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
+            $('#ddlItem' + cnt).attr('data-OnhandQty', SlsInvoiceItemsDetails[cnt].Onhand_Qty);
             $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SoldQty);
             $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Unitprice);
@@ -2300,21 +2360,41 @@ var SlsTrSalesManagerNew;
         $("#txtTotal" + cnt).val('0');
         $("#txtTax" + cnt).val('0');
         $("#txtTotAfterTax" + cnt).val('0');
+        $("#txt_OperationId" + cnt).val('0');
+        $("#txt_Operation" + cnt).val('');
+        $("#ddlStore" + cnt).val('null');
+        $("#ddlItem" + cnt).prop("value", 0);
+        $('#ddlItem' + cnt).attr('data-MinUnitPrice', 0);
+        $('#ddlItem' + cnt).attr('data-UomID', 1);
+        $('#ddlItem' + cnt).attr('data-OnhandQty', 0);
         ComputeTotals();
     }
     function totalRow(cnt, flagDiscountAmount) {
         var VatNatID = 0;
         var Type_inv = Number($('#ddlTypeInv' + cnt).val());
+        //-----------------------------------------------------------------------New_Ver2------------------
         if (Type_inv == 1) {
-            var CatID_3 = Model_Items.CatID;
-            var Cat_Tax_3 = CategoryDetails.filter(function (s) { return s.CatID == CatID_3; });
-            var VatNature = DetailsVatNature.filter(function (s) { return s.VatNatID == Cat_Tax_3[0].VatNatID; });
-            Tax_Rate = VatNature[0].VatPrc;
-            VatNatID = Cat_Tax_3[0].VatNatID;
+            if ($('#txt_StatusFlag' + cnt).val() == 'i') {
+                var CatID_3 = Model_Items.CatID;
+                var Cat_Tax_3 = CategoryDetails.filter(function (s) { return s.CatID == CatID_3; });
+                var VatNature = DetailsVatNature.filter(function (s) { return s.VatNatID == Cat_Tax_3[0].VatNatID; });
+                Tax_Rate = VatNature[0].VatPrc;
+                VatNatID = Cat_Tax_3[0].VatNatID;
+            }
+            else {
+                Tax_Rate = Number($('#VatPrc' + cnt).val());
+                VatNatID = Number($('#VatNatID' + cnt).val());
+            }
         }
         if (Type_inv == 2) {
-            Tax_Rate = Model_Items.VatPrc;
-            VatNatID = Model_Items.VatNatID;
+            if ($('#txt_StatusFlag' + cnt).val() == 'i') {
+                Tax_Rate = Model_Items.VatPrc;
+                VatNatID = Model_Items.VatNatID;
+            }
+            else {
+                Tax_Rate = Number($('#VatPrc' + cnt).val());
+                VatNatID = Number($('#VatNatID' + cnt).val());
+            }
         }
         Tax_Type_Model = GetVat(VatNatID, Tax_Rate, vatType);
         Tax_Rate = Tax_Type_Model.Prc;
@@ -2647,7 +2727,10 @@ var SlsTrSalesManagerNew;
             return true;
         }
         else {
-            if ($("#ddlItem" + rowcount).val().trim() == "" || $("#ddlItem" + rowcount).val() == '0') {
+            if (!ValidationType_Inv(rowcount)) {
+                return false;
+            }
+            else if ($("#ddlItem" + rowcount).val().trim() == "" || $("#ddlItem" + rowcount).val() == '0') {
                 DisplayMassage(" برجاء ادخال الصنف", "Please enter the Item", MessageType.Error);
                 Errorinput($("#Code_Item" + rowcount));
                 return false;

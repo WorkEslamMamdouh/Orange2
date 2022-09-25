@@ -324,10 +324,22 @@ namespace SlsTrSalesManagerNew {
         ddlTypeInv.onchange = ddlTypeInv_onchange;
 
         btnOperation.onclick = () => { OPerationSearch(0, false) };
+        ddlSalesman.onchange = ddlSalesman_onchange;
 
     }
 
     //----------------------------------------------------sales_New-------------------------------------------
+    function ddlSalesman_onchange() {
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                if (Number($('#txt_OperationId' + i).val()) > 0) {
+                    Clear_Row(i);
+                }
+
+            }
+        }
+    }
+
     function ddlTypeInv_onchange() {
         //if (ddlTypeInv.value == '0') {
         //    $('#Store').addClass('display_none')
@@ -346,12 +358,15 @@ namespace SlsTrSalesManagerNew {
 
     }
 
-    function GetItems(id: number, Type: number, cnt: number) {
+    function GetItems(id: number, SalesmanId: number, Type: number, cnt: number) {
+
 
 
         let ItemID = id;
 
         if (Type == 1) {
+
+
 
             let StoreId = Number($('#ddlStore' + cnt).val());
 
@@ -386,7 +401,7 @@ namespace SlsTrSalesManagerNew {
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemID: ItemID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemID: ItemID, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -409,7 +424,7 @@ namespace SlsTrSalesManagerNew {
 
     }
 
-    function GetItemsbyCode(Code: string, Type: number, cnt: number) {
+    function GetItemsbyCode(Code: string, SalesmanId: number, Type: number, cnt: number) {
 
 
         let ItemCode = Code;
@@ -449,7 +464,7 @@ namespace SlsTrSalesManagerNew {
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemCode: ItemCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemCode: ItemCode, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -515,8 +530,17 @@ namespace SlsTrSalesManagerNew {
 
     function OPerationSearch(cnt: number, flagfrom: boolean) {
 
+        if (ddlSalesman.value == 'null') {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesman);
+            modal.style.display = "none";
+            return false
+        }
+
+        let SalesmanId = Number(ddlSalesman.value);
+
         let sys: SystemTools = new SystemTools();
-        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2", () => {
+        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2 and SalesmanId = " + SalesmanId + "", () => {
             let OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             let List_Operation = SearchGrid.SearchDataGrid.dataScr;
 
@@ -571,7 +595,7 @@ namespace SlsTrSalesManagerNew {
             '</tr>';
         $("#Table_Inv_Type").append(html);
 
-        $('#ddlStore' + cnt).html('');
+        $('#ddlStore' + cnt).html(' <option value="null"> أختر المستودع  </option>');
         for (var i = 0; i < storeDetails.length; i++) {
 
             $('#ddlStore' + cnt).append('<option   value="' + storeDetails[i].StoreId + '">' + (lang == "ar" ? storeDetails[i].DescA : storeDetails[i].DescL) + '</option>');
@@ -636,7 +660,7 @@ namespace SlsTrSalesManagerNew {
 
         if ($('#ddlTypeInv' + cnt).val() == '1') {
             //$('#ddlStore' + cnt).val(ddlStore.value)
-            $("#btnTypeInv" + cnt).html('المستودع ( ' + $("#ddlStore" + cnt + " option:selected").text() + ' )');
+            $("#btnTypeInv" + cnt).html(' م ( ' + $("#ddlStore" + cnt + " option:selected").text() + ' )');
 
             $('.StoreGrid').removeClass('display_none');
             $('.ProceGrid').addClass('display_none');
@@ -649,7 +673,7 @@ namespace SlsTrSalesManagerNew {
         if ($('#ddlTypeInv' + cnt).val() == '2') {
             //$("#txt_Operation" + cnt).val($("#txt_Operation").val())
             //$("#txt_OperationId" + cnt).val($("#txt_OperationId").val())
-            $("#btnTypeInv" + cnt).html('العمليه رقم ( ' + $("#txt_Operation" + cnt).val() + ' )');
+            $("#btnTypeInv" + cnt).html(' عمليه   ( ' + $("#txt_Operation" + cnt).val() + ' )');
 
 
             $('.StoreGrid').addClass('display_none');
@@ -659,6 +683,41 @@ namespace SlsTrSalesManagerNew {
 
 
         }
+
+    }
+
+    function ValidationType_Inv(cnt: number) {
+
+        if (ddlSalesman.value == 'null') {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
+            Errorinput(ddlSalesman);
+            return false
+        }
+        if ($('#ddlStore' + cnt).val() == 'null' && $('#ddlTypeInv' + cnt).val() == '1') {
+            DisplayMassage('برجاء اختيار المستودع', '(Please select a customer)', MessageType.Error);
+
+            ShowType_Inv(cnt);
+            $('.Row_Type').addClass('display_none')
+            modal.style.display = "block";
+            $('#No_Row_Type' + cnt).removeClass('display_none');
+
+            Errorinput($('#ddlStore' + cnt))
+            return false
+        }
+        if ($('#txt_Operation' + cnt).val().trim() == '' && $('#ddlTypeInv' + cnt).val() == '2') {
+            DisplayMassage('برجاء اختيار العمليه', '(Please select a customer)', MessageType.Error);
+
+            ShowType_Inv(cnt);
+            $('.Row_Type').addClass('display_none')
+            modal.style.display = "block";
+            $('#No_Row_Type' + cnt).removeClass('display_none');
+
+            Errorinput($('#txt_Operation' + cnt))
+
+            return false
+        }
+
+        return true
 
     }
 
@@ -859,7 +918,7 @@ namespace SlsTrSalesManagerNew {
                             $("#custLastDate").html("-----")
                             $("#Name_Item").html("-----")
                         }
-                       
+
 
                     }
                 }
@@ -1599,7 +1658,7 @@ namespace SlsTrSalesManagerNew {
         $("#btnCust").removeAttr("disabled");
         $("#txt_CustCode").removeAttr("disabled");
         $("#ddlTypeInv").removeAttr("disabled");
-         
+
     }
     function btnShow_onclick() {
 
@@ -2212,7 +2271,7 @@ namespace SlsTrSalesManagerNew {
 
         var DeliveryEndDate: string = DateFormat(InvoiceStatisticsModel[0].DeliveryEndDate);
         $('#txtSupply_end_Date').val(DeliveryEndDate);
-      
+
 
 
         NewAdd = false;
@@ -2224,12 +2283,12 @@ namespace SlsTrSalesManagerNew {
         $("#txt_CustCode").attr("disabled", "disabled");
 
 
-        ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc); 
+        ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
         $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
 
-         
+
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function BuildControls(cnt: number) {
@@ -2248,7 +2307,7 @@ namespace SlsTrSalesManagerNew {
 	                </td>
                     <td>
 		                <div class="form-group"> 
-			               <button id="btnTypeInv${cnt}" class="btn btn-main btn-search"  style="border-radius: 13px;font-weight: bold;font-size: 18px;"  >   </button>
+			               <button id="btnTypeInv${cnt}" class="btn btn-main btn-operation" >   </button>
 		                </div>
 	                </td> 
                      <td>
@@ -2328,9 +2387,11 @@ namespace SlsTrSalesManagerNew {
                     <input id="UnitCost${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_StatusFlag${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_ID${cnt}" name = " " type ="hidden" class="form-control" />
+                    <input id="CatID${cnt}" name = " " type ="hidden" class="form-control" />
+                    <input id="VatNatID${cnt}" name = " " type ="hidden" class="form-control" />
+                    <input id="VatPrc${cnt}" name = " " type ="hidden" class="form-control" />
                 </tr>`;
         $("#div_Data").append(html);
-
 
 
         $(".select_").select2();
@@ -2535,7 +2596,10 @@ namespace SlsTrSalesManagerNew {
 
             let sys: SystemTools = new SystemTools();
 
-            debugger
+            if (!ValidationType_Inv(cnt)) {
+                Clear_Row(cnt)
+                return false
+            }
 
             var storeId = Number(ddlStore.value);//and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
@@ -2567,13 +2631,17 @@ namespace SlsTrSalesManagerNew {
                 $('#ddlItem' + cnt).val(searchItemID);
 
                 let Type_inv = Number($('#ddlTypeInv' + cnt).val())
-                GetItems(searchItemID, Type_inv, cnt);
+                let SalesmanId = Number(ddlSalesman.value);
+                GetItems(searchItemID, SalesmanId, Type_inv, cnt);
 
 
 
                 if (Model_Items.ItemCode != '') {
 
 
+                    $('#VatPrc' + cnt).val(Model_Items.VatPrc)
+                    $('#VatNatID' + cnt).val(Model_Items.VatNatID)
+                    $('#CatID' + cnt).val(Model_Items.CatID)
                     $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
                     $('#ddlItem' + cnt).attr('data-UomID', 1);
                     $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
@@ -2649,20 +2717,26 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
-
+            if (!ValidationType_Inv(cnt)) {
+                Clear_Row(cnt)
+                return false
+            }
 
 
             let Type_inv = Number($('#ddlTypeInv' + cnt).val())
             let Code_Item = $("#Code_Item" + cnt).val()
             debugger
-
-            GetItemsbyCode(Code_Item, Type_inv, cnt);
+            let SalesmanId = Number(ddlSalesman.value);
+            GetItemsbyCode(Code_Item, SalesmanId, Type_inv, cnt);
 
 
             debugger
 
             if (Model_Items.ItemCode != '') {
 
+                $('#VatPrc' + cnt).val(Model_Items.VatPrc)
+                $('#VatNatID' + cnt).val(Model_Items.VatNatID)
+                $('#CatID' + cnt).val(Model_Items.CatID)
                 $('#ddlItem' + cnt).val(Model_Items.ItemID)
                 $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
                 $('#ddlItem' + cnt).attr('data-UomID', 1);
@@ -2970,11 +3044,14 @@ namespace SlsTrSalesManagerNew {
             ShowType_Inv(cnt);
 
 
+            $('#VatPrc' + cnt).val(SlsInvoiceItemsDetails[cnt].VatPrc)
+            $('#VatNatID' + cnt).val(SlsInvoiceItemsDetails[cnt].VatNatID)
+            //$('#CatID' + cnt).val(SlsInvoiceItemsDetails[cnt].CatID)
+
             $("#ddlItem" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemID);
-            $('#ddlItem' + cnt).attr('data-MinUnitPrice', Model_Items.MinUnitPrice);
+            $('#ddlItem' + cnt).attr('data-MinUnitPrice', SlsInvoiceItemsDetails[cnt].MinSalesPrice);
             $('#ddlItem' + cnt).attr('data-UomID', 1);
-            $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
-            $('#ddlItem' + cnt).attr('data-OnhandQty', Model_Items.OnhandQty);
+            $('#ddlItem' + cnt).attr('data-OnhandQty', SlsInvoiceItemsDetails[cnt].Onhand_Qty);
 
             $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
             $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SoldQty);
@@ -3028,6 +3105,15 @@ namespace SlsTrSalesManagerNew {
         $("#txtTotal" + cnt).val('0')
         $("#txtTax" + cnt).val('0')
         $("#txtTotAfterTax" + cnt).val('0')
+        $("#txt_OperationId" + cnt).val('0')
+        $("#txt_Operation" + cnt).val('')
+        $("#ddlStore" + cnt).val('null')
+
+        $("#ddlItem" + cnt).prop("value", 0);
+        $('#ddlItem' + cnt).attr('data-MinUnitPrice', 0);
+        $('#ddlItem' + cnt).attr('data-UomID', 1);
+        $('#ddlItem' + cnt).attr('data-OnhandQty', 0);
+
         ComputeTotals();
     }
 
@@ -3035,23 +3121,38 @@ namespace SlsTrSalesManagerNew {
 
 
 
-
         let VatNatID = 0;
         let Type_inv = Number($('#ddlTypeInv' + cnt).val());
-
+        //-----------------------------------------------------------------------New_Ver2------------------
         if (Type_inv == 1) {
 
-            let CatID = Model_Items.CatID;
-            let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
-            let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
-            Tax_Rate = VatNature[0].VatPrc;
-            VatNatID = Cat_Tax[0].VatNatID;
+            if ($('#txt_StatusFlag' + cnt).val() == 'i') {
+                let CatID = Model_Items.CatID;
+                let Cat_Tax = CategoryDetails.filter(s => s.CatID == CatID);
+                let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
+                Tax_Rate = VatNature[0].VatPrc;
+                VatNatID = Cat_Tax[0].VatNatID;
+            } else {
+                Tax_Rate = Number($('#VatPrc' + cnt).val());
+                VatNatID = Number($('#VatNatID' + cnt).val());
+            }
+
+
         }
         if (Type_inv == 2) {
 
-            Tax_Rate = Model_Items.VatPrc;
-            VatNatID = Model_Items.VatNatID;
+            if ($('#txt_StatusFlag' + cnt).val() == 'i') {
+                Tax_Rate = Model_Items.VatPrc;
+                VatNatID = Model_Items.VatNatID;
+            }
+            else {
+                Tax_Rate = Number($('#VatPrc' + cnt).val());
+                VatNatID = Number($('#VatNatID' + cnt).val());
+            }
         }
+
+
+
 
 
 
@@ -3499,7 +3600,11 @@ namespace SlsTrSalesManagerNew {
         if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
             return true;
         } else {
-            if ($("#ddlItem" + rowcount).val().trim() == "" || $("#ddlItem" + rowcount).val() == '0') {
+
+            if (!ValidationType_Inv(rowcount)) {
+                return false
+            }
+            else if ($("#ddlItem" + rowcount).val().trim() == "" || $("#ddlItem" + rowcount).val() == '0') {
                 DisplayMassage(" برجاء ادخال الصنف", "Please enter the Item", MessageType.Error);
                 Errorinput($("#Code_Item" + rowcount));
                 return false

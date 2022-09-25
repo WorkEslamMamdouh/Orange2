@@ -13036,6 +13036,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     font-size: 0.875rem;
     border-radius: 0.1875rem;
 }
+
 .btn-main{
     color: var(--bs-light);
     background-color: var(--main-blue);
@@ -13114,6 +13115,12 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
         background-color: var(--bs-gray-dark);
         border-color: var(--bs-gray-dark);
     }
+.btn-operation {
+    border-radius: 13px;
+    font-weight: bold;
+    font-size: .9rem;
+    width: 100%;
+}
 .fade {
     transition: opacity 0.15s linear;
 }
@@ -29364,6 +29371,7 @@ div.tagsinput {
         .inside-table .form-control.no-border {
             border: none;
         }
+
 .satistics-table {
     position: absolute;
     top: 2.75rem;
@@ -30412,7 +30420,7 @@ input[class=checkbox]:checked:before {
 
 #btnPrintsFrom_To {
     font-weight: bold;
-    font-size: 15px;
+    font-size: .9rem;
 }
 
 /*End Scroll Bar*/

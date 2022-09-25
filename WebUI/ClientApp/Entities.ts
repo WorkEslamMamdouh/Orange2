@@ -4637,8 +4637,10 @@ class IQ_GetSlsInvoiceItemVer2 extends SecurityClass {
         this.OperationId = 0;
         this.op_TrNo = 0;
         this.op_status = 0;
-        this.Store_code = '';
+        this.STORE_CODE = '';
         this.Store_DescA = '';
+        this.Onhand_Qty = 0;
+        this.MinSalesPrice = 0;
     }
     public InvoiceItemID: number;
     public InvoiceID: number;
@@ -4704,9 +4706,10 @@ class IQ_GetSlsInvoiceItemVer2 extends SecurityClass {
     public OperationId: number;
     public op_TrNo: number;
     public op_status: number;
-    public Store_code: string;
+    public STORE_CODE: string;
     public Store_DescA: string;
-     
+    public Onhand_Qty: number;
+    public MinSalesPrice: number; 
 
 }
 
