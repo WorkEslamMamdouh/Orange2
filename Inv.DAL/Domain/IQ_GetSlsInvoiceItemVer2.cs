@@ -77,7 +77,9 @@ namespace Inv.DAL.Domain
         public Nullable<int> OperationId { get; set; }
         public Nullable<int> op_TrNo { get; set; }
         public Nullable<byte> op_status { get; set; }
-        public Nullable<int> Store_code { get; set; }
+        public Nullable<int> STORE_CODE { get; set; }
         public string Store_DescA { get; set; }
+        public Nullable<decimal> Onhand_Qty { get; set; }
+        public Nullable<decimal> MinSalesPrice { get; set; }
     }
 }
