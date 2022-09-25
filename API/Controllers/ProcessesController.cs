@@ -916,6 +916,34 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetOperItem(int operationID,int ItemID, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                List<IQ_GetOperationSalesmanItem> res = db.IQ_GetOperationSalesmanItem.Where(x => x.OperationID == operationID && x.ItemID == ItemID).ToList();
+
+                return Ok(new BaseResponse(res));
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetOperItem(int operationID, string ItemCode, string UserCode, string Token)
+        {
+            
+               
+            string SQL = "";
+                SQL = "Select *  from IQ_GetOperationSalesmanItem where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "' ";
+           
+            List<IQ_GetOperationSalesmanItem> ItemList = db.Database.SqlQuery<IQ_GetOperationSalesmanItem>(SQL).ToList();
+
+
+            return Ok(new BaseResponse(ItemList));
+
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetOperationByID(int OperationID, string UserCode, string Token)
         {

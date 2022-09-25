@@ -110,13 +110,29 @@ namespace Inv.API.Controllers
             {
                 try
                 {
-                    var AccDefVen = AccDefVendorService.Insert(obj.A_Pay_D_Vendor);
-                    foreach (var item in obj.A_Pay_D_VendorDoc)
+                    using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                     {
-                        item.VendorId = AccDefVen.VendorID;
-                        AccDefVendorService.Insert(item);
+                        A_Pay_D_Vendor AccDefVen = AccDefVendorService.Insert(obj.A_Pay_D_Vendor);
+                        foreach (A_Pay_D_VendorDoc item in obj.A_Pay_D_VendorDoc)
+                        {
+                            item.VendorId = AccDefVen.VendorID;
+                            AccDefVendorService.Insert(item);
+                        }
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccDefVen.CompCode), 0, AccDefVen.VendorID, "VendDef", "Add", db);
+                        if (res.ResponseState == true)
+                        {
+                            //AccDefCust.CustomerCODE = int.Parse(res.ResponseData.ToString());
+                            dbTransaction.Commit();
+
+                            return Ok(new BaseResponse(obj.A_Pay_D_Vendor));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
                     }
-                    return Ok(new BaseResponse(obj.A_Pay_D_Vendor));
                 }
                 catch (Exception ex)
                 {

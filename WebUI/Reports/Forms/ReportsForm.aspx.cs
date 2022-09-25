@@ -1282,7 +1282,7 @@ namespace RS.WebUI.Reports.Forms
 
 
         //IProc_Prnt_SlsInvoice
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_SlsInvoice()
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_SlsInvoice()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -1353,7 +1353,7 @@ namespace RS.WebUI.Reports.Forms
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
             string qr = query[0].QRSTR;
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
@@ -1382,7 +1382,7 @@ namespace RS.WebUI.Reports.Forms
 
 
         // print _ operation _ invoice
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_OperationInvoice()
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_OperationInvoice()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -1433,7 +1433,7 @@ namespace RS.WebUI.Reports.Forms
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
             string qr = query[0].QRSTR;
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
@@ -1456,7 +1456,7 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_SlsInvReturn()
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_SlsInvReturn()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -1503,7 +1503,7 @@ namespace RS.WebUI.Reports.Forms
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
             string qr = query[0].QRSTR;
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
             QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(qr, QRCoder.QRCodeGenerator.ECCLevel.Q);
@@ -1915,7 +1915,7 @@ namespace RS.WebUI.Reports.Forms
             return query;
         }
 
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_SlsInvoicepr()
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_SlsInvoicepr()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -1953,7 +1953,7 @@ namespace RS.WebUI.Reports.Forms
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
             ReportsDetails();
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);

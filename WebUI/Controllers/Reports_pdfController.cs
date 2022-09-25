@@ -304,7 +304,7 @@ namespace Inv.WebUI.Controllers
             buildReport(que);
 
         }
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_SlsInvoice(RepFinancials RepPar)
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_SlsInvoice(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
 
@@ -372,7 +372,7 @@ namespace Inv.WebUI.Controllers
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
 
             string qr = query[0].QRSTR;
@@ -414,7 +414,7 @@ namespace Inv.WebUI.Controllers
             buildReport(que);
         }
 
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_SlsInvReturn(RepFinancials RepPar)
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_SlsInvReturn(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
 
@@ -457,7 +457,7 @@ namespace Inv.WebUI.Controllers
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
             string qr = query[0].QRSTR;
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
             QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(qr, QRCoder.QRCodeGenerator.ECCLevel.Q);
@@ -624,7 +624,7 @@ namespace Inv.WebUI.Controllers
         }
 
         // print _ operation _ invoice
-        public IEnumerable<IProc_Prnt_SlsInvoice_Result> Rpt_Prnt_OperationInvoice(RepFinancials RepPar)
+        public IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> Rpt_Prnt_OperationInvoice(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
 
@@ -675,7 +675,7 @@ namespace Inv.WebUI.Controllers
                  ",@RepType = " + spRepType.Value +
                  ",@TRId = " + spTRId.Value;
 
-            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoice_Result>(_Query).ToList();
+            var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
             string qr = query[0].QRSTR;
             QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();

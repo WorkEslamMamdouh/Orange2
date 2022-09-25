@@ -56,7 +56,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res =db.IQ_GetSlsInvoiceItem.Where(s=>s.InvoiceID==invoiceID ).ToList();
+                var res =db.IQ_GetSlsInvoiceItemVer2.Where(s=>s.InvoiceID==invoiceID ).ToList();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -131,11 +131,11 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                //var res = db.IQ_GetSlsInvoiceItem.Where(x => x.InvoiceID == invoiceID).ToList();
+                //var res = db.IQ_GetSlsInvoiceItemVer2.Where(x => x.InvoiceID == invoiceID).ToList();
 
-                string query = "select * from IQ_GetSlsInvoiceItem where InvoiceID = " + invoiceID + " ";
+                string query = "select * from IQ_GetSlsInvoiceItemVer2 where InvoiceID = " + invoiceID + " ";
                
-                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceItem>(query).ToList();
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceItemVer2>(query).ToList();
 
                 return Ok(new BaseResponse(res));
             }
