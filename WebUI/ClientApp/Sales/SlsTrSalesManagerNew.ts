@@ -159,18 +159,31 @@ namespace SlsTrSalesManagerNew {
     var flagLastPrice = 2;
     var itemid_LastPrice = 0;
 
-    //------------------------------------------------------ Main Region------------------------
     var modal = document.getElementById("myModal");
+
+
+    var Screen_name =""
+    var SlsInvSrc = $('#SlsInvSrc').val(); 
+    debugger
+
+
+    if (SlsInvSrc == "1") {  //  1:Retail invoice  
+
+        (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice')
+    }
+    else {       //2: opration invoice 
+     
+        (lang == "ar" ? Screen_name = 'فواتير العمليات' : Screen_name = 'opration invoice')
+    }
+
+
+    //------------------------------------------------------ Main Region------------------------
 
     export function InitalizeComponent() {
 
 
-        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "فواتير التجزئه ";
-        }
-        else {
-            document.getElementById('Screen_name').innerHTML = "Retail invoices";
-        }
+        document.getElementById('Screen_name').innerHTML = Screen_name; 
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -323,22 +336,12 @@ namespace SlsTrSalesManagerNew {
 
         ddlTypeInv.onchange = ddlTypeInv_onchange;
 
-        btnOperation.onclick = () => { OPerationSearch(0, false) };
-        ddlSalesman.onchange = ddlSalesman_onchange;
+        btnOperation.onclick = () => { OPerationSearch(0, false) }; 
 
     }
 
     //----------------------------------------------------sales_New-------------------------------------------
-    function ddlSalesman_onchange() {
-        for (var i = 0; i < CountGrid; i++) {
-            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
-                if (Number($('#txt_OperationId' + i).val()) > 0) {
-                    Clear_Row(i);
-                }
-
-            }
-        }
-    }
+ 
 
     function ddlTypeInv_onchange() {
         //if (ddlTypeInv.value == '0') {
@@ -358,7 +361,7 @@ namespace SlsTrSalesManagerNew {
 
     }
 
-    function GetItems(id: number, SalesmanId: number, Type: number, cnt: number) {
+    function GetItems(id: number, Type: number, cnt: number) {
 
 
 
@@ -401,7 +404,7 @@ namespace SlsTrSalesManagerNew {
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemID: ItemID, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemID: ItemID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -424,7 +427,7 @@ namespace SlsTrSalesManagerNew {
 
     }
 
-    function GetItemsbyCode(Code: string, SalesmanId: number, Type: number, cnt: number) {
+    function GetItemsbyCode(Code: string,  Type: number, cnt: number) {
 
 
         let ItemCode = Code;
@@ -464,7 +467,7 @@ namespace SlsTrSalesManagerNew {
                 type: "Get",
                 url: sys.apiUrl("Processes", "GetOperItem"),
                 data: {
-                    operationID: OperaID, ItemCode: ItemCode, SalesmanId: SalesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    operationID: OperaID, ItemCode: ItemCode,  UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -530,17 +533,11 @@ namespace SlsTrSalesManagerNew {
 
     function OPerationSearch(cnt: number, flagfrom: boolean) {
 
-        if (ddlSalesman.value == 'null') {
-            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
-            Errorinput(ddlSalesman);
-            modal.style.display = "none";
-            return false
-        }
-
-        let SalesmanId = Number(ddlSalesman.value);
+     
+         
 
         let sys: SystemTools = new SystemTools();
-        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2 and SalesmanId = " + SalesmanId + "", () => {
+        sys.FindKey(Modules.ProcSalesMgr, "btnOPerationSearch", " BranchCode = " + BranchCode + " and CompCode = " + compcode + "and Status = 2 ", () => {
             let OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             let List_Operation = SearchGrid.SearchDataGrid.dataScr;
 
@@ -688,11 +685,7 @@ namespace SlsTrSalesManagerNew {
 
     function ValidationType_Inv(cnt: number) {
 
-        if (ddlSalesman.value == 'null') {
-            DisplayMassage(" برجاء اختيار المندوب", "Please select a Salesman", MessageType.Error);
-            Errorinput(ddlSalesman);
-            return false
-        }
+       
         if ($('#ddlStore' + cnt).val() == 'null' && $('#ddlTypeInv' + cnt).val() == '1') {
             DisplayMassage('برجاء اختيار المستودع', '(Please select a customer)', MessageType.Error);
 
@@ -2074,7 +2067,7 @@ namespace SlsTrSalesManagerNew {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("SlsTrSales", "GetAllSlsInvoiceReviewStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, SalesPerson: ddlSalesPersonFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, SlsInvSrc: SlsInvSrc , IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, SalesPerson: ddlSalesPersonFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//(int CompCode, string StartDate, string EndDate, int Status, int? CustId, string SalesUser, string UserCode, string Token)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -2630,9 +2623,8 @@ namespace SlsTrSalesManagerNew {
 
                 $('#ddlItem' + cnt).val(searchItemID);
 
-                let Type_inv = Number($('#ddlTypeInv' + cnt).val())
-                let SalesmanId = Number(ddlSalesman.value);
-                GetItems(searchItemID, SalesmanId, Type_inv, cnt);
+                let Type_inv = Number($('#ddlTypeInv' + cnt).val()) 
+                GetItems(searchItemID,Type_inv, cnt);
 
 
 
@@ -2724,10 +2716,8 @@ namespace SlsTrSalesManagerNew {
 
 
             let Type_inv = Number($('#ddlTypeInv' + cnt).val())
-            let Code_Item = $("#Code_Item" + cnt).val()
-            debugger
-            let SalesmanId = Number(ddlSalesman.value);
-            GetItemsbyCode(Code_Item, SalesmanId, Type_inv, cnt);
+            let Code_Item = $("#Code_Item" + cnt).val() 
+            GetItemsbyCode(Code_Item, Type_inv, cnt);
 
 
             debugger
@@ -3045,9 +3035,10 @@ namespace SlsTrSalesManagerNew {
 
 
             $('#VatPrc' + cnt).val(SlsInvoiceItemsDetails[cnt].VatPrc)
+            $('#VatPrc' + cnt).val(SlsInvoiceItemsDetails[cnt].VatPrc)
             $('#VatNatID' + cnt).val(SlsInvoiceItemsDetails[cnt].VatNatID)
             //$('#CatID' + cnt).val(SlsInvoiceItemsDetails[cnt].CatID)
-
+            debugger
             $("#ddlItem" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemID);
             $('#ddlItem' + cnt).attr('data-MinUnitPrice', SlsInvoiceItemsDetails[cnt].MinSalesPrice);
             $('#ddlItem' + cnt).attr('data-UomID', 1);
@@ -3687,11 +3678,12 @@ namespace SlsTrSalesManagerNew {
 
 
         InvoiceModel.TrType = 0//0 invoice 1 return
-        InvoiceModel.SlsInvSrc = Number(ddlTypeInv.value)   // 1 from store 2 from van 
         InvoiceModel.SlsInvType = 1 //  retail 
         InvoiceModel.StoreId = ddlStore.value == 'null' ? null : Number(ddlStore.value);//main store
 
         InvoiceModel.RefTrID = null;
+        InvoiceModel.SlsInvSrc = Number(ddlTypeInv.value)   // 1 from store 2 from van 
+        InvoiceModel.OperationId = Number($('#txt_OperationId').val());
         ///////////////
         InvoiceModel.InvoiceID = GlobalinvoiceID;
         InvoiceModel.SalesmanId = Number(ddlSalesman.value);

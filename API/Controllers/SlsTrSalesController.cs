@@ -263,11 +263,11 @@ namespace Inv.API.Controllers
 
        
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
+        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode ,int SlsInvSrc ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
         { 
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = "+ SlsInvSrc + " and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
