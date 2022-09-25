@@ -4131,6 +4131,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
         this.Tot_Qty = 0;
         this.Item_Count = 0;
         this.Line_Count = 0;
+        this.Op_TrNo = 0;
     }
     public InvoiceID: number;
     public TrNo: number;
@@ -4226,6 +4227,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
     public Tot_Qty: number;
     public Item_Count: number;
     public Line_Count: number;
+    public Op_TrNo: number;
     public statusDesciption: string;
     public returnTypeDesciption: string;
     public IsCashDesciption: string;
