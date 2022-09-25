@@ -108,5 +108,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> Tot_Qty { get; set; }
         public Nullable<int> Item_Count { get; set; }
         public Nullable<int> Line_Count { get; set; }
+        public Nullable<int> Op_TrNo { get; set; }
     }
 }

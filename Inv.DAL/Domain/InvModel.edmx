@@ -5556,6 +5556,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceStatisticVer2' does
           <Property Name="Tot_Qty" Type="numeric" Precision="19" Scale="2" />
           <Property Name="Item_Count" Type="int" />
           <Property Name="Line_Count" Type="int" />
+          <Property Name="Op_TrNo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetStkAdjust' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -9689,7 +9690,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceStatisticVer2].[SPer_NameA] AS [SPer_NameA], 
     [IQ_GetSlsInvoiceStatisticVer2].[Tot_Qty] AS [Tot_Qty], 
     [IQ_GetSlsInvoiceStatisticVer2].[Item_Count] AS [Item_Count], 
-    [IQ_GetSlsInvoiceStatisticVer2].[Line_Count] AS [Line_Count]
+    [IQ_GetSlsInvoiceStatisticVer2].[Line_Count] AS [Line_Count], 
+    [IQ_GetSlsInvoiceStatisticVer2].[Op_TrNo] AS [Op_TrNo]
     FROM [dbo].[IQ_GetSlsInvoiceStatisticVer2] AS [IQ_GetSlsInvoiceStatisticVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetStkAdjust" EntityType="Self.IQ_GetStkAdjust" store:Type="Views" store:Schema="dbo">
@@ -21270,6 +21272,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Tot_Qty" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="Item_Count" Type="Int32" />
           <Property Name="Line_Count" Type="Int32" />
+          <Property Name="Op_TrNo" Type="Int32" />
         </EntityType>
         <ComplexType Name="IProc_Rpt_SlsInvoiceListVer2_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
@@ -31748,6 +31751,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetSlsInvoiceStatisticVer2">
             <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceStatisticVer2">
               <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceStatisticVer2">
+                <ScalarProperty Name="Op_TrNo" ColumnName="Op_TrNo" />
                 <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
                 <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
                 <ScalarProperty Name="Tot_Qty" ColumnName="Tot_Qty" />
