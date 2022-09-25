@@ -5352,8 +5352,10 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceItemVer2' does not 
           <Property Name="OperationId" Type="int" />
           <Property Name="op_TrNo" Type="int" />
           <Property Name="op_status" Type="tinyint" />
-          <Property Name="Store_code" Type="int" />
+          <Property Name="STORE_CODE" Type="int" />
           <Property Name="Store_DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Onhand_Qty" Type="numeric" Precision="24" Scale="6" />
+          <Property Name="MinSalesPrice" Type="numeric" Precision="22" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceListVer2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -9493,8 +9495,10 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceItemVer2].[OperationId] AS [OperationId], 
     [IQ_GetSlsInvoiceItemVer2].[op_TrNo] AS [op_TrNo], 
     [IQ_GetSlsInvoiceItemVer2].[op_status] AS [op_status], 
-    [IQ_GetSlsInvoiceItemVer2].[Store_code] AS [Store_code], 
-    [IQ_GetSlsInvoiceItemVer2].[Store_DescA] AS [Store_DescA]
+    [IQ_GetSlsInvoiceItemVer2].[STORE_CODE] AS [STORE_CODE], 
+    [IQ_GetSlsInvoiceItemVer2].[Store_DescA] AS [Store_DescA], 
+    [IQ_GetSlsInvoiceItemVer2].[Onhand_Qty] AS [Onhand_Qty], 
+    [IQ_GetSlsInvoiceItemVer2].[MinSalesPrice] AS [MinSalesPrice]
     FROM [dbo].[IQ_GetSlsInvoiceItemVer2] AS [IQ_GetSlsInvoiceItemVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetSlsInvoiceListVer2" EntityType="Self.IQ_GetSlsInvoiceListVer2" store:Type="Views" store:Schema="dbo">
@@ -11561,7 +11565,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="FromDate" Mode="In" Type="String" />
             <Parameter Name="Todate" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="IQ_GetSlsInvoiceItemVer2" EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" />
           <FunctionImport Name="G_ProcessTransVer2">
             <Parameter Name="Comp" Mode="In" Type="Int32" />
             <Parameter Name="Branch" Mode="In" Type="Int32" />
@@ -11582,6 +11585,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="IQ_GetSlsInvoiceItemVer2" EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -21632,77 +21636,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="credit" Nullable="true" Precision="38" Scale="5" />
           <Property Type="Decimal" Name="EndBal" Nullable="true" Precision="38" Scale="5" />
         </ComplexType>
-        <EntityType Name="IQ_GetSlsInvoiceItemVer2">
-          <Key>
-            <PropertyRef Name="InvoiceItemID" />
-            <PropertyRef Name="ItemFamilyID" />
-          </Key>
-          <Property Name="InvoiceItemID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceID" Type="Int32" />
-          <Property Name="ItemID" Type="Int32" />
-          <Property Name="UomID" Type="Int32" />
-          <Property Name="SoldQty" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="Unitprice" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="DiscountPrc" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="NetUnitPrice" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="ItemTotal" Type="Decimal" Precision="37" Scale="10" />
-          <Property Name="VatPrc" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="VatAmount" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="NetAfterVat" Type="Decimal" Precision="38" Scale="10" />
-          <Property Name="StockSoldQty" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="StockUnitCost" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="VatApplied" Type="Int32" />
-          <Property Name="TotRetQty" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="it_itemCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="it_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompCode" Type="Int32" />
-          <Property Name="It_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ItFm_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="ItFm_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ItFm_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Cat_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Cat_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Cat_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Uom_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Uom_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Uom_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ItemFamilyID" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceSoldQty" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="Serial" Type="Int32" />
-          <Property Name="AllowAmount" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="AllowancePrc" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="AllowanceBase" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="AllowReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="AllowCode" Type="Int32" />
-          <Property Name="BaseQty" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="BaseQtyUomid" Type="Int32" />
-          <Property Name="BaseQtyPrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="BaseQtyDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="DiscountPrcBase" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="DiscountVatNatID" Type="Int32" />
-          <Property Name="Discountreason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DiscountCode" Type="Int32" />
-          <Property Name="ItemNetAmount" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="ChargeAmount" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="ChargePrc" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="ChargeBase" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="ChargeVatNatID" Type="Int32" />
-          <Property Name="ChargeVatPrc" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="ChargeAfterVat" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="ChargeReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ChargeCode" Type="Int32" />
-          <Property Name="VatNatID" Type="Int32" />
-          <Property Name="UnitpriceWithVat" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="NetUnitPriceWithVat" Type="Decimal" Precision="18" Scale="5" />
-          <Property Name="SlsInvSrc" Type="Int32" />
-          <Property Name="StoreId" Type="Int32" />
-          <Property Name="OperationId" Type="Int32" />
-          <Property Name="op_TrNo" Type="Int32" />
-          <Property Name="op_status" Type="Byte" />
-          <Property Name="Store_code" Type="Int32" />
-          <Property Name="Store_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <ComplexType Name="IProc_Prnt_SlsInvoiceVer2_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
           <Property Type="Int32" Name="Bra" Nullable="true" />
@@ -21801,6 +21734,79 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Int32" Name="dtStore_code" Nullable="true" />
           <Property Type="String" Name="dtStore_DescA" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="IQ_GetSlsInvoiceItemVer2">
+          <Key>
+            <PropertyRef Name="InvoiceItemID" />
+            <PropertyRef Name="ItemFamilyID" />
+          </Key>
+          <Property Name="InvoiceItemID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceID" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="UomID" Type="Int32" />
+          <Property Name="SoldQty" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Unitprice" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountPrc" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="NetUnitPrice" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="37" Scale="10" />
+          <Property Name="VatPrc" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="VatAmount" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="NetAfterVat" Type="Decimal" Precision="38" Scale="10" />
+          <Property Name="StockSoldQty" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="StockUnitCost" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="VatApplied" Type="Int32" />
+          <Property Name="TotRetQty" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="it_itemCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="it_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="It_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItFm_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ItFm_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItFm_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemFamilyID" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceSoldQty" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="AllowAmount" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="AllowancePrc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AllowanceBase" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AllowReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AllowCode" Type="Int32" />
+          <Property Name="BaseQty" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BaseQtyUomid" Type="Int32" />
+          <Property Name="BaseQtyPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BaseQtyDiscount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DiscountPrcBase" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="DiscountVatNatID" Type="Int32" />
+          <Property Name="Discountreason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountCode" Type="Int32" />
+          <Property Name="ItemNetAmount" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ChargeAmount" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ChargePrc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChargeBase" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChargeVatNatID" Type="Int32" />
+          <Property Name="ChargeVatPrc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChargeAfterVat" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ChargeReason" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ChargeCode" Type="Int32" />
+          <Property Name="VatNatID" Type="Int32" />
+          <Property Name="UnitpriceWithVat" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="NetUnitPriceWithVat" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="SlsInvSrc" Type="Int32" />
+          <Property Name="StoreId" Type="Int32" />
+          <Property Name="OperationId" Type="Int32" />
+          <Property Name="op_TrNo" Type="Int32" />
+          <Property Name="op_status" Type="Byte" />
+          <Property Name="STORE_CODE" Type="Int32" />
+          <Property Name="Store_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Onhand_Qty" Type="Decimal" Precision="24" Scale="6" />
+          <Property Name="MinSalesPrice" Type="Decimal" Precision="22" Scale="6" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32235,77 +32241,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="IQ_GetSlsInvoiceItemVer2">
-            <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceItemVer2">
-              <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceItemVer2">
-                <ScalarProperty Name="Store_DescA" ColumnName="Store_DescA" />
-                <ScalarProperty Name="Store_code" ColumnName="Store_code" />
-                <ScalarProperty Name="op_status" ColumnName="op_status" />
-                <ScalarProperty Name="op_TrNo" ColumnName="op_TrNo" />
-                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
-                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
-                <ScalarProperty Name="SlsInvSrc" ColumnName="SlsInvSrc" />
-                <ScalarProperty Name="NetUnitPriceWithVat" ColumnName="NetUnitPriceWithVat" />
-                <ScalarProperty Name="UnitpriceWithVat" ColumnName="UnitpriceWithVat" />
-                <ScalarProperty Name="VatNatID" ColumnName="VatNatID" />
-                <ScalarProperty Name="ChargeCode" ColumnName="ChargeCode" />
-                <ScalarProperty Name="ChargeReason" ColumnName="ChargeReason" />
-                <ScalarProperty Name="ChargeAfterVat" ColumnName="ChargeAfterVat" />
-                <ScalarProperty Name="ChargeVatPrc" ColumnName="ChargeVatPrc" />
-                <ScalarProperty Name="ChargeVatNatID" ColumnName="ChargeVatNatID" />
-                <ScalarProperty Name="ChargeBase" ColumnName="ChargeBase" />
-                <ScalarProperty Name="ChargePrc" ColumnName="ChargePrc" />
-                <ScalarProperty Name="ChargeAmount" ColumnName="ChargeAmount" />
-                <ScalarProperty Name="ItemNetAmount" ColumnName="ItemNetAmount" />
-                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
-                <ScalarProperty Name="Discountreason" ColumnName="Discountreason" />
-                <ScalarProperty Name="DiscountVatNatID" ColumnName="DiscountVatNatID" />
-                <ScalarProperty Name="DiscountPrcBase" ColumnName="DiscountPrcBase" />
-                <ScalarProperty Name="BaseQtyDiscount" ColumnName="BaseQtyDiscount" />
-                <ScalarProperty Name="BaseQtyPrice" ColumnName="BaseQtyPrice" />
-                <ScalarProperty Name="BaseQtyUomid" ColumnName="BaseQtyUomid" />
-                <ScalarProperty Name="BaseQty" ColumnName="BaseQty" />
-                <ScalarProperty Name="AllowCode" ColumnName="AllowCode" />
-                <ScalarProperty Name="AllowReason" ColumnName="AllowReason" />
-                <ScalarProperty Name="AllowanceBase" ColumnName="AllowanceBase" />
-                <ScalarProperty Name="AllowancePrc" ColumnName="AllowancePrc" />
-                <ScalarProperty Name="AllowAmount" ColumnName="AllowAmount" />
-                <ScalarProperty Name="Serial" ColumnName="Serial" />
-                <ScalarProperty Name="InvoiceSoldQty" ColumnName="InvoiceSoldQty" />
-                <ScalarProperty Name="ItemFamilyID" ColumnName="ItemFamilyID" />
-                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
-                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
-                <ScalarProperty Name="Uom_Code" ColumnName="Uom_Code" />
-                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
-                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
-                <ScalarProperty Name="Cat_Code" ColumnName="Cat_Code" />
-                <ScalarProperty Name="ItFm_DescE" ColumnName="ItFm_DescE" />
-                <ScalarProperty Name="ItFm_DescA" ColumnName="ItFm_DescA" />
-                <ScalarProperty Name="ItFm_Code" ColumnName="ItFm_Code" />
-                <ScalarProperty Name="It_DescE" ColumnName="It_DescE" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="it_DescA" ColumnName="it_DescA" />
-                <ScalarProperty Name="it_itemCode" ColumnName="it_itemCode" />
-                <ScalarProperty Name="TotRetQty" ColumnName="TotRetQty" />
-                <ScalarProperty Name="VatApplied" ColumnName="VatApplied" />
-                <ScalarProperty Name="StockUnitCost" ColumnName="StockUnitCost" />
-                <ScalarProperty Name="StockSoldQty" ColumnName="StockSoldQty" />
-                <ScalarProperty Name="NetAfterVat" ColumnName="NetAfterVat" />
-                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
-                <ScalarProperty Name="VatPrc" ColumnName="VatPrc" />
-                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
-                <ScalarProperty Name="NetUnitPrice" ColumnName="NetUnitPrice" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="DiscountPrc" ColumnName="DiscountPrc" />
-                <ScalarProperty Name="Unitprice" ColumnName="Unitprice" />
-                <ScalarProperty Name="SoldQty" ColumnName="SoldQty" />
-                <ScalarProperty Name="UomID" ColumnName="UomID" />
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
-                <ScalarProperty Name="InvoiceItemID" ColumnName="InvoiceItemID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="G_ProcessTransVer2" FunctionName="InvModel.Store.G_ProcessTransVer2" />
           <FunctionImportMapping FunctionImportName="IProc_Prnt_SlsInvoiceVer2" FunctionName="InvModel.Store.IProc_Prnt_SlsInvoiceVer2">
             <ResultMapping>
@@ -32409,6 +32344,79 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="IQ_GetSlsInvoiceItemVer2">
+            <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceItemVer2">
+              <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceItemVer2">
+                <ScalarProperty Name="MinSalesPrice" ColumnName="MinSalesPrice" />
+                <ScalarProperty Name="Onhand_Qty" ColumnName="Onhand_Qty" />
+                <ScalarProperty Name="Store_DescA" ColumnName="Store_DescA" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="op_status" ColumnName="op_status" />
+                <ScalarProperty Name="op_TrNo" ColumnName="op_TrNo" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="SlsInvSrc" ColumnName="SlsInvSrc" />
+                <ScalarProperty Name="NetUnitPriceWithVat" ColumnName="NetUnitPriceWithVat" />
+                <ScalarProperty Name="UnitpriceWithVat" ColumnName="UnitpriceWithVat" />
+                <ScalarProperty Name="VatNatID" ColumnName="VatNatID" />
+                <ScalarProperty Name="ChargeCode" ColumnName="ChargeCode" />
+                <ScalarProperty Name="ChargeReason" ColumnName="ChargeReason" />
+                <ScalarProperty Name="ChargeAfterVat" ColumnName="ChargeAfterVat" />
+                <ScalarProperty Name="ChargeVatPrc" ColumnName="ChargeVatPrc" />
+                <ScalarProperty Name="ChargeVatNatID" ColumnName="ChargeVatNatID" />
+                <ScalarProperty Name="ChargeBase" ColumnName="ChargeBase" />
+                <ScalarProperty Name="ChargePrc" ColumnName="ChargePrc" />
+                <ScalarProperty Name="ChargeAmount" ColumnName="ChargeAmount" />
+                <ScalarProperty Name="ItemNetAmount" ColumnName="ItemNetAmount" />
+                <ScalarProperty Name="DiscountCode" ColumnName="DiscountCode" />
+                <ScalarProperty Name="Discountreason" ColumnName="Discountreason" />
+                <ScalarProperty Name="DiscountVatNatID" ColumnName="DiscountVatNatID" />
+                <ScalarProperty Name="DiscountPrcBase" ColumnName="DiscountPrcBase" />
+                <ScalarProperty Name="BaseQtyDiscount" ColumnName="BaseQtyDiscount" />
+                <ScalarProperty Name="BaseQtyPrice" ColumnName="BaseQtyPrice" />
+                <ScalarProperty Name="BaseQtyUomid" ColumnName="BaseQtyUomid" />
+                <ScalarProperty Name="BaseQty" ColumnName="BaseQty" />
+                <ScalarProperty Name="AllowCode" ColumnName="AllowCode" />
+                <ScalarProperty Name="AllowReason" ColumnName="AllowReason" />
+                <ScalarProperty Name="AllowanceBase" ColumnName="AllowanceBase" />
+                <ScalarProperty Name="AllowancePrc" ColumnName="AllowancePrc" />
+                <ScalarProperty Name="AllowAmount" ColumnName="AllowAmount" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="InvoiceSoldQty" ColumnName="InvoiceSoldQty" />
+                <ScalarProperty Name="ItemFamilyID" ColumnName="ItemFamilyID" />
+                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
+                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
+                <ScalarProperty Name="Uom_Code" ColumnName="Uom_Code" />
+                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
+                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
+                <ScalarProperty Name="Cat_Code" ColumnName="Cat_Code" />
+                <ScalarProperty Name="ItFm_DescE" ColumnName="ItFm_DescE" />
+                <ScalarProperty Name="ItFm_DescA" ColumnName="ItFm_DescA" />
+                <ScalarProperty Name="ItFm_Code" ColumnName="ItFm_Code" />
+                <ScalarProperty Name="It_DescE" ColumnName="It_DescE" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="it_DescA" ColumnName="it_DescA" />
+                <ScalarProperty Name="it_itemCode" ColumnName="it_itemCode" />
+                <ScalarProperty Name="TotRetQty" ColumnName="TotRetQty" />
+                <ScalarProperty Name="VatApplied" ColumnName="VatApplied" />
+                <ScalarProperty Name="StockUnitCost" ColumnName="StockUnitCost" />
+                <ScalarProperty Name="StockSoldQty" ColumnName="StockSoldQty" />
+                <ScalarProperty Name="NetAfterVat" ColumnName="NetAfterVat" />
+                <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
+                <ScalarProperty Name="VatPrc" ColumnName="VatPrc" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="NetUnitPrice" ColumnName="NetUnitPrice" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DiscountPrc" ColumnName="DiscountPrc" />
+                <ScalarProperty Name="Unitprice" ColumnName="Unitprice" />
+                <ScalarProperty Name="SoldQty" ColumnName="SoldQty" />
+                <ScalarProperty Name="UomID" ColumnName="UomID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+                <ScalarProperty Name="InvoiceItemID" ColumnName="InvoiceItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
