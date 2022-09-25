@@ -2479,6 +2479,7 @@ var IQ_GetSlsInvoiceStatisticVer2 = /** @class */ (function () {
         this.Tot_Qty = 0;
         this.Item_Count = 0;
         this.Line_Count = 0;
+        this.Op_TrNo = 0;
     }
     return IQ_GetSlsInvoiceStatisticVer2;
 }());

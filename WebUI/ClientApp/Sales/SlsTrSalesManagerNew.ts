@@ -1598,6 +1598,8 @@ namespace SlsTrSalesManagerNew {
 
         $("#btnCust").removeAttr("disabled");
         $("#txt_CustCode").removeAttr("disabled");
+        $("#ddlTypeInv").removeAttr("disabled");
+         
     }
     function btnShow_onclick() {
 
@@ -2225,6 +2227,7 @@ namespace SlsTrSalesManagerNew {
         ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc); 
         $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
+        $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
 
          
     }
@@ -4072,7 +4075,7 @@ namespace SlsTrSalesManagerNew {
         ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
         $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
-
+        $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
     }
     function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
 
