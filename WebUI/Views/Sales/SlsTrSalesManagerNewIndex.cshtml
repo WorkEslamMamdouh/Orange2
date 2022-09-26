@@ -7,7 +7,6 @@
 
     /* The Modal (background) */
     .modal {
-      
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
@@ -21,15 +20,16 @@
         width: 80%;
         bottom: -20%;*/
     }
+
     .Grid_Type {
-        background-color: #0c2640;
+        background-color: #0c2640 ;
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
         bottom: -20%;
     }
-     
+
 
     /* The Close Button */
     .close {
@@ -45,10 +45,8 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-    
-
 </style>
+<input id="Flag_SlsInvSrc" type="hidden" value="1" class="form-control input-sm"> @*-----مبيعات تجزئه------*@
 <div class="col-12  borderred">
     @* Old HTML *@
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
@@ -119,14 +117,15 @@
                         <thead class="Heder">
                             <tr>
 
+
                                 <th class=" " style="text-align: right; width:10%;">  </th>
-                                <th class=" " style="text-align: right; width:30%;">  </th> 
+                                <th class=" " style="text-align: right; width:21%;">  </th>
                                 <th class=" " style="text-align: right; width:8%;">  </th>
-                                <th class=" " style="text-align: right; width:10%;">  </th>
+                                <th class=" " style="text-align: right; width:25%;">  </th>
                                 <th class=" " style="text-align: right; width:30%;">  </th>
                                 <th class=" " style="text-align: right; width:8%;">  </th>
                                 <th class=" " style="text-align: right; width:10%;">  </th>
-                                <th class=" " style="text-align: right; width:30%;">  </th>
+                                <th class=" " style="text-align: right; width:10%;">  </th>
 
                             </tr>
                         </thead>
@@ -175,7 +174,7 @@
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = "none"; 
+                modal.style.display = "none";
             }
         }
 
@@ -232,11 +231,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0">المندوب</label>
+                                <label class="col-4 align-self-center p-md-0"> بائع  </label>
                                 <div class="col-8 ">
-                                    <select class="form-control" id="ddlSalesmanFilter"></select>
+                                    <select class="form-control" id="ddlSalesPersonFilter"></select>
                                 </div>
                             </div>
                         </div>
@@ -252,9 +252,40 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
-                                <label class="col-4 align-self-center p-md-0"> بائع  </label>
+                                <label class="col-4 align-self-center p-md-0">المندوب</label>
                                 <div class="col-8 ">
-                                    <select class="form-control" id="ddlSalesPersonFilter"></select>
+                                    <select class="form-control" id="ddlSalesmanFilter"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modOperation col-12 col-md-4 display_none">
+                            <div class="form-group row">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.process </label>
+                                <div class="col-8 ">
+                                    <div class="search-content">
+                                        <input type="text" class="form-control search-control" id="txt_OperationFilter" name="Operation" disabled="">
+                                        <button type="button" id="btnOperationFilter" name="Operation" class="btn btn-main btn-search">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                    <input disabled="" class="form-control me-3 display_none" name="OperationId" id="txt_OperationIdFilter">
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" modOperation col-12 col-md-4 display_none">
+                            <div class="form-group row ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.process_opened</label>
+                                <div class="col-8 ">
+                                    <input type="checkbox" class="checkbox" id="chkOpenProcess" name="CUSTOM6" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modOperation col-12 col-md-4 display_none">
+                            <div class="form-group row">
+                                <div class="col-4 ">
+                                </div>
+                                <div class="col-8 ">
+
                                 </div>
                             </div>
                         </div>
@@ -269,15 +300,7 @@
                                         تنزيل ملف بطباعة الحركة المختارية
                                     </button>
                                 </div>
-
-
-
-
-                                @*<iframe src="http://localhost:61453/Home/OpenPdf/?path=C:/DocPDF/Comp3/Pdf_Invoices.pdf" frameBorder="0"scrolling="auto"height="100%" width="100%"></iframe>*@
-
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -436,9 +459,9 @@
 
                             </div>
 
-                            <div class="col-12 col-md-4 py-0">
+                            <div id="TypeInvMod" class="col-12 col-md-4 py-0">
                                 <div class="form-group row">
-                                    <label class="col-4 align-self-center p-md-0"> نوع العمليه</label>
+                                    <label id="LabTypeInv" class="col-4 align-self-center p-md-0"> نوع العمليه</label>
                                     <div class="col-8 ">
                                         <select class="form-control" id="ddlTypeInv">
                                             @*<option value="0">المستودع والعمليه</option>*@
@@ -482,17 +505,17 @@
                         <!-- Inside Table  -->
                         <div class="inside-table my-4">
                             <div class="table-responsive">
-                                <table class="table table-borderless "  style="width:140%">
+                                <table class="table table-borderless " style="width:140%">
                                     <thead>
                                         <tr>
-                                            <th style="width: 3%"></th> 
+                                            <th style="width: 3%"></th>
                                             <th style="width: 3%" class="px-3"> @SystemResource.serial </th>
                                             <th style="width: 3%" class="px-3"> النوع </th>
                                             <th style="width: 16%" class="px-3">كود الصنف</th>
-                                            <th style="width: 16%"class="px-5">الصنف</th>
+                                            <th style="width: 16%" class="px-5">الصنف</th>
                                             <th style="width: 8%" class="px-3"> @SystemResource.App_soldQty</th>
                                             <th style="width: 1%" class=" ">المرتجع</th>
-                                            <th style="width: 7%" >  @SystemResource.App_Price  </th>
+                                            <th style="width: 7%">  @SystemResource.App_Price  </th>
                                             <th style="width: 7%" class=" ">السعر بالضريبه</th>
                                             <th style="width: 7%" class=" ">نسبة الخصم </th>
                                             <th style="width: 7%" class=" ">الخصم  </th>
@@ -515,7 +538,7 @@
 
                         <div class="col-12">
                             <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
-                                <div class="icon-bar d-flex justify-content-between  btnCustLastPrice" id="btnCustLastPrice">
+                                <div class="icon-bar d-flex justify-content-between    btnCustLastPrice" id="btnCustLastPrice" >
                                     <i class="fas fa-dollar-sign fs-4"></i>
 
 
@@ -832,8 +855,8 @@
 
 
 
-                        //let myLabels = document.querySelectorAll('.lbl-toggle');
-                        //Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); });
+                                //let myLabels = document.querySelectorAll('.lbl-toggle');
+                                //Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); });
 
         </script>
     }

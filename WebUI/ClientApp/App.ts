@@ -36,6 +36,8 @@ var Modules = {
     AccTrVendorAdjust: "AccTrVendorAdjust",
     SlsTrSales: "SlsTrSales",
     SlsTrReturn: "SlsTrReturn",
+    SlsTrReturnNew: "SlsTrReturnNew",
+    SlsTrReturnOperation: "SlsTrReturnOperation",
     SlsTrSalesManager: "SlsTrSalesManager",
     SlsTrSalesManagerNew: "SlsTrSalesManagerNew",
     SlsTrSalesOperation: "SlsTrSalesOperation",
