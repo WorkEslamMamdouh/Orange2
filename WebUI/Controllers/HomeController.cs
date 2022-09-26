@@ -233,6 +233,11 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/Sales/SlsTrSalesManagerNewIndex.cshtml");
         }
 
+        public ActionResult SlsTrSalesOperationIndex()
+        {
+            return View("~/Views/Sales/SlsTrSalesOperationIndex.cshtml");
+        }
+
         public ActionResult SlsTrSalesManagerIndex()
         {
             return View("~/Views/Sales/SlsTrSalesManagerIndex.cshtml");

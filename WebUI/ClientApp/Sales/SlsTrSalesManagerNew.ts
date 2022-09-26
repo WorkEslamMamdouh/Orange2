@@ -5,7 +5,7 @@ $(document).ready(() => {
 })
 namespace SlsTrSalesManagerNew {
     //system varables
-    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesManager);
+    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
     var compcode: Number;
     var BranchCode: number;
     var sys: SystemTools = new SystemTools();
