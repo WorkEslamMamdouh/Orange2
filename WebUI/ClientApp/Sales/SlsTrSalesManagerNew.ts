@@ -4873,14 +4873,14 @@ namespace SlsTrSalesManagerNew {
             IsCash = 2;
         }
 
-
+        let OperationId = Number($('#txt_OperationIdFilter').val())
 
         try {
 
 
             let Name_ID = 'InvoiceID'
             let NameTable = 'I_Sls_TR_Invoice'
-            let Condation1 = " SlsInvSrc = 1 and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+            let Condation1 = " SlsInvSrc = " + SlsInvSrc+" and  TrType = 0 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
                 " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
             let Condation2 = " ";
 
@@ -4890,7 +4890,9 @@ namespace SlsTrSalesManagerNew {
             if (SalesPerson != 0 && SalesPerson != null)
                 Condation2 = Condation2 + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
             if (SalesMan != 0 && SalesMan != null)
-                Condation2 = Condation2 + " and SalesmanId =" + SalesMan;// and Status = " + Status
+                Condation2 = Condation2 + " and SalesmanId =" + SalesMan;// and Status = " + Status 
+            if (OperationId != 0 && OperationId != null)
+                Condation2 = Condation2 + " and OperationId =" + OperationId; 
             if (status == 2)
                 Condation2 = Condation2 + "";
             else {

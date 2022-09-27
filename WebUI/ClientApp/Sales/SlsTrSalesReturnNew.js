@@ -1677,6 +1677,8 @@ var SlsTrSalesReturnNew;
         $("#ddlStore" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].StoreId);
         $("#txt_Operation" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].op_TrNo);
         $("#txt_OperationId" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].OperationId);
+        $("#VatNatID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
+        $("#VatPrc" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
         if (SlsInvSrc == '1') {
             $("#btnTypeInv" + cnt).html(' م ( ' + SlsInvoiceItemsDetails[cnt].Store_DescA + ' )');
             $('#txt_OperationId' + cnt).val('0');
@@ -1941,7 +1943,8 @@ var SlsTrSalesReturnNew;
                 invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val());
-                invoiceItemSingleModel.VatNatID = Number($("#vatnatid" + i).val());
+                invoiceItemSingleModel.VatNatID = Number($("#VatNatID" + i).val());
+                invoiceItemSingleModel.VatPrc = Number($("#VatPrc" + i).val());
                 invoiceItemSingleModel.SlsInvSrc = SlsInvSrc;
                 invoiceItemSingleModel.StoreId = $("#ddlStore" + i).val() == 'null' ? null : Number($("#ddlStore" + i).val());
                 invoiceItemSingleModel.OperationId = Number($("#txt_OperationId" + i).val());
@@ -1970,7 +1973,8 @@ var SlsTrSalesReturnNew;
                 invoiceItemSingleModel.VatAmount = invoiceItemSingleModel.ItemTotal * invoiceItemSingleModel.VatPrc / 100;
                 invoiceItemSingleModel.NetAfterVat = invoiceItemSingleModel.ItemTotal + invoiceItemSingleModel.VatAmount;
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val());
-                invoiceItemSingleModel.VatNatID = Number($("#vatnatid" + i).val());
+                invoiceItemSingleModel.VatNatID = Number($("#VatNatID" + i).val());
+                invoiceItemSingleModel.VatPrc = Number($("#VatPrc" + i).val());
                 invoiceItemSingleModel.SlsInvSrc = SlsInvSrc;
                 invoiceItemSingleModel.StoreId = $("#ddlStore" + i).val() == 'null' ? null : Number($("#ddlStore" + i).val());
                 invoiceItemSingleModel.OperationId = Number($("#txt_OperationId" + i).val());
@@ -1989,6 +1993,8 @@ var SlsTrSalesReturnNew;
                 }
             }
         }
+        InvoiceModel.QtyTotal = Number($('#txtPackageCount').val());
+        InvoiceModel.LineCount = Number($('#txtItemCount').val());
         MasterDetailModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailModel.I_Sls_TR_InvoiceItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -2289,16 +2295,19 @@ var SlsTrSalesReturnNew;
         else {
             IsCash = 2;
         }
+        var OperationId = Number($('#txt_OperationIdFilter').val());
         try {
             var Name_ID = 'InvoiceID';
             var NameTable = 'I_Sls_TR_Invoice';
-            var Condation1 = " SlsInvSrc = 1 and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+            var Condation1 = " SlsInvSrc =  " + SlsInvSrc + " and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
                 " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
             var Condation2 = " ";
             if (customerId != 0 && customerId != null)
                 Condation2 = Condation2 + " and CustomerId =" + customerId;
             if (SalesMan != 0 && SalesMan != null)
                 Condation2 = Condation2 + " and SalesmanId =" + SalesMan; // and Status = " + Status
+            if (OperationId != 0 && OperationId != null)
+                Condation2 = Condation2 + " and OperationId =" + OperationId;
             if (status == 2)
                 Condation2 = Condation2 + "";
             else {
