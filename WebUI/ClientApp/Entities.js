@@ -2743,6 +2743,7 @@ var I_TR_OperationItems = /** @class */ (function (_super) {
         _this.Est_CostPrice = 0;
         _this.Est_SalesPrice = 0;
         _this.Min_SalesPrice = 0;
+        _this.TotalSales = 0;
         _this.OnhandQty = 0;
         _this.Remarks = "";
         _this.StatusFlag = "";

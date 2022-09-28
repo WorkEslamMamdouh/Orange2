@@ -1149,7 +1149,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string query = "EXEC IProc_UpdateOperationSummary " + OperationID + "  ";
+                string query = "EXEC IProc_UpdateOperationSummaryVer2 " + OperationID + "  ";
                 db.Database.ExecuteSqlCommand(query);
                 return Ok(new BaseResponse(true));
             }

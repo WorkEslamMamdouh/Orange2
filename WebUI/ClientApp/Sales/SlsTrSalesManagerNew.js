@@ -63,6 +63,7 @@ var SlsTrSalesManagerNew;
     var mainItemDetails = new Array();
     var MasterDetailModel = new SlsInvoiceMasterDetails();
     var Model_Items = new GetItem();
+    var Details_Inv_Items = new Array();
     var ModelPrice = new ModelLastPrice();
     var storeDetails = new Array();
     var AccountDetails = new Array();
@@ -290,7 +291,7 @@ var SlsTrSalesManagerNew;
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
         btndiv_1.onclick = btndiv_1_onclick;
         btndiv_2.onclick = btndiv_2_onclick;
-        btnCustLastPrice.onclick = LastPrice_onclick;
+        //btnCustLastPrice.onclick = LastPrice_onclick;
         //----------------------------------------------------sales_New-------------------------------------------
         ddlTypeInv.onchange = ddlTypeInv_onchange;
         btnOperation.onclick = function () { OPerationSearch(0, false); };
@@ -316,6 +317,7 @@ var SlsTrSalesManagerNew;
             $('#Store').removeClass('display_none');
             $('#Operation').addClass('display_none');
             $('.modOperation').addClass('display_none');
+            $('#btnCustLastPrice').addClass('display_none');
         }
         if (SlsInvSrc == '2') {
             ddlTypeInv.value = '2';
@@ -448,6 +450,7 @@ var SlsTrSalesManagerNew;
             Model_Items.CatID = List.CatID;
             Model_Items.GlobalCost = List.GlobalCost;
             Model_Items.LocalCost = List.LocalCost;
+            Details_Inv_Items.push(Model_Items);
         }
         if (type == 2) {
             Model_Items.ItemCode = List.ItemCode;
@@ -462,6 +465,7 @@ var SlsTrSalesManagerNew;
             Model_Items.UnitPrice = List.Est_SalesPrice;
             Model_Items.VatNatID = List.VatNatID;
             Model_Items.VatPrc = List.VatPrc;
+            Details_Inv_Items.push(Model_Items);
         }
     }
     function OPerationSearch(cnt, flagfrom) {
@@ -2203,6 +2207,9 @@ var SlsTrSalesManagerNew;
             var txtQuantityValue = $("#txtQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
             var total = 0;
+            if (txtQuantityValue == 0) {
+                $("#txtQuantity" + cnt).val("1");
+            }
             var Onhand_Qty = Number($("#ddlItem" + cnt).attr('data-OnhandQty'));
             if (isNaN(Onhand_Qty)) {
                 DisplayMassage("برجاء اختيار الصنف ", "Please choose the item", MessageType.Error);
@@ -2273,10 +2280,10 @@ var SlsTrSalesManagerNew;
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
         });
-        $("#No_Row" + cnt).on('click', function () {
-            itemid_LastPrice = $('#ddlItem' + cnt).val();
-            GetLastPrice(itemid_LastPrice, $("#Item_Desc" + cnt + "").val());
-        });
+        //$("#No_Row" + cnt).on('click', function () {
+        //    itemid_LastPrice = $('#ddlItem' + cnt).val();
+        //    GetLastPrice(itemid_LastPrice, $("#Item_Desc" + cnt + "").val())
+        //});
         $('#btnTypeInv' + cnt).click(function (e) {
             ShowType_Inv(cnt);
             $('.Row_Type').addClass('display_none');
@@ -2392,14 +2399,16 @@ var SlsTrSalesManagerNew;
         $('#ddlItem' + cnt).attr('data-OnhandQty', 0);
         ComputeTotals();
     }
-    function totalRow(cnt, flagDiscountAmount) {
+    function ComputeVatNat(cnt) {
         var VatNatID = 0;
         var Type_inv = Number($('#ddlTypeInv' + cnt).val());
         //-----------------------------------------------------------------------New_Ver2------------------
+        debugger;
         if (Type_inv == 1) {
-            if ($('#txt_StatusFlag' + cnt).val() == 'i') {
-                var CatID_3 = Model_Items.CatID;
-                var Cat_Tax_3 = CategoryDetails.filter(function (s) { return s.CatID == CatID_3; });
+            var id_1 = Number($('#ddlItem' + cnt).val());
+            var Items_1 = Details_Inv_Items.filter(function (x) { return x.ItemID == id_1; })[0];
+            if (Items_1 != null) {
+                var Cat_Tax_3 = CategoryDetails.filter(function (s) { return s.CatID == Items_1.CatID; });
                 var VatNature = DetailsVatNature.filter(function (s) { return s.VatNatID == Cat_Tax_3[0].VatNatID; });
                 Tax_Rate = VatNature[0].VatPrc;
                 VatNatID = Cat_Tax_3[0].VatNatID;
@@ -2424,6 +2433,9 @@ var SlsTrSalesManagerNew;
         VatPrc = Tax_Rate;
         $("#txtTax_Rate" + cnt).attr('data-VatNatID', Tax_Type_Model.Nature);
         $('#txtTax_Rate' + cnt).val(Tax_Rate);
+    }
+    function totalRow(cnt, flagDiscountAmount) {
+        ComputeVatNat(cnt);
         //$("#txtUnitpriceWithVat" + cnt).val((Number($("#txtPrice" + cnt).val()) * (Tax_Rate + 100) / 100).RoundToNum(2))
         //$("#txtPrice" + cnt).val((Number($("#txtUnitpriceWithVat" + cnt).val()) * 100 / (Tax_Rate + 100)).RoundToSt(2))
         //-------------------------
@@ -2905,22 +2917,15 @@ var SlsTrSalesManagerNew;
             invoiceItemSingleModel = new I_Sls_TR_InvoiceItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
             //--------------------------------------------------------------**** VatNatID = null ****----------------------------------------------------
-            //if (StatusFlag != 'd' && StatusFlag != 'm') {
-            //    let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
-            //    if (isNaN(NatID) == true || NatID == 0) {
-            //        var itemID = Number($("#ddlItem" + i).val());
-            //        var NumberSelect = ItemFamilyDetails.filter(s => s.ItemID == itemID);
-            //        Tax_Rate = NumberSelect[0].VatPrc;
-            //        Tax_Type_Model = GetVat(NumberSelect[0].VatNatID, Tax_Rate, vatType);
-            //        Tax_Rate = Tax_Type_Model.Prc
-            //        VatPrc = Tax_Rate;
-            //        $("#txtTax_Rate" + i).attr('Data-VatNatID', Tax_Type_Model.Nature);
-            //        $("#txtTax_Rate" + i).val(VatPrc);
-            //        if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
-            //            StatusFlag = "u";
-            //        }
-            //    }
-            //}
+            if (StatusFlag != 'd' && StatusFlag != 'm') {
+                var NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
+                if (isNaN(NatID) == true || NatID == 0) {
+                    ComputeVatNat(i);
+                    if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
+                        StatusFlag = "u";
+                    }
+                }
+            }
             //------------------------------------------------------------------------------------------------------------
             invoiceItemSingleModel.Name_Item = $("#Item_Desc" + i + "").val();
             invoiceItemSingleModel.MinUnitPrice = Number($("#ddlItem" + i).attr('data-MinUnitPrice'));
