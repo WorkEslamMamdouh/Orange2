@@ -1158,3 +1158,9 @@ able.dataTable tbody th, table.dataTable tbody td {
     margin: 1% 81% 0% 0%;
     z-index: 99;
 }
+. {
+    border-radius: 13px;
+    font-weight: bold;
+    font-size: .9rem;
+    width:100%;
+}

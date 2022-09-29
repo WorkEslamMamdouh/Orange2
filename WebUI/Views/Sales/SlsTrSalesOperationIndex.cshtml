@@ -22,7 +22,7 @@
     }
 
     .Grid_Type {
-        background-color: #0c2640 ;
+        background-color: #0c2640;
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
@@ -46,7 +46,9 @@
             cursor: pointer;
         }
 </style>
-<input id="Flag_SlsInvSrc" type="hidden" value="1" class="form-control input-sm"> @*-----مبيعات تجزئه------*@
+
+<input id="Flag_SlsInvSrc" type="hidden" value="2" class="form-control input-sm">@*-----مبيعات عمليات------*@
+
 <div class="col-12  borderred">
     @* Old HTML *@
     <div class="modal fade" id="Popup_Passowrd" role="dialog">
@@ -116,7 +118,6 @@
                     <table id="table" data-toggle="table" data-pagination="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="false" data-click-to-select="true" data-toolbar="#toolbar" style="direction: rtl;">
                         <thead class="Heder">
                             <tr>
-
 
                                 <th class=" " style="text-align: right; width:10%;">  </th>
                                 <th class=" " style="text-align: right; width:21%;">  </th>
@@ -231,7 +232,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
                                 <label class="col-4 align-self-center p-md-0"> بائع  </label>
@@ -240,6 +240,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="col-12 col-md-4">
                             <div class="form-group row">
@@ -272,7 +273,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class=" modOperation col-12 col-md-4 display_none">
+                        <div class="modOperation col-12 col-md-4 display_none">
                             <div class="form-group row ">
                                 <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.process_opened</label>
                                 <div class="col-8 ">
@@ -282,10 +283,10 @@
                         </div>
                         <div class="modOperation col-12 col-md-4 display_none">
                             <div class="form-group row">
-                                <div class="col-4 ">
+                                <div class="col-4 "> 
                                 </div>
                                 <div class="col-8 ">
-
+                                  
                                 </div>
                             </div>
                         </div>
@@ -459,6 +460,8 @@
 
                             </div>
 
+
+
                             <div id="TypeInvMod" class="col-12 col-md-4 py-0">
                                 <div class="form-group row">
                                     <label id="LabTypeInv" class="col-4 align-self-center p-md-0"> نوع العمليه</label>
@@ -472,6 +475,7 @@
                                 </div>
                             </div>
 
+
                             <div id="Store" class="col-12 col-md-4 py-0  ">
                                 <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_Store</label>
@@ -484,7 +488,7 @@
                             <div id="Operation" class="col-12 col-md-4 py-0 display_none">
 
                                 <div class="form-group row">
-                                    <label class="col-4 align-self-center p-md-0">العمليات</label>
+                                    <label class="col-4 align-self-center p-md-0">العملية</label>
                                     <div class="col-8 ">
                                         <div class="search-content">
                                             <input type="text" class="form-control search-control" id="txt_Operation" name="Operation" disabled>
@@ -497,6 +501,7 @@
                                 </div>
 
                             </div>
+
 
 
                         </div>
@@ -538,7 +543,7 @@
 
                         <div class="col-12">
                             <div class="col-12 details-iconbar d-flex justify-content-start" id="icon-bar">
-                                <div class="icon-bar d-flex justify-content-between    btnCustLastPrice" id="btnCustLastPrice" >
+                                <div class="icon-bar d-flex justify-content-between   btnCustLastPrice" id="btnCustLastPrice" >
                                     <i class="fas fa-dollar-sign fs-4"></i>
 
 
@@ -855,8 +860,8 @@
 
 
 
-                                //let myLabels = document.querySelectorAll('.lbl-toggle');
-                                //Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); });
+                                        //let myLabels = document.querySelectorAll('.lbl-toggle');
+                                        //Array.from(myLabels).forEach(label => { label.addEventListener('keydown', e => { if (e.which === 32 || e.which === 13) { e.preventDefault(); label.click(); }; }); });
 
         </script>
     }

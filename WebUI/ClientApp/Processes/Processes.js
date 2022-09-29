@@ -2395,6 +2395,7 @@ var Processes;
                 OperationItemSingleModel.Remarks = $('#txtRemark_item' + i).val();
                 OperationItemSingleModel.Est_SalesPrice = $("#txtPrice" + i).val();
                 OperationItemSingleModel.Min_SalesPrice = $("#txtMinPrice" + i).val();
+                OperationItemSingleModel.TotalSales = $("#txtTotal" + i).val();
                 OperationItemSingleModel.SoldQty = $('#txtSoldQty' + i).val(); //
                 OperationItemSingleModel.ScrapQty = $("#txtScrapQty" + i).val();
                 OperationItemModel.push(OperationItemSingleModel);
@@ -2409,6 +2410,7 @@ var Processes;
                 OperationItemSingleModel.Remarks = $('#txtRemark_item' + i).val();
                 OperationItemSingleModel.Est_SalesPrice = $("#txtPrice" + i).val();
                 OperationItemSingleModel.Min_SalesPrice = $("#txtMinPrice" + i).val();
+                OperationItemSingleModel.TotalSales = $("#txtTotal" + i).val();
                 OperationItemSingleModel.SoldQty = $('#txtSoldQty' + i).val(); //
                 OperationItemSingleModel.ScrapQty = $("#txtScrapQty" + i).val();
                 OperationItemModel.push(OperationItemSingleModel);
@@ -2924,6 +2926,9 @@ var Processes;
                 DisplayMassage("يجب ادخال يبنات الحموله", "Payload data must be entered!", MessageType.Worning);
                 btnUpdate_2.focus();
                 Update_2_onclick();
+                document.body.scrollTop = 800;
+                document.documentElement.scrollTop = 800;
+                btnUpdate_2.focus();
             }
             else {
                 Processes_Ready();
@@ -2969,12 +2974,12 @@ var Processes;
                 btnUpdate_5.focus();
                 Update_5_onclick();
             }
-            else if ($('#lab_Close_CashOnhand').text() != '0') {
-                DisplayMassage(" يجب ان يكون النقدي لدي المندوب = صفر", "The delegate's cash must be = 0!", MessageType.Worning);
-                btnUpdate_5.focus();
-                Update_5_onclick();
-                Errorinput($("#lab_Close_CashOnhand"));
-            }
+            //else if ($('#lab_Close_CashOnhand').text() != '0') {
+            //    DisplayMassage(" يجب ان يكون النقدي لدي المندوب = صفر", "The delegate's cash must be = 0!", MessageType.Worning);
+            //    btnUpdate_5.focus();
+            //    Update_5_onclick();
+            //    Errorinput($("#lab_Close_CashOnhand"));
+            //}
             else {
                 debugger;
                 //$("#Processshutdown").removeAttr("disabled");

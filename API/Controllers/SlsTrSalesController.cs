@@ -263,18 +263,20 @@ namespace Inv.API.Controllers
 
        
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
+        public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode , int OperationId ,int SlsInvSrc ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
         { 
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = 1 and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = "+ SlsInvSrc + " and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
                 if (SalesPerson != 0 && SalesPerson != null)
                     condition = condition + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
                 if (SalesMan != 0 && SalesMan != null)
-                    condition = condition + " and SalesmanId =" + SalesMan;// and Status = " + Status
+                    condition = condition + " and SalesmanId =" + SalesMan;// and Status = " + Status 
+                if (OperationId != 0 && OperationId != null)
+                    condition = condition + " and OperationId =" + OperationId; 
                 if (Status == 2)
                     condition = condition + "";
                 else
@@ -491,17 +493,19 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllReturnSlsInvoiceStatistic(int CompCode, int BranchCode , string StartDate, string EndDate, int Status,int FreeReturn, int? returnType, int? CustId, string SalesMan, string UserCode, string Token)
+        public IHttpActionResult GetAllReturnSlsInvoiceStatistic(int CompCode, int BranchCode , int OperationId , int SlsInvSrc ,string StartDate, string EndDate, int Status,int FreeReturn, int? returnType, int? CustId, string SalesMan, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 //trtype=2
-                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and TrType = 1 and SlsInvSrc = 1 and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and TrType = 1 and SlsInvSrc = "+ SlsInvSrc + " and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + "'";
                 string condition = "";
                 if (CustId != 0 && CustId != null)
                     condition = condition + " and CustomerId =" + CustId;
                 if (SalesMan != "" && SalesMan != "null")
                     condition = condition + " and SalesmanId ='" + SalesMan + "'";
+                if (OperationId != 0 && OperationId != null)
+                    condition = condition + " and OperationId =" + OperationId;
 
                 if (returnType == 0) {
                     condition = condition + " and IsCash = 'false' ";

@@ -918,7 +918,7 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetOperItem(int operationID,int ItemID, string UserCode, string Token)
+        public IHttpActionResult GetOperItem(int operationID,int ItemID , string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
@@ -930,7 +930,7 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetOperItem(int operationID, string ItemCode, string UserCode, string Token)
+        public IHttpActionResult GetOperItem(int operationID, string ItemCode ,  string UserCode, string Token)
         {
             
                
@@ -1149,7 +1149,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string query = "EXEC IProc_UpdateOperationSummary " + OperationID + "  ";
+                string query = "EXEC IProc_UpdateOperationSummaryVer2 " + OperationID + "  ";
                 db.Database.ExecuteSqlCommand(query);
                 return Ok(new BaseResponse(true));
             }

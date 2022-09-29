@@ -227,10 +227,25 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/Sales/SlsTrReturnIndex.cshtml");
         }
 
+        public ActionResult SlsTrReturnNewIndex()
+        {
+            return View("~/Views/Sales/SlsTrReturnNewIndex.cshtml");
+        }
+
+        public ActionResult SlsTrReturnOperationIndex()
+        {
+            return View("~/Views/Sales/SlsTrReturnOperationIndex.cshtml");
+        }
+
 
         public ActionResult SlsTrSalesManagerNewIndex()
         {
             return View("~/Views/Sales/SlsTrSalesManagerNewIndex.cshtml");
+        }
+
+        public ActionResult SlsTrSalesOperationIndex()
+        {
+            return View("~/Views/Sales/SlsTrSalesOperationIndex.cshtml");
         }
 
         public ActionResult SlsTrSalesManagerIndex()

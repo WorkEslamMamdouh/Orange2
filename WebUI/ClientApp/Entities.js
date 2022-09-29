@@ -2722,8 +2722,10 @@ var IQ_GetSlsInvoiceItemVer2 = /** @class */ (function (_super) {
         _this.OperationId = 0;
         _this.op_TrNo = 0;
         _this.op_status = 0;
-        _this.Store_code = '';
+        _this.STORE_CODE = '';
         _this.Store_DescA = '';
+        _this.Onhand_Qty = 0;
+        _this.MinSalesPrice = 0;
         return _this;
     }
     return IQ_GetSlsInvoiceItemVer2;
@@ -2741,6 +2743,7 @@ var I_TR_OperationItems = /** @class */ (function (_super) {
         _this.Est_CostPrice = 0;
         _this.Est_SalesPrice = 0;
         _this.Min_SalesPrice = 0;
+        _this.TotalSales = 0;
         _this.OnhandQty = 0;
         _this.Remarks = "";
         _this.StatusFlag = "";
