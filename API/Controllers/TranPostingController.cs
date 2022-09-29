@@ -123,7 +123,7 @@ namespace Inv.API.Controllers
             {
                 int Trno = 0;
                 ObjectParameter objParameterOk = new ObjectParameter("vTrno", Trno);
-                var RetValue = db.GLnk_GenerateVoucher(comp, branch, UserCode, Desc, objParameterOk);
+                var RetValue = db.GLnk_GenerateVoucherVer2(comp, branch, UserCode, Desc, "",objParameterOk);
                 if (Convert.ToInt32(objParameterOk.Value) != 0)
                     Trno = Convert.ToInt32(objParameterOk.Value);
                 else
