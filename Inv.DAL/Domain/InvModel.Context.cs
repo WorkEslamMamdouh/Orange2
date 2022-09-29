@@ -417,27 +417,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<AFunc_VoucherTotals_Result>("[InvEntities].[AFunc_VoucherTotals](@comp, @authorized, @newvoucher, @cc_code, @FromDate, @Todate)", compParameter, authorizedParameter, newvoucherParameter, cc_codeParameter, fromDateParameter, todateParameter);
         }
     
-        public virtual int GLnk_GenerateVoucher(Nullable<int> comp, Nullable<int> bra, string user, string vchrDescr, ObjectParameter vTrno)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("Bra", bra) :
-                new ObjectParameter("Bra", typeof(int));
-    
-            var userParameter = user != null ?
-                new ObjectParameter("User", user) :
-                new ObjectParameter("User", typeof(string));
-    
-            var vchrDescrParameter = vchrDescr != null ?
-                new ObjectParameter("VchrDescr", vchrDescr) :
-                new ObjectParameter("VchrDescr", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GLnk_GenerateVoucher", compParameter, braParameter, userParameter, vchrDescrParameter, vTrno);
-        }
-    
         public virtual int GProc_CreateBranch(Nullable<int> comp, Nullable<int> bra)
         {
             var compParameter = comp.HasValue ?
@@ -5492,6 +5471,31 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("TRId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_SlsInvoiceVer2_Result>("IProc_Prnt_SlsInvoiceVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
+        }
+    
+        public virtual int GLnk_GenerateVoucherVer2(Nullable<int> comp, Nullable<int> bra, string user, string vchrDescr, string vchrDate, ObjectParameter vTrno)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("Bra", bra) :
+                new ObjectParameter("Bra", typeof(int));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("User", user) :
+                new ObjectParameter("User", typeof(string));
+    
+            var vchrDescrParameter = vchrDescr != null ?
+                new ObjectParameter("VchrDescr", vchrDescr) :
+                new ObjectParameter("VchrDescr", typeof(string));
+    
+            var vchrDateParameter = vchrDate != null ?
+                new ObjectParameter("VchrDate", vchrDate) :
+                new ObjectParameter("VchrDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GLnk_GenerateVoucherVer2", compParameter, braParameter, userParameter, vchrDescrParameter, vchrDateParameter, vTrno);
         }
     }
 }

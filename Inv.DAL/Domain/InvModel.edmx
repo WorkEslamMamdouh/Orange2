@@ -6140,11 +6140,12 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
         <Function Name="GLnk_GenerateTransVchr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="user" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="GLnk_GenerateVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="GLnk_GenerateVoucherVer2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
           <Parameter Name="Bra" Type="int" Mode="In" />
           <Parameter Name="User" Type="nvarchar" Mode="In" />
           <Parameter Name="VchrDescr" Type="nvarchar" Mode="In" />
+          <Parameter Name="VchrDate" Type="nvarchar" Mode="In" />
           <Parameter Name="VTrno" Type="int" Mode="InOut" />
         </Function>
         <Function Name="GProc_CreateBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -10134,13 +10135,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="G_LnkTrans_TempVchr" EntityType="InvModel.G_LnkTrans_TempVchr" />
           <EntitySet Name="G_LnkTransVariable" EntityType="InvModel.G_LnkTransVariable" />
           <EntitySet Name="G_LnkTrans_Temp" EntityType="InvModel.G_LnkTrans_Temp" />
-          <FunctionImport Name="GLnk_GenerateVoucher">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="Bra" Mode="In" Type="Int32" />
-            <Parameter Name="User" Mode="In" Type="String" />
-            <Parameter Name="VchrDescr" Mode="In" Type="String" />
-            <Parameter Name="VTrno" Mode="InOut" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="I_Stk_TR_Transfer" EntityType="InvModel.I_Stk_TR_Transfer" />
           <EntitySet Name="I_Stk_TR_TransferDetails" EntityType="InvModel.I_Stk_TR_TransferDetails" />
           <EntitySet Name="IQ_GetTransfer" EntityType="InvModel.IQ_GetTransfer" />
@@ -11586,6 +11580,14 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="IQ_GetSlsInvoiceItemVer2" EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" />
+          <FunctionImport Name="GLnk_GenerateVoucherVer2">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="Bra" Mode="In" Type="Int32" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="VchrDescr" Mode="In" Type="String" />
+            <Parameter Name="VchrDate" Mode="In" Type="String" />
+            <Parameter Name="VTrno" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -24626,7 +24628,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GLnk_GenerateVoucher" FunctionName="InvModel.Store.GLnk_GenerateVoucher" />
           <EntitySetMapping Name="I_Stk_TR_Transfer">
             <EntityTypeMapping TypeName="InvModel.I_Stk_TR_Transfer">
               <MappingFragment StoreEntitySet="I_Stk_TR_Transfer">
@@ -32417,6 +32418,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GLnk_GenerateVoucherVer2" FunctionName="InvModel.Store.GLnk_GenerateVoucherVer2" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
