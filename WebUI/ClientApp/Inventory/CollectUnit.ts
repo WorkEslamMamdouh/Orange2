@@ -1373,6 +1373,5 @@ namespace CollectUnit {
         $("#div_1").addClass("display_none");
         $("#div_2").removeClass("display_none");
 
-
     }
 } 
