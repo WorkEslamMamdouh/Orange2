@@ -93,6 +93,14 @@ namespace TranPosting {
         //$("#btndiv_1").removeClass("Actiev");
         //$("#btndiv_2").removeClass("Actiev");
 
+        //$("#btndiv_3").addClass("btn-active");
+        //$("#btndiv_1").removeClass("btn-active");
+        //$("#btndiv_2").removeClass("btn-active");
+
+        //$("#btndiv_33").removeClass("btn-main");
+        //$("#btndiv_11").addClass("btn-main");
+        //$("#btndiv_22").addClass("btn-main");
+
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
         $("#div_2").addClass("display_none");
@@ -215,6 +223,14 @@ namespace TranPosting {
                         //$("#btndiv_3").removeClass("Actiev");
                         //$("#btndiv_1").addClass("Actiev");
                         //$("#btndiv_2").removeClass("Actiev");
+
+                        //$("#btndiv_3").addClass("btn-active");
+                        //$("#btndiv_1").removeClass("btn-active");
+                        //$("#btndiv_2").removeClass("btn-active");
+
+                        //$("#btndiv_33").removeClass("btn-main");
+                        //$("#btndiv_11").addClass("btn-main");
+                        //$("#btndiv_22").addClass("btn-main");
 
                         $("#div_3").addClass("display_none");
                         $("#div_1").removeClass("display_none");
@@ -390,12 +406,13 @@ namespace TranPosting {
         }
 
         var Desc: string = txtDesc.value;
+        var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
         let lstTrans = JSON.stringify(LnkTransDetails);
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GenerateVoucher"),
             data: {
-                comp: compcode, branch: branch, Desc: Desc, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -411,8 +428,16 @@ namespace TranPosting {
                             //$("#btndiv_1").addClass("Actiev");
                             //$("#btndiv_2").removeClass("Actiev");
 
-                            $("#div_3").addClass("display_none");
+                            //$("#btndiv_1").addClass("btn-active");
+                            //$("#btndiv_2").removeClass("btn-active");
+                            //$("#btndiv_3").removeClass("btn-active");
+
+                            //$("#btndiv_11").removeClass("btn-main");
+                            //$("#btndiv_22").addClass("btn-main");
+                            //$("#btndiv_33").addClass("btn-main");
+
                             $("#div_1").removeClass("display_none");
+                            $("#div_3").addClass("display_none");
                             $("#div_2").addClass("display_none");
                         }, 5000);
                         RefreshTransactions();

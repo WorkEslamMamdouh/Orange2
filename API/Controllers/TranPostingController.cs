@@ -117,13 +117,13 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GenerateVoucher(int comp, int branch, string Desc, string UserCode, string Token)
+        public IHttpActionResult GenerateVoucher(int comp, int branch, string Desc,string VoucherDate, string UserCode, string Token)
         {
             if (ModelState.IsValid)
             {
                 int Trno = 0;
                 ObjectParameter objParameterOk = new ObjectParameter("vTrno", Trno);
-                var RetValue = db.GLnk_GenerateVoucherVer2(comp, branch, UserCode, Desc, "",objParameterOk);
+                var RetValue = db.GLnk_GenerateVoucherVer2(comp, branch, UserCode, Desc, VoucherDate,objParameterOk);
                 if (Convert.ToInt32(objParameterOk.Value) != 0)
                     Trno = Convert.ToInt32(objParameterOk.Value);
                 else
