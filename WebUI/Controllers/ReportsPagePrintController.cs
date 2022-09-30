@@ -954,7 +954,7 @@ namespace Inv.WebUI.Controllers
             int slip = RepPar.slip;
             if (slip == 1)
             {
-                Rep = OpenReport("Slip_Prnt_SlsInvoiceSimple");
+                Rep = OpenReport("Slip_Prnt_SlsInvoiceSimpleVer2");
             }
             else
             {
@@ -962,11 +962,11 @@ namespace Inv.WebUI.Controllers
                 {
                     if (InvType == 1)
                     {
-                        Rep = OpenReport("Prnt_SlsQuotationStd");
+                        Rep = OpenReport("Prnt_SlsQuotationStdVer2");
                     }
                     else
                     {
-                        Rep = OpenReport("Prnt_SlsQuotationeSimple");
+                        Rep = OpenReport("Prnt_SlsQuotationeSimpleVer2");
                     }
                 }
                 else  // invoice 
@@ -976,11 +976,11 @@ namespace Inv.WebUI.Controllers
 
                     if (InvType == 1)   // std invoice 
                     {
-                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceStd");
+                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceStdVer2");
                     }
                     else    // simple invoice 
                     {
-                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceSimple");
+                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceSimpleVer2");
                     }
 
 
@@ -1051,18 +1051,18 @@ namespace Inv.WebUI.Controllers
 
             if (slip == 1)
             {
-                Rep = OpenReport("Slip_OPerationInvoiceSimple");
+                Rep = OpenReport("Slip_OPerationInvoiceSimpleVer2");
             }
             else
             {
 
                 if (InvType == 1)   // std invoice 
                 {
-                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceStd");
+                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceStdVer2");
                 }
                 else    // simple invoice 
                 {
-                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceSimple");
+                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceSimpleVer2");
                 }
             }
 
@@ -1132,11 +1132,11 @@ namespace Inv.WebUI.Controllers
 
             if (InvType == 1)  // std invoice  return 
             {
-                Rep = OpenReport("Rpt_Prnt_SlsInvReturnStd");
+                Rep = OpenReport("Rpt_Prnt_SlsInvReturnStdVer2");
             }
             else // simple invoice return 
             {
-                Rep = OpenReport("Rpt_Prnt_SlsInvReturnSimple");
+                Rep = OpenReport("Rpt_Prnt_SlsInvReturnSimpleVer2");
             }
 
 
@@ -1319,11 +1319,11 @@ namespace Inv.WebUI.Controllers
             int Repdesign = RepPar.Repdesign;
             if (slip == 0)
             {
-                Rep = OpenReport("Rpt_Prnt_CashInvoice");
+                Rep = OpenReport("Rpt_Prnt_CashInvoiceVer");
             }
             else
             {
-                Rep = OpenReport("Slip_CashInvoice");
+                Rep = OpenReport("Slip_CashInvoiceVer");
             }
 
 
