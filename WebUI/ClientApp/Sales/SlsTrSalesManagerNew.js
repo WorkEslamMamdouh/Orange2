@@ -3622,7 +3622,12 @@ var SlsTrSalesManagerNew;
         rp.TRId = GlobalinvoiceID;
         rp.slip = 0;
         rp.stat = InvoiceModel.InvoiceTransCode;
-        rp.Name_function = "rptInvoiceNote";
+        if (SlsInvSrc == '1') {
+            rp.Name_function = "rptInvoiceNote";
+        }
+        else {
+            rp.Name_function = "Prnt_OperationInvoice";
+        }
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "blank");

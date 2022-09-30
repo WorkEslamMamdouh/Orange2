@@ -3186,7 +3186,7 @@ namespace SlsTrSalesManagerNew {
         if (Type_inv == 1) {
 
             let id = Number($('#ddlItem' + cnt).val())
-            let Items = Details_Inv_Items.filter(x => x.ItemID ==id)[0];
+            let Items = Details_Inv_Items.filter(x => x.ItemID == id)[0];
             if (Items != null) {
                 let Cat_Tax = CategoryDetails.filter(s => s.CatID == Items.CatID);
                 let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
@@ -3200,7 +3200,7 @@ namespace SlsTrSalesManagerNew {
 
         }
         if (Type_inv == 2) {
-              
+
             if ($('#txt_StatusFlag' + cnt).val() == 'i') {
                 Tax_Rate = Model_Items.VatPrc;
                 VatNatID = Model_Items.VatNatID;
@@ -3839,16 +3839,16 @@ namespace SlsTrSalesManagerNew {
 
             //--------------------------------------------------------------**** VatNatID = null ****----------------------------------------------------
 
-                if (StatusFlag != 'd' && StatusFlag != 'm') {
+            if (StatusFlag != 'd' && StatusFlag != 'm') {
 
-                    let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
-                    if (isNaN(NatID) == true || NatID == 0) {
-                        ComputeVatNat(i);
-                        if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
-                            StatusFlag = "u";
-                        }
+                let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
+                if (isNaN(NatID) == true || NatID == 0) {
+                    ComputeVatNat(i);
+                    if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
+                        StatusFlag = "u";
                     }
                 }
+            }
 
             //------------------------------------------------------------------------------------------------------------
 
@@ -4713,7 +4713,16 @@ namespace SlsTrSalesManagerNew {
         rp.slip = 0;
         rp.stat = InvoiceModel.InvoiceTransCode;
 
-        rp.Name_function = "rptInvoiceNote";
+        if (SlsInvSrc == '1') {
+
+            rp.Name_function = "rptInvoiceNote";
+        }
+        else {
+
+            rp.Name_function = "Prnt_OperationInvoice";
+        }
+
+
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
