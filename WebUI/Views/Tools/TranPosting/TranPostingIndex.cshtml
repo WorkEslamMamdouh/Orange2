@@ -23,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-12 col-md-3">
                         <div class="form-group row">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
@@ -57,18 +57,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-3">
-                       <div class="d-flex">
-                            <button id="btnLoad" type="button"  class="btn  btn-main h-100 me-3"> 
-                                 @SystemResource.Download_move   
+                    <div class="col-12 col-md-9 offset-md-1 mt-3">
+                        <div class="d-flex">
+                            <button id="btnLoad" type="button" class="btn  btn-main h-100 me-3">
+                                @SystemResource.Download_move
                             </button>
                             <button id="btnShowVouchers" disabled="disabled" type="button" class=" btn btn-main h-100 me-3">
-                                @SystemResource.View_restrictions
+                                توليد وعرض القيد
                             </button>
-                            <button id="btnCreateVoucher" type="button" class="btn btn-main h-100 me-3">
-                                @SystemResource.create_restrictions
+                            <button id="btnCreateVoucher" type="button" class="btn btn-green align-self-end m-auto  h-100  me-3">
+                                انشاء القيد فى الحسابات
                             </button>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,137 +77,152 @@
 
     <!-- Section Container -->
     <div class="col-12">
-        <div class="card bg-light-blue">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 mt-3">
-                        <div class="d-flex">
-                            <button id="btndiv_3" type="button" class="btn  btn-main h-100 ">
-                                @SystemResource.App_TrType
-                            </button>
-                            <button id="btndiv_1" type="button" class=" btn btn-main h-100 ">
-                                @SystemResource.Movments
-                            </button>
-                            <button id="btndiv_2" type="button" class="btn btn-main h-100 ">
-                                @SystemResource.View_restrictions
-                            </button>
-                        </div>
+        <div class="row">
+            @* Switch Button Div *@
+            <div class="col-lg-12 mb-n3">
+                <div class=" d-flex justify-content-start">
+                    <div class="switch-div" id="btndiv_3">
+                        <a class="btn btn-main ms-3" id="btndiv_33" href="#"> @SystemResource.App_TrType </a>
                     </div>
-                    <div id="div_1" class="col-12 display_none">
-                        <label id="lepfarest" class="text-blue mt-3">
-                            <i id="spanlepRentdata_2" class="fas fa-angle-double-left" aria-hidden="true"></i>
-                            @SystemResource.Movments
-                        </label>
-                        <div class="row">
-                            <div class="col-12 mt-3">
-                                <div class="d-flex">
-                                    <button id="btnSelectAll" type="button" class="btn  btn-main h-100 ">
-                                        @SystemResource.App_All
-                                    </button>
-                                    <button id="btnReverseSelection" type="button" class=" btn btn-main h-100 ">
-                                        @SystemResource.Reverse_selection
-                                    </button>
-                                    <button id="btnUnSelectAll" type="button" class="btn btn-main h-100 ">
-                                        @SystemResource.Not_choosing_everyone
-                                    </button>
-                                </div>
-                            </div>
-                            <div id="TransactionsGrid" class="col-12"> </div>
-                        </div>
+                    <div class="switch-div" id="btndiv_1">
+                        <a class="btn btn-main" id="btndiv_11" href="#"> @SystemResource.Movments </a>
+                    </div>
+                    <div class="switch-div" id="btndiv_2">
+                        <a class="btn btn-main" id="btndiv_22" href="#"> @SystemResource.View_restrictions </a>
+                    </div>
+                </div>
+            </div>
 
-                    </div>
-                    <div id="div_2" class="col-12 display_none">
-                        <label id="lepfarest" class="text-blue mt-3">
-                            <i id="spanlepfarest" class="fas fa-angle-double-left" aria-hidden="true"></i>
-                            @SystemResource.View_restrictions
-                        </label>
-                        <div class="row">
-                            <div class="col-12 col-md-8">
-                                <div class="form-group row">
-                                    <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_Registration_Number</label>
-                                    <div class="col-9 col-md-10">
-                                        <label id="lblVoucherNum" class="">    </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-8">
-                                <div class="form-group row">
-                                    <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_desc</label>
-                                    <div class="col-9 col-md-10">
-                                        <textarea id="txtDesc" type="text" class="form-control"> </textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="VoucherDetailGrid" class="col-12"> </div>
-                            
-                            <div class="col-12">
-                                <div class="d-flex">
-                                    <label class="text-blue"> @SystemResource.App_total   </label>
-                                    <input id="txtDebit" disabled type="text" class="form-control " />
-                                    <input id="txtCedit" disabled type="text" class="form-control " />
-                                    <label id="" class="text-blue"> @SystemResource.Itm_Diff   </label>
-                                    <input id="txtDiff" disabled type="text" class="form-control " />
-                                </div>
+            <div id="div_1" class="col-12 display_none">
+                <div class="card bg-light-blue px-4 mb-4">
+                    <div class="row py-3">
+                        <div class="col-12 mt-3">
+                            <div class="d-flex justify-content-center">
+                                <button id="btnSelectAll" type="button" class="btn  btn-gray h-100 me-3">
+                                    اختيار الجميع
+                                </button>
+                                <button id="btnReverseSelection" type="button" class=" btn btn-gray h-100 me-3 ">
+                                    @SystemResource.Reverse_selection
+                                </button>
+                                <button id="btnUnSelectAll" type="button" class="btn btn-gray h-100 me-3">
+                                    @SystemResource.Not_choosing_everyone
+                                </button>
                             </div>
                         </div>
+                        <div id="TransactionsGrid" class="col-12"> </div>
                     </div>
-                    
-                    <div id="div_3" class="col-12 display_none">
-                        <label id="lepfarest" class="text-blue mt-3">
-                            <i id="spanlepfarest" class="fas fa-angle-double-left" aria-hidden="true"></i>
-                            @SystemResource.Movments
-                        </label>
-                        <table id="SubSystemGrid"></table>
-                    </div>
-
-
 
                 </div>
             </div>
+            <div id="div_2" class="col-12 display_none">
+                <div class="card bg-light-blue px-4 mb-4">
+                    <div class="row py-3">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-3 col-md-4 align-self-center p-md-0">تاريخ القيد</label>
+                                        <div class="col-9 col-md-8">
+                                            <input id="txtVoucherDate" name="" type="date" class="form-control">
+                                            @*<label id="lblVoucherNum" class="">    </label>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-8">
+                                    <div class="form-group row">
+                                        <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_desc</label>
+                                        <div class="col-9 col-md-10">
+                                            <textarea id="txtDesc" type="text" class="form-control" maxlength="200"> </textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        
+                        <div id="VoucherDetailGrid" class="col-12"> </div>
+
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <label class="text-blue"> @SystemResource.App_total   </label>
+                                <input id="txtDebit" disabled type="text" class="form-control " />
+                                <input id="txtCedit" disabled type="text" class="form-control " />
+                                <label id="" class="text-blue"> @SystemResource.Itm_Diff   </label>
+                                <input id="txtDiff" disabled type="text" class="form-control " />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="div_3" class="col-12 display_none">
+                <div class="card bg-light-blue px-4 mb-4">
+                    <div class="py-3">
+                        <table id="SubSystemGrid"></table>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 
 
 
 
-    @section Script{
-        <script src="~/ClientApp/CustomEntities.js"></script>
-        <script src="~/ClientApp/Tools/TranPosting/TranPosting.js"></script>
-        <script>
-            $(document).ready(function () {
+@section Script{
+    <script src="~/ClientApp/CustomEntities.js"></script>
+    <script src="~/ClientApp/Tools/TranPosting/TranPosting.js"></script>
+    <script>
+        $(document).ready(function () {
 
 
 
-                $('#btndiv_1').on('click', function () {
-                    //$("#btndiv_1").addClass("Actiev");
-                    //$("#btndiv_2").removeClass("Actiev");
-                    //$("#btndiv_3").removeClass("Actiev");
+            $('#btndiv_1').on('click', function () {
+                $("#btndiv_1").addClass("btn-active");
+                $("#btndiv_2").removeClass("btn-active");
+                $("#btndiv_3").removeClass("btn-active");
 
-                    $("#div_1").removeClass("display_none");
-                    $("#div_2").addClass("display_none");
-                    $("#div_3").addClass("display_none");
-                });
+                $("#btndiv_11").removeClass("btn-main");
+                $("#btndiv_22").addClass("btn-main");
+                $("#btndiv_33").addClass("btn-main");
 
-                $('#btndiv_2').on('click', function () {
-                    //$("#btndiv_1").removeClass("Actiev");
-                    //$("#btndiv_3").removeClass("Actiev");
-                    //$("#btndiv_2").addClass("Actiev");
-
-                    $("#div_1").addClass("display_none");
-                    $("#div_3").addClass("display_none");
-                    $("#div_2").removeClass("display_none");
-                });
-                $('#btndiv_3').on('click', function () {
-                    //$("#btndiv_1").removeClass("Actiev");
-                    //$("#btndiv_2").removeClass("Actiev");
-                    //$("#btndiv_3").addClass("Actiev");
-
-                    $("#div_3").removeClass("display_none");
-                    $("#div_1").addClass("display_none");
-                    $("#div_2").addClass("display_none");
-                });
-
+                $("#div_1").removeClass("display_none");
+                $("#div_2").addClass("display_none");
+                $("#div_3").addClass("display_none");
             });
-        </script>
-    }
+
+            $('#btndiv_2').on('click', function () {
+                $("#btndiv_2").addClass("btn-active");
+                $("#btndiv_1").removeClass("btn-active");
+                $("#btndiv_3").removeClass("btn-active");
+
+                $("#btndiv_22").removeClass("btn-main");
+                $("#btndiv_11").addClass("btn-main");
+                $("#btndiv_33").addClass("btn-main");
+
+                $("#div_1").addClass("display_none");
+                $("#div_3").addClass("display_none");
+                $("#div_2").removeClass("display_none");
+            });
+            $('#btndiv_3').on('click', function () {
+                $("#btndiv_3").addClass("btn-active");
+                $("#btndiv_1").removeClass("btn-active");
+                $("#btndiv_2").removeClass("btn-active");
+
+                $("#btndiv_33").removeClass("btn-main");
+                $("#btndiv_11").addClass("btn-main");
+                $("#btndiv_22").addClass("btn-main");
+
+                $("#div_3").removeClass("display_none");
+                $("#div_1").addClass("display_none");
+                $("#div_2").addClass("display_none");
+            });
+
+        });
+    </script>
+}

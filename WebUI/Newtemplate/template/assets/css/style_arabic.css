@@ -13046,15 +13046,23 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 .switch-div .btn-main {
     line-height: 1.5rem;
 }
-    .btn-gray {
+.btn-gray {
     color: var(--bs-light);
     background-color: var(--bs-gray);
     border-color: var(--bs-gray);
+    padding: .5rem .7rem;
+    border-radius: 10px;
+    border: 3px solid var(--bs-gray);
+    transition: all .5s ease-in-out;
 }
 .btn-green {
     color: var(--bs-light);
     background-color: green;
     border-color: green;
+    padding: .5rem .7rem;
+    border-radius: 10px;
+    border: 3px solid green;
+    transition: all .5s ease-in-out;
 }
 .btn-dark-green {
     color: var(--bs-light);
@@ -30370,7 +30378,10 @@ input[class=checkbox]:checked:before {
     border: 3px solid var(--main-blue);
     padding: 1rem;
     border-radius: 10px;
-    font-weight:bolder;
+    font-weight: bolder;
+    line-height: 1.5rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
 }
     .btn-active a:hover {
         color: var(--main-blue);

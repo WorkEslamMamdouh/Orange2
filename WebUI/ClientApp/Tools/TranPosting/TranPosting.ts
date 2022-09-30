@@ -9,8 +9,6 @@ namespace TranPosting {
     var branch: Number;
     var startDate: string;
     var EndDate: string;
-
-
     var Selecteditem = new GQ_GetUsers;
 
     //GridView
@@ -30,9 +28,10 @@ namespace TranPosting {
     var txtCedit: HTMLInputElement;
     var txtDesc: HTMLInputElement;
     var txtDiff: HTMLInputElement;
+    var txtVoucherDate: HTMLInputElement;
 
     //labels
-    var lblVoucherNum: HTMLLabelElement;
+ //   var lblVoucherNum: HTMLLabelElement;
 
     //buttons
     var btnLoad: HTMLButtonElement;
@@ -57,8 +56,6 @@ namespace TranPosting {
     var cerditTot: number = 0;
     var diffTot: number = 0;
     var lang: string;
-
-
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
@@ -76,6 +73,7 @@ namespace TranPosting {
         //Set Secial Values While Load
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        txtVoucherDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
 
 
@@ -91,9 +89,17 @@ namespace TranPosting {
         InitializeTransactionsGrid();
         InitializeVoucherDetailGrid();
 
-        $("#btndiv_3").addClass("Actiev");
-        $("#btndiv_1").removeClass("Actiev");
-        $("#btndiv_2").removeClass("Actiev");
+        //$("#btndiv_3").addClass("Actiev");
+        //$("#btndiv_1").removeClass("Actiev");
+        //$("#btndiv_2").removeClass("Actiev");
+
+        //$("#btndiv_3").addClass("btn-active");
+        //$("#btndiv_1").removeClass("btn-active");
+        //$("#btndiv_2").removeClass("btn-active");
+
+        //$("#btndiv_33").removeClass("btn-main");
+        //$("#btndiv_11").addClass("btn-main");
+        //$("#btndiv_22").addClass("btn-main");
 
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
@@ -114,9 +120,10 @@ namespace TranPosting {
         txtCedit = document.getElementById("txtCedit") as HTMLInputElement;
         txtDesc = document.getElementById("txtDesc") as HTMLInputElement;
         txtDiff = document.getElementById("txtDiff") as HTMLInputElement;
+        txtVoucherDate = document.getElementById("txtVoucherDate") as HTMLInputElement;
 
         //labels
-        lblVoucherNum = document.getElementById("lblVoucherNum") as HTMLLabelElement;
+     //   lblVoucherNum = document.getElementById("lblVoucherNum") as HTMLLabelElement;
 
         //buttons
         btnLoad = document.getElementById("btnLoad") as HTMLButtonElement;
@@ -134,6 +141,8 @@ namespace TranPosting {
         btnSelectAll.onclick = btnSelectAll_onclick;
         btnReverseSelection.onclick = btnReverseSelection_onclick;
         btnUnSelectAll.onclick = btnUnSelectAll_onclick;
+        txtToDate.onchange = txtToDate_onchange;
+        txtVoucherDate.onchange = txtVoucherDate_onchange;
     }
 
     //------------------------------------------------------ ButtonsRegion ----------------------------------
@@ -211,9 +220,17 @@ namespace TranPosting {
                         TransactionsGrid.DataSource = LnkTransDetails;
                         TransactionsGrid.Bind();
 
-                        $("#btndiv_3").removeClass("Actiev");
-                        $("#btndiv_1").addClass("Actiev");
-                        $("#btndiv_2").removeClass("Actiev");
+                        //$("#btndiv_3").removeClass("Actiev");
+                        //$("#btndiv_1").addClass("Actiev");
+                        //$("#btndiv_2").removeClass("Actiev");
+
+                        //$("#btndiv_3").addClass("btn-active");
+                        //$("#btndiv_1").removeClass("btn-active");
+                        //$("#btndiv_2").removeClass("btn-active");
+
+                        //$("#btndiv_33").removeClass("btn-main");
+                        //$("#btndiv_11").addClass("btn-main");
+                        //$("#btndiv_22").addClass("btn-main");
 
                         $("#div_3").addClass("display_none");
                         $("#div_1").removeClass("display_none");
@@ -280,9 +297,9 @@ namespace TranPosting {
                         VoucherDetailGrid.Bind();
                         RefreshTransactions();
 
-                        $("#btndiv_3").removeClass("Actiev");
-                        $("#btndiv_1").removeClass("Actiev");
-                        $("#btndiv_2").addClass("Actiev");
+                        //$("#btndiv_3").removeClass("Actiev");
+                        //$("#btndiv_1").removeClass("Actiev");
+                        //$("#btndiv_2").addClass("Actiev");
 
                         $("#div_3").addClass("display_none");
                         $("#div_1").addClass("display_none");
@@ -389,29 +406,38 @@ namespace TranPosting {
         }
 
         var Desc: string = txtDesc.value;
+        var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
         let lstTrans = JSON.stringify(LnkTransDetails);
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GenerateVoucher"),
             data: {
-                comp: compcode, branch: branch, Desc: Desc, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     if (result.Response != -1) {
-                        lblVoucherNum.innerText = result.Response;
+                      //  lblVoucherNum.innerText = result.Response;
 
                         DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
                         setTimeout(() => {
                             Clear();
 
-                            $("#btndiv_3").removeClass("Actiev");
-                            $("#btndiv_1").addClass("Actiev");
-                            $("#btndiv_2").removeClass("Actiev");
+                            //$("#btndiv_3").removeClass("Actiev");
+                            //$("#btndiv_1").addClass("Actiev");
+                            //$("#btndiv_2").removeClass("Actiev");
 
-                            $("#div_3").addClass("display_none");
+                            //$("#btndiv_1").addClass("btn-active");
+                            //$("#btndiv_2").removeClass("btn-active");
+                            //$("#btndiv_3").removeClass("btn-active");
+
+                            //$("#btndiv_11").removeClass("btn-main");
+                            //$("#btndiv_22").addClass("btn-main");
+                            //$("#btndiv_33").addClass("btn-main");
+
                             $("#div_1").removeClass("display_none");
+                            $("#div_3").addClass("display_none");
                             $("#div_2").addClass("display_none");
                         }, 5000);
                         RefreshTransactions();
@@ -620,7 +646,7 @@ namespace TranPosting {
         });
     }
 
-    //------------------------------------------------------ Date&& Clear Region ----------------------------------
+    //------------------------------------------------------ Date && Clear Region ----------------------------------
     function GetDate() {
         var today: Date = new Date();
         var dd: string = today.getDate().toString();
@@ -637,7 +663,7 @@ namespace TranPosting {
         return ReturnedDate;
     }
     function Clear() {
-        lblVoucherNum.innerText = "";
+        //lblVoucherNum.innerText = "";
         txtDesc.value = "";
         txtCedit.value = "";
         txtDebit.value = "";
@@ -647,5 +673,16 @@ namespace TranPosting {
         VoucherDetailGrid.DataSource = null;
         RefreshTransactions();
     }
+    function txtToDate_onchange() {
+        txtVoucherDate.value = txtToDate.value;
+    }
+    function txtVoucherDate_onchange() {
+        if (txtVoucherDate.value > txtToDate.value || txtVoucherDate.value < txtFromDate.value) {
+            DisplayMassage("يجب ادخال تاريخ القيد بين تاريخين الادخال", "you must Enter the date between 'From Date' & 'To Date'", MessageType.Error);
+            txtVoucherDate.value = txtToDate.value;
+        }
+
+    }
+
 }
 
