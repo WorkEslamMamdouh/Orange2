@@ -22,6 +22,9 @@ var ItemsalesSum;
     var reptp1;
     var InvTp1;
     var InvTp2;
+    var InvTp11;
+    var InvTp22;
+    var InvTp33;
     var chk_Authorized;
     var reptp2;
     var btnReset;
@@ -54,6 +57,7 @@ var ItemsalesSum;
         InitalizeEvents();
         reptp1.checked = true;
         InvTp1.checked = true;
+        InvTp11.checked = true;
         reptype2.checked = true;
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
@@ -78,6 +82,9 @@ var ItemsalesSum;
         reptp1 = document.getElementById("reptp1");
         reptp2 = document.getElementById("reptp2");
         InvTp1 = document.getElementById("InvTp1");
+        InvTp11 = document.getElementById("InvTp11");
+        InvTp22 = document.getElementById("InvTp22");
+        InvTp33 = document.getElementById("InvTp33");
         InvTp2 = document.getElementById("InvTp2");
         reptype2 = document.getElementById("reptype2");
         txtCustomerCode = document.getElementById("txtCustomerCode");
@@ -320,6 +327,15 @@ var ItemsalesSum;
         rp.FromDate = DateFormatRep(txtDateFrom.value);
         rp.ToDate = DateFormatRep(txtDateTo.value);
         debugger;
+        if (InvTp11.checked == true) {
+            rp.SLStype = 1;
+        }
+        else if (InvTp22.checked == true) {
+            rp.SLStype = 2;
+        }
+        else {
+            rp.SLStype = 0;
+        }
         if (InvTp1.checked == true) {
             rp.invType = 1;
         }

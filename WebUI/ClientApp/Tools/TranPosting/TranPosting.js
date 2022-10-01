@@ -290,7 +290,7 @@ var TranPosting;
     function btnSelectAll_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === false) {
-                return __assign({}, object, { IsSelected: true });
+                return __assign(__assign({}, object), { IsSelected: true });
             }
             return object;
         });
@@ -301,10 +301,10 @@ var TranPosting;
     function btnReverseSelection_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === false) {
-                return __assign({}, object, { IsSelected: true });
+                return __assign(__assign({}, object), { IsSelected: true });
             }
             else {
-                return __assign({}, object, { IsSelected: false });
+                return __assign(__assign({}, object), { IsSelected: false });
             }
         });
         LnkTransDetails = newArr;
@@ -314,7 +314,7 @@ var TranPosting;
     function btnUnSelectAll_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === true) {
-                return __assign({}, object, { IsSelected: false });
+                return __assign(__assign({}, object), { IsSelected: false });
             }
             return object;
         });
