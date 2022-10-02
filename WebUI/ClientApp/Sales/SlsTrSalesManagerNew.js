@@ -918,41 +918,35 @@ var SlsTrSalesManagerNew;
             }
         }
         else { //علي الحساب
-            $("#txtCashMoney").val("");
-            $("#txtCardMoney").val("");
-            $('#ddlCashBox').prop('selectedIndex', 0);
-            $('#ddlCashBox').attr('disabled', 'disabled');
-            txtInvoiceCustomerName.value = "";
-            $("#txtInvoiceCustomerName").attr("disabled", "disabled");
-            $("#ddlInvoiceCustomer").removeAttr("disabled");
-            $("#txtCustomerMobile").removeAttr("disabled");
-            TypeFlag = false;
-            $("#Div_Money").addClass("display_none");
-            //fillddlCustomer();
-            if (NewAdd == true) {
-                chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCreditInvoiceDefAuth;
-            }
-            if (compcode != 4) {
-                var cust = CustomerDetails.filter(function (x) { return x.IsCreditCustomer == true; });
-                //if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {//ddlInvoiceCustomer 
-                //    DocumentActions.FillCombowithdefult(cust, ddlInvoiceCustomer, "CustomerId", "NAMEE", "Select customer");
-                //}
-                //else {
-                //    DocumentActions.FillCombowithdefult(cust, ddlInvoiceCustomer, "CustomerId", "NAMEA", "اختر العميل");
-                //}
-            }
+            Creadt();
         }
-        //if (CountItems > 0) {
-        //    DisplayMassage("من فضلك اعادة ادخال  بيانات الفاتورة مره أخري", "Please re-enter the billing information again", MessageType.Worning);
-        //}
-        //CountItems = 0;
-        //PackageCount = 0;
-        //CountTotal = 0;
-        //TaxCount = 0;
-        //NetCount = 0;
-        //CountGrid = 0;
-        //$('#div_Data').html("");
         ComputeTotals();
+    }
+    function Creadt() {
+        $("#txtCashMoney").val("");
+        $("#txtCardMoney").val("");
+        $('#ddlCashBox').prop('selectedIndex', 0);
+        $('#ddlCashBox').attr('disabled', 'disabled');
+        txtInvoiceCustomerName.value = "";
+        $("#txtInvoiceCustomerName").attr("disabled", "disabled");
+        $("#ddlInvoiceCustomer").removeAttr("disabled");
+        $("#txtCustomerMobile").removeAttr("disabled");
+        TypeFlag = false;
+        $("#Div_Money").addClass("display_none");
+        //fillddlCustomer();
+        if (NewAdd == true) {
+            chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCreditInvoiceDefAuth;
+        }
+        if (compcode != 4) {
+            var cust = CustomerDetails.filter(function (x) { return x.IsCreditCustomer == true; });
+            //if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {//ddlInvoiceCustomer 
+            //    DocumentActions.FillCombowithdefult(cust, ddlInvoiceCustomer, "CustomerId", "NAMEE", "Select customer");
+            //}
+            //else {
+            //    DocumentActions.FillCombowithdefult(cust, ddlInvoiceCustomer, "CustomerId", "NAMEA", "اختر العميل");
+            //}
+        }
+        ddlType.value = '0';
     }
     function txtCommission_onchange() {
         var net = (Number(txtTotal.value) + Number(txtTax.value)).RoundToSt(2);
@@ -1306,6 +1300,7 @@ var SlsTrSalesManagerNew;
         $("#btnOperation").removeAttr("disabled");
         $("#txt_Operation").val("");
         $("#txt_OperationId").val("");
+        Creadt();
     }
     function btnShow_onclick() {
         BindStatisticGridData();
@@ -2196,11 +2191,10 @@ var SlsTrSalesManagerNew;
                 if (txtQuantityValue > Onhand_Qty) {
                     DisplayMassage("خطأ الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Error);
                     //if (SysSession.CurrentEnvironment.I_Control[0].ExceedOnhandQty != 1) { // invoice, send tf , direct tf                         
-                    if (false) {
-                        Errorinput($("#txtQuantity" + cnt));
-                        $("#txtQuantity" + cnt).val(Onhand_Qty);
-                        txtQuantityValue = Onhand_Qty;
-                    }
+                    Errorinput($("#txtQuantity" + cnt));
+                    $("#txtQuantity" + cnt).val(Onhand_Qty);
+                    //txtQuantityValue = Onhand_Qty;
+                    //}
                 }
             }
             totalRow(cnt, true);
@@ -2494,14 +2488,14 @@ var SlsTrSalesManagerNew;
         if (SysSession.CurrentEnvironment.InvoiceTransCode == 1) {
             if (ddlInvoiceCustomer.value.trim() == "" && SysSession.CurrentEnvironment.InvoiceTransCode == 1) { //علي الحساب  
                 DisplayMassage(" برجاء اختيار العميل", "Please select a customer", MessageType.Worning);
-                Errorinput(ddlInvoiceCustomer);
+                Errorinput(txt_CustCode);
                 return false;
             }
         }
         else {
             if (ddlType.value == "0" && ddlInvoiceCustomer.value.trim() == "") { //علي الحساب  
                 DisplayMassage(" برجاء اختيار العميل", "Please select a customer", MessageType.Worning);
-                Errorinput(ddlInvoiceCustomer);
+                Errorinput(txt_CustCode);
                 return false;
             }
         }
@@ -2700,7 +2694,7 @@ var SlsTrSalesManagerNew;
     function ValidationHeader() {
         if (ddlInvoiceCustomer.value.trim() == "" && SysSession.CurrentEnvironment.InvoiceTransCode == 1) {
             DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
-            Errorinput(ddlInvoiceCustomer);
+            Errorinput(txt_CustCode);
             return false;
         }
         else if (ddlStore.value == "null" && SlsInvSrc == "1") {
@@ -3609,11 +3603,11 @@ var SlsTrSalesManagerNew;
             rp.CustomerID = -1;
         else
             rp.CustomerID = Number($("#ddlCustomer").val());
-        rp.OperationId = -1;
+        rp.OperationId = Number($('#txt_OperationIdFilter').val()) == 0 ? -1 : Number($('#txt_OperationIdFilter').val());
         rp.CashType = Number($("#ddlInvoiceType").val());
         rp.Status = Number($("#ddlStateType").val());
         rp.TrType = 0;
-        rp.src = 1;
+        rp.src = Number(SlsInvSrc);
         Ajax.Callsync({
             url: Url.Action("IProc_Rpt_SlsInvoiceList", "GeneralReports"),
             data: rp,
