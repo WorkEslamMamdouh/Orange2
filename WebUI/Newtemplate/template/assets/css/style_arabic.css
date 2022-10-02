@@ -13045,6 +13045,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 .switch-div .btn-main {
     line-height: 1.5rem;
+    padding: 0.5rem 0.7rem 0.75rem;
 }
 .btn-gray {
     color: var(--bs-light);
@@ -13078,6 +13079,10 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     color: var(--bs-light);
     background-color: #b30000;
     border-color: #b30000;
+    padding: .5rem .7rem;
+    border-radius: 10px;
+    border: 3px solid #b30000;
+    transition: all .5s ease-in-out;
 }
 .btn-blue {
     color: var(--bs-light);
@@ -15665,7 +15670,8 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     color: var(--main-blue);
     max-height: 200px;
     overflow: auto;
-    font-size: .75rem;
+    font-size: 1rem;
+    font-weight:bold;
 }
 
 .modal-footer {
@@ -30380,7 +30386,7 @@ input[class=checkbox]:checked:before {
     border-radius: 10px;
     font-weight: bolder;
     line-height: 1.5rem;
-    padding: 0.5rem 0.7rem;
+    padding: 0.5rem 0.7rem 0.75rem;
     border-radius: 10px;
 }
     .btn-active a:hover {

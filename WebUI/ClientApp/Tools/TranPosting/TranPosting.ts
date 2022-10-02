@@ -93,13 +93,13 @@ namespace TranPosting {
         //$("#btndiv_1").removeClass("Actiev");
         //$("#btndiv_2").removeClass("Actiev");
 
-        //$("#btndiv_3").addClass("btn-active");
-        //$("#btndiv_1").removeClass("btn-active");
-        //$("#btndiv_2").removeClass("btn-active");
+        $("#btndiv_3").addClass("btn-active");
+        $("#btndiv_1").removeClass("btn-active");
+        $("#btndiv_2").removeClass("btn-active");
 
-        //$("#btndiv_33").removeClass("btn-main");
-        //$("#btndiv_11").addClass("btn-main");
-        //$("#btndiv_22").addClass("btn-main");
+        $("#btndiv_33").removeClass("btn-main");
+        $("#btndiv_11").addClass("btn-main");
+        $("#btndiv_22").addClass("btn-main");
 
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
@@ -224,16 +224,16 @@ namespace TranPosting {
                         //$("#btndiv_1").addClass("Actiev");
                         //$("#btndiv_2").removeClass("Actiev");
 
-                        //$("#btndiv_3").addClass("btn-active");
-                        //$("#btndiv_1").removeClass("btn-active");
-                        //$("#btndiv_2").removeClass("btn-active");
+                        $("#btndiv_1").addClass("btn-active");
+                        $("#btndiv_3").removeClass("btn-active");
+                        $("#btndiv_2").removeClass("btn-active");
 
-                        //$("#btndiv_33").removeClass("btn-main");
-                        //$("#btndiv_11").addClass("btn-main");
-                        //$("#btndiv_22").addClass("btn-main");
+                        $("#btndiv_11").removeClass("btn-main");
+                        $("#btndiv_33").addClass("btn-main");
+                        $("#btndiv_22").addClass("btn-main");
 
-                        $("#div_3").addClass("display_none");
                         $("#div_1").removeClass("display_none");
+                        $("#div_3").addClass("display_none");
                         $("#div_2").addClass("display_none");
                         $('#btnShowVouchers').removeAttr('disabled');
                     }
@@ -301,9 +301,17 @@ namespace TranPosting {
                         //$("#btndiv_1").removeClass("Actiev");
                         //$("#btndiv_2").addClass("Actiev");
 
-                        $("#div_3").addClass("display_none");
-                        $("#div_1").addClass("display_none");
+                        $("#btndiv_2").addClass("btn-active");
+                        $("#btndiv_3").removeClass("btn-active");
+                        $("#btndiv_1").removeClass("btn-active");
+
+                        $("#btndiv_22").removeClass("btn-main");
+                        $("#btndiv_33").addClass("btn-main");
+                        $("#btndiv_11").addClass("btn-main");
+
                         $("#div_2").removeClass("display_none");
+                        $("#div_1").addClass("display_none");
+                        $("#div_3").addClass("display_none");
 
                     }
 
@@ -423,18 +431,18 @@ namespace TranPosting {
                         DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
                         setTimeout(() => {
                             Clear();
-
+                            $("#VoucherDetailGrid").html("");
                             //$("#btndiv_3").removeClass("Actiev");
                             //$("#btndiv_1").addClass("Actiev");
                             //$("#btndiv_2").removeClass("Actiev");
 
-                            //$("#btndiv_1").addClass("btn-active");
-                            //$("#btndiv_2").removeClass("btn-active");
-                            //$("#btndiv_3").removeClass("btn-active");
+                            $("#btndiv_1").addClass("btn-active");
+                            $("#btndiv_2").removeClass("btn-active");
+                            $("#btndiv_3").removeClass("btn-active");
 
-                            //$("#btndiv_11").removeClass("btn-main");
-                            //$("#btndiv_22").addClass("btn-main");
-                            //$("#btndiv_33").addClass("btn-main");
+                            $("#btndiv_11").removeClass("btn-main");
+                            $("#btndiv_22").addClass("btn-main");
+                            $("#btndiv_33").addClass("btn-main");
 
                             $("#div_1").removeClass("display_none");
                             $("#div_3").addClass("display_none");
