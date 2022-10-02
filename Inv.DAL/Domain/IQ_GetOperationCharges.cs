@@ -36,5 +36,8 @@ namespace Inv.DAL.Domain
         public int OperationID { get; set; }
         public string CashBox_DescA { get; set; }
         public string CashBox_DescE { get; set; }
+        public int CashBoxID { get; set; }
+        public Nullable<bool> IsPosted { get; set; }
+        public Nullable<int> VoucherNo { get; set; }
     }
 }
