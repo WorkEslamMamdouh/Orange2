@@ -28,5 +28,7 @@ namespace Inv.DAL.Domain
         public Nullable<System.DateTime> RefInvoiceDate { get; set; }
         public int VendorID { get; set; }
         public int CashBoxID { get; set; }
+        public Nullable<bool> IsPosted { get; set; }
+        public Nullable<int> VoucherNo { get; set; }
     }
 }

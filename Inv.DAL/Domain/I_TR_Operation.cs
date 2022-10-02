@@ -75,5 +75,7 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> Close_TotalQtyRec { get; set; }
         public Nullable<decimal> Close_TotalQtySold { get; set; }
         public Nullable<decimal> Close_TotalQtyScrap { get; set; }
+        public Nullable<bool> IsPurPosted { get; set; }
+        public Nullable<int> PurVoucherNo { get; set; }
     }
 }

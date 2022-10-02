@@ -167,7 +167,7 @@
                                 <span class="menu-icon">
                                     <i class="fas fa-user text-white fs-6"></i>
                                 </span>
-                               
+
                                 <span class="count bg-success"></span>
                             </div>
                             <div class="profile-name">
@@ -226,8 +226,8 @@
                                 <a id="btnSlsTrShowPrice" class="nav-link" href="#">@SystemResource.showPrice</a>
                             </li>
                             @*<li style="display:none" id="btnSlsTrSales" key="SlsTrSales" class="nav-item d-flex justify-content-between mb-1">
-               <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
-        </li>*@
+                                       <a id="btnSlsTrSales" class="nav-link" href="#">@SystemResource.Men_SlsSales</a>
+                                </li>*@
                             <li key="SlsTrSalesManagerNew" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnSlsTrSalesManagerNewT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrSalesManagerNew" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
@@ -1025,9 +1025,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h4 class="modal-title" id="myModalLabel">@SystemResource.App_Help</h4>
                 </div>
-                <div class="modal-body content content-8" id="modalHelpRep">
-
-                </div>
+                <div class="modal-body content content-8" id="modalHelpRep"> </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">@SystemResource.App_Close</button>
                 </div>
@@ -1046,6 +1044,24 @@
         </div>
     </div>
 
+    <!-- Session Modal-->
+    <div class="modal fade messagealert show" id="modalSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                  @*  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h4 class="modal-title" id="MessageBoxTitle">الوقت!!</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body content content-8" id="MessageBoxMessage">لقد استنفذت وقت الجلسة هل تريد الاستمرار </div>
+                   
+                <div class="modal-footer">
+                    <button type="button" id="SessionBoxOk" class="btn btn-red">نعم</button>
+                    <button type="button" id="SessionBoxCancel" class="btn btn-main" data-dismiss="modal">لا</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="ModalRep" tabindex="-1" role="dialog" aria-labelledby="ModalRep" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1061,8 +1077,6 @@
                             <i class="fa fa-print"></i>
                         </button>
                     </div>
-
-
 
                 </div>
                 <div class="modal-body" id="datarepmodel">
@@ -1123,10 +1137,7 @@
 
 
     @*@Scripts.Render("~/Bundles/AppScript2")*@
-
-
-
-
+    @*//------------------------------------------------------ Side Icons Controllers---------------------------------------*@
     <script>
         $("#NewAdd_Falg").val(0);
         $("#Mod_Flag").val(0);
@@ -1230,43 +1241,7 @@
     </script>
 
     <script src="~/Style_design/LodBut/Loder.js"></script>
-
-
-
-
-
     @*//------------------------------------------------------NewSession---------------------------------------*@
-    <div class="modal fade messagealert" id="modalSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="MessageBoxTitle">الوقت!!</h4>
-                </div>
-                <div class="modal-body" style="max-height:200px; overflow:auto;">
-                    <div class="col-xs-7"> <h3 id="MessageBoxMessage">لقد استنفذت وقت الجلسة هل تريد الاستمرار </h3></div>
-                    <div class="col-xs-5 text-center">
-                        <i class="glyphicon btn-danger"> </i>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="SessionBoxOk" class="btn btn-danger">نعم</button>
-                    <button type="button" id="SessionBoxCancel" class="btn btn-warning" data-dismiss="modal">لا</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
     <script>
 
         var timeInSecondsAfterSessionOut = 0;
@@ -1285,18 +1260,12 @@
             $("#timeLeft").html(timeInSecondsAfterSessionOut);
 
         });
-
-
-
         timeInSecondsAfterSessionOut = Number($('#idSession').val()) * 60; // change this to change session time out (in seconds).
 
         $("#timeLeft").html(timeInSecondsAfterSessionOut);
         var secondTick = 0;
 
         StartThisSessionTimer();
-
-
-
 
         function ResetThisSession() {
             secondTick = 0;

@@ -109,5 +109,8 @@ namespace Inv.DAL.Domain
         public Nullable<int> dtop_TrNo { get; set; }
         public Nullable<int> dtStore_code { get; set; }
         public string dtStore_DescA { get; set; }
+        public string Salesman_code { get; set; }
+        public string Salesman_NameA { get; set; }
+        public string Salesman_nameE { get; set; }
     }
 }
