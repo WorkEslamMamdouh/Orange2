@@ -270,6 +270,7 @@ var AccTrReceiptNote;
         }
     }
     function txtCashTypeNew_onchange() {
+        debugger;
         if (txtCashTypeNew.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('#La_CashAmount').removeClass('display_none');
@@ -282,6 +283,7 @@ var AccTrReceiptNote;
             $('#txt_BankAcc_Code').val('null');
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
+            $('#txt_Amount').attr('disabled', 'disabled');
         }
         else if (txtCashTypeNew.value == '1' || txtCashTypeNew.value == '2') {
             $('#Bank_Div').removeClass('display_none');
@@ -293,7 +295,8 @@ var AccTrReceiptNote;
             $('#txt_CheckNo').addClass('display_none');
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
-            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            //$('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#txt_Amount').removeAttr('disabled');
         }
         else {
             $('#Bank_Div').removeClass('display_none');
@@ -305,7 +308,8 @@ var AccTrReceiptNote;
             $('#txt_CheckNo').removeClass('display_none');
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
-            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#txt_Amount').removeAttr('disabled');
+            //$('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
         }
         chkIsDeffered_onchange();
     }

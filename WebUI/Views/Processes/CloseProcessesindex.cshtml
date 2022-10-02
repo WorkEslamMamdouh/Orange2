@@ -292,14 +292,24 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-12 col-md-6 col-lg-9">
                                 <div class="form-group row g-0">
-                                    <label class="col-3 col-md-2 col-lg-1 align-self-center p-md-0">@SystemResource.Description_Shipment</label>
-                                    <div class="col-9 col-md-10 col-lg-11">
+                                    <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.Description_Shipment</label>
+                                    <div class="col-9 col-md-11">
                                         <textarea type="" class="form-control" name="Goods_Desc" id="txtGoods_Desc"></textarea>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="form-group row g-0">
+                                    <label class="col-3 col-md-5 align-self-center p-md-0">قيد المشتريات</label>
+                                    <div class="col-9 col-md-7">
+                                        <input type="number" disabled class="form-control" name="PurVoucherNo" id="txtPurVoucherNo">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <div class="form-group row g-0">
                                     <label class="col-3 col-md-2 col-lg-1 align-self-center p-md-0">@SystemResource.App_Notes</label>
@@ -550,6 +560,7 @@
                                             <th style="width:10%">@SystemResource.Invoice_Date</th>
                                             <th style="width:15%">@SystemResource.I_Vendor</th>
                                             <th style="width:10%">@SystemResource.App_Cashbox</th>
+                                            <th style="width:10%" class="px-5">رقم القيد</th>
                                         </tr>
                                     </thead>
                                     <tbody id="div_ChargesData"> </tbody>

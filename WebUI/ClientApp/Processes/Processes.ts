@@ -1753,13 +1753,18 @@ namespace Processes {
 			              </select>
 		                </div>
 	                </td>
+                    <td>
+		                <div class="form-group">
+			              <input id="VoucherNoCharge${cnt}" disabled type="text" class="form-control"  value="0"/>
+		                </div>
+	                </td>
+                    <input id="IsPosted${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
                 </tr>`;
         $("#div_ChargesData").append(html);
 
-        $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
-        // 
+        $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString())); 
 
 
         $("#txtInvoiceDateCharge" + cnt).val(GetDate());
@@ -1995,6 +2000,10 @@ namespace Processes {
         $("#txtValueAfterVatCharge" + cnt).prop("value", ((OperationCharges[cnt].NetAtferVat == null || undefined) ? 0 : OperationCharges[cnt].NetAtferVat));
 
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
+        $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
+      
+        $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
+         
         $("#txtAddonsCharge" + cnt).val(OperationCharges[cnt].ChargeID);
         FillddlAddonsType(cnt);
         $("#txtAddonsTypeCharge" + cnt).val(OperationCharges[cnt].IsAddition ? (lang == "ar" ? "اضافة" : "add") : (lang == "ar" ? "خصم" : "Discount"));
@@ -2170,8 +2179,8 @@ namespace Processes {
             { title: res.sales_credit, name: "Close_TotalSalesCredit", type: "text", width: "10%" },
             { title: res.Sales_credit_tax, name: "Close_TotalSalesCreditVAT", type: "text", width: "10%" },
             { title: res.Total_sales, name: "Close_TotalSales", type: "text", width: "10%" },
-            { title: res.cash_to_sales, name: "Close_CashOnhand", type: "text", width: "10%" },
-            { title: res.cash_in_bank, name: "Close_CashOnBank", type: "text", width: "10%" },
+            //{ title: res.cash_to_sales, name: "Close_CashOnhand", type: "text", width: "10%" },
+            //{ title: res.cash_in_bank, name: "Close_CashOnBank", type: "text", width: "10%" },
         ];
 
     }
@@ -2911,6 +2920,8 @@ namespace Processes {
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
             Model_I_TR_Operation.IsGenerated = false;
 
+            Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
+            Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
 
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
@@ -3298,6 +3309,8 @@ namespace Processes {
                 if (ispaid == "0") { chargesingleModel.isPaidByVendor = true } else { chargesingleModel.isPaidByVendor = false }
 
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
                 if ($("#txt_D_CashBox" + i).val() == "Null") { chargesingleModel.CashBoxID = 0; }
@@ -3322,6 +3335,8 @@ namespace Processes {
                 if (ispaid == "0") { chargesingleModel.isPaidByVendor = true } else { chargesingleModel.isPaidByVendor = false }
 
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
                 if ($("#txt_D_CashBox" + i).val() == "Null") { chargesingleModel.CashBoxID = 0; }
@@ -4644,7 +4659,7 @@ namespace Processes {
 
             $('#Close_AllTotalSale').text(Number(Selected_Data[0].Close_TotalSalesCash.RoundToSt(2)) + Number(Selected_Data[0].Close_TotalSalesCredit.RoundToSt(2)));
             $('#Close_AllTotalSaleVAT').text(Number(Selected_Data[0].Close_TotalSalesCashVAT.RoundToSt(2)) + Number(Selected_Data[0].Close_TotalSalesCreditVAT.RoundToSt(2)));
-            $('#Close_AllAfterTotalSaleVAT').text(Number(AfterTotalSalesCreditVAT.RoundToSt(2)) + Number(AfterTotalSalesCashVAT.RoundToSt(2)));
+            $('#Close_AllAfterTotalSaleVAT').text((Number(AfterTotalSalesCreditVAT) + Number(AfterTotalSalesCashVAT)).RoundToSt(2));
 
             //$("#btnClose").focus();
 

@@ -4841,6 +4841,8 @@ class I_TR_OperationCharges extends SecurityClass {
         this.VendorID = 0;
         this.StatusFlag = "";
         this.CashBoxID = 0;
+        this.IsPosted = false;
+        this.VoucherNo = 0; 
     }
     public OperationExpensesID: number;
     public OperationID: number;
@@ -4857,6 +4859,9 @@ class I_TR_OperationCharges extends SecurityClass {
     public VendorID: number;
     public StatusFlag: string;
     public CashBoxID: number;
+    public IsPosted: boolean;
+    public VoucherNo: number; 
+
 }
 
 
@@ -4923,6 +4928,8 @@ class I_TR_Operation extends SecurityClass {
         this.Close_TotalQtyRec = 0;
         this.Close_TotalQtySold = 0;
         this.Close_TotalQtyScrap = 0;
+        this.IsPurPosted = false;
+        this.PurVoucherNo = 0;
     }
     public OperationID: number;
     public TrNo: number;
@@ -4983,8 +4990,9 @@ class I_TR_Operation extends SecurityClass {
     public Close_Coolingandstorage: number;
     public Close_TotalQtyRec: number;
     public Close_TotalQtySold: number;
-    public Close_TotalQtyScrap: number;
-
+    public Close_TotalQtyScrap: number; 
+    public IsPurPosted: boolean;
+    public PurVoucherNo: number; 
 }
 class IQ_GetOperationItemInfo_New {
     constructor() {
@@ -5115,6 +5123,8 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.OperationID = 0;
         this.CashBox_DescA = "";
         this.CashBox_DescE = "";
+        this.IsPosted = false;
+        this.VoucherNo = 0;
 
 
     }
@@ -5140,6 +5150,8 @@ class IQ_GetOperationCharges extends SecurityClass {
     public OperationID: number;
     public CashBox_DescA: string;
     public CashBox_DescE: string;
+    public IsPosted: boolean; 
+    public VoucherNo: number;
 
 }
 
@@ -5219,7 +5231,9 @@ class IQ_GetOperation extends SecurityClass {
         this.Close_TotalQtyRec = 0;
         this.Close_TotalQtySold = 0;
         this.Close_TotalQtyScrap = 0;
-
+        this.PurVoucherNo = 0;
+        this.IsPurPosted = false;
+        
 
     }
     public OperationID: number;
@@ -5292,7 +5306,10 @@ class IQ_GetOperation extends SecurityClass {
     public Close_Coolingandstorage: number;
     public Close_TotalQtyRec: number;
     public Close_TotalQtySold: number;
-    public Close_TotalQtyScrap: number;
+    public Close_TotalQtyScrap: number; 
+    public PurVoucherNo: number;
+    public IsPurPosted: boolean;
+     
 
 }
 
