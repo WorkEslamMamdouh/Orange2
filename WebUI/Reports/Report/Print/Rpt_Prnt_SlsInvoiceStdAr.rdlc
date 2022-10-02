@@ -1276,7 +1276,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.88388cm</Top>
-        <Left>10.04191cm</Left>
+        <Left>10.13716cm</Left>
         <Height>0.6cm</Height>
         <Width>2.18336cm</Width>
         <ZIndex>15</ZIndex>
@@ -1310,7 +1310,7 @@
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>0.88388cm</Top>
-        <Left>7.18606cm</Left>
+        <Left>7.28131cm</Left>
         <Height>0.6cm</Height>
         <Width>2.82573cm</Width>
         <ZIndex>16</ZIndex>
@@ -4287,7 +4287,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Source>Embedded</Source>
         <Value>draft21</Value>
         <Sizing>Fit</Sizing>
-        <Top>0cm</Top>
         <Left>0.31195cm</Left>
         <Height>2.83906cm</Height>
         <Width>4.45348cm</Width>
@@ -4320,8 +4319,8 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.29174cm</Top>
-        <Left>17.60134cm</Left>
+        <Top>1.62852cm</Top>
+        <Left>10.49992cm</Left>
         <Height>0.6cm</Height>
         <Width>1.82666cm</Width>
         <ZIndex>29</ZIndex>
@@ -4354,11 +4353,78 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>2.25999cm</Top>
-        <Left>7.18606cm</Left>
+        <Top>1.59677cm</Top>
+        <Left>5.45037cm</Left>
         <Height>0.6cm</Height>
-        <Width>10.38cm</Width>
+        <Width>5.01427cm</Width>
         <ZIndex>30</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox74">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>المندوب </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>2.26728cm</Top>
+        <Left>17.60134cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.80576cm</Width>
+        <ZIndex>31</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TrNo5">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!GlobalInvoiceCounter.Value, "Rpt_Prnt_SlsInvoiceStdAr")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TrNo</rd:DefaultName>
+        <Top>2.27081cm</Top>
+        <Left>12.55179cm</Left>
+        <Height>0.6cm</Height>
+        <Width>4.97899cm</Width>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4601,7 +4667,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>TotalPages</rd:DefaultName>
               <Top>1.12102cm</Top>
-              <Left>0cm</Left>
               <Height>0.50698cm</Height>
               <Width>0.83312cm</Width>
               <ZIndex>6</ZIndex>
