@@ -375,11 +375,11 @@ namespace ItemPurchase {
         rp.invType = Number($('#invType').val());
         debugger
         if (InvTp1.checked == true) {
-            rp.SLStype = 1;
+            rp.invType = 1;
         } else if (InvTp2.checked == true) {
-            rp.SLStype = 2;
+            rp.invType = 2;
         } else {
-            rp.SLStype = 0;
+            rp.invType = 0;
         }
         if (reptp1.checked == true) {  //------------By_Cust
             rp.check = 1;

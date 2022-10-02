@@ -24,6 +24,11 @@ namespace ItemsalesSum {
     var reptp1: HTMLInputElement;
     var InvTp1: HTMLInputElement;
     var InvTp2: HTMLInputElement;
+
+    var InvTp11: HTMLInputElement;
+    var InvTp22: HTMLInputElement;
+    var InvTp33: HTMLInputElement;
+
     var chk_Authorized: HTMLInputElement;
     var reptp2: HTMLInputElement;
     var btnReset;
@@ -58,6 +63,7 @@ namespace ItemsalesSum {
         InitalizeEvents();
         reptp1.checked = true;
         InvTp1.checked = true;
+        InvTp11.checked = true;
         reptype2.checked = true;
 
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
@@ -87,6 +93,9 @@ namespace ItemsalesSum {
         reptp1 = document.getElementById("reptp1") as HTMLInputElement;
         reptp2 = document.getElementById("reptp2") as HTMLInputElement;
         InvTp1 = document.getElementById("InvTp1") as HTMLInputElement;
+        InvTp11 = document.getElementById("InvTp11") as HTMLInputElement;
+        InvTp22 = document.getElementById("InvTp22") as HTMLInputElement;
+        InvTp33 = document.getElementById("InvTp33") as HTMLInputElement;
         InvTp2 = document.getElementById("InvTp2") as HTMLInputElement;
         reptype2 = document.getElementById("reptype2") as HTMLInputElement;
         txtCustomerCode = document.getElementById("txtCustomerCode") as HTMLInputElement;
@@ -374,6 +383,16 @@ namespace ItemsalesSum {
         rp.FromDate = DateFormatRep(txtDateFrom.value);
         rp.ToDate = DateFormatRep(txtDateTo.value);
         debugger
+
+        if (InvTp11.checked == true) {
+            rp.SLStype = 1;
+        } else if (InvTp22.checked == true) {
+            rp.SLStype = 2;
+        } else {
+            rp.SLStype = 0;
+        }
+
+
         if (InvTp1.checked == true) {
             rp.invType = 1;
         } else if (InvTp2.checked == true) {
