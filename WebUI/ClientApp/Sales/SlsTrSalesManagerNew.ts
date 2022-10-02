@@ -634,7 +634,7 @@ namespace SlsTrSalesManagerNew {
             ' </select></td>' +
             '<td class ="StoreGrid">    </td>' +
             '<td class="StoreGrid">  المستودع </td>' +
-            '<td class="StoreGrid"><select id="ddlStore' + cnt + '" class=" form-control"> <option value="null"> أختر المستودع  </option></select></td>' +
+            //'<td class="StoreGrid"><select id="ddlStore' + cnt + '" class=" form-control"> <option value="null"> أختر المستودع  </option></select></td>' +
             '<td class="ProceGrid"> </td>' +
             '<td class="ProceGrid">العمليه</td>' +
             '<td class="ProceGrid"><div class="search-content">' +
@@ -695,7 +695,7 @@ namespace SlsTrSalesManagerNew {
 
         });
 
-        $('#ddlStore' + cnt).click(function (e) {
+        $('#ddlStore' + cnt).change(function (e) {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
@@ -748,7 +748,7 @@ namespace SlsTrSalesManagerNew {
 
             ShowType_Inv(cnt);
             $('.Row_Type').addClass('display_none')
-            modal.style.display = "block";
+            //modal.style.display = "block";
             $('#No_Row_Type' + cnt).removeClass('display_none');
 
             Errorinput($('#ddlStore' + cnt))
@@ -759,10 +759,12 @@ namespace SlsTrSalesManagerNew {
 
             ShowType_Inv(cnt);
             $('.Row_Type').addClass('display_none')
-            modal.style.display = "block";
             $('#No_Row_Type' + cnt).removeClass('display_none');
+            //modal.style.display = "block";
 
-            Errorinput($('#txt_Operation' + cnt))
+            //Errorinput($('#txt_Operation' + cnt))
+            Errorinput($('#btnTypeInv' + cnt))
+            Errorinput($('#txt_Operation'))
 
             return false
         }
@@ -2366,11 +2368,12 @@ namespace SlsTrSalesManagerNew {
 			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
-                    <td>
+                    <td  class="btnOpration">
 		                <div class="form-group"> 
 			               <button id="btnTypeInv${cnt}" class="btn btn-main btn-operation" >   </button>
 		                </div>
-	                </td> 
+	                </td>
+                    <td class="Storeflag  "  ><select id="ddlStore${cnt}" disabled class="btn btn-main"> <option value="null"> أختر المستودع  </option></select></td>
                      <td>
                         <div class="search-content">
                              <input  type ="hidden" class="form-control search-control" id ="ddlItem${cnt}" name ="Operation" disabled >
@@ -2453,14 +2456,17 @@ namespace SlsTrSalesManagerNew {
                     <input id="VatPrc${cnt}" name = " " type ="hidden" class="form-control" />
                 </tr>`;
         $("#div_Data").append(html);
+         
+        if (SlsInvSrc == "1") {
+            $(".btnOpration").addClass("display_none"); 
+        } else { 
+            $(".Storeflag").addClass("display_none"); 
+        }
+
+        
 
 
-        $(".select_").select2();
-        var username = $('.select_ option:selected').text();
-        var userid = $('.select_').val();
-        $('#result').html("id : " + userid + ", name : " + username);
-
-
+         
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
             var fieldName = $(this).attr('data-field');
@@ -2746,7 +2752,7 @@ namespace SlsTrSalesManagerNew {
 
                     var itemPrice = GetUnitprice.unitprice;
 
-                    $("#txtPrice" + cnt).val(itemPrice);
+                    $("#txtPrice" + cnt).val(Model_Items.UnitPrice);
                     $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
                     //
 
@@ -3029,11 +3035,29 @@ namespace SlsTrSalesManagerNew {
 
         $('#btnTypeInv' + cnt).click(function (e) {
 
+
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
             ShowType_Inv(cnt);
 
             $('.Row_Type').addClass('display_none')
-            modal.style.display = "block";
             $('#No_Row_Type' + cnt).removeClass('display_none');
+            //modal.style.display = "block";
+
+
+
+            if ($('#ddlTypeInv' + cnt).val() == '1') {
+                      modal.style.display = "block";
+                 
+            }
+            if ($('#ddlTypeInv' + cnt).val() == '2') {
+                OPerationSearch(cnt, true); 
+
+            }
+
+
+
 
 
         });
@@ -3186,7 +3210,7 @@ namespace SlsTrSalesManagerNew {
         if (Type_inv == 1) {
 
             let id = Number($('#ddlItem' + cnt).val())
-            let Items = Details_Inv_Items.filter(x => x.ItemID ==id)[0];
+            let Items = Details_Inv_Items.filter(x => x.ItemID == id)[0];
             if (Items != null) {
                 let Cat_Tax = CategoryDetails.filter(s => s.CatID == Items.CatID);
                 let VatNature = DetailsVatNature.filter(s => s.VatNatID == Cat_Tax[0].VatNatID);
@@ -3200,7 +3224,7 @@ namespace SlsTrSalesManagerNew {
 
         }
         if (Type_inv == 2) {
-              
+
             if ($('#txt_StatusFlag' + cnt).val() == 'i') {
                 Tax_Rate = Model_Items.VatPrc;
                 VatNatID = Model_Items.VatNatID;
@@ -3331,6 +3355,7 @@ namespace SlsTrSalesManagerNew {
             $("#txtReturnQuantity" + CountGrid).attr("disabled", "disabled");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
+            $("#ddlStore" + CountGrid).removeAttr("disabled");
 
 
             if (flag_PriceWithVAT == true) {
@@ -3839,16 +3864,16 @@ namespace SlsTrSalesManagerNew {
 
             //--------------------------------------------------------------**** VatNatID = null ****----------------------------------------------------
 
-                if (StatusFlag != 'd' && StatusFlag != 'm') {
+            if (StatusFlag != 'd' && StatusFlag != 'm') {
 
-                    let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
-                    if (isNaN(NatID) == true || NatID == 0) {
-                        ComputeVatNat(i);
-                        if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
-                            StatusFlag = "u";
-                        }
+                let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
+                if (isNaN(NatID) == true || NatID == 0) {
+                    ComputeVatNat(i);
+                    if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
+                        StatusFlag = "u";
                     }
                 }
+            }
 
             //------------------------------------------------------------------------------------------------------------
 
@@ -4713,7 +4738,16 @@ namespace SlsTrSalesManagerNew {
         rp.slip = 0;
         rp.stat = InvoiceModel.InvoiceTransCode;
 
-        rp.Name_function = "rptInvoiceNote";
+        if (SlsInvSrc == '1') {
+
+            rp.Name_function = "rptInvoiceNote";
+        }
+        else {
+
+            rp.Name_function = "Prnt_OperationInvoice";
+        }
+
+
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
