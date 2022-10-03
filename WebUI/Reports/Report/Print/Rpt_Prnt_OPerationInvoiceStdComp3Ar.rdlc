@@ -906,17 +906,15 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="op_TrNo">
+                    <Textbox Name="dtop_TrNo">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!op_TrNo.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
+                              <Value>=Fields!dtop_TrNo.Value</Value>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -924,7 +922,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>op_TrNo</rd:DefaultName>
+                      <rd:DefaultName>dtop_TrNo</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -936,6 +934,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -977,7 +976,7 @@
         <Top>9.03259cm</Top>
         <Left>0.03175cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.86075cm</Width>
+        <Width>19.86074cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>

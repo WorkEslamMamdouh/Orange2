@@ -2921,8 +2921,8 @@ namespace Processes {
             Model_I_TR_Operation.IsGenerated = false;
 
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
-            Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
-
+                Model_I_TR_Operation.IsPurPosted = false; 
+     
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
@@ -2971,6 +2971,13 @@ namespace Processes {
             Model_I_TR_Operation.IsGenerated = IsGenerated;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
 
+            Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
+            if (Selected_Data.length > 0) {
+                Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
+            }
+            else {
+                Model_I_TR_Operation.IsPurPosted = false;
+            }
 
             //Model_I_TR_Operation.TrDate = التاريخ 
             //Model_I_TR_Operation.OpenAt = تارخ الفتح

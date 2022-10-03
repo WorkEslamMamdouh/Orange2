@@ -2906,7 +2906,8 @@ namespace CloseProcesses {
             Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
 
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
-            Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
+                Model_I_TR_Operation.IsPurPosted = false;
+          
 
             Model_I_TR_Operation.Close_AdjTotalSales = Number($('#textClose_AdjTotalSales').val());
             Model_I_TR_Operation.Close_Adjustment = Number($('#txtClose_Adjustment').val());
@@ -2961,6 +2962,15 @@ namespace CloseProcesses {
             Model_I_TR_Operation.IsGenerated = IsGenerated;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
             Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
+
+            Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
+            if (Selected_Data.length > 0) {
+                Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
+            }
+            else {
+                Model_I_TR_Operation.IsPurPosted = false;
+            }
+
 
             //Model_I_TR_Operation.TrDate = التاريخ 
             //Model_I_TR_Operation.OpenAt = تارخ الفتح

@@ -935,9 +935,9 @@ namespace Inv.API.Controllers
             
                
             string SQL = "";
-                SQL = "Select *  from IQ_GetOperationSalesmanItem where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "' ";
+                SQL = "Select *  from IQ_GetOperationItemInfo where OperationID= " + operationID + "and ItemCode ='" + ItemCode + "' ";
            
-            List<IQ_GetOperationSalesmanItem> ItemList = db.Database.SqlQuery<IQ_GetOperationSalesmanItem>(SQL).ToList();
+            List<IQ_GetOperationItemInfo> ItemList = db.Database.SqlQuery<IQ_GetOperationItemInfo>(SQL).ToList();
 
 
             return Ok(new BaseResponse(ItemList));
