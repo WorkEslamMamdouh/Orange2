@@ -61,7 +61,6 @@ namespace Inv.DAL.Domain
         public virtual DbSet<G_TransCounterSetting> G_TransCounterSetting { get; set; }
         public virtual DbSet<G_USER_BRANCH> G_USER_BRANCH { get; set; }
         public virtual DbSet<G_USER_COMPANY> G_USER_COMPANY { get; set; }
-        public virtual DbSet<G_USER_LOG> G_USER_LOG { get; set; }
         public virtual DbSet<I_D_Category> I_D_Category { get; set; }
         public virtual DbSet<I_D_Specification> I_D_Specification { get; set; }
         public virtual DbSet<I_D_SpecificationValues> I_D_SpecificationValues { get; set; }
@@ -222,6 +221,7 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetSlsInvoiceListVer2> IQ_GetSlsInvoiceListVer2 { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceStatisticVer2> IQ_GetSlsInvoiceStatisticVer2 { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceItemVer2> IQ_GetSlsInvoiceItemVer2 { get; set; }
+        public virtual DbSet<G_USER_LOG> G_USER_LOG { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {

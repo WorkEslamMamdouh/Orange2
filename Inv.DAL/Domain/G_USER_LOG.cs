@@ -14,11 +14,18 @@ namespace Inv.DAL.Domain
     
     public partial class G_USER_LOG
     {
+        public long LogID { get; set; }
         public string USER_CODE { get; set; }
         public string SYSTEM_CODE { get; set; }
-        public short SYSTEM_YEAR { get; set; }
+        public Nullable<int> COMP_CODE { get; set; }
+        public Nullable<int> BranchCode { get; set; }
+        public Nullable<short> FinYear { get; set; }
+        public Nullable<System.DateTime> TimeStamp { get; set; }
         public string MODULE_CODE { get; set; }
-        public int COMP_CODE { get; set; }
-        public System.DateTime LOG_DATE { get; set; }
+        public Nullable<byte> OperationId { get; set; }
+        public Nullable<long> DataID { get; set; }
+        public Nullable<bool> ISSucceed { get; set; }
+        public string ErrorMessage { get; set; }
+        public string ExtraData { get; set; }
     }
 }
