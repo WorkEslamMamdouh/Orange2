@@ -143,7 +143,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.46521cm</Width>
+              <Width>1.99566cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.70254cm</Width>
@@ -167,10 +167,13 @@
               <Width>1.52527cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.59994cm</Width>
+              <Width>5.23484cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.55173cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.7938cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -504,6 +507,40 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox123</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox3">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>م</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -869,12 +906,47 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox7">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=RowNumber(nothing)</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -906,7 +978,7 @@
         <DataSetName>Rpt_Prnt_SlsInvoiceStdComp3Ar</DataSetName>
         <Top>8.26864cm</Top>
         <Height>1.2cm</Height>
-        <Width>19.80395cm</Width>
+        <Width>19.7631cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -4098,7 +4170,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
     <Height>5.56276in</Height>
     <Style />
   </Body>
-  <Width>7.79683in</Width>
+  <Width>7.79623in</Width>
   <Page>
     <PageHeader>
       <Height>6.61628cm</Height>

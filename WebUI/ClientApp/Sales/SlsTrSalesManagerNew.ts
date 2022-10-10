@@ -2274,6 +2274,7 @@ namespace SlsTrSalesManagerNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItemVer2>;
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }

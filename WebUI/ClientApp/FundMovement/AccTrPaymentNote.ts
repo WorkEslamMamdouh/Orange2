@@ -626,6 +626,7 @@ namespace AccTrPaymentNote {
         if (txt_D_CashBox.value == "Null") {
             DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
             Errorinput(txt_D_CashBox);
+            Back();
             return;
         } else {
 

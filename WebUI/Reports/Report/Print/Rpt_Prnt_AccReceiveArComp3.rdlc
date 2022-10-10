@@ -816,7 +816,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBoxID.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -2093,7 +2093,6 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>4.46607cm</Top>
-              <Left>0cm</Left>
               <Height>0.89986cm</Height>
               <Width>20.06781cm</Width>
               <Style>
@@ -2111,7 +2110,6 @@
               <Value>IMG_20220223_094530</Value>
               <Sizing>Fit</Sizing>
               <Top>0.07432cm</Top>
-              <Left>0cm</Left>
               <Height>4.32119cm</Height>
               <Width>20.06781cm</Width>
               <ZIndex>1</ZIndex>
@@ -2147,8 +2145,6 @@
           <Source>Embedded</Source>
           <Value>ProcF</Value>
           <Sizing>Fit</Sizing>
-          <Top>0cm</Top>
-          <Left>0cm</Left>
           <Height>2.64045cm</Height>
           <Width>20.06781cm</Width>
           <Style>

@@ -1793,6 +1793,7 @@ var SlsTrSalesManagerNew;
                 var result = d;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response;
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (var i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }

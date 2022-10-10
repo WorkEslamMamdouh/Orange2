@@ -579,7 +579,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBoxID.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -666,7 +666,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>صندوق الأستلام</Value>
+                <Value>صندوق الصرف</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1875,8 +1875,6 @@
           <Source>Embedded</Source>
           <Value>IMG_20220223_094530</Value>
           <Sizing>Fit</Sizing>
-          <Top>0cm</Top>
-          <Left>0cm</Left>
           <Height>4.77279cm</Height>
           <Width>20.06781cm</Width>
           <ZIndex>1</ZIndex>
@@ -1902,8 +1900,6 @@
           <Source>Embedded</Source>
           <Value>ProcF</Value>
           <Sizing>Fit</Sizing>
-          <Top>0cm</Top>
-          <Left>0cm</Left>
           <Height>2.64045cm</Height>
           <Width>20.06781cm</Width>
           <Style>
