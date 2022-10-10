@@ -1822,19 +1822,21 @@
         </EntityType>
         <EntityType Name="G_USER_LOG">
           <Key>
-            <PropertyRef Name="USER_CODE" />
-            <PropertyRef Name="SYSTEM_CODE" />
-            <PropertyRef Name="SYSTEM_YEAR" />
-            <PropertyRef Name="MODULE_CODE" />
-            <PropertyRef Name="COMP_CODE" />
-            <PropertyRef Name="LOG_DATE" />
+            <PropertyRef Name="LogID" />
           </Key>
-          <Property Name="USER_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="SYSTEM_CODE" Type="nchar" MaxLength="1" Nullable="false" />
-          <Property Name="SYSTEM_YEAR" Type="smallint" Nullable="false" />
-          <Property Name="MODULE_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="COMP_CODE" Type="int" Nullable="false" />
-          <Property Name="LOG_DATE" Type="datetime" Nullable="false" />
+          <Property Name="LogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_CODE" Type="nvarchar" MaxLength="20" />
+          <Property Name="SYSTEM_CODE" Type="nvarchar" MaxLength="5" />
+          <Property Name="COMP_CODE" Type="int" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="FinYear" Type="smallint" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="MODULE_CODE" Type="nvarchar" MaxLength="25" />
+          <Property Name="OperationId" Type="tinyint" />
+          <Property Name="DataID" Type="bigint" />
+          <Property Name="ISSucceed" Type="bit" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ExtraData" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="G_USERS">
           <Key>
@@ -10021,7 +10023,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="G_TransCounterSetting" EntityType="InvModel.G_TransCounterSetting" />
           <EntitySet Name="G_USER_BRANCH" EntityType="InvModel.G_USER_BRANCH" />
           <EntitySet Name="G_USER_COMPANY" EntityType="InvModel.G_USER_COMPANY" />
-          <EntitySet Name="G_USER_LOG" EntityType="InvModel.G_USER_LOG" />
           <EntitySet Name="I_D_Category" EntityType="InvModel.I_D_Category" />
           <EntitySet Name="I_D_Specification" EntityType="InvModel.I_D_Specification" />
           <EntitySet Name="I_D_SpecificationValues" EntityType="InvModel.I_D_SpecificationValues" />
@@ -11603,6 +11604,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="G_USER_LOG" EntityType="InvModel.G_USER_LOG" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -12289,22 +12291,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="DELETE" Type="Boolean" Nullable="false" />
           <Property Name="PRINT" Type="Boolean" Nullable="false" />
           <Property Name="VIEW" Type="Boolean" Nullable="false" />
-        </EntityType>
-        <EntityType Name="G_USER_LOG">
-          <Key>
-            <PropertyRef Name="USER_CODE" />
-            <PropertyRef Name="SYSTEM_CODE" />
-            <PropertyRef Name="SYSTEM_YEAR" />
-            <PropertyRef Name="MODULE_CODE" />
-            <PropertyRef Name="COMP_CODE" />
-            <PropertyRef Name="LOG_DATE" />
-          </Key>
-          <Property Name="USER_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="SYSTEM_CODE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SYSTEM_YEAR" Type="Int16" Nullable="false" />
-          <Property Name="MODULE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="COMP_CODE" Type="Int32" Nullable="false" />
-          <Property Name="LOG_DATE" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="I_D_Category">
           <Key>
@@ -21837,6 +21823,24 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="Salesman_NameA" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Salesman_nameE" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="G_USER_LOG">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SYSTEM_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="COMP_CODE" Type="Int32" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="FinYear" Type="Int16" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="MODULE_CODE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="OperationId" Type="Byte" />
+          <Property Name="DataID" Type="Int64" />
+          <Property Name="ISSucceed" Type="Boolean" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraData" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22528,18 +22532,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="CREATE" ColumnName="CREATE" />
                 <ScalarProperty Name="EXECUTE" ColumnName="EXECUTE" />
                 <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
-                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="G_USER_LOG">
-            <EntityTypeMapping TypeName="InvModel.G_USER_LOG">
-              <MappingFragment StoreEntitySet="G_USER_LOG">
-                <ScalarProperty Name="LOG_DATE" ColumnName="LOG_DATE" />
-                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
-                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
-                <ScalarProperty Name="SYSTEM_YEAR" ColumnName="SYSTEM_YEAR" />
-                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
                 <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -32459,6 +32451,25 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="G_USER_LOG">
+            <EntityTypeMapping TypeName="InvModel.G_USER_LOG">
+              <MappingFragment StoreEntitySet="G_USER_LOG">
+                <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ISSucceed" ColumnName="ISSucceed" />
+                <ScalarProperty Name="DataID" ColumnName="DataID" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="FinYear" ColumnName="FinYear" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
