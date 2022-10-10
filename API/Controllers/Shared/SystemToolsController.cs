@@ -1803,7 +1803,21 @@ namespace Inv.API.Controllers
 
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult OpenScreenLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
 
+                return BadRequest();
+            }
+        }
 
     }
 }

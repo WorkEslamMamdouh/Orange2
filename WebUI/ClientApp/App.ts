@@ -2462,3 +2462,53 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
     return '';
 }
+
+
+
+
+function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        //url: this.apiUrl("SystemTools", "InsertLog"),
+        url: sys.apiUrl("SystemTools", "InsertLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
+
+        }
+    });
+
+}
+function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "PrintliestLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+
+        }
+    });
+
+}
+function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "OpenScreenLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+
+        }
+    });
+
+}
+
+

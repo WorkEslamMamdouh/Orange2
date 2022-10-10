@@ -1684,6 +1684,8 @@ var Processes;
             { title: res.sales_credit, name: "Close_TotalSalesCredit", type: "text", width: "10%" },
             { title: res.Sales_credit_tax, name: "Close_TotalSalesCreditVAT", type: "text", width: "10%" },
             { title: res.Total_sales, name: "Close_TotalSales", type: "text", width: "10%" },
+            //{ title: res.cash_to_sales, name: "Close_CashOnhand", type: "text", width: "10%" },
+            //{ title: res.cash_in_bank, name: "Close_CashOnBank", type: "text", width: "10%" },
         ];
     }
     function SalaGridDoubleClick() {
@@ -1798,6 +1800,7 @@ var Processes;
                     return txt;
                 }
             },
+            //{ title: res.Remaining_quantity, name: "OnhandQty", type: "text", width: "22%" },
         ];
     }
     function check_OnhandQty(id_Num) {

@@ -33,6 +33,14 @@ namespace Inv.DAL.Domain
         public string Token { get; set; } 
         public string CompName { get; set; }
         public string VatNo { get; set; }
+
+        public string Branch_Code { get; set; }
+        public string Comp_Code { get; set; }
+        public string sec_FinYear { get; set; }
+        public string MODULE_CODE { get; set; }
+
+
+
     }
     public class SecurityandUpdateFlagClass_FIN_YEAR
     {

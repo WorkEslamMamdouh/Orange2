@@ -216,16 +216,20 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                              
-                               obj.I_Sls_TR_Invoice.TrNo=int.Parse(res.ResponseData.ToString());
+                            obj.I_Sls_TR_Invoice.TrNo=int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                         ////////
@@ -233,6 +237,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -426,17 +432,24 @@ namespace Inv.API.Controllers
                             dbTransaction.Commit();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -812,18 +825,24 @@ namespace Inv.API.Controllers
                         {
                             //updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
+
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

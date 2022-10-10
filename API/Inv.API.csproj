@@ -283,6 +283,7 @@
     <Compile Include="Controllers\ServPurInvoiceController.cs" />
     <Compile Include="Controllers\ServTrSalesController.cs" />
     <Compile Include="Controllers\Shared\G_BranchController.cs" />
+    <Compile Include="Controllers\Shared\LogUser.cs" />
     <Compile Include="Controllers\Shared\QRGenerator.cs" />
     <Compile Include="Controllers\I_PeriodController.cs" />
     <Compile Include="Controllers\STK_TR_ISSUECCController.cs" />

@@ -1920,4 +1920,38 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     });
     return '';
 }
+function PrintTransactionLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId) {
+    debugger;
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        //url: this.apiUrl("SystemTools", "InsertLog"),
+        url: sys.apiUrl("SystemTools", "InsertLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: function (response) {
+        }
+    });
+}
+function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    debugger;
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "PrintliestLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
+function OpenScreen(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    debugger;
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "OpenScreenLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
 //# sourceMappingURL=App.js.map

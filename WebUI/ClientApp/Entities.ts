@@ -4,6 +4,10 @@ class SecurityClass {
     public Token: string;
     public CompName: string;
     public VatNo: string;
+    public Branch_Code: string;
+    public Comp_Code: string;
+    public sec_FinYear: string;
+    public MODULE_CODE: string;
 }
 
 class FavModules {//
