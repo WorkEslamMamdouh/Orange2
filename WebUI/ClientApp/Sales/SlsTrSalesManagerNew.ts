@@ -166,25 +166,41 @@ namespace SlsTrSalesManagerNew {
     var modal = document.getElementById("myModal");
 
 
+    var display_none = "display_none";
+    var Remove_display_none = "";
+
     var Screen_name = ""
     var SlsInvSrc = $('#Flag_SlsInvSrc').val();
     debugger
-
-
+    var flagInvItemDiscount = false;
+    var flagInvMulti = false;
+    var SalesmanId = 'null';
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
-        (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice')
+        (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice') 
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
+        
+
     }
     else {       //2: opration invoice 
 
-        (lang == "ar" ? Screen_name = 'فواتير العمليات' : Screen_name = 'opration invoice')
+        (lang == "ar" ? Screen_name = 'فواتير العمليات' : Screen_name = 'opration invoice') 
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper
+
     }
 
+    //flagInvItemDiscount = true;
+    //flagInvMulti = true;
 
     //------------------------------------------------------ Main Region------------------------
 
     export function InitalizeComponent() {
 
+        //alert()
+        //alert()
+      
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
 
@@ -229,6 +245,15 @@ namespace SlsTrSalesManagerNew {
         InitializeGrid();
 
         DisplayMod();
+
+        
+        
+
+        flagInvMulti == false ?  $('.InvMulti').addClass('display_none') : $('.InvMulti').removeClass('display_none');
+        flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
+
+        flagInvMulti == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', '')
+        flagInvItemDiscount == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', 'width:140%')
 
         
 
@@ -369,6 +394,7 @@ namespace SlsTrSalesManagerNew {
             $('#txt_OperationFilter').val(List_Operation[0].TrNo)
             $('#txt_OperationIdFilter').val(List_Operation[0].OperationID)
 
+            SalesmanId = List_Operation[0].SalesmanId
 
         });
 
@@ -608,8 +634,9 @@ namespace SlsTrSalesManagerNew {
 
             SetDataOperation(cnt, flagfrom, List_Operation[0].TrNo, List_Operation[0].OperationID)
 
-
-
+            ddlSalesman.value = List_Operation[0].SalesmanId;
+            ddlSalesPerson.value = List_Operation[0].SalesmanId;
+            
         });
 
     }
@@ -1709,6 +1736,16 @@ namespace SlsTrSalesManagerNew {
 
         Creadt();
 
+        $('#txt_OperationId').val($('#txt_OperationIdFilter').val())
+        $('#txt_Operation').val($('#txt_OperationFilter').val())
+
+        try {
+            ddlSalesman.value = SalesmanId;
+            ddlSalesPerson.value = SalesmanId;
+        } catch (e) {
+
+        }
+
     }
     function btnShow_onclick() {
 
@@ -2364,12 +2401,12 @@ namespace SlsTrSalesManagerNew {
 			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
-                    <td  class="btnOpration">
+                    <td  class="btnOpration ${ flagInvMulti == false ? display_none : Remove_display_none } ">
 		                <div class="form-group"> 
 			               <button id="btnTypeInv${cnt}" class="btn btn-main btn-operation" >   </button>
 		                </div>
 	                </td>
-                    <td class="Storeflag  "  ><select id="ddlStore${cnt}" disabled class="btn btn-main"> <option value="null"> أختر المستودع  </option></select></td>
+                    <td class="Storeflag  ${ flagInvMulti == false ? display_none : Remove_display_none } "  ><select id="ddlStore${cnt}" disabled class="btn btn-main"> <option value="null"> أختر المستودع  </option></select></td>
                      <td>
                         <div class="search-content">
                              <input  type ="hidden" class="form-control search-control" id ="ddlItem${cnt}" name ="Operation" disabled >
@@ -2408,18 +2445,18 @@ namespace SlsTrSalesManagerNew {
 			               <input id="txtUnitpriceWithVat${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td> 
-                    <td>
-		                <div class="form-group" >
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+		                <div class="form-group " >
 			               <input id="txtDiscountPrc${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
-		                <div class="form-group"  >
+                    <td class="  ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+		                <div class="form-group  "  >
 			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
-		                <div class="form-group" >
+                    <td class="   ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+		                <div class="form-group " >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>

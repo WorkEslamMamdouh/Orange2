@@ -518,21 +518,21 @@
                         <!-- Inside Table  -->
                         <div class="inside-table my-4">
                             <div class="table-responsive">
-                                <table class="table table-borderless " style="width:140%">
+                                <table id="TableRespon" class="table table-borderless " style="width:140%">
                                     <thead>
                                         <tr>
                                             <th style="width: 3%"></th>
                                             <th style="width: 3%" class="px-3"> @SystemResource.serial </th>
-                                            <th style="width: 3%" class="px-3"> النوع </th>
+                                            <th style="width: 3%" class="px-3 InvMulti"> نوع الملية </th>
                                             <th style="width: 16%" class="px-3">كود الصنف</th>
                                             <th style="width: 16%" class="px-5">الصنف</th>
                                             <th style="width: 8%" class="px-3"> @SystemResource.App_soldQty</th>
                                             <th style="width: 1%" class=" ">المرتجع</th>
                                             <th style="width: 7%">  @SystemResource.App_Price  </th>
                                             <th style="width: 7%" class=" ">السعر بالضريبه</th>
-                                            <th style="width: 7%" class=" ">نسبة الخصم </th>
-                                            <th style="width: 7%" class=" ">الخصم  </th>
-                                            <th style="width: 7%" class=" ">السعر بعدالخصم  </th>
+                                            <th style="width: 7%" class="InvDiscount ">نسبة الخصم </th>
+                                            <th style="width: 7%" class="InvDiscount ">الخصم  </th>
+                                            <th style="width: 7%" class="InvDiscount ">السعر بعدالخصم  </th>
                                             <th style="width: 1%" class=" ">@SystemResource.tax_rate</th>
                                             <th style="width: 7%" class=" ">@SystemResource.App_total</th>
                                             <th style="width: 7%" class=" ">@SystemResource.App_Tax</th>
@@ -626,7 +626,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-3">
+                            <div class="col-12 col-md-3 InvDiscount">
                                 <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">الخصم</label>
                                     <div class="col-8 ">
@@ -634,7 +634,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3">
+                            <div class="col-12 col-md-3 InvDiscount">
                                 <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">الاجمالي بعد الخصم</label>
                                     <div class="col-8 ">
