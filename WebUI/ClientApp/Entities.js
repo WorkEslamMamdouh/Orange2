@@ -2815,6 +2815,8 @@ var I_TR_OperationCharges = /** @class */ (function (_super) {
         _this.VendorID = 0;
         _this.StatusFlag = "";
         _this.CashBoxID = 0;
+        _this.IsPosted = false;
+        _this.VoucherNo = 0;
         return _this;
     }
     return I_TR_OperationCharges;
@@ -2883,6 +2885,8 @@ var I_TR_Operation = /** @class */ (function (_super) {
         _this.Close_TotalQtyRec = 0;
         _this.Close_TotalQtySold = 0;
         _this.Close_TotalQtyScrap = 0;
+        _this.IsPurPosted = false;
+        _this.PurVoucherNo = 0;
         return _this;
     }
     return I_TR_Operation;
@@ -2971,6 +2975,8 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.OperationID = 0;
         _this.CashBox_DescA = "";
         _this.CashBox_DescE = "";
+        _this.IsPosted = false;
+        _this.VoucherNo = 0;
         return _this;
     }
     return IQ_GetOperationCharges;
@@ -3051,6 +3057,8 @@ var IQ_GetOperation = /** @class */ (function (_super) {
         _this.Close_TotalQtyRec = 0;
         _this.Close_TotalQtySold = 0;
         _this.Close_TotalQtyScrap = 0;
+        _this.PurVoucherNo = 0;
+        _this.IsPurPosted = false;
         return _this;
     }
     return IQ_GetOperation;

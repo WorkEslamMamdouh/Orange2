@@ -22,7 +22,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.85099cm</Top>
+        <Top>0.21599cm</Top>
         <Left>18.13288cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
@@ -56,45 +56,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>3.27485cm</Top>
+        <Top>2.4176cm</Top>
         <Left>18.13391cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
         <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox18">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>المندوب</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>3.27485cm</Top>
-        <Left>7.87557cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.80576cm</Width>
-        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -124,11 +90,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>0.85099cm</Top>
+        <Top>0.21599cm</Top>
         <Left>14.13047cm</Left>
         <Height>0.6cm</Height>
         <Width>3.93788cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -163,7 +129,7 @@
         <Left>13.3538cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -197,7 +163,7 @@
         <Left>4.23547cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -231,7 +197,7 @@
         <Left>13.3538cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -265,7 +231,7 @@
         <Left>4.23547cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -299,7 +265,7 @@
         <Left>14.48235cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -333,7 +299,7 @@
         <Left>14.48235cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -367,7 +333,7 @@
         <Left>5.38519cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -401,7 +367,7 @@
         <Left>5.38519cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -435,7 +401,7 @@
         <Left>13.3538cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -469,7 +435,7 @@
         <Left>4.23547cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -500,11 +466,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.85099cm</Top>
+        <Top>0.21599cm</Top>
         <Left>12.63816cm</Left>
         <Height>0.6cm</Height>
         <Width>1.17708cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -534,11 +500,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.85099cm</Top>
+        <Top>0.21599cm</Top>
         <Left>9.44104cm</Left>
         <Height>0.6cm</Height>
         <Width>3.19712cm</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -567,44 +533,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
-        <Top>3.27485cm</Top>
+        <Top>2.4176cm</Top>
         <Left>10.39354cm</Left>
         <Height>0.6cm</Height>
         <Width>7.74037cm</Width>
-        <ZIndex>16</ZIndex>
-        <Style>
-          <Border>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Slsm_DescA">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!BRA_DESC.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>3.27838cm</Top>
-        <Left>1.02556cm</Left>
-        <Height>0.6cm</Height>
-        <Width>6.85001cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -638,7 +571,10 @@
               <Width>2.07667cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>8.02433cm</Width>
+              <Width>6.43683cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.47124cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -976,6 +912,40 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox6">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>العمليه</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -1215,12 +1185,46 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="dtop_TrNo">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!dtop_TrNo.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>dtop_TrNo</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1249,8 +1253,8 @@
         <DataSetName>Rpt_Prnt_OPerationInvoiceSimpleAr</DataSetName>
         <Top>4.10904cm</Top>
         <Height>1.64979cm</Height>
-        <Width>20.09121cm</Width>
-        <ZIndex>18</ZIndex>
+        <Width>19.97495cm</Width>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1280,7 +1284,7 @@
         <Left>8.22022cm</Left>
         <Height>0.6cm</Height>
         <Width>3.06548cm</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1316,7 +1320,7 @@
         <Left>14.28568cm</Left>
         <Height>0.6cm</Height>
         <Width>2.44231cm</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1349,11 +1353,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.81695cm</Top>
+        <Top>0.18195cm</Top>
         <Left>6.09195cm</Left>
         <Height>0.6cm</Height>
         <Width>3.1727cm</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1384,11 +1388,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59752cm</Top>
+        <Top>0.96252cm</Top>
         <Left>12.00948cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1416,11 +1420,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>1.59752cm</Top>
+        <Top>0.96252cm</Top>
         <Left>9.19316cm</Left>
         <Height>0.6cm</Height>
         <Width>2.81632cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1452,11 +1456,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.36361cm</Top>
+        <Top>1.72861cm</Top>
         <Left>18.13391cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1486,11 +1490,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>2.36361cm</Top>
+        <Top>1.72861cm</Top>
         <Left>14.1315cm</Left>
         <Height>0.6cm</Height>
         <Width>3.93788cm</Width>
-        <ZIndex>25</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1522,11 +1526,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.36361cm</Top>
+        <Top>1.72861cm</Top>
         <Left>12.01103cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
-        <ZIndex>26</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1556,11 +1560,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>2.36361cm</Top>
+        <Top>1.72861cm</Top>
         <Left>9.19316cm</Left>
         <Height>0.6cm</Height>
         <Width>2.75334cm</Width>
-        <ZIndex>27</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1595,7 +1599,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>0.59517cm</Left>
         <Height>0.6cm</Height>
         <Width>2.58242cm</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1617,7 +1621,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>0.29035cm</Left>
         <Height>2.25806cm</Height>
         <Width>3.01404cm</Width>
-        <ZIndex>29</ZIndex>
+        <ZIndex>27</ZIndex>
         <ToolTip>=First(Fields!QRSTR.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</ToolTip>
         <Style>
           <Border>
@@ -1649,7 +1653,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>16.72799cm</Left>
         <Height>0.6cm</Height>
         <Width>3.18445cm</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1683,7 +1687,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>11.2857cm</Left>
         <Height>0.6cm</Height>
         <Width>2.28351cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1717,7 +1721,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>3.16328cm</Left>
         <Height>0.6cm</Height>
         <Width>1.97299cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1752,7 +1756,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>17.69691cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>31</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1784,7 +1788,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>0.58856cm</Left>
         <Height>1.44667cm</Height>
         <Width>17.10835cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>32</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1800,11 +1804,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Source>Embedded</Source>
         <Value>draft21</Value>
         <Sizing>Fit</Sizing>
-        <Top>0cm</Top>
         <Left>0.29035cm</Left>
         <Height>2.47814cm</Height>
         <Width>3.80918cm</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>33</ZIndex>
         <Visibility>
           <Hidden>=iif(Fields!Status.Value=0,false,true)</Hidden>
         </Visibility>
@@ -1837,7 +1840,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>5.93085cm</Left>
         <Height>0.6cm</Height>
         <Width>2.11298cm</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1869,11 +1872,11 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59752cm</Top>
+        <Top>0.96252cm</Top>
         <Left>18.16919cm</Left>
         <Height>0.6cm</Height>
         <Width>1.77048cm</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1903,15 +1906,149 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.55682cm</Top>
+        <Top>0.92182cm</Top>
         <Left>14.13047cm</Left>
         <Height>0.6cm</Height>
         <Width>3.96816cm</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
             <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox76">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>المندوب</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>3.13049cm</Top>
+        <Left>18.16919cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.80576cm</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TrNo6">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Salesman_NameA.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TrNo</rd:DefaultName>
+        <Top>3.13049cm</Top>
+        <Left>14.13349cm</Left>
+        <Height>0.6cm</Height>
+        <Width>4.03467cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox77">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>البائع</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>3.13416cm</Top>
+        <Left>12.1864cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.80576cm</Width>
+        <ZIndex>39</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TrNo7">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!SPer_NameA.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TrNo</rd:DefaultName>
+        <Top>3.13416cm</Top>
+        <Left>8.1507cm</Left>
+        <Height>0.6cm</Height>
+        <Width>4.03467cm</Width>
+        <ZIndex>40</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
           </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
@@ -2872,6 +3009,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <DataField>Status</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="Inv_RefNo">
+          <DataField>Inv_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="op_TrNo">
           <DataField>op_TrNo</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -2886,6 +3027,58 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Field>
         <Field Name="Op_RefNo">
           <DataField>Op_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AmountinWords">
+          <DataField>AmountinWords</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_code">
+          <DataField>Sper_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SPer_NameA">
+          <DataField>SPer_NameA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_nameE">
+          <DataField>Sper_nameE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dt_Src">
+          <DataField>dt_Src</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dt_Storeid">
+          <DataField>dt_Storeid</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dt_Operationid">
+          <DataField>dt_Operationid</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtop_TrNo">
+          <DataField>dtop_TrNo</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtStore_code">
+          <DataField>dtStore_code</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtStore_DescA">
+          <DataField>dtStore_DescA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_code">
+          <DataField>Salesman_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_NameA">
+          <DataField>Salesman_NameA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_nameE">
+          <DataField>Salesman_nameE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

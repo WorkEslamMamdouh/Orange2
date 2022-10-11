@@ -952,7 +952,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBoxID.Value, "Rpt_Prnt_AccReceiveAr")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveAr")</Value>
                 <Style />
               </TextRun>
             </TextRuns>

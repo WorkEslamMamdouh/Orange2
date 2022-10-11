@@ -334,6 +334,7 @@ namespace AccTrReceiptNote {
     }
 
     function txtCashTypeNew_onchange() {
+        debugger
         if (txtCashTypeNew.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('#La_CashAmount').removeClass('display_none');
@@ -346,6 +347,8 @@ namespace AccTrReceiptNote {
             $('#txt_BankAcc_Code').val('null');
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
+            $('#txt_Amount').attr('disabled', 'disabled');
+
         }
         else if (txtCashTypeNew.value == '1' || txtCashTypeNew.value == '2') {
             $('#Bank_Div').removeClass('display_none');
@@ -358,9 +361,10 @@ namespace AccTrReceiptNote {
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
 
-            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            //$('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
 
-
+            $('#txt_Amount').removeAttr('disabled');
+             
         }
         else {
             $('#Bank_Div').removeClass('display_none');
@@ -373,7 +377,9 @@ namespace AccTrReceiptNote {
             $('#txt_CashAmount').val('0');
             $('#txt_CardAmount').val('0');
 
-            $('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
+            $('#txt_Amount').removeAttr('disabled');
+
+            //$('#btnUpdate').attr('class') == 'btn btn-primary display_none' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
 
         }
 
@@ -603,6 +609,7 @@ namespace AccTrReceiptNote {
         if (txt_D_CashBox.value == "Null") {
             DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
             Errorinput(txt_D_CashBox);
+            Back();
             return;
         } else {
 

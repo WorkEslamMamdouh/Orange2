@@ -474,6 +474,7 @@ var SlsTrSalesManagerNew;
             var OperationID = SearchGrid.SearchDataGrid.SelectedKey;
             var List_Operation = SearchGrid.SearchDataGrid.dataScr;
             debugger;
+            Clear_Row(cnt);
             List_Operation = List_Operation.filter(function (x) { return x.OperationID == OperationID; });
             SetDataOperation(cnt, flagfrom, List_Operation[0].TrNo, List_Operation[0].OperationID);
         });
@@ -1792,6 +1793,7 @@ var SlsTrSalesManagerNew;
                 var result = d;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response;
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (var i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }
@@ -2191,9 +2193,8 @@ var SlsTrSalesManagerNew;
                 if (txtQuantityValue > Onhand_Qty) {
                     DisplayMassage("خطأ الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Error);
                     //if (SysSession.CurrentEnvironment.I_Control[0].ExceedOnhandQty != 1) { // invoice, send tf , direct tf                         
-                    Errorinput($("#txtQuantity" + cnt));
-                    $("#txtQuantity" + cnt).val(Onhand_Qty);
-                    //txtQuantityValue = Onhand_Qty;
+                    //Errorinput($("#txtQuantity" + cnt));
+                    //$("#txtQuantity" + cnt).val(Onhand_Qty); 
                     //}
                 }
             }

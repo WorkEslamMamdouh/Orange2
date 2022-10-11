@@ -384,6 +384,7 @@ var Clientaccstat;
         else {
             rp.orderby = 3;
         }
+        debugger;
         //  Rd_detail
         if (Rddetails.checked == true) { //******  تقرير تفصيلي  
             rp.check = 1;

@@ -65,7 +65,7 @@ namespace SlsTrSalesManagerNew {
     var invoiceItemSingleModel: I_Sls_TR_InvoiceItems = new I_Sls_TR_InvoiceItems();
     var List_MinUnitPrice: Array<I_Sls_TR_InvoiceItems> = new Array<I_Sls_TR_InvoiceItems>();
     var ItemFamilyDetails: Array<IQ_GetItemStoreInfo> = new Array<IQ_GetItemStoreInfo>();
-    var mainItemDetails: Array<IQ_GetOperationSalesmanItem> = new Array<IQ_GetOperationSalesmanItem>();
+    var mainItemDetails: Array<IQ_GetOperationItemInfo> = new Array<IQ_GetOperationItemInfo>();
     var MasterDetailModel: SlsInvoiceMasterDetails = new SlsInvoiceMasterDetails();
     var Model_Items: GetItem = new GetItem();
     var Details_Inv_Items: Array<GetItem> = new Array<GetItem>();
@@ -466,9 +466,10 @@ namespace SlsTrSalesManagerNew {
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
-                        mainItemDetails = result.Response as Array<IQ_GetOperationSalesmanItem>;
+                        mainItemDetails = result.Response as Array<IQ_GetOperationItemInfo>;
                         if (mainItemDetails.length > 0) {
                             PushModelItems(mainItemDetails[0], Type)
+                            
                         }
                         else {
                             Model_Items = new GetItem();
@@ -529,9 +530,10 @@ namespace SlsTrSalesManagerNew {
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
-                        mainItemDetails = result.Response as Array<IQ_GetOperationSalesmanItem>;
+                        mainItemDetails = result.Response as Array<IQ_GetOperationItemInfo>;
                         if (mainItemDetails.length > 0) {
                             PushModelItems(mainItemDetails[0], Type)
+                           
                         }
                         else {
                             Model_Items = new GetItem();
@@ -601,6 +603,7 @@ namespace SlsTrSalesManagerNew {
             let List_Operation = SearchGrid.SearchDataGrid.dataScr;
 
             debugger
+            Clear_Row(cnt)
             List_Operation = List_Operation.filter(x => x.OperationID == OperationID)
 
             SetDataOperation(cnt, flagfrom, List_Operation[0].TrNo, List_Operation[0].OperationID)
@@ -2271,6 +2274,7 @@ namespace SlsTrSalesManagerNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItemVer2>;
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }
@@ -2888,9 +2892,8 @@ namespace SlsTrSalesManagerNew {
                  
                     //if (SysSession.CurrentEnvironment.I_Control[0].ExceedOnhandQty != 1) { // invoice, send tf , direct tf                         
                  
-                            Errorinput($("#txtQuantity" + cnt));
-                            $("#txtQuantity" + cnt).val(Onhand_Qty);
-                            //txtQuantityValue = Onhand_Qty;
+                            //Errorinput($("#txtQuantity" + cnt));
+                            //$("#txtQuantity" + cnt).val(Onhand_Qty); 
                      
                     //}
                 }

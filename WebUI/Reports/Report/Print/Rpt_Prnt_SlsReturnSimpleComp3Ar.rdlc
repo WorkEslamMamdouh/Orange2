@@ -998,7 +998,6 @@
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_SlsReturnSimpleComp3Ar</DataSetName>
         <Top>3.88654cm</Top>
-        <Left>0cm</Left>
         <Height>1.72917cm</Height>
         <Width>20.00119cm</Width>
         <ZIndex>3</ZIndex>
@@ -2381,8 +2380,78 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <rd:DefaultName>Textbox1</rd:DefaultName>
           <Top>4.57412cm</Top>
           <Left>0.01255in</Left>
-          <Height>1.42902cm</Height>
+          <Height>1.32319cm</Height>
           <Width>19.96931cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="ExecutionTime">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Format(Fields!PrintDate.Value, "dd/MM/yyyy hh:mm tt")</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <Format>dd/MM/yyyy hh:mm </Format>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>ExecutionTime</rd:DefaultName>
+          <Top>5.97018cm</Top>
+          <Left>14.55287cm</Left>
+          <Height>0.50355cm</Height>
+          <Width>3.32716cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox15">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>تاريخ الطباعة</Value>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>5.97018cm</Top>
+          <Left>17.93825cm</Left>
+          <Height>0.50355cm</Height>
+          <Width>2.04108cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
