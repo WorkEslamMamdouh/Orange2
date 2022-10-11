@@ -204,6 +204,8 @@ namespace SlsTrSalesManagerNew {
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
 
+        document.title = Screen_name;
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
