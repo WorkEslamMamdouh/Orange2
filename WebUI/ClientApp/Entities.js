@@ -1350,6 +1350,10 @@ var I_Control = /** @class */ (function () {
         this.IsInvPeriodClose = false;
         this.IsFasPeriodClose = false;
         this.IsAutoNoCustVendor = false;
+        this.IsOprInvItemDiscount = false;
+        this.IsOprInvMultiOper = false;
+        this.IsRetailInvItemDiscount = false;
+        this.IsRetailInvMultiStore = false;
         this.RetailInvoicePaymentDef = 0;
         this.OperationInvoicePaymentDef = 0;
     }

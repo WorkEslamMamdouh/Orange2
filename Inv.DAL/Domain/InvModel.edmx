@@ -1957,6 +1957,10 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="IsInvPeriodClose" Type="bit" />
           <Property Name="IsFasPeriodClose" Type="bit" />
           <Property Name="IsAutoNoCustVendor" Type="bit" />
+          <Property Name="IsOprInvItemDiscount" Type="bit" />
+          <Property Name="IsOprInvMultiOper" Type="bit" />
+          <Property Name="IsRetailInvItemDiscount" Type="bit" />
+          <Property Name="IsRetailInvMultiStore" Type="bit" />
         </EntityType>
         <EntityType Name="I_D_Category">
           <Key>
@@ -17662,6 +17666,10 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsInvPeriodClose" Type="Boolean" />
           <Property Name="IsFasPeriodClose" Type="Boolean" />
           <Property Name="IsAutoNoCustVendor" Type="Boolean" />
+          <Property Name="IsOprInvItemDiscount" Type="Boolean" />
+          <Property Name="IsOprInvMultiOper" Type="Boolean" />
+          <Property Name="IsRetailInvItemDiscount" Type="Boolean" />
+          <Property Name="IsRetailInvMultiStore" Type="Boolean" />
         </EntityType>
         <EntityType Name="A_CCDT_COSTCENTERS">
           <Key>
@@ -27986,6 +27994,10 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Control">
             <EntityTypeMapping TypeName="InvModel.I_Control">
               <MappingFragment StoreEntitySet="I_Control">
+                <ScalarProperty Name="IsRetailInvMultiStore" ColumnName="IsRetailInvMultiStore" />
+                <ScalarProperty Name="IsRetailInvItemDiscount" ColumnName="IsRetailInvItemDiscount" />
+                <ScalarProperty Name="IsOprInvMultiOper" ColumnName="IsOprInvMultiOper" />
+                <ScalarProperty Name="IsOprInvItemDiscount" ColumnName="IsOprInvItemDiscount" />
                 <ScalarProperty Name="IsAutoNoCustVendor" ColumnName="IsAutoNoCustVendor" />
                 <ScalarProperty Name="IsFasPeriodClose" ColumnName="IsFasPeriodClose" />
                 <ScalarProperty Name="IsInvPeriodClose" ColumnName="IsInvPeriodClose" />

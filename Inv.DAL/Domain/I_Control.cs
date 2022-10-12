@@ -72,5 +72,9 @@ namespace Inv.DAL.Domain
         public Nullable<bool> IsInvPeriodClose { get; set; }
         public Nullable<bool> IsFasPeriodClose { get; set; }
         public Nullable<bool> IsAutoNoCustVendor { get; set; }
+        public Nullable<bool> IsOprInvItemDiscount { get; set; }
+        public Nullable<bool> IsOprInvMultiOper { get; set; }
+        public Nullable<bool> IsRetailInvItemDiscount { get; set; }
+        public Nullable<bool> IsRetailInvMultiStore { get; set; }
     }
 }
