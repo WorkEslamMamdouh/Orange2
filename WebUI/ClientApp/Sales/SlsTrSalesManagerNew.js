@@ -496,7 +496,7 @@ var SlsTrSalesManagerNew;
             Clear_Row(cnt);
             List_Operation = List_Operation.filter(function (x) { return x.OperationID == OperationID; });
             SetDataOperation(cnt, flagfrom, List_Operation[0].TrNo, List_Operation[0].OperationID);
-            ddlSalesman.value = List_Operation[0].SalesmanId;
+            //ddlSalesman.value = List_Operation[0].SalesmanId;
             ddlSalesPerson.value = List_Operation[0].SalesmanId;
         });
     }
@@ -1326,7 +1326,7 @@ var SlsTrSalesManagerNew;
         $('#txt_OperationId').val($('#txt_OperationIdFilter').val());
         $('#txt_Operation').val($('#txt_OperationFilter').val());
         try {
-            ddlSalesman.value = SalesmanId;
+            //ddlSalesman.value = SalesmanId;
             ddlSalesPerson.value = SalesmanId;
         }
         catch (e) {
