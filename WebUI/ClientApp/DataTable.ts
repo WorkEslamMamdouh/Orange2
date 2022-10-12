@@ -81,7 +81,7 @@ class DataTable {
 
         this.dataScr = this.dataScr.filter(row => row.hidden != true);
 
-        var tableHeaders;
+        var tableHeaders = "";
         this.column_defs.forEach(col => {
             var _width: string = "style = 'width: " + col.width + ";max-width: " + col.width + ";min-width: " + col.width + ";'";
             tableHeaders += "<th " + _width + ">" + col.title + "</th>";

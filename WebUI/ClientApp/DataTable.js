@@ -52,7 +52,7 @@ var DataTable = /** @class */ (function () {
             this.column_defs.push(newColumn);
         }
         this.dataScr = this.dataScr.filter(function (row) { return row.hidden != true; });
-        var tableHeaders;
+        var tableHeaders = "";
         this.column_defs.forEach(function (col) {
             var _width = "style = 'width: " + col.width + ";max-width: " + col.width + ";min-width: " + col.width + ";'";
             tableHeaders += "<th " + _width + ">" + col.title + "</th>";
