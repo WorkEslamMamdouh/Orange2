@@ -29905,7 +29905,7 @@ input[class=checkbox]:checked:before {
 .search-box .dataTables_wrapper .dataTables_paginate {
     display: flex;
     justify-content: center;
-    font-size: .7rem;
+    font-size: 1.3rem;
 }
     .search-box .dataTables_wrapper .dataTables_paginate .paginate_button {
         color: var(--bs-white);
