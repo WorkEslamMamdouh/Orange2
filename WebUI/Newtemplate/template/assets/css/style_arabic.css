@@ -21851,28 +21851,24 @@ a {
     font-family: 'Rubik';
     font-weight: 300;
     src: url("../fonts/Rubik/Rubik-Light.ttf");
-    /* IE9 Compat Modes */
 }
 
 @font-face {
     font-family: 'Rubik';
     font-weight: 400;
     src: url("../fonts/Rubik/Rubik-Regular.ttf");
-    /* IE9 Compat Modes */
 }
 
 @font-face {
     font-family: 'Rubik';
     font-weight: 500;
     src: url("../fonts/Rubik/Rubik-Medium.ttf");
-    /* IE9 Compat Modes */
 }
 
 @font-face {
     font-family: 'Rubik';
     font-weight: 700;
     src: url("../fonts/Rubik/Rubik-Bold.ttf");
-    /* IE9 Compat Modes */
 }
 
 /* Backgrounds  */
@@ -25261,7 +25257,7 @@ div.tagsinput {
         font-size: 0.6rem;
         line-height: 1;
         white-space: nowrap;
-        padding: 0.1075rem;
+        padding: 0.3rem;
     }
 
         .table th img, .jsgrid .jsgrid-table th img,
@@ -25948,11 +25944,16 @@ body.avgrund-active {
     padding-right: 0;
     padding-left: 0;
     margin: 2rem;
+    margin-top:0;
 }
 
     .dataTables_wrapper label {
         font-size: .8125rem;
     }
+
+.dataTables_filter label {
+    width: 100%;
+}
 
     .dataTables_wrapper select {
         padding: .4rem;
@@ -27746,7 +27747,7 @@ div.tagsinput {
     }
     .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini {
         display: none;
-        font-family: 'Dancing Script', cursive;
+        font-family: 'DancingScript', cursive;
     }
 
         .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini img {
@@ -29843,7 +29844,8 @@ input[class=checkbox]:checked:before {
         color: #fff;
         line-height: 36px;
         text-align: right;
-        font-size:.8rem;
+        font-size:1rem;
+        padding-right:1rem;
     }
 .table-serach-container {
     overflow-x: auto;
@@ -29869,17 +29871,20 @@ input[class=checkbox]:checked:before {
         line-height: 2rem;
     }
 
-    .dataTables_filter input[type="search"] {
-        border-radius: 5px;
-        border: 1px solid var(--main-blue);
-        margin-right: 8px;
-    }
+        .dataTables_filter input[type="search"] {
+            border-radius: 5px;
+            border: 1px solid var(--main-blue);
+            margin-right: 8px;
+            width: 60%;
+            height: 1.9rem;
+            background-color: var(--Light-blue);
+        }
 .search-box .dataTable {
     margin: 1rem;
 }
 .search-box .dataTables_wrapper .dataTable thead th,
 .dataTables_wrapper .dataTable tbody td {
-    font-size: .8rem;
+    font-size: .9rem;
 }
 .search-box .dataTables_wrapper .dataTable tr {
     border-width: 0.5px;
@@ -30435,10 +30440,20 @@ input[class=checkbox]:checked:before {
     background-image: linear-gradient(180deg, var(--dark-blue) 0%, var(--dark-blue) 99%);
 }
 
+
+.table-serach-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.table-serach-container::-webkit-scrollbar-thumb {
+    border-radius: 80px;
+    background-image: linear-gradient(180deg, var(--dark-blue) 0%, var(--dark-blue) 99%);
+}
+/*End Scroll Bar*/
+
 #btnPrintsFrom_To {
     font-weight: bold;
     font-size: .9rem;
 }
 
-/*End Scroll Bar*/
 
