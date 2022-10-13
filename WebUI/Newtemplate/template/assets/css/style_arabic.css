@@ -25945,6 +25945,7 @@ body.avgrund-active {
     padding-left: 0;
     margin: 2rem;
     margin-top:0;
+    margin-bottom:0;
 }
 
     .dataTables_wrapper label {
@@ -29880,11 +29881,14 @@ input[class=checkbox]:checked:before {
             background-color: var(--Light-blue);
         }
 .search-box .dataTable {
-    margin: 1rem;
+    margin: .5rem 1rem;
 }
 .search-box .dataTables_wrapper .dataTable thead th,
 .dataTables_wrapper .dataTable tbody td {
-    font-size: .9rem;
+    font-size: .8rem;
+}
+.search-box .dataTables_wrapper .dataTable thead th {
+   padding:0;
 }
 .search-box .dataTables_wrapper .dataTable tr {
     border-width: 0.5px;
@@ -29905,7 +29909,8 @@ input[class=checkbox]:checked:before {
 .search-box .dataTables_wrapper .dataTables_paginate {
     display: flex;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: 0.7rem;
+    direction:ltr;
 }
     .search-box .dataTables_wrapper .dataTables_paginate .paginate_button {
         color: var(--bs-white);
@@ -30455,5 +30460,14 @@ input[class=checkbox]:checked:before {
     font-weight: bold;
     font-size: .9rem;
 }
+/*.sorting {
+    background-image: url("../images/sort_both.png")
+}
+.sorting_desc {
+    background-image: url("../images/sort_desc.png")
+}
+.sorting_asc {
+    background-image: url("../images/sort_asc.png")
+}*/
 
 

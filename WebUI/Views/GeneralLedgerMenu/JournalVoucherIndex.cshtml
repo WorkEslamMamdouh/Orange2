@@ -226,12 +226,19 @@
                                     </div>
                                     </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-5">
                                     <div class="form-group row">
                                         <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_desc  </label>
                                         <div class="col-8 col-md-10">
                                             <textarea id="txtJournalDescripton" name="" disabled type="text" class="form-control  h-100"></textarea>
                                         </div>
+                                    </div>
+                                </div>  
+                                <div class="col-12 col-md-1">
+                                    <div class="form-group row">
+                                        <button id="btnCopyRemark" type="button" class="btn btn-main me-3">
+                                            نسخ الوصف في الملاحظات الجدول
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-3">
@@ -266,9 +273,9 @@
                                                     <th></th>
                                                     <th class="cursor-pointer" id="divCostCnterName">@SystemResource.menu_Costcenter <i class="fas fa-arrows-alt-h"></i></th>
                                                     <th>@SystemResource.SHT_Name</th>
-                                                    <th></th>
-                                                    <th class="cursor-pointer" id="divCostCnterNameCCDT">@SystemResource.BU <i class="fas fa-arrows-alt-h"></i></th>
-                                                    <th>@SystemResource.SHT_Name</th>
+                                                    <th class="display_none"></th>
+                                                    <th class="cursor-pointer display_none" id="divCostCnterNameCCDT">@SystemResource.BU <i class="fas fa-arrows-alt-h"></i></th>
+                                                    <th class="display_none">@SystemResource.SHT_Name</th>
                                                     <th>@SystemResource.App_Notes</th>
                                                 </tr>
                                             </thead>

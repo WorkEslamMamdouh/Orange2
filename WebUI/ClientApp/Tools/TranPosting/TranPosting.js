@@ -95,6 +95,7 @@ var TranPosting;
         $("#div_3").removeClass("display_none");
         $("#div_1").addClass("display_none");
         $("#div_2").addClass("display_none");
+        ddlBranch.selectedIndex = 1;
     }
     TranPosting.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -407,7 +408,7 @@ var TranPosting;
         SubSystemGrid.ElementName = "SubSystemGrid";
         SubSystemGrid.PrimaryKey = "MODULE_CODE";
         SubSystemGrid.Paging = true;
-        SubSystemGrid.PageSize = 10;
+        SubSystemGrid.PageSize = 15;
         SubSystemGrid.Sorting = true;
         SubSystemGrid.InsertionMode = JsGridInsertionMode.Binding;
         SubSystemGrid.Editing = false;
@@ -467,7 +468,7 @@ var TranPosting;
         TransactionsGrid.ElementName = "TransactionsGrid";
         TransactionsGrid.PrimaryKey = "ROW_ID";
         TransactionsGrid.Paging = true;
-        TransactionsGrid.PageSize = 10;
+        TransactionsGrid.PageSize = 15;
         TransactionsGrid.Sorting = true;
         TransactionsGrid.InsertionMode = JsGridInsertionMode.Binding;
         TransactionsGrid.Editing = false;
@@ -476,12 +477,14 @@ var TranPosting;
         TransactionsGrid.OnItemEditing = function () { };
         TransactionsGrid.Columns = [
             { title: "ROW_ID", name: "ROW_ID", type: "text", width: "5%", visible: false },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "17%" },
-            { title: res.App_Number, name: "TR_NO", type: "text", width: "8%" },
-            { title: res.App_date, name: "TR_DATE", type: "text", width: "10%" },
-            { title: res.TransDesc, name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "15%" },
-            { title: res.value, name: "TR_AMOUNT", type: "text", width: "15%" },
-            { title: res.User, name: "User_Code", type: "text", width: "15%" },
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%" },
+            { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
+            { title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
+            { title: res.TransDesc, name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
+            { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
+            { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
+            { title: res.User, name: "User_Code", type: "text", width: "8%" },
+            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
             {
                 title: res.appSelect, css: "ColumPadding", name: "IsSelected", width: "6%",
                 itemTemplate: function (s, item) {
@@ -504,8 +507,8 @@ var TranPosting;
                     return txt;
                 }
             },
-            { title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "10%" },
-            { title: res.App_Notes, name: "GenRemarks", type: "text", width: "15%" },
+            { title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
+            { title: res.App_Notes, name: "GenRemarks", type: "text", width: "10%" },
         ];
     }
     // function updateselect() {		   
@@ -522,7 +525,7 @@ var TranPosting;
         var res = GetResourceList("");
         VoucherDetailGrid.ElementName = "VoucherDetailGrid";
         VoucherDetailGrid.Paging = true;
-        VoucherDetailGrid.PageSize = 10;
+        VoucherDetailGrid.PageSize = 15;
         VoucherDetailGrid.Sorting = true;
         VoucherDetailGrid.InsertionMode = JsGridInsertionMode.Binding;
         VoucherDetailGrid.Editing = false;
@@ -532,12 +535,12 @@ var TranPosting;
         VoucherDetailGrid.Columns = [
             { title: res.App_serial, name: "Seq", type: "text", width: "5%" },
             { title: res.p_account_number, name: "ACC_CODE", type: "text", width: "14%" },
-            { title: res.TransDesc, name: (lang == "ar" ? "ACC_DESCA" : "ACC_DESCL"), type: "text", width: "20%" },
+            { title: res.TransDesc, name: (lang == "ar" ? "ACC_DESCA" : "ACC_DESCL"), type: "text", width: "25%" },
             { title: res.App_Debtor, name: "DEBIT", type: "text", width: "15%" },
             { title: res.App_Creditor, name: "CREDIT", type: "text", width: "15%" },
             { title: res.menu_Costcenter, name: "CC_CODE", type: "text", width: "15%" },
-            { title: res.TransCCDesc, name: (lang == "ar" ? "CC_DESCA" : "CC_DESCE"), type: "text", width: "15%" },
-            { title: res.TransExplain, name: (lang == "ar" ? "LINE_DESCA" : "LINE_DESCE"), type: "text", width: "30%" },
+            //    { title: res.TransCCDesc, name: (lang == "ar" ? "CC_DESCA" : "CC_DESCE"), type: "text", width: "15%" },
+            { title: res.TransExplain, name: (lang == "ar" ? "LINE_DESCA" : "LINE_DESCE"), type: "text", width: "35%" },
             { title: res.Trns_TrNO, name: "Tr_No", type: "text", width: "15%" },
         ];
     }

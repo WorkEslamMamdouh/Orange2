@@ -409,6 +409,9 @@
     <Content Include="Newtemplate\template\assets\images\screenshots\modern-horizontal.jpg" />
     <Content Include="Newtemplate\template\assets\images\screenshots\modern-vertical.jpg" />
     <Content Include="Newtemplate\template\assets\images\screenshots\tinted-sidebar.jpg" />
+    <Content Include="Newtemplate\template\assets\images\sort_asc.png" />
+    <Content Include="Newtemplate\template\assets\images\sort_both.png" />
+    <Content Include="Newtemplate\template\assets\images\sort_desc.png" />
     <Content Include="Newtemplate\template\assets\images\sprites\blue.png" />
     <Content Include="Newtemplate\template\assets\images\sprites\dark.png" />
     <Content Include="Newtemplate\template\assets\images\sprites\flag.png" />

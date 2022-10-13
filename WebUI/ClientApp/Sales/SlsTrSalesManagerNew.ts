@@ -218,7 +218,7 @@ namespace SlsTrSalesManagerNew {
 
 
 
-        //FillddlFamily();
+        FillddlFamily();
         fillddlSalesman();
         FillddlStore();
         txtStartDate.value = DateStartMonth();
@@ -257,7 +257,10 @@ namespace SlsTrSalesManagerNew {
         flagInvMulti == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', '')
         flagInvItemDiscount == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', 'width:140%')
 
-        
+        if (flagInvMulti == true && SlsInvSrc == '1')
+        {
+            $('#TableRespon').attr('style', 'width:120%')
+        }
 
     }
     function InitalizeControls() {
@@ -1905,7 +1908,22 @@ namespace SlsTrSalesManagerNew {
 
 
     }
-
+    function FillddlFamily() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefItemType", "GetAllOrdered"),
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                ////////
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    FamilyDetails = result.Response as Array<I_ItemFamily>;
+                }
+            }
+        });
+    }
     function fillddlSalesman() {
         Ajax.Callsync({
             type: "Get",
@@ -2097,6 +2115,7 @@ namespace SlsTrSalesManagerNew {
             { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
             { title: res.App_Cutomer, name: "Cus_NameA", type: "text", width: "25%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Slsm_DescA" : "Slsm_DescE"), type: "text", width: "25%" },
+            { title: "البائع", name: (lang == "ar" ? "SPer_NameA" : "SPer_NameA"), type: "text", width: "25%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
                 itemTemplate: (s: string, item: IQ_GetSlsInvoiceStatisticVer2): HTMLLabelElement => {
@@ -2409,6 +2428,7 @@ namespace SlsTrSalesManagerNew {
 		                </div>
 	                </td>
                     <td class="Storeflag  ${ flagInvMulti == false ? display_none : Remove_display_none } "  ><select id="ddlStore${cnt}" disabled class="btn btn-main"> <option value="null"> أختر المستودع  </option></select></td>
+                    <td class="Storeflag"  ><select id="ddlFamily${cnt}" disabled  class="form-control"> <option value="null"> أختر النوع  </option></select></td>
                      <td>
                         <div class="search-content">
                              <input  type ="hidden" class="form-control search-control" id ="ddlItem${cnt}" name ="Operation" disabled >
@@ -2692,6 +2712,11 @@ namespace SlsTrSalesManagerNew {
         });
         //script
 
+        for (var i = 0; i < FamilyDetails.length; i++) {
+            $('#ddlFamily' + cnt).append('<option data-CatID= "' + FamilyDetails[i].CatID + '"  value="' + FamilyDetails[i].ItemFamilyID + '">' + (lang == "ar" ? FamilyDetails[i].DescA : FamilyDetails[i].DescL) + '</option>');
+        }
+
+
         $('#btnSearchItems' + cnt).click(function (e) {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
@@ -2711,7 +2736,9 @@ namespace SlsTrSalesManagerNew {
 
             if ($('#ddlTypeInv' + cnt).val() == '1') {
 
-                qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and ISSales =1 and IsActive = 1 and  FinYear = " + FinYear;
+                let Family = $('#ddlFamily' + cnt).val() == 'null' ? '' : " and ItemFamilyID =" + $('#ddlFamily' + cnt).val()+""
+
+                qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and ISSales =1 and IsActive = 1 and  FinYear = " + FinYear + " " + Family;
                 btnSearch = 'btnSearchItems';
             }
             if ($('#ddlTypeInv' + cnt).val() == '2') {
@@ -3196,6 +3223,7 @@ namespace SlsTrSalesManagerNew {
             $("#txtTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatAmount.RoundToSt(2));
             $("#txtTotAfterTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetAfterVat.RoundToSt(2));
             $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
+            $("#ddlFamily" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemFamilyID);
 
             $("#UnitCost" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].StockUnitCost);
         }
@@ -3390,6 +3418,7 @@ namespace SlsTrSalesManagerNew {
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             $("#ddlStore" + CountGrid).removeAttr("disabled");
+            $("#ddlFamily" + CountGrid).removeAttr("disabled");
 
 
             if (flag_PriceWithVAT == true) {
@@ -3922,7 +3951,7 @@ namespace SlsTrSalesManagerNew {
             }
 
             if (StatusFlag == "i") {
-                invoiceItemSingleModel.InvoiceItemID = 0;
+                invoiceItemSingleModel.InvoiceItemID = 0; 
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
