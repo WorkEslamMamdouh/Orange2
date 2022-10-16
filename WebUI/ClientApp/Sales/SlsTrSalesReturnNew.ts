@@ -115,6 +115,10 @@ namespace SlsTrSalesReturnNew {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].SalesPriceWithVAT);
 
+    var display_none = "display_none";
+    var Remove_display_none = "";
+    var flagInvItemDiscount = false;
+    var flagInvMulti = false;
 
     var Screen_name = ""
     var SlsInvSrc = $('#Flag_SlsInvSrc').val();
@@ -124,10 +128,14 @@ namespace SlsTrSalesReturnNew {
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
         (lang == "ar" ? Screen_name = 'مرتجع فواتير التجزئه' : Screen_name = 'Retail invoice')
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
     }
     else {       //2: opration invoice 
 
         (lang == "ar" ? Screen_name = 'مرتجع فواتير العمليات' : Screen_name = 'opration invoice')
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper
     }
 
 
@@ -135,7 +143,7 @@ namespace SlsTrSalesReturnNew {
     export function InitalizeComponent() {
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
-
+        document.title = Screen_name;
        
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -174,6 +182,18 @@ namespace SlsTrSalesReturnNew {
 
         InitializeGrid();
         DisplayMod();
+
+
+
+        flagInvMulti == false ? $('.InvMulti').addClass('display_none') : $('.InvMulti').removeClass('display_none');
+        flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
+
+        flagInvMulti == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', '')
+        flagInvItemDiscount == false ? $('#TableRespon').attr('style', '') : $('#TableRespon').attr('style', 'width:140%')
+
+
+
+
     }
     function InitalizeControls() {
 
@@ -1403,7 +1423,7 @@ namespace SlsTrSalesReturnNew {
 			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
-                    <td>
+                    <td class="${ flagInvMulti == false ? display_none : Remove_display_none } ">
 		                <div class="form-group"> 
 			               <button disabled id="btnTypeInv${cnt}" class="btn btn-main btn-operation" >   </button>
 		                </div>
@@ -1446,17 +1466,17 @@ namespace SlsTrSalesReturnNew {
 			               <input id="txtUnitpriceWithVat${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td> 
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group" >
 			               <input id="txtDiscountPrc${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group"  >
 			               <input id="txtDiscountAmount${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group" >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>

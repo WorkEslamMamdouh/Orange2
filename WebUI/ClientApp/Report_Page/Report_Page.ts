@@ -13,6 +13,8 @@ namespace Report_Page {
     var succes;
 
     export function InitalizeComponent() {
+        document.title = "الطباعة";
+
         $('#div_Reports').removeClass('display_none');
         $('.main-iconbar').addClass('display_none');
 

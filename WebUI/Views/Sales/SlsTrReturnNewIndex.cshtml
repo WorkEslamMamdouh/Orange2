@@ -3,7 +3,14 @@
     ViewBag.Title = @SystemResource.Men_SlsTrReturn;
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-
+<style>
+    .Net_inv {
+        font-weight: bold !important;
+        font-size: 19px !important;
+        color: #00956b !important;
+        text-align: center !important;
+    }
+</style>
 <div class="row gy-3">
     <input id="Flag_SlsInvSrc" type="hidden" value="1" class="form-control input-sm">@*-----مبيعات عمليات------*@
     <!-- Filter Container -->
@@ -260,21 +267,21 @@
                         <!-- Inside Table  -->
                         <div class="inside-table my-4">
                             <div class="table-responsive">
-                                <table class="table table-borderless " style="width:140%">
+                                <table id="TableRespon" class="table table-borderless " style="width:140%">
                                     <thead>
                                         <tr>
                                             <th style="width: 3%"></th>
                                             <th style="width: 3%" class="px-3"> @SystemResource.serial </th>
-                                            <th style="width: 3%" class="px-3"> النوع </th>
+                                            <th style="width: 3%" class="px-3 InvMulti"> نوع المستودع </th>
                                             <th style="width: 13%" class="px-3">كود الصنف</th>
                                             <th style="width: 18%" class="px-5">الصنف</th>
                                             <th style="width: 5%" class="px-3"> @SystemResource.App_soldQty</th>
                                             <th style="width: 5%" class=" ">المرتجع</th>
                                             <th style="width: 7%">  @SystemResource.App_Price  </th>
                                             <th style="width: 7%" class=" ">السعر بالضريبه</th>
-                                            <th style="width: 7%" class=" ">نسبة الخصم </th>
-                                            <th style="width: 7%" class=" ">الخصم  </th>
-                                            <th style="width: 7%" class=" ">السعر بعدالخصم  </th>
+                                            <th style="width: 7%" class="InvDiscount ">نسبة الخصم </th>
+                                            <th style="width: 7%" class="InvDiscount ">الخصم  </th>
+                                            <th style="width: 7%" class="InvDiscount ">السعر بعدالخصم  </th>
                                             <th style="width: 1%" class=" ">@SystemResource.tax_rate</th>
                                             <th style="width: 7%" class=" ">@SystemResource.App_total</th>
                                             <th style="width: 7%" class=" ">@SystemResource.App_Tax</th>
@@ -299,31 +306,53 @@
                                 </div>
                             </div>
                             <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
                                     <div class="col-8 ">
-                                        <input disabled type="text" class="form-control" name="ItemTotal" id="txtTotalbefore">
+                                        <input disabled class="form-control" name="Line_Count" id="txtItemCount" />
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                                    <div class="col-8 ">
+                                        <input disabled class="form-control" name="ItemTotal" id="txtTotalbefore" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-3 InvDiscount">
+                                <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">الخصم</label>
                                     <div class="col-8 ">
                                         <input disabled class="form-control" name="ItemDiscountTotal" id="txtTotalDiscount" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
+                            <div class="col-12 col-md-3 InvDiscount">
+                                <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">الاجمالي بعد الخصم</label>
                                     <div class="col-8 ">
                                         <input disabled class="form-control" name="TotalAmount" id="txtTotal" />
                                     </div>
                                 </div>
                             </div>
+
+
+
+
                             <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">  عدد العبوات</label>
+                                    <div class="col-8 ">
+                                        <input disabled class="form-control" name="Tot_Qty" id="txtPackageCount" />
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-12 col-md-3">
+                                <div class="form-group row">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.App_Tax</label>
                                     <div class="col-8 ">
                                         <input disabled class="form-control" name="VatAmount" id="txtTax" />
@@ -332,30 +361,17 @@
                             </div>
 
 
+
                             <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_Net</label>
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0 Net_inv">@SystemResource.App_Net</label>
                                     <div class="col-8 ">
-                                        <input disabled type="text" class="form-control " id="txtNet">
+                                        <input disabled class="form-control Net_inv" name="Tot_Net" id="txtNet" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
-                                    <div class="col-8 ">
-                                        <input disabled class="form-control" name="Line_Count" id="txtItemCount" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="form-group row g-0">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_PackageCount</label>
-                                    <div class="col-8 ">
-                                        <input disabled type="text" class="form-control" id="txtPackageCount">
-                                    </div>
-                                </div>
-                            </div>
+
+
                         </div>
 
 

@@ -74,6 +74,7 @@ var JournalVoucher;
     var ddlVoucherSourceFilter;
     var ddlJournalType;
     //buttons
+    var btnCopyRemark;
     var btnShow;
     var btnAdd;
     var btnUpdate;
@@ -174,6 +175,7 @@ var JournalVoucher;
         ddlVoucherTypeFilter = document.getElementById("ddlVoucherTypeFilter");
         ddlJournalType = document.getElementById("ddlJournalType");
         //buttons
+        btnCopyRemark = document.getElementById("btnCopyRemark");
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
         btnUpdate = document.getElementById("btnUpdate");
@@ -203,6 +205,7 @@ var JournalVoucher;
         rdSaveDesc = document.getElementById("rdSaveDesc");
     }
     function InitalizeEvents() {
+        btnCopyRemark.onclick = btnCopyRemark_onclick;
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onClick;
@@ -370,6 +373,16 @@ var JournalVoucher;
         $("#divJournalDetail").addClass("display_none");
         Back();
         InitializeGrid();
+    }
+    function btnCopyRemark_onclick() {
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                $("#Notes" + i).val(txtJournalDescripton.value);
+                if ($("#txt_StatusFlag" + i).val() == "") {
+                    $("#txt_StatusFlag" + i).val("u");
+                }
+            }
+        }
     }
     function btnBack_onclick() {
         //if (TempFlagAddOrEdit == 1 || TempFlagAddOrEdit == 2) {
@@ -706,13 +719,13 @@ var JournalVoucher;
                 Errorinput($("#txtCostCntrNum" + rowcount));
                 return false;
             }
-            else if (AccObject.length > 0) {
-                if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
-                    DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
-                    Errorinput($("#txtCCDtCostCntrNum" + rowcount));
-                    return false;
-                }
-            }
+            //else if (AccObject.length > 0) {
+            //    if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
+            //        DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
+            //        Errorinput($("#txtCCDtCostCntrNum" + rowcount));
+            //        return false
+            //    }
+            //}
             return true;
         }
     }
@@ -969,7 +982,7 @@ var JournalVoucher;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"" + (CountGrid + 1) + "\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t\t                <span id=\"btn_Copy" + cnt + "\"><i class=\"fas fa-clone  btn-copy\"></i></span>\n                            <span id=\"btn_Insert" + cnt + "\"><i class=\"fas fa-share fa-rotate-180 btn-insert\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCCdtTypes" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCCDtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCCDTCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"" + (CountGrid + 1) + "\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t\t                <span id=\"btn_Copy" + cnt + "\"><i class=\"fas fa-clone  btn-copy\"></i></span>\n                            <span id=\"btn_Insert" + cnt + "\"><i class=\"fas fa-share fa-rotate-180 btn-insert\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCCdtTypes" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCCDtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCCDTCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
         //    '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
         //    '<div class="col-lg-1" style="width:6%">' +
