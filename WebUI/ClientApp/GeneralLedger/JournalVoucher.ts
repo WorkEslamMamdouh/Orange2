@@ -87,6 +87,7 @@ namespace JournalVoucher {
 
     //buttons
 
+    var btnCopyRemark: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnUpdate: HTMLButtonElement;
@@ -208,6 +209,7 @@ namespace JournalVoucher {
         ddlJournalType = document.getElementById("ddlJournalType") as HTMLSelectElement;
 
         //buttons
+        btnCopyRemark = document.getElementById("btnCopyRemark") as HTMLButtonElement;
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
@@ -242,6 +244,7 @@ namespace JournalVoucher {
     }
     function InitalizeEvents() {
 
+        btnCopyRemark.onclick = btnCopyRemark_onclick;
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onClick;
@@ -437,6 +440,24 @@ namespace JournalVoucher {
         $("#divJournalDetail").addClass("display_none");
         Back();
         InitializeGrid();
+    }
+    function btnCopyRemark_onclick() {
+
+
+      
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+
+                $("#Notes" + i).val(txtJournalDescripton.value);
+
+
+                if ($("#txt_StatusFlag" + i).val() == "") {
+                    $("#txt_StatusFlag" + i).val("u");
+
+                }
+            }
+        }
+
     }
     function btnBack_onclick() {
         //if (TempFlagAddOrEdit == 1 || TempFlagAddOrEdit == 2) {
@@ -804,13 +825,13 @@ namespace JournalVoucher {
                 Errorinput($("#txtCostCntrNum" + rowcount));
                 return false
             }
-            else if (AccObject.length > 0) {
-                if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
-                    DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
-                    Errorinput($("#txtCCDtCostCntrNum" + rowcount));
-                    return false
-                }
-            }
+            //else if (AccObject.length > 0) {
+            //    if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
+            //        DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
+            //        Errorinput($("#txtCCDtCostCntrNum" + rowcount));
+            //        return false
+            //    }
+            //}
 
 
             return true;
@@ -1115,22 +1136,22 @@ namespace JournalVoucher {
                              </button>
 		                </div>
 	                </td>
-                     <td>
+                     <td style="width:9%;">
 		                <div class="form-group">
 			                 <input id="txtAccNumber${cnt}" name="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:17%;">
 		                <div class="form-group">
 			                  <input id="txtAccName${cnt}" name="" disabled type="text" class="form-control"  />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:9%;">
 		                <div class="form-group">
 			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:9%;">
 		                <div class="form-group">
 			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
 		                </div>
@@ -1143,37 +1164,37 @@ namespace JournalVoucher {
                              </button>
 		                </div>
 	                </td>
-                     <td>
+                     <td style="width:9%;">
 		                <div class="form-group">
 			                <input id="txtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:17%;">
 		                <div class="form-group">
 			                  <input id="txtCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 
-                    <td>
+                    <td class="display_none">
 		                <div class="form-group">
 			                <button type="button" class="style_ButSearch"  id="btnSearchCCdtTypes${cnt}" name="ColSearch" disabled>
                                 <i class="fa fa-search"></i>
                              </button>
 		                </div>
 	                </td>
-                     <td>
+                     <td class="display_none">
 		                <div class="form-group">
 			               <input id="txtCCDtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td class="display_none">
 		                <div class="form-group">
 			                  <input id="txtCCDTCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 
 
-                    <td>
+                    <td style="width:22%;">
 		                <div class="form-group">
 			              <input id="Notes${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>

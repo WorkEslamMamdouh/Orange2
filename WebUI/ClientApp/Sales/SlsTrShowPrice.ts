@@ -1039,7 +1039,7 @@ namespace SlsTrShowPrice {
 	                </td>
                      <td>
 		                <div class="form-group">
-			                <div class="form-group ps-1">
+			                <div class="form-group counter-group ps-1">
 			                    <input class="counter" type="number" data-id="number" id="txtQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
 			                    <div class="value-button decrease-button btn-number1${cnt}" data-id="decrease" id="btnminus1" data-type="minus" data-field="quant[1]">-</div>
 			                    <div class="value-button increase-button btn-number1${cnt}" data-id="increase" id="btnplus1" data-type="plus" data-field="quant[1]">+</div>

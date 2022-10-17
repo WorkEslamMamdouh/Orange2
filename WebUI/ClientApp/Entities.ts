@@ -2246,6 +2246,13 @@ class I_Control {
         this.IsFasPeriodClose = false;
         this.IsAutoNoCustVendor = false;
 
+
+        this.IsOprInvItemDiscount = false;
+        this.IsOprInvMultiOper = false;
+        this.IsRetailInvItemDiscount = false;
+        this.IsRetailInvMultiStore = false;
+
+         
         this.RetailInvoicePaymentDef = 0;
         this.OperationInvoicePaymentDef = 0;
     }
@@ -2312,8 +2319,13 @@ class I_Control {
     public IsAccPeriodClose: boolean;
     public IsInvPeriodClose: boolean;
     public IsFasPeriodClose: boolean;  
-    public IsAutoNoCustVendor: boolean;  
+    public IsAutoNoCustVendor: boolean;   
 
+    public IsOprInvItemDiscount: boolean;
+    public IsOprInvMultiOper: boolean;
+    public IsRetailInvItemDiscount: boolean;  
+    public IsRetailInvMultiStore: boolean;  
+  
     public RetailInvoicePaymentDef: number;
     public OperationInvoicePaymentDef: number; 
 

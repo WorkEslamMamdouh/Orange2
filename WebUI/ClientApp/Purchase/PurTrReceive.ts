@@ -129,6 +129,10 @@ namespace PurTrReceive {
 
     var flagLastPrice = 2;
     var itemid_LastPrice = 0;
+
+    var flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
+    var display_none = "display_none";
+    var Remove_display_none = "";
     //---------------------------------------------------------------- main region----------------------------------------------------
     export function InitalizeComponent() {
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -162,6 +166,10 @@ namespace PurTrReceive {
 
        
         InitializeGrid();
+
+
+        flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
+
     }
     function InitalizeControls() {
         // print ----*
@@ -1435,17 +1443,17 @@ namespace PurTrReceive {
 			                <input type="number"  id="txtPriceFc${cnt}" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5">
 		                </div>
 	                </td>
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group" >
 			               <input id="txtDiscountPrc${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group"style="width: 84px;" >
 			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td>
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
 		                <div class="form-group"style="width: 84px;" >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
