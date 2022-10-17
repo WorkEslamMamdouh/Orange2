@@ -651,7 +651,7 @@ namespace IssueToCC {
                     SingleModelDetail.ItemID = Number($('#ItemID' + i).val());
                     SingleModelDetail.UnitID = Number($('#txtUnitID' + i).val());
                     SingleModelDetail.ReqQty = Number($('#txtQTY' + i).val());
-                    SingleModelDetail.IssueQty = 0;
+                    SingleModelDetail.IssueQty = Number($('#txtQTY' + i).val());
                     SingleModelDetail.UnitCost = 0;
                     SingleModelDetail.TotRetQty = 0;
                     SingleModelDetail.IssueedBeforeQty = 0;
@@ -671,7 +671,7 @@ namespace IssueToCC {
                     SingleModelDetail.ItemID = Number($('#ddlItem' + i).val());
                     SingleModelDetail.UnitID = Number($('#txtUnitID' + i).val());
                     SingleModelDetail.ReqQty = Number($('#txtQTY' + i).val());
-                    SingleModelDetail.IssueQty = 0;
+                    SingleModelDetail.IssueQty = Number($('#txtQTY' + i).val());
                     SingleModelDetail.UnitCost = 0;
                     SingleModelDetail.TotRetQty = 0;
                     SingleModelDetail.IssueedBeforeQty = 0;
