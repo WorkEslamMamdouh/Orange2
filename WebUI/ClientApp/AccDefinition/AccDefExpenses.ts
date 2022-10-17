@@ -176,7 +176,7 @@ namespace AccDefExpenses {
 	                </td>
                     <td>
                         <div class="form-group">
-                            <select id="txtAcount_Code' + cnt + '" class="form-control ddlAcc"  disabled="disabled"> 
+                            <select id="txtAcount_Code${cnt}" class="form-control ddlAcc"  disabled>
 			                    <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
 			                </select>
                          </div>

@@ -284,7 +284,7 @@ namespace IssueToCC {
             type: "Get",
             url: sys.apiUrl("Stk_TR_IssueToCC", "GetAllIssueTypes"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode, MODULE_CODE: Modules.IssueToCC
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -361,7 +361,7 @@ namespace IssueToCC {
             type: "Get",
             url: sys.apiUrl("Stk_TR_IssueToCC", "GetFiltered"),
             data: {
-                CompCode: compcode, BranchCode: BranchCode, FromDate: FromDate, ToDate: ToDate, TRType: TRType, StoreID: StoreID, CC_CODE: CC_CODE, Status: Status, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, BranchCode: BranchCode, FromDate: FromDate, ToDate: ToDate, TRType: TRType, StoreID: StoreID, CC_CODE: CC_CODE, Status: Status, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.IssueToCC
             },
             success: (d) => {
 
@@ -712,6 +712,14 @@ namespace IssueToCC {
         IssueMasterDetails.I_Stk_TR_IssueToCCDetails = ModelDetail;
         IssueMasterDetails.I_Stk_TR_IssueToCC = ModelMaster;
 
+
+        IssueMasterDetails.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        IssueMasterDetails.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        IssueMasterDetails.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        IssueMasterDetails.UserCode = SysSession.CurrentEnvironment.UserCode;
+        IssueMasterDetails.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+
     }
     //------------------------------------------------------------------------------* A S S I G N* -----------------------------   
     function DeleteRow(RecNo: number) {
@@ -885,6 +893,7 @@ namespace IssueToCC {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -899,6 +908,7 @@ namespace IssueToCC {
 
         rp.Name_function = "IProc_Prnt_StkIssue";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

@@ -2465,9 +2465,8 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 
 
-
 function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",

@@ -38,6 +38,7 @@ namespace Inv.DAL.Domain
         public string Comp_Code { get; set; }
         public string sec_FinYear { get; set; }
         public string MODULE_CODE { get; set; }
+        public int FIN_YEAR { get; set; }
 
 
 
@@ -294,7 +295,7 @@ namespace Inv.DAL.Domain
     public partial class G_BRANCH : SecurityandUpdateFlagClass
     {
     }  
-    public partial class I_TR_Collect : SecurityClass
+    public partial class I_TR_Collect : SecurityandUpdateFlagClass
     {
     }
     public partial class I_TR_CollectDetail : UpdateFlagClass
@@ -303,7 +304,7 @@ namespace Inv.DAL.Domain
     public partial class I_Period : SecurityandUpdateFlagClass_FIN_YEAR
     {
     }
-    public partial class I_D_IssueType : SecurityandUpdateFlagClass_FIN_YEAR
+    public partial class I_D_IssueType : SecurityandUpdateFlagClass
     {
     }
     public partial class I_Stk_TR_IssueToCCDetails : SecurityandUpdateFlagClass_FIN_YEAR

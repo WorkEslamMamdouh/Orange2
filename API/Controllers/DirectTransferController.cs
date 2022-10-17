@@ -30,10 +30,10 @@ namespace Inv.API.Controllers
             this.IItemDefService = _IItemDefService;
             this.UserControl = _Control;
         }
-    
+
         #region Direct Transfer
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllDirectTransferHeaderWithDetail(int compcode,int TrType,int TFType, string FromDate, string toDate, int status,int sourcrBR,  int ToBR, int sourcrStore,  int ToStore,  string UserCode, string Token)
+        public IHttpActionResult GetAllDirectTransferHeaderWithDetail(int compcode, int TrType, int TFType, string FromDate, string toDate, int status, int sourcrBR, int ToBR, int sourcrStore, int ToStore, string UserCode, string Token, string MODULE_CODE, string FinYear)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
@@ -65,7 +65,7 @@ namespace Inv.API.Controllers
                 if (status == 2)
                     condition = condition + "";
 
-                 if (status == 0 && TFType==1)
+                if (status == 0 && TFType == 1)
                 {
                     condition = condition + " and IsSent = 'False'  ";
                 }
@@ -74,7 +74,7 @@ namespace Inv.API.Controllers
                     condition = condition + " and IsSent = 'True' ";
                 }
 
-                if (status == 0 && TFType==2)
+                if (status == 0 && TFType == 2)
                 {
                     condition = condition + " and IsReceived = 'False'  ";
                 }
@@ -83,24 +83,26 @@ namespace Inv.API.Controllers
                     condition = condition + " and IsReceived = 'True' ";
                 }
 
-                
+
                 string query = s + condition;
                 var res = db.Database.SqlQuery<IQ_GetTransfer>(query).ToList();
                 //var res2 = db.IQ_GetTransferDetail.ToList();
                 //IQ_DirectTransferWithDetail model = new IQ_DirectTransferWithDetail();
                 //model.IQ_GetTransfer = res;
                 //model.IQ_GetTransferDetail = res2;
+
+
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllItemsInStore(int branch, int comp,int Store, string UserCode, string Token)
+        public IHttpActionResult GetAllItemsInStore(int branch, int comp, int Store, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var itemsList = IItemDefService.GetAll(s => s.CompCode == comp && s.BraCode == branch&&s.StoreId==Store).ToList();
+                var itemsList = IItemDefService.GetAll(s => s.CompCode == comp && s.BraCode == branch && s.StoreId == Store).ToList();
                 return Ok(new BaseResponse(itemsList));
             }
             return BadRequest(ModelState);
@@ -121,10 +123,10 @@ namespace Inv.API.Controllers
                             item.TransfareID = TransferHeader.TransfareID;
                             IDirectTransferService.Insert(item);
                         }
-                        if (obj.I_Stk_TR_Transfer.TrType == 0 &&obj.I_Stk_TR_Transfer.TFType == 1)
+                        if (obj.I_Stk_TR_Transfer.TrType == 0 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
                             //// call process trans 
-                          
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), TransferHeader.TransfareID, "DirctTrans", "Add", db);
                             if (res.ResponseState == true)
                             {
@@ -139,20 +141,24 @@ namespace Inv.API.Controllers
                             }
                             ////////
                         }
-                      else  if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 1)
+                        else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
                             //// call process trans 
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), TransferHeader.TransfareID, "sendTrans", "Add", db);
                             if (res.ResponseState == true)
                             {
                                 obj.I_Stk_TR_Transfer.Tr_No = int.Parse(res.ResponseData.ToString());
                                 dbTransaction.Commit();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(obj.I_Stk_TR_Transfer));
                             }
                             else
                             {
                                 dbTransaction.Rollback();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                             }
                             ////////
@@ -160,17 +166,21 @@ namespace Inv.API.Controllers
                         else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 2)
                         {
                             //// call process trans 
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), TransferHeader.TransfareID, "RecvTrans", "Add", db);
                             if (res.ResponseState == true)
                             {
                                 obj.I_Stk_TR_Transfer.Tr_No = int.Parse(res.ResponseData.ToString());
                                 dbTransaction.Commit();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(obj.I_Stk_TR_Transfer));
                             }
                             else
                             {
                                 dbTransaction.Rollback();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                             }
                             ////////
@@ -179,6 +189,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -220,46 +232,58 @@ namespace Inv.API.Controllers
                         //// call process trans 
                         if (obj.I_Stk_TR_Transfer.TrType == 0 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "DirctTrans", "Update", db);
                             if (res.ResponseState == true)
                             {
                                 dbTransaction.Commit();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(obj.I_Stk_TR_Transfer));
                             }
                             else
                             {
                                 dbTransaction.Rollback();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                             }
                         }
                         else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "sendTrans", "Update", db);
                             if (res.ResponseState == true)
                             {
                                 dbTransaction.Commit();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(obj.I_Stk_TR_Transfer));
                             }
                             else
                             {
                                 dbTransaction.Rollback();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                             }
                         }
                         else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 2)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "RecvTrans", "Update", db);
                             if (res.ResponseState == true)
                             {
                                 dbTransaction.Commit();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                                 return Ok(new BaseResponse(obj.I_Stk_TR_Transfer));
                             }
                             else
                             {
                                 dbTransaction.Rollback();
+                                LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                             }
                         }
@@ -267,6 +291,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -308,7 +334,7 @@ namespace Inv.API.Controllers
                         //// call process trans 
                         if (obj.I_Stk_TR_Transfer.TrType == 0 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "DirctTrans", "Open", db);
                             if (res.ResponseState == true)
                             {
@@ -323,7 +349,7 @@ namespace Inv.API.Controllers
                         }
                         else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 1)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "sendTrans", "Open", db);
                             if (res.ResponseState == true)
                             {
@@ -338,7 +364,7 @@ namespace Inv.API.Controllers
                         }
                         else if (obj.I_Stk_TR_Transfer.TrType == 1 && obj.I_Stk_TR_Transfer.TFType == 2)
                         {
-                             
+
                             ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Transfer.CompCode), Convert.ToInt32(obj.I_Stk_TR_Transfer.BranchCode), jouranalHeader.TransfareID, "RecvTrans", "Open", db);
                             if (res.ResponseState == true)
                             {
@@ -367,8 +393,8 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.IQ_GetTransfer.Where(s=>s.TransfareID==TransferID).ToList();
-                var res2 = db.IQ_GetTransferDetail.Where(s=>s.TransfareID==TransferID).ToList();
+                var res = db.IQ_GetTransfer.Where(s => s.TransfareID == TransferID).ToList();
+                var res2 = db.IQ_GetTransferDetail.Where(s => s.TransfareID == TransferID).ToList();
                 IQ_DirectTransferWithDetail model = new IQ_DirectTransferWithDetail();
                 model.IQ_GetTransfer = res;
                 model.IQ_GetTransferDetail = res2;
@@ -381,20 +407,20 @@ namespace Inv.API.Controllers
 
         #region Stock Adjustment
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllStockAdjustmentHeaderWithDetail(int CompCode, int TrType,int State, string FromDate, string toDate, int Store, string UserCode, string Token)
+        public IHttpActionResult GetAllStockAdjustmentHeaderWithDetail(int CompCode, int TrType, int State, string FromDate, string toDate, int Store, string UserCode, string Token, string MODULE_CODE, string FinYear, string Branch_Code)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetStkAdjust where CompCode = "+ CompCode + " and  TrDate >=' " + FromDate + "' and TrDate <= ' " + toDate + " '";
+                string s = "select * from IQ_GetStkAdjust where CompCode = " + CompCode + " and  TrDate >=' " + FromDate + "' and TrDate <= ' " + toDate + " '";
                 string condition = "";
                 if (TrType == 3)
                     condition = condition + "";
-                else 
+                else
                 {
-                    condition = condition + " and TrType =  "+TrType;
+                    condition = condition + " and TrType =  " + TrType;
                 }
                 if (Store != 0)
-                    condition = condition + " and StoreID = "+Store;
+                    condition = condition + " and StoreID = " + Store;
 
                 if (State == 2)
                     condition = condition + "";
@@ -405,17 +431,18 @@ namespace Inv.API.Controllers
 
                 string query = s + condition;
                 var res = db.Database.SqlQuery<IQ_GetStkAdjust>(query).ToList();
-              
+                LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
         }
-          [HttpGet, AllowAnonymous]
+        [HttpGet, AllowAnonymous]
         public IHttpActionResult GetStockByID(int AdjustID, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.IQ_GetStkAdjust.Where(s=>s.AdjustID== AdjustID).ToList();
+                var res = db.IQ_GetStkAdjust.Where(s => s.AdjustID == AdjustID).ToList();
                 var res2 = db.IQ_GetStkAdjustDetail.Where(s => s.AdjustID == AdjustID).ToList();
                 IQ_GetStkAdjustWithDetail model = new IQ_GetStkAdjustWithDetail();
                 model.IQ_GetStkAdjust = res;
@@ -440,25 +467,29 @@ namespace Inv.API.Controllers
                             item.AdjustID = TransferHeader.AdjustID;
                             IStckAdjustService.Insert(item);
                         }
-                   
-                            //// call process trans 
-                             
-                            ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), TransferHeader.AdjustID, "StkAdjust", "Add", db);
-                            if (res.ResponseState == true)
-                            {
-                                obj.I_Stk_TR_Adjust.Tr_No = int.Parse(res.ResponseData.ToString());
-                                dbTransaction.Commit();
-                                return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
-                            }
-                            else
-                            {
-                                dbTransaction.Rollback();
-                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
-                            }
+
+                        //// call process trans 
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), TransferHeader.AdjustID, "StkAdjust", "Add", db);
+                        if (res.ResponseState == true)
+                        {
+                            obj.I_Stk_TR_Adjust.Tr_No = int.Parse(res.ResponseData.ToString());
+                            dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
+                            return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -477,7 +508,6 @@ namespace Inv.API.Controllers
                     {
                         var jouranalHeader = IStckAdjustService.Update(obj.I_Stk_TR_Adjust);
 
-                        //update Details
                         var insertedObjects = obj.I_Stk_Tr_AdjustDetails.Where(x => x.StatusFlag == 'i').ToList();
                         var updatedObjects = obj.I_Stk_Tr_AdjustDetails.Where(x => x.StatusFlag == 'u').ToList();
                         var deletedObjects = obj.I_Stk_Tr_AdjustDetails.Where(x => x.StatusFlag == 'd').ToList();
@@ -497,25 +527,26 @@ namespace Inv.API.Controllers
                             IStckAdjustService.Delete(item.AdjustDetailID);
                         }
 
-                        //// call process trans 
-                   
-                             
-                            ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), jouranalHeader.AdjustID, "StkAdjust", "Update", db);
-                            if (res.ResponseState == true)
-                            {
-                                dbTransaction.Commit();
-                                return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
-                            }
-                            else
-                            {
-                                dbTransaction.Rollback();
-                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
-                            }
-                        
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), jouranalHeader.AdjustID, "StkAdjust", "Update", db);
+                        if (res.ResponseState == true)
+                        {
+                            dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
+                            return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
+
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -555,24 +586,28 @@ namespace Inv.API.Controllers
                         }
 
                         //// call process trans 
-                  
-                             
-                            ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), jouranalHeader.AdjustID, "StkAdjust", "Open", db);
-                            if (res.ResponseState == true)
-                            {
-                                dbTransaction.Commit();
-                                return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
-                            }
-                            else
-                            {
-                                dbTransaction.Rollback();
-                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
-                            }
-                   
+
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Adjust.CompCode), Convert.ToInt32(obj.I_Stk_TR_Adjust.BranchCode), jouranalHeader.AdjustID, "StkAdjust", "Open", db);
+                        if (res.ResponseState == true)
+                        {
+                            dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, true, null, null, null);
+
+                            return Ok(new BaseResponse(obj.I_Stk_TR_Adjust));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
+
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

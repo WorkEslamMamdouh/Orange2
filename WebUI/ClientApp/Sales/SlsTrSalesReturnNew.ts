@@ -940,7 +940,7 @@ namespace SlsTrSalesReturnNew {
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.SlsTrReturnNew, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -2444,7 +2444,7 @@ namespace SlsTrSalesReturnNew {
 
         MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailModel.MODULE_CODE = Modules.SlsTrReturnNew;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }

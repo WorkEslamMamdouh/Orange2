@@ -22,12 +22,12 @@ namespace Inv.API.Controllers
             this.AccDefBoxService = _IAccDefBoxService;
             this.UserControl = _Control;
         }
-        public IHttpActionResult GetAll(int compCode, int BranchCode, string UserCode, string Token)
+        public IHttpActionResult GetAll(int compCode, int BranchCode, string UserCode, string Token, string ModuleCode, string FinYear)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var AccDefBoxList = AccDefBoxService.GetAll(s => s.CompCode == compCode && s.BranchCode == BranchCode).ToList();
-                LogUser.InsertPrint(db, compCode.ToString(), BranchCode.ToString(), "",UserCode, null, LogUser.UserLog.Query, "", true, null, null, null);
+                LogUser.InsertPrint(db, compCode.ToString(), BranchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, ModuleCode, true, null, null, null);
 
                 return Ok(new BaseResponse(AccDefBoxList));
             }

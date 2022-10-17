@@ -47,6 +47,7 @@ namespace Inv.API.Controllers
             Query = 20,
             print = 21,
             Open= 22,
+            AllSuccess = 23,
             OpenScreen = 5
         }
         public enum PageName
@@ -86,22 +87,22 @@ namespace Inv.API.Controllers
                 G_USER_LOG obj = new G_USER_LOG();
                
                 obj.COMP_CODE = Convert.ToInt32(COMP_CODE);
-                //obj.BranchCode = Convert.ToInt32(BranchCode);
-                //obj.FinYear = short.Parse(FinYear);
+                obj.BranchCode = Convert.ToInt32(BranchCode);
+                obj.FinYear = short.Parse(FinYear);
                 obj.USER_CODE = USER_CODE;
 
                 //***const
                 obj.SYSTEM_CODE = "I";
-                //obj.TimeStamp = DateTime.Now;
-                //obj.ExtraData = Info;
+                obj.TimeStamp = DateTime.Now;
+                obj.ExtraData = Info;
 
                 //***Data
-                //obj.DataID = DataId;
-                //obj.ErrorMessage = ErrorMessage;
+                obj.DataID = DataId;
+                obj.ErrorMessage = ErrorMessage;
                 //obj.ErrorNo = ErrorNo;
-                //obj.ISSucceed = ISSucceed;
-                //obj.MODULE_CODE = PageName.ToString();
-                //obj.OperationId = Convert.ToByte(OperationId);//G Code  ()
+                obj.ISSucceed = ISSucceed;
+                obj.MODULE_CODE = PageName.ToString();
+                obj.OperationId = Convert.ToByte(OperationId);//G Code  ()
                 _db.G_USER_LOG.Add(obj);
                 _db.SaveChanges();
                 return;
@@ -121,22 +122,21 @@ namespace Inv.API.Controllers
                 G_USER_LOG obj = new G_USER_LOG();
                 //***const
                 obj.SYSTEM_CODE = "I";
-                obj.LOG_DATE = DateTime.Now;
 
-                //obj.LOG_DATE = DateTime.Now;
-                //obj.ExtraData = Info;
+                obj.TimeStamp = DateTime.Now;
+                obj.ExtraData = Info;
                 //***session
                 obj.COMP_CODE = Convert.ToInt32(COMP_CODE);
-                //obj.BranchCode = Convert.ToInt32(BranchCode);
-                //obj.FinYear = short.Parse(FinYear);
+                obj.BranchCode = Convert.ToInt32(BranchCode);
+                obj.FinYear = short.Parse(FinYear);
                 obj.USER_CODE = USER_CODE;
                 //***
-                //obj.DataID = DataId;
-                //obj.ErrorMessage = ErrorMessage;
+                obj.DataID = DataId;
+                obj.ErrorMessage = ErrorMessage;
                 //obj.ErrorNo = ErrorNo;
-                //obj.ISSucceed = ISSucceed;
+                obj.ISSucceed = ISSucceed;
                 obj.MODULE_CODE = ModuleCode;
-                 //obj.OperationId = Convert.ToByte(OperationId);//G Code  ()
+                 obj.OperationId = Convert.ToByte(OperationId);//G Code  ()
                 _db.G_USER_LOG.Add(obj);
                 _db.SaveChanges();
                 return;

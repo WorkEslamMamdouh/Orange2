@@ -75,7 +75,7 @@ var CashBoxAccount;
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                CompCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.CashBoxAccount, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             //success: (d) => {
             //    let result = d as BaseResponse;

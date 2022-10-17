@@ -1921,7 +1921,6 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     return '';
 }
 function PrintTransactionLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",

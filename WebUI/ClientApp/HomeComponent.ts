@@ -64,8 +64,11 @@ namespace HomeComponent {
                         } 
                         else {
                             window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
-                        } 
-                     }
+                        }
+
+                        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, moduleCode, SysSession.CurrentEnvironment.CurrentYear);
+
+                    }
                     else {
                         MessageBox.Show("No Inv1_Privilage", moduleCode);
                     }

@@ -57,12 +57,12 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllCat(int CompCode,int CatID , string UserCode, string Token)
+        public IHttpActionResult GetAllCat(int CompCode, int CatID, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var category = StkDefCategoryService.GetAll(x => x.CompCode == CompCode && x.CatID == CatID).ToList();
-                
+
                 return Ok(new BaseResponse(category));
             }
             return BadRequest(ModelState);
@@ -86,15 +86,19 @@ namespace Inv.API.Controllers
         {
             //if (ModelState.IsValid && UserControl.CheckUser(category.Token, category.UserCode))
             //{
-                try
-                {
-                    var Catg = StkDefCategoryService.Insert(category);
-                    return Ok(new BaseResponse(Catg));
-                }
-                catch (Exception ex)
-                {
-                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
-                }
+            try
+            {
+                var Catg = StkDefCategoryService.Insert(category);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID, LogUser.UserLog.Insert, category.MODULE_CODE, true, null, null, null);
+
+                return Ok(new BaseResponse(Catg));
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID, LogUser.UserLog.Insert, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+            }
             //}
             //return BadRequest(ModelState);
         }
@@ -123,10 +127,21 @@ namespace Inv.API.Controllers
 
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Update([FromBody]I_D_Category category)
-        { 
-                    var Catg = StkDefCategoryService.Update(category);
-                    return Ok(new BaseResponse(Catg)); 
-        }
+        {
+            try
+            {
+                var Catg = StkDefCategoryService.Update(category);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID, LogUser.UserLog.Update, category.MODULE_CODE, true, null, null, null);
+
+                return Ok(new BaseResponse(Catg));
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID, LogUser.UserLog.Update, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+            }
+         }
 
         [HttpPost, AllowAnonymous]
         public IHttpActionResult UpdateLst(List<I_D_Category> CategoryList)
@@ -148,7 +163,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var ItemType = db.Database.SqlQuery<I_G_ItemType>("select * from I_G_ItemType where CompCode = "+ CompCode +"").ToList();
+                var ItemType = db.Database.SqlQuery<I_G_ItemType>("select * from I_G_ItemType where CompCode = " + CompCode + "").ToList();
 
                 return Ok(new BaseResponse(ItemType));
             }

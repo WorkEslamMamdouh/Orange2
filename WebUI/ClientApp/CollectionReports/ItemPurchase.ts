@@ -321,12 +321,9 @@ namespace ItemPurchase {
          
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
-        discharge();
-      
-
-    }
+        discharge(); 
+     }
 
     function discharge() {
         $('#drpPaymentType option[value=Null]').prop('selected', 'selected').change();
@@ -423,9 +420,9 @@ namespace ItemPurchase {
                 data: rp,
                 success: (d) => {     
                     let result = d.result as string;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ItemsalesSum, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
-
             })
         }   
     } 

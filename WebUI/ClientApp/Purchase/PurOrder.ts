@@ -135,6 +135,9 @@ namespace PurOrder {
        
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
+
       //  $('#btnPrint').addClass('display_none');
     }
     function IntializeEvents() {
@@ -556,7 +559,7 @@ namespace PurOrder {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurOrder, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1414,6 +1417,11 @@ namespace PurOrder {
 
         MasterDetailModel.I_Pur_Tr_PurchaseOrder = PurOrderModel;
         MasterDetailModel.I_Pur_Tr_PurchaseOrderDetail = PurOrderDetailsModel;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurOrder;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -1653,9 +1661,8 @@ namespace PurOrder {
             data: rp,
             success: (d) => {
 
-                let result = d.result as string;
-
-
+                let result = d.result as string;  
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         })
@@ -1672,6 +1679,7 @@ namespace PurOrder {
                                                                                    
                 rp.Name_function = "IProc_Prnt_PurPurchaseOrder";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
          window.open(Url.Action("ReportsPopup", "Home"), "_blank");

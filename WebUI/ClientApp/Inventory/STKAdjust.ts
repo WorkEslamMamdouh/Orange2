@@ -115,6 +115,7 @@ namespace STKAdjust {
         InitalizeEvents();
         $('#btnPrint').addClass('display_none');
 
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
 
 
     }
@@ -553,7 +554,7 @@ namespace STKAdjust {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("DirectTransfer", "GetAllStockAdjustmentHeaderWithDetail"),
-            data: { CompCode: compcode , TrType: status, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, TrType: status, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.STKAdjust, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1448,7 +1449,14 @@ namespace STKAdjust {
         MasterDetailModel.I_Stk_Tr_AdjustDetails = StockDetailModel;
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+ 
+
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.STKAdjust;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.I_Stk_TR_Adjust.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1646,6 +1654,7 @@ namespace STKAdjust {
             success: (d) => {
 
                 let result = d.result as string;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
 
 
                 window.open(result, "_blank");
@@ -1664,6 +1673,7 @@ namespace STKAdjust {
         rp.Type = 0;
         rp.Name_function = "IProc_Prnt_StkAdjust";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
