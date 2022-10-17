@@ -38,9 +38,14 @@ var TranPosting;
     var txtDesc;
     var txtDiff;
     var txtVoucherDate;
+    var txtSearchBox;
+    var txtSearchTrans;
     //labels
     //   var lblVoucherNum: HTMLLabelElement;
     //buttons
+    var btndiv_11;
+    var btndiv_22;
+    var btndiv_33;
     var btnLoad;
     var btnShowVouchers;
     var btnCreateVoucher;
@@ -52,8 +57,10 @@ var TranPosting;
     var SubSystemDetails = new Array();
     var SubSystemDetailsRefreshed = new Array();
     var LnkTransDetails = new Array();
+    var SearchDetailsTrans = new Array();
     var selectedLnkTransDetails = new Array();
     var GetLnkVoucherDetail = new Array();
+    var SearchDetails = new Array();
     //var SelectedModuleCodes: Array<G_LnkTrans> = new Array<G_LnkTrans>();
     // global
     var debitTot = 0;
@@ -61,6 +68,8 @@ var TranPosting;
     var diffTot = 0;
     var lang;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var IsUpdated = false;
+    var IsChange = false;
     function InitalizeComponent() {
         $("#iconbar_Definition").addClass("d-none");
         $("#divIconbar").addClass("d-none");
@@ -111,6 +120,8 @@ var TranPosting;
         txtDesc = document.getElementById("txtDesc");
         txtDiff = document.getElementById("txtDiff");
         txtVoucherDate = document.getElementById("txtVoucherDate");
+        txtSearchBox = document.getElementById("txtSearchBox");
+        txtSearchTrans = document.getElementById("txtSearchTrans");
         //labels
         //   lblVoucherNum = document.getElementById("lblVoucherNum") as HTMLLabelElement;
         //buttons
@@ -120,6 +131,9 @@ var TranPosting;
         btnSelectAll = document.getElementById("btnSelectAll");
         btnReverseSelection = document.getElementById("btnReverseSelection");
         btnUnSelectAll = document.getElementById("btnUnSelectAll");
+        btndiv_11 = document.getElementById("btndiv_11");
+        btndiv_22 = document.getElementById("btndiv_22");
+        btndiv_33 = document.getElementById("btndiv_33");
     }
     function InitializeEvents() {
         btnLoad.onclick = btnLoad_onclick;
@@ -130,6 +144,11 @@ var TranPosting;
         btnUnSelectAll.onclick = btnUnSelectAll_onclick;
         txtToDate.onchange = txtToDate_onchange;
         txtVoucherDate.onchange = txtVoucherDate_onchange;
+        btndiv_11.onclick = btndiv_11_onclick;
+        btndiv_22.onclick = btndiv_22_onclick;
+        btndiv_33.onclick = btndiv_33_onclick;
+        txtSearchBox.onkeyup = txtSearchBox_onchange;
+        txtSearchTrans.onkeyup = txtSearchTrans_onchange;
     }
     //------------------------------------------------------ ButtonsRegion ----------------------------------
     function btnLoad_onclick() {
@@ -161,7 +180,7 @@ var TranPosting;
                 }
             }
             if (SelectFalg == false) {
-                DisplayMassage("يجب اختيار الحركات", "you must Select Transactions", MessageType.Error);
+                DisplayMassage("يجب تحديد نوع الحركة", "The type of movement must be selected", MessageType.Error);
                 return;
             }
             var StartDate = DateFormatRep(txtFromDate.value);
@@ -185,37 +204,47 @@ var TranPosting;
                     if (result.IsSuccess) {
                         SubSystemDetails;
                         LnkTransDetails = result.Response;
-                        LnkTransDetails = LnkTransDetails.filter(function (x) { return x.TR_NO != null; }).sort(function (a, b) { return a.TR_NO - b.TR_NO; });
-                        //LnkTransDetails = LnkTransDetails.filter(x => x.TR_NO != null && x.TR_CODE != null).sort(function (a, b) { return a.TR_CODE.localeCompare(b.TR_CODE) || b.TR_NO - a.TR_NO; });
-                        //LnkTransDetails.sort(function (a, b) {
-                        //    return a.TR_NO - b.TR_NO && Number(a.TR_CODE) - Number(b.TR_CODE);
-                        //});
-                        for (var i = 0; i < LnkTransDetails.length; i++) {
-                            (LnkTransDetails[i].TR_DATE != null) ? LnkTransDetails[i].TR_DATE = DateFormatRep(LnkTransDetails[i].TR_DATE) : "";
-                            if (lang == "ar")
-                                (LnkTransDetails[i].IsGenerated == true) ? LnkTransDetails[i].IsGeneratedDesc = "تم " : "";
-                            else
-                                (LnkTransDetails[i].IsGenerated == true) ? LnkTransDetails[i].IsGeneratedDesc = "Done " : "";
+                        if (LnkTransDetails.length > 0) {
+                            LnkTransDetails = LnkTransDetails.filter(function (x) { return x.TR_NO != null; }).sort(function (a, b) { return a.TR_NO - b.TR_NO; });
+                            for (var i = 0; i < LnkTransDetails.length; i++) {
+                                (LnkTransDetails[i].TR_DATE != null) ? LnkTransDetails[i].TR_DATE = DateFormatRep(LnkTransDetails[i].TR_DATE) : "";
+                                if (lang == "ar")
+                                    (LnkTransDetails[i].IsGenerated == true) ? LnkTransDetails[i].IsGeneratedDesc = "تم " : "";
+                                else
+                                    (LnkTransDetails[i].IsGenerated == true) ? LnkTransDetails[i].IsGeneratedDesc = "Done " : "";
+                            }
+                            InitializeTransactionsGrid();
+                            TransactionsGrid.DataSource = LnkTransDetails;
+                            TransactionsGrid.Bind();
+                            $("#btndiv_1").addClass("btn-active");
+                            $("#btndiv_3").removeClass("btn-active");
+                            $("#btndiv_2").removeClass("btn-active");
+                            $("#btndiv_11").removeClass("btn-main");
+                            $("#btndiv_33").addClass("btn-main");
+                            $("#btndiv_22").addClass("btn-main");
+                            $("#div_1").removeClass("display_none");
+                            $("#div_3").addClass("display_none");
+                            $("#div_2").addClass("display_none");
+                            $('#btnShowVouchers').removeAttr('disabled');
                         }
-                        InitializeTransactionsGrid();
-                        TransactionsGrid.DataSource = LnkTransDetails;
-                        TransactionsGrid.Bind();
-                        //$("#btndiv_3").removeClass("Actiev");
-                        //$("#btndiv_1").addClass("Actiev");
-                        //$("#btndiv_2").removeClass("Actiev");
-                        $("#btndiv_1").addClass("btn-active");
-                        $("#btndiv_3").removeClass("btn-active");
-                        $("#btndiv_2").removeClass("btn-active");
-                        $("#btndiv_11").removeClass("btn-main");
-                        $("#btndiv_33").addClass("btn-main");
-                        $("#btndiv_22").addClass("btn-main");
-                        $("#div_1").removeClass("display_none");
-                        $("#div_3").addClass("display_none");
-                        $("#div_2").addClass("display_none");
-                        $('#btnShowVouchers').removeAttr('disabled');
+                        else {
+                            InitializeTransactionsGrid();
+                            TransactionsGrid.DataSource = LnkTransDetails;
+                            TransactionsGrid.Bind();
+                            DisplayMassage("لا يوجد حركات", "There are no moves here", MessageType.Error);
+                        }
                     }
                 }
             });
+            selectedLnkTransDetails = new Array();
+            GetLnkVoucherDetail = new Array();
+            VoucherDetailGrid.DataSource = GetLnkVoucherDetail;
+            VoucherDetailGrid.Bind();
+            txtDesc.value = "";
+            txtDebit.value = "0";
+            txtCedit.value = "0";
+            txtDiff.value = "0";
+            btnCreateVoucher.disabled = true;
         }
     }
     function btnShowVouchers_onclick() {
@@ -277,6 +306,9 @@ var TranPosting;
                         $("#div_2").removeClass("display_none");
                         $("#div_1").addClass("display_none");
                         $("#div_3").addClass("display_none");
+                        btnCreateVoucher.disabled = false;
+                        IsUpdated = true;
+                        IsChange = false;
                     }
                 }
             });
@@ -290,6 +322,7 @@ var TranPosting;
             txtDebit.value = "0";
             txtCedit.value = "0";
             txtDiff.value = "0";
+            btnCreateVoucher.disabled = true;
             DisplayMassage("لا يوجد قيود لعرضها ", "There are no restrictions to display", MessageType.Error);
             return;
         }
@@ -301,6 +334,8 @@ var TranPosting;
             }
             return object;
         });
+        btnCreateVoucher.disabled = true;
+        IsChange = true;
         LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
@@ -314,6 +349,8 @@ var TranPosting;
                 return __assign({}, object, { IsSelected: false });
             }
         });
+        btnCreateVoucher.disabled = true;
+        IsChange = true;
         LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
@@ -325,84 +362,199 @@ var TranPosting;
             }
             return object;
         });
+        btnCreateVoucher.disabled = true;
+        IsChange = true;
         LnkTransDetails = newArr;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
     }
     function btnCreateVoucher_onclick() {
-        debugger;
-        //updateselect();
-        if (txtDesc.value == " ") {
-            DisplayMassage("يجب ادخال الوصف", "you must enter description", MessageType.Error);
-            Errorinput(txtDesc);
-            return;
-        }
-        debugger;
-        var isGeneratedFlag = false;
-        //for (let i = 0; i < LnkTransDetails.length; i++) {
-        //    if (LnkTransDetails[i].IsGenerated == true) {
-        //        isGeneratedFlag = true;
-        //    }
-        //}
-        var newArr = LnkTransDetails.map(function (object) {
-            if (object.IsGenerated === true) {
-                isGeneratedFlag = true;
+        btnShowVouchers_onclick();
+        if (IsUpdated == true) {
+            if (txtDesc.value == " ") {
+                DisplayMassage("يجب ادخال الوصف", "you must enter description", MessageType.Error);
+                Errorinput(txtDesc);
+                return;
             }
-        });
-        if (isGeneratedFlag == false) {
-            DisplayMassage("لا يوجد حركات للترحيل", "there is no transactions for posting", MessageType.Error);
-            return;
-        }
-        if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtFromDate);
-            return;
-        }
-        if (!CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtToDate);
-            return;
-        }
-        var Desc = txtDesc.value;
-        var VoucherDate = DateFormatRep(txtVoucherDate.value);
-        var lstTrans = JSON.stringify(LnkTransDetails);
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("TranPosting", "GenerateVoucher"),
-            data: {
-                comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    if (result.Response != -1) {
-                        //  lblVoucherNum.innerText = result.Response;
-                        DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
-                        setTimeout(function () {
-                            Clear();
-                            $("#VoucherDetailGrid").html("");
-                            //$("#btndiv_3").removeClass("Actiev");
-                            //$("#btndiv_1").addClass("Actiev");
-                            //$("#btndiv_2").removeClass("Actiev");
-                            $("#btndiv_1").addClass("btn-active");
-                            $("#btndiv_2").removeClass("btn-active");
-                            $("#btndiv_3").removeClass("btn-active");
-                            $("#btndiv_11").removeClass("btn-main");
-                            $("#btndiv_22").addClass("btn-main");
-                            $("#btndiv_33").addClass("btn-main");
-                            $("#div_1").removeClass("display_none");
-                            $("#div_3").addClass("display_none");
-                            $("#div_2").addClass("display_none");
-                        }, 5000);
-                        RefreshTransactions();
-                    }
-                    else
-                        DisplayMassage("لم تتم عملية الترحيل راجع اعدادات الربط  ", "Transposting process not accomplished please review connection settings", MessageType.Error);
+            debugger;
+            var isGeneratedFlag = false;
+            //for (let i = 0; i < LnkTransDetails.length; i++) {
+            //    if (LnkTransDetails[i].IsGenerated == true) {
+            //        isGeneratedFlag = true;
+            //    }
+            //}
+            var newArr = LnkTransDetails.map(function (object) {
+                if (object.IsGenerated === true) {
+                    isGeneratedFlag = true;
                 }
+            });
+            if (isGeneratedFlag == false) {
+                DisplayMassage("لا يوجد حركات للترحيل", "there is no transactions for posting", MessageType.Error);
+                return;
             }
-        });
+            if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+                Errorinput(txtFromDate);
+                return;
+            }
+            if (!CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+                Errorinput(txtToDate);
+                return;
+            }
+            var Desc = txtDesc.value;
+            var VoucherDate = DateFormatRep(txtVoucherDate.value);
+            var lstTrans = JSON.stringify(LnkTransDetails);
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("TranPosting", "GenerateVoucher"),
+                data: {
+                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        if (result.Response != -1) {
+                            //  lblVoucherNum.innerText = result.Response;
+                            DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
+                            setTimeout(function () {
+                                Clear();
+                                $("#VoucherDetailGrid").html("");
+                                $("#btndiv_1").addClass("btn-active");
+                                $("#btndiv_2").removeClass("btn-active");
+                                $("#btndiv_3").removeClass("btn-active");
+                                $("#btndiv_11").removeClass("btn-main");
+                                $("#btndiv_22").addClass("btn-main");
+                                $("#btndiv_33").addClass("btn-main");
+                                $("#div_1").removeClass("display_none");
+                                $("#div_3").addClass("display_none");
+                                $("#div_2").addClass("display_none");
+                            }, 5000);
+                            RefreshTransactions();
+                        }
+                        else
+                            DisplayMassage("لم تتم عملية الترحيل راجع اعدادات الربط  ", "Transposting process not accomplished please review connection settings", MessageType.Error);
+                    }
+                }
+            });
+        }
+        IsUpdated = false;
+    }
+    function btndiv_11_onclick() {
+        if (LnkTransDetails.length == 0) {
+            Errorinput($('#btnLoad'));
+            DisplayMassage("يجب تحميل الحركات اولاً ", "Moves must be loaded first", MessageType.Error);
+            $("#btndiv_3").addClass("btn-active");
+            $("#btndiv_1").removeClass("btn-active");
+            $("#btndiv_2").removeClass("btn-active");
+            $("#btndiv_33").removeClass("btn-main");
+            $("#btndiv_11").addClass("btn-main");
+            $("#btndiv_22").addClass("btn-main");
+            $("#div_3").removeClass("display_none");
+            $("#div_1").addClass("display_none");
+            $("#div_2").addClass("display_none");
+        }
+        else {
+            $("#btndiv_1").addClass("btn-active");
+            $("#btndiv_2").removeClass("btn-active");
+            $("#btndiv_3").removeClass("btn-active");
+            $("#btndiv_11").removeClass("btn-main");
+            $("#btndiv_22").addClass("btn-main");
+            $("#btndiv_33").addClass("btn-main");
+            $("#div_1").removeClass("display_none");
+            $("#div_2").addClass("display_none");
+            $("#div_3").addClass("display_none");
+        }
+    }
+    function btndiv_22_onclick() {
+        debugger;
+        if (IsChange == true) {
+            DisplayMassage("يجب توليد القيود قبل عرضها ", "Constraints must be generated before they are displayed", MessageType.Error);
+            Errorinput($('#btnShowVouchers'));
+            $("#btndiv_1").addClass("btn-active");
+            $("#btndiv_2").removeClass("btn-active");
+            $("#btndiv_3").removeClass("btn-active");
+            $("#btndiv_11").removeClass("btn-main");
+            $("#btndiv_22").addClass("btn-main");
+            $("#btndiv_33").addClass("btn-main");
+            $("#div_1").removeClass("display_none");
+            $("#div_2").addClass("display_none");
+            $("#div_3").addClass("display_none");
+        }
+        else {
+            if (GetLnkVoucherDetail.length == 0 && LnkTransDetails.length == 0) {
+                Errorinput($('#btnLoad'));
+                DisplayMassage("يجب تحميل الحركات اولاً ", "Moves must be loaded first", MessageType.Error);
+                $("#btndiv_3").addClass("btn-active");
+                $("#btndiv_1").removeClass("btn-active");
+                $("#btndiv_2").removeClass("btn-active");
+                $("#btndiv_33").removeClass("btn-main");
+                $("#btndiv_11").addClass("btn-main");
+                $("#btndiv_22").addClass("btn-main");
+                $("#div_3").removeClass("display_none");
+                $("#div_1").addClass("display_none");
+                $("#div_2").addClass("display_none");
+            }
+            else if (GetLnkVoucherDetail.length == 0) {
+                Errorinput($('#btnShowVouchers'));
+                DisplayMassage("يجب توليد القيود قبل عرضها ", "Constraints must be generated before they are displayed", MessageType.Error);
+                $("#btndiv_1").addClass("btn-active");
+                $("#btndiv_2").removeClass("btn-active");
+                $("#btndiv_3").removeClass("btn-active");
+                $("#btndiv_11").removeClass("btn-main");
+                $("#btndiv_22").addClass("btn-main");
+                $("#btndiv_33").addClass("btn-main");
+                $("#div_1").removeClass("display_none");
+                $("#div_2").addClass("display_none");
+                $("#div_3").addClass("display_none");
+            }
+        }
+    }
+    function btndiv_33_onclick() {
+        $("#btndiv_3").addClass("btn-active");
+        $("#btndiv_1").removeClass("btn-active");
+        $("#btndiv_2").removeClass("btn-active");
+        $("#btndiv_33").removeClass("btn-main");
+        $("#btndiv_11").addClass("btn-main");
+        $("#btndiv_22").addClass("btn-main");
+        $("#div_3").removeClass("display_none");
+        $("#div_1").addClass("display_none");
+        $("#div_2").addClass("display_none");
     }
     //------------------------------------------------------ Initialize Grid  Region ----------------------------------
+    function txtSearchBox_onchange() {
+        debugger;
+        $("#VoucherDetailGrid").jsGrid("option", "pageIndex", 1);
+        if (txtSearchBox.value != "") {
+            var search_1 = txtSearchBox.value.toLowerCase();
+            SearchDetails = GetLnkVoucherDetail.filter(function (x) { return x.Tr_No.toString().search(search_1) >= 0; });
+            VoucherDetailGrid.DataSource = SearchDetails;
+            VoucherDetailGrid.Bind();
+        }
+        else {
+            VoucherDetailGrid.DataSource = GetLnkVoucherDetail;
+            VoucherDetailGrid.Bind();
+        }
+    }
+    function txtSearchTrans_onchange() {
+        debugger;
+        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+        if (txtSearchTrans.value != "") {
+            var search_2 = txtSearchTrans.value.toLowerCase();
+            try {
+                SearchDetailsTrans = LnkTransDetails.filter(function (x) { return x.TR_CODE.toLowerCase().search(search_2) >= 0 || x.TR_DESCA.toLowerCase().search(search_2) >= 0 || x.TR_DESCE.toLowerCase().search(search_2) >= 0 || x.TR_AMOUNT.toString().search(search_2) >= 0 || x.User_Code.toLowerCase().search(search_2) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search_2) >= 0 || x.TR_NO.toString().search(search_2) >= 0; });
+            }
+            catch (e) {
+                SearchDetailsTrans = LnkTransDetails.filter(function (x) { return x.TR_CODE.toLowerCase().search(search_2) >= 0 || x.TR_DESCA.toLowerCase().search(search_2) >= 0 || x.TR_DESCE.toLowerCase().search(search_2) >= 0 || x.TR_AMOUNT.toString().search(search_2) >= 0 || x.User_Code.toLowerCase().search(search_2) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search_2) >= 0 || x.TR_NO.toString().search(search_2) >= 0; });
+            }
+            TransactionsGrid.DataSource = SearchDetailsTrans;
+            TransactionsGrid.Bind();
+        }
+        else {
+            TransactionsGrid.DataSource = LnkTransDetails;
+            TransactionsGrid.Bind();
+        }
+    }
     function InitializeSubSystemGrid() {
         var res = GetResourceList("");
         SubSystemGrid.ElementName = "SubSystemGrid";
@@ -492,6 +644,8 @@ var TranPosting;
                     txt.style.height = "25px";
                     txt.style.width = "25px";
                     txt.onclick = function (e) {
+                        btnCreateVoucher.disabled = true;
+                        IsChange = true;
                         if (txt.checked == true) {
                             item.IsSelected = true;
                         }
