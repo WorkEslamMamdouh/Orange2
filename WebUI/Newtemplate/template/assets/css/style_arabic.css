@@ -25977,36 +25977,44 @@ body.avgrund-active {
         color: var(--bs-black);
     }
 
-    .dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting:after,
-    .dataTables_wrapper .dataTable thead .sorting_asc:before,
-    .dataTables_wrapper .dataTable thead .sorting_asc:after,
-    .dataTables_wrapper .dataTable thead .sorting_desc:before,
-    .dataTables_wrapper .dataTable thead .sorting_desc:after,
-    .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before,
-    .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
-    .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before,
-    .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
-        line-height: 2.5;
-        font-family: Material Design Icons;
-        font-size: .65rem;
-    }
 
-    .dataTables_wrapper .dataTable thead .sorting:before,
-    .dataTables_wrapper .dataTable thead .sorting_asc:before,
-    .dataTables_wrapper .dataTable thead .sorting_desc:before,
-    .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before,
-    .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before {
-        content: "\F05D";
-        left: 1.2em;
-    }
+.dataTables_wrapper .dataTable thead .sorting,
+.dataTables_wrapper .dataTable thead .sorting_asc,
+.dataTables_wrapper .dataTable thead .sorting_asc_disabled,
+.dataTables_wrapper .dataTable thead .sorting_desc,
+.dataTables_wrapper .dataTable thead .sorting_desc_disabled {
+    position: relative;
+}
+.dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting:after,
+.dataTables_wrapper .dataTable thead .sorting_asc:before,
+.dataTables_wrapper .dataTable thead .sorting_asc:after,
+.dataTables_wrapper .dataTable thead .sorting_desc:before,
+.dataTables_wrapper .dataTable thead .sorting_desc:after,
+.dataTables_wrapper .dataTable thead .sorting_asc_disabled:before,
+.dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
+.dataTables_wrapper .dataTable thead .sorting_desc_disabled:before,
+.dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    line-height: 2.5;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: .70rem;
+}
 
     .dataTables_wrapper .dataTable thead .sorting:after,
     .dataTables_wrapper .dataTable thead .sorting_asc:after,
-    .dataTables_wrapper .dataTable thead .sorting_desc:after,
-    .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
-    .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
-        content: "\F045";
-        left: 0.2em;
+    .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after {
+        content: "\f0de";
+        top: 0;
+        right: 0.5rem;
+    }
+
+    .dataTables_wrapper .dataTable thead .sorting:before,
+    .dataTables_wrapper .dataTable thead .sorting_desc:before,
+    .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before {
+        content: "\f0dd";
+        top: 0;
+        right: 0.5rem;
     }
 
     .dataTables_wrapper .dataTables_paginate {
@@ -29888,7 +29896,7 @@ input[class=checkbox]:checked:before {
     font-size: .8rem;
 }
 .search-box .dataTables_wrapper .dataTable thead th {
-   padding:0;
+   padding:.5rem 1.5rem;
 }
 .search-box .dataTables_wrapper .dataTable tr {
     border-width: 0.5px;
@@ -30460,14 +30468,5 @@ input[class=checkbox]:checked:before {
     font-weight: bold;
     font-size: .9rem;
 }
-/*.sorting {
-    background-image: url("../images/sort_both.png")
-}
-.sorting_desc {
-    background-image: url("../images/sort_desc.png")
-}
-.sorting_asc {
-    background-image: url("../images/sort_asc.png")
-}*/
 
 
