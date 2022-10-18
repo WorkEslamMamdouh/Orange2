@@ -369,7 +369,7 @@ var TranPosting;
         TransactionsGrid.Bind();
     }
     function btnCreateVoucher_onclick() {
-        btnShowVouchers_onclick();
+        debugger;
         if (IsUpdated == true) {
             if (txtDesc.value == " ") {
                 DisplayMassage("يجب ادخال الوصف", "you must enter description", MessageType.Error);
@@ -402,6 +402,7 @@ var TranPosting;
                 Errorinput(txtToDate);
                 return;
             }
+            alert(txtDesc.value);
             var Desc = txtDesc.value;
             var VoucherDate = DateFormatRep(txtVoucherDate.value);
             var lstTrans = JSON.stringify(LnkTransDetails);

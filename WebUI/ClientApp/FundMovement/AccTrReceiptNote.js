@@ -492,6 +492,7 @@ var AccTrReceiptNote;
             txtCashTypeNew.value != '0' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
             chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
             $(".btn-group").addClass("display_none");
+            $('#txt_Receiving_Fund').removeAttr('disabled');
         }
     }
     function btnAdd_onclick() {
@@ -527,6 +528,7 @@ var AccTrReceiptNote;
             $('#txt_CardAmount').removeClass('display_none');
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txtDateNew').removeAttr('disabled');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_BankAcc_Code').val('null');
@@ -874,7 +876,7 @@ var AccTrReceiptNote;
             $('#txt_Receiving_Fund').append('<option value="' + Details_Type_D_CashBox[i].CashBoxID + '">' + (lang == "ar" ? Details_Type_D_CashBox[i].CashBox_DescA : Details_Type_D_CashBox[i].CashBox_DescE) + '</option>');
         }
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(function (x) { return x.CashBoxID == Number(txt_D_CashBox.value); });
             if (box.length > 0) {
@@ -1271,6 +1273,7 @@ var AccTrReceiptNote;
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
@@ -1298,6 +1301,7 @@ var AccTrReceiptNote;
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);

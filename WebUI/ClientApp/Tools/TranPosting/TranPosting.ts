@@ -414,8 +414,8 @@ namespace TranPosting {
 		TransactionsGrid.Bind();
 
 	}
-	function btnCreateVoucher_onclick() {
-		btnShowVouchers_onclick();
+    function btnCreateVoucher_onclick() {
+        debugger
 		if (IsUpdated == true) {
 			if (txtDesc.value == " ") {
 				DisplayMassage("يجب ادخال الوصف", "you must enter description", MessageType.Error);
@@ -453,7 +453,9 @@ namespace TranPosting {
 				WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
 				Errorinput(txtToDate);
 				return
-			}
+            }
+
+            alert(txtDesc.value)
 
 			var Desc: string = txtDesc.value;
 			var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
