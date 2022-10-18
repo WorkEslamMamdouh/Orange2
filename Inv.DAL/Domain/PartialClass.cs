@@ -145,7 +145,7 @@ namespace Inv.DAL.Domain
     public partial class I_Sls_TR_InvoiceItems : SecurityandUpdateFlagClass
     {
     }
-    public partial class A_RecPay_Tr_ReceiptNote : SecurityClass
+    public partial class A_RecPay_Tr_ReceiptNote : SecurityandUpdateFlagClass
     {
     }
     public partial class I_Pur_TR_Receive : SecurityandUpdateFlagClass

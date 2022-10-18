@@ -35,11 +35,7 @@ namespace Clientaccstat {
     var Rd_Code: HTMLInputElement;
     var Rd_Name: HTMLInputElement;
     var Rd_Bal: HTMLInputElement;
-
-
-
-
-    //-------------------------------------------------------------
+     
     var indebtedness;
 
     //--- Print Buttons
@@ -81,8 +77,6 @@ namespace Clientaccstat {
         txt_ID_APP_Type.value = "1";
     }
 
-
-
     function InitalizeControls() {
 
         txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category") as HTMLSelectElement;
@@ -115,8 +109,6 @@ namespace Clientaccstat {
 
     }
 
-
-
     function InitalizeEvents() {
 
         txt_ID_APP_Category.onchange= FillddlCustomer;
@@ -128,8 +120,7 @@ namespace Clientaccstat {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         btnPrint.onclick = () => { PrintReport(4); }
 
-    }                                            
-
+    }
 
     //----------------------------------------------------( Get cus_Cat )
     function Display_CustomerCat() {
@@ -152,6 +143,7 @@ namespace Clientaccstat {
             }
         });
     }
+
     function DisplayStGenDefCustomerCat() {
         
         for (var i = 0; i < Details_Type_D_Category.length; i++) {
@@ -165,10 +157,7 @@ namespace Clientaccstat {
 
     }
     //----------------------------------------------------( Get cus_Group )
-    function Display_CustomerGroup() {
-
-
-        //
+    function Display_CustomerGroup() { 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("GenDefGroup", "GetAll"),
@@ -186,6 +175,7 @@ namespace Clientaccstat {
             }
         });
     }
+
     function DisplayStkCustomerGroup() {
         for (var i = 0; i < Details_CustomerGroup.length; i++) {
 
@@ -218,6 +208,7 @@ namespace Clientaccstat {
             }
         });
     }
+
     function DisplaySalesman() {
         for (var i = 0; i < SalesmanDetails.length; i++) {
 
@@ -358,33 +349,12 @@ namespace Clientaccstat {
                 //
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    Details = result.Response as Array<IQ_GetCustomer>;
-
-                    
-
-                    //for (var i = 0; i < Details.length; i++) {
-
-                    //    Details[i].Isbalance = Number((Number(Details[i].Openbalance) + Number(Details[i].Debit) - Number(Details[i].Credit)).RoundToSt(2));
-                    //    //Details[i].NAME_Salesman = $('#ddlSalesman').find('option:selected').text();
-
-                    //    SalesmanId = Details[i].SalesmanId;
-                    //    //NAME_Salesman = ddlSalesman.options[ddlSalesman.value = "" + SalesmanId + ""].text;
-                    //    //Details[i].NAME_Salesman = NAME_Salesman;
-
-                    //}
-
-                    $('#ddlSalesman').prop("value", value_list_Salesman);
-
-
-
+                    Details = result.Response as Array<IQ_GetCustomer>; 
+                    $('#ddlSalesman').prop("value", value_list_Salesman);                     
                 }
-
             }
         });
     }  
-  
-
-
 
     function btnReset_onclick() {
         
@@ -393,6 +363,7 @@ namespace Clientaccstat {
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         discharge();
     }
+
     function discharge() {
         $('#txt_ID_APP_Category option[value=Null]').prop('selected', 'selected').change();
         $('#ddlSalesman option[value=Null]').prop('selected', 'selected').change();
@@ -454,9 +425,7 @@ namespace Clientaccstat {
             rp.CustomerID = Number($("#ddlCustomer").val());
         }
 
-
-
-
+         
         if (Number($("#txt_ID_APP_Type").val()) == 3) {//-------------غير منفذ///الجميع
             rp.Status = 3;
 
@@ -521,8 +490,7 @@ namespace Clientaccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Clientaccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             })
@@ -537,15 +505,10 @@ namespace Clientaccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Clientaccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             })
-        }
-
-
-
-    }
-
+        } 
+    } 
 }

@@ -36,11 +36,10 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetBoxReceiveList(int comp, int GlobalID, int IQ_TrType, int? Boxid, int? RecPayTypeId, string Status, string FromDate, string Todate, int? custId, int? vndid, int? expid, int? BankCode, int? fromBoxid, int? CashType, string UserCode, string Token)
+        public IHttpActionResult GetBoxReceiveList(int comp, int GlobalID, int IQ_TrType, int? Boxid, int? RecPayTypeId, string Status, string FromDate, string Todate, int? custId, int? vndid, int? expid, int? BankCode, int? fromBoxid, int? CashType, string UserCode,  string Token, string FinYear, string MODULE_CODE, string BranchCode)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
-            {   // 
-
+            {   
                 if (custId == 0) { custId = null; }
                 if (vndid == 0) { vndid = null; }
                 if (BankCode == 0) { BankCode = null; }
@@ -49,10 +48,7 @@ namespace Inv.API.Controllers
                 if (Boxid == 0) { Boxid = null; }
                 if (RecPayTypeId == 0) { RecPayTypeId = null; }
                 if (CashType == 1001) { CashType = null; }
-                if (Status == "All") { Status = null; }
-
-
-
+                if (Status == "All") { Status = null; } 
 
                 string s = "select * from IQ_GetBoxReceiveList where TrType=" + IQ_TrType + " and CompCode= " + comp + "";
                 string condition = "";
@@ -110,6 +106,8 @@ namespace Inv.API.Controllers
                 {
                     string query = s + condition + " ORDER BY [TrNo] ";
                     var AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList();
+                    LogUser.InsertPrint(db, comp.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+
                     return Ok(new BaseResponse(AccTrReceipList));
                 }
                 catch (Exception e)
@@ -157,18 +155,20 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             res.TrNo = int.Parse(result.ResponseData.ToString());
+                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(res));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
-
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -259,11 +259,15 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             res.TrNo = int.Parse(result.ResponseData.ToString());
+                            LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, true, null, null, null);
+
                             return Ok(new BaseResponse(res));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
 
@@ -271,6 +275,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
