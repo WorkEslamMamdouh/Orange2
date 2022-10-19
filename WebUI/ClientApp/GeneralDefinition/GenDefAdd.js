@@ -127,7 +127,7 @@ var GenDefAdd;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\"> \n\t\t             <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Defaultperc" + cnt + "\" type=\"Number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select id=\"VatType" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                      <option value=\"Null\">" + (lang == "ar" ? "اختر الضريبه" : "Choose Tax") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAcc" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAccop" + cnt + "\" disabled   class=\"form-control\">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    \n\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\"> \n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\" class=\"btn-minus\" ><i class=\"fas fa-minus-circle btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtCode" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescA" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtDescL" + cnt + "\" type=\"text\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"Defaultperc" + cnt + "\" type=\"Number\" class=\"form-control\" name=\"\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select id=\"VatType" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                      <option value=\"Null\">" + (lang == "ar" ? "اختر الضريبه" : "Choose Tax") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAcc" + cnt + "\" disabled   class=\"form-control \">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n                        </div>\n\t                </td>\n                    <td>\n                        <div class=\"form-group\">\n                            <select style=\"display: none;\"  id=\"ddlAccop" + cnt + "\" disabled   class=\"form-control\">\n\t\t\t                  <option value=\"Null\">" + (lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number") + "</option>\n\t\t\t                </select>\n \t\t            <input id = \"txt_StatusFlag" + cnt + "\" name = \" \" type =\"text\" disabled class=\"form-control display_none\"/>\n\t\t            <input id = \"txt_ID" + cnt + "\" name = \" \" type = \"text\" disabled class=\"form-control display_none\"/>\n\n                        </div>\n\t                </td>\n                    \n\t\t          \n                </tr>";
         $("#div_Data").append(html);
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
@@ -223,38 +223,40 @@ var GenDefAdd;
     }
     function Update() {
         Assign();
+        debugger;
         if (Model_Details.length > 0) {
             Model_Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model_Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
             Model_Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             Model_Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model_Details[0].MODULE_CODE = Modules.GenDefVendorCat;
+            Model_Details[0].MODULE_CODE = Modules.GenDefAdd;
             Model_Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
-        }
-        Ajax.Callsync({
-            type: "POST",
-            url: sys.apiUrl("GenDefAdd", "UpdateLst"),
-            data: JSON.stringify(Model_Details),
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess == true) {
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-                        MessageBox.Show("تم الحفظ", "");
+            Ajax.Callsync({
+                type: "POST",
+                url: sys.apiUrl("GenDefAdd", "UpdateLst"),
+                data: JSON.stringify(Model_Details),
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess == true) {
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                            MessageBox.Show("تم الحفظ", "");
+                        }
+                        else {
+                            MessageBox.Show("Done", "");
+                        }
+                        btnback_onclick();
+                        refresh();
+                        Save_Succ_But();
                     }
                     else {
-                        MessageBox.Show("Done", "");
+                        MessageBox.Show(result.ErrorMessage, "خطأ");
                     }
-                    btnback_onclick();
-                    refresh();
-                    Save_Succ_But();
                 }
-                else {
-                    MessageBox.Show(result.ErrorMessage, "خطأ");
-                }
-            }
-        });
+            });
+        }
     }
     function Assign() {
+        debugger;
         var StatusFlag;
         Model_Details = new Array();
         for (var i = 0; i < CountGrid; i++) {

@@ -261,7 +261,7 @@ namespace Services {
 
         Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Model.MODULE_CODE = Modules.ServiceCategories;
+        Model.MODULE_CODE = Modules.Services;
         Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
 

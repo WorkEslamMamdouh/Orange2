@@ -21,7 +21,7 @@ namespace GenDefAdd {
     var Model: I_Pur_D_Charges = new I_Pur_D_Charges();
     var VatTypeData: Array<A_D_VAT_TYPE> = new Array<A_D_VAT_TYPE>();
     var AccDataData: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
-    var AccDataDatacode: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();    
+    var AccDataDatacode: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var CountGrid = 0;
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var btnBack_Def: HTMLButtonElement;
@@ -62,7 +62,7 @@ namespace GenDefAdd {
             $("#VatType").removeAttr("disabled");
             $("#btnUpdate_Def").addClass("display_none");
         }
-       
+
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
             $('#btnAddDetails').removeClass("display_none");
@@ -106,9 +106,9 @@ namespace GenDefAdd {
     function AddNewRow() {
         // 
         if (!SysSession.CurrentPrivileges.AddNew) return;
-        var CanAdd: boolean = true; 
-        if (CountGrid > 0) { 
-            for (var i = 0; i < CountGrid; i++) { 
+        var CanAdd: boolean = true;
+        if (CountGrid > 0) {
+            for (var i = 0; i < CountGrid; i++) {
                 CanAdd = Validation_Grid(i);
                 if (CanAdd == false) {
                     break;
@@ -159,10 +159,8 @@ namespace GenDefAdd {
 
     function BuildControls(cnt: number) {
         var html;
-       
+
         html = `<tr id= "No_Row${cnt}"> 
-		             <input id = "txt_StatusFlag${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
-		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
                     <td>
 		                <div class="form-group">
 			                <span id="btn_minus${cnt}" class="btn-minus" ><i class="fas fa-minus-circle btn-minus"></i></span>
@@ -207,10 +205,13 @@ namespace GenDefAdd {
                             <select style="display: none;"  id="ddlAccop${cnt}" disabled   class="form-control">
 			                  <option value="Null">${(lang == "ar" ? "اختر رقم الحساب" : "Choose Account Number")}</option>
 			                </select>
+ 		            <input id = "txt_StatusFlag${cnt}" name = " " type ="text" disabled class="form-control display_none"/>
+		            <input id = "txt_ID${cnt}" name = " " type = "text" disabled class="form-control display_none"/>
+
                         </div>
 	                </td>
                     
-
+		          
                 </tr>`;
 
 
@@ -270,10 +271,10 @@ namespace GenDefAdd {
                 $('#ddlAcc' + cnt).append('<option value="' + AccDataData[i].ACC_CODE + '">' + AccDataData[i].ACC_DESCL + '</option>');
         }
         for (var i = 0; i < AccDataDatacode.length; i++) {
-             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                 $('#ddlAccop' + cnt).append('<option value="' + AccDataDatacode[i].ACC_CODE + '">' + AccDataDatacode[i].ACC_DESCA + '</option>');
-             else
-                 $('#ddlAccop' + cnt).append('<option value="' + AccDataDatacode[i].ACC_CODE + '">' + AccDataDatacode[i].ACC_DESCL + '</option>');
+            if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
+                $('#ddlAccop' + cnt).append('<option value="' + AccDataDatacode[i].ACC_CODE + '">' + AccDataDatacode[i].ACC_DESCA + '</option>');
+            else
+                $('#ddlAccop' + cnt).append('<option value="' + AccDataDatacode[i].ACC_CODE + '">' + AccDataDatacode[i].ACC_DESCL + '</option>');
         }
 
 
@@ -284,11 +285,11 @@ namespace GenDefAdd {
 
             // Read selected option
             $('#but_read' + cnt).click(function () {
-                var username = $('#ddlAcc' + cnt+' option:selected').text();
-                var userid = $('#ddlAcc' + cnt +'').val();
+                var username = $('#ddlAcc' + cnt + ' option:selected').text();
+                var userid = $('#ddlAcc' + cnt + '').val();
 
-                var username = $('#ddlAccop' + cnt +' option:selected').text();
-                var userid = $('#ddlAccop' + cnt +'').val();
+                var username = $('#ddlAccop' + cnt + ' option:selected').text();
+                var userid = $('#ddlAccop' + cnt + '').val();
 
 
                 $('#result').html("id : " + userid + ", name : " + username);
@@ -299,26 +300,25 @@ namespace GenDefAdd {
         return;
     }
 
-    function btnsave_onClick() { 
+    function btnsave_onClick() {
         loading('btnSave_Def');
 
         setTimeout(function () {
 
             finishSave('btnSave_Def');
-        var CanAdd: boolean = true;
-        if (CountGrid > 0)
-        {
-            for (var i = 0; i < CountGrid; i++) {
-                CanAdd = Validation_Grid(i);
-                if (CanAdd == false) {
-                    break;
+            var CanAdd: boolean = true;
+            if (CountGrid > 0) {
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
                 }
             }
-        } 
-        if (CanAdd) {
-            Update();
-        }
-    }, 100);
+            if (CanAdd) {
+                Update();
+            }
+        }, 100);
     }
 
     function refresh() {
@@ -331,45 +331,48 @@ namespace GenDefAdd {
 
     }
     function Update() {
-        Assign(); 
-        if (Model_Details.length > 0 ) {
+        Assign();
+        debugger
+        if (Model_Details.length > 0) {
             Model_Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model_Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
 
-           Model_Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-           Model_Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-           Model_Details[0].MODULE_CODE = Modules.GenDefVendorCat;
-           Model_Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+            Model_Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_Details[0].MODULE_CODE = Modules.GenDefAdd;
+            Model_Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+            Ajax.Callsync({
+
+                type: "POST",
+                url: sys.apiUrl("GenDefAdd", "UpdateLst"),
+                data: JSON.stringify(Model_Details),
+                success: (d) => {
+
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess == true) {
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                            MessageBox.Show("تم الحفظ", "");
+                        } else {
+                            MessageBox.Show("Done", "");
+                        }
+                        btnback_onclick();
+                        refresh();
+                        Save_Succ_But();
+
+                    }
+                    else {
+                        MessageBox.Show(result.ErrorMessage, "خطأ");
+                    }
+                }
+            });
 
         }
 
-        Ajax.Callsync({
-
-            type: "POST",
-            url: sys.apiUrl("GenDefAdd", "UpdateLst"),
-            data: JSON.stringify(Model_Details),
-            success: (d) => {
-
-                let result = d as BaseResponse;
-                if (result.IsSuccess == true) {
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-                        MessageBox.Show("تم الحفظ", "");
-                    } else {
-                        MessageBox.Show("Done", "");
-                    }
-                    btnback_onclick();
-                    refresh();
-                    Save_Succ_But();
-
-                }
-                else { 
-                    MessageBox.Show(result.ErrorMessage, "خطأ");
-                }
-            }
-        });
     }
 
     function Assign() {
+        debugger
         var StatusFlag: String;
         Model_Details = new Array<I_Pur_D_Charges>();
 
@@ -390,7 +393,7 @@ namespace GenDefAdd {
                 Model.OPGLExpenseAcc = $("#ddlAccop" + i).val();
                 Model.IsAddition = true;
                 Model.IsAffectPurchaseCost = true;
-                
+
                 if ($("#txtDescA" + i).val() == "") {
                     Model.DESCA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
@@ -414,7 +417,7 @@ namespace GenDefAdd {
             }
             if (StatusFlag == "u") {
 
-                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode); 
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                 Model.ChargeID = Number($("#txt_ID" + i).val());
                 Model.StatusFlag = StatusFlag.toString();
                 Model.CostAddCode = $("#txtCode" + i).val();
@@ -446,7 +449,7 @@ namespace GenDefAdd {
 
                 if ($("#txt_ID" + i).val() != "") {
 
-                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode); 
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                     Model.ChargeID = Number($("#txt_ID" + i).val());
                     Model.StatusFlag = StatusFlag.toString();
                 }
@@ -480,7 +483,7 @@ namespace GenDefAdd {
     }
 
     function DisplayGenDefCategory() {
-         
+
         for (var i = 0; i < Details.length; i++) {
 
             BuildControls(CountGrid);
@@ -494,8 +497,8 @@ namespace GenDefAdd {
             $("#ddlAccop" + i).val(Details[i].OPGLExpenseAcc);
 
             $("#txt_StatusFlag" + i).val("");
-            CountGrid++; 
-        } 
+            CountGrid++;
+        }
 
         $(document).ready(function () {
             // Initialize select2
@@ -506,10 +509,10 @@ namespace GenDefAdd {
             $('#but_read').click(function () {
                 var username = $('.ddlAcc option:selected').text();
                 var userid = $('.ddlAcc').val();
- 
+
                 var username = $('.ddlAccop option:selected').text();
                 var userid = $('.ddlAccop').val();
- 
+
 
                 $('#result').html("id : " + userid + ", name : " + username);
             });
@@ -529,44 +532,44 @@ namespace GenDefAdd {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
 
-                    VatTypeData = result.Response as Array<A_D_VAT_TYPE>; 
+                    VatTypeData = result.Response as Array<A_D_VAT_TYPE>;
                 }
             }
         });
     }
     function GetddlAcc() {
-      
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
-                data: { CompCode: compcode,UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-                success: (d) => {
-                    let result = d as BaseResponse;
-                    AccDataData = result.Response as Array<A_ACCOUNT>;   
-                }
-            });
-        }
-      function GetddlAcccod() {
-      
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
-                data: { CompCode: compcode,UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-                success: (d) => {
-                    let result = d as BaseResponse;
-                    AccDataDatacode = result.Response as Array<A_ACCOUNT>;            
-                 }
-            });
-        }
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
+            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                AccDataData = result.Response as Array<A_ACCOUNT>;
+            }
+        });
+    }
+    function GetddlAcccod() {
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
+            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                AccDataDatacode = result.Response as Array<A_ACCOUNT>;
+            }
+        });
+    }
 
     function DeleteRow(RecNo: number) {
 
         if (!SysSession.CurrentPrivileges.Remove) return;
-        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => { 
+        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
 
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
 
-            $("#No_Row" + RecNo).attr("hidden", "true"); 
+            $("#No_Row" + RecNo).attr("hidden", "true");
             $("#txtCode" + RecNo).val("000");
 
         });
@@ -620,8 +623,8 @@ namespace GenDefAdd {
 
                 WorningMessage('ادخل الوصف ', 'Enter The Description', 'خطاء', 'Erorr');
                 Errorinput((lang == "ar" ? $("#txtDescA" + rowcount) : $("#txtDescL" + rowcount)));
-                return false; 
-            } 
+                return false;
+            }
 
 
             if (
@@ -645,7 +648,7 @@ namespace GenDefAdd {
                 return false;
             }
             if (
-                ($('#ddlAccop' + rowcount).val() == "Null")  && $("#txt_StatusFlag" + rowcount).val() != "d") {
+                ($('#ddlAccop' + rowcount).val() == "Null") && $("#txt_StatusFlag" + rowcount).val() != "d") {
                 if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                     MessageBox.Show("برجاء اختيار رقم الحساب العمليات", "");
                 } else {

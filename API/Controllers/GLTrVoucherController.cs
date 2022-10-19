@@ -216,20 +216,20 @@ namespace Inv.API.Controllers
                         {
                             item.VoucherID = obj.A_JOURNAL_HEADER.VoucherID;
                             IJournalDetailService.Insert(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            //LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                         }
                         foreach (var item in updatedObjects)
                         {
                             item.VoucherID = obj.A_JOURNAL_HEADER.VoucherID;
                             IJournalDetailService.Update(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                           // LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
 
                         }
                         foreach (var item in deletedObjects)
                         {
                             IJournalDetailService.Delete(item.VoucherDetailID);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, null);
+                           // LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, null);
 
                         }
 

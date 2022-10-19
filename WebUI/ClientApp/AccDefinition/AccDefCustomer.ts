@@ -771,10 +771,11 @@ namespace AccDefCustomer {
                     <td>
 		                <div class="form-group">
 		                    <input type="text" disabled id="IDExpireDateH${cnt}" class="form-control">
+		                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+		                    <input id="CustomerDocID${cnt}" name = " " type = "hidden" class="form-control" />
 		                </div>
 	                </td>
-             <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
-		    <input id="CustomerDocID${cnt}" name = " " type = "hidden" class="form-control" />
+           
                 </tr>`;
 
         $("#data_lebel").append(html);
@@ -1374,11 +1375,12 @@ namespace AccDefCustomer {
 
 
     function Assign_CustomerDoc() {
-
+        debugger
         Model.A_Rec_D_CustomerDoc = new Array<A_Rec_D_CustomerDoc>();
         var StatusFlag: String;
         for (var i = 0; i < CountGrid; i++) {
             singleModel = new A_Rec_D_CustomerDoc();
+
             StatusFlag = $("#txt_StatusFlag" + i).val();
             $("#txt_StatusFlag" + i).val("");
             singleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -1427,7 +1429,7 @@ namespace AccDefCustomer {
     }
 
     function Assign() {
-
+      
         debugger
         if (txt_NAME.value == "") {
             txt_NAME.value = txt_NAMEE.value;
@@ -1509,7 +1511,57 @@ namespace AccDefCustomer {
 
         }
 
+        //debugger
+        ////Model.A_Rec_D_CustomerDoc = new Array<A_Rec_D_CustomerDoc>();
+        //var StatusFlag: String;
+        //for (var i = 0; i < CountGrid; i++) {
+        //    singleModel = new A_Rec_D_CustomerDoc();
 
+        //    StatusFlag = $("#txt_StatusFlag" + i).val();
+        //    $("#txt_StatusFlag" + i).val("");
+        //    singleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        //    singleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        //    if (StatusFlag == "i") {
+        //        singleModel.CustomerDocID = 0;
+        //        singleModel.CustomerId = CustomerId;
+        //        singleModel.StatusFlag = StatusFlag.toString();
+        //        singleModel.CusIDTypeCode = Number($("#CusIDTypeCode" + i).val());
+        //        singleModel.IDNo = $("#IDNo" + i).val();
+        //        singleModel.IDIssuePlace = $('#IDIssuePlace' + i).val();//
+        //        singleModel.IDIssueDate = $('#IDIssueDate' + i).val();
+        //        singleModel.IDIssueDateH = $("#IDIssueDateH" + i).val();
+        //        singleModel.IDExpireDate = $("#IDExpireDate" + i).val();
+        //        singleModel.IDExpireDateH = $("#IDExpireDateH" + i).val();
+
+        //        Model.A_Rec_D_CustomerDoc.push(singleModel);
+
+        //    }
+        //    if (StatusFlag == "u") {
+        //        var CustomerDocID = $("#CustomerDocID" + i).val();
+        //        singleModel.CustomerDocID = CustomerDocID;
+        //        singleModel.CustomerId = CustomerId;
+        //        singleModel.StatusFlag = StatusFlag.toString();
+        //        singleModel.CusIDTypeCode = Number($("#CusIDTypeCode" + i).val());
+        //        singleModel.IDNo = $("#IDNo" + i).val();
+        //        singleModel.IDIssuePlace = $('#IDIssuePlace' + i).val();//
+        //        singleModel.IDIssueDate = $('#IDIssueDate' + i).val();
+        //        singleModel.IDIssueDateH = $("#IDIssueDateH" + i).val();
+        //        singleModel.IDExpireDate = $("#IDExpireDate" + i).val();
+        //        singleModel.IDExpireDateH = $("#IDExpireDateH" + i).val();
+
+        //        Model.A_Rec_D_CustomerDoc.push(singleModel);
+
+        //    }
+        //    if (StatusFlag == "d") {
+        //        if ($("#CustomerDocID" + i).val() != "") {
+        //            var CustomerDocID = $("#CustomerDocID" + i).val();
+        //            singleModel.CustomerDocID = CustomerDocID;
+        //            singleModel.CustomerId = CustomerId;
+        //            singleModel.StatusFlag = StatusFlag.toString();
+        //            Model.A_Rec_D_CustomerDoc.push(singleModel);
+        //        }
+        //    }
+        //}
         Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Model.MODULE_CODE = Modules.AccDefCustomer;
@@ -1540,6 +1592,7 @@ namespace AccDefCustomer {
     }
     function Update() {
         Assign();
+        debugger
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Update"),
