@@ -516,6 +516,10 @@ var CostCenter;
                 Details.push(AccList);
             }
         }
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].MODULE_CODE = Modules.CostCenter;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         $("#MessageBoxDialog").modal("hide");

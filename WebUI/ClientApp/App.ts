@@ -2469,8 +2469,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
-        type: "GET",
-        //url: this.apiUrl("SystemTools", "InsertLog"),
+        type: "GET", 
         url: sys.apiUrl("SystemTools", "InsertLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
         success: (response) => {
@@ -2481,33 +2480,49 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 }
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
     debugger
-    var sys: SystemTools = new SystemTools();
-
+    var sys: SystemTools = new SystemTools(); 
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "PrintliestLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
         success: (response) => {
-
-
+ 
         }
-    });
-
+    }); 
+}
+function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
+    debugger
+    var sys: SystemTools = new SystemTools(); 
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogOperation"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, ExtraData: ExtraData },
+        success: (response) => {
+             
+        }
+    }); 
 }
 function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
     debugger
-    var sys: SystemTools = new SystemTools();
-
+    var sys: SystemTools = new SystemTools(); 
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "OpenScreenLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
         success: (response) => {
+             
+        }
+    }); 
+}
+function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
 
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
 
         }
-    });
-
+    }); 
 }
-
-

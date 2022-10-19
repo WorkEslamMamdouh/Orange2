@@ -328,17 +328,23 @@ namespace Inv.API.Controllers
                         {
                             Operation.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, Operation.OperationID, LogUser.UserLog.Insert, Operation.MODULE_CODE, true, null, null, null);
+
                             return Ok(new BaseResponse(Operation.OperationID));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, null, LogUser.UserLog.Insert, Operation.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, null, LogUser.UserLog.Insert, Operation.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -398,11 +404,15 @@ namespace Inv.API.Controllers
                     {
                         Operation.TrNo = int.Parse(res.ResponseData.ToString());
                         dbTransaction.Commit();
+                        LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, Operation.OperationID, LogUser.UserLog.Update, Operation.MODULE_CODE, true, null, null, null);
+
                         return Ok(new BaseResponse(Operation));
                     }
                     else
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, null, LogUser.UserLog.Update, Operation.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
                 }
@@ -411,6 +421,8 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, Operation.Comp_Code.ToString(), Operation.Branch_Code, Operation.sec_FinYear, Operation.UserCode, null, LogUser.UserLog.Update, Operation.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
@@ -988,11 +1000,15 @@ namespace Inv.API.Controllers
                         {
                             obj.I_TR_OperationTF.Tr_No = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
                             return Ok(new BaseResponse(obj.I_TR_OperationTF));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
 
@@ -1000,6 +1016,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -1042,11 +1060,13 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(obj.I_TR_OperationTF));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
 
@@ -1054,6 +1074,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

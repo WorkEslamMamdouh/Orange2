@@ -270,10 +270,10 @@ namespace financialreports {
                 rp.cc_code = "-1";
             } else {
 
-                rp.cc_code = $('#txtCenter_Cost_ID').val();    //-----------------------------( cost center )
+                rp.cc_code = $('#txtCenter_Cost_ID').val(); //-----------------------------( cost center )
             }
         }
-        else                                 //-------------------------------------( balance sheet )
+        else //-------------------------------------( balance sheet )
         {
             rp.Typ = 3;
             rp.cc_code = "-1";    //-----------------------------( cost center )
@@ -287,13 +287,7 @@ namespace financialreports {
             rp.Level = $('#txt_ID_level').val();
         }
         var ccd = $('#txtCenter_Cost_DESC').val();
-        var ccI = $('#txtCenter_Cost_ID').val()
-
-        //if ((ccI == "" || ccd == "" ) && IsBEnable.checked == true) {
-        //    MessageBox.Show("يجب اختيار التكلفه", "تنبيه")
-        //    return;
-        //}
-        /////////////////////////donia
+        var ccI = $('#txtCenter_Cost_ID').val();
         if (chkLandscapePrint.checked == true) {
             rp.check = 1;
         }
@@ -308,10 +302,8 @@ namespace financialreports {
             url: Url.Action("AProc_Rpt_GLFinancialStatment", "GeneralReports"),
             data: rp,
             success: (d) => {
-                let result = d.result as string;
-
-
-
+                let result = d.result as string;  
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.financialreports, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         })

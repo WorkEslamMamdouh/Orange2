@@ -849,6 +849,8 @@ namespace PurTrReturn {
         clear();
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
         receiveID = Number(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;

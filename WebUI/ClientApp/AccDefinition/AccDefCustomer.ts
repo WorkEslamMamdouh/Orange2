@@ -622,6 +622,9 @@ namespace AccDefCustomer {
         });
     } 
     function DriverDoubleClick() {
+
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
+
         Selecteditem = Details.filter(x => x.CustomerId == Number(ReportGrid.SelectedKey));
         for (var item of Selecteditem) {
             if (item.Isactive) { chkActive.checked = true; }
@@ -1507,6 +1510,12 @@ namespace AccDefCustomer {
         }
 
 
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccDefCustomer;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
     }
     function Insert() {
 
@@ -1689,7 +1698,8 @@ namespace AccDefCustomer {
             success: (d) => {
 
                 let result = d.result as string;
-
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear);
+               
 
                 window.open(result, "_blank");
             }

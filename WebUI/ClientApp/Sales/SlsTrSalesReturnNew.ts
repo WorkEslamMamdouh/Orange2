@@ -1279,6 +1279,7 @@ namespace SlsTrSalesReturnNew {
         Show = true;
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {

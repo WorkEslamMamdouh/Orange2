@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Inv.API.Models.CustomModel
 {
-    public class Account_CCDT_CCDTTP_MasterDetails
+    public class Account_CCDT_CCDTTP_MasterDetails : SecurityandUpdateFlagClass
     {
        
         public A_CCDT_Types A_CCDT_Types { get; set; }

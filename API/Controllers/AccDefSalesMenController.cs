@@ -136,10 +136,15 @@ namespace Inv.API.Controllers
                 try
                 {
                     var AccDefSales = AccDefSalesMenService.Insert(AccDefSalesMan);
+
+                    LogUser.InsertPrint(db, AccDefSalesMan.Comp_Code.ToString(), AccDefSalesMan.Branch_Code, AccDefSalesMan.sec_FinYear, AccDefSalesMan.UserCode, AccDefSales.SalesmanId, LogUser.UserLog.Insert, AccDefSalesMan.MODULE_CODE, true, null, null, null);
+
                     return Ok(new BaseResponse(AccDefSales));
                 }
                 catch (Exception ex)
                 {
+                    LogUser.InsertPrint(db, AccDefSalesMan.Comp_Code.ToString(), AccDefSalesMan.Branch_Code, AccDefSalesMan.sec_FinYear, AccDefSalesMan.UserCode, null, LogUser.UserLog.Insert, AccDefSalesMan.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
@@ -174,10 +179,12 @@ namespace Inv.API.Controllers
                 try
                 {
                     var AccDefSales = AccDefSalesMenService.Update(AccDefSalesMan);
+                    LogUser.InsertPrint(db, AccDefSalesMan.Comp_Code.ToString(), AccDefSalesMan.Branch_Code, AccDefSalesMan.sec_FinYear, AccDefSalesMan.UserCode, AccDefSales.SalesmanId, LogUser.UserLog.Update, AccDefSalesMan.MODULE_CODE, true, null, null, null);
                     return Ok(new BaseResponse(AccDefSales));
                 }
                 catch (Exception ex)
                 {
+                    LogUser.InsertPrint(db, AccDefSalesMan.Comp_Code.ToString(), AccDefSalesMan.Branch_Code, AccDefSalesMan.sec_FinYear, AccDefSalesMan.UserCode, null, LogUser.UserLog.Update, AccDefSalesMan.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }

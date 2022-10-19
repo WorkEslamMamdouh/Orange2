@@ -632,6 +632,7 @@ var CollectUnit;
     //*************************************************Display******************************************//
     function Grid_RowDoubleClicked() {
         $("#DivInvoiceData").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         hd_CollectID.value = Grid.SelectedKey;
         //GlobalInvoiceID = Number(Grid.SelectedKey);
         backflag = false;

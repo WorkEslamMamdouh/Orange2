@@ -2215,6 +2215,7 @@ namespace SlsTrSalesManagerNew {
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;

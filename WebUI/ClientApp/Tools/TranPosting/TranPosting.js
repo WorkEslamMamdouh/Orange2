@@ -178,7 +178,7 @@ var TranPosting;
                 type: "Get",
                 url: sys.apiUrl("TranPosting", "LoadTransactions"),
                 data: {
-                    Comp: compcode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    Comp: compcode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
                 },
                 success: function (d) {
                     var result = d;
@@ -236,6 +236,11 @@ var TranPosting;
         var LnkTransDetails = new Array();
         LnkTransDetails = TransactionsGrid.DataSource;
         selectedLnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsSelected == true; });
+        selectedLnkTransDetails[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        selectedLnkTransDetails[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        selectedLnkTransDetails[0].MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        selectedLnkTransDetails[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        selectedLnkTransDetails[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         if (selectedLnkTransDetails.length != 0) {
             Ajax.Callsync({
                 type: "POST",
@@ -370,7 +375,7 @@ var TranPosting;
             type: "Get",
             url: sys.apiUrl("TranPosting", "GenerateVoucher"),
             data: {
-                comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
             },
             success: function (d) {
                 var result = d;
@@ -451,7 +456,7 @@ var TranPosting;
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetAllTransactions"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
@@ -511,16 +516,6 @@ var TranPosting;
             { title: res.App_Notes, name: "GenRemarks", type: "text", width: "10%" },
         ];
     }
-    // function updateselect() {		   
-    //     Ajax.Callsync({
-    //         type: "Get",
-    //url: sys.apiUrl("TranPosting", "Updateselect"),
-    //data: JSON.stringify(LnkTransDetails),
-    //         success: (d) => {
-    //             let result = d as BaseResponse;
-    //         }
-    //     });
-    // }
     function InitializeVoucherDetailGrid() {
         var res = GetResourceList("");
         VoucherDetailGrid.ElementName = "VoucherDetailGrid";

@@ -646,6 +646,8 @@ namespace JournalVoucher {
         PostFlag = false;
         Clear();
         $("#divJournalDetail").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         if (ReverseFlag == true) {
             SelectedJournalModel = ReversedJournalMasterDetailModel.AQ_GetJournalHeader;
         } else {
@@ -2048,6 +2050,14 @@ namespace JournalVoucher {
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.JournalVoucher; 
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+
+
     }
     function Insert() {
         MasterDetailModel.A_JOURNAL_HEADER.SOURCE_TYPE = "1";

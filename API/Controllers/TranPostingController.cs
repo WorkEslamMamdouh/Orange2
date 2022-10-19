@@ -35,11 +35,12 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllTransactions(string UserCode, string Token)
+        public IHttpActionResult GetAllTransactions(int CompCode, string UserCode, string Token, string sec_FinYear, string MODULE_CODE, string BranchCode)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var GenVatTypeList = IGlnktransService.GetAll(x => x.INTEGRATE == true).OrderBy(s => s.SUB_SYSTEM_CODE).ThenBy(a => a.TR_CODE).ToList();
+                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, "GetAllTransactions");
 
                 return Ok(new BaseResponse(GenVatTypeList));
             }
@@ -49,12 +50,14 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult LoadTransactions(int Comp, int branchCode, string TrType, string StartDate, string EndDate, int? FromNum, int? ToNum, string UserCode, string Token)
+        public IHttpActionResult LoadTransactions(int Comp, int branchCode, string TrType, string StartDate, string EndDate, int? FromNum, int? ToNum, string UserCode, string Token, string Modules, string FinYear)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 db.GLnk_GenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
                 var Arrays = GlnktransTempService.GetAll(s => s.User_Code == UserCode).ToList();
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+
                 return Ok(new BaseResponse(Arrays));
             }
             return BadRequest(ModelState);
@@ -90,7 +93,7 @@ namespace Inv.API.Controllers
                 var userCode = lnkTempList[0].User_Code;
                 var VchDeatilList = IVchrTemplateDetailService.GetAllFromView(s => s.User_Code == userCode).ToList();
 
-                //LogUser.Insert(db, lnkTempList[0].COMP_CODE.ToString(), lnkTempList[0].BRA_CODE.ToString(), lnkTempList[0].ToString(), lnkTempList[0].User_Code, lnkTempList[0].TR_NO, LogUser.UserLog.Insert, LogUser.PageName.AccDefCustomer, true, null, lnkTempList[0].TR_NO.ToString(), null);
+                LogUser.InsertPrint(db, lnkTempList[0].Comp_Code.ToString(), lnkTempList[0].Branch_Code.ToString(), lnkTempList[0].sec_FinYear, lnkTempList[0].UserCode, null, LogUser.UserLog.Update, lnkTempList[0].MODULE_CODE, true, null, null, null);
 
                 return Ok(new BaseResponse(VchDeatilList));
             }
@@ -117,7 +120,7 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GenerateVoucher(int comp, int branch, string Desc,string VoucherDate, string UserCode, string Token)
+        public IHttpActionResult GenerateVoucher(int comp, int branch, string Desc,string VoucherDate, string UserCode, string Token, string sec_FinYear, string MODULE_CODE)
         {
             if (ModelState.IsValid)
             {
@@ -128,6 +131,9 @@ namespace Inv.API.Controllers
                     Trno = Convert.ToInt32(objParameterOk.Value);
                 else
                     Trno = -1;
+
+                LogUser.InsertPrint(db, comp.ToString(), branch.ToString(), sec_FinYear, UserCode, null, LogUser.UserLog.Update, MODULE_CODE, true, null, null, "GenerateVoucher" + Desc);
+
                 return Ok(new BaseResponse(Trno));
             }
             return BadRequest(ModelState);

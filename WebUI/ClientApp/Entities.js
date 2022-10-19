@@ -5701,11 +5701,16 @@ var ServPurchseInvoiceMasterDetail = /** @class */ (function (_super) {
     }
     return ServPurchseInvoiceMasterDetail;
 }(SecurityClass));
-var PurInvoiceRetMasterDetails = /** @class */ (function () {
+var PurInvoiceRetMasterDetails = /** @class */ (function (_super) {
+    __extends(PurInvoiceRetMasterDetails, _super);
     function PurInvoiceRetMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.AVAT_TR_PurInvoiceRet = new AVAT_TR_PurInvoiceRet();
+        _this.AVAT_TR_PurInvoiceRetDetail = new Array();
+        return _this;
     }
     return PurInvoiceRetMasterDetails;
-}());
+}(SecurityClass));
 var AQ_ServPurInvoiceMasterDetail = /** @class */ (function (_super) {
     __extends(AQ_ServPurInvoiceMasterDetail, _super);
     function AQ_ServPurInvoiceMasterDetail() {
@@ -5722,11 +5727,17 @@ var AQPurInvoiceRetMasterDetails = /** @class */ (function () {
     }
     return AQPurInvoiceRetMasterDetails;
 }());
-var Account_CCDT_CCDTTP_MasterDetails = /** @class */ (function () {
+var Account_CCDT_CCDTTP_MasterDetails = /** @class */ (function (_super) {
+    __extends(Account_CCDT_CCDTTP_MasterDetails, _super);
     function Account_CCDT_CCDTTP_MasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.A_CCDT_Types = new A_CCDT_Types;
+        _this.A_ACCOUNT = new Array();
+        _this.A_CCDT_COSTCENTERS = new Array();
+        return _this;
     }
     return Account_CCDT_CCDTTP_MasterDetails;
-}());
+}(SecurityClass));
 var A_CCDT_COSTCENTERS = /** @class */ (function (_super) {
     __extends(A_CCDT_COSTCENTERS, _super);
     function A_CCDT_COSTCENTERS() {

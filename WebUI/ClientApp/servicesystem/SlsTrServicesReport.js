@@ -461,6 +461,7 @@ var SlsTrServicesReport;
         }
         rp.Name_function = "IProc_Rpt_VatSalesSummary";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Sales_Report, SysSession.CurrentEnvironment.CurrentYear);
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

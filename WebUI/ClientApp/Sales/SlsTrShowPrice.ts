@@ -873,6 +873,8 @@ namespace SlsTrShowPrice {
         clear();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         let Selecteditem
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         try {
             GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);

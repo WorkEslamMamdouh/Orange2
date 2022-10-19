@@ -215,6 +215,10 @@ var Services;
         else {
             Model.Itemid = Itemid;
         }
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.ServiceCategories;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         $("#btnUpdate").removeClass("display_none");

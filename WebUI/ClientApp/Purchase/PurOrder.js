@@ -276,6 +276,7 @@ var PurOrder;
         $("#PurOrderDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(divMasterGrid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(GlobalPurOrderID); });

@@ -368,14 +368,14 @@ namespace Accountstatement {
         }
 
 
-        if (chk_Certified.checked == true)  //------------------------------------( Inclusion of certified restrictions )
+        if (chk_Certified.checked == true) //------------------------------------( Inclusion of certified restrictions )
         {
             rp.IsAuthVchr = 1;
         }
         else {
             rp.IsAuthVchr = 0;
         }
-        if (chk_New.checked == true)       //-------------------------------------( Inclusion of new restrictions )
+        if (chk_New.checked == true) //-------------------------------------( Inclusion of new restrictions )
         {
             rp.IsNewVchr = 1;
         }
@@ -383,7 +383,7 @@ namespace Accountstatement {
             rp.IsNewVchr = 0;
         }
 
-        if (chkview.checked == true)         //-----------------------------------( Hide zero accounts )
+        if (chkview.checked == true) //-----------------------------------( Hide zero accounts )
         {
             rp.exzero = 1;
         }
@@ -395,16 +395,13 @@ namespace Accountstatement {
             MessageBox.Show("يجب اختيار الحساب", "تنبيه")
             return;
         }
-
-
+         
         Ajax.Callsync({
             url: Url.Action("AProc_Rpt_GLAccountStatment", "GeneralReports"),
             data: rp,
             success: (d) => {
-                let result = d.result as string;
-
-
-
+                let result = d.result as string; 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Accountstatement, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         })

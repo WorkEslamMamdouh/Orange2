@@ -226,6 +226,10 @@ var GenDefAdd;
         if (Model_Details.length > 0) {
             Model_Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model_Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model_Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_Details[0].MODULE_CODE = Modules.GenDefVendorCat;
+            Model_Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         Ajax.Callsync({
             type: "POST",

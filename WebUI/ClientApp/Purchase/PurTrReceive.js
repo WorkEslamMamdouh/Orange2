@@ -434,6 +434,7 @@ var PurTrReceive;
         debugger;
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(divMasterGrid.SelectedKey); });
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
         RetrivedPurchaseModel = Selecteditem;

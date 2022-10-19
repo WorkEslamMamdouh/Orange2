@@ -1751,6 +1751,7 @@ var SlsTrSalesManagerNew;
         $("#btnSave").addClass("display_none");
         InvoiceStatisticsModel = new Array();
         Selecteditem = new Array();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         GlobalDocNo = Selecteditem[0].DocNo;
         try {

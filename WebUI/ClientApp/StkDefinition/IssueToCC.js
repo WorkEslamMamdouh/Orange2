@@ -374,6 +374,7 @@ var IssueToCC;
     }
     function Grid_RowDoubleClicked() {
         IsNew = false;
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         DocumentActions.RenderFromModel(Grid.SelectedItem);
         IssueToCcID = Number(Grid.SelectedKey);
         bindDetails();
@@ -638,7 +639,7 @@ var IssueToCC;
         IssueMasterDetails.I_Stk_TR_IssueToCC = ModelMaster;
         IssueMasterDetails.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         IssueMasterDetails.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        IssueMasterDetails.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        IssueMasterDetails.MODULE_CODE = Modules.IssueToCC;
         IssueMasterDetails.UserCode = SysSession.CurrentEnvironment.UserCode;
         IssueMasterDetails.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
