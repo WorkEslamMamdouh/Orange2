@@ -78,7 +78,7 @@
       <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>..\..\Elmac\API\bin\Security.dll</HintPath>
+      <HintPath>..\packages\Security\Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />

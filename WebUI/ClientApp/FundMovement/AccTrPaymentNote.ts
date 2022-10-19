@@ -615,6 +615,8 @@ namespace AccTrPaymentNote {
             }
             $("#txtDateNew").removeAttr("disabled");
 
+
+            $('#txt_Receiving_Fund').removeAttr('disabled');
         }
           
 
@@ -649,6 +651,7 @@ namespace AccTrPaymentNote {
 
 
             $('#Bank_Div').addClass('display_none');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#La_CashAmount').removeClass('display_none');
             $('#La_CardAmount').removeClass('display_none');
             $('#txt_CashAmount').removeClass('display_none');
@@ -1117,7 +1120,7 @@ namespace AccTrPaymentNote {
 
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
             debugger
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(x => x.CashBoxID == Number(txt_D_CashBox.value));
             if (box.length > 0) {
@@ -1476,6 +1479,7 @@ namespace AccTrPaymentNote {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     Save_Succ_But();
@@ -1512,6 +1516,7 @@ namespace AccTrPaymentNote {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);

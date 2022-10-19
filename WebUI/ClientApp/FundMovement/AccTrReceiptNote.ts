@@ -580,6 +580,7 @@ namespace AccTrReceiptNote {
             chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
             $(".btn-group").addClass("display_none");
 
+            $('#txt_Receiving_Fund').removeAttr('disabled');
 
         }
          
@@ -625,6 +626,7 @@ namespace AccTrReceiptNote {
 
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txtDateNew').removeAttr('disabled');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_BankAcc_Code').val('null');
@@ -1077,7 +1079,7 @@ namespace AccTrReceiptNote {
 
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
 
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(x => x.CashBoxID == Number(txt_D_CashBox.value));
             if (box.length > 0) {
@@ -1405,6 +1407,7 @@ namespace AccTrReceiptNote {
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
@@ -1432,6 +1435,7 @@ namespace AccTrReceiptNote {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
