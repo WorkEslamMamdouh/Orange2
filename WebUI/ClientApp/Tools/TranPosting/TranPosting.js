@@ -402,7 +402,6 @@ var TranPosting;
                 Errorinput(txtToDate);
                 return;
             }
-            alert(txtDesc.value);
             var Desc = txtDesc.value;
             var VoucherDate = DateFormatRep(txtVoucherDate.value);
             var lstTrans = JSON.stringify(LnkTransDetails);

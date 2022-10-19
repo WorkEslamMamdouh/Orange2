@@ -674,7 +674,7 @@ function OpenPartial(ModuleCode: string, DivName: string) {
 }
 function loading(NameBtn: string) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
-
+    
     $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
 
     setTimeout(function () {

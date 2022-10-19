@@ -454,8 +454,7 @@ namespace TranPosting {
 				Errorinput(txtToDate);
 				return
             }
-
-            alert(txtDesc.value)
+             
 
 			var Desc: string = txtDesc.value;
 			var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
