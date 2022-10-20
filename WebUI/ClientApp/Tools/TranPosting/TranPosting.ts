@@ -702,10 +702,10 @@ namespace TranPosting {
 		Ajax.Callsync({
 			type: "Get",
 			url: sys.apiUrl("TranPosting", "GetAllTransactions"),
-			data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.TranPosting, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
                                     
-
+            
 
 			},
 			success: (d) => {
@@ -806,7 +806,7 @@ namespace TranPosting {
 		Ajax.Callsync({
 			type: "Get",
 			url: sys.apiUrl("TranPosting", "GetTransactions"),
-            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token/*, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear */},
 			success: (d) => {
 				let result = d as BaseResponse;
 				if (result.IsSuccess) {

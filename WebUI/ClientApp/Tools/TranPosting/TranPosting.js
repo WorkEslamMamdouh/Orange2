@@ -609,7 +609,7 @@ var TranPosting;
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetAllTransactions"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.TranPosting, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
@@ -708,7 +708,7 @@ var TranPosting;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetTransactions"),
-            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token /*, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear */ },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
