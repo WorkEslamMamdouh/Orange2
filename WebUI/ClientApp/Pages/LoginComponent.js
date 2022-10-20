@@ -383,7 +383,6 @@ var LoginComponent;
         APiSession.Session.ScreenLanguage = SystemEnv.ScreenLanguage;
         APiSession.Session.UserCode = SystemEnv.UserCode;
         APiSession.Session.CurrentYear = $("#txtYear").val();
-        InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true); //if success
         $.ajax({
             url: OnLoggedUrl,
             success: function (result) {
@@ -421,22 +420,6 @@ var LoginComponent;
                         cmbBranch.add(new Option(text, bra.BRA_CODE.toString()));
                     });
                 }
-            }
-        });
-    }
-    function InsertLog(UserCode, compcode, BranchCode, FinYear, ISLogin) {
-        //*****log
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("G_USERS", "InsertLog"),
-            data: {
-                UserCode: UserCode,
-                compcode: compcode,
-                BranchCode: BranchCode,
-                FinYear: SystemEnv.CurrentYear,
-                ISLogin: ISLogin
-            },
-            success: function (d) {
             }
         });
     }

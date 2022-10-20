@@ -204,10 +204,6 @@ var LnkvarBranch;
             if (Detailsbranch.length != 0) {
                 Detailsbranch[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
                 Detailsbranch[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-                Detailsbranch[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-                Detailsbranch[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-                Detailsbranch[0].MODULE_CODE = Modules.LnkvarBranch;
-                Detailsbranch[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
                 Ajax.Callsync({
                     type: "POST",
                     url: sys.apiUrl("G_LnkVarBranch", "Update"),

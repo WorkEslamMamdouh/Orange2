@@ -742,7 +742,7 @@ var SlsTrSalesReturn;
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.SlsTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: function (d) {
                 var result = d;
@@ -1031,7 +1031,6 @@ var SlsTrSalesReturn;
         Show = true;
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturn, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == GlobalReturnID; });

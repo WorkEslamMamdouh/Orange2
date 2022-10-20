@@ -1275,7 +1275,7 @@ namespace AccTrPaymentNote {
 
 
             let search: string = searchbutmemreport.value.toLowerCase();
-            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 || x.Bef_DescE.toLowerCase().search(search) >= 0); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
+            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 ); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
             //    || x.CustomerCODE.toString().search(search) >= 0 /* || x.CreditLimit.toString().search(search) >= 0 || x.Emp_NameA.toString().search(search) >= 0
             //    || x.ContactMobile.toString().search(search) >= 0 /*|| x.DueAmount.toString().search(search) >= 0 *//*|| x.DaysDiff.toString().search(search) >= 0*/);
 

@@ -378,7 +378,6 @@ var AccTrInvReceipt;
         txtCardInv.disabled = true;
         ////debugger
         InvoiceStatisticsModel = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrInvReceipt, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         var Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         invoiceID = Number(Selecteditem[0].InvoiceID);
         InvoiceStatisticsModel = Selecteditem;

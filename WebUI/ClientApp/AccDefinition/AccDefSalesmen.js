@@ -647,10 +647,6 @@ var AccDefSalesmen;
             Model.NationalityID = $('#ddlNationality').val();
             Model.CC_Code = $('#txt_CC_Code').val();
         }
-        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Model.MODULE_CODE = Modules.AccDefSalesmen;
-        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         Assign();

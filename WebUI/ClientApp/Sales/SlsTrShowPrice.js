@@ -147,7 +147,6 @@ var SlsTrShowPrice;
         txtNet.value = NetCount.toString();
         txtCommission.value = commissionCount.toString();
         GetAllIItem();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear);
         // $('#btnPrint').addClass('display_none');
     }
     SlsTrShowPrice.InitalizeComponent = InitalizeComponent;
@@ -740,7 +739,7 @@ var SlsTrShowPrice;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("SlsTrSales", "GetAllSlsTrShowPriceStatistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.SlsTrShowPrice, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { CompCode: compcode, BranchCode: BranchCode, IsCash: IsCash, StartDate: startDate, EndDate: endDate, Status: status, CustId: customerId, SalesMan: ddlSalesmanFilterValue, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -765,7 +764,6 @@ var SlsTrShowPrice;
         clear();
         InvoiceStatisticsModel = new Array();
         var Selecteditem;
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         try {
             GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
@@ -2139,11 +2137,6 @@ var SlsTrShowPrice;
         }
         MasterDetailsModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
-        MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrShowPrice;
-        MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function updateWithProcess() {
         Ajax.Callsync({
@@ -2365,7 +2358,6 @@ var SlsTrShowPrice;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2407,8 +2399,6 @@ var SlsTrShowPrice;
         rp.TRId = GlobalinvoiceID;
         rp.Name_function = "rptInvoiceNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        debugger;
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

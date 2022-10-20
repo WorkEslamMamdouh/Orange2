@@ -97,7 +97,6 @@ var DirectTransfer;
         txtTransferDate.value = GetDate();
         InitalizeEvents();
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear);
     }
     DirectTransfer.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -306,7 +305,7 @@ var DirectTransfer;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("DirectTransfer", "GetAllDirectTransferHeaderWithDetail"),
-            data: { compcode: compcode, TrType: 0, TFType: 1, FromDate: FromDate, toDate: toDate, status: status, sourcrBR: sourcrBR, ToBR: ToBR, sourcrStore: sourcrStore, ToStore: ToStore, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.Directtransfer, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { compcode: compcode, TrType: 0, TFType: 1, FromDate: FromDate, toDate: toDate, status: status, sourcrBR: sourcrBR, ToBR: ToBR, sourcrStore: sourcrStore, ToStore: ToStore, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -1034,11 +1033,6 @@ var DirectTransfer;
         MasterDetailModel.I_Stk_TR_TransferDetails = TransferDetailModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.PurTrReceive;
-        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.I_Stk_TR_Transfer.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1207,7 +1201,6 @@ var DirectTransfer;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1224,7 +1217,6 @@ var DirectTransfer;
         rp.Name_function = "IProc_Prnt_StkTransfer";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 })(DirectTransfer || (DirectTransfer = {}));

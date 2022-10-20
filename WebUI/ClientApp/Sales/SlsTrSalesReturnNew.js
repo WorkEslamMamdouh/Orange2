@@ -158,7 +158,6 @@ var SlsTrSalesReturnNew;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
         InitializeGrid();
         DisplayMod();
         flagInvMulti == false ? $('.InvMulti').addClass('display_none') : $('.InvMulti').removeClass('display_none');
@@ -821,7 +820,7 @@ var SlsTrSalesReturnNew;
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.SlsTrReturnNew, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: function (d) {
                 var result = d;
@@ -1111,7 +1110,6 @@ var SlsTrSalesReturnNew;
         Show = true;
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == GlobalReturnID; });
@@ -2013,13 +2011,9 @@ var SlsTrSalesReturnNew;
         MasterDetailModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailModel.I_Sls_TR_InvoiceItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.CompName = SysSession.CurrentEnvironment.CompanyNameAr;
         MasterDetailModel.VatNo = SysSession.CurrentEnvironment.VatNo;
-        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.SlsTrReturnNew;
-        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         InvoiceModel.InvoiceID = 0;
@@ -2239,7 +2233,6 @@ var SlsTrSalesReturnNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2255,7 +2248,6 @@ var SlsTrSalesReturnNew;
         rp.TRId = GlobalReturnID;
         rp.Name_function = "rptInvoiceNoteRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

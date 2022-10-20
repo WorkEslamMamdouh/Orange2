@@ -428,11 +428,6 @@ var AVATCONTROL;
         Model.VAT_YEAR = vatyear;
         Model.Sls_DISC_ACC_CODE = txtSls_DISC_ACC_CODE.value;
         Model.Pur_DISC_ACC_CODE = txtPur_DISC_ACC_CODE.value;
-        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Model.MODULE_CODE = Modules.SlsTrSalesManagerNew;
-        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("AVATCONTROL", "Update"),

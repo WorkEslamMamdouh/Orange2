@@ -327,7 +327,6 @@ var StkDefItemsNew;
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItemsNew, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         Selected_Data = Details.filter(function (x) { return x.ItemID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
         DisplayData(Selected_Data);
