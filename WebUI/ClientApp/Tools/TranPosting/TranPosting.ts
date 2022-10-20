@@ -469,9 +469,9 @@ namespace TranPosting {
 			Ajax.Callsync({
 				type: "Get",
 				url: sys.apiUrl("TranPosting", "GenerateVoucher"),
-				data: {
-					comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-				},
+                data: {
+                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
+                },//(int comp, int branch, string Desc,string VoucherDate, string UserCode, string Token, string sec_FinYear, string MODULE_CODE)
 				success: (d) => {
 					let result = d as BaseResponse;
 					if (result.IsSuccess) {

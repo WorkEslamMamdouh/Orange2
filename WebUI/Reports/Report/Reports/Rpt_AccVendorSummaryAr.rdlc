@@ -431,7 +431,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=iif(Fields!EndBal.Value &gt;= 0, "دائن", "مدين")</Value>
+                              <Value>=iif(Fields!EndBal.Value &gt;= 0,   "مدين" , "دائن")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -818,7 +818,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=iif(sum(Fields!EndBal.Value) &gt;= 0, "دائن", "مدين")</Value>
+                              <Value>=iif(sum(Fields!EndBal.Value) &gt;= 0,   "مدين" , "دائن")</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -842,6 +842,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1173,7 +1174,7 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rpt_AccVendorSummaryAr</DataSetName>
         <Height>1.8cm</Height>
-        <Width>19.79472cm</Width>
+        <Width>19.79467cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
