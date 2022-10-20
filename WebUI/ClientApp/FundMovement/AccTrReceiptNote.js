@@ -67,7 +67,6 @@ var AccTrReceiptNote;
     var GlobalAccIDH = 0;
     var GlobalBoxIDH = 0;
     var IsEdite = false;
-    ;
     ////////////////////////////////////////////Vendors////////////////////////////////////////
     var PurchaserVndId;
     var VndIdfilter;
@@ -94,7 +93,7 @@ var AccTrReceiptNote;
     var BoxDetails = new Array();
     var PurchaserBoxId;
     var BoxIdfilter;
-    //----------------------------------------------------print buttons 
+    //////////////////////////////////////////print buttons////////////////////////////////////////////
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -102,7 +101,6 @@ var AccTrReceiptNote;
     //var btnPrint: HTMLButtonElement;
     var btnPrintslip;
     var btnPrintsFrom_To;
-    //-----------------------------------------------------------------------------
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
     var BranchCode; //SharedSession.CurrentEnvironment.BranchCode;
     var IsNew;
@@ -426,11 +424,6 @@ var AccTrReceiptNote;
         }
         txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).toString();
     }
-    //function txt_ID_beneficiaryNew_onchange()
-    //{
-    //    var openbalance = Number($('option:selected', txt_ID_beneficiaryNew).attr('data-openbalance'));
-    //    if (txt_ID_beneficiaryNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance);}
-    //}
     function txt_ReceiptNoteNew_onchange() {
         txt_BenCode.value = "";
         txt_BenName.value = "";
@@ -1016,22 +1009,18 @@ var AccTrReceiptNote;
         //}
     }
     function Display() {
+        debugger;
         Assign_Display();
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccTrReceipt", "GetBoxReceiveList"),
             data: {
-                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrReceiptNote, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    //for (var i = 0; i < Details.length; i++) {
-                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
-                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد " : "A certified "); }
-                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : 'Not supported'); }
-                    //}
                     InitializeGrid();
                     ReportGrid.DataSource = Details;
                     ReportGrid.Bind();
@@ -1175,6 +1164,11 @@ var AccTrReceiptNote;
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
             Model.BankName = $('#txt_BankName').val();
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -1251,6 +1245,11 @@ var AccTrReceiptNote;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
     }
     function Insert() {
@@ -1260,6 +1259,7 @@ var AccTrReceiptNote;
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
             return;
         }
+        console.log(Model);
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccTrReceipt", "Insert"),
@@ -1410,6 +1410,7 @@ var AccTrReceiptNote;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result);
                 // window.close(result)
             }
@@ -1426,6 +1427,7 @@ var AccTrReceiptNote;
         rp.TRId = ReceiptID;
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
@@ -1459,11 +1461,11 @@ var AccTrReceiptNote;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
     }
-    ///////////////////////////////////////donia
     ////////////////////////////////////////////////Display Vendors///////////////////////////
     function btnBenVnd_onclick() {
         sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", "CompCode= " + compcode + "and IsCreditVendor = 1 and Isactive = 1", function () {
