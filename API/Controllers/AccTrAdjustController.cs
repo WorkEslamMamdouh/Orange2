@@ -114,8 +114,7 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Insert([FromBody]A_RecPay_Tr_Adjustment Entity)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(Entity.Token, Entity.UserCode))
-            {
+           
                 using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                 {
                     try
@@ -164,8 +163,7 @@ namespace Inv.API.Controllers
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
-            }
-            return BadRequest(ModelState);
+             
         }
 
         public IHttpActionResult Delete(int ID, string UserCode, string Token)
