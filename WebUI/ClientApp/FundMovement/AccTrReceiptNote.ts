@@ -1329,6 +1329,11 @@ namespace AccTrReceiptNote {
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
             Model.BankName = $('#txt_BankName').val();
 
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model);//Insert Update
@@ -1392,7 +1397,7 @@ namespace AccTrReceiptNote {
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
             return
         }
-
+        console.log(Model);
         Ajax.Callsync({
             type: "POST",
 
