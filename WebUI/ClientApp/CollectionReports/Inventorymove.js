@@ -287,7 +287,6 @@ var Inventorymove;
                     //window.open(Url.Action("ReportsPopup", "Home"), "blank");
                     //localStorage.setItem("result", "" + result + "");
                     var result = d.result;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Inventorymove, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });
@@ -301,7 +300,6 @@ var Inventorymove;
                     //window.open(Url.Action("ReportsPopup", "Home"), "blank");
                     //localStorage.setItem("result", "" + result + "");
                     var result = d.result;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Inventorymove, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });

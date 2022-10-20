@@ -75,7 +75,7 @@ var CashBoxAccount;
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                CompCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.CashBoxAccount, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                CompCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             //success: (d) => {
             //    let result = d as BaseResponse;
@@ -162,7 +162,6 @@ var CashBoxAccount;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBoxAccount, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });
@@ -174,7 +173,6 @@ var CashBoxAccount;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBoxAccount, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });

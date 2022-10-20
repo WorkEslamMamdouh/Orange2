@@ -797,10 +797,6 @@ var GLDefAccount;
                 Singl_Details.A_ACCOUNT_YEAR = AccList_YEAR;
             }
         }
-        Singl_Details.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Singl_Details.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Singl_Details.MODULE_CODE = Modules.GLDefAccount;
-        Singl_Details.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         $("#MessageBoxDialog").modal("hide");

@@ -811,11 +811,6 @@ var AccTrVendorAdjust;
             Model.TrDateH = "1";
             Model.TrNo = 0;
             Model.IsCustomer = isCustomer;
-            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
-            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -840,11 +835,6 @@ var AccTrVendorAdjust;
             Model.TrDateH = "1";
             Model.TrNo = txt_CODE.value;
             Model.IsCustomer = isCustomer;
-            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model.MODULE_CODE = Modules.AccTrVendorAdjust;
-            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
     }
     function Insert() {
@@ -1000,7 +990,6 @@ var AccTrVendorAdjust;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrVendorAdjust, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1015,7 +1004,6 @@ var AccTrVendorAdjust;
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrVendorAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

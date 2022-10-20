@@ -384,11 +384,6 @@ var ServPurInvoiceRet;
             Model.SalesType = ServPurInvoiceMasterDetail.AQVAT_GetPurInvoiceHeader[0].SalesType;
             Model.PAY_ACC_CODE = ServPurInvoiceMasterDetail.AQVAT_GetPurInvoiceHeader[0].PAY_ACC_CODE;
         }
-        MasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetail.MODULE_CODE = Modules.Ser_Return_Pur;
-        MasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function AssignDetails() {
         ModelDetail = new Array();
@@ -495,7 +490,6 @@ var ServPurInvoiceRet;
         return flag;
     }
     function Display() {
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
         DocumentActions.RenderFromModel(selecteditem);
         drpVendor.value = selecteditem.VendorID.toString();
         drpTrType.value = selecteditem.TR_TYPE.toString();
@@ -939,7 +933,6 @@ var ServPurInvoiceRet;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -954,7 +947,6 @@ var ServPurInvoiceRet;
         rp.TRId = hd_InvoiceRetID;
         rp.Name_function = "IProc_Prnt_VATPurReturn";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

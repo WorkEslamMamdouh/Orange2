@@ -65,6 +65,25 @@ var PeriodManagement;
         //btnsave.onclick = btnsave_onclick;
         btnGen.onclick = btnGen_onclick;
     }
+    //function btnedite_onclick() {
+    //    if ($('#drpuserType').val() != "Null") {
+    //        $('#btnback').removeClass('display_none')
+    //        $('#btnsave').removeClass('display_none')
+    //        $('#btnedite').addClass('display_none')
+    //        $('.dis').removeAttr('disabled');
+    //        $(".acc_Cod").removeAttr('disabled');
+    //    } else {
+    //        WorningMessage("يجب اختيار الفرع!", "Must choose Type!", "تحذير", "worning");
+    //        return;
+    //    }
+    //}
+    //function btnback_onclick() {
+    //    $('#btnback').addClass('display_none')
+    //    $('#btnsave').addClass('display_none')
+    //    $('#btnedite').removeClass('display_none')
+    //    //Display();
+    //}
+    //function btnsave_onclick() { }
     function InitializeGrid() {
         var res = GetResourceList("");
         Grid.ElementName = "ReportGrid";
@@ -210,7 +229,7 @@ var PeriodManagement;
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("I_Period", "Close_ReOpen"),
-                data: { CompCode: compcode, FinYear: FinYear, PERIOD_CODE: PERIOD_CODE, IsClosed: IsClosed, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.PeriodManagement, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
+                data: { CompCode: compcode, FinYear: FinYear, PERIOD_CODE: PERIOD_CODE, IsClosed: IsClosed, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
                 success: function (d) {
                     Display();
                 }
@@ -224,7 +243,7 @@ var PeriodManagement;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("I_Period", "FixzQty_Cost"),
-            data: { CompCode: compcode, FinYear: FinYear, PERIOD_CODE: PERIOD_CODE, check: check, IsQty: IsQty, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.PeriodManagement, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
+            data: { CompCode: compcode, FinYear: FinYear, PERIOD_CODE: PERIOD_CODE, check: check, IsQty: IsQty, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 Display();
             }

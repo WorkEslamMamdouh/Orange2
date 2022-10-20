@@ -750,7 +750,6 @@ var SlsTrServices;
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         if (FlagAfterInsertOrUpdate == true) {
             Selecteditem = AQ_ServSlsInvoiceDetails.filter(function (x) { return x.InvoiceID == Number(GlobalinvoiceID); });
         }
@@ -1534,11 +1533,6 @@ var SlsTrServices;
         }
         MasterDetailsModel.AVAT_TR_SlsInvoice = InvoiceModel;
         MasterDetailsModel.AVAT_TR_SlsInvoiceItem = InvoiceItemsDetailsModel;
-        MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.Sales_Services;
-        MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         InvoiceModel.InvoiceID = GlobalinvoiceID;
@@ -1694,7 +1688,6 @@ var SlsTrServices;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1719,7 +1712,6 @@ var SlsTrServices;
         rp.slip = 0;
         rp.Name_function = "IProc_Prnt_VATSlsInvoice";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
@@ -1732,7 +1724,6 @@ var SlsTrServices;
         rp.slip = 1;
         rp.Name_function = "IProc_Prnt_VATSlsInvoice";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
@@ -1760,7 +1751,6 @@ var SlsTrServices;
             url: Url.Action("Prnt_VATSlsInvoice", "Reports_pdf"),
             data: rp,
             success: function (d) {
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
             }
         });
     }

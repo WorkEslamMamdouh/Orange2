@@ -65,7 +65,6 @@ var StkDefItems;
         //$('#drp_G_Store').prop("value", 1);
         $("#drp_G_Store").attr("disabled", "disabled");
         //Display_I_ItemFamily();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItems, SysSession.CurrentEnvironment.CurrentYear);
     }
     StkDefItems.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {
@@ -421,13 +420,8 @@ var StkDefItems;
     }
     function Update() {
         Assign();
-        //BilldDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
         BilldDetail.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        BilldDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        BilldDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        BilldDetail.MODULE_CODE = Modules.StkDefItems;
         BilldDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
-        BilldDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("StkDefItems", "Updatelist"),
