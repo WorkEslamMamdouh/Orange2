@@ -236,6 +236,7 @@ function GetSystemEnvironment() {
 //    }
 //}
 function GetSystemSession(Mod) {
+    debugger;
     if (Mod != "Home") {
         $('#divIconbar').removeClass('hidden_Control');
     }
