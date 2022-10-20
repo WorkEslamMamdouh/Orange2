@@ -111,8 +111,12 @@ namespace Inv.API.Controllers
                     foreach (var item in LnkVarBranch)
                     {
                         var updatedRec = G_LnkVarBranchService.Update(item);
+
+                        LogUser.InsertPrint(db, LnkVarBranch[0].Comp_Code.ToString(), LnkVarBranch[0].Branch_Code, LnkVarBranch[0].sec_FinYear, LnkVarBranch[0].UserCode, null, LogUser.UserLog.Update, LnkVarBranch[0].MODULE_CODE, true, null, null, updatedRec.LnkCode.ToString());
+
+
                     }
-                    
+
                     return Ok(new BaseResponse(100));
                 }
                 catch (Exception ex)

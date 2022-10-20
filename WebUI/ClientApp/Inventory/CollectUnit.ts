@@ -70,6 +70,9 @@ namespace CollectUnit {
         InitializeGrid();
         FillStore();
         drp_Store.selectedIndex = 1;
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
+
+
     }
 
     function InitalizeControls() {
@@ -227,9 +230,7 @@ namespace CollectUnit {
             // can delete new inserted record  without need for delete privilage
             CountGrid++;
         }
-    }
-
-    
+    }    
 
     function validationitem(id: number, idRow: number) {
         for (var i = 0; i < CountGrid; i++) {
@@ -261,7 +262,6 @@ namespace CollectUnit {
         return true;
     }
 
-
     function DeleteRow(RecNo: number) {
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
@@ -275,7 +275,6 @@ namespace CollectUnit {
         });
 
     }
-
 
     function DeleteRow2(RecNo: number) {
         if (!SysSession.CurrentPrivileges.Remove) return;
@@ -426,8 +425,8 @@ namespace CollectUnit {
             }
         });
     }
-    //***************************************************Main function************************************//
 
+    //***************************************************Main function************************************//
     function btnSave_onclick() {
         loading('btnsave');
 
@@ -792,6 +791,8 @@ namespace CollectUnit {
     //*************************************************Display******************************************//
     function Grid_RowDoubleClicked() {
         $("#DivInvoiceData").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         hd_CollectID.value = Grid.SelectedKey;
         //GlobalInvoiceID = Number(Grid.SelectedKey);
         backflag = false;
@@ -1197,6 +1198,12 @@ namespace CollectUnit {
         Model.TrNo = null;
         CollectMasterDetail.I_TR_Collect = Model;
         CollectMasterDetail.I_TR_CollectDetail = ModelCollectDet;
+
+        CollectMasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        CollectMasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        CollectMasterDetail.MODULE_CODE = Modules.CollectUnit;
+        CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
+        CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("Collect", "InsertAll"),
@@ -1225,6 +1232,12 @@ namespace CollectUnit {
         Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         CollectMasterDetail.I_TR_Collect = Model;
         CollectMasterDetail.I_TR_CollectDetail = ModelCollectDet;
+
+        CollectMasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        CollectMasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        CollectMasterDetail.MODULE_CODE = Modules.CollectUnit;
+        CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
+        CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("Collect", "UpdateALL"),
@@ -1283,10 +1296,15 @@ namespace CollectUnit {
             return false
         }
 
-        Assign();
-        Model.Status = 0;
-        Model.UpdatedAt = DateTimeFormat(Date().toString());
-        Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+       Assign();
+       Model.Status = 0;
+       Model.UpdatedAt = DateTimeFormat(Date().toString());
+       Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+       Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+       Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.CollectUnit;
+       Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+       Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("Collect", "Open"),
@@ -1302,7 +1320,9 @@ namespace CollectUnit {
             }
         });
     }
+
     //******************************************Print**********************************************//
+
     function PrintTransaction() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
@@ -1312,6 +1332,7 @@ namespace CollectUnit {
         rp.Name_function = "IProc_Prnt_Collect";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
@@ -1348,6 +1369,9 @@ namespace CollectUnit {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+              
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
+
                 window.open(result, "_blank");
             }
         })
@@ -1363,6 +1387,7 @@ namespace CollectUnit {
         $("#div_1").removeClass("display_none");
         $("#div_2").addClass("display_none");
     }
+
     function btndiv_2_onclick() {
         $("#btndiv_1").removeClass("btn-active");
         $("#btndiv_11").addClass("btn-main");
@@ -1372,6 +1397,5 @@ namespace CollectUnit {
         //Edit
         $("#div_1").addClass("display_none");
         $("#div_2").removeClass("display_none");
-
     }
 } 

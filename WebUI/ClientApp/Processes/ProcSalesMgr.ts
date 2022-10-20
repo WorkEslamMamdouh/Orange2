@@ -1344,6 +1344,7 @@ namespace ProcSalesMgr {
         clear();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         SlsInvoiceItemsDetails = new Array<IQ_GetSlsInvoiceItem>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ProcSalesMgr, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {

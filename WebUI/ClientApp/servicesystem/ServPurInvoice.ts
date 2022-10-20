@@ -555,6 +555,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         // Bind Menu
         showFlag = true;
         Selected_Data = new Array<AVAT_TR_PurInvoice>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
+
         if (FlagAfterInsertOrUpdate == true) {
             Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(x => x.InvoiceId == GlobalMenuID);
             txtMenuNum.value = Selected_Data[0].TR_NO.toString();

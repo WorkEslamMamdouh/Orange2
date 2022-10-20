@@ -34,8 +34,6 @@ namespace Inventoryvalue {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
 
-
-
     export function InitalizeComponent() {
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(sys.SysSession.CurrentEnvironment.BranchCode);
@@ -60,8 +58,6 @@ namespace Inventoryvalue {
         $('#btnPrint').addClass('display_none');
     }
 
-
-
     function InitalizeControls() {
 
 
@@ -83,8 +79,6 @@ namespace Inventoryvalue {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
     }
-
-
 
     function InitalizeEvents() {
         // Print Buttons
@@ -167,6 +161,7 @@ namespace Inventoryvalue {
             }
         });
     }
+
     function drpPaymentType_onchange() {
         if (drpPaymentType.value != 'null') {
             Display_ItemFamilyFill = Display_ItemFamily.filter(x => x.CatID == Number(drpPaymentType.value))
@@ -229,11 +224,7 @@ namespace Inventoryvalue {
 
 
     }
-
-
-
-
-   
+     
     function GetDate() {
         var today: Date = new Date();
         var dd: string = today.getDate().toString();
@@ -249,9 +240,7 @@ namespace Inventoryvalue {
         ReturnedDate = yyyy + '-' + mm + '-' + dd;
         return ReturnedDate;
     }
-
-
-
+     
     function btnReset_onclick() {
          
         txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
@@ -269,8 +258,7 @@ namespace Inventoryvalue {
         $('#txt_ID_APP_Type').html('');
         $('#txt_ID_APP_Type').append('<option value="' + 0 + '"> ' + (lang == "ar" ? "اختر النوع" : "choose type") +'</option>');
         $('#txt_ID_APP_Type').attr("disabled", "disabled");
-    }                  
-
+    }
     //----------------------------------------------------( Report )
     function PrintReport(OutType: number) {
 
@@ -331,13 +319,11 @@ namespace Inventoryvalue {
             url: Url.Action("IProc_Rpt_ItemStockValue", "GeneralReports"),
             data: rp,
             success: (d) => {
-
                 let result = d.result as string;
-
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Inventoryvalue, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
         })
     }
-
 }

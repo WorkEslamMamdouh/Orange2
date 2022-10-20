@@ -114,11 +114,15 @@ namespace Inv.API.Controllers
                         //*****Run TransProcess
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_TR_Collect.CompCode),Convert.ToInt32(obj.I_TR_Collect.BranchCode), obj.I_TR_Collect.CollectID, "collect", "Add", db);
                         dbTransaction.Commit();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
                         return Ok(new BaseResponse(result));
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
 
@@ -144,11 +148,15 @@ namespace Inv.API.Controllers
                         //*****Run TransProcess
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_TR_Collect.CompCode), Convert.ToInt32(obj.I_TR_Collect.BranchCode), obj.I_TR_Collect.CollectID, "collect", "Update", db);
                         dbTransaction.Commit();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                         return Ok(new BaseResponse(result));
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -243,12 +251,15 @@ namespace Inv.API.Controllers
                         //*****Run TransProcess
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.CompCode), Convert.ToInt32(obj.BranchCode), obj.CollectID, "collect", "Open", db);
                         dbTransaction.Commit();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                         return Ok(new BaseResponse(result));
                     }
                     catch (Exception ex)
                     {
 
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                       
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }

@@ -244,11 +244,6 @@ var financialreports;
         }
         var ccd = $('#txtCenter_Cost_DESC').val();
         var ccI = $('#txtCenter_Cost_ID').val();
-        //if ((ccI == "" || ccd == "" ) && IsBEnable.checked == true) {
-        //    MessageBox.Show("يجب اختيار التكلفه", "تنبيه")
-        //    return;
-        //}
-        /////////////////////////donia
         if (chkLandscapePrint.checked == true) {
             rp.check = 1;
         }
@@ -261,6 +256,7 @@ var financialreports;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.financialreports, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

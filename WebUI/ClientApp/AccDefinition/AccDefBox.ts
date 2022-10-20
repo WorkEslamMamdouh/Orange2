@@ -48,6 +48,7 @@ namespace AccDefBox {
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
         InitalizeEvents();     
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefBox, SysSession.CurrentEnvironment.CurrentYear);
         Display_Acount_Code();
         Display_Network_account_Code();
         Display();
@@ -365,7 +366,7 @@ namespace AccDefBox {
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode,  UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.AccDefBox, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 //debugger;
@@ -587,6 +588,9 @@ namespace AccDefBox {
 
         Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
 
         //debugger;

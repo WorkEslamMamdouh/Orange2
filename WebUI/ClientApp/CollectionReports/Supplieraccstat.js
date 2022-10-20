@@ -221,9 +221,6 @@ var Supplieraccstat;
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    //for (var i = 0; i < Details.length; i++) {
-                    //    Details[i].Isbalance = Number((Number(Details[i].Openbalance) - Number(Details[i].Debit) + Number(Details[i].Credit)).RoundToSt(2));
-                    //}
                 }
             }
         });
@@ -320,9 +317,6 @@ var Supplieraccstat;
         if (Number($("#txt_ID_APP_Type").val()) == 1) { //-------------منفذ 
             rp.Status = 1;
         }
-        //if (Number($("#txt_ID_APP_Type").val()) == 0) {//-------------غير منفذ
-        //    rp.Status = 0;
-        //}
         if ($("#txt_indebtedness").val() == ">") { //******عليه مديونيه
             rp.BalType = 1;
         }
@@ -335,16 +329,6 @@ var Supplieraccstat;
         if ($("#txt_indebtedness").val() == "All") { //******الجميع
             rp.BalType = 0;
         }
-        //txtVendorType
-        //if ($("#txtVendorType").val() == "Null") {//-------------جميع النشاطات  
-        //    rp.Status = 3;
-        //}
-        //if (Number($("#txtVendorType").val()) == 1) {//-------------مورد بضاعة 
-        //    rp.Status = 1;
-        //}
-        //if (Number($("#txtVendorType").val()) == 2) {//-------------مورد خدمات
-        //    rp.Status = 0;
-        //}
         if ($("#txt_ID_Vendor").val() == "Null") { //-------------جميع الفئات
             rp.VendorId = -1;
         }
@@ -369,6 +353,7 @@ var Supplieraccstat;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });
@@ -380,6 +365,7 @@ var Supplieraccstat;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });
@@ -391,6 +377,7 @@ var Supplieraccstat;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });

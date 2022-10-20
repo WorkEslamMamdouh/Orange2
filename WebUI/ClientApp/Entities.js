@@ -2,10 +2,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -51,7 +53,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("SystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "SubSystemCode", {
@@ -61,7 +63,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("SubSystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Modulecode", {
@@ -71,7 +73,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("Modulecode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "UserCode", {
@@ -81,7 +83,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("UserCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Token", {
@@ -91,7 +93,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("Token", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CompCode", {
@@ -101,7 +103,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("CompCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "BranchCode", {
@@ -111,7 +113,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("BranchCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CurrentYear", {
@@ -121,7 +123,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("CurrentYear", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "ScreenLanguage", {
@@ -131,7 +133,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("ScreenLanguage", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return APISessionRecord;
@@ -5699,11 +5701,16 @@ var ServPurchseInvoiceMasterDetail = /** @class */ (function (_super) {
     }
     return ServPurchseInvoiceMasterDetail;
 }(SecurityClass));
-var PurInvoiceRetMasterDetails = /** @class */ (function () {
+var PurInvoiceRetMasterDetails = /** @class */ (function (_super) {
+    __extends(PurInvoiceRetMasterDetails, _super);
     function PurInvoiceRetMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.AVAT_TR_PurInvoiceRet = new AVAT_TR_PurInvoiceRet();
+        _this.AVAT_TR_PurInvoiceRetDetail = new Array();
+        return _this;
     }
     return PurInvoiceRetMasterDetails;
-}());
+}(SecurityClass));
 var AQ_ServPurInvoiceMasterDetail = /** @class */ (function (_super) {
     __extends(AQ_ServPurInvoiceMasterDetail, _super);
     function AQ_ServPurInvoiceMasterDetail() {
@@ -5720,11 +5727,17 @@ var AQPurInvoiceRetMasterDetails = /** @class */ (function () {
     }
     return AQPurInvoiceRetMasterDetails;
 }());
-var Account_CCDT_CCDTTP_MasterDetails = /** @class */ (function () {
+var Account_CCDT_CCDTTP_MasterDetails = /** @class */ (function (_super) {
+    __extends(Account_CCDT_CCDTTP_MasterDetails, _super);
     function Account_CCDT_CCDTTP_MasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.A_CCDT_Types = new A_CCDT_Types;
+        _this.A_ACCOUNT = new Array();
+        _this.A_CCDT_COSTCENTERS = new Array();
+        return _this;
     }
     return Account_CCDT_CCDTTP_MasterDetails;
-}());
+}(SecurityClass));
 var A_CCDT_COSTCENTERS = /** @class */ (function (_super) {
     __extends(A_CCDT_COSTCENTERS, _super);
     function A_CCDT_COSTCENTERS() {

@@ -82,6 +82,8 @@ namespace Inv.API.Controllers
             //if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
             //{
             var res = DefStoreService.Update(STORE);
+            LogUser.InsertPrint(db, STORE.Comp_Code.ToString(), STORE.Branch_Code, STORE.sec_FinYear, STORE.UserCode, res.StoreId, LogUser.UserLog.Update, STORE.MODULE_CODE, true, null, null, res.DescA);
+
             return Ok(new BaseResponse(res.StoreId));
 
             //}
@@ -93,7 +95,10 @@ namespace Inv.API.Controllers
             //if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
             //{
                 var res = DefStoreService.Insert(AccTrReceipt);
-                return Ok(new BaseResponse(res.StoreId));
+
+            LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, res.StoreId, LogUser.UserLog.Insert, AccTrReceipt.MODULE_CODE, true, null, null, res.DescA);
+
+            return Ok(new BaseResponse(res.StoreId));
 
             //}
             //return BadRequest(ModelState);

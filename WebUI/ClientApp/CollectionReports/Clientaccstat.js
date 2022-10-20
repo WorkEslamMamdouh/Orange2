@@ -29,7 +29,6 @@ var Clientaccstat;
     var Rd_Code;
     var Rd_Name;
     var Rd_Bal;
-    //-------------------------------------------------------------
     var indebtedness;
     //--- Print Buttons
     var btnPrint;
@@ -121,7 +120,6 @@ var Clientaccstat;
     }
     //----------------------------------------------------( Get cus_Group )
     function Display_CustomerGroup() {
-        //
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("GenDefGroup", "GetAll"),
@@ -282,13 +280,6 @@ var Clientaccstat;
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    //for (var i = 0; i < Details.length; i++) {
-                    //    Details[i].Isbalance = Number((Number(Details[i].Openbalance) + Number(Details[i].Debit) - Number(Details[i].Credit)).RoundToSt(2));
-                    //    //Details[i].NAME_Salesman = $('#ddlSalesman').find('option:selected').text();
-                    //    SalesmanId = Details[i].SalesmanId;
-                    //    //NAME_Salesman = ddlSalesman.options[ddlSalesman.value = "" + SalesmanId + ""].text;
-                    //    //Details[i].NAME_Salesman = NAME_Salesman;
-                    //}
                     $('#ddlSalesman').prop("value", value_list_Salesman);
                 }
             }
@@ -404,6 +395,7 @@ var Clientaccstat;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Clientaccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });
@@ -415,6 +407,7 @@ var Clientaccstat;
                 data: rp,
                 success: function (d) {
                     var result = d.result;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Clientaccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             });

@@ -354,6 +354,7 @@ namespace Incomeoperations {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Incomeoperations, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }

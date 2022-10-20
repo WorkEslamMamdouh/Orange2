@@ -134,8 +134,7 @@ namespace Inv.API.Controllers
                         ResponseResult res = new ResponseResult();
                         //loop insered 
                         foreach (var item in insertedRecords)
-                        {
-                            
+                        {                            
                             var InsertedRec = GCostCenterService.Insert(item);
                             if (item.CC_PARENT != null)
                             {
@@ -146,23 +145,17 @@ namespace Inv.API.Controllers
                                     GCostCenterService.Update(item3);
                                 }
                             }
-
-
+                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, InsertedRec.CC_CODE);
                         }
-
                         //loop Update 
                         foreach (var item in updatedRecords)
                         {                            
                             var updatedRec = GCostCenterService.Update(item);
-                            
+                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, updatedRec.CC_CODE);                          
                         }
-
                         //loop Delete 
                         foreach (var item in deletedRecords)
-                        {
-
-
-
+                        { 
                             if (item.CC_PARENT != null)
                             {
                                 var CH_DETAIL = GCostCenterService.GetAll(x => x.COMP_CODE == item.COMP_CODE && x.CC_PARENT == item.CC_PARENT);
@@ -177,26 +170,20 @@ namespace Inv.API.Controllers
                                     }
                                 }
 
-                            }
-
+                            } 
                             string Q = "DELETE FROM G_COST_CENTER WHERE COMP_CODE = " + item.COMP_CODE + " and CC_CODE ='" + item.CC_CODE + "'";
-
                             string query = Q;
                             var de = db.Database.ExecuteSqlCommand(query);
-
+                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Delete, COST_CENTER_List[0].MODULE_CODE, true, null, null, item.CC_CODE);
                         }
-
-
                         dbTransaction.Commit();
-                        // Return in case if the db generate transaction number   res.ResponseData
-                        return Ok(new BaseResponse(100));
-
-
-
+                        return Ok(new BaseResponse(100)); 
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null,null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

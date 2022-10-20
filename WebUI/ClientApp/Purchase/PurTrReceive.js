@@ -150,6 +150,7 @@ var PurTrReceive;
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
         InitializeGrid();
         flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
     }
@@ -433,6 +434,7 @@ var PurTrReceive;
         debugger;
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(divMasterGrid.SelectedKey); });
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
         RetrivedPurchaseModel = Selecteditem;
@@ -768,7 +770,7 @@ var PurTrReceive;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurTrReceive, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -2545,6 +2547,11 @@ var PurTrReceive;
         MasterDetailModel.I_Pur_TR_Receive = ReceiveModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = ReceiveItemsDetailsModel;
         MasterDetailModel.I_Pur_Tr_ReceiveCharges = chargesDetailsModel; //I_Pur_Tr_ReceiveCharges
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurTrReceive;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -2774,6 +2781,7 @@ var PurTrReceive;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2788,6 +2796,7 @@ var PurTrReceive;
         rp.TRId = GlobalReceiveID;
         rp.Name_function = "IProc_Prnt_PurReceive";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

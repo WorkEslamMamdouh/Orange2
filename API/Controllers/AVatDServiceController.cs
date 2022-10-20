@@ -19,19 +19,19 @@ namespace Inv.API.Controllers
     {
         private readonly IAVATSrvCategoryService AVATSrvCategoryService;
         private readonly IAVatDServiceService IAVatDServiceService;
-        private readonly G_USERSController UserControl ;
-        public AVatDServiceController(IAVatDServiceService _IAVatDServiceService, IAVATSrvCategoryService _AVATSrvCategoryService, G_USERSController _Control )
+        private readonly G_USERSController UserControl;
+        public AVatDServiceController(IAVatDServiceService _IAVatDServiceService, IAVATSrvCategoryService _AVATSrvCategoryService, G_USERSController _Control)
         {
             this.IAVatDServiceService = _IAVatDServiceService;
             this.AVATSrvCategoryService = _AVATSrvCategoryService;
             this.UserControl = _Control;
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllFiltered(int compcode,bool isPurchase,int? SrvCatId ,string UserCode, string Token)
+        public IHttpActionResult GetAllFiltered(int compcode, bool isPurchase, int? SrvCatId, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from AQVAT_GetService where CompCode = " + compcode ;
+                string s = "select * from AQVAT_GetService where CompCode = " + compcode;
                 string condition = "";
                 if (SrvCatId != 0 && SrvCatId != null)
                     condition = condition + " and SrvCategoryID = " + SrvCatId;
@@ -40,7 +40,7 @@ namespace Inv.API.Controllers
                 {
                     condition = condition + " and IsPurchase = 'False' ";
                 }
-                else if (isPurchase ==true )
+                else if (isPurchase == true)
                 {
                     condition = condition + " and IsPurchase = 'True' ";
                 }
@@ -54,9 +54,9 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAll( int compcode,string UserCode, string Token)
+        public IHttpActionResult GetAll(int compcode, string UserCode, string Token)
         {
-            if (ModelState.IsValid &&  UserControl.CheckUser(Token, UserCode))
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var res = IAVatDServiceService.GetAll().Where(x => x.CompCode == compcode).ToList();
 
@@ -65,11 +65,11 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllFromView( int compcode,bool ispur,string UserCode, string Token)
+        public IHttpActionResult GetAllFromView(int compcode, bool ispur, string UserCode, string Token)
         {
-            if (ModelState.IsValid &&  UserControl.CheckUser(Token, UserCode))
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var res = db.AQVAT_GetService.Where(x => x.CompCode == compcode&&x.IsPurchase==ispur).ToList();
+                var res = db.AQVAT_GetService.Where(x => x.CompCode == compcode && x.IsPurchase == ispur).ToList();
 
                 return Ok(new BaseResponse(res));
             }
@@ -94,28 +94,33 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
             {
-                    try
-                    {
+                try
+                {
                     // region to update category serial and insert service code
                     var CatObj = db.AVAT_D_SrvCategory.Where(s => s.SrvCategoryID == obj.SrvCategoryID).FirstOrDefault();
 
-                    int lastNum = int.Parse(CatObj.ItemFormatSerial.Last().ToString())+1;
+                    int lastNum = int.Parse(CatObj.ItemFormatSerial.Last().ToString()) + 1;
 
                     string newItemFormatSerial = CatObj.ItemFormatSerial;
-                   var x=newItemFormatSerial.Remove(newItemFormatSerial.Length - 1, 1);
+                    var x = newItemFormatSerial.Remove(newItemFormatSerial.Length - 1, 1);
 
                     CatObj.ItemFormatSerial = x + lastNum;
                     AVATSrvCategoryService.Update(CatObj);
 
-                   obj.ItemCode = CatObj.ItemFormatFix + CatObj.ItemFormatSerial;
-                     
-                        var res = IAVatDServiceService.Insert(obj);
-                        return Ok(new BaseResponse(res));
-                    }
-                    catch (Exception ex)
-                    {
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
-                    }
+                    obj.ItemCode = CatObj.ItemFormatFix + CatObj.ItemFormatSerial;
+
+                    var res = IAVatDServiceService.Insert(obj);
+
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
+                    return Ok(new BaseResponse(res));
+                }
+                catch (Exception ex)
+                {
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                }
             }
             return BadRequest(ModelState);
         }
@@ -145,22 +150,26 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
             {
-                    try
-                    {
-                        var res = IAVatDServiceService.Update(obj);
-                        return Ok(new BaseResponse(res));
-                    }
-                    catch (Exception ex)
-                    {
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
-                    }
+                try
+                {
+                    var res = IAVatDServiceService.Update(obj);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
+                    return Ok(new BaseResponse(res));
+                }
+                catch (Exception ex)
+                {
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                }
             }
             return BadRequest(ModelState);
         }
 
 
 
-       
+
 
     }
 }

@@ -513,6 +513,7 @@ var ServPurInvoice;
         // Bind Menu
         showFlag = true;
         Selected_Data = new Array();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
         if (FlagAfterInsertOrUpdate == true) {
             Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(function (x) { return x.InvoiceId == GlobalMenuID; });
             txtMenuNum.value = Selected_Data[0].TR_NO.toString();
