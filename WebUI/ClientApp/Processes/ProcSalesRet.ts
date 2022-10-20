@@ -1070,6 +1070,7 @@ namespace ProcSalesRet {
         FillddlItem();
         Success();
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ProcSalesRet, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
 

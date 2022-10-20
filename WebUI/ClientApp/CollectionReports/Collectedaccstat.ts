@@ -1,5 +1,4 @@
-﻿$(document).ready(() => {
-
+﻿$(document).ready(() => { 
     Collectedaccstat.InitalizeComponent();
 })
 
@@ -18,9 +17,7 @@ namespace Collectedaccstat {
     var Details_Vendor: Array<A_Pay_D_Vendor> = new Array<A_Pay_D_Vendor>();
     var VatTypeDetails: Array<A_D_VAT_TYPE> = new Array<A_D_VAT_TYPE>();
     var ddl_CustomerFilter: Array<A_Rec_D_Customer> = new Array<A_Rec_D_Customer>();
-
-
-
+     
     //------------------------------------------------------------
     var txt_ID_APP_Category: HTMLSelectElement;
     var txt_ID_APP_Type: HTMLSelectElement;
@@ -40,8 +37,7 @@ namespace Collectedaccstat {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-
-
+     
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
      export function InitalizeComponent() {
@@ -73,9 +69,7 @@ namespace Collectedaccstat {
          $('#btnPrint').addClass('display_none');
 
     }
-
-
-
+     
     function InitalizeControls() {
 
         txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category") as HTMLSelectElement;
@@ -100,9 +94,7 @@ namespace Collectedaccstat {
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
 
     }
-
-
-
+     
     function InitalizeEvents() {
         // Print Buttons
         btnPrintTrview.onclick = () => { PrintReport(1); }
@@ -132,6 +124,7 @@ namespace Collectedaccstat {
             }
         });
     }
+
     function DisplayStGenDefSupplierCat() {
         debugger
         for (var i = 0; i < Details_Type_D_Category.length; i++) {
@@ -166,6 +159,7 @@ namespace Collectedaccstat {
             }
         });
     }
+
     function DisplayStkSupplierGroup() {
         for (var i = 0; i < Details_CustomerGroup.length; i++) {
 
@@ -198,6 +192,7 @@ namespace Collectedaccstat {
             }
         });
     }
+
     function DisplaySalesman() {
         for (var i = 0; i < SalesmanDetails.length; i++) {
 
@@ -287,8 +282,7 @@ namespace Collectedaccstat {
             }
         });
     }
-
-    
+     
     //----------------------------------------------------(Get Vendor )
     function DisplayAccDefVendor() {
          
@@ -321,11 +315,7 @@ namespace Collectedaccstat {
         }
                
     }
-
-
-
-
-
+     
     function btnReset_onclick() {
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
@@ -345,8 +335,7 @@ namespace Collectedaccstat {
         $('#txtVendorType option[value=Null]').prop('selected', 'selected').change();
         $('#txt_indebtedness option[value=All]').prop('selected', 'selected').change();
         $('#txt_ID_Vendor option[value=Null]').prop('selected', 'selected').change();
-    }     
-
+    }
 
     function Fillddl_Customer() {
 
@@ -371,8 +360,7 @@ namespace Collectedaccstat {
     function PrintReport(OutType: number) {
 
         debugger
-        let rp: ReportParameters = new ReportParameters();
-
+        let rp: ReportParameters = new ReportParameters(); 
         rp.CompCode = SysSession.CurrentEnvironment.CompCode;
         rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
         rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
@@ -447,9 +435,7 @@ namespace Collectedaccstat {
             rp.VendorId = Number($("#txt_ID_Vendor").val());
         }
         rp.checkedprint = Rddetails.checked;
-
-
-
+         
         if (rp.checkedprint == true) {
 
             Ajax.Callsync({
@@ -459,7 +445,8 @@ namespace Collectedaccstat {
 
                     let result = d.result as string;
 
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Collectedaccstat, SysSession.CurrentEnvironment.CurrentYear);
+ 
                     window.open(result, "_blank");
                 }
             })
@@ -473,6 +460,7 @@ namespace Collectedaccstat {
 
                     let result = d.result as string;
 
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Collectedaccstat, SysSession.CurrentEnvironment.CurrentYear);
 
                     window.open(result, "_blank");
                 }

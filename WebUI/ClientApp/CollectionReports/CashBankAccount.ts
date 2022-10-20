@@ -12,8 +12,7 @@ namespace CashBankAccount {
     var SysSession: SystemSession = GetSystemSession(Modules.CashBoxAccount);
     //------------------------------------------------------------
     var Details_ACCOUNT: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
-
-
+     
     //------------------------------------------------------------
 
     var ddlBox: HTMLSelectElement;
@@ -22,9 +21,7 @@ namespace CashBankAccount {
       
     var Rd_detail: HTMLInputElement;
     var btnReset: HTMLButtonElement;
-
-
-
+     
     //--- Print Buttons
     var btnPrint: HTMLButtonElement;
     var btnPrintTrview: HTMLButtonElement;
@@ -91,8 +88,7 @@ namespace CashBankAccount {
         btnPrint.onclick = () => { PrintReport(4); }
 
     }
-
-
+     
     function fillddlBank() {
         Ajax.Callsync({
             type: "Get",
@@ -117,8 +113,7 @@ namespace CashBankAccount {
         });
 
     }
-
-
+     
     function GetDate() {
         var today: Date = new Date();
         var dd: string = today.getDate().toString();
@@ -134,10 +129,7 @@ namespace CashBankAccount {
         ReturnedDate = yyyy + '-' + mm + '-' + dd;
         return ReturnedDate;
     }
-
- 
-
-
+     
     function btnReset_onclick() {
 
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
@@ -151,8 +143,7 @@ namespace CashBankAccount {
     }
 
     //----------------------------------------------------( Report )
-    function PrintReport(OutType: number) {
-
+    function PrintReport(OutType: number) { 
 
         let rp: ReportParameters = new ReportParameters();
 
@@ -200,6 +191,7 @@ namespace CashBankAccount {
                 success: (d) => {
 
                     let result = d.result as string;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBankAccount, SysSession.CurrentEnvironment.CurrentYear);
 
 
                     window.open(result, "_blank");
@@ -217,6 +209,7 @@ namespace CashBankAccount {
                 success: (d) => {
 
                     let result = d.result as string;
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBankAccount, SysSession.CurrentEnvironment.CurrentYear);
 
 
                     window.open(result, "_blank");

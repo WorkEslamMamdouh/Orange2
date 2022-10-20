@@ -33,6 +33,15 @@ namespace Inv.DAL.Domain
         public string Token { get; set; } 
         public string CompName { get; set; }
         public string VatNo { get; set; }
+
+        public string Branch_Code { get; set; }
+        public string Comp_Code { get; set; }
+        public string sec_FinYear { get; set; }
+        public string MODULE_CODE { get; set; }
+        public int FIN_YEAR { get; set; }
+
+
+
     }
     public class SecurityandUpdateFlagClass_FIN_YEAR
     {
@@ -56,6 +65,12 @@ namespace Inv.DAL.Domain
         public string Token { get; set; }
         public string serial_num{ get; set; }
 
+        public string Branch_Code { get; set; }
+        public string Comp_Code { get; set; }
+        public string sec_FinYear { get; set; }
+        public string MODULE_CODE { get; set; }
+        public int FIN_YEAR { get; set; }
+
     }
     public class VoucherStatusClass
     {
@@ -64,10 +79,21 @@ namespace Inv.DAL.Domain
         public string UserCode { get; set; }
         public string Token { get; set; }
         public int OpCode { get; set; }
-       
+
+        public string Branch_Code { get; set; }
+        public string Comp_Code { get; set; }
+        public string sec_FinYear { get; set; }
+        public string MODULE_CODE { get; set; }
+        public int FIN_YEAR { get; set; }
+
+
     }
   
     public partial class G_Nationality : SecurityandUpdateFlagClass
+    {
+
+    }
+    public partial class G_LnkTrans_Temp : SecurityandUpdateFlagClass
     {
 
     }
@@ -136,7 +162,7 @@ namespace Inv.DAL.Domain
     public partial class I_Sls_TR_InvoiceItems : SecurityandUpdateFlagClass
     {
     }
-    public partial class A_RecPay_Tr_ReceiptNote : SecurityClass
+    public partial class A_RecPay_Tr_ReceiptNote : SecurityandUpdateFlagClass
     {
     }
     public partial class I_Pur_TR_Receive : SecurityandUpdateFlagClass
@@ -156,7 +182,7 @@ namespace Inv.DAL.Domain
     public partial class I_Sls_TR_Invoice : SecurityClass
     {
     }
-    public partial class I_TR_Operation : SecurityClass
+    public partial class I_TR_Operation : SecurityandUpdateFlagClass
     {
     }
     public partial class I_TR_OperationItems : SecurityandUpdateFlagClass
@@ -233,7 +259,7 @@ namespace Inv.DAL.Domain
     public partial class A_Rec_D_CustomerDoc : SecurityandUpdateFlagClass
     {
     }
-    public partial class AVAT_D_SrvCategory : SecurityClass
+    public partial class AVAT_D_SrvCategory : SecurityandUpdateFlagClass
     {
     } 
     public partial class AVAT_TR_PurInvoice : SecurityClass
@@ -250,7 +276,7 @@ namespace Inv.DAL.Domain
     public partial class AVAT_TR_SlsInvoiceItem : SecurityandUpdateFlagClass
     {
     }
-    public partial class AVAT_TR_PurInvoiceRet : SecurityClass
+    public partial class AVAT_TR_PurInvoiceRet : SecurityandUpdateFlagClass
     {
     }
     public partial class G_COMPANY : SecurityandUpdateFlagClass
@@ -265,7 +291,7 @@ namespace Inv.DAL.Domain
     public partial class A_CCDT_COSTCENTERS : SecurityandUpdateFlagClass
     {
     }
-    public partial class AVAT_CONTROL : SecurityClass
+    public partial class AVAT_CONTROL : SecurityandUpdateFlagClass
     {
     }
     public partial class AVAT_PERIOD : SecurityClass
@@ -286,7 +312,7 @@ namespace Inv.DAL.Domain
     public partial class G_BRANCH : SecurityandUpdateFlagClass
     {
     }  
-    public partial class I_TR_Collect : SecurityClass
+    public partial class I_TR_Collect : SecurityandUpdateFlagClass
     {
     }
     public partial class I_TR_CollectDetail : UpdateFlagClass
@@ -295,7 +321,7 @@ namespace Inv.DAL.Domain
     public partial class I_Period : SecurityandUpdateFlagClass_FIN_YEAR
     {
     }
-    public partial class I_D_IssueType : SecurityandUpdateFlagClass_FIN_YEAR
+    public partial class I_D_IssueType : SecurityandUpdateFlagClass
     {
     }
     public partial class I_Stk_TR_IssueToCCDetails : SecurityandUpdateFlagClass_FIN_YEAR

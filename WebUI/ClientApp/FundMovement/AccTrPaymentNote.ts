@@ -615,6 +615,8 @@ namespace AccTrPaymentNote {
             }
             $("#txtDateNew").removeAttr("disabled");
 
+
+            $('#txt_Receiving_Fund').removeAttr('disabled');
         }
           
 
@@ -649,6 +651,7 @@ namespace AccTrPaymentNote {
 
 
             $('#Bank_Div').addClass('display_none');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#La_CashAmount').removeClass('display_none');
             $('#La_CardAmount').removeClass('display_none');
             $('#txt_CashAmount').removeClass('display_none');
@@ -1117,7 +1120,7 @@ namespace AccTrPaymentNote {
 
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
             debugger
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(x => x.CashBoxID == Number(txt_D_CashBox.value));
             if (box.length > 0) {
@@ -1248,31 +1251,18 @@ namespace AccTrPaymentNote {
             type: "Get",
             url: sys.apiUrl("AccTrReceipt", "GetBoxReceiveList"),
             data: {
-                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrPaymentNote, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
+ 
             },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Details = result.Response as Array<IQ_GetBoxReceiveList>;
-
-                    //for (var i = 0; i < Details.length; i++) {
-
-                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
-
-                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified"); }
-                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported"); }
-
-
-                    //}
-
-                    InitializeGrid();
-                    //filter_DataSource();
+  
+                    InitializeGrid(); 
                     ReportGrid.DataSource = Details;
-                    ReportGrid.Bind();
-
-
-                }
-
+                    ReportGrid.Bind(); 
+                } 
             }
         });
     }
@@ -1285,7 +1275,7 @@ namespace AccTrPaymentNote {
 
 
             let search: string = searchbutmemreport.value.toLowerCase();
-            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 || x.Bef_DescE.toLowerCase().search(search) >= 0); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
+            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 ); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
             //    || x.CustomerCODE.toString().search(search) >= 0 /* || x.CreditLimit.toString().search(search) >= 0 || x.Emp_NameA.toString().search(search) >= 0
             //    || x.ContactMobile.toString().search(search) >= 0 /*|| x.DueAmount.toString().search(search) >= 0 *//*|| x.DaysDiff.toString().search(search) >= 0*/);
 
@@ -1450,6 +1440,13 @@ namespace AccTrPaymentNote {
         }
 
         Model.BankName = '';
+
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNote;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
     }
 
     function Insert() {
@@ -1482,6 +1479,7 @@ namespace AccTrPaymentNote {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     Save_Succ_But();
@@ -1518,6 +1516,7 @@ namespace AccTrPaymentNote {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
@@ -1530,8 +1529,7 @@ namespace AccTrPaymentNote {
             }
         });
 
-    }
-
+    } 
 
     function IsSuccess() {
         IsNew = false;
@@ -1566,8 +1564,7 @@ namespace AccTrPaymentNote {
 
 
 
-    }
-
+    } 
 
     export function PrintReport(OutType: number) {
 
@@ -1651,6 +1648,7 @@ namespace AccTrPaymentNote {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrPaymentNote, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -1670,11 +1668,11 @@ namespace AccTrPaymentNote {
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrPaymentNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 
-    ///////////////////////////////////////donia
-    ////////////////////////////////////////////////Display Vendors///////////////////////////
+     ////////////////////////////////////////////////Display Vendors///////////////////////////
     function btnBenVnd_onclick() {
 
         sys.FindKey(Modules.AccTrPaymentNote, "btnVndSrch", "CompCode= " + compcode + "and IsCreditVendor = 1 and Isactive = 1", () => {
@@ -1683,6 +1681,7 @@ namespace AccTrPaymentNote {
             getAccountVndById(id, false);
         });
     }
+
     function getAccountVndById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -1741,12 +1740,12 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenVndCode_onchange() {
         txt_BenName.value = "";
         getAccountVndById(txt_BenCode.value, true);
 
     }
-
 
     function btnBenVndH_onclick() {
 
@@ -1756,6 +1755,7 @@ namespace AccTrPaymentNote {
             getAccountVndHById(id, false);
         });
     }
+
     function getAccountVndHById(custId: string, code: boolean) {   
         Ajax.Callsync({
             type: "Get",
@@ -1784,6 +1784,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenVndCodeH_onchange() {
         txt_BenNameH.value = "";
         getAccountVndHById(txt_BenCodeH.value, true);
@@ -1802,6 +1803,7 @@ namespace AccTrPaymentNote {
             getAccountCustById(id, false);
         });
     }
+
     function getAccountCustById(custId: string, code: boolean) {
         debugger
         Ajax.Callsync({
@@ -1860,6 +1862,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenCustCode_onchange() {
 
         getAccountCustById(txt_BenCode.value, true);
@@ -1876,6 +1879,7 @@ namespace AccTrPaymentNote {
             getAccountCustHById(id, false);
         });
     }
+
     function getAccountCustHById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -1908,6 +1912,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenCustCodeH_onchange() {
 
         getAccountCustHById(txt_BenCodeH.value, true);
@@ -1923,6 +1928,7 @@ namespace AccTrPaymentNote {
             getAccountBankById(id, true);
         });
     }
+
     function getAccountBankById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -1977,11 +1983,11 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenBankCode_onchange() {
         getAccountBankById(txt_BenCode.value, true);
 
     }
-
 
     function btnBenBankH_onclick() {
 
@@ -1991,6 +1997,7 @@ namespace AccTrPaymentNote {
             getAccountBankHById(id, true);
         });
     }
+
     function getAccountBankHById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -2021,6 +2028,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenBankCodeH_onchange() {
         getAccountBankHById(txt_BenCodeH.value, true);
 
@@ -2036,6 +2044,7 @@ namespace AccTrPaymentNote {
             getAccountAccById(id, false);
         });
     }
+
     function getAccountAccById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -2070,6 +2079,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function BenAccCode_onchange() {
         getAccountAccById(txt_BenCode.value, true);
 
@@ -2083,6 +2093,7 @@ namespace AccTrPaymentNote {
             getAccountAccHById(id, false);
         });
     }
+
     function getAccountAccHById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -2114,11 +2125,11 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function BenAccCodeH_onchange() {
         getAccountAccHById(txt_BenCodeH.value, true);
 
     }
-
 
     ////////////////////////////////////////////////Display Box///////////////////////////
 
@@ -2130,6 +2141,7 @@ namespace AccTrPaymentNote {
             getAccountBoxById(id, false);
         });
     }
+
     function getAccountBoxById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -2185,6 +2197,7 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenBoxCode_onchange() {
         getAccountBoxById(txt_BenCode.value, true);
 
@@ -2198,6 +2211,7 @@ namespace AccTrPaymentNote {
             getAccountBoxHById(id, false);
         });
     }
+
     function getAccountBoxHById(custId: string, code: boolean) {
 
         Ajax.Callsync({
@@ -2228,12 +2242,11 @@ namespace AccTrPaymentNote {
         });
 
     }
+
     function txt_BenBoxCodeH_onchange() {
         getAccountBoxHById(txt_BenCodeH.value, true);
 
     }
-
-
     ////////////////////////////////////////////////BtnBenOnClick///////////////////////////
     function btnBen_onclick() {
         if (txt_ReceiptNoteNew.value == "1") { btnBenCust_onclick(); }
@@ -2242,6 +2255,7 @@ namespace AccTrPaymentNote {
         if (txt_ReceiptNoteNew.value == "4") { btnBenAcc_onclick(); }
         if (txt_ReceiptNoteNew.value == "5") { btnBenBox_onclick(); }
     }
+
     function txt_BenCode_onchange() {
         if (txt_ReceiptNoteNew.value == "1") { txt_BenCustCode_onchange(); }
         if (txt_ReceiptNoteNew.value == "2") { txt_BenVndCode_onchange(); }
@@ -2249,7 +2263,6 @@ namespace AccTrPaymentNote {
         if (txt_ReceiptNoteNew.value == "4") { BenAccCode_onchange(); }
         if (txt_ReceiptNoteNew.value == "5") { txt_BenBoxCode_onchange(); }
     }
-
 
     function btnBenH_onclick() {
         if (txt_ReceiptNote.value == "Null") {
@@ -2262,6 +2275,7 @@ namespace AccTrPaymentNote {
         if (txt_ReceiptNote.value == "4") { btnBenAccH_onclick(); }
         if (txt_ReceiptNote.value == "5") { btnBenBoxH_onclick(); }
     }
+
     function txt_BenCodeH_onchange() {
         if (txt_ReceiptNote.value == "Null") {
             txt_BenCodeH.value = "";
@@ -2294,8 +2308,6 @@ namespace AccTrPaymentNote {
             }
         });
     }
-
-
 
     function btnPrintsFrom_To_onclick() {
         btnShow_onclick();
@@ -2374,18 +2386,5 @@ namespace AccTrPaymentNote {
         }
 
     }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
+     
+} 

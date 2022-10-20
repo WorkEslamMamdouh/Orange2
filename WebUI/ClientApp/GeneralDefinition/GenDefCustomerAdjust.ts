@@ -399,6 +399,10 @@ namespace GenDefCustomerAdjust {
         Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
 
 
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].MODULE_CODE = Modules.GenDefCustomerCat;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         ;
         Ajax.Callsync({
             type: "POST",

@@ -1803,7 +1803,78 @@ namespace Inv.API.Controllers
 
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, null);
 
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
 
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, null, null);
+
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLogOperation(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId, string ExtraData)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
+
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult PrintliestLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult OpenScreenLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
+
+                return BadRequest();
+            }
+        }
     }
 }

@@ -517,6 +517,7 @@ var AccTrPaymentNote;
                 $("#txt_Amount").removeAttr("disabled");
             }
             $("#txtDateNew").removeAttr("disabled");
+            $('#txt_Receiving_Fund').removeAttr('disabled');
         }
     }
     function btnAdd_onclick() {
@@ -545,6 +546,7 @@ var AccTrPaymentNote;
             chkActive.checked = false;
             $('#btnPrintTransaction').addClass("display_none");
             $('#Bank_Div').addClass('display_none');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#La_CashAmount').removeClass('display_none');
             $('#La_CardAmount').removeClass('display_none');
             $('#txt_CashAmount').removeClass('display_none');
@@ -920,7 +922,7 @@ var AccTrPaymentNote;
         }
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
             debugger;
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(function (x) { return x.CashBoxID == Number(txt_D_CashBox.value); });
             if (box.length > 0) {
@@ -1066,19 +1068,13 @@ var AccTrPaymentNote;
             type: "Get",
             url: sys.apiUrl("AccTrReceipt", "GetBoxReceiveList"),
             data: {
-                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrPaymentNote, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
                     Details = result.Response;
-                    //for (var i = 0; i < Details.length; i++) {
-                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
-                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد" : "A certified"); }
-                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : "Not supported"); }
-                    //}
                     InitializeGrid();
-                    //filter_DataSource();
                     ReportGrid.DataSource = Details;
                     ReportGrid.Bind();
                 }
@@ -1090,7 +1086,7 @@ var AccTrPaymentNote;
         $("#ReportGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
-            SearchDetails = Details.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Bef_DescA.toLowerCase().search(search_1) >= 0 || x.Bef_DescE.toLowerCase().search(search_1) >= 0; }); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
+            SearchDetails = Details.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Bef_DescA.toLowerCase().search(search_1) >= 0; }); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
             //    || x.CustomerCODE.toString().search(search) >= 0 /* || x.CreditLimit.toString().search(search) >= 0 || x.Emp_NameA.toString().search(search) >= 0
             //    || x.ContactMobile.toString().search(search) >= 0 /*|| x.DueAmount.toString().search(search) >= 0 *//*|| x.DaysDiff.toString().search(search) >= 0*/);
             ReportGrid.DataSource = SearchDetails;
@@ -1309,6 +1305,11 @@ var AccTrPaymentNote;
             Model.CardAmount = Number(txt_CardAmount.value);
         }
         Model.BankName = '';
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNote;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         Assign();
@@ -1335,6 +1336,7 @@ var AccTrPaymentNote;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     Save_Succ_But();
@@ -1366,6 +1368,7 @@ var AccTrPaymentNote;
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
@@ -1478,6 +1481,7 @@ var AccTrPaymentNote;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrPaymentNote, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1493,9 +1497,9 @@ var AccTrPaymentNote;
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrPaymentNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
-    ///////////////////////////////////////donia
     ////////////////////////////////////////////////Display Vendors///////////////////////////
     function btnBenVnd_onclick() {
         sys.FindKey(Modules.AccTrPaymentNote, "btnVndSrch", "CompCode= " + compcode + "and IsCreditVendor = 1 and Isactive = 1", function () {

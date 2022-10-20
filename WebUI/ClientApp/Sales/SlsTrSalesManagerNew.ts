@@ -243,6 +243,7 @@ namespace SlsTrSalesManagerNew {
         $('#btnPrint').addClass('display_none');
 
         //GetLastPrice(3236)
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
 
         InitializeGrid();
 
@@ -2214,6 +2215,7 @@ namespace SlsTrSalesManagerNew {
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -4050,6 +4052,11 @@ namespace SlsTrSalesManagerNew {
         }
         MasterDetailsModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
+        MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
 
@@ -4783,6 +4790,7 @@ namespace SlsTrSalesManagerNew {
 
                 let result = d.result as string;
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -4809,10 +4817,12 @@ namespace SlsTrSalesManagerNew {
 
             rp.Name_function = "Prnt_OperationInvoice";
         }
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
 
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {
@@ -4889,6 +4899,8 @@ namespace SlsTrSalesManagerNew {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
                 window.open(result, "_blank");
             }
         })

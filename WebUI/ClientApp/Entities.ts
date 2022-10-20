@@ -4,6 +4,10 @@ class SecurityClass {
     public Token: string;
     public CompName: string;
     public VatNo: string;
+    public Branch_Code: string;
+    public Comp_Code: string;
+    public sec_FinYear: string;
+    public MODULE_CODE: string;
 }
 
 class FavModules {//
@@ -9783,8 +9787,12 @@ class ServPurchseInvoiceMasterDetail extends SecurityClass {
     public AVAT_TR_PurInvoiceHeader: Array<AVAT_TR_PurInvoiceHeader>;
 }
 
-class PurInvoiceRetMasterDetails {
-
+class PurInvoiceRetMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.AVAT_TR_PurInvoiceRet = new AVAT_TR_PurInvoiceRet();
+        this.AVAT_TR_PurInvoiceRetDetail = new Array<AVAT_TR_PurInvoiceRetDetail>();
+     }
     public AVAT_TR_PurInvoiceRet: AVAT_TR_PurInvoiceRet;
     public AVAT_TR_PurInvoiceRetDetail: Array<AVAT_TR_PurInvoiceRetDetail>;
 
@@ -9811,12 +9819,22 @@ class AQPurInvoiceRetMasterDetails {
 
 }
 
-class Account_CCDT_CCDTTP_MasterDetails {
+class Account_CCDT_CCDTTP_MasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.A_CCDT_Types = new A_CCDT_Types;
+        this.A_ACCOUNT = new Array<A_ACCOUNT>();
+        this.A_CCDT_COSTCENTERS = new Array<A_CCDT_COSTCENTERS>();
+
+    }
     public A_CCDT_Types: A_CCDT_Types;
     public A_ACCOUNT: Array<A_ACCOUNT>;
     public A_CCDT_COSTCENTERS: Array<A_CCDT_COSTCENTERS>;
 
 }
+
+
+ 
 class A_CCDT_COSTCENTERS extends SecurityClass {
     constructor() {
         super();

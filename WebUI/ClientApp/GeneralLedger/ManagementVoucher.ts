@@ -1,5 +1,4 @@
-﻿
-$(document).ready(() => {
+﻿$(document).ready(() => {
     ManagementVoucher.InitalizeComponent();
 })
 
@@ -556,6 +555,8 @@ namespace ManagementVoucher {
             TmpVoucherProcessSingl.Src_DescA = AQJournalHeaderDetails[i].Src_DescA;
 
             TmpVoucherProcessDetails.push(TmpVoucherProcessSingl);
+
+
         }
     }
     function Insert(OpCode: number) {
@@ -568,6 +569,11 @@ namespace ManagementVoucher {
         Newtmp[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Newtmp[0].UserCode = SysSession.CurrentEnvironment.UserCode;
         Newtmp[0].OpCode = OpCode;
+
+         Newtmp[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+         Newtmp[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+         Newtmp[0].MODULE_CODE = Modules.ManagementVoucher;
+         Newtmp[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
         //debugger
         Ajax.Callsync({

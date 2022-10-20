@@ -159,7 +159,9 @@ namespace PurTrReturn {
         $("#divMasterGridiv").removeClass("display_none"); 
 
         //btnShow_onclick();
-        $('#btnPrint').addClass('display_none'); 
+        $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
+
     }
     function IntializeEvents() { 
         btnShow.onclick = btnShow_onclick;
@@ -356,7 +358,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -815,7 +817,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetAllReturnPurReceiveStaistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -847,6 +849,8 @@ namespace PurTrReturn {
         clear();
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
         receiveID = Number(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
@@ -1813,7 +1817,14 @@ namespace PurTrReturn {
         MasterDetailModel.I_Pur_TR_Receive = InvoiceModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+ 
+
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurTrReturn;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
 
@@ -2156,6 +2167,7 @@ namespace PurTrReturn {
 
                 let result = d.result as string;
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -2175,6 +2187,9 @@ namespace PurTrReturn {
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
+        
          window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 
@@ -2227,6 +2242,7 @@ namespace PurTrReturn {
 
 
             PrintsFrom_To(TransType.Pur_Receive_Return, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length)
+
 
 
 

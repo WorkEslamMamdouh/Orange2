@@ -646,6 +646,8 @@ namespace JournalVoucher {
         PostFlag = false;
         Clear();
         $("#divJournalDetail").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         if (ReverseFlag == true) {
             SelectedJournalModel = ReversedJournalMasterDetailModel.AQ_GetJournalHeader;
         } else {
@@ -1136,22 +1138,22 @@ namespace JournalVoucher {
                              </button>
 		                </div>
 	                </td>
-                     <td>
+                     <td style="width:9%;">
 		                <div class="form-group">
 			                 <input id="txtAccNumber${cnt}" name="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:17%;">
 		                <div class="form-group">
 			                  <input id="txtAccName${cnt}" name="" disabled type="text" class="form-control"  />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:9%;">
 		                <div class="form-group">
 			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:9%;">
 		                <div class="form-group">
 			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
 		                </div>
@@ -1164,12 +1166,12 @@ namespace JournalVoucher {
                              </button>
 		                </div>
 	                </td>
-                     <td>
+                     <td style="width:9%;">
 		                <div class="form-group">
 			                <input id="txtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td>
+                    <td style="width:17%;">
 		                <div class="form-group">
 			                  <input id="txtCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
@@ -1194,7 +1196,7 @@ namespace JournalVoucher {
 	                </td>
 
 
-                    <td>
+                    <td style="width:22%;">
 		                <div class="form-group">
 			              <input id="Notes${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
@@ -2048,6 +2050,14 @@ namespace JournalVoucher {
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.JournalVoucher; 
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+
+
     }
     function Insert() {
         MasterDetailModel.A_JOURNAL_HEADER.SOURCE_TYPE = "1";

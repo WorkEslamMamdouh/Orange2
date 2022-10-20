@@ -38,11 +38,9 @@ namespace IssueType {
         InitalizeEvents();     
         GetddlAcc();
         Display();
-
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueType, SysSession.CurrentEnvironment.CurrentYear);
     }
-    
-    
-
+     
     function InitalizeControls() {
         ////debugger;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
@@ -94,8 +92,7 @@ namespace IssueType {
         }
         $("#btnUpdate_Def").addClass("display_none");
     }
-
-
+     
     function BuildControls(cnt: number) {
 
         var html="";
@@ -248,15 +245,14 @@ namespace IssueType {
             $('#btnAddDetails').addClass("display_none");
         }   
     }
-         
-
+          
     function Display() {
         debugger;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("Stk_TR_IssueToCC", "GetAllIssueTypes"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode, MODULE_CODE: Modules.IssueType
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -296,6 +292,7 @@ namespace IssueType {
             }
         });
     }
+
     function DeleteRow(RecNo: number) {
 
         if (!SysSession.CurrentPrivileges.Remove) return;
@@ -319,7 +316,8 @@ namespace IssueType {
         $(".btnAddDetails").attr("disabled", "disabled");      
         $("#btnAddDetails").addClass("display_none");
        // DisplayAccDefBox();
-    }           
+    }
+    
     function Validation_Grid(rowcount: number) {
 
         if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
@@ -410,13 +408,23 @@ namespace IssueType {
 
             }  
         }
-    } 
+
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].MODULE_CODE = Modules.IssueType;
+        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+    }
+
     function Update() {
         Assign();
 
        
         console.log(Details); 
         var stringDetail: string = JSON.stringify(Details);
+
+        
+
         Ajax.Callsync({
 
             type: "Get",
@@ -436,7 +444,8 @@ namespace IssueType {
                 }
             }
         });
-    }     
+    }
+
     function success() {
         $('#btnSave_Def').addClass("display_none");
         $('#btnBack_Def').addClass("display_none");
@@ -447,16 +456,5 @@ namespace IssueType {
         $(".btnAddDetails").attr("disabled", "disabled");
         $("#btnAddDetails").addClass("display_none");
         Display();
-    }
-
-}           
-
-
-
-
-
-
-
-
-
-
+    } 
+}

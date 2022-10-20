@@ -674,7 +674,7 @@ function OpenPartial(ModuleCode: string, DivName: string) {
 }
 function loading(NameBtn: string) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
-
+    
     $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
 
     setTimeout(function () {
@@ -2461,4 +2461,68 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     })
 
     return '';
+}
+
+
+
+function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET", 
+        url: sys.apiUrl("SystemTools", "InsertLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
+
+        }
+    });
+
+}
+function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools(); 
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "PrintliestLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+ 
+        }
+    }); 
+}
+function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
+    debugger
+    var sys: SystemTools = new SystemTools(); 
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogOperation"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, ExtraData: ExtraData },
+        success: (response) => {
+             
+        }
+    }); 
+}
+function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools(); 
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "OpenScreenLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+             
+        }
+    }); 
+}
+function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
+
+        }
+    }); 
 }

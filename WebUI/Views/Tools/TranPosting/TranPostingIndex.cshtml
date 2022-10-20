@@ -65,7 +65,7 @@
                             <button id="btnShowVouchers" disabled="disabled" type="button" class=" btn btn-main h-100 me-3">
                                 توليد وعرض القيد
                             </button>
-                            <button id="btnCreateVoucher" type="button" class="btn btn-green align-self-end m-auto  h-100  me-3">
+                            <button id="btnCreateVoucher"disabled type="button" class="btn btn-green align-self-end m-auto  h-100  me-3">
                                 انشاء القيد فى الحسابات
                             </button>
                         </div>
@@ -96,19 +96,22 @@
             <div id="div_1" class="col-12 display_none">
                 <div class="card bg-light-blue px-4 mb-4">
                     <div class="row py-3">
-                        <div class="col-12 my-3">
-                            <div class="d-flex justify-content-center">
-                                <button id="btnSelectAll" type="button" class="btn  btn-gray h-100 me-3">
-                                    اختيار الجميع
-                                </button>
-                                <button id="btnReverseSelection" type="button" class=" btn btn-gray h-100 me-3 ">
-                                    @SystemResource.Reverse_selection
-                                </button>
-                                <button id="btnUnSelectAll" type="button" class="btn btn-gray h-100 me-3">
-                                    @SystemResource.Not_choosing_everyone
-                                </button>
-                            </div>
-                        </div>
+						<div class="col-12 my-3">
+							<div class="d-flex justify-content-center">
+								<button id="btnSelectAll" type="button" class="btn  btn-gray h-100 me-3">
+									اختيار الجميع
+								</button>
+								<button id="btnReverseSelection" type="button" class=" btn btn-gray h-100 me-3 ">
+									@SystemResource.Reverse_selection
+								</button>
+								<button id="btnUnSelectAll" type="button" class="btn btn-gray h-100 me-3">
+									@SystemResource.Not_choosing_everyone
+								</button>
+							</div>
+							<div class="col-4">
+								<input id="txtSearchTrans" name="" type="text" class="form-control" placeholder="بحث : ">
+							</div>
+						</div>
                         <div id="TransactionsGrid" class="col-12"> </div>
                     </div>
 
@@ -116,47 +119,52 @@
             </div>
             <div id="div_2" class="col-12 display_none">
                 <div class="card bg-light-blue px-4 mb-4">
-                    <div class="row py-3">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 col-md-4">
-                                    <div class="form-group row">
-                                        <label class="col-3 col-md-4 align-self-center p-md-0">تاريخ القيد</label>
-                                        <div class="col-9 col-md-8">
-                                            <input id="txtVoucherDate" name="" type="date" class="form-control">
-                                            @*<label id="lblVoucherNum" class="">    </label>*@
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12 col-md-8">
-                                    <div class="form-group row">
-                                        <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_desc</label>
-                                        <div class="col-9 col-md-10">
-                                            <textarea id="txtDesc" type="text" class="form-control" maxlength="200"> </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        
-                        <div id="VoucherDetailGrid" class="col-12"> </div>
+					<div class="row py-3">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12 col-md-4">
+									<div class="form-group row">
+										<label class="col-3 col-md-4 align-self-center p-md-0">تاريخ القيد</label>
+										<div class="col-9 col-md-8">
+											<input id="txtVoucherDate" name="" type="date" class="form-control">
+											@*<label id="lblVoucherNum" class="">    </label>*@
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12 col-md-8">
+									<div class="form-group row">
+										<label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_desc</label>
+										<div class="col-9 col-md-10">
+											<textarea id="txtDesc" type="text" class="form-control" maxlength="200"> </textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                        <div class="col-12">
-                            <div class="d-flex">
-                                <label class="text-blue"> @SystemResource.App_total   </label>
-                                <input id="txtDebit" disabled type="text" class="form-control " />
-                                <input id="txtCedit" disabled type="text" class="form-control " />
-                                <label id="" class="text-blue"> @SystemResource.Itm_Diff   </label>
-                                <input id="txtDiff" disabled type="text" class="form-control " />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+						<div class="col-4">
+							<input id="txtSearchBox" name="" type="text" class="form-control" placeholder="بحث : برقم الحركة">
+						</div>
+						<div id="VoucherDetailGrid" class="col-12"> </div>
+
+							<div class="col-12">
+
+								<div class="d-flex">
+									<label class="text-blue"> @SystemResource.App_total   </label>
+									<input id="txtDebit" disabled type="text" class="form-control " />
+									<input id="txtCedit" disabled type="text" class="form-control " />
+									<label id="" class="text-blue"> @SystemResource.Itm_Diff   </label>
+									<input id="txtDiff" disabled type="text" class="form-control " />
+								</div>
+							</div>
+						</div>
+					</div>
             </div>
 
             <div id="div_3" class="col-12 display_none">
@@ -176,53 +184,53 @@
 
 @section Script{
     <script src="~/ClientApp/CustomEntities.js"></script>
-    <script src="~/ClientApp/Tools/TranPosting/TranPosting.js"></script>
     <script>
-        $(document).ready(function () {
+        //$(document).ready(function () {
 
 
 
-            $('#btndiv_1').on('click', function () {
-                $("#btndiv_1").addClass("btn-active");
-                $("#btndiv_2").removeClass("btn-active");
-                $("#btndiv_3").removeClass("btn-active");
+        //    $('#btndiv_1').on('click', function () {
+        //        $("#btndiv_1").addClass("btn-active");
+        //        $("#btndiv_2").removeClass("btn-active");
+        //        $("#btndiv_3").removeClass("btn-active");
 
-                $("#btndiv_11").removeClass("btn-main");
-                $("#btndiv_22").addClass("btn-main");
-                $("#btndiv_33").addClass("btn-main");
+        //        $("#btndiv_11").removeClass("btn-main");
+        //        $("#btndiv_22").addClass("btn-main");
+        //        $("#btndiv_33").addClass("btn-main");
 
-                $("#div_1").removeClass("display_none");
-                $("#div_2").addClass("display_none");
-                $("#div_3").addClass("display_none");
-            });
+        //        $("#div_1").removeClass("display_none");
+        //        $("#div_2").addClass("display_none");
+        //        $("#div_3").addClass("display_none");
+        //    });
 
-            $('#btndiv_2').on('click', function () {
-                $("#btndiv_2").addClass("btn-active");
-                $("#btndiv_1").removeClass("btn-active");
-                $("#btndiv_3").removeClass("btn-active");
+        //    $('#btndiv_2').on('click', function () {
+        //        $("#btndiv_2").addClass("btn-active");
+        //        $("#btndiv_1").removeClass("btn-active");
+        //        $("#btndiv_3").removeClass("btn-active");
 
-                $("#btndiv_22").removeClass("btn-main");
-                $("#btndiv_11").addClass("btn-main");
-                $("#btndiv_33").addClass("btn-main");
+        //        $("#btndiv_22").removeClass("btn-main");
+        //        $("#btndiv_11").addClass("btn-main");
+        //        $("#btndiv_33").addClass("btn-main");
 
-                $("#div_1").addClass("display_none");
-                $("#div_3").addClass("display_none");
-                $("#div_2").removeClass("display_none");
-            });
-            $('#btndiv_3').on('click', function () {
-                $("#btndiv_3").addClass("btn-active");
-                $("#btndiv_1").removeClass("btn-active");
-                $("#btndiv_2").removeClass("btn-active");
+        //        $("#div_1").addClass("display_none");
+        //        $("#div_3").addClass("display_none");
+        //        $("#div_2").removeClass("display_none");
+        //    });
+        //    $('#btndiv_3').on('click', function () {
+        //        $("#btndiv_3").addClass("btn-active");
+        //        $("#btndiv_1").removeClass("btn-active");
+        //        $("#btndiv_2").removeClass("btn-active");
 
-                $("#btndiv_33").removeClass("btn-main");
-                $("#btndiv_11").addClass("btn-main");
-                $("#btndiv_22").addClass("btn-main");
+        //        $("#btndiv_33").removeClass("btn-main");
+        //        $("#btndiv_11").addClass("btn-main");
+        //        $("#btndiv_22").addClass("btn-main");
 
-                $("#div_3").removeClass("display_none");
-                $("#div_1").addClass("display_none");
-                $("#div_2").addClass("display_none");
-            });
+        //        $("#div_3").removeClass("display_none");
+        //        $("#div_1").addClass("display_none");
+        //        $("#div_2").addClass("display_none");
+        //    });
 
-        });
+        //});
     </script>
+    <script src="~/ClientApp/Tools/TranPosting/TranPosting.js"></script>
 }

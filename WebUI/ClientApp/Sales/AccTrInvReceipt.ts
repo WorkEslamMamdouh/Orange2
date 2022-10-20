@@ -437,6 +437,8 @@ namespace AccTrInvReceipt {
         txtCardInv.disabled = true;
         ////debugger
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrInvReceipt, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         let Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         invoiceID = Number(Selecteditem[0].InvoiceID);
         InvoiceStatisticsModel = Selecteditem; 

@@ -841,7 +841,7 @@ namespace SlsTrSalesReturn {
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.SlsTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -1153,6 +1153,7 @@ namespace SlsTrSalesReturn {
         Show = true; 
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturn, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {
