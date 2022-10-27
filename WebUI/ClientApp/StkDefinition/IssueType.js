@@ -32,6 +32,7 @@ var IssueType;
         InitalizeEvents();
         GetddlAcc();
         Display();
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueType, SysSession.CurrentEnvironment.CurrentYear);
     }
     IssueType.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -180,7 +181,7 @@ var IssueType;
             type: "Get",
             url: sys.apiUrl("Stk_TR_IssueToCC", "GetAllIssueTypes"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode, MODULE_CODE: Modules.IssueType
             },
             success: function (d) {
                 var result = d;
@@ -303,6 +304,11 @@ var IssueType;
                 Details.push(Model);
             }
         }
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].MODULE_CODE = Modules.IssueType;
+        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         Assign();

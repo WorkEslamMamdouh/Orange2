@@ -69,6 +69,7 @@ var CollectUnit;
         InitializeGrid();
         FillStore();
         drp_Store.selectedIndex = 1;
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
     }
     CollectUnit.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -631,6 +632,7 @@ var CollectUnit;
     //*************************************************Display******************************************//
     function Grid_RowDoubleClicked() {
         $("#DivInvoiceData").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         hd_CollectID.value = Grid.SelectedKey;
         //GlobalInvoiceID = Number(Grid.SelectedKey);
         backflag = false;
@@ -1003,6 +1005,11 @@ var CollectUnit;
         Model.TrNo = null;
         CollectMasterDetail.I_TR_Collect = Model;
         CollectMasterDetail.I_TR_CollectDetail = ModelCollectDet;
+        CollectMasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        CollectMasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        CollectMasterDetail.MODULE_CODE = Modules.CollectUnit;
+        CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
+        CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("Collect", "InsertAll"),
@@ -1030,6 +1037,11 @@ var CollectUnit;
         Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         CollectMasterDetail.I_TR_Collect = Model;
         CollectMasterDetail.I_TR_CollectDetail = ModelCollectDet;
+        CollectMasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        CollectMasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        CollectMasterDetail.MODULE_CODE = Modules.CollectUnit;
+        CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
+        CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("Collect", "UpdateALL"),
@@ -1086,6 +1098,11 @@ var CollectUnit;
         Model.Status = 0;
         Model.UpdatedAt = DateTimeFormat(Date().toString());
         Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.CollectUnit;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("Collect", "Open"),
@@ -1109,6 +1126,7 @@ var CollectUnit;
         rp.TRId = Number(hd_CollectID.value);
         rp.Name_function = "IProc_Prnt_Collect";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
@@ -1152,6 +1170,7 @@ var CollectUnit;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

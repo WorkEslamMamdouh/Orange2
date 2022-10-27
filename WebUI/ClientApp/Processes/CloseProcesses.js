@@ -521,7 +521,7 @@ var CloseProcesses;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.CloseProcesses, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -763,6 +763,7 @@ var CloseProcesses;
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
         $("#txtVoucherNo").val("");
@@ -2214,6 +2215,11 @@ var CloseProcesses;
             }
             //if ($('#ddlSalesman').val() == "null") { Model_I_TR_Operation.SalesmanId = 0; }
             //else { Model_I_TR_Operation.SalesmanId = $('#ddlSalesman').val(); }
+            Model_I_TR_Operation.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_I_TR_Operation.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_I_TR_Operation.MODULE_CODE = Modules.CloseProcesses;
+            Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model_I_TR_Operation.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else { // Update 
             // 
@@ -2268,6 +2274,11 @@ var CloseProcesses;
                 Model_I_TR_Operation.SalesmanId = 0;
                 Model_I_TR_Operation.OpenAt = null;
             }
+            Model_I_TR_Operation.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_I_TR_Operation.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_I_TR_Operation.MODULE_CODE = Modules.CloseProcesses;
+            Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model_I_TR_Operation.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
     }
     function Insert_1_Processes() {
@@ -3894,6 +3905,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -3963,6 +3975,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "print operation costs");
                 window.open(result, "_blank");
             }
         });
@@ -3997,6 +4010,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
@@ -4031,6 +4045,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor stock printing");
                 window.open(result, "_blank");
             }
         });
@@ -4062,6 +4077,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor's Deposit Printing");
                 window.open(result, "_blank");
             }
         });
@@ -4092,6 +4108,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
@@ -4121,6 +4138,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
@@ -4150,6 +4168,7 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });

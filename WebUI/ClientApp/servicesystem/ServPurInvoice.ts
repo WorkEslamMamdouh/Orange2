@@ -30,6 +30,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var txtSearch: HTMLInputElement;
     //------------------------------------- Arrays
     var MasterGrid: JsGrid = new JsGrid();
+    var VatDetails: Array<A_D_VAT_TYPE> = new Array<A_D_VAT_TYPE>();
     var Selected_Data: Array<AVAT_TR_PurInvoice> = new Array<AVAT_TR_PurInvoice>();
     var searchDetails: Array<AVAT_TR_PurInvoice> = new Array<AVAT_TR_PurInvoice>();
     var AQ_ServPurInvoiceMasterDetailModel: Array<AVAT_TR_PurInvoice> = new Array<AVAT_TR_PurInvoice>();
@@ -123,6 +124,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         FillddlFamily();
         GetAllCostCenters();
         GetAllVendors();
+        GetAllVatDetails();
     }
     function InitializeControls() {
         drpSrchStatus = document.getElementById("drpSrchStatus") as HTMLSelectElement;
@@ -164,7 +166,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-     //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
+        //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
 
 
     }
@@ -183,7 +185,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-       // btnPrint.onclick = () => { PrintReport(4); }
+        // btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = btnPrintReceive_onclick;
 
 
@@ -332,6 +334,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
 
     function Insert() {
+        debugger
         Menu.CreatedAt = DateTimeFormat(Date().toString());
         Menu.CreatedBy = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -555,7 +558,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         // Bind Menu
         showFlag = true;
         Selected_Data = new Array<AVAT_TR_PurInvoice>();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
+        //DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
 
         if (FlagAfterInsertOrUpdate == true) {
             Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(x => x.InvoiceId == GlobalMenuID);
@@ -782,8 +785,15 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 if ($("#txt_StatusFlag1" + cnt).val() != "i")
                     $("#txt_StatusFlag1" + cnt).val("u");
 
+
+
                 GlobalVendorNum = $("#VND_SERIAL" + cnt).val();
                 AssignForGrids(GlobalVendorNum, cnt);
+
+                btn_arrowdown_onclick(cnt);
+                OnChangServCode(cnt);
+
+
             });
         });
 
@@ -800,6 +810,10 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $('#txtVendoeName' + cnt).val("");
                 DisplayMassage("كود المورد غير صحيح ", "Wrong vendor code ", MessageType.Error);
             }
+            btn_arrowdown_onclick(cnt);
+
+            OnChangServCode(cnt);
+
         });
         //// Account Search
         $('#btnAccSearch' + cnt).click(function (e) {
@@ -1051,7 +1065,22 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
     //    });
     //}
+    function GetAllVatDetails() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GenVatType", "GetAll"),
+            data: {
+                CompCode: compcode, VatType: 2, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
 
+                    VatDetails = result.Response as Array<A_D_VAT_TYPE>; 
+                }
+            }
+        });
+    }
     function Validation_Grid_Header(rowcount: number) {
         if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m") {
             return true;
@@ -1110,6 +1139,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#txtInvVat" + ID).val(vatAmount.RoundToSt(2));
         $("#txtInvVat" + ID).attr('data-VndVatType', VaType);
 
+
+        //ID = (Number($("#VND_SERIALDetail" + i).val())) - 1);
         //$("#txtInvNet" + ID).val(netAmount.RoundToSt(2));
         //****new
         if ($("#txt_StatusFlag1" + ID).val() != 'i' && $("#txt_StatusFlag1" + ID).val() != 'd')
@@ -1309,7 +1340,14 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
                     Tax_Rate = Cat_Tax[0].VatPrc;
 
-                    Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
+                  
+                    let Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
+                    var code = $('#txtVndrCode' + Cnt_Vnd).val();
+                    var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
+                     
+                    Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
+
+                    Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
 
                     Tax_Rate = Tax_Type_Model.Prc;
 
@@ -1323,7 +1361,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
 
                 }
-                ComputeTotals();
+                //ComputeTotals();
                 GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
                 ComputeTotals();
                 var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1335,50 +1373,9 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#txtServCode" + cnt).on('change', function () {
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
                 $("#txt_StatusFlag2" + cnt).val("u");
-            var code = $('#txtServCode' + cnt).val();
-            var NumberSelect = ServicesDetails.filter(s => s.ItemCode == code);
 
-            if (NumberSelect.length > 0) {
-                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
+            OnChangServCode(cnt);
 
-                var itemPrice = NumberSelect[0].UnitPrice;
-                $("#txtPrice" + cnt).val(itemPrice);
-                var txtQuantityValue = $("#txtQty" + cnt).val();
-                var txtPriceValue = $("#txtPrice" + cnt).val();
-
-                var catID = NumberSelect[0].SrvCategoryID;
-                var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
-                let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
-                Tax_Rate = Cat_Tax[0].VatPrc;
-
-                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-
-                Tax_Rate = Tax_Type_Model.Prc;
-
-
-
-                $('#txtVatPrc' + cnt).val(Tax_Rate);
-                var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
-                VatPrc = Tax_Rate;
-                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-
-                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
-                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
-                var totalAfterVat = Number(vatAmount) + Number(total);
-                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            } else {
-                $("#txtQuantity" + cnt).val("1");
-                $("#txtPrice" + cnt).val("1");
-                $("#txtDetailTotal" + cnt).val("0");
-                $("#txtVatAmount" + cnt).val("0");
-                $("#txtDetailNet" + cnt).val("0");
-                $('#txtServCode' + cnt).val("");
-                $('#txtServName' + cnt).val("");
-                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
-            }
-            ComputeTotals();
             GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
             ComputeTotals();
             var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1494,6 +1491,78 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         return;
 
     }
+    function OnChangServCode(Index: number) {
+
+        //*****تحديث الرقم الحالي برقم الفاتورة الجديدة
+        CurrentVendorSerial = $("#VND_SERIAL" + Index).val();
+
+        //*****عرض خدمات الفاتورة المختارة
+        let DetailForSelectedVendorSR = DetailList.filter(x => x.VND_SERIAL == CurrentVendorSerial);
+
+        for (var cnt = 0; cnt < DetailForSelectedVendorSR.length; cnt++) {
+
+
+            if ($("#txt_StatusFlag2" + cnt).val() != "i")
+                $("#txt_StatusFlag2" + cnt).val("u");
+
+
+
+
+            var code = $('#txtServCode' + cnt).val();
+            var NumberSelect = ServicesDetails.filter(s => s.ItemCode == code);
+
+            if (NumberSelect.length > 0) {
+                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
+
+                var itemPrice = NumberSelect[0].UnitPrice;
+                $("#txtPrice" + cnt).val(itemPrice);
+                var txtQuantityValue = $("#txtQty" + cnt).val();
+                var txtPriceValue = $("#txtPrice" + cnt).val();
+
+                var catID = NumberSelect[0].SrvCategoryID;
+                var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
+                let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
+                Tax_Rate = Cat_Tax[0].VatPrc;
+
+                let Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
+                var code = $('#txtVndrCode' + Cnt_Vnd).val();
+                var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
+                Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
+
+                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
+
+                Tax_Rate = Tax_Type_Model.Prc;
+
+
+
+                $('#txtVatPrc' + cnt).val(Tax_Rate);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
+                VatPrc = Tax_Rate;
+                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+
+                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
+                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+
+            } else {
+                $("#txtQuantity" + cnt).val("1");
+                $("#txtPrice" + cnt).val("1");
+                $("#txtDetailTotal" + cnt).val("0");
+                $("#txtVatAmount" + cnt).val("0");
+                $("#txtDetailNet" + cnt).val("0");
+                $('#txtServCode' + cnt).val("");
+                $('#txtServName' + cnt).val("");
+                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
+            }
+
+        }
+
+        ComputeTotals();
+
+    }
+
     //function AddNewRow_Details() {
 
     //    if (!SysSession.CurrentPrivileges.AddNew) return;
@@ -1666,14 +1735,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         InvHeaderAssignSingle.PAID = 0;
 
         //InvHeaderAssignSingle.VndVatType = Number($("#txtInvVat" + cnt).attr('data-VndVatType'));
-        InvHeaderAssignSingle.VndVatType = vatType;
+
+        var code = $('#txtVndrCode' + cnt).val();
+        var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
+
+        InvHeaderAssignSingle.VndVatType = VendObj[0].VATType;
         InvHeaderAssignSingle.Vat = $("#txtInvVat" + cnt).val();
         InvHeaderAssignSingle.NetATax = $("#txtInvNet" + cnt).val();
         InvHeaderAssignSingle.VatApplied = false;
 
         //InvHeaderAssignSingle.VndVatType = 0;
 
-        InvHeaderAssignSingle.VatPrc = VatPrc;
+        InvHeaderAssignSingle.VatPrc =  VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc; 
         InvHeaderAssignSingle.SalesType = 0;
         InvHeaderAssignSingle.PAY_ACC_CODE = $("#txtAccCode" + cnt).val();
         InvHeaderAssignSingle.REMARK = $("#txtInvoiceDesc" + cnt).val();
@@ -1869,7 +1942,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#div_Data :input").val("");
         $("#div_Data").html("");
 
-        txtTR_DATE.value = GetDate(); 
+        txtTR_DATE.value = GetDate();
 
         txtPerson.value = "";
 
@@ -1959,7 +2032,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         txtVat.disabled = true;
         txtDiscountValue.disabled = true;
         txtNet.disabled = true;
-        chkClosed.disabled = !SysSession.CurrentPrivileges.CUSTOM1; 
+        chkClosed.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
         txtMenuNum.disabled = true;
     }
     function DisableControls() {
@@ -1969,7 +2042,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#div_Master :input").prop("disabled", true);
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none"); 
+        $("#btnUpdate").removeClass("display_none");
         $("#TR_DATE").attr("disabled", "disabled");
         $("#btnAddHeaderControls").addClass("display_none");
         $("#btnAddChildControls").addClass("display_none");
@@ -2170,7 +2243,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
     function btnPrintReceive_onclick() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
-        
+
         let rp: ReportParameters = new ReportParameters();
 
         rp.CompCode = SysSession.CurrentEnvironment.CompCode;
@@ -2494,47 +2567,47 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         setTimeout(function () {
 
             finishSave('btnsave');
-        if (!CheckDate(DateFormat(txtTR_DATE.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtTR_DATE);
-            return
-        }
-
-      
-
-        btn_arrowdown_onclick(0);
+            if (!CheckDate(DateFormat(txtTR_DATE.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+                Errorinput(txtTR_DATE);
+                return
+            }
 
 
-        Assign();
 
-        if (!ValidationMenu())
-            return;
+            btn_arrowdown_onclick(0);
 
 
-        for (let i = 0; i < CountGrid1; i++) {
-            if (!ValidationHeaderWithDetail(i))
+            Assign();
+
+            if (!ValidationMenu())
                 return;
-        }
 
-        for (let i = 0; i < CountGrid1; i++) {
-            if (!Validation_Grid_Header(i))
-                return;
-        }
 
-        for (let i = 0; i < DetailList.length; i++) {
-            if (!ValidationDetailBeforeSave(i))
-                return;
-        }
+            for (let i = 0; i < CountGrid1; i++) {
+                if (!ValidationHeaderWithDetail(i))
+                    return;
+            }
 
-        if (isNew == true) {
-            Insert();
-        } else {
-            Update();
-        }
-        EditModeFlag = false;
-        isNew = false;
-        CurrentVendorSerial = 0;
-        $("#btnPrintTransaction").removeClass("display_none");
+            for (let i = 0; i < CountGrid1; i++) {
+                if (!Validation_Grid_Header(i))
+                    return;
+            }
+
+            for (let i = 0; i < DetailList.length; i++) {
+                if (!ValidationDetailBeforeSave(i))
+                    return;
+            }
+
+            if (isNew == true) {
+                Insert();
+            } else {
+                Update();
+            }
+            EditModeFlag = false;
+            isNew = false;
+            CurrentVendorSerial = 0;
+            $("#btnPrintTransaction").removeClass("display_none");
 
         }, 100);
     }
@@ -2672,5 +2745,5 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
         return true;
     }
-                                                              
+
 }

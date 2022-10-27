@@ -522,43 +522,42 @@ var AccTrPaymentNote;
     }
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
+        DisplayAddStkGCodes();
+        EnableControls();
+        removedisabled();
+        ///////////////////////////donia
+        //txt_ID_beneficiaryNew.setAttribute("disabled", "disabled");
+        txt_BenCode.setAttribute("disabled", "disabled");
+        btnBen.setAttribute("disabled", "disabled");
+        $("#id_div_Add").addClass("disabledDiv");
+        if (txt_D_CashBox.value != "Null") {
+            $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value);
+            $("#txt_Receiving_Fund").attr("disabled", "disabled");
         }
-        else {
-            DisplayAddStkGCodes();
-            IsNew = true;
-            EnableControls();
-            removedisabled();
-            ///////////////////////////donia
-            //txt_ID_beneficiaryNew.setAttribute("disabled", "disabled");
-            txt_BenCode.setAttribute("disabled", "disabled");
-            btnBen.setAttribute("disabled", "disabled");
-            $("#id_div_Add").addClass("disabledDiv");
-            if (txt_D_CashBox.value != "Null") {
-                $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value);
-                $("#txt_Receiving_Fund").attr("disabled", "disabled");
-            }
-            reference_Page();
-            chkActive.checked = false;
-            $('#btnPrintTransaction').addClass("display_none");
-            $('#Bank_Div').addClass('display_none');
-            $('#txt_Receiving_Fund').removeAttr('disabled');
-            $('#La_CashAmount').removeClass('display_none');
-            $('#La_CardAmount').removeClass('display_none');
-            $('#txt_CashAmount').removeClass('display_none');
-            $('#txt_CardAmount').removeClass('display_none');
-            $('#txt_Amount').attr('disabled', 'disabled');
-            $('#txtDateNew').removeAttr('disabled');
-            $('#txt_CheckNo').val('');
-            $('#txt_TransferNo').val('');
-            $('#txt_BankAcc_Code').val('null');
-            chkIsDeffered.checked = false;
-            txtDueDate.value = GetDate();
-        }
+        reference_Page();
+        chkActive.checked = false;
+        $('#btnPrintTransaction').addClass("display_none");
+        $('#Bank_Div').addClass('display_none');
+        $('#txt_Receiving_Fund').removeAttr('disabled');
+        $('#La_CashAmount').removeClass('display_none');
+        $('#La_CardAmount').removeClass('display_none');
+        $('#txt_CashAmount').removeClass('display_none');
+        $('#txt_CardAmount').removeClass('display_none');
+        $('#txt_Amount').attr('disabled', 'disabled');
+        $('#txtDateNew').removeAttr('disabled');
+        $('#txt_CheckNo').val('');
+        $('#txt_TransferNo').val('');
+        $('#txt_BankAcc_Code').val('null');
+        chkIsDeffered.checked = false;
+        txtDueDate.value = GetDate();
+        //}
+        IsNew = true;
     }
     function btnsave_onClick() {
         loading('btnSave');
@@ -859,6 +858,7 @@ var AccTrPaymentNote;
         $('#txt_ReceiptNoteNew').prop("value", Selecteditem[0].RecPayTypeId);
         $('#txt_Receiving_Fund').prop("value", Selecteditem[0].CashBoxID);
         txtCashTypeNew_onchange();
+        IsNew = false;
     }
     function Display_GCodes() {
         Ajax.Callsync({
@@ -1300,6 +1300,9 @@ var AccTrPaymentNote;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
             Model.IsDeffered = chkIsDeffered.checked;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
+            Model.VoucherNo = 0;
             debugger;
             Model.CashAmount = Number(txt_CashAmount.value);
             Model.CardAmount = Number(txt_CardAmount.value);
@@ -1387,6 +1390,7 @@ var AccTrPaymentNote;
         debugger;
         AddDisabled();
         Update_claenData = 1;
+        ReportGrid.SelectedKey = ReceiptID;
         Selecteditem = Details.filter(function (x) { return x.ReceiptID == Number(ReceiptID); });
         debugger;
         DisplayAddStkGCodes();
@@ -1409,6 +1413,7 @@ var AccTrPaymentNote;
             btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
         }
         $("#Div_control").removeClass("display_none");
+        IsNew = false;
     }
     function PrintReport(OutType) {
         if (!SysSession.CurrentPrivileges.PrintOut)

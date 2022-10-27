@@ -1172,6 +1172,7 @@ var ProcSalesMgr;
         clear();
         InvoiceStatisticsModel = new Array();
         SlsInvoiceItemsDetails = new Array();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ProcSalesMgr, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == GlobalinvoiceID; });

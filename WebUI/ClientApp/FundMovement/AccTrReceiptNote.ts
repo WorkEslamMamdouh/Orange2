@@ -282,6 +282,7 @@ namespace AccTrReceiptNote {
         txt_CardAmount.onchange = Amount_onchange;
 
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
+         
 
     }
 
@@ -589,12 +590,12 @@ namespace AccTrReceiptNote {
 
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
-        } else {
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
 
             $("#Div_control").removeClass("display_none");
             DisplayAddStkGCodes();
@@ -633,7 +634,9 @@ namespace AccTrReceiptNote {
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
 
-        }
+        //}
+        IsNew = true;
+
     }
 
     function btnsave_onClick() {
@@ -939,6 +942,10 @@ namespace AccTrReceiptNote {
 
 
         Amount_onchange();
+
+        IsNew = false;
+
+
     }
 
     function DisplayData(Selecteditem: Array<IQ_GetBoxReceiveList>) {
@@ -1372,7 +1379,8 @@ namespace AccTrReceiptNote {
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
 
-            Model.TrNo = Reciept_TrNo;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
             Model.VoucherNo = 0;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
@@ -1458,6 +1466,7 @@ namespace AccTrReceiptNote {
     function IsSuccess() {
         IsNew = false;
         AddDisabled();
+        ReportGrid.SelectedKey = ReceiptID.toString(); 
         Selecteditem = Details.filter(x => x.ReceiptID == Number(ReceiptID));
         Update_claenData = 1;
         DisplayAddStkGCodes();
@@ -1494,6 +1503,7 @@ namespace AccTrReceiptNote {
         $("#Div_control").removeClass("display_none");
 
 
+        IsNew = false;
 
     }
 

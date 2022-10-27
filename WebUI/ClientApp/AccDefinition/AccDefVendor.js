@@ -915,6 +915,7 @@ var AccDefVendor;
         ShowFlag = true;
         $("#div_Data").html('');
         CountGrid = 0;
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
         if (showAfterInsertOrUpdate == true) {
             Selecteditem = Details.IQ_GetVendor.filter(function (x) { return x.VendorID == GlobalVendorID; });
             showAfterInsertOrUpdate = false;
@@ -1217,6 +1218,11 @@ var AccDefVendor;
         }
         MasterDetailModel.A_Pay_D_Vendor = Model;
         MasterDetailModel.A_Pay_D_VendorDoc = DetailsModel;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.AccDefVendor;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         Assign();
@@ -1336,6 +1342,7 @@ var AccDefVendor;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

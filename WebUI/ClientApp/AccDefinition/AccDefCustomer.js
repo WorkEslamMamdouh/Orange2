@@ -557,6 +557,7 @@ var AccDefCustomer;
         });
     }
     function DriverDoubleClick() {
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
         Selecteditem = Details.filter(function (x) { return x.CustomerId == Number(ReportGrid.SelectedKey); });
         for (var _i = 0, Selecteditem_2 = Selecteditem; _i < Selecteditem_2.length; _i++) {
             var item = Selecteditem_2[_i];
@@ -646,7 +647,7 @@ var AccDefCustomer;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"row_font_header" + cnt + "\">\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\"><i class=\"fas fa-minus-circle btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select disabled id=\"CusIDTypeCode" + cnt + "\" class=\"form-control\"> \n\t\t                        <option value=\"null\">" + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + "</option> \n\t\t                     </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDNo" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDIssuePlace" + cnt + "\" type=\"text\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input type=\"date\" disabled id=\"IDIssueDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDIssueDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"date\" disabled id=\"IDExpireDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDExpireDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n             <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n\t\t    <input id=\"CustomerDocID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n                </tr>";
+        html = "<tr id= \"row_font_header" + cnt + "\">\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus3" + cnt + "\"><i class=\"fas fa-minus-circle btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           \t<select disabled id=\"CusIDTypeCode" + cnt + "\" class=\"form-control\"> \n\t\t                        <option value=\"null\">" + (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") + "</option> \n\t\t                     </select >\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDNo" + cnt + "\" type=\"number\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                           <input disabled id=\"IDIssuePlace" + cnt + "\" type=\"text\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input type=\"date\" disabled id=\"IDIssueDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDIssueDateH" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"date\" disabled id=\"IDExpireDate" + cnt + "\" class=\"form-control\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t                    <input type=\"text\" disabled id=\"IDExpireDateH" + cnt + "\" class=\"form-control\">\n\t\t                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n\t\t                    <input id=\"CustomerDocID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n           \n                </tr>";
         $("#data_lebel").append(html);
         for (var i = 0; i < CodesTypes.length; i++) {
             $('#CusIDTypeCode' + cnt).append('<option value="' + CodesTypes[i].CodeValue + '">' + (lang == "ar" ? CodesTypes[i].DescA : CodesTypes[i].DescE) + '</option>');
@@ -1147,6 +1148,7 @@ var AccDefCustomer;
         ReportGrid.Bind();
     }
     function Assign_CustomerDoc() {
+        debugger;
         Model.A_Rec_D_CustomerDoc = new Array();
         var StatusFlag;
         for (var i = 0; i < CountGrid; i++) {
@@ -1273,6 +1275,57 @@ var AccDefCustomer;
                 Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
             }
         }
+        //debugger
+        ////Model.A_Rec_D_CustomerDoc = new Array<A_Rec_D_CustomerDoc>();
+        //var StatusFlag: String;
+        //for (var i = 0; i < CountGrid; i++) {
+        //    singleModel = new A_Rec_D_CustomerDoc();
+        //    StatusFlag = $("#txt_StatusFlag" + i).val();
+        //    $("#txt_StatusFlag" + i).val("");
+        //    singleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        //    singleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        //    if (StatusFlag == "i") {
+        //        singleModel.CustomerDocID = 0;
+        //        singleModel.CustomerId = CustomerId;
+        //        singleModel.StatusFlag = StatusFlag.toString();
+        //        singleModel.CusIDTypeCode = Number($("#CusIDTypeCode" + i).val());
+        //        singleModel.IDNo = $("#IDNo" + i).val();
+        //        singleModel.IDIssuePlace = $('#IDIssuePlace' + i).val();//
+        //        singleModel.IDIssueDate = $('#IDIssueDate' + i).val();
+        //        singleModel.IDIssueDateH = $("#IDIssueDateH" + i).val();
+        //        singleModel.IDExpireDate = $("#IDExpireDate" + i).val();
+        //        singleModel.IDExpireDateH = $("#IDExpireDateH" + i).val();
+        //        Model.A_Rec_D_CustomerDoc.push(singleModel);
+        //    }
+        //    if (StatusFlag == "u") {
+        //        var CustomerDocID = $("#CustomerDocID" + i).val();
+        //        singleModel.CustomerDocID = CustomerDocID;
+        //        singleModel.CustomerId = CustomerId;
+        //        singleModel.StatusFlag = StatusFlag.toString();
+        //        singleModel.CusIDTypeCode = Number($("#CusIDTypeCode" + i).val());
+        //        singleModel.IDNo = $("#IDNo" + i).val();
+        //        singleModel.IDIssuePlace = $('#IDIssuePlace' + i).val();//
+        //        singleModel.IDIssueDate = $('#IDIssueDate' + i).val();
+        //        singleModel.IDIssueDateH = $("#IDIssueDateH" + i).val();
+        //        singleModel.IDExpireDate = $("#IDExpireDate" + i).val();
+        //        singleModel.IDExpireDateH = $("#IDExpireDateH" + i).val();
+        //        Model.A_Rec_D_CustomerDoc.push(singleModel);
+        //    }
+        //    if (StatusFlag == "d") {
+        //        if ($("#CustomerDocID" + i).val() != "") {
+        //            var CustomerDocID = $("#CustomerDocID" + i).val();
+        //            singleModel.CustomerDocID = CustomerDocID;
+        //            singleModel.CustomerId = CustomerId;
+        //            singleModel.StatusFlag = StatusFlag.toString();
+        //            Model.A_Rec_D_CustomerDoc.push(singleModel);
+        //        }
+        //    }
+        //}
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccDefCustomer;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         Assign();
@@ -1297,6 +1350,7 @@ var AccDefCustomer;
     }
     function Update() {
         Assign();
+        debugger;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Update"),
@@ -1431,6 +1485,7 @@ var AccDefCustomer;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

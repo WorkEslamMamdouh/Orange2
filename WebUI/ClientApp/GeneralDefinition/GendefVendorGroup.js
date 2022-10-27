@@ -154,6 +154,10 @@ var GendefVendorGroup;
         Assign();
         Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Details[0].MODULE_CODE = Modules.GendefVendorGroup;
+        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("GenDefGroup", "UpdateLst"),

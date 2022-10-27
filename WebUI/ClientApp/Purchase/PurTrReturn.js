@@ -144,6 +144,7 @@ var PurTrReturn;
         $("#divMasterGridiv").removeClass("display_none");
         //btnShow_onclick();
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
     }
     PurTrReturn.InitalizeComponent = InitalizeComponent;
     function IntializeEvents() {
@@ -326,7 +327,7 @@ var PurTrReturn;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -783,7 +784,7 @@ var PurTrReturn;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetAllReturnPurReceiveStaistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -815,6 +816,7 @@ var PurTrReturn;
         clear();
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(divMasterGrid.SelectedKey); });
         receiveID = Number(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
@@ -1684,7 +1686,11 @@ var PurTrReturn;
         MasterDetailModel.I_Pur_TR_Receive = InvoiceModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurTrReturn;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         InvoiceModel.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -2001,6 +2007,7 @@ var PurTrReturn;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2017,6 +2024,7 @@ var PurTrReturn;
         rp.Name_function = "IProc_Prnt_PurReceiveRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
     function btnPrintsFrom_To_onclick() {
