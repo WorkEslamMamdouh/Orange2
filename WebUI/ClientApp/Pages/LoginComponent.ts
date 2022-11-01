@@ -227,6 +227,38 @@ var LoginComponent;
             }
         });
     }
+
+
+    function ShowMessg(CompanyStatus: I_VW_GetCompStatus) {
+
+        var MembeshipEndDate = CompanyStatus.MembeshipEndDate;
+        var status = CompanyStatus.CompStatus;
+        var masg = CompanyStatus.LoginMsg;
+        var MembershipAllanceDays = CompanyStatus.MembershipAllanceDays;
+        let dateExport_1 = addDaysOrMonth(MembeshipEndDate, MembershipAllanceDays, 0)
+        let Day_1 = daysDifference(GetDate(), DateFormat(dateExport_1));
+
+        var MembershipreadOnlyDays = CompanyStatus.MembershipreadOnlyDays;
+        let AllDays = (MembershipAllanceDays + MembershipreadOnlyDays);
+        let dateExport = addDaysOrMonth(MembeshipEndDate, AllDays, 0)
+        let NumDay = daysDifference(GetDate(), DateFormat(dateExport));
+
+        if (status == 0 || status == 1 || status == 2) {
+            debugger
+            if (status == 1) {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم", "");
+            }
+            else if (status == 2) {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم", "");
+            }
+            else {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");
+            }
+
+        }
+
+    }
+
     function GoToCompanySelect() {
         $("#tblLogin").css("display", "none");
         $("#tblCompany").css("display", "block");
@@ -248,11 +280,11 @@ var LoginComponent;
                             var CompanyStatus = res.Response as I_VW_GetCompStatus;
                             var status = CompanyStatus.CompStatus;
                             var masg = CompanyStatus.LoginMsg;
+
+                            ShowMessg(CompanyStatus);
+
                             if (status == 0 || status == 1 || status == 2) {
-                                //if (status == 1 || status == 2) {
-                                MessageBox.Show(CompanyStatus.LoginMsg, "");
-                                // Get i_control 
-                                // Get G_Branch 
+                            
                                 setTimeout(function () {
                                 $.ajax({
                                     type: "GET",

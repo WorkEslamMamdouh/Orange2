@@ -380,6 +380,9 @@ var I_VW_GetCompStatus = /** @class */ (function (_super) {
         _this.ProfitAcc_Code = "";
         _this.OpenAccVoucheNo = 0;
         _this.OpenInvAdjNo = 0;
+        _this.MembershipAllanceDays = 0;
+        _this.MembershipreadOnlyDays = 0;
+        _this.MembeshipEndDate = "";
         return _this;
     }
     return I_VW_GetCompStatus;

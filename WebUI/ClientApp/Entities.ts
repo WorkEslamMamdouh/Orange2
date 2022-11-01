@@ -646,6 +646,10 @@ class I_VW_GetCompStatus extends SecurityClass {
         this.ProfitAcc_Code = "";
         this.OpenAccVoucheNo = 0;
         this.OpenInvAdjNo = 0;
+        this.MembershipAllanceDays = 0;
+        this.MembershipreadOnlyDays = 0;
+        this.MembeshipEndDate = "";
+
     }
     public CompCode: number;
     public AddAble: boolean;
@@ -660,6 +664,9 @@ class I_VW_GetCompStatus extends SecurityClass {
     public ProfitAcc_Code: string;
     public OpenAccVoucheNo: number;
     public OpenInvAdjNo: number;
+    public MembershipAllanceDays: number;
+    public MembershipreadOnlyDays: number;
+    public MembeshipEndDate: string;
 }
 
 

@@ -1542,6 +1542,17 @@ function convertToG(date) {
 //    } catch (e) {
 //    }
 //}
+function daysDifference(dateI1, dateI2) {
+    debugger;
+    //define two date object variables to store the date values
+    var date1 = new Date(dateI1);
+    var date2 = new Date(dateI2);
+    //calculate time difference
+    var time_difference = date2.getTime() - date1.getTime();
+    //calculate days difference by dividing total milliseconds in a day
+    var result = time_difference / (1000 * 60 * 60 * 24);
+    return parseInt(result.toString());
+}
 function addDaysOrMonth(date, days, Month) {
     var result = new Date(date);
     days != 0 ? result.setDate(result.getDate() + days) : days = 0;
