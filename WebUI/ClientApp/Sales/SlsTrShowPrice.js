@@ -1420,6 +1420,7 @@ var SlsTrShowPrice;
     }
     function _SearchBox_Change() {
         //  k////////debugger;
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.CustomerName.toLowerCase().search(search_1) >= 0

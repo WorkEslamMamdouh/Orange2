@@ -773,6 +773,7 @@ var AccTrCustomerAdjust;
     }
     function _SearchBox_Change() {
         //  k//;
+        $("#ReportGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = Details.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Adj_DescA.toLowerCase().search(search_1) >= 0 || x.Adj_DescE.toLowerCase().search(search_1) >= 0 || x.cus_NameA.toLowerCase().search(search_1) >= 0 || x.Cus_NameE.toLowerCase().search(search_1) >= 0 || x.CustomerCODE.toLowerCase().search(search_1) >= 0; }); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/

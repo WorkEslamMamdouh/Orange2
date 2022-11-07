@@ -1140,6 +1140,8 @@ namespace SlsTrSalesReturnNew {
         });
     }
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
 
         if (searchbutmemreport.value != "") {
             //debugger

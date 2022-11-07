@@ -274,6 +274,10 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
     }
     function txtSearch_Change() {
+
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
+
+
         if (txtSearch.value != "") {
 
             let search: string = txtSearch.value.toLowerCase();

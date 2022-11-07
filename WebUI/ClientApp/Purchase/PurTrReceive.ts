@@ -826,6 +826,7 @@ namespace PurTrReceive {
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
 
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();

@@ -251,6 +251,7 @@ var ServPurInvoice;
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
     }
     function txtSearch_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             searchDetails = AQ_ServPurInvoiceMasterDetailModel.filter(function (x) { return x.TR_NO.toString().search(search_1) >= 0 || x.DocNo.toLowerCase().search(search_1) >= 0

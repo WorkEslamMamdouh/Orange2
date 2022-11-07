@@ -702,6 +702,7 @@ var AccTrReceiptNote;
         else {
             Display();
         }
+        $("#Div_control").addClass("display_none");
     }
     function btnback_onclick() {
         IsEdite = false;

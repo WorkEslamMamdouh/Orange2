@@ -815,7 +815,8 @@ var STKAdjust;
         $(".Cost").show();
     }
     function txtSearch_onKeyup() {
-        BindGridData();
+        //BindGridData();
+        $("#divGridDetails_View").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             SearchDetails = IQ_GetStkAdjustDetailModel.filter(function (x) { return x.Tr_No.toString().toLowerCase().search(search_1) >= 0 || x.St_DEscA.toLowerCase().search(search_1) >= 0

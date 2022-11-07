@@ -1711,6 +1711,7 @@ namespace SlsTrShowPrice {
     }
     function _SearchBox_Change() {
         //  k////////debugger;
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
 
         if (searchbutmemreport.value != "") {
 

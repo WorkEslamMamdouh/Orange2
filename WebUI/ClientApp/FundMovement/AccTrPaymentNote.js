@@ -730,6 +730,7 @@ var AccTrPaymentNote;
         else {
             Display();
         }
+        $("#Div_control").addClass("display_none");
     }
     function AddDisabled() {
         ////// 

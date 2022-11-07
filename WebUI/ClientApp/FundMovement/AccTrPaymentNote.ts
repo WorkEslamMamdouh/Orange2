@@ -875,7 +875,7 @@ namespace AccTrPaymentNote {
             Display();
         }
 
-
+        $("#Div_control").addClass("display_none");
 
 
     }

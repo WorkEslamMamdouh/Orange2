@@ -559,7 +559,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!NAMEA.Value="","عميل نقدي عام",Fields!NAMEA.Value)</Value>
+                <Value>=First(Fields!Cash_customerName.Value, "Rpt_Prnt_SlsInvoiceSimpleArComp6")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -2120,7 +2120,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Source>Embedded</Source>
           <Value>Comp6F</Value>
           <Sizing>Fit</Sizing>
-          <Top>0cm</Top>
           <Height>2.62772cm</Height>
           <Width>19.97661cm</Width>
           <Style>

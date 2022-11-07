@@ -713,6 +713,7 @@ var PurTrReceive;
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = GetPurReceiveStaisticData.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0

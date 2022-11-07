@@ -931,6 +931,7 @@ namespace AccTrVendorAdjust {
 
     function _SearchBox_Change() {
         //  k//;
+        $("#ReportGrid").jsGrid("option", "pageIndex", 1);
 
         if (searchbutmemreport.value != "") {
 

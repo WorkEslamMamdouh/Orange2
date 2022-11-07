@@ -833,6 +833,8 @@ namespace CloseProcesses {
 
     function _SearchBox_Change() {
 
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
+
         if (searchbutmemreport.value != "") {
 
 

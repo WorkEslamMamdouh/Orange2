@@ -760,6 +760,8 @@ namespace DirectTransfer {
 
     }
     function txtSearch_onKeyup() {
+        $("#divGridDetails_View").jsGrid("option", "pageIndex", 1);
+
         if (txtSearch.value != "") {
             let search: string = txtSearch.value.toLowerCase();
             SearchDetails = IQ_DirectTransferDetail.filter(x => x.RBr_DescA.toString().toLowerCase().search(search) >= 0 || x.RBr_DescE.toString().toLowerCase().search(search) >= 0
