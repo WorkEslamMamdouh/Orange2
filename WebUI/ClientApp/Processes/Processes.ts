@@ -807,9 +807,12 @@ namespace Processes {
 
     function _SearchBox_Change() {
 
+         
+
         if (searchbutmemreport.value != "") {
 
 
+            $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
 
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = Get_IQ_GetOperation.filter(x => x.TrNo.toString().search(search) >= 0 || x.TruckNo.toLowerCase().search(search) >= 0 || x.nvd_DescA.toLowerCase().search(search) >= 0 || x.PortName.toLowerCase().search(search) >= 0);

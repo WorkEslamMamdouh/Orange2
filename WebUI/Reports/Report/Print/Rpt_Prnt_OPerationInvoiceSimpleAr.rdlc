@@ -523,7 +523,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!NAMEA.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</Value>
+                <Value>=First(Fields!Cash_customerName.Value, "Rpt_Prnt_OPerationInvoiceSimpleAr")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1215,7 +1215,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

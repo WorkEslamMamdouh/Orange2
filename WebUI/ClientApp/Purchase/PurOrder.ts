@@ -540,6 +540,8 @@ namespace PurOrder {
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
+
         if (txtSearchBox.value != "") {
 
             let search: string = txtSearchBox.value.toLowerCase();

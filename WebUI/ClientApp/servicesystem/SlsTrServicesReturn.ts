@@ -1226,6 +1226,9 @@ namespace SlsTrServicesReturn {
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+         
         if (searchbutmemreport.value != "") {
 
             let search: string = searchbutmemreport.value.toLowerCase();

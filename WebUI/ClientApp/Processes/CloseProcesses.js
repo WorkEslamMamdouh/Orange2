@@ -708,6 +708,7 @@ var CloseProcesses;
         });
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = Get_IQ_GetOperation.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.TruckNo.toLowerCase().search(search_1) >= 0 || x.nvd_DescA.toLowerCase().search(search_1) >= 0 || x.PortName.toLowerCase().search(search_1) >= 0; });
@@ -1738,7 +1739,6 @@ var CloseProcesses;
                     return txt;
                 }
             },
-            //{ title: res.Remaining_quantity, name: "OnhandQty", type: "text", width: "22%" },
         ];
     }
     function check_OnhandQty(id_Num) {

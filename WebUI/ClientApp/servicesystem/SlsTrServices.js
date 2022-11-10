@@ -1243,6 +1243,7 @@ var SlsTrServices;
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = AQ_ServSlsInvoiceDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Cus_NameA.toLowerCase().search(search_1) >= 0

@@ -272,12 +272,8 @@ var AccTrCustomerAdjust;
         }
     }
     function txt_Amount_onchange() {
-        if (txt_Type_of_tax.value == "Null") {
-            txt_Type_of_tax.value = "0";
-        }
-        if (txt_Amount.value == null) {
-            txt_Amount.value = "0";
-        }
+        //if (txt_Type_of_tax.value == "Null") { txt_Type_of_tax.value = "0"; }
+        //if (txt_Amount.value == null) { txt_Amount.value = "0"; }
         txt_The_tax_amount.value = ((Number(txt_Amount.value) * Number($('option:selected', $("#txt_Type_of_tax")).attr('Date_VatPerc'))) / 100).toString();
         txt_Total_after_tax.value = (Number(txt_The_tax_amount.value) + Number(txt_Amount.value)).toString();
     }
@@ -777,6 +773,7 @@ var AccTrCustomerAdjust;
     }
     function _SearchBox_Change() {
         //  k//;
+        $("#ReportGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = Details.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Adj_DescA.toLowerCase().search(search_1) >= 0 || x.Adj_DescE.toLowerCase().search(search_1) >= 0 || x.cus_NameA.toLowerCase().search(search_1) >= 0 || x.Cus_NameE.toLowerCase().search(search_1) >= 0 || x.CustomerCODE.toLowerCase().search(search_1) >= 0; }); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/

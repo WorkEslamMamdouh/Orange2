@@ -440,8 +440,8 @@ namespace SlsTrSalesReturnNew {
                         $('#txtCustomerName').prop("value", customerName);
                     }
                     else {
-                        var customerName = InvoiceStatisticsModel[0].CustomerName.toString();
-                        $('#txtCustomerName').prop("value", customerName);
+                        
+                        $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
                     }
 
                     if (InvoiceStatisticsModel[0].Status == 1) {
@@ -1140,6 +1140,8 @@ namespace SlsTrSalesReturnNew {
         });
     }
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
 
         if (searchbutmemreport.value != "") {
             //debugger
@@ -1323,7 +1325,7 @@ namespace SlsTrSalesReturnNew {
                 var custId = InvoiceStatisticsModel[0].CustomerId.toString();
                 ddlInvoiceCustomer.value = custId;
             } else {
-                $('#txtCustomerName').prop("value", InvoiceStatisticsModel[0].CustomerName.toString());
+                $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
             }
 
             if (InvoiceStatisticsModel[0].IsCash == true) {

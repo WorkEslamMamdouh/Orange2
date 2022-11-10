@@ -10,6 +10,7 @@ using System.Web.Http;
 using Inv.BLL.Services.CompStatus;
 using Inv.BLL.Services.G_Control;
 using Inv.API.Models.CustomModel;
+using Inv.BLL.Services.IControl;
 
 namespace Inv.API.Controllers
 {
@@ -17,12 +18,15 @@ namespace Inv.API.Controllers
     {
         private readonly II_VW_GetCompStatusService GetCompStatusService;
         private readonly IG_ControlService G_ControlService;
-        
-        public I_VW_GetCompStatusController(II_VW_GetCompStatusService _CompStatusService , IG_ControlService _G_ControlService)
+        private readonly II_ControlService I_ControlService;
+
+
+        public I_VW_GetCompStatusController(II_VW_GetCompStatusService _CompStatusService, IG_ControlService _G_ControlService, II_ControlService _I_ControlService)
         {
             this.GetCompStatusService = _CompStatusService;
             this.G_ControlService = _G_ControlService;
-            
+            this.I_ControlService = _I_ControlService;
+
         }
 
         [HttpGet, AllowAnonymous]
@@ -52,16 +56,20 @@ namespace Inv.API.Controllers
                 ctr.AddAble = Control.AddAble;
                 ctr.Editable = Control.Editable;
                 var gc = G_ControlService.GetAll(x => x.COMP_CODE == Compcode && x.FIN_YEAR == yr);
+                var Ic = I_ControlService.GetAll(x => x.CompCode == Compcode);
                 if (gc.Count > 0)
                 {
- 
-                    ctr.ACC_STATUS = gc[0].ACC_STATUS; 
-                    ctr.INV_STATUS = gc[0].INV_STATUS; 
-                    ctr.LastDate = gc[0].LastDate; 
-                    ctr.FirstDate = gc[0].FirstDate; 
-                    ctr.OpenAccVoucheNo = gc[0].OpenAccVoucheNo; 
-                    ctr.OpenInvAdjNo = gc[0].OpenInvAdjNo; 
-                    ctr.ProfitAcc_Code = gc[0].ProfitAcc_Code; 
+
+                    ctr.ACC_STATUS = gc[0].ACC_STATUS;
+                    ctr.INV_STATUS = gc[0].INV_STATUS;
+                    ctr.LastDate = gc[0].LastDate;
+                    ctr.FirstDate = gc[0].FirstDate;
+                    ctr.OpenAccVoucheNo = gc[0].OpenAccVoucheNo;
+                    ctr.OpenInvAdjNo = gc[0].OpenInvAdjNo;
+                    ctr.ProfitAcc_Code = gc[0].ProfitAcc_Code;
+                    ctr.MembeshipEndDate = Ic[0].MembeshipEndDate;
+                    ctr.MembershipAllanceDays = Ic[0].MembershipAllanceDays;
+                    ctr.MembershipreadOnlyDays = Ic[0].MembershipreadOnlyDays;
                 }
                 else
                 {

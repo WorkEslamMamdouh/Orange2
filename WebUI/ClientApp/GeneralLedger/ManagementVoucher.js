@@ -409,6 +409,7 @@ var ManagementVoucher;
     }
     //------------------------------------------------------ Clear && Search && Enable && Disabled Region -----------------------------------     
     function txtSearch_onKeyup() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             searchDetails = AQJournalHeaderDetails.filter(function (x) { return x.VOUCHER_CODE.toString().search(search_1) >= 0 || x.Src_DescA.toLowerCase().search(search_1) >= 0

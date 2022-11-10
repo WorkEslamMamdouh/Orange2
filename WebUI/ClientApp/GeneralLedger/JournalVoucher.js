@@ -830,6 +830,7 @@ var JournalVoucher;
     }
     function txtSearch_onKeyup() {
         //BindGridData();
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             SearchDetails = AQJournalHeaderWithDetails.filter(function (x) { return x.VOUCHER_CODE.toString().toLowerCase().search(search_1) >= 0 || x.VOUCHER_DESC.toLowerCase().search(search_1) >= 0 || x.SOURCE_TYPE.toLowerCase().search(search_1) >= 0

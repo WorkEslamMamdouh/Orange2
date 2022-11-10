@@ -1338,7 +1338,6 @@
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_SlsReturnSimpleAr</DataSetName>
         <Top>3.91829cm</Top>
-        <Left>0cm</Left>
         <Height>1.54396cm</Height>
         <Width>19.96931cm</Width>
         <ZIndex>13</ZIndex>
@@ -1390,7 +1389,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!NAMEA.Value="","عميل نقدي عام",Fields!NAMEA.Value)</Value>
+                <Value>=First(Fields!Cash_customerName.Value, "Rpt_Prnt_SlsReturnSimpleAr")</Value>
                 <Style />
               </TextRun>
             </TextRuns>

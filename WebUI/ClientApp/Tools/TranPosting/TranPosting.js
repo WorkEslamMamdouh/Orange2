@@ -335,7 +335,7 @@ var TranPosting;
     function btnSelectAll_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === false) {
-                return __assign(__assign({}, object), { IsSelected: true });
+                return __assign({}, object, { IsSelected: true });
             }
             return object;
         });
@@ -348,10 +348,10 @@ var TranPosting;
     function btnReverseSelection_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === false) {
-                return __assign(__assign({}, object), { IsSelected: true });
+                return __assign({}, object, { IsSelected: true });
             }
             else {
-                return __assign(__assign({}, object), { IsSelected: false });
+                return __assign({}, object, { IsSelected: false });
             }
         });
         btnCreateVoucher.disabled = true;
@@ -363,7 +363,7 @@ var TranPosting;
     function btnUnSelectAll_onclick() {
         var newArr = LnkTransDetails.map(function (object) {
             if (object.IsSelected === true) {
-                return __assign(__assign({}, object), { IsSelected: false });
+                return __assign({}, object, { IsSelected: false });
             }
             return object;
         });
@@ -407,7 +407,6 @@ var TranPosting;
                 Errorinput(txtToDate);
                 return;
             }
-            alert(txtDesc.value);
             var Desc = txtDesc.value;
             var VoucherDate = DateFormatRep(txtVoucherDate.value);
             var lstTrans = JSON.stringify(LnkTransDetails);
@@ -415,7 +414,7 @@ var TranPosting;
                 type: "Get",
                 url: sys.apiUrl("TranPosting", "GenerateVoucher"),
                 data: {
-                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
                 },
                 success: function (d) {
                     var result = d;
@@ -609,7 +608,7 @@ var TranPosting;
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetAllTransactions"),
             data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.TranPosting, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
@@ -708,7 +707,7 @@ var TranPosting;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetTransactions"),
-            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token /*, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear */ },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {

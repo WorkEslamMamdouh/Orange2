@@ -625,15 +625,15 @@ namespace AccTrPaymentNote {
 
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
-        } else {
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
 
             DisplayAddStkGCodes();
-            IsNew = true;
+         
             EnableControls();
             removedisabled();
             ///////////////////////////donia
@@ -663,7 +663,9 @@ namespace AccTrPaymentNote {
             $('#txt_BankAcc_Code').val('null');
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
-        }
+        //}
+
+        IsNew = true;
 
     }
 
@@ -873,7 +875,7 @@ namespace AccTrPaymentNote {
             Display();
         }
 
-
+        $("#Div_control").addClass("display_none");
 
 
     }
@@ -1026,6 +1028,7 @@ namespace AccTrPaymentNote {
 
         txtCashTypeNew_onchange();
 
+        IsNew = false;
     }
 
     function Display_GCodes() {
@@ -1275,7 +1278,7 @@ namespace AccTrPaymentNote {
 
 
             let search: string = searchbutmemreport.value.toLowerCase();
-            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 || x.Bef_DescE.toLowerCase().search(search) >= 0); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
+            SearchDetails = Details.filter(x => x.TrNo.toString().search(search) >= 0 || x.Bef_DescA.toLowerCase().search(search) >= 0 ); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
             //    || x.CustomerCODE.toString().search(search) >= 0 /* || x.CreditLimit.toString().search(search) >= 0 || x.Emp_NameA.toString().search(search) >= 0
             //    || x.ContactMobile.toString().search(search) >= 0 /*|| x.DueAmount.toString().search(search) >= 0 *//*|| x.DaysDiff.toString().search(search) >= 0*/);
 
@@ -1434,6 +1437,9 @@ namespace AccTrPaymentNote {
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
             Model.IsDeffered = chkIsDeffered.checked;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
+            Model.VoucherNo = 0; 
             debugger
             Model.CashAmount = Number(txt_CashAmount.value);
             Model.CardAmount = Number(txt_CardAmount.value);
@@ -1536,6 +1542,8 @@ namespace AccTrPaymentNote {
         debugger
         AddDisabled();
         Update_claenData = 1;
+      
+        ReportGrid.SelectedKey = ReceiptID; 
         Selecteditem = Details.filter(x => x.ReceiptID == Number(ReceiptID));
         debugger
         DisplayAddStkGCodes();
@@ -1562,7 +1570,7 @@ namespace AccTrPaymentNote {
         }
         $("#Div_control").removeClass("display_none");
 
-
+        IsNew = false; 
 
     } 
 

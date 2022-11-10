@@ -1083,7 +1083,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!NAMEA.Value="","عميل نقدي عام",Fields!NAMEA.Value)</Value>
+                <Value>=First(Fields!Cash_customerName.Value, "Rpt_Prnt_SlsReturnSimpleComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>

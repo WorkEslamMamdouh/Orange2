@@ -1545,6 +1545,10 @@ namespace SlsTrServices {
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = AQ_ServSlsInvoiceDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.Cus_NameA.toLowerCase().search(search) >= 0

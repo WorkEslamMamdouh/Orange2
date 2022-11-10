@@ -461,8 +461,7 @@ namespace TranPosting {
 				Errorinput(txtToDate);
 				return
             }
-
-            alert(txtDesc.value)
+             
 
 			var Desc: string = txtDesc.value;
 			var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
@@ -470,9 +469,9 @@ namespace TranPosting {
 			Ajax.Callsync({
 				type: "Get",
 				url: sys.apiUrl("TranPosting", "GenerateVoucher"),
-				data: {
-					comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-				},
+                data: {
+                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
+                },//(int comp, int branch, string Desc,string VoucherDate, string UserCode, string Token, string sec_FinYear, string MODULE_CODE)
 				success: (d) => {
 					let result = d as BaseResponse;
 					if (result.IsSuccess) {
@@ -702,10 +701,10 @@ namespace TranPosting {
 		Ajax.Callsync({
 			type: "Get",
 			url: sys.apiUrl("TranPosting", "GetAllTransactions"),
-			data: {
-                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.TranPosting, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
                                     
-
+            
 
 			},
 			success: (d) => {
@@ -806,7 +805,7 @@ namespace TranPosting {
 		Ajax.Callsync({
 			type: "Get",
 			url: sys.apiUrl("TranPosting", "GetTransactions"),
-            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear },
+            data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token/*, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear */},
 			success: (d) => {
 				let result = d as BaseResponse;
 				if (result.IsSuccess) {

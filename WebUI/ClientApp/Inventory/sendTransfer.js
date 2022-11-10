@@ -678,6 +678,7 @@ var sendTransfer;
         chkApproved.checked = false;
     }
     function txtSearch_onKeyup() {
+        $("#divGridDetails_View").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             SearchDetails = IQ_DirectTransferDetail.filter(function (x) { return x.RBr_DescA.toString().toLowerCase().search(search_1) >= 0 || x.RBr_DescE.toString().toLowerCase().search(search_1) >= 0

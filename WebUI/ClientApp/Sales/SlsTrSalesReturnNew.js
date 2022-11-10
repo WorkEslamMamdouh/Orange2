@@ -368,8 +368,7 @@ var SlsTrSalesReturnNew;
                         $('#txtCustomerName').prop("value", customerName);
                     }
                     else {
-                        var customerName = InvoiceStatisticsModel[0].CustomerName.toString();
-                        $('#txtCustomerName').prop("value", customerName);
+                        $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
                     }
                     if (InvoiceStatisticsModel[0].Status == 1) {
                         chkActive.checked = true;
@@ -980,6 +979,7 @@ var SlsTrSalesReturnNew;
         });
     }
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             //debugger
             var search_1 = searchbutmemreport.value.toLowerCase();
@@ -1146,7 +1146,7 @@ var SlsTrSalesReturnNew;
                 ddlInvoiceCustomer.value = custId;
             }
             else {
-                $('#txtCustomerName').prop("value", InvoiceStatisticsModel[0].CustomerName.toString());
+                $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
             }
             if (InvoiceStatisticsModel[0].IsCash == true) {
                 $('#ddlReturnTypeShow').prop("value", "1");

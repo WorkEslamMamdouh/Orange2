@@ -25,10 +25,12 @@
 
 
     $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
-
+    //$('.iconbar-container').addClass('hidden_Control');
     setTimeout(function () {
 
         $('#Loading_Div').html('');
+        $('.iconbar-container').removeClass('hidden_Control');
+        $('.iconbar-container').attr('style','');
     }, 150);
 
 

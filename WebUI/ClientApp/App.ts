@@ -119,8 +119,8 @@ var TransType = {
     InvoiceOperationReturn: 'Pro_Ret',
     Pur_Receive: 'Pur',
     Pur_Receive_Return: 'Pur_Ret',
-    AccReceive: 'AccReceive', 
-    AccPayment: 'AccPayment', 
+    AccReceive: 'AccReceive',
+    AccPayment: 'AccPayment',
 }
 
 
@@ -1893,6 +1893,22 @@ function convertToG(date: string) {
 
 //}
 
+function daysDifference(dateI1, dateI2) {
+    debugger
+    //define two date object variables to store the date values
+    var date1 = new Date(dateI1);
+    var date2 = new Date(dateI2);
+
+    //calculate time difference
+    var time_difference = date2.getTime() - date1.getTime();
+
+    //calculate days difference by dividing total milliseconds in a day
+    var result = time_difference / (1000 * 60 * 60 * 24);
+
+
+    return parseInt(result.toString());
+}
+
 function addDaysOrMonth(date, days, Month) {
 
     var result = new Date(date);
@@ -2352,7 +2368,7 @@ function CheckTime() {
         outUesr += 1;
         if (outUesr == 2) {
             localStorage.setItem("OutUesr", "1");
-            window.open(Url.Action("HomePage", "Login"), "_self"); 
+            window.open(Url.Action("HomePage", "Login"), "_self");
         }
 
         return
@@ -2441,7 +2457,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
-       
+
             //alert(result);
             //debugger
             //window.open(result, "blank");
@@ -2449,7 +2465,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             let x = Url.Action("OpenPdf", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
-          
+
 
             window.open(UrlPdf, "blank");
 
@@ -2469,7 +2485,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
-        type: "GET", 
+        type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
         success: (response) => {
@@ -2480,39 +2496,39 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 }
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
     debugger
-    var sys: SystemTools = new SystemTools(); 
+    var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "PrintliestLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
         success: (response) => {
- 
+
         }
-    }); 
+    });
 }
 function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
     debugger
-    var sys: SystemTools = new SystemTools(); 
+    var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLogOperation"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, ExtraData: ExtraData },
         success: (response) => {
-             
+
         }
-    }); 
+    });
 }
 function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
     debugger
-    var sys: SystemTools = new SystemTools(); 
+    var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "OpenScreenLog"),
         data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
         success: (response) => {
-             
+
         }
-    }); 
+    });
 }
 function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
 
@@ -2524,5 +2540,6 @@ function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, 
         success: (response) => {
 
         }
-    }); 
+    });
 }
+

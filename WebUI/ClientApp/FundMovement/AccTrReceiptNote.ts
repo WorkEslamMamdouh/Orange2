@@ -282,6 +282,7 @@ namespace AccTrReceiptNote {
         txt_CardAmount.onchange = Amount_onchange;
 
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
+         
 
     }
 
@@ -589,12 +590,12 @@ namespace AccTrReceiptNote {
 
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
-        } else {
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
 
             $("#Div_control").removeClass("display_none");
             DisplayAddStkGCodes();
@@ -633,7 +634,9 @@ namespace AccTrReceiptNote {
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
 
-        }
+        //}
+        IsNew = true;
+
     }
 
     function btnsave_onClick() {
@@ -861,6 +864,9 @@ namespace AccTrReceiptNote {
         else {
             Display();
         }
+
+        $("#Div_control").addClass("display_none");
+
     }
 
     function btnback_onclick() {
@@ -939,6 +945,10 @@ namespace AccTrReceiptNote {
 
 
         Amount_onchange();
+
+        IsNew = false;
+
+
     }
 
     function DisplayData(Selecteditem: Array<IQ_GetBoxReceiveList>) {
@@ -1329,6 +1339,11 @@ namespace AccTrReceiptNote {
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
             Model.BankName = $('#txt_BankName').val();
 
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model);//Insert Update
@@ -1367,7 +1382,8 @@ namespace AccTrReceiptNote {
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
 
-            Model.TrNo = Reciept_TrNo;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
             Model.VoucherNo = 0;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
@@ -1392,7 +1408,7 @@ namespace AccTrReceiptNote {
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
             return
         }
-
+        console.log(Model);
         Ajax.Callsync({
             type: "POST",
 
@@ -1453,6 +1469,7 @@ namespace AccTrReceiptNote {
     function IsSuccess() {
         IsNew = false;
         AddDisabled();
+        ReportGrid.SelectedKey = ReceiptID.toString(); 
         Selecteditem = Details.filter(x => x.ReceiptID == Number(ReceiptID));
         Update_claenData = 1;
         DisplayAddStkGCodes();
@@ -1489,6 +1506,7 @@ namespace AccTrReceiptNote {
         $("#Div_control").removeClass("display_none");
 
 
+        IsNew = false;
 
     }
 

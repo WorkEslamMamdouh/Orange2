@@ -491,6 +491,10 @@ namespace ManagementVoucher {
     }
     //------------------------------------------------------ Clear && Search && Enable && Disabled Region -----------------------------------     
     function txtSearch_onKeyup() {
+
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+
         if (txtSearch.value != "") {
             let search: string = txtSearch.value.toLowerCase();
             searchDetails = AQJournalHeaderDetails.filter(x => x.VOUCHER_CODE.toString().search(search) >= 0 || x.Src_DescA.toLowerCase().search(search) >= 0

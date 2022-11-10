@@ -736,7 +736,11 @@ namespace PurTrReceive {
 
         PurOrderShowFlag = false;
         ShowFlag = false;
+        ddlReciveTypeHeader.selectedIndex = 1;
 
+        if (compcode == 4) {
+            ddlSalesmanHeader.value ='21'
+        }
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
@@ -822,6 +826,7 @@ namespace PurTrReceive {
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
 
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();
@@ -1658,14 +1663,20 @@ namespace PurTrReceive {
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
             let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
 
+            ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
+
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-
+                debugger
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
                 //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
 
                 $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
+
+                ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>(); 
+                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+
 
                 let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
 

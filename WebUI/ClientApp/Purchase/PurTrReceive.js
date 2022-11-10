@@ -635,6 +635,10 @@ var PurTrReceive;
         txtPurOrderNum.disabled = false;
         PurOrderShowFlag = false;
         ShowFlag = false;
+        ddlReciveTypeHeader.selectedIndex = 1;
+        if (compcode == 4) {
+            ddlSalesmanHeader.value = '21';
+        }
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -709,6 +713,7 @@ var PurTrReceive;
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = GetPurReceiveStaisticData.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0
@@ -1356,11 +1361,15 @@ var PurTrReceive;
             var storeId = Number(ddlStoreHeader.value); //and OnhandQty > 0
             var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
             var qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
+            ItemBaesdFamilyDetails = new Array();
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, function () {
                 var id = SearchGrid.SearchDataGrid.SelectedKey;
+                debugger;
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
                 //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
                 $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
+                ItemBaesdFamilyDetails = new Array();
+                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
                 var searchItemID = ItemBaesdFamilyDetails[0].ItemID;
                 FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
                 $('#ddlItem' + cnt).empty();

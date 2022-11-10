@@ -478,28 +478,28 @@
         $(document).ready(function () {
             // Initialize select2
             $("#ddlVendorMaster").select2();
-            $("#ddlSalesmanMaster").select2();
-            $("#ddlSalesmanHeader").select2();
-            $("#ddlCashBoxH").select2();
+            //$("#ddlSalesmanMaster").select2();
+            //$("#ddlSalesmanHeader").select2();
+            //$("#ddlCashBoxH").select2();
          
 
 
             // Read selected option
             $('#but_read').click(function () {
-                var username = $('#ddlCashBox option:selected').text();
-                var userid = $('#ddlCashBox').val();
+                //var username = $('#ddlCashBox option:selected').text();
+                //var userid = $('#ddlCashBox').val();
 
-                var username = $('#ddlSalesman option:selected').text();
-                var userid = $('#ddlSalesman').val();
+                //var username = $('#ddlSalesman option:selected').text();
+                //var userid = $('#ddlSalesman').val();
 
-                var username = $('#ddlSeller option:selected').text();
-                var userid = $('#ddlSeller').val();
+                //var username = $('#ddlSeller option:selected').text();
+                //var userid = $('#ddlSeller').val();
 
-                var username = $('#ddlCustomer option:selected').text();
-                var userid = $('#ddlCustomer').val();
+                //var username = $('#ddlCustomer option:selected').text();
+                //var userid = $('#ddlCustomer').val();
 
-                var username = $('#ddlCustomer2 option:selected').text();
-                var userid = $('#ddlCustomer2').val();
+                //var username = $('#ddlCustomer2 option:selected').text();
+                //var userid = $('#ddlCustomer2').val();
                 $('#result').html("id : " + userid + ", name : " + username);
             });
         });

@@ -490,44 +490,44 @@ var AccTrReceiptNote;
     }
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning);
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
+        $("#Div_control").removeClass("display_none");
+        DisplayAddStkGCodes();
+        IsNew = true;
+        EnableControls();
+        removedisabled();
+        //txt_ID_beneficiaryNew.setAttribute("disabled", "disabled");
+        txt_BenCode.setAttribute("disabled", "disabled");
+        btnBen.setAttribute("disabled", "disabled");
+        $("#id_div_Add").addClass("disabledDiv");
+        if (txt_D_CashBox.value != "Null") {
+            $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value);
+            $("#txt_Receiving_Fund").attr("disabled", "disabled");
         }
-        else {
-            $("#Div_control").removeClass("display_none");
-            DisplayAddStkGCodes();
-            IsNew = true;
-            EnableControls();
-            removedisabled();
-            //txt_ID_beneficiaryNew.setAttribute("disabled", "disabled");
-            txt_BenCode.setAttribute("disabled", "disabled");
-            btnBen.setAttribute("disabled", "disabled");
-            $("#id_div_Add").addClass("disabledDiv");
-            if (txt_D_CashBox.value != "Null") {
-                $('#txt_Receiving_Fund').prop("value", txt_D_CashBox.value);
-                $("#txt_Receiving_Fund").attr("disabled", "disabled");
-            }
-            reference_Page();
-            chkActive.checked = false;
-            $('#btnPrintTransaction').addClass("display_none");
-            $('#Bank_Div').addClass('display_none');
-            $('.btn-group').addClass('display_none');
-            $('#La_CashAmount').removeClass('display_none');
-            $('#La_CardAmount').removeClass('display_none');
-            $('#txt_CashAmount').removeClass('display_none');
-            $('#txt_CardAmount').removeClass('display_none');
-            $('#txt_Amount').attr('disabled', 'disabled');
-            $('#txtDateNew').removeAttr('disabled');
-            $('#txt_Receiving_Fund').removeAttr('disabled');
-            $('#txt_CheckNo').val('');
-            $('#txt_TransferNo').val('');
-            $('#txt_BankAcc_Code').val('null');
-            chkIsDeffered.checked = false;
-            txtDueDate.value = GetDate();
-        }
+        reference_Page();
+        chkActive.checked = false;
+        $('#btnPrintTransaction').addClass("display_none");
+        $('#Bank_Div').addClass('display_none');
+        $('.btn-group').addClass('display_none');
+        $('#La_CashAmount').removeClass('display_none');
+        $('#La_CardAmount').removeClass('display_none');
+        $('#txt_CashAmount').removeClass('display_none');
+        $('#txt_CardAmount').removeClass('display_none');
+        $('#txt_Amount').attr('disabled', 'disabled');
+        $('#txtDateNew').removeAttr('disabled');
+        $('#txt_Receiving_Fund').removeAttr('disabled');
+        $('#txt_CheckNo').val('');
+        $('#txt_TransferNo').val('');
+        $('#txt_BankAcc_Code').val('null');
+        chkIsDeffered.checked = false;
+        txtDueDate.value = GetDate();
+        //}
+        IsNew = true;
     }
     function btnsave_onClick() {
         loading('btnSave');
@@ -702,6 +702,7 @@ var AccTrReceiptNote;
         else {
             Display();
         }
+        $("#Div_control").addClass("display_none");
     }
     function btnback_onclick() {
         IsEdite = false;
@@ -763,6 +764,7 @@ var AccTrReceiptNote;
         }
         $("#Div_control").removeClass("display_none");
         Amount_onchange();
+        IsNew = false;
     }
     function DisplayData(Selecteditem) {
         debugger;
@@ -1164,6 +1166,11 @@ var AccTrReceiptNote;
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
             Model.BankName = $('#txt_BankName').val();
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -1235,7 +1242,8 @@ var AccTrReceiptNote;
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
-            Model.TrNo = Reciept_TrNo;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
             Model.VoucherNo = 0;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
@@ -1254,6 +1262,7 @@ var AccTrReceiptNote;
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
             return;
         }
+        console.log(Model);
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccTrReceipt", "Insert"),
@@ -1312,6 +1321,7 @@ var AccTrReceiptNote;
     function IsSuccess() {
         IsNew = false;
         AddDisabled();
+        ReportGrid.SelectedKey = ReceiptID.toString();
         Selecteditem = Details.filter(function (x) { return x.ReceiptID == Number(ReceiptID); });
         Update_claenData = 1;
         DisplayAddStkGCodes();
@@ -1339,6 +1349,7 @@ var AccTrReceiptNote;
             btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         }
         $("#Div_control").removeClass("display_none");
+        IsNew = false;
     }
     function PrintReport(OutType) {
         // 
