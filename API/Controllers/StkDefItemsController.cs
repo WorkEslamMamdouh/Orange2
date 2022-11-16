@@ -196,21 +196,21 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetItem(int CompCode, int BraCode, int FinYear, string ItemCode, int StoreId, bool Show, string UserCode, string Token)
         { //CompCode: compcode, BraCode: BranchCode, FinYear: Finyear, ItemID: ItemID , StoreId: StoreId, Show: Show, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            
-                string SQL = "";
-                if (Show)
-                {
-                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + "";
-                }
-                else
-                {
-                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + " and IsActive =1 and ISSales = 1 ";
-                }
 
-                List<IQ_GetItemStoreInfo> ItemList = db.Database.SqlQuery<IQ_GetItemStoreInfo>(SQL).ToList();
+            string SQL = "";
+            if (Show)
+            {
+                SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + "";
+            }
+            else
+            {
+                SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + " and IsActive =1 and ISSales = 1 ";
+            }
 
-                return Ok(new BaseResponse(ItemList));
-           
+            List<IQ_GetItemStoreInfo> ItemList = db.Database.SqlQuery<IQ_GetItemStoreInfo>(SQL).ToList();
+
+            return Ok(new BaseResponse(ItemList));
+
         }
 
         [HttpGet, AllowAnonymous]
@@ -368,14 +368,14 @@ namespace Inv.API.Controllers
                     if (!Delet_Item)
                     {
                         dbTransaction.Commit();
- 
+
                         // Return in case if the db generate transaction number   res.ResponseData
                         return Ok(new BaseResponse(0));
                     }
                     if (AllSuccess)
                     {
                         dbTransaction.Commit();
- 
+
                         // Return in case if the db generate transaction number   res.ResponseData
                         return Ok(new BaseResponse(100));
                     }
@@ -408,6 +408,21 @@ namespace Inv.API.Controllers
 
 
         }
+
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetItemsControl(string FildItemID, string FildItemCode, string FildItm_Desc, string qury)
+        {
+
+            string SQL = "select " + FildItemID + " as ItemID, " + FildItemCode + " as ItemCode , " + FildItm_Desc + " as ItemDesc from " + qury + "";
+             
+            List<Custom_Items> ItemList = db.Database.SqlQuery<Custom_Items>(SQL).ToList();
+
+            return Ok(new BaseResponse(ItemList));
+
+        }
+
 
 
     }

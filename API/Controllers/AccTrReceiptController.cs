@@ -185,7 +185,9 @@ namespace Inv.API.Controllers
                 {
                     try
                     {
-                        var res = AccTrReceiptService.Update(obj);
+                        db.Database.ExecuteSqlCommand("update A_RecPay_Tr_ReceiptNote set [Status] = 0 where ReceiptID = "+ obj.ReceiptID+ "");
+                        var res = obj;
+                        //var res = AccTrReceiptService.Update(obj);
                         string Typ;
                         if (res.TrType == 1)
                             Typ = "BoxReceipt";

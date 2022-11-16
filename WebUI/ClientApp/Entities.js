@@ -1060,6 +1060,14 @@ var IQ_GetItemFamily = /** @class */ (function () {
     }
     return IQ_GetItemFamily;
 }());
+var Custom_Items = /** @class */ (function () {
+    function Custom_Items() {
+        this.ItemID = 0;
+        this.ItemCode = "";
+        this.ItemDesc = "";
+    }
+    return Custom_Items;
+}());
 var I_ItemStore = /** @class */ (function () {
     function I_ItemStore() {
         this.ItemStoreID = 0;

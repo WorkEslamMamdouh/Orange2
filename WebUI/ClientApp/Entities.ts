@@ -1849,6 +1849,19 @@ class IQ_GetItemFamily {
     public IsProduct: boolean;
     public IsPurchase: boolean;
 }
+             
+
+class Custom_Items {
+    constructor() {
+        this.ItemID = 0;
+        this.ItemCode = "";
+        this.ItemDesc = "";
+    
+    }
+    public ItemID: number;
+    public ItemCode: string;
+    public ItemDesc: string; 
+}
                    
 
 class I_ItemStore {
