@@ -2674,6 +2674,12 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankSummaryEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBoxSummaryEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingFiveAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingFiveEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingThreeAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingThreeEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorLedgerAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1185,7 +1185,7 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <DataSetName>Rpt_AccCustomerAgingAr</DataSetName>
+        <DataSetName>Rpt_AccVendorAgingAr</DataSetName>
         <Top>0.05556in</Top>
         <Height>0.75in</Height>
         <Width>10.59304in</Width>
@@ -1697,7 +1697,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_CatDSA.Value, "Rpt_AccCustomerAgingAr")</Value>
+                      <Value>=First(Fields!Par_CatDSA.Value, "Rpt_AccVendorAgingAr")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1751,7 +1751,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_GroupDSA.Value, "Rpt_AccCustomerAgingAr")</Value>
+                      <Value>=First(Fields!Par_GroupDSA.Value, "Rpt_AccVendorAgingAr")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1859,7 +1859,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_BalTypeDSA.Value, "Rpt_AccCustomerAgingAr")</Value>
+                      <Value>=First(Fields!Par_BalTypeDSA.Value, "Rpt_AccVendorAgingAr")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1913,7 +1913,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_CustDSA.Value, "Rpt_AccCustomerAgingAr")</Value>
+                      <Value>=First(Fields!Par_CustDSA.Value, "Rpt_AccVendorAgingAr")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
@@ -1967,7 +1967,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_Todate.Value, "Rpt_AccCustomerAgingAr")</Value>
+                      <Value>=First(Fields!Par_Todate.Value, "Rpt_AccVendorAgingAr")</Value>
                       <Style>
                         <Format>dd/MM/yyyy</Format>
                       </Style>
@@ -2205,7 +2205,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Rpt_AccCustomerAgingAr">
+    <DataSet Name="Rpt_AccVendorAgingAr">
       <Query>
         <DataSourceName>RSWebUIReportsForms</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -2375,7 +2375,7 @@
       <rd:DataSetInfo>
         <rd:DataSetName>RS.WebUI.Reports.Forms</rd:DataSetName>
         <rd:TableName>ReportsForm</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>Rpt_AccCustomerAging</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethod>Rpt_AccVendorAging</rd:ObjectDataSourceSelectMethod>
         <rd:ObjectDataSourceType>RS.WebUI.Reports.Forms.ReportsForm, Inv.WebUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>

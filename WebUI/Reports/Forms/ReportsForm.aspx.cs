@@ -5643,10 +5643,20 @@ namespace RS.WebUI.Reports.Forms
 
             int Agtype = int.Parse(RepPar.Agtype.ToString());
             SqlParameter spAgtype = new SqlParameter("@Agtype", Agtype);
-
-          
+             
+            if (Agtype == 1)
+            {
                 Rep = OpenReport("Rpt_AccCustomerAging");
-          
+            }
+            else if (Agtype == 3)
+            {
+                Rep = OpenReport("Rpt_AccCustomerAgingThree");
+            }
+            else
+            {
+                Rep = OpenReport("Rpt_AccCustomerAgingFive");
+            }
+
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
            ", @bra = '" + StandPar.spbra.Value + "'" +
@@ -5703,11 +5713,20 @@ namespace RS.WebUI.Reports.Forms
 
             int Agtype = int.Parse(RepPar.Agtype.ToString());
             SqlParameter spAgtype = new SqlParameter("@Agtype", Agtype);
+            if (Agtype == 1)
+            {
+                Rep = OpenReport("Rpt_AccVendorAging");
+            }
+            else if (Agtype == 3)
+            {
+                Rep = OpenReport("Rpt_AccVendorAgingThree");
 
+            }
+            else
+            {
 
-            Rep = OpenReport("Rpt_AccVendorAging");
-          
-
+                Rep = OpenReport("Rpt_AccVendorAgingFive");
+            }
             string _Query = "execute " + Rep.dataSource +
            " @comp = '" + StandPar.spComCode.Value + "'" +
            ", @bra = '" + StandPar.spbra.Value + "'" +
