@@ -75,6 +75,7 @@ namespace AgingVend {
         discharge();
         // DisplayAccDefVendor();      
 
+        $("#txtFromDate").val(GetDate());
 
     }
 

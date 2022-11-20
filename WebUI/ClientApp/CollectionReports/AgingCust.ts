@@ -72,6 +72,9 @@ namespace AgingCust {
         Display_SupplierGroup();
         discharge();
        // DisplayAccDefVendor();
+
+        $("#txtFromDate").val(GetDate());
+
     }     
     function InitalizeControls() {
 

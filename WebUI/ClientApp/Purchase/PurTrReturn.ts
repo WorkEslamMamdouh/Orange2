@@ -750,7 +750,7 @@ namespace PurTrReturn {
             $('#btnEdit').addClass("display_none");
 
             var items: number = Number(txtItemCount.value);
-            for (let i = 0; i < items; i++) {
+            for (let i = 0; i < CountGrid; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
 
                 $('.btn-number3' + i).removeAttr("disabled");
@@ -760,6 +760,7 @@ namespace PurTrReturn {
             $("#btnAddDetails").addClass("display_none");
             $("#txt_note").removeAttr("disabled");
 
+            $("#txtReturnQuantity0").focus();
         }
     } 
     //------------------------------------------------------ Normal Grid Region -----------------------------------
@@ -1046,7 +1047,7 @@ namespace PurTrReturn {
 		                </div>
 	                </td>
 	                <td>
-		                <div class="form-group ps-1">
+		                <div class="form-group counter-group ps-1">
 			                <input class="counter" type="number" data-id="number" id="txtReturnQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
 			                <div class="value-button decrease-button btn-number3${cnt}" data-id="decrease" id="btnminus1" data-type="minus" data-field="quant[3]">-</div>
 			                <div class="value-button increase-button btn-number3${cnt}" data-id="increase" id="btnplus3" data-type="plus" data-field="quant[3]">+</div>
@@ -1421,7 +1422,7 @@ namespace PurTrReturn {
             var txtQuantityValue = $("#txtReturnQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
 
-            if ($("#txtReturnQuantity" + cnt).val() == 0) {
+            if (Number($("#txtReturnQuantity" + cnt).val()) == 0) {
                 var total = 1 * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 var vatAmount = Number(total) * VatPrc / 100;
@@ -1551,12 +1552,12 @@ namespace PurTrReturn {
         });
         if (InvoiceFlag == true) {
             debugger 
-            $("#txt_StatusFlag" + cnt).val("i");
+            $("#txt_StatusFlag" + cnt).val("");
             let InvoiceSoldQty = SlsInvoiceItemsDetails[cnt].RecQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
             let total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].RecUnitPriceFC;
             let vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
             $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
-            $("#txtReturnQuantity" + cnt).prop("value", InvoiceSoldQty);
+            $("#txtReturnQuantity" + cnt).prop("value", '');
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
             $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
@@ -1835,6 +1836,10 @@ namespace PurTrReturn {
 
         if (txtInvoiceNumber.value.toString() == "") { InvoiceModel.RefTrID = null; }
         else { InvoiceModel.RefTrID = receiveID; }
+
+        if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
+            DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
+        }
 
         Ajax.Callsync({
             type: "POST",

@@ -714,7 +714,7 @@ var PurTrReturn;
             $("#btnPrint").addClass("display_none");
             $('#btnEdit').addClass("display_none");
             var items = Number(txtItemCount.value);
-            for (var i = 0; i < items; i++) {
+            for (var i = 0; i < CountGrid; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
                 $('.btn-number3' + i).removeAttr("disabled");
                 $('.input-number3' + i).removeAttr("disabled");
@@ -722,6 +722,7 @@ var PurTrReturn;
             $("#txtInvoiceDate").removeAttr("disabled");
             $("#btnAddDetails").addClass("display_none");
             $("#txt_note").removeAttr("disabled");
+            $("#txtReturnQuantity0").focus();
         }
     }
     //------------------------------------------------------ Normal Grid Region -----------------------------------
@@ -985,7 +986,7 @@ var PurTrReturn;
     //------------------------------------------------------ Controls Grid Region -----------------------------------
     function BuildControls(cnt) {
         var html;
-        html = "<tr id=\"No_Row" + cnt + "\">\n \n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"display_none\"  />\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"display_none\"  />\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n\t                <td>\n\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\">" + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQuantity" + cnt + "\" type=\"text\" class=\"form-control\" name=\"quant[1]\" value=\"0\" min=\"0\" max=\"1000\" disabled />\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group ps-1\">\n\t\t\t                <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                <div class=\"value-button decrease-button btn-number3" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[3]\">-</div>\n\t\t\t                <div class=\"value-button increase-button btn-number3" + cnt + "\" data-id=\"increase\" id=\"btnplus3\" data-type=\"plus\" data-field=\"quant[3]\">+</div>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" value=\"0\" min=\"0\" step=\"1\"/>\n\t\t                </div>\n\t                </td>\n\t                 \n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotal" + cnt + "\" disabled />\n\t\t                </div>\n\t                </td>\n\t                \n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTax" + cnt + "\" disabled/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotAfterTax" + cnt + "\" disabled />\n\t\t                </div>\n                        <input id=\"vatnatid" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"UnitCost" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_StatusFlag" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_ID" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t                </td>\n\t        \n                </tr>";
+        html = "<tr id=\"No_Row" + cnt + "\">\n \n                    <input id=\"InvoiceItemID" + cnt + "\" type=\"hidden\" class=\"display_none\"  />\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"display_none\"  />\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n\t                <td>\n\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\"> " + (lang == "ar" ? "النوع" : "Type") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlItem" + cnt + "\" class=\"form-control\">\n                                <option value=\"null\">" + (lang == "ar" ? "الصنف" : "Item") + " </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtQuantity" + cnt + "\" type=\"text\" class=\"form-control\" name=\"quant[1]\" value=\"0\" min=\"0\" max=\"1000\" disabled />\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group counter-group ps-1\">\n\t\t\t                <input class=\"counter\" type=\"number\" data-id=\"number\" id=\"txtReturnQuantity" + cnt + "\" name=\"quant[3]\" value=\"1\" min=\"0\" max=\"1000\" step=\"1\"/>\n\t\t\t                <div class=\"value-button decrease-button btn-number3" + cnt + "\" data-id=\"decrease\" id=\"btnminus1\" data-type=\"minus\" data-field=\"quant[3]\">-</div>\n\t\t\t                <div class=\"value-button increase-button btn-number3" + cnt + "\" data-id=\"increase\" id=\"btnplus3\" data-type=\"plus\" data-field=\"quant[3]\">+</div>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtPrice" + cnt + "\" name=\"quant[3]\" value=\"0\" min=\"0\" step=\"1\"/>\n\t\t                </div>\n\t                </td>\n\t                 \n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotal" + cnt + "\" disabled />\n\t\t                </div>\n\t                </td>\n\t                \n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTax" + cnt + "\" disabled/>\n\t\t                </div>\n\t                </td>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"text\" class=\"form-control\" id=\"txtTotAfterTax" + cnt + "\" disabled />\n\t\t                </div>\n                        <input id=\"vatnatid" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"UnitCost" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_StatusFlag" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t\t                <input id=\"txt_ID" + cnt + "\" name = \"\" type = \"hidden\" class=\"form-control\"/>\n\t                </td>\n\t        \n                </tr>";
         //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-xs-12" style="right: 3%;" > ' +
         //    '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm3 display_none"></span>' +
         //    '<input id="ReciveDetailsID' + cnt + '" type="hidden" class="form-control right2 display_none"  />' +
@@ -1309,7 +1310,7 @@ var PurTrReturn;
                 $("#txt_StatusFlag" + cnt).val("u");
             var txtQuantityValue = $("#txtReturnQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
-            if ($("#txtReturnQuantity" + cnt).val() == 0) {
+            if (Number($("#txtReturnQuantity" + cnt).val()) == 0) {
                 var total = 1 * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 var vatAmount = Number(total) * VatPrc / 100;
@@ -1428,12 +1429,12 @@ var PurTrReturn;
         });
         if (InvoiceFlag == true) {
             debugger;
-            $("#txt_StatusFlag" + cnt).val("i");
+            $("#txt_StatusFlag" + cnt).val("");
             var InvoiceSoldQty = SlsInvoiceItemsDetails[cnt].RecQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
             var total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].RecUnitPriceFC;
             var vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
             $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
-            $("#txtReturnQuantity" + cnt).prop("value", InvoiceSoldQty);
+            $("#txtReturnQuantity" + cnt).prop("value", '');
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
             $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
@@ -1701,6 +1702,9 @@ var PurTrReturn;
         }
         else {
             InvoiceModel.RefTrID = receiveID;
+        }
+        if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
+            DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
         }
         Ajax.Callsync({
             type: "POST",
