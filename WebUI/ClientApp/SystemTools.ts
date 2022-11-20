@@ -5,7 +5,7 @@
     }
 
     public orgCondition: string;
-    public SysSession: SystemSession; 
+    public SysSession: SystemSession;
 
     public apiUrl(controller: string, action: string) {
 
@@ -15,7 +15,7 @@
     }
 
     public getJsonData(model: any, type: string = ""): any {
-         
+
         switch (type) {
 
             case "Insert":
@@ -84,7 +84,7 @@
 
     private SwitchFavoriteIcon() {
         //imgFavUrl
-         
+
         if (sessionStorage.getItem("MODU_CODE") == null) {
             sessionStorage.setItem("imgFavUrl", "../images/favourit.gif");
             return;
@@ -108,7 +108,7 @@
         let UserCode = this.SysSession.CurrentEnvironment.UserCode;
         let Modulecode = this.SysSession.CurrentPrivileges.MODULE_CODE;
         let SubSystemCode = this.SysSession.CurrentEnvironment.SubSystemCode;
-         
+
         Ajax.CallAsync({
             type: "GET",
             url: this.apiUrl("SystemTools", "SwitchUserFavorite"),
@@ -121,7 +121,7 @@
     }
 
     public FindKey(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {
-         
+
         this.orgCondition = Condition;
 
         let SystemCode = this.SysSession.CurrentEnvironment.SystemCode;
@@ -139,7 +139,7 @@
             },
             async: true,
             success: (resp) => {
-                 
+
                 var response = resp;
                 if (response == null) {
                     MessageBox.Show("Search not available, Please call your app administrator", "Search");
@@ -165,7 +165,7 @@
                 let boxHeight: string = settings.Height <= 100 ? "80%" : settings.Height.toString() + "px";
                 let boxLeft: string = settings.Left <= 50 ? "5%" : settings.Left.toString() + "px";
                 let boxTop: string = settings.Top <= 50 ? "10%" : settings.Top.toString() + "px";
-                 
+
                 $("#SearchBox").css("width", boxWidth);
                 $("#SearchBox").css("height", boxHeight);
                 $("#SearchBox").css("left", boxLeft);
@@ -175,7 +175,7 @@
 
                 SearchGrid.SearchDataGrid.OnDoubleClick = () => {
                     debugger
-                     console.log(SearchGrid.SearchDataGrid.SelectedKey);
+                    console.log(SearchGrid.SearchDataGrid.SelectedKey);
                     $("#SearchBox").removeClass("show")
                     $("#SearchBox").removeClass("modal-backdrop")
                     $("#SearchBox").modal("hide");//.css("display", "none");
@@ -209,6 +209,15 @@
                 $("#SearchDataTable").css("height", "100%");
             }
         });
+
+        //$("#SearchDataTable_filter label input").addClass('display_none');
+
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 200);
+
+        
+
+        //$("#SearchBox .table-serach-container #tableDiv #SearchDataTable_wrapper #SearchDataTable_filter label input").focus();
+
     }
     //old code
     //public FindNotification(moduleCode: string, _SearchControlName: string, Condition: string, OnSearchSelected: () => void) {

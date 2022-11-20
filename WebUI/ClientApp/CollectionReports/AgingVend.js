@@ -62,6 +62,7 @@ var AgingVend;
         Display_SupplierGroup();
         discharge();
         // DisplayAccDefVendor();      
+        $("#txtFromDate").val(GetDate());
     }
     AgingVend.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {

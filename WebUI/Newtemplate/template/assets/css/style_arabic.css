@@ -21841,10 +21841,10 @@ textarea {
 a:focus,
 input:focus {
     border-color: transparent;
-    outline: none;
+    outline: inherit;
 }
 a {
-    text-decoration: none;
+    text-decoration: solid;
 }
 /* Fonts */
 @font-face {
