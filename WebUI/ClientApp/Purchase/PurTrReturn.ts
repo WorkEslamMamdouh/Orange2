@@ -1455,6 +1455,38 @@ namespace PurTrReturn {
             }
         });
         //txtReturnQuantity
+        $("#txtReturnQuantity" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            var txtQuantityValue = $("#txtQuantity" + cnt).val();
+
+            var totalReturnQuantityValue = $("#txtReturnQuantity" + cnt).val();
+            var txtPriceValue = $("#txtPrice" + cnt).val();
+
+            if (Number(txtQuantityValue) >= totalReturnQuantityValue) {   // qty accepted  
+                var total = Number(totalReturnQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));//= total;
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                ComputeTotals();
+
+            }
+            else {
+
+                $("#txtReturnQuantity" + cnt).val(txtQuantityValue);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));//= total;
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                ComputeTotals();
+                DisplayMassage('(  الكميه المتاحه من الشراء = ' + txtQuantityValue + ')', 'Avaliable Quantity From Purchase', MessageType.Error);
+            }
+        });
         $("#txtReturnQuantity" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
@@ -1557,7 +1589,7 @@ namespace PurTrReturn {
             let total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].RecUnitPriceFC;
             let vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
             $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
-            $("#txtReturnQuantity" + cnt).prop("value", '');
+            $("#txtReturnQuantity" + cnt).prop("value", '0');
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
             $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
@@ -1594,7 +1626,8 @@ namespace PurTrReturn {
         NetCount = 0; 
         for (let i = 0; i < CountGrid; i++) {  
             var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m" ) { 
+            var ReturnQua = Number($("#txtReturnQuantity" + i).val());
+            if (flagvalue != "d" && flagvalue != "m" && ReturnQua != 0) { 
                 var ReturnQty = Number($("#txtReturnQuantity" + i).val());
                 PackageCount += ReturnQty; 
                 CountTotal += Number($("#txtTotal" + i).val());

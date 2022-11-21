@@ -96,13 +96,63 @@ namespace Inv.WebUI.Controllers
 
         }
 
+        public class MyModel
+        {
+            public string JavascriptToRun { get; set; }
+        }
+
         #region Open Pages 
+
+        public ActionResult OpenPdfCust(string NameInv)
+        {
+            try
+            {
+                string base64Encoded = NameInv;
+                string base64Decoded;
+                byte[] data = System.Convert.FromBase64String(base64Encoded);
+                base64Decoded = System.Text.ASCIIEncoding.ASCII.GetString(data);
+
+                string Path = "C:/PdfCustSend_Or/" + base64Decoded + ".pdf";
+                if (System.IO.File.Exists(Path))
+                {
+                    var fil = File(Path, "application/pdf");
+
+                    int index1 =0;
+                    int index2 = base64Decoded.IndexOf(')');
+
+                    base64Decoded = base64Decoded.Substring(index1 + 2, index2 - index1 - 2);
+
+                    fil.FileDownloadName = ""+ base64Decoded + " فاتورة رقم" + ".pdf";
+                    return fil;
+
+                }
+                else
+                {
+
+                    return ErrorPDF_Fix();
+                }
+
+            }
+            catch (System.Exception)
+            {
+                return ErrorPDF_Fix();
+            }
+
+
+
+        }
+
+        public ActionResult ErrorPDF_Fix()
+        {
+            return View("~/Views/Error/ErrorPDF_Fix.cshtml");
+        }
 
         public ActionResult OpenPdf(string path)
         {
           
             return File(""+ path + "","application/pdf");
         }
+
 
         public ActionResult AgingCustIndex()
         {

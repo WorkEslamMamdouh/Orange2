@@ -212,7 +212,7 @@
 
         //$("#SearchDataTable_filter label input").addClass('display_none');
 
-        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 200);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 500);
 
         
 

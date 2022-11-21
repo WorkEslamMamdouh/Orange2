@@ -171,7 +171,7 @@ var SystemTools = /** @class */ (function () {
             }
         });
         //$("#SearchDataTable_filter label input").addClass('display_none');
-        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 200);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 500);
         //$("#SearchBox .table-serach-container #tableDiv #SearchDataTable_wrapper #SearchDataTable_filter label input").focus();
     };
     //old code

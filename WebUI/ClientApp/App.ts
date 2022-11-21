@@ -2481,6 +2481,96 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 
 
+
+function SendInv_to_Cust(data_New: ReportParameters) {
+
+    var SysSession = GetSystemEnvironment();
+    data_New.CompCode = SysSession.CompCode;
+    data_New.BranchCode = SysSession.BranchCode;
+    data_New.CompNameA = SysSession.CompanyNameAr;
+    data_New.CompNameE = SysSession.CompanyName;
+    data_New.UserCode = SysSession.UserCode;
+    data_New.Tokenid = SysSession.Token;
+    data_New.ScreenLanguage = SysSession.ScreenLanguage;
+    data_New.SystemCode = SysSession.SystemCode;
+    data_New.SubSystemCode = SysSession.SubSystemCode;
+    data_New.BraNameA = SysSession.BranchName;
+    data_New.BraNameE = SysSession.BranchName;
+    data_New.DocPDFFolder = SysSession.I_Control[0].DocPDFFolder;
+    data_New.LoginUser = SysSession.UserCode;
+    data_New.Send_Pdf = 1;
+
+    if (data_New.BraNameA == null || data_New.BraNameE == null) {
+
+        data_New.BraNameA = " ";
+        data_New.BraNameE = " ";
+    }
+
+
+    setTimeout(function () {
+
+        $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;left: 0%;')
+        $('#btnSend').html(' جاري ارسال <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnSend').attr('disabled', 'disabled')
+    }, 200);
+
+    const baseDocUUID = "( " + data_New.TrNo.toString() + " )_" + data_New.TrDate.toString() + "_" + data_New.Module + "_" + SysSession.CompCode + "_" + SysSession.BranchCode
+    data_New.DocUUID =  baseDocUUID
+    //data_New.DocUUID = window.btoa(baseDocUUID);
+    //alert(data_New.DocUUID)
+    Ajax.CallAsync({
+        url: Url.Action("" + data_New.Name_function + "", "GeneralRep"),
+        data: data_New,
+        success: (d) => {
+            let result = d as BaseResponse;
+            let res = window.btoa("" + result+"");
+
+            //$('#printableArea').html("" + result + "");
+            $('#printableArea').html("");
+            let x = Url.Action("OpenPdfCust", "Home");
+            let UrlPdf = x + "/" + "?" + "NameInv=" + res + "";
+            alert(UrlPdf);
+
+            //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
+
+
+            $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;')
+            $('#btnSend').html('<i class="fas fa-file-pdf fa-fw side-icon ms-1"></i> <span class="align-self-center mb-3">  ارسال PDF</span>');
+            $('#btnSend').removeAttr('disabled')
+
+        }
+    })
+
+
+
+}
+
+
+function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobile: string, TrID: number) {
+
+    debugger
+    let sys = new SystemTools;
+    Ajax.Callsync({
+        type: "Get",
+        url: sys.apiUrl("SystemTools", "SendMessage"),
+        data: { CompCode: CompCode, HdMsg: HdMsg, DetMsg: DetMsg, ContactMobile: ContactMobile, TrID: TrID },
+        success: (d) => {//(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                debugger
+                let res = result.Response;
+
+                MessageBox.Show(res, "خطأ");
+                //alert(res)
+
+            }
+        }
+    });
+
+}
+
+
+
 function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
 
     var sys: SystemTools = new SystemTools();

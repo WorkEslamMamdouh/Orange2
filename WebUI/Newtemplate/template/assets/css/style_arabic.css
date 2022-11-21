@@ -28988,6 +28988,7 @@ div.tagsinput {
 }
 .reset.icon-bar,
 .viewresult.icon-bar,
+.Send.icon-bar,
 .print-report.icon-bar{
     left: -77px;
 }
@@ -29013,6 +29014,7 @@ div.tagsinput {
 .pdf,
 .excel,
 .edit,
+.Send,
 .save,
 .back,
 .print-details,
@@ -29028,8 +29030,9 @@ div.tagsinput {
     height: 35px;
 }
 .reset,
+.Send,
 .viewresult,
-.print-report{
+.print-report {
     width: 115px;
     height: 35px;
 }
@@ -29522,7 +29525,8 @@ div.tagsinput {
         color: darkred;
     }
 .btn-insert:hover,
-.btn-plus:hover {
+.btn-plus:hover ,
+.button-plus:hover i{
     color: green;
 }
 
@@ -29530,6 +29534,13 @@ div.tagsinput {
 .btn-copy:hover {
     color: var(--main-blue);
 }
+.button-plus{
+    background-color:transparent;
+    border:none;
+}
+    .button-plus:focus i {
+        color: var(--main-orange);
+    }
 .inside-table .form-check {
     margin-bottom: -5px;
 }

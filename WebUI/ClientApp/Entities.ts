@@ -148,6 +148,14 @@ class ReportParameters {
     public Tokenid: String;
     public LoginUser: string;
 
+    public Send_Pdf: number;
+    public TrNo: string;
+    public ContactMobile: string;
+    public Title_Mess: string;
+    public DocUUID: string;
+    public TrDate: string;
+    public Module: string;
+
     public FromDt: string;// { get; set; }--
     public ToDt: string;// { get; set; }--
     public stat: number;

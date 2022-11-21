@@ -63,6 +63,8 @@ namespace Inv.WebUI.Controllers
         string LoginUser = "";
         string ScreenLanguage = "";
         string reportName = "";
+        int? Send_Pdf = 0;
+        string DocUUID = ""; 
         object[] query;
         int TRId;
         ReportViewer reportViewer = new ReportViewer();
@@ -262,17 +264,28 @@ namespace Inv.WebUI.Controllers
                 //System.IO.File.WriteAllBytes(savePath, contractByte);
 
 
-                string savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + nid + "") + @"Pdf_Invoices" + ".pdf";
+                string savePath = "";
 
+                if (Send_Pdf == 1)
+                {
+                    savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"C:/PdfCustSend_Or/") + @"" + DocUUID + "" + ".pdf";
+                    System.IO.File.WriteAllBytes(savePath, contractByte);
 
-                System.IO.File.WriteAllBytes(savePath, contractByte);
+                    return DocUUID;
 
-                path = savePath;
-                //System.IO.File.WriteAllBytes(path, contractByte);
+                }
+                else
+                {
+                    savePath = System.Web.HttpContext.Current.Server.UrlPathEncode(@"" + nid + "") + @"Pdf_Invoices" + ".pdf";
 
-                path = path.Replace(@"\", "/");
+                    System.IO.File.WriteAllBytes(savePath, contractByte);
 
-                return path;
+                    path = savePath;
+                    path = path.Replace(@"\", "/");
+
+                    return path;
+
+                }
             }
             catch (Exception ex)
             {
@@ -573,7 +586,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -626,7 +639,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID; 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         } 
@@ -663,7 +676,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -698,7 +711,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -739,7 +752,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -780,7 +793,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -816,7 +829,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -854,7 +867,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -890,7 +903,7 @@ namespace Inv.WebUI.Controllers
             List<IProc_Rep_OperationItemSales_Result> query = db.Database.SqlQuery<IProc_Rep_OperationItemSales_Result>(_Query).ToList();
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -931,7 +944,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -946,6 +959,12 @@ namespace Inv.WebUI.Controllers
             int typ = int.Parse(RepPar.Typ.ToString());
 
 
+            //DocUUID = db.Database.SqlQuery<string>("select  DocUUID from I_Sls_TR_Invoice where InvoiceID = " + TRId).FirstOrDefault();
+            //if (DocUUID.Trim() == "")
+            //{
+            //    DocUUID = RepPar.DocUUID;
+            //}
+            DocUUID = RepPar.DocUUID;
 
             var InvType = db.Database.SqlQuery<int?>("select  InvoiceTransCode from I_Sls_TR_Invoice where InvoiceID = " + TRId).FirstOrDefault();
             InvType = InvType == null ? 0 : InvType;
@@ -1027,7 +1046,7 @@ namespace Inv.WebUI.Controllers
             query[0].QRSTR = QRcode;
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf;  
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1104,7 +1123,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1176,7 +1195,7 @@ namespace Inv.WebUI.Controllers
 
             ReportsDetails();
 
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1224,7 +1243,7 @@ namespace Inv.WebUI.Controllers
             
           
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1264,7 +1283,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_PurReceive_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1299,7 +1318,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_PurReceiveRet_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1311,11 +1330,14 @@ namespace Inv.WebUI.Controllers
             var typ = int.Parse(RepPar.Typ.ToString());
 
 
+
+
             var TRId = int.Parse(RepPar.TRId.ToString());
             SqlParameter spTRId = new SqlParameter("@TRId", TRId);
             var slip = int.Parse(RepPar.slip.ToString());
 
-
+            //DocUUID = db.Database.SqlQuery<string>("select  DocUUID from I_Sls_TR_Invoice where InvoiceID = " + TRId).FirstOrDefault();
+            DocUUID = RepPar.DocUUID;
             int Repdesign = RepPar.Repdesign;
             if (slip == 0)
             {
@@ -1345,7 +1367,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_SlsInvoiceVer2_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf;  
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1412,7 +1434,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccCustomerSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerSummary_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -1473,7 +1495,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccCustomerDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerDetail_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -1541,7 +1563,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccVendorDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorDetail_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1610,7 +1632,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccVendorSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorSummary_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1671,7 +1693,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_ItemStockSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemStockSummary_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
 
             return query;
@@ -1729,7 +1751,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_ItemStockValue_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemStockValue_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1786,7 +1808,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_ItemStockIncome_Result> query = db.Database.SqlQuery<IProc_Rpt_ItemStockIncome_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1866,7 +1888,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLFinancialStatment_Result> query = db.Database.SqlQuery<AProc_Rpt_GLFinancialStatment_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1932,7 +1954,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLGeneralLedger_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedger_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -1999,7 +2021,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLAccountStatment_Result> query = db.Database.SqlQuery<AProc_Rpt_GLAccountStatment_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2033,7 +2055,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Prnt_JournalVoucher_Result> query = db.Database.SqlQuery<AProc_Prnt_JournalVoucher_Result>(_Query).ToList();
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2062,7 +2084,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_PurPurchaseOrder_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2097,7 +2119,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_StkTransfer_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2132,7 +2154,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_StkAdjust_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         } 
@@ -2167,7 +2189,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_OerationTf_Result>(_Query).ToList();
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2268,7 +2290,7 @@ namespace Inv.WebUI.Controllers
 
 
             ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         } 
@@ -2305,7 +2327,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_VATPurInvoice_Result>(_Query).ToList();
 
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2342,7 +2364,7 @@ namespace Inv.WebUI.Controllers
             var query = db.Database.SqlQuery<IProc_Prnt_VATPurReturn_Result>(_Query).ToList();
 
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
         }
@@ -2407,7 +2429,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccVendorCollDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorCollDetail_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2472,7 +2494,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccVendorCollSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorCollSummary_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2561,7 +2583,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_VatSalesSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_VatSalesSummary_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2649,7 +2671,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_VatSalesDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_VatSalesDetail_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2743,7 +2765,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_VatPurchaseSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_VatPurchaseSummary_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2837,7 +2859,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_VatPurchaseDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_VatPurchaseDetail_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2893,7 +2915,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Prnt_CashVoucher_Result> query = db.Database.SqlQuery<AProc_Prnt_CashVoucher_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -2966,7 +2988,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLDtCCenterStatmentSummary_Result> query = db.Database.SqlQuery<AProc_Rpt_GLDtCCenterStatmentSummary_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3039,7 +3061,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLDtCCenterStatmentDetail_Result> query = db.Database.SqlQuery<AProc_Rpt_GLDtCCenterStatmentDetail_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3076,7 +3098,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Prnt_VATReport_Result> query = db.Database.SqlQuery<IProc_Prnt_VATReport_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3126,7 +3148,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccBoxSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxSummaryVer2_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3176,7 +3198,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rpt_AccBoxDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccBoxDetailVer2_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3218,7 +3240,7 @@ namespace Inv.WebUI.Controllers
 
             List<IProc_Rep_OperationScrap_Result> query = db.Database.SqlQuery<IProc_Rep_OperationScrap_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3299,7 +3321,7 @@ namespace Inv.WebUI.Controllers
 
             List<AProc_Rpt_GLFinancialStatment_Result> query = db.Database.SqlQuery<AProc_Rpt_GLFinancialStatment_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3340,7 +3362,7 @@ namespace Inv.WebUI.Controllers
 
             var query = db.Database.SqlQuery<IProc_Prnt_Collect_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;
@@ -3383,7 +3405,7 @@ namespace Inv.WebUI.Controllers
 
             var query = db.Database.SqlQuery<IProc_Prnt_StkIssue_Result>(_Query).ToList();
              ReportsDetails();
-            reportName = Rep.reportName;
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
 
             DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
             return query;

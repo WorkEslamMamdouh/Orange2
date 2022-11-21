@@ -1876,5 +1876,51 @@ namespace Inv.API.Controllers
                 return BadRequest();
             }
         }
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult SendMessage(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
+        {
+            var SendingMethods = new Sending_Methods();
+
+
+            string response = "";
+
+
+
+            var IControl = db.I_Control.Where(x => x.CompCode == CompCode).First();
+
+
+            G_AlertControl cntrl = db.G_AlertControl.Where(x => x.Compcode == CompCode).First();
+
+            //----------------------SMS---------------------//
+
+            if (IControl.SendSMS == true)
+            {
+                response = SendingMethods.Send_SMS(cntrl.SMS_Provider, cntrl.SMS_UserName, cntrl.SMS_Password, HdMsg + "\n " + DetMsg, cntrl.SMS_SenderName, cntrl.MobileNoPreFex + "" + ContactMobile.Substring(1, ContactMobile.Length - 1), CompCode);//"966504170785");
+                if (response == "لقد تمت العملية بنجاح")
+                {
+                    var ALertLogSMS = new G_AlertLog();
+                    ALertLogSMS.CompCode = CompCode;
+                    ALertLogSMS.TrID = TrID;
+                    ALertLogSMS.MobileNo = ContactMobile;
+                    ALertLogSMS.MsgHeader = HdMsg.Substring(0, 49);
+                    ALertLogSMS.MsgBody = DetMsg;
+                    ALertLogSMS.AlertType = "1";
+                    ALertLogSMS.SendDate = DateTime.Now;
+                    ALertLogSMS.IsSent = true;
+                    db.G_AlertLog.Add(ALertLogSMS);
+                    db.SaveChanges();
+                }
+                else
+                {
+
+                }
+            }
+
+            return Ok(new BaseResponse(response));
+        }
+
+
     }
 }

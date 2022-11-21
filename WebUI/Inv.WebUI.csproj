@@ -222,6 +222,7 @@
     <Content Include="images\Background\bk_shrouq.jpg" />
     <Content Include="images\Background\bs1.jpg" />
     <Content Include="images\Background\businessman-3087395_1920.jpg" />
+    <Content Include="images\Background\ErrorPdf.jpg" />
     <Content Include="images\Background\fr1.jpg" />
     <Content Include="images\Background\fr2.jpg" />
     <Content Include="images\Background\fr6.jpg" />
@@ -2288,6 +2289,7 @@
     <Content Include="Views\Sales\SlsTrSalesOperationIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnNewIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnOperationIndex.cshtml" />
+    <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

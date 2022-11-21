@@ -114,6 +114,7 @@ var SlsTrSalesManagerNew;
     var btnPrintslip;
     var btnCustFilter;
     var btnCust;
+    var btnSend;
     // giedView
     var Grid = new JsGrid();
     //global
@@ -213,6 +214,9 @@ var SlsTrSalesManagerNew;
         if (flagInvMulti == true && SlsInvSrc == '1') {
             $('#TableRespon').attr('style', 'width:120%');
         }
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
     }
     SlsTrSalesManagerNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -280,6 +284,7 @@ var SlsTrSalesManagerNew;
         btnPrintslip = document.getElementById("btnPrintslip");
         btnCustFilter = document.getElementById("btnCustFilter");
         btnCust = document.getElementById("btnCust");
+        btnSend = document.getElementById("btnSend");
         ////
         //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
     }
@@ -293,6 +298,7 @@ var SlsTrSalesManagerNew;
         btnSave.onclick = btnSave_onclick;
         btnCustFilter.onclick = btnCustFilter_onclick;
         btnCust.onclick = btnCust_onclick;
+        btnSend.onclick = sendCust;
         txtCommission.onkeyup = txtCommission_onchange;
         ddlType.onchange = ddlType_onchange;
         btn_Approveprice.onclick = btn_Approveprice_onclick;
@@ -1080,7 +1086,7 @@ var SlsTrSalesManagerNew;
                 InvoiceModel.VatType = vatType;
                 InvoiceModel.VatAmount = Number(txtTax.value);
                 InvoiceModel.CommitionAmount = Number(txtCommission.value);
-                if (Validation_Insert == 1) {
+                if (Validation_Insert == 1 && compcode != 6) {
                     Open_poup_Pass();
                 }
                 else if (NewAdd == true) {
@@ -1132,6 +1138,7 @@ var SlsTrSalesManagerNew;
             $("#div_btnPrint").removeClass("display_none");
             $("#btnUpdate").removeClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
+            $("#btnSend").removeClass("display_none");
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
             ddlStore.disabled = true;
@@ -1163,6 +1170,7 @@ var SlsTrSalesManagerNew;
             $("#div_btnPrint").removeClass("display_none");
             $("#btnUpdate").removeClass("display_none");
             $("#btnPrintTransaction").removeClass("display_none");
+            $("#btnSend").removeClass("display_none");
             $("#btnBack").addClass("display_none");
             $("#btnSave").addClass("display_none");
             ddlStore.disabled = true;
@@ -1223,6 +1231,7 @@ var SlsTrSalesManagerNew;
         $("#btnAddDetails").removeClass("display_none");
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
         $("#btnPrintInvoicePrice").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
@@ -1358,6 +1367,7 @@ var SlsTrSalesManagerNew;
         Show = false;
         $("#btnUpdate").addClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
         $("#btnPrintInvoicePrice").addClass("display_none");
         $("#div_btnPrint").addClass("display_none");
         $("#btnBack").removeClass("display_none");
@@ -1807,6 +1817,7 @@ var SlsTrSalesManagerNew;
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         $("#btnBack").addClass("display_none");
@@ -1966,6 +1977,7 @@ var SlsTrSalesManagerNew;
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         ddlTypeInv_onchange();
+        //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function searchItem(searchItemID, cnt) {
@@ -2674,6 +2686,29 @@ var SlsTrSalesManagerNew;
                 $("#Item_Desc" + CountGrid).removeAttr("disabled");
                 $('.Search_Items').addClass('display_none');
             }
+            else {
+                var cnt_1 = CountGrid;
+                var storeId = Number(ddlStore.value); //and OnhandQty > 0
+                var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
+                var qury = "";
+                var btnSearch = 'btnSearchItems';
+                var OperationID = Number($('#txt_OperationId' + cnt_1).val());
+                if ($('#ddlTypeInv' + cnt_1).val() == '1') {
+                    var Family = $('#ddlFamily' + cnt_1).val() == 'null' ? '' : " and ItemFamilyID =" + $('#ddlFamily' + cnt_1).val() + "";
+                    qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and ISSales =1 and IsActive = 1 and  FinYear = " + FinYear + " " + Family;
+                    btnSearch = 'btnSearchItems';
+                }
+                if ($('#ddlTypeInv' + cnt_1).val() == '2') {
+                    qury = " OperationID = " + OperationID;
+                    btnSearch = 'btnSearchOprationItems';
+                }
+                sys.FindKey(Modules.SlsTrSalesManagerNew, btnSearch, qury, function () {
+                    var id = SearchGrid.SearchDataGrid.SelectedKey;
+                    var searchItemID = id;
+                    searchItem(searchItemID, cnt_1);
+                    debugger;
+                });
+            }
             if (flag_PriceWithVAT == true) {
                 $("#txtUnitpriceWithVat" + CountGrid).removeAttr("disabled");
                 $("#txtPrice" + CountGrid).removeAttr("disabled");
@@ -3268,6 +3303,7 @@ var SlsTrSalesManagerNew;
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         NewAdd = false;
         clear();
@@ -3446,6 +3482,7 @@ var SlsTrSalesManagerNew;
         Show = true; //   ////
         $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array();
@@ -3797,7 +3834,7 @@ var SlsTrSalesManagerNew;
         else {
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
@@ -3966,6 +4003,30 @@ var SlsTrSalesManagerNew;
         catch (e) {
             return;
         }
+    }
+    function sendCust() {
+        var rp = new ReportParameters();
+        rp.Type = 4;
+        rp.Repdesign = 0;
+        rp.TRId = GlobalinvoiceID;
+        rp.slip = 0;
+        rp.stat = InvoiceModel.InvoiceTransCode;
+        if (SlsInvSrc == '1') {
+            rp.Name_function = "rptInvoiceNote";
+        }
+        else {
+            rp.Name_function = "Prnt_OperationInvoice";
+        }
+        //************************Data Mess***************
+        debugger;
+        rp.Module = "Sales";
+        rp.TrDate = txtInvoiceDate.value;
+        rp.TrNo = lblInvoiceNumber.value;
+        rp.ContactMobile = "966504170785"; //966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ";
+        //rp.Title_Mess = "فاتورة رقم ( " + lblInvoiceNumber.value + " )"; 
+        debugger;
+        SendInv_to_Cust(rp);
     }
 })(SlsTrSalesManagerNew || (SlsTrSalesManagerNew = {}));
 //# sourceMappingURL=SlsTrSalesManagerNew.js.map
