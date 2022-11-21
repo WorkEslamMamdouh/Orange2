@@ -6,37 +6,40 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.87314in</Width>
+              <Width>0.72805in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.84922in</Width>
+              <Width>0.70413in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.85729in</Width>
+              <Width>0.7122in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.86277in</Width>
+              <Width>0.71768in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.86926in</Width>
+              <Width>0.72417in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.85038in</Width>
+              <Width>0.70529in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.83997in</Width>
+              <Width>0.69488in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.01089in</Width>
+              <Width>0.8658in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.00174in</Width>
+              <Width>0.85665in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85402in</Width>
+              <Width>0.92628in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.63336in</Width>
+              <Width>2.02895in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.86327in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -336,6 +339,40 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox33</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox20">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>اخر سداد</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -714,6 +751,41 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="LastDate">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!LastDate.Value</Value>
+                              <Style>
+                                <Format>dd/MM/yyyy</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>LastDate</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="NameA">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1086,7 +1158,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox46">
+                    <Textbox Name="Textbox27">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1104,7 +1176,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox46</rd:DefaultName>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1116,9 +1188,10 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>2</ColSpan>
+                    <ColSpan>3</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
                 <TablixCell />
               </TablixCells>
             </TablixRow>
@@ -1126,6 +1199,7 @@
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1157,10 +1231,8 @@
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rpt_AccCustomerAgingFiveAr</DataSetName>
-        <Top>0.05556in</Top>
-        <Left>0.04807in</Left>
         <Height>0.75in</Height>
-        <Width>10.50204in</Width>
+        <Width>10.5273in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1171,7 +1243,7 @@
     <Height>2.04612cm</Height>
     <Style />
   </Body>
-  <Width>26.85019cm</Width>
+  <Width>26.79727cm</Width>
   <Page>
     <PageHeader>
       <Height>4.03141cm</Height>
@@ -2340,6 +2412,10 @@
         <Field Name="y6">
           <DataField>y6</DataField>
           <rd:TypeName>System.Nullable`1[[System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="LastDate">
+          <DataField>LastDate</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
