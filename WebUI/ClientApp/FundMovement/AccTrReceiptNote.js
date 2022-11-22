@@ -98,6 +98,7 @@ var AccTrReceiptNote;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
+    var btnSend;
     //var btnPrint: HTMLButtonElement;
     var btnPrintslip;
     var btnPrintsFrom_To;
@@ -151,6 +152,9 @@ var AccTrReceiptNote;
         txtDateFrom.value = DateStartMonth();
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         Display_Acount_Code();
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
     }
     AccTrReceiptNote.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -190,6 +194,7 @@ var AccTrReceiptNote;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
+        btnSend = document.getElementById("btnSend");
         //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip");
         btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
@@ -225,6 +230,7 @@ var AccTrReceiptNote;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
+        btnSend.onclick = sendCust;
         //btnPrintslip. = btnPrintslip;
         btnPrintslip.onclick = btnPrintslip_onclick;
         /////////////////////////////donia
@@ -482,6 +488,7 @@ var AccTrReceiptNote;
             //$("#txt_Receiving_Fund").attr("disabled", "disabled");
             $("#id_div_Add").addClass("disabledDiv");
             $('#btnPrintTransaction').addClass("display_none");
+            $('#btnSend').addClass("display_none");
             txtCashTypeNew.value != '0' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
             chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
             $(".btn-group").addClass("display_none");
@@ -512,6 +519,7 @@ var AccTrReceiptNote;
         reference_Page();
         chkActive.checked = false;
         $('#btnPrintTransaction').addClass("display_none");
+        $('#btnSend').addClass("display_none");
         $('#Bank_Div').addClass('display_none');
         $('.btn-group').addClass('display_none');
         $('#La_CashAmount').removeClass('display_none');
@@ -710,7 +718,8 @@ var AccTrReceiptNote;
             $('#btnAddDetails').addClass("display_none");
             $('#btnSave').addClass("display_none");
             $('#btnBack').addClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
+            $("#btnPrintTransaction").addClass("display_none");
+            $("#btnSend").addClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
             $("#btnUpdate").removeClass("display_none");
@@ -807,6 +816,12 @@ var AccTrReceiptNote;
         $('#txt_ReceiptNoteNew').prop("value", Selecteditem[0].RecPayTypeId);
         chkIsDeffered.checked = Selecteditem[0].IsDeffered == true ? true : false;
         txtCashTypeNew_onchange();
+        if (Selecteditem[0].CustomerID > 0) {
+            $("#btnSend").removeClass("display_none");
+        }
+        else {
+            $("#btnSend").addClass("display_none");
+        }
     }
     function Display_GCodes() {
         Ajax.Callsync({
@@ -2121,6 +2136,23 @@ var AccTrReceiptNote;
         catch (e) {
             return;
         }
+    }
+    function sendCust() {
+        var rp = new ReportParameters();
+        rp.Type = 0;
+        rp.slip = 0;
+        rp.Repdesign = 1;
+        rp.TRId = ReceiptID;
+        rp.Name_function = "rptReceiptNote";
+        //************************Data Mess***************
+        debugger;
+        rp.Module = "Receipt";
+        rp.TrDate = txtDateNew.value;
+        rp.TrNo = txt_CODE.value;
+        rp.ContactMobile = "966504170785"; //966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + txt_CODE.value + " ) ";
+        debugger;
+        SendInv_to_Cust(rp);
     }
 })(AccTrReceiptNote || (AccTrReceiptNote = {}));
 //# sourceMappingURL=AccTrReceiptNote.js.map

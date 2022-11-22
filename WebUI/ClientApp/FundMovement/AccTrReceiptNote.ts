@@ -107,6 +107,7 @@ namespace AccTrReceiptNote {
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
+    var btnSend: HTMLButtonElement;
     //var btnPrint: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
     var btnPrintsFrom_To: HTMLButtonElement;
@@ -177,6 +178,12 @@ namespace AccTrReceiptNote {
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         Display_Acount_Code();
+
+
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
+
     }
 
     function InitalizeControls() {
@@ -226,6 +233,7 @@ namespace AccTrReceiptNote {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+        btnSend = document.getElementById("btnSend") as HTMLButtonElement;
         //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
         btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
@@ -269,6 +277,7 @@ namespace AccTrReceiptNote {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
+        btnSend.onclick = sendCust;
         //btnPrintslip. = btnPrintslip;
         btnPrintslip.onclick = btnPrintslip_onclick;
 
@@ -575,6 +584,7 @@ namespace AccTrReceiptNote {
             $("#id_div_Add").addClass("disabledDiv");
 
             $('#btnPrintTransaction').addClass("display_none");
+            $('#btnSend').addClass("display_none");
 
 
             txtCashTypeNew.value != '0' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
@@ -616,6 +626,7 @@ namespace AccTrReceiptNote {
             reference_Page();
             chkActive.checked = false;
             $('#btnPrintTransaction').addClass("display_none");
+        $('#btnSend').addClass("display_none");
 
 
             $('#Bank_Div').addClass('display_none');
@@ -738,6 +749,9 @@ namespace AccTrReceiptNote {
         $('#btnSave').addClass("display_none");
         $('#btnBack').addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+
+       
+
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
         $("#btnUpdate").removeClass("display_none");
@@ -876,7 +890,8 @@ namespace AccTrReceiptNote {
             $('#btnAddDetails').addClass("display_none");
             $('#btnSave').addClass("display_none");
             $('#btnBack').addClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
+            $("#btnPrintTransaction").addClass("display_none");
+            $("#btnSend").addClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
             $("#btnUpdate").removeClass("display_none");
@@ -995,6 +1010,15 @@ namespace AccTrReceiptNote {
         chkIsDeffered.checked = Selecteditem[0].IsDeffered == true ? true : false;
 
         txtCashTypeNew_onchange();
+
+
+        if (Selecteditem[0].CustomerID > 0) {
+            $("#btnSend").removeClass("display_none");
+        }
+        else {
+            $("#btnSend").addClass("display_none");
+        }
+
     }
 
     function Display_GCodes() {
@@ -2358,4 +2382,36 @@ namespace AccTrReceiptNote {
         }
 
     }
+
+
+
+
+    function sendCust() {
+
+
+
+        let rp: ReportParameters = new ReportParameters();
+
+        rp.Type = 0;
+        rp.slip = 0;
+        rp.Repdesign = 1;
+        rp.TRId = ReceiptID;
+
+        rp.Name_function = "rptReceiptNote";
+
+
+        //************************Data Mess***************
+        debugger
+        rp.Module = "Receipt";
+        rp.TrDate = txtDateNew.value;
+        rp.TrNo = txt_CODE.value;
+        rp.ContactMobile = "966504170785";//966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + txt_CODE.value + " ) ";
+
+        debugger
+        SendInv_to_Cust(rp)
+    }
+
+
+
 } 

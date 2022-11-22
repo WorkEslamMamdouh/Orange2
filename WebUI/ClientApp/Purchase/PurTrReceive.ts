@@ -125,6 +125,8 @@ namespace PurTrReceive {
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
+    var btnSend: HTMLButtonElement;
+    
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     var flagLastPrice = 2;
@@ -170,6 +172,10 @@ namespace PurTrReceive {
 
         flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
 
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
+
     }
     function InitalizeControls() {
         // print ----*
@@ -178,6 +184,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+        btnSend = document.getElementById("btnSend") as HTMLButtonElement;
         //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
@@ -265,6 +272,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
+        btnSend.onclick = sendCust;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
@@ -2700,7 +2708,7 @@ namespace PurTrReceive {
         $("#txtTotalPurchaseWithTax").prop("value", "");
 
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
 
         CountGrid = 0;
         CountGridCharge = 0;
@@ -2887,7 +2895,7 @@ namespace PurTrReceive {
         $("#btnAddDetailsCharge").removeClass("display_none");
 
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
         //$("#btnPrintInvoicePrice").addClass("display_none");
 
         $("#btnUpdate").addClass("display_none");
@@ -2949,7 +2957,7 @@ namespace PurTrReceive {
         $("#btnAddDetailsCharge").addClass("display_none");
 
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         //$("#btnPrintInvoicePrice").removeClass("display_none");
 
         $("#btnUpdate").removeClass("display_none");
@@ -3319,7 +3327,7 @@ namespace PurTrReceive {
         $("#divEdit").removeClass("display_none");
 
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
 
 
     } 
@@ -3393,7 +3401,7 @@ namespace PurTrReceive {
         debugger
         ShowFlag = true;
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         GlobalReceiveID = receiveid;
 
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == receiveid);
@@ -3568,5 +3576,33 @@ namespace PurTrReceive {
         }
 
     }
+
+
+
+    function sendCust() {
+
+
+
+        let rp: ReportParameters = new ReportParameters();
+
+        rp.Type = 0;
+        rp.Repdesign = 0;
+        rp.TRId = GlobalReceiveID; 
+        rp.Name_function = "IProc_Prnt_PurReceive";
+
+
+        //************************Data Mess***************
+        debugger
+        rp.Module = "Purchases";
+        rp.TrDate = txtDateHeader.value;
+        rp.TrNo = lblInvoiceNumber.innerText;
+        rp.ContactMobile = "966504170785";//966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.innerText + " ) ";
+        
+        debugger
+        SendInv_to_Cust(rp)
+    }
+
+
 
 }
