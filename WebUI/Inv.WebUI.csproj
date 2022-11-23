@@ -2095,6 +2095,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientToolsController.cs" />
     <Compile Include="Controllers\GeneralRepController.cs" />
+    <Compile Include="Controllers\HController.cs" />
     <Compile Include="Controllers\ReportsPagePrintController.cs" />
     <Compile Include="Controllers\Reports_pdfController.cs" />
     <Compile Include="Controllers\GeneralReportsController.cs" />

@@ -1956,7 +1956,7 @@ function SendInv_to_Cust(data_New) {
         $('#btnSend').html(' جاري ارسال <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
         $('#btnSend').attr('disabled', 'disabled');
     }, 200);
-    var baseDocUUID = "( " + data_New.TrNo.toString() + " )_" + data_New.TrDate.toString() + "_" + data_New.Module + "_" + SysSession.CompCode + "_" + SysSession.BranchCode;
+    var baseDocUUID = "" + data_New.TrNo.toString() + "_" + data_New.Module + "" + SysSession.CompCode + "" + SysSession.BranchCode;
     data_New.DocUUID = baseDocUUID;
     //data_New.DocUUID = window.btoa(baseDocUUID);
     //alert(data_New.DocUUID)
@@ -1968,13 +1968,15 @@ function SendInv_to_Cust(data_New) {
             var res = window.btoa("" + result + "");
             //$('#printableArea').html("" + result + "");
             $('#printableArea').html("");
-            var x = Url.Action("OpenPdfCust", "Home");
-            var UrlPdf = x + "/" + "?" + "NameInv=" + res + "";
+            var x = Url.Action("O", "H");
+            var UrlPdf = x + "/" + "?" + "N=" + res + "";
             alert(UrlPdf);
             //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
             $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;');
             $('#btnSend').html('<i class="fas fa-file-pdf fa-fw side-icon ms-1"></i> <span class="align-self-center mb-3">  ارسال PDF</span>');
             $('#btnSend').removeAttr('disabled');
+            //alert(location.origin)
+            //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))
         }
     });
 }

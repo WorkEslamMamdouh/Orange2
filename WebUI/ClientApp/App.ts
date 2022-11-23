@@ -2514,7 +2514,7 @@ function SendInv_to_Cust(data_New: ReportParameters) {
         $('#btnSend').attr('disabled', 'disabled')
     }, 200);
 
-    const baseDocUUID = "( " + data_New.TrNo.toString() + " )_" + data_New.TrDate.toString() + "_" + data_New.Module + "_" + SysSession.CompCode + "_" + SysSession.BranchCode
+    const baseDocUUID = "" + data_New.TrNo.toString() + "_" + data_New.Module + "" + SysSession.CompCode + "" + SysSession.BranchCode
     data_New.DocUUID =  baseDocUUID
     //data_New.DocUUID = window.btoa(baseDocUUID);
     //alert(data_New.DocUUID)
@@ -2527,8 +2527,8 @@ function SendInv_to_Cust(data_New: ReportParameters) {
 
             //$('#printableArea').html("" + result + "");
             $('#printableArea').html("");
-            let x = Url.Action("OpenPdfCust", "Home");
-            let UrlPdf = x + "/" + "?" + "NameInv=" + res + "";
+            let x = Url.Action("O", "H");
+            let UrlPdf = x + "/" + "?" + "N=" + res + "";
             alert(UrlPdf);
 
             //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
@@ -2537,6 +2537,13 @@ function SendInv_to_Cust(data_New: ReportParameters) {
             $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;')
             $('#btnSend').html('<i class="fas fa-file-pdf fa-fw side-icon ms-1"></i> <span class="align-self-center mb-3">  ارسال PDF</span>');
             $('#btnSend').removeAttr('disabled')
+
+
+
+
+            //alert(location.origin)
+
+            //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))
 
         }
     })

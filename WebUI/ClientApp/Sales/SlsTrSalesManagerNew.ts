@@ -5254,7 +5254,7 @@ namespace SlsTrSalesManagerNew {
         }
         //************************Data Mess***************
         debugger
-        rp.Module = "Sales";
+        rp.Module = "S";
         rp.TrDate = txtInvoiceDate.value;
         rp.TrNo = lblInvoiceNumber.value;
         rp.ContactMobile = "966504170785";//966504170785 //966508133500 
