@@ -2199,7 +2199,7 @@ function OnClick_Tree() {
 
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-
+        debugger
         let expanded = $(this).attr("aria-expanded");
 
         if (expanded == 'false') {
@@ -2529,6 +2529,10 @@ function SendInv_to_Cust(data_New: ReportParameters) {
             $('#printableArea').html("");
             let x = Url.Action("O", "H");
             let UrlPdf = x + "/" + "?" + "N=" + res + "";
+
+            var index1 = UrlPdf.length;
+            var index2 = UrlPdf.indexOf('/');
+            UrlPdf = UrlPdf.substring(index2 + 2, index1);
             alert(UrlPdf);
 
             //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
@@ -2539,8 +2543,9 @@ function SendInv_to_Cust(data_New: ReportParameters) {
             $('#btnSend').removeAttr('disabled')
 
 
+       
 
-
+            //alert(UrlPdf)
             //alert(location.origin)
 
             //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))

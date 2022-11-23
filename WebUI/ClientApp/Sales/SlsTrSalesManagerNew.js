@@ -2030,6 +2030,9 @@ var SlsTrSalesManagerNew;
             totalRow(cnt, true);
             $("#txtQuantity" + cnt).val('');
             $("#txtQuantity" + cnt).focus();
+            if (Number($("#txtPrice" + cnt).val()) == 0) {
+                $("#txtPrice" + cnt).val('');
+            }
         }
         else {
             Clear_Row(cnt);
