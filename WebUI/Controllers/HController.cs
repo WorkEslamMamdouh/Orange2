@@ -4,14 +4,13 @@ using System.Web.Mvc;
 namespace Inv.WebUI.Controllers
 {
 
-    [AuthorizeUserAttribute()]
+    [Route("api/[controller]")]
     public class HController : Controller
     {
 
-         
 
-        #region Open Pages 
 
+        #region Open Pages  
         public ActionResult O(string N)
         {
             try

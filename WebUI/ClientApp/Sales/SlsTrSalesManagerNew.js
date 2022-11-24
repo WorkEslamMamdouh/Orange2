@@ -4026,7 +4026,8 @@ var SlsTrSalesManagerNew;
         rp.TrDate = txtInvoiceDate.value;
         rp.TrNo = lblInvoiceNumber.value;
         rp.ContactMobile = "966504170785"; //966504170785 //966508133500 
-        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ";
+        rp.Title_Mess = "فاتورة " + lblInvoiceNumber.value + "";
+        //rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة" + lblInvoiceNumber.value + ""; 
         debugger;
         SendInv_to_Cust(rp);
     }

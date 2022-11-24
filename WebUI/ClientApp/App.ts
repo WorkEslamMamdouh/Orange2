@@ -2515,7 +2515,7 @@ function SendInv_to_Cust(data_New: ReportParameters) {
     }, 200);
 
     const baseDocUUID = "" + data_New.TrNo.toString() + "_" + data_New.Module + "" + SysSession.CompCode + "" + SysSession.BranchCode
-    data_New.DocUUID =  baseDocUUID
+    data_New.DocUUID = baseDocUUID
     //data_New.DocUUID = window.btoa(baseDocUUID);
     //alert(data_New.DocUUID)
     Ajax.CallAsync({
@@ -2523,19 +2523,33 @@ function SendInv_to_Cust(data_New: ReportParameters) {
         data: data_New,
         success: (d) => {
             let result = d as BaseResponse;
-            let res = window.btoa("" + result+"");
+            let res = window.btoa("" + result + "");
 
             //$('#printableArea').html("" + result + "");
             $('#printableArea').html("");
             let x = Url.Action("O", "H");
-            let UrlPdf = x + "/" + "?" + "N=" + res + "";
+            //let UrlPdf = x + "/" + "?" + "N=" + res + "";
+            let UrlPdf = location.origin + "/" + res + "";
 
             var index1 = UrlPdf.length;
-            var index2 = UrlPdf.indexOf('/');
-            UrlPdf = UrlPdf.substring(index2 + 2, index1);
+            if (location.hostname != "localhost") {
+                //var index2 = UrlPdf.indexOf('/');
+                //UrlPdf = UrlPdf.substring(index2 + 2, index1);
+                UrlPdf = UrlPdf.replace('www.', '');
+            }
+            //else if (true) {
+ 
+            //    //var index2 = UrlPdf.indexOf('.');
+            //    //UrlPdf = UrlPdf.substring(index2 + 1, index1);
+            //}
+ 
             alert(UrlPdf);
 
-            //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
+            //UrlPdf = location.protocol +'//'+ UrlPdf
+
+            //alert(UrlPdf);
+
+            SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
 
 
             $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;')
@@ -2543,10 +2557,10 @@ function SendInv_to_Cust(data_New: ReportParameters) {
             $('#btnSend').removeAttr('disabled')
 
 
-       
+
+
 
             //alert(UrlPdf)
-            //alert(location.origin)
 
             //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))
 
@@ -2572,7 +2586,7 @@ function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobil
                 debugger
                 let res = result.Response;
 
-                MessageBox.Show(res, "خطأ");
+                MessageBox.Show(res, "الرساله");
                 //alert(res)
 
             }

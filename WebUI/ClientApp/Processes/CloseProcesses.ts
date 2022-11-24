@@ -4056,14 +4056,17 @@ namespace CloseProcesses {
             btnBack_3_onclick();
             btnBack_5_onclick();
 
-            //btnUpdate_2.disabled = true;
-            //btnUpdate_3.disabled = true;
+            btnUpdate_2.disabled = true;
+            btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
+            btnReCalculation.disabled = true;
             //}
 
 
 
             Calculation_Close();
+
+
         }
         else {
             DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
@@ -4655,6 +4658,9 @@ namespace CloseProcesses {
 
             flag_Back = false;
 
+            btnUpdate_2.disabled = false;
+            btnUpdate_3.disabled = false;
+            btnReCalculation.disabled = false;
         }
         else {
 
@@ -4666,7 +4672,7 @@ namespace CloseProcesses {
 
             DocumentActions.RenderFromModel(Selected_Data[0]);
             var trDate: string = DateFormat(Selected_Data[0].TrDate);
-            //txtDateHeader.value = trDate;
+            txtDateHeader.value = trDate;
             $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
             $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
             $('#txtStatus').val(Selected_Data[0].Status_DescA);
@@ -4714,6 +4720,8 @@ namespace CloseProcesses {
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnUpdate_5.disabled = false;
+            btnReCalculation.disabled = false;
+
         }
 
 

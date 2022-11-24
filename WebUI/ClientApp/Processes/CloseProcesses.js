@@ -3081,9 +3081,10 @@ var CloseProcesses;
             }
             btnBack_3_onclick();
             btnBack_5_onclick();
-            //btnUpdate_2.disabled = true;
-            //btnUpdate_3.disabled = true;
+            btnUpdate_2.disabled = true;
+            btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
+            btnReCalculation.disabled = true;
             //}
             Calculation_Close();
         }
@@ -3542,6 +3543,9 @@ var CloseProcesses;
             Display();
             MasterGridBiuld();
             flag_Back = false;
+            btnUpdate_2.disabled = false;
+            btnUpdate_3.disabled = false;
+            btnReCalculation.disabled = false;
         }
         else {
             $("#divProcessClose").attr("disabled", "disabled").off('click');
@@ -3551,7 +3555,7 @@ var CloseProcesses;
             btnBack_4.classList.add("display_none");
             DocumentActions.RenderFromModel(Selected_Data[0]);
             var trDate = DateFormat(Selected_Data[0].TrDate);
-            //txtDateHeader.value = trDate;
+            txtDateHeader.value = trDate;
             $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
             $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
             $('#txtStatus').val(Selected_Data[0].Status_DescA);
@@ -3586,6 +3590,7 @@ var CloseProcesses;
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnUpdate_5.disabled = false;
+            btnReCalculation.disabled = false;
         }
         Update_4 = false;
         disabled_divMasterGridiv();

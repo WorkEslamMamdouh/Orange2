@@ -1970,17 +1970,26 @@ function SendInv_to_Cust(data_New) {
             //$('#printableArea').html("" + result + "");
             $('#printableArea').html("");
             var x = Url.Action("O", "H");
-            var UrlPdf = x + "/" + "?" + "N=" + res + "";
+            //let UrlPdf = x + "/" + "?" + "N=" + res + "";
+            var UrlPdf = location.origin + "/" + res + "";
             var index1 = UrlPdf.length;
-            var index2 = UrlPdf.indexOf('/');
-            UrlPdf = UrlPdf.substring(index2 + 2, index1);
+            if (location.hostname != "localhost") {
+                //var index2 = UrlPdf.indexOf('/');
+                //UrlPdf = UrlPdf.substring(index2 + 2, index1);
+                UrlPdf = UrlPdf.replace('www.', '');
+            }
+            //else if (true) {
+            //    //var index2 = UrlPdf.indexOf('.');
+            //    //UrlPdf = UrlPdf.substring(index2 + 1, index1);
+            //}
             alert(UrlPdf);
-            //SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
+            //UrlPdf = location.protocol +'//'+ UrlPdf
+            //alert(UrlPdf);
+            SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId);
             $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;');
             $('#btnSend').html('<i class="fas fa-file-pdf fa-fw side-icon ms-1"></i> <span class="align-self-center mb-3">  ارسال PDF</span>');
             $('#btnSend').removeAttr('disabled');
             //alert(UrlPdf)
-            //alert(location.origin)
             //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))
         }
     });
@@ -1997,7 +2006,7 @@ function SendMessg(CompCode, HdMsg, DetMsg, ContactMobile, TrID) {
             if (result.IsSuccess) {
                 debugger;
                 var res = result.Response;
-                MessageBox.Show(res, "خطأ");
+                MessageBox.Show(res, "الرساله");
                 //alert(res)
             }
         }

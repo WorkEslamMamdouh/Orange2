@@ -1881,14 +1881,15 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult SendMessage(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
         {
-            var SendingMethods = new Sending_Methods();
+            Sending_Methods SendingMethods = new Sending_Methods();
 
 
+            string res = "";
             string response = "";
 
 
 
-            var IControl = db.I_Control.Where(x => x.CompCode == CompCode).First();
+            I_Control IControl = db.I_Control.Where(x => x.CompCode == CompCode).First();
 
 
             G_AlertControl cntrl = db.G_AlertControl.Where(x => x.Compcode == CompCode).First();
@@ -1897,14 +1898,24 @@ namespace Inv.API.Controllers
 
             if (IControl.SendSMS == true)
             {
-                response = SendingMethods.Send_SMS(cntrl.SMS_Provider, cntrl.SMS_UserName, cntrl.SMS_Password, HdMsg + "\n " + DetMsg, cntrl.SMS_SenderName, cntrl.MobileNoPreFex + "" + ContactMobile.Substring(1, ContactMobile.Length - 1), CompCode);//"966504170785");
+                response = SendingMethods.Send_SMS(cntrl.SMS_Provider, cntrl.SMS_UserName, cntrl.SMS_Password, cntrl.EMAIL_SenderName + " " + HdMsg + "\n " + DetMsg, cntrl.SMS_SenderName, cntrl.MobileNoPreFex + "" + ContactMobile.Substring(1, ContactMobile.Length - 1), CompCode);//"966504170785");
                 if (response == "لقد تمت العملية بنجاح")
                 {
-                    var ALertLogSMS = new G_AlertLog();
-                    ALertLogSMS.CompCode = CompCode;
-                    ALertLogSMS.TrID = TrID;
-                    ALertLogSMS.MobileNo = ContactMobile;
-                    ALertLogSMS.MsgHeader = HdMsg.Substring(0, 49);
+                    G_AlertLog ALertLogSMS = new G_AlertLog
+                    {
+                        CompCode = CompCode,
+                        TrID = TrID,
+                        MobileNo = ContactMobile
+                    };
+
+                    if (HdMsg.Length < 50)
+                    {
+                        ALertLogSMS.MsgHeader = HdMsg;
+                    }
+                    else
+                    {
+                        ALertLogSMS.MsgHeader = HdMsg.Substring(0, 49); 
+                    }
                     ALertLogSMS.MsgBody = DetMsg;
                     ALertLogSMS.AlertType = "1";
                     ALertLogSMS.SendDate = DateTime.Now;
@@ -1917,8 +1928,8 @@ namespace Inv.API.Controllers
 
                 }
             }
-
-            return Ok(new BaseResponse(response));
+            res = response + "\n " + cntrl.SMS_SenderName + "\n " + cntrl.EMAIL_SenderName + " " + HdMsg + "\n " + DetMsg;
+            return Ok(new BaseResponse(res));
         }
 
 
