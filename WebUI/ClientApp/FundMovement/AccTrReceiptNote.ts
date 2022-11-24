@@ -74,53 +74,45 @@ namespace AccTrReceiptNote {
     var GlobalBankIDH = 0;
     var GlobalAccIDH = 0;
     var GlobalBoxIDH = 0;
-    var IsEdite: boolean = false;;
-
-
-
-
+    var IsEdite: boolean = false; 
     ////////////////////////////////////////////Vendors////////////////////////////////////////
     var PurchaserVndId;
     var VndIdfilter;
     var GLOBALopenbalance;
     var AccountVndDetails: Array<A_Pay_D_Vendor> = new Array<A_Pay_D_Vendor>();
-    var BenVndDetails: Array<A_Pay_D_Vendor> = new Array<A_Pay_D_Vendor>();
-
-
+    var BenVndDetails: Array<A_Pay_D_Vendor> = new Array<A_Pay_D_Vendor>(); 
     //////////////////////////////////////////Customers/////////////////////////////////////////
     var AccountVendorDetails: Array<IQ_GetCustomer> = new Array<IQ_GetCustomer>();
     var VendorDetails: Array<A_Rec_D_Customer> = new Array<A_Rec_D_Customer>();
     var PurchaserCustId;
-    var custIdfilter;
-
+    var custIdfilter; 
     //////////////////////////////////////////Bank/////////////////////////////////////////
     var AccountBankDetails: A_ACCOUNT = new A_ACCOUNT;
     var BankDetails: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var PurchaserBankId;
-    var BankIdfilter;
-
+    var BankIdfilter; 
     //////////////////////////////////////////Account/////////////////////////////////////////
     var AccountAccDetails: Array<A_RecPay_D_Accounts> = new Array<A_RecPay_D_Accounts>();
     var AccDetails: Array<A_RecPay_D_Accounts> = new Array<A_RecPay_D_Accounts>();
     var PurchaserAccId;
-    var AccIdfilter;
-
+    var AccIdfilter; 
     //////////////////////////////////////////Account/////////////////////////////////////////
     var AccountBoxDetails: Array<A_RecPay_D_CashBox> = new Array<A_RecPay_D_CashBox>();
     var BoxDetails: Array<A_RecPay_D_CashBox> = new Array<A_RecPay_D_CashBox>();
     var PurchaserBoxId;
     var BoxIdfilter;
-    //----------------------------------------------------print buttons 
+    //////////////////////////////////////////print buttons////////////////////////////////////////////
 
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
+    var btnSend: HTMLButtonElement;
     //var btnPrint: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
     var btnPrintsFrom_To: HTMLButtonElement;
 
-    //-----------------------------------------------------------------------------
+     
     var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var BranchCode: number;//SharedSession.CurrentEnvironment.BranchCode;
     var IsNew;
@@ -186,6 +178,12 @@ namespace AccTrReceiptNote {
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         Display_Acount_Code();
+
+
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
+
     }
 
     function InitalizeControls() {
@@ -235,6 +233,7 @@ namespace AccTrReceiptNote {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+        btnSend = document.getElementById("btnSend") as HTMLButtonElement;
         //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
         btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
@@ -278,6 +277,7 @@ namespace AccTrReceiptNote {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = PrintTransaction;
+        btnSend.onclick = sendCust;
         //btnPrintslip. = btnPrintslip;
         btnPrintslip.onclick = btnPrintslip_onclick;
 
@@ -291,6 +291,7 @@ namespace AccTrReceiptNote {
         txt_CardAmount.onchange = Amount_onchange;
 
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
+         
 
     }
 
@@ -512,15 +513,6 @@ namespace AccTrReceiptNote {
 
     }
 
-    //function txt_ID_beneficiaryNew_onchange()
-    //{
-    //    var openbalance = Number($('option:selected', txt_ID_beneficiaryNew).attr('data-openbalance'));
-
-    //    if (txt_ID_beneficiaryNew.value == "Null") { $('#txt_Openbalance').val(""); } else { $('#txt_Openbalance').val(openbalance);}
-
-
-    //}
-
     function txt_ReceiptNoteNew_onchange() {
 
         txt_BenCode.value = "";
@@ -592,12 +584,14 @@ namespace AccTrReceiptNote {
             $("#id_div_Add").addClass("disabledDiv");
 
             $('#btnPrintTransaction').addClass("display_none");
+            $('#btnSend').addClass("display_none");
 
 
             txtCashTypeNew.value != '0' ? $('#txt_Amount').removeAttr('disabled') : $('#txt_Amount').attr('disabled', 'disabled');
             chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
             $(".btn-group").addClass("display_none");
 
+            $('#txt_Receiving_Fund').removeAttr('disabled');
 
         }
          
@@ -606,12 +600,12 @@ namespace AccTrReceiptNote {
 
     function btnAdd_onclick() {
         IsEdite = false;
-        if (txt_D_CashBox.value == "Null") {
-            DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
-            Errorinput(txt_D_CashBox);
-            Back();
-            return;
-        } else {
+        //if (txt_D_CashBox.value == "Null") {
+        //    DisplayMassage('(يجب أختيار الصندوق)', '(The Box must be selected)', MessageType.Worning)
+        //    Errorinput(txt_D_CashBox);
+        //    Back();
+        //    return;
+        //} else {
 
             $("#Div_control").removeClass("display_none");
             DisplayAddStkGCodes();
@@ -632,6 +626,7 @@ namespace AccTrReceiptNote {
             reference_Page();
             chkActive.checked = false;
             $('#btnPrintTransaction').addClass("display_none");
+        $('#btnSend').addClass("display_none");
 
 
             $('#Bank_Div').addClass('display_none');
@@ -643,13 +638,16 @@ namespace AccTrReceiptNote {
 
             $('#txt_Amount').attr('disabled', 'disabled');
             $('#txtDateNew').removeAttr('disabled');
+            $('#txt_Receiving_Fund').removeAttr('disabled');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_BankAcc_Code').val('null');
             chkIsDeffered.checked = false;
             txtDueDate.value = GetDate();
 
-        }
+        //}
+        IsNew = true;
+
     }
 
     function btnsave_onClick() {
@@ -751,6 +749,9 @@ namespace AccTrReceiptNote {
         $('#btnSave').addClass("display_none");
         $('#btnBack').addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
+
+       
+
         //$("#div_ContentData :input").attr("disabled", "true");
         $(".fa-minus-circle").addClass("display_none");
         $("#btnUpdate").removeClass("display_none");
@@ -877,6 +878,9 @@ namespace AccTrReceiptNote {
         else {
             Display();
         }
+
+        $("#Div_control").addClass("display_none");
+
     }
 
     function btnback_onclick() {
@@ -886,7 +890,8 @@ namespace AccTrReceiptNote {
             $('#btnAddDetails').addClass("display_none");
             $('#btnSave').addClass("display_none");
             $('#btnBack').addClass("display_none");
-            $("#btnPrintTransaction").removeClass("display_none");
+            $("#btnPrintTransaction").addClass("display_none");
+            $("#btnSend").addClass("display_none");
             //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
             $("#btnUpdate").removeClass("display_none");
@@ -955,6 +960,10 @@ namespace AccTrReceiptNote {
 
 
         Amount_onchange();
+
+        IsNew = false;
+
+
     }
 
     function DisplayData(Selecteditem: Array<IQ_GetBoxReceiveList>) {
@@ -1001,6 +1010,15 @@ namespace AccTrReceiptNote {
         chkIsDeffered.checked = Selecteditem[0].IsDeffered == true ? true : false;
 
         txtCashTypeNew_onchange();
+
+
+        if (Selecteditem[0].CustomerID > 0) {
+            $("#btnSend").removeClass("display_none");
+        }
+        else {
+            $("#btnSend").addClass("display_none");
+        }
+
     }
 
     function Display_GCodes() {
@@ -1095,7 +1113,7 @@ namespace AccTrReceiptNote {
 
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
 
-            $('#txt_D_CashBox option[value="Null"]').remove();
+            //$('#txt_D_CashBox option[value="Null"]').remove();
             $('#txt_Receiving_Fund option[value="Null"]').remove();
             var box = Details_Type_D_CashBox.filter(x => x.CashBoxID == Number(txt_D_CashBox.value));
             if (box.length > 0) {
@@ -1210,36 +1228,23 @@ namespace AccTrReceiptNote {
     }
 
     function Display() {
-
+        debugger
         Assign_Display();
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccTrReceipt", "GetBoxReceiveList"),
             data: {
-                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                comp: compcode, GlobalID: GlobalID, IQ_TrType: IQ_TrType, Boxid: Boxid, Status: Status, RecPayTypeId: RecPayTypeId, FromDate: DateFrom, Todate: DateTo, custId: custId, vndid: vndid, expid: expid, BankCode: BankCode, fromBoxid: fromBoxid, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrReceiptNote, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    Details = result.Response as Array<IQ_GetBoxReceiveList>;
-
-                    //for (var i = 0; i < Details.length; i++) {
-
-                    //    Details[i].TrDate = DateFormat(Details[i].TrDate);
-
-                    //    if (Details[i].Status == 1) { Details[i].Status_New = (lang == "ar" ? "معتمد " : "A certified "); }
-                    //    else { Details[i].Status_New = (lang == "ar" ? "غير معتمد" : 'Not supported'); }
-
-
-                    //}
-
+                    Details = result.Response as Array<IQ_GetBoxReceiveList>;                     
                     InitializeGrid();
                     ReportGrid.DataSource = Details;
                     ReportGrid.Bind();
 
-
                 }
-
             }
         });
     }
@@ -1358,6 +1363,11 @@ namespace AccTrReceiptNote {
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
             Model.BankName = $('#txt_BankName').val();
 
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrReceiptNote;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model);//Insert Update
@@ -1396,17 +1406,22 @@ namespace AccTrReceiptNote {
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
 
-            Model.TrNo = Reciept_TrNo;
+            //Model.TrNo = Reciept_TrNo;
+            Model.TrNo = Number($('#txt_CODE').val());
             Model.VoucherNo = 0;
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
 
 
-        }
+           Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+           Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+           Model.MODULE_CODE = Modules.AccTrReceiptNote;
+           Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+           Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
-         
 
+        } 
     }
 
     function Insert() {
@@ -1417,7 +1432,7 @@ namespace AccTrReceiptNote {
             WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
             return
         }
-
+        console.log(Model);
         Ajax.Callsync({
             type: "POST",
 
@@ -1432,6 +1447,7 @@ namespace AccTrReceiptNote {
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     Valid = 0;
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
@@ -1459,6 +1475,7 @@ namespace AccTrReceiptNote {
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     Update_claenData = 0;
+                    $('#txt_D_CashBox').val('Null');
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
@@ -1473,10 +1490,10 @@ namespace AccTrReceiptNote {
 
     }
 
-
     function IsSuccess() {
         IsNew = false;
         AddDisabled();
+        ReportGrid.SelectedKey = ReceiptID.toString(); 
         Selecteditem = Details.filter(x => x.ReceiptID == Number(ReceiptID));
         Update_claenData = 1;
         DisplayAddStkGCodes();
@@ -1513,9 +1530,9 @@ namespace AccTrReceiptNote {
         $("#Div_control").removeClass("display_none");
 
 
+        IsNew = false;
 
     }
-
 
     export function PrintReport(OutType: number) {
         // 
@@ -1587,6 +1604,7 @@ namespace AccTrReceiptNote {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result);
                 // window.close(result)
@@ -1606,6 +1624,7 @@ namespace AccTrReceiptNote {
 
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -1643,13 +1662,14 @@ namespace AccTrReceiptNote {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
                 window.open(result, "_blank");
             }
         })
     }
 
-    ///////////////////////////////////////donia
-    ////////////////////////////////////////////////Display Vendors///////////////////////////
+     ////////////////////////////////////////////////Display Vendors///////////////////////////
     function btnBenVnd_onclick() {
 
         sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", "CompCode= " + compcode + "and IsCreditVendor = 1 and Isactive = 1", () => {
@@ -2231,6 +2251,7 @@ namespace AccTrReceiptNote {
         if (txt_ReceiptNoteNew.value == "4") { btnBenAcc_onclick(); }
         if (txt_ReceiptNoteNew.value == "5") { btnBenBox_onclick(); }
     }
+
     function txt_BenCode_onchange() {
         if (txt_ReceiptNoteNew.value == "1") { txt_BenCustCode_onchange(); }
         if (txt_ReceiptNoteNew.value == "2") { txt_BenVndCode_onchange(); }
@@ -2250,6 +2271,7 @@ namespace AccTrReceiptNote {
         if (txt_ReceiptNote.value == "4") { btnBenAccH_onclick(); }
         if (txt_ReceiptNote.value == "5") { btnBenBoxH_onclick(); }
     }
+
     function txt_BenCodeH_onchange() {
         if (txt_ReceiptNote.value == "Null") {
             txt_BenCodeH.value = "";
@@ -2262,6 +2284,7 @@ namespace AccTrReceiptNote {
         if (txt_ReceiptNote.value == "4") { BenAccCodeH_onchange(); }
         if (txt_ReceiptNote.value == "5") { txt_BenBoxCodeH_onchange(); }
     }
+
     function Amount_onchange() {
         debugger;
         var Currency = sys.SysSession.CurrentEnvironment.I_Control[0].Currencyid
@@ -2280,8 +2303,6 @@ namespace AccTrReceiptNote {
             }
         });
     }
-
-
 
     function btnPrintsFrom_To_onclick() {
         btnShow_onclick();
@@ -2363,16 +2384,34 @@ namespace AccTrReceiptNote {
     }
 
 
-}
+
+
+    function sendCust() {
 
 
 
+        let rp: ReportParameters = new ReportParameters();
+
+        rp.Type = 0;
+        rp.slip = 0;
+        rp.Repdesign = 1;
+        rp.TRId = ReceiptID;
+
+        rp.Name_function = "rptReceiptNote";
+
+
+        //************************Data Mess***************
+        debugger
+        rp.Module = "Receipt";
+        rp.TrDate = txtDateNew.value;
+        rp.TrNo = txt_CODE.value;
+        rp.ContactMobile = "966504170785";//966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + txt_CODE.value + " ) ";
+
+        debugger
+        SendInv_to_Cust(rp)
+    }
 
 
 
-
-
-
-
-
-
+} 

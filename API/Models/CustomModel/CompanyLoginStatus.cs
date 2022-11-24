@@ -21,5 +21,8 @@ namespace Inv.API.Models.CustomModel
         public string ProfitAcc_Code { get; set; }
         public Nullable<int> OpenAccVoucheNo { get; set; }
         public Nullable<int> OpenInvAdjNo { get; set; }
+        public Nullable<System.DateTime> MembeshipEndDate { get; set; }
+        public Nullable<int> MembershipAllanceDays { get; set; }
+        public Nullable<int> MembershipreadOnlyDays { get; set; }
     }
 }

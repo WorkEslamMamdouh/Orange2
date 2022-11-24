@@ -370,6 +370,11 @@ var Dtcostcenter;
         MasterDetail.A_CCDT_Types = Model;
         MasterDetail.A_CCDT_COSTCENTERS = CCDTDetail.filter(function (x) { return x.StatusFlag != 'd'; });
         MasterDetail.A_ACCOUNT = AccountDetail;
+        MasterDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetail.MODULE_CODE = Modules.Dtcostcenter;
+        MasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "post",
             url: sys.apiUrl("AccDtTypes", "InsertAll"),

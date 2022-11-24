@@ -86,19 +86,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\r\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\r\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.2.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\r\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\r\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -113,7 +113,7 @@
       <HintPath>..\packages\QRCoder.1.3.9\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>..\..\SafeParty\API\bin\Security.dll</HintPath>
+      <HintPath>..\packages\Security\Security.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Barcode, Version=3.2.0.14040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <HintPath>..\packages\FreeSpire.Office.4.3.1\lib\net40\Spire.Barcode.dll</HintPath>
@@ -222,6 +222,7 @@
     <Content Include="images\Background\bk_shrouq.jpg" />
     <Content Include="images\Background\bs1.jpg" />
     <Content Include="images\Background\businessman-3087395_1920.jpg" />
+    <Content Include="images\Background\ErrorPdf.jpg" />
     <Content Include="images\Background\fr1.jpg" />
     <Content Include="images\Background\fr2.jpg" />
     <Content Include="images\Background\fr6.jpg" />
@@ -2094,6 +2095,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientToolsController.cs" />
     <Compile Include="Controllers\GeneralRepController.cs" />
+    <Compile Include="Controllers\HController.cs" />
     <Compile Include="Controllers\ReportsPagePrintController.cs" />
     <Compile Include="Controllers\Reports_pdfController.cs" />
     <Compile Include="Controllers\GeneralReportsController.cs" />
@@ -2288,6 +2290,7 @@
     <Content Include="Views\Sales\SlsTrSalesOperationIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnNewIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnOperationIndex.cshtml" />
+    <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2674,6 +2677,17 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankSummaryEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBoxSummaryEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingFiveAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingFiveEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingThreeAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccCustomerAgingThreeEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingFiveAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingFiveEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingThreeAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorAgingThreeEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccVendorLedgerAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

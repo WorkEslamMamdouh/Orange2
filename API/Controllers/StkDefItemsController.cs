@@ -196,21 +196,21 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetItem(int CompCode, int BraCode, int FinYear, string ItemCode, int StoreId, bool Show, string UserCode, string Token)
         { //CompCode: compcode, BraCode: BranchCode, FinYear: Finyear, ItemID: ItemID , StoreId: StoreId, Show: Show, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            
-                string SQL = "";
-                if (Show)
-                {
-                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + "";
-                }
-                else
-                {
-                    SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + " and IsActive =1 and ISSales = 1 ";
-                }
 
-                List<IQ_GetItemStoreInfo> ItemList = db.Database.SqlQuery<IQ_GetItemStoreInfo>(SQL).ToList();
+            string SQL = "";
+            if (Show)
+            {
+                SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + "";
+            }
+            else
+            {
+                SQL = "Select *  from IQ_GetItemStoreInfo where CompCode= " + CompCode + "and BraCode =" + BraCode + " and FinYear =" + FinYear + " and  ItemCode ='" + ItemCode + "' and  StoreId =" + StoreId + " and IsActive =1 and ISSales = 1 ";
+            }
 
-                return Ok(new BaseResponse(ItemList));
-           
+            List<IQ_GetItemStoreInfo> ItemList = db.Database.SqlQuery<IQ_GetItemStoreInfo>(SQL).ToList();
+
+            return Ok(new BaseResponse(ItemList));
+
         }
 
         [HttpGet, AllowAnonymous]
@@ -313,6 +313,7 @@ namespace Inv.API.Controllers
                                 itemDefList.I_ItemYear[i].MinUnitPrice = 0;
                                 yearrec = ItemDefYearService.Update(itemDefList.I_ItemYear[i]);
                             }
+                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, InsertedRec.ItemID, LogUser.UserLog.Insert, itemDefList.MODULE_CODE, true, null, null, null);
 
                         }
                         else if (item.StatusFlag == 'u')
@@ -338,6 +339,8 @@ namespace Inv.API.Controllers
                                 AllSuccess = false;
                                 break;
                             }
+                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, UpdateedRec.ItemID, LogUser.UserLog.Update, itemDefList.MODULE_CODE, true, null, null, null);
+
                         }
                         else if (item.StatusFlag == 'd')
                         {
@@ -350,6 +353,8 @@ namespace Inv.API.Controllers
                                 Delet_Item = false;
                                 break;
                             }
+                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, item.ItemID, LogUser.UserLog.Delete, itemDefList.MODULE_CODE, true, null, null, null);
+
 
                         }
                         i++;
@@ -363,18 +368,22 @@ namespace Inv.API.Controllers
                     if (!Delet_Item)
                     {
                         dbTransaction.Commit();
+
                         // Return in case if the db generate transaction number   res.ResponseData
                         return Ok(new BaseResponse(0));
                     }
                     if (AllSuccess)
                     {
                         dbTransaction.Commit();
+
                         // Return in case if the db generate transaction number   res.ResponseData
                         return Ok(new BaseResponse(100));
                     }
                     else
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, null, LogUser.UserLog.Update, itemDefList.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
 
@@ -383,6 +392,8 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, null, LogUser.UserLog.Update, itemDefList.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
 
@@ -397,6 +408,21 @@ namespace Inv.API.Controllers
 
 
         }
+
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetItemsControl(string FildItemID, string FildItemCode, string FildItm_Desc, string qury)
+        {
+
+            string SQL = "select " + FildItemID + " as ItemID, " + FildItemCode + " as ItemCode , " + FildItm_Desc + " as ItemDesc from " + qury + "";
+             
+            List<Custom_Items> ItemList = db.Database.SqlQuery<Custom_Items>(SQL).ToList();
+
+            return Ok(new BaseResponse(ItemList));
+
+        }
+
 
 
     }

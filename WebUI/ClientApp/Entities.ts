@@ -4,6 +4,10 @@ class SecurityClass {
     public Token: string;
     public CompName: string;
     public VatNo: string;
+    public Branch_Code: string;
+    public Comp_Code: string;
+    public sec_FinYear: string;
+    public MODULE_CODE: string;
 }
 
 class FavModules {//
@@ -143,6 +147,14 @@ class ReportParameters {
     public SubSystemCode: String;
     public Tokenid: String;
     public LoginUser: string;
+
+    public Send_Pdf: number;
+    public TrNo: string;
+    public ContactMobile: string;
+    public Title_Mess: string;
+    public DocUUID: string;
+    public TrDate: string;
+    public Module: string;
 
     public FromDt: string;// { get; set; }--
     public ToDt: string;// { get; set; }--
@@ -642,6 +654,10 @@ class I_VW_GetCompStatus extends SecurityClass {
         this.ProfitAcc_Code = "";
         this.OpenAccVoucheNo = 0;
         this.OpenInvAdjNo = 0;
+        this.MembershipAllanceDays = 0;
+        this.MembershipreadOnlyDays = 0;
+        this.MembeshipEndDate = "";
+
     }
     public CompCode: number;
     public AddAble: boolean;
@@ -656,6 +672,9 @@ class I_VW_GetCompStatus extends SecurityClass {
     public ProfitAcc_Code: string;
     public OpenAccVoucheNo: number;
     public OpenInvAdjNo: number;
+    public MembershipAllanceDays: number;
+    public MembershipreadOnlyDays: number;
+    public MembeshipEndDate: string;
 }
 
 
@@ -1837,6 +1856,19 @@ class IQ_GetItemFamily {
     public IsStock: boolean;
     public IsProduct: boolean;
     public IsPurchase: boolean;
+}
+             
+
+class Custom_Items {
+    constructor() {
+        this.ItemID = 0;
+        this.ItemCode = "";
+        this.ItemDesc = "";
+    
+    }
+    public ItemID: number;
+    public ItemCode: string;
+    public ItemDesc: string; 
 }
                    
 
@@ -9783,8 +9815,12 @@ class ServPurchseInvoiceMasterDetail extends SecurityClass {
     public AVAT_TR_PurInvoiceHeader: Array<AVAT_TR_PurInvoiceHeader>;
 }
 
-class PurInvoiceRetMasterDetails {
-
+class PurInvoiceRetMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.AVAT_TR_PurInvoiceRet = new AVAT_TR_PurInvoiceRet();
+        this.AVAT_TR_PurInvoiceRetDetail = new Array<AVAT_TR_PurInvoiceRetDetail>();
+     }
     public AVAT_TR_PurInvoiceRet: AVAT_TR_PurInvoiceRet;
     public AVAT_TR_PurInvoiceRetDetail: Array<AVAT_TR_PurInvoiceRetDetail>;
 
@@ -9811,12 +9847,22 @@ class AQPurInvoiceRetMasterDetails {
 
 }
 
-class Account_CCDT_CCDTTP_MasterDetails {
+class Account_CCDT_CCDTTP_MasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.A_CCDT_Types = new A_CCDT_Types;
+        this.A_ACCOUNT = new Array<A_ACCOUNT>();
+        this.A_CCDT_COSTCENTERS = new Array<A_CCDT_COSTCENTERS>();
+
+    }
     public A_CCDT_Types: A_CCDT_Types;
     public A_ACCOUNT: Array<A_ACCOUNT>;
     public A_CCDT_COSTCENTERS: Array<A_CCDT_COSTCENTERS>;
 
 }
+
+
+ 
 class A_CCDT_COSTCENTERS extends SecurityClass {
     constructor() {
         super();

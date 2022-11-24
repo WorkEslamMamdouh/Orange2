@@ -278,22 +278,11 @@ namespace Supplieraccstat {
                 if (result.IsSuccess) {
                     Details = result.Response as Array<IQ_GetVendor>;
 
-
-                    //for (var i = 0; i < Details.length; i++) {
-
-                    //    Details[i].Isbalance = Number((Number(Details[i].Openbalance) - Number(Details[i].Debit) + Number(Details[i].Credit)).RoundToSt(2));
-
-                    //}
-
-
-
                 }
 
             }
         });
-    }
-
-  
+    }  
     //----------------------------------------------------(Get Vendor )
     function DisplayAccDefVendor() {
         debugger
@@ -312,7 +301,6 @@ namespace Supplieraccstat {
                     DisplayStVendor();
 
                 }
-
             }
         });
 
@@ -323,20 +311,13 @@ namespace Supplieraccstat {
             $('#txt_ID_Vendor').append('<option value="' + Details_Vendor[i].VendorID + '">' + (lang == "ar" ? Details_Vendor[i].NAMEA  : Details_Vendor[i].NAMEL) + '</option>');
         }
                
-    }
-
-
-
-
-
+    } 
     function btnReset_onclick() {
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
-        discharge();
-     
-
+        discharge(); 
     }
 
     function discharge() {
@@ -403,11 +384,7 @@ namespace Supplieraccstat {
         if (Number($("#txt_ID_APP_Type").val()) == 1) {//-------------منفذ 
             rp.Status = 1;
 
-        }
-        //if (Number($("#txt_ID_APP_Type").val()) == 0) {//-------------غير منفذ
-        //    rp.Status = 0;
-
-        //}
+        } 
         if ($("#txt_indebtedness").val() == ">") {//******عليه مديونيه
             rp.BalType = 1;
 
@@ -424,17 +401,7 @@ namespace Supplieraccstat {
 
             rp.BalType = 0;
         }
-
-        //txtVendorType
-        //if ($("#txtVendorType").val() == "Null") {//-------------جميع النشاطات  
-        //    rp.Status = 3;
-        //}
-        //if (Number($("#txtVendorType").val()) == 1) {//-------------مورد بضاعة 
-        //    rp.Status = 1;
-        //}
-        //if (Number($("#txtVendorType").val()) == 2) {//-------------مورد خدمات
-        //    rp.Status = 0;
-        //}
+ 
         if ($("#txt_ID_Vendor").val() == "Null") {//-------------جميع الفئات
             rp.VendorId = -1;
         } else {
@@ -461,8 +428,7 @@ namespace Supplieraccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             })
@@ -474,10 +440,8 @@ namespace Supplieraccstat {
                 url: Url.Action("IProc_Rpt_AccVendorSummary", "GeneralReports"),
                 data: rp,
                 success: (d) => {
-
                     let result = d.result as string;
-
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             })
@@ -491,15 +455,10 @@ namespace Supplieraccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-
-
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
                     window.open(result, "_blank");
                 }
             })
         }
-
-
-
     }
-
 }

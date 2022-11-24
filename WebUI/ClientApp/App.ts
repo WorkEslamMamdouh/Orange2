@@ -119,8 +119,8 @@ var TransType = {
     InvoiceOperationReturn: 'Pro_Ret',
     Pur_Receive: 'Pur',
     Pur_Receive_Return: 'Pur_Ret',
-    AccReceive: 'AccReceive', 
-    AccPayment: 'AccPayment', 
+    AccReceive: 'AccReceive',
+    AccPayment: 'AccPayment',
 }
 
 
@@ -1893,6 +1893,22 @@ function convertToG(date: string) {
 
 //}
 
+function daysDifference(dateI1, dateI2) {
+    debugger
+    //define two date object variables to store the date values
+    var date1 = new Date(dateI1);
+    var date2 = new Date(dateI2);
+
+    //calculate time difference
+    var time_difference = date2.getTime() - date1.getTime();
+
+    //calculate days difference by dividing total milliseconds in a day
+    var result = time_difference / (1000 * 60 * 60 * 24);
+
+
+    return parseInt(result.toString());
+}
+
 function addDaysOrMonth(date, days, Month) {
 
     var result = new Date(date);
@@ -2183,7 +2199,7 @@ function OnClick_Tree() {
 
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-
+        debugger
         let expanded = $(this).attr("aria-expanded");
 
         if (expanded == 'false') {
@@ -2352,7 +2368,7 @@ function CheckTime() {
         outUesr += 1;
         if (outUesr == 2) {
             localStorage.setItem("OutUesr", "1");
-            window.open(Url.Action("HomePage", "Login"), "_self"); 
+            window.open(Url.Action("HomePage", "Login"), "_self");
         }
 
         return
@@ -2441,7 +2457,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
-       
+
             //alert(result);
             //debugger
             //window.open(result, "blank");
@@ -2449,7 +2465,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             let x = Url.Action("OpenPdf", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
-          
+
 
             window.open(UrlPdf, "blank");
 
@@ -2462,3 +2478,184 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
     return '';
 }
+
+
+
+
+function SendInv_to_Cust(data_New: ReportParameters) {
+
+    var SysSession = GetSystemEnvironment();
+    data_New.CompCode = SysSession.CompCode;
+    data_New.BranchCode = SysSession.BranchCode;
+    data_New.CompNameA = SysSession.CompanyNameAr;
+    data_New.CompNameE = SysSession.CompanyName;
+    data_New.UserCode = SysSession.UserCode;
+    data_New.Tokenid = SysSession.Token;
+    data_New.ScreenLanguage = SysSession.ScreenLanguage;
+    data_New.SystemCode = SysSession.SystemCode;
+    data_New.SubSystemCode = SysSession.SubSystemCode;
+    data_New.BraNameA = SysSession.BranchName;
+    data_New.BraNameE = SysSession.BranchName;
+    data_New.DocPDFFolder = SysSession.I_Control[0].DocPDFFolder;
+    data_New.LoginUser = SysSession.UserCode;
+    data_New.Send_Pdf = 1;
+
+    if (data_New.BraNameA == null || data_New.BraNameE == null) {
+
+        data_New.BraNameA = " ";
+        data_New.BraNameE = " ";
+    }
+
+
+    setTimeout(function () {
+
+        $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;left: 0%;')
+        $('#btnSend').html(' جاري ارسال <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnSend').attr('disabled', 'disabled')
+    }, 200);
+
+    const baseDocUUID = "" + data_New.TrNo.toString() + "_" + data_New.Module + "" + SysSession.CompCode + "" + SysSession.BranchCode
+    data_New.DocUUID = baseDocUUID
+    //data_New.DocUUID = window.btoa(baseDocUUID);
+    //alert(data_New.DocUUID)
+    Ajax.CallAsync({
+        url: Url.Action("" + data_New.Name_function + "", "GeneralRep"),
+        data: data_New,
+        success: (d) => {
+            let result = d as BaseResponse;
+            let res = window.btoa("" + result + "");
+
+            //$('#printableArea').html("" + result + "");
+            $('#printableArea').html("");
+            let x = Url.Action("O", "H");
+            //let UrlPdf = x + "/" + "?" + "N=" + res + "";
+            let UrlPdf = location.origin + "/" + res + "";
+
+            var index1 = UrlPdf.length;
+            if (location.hostname != "localhost") {
+                //var index2 = UrlPdf.indexOf('/');
+                //UrlPdf = UrlPdf.substring(index2 + 2, index1);
+                UrlPdf = UrlPdf.replace('www.', '');
+            }
+            //else if (true) {
+ 
+            //    //var index2 = UrlPdf.indexOf('.');
+            //    //UrlPdf = UrlPdf.substring(index2 + 1, index1);
+            //}
+ 
+            alert(UrlPdf);
+
+            //UrlPdf = location.protocol +'//'+ UrlPdf
+
+            //alert(UrlPdf);
+
+            SendMessg(Number(SysSession.CompCode), data_New.Title_Mess, UrlPdf, data_New.ContactMobile, data_New.TRId)
+
+
+            $('#btnSend').attr('style', 'position: fixed;top: auto;bottom: 4px;')
+            $('#btnSend').html('<i class="fas fa-file-pdf fa-fw side-icon ms-1"></i> <span class="align-self-center mb-3">  ارسال PDF</span>');
+            $('#btnSend').removeAttr('disabled')
+
+
+
+
+
+            //alert(UrlPdf)
+
+            //alert(window.btoa("/H/O/" + "?" + "N=" + res + ""))
+
+        }
+    })
+
+
+
+}
+
+
+function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobile: string, TrID: number) {
+
+    debugger
+    let sys = new SystemTools;
+    Ajax.Callsync({
+        type: "Get",
+        url: sys.apiUrl("SystemTools", "SendMessage"),
+        data: { CompCode: CompCode, HdMsg: HdMsg, DetMsg: DetMsg, ContactMobile: ContactMobile, TrID: TrID },
+        success: (d) => {//(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                debugger
+                let res = result.Response;
+
+                MessageBox.Show(res, "الرساله");
+                //alert(res)
+
+            }
+        }
+    });
+
+}
+
+
+
+function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
+
+        }
+    });
+
+}
+function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "PrintliestLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogOperation"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, ExtraData: ExtraData },
+        success: (response) => {
+
+        }
+    });
+}
+function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "OpenScreenLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        success: (response) => {
+
+        }
+    });
+}
+

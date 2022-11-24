@@ -42,6 +42,7 @@ namespace Inv.API.Controllers
             {
                 
                 var AdjustmentTypeList = GenDefAdjustmentService.GetAll(x =>x.CompCode == CompCode && x.IsCustomer == isCustomer).ToList();
+
                 return Ok(new BaseResponse(AdjustmentTypeList));
             }
             return BadRequest(ModelState);
@@ -123,10 +124,15 @@ namespace Inv.API.Controllers
             try
             {
                 GenDefAdjustmentService.UpdateList(AdjustmentType);
+
+                LogUser.InsertPrint(db, AdjustmentType[0].Comp_Code.ToString(), AdjustmentType[0].Branch_Code, AdjustmentType[0].sec_FinYear, AdjustmentType[0].UserCode, null, LogUser.UserLog.Insert, AdjustmentType[0].MODULE_CODE, true, null, null, null);
+
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
+                LogUser.InsertPrint(db, AdjustmentType[0].Comp_Code.ToString(), AdjustmentType[0].Branch_Code, AdjustmentType[0].sec_FinYear, AdjustmentType[0].UserCode, null, LogUser.UserLog.Insert, AdjustmentType[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }

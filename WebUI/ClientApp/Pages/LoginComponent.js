@@ -202,6 +202,30 @@ var LoginComponent;
             }
         });
     }
+    function ShowMessg(CompanyStatus) {
+        var MembeshipEndDate = CompanyStatus.MembeshipEndDate;
+        var status = CompanyStatus.CompStatus;
+        var masg = CompanyStatus.LoginMsg;
+        var MembershipAllanceDays = CompanyStatus.MembershipAllanceDays;
+        var dateExport_1 = addDaysOrMonth(MembeshipEndDate, MembershipAllanceDays, 0);
+        var Day_1 = daysDifference(GetDate(), DateFormat(dateExport_1));
+        var MembershipreadOnlyDays = CompanyStatus.MembershipreadOnlyDays;
+        var AllDays = (MembershipAllanceDays + MembershipreadOnlyDays);
+        var dateExport = addDaysOrMonth(MembeshipEndDate, AllDays, 0);
+        var NumDay = daysDifference(GetDate(), DateFormat(dateExport));
+        if (status == 0 || status == 1 || status == 2) {
+            debugger;
+            if (status == 1) {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم", "");
+            }
+            else if (status == 2) {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم", "");
+            }
+            else {
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");
+            }
+        }
+    }
     function GoToCompanySelect() {
         $("#tblLogin").css("display", "none");
         $("#tblCompany").css("display", "block");
@@ -223,11 +247,8 @@ var LoginComponent;
                             var CompanyStatus = res.Response;
                             var status = CompanyStatus.CompStatus;
                             var masg = CompanyStatus.LoginMsg;
+                            ShowMessg(CompanyStatus);
                             if (status == 0 || status == 1 || status == 2) {
-                                //if (status == 1 || status == 2) {
-                                MessageBox.Show(CompanyStatus.LoginMsg, "");
-                                // Get i_control 
-                                // Get G_Branch 
                                 setTimeout(function () {
                                     $.ajax({
                                         type: "GET",
@@ -383,6 +404,7 @@ var LoginComponent;
         APiSession.Session.ScreenLanguage = SystemEnv.ScreenLanguage;
         APiSession.Session.UserCode = SystemEnv.UserCode;
         APiSession.Session.CurrentYear = $("#txtYear").val();
+        InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true); //if success
         $.ajax({
             url: OnLoggedUrl,
             success: function (result) {
@@ -420,6 +442,22 @@ var LoginComponent;
                         cmbBranch.add(new Option(text, bra.BRA_CODE.toString()));
                     });
                 }
+            }
+        });
+    }
+    function InsertLog(UserCode, compcode, BranchCode, FinYear, ISLogin) {
+        //*****log
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("G_USERS", "InsertLog"),
+            data: {
+                UserCode: UserCode,
+                compcode: compcode,
+                BranchCode: BranchCode,
+                FinYear: SystemEnv.CurrentYear,
+                ISLogin: ISLogin
+            },
+            success: function (d) {
             }
         });
     }

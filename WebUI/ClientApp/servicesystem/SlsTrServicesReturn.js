@@ -667,6 +667,7 @@ var SlsTrServicesReturn;
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Sales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         if (FlagAfterInsertOrUpdate == true) {
             Selecteditem = AQ_ServSlsInvoiceDetails.filter(function (x) { return x.InvoiceID == Number(GlobalReturnID); });
         }
@@ -982,6 +983,7 @@ var SlsTrServicesReturn;
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = AQ_ServSlsInvoiceDetails.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0
@@ -1384,6 +1386,11 @@ var SlsTrServicesReturn;
         }
         MasterDetailsModel.AVAT_TR_SlsInvoice = InvoiceModel;
         MasterDetailsModel.AVAT_TR_SlsInvoiceItem = InvoiceItemsDetailsModel;
+        MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailsModel.MODULE_CODE = Modules.Ser_Return_Sales;
+        MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         InvoiceModel.InvoiceID = GlobalReturnID;

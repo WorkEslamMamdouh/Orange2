@@ -157,160 +157,6 @@ var ServiceCategories;
             document.getElementById('Screen_name').innerHTML = "Service Categories";
         }
     }
-    //function btnSaleNO_onclick() {
-    //    var accGrup: number;
-    //    if (TypeP.checked == true) {
-    //        accGrup = 4;
-    //    } else {
-    //        accGrup = 5;
-    //    }
-    //    sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1  ", () => {
-    //        var id1 = SearchGrid.SearchDataGrid.SelectedKey
-    //        $('#txtSaleNO').val(id1);
-    //        getAccountById(id1, 1);
-    //    });
-    //    // flags = 1;
-    //}
-    //function btnreturnNO_onclick() {
-    //    var accGrup: number;
-    //    if (TypeP.checked == true) {
-    //        accGrup = 4;
-    //    } else {
-    //        accGrup = 5;
-    //    }
-    //    sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1 ", () => {
-    //        var id = SearchGrid.SearchDataGrid.SelectedKey
-    //        $('#txtreturnNO ').val(id);
-    //        getAccountById(id, 2);
-    //    });
-    //    //flags = 2;
-    //}
-    //function btndiscountNO_onclick() {
-    //    let accGrup: number;
-    //    if (TypeP.checked == true) {
-    //        accGrup = 4;
-    //    } else {
-    //        accGrup = 5;
-    //    }
-    //    sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1 ", () => {
-    //        let id = SearchGrid.SearchDataGrid.SelectedKey
-    //        $('#txtdiscountNO').val(id);
-    //        getAccountById(id, 3);
-    //    });
-    //    //  flags = 3;
-    //}
-    //function getAccountById(accountCode: string, flag: number) {
-    //    // call ajax
-    //    var AccCode = accountCode;
-    //    Ajax.Callsync({
-    //        type: "Get",
-    //        url: sys.apiUrl("GLDefAccount", "GetActivAccByCode"),
-    //        data: { CompCode: compcode, AccCode: AccCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-    //        success: (d) => {
-    //            let result = d as BaseResponse;
-    //            if (result.IsSuccess) {
-    //                AccountDetails = result.Response as A_ACCOUNT;
-    //                var ispur = TypeP.checked;
-    //                if (ispur == true) {// sales accgroup=4
-    //                    if (AccountDetails != null) {
-    //                        if (AccountDetails.ACC_GROUP == 4) {
-    //                            if (flag == 1) {
-    //                                $('#txtSaleD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                            if (flag == 2) {
-    //                                $('#txtreturnD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                            if (flag == 3) {
-    //                                $('#txtdiscountD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                        }
-    //                        else {
-    //                            DisplayMassage("الكود غير صحيح", "This Code is Wrong ", MessageType.Error);
-    //                            if (flag == 1) {
-    //                                $('#txtSaleNO').val("");
-    //                                $('#txtSaleD').val("");
-    //                            }
-    //                            if (flag == 2) {
-    //                                $('#txtreturnNO').val("");
-    //                                $('#txtreturnD').val("");
-    //                            }
-    //                            if (flag == 3) {
-    //                                $('#txtdiscountNO').val("");
-    //                                $('#txtdiscountD').val("");
-    //                            }
-    //                        }
-    //                    } else {
-    //                        DisplayMassage("الكود غير صحيح", "This Code is Wrong", MessageType.Error);
-    //                        if (flag == 1) {
-    //                            $('#txtSaleNO').val("");
-    //                            $('#txtSaleD').val("");
-    //                            return false;
-    //                        }
-    //                        if (flag == 2) {
-    //                            $('#txtreturnNO').val("");
-    //                            $('#txtreturnD').val("");
-    //                            return false;
-    //                        }
-    //                        if (flag == 3) {
-    //                            $('#txtdiscountNO').val("");
-    //                            $('#txtdiscountD').val("");
-    //                            return false;
-    //                        }
-    //                    }
-    //                } else if (ispur == false) {
-    //                    if (AccountDetails != null) {
-    //                        if (AccountDetails.ACC_GROUP == 5) {
-    //                            if (flag == 1) {
-    //                                $('#txtSaleD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                            if (flag == 2) {
-    //                                $('#txtreturnD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                            if (flag == 3) {
-    //                                $('#txtdiscountD').val(AccountDetails.ACC_DESCA);
-    //                            }
-    //                        }
-    //                        else {
-    //                            DisplayMassage("الكود غير صحيح", "The Code is incorrect", MessageType.Error);
-    //                            if (flag == 1) {
-    //                                $('#txtSaleNO').val("");
-    //                                $('#txtSaleD').val("");
-    //                                return false;
-    //                            }
-    //                            if (flag == 2) {
-    //                                $('#txtreturnNO').val("");
-    //                                $('#txtreturnD').val("");
-    //                                return false;
-    //                            }
-    //                            if (flag == 3) {
-    //                                $('#txtdiscountNO').val("");
-    //                                $('#txtdiscountD').val("");
-    //                                return false;
-    //                            }
-    //                        }
-    //                    } else {
-    //                        DisplayMassage("الكود غير صحيح", "The Code is incorrect", MessageType.Error);
-    //                        if (flag == 1) {
-    //                            $('#txtSaleNO').val("");
-    //                            $('#txtSaleD').val("");
-    //                            return false;
-    //                        }
-    //                        if (flag == 2) {
-    //                            $('#txtreturnNO').val("");
-    //                            $('#txtreturnD').val("");
-    //                            return false;
-    //                        }
-    //                        if (flag == 3) {
-    //                            $('#txtdiscountNO').val("");
-    //                            $('#txtdiscountD').val("");
-    //                            return false;
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    });
-    //}
     function btnSaleNO_onclick() {
         sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1  ", function () {
             var id1 = SearchGrid.SearchDataGrid.SelectedKey;
@@ -524,6 +370,10 @@ var ServiceCategories;
             Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
             Model.IsPurchase = pur;
             Model.VatNatID = Number(txtvat_natuer.value);
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.ServiceCategories;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -535,6 +385,10 @@ var ServiceCategories;
             Model.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             Model.IsPurchase = pur;
             Model.VatNatID = Number(txtvat_natuer.value);
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.ServiceCategories;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
     }
     function Insert() {
@@ -664,6 +518,7 @@ var ServiceCategories;
         }
         $("#Div_control").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ServiceCategories, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         SelecteData = SlsInvoiceStatisticsDetails.filter(function (x) { return x.SrvCategoryID == Number(Grid.SelectedKey); });
         getAccountById(SelecteData[0].SALES_ACC_CODE, 1);
         getAccountById(SelecteData[0].RETURN_ACC_CODE, 2);

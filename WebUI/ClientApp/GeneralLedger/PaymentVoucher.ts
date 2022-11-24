@@ -908,6 +908,9 @@ namespace PaymentVoucher {
     }
     function txtSearch_onKeyup() {
         //BindGridData();
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+
         if (txtSearch.value != "") {
             let search: string = txtSearch.value.toLowerCase();
             SearchDetails = AQJournalHeaders.filter(x => x.VOUCHER_CODE.toString().toLowerCase().search(search) >= 0 || x.VOUCHER_DESC.toLowerCase().search(search) >= 0

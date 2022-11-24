@@ -409,6 +409,7 @@ var ManagementVoucher;
     }
     //------------------------------------------------------ Clear && Search && Enable && Disabled Region -----------------------------------     
     function txtSearch_onKeyup() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             searchDetails = AQJournalHeaderDetails.filter(function (x) { return x.VOUCHER_CODE.toString().search(search_1) >= 0 || x.Src_DescA.toLowerCase().search(search_1) >= 0
@@ -480,6 +481,10 @@ var ManagementVoucher;
         Newtmp[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Newtmp[0].UserCode = SysSession.CurrentEnvironment.UserCode;
         Newtmp[0].OpCode = OpCode;
+        Newtmp[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Newtmp[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Newtmp[0].MODULE_CODE = Modules.ManagementVoucher;
+        Newtmp[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         //debugger
         Ajax.Callsync({
             type: "POST",

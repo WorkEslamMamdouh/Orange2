@@ -349,10 +349,11 @@ function GetSystemEnvironment(): SystemEnvironment {
 
 
 function GetSystemSession(Mod: string): SystemSession {
-
+    
     if (Mod != "Home") {
 
         $('#divIconbar').removeClass('hidden_Control');
+        
     }
     if (document.cookie.length > 0) {
 

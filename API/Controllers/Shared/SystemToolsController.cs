@@ -1803,6 +1803,134 @@ namespace Inv.API.Controllers
 
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, null);
+
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, null, null);
+
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLogOperation(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId, string ExtraData)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
+
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult PrintliestLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult OpenScreenLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
+
+                return BadRequest();
+            }
+        }
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult SendMessage(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
+        {
+            Sending_Methods SendingMethods = new Sending_Methods();
+
+
+            string res = "";
+            string response = "";
+
+
+
+            I_Control IControl = db.I_Control.Where(x => x.CompCode == CompCode).First();
+
+
+            G_AlertControl cntrl = db.G_AlertControl.Where(x => x.Compcode == CompCode).First();
+
+            //----------------------SMS---------------------//
+
+            if (IControl.SendSMS == true)
+            {
+                response = SendingMethods.Send_SMS(cntrl.SMS_Provider, cntrl.SMS_UserName, cntrl.SMS_Password, cntrl.EMAIL_SenderName + " " + HdMsg + "\n " + DetMsg, cntrl.SMS_SenderName, cntrl.MobileNoPreFex + "" + ContactMobile.Substring(1, ContactMobile.Length - 1), CompCode);//"966504170785");
+                if (response == "لقد تمت العملية بنجاح")
+                {
+                    G_AlertLog ALertLogSMS = new G_AlertLog
+                    {
+                        CompCode = CompCode,
+                        TrID = TrID,
+                        MobileNo = ContactMobile
+                    };
+
+                    if (HdMsg.Length < 50)
+                    {
+                        ALertLogSMS.MsgHeader = HdMsg;
+                    }
+                    else
+                    {
+                        ALertLogSMS.MsgHeader = HdMsg.Substring(0, 49); 
+                    }
+                    ALertLogSMS.MsgBody = DetMsg;
+                    ALertLogSMS.AlertType = "1";
+                    ALertLogSMS.SendDate = DateTime.Now;
+                    ALertLogSMS.IsSent = true;
+                    db.G_AlertLog.Add(ALertLogSMS);
+                    db.SaveChanges();
+                }
+                else
+                {
+
+                }
+            }
+            res = response + "\n " + cntrl.SMS_SenderName + "\n " + cntrl.EMAIL_SenderName + " " + HdMsg + "\n " + DetMsg;
+            return Ok(new BaseResponse(res));
+        }
 
 
     }

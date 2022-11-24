@@ -159,7 +159,9 @@ namespace PurTrReturn {
         $("#divMasterGridiv").removeClass("display_none"); 
 
         //btnShow_onclick();
-        $('#btnPrint').addClass('display_none'); 
+        $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
+
     }
     function IntializeEvents() { 
         btnShow.onclick = btnShow_onclick;
@@ -356,7 +358,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -748,7 +750,7 @@ namespace PurTrReturn {
             $('#btnEdit').addClass("display_none");
 
             var items: number = Number(txtItemCount.value);
-            for (let i = 0; i < items; i++) {
+            for (let i = 0; i < CountGrid; i++) {
                 $("#txtReturnQuantity" + i).removeAttr("disabled");
 
                 $('.btn-number3' + i).removeAttr("disabled");
@@ -758,6 +760,7 @@ namespace PurTrReturn {
             $("#btnAddDetails").addClass("display_none");
             $("#txt_note").removeAttr("disabled");
 
+            $("#txtReturnQuantity0").focus();
         }
     } 
     //------------------------------------------------------ Normal Grid Region -----------------------------------
@@ -815,7 +818,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetAllReturnPurReceiveStaistic"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: TrType, Status: status, isCash: isCash, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.PurTrReturn, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -847,6 +850,8 @@ namespace PurTrReturn {
         clear();
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
         receiveID = Number(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
@@ -1042,7 +1047,7 @@ namespace PurTrReturn {
 		                </div>
 	                </td>
 	                <td>
-		                <div class="form-group ps-1">
+		                <div class="form-group counter-group ps-1">
 			                <input class="counter" type="number" data-id="number" id="txtReturnQuantity${cnt}" name="quant[3]" value="1" min="0" max="1000" step="1"/>
 			                <div class="value-button decrease-button btn-number3${cnt}" data-id="decrease" id="btnminus1" data-type="minus" data-field="quant[3]">-</div>
 			                <div class="value-button increase-button btn-number3${cnt}" data-id="increase" id="btnplus3" data-type="plus" data-field="quant[3]">+</div>
@@ -1417,7 +1422,7 @@ namespace PurTrReturn {
             var txtQuantityValue = $("#txtReturnQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
 
-            if ($("#txtReturnQuantity" + cnt).val() == 0) {
+            if (Number($("#txtReturnQuantity" + cnt).val()) == 0) {
                 var total = 1 * Number(txtPriceValue);
                 $("#txtTotal" + cnt).val(total.RoundToSt(2));
                 var vatAmount = Number(total) * VatPrc / 100;
@@ -1450,6 +1455,38 @@ namespace PurTrReturn {
             }
         });
         //txtReturnQuantity
+        $("#txtReturnQuantity" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            var txtQuantityValue = $("#txtQuantity" + cnt).val();
+
+            var totalReturnQuantityValue = $("#txtReturnQuantity" + cnt).val();
+            var txtPriceValue = $("#txtPrice" + cnt).val();
+
+            if (Number(txtQuantityValue) >= totalReturnQuantityValue) {   // qty accepted  
+                var total = Number(totalReturnQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));//= total;
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                ComputeTotals();
+
+            }
+            else {
+
+                $("#txtReturnQuantity" + cnt).val(txtQuantityValue);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtTotal" + cnt).val(total.RoundToSt(2));//= total;
+                var vatAmount = Number(total) * VatPrc / 100;
+                $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+                ComputeTotals();
+                DisplayMassage('(  الكميه المتاحه من الشراء = ' + txtQuantityValue + ')', 'Avaliable Quantity From Purchase', MessageType.Error);
+            }
+        });
         $("#txtReturnQuantity" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
@@ -1547,12 +1584,12 @@ namespace PurTrReturn {
         });
         if (InvoiceFlag == true) {
             debugger 
-            $("#txt_StatusFlag" + cnt).val("i");
+            $("#txt_StatusFlag" + cnt).val("");
             let InvoiceSoldQty = SlsInvoiceItemsDetails[cnt].RecQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
             let total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].RecUnitPriceFC;
             let vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
             $("#txtSerialH" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
-            $("#txtReturnQuantity" + cnt).prop("value", InvoiceSoldQty);
+            $("#txtReturnQuantity" + cnt).prop("value", '0');
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
             $("#txtTax" + cnt).prop("value", vat.RoundToSt(2));
@@ -1589,7 +1626,8 @@ namespace PurTrReturn {
         NetCount = 0; 
         for (let i = 0; i < CountGrid; i++) {  
             var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "m" ) { 
+            var ReturnQua = Number($("#txtReturnQuantity" + i).val());
+            if (flagvalue != "d" && flagvalue != "m" && ReturnQua != 0) { 
                 var ReturnQty = Number($("#txtReturnQuantity" + i).val());
                 PackageCount += ReturnQty; 
                 CountTotal += Number($("#txtTotal" + i).val());
@@ -1696,6 +1734,8 @@ namespace PurTrReturn {
         return true;
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
+
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchGetPurReceiveStaisticData = GetPurReceiveStaisticData.filter(x => x.TrNo.toString().search(search) >= 0
@@ -1813,7 +1853,14 @@ namespace PurTrReturn {
         MasterDetailModel.I_Pur_TR_Receive = InvoiceModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = invoiceItemsModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+ 
+
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurTrReturn;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
 
@@ -1822,6 +1869,10 @@ namespace PurTrReturn {
 
         if (txtInvoiceNumber.value.toString() == "") { InvoiceModel.RefTrID = null; }
         else { InvoiceModel.RefTrID = receiveID; }
+
+        if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
+            DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
+        }
 
         Ajax.Callsync({
             type: "POST",
@@ -2156,6 +2207,7 @@ namespace PurTrReturn {
 
                 let result = d.result as string;
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -2175,6 +2227,9 @@ namespace PurTrReturn {
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
+        
          window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 
@@ -2227,6 +2282,7 @@ namespace PurTrReturn {
 
 
             PrintsFrom_To(TransType.Pur_Receive_Return, Name_ID, NameTable, Condation3, GetPurReceiveStaisticData.length)
+
 
 
 

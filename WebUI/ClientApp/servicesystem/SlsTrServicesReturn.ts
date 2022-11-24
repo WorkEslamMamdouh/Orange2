@@ -757,6 +757,9 @@ namespace SlsTrServicesReturn {
         $("#DivInvoiceDetails").removeClass("display_none");
         clear();
         InvoiceStatisticsModel = new Array<AQVAT_GetSlsInvoiceList>();
+
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Sales ,SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+
         if (FlagAfterInsertOrUpdate == true) {
             Selecteditem = AQ_ServSlsInvoiceDetails.filter(x => x.InvoiceID == Number(GlobalReturnID));
 
@@ -1223,6 +1226,9 @@ namespace SlsTrServicesReturn {
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function _SearchBox_Change() {
+
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+         
         if (searchbutmemreport.value != "") {
 
             let search: string = searchbutmemreport.value.toLowerCase();
@@ -1669,6 +1675,14 @@ namespace SlsTrServicesReturn {
 
         MasterDetailsModel.AVAT_TR_SlsInvoice = InvoiceModel;
         MasterDetailsModel.AVAT_TR_SlsInvoiceItem = InvoiceItemsDetailsModel;
+
+
+        MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailsModel.MODULE_CODE = Modules.Ser_Return_Sales;
+        MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
     }
     function Update() {
 

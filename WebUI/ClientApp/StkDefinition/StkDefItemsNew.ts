@@ -468,6 +468,7 @@ namespace StkDefItemsNew {
 
     function MasterGridDoubleClick() {
         Selected_Data = new Array<IQ_GetItemStoreInfo>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItemsNew, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
 
         Selected_Data = Details.filter(x => x.ItemID == Number(divMasterGrid.SelectedKey));
 

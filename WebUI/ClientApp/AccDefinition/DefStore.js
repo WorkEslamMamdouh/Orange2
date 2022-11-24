@@ -167,6 +167,7 @@ var DefStore;
         $('#btnSave').addClass('display_none');
         Selected_Data = new Array();
         Selected_Data = detailstore.filter(function (x) { return x.StoreId == Number(ReportGrid.SelectedKey); });
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.DefStore, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
         $('#StoreDetail').removeClass('display_none');
         DisplayData(Selected_Data);
     }
@@ -271,6 +272,11 @@ var DefStore;
     }
     //---------------------------------------------------------------------------Update and Insert
     function Update() {
+        Modelstore.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Modelstore.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Modelstore.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        Modelstore.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Modelstore.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("DefStore", "Update"),
@@ -291,6 +297,11 @@ var DefStore;
         });
     }
     function Insert() {
+        Modelstore.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Modelstore.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Modelstore.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        Modelstore.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Modelstore.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("DefStore", "Insert"),

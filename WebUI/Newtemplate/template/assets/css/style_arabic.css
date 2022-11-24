@@ -21841,10 +21841,10 @@ textarea {
 a:focus,
 input:focus {
     border-color: transparent;
-    outline: none;
+    outline: inherit;
 }
 a {
-    text-decoration: none;
+    text-decoration: solid;
 }
 /* Fonts */
 @font-face {
@@ -26022,7 +26022,7 @@ body.avgrund-active {
     }
 
     .dataTables_wrapper .dataTables_info {
-        font-size: 0.8rem;
+        font-size: 1rem;
         padding-right:1rem;
     }
 
@@ -26387,6 +26387,10 @@ body.avgrund-active {
     padding: 0.5rem 0.75rem;
     font-weight: initial;
     line-height: 1.25;
+    background-color: var(--main-blue);
+    border-radius: 0.5rem;
+    color: #fff;
+    margin: 0 1rem;
 }
 
 .jsgrid .jsgrid-cell,
@@ -28984,6 +28988,7 @@ div.tagsinput {
 }
 .reset.icon-bar,
 .viewresult.icon-bar,
+.Send.icon-bar,
 .print-report.icon-bar{
     left: -77px;
 }
@@ -29009,6 +29014,7 @@ div.tagsinput {
 .pdf,
 .excel,
 .edit,
+.Send,
 .save,
 .back,
 .print-details,
@@ -29024,8 +29030,9 @@ div.tagsinput {
     height: 35px;
 }
 .reset,
+.Send,
 .viewresult,
-.print-report{
+.print-report {
     width: 115px;
     height: 35px;
 }
@@ -29518,7 +29525,8 @@ div.tagsinput {
         color: darkred;
     }
 .btn-insert:hover,
-.btn-plus:hover {
+.btn-plus:hover ,
+.button-plus:hover i{
     color: green;
 }
 
@@ -29526,6 +29534,13 @@ div.tagsinput {
 .btn-copy:hover {
     color: var(--main-blue);
 }
+.button-plus{
+    background-color:transparent;
+    border:none;
+}
+    .button-plus:focus i {
+        color: var(--main-orange);
+    }
 .inside-table .form-check {
     margin-bottom: -5px;
 }

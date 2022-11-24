@@ -443,6 +443,24 @@ namespace Inv.API.Controllers
 
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult InsertLog(string UserCode, int compcode, string BranchCode, string FinYear, bool ISLogin)
+        {
+            try
+            {
+                if (ISLogin)
+                    //*********Log
+                    LogUser.Insert(db, compcode.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Login, LogUser.PageName.User, true, null, null, null);
+                else
+                    LogUser.Insert(db, compcode.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Login, LogUser.PageName.User, false, null, "wrong Login", null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
     }
 }
 

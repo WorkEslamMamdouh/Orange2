@@ -97,6 +97,7 @@ var sendTransfer;
         txtTransferDate.value = GetDate();
         InitalizeEvents();
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.sendTransfer, SysSession.CurrentEnvironment.CurrentYear);
     }
     sendTransfer.InitalizeComponent = InitalizeComponent;
     //------------------------------------------------------ Main Region -----------------------------------
@@ -302,7 +303,7 @@ var sendTransfer;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("DirectTransfer", "GetAllDirectTransferHeaderWithDetail"),
-            data: { compcode: compcode, TrType: 1, TFType: 1, FromDate: FromDate, toDate: toDate, status: status, sourcrBR: sourcrBR, ToBR: ToBR, sourcrStore: sourcrStore, ToStore: ToStore, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compcode: compcode, TrType: 1, TFType: 1, FromDate: FromDate, toDate: toDate, status: status, sourcrBR: sourcrBR, ToBR: ToBR, sourcrStore: sourcrStore, ToStore: ToStore, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.Directtransfer, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -677,6 +678,7 @@ var sendTransfer;
         chkApproved.checked = false;
     }
     function txtSearch_onKeyup() {
+        $("#divGridDetails_View").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             SearchDetails = IQ_DirectTransferDetail.filter(function (x) { return x.RBr_DescA.toString().toLowerCase().search(search_1) >= 0 || x.RBr_DescE.toString().toLowerCase().search(search_1) >= 0

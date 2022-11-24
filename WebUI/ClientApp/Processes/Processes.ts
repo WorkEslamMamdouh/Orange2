@@ -171,19 +171,15 @@ namespace Processes {
     var btnPrintTrPDF4: HTMLButtonElement;
     var btnPrintTrEXEL4: HTMLButtonElement;
     var btnPrint4: HTMLButtonElement;
-
-
+     
     // button print 
     var btnPrintStock: HTMLButtonElement;
     var btnPrintDeposit: HTMLButtonElement;
-
-
+     
     // button print   Operationsummary and sales History
     var btnPrintOperationsummary: HTMLButtonElement;
     var btnPrintsalesrecord: HTMLButtonElement;
-
-
-
+     
     export function InitalizeComponent() {
         $("#NoDubleclick").val('1');
 
@@ -587,7 +583,7 @@ namespace Processes {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.Processes, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -800,26 +796,23 @@ namespace Processes {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response as Array<IQ_GetOperation>;
-
                      
-
-
-
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
                     divMasterGrid.Bind();
                 }
             }
         });
-    }
-
-   
+    } 
 
     function _SearchBox_Change() {
+
+         
 
         if (searchbutmemreport.value != "") {
 
 
+            $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
 
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = Get_IQ_GetOperation.filter(x => x.TrNo.toString().search(search) >= 0 || x.TruckNo.toLowerCase().search(search) >= 0 || x.nvd_DescA.toLowerCase().search(search) >= 0 || x.PortName.toLowerCase().search(search) >= 0);
@@ -879,6 +872,8 @@ namespace Processes {
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array<IQ_GetOperation>();
+
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
 
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
@@ -2950,6 +2945,11 @@ namespace Processes {
             //else { Model_I_TR_Operation.SalesmanId = $('#ddlSalesman').val(); }
 
 
+            Model_I_TR_Operation.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_I_TR_Operation.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_I_TR_Operation.MODULE_CODE = Modules.Processes;
+            Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model_I_TR_Operation.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
         }
         else {// Update 
@@ -3003,6 +3003,12 @@ namespace Processes {
                 Model_I_TR_Operation.SalesmanId = 0;
                 Model_I_TR_Operation.OpenAt = null;
             }
+
+            Model_I_TR_Operation.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model_I_TR_Operation.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model_I_TR_Operation.MODULE_CODE = Modules.Processes;
+            Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model_I_TR_Operation.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
         }
 
@@ -5072,12 +5078,12 @@ namespace Processes {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
         })
     }
-
     function PrintReport1(OutType: number) {
         //
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -5114,16 +5120,12 @@ namespace Processes {
 
                 let result = d.result as string;
 
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear,"Load Data");
 
                 window.open(result, "_blank");
             }
         })
-    }
-
-
-
-
-
+    }     
     function PrintReport2(OutType: number) {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -5157,11 +5159,90 @@ namespace Processes {
 
                 let result = d.result as string;
 
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "print operation costs");
 
                 window.open(result, "_blank");
             }
         })
     }  
+    function PrintReport3(OutType: number) {
+
+        if (!SysSession.CurrentPrivileges.PrintOut) return;
+        let rp: ReportParameters = new ReportParameters();
+        rp.RepType = OutType;//output report as View
+        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
+        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
+        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
+        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
+        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
+        rp.Tokenid = SysSession.CurrentEnvironment.Token;
+        var BranchNameA = SysSession.CurrentEnvironment.BranchName;
+        var BranchNameE = SysSession.CurrentEnvironment.BranchNameEn;
+        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+        if (BranchNameA == null || BranchNameE == null) {
+
+            BranchNameA = " ";
+            BranchNameE = " ";
+        }
+        rp.BraNameA = BranchNameA;
+        rp.BraNameE = BranchNameE;
+        rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
+        rp.TRId = OperationID;
+        rp.SalesmanID = SalesmanId_Deposit;
+        Ajax.Callsync({
+            url: Url.Action("IProc_Prnt_OperationSalesmanItem", "GeneralReports"),
+            data: rp,
+            success: (d) => {
+
+                let result = d.result as string;
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor stock printing");
+
+
+                window.open(result, "_blank");
+            }
+        })
+    }
+    function PrintReport4(OutType: number) {
+
+        let rp: ReportParameters = new ReportParameters();
+        rp.RepType = OutType;//output report as View
+        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
+        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
+        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
+        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
+        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
+        rp.Tokenid = SysSession.CurrentEnvironment.Token;
+        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
+        var BranchNameA = SysSession.CurrentEnvironment.BranchName;
+        var BranchNameE = SysSession.CurrentEnvironment.BranchName;
+        if (BranchNameA == null || BranchNameE == null) {
+
+            BranchNameA = " ";
+            BranchNameE = " ";
+        }
+        rp.BraNameA = BranchNameA;
+        rp.BraNameE = BranchNameE;
+        rp.TRId = OperationID;
+        rp.SalesmanID = SalesmanId_Deposit;
+
+        Ajax.CallAsync({
+            url: Url.Action("IProc_Prnt_OperationDeposit", "GeneralReports"),
+            data: rp,
+            success: (d) => {
+                let result = d.result as string;
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor's Deposit Printing");
+
+                window.open(result, "_blank");
+            }
+        })
+         
+    }
+
+
     function btnPrintDeposit_onclick() {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -5195,90 +5276,11 @@ namespace Processes {
 
                 let result = d.result as string;
 
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }
         })
-    }
-    function PrintReport3(OutType: number) {
-
-        if (!SysSession.CurrentPrivileges.PrintOut) return;
-        let rp: ReportParameters = new ReportParameters();
-        rp.RepType = OutType;//output report as View
-        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
-        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
-        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
-        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
-        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-        rp.Tokenid = SysSession.CurrentEnvironment.Token;
-        var BranchNameA = SysSession.CurrentEnvironment.BranchName;
-        var BranchNameE = SysSession.CurrentEnvironment.BranchNameEn;
-        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
-        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
-        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-        if (BranchNameA == null || BranchNameE == null) {
-
-            BranchNameA = " ";
-            BranchNameE = " ";
-        }
-        rp.BraNameA = BranchNameA;
-        rp.BraNameE = BranchNameE;
-        rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
-        rp.TRId = OperationID;
-        rp.SalesmanID = SalesmanId_Deposit;
-        Ajax.Callsync({
-            url: Url.Action("IProc_Prnt_OperationSalesmanItem", "GeneralReports"),
-            data: rp,
-            success: (d) => {
-
-                let result = d.result as string;
-
-
-                window.open(result, "_blank");
-            }
-        })
-    }
-
-
-    function PrintReport4(OutType: number) {
-
-        let rp: ReportParameters = new ReportParameters();
-        rp.RepType = OutType;//output report as View
-        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
-        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
-        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
-        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
-        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-        rp.Tokenid = SysSession.CurrentEnvironment.Token;
-        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
-        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
-        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-        var BranchNameA = SysSession.CurrentEnvironment.BranchName;
-        var BranchNameE = SysSession.CurrentEnvironment.BranchName;
-        if (BranchNameA == null || BranchNameE == null) {
-
-            BranchNameA = " ";
-            BranchNameE = " ";
-        }
-        rp.BraNameA = BranchNameA;
-        rp.BraNameE = BranchNameE;
-        rp.TRId = OperationID;
-        rp.SalesmanID = SalesmanId_Deposit;
-
-        Ajax.CallAsync({
-            url: Url.Action("IProc_Prnt_OperationDeposit", "GeneralReports"),
-            data: rp,
-            success: (d) => {
-                let result = d.result as string;
-                window.open(result, "_blank");
-            }
-        })
-
-
-
-
-
-
     }
     function btnPrintStock_onclick() {
 
@@ -5311,6 +5313,8 @@ namespace Processes {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
                 window.open(result, "_blank");
             }
         })
@@ -5320,9 +5324,7 @@ namespace Processes {
 
 
 
-    }
-
-
+    }     
     function PrintOperationsummary() {
 
 
@@ -5352,11 +5354,12 @@ namespace Processes {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
                 window.open(result, "_blank");
             }
         }) 
     } 
-
     function Printsalesrecord() {
         let rp: ReportParameters = new ReportParameters();
         rp.CompCode = SysSession.CurrentEnvironment.CompCode;
@@ -5384,11 +5387,11 @@ namespace Processes {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
                 window.open(result, "_blank");
             }
         })
     };
-
-     
 
 }

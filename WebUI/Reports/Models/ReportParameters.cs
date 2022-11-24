@@ -231,6 +231,8 @@ namespace Inv.WebUI.Reports.Models
         public int TrType { get; set; }
         public int IncludeInvTR{ get; set; }
         public int RecType { get; set; }
+        public int Send_Pdf { get; set; }
+        public string DocUUID { get; set; }
         public string BnfID { get; set; }
         public string BnfDesc { get; set; }
         public string Type_Trans { get; set; }

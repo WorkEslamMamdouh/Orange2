@@ -5,6 +5,11 @@ $(document).ready(function () {
         $('.print-details').css('position', 'fixed');
         $('.print-details').css('top', `auto`);
         $('.print-details').css('bottom', `${heightIcon}px`);
+
+        $('.send').css('position', 'fixed');
+        $('.send').css('top', `auto`);
+        $('.send').css('bottom', `${heightIcon + 160}px`);
+
         $('.edit').css('position', 'fixed');
         $('.edit').css('top', `auto`);
         $('.edit').css('bottom', `${heightIcon + 40}px`);
@@ -16,12 +21,18 @@ $(document).ready(function () {
     } else {
         $('.print-details').css('position', 'absolute');
         $('.print-details').css('bottom', `${navTop}px`);
+
+        $('.Send').css('position', 'absolute');
+        $('.Send').css('bottom', `${navTop + 160}px`);
+
         $('.edit').css('position', 'absolute');
         $('.edit').css('bottom', `${navTop + 40}px`);
         $('.back').css('position', 'absolute');
         $('.back').css('bottom', `${navTop + 80}px`);
         $('.save').css('position', 'absolute');
         $('.save').css('bottom', `${navTop + 120}px`);
+
+
 
     }
 });

@@ -1124,8 +1124,16 @@ namespace SalesTrans {
         MasterDetailModel.I_TR_OperationTF = HeaderModel;
         MasterDetailModel.I_TR_OperationTFDetail = DetailModel;
 
-        MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token; 
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.sendTransfer;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+
+
     }
     function Insert() {
         MasterDetailModel.I_TR_OperationTF.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1372,16 +1380,13 @@ namespace SalesTrans {
 
                 let result = d.result as string;
 
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SalesTrans, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
         })
     }
-
-
-
-
-
+     
     function btnPrintTransaction_onclick() {
         debugger
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -1394,6 +1399,8 @@ namespace SalesTrans {
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SalesTrans, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
     }

@@ -125,6 +125,8 @@ namespace PurTrReceive {
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
+    var btnSend: HTMLButtonElement;
+    
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     var flagLastPrice = 2;
@@ -162,11 +164,17 @@ namespace PurTrReceive {
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
 
+       
         InitializeGrid();
 
 
         flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');
+
+        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
+            $("#btnSend").removeClass("hidden_Control");
+        }
 
     }
     function InitalizeControls() {
@@ -176,6 +184,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
+        btnSend = document.getElementById("btnSend") as HTMLButtonElement;
         //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
@@ -263,6 +272,7 @@ namespace PurTrReceive {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
         btnPrintTransaction.onclick = btnPrintTransaction_onclick;
+        btnSend.onclick = sendCust;
         //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
@@ -495,6 +505,8 @@ namespace PurTrReceive {
         debugger
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
         RetrivedPurchaseModel = Selecteditem;
@@ -732,7 +744,11 @@ namespace PurTrReceive {
 
         PurOrderShowFlag = false;
         ShowFlag = false;
+        ddlReciveTypeHeader.selectedIndex = 1;
 
+        if (compcode == 4) {
+            ddlSalesmanHeader.value ='21'
+        }
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
@@ -818,6 +834,7 @@ namespace PurTrReceive {
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
 
         if (searchbutmemreport.value != "") {
             let search: string = searchbutmemreport.value.toLowerCase();
@@ -888,7 +905,7 @@ namespace PurTrReceive {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurTrReceive, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1654,14 +1671,20 @@ namespace PurTrReceive {
             var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
             let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
 
+            ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
+
             sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-
+                debugger
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
                 //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
 
                 $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
+
+                ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>(); 
+                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+
 
                 let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
 
@@ -2685,7 +2708,7 @@ namespace PurTrReceive {
         $("#txtTotalPurchaseWithTax").prop("value", "");
 
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
 
         CountGrid = 0;
         CountGridCharge = 0;
@@ -2872,7 +2895,7 @@ namespace PurTrReceive {
         $("#btnAddDetailsCharge").removeClass("display_none");
 
         $("#btnPrintTransaction").addClass("display_none");
-        $("#btnPrintTransaction").addClass("display_none");
+        $("#btnSend").addClass("display_none");
         //$("#btnPrintInvoicePrice").addClass("display_none");
 
         $("#btnUpdate").addClass("display_none");
@@ -2934,7 +2957,7 @@ namespace PurTrReceive {
         $("#btnAddDetailsCharge").addClass("display_none");
 
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         //$("#btnPrintInvoicePrice").removeClass("display_none");
 
         $("#btnUpdate").removeClass("display_none");
@@ -3167,6 +3190,11 @@ namespace PurTrReceive {
         MasterDetailModel.I_Pur_TR_Receive = ReceiveModel;
         MasterDetailModel.I_Pur_TR_ReceiveItems = ReceiveItemsDetailsModel;
         MasterDetailModel.I_Pur_Tr_ReceiveCharges = chargesDetailsModel;//I_Pur_Tr_ReceiveCharges
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurTrReceive;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -3299,7 +3327,7 @@ namespace PurTrReceive {
         $("#divEdit").removeClass("display_none");
 
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
 
 
     } 
@@ -3373,7 +3401,7 @@ namespace PurTrReceive {
         debugger
         ShowFlag = true;
         $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnSend").removeClass("display_none");
         GlobalReceiveID = receiveid;
 
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == receiveid);
@@ -3447,6 +3475,9 @@ namespace PurTrReceive {
                 let result = d.result as string;
 
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
+
+
                 window.open(result, "_blank");
             }
         })
@@ -3462,6 +3493,7 @@ namespace PurTrReceive {
 
         rp.Name_function = "IProc_Prnt_PurReceive";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -3544,5 +3576,33 @@ namespace PurTrReceive {
         }
 
     }
+
+
+
+    function sendCust() {
+
+
+
+        let rp: ReportParameters = new ReportParameters();
+
+        rp.Type = 0;
+        rp.Repdesign = 0;
+        rp.TRId = GlobalReceiveID; 
+        rp.Name_function = "IProc_Prnt_PurReceive";
+
+
+        //************************Data Mess***************
+        debugger
+        rp.Module = "Purchases";
+        rp.TrDate = txtDateHeader.value;
+        rp.TrNo = lblInvoiceNumber.innerText;
+        rp.ContactMobile = "966504170785";//966504170785 //966508133500 
+        rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.innerText + " ) ";
+        
+        debugger
+        SendInv_to_Cust(rp)
+    }
+
+
 
 }

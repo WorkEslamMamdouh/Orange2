@@ -118,6 +118,7 @@ var PurOrder;
         GetAllItems();
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
         //  $('#btnPrint').addClass('display_none');
     }
     PurOrder.InitalizeComponent = InitalizeComponent;
@@ -275,6 +276,7 @@ var PurOrder;
         $("#PurOrderDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(divMasterGrid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(GlobalPurOrderID); });
@@ -465,6 +467,7 @@ var PurOrder;
         }
     }
     function _SearchBox_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (txtSearchBox.value != "") {
             var search_1 = txtSearchBox.value.toLowerCase();
             SearchDetails = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Vnd_NameA.toLowerCase().search(search_1) >= 0
@@ -483,7 +486,7 @@ var PurOrder;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
-            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.PurOrder, FinYear: SysSession.CurrentEnvironment.CurrentYear },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -1194,6 +1197,11 @@ var PurOrder;
         }
         MasterDetailModel.I_Pur_Tr_PurchaseOrder = PurOrderModel;
         MasterDetailModel.I_Pur_Tr_PurchaseOrderDetail = PurOrderDetailsModel;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.PurOrder;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -1395,6 +1403,7 @@ var PurOrder;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1409,6 +1418,7 @@ var PurOrder;
         rp.TRId = GlobalPurOrderID;
         rp.Name_function = "IProc_Prnt_PurPurchaseOrder";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

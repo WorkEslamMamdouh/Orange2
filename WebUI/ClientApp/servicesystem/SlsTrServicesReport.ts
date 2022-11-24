@@ -76,7 +76,7 @@ namespace SlsTrServicesReport {
         else {
             document.getElementById('Screen_name').innerHTML = "Services Sales Report";
         }
-         $("#iconMainPages").addClass("d-none");
+        $("#iconMainPages").addClass("d-none");
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview span").text("عرض تقرير");
         $("#btnPrintTrview").addClass("print-report");
@@ -432,7 +432,7 @@ namespace SlsTrServicesReport {
     }
     function PrintReport(OutType: number) {
         let rp: ReportParameters = new ReportParameters();
-         
+
         rp.RepType = OutType;//output report as View
         rp.FromDate = DateFormatRep(txtStartDate.value);
         rp.ToDate = DateFormatRep(txtEndDate.value);
@@ -482,12 +482,13 @@ namespace SlsTrServicesReport {
 
         if (ddlCustomer.value == "null") { rp.CustomerID = -1; }           //   العميل  
         else { rp.CustomerID = Number(ddlCustomer.value); }
-                        
-            rp.Name_function = "IProc_Rpt_VatSalesSummary";
-            localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-            localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-             window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+        rp.Name_function = "IProc_Rpt_VatSalesSummary";
+        localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Sales_Report, SysSession.CurrentEnvironment.CurrentYear);
+
+        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
 
     }
@@ -495,20 +496,5 @@ namespace SlsTrServicesReport {
         txtServiceCode.value = "";
         txtServiceName.value = "";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     
 }

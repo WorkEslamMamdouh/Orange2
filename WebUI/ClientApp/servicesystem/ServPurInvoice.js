@@ -30,6 +30,7 @@ var ServPurInvoice;
     var txtSearch;
     //------------------------------------- Arrays
     var MasterGrid = new JsGrid();
+    var VatDetails = new Array();
     var Selected_Data = new Array();
     var searchDetails = new Array();
     var AQ_ServPurInvoiceMasterDetailModel = new Array();
@@ -118,6 +119,7 @@ var ServPurInvoice;
         FillddlFamily();
         GetAllCostCenters();
         GetAllVendors();
+        GetAllVatDetails();
     }
     ServPurInvoice.InitializeComponent = InitializeComponent;
     function InitializeControls() {
@@ -249,6 +251,7 @@ var ServPurInvoice;
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
     }
     function txtSearch_Change() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             searchDetails = AQ_ServPurInvoiceMasterDetailModel.filter(function (x) { return x.TR_NO.toString().search(search_1) >= 0 || x.DocNo.toLowerCase().search(search_1) >= 0
@@ -300,6 +303,7 @@ var ServPurInvoice;
     //    MasterDetailModel.AVAT_TR_PurInvoiceDetail = DetailList;
     //}
     function Insert() {
+        debugger;
         Menu.CreatedAt = DateTimeFormat(Date().toString());
         Menu.CreatedBy = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -513,6 +517,7 @@ var ServPurInvoice;
         // Bind Menu
         showFlag = true;
         Selected_Data = new Array();
+        //DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
         if (FlagAfterInsertOrUpdate == true) {
             Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(function (x) { return x.InvoiceId == GlobalMenuID; });
             txtMenuNum.value = Selected_Data[0].TR_NO.toString();
@@ -633,6 +638,8 @@ var ServPurInvoice;
                     $("#txt_StatusFlag1" + cnt).val("u");
                 GlobalVendorNum = $("#VND_SERIAL" + cnt).val();
                 AssignForGrids(GlobalVendorNum, cnt);
+                btn_arrowdown_onclick(cnt);
+                OnChangServCode(cnt);
             });
         });
         $("#txtVndrCode" + cnt).on('change', function () {
@@ -648,6 +655,8 @@ var ServPurInvoice;
                 $('#txtVendoeName' + cnt).val("");
                 DisplayMassage("كود المورد غير صحيح ", "Wrong vendor code ", MessageType.Error);
             }
+            btn_arrowdown_onclick(cnt);
+            OnChangServCode(cnt);
         });
         //// Account Search
         $('#btnAccSearch' + cnt).click(function (e) {
@@ -859,6 +868,21 @@ var ServPurInvoice;
     //        ComputeTotals();
     //    });
     //}
+    function GetAllVatDetails() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GenVatType", "GetAll"),
+            data: {
+                CompCode: compcode, VatType: 2, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    VatDetails = result.Response;
+                }
+            }
+        });
+    }
     function Validation_Grid_Header(rowcount) {
         if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m") {
             return true;
@@ -913,6 +937,7 @@ var ServPurInvoice;
         $("#txtInvtotal" + ID).val(totalAmount.RoundToSt(2));
         $("#txtInvVat" + ID).val(vatAmount.RoundToSt(2));
         $("#txtInvVat" + ID).attr('data-VndVatType', VaType);
+        //ID = (Number($("#VND_SERIALDetail" + i).val())) - 1);
         //$("#txtInvNet" + ID).val(netAmount.RoundToSt(2));
         //****new
         if ($("#txt_StatusFlag1" + ID).val() != 'i' && $("#txt_StatusFlag1" + ID).val() != 'd')
@@ -1008,7 +1033,11 @@ var ServPurInvoice;
                     var catObj = CategorDetails.filter(function (s) { return s.SrvCategoryID == catID; });
                     var Cat_Tax = DetailsVatNature.filter(function (s) { return s.VatNatID == catObj[0].VatNatID; });
                     Tax_Rate = Cat_Tax[0].VatPrc;
-                    Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
+                    var Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
+                    var code = $('#txtVndrCode' + Cnt_Vnd).val();
+                    var VendObj = VendorDetailList.filter(function (s) { return s.VendorCode == code && s.Isactive == true && s.CompCode == compcode; });
+                    Tax_Rate = VatDetails.filter(function (x) { return x.CODE == VendObj[0].VATType; })[0].VatPerc;
+                    Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
                     Tax_Rate = Tax_Type_Model.Prc;
                     $('#txtVatPrc' + cnt).val(Tax_Rate);
                     var total = Number(txtQuantityValue) * Number(txtPriceValue);
@@ -1019,7 +1048,7 @@ var ServPurInvoice;
                     var totalAfterVat = Number(vatAmount) + Number(total);
                     $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
                 }
-                ComputeTotals();
+                //ComputeTotals();
                 GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
                 ComputeTotals();
                 var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1029,41 +1058,7 @@ var ServPurInvoice;
         $("#txtServCode" + cnt).on('change', function () {
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
                 $("#txt_StatusFlag2" + cnt).val("u");
-            var code = $('#txtServCode' + cnt).val();
-            var NumberSelect = ServicesDetails.filter(function (s) { return s.ItemCode == code; });
-            if (NumberSelect.length > 0) {
-                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
-                var itemPrice = NumberSelect[0].UnitPrice;
-                $("#txtPrice" + cnt).val(itemPrice);
-                var txtQuantityValue = $("#txtQty" + cnt).val();
-                var txtPriceValue = $("#txtPrice" + cnt).val();
-                var catID = NumberSelect[0].SrvCategoryID;
-                var catObj = CategorDetails.filter(function (s) { return s.SrvCategoryID == catID; });
-                var Cat_Tax = DetailsVatNature.filter(function (s) { return s.VatNatID == catObj[0].VatNatID; });
-                Tax_Rate = Cat_Tax[0].VatPrc;
-                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, vatType);
-                Tax_Rate = Tax_Type_Model.Prc;
-                $('#txtVatPrc' + cnt).val(Tax_Rate);
-                var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
-                VatPrc = Tax_Rate;
-                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
-                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
-                var totalAfterVat = Number(vatAmount) + Number(total);
-                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
-            }
-            else {
-                $("#txtQuantity" + cnt).val("1");
-                $("#txtPrice" + cnt).val("1");
-                $("#txtDetailTotal" + cnt).val("0");
-                $("#txtVatAmount" + cnt).val("0");
-                $("#txtDetailNet" + cnt).val("0");
-                $('#txtServCode' + cnt).val("");
-                $('#txtServName' + cnt).val("");
-                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
-            }
-            ComputeTotals();
+            OnChangServCode(cnt);
             GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
             ComputeTotals();
             var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1159,6 +1154,55 @@ var ServPurInvoice;
             DeleteRowDetail(cnt);
         });
         return;
+    }
+    function OnChangServCode(Index) {
+        //*****تحديث الرقم الحالي برقم الفاتورة الجديدة
+        CurrentVendorSerial = $("#VND_SERIAL" + Index).val();
+        //*****عرض خدمات الفاتورة المختارة
+        var DetailForSelectedVendorSR = DetailList.filter(function (x) { return x.VND_SERIAL == CurrentVendorSerial; });
+        for (var cnt = 0; cnt < DetailForSelectedVendorSR.length; cnt++) {
+            if ($("#txt_StatusFlag2" + cnt).val() != "i")
+                $("#txt_StatusFlag2" + cnt).val("u");
+            var code = $('#txtServCode' + cnt).val();
+            var NumberSelect = ServicesDetails.filter(function (s) { return s.ItemCode == code; });
+            if (NumberSelect.length > 0) {
+                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
+                var itemPrice = NumberSelect[0].UnitPrice;
+                $("#txtPrice" + cnt).val(itemPrice);
+                var txtQuantityValue = $("#txtQty" + cnt).val();
+                var txtPriceValue = $("#txtPrice" + cnt).val();
+                var catID = NumberSelect[0].SrvCategoryID;
+                var catObj = CategorDetails.filter(function (s) { return s.SrvCategoryID == catID; });
+                var Cat_Tax = DetailsVatNature.filter(function (s) { return s.VatNatID == catObj[0].VatNatID; });
+                Tax_Rate = Cat_Tax[0].VatPrc;
+                var Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
+                var code = $('#txtVndrCode' + Cnt_Vnd).val();
+                var VendObj = VendorDetailList.filter(function (s) { return s.VendorCode == code && s.Isactive == true && s.CompCode == compcode; });
+                Tax_Rate = VatDetails.filter(function (x) { return x.CODE == VendObj[0].VATType; })[0].VatPerc;
+                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
+                Tax_Rate = Tax_Type_Model.Prc;
+                $('#txtVatPrc' + cnt).val(Tax_Rate);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
+                VatPrc = Tax_Rate;
+                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
+                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+            }
+            else {
+                $("#txtQuantity" + cnt).val("1");
+                $("#txtPrice" + cnt).val("1");
+                $("#txtDetailTotal" + cnt).val("0");
+                $("#txtVatAmount" + cnt).val("0");
+                $("#txtDetailNet" + cnt).val("0");
+                $('#txtServCode' + cnt).val("");
+                $('#txtServName' + cnt).val("");
+                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
+            }
+        }
+        ComputeTotals();
     }
     //function AddNewRow_Details() {
     //    if (!SysSession.CurrentPrivileges.AddNew) return;
@@ -1317,12 +1361,14 @@ var ServPurInvoice;
         InvHeaderAssignSingle.DISCOUNT = $("#txtDiscoutnval" + cnt).val();
         InvHeaderAssignSingle.PAID = 0;
         //InvHeaderAssignSingle.VndVatType = Number($("#txtInvVat" + cnt).attr('data-VndVatType'));
-        InvHeaderAssignSingle.VndVatType = vatType;
+        var code = $('#txtVndrCode' + cnt).val();
+        var VendObj = VendorDetailList.filter(function (s) { return s.VendorCode == code && s.Isactive == true && s.CompCode == compcode; });
+        InvHeaderAssignSingle.VndVatType = VendObj[0].VATType;
         InvHeaderAssignSingle.Vat = $("#txtInvVat" + cnt).val();
         InvHeaderAssignSingle.NetATax = $("#txtInvNet" + cnt).val();
         InvHeaderAssignSingle.VatApplied = false;
         //InvHeaderAssignSingle.VndVatType = 0;
-        InvHeaderAssignSingle.VatPrc = VatPrc;
+        InvHeaderAssignSingle.VatPrc = VatDetails.filter(function (x) { return x.CODE == VendObj[0].VATType; })[0].VatPerc;
         InvHeaderAssignSingle.SalesType = 0;
         InvHeaderAssignSingle.PAY_ACC_CODE = $("#txtAccCode" + cnt).val();
         InvHeaderAssignSingle.REMARK = $("#txtInvoiceDesc" + cnt).val();

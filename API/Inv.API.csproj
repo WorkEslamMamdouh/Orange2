@@ -78,7 +78,7 @@
       <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="Security">
-      <HintPath>..\..\Elmac\API\bin\Security.dll</HintPath>
+      <HintPath>..\packages\Security\Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
@@ -283,6 +283,7 @@
     <Compile Include="Controllers\ServPurInvoiceController.cs" />
     <Compile Include="Controllers\ServTrSalesController.cs" />
     <Compile Include="Controllers\Shared\G_BranchController.cs" />
+    <Compile Include="Controllers\Shared\LogUser.cs" />
     <Compile Include="Controllers\Shared\QRGenerator.cs" />
     <Compile Include="Controllers\I_PeriodController.cs" />
     <Compile Include="Controllers\STK_TR_ISSUECCController.cs" />
@@ -326,8 +327,11 @@
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
+    <Compile Include="Models\CustomModel\Custom_Items.cs" />
+    <Compile Include="Models\CustomModel\Helping_Methods.cs" />
     <Compile Include="Models\CustomModel\ModelLastPurchase.cs" />
     <Compile Include="Models\CustomModel\ModelLastPrice.cs" />
+    <Compile Include="Models\CustomModel\Sending_Methods.cs" />
     <Compile Include="Models\CustomModel\Stk_TR_IssueToCCMasterDetails.cs" />
     <Compile Include="Models\CustomModel\ICollectMasterDetails.cs" />
     <Compile Include="Models\CustomModel\IQCollectMasterDetails.cs" />

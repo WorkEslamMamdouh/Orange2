@@ -272,12 +272,8 @@ var AccTrCustomerAdjust;
         }
     }
     function txt_Amount_onchange() {
-        if (txt_Type_of_tax.value == "Null") {
-            txt_Type_of_tax.value = "0";
-        }
-        if (txt_Amount.value == null) {
-            txt_Amount.value = "0";
-        }
+        //if (txt_Type_of_tax.value == "Null") { txt_Type_of_tax.value = "0"; }
+        //if (txt_Amount.value == null) { txt_Amount.value = "0"; }
         txt_The_tax_amount.value = ((Number(txt_Amount.value) * Number($('option:selected', $("#txt_Type_of_tax")).attr('Date_VatPerc'))) / 100).toString();
         txt_Total_after_tax.value = (Number(txt_The_tax_amount.value) + Number(txt_Amount.value)).toString();
     }
@@ -777,6 +773,7 @@ var AccTrCustomerAdjust;
     }
     function _SearchBox_Change() {
         //  k//;
+        $("#ReportGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
             var search_1 = searchbutmemreport.value.toLowerCase();
             SearchDetails = Details.filter(function (x) { return x.TrNo.toString().search(search_1) >= 0 || x.Adj_DescA.toLowerCase().search(search_1) >= 0 || x.Adj_DescE.toLowerCase().search(search_1) >= 0 || x.cus_NameA.toLowerCase().search(search_1) >= 0 || x.Cus_NameE.toLowerCase().search(search_1) >= 0 || x.CustomerCODE.toLowerCase().search(search_1) >= 0; }); /*|| x.MOBILE.toLowerCase().search(search) >= 0*/
@@ -846,6 +843,11 @@ var AccTrCustomerAdjust;
             Model.TrDateH = "1";
             Model.TrNo = 0;
             Model.IsCustomer = isCustomer;
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         else {
             DocumentActions.AssignToModel(Model); //Insert Update
@@ -870,6 +872,11 @@ var AccTrCustomerAdjust;
             Model.TrDateH = "1";
             Model.TrNo = txt_CODE.value;
             Model.IsCustomer = isCustomer;
+            Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
+            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
     }
     function Insert() {
@@ -1020,6 +1027,7 @@ var AccTrCustomerAdjust;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1034,6 +1042,7 @@ var AccTrCustomerAdjust;
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

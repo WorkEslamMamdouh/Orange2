@@ -47,7 +47,7 @@ var MessageBox;
         if (Initalized == false)
             InitalizeComponent();
         MessageBoxTitlewithoutclick.innerText = Title;
-        MessageBoxMessagewithoutclick.innerText = Message;
+        MessageBoxMessagewithoutclick.innerHTML = Message;
         MessageBoxCancel.style.display = "none";
         //$("#" + MessageBoxOk.id).off("click");
         $("#" + MessageBoxDialogwithoutclick.id).modal("show");

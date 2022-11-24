@@ -549,6 +549,7 @@ namespace VatLists {
 
                     let result = d.result as string;
 
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.VatLists, SysSession.CurrentEnvironment.CurrentYear);
 
                     window.open(result, "_blank");
                 }
@@ -563,6 +564,7 @@ namespace VatLists {
 
                     let result = d.result as string;
 
+                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.VatLists, SysSession.CurrentEnvironment.CurrentYear);
 
                     window.open(result, "_blank");
                 }

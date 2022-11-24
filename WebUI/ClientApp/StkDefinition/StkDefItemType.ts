@@ -54,6 +54,8 @@ namespace StkDefItemType {
 
         Display_DrpPaymentType();
         //Display();
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItemType, SysSession.CurrentEnvironment.CurrentYear);
+
     }
 
     $('#btnUpdate_Def').on('click', function () {
@@ -378,6 +380,11 @@ namespace StkDefItemType {
         }
         Detail_Model[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Detail_Model[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Detail_Model[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Detail_Model[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Detail_Model[0].MODULE_CODE = Modules.StkDefItemType;
+        Detail_Model[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+        Detail_Model[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
 
         //

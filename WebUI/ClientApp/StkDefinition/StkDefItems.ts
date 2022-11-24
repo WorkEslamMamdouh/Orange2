@@ -82,6 +82,10 @@ namespace StkDefItems {
         $("#drp_G_Store").attr("disabled", "disabled");
         //Display_I_ItemFamily();
 
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItems, SysSession.CurrentEnvironment.CurrentYear);
+
+
+
     }
 
     $('#btnUpdate_Def').on('click', function () {
@@ -660,10 +664,13 @@ namespace StkDefItems {
         Assign();
 
 
-
+        //BilldDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
         BilldDetail.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        BilldDetail.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        BilldDetail.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        BilldDetail.MODULE_CODE = Modules.StkDefItems;
         BilldDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
-
+        BilldDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
         Ajax.Callsync({
             type: "POST",
@@ -778,6 +785,9 @@ namespace StkDefItems {
                     BilldDetail.I_ItemYear.push(Model_Year);
                 }
             }
+
+
+
 
         }
     }

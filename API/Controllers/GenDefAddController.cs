@@ -109,10 +109,15 @@ namespace Inv.API.Controllers
             try
             {
                 IGenDefAddService.UpdateList(RecPayGroupList);
+
+                LogUser.InsertPrint(db, RecPayGroupList[0].Comp_Code.ToString(), RecPayGroupList[0].Branch_Code, RecPayGroupList[0].sec_FinYear, RecPayGroupList[0].UserCode, null, LogUser.UserLog.Insert, RecPayGroupList[0].MODULE_CODE, true, null, null, null);
+
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
+                LogUser.InsertPrint(db, RecPayGroupList[0].Comp_Code.ToString(), RecPayGroupList[0].Branch_Code, RecPayGroupList[0].sec_FinYear, RecPayGroupList[0].UserCode, null, LogUser.UserLog.Insert, RecPayGroupList[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }

@@ -82,6 +82,7 @@ var StkDefCategory;
         GetGLAccount();
         GetItemType();
         FillDrpItemType();
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefCategory, SysSession.CurrentEnvironment.CurrentYear);
     }
     StkDefCategory.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -292,6 +293,7 @@ var StkDefCategory;
         });
     }
     function Grid_RowDoubleClicked() {
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefCategory, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         SelectedItem = Details.filter(function (x) { return x.CatID == Number(Grid.SelectedKey); });
         GlobalCatID = Number(Grid.SelectedKey);
         BindDetail();
@@ -406,6 +408,11 @@ var StkDefCategory;
         Model.PurDisc_ACC_CODE = DrpDiscountPur.value == "null" ? null : DrpDiscountPur.value;
         Model.UserCode = sys.SysSession.CurrentEnvironment.UserCode;
         Model.Token = sys.SysSession.CurrentEnvironment.Token;
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.StkDefCategory;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         Model.CreatedAt = GetDate();

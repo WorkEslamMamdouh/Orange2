@@ -144,7 +144,7 @@ namespace SlsTrSalesReturnNew {
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
-       
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
@@ -179,6 +179,7 @@ namespace SlsTrSalesReturnNew {
 
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
 
         InitializeGrid();
         DisplayMod();
@@ -274,15 +275,15 @@ namespace SlsTrSalesReturnNew {
 
     function DisplayMod() {
 
-        chkOpenProcess.checked = true; 
+        chkOpenProcess.checked = true;
 
-        if (SlsInvSrc == '1') { 
+        if (SlsInvSrc == '1') {
             $('#Store').removeClass('display_none')
             $('#Operation').addClass('display_none')
             $('.modOperation').addClass('display_none')
         }
 
-        if (SlsInvSrc == '2') {  
+        if (SlsInvSrc == '2') {
             $('#Store').addClass('display_none')
             $('#Operation').removeClass('display_none')
             $('.modOperation').removeClass('display_none')
@@ -400,7 +401,7 @@ namespace SlsTrSalesReturnNew {
         $('#txtUpdatedAt').prop("value", "");
 
         $("#divReturnDetails").removeClass("display_none");
-      
+
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("SlsTrSales", "GetSlsInvoiceByIDFromStatistics"),
@@ -418,7 +419,7 @@ namespace SlsTrSalesReturnNew {
                     txtTax.value = "0";
                     txtNet.value = "0";
 
-                     
+
                     $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
                     $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
                     $('#ddlStore').val(setVal(InvoiceStatisticsModel[0].StoreId));
@@ -439,8 +440,8 @@ namespace SlsTrSalesReturnNew {
                         $('#txtCustomerName').prop("value", customerName);
                     }
                     else {
-                        var customerName = InvoiceStatisticsModel[0].CustomerName.toString();
-                        $('#txtCustomerName').prop("value", customerName);
+                        
+                        $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
                     }
 
                     if (InvoiceStatisticsModel[0].Status == 1) {
@@ -486,29 +487,33 @@ namespace SlsTrSalesReturnNew {
                         for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
 
                             if ((SlsInvoiceItemsDetails[i].SoldQty - SlsInvoiceItemsDetails[i].TotRetQty) > 0) {
-                                BuildControls(i);
-                                $("#txtReturnQuantity" + i).prop("value", '0');
-                                $("#txtTotal" + i).prop("value", 0);
-                                $("#txtTax" + i).prop("value", 0);
-                                $("#txtTotAfterTax" + i).prop("value", 0);
+                                BuildControls(buildedRows);
+                                $("#txtReturnQuantity" + buildedRows).prop("value", '0');
+                                $("#txtTotal" + buildedRows).prop("value", 0);
+                                $("#txtTax" + buildedRows).prop("value", 0);
+                                $("#txtTotAfterTax" + buildedRows).prop("value", 0);
                                 txtItemCount.value = '0';
                                 txtPackageCount.value = '0';
                                 txtTotal.value = '0';
                                 txtTax.value = '0';
                                 txtNet.value = '0';
-                                Display_GridConrtol(i);
+                                Display_GridConrtol(buildedRows, i);
                                 buildedRows++;
-                            }
-                            if (buildedRows == 0) {
-                                txtInvoiceNumber.value = "";
-                                DisplayMassage('( لا توجد اصناف علي هذه الفاتورة)', 'this invoice has no items', MessageType.Error);
-                                btnInvoiceSearch.disabled = false;
-                                clear();
-                                return;
+                                CountGrid++;
+
                             }
 
-                            CountGrid++; 
-                        } 
+
+                        }
+
+                        if (buildedRows == 0) {
+                            txtInvoiceNumber.value = "";
+                            DisplayMassage('( لا توجد اصناف علي هذه الفاتورة)', 'this invoice has no items', MessageType.Error);
+                            btnInvoiceSearch.disabled = false;
+                            clear();
+                            return;
+                        }
+
                         CountItems = CountGrid;
 
                         ComputeTotals();
@@ -613,7 +618,7 @@ namespace SlsTrSalesReturnNew {
         debugger
         let sys: SystemTools = new SystemTools();
 
-        sys.FindKey(Modules.SlsTrReturn, "btnInvoiceSearch", "SlsInvSrc = " + SlsInvSrc+" and CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", () => {
+        sys.FindKey(Modules.SlsTrReturn, "btnInvoiceSearch", "SlsInvSrc = " + SlsInvSrc + " and CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey
             Show = false;
             globalRefTrID = id;
@@ -889,14 +894,14 @@ namespace SlsTrSalesReturnNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     storeDetails = result.Response as Array<G_STORE>;
-                     
+
                     if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
                         DocumentActions.FillCombowithdefult(storeDetails, ddlStore, "StoreId", "DescL", "Select Store");
                     }
                     else {
                         DocumentActions.FillCombowithdefult(storeDetails, ddlStore, "StoreId", "DescA", "اختر المستودع");
                     }
-                 
+
                 }
             }
         });
@@ -959,7 +964,7 @@ namespace SlsTrSalesReturnNew {
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAll"),
             data: {
-                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                compCode: compcode, BranchCode: BranchCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, ModuleCode: Modules.SlsTrReturnNew, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -1135,12 +1140,14 @@ namespace SlsTrSalesReturnNew {
         });
     }
     function _SearchBox_Change() {
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
 
         if (searchbutmemreport.value != "") {
             //debugger
             let search: string = searchbutmemreport.value.toLowerCase();
             SearchDetails = SlsInvoiceStatisticsDetails.filter(x => x.TrNo.toString().search(search) >= 0 || x.CustomerName.toLowerCase().search(search) >= 0
-                || x.Slsm_DescA.toLowerCase().search(search) >= 0  );
+                || x.Slsm_DescA.toLowerCase().search(search) >= 0);
 
             Grid.DataSource = SearchDetails;
             Grid.Bind();
@@ -1229,7 +1236,7 @@ namespace SlsTrSalesReturnNew {
                 }
             },
         ];
-     
+
     }
     function BindStatisticGridData() {
         var startDate = DateFormatRep(txtStartDate.value).toString();
@@ -1271,13 +1278,14 @@ namespace SlsTrSalesReturnNew {
         });
     }
     function Grid_RowDoubleClicked() {
-        Show = true; 
+        Show = true;
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {
-            
+
             Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == GlobalReturnID);
             AfterInsertOrUpdateFlag = false;
         }
@@ -1317,7 +1325,7 @@ namespace SlsTrSalesReturnNew {
                 var custId = InvoiceStatisticsModel[0].CustomerId.toString();
                 ddlInvoiceCustomer.value = custId;
             } else {
-                $('#txtCustomerName').prop("value", InvoiceStatisticsModel[0].CustomerName.toString());
+                $('#txtCustomerName').prop("value", setVal(InvoiceStatisticsModel[0].CustomerName));
             }
 
             if (InvoiceStatisticsModel[0].IsCash == true) {
@@ -1388,10 +1396,10 @@ namespace SlsTrSalesReturnNew {
                     debugger
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
-                        Display_GridConrtol(i);
+                        Display_GridConrtol(i, i);
 
                         CountGrid++;
-                    } 
+                    }
                     CountItems = CountGrid;
 
                     ComputeTotals();
@@ -1401,7 +1409,7 @@ namespace SlsTrSalesReturnNew {
 
         $('#btnPrintTransaction').removeClass("display_none");
 
-          
+
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         $('#ddlStore').val(setVal(InvoiceStatisticsModel[0].StoreId));
@@ -1423,7 +1431,7 @@ namespace SlsTrSalesReturnNew {
 			                <input id="txtSerial${cnt}" type="text" class="form-control" disabled />
 		                </div>
 	                </td>
-                    <td class="${ flagInvMulti == false ? display_none : Remove_display_none } ">
+                    <td class="${ flagInvMulti == false ? display_none : Remove_display_none} ">
 		                <div class="form-group"> 
 			               <button disabled id="btnTypeInv${cnt}" class="btn btn-main btn-operation" >   </button>
 		                </div>
@@ -1466,17 +1474,17 @@ namespace SlsTrSalesReturnNew {
 			               <input id="txtUnitpriceWithVat${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td> 
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group" >
 			               <input id="txtDiscountPrc${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group"  >
 			               <input id="txtDiscountAmount${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group" >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
@@ -1514,7 +1522,7 @@ namespace SlsTrSalesReturnNew {
                     <input id="txt_OperationId${cnt}" name = " " type ="hidden" class="form-control" />
                 </tr>`;
         $("#div_Data").append(html);
- 
+
 
         //script
         $('.btn-number2' + cnt).click(function (e) {
@@ -2015,10 +2023,10 @@ namespace SlsTrSalesReturnNew {
             $("#txtUnitpriceWithVat" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].UnitpriceWithVat);
         }
 
- 
+
         return;
     }
-    function Display_GridConrtol(cnt) {
+    function Display_GridConrtol(cnt, i) {
 
 
         $("#txtSerial" + cnt).attr("disabled", "disabled");
@@ -2036,61 +2044,61 @@ namespace SlsTrSalesReturnNew {
         $("#btn_minus" + cnt).attr("disabled", "disabled");
 
 
-        $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Serial);
-        $("#txtServicCode" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].it_itemCode);
-        $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
-        $("#txt_ItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemID);
-         
-        $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].Unitprice);
-        $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
-        $("#txtTax_Rate" + cnt).attr('data-VatNatID', SlsInvoiceItemsDetails[cnt].VatNatID);
-        $("#txtDiscountPrc" + cnt).val(SlsInvoiceItemsDetails[cnt].DiscountPrc);
-        $("#txtDiscountAmount" + cnt).val(SlsInvoiceItemsDetails[cnt].DiscountAmount);
-        $("#txtNetUnitPrice" + cnt).val(SlsInvoiceItemsDetails[cnt].NetUnitPrice);
+        $("#txtSerial" + cnt).prop("value", SlsInvoiceItemsDetails[i].Serial);
+        $("#txtServicCode" + cnt).prop("value", SlsInvoiceItemsDetails[i].it_itemCode);
+        $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[i].InvoiceItemID);
+        $("#txt_ItemID" + cnt).prop("value", SlsInvoiceItemsDetails[i].ItemID);
 
-        $("#Code_Item" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].it_itemCode);
-        $("#Item_Desc" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].it_DescA);
+        $("#txtPrice" + cnt).prop("value", SlsInvoiceItemsDetails[i].Unitprice);
+        $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[i].VatPrc);
+        $("#txtTax_Rate" + cnt).attr('data-VatNatID', SlsInvoiceItemsDetails[i].VatNatID);
+        $("#txtDiscountPrc" + cnt).val(SlsInvoiceItemsDetails[i].DiscountPrc);
+        $("#txtDiscountAmount" + cnt).val(SlsInvoiceItemsDetails[i].DiscountAmount);
+        $("#txtNetUnitPrice" + cnt).val(SlsInvoiceItemsDetails[i].NetUnitPrice);
+
+        $("#Code_Item" + cnt).prop("value", SlsInvoiceItemsDetails[i].it_itemCode);
+        $("#Item_Desc" + cnt).prop("value", SlsInvoiceItemsDetails[i].it_DescA);
         //$("#ddlTypeInv" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SlsInvSrc);
-        $("#ddlStore" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].StoreId);
-        $("#txt_Operation" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].op_TrNo);
-        $("#txt_OperationId" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].OperationId);
-        $("#VatNatID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatNatID);
-        $("#VatPrc" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
+        $("#ddlStore" + cnt).prop("value", SlsInvoiceItemsDetails[i].StoreId);
+        $("#txt_Operation" + cnt).prop("value", SlsInvoiceItemsDetails[i].op_TrNo);
+        $("#txt_OperationId" + cnt).prop("value", SlsInvoiceItemsDetails[i].OperationId);
+        $("#VatNatID" + cnt).prop("value", SlsInvoiceItemsDetails[i].VatNatID);
+        $("#VatPrc" + cnt).prop("value", SlsInvoiceItemsDetails[i].VatPrc);
 
-        
-         
 
-        if (SlsInvSrc == '1') { 
-            $("#btnTypeInv" + cnt).html(' م ( ' + SlsInvoiceItemsDetails[cnt].Store_DescA + ' )'); 
+
+
+        if (SlsInvSrc == '1') {
+            $("#btnTypeInv" + cnt).html(' م ( ' + SlsInvoiceItemsDetails[i].Store_DescA + ' )');
             $('#txt_OperationId' + cnt).val('0')
             $('#txt_Operation' + cnt).val('')
 
 
         }
-        if (SlsInvSrc == '2') { 
-            $("#btnTypeInv" + cnt).html(' عمليه   ( ' + $("#txt_Operation" + cnt).val() + ' )');  
+        if (SlsInvSrc == '2') {
+            $("#btnTypeInv" + cnt).html(' عمليه   ( ' + $("#txt_Operation" + cnt).val() + ' )');
             $('#ddlStore' + cnt).val('null')
 
 
         }
 
 
-         
+
         if (Show == true) { // display return      
             //bind Data
             $("#txt_StatusFlag" + cnt).val("");
-            $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].SoldQty);
-            $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceSoldQty);
-            $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemTotal);
-            $("#txtTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatAmount.RoundToSt(2));
-            $("#txtTotAfterTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetAfterVat.RoundToSt(2));
-            $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
+            $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[i].SoldQty);
+            $("#txtQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[i].InvoiceSoldQty);
+            $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[i].ItemTotal);
+            $("#txtTax" + cnt).prop("value", SlsInvoiceItemsDetails[i].VatAmount.RoundToSt(2));
+            $("#txtTotAfterTax" + cnt).prop("value", SlsInvoiceItemsDetails[i].NetAfterVat.RoundToSt(2));
+            $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[i].InvoiceItemID);
         }
         else { // load from invoice 
             $("#txt_StatusFlag" + cnt).val("i");
-            let InvoiceSoldQty = SlsInvoiceItemsDetails[cnt].SoldQty - SlsInvoiceItemsDetails[cnt].TotRetQty;
-            let total = InvoiceSoldQty * SlsInvoiceItemsDetails[cnt].NetUnitPrice;
-            let vat = total * SlsInvoiceItemsDetails[cnt].VatPrc / 100;
+            let InvoiceSoldQty = SlsInvoiceItemsDetails[i].SoldQty - SlsInvoiceItemsDetails[i].TotRetQty;
+            let total = InvoiceSoldQty * SlsInvoiceItemsDetails[i].NetUnitPrice;
+            let vat = total * SlsInvoiceItemsDetails[i].VatPrc / 100;
             $("#txtReturnQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtQuantity" + cnt).prop("value", InvoiceSoldQty);
             $("#txtTotal" + cnt).prop("value", total.RoundToSt(2));
@@ -2346,8 +2354,8 @@ namespace SlsTrSalesReturnNew {
         InvoiceModel.CardAmount = 0;
 
 
-      
-     
+
+
         if (chkActive.checked == true) {
             InvoiceModel.Status = 1;
         } else {
@@ -2367,7 +2375,7 @@ namespace SlsTrSalesReturnNew {
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
 
-                invoiceItemSingleModel.InvoiceSoldQty = $('#txtQuantity' + i).val(); 
+                invoiceItemSingleModel.InvoiceSoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.SoldQty = $('#txtReturnQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtReturnQuantity' + i).val();
 
@@ -2390,7 +2398,7 @@ namespace SlsTrSalesReturnNew {
                 invoiceItemSingleModel.VatNatID = Number($("#VatNatID" + i).val())
                 invoiceItemSingleModel.VatPrc = Number($("#VatPrc" + i).val())
 
-             
+
 
                 invoiceItemSingleModel.SlsInvSrc = SlsInvSrc;
                 invoiceItemSingleModel.StoreId = $("#ddlStore" + i).val() == 'null' ? null : Number($("#ddlStore" + i).val())
@@ -2409,7 +2417,7 @@ namespace SlsTrSalesReturnNew {
 
                 invoiceItemSingleModel.SoldQty = $('#txtReturnQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtReturnQuantity' + i).val();
-                invoiceItemSingleModel.InvoiceSoldQty = $('#txtQuantity' + i).val(); 
+                invoiceItemSingleModel.InvoiceSoldQty = $('#txtQuantity' + i).val();
 
                 invoiceItemSingleModel.NetUnitPrice = $("#txtPrice" + i).val();
                 invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
@@ -2449,18 +2457,23 @@ namespace SlsTrSalesReturnNew {
             }
 
         }
-         
+
         InvoiceModel.QtyTotal = Number($('#txtPackageCount').val());
         InvoiceModel.LineCount = Number($('#txtItemCount').val());
-         
+
 
         MasterDetailModel.I_Sls_TR_Invoice = InvoiceModel;
         MasterDetailModel.I_Sls_TR_InvoiceItems = invoiceItemsModel;
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.CompName = SysSession.CurrentEnvironment.CompanyNameAr;
         MasterDetailModel.VatNo = SysSession.CurrentEnvironment.VatNo;
+
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.SlsTrReturnNew;
+        MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         InvoiceModel.InvoiceID = 0;
@@ -2483,10 +2496,10 @@ namespace SlsTrSalesReturnNew {
                     GlobalReturnID = res.InvoiceID;
                     $('#txtCreatedBy').prop("value", SysSession.CurrentEnvironment.UserCode);
                     $('#txtCreatedAt').prop("value", DateTimeFormat(Date().toString()));
-                     
+
                     displayDate_speed(GlobalReturnID, res);
                     Success();
-                      
+
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -2497,7 +2510,7 @@ namespace SlsTrSalesReturnNew {
 
     }
     function Success() {
-  
+
         $("#divReturnDetails").removeClass("display_none");
         $("#ddlCashBox").attr("disabled", "disabled");
         $("#txtCashAmount").attr("disabled", "disabled");
@@ -2522,7 +2535,7 @@ namespace SlsTrSalesReturnNew {
         $("#divGridDetails_View").removeClass("disabledDiv");
         $("#divGridDetails_View").removeClass("display_none");
         $("#searchbutmemreport").removeAttr("disabled");
-         
+
         $('#btnPrintTransaction').removeClass("display_none");
 
         AfterInsertOrUpdateFlag = true;
@@ -2607,9 +2620,9 @@ namespace SlsTrSalesReturnNew {
             data: JSON.stringify(MasterDetailModel),
             success: (d) => {
                 let result = d as BaseResponse;
-                if (result.IsSuccess == true) { 
+                if (result.IsSuccess == true) {
                     let res = result.Response as IQ_GetSlsInvoiceStatisticVer2;
-                    DisplayMassage('( تم فك اعتماد الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);       
+                    DisplayMassage('( تم فك اعتماد الفاتورة (' + res.TrNo + ') بنجاح )', '(The invoice has been successfully modified)', MessageType.Succeed);
                     GlobalReturnID = res.InvoiceID;
                     $('#divCreationPanel').removeClass("display_none");
                     $('#txtUpdatedBy').prop("value", res.UpdatedBy);
@@ -2629,7 +2642,7 @@ namespace SlsTrSalesReturnNew {
 
     }
     function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
-          
+
 
         SlsInvoiceStatisticsDetails = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID != invID);
 
@@ -2646,7 +2659,7 @@ namespace SlsTrSalesReturnNew {
         Grid.DataSource = SlsInvoiceStatisticsDetails;
         Grid.Bind();
         $("#divShow").removeClass("display_none");
-        
+
         $("#DivInvoiceDetails").addClass("display_none");
         $("#cotrolDiv").removeClass("disabledDiv");
         $("#divIconbar").removeClass("disabledIconbar");
@@ -2715,6 +2728,7 @@ namespace SlsTrSalesReturnNew {
 
                 let result = d.result as string;
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
@@ -2731,6 +2745,7 @@ namespace SlsTrSalesReturnNew {
 
         rp.Name_function = "rptInvoiceNoteRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -2784,7 +2799,7 @@ namespace SlsTrSalesReturnNew {
         var endDate = DateFormatRep(txtEndDate.value).toString();
         var customerId = 0;
         var status = 0;
-        var SalesMan = 0; 
+        var SalesMan = 0;
         var IsCash: number = 0;
 
         if (ddlCustomer.value != "null") {
@@ -2793,7 +2808,7 @@ namespace SlsTrSalesReturnNew {
 
         if (ddlSalesMan.value != "null") {
             SalesMan = Number(ddlSalesMan.value.toString());
-        } 
+        }
         if (ddlStateType.value != "null") {
             status = Number(ddlStateType.value.toString());
         }
@@ -2813,17 +2828,17 @@ namespace SlsTrSalesReturnNew {
 
             let Name_ID = 'InvoiceID'
             let NameTable = 'I_Sls_TR_Invoice'
-            let Condation1 = " SlsInvSrc =  " + SlsInvSrc +" and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
+            let Condation1 = " SlsInvSrc =  " + SlsInvSrc + " and  TrType = 1 and CompCode = " + compcode + " and BranchCode =" + BranchCode + " " +
                 " and TrDate >=' " + startDate + "' and TrDate <= ' " + endDate + " ' ";
             let Condation2 = " ";
 
 
             if (customerId != 0 && customerId != null)
-                Condation2 = Condation2 + " and CustomerId =" + customerId;            
+                Condation2 = Condation2 + " and CustomerId =" + customerId;
             if (SalesMan != 0 && SalesMan != null)
                 Condation2 = Condation2 + " and SalesmanId =" + SalesMan;// and Status = " + Status
             if (OperationId != 0 && OperationId != null)
-                Condation2 = Condation2 + " and OperationId =" + OperationId; 
+                Condation2 = Condation2 + " and OperationId =" + OperationId;
             if (status == 2)
                 Condation2 = Condation2 + "";
             else {

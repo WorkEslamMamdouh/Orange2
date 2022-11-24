@@ -98,6 +98,7 @@ var STKAdjust;
         txtTransferDate.value = GetDate();
         InitalizeEvents();
         $('#btnPrint').addClass('display_none');
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
     }
     STKAdjust.InitalizeComponent = InitalizeComponent;
     //------------------------------------------------------ Main Region -----------------------------------
@@ -478,7 +479,7 @@ var STKAdjust;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("DirectTransfer", "GetAllStockAdjustmentHeaderWithDetail"),
-            data: { CompCode: compcode, TrType: status, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, TrType: status, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.STKAdjust, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -814,7 +815,8 @@ var STKAdjust;
         $(".Cost").show();
     }
     function txtSearch_onKeyup() {
-        BindGridData();
+        //BindGridData();
+        $("#divGridDetails_View").jsGrid("option", "pageIndex", 1);
         if (txtSearch.value != "") {
             var search_1 = txtSearch.value.toLowerCase();
             SearchDetails = IQ_GetStkAdjustDetailModel.filter(function (x) { return x.Tr_No.toString().toLowerCase().search(search_1) >= 0 || x.St_DEscA.toLowerCase().search(search_1) >= 0
@@ -1244,7 +1246,11 @@ var STKAdjust;
         MasterDetailModel.I_Stk_TR_Adjust = StockHeaderModel;
         MasterDetailModel.I_Stk_Tr_AdjustDetails = StockDetailModel;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        MasterDetailModel.MODULE_CODE = Modules.STKAdjust;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         MasterDetailModel.I_Stk_TR_Adjust.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1432,6 +1438,7 @@ var STKAdjust;
             data: rp,
             success: function (d) {
                 var result = d.result;
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1447,6 +1454,7 @@ var STKAdjust;
         rp.Type = 0;
         rp.Name_function = "IProc_Prnt_StkAdjust";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

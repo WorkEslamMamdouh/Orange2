@@ -171,18 +171,24 @@ namespace Inv.API.Controllers
                         {
                             obj.A_JOURNAL_HEADER.VOUCHER_CODE = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            
                             return Ok(new BaseResponse(obj.A_JOURNAL_HEADER));
                     }
                         else
                         {
                         dbTransaction.Rollback();
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
                     ////////
                 }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -210,17 +216,21 @@ namespace Inv.API.Controllers
                         {
                             item.VoucherID = obj.A_JOURNAL_HEADER.VoucherID;
                             IJournalDetailService.Insert(item);
+                            //LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
                         }
                         foreach (var item in updatedObjects)
                         {
                             item.VoucherID = obj.A_JOURNAL_HEADER.VoucherID;
                             IJournalDetailService.Update(item);
+                           // LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+
                         }
                         foreach (var item in deletedObjects)
                         {
                             IJournalDetailService.Delete(item.VoucherDetailID);
-                            //string query = "DELETE FROM A_JOURNAL_DETAIL  WHERE COMP_CODE = " + item.COMP_CODE + " and VOUCHER_CODE =" + item.VOUCHER_CODE + "and VOUCHER_SERIAL = "+item.VOUCHER_SERIAL;
-                            // db.Database.ExecuteSqlCommand(query);
+                           // LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VoucherDetailID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, null);
+
                         }
 
                         //// call process trans 
@@ -230,17 +240,23 @@ namespace Inv.API.Controllers
                         {
 
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                           
                             return Ok(new BaseResponse(obj.A_JOURNAL_HEADER));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -288,17 +304,23 @@ namespace Inv.API.Controllers
                         {
 
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Open, obj.MODULE_CODE, true, null, null, null);
+                          
                             return Ok(new BaseResponse(obj.A_JOURNAL_HEADER));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Open, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_JOURNAL_HEADER.VoucherID, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -339,11 +361,15 @@ namespace Inv.API.Controllers
                         if (res > 0)
                         {
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, A_TmpVouProList[0].Comp_Code.ToString(), A_TmpVouProList[0].Branch_Code, A_TmpVouProList[0].sec_FinYear, A_TmpVouProList[0].UserCode, res, LogUser.UserLog.Insert, A_TmpVouProList[0].MODULE_CODE, true, null, null, null);
+                          
                             return Ok(new BaseResponse(res));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, A_TmpVouProList[0].Comp_Code.ToString(), A_TmpVouProList[0].Branch_Code, A_TmpVouProList[0].sec_FinYear, A_TmpVouProList[0].UserCode, null, LogUser.UserLog.Insert, A_TmpVouProList[0].MODULE_CODE, false, res.ToString(), null, null);
+
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, "Error"));
                         }
 
@@ -351,6 +377,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, A_TmpVouProList[0].Comp_Code.ToString(), A_TmpVouProList[0].Branch_Code, A_TmpVouProList[0].sec_FinYear, A_TmpVouProList[0].UserCode, null, LogUser.UserLog.Insert, A_TmpVouProList[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
+
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
 

@@ -30,7 +30,7 @@ namespace GLDefAccount {
     var btnback: HTMLButtonElement;
     var Refrash: HTMLButtonElement;
 
-
+    var txt_Search: HTMLInputElement; 
     var Name_Acc: HTMLLabelElement;
     var txt_ACC_CODE: HTMLInputElement;
     var txt_NAME_A: HTMLInputElement;
@@ -116,6 +116,7 @@ namespace GLDefAccount {
 
         //textBoxes
         Name_Acc = document.getElementById("Name_Acc") as HTMLLabelElement;
+        txt_Search = document.getElementById("txt_Search") as HTMLInputElement;
         txt_ACC_CODE = document.getElementById("txt_ACC_CODE") as HTMLInputElement;
         txt_NAME_A = document.getElementById("txt_NAME_A") as HTMLInputElement;
         txt_NAME_E = document.getElementById("txt_NAME_E") as HTMLInputElement;
@@ -162,14 +163,30 @@ namespace GLDefAccount {
         btnback.onclick = btnback_onclick;
         btnEdit.onclick = btnEdit_onclick;
         Refrash.onclick = Refrash_onclick;
+        txt_Search.onchange = txt_Search_onkeyup;
         //txt_Openbalance.onkeyup = balance_onchange;
         //txt_Cust_Type.onchange = txt_Cust_Type_onchange;
 
       
     }
-   
-    function Refrash_onclick() {
 
+    function txt_Search_onkeyup() {
+        $('#menu-group-1').html('');
+        if (txt_Search.value.trim() == '') {
+            Display();
+            OnClick_Tree();
+
+        }
+        else {
+            Displayfilter();
+            OnClick_Tree();
+
+        }
+
+    }
+    
+    function Refrash_onclick() {
+        txt_Search.value = ''; 
         $('#menu-group-1').html('');
         GetAll_Account();
         Display();
@@ -178,6 +195,8 @@ namespace GLDefAccount {
         btnDelete.disabled = true;
         btnEdit.disabled = true;
         btnAdd.disabled = true;
+        OnClick_Tree();
+
     }
     function Display_GCodes() {
 
@@ -216,6 +235,236 @@ namespace GLDefAccount {
             }
         });
     }
+
+    function Displayfilter() {
+
+        debugger
+        DetAccLst = new Array<AQ_GetAccount>();
+        var desc = "";
+        var Det = 0;
+        var MaxLevel = 10;
+        for (var l = 1; l < MaxLevel; l++) {
+            DetAccLst = Details_ACCOUNT.filter(x => x.ACC_LEVEL == l);
+
+
+            for (var i = 0; i < DetAccLst.length; i++) {
+
+                desc = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? DetAccLst[i].ACC_DESCA : DetAccLst[i].ACC_DESCL
+                Det = DetAccLst[i].DETAIL == true ? 1 : 0;
+
+                Biuld_TreeOpen(DetAccLst[i].ACC_CODE, desc, DetAccLst[i].PARENT_ACC, Det, DetAccLst[i].ACC_LEVEL, DetAccLst[i])
+
+            }
+
+
+
+        }
+        debugger
+        if (l != 1) {
+            let search: string = txt_Search.value.toLowerCase();
+            DetAccLst = Details_ACCOUNT.filter(x => x.ACC_CODE.toString().search(search) >= 0 || x.ACC_DESCA.toLowerCase().search(search) >= 0)
+
+        }
+
+        $('#a_' + DetAccLst[0].ACC_CODE + '').focus();
+        click_in_Focus(DetAccLst[0].ACC_CODE)
+
+
+
+
+
+
+
+    }
+    
+    function Biuld_TreeOpen(Node: string, NodeName: string, NodeParent: string, Detail: number, LVL: number, DetAccList: AQ_GetAccount) {
+
+        var class_Plus;
+        var style_Plus = '';
+        //if (NodeParent == null) {
+        //    NodeParent = ""; 
+        //} else {
+        //    NodeParent = NodeParent;
+        //}
+        //if (Node == null) {
+        //    Node = ""; 
+        //} else {
+        //    Node = Node;
+        //}
+        //if (NodeName == null) {
+        //    NodeName = ""; 
+        //} else {
+        //    NodeName = NodeName;
+        //} 
+        if (LVL == 1) {
+            id_ul = 'menu-group-1';
+        }
+        else {
+            id_ul = 'sub-item-' + NodeParent;
+        }
+
+        if (Detail == 0) {
+            class_Plus = 'fas fa-minus-circle fs-6';
+        }
+        else {
+            class_Plus = 'fa-minus-circle fs-6';
+            //  class_Plus = 'glyphicon-plusicon-white';
+            style_Plus = 'height: 1rem;width:1rem; background-color: var(--dark-blue); border-radius:50%; margin:auto; margin-right: 5px;';
+        }
+        //---------------------------------------------------------li---------------------
+        var li_1 = document.createElement('li');
+        li_1.setAttribute('id', 'li_' + Node);
+        li_1.setAttribute('class', 'item-' + Node + ' deeper parent');
+        try {
+            document.getElementById(id_ul).appendChild(li_1);
+        } catch (e) {
+            alert(Node);
+        }
+
+
+        //------------------------------------------------------------------------------
+
+        //---------------------------------------------------------a---------------------
+        var a_1 = document.createElement('a');   // a 
+        a_1.setAttribute('id', 'a_' + Node);
+        a_1.setAttribute('href', '#');
+        try {
+            document.getElementById('li_' + Node).appendChild(a_1);
+
+        } catch (e) {
+            alert(Node);
+        }
+
+
+        var span_1 = document.createElement('span');     // span زرار الفتح +
+        span_1.setAttribute('id', 'span_1' + Node);
+        span_1.setAttribute('data-toggle', 'collapse');
+        span_1.setAttribute('data-parent', '#' + id_ul + '');
+        span_1.setAttribute('href', '#sub-item-' + Node);
+        span_1.setAttribute('class', 'sign collapsed');
+        span_1.setAttribute('aria-expanded', 'true');
+        span_1.setAttribute('Data_I', 'i_' + Node);
+        span_1.setAttribute('style', style_Plus);
+        try {
+            document.getElementById('a_' + Node).appendChild(span_1);
+
+        } catch (e) {
+            alert(Node);
+        }
+
+        if (style_Plus == '') {
+            var i_1 = document.createElement('i');     //icon +
+            i_1.setAttribute('id', 'i_' + Node);
+            i_1.setAttribute('class', class_Plus);
+            document.getElementById('span_1' + Node).appendChild(i_1);
+        }
+
+
+
+        var span_2 = document.createElement('span');     // النص text in li
+        span_2.setAttribute('id', Node);
+        span_2.setAttribute('class', 'lbl');
+        span_2.setAttribute('data-detail', Detail.toString());
+        span_2.setAttribute('data-ACC_CODE', DetAccList.ACC_CODE);
+        span_2.setAttribute('data-NAME_A', DetAccList.ACC_DESCA);
+        span_2.setAttribute('data-NAME_E', DetAccList.ACC_DESCL);
+        //span_2.setAttribute('data-CCDT_Type', DetAccList.CCDT_TYPE == null ? null : DetAccList.CCDT_TYPE.toString());
+        span_2.setAttribute('data-ACC_TYPE', DetAccList.ACC_TYPE == null ? null : DetAccList.ACC_TYPE.toString());
+        span_2.setAttribute('data-ACC_GROUP', DetAccList.ACC_GROUP == null ? null : DetAccList.ACC_GROUP.toString());
+        span_2.setAttribute('data-REMARKS', DetAccList.REMARKS);
+        span_2.setAttribute('data-level', DetAccList.ACC_LEVEL.toString());
+        span_2.setAttribute('data-Debit', DetAccList.DEBIT.toString());
+        span_2.setAttribute('data-DebitFC', DetAccList.CREDIT.toString());
+        span_2.setAttribute('data-Openbalance', DetAccList.OPENING_BALANCE.toString());
+        span_2.setAttribute('data-ACTIVE', DetAccList.ACC_ACTIVE.toString());
+        span_2.setAttribute('data-NodeParent', DetAccList.PARENT_ACC = null ? '' : DetAccList.PARENT_ACC);
+        span_2.setAttribute('data-CreditLimit', DetAccList.ACC_LIMIT == null ? '0' : DetAccList.ACC_LIMIT.toString());
+        span_2.setAttribute('data-balance', '0');
+        span_2.setAttribute('data-CreatedBy', DetAccList.CREATED_BY == null ? ' ' : DetAccList.CREATED_BY.toString());
+        span_2.setAttribute('data-CreatedAt', DetAccList.CREATED_AT == null ? ' ' : DetAccList.CREATED_AT.toString());
+        span_2.setAttribute('data-UpdatedBy', DetAccList.UPDATED_BY == null ? ' ' : DetAccList.UPDATED_BY.toString());
+        span_2.setAttribute('data-UpdatedAt', DetAccList.LAST_UPDATE == null ? ' ' : DetAccList.LAST_UPDATE.toString());
+
+        document.getElementById('a_' + Node).appendChild(span_2);
+        document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
+
+        try {
+
+            $('#' + Node + '').click(click_in_labl);
+        } catch (e) {
+
+            alert(Node);
+        }
+
+        //------------------------------------------------------------------------------
+
+        //---------------------------------------------------------ul---------------------
+        var ul_1 = document.createElement('ul');
+        ul_1.setAttribute('class', 'children nav-child unstyled small ---');
+        ul_1.setAttribute('id', 'sub-item-' + Node);
+        document.getElementById('li_' + Node).appendChild(ul_1);
+        //------------------------------------------------------------------------------
+
+    }
+
+    function click_in_Focus(ACC_CODE: string) {
+
+        ACC_CODE = $('#' + ACC_CODE + '').attr('data-ACC_CODE');
+
+        DetAccLst = new Array<AQ_GetAccount>();
+        DetAccLst = Details_ACCOUNT.filter(x => x.ACC_CODE == $('#' + ACC_CODE + '').attr('data-NodeParent'));
+        // 
+        if ($('#' + ACC_CODE + '').attr('data-NodeParent') == 'null' || $('#' + ACC_CODE + '').attr('data-NodeParent') == '0') {
+            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? $('#' + ACC_CODE + '').attr('data-NAME_A') : $('#' + ACC_CODE + '').attr('data-NAME_E');
+            Name_Acc.innerHTML = "" + NAME + " ( " + ACC_CODE + " )";
+            Name_Acc.setAttribute('data-level', $('#' + ACC_CODE + '').attr('data-level'));
+        }
+        else {
+
+
+
+            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? DetAccLst[0].ACC_DESCA : DetAccLst[0].ACC_DESCL;
+            Name_Acc.innerHTML = "" + NAME + " ( " + $('#' + ACC_CODE + '').attr('data-NodeParent') + " )";
+            Name_Acc.setAttribute('data-level', $('#' + ACC_CODE + '').attr('data-level'));
+
+
+        }
+
+
+        var ACC_TYPE = Number($('#' + ACC_CODE + '').attr('data-ACC_TYPE'));
+        var ACC_GROUP = $('#' + ACC_CODE + '').attr('data-ACC_GROUP');
+        Display_Type(ACC_TYPE, ACC_GROUP);
+
+        txt_ACC_CODE.value = $('#' + ACC_CODE + '').attr('data-ACC_CODE');
+        txt_NAME_A.value = $('#' + ACC_CODE + '').attr('data-NAME_A');
+        txt_NAME_E.value = $('#' + ACC_CODE + '').attr('data-NAME_E');
+        txt_note.value = $('#' + ACC_CODE + '').attr('data-REMARKS');
+        txt_level.value = $('#' + ACC_CODE + '').attr('data-level');
+        txt_Debit.value = $('#' + ACC_CODE + '').attr('data-Debit');
+        txt_DebitFC.value = $('#' + ACC_CODE + '').attr('data-DebitFC');
+        //txtCCDT_Type.value = $(this).attr('data-CCDT_Type');
+        txt_Openbalance.value = $('#' + ACC_CODE + '').attr('data-Openbalance');
+        txt_CreditLimit.value = $('#' + ACC_CODE + '').attr('data-CreditLimit');
+        txt_balance.value = ((Number(txt_Openbalance.value) + Number(txt_Debit.value)) - Number(txt_DebitFC.value)).toString();
+        chkeck_Detailed.checked = $('#' + ACC_CODE + '').attr('data-detail') == '1' ? true : false;
+        chkeck_active.checked = $('#' + ACC_CODE + '').attr('data-ACTIVE') == 'true' ? true : false;
+
+
+        txtCreatedBy.value = $('#' + ACC_CODE + '').attr('data-CreatedBy') == null ? '' : $('#' + ACC_CODE + '').attr('data-CreatedBy');
+        txtCreatedAt.value = $('#' + ACC_CODE + '').attr('data-CreatedAt') == null ? '' : $('#' + ACC_CODE + '').attr('data-CreatedAt');
+
+        txtUpdatedBy.value = $('#' + ACC_CODE + '').attr('data-UpdatedBy') == null ? '' : $('#' + ACC_CODE + '').attr('data-UpdatedBy');
+        txtUpdatedAt.value = $('#' + ACC_CODE + '').attr('data-UpdatedAt') == null ? '' : $('#' + ACC_CODE + '').attr('data-UpdatedAt');
+
+        $('#txt_Type').prop('value', $('#' + ACC_CODE + '').attr('data-acc_type') == '0' ? 'null' : $('#' + ACC_CODE + '').attr('data-acc_type'));
+
+
+        btnDelete.disabled = false;
+        btnEdit.disabled = false;
+        btnAdd.disabled = false;
+
+    }
+
 
     function GetAll_Account() {
         Ajax.Callsync({
@@ -1009,6 +1258,12 @@ namespace GLDefAccount {
                 Singl_Details.A_ACCOUNT_YEAR = AccList_YEAR;
             }
         }
+        
+
+       Singl_Details.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Singl_Details.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Singl_Details.MODULE_CODE = Modules.GLDefAccount;
+       Singl_Details.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
     }
     function Insert() {
