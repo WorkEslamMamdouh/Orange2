@@ -29,5 +29,6 @@ namespace Inv.DAL.Domain
         public string SMS_Password { get; set; }
         public string MobileNoPreFex { get; set; }
         public Nullable<int> EmailMaxDaily { get; set; }
+        public string SMS_INMessageSenderName { get; set; }
     }
 }

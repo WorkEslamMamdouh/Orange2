@@ -1066,6 +1066,7 @@
           <Property Name="SMS_Provider" Type="nvarchar" MaxLength="100" />
           <Property Name="SMS_UserName" Type="nvarchar" MaxLength="100" />
           <Property Name="SMS_SenderName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SMS_INMessageSenderName" Type="nvarchar" MaxLength="100" />
           <Property Name="SMS_Password" Type="nvarchar" MaxLength="100" />
           <Property Name="MobileNoPreFex" Type="nvarchar" MaxLength="10" />
           <Property Name="EmailMaxDaily" Type="int" />
@@ -11844,6 +11845,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="SMS_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MobileNoPreFex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="EmailMaxDaily" Type="Int32" />
+          <Property Name="SMS_INMessageSenderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="G_AlertLog">
           <Key>
@@ -22081,6 +22083,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="G_AlertControl">
             <EntityTypeMapping TypeName="InvModel.G_AlertControl">
               <MappingFragment StoreEntitySet="G_AlertControl">
+                <ScalarProperty Name="SMS_INMessageSenderName" ColumnName="SMS_INMessageSenderName" />
                 <ScalarProperty Name="EmailMaxDaily" ColumnName="EmailMaxDaily" />
                 <ScalarProperty Name="MobileNoPreFex" ColumnName="MobileNoPreFex" />
                 <ScalarProperty Name="SMS_Password" ColumnName="SMS_Password" />
