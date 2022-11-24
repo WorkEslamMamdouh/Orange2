@@ -5,200 +5,200 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="49b3c42467d940a1883c80fae4bc3c31" Name="Diagram1" ZoomLevel="36">
-        <EntityTypeShape EntityType="InvModel.A_D_VAT_TYPE" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_PERIOD" Width="1.5" PointX="8.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_Rec_D_DiscountPlan" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.A_Rec_D_DiscountPlanSegment" Width="1.5" PointX="2.75" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Accounts" Width="1.5" PointX="10.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_D_AjustmentType" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_D_CashBox" Width="1.5" PointX="10.75" PointY="8.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Category" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Group" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_Adjustment" Width="1.5" PointX="2.75" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_ReceiptNote" Width="1.5" PointX="12.75" PointY="5.75" />
-        <EntityTypeShape EntityType="InvModel.G_AlertControl" Width="1.5" PointX="4.75" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.G_AlertLog" Width="1.5" PointX="10.75" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.G_AlertType" Width="1.5" PointX="12.75" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.G_BRANCH" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.G_Codes" Width="1.5" PointX="16.625" PointY="7" />
-        <EntityTypeShape EntityType="InvModel.G_COMPANY" Width="1.5" PointX="14.75" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.G_ModuleHelp" Width="1.5" PointX="16.75" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.G_MODULES" Width="1.5" PointX="16.75" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.G_News" Width="1.5" PointX="16.625" PointY="3.75" />
-        <EntityTypeShape EntityType="InvModel.G_Noteifications" Width="1.5" PointX="4.75" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.G_NotificationCompany" Width="1.5" PointX="18.75" PointY="7.75" />
-        <EntityTypeShape EntityType="InvModel.G_REGION" Width="1.5" PointX="10.75" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.G_REGION_BRANCH" Width="1.5" PointX="18.75" PointY="11.75" />
-        <EntityTypeShape EntityType="InvModel.G_SearchForm" Width="1.5" PointX="0.75" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.G_SearchFormModule" Width="1.5" PointX="6.75" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.G_SearchFormSetting" Width="1.5" PointX="18.5" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.G_STORE" Width="1.5" PointX="20.75" PointY="5.75" />
-        <EntityTypeShape EntityType="InvModel.G_SUB_SYSTEMS" Width="1.5" PointX="20.75" PointY="11.75" />
-        <EntityTypeShape EntityType="InvModel.G_SYSTEM" Width="1.5" PointX="12.75" PointY="20.75" />
-        <EntityTypeShape EntityType="InvModel.G_TransCounter" Width="1.5" PointX="20.75" PointY="15.75" />
-        <EntityTypeShape EntityType="InvModel.G_TransCounterSetting" Width="1.5" PointX="20.75" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.G_USER_BRANCH" Width="1.5" PointX="14.75" PointY="21.75" />
-        <EntityTypeShape EntityType="InvModel.G_USER_COMPANY" Width="1.5" PointX="16.75" PointY="21.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_Category" Width="1.5" PointX="22.75" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_Specification" Width="1.5" PointX="18.75" PointY="22.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_SpecificationValues" Width="1.5" PointX="20.75" PointY="22.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_UnitGroup" Width="1.5" PointX="22.75" PointY="21.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_UOM" Width="1.5" PointX="22.625" PointY="5.75" />
-        <EntityTypeShape EntityType="InvModel.I_G_CostMethods" Width="1.5" PointX="22.75" PointY="8.875" />
-        <EntityTypeShape EntityType="InvModel.I_G_ItemType" Width="1.5" PointX="24.875" PointY="9.875" />
-        <EntityTypeShape EntityType="InvModel.I_G_StockMethods" Width="1.5" PointX="24.75" PointY="16.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemBatch" Width="1.5" PointX="8.75" PointY="25.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemFamily" Width="1.5" PointX="10.75" PointY="25.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemSpecsValue" Width="1.5" PointX="12.75" PointY="25.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemStore" Width="1.5" PointX="14.75" PointY="25.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemStoreBatch" Width="1.5" PointX="22.75" PointY="0.625" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_D_Charges" Width="1.5" PointX="26.75" PointY="4.75" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_TR_ReceiveItems" Width="1.5" PointX="26.75" PointY="17.75" />
-        <EntityTypeShape EntityType="InvModel.I_Sls_TR_Invoice" Width="1.5" PointX="20.75" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.I_Sls_TR_InvoiceItems" Width="1.5" PointX="22.75" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetUserBranch" Width="1.5" PointX="30.75" PointY="3.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetUserModule" Width="1.5" PointX="30.75" PointY="6.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_Notifications" Width="1.5" PointX="6.75" PointY="30.75" />
-        <EntityTypeShape EntityType="InvModel.I_VW_GetCompStatus" Width="1.5" PointX="30.75" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetBoxAdjustmentList" Width="1.5" PointX="30.75" PointY="21.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetBoxAdjustmentVat" Width="1.5" PointX="24.75" PointY="30.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetBoxReceiveList" Width="1.5" PointX="30.75" PointY="30.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurChargeInfo" Width="1.5" PointX="10.75" PointY="31.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveCharge" Width="1.5" PointX="12.75" PointY="31.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveChargeSum" Width="1.5" PointX="14.75" PointY="31.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveItem" Width="1.5" PointX="26.75" PointY="31.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItem" Width="1.5" PointX="32.75" PointY="32.75" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_TR_Receive" Width="1.5" PointX="33.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.G_ReportWebSetting" Width="1.5" PointX="3.375" PointY="33.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_ReportWebSetting" Width="1.5" PointX="5.375" PointY="34.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveList" Width="1.5" PointX="33.75" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveStaistic" Width="1.5" PointX="35.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_Operation" Width="1.5" PointX="35.375" PointY="20.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationDeposit" Width="1.5" PointX="36.375" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationItems" Width="1.5" PointX="19.375" PointY="36.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperation" Width="1.5" PointX="11.375" PointY="37.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationCharges" Width="1.5" PointX="13.375" PointY="37.75" />
-        <EntityTypeShape EntityType="InvModel.G_Role" Width="1.5" PointX="36.375" PointY="17.75" />
-        <EntityTypeShape EntityType="InvModel.G_RoleModule" Width="1.5" PointX="37.375" PointY="20.75" />
-        <EntityTypeShape EntityType="InvModel.G_RoleUsers" Width="1.5" PointX="37.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.G_USERS" Width="1.5" PointX="37.375" PointY="29.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetUserRole" Width="1.5" PointX="37.375" PointY="37.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetUsers" Width="1.5" PointX="38.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_ReceiveCharges" Width="1.5" PointX="38.375" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationCharges" Width="1.5" PointX="38.375" PointY="14.75" />
-        <EntityTypeShape EntityType="InvModel.A_Voucher_Types" Width="1.5" PointX="39.375" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetJournalHeader" Width="1.5" PointX="39.375" PointY="33.75" />
-        <EntityTypeShape EntityType="InvModel.A_TmpVoucherProcess" Width="1.5" PointX="40.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_JOURNAL_HEADER" Width="1.5" PointX="40.375" PointY="7.75" />
-        <EntityTypeShape EntityType="InvModel.A_TR_VchrTemplate" Width="1.5" PointX="7.375" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.A_TR_VchrTemplateDetail" Width="1.5" PointX="40.375" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetVchrTemplateDetail" Width="1.5" PointX="19.375" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.G_CONTROL" Width="1.5" PointX="26.375" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.A_ACCOUNT_YEAR" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="InvModel.I_ItemYear" Width="1.5" PointX="37.75" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.A_ACCOUNT" Width="1.5" PointX="40.375" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.I_Item" Width="1.5" PointX="3.375" PointY="41.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetAccount" Width="1.5" PointX="41.375" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationItemInfo" Width="1.5" PointX="33.375" PointY="40.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkVar" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkVarBranch" Width="1.5" PointX="41.75" PointY="32.75" />
-        <EntityTypeShape EntityType="InvModel.I_Sls_D_Salesman" Width="1.5" PointX="17.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSalesMan" Width="1.5" PointX="43.375" PointY="18.75" />
-        <EntityTypeShape EntityType="InvModel.G_COST_CENTER" Width="1.5" PointX="3.75" PointY="22.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkTrans" Width="1.5" PointX="28.75" PointY="41.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkTrans_TempVchr" Width="1.5" PointX="41.75" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkTransVariable" Width="1.5" PointX="0.75" PointY="24.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkTrans_Temp" Width="1.5" PointX="44.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_TR_Transfer" Width="1.5" PointX="27.375" PointY="8.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_TR_TransferDetails" Width="1.5" PointX="44.375" PointY="7.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetTransfer" Width="1.5" PointX="44.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetTransferDetail" Width="1.5" PointX="44.375" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetUserBarnchAccess" Width="1.5" PointX="35.375" PointY="44.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_TR_Adjust" Width="1.5" PointX="37.375" PointY="44.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetStkAdjust" Width="1.5" PointX="7.375" PointY="45.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetStkAdjustDetail" Width="1.5" PointX="45.375" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_Tr_AdjustDetails" Width="1.5" PointX="45.375" PointY="36.75" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_PurchaseOrder" Width="1.5" PointX="39.375" PointY="45.75" />
-        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_PurchaseOrderDetail" Width="1.5" PointX="41.375" PointY="45.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurchaseOrder" Width="1.5" PointX="45.375" PointY="42.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetPurchaseOrderDetail" Width="1.5" PointX="46.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationDepsit" Width="1.5" PointX="46.375" PointY="7.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetStore" Width="1.5" PointX="46.375" PointY="12.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationSalesman" Width="1.5" PointX="15.375" PointY="46.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationTF" Width="1.5" PointX="17.375" PointY="46.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationTFDetail" Width="1.5" PointX="19.375" PointY="46.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationSalesmanItem" Width="1.5" PointX="46.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationSalesman" Width="1.5" PointX="46.375" PointY="30.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationSalesmanItem" Width="1.5" PointX="47.375" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationTF" Width="1.5" PointX="47.375" PointY="35.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetOperationTFDetail" Width="1.5" PointX="47.375" PointY="45.75" />
-        <EntityTypeShape EntityType="InvModel.A_Pay_D_VendorDoc" Width="1.5" PointX="48.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.A_Rec_CustomerDoc" Width="1.5" PointX="3.375" PointY="48.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetCustomerDoc" Width="1.5" PointX="48.375" PointY="4.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetVendorDoc" Width="1.5" PointX="48.375" PointY="9.75" />
-        <EntityTypeShape EntityType="InvModel.A_Rec_D_CustomerDoc" Width="1.5" PointX="48.375" PointY="14.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetCustomer" Width="1.5" PointX="0.75" PointY="35.75" />
-        <EntityTypeShape EntityType="InvModel.A_Rec_D_Customer" Width="1.5" PointX="24.375" PointY="44.75" />
-        <EntityTypeShape EntityType="InvModel.G_Currency" Width="1.5" PointX="54.375" PointY="46.75" />
-        <EntityTypeShape EntityType="InvModel.G_Nationality" Width="1.5" PointX="16.5" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.G_VatNature" Width="1.5" PointX="6.375" PointY="22.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetItemCategory" Width="1.5" PointX="48.375" PointY="25.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_D_SrvCategory" Width="1.5" PointX="28.375" PointY="48.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetSrvCategory" Width="1.5" PointX="32.375" PointY="48.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_SlsInvoice" Width="1.5" PointX="34.375" PointY="48.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_SlsInvoiceItem" Width="1.5" PointX="49.375" PointY="34.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetSlsInvoiceItem" Width="1.5" PointX="49.375" PointY="44.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetSlsInvoiceList" Width="1.5" PointX="50.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoice" Width="1.5" PointX="13.75" PointY="50.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceDetail" Width="1.5" PointX="50.75" PointY="19.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceHeader" Width="1.5" PointX="50.75" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceRet" Width="1.5" PointX="36.75" PointY="50.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceRetDetail" Width="1.5" PointX="41.75" PointY="50.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurInvoiceDetail" Width="1.5" PointX="9.75" PointY="51.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurInvoiceHeader" Width="1.5" PointX="51.75" PointY="33.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurReturn" Width="1.5" PointX="51.75" PointY="41.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_D_Service" Width="1.5" PointX="46.375" PointY="51.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetService" Width="1.5" PointX="52.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurReturnDetail" Width="1.5" PointX="3.375" PointY="52.75" />
-        <EntityTypeShape EntityType="InvModel.I_Control" Width="1.5" PointX="0.75" PointY="51.75" />
-        <EntityTypeShape EntityType="InvModel.A_CCDT_COSTCENTERS" Width="1.5" PointX="5.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_CONTROL" Width="1.5" PointX="5.375" PointY="52.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_PERIOD" Width="1.5" PointX="52.375" PointY="8.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_PeriodDetail" Width="1.5" PointX="52.375" PointY="13.75" />
-        <EntityTypeShape EntityType="InvModel.AVAT_TRANS" Width="1.5" PointX="51.375" PointY="52.75" />
-        <EntityTypeShape EntityType="InvModel.AQVAT_GetPeriodDetail" Width="1.5" PointX="53.375" PointY="17.75" />
-        <EntityTypeShape EntityType="InvModel.A_CCDT_Types" Width="1.5" PointX="23.375" PointY="37.75" />
-        <EntityTypeShape EntityType="InvModel.A_JOURNAL_DETAIL" Width="1.5" PointX="53.375" PointY="21.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetJournalDetail" Width="1.5" PointX="53.375" PointY="52.75" />
-        <EntityTypeShape EntityType="InvModel.G_LnkTransVoucher" Width="1.5" PointX="42.375" PointY="36.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransVoucher" Width="1.5" PointX="54.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransVoucherDetail" Width="1.5" PointX="16.375" PointY="54.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetLnkVarBranch" Width="1.5" PointX="53.375" PointY="27.75" />
-        <EntityTypeShape EntityType="InvModel.GQ_GetLnkVoucherDetail" Width="1.5" PointX="54.375" PointY="8.75" />
-        <EntityTypeShape EntityType="InvModel.A_CashVoucher_Detail" Width="1.5" PointX="18.375" PointY="54.75" />
-        <EntityTypeShape EntityType="InvModel.A_CashVoucher_Header" Width="1.5" PointX="26.375" PointY="54.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_UnitGroupUom" Width="1.5" PointX="28.375" PointY="54.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetCashVoucherDetail" Width="1.5" PointX="54.375" PointY="32.75" />
-        <EntityTypeShape EntityType="InvModel.AQ_GetCashVoucherHeader" Width="1.5" PointX="54.375" PointY="38.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_Collect" Width="1.5" PointX="55.375" PointY="14.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_CollectDetail" Width="1.5" PointX="3.375" PointY="4.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetCollectDetail" Width="1.5" PointX="55.375" PointY="20.75" />
-        <EntityTypeShape EntityType="InvModel.I_TR_OperationItemsSum" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetItemFamily" Width="1.5" PointX="55.375" PointY="26.75" />
-        <EntityTypeShape EntityType="InvModel.I_Period" Width="1.5" PointX="55.375" PointY="52.75" />
-        <EntityTypeShape EntityType="InvModel.I_PeriodItem" Width="1.5" PointX="56.375" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetItemStoreInfo" Width="1.5" PointX="30.375" PointY="56.75" />
-        <EntityTypeShape EntityType="InvModel.A_Pay_D_Vendor" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="InvModel.I_D_IssueType" Width="1.5" PointX="25.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_TR_IssueToCC" Width="1.5" PointX="25.75" PointY="23.75" />
-        <EntityTypeShape EntityType="InvModel.I_Stk_TR_IssueToCCDetails" Width="1.5" PointX="27.75" PointY="0.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCC" Width="1.5" PointX="27.75" PointY="23.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCCDetail" Width="1.5" PointX="0.75" PointY="28.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetVendor" Width="1.5" PointX="21.375" PointY="44.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceListVer2" Width="1.5" PointX="56.375" PointY="31.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceStatisticVer2" Width="1.5" PointX="44.375" PointY="56.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" Width="1.5" PointX="46.375" PointY="56.75" />
-        <EntityTypeShape EntityType="InvModel.G_USER_LOG" Width="1.5" PointX="15.375" PointY="34.75" />
+        <EntityTypeShape EntityType="InvModel.A_D_VAT_TYPE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_PERIOD" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Rec_D_DiscountPlan" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Rec_D_DiscountPlanSegment" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Accounts" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_D_AjustmentType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_D_CashBox" Width="1.5" PointX="4.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Category" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_D_Group" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_Adjustment" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_ReceiptNote" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_AlertControl" Width="1.5" PointX="6.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_AlertLog" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_AlertType" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_BRANCH" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_Codes" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_COMPANY" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_ModuleHelp" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_MODULES" Width="1.5" PointX="8.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_News" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_Noteifications" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_NotificationCompany" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_REGION" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_REGION_BRANCH" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_SearchForm" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_SearchFormModule" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_SearchFormSetting" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_STORE" Width="1.5" PointX="10.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_SUB_SYSTEMS" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_SYSTEM" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_TransCounter" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_TransCounterSetting" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_USER_BRANCH" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_USER_COMPANY" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_Category" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_Specification" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_SpecificationValues" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_UnitGroup" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_UOM" Width="1.5" PointX="12.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_G_CostMethods" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_G_ItemType" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_G_StockMethods" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemBatch" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemFamily" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemSpecsValue" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemStore" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemStoreBatch" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_D_Charges" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_TR_ReceiveItems" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Sls_TR_Invoice" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Sls_TR_InvoiceItems" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetUserBranch" Width="1.5" PointX="14.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetUserModule" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_Notifications" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_VW_GetCompStatus" Width="1.5" PointX="4.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetBoxAdjustmentList" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetBoxAdjustmentVat" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetBoxReceiveList" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurChargeInfo" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveCharge" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveChargeSum" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveItem" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItem" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_TR_Receive" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_ReportWebSetting" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_ReportWebSetting" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveList" Width="1.5" PointX="16.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurReceiveStaistic" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_Operation" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationDeposit" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationItems" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperation" Width="1.5" PointX="6.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationCharges" Width="1.5" PointX="16.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_Role" Width="1.5" PointX="8.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_RoleModule" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_RoleUsers" Width="1.5" PointX="10.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_USERS" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetUserRole" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetUsers" Width="1.5" PointX="16.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_ReceiveCharges" Width="1.5" PointX="14.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationCharges" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Voucher_Types" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetJournalHeader" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_TmpVoucherProcess" Width="1.5" PointX="18.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_JOURNAL_HEADER" Width="1.5" PointX="2.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_TR_VchrTemplate" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_TR_VchrTemplateDetail" Width="1.5" PointX="4.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetVchrTemplateDetail" Width="1.5" PointX="18.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_CONTROL" Width="1.5" PointX="6.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_ACCOUNT_YEAR" Width="1.5" PointX="18.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_ItemYear" Width="1.5" PointX="8.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_ACCOUNT" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Item" Width="1.5" PointX="10.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetAccount" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationItemInfo" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkVar" Width="1.5" PointX="18.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkVarBranch" Width="1.5" PointX="14.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Sls_D_Salesman" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSalesMan" Width="1.5" PointX="16.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_COST_CENTER" Width="1.5" PointX="18.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTrans" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTrans_TempVchr" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTransVariable" Width="1.5" PointX="20.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTrans_Temp" Width="1.5" PointX="2.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_TR_Transfer" Width="1.5" PointX="20.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_TR_TransferDetails" Width="1.5" PointX="4.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetTransfer" Width="1.5" PointX="20.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetTransferDetail" Width="1.5" PointX="6.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetUserBarnchAccess" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_TR_Adjust" Width="1.5" PointX="8.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetStkAdjust" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetStkAdjustDetail" Width="1.5" PointX="10.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_Tr_AdjustDetails" Width="1.5" PointX="20.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_PurchaseOrder" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Pur_Tr_PurchaseOrderDetail" Width="1.5" PointX="20.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurchaseOrder" Width="1.5" PointX="14.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetPurchaseOrderDetail" Width="1.5" PointX="20.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationDepsit" Width="1.5" PointX="16.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetStore" Width="1.5" PointX="20.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationSalesman" Width="1.5" PointX="18.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationTF" Width="1.5" PointX="20.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationTFDetail" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationSalesmanItem" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationSalesman" Width="1.5" PointX="22.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationSalesmanItem" Width="1.5" PointX="2.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationTF" Width="1.5" PointX="22.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetOperationTFDetail" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Pay_D_VendorDoc" Width="1.5" PointX="22.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Rec_CustomerDoc" Width="1.5" PointX="6.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetCustomerDoc" Width="1.5" PointX="22.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetVendorDoc" Width="1.5" PointX="8.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Rec_D_CustomerDoc" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetCustomer" Width="1.5" PointX="10.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Rec_D_Customer" Width="1.5" PointX="22.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_Currency" Width="1.5" PointX="12.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_Nationality" Width="1.5" PointX="22.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_VatNature" Width="1.5" PointX="14.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetItemCategory" Width="1.5" PointX="22.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_D_SrvCategory" Width="1.5" PointX="16.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetSrvCategory" Width="1.5" PointX="22.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_SlsInvoice" Width="1.5" PointX="18.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_SlsInvoiceItem" Width="1.5" PointX="22.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetSlsInvoiceItem" Width="1.5" PointX="20.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetSlsInvoiceList" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoice" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceDetail" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceHeader" Width="1.5" PointX="24.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceRet" Width="1.5" PointX="2.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TR_PurInvoiceRetDetail" Width="1.5" PointX="24.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurInvoiceDetail" Width="1.5" PointX="4.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurInvoiceHeader" Width="1.5" PointX="24.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurReturn" Width="1.5" PointX="6.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_D_Service" Width="1.5" PointX="24.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetService" Width="1.5" PointX="8.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetPurReturnDetail" Width="1.5" PointX="24.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Control" Width="1.5" PointX="10.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_CCDT_COSTCENTERS" Width="1.5" PointX="24.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_CONTROL" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_PERIOD" Width="1.5" PointX="24.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_PeriodDetail" Width="1.5" PointX="14.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AVAT_TRANS" Width="1.5" PointX="24.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQVAT_GetPeriodDetail" Width="1.5" PointX="16.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_CCDT_Types" Width="1.5" PointX="24.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_JOURNAL_DETAIL" Width="1.5" PointX="18.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetJournalDetail" Width="1.5" PointX="24.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTransVoucher" Width="1.5" PointX="20.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransVoucher" Width="1.5" PointX="24.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransVoucherDetail" Width="1.5" PointX="22.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetLnkVarBranch" Width="1.5" PointX="24.75" PointY="24.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetLnkVoucherDetail" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_CashVoucher_Detail" Width="1.5" PointX="0.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_CashVoucher_Header" Width="1.5" PointX="26.75" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_UnitGroupUom" Width="1.5" PointX="2.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetCashVoucherDetail" Width="1.5" PointX="26.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetCashVoucherHeader" Width="1.5" PointX="4.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_Collect" Width="1.5" PointX="26.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_CollectDetail" Width="1.5" PointX="6.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetCollectDetail" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_TR_OperationItemsSum" Width="1.5" PointX="8.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetItemFamily" Width="1.5" PointX="26.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Period" Width="1.5" PointX="10.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_PeriodItem" Width="1.5" PointX="26.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetItemStoreInfo" Width="1.5" PointX="12.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_Pay_D_Vendor" Width="1.5" PointX="26.75" PointY="14.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_D_IssueType" Width="1.5" PointX="14.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_TR_IssueToCC" Width="1.5" PointX="26.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.I_Stk_TR_IssueToCCDetails" Width="1.5" PointX="16.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCC" Width="1.5" PointX="26.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetStkIssueCCDetail" Width="1.5" PointX="18.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetVendor" Width="1.5" PointX="26.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceListVer2" Width="1.5" PointX="20.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceStatisticVer2" Width="1.5" PointX="26.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetSlsInvoiceItemVer2" Width="1.5" PointX="22.75" PointY="26.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_USER_LOG" Width="1.5" PointX="26.75" PointY="24.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
