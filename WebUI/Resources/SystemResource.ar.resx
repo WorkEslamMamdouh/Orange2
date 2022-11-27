@@ -706,16 +706,16 @@
     <value>المشترى</value>
   </data>
   <data name="Men_ProcReturn" xml:space="preserve">
-    <value>مرتجع العمليات</value>
+    <value>مرتجع الارساليات</value>
   </data>
   <data name="App_Print_slip" xml:space="preserve">
     <value>طباعة Slip</value>
   </data>
   <data name="Men_ProcInvoice" xml:space="preserve">
-    <value>فاتورة العمليات</value>
+    <value>فاتورة الارساليات</value>
   </data>
   <data name="Men_ProcessMan" xml:space="preserve">
-    <value>فواتير العمليات</value>
+    <value>فواتير الارساليات</value>
   </data>
   <data name="Clientstatment" xml:space="preserve">
     <value>كشف حساب عملاء</value>
@@ -775,10 +775,10 @@
     <value>الادوات</value>
   </data>
   <data name="operationsmanagment" xml:space="preserve">
-    <value>ادارة العمليات</value>
+    <value>ادارة الارساليات</value>
   </data>
   <data name="Processes" xml:space="preserve">
-    <value>العمليات</value>
+    <value>الارساليات</value>
   </data>
   <data name="Receipttransfer" xml:space="preserve">
     <value>استلام تحويل</value>
@@ -1349,7 +1349,7 @@
     <value>العملية</value>
   </data>
   <data name="process_opened" xml:space="preserve">
-    <value>العمليات المفتوحه حاليا</value>
+    <value>الارساليات المفتوحه حاليا</value>
   </data>
   <data name="Process_status" xml:space="preserve">
     <value>حالة العمليه</value>
@@ -2138,10 +2138,10 @@
     <value>طباعة مصاريف العمليه</value>
   </data>
   <data name="PrintProcessList" xml:space="preserve">
-    <value>طباعة قائمة العمليات</value>
+    <value>طباعة قائمة الارساليات</value>
   </data>
   <data name="ProcessesAccount" xml:space="preserve">
-    <value>حساب العمليات</value>
+    <value>حساب الارساليات</value>
   </data>
   <data name="ProcessSummary" xml:space="preserve">
     <value>ملخص عملية</value>
