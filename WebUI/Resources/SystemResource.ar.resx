@@ -1205,7 +1205,7 @@
     <value>تاريخ الاغلاق</value>
   </data>
   <data name="Close_process" xml:space="preserve">
-    <value>اغلاق العملية</value>
+    <value>اغلاق الارساليات</value>
   </data>
   <data name="Comp_comm" xml:space="preserve">
     <value>عمولة الشركة</value>
@@ -1823,7 +1823,7 @@
     <value>نقدي لدي المندوب</value>
   </data>
   <data name="Inv_ImportInvoice" xml:space="preserve">
-    <value>فواتير استيراد</value>
+    <value>فواتير الارساليات</value>
   </data>
   <data name="Inv_MenuNo" xml:space="preserve">
     <value>رقم القائمة</value>

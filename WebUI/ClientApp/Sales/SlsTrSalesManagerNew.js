@@ -162,7 +162,7 @@ var SlsTrSalesManagerNew;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
     }
     else { //2: opration invoice 
-        (lang == "ar" ? Screen_name = 'فواتير العمليات' : Screen_name = 'opration invoice');
+        (lang == "ar" ? Screen_name = 'فواتير الارساليات' : Screen_name = 'opration invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
     }
