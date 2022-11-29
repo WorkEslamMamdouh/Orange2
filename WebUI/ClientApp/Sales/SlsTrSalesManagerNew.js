@@ -4,7 +4,26 @@ $(document).ready(function () {
 var SlsTrSalesManagerNew;
 (function (SlsTrSalesManagerNew) {
     //system varables
-    var SysSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
+    var Screen_name = "";
+    var SlsInvSrc = $('#Flag_SlsInvSrc').val();
+    debugger;
+    var flagInvItemDiscount = false;
+    var flagInvMulti = false;
+    var SalesmanId = 'null';
+    if (SlsInvSrc == "1") { //  1:Retail invoice  
+        var SysSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
+        var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+        (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice');
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
+    }
+    else { //2: opration invoice 
+        var SysSession = GetSystemSession(Modules.SlsTrSalesOperation);
+        var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+        (lang == "ar" ? Screen_name = 'فواتير الارساليات' : Screen_name = 'opration invoice');
+        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
+        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
+    }
     var compcode;
     var BranchCode;
     var sys = new SystemTools();
@@ -137,7 +156,6 @@ var SlsTrSalesManagerNew;
     var Show = true;
     var NewAdd = true;
     var AutherizeFlag = false;
-    var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].SalesPriceWithVAT);
     var btnPrint;
     var Tax_Rate = 0;
@@ -150,22 +168,6 @@ var SlsTrSalesManagerNew;
     var modal = document.getElementById("myModal");
     var display_none = "display_none";
     var Remove_display_none = "";
-    var Screen_name = "";
-    var SlsInvSrc = $('#Flag_SlsInvSrc').val();
-    debugger;
-    var flagInvItemDiscount = false;
-    var flagInvMulti = false;
-    var SalesmanId = 'null';
-    if (SlsInvSrc == "1") { //  1:Retail invoice  
-        (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice');
-        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
-        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
-    }
-    else { //2: opration invoice 
-        (lang == "ar" ? Screen_name = 'فواتير الارساليات' : Screen_name = 'opration invoice');
-        flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
-        flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
-    }
     var flagControldbOrSerch = false;
     //flagInvItemDiscount = true;
     //flagInvMulti = true;

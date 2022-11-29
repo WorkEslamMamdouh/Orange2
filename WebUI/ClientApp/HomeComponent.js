@@ -179,7 +179,8 @@ var HomeComponent;
             $('#LanguageButtonHome').text(" تغير اللغة  ");
         }
         btn_loguotuser = DocumentActions.GetElementById("btn_loguotuser");
-        btn_loguotuser.onclick = LogoutUserApi;
+        var loguotuser = DocumentActions.GetElementById("loguotuser");
+        loguotuser.onclick = LogoutUserApi;
         //CheckTime(); 
         $("#LanguageButtonHome").click(function () {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { // English Mode  

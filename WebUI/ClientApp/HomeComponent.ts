@@ -219,7 +219,8 @@ namespace HomeComponent {
         }
          
          btn_loguotuser = DocumentActions.GetElementById<HTMLButtonElement>("btn_loguotuser");
-        btn_loguotuser.onclick = LogoutUserApi;
+        var loguotuser = DocumentActions.GetElementById<HTMLButtonElement>("loguotuser");
+        loguotuser.onclick = LogoutUserApi;
         //CheckTime(); 
         $("#LanguageButtonHome").click(() => {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { // English Mode  

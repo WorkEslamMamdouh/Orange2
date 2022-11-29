@@ -374,16 +374,27 @@ function ChangePassword(OldPassword, NewPassword) {
     var sys = new SystemTools();
     var Env = GetSystemEnvironment();
     var UserCode = Env.UserCode;
+    if (OldPassword.trim() == '') {
+        alert("يجب ادخال الباسور كلمة المرور القديمة");
+        Errorinput($('#txtOldPassword'));
+        return;
+    }
+    if (NewPassword.trim() == '') {
+        alert("يجب ادخال الباسور كلمة المرور الجديدة");
+        Errorinput($('#txtNewPassword'));
+        return;
+    }
     $.ajax({
         url: sys.apiUrl("SystemTools", "ChangePassword"),
         data: { OldPassword: OldPassword, NewPassword: NewPassword, UserCode: UserCode },
         success: function (response) {
             var result = response;
             if (result.IsSuccess == true) {
-                alert("Password changed");
+                alert("تم تغيير كلمة السر");
+                $("#user_setting").modal("hide");
             }
             else {
-                alert("Changing password failed");
+                alert("فشل تغيير كلمة المرور");
             }
         }
     });
