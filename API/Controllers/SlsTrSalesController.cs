@@ -217,7 +217,20 @@ namespace Inv.API.Controllers
                         {
                              
                             obj.I_Sls_TR_Invoice.TrNo=int.Parse(res.ResponseData.ToString());
+
+                            if (obj.I_Sls_TR_Invoice.TrNo == 0)
+                            {
+                                dbTransaction.Rollback();
+
+                                db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = "+ obj.I_Sls_TR_Invoice.InvoiceID+ " ");
+                                db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");                            
+                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+
+                            }
+
                             dbTransaction.Commit();
+
+
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
@@ -228,6 +241,8 @@ namespace Inv.API.Controllers
                         else
                         {
                             dbTransaction.Rollback();
+                            db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
+                            db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
                             LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
@@ -237,6 +252,8 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
+                        db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
                         LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
