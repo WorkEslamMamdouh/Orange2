@@ -4,7 +4,7 @@ using System.Web.Mvc;
 namespace Inv.WebUI.Controllers
 {
 
-    [AuthorizeUserAttribute()]
+    [RequireHttps]
     public class HomeController : Controller
     {
 

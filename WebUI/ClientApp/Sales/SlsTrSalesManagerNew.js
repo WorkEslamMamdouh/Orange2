@@ -680,7 +680,13 @@ var SlsTrSalesManagerNew;
                         txtCustomerMobile.value = AccountDetails[0].MOBILE;
                         if (SysSession.CurrentEnvironment.UserType != 1 && SysSession.CurrentEnvironment.UserType != 3) {
                             if (AccountDetails[0].SalesmanId != null && AccountDetails[0].SalesmanId != 0) {
-                                ddlSalesman.value = AccountDetails[0].SalesmanId.toString();
+                                var SaleMan = SalesmanDetails.filter(function (x) { return x.SalesmanId == AccountDetails[0].SalesmanId; });
+                                if (SaleMan.length > 0) {
+                                    ddlSalesman.value = setVal(AccountDetails[0].SalesmanId);
+                                }
+                                else {
+                                    ddlSalesman.value = "null";
+                                }
                             }
                         }
                     }

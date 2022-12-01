@@ -17,8 +17,7 @@
     <AssemblyName>Inv.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -2443,8 +2442,11 @@
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleComp5Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleComp5En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleRetComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleRetComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_invoice_simpleRetComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OerationTfEn.rdlc" />
@@ -2505,6 +2507,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetSimpleComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetSimpleComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetSimpleComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetSimpleEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdComp3Ar.rdlc">
@@ -2515,6 +2518,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceRetstdEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleComp3Ar.rdlc">
@@ -2525,6 +2529,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoicestdComp3Ar.rdlc">
       <SubType>Designer</SubType>
@@ -2534,15 +2539,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoicestdComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoicestdComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoicestdComp5Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_AccPaymentComp5Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_AccReceiveComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_OPerationInvoiceSimpleComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_OPerationInvoiceSimpleComp4En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_OPerationInvoiceSimpleComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_SlsInvoiceSimpleArComp6.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_SlsInvoiceStdArComp5.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_SlsInvoiceStdArComp6.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_SlsReturnStdComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListEn.rdlc">
       <SubType>Designer</SubType>
@@ -2955,7 +2966,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61453/</IISUrl>
+          <IISUrl>https://localhost:44312/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

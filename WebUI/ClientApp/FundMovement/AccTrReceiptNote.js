@@ -1287,6 +1287,7 @@ var AccTrReceiptNote;
                 if (result.IsSuccess) {
                     var res = void 0;
                     res = result.Response;
+                    DateSetsSccess("txtDateNew", "txtDateFrom", "txtDateTo");
                     ReceiptID = res.ReceiptID;
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
                     Valid = 0;
@@ -1318,6 +1319,7 @@ var AccTrReceiptNote;
                 var result = d;
                 if (result.IsSuccess) {
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
+                    DateSetsSccess("txtDateNew", "txtDateFrom", "txtDateTo");
                     Update_claenData = 0;
                     $('#txt_D_CashBox').val('Null');
                     Display();
@@ -2020,11 +2022,6 @@ var AccTrReceiptNote;
         }
     }
     function txt_BenCodeH_onchange() {
-        if (txt_ReceiptNote.value == "Null") {
-            txt_BenCodeH.value = "";
-            Errorinput(txt_ReceiptNoteNew);
-            DisplayMassage("اختر نوع الاستلام", "choose ReceiptNote", MessageType.Error);
-        }
         if (txt_ReceiptNote.value == "1") {
             txt_BenCustCodeH_onchange();
         }
