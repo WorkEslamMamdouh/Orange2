@@ -620,6 +620,9 @@
     <Compile Include="Domain\IProc_Rpt_OerationTFList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IProc_Rpt_OperationExportList_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IProc_Rpt_OperationList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
