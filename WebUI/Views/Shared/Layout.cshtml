@@ -35,7 +35,7 @@
 <body id="page-top">
     <div class="iconbar-container  " style="display:none;">
         <!--   Icon Bar Definition -->
-        <div class="details-iconbar d-flex justify-content-start hidden_Control" id="iconbar_Definition">
+        <div class="details-iconbar d-flex justify-content-start hidden_Control iconbars" id="iconbar_Definition" style="display : none">
             <button class="icon-bar d-flex justify-content-between  btnUpdate_Def position-fixed" id="btnUpdate_Def">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">@SystemResource.App_Update</span>
@@ -54,7 +54,7 @@
             </button>
         </div>
         <!-- Side Icon Bar -->
-        <div class="main-iconbar hidden_Control " id="divIconbar">
+        <div class="main-iconbar hidden_Control iconbars" id="divIconbar"  style="display : none">
             <div id="iconMainPages">
                 <button class="icon-bar d-flex justify-content-between view " id="btnShow">
                     <i class="fas fa-eye fa-fw side-icon ms-1"></i>
@@ -104,7 +104,7 @@
             </div>
         </div>
         <!-- Details Side Icon Bar -->
-        <div class="details-iconbar d-flex justify-content-start" id="icon-bar">
+        <div class="details-iconbar d-flex justify-content-start iconbars" id="icon-bar"  style="display : none">
             <button class="icon-bar d-flex justify-content-between edit display_none " id="btnUpdate">
                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
                 <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
@@ -171,18 +171,18 @@
                                     <p class="preview-subject ellipsis mb-1 text-small">Change Language</p>
                                 </div>
                             </a>
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="#" class="dropdown-item preview-item" onclick="changePassword()">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
 
                                         <i class="fas fa-lock text-light-blue"></i>
                                     </div>
                                 </div>
-                                <div class="preview-item-content">
+                                <div class="preview-item-content" id="btnUsers" data-target="#user_setting">
                                     <p class="preview-subject ellipsis mb-1 text-small">تغيير كلمه السر</p>
                                 </div>
                             </a>
-                            <a href="#" class="dropdown-item preview-item">
+                            <a href="#" class="dropdown-item preview-item" id="loguotuser">
                                 <div class="preview-thumbnail">
                                     <div class="preview-icon bg-dark rounded-circle">
                                         <i class="fas fa-sign-out-alt text-light-blue"></i>
@@ -217,7 +217,7 @@
                                 <a class="new-tab-link" id="btnSlsTrSalesManagerNewT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrSalesManagerNew" class="nav-link" href="#">@SystemResource.Men_SlsTrSalesManager</a>
                             </li>
-                       
+
 
                             <li key="SlsTrSalesManager" class="nav-item d-flex  mb-1  " style="display: none !important;">
                                 <a class="new-tab-link" id="btnSlsTrSalesManagerT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
@@ -231,7 +231,7 @@
                                 <a class="new-tab-link" id="btnSlsTrReturnNewT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSlsTrReturnNew" class="nav-link" href="#">@SystemResource.Men_SlsTrReturn</a>
                             </li>
-                      
+
 
                         </ul>
                     </div>
@@ -455,12 +455,12 @@
                             </li>
                             <li key="SlsTrSalesOperation" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnSlsTrSalesOperationT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
-                                <a id="btnSlsTrSalesOperation" class="nav-link" href="#">فواتير العمليات</a>
+                                <a id="btnSlsTrSalesOperation" class="nav-link" href="#">@SystemResource.Inv_ImportInvoice </a>
                             </li>
 
                             <li key="SlsTrReturnOperation" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnSlsTrReturnOperationT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
-                                <a id="btnSlsTrReturnOperation" class="nav-link" href="#">مرتج عمليات</a>
+                                <a id="btnSlsTrReturnOperation" class="nav-link" href="#">  @SystemResource.Men_ProcReturn</a>
                             </li>
                             <li id="" key="ProcSalesInvoice" class="nav-item d-flex  mb-1" style="display: none !important;">
                                 <a class="new-tab-link" id="btnProcSalesInvoiceT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
@@ -939,9 +939,50 @@
 
 
 
+    <!-- User Setting Modal -->
+    <div class="modal fade details-model" id="user_setting" tabindex="-1" aria-labelledby="UserSettingModel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-blue">
+                    <h5 class="modal-title" id="UserSettingModel">@SystemResource.App_UserSetting</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-3  align-self-center p-md-0">@SystemResource.App_OldPassword</label>
+                                <div class="col-9  ">
+                                    <input type="password" class="form-control" id="txtOldPassword">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-3  align-self-center p-md-0">@SystemResource.App_NewPassword</label>
+                                <div class="col-9  ">
+                                    <input type="password" class="form-control" id="txtNewPassword">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <div class="row flex-grow-1 flex-row-reverse">
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <button id="btnChangePassword" type="button" class="btn btn-green w-100"> @SystemResource.App_Confirm</button>
+                        </div>
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <button id="" type="button" class="btn btn-red w-100" data-bs-dismiss="modal">@SystemResource.App_Close</button>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--..............................user setting..................................................-->
-    <div class="modal fade" id="user_setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    @*<div class="modal fade" id="user_setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -951,27 +992,37 @@
                 <div class="user_2">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-3 control-label">@SystemResource.App_OldPassword </label>
+                            <label for="inputEmail3" class="col-sm-3 control-label" style="color: #ffffff;">@SystemResource.App_OldPassword </label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" id="txtOldPassword">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-3 control-label"> @SystemResource.App_NewPassword</label>
+                            <label for="inputPassword3" class="col-sm-3 control-label" style="color: #ffffff;"> @SystemResource.App_NewPassword</label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" id="txtNewPassword">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-1">
+
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" id="btnChangePassword" class="btn btn-danger">@SystemResource.App_Confirm </button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary btn_back">@SystemResource.App_Return</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">@SystemResource.App_Close </button>
+                            </div>
+
+                        </div>
                     </form>
-                    <div class="modal-footer">
-                        <button type="button" id="btnChangePassword" class="btn btn-danger">@SystemResource.App_Confirm </button>
-                        <button type="button" class="btn btn-primary btn_back">@SystemResource.App_Return</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">@SystemResource.App_Close </button>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 
@@ -1034,12 +1085,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                  @*  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    @*  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
                     <h4 class="modal-title" id="MessageBoxTitle">الوقت!!</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body content content-8" id="MessageBoxMessage">لقد استنفذت وقت الجلسة هل تريد الاستمرار </div>
-                   
+
                 <div class="modal-footer">
                     <button type="button" id="SessionBoxOk" class="btn btn-red">نعم</button>
                     <button type="button" id="SessionBoxCancel" class="btn btn-main" data-dismiss="modal">لا</button>
@@ -1126,6 +1177,14 @@
     <script>
         $("#NewAdd_Falg").val(0);
         $("#Mod_Flag").val(0);
+
+        function changePassword() {
+
+            $('#txtOldPassword').val('');
+            $('#txtNewPassword').val('');
+            $("#user_setting").modal("show")
+
+        }
 
         $("#btnAdd").click(function () {
             debugger

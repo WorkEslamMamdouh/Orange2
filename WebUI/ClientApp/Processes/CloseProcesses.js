@@ -328,7 +328,7 @@ var CloseProcesses;
         btnPrintOperationsummary = document.getElementById("btnPrintOperationsummary");
         btnPrintsalesrecord = document.getElementById("btnPrintsalesrecord");
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "اغلاق العمليات";
+            document.getElementById('Screen_name').innerHTML = "اغلاق الارساليات";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Close Processes ";

@@ -1588,7 +1588,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=iif(Fields!TrType.Value=1,"قائمة مرتجع العمليات","قائمة عرض اسعار")</Value>
+                      <Value>=iif(Fields!TrType.Value=1,"قائمة مرتجع الارساليات","قائمة عرض اسعار")</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>

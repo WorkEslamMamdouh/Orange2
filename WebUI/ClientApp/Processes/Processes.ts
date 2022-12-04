@@ -349,7 +349,7 @@ namespace Processes {
         btnPrintOperationsummary = document.getElementById("btnPrintOperationsummary") as HTMLButtonElement;
         btnPrintsalesrecord = document.getElementById("btnPrintsalesrecord") as HTMLButtonElement;
 
-        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = "ادارة العمليات"; }
+        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = "ادارة الارساليات"; }
         else { document.getElementById('Screen_name').innerHTML = "Processes"; }
 
     }

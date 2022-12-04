@@ -317,7 +317,7 @@ var Processes;
         btnPrintOperationsummary = document.getElementById("btnPrintOperationsummary");
         btnPrintsalesrecord = document.getElementById("btnPrintsalesrecord");
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "ادارة العمليات";
+            document.getElementById('Screen_name').innerHTML = "ادارة الارساليات";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Processes";

@@ -45,7 +45,9 @@ namespace Inv.WebUI.Reports.Models
             string EnPar = Models.UserTools.Encrypt(pars, "Business-Systems"); // mahroos 
             EnPar = EnPar.Replace("+", "*");
 
-            string uri = "http://" + HttpContext.Current.Request.Url.Host + ":" + HttpContext.Current.Request.Url.Port + "/" + HttpContext.Current.Request.ApplicationPath;
+           string Protocol = HttpContext.Current.Request.Url.Scheme; 
+
+            string uri = Protocol+"://" + HttpContext.Current.Request.Url.Host + ":" + HttpContext.Current.Request.Url.Port + "/" + HttpContext.Current.Request.ApplicationPath;
 
             string url = uri + "/Reports/Forms/ReportsForm.aspx?" + "rpt=" + ReportName + "&par="+EnPar;
 

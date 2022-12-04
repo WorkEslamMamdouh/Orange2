@@ -2989,6 +2989,7 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_OperationListAr</DataSetName>
+        <Top>0in</Top>
         <Height>3cm</Height>
         <Width>28.65134cm</Width>
         <Style>
@@ -3191,7 +3192,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>قائمة العمليات</Value>
+                      <Value>قائمة الارساليات</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>

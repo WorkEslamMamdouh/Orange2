@@ -368,7 +368,7 @@ namespace CloseProcesses {
         btnPrintOperationsummary = document.getElementById("btnPrintOperationsummary") as HTMLButtonElement;
         btnPrintsalesrecord = document.getElementById("btnPrintsalesrecord") as HTMLButtonElement;
 
-        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = "اغلاق العمليات"; }
+        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = "اغلاق الارساليات"; }
         else { document.getElementById('Screen_name').innerHTML = "Close Processes "; }
 
     }

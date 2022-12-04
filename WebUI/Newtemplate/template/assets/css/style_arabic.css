@@ -18168,7 +18168,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 /*===== Custom background/Color =====*/
 .bg-blue{
-    background-color: var(--main-blue);
+    background-color: var(--main-blue) !important;
 }
 .bg-light-blue {
     background-color: var(--Lighter-blue);
