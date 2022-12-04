@@ -628,6 +628,7 @@ namespace HomeComponent {
         $("#btnProcesses").click(() => { newtap = false; OpenPage(Modules.Processes); })
         $("#btnSalesTrans").click(() => { newtap = false;OpenPage(Modules.SalesTrans); })
         $("#btnProcSalesRet").click(() => { newtap = false;OpenPage(Modules.ProcSalesRet); })
+        $("#btnOperationExport").click(() => { newtap = false; OpenPage(Modules.OperationExport); }) 
         $("#btnOperationScrap").click(() => { newtap = false;OpenPage(Modules.OperationScrap); }) 
         $("#btnProcSalesInvoice").click(() => { newtap = false; OpenPage(Modules.ProcSalesInvoice); })
         $("#btnProcSalesMgr").click(() => { newtap = false; OpenPage(Modules.ProcSalesMgr); })//
@@ -726,6 +727,7 @@ namespace HomeComponent {
         $("#btnProcessesT").click(() => { newtap = true; OpenPage(Modules.Processes); })
         $("#btnSalesTransT").click(() => { newtap = true; OpenPage(Modules.SalesTrans); })
         $("#btnProcSalesRetT").click(() => { newtap = true; OpenPage(Modules.ProcSalesRet); })
+        $("#btnOperationExportT").click(() => { newtap = true; OpenPage(Modules.OperationExport); })
         $("#btnOperationScrapT").click(() => { newtap = true; OpenPage(Modules.OperationScrap); })
         $("#btnProcSalesInvoiceT").click(() => { newtap = true; OpenPage(Modules.ProcSalesInvoice); })
         $("#btnProcSalesMgrT").click(() => { newtap = true; OpenPage(Modules.ProcSalesMgr); })//

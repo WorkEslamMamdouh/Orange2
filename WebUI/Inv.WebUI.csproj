@@ -2291,6 +2291,7 @@
     <Content Include="Views\Sales\SlsTrReturnNewIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnOperationIndex.cshtml" />
     <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
+    <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2325,6 +2326,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Clientaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
+    <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturnNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />
@@ -2745,6 +2747,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_OperationExportListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

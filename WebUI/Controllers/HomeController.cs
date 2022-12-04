@@ -1,10 +1,9 @@
-﻿using Inv.WebUI.Filter;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Inv.WebUI.Controllers
 {
 
-    [RequireHttps]
+    //[RequireHttps]K
     public class HomeController : Controller
     {
 
@@ -39,7 +38,7 @@ namespace Inv.WebUI.Controllers
                 url = Url.Action("AdminHome", "Home")
 
             };
-            var result = Shared.JsonObject(obj);
+            JsonResult result = Shared.JsonObject(obj);
             return result;
         }
         public ActionResult HomeIndexPackage()
@@ -115,14 +114,14 @@ namespace Inv.WebUI.Controllers
                 string Path = "C:/PdfCustSend_Or/" + base64Decoded + ".pdf";
                 if (System.IO.File.Exists(Path))
                 {
-                    var fil = File(Path, "application/pdf");
+                    FilePathResult fil = File(Path, "application/pdf");
 
-                    int index1 =0;
+                    int index1 = 0;
                     int index2 = base64Decoded.IndexOf(')');
 
                     base64Decoded = base64Decoded.Substring(index1 + 2, index2 - index1 - 2);
 
-                    fil.FileDownloadName = ""+ base64Decoded + " فاتورة رقم" + ".pdf";
+                    fil.FileDownloadName = "" + base64Decoded + " فاتورة رقم" + ".pdf";
                     return fil;
 
                 }
@@ -149,8 +148,8 @@ namespace Inv.WebUI.Controllers
 
         public ActionResult OpenPdf(string path)
         {
-          
-            return File(""+ path + "","application/pdf");
+
+            return File("" + path + "", "application/pdf");
         }
 
 
@@ -178,7 +177,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/StkDefinition/PeriodManagementIndex.cshtml");
         }
-             public ActionResult ItemPeriodSummaryIndex()
+        public ActionResult ItemPeriodSummaryIndex()
         {
             return View("~/Views/StkDefinition/ItemPeriodSummaryIndex.cshtml");
         }
@@ -195,12 +194,12 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/StkDefinition/StkDefStoreIndex.cshtml");
         }
-        
+
         public ActionResult AccDefBoxIndex()
         {
             return View("~/Views/AccDefinition/AccDefBoxIndex.cshtml");
         }
-        
+
         public ActionResult AccDefCustomerIndex()
         {
             return View("~/Views/AccDefinition/AccDefCustomerIndex.cshtml");
@@ -221,7 +220,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/AccDefinition/AccDefVendorIndex.cshtml");
         }
-        
+
         public ActionResult GenDefCustomerAdjustIndex()
         {
             return View("~/Views/GeneralDefinition/GenDefCustomerAdjustIndex.cshtml");
@@ -346,10 +345,15 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Processes/ProcSalesRetIndex.cshtml");
         }
-        
-  public ActionResult OperationScrapIndex()
+
+        public ActionResult OperationScrapIndex()
         {
             return View("~/Views/Processes/OperationScrapIndex.cshtml");
+        }
+
+        public ActionResult OperationExportIndex()
+        {
+            return View("~/Views/Processes/OperationExportIndex.cshtml");
         }
 
 
@@ -362,7 +366,7 @@ namespace Inv.WebUI.Controllers
         public ActionResult ClientaccstatIndex()
         {
             return View("~/Views/CollectionReports/ClientaccstatIndex.cshtml");
-        } 
+        }
         public ActionResult CollectedaccstatIndex()
         {
             return View("~/Views/CollectionReports/CollectedaccstatIndex.cshtml");
@@ -394,7 +398,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/CollectionReports/ItemPurchaseIndex.cshtml");
         }
-         
+
         public ActionResult InventoryvalueIndex()
         {
             return View("~/Views/CollectionReports/InventoryvalueIndex.cshtml");
@@ -462,7 +466,7 @@ namespace Inv.WebUI.Controllers
         public ActionResult DashboardIndex()
         {
             return View("~/Views/Dashboard/DashboardIndex.cshtml");
-        
+
         }
 
         public ActionResult LnkTransVoucherIndex()
@@ -490,11 +494,11 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/GeneralDefinition/GenDefAddIndex.cshtml");
         }
-           public ActionResult DefStoreIndex()
+        public ActionResult DefStoreIndex()
         {
             return View("~/Views/AccDefinition/DefStoreIndex.cshtml");
         }
-           public ActionResult ServiceCategoriesIndex()
+        public ActionResult ServiceCategoriesIndex()
         {
             return View("~/Views/servicesystem/ServiceCategoriesIndex.cshtml");
         }
@@ -516,19 +520,19 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/servicesystem/Ser_PurchasingIndex.cshtml");
         }
-            public ActionResult Ser_Return_PurIndex()
+        public ActionResult Ser_Return_PurIndex()
         {
             return View("~/Views/servicesystem/Ser_Return_PurIndex.cshtml");
         }
-            public ActionResult Ser_Sales_ReportIndex()
+        public ActionResult Ser_Sales_ReportIndex()
         {
             return View("~/Views/servicesystem/Ser_Sales_ReportIndex.cshtml");
-        } 
-            public ActionResult Ser_Pur_ReportIndex()
+        }
+        public ActionResult Ser_Pur_ReportIndex()
         {
             return View("~/Views/servicesystem/Ser_Pur_ReportIndex.cshtml");
         }
-         public ActionResult AdminBarIndex()
+        public ActionResult AdminBarIndex()
         {
             return View("~/Views/AdminSetting/AdminBarIndex.cshtml");
         }
@@ -540,12 +544,12 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/AdminSetting/AdminCompIndex.cshtml");
         }
-        
+
         public ActionResult DtcostcenterIndex()
         {
             return View("~/Views/costcenter/DtcostcenterIndex.cshtml");
         }
-         public ActionResult CcdtAccStateIndex()
+        public ActionResult CcdtAccStateIndex()
         {
             return View("~/Views/costcenter/CcdtAccStateIndex.cshtml");
         }
@@ -554,12 +558,12 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/TaxSystem/VatReportIndex.cshtml");
         }
-         public ActionResult VatListsIndex()
+        public ActionResult VatListsIndex()
         {
             return View("~/Views/TaxSystem/VatListsIndex.cshtml");
         }
-        
-         public ActionResult VatSettingIndex()
+
+        public ActionResult VatSettingIndex()
         {
             return View("~/Views/TaxSystem/VatSettingIndex.cshtml");
         }
@@ -573,12 +577,12 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Inventory/CollectUnitIndex.cshtml");
         }
-         public ActionResult IssueTypeIndex()
-        { 
+        public ActionResult IssueTypeIndex()
+        {
             return View("~/Views/StkDefinition/IssueTypeIndex.cshtml");
         }
-         public ActionResult IssueToCCIndex()
-        { 
+        public ActionResult IssueToCCIndex()
+        {
             return View("~/Views/StkDefinition/IssueToCCIndex.cshtml");
         }
 

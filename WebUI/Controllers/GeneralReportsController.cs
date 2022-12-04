@@ -311,6 +311,25 @@ namespace Inv.WebUI.Controllers
 
             return Shared.JsonObject(url);
         }
+        public JsonResult IProc_Rpt_OperationExportList(RepFinancials rp)
+        {
+            ReportService rep = getStandardParameters(rp);
+
+            rep.AddParameter("FromDate", rp.FromDate);
+            rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("RepType", rp.RepType);
+            rep.AddParameter("Status", rp.Status);
+            rep.AddParameter("SalesmanID", rp.SalesmanID);
+            rep.AddParameter("VendorId", rp.VendorId);
+            rep.AddParameter("OperationId", rp.OperationId);
+
+            //R_Rpt_AccReceiptList 
+            string url = rep.GetReportUrl("Rpt_OperationExportList");
+
+            return Shared.JsonObject(url);
+        }
+
+
         public JsonResult IProc_Prnt_OperationCharges(RepFinancials rp)
         {
             ReportService rep = getStandardParameters(rp);

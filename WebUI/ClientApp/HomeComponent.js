@@ -534,6 +534,7 @@ var HomeComponent;
         $("#btnProcesses").click(function () { newtap = false; OpenPage(Modules.Processes); });
         $("#btnSalesTrans").click(function () { newtap = false; OpenPage(Modules.SalesTrans); });
         $("#btnProcSalesRet").click(function () { newtap = false; OpenPage(Modules.ProcSalesRet); });
+        $("#btnOperationExport").click(function () { newtap = false; OpenPage(Modules.OperationExport); });
         $("#btnOperationScrap").click(function () { newtap = false; OpenPage(Modules.OperationScrap); });
         $("#btnProcSalesInvoice").click(function () { newtap = false; OpenPage(Modules.ProcSalesInvoice); });
         $("#btnProcSalesMgr").click(function () { newtap = false; OpenPage(Modules.ProcSalesMgr); }); //
@@ -628,6 +629,7 @@ var HomeComponent;
         $("#btnProcessesT").click(function () { newtap = true; OpenPage(Modules.Processes); });
         $("#btnSalesTransT").click(function () { newtap = true; OpenPage(Modules.SalesTrans); });
         $("#btnProcSalesRetT").click(function () { newtap = true; OpenPage(Modules.ProcSalesRet); });
+        $("#btnOperationExportT").click(function () { newtap = true; OpenPage(Modules.OperationExport); });
         $("#btnOperationScrapT").click(function () { newtap = true; OpenPage(Modules.OperationScrap); });
         $("#btnProcSalesInvoiceT").click(function () { newtap = true; OpenPage(Modules.ProcSalesInvoice); });
         $("#btnProcSalesMgrT").click(function () { newtap = true; OpenPage(Modules.ProcSalesMgr); }); //
