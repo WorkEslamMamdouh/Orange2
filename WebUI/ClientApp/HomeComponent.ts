@@ -27,6 +27,10 @@ namespace HomeComponent {
 
     G_BRANCHService = GetSystemG_BRANCH();
 
+    $('Li').addClass('animate__animated animate__fadeInTopRight');
+    $('#logOrg').addClass('animate__animated animate__backInDown');
+    //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
+
     export function OpenPage(moduleCode: string) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
          

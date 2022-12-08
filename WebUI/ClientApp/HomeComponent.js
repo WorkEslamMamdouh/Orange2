@@ -22,6 +22,9 @@ var HomeComponent;
     var selectedbar;
     var newtap = false;
     G_BRANCHService = GetSystemG_BRANCH();
+    $('Li').addClass('animate__animated animate__fadeInTopRight');
+    $('#logOrg').addClass('animate__animated animate__backInDown');
+    //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
     function OpenPage(moduleCode) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
         // // ;

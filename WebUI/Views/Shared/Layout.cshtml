@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <!--=============== Favicons ===============-->
     <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/logo.ico" />
+    <link href="~/Newtemplate/template/animate.min.css" rel="stylesheet" />
 
 </head>
 
@@ -136,7 +137,7 @@
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas scroll" id="sidebar">
-            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <div id="logOrg" class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top animate__animated animate__backInDown">
 
                 <a class="sidebar-brand brand-logo" href="#">
                     <span class="logo-text">range</span>
@@ -738,7 +739,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="background-color: #bed9f3 ">
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar p-0 fixed-top d-flex flex-row">
                 <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
@@ -769,7 +770,7 @@
                             </div>
                         </li>
                     </ul>
-                    <ul class="navbar-nav navbar-nav-right">
+                    <ul class="navbar-nav navbar-nav-right animate__animated animate__fadeInTopRight">
 
                         <li class="nav-item nav-settings  d-block">
                             @*------------------------------------------------------NewSession---------------------------------------*@
@@ -914,7 +915,7 @@
                 </div>
             </nav>
             <!-- partial -->
-            <div class="main-panel">
+            <div class="main-panel animate__animated animate__bounceInUp" id="PageLodes">
                 <div class="content-wrapper">
                     @* Error Alert Message *@
                     <div id="DivMassage" class="d-flex justify-content-center display_none">

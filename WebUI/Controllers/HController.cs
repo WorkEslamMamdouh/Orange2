@@ -11,10 +11,15 @@ namespace Inv.WebUI.Controllers
 
 
         #region Open Pages  
-        public ActionResult O(string N)
+        public ActionResult O(string N )
         {
             try
             {
+                if (N == "Home")
+                {
+                    return View("HomeIndex");
+                }
+
                 string base64Encoded = N;
                 string base64Decoded;
                 byte[] data = System.Convert.FromBase64String(base64Encoded);

@@ -216,9 +216,9 @@ var SlsTrSalesManagerNew;
         if (flagInvMulti == true && SlsInvSrc == '1') {
             $('#TableRespon').attr('style', 'width:120%');
         }
-        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
-            $("#btnSend").removeClass("hidden_Control");
-        }
+        //if (SysSession.CurrentEnvironment.UserCode == 'islam'  ) {
+        //    $("#btnSend").removeClass("hidden_Control");
+        //}
     }
     SlsTrSalesManagerNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {

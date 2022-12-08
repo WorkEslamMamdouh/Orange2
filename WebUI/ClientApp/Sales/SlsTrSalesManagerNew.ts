@@ -277,9 +277,9 @@ namespace SlsTrSalesManagerNew {
             $('#TableRespon').attr('style', 'width:120%')
         }
 
-        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
-            $("#btnSend").removeClass("hidden_Control");
-        }
+        //if (SysSession.CurrentEnvironment.UserCode == 'islam'  ) {
+        //    $("#btnSend").removeClass("hidden_Control");
+        //}
 
 
     }
