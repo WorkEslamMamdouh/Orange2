@@ -25,6 +25,11 @@ var HomeComponent;
     $('Li').addClass('animate__animated animate__fadeInTopRight');
     $('#logOrg').addClass('animate__animated animate__backInDown');
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
+    setTimeout(function () {
+        $('#Uesr_out').removeClass('animate__backInDown');
+        $('#Uesr_out').removeClass('animate__animated');
+        $('.mes').removeClass('display_none');
+    }, 1000);
     function OpenPage(moduleCode) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
         // // ;

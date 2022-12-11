@@ -146,7 +146,7 @@
                 <a class="sidebar-brand brand-logo-mini" href="#"> <img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" /></a>
             </div>
             <ul class="nav position-fixed">
-                <li class="nav-item profile">
+                <li id="Uesr_out" class="nav-item profile">
                     <div class="profile-desc">
                         <div class="profile-pic">
                             <div class="count-indicator">
@@ -772,7 +772,7 @@
                     </ul>
                     <ul class="navbar-nav navbar-nav-right animate__animated animate__fadeInTopRight">
 
-                        <li class="nav-item nav-settings  d-block">
+                        <li class="nav-item nav-settings  d-block display_none mes">
                             @*------------------------------------------------------NewSession---------------------------------------*@
                             <span id="timeLeft" class="admin-name   display_none" style="color: red;font-weight: bold;margin-right: -35%;font-size: 20px;"></span>
                             @*<label id="timeLeft" style="color: red" class=" "></label>*@
@@ -785,12 +785,12 @@
                             @*---------------------------------------------------------------------------------------------------------------*@
                         </li>
                         <li class="nav-item nav-settings  d-block">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link display_none mes" href="#">
                                 <i class="fas fa-chart-bar" id="btnDashboard"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown border-left">
-                            <a class="nav-link count-indicator dropdown-toggle" id="tol_messagestoppar" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                            <a class="nav-link count-indicator dropdown-toggle display_none mes" id="tol_messagestoppar" href="#" data-bs-toggle="dropdown" aria-expanded="true">
                                 <i class="fas fa-envelope"></i>
                                 <span class="count bg-success"></span>
                             </a>
@@ -827,7 +827,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown border-left">
-                            <a class="nav-link count-indicator dropdown-toggle" id="tol_allnotification" href="#" data-bs-toggle="dropdown">
+                            <a class="nav-link count-indicator dropdown-toggle display_none" id="tol_allnotification" href="#" data-bs-toggle="dropdown">
                                 <i class="far fa-bell"></i>
                                 <span class="count bg-danger"></span>
                             </a>
@@ -869,7 +869,7 @@
                                 <p class="p-3 mb-0 text-center">See all notifications</p>
                             </div>
                         </li>
-                        <li class="nav-item nav-settings d-block">
+                        <li class="nav-item nav-settings d-block display_none mes">
                             <a class="nav-link" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal">
                                 <i class="fas fa-info"></i>
                             </a>

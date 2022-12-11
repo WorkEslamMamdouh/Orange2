@@ -16,8 +16,8 @@ namespace Inv.WebUI.Controllers
             try
             {
                 if (N == "Home")
-                {
-                    return View("HomeIndex");
+                { 
+                    return PartialView("~/Views/Home/HomeIndex.cshtml");
                 }
 
                 string base64Encoded = N;
