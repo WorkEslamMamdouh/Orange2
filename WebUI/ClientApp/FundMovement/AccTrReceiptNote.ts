@@ -963,7 +963,7 @@ namespace AccTrReceiptNote {
 
         IsNew = false;
 
-
+        txt_Amount.disabled = true; 
     }
 
     function DisplayData(Selecteditem: Array<IQ_GetBoxReceiveList>) {

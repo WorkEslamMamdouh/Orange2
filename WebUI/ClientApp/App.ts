@@ -48,6 +48,7 @@ var Modules = {
     ProcSalesMgr: "ProcSalesMgr",
     ProcSalesRet: "ProcSalesRet",
     OperationScrap: "OperationScrap",
+    OperationExport: "OperationExport",
     ProcSalesInvoice: "ProcSalesInvoice",
     Clientaccstat: "Clientaccstat",
     Supplieraccstat: "Supplieraccstat",
@@ -130,9 +131,9 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-
+    debugger
     let Input = this;
-    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
 };
 
@@ -2479,7 +2480,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             //debugger
             //window.open(result, "blank");
 
-            let x = Url.Action("OpenPdf", "Home");
+            let x = Url.Action("OpenPdfS", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
 

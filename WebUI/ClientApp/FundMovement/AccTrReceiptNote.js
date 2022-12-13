@@ -774,6 +774,7 @@ var AccTrReceiptNote;
         $("#Div_control").removeClass("display_none");
         Amount_onchange();
         IsNew = false;
+        txt_Amount.disabled = true;
     }
     function DisplayData(Selecteditem) {
         debugger;

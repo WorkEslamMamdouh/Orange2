@@ -957,6 +957,67 @@ namespace RS.WebUI.Reports.Forms
 
 
 
+
+        public IEnumerable<IProc_Rpt_OperationExportList_Result> Rpt_OperationExportList()
+        {
+
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+
+            string dateForm = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", dateForm);
+
+            string dateTo = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", dateTo);
+
+
+            int SalesmanID = int.Parse(RepPar.SalesmanID.ToString());
+            SqlParameter spSalesmanID = new SqlParameter("@SlsID", SalesmanID == -1 ? System.Data.SqlTypes.SqlInt32.Null : SalesmanID);
+
+            int VendorId = int.Parse(RepPar.VendorId.ToString());
+            SqlParameter spVendorId = new SqlParameter("@vndId", VendorId == -1 ? System.Data.SqlTypes.SqlInt32.Null : VendorId);
+
+            int OperationId = int.Parse(RepPar.OperationId.ToString());
+            SqlParameter spOperationId = new SqlParameter("@OperationID", OperationId == -1 ? System.Data.SqlTypes.SqlInt32.Null : OperationId);
+
+
+            int Status = int.Parse(RepPar.Status.ToString());
+            SqlParameter spStatus = new SqlParameter("@Status", Status == -1 ? System.Data.SqlTypes.SqlInt32.Null : Status);
+            int Repdesign = RepPar.Repdesign;
+
+
+            Rep = OpenReport("Rpt_OperationExportList");
+
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value +
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @ToDate = '" + sptoDate.Value + "'";
+
+
+
+            var query = db.Database.SqlQuery<IProc_Rpt_OperationExportList_Result>(_Query).ToList();
+
+            //if (Type == 1)
+            ReportsDetails();
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         public IEnumerable<IProc_Rpt_OperationList_Result> Rpt_OperationList()
         {
 

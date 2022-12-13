@@ -11,6 +11,8 @@ using Inv.BLL.Services.CompStatus;
 using Inv.BLL.Services.G_Control;
 using Inv.API.Models.CustomModel;
 using Inv.BLL.Services.IControl;
+using Inv.DAL.Domain;
+using Inv.API.Models.CustomEntities;
 
 namespace Inv.API.Controllers
 {
@@ -81,6 +83,41 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+
+
+
+
+        public IHttpActionResult GetComps(string userCode,int yr)
+        {
+
+
+            string Query = @"select c.[COMP_CODE],uc.[USER_CODE],getstat.LoginMsg ,c.NameA,c.NameE  , G_C.LastDate,G_C.FirstDate,getstat.CompStatus,
+	                        I_C.MembeshipEndDate,I_C.MembershipAllanceDays,I_C.MembershipreadOnlyDays,c.IsActive   
+	                        From dbo.G_USER_COMPANY as uc right JOIN
+	                        dbo.G_COMPANY as c on  uc.COMP_CODE = c.COMP_CODE 
+	                        inner join I_VW_GetCompStatus getstat on getstat.CompCode = uc.COMP_CODE
+	                        inner join G_CONTROL G_C on G_C.COMP_CODE = uc.COMP_CODE
+	                        inner join I_CONTROL I_C on I_C.CompCode = uc.COMP_CODE
+	                        WHERE uc.USER_CODE = '" + userCode + "' and uc.[EXECUTE] = 1 and G_C.FIN_YEAR ='"+ yr + "'";
+
+
+
+            List<ModelCompStatus> companies = db.Database.SqlQuery<ModelCompStatus>(Query).ToList(); 
+            foreach (ModelCompStatus company in companies)
+            {
+
+
+                company.NameA = SecuritySystem.Decrypt(company.NameA);
+                company.NameE = SecuritySystem.Decrypt(company.NameE);
+                
+            };
+
+            return Ok(new BaseResponse(companies));
+
+        }
+
+
 
 
 

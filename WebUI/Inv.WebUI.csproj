@@ -17,10 +17,11 @@
     <AssemblyName>Inv.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -242,6 +243,7 @@
     <Content Include="Newtemplate\documentation\script.js" />
     <Content Include="Newtemplate\documentation\style.css" />
     <Content Include="Newtemplate\preview.jpg" />
+    <Content Include="Newtemplate\template\animate.min.css" />
     <Content Include="Newtemplate\template\assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.bundle.min.js" />
@@ -2290,6 +2292,7 @@
     <Content Include="Views\Sales\SlsTrReturnNewIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrReturnOperationIndex.cshtml" />
     <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
+    <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2324,6 +2327,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Clientaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
+    <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturnNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />
@@ -2744,6 +2748,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_OperationExportListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2964,9 +2969,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56460</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44312/</IISUrl>
+          <IISUrl>http://localhost:61453/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="~/Newtemplate/template/assets/css/style_arabic.css">
     <!--=============== Favicons ===============-->
     <link rel="shortcut icon" href="~/Newtemplate/template/assets/images/logo.ico" />
+    <link href="~/Newtemplate/template/animate.min.css" rel="stylesheet" />
 
 </head>
 
@@ -136,7 +137,7 @@
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas scroll" id="sidebar">
-            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <div id="logOrg" class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top animate__animated animate__backInDown">
 
                 <a class="sidebar-brand brand-logo" href="#">
                     <span class="logo-text">range</span>
@@ -145,7 +146,7 @@
                 <a class="sidebar-brand brand-logo-mini" href="#"> <img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" /></a>
             </div>
             <ul class="nav position-fixed">
-                <li class="nav-item profile">
+                <li id="Uesr_out" class="nav-item profile">
                     <div class="profile-desc">
                         <div class="profile-pic">
                             <div class="count-indicator">
@@ -474,6 +475,12 @@
                                 <a class="new-tab-link" id="btnOperationScrapT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnOperationScrap" class="nav-link" href="#">@SystemResource.OperationScrap</a>
                             </li>
+
+                            <li id="" key="OperationExport" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnOperationExportT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnOperationExport" class="nav-link" href="#">تقرير الاستيراد</a>
+                            </li>
+
                             <li id="" key="CloseProcesses" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnCloseProcessesT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnCloseProcesses" class="nav-link" href="#">@SystemResource.Close_process</a>
@@ -732,7 +739,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="background-color: #bed9f3 ">
             <!-- partial:partials/_navbar.html -->
             <nav class="navbar p-0 fixed-top d-flex flex-row">
                 <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
@@ -763,9 +770,9 @@
                             </div>
                         </li>
                     </ul>
-                    <ul class="navbar-nav navbar-nav-right">
+                    <ul class="navbar-nav navbar-nav-right animate__animated animate__fadeInTopRight">
 
-                        <li class="nav-item nav-settings  d-block">
+                        <li class="nav-item nav-settings  d-block display_none mes">
                             @*------------------------------------------------------NewSession---------------------------------------*@
                             <span id="timeLeft" class="admin-name   display_none" style="color: red;font-weight: bold;margin-right: -35%;font-size: 20px;"></span>
                             @*<label id="timeLeft" style="color: red" class=" "></label>*@
@@ -778,12 +785,12 @@
                             @*---------------------------------------------------------------------------------------------------------------*@
                         </li>
                         <li class="nav-item nav-settings  d-block">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link display_none mes" href="#">
                                 <i class="fas fa-chart-bar" id="btnDashboard"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown border-left">
-                            <a class="nav-link count-indicator dropdown-toggle" id="tol_messagestoppar" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+                            <a class="nav-link count-indicator dropdown-toggle display_none mes" id="tol_messagestoppar" href="#" data-bs-toggle="dropdown" aria-expanded="true">
                                 <i class="fas fa-envelope"></i>
                                 <span class="count bg-success"></span>
                             </a>
@@ -820,7 +827,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown border-left">
-                            <a class="nav-link count-indicator dropdown-toggle" id="tol_allnotification" href="#" data-bs-toggle="dropdown">
+                            <a class="nav-link count-indicator dropdown-toggle display_none" id="tol_allnotification" href="#" data-bs-toggle="dropdown">
                                 <i class="far fa-bell"></i>
                                 <span class="count bg-danger"></span>
                             </a>
@@ -862,7 +869,7 @@
                                 <p class="p-3 mb-0 text-center">See all notifications</p>
                             </div>
                         </li>
-                        <li class="nav-item nav-settings d-block">
+                        <li class="nav-item nav-settings d-block display_none mes">
                             <a class="nav-link" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal">
                                 <i class="fas fa-info"></i>
                             </a>
@@ -908,7 +915,7 @@
                 </div>
             </nav>
             <!-- partial -->
-            <div class="main-panel">
+            <div class="main-panel animate__animated animate__bounceInUp" id="PageLodes">
                 <div class="content-wrapper">
                     @* Error Alert Message *@
                     <div id="DivMassage" class="d-flex justify-content-center display_none">

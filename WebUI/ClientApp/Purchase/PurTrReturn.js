@@ -64,6 +64,8 @@ var PurTrReturn;
     var txtCashAmount;
     var txtInvoiceDate;
     var txtInvoiceNumber;
+    var TxtRefTrID;
+    var TxtReceiveID;
     var lblReturnNumber;
     //checkbox
     var chkActive;
@@ -91,7 +93,6 @@ var PurTrReturn;
     var TaxCount = 0;
     var NetCount = 0;
     var VatPrc;
-    var receiveID = 0;
     var ShowFlag;
     var PurRecType = 0;
     var isCash;
@@ -205,6 +206,8 @@ var PurTrReturn;
         txtNet = document.getElementById("txtNet");
         txtInvoiceDate = document.getElementById("txtInvoiceDate");
         txtInvoiceNumber = document.getElementById("txtInvoiceNumber");
+        TxtRefTrID = document.getElementById("TxtRefTrID");
+        TxtReceiveID = document.getElementById("TxtReceiveID");
         lblReturnNumber = document.getElementById("lblReturnNumber");
         txtCashAmount = document.getElementById("txtCashAmount");
         //checkbox
@@ -382,7 +385,7 @@ var PurTrReturn;
         ItemDetails = ItemFamilyDetails.filter(function (x) { return x.ItemFamilyID == ItemFamilyID && x.StoreId == StoreId; });
     }
     //-----------------------------------------------------------------------  Events Region ----------------------------------
-    function txtInvoiceNumber_onchange() {
+    function txtInvoiceNumber_onchange(recID) {
         $('#div_Data').html("");
         txtItemCount.value = "";
         txtPackageCount.value = "";
@@ -402,7 +405,7 @@ var PurTrReturn;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveByIDFromStatistics"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: recID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.Response.length == 0) {
@@ -412,6 +415,7 @@ var PurTrReturn;
                 }
                 else if (result.IsSuccess) {
                     InvoiceStatisticsModel = result.Response;
+                    TxtRefTrID.value = InvoiceStatisticsModel[0].ReceiveID.toString();
                     txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
                     ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
                     StoreID = InvoiceStatisticsModel[0].StoreID;
@@ -467,7 +471,7 @@ var PurTrReturn;
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-                data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+                data: { receiveID: recID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
                 success: function (d) {
                     var result = d;
                     if (result.IsSuccess) {
@@ -560,8 +564,8 @@ var PurTrReturn;
         var sys = new SystemTools();
         sys.FindKey(Modules.PurTrReturn, "btnRecieveSearch", "CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
-            receiveID = id;
-            btnAddReturn_onclick();
+            //receiveID = id;
+            btnAddReturn_onclick(id);
             $("#ddlVendorDetails").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
@@ -633,8 +637,8 @@ var PurTrReturn;
             $('#btnEdit').addClass("display_none");
             $('#btnPrintTransaction').addClass("display_none");
             btnRecieveSearch.disabled = true;
-            receiveID = 0;
             txtInvoiceNumber.value = "";
+            TxtRefTrID.value = "";
             lblReturnNumber.value = "";
             clear();
             $("#DivFilter").removeClass("disabledDiv");
@@ -670,6 +674,7 @@ var PurTrReturn;
         txtTax.value = "";
         txtNet.value = "";
         txtInvoiceNumber.value = "";
+        TxtRefTrID.value = "";
         lblReturnNumber.value = "";
         txtInvoiceDate.value = "";
         ddlFreeSalesman.value = "null";
@@ -696,17 +701,17 @@ var PurTrReturn;
         $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         IsNew = true;
     }
-    function btnAddReturn_onclick() {
+    function btnAddReturn_onclick(recID) {
         txtInvoiceDate.value = GetDate();
         var unApprovedReturn = false;
         lblReturnNumber.value = "";
-        unApprovedReturn = checkUnApprovedReturns(receiveID);
+        unApprovedReturn = checkUnApprovedReturns(recID);
         if (unApprovedReturn == true) {
             DisplayMassage('( لا يمكن اضافه مرتجع علي الفاتورة قبل اعتماد المرتجعات السابقه)', '(A return cannot be added to the invoice before previous returns are approved)', MessageType.Error);
             btnRecieveSearch.disabled = false;
         }
         else {
-            txtInvoiceNumber_onchange();
+            txtInvoiceNumber_onchange(recID);
             Show = false;
             $("#btnAddReturn").addClass("display_none");
             $("#btnBack").removeClass("display_none");
@@ -819,9 +824,10 @@ var PurTrReturn;
         $("#txtCashAmount").prop("value", "");
         DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(divMasterGrid.SelectedKey); });
-        receiveID = Number(Selecteditem[0].ReceiveID);
+        TxtReceiveID.value = setVal(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length > 0) {
+            TxtRefTrID.value = setVal(InvoiceStatisticsModel[0].RefTrID);
             txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
             ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
             txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
@@ -843,7 +849,6 @@ var PurTrReturn;
             vatType = InvoiceStatisticsModel[0].VATType;
             PurRecType = InvoiceStatisticsModel[0].PurRecType;
             if (InvoiceStatisticsModel[0].RefTrID != null) {
-                txtInvoiceNumber.value = InvoiceStatisticsModel[0].RefTrID.toString();
                 RefTrID = InvoiceStatisticsModel[0].RefTrID.toString();
                 GetPurReceiveCharge(InvoiceStatisticsModel[0].RefTrID);
             }
@@ -901,7 +906,7 @@ var PurTrReturn;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: Selecteditem[0].ReceiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -937,7 +942,7 @@ var PurTrReturn;
         return ReturnedDate;
     }
     function GetPurReceiveCharge(ReceiD) {
-        ////debugger
+        ////debugger 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveByIDFromStatistics"),
@@ -1726,10 +1731,10 @@ var PurTrReturn;
         InvoiceModel.CreatedBy = SysSession.CurrentEnvironment.UserCode;
         InvoiceModel.CreatedAt = DateTimeFormat(Date().toString());
         if (txtInvoiceNumber.value.toString() == "") {
-            InvoiceModel.RefTrID = null;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
         else {
-            InvoiceModel.RefTrID = receiveID;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
         if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
             DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
@@ -1756,7 +1761,7 @@ var PurTrReturn;
         });
     }
     function Update() {
-        InvoiceModel.ReceiveID = receiveID;
+        InvoiceModel.ReceiveID = Number(TxtReceiveID.value);
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         var returnNumber = Number(lblReturnNumber.value);
@@ -1765,12 +1770,12 @@ var PurTrReturn;
         InvoiceModel.UpdatedAt = DateTimeFormat(Date().toString());
         InvoiceModel.StoreID = InvoiceStatisticsModel[0].StoreID; //main store 
         if (txtInvoiceNumber.value.toString() == "") {
-            InvoiceModel.RefTrID = null;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
         }
         else {
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
-            InvoiceModel.RefTrID = Number(RefTrID);
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
         if (!CheckDate(DateFormat(txtInvoiceDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
@@ -1815,7 +1820,7 @@ var PurTrReturn;
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(RecID); });
-        receiveID = Number(Selecteditem[0].ReceiveID);
+        TxtReceiveID.value = setVal(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length > 0) {
             txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
@@ -1897,7 +1902,7 @@ var PurTrReturn;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: Selecteditem[0].ReceiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -1934,7 +1939,7 @@ var PurTrReturn;
             return false;
         }
         Assign();
-        InvoiceModel.ReceiveID = receiveID;
+        InvoiceModel.ReceiveID = Number(TxtReceiveID.value);
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         InvoiceModel.TrNo = Number(lblReturnNumber.value);
@@ -1944,12 +1949,12 @@ var PurTrReturn;
         InvoiceModel.StoreID = InvoiceStatisticsModel[0].StoreID;
         ; //main store 
         if (txtInvoiceNumber.value.toString() == "") {
-            InvoiceModel.RefTrID = null;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value);
         }
         else {
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
-            InvoiceModel.RefTrID = Number(RefTrID);
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
         Ajax.Callsync({
             type: "POST",
@@ -2053,7 +2058,7 @@ var PurTrReturn;
         rp.Type = 0;
         rp.Repdesign = 1;
         debugger;
-        rp.TRId = receiveID;
+        rp.TRId = Number(TxtReceiveID.value);
         rp.Name_function = "IProc_Prnt_PurReceiveRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');

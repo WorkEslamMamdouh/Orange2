@@ -41,7 +41,7 @@ namespace AdminComp {
     var txt_Address_Build_Additional: HTMLInputElement;
     var txt_Address_Postal: HTMLInputElement;
     var searchbutmemreport: HTMLInputElement;
-   
+
 
 
     var btnSave: HTMLButtonElement;
@@ -82,7 +82,7 @@ namespace AdminComp {
     var chk_GL_JournalSaveUnbalanced: HTMLInputElement;
     var chk_IsLocalBranchCustomer: HTMLInputElement;
     var chk_IvoiceDateEditable: HTMLInputElement;
-   // var chk_InvoiceWithoutCust: HTMLInputElement;
+    // var chk_InvoiceWithoutCust: HTMLInputElement;
     var txt_DocPDFFolder: HTMLInputElement;
     var chk_InvoiceLineDiscount: HTMLInputElement;
     var chk_InvoiceLineAllowance: HTMLInputElement;
@@ -90,8 +90,8 @@ namespace AdminComp {
     var chk_InvoiceTotalCharge: HTMLInputElement;
     var chk_OperationPriceWithVAT: HTMLInputElement;
     var chk_SalesPriceWithVAT: HTMLInputElement;
-   // var chk_sendEmail: HTMLInputElement;
-   // var chk_sendshopEmail: HTMLInputElement;
+    // var chk_sendEmail: HTMLInputElement;
+    // var chk_sendshopEmail: HTMLInputElement;
     var chk_incoming: HTMLInputElement;
     var chk_GL_VoucherCCDT_Type2: HTMLInputElement;
     var chk_all: HTMLInputElement;
@@ -126,6 +126,43 @@ namespace AdminComp {
     var Txt_SalePriceAddPerc: HTMLInputElement;
     var Txt_SalePriceMinAddPerc: HTMLInputElement;
     var chk_IsActive: HTMLInputElement;
+
+
+
+    var Txt_UserTimeZoneUTCDiff: HTMLInputElement;
+    var Txt_ServerTimeZoneUTCDiff: HTMLInputElement;
+    var Txt_SaudiNationID: HTMLInputElement;
+
+    var Txt_CurNameA: HTMLInputElement;
+    var Txt_CurNameE: HTMLInputElement;
+    var Txt_CurSmallNameA: HTMLInputElement;
+    var Txt_CurSmallNameE: HTMLInputElement;
+
+
+    var chk_WebCustomerWebsite: HTMLInputElement;
+    var chk_IsFreePurchaseReturn: HTMLInputElement;
+    var chk_IsFreeSalesReturn: HTMLInputElement;
+    var chk_InvoiceWithoutCust: HTMLInputElement;
+    var chk_ISCustVendorInGL: HTMLInputElement;
+    var chk_IsRetailCashInvoiceDefAuth: HTMLInputElement;
+    var chk_IsRetailCreditInvoiceDefAuth: HTMLInputElement;
+    var chk_IsProcessCashInvoiceDefAuth: HTMLInputElement;
+    var chk_IsProcessCreditInvoiceDefAuth: HTMLInputElement;
+    var chk_IsAccPeriodClose: HTMLInputElement;
+    var chk_IsInvPeriodClose: HTMLInputElement;
+    var chk_IsFasPeriodClose: HTMLInputElement;
+    var chk_IsAutoNoCustVendor: HTMLInputElement;
+    var chk_IsOprInvItemDiscount: HTMLInputElement;
+    var chk_IsOprInvMultiOper: HTMLInputElement;
+    var chk_IsRetailInvItemDiscount: HTMLInputElement;
+    var chk_IsRetailInvMultiStore: HTMLInputElement;
+
+
+
+
+
+
+
     var IsNew = true;
     var comp_CODE = 0;
     var SystemCode;
@@ -227,7 +264,7 @@ namespace AdminComp {
         txt_Address_Build_Additional = document.getElementById("txt_Address_Build_Additional") as HTMLInputElement;
         txt_Address_Postal = document.getElementById("txt_Address_Postal") as HTMLInputElement;
         searchbutmemreport = document.getElementById("searchbutmemreport") as HTMLInputElement;
-       
+
 
 
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
@@ -291,7 +328,7 @@ namespace AdminComp {
         chk_GL_JournalSaveUnbalanced = document.getElementById("chk_GL_JournalSaveUnbalanced") as HTMLInputElement;
         chk_IsLocalBranchCustomer = document.getElementById("chk_IsLocalBranchCustomer") as HTMLInputElement;
         chk_IvoiceDateEditable = document.getElementById("chk_IvoiceDateEditable") as HTMLInputElement;
-       // chk_InvoiceWithoutCust = document.getElementById("chk_InvoiceWithoutCust") as HTMLInputElement;
+        // chk_InvoiceWithoutCust = document.getElementById("chk_InvoiceWithoutCust") as HTMLInputElement;
         txt_DocPDFFolder = document.getElementById("txt_DocPDFFolder") as HTMLInputElement;
         chk_InvoiceLineDiscount = document.getElementById("chk_InvoiceLineDiscount") as HTMLInputElement;
         chk_InvoiceLineAllowance = document.getElementById("chk_InvoiceLineAllowance") as HTMLInputElement;
@@ -299,8 +336,8 @@ namespace AdminComp {
         chk_InvoiceTotalCharge = document.getElementById("chk_InvoiceTotalCharge") as HTMLInputElement;
         chk_OperationPriceWithVAT = document.getElementById("chk_OperationPriceWithVAT") as HTMLInputElement;
         chk_SalesPriceWithVAT = document.getElementById("chk_SalesPriceWithVAT") as HTMLInputElement;
-      //  chk_sendEmail = document.getElementById("chk_sendEmail") as HTMLInputElement;
-      //  chk_sendshopEmail = document.getElementById("chk_sendshopEmail") as HTMLInputElement;
+        //  chk_sendEmail = document.getElementById("chk_sendEmail") as HTMLInputElement;
+        //  chk_sendshopEmail = document.getElementById("chk_sendshopEmail") as HTMLInputElement;
 
         Txt_PswPrice = document.getElementById("Txt_PswPrice") as HTMLInputElement;
         chk_IsLocalSalePrice = document.getElementById("chk_IsLocalSalePrice") as HTMLInputElement;
@@ -311,6 +348,39 @@ namespace AdminComp {
         chk_AutoupdateSalesPrice2 = document.getElementById("chk_AutoupdateSalesPrice2") as HTMLInputElement;
         Txt_SalePriceAddPerc = document.getElementById("Txt_SalePriceAddPerc") as HTMLInputElement;
         Txt_SalePriceMinAddPerc = document.getElementById("Txt_SalePriceMinAddPerc") as HTMLInputElement;
+
+
+        //--------------------------------------------New--------------------------------------
+
+        Txt_UserTimeZoneUTCDiff = document.getElementById("UserTimeZoneUTCDiff") as HTMLInputElement;
+        Txt_ServerTimeZoneUTCDiff = document.getElementById("ServerTimeZoneUTCDiff") as HTMLInputElement;
+        Txt_SaudiNationID = document.getElementById("SaudiNationID") as HTMLInputElement;
+        Txt_CurNameA = document.getElementById("CurNameA") as HTMLInputElement;
+        Txt_CurNameE = document.getElementById("CurNameE") as HTMLInputElement;
+        Txt_CurSmallNameA = document.getElementById("CurSmallNameA") as HTMLInputElement;
+        Txt_CurSmallNameE = document.getElementById("CurSmallNameE") as HTMLInputElement;
+
+
+
+        chk_WebCustomerWebsite = document.getElementById("WebCustomerWebsite") as HTMLInputElement;
+        chk_IsFreePurchaseReturn = document.getElementById("IsFreePurchaseReturn") as HTMLInputElement;
+        chk_IsFreeSalesReturn = document.getElementById("IsFreeSalesReturn") as HTMLInputElement;
+        chk_InvoiceWithoutCust = document.getElementById("InvoiceWithoutCust") as HTMLInputElement;
+        chk_ISCustVendorInGL = document.getElementById("ISCustVendorInGL") as HTMLInputElement;
+        chk_IsRetailCashInvoiceDefAuth = document.getElementById("IsRetailCashInvoiceDefAuth") as HTMLInputElement;
+        chk_IsRetailCreditInvoiceDefAuth = document.getElementById("IsRetailCreditInvoiceDefAuth") as HTMLInputElement;
+        chk_IsProcessCashInvoiceDefAuth = document.getElementById("IsProcessCashInvoiceDefAuth") as HTMLInputElement;
+        chk_IsProcessCreditInvoiceDefAuth = document.getElementById("IsProcessCreditInvoiceDefAuth") as HTMLInputElement;
+        chk_IsAccPeriodClose = document.getElementById("IsAccPeriodClose") as HTMLInputElement;
+        chk_IsInvPeriodClose = document.getElementById("IsInvPeriodClose") as HTMLInputElement;
+        chk_IsFasPeriodClose = document.getElementById("IsFasPeriodClose") as HTMLInputElement;
+        chk_IsAutoNoCustVendor = document.getElementById("IsAutoNoCustVendor") as HTMLInputElement;
+        chk_IsOprInvItemDiscount = document.getElementById("IsOprInvItemDiscount") as HTMLInputElement;
+        chk_IsOprInvMultiOper = document.getElementById("IsOprInvMultiOper") as HTMLInputElement;
+        chk_IsRetailInvItemDiscount = document.getElementById("IsRetailInvItemDiscount") as HTMLInputElement;
+        chk_IsRetailInvMultiStore = document.getElementById("IsRetailInvMultiStore") as HTMLInputElement;
+
+
 
 
     }
@@ -380,9 +450,9 @@ namespace AdminComp {
         //    type: "Get",
         //    url: link + "GComp/GetAll",
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GComp", "GetAll"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GComp", "GetAll"),
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -411,9 +481,9 @@ namespace AdminComp {
         var COMP_CODE = Number(Grid.SelectedKey);
 
         //Ajax.Callsync({
-            //type: "Get",
-            //url: link + "I_Control/GetAll",
-            Ajax.Callsync({
+        //type: "Get",
+        //url: link + "I_Control/GetAll",
+        Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("I_Control", "GetAll"),
             data: { CompCode: COMP_CODE },
@@ -423,14 +493,14 @@ namespace AdminComp {
                     IControl = result.Response as Array<I_Control>;
 
                     IControlFilter = IControl.filter(x => x.CompCode == COMP_CODE);
-                    
+
                     chk_SendSMS.checked = IControl[0].SendSMS;
                     chk_SendPublicSMS.checked = IControl[0].SendPublicSMS;
                     chk_IsVat.checked = IControl[0].IsVat;
                     //chk_GL_VoucherCCType.checked = IControl[0].GL_VoucherCCType == 1 ? true : false;
-                    
+
                     if (IControl[0].GL_VoucherCCType == 0) {
-                         chk_GL_VoucherCCType.checked = true
+                        chk_GL_VoucherCCType.checked = true
                     }
                     else if (IControl[0].GL_VoucherCCType == 1) {
                         chk_incoming.checked = true
@@ -438,8 +508,8 @@ namespace AdminComp {
                     else {
                         chk_all.checked = true;
                     }
-                   // chk_GL_VoucherCCDT_Type.checked = IControl[0].GL_VoucherCCDT_Type == 1 ? true : false;
-                    if  (IControl[0].GL_VoucherCCDT_Type == 1 ) {
+                    // chk_GL_VoucherCCDT_Type.checked = IControl[0].GL_VoucherCCDT_Type == 1 ? true : false;
+                    if (IControl[0].GL_VoucherCCDT_Type == 1) {
                         chk_GL_VoucherCCDT_Type.checked = true;
                     } else {
                         chk_GL_VoucherCCDT_Type2.checked = true;
@@ -454,7 +524,7 @@ namespace AdminComp {
                         chk_IsLocalCost.checked = true;
                     } else {
                         chk_IsLocalCost2.checked = true;
-                    } 
+                    }
                     if (IControl[0].AutoupdateSalesPrice == true) {
                         chk_AutoupdateSalesPrice.checked = true;
                     } else {
@@ -463,11 +533,10 @@ namespace AdminComp {
                     Txt_PswPrice.value = IControl[0].ExceedMinPricePassword;
                     Txt_SalePriceAddPerc.value = IControl[0].SalePriceAddPerc.toString();
                     Txt_SalePriceMinAddPerc.value = IControl[0].SalePriceMinAddPerc.toString();
-                    
+
 
 
                     chk_GL_JournalSaveUnbalanced.checked = IControl[0].GL_JournalSaveUnbalanced;
-                    chk_IsLocalBranchCustomer.checked = IControl[0].IsLocalBranchCustomer;
                     chk_IvoiceDateEditable.checked = IControl[0].IvoiceDateEditable;
                     //chk_InvoiceWithoutCust.checked = IControl[0].InvoiceWithoutCust;
                     txt_DocPDFFolder.value = IControl[0].DocPDFFolder;
@@ -503,6 +572,39 @@ namespace AdminComp {
                     txt_MembeshiptStartDate.value = DateFormat(IControl[0].MembeshiptStartDate);
                     Txt_PswPrice.value = IControl[0].ExceedMinPricePassword.toString();
 
+                    chk_IsLocalBranchCustomer.checked = IControl[0].IsLocalBranchCustomer;
+
+                    //********************New************
+
+                    Txt_UserTimeZoneUTCDiff.value = setVal( IControl[0].UserTimeZoneUTCDiff)
+                    Txt_ServerTimeZoneUTCDiff.value = setVal( IControl[0].ServerTimeZoneUTCDiff)
+                    Txt_SaudiNationID.value = setVal( IControl[0].SaudiNationID)
+                    Txt_CurNameA.value = setVal( IControl[0].CurNameA);
+                    Txt_CurNameE.value = setVal( IControl[0].CurNameE);
+                    Txt_CurSmallNameA.value = setVal(IControl[0].CurSmallNameA); 
+                    Txt_CurSmallNameE.value = setVal( IControl[0].CurSmallNameE);
+
+                    chk_WebCustomerWebsite.checked = IControl[0].WebCustomerWebsite;
+                    chk_IsFreePurchaseReturn.checked = IControl[0].IsFreePurchaseReturn;
+                    chk_IsFreeSalesReturn.checked = IControl[0].IsFreeSalesReturn;
+                    chk_InvoiceWithoutCust.checked = IControl[0].InvoiceWithoutCust;
+                    chk_ISCustVendorInGL.checked = IControl[0].ISCustVendorInGL;
+                    chk_IsRetailCashInvoiceDefAuth.checked = IControl[0].IsRetailCashInvoiceDefAuth;
+                    chk_IsRetailCreditInvoiceDefAuth.checked = IControl[0].IsRetailCreditInvoiceDefAuth;
+                    chk_IsProcessCashInvoiceDefAuth.checked = IControl[0].IsProcessCashInvoiceDefAuth;
+                    chk_IsProcessCreditInvoiceDefAuth.checked = IControl[0].IsProcessCreditInvoiceDefAuth;
+                    chk_IsAccPeriodClose.checked = IControl[0].IsAccPeriodClose;
+                    chk_IsInvPeriodClose.checked = IControl[0].IsInvPeriodClose;
+                    chk_IsFasPeriodClose.checked = IControl[0].IsFasPeriodClose;
+                    chk_IsAutoNoCustVendor.checked = IControl[0].IsAutoNoCustVendor;
+                    chk_IsOprInvItemDiscount.checked = IControl[0].IsOprInvItemDiscount;
+                    chk_IsOprInvMultiOper.checked = IControl[0].IsOprInvMultiOper;
+                    chk_IsRetailInvItemDiscount.checked = IControl[0].IsRetailInvItemDiscount;
+                    chk_IsRetailInvMultiStore.checked = IControl[0].IsRetailInvMultiStore;
+
+
+
+
 
                 }
             }
@@ -522,11 +624,11 @@ namespace AdminComp {
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
-                if (result.IsSuccess && result.Response != 0 ) {
-                    
+                if (result.IsSuccess && result.Response != 0) {
+
                     GAlertControl = result.Response as Array<G_AlertControl>;
                     GAlertControlFilter = GAlertControl.filter(X => X.Compcode == COMP_CODE);
-                    SystemCode = GAlertControlFilter[0].SystemCode; 
+                    SystemCode = GAlertControlFilter[0].SystemCode;
                     chk_EMAIL_SSL.checked = GAlertControlFilter[0].EMAIL_SSL;
                     chk_EMAIL_Authentication.checked = GAlertControlFilter[0].EMAIL_Authentication;
                     txt_EMAIL_Sender.value = GAlertControlFilter[0].EMAIL_Sender.toString();
@@ -542,8 +644,8 @@ namespace AdminComp {
                     //txt_MobileNoPreFex.value = GAlertControlFilter[0].MobileNoPreFex.toString();
 
                 }
-                        
-                
+
+
             }
         });
 
@@ -551,7 +653,7 @@ namespace AdminComp {
 
     ////////////////////////////////////////////////////////////////
     function Grid_RowDoubleClicked() {
-        
+
         $("#divGrid").removeClass("display_none");
         $("#btnEdit").removeClass("display_none");
         $("#btnEdit2").removeClass("display_none");
@@ -617,9 +719,9 @@ namespace AdminComp {
         //    type: "POST",
         //    url: link + "GComp/Update",
 
-            Ajax.Callsync({
-                type: "POST",
-                url: sys.apiUrl("GComp", "Update"),
+        Ajax.Callsync({
+            type: "POST",
+            url: sys.apiUrl("GComp", "Update"),
             data: JSON.stringify(Model),
             success: (d) => {
                 let result = d as BaseResponse;
@@ -639,9 +741,9 @@ namespace AdminComp {
         //    type: "Post",
         //    url: link + "GComp/Insert",
 
-            Ajax.Callsync({
-                type: "Post",
-                url: sys.apiUrl("GComp", "Insert"),
+        Ajax.Callsync({
+            type: "Post",
+            url: sys.apiUrl("GComp", "Insert"),
             data: JSON.stringify(Model),
             success: (d) => {
                 let result = d as BaseResponse;
@@ -664,7 +766,7 @@ namespace AdminComp {
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.IDNo = txt_IDNo.value;
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        
+
     }
 
 
@@ -677,9 +779,9 @@ namespace AdminComp {
         //    url: link + "GCodes/GetAll",
 
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GCodes", "GetAll"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GCodes", "GetAll"),
             data: { codeType: 'VNDIDType', UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -700,9 +802,9 @@ namespace AdminComp {
         //    type: "Get",
         //    url: link + "Nationality/GetAll",
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("Nationality", "GetAll"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("Nationality", "GetAll"),
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -721,9 +823,9 @@ namespace AdminComp {
         //    type: "Get",
         //    url: link + "AccDefVendor/GetAllCurrency",
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("AccDefVendor", "GetAllCurrency"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefVendor", "GetAllCurrency"),
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -741,14 +843,14 @@ namespace AdminComp {
         //Ajax.Callsync({
         //    type: "Get",
         //    url: link + "GenVatType/GetAll",
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GenVatType", "GetAll"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GenVatType", "GetAll"),
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-             
+
                     ddl_AllDefVatTypeFilter = result.Response as Array<A_D_VAT_TYPE>;
 
                     ddl_DefSlsVatTypeFilter = ddl_AllDefVatTypeFilter.filter(x => x.TYPE == 1 && x.COMP_CODE == compcode)
@@ -758,7 +860,7 @@ namespace AdminComp {
                     ddl_DefPurVatTypeFilter = ddl_AllDefVatTypeFilter.filter(x => x.TYPE == 2 && x.COMP_CODE == compcode)
                     DocumentActions.FillCombowithdefult(ddl_DefPurVatTypeFilter, ddl_DefPurVatType, "CODE", "DESCRIPTION", " اختر الضريبة في المشتريات ");
                 }
-              
+
             }
         });
     }
@@ -769,10 +871,10 @@ namespace AdminComp {
         //    type: "Get",
         //    url: link + "GLTrVoucher/GetAll",
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GLTrVoucher", "GetAllVoucherTypes"),
-                data: { CompCode:compcode, UserCode: SysSession.CurrentEnvironment.UserCode, VoucherType:1, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GLTrVoucher", "GetAllVoucherTypes"),
+            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, VoucherType: 1, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
@@ -793,9 +895,9 @@ namespace AdminComp {
         //    type: "Get",
         //    url: link + "GCodes/GetAll_GCodes",
 
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("GCodes", "GetAll_GCodes"),
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GCodes", "GetAll_GCodes"),
             data: { UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -872,7 +974,7 @@ namespace AdminComp {
         //$("#btnSave").addClass("display_none");
         //$("#btnEdit").removeClass("display_none");
         //$("#divGrid").removeClass("display_none");
-        
+
     }
 
     function btnBack_onclick() {
@@ -895,8 +997,8 @@ namespace AdminComp {
             Grid_RowDoubleClicked();
             DisabledSecondDiv();
             DisabledThirdDiv();
-        //btnBack2_onclick();
-        //btnBack3_onclick();
+            //btnBack2_onclick();
+            //btnBack3_onclick();
 
         }
 
@@ -915,7 +1017,7 @@ namespace AdminComp {
         }
         else {
 
-          
+
 
             $("#btnEdit2").removeClass("display_none");
             $("#btnSave2").addClass("display_none");
@@ -928,7 +1030,7 @@ namespace AdminComp {
             Model_GAlertControl.Compcode = Number(txt_COMP_CODE.value);
             //Model_GAlertControl.SystemCode = sys.SysSession.CurrentEnvironment.SystemCode;
             Model_GAlertControl.SystemCode = SystemCode;
-              
+
             Model_GAlertControl.EMAIL_SSL = chk_EMAIL_SSL.checked;
             Model_GAlertControl.EMAIL_Authentication = chk_EMAIL_Authentication.checked;
             Model_GAlertControl.EMAIL_SenderName = txt_EMAIL_SenderName.value;
@@ -948,9 +1050,9 @@ namespace AdminComp {
             //    type: "POST",
             //    url: link + "GAlertControl/Update",
 
-                Ajax.Callsync({
-                    type: "POST",
-                    url: sys.apiUrl("GAlertControl", "Update"),
+            Ajax.Callsync({
+                type: "POST",
+                url: sys.apiUrl("GAlertControl", "Update"),
                 data: JSON.stringify(Model_GAlertControl),
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -961,7 +1063,7 @@ namespace AdminComp {
             });
 
             DisabledSecondDiv();
-            
+
         }
 
     }
@@ -990,8 +1092,8 @@ namespace AdminComp {
         }
         else {
             Grid_RowDoubleClicked();
-        //btnBack_onclick();
-        //btnBack3_onclick();
+            //btnBack_onclick();
+            //btnBack3_onclick();
         }
 
     }
@@ -1038,19 +1140,19 @@ namespace AdminComp {
             Model_IControl.IsFreePurchaseReturn = true;
             Model_IControl.IsFreeSalesReturn = true;
             Model_IControl.ExceedMinPricePassword = txt_ExceedMinPricePassword.value;
-            
-          //  Model_IControl.GL_VoucherCCType = Number(chk_GL_VoucherCCType.checked);
+
+            //  Model_IControl.GL_VoucherCCType = Number(chk_GL_VoucherCCType.checked);
             if (chk_GL_VoucherCCType.checked == true) {
-                Model_IControl.GL_VoucherCCType = 0;          
+                Model_IControl.GL_VoucherCCType = 0;
             }
-            else if (chk_incoming.checked== true) {
+            else if (chk_incoming.checked == true) {
                 Model_IControl.GL_VoucherCCType = 1;
             }
             else {
-                Model_IControl.GL_VoucherCCType = 2;              
+                Model_IControl.GL_VoucherCCType = 2;
             }
 
-         //   Model_IControl.GL_VoucherCCDT_Type = Number(chk_GL_VoucherCCDT_Type.checked);
+            //   Model_IControl.GL_VoucherCCDT_Type = Number(chk_GL_VoucherCCDT_Type.checked);
 
             if (chk_GL_VoucherCCDT_Type.checked == true) {
                 Model_IControl.GL_VoucherCCDT_Type = 1;
@@ -1078,7 +1180,7 @@ namespace AdminComp {
             Model_IControl.ExceedMinPricePassword = Txt_PswPrice.value;
             Model_IControl.SalePriceAddPerc = Number(Txt_SalePriceAddPerc.value);
             Model_IControl.SalePriceMinAddPerc = Number(Txt_SalePriceMinAddPerc.value);
-            
+
 
             Model_IControl.Gl_JournalOpenType = Number(ddl_Gl_JournalOpenType.value);
             Model_IControl.GL_JournalMonthlyNo = txt_GL_JournalMonthlyNo.checked;
@@ -1102,6 +1204,38 @@ namespace AdminComp {
 
 
 
+            //********************New************
+             
+
+            Model_IControl.UserTimeZoneUTCDiff = Number(Txt_UserTimeZoneUTCDiff.value)
+            Model_IControl.ServerTimeZoneUTCDiff = Number( Txt_ServerTimeZoneUTCDiff.value)
+            Model_IControl.SaudiNationID = Number( Txt_SaudiNationID.value)
+            Model_IControl.CurNameA = Txt_CurNameA.value
+            Model_IControl.CurNameE = Txt_CurNameE.value
+            Model_IControl.CurSmallNameA = Txt_CurSmallNameA.value
+            Model_IControl.CurSmallNameE = Txt_CurSmallNameE.value
+            Model_IControl.WebCustomerWebsite = chk_WebCustomerWebsite.checked;
+            Model_IControl.IsFreePurchaseReturn = chk_IsFreePurchaseReturn.checked;
+            Model_IControl.IsFreeSalesReturn = chk_IsFreeSalesReturn.checked;
+            Model_IControl.InvoiceWithoutCust = chk_InvoiceWithoutCust.checked;
+            Model_IControl.ISCustVendorInGL = chk_ISCustVendorInGL.checked;
+            Model_IControl.IsRetailCashInvoiceDefAuth = chk_IsRetailCashInvoiceDefAuth.checked;
+            Model_IControl.IsRetailCreditInvoiceDefAuth = chk_IsRetailCreditInvoiceDefAuth.checked;
+            Model_IControl.IsProcessCashInvoiceDefAuth = chk_IsProcessCashInvoiceDefAuth.checked;
+            Model_IControl.IsProcessCreditInvoiceDefAuth = chk_IsProcessCreditInvoiceDefAuth.checked;
+            Model_IControl.IsAccPeriodClose = chk_IsAccPeriodClose.checked;
+            Model_IControl.IsInvPeriodClose = chk_IsInvPeriodClose.checked;
+            Model_IControl.IsFasPeriodClose = chk_IsFasPeriodClose.checked;
+            Model_IControl.IsAutoNoCustVendor = chk_IsAutoNoCustVendor.checked;
+            Model_IControl.IsOprInvItemDiscount = chk_IsOprInvItemDiscount.checked;
+            Model_IControl.IsOprInvMultiOper = chk_IsOprInvMultiOper.checked;
+            Model_IControl.IsRetailInvItemDiscount = chk_IsRetailInvItemDiscount.checked;
+            Model_IControl.IsRetailInvMultiStore = chk_IsRetailInvMultiStore.checked;
+
+
+
+
+
 
             //if (chk_sendEmail.checked == true) {
             //    chk_sendEmail.checked = true;
@@ -1121,9 +1255,9 @@ namespace AdminComp {
             //    type: "POST",
             //    url: link + "I_Control/Update",
 
-                Ajax.Callsync({
-                    type: "POST",
-                    url: sys.apiUrl("I_Control", "Update"),
+            Ajax.Callsync({
+                type: "POST",
+                url: sys.apiUrl("I_Control", "Update"),
                 data: JSON.stringify(Model_IControl),
                 success: (d) => {
                     let result = d as BaseResponse;
@@ -1161,13 +1295,13 @@ namespace AdminComp {
         else {
             Grid_RowDoubleClicked();
 
-        //btnBack_onclick();
-        //btnBack2_onclick();
+            //btnBack_onclick();
+            //btnBack2_onclick();
         }
 
     }
 
-  
+
 
     /////CONTROL FIRSTDIV  //////////////////////////////////////////////////////////////////////////
 
@@ -1197,11 +1331,11 @@ namespace AdminComp {
         txt_Address_Build_Additional.disabled = true;
         txt_Address_Postal.disabled = true;
         chk_IsActive.disabled = true;
-       
+
     }
 
     function Enabled() {
-        
+
         txt_NameA.disabled = false;
         txt_NameE.disabled = false;
         txt_Tel.disabled = false;
@@ -1226,7 +1360,7 @@ namespace AdminComp {
         txt_Address_Build_Additional.disabled = false;
         txt_Address_Postal.disabled = false;
         chk_IsActive.disabled = false;
-       
+
     }
 
     function Clear() {
@@ -1255,7 +1389,7 @@ namespace AdminComp {
         txt_Address_Build_Additional.value = "";
         txt_Address_Postal.value = "";
         chk_IsActive.checked = false;
-        
+
     }
 
     function validateEmail(email) {
@@ -1564,7 +1698,7 @@ namespace AdminComp {
             Errorinput(txt_SMS_SenderName);
             return false;
         }
-    
+
         return true;
     }
 
@@ -1622,6 +1756,33 @@ namespace AdminComp {
         Txt_SalePriceAddPerc.disabled = true;
         Txt_SalePriceMinAddPerc.disabled = true;
 
+        //********************New************
+
+        Txt_UserTimeZoneUTCDiff.disabled = true;
+        Txt_ServerTimeZoneUTCDiff.disabled = true;
+        Txt_SaudiNationID.disabled = true;
+        Txt_CurNameA.disabled = true;
+        Txt_CurNameE.disabled = true;
+        Txt_CurSmallNameA.disabled = true;
+        Txt_CurSmallNameE.disabled = true;
+        chk_WebCustomerWebsite.disabled = true;
+        chk_IsFreePurchaseReturn.disabled = true;
+        chk_IsFreeSalesReturn.disabled = true;
+        chk_InvoiceWithoutCust.disabled = true;
+        chk_ISCustVendorInGL.disabled = true;
+        chk_IsRetailCashInvoiceDefAuth.disabled = true;
+        chk_IsRetailCreditInvoiceDefAuth.disabled = true;
+        chk_IsProcessCashInvoiceDefAuth.disabled = true;
+        chk_IsProcessCreditInvoiceDefAuth.disabled = true;
+        chk_IsAccPeriodClose.disabled = true;
+        chk_IsInvPeriodClose.disabled = true;
+        chk_IsFasPeriodClose.disabled = true;
+        chk_IsAutoNoCustVendor.disabled = true;
+        chk_IsOprInvItemDiscount.disabled = true;
+        chk_IsOprInvMultiOper.disabled = true;
+        chk_IsRetailInvItemDiscount.disabled = true;
+        chk_IsRetailInvMultiStore.disabled = true;
+
 
     }
 
@@ -1677,6 +1838,35 @@ namespace AdminComp {
         chk_AutoupdateSalesPrice2.disabled = false;
         //Txt_SalePriceAddPerc.disabled = false;
         //Txt_SalePriceMinAddPerc.disabled = false;
+
+
+
+        //********************New************
+
+        Txt_UserTimeZoneUTCDiff.disabled = false;
+        Txt_ServerTimeZoneUTCDiff.disabled = false;
+        Txt_SaudiNationID.disabled = false;
+        Txt_CurNameA.disabled = false;
+        Txt_CurNameE.disabled = false;
+        Txt_CurSmallNameA.disabled = false;
+        Txt_CurSmallNameE.disabled = false;
+        chk_WebCustomerWebsite.disabled = false;
+        chk_IsFreePurchaseReturn.disabled = false;
+        chk_IsFreeSalesReturn.disabled = false;
+        chk_InvoiceWithoutCust.disabled = false;
+        chk_ISCustVendorInGL.disabled = false;
+        chk_IsRetailCashInvoiceDefAuth.disabled = false;
+        chk_IsRetailCreditInvoiceDefAuth.disabled = false;
+        chk_IsProcessCashInvoiceDefAuth.disabled = false;
+        chk_IsProcessCreditInvoiceDefAuth.disabled = false;
+        chk_IsAccPeriodClose.disabled = false;
+        chk_IsInvPeriodClose.disabled = false;
+        chk_IsFasPeriodClose.disabled = false;
+        chk_IsAutoNoCustVendor.disabled = false;
+        chk_IsOprInvItemDiscount.disabled = false;
+        chk_IsOprInvMultiOper.disabled = false;
+        chk_IsRetailInvItemDiscount.disabled = false;
+        chk_IsRetailInvMultiStore.disabled = false;
 
 
     }
@@ -1809,26 +1999,26 @@ namespace AdminComp {
         return true;
     }
 
-    function chk_IsLocalSalePrice_onchange() {  
-            Txt_SalePriceAddPerc.disabled = true;
-            Txt_SalePriceMinAddPerc.disabled = true;
-            chk_IsLocalCost.checked = true; 
-   }
-    function chk_IsLocalSalePrice2_onchange() { 
+    function chk_IsLocalSalePrice_onchange() {
+        Txt_SalePriceAddPerc.disabled = true;
+        Txt_SalePriceMinAddPerc.disabled = true;
+        chk_IsLocalCost.checked = true;
+    }
+    function chk_IsLocalSalePrice2_onchange() {
         chk_IsLocalCost2.checked = true;
-        if (chk_AutoupdateSalesPrice.checked ==true) {
+        if (chk_AutoupdateSalesPrice.checked == true) {
             Txt_SalePriceAddPerc.disabled = false;
-            Txt_SalePriceMinAddPerc.disabled = false; 
+            Txt_SalePriceMinAddPerc.disabled = false;
         } else {
             Txt_SalePriceAddPerc.disabled = true;
-            Txt_SalePriceMinAddPerc.disabled = true; 
+            Txt_SalePriceMinAddPerc.disabled = true;
         }
-           
+
     }
 
     function chk_IsLocalCost_onchange() {
         Txt_SalePriceAddPerc.disabled = true;
-        Txt_SalePriceMinAddPerc.disabled = true; 
+        Txt_SalePriceMinAddPerc.disabled = true;
         chk_IsLocalSalePrice.checked = true;
     }
     function chk_IsLocalCost2_onchange() {
@@ -1840,7 +2030,7 @@ namespace AdminComp {
             Txt_SalePriceAddPerc.disabled = true;
             Txt_SalePriceMinAddPerc.disabled = true;
         }
-    }  
+    }
 
     function chk_AutoupdateSalesPrice_onchange() {
 
@@ -1852,12 +2042,12 @@ namespace AdminComp {
             Txt_SalePriceMinAddPerc.disabled = true;
         }
 
-   } 
+    }
 
-    function chk_AutoupdateSalesPrice2_onchange() { 
-            Txt_SalePriceAddPerc.disabled = true;
-            Txt_SalePriceMinAddPerc.disabled = true;
-       
+    function chk_AutoupdateSalesPrice2_onchange() {
+        Txt_SalePriceAddPerc.disabled = true;
+        Txt_SalePriceMinAddPerc.disabled = true;
+
     }
 
 
