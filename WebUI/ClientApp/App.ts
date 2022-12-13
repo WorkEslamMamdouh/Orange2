@@ -131,9 +131,9 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-
+    debugger
     let Input = this;
-    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
 };
 

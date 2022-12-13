@@ -69,10 +69,10 @@
 <body>
     <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
     <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
-   
+
     <div id="footer" class="stfooter">
         <div id="displaydiv" class="col-lg-12 display_none" style="top: 3px">
-             <a href="/Home/AdminBarIndex">
+            <a href="/Home/AdminBarIndex">
                 <span class="glyphicon glyphicon-floppy-saved">
                     <button id="" type="button" class="btn btn-success   ">
                         اعدادات الفرع   <span class="glyphicon glyphicon-floppy-saved"></span>
@@ -104,17 +104,22 @@
     <div>
         @RenderBody()
     </div>
-   
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="glyphicon glyphicon-arrow-up	"></i></a>
     <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
     <input type="hidden" id="ModelPreview" name="name" value="" />
     <input type="hidden" id="SearchControlName" name="name" value="" />
-   
+
     <div id="caret_script" style="display:none!important">
     </div>
     @*<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
     @Scripts.Render("~/Bundles/AppScript4")
+    <link href="~/Style_design/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-arabic.min.css" rel="stylesheet" /> 
+    <link href="~/Style_design/Style_Arabic.css" rel="stylesheet" />
+    <link href="~/Style_design/style.css" rel="stylesheet" />
     <script>
 
         $('#lepcompinformtion').on('click', function () {

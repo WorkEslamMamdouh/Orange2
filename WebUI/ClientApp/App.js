@@ -126,8 +126,9 @@ var Keys = {
     Enter: "Enter"
 };
 var setVal = function (value) {
+    debugger;
     var Input = this;
-    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
 };
 function IsNullOrEmpty(value) {

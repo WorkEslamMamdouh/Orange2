@@ -24,9 +24,9 @@
         width: 39.666667%;
     }
 
-    #divcompinformtion .col-lg-1 {
+    /*#divcompinformtion .col-lg-1 {
         width: 10.333333%;
-    }
+    }*/
 
     #col-9 .col-lg-1 {
         width: 9.333333%;
@@ -370,13 +370,13 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont">
                 <div id="col-9" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
                     @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">ارسال ايميل</label>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                            <input type="checkbox" class="checkbox" id="chk_sendEmail" />
-                        </div>i
-                        <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end"> ارسال ايميل تسويقي   </label>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                            <input type="checkbox" class="checkbox" id="chk_sendshopEmail" />
-                        </div>*@
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                        <input type="checkbox" class="checkbox" id="chk_sendEmail" />
+                    </div>i
+                    <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end"> ارسال ايميل تسويقي   </label>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
+                        <input type="checkbox" class="checkbox" id="chk_sendshopEmail" />
+                    </div>*@
                     <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">ارسال رسالة نصية</label>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
                         <input type="checkbox" class="checkbox" name="SendSMS" id="chk_SendSMS" />
@@ -509,7 +509,7 @@
                         <input name="GL_JournalMonthlyNo" id="txt_GL_JournalMonthlyNo" type="checkbox" class="checkbox" />
                     </div>
                     @*<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">
-                        </div>*@
+                    </div>*@
                     <label class="col-lg-3 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">عدد خانات التسلسل </label>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
                         <input type="number" class="form-control input-sm addable editable" name="GL_JournalMonthlyNoWidth" id="txt_GL_JournalMonthlyNoWidth">
@@ -560,9 +560,9 @@
                         <input type="checkbox" class="checkbox" name="IvoiceDateEditable" id="chk_IvoiceDateEditable" />
                     </div>
                     @*<div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">اصدار فاتورة بدون عميل</label>
-                <input type="checkbox" class="checkbox" name="InvoiceWithoutCust" id="chk_InvoiceWithoutCust" />
-            </div>*@
+                        <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">اصدار فاتورة بدون عميل</label>
+                        <input type="checkbox" class="checkbox" name="InvoiceWithoutCust" id="chk_InvoiceWithoutCust" />
+                    </div>*@
 
 
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
@@ -662,7 +662,130 @@
 
 
             </div>
+
+
+
         </div>
+
+
+        @*//********************New***************************@
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont ">
+            <label id="" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="" class="ifontowsam fa fa-caret-left"></span>اعدادات الفواتير</label>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">المنطقة الزمنية للمستخدم	</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="UserTimeZoneUTCDiff" id="UserTimeZoneUTCDiff" disabled="">
+                </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 text-end ">المنطقة الزمنية للخادم</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="ServerTimeZoneUTCDiff" id="ServerTimeZoneUTCDiff" disabled="">
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">الهوية الوطنية السعودية</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="SaudiNationID" id="SaudiNationID" disabled="">
+                </div>
+            </div>
+            <div id="" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> اسم الشركه في الرساله 	</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="CurNameA" id="CurNameA" disabled="">
+                </div>
+
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 text-end">               اختصار اسم الشركه </label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="CurSmallNameA" id="CurSmallNameA" disabled="">
+                </div>
+
+                <label class=" display_none col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 text-end ">CurNameE	</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 display_none">
+                    <input type="text" class="form-control input-sm addable editable" name="CurNameE" id="CurNameE" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 display_none">
+                    <input type="text" class="form-control input-sm addable editable" name="CurSmallNameE" id="CurSmallNameE" disabled="">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">  موقع ويب العميل  </label>
+                    <input type="checkbox" class="checkbox" name="WebCustomerWebsite" id="WebCustomerWebsite" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">        هو عائد شراء مجاني</label>
+                    <input type="checkbox" class="checkbox" name="IsFreePurchaseReturn" id="IsFreePurchaseReturn" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">        هو عائد مبيعات مجاني</label>
+                    <input type="checkbox" class="checkbox" name="IsFreeSalesReturn" id="IsFreeSalesReturn" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">        فاتورة بدون عميل</label>
+                    <input type="checkbox" class="checkbox" name="InvoiceWithoutCust" id="InvoiceWithoutCust" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">  ISCustVendorInGL        </label>
+                    <input type="checkbox" class="checkbox" name="ISCustVendorInGL" id="ISCustVendorInGL" disabled="">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">    IsRetailCashInvoiceDefAuth</label>
+                    <input type="checkbox" class="checkbox" name="IsRetailCashInvoiceDefAuth" id="IsRetailCashInvoiceDefAuth" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsRetailCreditInvoiceDefAuth</label>
+                    <input type="checkbox" class="checkbox" name="IsRetailCreditInvoiceDefAuth" id="IsRetailCreditInvoiceDefAuth" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsProcessCashInvoiceDefAuth</label>
+                    <input type="checkbox" class="checkbox" name="IsProcessCashInvoiceDefAuth" id="IsProcessCashInvoiceDefAuth" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsProcessCreditInvoiceDefAuth</label>
+                    <input type="checkbox" class="checkbox" name="IsProcessCreditInvoiceDefAuth" id="IsProcessCreditInvoiceDefAuth" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">إغلاق فترة الحسبات</label>
+                    <input type="checkbox" class="checkbox" name="IsAccPeriodClose" id="IsAccPeriodClose" disabled="">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">إغلاق فترة المبيعات</label>
+                    <input type="checkbox" class="checkbox" name="IsInvPeriodClose" id="IsInvPeriodClose" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">إغلاق فترة الاصول</label>
+                    <input type="checkbox" class="checkbox" name="IsFasPeriodClose" id="IsFasPeriodClose" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsAutoNoCustVendor</label>
+                    <input type="checkbox" class="checkbox" name="IsAutoNoCustVendor" id="IsAutoNoCustVendor" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsOprInvItemDiscount</label>
+                    <input type="checkbox" class="checkbox" name="IsOprInvItemDiscount" id="IsOprInvItemDiscount" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsOprInvMultiOper</label>
+                    <input type="checkbox" class="checkbox" name="IsOprInvMultiOper" id="IsOprInvMultiOper" disabled="">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsRetailInvItemDiscount</label>
+                    <input type="checkbox" class="checkbox" name="IsRetailInvItemDiscount" id="IsRetailInvItemDiscount" disabled="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <label class="col-lg-7 col-md-7 col-sm-7 col-xl-7 col-xs-7 pading_2Processes2 ">IsRetailInvMultiStore</label>
+                    <input type="checkbox" class="checkbox" name="IsRetailInvMultiStore" id="IsRetailInvMultiStore" disabled="">
+                </div>
+            </div>
+
+
+        </div>
+
 
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">

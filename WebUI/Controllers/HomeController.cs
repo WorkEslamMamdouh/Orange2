@@ -149,9 +149,15 @@ namespace Inv.WebUI.Controllers
         public ActionResult OpenPdf(string path)
         {
 
+            //File("" + path + "", "application/pdf");
+            if (System.IO.File.Exists(path))
+            {
+                var fil = File(path, "application/pdf");
+                fil.FileDownloadName = "Invoices.pdf";
+                return fil;
+            }
             return File("" + path + "", "application/pdf");
         }
-
 
         public ActionResult AgingCustIndex()
         {
