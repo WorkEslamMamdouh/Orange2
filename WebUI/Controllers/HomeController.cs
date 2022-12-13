@@ -146,7 +146,7 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/Error/ErrorPDF_Fix.cshtml");
         }
 
-        public ActionResult OpenPdf(string path)
+        public ActionResult OpenPdfS(string path)
         {
 
             //File("" + path + "", "application/pdf");
@@ -156,6 +156,11 @@ namespace Inv.WebUI.Controllers
                 fil.FileDownloadName = "Invoices.pdf";
                 return fil;
             }
+            return File("" + path + "", "application/pdf");
+        }
+
+        public ActionResult OpenPdf(string path)
+        { 
             return File("" + path + "", "application/pdf");
         }
 

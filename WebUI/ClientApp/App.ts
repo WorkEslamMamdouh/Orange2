@@ -2480,7 +2480,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             //debugger
             //window.open(result, "blank");
 
-            let x = Url.Action("OpenPdf", "Home");
+            let x = Url.Action("OpenPdfS", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
 

@@ -1939,7 +1939,7 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
             //alert(result);
             //debugger
             //window.open(result, "blank");
-            var x = Url.Action("OpenPdf", "Home");
+            var x = Url.Action("OpenPdfS", "Home");
             var UrlPdf = x + "/" + "?" + "path=" + result + "";
             window.open(UrlPdf, "blank");
             return result;
