@@ -6005,6 +6005,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="IsAuthVchr" Type="int" Mode="In" />
           <Parameter Name="IsNewVchr" Type="int" Mode="In" />
           <Parameter Name="ExZero" Type="int" Mode="In" />
+          <Parameter Name="Parentcollect" Type="int" Mode="In" />
           <Parameter Name="RepTyp" Type="int" Mode="In" />
         </Function>
         <Function Name="AProc_Rpt_GLGeneralLedger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -10946,24 +10947,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AProc_Rpt_GLFinancialStatment" ReturnType="Collection(InvModel.AProc_Rpt_GLFinancialStatment_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="FromDate" Mode="In" Type="String" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
-            <Parameter Name="cc_Code" Mode="In" Type="String" />
-            <Parameter Name="Level" Mode="In" Type="Int32" />
-            <Parameter Name="IsAuthVchr" Mode="In" Type="Int32" />
-            <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
-            <Parameter Name="ExZero" Mode="In" Type="Int32" />
-            <Parameter Name="RepTyp" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="I_TR_Collect" EntityType="InvModel.I_TR_Collect" />
           <EntitySet Name="I_TR_CollectDetail" EntityType="InvModel.I_TR_CollectDetail" />
           <EntitySet Name="IQ_GetCollectDetail" EntityType="InvModel.IQ_GetCollectDetail" />
@@ -11633,6 +11616,25 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="FromDate" Mode="In" Type="String" />
             <Parameter Name="ToDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AProc_Rpt_GLFinancialStatment" ReturnType="Collection(InvModel.AProc_Rpt_GLFinancialStatment_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="cc_Code" Mode="In" Type="String" />
+            <Parameter Name="Level" Mode="In" Type="Int32" />
+            <Parameter Name="IsAuthVchr" Mode="In" Type="Int32" />
+            <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
+            <Parameter Name="ExZero" Mode="In" Type="Int32" />
+            <Parameter Name="Parentcollect" Mode="In" Type="Int32" />
+            <Parameter Name="RepTyp" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -19280,47 +19282,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="ACC_DESCL" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="AmountinWords" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="AProc_Rpt_GLFinancialStatment_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StNewDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StNewDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StAuthDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StAuthDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_ZeroDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_ZeroDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_CCDESCA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CCDESCE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="ID" Nullable="true" />
-          <Property Type="String" Name="AccCode" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="AccLEvel" Nullable="true" />
-          <Property Type="Int32" Name="AccGroup" Nullable="true" />
-          <Property Type="String" Name="ParentAcc" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="detail" Nullable="true" />
-          <Property Type="Decimal" Name="PrevDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Prevcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrdDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Prdcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="EndDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Endcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="acc_descA" Nullable="true" MaxLength="4000" />
-          <Property Type="String" Name="acc_descL" Nullable="true" MaxLength="4000" />
-          <Property Type="Decimal" Name="Tot_PrevDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Tot_PrevCredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Tot_PrdDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="TotPrdCredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Tot_EndDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Tot_EndCredit" Nullable="true" Precision="18" Scale="2" />
-        </ComplexType>
         <EntityType Name="I_TR_Collect">
           <Key>
             <PropertyRef Name="CollectID" />
@@ -21910,6 +21871,50 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="VatPrc" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="VatAmount" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="VatType" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AProc_Rpt_GLFinancialStatment_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StNewDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StNewDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StAuthDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StAuthDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_ZeroDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_ZeroDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_CCDESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CCDESCE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Par_ParentCollect" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="AccCode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="AccLEvel" Nullable="true" />
+          <Property Type="Int32" Name="AccGroup" Nullable="true" />
+          <Property Type="String" Name="ParentAcc" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="detail" Nullable="true" />
+          <Property Type="Decimal" Name="PrevDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Prevcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrdDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Prdcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="EndDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Endcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="acc_descA" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="acc_descL" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="Tot_PrevDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tot_PrevCredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tot_PrdDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotPrdCredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tot_EndDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Tot_EndCredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="ParAcc_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ParAcc_DescE" Nullable="true" MaxLength="100" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -29778,51 +29783,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AProc_Rpt_GLFinancialStatment" FunctionName="InvModel.Store.AProc_Rpt_GLFinancialStatment">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.AProc_Rpt_GLFinancialStatment_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StNewDSA" ColumnName="Par_StNewDSA" />
-                <ScalarProperty Name="Par_StNewDSE" ColumnName="Par_StNewDSE" />
-                <ScalarProperty Name="Par_StAuthDSA" ColumnName="Par_StAuthDSA" />
-                <ScalarProperty Name="Par_StAuthDSE" ColumnName="Par_StAuthDSE" />
-                <ScalarProperty Name="Par_ZeroDSA" ColumnName="Par_ZeroDSA" />
-                <ScalarProperty Name="Par_ZeroDSE" ColumnName="Par_ZeroDSE" />
-                <ScalarProperty Name="Par_CCDESCA" ColumnName="Par_CCDESCA" />
-                <ScalarProperty Name="Par_CCDESCE" ColumnName="Par_CCDESCE" />
-                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="AccCode" ColumnName="AccCode" />
-                <ScalarProperty Name="AccLEvel" ColumnName="AccLEvel" />
-                <ScalarProperty Name="AccGroup" ColumnName="AccGroup" />
-                <ScalarProperty Name="ParentAcc" ColumnName="ParentAcc" />
-                <ScalarProperty Name="detail" ColumnName="detail" />
-                <ScalarProperty Name="PrevDebit" ColumnName="PrevDebit" />
-                <ScalarProperty Name="Prevcredit" ColumnName="Prevcredit" />
-                <ScalarProperty Name="PrdDebit" ColumnName="PrdDebit" />
-                <ScalarProperty Name="Prdcredit" ColumnName="Prdcredit" />
-                <ScalarProperty Name="EndDebit" ColumnName="EndDebit" />
-                <ScalarProperty Name="Endcredit" ColumnName="Endcredit" />
-                <ScalarProperty Name="acc_descA" ColumnName="acc_descA" />
-                <ScalarProperty Name="acc_descL" ColumnName="acc_descL" />
-                <ScalarProperty Name="Tot_PrevDebit" ColumnName="Tot_PrevDebit" />
-                <ScalarProperty Name="Tot_PrevCredit" ColumnName="Tot_PrevCredit" />
-                <ScalarProperty Name="Tot_PrdDebit" ColumnName="Tot_PrdDebit" />
-                <ScalarProperty Name="TotPrdCredit" ColumnName="TotPrdCredit" />
-                <ScalarProperty Name="Tot_EndDebit" ColumnName="Tot_EndDebit" />
-                <ScalarProperty Name="Tot_EndCredit" ColumnName="Tot_EndCredit" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="I_TR_Collect">
             <EntityTypeMapping TypeName="InvModel.I_TR_Collect">
               <MappingFragment StoreEntitySet="I_TR_Collect">
@@ -32582,6 +32542,54 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="VatPrc" ColumnName="VatPrc" />
                 <ScalarProperty Name="VatAmount" ColumnName="VatAmount" />
                 <ScalarProperty Name="VatType" ColumnName="VatType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AProc_Rpt_GLFinancialStatment" FunctionName="InvModel.Store.AProc_Rpt_GLFinancialStatment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_Rpt_GLFinancialStatment_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StNewDSA" ColumnName="Par_StNewDSA" />
+                <ScalarProperty Name="Par_StNewDSE" ColumnName="Par_StNewDSE" />
+                <ScalarProperty Name="Par_StAuthDSA" ColumnName="Par_StAuthDSA" />
+                <ScalarProperty Name="Par_StAuthDSE" ColumnName="Par_StAuthDSE" />
+                <ScalarProperty Name="Par_ZeroDSA" ColumnName="Par_ZeroDSA" />
+                <ScalarProperty Name="Par_ZeroDSE" ColumnName="Par_ZeroDSE" />
+                <ScalarProperty Name="Par_CCDESCA" ColumnName="Par_CCDESCA" />
+                <ScalarProperty Name="Par_CCDESCE" ColumnName="Par_CCDESCE" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_ParentCollect" ColumnName="Par_ParentCollect" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccCode" ColumnName="AccCode" />
+                <ScalarProperty Name="AccLEvel" ColumnName="AccLEvel" />
+                <ScalarProperty Name="AccGroup" ColumnName="AccGroup" />
+                <ScalarProperty Name="ParentAcc" ColumnName="ParentAcc" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="PrevDebit" ColumnName="PrevDebit" />
+                <ScalarProperty Name="Prevcredit" ColumnName="Prevcredit" />
+                <ScalarProperty Name="PrdDebit" ColumnName="PrdDebit" />
+                <ScalarProperty Name="Prdcredit" ColumnName="Prdcredit" />
+                <ScalarProperty Name="EndDebit" ColumnName="EndDebit" />
+                <ScalarProperty Name="Endcredit" ColumnName="Endcredit" />
+                <ScalarProperty Name="acc_descA" ColumnName="acc_descA" />
+                <ScalarProperty Name="acc_descL" ColumnName="acc_descL" />
+                <ScalarProperty Name="Tot_PrevDebit" ColumnName="Tot_PrevDebit" />
+                <ScalarProperty Name="Tot_PrevCredit" ColumnName="Tot_PrevCredit" />
+                <ScalarProperty Name="Tot_PrdDebit" ColumnName="Tot_PrdDebit" />
+                <ScalarProperty Name="TotPrdCredit" ColumnName="TotPrdCredit" />
+                <ScalarProperty Name="Tot_EndDebit" ColumnName="Tot_EndDebit" />
+                <ScalarProperty Name="Tot_EndCredit" ColumnName="Tot_EndCredit" />
+                <ScalarProperty Name="ParAcc_DescA" ColumnName="ParAcc_DescA" />
+                <ScalarProperty Name="ParAcc_DescE" ColumnName="ParAcc_DescE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
