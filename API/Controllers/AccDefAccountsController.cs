@@ -109,14 +109,12 @@ namespace Inv.API.Controllers
         {
             try
             {
-                AccDefAccountsService.UpdateList(AccDefAccount); 
-                LogUser.InsertPrint(db, AccDefAccount[0].Comp_Code.ToString(), AccDefAccount[0].Branch_Code, AccDefAccount[0].sec_FinYear, AccDefAccount[0].UserCode, null, LogUser.UserLog.Update, AccDefAccount[0].MODULE_CODE, true, null, null, null);
-
+                AccDefAccountsService.UpdateList(AccDefAccount);  
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, AccDefAccount[0].Comp_Code.ToString(), AccDefAccount[0].Branch_Code, AccDefAccount[0].sec_FinYear, AccDefAccount[0].UserCode, null, LogUser.UserLog.Update, AccDefAccount[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
+               
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }

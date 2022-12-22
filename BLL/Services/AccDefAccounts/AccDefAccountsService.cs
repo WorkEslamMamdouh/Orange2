@@ -70,6 +70,7 @@ namespace Inv.BLL.Services.AccDefAccounts
                 if (entity.StatusFlag == 'i')
                 {
                     unitOfWork.Repository<A_RecPay_D_Accounts>().Insert(entity);
+                    
                 }
             }
             unitOfWork.Save();

@@ -4481,6 +4481,7 @@ var CloseProcesses;
                     flag_Success_2 = false;
                     $("#DivHederMaster").removeClass("disabledDiv");
                     $("#div_MasterGird").removeClass("disabledDiv");
+                    Update_2 = false;
                 }
                 else {
                     DisplayMassage("خطأء!", "Error!", MessageType.Worning);
