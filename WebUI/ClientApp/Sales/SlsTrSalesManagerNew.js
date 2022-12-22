@@ -1989,6 +1989,7 @@ var SlsTrSalesManagerNew;
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function searchItem(searchItemID, cnt) {
+        debugger;
         $('#ddlItem' + cnt).val(searchItemID);
         var Type_inv = Number($('#ddlTypeInv' + cnt).val());
         GetItems(searchItemID, Type_inv, cnt);

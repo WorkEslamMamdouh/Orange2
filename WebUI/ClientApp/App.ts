@@ -2232,9 +2232,9 @@ function OnClick_Tree() {
             $('' + ul + '').attr("class", "children nav-child unstyled small ---")
             $('' + ul + '').attr("aria-expanded", "true")
             $('' + ul + '').attr("style", "")
-
+             
         }
-        else {
+        if (expanded == 'true') {
 
             $(this).attr("aria-expanded", "false")
             $(this).attr("class", "sign")
@@ -2246,6 +2246,7 @@ function OnClick_Tree() {
             $('' + ul + '').attr("class", "children nav-child unstyled small collapse in")
             $('' + ul + '').attr("aria-expanded", "false")
             $('' + ul + '').attr("style", "height: 0px;")
+
 
         }
 

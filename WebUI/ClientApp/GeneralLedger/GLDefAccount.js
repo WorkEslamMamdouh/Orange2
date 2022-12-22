@@ -80,7 +80,7 @@ var GLDefAccount;
         //    $("#txtCCDT_Type").addClass("display_none");
         //    $("#LabelCCDT_Type").addClass("display_none");
         //}
-        OnClick_Tree();
+        OnClick_TreeData();
     }
     GLDefAccount.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -136,15 +136,48 @@ var GLDefAccount;
         //txt_Openbalance.onkeyup = balance_onchange;
         //txt_Cust_Type.onchange = txt_Cust_Type_onchange;
     }
+    function OnClick_TreeData() {
+        $('span').on('click', function () {
+            //let ul = $(this).attr("href");
+            //alert($('' + ul + '').attr("class"))
+            debugger;
+            var expanded = $(this).attr("aria-expanded");
+            if (expanded == 'false') {
+                $(this).attr("aria-expanded", "true");
+                $(this).attr("class", "sign");
+                var data_i = $(this).attr("data_i");
+                var ul = $(this).attr("href");
+                //alert($('' + ul + '').attr("class"))
+                $('#' + data_i + '').attr("class", "fas fa-minus-circle");
+                $('' + ul + '').attr("class", "children nav-child unstyled small ---");
+                $('' + ul + '').attr("aria-expanded", "true");
+                $('' + ul + '').attr("style", "");
+                var node = $(this).attr("node");
+                click_in_labl(node);
+            }
+            if (expanded == 'true') {
+                $(this).attr("aria-expanded", "false");
+                $(this).attr("class", "sign");
+                var data_i = $(this).attr("data_i");
+                var ul = $(this).attr("href");
+                $('#' + data_i + '').attr("class", "fas fa-plus-circle");
+                $('' + ul + '').attr("class", "children nav-child unstyled small collapse in");
+                $('' + ul + '').attr("aria-expanded", "false");
+                $('' + ul + '').attr("style", "height: 0px;");
+                var node = $(this).attr("node");
+                click_in_labl(node);
+            }
+        });
+    }
     function txt_Search_onkeyup() {
         $('#menu-group-1').html('');
         if (txt_Search.value.trim() == '') {
             Display();
-            OnClick_Tree();
+            OnClick_TreeData();
         }
         else {
             Displayfilter();
-            OnClick_Tree();
+            OnClick_TreeData();
         }
     }
     function Refrash_onclick() {
@@ -156,7 +189,7 @@ var GLDefAccount;
         btnDelete.disabled = true;
         btnEdit.disabled = true;
         btnAdd.disabled = true;
-        OnClick_Tree();
+        OnClick_TreeData();
     }
     function Display_GCodes() {
         Ajax.Callsync({
@@ -272,6 +305,7 @@ var GLDefAccount;
         span_1.setAttribute('class', 'sign collapsed');
         span_1.setAttribute('aria-expanded', 'true');
         span_1.setAttribute('Data_I', 'i_' + Node);
+        span_1.setAttribute('Node', Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);
@@ -311,7 +345,10 @@ var GLDefAccount;
         document.getElementById('a_' + Node).appendChild(span_2);
         document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
         try {
-            $('#' + Node + '').click(click_in_labl);
+            //$('#' + Node + '').click(click_in_labl);
+            $("#" + Node + "").on('click', function () {
+                click_in_labl(Node);
+            });
         }
         catch (e) {
             alert(Node);
@@ -455,6 +492,7 @@ var GLDefAccount;
         span_1.setAttribute('class', 'sign collapsed');
         span_1.setAttribute('aria-expanded', 'false');
         span_1.setAttribute('Data_I', 'i_' + Node);
+        span_1.setAttribute('Node', Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);
@@ -494,7 +532,10 @@ var GLDefAccount;
         document.getElementById('a_' + Node).appendChild(span_2);
         document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
         try {
-            $('#' + Node + '').click(click_in_labl);
+            //$('#' + Node + '').click(click_in_labl);
+            $("#" + Node + "").on('click', function () {
+                click_in_labl(Node);
+            });
         }
         catch (e) {
             alert(Node);
@@ -507,43 +548,43 @@ var GLDefAccount;
         document.getElementById('li_' + Node).appendChild(ul_1);
         //------------------------------------------------------------------------------
     }
-    function click_in_labl() {
-        var _this = this;
-        ACC_CODE = $(this).attr('data-ACC_CODE');
+    function click_in_labl(Node) {
+        debugger;
+        ACC_CODE = $('#' + Node + '').attr('data-ACC_CODE');
         DetAccLst = new Array();
-        DetAccLst = Details_ACCOUNT.filter(function (x) { return x.ACC_CODE == $(_this).attr('data-NodeParent'); });
+        DetAccLst = Details_ACCOUNT.filter(function (x) { return x.ACC_CODE == $('#' + Node + '').attr('data-NodeParent'); });
         // 
-        if ($(this).attr('data-NodeParent') == 'null' || $(this).attr('data-NodeParent') == '0') {
-            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? $(this).attr('data-NAME_A') : $(this).attr('data-NAME_E');
+        if ($('#' + Node + '').attr('data-NodeParent') == 'null' || $('#' + Node + '').attr('data-NodeParent') == '0') {
+            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? $('#' + Node + '').attr('data-NAME_A') : $('#' + Node + '').attr('data-NAME_E');
             Name_Acc.innerHTML = "" + NAME + " ( " + ACC_CODE + " )";
-            Name_Acc.setAttribute('data-level', $(this).attr('data-level'));
+            Name_Acc.setAttribute('data-level', $('#' + Node + '').attr('data-level'));
         }
         else {
             NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? DetAccLst[0].ACC_DESCA : DetAccLst[0].ACC_DESCL;
-            Name_Acc.innerHTML = "" + NAME + " ( " + $(this).attr('data-NodeParent') + " )";
-            Name_Acc.setAttribute('data-level', $(this).attr('data-level'));
+            Name_Acc.innerHTML = "" + NAME + " ( " + $('#' + Node + '').attr('data-NodeParent') + " )";
+            Name_Acc.setAttribute('data-level', $('#' + Node + '').attr('data-level'));
         }
-        var ACC_TYPE = Number($(this).attr('data-ACC_TYPE'));
-        var ACC_GROUP = $(this).attr('data-ACC_GROUP');
+        var ACC_TYPE = Number($('#' + Node + '').attr('data-ACC_TYPE'));
+        var ACC_GROUP = $('#' + Node + '').attr('data-ACC_GROUP');
         Display_Type(ACC_TYPE, ACC_GROUP);
-        txt_ACC_CODE.value = $(this).attr('data-ACC_CODE');
-        txt_NAME_A.value = $(this).attr('data-NAME_A');
-        txt_NAME_E.value = $(this).attr('data-NAME_E');
-        txt_note.value = $(this).attr('data-REMARKS');
-        txt_level.value = $(this).attr('data-level');
-        txt_Debit.value = $(this).attr('data-Debit');
-        txt_DebitFC.value = $(this).attr('data-DebitFC');
-        //txtCCDT_Type.value = $(this).attr('data-CCDT_Type');
-        txt_Openbalance.value = $(this).attr('data-Openbalance');
-        txt_CreditLimit.value = $(this).attr('data-CreditLimit');
+        txt_ACC_CODE.value = $('#' + Node + '').attr('data-ACC_CODE');
+        txt_NAME_A.value = $('#' + Node + '').attr('data-NAME_A');
+        txt_NAME_E.value = $('#' + Node + '').attr('data-NAME_E');
+        txt_note.value = $('#' + Node + '').attr('data-REMARKS');
+        txt_level.value = $('#' + Node + '').attr('data-level');
+        txt_Debit.value = $('#' + Node + '').attr('data-Debit');
+        txt_DebitFC.value = $('#' + Node + '').attr('data-DebitFC');
+        //txtCCDT_Type.value = $('#' + Node + '').attr('data-CCDT_Type');
+        txt_Openbalance.value = $('#' + Node + '').attr('data-Openbalance');
+        txt_CreditLimit.value = $('#' + Node + '').attr('data-CreditLimit');
         txt_balance.value = ((Number(txt_Openbalance.value) + Number(txt_Debit.value)) - Number(txt_DebitFC.value)).toString();
-        chkeck_Detailed.checked = $(this).attr('data-detail') == '1' ? true : false;
-        chkeck_active.checked = $(this).attr('data-ACTIVE') == 'true' ? true : false;
-        txtCreatedBy.value = $(this).attr('data-CreatedBy') == null ? '' : $(this).attr('data-CreatedBy');
-        txtCreatedAt.value = $(this).attr('data-CreatedAt') == null ? '' : $(this).attr('data-CreatedAt');
-        txtUpdatedBy.value = $(this).attr('data-UpdatedBy') == null ? '' : $(this).attr('data-UpdatedBy');
-        txtUpdatedAt.value = $(this).attr('data-UpdatedAt') == null ? '' : $(this).attr('data-UpdatedAt');
-        $('#txt_Type').prop('value', $(this).attr('data-acc_type') == '0' ? 'null' : $(this).attr('data-acc_type'));
+        chkeck_Detailed.checked = $('#' + Node + '').attr('data-detail') == '1' ? true : false;
+        chkeck_active.checked = $('#' + Node + '').attr('data-ACTIVE') == 'true' ? true : false;
+        txtCreatedBy.value = $('#' + Node + '').attr('data-CreatedBy') == null ? '' : $('#' + Node + '').attr('data-CreatedBy');
+        txtCreatedAt.value = $('#' + Node + '').attr('data-CreatedAt') == null ? '' : $('#' + Node + '').attr('data-CreatedAt');
+        txtUpdatedBy.value = $('#' + Node + '').attr('data-UpdatedBy') == null ? '' : $('#' + Node + '').attr('data-UpdatedBy');
+        txtUpdatedAt.value = $('#' + Node + '').attr('data-UpdatedAt') == null ? '' : $('#' + Node + '').attr('data-UpdatedAt');
+        $('#txt_Type').prop('value', $('#' + Node + '').attr('data-acc_type') == '0' ? 'null' : $('#' + Node + '').attr('data-acc_type'));
         btnDelete.disabled = false;
         btnEdit.disabled = false;
         btnAdd.disabled = false;

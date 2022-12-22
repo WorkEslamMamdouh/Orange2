@@ -1772,7 +1772,7 @@ function OnClick_Tree() {
             $('' + ul + '').attr("aria-expanded", "true");
             $('' + ul + '').attr("style", "");
         }
-        else {
+        if (expanded == 'true') {
             $(this).attr("aria-expanded", "false");
             $(this).attr("class", "sign");
             var data_i = $(this).attr("data_i");

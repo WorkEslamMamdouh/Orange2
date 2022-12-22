@@ -2530,6 +2530,7 @@ namespace SlsTrSalesManagerNew {
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function searchItem(searchItemID: number, cnt: number) {
+        debugger
         $('#ddlItem' + cnt).val(searchItemID);
 
         let Type_inv = Number($('#ddlTypeInv' + cnt).val())
