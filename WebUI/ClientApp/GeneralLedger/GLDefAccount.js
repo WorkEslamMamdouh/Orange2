@@ -749,10 +749,10 @@ var GLDefAccount;
             RemoveDisabled();
             try {
                 if (x.length > 0) {
-                    txt_ACC_CODE.value = x[x.length - 1].ACC_CODE;
+                    txt_ACC_CODE.value = Sub_ACC_CODE(x[x.length - 1].ACC_CODE);
                 }
                 else {
-                    txt_ACC_CODE.value = ACC_CODE;
+                    txt_ACC_CODE.value = ACC_CODE + "01";
                 }
             }
             catch (e) {
@@ -767,6 +767,20 @@ var GLDefAccount;
             btnEdit.disabled = true;
             StatusFlag = 'i';
         }
+    }
+    function Sub_ACC_CODE(ACC_CODE_Str) {
+        var First_ACC_CODE = ACC_CODE_Str.substr(0, ACC_CODE_Str.length - 2);
+        var Last_ACC_CODE = ACC_CODE_Str.substr(ACC_CODE_Str.length - 2, ACC_CODE_Str.length);
+        if (Number(Last_ACC_CODE) >= 9) {
+            Last_ACC_CODE = (Number(Last_ACC_CODE) + 1).toString();
+        }
+        else {
+            Last_ACC_CODE = ('0' + (Number(Last_ACC_CODE) + 1)).toString();
+        }
+        var New_ACC_CODE = (First_ACC_CODE + Last_ACC_CODE);
+        return New_ACC_CODE;
+        //alert('New_ACC_CODE ' + New_ACC_CODE)
+        //alert('Last_ACC_CODE ' + Last_ACC_CODE)
     }
     function btnEdit_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
