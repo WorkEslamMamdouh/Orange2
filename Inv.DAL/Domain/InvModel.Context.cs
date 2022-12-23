@@ -5474,7 +5474,7 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_OperationExportList_Result>("IProc_Rpt_OperationExportList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter);
         }
     
-        public virtual ObjectResult<AProc_Rpt_GLFinancialStatment_Result> AProc_Rpt_GLFinancialStatment(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string fromDate, string toDate, string cc_Code, Nullable<int> level, Nullable<int> isAuthVchr, Nullable<int> isNewVchr, Nullable<int> exZero, Nullable<int> parentcollect, Nullable<int> repTyp)
+        public virtual ObjectResult<AProc_Rpt_GLFinancialStatment_Result> AProc_Rpt_GLFinancialStatment(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string fromDate, string toDate, string cc_Code, Nullable<int> level, Nullable<int> isAuthVchr, Nullable<int> isNewVchr, Nullable<int> exZero, Nullable<int> repTyp)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -5536,15 +5536,11 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("ExZero", exZero) :
                 new ObjectParameter("ExZero", typeof(int));
     
-            var parentcollectParameter = parentcollect.HasValue ?
-                new ObjectParameter("Parentcollect", parentcollect) :
-                new ObjectParameter("Parentcollect", typeof(int));
-    
             var repTypParameter = repTyp.HasValue ?
                 new ObjectParameter("RepTyp", repTyp) :
                 new ObjectParameter("RepTyp", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rpt_GLFinancialStatment_Result>("AProc_Rpt_GLFinancialStatment", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter, cc_CodeParameter, levelParameter, isAuthVchrParameter, isNewVchrParameter, exZeroParameter, parentcollectParameter, repTypParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rpt_GLFinancialStatment_Result>("AProc_Rpt_GLFinancialStatment", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter, cc_CodeParameter, levelParameter, isAuthVchrParameter, isNewVchrParameter, exZeroParameter, repTypParameter);
         }
     }
 }

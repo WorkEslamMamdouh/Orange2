@@ -32,7 +32,6 @@ namespace Inv.DAL.Domain
         public string Par_CCDESCE { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
-        public Nullable<int> Par_ParentCollect { get; set; }
         public Nullable<int> ID { get; set; }
         public string AccCode { get; set; }
         public Nullable<int> AccLEvel { get; set; }
@@ -53,7 +52,5 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> TotPrdCredit { get; set; }
         public Nullable<decimal> Tot_EndDebit { get; set; }
         public Nullable<decimal> Tot_EndCredit { get; set; }
-        public string ParAcc_DescA { get; set; }
-        public string ParAcc_DescE { get; set; }
     }
 }
