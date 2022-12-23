@@ -9,6 +9,7 @@ namespace AccDefExpenses {
     var TrType: number = 2;
     var MSG_ID: number;
     var Details: Array<A_RecPay_D_Accounts> = new Array<A_RecPay_D_Accounts>();
+    var DetailsModel: Array<A_RecPay_D_Accounts> = new Array<A_RecPay_D_Accounts>();
 
     var Details_Acount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
 
@@ -19,32 +20,31 @@ namespace AccDefExpenses {
     var btnEdit: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
     //var sys: _shared = new _shared();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccDefExpenses);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccDefReceipts);
     var Model: A_RecPay_D_Accounts = new A_RecPay_D_Accounts();
 
     var CountGrid = 0;
-    var compcode: number;//SharedSession.CurrentEnvironment.CompCode;
+    var compcode: Number;//SharedSession.CurrentEnvironment.CompCode;
     var btnBack_Def: HTMLButtonElement;
 
-    var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
+    var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = " حسابات المصروف ";
-            
+            document.getElementById('Screen_name').innerHTML = "  حسابات إلايراد ";
 
         } else {
-            document.getElementById('Screen_name').innerHTML = "expense accounts";
+            document.getElementById('Screen_name').innerHTML = "Revenue Accounts";
 
         }
-
         $('#icon-bar').addClass('hidden_Control');
         $('#divIconbar').addClass('hidden_Control');
-        $('#icon-bar').addClass('d-none');
+        $('#divIconbar').addClass('d-none');
         $('#iconbar_Definition').removeClass('hidden_Control');
         $("#divShow").removeClass("display_none");
+
 
         ////debugger;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -65,7 +65,8 @@ namespace AccDefExpenses {
             $('#btnBack_Def').removeClass("display_none");
             $("#div_ContentData :input").removeAttr("disabled");
             $("#btnUpdate_Def").addClass("display_none");
-        } 
+        }
+
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");
             $('#btnAddDetails').removeClass("display_none");
@@ -102,8 +103,8 @@ namespace AccDefExpenses {
     function InitalizeEvents() {
         ////debugger;
         btnAddDetails.onclick = AddNewRow;//
-        btnSave_Def.onclick = btnSave_onClick;
-        btnBack_Def.onclick = btnBack_Def_onclick;
+        btnSave_Def.onclick = btnsave_onClick;
+        btnBack_Def.onclick = btnback_onclick;
     }
 
     function AddNewRow() {
@@ -111,8 +112,12 @@ namespace AccDefExpenses {
         if (!SysSession.CurrentPrivileges.AddNew) return;
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
-            var LastRowNo = CountGrid - 1;
-            CanAdd = Validation_Grid(LastRowNo);
+            for (var i = 0; i < CountGrid; i++) {
+                CanAdd = Validation_Grid(i);
+                if (CanAdd == false) {
+                    break;
+                }
+            }
         }
         if (CanAdd) {
             BuildControls(CountGrid);
@@ -134,15 +139,17 @@ namespace AccDefExpenses {
         }
         $("#btnUpdate_Def").addClass("display_none");
 
+
+
         $(document).ready(function () {
             // Initialize select2
             $(".ddlAcc").select2();
- 
+
             // Read selected option
             $('#but_read').click(function () {
                 var username = $('.ddlAcc option:selected').text();
                 var userid = $('.ddlAcc').val();
- 
+
 
                 $('#result').html("id : " + userid + ", name : " + username);
             });
@@ -175,23 +182,22 @@ namespace AccDefExpenses {
 		                </div>
 	                </td>
                     <td>
-                        <div class="form-group">
-                            <select id="txtAcount_Code${cnt}" class="form-control ddlAcc"  disabled>
-			                    <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
-			                </select>
-                         </div>
+                        <select id="txtAcount_Code${cnt}" class="form-control ddlAcc"  disabled="disabled"> 
+			                <option value="Null">${(lang == "ar" ? "رقم الحساب" : "Account number")}</option>
+			            </select >
 	                </td>
                     
                <input id = "txt_StatusFlag${cnt}" name = " " type = "hidden" disabled class="form-control"/>
                <input id = "txt_ID${cnt}" name = " " type = "hidden" disabled class="form-control"/>
                 </tr>`;
+
         $("#div_Data").append(html);
 
         for (var i = 0; i < Details_Acount.length; i++) {
             //debugger;
 
 
-            $('#txtAcount_Code' + cnt).append('<option value="' + Details_Acount[i].ACC_CODE + '">' + (lang == "ar" ? Details_Acount[i].ACC_DESCA  : Details_Acount[i].ACC_DESCL) + '</option>');
+            $('#txtAcount_Code' + cnt).append('<option value="' + Details_Acount[i].ACC_CODE + '">' + (lang == "ar" ? Details_Acount[i].ACC_DESCA : Details_Acount[i].ACC_DESCL) + '</option>');
 
 
         }
@@ -233,8 +239,6 @@ namespace AccDefExpenses {
 
 
     function Display_Acount_Code() {
-        //var StkDefCategory: Array<G_USERS> = new Array<G_USERS>();
-        //debugger;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
@@ -244,23 +248,33 @@ namespace AccDefExpenses {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    //debugger
-                      Details_Acount = result.Response as Array<A_ACCOUNT>;
-                    
+                    Details_Acount = result.Response as Array<A_ACCOUNT>;
+
                 }
             }
         });
     }
 
-    function btnSave_onClick() {
+    function btnsave_onClick() {
         ////debugger;
         loading('btnSave_Def');
 
-        setTimeout(function () {    
-            finishSave('btnSave_Def');  
-        if (Validation_Grid(CountGrid - 1))
-            Update();
-    }, 100);
+        setTimeout(function () {
+            finishSave('btnSave_Def');
+
+            var CanAdd: boolean = true;
+            if (CountGrid > 0) {
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
+                }
+            }
+            if (CanAdd) {
+                Update();
+            }
+        }, 100);
     }
 
     function refresh() {
@@ -277,40 +291,27 @@ namespace AccDefExpenses {
     function Update() {
         Assign();
 
-        //debugger;
-        if (Details.filter(x => x.ExpCode == 0).length > 0) {
-            WorningMessage("يجب ادخال الكود!", "must enter Code!", "تحذير", "worning");
 
-            return;
+        if (DetailsModel.length > 0) {
+            DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+            DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            DetailsModel[0].MODULE_CODE = Modules.AccDefReceipts;
+            DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
-        if (Details.filter(x => x.ExpDescA == "").length > 0) {
-            WorningMessage(" يجب ادخال الوصف باعربي!", "must enter arabic describtion!", "تحذير", "worning");
-            return;
-        }
-        if (Details.filter(x => x.ExpAccountCode == "0").length > 0) {
-            WorningMessage(" يجب ادخال رقم الحساب!", "must enter Account number!", "تحذير", "worning");
-            return;
-        }
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Details[0].MODULE_CODE = Modules.AccDefExpenses;
-        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
-
-        //debugger;
         Ajax.Callsync({
 
             type: "POST",
             url: sys.apiUrl("AccDefAccounts", "UpdateLst"),
-            data: JSON.stringify(Details),
+            data: JSON.stringify(DetailsModel),
             success: (d) => {
                 //debugger
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
                     MessageBox.Show("تم الحفظ", "الحفظ");
-                    btnBack_Def_onclick();
+                    btnback_onclick();
                     refresh();
                     Save_Succ_But();
                 }
@@ -325,20 +326,16 @@ namespace AccDefExpenses {
     function Assign() {
         var StatusFlag: String;
         for (var i = 0; i < CountGrid; i++) {
+            DetailsModel = new Array<A_RecPay_D_Accounts>();
             Model = new A_RecPay_D_Accounts();
 
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
-            //debugger;
 
 
             if (StatusFlag == "i") {
                 Model.StatusFlag = StatusFlag.toString();
                 Model.ExpenseID = 0;
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
-                //Model.AccountType = Number(AccountType);
-                //Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
-                //Model.UpdatedBy = "";
                 Model.TrType = Number(TrType);
                 Model.ExpCode = $("#txtCode" + i).val();
                 if ($("#txtDescA" + i).val() == "") {
@@ -361,46 +358,68 @@ namespace AccDefExpenses {
                 else {
                     Model.ExpAccountCode = $("#txtAcount_Code" + i).val();
                 }
-                Details.push(Model);
+                DetailsModel.push(Model);
 
-
-
-
-                //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
 
-
-                var UpdatedDetail = Details.filter(x => x.ExpenseID == $("#txt_ID" + i).val())
-                //UpdatedDetail[0].UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-                UpdatedDetail[0].StatusFlag = StatusFlag.toString();
-                UpdatedDetail[0].ExpCode = $("#txtCode" + i).val();
-                UpdatedDetail[0].TrType = Number(TrType);
-                if ($("#txtAcount_Code" + i).val() == "Null") {
-                    UpdatedDetail[0].ExpAccountCode = "0";
-                }
-                else {
-                    UpdatedDetail[0].ExpAccountCode = $("#txtAcount_Code" + i).val();
-                }
+                Model.StatusFlag = StatusFlag.toString();
+                Model.ExpenseID = Number($("#txt_ID" + i).val());
+                Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                Model.TrType = Number(TrType);
+                Model.ExpCode = $("#txtCode" + i).val();
                 if ($("#txtDescA" + i).val() == "") {
-                    UpdatedDetail[0].ExpDescA = $("#txtDescL" + i).val();
+                    Model.ExpDescA = $("#txtDescL" + i).val();
                     $("#txtDescA" + i).val($("#txtDescL" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].ExpDescA = $("#txtDescA" + i).val();
+                    Model.ExpDescA = $("#txtDescA" + i).val();
                 }
                 if ($("#txtDescL" + i).val() == "") {
-                    UpdatedDetail[0].ExpDescE = $("#txtDescA" + i).val();
+                    Model.ExpDescE = $("#txtDescA" + i).val();
                     $("#txtDescL" + i).val($("#txtDescA" + i).val());
                 }
                 else {
-                    UpdatedDetail[0].ExpDescE = $("#txtDescL" + i).val();
+                    Model.ExpDescE = $("#txtDescL" + i).val();
                 }
+                if ($("#txtAcount_Code" + i).val() == "Null") {
+                    Model.ExpAccountCode = "0";
+                }
+                else {
+                    Model.ExpAccountCode = $("#txtAcount_Code" + i).val();
+                }
+                DetailsModel.push(Model);
+
+
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(x => x.ExpenseID == $("#txt_ID" + i).val())
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = StatusFlag.toString();
+                    Model.ExpenseID = Number($("#txt_ID" + i).val());
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                    Model.TrType = Number(TrType);
+                    Model.ExpCode = $("#txtCode" + i).val();
+                    if ($("#txtDescA" + i).val() == "") {
+                        Model.ExpDescA = $("#txtDescL" + i).val();
+                        $("#txtDescA" + i).val($("#txtDescL" + i).val());
+                    }
+                    else {
+                        Model.ExpDescA = $("#txtDescA" + i).val();
+                    }
+                    if ($("#txtDescL" + i).val() == "") {
+                        Model.ExpDescE = $("#txtDescA" + i).val();
+                        $("#txtDescL" + i).val($("#txtDescA" + i).val());
+                    }
+                    else {
+                        Model.ExpDescE = $("#txtDescL" + i).val();
+                    }
+                    if ($("#txtAcount_Code" + i).val() == "Null") {
+                        Model.ExpAccountCode = "0";
+                    }
+                    else {
+                        Model.ExpAccountCode = $("#txtAcount_Code" + i).val();
+                    }
+                    DetailsModel.push(Model);
                 }
 
             }
@@ -468,15 +487,16 @@ namespace AccDefExpenses {
 
         }
 
+
         $(document).ready(function () {
             // Initialize select2
             $(".ddlAcc").select2();
- 
+
             // Read selected option
             $('#but_read').click(function () {
                 var username = $('.ddlAcc option:selected').text();
                 var userid = $('.ddlAcc').val();
- 
+
 
                 $('#result').html("id : " + userid + ", name : " + username);
             });
@@ -487,16 +507,14 @@ namespace AccDefExpenses {
 
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
-            //debugger;
+            $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
 
-            $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('') : $("#txt_StatusFlag" + RecNo).val('d');
-
-            $("#No_Row" + RecNo).attr("hidden", "true"); 
+            $("#No_Row" + RecNo).attr("hidden", "true");
             $("#txtCode" + RecNo).val("000");
         });
     }
 
-    function btnBack_Def_onclick() {
+    function btnback_onclick() {
 
         $('#btnAddDetails').addClass("display_none");
         $('#btnSave_Def').addClass("display_none");
@@ -514,19 +532,49 @@ namespace AccDefExpenses {
 
     function Validation_Grid(rowcount: number) {
 
-        if ($("#txtDescA" + rowcount).val() == "") {
-            $("#txtDescA" + rowcount).val($("#txtDescL" + rowcount).val());
-        }
-        if ($("#txtDescL" + rowcount).val() == "") {
-            $("#txtDescL" + rowcount).val($("#txtDescL" + rowcount).val());
+        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+            return true;
         }
 
-        if (
-            ($("#txtCode" + rowcount).val() == "" || $("#txtDescA" + rowcount).val() == "" || $("#txtAcount_Code" + rowcount).val() == "Null")
-            && $("#txt_StatusFlag" + rowcount).val() != "d") {
-            WorningMessage("ادخل كود و الوصف العربي واختار رقم الحساب!", "Enter the Arabic code and description and choose the account number!", "تحذير", "worning");
-        return false;
+        if ($("#txtDescA" + rowcount).val().trim() == "") {
+            $("#txtDescA" + rowcount).val($("#txtDescL" + rowcount).val());
         }
+        if ($("#txtDescL" + rowcount).val().trim() == "") {
+            $("#txtDescL" + rowcount).val($("#txtDescL" + rowcount).val());
+        }
+        if (($("#txtCode" + rowcount).val().trim() == "")) {
+            if (lang == "ar") {
+                MessageBox.Show(" ادخل كود ", "خطأ");
+            }
+            else {
+                MessageBox.Show(" Must Enter Code", "Error");
+            }
+            Errorinput($("#txtCode" + rowcount));
+            return false;
+        }
+        if (($("#txtDescA" + rowcount).val().trim() == "")) {
+            if (lang == "ar") {
+                MessageBox.Show(" ادخل الوصف العربي", "خطأ");
+            }
+            else {
+                MessageBox.Show(" Must Arabic describtion ", "Error");
+            }
+            Errorinput($("#txtDescA" + rowcount));
+
+            return false;
+        }
+        if (($("#txtAcount_Code" + rowcount).val() == "Null")) {
+            if (lang == "ar") {
+                MessageBox.Show(" ادخل اختار رقم الحساب", "خطأ");
+            }
+            else {
+                MessageBox.Show(" Must select Account number", "Error");
+            }
+            Errorinput($("#txtAcount_Code" + rowcount));
+
+            return false;
+        }
+
         return true;
     }
 
@@ -535,7 +583,7 @@ namespace AccDefExpenses {
         for (var i = 0; i < CountGrid; i++) {
             if (i != rowno) {
 
-                if ($("#txt_StatusFlag" + i).val() == "d") {
+                if ($("#txt_StatusFlag" + i).val() == "d" || $("#txt_StatusFlag" + i).val() == "m") {
                     return true;
 
                 }
@@ -549,7 +597,6 @@ namespace AccDefExpenses {
                 }
             }
         }
-        if ($("#txt_StatusFlag" + rowno).val() != "i") $("#txt_StatusFlag" + rowno).val("u");
         return true;
     }
 

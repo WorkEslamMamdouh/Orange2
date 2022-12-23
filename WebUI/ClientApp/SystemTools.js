@@ -170,8 +170,7 @@ var SystemTools = /** @class */ (function () {
                 $("#SearchDataTable").css("height", "100%");
             }
         });
-        //$("#SearchDataTable_filter label input").addClass('display_none');
-        debugger;
+        //$("#SearchDataTable_filter label input").addClass('display_none'); 
         $("#SearchDataTable_filter label input").focus();
         setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 400);
         setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 800);

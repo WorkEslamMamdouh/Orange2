@@ -4065,8 +4065,7 @@ namespace CloseProcesses {
 
 
             Calculation_Close();
-
-
+             
         }
         else {
             DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
@@ -5856,7 +5855,8 @@ namespace CloseProcesses {
                     $("#nameitem").text(nameGlopl);
                     flag_Success_2 = false;
                     $("#DivHederMaster").removeClass("disabledDiv");
-                    $("#div_MasterGird").removeClass("disabledDiv");
+                    $("#div_MasterGird").removeClass("disabledDiv"); 
+                    Update_2 = false;
                 }
                 else {
                     DisplayMassage("خطأء!", "Error!", MessageType.Worning);

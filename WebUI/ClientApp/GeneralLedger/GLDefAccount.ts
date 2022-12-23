@@ -94,10 +94,13 @@ namespace GLDefAccount {
         //    $("#txtCCDT_Type").addClass("display_none");
         //    $("#LabelCCDT_Type").addClass("display_none");
         //}
-        OnClick_Tree();
+        OnClick_TreeData();
 
-    }
-    
+
+        
+
+         
+    } 
     function InitalizeControls() {
         //--- Print Buttons
 
@@ -169,17 +172,62 @@ namespace GLDefAccount {
 
       
     }
+    function OnClick_TreeData() {
+        $('span').on('click', function () {
 
+            //let ul = $(this).attr("href");
+            //alert($('' + ul + '').attr("class"))
+            debugger
+            let expanded = $(this).attr("aria-expanded");
+
+            if (expanded == 'false') {
+
+                $(this).attr("aria-expanded", "true")
+                $(this).attr("class", "sign")
+                let data_i = $(this).attr("data_i");
+                let ul = $(this).attr("href");
+                //alert($('' + ul + '').attr("class"))
+
+                $('#' + data_i + '').attr("class", "fas fa-minus-circle")
+                $('' + ul + '').attr("class", "children nav-child unstyled small ---")
+                $('' + ul + '').attr("aria-expanded", "true")
+                $('' + ul + '').attr("style", "")
+
+                let node = $(this).attr("node");
+                click_in_labl(node);
+            }
+            if (expanded == 'true') {
+
+                $(this).attr("aria-expanded", "false")
+                $(this).attr("class", "sign")
+                let data_i = $(this).attr("data_i");
+                let ul = $(this).attr("href");
+
+                $('#' + data_i + '').attr("class", "fas fa-plus-circle")
+
+                $('' + ul + '').attr("class", "children nav-child unstyled small collapse in")
+                $('' + ul + '').attr("aria-expanded", "false")
+                $('' + ul + '').attr("style", "height: 0px;")
+
+                let node = $(this).attr("node");
+                click_in_labl(node);
+
+            }
+
+
+        });
+
+    }
     function txt_Search_onkeyup() {
         $('#menu-group-1').html('');
         if (txt_Search.value.trim() == '') {
             Display();
-            OnClick_Tree();
+            OnClick_TreeData();
 
         }
         else {
             Displayfilter();
-            OnClick_Tree();
+            OnClick_TreeData();
 
         }
 
@@ -195,7 +243,7 @@ namespace GLDefAccount {
         btnDelete.disabled = true;
         btnEdit.disabled = true;
         btnAdd.disabled = true;
-        OnClick_Tree();
+        OnClick_TreeData();
 
     }
     function Display_GCodes() {
@@ -344,6 +392,7 @@ namespace GLDefAccount {
         span_1.setAttribute('class', 'sign collapsed');
         span_1.setAttribute('aria-expanded', 'true');
         span_1.setAttribute('Data_I', 'i_' + Node);
+        span_1.setAttribute('Node',  Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);
@@ -389,8 +438,12 @@ namespace GLDefAccount {
         document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
 
         try {
+             
+            //$('#' + Node + '').click(click_in_labl);
 
-            $('#' + Node + '').click(click_in_labl);
+            $("#" + Node + "").on('click', function () {
+                click_in_labl(Node);
+            });
         } catch (e) {
 
             alert(Node);
@@ -575,6 +628,7 @@ namespace GLDefAccount {
         span_1.setAttribute('class', 'sign collapsed');
         span_1.setAttribute('aria-expanded', 'false');
         span_1.setAttribute('Data_I', 'i_' + Node);
+        span_1.setAttribute('Node', Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);
@@ -619,9 +673,18 @@ namespace GLDefAccount {
         document.getElementById('a_' + Node).appendChild(span_2);
         document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
 
+
+ 
+
+
         try {
 
-            $('#' + Node + '').click(click_in_labl);
+            //$('#' + Node + '').click(click_in_labl);
+
+            $("#" + Node + "").on('click', function () {
+                click_in_labl(Node);
+            });
+             
         } catch (e) {
 
             alert(Node);
@@ -637,56 +700,56 @@ namespace GLDefAccount {
         //------------------------------------------------------------------------------
 
     }
-    function click_in_labl() {
-
-        ACC_CODE = $(this).attr('data-ACC_CODE');
+    function click_in_labl(Node: string) {
+        debugger
+        ACC_CODE = $('#' + Node + '').attr('data-ACC_CODE');
 
         DetAccLst = new Array<AQ_GetAccount>();
-        DetAccLst = Details_ACCOUNT.filter(x => x.ACC_CODE == $(this).attr('data-NodeParent'));
+        DetAccLst = Details_ACCOUNT.filter(x => x.ACC_CODE == $('#' + Node + '').attr('data-NodeParent'));
         // 
-        if ($(this).attr('data-NodeParent') == 'null' || $(this).attr('data-NodeParent') == '0') {
-            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? $(this).attr('data-NAME_A') : $(this).attr('data-NAME_E');
+        if ($('#' + Node + '').attr('data-NodeParent') == 'null' || $('#' + Node + '').attr('data-NodeParent') == '0') {
+            NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? $('#' + Node + '').attr('data-NAME_A') : $('#' + Node + '').attr('data-NAME_E');
             Name_Acc.innerHTML = "" + NAME + " ( " + ACC_CODE + " )";
-            Name_Acc.setAttribute('data-level', $(this).attr('data-level'));
+            Name_Acc.setAttribute('data-level', $('#' + Node + '').attr('data-level'));
         }
         else {
 
 
 
             NAME = SysSession.CurrentEnvironment.ScreenLanguage == "ar" ? DetAccLst[0].ACC_DESCA : DetAccLst[0].ACC_DESCL;
-            Name_Acc.innerHTML = "" + NAME + " ( " + $(this).attr('data-NodeParent') + " )";
-            Name_Acc.setAttribute('data-level', $(this).attr('data-level'));
+            Name_Acc.innerHTML = "" + NAME + " ( " + $('#' + Node + '').attr('data-NodeParent') + " )";
+            Name_Acc.setAttribute('data-level', $('#' + Node + '').attr('data-level'));
 
 
         }
 
 
-        var ACC_TYPE = Number($(this).attr('data-ACC_TYPE'));
-        var ACC_GROUP = $(this).attr('data-ACC_GROUP');
+        var ACC_TYPE = Number($('#' + Node + '').attr('data-ACC_TYPE'));
+        var ACC_GROUP = $('#' + Node + '').attr('data-ACC_GROUP');
         Display_Type(ACC_TYPE, ACC_GROUP);
 
-        txt_ACC_CODE.value = $(this).attr('data-ACC_CODE');
-        txt_NAME_A.value = $(this).attr('data-NAME_A');
-        txt_NAME_E.value = $(this).attr('data-NAME_E');
-        txt_note.value = $(this).attr('data-REMARKS');
-        txt_level.value = $(this).attr('data-level');
-        txt_Debit.value = $(this).attr('data-Debit');
-        txt_DebitFC.value = $(this).attr('data-DebitFC');
-        //txtCCDT_Type.value = $(this).attr('data-CCDT_Type');
-        txt_Openbalance.value = $(this).attr('data-Openbalance');
-        txt_CreditLimit.value = $(this).attr('data-CreditLimit');
+        txt_ACC_CODE.value = $('#' + Node + '').attr('data-ACC_CODE');
+        txt_NAME_A.value = $('#' + Node + '').attr('data-NAME_A');
+        txt_NAME_E.value = $('#' + Node + '').attr('data-NAME_E');
+        txt_note.value = $('#' + Node + '').attr('data-REMARKS');
+        txt_level.value = $('#' + Node + '').attr('data-level');
+        txt_Debit.value = $('#' + Node + '').attr('data-Debit');
+        txt_DebitFC.value = $('#' + Node + '').attr('data-DebitFC');
+        //txtCCDT_Type.value = $('#' + Node + '').attr('data-CCDT_Type');
+        txt_Openbalance.value = $('#' + Node + '').attr('data-Openbalance');
+        txt_CreditLimit.value = $('#' + Node + '').attr('data-CreditLimit');
         txt_balance.value = ((Number(txt_Openbalance.value) + Number(txt_Debit.value)) - Number(txt_DebitFC.value)).toString();
-        chkeck_Detailed.checked = $(this).attr('data-detail') == '1' ? true : false;
-        chkeck_active.checked = $(this).attr('data-ACTIVE') == 'true' ? true : false;
+        chkeck_Detailed.checked = $('#' + Node + '').attr('data-detail') == '1' ? true : false;
+        chkeck_active.checked = $('#' + Node + '').attr('data-ACTIVE') == 'true' ? true : false;
 
 
-        txtCreatedBy.value = $(this).attr('data-CreatedBy') == null ? '' : $(this).attr('data-CreatedBy');
-        txtCreatedAt.value = $(this).attr('data-CreatedAt') == null ? '' : $(this).attr('data-CreatedAt');
+        txtCreatedBy.value = $('#' + Node + '').attr('data-CreatedBy') == null ? '' : $('#' + Node + '').attr('data-CreatedBy');
+        txtCreatedAt.value = $('#' + Node + '').attr('data-CreatedAt') == null ? '' : $('#' + Node + '').attr('data-CreatedAt');
 
-        txtUpdatedBy.value = $(this).attr('data-UpdatedBy') == null ? '' : $(this).attr('data-UpdatedBy');
-        txtUpdatedAt.value = $(this).attr('data-UpdatedAt') == null ? '' : $(this).attr('data-UpdatedAt');
+        txtUpdatedBy.value = $('#' + Node + '').attr('data-UpdatedBy') == null ? '' : $('#' + Node + '').attr('data-UpdatedBy');
+        txtUpdatedAt.value = $('#' + Node + '').attr('data-UpdatedAt') == null ? '' : $('#' + Node + '').attr('data-UpdatedAt');
 
-        $('#txt_Type').prop('value', $(this).attr('data-acc_type') == '0' ? 'null' : $(this).attr('data-acc_type'));
+        $('#txt_Type').prop('value', $('#' + Node + '').attr('data-acc_type') == '0' ? 'null' : $('#' + Node + '').attr('data-acc_type'));
 
 
         btnDelete.disabled = false;
@@ -929,10 +992,11 @@ namespace GLDefAccount {
             try {
 
                 if (x.length > 0) {
-                    txt_ACC_CODE.value = x[x.length - 1].ACC_CODE;
+                   
+                    txt_ACC_CODE.value = Sub_ACC_CODE(x[x.length - 1].ACC_CODE);
                 }
                 else {
-                    txt_ACC_CODE.value = ACC_CODE;
+                    txt_ACC_CODE.value = ACC_CODE+"01";
                 }
 
             } catch (e) {
@@ -950,6 +1014,26 @@ namespace GLDefAccount {
             btnEdit.disabled = true;
             StatusFlag = 'i';
         }
+    }
+    function Sub_ACC_CODE(ACC_CODE_Str: string): string{
+
+        let First_ACC_CODE = ACC_CODE_Str.substr(0, ACC_CODE_Str.length - 2); 
+
+        let Last_ACC_CODE = ACC_CODE_Str.substr(ACC_CODE_Str.length - 2, ACC_CODE_Str.length); 
+
+        if (Number(Last_ACC_CODE) >= 9) {
+
+            Last_ACC_CODE = (Number(Last_ACC_CODE) + 1).toString()
+        }
+        else {
+            Last_ACC_CODE = ('0'+(Number(Last_ACC_CODE) + 1)).toString()
+        }
+
+        let New_ACC_CODE = (First_ACC_CODE + Last_ACC_CODE)
+
+        return New_ACC_CODE;
+        //alert('New_ACC_CODE ' + New_ACC_CODE)
+        //alert('Last_ACC_CODE ' + Last_ACC_CODE)
     }
     function btnEdit_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
