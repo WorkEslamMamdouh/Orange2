@@ -1002,7 +1002,7 @@ namespace Inv.WebUI.Controllers
                         Rep = OpenReport("Rpt_Prnt_SlsInvoiceSimpleVer2");
                     }
 
-
+ 
                 }
             }
 

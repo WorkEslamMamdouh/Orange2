@@ -678,11 +678,13 @@ var LnkTransVoucher;
         }
     }
     function updatelist() {
-        TransVoucher_details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        TransVoucher_details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        TransVoucher_details[0].MODULE_CODE = Modules.SlsTrSalesManagerNew;
-        TransVoucher_details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        TransVoucher_details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        if (TransVoucher_details.length > 0) {
+            TransVoucher_details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            TransVoucher_details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            TransVoucher_details[0].MODULE_CODE = Modules.SlsTrSalesManagerNew;
+            TransVoucher_details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            TransVoucher_details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        }
         Ajax.Callsync({
             type: "Post",
             url: sys.apiUrl("G_LnkTransVoucher", "Updatelsit"),

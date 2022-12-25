@@ -1034,7 +1034,6 @@ namespace AccDefVendor {
         $("#div_Data").html('');
         CountGrid = 0;
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
 
         if (showAfterInsertOrUpdate == true) {
             Selecteditem = Details.IQ_GetVendor.filter(x => x.VendorID == GlobalVendorID);
@@ -1046,6 +1045,9 @@ namespace AccDefVendor {
             else chkActive.checked = false;
 
         }
+
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear, Selecteditem[0].VendorID);
+
         DisplayData(Selecteditem);
         $('#btnUpdate').removeClass("display_none");
 
@@ -1127,10 +1129,10 @@ namespace AccDefVendor {
             $('#txt_CustName').val('');
             PurchaserId = null;
         }
-        $('#txt_Openbalance').val(Selecteditem[0].Openbalance.RoundToSt(2));
-        $('#txt_balance').val(Selecteditem[0].Balance.RoundToSt(2));
-        $('#txt_Debit').val(Selecteditem[0].Debit.RoundToSt(2));
-        $('#txt_DebitFC').val(Selecteditem[0].Credit.RoundToSt(2));
+        $('#txt_Openbalance').val(setVal(Selecteditem[0].Openbalance));
+        $('#txt_balance').val(setVal(Selecteditem[0].Balance) );
+        $('#txt_Debit').val(setVal(Selecteditem[0].Debit) );
+        $('#txt_DebitFC').val(setVal(Selecteditem[0].Credit) );
 
         debugger
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
