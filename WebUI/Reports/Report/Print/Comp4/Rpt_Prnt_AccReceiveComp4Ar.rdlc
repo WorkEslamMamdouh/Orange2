@@ -705,7 +705,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>1.05128cm</Top>
-        <Left>10.53666cm</Left>
+        <Left>9.58416cm</Left>
         <Height>0.6cm</Height>
         <Width>2.55086cm</Width>
         <ZIndex>19</ZIndex>
@@ -739,7 +739,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>1.77963cm</Top>
-        <Left>10.53666cm</Left>
+        <Left>9.58416cm</Left>
         <Height>0.6cm</Height>
         <Width>2.56173cm</Width>
         <ZIndex>20</ZIndex>
@@ -876,7 +876,7 @@
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>1.05128cm</Top>
-        <Left>7.15185cm</Left>
+        <Left>6.19935cm</Left>
         <Height>0.6cm</Height>
         <Width>3.39893cm</Width>
         <ZIndex>24</ZIndex>
@@ -952,7 +952,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBoxID.Value, "Rpt_Prnt_AccReceiveComp4Ar")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveComp4Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -963,9 +963,9 @@
         </Paragraphs>
         <rd:DefaultName>CashBox_DescA</rd:DefaultName>
         <Top>1.76064cm</Top>
-        <Left>14.359cm</Left>
+        <Left>12.44402cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.42309cm</Width>
+        <Width>5.33806cm</Width>
         <ZIndex>26</ZIndex>
         <Style>
           <Border>
@@ -1016,7 +1016,7 @@
         </Paragraphs>
         <rd:DefaultName>Type_DescA</rd:DefaultName>
         <Top>1.77963cm</Top>
-        <Left>7.15185cm</Left>
+        <Left>6.19935cm</Left>
         <Height>0.6cm</Height>
         <Width>3.39893cm</Width>
         <ZIndex>27</ZIndex>

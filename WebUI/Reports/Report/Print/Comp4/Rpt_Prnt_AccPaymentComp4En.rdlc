@@ -350,8 +350,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Top>1.62658cm</Top>
-            <Left>7.41211cm</Left>
+            <Top>2.39592cm</Top>
+            <Left>14.74532cm</Left>
             <Height>0.6cm</Height>
             <Width>2.71813cm</Width>
             <ZIndex>1</ZIndex>
@@ -637,59 +637,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="CashBox_DescE">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CashBox_DescE.Value, "Rpt_Prnt_AccPaymentComp4En")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>CashBox_DescE</rd:DefaultName>
-            <Top>1.62658cm</Top>
-            <Left>3.14702cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.18395cm</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-              </Border>
-              <TopBorder>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </LeftBorder>
-              <RightBorder>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-                <Width>1pt</Width>
-              </RightBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Status">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -711,7 +658,7 @@
             <Left>17.52448cm</Left>
             <Height>0.6cm</Height>
             <Width>2.4849cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -766,7 +713,7 @@
             <Left>10.13024cm</Left>
             <Height>0.6cm</Height>
             <Width>4.50925cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -801,7 +748,7 @@
             <Left>3.14702cm</Left>
             <Height>0.6cm</Height>
             <Width>4.18042cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -830,11 +777,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TrType</rd:DefaultName>
-            <Top>1.62658cm</Top>
-            <Left>10.13024cm</Left>
+            <Top>2.39592cm</Top>
+            <Left>17.52448cm</Left>
             <Height>0.6cm</Height>
-            <Width>4.50925cm</Width>
-            <ZIndex>14</ZIndex>
+            <Width>2.45317cm</Width>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -887,7 +834,7 @@
             <Left>2.41438cm</Left>
             <Height>0.6cm</Height>
             <Width>3.0533cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -940,7 +887,7 @@
             <Left>3.14702cm</Left>
             <Height>1.26146cm</Height>
             <Width>16.83061cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -992,8 +939,8 @@
             <Top>2.40886cm</Top>
             <Left>7.50736cm</Left>
             <Height>0.6cm</Height>
-            <Width>12.47028cm</Width>
-            <ZIndex>17</ZIndex>
+            <Width>7.13213cm</Width>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1048,7 +995,7 @@
             <Left>17.55976cm</Left>
             <Height>0.6cm</Height>
             <Width>2.41788cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1079,7 +1026,7 @@
             <Left>3.14702cm</Left>
             <Height>1.235cm</Height>
             <Width>16.83061cm</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1132,7 +1079,7 @@
             <Left>3.14702cm</Left>
             <Height>0.6cm</Height>
             <Width>4.18395cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1187,7 +1134,7 @@
             <Left>5.24274cm</Left>
             <Height>0.6cm</Height>
             <Width>2.05812cm</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1221,7 +1168,7 @@
             <Left>14.93773cm</Left>
             <Height>0.6cm</Height>
             <Width>2.10574cm</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1255,7 +1202,7 @@
             <Left>5.30271cm</Left>
             <Height>0.6cm</Height>
             <Width>1.8394cm</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1289,7 +1236,7 @@
             <Left>14.982cm</Left>
             <Height>0.6cm</Height>
             <Width>1.99797cm</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1323,7 +1270,7 @@
             <Left>3.45626cm</Left>
             <Height>0.6cm</Height>
             <Width>1.84645cm</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1357,7 +1304,7 @@
             <Left>3.45626cm</Left>
             <Height>0.6cm</Height>
             <Width>1.84645cm</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1391,7 +1338,7 @@
             <Left>13.11054cm</Left>
             <Height>0.6cm</Height>
             <Width>1.84645cm</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1425,7 +1372,7 @@
             <Left>13.13555cm</Left>
             <Height>0.6cm</Height>
             <Width>1.84645cm</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1459,7 +1406,7 @@
             <Left>5.30271cm</Left>
             <Height>0.6cm</Height>
             <Width>1.8394cm</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1493,7 +1440,7 @@
             <Left>14.982cm</Left>
             <Height>0.6cm</Height>
             <Width>1.99797cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1666,7 +1613,7 @@
             <Left>0.43553cm</Left>
             <Height>0.63528cm</Height>
             <Width>19.67434cm</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>30</ZIndex>
             <Visibility>
               <Hidden>=IIf(Fields!CashType.Value = 1 Or Fields!CashType.Value = 2, False, True)</Hidden>
             </Visibility>
@@ -1835,7 +1782,7 @@
             <Left>6.8435cm</Left>
             <Height>0.63881cm</Height>
             <Width>13.13414cm</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Visibility>
               <Hidden>=IIf(Fields!CashType.Value &gt;= 1, False, True)</Hidden>
             </Visibility>
@@ -2088,7 +2035,7 @@
             <Left>0.17147in</Left>
             <Height>0.6cm</Height>
             <Width>19.54211cm</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Visibility>
               <Hidden>=IIf(Fields!CashType.Value &gt;= 3, False, True)</Hidden>
             </Visibility>
@@ -2121,7 +2068,7 @@
             <Left>0.43553cm</Left>
             <Height>0.6cm</Height>
             <Width>2.71149cm</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2155,7 +2102,7 @@
             <Left>3.14702cm</Left>
             <Height>0.6cm</Height>
             <Width>16.83061cm</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -2192,11 +2139,64 @@
             <Left>0.31631cm</Left>
             <Height>0.68819cm</Height>
             <Width>19.69307cm</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Bef_DescE2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CashBox_DescE.Value, "Rpt_Prnt_AccPaymentComp4En")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Bef_DescE</rd:DefaultName>
+            <Top>1.60895cm</Top>
+            <Left>3.14702cm</Left>
+            <Height>0.6cm</Height>
+            <Width>11.39722cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Color>Gray</Color>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Gray</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Gray</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Gray</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Gray</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
