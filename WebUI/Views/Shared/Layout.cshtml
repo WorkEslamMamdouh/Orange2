@@ -915,7 +915,7 @@
                 </div>
             </nav>
             <!-- partial -->
-            <div class="main-panel animate__animated animate__bounceInUp" id="PageLodes">
+            <div class="main-panel" id="PageLodes">
                 <div class="content-wrapper">
                     @* Error Alert Message *@
                     <div id="DivMassage" class="d-flex justify-content-center display_none">
@@ -928,8 +928,9 @@
                             </div>
                         </div>
                     </div>
-
-                    @RenderBody()
+                    @*<div class="animate__animated animate__bounceIn" >*@
+                        @RenderBody()
+                    @*</div>*@
                     <!--Back To Top-->
                     <div class="top-container">
                         <a href="#" class="back-to-top">

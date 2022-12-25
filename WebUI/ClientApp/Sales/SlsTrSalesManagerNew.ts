@@ -214,7 +214,7 @@ namespace SlsTrSalesManagerNew {
     export function InitalizeComponent() {
 
         //alert()
-        //alert()
+        alert(SysSession.CurrentEnvironment.SerialNumber);
 
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
@@ -3102,6 +3102,7 @@ namespace SlsTrSalesManagerNew {
             var txtPriceValue = $("#txtPrice" + cnt).val();
             var total = 0;
 
+            debugger
 
             let Onhand_Qty = Number($("#ddlItem" + cnt).attr('data-OnhandQty'))
             if (isNaN(Onhand_Qty)) {
@@ -3109,8 +3110,8 @@ namespace SlsTrSalesManagerNew {
                 Errorinput($("#Code_Item" + cnt));
                 $("#txtQuantity" + cnt).val("1");
             } else {
-                if (txtQuantityValue > Onhand_Qty) {
-                    DisplayMassage("خطأ الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Error);
+                if (Number(txtQuantityValue) > Onhand_Qty) {
+                    DisplayMassage("تنبيه الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Worning);
 
                     //if (SysSession.CurrentEnvironment.I_Control[0].ExceedOnhandQty != 1) { // invoice, send tf , direct tf                         
 

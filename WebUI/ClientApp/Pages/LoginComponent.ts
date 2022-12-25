@@ -177,6 +177,7 @@ var LoginComponent;
                         SystemEnv.SalesManID = result.SalesManID;
                         SystemEnv.CashBoxID = result.CashBoxID;
                         SystemEnv.StoreID = result.StoreID;
+              
                         document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                         Ajax.Callsync({
                             type: "GET",
@@ -327,7 +328,9 @@ var LoginComponent;
                                                 //SystemEnv.SalesPriceWithVAT = CompanyService[0].SalesPriceWithVAT; 
                                                 //SystemEnv.IsLocalBranchCustomer = CompanyService[0].IsLocalBranchCustomer; 
                                                 //SystemEnv.GL_VoucherCCDT_Type = CompanyService[0].GL_VoucherCCDT_Type; 
-
+                                                debugger
+                                                //SystemEnv.SerialNumber = GetSerialNumber();
+                                                debugger
                                                 let IsLocalSalePrice = false; 
                                                 IsLocalSalePrice = CompanyService[0].IsLocalSalePrice 
                                                  
@@ -373,9 +376,20 @@ var LoginComponent;
 
 
 
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url: Url.Action("GetSerialNumber", "Home"),
+                                                    success: (d) => {
+                                                        debugger
+                                                        let result = d.trim();
+                                                        let res = result.replace("SerialNumber", "");
+                                                        SystemEnv.SerialNumber = res.trim();
+                                                        document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                        OnLogged();
 
-                                                document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                                                OnLogged();
+                                                    }
+                                                })
+                                             
                                             }
                                             else {
                                                 var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول للنظام" : "You are not allowed to login";

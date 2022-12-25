@@ -174,7 +174,7 @@ var SlsTrSalesManagerNew;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
         //alert()
-        //alert()
+        alert(SysSession.CurrentEnvironment.SerialNumber);
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -2341,6 +2341,7 @@ var SlsTrSalesManagerNew;
             var txtQuantityValue = $("#txtQuantity" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
             var total = 0;
+            debugger;
             var Onhand_Qty = Number($("#ddlItem" + cnt).attr('data-OnhandQty'));
             if (isNaN(Onhand_Qty)) {
                 DisplayMassage("برجاء اختيار الصنف ", "Please choose the item", MessageType.Error);
@@ -2348,8 +2349,8 @@ var SlsTrSalesManagerNew;
                 $("#txtQuantity" + cnt).val("1");
             }
             else {
-                if (txtQuantityValue > Onhand_Qty) {
-                    DisplayMassage("خطأ الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Error);
+                if (Number(txtQuantityValue) > Onhand_Qty) {
+                    DisplayMassage("تنبيه الكميه المتاحه (" + Onhand_Qty + ")", "Error quantity available(" + Onhand_Qty + ")", MessageType.Worning);
                     //if (SysSession.CurrentEnvironment.I_Control[0].ExceedOnhandQty != 1) { // invoice, send tf , direct tf                         
                     //Errorinput($("#txtQuantity" + cnt));
                     //$("#txtQuantity" + cnt).val(Onhand_Qty); 
