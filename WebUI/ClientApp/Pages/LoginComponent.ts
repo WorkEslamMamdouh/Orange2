@@ -381,9 +381,9 @@ var LoginComponent;
                                                     url: Url.Action("GetSerialNumber", "Home"),
                                                     success: (d) => {
                                                         debugger
-                                                        let result = d;
-                                                       
-                                                        SystemEnv.SerialNumber = result;
+                                                        let result = d.trim();
+                                                        let res = result.replace("SerialNumber", "");
+                                                        SystemEnv.SerialNumber = res.trim();
                                                         document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                                                         OnLogged();
 
