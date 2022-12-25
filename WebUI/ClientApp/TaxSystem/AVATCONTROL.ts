@@ -48,8 +48,9 @@ namespace AVATCONTROL {
             document.getElementById('Screen_name').innerHTML = "Vat Control Setting";
             Period = [{ id: 1, value: 'Every Month' }, { id: 2, value: 'Every 3 Month' }];
         }
-        $("#icon-bar").addClass("d-none");
+        //$("#icon-bar").addClass("d-none");
         $("#divIconbar").addClass("d-none");
+        $("#btnUpdate").removeClass("display_none");
         $("#btnPrintTransaction").addClass("d-none");
 
         InitializeControls();
@@ -58,8 +59,11 @@ namespace AVATCONTROL {
         debugger
         FillPeriod();
         Load_Account();
+        debugger
         LoadControlSetting();
+        debugger
         Load_VatPeriod();
+        debugger
         //Button_privialges();
         btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
         chkSetting.disabled = true;

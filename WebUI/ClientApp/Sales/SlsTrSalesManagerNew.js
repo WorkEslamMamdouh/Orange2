@@ -216,9 +216,9 @@ var SlsTrSalesManagerNew;
         if (flagInvMulti == true && SlsInvSrc == '1') {
             $('#TableRespon').attr('style', 'width:120%');
         }
-        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
-            $("#btnSend").removeClass("hidden_Control");
-        }
+        //if (SysSession.CurrentEnvironment.UserCode == 'islam'  ) {
+        //    $("#btnSend").removeClass("hidden_Control");
+        //}
     }
     SlsTrSalesManagerNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -1989,6 +1989,7 @@ var SlsTrSalesManagerNew;
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function searchItem(searchItemID, cnt) {
+        debugger;
         $('#ddlItem' + cnt).val(searchItemID);
         var Type_inv = Number($('#ddlTypeInv' + cnt).val());
         GetItems(searchItemID, Type_inv, cnt);
@@ -2436,6 +2437,7 @@ var SlsTrSalesManagerNew;
         $("#ddlFamily" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            Clear_Row(cnt);
             $("#Item_Desc" + cnt).html('');
             $("#Item_Desc" + cnt).append('<option value=""></option>');
         });
@@ -2750,7 +2752,9 @@ var SlsTrSalesManagerNew;
                 TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
                 CountTotal += Number($("#txtTotal" + i).val());
                 CountTotal = Number(CountTotal.RoundToSt(2).toString());
-                TaxCount += Number($("#txtTax" + i).val());
+                var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
+                //TaxCount += Number($("#txtTax" + i).val());
+                TaxCount += vatAmount;
                 TaxCount = Number(TaxCount.RoundToSt(2).toString());
                 NetCount += Number($("#txtTotAfterTax" + i).val());
             }
@@ -2992,6 +2996,9 @@ var SlsTrSalesManagerNew;
                 Errorinput($("#txtUnitpriceWithVat" + rowcount));
                 return false;
             }
+            else if (Number($("#txtTax" + rowcount).val()) == 0) {
+                totalRow(rowcount, true);
+            }
             return true;
         }
     }
@@ -3127,7 +3134,8 @@ var SlsTrSalesManagerNew;
             if (StatusFlag != 'd' && StatusFlag != 'm') {
                 var NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 if (isNaN(NatID) == true || NatID == 0) {
-                    ComputeVatNat(i);
+                    //ComputeVatNat();
+                    totalRow(i, true);
                     if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
                         StatusFlag = "u";
                     }

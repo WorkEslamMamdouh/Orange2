@@ -479,6 +479,7 @@ namespace Dashboard {
         $("#TableCashOrBank_" + _Type).append(html);
 
     }
+
     function DisplayGridCashOrBank(i: number, _Data: IProc_DashAccounts, _Type: number, Ser: number) {
 
 

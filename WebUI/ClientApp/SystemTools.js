@@ -170,9 +170,14 @@ var SystemTools = /** @class */ (function () {
                 $("#SearchDataTable").css("height", "100%");
             }
         });
-        //$("#SearchDataTable_filter label input").addClass('display_none');
-        debugger;
+        //$("#SearchDataTable_filter label input").addClass('display_none'); 
+        $("#SearchDataTable_filter label input").focus();
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 400);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 800);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 1000);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 1500);
         setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 2000);
+        setTimeout(function () { $("#SearchDataTable_filter label input").focus(); }, 2500);
         //$("#SearchBox .table-serach-container #tableDiv #SearchDataTable_wrapper #SearchDataTable_filter label input").focus();
     };
     //old code

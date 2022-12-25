@@ -6464,4 +6464,24 @@ var GetItem = /** @class */ (function (_super) {
     }
     return GetItem;
 }(SecurityClass));
+var ModelCompStatus = /** @class */ (function (_super) {
+    __extends(ModelCompStatus, _super);
+    function ModelCompStatus() {
+        var _this = _super.call(this) || this;
+        _this.COMP_CODE = 0;
+        _this.USER_CODE = "";
+        _this.NameA = "";
+        _this.NameE = "";
+        _this.LoginMsg = "";
+        _this.FirstDate = "";
+        _this.LastDate = "";
+        _this.MembeshipEndDate = "";
+        _this.MembershipAllanceDays = 0;
+        _this.MembershipreadOnlyDays = 0;
+        _this.CompStatus = 0;
+        _this.IsActive = false;
+        return _this;
+    }
+    return ModelCompStatus;
+}(SecurityClass));
 //# sourceMappingURL=Entities.js.map

@@ -52,6 +52,7 @@ var GenDefAdd;
             $("#Defaultperc").removeAttr("disabled");
             $("#VatType").removeAttr("disabled");
             $("#btnUpdate_Def").addClass("display_none");
+            $('.btn-minus').removeClass("display_none");
         }
         if (SysSession.CurrentPrivileges.AddNew) {
             $(".btnAddDetails").removeAttr("disabled");

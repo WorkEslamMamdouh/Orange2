@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace Inv.WebUI.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class LoginController : Controller
     {
 

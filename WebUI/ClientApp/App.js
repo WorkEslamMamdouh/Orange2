@@ -52,6 +52,7 @@ var Modules = {
     ProcSalesMgr: "ProcSalesMgr",
     ProcSalesRet: "ProcSalesRet",
     OperationScrap: "OperationScrap",
+    OperationExport: "OperationExport",
     ProcSalesInvoice: "ProcSalesInvoice",
     Clientaccstat: "Clientaccstat",
     Supplieraccstat: "Supplieraccstat",
@@ -125,8 +126,9 @@ var Keys = {
     Enter: "Enter"
 };
 var setVal = function (value) {
+    debugger;
     var Input = this;
-    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
 };
 function IsNullOrEmpty(value) {
@@ -1770,7 +1772,7 @@ function OnClick_Tree() {
             $('' + ul + '').attr("aria-expanded", "true");
             $('' + ul + '').attr("style", "");
         }
-        else {
+        if (expanded == 'true') {
             $(this).attr("aria-expanded", "false");
             $(this).attr("class", "sign");
             var data_i = $(this).attr("data_i");
@@ -1937,7 +1939,7 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
             //alert(result);
             //debugger
             //window.open(result, "blank");
-            var x = Url.Action("OpenPdf", "Home");
+            var x = Url.Action("OpenPdfS", "Home");
             var UrlPdf = x + "/" + "?" + "path=" + result + "";
             window.open(UrlPdf, "blank");
             return result;

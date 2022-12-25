@@ -1154,7 +1154,6 @@ var AccDefCustomer;
         for (var i = 0; i < CountGrid; i++) {
             singleModel = new A_Rec_D_CustomerDoc();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
             singleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             singleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {

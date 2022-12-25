@@ -30012,7 +30012,7 @@ input[class=checkbox]:checked:before {
 .main-menu {
     list-style: none;
     overflow-y: auto;
-    max-height: 100vh;
+    max-height: 73vh;
 }
 
     .account-menu ul.main-menu ul,

@@ -677,7 +677,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -937,6 +936,12 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_VATListDetailAr</DataSetName>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!NetAfterVat.Value</Value>
+            <Direction>Descending</Direction>
+          </SortExpression>
+        </SortExpressions>
         <Top>0.25166cm</Top>
         <Left>0.05291cm</Left>
         <Height>1.8cm</Height>

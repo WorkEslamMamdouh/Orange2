@@ -26,6 +26,8 @@ var LoginComponent;
     var SysSession: SystemSession = GetSystemSession('Home');
 
     function InitalizeComponent() {
+ 
+
         txtUserName = document.getElementById("txtUserName");
         txtUserPassword = document.getElementById("txtUserPassword");
          btnLogin = document.getElementById("btnLogin");

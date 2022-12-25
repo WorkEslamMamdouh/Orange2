@@ -147,20 +147,23 @@ namespace Inv.API.Controllers
                         {
                             Entity.TrNo = res.ResponseData.ToString();
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity2.AdjustmentID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
+                            
                             return Ok(new BaseResponse(Entity));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity2.AdjustmentID, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null); 
+
+                            
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, 0, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

@@ -11005,3 +11005,36 @@ class GetItem extends SecurityClass {
 
 
 
+class ModelCompStatus extends SecurityClass {
+    constructor() {
+        super();
+        this.COMP_CODE = 0; 
+        this.USER_CODE = "";
+        this.NameA = "";
+        this.NameE = ""; 
+        this.LoginMsg = ""; 
+        this.FirstDate = ""; 
+        this.LastDate = ""; 
+        this.MembeshipEndDate = ""; 
+        this.MembershipAllanceDays = 0;
+        this.MembershipreadOnlyDays = 0;
+        this.CompStatus = 0;
+        this.IsActive = false;
+    }
+    public COMP_CODE: number;
+    public USER_CODE: string;
+    public NameA: string;
+    public NameE: string;
+    public LoginMsg: string;
+    public FirstDate: string;
+    public LastDate: string;
+    public MembeshipEndDate: string;
+    public MembershipAllanceDays: number;
+    public MembershipreadOnlyDays: number; 
+    public CompStatus: number; 
+    public IsActive: boolean; 
+}
+
+ 
+
+

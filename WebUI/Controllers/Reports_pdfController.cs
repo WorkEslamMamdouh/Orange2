@@ -314,42 +314,47 @@ namespace Inv.WebUI.Controllers
 
 
 
+
             var InvType = db.Database.SqlQuery<int?>("select  InvoiceTransCode from I_Sls_TR_Invoice where InvoiceID = " + TRId).FirstOrDefault();
             InvType = InvType == null ? 0 : InvType;
 
             int Repdesign = RepPar.Repdesign;
             int slip = RepPar.slip;
-            if (typ == 1)  // price show
+            if (slip == 1)
             {
-                if (InvType == 1)
-                {
-                    Rep = OpenReport("Prnt_SlsQuotationStd");
-                }
-                else
-                {
-                    Rep = OpenReport("Prnt_SlsQuotationeSimple");
-                }
+                Rep = OpenReport("Slip_Prnt_SlsInvoiceSimpleVer2");
             }
-            else  // invoice 
+            else
             {
-                if (slip == 1)
+                if (typ == 1)  // price show
                 {
-                    Rep = OpenReport("Slip_Prnt_SlsInvoiceSimple");
+                    if (InvType == 1)
+                    {
+                        Rep = OpenReport("Prnt_SlsQuotationStdVer2");
+                    }
+                    else
+                    {
+                        Rep = OpenReport("Prnt_SlsQuotationeSimpleVer2");
+                    }
                 }
-                else
+                else  // invoice 
                 {
+
+
 
                     if (InvType == 1)   // std invoice 
                     {
-                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceStd");
+                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceStdVer2");
                     }
                     else    // simple invoice 
                     {
-                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceSimple");
+                        Rep = OpenReport("Rpt_Prnt_SlsInvoiceSimpleVer2");
                     }
-                }
 
+
+                }
             }
+
 
 
             int Type = int.Parse(RepPar.Type.ToString());
@@ -433,11 +438,11 @@ namespace Inv.WebUI.Controllers
 
             if (InvType == 1)  // std invoice  return 
             {
-                Rep = OpenReport("Rpt_Prnt_SlsInvReturnStd");
+                Rep = OpenReport("Rpt_Prnt_SlsInvReturnStdVer2");
             }
             else // simple invoice return 
             {
-                Rep = OpenReport("Rpt_Prnt_SlsInvReturnSimple");
+                Rep = OpenReport("Rpt_Prnt_SlsInvReturnSimpleVer2");
             }
 
 
@@ -643,18 +648,18 @@ namespace Inv.WebUI.Controllers
 
             if (slip == 1)
             {
-                Rep = OpenReport("Slip_OPerationInvoiceSimple");
+                Rep = OpenReport("Slip_OPerationInvoiceSimpleVer2");
             }
             else
             {
 
                 if (InvType == 1)   // std invoice 
                 {
-                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceStd");
+                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceStdVer2");
                 }
                 else    // simple invoice 
                 {
-                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceSimple");
+                    Rep = OpenReport("Rpt_Prnt_OPerationInvoiceSimpleVer2");
                 }
             }
 

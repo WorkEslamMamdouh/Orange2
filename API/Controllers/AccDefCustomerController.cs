@@ -260,6 +260,8 @@ namespace Inv.API.Controllers
                         LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.CustomerDocID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, "CustomerDocID");
                     }
 
+                    return Ok(new BaseResponse(AccDefCust));
+
                 }
                 catch (Exception ex)
                 {

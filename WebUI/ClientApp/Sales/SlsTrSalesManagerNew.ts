@@ -277,9 +277,9 @@ namespace SlsTrSalesManagerNew {
             $('#TableRespon').attr('style', 'width:120%')
         }
 
-        if (SysSession.CurrentEnvironment.UserCode == 'islam') {
-            $("#btnSend").removeClass("hidden_Control");
-        }
+        //if (SysSession.CurrentEnvironment.UserCode == 'islam'  ) {
+        //    $("#btnSend").removeClass("hidden_Control");
+        //}
 
 
     }
@@ -2530,6 +2530,7 @@ namespace SlsTrSalesManagerNew {
     }
     //------------------------------------------------------ Controls Grid Region------------------------
     function searchItem(searchItemID: number, cnt: number) {
+        debugger
         $('#ddlItem' + cnt).val(searchItemID);
 
         let Type_inv = Number($('#ddlTypeInv' + cnt).val())
@@ -3242,6 +3243,7 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            Clear_Row(cnt);
             $("#Item_Desc" + cnt).html('');
             $("#Item_Desc" + cnt).append('<option value=""></option>');
 
@@ -3674,7 +3676,9 @@ namespace SlsTrSalesManagerNew {
                 CountTotal += Number($("#txtTotal" + i).val());
                 CountTotal = Number(CountTotal.RoundToSt(2).toString());
 
-                TaxCount += Number($("#txtTax" + i).val());
+                var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100; 
+                //TaxCount += Number($("#txtTax" + i).val());
+                TaxCount += vatAmount;
                 TaxCount = Number(TaxCount.RoundToSt(2).toString());
 
                 NetCount += Number($("#txtTotAfterTax" + i).val());
@@ -3967,6 +3971,7 @@ namespace SlsTrSalesManagerNew {
     }
     function Validation_Grid(rowcount: number) {
 
+
         var Qty: number = Number($("#txtQuantity" + rowcount).val());
         var Price: number = Number($("#txtPrice" + rowcount).val());
         if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
@@ -3992,6 +3997,11 @@ namespace SlsTrSalesManagerNew {
                 Errorinput($("#txtPrice" + rowcount));
                 Errorinput($("#txtUnitpriceWithVat" + rowcount));
                 return false
+            }
+            else if (Number($("#txtTax" + rowcount).val()) == 0) {
+                totalRow(rowcount, true);
+
+               
             }
             return true;
         }
@@ -4152,7 +4162,8 @@ namespace SlsTrSalesManagerNew {
 
                 let NatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 if (isNaN(NatID) == true || NatID == 0) {
-                    ComputeVatNat(i);
+                    //ComputeVatNat();
+                    totalRow(i, true);
                     if (StatusFlag != 'd' && StatusFlag != 'm' && StatusFlag != 'i') {
                         StatusFlag = "u";
                     }

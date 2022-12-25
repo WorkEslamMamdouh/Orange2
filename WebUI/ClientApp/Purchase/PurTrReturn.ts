@@ -75,6 +75,8 @@ namespace PurTrReturn {
     var txtCashAmount: HTMLInputElement;
     var txtInvoiceDate: HTMLInputElement;    
     var txtInvoiceNumber: HTMLInputElement;
+    var TxtRefTrID: HTMLInputElement;
+    var TxtReceiveID: HTMLInputElement;
     var lblReturnNumber: HTMLInputElement;
 
 
@@ -106,8 +108,7 @@ namespace PurTrReturn {
     var CountTotal: number = 0;
     var TaxCount: number = 0;
     var NetCount: number = 0;
-    var VatPrc;
-    var receiveID: number = 0;      
+    var VatPrc;    
     var ShowFlag;
     var PurRecType = 0;
     var isCash;
@@ -230,6 +231,8 @@ namespace PurTrReturn {
         txtNet = document.getElementById("txtNet") as HTMLInputElement;
         txtInvoiceDate = document.getElementById("txtInvoiceDate") as HTMLInputElement; 
         txtInvoiceNumber = document.getElementById("txtInvoiceNumber") as HTMLInputElement;
+        TxtRefTrID = document.getElementById("TxtRefTrID") as HTMLInputElement;
+        TxtReceiveID = document.getElementById("TxtReceiveID") as HTMLInputElement;
         lblReturnNumber = document.getElementById("lblReturnNumber") as HTMLInputElement;
         txtCashAmount = document.getElementById("txtCashAmount") as HTMLInputElement; 
         //checkbox
@@ -410,7 +413,7 @@ namespace PurTrReturn {
 
     }
   //-----------------------------------------------------------------------  Events Region ----------------------------------
-    function txtInvoiceNumber_onchange() {
+    function txtInvoiceNumber_onchange(recID: number) {
         $('#div_Data').html("");
         txtItemCount.value = "";
         txtPackageCount.value = "";
@@ -430,7 +433,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveByIDFromStatistics"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: recID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.Response.length == 0) {
@@ -439,6 +442,7 @@ namespace PurTrReturn {
                     btnRecieveSearch.disabled = false;
                 } else if (result.IsSuccess) {
                     InvoiceStatisticsModel = result.Response as Array<IQ_GetPurReceiveStaistic>;
+                    TxtRefTrID.value = InvoiceStatisticsModel[0].ReceiveID.toString();
                     txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
                     ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
                     StoreID = InvoiceStatisticsModel[0].StoreID;
@@ -490,7 +494,7 @@ namespace PurTrReturn {
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-                data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+                data: { receiveID: recID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
                 success: (d) => {
                     let result = d as BaseResponse;
                     if (result.IsSuccess) {
@@ -588,8 +592,8 @@ namespace PurTrReturn {
         let sys: SystemTools = new SystemTools();
         sys.FindKey(Modules.PurTrReturn, "btnRecieveSearch", "CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey
-            receiveID = id;
-            btnAddReturn_onclick();
+            //receiveID = id;
+            btnAddReturn_onclick(id);
             $("#ddlVendorDetails").attr("disabled", "disabled");
             $("#ddlReturnTypeShow").attr("disabled", "disabled");
             $("#ddlFreeSalesman").attr("disabled", "disabled");
@@ -667,9 +671,9 @@ namespace PurTrReturn {
             $("#btnPrint").addClass("display_none");
             $('#btnEdit').addClass("display_none");
             $('#btnPrintTransaction').addClass("display_none");
-            btnRecieveSearch.disabled = true;
-            receiveID = 0;
+            btnRecieveSearch.disabled = true; 
             txtInvoiceNumber.value = "";
+            TxtRefTrID.value = "";
             lblReturnNumber.value = "";
             clear();
             $("#DivFilter").removeClass("disabledDiv");
@@ -704,6 +708,7 @@ namespace PurTrReturn {
         txtTax.value = "";
         txtNet.value = "";
         txtInvoiceNumber.value = "";
+        TxtRefTrID.value = "";
         lblReturnNumber.value = "";
         txtInvoiceDate.value = "";
         ddlFreeSalesman.value = "null";
@@ -730,18 +735,18 @@ namespace PurTrReturn {
         $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         IsNew = true;
     }
-    function btnAddReturn_onclick() {
+    function btnAddReturn_onclick(recID: number) {
         txtInvoiceDate.value = GetDate();
         var unApprovedReturn: boolean = false;
         lblReturnNumber.value = "";
 
-        unApprovedReturn = checkUnApprovedReturns(receiveID);
+        unApprovedReturn = checkUnApprovedReturns(recID);
         if (unApprovedReturn == true) {
             DisplayMassage('( لا يمكن اضافه مرتجع علي الفاتورة قبل اعتماد المرتجعات السابقه)', '(A return cannot be added to the invoice before previous returns are approved)', MessageType.Error);
             btnRecieveSearch.disabled = false;
 
         } else {
-            txtInvoiceNumber_onchange();
+            txtInvoiceNumber_onchange(recID);
             Show = false;
             $("#btnAddReturn").addClass("display_none");
             $("#btnBack").removeClass("display_none");
@@ -853,10 +858,11 @@ namespace PurTrReturn {
         DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
 
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
-        receiveID = Number(Selecteditem[0].ReceiveID);
+        TxtReceiveID.value = setVal( Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length > 0) {
 
+            TxtRefTrID.value = setVal(InvoiceStatisticsModel[0].RefTrID);
             txtInvoiceNumber.value = InvoiceStatisticsModel[0].TrNo.toString();
             ddlTaxTypeHeader.value = InvoiceStatisticsModel[0].VATType.toString();
             txtItemCount.value = InvoiceStatisticsModel[0].Line_Count.toString();
@@ -869,8 +875,7 @@ namespace PurTrReturn {
             else { txtNet.value = '0'; }
             vatType = InvoiceStatisticsModel[0].VATType;
             PurRecType = InvoiceStatisticsModel[0].PurRecType;
-            if (InvoiceStatisticsModel[0].RefTrID != null) {
-                txtInvoiceNumber.value = InvoiceStatisticsModel[0].RefTrID.toString();
+            if (InvoiceStatisticsModel[0].RefTrID != null) { 
                 RefTrID = InvoiceStatisticsModel[0].RefTrID.toString();
                 GetPurReceiveCharge(InvoiceStatisticsModel[0].RefTrID);
             }
@@ -925,7 +930,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: Selecteditem[0].ReceiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -965,7 +970,7 @@ namespace PurTrReturn {
         return ReturnedDate;
     }
     function GetPurReceiveCharge(ReceiD: number) {
-        ////debugger
+        ////debugger 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveByIDFromStatistics"),
@@ -1867,8 +1872,8 @@ namespace PurTrReturn {
         InvoiceModel.CreatedBy = SysSession.CurrentEnvironment.UserCode;
         InvoiceModel.CreatedAt = DateTimeFormat(Date().toString()); 
 
-        if (txtInvoiceNumber.value.toString() == "") { InvoiceModel.RefTrID = null; }
-        else { InvoiceModel.RefTrID = receiveID; }
+        if (txtInvoiceNumber.value.toString() == "") { InvoiceModel.RefTrID = Number(TxtRefTrID.value); }
+        else { InvoiceModel.RefTrID = Number(TxtRefTrID.value); }
 
         if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
             DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
@@ -1895,8 +1900,8 @@ namespace PurTrReturn {
         });
 
     }
-    function Update() { 
-        InvoiceModel.ReceiveID = receiveID;
+    function Update() {
+        InvoiceModel.ReceiveID = Number(TxtReceiveID.value);
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
 
@@ -1908,11 +1913,11 @@ namespace PurTrReturn {
         InvoiceModel.StoreID = InvoiceStatisticsModel[0].StoreID;//main store 
 
         if (txtInvoiceNumber.value.toString() == "") {
-            InvoiceModel.RefTrID = null;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value); }
         else {
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
-            InvoiceModel.RefTrID = Number(RefTrID);
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
 
 
@@ -1963,7 +1968,7 @@ namespace PurTrReturn {
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(RecID));
-        receiveID = Number(Selecteditem[0].ReceiveID);
+        TxtReceiveID.value = setVal(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
         if (InvoiceStatisticsModel.length > 0) {
 
@@ -2035,7 +2040,7 @@ namespace PurTrReturn {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("PurTrReceive", "GetPurReceiveItems"),
-            data: { receiveID: receiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { receiveID: Selecteditem[0].ReceiveID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -2079,7 +2084,7 @@ namespace PurTrReturn {
         }
 
         Assign();
-        InvoiceModel.ReceiveID = receiveID;
+        InvoiceModel.ReceiveID = Number(TxtReceiveID.value);
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
      
@@ -2090,12 +2095,12 @@ namespace PurTrReturn {
         InvoiceModel.Status = 0;
         InvoiceModel.StoreID = InvoiceStatisticsModel[0].StoreID;;//main store 
         if (txtInvoiceNumber.value.toString() == "") {
-            InvoiceModel.RefTrID = null;
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
             InvoiceModel.SalesmanId = Number(ddlFreeSalesman.value); 
         }
         else {
             InvoiceModel.SalesmanId = InvoiceStatisticsModel[0].SalesmanId;
-            InvoiceModel.RefTrID = Number(RefTrID);
+            InvoiceModel.RefTrID = Number(TxtRefTrID.value);
         }
         Ajax.Callsync({
             type: "POST",
@@ -2221,7 +2226,7 @@ namespace PurTrReturn {
         rp.Repdesign = 1;
 
         debugger
-        rp.TRId = receiveID;
+        rp.TRId = Number(TxtReceiveID.value);
                                                                                 
                 rp.Name_function = "IProc_Prnt_PurReceiveRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));

@@ -3080,6 +3080,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>Rep_OperationSummaryAr</DataSetName>
         <Filters>
           <Filter>

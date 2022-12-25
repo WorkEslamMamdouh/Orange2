@@ -30,8 +30,8 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAll(string UserCode, string Token)
         {
-         
-                var res = G_AlertControlService.GetAll().ToList();
+
+            var res = db.Database.SqlQuery<G_AlertControl>("select * from G_AlertControl").ToList();
 
                 return Ok(new BaseResponse(res));
          

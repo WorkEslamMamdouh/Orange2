@@ -48,6 +48,7 @@ var Modules = {
     ProcSalesMgr: "ProcSalesMgr",
     ProcSalesRet: "ProcSalesRet",
     OperationScrap: "OperationScrap",
+    OperationExport: "OperationExport",
     ProcSalesInvoice: "ProcSalesInvoice",
     Clientaccstat: "Clientaccstat",
     Supplieraccstat: "Supplieraccstat",
@@ -130,9 +131,9 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-
+    debugger
     let Input = this;
-    value == null || Number(value) == 0 ? Input.value = '' : Input.value = value;
+    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
 };
 
@@ -2231,9 +2232,9 @@ function OnClick_Tree() {
             $('' + ul + '').attr("class", "children nav-child unstyled small ---")
             $('' + ul + '').attr("aria-expanded", "true")
             $('' + ul + '').attr("style", "")
-
+             
         }
-        else {
+        if (expanded == 'true') {
 
             $(this).attr("aria-expanded", "false")
             $(this).attr("class", "sign")
@@ -2245,6 +2246,7 @@ function OnClick_Tree() {
             $('' + ul + '').attr("class", "children nav-child unstyled small collapse in")
             $('' + ul + '').attr("aria-expanded", "false")
             $('' + ul + '').attr("style", "height: 0px;")
+
 
         }
 
@@ -2479,7 +2481,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
             //debugger
             //window.open(result, "blank");
 
-            let x = Url.Action("OpenPdf", "Home");
+            let x = Url.Action("OpenPdfS", "Home");
 
             let UrlPdf = x + "/" + "?" + "path=" + result + "";
 
