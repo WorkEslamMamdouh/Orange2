@@ -174,7 +174,6 @@ var SlsTrSalesManagerNew;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
         //alert()
-        alert(SysSession.CurrentEnvironment.SerialNumber);
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
