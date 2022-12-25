@@ -289,6 +289,9 @@ var LoginComponent;
                                                     //SystemEnv.SalesPriceWithVAT = CompanyService[0].SalesPriceWithVAT; 
                                                     //SystemEnv.IsLocalBranchCustomer = CompanyService[0].IsLocalBranchCustomer; 
                                                     //SystemEnv.GL_VoucherCCDT_Type = CompanyService[0].GL_VoucherCCDT_Type; 
+                                                    debugger;
+                                                    //SystemEnv.SerialNumber = GetSerialNumber();
+                                                    debugger;
                                                     var IsLocalSalePrice = false;
                                                     IsLocalSalePrice = CompanyService[0].IsLocalSalePrice;
                                                     $.ajax({
@@ -325,8 +328,17 @@ var LoginComponent;
                                                             }
                                                         }
                                                     });
-                                                    document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                                                    OnLogged();
+                                                    $.ajax({
+                                                        type: "GET",
+                                                        url: Url.Action("GetSerialNumber", "Home"),
+                                                        success: function (d) {
+                                                            debugger;
+                                                            var result = d;
+                                                            SystemEnv.SerialNumber = result;
+                                                            document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                            OnLogged();
+                                                        }
+                                                    });
                                                 }
                                                 else {
                                                     var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول للنظام" : "You are not allowed to login";

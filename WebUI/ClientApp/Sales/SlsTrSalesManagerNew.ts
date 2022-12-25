@@ -214,7 +214,7 @@ namespace SlsTrSalesManagerNew {
     export function InitalizeComponent() {
 
         //alert()
-        //alert()
+        alert(SysSession.CurrentEnvironment.SerialNumber);
 
 
         document.getElementById('Screen_name').innerHTML = Screen_name;

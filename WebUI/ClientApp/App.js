@@ -1947,6 +1947,18 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     });
     return '';
 }
+function GetSerialNumber() {
+    $.ajax({
+        type: "GET",
+        url: Url.Action("GetSerialNumber", "Home"),
+        success: function (d) {
+            debugger;
+            var result = d;
+            return result;
+        }
+    });
+    return "";
+}
 function SendInv_to_Cust(data_New) {
     var SysSession = GetSystemEnvironment();
     data_New.CompCode = SysSession.CompCode;

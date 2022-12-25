@@ -204,6 +204,7 @@ class SystemEnvironment {
     public ModuleCode: string;
     public IsBiLingual?: any;
     public Token: string;
+    public SerialNumber: string;
 
     public IsNotificaitonActive: boolean;
     public IsDashboardActive: boolean;

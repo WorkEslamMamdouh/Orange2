@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Text;
+using System.Web.Mvc;
 
 namespace Inv.WebUI.Controllers
 {
@@ -162,6 +164,28 @@ namespace Inv.WebUI.Controllers
         public ActionResult OpenPdf(string path)
         { 
             return File("" + path + "", "application/pdf");
+        }
+
+        public string GetSerialNumber()
+        {
+              
+            var processInfo = new ProcessStartInfo("cmd.exe", "/c " + "wmic os get serialnumber")
+            {
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+                WorkingDirectory = @"C:\Windows\System32\"
+            };
+
+            StringBuilder sb = new StringBuilder();
+            Process p = Process.Start(processInfo);
+            p.OutputDataReceived += (sender, args_) => sb.AppendLine(args_.Data);
+            p.BeginOutputReadLine();
+            p.WaitForExit();
+
+            return sb.ToString();
+
         }
 
         public ActionResult AgingCustIndex()

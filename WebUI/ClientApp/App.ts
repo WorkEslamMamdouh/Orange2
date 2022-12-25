@@ -2500,6 +2500,22 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 
 
+function GetSerialNumber(): string {
+
+    $.ajax({
+        type: "GET",
+        url: Url.Action("GetSerialNumber", "Home"), 
+        success: (d) => {
+            debugger
+            let result = d;  
+            return result
+
+        }
+    })
+    return "";
+}
+
+
 
 function SendInv_to_Cust(data_New: ReportParameters) {
 
