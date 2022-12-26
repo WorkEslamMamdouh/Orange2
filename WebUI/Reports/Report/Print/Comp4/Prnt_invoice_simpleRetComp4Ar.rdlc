@@ -106,34 +106,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.85233cm</Width>
+              <Width>1.8817cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.50094cm</Width>
+              <Width>1.53031cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.84126cm</Width>
+              <Width>1.87063cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.29568cm</Width>
+              <Width>1.32505cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.61836cm</Width>
+              <Width>1.64773cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.79514cm</Width>
+              <Width>1.82451cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.16508cm</Width>
+              <Width>2.19445cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.32367cm</Width>
+              <Width>1.35304cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.66997cm</Width>
+              <Width>4.69934cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.69409cm</Width>
+              <Width>1.72346cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -995,12 +995,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_invoice_simpleRetComp4Ar</DataSetName>
         <Top>4.74379cm</Top>
-        <Left>0.31791cm</Left>
+        <Left>0.02419cm</Left>
         <Height>1.72917cm</Height>
-        <Width>19.75652cm</Width>
+        <Width>20.05022cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -2376,7 +2375,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
     <Height>4.63728in</Height>
     <Style />
   </Body>
-  <Width>7.9174in</Width>
+  <Width>7.91741in</Width>
   <Page>
     <PageHeader>
       <Height>4.45134cm</Height>
@@ -2895,9 +2894,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.01083cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0.07238cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

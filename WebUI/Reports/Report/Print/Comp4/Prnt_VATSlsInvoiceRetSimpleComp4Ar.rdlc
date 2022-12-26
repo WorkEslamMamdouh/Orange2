@@ -22,7 +22,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.93838cm</Top>
+        <Top>0.84313cm</Top>
         <Left>18.23445cm</Left>
         <Height>0.6cm</Height>
         <Width>1.67066cm</Width>
@@ -56,7 +56,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>4.90444cm</Top>
+        <Top>4.80919cm</Top>
         <Left>18.23444cm</Left>
         <Height>0.6cm</Height>
         <Width>1.67067cm</Width>
@@ -91,7 +91,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.97338cm</Top>
+        <Top>0.87813cm</Top>
         <Left>10.95595cm</Left>
         <Height>0.6cm</Height>
         <Width>1.75004cm</Width>
@@ -123,7 +123,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>0.93838cm</Top>
+        <Top>0.84313cm</Top>
         <Left>13.06215cm</Left>
         <Height>0.6cm</Height>
         <Width>5.17229cm</Width>
@@ -157,7 +157,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.97338cm</Top>
+        <Top>0.87813cm</Top>
         <Left>8.42067cm</Left>
         <Height>0.6cm</Height>
         <Width>2.5cm</Width>
@@ -189,7 +189,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>NAMEA</rd:DefaultName>
-        <Top>4.90444cm</Top>
+        <Top>4.80919cm</Top>
         <Left>10.34461cm</Left>
         <Height>0.6cm</Height>
         <Width>7.87923cm</Width>
@@ -208,37 +208,37 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.04762cm</Width>
+              <Width>2.06686cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.28034cm</Width>
+              <Width>1.29958cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88396cm</Width>
+              <Width>1.9032cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.41559cm</Width>
+              <Width>1.43483cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.54788cm</Width>
+              <Width>1.56712cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.56849cm</Width>
+              <Width>1.58773cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73309cm</Width>
+              <Width>1.75233cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.79385cm</Width>
+              <Width>1.81309cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.11432cm</Width>
+              <Width>4.13356cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.78603cm</Width>
+              <Width>1.80527cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6285cm</Width>
+              <Width>0.64774cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1111,12 +1111,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_VATSlsInvoiceRetSimpleComp4Ar</DataSetName>
-        <Top>5.76728cm</Top>
-        <Left>0.31699cm</Left>
+        <Top>5.54503cm</Top>
+        <Left>0.10532cm</Left>
         <Height>1.67625cm</Height>
-        <Width>19.79967cm</Width>
+        <Width>20.01131cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -1142,7 +1141,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.97338cm</Top>
+        <Top>0.87813cm</Top>
         <Left>5.84025cm</Left>
         <Height>0.6cm</Height>
         <Width>2.47459cm</Width>
@@ -1176,7 +1175,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>3.38341cm</Top>
+        <Top>3.28816cm</Top>
         <Left>18.26455cm</Left>
         <Height>0.6cm</Height>
         <Width>1.64056cm</Width>
@@ -1208,7 +1207,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>3.38694cm</Top>
+        <Top>3.29169cm</Top>
         <Left>13.06215cm</Left>
         <Height>0.6cm</Height>
         <Width>5.21482cm</Width>
@@ -1243,7 +1242,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.68627cm</Top>
+        <Top>1.59102cm</Top>
         <Left>10.34461cm</Left>
         <Height>0.6cm</Height>
         <Width>2.36139cm</Width>
@@ -1277,7 +1276,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.68627cm</Top>
+        <Top>1.59102cm</Top>
         <Left>5.84025cm</Left>
         <Height>0.6cm</Height>
         <Width>4.46907cm</Width>
@@ -1309,7 +1308,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
-        <Top>11.38547cm</Top>
+        <Top>11.16322cm</Top>
         <Left>0.6531cm</Left>
         <Height>1.31438cm</Height>
         <Width>17.94238cm</Width>
@@ -1345,7 +1344,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>11.38547cm</Top>
+        <Top>11.16322cm</Top>
         <Left>18.56373cm</Left>
         <Height>0.6cm</Height>
         <Width>1.39428cm</Width>
@@ -1397,7 +1396,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.57202cm</Top>
+        <Top>2.47677cm</Top>
         <Left>18.23445cm</Left>
         <Height>0.6cm</Height>
         <Width>1.67066cm</Width>
@@ -1429,7 +1428,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>2.57202cm</Top>
+        <Top>2.47677cm</Top>
         <Left>13.06215cm</Left>
         <Height>0.6cm</Height>
         <Width>5.17229cm</Width>
@@ -1464,7 +1463,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>4.1598cm</Top>
+        <Top>4.06455cm</Top>
         <Left>18.26455cm</Left>
         <Height>0.6cm</Height>
         <Width>1.64056cm</Width>
@@ -1496,7 +1495,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ContractNo</rd:DefaultName>
-        <Top>4.1598cm</Top>
+        <Top>4.06455cm</Top>
         <Left>13.07721cm</Left>
         <Height>0.6cm</Height>
         <Width>5.19976cm</Width>
@@ -1531,7 +1530,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.42738cm</Top>
+        <Top>2.33213cm</Top>
         <Left>10.34461cm</Left>
         <Height>0.6cm</Height>
         <Width>2.36139cm</Width>
@@ -1563,7 +1562,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>PurchaseorderNo</rd:DefaultName>
-        <Top>2.42738cm</Top>
+        <Top>2.33213cm</Top>
         <Left>5.84025cm</Left>
         <Height>0.6cm</Height>
         <Width>4.46907cm</Width>
@@ -1595,7 +1594,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
-        <Top>4.90444cm</Top>
+        <Top>4.80919cm</Top>
         <Left>2.09272cm</Left>
         <Height>0.6cm</Height>
         <Width>8.2166cm</Width>
@@ -1627,7 +1626,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>PurchaseorderNo</rd:DefaultName>
-        <Top>3.20377cm</Top>
+        <Top>3.10852cm</Top>
         <Left>5.84025cm</Left>
         <Height>0.6cm</Height>
         <Width>4.46907cm</Width>
@@ -1662,7 +1661,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>3.20377cm</Top>
+        <Top>3.10852cm</Top>
         <Left>10.28554cm</Left>
         <Height>0.6cm</Height>
         <Width>2.42045cm</Width>
@@ -2362,7 +2361,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_VATSlsInvoiceRetSimpleComp4Ar</DataSetName>
-        <Top>7.60909cm</Top>
+        <Top>7.38684cm</Top>
         <Left>0.1248in</Left>
         <Height>3.6cm</Height>
         <Width>19.77903cm</Width>
@@ -2390,7 +2389,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>1.74977cm</Top>
+        <Top>1.65452cm</Top>
         <Left>13.07721cm</Left>
         <Height>0.6cm</Height>
         <Width>5.15723cm</Width>
@@ -2424,7 +2423,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.76007cm</Top>
+        <Top>1.66482cm</Top>
         <Left>18.32905cm</Left>
         <Height>0.6cm</Height>
         <Width>1.5888cm</Width>
@@ -2476,13 +2475,13 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>4.99994in</Height>
+    <Height>4.9489in</Height>
     <Style />
   </Body>
   <Width>7.91994in</Width>
   <Page>
     <PageHeader>
-      <Height>4.45134cm</Height>
+      <Height>2.7512cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2492,10 +2491,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Source>Embedded</Source>
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
-              <Top>0.9525cm</Top>
-              <Left>8.10455cm</Left>
-              <Height>3.49884cm</Height>
-              <Width>4.39796cm</Width>
+              <Top>0cm</Top>
+              <Left>8.31093cm</Left>
+              <Height>2.7512cm</Height>
+              <Width>3.36609cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2982,7 +2981,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <KeepTogether>true</KeepTogether>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>4.45134cm</Height>
+          <Height>2.7512cm</Height>
           <Width>19.95801cm</Width>
           <Style>
             <Border>
@@ -2998,9 +2997,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.01084cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox4">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0.07559cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

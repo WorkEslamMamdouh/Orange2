@@ -143,34 +143,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.18491cm</Width>
+              <Width>2.20872cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.72536cm</Width>
+              <Width>1.74917cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.09071cm</Width>
+              <Width>2.11452cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52696cm</Width>
+              <Width>1.55077cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.40847cm</Width>
+              <Width>1.43228cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.00707cm</Width>
+              <Width>2.03088cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.00474cm</Width>
+              <Width>2.02855cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.75675cm</Width>
+              <Width>4.78056cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.55496cm</Width>
+              <Width>1.57877cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.52311cm</Width>
+              <Width>0.54692cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -902,12 +902,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_VATSlsInvoicestdComp4Ar</DataSetName>
         <Top>10.04664cm</Top>
-        <Left>0.15943in</Left>
+        <Left>0.06568in</Left>
         <Height>1.2cm</Height>
-        <Width>19.78304cm</Width>
+        <Width>20.02116cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -4126,7 +4125,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
   <Width>7.9512in</Width>
   <Page>
     <PageHeader>
-      <Height>4.45134cm</Height>
+      <Height>2.7512cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -4136,10 +4135,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Source>Embedded</Source>
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
-              <Top>0.9525cm</Top>
-              <Left>8.10455cm</Left>
-              <Height>3.49884cm</Height>
-              <Width>4.39796cm</Width>
+              <Top>0cm</Top>
+              <Left>8.28976cm</Left>
+              <Height>2.7512cm</Height>
+              <Width>3.71004cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4626,7 +4625,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <KeepTogether>true</KeepTogether>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>4.45134cm</Height>
+          <Height>2.7512cm</Height>
           <Width>20.19605cm</Width>
           <Style>
             <Border>
@@ -4642,9 +4641,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.98437cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox7">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0.11529cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
