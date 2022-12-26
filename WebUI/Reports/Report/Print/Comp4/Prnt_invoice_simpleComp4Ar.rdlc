@@ -812,7 +812,7 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_invoice_simpleComp4Ar</DataSetName>
-        <Top>4.28639cm</Top>
+        <Top>3.96889cm</Top>
         <Height>1.64979cm</Height>
         <Width>19.96547cm</Width>
         <Style>
@@ -841,7 +841,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>8.47415cm</Top>
+        <Top>8.15665cm</Top>
         <Left>18.19902cm</Left>
         <Height>0.6cm</Height>
         <Width>1.42631cm</Width>
@@ -873,7 +873,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
-        <Top>8.47415cm</Top>
+        <Top>8.15665cm</Top>
         <Left>0.52935cm</Left>
         <Height>0.6cm</Height>
         <Width>17.56986cm</Width>
@@ -1357,7 +1357,7 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Prnt_invoice_simpleComp4Ar</DataSetName>
-        <Top>6.0295cm</Top>
+        <Top>5.712cm</Top>
         <Left>0.20655in</Left>
         <Height>2.4cm</Height>
         <Width>18.9719cm</Width>
@@ -1388,7 +1388,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.18706cm</Top>
+        <Top>0.86956cm</Top>
         <Left>18.17759cm</Left>
         <Height>0.6cm</Height>
         <Width>1.69993cm</Width>
@@ -1423,7 +1423,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.72192cm</Top>
+        <Top>2.40442cm</Top>
         <Left>18.17862cm</Left>
         <Height>0.6cm</Height>
         <Width>1.69993cm</Width>
@@ -1457,7 +1457,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>3.43128cm</Top>
+        <Top>3.11378cm</Top>
         <Left>18.17128cm</Left>
         <Height>0.6cm</Height>
         <Width>1.70624cm</Width>
@@ -1491,7 +1491,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>1.18706cm</Top>
+        <Top>0.86956cm</Top>
         <Left>10.39837cm</Left>
         <Height>0.6cm</Height>
         <Width>7.77291cm</Width>
@@ -1526,7 +1526,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.92817cm</Top>
+        <Top>1.61067cm</Top>
         <Left>9.16186cm</Left>
         <Height>0.6cm</Height>
         <Width>1.02567cm</Width>
@@ -1560,7 +1560,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.92817cm</Top>
+        <Top>1.61067cm</Top>
         <Left>6.31429cm</Left>
         <Height>0.6cm</Height>
         <Width>2.84757cm</Width>
@@ -1592,7 +1592,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
-        <Top>2.72192cm</Top>
+        <Top>2.40442cm</Top>
         <Left>10.39837cm</Left>
         <Height>0.6cm</Height>
         <Width>7.7729cm</Width>
@@ -1624,7 +1624,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>3.43128cm</Top>
+        <Top>3.11378cm</Top>
         <Left>10.39837cm</Left>
         <Height>0.6cm</Height>
         <Width>7.77291cm</Width>
@@ -1658,7 +1658,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.92817cm</Top>
+        <Top>1.61067cm</Top>
         <Left>4.147cm</Left>
         <Height>0.6cm</Height>
         <Width>2.16729cm</Width>
@@ -1692,7 +1692,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.63753cm</Top>
+        <Top>2.32003cm</Top>
         <Left>8.38177cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
@@ -1724,7 +1724,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>2.63753cm</Top>
+        <Top>2.32003cm</Top>
         <Left>4.147cm</Left>
         <Height>0.6cm</Height>
         <Width>4.23478cm</Width>
@@ -1744,7 +1744,7 @@
         <Value>=First(Fields!QRSTR.Value, "Prnt_invoice_simpleComp4Ar")</Value>
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>1.11373cm</Top>
+        <Top>0.79623cm</Top>
         <Left>0.41879cm</Left>
         <Height>2.97047cm</Height>
         <Width>3.5871cm</Width>
@@ -1775,7 +1775,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.15428cm</Top>
+        <Top>8.83678cm</Top>
         <Left>13.33979cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1809,7 +1809,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.17898cm</Top>
+        <Top>8.86148cm</Top>
         <Left>4.22146cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1843,7 +1843,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.73284cm</Top>
+        <Top>9.41534cm</Top>
         <Left>13.33979cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1877,7 +1877,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.73284cm</Top>
+        <Top>9.41534cm</Top>
         <Left>4.22146cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1911,7 +1911,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.73284cm</Top>
+        <Top>9.41534cm</Top>
         <Left>14.46834cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1945,7 +1945,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>10.4034cm</Top>
+        <Top>10.0859cm</Top>
         <Left>14.46834cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1979,7 +1979,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>9.73284cm</Top>
+        <Top>9.41534cm</Top>
         <Left>5.37118cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -2013,7 +2013,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>10.4034cm</Top>
+        <Top>10.0859cm</Top>
         <Left>5.37118cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -2047,7 +2047,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>10.4034cm</Top>
+        <Top>10.0859cm</Top>
         <Left>13.33979cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -2081,7 +2081,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>10.4034cm</Top>
+        <Top>10.0859cm</Top>
         <Left>4.22146cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -2117,7 +2117,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.18706cm</Top>
+        <Top>0.86956cm</Top>
         <Left>9.19714cm</Left>
         <Height>0.6cm</Height>
         <Width>0.9904cm</Width>
@@ -2151,7 +2151,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>1.18706cm</Top>
+        <Top>0.86956cm</Top>
         <Left>4.147cm</Left>
         <Height>0.6cm</Height>
         <Width>5.01486cm</Width>
@@ -2170,7 +2170,7 @@
         <Source>Embedded</Source>
         <Value>draft21</Value>
         <Sizing>Fit</Sizing>
-        <Top>1.04775cm</Top>
+        <Top>0.73025cm</Top>
         <Left>0.32924cm</Left>
         <Height>3.04703cm</Height>
         <Width>3.70487cm</Width>
@@ -2203,7 +2203,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.91025cm</Top>
+        <Top>1.59275cm</Top>
         <Left>18.17862cm</Left>
         <Height>0.6cm</Height>
         <Width>1.71904cm</Width>
@@ -2235,7 +2235,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
-        <Top>1.96345cm</Top>
+        <Top>1.64595cm</Top>
         <Left>10.39837cm</Left>
         <Height>0.6cm</Height>
         <Width>7.6656cm</Width>
@@ -2271,7 +2271,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.14111cm</Top>
+        <Top>0cm</Top>
         <Left>0.02419cm</Left>
         <Height>0.74111cm</Height>
         <Width>19.85436cm</Width>
@@ -2293,7 +2293,7 @@
   <Width>7.86042in</Width>
   <Page>
     <PageHeader>
-      <Height>4.45134cm</Height>
+      <Height>2.7512cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2303,10 +2303,10 @@
               <Source>Embedded</Source>
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
-              <Top>0.9525cm</Top>
-              <Left>8.10455cm</Left>
-              <Height>3.49884cm</Height>
-              <Width>4.39796cm</Width>
+              <Top>0cm</Top>
+              <Left>8.38177cm</Left>
+              <Height>2.7512cm</Height>
+              <Width>3.34463cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2793,7 +2793,7 @@
           <KeepTogether>true</KeepTogether>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>4.45134cm</Height>
+          <Height>2.7512cm</Height>
           <Width>19.87855cm</Width>
           <Style>
             <Border>
@@ -2809,9 +2809,45 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.29531cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

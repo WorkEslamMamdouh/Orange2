@@ -6,34 +6,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.15998cm</Width>
+              <Width>2.1785cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.62339cm</Width>
+              <Width>1.64191cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.2129cm</Width>
+              <Width>2.23142cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.03734cm</Width>
+              <Width>2.05586cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.77819cm</Width>
+              <Width>1.79671cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.97736cm</Width>
+              <Width>0.99588cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.76777cm</Width>
+              <Width>4.78629cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.86726cm</Width>
+              <Width>1.88578cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73271cm</Width>
+              <Width>1.75123cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.62146cm</Width>
+              <Width>0.63998cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -893,12 +893,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_OPerationInvoiceSimpleComp4Ar</DataSetName>
         <Top>3.64537cm</Top>
-        <Left>0.13634in</Left>
+        <Left>0.06342in</Left>
         <Height>1.64979cm</Height>
-        <Width>19.77836cm</Width>
+        <Width>19.96357cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1829,10 +1828,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Value>=First(Fields!QRSTR.Value, "Rpt_Prnt_OPerationInvoiceSimpleComp4Ar")</Value>
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>0.75846cm</Top>
-        <Left>0.81174cm</Left>
-        <Height>2.4cm</Height>
-        <Width>3.2018cm</Width>
+        <Top>0.88546cm</Top>
+        <Left>0.50665cm</Left>
+        <Height>2.50127cm</Height>
+        <Width>3.37989cm</Width>
         <ZIndex>15</ZIndex>
         <ToolTip>=First(Fields!QRSTR.Value, "Rpt_Prnt_OPerationInvoiceSimpleComp4Ar")</ToolTip>
         <Style>
@@ -2393,10 +2392,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Source>Embedded</Source>
         <Value>draft21</Value>
         <Sizing>Fit</Sizing>
-        <Top>0.70556cm</Top>
-        <Left>0.46619cm</Left>
-        <Height>2.7482cm</Height>
-        <Width>3.80918cm</Width>
+        <Top>0.83256cm</Top>
+        <Left>0.50665cm</Left>
+        <Height>2.51184cm</Height>
+        <Width>3.64172cm</Width>
         <ZIndex>32</ZIndex>
         <Visibility>
           <Hidden>=iif(Fields!Status.Value=0,false,true)</Hidden>
@@ -2581,7 +2580,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
   <Width>7.9231in</Width>
   <Page>
     <PageHeader>
-      <Height>4.45134cm</Height>
+      <Height>2.7512cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -2591,10 +2590,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Source>Embedded</Source>
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
-              <Top>0.9525cm</Top>
-              <Left>8.10455cm</Left>
-              <Height>3.49884cm</Height>
-              <Width>4.39796cm</Width>
+              <Top>0cm</Top>
+              <Left>8.26879cm</Left>
+              <Height>2.7512cm</Height>
+              <Width>3.61636cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -3081,7 +3080,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <KeepTogether>true</KeepTogether>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>4.45134cm</Height>
+          <Height>2.7512cm</Height>
           <Width>20.12467cm</Width>
           <Style>
             <Border>
@@ -3097,9 +3096,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.29531cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0.0796cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

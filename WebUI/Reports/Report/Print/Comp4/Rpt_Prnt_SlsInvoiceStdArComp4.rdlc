@@ -22,7 +22,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.97014cm</Top>
+        <Top>0.84314cm</Top>
         <Left>18.30537cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
@@ -55,7 +55,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>0.97014cm</Top>
+        <Top>0.84314cm</Top>
         <Left>13.25581cm</Left>
         <Height>0.6cm</Height>
         <Width>5.04955cm</Width>
@@ -90,7 +90,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.97014cm</Top>
+        <Top>0.84314cm</Top>
         <Left>10.71581cm</Left>
         <Height>0.6cm</Height>
         <Width>2.31479cm</Width>
@@ -124,7 +124,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.97014cm</Top>
+        <Top>0.84314cm</Top>
         <Left>7.63383cm</Left>
         <Height>0.6cm</Height>
         <Width>3.08199cm</Width>
@@ -871,319 +871,6 @@
                 </TablixCell>
               </TablixCells>
             </TablixRow>
-            <TablixRow>
-              <Height>0.6cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox3">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox3</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox8">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox8</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox10">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox10</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox12">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox12</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox14">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox14</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox15">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox15</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox18">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox18</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="It_DescE">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!It_DescE.Value</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>It_DescE</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <ColSpan>2</ColSpan>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell />
-              </TablixCells>
-            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -1210,7 +897,6 @@
               <Group Name="Details" />
               <TablixMembers>
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
@@ -1219,12 +905,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp4</DataSetName>
-        <Top>9.91964cm</Top>
+        <Top>8.64964cm</Top>
         <Left>0cm</Left>
-        <Height>1.8cm</Height>
-        <Width>20.1643cm</Width>
+        <Height>1.2cm</Height>
+        <Width>20.16435cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1251,7 +936,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.29135cm</Top>
+        <Top>15.02135cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1285,7 +970,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.2843cm</Top>
+        <Top>15.0143cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1319,7 +1004,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.90166cm</Top>
+        <Top>15.63166cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1353,7 +1038,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.90166cm</Top>
+        <Top>15.63166cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1387,7 +1072,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.90166cm</Top>
+        <Top>15.63166cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1421,7 +1106,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.57222cm</Top>
+        <Top>16.30222cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1455,7 +1140,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.90166cm</Top>
+        <Top>15.63166cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1489,7 +1174,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.57222cm</Top>
+        <Top>16.30222cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1523,7 +1208,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.57222cm</Top>
+        <Top>16.30222cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1557,7 +1242,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.57222cm</Top>
+        <Top>16.30222cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1592,7 +1277,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.42061cm</Top>
+        <Top>2.29361cm</Top>
         <Left>18.30536cm</Left>
         <Height>0.57354cm</Height>
         <Width>1.80576cm</Width>
@@ -1626,7 +1311,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>2.42061cm</Top>
+        <Top>2.29361cm</Top>
         <Left>13.25581cm</Left>
         <Height>0.57354cm</Height>
         <Width>5.04955cm</Width>
@@ -1659,7 +1344,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrTime</rd:DefaultName>
-        <Top>0.97014cm</Top>
+        <Top>0.84314cm</Top>
         <Left>5.24848cm</Left>
         <Height>0.6cm</Height>
         <Width>2.31479cm</Width>
@@ -1694,7 +1379,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.6407cm</Top>
+        <Top>1.5137cm</Top>
         <Left>10.71581cm</Left>
         <Height>0.57354cm</Height>
         <Width>2.31479cm</Width>
@@ -1728,7 +1413,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.6407cm</Top>
+        <Top>1.5137cm</Top>
         <Left>7.63383cm</Left>
         <Height>0.57354cm</Height>
         <Width>3.08199cm</Width>
@@ -1763,7 +1448,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>15.54671cm</Top>
+        <Top>14.27671cm</Top>
         <Left>18.14558cm</Left>
         <Height>0.6cm</Height>
         <Width>2.01872cm</Width>
@@ -1797,7 +1482,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>15.54671cm</Top>
+        <Top>14.27671cm</Top>
         <Left>0.16956cm</Left>
         <Height>0.6cm</Height>
         <Width>17.97602cm</Width>
@@ -2586,7 +2271,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp4</DataSetName>
-        <Top>11.74699cm</Top>
+        <Top>10.47699cm</Top>
         <Left>0.06676in</Left>
         <Height>3.6cm</Height>
         <Width>20.07491cm</Width>
@@ -2602,10 +2287,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Value>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp4")</Value>
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>0.84314cm</Top>
+        <Top>0.0635cm</Top>
         <Left>0.34025cm</Left>
-        <Height>3.13892cm</Height>
-        <Width>4.47784cm</Width>
+        <Height>2.80365cm</Height>
+        <Width>3.47625cm</Width>
         <ZIndex>23</ZIndex>
         <ToolTip>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp4")</ToolTip>
         <Style>
@@ -3541,7 +3226,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.28545cm</Top>
+        <Top>3.01545cm</Top>
         <Left>10.39668cm</Left>
         <Height>5.50558cm</Height>
         <Width>9.76762cm</Width>
@@ -4501,7 +4186,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.28545cm</Top>
+        <Top>3.01545cm</Top>
         <Left>0.34922cm</Left>
         <Height>5.50558cm</Height>
         <Width>9.94163cm</Width>
@@ -4551,7 +4236,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>1.67597cm</Top>
+        <Top>1.54897cm</Top>
         <Left>13.25581cm</Left>
         <Height>0.6cm</Height>
         <Width>5.04955cm</Width>
@@ -4586,7 +4271,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.67597cm</Top>
+        <Top>1.54897cm</Top>
         <Left>18.30536cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
@@ -4605,10 +4290,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Source>Embedded</Source>
         <Value>draft21</Value>
         <Sizing>Fit</Sizing>
-        <Top>0.84314cm</Top>
+        <Top>0.0635cm</Top>
         <Left>0.34025cm</Left>
-        <Height>3.24475cm</Height>
-        <Width>4.48037cm</Width>
+        <Height>2.80365cm</Height>
+        <Width>3.47625cm</Width>
         <ZIndex>28</ZIndex>
         <Visibility>
           <Hidden>=iif(Fields!Status.Value=0,false,true)</Hidden>
@@ -4656,13 +4341,13 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>7.15442in</Height>
+    <Height>6.65442in</Height>
     <Style />
   </Body>
   <Width>7.97027in</Width>
   <Page>
     <PageHeader>
-      <Height>4.18703cm</Height>
+      <Height>2.7512cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -4672,10 +4357,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Source>Embedded</Source>
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
-              <Top>0.79227cm</Top>
-              <Left>7.7536cm</Left>
-              <Height>3.33126cm</Height>
-              <Width>4.42259cm</Width>
+              <Top>0cm</Top>
+              <Left>8.36839cm</Left>
+              <Height>2.7512cm</Height>
+              <Width>3.60672cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4693,6 +4378,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -4728,6 +4414,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -5162,7 +4849,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <KeepTogether>true</KeepTogether>
           <Top>0cm</Top>
           <Left>0cm</Left>
-          <Height>4.18703cm</Height>
+          <Height>2.7512cm</Height>
           <Width>20.24448cm</Width>
           <Style>
             <Border>
@@ -5178,9 +4865,45 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.02917cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>  E1@HOTMAILCOM ايميل - T-S- 0505182487-0538889805 الرياض - العزيزية - سوق الجملة - ثلاجة28 - هاتف 2134233-جوال </Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>DarkBlue</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox3</rd:DefaultName>
+          <Top>0cm</Top>
+          <Left>0.13951cm</Left>
+          <Height>0.6cm</Height>
+          <Width>19.96547cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
