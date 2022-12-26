@@ -33,6 +33,7 @@ var LnkTransVoucher;
     var SYSTEM_CODE = SysSession.CurrentEnvironment.SystemCode;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        alert(SysSession.CurrentEnvironment.SerialNumber);
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = " تصميم قيود الربط  ";
         }

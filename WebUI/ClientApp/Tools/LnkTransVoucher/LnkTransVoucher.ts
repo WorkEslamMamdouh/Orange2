@@ -44,6 +44,9 @@ namespace LnkTransVoucher {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
+
+        alert(SysSession.CurrentEnvironment.SerialNumber);
+
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") { document.getElementById('Screen_name').innerHTML = " تصميم قيود الربط  "; }
         else { document.getElementById('Screen_name').innerHTML = "Design link constraints"; }
 
