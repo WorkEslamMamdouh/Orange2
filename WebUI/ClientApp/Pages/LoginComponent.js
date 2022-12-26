@@ -328,18 +328,18 @@ var LoginComponent;
                                                             }
                                                         }
                                                     });
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: Url.Action("GetSerialNumber", "Home"),
-                                                        success: function (d) {
-                                                            debugger;
-                                                            var result = d.trim();
-                                                            var res = result.replace("SerialNumber", "");
-                                                            SystemEnv.SerialNumber = res.trim();
-                                                            document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                                                            OnLogged();
-                                                        }
-                                                    });
+                                                    //$.ajax({
+                                                    //    type: "GET",
+                                                    //    url: Url.Action("GetSerialNumber", "Home"),
+                                                    //    success: (d) => {
+                                                    //        debugger
+                                                    //        let result = d.trim();
+                                                    //        let res = result.replace("SerialNumber", "");
+                                                    //        SystemEnv.SerialNumber = res.trim();
+                                                    //    }
+                                                    //})
+                                                    document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                    OnLogged();
                                                 }
                                                 else {
                                                     var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول للنظام" : "You are not allowed to login";
