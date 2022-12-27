@@ -140,11 +140,11 @@ namespace JournalVoucher {
     var DepitTotal: number = 0;
     var CreditTotal: number = 0;
     var btnPrintTransaction;
-
+    var Events = 0;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
-        
+
         //System
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "سند قيد" : document.getElementById('Screen_name').innerHTML = "Journal Voucher";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -171,7 +171,7 @@ namespace JournalVoucher {
 
         btnAddDetails.onclick = AddNewRow;
         InitalizeEvents();
-         
+
     }
 
     //------------------------------------------------------ Main Region -----------------------------------
@@ -256,98 +256,7 @@ namespace JournalVoucher {
         btnUnAuthorize.onclick = btnUnAuthorize_onclick;
         btnPost.onclick = btnPost_onclick;
         btnReverseVoucher.onclick = btnReverseVoucher_onclick;
-        $("#divCostCnterName").on('click', function () {
-            $(".costcntr").toggle();
-            /////////////////////////
-            var show1 = $(".costcntr").is(":visible");
-            var show2 = $(".Acc").is(":visible");
-            if (show1 == false && show2 == true) {
 
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-                }
-                $("#divJournalVouchergred").addClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-
-            } else if (show1 == true && show2 == false) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-                }
-                $("#divJournalVouchergred").addClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-            } else if (show1 == true && show2 == true) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-                }
-                $("#divJournalVouchergred").removeClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-            } else if (show1 == false && show2 == false) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred3");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred2");
-                }
-                $("#divJournalVouchergred").addClass("JournalVouchergred3");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred2");
-
-            }
-            //////////////////////////
-            $("#txtAccountNameFooter").prop("value", "");
-            $("#txtCostCntrNameFooter").prop("value", "");
-        });
-
-        $("#divAccNumber").on('click', function () {
-            $(".Acc").toggle();
-            /////////////////////////
-            var show1 = $(".costcntr").is(":visible");
-            var show2 = $(".Acc").is(":visible");
-            if (show1 == false && show2 == true) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-
-                } $("#divJournalVouchergred").addClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-            } else if (show1 == true && show2 == false) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-                }
-                $("#divJournalVouchergred").addClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-            } else if (show1 == true && show2 == true) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred2");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred3");
-                }
-                $("#divJournalVouchergred").removeClass("JournalVouchergred2");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred3");
-
-            } else if (show1 == false && show2 == false) {
-                for (var i = 0; i < CountGrid; i++) {
-                    $("#divJouralHide" + i).addClass("JournalVouchergred3");
-                    $("#divJouralHide" + i).removeClass("JournalVouchergred2");
-                }
-                $("#divJournalVouchergred").addClass("JournalVouchergred3");
-                $("#divJournalVouchergred").removeClass("JournalVouchergred2");
-
-            }
-            //////////////////////////
-            $("#txtAccountNameFooter").prop("value", "");
-            $("#txtCostCntrNameFooter").prop("value", "");
-        });
-
-        //divJouralHide
-        $("#divCostCnterNameCCDT").on('click', function () {
-            $(".costcntrCCDt").toggle();
-        });
         btnCreateTemplate.onclick = btnCreateTemplate_onclick;
         btnEditTemplate.onclick = btnEditTemplate_onclick;
         btnLoadTemplate.onclick = btnLoadTemplate_onclick;
@@ -384,7 +293,7 @@ namespace JournalVoucher {
 
         $("#divTemplateData").removeClass("display_none");
 
-        
+
 
         $(".BtnHide").removeAttr("disabled");
 
@@ -444,7 +353,7 @@ namespace JournalVoucher {
     function btnCopyRemark_onclick() {
 
 
-      
+
         for (var i = 0; i < CountGrid; i++) {
             if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
 
@@ -707,7 +616,7 @@ namespace JournalVoucher {
         CountGrid = JournalDetailModelFiltered.length;
         ComputeTotals();
         DisableControls();
-        
+
         // جديد
         if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
             rdNew.checked = true;
@@ -759,7 +668,71 @@ namespace JournalVoucher {
             $("#btnUpdate").attr("disabled", "disabled");
         }
     }
+    function clickEventsVisible() {
+        
+        $("#divCostCnterName").on('click', function () {
+            debugger
+            if (Events == 0) {
+                var show1 = $(".costcntr").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
 
+                    $(".costcntr").addClass("display_none");
+                }
+                else {
+                    $(".costcntr").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0 }, 700);
+            }
+
+        });
+
+        $("#divAccNumber").on('click', function () {
+            debugger
+            if (Events == 0) {
+                //$(".Acc").toggle();
+                /////////////////////////
+                var show1 = $(".Acc").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+
+                    $(".Acc").addClass("display_none");
+                }
+                else {
+                    $(".Acc").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0 }, 700);
+            }
+
+        });
+
+        //divJouralHide
+        $("#divCostCnterNameCCDT").on('click', function () {
+            debugger
+
+            //$(".costcntrCCDt").toggle();
+            /////////////////////////
+            if (Events == 0) {
+
+                var show1 = $(".costcntrCCDt").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+
+                    $(".costcntrCCDt").addClass("display_none");
+                }
+                else {
+                    $(".costcntrCCDt").removeClass("display_none");
+                }
+
+                Events = 1;
+                setTimeout(function () {   Events = 0 }, 700);
+            }
+
+        });
+
+    }
     //------------------------------------------------------ Validation Region -----------------------------------
     function Validation_Header() {
         var newCount: number = 0;
@@ -1145,7 +1118,7 @@ namespace JournalVoucher {
 			                 <input id="txtAccNumber${cnt}" name="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td style="width:17%;">
+                    <td style="width:17%;" class="Acc">
 		                <div class="form-group">
 			                  <input id="txtAccName${cnt}" name="" disabled type="text" class="form-control"  />
 		                </div>
@@ -1173,7 +1146,7 @@ namespace JournalVoucher {
 			                <input id="txtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td style="width:17%;">
+                    <td style="width:17%;" class="costcntr">
 		                <div class="form-group">
 			                  <input id="txtCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
@@ -1191,7 +1164,7 @@ namespace JournalVoucher {
 			               <input id="txtCCDtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
-                    <td class="display_none">
+                    <td class="display_none costcntrCCDt">
 		                <div class="form-group">
 			                  <input id="txtCCDTCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
 		                </div>
@@ -1467,6 +1440,38 @@ namespace JournalVoucher {
             }
         });
 
+        debugger
+        var show2 = $(".costcntr").is(":visible");
+        //var show2 = $(".Acc").is(":visible");
+        if (show2 == false) {
+
+            $(".costcntr").addClass("display_none");
+        }
+        else {
+            $(".costcntr").removeClass("display_none");
+        }
+
+        var show1 = $(".Acc").is(":visible");
+        //var show2 = $(".Acc").is(":visible");
+        if (show1 == false) {
+
+            $(".Acc").addClass("display_none");
+        }
+        else {
+            $(".Acc").removeClass("display_none");
+        }
+
+        var show3 = $(".costcntrCCDt").is(":visible");
+        //var show2 = $(".Acc").is(":visible");
+        if (show3 == false) {
+
+            $(".costcntrCCDt").addClass("display_none");
+        }
+        else {
+            $(".costcntrCCDt").removeClass("display_none");
+        }
+
+
         if (showFlag == true) {
 
             $('#txtSerial' + cnt).val(JournalDetailModelFiltered[cnt].VOUCHER_SERIAL);
@@ -1533,7 +1538,7 @@ namespace JournalVoucher {
             $(".ccTypeBranch").hide();
         }
 
-
+        clickEventsVisible();
     }
     function ComputeTotals() {
 
@@ -2005,9 +2010,9 @@ namespace JournalVoucher {
         for (var i = 0; i < CountGrid; i++) {
             JournalDetailSingleModel = new A_JOURNAL_DETAIL();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            if (GlobalTemplateID != 0 && StatusFlag != "d"&& StatusFlag != "m") {
+            if (GlobalTemplateID != 0 && StatusFlag != "d" && StatusFlag != "m") {
                 StatusFlag = "i";
-            } 
+            }
             JournalDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             JournalDetailSingleModel.StatusFlag = StatusFlag.toString();
 
@@ -2055,7 +2060,7 @@ namespace JournalVoucher {
 
         MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.JournalVoucher; 
+        MasterDetailModel.MODULE_CODE = Modules.JournalVoucher;
         MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
 
@@ -2088,7 +2093,7 @@ namespace JournalVoucher {
 
                     $("#divFilter").removeClass("disabledDiv");
                     $("#divGridShow").removeClass("disabledDiv");
-                 
+
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
                     $('#divTemplateData').addClass('showdiv');
@@ -2193,7 +2198,7 @@ namespace JournalVoucher {
 
 
                     $("#divFilter").removeClass("disabledDiv");
-                    $("#divGridShow").removeClass("disabledDiv"); 
+                    $("#divGridShow").removeClass("disabledDiv");
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
                     $('#divTemplateData').addClass('showdiv');
@@ -2481,7 +2486,7 @@ namespace JournalVoucher {
                 StatusFlag = "i";
             } else {
                 StatusFlag = $("#txt_StatusFlag" + i).val();
-            } 
+            }
             TempDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             TempDetailSingleModel.StatusFlag = StatusFlag.toString();
 

@@ -309,7 +309,7 @@ var AccDefCustomer;
         $("#Div_ADDRESS :input").removeAttr("disabled");
         $("#Div_ADDRESS :input").val("");
         $("#txt_Country").val("null");
-        AddNewRow();
+        //AddNewRow();
         SysSession.CurrentEnvironment.I_Control[0].NationalityID != null ? $("#txt_Country").val(SysSession.CurrentEnvironment.I_Control[0].NationalityID) : $("#txt_Country").val("null");
         SysSession.CurrentEnvironment.I_Control[0].Currencyid != null ? $("#txt_Currency").val(SysSession.CurrentEnvironment.I_Control[0].Currencyid) : $("#txt_Currency").val("null");
         Is_cust = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;

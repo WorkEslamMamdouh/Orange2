@@ -1597,6 +1597,7 @@ namespace SlsTrSalesManagerNew {
         $('#txtUpdatedBy').prop("value", "");
         $('#txtUpdatedAt').prop("value", "");
         $('#txt_CustCode').prop("value", "");
+        $('#VoucherNo').prop("value", "");
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             txtInvoiceCustomerName.value = "عميل نقدي عام";

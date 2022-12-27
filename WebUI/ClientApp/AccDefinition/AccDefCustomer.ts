@@ -352,7 +352,7 @@ namespace AccDefCustomer {
         $("#txt_Country").val("null");
 
 
-        AddNewRow();
+        //AddNewRow();
 
 
         SysSession.CurrentEnvironment.I_Control[0].NationalityID != null ? $("#txt_Country").val(SysSession.CurrentEnvironment.I_Control[0].NationalityID) : $("#txt_Country").val("null");
