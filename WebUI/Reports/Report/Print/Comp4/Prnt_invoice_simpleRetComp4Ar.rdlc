@@ -2409,6 +2409,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -2444,6 +2445,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>

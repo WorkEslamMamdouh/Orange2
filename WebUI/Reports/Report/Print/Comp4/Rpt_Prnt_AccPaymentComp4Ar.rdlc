@@ -1919,7 +1919,7 @@
         <Top>0cm</Top>
         <Left>0.49426cm</Left>
         <Height>0.68819cm</Height>
-        <Width>19.52504cm</Width>
+        <Width>19.32079cm</Width>
         <ZIndex>34</ZIndex>
         <Style>
           <Border>
@@ -1988,7 +1988,7 @@
     <Height>4.18379in</Height>
     <Style />
   </Body>
-  <Width>7.88161in</Width>
+  <Width>7.8012in</Width>
   <Page>
     <PageHeader>
       <Height>3.22971cm</Height>
@@ -2132,7 +2132,7 @@
               <Value>Comp4Logo</Value>
               <Sizing>Fit</Sizing>
               <Top>0cm</Top>
-              <Left>8.31622cm</Left>
+              <Left>8.25272cm</Left>
               <Height>2.67136cm</Height>
               <Width>3.44546cm</Width>
               <Style>
@@ -2152,6 +2152,7 @@
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -2162,7 +2163,7 @@
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
               <Top>0cm</Top>
-              <Left>11.89926cm</Left>
+              <Left>11.80401cm</Left>
               <Height>0.67938cm</Height>
               <Width>8.01104cm</Width>
               <ZIndex>1</ZIndex>
@@ -2187,6 +2188,7 @@
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -2195,7 +2197,7 @@
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
               <Top>0cm</Top>
-              <Left>0cm</Left>
+              <Left>0.03175cm</Left>
               <Height>0.67938cm</Height>
               <Width>8.10455cm</Width>
               <ZIndex>2</ZIndex>
@@ -2228,7 +2230,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox41</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>0.02419cm</Left>
+              <Left>0.05594cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>3</ZIndex>
@@ -2261,7 +2263,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>0.02419cm</Left>
+              <Left>0.05594cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>4</ZIndex>
@@ -2294,7 +2296,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>2.15847cm</Left>
+              <Left>2.19022cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>5</ZIndex>
@@ -2327,7 +2329,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>2.15847cm</Left>
+              <Left>2.19022cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>6</ZIndex>
@@ -2362,7 +2364,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox41</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>17.70212cm</Left>
+              <Left>17.60687cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>7</ZIndex>
@@ -2397,7 +2399,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>17.70211cm</Left>
+              <Left>17.60686cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>8</ZIndex>
@@ -2432,7 +2434,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>13.45474cm</Left>
+              <Left>13.35949cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>9</ZIndex>
@@ -2467,7 +2469,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>13.45473cm</Left>
+              <Left>13.35948cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>10</ZIndex>
@@ -2486,7 +2488,7 @@
           <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>2.67136cm</Height>
-          <Width>20.00555cm</Width>
+          <Width>19.81505cm</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
@@ -2513,8 +2515,8 @@
     </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>0cm</LeftMargin>
-    <RightMargin>0cm</RightMargin>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0.5cm</RightMargin>
     <TopMargin>0.5cm</TopMargin>
     <BottomMargin>0.5cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>

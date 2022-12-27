@@ -906,7 +906,7 @@
         <Top>9.85614cm</Top>
         <Left>0.18402cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.94982cm</Width>
+        <Width>19.94983cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -4225,6 +4225,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -4260,6 +4261,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>

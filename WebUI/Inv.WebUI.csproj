@@ -2308,7 +2308,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="ClientApp\Component\" />
     <Folder Include="Newtemplate\template\assets\images\home\why-us\" />
-    <Folder Include="Reports\Report\Print\Comp10\" />
     <Folder Include="Views\Site\UnderConstruction\" />
   </ItemGroup>
   <ItemGroup>
@@ -2428,6 +2427,27 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_invoice_simpleComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_invoice_simpleComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_invoice_simpleRetComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_invoice_simpleRetComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceRetSimpleComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceRetSimpleComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceRetstdComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceRetstdComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceSimpleComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoiceSimpleComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoicestdComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Prnt_VATSlsInvoicestdComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_AccPaymentComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_AccPaymentComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_AccReceiveComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_AccReceiveComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceSimpleComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceSimpleComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceStdComp10Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceStdComp10En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_SlsInvoiceStdArComp10.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicePriceComp3Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicePriceComp3En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoiceRetSimpleComp3Ar.rdlc" />
@@ -2472,6 +2492,8 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_AccReceiveComp4En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceSimpleComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceSimpleComp4En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceStdComp4Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceStdComp4En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_SlsInvoiceStdArComp4.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Prnt_invoice_simpleComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Prnt_invoice_simpleComp5En.rdlc" />

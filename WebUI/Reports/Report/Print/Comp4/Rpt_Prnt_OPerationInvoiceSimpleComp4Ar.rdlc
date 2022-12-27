@@ -897,7 +897,7 @@
         <Top>3.64537cm</Top>
         <Left>0.06342in</Left>
         <Height>1.64979cm</Height>
-        <Width>19.96357cm</Width>
+        <Width>19.96356cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2611,6 +2611,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -2646,6 +2647,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -2654,7 +2656,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
               <Top>0cm</Top>
-              <Left>0cm</Left>
+              <Left>0.0635cm</Left>
               <Height>0.67938cm</Height>
               <Width>8.10455cm</Width>
               <ZIndex>2</ZIndex>
@@ -2687,7 +2689,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox41</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>0.02419cm</Left>
+              <Left>0.08769cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>3</ZIndex>
@@ -2720,7 +2722,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>0.02419cm</Left>
+              <Left>0.08769cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>4</ZIndex>
@@ -2753,7 +2755,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>2.1512cm</Top>
-              <Left>0.02419cm</Left>
+              <Left>0.08769cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>5</ZIndex>
@@ -2786,7 +2788,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>2.15847cm</Left>
+              <Left>2.22197cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>6</ZIndex>
@@ -2819,7 +2821,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>2.15847cm</Left>
+              <Left>2.22197cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>7</ZIndex>
@@ -2852,7 +2854,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>2.1512cm</Top>
-              <Left>2.15847cm</Left>
+              <Left>2.22197cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>8</ZIndex>

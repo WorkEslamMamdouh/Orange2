@@ -1819,6 +1819,7 @@
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1854,6 +1855,7 @@
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>#dc4624</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
