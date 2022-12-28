@@ -169,7 +169,7 @@ namespace OperationScrap {
             rp.OperationId = -1;
 
         } else {
-            rp.OperationId = Number($("#txt_Processes").val());
+            rp.OperationId = OperaID;
         }
 
         rp.Name_function = "IProc_Rep_OperationScrap";

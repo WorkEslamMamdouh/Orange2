@@ -1,7 +1,9 @@
 ﻿
 @using Inv.WebUI.Resources
 @{
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+                /**/
+
+                Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 
@@ -290,291 +292,324 @@
                 <div class="col-lg-5 col-md-4 col-sm-4 col-xl-4 col-xs-4">
                     <input type="text" class="form-control input-sm addable editable" name="" id="Txt_PswPrice">
                 </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 " style="width:38%;">تغيير سعر البيع تلقائي</label>
+                @*<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>*@
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" style="width:25%;" name="RDAUTO" id="chk_AutoupdateSalesPrice">
+                    <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-5 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
                 </div>
-
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 " style="width:38%;">تغيير سعر البيع تلقائي</label>
-                    @*<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>*@
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" style="width:25%;" name="RDAUTO" id="chk_AutoupdateSalesPrice">
-                        <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-5 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" style="width:25%;" name="RDAUTO" id="chk_AutoupdateSalesPrice2">
-                        <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-5 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">
-                    
-                    <label class="col-lg-7 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 " style="width:55%;">نسبة الزيادة سعر البيع عن سعر الشراء</label>
-                        <div class="col-lg-5 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                            <input type="number" class="form-control input-sm addable editable" name="SalePriceAddPerc" id="Txt_SalePriceAddPerc">
-                        </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
-
-                    <label class="col-lg-7 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 " style="width:58%;">نسبة زيادة اقل سعر بيع عن سعر الشراء</label>
-                    <div class="col-lg-5 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                            <input type="number" class="form-control input-sm addable editable" name="SalePriceMinAddPer" id="Txt_SalePriceMinAddPerc">                      
-                    </div>
-                 
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" style="width:25%;" name="RDAUTO" id="chk_AutoupdateSalesPrice2">
+                    <div class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-5 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
                 </div>
             </div>
 
+
+
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">
+
+                <label class="col-lg-7 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 " style="width:55%;">نسبة الزيادة سعر البيع عن سعر الشراء</label>
+                <div class="col-lg-5 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                    <input type="number" class="form-control input-sm addable editable" name="SalePriceAddPerc" id="Txt_SalePriceAddPerc">
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+                <label class="col-lg-7 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 " style="width:58%;">نسبة زيادة اقل سعر بيع عن سعر الشراء</label>
+                <div class="col-lg-5 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="number" class="form-control input-sm addable editable" name="SalePriceMinAddPer" id="Txt_SalePriceMinAddPerc">
+                </div>
+
+            </div>
         </div>
+
+
+        <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 border_gridCont">
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 ">
+
+                <label class="col-lg-6 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 " style="">ExceedMinPricePassword</label>
+                <div class="col-lg-6 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                    <input type="text" class="form-control input-sm addable editable" name="ExceedMinPricePassword" id="ExceedMinPricePassword">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+                <label class="col-lg-6 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 " style="">RetailInvoicePaymentDef</label>
+                <div class="col-lg-6 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="number" class="form-control input-sm addable editable" name="RetailInvoicePaymentDef" id="RetailInvoicePaymentDef">
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+                <label class="col-lg-6 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 " style="">OperationInvoicePaymentDef</label>
+                <div class="col-lg-6 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="number" class="form-control input-sm addable editable" name="OperationInvoicePaymentDef" id="OperationInvoicePaymentDef">
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
 </div>
 
 
 <div id="divBraInformtion" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
 
-        <label id="lepcompinformtion" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepcompinformtion" class="ifontowsam fa fa-caret-left"></span>فواتير المبيعات   </label>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont">
+    <label id="lepcompinformtion" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepcompinformtion" class="ifontowsam fa fa-caret-left"></span>فواتير المبيعات   </label>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont">
 
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0 ">
-                <div class="col-lg-4 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">فاتورة التجزئة   </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceAllowed" id="Chk_RetailInvoiceAllowed">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceAllowed" id="Chk_RetailInvoiceAllowed2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
-                    </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0 ">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">فاتورة التجزئة   </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceAllowed" id="Chk_RetailInvoiceAllowed">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع الفاتورة    </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceTransCode" id="Chk_RetailInvoiceTransCode">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">قياسية</label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceTransCode" id="Chk_RetailInvoiceTransCode2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">مبسطة </label>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع البيع    </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نقدي</label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">اجل </label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment3">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">الجميع </label>
-                    </div>
-
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceAllowed" id="Chk_RetailInvoiceAllowed2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont">
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">فاتورة الجملة   </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceAllowed" id="Chk_WholeInvoiceAllowed">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceAllowed" id="Chk_WholeInvoiceAllowed2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
-                    </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع الفاتورة    </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceTransCode" id="Chk_RetailInvoiceTransCode">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">قياسية</label>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع الفاتورة    </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceTransCode" id="Chk_WholeInvoiceTransCode">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">قياسية</label>
-                    </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoiceTransCode" id="Chk_RetailInvoiceTransCode2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">مبسطة </label>
+                </div>
+            </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceTransCode" id="Chk_WholeInvoiceTransCode2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">مبسطة </label>
-                    </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع البيع    </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نقدي</label>
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
-                    <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع المبيع    </label>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نقدي</label>
-                    </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">اجل </label>
+                </div>
 
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment2">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">اجل </label>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
-                        <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment3">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
-                        <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">الجميع </label>
-                    </div>
-
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="RetailInvoicePayment" id="Chk_RetailInvoicePayment3">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">الجميع </label>
                 </div>
 
             </div>
-
-    </div>
+        </div>
     </div>
 
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 border_gridCont">
 
-    <div id="divSecondGrid" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
-        <label id="lepcompinformtion" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepcompinformtion" class="ifontowsam fa fa-caret-left"></span>المستودعات   </label>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 p-0">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
 
-        <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">فاتورة الجملة   </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceAllowed" id="Chk_WholeInvoiceAllowed">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نعم</label>
+                </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
-                <button id="btnAddStore" type="button" class="btn btn-success   float_left_right ">
-                    <span class="glyphicon glyphicon-plus"></span> @SystemResource.App_Add
-                </button>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceAllowed" id="Chk_WholeInvoiceAllowed2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">لا </label>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع الفاتورة    </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceTransCode" id="Chk_WholeInvoiceTransCode">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">قياسية</label>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoiceTransCode" id="Chk_WholeInvoiceTransCode2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">مبسطة </label>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 p-0 ">
+                <label class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 pading_2Processes2 ">نوع المبيع    </label>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">نقدي</label>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment2">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">اجل </label>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">
+                    <input type="radio" class="form-control input-sm addable editable col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" name="WholeInvoicePayment" id="Chk_WholeInvoicePayment3">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1">  </div>
+                    <label class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 pading_2Processes2 ">الجميع </label>
+                </div>
 
             </div>
+
         </div>
 
-        <div id="" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12   ">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6">
+    </div>
+</div>
 
-                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                        <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الشركة	</label>
-                        <div class="col-lg-4 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                            <select id="ddlCompFilter" class="form-control input-sm addable editable"></select>
-                        </div>
 
-                    </div>*@
+<div id="divSecondGrid" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+    <label id="lepcompinformtion" class="col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8  labeltitel "><span id="spanlepcompinformtion" class="ifontowsam fa fa-caret-left"></span>المستودعات   </label>
+
+    <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
+            <button id="btnAddStore" type="button" class="btn btn-success   float_left_right ">
+                <span class="glyphicon glyphicon-plus"></span> @SystemResource.App_Add
+            </button>
+
+        </div>
+    </div>
+
+    <div id="" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12   ">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6">
+
+            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الشركة	</label>
+                    <div class="col-lg-4 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                        <select id="ddlCompFilter" class="form-control input-sm addable editable"></select>
+                    </div>
+
+                </div>*@
+        </div>
+    </div>
+    <div class=" display_none  col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="divStoreShow">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+            <input id="searchbutmemreportS" name="" type="text" class="form-control input-sm  text_Display" placeholder="@SystemResource.Search">
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <table id="divGridStoreDetails"></table>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+
+    <div id="divstoreinformtion" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12     ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 "></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
+                        <button id="btnSaveS" type="button" class="btn btn-success display_none  ">
+                            @SystemResource.App_save   <span class="glyphicon glyphicon-floppy-saved"></span>
+                        </button>
+                        <button id="btnBackS" type="button" class="btn btn-warning  display_none ">
+                            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
+                        </button>
+                        <button id="btnEditS" type="button" class="btn btn-primary    float_left_right">
+                            <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
+                        </button>
+
+                    </div>
+                </div>
+
             </div>
-        </div>
-        <div class=" display_none  col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12" id="divStoreShow">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
-                <input id="searchbutmemreportS" name="" type="text" class="form-control input-sm  text_Display" placeholder="@SystemResource.Search">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">  رقم المستودع</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="number" class="form-control input-sm addable editable" name="" id="txt_STORE_CODE">
+                </div>
+
+                @*</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">*@
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> اسم المستودع A</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="" id="txt_DescA">
+                </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">اسم المستودع E</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="text" class="form-control input-sm addable editable" name="" id="txt_DescL">
+                </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> رقم التليفون</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="number" class="form-control input-sm addable editable" name="" id="txt_Tel1">
+                </div>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                <table id="divGridStoreDetails"></table>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
-
-        <div id="divstoreinformtion" class="col-lg-12  col-md-12 col-sm-12 col-xl-12 col-xs-12     ">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 ">
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 "></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
-                            <button id="btnSaveS" type="button" class="btn btn-success display_none  ">
-                                @SystemResource.App_save   <span class="glyphicon glyphicon-floppy-saved"></span>
-                            </button>
-                            <button id="btnBackS" type="button" class="btn btn-warning  display_none ">
-                                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
-                            </button>
-                            <button id="btnEditS" type="button" class="btn btn-primary    float_left_right">
-                                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
-                            </button>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">  رقم المستودع</label>
+                @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> رقم التليفون</label>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <input type="number" class="form-control input-sm addable editable" name="" id="txt_STORE_CODE">
-                    </div>
-
-                    @*</div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">*@
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> اسم المستودع A</label>
+                        <input type="number" class="form-control input-sm addable editable" name="Tel1" id="txt_Tel1">
+                    </div>*@
+                @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الهاتف</label>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <input type="text" class="form-control input-sm addable editable" name="" id="txt_DescA">
-                    </div>
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">اسم المستودع E</label>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <input type="text" class="form-control input-sm addable editable" name="" id="txt_DescL">
-                    </div>
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> رقم التليفون</label>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <input type="number" class="form-control input-sm addable editable" name="" id="txt_Tel1">
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> رقم التليفون</label>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                            <input type="number" class="form-control input-sm addable editable" name="Tel1" id="txt_Tel1">
-                        </div>*@
-                    @*<label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الهاتف</label>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                            <input type="number" class="form-control input-sm addable editable" name="Tel2" id="txt_Tel2">
-                        </div>*@
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الهاتف</label>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
-                        <input type="number" class="form-control input-sm addable editable" name="" id="txt_Tel2">
-                    </div>
-                    <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> @SystemResource.App_address</label>
-                    <div class="col-lg-3 col-md-5 col-sm-5 col-xl-5 col-xs-5">
-                        <input type="text" class="form-control input-sm addable editable" name="" id="txt_Address2">
-                    </div>
-
-                    <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الملاحظات</label>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                        <input type="text" class="form-control input-sm addable editable" name="" id="txt_Remarks">
-                    </div>
-                </div>
-
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
-                    @*<label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الملاحظات</label>
-                        <div class="col-lg-5 col-md-4 col-sm-4 col-xl-4 col-xs-4">
-                            <input type="text" class="form-control input-sm addable editable" name="Remarks" id="txt_Remarks">
-                        </div>*@
-                </div>
-
+                        <input type="number" class="form-control input-sm addable editable" name="Tel2" id="txt_Tel2">
+                    </div>*@
             </div>
 
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> الهاتف</label>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2">
+                    <input type="number" class="form-control input-sm addable editable" name="" id="txt_Tel2">
+                </div>
+                <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 "> @SystemResource.App_address</label>
+                <div class="col-lg-3 col-md-5 col-sm-5 col-xl-5 col-xs-5">
+                    <input type="text" class="form-control input-sm addable editable" name="" id="txt_Address2">
+                </div>
+
+                <label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الملاحظات</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                    <input type="text" class="form-control input-sm addable editable" name="" id="txt_Remarks">
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                @*<label class="col-lg-1 col-md-2 col-sm-2 col-xl-2 col-xs-2 pading_2Processes2 ">الملاحظات</label>
+                    <div class="col-lg-5 col-md-4 col-sm-4 col-xl-4 col-xs-4">
+                        <input type="text" class="form-control input-sm addable editable" name="Remarks" id="txt_Remarks">
+                    </div>*@
+            </div>
 
         </div>
+
+
     </div>
-    <script src="~/ClientApp/Admin/AdminBar.js"></script>
+</div>
+<script src="~/ClientApp/Admin/AdminBar.js"></script>
 
