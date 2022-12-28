@@ -43,6 +43,10 @@ namespace AdminBar {
     var searchbutmemreport: HTMLInputElement;
 
 
+    var ExceedMinPricePassword: HTMLInputElement;
+    var RetailInvoicePaymentDef: HTMLInputElement;
+    var OperationInvoicePaymentDef: HTMLInputElement;
+
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
@@ -71,7 +75,7 @@ namespace AdminBar {
     var Txt_SalePriceAddPerc: HTMLInputElement;
     var Txt_SalePriceMinAddPerc: HTMLInputElement;
     var Txt_PswPrice: HTMLInputElement;
-    
+
     //------------------------------------------------------------
 
     var CompFilter: Array<G_COMPANY> = new Array<G_COMPANY>();
@@ -218,6 +222,11 @@ namespace AdminBar {
         btnSaveS = document.getElementById("btnSaveS") as HTMLButtonElement;
         btnBackS = document.getElementById("btnBackS") as HTMLButtonElement;
         btnEditS = document.getElementById("btnEditS") as HTMLButtonElement;
+
+
+        ExceedMinPricePassword = document.getElementById("ExceedMinPricePassword") as HTMLInputElement;
+        RetailInvoicePaymentDef = document.getElementById("RetailInvoicePaymentDef") as HTMLInputElement;
+        OperationInvoicePaymentDef = document.getElementById("OperationInvoicePaymentDef") as HTMLInputElement;
     }
 
     function InitalizeEvents() {
@@ -282,11 +291,11 @@ namespace AdminBar {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    ControlDet = result.Response as Array<I_Control>; 
+                    ControlDet = result.Response as Array<I_Control>;
                 }
             }
-        });   
-      
+        });
+
     }
     function InitializeGrid() {
 
@@ -348,7 +357,7 @@ namespace AdminBar {
         else { Chk_WholeInvoicePayment3.checked = true; }
         debugger
         if (ControlDet[0].IsLocalSalePrice == true) {
-            if (SelecteData[0].AutoupdateSalesPrice == true) { 
+            if (SelecteData[0].AutoupdateSalesPrice == true) {
                 chk_AutoupdateSalesPrice.checked = true;
                 Txt_SalePriceAddPerc.disabled = false;
                 Txt_SalePriceMinAddPerc.disabled = false;
@@ -365,7 +374,7 @@ namespace AdminBar {
 
             chk_AutoupdateSalesPrice.disabled = true;
             chk_AutoupdateSalesPrice2.disabled = true;
-            Txt_SalePriceMinAddPerc.disabled = true; 
+            Txt_SalePriceMinAddPerc.disabled = true;
             Txt_SalePriceAddPerc.disabled = true;
         }
 
@@ -389,7 +398,7 @@ namespace AdminBar {
         ddl_Currency.value = SelecteData[0].Currencyid == null ? 'null' : SelecteData[0].Currencyid.toString();
         Disabled();
         ClearStr();
-       
+
 
     }
 
@@ -593,10 +602,10 @@ namespace AdminBar {
                 if (result.IsSuccess) {
 
                     CompFilter = result.Response as Array<G_COMPANY>;
-                        $('#ddlCompFilter').append("<option value=null >" + (lang == "ar" ? "اختر الشركة" : "Choose Company") + "</option>");
+                    $('#ddlCompFilter').append("<option value=null >" + (lang == "ar" ? "اختر الشركة" : "Choose Company") + "</option>");
                     for (var i = 0; i < CompFilter.length; i++) {
                         $('#ddlCompFilter').append("<option value=" + CompFilter[i].COMP_CODE + " >" + (lang == "ar" ? CompFilter[i].NameA : CompFilter[i].NameE) + "</option>");
-                    }  
+                    }
 
                 }
             }
@@ -663,7 +672,7 @@ namespace AdminBar {
         });
     }
 
-    function Insert() { 
+    function Insert() {
         Ajax.Callsync({
             type: "Post",
             url: sys.apiUrl("GBranch", "Insert"),
@@ -692,7 +701,7 @@ namespace AdminBar {
         Model.IDNo = txt_IDNo.value;
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        
+
         //Model.RetailInvoiceAllowed = Number(Chk_RetailInvoiceAllowed.checked);
         if (Chk_RetailInvoiceAllowed.checked == true) { Model.RetailInvoiceAllowed = 0; }
         else { Model.RetailInvoiceAllowed = 1; }
@@ -717,10 +726,10 @@ namespace AdminBar {
         else if (Chk_WholeInvoicePayment2.checked == true) { Model.WholeInvoicePayment = 1; }
         else { Model.WholeInvoicePayment = 2; }
 
-        Model.AutoupdateSalesPrice = chk_AutoupdateSalesPrice.checked == true ? true : false; 
+        Model.AutoupdateSalesPrice = chk_AutoupdateSalesPrice.checked == true ? true : false;
     }
 
-    function Update() { 
+    function Update() {
 
         $("#btnEdit").removeClass("display_none");
         $("#btnSave").addClass("display_none");
@@ -806,7 +815,7 @@ namespace AdminBar {
         else {
             Insert();
         }
-        succes(); 
+        succes();
         $("#divSecondGrid").removeClass("disabledDiv");
         $("#divstoreinformtion").removeClass("disabledDiv");
     }
@@ -861,6 +870,11 @@ namespace AdminBar {
         txt_BuildNum1.disabled = true;
         txt_BuildNum2.disabled = true;
         txt_postCode.disabled = true;
+
+        ExceedMinPricePassword.disabled = true;
+        RetailInvoicePaymentDef.disabled = true;
+        OperationInvoicePaymentDef.disabled = true;
+
         txt_BRA_DESC.disabled = true;
         chk_AutoupdateSalesPrice.disabled = true;
         chk_AutoupdateSalesPrice2.disabled = true;
@@ -906,9 +920,14 @@ namespace AdminBar {
         txt_BuildNum1.disabled = false;
         txt_BuildNum2.disabled = false;
         txt_postCode.disabled = false;
+
+        ExceedMinPricePassword.disabled = false;
+        RetailInvoicePaymentDef.disabled = false;
+        OperationInvoicePaymentDef.disabled = false;
+
         txt_BRA_DESC.disabled = false;
         chk_AutoupdateSalesPrice.disabled = false;
-        chk_AutoupdateSalesPrice2.disabled = false; 
+        chk_AutoupdateSalesPrice2.disabled = false;
         Txt_PswPrice.disabled = false;
 
 
@@ -965,6 +984,10 @@ namespace AdminBar {
         Txt_SalePriceAddPerc.value = "";
         Txt_SalePriceMinAddPerc.value = "";
         Txt_PswPrice.value = "";
+
+        ExceedMinPricePassword.value = "";
+        RetailInvoicePaymentDef.value = "";
+        OperationInvoicePaymentDef.value = "";
 
         Chk_RetailInvoiceAllowed.checked = true;
         Chk_RetailInvoicePayment.checked = true;
@@ -1296,9 +1319,9 @@ namespace AdminBar {
         }
     }
 
-    function chk_AutoupdateSalesPrice2_onchange() { 
-            Txt_SalePriceAddPerc.disabled = true;
-            Txt_SalePriceMinAddPerc.disabled = true;
-         
+    function chk_AutoupdateSalesPrice2_onchange() {
+        Txt_SalePriceAddPerc.disabled = true;
+        Txt_SalePriceMinAddPerc.disabled = true;
+
     }
 }
