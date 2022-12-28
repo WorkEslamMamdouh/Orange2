@@ -21,10 +21,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.16581cm</Top>
-        <Left>3.50134cm</Left>
+        <Top>0.32103cm</Top>
+        <Left>4.39413cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.30146cm</Width>
+        <Width>1.87813cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -54,8 +54,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>4.08707cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>4.88109cm</Top>
+        <Left>17.38984cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
         <ZIndex>1</ZIndex>
@@ -88,8 +88,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>5.72071cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>7.37606cm</Top>
+        <Left>17.31307cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
         <ZIndex>2</ZIndex>
@@ -122,8 +122,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>7.03685cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>8.6922cm</Top>
+        <Left>17.31307cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
         <ZIndex>3</ZIndex>
@@ -144,7 +144,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style>
                   <Format>0.00</Format>
                 </Style>
@@ -156,8 +156,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Amount</rd:DefaultName>
-        <Top>4.08707cm</Top>
-        <Left>14.13613cm</Left>
+        <Top>4.88109cm</Top>
+        <Left>13.97059cm</Left>
         <Height>0.6cm</Height>
         <Width>3.42309cm</Width>
         <ZIndex>4</ZIndex>
@@ -189,10 +189,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Status</rd:DefaultName>
-        <Top>0.16228cm</Top>
-        <Left>0.63591cm</Left>
+        <Top>0.3175cm</Top>
+        <Left>0.57406cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.86543cm</Width>
+        <Width>3.82007cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -212,7 +212,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -222,10 +222,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ReceiptDescA</rd:DefaultName>
-        <Top>5.72071cm</Top>
-        <Left>0.65324cm</Left>
+        <Top>7.37606cm</Top>
+        <Left>0.5159cm</Left>
         <Height>1.11505cm</Height>
-        <Width>16.90598cm</Width>
+        <Width>16.80101cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border>
@@ -265,7 +265,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -275,10 +275,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Remarks</rd:DefaultName>
-        <Top>7.03685cm</Top>
-        <Left>0.62504cm</Left>
+        <Top>8.6922cm</Top>
+        <Left>0.4877cm</Left>
         <Height>1.11505cm</Height>
-        <Width>16.93418cm</Width>
+        <Width>16.82921cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -330,8 +330,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.27195cm</Top>
-        <Left>13.25911cm</Left>
+        <Top>9.9273cm</Top>
+        <Left>13.0168cm</Left>
         <Height>0.6cm</Height>
         <Width>1.16383cm</Width>
         <ZIndex>8</ZIndex>
@@ -364,8 +364,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.2649cm</Top>
-        <Left>4.14078cm</Left>
+        <Top>9.92025cm</Top>
+        <Left>3.89847cm</Left>
         <Height>0.6cm</Height>
         <Width>1.16383cm</Width>
         <ZIndex>9</ZIndex>
@@ -398,8 +398,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.85051cm</Top>
-        <Left>13.25911cm</Left>
+        <Top>10.50586cm</Top>
+        <Left>13.0168cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>10</ZIndex>
@@ -432,8 +432,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.85051cm</Top>
-        <Left>4.14078cm</Left>
+        <Top>10.50586cm</Top>
+        <Left>3.89847cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>11</ZIndex>
@@ -466,11 +466,45 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.85051cm</Top>
-        <Left>14.38766cm</Left>
+        <Top>10.50586cm</Top>
+        <Left>14.14535cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox52">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>التوقيع</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>11.17642cm</Top>
+        <Left>14.14535cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.07916cm</Width>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -500,11 +534,113 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>8.85051cm</Top>
-        <Left>5.2905cm</Left>
+        <Top>10.50586cm</Top>
+        <Left>5.04819cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>14</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox54">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>التوقيع</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>11.17642cm</Top>
+        <Left>5.04819cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.07916cm</Width>
+        <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox55">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>........</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>11.17642cm</Top>
+        <Left>13.0168cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.07916cm</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox56">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>........</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>11.17642cm</Top>
+        <Left>3.89847cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.07916cm</Width>
+        <ZIndex>17</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -534,11 +670,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.16228cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>0.3175cm</Top>
+        <Left>17.38984cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -568,11 +704,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.16228cm</Top>
-        <Left>10.3138cm</Left>
+        <Top>0.3175cm</Top>
+        <Left>10.14826cm</Left>
         <Height>0.6cm</Height>
         <Width>2.55086cm</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>19</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -590,7 +726,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>نوع الأستلام</Value>
+                <Value>نوع السند</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -602,11 +738,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.89063cm</Top>
-        <Left>10.3138cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>10.14826cm</Left>
         <Height>0.6cm</Height>
         <Width>2.56173cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -636,11 +772,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>3.28598cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>3.2507cm</Top>
+        <Left>17.38984cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -658,7 +794,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>الصندوق</Value>
+                <Value>صندوق الاصدار</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -670,11 +806,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.87164cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>17.38984cm</Left>
         <Height>0.6cm</Height>
         <Width>2.03962cm</Width>
-        <ZIndex>18</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -692,7 +828,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -704,11 +840,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>0.17286cm</Top>
-        <Left>15.50168cm</Left>
+        <Top>0.32808cm</Top>
+        <Left>15.33614cm</Left>
         <Height>0.6cm</Height>
         <Width>2.05754cm</Width>
-        <ZIndex>19</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -727,7 +863,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style>
                   <Format>dd/MM/yyy </Format>
                 </Style>
@@ -739,11 +875,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>0.16228cm</Top>
-        <Left>6.92898cm</Left>
+        <Top>0.3175cm</Top>
+        <Left>6.76344cm</Left>
         <Height>0.6cm</Height>
         <Width>3.39893cm</Width>
-        <ZIndex>20</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -762,7 +898,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -772,11 +908,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Bef_DescA</rd:DefaultName>
-        <Top>3.28627cm</Top>
-        <Left>6.92898cm</Left>
+        <Top>3.25099cm</Top>
+        <Left>6.76344cm</Left>
         <Height>0.6cm</Height>
         <Width>8.39631cm</Width>
-        <ZIndex>21</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -816,7 +952,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -826,11 +962,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>CashBox_DescA</rd:DefaultName>
-        <Top>0.87164cm</Top>
-        <Left>14.13613cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>13.97059cm</Left>
         <Height>0.6cm</Height>
         <Width>3.42309cm</Width>
-        <ZIndex>22</ZIndex>
+        <ZIndex>26</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -869,7 +1005,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -879,11 +1015,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Type_DescA</rd:DefaultName>
-        <Top>0.89063cm</Top>
-        <Left>6.92898cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>6.76344cm</Left>
         <Height>0.6cm</Height>
         <Width>3.39893cm</Width>
-        <ZIndex>23</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -922,7 +1058,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -932,11 +1068,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Bef_DescA</rd:DefaultName>
-        <Top>3.28598cm</Top>
-        <Left>15.50168cm</Left>
+        <Top>3.2507cm</Top>
+        <Left>15.33614cm</Left>
         <Height>0.6cm</Height>
         <Width>2.05754cm</Width>
-        <ZIndex>24</ZIndex>
+        <ZIndex>28</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -988,11 +1124,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>0.94925cm</Top>
-        <Left>3.50134cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>4.39413cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.30146cm</Width>
-        <ZIndex>25</ZIndex>
+        <Width>1.87813cm</Width>
+        <ZIndex>29</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1010,7 +1146,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -1022,103 +1158,16 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>VoucherNo</rd:DefaultName>
-        <Top>0.9422cm</Top>
-        <Left>0.63591cm</Left>
+        <Top>1.04585cm</Top>
+        <Left>0.57406cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.86543cm</Width>
-        <ZIndex>26</ZIndex>
+        <Width>3.82007cm</Width>
+        <ZIndex>30</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
             <Style>Solid</Style>
           </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox34">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>نوع القيد</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.64803cm</Top>
-        <Left>17.55538cm</Left>
-        <Height>0.6cm</Height>
-        <Width>2.03962cm</Width>
-        <ZIndex>27</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Bef_DescA3">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Bef_DescA</rd:DefaultName>
-        <Top>1.64803cm</Top>
-        <Left>14.13613cm</Left>
-        <Height>0.6cm</Height>
-        <Width>3.42309cm</Width>
-        <ZIndex>28</ZIndex>
-        <Style>
-          <Border>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Gray</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -1147,7 +1196,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
             <Top>0.07822cm</Top>
-            <Left>9.89986cm</Left>
+            <Left>3.38482cm</Left>
             <Height>0.6cm</Height>
             <Width>2.57906cm</Width>
             <Style>
@@ -1167,7 +1216,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1178,7 +1227,7 @@
             </Paragraphs>
             <rd:DefaultName>Type_DescA</rd:DefaultName>
             <Top>0.09098cm</Top>
-            <Left>6.51504cm</Left>
+            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>3.39893cm</Width>
             <ZIndex>1</ZIndex>
@@ -1213,75 +1262,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox43">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>رقم الحساب</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Top>0.08527cm</Top>
-            <Left>3.26378cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.12507cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="VoucherNo2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
-                    <Style>
-                      <Format>0;(0)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>VoucherNo</rd:DefaultName>
-            <Top>0.07822cm</Top>
-            <Left>0.2393cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.8481cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox44">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1302,10 +1282,10 @@
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
             <Top>0.08527cm</Top>
-            <Left>17.2308cm</Left>
+            <Left>10.71576cm</Left>
             <Height>0.6cm</Height>
             <Width>1.95025cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1323,7 +1303,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1334,10 +1314,10 @@
             </Paragraphs>
             <rd:DefaultName>CashBox_DescA</rd:DefaultName>
             <Top>0.09098cm</Top>
-            <Left>13.73952cm</Left>
+            <Left>7.22448cm</Left>
             <Height>0.6cm</Height>
             <Width>3.42456cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1371,11 +1351,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>2.37198cm</Top>
-        <Left>0.41394cm</Left>
+        <Top>5.57221cm</Top>
+        <Left>6.7408cm</Left>
         <Height>0.76522cm</Height>
-        <Width>19.35436cm</Width>
-        <ZIndex>29</ZIndex>
+        <Width>12.83932cm</Width>
+        <ZIndex>31</ZIndex>
         <Visibility>
           <Hidden>=IIf((Fields!CashType.Value )= 1 or (Fields!CashType.Value) = 2 ,false,true)</Hidden>
         </Visibility>
@@ -1406,7 +1386,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Left>9.84398cm</Left>
+            <Left>9.66056cm</Left>
             <Height>0.6cm</Height>
             <Width>2.55086cm</Width>
             <Style>
@@ -1438,7 +1418,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Left>3.10208cm</Left>
+            <Left>2.91866cm</Left>
             <Height>0.6cm</Height>
             <Width>2.11858cm</Width>
             <ZIndex>1</ZIndex>
@@ -1459,7 +1439,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CashAmount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!CashAmount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style>
                       <Format>0.00</Format>
                     </Style>
@@ -1472,7 +1452,7 @@
             </Paragraphs>
             <rd:DefaultName>CashAmount</rd:DefaultName>
             <Top>0.00734cm</Top>
-            <Left>6.45916cm</Left>
+            <Left>6.27574cm</Left>
             <Height>0.6cm</Height>
             <Width>3.39893cm</Width>
             <ZIndex>2</ZIndex>
@@ -1514,7 +1494,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CardAmount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!CardAmount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -1526,7 +1506,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CardAmount</rd:DefaultName>
-            <Left>0.18342cm</Left>
+            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>2.8481cm</Width>
             <ZIndex>3</ZIndex>
@@ -1543,11 +1523,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.0834cm</Top>
-        <Left>0.46982cm</Left>
+        <Top>4.88109cm</Top>
+        <Left>0.4877cm</Left>
         <Height>0.60734cm</Height>
-        <Width>13.34651cm</Width>
-        <ZIndex>30</ZIndex>
+        <Width>12.21142cm</Width>
+        <ZIndex>32</ZIndex>
         <Visibility>
           <Hidden>=IIf(Fields!CashType.Value &gt; 0,true,false)</Hidden>
         </Visibility>
@@ -1685,7 +1665,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DueDate.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!DueDate.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style>
                       <Format>dd/MM/yyyy</Format>
                     </Style>
@@ -1714,11 +1694,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>1.61872cm</Top>
-        <Left>0.63591cm</Left>
+        <Top>4.01433cm</Top>
+        <Left>7.24895cm</Left>
         <Height>0.69037cm</Height>
         <Width>12.23962cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>33</ZIndex>
         <Visibility>
           <Hidden>=IIf(Fields!CashType.Value &gt;=1, false, true)</Hidden>
         </Visibility>
@@ -1750,7 +1730,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
             <Top>0.07822cm</Top>
-            <Left>9.87101cm</Left>
+            <Left>3.38482cm</Left>
             <Height>0.6cm</Height>
             <Width>2.55086cm</Width>
             <Style>
@@ -1770,7 +1750,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1781,7 +1761,7 @@
             </Paragraphs>
             <rd:DefaultName>Type_DescA</rd:DefaultName>
             <Top>0.09098cm</Top>
-            <Left>6.48619cm</Left>
+            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>3.39893cm</Width>
             <ZIndex>1</ZIndex>
@@ -1816,75 +1796,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox47">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>رقم الحساب</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Top>0.08527cm</Top>
-            <Left>3.23494cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.12507cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="VoucherNo3">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
-                    <Style>
-                      <Format>0;(0)</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>VoucherNo</rd:DefaultName>
-            <Top>0.09098cm</Top>
-            <Left>0.18225cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.8763cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Color>Gray</Color>
-                <Style>Solid</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox57">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -1905,10 +1816,10 @@
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
             <Top>0.08527cm</Top>
-            <Left>17.17376cm</Left>
+            <Left>10.68757cm</Left>
             <Height>0.6cm</Height>
             <Width>1.99243cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1926,7 +1837,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1937,10 +1848,10 @@
             </Paragraphs>
             <rd:DefaultName>CashBox_DescA</rd:DefaultName>
             <Top>0.09098cm</Top>
-            <Left>13.68247cm</Left>
+            <Left>7.19628cm</Left>
             <Height>0.6cm</Height>
             <Width>3.38925cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -1974,11 +1885,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>2.41605cm</Top>
-        <Left>0.44279cm</Left>
+        <Top>5.61628cm</Top>
+        <Left>6.7408cm</Left>
         <Height>0.75021cm</Height>
-        <Width>19.29848cm</Width>
-        <ZIndex>32</ZIndex>
+        <Width>12.81229cm</Width>
+        <ZIndex>34</ZIndex>
         <Visibility>
           <Hidden>=IIf(Fields!CashType.Value &gt;=3, false, true)</Hidden>
         </Visibility>
@@ -2007,11 +1918,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>4.88753cm</Top>
-        <Left>17.55538cm</Left>
+        <Top>6.54288cm</Top>
+        <Left>17.31307cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2037cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2029,7 +1940,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
+                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
                 <Style>
                   <Format>#,0.00</Format>
                 </Style>
@@ -2041,11 +1952,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>NetAfterVAT</rd:DefaultName>
-        <Top>4.88753cm</Top>
-        <Left>0.30874cm</Left>
+        <Top>6.54288cm</Top>
+        <Left>0.5159cm</Left>
         <Height>0.6cm</Height>
-        <Width>17.24664cm</Width>
-        <ZIndex>34</ZIndex>
+        <Width>16.79717cm</Width>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -2058,8 +1969,182 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox61">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>نوع السداد</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>1.82224cm</Top>
+        <Left>4.39413cm</Left>
+        <Height>0.6cm</Height>
+        <Width>1.87813cm</Width>
+        <ZIndex>37</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TrType2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TrType</rd:DefaultName>
+        <Top>1.82224cm</Top>
+        <Left>0.56319cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.83094cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+          </Border>
+          <TopBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </TopBorder>
+          <BottomBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </BottomBorder>
+          <LeftBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </LeftBorder>
+          <RightBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </RightBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox62">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>حساب الاستلام</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Top>1.82224cm</Top>
+        <Left>17.34396cm</Left>
+        <Height>0.58942cm</Height>
+        <Width>2.08549cm</Width>
+        <ZIndex>39</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Bef_DescA4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=iif(Fields!CashType.Value = 0, First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar"), First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccReceiveComp3Ar"))</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Bef_DescA</rd:DefaultName>
+        <Top>1.82224cm</Top>
+        <Left>6.76344cm</Left>
+        <Height>0.58942cm</Height>
+        <Width>10.58051cm</Width>
+        <ZIndex>40</ZIndex>
+        <Style>
+          <Border>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+          </Border>
+          <TopBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </TopBorder>
+          <BottomBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </BottomBorder>
+          <LeftBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </LeftBorder>
+          <RightBorder>
+            <Color>Gray</Color>
+            <Style>Solid</Style>
+            <Width>1pt</Width>
+          </RightBorder>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>3.74509in</Height>
+    <Height>4.63639in</Height>
     <Style />
   </Body>
   <Width>7.90071in</Width>
@@ -2145,6 +2230,7 @@
           <Source>Embedded</Source>
           <Value>ProcF</Value>
           <Sizing>Fit</Sizing>
+          <Top>0in</Top>
           <Height>2.64045cm</Height>
           <Width>20.06781cm</Width>
           <Style>
@@ -2180,7 +2266,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Rpt_Prnt_AccReceiveArComp3">
+    <DataSet Name="Rpt_Prnt_AccReceiveComp3ArComp3">
       <Query>
         <DataSourceName>RSWebUIReportsForms</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
