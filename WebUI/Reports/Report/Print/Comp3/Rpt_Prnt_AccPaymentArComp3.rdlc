@@ -1889,7 +1889,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1976,7 +1976,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!CashType.Value = 0, First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar"), First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccPaymentComp3Ar"))</Value>
+                <Value>=iif(Fields!CashType.Value = 0, First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccPaymentArComp3"), First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccPaymentArComp3"))</Value>
                 <Style />
               </TextRun>
             </TextRuns>

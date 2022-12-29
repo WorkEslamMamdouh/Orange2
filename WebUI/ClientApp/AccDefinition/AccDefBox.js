@@ -165,7 +165,7 @@ var AccDefBox;
         //debugger;
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("GLDefAccount", "GetByType"),
+            url: sys.apiUrl("GLDefAccount", "GetByTypeForBoxes"),
             data: {
                 CompCode: compcode, AccType: NumAccType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },

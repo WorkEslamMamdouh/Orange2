@@ -144,7 +144,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style>
                   <Format>0.00</Format>
                 </Style>
@@ -212,7 +212,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -265,7 +265,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -828,7 +828,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -863,7 +863,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style>
                   <Format>dd/MM/yyy </Format>
                 </Style>
@@ -898,7 +898,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -952,7 +952,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1005,7 +1005,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1058,7 +1058,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1146,7 +1146,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -1216,7 +1216,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1303,7 +1303,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1439,7 +1439,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CashAmount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!CashAmount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style>
                       <Format>0.00</Format>
                     </Style>
@@ -1494,7 +1494,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CardAmount.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!CardAmount.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -1665,7 +1665,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DueDate.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!DueDate.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style>
                       <Format>dd/MM/yyyy</Format>
                     </Style>
@@ -1750,7 +1750,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1837,7 +1837,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1940,7 +1940,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style>
                   <Format>#,0.00</Format>
                 </Style>
@@ -2010,7 +2010,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar")</Value>
+                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccReceiveArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -2097,7 +2097,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=iif(Fields!CashType.Value = 0, First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveComp3Ar"), First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccReceiveComp3Ar"))</Value>
+                <Value>=iif(Fields!CashType.Value = 0, First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccReceiveArComp3"), First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccReceiveArComp3"))</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -2230,7 +2230,6 @@
           <Source>Embedded</Source>
           <Value>ProcF</Value>
           <Sizing>Fit</Sizing>
-          <Top>0in</Top>
           <Height>2.64045cm</Height>
           <Width>20.06781cm</Width>
           <Style>
@@ -2266,7 +2265,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Rpt_Prnt_AccReceiveComp3ArComp3">
+    <DataSet Name="Rpt_Prnt_AccReceiveArComp3">
       <Query>
         <DataSourceName>RSWebUIReportsForms</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
