@@ -232,7 +232,7 @@ var AdminCloseComp;
         }
     }
     function ProcessTrans(CompCode, FinYear, Type, titel) {
-        var Query = "sys_sp_opr " + CompCode + " , " + FinYear + " ," + Type + " ";
+        var Query = "sys_sp_opr " + FinYear + " , " + CompCode + " ," + Type + " ";
         debugger;
         Ajax.Callsync({
             type: "Get",

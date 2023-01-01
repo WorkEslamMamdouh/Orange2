@@ -287,7 +287,7 @@ namespace AdminCloseComp {
 
     function ProcessTrans(CompCode: number, FinYear: number, Type: number, titel: string) {
 
-        let Query = "sys_sp_opr " + CompCode + " , " + FinYear + " ," + Type + " ";
+        let Query = "sys_sp_opr " + FinYear + " , " +  CompCode+ " ," + Type + " ";
         debugger
         Ajax.Callsync({
             type: "Get",
