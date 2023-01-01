@@ -16,7 +16,7 @@ namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
     public class GeneralRepController : ReportsPagePrintController
     {
-        private readonly StdParamters CurrentReportParameters;
+        private readonly StdParamters CurrePrnt_OperationInvoicentReportParameters;
         private readonly ReportsDetails ReportsDetail = new ReportsDetails();
         private readonly ReportInfo Rep = new ReportInfo();
         private readonly ClassPrint Printer = new ClassPrint();
