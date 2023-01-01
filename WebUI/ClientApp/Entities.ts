@@ -11035,6 +11035,13 @@ class ModelCompStatus extends SecurityClass {
     public IsActive: boolean; 
 }
 
- 
+class Exec_Proc_Status {
+    constructor() {
+        this.res = 0;
+        this.msg = '';
+    }
+    public res: number;
+    public msg: string;
+}
 
 

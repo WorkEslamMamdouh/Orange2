@@ -188,6 +188,11 @@ namespace Inv.WebUI.Controllers
 
         }
 
+
+        public ActionResult AdminColseComp()
+        {
+            return View("~/Views/AdminSetting/AdminColseCompIndex.cshtml");
+        }
         public ActionResult AgingCustIndex()
         {
             return View("~/Views/CollectionReports/AgingCustIndex.cshtml");

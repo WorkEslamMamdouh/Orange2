@@ -2301,6 +2301,7 @@
     <Content Include="Views\Sales\SlsTrReturnOperationIndex.cshtml" />
     <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
     <Content Include="Views\Processes\OperationExportIndex.cshtml" />
+    <Content Include="Views\AdminSetting\AdminColseCompIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2322,6 +2323,7 @@
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefSalesmen.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefVendor.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\DefStore.ts" />
+    <TypeScriptCompile Include="ClientApp\Admin\AdminCloseComp.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminCompData.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminComp.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminBar.ts" />
@@ -2580,6 +2582,7 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_OPerationInvoiceSimpleComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_OPerationInvoiceSimpleComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9_Old.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CashVoucherpay2Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>

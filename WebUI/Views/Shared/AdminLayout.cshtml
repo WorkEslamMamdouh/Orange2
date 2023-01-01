@@ -64,6 +64,48 @@
             color: white;
             left: 5%;
         }
+
+        .alert-message {
+            position: fixed;
+            z-index: 10;
+            width: 78%;
+            background-color: var(--main-orange);
+            left: 10%;
+        }
+
+        .toast-body {
+            padding: 0.75rem;
+            word-wrap: break-word;
+            font-size: .9rem;
+            width: 90%;
+  
+        }
+
+
+
+        .justify-content-center {
+            justify-content: center !important;
+        }
+
+        .bg-success {
+            background-color: #185100 !important;
+        }
+
+        .toast {
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+            
+        }
+        .d-flex {
+            display: flex !important !important;
+        }
+
+        .toast-body {
+            padding: 1.75rem !important;
+            word-wrap: break-word !important;
+            font-size: 2.9rem !important;
+            width: 142% !important;
+        }
+
     </style>
 </head>
 <body>
@@ -100,7 +142,8 @@
             <i id="chevron2" style="font-size: 30px;float:right" class="glyphicon glyphicon-hand-left display_none"></i>
 
         </div>
-    </div>
+    </div> 
+
     <div>
         @RenderBody()
     </div>
@@ -117,8 +160,8 @@
 
     @Scripts.Render("~/Bundles/AppScript4")
     <link href="~/Style_design/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/bootstrap-arabic.min.css" rel="stylesheet" /> 
-    <link href="~/Style_design/Style_Arabic.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-arabic.min.css" rel="stylesheet" />
+    @*<link href="~/Style_design/Style_Arabic.css" rel="stylesheet" />*@
     <link href="~/Style_design/style.css" rel="stylesheet" />
     <script>
 

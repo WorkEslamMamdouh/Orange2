@@ -328,6 +328,7 @@
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
     <Compile Include="Models\CustomModel\Custom_Items.cs" />
+    <Compile Include="Models\CustomModel\Exec_Proc_Status.cs" />
     <Compile Include="Models\CustomModel\ModelCompStatus.cs" />
     <Compile Include="Models\CustomModel\Helping_Methods.cs" />
     <Compile Include="Models\CustomModel\ModelLastPurchase.cs" />
