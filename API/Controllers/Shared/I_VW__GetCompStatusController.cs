@@ -119,6 +119,64 @@ namespace Inv.API.Controllers
 
 
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetCompsInAdmin(string userCode)
+        {
+
+
+            string Query = @"select c.[COMP_CODE],uc.[USER_CODE],c.NameA,c.NameE  ,c.IsActive   
+	                        From dbo.G_USER_COMPANY as uc right JOIN
+	                        dbo.G_COMPANY as c on  uc.COMP_CODE = c.COMP_CODE 
+	                        WHERE uc.USER_CODE = '" + userCode + "' and uc.[EXECUTE] = 1 ";
+
+
+
+            List<ModelCompStatus> companies = db.Database.SqlQuery<ModelCompStatus>(Query).ToList();
+            foreach (ModelCompStatus company in companies)
+            {
+
+
+                company.NameA = SecuritySystem.Decrypt(company.NameA);
+                company.NameE = SecuritySystem.Decrypt(company.NameE);
+
+            };
+
+            return Ok(new BaseResponse(companies));
+
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult ChaekFinYear(int CompCode, int FinYear)
+        {
+
+            string Query = @"select * from [dbo].[G_CONTROL] where  Comp_Code = " + CompCode + " and fin_year = " + FinYear + " ";
+
+            List<G_CONTROL> CONTROL = db.Database.SqlQuery<G_CONTROL>(Query).ToList();
+
+            return Ok(new BaseResponse(CONTROL));
+
+        }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult PushProcessTrans(int CompCode, int FinYear, string Query)
+        {
+            try
+            {
+                Exec_Proc_Status res = db.Database.SqlQuery<Exec_Proc_Status>(Query).FirstOrDefault();
+                return Ok(new BaseResponse(res));
+            }
+            catch (Exception ex)
+            {
+                Exec_Proc_Status Re = new Exec_Proc_Status();
+                Re.res = 0;
+                Re.msg = ex.Message;
+                return Ok(new BaseResponse(Re));
+            }
+
+
+        }
+
+
+
 
 
     }

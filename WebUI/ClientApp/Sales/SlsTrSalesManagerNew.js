@@ -1287,7 +1287,7 @@ var SlsTrSalesManagerNew;
         ddlInvoiceCustomer.disabled = false;
         ddlInvoiceCustomer.value = '';
         $("#Div_Money").removeClass("display_none");
-        if (SysSession.CurrentEnvironment.I_Control.RetailInvoicePaymentDef == 2) {
+        if (SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef == 2) {
             $("#txtCashMoney").val("");
             $("#txtCardMoney").val("");
             $('#ddlCashBox').prop('selectedIndex', 0);

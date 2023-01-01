@@ -6484,4 +6484,11 @@ var ModelCompStatus = /** @class */ (function (_super) {
     }
     return ModelCompStatus;
 }(SecurityClass));
+var Exec_Proc_Status = /** @class */ (function () {
+    function Exec_Proc_Status() {
+        this.res = 0;
+        this.msg = '';
+    }
+    return Exec_Proc_Status;
+}());
 //# sourceMappingURL=Entities.js.map

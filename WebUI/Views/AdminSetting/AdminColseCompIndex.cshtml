@@ -1,0 +1,103 @@
+﻿
+@using Inv.WebUI.Resources
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+
+    .display_none {
+        display: none !important;
+    }
+
+
+
+    .LEPEL_padingright {
+        padding-right: 25px !important
+    }
+
+    .pading_lep {
+        padding-right: 7px;
+    }
+
+
+
+
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+
+
+    .fontitm3 {
+        float: right;
+        margin: 1px -21px 0px 0px !important;
+        font-size: 25px !important;
+        position: absolute;
+    }
+
+    #btnAddDetails {
+        font-size: 31px;
+        float: right;
+        margin: 5px -26px 0px 0px !important;
+    }
+
+        #btnAddDetails:hover {
+            color: #24b414;
+        }
+
+    .glyphicon-remove-sign:hover {
+        color: red
+    }
+
+    .LEPEL_padingright2 {
+        padding-right: 39px !important;
+    }
+
+    .pading_2 {
+        padding: 6px 18px 0px 0px !important;
+    }
+
+    #ReportGrid {
+        width: 100% !important;
+        border: solid 2px black;
+        border-radius: 15px;
+    }
+
+    .inputYesr {
+        text-align: center;
+        width: 91% !important;
+        border-radius: 16% !important;
+    }
+    .opacitydisabled {
+        pointer-events: none;
+        opacity: 1.4;
+    }
+</style>
+<div class="container-fluid">
+    <div class="col-lg-12 margingred" id="div_ALLData">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+            <br />
+            <br />
+            <br />
+        </div>
+        <div id="DivMassage" class="d-flex justify-content-center display_none  ">
+            <div class="toast align-items-center text-white border-0 alert-message show bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i id="icon_Massage" class="fas fa-exclamation-triangle"></i>
+                        <span id="Text_Massage">خطا فى البيانات </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 margingred  borderred  ">
+            <div class="col-lg-12">
+                <table id="ReportGrid" class=""> </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/ClientApp/Admin/AdminCloseComp.js"></script>
