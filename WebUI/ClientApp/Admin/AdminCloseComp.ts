@@ -70,6 +70,26 @@ namespace AdminCloseComp {
                 }
             },
             {
+                title: "حساب الارباح المدورة", width: "5%",
+                itemTemplate: (s: string, item: ModelCompStatus): HTMLInputElement => {
+                    let txt: HTMLInputElement = document.createElement("input");
+                    txt.type = "text";
+                    txt.value = "";
+                    txt.id = "Txt_Acc_Code" + item.COMP_CODE;
+                    txt.className = "inputYesr";
+                    txt.disabled = true;
+                    txt.onchange = (e) => {
+
+                        let FinYear = Number($('#TextYear' + item.COMP_CODE).val());
+
+                        ChangeAcc_Code(item.COMP_CODE, FinYear, txt.value)
+
+
+                    };
+                    return txt;
+                }
+            },
+            {
                 title: "تهيئة سنة جديدة", width: "3%",
                 itemTemplate: (s: string, item: ModelCompStatus): HTMLInputElement => {
                     let txt: HTMLInputElement = document.createElement("input");
@@ -237,7 +257,7 @@ namespace AdminCloseComp {
     }
     function ChaekFinYear(CompCode: number, FinYear: number) {
         debugger
-     
+
         if (FinYear.toString().length == 4) {
 
             Ajax.Callsync({
@@ -262,10 +282,41 @@ namespace AdminCloseComp {
         }
 
     }
+    function ChangeAcc_Code(CompCode: number, FinYear: number, Acc_Code: string) {
+        debugger
+
+        if (FinYear.toString().length == 4) {
+
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("I_VW_GetCompStatus", "ChangeAcc_Code"),
+                data: { CompCode: CompCode, FinYear: FinYear, Acc_Code: Acc_Code },
+                success: (d) => {
+                    debugger
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+                        let Mode_G_CONTROL = result.Response as Array<G_CONTROL>;
+
+                        Display_but(Mode_G_CONTROL, CompCode)
+
+                    }
+
+                }
+            });
+        }
+        else {
+            $('.ClasBut_' + CompCode).attr('disabled', 'disabled')
+        }
+
+    }
 
     function Display_but(Mode: Array<G_CONTROL>, CompCode: number) {
 
         if (Mode.length > 0) {
+
+            $('#Txt_Acc_Code' + CompCode).val(Mode[0].ProfitAcc_Code)
+            $('#Txt_Acc_Code' + CompCode).removeAttr('disabled')
+
             $('.ClasBut_' + CompCode).removeAttr('disabled')
             $('#but1_' + CompCode).attr('disabled', 'disabled')
             if (Mode[0].INV_STATUS == 1) {
@@ -279,6 +330,9 @@ namespace AdminCloseComp {
 
         }
         else {
+            $('#Txt_Acc_Code' + CompCode).val("")
+            $('#Txt_Acc_Code' + CompCode).attr('disabled', 'disabled')
+
             $('.ClasBut_' + CompCode).attr('disabled', 'disabled')
             $('#but1_' + CompCode).removeAttr('disabled')
         }
@@ -287,7 +341,7 @@ namespace AdminCloseComp {
 
     function ProcessTrans(CompCode: number, FinYear: number, Type: number, titel: string) {
 
-        let Query = "sys_sp_opr " + CompCode + " , " + FinYear + " ," + Type + " ";
+        let Query = "sys_sp_opr " + FinYear + " , " + CompCode + " ," + Type + " ";
         debugger
         Ajax.Callsync({
             type: "Get",
@@ -297,11 +351,11 @@ namespace AdminCloseComp {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let Les = result.Response as Exec_Proc_Status;
-                    if (Les.res == 1) { 
-                        DisplayMassage("تم " + titel + " بنجاح","تم " + titel + " بنجاح", MessageType.Succeed)
+                    if (Les.res == 1) {
+                        MessageBox.Show("تم " + titel + " بنجاح", "تم بنجاح")
                     }
-                    else { 
-                        DisplayMassage(Les.msg,Les.msg, MessageType.Error)
+                    else {
+                        MessageBox.Show(Les.msg, "خطأ")
                     }
                     ChaekFinYear(CompCode, FinYear)
 

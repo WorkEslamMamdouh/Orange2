@@ -22,10 +22,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -235,7 +239,6 @@
     <Content Include="images\Background\Fruitstore3.jpg" />
     <Content Include="images\Background\Fruitstore31.jpg" />
     <Content Include="images\Background\Fruitstore33.jpg" />
-    <Content Include="images\Background\helloquence-5fNmWej4tAA-unsplash.jpg" />
     <Content Include="images\Background\imagesbra-Copy.jpg" />
     <Content Include="images\Background\imagesbra.jpg" />
     <Content Include="images\Background\imagescomp %281%29.jpg" />
@@ -2558,9 +2561,7 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_AccReceiveComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceSimpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceSimpleComp8En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceStdComp8Ar.rdlc">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceStdComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9En.rdlc" />
@@ -2576,9 +2577,7 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoicestdComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9Ar.rdlc">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_OPerationInvoiceSimpleComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_OPerationInvoiceSimpleComp9En.rdlc" />
