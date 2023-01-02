@@ -51,6 +51,22 @@ var AdminCloseComp;
                 }
             },
             {
+                title: "حساب الارباح المدورة", width: "5%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("input");
+                    txt.type = "text";
+                    txt.value = "";
+                    txt.id = "Txt_Acc_Code" + item.COMP_CODE;
+                    txt.className = "inputYesr";
+                    txt.disabled = true;
+                    txt.onchange = function (e) {
+                        var FinYear = Number($('#TextYear' + item.COMP_CODE).val());
+                        ChangeAcc_Code(item.COMP_CODE, FinYear, txt.value);
+                    };
+                    return txt;
+                }
+            },
+            {
                 title: "تهيئة سنة جديدة", width: "3%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
@@ -214,8 +230,31 @@ var AdminCloseComp;
             $('.ClasBut_' + CompCode).attr('disabled', 'disabled');
         }
     }
+    function ChangeAcc_Code(CompCode, FinYear, Acc_Code) {
+        debugger;
+        if (FinYear.toString().length == 4) {
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("I_VW_GetCompStatus", "ChangeAcc_Code"),
+                data: { CompCode: CompCode, FinYear: FinYear, Acc_Code: Acc_Code },
+                success: function (d) {
+                    debugger;
+                    var result = d;
+                    if (result.IsSuccess) {
+                        var Mode_G_CONTROL = result.Response;
+                        Display_but(Mode_G_CONTROL, CompCode);
+                    }
+                }
+            });
+        }
+        else {
+            $('.ClasBut_' + CompCode).attr('disabled', 'disabled');
+        }
+    }
     function Display_but(Mode, CompCode) {
         if (Mode.length > 0) {
+            $('#Txt_Acc_Code' + CompCode).val(Mode[0].ProfitAcc_Code);
+            $('#Txt_Acc_Code' + CompCode).removeAttr('disabled');
             $('.ClasBut_' + CompCode).removeAttr('disabled');
             $('#but1_' + CompCode).attr('disabled', 'disabled');
             if (Mode[0].INV_STATUS == 1) {
@@ -227,6 +266,8 @@ var AdminCloseComp;
             }
         }
         else {
+            $('#Txt_Acc_Code' + CompCode).val("");
+            $('#Txt_Acc_Code' + CompCode).attr('disabled', 'disabled');
             $('.ClasBut_' + CompCode).attr('disabled', 'disabled');
             $('#but1_' + CompCode).removeAttr('disabled');
         }
@@ -243,10 +284,10 @@ var AdminCloseComp;
                 if (result.IsSuccess) {
                     var Les = result.Response;
                     if (Les.res == 1) {
-                        DisplayMassage("تم " + titel + " بنجاح", "تم " + titel + " بنجاح", MessageType.Succeed);
+                        MessageBox.Show("تم " + titel + " بنجاح", "تم بنجاح");
                     }
                     else {
-                        DisplayMassage(Les.msg, Les.msg, MessageType.Error);
+                        MessageBox.Show(Les.msg, "خطأ");
                     }
                     ChaekFinYear(CompCode, FinYear);
                 }
