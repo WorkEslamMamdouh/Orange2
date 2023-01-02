@@ -4274,10 +4274,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       <Border>
         <Style>None</Style>
       </Border>
-      <BackgroundImage>
-        <Source>Embedded</Source>
-        <Value>Bodyphotoshop</Value>
-      </BackgroundImage>
     </Style>
   </Body>
   <Width>8.0762in</Width>
