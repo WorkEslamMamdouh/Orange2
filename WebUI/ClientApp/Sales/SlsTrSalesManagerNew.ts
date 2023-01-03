@@ -5256,8 +5256,11 @@ namespace SlsTrSalesManagerNew {
             ///////////
             let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
 
-
-            PrintsFrom_To(TransType.Invoice, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
+			let type = TransType.Invoice;	    
+			if (SlsInvSrc == '2') {
+				type = TransType.InvoiceOperation;
+			}
+			PrintsFrom_To(type, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
 
 
 

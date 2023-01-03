@@ -9,6 +9,8 @@ namespace GenDefCustomerCat {
     var AccountType: Number = 1;
     var MSG_ID: number;
     var Details: Array<A_RecPay_D_Category> = new Array<A_RecPay_D_Category>();
+	var DetailsModel: Array<A_RecPay_D_Category> = new Array<A_RecPay_D_Category>();
+	 
 
     var Details_Acount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
 
@@ -292,22 +294,24 @@ namespace GenDefCustomerCat {
 
 
     function Update() {
-        Assign();
-      
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+		Assign();
+		if (DetailsModel.length > 0) {
 
-        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Details[0].MODULE_CODE = Modules.GenDefCustomerCat; 
-        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+		DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+		DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
 
+		DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+		DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+		DetailsModel[0].MODULE_CODE = Modules.GenDefCustomerCat; 
+		DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+		}
          
         Ajax.Callsync({
 
             type: "POST",
             url: sys.apiUrl("GenDefCategory", "UpdateLst"),
-            data: JSON.stringify(Details),
+			data: JSON.stringify(DetailsModel),
             success: (d) => {
                  
                 let result = d as BaseResponse;
@@ -331,15 +335,16 @@ namespace GenDefCustomerCat {
         });
     }
 
-    function Assign() {
-        var StatusFlag: String;
+    function Assign() {			 
+		DetailsModel = new Array<A_RecPay_D_Category>();
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Category();
 
-            StatusFlag = $("#txt_StatusFlag" + i).val(); 
+             
 
-            if (StatusFlag == "i") {
-                Model.StatusFlag = StatusFlag.toString();
+			if ($("#txt_StatusFlag" + i).val() == "i") {
+				Model.StatusFlag = "i";
+
                 Model.CatID = 0;
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                 Model.AccountType = Number(AccountType);
@@ -369,16 +374,17 @@ namespace GenDefCustomerCat {
                 }
                 Model.CodePrefex = $("#CodePrefex" + i).val();
                 Model.LastNumber = $("#LastNumber" + i).val();
-                Details.push(Model);
+				DetailsModel.push(Model);
 
 
 
 
                 //Model.CompCode = Number(compcode);
             }
-            if (StatusFlag == "u") {
+			if ($("#txt_StatusFlag" + i).val() == "u") {
                  
-                Model.StatusFlag = StatusFlag.toString();
+				Model.StatusFlag = "u";
+
 
                 Model.CatID = Number($("#txt_ID" + i).val());
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -409,21 +415,22 @@ namespace GenDefCustomerCat {
                 }
                 Model.CodePrefex = $("#CodePrefex" + i).val();
                 Model.LastNumber = $("#LastNumber" + i).val();
-                Details.push(Model);
+				DetailsModel.push(Model);
 
 
             }
-            if (StatusFlag == "d") {
+			if ($("#txt_StatusFlag" + i).val() == "d") {
                 if ($("#txt_ID" + i).val() != "")
                 {
 
-                    Model.StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = "d";
 
                     Model.CatID = Number($("#txt_ID" + i).val());
                     Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                     Model.AccountType = Number(AccountType);
                     Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
                     Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;;
+					DetailsModel.push(Model);
 
                 }
 

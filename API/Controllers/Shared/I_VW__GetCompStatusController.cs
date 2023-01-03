@@ -87,8 +87,8 @@ namespace Inv.API.Controllers
 
 
 
-
-        public IHttpActionResult GetComps(string userCode,int yr)
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetComps(string userCode, int yr)
         {
 
 
@@ -99,25 +99,23 @@ namespace Inv.API.Controllers
 	                        inner join I_VW_GetCompStatus getstat on getstat.CompCode = uc.COMP_CODE
 	                        inner join G_CONTROL G_C on G_C.COMP_CODE = uc.COMP_CODE
 	                        inner join I_CONTROL I_C on I_C.CompCode = uc.COMP_CODE
-	                        WHERE uc.USER_CODE = '" + userCode + "' and uc.[EXECUTE] = 1 and G_C.FIN_YEAR ='"+ yr + "'";
+	                        WHERE uc.USER_CODE = '" + userCode + "' and uc.[EXECUTE] = 1 and G_C.FIN_YEAR ='" + yr + "'";
 
 
 
-            List<ModelCompStatus> companies = db.Database.SqlQuery<ModelCompStatus>(Query).ToList(); 
+            List<ModelCompStatus> companies = db.Database.SqlQuery<ModelCompStatus>(Query).ToList();
             foreach (ModelCompStatus company in companies)
             {
 
 
                 company.NameA = SecuritySystem.Decrypt(company.NameA);
                 company.NameE = SecuritySystem.Decrypt(company.NameE);
-                
+
             };
 
             return Ok(new BaseResponse(companies));
 
-        }
-
-
+        } 
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetCompsInAdmin(string userCode)
@@ -156,6 +154,21 @@ namespace Inv.API.Controllers
             return Ok(new BaseResponse(CONTROL));
 
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult ChangeAcc_Code(int CompCode, int FinYear, string Acc_Code)
+        {
+
+            string update_Query = @"update G_CONTROL set ProfitAcc_Code = '" + Acc_Code + "' where  Comp_Code = " + CompCode + " and fin_year = " + FinYear + " ";
+            db.Database.ExecuteSqlCommand(update_Query);
+
+            string Query = @"select * from [dbo].[G_CONTROL] where  Comp_Code = " + CompCode + " and fin_year = " + FinYear + " ";
+            List<G_CONTROL> CONTROL = db.Database.SqlQuery<G_CONTROL>(Query).ToList();
+
+            return Ok(new BaseResponse(CONTROL));
+
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult PushProcessTrans(int CompCode, int FinYear, string Query)
         {

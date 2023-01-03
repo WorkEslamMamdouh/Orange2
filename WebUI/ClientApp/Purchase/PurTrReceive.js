@@ -91,7 +91,7 @@ var PurTrReceive;
     var btnBack;
     var btnAdd;
     var btnPurOrderSearch;
-    //var btnPrintInvoicePrice: HTMLButtonElement;
+    var btnPrintInvoicePrice;
     var btnVendorSearch;
     //flags && global
     var GlobalReceiveID = 0;
@@ -167,7 +167,7 @@ var PurTrReceive;
         btnPrint = document.getElementById("btnPrint");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
         btnSend = document.getElementById("btnSend");
-        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice");
         //----------------------------------------------------------------------------------------//
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -245,9 +245,9 @@ var PurTrReceive;
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintTransaction.onclick = btnPrintTransaction_onclick;
+        btnPrintTransaction.onclick = btnPrntPrice_onclick;
         btnSend.onclick = sendCust;
-        //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
+        btnPrintInvoicePrice.onclick = btnPrintTransaction_onclick;
         searchbutmemreport.onkeyup = _SearchBox_Change;
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     }
@@ -466,6 +466,7 @@ var PurTrReceive;
         txtPurOrderNum.disabled = true;
         btnVendorSearch.disabled = true;
         btnPurOrderSearch.disabled = true;
+        btnPrintInvoicePrice.disabled = false;
     }
     function DataHeader() {
         if (RetrivedPurchaseModel.length > 0) {
@@ -2298,7 +2299,7 @@ var PurTrReceive;
         $("#btnAddDetailsCharge").removeClass("display_none");
         $("#btnPrintTransaction").addClass("display_none");
         $("#btnSend").addClass("display_none");
-        //$("#btnPrintInvoicePrice").addClass("display_none");
+        $("#btnPrintInvoicePrice").addClass("display_none");
         $("#btnUpdate").addClass("display_none");
         $("#btnBack").removeClass("display_none");
         $("#btnSave").removeClass("display_none");
@@ -2347,7 +2348,7 @@ var PurTrReceive;
         $("#btnAddDetailsCharge").addClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnSend").removeClass("display_none");
-        //$("#btnPrintInvoicePrice").removeClass("display_none");
+        $("#btnPrintInvoicePrice").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
@@ -2680,6 +2681,7 @@ var PurTrReceive;
         $("#divEdit").removeClass("display_none");
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnSend").removeClass("display_none");
+        btnPrintInvoicePrice.disabled = false;
     }
     function openInvoice() {
         if (!CheckPeriodDate(txtDateHeader.value, "I")) {
