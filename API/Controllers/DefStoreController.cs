@@ -6,9 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Inv.API.Controllers;
 
 namespace Inv.API.Controllers
 {
@@ -19,18 +17,18 @@ namespace Inv.API.Controllers
 
         public DefStoreController(IDefStoreService _IDefStoreService, G_USERSController _Control)
         {
-            this.DefStoreService = _IDefStoreService;
-            this.UserControl = _Control;
+            DefStoreService = _IDefStoreService;
+            UserControl = _Control;
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAll(int CompCode, int BranchCode ,string UserCode, string Token)
+        public IHttpActionResult GetAll(int CompCode, int BranchCode, string UserCode, string Token)
         {
             //if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             //{
-                var AccDefCustomerList = DefStoreService.GetAll(x => x.COMP_CODE == CompCode && x.BRA_CODE == BranchCode).ToList();
+            List<GQ_GetStore> AccDefCustomerList = DefStoreService.GetAll(x => x.COMP_CODE == CompCode && x.BRA_CODE == BranchCode).ToList();
 
-                return Ok(new BaseResponse(AccDefCustomerList));
+            return Ok(new BaseResponse(AccDefCustomerList));
             //}
             //return BadRequest(ModelState);
         }
@@ -52,16 +50,16 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefCustomer = DefStoreService.GetById(id);
+                GQ_GetStore AccDefCustomer = DefStoreService.GetById(id);
 
                 return Ok(new BaseResponse(AccDefCustomer));
             }
             return BadRequest(ModelState);
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult Update(  int BRA_CODE , int STORE_CODE , string DescA , string DescL , string Tel1 , string Tel2 , string Address , string Remarks , string UpdatedBy)
-  {
-            var query = "UPDATE G_STORE SET    DescA= '"+DescA+"',DescL='"+DescL+"',Tel1 ='"+Tel1+"', Tel2='"+Tel2+"', Address ='"+Address+"' ,Remarks= '"+Remarks+"',UpdatedBy='"+UpdatedBy+ "' WHERE STORE_CODE = " + STORE_CODE + " and BRA_CODE= "+ BRA_CODE + "";
+        public IHttpActionResult Update(int BRA_CODE, int STORE_CODE, string DescA, string DescL, string Tel1, string Tel2, string Address, string Remarks, string UpdatedBy)
+        {
+            string query = "UPDATE G_STORE SET    DescA= '" + DescA + "',DescL='" + DescL + "',Tel1 ='" + Tel1 + "', Tel2='" + Tel2 + "', Address ='" + Address + "' ,Remarks= '" + Remarks + "',UpdatedBy='" + UpdatedBy + "' WHERE STORE_CODE = " + STORE_CODE + " and BRA_CODE= " + BRA_CODE + "";
 
 
 
@@ -81,7 +79,7 @@ namespace Inv.API.Controllers
         {
             //if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
             //{
-            var res = DefStoreService.Update(STORE);
+            G_STORE res = DefStoreService.Update(STORE);
             LogUser.InsertPrint(db, STORE.Comp_Code.ToString(), STORE.Branch_Code, STORE.sec_FinYear, STORE.UserCode, res.StoreId, LogUser.UserLog.Update, STORE.MODULE_CODE, true, null, null, res.DescA);
 
             return Ok(new BaseResponse(res.StoreId));
@@ -90,19 +88,41 @@ namespace Inv.API.Controllers
             //return BadRequest(ModelState);
         }
         [HttpPost, AllowAnonymous]
-        public IHttpActionResult Insert([FromBody]G_STORE AccTrReceipt)
+        public IHttpActionResult Insert([FromBody]G_STORE obj)
         {
-            //if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
-            //{
-                var res = DefStoreService.Insert(AccTrReceipt);
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    G_STORE result = DefStoreService.Insert(obj);
 
-            LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, res.StoreId, LogUser.UserLog.Insert, AccTrReceipt.MODULE_CODE, true, null, null, res.DescA);
+                    ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.Comp_Code), Convert.ToInt32(obj.Branch_Code), result.StoreId, "Store", "Add", db);
+                    if (res.ResponseState == true)
+                    {
+                        obj.STORE_CODE = int.Parse(res.ResponseData.ToString());
+                        dbTransaction.Commit();
 
-            return Ok(new BaseResponse(res.StoreId));
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
 
-            //}
-            //return BadRequest(ModelState);
+                        return Ok(new BaseResponse(obj));
+                    }
+                    else
+                    {
+                        dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
+
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                }
+            }
+
         }
-
     }
 }

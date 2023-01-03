@@ -7,6 +7,7 @@ var GenDefCustomerCat;
     var AccountType = 1;
     var MSG_ID;
     var Details = new Array();
+    var DetailsModel = new Array();
     var Details_Acount = new Array();
     //var Details: Array<I_D_Category> = new Array<I_D_Category>();
     var btnNew_sub_Add_service;
@@ -193,16 +194,18 @@ var GenDefCustomerCat;
     }
     function Update() {
         Assign();
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Details[0].MODULE_CODE = Modules.GenDefCustomerCat;
-        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        if (DetailsModel.length > 0) {
+            DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+            DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            DetailsModel[0].MODULE_CODE = Modules.GenDefCustomerCat;
+            DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("GenDefCategory", "UpdateLst"),
-            data: JSON.stringify(Details),
+            data: JSON.stringify(DetailsModel),
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess == true) {
@@ -223,12 +226,11 @@ var GenDefCustomerCat;
         });
     }
     function Assign() {
-        var StatusFlag;
+        DetailsModel = new Array();
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Category();
-            StatusFlag = $("#txt_StatusFlag" + i).val();
-            if (StatusFlag == "i") {
-                Model.StatusFlag = StatusFlag.toString();
+            if ($("#txt_StatusFlag" + i).val() == "i") {
+                Model.StatusFlag = "i";
                 Model.CatID = 0;
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                 Model.AccountType = Number(AccountType);
@@ -257,11 +259,11 @@ var GenDefCustomerCat;
                 }
                 Model.CodePrefex = $("#CodePrefex" + i).val();
                 Model.LastNumber = $("#LastNumber" + i).val();
-                Details.push(Model);
+                DetailsModel.push(Model);
                 //Model.CompCode = Number(compcode);
             }
-            if (StatusFlag == "u") {
-                Model.StatusFlag = StatusFlag.toString();
+            if ($("#txt_StatusFlag" + i).val() == "u") {
+                Model.StatusFlag = "u";
                 Model.CatID = Number($("#txt_ID" + i).val());
                 Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                 Model.AccountType = Number(AccountType);
@@ -291,17 +293,18 @@ var GenDefCustomerCat;
                 }
                 Model.CodePrefex = $("#CodePrefex" + i).val();
                 Model.LastNumber = $("#LastNumber" + i).val();
-                Details.push(Model);
+                DetailsModel.push(Model);
             }
-            if (StatusFlag == "d") {
+            if ($("#txt_StatusFlag" + i).val() == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    Model.StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = "d";
                     Model.CatID = Number($("#txt_ID" + i).val());
                     Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
                     Model.AccountType = Number(AccountType);
                     Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
                     Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
                     ;
+                    DetailsModel.push(Model);
                 }
             }
         }
