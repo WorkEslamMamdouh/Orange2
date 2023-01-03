@@ -6542,6 +6542,19 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="vendorid" Type="int" Mode="In" />
           <Parameter Name="TRId" Type="int" Mode="In" />
         </Function>
+        <Function Name="IProc_Rep_OperationScrapList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="vendorid" Type="int" Mode="In" />
+          <Parameter Name="TRId" Type="int" Mode="In" />
+          <Parameter Name="ByValue" Type="int" Mode="In" />
+        </Function>
         <Function Name="IProc_Rep_OperationSum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
           <Parameter Name="bra" Type="int" Mode="In" />
@@ -11633,6 +11646,19 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
             <Parameter Name="ExZero" Mode="In" Type="Int32" />
             <Parameter Name="RepTyp" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Rep_OperationScrapList" ReturnType="Collection(InvModel.IProc_Rep_OperationScrapList_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="vendorid" Mode="In" Type="Int32" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+            <Parameter Name="ByValue" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -21910,6 +21936,42 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="TotPrdCredit" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Tot_EndDebit" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Tot_EndCredit" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="IProc_Rep_OperationScrapList_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="Int32" Name="op_trNO" Nullable="true" />
+          <Property Type="DateTime" Name="op_trDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="TruckNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="PaperPurchaseValue" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="ClearanceDate" Nullable="true" Precision="16" />
+          <Property Type="Byte" Name="op_status" Nullable="true" />
+          <Property Type="String" Name="PolicyNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CustomNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Vnd_Code" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="vnd_NameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="vnd_nameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="it_itemCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="it_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ItemID" Nullable="false" />
+          <Property Type="String" Name="it_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="it_ReceivedQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="it_totSoldQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="it_scrapQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="it_remainQty" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="it_EstSalePrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ivit_SoldQty" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="ivit_total" Nullable="true" Precision="38" Scale="10" />
+          <Property Type="Decimal" Name="ivit_VatAmount" Nullable="true" Precision="38" Scale="5" />
+          <Property Type="Decimal" Name="ivit_NetAfterVat" Nullable="true" Precision="38" Scale="10" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -32582,6 +32644,46 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="TotPrdCredit" ColumnName="TotPrdCredit" />
                 <ScalarProperty Name="Tot_EndDebit" ColumnName="Tot_EndDebit" />
                 <ScalarProperty Name="Tot_EndCredit" ColumnName="Tot_EndCredit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Rep_OperationScrapList" FunctionName="InvModel.Store.IProc_Rep_OperationScrapList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Rep_OperationScrapList_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="op_trNO" ColumnName="op_trNO" />
+                <ScalarProperty Name="op_trDate" ColumnName="op_trDate" />
+                <ScalarProperty Name="TruckNo" ColumnName="TruckNo" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="PaperPurchaseValue" ColumnName="PaperPurchaseValue" />
+                <ScalarProperty Name="ClearanceDate" ColumnName="ClearanceDate" />
+                <ScalarProperty Name="op_status" ColumnName="op_status" />
+                <ScalarProperty Name="PolicyNo" ColumnName="PolicyNo" />
+                <ScalarProperty Name="CustomNo" ColumnName="CustomNo" />
+                <ScalarProperty Name="Vnd_Code" ColumnName="Vnd_Code" />
+                <ScalarProperty Name="vnd_NameA" ColumnName="vnd_NameA" />
+                <ScalarProperty Name="vnd_nameE" ColumnName="vnd_nameE" />
+                <ScalarProperty Name="it_itemCode" ColumnName="it_itemCode" />
+                <ScalarProperty Name="it_DescA" ColumnName="it_DescA" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="it_DescE" ColumnName="it_DescE" />
+                <ScalarProperty Name="it_ReceivedQty" ColumnName="it_ReceivedQty" />
+                <ScalarProperty Name="it_totSoldQty" ColumnName="it_totSoldQty" />
+                <ScalarProperty Name="it_scrapQty" ColumnName="it_scrapQty" />
+                <ScalarProperty Name="it_remainQty" ColumnName="it_remainQty" />
+                <ScalarProperty Name="it_EstSalePrice" ColumnName="it_EstSalePrice" />
+                <ScalarProperty Name="ivit_SoldQty" ColumnName="ivit_SoldQty" />
+                <ScalarProperty Name="ivit_total" ColumnName="ivit_total" />
+                <ScalarProperty Name="ivit_VatAmount" ColumnName="ivit_VatAmount" />
+                <ScalarProperty Name="ivit_NetAfterVat" ColumnName="ivit_NetAfterVat" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
