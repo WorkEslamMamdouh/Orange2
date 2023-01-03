@@ -2573,7 +2573,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoiceSimpleComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoicestdComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoicestdComp9En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9En.rdlc" />
