@@ -1418,7 +1418,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -4461,7 +4460,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>استلام مشتريات</Value>
+                      <Value> استلام مشتريات بالتكلفة</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>

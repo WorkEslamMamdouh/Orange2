@@ -4,15 +4,9 @@
     AdminCloseComp.InitalizeComponent();
 })
 namespace AdminCloseComp {
-
-
     var sys: SystemTools = new SystemTools();
-
     var SysSession: SystemSession = GetSystemSession('Home');
-
     var GetCompStatus: Array<ModelCompStatus> = new Array<ModelCompStatus>();
-
-    var CountGrid = 0;
 
     //GridView                        
     var Grid: JsGrid = new JsGrid();
@@ -20,14 +14,10 @@ namespace AdminCloseComp {
 
     export function InitalizeComponent() {
 
-
         InitalizeControls();
-
         InitializeEvents();
         InitializeGrid();
         Display();
-
-
     }
     function InitalizeControls() {
 
@@ -36,7 +26,6 @@ namespace AdminCloseComp {
     function InitializeEvents() {
 
     }
-
     function InitializeGrid() {
 
         Grid.ElementName = "ReportGrid";
@@ -70,7 +59,7 @@ namespace AdminCloseComp {
                 }
             },
             {
-                title: "حساب الارباح المدورة", width: "5%",
+                title: "حساب الارباح ", width: "5%",
                 itemTemplate: (s: string, item: ModelCompStatus): HTMLInputElement => {
                     let txt: HTMLInputElement = document.createElement("input");
                     txt.type = "text";
@@ -139,6 +128,11 @@ namespace AdminCloseComp {
 
                         let Comp = item.COMP_CODE;
                         let FinYear = Number($('#TextYear' + Comp).val());
+                        if ($('#Txt_Acc_Code' + Comp).val().trim() == '') {  
+                            DisplayMassage("يجب ادخال حساب الارباح", "خطأ", MessageType.Error)
+                            Errorinput($('#Txt_Acc_Code' + Comp))
+                            return
+                        }
                         ProcessTrans(Comp, FinYear, 3, "اصدار القيد الافتتاحي ")
                     };
                     return txt;
@@ -226,7 +220,6 @@ namespace AdminCloseComp {
         ];
     }
     function Display() {
-
         debugger
         Ajax.Callsync({
             type: "Get",
@@ -236,30 +229,19 @@ namespace AdminCloseComp {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     GetCompStatus = result.Response as Array<ModelCompStatus>;
-
-
-                    InitializeGrid();
                     Grid.DataSource = GetCompStatus;
                     Grid.Bind();
                     $('.jsgrid-grid-header').addClass('opacitydisabled')
-
                     for (var i = 0; i < GetCompStatus.length; i++) {
-
                         ChaekFinYear(GetCompStatus[i].COMP_CODE, Number(today.getFullYear()))
-
                     }
-
                 }
             }
         });
-
-
     }
     function ChaekFinYear(CompCode: number, FinYear: number) {
         debugger
-
         if (FinYear.toString().length == 4) {
-
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("I_VW_GetCompStatus", "ChaekFinYear"),
@@ -273,7 +255,6 @@ namespace AdminCloseComp {
                         Display_but(Mode_G_CONTROL, CompCode)
 
                     }
-
                 }
             });
         }
@@ -284,9 +265,7 @@ namespace AdminCloseComp {
     }
     function ChangeAcc_Code(CompCode: number, FinYear: number, Acc_Code: string) {
         debugger
-
         if (FinYear.toString().length == 4) {
-
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("I_VW_GetCompStatus", "ChangeAcc_Code"),
@@ -300,7 +279,6 @@ namespace AdminCloseComp {
                         Display_but(Mode_G_CONTROL, CompCode)
 
                     }
-
                 }
             });
         }
@@ -309,7 +287,6 @@ namespace AdminCloseComp {
         }
 
     }
-
     function Display_but(Mode: Array<G_CONTROL>, CompCode: number) {
 
         if (Mode.length > 0) {
@@ -338,7 +315,6 @@ namespace AdminCloseComp {
         }
 
     }
-
     function ProcessTrans(CompCode: number, FinYear: number, Type: number, titel: string) {
 
         let Query = "sys_sp_opr " + FinYear + " , " + CompCode + " ," + Type + " ";
@@ -351,11 +327,11 @@ namespace AdminCloseComp {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let Les = result.Response as Exec_Proc_Status;
-                    if (Les.res == 1) {
-                        MessageBox.Show("تم " + titel + " بنجاح", "تم بنجاح")
+                    if (Les.res == 1) { 
+                        DisplayMassage("تم " + titel + " بنجاح", "تم بنجاح", MessageType.Succeed)
                     }
                     else {
-                        MessageBox.Show(Les.msg, "خطأ")
+                        DisplayMassage(Les.msg, "خطأ", MessageType.Error)
                     }
                     ChaekFinYear(CompCode, FinYear)
 

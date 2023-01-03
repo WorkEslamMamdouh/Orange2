@@ -97,7 +97,7 @@ namespace PurTrReceive {
     var btnBack: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
     var btnPurOrderSearch: HTMLButtonElement;
-    //var btnPrintInvoicePrice: HTMLButtonElement;
+    var btnPrintInvoicePrice: HTMLButtonElement;
     var btnVendorSearch: HTMLButtonElement;
 
     //flags && global
@@ -185,7 +185,7 @@ namespace PurTrReceive {
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
         btnSend = document.getElementById("btnSend") as HTMLButtonElement;
-        //btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
+        btnPrintInvoicePrice = document.getElementById("btnPrintInvoicePrice") as HTMLButtonElement;
 
 
         //----------------------------------------------------------------------------------------//
@@ -271,9 +271,9 @@ namespace PurTrReceive {
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         //btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintTransaction.onclick = btnPrintTransaction_onclick;
+        btnPrintTransaction.onclick = btnPrntPrice_onclick;
         btnSend.onclick = sendCust;
-        //btnPrintInvoicePrice.onclick = btnPrntPrice_onclick;
+        btnPrintInvoicePrice.onclick = btnPrintTransaction_onclick;
 
         searchbutmemreport.onkeyup = _SearchBox_Change;
         btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
@@ -535,6 +535,7 @@ namespace PurTrReceive {
         btnVendorSearch.disabled = true;
         btnPurOrderSearch.disabled = true;
 
+        btnPrintInvoicePrice.disabled = false;
     }
     function DataHeader() {
 
@@ -2896,7 +2897,7 @@ namespace PurTrReceive {
 
         $("#btnPrintTransaction").addClass("display_none");
         $("#btnSend").addClass("display_none");
-        //$("#btnPrintInvoicePrice").addClass("display_none");
+        $("#btnPrintInvoicePrice").addClass("display_none");
 
         $("#btnUpdate").addClass("display_none");
 
@@ -2958,7 +2959,7 @@ namespace PurTrReceive {
 
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnSend").removeClass("display_none");
-        //$("#btnPrintInvoicePrice").removeClass("display_none");
+        $("#btnPrintInvoicePrice").removeClass("display_none");
 
         $("#btnUpdate").removeClass("display_none");
 
@@ -3329,7 +3330,7 @@ namespace PurTrReceive {
         $("#btnPrintTransaction").removeClass("display_none");
         $("#btnSend").removeClass("display_none");
 
-
+        btnPrintInvoicePrice.disabled = false;
     } 
     function openInvoice() {
 
