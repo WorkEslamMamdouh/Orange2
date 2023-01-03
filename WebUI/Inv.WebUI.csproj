@@ -2538,6 +2538,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_AccReceiveComp7En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceSimpleComp7Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceSimpleComp7En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceStdComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsInvoiceStdArComp7.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8En.rdlc" />
