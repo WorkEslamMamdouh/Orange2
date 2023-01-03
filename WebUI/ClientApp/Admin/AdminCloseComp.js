@@ -7,7 +7,6 @@ var AdminCloseComp;
     var sys = new SystemTools();
     var SysSession = GetSystemSession('Home');
     var GetCompStatus = new Array();
-    var CountGrid = 0;
     //GridView                        
     var Grid = new JsGrid();
     var today = new Date();
@@ -51,7 +50,7 @@ var AdminCloseComp;
                 }
             },
             {
-                title: "حساب الارباح المدورة", width: "5%",
+                title: "حساب الارباح ", width: "5%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("input");
                     txt.type = "text";
@@ -113,6 +112,11 @@ var AdminCloseComp;
                     txt.onclick = function (e) {
                         var Comp = item.COMP_CODE;
                         var FinYear = Number($('#TextYear' + Comp).val());
+                        if ($('#Txt_Acc_Code' + Comp).val().trim() == '') {
+                            DisplayMassage("يجب ادخال حساب الارباح", "خطأ", MessageType.Error);
+                            Errorinput($('#Txt_Acc_Code' + Comp));
+                            return;
+                        }
                         ProcessTrans(Comp, FinYear, 3, "اصدار القيد الافتتاحي ");
                     };
                     return txt;
@@ -198,7 +202,6 @@ var AdminCloseComp;
                 var result = d;
                 if (result.IsSuccess) {
                     GetCompStatus = result.Response;
-                    InitializeGrid();
                     Grid.DataSource = GetCompStatus;
                     Grid.Bind();
                     $('.jsgrid-grid-header').addClass('opacitydisabled');
@@ -284,10 +287,10 @@ var AdminCloseComp;
                 if (result.IsSuccess) {
                     var Les = result.Response;
                     if (Les.res == 1) {
-                        MessageBox.Show("تم " + titel + " بنجاح", "تم بنجاح");
+                        DisplayMassage("تم " + titel + " بنجاح", "تم بنجاح", MessageType.Succeed);
                     }
                     else {
-                        MessageBox.Show(Les.msg, "خطأ");
+                        DisplayMassage(Les.msg, "خطأ", MessageType.Error);
                     }
                     ChaekFinYear(CompCode, FinYear);
                 }
