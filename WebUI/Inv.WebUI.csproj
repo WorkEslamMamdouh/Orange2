@@ -2301,6 +2301,7 @@
     <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
     <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <Content Include="Views\AdminSetting\AdminColseCompIndex.cshtml" />
+    <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2337,6 +2338,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
+    <TypeScriptCompile Include="ClientApp\Processes\OperationRepScrap.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturnNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />
@@ -2672,6 +2674,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationItemSalesEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationScrapListAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationScrapAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationScrapEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_AccVendorAdjustAr.rdlc">

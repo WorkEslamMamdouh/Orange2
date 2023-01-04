@@ -1,9 +1,9 @@
 ﻿$(document).ready(() => {
 
-    OperationRepScrap.InitalizeComponent();
+    OperationScrap.InitalizeComponent();
 })
 
-namespace OperationRepScrap {
+namespace OperationScrap {
 
     var compcode: Number;
     var BranchCode: Number;
@@ -35,10 +35,10 @@ namespace OperationRepScrap {
         debugger
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "سجل البواقي";
+            document.getElementById('Screen_name').innerHTML = "تقرير البواقي";
 
         } else {
-            document.getElementById('Screen_name').innerHTML = "Record the rest";
+            document.getElementById('Screen_name').innerHTML = "Report the rest";
 
         }
         $("#iconMainPages").addClass("d-none");
@@ -172,7 +172,14 @@ namespace OperationRepScrap {
             rp.OperationId = OperaID;
         }
 
-        rp.Name_function = "IProc_Rep_OperationScrap";
+        if ($("#Rd_Yes").is(':checked')) {
+            rp.ByValue = 1;
+
+        } else {
+            rp.ByValue = 0;
+        }
+
+        rp.Name_function = "IProc_Rep_OperationRepScrap";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.OperationScrap, SysSession.CurrentEnvironment.CurrentYear);
 
