@@ -22,10 +22,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -2560,7 +2564,13 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceSimpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceSimpleComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceStdComp8Ar.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8br2.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8_.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleRetComp9Ar.rdlc" />

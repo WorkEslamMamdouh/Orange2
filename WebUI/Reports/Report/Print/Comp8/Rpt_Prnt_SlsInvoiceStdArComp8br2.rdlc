@@ -43,7 +43,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!DocNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                <Value>=First(Fields!DocNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -112,7 +112,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                 <Style>
                   <Format>yyyy/MM/dd</Format>
                 </Style>
@@ -906,7 +906,7 @@
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
-        <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8</DataSetName>
+        <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8br2</DataSetName>
         <Top>9.91964cm</Top>
         <Left>0cm</Left>
         <Height>1.2cm</Height>
@@ -1300,7 +1300,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!DeliveryDate.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                <Value>=First(Fields!DeliveryDate.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                 <Style>
                   <Format>yyyy/MM/dd</Format>
                 </Style>
@@ -1471,7 +1471,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Remark.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                <Value>=First(Fields!Remark.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -1966,7 +1966,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!VatPrc.Value, "Rpt_Prnt_SlsInvoiceStdArComp8") / 100</Value>
+                              <Value>=First(Fields!VatPrc.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2") / 100</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <Format>0.00%</Format>
@@ -2271,7 +2271,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8</DataSetName>
+        <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8br2</DataSetName>
         <Top>11.42949cm</Top>
         <Left>0.06676in</Left>
         <Height>3.6cm</Height>
@@ -2381,7 +2381,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!NAMEA.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!NAMEA.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2449,7 +2449,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_BuildingNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_BuildingNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2538,7 +2538,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_Street.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_Street.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2837,7 +2837,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_District.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_District.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2891,7 +2891,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_City.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_City.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2945,7 +2945,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_Build_Additional.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_Build_Additional.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2999,7 +2999,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_postal.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_postal.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3053,7 +3053,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Address_Province.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Address_Province.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3161,7 +3161,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!AddIDAr.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!AddIDAr.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3286,7 +3286,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BRA_DESC.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!BRA_DESC.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3599,7 +3599,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Br_Address_Street.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!Br_Address_Street.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3653,7 +3653,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_Address_Build_Additional.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_Address_Build_Additional.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3707,7 +3707,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_Address_City.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_Address_City.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3761,7 +3761,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_Address_Postal.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_Address_Postal.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3815,7 +3815,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_Address_Province.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_Address_Province.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3869,7 +3869,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_Address_District.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_Address_District.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3923,7 +3923,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_VatNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_VatNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -3977,7 +3977,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!br_AddIDAr.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!br_AddIDAr.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -4066,7 +4066,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BR_Address_BuildingNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=First(Fields!BR_Address_BuildingNo.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -4120,7 +4120,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=" المورد   : " + First(Fields!CompNameA.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                    <Value>=" المورد   : " + First(Fields!CompNameA.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                     <Style>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -4210,7 +4210,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!GlobalInvoiceCounter.Value, "Rpt_Prnt_SlsInvoiceStdArComp8")</Value>
+                <Value>=First(Fields!GlobalInvoiceCounter.Value, "Rpt_Prnt_SlsInvoiceStdArComp8br2")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -4338,22 +4338,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       <Height>3.61774cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Image Name="Image4">
-          <Source>Embedded</Source>
-          <Value>WhatsAppImage20221222at105916AM1</Value>
-          <Sizing>Fit</Sizing>
-          <Top>0cm</Top>
-          <Left>0cm</Left>
-          <Height>3.61774cm</Height>
-          <Width>20.51355cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
-      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
@@ -4390,7 +4374,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Rpt_Prnt_SlsInvoiceStdArComp8">
+    <DataSet Name="Rpt_Prnt_SlsInvoiceStdArComp8br2">
       <Query>
         <DataSourceName>RSWebUIReportsForms</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
