@@ -2520,8 +2520,7 @@ namespace SlsTrSalesManagerNew {
         $("#btnOperation").attr("disabled", "disabled");
 
 
-        ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
-        $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
+		ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc); 
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
 

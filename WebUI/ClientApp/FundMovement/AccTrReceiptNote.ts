@@ -1320,11 +1320,7 @@ namespace AccTrReceiptNote {
             DocumentActions.AssignToModel(Model);//Insert Update
             if (chkActive.checked) { Model.Status = 1 }
             else { Model.Status = 0 }
-            Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
-            Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
-            Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-
+       
             Model.CreatedAt = DateTimeFormat(Date().toString());
             Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
             Model.ReceiptID = 0;
@@ -1350,8 +1346,7 @@ namespace AccTrReceiptNote {
             Model.CustomerID = custId;
             Model.VendorID = vndid;
 
-            Model.BankAccountCode = BankCode == null ? null : BankCode.toString(); 
-            Model.BankName = txt_BenName.value;
+            Model.BankAccountCode = BankCode == null ? null : BankCode.toString(); 		  
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1361,8 +1356,12 @@ namespace AccTrReceiptNote {
             Model.UpdatedAt = "";
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
-            Model.BankName = $('#txt_BankName').val();
+			Model.BankName = $('#txt_BankName').val();
 
+			Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+			Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);	   
+
+            Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
             Model.MODULE_CODE = Modules.AccTrReceiptNote;
@@ -1373,10 +1372,7 @@ namespace AccTrReceiptNote {
             DocumentActions.AssignToModel(Model);//Insert Update
             if (chkActive.checked) { Model.Status = 1 }
             else { Model.Status = 0 }
-            Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
-            Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
-            Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-            Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+          
 
             Model.CreatedAt = DateTimeFormat(Date().toString());
             Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1400,8 +1396,7 @@ namespace AccTrReceiptNote {
             Model.CustomerID = custId;
             Model.VendorID = vndid;
 
-            Model.BankAccountCode = BankCode == null ? null : BankCode.toString();
-            Model.BankName = txt_BenName.value;
+            Model.BankAccountCode = BankCode == null ? null : BankCode.toString();		 
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1413,11 +1408,14 @@ namespace AccTrReceiptNote {
             Model.IsDeffered = chkIsDeffered.checked;
             Model.CashBoxID = Number($('#txt_Receiving_Fund').val());
 
+			Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+			Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);	   
 
-           Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-           Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-           Model.MODULE_CODE = Modules.AccTrReceiptNote;
-           Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+			Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+			Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+			Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+			Model.MODULE_CODE = Modules.AccTrReceiptNote;
+			Model.UserCode = SysSession.CurrentEnvironment.UserCode;	   	   
            Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
 
