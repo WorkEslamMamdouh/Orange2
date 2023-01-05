@@ -1981,7 +1981,6 @@ var SlsTrSalesManagerNew;
         $("#txt_CustCode").attr("disabled", "disabled");
         $("#btnOperation").attr("disabled", "disabled");
         ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
-        $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo)); //get trno
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         ddlTypeInv_onchange();

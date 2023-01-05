@@ -302,17 +302,46 @@ interface IJsGridColumn {
 namespace App {
 
 
-    Number.prototype.RoundToNum = function (dec: number): number {
-        let num = this;
-        return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
-    };
+    //Number.prototype.RoundToNum = function (dec: number): number {
+    //    let num = this;
+    //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
+    //};
 
 
 
-    Number.prototype.RoundToSt = function (dec: number): string {
-        let num = this;
-        return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
-    };
+    //Number.prototype.RoundToSt = function (dec: number): string {
+    //    let num = this;
+    //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    //};
+
+	Number.prototype.RoundToNum = function (dec: number): number {
+		debugger
+		let num = this;
+		//let stnum = num.toString();
+		if (num.toString().indexOf(".") == -1) {
+			return num;
+		} else {
+			let stfix = num.toString().substr(0, num.toString().indexOf("."));
+			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+			return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+		}
+		//return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
+	};
+
+
+
+	Number.prototype.RoundToSt = function (dec: number): string {
+		let num = this;
+		//let stnum = num.toString();
+		if (num.toString().indexOf(".") == -1) {
+			return num;
+		} else {
+			let stfix = num.toString().substr(0, num.toString().indexOf("."));
+			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+			return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+		}
+		//return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+	};
 
     Number.prototype.setVal = function (value: any): any {
 
