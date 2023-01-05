@@ -1,0 +1,140 @@
+﻿@using Inv.WebUI.Resources
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<label for="rpTitle" style="display:none" id="rpTitle">@*@SystemResource.Rep_PayRecieptList*@</label>
+<div class="row gy-3" id="content_report">
+    <!-- Filter Container -->
+    <div id="div_dis" class="col-12">
+        <div class="card bg-light-blue" id="informtionReserved">
+            <div class="card-body" id="id_div_Add">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group row">
+                            <label for="txtFromDate" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.I_Vendor</label>
+                            <div class="col-9 col-md-8">
+                                <select id="txt_ID_Vendor" name="" class="form-control">
+                                    <option value="Null">@SystemResource.App_Everybody</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group row g-0 d-flex justify-content-center align-items-center">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Processes </label>
+                            <div class="col-9 col-md-8">
+                                <div class="search-content">
+                                    <input type="text" id="txt_Processes" disabled name="" class="form-control  search-control" />
+                                    <button type="button" id="btnOPerationSearch" name="Search" class="btn btn-main btn-search">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row mt-n3">
+                            <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> أظهار القيمة</label>
+                            <div class="form-group col-8 col-md-10">
+                                <div class="row">
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4 offset-xl-3">
+                                        <div class="form-check d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="Rd_Yes" name="details" value="1" checked="">
+                                            <label class="form-check-label my-auto me-3" for="Rd_Yes" style="color: rgb(233, 26, 26);"> نعم <i class="input-helper"></i></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                        <div class="form-check  d-inline-flex">
+                                            <input class="form-check-input form-radio special-radio" type="radio" id="Rd_No" name="details" value="2">
+                                            <label class="form-check-label my-auto me-3" for="Rd_No" style="color: rgb(233, 26, 26);"> لا<i class="input-helper"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="content_report" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 borderred ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <div id="informtionReserved" class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred" style="margin-bottom: 15px;">
+                <div id="id_div_Add">
+                    <div id="DivMassage" class="col-lg-12  margingred  borderred display_none">
+                        <h4 id="Text_Massage" style=""> @SystemResource.App_Message </h4>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+                            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2Supplieraccsta ">@SystemResource.I_Vendor</label>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3">
+                                <select id="txt_ID_Vendor" name="" class="form-control input-sm  text_Display">
+                                    <option value="Null">@SystemResource.App_Everybody</option>
+                                </select>
+                            </div>
+                            <label class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1  marginstenig pading_lep  pading_2Supplieraccsta ">@SystemResource.Processes</label>
+                            <div class="col-lg-1">
+                                <button class="btn src-btn  btn-warning" id="btnOPerationSearch" name="Search">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2" style="left: 5%;">
+                                <input type="text" id="txt_Processes" disabled name="" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id=" " class=" col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred">
+        <div class=" col-md-12 col-sm-12 col-xl-12 col-xs-12">
+            <div class="col-lg-1 hidden-md hidden-sm hidden-xs ">  </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10 borderred" style="right: 3%;">
+                <div class="col-lg-1 hidden-md hidden-sm hidden-xs "></div>
+                <button id="btnReset" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl  "><span class="adminpro-icon  search-choice-focus "></span>@SystemResource.new_search</button>
+                <button id="btnviewresult" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl  " style="margin-right: 1%;display:none"><span class="adminpro-icon adminpro-paint-roller"></span>   @SystemResource.Preview_results  </button>
+                <div class="col-lg-1 hidden-md hidden-sm hidden-xs "></div>
+                <button id="btnPrintTrview" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-airplay"></span>@SystemResource.Print_Report</button>
+                <button id="btnPrintTrPDF" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>@SystemResource.Download_PDF</button>
+                <button id="btnPrintTrEXEL" type="button" class="marginbtn btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-download-arrow"></span>@SystemResource.Download_EXCEL</button>
+                <button id="btnPrint" type="button" class="  btn btn-custon-four btndefolt primary-btn-cl"><span class="adminpro-icon adminpro-paint-roller"></span> @SystemResource.App_Print</button>
+            </div>
+        </div>
+    </div>*@
+@section Script{
+    <script>
+        $(document).ready(function () {
+            $("#txt_ID_Vendor").select2();
+
+            // Read selected option
+            $('#but_read').click(function () {
+                var username = $('#txt_ID_Vendor option:selected').text();
+                var userid = $('#txt_ID_Vendor').val();
+
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
+    <script src="~/ClientApp/Processes/OperationRepScrap.js"></script>
+    <script>
+        function myclaer() {
+            $("#ShiftName option:selected").prop("selected", false);
+            $("#ShiftName option:first").prop("selected", "selected");
+
+            $("#PeriodName option:selected").prop("selected", false);
+            $("#PeriodName option:first").prop("selected", "selected");
+
+            $("#SrvTypeName").value = "";
+            $("#SrvTypeCode").value = "";
+            $("#ShiftCode").value = "";
+            $("#PeriodCode").value = "";
+        }
+    </script>
+}

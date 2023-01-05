@@ -1557,7 +1557,7 @@ namespace JournalVoucher {
         txtTotalDebit.value = DepitTotal.RoundToNum(2).toLocaleString();
         txtTotalCredit.value = CreditTotal.RoundToNum(2).toLocaleString();
 
-        Difference = (DepitTotal - CreditTotal).RoundToNum(2);
+        Difference = ((DepitTotal).RoundToNum(2) - (CreditTotal).RoundToNum(2)).RoundToNum(2);
         txtDifference.value = Difference.toLocaleString();
 
     }

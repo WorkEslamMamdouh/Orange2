@@ -390,6 +390,11 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Processes/OperationScrapIndex.cshtml");
         }
+        
+        public ActionResult OperationRepScrapIndex()
+        {
+            return View("~/Views/Processes/OperationRepScrapIndex.cshtml");
+        }
 
         public ActionResult OperationExportIndex()
         {

@@ -22,6 +22,7 @@ namespace Inv.DAL.Domain
         public string LoginUser { get; set; }
         public System.DateTime PrintDate { get; set; }
         public Nullable<int> Par_RepType { get; set; }
+        public Nullable<int> Par_ByValue { get; set; }
         public Nullable<int> op_trNO { get; set; }
         public Nullable<System.DateTime> op_trDate { get; set; }
         public string TruckNo { get; set; }

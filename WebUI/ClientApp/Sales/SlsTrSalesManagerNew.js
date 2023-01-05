@@ -468,6 +468,7 @@ var SlsTrSalesManagerNew;
         }
     }
     function PushModelItems(List, type) {
+        debugger;
         Model_Items = new GetItem();
         if (type == 1) {
             Model_Items.ItemCode = List.ItemCode;
@@ -1984,6 +1985,7 @@ var SlsTrSalesManagerNew;
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         ddlTypeInv_onchange();
+        vatType = InvoiceStatisticsModel[0].VatType;
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
     //------------------------------------------------------ Controls Grid Region------------------------

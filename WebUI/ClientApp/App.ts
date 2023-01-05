@@ -48,6 +48,7 @@ var Modules = {
     ProcSalesMgr: "ProcSalesMgr",
     ProcSalesRet: "ProcSalesRet",
     OperationScrap: "OperationScrap",
+    OperationRepScrap: "OperationRepScrap",
     OperationExport: "OperationExport",
     ProcSalesInvoice: "ProcSalesInvoice",
     Clientaccstat: "Clientaccstat",

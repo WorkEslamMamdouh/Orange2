@@ -21947,6 +21947,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
           <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="Int32" Name="Par_ByValue" Nullable="true" />
           <Property Type="Int32" Name="op_trNO" Nullable="true" />
           <Property Type="DateTime" Name="op_trDate" Nullable="true" Precision="16" />
           <Property Type="String" Name="TruckNo" Nullable="true" MaxLength="50" />
@@ -32659,6 +32660,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
                 <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
                 <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_ByValue" ColumnName="Par_ByValue" />
                 <ScalarProperty Name="op_trNO" ColumnName="op_trNO" />
                 <ScalarProperty Name="op_trDate" ColumnName="op_trDate" />
                 <ScalarProperty Name="TruckNo" ColumnName="TruckNo" />
