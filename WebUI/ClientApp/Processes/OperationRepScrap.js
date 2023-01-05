@@ -123,14 +123,19 @@ var OperationScrap;
     //----------------------------------------------------( Report )
     function PrintReport(OutType) {
         debugger;
-        if ($("#txt_ID_Vendor").val() == "Null") {
-            DisplayMassage("يجب اختيار مورد", "Must choose supplier", MessageType.Worning);
-            Errorinput($("#txt_ID_Vendor"));
-            return;
-        }
+        //if ($("#txt_ID_Vendor").val() == "Null") {
+        //    DisplayMassage("يجب اختيار مورد", "Must choose supplier", MessageType.Worning);
+        //    Errorinput($("#txt_ID_Vendor"));
+        //    return;
+        //}
         var rp = new ReportParameters();
         rp.RepType = OutType; //output report as View
-        rp.VendorId = Number($("#txt_ID_Vendor").val());
+        if ($("#txt_ID_Vendor").val() == "Null") {
+            rp.VendorId = -1;
+        }
+        else {
+            rp.VendorId = Number($("#txt_ID_Vendor").val());
+        }
         if ($("#txt_Processes").val() == "") {
             rp.OperationId = -1;
         }
