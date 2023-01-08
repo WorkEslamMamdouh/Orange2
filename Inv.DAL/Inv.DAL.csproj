@@ -533,6 +533,9 @@
     <Compile Include="Domain\IProc_Rep_OperationItemSales_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IProc_Rep_OperationScrapList_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IProc_Rep_OperationScrap_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>

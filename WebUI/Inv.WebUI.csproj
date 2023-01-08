@@ -22,10 +22,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -2538,6 +2542,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_AccReceiveComp7En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceSimpleComp7Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceSimpleComp7En.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_OPerationInvoiceStdComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsInvoiceStdArComp7.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8En.rdlc" />
@@ -2573,7 +2580,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoiceSimpleComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoicestdComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_VATSlsInvoicestdComp9En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9Ar.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccPaymentComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_AccReceiveComp9En.rdlc" />

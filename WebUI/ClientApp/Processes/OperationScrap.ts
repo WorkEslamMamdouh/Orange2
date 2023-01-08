@@ -1,9 +1,9 @@
 ﻿$(document).ready(() => {
 
-    OperationScrap.InitalizeComponent();
+    OperationRepScrap.InitalizeComponent();
 })
 
-namespace OperationScrap {
+namespace OperationRepScrap {
 
     var compcode: Number;
     var BranchCode: Number;

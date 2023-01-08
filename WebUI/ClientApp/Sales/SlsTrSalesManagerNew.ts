@@ -604,6 +604,7 @@ namespace SlsTrSalesManagerNew {
 
     function PushModelItems(List: any, type: number) {
 
+        debugger
         Model_Items = new GetItem();
 
         if (type == 1) {
@@ -891,6 +892,7 @@ namespace SlsTrSalesManagerNew {
                         ddlInvoiceCustomer.value = AccountDetails[0].CustomerId.toString();
 
                         vatType = AccountDetails[0].VATType;
+                        
                         txtInvoiceCustomerName.value = AccountDetails[0].NAMEA.toString();
                         txtCustomerMobile.value = AccountDetails[0].MOBILE;
 
@@ -2381,7 +2383,7 @@ namespace SlsTrSalesManagerNew {
                 $('#ddlInvoiceCustomer').val('');
                 //$('#ddlInvoiceCustomer').val(InvoiceStatisticsModel[0].CustomerId.toString());
 
-
+                
             }
 
             var ddlSalesmanValue = InvoiceStatisticsModel[0].SalesmanId.toString();
@@ -2518,14 +2520,13 @@ namespace SlsTrSalesManagerNew {
         $("#btnOperation").attr("disabled", "disabled");
 
 
-        ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
-        $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
+		ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc); 
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
 
         ddlTypeInv_onchange();
 
-
+        vatType = InvoiceStatisticsModel[0].VatType;
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
     //------------------------------------------------------ Controls Grid Region------------------------
