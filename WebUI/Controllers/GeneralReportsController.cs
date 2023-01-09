@@ -1549,6 +1549,21 @@ namespace Inv.WebUI.Controllers
             return Shared.JsonObject(url);
 
         }
+        public JsonResult IProc_Rep_OperationRepScrap(RepFinancials rp)
+        {
+            ReportService rep = getStandardParameters(rp);
+
+            rep.AddParameter("RepType", rp.RepType); 
+            rep.AddParameter("VendorId", rp.VendorId);
+            rep.AddParameter("OperationId", rp.OperationId);
+            rep.AddParameter("ByValue", rp.ByValue);
+
+            string url = rep.GetReportUrl("Rep_OperationRepScrap");
+
+            return Shared.JsonObject(url);
+
+        }
+         
 
         /////////////////***new
         public JsonResult IProc_Prnt_Collect(RepFinancials rp)

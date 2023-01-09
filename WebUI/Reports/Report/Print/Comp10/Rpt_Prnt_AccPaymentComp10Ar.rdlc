@@ -22,7 +22,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>4.84535cm</Top>
-        <Left>17.75867cm</Left>
+        <Left>16.96492cm</Left>
         <Height>0.6cm</Height>
         <Width>2.08549cm</Width>
         <Style>
@@ -55,7 +55,7 @@
         </Paragraphs>
         <rd:DefaultName>Amount</rd:DefaultName>
         <Top>4.84535cm</Top>
-        <Left>14.20019cm</Left>
+        <Left>13.40644cm</Left>
         <Height>0.6cm</Height>
         <Width>3.55848cm</Width>
         <ZIndex>1</ZIndex>
@@ -90,7 +90,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>17.75867cm</Left>
+        <Left>16.93317cm</Left>
         <Height>0.6cm</Height>
         <Width>2.08549cm</Width>
         <ZIndex>2</ZIndex>
@@ -124,9 +124,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>4.07249cm</Top>
-        <Left>4.78938cm</Left>
+        <Left>4.15438cm</Left>
         <Height>0.6cm</Height>
-        <Width>2.12398cm</Width>
+        <Width>2.07593cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -158,7 +158,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>7.31833cm</Top>
-        <Left>17.96329cm</Left>
+        <Left>17.20129cm</Left>
         <Height>0.6cm</Height>
         <Width>1.88087cm</Width>
         <ZIndex>4</ZIndex>
@@ -192,7 +192,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>8.75891cm</Top>
-        <Left>17.96329cm</Left>
+        <Left>17.20129cm</Left>
         <Height>0.6cm</Height>
         <Width>1.88087cm</Width>
         <ZIndex>5</ZIndex>
@@ -226,7 +226,7 @@
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>14.20019cm</Left>
+        <Left>13.37469cm</Left>
         <Height>0.6cm</Height>
         <Width>3.55848cm</Width>
         <ZIndex>6</ZIndex>
@@ -259,7 +259,7 @@
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
         <Top>4.07249cm</Top>
-        <Left>0.98878cm</Left>
+        <Left>0.35378cm</Left>
         <Height>0.6cm</Height>
         <Width>3.8006cm</Width>
         <ZIndex>7</ZIndex>
@@ -312,7 +312,7 @@
         </Paragraphs>
         <rd:DefaultName>Remarks</rd:DefaultName>
         <Top>8.75891cm</Top>
-        <Left>0.97145cm</Left>
+        <Left>0.20945cm</Left>
         <Height>1.26146cm</Height>
         <Width>17.01124cm</Width>
         <ZIndex>8</ZIndex>
@@ -367,7 +367,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>12.25367cm</Left>
+        <Left>11.42817cm</Left>
         <Height>0.58942cm</Height>
         <Width>1.60688cm</Width>
         <ZIndex>9</ZIndex>
@@ -401,7 +401,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>4.07249cm</Top>
-        <Left>17.75867cm</Left>
+        <Left>16.96492cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.08196cm</Width>
         <ZIndex>10</ZIndex>
@@ -435,7 +435,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>1.58652cm</Top>
-        <Left>4.7929cm</Left>
+        <Left>4.1579cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.11693cm</Width>
         <ZIndex>11</ZIndex>
@@ -469,7 +469,7 @@
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>7.52941cm</Left>
+        <Left>6.70391cm</Left>
         <Height>0.6cm</Height>
         <Width>4.71721cm</Width>
         <ZIndex>12</ZIndex>
@@ -502,7 +502,7 @@
         </Paragraphs>
         <rd:DefaultName>Bef_DescA</rd:DefaultName>
         <Top>4.07249cm</Top>
-        <Left>7.52941cm</Left>
+        <Left>6.73566cm</Left>
         <Height>0.58942cm</Height>
         <Width>6.33114cm</Width>
         <ZIndex>13</ZIndex>
@@ -557,7 +557,7 @@
         </Paragraphs>
         <rd:DefaultName>VoucherNo</rd:DefaultName>
         <Top>1.58652cm</Top>
-        <Left>0.98525cm</Left>
+        <Left>0.35025cm</Left>
         <Height>0.6cm</Height>
         <Width>3.8006cm</Width>
         <ZIndex>14</ZIndex>
@@ -592,7 +592,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>4.78938cm</Left>
+        <Left>4.15438cm</Left>
         <Height>0.6cm</Height>
         <Width>2.11693cm</Width>
         <ZIndex>15</ZIndex>
@@ -626,7 +626,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>1.58652cm</Top>
-        <Left>17.75514cm</Left>
+        <Left>16.92964cm</Left>
         <Height>0.6cm</Height>
         <Width>2.08549cm</Width>
         <ZIndex>16</ZIndex>
@@ -657,8 +657,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ReceiptDescA</rd:DefaultName>
-        <Top>7.34735cm</Top>
-        <Left>0.98878cm</Left>
+        <Top>7.35634cm</Top>
+        <Left>0.22678cm</Left>
         <Height>1.26146cm</Height>
         <Width>16.9939cm</Width>
         <ZIndex>17</ZIndex>
@@ -711,7 +711,7 @@
         </Paragraphs>
         <rd:DefaultName>Bef_Code</rd:DefaultName>
         <Top>4.07249cm</Top>
-        <Left>14.20019cm</Left>
+        <Left>13.40644cm</Left>
         <Height>0.6cm</Height>
         <Width>3.55848cm</Width>
         <ZIndex>18</ZIndex>
@@ -764,7 +764,7 @@
         </Paragraphs>
         <rd:DefaultName>Status1</rd:DefaultName>
         <Top>0.82424cm</Top>
-        <Left>0.98878cm</Left>
+        <Left>0.35378cm</Left>
         <Height>0.6cm</Height>
         <Width>3.8006cm</Width>
         <ZIndex>19</ZIndex>
@@ -819,7 +819,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.17471cm</Top>
-        <Left>14.80873cm</Left>
+        <Left>14.17373cm</Left>
         <Height>0.6cm</Height>
         <Width>1.16383cm</Width>
         <ZIndex>20</ZIndex>
@@ -853,7 +853,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.19941cm</Top>
-        <Left>4.58371cm</Left>
+        <Left>3.94871cm</Left>
         <Height>0.6cm</Height>
         <Width>1.16383cm</Width>
         <ZIndex>21</ZIndex>
@@ -887,7 +887,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.75327cm</Top>
-        <Left>14.80873cm</Left>
+        <Left>14.17373cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>22</ZIndex>
@@ -921,7 +921,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.75327cm</Top>
-        <Left>4.58371cm</Left>
+        <Left>3.94871cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>23</ZIndex>
@@ -955,7 +955,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.75327cm</Top>
-        <Left>15.93728cm</Left>
+        <Left>15.30228cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>24</ZIndex>
@@ -989,7 +989,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>11.42383cm</Top>
-        <Left>15.93728cm</Left>
+        <Left>15.30228cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>25</ZIndex>
@@ -1023,7 +1023,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>10.75327cm</Top>
-        <Left>5.73343cm</Left>
+        <Left>5.09843cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>26</ZIndex>
@@ -1057,7 +1057,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>11.42383cm</Top>
-        <Left>5.73343cm</Left>
+        <Left>5.09843cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>27</ZIndex>
@@ -1091,7 +1091,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>11.42383cm</Top>
-        <Left>14.80873cm</Left>
+        <Left>14.17373cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>28</ZIndex>
@@ -1125,7 +1125,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>11.42383cm</Top>
-        <Left>4.58371cm</Left>
+        <Left>3.94871cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
         <ZIndex>29</ZIndex>
@@ -1489,7 +1489,7 @@
                 </Paragraphs>
                 <rd:DefaultName>Textbox29</rd:DefaultName>
                 <Top>0.00705cm</Top>
-                <Left>3.86732cm</Left>
+                <Left>3.99432cm</Left>
                 <Height>0.6cm</Height>
                 <Width>2.05021cm</Width>
                 <ZIndex>2</ZIndex>
@@ -1641,7 +1641,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>5.64922cm</Top>
-        <Left>0.97953cm</Left>
+        <Left>0.18578cm</Left>
         <Height>0.67436cm</Height>
         <Width>18.8611cm</Width>
         <ZIndex>30</ZIndex>
@@ -1761,9 +1761,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
             <Top>0.05862cm</Top>
-            <Left>3.81793cm</Left>
+            <Left>4.0024cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.0996cm</Width>
+            <Width>2.05021cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1796,7 +1796,7 @@
             <rd:DefaultName>VoucherNo</rd:DefaultName>
             <Top>0.05157cm</Top>
             <Height>0.6cm</Height>
-            <Width>3.81793cm</Width>
+            <Width>3.91824cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1812,7 +1812,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>4.84535cm</Top>
-        <Left>0.97145cm</Left>
+        <Left>0.1777cm</Left>
         <Height>0.69037cm</Height>
         <Width>12.8891cm</Width>
         <ZIndex>31</ZIndex>
@@ -1845,7 +1845,7 @@
         </Paragraphs>
         <rd:DefaultName>NetAfterVAT</rd:DefaultName>
         <Top>6.48979cm</Top>
-        <Left>0.98878cm</Left>
+        <Left>0.22678cm</Left>
         <Height>0.6cm</Height>
         <Width>16.76989cm</Width>
         <ZIndex>32</ZIndex>
@@ -1881,7 +1881,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>6.48979cm</Top>
-        <Left>17.75867cm</Left>
+        <Left>16.99667cm</Left>
         <Height>0.6cm</Height>
         <Width>2.08196cm</Width>
         <ZIndex>33</ZIndex>
@@ -1919,7 +1919,7 @@
         <Top>0cm</Top>
         <Left>0cm</Left>
         <Height>0.68819cm</Height>
-        <Width>20.24448cm</Width>
+        <Width>18.8652cm</Width>
         <ZIndex>34</ZIndex>
         <Style>
           <Border>
@@ -1949,7 +1949,7 @@
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
         <Top>1.58652cm</Top>
-        <Left>7.53117cm</Left>
+        <Left>6.70567cm</Left>
         <Height>0.6cm</Height>
         <Width>10.22397cm</Width>
         <ZIndex>35</ZIndex>
@@ -2004,7 +2004,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>2.36291cm</Top>
-        <Left>4.73094cm</Left>
+        <Left>4.09594cm</Left>
         <Height>0.6cm</Height>
         <Width>2.18242cm</Width>
         <ZIndex>36</ZIndex>
@@ -2036,7 +2036,7 @@
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
         <Top>2.36291cm</Top>
-        <Left>0.98878cm</Left>
+        <Left>0.35378cm</Left>
         <Height>0.6cm</Height>
         <Width>3.74216cm</Width>
         <ZIndex>37</ZIndex>
@@ -2091,7 +2091,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
         <Top>2.36291cm</Top>
-        <Left>17.75514cm</Left>
+        <Left>16.92964cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.08549cm</Width>
         <ZIndex>38</ZIndex>
@@ -2123,7 +2123,7 @@
         </Paragraphs>
         <rd:DefaultName>Bef_DescA</rd:DefaultName>
         <Top>2.36291cm</Top>
-        <Left>7.5347cm</Left>
+        <Left>6.7092cm</Left>
         <Height>0.58942cm</Height>
         <Width>10.19376cm</Width>
         <ZIndex>39</ZIndex>
@@ -2170,7 +2170,7 @@
       </BackgroundImage>
     </Style>
   </Body>
-  <Width>7.97027in</Width>
+  <Width>7.56266in</Width>
   <Page>
     <PageHeader>
       <Height>3.02259cm</Height>
@@ -2184,7 +2184,7 @@
           <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>3.02259cm</Height>
-          <Width>20.24449cm</Width>
+          <Width>19.20916cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2210,7 +2210,7 @@
           <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>0.78562cm</Height>
-          <Width>20.24448cm</Width>
+          <Width>19.20916cm</Width>
           <Style>
             <Border>
               <Style>None</Style>

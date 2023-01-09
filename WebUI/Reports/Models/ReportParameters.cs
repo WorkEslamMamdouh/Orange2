@@ -246,6 +246,7 @@ namespace Inv.WebUI.Reports.Models
         public int AdjId { get; set; }
         public int CustomerID { get; set; }
         public int VendorId { get; set; }
+        public int ByValue { get; set; }
         public int SalesmanID { get; set; }
         public int CashType { get; set; }
         public int PaymentType { get; set; }

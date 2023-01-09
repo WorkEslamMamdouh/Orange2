@@ -252,6 +252,7 @@ class ReportParameters {
     public ToBra: number;
     public src: number;
     public OperationId: number;
+    public ByValue: number;
     public FromSls: number;
     public ToSls: number;
     public ISimport: number;

@@ -13,6 +13,13 @@ namespace SlsTrSalesManagerNew {
     var flagInvMulti = false;
     var SalesmanId = 'null';
 
+    var InvoicePaymentDef;
+
+    var  CashInvoiceDefAuth;
+
+
+
+
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
         var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
@@ -21,6 +28,10 @@ namespace SlsTrSalesManagerNew {
         (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice')
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
+
+        InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef
+
+        CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
 
 
     }
@@ -33,6 +44,10 @@ namespace SlsTrSalesManagerNew {
         (lang == "ar" ? Screen_name = 'فواتير الارساليات' : Screen_name = 'opration invoice')
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper
+
+        InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef
+
+        CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
 
     }
 
@@ -202,9 +217,10 @@ namespace SlsTrSalesManagerNew {
     var display_none = "display_none";
     var Remove_display_none = "";
 
-    
+
 
     var flagControldbOrSerch = false;
+
 
     //flagInvItemDiscount = true;
     //flagInvMulti = true;
@@ -214,7 +230,7 @@ namespace SlsTrSalesManagerNew {
     export function InitalizeComponent() {
 
         //alert()
-       
+
 
 
         document.getElementById('Screen_name').innerHTML = Screen_name;
@@ -604,6 +620,7 @@ namespace SlsTrSalesManagerNew {
 
     function PushModelItems(List: any, type: number) {
 
+        debugger
         Model_Items = new GetItem();
 
         if (type == 1) {
@@ -891,11 +908,12 @@ namespace SlsTrSalesManagerNew {
                         ddlInvoiceCustomer.value = AccountDetails[0].CustomerId.toString();
 
                         vatType = AccountDetails[0].VATType;
+
                         txtInvoiceCustomerName.value = AccountDetails[0].NAMEA.toString();
                         txtCustomerMobile.value = AccountDetails[0].MOBILE;
 
                         if (SysSession.CurrentEnvironment.UserType != 1 && SysSession.CurrentEnvironment.UserType != 3) {
-                             
+
                             if (AccountDetails[0].SalesmanId != null && AccountDetails[0].SalesmanId != 0) {
 
                                 let SaleMan = SalesmanDetails.filter(x => x.SalesmanId == AccountDetails[0].SalesmanId);
@@ -1453,8 +1471,8 @@ namespace SlsTrSalesManagerNew {
                 InvoiceModel.VatAmount = Number(txtTax.value);
                 InvoiceModel.CommitionAmount = Number(txtCommission.value);
 
-                if (Validation_Insert == 1 && compcode != 6 ) { Open_poup_Pass(); }
-                else  if (NewAdd == true) {
+                if (Validation_Insert == 1 && compcode != 6) { Open_poup_Pass(); }
+                else if (NewAdd == true) {
 
                     InvoiceModel.CreatedAt = DateTimeFormat(Date().toString());
                     InvoiceModel.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1692,9 +1710,13 @@ namespace SlsTrSalesManagerNew {
         $("#Div_Money").removeClass("display_none");
 
 
-         
+        //alert(SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef = 2)
+        //SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef = 2
 
-        if (SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef == 2) {
+        //alert(InvoicePaymentDef) 
+
+        debugger
+        if (InvoicePaymentDef == 2) {
 
             $("#txtCashMoney").val("");
             $("#txtCardMoney").val("");
@@ -1714,7 +1736,7 @@ namespace SlsTrSalesManagerNew {
 
             ddlType.value = '0'
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
-            chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCreditInvoiceDefAuth;
+            chkActive.checked = CashInvoiceDefAuth;
 
             if (compcode != 4) {
 
@@ -1722,6 +1744,7 @@ namespace SlsTrSalesManagerNew {
                 //DocumentActions.FillCombowithdefult(filterCustomerDetails, ddlInvoiceCustomer, "CustomerId", (lang == "ar" ? "NAMEA" : "NAMEE"), (lang == "ar" ? "اختر العميل" : "Select customer"));
 
             }
+            Creadt();
 
         }
         else {
@@ -1753,7 +1776,7 @@ namespace SlsTrSalesManagerNew {
 
             ddlType.value = '1'
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
-            chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
+            chkActive.checked = CashInvoiceDefAuth;
 
             if (compcode != 4) {
                 //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true && x.IsCreditCustomer == true);
@@ -1778,7 +1801,6 @@ namespace SlsTrSalesManagerNew {
         $("#txt_Operation").val("");
         $("#txt_OperationId").val("");
 
-        Creadt();
 
         $('#txt_OperationId').val($('#txt_OperationIdFilter').val())
         $('#txt_Operation').val($('#txt_OperationFilter').val())
@@ -1935,8 +1957,8 @@ namespace SlsTrSalesManagerNew {
                 Errorinput($('#ddlFamily' + cnt));
                 return
             }
-        }  
-      
+        }
+
 
         let FildItemID = '';
         let FildItemCode = '';
@@ -2519,13 +2541,12 @@ namespace SlsTrSalesManagerNew {
 
 
         ddlTypeInv.value = setVal(InvoiceStatisticsModel[0].SlsInvSrc);
-        $('#txt_Operation').val(setVal(SlsInvoiceItemsDetails[0].op_TrNo));//get trno
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
 
         ddlTypeInv_onchange();
 
-
+        vatType = InvoiceStatisticsModel[0].VatType;
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
     //------------------------------------------------------ Controls Grid Region------------------------
@@ -3677,7 +3698,7 @@ namespace SlsTrSalesManagerNew {
                 CountTotal += Number($("#txtTotal" + i).val());
                 CountTotal = Number(CountTotal.RoundToSt(2).toString());
 
-                var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100; 
+                var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
                 //TaxCount += Number($("#txtTax" + i).val());
                 TaxCount += vatAmount;
                 TaxCount = Number(TaxCount.RoundToSt(2).toString());
@@ -4002,7 +4023,7 @@ namespace SlsTrSalesManagerNew {
             else if (Number($("#txtTax" + rowcount).val()) == 0) {
                 totalRow(rowcount, true);
 
-               
+
             }
             return true;
         }
@@ -4173,7 +4194,7 @@ namespace SlsTrSalesManagerNew {
 
             //------------------------------------------------------------------------------------------------------------
 
-            invoiceItemSingleModel.Name_Item = $("#Item_Desc" + i + " option:selected").text();  
+            invoiceItemSingleModel.Name_Item = $("#Item_Desc" + i + " option:selected").text();
             invoiceItemSingleModel.MinUnitPrice = Number($("#ddlItem" + i).attr('data-MinUnitPrice'));
 
             let MinPrice = $("#ddlItem" + i).attr('data-MinUnitPrice');
@@ -4370,7 +4391,7 @@ namespace SlsTrSalesManagerNew {
                     }
 
                     Save_Succ_But();
-                  
+
                 } else {
                     IsSuccess = false;
 
@@ -4504,7 +4525,7 @@ namespace SlsTrSalesManagerNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItemVer2>;
-                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial")); 
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }
@@ -4723,7 +4744,7 @@ namespace SlsTrSalesManagerNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItemVer2>;
-                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial")); 
+                    SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                         BuildControls(i);
                     }
@@ -5256,11 +5277,11 @@ namespace SlsTrSalesManagerNew {
             ///////////
             let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
 
-			let type = TransType.Invoice;	    
-			if (SlsInvSrc == '2') {
-				type = TransType.InvoiceOperation;
-			}
-			PrintsFrom_To(type, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
+            let type = TransType.Invoice;
+            if (SlsInvSrc == '2') {
+                type = TransType.InvoiceOperation;
+            }
+            PrintsFrom_To(type, Name_ID, NameTable, Condation3, SlsInvoiceStatisticsDetails.length)
 
 
 
@@ -5299,9 +5320,9 @@ namespace SlsTrSalesManagerNew {
         rp.TrDate = txtInvoiceDate.value;
         rp.TrNo = lblInvoiceNumber.value;
         rp.ContactMobile = "966504170785";//966504170785 //966508133500 
-        rp.Title_Mess = "فاتورة " + lblInvoiceNumber.value + ""; 
+        rp.Title_Mess = "فاتورة " + lblInvoiceNumber.value + "";
         //rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة" + lblInvoiceNumber.value + ""; 
-        
+
         debugger
         SendInv_to_Cust(rp)
     }

@@ -52,6 +52,7 @@ var Modules = {
     ProcSalesMgr: "ProcSalesMgr",
     ProcSalesRet: "ProcSalesRet",
     OperationScrap: "OperationScrap",
+    OperationRepScrap: "OperationRepScrap",
     OperationExport: "OperationExport",
     ProcSalesInvoice: "ProcSalesInvoice",
     Clientaccstat: "Clientaccstat",
@@ -203,13 +204,40 @@ function Fixed(value) {
 }
 var App;
 (function (App) {
+    //Number.prototype.RoundToNum = function (dec: number): number {
+    //    let num = this;
+    //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
+    //};
+    //Number.prototype.RoundToSt = function (dec: number): string {
+    //    let num = this;
+    //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    //};
     Number.prototype.RoundToNum = function (dec) {
+        debugger;
         var num = this;
-        return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
+        //let stnum = num.toString();
+        if (num.toString().indexOf(".") == -1) {
+            return num;
+        }
+        else {
+            var stfix = num.toString().substr(0, num.toString().indexOf("."));
+            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+        }
+        //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
     Number.prototype.RoundToSt = function (dec) {
         var num = this;
-        return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+        //let stnum = num.toString();
+        if (num.toString().indexOf(".") == -1) {
+            return num;
+        }
+        else {
+            var stfix = num.toString().substr(0, num.toString().indexOf("."));
+            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+        }
+        //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
     Number.prototype.setVal = function (value) {
         var Input = this;

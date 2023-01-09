@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    OperationScrap.InitalizeComponent();
+    OperationRepScrap.InitalizeComponent();
 });
-var OperationScrap;
-(function (OperationScrap) {
+var OperationRepScrap;
+(function (OperationRepScrap) {
     var compcode;
     var BranchCode;
     var AccountType = 2;
@@ -42,7 +42,7 @@ var OperationScrap;
         DisplayAccDefVendor();
         $('#btnPrint').addClass('display_none');
     }
-    OperationScrap.InitalizeComponent = InitalizeComponent;
+    OperationRepScrap.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         txtVendorType = document.getElementById("txtVendorType");
         btnOPerationSearch = document.getElementById("btnOPerationSearch");
@@ -143,5 +143,5 @@ var OperationScrap;
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
-})(OperationScrap || (OperationScrap = {}));
+})(OperationRepScrap || (OperationRepScrap = {}));
 //# sourceMappingURL=OperationScrap.js.map

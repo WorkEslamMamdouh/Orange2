@@ -390,6 +390,13 @@ namespace Inv.WebUI.Controllers
             return buildReport(que);
         }
 
+
+        public string IProc_Rep_OperationRepScrap(RepFinancials rp)
+        {
+            IEnumerable<IProc_Rep_OperationScrapList_Result> que = Rep_OperationRepScrap(rp);
+            return buildReport(que);
+        }
+
         public string IProc_Prnt_Collect(RepFinancials rp)
         {
             IEnumerable<IProc_Prnt_Collect_Result> que = Prnt_Collect(rp);
