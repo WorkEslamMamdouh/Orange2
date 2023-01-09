@@ -10,12 +10,16 @@ var SlsTrSalesManagerNew;
     var flagInvItemDiscount = false;
     var flagInvMulti = false;
     var SalesmanId = 'null';
+    var InvoicePaymentDef;
+    var CashInvoiceDefAuth;
     if (SlsInvSrc == "1") { //  1:Retail invoice  
         var SysSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
         (lang == "ar" ? Screen_name = 'فواتير التجزئه' : Screen_name = 'Retail invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
+        InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef;
+        CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
     }
     else { //2: opration invoice 
         var SysSession = GetSystemSession(Modules.SlsTrSalesOperation);
@@ -23,6 +27,8 @@ var SlsTrSalesManagerNew;
         (lang == "ar" ? Screen_name = 'فواتير الارساليات' : Screen_name = 'opration invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
+        InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef;
+        CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
     }
     var compcode;
     var BranchCode;
@@ -1288,7 +1294,11 @@ var SlsTrSalesManagerNew;
         ddlInvoiceCustomer.disabled = false;
         ddlInvoiceCustomer.value = '';
         $("#Div_Money").removeClass("display_none");
-        if (SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef == 2) {
+        //alert(SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef = 2)
+        //SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef = 2
+        //alert(InvoicePaymentDef) 
+        debugger;
+        if (InvoicePaymentDef == 2) {
             $("#txtCashMoney").val("");
             $("#txtCardMoney").val("");
             $('#ddlCashBox').prop('selectedIndex', 0);
@@ -1303,11 +1313,12 @@ var SlsTrSalesManagerNew;
             $("#Div_Money").addClass("display_none");
             ddlType.value = '0';
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
-            chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCreditInvoiceDefAuth;
+            chkActive.checked = CashInvoiceDefAuth;
             if (compcode != 4) {
                 //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true);
                 //DocumentActions.FillCombowithdefult(filterCustomerDetails, ddlInvoiceCustomer, "CustomerId", (lang == "ar" ? "NAMEA" : "NAMEE"), (lang == "ar" ? "اختر العميل" : "Select customer"));
             }
+            Creadt();
         }
         else {
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
@@ -1333,7 +1344,7 @@ var SlsTrSalesManagerNew;
             TypeFlag = true;
             ddlType.value = '1';
             chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
-            chkActive.checked = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
+            chkActive.checked = CashInvoiceDefAuth;
             if (compcode != 4) {
                 //filterCustomerDetails = CustomerDetails.filter(x => x.Isactive == true && x.IsCreditCustomer == true);
                 //DocumentActions.FillCombowithdefult(filterCustomerDetails, ddlInvoiceCustomer, "CustomerId", (lang == "ar" ? "NAMEA" : "NAMEE"), (lang == "ar" ? "اختر العميل" : "Select customer"));
@@ -1349,7 +1360,6 @@ var SlsTrSalesManagerNew;
         $("#btnOperation").removeAttr("disabled");
         $("#txt_Operation").val("");
         $("#txt_OperationId").val("");
-        Creadt();
         $('#txt_OperationId').val($('#txt_OperationIdFilter').val());
         $('#txt_Operation').val($('#txt_OperationFilter').val());
         try {

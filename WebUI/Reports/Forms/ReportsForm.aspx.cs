@@ -5011,6 +5011,52 @@ namespace RS.WebUI.Reports.Forms
             return query;
         }
 
+
+        public IEnumerable<IProc_Rep_OperationScrapList_Result> Rep_OperationRepScrap()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+            //ReportInfo Rep;
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+            int vendorid = int.Parse(RepPar.VendorId.ToString());
+            SqlParameter spvendorid = new SqlParameter("@vendorid", vendorid == -1 ? System.Data.SqlTypes.SqlInt32.Null : vendorid);
+
+            int ByValue = int.Parse(RepPar.ByValue.ToString());
+            SqlParameter spByValue = new SqlParameter("@ByValue", ByValue == -1 ? System.Data.SqlTypes.SqlInt32.Null : ByValue);
+
+            int TRId = int.Parse(RepPar.OperationId.ToString());
+            SqlParameter spTRId = new SqlParameter("@TRId", TRId == -1 ? System.Data.SqlTypes.SqlInt32.Null : TRId);
+
+
+
+
+            Rep = OpenReport("Rep_OperationRepScrap");
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value +
+           ", @vendorid= " + spvendorid.Value +
+           ", @TRId= " + spTRId.Value +
+           ", @ByValue = " + spByValue.Value;
+
+
+            List<IProc_Rep_OperationScrapList_Result> query = db.Database.SqlQuery<IProc_Rep_OperationScrapList_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         public IEnumerable<AProc_Rpt_GLFinancialStatment_Result> Rpt_GLFinancialStatment()
         {
             ReportStandardParameters StandPar = getStandardParameters();
