@@ -32,6 +32,8 @@ namespace Inv.DAL.Domain
         public Nullable<byte> op_status { get; set; }
         public string PolicyNo { get; set; }
         public string CustomNo { get; set; }
+        public string Par_VndCode { get; set; }
+        public string par_vndNameA { get; set; }
         public string Vnd_Code { get; set; }
         public string vnd_NameA { get; set; }
         public string vnd_nameE { get; set; }
