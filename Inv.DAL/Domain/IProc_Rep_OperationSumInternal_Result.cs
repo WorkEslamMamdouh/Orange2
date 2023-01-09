@@ -65,5 +65,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> ivit_total { get; set; }
         public Nullable<decimal> ivit_VatAmount { get; set; }
         public Nullable<decimal> ivit_NetAfterVat { get; set; }
+        public string ChRemarks { get; set; }
     }
 }
