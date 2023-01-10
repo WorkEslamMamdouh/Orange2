@@ -3002,12 +3002,12 @@ var SlsTrSalesManagerNew;
                 Errorinput($("#txtQuantity" + rowcount));
                 return false;
             }
-            else if (Price == 0) {
-                DisplayMassage(" برجاء ادخال السعر", "Please enter the Price", MessageType.Error);
-                Errorinput($("#txtPrice" + rowcount));
-                Errorinput($("#txtUnitpriceWithVat" + rowcount));
-                return false;
-            }
+            //else if (Price == 0) {
+            //    DisplayMassage(" برجاء ادخال السعر", "Please enter the Price", MessageType.Error);
+            //    Errorinput($("#txtPrice" + rowcount));
+            //    Errorinput($("#txtUnitpriceWithVat" + rowcount));
+            //    return false
+            //}
             else if (Number($("#txtTax" + rowcount).val()) == 0) {
                 totalRow(rowcount, true);
             }
@@ -3167,8 +3167,8 @@ var SlsTrSalesManagerNew;
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val(); // 
-                invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
-                invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+                invoiceItemSingleModel.Unitprice = Number($("#txtPrice" + i).val());
+                invoiceItemSingleModel.UnitpriceWithVat = Number($("#txtUnitpriceWithVat" + i).val());
                 invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
                 invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
@@ -3205,8 +3205,8 @@ var SlsTrSalesManagerNew;
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val(); //
                 invoiceItemSingleModel.TotRetQty = $('#txtReturnQuantity' + i).val();
-                invoiceItemSingleModel.Unitprice = $("#txtPrice" + i).val();
-                invoiceItemSingleModel.UnitpriceWithVat = $("#txtUnitpriceWithVat" + i).val();
+                invoiceItemSingleModel.Unitprice = Number($("#txtPrice" + i).val());
+                invoiceItemSingleModel.UnitpriceWithVat = Number($("#txtUnitpriceWithVat" + i).val());
                 invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
                 invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());

@@ -2829,6 +2829,7 @@ var I_TR_OperationCharges = /** @class */ (function (_super) {
         _this.RefInvoiceDate = "";
         _this.VendorID = 0;
         _this.StatusFlag = "";
+        _this.ChRemarks = "";
         _this.CashBoxID = 0;
         _this.IsPosted = false;
         _this.VoucherNo = 0;
@@ -2990,6 +2991,7 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.OperationID = 0;
         _this.CashBox_DescA = "";
         _this.CashBox_DescE = "";
+        _this.ChRemarks = "";
         _this.IsPosted = false;
         _this.VoucherNo = 0;
         return _this;

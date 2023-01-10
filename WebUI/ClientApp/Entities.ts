@@ -4885,6 +4885,7 @@ class I_TR_OperationCharges extends SecurityClass {
         this.RefInvoiceDate = "";
         this.VendorID = 0;
         this.StatusFlag = "";
+        this.ChRemarks = "";
         this.CashBoxID = 0;
         this.IsPosted = false;
         this.VoucherNo = 0; 
@@ -4903,6 +4904,7 @@ class I_TR_OperationCharges extends SecurityClass {
     public RefInvoiceDate: string;
     public VendorID: number;
     public StatusFlag: string;
+    public ChRemarks: string;
     public CashBoxID: number;
     public IsPosted: boolean;
     public VoucherNo: number; 
@@ -5168,6 +5170,7 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.OperationID = 0;
         this.CashBox_DescA = "";
         this.CashBox_DescE = "";
+        this.ChRemarks = "";
         this.IsPosted = false;
         this.VoucherNo = 0;
 
@@ -5195,6 +5198,7 @@ class IQ_GetOperationCharges extends SecurityClass {
     public OperationID: number;
     public CashBox_DescA: string;
     public CashBox_DescE: string;
+    public ChRemarks: string;
     public IsPosted: boolean; 
     public VoucherNo: number;
 
