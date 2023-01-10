@@ -217,7 +217,7 @@ var App;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
-            return num;
+            return Number(num);
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
@@ -230,7 +230,7 @@ var App;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
-            return num;
+            return Number(num).toString();
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));

@@ -335,7 +335,7 @@ namespace App {
 		let num = this;
 		//let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
-            return Number(num);
+            return Number(num).toString();
 		} else {
 			let stfix = num.toString().substr(0, num.toString().indexOf("."));
 			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
