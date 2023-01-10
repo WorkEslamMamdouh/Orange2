@@ -2775,6 +2775,45 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="IssueedBeforeQty" Type="numeric" Precision="19" Scale="2" />
           <Property Name="TotRetQty" Type="numeric" Precision="19" Scale="2" />
         </EntityType>
+        <EntityType Name="I_Stk_TR_Open">
+          <Key>
+            <PropertyRef Name="OpenID" />
+          </Key>
+          <Property Name="OpenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tr_No" Type="int" />
+          <Property Name="RefNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrDate" Type="smalldatetime" />
+          <Property Name="TrDateH" Type="nvarchar" MaxLength="20" />
+          <Property Name="StoreID" Type="int" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="CountedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="VerfiedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="TotalCost" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="VoucherNo" Type="int" />
+          <Property Name="VoucherType" Type="tinyint" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="25" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="25" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="I_Stk_Tr_OpenDetails">
+          <Key>
+            <PropertyRef Name="OpenDetailID" />
+          </Key>
+          <Property Name="OpenDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpenID" Type="int" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="ItemStoreBatchid" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="Qty" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="UnitCost" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="StkUnitCost" Type="numeric" Precision="19" Scale="5" />
+        </EntityType>
         <EntityType Name="I_Stk_TR_Transfer">
           <Key>
             <PropertyRef Name="TransfareID" />
@@ -5704,6 +5743,28 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetStkIssueCCDetail' does not ha
           <Property Name="uom_DescE" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.IQ_GetStkOpenDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IQ_GetStkOpenDetail">
+          <Key>
+            <PropertyRef Name="OpenDetailID" />
+          </Key>
+          <Property Name="OpenDetailID" Type="int" Nullable="false" />
+          <Property Name="OpenID" Type="int" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="ItemStoreBatchid" Type="int" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="Qty" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="UnitCost" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="StkUnitCost" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="UomCode" Type="nvarchar" MaxLength="25" />
+          <Property Name="uom_DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Uom_DescE" Type="nvarchar" MaxLength="100" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="25" />
+          <Property Name="DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="DescL" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetTransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="IQ_GetTransfer">
           <Key>
@@ -7503,6 +7564,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="I_Stk_Tr_AdjustDetails" EntityType="Self.I_Stk_Tr_AdjustDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="I_Stk_TR_IssueToCC" EntityType="Self.I_Stk_TR_IssueToCC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="I_Stk_TR_IssueToCCDetails" EntityType="Self.I_Stk_TR_IssueToCCDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="I_Stk_TR_Open" EntityType="Self.I_Stk_TR_Open" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="I_Stk_Tr_OpenDetails" EntityType="Self.I_Stk_Tr_OpenDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="I_Stk_TR_Transfer" EntityType="Self.I_Stk_TR_Transfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="I_Stk_TR_TransferDetails" EntityType="Self.I_Stk_TR_TransferDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="I_TR_Collect" EntityType="Self.I_TR_Collect" Schema="dbo" store:Type="Tables" />
@@ -9861,6 +9924,25 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetStkIssueCCDetail].[uom_DescE] AS [uom_DescE]
     FROM [dbo].[IQ_GetStkIssueCCDetail] AS [IQ_GetStkIssueCCDetail]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="IQ_GetStkOpenDetail" EntityType="Self.IQ_GetStkOpenDetail" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IQ_GetStkOpenDetail].[OpenDetailID] AS [OpenDetailID], 
+    [IQ_GetStkOpenDetail].[OpenID] AS [OpenID], 
+    [IQ_GetStkOpenDetail].[Serial] AS [Serial], 
+    [IQ_GetStkOpenDetail].[ItemID] AS [ItemID], 
+    [IQ_GetStkOpenDetail].[ItemStoreBatchid] AS [ItemStoreBatchid], 
+    [IQ_GetStkOpenDetail].[UnitID] AS [UnitID], 
+    [IQ_GetStkOpenDetail].[Qty] AS [Qty], 
+    [IQ_GetStkOpenDetail].[UnitCost] AS [UnitCost], 
+    [IQ_GetStkOpenDetail].[StkUnitCost] AS [StkUnitCost], 
+    [IQ_GetStkOpenDetail].[UomCode] AS [UomCode], 
+    [IQ_GetStkOpenDetail].[uom_DescA] AS [uom_DescA], 
+    [IQ_GetStkOpenDetail].[Uom_DescE] AS [Uom_DescE], 
+    [IQ_GetStkOpenDetail].[ItemCode] AS [ItemCode], 
+    [IQ_GetStkOpenDetail].[DescA] AS [DescA], 
+    [IQ_GetStkOpenDetail].[DescL] AS [DescL]
+    FROM [dbo].[IQ_GetStkOpenDetail] AS [IQ_GetStkOpenDetail]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="IQ_GetTransfer" EntityType="Self.IQ_GetTransfer" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [IQ_GetTransfer].[TransfareID] AS [TransfareID], 
@@ -11663,6 +11745,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="TRId" Mode="In" Type="Int32" />
             <Parameter Name="ByValue" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="I_Stk_TR_Open" EntityType="InvModel.I_Stk_TR_Open" />
+          <EntitySet Name="I_Stk_Tr_OpenDetails" EntityType="InvModel.I_Stk_Tr_OpenDetails" />
+          <EntitySet Name="IQ_GetStkOpenDetail" EntityType="InvModel.IQ_GetStkOpenDetail" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -21984,6 +22069,65 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Decimal" Name="ivit_VatAmount" Nullable="true" Precision="38" Scale="5" />
           <Property Type="Decimal" Name="ivit_NetAfterVat" Nullable="true" Precision="38" Scale="10" />
         </ComplexType>
+        <EntityType Name="I_Stk_TR_Open">
+          <Key>
+            <PropertyRef Name="OpenID" />
+          </Key>
+          <Property Name="OpenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tr_No" Type="Int32" />
+          <Property Name="RefNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrDate" Type="DateTime" Precision="0" />
+          <Property Name="TrDateH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StoreID" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VerfiedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TotalCost" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="VoucherNo" Type="Int32" />
+          <Property Name="VoucherType" Type="Byte" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="I_Stk_Tr_OpenDetails">
+          <Key>
+            <PropertyRef Name="OpenDetailID" />
+          </Key>
+          <Property Name="OpenDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenID" Type="Int32" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="ItemStoreBatchid" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="Qty" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="UnitCost" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="StkUnitCost" Type="Decimal" Precision="19" Scale="5" />
+        </EntityType>
+        <EntityType Name="IQ_GetStkOpenDetail">
+          <Key>
+            <PropertyRef Name="OpenDetailID" />
+          </Key>
+          <Property Name="OpenDetailID" Type="Int32" Nullable="false" />
+          <Property Name="OpenID" Type="Int32" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="ItemStoreBatchid" Type="Int32" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="Qty" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="UnitCost" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="StkUnitCost" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="UomCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="uom_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -32706,6 +32850,68 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="I_Stk_TR_Open">
+            <EntityTypeMapping TypeName="InvModel.I_Stk_TR_Open">
+              <MappingFragment StoreEntitySet="I_Stk_TR_Open">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="VerfiedBy" ColumnName="VerfiedBy" />
+                <ScalarProperty Name="CountedBy" ColumnName="CountedBy" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="Tr_No" ColumnName="Tr_No" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="I_Stk_Tr_OpenDetails">
+            <EntityTypeMapping TypeName="InvModel.I_Stk_Tr_OpenDetails">
+              <MappingFragment StoreEntitySet="I_Stk_Tr_OpenDetails">
+                <ScalarProperty Name="StkUnitCost" ColumnName="StkUnitCost" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="ItemStoreBatchid" ColumnName="ItemStoreBatchid" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="OpenDetailID" ColumnName="OpenDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IQ_GetStkOpenDetail">
+            <EntityTypeMapping TypeName="InvModel.IQ_GetStkOpenDetail">
+              <MappingFragment StoreEntitySet="IQ_GetStkOpenDetail">
+                <ScalarProperty Name="DescL" ColumnName="DescL" />
+                <ScalarProperty Name="DescA" ColumnName="DescA" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
+                <ScalarProperty Name="uom_DescA" ColumnName="uom_DescA" />
+                <ScalarProperty Name="UomCode" ColumnName="UomCode" />
+                <ScalarProperty Name="StkUnitCost" ColumnName="StkUnitCost" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="ItemStoreBatchid" ColumnName="ItemStoreBatchid" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+                <ScalarProperty Name="OpenDetailID" ColumnName="OpenDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

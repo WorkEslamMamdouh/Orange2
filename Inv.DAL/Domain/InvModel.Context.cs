@@ -222,6 +222,9 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetSlsInvoiceStatisticVer2> IQ_GetSlsInvoiceStatisticVer2 { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceItemVer2> IQ_GetSlsInvoiceItemVer2 { get; set; }
         public virtual DbSet<G_USER_LOG> G_USER_LOG { get; set; }
+        public virtual DbSet<I_Stk_TR_Open> I_Stk_TR_Open { get; set; }
+        public virtual DbSet<I_Stk_Tr_OpenDetails> I_Stk_Tr_OpenDetails { get; set; }
+        public virtual DbSet<IQ_GetStkOpenDetail> IQ_GetStkOpenDetail { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {

@@ -779,6 +779,9 @@
     <Compile Include="Domain\IQ_GetStkIssueCCDetail.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IQ_GetStkOpenDetail.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IQ_GetTransfer.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -885,6 +888,12 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\I_Stk_TR_IssueToCCDetails.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_Stk_TR_Open.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\I_Stk_Tr_OpenDetails.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\I_Stk_TR_Transfer.cs">
