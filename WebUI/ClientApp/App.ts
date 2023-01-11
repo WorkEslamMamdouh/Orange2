@@ -81,6 +81,7 @@ var Modules = {
     LnkTransVoucher: "LnkTransVoucher",
     Directtransfer: "Directtransfer",
     STKAdjust: "STKAdjust",
+    STKOpeningbalance: "STKOpeningbalance",
     ReceiveTransfer: "ReceiveTransfer",
     sendTransfer: "sendTransfer",
     financialreports: "financialreports",

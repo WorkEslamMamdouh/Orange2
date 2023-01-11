@@ -94,6 +94,7 @@ using Inv.BLL.Services.G_Branch;
 using Inv.BLL.Services.ITRCollect;
 using Inv.BLL.Services.I_PeriodSer;
 using Inv.BLL.Services.Stk_TR_IssueToCC;
+using Inv.BLL.Services.STKOpen;
 
 namespace Inv.API.Infrastructure
 {
@@ -164,6 +165,7 @@ namespace Inv.API.Infrastructure
             container.RegisterType<IG_LnkVarService, G_LnkVarService>();
             container.RegisterType<IG_USER_BRANCHService, G_USER_BRANCHService>();
             container.RegisterType<IStckAdjustService, StckAdjustService>();
+            container.RegisterType<ISTKOpenService, STKOpenService>();
             container.RegisterType<IGenDefAddService, GenDefAddService>();
             container.RegisterType<IPurOrderService, PurOrderService>();
             container.RegisterType<IDefStoreService, DefStoreService>();

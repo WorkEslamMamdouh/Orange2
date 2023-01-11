@@ -2301,6 +2301,7 @@
     <Content Include="Views\Error\ErrorPDF_Fix.cshtml" />
     <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <Content Include="Views\AdminSetting\AdminColseCompIndex.cshtml" />
+    <Content Include="Views\Inventory\STKOpeningbalanceIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2335,6 +2336,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\CashBoxAccount.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Clientaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
+    <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />

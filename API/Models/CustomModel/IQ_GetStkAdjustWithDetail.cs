@@ -13,3 +13,5 @@ namespace Inv.API.Models.CustomModel
         public List<IQ_GetStkAdjustDetail> IQ_GetStkAdjustDetail { get; set; }
     }
 }
+
+ 
