@@ -814,7 +814,10 @@ namespace Inv.API.Controllers
                         }
                         foreach (I_Stk_Tr_OpenDetails item in deletedObjects)
                         {
-                            ISTKOpenService.Delete(item.OpenDetailID);
+                            if (item.OpenDetailID != 0 && item.OpenDetailID != null)
+                            { 
+                                ISTKOpenService.Delete(item.OpenDetailID);
+                            }
                         }
 
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Stk_TR_Open.CompCode), Convert.ToInt32(obj.I_Stk_TR_Open.BranchCode), jouranalHeader.OpenID, "StkOpen", "Update", db);
@@ -960,8 +963,8 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult DeleteStockOpen(string query)
         {
-             
-            db.Database.ExecuteSqlCommand(query); 
+
+            db.Database.ExecuteSqlCommand(query);
             return Ok(new BaseResponse(100));
 
         }

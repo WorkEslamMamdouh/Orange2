@@ -76,6 +76,7 @@ var STKOpeningbalance;
     function InitalizeComponent() {
         //System
         //debugger
+        $('#btnPrintTransaction').addClass('hidden_Control');
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "الرصيد الافتتاحي" : document.getElementById('Screen_name').innerHTML = "Opening balance";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         Branch = Number(SysSession.CurrentEnvironment.BranchCode);
