@@ -2739,6 +2739,7 @@
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_AccReceiveAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Rpt_Prnt_AccReceiveEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OerationTfAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationScrapListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationSummaryIntAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
