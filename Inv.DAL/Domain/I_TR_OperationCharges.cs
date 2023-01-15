@@ -30,5 +30,6 @@ namespace Inv.DAL.Domain
         public int CashBoxID { get; set; }
         public Nullable<bool> IsPosted { get; set; }
         public Nullable<int> VoucherNo { get; set; }
+        public string ChRemarks { get; set; }
     }
 }

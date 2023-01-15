@@ -336,7 +336,7 @@ var Collectedaccstat;
             rp.VendType = 1;
         }
         if ($("#txt_ID_APP_Type").val() == "Null") { //-------------جميع الانواع
-            rp.Status = 3;
+            rp.Status = 2;
         }
         else {
             rp.Status = 1;

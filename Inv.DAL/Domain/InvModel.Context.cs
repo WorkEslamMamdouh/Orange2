@@ -222,6 +222,9 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetSlsInvoiceStatisticVer2> IQ_GetSlsInvoiceStatisticVer2 { get; set; }
         public virtual DbSet<IQ_GetSlsInvoiceItemVer2> IQ_GetSlsInvoiceItemVer2 { get; set; }
         public virtual DbSet<G_USER_LOG> G_USER_LOG { get; set; }
+        public virtual DbSet<I_Stk_TR_Open> I_Stk_TR_Open { get; set; }
+        public virtual DbSet<I_Stk_Tr_OpenDetails> I_Stk_Tr_OpenDetails { get; set; }
+        public virtual DbSet<IQ_GetStkOpenDetail> IQ_GetStkOpenDetail { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -1558,47 +1561,6 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("TRId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_VATPurInvoice_Result>("IProc_Prnt_VATPurInvoice", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
-        }
-    
-        public virtual ObjectResult<IProc_Prnt_OperationCharges_Result> IProc_Prnt_OperationCharges(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var tRIdParameter = tRId.HasValue ?
-                new ObjectParameter("TRId", tRId) :
-                new ObjectParameter("TRId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_OperationCharges_Result>("IProc_Prnt_OperationCharges", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     
         public virtual ObjectResult<IProc_Prnt_OperationDeposit_Result> IProc_Prnt_OperationDeposit(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId, Nullable<int> slsid)
@@ -3466,88 +3428,6 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("Todate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_ItemStockValue_Result>("IProc_Rpt_ItemStockValue", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, typeParameter, statusParameter, fromDateParameter, todateParameter);
-        }
-    
-        public virtual ObjectResult<IProc_Rep_OperationSum_Result> IProc_Rep_OperationSum(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var tRIdParameter = tRId.HasValue ?
-                new ObjectParameter("TRId", tRId) :
-                new ObjectParameter("TRId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rep_OperationSum_Result>("IProc_Rep_OperationSum", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
-        }
-    
-        public virtual ObjectResult<IProc_Rep_OperationSumInternal_Result> IProc_Rep_OperationSumInternal(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var tRIdParameter = tRId.HasValue ?
-                new ObjectParameter("TRId", tRId) :
-                new ObjectParameter("TRId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rep_OperationSumInternal_Result>("IProc_Rep_OperationSumInternal", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     
         public virtual ObjectResult<IProc_Rep_AccVendorList_Result> IProc_Rep_AccVendorList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> isCredit, Nullable<int> catID, Nullable<int> groupID, Nullable<int> vendType, Nullable<int> balStatus)
@@ -5541,6 +5421,129 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("RepTyp", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rpt_GLFinancialStatment_Result>("AProc_Rpt_GLFinancialStatment", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter, cc_CodeParameter, levelParameter, isAuthVchrParameter, isNewVchrParameter, exZeroParameter, repTypParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Prnt_OperationCharges_Result> IProc_Prnt_OperationCharges(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_OperationCharges_Result>("IProc_Prnt_OperationCharges", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rep_OperationSum_Result> IProc_Rep_OperationSum(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rep_OperationSum_Result>("IProc_Rep_OperationSum", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rep_OperationSumInternal_Result> IProc_Rep_OperationSumInternal(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rep_OperationSumInternal_Result>("IProc_Rep_OperationSumInternal", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     
         public virtual ObjectResult<IProc_Rep_OperationScrapList_Result> IProc_Rep_OperationScrapList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> vendorid, Nullable<int> tRId, Nullable<int> byValue)

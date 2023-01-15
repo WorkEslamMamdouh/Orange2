@@ -241,6 +241,9 @@ namespace Inv.DAL.Domain
     public partial class I_Stk_Tr_AdjustDetails : SecurityandUpdateFlagClass
     {
     }
+    public partial class I_Stk_Tr_OpenDetails : UpdateFlagClass
+    {
+    }
     public partial class I_Pur_D_Charges : SecurityandUpdateFlagClass
     {
     }

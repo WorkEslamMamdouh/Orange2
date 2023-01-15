@@ -719,7 +719,7 @@ namespace AccDefVendor {
         txtResName.value = "";
         txt_CustCode.value = "";
         txt_CustName.value = "";
-        $("#txt_OpenbalanceAt").val(GetDate());
+        $("#txt_OpenbalanceAt").val(DateStartMonth());
 
         $("#ddlCurrency").val("null");
         $("#txtRegion").val("");

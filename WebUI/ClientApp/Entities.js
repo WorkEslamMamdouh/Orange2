@@ -2829,6 +2829,7 @@ var I_TR_OperationCharges = /** @class */ (function (_super) {
         _this.RefInvoiceDate = "";
         _this.VendorID = 0;
         _this.StatusFlag = "";
+        _this.ChRemarks = "";
         _this.CashBoxID = 0;
         _this.IsPosted = false;
         _this.VoucherNo = 0;
@@ -2990,6 +2991,7 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.OperationID = 0;
         _this.CashBox_DescA = "";
         _this.CashBox_DescE = "";
+        _this.ChRemarks = "";
         _this.IsPosted = false;
         _this.VoucherNo = 0;
         return _this;
@@ -4289,6 +4291,16 @@ var StockAdjustMasterDetails = /** @class */ (function (_super) {
     }
     return StockAdjustMasterDetails;
 }(SecurityClass));
+var StockOpenMasterDetails = /** @class */ (function (_super) {
+    __extends(StockOpenMasterDetails, _super);
+    function StockOpenMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.I_Stk_TR_Open = new I_Stk_TR_Open();
+        _this.I_Stk_Tr_OpenDetails = new Array();
+        return _this;
+    }
+    return StockOpenMasterDetails;
+}(SecurityClass));
 var IQ_GetStkAdjustWithDetail = /** @class */ (function (_super) {
     __extends(IQ_GetStkAdjustWithDetail, _super);
     function IQ_GetStkAdjustWithDetail() {
@@ -4298,6 +4310,16 @@ var IQ_GetStkAdjustWithDetail = /** @class */ (function (_super) {
         return _this;
     }
     return IQ_GetStkAdjustWithDetail;
+}(SecurityClass));
+var IQ_GetStkOpenWithDetail = /** @class */ (function (_super) {
+    __extends(IQ_GetStkOpenWithDetail, _super);
+    function IQ_GetStkOpenWithDetail() {
+        var _this = _super.call(this) || this;
+        _this.I_Stk_TR_Open = new Array();
+        _this.IQ_GetStkOpenDetail = new Array();
+        return _this;
+    }
+    return IQ_GetStkOpenWithDetail;
 }(SecurityClass));
 var IQ_PurchaseOrderWithDetail = /** @class */ (function (_super) {
     __extends(IQ_PurchaseOrderWithDetail, _super);
@@ -6490,5 +6512,68 @@ var Exec_Proc_Status = /** @class */ (function () {
         this.msg = '';
     }
     return Exec_Proc_Status;
+}());
+var I_Stk_TR_Open = /** @class */ (function (_super) {
+    __extends(I_Stk_TR_Open, _super);
+    function I_Stk_TR_Open() {
+        var _this = _super.call(this) || this;
+        _this.OpenID = 0;
+        _this.Tr_No = 0;
+        _this.RefNO = "";
+        _this.TrDate = "";
+        _this.TrDateH = "";
+        _this.StoreID = 0;
+        _this.Remark = "";
+        _this.CountedBy = "";
+        _this.VerfiedBy = "";
+        _this.TotalCost = 0;
+        _this.IsPosted = false;
+        _this.VoucherNo = 0;
+        _this.VoucherType = 0;
+        _this.CreatedAt = "";
+        _this.CreatedBy = "";
+        _this.UpdatedAt = "";
+        _this.UpdatedBy = "";
+        _this.CompCode = 0;
+        _this.BranchCode = 0;
+        _this.Status = 0;
+        return _this;
+    }
+    return I_Stk_TR_Open;
+}(SecurityClass));
+var I_Stk_Tr_OpenDetails = /** @class */ (function () {
+    function I_Stk_Tr_OpenDetails() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.StatusFlag = "";
+    }
+    return I_Stk_Tr_OpenDetails;
+}());
+var IQ_GetStkOpenDetail = /** @class */ (function () {
+    function IQ_GetStkOpenDetail() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.ItemCode = "";
+        this.DescA = "";
+        this.DescL = "";
+        this.uom_DescA = "";
+        this.UOM_DescE = "";
+        this.UomCode = "";
+    }
+    return IQ_GetStkOpenDetail;
 }());
 //# sourceMappingURL=Entities.js.map

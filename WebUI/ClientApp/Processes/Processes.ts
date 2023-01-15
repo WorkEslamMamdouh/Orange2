@@ -1753,6 +1753,11 @@ namespace Processes {
 			              <input id="VoucherNoCharge${cnt}" disabled type="text" class="form-control"  value="0"/>
 		                </div>
 	                </td>
+                    <td>
+		                <div class="form-group">
+			              <textarea id="RemarksCharge${cnt}" type="text" class="form-control"  value=""></textarea>
+		                </div>
+	                </td>
                     <input id="IsPosted${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
@@ -1898,6 +1903,11 @@ namespace Processes {
                 $("#txt_StatusFlag1" + cnt).val("u");
 
         });
+        $("#RemarksCharge" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag1" + cnt).val() != "i")
+                $("#txt_StatusFlag1" + cnt).val("u");
+
+        });
         $("#txtInvoiceDateCharge" + cnt).on('change', function () {
             if ($("#txt_StatusFlag1" + cnt).val() != "i")
                 $("#txt_StatusFlag1" + cnt).val("u");
@@ -1995,6 +2005,7 @@ namespace Processes {
         $("#txtValueAfterVatCharge" + cnt).prop("value", ((OperationCharges[cnt].NetAtferVat == null || undefined) ? 0 : OperationCharges[cnt].NetAtferVat));
 
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
+        $("#RemarksCharge" + cnt).prop("value", (OperationCharges[cnt].ChRemarks == null || undefined) ? '' : OperationCharges[cnt].ChRemarks);
         $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
       
         $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
@@ -2030,6 +2041,7 @@ namespace Processes {
         $("#txtVatType" + cnt).attr("disabled", "disabled");
         $("#txtVendorIsCheckCharge" + cnt).attr("disabled", "disabled");
         $("#txtInvoiceNumberCharge" + cnt).attr("disabled", "disabled");
+        $("#RemarksCharge" + cnt).attr("disabled", "disabled");
         $("#txtInvoiceDateCharge" + cnt).attr("disabled", "disabled");
         $("#txtVendorCharge" + cnt).attr("disabled", "disabled");
 
@@ -2086,6 +2098,7 @@ namespace Processes {
             $("#txtValueAfterVatCharge" + RecNo).val("0");
             $("#txtVendorIsCheckCharge" + RecNo).val("0");
             $("#txtInvoiceNumberCharge" + RecNo).val("00");
+            $("#RemarksCharge" + RecNo).val("00");
             $("#txtInvoiceDateCharge" + RecNo).val("0");
             $("#txtVendorCharge" + RecNo).val("Null");
             $("#No_Row1" + RecNo).attr("hidden", "true");
@@ -3322,6 +3335,7 @@ namespace Processes {
                 if (ispaid == "0") { chargesingleModel.isPaidByVendor = true } else { chargesingleModel.isPaidByVendor = false }
 
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
@@ -3348,6 +3362,7 @@ namespace Processes {
                 if (ispaid == "0") { chargesingleModel.isPaidByVendor = true } else { chargesingleModel.isPaidByVendor = false }
 
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
@@ -4462,6 +4477,7 @@ namespace Processes {
             $("#txtVatType" + cnt).removeAttr("disabled");
             $("#txtVendorIsCheckCharge" + cnt).removeAttr("disabled");
             $("#txtInvoiceNumberCharge" + cnt).removeAttr("disabled");
+            $("#RemarksCharge" + cnt).removeAttr("disabled");
             $("#txtInvoiceDateCharge" + cnt).removeAttr("disabled");
             $("#txtVendorCharge" + cnt).removeAttr("disabled");
 

@@ -562,7 +562,7 @@ var PurTrReturn;
     function btnRecieveSearch_onclick() {
         InvoiceFlag = true;
         var sys = new SystemTools();
-        sys.FindKey(Modules.PurTrReturn, "btnRecieveSearch", "CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1 ", function () {
+        sys.FindKey(Modules.PurTrReturn, "btnRecieveSearch", "CompCode=" + compcode + "and BranchCode = " + BranchCode + " and TrType = 0  and Status = 1  and  YEAR([TrDate])  = " + SysSession.CurrentEnvironment.CurrentYear + "", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             //receiveID = id;
             btnAddReturn_onclick(id);

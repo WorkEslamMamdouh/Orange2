@@ -575,6 +575,7 @@ var HomeComponent;
         $("#btnLnkTransVoucher").click(function () { newtap = false; OpenPage(Modules.LnkTransVoucher); }); // 
         $("#btnDirecttransfer").click(function () { newtap = false; OpenPage(Modules.Directtransfer); });
         $("#btnSTKAdjust").click(function () { newtap = false; OpenPage(Modules.STKAdjust); });
+        $("#btnSTKOpeningbalance").click(function () { newtap = false; OpenPage(Modules.STKOpeningbalance); });
         $("#btnReceiveTransfer").click(function () { newtap = false; OpenPage(Modules.ReceiveTransfer); });
         $("#btnsendTransfer").click(function () { newtap = false; OpenPage(Modules.sendTransfer); });
         $("#btnGenDefAdd").click(function () { newtap = false; OpenPage(Modules.GenDefAdd); });
@@ -671,6 +672,7 @@ var HomeComponent;
         $("#btnLnkTransVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkTransVoucher); }); // 
         $("#btnDirecttransferT").click(function () { newtap = true; OpenPage(Modules.Directtransfer); });
         $("#btnSTKAdjustT").click(function () { newtap = true; OpenPage(Modules.STKAdjust); });
+        $("#btnSTKOpeningbalanceT").click(function () { newtap = true; OpenPage(Modules.STKOpeningbalance); });
         $("#btnReceiveTransferT").click(function () { newtap = true; OpenPage(Modules.ReceiveTransfer); });
         $("#btnsendTransferT").click(function () { newtap = true; OpenPage(Modules.sendTransfer); });
         $("#btnGenDefAddT").click(function () { newtap = true; OpenPage(Modules.GenDefAdd); });
