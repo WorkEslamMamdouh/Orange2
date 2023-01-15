@@ -1624,7 +1624,7 @@ namespace AccTrPaymentNote {
         //    BnfID = Number($("#txt_ID_beneficiary").val());
         //    BnfDesc = txt_ID_beneficiary.value;
         //}
-        if (txt_BenCodeH.value == "") {
+        if (txt_BenCodeH.value != "") {
             BnfID = Number($("#txt_BenCodeH").val());
             BnfDesc = txt_BenNameH.value;
         }
