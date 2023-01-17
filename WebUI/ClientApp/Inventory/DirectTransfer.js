@@ -786,6 +786,7 @@ var DirectTransfer;
             else {
                 var storeId = Number(ddlSourceStoreAdd.value);
                 sys.FindKey(Modules.Directtransfer, "btnSearchItems", "StoreId=" + storeId + " and OnhandQty > 0 and IsStock = 1 and FinYear = " + FinYear, function () {
+                    debugger;
                     var id = SearchGrid.SearchDataGrid.SelectedKey;
                     var res = false;
                     var NumberRowid = Number($("#TransfareDetailID" + cnt).val());
@@ -793,6 +794,7 @@ var DirectTransfer;
                     if (res == false) {
                         if ($("#txt_StatusFlag" + cnt).val() != "i")
                             $("#txt_StatusFlag" + cnt).val("u");
+                        debugger;
                         var SrcItem = ItemsSourceListDetails.filter(function (s) { return s.ItemID == id; });
                         var Toitem = ItemsToListDetails.filter(function (s) { return s.ItemID == id; });
                         if (SrcItem.length > 0) {
@@ -802,6 +804,7 @@ var DirectTransfer;
                             else {
                                 $("#UnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
                             }
+                            debugger;
                             $('#txtItemNumber' + cnt).val(id);
                             (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE);
                             (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA) : $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescE);
@@ -811,6 +814,7 @@ var DirectTransfer;
                             $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
                             $('#txtToQty' + cnt).val(Toitem.length == 0 ? 0 : Toitem[0].OnhandQty);
                             $('#txtConvertedQnty' + cnt).val("0");
+                            debugger;
                         }
                     }
                     else {
@@ -961,7 +965,7 @@ var DirectTransfer;
                 var result = d;
                 if (result.IsSuccess) {
                     ItemsListDetails = result.Response;
-                    ItemsListDetails = ItemsListDetails.filter(function (x) { return x.IsStock == true; });
+                    ItemsListDetails = ItemsListDetails.filter(function (x) { return x.IsStock == true && x.FinYear == FinYear; });
                 }
             }
         });
@@ -1054,6 +1058,7 @@ var DirectTransfer;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
+                    btnShow_onclick();
                     DisplayMassage("تم اصدار  تحويل رقم " + res.Tr_No, 'Transfer number ' + res.Tr_No + 'has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.TransfareID;
@@ -1090,6 +1095,7 @@ var DirectTransfer;
                 if (result.IsSuccess == true) {
                     var res = result.Response;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
+                    btnShow_onclick();
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Editied successfully' + res.Tr_No, MessageType.Succeed);
                     Save();
                     AfterInsertOrUpdateFlag = true;

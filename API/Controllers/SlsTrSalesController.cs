@@ -348,38 +348,38 @@ namespace Inv.API.Controllers
                     {
 
 
-                        DateTime tstamp = DateTime.Now;
-                        DateTime data1 = DateTime.Now;
+                        //DateTime tstamp = DateTime.Now;
+                        //DateTime data1 = DateTime.Now;
 
 
-                        if (obj.I_Sls_TR_Invoice.Status == 1)
-                        {
+                        //if (obj.I_Sls_TR_Invoice.Status == 1)
+                        //{
 
 
-                            QrModel QrRec = new QrModel();
-                            QrRec.CompName = obj.CompName;
-                            QrRec.VatNo = obj.VatNo;
-                            QrRec.Total = obj.I_Sls_TR_Invoice.TotalAmount;
-                            QrRec.Vat = obj.I_Sls_TR_Invoice.VatAmount;
-                            //QrRec.TrDate = tstamp;
-                            data1 = Convert.ToDateTime(obj.I_Sls_TR_Invoice.TrDate);
-                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+                        //    QrModel QrRec = new QrModel();
+                        //    QrRec.CompName = obj.CompName;
+                        //    QrRec.VatNo = obj.VatNo;
+                        //    QrRec.Total = obj.I_Sls_TR_Invoice.TotalAmount;
+                        //    QrRec.Vat = obj.I_Sls_TR_Invoice.VatAmount;
+                        //    //QrRec.TrDate = tstamp;
+                        //    data1 = Convert.ToDateTime(obj.I_Sls_TR_Invoice.TrDate);
+                        //    tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
 
-                            QrRec.TrDate = tstamp;
-                            //QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
-
-
+                        //    QrRec.TrDate = tstamp;
+                        //    //QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
 
 
-                            string QrCode = QRGeneratorController.QrGenerator(QrRec);
 
-                            string st = SystemToolsController.GenerateGuid();
-                            obj.I_Sls_TR_Invoice.DocUUID = st;
-                            obj.I_Sls_TR_Invoice.QRCode = QrCode;
-                            //obj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
-                        }
-                        obj.I_Sls_TR_Invoice.CreatedAt = tstamp;
-                        obj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
+
+                        //    string QrCode = QRGeneratorController.QrGenerator(QrRec);
+
+                        //    string st = SystemToolsController.GenerateGuid();
+                        //    obj.I_Sls_TR_Invoice.DocUUID = st;
+                        //    obj.I_Sls_TR_Invoice.QRCode = QrCode;
+                        //    //obj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
+                        //}
+                        //obj.I_Sls_TR_Invoice.CreatedAt = tstamp;
+                        //obj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
 
 
                         obj.I_Sls_TR_Invoice.AllowAfterVat = obj.I_Sls_TR_Invoice.AllowAfterVat == null ? 0 : obj.I_Sls_TR_Invoice.AllowAfterVat;
@@ -455,37 +455,37 @@ namespace Inv.API.Controllers
                     {
 
 
-                        DateTime tstamp = DateTime.Now;
-                        DateTime data1 = DateTime.Now;
+                        //DateTime tstamp = DateTime.Now;
+                        //DateTime data1 = DateTime.Now;
 
-                        //tstamp = QRGeneratorController.AddTimeIndata(data1, updatedObj.I_Sls_TR_Invoice.TrTime.ToString());
+                        ////tstamp = QRGeneratorController.AddTimeIndata(data1, updatedObj.I_Sls_TR_Invoice.TrTime.ToString());
 
-                        if (updatedObj.I_Sls_TR_Invoice.Status == 1)
-                        {
+                        //if (updatedObj.I_Sls_TR_Invoice.Status == 1)
+                        //{
 
 
-                            QrModel QrRec = new QrModel();
-                            QrRec.CompName = updatedObj.CompName;
-                            QrRec.VatNo = updatedObj.VatNo;
-                            QrRec.Total = updatedObj.I_Sls_TR_Invoice.TotalAmount;
-                            QrRec.Vat = updatedObj.I_Sls_TR_Invoice.VatAmount;
-                            //QrRec.TrDate = tstamp;
-                            data1 = Convert.ToDateTime(updatedObj.I_Sls_TR_Invoice.TrDate);
-                            tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+                        //    QrModel QrRec = new QrModel();
+                        //    QrRec.CompName = updatedObj.CompName;
+                        //    QrRec.VatNo = updatedObj.VatNo;
+                        //    QrRec.Total = updatedObj.I_Sls_TR_Invoice.TotalAmount;
+                        //    QrRec.Vat = updatedObj.I_Sls_TR_Invoice.VatAmount;
+                        //    //QrRec.TrDate = tstamp;
+                        //    data1 = Convert.ToDateTime(updatedObj.I_Sls_TR_Invoice.TrDate);
+                        //    tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
 
-                            QrRec.TrDate = tstamp;
+                        //    QrRec.TrDate = tstamp;
 
-                            //QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
+                        //    //QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
 
-                            string QrCode = QRGeneratorController.QrGenerator(QrRec);
+                        //    string QrCode = QRGeneratorController.QrGenerator(QrRec);
 
-                            string st = SystemToolsController.GenerateGuid();
-                            updatedObj.I_Sls_TR_Invoice.DocUUID = st;
-                            updatedObj.I_Sls_TR_Invoice.QRCode = QrCode;
-                            //updatedObj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
-                            //updatedObj.I_Sls_TR_Invoice.CreatedAt = tstamp;
-                            //updatedObj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
-                        }
+                        //    string st = SystemToolsController.GenerateGuid();
+                        //    updatedObj.I_Sls_TR_Invoice.DocUUID = st;
+                        //    updatedObj.I_Sls_TR_Invoice.QRCode = QrCode;
+                        //    //updatedObj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
+                        //    //updatedObj.I_Sls_TR_Invoice.CreatedAt = tstamp;
+                        //    //updatedObj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
+                        //}
 
                         //update Master
                         var Sls_TR_Invoice = SlsTrSalesService.Update(updatedObj.I_Sls_TR_Invoice);

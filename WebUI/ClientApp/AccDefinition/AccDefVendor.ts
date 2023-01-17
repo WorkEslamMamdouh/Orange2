@@ -95,6 +95,7 @@ namespace AccDefVendor {
     var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
 
     var AccountDetails: A_Rec_D_Customer = new A_Rec_D_Customer();
+    var DetailsGetCustomer: Array<IQ_GetCustomer> = new Array<IQ_GetCustomer>();
     var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     //---------------------------------------------------------- main region---------------------------------------------------------------
     export function InitalizeComponent() {
@@ -221,7 +222,7 @@ namespace AccDefVendor {
 
 
         btnCust.onclick = btnCust_OnClick;
-        //txt_CustCode.onchange = txt_CustCode_onchange;
+        txt_CustCode.onchange = txt_CustCode_onchange;
         //txt_CustomerCODE.onkeyup = txt_CustomerCODE_keyup;
         txtOperationser.onkeyup = txtOperationser_keyup;
         txt_ACCCode.onchange = txt_ACCCode_onchange;
@@ -282,7 +283,6 @@ namespace AccDefVendor {
         debugger;
         sys.FindKey(Modules.AccDefVendor, "btncustSearch", "CompCode= " + compcode + " ", () => {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
-
             getAccountById(id);
         });
     }
@@ -305,6 +305,49 @@ namespace AccDefVendor {
         });
 
     }
+    function txt_CustCode_onchange() {
+
+        let code = txt_CustCode.value.trim();
+
+        if (code == '') {
+            $('#txt_CustCode').val('');
+            $('#txt_CustName').val('');
+            PurchaserId = null;
+            Errorinput($('#txt_CustCode'))
+        } else {
+            getCustomerById(code, true);
+        } 
+    }
+
+    function getCustomerById(custId: string, iscode: boolean) {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
+            data: { Compcode: compcode, BranchCode: SysSession.CurrentEnvironment.BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {//int Compcode,int BranchCode, bool code, string CustomerId, string UserCode, string Token
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    DetailsGetCustomer = result.Response as Array<IQ_GetCustomer>;
+                    if (DetailsGetCustomer.length > 0) {
+
+                        $('#txt_CustCode').val(DetailsGetCustomer[0].CustomerCODE);
+                        $('#txt_CustName').val(DetailsGetCustomer[0].NAMEA);
+                        PurchaserId = DetailsGetCustomer[0].CustomerId;
+                        AccountDetails = DetailsGetCustomer[0];
+                    } else {
+                        $('#txt_CustCode').val('');
+                        $('#txt_CustName').val('');
+                        PurchaserId = null;
+                        Errorinput($('#txt_CustCode'))
+                    }
+                }
+
+            }
+        });
+
+    }
+
+
     function txt_Cust_Type_onchange() {
 
         if (txt_Cust_Type.value == "1" || txt_Cust_Type.value == "Null") {
@@ -365,6 +408,7 @@ namespace AccDefVendor {
         $("#txt_Email").attr("disabled", "disabled");
         $("#txt_WorkTel").attr("disabled", "disabled");
         $("#txt_note").attr("disabled", "disabled");
+        $("#txt_CustCode").attr("disabled", "disabled");
         $("#txt_tax").attr("disabled", "disabled");
         $("#txt_VatNo").attr("disabled", "disabled");
         $("#txt_Debit").attr("disabled", "disabled");
@@ -410,6 +454,7 @@ namespace AccDefVendor {
         $("#txt_Email").removeAttr("disabled");
         $("#txt_WorkTel").removeAttr("disabled");
         $("#txt_note").removeAttr("disabled");
+        $("#txt_CustCode").removeAttr("disabled");
         $("#txt_tax").removeAttr("disabled");
         $("#txt_VatNo").removeAttr("disabled");
         $("#txt_Debit").removeAttr("disabled");
@@ -445,7 +490,7 @@ namespace AccDefVendor {
                 newCount++;
             }
         }
-         
+
 
         if (txt_CustomerCODE.value.trim() == "" && IsAutoCode == false) {
             DisplayMassage("يجب ادخال رقم المورد", "Vendor number must be entered", MessageType.Worning);
@@ -453,7 +498,7 @@ namespace AccDefVendor {
             return false;
         }
 
-        if (IsNew == true && txt_CustomerCODE.value.trim() != ""  ) {
+        if (IsNew == true && txt_CustomerCODE.value.trim() != "") {
             if (CustomerFoundBefore() == false) {
                 DisplayMassage("رقم المورد موجود من قبل ", "vendor number found before", MessageType.Worning);
                 Errorinput(txt_CustomerCODE);
@@ -836,7 +881,7 @@ namespace AccDefVendor {
         }
 
 
-          
+
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
         }
@@ -1130,9 +1175,9 @@ namespace AccDefVendor {
             PurchaserId = null;
         }
         $('#txt_Openbalance').val(setVal(Selecteditem[0].Openbalance));
-        $('#txt_balance').val(setVal(Selecteditem[0].Balance) );
-        $('#txt_Debit').val(setVal(Selecteditem[0].Debit) );
-        $('#txt_DebitFC').val(setVal(Selecteditem[0].Credit) );
+        $('#txt_balance').val(setVal(Selecteditem[0].Balance));
+        $('#txt_Debit').val(setVal(Selecteditem[0].Debit));
+        $('#txt_DebitFC').val(setVal(Selecteditem[0].Credit));
 
         debugger
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
@@ -1523,7 +1568,7 @@ namespace AccDefVendor {
                 let result = d.result as string;
 
                 PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear);
-             
+
 
                 window.open(result, "_blank");
             }

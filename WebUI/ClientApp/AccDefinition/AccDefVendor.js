@@ -89,6 +89,7 @@ var AccDefVendor;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
     var AccountDetails = new A_Rec_D_Customer();
+    var DetailsGetCustomer = new Array();
     var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     //---------------------------------------------------------- main region---------------------------------------------------------------
     function InitalizeComponent() {
@@ -193,7 +194,7 @@ var AccDefVendor;
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         //    btnPrint.onclick = () => { PrintReport(4); }
         btnCust.onclick = btnCust_OnClick;
-        //txt_CustCode.onchange = txt_CustCode_onchange;
+        txt_CustCode.onchange = txt_CustCode_onchange;
         //txt_CustomerCODE.onkeyup = txt_CustomerCODE_keyup;
         txtOperationser.onkeyup = txtOperationser_keyup;
         txt_ACCCode.onchange = txt_ACCCode_onchange;
@@ -274,6 +275,43 @@ var AccDefVendor;
             }
         });
     }
+    function txt_CustCode_onchange() {
+        var code = txt_CustCode.value.trim();
+        if (code == '') {
+            $('#txt_CustCode').val('');
+            $('#txt_CustName').val('');
+            PurchaserId = null;
+            Errorinput($('#txt_CustCode'));
+        }
+        else {
+            getCustomerById(code, true);
+        }
+    }
+    function getCustomerById(custId, iscode) {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
+            data: { Compcode: compcode, BranchCode: SysSession.CurrentEnvironment.BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    DetailsGetCustomer = result.Response;
+                    if (DetailsGetCustomer.length > 0) {
+                        $('#txt_CustCode').val(DetailsGetCustomer[0].CustomerCODE);
+                        $('#txt_CustName').val(DetailsGetCustomer[0].NAMEA);
+                        PurchaserId = DetailsGetCustomer[0].CustomerId;
+                        AccountDetails = DetailsGetCustomer[0];
+                    }
+                    else {
+                        $('#txt_CustCode').val('');
+                        $('#txt_CustName').val('');
+                        PurchaserId = null;
+                        Errorinput($('#txt_CustCode'));
+                    }
+                }
+            }
+        });
+    }
     function txt_Cust_Type_onchange() {
         if (txt_Cust_Type.value == "1" || txt_Cust_Type.value == "Null") {
             $('#div_Balance').removeClass("display_none");
@@ -327,6 +365,7 @@ var AccDefVendor;
         $("#txt_Email").attr("disabled", "disabled");
         $("#txt_WorkTel").attr("disabled", "disabled");
         $("#txt_note").attr("disabled", "disabled");
+        $("#txt_CustCode").attr("disabled", "disabled");
         $("#txt_tax").attr("disabled", "disabled");
         $("#txt_VatNo").attr("disabled", "disabled");
         $("#txt_Debit").attr("disabled", "disabled");
@@ -369,6 +408,7 @@ var AccDefVendor;
         $("#txt_Email").removeAttr("disabled");
         $("#txt_WorkTel").removeAttr("disabled");
         $("#txt_note").removeAttr("disabled");
+        $("#txt_CustCode").removeAttr("disabled");
         $("#txt_tax").removeAttr("disabled");
         $("#txt_VatNo").removeAttr("disabled");
         $("#txt_Debit").removeAttr("disabled");

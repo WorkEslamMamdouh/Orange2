@@ -49,6 +49,7 @@ namespace SlsTrSalesManagerNew {
 
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
 
+        $('#Div_Priceshow').addClass('display_none');
     }
 
 
@@ -274,6 +275,7 @@ namespace SlsTrSalesManagerNew {
 
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
+        
 
         //GetLastPrice(3236)
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);

@@ -3891,6 +3891,7 @@ var SlsTrShowPrice;
         rp.Repdesign = 0;
         rp.TRId = GlobalinvoiceID;
         rp.slip = 0;
+        rp.Typ = 1;
         rp.stat = InvoiceModel.InvoiceTransCode;
         if (SlsInvSrc == '1') {
             rp.Name_function = "rptInvoiceNote";

@@ -29,6 +29,7 @@ var SlsTrSalesManagerNew;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
         InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef;
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
+        $('#Div_Priceshow').addClass('display_none');
     }
     var compcode;
     var BranchCode;
