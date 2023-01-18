@@ -2373,4 +2373,13 @@
   <data name="Isrecieved" xml:space="preserve">
     <value>Isrecieved</value>
   </data>
+  <data name="Has_stock" xml:space="preserve">
+    <value>Has Stock</value>
+  </data>
+  <data name="overdrawn_stock" xml:space="preserve">
+    <value>Overdrawn Stock</value>
+  </data>
+  <data name="Zero_stock" xml:space="preserve">
+    <value>Zero Stock</value>
+  </data>
 </root>

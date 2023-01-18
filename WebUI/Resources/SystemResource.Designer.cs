@@ -3337,6 +3337,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Has Stock.
+        /// </summary>
+        public static string Has_stock {
+            get {
+                return ResourceManager.GetString("Has_stock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide zero accounts.
         /// </summary>
         public static string Hide_zero_accounts {
@@ -4845,6 +4854,15 @@ namespace Inv.WebUI.Resources {
         public static string Other {
             get {
                 return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overdrawn Stock.
+        /// </summary>
+        public static string overdrawn_stock {
+            get {
+                return ResourceManager.GetString("overdrawn_stock", resourceCulture);
             }
         }
         
@@ -6798,6 +6816,15 @@ namespace Inv.WebUI.Resources {
         public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zero Stock.
+        /// </summary>
+        public static string Zero_stock {
+            get {
+                return ResourceManager.GetString("Zero_stock", resourceCulture);
             }
         }
         
