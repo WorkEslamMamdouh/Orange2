@@ -241,7 +241,23 @@ namespace Inv.API.Controllers
 
                             }
 
+
                             dbTransaction.Commit();
+
+                            //*********************************************************************************************************
+                            var displayItems = db.I_Sls_TR_InvoiceItems.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).ToList();
+                            if (displayItems.Count == 0)
+                            {
+                                for (int i = 0; i < obj.I_Sls_TR_InvoiceItems.Count; i++)
+                                {
+                                    obj.I_Sls_TR_InvoiceItems[i].InvoiceID = Sls_TR_Invoice.InvoiceID;
+                                }
+                                SlsInvoiceItemsService.InsertLst(obj.I_Sls_TR_InvoiceItems);
+                                ResponseResult res1 = Shared.TransactionProcess(Convert.ToInt32(obj.I_Sls_TR_Invoice.CompCode), Convert.ToInt32(obj.I_Sls_TR_Invoice.BranchCode), Sls_TR_Invoice.InvoiceID, "SlsInvoice", "Add", db);
+                            }
+                            //*********************************************************************************************************
+
+
 
 
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
