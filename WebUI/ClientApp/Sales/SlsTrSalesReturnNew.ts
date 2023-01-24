@@ -1455,6 +1455,9 @@ namespace SlsTrSalesReturnNew {
 
         EditFlag = true;
 
+        txtInvoiceDate.disabled = true
+
+
         InvoiceItemsDetailsModelDelete = new Array<I_Sls_TR_InvoiceItems>();
     }
     //------------------------------------------------------ Controls Grid Region -----------------------------------
