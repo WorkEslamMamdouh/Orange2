@@ -287,7 +287,7 @@ namespace StkDefItems {
             $("#select_Type_Item" + CountGrid).prop('value', $("#drpPaymentType").val() == 'null' ? 'null' : Number($("#drpPaymentType").val()));
             $("#select_ItemFamily" + CountGrid).prop('value', $("#drpitem_family").val() == 'null' || $("#drpitem_family").val() == null ? 'null' : Number($("#drpitem_family").val()));
           
-            $("#txt_UOM").prop('selectedIndex', 1);
+            $("#txt_UOM" + CountGrid).prop('selectedIndex', 1);
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
             CountGrid++;
         }
