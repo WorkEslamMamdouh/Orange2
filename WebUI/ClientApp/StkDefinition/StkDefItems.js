@@ -198,7 +198,7 @@ var StkDefItems;
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             $("#select_Type_Item" + CountGrid).prop('value', $("#drpPaymentType").val() == 'null' ? 'null' : Number($("#drpPaymentType").val()));
             $("#select_ItemFamily" + CountGrid).prop('value', $("#drpitem_family").val() == 'null' || $("#drpitem_family").val() == null ? 'null' : Number($("#drpitem_family").val()));
-            $("#txt_UOM" + CountGrid).prop('value', 1);
+            $("#txt_UOM" + CountGrid).prop('selectedIndex', 1);
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
             CountGrid++;
         }
@@ -225,11 +225,22 @@ var StkDefItems;
             DeleteRow(cnt);
         });
         $("#txtCode" + cnt).on('change', function () {
-            Validate_code(cnt);
+            if (Validate_Item(cnt, true) == false) {
+                DisplayMassage("رقم الصنف موجود من قبل ", "The Item number already exists", MessageType.Worning);
+                Errorinput($("#txtCode" + cnt));
+                $("#txtCode" + cnt).val('');
+                return false;
+            }
         });
         $("#txtDescA" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            if (Validate_Item(cnt, false) == false) {
+                DisplayMassage("وصف الصنف موجود من قبل ", "The Item   already exists", MessageType.Worning);
+                Errorinput($("#txtDescA" + cnt));
+                $("#txtDescA" + cnt).val('');
+                return false;
+            }
         });
         $("#txtDescL" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
@@ -732,27 +743,27 @@ var StkDefItems;
         }
         return true;
     }
-    function Validate_code(rowno) {
-        for (var i = 0; i < CountGrid; i++) {
-            if (i != rowno) {
-                if ($("#txt_StatusFlag" + i).val() == "d") {
-                    return true;
+    function Validate_Item(rowno, IsCode) {
+        var res = true;
+        var ItemCode = $("#txtCode" + rowno).val().trim();
+        var ItID = Number($("#txt_ID" + rowno).val());
+        var ItemDescA = $("#txtDescA" + rowno).val();
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefItems", "chackItem"),
+            data: {
+                compCode: compcode, ItemCode: ItemCode, ItemDescA: ItemDescA, ItemID: ItID, IsCode: IsCode
+            },
+            success: function (d) {
+                var result = d;
+                if (result.Response == 0) {
+                    res = true;
                 }
-                else {
-                    if ($("#txtCode" + rowno).val() == $("#txtCode" + i).val()) {
-                        var Code = $("#txtCode" + rowno).val();
-                        $("#txtCode" + rowno).val("");
-                        WorningMessage("لا يمكن تكرار رقم الكود " + Code, "code cannot br repeated?", "تحذير", "worning", function () {
-                            $("#txtCode" + rowno).val("");
-                            return false;
-                        });
-                    }
-                }
+                else
+                    res = false;
             }
-        }
-        if ($("#txt_StatusFlag" + rowno).val() != "i")
-            $("#txt_StatusFlag" + rowno).val("u");
-        return true;
+        });
+        return res;
     }
 })(StkDefItems || (StkDefItems = {}));
 //# sourceMappingURL=StkDefItems.js.map

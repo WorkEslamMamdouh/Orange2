@@ -347,7 +347,7 @@ var Clientaccstat;
         else {
             rp.CustomerID = Number($("#ddlCustomer").val());
         }
-        if (Number($("#txt_ID_APP_Type").val()) == 3) { //-------------غير منفذ///الجميع
+        if ($("#txt_ID_APP_Type").val() == 'Null') { //-------------غير منفذ///الجميع
             rp.Status = 3;
         }
         if (Number($("#txt_ID_APP_Type").val()) == 1) { //------------- منفذ

@@ -2377,4 +2377,13 @@
   <data name="Isrecieved" xml:space="preserve">
     <value>تم الاستلام</value>
   </data>
+  <data name="Has_stock" xml:space="preserve">
+    <value>له رصيد</value>
+  </data>
+  <data name="overdrawn_stock" xml:space="preserve">
+    <value>رصيد مكشوف</value>
+  </data>
+  <data name="Zero_stock" xml:space="preserve">
+    <value>رصيد صفري</value>
+  </data>
 </root>

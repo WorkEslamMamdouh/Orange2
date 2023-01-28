@@ -81,6 +81,7 @@ var Modules = {
     LnkTransVoucher: "LnkTransVoucher",
     Directtransfer: "Directtransfer",
     STKAdjust: "STKAdjust",
+    STKOpeningbalance: "STKOpeningbalance",
     ReceiveTransfer: "ReceiveTransfer",
     sendTransfer: "sendTransfer",
     financialreports: "financialreports",
@@ -319,8 +320,8 @@ namespace App {
 		debugger
 		let num = this;
 		//let stnum = num.toString();
-		if (num.toString().indexOf(".") == -1) {
-			return num;
+        if (num.toString().indexOf(".") == -1) {
+            return Number(num);
 		} else {
 			let stfix = num.toString().substr(0, num.toString().indexOf("."));
 			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
@@ -334,8 +335,8 @@ namespace App {
 	Number.prototype.RoundToSt = function (dec: number): string {
 		let num = this;
 		//let stnum = num.toString();
-		if (num.toString().indexOf(".") == -1) {
-			return num;
+        if (num.toString().indexOf(".") == -1) {
+            return Number(num).toString();
 		} else {
 			let stfix = num.toString().substr(0, num.toString().indexOf("."));
 			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
@@ -2137,6 +2138,23 @@ function Cheak_UserTokenlog() {
     });
 };
 
+
+
+
+function dynamicSortNew(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (b, a) {
+        /* next line works with strings and numbers, 
+         * and you may want to customize it to your needs
+         */
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
 
 
 

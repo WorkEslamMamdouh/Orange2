@@ -67,5 +67,6 @@ namespace Inv.DAL.Domain
         public string ivit_Remark { get; set; }
         public Nullable<decimal> Close_Coolingandstorage { get; set; }
         public Nullable<decimal> Close_AdjTotalSales { get; set; }
+        public string ChRemarks { get; set; }
     }
 }

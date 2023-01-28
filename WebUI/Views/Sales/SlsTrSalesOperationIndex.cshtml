@@ -350,8 +350,23 @@
                 <div class="col-12 service-content">
                     <div class="serviceBox">
                         <div class="row">
-                            <div class="d-flex justify-content-start">
-                                <button id="btnPrintslip" type="button" class="btn btn-main display_none">
+                            <div id="Div_Priceshow" class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0"> تحميل عرض سعر   </label>
+                                    <div class="col-4 col-md-4 px-0">
+                                        <div class="search-content">
+                                            <input type="text" class="form-control search-control" id="txtPriceshow" name="CustCode" disabled>
+                                            <button type="button" id="btnpriceSrch" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                        <input disabled class="form-control me-3 display_none" id="txtPriceshowID">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start ">
+                                <button id="btnPrintslip" type="button" class="btn btn-main hidden_Control display_none">
                                     <span class="adminpro-icon adminpro-paint-roller"></span>
                                     @SystemResource.App_Print_slip
                                 </button>

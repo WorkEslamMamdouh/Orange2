@@ -700,6 +700,7 @@ var CloseProcesses;
                 var result = d;
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response;
+                    Get_IQ_GetOperation = Get_IQ_GetOperation.sort(dynamicSortNew("TrNo"));
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
                     divMasterGrid.Bind();
@@ -735,7 +736,7 @@ var CloseProcesses;
         divMasterGrid.PrimaryKey = "OperationID";
         divMasterGrid.Columns = [
             { title: "ID", name: "OperationID", type: "text", width: "2%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
+            { title: res.App_Number, name: "TrNo", type: "number", width: "10%" },
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
@@ -1290,7 +1291,7 @@ var CloseProcesses;
     }
     function BuildControlsCharges(cnt) {
         var html;
-        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\" class=\"minusCharges\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"VoucherNoCharge" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <input id=\"IsPosted" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"No_Row1" + cnt + "\">\n                    <input id=\"OperationExpensesID" + cnt + "\" type=\"text\" class=\"form-control\" style=\"display: none;\" disabled value=\"\"/>\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\" class=\"minusCharges\" ><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\" \"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueCharge" + cnt + "\" type=\"number\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <select id=\"txtVatType" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtVatCharge" + cnt + "\" type=\"text\" value=\"0\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" class=\"form-control\"  disabled  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                 <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n\t\t\t                    <option value=\"Null\"> \u0627\u0644\u0635\u0646\u062F\u0648\u0642  </option>\n\t\t\t              </select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"VoucherNoCharge" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <textarea id=\"RemarksCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"\"></textarea>\n\t\t                </div>\n\t                </td>\n                    <input id=\"IsPosted" + cnt + "\" name = \" \" type =\"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         $("#div_ChargesData").append(html);
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
         // 
@@ -1408,6 +1409,10 @@ var CloseProcesses;
             if ($("#txt_StatusFlag1" + cnt).val() != "i")
                 $("#txt_StatusFlag1" + cnt).val("u");
         });
+        $("#RemarksCharge" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag1" + cnt).val() != "i")
+                $("#txt_StatusFlag1" + cnt).val("u");
+        });
         $("#txtInvoiceDateCharge" + cnt).on('change', function () {
             if ($("#txt_StatusFlag1" + cnt).val() != "i")
                 $("#txt_StatusFlag1" + cnt).val("u");
@@ -1483,6 +1488,7 @@ var CloseProcesses;
         $("#txtVatCharge" + cnt).prop("value", (OperationCharges[cnt].VatAmount == null || undefined) ? 0 : OperationCharges[cnt].VatAmount);
         $("#txtValueAfterVatCharge" + cnt).prop("value", ((OperationCharges[cnt].NetAtferVat == null || undefined) ? 0 : OperationCharges[cnt].NetAtferVat));
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
+        $("#RemarksCharge" + cnt).prop("value", (OperationCharges[cnt].ChRemarks == null || undefined) ? '' : OperationCharges[cnt].ChRemarks);
         $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
         $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
         $("#txtAddonsCharge" + cnt).val(OperationCharges[cnt].ChargeID);
@@ -1509,6 +1515,7 @@ var CloseProcesses;
         $("#txtVatType" + cnt).attr("disabled", "disabled");
         $("#txtVendorIsCheckCharge" + cnt).attr("disabled", "disabled");
         $("#txtInvoiceNumberCharge" + cnt).attr("disabled", "disabled");
+        $("#RemarksCharge" + cnt).attr("disabled", "disabled");
         $("#txtInvoiceDateCharge" + cnt).attr("disabled", "disabled");
         $("#txtVendorCharge" + cnt).attr("disabled", "disabled");
         ComputeTotalsCharge();
@@ -1551,6 +1558,7 @@ var CloseProcesses;
             $("#txtValueAfterVatCharge" + RecNo).val("0");
             $("#txtVendorIsCheckCharge" + RecNo).val("0");
             $("#txtInvoiceNumberCharge" + RecNo).val("00");
+            $("#RemarksCharge" + RecNo).val("00");
             $("#txtInvoiceDateCharge" + RecNo).val("0");
             $("#txtVendorCharge" + RecNo).val("Null");
             $("#No_Row1" + RecNo).attr("hidden", "true");
@@ -2533,6 +2541,7 @@ var CloseProcesses;
                     chargesingleModel.isPaidByVendor = false;
                 }
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked");
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
@@ -2565,6 +2574,7 @@ var CloseProcesses;
                     chargesingleModel.isPaidByVendor = false;
                 }
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
+                chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked");
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
@@ -3421,6 +3431,7 @@ var CloseProcesses;
             $("#txtVatType" + cnt).removeAttr("disabled");
             $("#txtVendorIsCheckCharge" + cnt).removeAttr("disabled");
             $("#txtInvoiceNumberCharge" + cnt).removeAttr("disabled");
+            $("#RemarksCharge" + cnt).removeAttr("disabled");
             $("#txtInvoiceDateCharge" + cnt).removeAttr("disabled");
             $("#txtVendorCharge" + cnt).removeAttr("disabled");
             if ($("#txtVendorIsCheckCharge" + cnt).val() == 1) {

@@ -390,34 +390,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.33794cm</Width>
+              <Width>1.32894cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.10518cm</Width>
+              <Width>1.09618cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.58148cm</Width>
+              <Width>2.57248cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.62899cm</Width>
+              <Width>1.61999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.86711cm</Width>
+              <Width>1.85811cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.60253cm</Width>
+              <Width>1.59353cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.23217cm</Width>
+              <Width>2.22317cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.01729cm</Width>
+              <Width>3.00829cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.8515cm</Width>
+              <Width>3.8425cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.59711cm</Width>
+              <Width>0.58811cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1117,6 +1117,89 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!ChRemarks.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>8</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox6">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>الملاحظات</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>2</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox49">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -1330,6 +1413,10 @@
             </TablixMember>
             <TablixMember>
               <Group Name="Details" />
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
             </TablixMember>
             <TablixMember>
               <KeepWithGroup>Before</KeepWithGroup>
@@ -1338,8 +1425,8 @@
         </TablixRowHierarchy>
         <DataSetName>Prnt_OperationChargesAr</DataSetName>
         <Top>2.57366cm</Top>
-        <Height>1.8cm</Height>
-        <Width>19.8213cm</Width>
+        <Height>2.4cm</Height>
+        <Width>19.73125cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -1924,7 +2011,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.73958in</Height>
+    <Height>1.97916in</Height>
     <Style />
   </Body>
   <Width>7.80367in</Width>
@@ -2523,6 +2610,10 @@
         </Field>
         <Field Name="ch_CashDescE">
           <DataField>ch_CashDescE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ChRemarks">
+          <DataField>ChRemarks</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

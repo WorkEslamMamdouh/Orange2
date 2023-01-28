@@ -4885,6 +4885,7 @@ class I_TR_OperationCharges extends SecurityClass {
         this.RefInvoiceDate = "";
         this.VendorID = 0;
         this.StatusFlag = "";
+        this.ChRemarks = "";
         this.CashBoxID = 0;
         this.IsPosted = false;
         this.VoucherNo = 0; 
@@ -4903,6 +4904,7 @@ class I_TR_OperationCharges extends SecurityClass {
     public RefInvoiceDate: string;
     public VendorID: number;
     public StatusFlag: string;
+    public ChRemarks: string;
     public CashBoxID: number;
     public IsPosted: boolean;
     public VoucherNo: number; 
@@ -5168,6 +5170,7 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.OperationID = 0;
         this.CashBox_DescA = "";
         this.CashBox_DescE = "";
+        this.ChRemarks = "";
         this.IsPosted = false;
         this.VoucherNo = 0;
 
@@ -5195,6 +5198,7 @@ class IQ_GetOperationCharges extends SecurityClass {
     public OperationID: number;
     public CashBox_DescA: string;
     public CashBox_DescE: string;
+    public ChRemarks: string;
     public IsPosted: boolean; 
     public VoucherNo: number;
 
@@ -7359,6 +7363,16 @@ class StockAdjustMasterDetails extends SecurityClass {
     public I_Stk_Tr_AdjustDetails: Array<I_Stk_Tr_AdjustDetails>;
 }
 
+class StockOpenMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.I_Stk_TR_Open = new I_Stk_TR_Open();
+        this.I_Stk_Tr_OpenDetails = new Array<I_Stk_Tr_OpenDetails>();
+    }
+    public I_Stk_TR_Open: I_Stk_TR_Open;
+    public I_Stk_Tr_OpenDetails: Array<I_Stk_Tr_OpenDetails>;
+}
+
 class IQ_GetStkAdjustWithDetail extends SecurityClass {
     constructor() {
         super();
@@ -7367,6 +7381,17 @@ class IQ_GetStkAdjustWithDetail extends SecurityClass {
     }
     public IQ_GetStkAdjust: Array<IQ_GetStkAdjust>;
     public IQ_GetStkAdjustDetail: Array<IQ_GetStkAdjustDetail>;
+}
+
+
+class IQ_GetStkOpenWithDetail   extends SecurityClass {
+    constructor() {
+        super();
+        this.I_Stk_TR_Open = new Array<I_Stk_TR_Open>();
+        this.IQ_GetStkOpenDetail = new Array<IQ_GetStkOpenDetail>();
+    }
+    public I_Stk_TR_Open: Array<I_Stk_TR_Open>;
+    public IQ_GetStkOpenDetail: Array<IQ_GetStkOpenDetail>;
 }
 
 
@@ -11045,4 +11070,111 @@ class Exec_Proc_Status {
     public msg: string;
 }
 
+
+class I_Stk_TR_Open extends SecurityClass {
+    constructor() {
+        super();
+        this.OpenID = 0;
+        this.Tr_No = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.CountedBy = "";
+        this.VerfiedBy = "";
+        this.TotalCost = 0;
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+    }
+    public OpenID: number;
+    public Tr_No: number;
+    public RefNO: string;
+    public TrDate: string;
+    public TrDateH: string;
+    public StoreID: number;
+    public Remark: string;
+    public CountedBy: string;
+    public VerfiedBy: string;
+    public TotalCost: number;
+    public IsPosted: boolean;
+    public VoucherNo: number;
+    public VoucherType: number;
+    public CreatedAt: string;
+    public CreatedBy: string;
+    public UpdatedAt: string;
+    public UpdatedBy: string;
+    public CompCode: number;
+    public BranchCode: number;
+    public Status: number;
+}
+
+class I_Stk_Tr_OpenDetails {
+    constructor() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.StatusFlag = "";
+    }
+    public OpenDetailID: number;
+    public OpenID: number;
+    public Serial: number;
+    public ItemID: number;
+    public ItemStoreBatchid: number;
+    public UnitID: number;
+    public Qty: number;
+    public UnitCost: number;
+    public StkUnitCost: number;
+    public StatusFlag: string;
+}
+
+class IQ_GetStkOpenDetail {
+    constructor() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.ItemCode = "";
+        this.DescA = "";
+        this.DescL = "";
+        this.uom_DescA = "";
+        this.UOM_DescE = "";
+        this.UomCode = "";
+
+    }
+    public OpenDetailID: number;
+    public OpenID: number;
+    public Serial: number;
+    public ItemID: number;
+    public ItemStoreBatchid: number;
+    public UnitID: number;
+    public Qty: number;
+    public UnitCost: number;
+    public StkUnitCost: number;
+    public ItemCode: string;
+    public DescA: string;
+    public DescL: string;
+    public uom_DescA: string;
+    public UOM_DescE: string;
+    public UomCode: string;
+}
 

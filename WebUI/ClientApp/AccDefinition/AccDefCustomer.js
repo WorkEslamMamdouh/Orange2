@@ -228,7 +228,7 @@ var AccDefCustomer;
         else {
             $('#div_Balance').addClass("display_none");
             txt_Openbalance.value = "0";
-            txt_OpenbalanceAt.value = GetDate();
+            txt_OpenbalanceAt.value = DateStartMonth();
             txt_CreditLimit.value = "0";
             txt_Debit.value = "0";
             txt_DebitFC.value = "0";
@@ -1024,7 +1024,7 @@ var AccDefCustomer;
         txt_Debit.value = "";
         txt_DebitFC.value = "";
         txt_Openbalance.value = "";
-        txt_OpenbalanceAt.value = GetDate();
+        txt_OpenbalanceAt.value = DateStartMonth();
         txt_CreditLimit.value = "";
         txt_balance.value = "";
     }

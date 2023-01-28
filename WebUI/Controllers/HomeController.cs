@@ -527,6 +527,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Inventory/STKAdjustIndex.cshtml");
         }
+        public ActionResult STKOpeningbalanceIndex()
+        {
+            return View("~/Views/Inventory/STKOpeningbalanceIndex.cshtml");
+        }
         public ActionResult sendTransferIndex()
         {
             return View("~/Views/Inventory/sendTransferIndex.cshtml");

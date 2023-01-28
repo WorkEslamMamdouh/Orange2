@@ -81,5 +81,6 @@ namespace Inv.DAL.Domain
         public string ch_VndNameE { get; set; }
         public string ch_CashDescA { get; set; }
         public string ch_CashDescE { get; set; }
+        public string ChRemarks { get; set; }
     }
 }
