@@ -1,15 +1,14 @@
-﻿//using Inv.WebUI.Models.CustomModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Inv.WebUI.Models
+namespace Inv.API.Models.CustomModel
 {
     public class SessionManager
     {
-        
-        
+
+
         public static SessionRecord SessionRecord
         {
             set
@@ -18,12 +17,10 @@ namespace Inv.WebUI.Models
             }
             get
             {
+                
                 return HttpContext.Current.Session["SessionRecord"] as SessionRecord;
             }
-
-            //get { return (SessionRecord)HttpContext.Current.Items["SessionRecord"]; }
-            //set { HttpContext.Current.Items["SessionRecord"] = value; }
         }
-        
+
     }
 }

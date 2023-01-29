@@ -4633,6 +4633,18 @@ namespace SlsTrSalesManagerNew {
             return
         }
 
+        debugger
+        if (MasterDetailsModel.I_Sls_TR_InvoiceItems.length == 0)
+        { 
+            DisplayMassage("الرجاء اعادت تكرارالمحاولة مره اخري", "Please refresh the page and try again", MessageType.Error);
+
+            for (var i = 0; i < CountGrid; i++) {
+                if ($("#txt_StatusFlag" + i).val() != 'm')  
+                    $("#txt_StatusFlag" + i).val('i'); 
+            }
+
+            return 
+        }
 
         Ajax.Callsync({
             type: "POST",

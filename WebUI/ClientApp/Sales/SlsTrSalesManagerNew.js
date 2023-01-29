@@ -3503,6 +3503,15 @@ var SlsTrSalesManagerNew;
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             return;
         }
+        debugger;
+        if (MasterDetailsModel.I_Sls_TR_InvoiceItems.length == 0) {
+            DisplayMassage("الرجاء اعادت تكرارالمحاولة مره اخري", "Please refresh the page and try again", MessageType.Error);
+            for (var i = 0; i < CountGrid; i++) {
+                if ($("#txt_StatusFlag" + i).val() != 'm')
+                    $("#txt_StatusFlag" + i).val('i');
+            }
+            return;
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "InsertInvoiceMasterDetail"),
