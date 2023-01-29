@@ -29,6 +29,15 @@ var SystemParameters = /** @class */ (function () {
 var APISessionRecord = /** @class */ (function () {
     function APISessionRecord() {
     }
+    APISessionRecord.prototype.SetAPISessionAPI = function (key, value) {
+        var sys = new SystemTools();
+        $.ajax({
+            //url: Url.Action("SetSessionRecordValue", "Session"),
+            url: sys.apiUrl("Session", "SetSessionRecordValue"),
+            data: { propertyName: key, value: value },
+            async: false
+        });
+    };
     APISessionRecord.prototype.SetAPISession = function (key, value) {
         $.ajax({
             url: Url.Action("SetSessionRecordValue", "Session"),
@@ -50,6 +59,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("SystemCode", value);
+            //this.SetAPISessionAPI("SystemCode", value);
         },
         enumerable: true,
         configurable: true
@@ -60,6 +70,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("SubSystemCode", value);
+            //this.SetAPISessionAPI("SubSystemCode", value);
         },
         enumerable: true,
         configurable: true
@@ -70,6 +81,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("Modulecode", value);
+            //this.SetAPISessionAPI("Modulecode", value);
         },
         enumerable: true,
         configurable: true
@@ -80,6 +92,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("UserCode", value);
+            this.SetAPISessionAPI("UserCode", value);
         },
         enumerable: true,
         configurable: true
@@ -100,6 +113,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("CompCode", value);
+            this.SetAPISessionAPI("CompCode", value);
         },
         enumerable: true,
         configurable: true
@@ -110,6 +124,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("BranchCode", value);
+            this.SetAPISessionAPI("BranchCode", value);
         },
         enumerable: true,
         configurable: true
@@ -120,6 +135,7 @@ var APISessionRecord = /** @class */ (function () {
         },
         set: function (value) {
             this.SetAPISession("CurrentYear", value);
+            this.SetAPISessionAPI("CurrentYear", value);
         },
         enumerable: true,
         configurable: true

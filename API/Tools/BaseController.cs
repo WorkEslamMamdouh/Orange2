@@ -16,6 +16,8 @@ using System.Data.Entity;
 using Inv.DAL.Domain;
 using Inv.API.Tools;
 using Inv.DAL.Repository;
+using Inv.API.Models.CustomEntities;
+using System.Reflection;
 
 namespace Inv.API.Tools
 {
@@ -28,9 +30,38 @@ namespace Inv.API.Tools
 
         //protected InvEntities db = UnitOfWork.context();
 
+        public static class Config
+        {
+            public static Dictionary<string, string> Application = new Dictionary<string, string>();
+        }
+
+        public static class GlobalData
+        {
+            public static KeyValuePair<string, object> Application { get; set; }
+        }
+
+
         public static string BuildConnectionString()
         {
-            
+
+            try
+            {
+                var CompCode = Config.Application["CompCode"];
+
+                //PropertyInfo property = typeof(SessionRecord).GetProperty("SystemCode");
+                //SessionRecord myObject = new SessionRecord();
+                //var val = property.GetValue(myObject, null);
+
+                //string systemProperties = HttpContext.Current.Request.Cookies["Inv1_systemProperties"].Value.ToString();
+
+                //var CompCode = JsonConvert.DeserializeObject<SystemEnvironment>(systemProperties).CompCode;
+            }
+            catch (Exception ex)
+            {
+                 
+            }
+         
+
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
             EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
 
