@@ -54,5 +54,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> y5 { get; set; }
         public Nullable<decimal> y6 { get; set; }
         public Nullable<System.DateTime> LastDate { get; set; }
+        public Nullable<decimal> amount { get; set; }
     }
 }
