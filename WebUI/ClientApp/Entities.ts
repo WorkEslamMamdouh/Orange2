@@ -29,7 +29,7 @@ class SystemParameters {
 
 class APISessionRecord {
 
-    private SetAPISessionAPI(key: string, value: string) {
+    public SetAPISessionAPI(key: string, value: string) {
         var sys: SystemTools = new SystemTools();
         $.ajax({
             //url: Url.Action("SetSessionRecordValue", "Session"),
