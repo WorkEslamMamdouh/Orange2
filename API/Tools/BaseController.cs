@@ -26,7 +26,7 @@ namespace Inv.API.Tools
         bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
-        protected InvEntities dbNew = UnitOfWork.context(BuildConnectionString());
+        //protected InvEntities dbNew = UnitOfWork.context(BuildConnectionString());
 
         //protected InvEntities db = UnitOfWork.context();
 
@@ -44,22 +44,6 @@ namespace Inv.API.Tools
         public static string BuildConnectionString()
         {
 
-            try
-            {
-                var CompCode = Config.Application["CompCode"];
-
-                //PropertyInfo property = typeof(SessionRecord).GetProperty("SystemCode");
-                //SessionRecord myObject = new SessionRecord();
-                //var val = property.GetValue(myObject, null);
-
-                //string systemProperties = HttpContext.Current.Request.Cookies["Inv1_systemProperties"].Value.ToString();
-
-                //var CompCode = JsonConvert.DeserializeObject<SystemEnvironment>(systemProperties).CompCode;
-            }
-            catch (Exception ex)
-            {
-                 
-            }
          
 
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
