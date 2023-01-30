@@ -129,9 +129,9 @@ var CollectUnit;
             { title: res.App_Number, name: "CollectID", type: "text", width: "0%", visible: false },
             { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
             { title: res.App_date, name: "TrDate", type: "text", width: "20%" },
-            { title: res.App_date, name: "Remark", type: "text", width: "20%" },
+            { title: res.TransExplain, name: "Remark", type: "text", width: "20%" },
             { title: res.Inv_LabourCost, name: "LabourCost", type: "text", width: "13%" },
-            { title: res.Inv_CostPrc, name: "MaterialCost", type: "text", width: "13%" },
+            { title: " تكلفة المواد", name: "MaterialCost", type: "text", width: "13%" },
             { title: res.App_Certified, name: "status_txt", type: "text", width: "17%" }
         ];
         Grid.Bind();
@@ -435,7 +435,7 @@ var CollectUnit;
         var cond;
         cond = "";
         cond = " CompCode=" + SysSession.CurrentEnvironment.CompCode + " and BraCode=" + SysSession.CurrentEnvironment.BranchCode;
-        cond = cond + " and StoreId=" + drp_Store.value;
+        cond = cond + " and StoreId=" + drp_Store.value + " and  FinYear= " + SysSession.CurrentEnvironment.CurrentYear;
         sys.FindKey(Modules.CollectUnit, "btnSearchItem", cond, function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             if (!validationitem(id, Number($("#txt_ItemID" + cnt + "").val()))) {
@@ -444,15 +444,20 @@ var CollectUnit;
             }
             Ajax.Callsync({
                 type: "Get",
-                url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
+                //url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
+                //data: {
+                //    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
+                //    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                //},
+                url: sys.apiUrl("StkDefItems", "GetItem"),
                 data: {
-                    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
-                    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                    CompCode: compcode, BraCode: Number(SysSession.CurrentEnvironment.BranchCode), FinYear: Number(SysSession.CurrentEnvironment.CurrentYear), ItemID: id, StoreId: Number(drp_Store.value), Show: false, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: function (d) {
+                    debugger;
                     var result = d;
                     if (result.IsSuccess) {
-                        var res = result.Response;
+                        var res = result.Response[0];
                         $("#txtItemCode" + cnt).val(res.ItemCode);
                         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                             $("#txtItemName" + cnt).val(res.Itm_DescA);
@@ -486,7 +491,7 @@ var CollectUnit;
         var cond;
         cond = "";
         cond = " CompCode=" + SysSession.CurrentEnvironment.CompCode + " and BraCode=" + SysSession.CurrentEnvironment.BranchCode;
-        cond = cond + " and StoreId=" + drp_Store.value;
+        cond = cond + " and StoreId=" + drp_Store.value + " and  FinYear= " + SysSession.CurrentEnvironment.CurrentYear;
         sys.FindKey(Modules.CollectUnit, "btn_OUT_SrchItem", cond, function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             if (!validationitem2(id, Number($("#txt_OUT_ItemID" + cnt + "").val()))) {
@@ -495,15 +500,20 @@ var CollectUnit;
             }
             Ajax.Callsync({
                 type: "Get",
-                url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
+                //url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
+                //data: {
+                //    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
+                //    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                //},
+                url: sys.apiUrl("StkDefItems", "GetItem"),
                 data: {
-                    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
-                    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                    CompCode: compcode, BraCode: Number(SysSession.CurrentEnvironment.BranchCode), FinYear: Number(SysSession.CurrentEnvironment.CurrentYear), ItemID: id, StoreId: Number(drp_Store.value), Show: false, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                 },
                 success: function (d) {
                     var result = d;
                     if (result.IsSuccess) {
-                        var res = result.Response;
+                        //let res = result.Response as Array<IQ_GetItemStoreInfo> ;
+                        var res = result.Response[0];
                         $("#txt_OUT_ItemCode" + cnt).val(res.ItemCode);
                         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
                             $("#txt_OUT_ItemName" + cnt).val(res.Itm_DescA);
