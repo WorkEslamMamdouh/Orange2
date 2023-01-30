@@ -63,6 +63,19 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetPriceshowById(int InvId, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                string query = "select * from IQ_GetSlsInvoiceStatisticVer2 where InvoiceID =" + InvId + " ";
+
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
+                return Ok(new BaseResponse(res));
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpGet, AllowAnonymous]
         public IHttpActionResult GetSlsInvoiceByIDFromStatistics(int invoiceID, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
@@ -228,7 +241,23 @@ namespace Inv.API.Controllers
 
                             }
 
+
                             dbTransaction.Commit();
+
+                            //*********************************************************************************************************
+                            var displayItems = db.I_Sls_TR_InvoiceItems.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).ToList();
+                            if (displayItems.Count == 0)
+                            {
+                                for (int i = 0; i < obj.I_Sls_TR_InvoiceItems.Count; i++)
+                                {
+                                    obj.I_Sls_TR_InvoiceItems[i].InvoiceID = Sls_TR_Invoice.InvoiceID;
+                                }
+                                SlsInvoiceItemsService.InsertLst(obj.I_Sls_TR_InvoiceItems);
+                                ResponseResult res1 = Shared.TransactionProcess(Convert.ToInt32(obj.I_Sls_TR_Invoice.CompCode), Convert.ToInt32(obj.I_Sls_TR_Invoice.BranchCode), Sls_TR_Invoice.InvoiceID, "SlsInvoice", "Add", db);
+                            }
+                            //*********************************************************************************************************
+
+
 
 
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
@@ -284,7 +313,262 @@ namespace Inv.API.Controllers
             }
         }
 
-       
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetAllSlsInvoicePriceSrch(int CompCode, int BranchCode, int OperationId, int SlsInvSrc, int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 2 and BranchCode = " + BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = " + SlsInvSrc + " and TrDate >=' " + StartDate + "' and TrDate <= ' " + EndDate + " ' ";
+                string condition = "";
+                if (CustId != 0 && CustId != null)
+                    condition = condition + " and CustomerId =" + CustId;
+                if (SalesPerson != 0 && SalesPerson != null)
+                    condition = condition + " and SalesPersonId =" + SalesPerson;// and Status = " + Status   
+                if (SalesMan != 0 && SalesMan != null)
+                    condition = condition + " and SalesmanId =" + SalesMan;// and Status = " + Status 
+                if (OperationId != 0 && OperationId != null)
+                    condition = condition + " and OperationId =" + OperationId;
+                if (Status == 2)
+                    condition = condition + "";
+                else
+                {
+                    condition = condition + " and Status = " + Status;
+                }
+                /////////////' and IsCash = '" + IsCash+"'"
+                if (IsCash == 2)
+                    condition = condition + "";
+                else if (IsCash == 0)
+                {
+                    condition = condition + " and IsCash = 'False' ";
+                }
+                else if (IsCash == 1)
+                {
+                    condition = condition + " and IsCash = 'True' ";
+                }
+                ///////////
+                string query = s + condition + " ORDER BY TrNo ASC;";
+                var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
+                return Ok(new BaseResponse(res));
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost, AllowAnonymous]
+        public IHttpActionResult InsertInvoicePriceSrch([FromBody]SlsInvoiceMasterDetails obj)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+
+                        //DateTime tstamp = DateTime.Now;
+                        //DateTime data1 = DateTime.Now;
+
+
+                        //if (obj.I_Sls_TR_Invoice.Status == 1)
+                        //{
+
+
+                        //    QrModel QrRec = new QrModel();
+                        //    QrRec.CompName = obj.CompName;
+                        //    QrRec.VatNo = obj.VatNo;
+                        //    QrRec.Total = obj.I_Sls_TR_Invoice.TotalAmount;
+                        //    QrRec.Vat = obj.I_Sls_TR_Invoice.VatAmount;
+                        //    //QrRec.TrDate = tstamp;
+                        //    data1 = Convert.ToDateTime(obj.I_Sls_TR_Invoice.TrDate);
+                        //    tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+
+                        //    QrRec.TrDate = tstamp;
+                        //    //QrRec.TrDate = obj.I_Sls_TR_Invoice.TrDate;
+
+
+
+
+                        //    string QrCode = QRGeneratorController.QrGenerator(QrRec);
+
+                        //    string st = SystemToolsController.GenerateGuid();
+                        //    obj.I_Sls_TR_Invoice.DocUUID = st;
+                        //    obj.I_Sls_TR_Invoice.QRCode = QrCode;
+                        //    //obj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
+                        //}
+                        //obj.I_Sls_TR_Invoice.CreatedAt = tstamp;
+                        //obj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
+
+
+                        obj.I_Sls_TR_Invoice.AllowAfterVat = obj.I_Sls_TR_Invoice.AllowAfterVat == null ? 0 : obj.I_Sls_TR_Invoice.AllowAfterVat;
+
+                        var Sls_TR_Invoice = SlsTrSalesService.Insert(obj.I_Sls_TR_Invoice);
+
+                        for (int i = 0; i < obj.I_Sls_TR_InvoiceItems.Count; i++)
+                        {
+                            obj.I_Sls_TR_InvoiceItems[i].InvoiceID = Sls_TR_Invoice.InvoiceID;
+                        }
+                        SlsInvoiceItemsService.InsertLst(obj.I_Sls_TR_InvoiceItems);
+                        // call process trans 
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Sls_TR_Invoice.CompCode), Convert.ToInt32(obj.I_Sls_TR_Invoice.BranchCode), Sls_TR_Invoice.InvoiceID, "ShwPrice", "Add", db);
+                        if (res.ResponseState == true)
+                        {
+
+                            obj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
+
+                            if (obj.I_Sls_TR_Invoice.TrNo == 0)
+                            {
+                                dbTransaction.Rollback();
+
+                                db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
+                                db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
+                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+
+                            }
+
+                            dbTransaction.Commit();
+
+
+                            obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
+
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+
+                            return Ok(new BaseResponse(displayData));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
+                            db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
+                        ////////
+                    }
+                    catch (Exception ex)
+                    {
+                        dbTransaction.Rollback();
+                        db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
+                        db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost, AllowAnonymous]
+        public IHttpActionResult updateInvoicePriceSrch([FromBody]SlsInvoiceMasterDetails updatedObj)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(updatedObj.Token, updatedObj.UserCode))
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+
+                        //DateTime tstamp = DateTime.Now;
+                        //DateTime data1 = DateTime.Now;
+
+                        ////tstamp = QRGeneratorController.AddTimeIndata(data1, updatedObj.I_Sls_TR_Invoice.TrTime.ToString());
+
+                        //if (updatedObj.I_Sls_TR_Invoice.Status == 1)
+                        //{
+
+
+                        //    QrModel QrRec = new QrModel();
+                        //    QrRec.CompName = updatedObj.CompName;
+                        //    QrRec.VatNo = updatedObj.VatNo;
+                        //    QrRec.Total = updatedObj.I_Sls_TR_Invoice.TotalAmount;
+                        //    QrRec.Vat = updatedObj.I_Sls_TR_Invoice.VatAmount;
+                        //    //QrRec.TrDate = tstamp;
+                        //    data1 = Convert.ToDateTime(updatedObj.I_Sls_TR_Invoice.TrDate);
+                        //    tstamp = QRGeneratorController.MargeTime_in_Date(data1, tstamp);
+
+                        //    QrRec.TrDate = tstamp;
+
+                        //    //QrRec.TrDate = updatedObj.I_Sls_TR_Invoice.TrDate;
+
+                        //    string QrCode = QRGeneratorController.QrGenerator(QrRec);
+
+                        //    string st = SystemToolsController.GenerateGuid();
+                        //    updatedObj.I_Sls_TR_Invoice.DocUUID = st;
+                        //    updatedObj.I_Sls_TR_Invoice.QRCode = QrCode;
+                        //    //updatedObj.I_Sls_TR_Invoice.TrDate = tstamp.Date;
+                        //    //updatedObj.I_Sls_TR_Invoice.CreatedAt = tstamp;
+                        //    //updatedObj.I_Sls_TR_Invoice.TrTime = tstamp.TimeOfDay;
+                        //}
+
+                        //update Master
+                        var Sls_TR_Invoice = SlsTrSalesService.Update(updatedObj.I_Sls_TR_Invoice);
+
+                        //update Details
+                        var insertedInvoiceItems = updatedObj.I_Sls_TR_InvoiceItems.Where(x => x.StatusFlag == 'i').ToList();
+                        var updatedInvoiceItems = updatedObj.I_Sls_TR_InvoiceItems.Where(x => x.StatusFlag == 'u').ToList();
+                        var deletedInvoiceItems = updatedObj.I_Sls_TR_InvoiceItems.Where(x => x.StatusFlag == 'd').ToList();
+
+                        //loop insered  
+                        foreach (var item in insertedInvoiceItems)
+                        {
+                            item.InvoiceID = updatedObj.I_Sls_TR_Invoice.InvoiceID;
+                            var InsertedRec = SlsInvoiceItemsService.Insert(item);
+
+
+
+                        }
+
+                        //loop Update  
+                        foreach (var item in updatedInvoiceItems)
+                        {
+                            item.InvoiceID = updatedObj.I_Sls_TR_Invoice.InvoiceID;
+                            var updatedRec = SlsInvoiceItemsService.Update(item);
+                        }
+
+                        //loop Delete  
+                        foreach (var item in deletedInvoiceItems)
+                        {
+                            int deletedId = item.InvoiceItemID;
+                            SlsInvoiceItemsService.Delete(deletedId);
+                        }
+                        // call process trans 
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(updatedObj.I_Sls_TR_Invoice.CompCode), Convert.ToInt32(updatedObj.I_Sls_TR_Invoice.BranchCode), Sls_TR_Invoice.InvoiceID, "ShwPrice", "Update", db);
+                        if (res.ResponseState == true)
+                        {
+                            updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
+                            dbTransaction.Commit();
+
+                            var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
+
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+
+                            return Ok(new BaseResponse(displayData));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
+
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode , int OperationId ,int SlsInvSrc ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
         { 

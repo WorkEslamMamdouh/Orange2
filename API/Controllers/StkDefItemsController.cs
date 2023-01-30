@@ -410,13 +410,47 @@ namespace Inv.API.Controllers
         }
 
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult chackItem(int CompCode, string ItemCode, string ItemDescA, int ItemID, bool IsCode)
+        {
+
+            string SQL = "";
+            if (ItemID == 0)
+            {
+                if (IsCode)
+                {
+                    SQL = "select * from [dbo].[I_Item]   where [ItemCode] = '" + ItemCode + "' and CompCode = " + CompCode + " ";
+                }
+                else
+                {
+                    SQL = "select * from [dbo].[I_Item]   where [DescA] = '" + ItemDescA + "' and CompCode = " + CompCode + " ";
+                }
+            }
+            else
+            {
+                if (IsCode)
+                {
+                    SQL = "select * from [dbo].[I_Item]   where [ItemCode] = '" + ItemCode + "' and CompCode = " + CompCode + " and ItemID <> " + ItemID + "";
+                }
+                else
+                {
+                    SQL = "select * from [dbo].[I_Item]   where [DescA] = '" + ItemDescA + "' and CompCode = " + CompCode + " and ItemID <> " + ItemID + "";
+                }
+            }
+
+            List<I_Item> ItemList = db.Database.SqlQuery<I_Item>(SQL).ToList();
+
+            return Ok(new BaseResponse(ItemList.Count));
+
+        }
+
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetItemsControl(string FildItemID, string FildItemCode, string FildItm_Desc, string qury)
         {
 
             string SQL = "select " + FildItemID + " as ItemID, " + FildItemCode + " as ItemCode , " + FildItm_Desc + " as ItemDesc from " + qury + "";
-             
+
             List<Custom_Items> ItemList = db.Database.SqlQuery<Custom_Items>(SQL).ToList();
 
             return Ok(new BaseResponse(ItemList));

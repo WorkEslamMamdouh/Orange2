@@ -681,6 +681,7 @@ var Processes;
                 var result = d;
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response;
+                    Get_IQ_GetOperation = Get_IQ_GetOperation.sort(dynamicSortNew("TrNo"));
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
                     divMasterGrid.Bind();
@@ -716,7 +717,7 @@ var Processes;
         divMasterGrid.PrimaryKey = "OperationID";
         divMasterGrid.Columns = [
             { title: "ID", name: "OperationID", type: "text", width: "2%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
+            { title: res.App_Number, name: "TrNo", type: "number", width: "10%" },
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
@@ -1254,6 +1255,7 @@ var Processes;
         var Total = (Number(OperationItemInfo[cnt].ReceivedQty) * Number(OperationItemInfo[cnt].Est_SalesPrice));
         //$("#txtTotal" + cnt).prop("value", (Total).RoundToSt(2));
         $("#txtTotal" + cnt).prop("value", (OperationItemInfo[cnt].TotalSales == null || undefined) ? 0 : OperationItemInfo[cnt].TotalSales);
+        debugger;
         $("#txtSoldQty" + cnt).prop("value", (OperationItemInfo[cnt].SoldQty == null || undefined) ? 0 : OperationItemInfo[cnt].SoldQty);
         $("#txtScrapQty" + cnt).prop("value", (OperationItemInfo[cnt].ScrapQty == null || undefined) ? 0 : OperationItemInfo[cnt].ScrapQty);
         var AvailableQty = (Number(OperationItemInfo[cnt].ReceivedQty) - Number(OperationItemInfo[cnt].SoldQty) - Number(OperationItemInfo[cnt].ScrapQty));
@@ -1693,6 +1695,8 @@ var Processes;
             { title: res.sales_credit, name: "Close_TotalSalesCredit", type: "text", width: "10%" },
             { title: res.Sales_credit_tax, name: "Close_TotalSalesCreditVAT", type: "text", width: "10%" },
             { title: res.Total_sales, name: "Close_TotalSales", type: "text", width: "10%" },
+            //{ title: res.cash_to_sales, name: "Close_CashOnhand", type: "text", width: "10%" },
+            //{ title: res.cash_in_bank, name: "Close_CashOnBank", type: "text", width: "10%" },
         ];
     }
     function SalaGridDoubleClick() {
@@ -1807,6 +1811,7 @@ var Processes;
                     return txt;
                 }
             },
+            //{ title: res.Remaining_quantity, name: "OnhandQty", type: "text", width: "22%" },
         ];
     }
     function check_OnhandQty(id_Num) {

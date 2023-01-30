@@ -29,6 +29,16 @@ class SystemParameters {
 
 class APISessionRecord {
 
+    private SetAPISessionAPI(key: string, value: string) {
+        var sys: SystemTools = new SystemTools();
+        $.ajax({
+            //url: Url.Action("SetSessionRecordValue", "Session"),
+            url: sys.apiUrl("Session", "SetSessionRecordValue"),
+            data: { propertyName: key, value: value },
+            async: false
+        });
+
+    }
     private SetAPISession(key: string, value: string) {
         $.ajax({
             url: Url.Action("SetSessionRecordValue", "Session"),
@@ -48,6 +58,7 @@ class APISessionRecord {
     }
     public set SystemCode(value: string) {
         this.SetAPISession("SystemCode", value);
+        //this.SetAPISessionAPI("SystemCode", value);
     }
     public get SystemCode(): string {
         return this.GetAPISession("SystemCode");
@@ -55,6 +66,7 @@ class APISessionRecord {
 
     public set SubSystemCode(value: string) {
         this.SetAPISession("SubSystemCode", value);
+        //this.SetAPISessionAPI("SubSystemCode", value);
     }
     public get SubSystemCode(): string {
         return this.GetAPISession("SubSystemCode");
@@ -62,6 +74,7 @@ class APISessionRecord {
 
     public set Modulecode(value: string) {
         this.SetAPISession("Modulecode", value);
+        //this.SetAPISessionAPI("Modulecode", value);
     }
     public get Modulecode(): string {
         return this.GetAPISession("Modulecode");
@@ -69,6 +82,8 @@ class APISessionRecord {
 
     public set UserCode(value: string) {
         this.SetAPISession("UserCode", value);
+        this.SetAPISessionAPI("UserCode", value);
+
     }
     public set Token(value: string) {
         this.SetAPISession("Token", value);
@@ -79,8 +94,9 @@ class APISessionRecord {
     public get Token(): string {
         return this.GetAPISession("Token");
     }
-    public set CompCode(value: string) {
+    public set CompCode(value: string) { 
         this.SetAPISession("CompCode", value);
+        this.SetAPISessionAPI("CompCode", value); 
     }
     public get CompCode(): string {
         return this.GetAPISession("CompCode");
@@ -88,6 +104,7 @@ class APISessionRecord {
 
     public set BranchCode(value: string) {
         this.SetAPISession("BranchCode", value);
+        this.SetAPISessionAPI("BranchCode", value);
     }
     public get BranchCode(): string {
         return this.GetAPISession("BranchCode");
@@ -96,6 +113,7 @@ class APISessionRecord {
 
     public set CurrentYear(value: string) {
         this.SetAPISession("CurrentYear", value);
+        this.SetAPISessionAPI("CurrentYear", value);
     }
     public get CurrentYear(): string {
         return this.GetAPISession("CurrentYear");
@@ -7363,6 +7381,16 @@ class StockAdjustMasterDetails extends SecurityClass {
     public I_Stk_Tr_AdjustDetails: Array<I_Stk_Tr_AdjustDetails>;
 }
 
+class StockOpenMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.I_Stk_TR_Open = new I_Stk_TR_Open();
+        this.I_Stk_Tr_OpenDetails = new Array<I_Stk_Tr_OpenDetails>();
+    }
+    public I_Stk_TR_Open: I_Stk_TR_Open;
+    public I_Stk_Tr_OpenDetails: Array<I_Stk_Tr_OpenDetails>;
+}
+
 class IQ_GetStkAdjustWithDetail extends SecurityClass {
     constructor() {
         super();
@@ -7371,6 +7399,17 @@ class IQ_GetStkAdjustWithDetail extends SecurityClass {
     }
     public IQ_GetStkAdjust: Array<IQ_GetStkAdjust>;
     public IQ_GetStkAdjustDetail: Array<IQ_GetStkAdjustDetail>;
+}
+
+
+class IQ_GetStkOpenWithDetail   extends SecurityClass {
+    constructor() {
+        super();
+        this.I_Stk_TR_Open = new Array<I_Stk_TR_Open>();
+        this.IQ_GetStkOpenDetail = new Array<IQ_GetStkOpenDetail>();
+    }
+    public I_Stk_TR_Open: Array<I_Stk_TR_Open>;
+    public IQ_GetStkOpenDetail: Array<IQ_GetStkOpenDetail>;
 }
 
 
@@ -11049,4 +11088,111 @@ class Exec_Proc_Status {
     public msg: string;
 }
 
+
+class I_Stk_TR_Open extends SecurityClass {
+    constructor() {
+        super();
+        this.OpenID = 0;
+        this.Tr_No = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.CountedBy = "";
+        this.VerfiedBy = "";
+        this.TotalCost = 0;
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+    }
+    public OpenID: number;
+    public Tr_No: number;
+    public RefNO: string;
+    public TrDate: string;
+    public TrDateH: string;
+    public StoreID: number;
+    public Remark: string;
+    public CountedBy: string;
+    public VerfiedBy: string;
+    public TotalCost: number;
+    public IsPosted: boolean;
+    public VoucherNo: number;
+    public VoucherType: number;
+    public CreatedAt: string;
+    public CreatedBy: string;
+    public UpdatedAt: string;
+    public UpdatedBy: string;
+    public CompCode: number;
+    public BranchCode: number;
+    public Status: number;
+}
+
+class I_Stk_Tr_OpenDetails {
+    constructor() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.StatusFlag = "";
+    }
+    public OpenDetailID: number;
+    public OpenID: number;
+    public Serial: number;
+    public ItemID: number;
+    public ItemStoreBatchid: number;
+    public UnitID: number;
+    public Qty: number;
+    public UnitCost: number;
+    public StkUnitCost: number;
+    public StatusFlag: string;
+}
+
+class IQ_GetStkOpenDetail {
+    constructor() {
+        this.OpenDetailID = 0;
+        this.OpenID = 0;
+        this.Serial = 0;
+        this.ItemID = 0;
+        this.ItemStoreBatchid = 0;
+        this.UnitID = 0;
+        this.Qty = 0;
+        this.UnitCost = 0;
+        this.StkUnitCost = 0;
+        this.ItemCode = "";
+        this.DescA = "";
+        this.DescL = "";
+        this.uom_DescA = "";
+        this.UOM_DescE = "";
+        this.UomCode = "";
+
+    }
+    public OpenDetailID: number;
+    public OpenID: number;
+    public Serial: number;
+    public ItemID: number;
+    public ItemStoreBatchid: number;
+    public UnitID: number;
+    public Qty: number;
+    public UnitCost: number;
+    public StkUnitCost: number;
+    public ItemCode: string;
+    public DescA: string;
+    public DescL: string;
+    public uom_DescA: string;
+    public UOM_DescE: string;
+    public UomCode: string;
+}
 

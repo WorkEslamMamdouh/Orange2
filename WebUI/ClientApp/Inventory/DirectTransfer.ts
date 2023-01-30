@@ -952,7 +952,8 @@ namespace DirectTransfer {
             } else {
                 var storeId = Number(ddlSourceStoreAdd.value);
                 sys.FindKey(Modules.Directtransfer, "btnSearchItems", "StoreId=" + storeId + " and OnhandQty > 0 and IsStock = 1 and FinYear = " + FinYear, () => {
-                 
+
+                    debugger
                     let id = SearchGrid.SearchDataGrid.SelectedKey
                     var res = false;
                     var NumberRowid = Number($("#TransfareDetailID" + cnt).val());
@@ -960,9 +961,9 @@ namespace DirectTransfer {
                     if (res == false) {
                         if ($("#txt_StatusFlag" + cnt).val() != "i")
                             $("#txt_StatusFlag" + cnt).val("u");
-
-                        var SrcItem = ItemsSourceListDetails.filter(s => s.ItemID == id);
-                        var Toitem = ItemsToListDetails.filter(s => s.ItemID == id);
+                        debugger
+                        var SrcItem = ItemsSourceListDetails.filter(s => s.ItemID == id  );
+                        var Toitem = ItemsToListDetails.filter(s => s.ItemID == id  );
                         if (SrcItem.length > 0) {
 
                             if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
@@ -971,7 +972,7 @@ namespace DirectTransfer {
                             else {
                                 $("#UnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
                             }
-
+                            debugger
 
                             $('#txtItemNumber' + cnt).val(id);
                             (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE);
@@ -984,7 +985,7 @@ namespace DirectTransfer {
                             $('#txtToQty' + cnt).val(Toitem.length == 0  ? 0 : Toitem[0].OnhandQty);
                             $('#txtConvertedQnty' + cnt).val("0");
 
-                           
+                            debugger
                         }
 
                     } else {
@@ -1156,7 +1157,7 @@ namespace DirectTransfer {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     ItemsListDetails = result.Response as Array<IQ_GetItemStoreInfo>;
-                    ItemsListDetails = ItemsListDetails.filter(x => x.IsStock == true);
+                    ItemsListDetails = ItemsListDetails.filter(x => x.IsStock == true && x.FinYear == FinYear);
                 }
             }
         });
@@ -1265,6 +1266,7 @@ namespace DirectTransfer {
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Transfer;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
+                    btnShow_onclick();
                     DisplayMassage("تم اصدار  تحويل رقم " + res.Tr_No, 'Transfer number ' + res.Tr_No + 'has been issued', MessageType.Succeed);
                     txtTrNo.value = res.Tr_No.toString();
                     GlobalTransferID = res.TransfareID;
@@ -1301,6 +1303,7 @@ namespace DirectTransfer {
                 if (result.IsSuccess == true) {
                     let res = result.Response as I_Stk_TR_Transfer;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
+                    btnShow_onclick();
                     DisplayMassage("تم التعديل بنجاح " + res.Tr_No, 'Editied successfully' + res.Tr_No, MessageType.Succeed);
                     Save();
                     AfterInsertOrUpdateFlag = true;

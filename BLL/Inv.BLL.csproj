@@ -100,6 +100,8 @@
     <Compile Include="Services\ServSlsInvoiceItems\ServSlsInvoiceItemsService.cs" />
     <Compile Include="Services\I_PeriodSer\II_PeriodService.cs" />
     <Compile Include="Services\I_PeriodSer\I_PeriodService.cs" />
+    <Compile Include="Services\STKOpen\ISTKOpenService.cs" />
+    <Compile Include="Services\STKOpen\STKOpenService.cs" />
     <Compile Include="Services\STK_TR_ISSUECC\ISTK_TR_ISSUECCService.cs" />
     <Compile Include="Services\STK_TR_ISSUECC\STK_TR_ISSUECCService.cs" />
     <Compile Include="Services\VatNature\VatNatureService.cs" />

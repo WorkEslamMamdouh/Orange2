@@ -58,6 +58,7 @@ var Collectedaccstat;
         Rddetails.checked = true;
         Fillddl_Customer();
         $('#btnPrint').addClass('display_none');
+        txt_ID_APP_Type.value = '1';
     }
     Collectedaccstat.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {

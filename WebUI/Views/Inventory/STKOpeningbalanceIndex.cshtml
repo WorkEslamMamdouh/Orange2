@@ -1,0 +1,252 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = @SystemResource.Men_SlsTrReturn;
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div class="row gy-3 ">
+    <!-- Filter Container -->
+    <div id="div_hedr" class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtFromDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8">
+                                <input type="date" class="form-control" name="GosiJoinDate" id="txtToDate">
+                            </div>
+                        </div>
+                    </div>
+                     
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_Store</label>
+                            <div class="col-9 col-md-8 ">
+                                <select class="form-control" id="ddlSourceStore"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Choose_Status</label>
+                            <div class="col-9 col-md-8 ">
+                                <select class="form-control" id="ddlstatus">
+                                    <option value="0">@SystemResource.App_Not_Certified</option>
+                                    <option value="1">@SystemResource.App_Certified</option>
+                                    <option value="2">@SystemResource.App_All</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0"></label>
+                            <div class="col-9 col-md-8 ">
+                                <button id="btnDeleteOpen" type="button" class="btn btn-main float-right" fdprocessedid="53c1n" style="width: 100%;">
+                                    مسـح الرصيد الافتتاحي
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="txtSearch" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <div id="divGridDetails_View"></div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Details  -->
+        <div id="divTransferDetails" class="row display_none">
+            <div class="col-12 service-content">
+                <div class="serviceBox">
+                    <div class="row ">
+                        @* Change Place *@
+                        <div class="col-12">
+                            
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_TrNO</label>
+                                <div class="col-9 col-md-8 ">
+                                    <input disabled type="text" class="form-control" id="txtTrNo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group row ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_date </label>
+                                <div class="col-9 col-md-8 ">
+                                    <input disabled type="date" class="form-control" id="txtTransferDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group row ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_Store </label>
+                                <div class="col-9 col-md-8 ">
+                                    <select id="ddlSourceStoreAdd" name="" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2 ">
+                            <div class="form-group row ">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
+                                <div class="col-2 col-md-8">
+                                    <input type="checkbox" class="checkbox" id="chkApproved">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                      
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row ">
+                                                <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.Trns_RefNum</label>
+                                                <div class="col-9 col-md-7 ">
+                                                    <input disabled type="text" class="form-control" id="txtRefNumber">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group row ">
+                                                <button id="btnRefash" type="button" class="btn btn-main float-right" disabled>
+                                                    تحديث
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group row  ">
+                                                <label id="LabtxtRemarks" class="col-3 col-md-2  align-self-center p-md-0">@SystemResource.App_Notes</label>
+                                                <div class="col-9 col-md-10 ">
+                                                    <textarea rows="2" type="text" class="form-control" disabled name="Remark" id="txtRemarks"> </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @* special Flides *@
+                                <div class="col-12 col-md-6">
+                                    <div class="row special-group">
+                                        <div class="form-group">
+                                            <label class="col-12 align-self-center p-md-0 text-center">  @SystemResource.Download_items   </label>
+                                        </div>
+                                        <div class="col-12 col-md-8 order-3 order-md-1">
+                                            <div class="form-group row ">
+                                                <label class="col-3 col-md-4  align-self-center p-md-0">@SystemResource.APP_Category</label>
+                                                <div class="col-9 col-md-8 ">
+                                                    <select disabled class="form-control" id="ddlCategory"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-4 order-1 order-md-2">
+                                            <button id="btnLoad" type="button" class="btn btn-main">
+                                                @SystemResource.Download
+                                                <i class="fas fa-save"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-12 col-md-8 order-2 order-md-3">
+                                            <div class="form-group row  ">
+                                                <label class="col-3 col-md-4  align-self-center p-md-0">@SystemResource.Itm_MainItem</label>
+                                                <div class="col-9 col-md-8">
+                                                    <select disabled class="form-control" id="ddlFamily"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        @* End special Flides *@
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inside Table  -->
+            <div class="inside-table my-4">
+                <div class="table-responsive">
+                    <table class="table table-borderless ">
+                        <thead>
+                            <tr>
+                                <th style="width: 2%"></th>
+                                <th style="width: 5%"></th>
+                                <th style="width: 10%"> @SystemResource.Itm_ItemCode</th>
+                                <th style="width: 20%">@SystemResource.Itm_Item</th>
+                                <th style="width: 10%"> @SystemResource.Itm_Uom</th>
+                                <th style="width: 10%">الكمية</th>
+                                <th style="width: 10%"> التكليفه</th>
+                                <th style="width: 10%">الاجمالي</th>  
+                            </tr>
+                        </thead>
+                        <tbody id="div_Data"></tbody>
+
+                    </table>
+                    <div class="d-flex justify-content-start mr-1">
+                        <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Editors Details -->
+            <div class="insettext row editor-details mt-2">
+                <div class="col-12 col-md-6">
+
+                    <div class="form-group row g-0">
+                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Create</label>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtCreatedBy" name="CreatedBy" type="text" disabled class="p-0">
+                        </div>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtCreatedAt" name="CreatedAt" type="text" disabled class="p-0">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group row g-0">
+                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_Update</label>
+                        <div class="col-4 col-md-5 editor-input px-0">
+                            <input id="txtUpdatedBy" name="CreatedBy" type="text" disabled class="p-0">
+                        </div>
+                        <div class="col-4 col-md-5 editor-input px-0">
+
+                            <input id="txtUpdatedAt" name="UpdatedAt" type="text" disabled class="p-0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{
+    <script src="~/ClientApp/Inventory/STKOpeningbalance.js"></script>
+}
+
+
+

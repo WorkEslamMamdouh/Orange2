@@ -668,6 +668,7 @@ namespace HomeComponent {
         $("#btnLnkTransVoucher").click(() => { newtap = false; OpenPage(Modules.LnkTransVoucher); })// 
         $("#btnDirecttransfer").click(() => { newtap = false; OpenPage(Modules.Directtransfer); })
         $("#btnSTKAdjust").click(() => { newtap = false; OpenPage(Modules.STKAdjust); })
+        $("#btnSTKOpeningbalance").click(() => { newtap = false; OpenPage(Modules.STKOpeningbalance); })
         $("#btnReceiveTransfer").click(() => { newtap = false; OpenPage(Modules.ReceiveTransfer); })
         $("#btnsendTransfer").click(() => { newtap = false; OpenPage(Modules.sendTransfer); })
         $("#btnGenDefAdd").click(() => { newtap = false; OpenPage(Modules.GenDefAdd); })
@@ -768,6 +769,7 @@ namespace HomeComponent {
         $("#btnLnkTransVoucherT").click(() => { newtap = true; OpenPage(Modules.LnkTransVoucher); })// 
         $("#btnDirecttransferT").click(() => { newtap = true; OpenPage(Modules.Directtransfer); })
         $("#btnSTKAdjustT").click(() => { newtap = true; OpenPage(Modules.STKAdjust); })
+        $("#btnSTKOpeningbalanceT").click(() => { newtap = true; OpenPage(Modules.STKOpeningbalance); })
         $("#btnReceiveTransferT").click(() => { newtap = true; OpenPage(Modules.ReceiveTransfer); })
         $("#btnsendTransferT").click(() => { newtap = true; OpenPage(Modules.sendTransfer); })
         $("#btnGenDefAddT").click(() => { newtap = true; OpenPage(Modules.GenDefAdd); })

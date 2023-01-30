@@ -286,6 +286,7 @@
     <Compile Include="Controllers\Shared\LogUser.cs" />
     <Compile Include="Controllers\Shared\QRGenerator.cs" />
     <Compile Include="Controllers\I_PeriodController.cs" />
+    <Compile Include="Controllers\Shared\SessionController.cs" />
     <Compile Include="Controllers\STK_TR_ISSUECCController.cs" />
     <Compile Include="Controllers\TranPostingController.cs" />
     <Compile Include="Controllers\GCodesController.cs" />
@@ -327,8 +328,10 @@
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
+    <Compile Include="Models\CustomModel\SessionManager.cs" />
     <Compile Include="Models\CustomModel\Custom_Items.cs" />
     <Compile Include="Models\CustomModel\Exec_Proc_Status.cs" />
+    <Compile Include="Models\CustomModel\IQ_GetStkOpenWithDetail.cs" />
     <Compile Include="Models\CustomModel\ModelCompStatus.cs" />
     <Compile Include="Models\CustomModel\Helping_Methods.cs" />
     <Compile Include="Models\CustomModel\ModelLastPurchase.cs" />
@@ -345,6 +348,7 @@
     <Compile Include="Models\CustomModel\IQVendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\Rec_D_CustomerDetail.cs" />
     <Compile Include="Models\CustomModel\DashBalances.cs" />
+    <Compile Include="Models\CustomModel\StockOpenMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SystemClass.cs" />
     <Compile Include="Models\CustomModel\VendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\ListOperationDepositDetail.cs" />

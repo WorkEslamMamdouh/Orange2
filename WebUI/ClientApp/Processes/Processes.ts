@@ -796,7 +796,7 @@ namespace Processes {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response as Array<IQ_GetOperation>;
-                     
+                    Get_IQ_GetOperation = Get_IQ_GetOperation.sort(dynamicSortNew("TrNo"));
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
                     divMasterGrid.Bind();
@@ -840,7 +840,7 @@ namespace Processes {
         divMasterGrid.PrimaryKey = "OperationID";
         divMasterGrid.Columns = [
             { title: "ID", name: "OperationID", type: "text", width: "2%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
+            { title: res.App_Number, name: "TrNo", type: "number", width: "10%" },
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
@@ -1569,6 +1569,7 @@ namespace Processes {
         var Total = (Number(OperationItemInfo[cnt].ReceivedQty) * Number(OperationItemInfo[cnt].Est_SalesPrice));
         //$("#txtTotal" + cnt).prop("value", (Total).RoundToSt(2));
         $("#txtTotal" + cnt).prop("value", (OperationItemInfo[cnt].TotalSales == null || undefined) ? 0 : OperationItemInfo[cnt].TotalSales);
+        debugger
         $("#txtSoldQty" + cnt).prop("value", (OperationItemInfo[cnt].SoldQty == null || undefined) ? 0 : OperationItemInfo[cnt].SoldQty);
         $("#txtScrapQty" + cnt).prop("value", (OperationItemInfo[cnt].ScrapQty == null || undefined) ? 0 : OperationItemInfo[cnt].ScrapQty);
         var AvailableQty = (Number(OperationItemInfo[cnt].ReceivedQty) - Number(OperationItemInfo[cnt].SoldQty) - Number(OperationItemInfo[cnt].ScrapQty));

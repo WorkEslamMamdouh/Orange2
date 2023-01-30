@@ -20,6 +20,9 @@ namespace Inv.WebUI.Models
             {
                 return HttpContext.Current.Session["SessionRecord"] as SessionRecord;
             }
+
+            //get { return (SessionRecord)HttpContext.Current.Items["SessionRecord"]; }
+            //set { HttpContext.Current.Items["SessionRecord"] = value; }
         }
         
     }

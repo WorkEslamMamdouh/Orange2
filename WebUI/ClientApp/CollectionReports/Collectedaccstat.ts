@@ -67,7 +67,7 @@ namespace Collectedaccstat {
          Rddetails.checked = true;
          Fillddl_Customer();
          $('#btnPrint').addClass('display_none');
-
+         txt_ID_APP_Type.value = '1'
     }
      
     function InitalizeControls() {
@@ -408,9 +408,11 @@ namespace Collectedaccstat {
             rp.VendType = 1;
         }
         if ($("#txt_ID_APP_Type").val() == "Null") {//-------------جميع الانواع
-            rp.Status = 3;
+            rp.Status =3;
         }
-        else { rp.Status = 1; }//-------------منفذ 
+        else {
+            rp.Status = 1;
+        }//-------------منفذ 
 
         if ($("#txt_indebtedness").val() == ">") {//******عليه مديونيه
             rp.BalType = 1;

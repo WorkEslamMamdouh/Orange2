@@ -99,6 +99,13 @@ namespace Inv.WebUI.Controllers
 
         }
 
+        public string rptInvoiceNotePrice(RepFinancials rp)
+        {
+            IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvoice(rp);
+            return buildReport(que);
+
+        }
+
         public string Prnt_OperationInvoice(RepFinancials rp)
         {
             IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_OperationInvoice(rp);

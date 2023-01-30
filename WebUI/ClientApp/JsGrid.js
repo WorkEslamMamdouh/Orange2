@@ -268,8 +268,8 @@ var JsGrid = /** @class */ (function () {
                         $('#Loading_Div').html('');
                     }
                     if ($("#NoDubleclick").val() == 0) {
-                        document.body.scrollTop = 600;
-                        document.documentElement.scrollTop = 600;
+                        document.body.scrollTop = 800;
+                        document.documentElement.scrollTop = 800;
                     }
                 }, 150);
             },

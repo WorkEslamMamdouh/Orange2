@@ -820,7 +820,7 @@ namespace CloseProcesses {
                 if (result.IsSuccess) {
                     Get_IQ_GetOperation = result.Response as Array<IQ_GetOperation>;
 
- 
+                    Get_IQ_GetOperation = Get_IQ_GetOperation.sort(dynamicSortNew("TrNo"));
 
                     InitializeGrid();
                     divMasterGrid.DataSource = Get_IQ_GetOperation;
@@ -865,7 +865,7 @@ namespace CloseProcesses {
         divMasterGrid.PrimaryKey = "OperationID";
         divMasterGrid.Columns = [
             { title: "ID", name: "OperationID", type: "text", width: "2%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
+            { title: res.App_Number, name: "TrNo", type: "number", width: "10%" },
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
