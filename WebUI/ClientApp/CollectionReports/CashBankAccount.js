@@ -7,7 +7,7 @@ var CashBankAccount;
     var BranchCode;
     var AccountType = 1;
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.CashBoxAccount);
+    var SysSession = GetSystemSession(Modules.CashBankAccount);
     //------------------------------------------------------------
     var Details_ACCOUNT = new Array();
     //------------------------------------------------------------

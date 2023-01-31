@@ -20,7 +20,7 @@ namespace AccDefExpenses {
     var btnEdit: HTMLButtonElement;
     var sys: SystemTools = new SystemTools();
     //var sys: _shared = new _shared();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccDefReceipts);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccDefExpenses);
     var Model: A_RecPay_D_Accounts = new A_RecPay_D_Accounts();
 
     var CountGrid = 0;
