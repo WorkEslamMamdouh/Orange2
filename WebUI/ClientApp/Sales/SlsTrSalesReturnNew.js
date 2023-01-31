@@ -1250,6 +1250,7 @@ var SlsTrSalesReturnNew;
         $('#ddlStore').val(setVal(InvoiceStatisticsModel[0].StoreId));
         $('#ddlStore').val() == null ? $('#ddlStore').val('null') : null;
         EditFlag = true;
+        txtInvoiceDate.disabled = true;
         InvoiceItemsDetailsModelDelete = new Array();
     }
     //------------------------------------------------------ Controls Grid Region -----------------------------------

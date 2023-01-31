@@ -29,6 +29,16 @@ class SystemParameters {
 
 class APISessionRecord {
 
+    public SetAPISessionAPI(key: string, value: string) {
+        var sys: SystemTools = new SystemTools();
+        $.ajax({
+            //url: Url.Action("SetSessionRecordValue", "Session"),
+            url: sys.apiUrl("Session", "SetSessionRecordValue"),
+            data: { propertyName: key, value: value },
+            async: false
+        });
+
+    }
     private SetAPISession(key: string, value: string) {
         $.ajax({
             url: Url.Action("SetSessionRecordValue", "Session"),
@@ -48,6 +58,7 @@ class APISessionRecord {
     }
     public set SystemCode(value: string) {
         this.SetAPISession("SystemCode", value);
+        //this.SetAPISessionAPI("SystemCode", value);
     }
     public get SystemCode(): string {
         return this.GetAPISession("SystemCode");
@@ -55,6 +66,7 @@ class APISessionRecord {
 
     public set SubSystemCode(value: string) {
         this.SetAPISession("SubSystemCode", value);
+        //this.SetAPISessionAPI("SubSystemCode", value);
     }
     public get SubSystemCode(): string {
         return this.GetAPISession("SubSystemCode");
@@ -62,6 +74,7 @@ class APISessionRecord {
 
     public set Modulecode(value: string) {
         this.SetAPISession("Modulecode", value);
+        //this.SetAPISessionAPI("Modulecode", value);
     }
     public get Modulecode(): string {
         return this.GetAPISession("Modulecode");
@@ -69,6 +82,8 @@ class APISessionRecord {
 
     public set UserCode(value: string) {
         this.SetAPISession("UserCode", value);
+        this.SetAPISessionAPI("UserCode", value);
+
     }
     public set Token(value: string) {
         this.SetAPISession("Token", value);
@@ -79,8 +94,9 @@ class APISessionRecord {
     public get Token(): string {
         return this.GetAPISession("Token");
     }
-    public set CompCode(value: string) {
+    public set CompCode(value: string) { 
         this.SetAPISession("CompCode", value);
+        this.SetAPISessionAPI("CompCode", value); 
     }
     public get CompCode(): string {
         return this.GetAPISession("CompCode");
@@ -88,6 +104,7 @@ class APISessionRecord {
 
     public set BranchCode(value: string) {
         this.SetAPISession("BranchCode", value);
+        this.SetAPISessionAPI("BranchCode", value);
     }
     public get BranchCode(): string {
         return this.GetAPISession("BranchCode");
@@ -96,6 +113,7 @@ class APISessionRecord {
 
     public set CurrentYear(value: string) {
         this.SetAPISession("CurrentYear", value);
+        this.SetAPISessionAPI("CurrentYear", value);
     }
     public get CurrentYear(): string {
         return this.GetAPISession("CurrentYear");

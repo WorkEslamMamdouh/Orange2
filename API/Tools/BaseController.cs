@@ -16,6 +16,8 @@ using System.Data.Entity;
 using Inv.DAL.Domain;
 using Inv.API.Tools;
 using Inv.DAL.Repository;
+using Inv.API.Models.CustomEntities;
+using System.Reflection;
 
 namespace Inv.API.Tools
 {
@@ -24,13 +26,26 @@ namespace Inv.API.Tools
         bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
-        protected InvEntities dbNew = UnitOfWork.context(BuildConnectionString());
+        //protected InvEntities dbNew = UnitOfWork.context(BuildConnectionString());
 
         //protected InvEntities db = UnitOfWork.context();
 
+        public static class Config
+        {
+            public static Dictionary<string, string> Application = new Dictionary<string, string>();
+        }
+
+        public static class GlobalData
+        {
+            public static KeyValuePair<string, object> Application { get; set; }
+        }
+
+
         public static string BuildConnectionString()
         {
-            
+
+         
+
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
             EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
 

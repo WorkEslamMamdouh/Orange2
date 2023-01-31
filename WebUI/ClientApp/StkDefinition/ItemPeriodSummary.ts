@@ -8,7 +8,7 @@ namespace ItemPeriodSummary {
     var compcode: number;
     var BranchCode: number;
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.Inventorymove);
+    var SysSession: SystemSession = GetSystemSession(Modules.ItemPeriodSummary);
     var Display_ItemFamily: Array<I_ItemFamily> = new Array<I_ItemFamily>();
     var Display_ItemFamilyFill: Array<I_ItemFamily> = new Array<I_ItemFamily>();
     var Details: Array<I_Item> = new Array<I_Item>();

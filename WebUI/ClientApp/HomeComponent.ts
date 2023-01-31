@@ -48,43 +48,46 @@ namespace HomeComponent {
         let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         let Modulecode = SysSession.CurrentEnvironment.ModuleCode;
         let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
-        Ajax.Callsync({
-            type: "GET",
-            url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
-            data: { year: Number(CurrentYear), compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, Modulecode: Modulecode },
-            success: (d) => {
 
-                if (d == undefined) {
-                    window.open(Url.Action("HomePage", "Login"), "_self");
-                    return;
-                }
-                else {
-                    let result = JSON.parse(d) as UserPrivilege;
+        window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
 
-                    if (result == null) {
-                        MessageBox.Show("Access denied", moduleCode);
-                        return;
-                    }
-                    if (result.Access == true) {
-                        SysSession.CurrentPrivileges = result;
+        //Ajax.Callsync({
+        //    type: "GET",
+        //    url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
+        //    data: { year: Number(CurrentYear), compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, Modulecode: Modulecode },
+        //    success: (d) => {
 
-                        if (newtap == true) {
-                            window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+        //        if (d == undefined) {
+        //            window.open(Url.Action("HomePage", "Login"), "_self");
+        //            return;
+        //        }
+        //        else {
+        //            let result = JSON.parse(d) as UserPrivilege;
 
-                        }
-                        else {
-                            window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
-                        }
+        //            if (result == null) {
+        //                MessageBox.Show("Access denied", moduleCode);
+        //                return;
+        //            }
+        //            if (result.Access == true) {
+        //                SysSession.CurrentPrivileges = result;
 
-                        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, moduleCode, SysSession.CurrentEnvironment.CurrentYear);
+        //                if (newtap == true) {
+        //                    window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
 
-                    }
-                    else {
-                        MessageBox.Show("No Inv1_Privilage", moduleCode);
-                    }
-                }
-            }
-        });
+        //                }
+        //                else {
+        //                    window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
+        //                }
+
+        //                OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, moduleCode, SysSession.CurrentEnvironment.CurrentYear);
+
+        //            }
+        //            else {
+        //                MessageBox.Show("No Inv1_Privilage", moduleCode);
+        //            }
+        //        }
+        //    }
+        //});
     }
 
     export function OpenReportsPopup(moduleCode: string) {
@@ -553,40 +556,41 @@ namespace HomeComponent {
         let Modulecode = SysSession.CurrentEnvironment.ModuleCode;
         let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
         localStorage.setItem("Compcode1", compCode);
+        window.open(Url.Action(controllerName + "Index", controllerName), "_self");
 
-        Ajax.Callsync({
-            url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
-            data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
-            success: (d) => {
-                // ;
-                if (d == undefined) {
-                    window.open(Url.Action("HomePage", "Login"), "_self");
-                    return;
-                }
-                else {
-                    let result = JSON.parse(d) as UserPrivilege;
+        //Ajax.Callsync({
+        //    url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
+        //    data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: Modulecode },
+        //    success: (d) => {
+        //        // ;
+        //        if (d == undefined) {
+        //            window.open(Url.Action("HomePage", "Login"), "_self");
+        //            return;
+        //        }
+        //        else {
+        //            let result = JSON.parse(d) as UserPrivilege;
 
-                    if (result == null) {
-                        MessageBox.Show("Access denied", controllerName);
-                        return;
-                    }
-                    if (result.Access == true) {
+        //            if (result == null) {
+        //                MessageBox.Show("Access denied", controllerName);
+        //                return;
+        //            }
+        //            if (result.Access == true) {
 
-                        $("#spnFav").css("display", "inline-block");
+        //                $("#spnFav").css("display", "inline-block");
 
-                        SysSession.CurrentPrivileges = result;
-                        SysSession.CurrentPrivileges.MODULE_CODE = SysSession.CurrentEnvironment.ModuleCode;
-                        sessionStorage.setItem("MODU_CODE", SysSession.CurrentEnvironment.ModuleCode);
-                        systemEnv.ScreenLanguage = sessionStorage.getItem("temp_lang");
-                        document.cookie = "Privilage=" + JSON.stringify(d).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                        window.open(Url.Action(controllerName + "Index", controllerName), "_self");
-                    }
-                    else {
-                        MessageBox.Show("Access denied", controllerName);
-                    }
-                }
-            }
-        });
+        //                SysSession.CurrentPrivileges = result;
+        //                SysSession.CurrentPrivileges.MODULE_CODE = SysSession.CurrentEnvironment.ModuleCode;
+        //                sessionStorage.setItem("MODU_CODE", SysSession.CurrentEnvironment.ModuleCode);
+        //                systemEnv.ScreenLanguage = sessionStorage.getItem("temp_lang");
+        //                document.cookie = "Privilage=" + JSON.stringify(d).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+        //                window.open(Url.Action(controllerName + "Index", controllerName), "_self");
+        //            }
+        //            else {
+        //                MessageBox.Show("Access denied", controllerName);
+        //            }
+        //        }
+        //    }
+        //});
     }
 
     function InitializePages() {

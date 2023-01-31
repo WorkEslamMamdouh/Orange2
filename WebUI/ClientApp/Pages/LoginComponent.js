@@ -73,6 +73,18 @@ var LoginComponent;
         catch (e) {
             localStorage.setItem("OutUesr", "");
         }
+        $.ajax({
+            //url: Url.Action("SetSessionRecordValue", "Session"),
+            url: sys.apiUrl("Session", "SetSessionRecordValue"),
+            data: { propertyName: "CompCode", value: "" },
+            async: false
+        });
+        $.ajax({
+            //url: Url.Action("SetSessionRecordValue", "Session"),
+            url: sys.apiUrl("Session", "SetSessionRecordValue"),
+            data: { propertyName: "ConnectionString", value: "" },
+            async: false
+        });
     }
     LoginComponent.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {
