@@ -847,7 +847,7 @@ namespace AccDefVendor {
             $("#txtIDIssueDate" + i).removeAttr("disabled");
             $("#txtIDExpireDate" + i).removeAttr("disabled");
         }
-
+		$('#Div_ADDRESS :input').removeAttr('disabled')
     }
     function btnAdd_onclick() {
         ShowFlag = false;
@@ -885,7 +885,7 @@ namespace AccDefVendor {
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
         }
-
+		$('#Div_ADDRESS :input').removeAttr('disabled')
 
     }
     function btnsave_onClick() {
@@ -933,46 +933,28 @@ namespace AccDefVendor {
         if (Selecteditem.length == 0) {
             IsNew = true;
         }
-        if (IsNew == true) {
             $('#btnAddDetails').addClass("display_none");
             $('#btnSave').addClass("display_none");
             $('#btnBack').addClass("display_none");
-            //$("#div_ContentData :input").attr("disabled", "true");
             $(".fa-minus-circle").addClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
             $("#btnUpdate").removeAttr("disabled");
-            //$("#drpPaymentType").removeAttr("disabled");
             $("#drp_G_Store").removeAttr("disabled");
-            txt_disabled();
-            $("#Div_control").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
-            $("#id_ReportGrid").removeClass("disabledDiv");
-
+		$("#id_ReportGrid").removeClass("disabledDiv");
+		$('#Div_ADDRESS :input').attr('disabled', 'disabled');
+            txt_disabled();
+        if (IsNew == true) {							 
+            $("#btnUpdate").removeClass("display_none"); 
+            $("#Div_control").addClass("display_none");
         }
         else {
-
-
-            $('#btnAddDetails').addClass("display_none");
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-            //$("#div_ContentData :input").attr("disabled", "true");
-            $(".fa-minus-circle").addClass("display_none");
-            $("#btnUpdate").removeClass("display_none");
-            $("#btnUpdate").removeAttr("disabled");
-            //$("#drpPaymentType").removeAttr("disabled");
-            $("#drp_G_Store").removeAttr("disabled");
-            txt_disabled();
-            //DriverDoubleClick();
+            $("#btnUpdate").removeClass("display_none");    
             if (Update_claenData != 1) {
-
                 back_Details();
             }
-            Update_claenData = 0;
+            Update_claenData = 0;							
+		}
 
-            $("#id_div_Add").removeClass("disabledDiv");
-            $("#id_ReportGrid").removeClass("disabledDiv");
-
-        }
 
     }
     function back_Details() {
@@ -1317,7 +1299,8 @@ namespace AccDefVendor {
         DocumentActions.AssignToModel(Model);//Insert Update
 
         if (chkActive.checked) { Model.Isactive = true; }
-        else { Model.Isactive = false; }
+		else { Model.Isactive = false; }
+
         Model.CompCode = Number(compcode);
         Model.CatID = $('#txt_Category').val();
         Model.VATType = $('#txt_tax').val();
@@ -1463,7 +1446,8 @@ namespace AccDefVendor {
                     Display();
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
-                    Save_Succ_But();
+					Save_Succ_But();
+					$('#Div_ADDRESS :input').attr('disabled', 'disabled');	 
 
                 } else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);
