@@ -267,9 +267,7 @@ var AccTrCustomerAdjust;
             IsdebitNew = txt_Movement_typeNew.value == "true" ? true : false;
             Display_Settlement_typeNew();
         }
-        else {
-            $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
-        }
+        $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
     }
     function txt_Amount_onchange() {
         //if (txt_Type_of_tax.value == "Null") { txt_Type_of_tax.value = "0"; }
@@ -632,7 +630,6 @@ var AccTrCustomerAdjust;
                 if (result.IsSuccess) {
                     Details_AjustmentTypeNew = result.Response;
                     debugger;
-                    $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
                     for (var i = 0; i < Details_AjustmentTypeNew.length; i++) {
                         $('#txt_Settlement_typeNew').append('<option value="' + Details_AjustmentTypeNew[i].AdustmentTypeID + '">' + (lang == "ar" ? Details_AjustmentTypeNew[i].Adj_DescA : Details_AjustmentTypeNew[i].Adj_DescE) + '</option>');
                     }

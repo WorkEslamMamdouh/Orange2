@@ -7,7 +7,7 @@ var AgingCust;
     var BranchCode;
     var AccountType = 1;
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AgingVend);
+    var SysSession = GetSystemSession(Modules.AgingCust);
     //------------------------------------------------------------
     var Details_Type_D_Category = new Array();
     var Details_CustomerGroup = new Array();

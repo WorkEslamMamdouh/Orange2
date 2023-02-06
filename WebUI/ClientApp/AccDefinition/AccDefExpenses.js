@@ -16,7 +16,7 @@ var AccDefExpenses;
     var btnEdit;
     var sys = new SystemTools();
     //var sys: _shared = new _shared();
-    var SysSession = GetSystemSession(Modules.AccDefReceipts);
+    var SysSession = GetSystemSession(Modules.AccDefExpenses);
     var Model = new A_RecPay_D_Accounts();
     var CountGrid = 0;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;

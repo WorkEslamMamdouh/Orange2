@@ -365,11 +365,11 @@ namespace Inv.API.Controllers
                     if (Operation.OperationID != 0 && Operation.OperationID != null)
                     {
 
-                        IQ_GetOperation chackVendorChang = dbNew.IQ_GetOperation.Where(s => s.OperationID == Operation.OperationID).FirstOrDefault();
+                        IQ_GetOperation chackVendorChang = db.IQ_GetOperation.Where(s => s.OperationID == Operation.OperationID).FirstOrDefault();
                         if (chackVendorChang.VendorID != Operation.VendorID)
                         {
 
-                            A_Pay_D_Vendor VendorObj = dbNew.A_Pay_D_Vendor.Where(s => s.VendorID == Operation.VendorID).FirstOrDefault();
+                            A_Pay_D_Vendor VendorObj = db.A_Pay_D_Vendor.Where(s => s.VendorID == Operation.VendorID).FirstOrDefault();
 
                             if (VendorObj.OperationSer == null || VendorObj.OperationSer == "")
                             {
