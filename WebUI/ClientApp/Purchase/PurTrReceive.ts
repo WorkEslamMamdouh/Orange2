@@ -1933,7 +1933,7 @@ namespace PurTrReceive {
             $("#ddlItem" + cnt).prop("value", itemcode.toString());
 
             $("#txtQuantity" + cnt).prop("value", ((ItemDetails[cnt].RecQty == null || undefined) ? 0 : ItemDetails[cnt].RecQty));
-
+            debugger
             $("#txtQuantityReturnValue" + cnt).prop("value", ((ItemDetails[cnt].TotRetQty == null || undefined) ? 0 : ItemDetails[cnt].TotRetQty));
 
             $("#txtPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPrice == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPrice.RoundToSt(2));
@@ -1942,7 +1942,7 @@ namespace PurTrReceive {
             $("#txtAddons" + cnt).prop("value", (ItemDetails[cnt].UnitAddCost == null || undefined) ? 0 : ItemDetails[cnt].UnitAddCost.RoundToSt(2));
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
 
-            debugger
+            
 
             $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2));
             $("#txtNetUnitPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
