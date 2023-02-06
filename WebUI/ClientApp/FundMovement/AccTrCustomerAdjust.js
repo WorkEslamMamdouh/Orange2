@@ -267,6 +267,7 @@ var AccTrCustomerAdjust;
             IsdebitNew = txt_Movement_typeNew.value == "true" ? true : false;
             Display_Settlement_typeNew();
         }
+        $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
     }
     function txt_Amount_onchange() {
         //if (txt_Type_of_tax.value == "Null") { txt_Type_of_tax.value = "0"; }
@@ -295,6 +296,7 @@ var AccTrCustomerAdjust;
         IsNew = true;
         EnableControls();
         removedisabled();
+        //txt_Settlement_typeNew.setAttribute("disabled", "disabled");
         $("#id_div_Add").attr("disabled", "disabled").off('click');
         $("#id_ReportGrid").attr("disabled", "disabled").off('click');
         $("#id_div_Add").addClass("disabledDiv");
@@ -447,7 +449,11 @@ var AccTrCustomerAdjust;
             Errorinput(txt_Movement_typeNew);
             return Valid = 1;
         }
-        // if (txt_ID_CustmNew.selectedIndex == 0) {
+        if (txt_Settlement_typeNew.selectedIndex == 0) {
+            DisplayMassage("يجب اختيار نوع التسويه ", "The type of settlement must be chosen", MessageType.Worning);
+            Errorinput(txt_Settlement_typeNew);
+            return Valid = 1;
+        } // if (txt_ID_CustmNew.selectedIndex == 0) {
         //    DisplayMassage("يجب اختيار العميل ", "The customer must be chosen", MessageType.Worning);
         //    Errorinput(txt_ID_CustmNew);
         //    return Valid = 1;
