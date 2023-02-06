@@ -326,8 +326,7 @@ namespace AccTrCustomerAdjust {
             IsdebitNew = txt_Movement_typeNew.value == "true" ? true : false;
             Display_Settlement_typeNew();
         } 
-            $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');else {
-        }
+            $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>'); 
     }
     function txt_Amount_onchange() {
         //if (txt_Type_of_tax.value == "Null") { txt_Type_of_tax.value = "0"; }
