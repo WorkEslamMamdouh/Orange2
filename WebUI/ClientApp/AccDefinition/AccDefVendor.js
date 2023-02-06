@@ -763,6 +763,7 @@ var AccDefVendor;
             $("#txtIDIssueDate" + i).removeAttr("disabled");
             $("#txtIDExpireDate" + i).removeAttr("disabled");
         }
+        $('#Div_ADDRESS :input').removeAttr('disabled');
     }
     function btnAdd_onclick() {
         ShowFlag = false;
@@ -791,6 +792,7 @@ var AccDefVendor;
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
         }
+        $('#Div_ADDRESS :input').removeAttr('disabled');
     }
     function btnsave_onClick() {
         loading('btnSave');
@@ -827,39 +829,26 @@ var AccDefVendor;
         if (Selecteditem.length == 0) {
             IsNew = true;
         }
+        $('#btnAddDetails').addClass("display_none");
+        $('#btnSave').addClass("display_none");
+        $('#btnBack').addClass("display_none");
+        $(".fa-minus-circle").addClass("display_none");
+        $("#btnUpdate").removeAttr("disabled");
+        $("#drp_G_Store").removeAttr("disabled");
+        $("#id_div_Add").removeClass("disabledDiv");
+        $("#id_ReportGrid").removeClass("disabledDiv");
+        $('#Div_ADDRESS :input').attr('disabled', 'disabled');
+        txt_disabled();
         if (IsNew == true) {
-            $('#btnAddDetails').addClass("display_none");
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-            //$("#div_ContentData :input").attr("disabled", "true");
-            $(".fa-minus-circle").addClass("display_none");
             $("#btnUpdate").removeClass("display_none");
-            $("#btnUpdate").removeAttr("disabled");
-            //$("#drpPaymentType").removeAttr("disabled");
-            $("#drp_G_Store").removeAttr("disabled");
-            txt_disabled();
             $("#Div_control").addClass("display_none");
-            $("#id_div_Add").removeClass("disabledDiv");
-            $("#id_ReportGrid").removeClass("disabledDiv");
         }
         else {
-            $('#btnAddDetails').addClass("display_none");
-            $('#btnSave').addClass("display_none");
-            $('#btnBack').addClass("display_none");
-            //$("#div_ContentData :input").attr("disabled", "true");
-            $(".fa-minus-circle").addClass("display_none");
             $("#btnUpdate").removeClass("display_none");
-            $("#btnUpdate").removeAttr("disabled");
-            //$("#drpPaymentType").removeAttr("disabled");
-            $("#drp_G_Store").removeAttr("disabled");
-            txt_disabled();
-            //DriverDoubleClick();
             if (Update_claenData != 1) {
                 back_Details();
             }
             Update_claenData = 0;
-            $("#id_div_Add").removeClass("disabledDiv");
-            $("#id_ReportGrid").removeClass("disabledDiv");
         }
     }
     function back_Details() {
@@ -1307,6 +1296,7 @@ var AccDefVendor;
                     showAfterInsertOrUpdate = true;
                     DriverDoubleClick();
                     Save_Succ_But();
+                    $('#Div_ADDRESS :input').attr('disabled', 'disabled');
                 }
                 else {
                     DisplayMassage("خطأ", "Error", MessageType.Error);

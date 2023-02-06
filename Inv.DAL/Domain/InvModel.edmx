@@ -2922,6 +2922,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           </Key>
           <Property Name="OperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TrNo" Type="int" />
+          <Property Name="Trtype" Type="int" />
           <Property Name="RefNO" Type="nvarchar" MaxLength="50" />
           <Property Name="TrDate" Type="smalldatetime" />
           <Property Name="TrDateH" Type="nvarchar" MaxLength="20" />
@@ -4671,6 +4672,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperation' does not have a pr
           <Property Name="Close_TotalQtyScrap" Type="numeric" Precision="18" Scale="2" />
           <Property Name="PurVoucherNo" Type="int" />
           <Property Name="IsPurPosted" Type="bit" />
+          <Property Name="Trtype" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperationCharges' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8946,7 +8948,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetOperation].[Close_TotalQtySold] AS [Close_TotalQtySold], 
     [IQ_GetOperation].[Close_TotalQtyScrap] AS [Close_TotalQtyScrap], 
     [IQ_GetOperation].[PurVoucherNo] AS [PurVoucherNo], 
-    [IQ_GetOperation].[IsPurPosted] AS [IsPurPosted]
+    [IQ_GetOperation].[IsPurPosted] AS [IsPurPosted], 
+    [IQ_GetOperation].[Trtype] AS [Trtype]
     FROM [dbo].[IQ_GetOperation] AS [IQ_GetOperation]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetOperationCharges" EntityType="Self.IQ_GetOperationCharges" store:Type="Views" store:Schema="dbo">
@@ -13644,6 +13647,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Close_TotalQtyScrap" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsPurPosted" Type="Boolean" />
           <Property Name="PurVoucherNo" Type="Int32" />
+          <Property Name="Trtype" Type="Int32" />
         </EntityType>
         <EntityType Name="I_TR_OperationDeposit">
           <Key>
@@ -13761,6 +13765,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Close_TotalQtyScrap" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PurVoucherNo" Type="Int32" />
           <Property Name="IsPurPosted" Type="Boolean" />
+          <Property Name="Trtype" Type="Int32" />
         </EntityType>
         <EntityType Name="IQ_GetOperationCharges">
           <Key>
@@ -23971,6 +23976,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_TR_Operation">
             <EntityTypeMapping TypeName="InvModel.I_TR_Operation">
               <MappingFragment StoreEntitySet="I_TR_Operation">
+                <ScalarProperty Name="Trtype" ColumnName="Trtype" />
                 <ScalarProperty Name="PurVoucherNo" ColumnName="PurVoucherNo" />
                 <ScalarProperty Name="IsPurPosted" ColumnName="IsPurPosted" />
                 <ScalarProperty Name="Close_TotalQtyScrap" ColumnName="Close_TotalQtyScrap" />
@@ -24078,6 +24084,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetOperation">
             <EntityTypeMapping TypeName="InvModel.IQ_GetOperation">
               <MappingFragment StoreEntitySet="IQ_GetOperation">
+                <ScalarProperty Name="Trtype" ColumnName="Trtype" />
                 <ScalarProperty Name="IsPurPosted" ColumnName="IsPurPosted" />
                 <ScalarProperty Name="PurVoucherNo" ColumnName="PurVoucherNo" />
                 <ScalarProperty Name="Close_TotalQtyScrap" ColumnName="Close_TotalQtyScrap" />

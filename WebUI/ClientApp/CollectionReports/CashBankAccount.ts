@@ -9,7 +9,7 @@ namespace CashBankAccount {
     var BranchCode: Number;
     var AccountType: Number = 1;
     var sys: SystemTools = new SystemTools(); 
-    var SysSession: SystemSession = GetSystemSession(Modules.CashBoxAccount);
+    var SysSession: SystemSession = GetSystemSession(Modules.CashBankAccount);
     //------------------------------------------------------------
     var Details_ACCOUNT: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
      

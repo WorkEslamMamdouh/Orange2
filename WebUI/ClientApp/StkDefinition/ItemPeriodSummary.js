@@ -6,7 +6,7 @@ var ItemPeriodSummary;
     var compcode;
     var BranchCode;
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.Inventorymove);
+    var SysSession = GetSystemSession(Modules.ItemPeriodSummary);
     var Display_ItemFamily = new Array();
     var Display_ItemFamilyFill = new Array();
     var Details = new Array();

@@ -11,7 +11,7 @@ namespace AgingCust {
     var BranchCode: Number;
     var AccountType: Number = 1; 
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AgingVend);
+    var SysSession: SystemSession = GetSystemSession(Modules.AgingCust);
     //------------------------------------------------------------
     var Details_Type_D_Category: Array<A_RecPay_D_Category> = new Array<A_RecPay_D_Category>();
     var Details_CustomerGroup: Array<A_RecPay_D_Group> = new Array<A_RecPay_D_Group>();
