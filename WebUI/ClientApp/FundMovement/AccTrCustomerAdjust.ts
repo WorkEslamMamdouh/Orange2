@@ -325,8 +325,8 @@ namespace AccTrCustomerAdjust {
         if (txt_Movement_typeNew.value != "Null") {
             IsdebitNew = txt_Movement_typeNew.value == "true" ? true : false;
             Display_Settlement_typeNew();
-        } else {
-            $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
+        } 
+            $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');else {
         }
     }
     function txt_Amount_onchange() {
@@ -777,8 +777,7 @@ namespace AccTrCustomerAdjust {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     Details_AjustmentTypeNew = result.Response as Array<A_RecPay_D_AjustmentType>;
-                    debugger
-                    $('#txt_Settlement_typeNew').append('<option value="Null">' + (lang == "ar" ? "اختر" : "Choose") + '</option>');
+                    debugger																												   
                     for (var i = 0; i < Details_AjustmentTypeNew.length; i++) {
 
                         $('#txt_Settlement_typeNew').append('<option value="' + Details_AjustmentTypeNew[i].AdustmentTypeID + '">' + (lang == "ar" ? Details_AjustmentTypeNew[i].Adj_DescA : Details_AjustmentTypeNew[i].Adj_DescE) + '</option>');
