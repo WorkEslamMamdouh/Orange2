@@ -851,7 +851,7 @@ namespace AccTrReceiptNote {
             return false;
         }
 
-        if (txtCashTypeNew.value != "0" && $('#txt_BankName').val() == '') {
+        if (txtCashTypeNew.value != "0" && $('#txt_BankName').val().trim() == '') {
             DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
             Errorinput($('#txt_BankName'));
             return false;
