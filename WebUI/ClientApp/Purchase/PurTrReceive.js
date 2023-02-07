@@ -54,6 +54,7 @@ var PurTrReceive;
     var divMasterGrid = new JsGrid();
     //Textboxes
     var txtNotes;
+    var VoucherNo;
     var txtFromDate;
     var txtToDate;
     var txtDateHeader;
@@ -186,6 +187,7 @@ var PurTrReceive;
         //textboxes
         txtFromDate = document.getElementById("txtFromDate");
         txtToDate = document.getElementById("txtToDate");
+        VoucherNo = document.getElementById("VoucherNo");
         txtNotes = document.getElementById("txtNotes");
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtDateHeader = document.getElementById("txtDateHeader");
@@ -461,6 +463,7 @@ var PurTrReceive;
         $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         txtNotes.disabled = true;
+        VoucherNo.disabled = true;
         ddlCashBoxH.disabled = true;
         txtDateHeader.disabled = true;
         txtPurOrderNum.disabled = true;
@@ -469,6 +472,7 @@ var PurTrReceive;
         btnPrintInvoicePrice.disabled = false;
     }
     function DataHeader() {
+        debugger;
         if (RetrivedPurchaseModel.length > 0) {
             $("#txtDateHeader").val(RetrivedPurchaseModel[0].TrDate.toString());
             globalVendorID = RetrivedPurchaseModel[0].VendorID;
@@ -478,6 +482,8 @@ var PurTrReceive;
             lblInvoiceNumber.innerText = RetrivedPurchaseModel[0].TrNo.toString();
             ddlTaxTypeHeader.value = RetrivedPurchaseModel[0].VATType.toString();
             txtNotes.value = RetrivedPurchaseModel[0].Remarks.toString();
+            debugger;
+            VoucherNo.value = RetrivedPurchaseModel[0].VoucherNo.toString();
             ddlReciveTypeHeader.value = RetrivedPurchaseModel[0].PurRecType.toString();
             VendorRecieptID.value = RetrivedPurchaseModel[0].VendorInvNo.toString();
             txtDateHeader.value = DateFormat(RetrivedPurchaseModel[0].TrDate);
@@ -646,6 +652,7 @@ var PurTrReceive;
         if (compcode == 4) {
             ddlSalesmanHeader.value = '21';
         }
+        VoucherNo.disabled = true;
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -657,6 +664,7 @@ var PurTrReceive;
         $("#txtUpdatedAt").prop("value", DateTimeFormat(Date().toString()));
         $("#txtUpdatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         txtPurOrderNum.disabled = false;
+        VoucherNo.disabled = true;
     }
     function btnPurOrderSearch_onclick() {
         var sys = new SystemTools();
@@ -1119,6 +1127,7 @@ var PurTrReceive;
             txtPurOrderNum.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].TrNo.toString();
             ddlTaxTypeHeader.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VATType.toString();
             txtNotes.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].Remarks.toString();
+            VoucherNo.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VoucherNo.toString();
             if (PurOrderDetailModel.IQ_GetPurchaseOrder[0].IsCash == true) {
                 ddlIsCash.value = '1';
                 $('#ddlCashBoxH').attr('disabled', 'disabled');
@@ -2141,6 +2150,7 @@ var PurTrReceive;
         lblInvoiceNumber.innerText = "";
         ddlTaxTypeHeader.value = "null";
         txtNotes.value = "";
+        VoucherNo.value = "";
         $("#ddlIsCash").prop("value", "0");
         $('#ddlCashBoxH').removeAttr('disabled');
         ddlReciveTypeHeader.value = "null";
@@ -2374,6 +2384,7 @@ var PurTrReceive;
             $("#btn_minus1" + i).removeAttr("disabled");
         }
         txtNotes.disabled = true;
+        VoucherNo.disabled = true;
         ddlCashBoxH.disabled = true;
         txtDateHeader.disabled = true;
         txtPurOrderNum.disabled = true;
@@ -2411,6 +2422,7 @@ var PurTrReceive;
         ReceiveModel.CurrencyRate = Number(txtCurrencyRate.value);
         ReceiveModel.TotalFC = Number($("#txtLocalTotalFooter").val());
         ReceiveModel.Remarks = txtNotes.value;
+        ReceiveModel.VoucherNo = Number(VoucherNo.value);
         if (ddlIsCash.value == '1') {
             ReceiveModel.CashBoxID = Number(ddlCashBoxH.value);
             ReceiveModel.IsCash = true;

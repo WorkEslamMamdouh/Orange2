@@ -287,10 +287,10 @@ var TranPosting;
                             debitTot += GetLnkVoucherDetail[i].DEBIT;
                             cerditTot += GetLnkVoucherDetail[i].CREDIT;
                         }
-                        diffTot = debitTot - cerditTot;
-                        txtDebit.value = debitTot.RoundToSt(2).toLocaleString();
-                        txtCedit.value = cerditTot.RoundToSt(2).toLocaleString();
-                        txtDiff.value = diffTot.RoundToSt(2).toLocaleString();
+                        diffTot = debitTot.RoundToNum(2) - cerditTot.RoundToNum(2);
+                        txtDebit.value = debitTot.RoundToSt(2);
+                        txtCedit.value = cerditTot.RoundToSt(2);
+                        txtDiff.value = diffTot.RoundToSt(2);
                         var brID = Number(ddlBranch.value);
                         var txtBranch = BranchDetails.filter(function (s) { return s.BRA_CODE == brID; });
                         if (lang == "ar")

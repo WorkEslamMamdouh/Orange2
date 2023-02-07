@@ -66,6 +66,7 @@ namespace Processes {
     var txtDateHeader: HTMLInputElement;
     var txtNationality: HTMLSelectElement;
     var txt_tax: HTMLSelectElement;
+    var ddlTrtype: HTMLSelectElement;
     //buttons 
     var btnclosingprocessing: HTMLButtonElement;
     var btnPresent: HTMLButtonElement;
@@ -253,6 +254,7 @@ namespace Processes {
         ddlVendorMaster = document.getElementById("ddlVendorMaster") as HTMLSelectElement;
         txtNationality = document.getElementById("txtNationality") as HTMLSelectElement;
         txt_tax = document.getElementById("txt_tax") as HTMLSelectElement;
+        ddlTrtype = document.getElementById("ddlTrtype") as HTMLSelectElement;
 
         id_divGridDetails = document.getElementById("divMasterGridiv") as HTMLDivElement;
 
@@ -844,6 +846,18 @@ namespace Processes {
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
+            {
+                title: 'نوع الارسالية', css: "ColumPadding", name: "Trtype", width: "13%",
+                itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    if (item.Trtype == 0) {
+                        txt.innerHTML = "عموله";
+                    } else {
+                        txt.innerHTML = "مشتراه";
+                    }
+                    return txt;
+                }
+            }, 
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
          
             {
@@ -861,7 +875,8 @@ namespace Processes {
                     txt.innerHTML = DateFormat(item.ClearanceDate);
                     return txt;
                 }
-            }, 
+            },
+        
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -947,6 +962,7 @@ namespace Processes {
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
         $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
         $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+        $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
         if (Selected_Data[0].SalesmanId != 0) {
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
         }
@@ -2935,6 +2951,7 @@ namespace Processes {
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -2998,6 +3015,7 @@ namespace Processes {
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -3656,6 +3674,7 @@ namespace Processes {
         $("#txtPortName").attr("disabled", "disabled");
         $("#ddlVendor").attr("disabled", "disabled");
         $("#txtNationality").attr("disabled", "disabled");
+        $("#ddlTrtype").attr("disabled", "disabled");
         $("#txtClearanceDate").attr("disabled", "disabled");
         $("#txtPaperPurchaseValue").attr("disabled", "disabled");
         $("#txtCustomNo").attr("disabled", "disabled");
@@ -4119,6 +4138,7 @@ namespace Processes {
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
@@ -4153,6 +4173,7 @@ namespace Processes {
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
@@ -4262,6 +4283,7 @@ namespace Processes {
                 }
                 $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
                 $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
 
                 $("#open_Trill").attr("disabled", "disabled").off('click');
@@ -4661,6 +4683,7 @@ namespace Processes {
             Status = Selected_Data[0].Status;
             $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
             $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+            $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
             $('#div_Master').removeClass('disabledDiv');
             $("#div_Master").attr("disabled", "disabled").off('click');
@@ -4863,6 +4886,7 @@ namespace Processes {
 
 
 
+        $('#ddlTrtype').val('0');
         $('#txtClose_TotalSalesCash').val('0');
         $('#txtNetsales').val('0');
         $('#txtClose_TotalExpenses').val('0');
@@ -4884,6 +4908,7 @@ namespace Processes {
 
         $('#ddlVendor option[value=null]').prop('selected', 'selected').change();
         $('#txtNationality option[value=null]').prop('selected', 'selected').change();
+        $('#ddlTrtype option[value=null]').prop('selected', 'selected').change();
         $('#ddlSalesman option[value=null]').prop('selected', 'selected').change();
 
         $('#txt_tax').val('null');

@@ -4941,6 +4941,7 @@ class I_TR_Operation extends SecurityClass {
         this.TrDateH = "";
         this.TruckNo = "";
         this.PortName = "";
+        this.Trtype = 0;
         this.PaperPurchaseValue = 0;
         this.NationalityID = 0;
         this.VendorID = 0;
@@ -5004,6 +5005,7 @@ class I_TR_Operation extends SecurityClass {
     public TrDateH: string;
     public TruckNo: string;
     public PortName: string;
+    public Trtype: number;
     public PaperPurchaseValue: number;
     public NationalityID: number;
     public VendorID: number;
@@ -5233,6 +5235,7 @@ class IQ_GetOperation extends SecurityClass {
         this.TrDateH = "";
         this.TruckNo = "";
         this.PortName = "";
+        this.Trtype = 0;
         this.PaperPurchaseValue = 0;
         this.NationalityID = 0;
         this.VendorID = 0;
@@ -5310,6 +5313,7 @@ class IQ_GetOperation extends SecurityClass {
     public TrDateH: string;
     public TruckNo: string;
     public PortName: string;
+    public Trtype: number;
     public PaperPurchaseValue: number;
     public NationalityID: number;
     public VendorID: number;
