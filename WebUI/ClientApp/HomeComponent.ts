@@ -32,9 +32,9 @@ namespace HomeComponent {
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
     setTimeout(function () {
         $('#Uesr_out').removeClass('animate__backInDown');
-        $('#Uesr_out').removeClass('animate__animated'); 
-    $('.mes').removeClass('display_none'); 
-        
+        $('#Uesr_out').removeClass('animate__animated');
+        $('.mes').removeClass('display_none');
+
     }, 1000);
 
     export function OpenPage(moduleCode: string) {
@@ -49,7 +49,15 @@ namespace HomeComponent {
         let Modulecode = SysSession.CurrentEnvironment.ModuleCode;
         let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
 
-        window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+        if (newtap == true) {
+            window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+
+        }
+        else {
+            window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
+        }
+
+        //window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
 
         //Ajax.Callsync({
         //    type: "GET",
