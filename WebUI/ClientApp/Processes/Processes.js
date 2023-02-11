@@ -61,6 +61,7 @@ var Processes;
     var txtDateHeader;
     var txtNationality;
     var txt_tax;
+    var ddlTrtype;
     //buttons 
     var btnclosingprocessing;
     var btnPresent;
@@ -233,6 +234,7 @@ var Processes;
         ddlVendorMaster = document.getElementById("ddlVendorMaster");
         txtNationality = document.getElementById("txtNationality");
         txt_tax = document.getElementById("txt_tax");
+        ddlTrtype = document.getElementById("ddlTrtype");
         id_divGridDetails = document.getElementById("divMasterGridiv");
         //textboxes
         txtFromDate = document.getElementById("txtFromDate");
@@ -721,6 +723,19 @@ var Processes;
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
+            {
+                title: 'نوع الارسالية', css: "ColumPadding", name: "Trtype", width: "13%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    if (item.Trtype == 0) {
+                        txt.innerHTML = "عموله";
+                    }
+                    else {
+                        txt.innerHTML = "مشتراه";
+                    }
+                    return txt;
+                }
+            },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
@@ -804,6 +819,7 @@ var Processes;
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
         $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
         $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+        $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
         if (Selected_Data[0].SalesmanId != 0) {
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
         }
@@ -2216,6 +2232,7 @@ var Processes;
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -2276,6 +2293,7 @@ var Processes;
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -2807,6 +2825,7 @@ var Processes;
         $("#txtPortName").attr("disabled", "disabled");
         $("#ddlVendor").attr("disabled", "disabled");
         $("#txtNationality").attr("disabled", "disabled");
+        $("#ddlTrtype").attr("disabled", "disabled");
         $("#txtClearanceDate").attr("disabled", "disabled");
         $("#txtPaperPurchaseValue").attr("disabled", "disabled");
         $("#txtCustomNo").attr("disabled", "disabled");
@@ -3154,6 +3173,7 @@ var Processes;
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
@@ -3180,6 +3200,7 @@ var Processes;
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
@@ -3270,6 +3291,7 @@ var Processes;
                 }
                 $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
                 $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
@@ -3582,6 +3604,7 @@ var Processes;
             Status = Selected_Data[0].Status;
             $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
             $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+            $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
             $('#div_Master').removeClass('disabledDiv');
             $("#div_Master").attr("disabled", "disabled").off('click');
@@ -3729,6 +3752,7 @@ var Processes;
         $('#txtPolice_num').val('');
         $('#txtGoods_Desc').val('');
         $('#txtRemark').val('');
+        $('#ddlTrtype').val('0');
         $('#txtClose_TotalSalesCash').val('0');
         $('#txtNetsales').val('0');
         $('#txtClose_TotalExpenses').val('0');
@@ -3746,6 +3770,7 @@ var Processes;
         $('#txtClose_TrDate').val(GetDate());
         $('#ddlVendor option[value=null]').prop('selected', 'selected').change();
         $('#txtNationality option[value=null]').prop('selected', 'selected').change();
+        $('#ddlTrtype option[value=null]').prop('selected', 'selected').change();
         $('#ddlSalesman option[value=null]').prop('selected', 'selected').change();
         $('#txt_tax').val('null');
         $('#txtVatPrc').val('');

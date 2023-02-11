@@ -41,7 +41,13 @@ var HomeComponent;
         var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         var Modulecode = SysSession.CurrentEnvironment.ModuleCode;
         var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
-        window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+        if (newtap == true) {
+            window.open(Url.Action(moduleCode + "Index", "Home"), "_blank");
+        }
+        else {
+            window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
+        }
+        //window.open(Url.Action(moduleCode + "Index", "Home"), "_self");
         //Ajax.Callsync({
         //    type: "GET",
         //    url: sys.apiUrl("SystemTools", "GetUserPrivilage"),

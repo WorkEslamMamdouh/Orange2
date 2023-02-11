@@ -319,15 +319,15 @@ namespace TranPosting {
 						VoucherDetailGrid.DataSource = new Array<GQ_GetLnkVoucherDetail>();
 						GetLnkVoucherDetail = result.Response as Array<GQ_GetLnkVoucherDetail>;
 						VoucherDetailGrid.DataSource = GetLnkVoucherDetail;
-						for (let i = 0; i < GetLnkVoucherDetail.length; i++) {
-							debitTot += GetLnkVoucherDetail[i].DEBIT;
-							cerditTot += GetLnkVoucherDetail[i].CREDIT;
-						}
-						diffTot = debitTot - cerditTot;
+                        for (let i = 0; i < GetLnkVoucherDetail.length; i++) {
+                            debitTot += GetLnkVoucherDetail[i].DEBIT;
+                            cerditTot += GetLnkVoucherDetail[i].CREDIT;
+                        }
+                        diffTot = debitTot.RoundToNum(2) - cerditTot.RoundToNum(2);
 
-						txtDebit.value = debitTot.RoundToSt(2).toLocaleString();
-						txtCedit.value = cerditTot.RoundToSt(2).toLocaleString();
-						txtDiff.value = diffTot.RoundToSt(2).toLocaleString();
+                        txtDebit.value = debitTot.RoundToSt(2);
+                        txtCedit.value = cerditTot.RoundToSt(2);
+                        txtDiff.value = diffTot.RoundToSt(2);
 						var brID = Number(ddlBranch.value);
 						var txtBranch = BranchDetails.filter(s => s.BRA_CODE == brID);
 						if (lang == "ar")
