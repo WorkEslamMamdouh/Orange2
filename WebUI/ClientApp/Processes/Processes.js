@@ -1998,6 +1998,7 @@ var Processes;
         Calculation_Close();
     }
     function Calculation_Close() {
+        debugger;
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
         var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val()) + Number(txtClose_Adjustment.value))));
         $('#txtNetsales').val(Netsales);

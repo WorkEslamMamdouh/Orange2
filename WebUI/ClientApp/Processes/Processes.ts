@@ -2665,24 +2665,27 @@ namespace Processes {
         Calculation_Close()
     }
     function Calculation_Close() {
+        debugger
+       
+       
+            //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+            var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val()) + Number(txtClose_Adjustment.value))))
+            $('#txtNetsales').val(Netsales);
 
-        //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val()) + Number(txtClose_Adjustment.value))))
-        $('#txtNetsales').val(Netsales);
+            //نسبة العمولة 
 
-        //نسبة العمولة 
+            var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+            $('#txtClose_CompanyCommitionPrc').val(prc);
 
-        var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
-        $('#txtClose_CompanyCommitionPrc').val(prc);
+            //صافي الارباح = عمولة الشركة - عمولة البائع
+            var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+            $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
 
-        //صافي الارباح = عمولة الشركة - عمولة البائع
-        var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
-        $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
-
-        //قيمة الشراء = صافي المبيعات - عمولة الشركة
-        var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
-        purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
-        $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+            //قيمة الشراء = صافي المبيعات - عمولة الشركة
+            var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+            purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+            $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+ 
 
     }
     function Calculation_Close1() {
