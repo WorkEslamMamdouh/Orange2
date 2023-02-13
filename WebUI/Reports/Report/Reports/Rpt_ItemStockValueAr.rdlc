@@ -118,7 +118,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ق.مبيعات</Value>
+                              <Value>ق.المنصرف</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -152,7 +152,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ك.مبيعات</Value>
+                              <Value>ك.المنصرف</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -186,7 +186,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ق.مشتريات</Value>
+                              <Value>ق.الوارد</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -220,7 +220,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ك.مشتريات </Value>
+                              <Value>ك.الوارد</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -806,7 +806,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=sum(Fields!TotSoldQty.Value)</Value>
+                              <Value>=Sum(Fields!TotSoldCost.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -872,7 +872,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=sum(Fields!TotRecQty.Value)</Value>
+                              <Value>=Sum(Fields!TotRecCost.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>

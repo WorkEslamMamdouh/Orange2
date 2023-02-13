@@ -275,7 +275,7 @@ namespace SlsTrSalesManagerNew {
 
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
-        
+
 
         //GetLastPrice(3236)
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
@@ -459,18 +459,18 @@ namespace SlsTrSalesManagerNew {
                     lblInvoiceNumber.value = '';
                     ddlSalesPerson.value = ddlSalesman.value;
                     $("#txtPriceshow").val(PriceInvDetails[0].TrNo);
-                    $("#txtPriceshowID").val(PriceInvDetails[0].TrNo); 
+                    $("#txtPriceshowID").val(PriceInvDetails[0].TrNo);
                     $("#btnpriceSrch").removeAttr("disabled");
 
                 }
             }
         });
 
-        
+
 
     }
-    function displayPriceshow(PriceInvDetails:  Array<IQ_GetSlsInvoiceStatisticVer2> ) {
-       
+    function displayPriceshow(PriceInvDetails: Array<IQ_GetSlsInvoiceStatisticVer2>) {
+
 
         Selecteditem[0] = PriceInvDetails[0];
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -585,24 +585,24 @@ namespace SlsTrSalesManagerNew {
                     SlsInvoiceItemsDetails = result.Response as Array<IQ_GetSlsInvoiceItemVer2>;
                     SlsInvoiceItemsDetails = SlsInvoiceItemsDetails.sort(dynamicSort("Serial"));
                     debugger
-                    CountGrid = 0;  
+                    CountGrid = 0;
                     CountItems = 0;
                     Show = true
                     for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
-                        
-                        BuildControls(i); 
+
+                        BuildControls(i);
                         $("#txt_StatusFlag" + i).val('i');
-                        CountGrid  ++; 
-                        CountItems  ++;  
-                        totalRow(i, true); 
-                    } 
-                  
+                        CountGrid++;
+                        CountItems++;
+                        totalRow(i, true);
+                    }
+
                 }
             }
-        }); 
+        });
 
 
-            debugger
+        debugger
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
 
@@ -2065,7 +2065,7 @@ namespace SlsTrSalesManagerNew {
         }
 
         $("#txtPriceshow").val("");
-        $("#txtPriceshowID").val(""); 
+        $("#txtPriceshowID").val("");
 
 
     }
@@ -3977,6 +3977,15 @@ namespace SlsTrSalesManagerNew {
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
         txtNet.value = (NetCount.RoundToSt(2));
+
+
+        if (ddlType.value == "1") {
+            if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
+                $("#txtCardMoney").val('')
+                $("#txtCashMoney").val(txtNet.value.toString());
+            } 
+        }
+
     }
 
     function Insert_Serial() {
@@ -4424,7 +4433,7 @@ namespace SlsTrSalesManagerNew {
 
         InvoiceModel.RefTrID = $("#txtPriceshow").val()
         InvoiceModel.RefTrID = $("#txtPriceshowID").val()
-         
+
 
         //InvoiceModel.CashBoxID = Number($('#ddlCashBox').val());
         //InvoiceModel.CashBoxID = 20;
@@ -4635,16 +4644,15 @@ namespace SlsTrSalesManagerNew {
         }
 
         debugger
-        if (MasterDetailsModel.I_Sls_TR_InvoiceItems.length == 0)
-        { 
+        if (MasterDetailsModel.I_Sls_TR_InvoiceItems.length == 0) {
             DisplayMassage("الرجاء اعادت تكرارالمحاولة مره اخري", "Please refresh the page and try again", MessageType.Error);
 
             for (var i = 0; i < CountGrid; i++) {
-                if ($("#txt_StatusFlag" + i).val() != 'm')  
-                    $("#txt_StatusFlag" + i).val('i'); 
+                if ($("#txt_StatusFlag" + i).val() != 'm')
+                    $("#txt_StatusFlag" + i).val('i');
             }
 
-            return 
+            return
         }
 
         Ajax.Callsync({

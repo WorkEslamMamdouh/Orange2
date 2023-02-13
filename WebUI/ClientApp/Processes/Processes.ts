@@ -70,6 +70,7 @@ namespace Processes {
     //buttons 
     var btnclosingprocessing: HTMLButtonElement;
     var btnPresent: HTMLButtonElement;
+    var btnfinish: HTMLButtonElement;
     var btnClose: HTMLButtonElement;
     var btnClose_Focus: HTMLButtonElement;
     var btnView_load: HTMLButtonElement;
@@ -105,6 +106,7 @@ namespace Processes {
     var txtPaperPurchaseValue: HTMLInputElement;
     var txtClose_CompanyCommition: HTMLInputElement;
     var txtClose_Marketting: HTMLInputElement;
+    var textClose_Coolingandstorage: HTMLInputElement;
     var txtVatPrc: HTMLInputElement;
     var txtVatAmount: HTMLInputElement;
     var txtCustomNo: HTMLInputElement;
@@ -151,7 +153,7 @@ namespace Processes {
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
-//    var btnPrint: HTMLButtonElement;
+    //    var btnPrint: HTMLButtonElement;
     //------------------------------------report print 1------------------------------
     var btnPrintTrview1: HTMLButtonElement;
     var btnPrintTrPDF1: HTMLButtonElement;
@@ -172,15 +174,15 @@ namespace Processes {
     var btnPrintTrPDF4: HTMLButtonElement;
     var btnPrintTrEXEL4: HTMLButtonElement;
     var btnPrint4: HTMLButtonElement;
-     
+
     // button print 
     var btnPrintStock: HTMLButtonElement;
     var btnPrintDeposit: HTMLButtonElement;
-     
+
     // button print   Operationsummary and sales History
     var btnPrintOperationsummary: HTMLButtonElement;
     var btnPrintsalesrecord: HTMLButtonElement;
-     
+
     export function InitalizeComponent() {
         $("#NoDubleclick").val('1');
 
@@ -231,7 +233,7 @@ namespace Processes {
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         fillddlVatType();
-     //   $('#btnPrint').addClass('display_none');
+        //   $('#btnPrint').addClass('display_none');
         $('#btnPrint1').addClass('display_none');
         $('#btnPrint2').addClass('display_none');
         $('#btnPrint3').addClass('display_none');
@@ -240,7 +242,7 @@ namespace Processes {
         if (SysSession.CurrentPrivileges.CUSTOM5 == false) {
             $('#DivInformationCloce').addClass('display_none');
         }
-    } 
+    }
     function InitalizeControls() {
 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -273,6 +275,7 @@ namespace Processes {
         searchOerSalesmanGrid_Master = document.getElementById("searchOerSalesmanGrid_Master") as HTMLInputElement;
         txtClose_CompanyCommition = document.getElementById("txtClose_CompanyCommition") as HTMLInputElement;
         txtClose_Marketting = document.getElementById("txtClose_Marketting") as HTMLInputElement;
+        textClose_Coolingandstorage = document.getElementById("textClose_Coolingandstorage") as HTMLInputElement;
         txtVatPrc = document.getElementById("txtVatPrc") as HTMLInputElement;
         txtVatAmount = document.getElementById("txtVatAmount") as HTMLInputElement;
 
@@ -286,11 +289,12 @@ namespace Processes {
         //buttons
         btnPresent = document.getElementById("btnPresent") as HTMLButtonElement;
         btnClose = document.getElementById("btnClose") as HTMLButtonElement;
+        btnfinish = document.getElementById("btnfinish") as HTMLButtonElement;
         btnClose_Focus = document.getElementById("btnClose_Focus") as HTMLButtonElement;
         btnView_load = document.getElementById("btnView_load") as HTMLButtonElement;
         btnExpenses = document.getElementById("btnExpenses") as HTMLButtonElement;
         btnOpen = document.getElementById("btnOpen") as HTMLButtonElement;
-       // btnclosingprocessing = document.getElementById("btnclosingprocessing") as HTMLButtonElement;
+        // btnclosingprocessing = document.getElementById("btnclosingprocessing") as HTMLButtonElement;
 
 
 
@@ -317,7 +321,7 @@ namespace Processes {
         btnAddDetailslebel = document.getElementById("btnAddDetailslebel") as HTMLButtonElement;
 
         //--------------------------- print Button  
-     //   btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+        //   btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
@@ -364,12 +368,13 @@ namespace Processes {
 
         btnPresent.onclick = btnPresent_onclick;
         btnClose.onclick = btnClose_onclick;
+        btnfinish.onclick = btnfinish_onclick;
         btnClose_Focus.onclick = btnClose_Focus_onclick;
         btnView_load.onclick = btnView_load_onclick;
         btnExpenses.onclick = btnExpenses_onclick;
         btnOpen.onclick = btnOpen_onclick;
         //btnclosingprocessing.onclick = btnclosingprocessingonclick;
-         
+
         btnUpdate_1.onclick = Update_1_onclick;
         btnBack_1.onclick = btnBack_1_onclick;
         btnSave_1.onclick = btnSave_1_onclick;
@@ -395,6 +400,7 @@ namespace Processes {
         txtClose_CompanyCommition.onkeyup = Calculation_Close;
         txtClose_CompanyCommitionPrc.onchange = CommitionPrc_onchange;
         txtClose_Marketting.onkeyup = Calculation_Close;
+        textClose_Coolingandstorage.onkeyup = Calculation_Close;
 
 
         ddlVendor.onchange = ddlVendor_onchange;
@@ -412,7 +418,7 @@ namespace Processes {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-       // btnPrint.onclick = () => { PrintReport(4); }
+        // btnPrint.onclick = () => { PrintReport(4); }
         //--------------------------- print Button1  
         btnPrintTrview1.onclick = () => { PrintReport1(1); }
         btnPrintTrPDF1.onclick = () => { PrintReport1(2); }
@@ -445,7 +451,7 @@ namespace Processes {
 
         //$("#DivFilter #DivHederMaster").click(divGridDetails_onclick );
     }
-     
+
     function Check_on_user_type() {
 
 
@@ -470,7 +476,7 @@ namespace Processes {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    VatTypeDetails = result.Response as Array<A_D_VAT_TYPE>; 
+                    VatTypeDetails = result.Response as Array<A_D_VAT_TYPE>;
                     for (var i = 0; i < VatTypeDetails.length; i++) {
 
                         $('#txt_tax').append('<option Data_VatPerc="' + VatTypeDetails[i].VatPerc + '" value="' + VatTypeDetails[i].CODE + '">' + (lang == "ar" ? VatTypeDetails[i].DESCRIPTION : VatTypeDetails[i].DESCRIPTION) + '</option>');
@@ -731,11 +737,11 @@ namespace Processes {
     }
     function ddlVendor_onchange() {
         let tax = $('option:selected', $("#ddlVendor")).attr('data_vattype');
-        if (tax != '' ) {
+        if (tax != '') {
             txt_tax.value = tax;
             txt_tax_onchange();
         }
-        
+
     }
     function txt_tax_onchange() {
         txtVatPrc.value = $('option:selected', $("#txt_tax")).attr('data_VatPerc');
@@ -805,11 +811,11 @@ namespace Processes {
                 }
             }
         });
-    } 
+    }
 
     function _SearchBox_Change() {
 
-         
+
 
         if (searchbutmemreport.value != "") {
 
@@ -857,9 +863,9 @@ namespace Processes {
                     }
                     return txt;
                 }
-            }, 
+            },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
-         
+
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
                 itemTemplate: (s: string, item: IQ_GetOperation): HTMLLabelElement => {
@@ -876,7 +882,7 @@ namespace Processes {
                     return txt;
                 }
             },
-        
+
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -909,19 +915,37 @@ namespace Processes {
             Processes_Close();
 
 
-            $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").removeClass("btn-dark-green");
 
-            $("#btnClose").attr("disabled", "disabled");
-            $("#btnClose").attr("style", "")
 
-            $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "");
+            if (ddlTrtype.value == '1') {
+
+                $('#btnClose').attr('disabled', 'disabled');
+
+                $("#btnClose").attr("disabled", "disabled");
+                //$("#btnClose").attr("style", "")
+                $("#btnClose").removeClass("btn-red");
+
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").removeClass("btn-green");
+                //$("#btnPresent").attr("style", "")
+
+            }
+            else {
+                $("#btnOpen").attr("disabled", "disabled");
+                $("#btnOpen").removeClass("btn-dark-green");
+
+                $("#btnClose").attr("disabled", "disabled");
+                $("#btnClose").attr("style", "")
+
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").attr("style", "");
+            }
+
         }
         else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
             Processes_Close();
             $('#btnClose').attr('disabled', 'disabled');
-             
+
             $("#btnClose").attr("disabled", "disabled");
             //$("#btnClose").attr("style", "")
             $("#btnClose").removeClass("btn-red");
@@ -929,6 +953,10 @@ namespace Processes {
             $("#btnPresent").attr("disabled", "disabled");
             $("#btnPresent").removeClass("btn-green");
             //$("#btnPresent").attr("style", "")
+
+
+
+
         }
 
         flag_Add = false;
@@ -960,7 +988,8 @@ namespace Processes {
 
         $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
-        $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
         $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
         $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
         if (Selected_Data[0].SalesmanId != 0) {
@@ -1048,8 +1077,9 @@ namespace Processes {
 
         $('#Print_salsman_1').addClass('display_none');
         $('#Print_salsman_2').addClass('display_none');
-
-
+        if (ddlTrtype.value == '1') {
+            Calculation_Close();
+        }
     }
     function BindGetOperationItemsGridData(OperationID: number) {
         Ajax.Callsync({
@@ -1440,7 +1470,7 @@ namespace Processes {
         $("#txtRemark_item" + cnt).on('keyup', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
-             
+
         });
 
         $("#txtSoldQty" + cnt).on('keyup', function () {
@@ -1682,20 +1712,20 @@ namespace Processes {
                 soldQty += Number($("#txtSoldQty" + i).val());
                 Voids += Number($("#txtScrapQty" + i).val());
                 Remaining_quantity += Number($("#txtAvailableQty" + i).val());
-                
+
             }
         }
         txtTotal.value = total.RoundToSt(2).toString();
 
-        $("#txtQuantity" ).val(Quantity)
+        $("#txtQuantity").val(Quantity)
         $("#txtsoldQty").val(soldQty)
         $("#txtVoids").val(Voids)
-        $("#txtRemaining_quantity" ).val(Remaining_quantity)
+        $("#txtRemaining_quantity").val(Remaining_quantity)
     }
 
     function BuildControlsCharges(cnt: number) {
         var html;
-      
+
         html = `<tr id="No_Row1${cnt}">
                     <input id="OperationExpensesID${cnt}" type="text" class="form-control" style="display: none;" disabled value=""/>
 	                <td>
@@ -1781,7 +1811,7 @@ namespace Processes {
                 </tr>`;
         $("#div_ChargesData").append(html);
 
-        $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString())); 
+        $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
 
 
         $("#txtInvoiceDateCharge" + cnt).val(GetDate());
@@ -1948,8 +1978,8 @@ namespace Processes {
                 $("#txt_StatusFlag1" + cnt).val("u");
 
 
-            let ChargeID = $("#txtAddonsCharge" + cnt).val(); 
-            let VatType = AddonsData.filter(x => x.ChargeID == ChargeID)[0].VatType; 
+            let ChargeID = $("#txtAddonsCharge" + cnt).val();
+            let VatType = AddonsData.filter(x => x.ChargeID == ChargeID)[0].VatType;
             $("#txtVatType" + cnt).val(VatType);
 
 
@@ -2024,9 +2054,9 @@ namespace Processes {
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
         $("#RemarksCharge" + cnt).prop("value", (OperationCharges[cnt].ChRemarks == null || undefined) ? '' : OperationCharges[cnt].ChRemarks);
         $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
-      
+
         $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
-         
+
         $("#txtAddonsCharge" + cnt).val(OperationCharges[cnt].ChargeID);
         FillddlAddonsType(cnt);
         $("#txtAddonsTypeCharge" + cnt).val(OperationCharges[cnt].IsAddition ? (lang == "ar" ? "اضافة" : "add") : (lang == "ar" ? "خصم" : "Discount"));
@@ -2394,7 +2424,7 @@ namespace Processes {
 
     function BuildControlslebel(cnt: number) {
         var html;
-      
+
         html = `<tr id="row_font_header${cnt}">
                     <input id="InvoiceItemID${cnt}" type="hidden" class="form-control display_none"  />
 	                <td>
@@ -2429,7 +2459,7 @@ namespace Processes {
 			               	<select id="ACC_type${cnt}" class="form-control"> 
 			                    <option value="Null"> ${ (lang == "ar" ? "النوع الحساب  " : "Account Type ")}  </option> 
                                 <option value="0"> ${ (lang == "ar" ? "بنك" : "Bank")} </option>
-                                <option value="1"> ${ (lang == "ar" ? "صندوق" : "Cash box") } </option> 
+                                <option value="1"> ${ (lang == "ar" ? "صندوق" : "Cash box")} </option> 
 			                </select >
 		                </div>
 	                </td>
@@ -2441,7 +2471,7 @@ namespace Processes {
 		                </div>
                         <div class="form-group display_none" id="CashBox_div${cnt}">
 			                <select id="CashBox${cnt}" class="form-control display_none"> 
-			                    <option value="Null"> ${(lang == "ar" ? "الصندوق" : "CashBox") }</option>
+			                    <option value="Null"> ${(lang == "ar" ? "الصندوق" : "CashBox")}</option>
 			                </select >
 		                </div>
 	                </td>
@@ -2666,26 +2696,27 @@ namespace Processes {
     }
     function Calculation_Close() {
         debugger
-       
-       
-            //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-            var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val()) + Number(txtClose_Adjustment.value))))
-            $('#txtNetsales').val(Netsales);
 
-            //نسبة العمولة 
+        //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
+        $('#txtNetsales').val(Netsales);
 
-            var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
-            $('#txtClose_CompanyCommitionPrc').val(prc);
+        //العمولة
+        var CompanyCommition = (Number($('#txtNetsales').val()) - Number($('#txtPaperPurchaseValue').val())).RoundToSt(2)
+        $('#txtClose_CompanyCommition').val(CompanyCommition)
 
-            //صافي الارباح = عمولة الشركة - عمولة البائع
-            var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
-            $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+        //نسبة العمولة  
+        var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+        $('#txtClose_CompanyCommitionPrc').val(prc);
 
-            //قيمة الشراء = صافي المبيعات - عمولة الشركة
-            var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
-            purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
-            $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
- 
+        //صافي الارباح = عمولة الشركة - عمولة البائع
+        var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+        $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+
+        //قيمة الشراء = صافي المبيعات - عمولة الشركة
+        var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+        purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+        $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
 
     }
     function Calculation_Close1() {
@@ -2757,14 +2788,14 @@ namespace Processes {
             DisplayMassage("برجاء أدخل  نوع الضريبه!", "must enter value of Custom NO!", MessageType.Worning);
             Errorinput(txt_tax);
             return false
-        } 
+        }
         else if (ddlSalesman.value == "null" && Status == 1) {
             DisplayMassage(" برجاء اختيار  البائع!", "must choose seller!", MessageType.Worning);
             Errorinput(ddlSalesman);
 
             return false
         }
-          
+
         return true;
     }
     function ValidationClose() {
@@ -2818,6 +2849,7 @@ namespace Processes {
             Errorinput($("#txtMinPrice" + rowcount));
             return false
         }
+        
 
 
         return true;
@@ -2929,7 +2961,7 @@ namespace Processes {
 
     //----------------------------------------------------- Div_Processes----------------------------------------------------
     function Assign_1_Processes() {
- 
+
         debugger
         Model_I_TR_Operation = new I_TR_Operation();
         if (FlagIns_Operation == true) {//Insert
@@ -2947,10 +2979,11 @@ namespace Processes {
             Model_I_TR_Operation.CreatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
             Model_I_TR_Operation.IsGenerated = false;
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
 
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
-                Model_I_TR_Operation.IsPurPosted = false; 
-     
+            Model_I_TR_Operation.IsPurPosted = false;
+
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
@@ -3004,6 +3037,7 @@ namespace Processes {
             Model_I_TR_Operation.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.IsGenerated = IsGenerated;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
 
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
             if (Selected_Data.length > 0) {
@@ -3189,7 +3223,7 @@ namespace Processes {
         for (var i = 0; i <= CountGrid; i++) {
             OperationItemSingleModel = new I_TR_OperationItems();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-      
+
             OperationItemSingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             OperationItemSingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
 
@@ -3336,7 +3370,7 @@ namespace Processes {
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_TR_OperationCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-   
+
             chargesingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             chargesingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3454,7 +3488,7 @@ namespace Processes {
         for (var i = 0; i < CountGridDeposit; i++) {
             DepositsingleModel = new I_TR_OperationDeposit();
             StatusFlag = $("#txt_StatusFlag2" + i).val();
- 
+
             DepositsingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DepositsingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3554,9 +3588,13 @@ namespace Processes {
     }
     //------------------------------------------------------------------------------------------------------------------------
 
+
     //-------------------------------------------------------Processes--------------------------------------------------------
     function Processes_under_preparing() { // تحت التجهيز
-
+        $("#btnfinish").attr("disabled", "disabled")
+        $("#btnfinish").removeClass('btn-red')
+        $("#btnfinish").addClass('display_none')
+        $("#btnClose").removeClass('display_none')
         $("#open_Trill").attr("disabled", "disabled").off('click');
         $("#open_Trill").addClass("disabledDiv");
 
@@ -3618,11 +3656,24 @@ namespace Processes {
         //$("#btnPresent").attr("style", "background-color: #198754")
         $("#btnPresent").addClass("btn-green");
 
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none')
+            $("#btnfinish").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
 
+        }
+        else {
+            $("#btnfinish").addClass('display_none')
+            $("#btnClose").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
+        }
 
     }
     function Processes_Ready() { //جاهزة
-
+        $("#btnfinish").attr("disabled", "disabled")
+        $("#btnfinish").removeClass('btn-red')
+        $("#btnfinish").addClass('display_none')
+        $("#btnClose").removeClass('display_none')
         $("#divProcessClose").attr("disabled", "disabled").off('click');
         $("#divProcessClose").addClass("disabledDiv");
 
@@ -3691,9 +3742,23 @@ namespace Processes {
         //btnUpdate_4.classList.add('display_none');
         //btnUpdate_5.classList.add('display_none');
 
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none')
+            $("#btnfinish").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
+
+        }
+        else {
+            $("#btnfinish").addClass('display_none')
+            $("#btnClose").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
+        }
+
     }
     function Processes_Open() { //مفتوحة
-
+        $("#btnfinish").attr("disabled", "disabled")
+        $("#btnfinish").addClass('display_none')
+        $("#btnClose").removeClass('display_none')
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
 
@@ -3739,12 +3804,12 @@ namespace Processes {
 
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnOpen").attr("disabled", "disabled").off('click');
-      //  $("#btnOpen").attr("style", "")
+        //  $("#btnOpen").attr("style", "")
         $("#btnOpen").removeClass("btn-dark-green");
 
-      //  $("#btnPresent").attr("style", "margin-right: 8%;")
+        //  $("#btnPresent").attr("style", "margin-right: 8%;")
         $("#btnClose").removeAttr("disabled");
-       // $("#btnClose").attr("style", "background-color: #fdb0b0;");
+        // $("#btnClose").attr("style", "background-color: #fdb0b0;");
         $("#btnClose").addClass("btn-red");
         $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
 
@@ -3755,10 +3820,33 @@ namespace Processes {
             btnClose.disabled = false;
         }
 
+        //if (ddlTrtype.value == '1') {
+        //    btnClose.innerHTML = 'اغلاق الارساليات';
+        //}
+        //else {
+        //    btnClose.innerHTML = 'تجهيز الاغلاق';
+        //}
+
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none')
+            $("#btnfinish").removeClass('display_none')
+            $("#btnfinish").removeAttr("disabled");
+            $("#btnfinish").addClass('btn-red')
+            $('#DivInformationCloce').removeClass('display_none');
+
+        }
+        else {
+            $("#btnfinish").addClass('display_none')
+            $("#btnClose").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
+        }
 
     }
     function Processes_Close() {  //مغلقة
-
+        $("#btnfinish").attr("disabled", "disabled")
+        $("#btnfinish").removeClass('btn-red')
+        $("#btnfinish").addClass('display_none')
+        $("#btnClose").removeClass('display_none')
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
 
@@ -3784,7 +3872,7 @@ namespace Processes {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-     //   $("#btnPresent").attr("style", " margin-right: 8%;")
+        //   $("#btnPresent").attr("style", " margin-right: 8%;")
         //   $("#btnClose").attr("style", " ")
         $("#btnClose").removeClass("btn-red");
 
@@ -3808,10 +3896,23 @@ namespace Processes {
         } else {
             btnClose.disabled = false;
             $("#btnOpen").removeAttr("disabled");
-           // $("#btnOpen").attr("style", "background-color:   ")
+            // $("#btnOpen").attr("style", "background-color:   ")
             $("#btnOpen").addClass("btn-dark-green");
 
 
+        }
+
+
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none')
+            $("#btnfinish").removeClass('display_none')
+            $('#DivInformationCloce').removeClass('display_none');
+
+        }
+        else {
+            $("#btnfinish").addClass('display_none')
+            $("#btnClose").removeClass('display_none')
+            $('#DivInformationCloce').addClass('display_none');
         }
 
 
@@ -3820,8 +3921,8 @@ namespace Processes {
     //-------------------------------------------------------button---Processes--------------------------------------
     function btnOpen_onclick() {
 
-
-        if (Status == 4) {
+        debugger
+        if (Status == 4 || Status == 3) {
 
             Ajax.Callsync({
                 type: "Get",
@@ -3893,9 +3994,9 @@ namespace Processes {
                 Update_2_onclick();
 
                 document.body.scrollTop = 800;
-                document.documentElement.scrollTop = 800; 
+                document.documentElement.scrollTop = 800;
                 btnUpdate_2.focus();
-            }          
+            }
             else {
                 Processes_Ready();
                 Ready = 1;
@@ -3972,7 +4073,7 @@ namespace Processes {
                 //btnUpdate_4.classList.remove('display_none');
                 //btnUpdate_4.focus();
                 //Update_4_onclick();
-                
+
 
                 //btnBack_2_onclick();
                 //btnBack_3_onclick();
@@ -4017,8 +4118,10 @@ namespace Processes {
                                 Processes_Close();
                             }
                             else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
+                                debugger
                                 Processes_Close();
                                 $('#btnClose').attr('disabled', 'disabled');
+                                //NewClose();
                             }
 
                             flag_Add = false;
@@ -4031,6 +4134,211 @@ namespace Processes {
 
                     }
                 });
+            }
+        }
+        else {
+            DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
+        }
+
+
+    }
+    function CloseNew() {
+
+        $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
+        $("#Financialsituation").removeAttr("disabled");
+        $("#Div_Money").removeAttr("disabled");
+
+        $('#lepRentdata').removeClass('showdiv');
+        $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+
+        $('#lepMoney').removeClass('showdiv');
+        $('#spanlepMoney_4').addClass('fa-angle-double-down');
+
+
+
+        $("#div_Master").attr("disabled", "disabled").off('click');
+        $("#div_Master").addClass("disabledDiv")
+        btnUpdate_1.classList.remove("display_none");
+        btnSave_1.classList.add("display_none");
+        btnBack_1.classList.add("display_none");
+
+        DocumentActions.RenderFromModel(Selected_Data[0]);
+        var trDate: string = DateFormat(Selected_Data[0].TrDate);
+        $('#txtDate').val(trDate);
+        Status = Selected_Data[0].Status;
+        var OpenAt: string = DateFormat(Selected_Data[0].OpenAt);
+        if (OpenAt != null) { $('#txtdateopening').val(OpenAt); } else {
+            $('#txtdateopening').val(GetDate());
+        }
+        //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
+        $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+        $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
+        $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
+
+        $("#open_Trill").attr("disabled", "disabled").off('click');
+        $("#open_Trill").addClass("disabledDiv");
+        Update_1 = false;
+
+        debugger
+        $("#Processshutdown").removeAttr("disabled");
+        $('#divlepRentdata_3').removeClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        btnUpdate_4.classList.remove('display_none');
+        btnUpdate_4.focus();
+        Update_4_onclick();
+        //$('#txtClose_CompanyCommition').val(0);
+        //$('#txtClose_NetProfit').val(0);
+        //$('#txtClose_purchaseValue').val(0);
+
+
+        if (btnSave_2.getAttribute('class') == 'icon-bar3 d-flex justify-content-between btn-save') {
+
+            btnBack_2_onclick();
+
+        }
+        btnBack_3_onclick();
+        btnBack_5_onclick();
+
+        btnUpdate_2.disabled = true;
+        btnUpdate_3.disabled = true;
+        btnUpdate_5.disabled = true;
+
+        Calculation_Close();
+
+        DisabledToolBar();
+        $("#Processshutdown").removeAttr("disabled");
+        $('#divlepRentdata_3').removeClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $("#divProcessClose").removeClass("disabledDiv");
+    }
+    function btnfinish_onclick() {
+        if (Status == 2) {
+            var AvailableQty = false;
+
+            OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
+            OerSalesmanGrid_Detail.Bind();
+            SalesmanItem_AllAssign(AllGetOperationMasterDetailModel.TR_OperationSalesmanItem);
+
+            $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
+            $("#Financialsituation").removeAttr("disabled");
+            $("#Div_Money").removeAttr("disabled");
+
+            $('#lepRentdata').removeClass('display_none');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+
+            $('#lepMoney').removeClass('display_none');
+            $('#spanlepMoney_4').addClass('fa-angle-double-down');
+
+            let cnt = 1;
+            let ii = 0;
+            $("#OerSalesmanGrid_Detail").jsGrid("option", "pageIndex", cnt);
+
+            for (var i = 0; i < AllGetOperationMasterDetailModel.TR_OperationSalesmanItem.length; i++) {
+
+                if (ii > 15) {
+                    cnt += 1;
+
+                    $("#OerSalesmanGrid_Detail").jsGrid("option", "pageIndex", cnt);
+
+                    ii = 0;
+                }
+                let id = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem[i].OperationSalesmanItemID;
+
+                if ($("#OnhandQty" + id).val() != '0' && $("#OnhandQty" + id).val() != null) {
+                    AvailableQty = true;
+                    Errorinput($("#OnhandQty" + id));
+                }
+
+                ii++;
+            }
+
+            debugger
+            if (ddlTrtype.value == '1') {
+                if (Number($("#txtTotal").val()) != Number($("#txtPaperPurchaseValue").val())) {
+                    DisplayMassage("يجب ان يكون قيمة البضائع المسجلة = اجمالي الحمولة", "must enter lowest price !", MessageType.Worning);
+                    Errorinput($("#txtTotal"));
+                    Errorinput($("#txtPaperPurchaseValue"));
+                    return false
+                }
+            }
+            if (AvailableQty == true) {
+                DisplayMassage("يجب ان تكون الكمية المتبقية = صفر", "The remaining amount should be = 0!", MessageType.Worning);
+                btnUpdate_5.focus();
+                Update_5_onclick();
+
+            }  
+            else {
+
+
+
+                $('#btnfinish').attr('style', 'width: 104%;')
+                $('#btnfinish').html(' جاري الاغلاق <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+                $('#btnfinish').attr('disabled', 'disabled')
+
+
+                debugger
+                setTimeout(function () {
+
+
+                    Ajax.Callsync({
+                        type: "Get",
+                        url: sys.apiUrl("Processes", "closingprocessingonNew"),
+                        data: { OperationID: OperationIDglopel, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+                        success: (d) => {
+                            let result = d as BaseResponse;
+
+                            if (result.Response) {
+                                ddlStateType.value = '111';
+
+                                //DisplayMassage("تم تجهيز اغلاق  العملية بنجاح", "Operation added successfully", MessageType.Succeed);
+                                flag_Success_5 = true;
+                                $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
+                                $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
+                                Display();
+                                Selected_Data = new Array<IQ_GetOperation>();
+
+                                Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
+
+                                $("#div_Master_Hedr").removeClass("display_none");
+                                DisplayData(Selected_Data);
+
+                                if (Selected_Data[0].Status == 0) {// تحت التجهيز
+                                    Processes_under_preparing();
+                                }
+                                else if (Selected_Data[0].Status == 1) {//جاهز
+
+                                }
+                                else if (Selected_Data[0].Status == 2) {//مفتوحة
+                                    Processes_Open();
+                                }
+                                else if (Selected_Data[0].Status == 3) { //مغلق
+                                    Processes_Close();
+                                }
+                                else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
+                                    debugger
+                                    Processes_Close();
+                                    $('#btnClose').attr('disabled', 'disabled');
+
+                                }
+                                CloseNew();
+                                flag_Add = false;
+                                flag_Success_5 = false;
+                                $('#btnfinish').attr('style', '')
+                                $('#btnfinish').html(' اغلاق الارساليات');
+                                $('#btnfinish').removeAttr('disabled')
+                            } else {
+                                DisplayMassage("خطأء!", "Error!", MessageType.Worning);
+
+                            }
+
+
+                        }
+                    });
+
+                }, 200);
             }
         }
         else {
@@ -4127,7 +4435,7 @@ namespace Processes {
         $("#btnPresent").attr("disabled", "disabled").off('click');
         $("#btnClose").attr("disabled", "disabled").off('click');
 
-      //  $("#btnPresent").attr("style", "  margin-right: 8%;")
+        //  $("#btnPresent").attr("style", "  margin-right: 8%;")
         //$("#btnClose").attr("style", "")
         $("#btnClose").removeClass("btn-red");
 
@@ -4203,10 +4511,11 @@ namespace Processes {
         DisabledToolBar();
     }
     function btnBack_1_onclick() {
+        debugger
         if (flag_Add == true) {
-
+            debugger
             if (flag_succ_insert == true) {
-
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
@@ -4230,13 +4539,14 @@ namespace Processes {
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-             //   $("#btnPresent").attr("style", "background-color: #198754")
+                //   $("#btnPresent").attr("style", "background-color: #198754")
                 $("#btnPresent").addClass("btn-green");
-              //  $("#btnClose").attr("style", "")
+                //  $("#btnClose").attr("style", "")
                 $("#btnClose").addClass("btn-red");
 
             }
             else {
+                debugger
                 $("#div_Master_Hedr").addClass("display_none");
                 $('#div_Master').addClass('disabledDiv');
 
@@ -4250,9 +4560,10 @@ namespace Processes {
             RemoveDisabledToolBar();
         }
         else {
-
+            debugger
             if (flag_Back == true) {
-                // 
+                //  debugger
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
@@ -4272,6 +4583,7 @@ namespace Processes {
                 //disabled_divMasterGridiv();
             }
             else {
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
@@ -4279,12 +4591,15 @@ namespace Processes {
                 btnBack_1.classList.add("display_none");
 
                 DocumentActions.RenderFromModel(Selected_Data[0]);
+                var trDate: string = DateFormat(Selected_Data[0].TrDate);
+                $('#txtDate').val(trDate);
                 Status = Selected_Data[0].Status;
                 var OpenAt: string = DateFormat(Selected_Data[0].OpenAt);
                 if (OpenAt != null) { $('#txtdateopening').val(OpenAt); } else {
                     $('#txtdateopening').val(GetDate());
                 }
-                $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+                //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+                $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
                 $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
                 $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
@@ -4292,11 +4607,11 @@ namespace Processes {
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
-
+            debugger
             RemoveDisabledToolBar();
         }
 
-
+        debugger
 
         Update_1 = false;
         disabled_divMasterGridiv();
@@ -4310,26 +4625,26 @@ namespace Processes {
 
             finishSave('btnsave');
 
-        if (!ValidationHeader()) return
+            if (!ValidationHeader()) return
 
-        Assign_1_Processes();
-        if (FlagIns_Operation == true) {//Insert
-            // 
-            Insert_1_Processes();
+            Assign_1_Processes();
+            if (FlagIns_Operation == true) {//Insert
+                // 
+                Insert_1_Processes();
 
-        }
-        else {// Update 
+            }
+            else {// Update 
 
-            Update_1_Processes();
-            disabled_divMasterGridiv();
-        }
+                Update_1_Processes();
+                disabled_divMasterGridiv();
+            }
 
-        //alert('ok');
-        //console.log(Model_I_TR_Operation);
-        btnBack_1_onclick();
-        flag_Back = false;
+            //alert('ok');
+            //console.log(Model_I_TR_Operation);
+            btnBack_1_onclick();
+            flag_Back = false;
 
-    }, 100);
+        }, 100);
         //btnSave_2.classList.add("display_none");
         //btnBack_2.classList.add("display_none");
         //btnSave_3.classList.add("display_none");
@@ -4455,35 +4770,44 @@ namespace Processes {
 
             finishSave('btnsave');
 
-        var CanAdd: boolean = true;
-        if (CountGrid < 0) {
-            DisplayMassage(" برجاء ادخال بيانات الحمولة", "Please enter the payload data", MessageType.Worning);
-            Errorinput(btnAddDetails);
-            CanAdd = false;
-        }
-        else {
-            if (CountGrid > -1) {
+            var CanAdd: boolean = true;
+            if (CountGrid < 0) {
+                DisplayMassage(" برجاء ادخال بيانات الحمولة", "Please enter the payload data", MessageType.Worning);
+                Errorinput(btnAddDetails);
+                CanAdd = false;
+            }
+            if (ddlTrtype.value == '1') {
+                if (Number($("#txtTotal").val()) != Number($("#txtPaperPurchaseValue").val())) {
+                    DisplayMassage("يجب ان يكون قيمة البضائع المسجلة = اجمالي الحمولة", "must enter lowest price !", MessageType.Worning);
+                    Errorinput($("#txtTotal"));
+                    Errorinput($("#txtPaperPurchaseValue"));
+                    return false
+                }
 
-                for (var i = 0; i <= CountGrid; i++) {
+            }
+            else {
+                if (CountGrid > -1) {
 
-                    CanAdd = Validation_Grid(i);
-                    if (CanAdd == false) {
-                        break;
+                    for (var i = 0; i <= CountGrid; i++) {
+
+                        CanAdd = Validation_Grid(i);
+                        if (CanAdd == false) {
+                            break;
+                        }
                     }
                 }
             }
-        }
-        if (CanAdd) {
-            Assign_2_items();
-            if (Status == 2) {//مفتوحة
-                Update_2_items_Open();
-            }
-            else {
-                Update_2_items();
-            }
-            btnBack_2_onclick();
+            if (CanAdd) {
+                Assign_2_items();
+                if (Status == 2) {//مفتوحة
+                    Update_2_items_Open();
+                }
+                else {
+                    Update_2_items();
+                }
+                btnBack_2_onclick();
 
-        }
+            }
         }, 100);
 
     }
@@ -4604,8 +4928,8 @@ namespace Processes {
         setTimeout(function () {
 
             finishSave('btnsave');
-        var CanAddCharge: boolean = true;
-    
+            var CanAddCharge: boolean = true;
+
             if (CountGridCharge > 0) {
 
                 for (var i = 0; i < CountGridCharge; i++) {
@@ -4616,13 +4940,13 @@ namespace Processes {
                     }
                 }
             }
-         
-        if (CanAddCharge) {
-            Assign_3_Charges();
-            Update_3_Charges();
-            btnBack_3_onclick();
-        }
-    }, 100);
+
+            if (CanAddCharge) {
+                Assign_3_Charges();
+                Update_3_Charges();
+                btnBack_3_onclick();
+            }
+        }, 100);
     }
 
     function Update_4_onclick() {
@@ -4656,7 +4980,7 @@ namespace Processes {
             Processes_Close();
             $("#btnPresent").attr("disabled", "disabled").off('click');
             $("#btnClose").attr("disabled", "disabled").off('click');
-        //    $("#btnPresent").attr("style", "  margin-right: 8%;");
+            //    $("#btnPresent").attr("style", "  margin-right: 8%;");
             // $("#btnClose").attr("style", "")
             $("#btnClose").removeClass("btn-red");
 
@@ -4679,12 +5003,14 @@ namespace Processes {
 
             DocumentActions.RenderFromModel(Selected_Data[0]);
             var trDate: string = DateFormat(Selected_Data[0].TrDate);
+            $('#txtDate').val(trDate);
             //txtDateHeader.value = trDate;
             $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
             $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
             $('#txtStatus').val(Selected_Data[0].Status_DescA);
             Status = Selected_Data[0].Status;
-            $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+            //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+            $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
             $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
             $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
@@ -4736,6 +5062,9 @@ namespace Processes {
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
         RemoveDisabledToolBar();
+
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     function btnSave_4_onclick() {
         loading('btnsave');
@@ -4743,15 +5072,15 @@ namespace Processes {
         setTimeout(function () {
 
             finishSave('btnsave');
-        if (!ValidationClose()) return
+            if (!ValidationClose()) return
 
-        FlagIns_Operation = false;
-        Status = 3;
-        Assign_1_Processes();
-        Update_1_Processes();
-        btnBack_4_onclick();
+            FlagIns_Operation = false;
+            Status = 3;
+            Assign_1_Processes();
+            Update_1_Processes();
+            btnBack_4_onclick();
 
-        flag_Back = false;
+            flag_Back = false;
 
         }, 100);
     }
@@ -4851,24 +5180,24 @@ namespace Processes {
 
             finishSave('btnsave');
 
-        var CanAddDeposit: boolean = true;
-         
-        if (CountGridDeposit > 0) {
+            var CanAddDeposit: boolean = true;
 
-            for (var i = 0; i < CountGridDeposit; i++) {
+            if (CountGridDeposit > 0) {
 
-                CanAddDeposit = ValidationDeposit_Grid(i);
-                if (CanAddDeposit == false) {
-                    break;
+                for (var i = 0; i < CountGridDeposit; i++) {
+
+                    CanAddDeposit = ValidationDeposit_Grid(i);
+                    if (CanAddDeposit == false) {
+                        break;
+                    }
                 }
             }
-        }    
-        if (CanAddDeposit) {
-            Assign_5_Deposit();
-            Update_5_Deposit();
-            btnBack_5_onclick();
-        }
-    }, 100);
+            if (CanAddDeposit) {
+                Assign_5_Deposit();
+                Update_5_Deposit();
+                btnBack_5_onclick();
+            }
+        }, 100);
     }
 
     function clear() {
@@ -5165,12 +5494,12 @@ namespace Processes {
 
                 let result = d.result as string;
 
-                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear,"Load Data");
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Load Data");
 
                 window.open(result, "_blank");
             }
         })
-    }     
+    }
     function PrintReport2(OutType: number) {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -5209,7 +5538,7 @@ namespace Processes {
                 window.open(result, "_blank");
             }
         })
-    }  
+    }
     function PrintReport3(OutType: number) {
 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
@@ -5284,7 +5613,7 @@ namespace Processes {
                 window.open(result, "_blank");
             }
         })
-         
+
     }
 
 
@@ -5369,11 +5698,11 @@ namespace Processes {
 
 
 
-    }     
+    }
     function PrintOperationsummary() {
 
 
-        let rp: ReportParameters = new ReportParameters(); 
+        let rp: ReportParameters = new ReportParameters();
         rp.CompCode = SysSession.CurrentEnvironment.CompCode;
         rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
         rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
@@ -5403,8 +5732,8 @@ namespace Processes {
 
                 window.open(result, "_blank");
             }
-        }) 
-    } 
+        })
+    }
     function Printsalesrecord() {
         let rp: ReportParameters = new ReportParameters();
         rp.CompCode = SysSession.CurrentEnvironment.CompCode;

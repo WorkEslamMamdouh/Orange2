@@ -2982,6 +2982,12 @@ var SlsTrSalesManagerNew;
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
         txtNet.value = (NetCount.RoundToSt(2));
+        if (ddlType.value == "1") {
+            if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
+                $("#txtCardMoney").val('');
+                $("#txtCashMoney").val(txtNet.value.toString());
+            }
+        }
     }
     function Insert_Serial() {
         var Chack_Flag = false;
