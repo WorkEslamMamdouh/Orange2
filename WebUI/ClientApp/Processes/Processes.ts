@@ -795,11 +795,12 @@ namespace Processes {
 
         status = Number(ddlStateType.value.toString());
 
+        let trtype = Number($('#ddlTrtypeFilter').val());
 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("Processes", "GetAll_IQ_GetOperation"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: 0, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: trtype, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {

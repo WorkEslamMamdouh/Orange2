@@ -681,10 +681,11 @@ var Processes;
             salesmanId = Number(ddlSalesmanMaster.value.toString());
         }
         status = Number(ddlStateType.value.toString());
+        var trtype = Number($('#ddlTrtypeFilter').val());
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("Processes", "GetAll_IQ_GetOperation"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: 0, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: trtype, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -901,7 +902,9 @@ var Processes;
         ComputeTotalsCharge();
         $('#Print_salsman_1').addClass('display_none');
         $('#Print_salsman_2').addClass('display_none');
-        Calculation_Close();
+        if (ddlTrtype.value == '1') {
+            Calculation_Close();
+        }
     }
     function BindGetOperationItemsGridData(OperationID) {
         Ajax.Callsync({
@@ -2250,6 +2253,7 @@ var Processes;
             Model_I_TR_Operation.CreatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
             Model_I_TR_Operation.IsGenerated = false;
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
             Model_I_TR_Operation.IsPurPosted = false;
             Model_I_TR_Operation.Status = Status;
@@ -2304,6 +2308,7 @@ var Processes;
             Model_I_TR_Operation.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.IsGenerated = IsGenerated;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
             if (Selected_Data.length > 0) {
                 Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;

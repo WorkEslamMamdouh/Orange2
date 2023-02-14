@@ -143,13 +143,18 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetOperation where CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
+                string s = "select * from IQ_GetOperation where  CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
 
                 string condition = "";
 
                 if (SalesmanId != 0 && SalesmanId != null)
                 {
                     condition = condition + " and SalesmanId =" + SalesmanId;
+                }
+
+                if (trtype != -1)
+                {
+                    condition = condition + " and trtype =" + trtype;
                 }
 
                 if (VendorId != 0 && VendorId != null)
