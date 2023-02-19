@@ -2588,25 +2588,64 @@ namespace CloseProcesses {
         Calculation_Close()
     }
     function Calculation_Close() {
+        debugger
+
         ComputeTotalsAdjTotalSales();
         ComputeTotalClose_Adjustment();
 
-        //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).toFixed(2);
-        $('#txtNetsales').val(Netsales);
+        //if (ddlTrtype.value == '1') { // مشتراه
 
-        //نسبة العمولة  
-        var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
-        $('#txtClose_CompanyCommitionPrc').val(prc);
+        //    txtClose_CompanyCommitionPrc.disabled = true;
+        //    txtClose_CompanyCommition.disabled = true;
+        //    txtClose_Adjustment.value = '0';
+        //    $('#Comp_comm').addClass('display_none');
 
-        //صافي الارباح = عمولة الشركة - عمولة البائع
-        var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
-        $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
 
-        //قيمة الشراء = صافي المبيعات - عمولة الشركة
-        var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
-        purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
-        $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+
+        //    //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+        //    var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
+        //    $('#txtNetsales').val(Netsales);
+
+        //    //نسبة العمولة  
+        //    var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+        //    $('#txtClose_CompanyCommitionPrc').val(prc);
+
+        //    //صافي الارباح = عمولة الشركة - عمولة البائع
+        //    //var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+        //    //$('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+
+            
+        //    $('#txtClose_NetProfit').val(Netsales);
+
+        //    //قيمة الشراء = صافي المبيعات - عمولة الشركة
+        //    var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+        //    purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+        //    purchaseValue = purchaseValue
+        //    $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+
+        //}
+        //else { //عموله
+
+          
+
+            //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+            var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
+            $('#txtNetsales').val(Netsales);
+          
+
+            //نسبة العمولة  
+            var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+            $('#txtClose_CompanyCommitionPrc').val(prc);
+
+            //صافي الارباح = عمولة الشركة - عمولة البائع
+            var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+            $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+
+            //قيمة الشراء = صافي المبيعات - عمولة الشركة
+            var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+            purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+            $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+        //}
 
 
     }
@@ -2656,7 +2695,7 @@ namespace CloseProcesses {
         //ComputeTotalClose_Adjustment();
 
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).toFixed(2);
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
         $('#txtNetsales').val(Netsales);
 
         //نسبة العمولة  

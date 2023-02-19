@@ -268,6 +268,9 @@ var Inventorymove;
         if ($("#txt_indebtedness").val() == "All") { //******الجميع
             rp.BalType = 0;
         }
+        if ($("#txt_indebtedness").val() == "4") { //******رصيد موجب
+            rp.BalType = 4;
+        }
         rp.Status = $("#txt_ID_status").val();
         if (reptp1.checked == true) {
             rp.check = 3;

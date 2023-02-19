@@ -65,6 +65,7 @@ var Processes;
     //buttons 
     var btnclosingprocessing;
     var btnPresent;
+    var btnfinish;
     var btnClose;
     var btnClose_Focus;
     var btnView_load;
@@ -99,6 +100,7 @@ var Processes;
     var txtPaperPurchaseValue;
     var txtClose_CompanyCommition;
     var txtClose_Marketting;
+    var textClose_Coolingandstorage;
     var txtVatPrc;
     var txtVatAmount;
     var txtCustomNo;
@@ -251,6 +253,7 @@ var Processes;
         searchOerSalesmanGrid_Master = document.getElementById("searchOerSalesmanGrid_Master");
         txtClose_CompanyCommition = document.getElementById("txtClose_CompanyCommition");
         txtClose_Marketting = document.getElementById("txtClose_Marketting");
+        textClose_Coolingandstorage = document.getElementById("textClose_Coolingandstorage");
         txtVatPrc = document.getElementById("txtVatPrc");
         txtVatAmount = document.getElementById("txtVatAmount");
         txtTruckNumber = document.getElementById("txtTruckNumber");
@@ -262,6 +265,7 @@ var Processes;
         //buttons
         btnPresent = document.getElementById("btnPresent");
         btnClose = document.getElementById("btnClose");
+        btnfinish = document.getElementById("btnfinish");
         btnClose_Focus = document.getElementById("btnClose_Focus");
         btnView_load = document.getElementById("btnView_load");
         btnExpenses = document.getElementById("btnExpenses");
@@ -333,6 +337,7 @@ var Processes;
         btnAdd.onclick = btnAdd_onclick;
         btnPresent.onclick = btnPresent_onclick;
         btnClose.onclick = btnClose_onclick;
+        btnfinish.onclick = btnfinish_onclick;
         btnClose_Focus.onclick = btnClose_Focus_onclick;
         btnView_load.onclick = btnView_load_onclick;
         btnExpenses.onclick = btnExpenses_onclick;
@@ -358,6 +363,7 @@ var Processes;
         txtClose_CompanyCommition.onkeyup = Calculation_Close;
         txtClose_CompanyCommitionPrc.onchange = CommitionPrc_onchange;
         txtClose_Marketting.onkeyup = Calculation_Close;
+        textClose_Coolingandstorage.onkeyup = Calculation_Close;
         ddlVendor.onchange = ddlVendor_onchange;
         txt_tax.onchange = txt_tax_onchange;
         txtPaperPurchaseValue.onkeyup = Totaltax;
@@ -675,10 +681,11 @@ var Processes;
             salesmanId = Number(ddlSalesmanMaster.value.toString());
         }
         status = Number(ddlStateType.value.toString());
+        var trtype = Number($('#ddlTrtypeFilter').val());
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("Processes", "GetAll_IQ_GetOperation"),
-            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: 0, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BranchCode, startDate: startdt, endDate: enddt, trtype: trtype, Status: status, VendorId: vendorId, SalesmanId: salesmanId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -776,12 +783,23 @@ var Processes;
         }
         else if (Selected_Data[0].Status == 3) { //مغلق
             Processes_Close();
-            $("#btnOpen").attr("disabled", "disabled");
-            $("#btnOpen").removeClass("btn-dark-green");
-            $("#btnClose").attr("disabled", "disabled");
-            $("#btnClose").attr("style", "");
-            $("#btnPresent").attr("disabled", "disabled");
-            $("#btnPresent").attr("style", "");
+            if (ddlTrtype.value == '1') {
+                $('#btnClose').attr('disabled', 'disabled');
+                $("#btnClose").attr("disabled", "disabled");
+                //$("#btnClose").attr("style", "")
+                $("#btnClose").removeClass("btn-red");
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").removeClass("btn-green");
+                //$("#btnPresent").attr("style", "")
+            }
+            else {
+                $("#btnOpen").attr("disabled", "disabled");
+                $("#btnOpen").removeClass("btn-dark-green");
+                $("#btnClose").attr("disabled", "disabled");
+                $("#btnClose").attr("style", "");
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").attr("style", "");
+            }
         }
         else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
             Processes_Close();
@@ -817,7 +835,8 @@ var Processes;
         $('#txtDate').val(trDate);
         $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
-        $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
         $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
         $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
         if (Selected_Data[0].SalesmanId != 0) {
@@ -883,6 +902,9 @@ var Processes;
         ComputeTotalsCharge();
         $('#Print_salsman_1').addClass('display_none');
         $('#Print_salsman_2').addClass('display_none');
+        if (ddlTrtype.value == '1') {
+            Calculation_Close();
+        }
     }
     function BindGetOperationItemsGridData(OperationID) {
         Ajax.Callsync({
@@ -1998,10 +2020,14 @@ var Processes;
         Calculation_Close();
     }
     function Calculation_Close() {
+        debugger;
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = Number(($('#txtClose_TotalSalesCash').val() - (Number($('#txtClose_TotalExpenses').val()) + Number(txtClose_Adjustment.value))));
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
         $('#txtNetsales').val(Netsales);
-        //نسبة العمولة 
+        //العمولة
+        var CompanyCommition = (Number($('#txtNetsales').val()) - Number($('#txtPaperPurchaseValue').val())).RoundToSt(2);
+        $('#txtClose_CompanyCommition').val(CompanyCommition);
+        //نسبة العمولة  
         var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2);
         $('#txtClose_CompanyCommitionPrc').val(prc);
         //صافي الارباح = عمولة الشركة - عمولة البائع
@@ -2227,6 +2253,7 @@ var Processes;
             Model_I_TR_Operation.CreatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
             Model_I_TR_Operation.IsGenerated = false;
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
             Model_I_TR_Operation.IsPurPosted = false;
             Model_I_TR_Operation.Status = Status;
@@ -2281,6 +2308,7 @@ var Processes;
             Model_I_TR_Operation.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
             Model_I_TR_Operation.IsGenerated = IsGenerated;
             Model_I_TR_Operation.ClearanceDate = $('#txtClearanceDate').val();
+            Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
             if (Selected_Data.length > 0) {
                 Model_I_TR_Operation.IsPurPosted = Selected_Data[0].IsPurPosted;
@@ -2747,6 +2775,10 @@ var Processes;
     //------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------Processes--------------------------------------------------------
     function Processes_under_preparing() {
+        $("#btnfinish").attr("disabled", "disabled");
+        $("#btnfinish").removeClass('btn-red');
+        $("#btnfinish").addClass('display_none');
+        $("#btnClose").removeClass('display_none');
         $("#open_Trill").attr("disabled", "disabled").off('click');
         $("#open_Trill").addClass("disabledDiv");
         $("#divProcessClose").attr("disabled", "disabled").off('click');
@@ -2786,8 +2818,22 @@ var Processes;
         $("#btnClose").removeClass("btn-red");
         //$("#btnPresent").attr("style", "background-color: #198754")
         $("#btnPresent").addClass("btn-green");
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none');
+            $("#btnfinish").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
+        else {
+            $("#btnfinish").addClass('display_none');
+            $("#btnClose").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
     }
     function Processes_Ready() {
+        $("#btnfinish").attr("disabled", "disabled");
+        $("#btnfinish").removeClass('btn-red');
+        $("#btnfinish").addClass('display_none');
+        $("#btnClose").removeClass('display_none');
         $("#divProcessClose").attr("disabled", "disabled").off('click');
         $("#divProcessClose").addClass("disabledDiv");
         $("#data_lebel").attr("disabled", "disabled").off('click');
@@ -2836,8 +2882,21 @@ var Processes;
         //btnUpdate_3.classList.add('display_none');
         //btnUpdate_4.classList.add('display_none');
         //btnUpdate_5.classList.add('display_none');
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none');
+            $("#btnfinish").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
+        else {
+            $("#btnfinish").addClass('display_none');
+            $("#btnClose").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
     }
     function Processes_Open() {
+        $("#btnfinish").attr("disabled", "disabled");
+        $("#btnfinish").addClass('display_none');
+        $("#btnClose").removeClass('display_none');
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
         //$("#DivShow").attr("disabled", "disabled").off('click');
@@ -2883,8 +2942,30 @@ var Processes;
         else {
             btnClose.disabled = false;
         }
+        //if (ddlTrtype.value == '1') {
+        //    btnClose.innerHTML = 'اغلاق الارساليات';
+        //}
+        //else {
+        //    btnClose.innerHTML = 'تجهيز الاغلاق';
+        //}
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none');
+            $("#btnfinish").removeClass('display_none');
+            $("#btnfinish").removeAttr("disabled");
+            $("#btnfinish").addClass('btn-red');
+            $('#DivInformationCloce').removeClass('display_none');
+        }
+        else {
+            $("#btnfinish").addClass('display_none');
+            $("#btnClose").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
     }
     function Processes_Close() {
+        $("#btnfinish").attr("disabled", "disabled");
+        $("#btnfinish").removeClass('btn-red');
+        $("#btnfinish").addClass('display_none');
+        $("#btnClose").removeClass('display_none');
         $("#div_Master").attr("disabled", "disabled").off('click');
         $("#div_Master").addClass("disabledDiv");
         //$("#DivShow").attr("disabled", "disabled").off('click');
@@ -2923,10 +3004,21 @@ var Processes;
             // $("#btnOpen").attr("style", "background-color:   ")
             $("#btnOpen").addClass("btn-dark-green");
         }
+        if (ddlTrtype.value == '1') {
+            $("#btnClose").addClass('display_none');
+            $("#btnfinish").removeClass('display_none');
+            $('#DivInformationCloce').removeClass('display_none');
+        }
+        else {
+            $("#btnfinish").addClass('display_none');
+            $("#btnClose").removeClass('display_none');
+            $('#DivInformationCloce').addClass('display_none');
+        }
     }
     //-------------------------------------------------------button---Processes--------------------------------------
     function btnOpen_onclick() {
-        if (Status == 4) {
+        debugger;
+        if (Status == 4 || Status == 3) {
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("Processes", "OpenOperation"),
@@ -3078,8 +3170,10 @@ var Processes;
                                 Processes_Close();
                             }
                             else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
+                                debugger;
                                 Processes_Close();
                                 $('#btnClose').attr('disabled', 'disabled');
+                                //NewClose();
                             }
                             flag_Add = false;
                             flag_Success_5 = false;
@@ -3089,6 +3183,166 @@ var Processes;
                         }
                     }
                 });
+            }
+        }
+        else {
+            DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
+        }
+    }
+    function CloseNew() {
+        $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
+        $("#Financialsituation").removeAttr("disabled");
+        $("#Div_Money").removeAttr("disabled");
+        $('#lepRentdata').removeClass('showdiv');
+        $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+        $('#lepMoney').removeClass('showdiv');
+        $('#spanlepMoney_4').addClass('fa-angle-double-down');
+        $("#div_Master").attr("disabled", "disabled").off('click');
+        $("#div_Master").addClass("disabledDiv");
+        btnUpdate_1.classList.remove("display_none");
+        btnSave_1.classList.add("display_none");
+        btnBack_1.classList.add("display_none");
+        DocumentActions.RenderFromModel(Selected_Data[0]);
+        var trDate = DateFormat(Selected_Data[0].TrDate);
+        $('#txtDate').val(trDate);
+        Status = Selected_Data[0].Status;
+        var OpenAt = DateFormat(Selected_Data[0].OpenAt);
+        if (OpenAt != null) {
+            $('#txtdateopening').val(OpenAt);
+        }
+        else {
+            $('#txtdateopening').val(GetDate());
+        }
+        //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+        $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
+        $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+        $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
+        $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
+        $("#open_Trill").attr("disabled", "disabled").off('click');
+        $("#open_Trill").addClass("disabledDiv");
+        Update_1 = false;
+        debugger;
+        $("#Processshutdown").removeAttr("disabled");
+        $('#divlepRentdata_3').removeClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        btnUpdate_4.classList.remove('display_none');
+        btnUpdate_4.focus();
+        Update_4_onclick();
+        //$('#txtClose_CompanyCommition').val(0);
+        //$('#txtClose_NetProfit').val(0);
+        //$('#txtClose_purchaseValue').val(0);
+        if (btnSave_2.getAttribute('class') == 'icon-bar3 d-flex justify-content-between btn-save') {
+            btnBack_2_onclick();
+        }
+        btnBack_3_onclick();
+        btnBack_5_onclick();
+        btnUpdate_2.disabled = true;
+        btnUpdate_3.disabled = true;
+        btnUpdate_5.disabled = true;
+        Calculation_Close();
+        DisabledToolBar();
+        $("#Processshutdown").removeAttr("disabled");
+        $('#divlepRentdata_3').removeClass('display_none');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
+        $('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+        $("#divProcessClose").removeClass("disabledDiv");
+    }
+    function btnfinish_onclick() {
+        if (Status == 2) {
+            var AvailableQty = false;
+            OerSalesmanGrid_Detail.DataSource = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem;
+            OerSalesmanGrid_Detail.Bind();
+            SalesmanItem_AllAssign(AllGetOperationMasterDetailModel.TR_OperationSalesmanItem);
+            $("#id_Lapl_Salesman").html('<i class="glyphicon glyphicon-hand-down"></i> &gt;&gt;  ' + (lang == "ar" ? ' الاصناف لدي المناديب   ' : ' Items I have SalesMan  ') + '   &lt;&lt; <i class="glyphicon glyphicon-hand-down"></i>');
+            $("#Financialsituation").removeAttr("disabled");
+            $("#Div_Money").removeAttr("disabled");
+            $('#lepRentdata').removeClass('display_none');
+            $('#spanlepRentdata_4').addClass('fa-angle-double-down');
+            $('#lepMoney').removeClass('display_none');
+            $('#spanlepMoney_4').addClass('fa-angle-double-down');
+            var cnt = 1;
+            var ii = 0;
+            $("#OerSalesmanGrid_Detail").jsGrid("option", "pageIndex", cnt);
+            for (var i = 0; i < AllGetOperationMasterDetailModel.TR_OperationSalesmanItem.length; i++) {
+                if (ii > 15) {
+                    cnt += 1;
+                    $("#OerSalesmanGrid_Detail").jsGrid("option", "pageIndex", cnt);
+                    ii = 0;
+                }
+                var id = AllGetOperationMasterDetailModel.TR_OperationSalesmanItem[i].OperationSalesmanItemID;
+                if ($("#OnhandQty" + id).val() != '0' && $("#OnhandQty" + id).val() != null) {
+                    AvailableQty = true;
+                    Errorinput($("#OnhandQty" + id));
+                }
+                ii++;
+            }
+            debugger;
+            if (ddlTrtype.value == '1') {
+                if (Number($("#txtTotal").val()) != Number($("#txtPaperPurchaseValue").val())) {
+                    DisplayMassage("يجب ان يكون قيمة البضائع المسجلة = اجمالي الحمولة", "must enter lowest price !", MessageType.Worning);
+                    Errorinput($("#txtTotal"));
+                    Errorinput($("#txtPaperPurchaseValue"));
+                    return false;
+                }
+            }
+            if (AvailableQty == true) {
+                DisplayMassage("يجب ان تكون الكمية المتبقية = صفر", "The remaining amount should be = 0!", MessageType.Worning);
+                btnUpdate_5.focus();
+                Update_5_onclick();
+            }
+            else {
+                $('#btnfinish').attr('style', 'width: 104%;');
+                $('#btnfinish').html(' جاري الاغلاق <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+                $('#btnfinish').attr('disabled', 'disabled');
+                debugger;
+                setTimeout(function () {
+                    Ajax.Callsync({
+                        type: "Get",
+                        url: sys.apiUrl("Processes", "closingprocessingonNew"),
+                        data: { OperationID: OperationIDglopel, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+                        success: function (d) {
+                            var result = d;
+                            if (result.Response) {
+                                ddlStateType.value = '111';
+                                //DisplayMassage("تم تجهيز اغلاق  العملية بنجاح", "Operation added successfully", MessageType.Succeed);
+                                flag_Success_5 = true;
+                                $('#txtUpdatedBy').val(SysSession.CurrentEnvironment.UserCode);
+                                $('#txtUpdatedAt').val(DateTimeFormat(Date().toString()));
+                                Display();
+                                Selected_Data = new Array();
+                                Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
+                                $("#div_Master_Hedr").removeClass("display_none");
+                                DisplayData(Selected_Data);
+                                if (Selected_Data[0].Status == 0) { // تحت التجهيز
+                                    Processes_under_preparing();
+                                }
+                                else if (Selected_Data[0].Status == 1) { //جاهز
+                                }
+                                else if (Selected_Data[0].Status == 2) { //مفتوحة
+                                    Processes_Open();
+                                }
+                                else if (Selected_Data[0].Status == 3) { //مغلق
+                                    Processes_Close();
+                                }
+                                else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
+                                    debugger;
+                                    Processes_Close();
+                                    $('#btnClose').attr('disabled', 'disabled');
+                                }
+                                CloseNew();
+                                flag_Add = false;
+                                flag_Success_5 = false;
+                                $('#btnfinish').attr('style', '');
+                                $('#btnfinish').html(' اغلاق الارساليات');
+                                $('#btnfinish').removeAttr('disabled');
+                            }
+                            else {
+                                DisplayMassage("خطأء!", "Error!", MessageType.Worning);
+                            }
+                        }
+                    });
+                }, 200);
             }
         }
         else {
@@ -3218,8 +3472,11 @@ var Processes;
         DisabledToolBar();
     }
     function btnBack_1_onclick() {
+        debugger;
         if (flag_Add == true) {
+            debugger;
             if (flag_succ_insert == true) {
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
@@ -3245,6 +3502,7 @@ var Processes;
                 $("#btnClose").addClass("btn-red");
             }
             else {
+                debugger;
                 $("#div_Master_Hedr").addClass("display_none");
                 $('#div_Master').addClass('disabledDiv');
                 btnUpdate_1.classList.remove("display_none");
@@ -3255,8 +3513,10 @@ var Processes;
             RemoveDisabledToolBar();
         }
         else {
+            debugger;
             if (flag_Back == true) {
-                // 
+                //  debugger
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
@@ -3275,12 +3535,15 @@ var Processes;
                 //disabled_divMasterGridiv();
             }
             else {
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
                 btnSave_1.classList.add("display_none");
                 btnBack_1.classList.add("display_none");
                 DocumentActions.RenderFromModel(Selected_Data[0]);
+                var trDate = DateFormat(Selected_Data[0].TrDate);
+                $('#txtDate').val(trDate);
                 Status = Selected_Data[0].Status;
                 var OpenAt = DateFormat(Selected_Data[0].OpenAt);
                 if (OpenAt != null) {
@@ -3289,15 +3552,18 @@ var Processes;
                 else {
                     $('#txtdateopening').val(GetDate());
                 }
-                $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+                //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+                $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
                 $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
                 $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+            debugger;
             RemoveDisabledToolBar();
         }
+        debugger;
         Update_1 = false;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
@@ -3427,6 +3693,14 @@ var Processes;
                 DisplayMassage(" برجاء ادخال بيانات الحمولة", "Please enter the payload data", MessageType.Worning);
                 Errorinput(btnAddDetails);
                 CanAdd = false;
+            }
+            if (ddlTrtype.value == '1') {
+                if (Number($("#txtTotal").val()) != Number($("#txtPaperPurchaseValue").val())) {
+                    DisplayMassage("يجب ان يكون قيمة البضائع المسجلة = اجمالي الحمولة", "must enter lowest price !", MessageType.Worning);
+                    Errorinput($("#txtTotal"));
+                    Errorinput($("#txtPaperPurchaseValue"));
+                    return false;
+                }
             }
             else {
                 if (CountGrid > -1) {
@@ -3597,12 +3871,14 @@ var Processes;
             btnBack_4.classList.add("display_none");
             DocumentActions.RenderFromModel(Selected_Data[0]);
             var trDate = DateFormat(Selected_Data[0].TrDate);
+            $('#txtDate').val(trDate);
             //txtDateHeader.value = trDate;
             $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
             $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
             $('#txtStatus').val(Selected_Data[0].Status_DescA);
             Status = Selected_Data[0].Status;
-            $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+            //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
+            $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
             $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
             $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
@@ -3638,6 +3914,8 @@ var Processes;
         disabled_divMasterGridiv();
         //divGridDetails_onclick();
         RemoveDisabledToolBar();
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     function btnSave_4_onclick() {
         loading('btnsave');
