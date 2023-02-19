@@ -1657,9 +1657,9 @@ var PurTrReceive;
         var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * (Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val()));
         $("#txtPrice" + cnt).val(txtPriceValue);
         var total = Number(txtQuantityValue) * Number(txtPriceValue);
-        $("#txtTotal" + cnt).val(total);
+        $("#txtTotal" + cnt).val(total.RoundToSt(2));
         var vatAmount = Number(total) * VatPrc / 100;
-        $("#txtTax" + cnt).val(vatAmount);
+        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
         var totalAfterVat = Number(vatAmount) + Number(total);
         $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
         ComputeTotals();
@@ -1702,7 +1702,7 @@ var PurTrReceive;
         $("#txtItemsNumber").val(txtQuantityVal); // عدد العبوات
         //  var FullAllPriceWithoutTaxVal = (txtAddonsTot + Total).RoundToSt(2);
         $("#txtTotalPurchaseWithoutTax").val((txtAddonsTot + Totallll).RoundToSt(2)); //مجمل التكلفة بدون ضريبة
-        $("#txtTotal").val(Totallll);
+        $("#txtTotal").val(Totallll.RoundToSt(2));
         $("#txtTax").val(txtTaxVal.RoundToSt(2));
         $("#txtTotalFamily").val((txtTotAfterTaxVal).RoundToSt(2));
         var txtAddonsTaxValue = Number($("#txtAddonsTax").val());

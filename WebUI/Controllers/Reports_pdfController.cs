@@ -226,13 +226,11 @@ namespace Inv.WebUI.Controllers
             string ReportPDFFilename = "Report-" + DateTime.Now + ".pdf";
             LocalReport localReport = new LocalReport();
             localReport.DataSources.Clear();
-            foreach (var model in models)
-            {
-                ReportDataSource source = new ReportDataSource(reportName, model);
 
-                localReport.DataSources.Add(source);
+            string[] broken_str = reportName.Split('/');
 
-            }
+            ReportDataSource source = new ReportDataSource(broken_str[broken_str.Length - 1], models[0]);
+            localReport.DataSources.Add(source);
 
 
             if (reportName.Contains("Prnt"))
@@ -261,8 +259,7 @@ namespace Inv.WebUI.Controllers
             }
             catch (Exception ex)
             {
-
-                throw;
+                 
             }
 
 

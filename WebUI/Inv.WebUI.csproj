@@ -22,10 +22,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1747,6 +1751,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceStdComp10Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_OPerationInvoiceStdComp10En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_SlsInvoiceStdArComp10.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_SlsReturnSimpleComp10Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp10\Rpt_Prnt_SlsReturnStdComp10Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicePriceComp3Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicePriceComp3En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoiceRetSimpleComp3Ar.rdlc" />
@@ -1794,6 +1804,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceStdComp4Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_OPerationInvoiceStdComp4En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_SlsInvoiceStdArComp4.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_SlsReturnSimpleComp4Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp4\Rpt_Prnt_SlsReturnStdComp4Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Prnt_invoice_simpleComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Prnt_invoice_simpleComp5En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Prnt_invoice_simpleRetComp5Ar.rdlc" />
@@ -1818,6 +1834,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp5\Rpt_Prnt_SlsReturnStdComp5Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp6\Rpt_Prnt_SlsInvoiceSimpleArComp6.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp6\Rpt_Prnt_SlsInvoiceStdArComp6.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp6\Rpt_Prnt_SlsReturnSimpleComp6Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp6\Rpt_Prnt_SlsReturnStdComp6Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Prnt_invoice_simpleComp7Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Prnt_invoice_simpleComp7En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Prnt_invoice_simpleRetComp7Ar.rdlc" />
@@ -1840,6 +1862,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsInvoiceStdArComp7.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsReturnSimpleComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsReturnStdComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleRetComp8Ar.rdlc" />
@@ -1862,6 +1890,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceSimpleComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_OPerationInvoiceStdComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsInvoiceStdArComp8.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsReturnSimpleComp8Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Rpt_Prnt_SlsReturnStdComp8Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleComp9En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Prnt_invoice_simpleRetComp9Ar.rdlc" />
@@ -1887,6 +1921,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9_Old.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsReturnSimpleComp9Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsReturnStdComp9Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CashVoucherpay2Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
