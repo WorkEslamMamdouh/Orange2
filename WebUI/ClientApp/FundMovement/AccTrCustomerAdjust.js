@@ -449,7 +449,7 @@ var AccTrCustomerAdjust;
             Errorinput(txt_Movement_typeNew);
             return Valid = 1;
         }
-        if (txt_Settlement_typeNew.selectedIndex == 0) {
+        if (txt_Settlement_typeNew.value == 'Null') {
             DisplayMassage("يجب اختيار نوع التسويه ", "The type of settlement must be chosen", MessageType.Worning);
             Errorinput(txt_Settlement_typeNew);
             return Valid = 1;

@@ -1,50 +1,98 @@
+using Inv.API.Models.CustomEntities;
+using Inv.DAL.Domain;
+using Inv.DAL.Repository;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Inv.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Threading;
 using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
+using System.Threading;
+using System.Web;
 using System.Web.Configuration;
-using System.Net;
-using System.Data.Entity;
-using Inv.DAL.Domain;
-using Inv.API.Tools;
-using Inv.DAL.Repository;
-using Inv.API.Models.CustomEntities;
-using System.Reflection;
+using System.Web.Http;
 
 namespace Inv.API.Tools
 {
     public abstract class BaseController : ApiController
     {
-        bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+        //private readonly bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+
+      
+
+
+        //static string Comp_Code = GetValue("CompCode");
+        //public string Year = GetValue("CurrentYear");
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
-        //protected InvEntities dbNew = UnitOfWork.context(BuildConnectionString());
+  
 
         //protected InvEntities db = UnitOfWork.context();
 
-        public static class Config
+
+        //protected string? Username => User?.Identity?.Name?.Split("\\");
+
+
+
+ 
+
+
+        public static string GetName()
         {
-            public static Dictionary<string, string> Application = new Dictionary<string, string>();
+
+            string CompCode = "";
+            string CurrentYear = "";
+
+            IdRequest Base = new IdRequest(); 
+            try
+            {
+                CompCode = Base.GetValue("CompCode");
+                CurrentYear = Base.GetValue("CurrentYear");
+            }
+            catch (Exception ex)
+            {
+                 
+            }
+
+
+            string ServerName = WebConfigurationManager.AppSettings["ServerName"];
+            string DbName = WebConfigurationManager.AppSettings["AbsoluteSysDbName"];
+            string DbUserName = WebConfigurationManager.AppSettings["DbUserName"];
+            string DbPassword = WebConfigurationManager.AppSettings["DbPassword"];
+
+            //SessionRecord session = data[Shared.SessionKey].ToObject<SessionRecord>();
+
+            string connectionString = @"Data Source=" + ServerName + ";Network Library=DBMSSOCN;Initial Catalog=" + DbName + ";User ID=" + DbUserName + ";Password=" + DbPassword + "";
+
+            string Name;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand com = new SqlCommand())
+                {
+                    com.CommandText = "select DbName from G_CONTROL where COMP_CODE = " + CompCode + " and FIN_YEAR = " + CurrentYear + "";
+                    com.Connection = conn;
+                    conn.Open();
+                    Name = com.ExecuteScalar().ToString();
+                    conn.Close();
+
+
+                }
+            }
+
+            return Name;
         }
-
-        public static class GlobalData
-        {
-            public static KeyValuePair<string, object> Application { get; set; }
-        }
-
-
-        public static string BuildConnectionString()
-        {
-
          
+        public static string BuildConnectionString()
+        { 
+
+   
+
+
 
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
             EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
@@ -58,16 +106,21 @@ namespace Inv.API.Tools
             else
                 sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"];
 
+
+
             sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserName"];
             sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPassword"];
             sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
             sqlBuilder.MultipleActiveResultSets = true;
-           
+
             string providerString = sqlBuilder.ToString();
 
             entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
             entityBuilder.Provider = "System.Data.SqlClient";
             entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+ 
+             
 
             return entityBuilder.ConnectionString;
         }
@@ -89,7 +142,7 @@ namespace Inv.API.Tools
                     command.Dispose();
                     connection.Dispose();
 
-                    var result = JsonConvert.DeserializeObject<IEnumerable<T>>(JsonConvert.SerializeObject(table));
+                    IEnumerable<T> result = JsonConvert.DeserializeObject<IEnumerable<T>>(JsonConvert.SerializeObject(table));
                     return result;
                 }
             }
@@ -103,18 +156,22 @@ namespace Inv.API.Tools
 
         protected string JsonSerialize(object obj)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
             string result = JsonConvert.SerializeObject(obj, Formatting.Indented, settings);
             return result;
         }
 
         protected T JsonDeserialize<T>(string obj)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            var objResult = (object)obj;
-            var result = JsonConvert.DeserializeObject<T>(objResult.ToString(), settings);
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            object objResult = (object)obj;
+            T result = JsonConvert.DeserializeObject<T>(objResult.ToString(), settings);
             return result;
         }
 

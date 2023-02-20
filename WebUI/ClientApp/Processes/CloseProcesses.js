@@ -64,6 +64,7 @@ var CloseProcesses;
     var txtdateopening;
     var txtDateHeader;
     var txtNationality;
+    var ddlTrtype;
     var txt_tax;
     //buttons 
     var btnReCalculation;
@@ -241,6 +242,7 @@ var CloseProcesses;
         ddlVendor = document.getElementById("ddlVendor");
         ddlVendorMaster = document.getElementById("ddlVendorMaster");
         txtNationality = document.getElementById("txtNationality");
+        ddlTrtype = document.getElementById("ddlTrtype");
         txt_tax = document.getElementById("txt_tax");
         id_divGridDetails = document.getElementById("divMasterGridiv");
         //textboxes
@@ -740,6 +742,19 @@ var CloseProcesses;
             { title: res.Truck_number, name: "TruckNo", type: "text", width: "12%" },
             { title: res.I_Vendor, name: (lang == "ar" ? "nvd_DescA" : "Vnd_DescE"), type: "text", width: "35%" },
             { title: res.Consignment_number, name: "RefNO", type: "text", width: "14%" },
+            {
+                title: 'نوع الارسالية', css: "ColumPadding", name: "Trtype", width: "13%",
+                itemTemplate: function (s, item) {
+                    var txt = document.createElement("label");
+                    if (item.Trtype == 0) {
+                        txt.innerHTML = "عموله";
+                    }
+                    else {
+                        txt.innerHTML = "مشتراه";
+                    }
+                    return txt;
+                }
+            },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
@@ -810,6 +825,7 @@ var CloseProcesses;
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
         $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
         $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+        $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
         if (Selected_Data[0].SalesmanId != 0) {
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
         }
@@ -1920,10 +1936,33 @@ var CloseProcesses;
         Calculation_Close();
     }
     function Calculation_Close() {
+        debugger;
         ComputeTotalsAdjTotalSales();
         ComputeTotalClose_Adjustment();
+        //if (ddlTrtype.value == '1') { // مشتراه
+        //    txtClose_CompanyCommitionPrc.disabled = true;
+        //    txtClose_CompanyCommition.disabled = true;
+        //    txtClose_Adjustment.value = '0';
+        //    $('#Comp_comm').addClass('display_none');
+        //    //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+        //    var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
+        //    $('#txtNetsales').val(Netsales);
+        //    //نسبة العمولة  
+        //    var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+        //    $('#txtClose_CompanyCommitionPrc').val(prc);
+        //    //صافي الارباح = عمولة الشركة - عمولة البائع
+        //    //var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+        //    //$('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+        //    $('#txtClose_NetProfit').val(Netsales);
+        //    //قيمة الشراء = صافي المبيعات - عمولة الشركة
+        //    var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+        //    purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+        //    purchaseValue = purchaseValue
+        //    $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+        //}
+        //else { //عموله
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).toFixed(2);
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
         $('#txtNetsales').val(Netsales);
         //نسبة العمولة  
         var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2);
@@ -1935,6 +1974,7 @@ var CloseProcesses;
         var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
         purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
         $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+        //}
     }
     function Calculation_Close1() {
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
@@ -1970,7 +2010,7 @@ var CloseProcesses;
         ComputeTotalsAdjTotalSales();
         //ComputeTotalClose_Adjustment();
         //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).toFixed(2);
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
         $('#txtNetsales').val(Netsales);
         //نسبة العمولة  
         var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2);
@@ -2205,6 +2245,7 @@ var CloseProcesses;
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -2265,6 +2306,7 @@ var CloseProcesses;
             Model_I_TR_Operation.Status = Status;
             Model_I_TR_Operation.VendorID = $('#ddlVendor').val();
             Model_I_TR_Operation.NationalityID = $('#txtNationality').val();
+            Model_I_TR_Operation.Trtype = $('#ddlTrtype').val();
             Model_I_TR_Operation.VatType = Number(txt_tax.value);
             Model_I_TR_Operation.VatPrc = Number(txtVatPrc.value);
             Model_I_TR_Operation.VatAmount = Number(txtVatAmount.value);
@@ -2797,6 +2839,7 @@ var CloseProcesses;
         $("#txtPortName").attr("disabled", "disabled");
         $("#ddlVendor").attr("disabled", "disabled");
         $("#txtNationality").attr("disabled", "disabled");
+        $("#ddlTrtype").attr("disabled", "disabled");
         $("#txtClearanceDate").attr("disabled", "disabled");
         $("#txtPaperPurchaseValue").attr("disabled", "disabled");
         $("#txtCustomNo").attr("disabled", "disabled");
@@ -3185,6 +3228,7 @@ var CloseProcesses;
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
@@ -3210,6 +3254,7 @@ var CloseProcesses;
         $("#txtPortName").removeAttr("disabled");
         $("#ddlVendor").removeAttr("disabled");
         $("#txtNationality").removeAttr("disabled");
+        $("#ddlTrtype").removeAttr("disabled");
         $("#txtClearanceDate").removeAttr("disabled");
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
@@ -3291,6 +3336,7 @@ var CloseProcesses;
                 }
                 $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
                 $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
@@ -3573,6 +3619,7 @@ var CloseProcesses;
             Status = Selected_Data[0].Status;
             $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
             $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
+            $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
             $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
             $('#div_Master').removeClass('disabledDiv');
             $("#div_Master").attr("disabled", "disabled").off('click');
@@ -3745,6 +3792,7 @@ var CloseProcesses;
         $('#txtClose_TrDate').val(GetDate());
         $('#ddlVendor option[value=null]').prop('selected', 'selected').change();
         $('#txtNationality option[value=null]').prop('selected', 'selected').change();
+        $('#ddlTrtype option[value=null]').prop('selected', 'selected').change();
         $('#ddlSalesman option[value=null]').prop('selected', 'selected').change();
         $('#txt_tax').val('null');
         $('#txtVatPrc').val('');

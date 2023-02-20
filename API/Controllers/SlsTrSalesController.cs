@@ -17,10 +17,12 @@ namespace Inv.API.Controllers
 {
     public class SlsTrSalesController : BaseController
     {
+    
+
         private readonly ISlsInvoiceItemsService SlsInvoiceItemsService;
         private readonly ISlsTRInvoiceService SlsTrSalesService;
         private readonly G_USERSController UserControl;
-
+        private string username;
         public SlsTrSalesController(ISlsTRInvoiceService _ISlsTrSalesService, G_USERSController _Control, ISlsInvoiceItemsService _ISlsInvoiceItemsService)
         {
             this.SlsTrSalesService = _ISlsTrSalesService;
@@ -31,6 +33,7 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllSlsInvoiceList(int CompCode, int BranchCode , string UserCode, string Token)
         {
+            
             if (ModelState.IsValid)
             {
                 var res = db.IQ_GetSlsInvoiceListVer2.Where(x => x.CompCode == CompCode && x.BranchCode == BranchCode).ToList();
@@ -110,6 +113,8 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllSlsInvoiceCashStatistic(int CompCode, int BranchCode ,  string TrDate , int Status , int? CashBoxid, int? SalesmanId,int? CustId ,  string SalesUser, string UserCode, string Token)
         {
+          
+
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "  and SlsInvSrc = 1 and TrType= 0  and TrDate =' " + TrDate + "' and IsCash = 'true'  " ;
@@ -571,7 +576,9 @@ namespace Inv.API.Controllers
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllSlsInvoiceReviewStatistic(int CompCode, int BranchCode , int OperationId ,int SlsInvSrc ,int IsCash, string StartDate, string EndDate, int Status, int? CustId, int? SalesMan, int? SalesPerson, string UserCode, string Token)
-        { 
+        {
+            //username = GetKeyId('c');
+
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 string s = "select * from IQ_GetSlsInvoiceStatisticVer2 where TrType = 0 and BranchCode = "+ BranchCode + " and CompCode = " + CompCode + "and SlsInvSrc = "+ SlsInvSrc + " and TrDate >=' " + StartDate +  "' and TrDate <= ' " + EndDate + " ' ";

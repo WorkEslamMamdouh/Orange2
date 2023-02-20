@@ -307,21 +307,26 @@ namespace Inventorymove {
             }
         }
         if ($("#txt_indebtedness").val() == ">") {//******رصيد سالب
-            rp.BalType = 2;
-
-        }
-        if ($("#txt_indebtedness").val() == "<") {//******رصيد موجود
             rp.BalType = 1;
 
         }
-        if ($("#txt_indebtedness").val() == "=") {//******صفري
+        if ($("#txt_indebtedness").val() == "<") {//******رصيد موجود
             rp.BalType = 3;
+
+        }
+        if ($("#txt_indebtedness").val() == "=") {//******صفري
+			rp.BalType = 2;
 
         }
         if ($("#txt_indebtedness").val() == "All") {//******الجميع
 
             rp.BalType = 0;
         }
+        if ($("#txt_indebtedness").val() == "4") {//******رصيد موجب
+
+            rp.BalType = 4;
+        }
+
         rp.Status = $("#txt_ID_status").val();
         if (reptp1.checked == true) {
             rp.check = 3;

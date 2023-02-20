@@ -143,13 +143,18 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetOperation where CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
+                string s = "select * from IQ_GetOperation where  CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
 
                 string condition = "";
 
                 if (SalesmanId != 0 && SalesmanId != null)
                 {
                     condition = condition + " and SalesmanId =" + SalesmanId;
+                }
+
+                if (trtype != -1)
+                {
+                    condition = condition + " and trtype =" + trtype;
                 }
 
                 if (VendorId != 0 && VendorId != null)
@@ -173,7 +178,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string s = "select * from IQ_GetOperation where CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
+                string s = "select * from IQ_GetOperation where Trtype =0 and CompCode = " + CompCode + " and BranchCode = " + BranchCode + "and TrDate >=' " + startDate + "' and TrDate <=' " + endDate + " ' ";
 
                 string condition = "";
 
@@ -1176,5 +1181,21 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult closingprocessingonNew(int OperationID, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                string query = @"EXEC IProc_UpdateOperationSummaryVer2 "+ OperationID + @"
+                        update [dbo].[I_TR_Operation] set Status = 2 where OperationID = " + OperationID + "";
+
+                db.Database.ExecuteSqlCommand(query);
+                return Ok(new BaseResponse(true));
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 }

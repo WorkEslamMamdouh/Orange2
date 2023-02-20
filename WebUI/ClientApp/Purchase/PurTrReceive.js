@@ -54,6 +54,7 @@ var PurTrReceive;
     var divMasterGrid = new JsGrid();
     //Textboxes
     var txtNotes;
+    var VoucherNo;
     var txtFromDate;
     var txtToDate;
     var txtDateHeader;
@@ -186,6 +187,7 @@ var PurTrReceive;
         //textboxes
         txtFromDate = document.getElementById("txtFromDate");
         txtToDate = document.getElementById("txtToDate");
+        VoucherNo = document.getElementById("VoucherNo");
         txtNotes = document.getElementById("txtNotes");
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtDateHeader = document.getElementById("txtDateHeader");
@@ -461,6 +463,7 @@ var PurTrReceive;
         $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
         txtNotes.disabled = true;
+        VoucherNo.disabled = true;
         ddlCashBoxH.disabled = true;
         txtDateHeader.disabled = true;
         txtPurOrderNum.disabled = true;
@@ -469,6 +472,7 @@ var PurTrReceive;
         btnPrintInvoicePrice.disabled = false;
     }
     function DataHeader() {
+        debugger;
         if (RetrivedPurchaseModel.length > 0) {
             $("#txtDateHeader").val(RetrivedPurchaseModel[0].TrDate.toString());
             globalVendorID = RetrivedPurchaseModel[0].VendorID;
@@ -478,6 +482,8 @@ var PurTrReceive;
             lblInvoiceNumber.innerText = RetrivedPurchaseModel[0].TrNo.toString();
             ddlTaxTypeHeader.value = RetrivedPurchaseModel[0].VATType.toString();
             txtNotes.value = RetrivedPurchaseModel[0].Remarks.toString();
+            debugger;
+            VoucherNo.value = RetrivedPurchaseModel[0].VoucherNo.toString();
             ddlReciveTypeHeader.value = RetrivedPurchaseModel[0].PurRecType.toString();
             VendorRecieptID.value = RetrivedPurchaseModel[0].VendorInvNo.toString();
             txtDateHeader.value = DateFormat(RetrivedPurchaseModel[0].TrDate);
@@ -646,6 +652,7 @@ var PurTrReceive;
         if (compcode == 4) {
             ddlSalesmanHeader.value = '21';
         }
+        VoucherNo.disabled = true;
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -657,6 +664,7 @@ var PurTrReceive;
         $("#txtUpdatedAt").prop("value", DateTimeFormat(Date().toString()));
         $("#txtUpdatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         txtPurOrderNum.disabled = false;
+        VoucherNo.disabled = true;
     }
     function btnPurOrderSearch_onclick() {
         var sys = new SystemTools();
@@ -1119,6 +1127,7 @@ var PurTrReceive;
             txtPurOrderNum.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].TrNo.toString();
             ddlTaxTypeHeader.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VATType.toString();
             txtNotes.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].Remarks.toString();
+            VoucherNo.value = PurOrderDetailModel.IQ_GetPurchaseOrder[0].VoucherNo.toString();
             if (PurOrderDetailModel.IQ_GetPurchaseOrder[0].IsCash == true) {
                 ddlIsCash.value = '1';
                 $('#ddlCashBoxH').attr('disabled', 'disabled');
@@ -1224,7 +1233,7 @@ var PurTrReceive;
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n \n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                            <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc" + cnt + "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtDiscountAmount" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtNetUnitPrice" + cnt + "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc" + cnt + "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax" + cnt + "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"" + ((VatPrc == null || undefined) ? 0 : VatPrc) + "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>";
+        html = "<tr id= \"No_Row".concat(cnt, "\">\n                    <input id=\"ReciveDetailsID").concat(cnt, "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus").concat(cnt, "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems").concat(cnt, "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n \n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH").concat(cnt, "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily").concat(cnt, "\" class=\"form-control select_\">\n                                <option value=\"null\">").concat((lang == "ar" ? "اختر" : "Choose"), "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem").concat(cnt, "\" class=\"form-control select_\">\n                            <option value=\"null\">").concat((lang == "ar" ? "اختر" : "Choose"), "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity").concat(cnt, "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue").concat(cnt, "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc").concat(cnt, "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td class=\" ").concat(flagInvItemDiscount == false ? display_none : Remove_display_none, " \" >\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc").concat(cnt, "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" ").concat(flagInvItemDiscount == false ? display_none : Remove_display_none, " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtDiscountAmount").concat(cnt, "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" ").concat(flagInvItemDiscount == false ? display_none : Remove_display_none, " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtNetUnitPrice").concat(cnt, "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc").concat(cnt, "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice").concat(cnt, "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal").concat(cnt, "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax").concat(cnt, "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"").concat(((VatPrc == null || undefined) ? 0 : VatPrc), "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax").concat(cnt, "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons").concat(cnt, "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons").concat(cnt, "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost").concat(cnt, "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag").concat(cnt, "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID").concat(cnt, "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>");
         $("#div_Data").append(html);
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
@@ -1549,12 +1558,12 @@ var PurTrReceive;
             $("#UnitCost" + cnt).prop("value", ItemDetails[cnt].StockUnitCost);
             $("#ddlItem" + cnt).prop("value", itemcode.toString());
             $("#txtQuantity" + cnt).prop("value", ((ItemDetails[cnt].RecQty == null || undefined) ? 0 : ItemDetails[cnt].RecQty));
+            debugger;
             $("#txtQuantityReturnValue" + cnt).prop("value", ((ItemDetails[cnt].TotRetQty == null || undefined) ? 0 : ItemDetails[cnt].TotRetQty));
             $("#txtPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPrice == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPrice.RoundToSt(2));
             $("#txtSerialH" + cnt).prop("value", (ItemDetails[cnt].Serial == null || undefined) ? 0 : ItemDetails[cnt].Serial.RoundToSt(2));
             $("#txtAddons" + cnt).prop("value", (ItemDetails[cnt].UnitAddCost == null || undefined) ? 0 : ItemDetails[cnt].UnitAddCost.RoundToSt(2));
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
-            debugger;
             $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2));
             $("#txtNetUnitPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
             $("#txtDiscountPrc" + cnt).prop("value", (ItemDetails[cnt].DiscountPrc == null || undefined) ? 0 : ItemDetails[cnt].DiscountPrc.RoundToSt(2));
@@ -1627,7 +1636,6 @@ var PurTrReceive;
         return;
     }
     function totalRow(cnt, flagDiscountAmount) {
-        debugger;
         var txtPrice = Number($("#txtPriceFc" + cnt).val());
         var txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
         if (flagDiscountAmount) {
@@ -1639,16 +1647,16 @@ var PurTrReceive;
             $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2));
             $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
         }
-        var txtQuantityValue = $("#txtQuantity" + cnt).val();
-        var txtPriceValueFc = $("#txtNetUnitPrice" + cnt).val();
-        //var txtQuantityValue = $("#txtQuantity" + cnt).val();
-        //var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
+        debugger;
+        var txtQuantityValue = Number($("#txtQuantity" + cnt).val());
+        var txtPriceValueFc = Number($("#txtPriceFc" + cnt).val());
         var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-        $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
-        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * (Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val()));
-        $("#txtPrice" + cnt).val(txtPriceValue);
-        var total = Number(txtQuantityValue) * Number(txtPriceValue);
-        $("#txtTotal" + cnt).val(total);
+        $("#txtTotalFc" + cnt).val(totalFc.RoundToSt(2));
+        var Ratevalue = Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val());
+        var PriceValue = Number($("#txtPriceFc" + cnt).val()) * Ratevalue;
+        $("#txtPrice" + cnt).val(PriceValue);
+        var total = txtQuantityValue * PriceValue;
+        $("#txtTotal" + cnt).val(total.RoundToSt(2));
         var vatAmount = Number(total) * VatPrc / 100;
         $("#txtTax" + cnt).val(vatAmount);
         var totalAfterVat = Number(vatAmount) + Number(total);
@@ -1673,9 +1681,9 @@ var PurTrReceive;
             var flagvalue = $("#txt_StatusFlag" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
                 txtQuantityVal += Number($("#txtQuantity" + i).val()); // عدد العبوات
-                txtPriceVal = Number($("#txtNetUnitPrice" + i).val() * currencrRate);
+                txtPriceVal = Number($("#txtPrice" + i).val() * currencrRate);
                 Totallll += Number((Number($("#txtQuantity" + i).val()) * txtPriceVal));
-                txtPriceValFc = Number($("#txtNetUnitPrice" + i).val());
+                txtPriceValFc = Number($("#txtPriceFc" + i).val());
                 TotalFc += Number((Number($("#txtQuantity" + i).val()) * txtPriceValFc).RoundToSt(2));
                 txtTaxVal += Number($("#txtTax" + i).val());
                 txtTotAfterTaxVal += Number($("#txtTotAfterTax" + i).val());
@@ -1687,13 +1695,13 @@ var PurTrReceive;
                 TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
             }
         }
-        $("#txtLocalTotalFooter").val(TotalFc);
+        $("#txtLocalTotalFooter").val(TotalFc.RoundToSt(2));
         var txtAddonsTot = Number($("#txtAddons").val());
         txtFamilyType.value = CountItems.toString(); //عدد الاصناف 
         $("#txtItemsNumber").val(txtQuantityVal); // عدد العبوات
         //  var FullAllPriceWithoutTaxVal = (txtAddonsTot + Total).RoundToSt(2);
         $("#txtTotalPurchaseWithoutTax").val((txtAddonsTot + Totallll).RoundToSt(2)); //مجمل التكلفة بدون ضريبة
-        $("#txtTotal").val(Totallll);
+        $("#txtTotal").val(Totallll.RoundToSt(2));
         $("#txtTax").val(txtTaxVal.RoundToSt(2));
         $("#txtTotalFamily").val((txtTotAfterTaxVal).RoundToSt(2));
         var txtAddonsTaxValue = Number($("#txtAddonsTax").val());
@@ -1789,7 +1797,7 @@ var PurTrReceive;
     }
     function BuildControlsCharges(cnt) {
         var html;
-        html = "<tr id= \"No_Row_1" + cnt + "\">\n                    <input id=\"ReceiveExpensesID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtSerial" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"" + CountItemsCharge + "\"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtAddonsCharge" + cnt + "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge" + cnt + "\" type=\"text\" class=\"form-control\" disabled value=\"\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtValueCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVatType" + cnt + "\" class=\"form-control \" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtVatCharge" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control \"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtValueAfterVatCharge" + cnt + "\" type=\"text\" disabled class=\"form-control\"   value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVendorIsCheckCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtInvoiceNumberCharge" + cnt + "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtInvoiceDateCharge" + cnt + "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVendorCharge" + cnt + "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txt_D_CashBox" + cnt + "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n                             <option value=\"Null\">" + (lang == "ar" ? "الصندوق" : "CashBox") + "  </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\" />;\n\n                </tr>";
+        html = "<tr id= \"No_Row_1".concat(cnt, "\">\n                    <input id=\"ReceiveExpensesID").concat(cnt, "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus1").concat(cnt, "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtSerial").concat(cnt, "\" type=\"text\" class=\"form-control\" disabled value=\"").concat(CountItemsCharge, "\"/>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtAddonsCharge").concat(cnt, "\" class=\"form-control\" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtAddonsTypeCharge").concat(cnt, "\" type=\"text\" class=\"form-control\" disabled value=\"\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtValueCharge").concat(cnt, "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVatType").concat(cnt, "\" class=\"form-control \" value=\"null\" ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtVatCharge").concat(cnt, "\" type=\"text\" disabled value=\"0\" class=\"form-control \"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtValueAfterVatCharge").concat(cnt, "\" type=\"text\" disabled class=\"form-control\"   value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVendorIsCheckCharge").concat(cnt, "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtInvoiceNumberCharge").concat(cnt, "\" type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <input id=\"txtInvoiceDateCharge").concat(cnt, "\" type=\"date\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txtVendorCharge").concat(cnt, "\" class=\"form-control\"  ></select>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"txt_D_CashBox").concat(cnt, "\" name=\"\"  disabled class=\"form-control\" tabindex=\"-1\" aria-hidden=\"true\">\n                             <option value=\"Null\">").concat((lang == "ar" ? "الصندوق" : "CashBox"), "  </option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                    <input id=\"txt_StatusFlag1").concat(cnt, "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"txt_ID1").concat(cnt, "\" name = \" \" type = \"hidden\" class=\"form-control\" />;\n\n                </tr>");
         $("#div_ChargesData").append(html);
         $("#txtInvoiceDateCharge" + cnt).val(DateFormat(GetCurrentDate().toString()));
         $("#txtInvoiceDateCharge" + cnt).val(GetDate());
@@ -2141,6 +2149,7 @@ var PurTrReceive;
         lblInvoiceNumber.innerText = "";
         ddlTaxTypeHeader.value = "null";
         txtNotes.value = "";
+        VoucherNo.value = "";
         $("#ddlIsCash").prop("value", "0");
         $('#ddlCashBoxH').removeAttr('disabled');
         ddlReciveTypeHeader.value = "null";
@@ -2374,6 +2383,7 @@ var PurTrReceive;
             $("#btn_minus1" + i).removeAttr("disabled");
         }
         txtNotes.disabled = true;
+        VoucherNo.disabled = true;
         ddlCashBoxH.disabled = true;
         txtDateHeader.disabled = true;
         txtPurOrderNum.disabled = true;
@@ -2411,6 +2421,7 @@ var PurTrReceive;
         ReceiveModel.CurrencyRate = Number(txtCurrencyRate.value);
         ReceiveModel.TotalFC = Number($("#txtLocalTotalFooter").val());
         ReceiveModel.Remarks = txtNotes.value;
+        ReceiveModel.VoucherNo = Number(VoucherNo.value);
         if (ddlIsCash.value == '1') {
             ReceiveModel.CashBoxID = Number(ddlCashBoxH.value);
             ReceiveModel.IsCash = true;

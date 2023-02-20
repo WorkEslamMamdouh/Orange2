@@ -2967,11 +2967,11 @@ var SlsTrSalesManagerNew;
                 TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
                 TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
                 CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal.RoundToSt(2).toString());
-                var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
-                //TaxCount += Number($("#txtTax" + i).val());
-                TaxCount += vatAmount;
-                TaxCount = Number(TaxCount.RoundToSt(2).toString());
+                CountTotal = Number(CountTotal);
+                //var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
+                TaxCount += Number($("#txtTax" + i).val());
+                //TaxCount += vatAmount;
+                //TaxCount = Number(TaxCount);
                 NetCount += Number($("#txtTotAfterTax" + i).val());
             }
         }
@@ -2979,9 +2979,15 @@ var SlsTrSalesManagerNew;
         txtPackageCount.value = PackageCount.toString();
         txtTotalDiscount.value = TotalDiscount.toString();
         txtTotalbefore.value = Totalbefore.toString();
-        txtTotal.value = CountTotal.toString();
-        txtTax.value = TaxCount.toString();
-        txtNet.value = (Number(NetCount.RoundToSt(2))).RoundToSt(2);
+        txtTotal.value = CountTotal.RoundToSt(2);
+        txtTax.value = TaxCount.RoundToSt(2);
+        txtNet.value = (NetCount.RoundToSt(2));
+        if (ddlType.value == "1") {
+            if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
+                $("#txtCardMoney").val('');
+                $("#txtCashMoney").val(txtNet.value.toString());
+            }
+        }
     }
     function Insert_Serial() {
         var Chack_Flag = false;
@@ -3371,12 +3377,13 @@ var SlsTrSalesManagerNew;
                 invoiceItemSingleModel.InvoiceItemID = 0;
                 invoiceItemSingleModel.ItemID = $("#ddlItem" + i).val();
                 invoiceItemSingleModel.Serial = $("#txtSerial" + i).val();
-                invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.StockSoldQty = $('#txtQuantity' + i).val(); // 
                 invoiceItemSingleModel.Unitprice = Number($("#txtPrice" + i).val());
                 invoiceItemSingleModel.UnitpriceWithVat = Number($("#txtUnitpriceWithVat" + i).val());
                 invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
+                invoiceItemSingleModel.VatAmount = $("#txtTax" + i).val();
+                invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
                 //-----------------------------------------------------
                 invoiceItemSingleModel.UomID = Number($("#ddlItem" + i).attr('data-UomID'));
@@ -3392,7 +3399,6 @@ var SlsTrSalesManagerNew;
                 var VatNatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 invoiceItemSingleModel.VatPrc = VatPrc; //$("#txtTax" + i).val();
                 invoiceItemSingleModel.VatNatID = VatNatID;
-                invoiceItemSingleModel.VatAmount = $("#txtTax" + i).val();
                 invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
                 invoiceItemSingleModel.TotRetQty = $("#txtReturnQuantity" + i).val();
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();

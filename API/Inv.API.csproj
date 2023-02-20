@@ -323,6 +323,7 @@
     <Compile Include="Models\BaseResponse.cs" />
     <Compile Include="Models\CustomEntities\SystemEnvironment.cs" />
     <Compile Include="Models\CustomEntities\SystemParameters.cs" />
+    <Compile Include="Models\CustomEntities\IdRequest.cs" />
     <Compile Include="Models\CustomEntities\UserPrivilege.cs" />
     <Compile Include="Models\CustomModel\Account_CCDT_CCDTTP_MasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />

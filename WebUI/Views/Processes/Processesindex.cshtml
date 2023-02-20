@@ -71,6 +71,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">نوع الارساليه</label>
+                            <div class="col-9 col-md-8 ">
+                                <select id="ddlTrtypeFilter" name="" class="form-control">
+                                    <option value="-1">الجميع</option>
+                                    <option value="0">عموله</option>
+                                    <option value="1">مشتراه</option> 
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +140,9 @@
                                 <div class="col-4">
                                     <button id="btnClose" type="button" class="btn btn-main h-100">
                                         تجهيز الاغلاق
+                                    </button>
+                                    <button id="btnfinish" type="button" class="btn btn-main h-100 ">
+                                        اغلاق الارساليات
                                     </button>
                                 </div>
                             </div>
@@ -306,11 +321,23 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-6 col-lg-9">
+                        <div class="col-12 col-md-6 col-lg-6">
                             <div class="form-group row g-0">
                                 <label class="col-3 col-md-1 align-self-center p-md-0">@SystemResource.Description_Shipment</label>
                                 <div class="col-9 col-md-11">
                                     <textarea type="" class="form-control" name="Goods_Desc" id="txtGoods_Desc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-5 align-self-center p-md-0">نوع الارسالية</label>
+                                <div class="col-9 col-md-7">
+                                    <select id="ddlTrtype" name="" class="form-control"  >
+                                        <option value="0">عموله</option>
+                                        <option value="1">مشتراه</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -780,7 +807,7 @@
         </div>
     </div>
 </div>
-<div class="row gy-3 " id="DivInformationCloce">
+<div class="row gy-3 display_none" id="DivInformationCloce">
     <!-- Process Shutdown Container -->
     <div class="col-12">
         <div class="card bg-light-blue mt-2">
@@ -792,35 +819,67 @@
                         @SystemResource.Close_process
                     </label>
                     @* Details *@
-                    <div class="col-12" id="divlepRentdata_3">
+                    <div class="col-12 display_none" id="divlepRentdata_3">
                         <!-- Details Side Icon Bar -->
                         <div class="div-iconbar">
                             <button class="icon-bar2 d-flex justify-content-between btn-update" id="btnUpdate_4">
                                 <i class="fas fa-edit fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center">  @SystemResource.App_Update</span>
+                                <span class="align-self-center mb-3">  @SystemResource.App_Update</span>
                             </button>
                             <button class="icon-bar2 d-flex justify-content-between btn-save display_none" id="btnSave_4">
                                 <i class="fas fa-save fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center">  @SystemResource.App_save</span>
+                                <span class="align-self-center mb-3">  @SystemResource.App_save</span>
                             </button>
                             <button class="icon-bar2 d-flex justify-content-between btn-back display_none" id="btnBack_4">
                                 <i class="fas fa-backspace fa-fw side-icon ms-1"></i>
-                                <span class="align-self-center">   @SystemResource.App_back</span>
+                                <span class="align-self-center mb-3">   @SystemResource.App_back</span>
                             </button>
                         </div>
                         <!-- Details Contant  -->
-                        <div class="row">
+                        <div class="row" id="divProcessClose">
                             <div class="col-12 col-xl-6">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group row g-0">
-                                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Close_Date</label>
-                                            <div class="col-9 col-md-8">
+                                            <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.Close_Date</label>
+                                            <div class="col-9 col-md-6">
                                                 <input type="date" class="form-control" name="Close_TrDate" id="txtClose_TrDate">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">اجمالي الكمية المستلمة</label>
+                                            <div class="col-9 col-md-8">
+                                                <input disabled type="text" class="form-control" name="Close_TotalQtyRec" id="textClose_TotalQtyRec">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">اجمالي كمية المبيعات</label>
+                                            <div class="col-9 col-md-8">
+                                                <input disabled type="text" class="form-control" name="Close_TotalQtySold" id="textClose_TotalQtySold">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">اجمالي كمية الفوارغ</label>
+                                            <div class="col-9 col-md-8">
+                                                <input disabled type="text" class="form-control" name="Close_TotalQtyScrap" id="textClose_TotalQtyScrap">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">مصروف البرادات والتخزين</label>
+                                            <div class="col-9 col-md-8">
+                                                <input type="text" class="form-control" name="Close_Coolingandstorage" id="textClose_Coolingandstorage">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group row g-0">
                                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Total_sales</label>
                                             <div class="col-9 col-md-8">
@@ -828,7 +887,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group row g-0">
                                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Total_Expenses</label>
                                             <div class="col-9 col-md-8">
@@ -836,23 +895,31 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 display_none">
                                         <div class="form-group row g-0">
-                                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Adjustment</label>
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">اجمالي المبيعات المعدلة</label>
                                             <div class="col-9 col-md-8">
-                                                <input type="text" class="form-control" name="Close_Adjustment" id="txtClose_Adjustment">
+                                                <input type="text" class="form-control" disabled name="Close_AdjTotalSales" id="textClose_AdjTotalSales">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 display_none">
                                         <div class="form-group row g-0">
-                                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Adjust_Note</label>
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Adjustment</label>
                                             <div class="col-9 col-md-8">
+                                                <input type="text" class="form-control" disabled name="Close_Adjustment" id="txtClose_Adjustment">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 display_none">
+                                        <div class="form-group row g-0">
+                                            <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.Adjust_Note</label>
+                                            <div class="col-9 col-md-10">
                                                 <textarea type="text" class="form-control" name="Close_AdjustmentRemarks" id="txtClose_AdjustmentRemarks"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6">
                                         <div class="form-group row g-0">
                                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.RegistrationNoteNo</label>
                                             <div class="col-9 col-md-8">
@@ -862,8 +929,8 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group row g-0">
-                                            <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.Shutdown_notes</label>
-                                            <div class="col-9 col-md-10">
+                                            <label class="col-3 col-md-2 col-lg-1 align-self-center p-md-0">@SystemResource.Shutdown_notes</label>
+                                            <div class="col-9 col-md-10 col-lg-11">
                                                 <textarea type="" class="form-control" name="Close_Remarks" id="txtClose_Remarks"></textarea>
                                             </div>
                                         </div>
@@ -871,13 +938,13 @@
                                 </div>
                             </div>
                             <div class="col-12 col-xl-6">
-                                <div class="form-group row g-0 mb-2">
+                                <div class="form-group row g-0 mb-2 mt-5">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.Net_sales</label>
                                     <div class="col-4 ">
                                         <input type="text" class="form-control" disabled name="Netsales" id="txtNetsales">
                                     </div>
                                 </div>
-                                <div class="form-group row g-0 mb-2">
+                                <div id="Comp_comm" class="form-group row g-0 mb-2 display_none">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.Comp_comm</label>
                                     <div class="col-2"></div>
                                     <div class="col-1">
@@ -888,22 +955,16 @@
                                         <input type="text" class="form-control bg-danger bg-opacity-25" name="Close_CompanyCommition" id="txtClose_CompanyCommition">
                                     </div>
                                 </div>
-                                <div class="form-group row g-0 mb-2">
+                                <div class="form-group row g-0 mb-2 display_none">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.Marketing</label>
                                     <div class="col-4 offset-4">
                                         <input type="text" class="form-control bg-danger bg-opacity-25" name="Close_Marketting" id="txtClose_Marketting">
                                     </div>
                                 </div>
-                                <div class="form-group row g-0 mb-2">
+                                <div class="form-group row g-0 mb-2 display_none">
                                     <label class="col-4 align-self-center p-md-0">@SystemResource.sales_comm</label>
                                     <div class="col-4 ">
                                         <input type="text" class="form-control bg-success bg-opacity-25" name="Close_SalesManCommition" id="txtClose_SalesManCommition">
-                                    </div>
-                                </div>
-                                <div class="form-group row g-0 mb-2">
-                                    <label class="col-4 align-self-center p-md-0">@SystemResource.Net_profit</label>
-                                    <div class="col-4 ">
-                                        <input type="text" class="form-control" disabled name="Close_NetProfit" id="txtClose_NetProfit">
                                     </div>
                                 </div>
                                 <div class="form-group row g-0 mb-2">
@@ -912,6 +973,13 @@
                                         <input type="text" class="form-control" disabled name="Close_purchaseValue" id="txtClose_purchaseValue">
                                     </div>
                                 </div>
+                                <div class="form-group row g-0 mb-2">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.Net_profit</label>
+                                    <div class="col-4 ">
+                                        <input type="text" class="form-control" disabled name="Close_NetProfit" id="txtClose_NetProfit">
+                                    </div>
+                                </div>
+
                             </div>
 
                             <!-- Editors Details -->
@@ -961,6 +1029,7 @@
             $("#ddlSeller").select2();
             $("#ddlCustomer").select2();
             $("#ddlCustomer2").select2();
+            $("#ddlVendor").select2();
             // Read selected option
             $('#but_read').click(function () {
                 var username = $('#ddlVendorMaster option:selected').text();
@@ -980,6 +1049,9 @@
 
                 var username = $('#ddlCustomer2 option:selected').text();
                 var userid = $('#ddlCustomer2').val();
+
+                var username = $('#ddlVendor option:selected').text();
+                var userid = $('#ddlVendor').val();
 
                 $('#result').html("id : " + userid + ", name : " + username);
             });
