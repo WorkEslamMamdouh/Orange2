@@ -127,7 +127,7 @@ namespace PurTrReceive {
     var btnPrint: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
     var btnSend: HTMLButtonElement;
-    
+
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     var flagLastPrice = 2;
@@ -167,7 +167,7 @@ namespace PurTrReceive {
         $('#btnPrint').addClass('display_none');
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
 
-       
+
         InitializeGrid();
 
 
@@ -451,7 +451,7 @@ namespace PurTrReceive {
             },
 
         ];
-        
+
     }
     function BindStatisticGridData() {
         var startdt = DateFormatRep(txtFromDate.value).toString();
@@ -659,7 +659,7 @@ namespace PurTrReceive {
     function btnShow_onclick() {
         ShowFlag = true;
         $("#divMasterGridiv").removeClass("display_none");
-         
+
         BindStatisticGridData();
         $("#divDetails").addClass("display_none");
         $("#MasterDropDowns").removeClass("display_none");
@@ -753,7 +753,7 @@ namespace PurTrReceive {
         ddlReciveTypeHeader.selectedIndex = 1;
 
         if (compcode == 4) {
-            ddlSalesmanHeader.value ='21'
+            ddlSalesmanHeader.value = '21'
         }
 
         VoucherNo.disabled = true;
@@ -1315,7 +1315,7 @@ namespace PurTrReceive {
                 BuildControls(i);
                 CountGrid++
             }
-            PurOrderShowFlag = false; 
+            PurOrderShowFlag = false;
             CountItems = CountGrid;
             Insert_Serial();
             ComputeTotals();
@@ -1448,7 +1448,7 @@ namespace PurTrReceive {
                      <td>
 		                <div class="form-group">
                         <select id="ddlItem${cnt}" class="form-control select_">
-                            <option value="null">${ (lang == "ar" ? "اختر" : "Choose")}</option>
+                            <option value="null">${(lang == "ar" ? "اختر" : "Choose")}</option>
                         </select>
 		                </div>
 	                </td>
@@ -1467,17 +1467,17 @@ namespace PurTrReceive {
 			                <input type="number"  id="txtPriceFc${cnt}" name="quant[20]" class="form-control" value="1" min="0" max="1000" step="0.5">
 		                </div>
 	                </td>
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group" >
 			               <input id="txtDiscountPrc${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group"style="width: 84px;" >
 			               <input id="txtDiscountAmount${cnt}" type="text"  class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
 	                </td>  
-                    <td class=" ${ flagInvItemDiscount == false ? display_none : Remove_display_none } " >
+                    <td class=" ${flagInvItemDiscount == false ? display_none : Remove_display_none} " >
 		                <div class="form-group"style="width: 84px;" >
 			               <input id="txtNetUnitPrice${cnt}" type="text" disabled class="form-control"  name="quant[3]" class="form-control" value="0" min="0" step="1">
 		                </div>
@@ -1691,7 +1691,7 @@ namespace PurTrReceive {
 
                 $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
 
-                ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>(); 
+                ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
                 ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
 
 
@@ -1950,7 +1950,7 @@ namespace PurTrReceive {
             $("#txtAddons" + cnt).prop("value", (ItemDetails[cnt].UnitAddCost == null || undefined) ? 0 : ItemDetails[cnt].UnitAddCost.RoundToSt(2));
             $("#txtTotAddons" + cnt).prop("value", (ItemDetails[cnt].NetUnitCost == null || undefined) ? 0 : ItemDetails[cnt].NetUnitCost.RoundToSt(2));
 
-            
+
 
             $("#txtPriceFc" + cnt).prop("value", (ItemDetails[cnt].OrgUnitpriceFC == null || undefined) ? 0 : ItemDetails[cnt].OrgUnitpriceFC.RoundToSt(2));
             $("#txtNetUnitPrice" + cnt).prop("value", (ItemDetails[cnt].RecUnitPriceFC == null || undefined) ? 0 : ItemDetails[cnt].RecUnitPriceFC.RoundToSt(2));
@@ -2043,7 +2043,6 @@ namespace PurTrReceive {
     }
 
     function totalRow(cnt: number, flagDiscountAmount: boolean) {
-        debugger
 
 
         let txtPrice = Number($("#txtPriceFc" + cnt).val())
@@ -2063,24 +2062,23 @@ namespace PurTrReceive {
 
 
 
-        var txtQuantityValue = $("#txtQuantity" + cnt).val();
-        var txtPriceValueFc = $("#txtNetUnitPrice" + cnt).val();
+        debugger
+        var txtQuantityValue = Number($("#txtQuantity" + cnt).val());
+        var txtPriceValueFc = Number($("#txtPriceFc" + cnt).val());
 
 
 
-        //var txtQuantityValue = $("#txtQuantity" + cnt).val();
-        //var txtPriceValueFc = $("#txtPriceFc" + cnt).val();
         var totalFc = Number(txtQuantityValue) * Number(txtPriceValueFc);
-        $("#txtTotalFc" + cnt).val(Number(totalFc).toFixed(2));
+        $("#txtTotalFc" + cnt).val(totalFc.RoundToSt(2));
 
-
-        var txtPriceValue = $("#txtNetUnitPrice" + cnt).val() * (Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val()));
-        $("#txtPrice" + cnt).val(txtPriceValue);
-        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+        var Ratevalue = Number($("#txtCurrencyRate").val()) == 0 ? 1 : Number($("#txtCurrencyRate").val())
+        var PriceValue = Number($("#txtPriceFc" + cnt).val()) * Ratevalue;
+        $("#txtPrice" + cnt).val(PriceValue);
+        var total = txtQuantityValue * PriceValue;
         $("#txtTotal" + cnt).val(total.RoundToSt(2));
 
         var vatAmount = Number(total) * VatPrc / 100;
-        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
+        $("#txtTax" + cnt).val(vatAmount);
         var totalAfterVat = Number(vatAmount) + Number(total);
         $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
 
@@ -2108,10 +2106,10 @@ namespace PurTrReceive {
             var flagvalue = $("#txt_StatusFlag" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
                 txtQuantityVal += Number($("#txtQuantity" + i).val()); // عدد العبوات
-                txtPriceVal = Number($("#txtNetUnitPrice" + i).val() * currencrRate);
+                txtPriceVal = Number($("#txtPrice" + i).val() * currencrRate);
                 Totallll += Number((Number($("#txtQuantity" + i).val()) * txtPriceVal));
 
-                txtPriceValFc = Number($("#txtNetUnitPrice" + i).val());
+                txtPriceValFc = Number($("#txtPriceFc" + i).val());
                 TotalFc += Number((Number($("#txtQuantity" + i).val()) * txtPriceValFc).RoundToSt(2));
 
                 txtTaxVal += Number($("#txtTax" + i).val());
@@ -2129,7 +2127,7 @@ namespace PurTrReceive {
 
             }
         }
-        $("#txtLocalTotalFooter").val(TotalFc);
+        $("#txtLocalTotalFooter").val(TotalFc.RoundToSt(2));
         var txtAddonsTot = Number($("#txtAddons").val());
         txtFamilyType.value = CountItems.toString();//عدد الاصناف 
         $("#txtItemsNumber").val(txtQuantityVal);// عدد العبوات
@@ -2308,7 +2306,7 @@ namespace PurTrReceive {
                     <td>
 		                <div class="form-group">
                             <select id="txt_D_CashBox${cnt}" name=""  disabled class="form-control" tabindex="-1" aria-hidden="true">
-                             <option value="Null">${ (lang == "ar" ? "الصندوق" : "CashBox")}  </option>
+                             <option value="Null">${(lang == "ar" ? "الصندوق" : "CashBox")}  </option>
                             </select>
 		                </div>
 	                </td>
@@ -3233,7 +3231,7 @@ namespace PurTrReceive {
                     GlobalReceiveID = res.ReceiveID;
                     displayDate_speed(GlobalReceiveID, res);
                     Success(res.ReceiveID);
-                
+
                     Save_Succ_But();
                 } else {
 
@@ -3270,7 +3268,7 @@ namespace PurTrReceive {
                     GlobalReceiveID = res.ReceiveID;
                     displayDate_speed(GlobalReceiveID, res);
                     Success(res.ReceiveID);
-                    
+
                     //BindAfterInsertorUpdate(res.I_Pur_TR_Receive.ReceiveID);
                     //DisableControls();
                     //if (RetrivedPurchaseModel[0].Status == 1) {
@@ -3306,7 +3304,7 @@ namespace PurTrReceive {
 
         ShowFlag = true;
         $("#divMasterGridiv").removeClass("display_none");
-    
+
         $("#divDetails").addClass("display_none");
         $("#MasterDropDowns").removeClass("display_none");
         $("#divGridWithDetail").removeClass("display_none");
@@ -3342,7 +3340,7 @@ namespace PurTrReceive {
         $("#btnSend").removeClass("display_none");
 
         btnPrintInvoicePrice.disabled = false;
-    } 
+    }
     function openInvoice() {
 
         if (!CheckPeriodDate(txtDateHeader.value, "I")) {
@@ -3505,7 +3503,7 @@ namespace PurTrReceive {
 
         rp.Name_function = "IProc_Prnt_PurReceive";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -3573,7 +3571,7 @@ namespace PurTrReceive {
             else if (status == 2) {
                 Condation2 = Condation2 + "";
             }
-             
+
             ///////////
             let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
 
@@ -3599,7 +3597,7 @@ namespace PurTrReceive {
 
         rp.Type = 0;
         rp.Repdesign = 0;
-        rp.TRId = GlobalReceiveID; 
+        rp.TRId = GlobalReceiveID;
         rp.Name_function = "IProc_Prnt_PurReceive";
 
 
@@ -3610,7 +3608,7 @@ namespace PurTrReceive {
         rp.TrNo = lblInvoiceNumber.innerText;
         rp.ContactMobile = "966504170785";//966504170785 //966508133500 
         rp.Title_Mess = "  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.innerText + " ) ";
-        
+
         debugger
         SendInv_to_Cust(rp)
     }
