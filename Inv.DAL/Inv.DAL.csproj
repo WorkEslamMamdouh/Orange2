@@ -560,10 +560,16 @@
     <Compile Include="Domain\IProc_Rpt_AccCustomerAging_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IProc_Rpt_AccCustomerDetailVer2_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IProc_Rpt_AccCustomerDetail_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_AccCustomerLedger_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\IProc_Rpt_AccCustomerSummaryVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_AccCustomerSummary_Result.cs">
@@ -584,10 +590,16 @@
     <Compile Include="Domain\IProc_Rpt_AccVendorCollSummary_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IProc_Rpt_AccVendorDetailVer2_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IProc_Rpt_AccVendorDetail_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_AccVendorLedger_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\IProc_Rpt_AccVendorSummaryVer2_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_AccVendorSummary_Result.cs">
