@@ -26,7 +26,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.App_indebtedness</label>
+                                    <div class="col-8 ">
+                                        <select id="txt_indebtedness" name="" class="form-control">
+                                            <option value="All">@SystemResource.App_All</option>
+                                            <option value=">">@SystemResource.App_He_Owes_Him </option>
+                                            <option value="<">@SystemResource.App_an_indebtedness</option>
+                                            <option value="=">@SystemResource.App_Zero </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                      
                     </div>
 
                     <div class="col-12 col-md-4">
@@ -83,14 +97,9 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.App_indebtedness</label>
+                            <label class="col-4 align-self-center p-md-0">ادراج العمليات النقدية ؟ </label>
                             <div class="col-8 ">
-                                <select id="txt_indebtedness" name="" class="form-control">
-                                    <option value="All">@SystemResource.App_All</option>
-                                    <option value=">">@SystemResource.App_He_Owes_Him </option>
-                                    <option value="<">@SystemResource.App_an_indebtedness</option>
-                                    <option value="=">@SystemResource.App_Zero </option>
-                                </select>
+                                <input id="checkboxCash" type="checkbox" class="form-check-input" >
                             </div>
                         </div>
                     </div>

@@ -30,6 +30,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group row">
+                                    <label class="col-4 align-self-center p-md-0">@SystemResource.activity_Nature</label>
+                                    <div class="col-8 ">
+                                        <select id="txtVendorType" name="" class="form-control">
+                                            <option value="Null">@SystemResource.App_Everybody</option>
+                                            <option value="1">@SystemResource.vendor_good</option>
+                                            <option value="2"> @SystemResource.Service_supplier</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -90,16 +102,13 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-4 align-self-center p-md-0">@SystemResource.activity_Nature</label>
+                            <label class="col-4 align-self-center p-md-0">ادراج العمليات النقدية ؟ </label>
                             <div class="col-8 ">
-                                <select id="txtVendorType" name="" class="form-control">
-                                    <option value="Null">@SystemResource.App_Everybody</option>
-                                    <option value="1">@SystemResource.vendor_good</option>
-                                    <option value="2"> @SystemResource.Service_supplier</option>
-                                </select>
+                                <input id="checkboxCash" type="checkbox" class="form-check-input">
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-6  mt-2">
                         <div class="row special-group">
                             <label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> @SystemResource.App_report_type</label>
@@ -154,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-              
+
                 </div>
             </div>
         </div>
