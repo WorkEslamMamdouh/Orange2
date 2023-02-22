@@ -1721,10 +1721,10 @@ namespace PurTrReceive {
                 $("#txtQuantity" + cnt).val("1");
                 $("#txtDiscountPrc" + cnt).val("0");
                 $("#txtDiscountAmount" + cnt).val("0");
-                if (res == true) {
-                    $("#ddlItem" + cnt).val("null");
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                }
+                //if (res == true) {
+                //    $("#ddlItem" + cnt).val("null");
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+                //}
 
                 totalRow(cnt, true);
 

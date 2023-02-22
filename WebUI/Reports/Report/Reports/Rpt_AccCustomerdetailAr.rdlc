@@ -2503,6 +2503,60 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Par_StatusDSA2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!Par_CashDsA.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
+              <Top>1.50595cm</Top>
+              <Left>1.58445cm</Left>
+              <Height>0.6cm</Height>
+              <Width>6.13703cm</Width>
+              <ZIndex>27</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>0.25pt</Width>
+                </Border>
+                <TopBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>0.25pt</Width>
+                </TopBorder>
+                <BottomBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>0.25pt</Width>
+                </BottomBorder>
+                <LeftBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>0.25pt</Width>
+                </LeftBorder>
+                <RightBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>0.25pt</Width>
+                </RightBorder>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Height>4.45474cm</Height>
@@ -2673,6 +2727,10 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
           <DataField>Par_Todate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_CashDsA">
+          <DataField>Par_CashDsA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="customercode">
           <DataField>customercode</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2719,10 +2777,11 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>RS.WebUI.Reports.Forms</rd:DataSetName>
-        <rd:TableName>ReportsForm</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>Rpt_AccCustomerDetail</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>RS.WebUI.Reports.Forms.ReportsForm, Inv.WebUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
+        <rd:TableName>InvEntities</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>IProc_Rpt_AccCustomerDetailVer2</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.IProc_Rpt_AccCustomerDetailVer2_Result] IProc_Rpt_AccCustomerDetailVer2(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String)</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

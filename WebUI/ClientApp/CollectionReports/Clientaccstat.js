@@ -23,6 +23,7 @@ var Clientaccstat;
     var txtDateFrom;
     var txtDateTo;
     var Rddetails;
+    var checkboxCash;
     var Rd_sum;
     var Rd_custmastr;
     var btnReset;
@@ -59,7 +60,7 @@ var Clientaccstat;
         FillddlCustomer();
         Rddetails.checked = true;
         Rd_Bal.checked = true;
-        Display();
+        //Display();
         txt_ID_APP_Type.value = "1";
     }
     Clientaccstat.InitalizeComponent = InitalizeComponent;
@@ -71,6 +72,7 @@ var Clientaccstat;
         txtDateFrom = document.getElementById("txtFromDate");
         txtDateTo = document.getElementById("txtToDate");
         Rddetails = document.getElementById("Rd_detail");
+        checkboxCash = document.getElementById("checkboxCash");
         Rd_sum = document.getElementById("Rd_sum");
         Rd_custmastr = document.getElementById("Rd_custmastr");
         Rd_Code = document.getElementById("Rd_Code");
@@ -374,6 +376,12 @@ var Clientaccstat;
         }
         else {
             rp.orderby = 3;
+        }
+        if (checkboxCash.checked == true) {
+            rp.CashType = 1;
+        }
+        else {
+            rp.CashType = 0;
         }
         debugger;
         //  Rd_detail

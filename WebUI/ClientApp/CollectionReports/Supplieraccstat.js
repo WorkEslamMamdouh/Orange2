@@ -24,6 +24,7 @@ var Supplieraccstat;
     var txtDateFrom;
     var txtDateTo;
     var btnReset;
+    var checkboxCash;
     var Rd_Code;
     var Rd_Name;
     var Rd_Bal;
@@ -73,6 +74,7 @@ var Supplieraccstat;
         Rd_Ladger = document.getElementById("Rd_Ladger");
         btnReset = document.getElementById("btnReset");
         Rd_Code = document.getElementById("Rd_Code");
+        checkboxCash = document.getElementById("checkboxCash");
         Rd_Name = document.getElementById("Rd_Name");
         Rd_Bal = document.getElementById("Rd_Bal");
         //---------------------------------------------------------------------- Print Buttons
@@ -344,6 +346,12 @@ var Supplieraccstat;
         }
         else {
             rp.orderby = 3;
+        }
+        if (checkboxCash.checked == true) {
+            rp.CashType = 1;
+        }
+        else {
+            rp.CashType = 0;
         }
         //  Rd_detail
         if (Rddetails.checked == true) { //******  تقرير تفصيلي 
