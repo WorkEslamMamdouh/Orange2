@@ -91,8 +91,8 @@ namespace STKOpeningbalance {
     export function InitalizeComponent() {
         //System
         //debugger
-        
-        $('#btnPrintTransaction').addClass('hidden_Control');
+
+        //$('#btnPrintTransaction').addClass('hidden_Control');
 
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "الرصيد الافتتاحي" : document.getElementById('Screen_name').innerHTML = "Opening balance";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -335,6 +335,7 @@ namespace STKOpeningbalance {
                                 CountGrid++;
                                 i++;
                             }
+                                ComputeTotals();
 
 
                         }
@@ -400,6 +401,7 @@ namespace STKOpeningbalance {
                                     $("#div_Data").html("");
                                     DisplayMassage('لا توجد اصناف', 'No items', MessageType.Error);
                                 }
+                                ComputeTotals();
 
 
                             }
@@ -471,10 +473,12 @@ namespace STKOpeningbalance {
 
     }
     function btnDeleteOpen_onclick() {
+        
+        
+        let query = " Iproc_UpdateStockOpenbalance  " + compcode + "," + Branch + "," + FinYear + "," + 2 + " "; 
 
-        let query = "select * from [dbo].[G_AlertType]"
 
-        WorningMessage("هل تريد  مسـح الرصيد الافتتاحي؟", "Do you want to delete?", "تحذير", "worning", () => {
+        WorningMessage("هل تريد  اعادة ضبط الرصيد الافتتاحي ؟", "Do you want to delete?", "تحذير", "worning", () => {
 
             Ajax.Callsync({
                 type: "Get",
@@ -484,7 +488,7 @@ namespace STKOpeningbalance {
                     let result = d as BaseResponse;
                     if (result.IsSuccess == true) {
                         let res = result.Response as I_Stk_TR_Open;
-                        DisplayMassage("تم  مسـح الرصيد الافتتاحي بنجاح ", 'Edited Successfully ' + res.Tr_No, MessageType.Succeed);
+                        DisplayMassage("تم اعادة ضبط الرصيد الافتتاحي  بنجاح ", 'Edited Successfully ' + res.Tr_No, MessageType.Succeed);
                         $("#div_hedr").removeClass("disabledDiv");
                         $("#divShow").removeClass("display_none");
                         $("#divShow").removeClass("disabledDiv");
@@ -499,7 +503,7 @@ namespace STKOpeningbalance {
 
 
         });
-        
+
 
     }
     //------------------------------------------------------ Normal Grid Region -----------------------------------
@@ -523,16 +527,16 @@ namespace STKOpeningbalance {
             {
                 title: res.Trns_Store, css: "ColumPadding", name: "TrDate", width: "100px",
                 itemTemplate: (s: string, item: I_Stk_TR_Open): HTMLLabelElement => {
-                    let txt: HTMLLabelElement = document.createElement("label");  
+                    let txt: HTMLLabelElement = document.createElement("label");
 
                     let StoreSource = StoreSourceDetails.filter(x => x.StoreId == item.StoreID)
                     if (StoreSource.length > 0) {
                         txt.innerHTML = StoreSource[0].DescA;
-                    } 
+                    }
                     return txt;
                 }
-            },
-            { title: res.App_ReferenceNumber, name: "RefNO", type: "text", width: "100px" },
+            }, 
+            
             //{ title: res.App_date, name: "TrDate", type: "text", width: "100px" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
@@ -542,6 +546,7 @@ namespace STKOpeningbalance {
                     return txt;
                 }
             },
+            { title: "الاجمالي", name: "TotalCost", type: "text", width: "100px" },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
                 itemTemplate: (s: string, item: I_Stk_TR_Open): HTMLLabelElement => {
@@ -643,7 +648,7 @@ namespace STKOpeningbalance {
                             totalRow(i);
                             CountGrid++;
                         }
-
+                        ComputeTotals();
 
                         //CountGrid = StockDetailModelFiltered.length;
                         DisableControls();
@@ -994,44 +999,44 @@ namespace STKOpeningbalance {
                     var res = false;
                     debugger
                     var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
-                    res = checkRepeatedItems(id, NumberRowid);
-                    if (res == false) {
-                        if ($("#txt_StatusFlag" + cnt).val() != "i")
-                            $("#txt_StatusFlag" + cnt).val("u");
+                    //res = checkRepeatedItems(id, NumberRowid);
+                    //if (res == false) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i")
+                        $("#txt_StatusFlag" + cnt).val("u");
 
-                        var SrcItem = ItemsToListDetails.filter(s => s.ItemID == id);
-                        if (SrcItem != null) {
-                            $('#txtItemNumber' + cnt).val(id);
-                            if (FlagAddOrEdit == 1)
-                                $('#txtOpenDetailID' + cnt).val(0);
-                            $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
-                            (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
-                            $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
-                            $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                            $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
-                            $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
-                            //$('#txtUnitCost' + cnt).val(SrcItem[0].GlobalCost);
-                            if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                                $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
-                            }
-                            else {
-                                $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
-                            }
-
-
+                    var SrcItem = ItemsToListDetails.filter(s => s.ItemID == id);
+                    if (SrcItem != null) {
+                        $('#txtItemNumber' + cnt).val(id);
+                        if (FlagAddOrEdit == 1)
+                            $('#txtOpenDetailID' + cnt).val(0);
+                        $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
+                        (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
+                        $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
+                        $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
+                        //$('#txtUnitCost' + cnt).val(SrcItem[0].GlobalCost);
+                        if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
+                            $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
+                        }
+                        else {
+                            $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
                         }
 
-                    } else {
-                        DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
-                        $('#txtItemNumber' + cnt).val("");
-                        $('#txtItemCode' + cnt).val("");
-                        $('#txtItemName' + cnt).val("");
-                        $('#txtUntitName' + cnt).val("");
-                        $('#txtItemCode' + cnt).val("");
-                        $('#txtSrcQty' + cnt).val("");
-                        $('#txtToQty' + cnt).val("");
-                        $('#txtUnitID' + cnt).val("");
+
                     }
+                    totalRow(cnt);
+                    //} else {
+                    //    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
+                    //    $('#txtItemNumber' + cnt).val("");
+                    //    $('#txtItemCode' + cnt).val("");
+                    //    $('#txtItemName' + cnt).val("");
+                    //    $('#txtUntitName' + cnt).val("");
+                    //    $('#txtItemCode' + cnt).val("");
+                    //    $('#txtSrcQty' + cnt).val("");
+                    //    $('#txtToQty' + cnt).val("");
+                    //    $('#txtUnitID' + cnt).val("");
+                    //}
                 });
             }
         });
@@ -1061,43 +1066,43 @@ namespace STKOpeningbalance {
 
             var ItemCode = $('#txtItemCode' + cnt).val();
             var SrcItem = ItemsToListDetails.filter(s => s.ItemCode == ItemCode);
-            if (SrcItem.length > 0) {
-                var res = false;
-                var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
-                var id = Number(SrcItem[0].ItemID);
-                res = checkRepeatedItems(id, NumberRowid);
-                if (res == false) {
-                    if (FlagAddOrEdit == 1)
-                        $('#txtOpenDetailID' + cnt).val(0);
+            //if (SrcItem.length > 0) {
+            var res = false;
+            var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
+            var id = Number(SrcItem[0].ItemID);
+            res = checkRepeatedItems(id, NumberRowid);
+            if (res == false) {
+                if (FlagAddOrEdit == 1)
+                    $('#txtOpenDetailID' + cnt).val(0);
 
-                    $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
-                    (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
-                    $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
-                    $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                    $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
-                    $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
-                    if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                        $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
-                    }
-                    else {
-                        $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
-                    }
-
-
-
-                    //$("#txtUnitCost" + cnt).removeAttr("disabled");
-                } else {
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
-                    $('#txtItemNumber' + cnt).val("");
-                    $('#txtItemCode' + cnt).val("");
-                    $('#txtItemName' + cnt).val("");
-                    $('#txtUntitName' + cnt).val("");
-                    $('#txtOnhandQty' + cnt).val("");
-                    $('#txtItemCode' + cnt).val("");
-                    $('#txtSrcQty' + cnt).val("");
-                    $('#txtToQty' + cnt).val("");
-                    $('#txtUnitID' + cnt).val("");
+                $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
+                (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
+                $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
+                $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
+                $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
+                $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
+                if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
+                    $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
                 }
+                else {
+                    $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
+                }
+
+
+
+                //$("#txtUnitCost" + cnt).removeAttr("disabled");
+                //} else {
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
+                //    $('#txtItemNumber' + cnt).val("");
+                //    $('#txtItemCode' + cnt).val("");
+                //    $('#txtItemName' + cnt).val("");
+                //    $('#txtUntitName' + cnt).val("");
+                //    $('#txtOnhandQty' + cnt).val("");
+                //    $('#txtItemCode' + cnt).val("");
+                //    $('#txtSrcQty' + cnt).val("");
+                //    $('#txtToQty' + cnt).val("");
+                //    $('#txtUnitID' + cnt).val("");
+                //}
             }
             else {
                 $('#txtItemNumber' + cnt).val("");
@@ -1145,6 +1150,35 @@ namespace STKOpeningbalance {
         let Qty = Number($("#txtOnhandQty" + cnt).val())
         let Cost = Number($("#txtUnitCost" + cnt).val())
         $("#txtTotal" + cnt).val((Qty * Cost).RoundToSt(2));
+        debugger
+        ComputeTotals();
+    }
+    function ComputeTotals() {
+
+        let CountItems = 0;
+        let PackageCount = 0;
+        let txtUnitCosts = 0;
+        let CountTotal = 0;
+        debugger
+        for (let i = 0; i < CountGrid; i++) {
+            var flagvalue = $("#txt_StatusFlag" + i).val();
+            if (flagvalue != "d" && flagvalue != "m") {
+
+                PackageCount += Number($("#txtOnhandQty" + i).val());
+
+                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
+
+                CountTotal += Number($("#txtTotal" + i).val());
+
+
+                CountItems++
+            }
+        }
+
+        $("#txtItemCount").val(CountItems.RoundToSt(2));
+        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
+        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
+        $("#txtTotal").val(CountTotal.RoundToSt(2));
 
 
     }
@@ -1235,6 +1269,7 @@ namespace STKOpeningbalance {
         StockHeaderModel.BranchCode = Number(Branch);
         StockHeaderModel.TrDate = txtTransferDate.value;
         StockHeaderModel.RefNO = txtRefNumber.value;
+        StockHeaderModel.TotalCost = Number($("#txtTotal").val());
 
         if (chkApproved.checked == true) { StockHeaderModel.Status = 1; } else { StockHeaderModel.Status = 0; }
 
@@ -1476,7 +1511,7 @@ namespace STKOpeningbalance {
 
 
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_StkAdjustList", "GeneralReports"),
+            url: Url.Action("IProc_Rpt_StkOpenList", "GeneralReports"),
             data: rp,
             success: (d) => {
 
@@ -1498,7 +1533,7 @@ namespace STKOpeningbalance {
         rp.ToDate = DateFormatRep(txtToDate.value);
         rp.TRId = GlobalOpenID;
         rp.Type = 0;
-        rp.Name_function = "IProc_Prnt_StkAdjust";
+        rp.Name_function = "IProc_Prnt_StkOpen";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 

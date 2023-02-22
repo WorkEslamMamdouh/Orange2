@@ -1960,6 +1960,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OperationSalesmanItemAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_PurPurchaseOrderAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_PurPurchaseOrderEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_StkOpenAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_StkIssueAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATReportAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATReportEn.rdlc" />
@@ -2160,6 +2163,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_StkOpenListAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_StkIssueListAr.rdlc" />

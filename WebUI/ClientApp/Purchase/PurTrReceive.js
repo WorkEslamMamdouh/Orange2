@@ -2177,7 +2177,7 @@ var PurTrReceive;
             Errorinput(txtVendorName);
             return false;
         }
-        else if (ddlSalesmanHeader.value == "null") {
+        else if (ddlSalesmanHeader.value == "null" || Number(ddlSalesmanHeader.value) == 0) {
             DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
             Errorinput(ddlSalesmanHeader);
             return false;

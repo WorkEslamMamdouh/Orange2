@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                     
+
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Trns_Store</label>
@@ -52,7 +52,7 @@
                             <label class="col-3 col-md-4 align-self-center p-md-0"></label>
                             <div class="col-9 col-md-8 ">
                                 <button id="btnDeleteOpen" type="button" class="btn btn-main float-right" fdprocessedid="53c1n" style="width: 100%;">
-                                    مسـح الرصيد الافتتاحي
+                                    اعادة ضبط الرصيد الافتتاحي 
                                 </button>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                     <div class="row ">
                         @* Change Place *@
                         <div class="col-12">
-                            
+
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="form-group row">
@@ -126,7 +126,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <div class="row">
-                                      
+
                                         <div class="col-12 col-md-6">
                                             <div class="form-group row ">
                                                 <label class="col-3 col-md-5 align-self-center p-md-0"> @SystemResource.Trns_RefNum</label>
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
-                                            <div class="form-group row ">
+                                            <div class="form-group row display_none">
                                                 <button id="btnRefash" type="button" class="btn btn-main float-right" disabled>
                                                     تحديث
                                                 </button>
@@ -203,7 +203,7 @@
                                 <th style="width: 10%"> @SystemResource.Itm_Uom</th>
                                 <th style="width: 10%">الكمية</th>
                                 <th style="width: 10%"> التكليفه</th>
-                                <th style="width: 10%">الاجمالي</th>  
+                                <th style="width: 10%">الاجمالي</th>
                             </tr>
                         </thead>
                         <tbody id="div_Data"></tbody>
@@ -215,6 +215,47 @@
                 </div>
             </div>
             <!-- Editors Details -->
+            <div class="row">
+
+                @*-------------------------------------------1----------------*@
+                 
+                <div class="col-12 col-md-3">
+                    <div class="form-group row">
+                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_ItemsCount</label>
+                        <div class="col-8 ">
+                            <input disabled class="form-control" name="Line_Count" id="txtItemCount" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <div class="form-group row">
+                        <label class="col-4 align-self-center p-md-0">اجمالي الكميات</label>
+                        <div class="col-8 ">
+                            <input disabled class="form-control" name="Line_Count" id="txtPackageCount" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <div class="form-group row">
+                        <label class="col-4 align-self-center p-md-0">اجمالي التكلفه</label>
+                        <div class="col-8 ">
+                            <input disabled class="form-control" name="Line_Count" id="txtUnitCosts" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <div class="form-group row">
+                        <label class="col-4 align-self-center p-md-0">@SystemResource.App_total</label>
+                        <div class="col-8 ">
+                            <input disabled class="form-control" name="ItemTotal" id="txtTotal" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div class="insettext row editor-details mt-2">
                 <div class="col-12 col-md-6">
 

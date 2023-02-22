@@ -3170,6 +3170,57 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
+
+        public IEnumerable<IProc_Rpt_StkOpenList_Result> Rpt_StkOpenList()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+            //ReportInfo Rep;
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+            string formDate = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", formDate);
+
+            string toDate = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", toDate);
+
+            int TrType = int.Parse(RepPar.TrType.ToString());
+            SqlParameter spTrType = new SqlParameter("@TrType", TrType == -1 ? System.Data.SqlTypes.SqlInt32.Null : TrType);
+
+            int storeID = int.Parse(RepPar.storeID.ToString());
+            SqlParameter spstoreID = new SqlParameter("@storeID", storeID == -1 ? System.Data.SqlTypes.SqlInt32.Null : storeID);
+
+            int Status = int.Parse(RepPar.Status.ToString());
+            SqlParameter spStatus = new SqlParameter("@Status", Status == -1 ? System.Data.SqlTypes.SqlInt32.Null : Status);
+
+                
+            Rep = OpenReport("Rpt_StkOpenList");
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value + 
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @Todate = '" + sptoDate.Value + "'" +
+           ", @storeID = " + spstoreID.Value + "" +
+           ", @Status =" + spStatus.Value + "";
+
+            List<IProc_Rpt_StkOpenList_Result> query = db.Database.SqlQuery<IProc_Rpt_StkOpenList_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         public IEnumerable<IProc_Rpt_StkTransferList_Result> Rpt_StkTransferListdirect()
         {
             ReportStandardParameters StandPar = getStandardParameters();
