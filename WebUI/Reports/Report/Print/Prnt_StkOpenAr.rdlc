@@ -465,7 +465,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الكمية الفعلية</Value>
+                              <Value>التكلفة</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -499,7 +499,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الكمية المسجلة</Value>
+                              <Value>الكمية </Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -778,7 +778,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=sum(Fields!Qty.Value * Fields!UnitCost.Value)</Value>
-                              <Style />
+                              <Style>
+                                <Format>#,0.00;- #,0.00</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -798,6 +800,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -810,7 +813,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=sum(Fields!UnitCost.Value)</Value>
-                              <Style />
+                              <Style>
+                                <Format>#,0.00;- #,0.00</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -842,7 +847,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=sum(Fields!Qty.Value)</Value>
-                              <Style />
+                              <Style>
+                                <Format>#,0.00;- #,0.00</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>

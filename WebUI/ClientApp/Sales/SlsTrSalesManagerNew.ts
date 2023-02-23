@@ -3675,7 +3675,7 @@ namespace SlsTrSalesManagerNew {
             $("#txtNetUnitPrice" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetUnitPrice);
             $("#txtTax_Rate" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatPrc);
             $("#txtReturnQuantity" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].TotRetQty);
-            $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemTotal);
+            $("#txtTotal" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].ItemTotal.RoundToSt(2));
             $("#txtTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].VatAmount.RoundToSt(2));
             $("#txtTotAfterTax" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].NetAfterVat.RoundToSt(2));
             $("#InvoiceItemID" + cnt).prop("value", SlsInvoiceItemsDetails[cnt].InvoiceItemID);
@@ -3781,14 +3781,14 @@ namespace SlsTrSalesManagerNew {
         let txtDiscountPrc = Number($("#txtDiscountPrc" + cnt).val());
 
         if (flagDiscountAmount) {
-            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100).RoundToSt(2));
-            $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)).RoundToSt(2));
+            $("#txtDiscountAmount" + cnt).val(((txtDiscountPrc * txtPrice) / 100));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - ((txtDiscountPrc * txtPrice) / 100)));
         }
         else {
 
             let txtDiscountAmount = Number($("#txtDiscountAmount" + cnt).val());
-            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100).RoundToSt(2));
-            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount).RoundToSt(2));
+            $("#txtDiscountPrc" + cnt).val(((txtDiscountAmount / txtPrice) * 100));
+            $("#txtNetUnitPrice" + cnt).val((txtPrice - txtDiscountAmount));
         }
 
 
@@ -3798,16 +3798,15 @@ namespace SlsTrSalesManagerNew {
         var txtPriceValue = $("#txtNetUnitPrice" + cnt).val();
 
 
-
-        var total = Number(txtQuantityValue) * Number(txtPriceValue);
+        debugger
+        var total = (Number(txtQuantityValue) * Number(txtPriceValue)).RoundToNum(2);
         VatPrc = $("#txtTax_Rate" + cnt).val();
-        var vatAmount = Number(total) * VatPrc / 100;
-        $("#txtTax" + cnt).val(vatAmount.RoundToSt(2));
-        var total = Number(txtQuantityValue) * Number(txtPriceValue);
-        $("#txtTotal" + cnt).val(total.RoundToSt(2));
+        var vatAmount = (Number(total) * VatPrc / 100).RoundToNum(2);
+        $("#txtTax" + cnt).val(vatAmount); 
+        $("#txtTotal" + cnt).val(total);
 
-        var totalAfterVat = Number(vatAmount.RoundToSt(2)) + Number(total.RoundToSt(2));
-        $("#txtTotAfterTax" + cnt).val(totalAfterVat.RoundToSt(2));
+        var totalAfterVat = ((vatAmount) + (total)).RoundToNum(2);
+        $("#txtTotAfterTax" + cnt).val(totalAfterVat);
 
 
 
@@ -3952,11 +3951,9 @@ namespace SlsTrSalesManagerNew {
                 PackageCount += Number($("#txtQuantity" + i).val());
                 PackageCount = Number(PackageCount.RoundToSt(2).toString());
 
-                Totalbefore += (Number($("#txtQuantity" + i).val()) * Number($("#txtPrice" + i).val()));
-                Totalbefore = Number(Totalbefore.RoundToSt(2).toString());
+                Totalbefore += (Number($("#txtTotal" + i).val())); 
 
-                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
-                TotalDiscount = Number(TotalDiscount.RoundToSt(2).toString());
+                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val())); 
 
                 CountTotal += Number($("#txtTotal" + i).val());
                 CountTotal = Number(CountTotal);
@@ -3973,7 +3970,7 @@ namespace SlsTrSalesManagerNew {
         txtItemCount.value = CountItems.toString();
         txtPackageCount.value = PackageCount.toString();
         txtTotalDiscount.value = TotalDiscount.toString();
-        txtTotalbefore.value = Totalbefore.toString();
+        txtTotalbefore.value = Totalbefore.RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
         txtNet.value = (NetCount.RoundToSt(2));
@@ -4234,8 +4231,8 @@ namespace SlsTrSalesManagerNew {
 
             let card = Number($('#txtCardMoney').val());
             let Cash = Number($('#txtCashMoney').val());
-            let Net = card + Cash;
-            if (Net != Number($('#txtNet').val())) {
+            let Net = (card + Cash).RoundToNum(2);
+            if (Net != Number($('#txtNet').val()).RoundToNum(2)) {
                 DisplayMassage("يجب ان يكون مجموع المبلغ المسدد بالكارت مع المسدد نقدا مساويا لصافي الفاتورة", "The amount paid should be equal to the net", MessageType.Worning);
                 Errorinput($('#txtNet'));
                 if ($('#txtCardMoney').val().trim() == '' && $('#txtCashMoney').val().trim() == '') {
@@ -4489,8 +4486,7 @@ namespace SlsTrSalesManagerNew {
                 invoiceItemSingleModel.UnitpriceWithVat = Number($("#txtUnitpriceWithVat" + i).val());
                 invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
-
-                invoiceItemSingleModel.VatAmount = $("#txtTax" + i).val();
+                 
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
                 //-----------------------------------------------------
@@ -4506,12 +4502,14 @@ namespace SlsTrSalesManagerNew {
                 VatPrc = $("#txtTax_Rate" + i).val();
                 let VatNatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 invoiceItemSingleModel.VatPrc = VatPrc;//$("#txtTax" + i).val();
-                invoiceItemSingleModel.VatNatID = VatNatID;
-                invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
+                invoiceItemSingleModel.VatNatID = VatNatID; 
                 invoiceItemSingleModel.TotRetQty = $("#txtReturnQuantity" + i).val();
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
 
 
+                invoiceItemSingleModel.ItemTotal = Number($("#txtTotal" + i).val());
+                invoiceItemSingleModel.VatAmount = Number($("#txtTax" + i).val());
+                invoiceItemSingleModel.NetAfterVat = Number($("#txtTotAfterTax" + i).val());
 
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())
 
@@ -4551,9 +4549,10 @@ namespace SlsTrSalesManagerNew {
                 let VatNatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 invoiceItemSingleModel.VatPrc = VatPrc;// $("#txtTax" + i).val();
                 invoiceItemSingleModel.VatNatID = VatNatID;
-                invoiceItemSingleModel.ItemTotal = invoiceItemSingleModel.Unitprice * invoiceItemSingleModel.SoldQty;
-                invoiceItemSingleModel.VatAmount = invoiceItemSingleModel.ItemTotal * invoiceItemSingleModel.VatPrc / 100;
-                invoiceItemSingleModel.NetAfterVat = invoiceItemSingleModel.ItemTotal + invoiceItemSingleModel.VatAmount;
+
+                invoiceItemSingleModel.ItemTotal = Number($("#txtTotal" + i).val());
+                invoiceItemSingleModel.VatAmount = Number($("#txtTax" + i).val());
+                invoiceItemSingleModel.NetAfterVat = Number($("#txtTotAfterTax" + i).val());
 
 
                 invoiceItemSingleModel.StockUnitCost = Number($("#UnitCost" + i).val())

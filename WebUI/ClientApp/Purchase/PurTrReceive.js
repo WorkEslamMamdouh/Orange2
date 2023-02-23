@@ -2589,6 +2589,11 @@ var PurTrReceive;
         //    MessageBox.Show('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '');
         //    return
         //}
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false;
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertPurchaseReceiveMasterDetail"),
@@ -2620,6 +2625,11 @@ var PurTrReceive;
         // MasterDetailModel.I_Pur_TR_Receive.PurOrderID = RetrivedPurchaseModel[0].PurOrderID;
         MasterDetailModel.I_Pur_TR_Receive.TrNo = RetrivedPurchaseModel[0].TrNo;
         MasterDetailModel.I_Pur_TR_Receive.ReceiveID = RetrivedPurchaseModel[0].ReceiveID;
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false;
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "UpdateListPurchaseReceiveMasterDetail"),
@@ -2711,6 +2721,11 @@ var PurTrReceive;
         MasterDetailModel.I_Pur_TR_Receive.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.I_Pur_TR_Receive.UpdatedAt = DateTimeFormat(Date().toString());
         MasterDetailModel.I_Pur_TR_Receive.Status = 0;
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false;
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "Open"),
