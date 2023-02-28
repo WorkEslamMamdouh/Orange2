@@ -162,7 +162,8 @@ namespace PurTrReceive {
         ShowFlag = true;
         GetVatType();
         GetAddonsData();
-        txtFromDate.value = DateStartMonth();
+        //txtFromDate.value = DateStartMonth();
+        txtFromDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
@@ -3223,6 +3224,20 @@ namespace PurTrReceive {
             return false
         }
 
+        if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
+            DisplayMassage(" برجاء مراجعه علي  بينات الفاتوره", "Please select the salesman", MessageType.Error);
+            Errorinput(btnAddDetails);
+
+            for (var i = 0; i < CountGrid; i++) {
+                let StatusFlag = $("#txt_StatusFlag" + i).val();
+                if (StatusFlag != "d" && StatusFlag != "m") {
+                    $("#txt_StatusFlag" + i).val('i')
+                }
+            }
+
+            return false
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertPurchaseReceiveMasterDetail"),
@@ -3329,6 +3344,7 @@ namespace PurTrReceive {
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(ReceiveID));
+        divMasterGrid.SelectedKey = Selecteditem[0].ReceiveID.toString();
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
         RetrivedPurchaseModel = Selecteditem;
         DataHeader();

@@ -15,7 +15,7 @@ namespace Inv.DAL.Domain
     {
         public InvEntities(string ConnectionString): base(ConnectionString)
         {
-            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 120; // seconds
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 150; // seconds
         }
 
     }

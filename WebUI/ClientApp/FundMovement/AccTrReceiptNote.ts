@@ -1346,7 +1346,8 @@ namespace AccTrReceiptNote {
             Model.CustomerID = custId;
             Model.VendorID = vndid;
 
-            Model.BankAccountCode = BankCode == null ? null : BankCode.toString(); 		  
+            Model.BankAccountCode = BankCode == null ? null : BankCode.toString(); 		
+            Model.BankAccountCode = Model.BankAccountCode == "undefined" ? null : Model.BankAccountCode;
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1397,6 +1398,7 @@ namespace AccTrReceiptNote {
             Model.VendorID = vndid;
 
             Model.BankAccountCode = BankCode == null ? null : BankCode.toString();		 
+            Model.BankAccountCode = Model.BankAccountCode == "undefined" ? null : Model.BankAccountCode;
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1447,6 +1449,7 @@ namespace AccTrReceiptNote {
                     Valid = 0;
                     Update_claenData = 0;
                     $('#txt_D_CashBox').val('Null');
+                    Save_Succ_But();
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
@@ -1476,6 +1479,7 @@ namespace AccTrReceiptNote {
                     DateSetsSccess("txtDateNew", "txtDateFrom", "txtDateTo");
                     Update_claenData = 0;
                     $('#txt_D_CashBox').val('Null');
+                    Save_Succ_But();
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
