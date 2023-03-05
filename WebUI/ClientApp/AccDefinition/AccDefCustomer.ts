@@ -1362,6 +1362,7 @@ namespace AccDefCustomer {
             { title: "الرقم", name: "CustomerId", type: "text", width: "8%", visible: false },
             { title: res.App_CustomerCODE, name: "CustomerCODE", type: "text", width: "10%" },
             { title: res.SHT_Name, name: (lang == "ar" ? "NAMEA" : "NAMEE"), type: "text", width: "20%" },
+            { title: "الرقم الضريبي", name: "VatNo", type: "text", width: "12%" },
             { title: res.App_Mobile, name: "MOBILE", type: "text", width: "12%" },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "10%" },
             { title: res.App_CreditLimit, name: "CreditLimit", type: "text", width: "10%" },

@@ -24,7 +24,7 @@ var AccDefExpenses;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "  حسابات إلايراد ";
+            document.getElementById('Screen_name').innerHTML = "  حسابات المصروف ";
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Revenue Accounts";
@@ -196,6 +196,7 @@ var AccDefExpenses;
     }
     function Update() {
         Assign();
+        debugger;
         if (DetailsModel.length > 0) {
             DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -204,6 +205,7 @@ var AccDefExpenses;
             DetailsModel[0].MODULE_CODE = Modules.AccDefReceipts;
             DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
+        debugger;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefAccounts", "UpdateLst"),
@@ -225,9 +227,10 @@ var AccDefExpenses;
         });
     }
     function Assign() {
+        debugger;
         var StatusFlag;
+        DetailsModel = new Array();
         for (var i = 0; i < CountGrid; i++) {
-            DetailsModel = new Array();
             Model = new A_RecPay_D_Accounts();
             StatusFlag = $("#txt_StatusFlag" + i).val();
             if (StatusFlag == "i") {
