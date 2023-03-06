@@ -8,6 +8,7 @@ var AccDefBox;
     var AccountType = 1;
     var MSG_ID;
     var Details = new Array();
+    var DetailsModel = new Array();
     var Details_NumAcount = new Array();
     var Details_NetworkAcount = new Array();
     //var Details: Array<G_USERS> = new Array<G_USERS>();
@@ -342,6 +343,7 @@ var AccDefBox;
     function Assign() {
         debugger;
         var StatusFlag;
+        DetailsModel = new Array();
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_CashBox();
             StatusFlag = $("#txt_StatusFlag" + i).val();
@@ -382,7 +384,7 @@ var AccDefBox;
                 else {
                     Model.IsRecPayAccount = false;
                 }
-                Details.push(Model);
+                DetailsModel.push(Model);
                 //Model.CompCode = Number(compcode);
             }
             if (StatusFlag == "u") {
@@ -422,28 +424,33 @@ var AccDefBox;
                 else {
                     Model.IsRecPayAccount = false;
                 }
-                Details.push(Model);
+                DetailsModel.push(Model);
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(function (x) { return x.CashBoxID == $("#txt_ID" + i).val(); });
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = StatusFlag.toString();
+                    Model.CashBoxID = Number($("#txt_ID" + i).val());
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                    Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
+                    DetailsModel.push(Model);
                 }
             }
         }
     }
     function Update() {
         Assign();
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        if (DetailsModel.length > 0) {
+            DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+            DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        }
         //debugger;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefBox", "UpdateLst"),
-            data: JSON.stringify(Details),
+            data: JSON.stringify(DetailsModel),
             success: function (d) {
                 //debugger
                 var result = d;

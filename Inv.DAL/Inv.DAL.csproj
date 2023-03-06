@@ -503,6 +503,9 @@
     <Compile Include="Domain\IProc_Prnt_StkIssue_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IProc_Prnt_StkOpen_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IProc_Prnt_StkTransfer_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -654,6 +657,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_StkIssueList_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\IProc_Rpt_StkOpenList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\IProc_Rpt_StkTransferList_Result.cs">

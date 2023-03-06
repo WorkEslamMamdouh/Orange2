@@ -162,7 +162,8 @@ namespace PurTrReceive {
         ShowFlag = true;
         GetVatType();
         GetAddonsData();
-        txtFromDate.value = DateStartMonth();
+        //txtFromDate.value = DateStartMonth();
+        txtFromDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
@@ -2769,7 +2770,7 @@ namespace PurTrReceive {
             Errorinput(txtVendorName);
             return false
         }
-        else if (ddlSalesmanHeader.value == "null") {
+        else if (ddlSalesmanHeader.value == "null" || Number(ddlSalesmanHeader.value) == 0) {
             DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
             Errorinput(ddlSalesmanHeader);
             return false
@@ -3216,6 +3217,27 @@ namespace PurTrReceive {
         //    MessageBox.Show('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '');
         //    return
         //}
+
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false
+        }
+
+        if (MasterDetailModel.I_Pur_TR_ReceiveItems.length == 0) {
+            DisplayMassage(" برجاء مراجعه علي  بينات الفاتوره", "Please select the salesman", MessageType.Error);
+            Errorinput(btnAddDetails);
+
+            for (var i = 0; i < CountGrid; i++) {
+                let StatusFlag = $("#txt_StatusFlag" + i).val();
+                if (StatusFlag != "d" && StatusFlag != "m") {
+                    $("#txt_StatusFlag" + i).val('i')
+                }
+            }
+
+            return false
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertPurchaseReceiveMasterDetail"),
@@ -3252,6 +3274,12 @@ namespace PurTrReceive {
         // MasterDetailModel.I_Pur_TR_Receive.PurOrderID = RetrivedPurchaseModel[0].PurOrderID;
         MasterDetailModel.I_Pur_TR_Receive.TrNo = RetrivedPurchaseModel[0].TrNo;
         MasterDetailModel.I_Pur_TR_Receive.ReceiveID = RetrivedPurchaseModel[0].ReceiveID;
+
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false
+        }
 
         Ajax.Callsync({
             type: "POST",
@@ -3316,6 +3344,7 @@ namespace PurTrReceive {
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(ReceiveID));
+        divMasterGrid.SelectedKey = Selecteditem[0].ReceiveID.toString();
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
         RetrivedPurchaseModel = Selecteditem;
         DataHeader();
@@ -3362,6 +3391,12 @@ namespace PurTrReceive {
         MasterDetailModel.I_Pur_TR_Receive.UpdatedAt = DateTimeFormat(Date().toString());
 
         MasterDetailModel.I_Pur_TR_Receive.Status = 0;
+
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
+            Errorinput(ddlSalesmanHeader);
+            return false
+        }
 
         Ajax.Callsync({
             type: "POST",

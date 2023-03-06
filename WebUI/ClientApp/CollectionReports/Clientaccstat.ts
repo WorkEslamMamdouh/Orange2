@@ -28,6 +28,7 @@ namespace Clientaccstat {
     var txtDateFrom: HTMLInputElement;
     var txtDateTo: HTMLInputElement;
     var Rddetails: HTMLInputElement;
+    var checkboxCash: HTMLInputElement;
     var Rd_sum: HTMLInputElement;
     var Rd_custmastr: HTMLInputElement;
     var btnReset;
@@ -73,7 +74,7 @@ namespace Clientaccstat {
         Rddetails.checked = true;
         Rd_Bal.checked = true;
 
-        Display();
+        //Display();
         txt_ID_APP_Type.value = "1";
     }
 
@@ -86,6 +87,7 @@ namespace Clientaccstat {
         txtDateFrom = document.getElementById("txtFromDate") as HTMLInputElement;
         txtDateTo = document.getElementById("txtToDate") as HTMLInputElement;
         Rddetails = document.getElementById("Rd_detail") as HTMLInputElement;
+        checkboxCash = document.getElementById("checkboxCash") as HTMLInputElement;
         Rd_sum = document.getElementById("Rd_sum") as HTMLInputElement;
         Rd_custmastr = document.getElementById("Rd_custmastr") as HTMLInputElement;
 
@@ -459,6 +461,14 @@ namespace Clientaccstat {
             rp.orderby = 2;
         }
         else { rp.orderby = 3 }
+
+
+        if (checkboxCash.checked == true) {
+            rp.CashType = 1;
+        }
+        else {
+            rp.CashType = 0; 
+        }
 
         debugger
         //  Rd_detail

@@ -988,6 +988,7 @@ namespace AccDefVendor {
             { title: "الرقم", name: "VendorID", type: "text", width: "10%", visible: false },
             { title: res.App_VendorNumber, name: "VendorCode", type: "text", width: "10%" },
             { title: res.SHT_Name, name: (lang == "ar" ? "NAMEA" : "NAMEL"), type: "text", width: "30%" },
+            { title: "الرقم الضريبي", name: "VatNo", type: "text", width: "12%" },
             { title: res.App_Mobile, name: "MOBILE", type: "text", width: "12%" },
             { title: res.App_CreditLimit, name: "DebitLimit", type: "text", width: "100px" },
             { title: res.App_openBalance, name: "Openbalance", type: "text", width: "100px" },

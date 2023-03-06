@@ -186,7 +186,17 @@ namespace AccTrVendorAdjust {
 
     function Open() {
 
+        IsNew = false;
+
         Assign();
+
+
+        Model.CreatedAt = $('#txtCreatedAt').val();
+        Model.CreatedBy = $('#txtCreatedBy').val();
+
+        Model.UpdatedAt = DateTimeFormat(Date().toString());
+        Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccTrAdjust", "Open"),
@@ -1014,18 +1024,30 @@ namespace AccTrVendorAdjust {
             Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
             Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
+ 
+
+
         }
         else {
+
             DocumentActions.AssignToModel(Model);//Insert Update
             if (chkActive.checked) { Model.Status = 1 }
             else { Model.Status = 0 }
+
+
+            Model.CreatedAt = $('#txtCreatedAt').val();
+            Model.CreatedBy = $('#txtCreatedBy').val();
+
+            Model.UpdatedAt = DateTimeFormat(Date().toString());
+            Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+
             Model.CompCode = Number(compcode);
             Model.BranchCode = Number(branchcode);
             Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
 
-            Model.UpdatedAt = DateTimeFormat(Date().toString());
-            Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+
             Model.AdjustmentID = AdjustmentID;
 
             Model.IsDebit = $('#txt_Movement_typeNew').val();

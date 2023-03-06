@@ -10,6 +10,7 @@ namespace AccDefBox {
     var AccountType: Number = 1;
     var MSG_ID: number;
     var Details: Array<A_RecPay_D_CashBox> = new Array<A_RecPay_D_CashBox>();   
+    var DetailsModel: Array<A_RecPay_D_CashBox> = new Array<A_RecPay_D_CashBox>();   
     var Details_NumAcount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var Details_NetworkAcount: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     //var Details: Array<G_USERS> = new Array<G_USERS>();
@@ -481,6 +482,7 @@ namespace AccDefBox {
     function Assign() {
         debugger
         var StatusFlag: String;
+        DetailsModel = new Array<A_RecPay_D_CashBox>();
         for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_CashBox();
 
@@ -523,7 +525,7 @@ namespace AccDefBox {
 
 
 
-                Details.push(Model);
+                DetailsModel.push(Model);
 
 
 
@@ -567,14 +569,17 @@ namespace AccDefBox {
 
 
 
-                Details.push(Model);
+                DetailsModel.push(Model);
 
 
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ID" + i).val() != "") {
-                    var UpdatedDetail = Details.filter(x => x.CashBoxID == $("#txt_ID" + i).val())
-                    UpdatedDetail[0].StatusFlag = StatusFlag.toString();
+                    Model.StatusFlag = StatusFlag.toString();
+                    Model.CashBoxID = Number($("#txt_ID" + i).val());
+                    Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+                    Model.BranchCode = Number(SysSession.CurrentEnvironment.BranchCode); 
+                    DetailsModel.push(Model);
                 }
 
             }
@@ -586,11 +591,14 @@ namespace AccDefBox {
     function Update() {
         Assign();
 
-        Details[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Details[0].UserCode = SysSession.CurrentEnvironment.UserCode;
-        Details[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        Details[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Details[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        if (DetailsModel.length > 0) {
+            DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+            DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
+            DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+            DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
+            DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        }
+        
 
 
         //debugger;
@@ -598,7 +606,7 @@ namespace AccDefBox {
 
             type: "POST",
             url: sys.apiUrl("AccDefBox", "UpdateLst"),
-            data: JSON.stringify(Details),
+            data: JSON.stringify(DetailsModel),
             success: (d) => {
                 //debugger
                 let result = d as BaseResponse;

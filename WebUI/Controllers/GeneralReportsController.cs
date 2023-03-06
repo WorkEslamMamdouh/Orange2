@@ -699,6 +699,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("SalesmanID", rp.SalesmanID);
             rep.AddParameter("check", rp.check);
             rep.AddParameter("orderby", rp.orderby);
+            rep.AddParameter("CashType", rp.CashType);
 
 
             string url = rep.GetReportUrl("Rpt_AccCustomerSummary");
@@ -722,6 +723,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("BalType", rp.BalType);
             rep.AddParameter("SalesmanID", rp.SalesmanID);
             rep.AddParameter("check", rp.check);
+            rep.AddParameter("CashType", rp.CashType);
 
             string url = rep.GetReportUrl("Rpt_AccCustomerDetail");
 
@@ -765,6 +767,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("BalType", rp.BalType);
             rep.AddParameter("VendorId", rp.VendorId);
             rep.AddParameter("VendType", rp.VendType);
+            rep.AddParameter("CashType", rp.CashType);
         
 
             string url = rep.GetReportUrl("Rpt_AccVendorDetail");
@@ -789,6 +792,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("VendorId", rp.VendorId);
             rep.AddParameter("VendType", rp.VendType);
             rep.AddParameter("orderby", rp.orderby);
+            rep.AddParameter("CashType", rp.CashType);
 
             string url = rep.GetReportUrl("Rpt_AccVendorSummary");
 
@@ -1011,6 +1015,22 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("Status", rp.Status);
 
             string url = rep.GetReportUrl("Rpt_StkAdjustList");
+
+            return Shared.JsonObject(url);
+
+        }
+        public JsonResult IProc_Rpt_StkOpenList(RepFinancials rp)
+        {
+            ReportService rep = getStandardParameters(rp);
+
+            rep.AddParameter("RepType", rp.RepType);
+            rep.AddParameter("TrType", rp.TrType);
+            rep.AddParameter("FromDate", rp.FromDate);
+            rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("storeID", rp.storeID);
+            rep.AddParameter("Status", rp.Status);
+
+            string url = rep.GetReportUrl("Rpt_StkOpenList");
 
             return Shared.JsonObject(url);
 

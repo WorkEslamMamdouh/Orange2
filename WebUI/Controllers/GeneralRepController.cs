@@ -289,6 +289,12 @@ namespace Inv.WebUI.Controllers
             return buildReport(que);
         }
 
+        public string IProc_Prnt_StkOpen(RepFinancials rp)
+        {
+            IEnumerable<IProc_Prnt_StkOpen_Result> que = Prnt_StkOpen(rp);
+            return buildReport(que);
+        }
+
         public string IProc_Prnt_OerationTf(RepFinancials rp)
         {
             IEnumerable<IProc_Prnt_OerationTf_Result> que = Prnt_OerationTf(rp);

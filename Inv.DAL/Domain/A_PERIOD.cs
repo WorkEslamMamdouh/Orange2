@@ -25,5 +25,7 @@ namespace Inv.DAL.Domain
         public Nullable<System.DateTime> CREATED_AT { get; set; }
         public string UPDATED_BY { get; set; }
         public Nullable<System.DateTime> LAST_UPDATE { get; set; }
+        public int COMP_CODE { get; set; }
+        public int PERIOD_YEAR { get; set; }
     }
 }

@@ -2129,7 +2129,7 @@ namespace RS.WebUI.Reports.Forms
 
 
         ////كشف حساب عميل ملخص
-        public IEnumerable<IProc_Rpt_AccCustomerSummary_Result> Rpt_AccCustomerSummary()
+        public IEnumerable<IProc_Rpt_AccCustomerSummaryVer2_Result> Rpt_AccCustomerSummary()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2166,6 +2166,9 @@ namespace RS.WebUI.Reports.Forms
             int orderby = int.Parse(RepPar.orderby.ToString());
             SqlParameter sporderby = new SqlParameter("@orderby", orderby == -1 ? System.Data.SqlTypes.SqlInt32.Null : orderby);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@Cash", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+
 
             Rep = OpenReport("Rpt_AccCustomerSummary_total");
 
@@ -2184,19 +2187,20 @@ namespace RS.WebUI.Reports.Forms
            ", @CustomerID = " + spCustomerID.Value +
            ", @SalesManID = " + spSalesmanID.Value +
            ", @status = " + spStatus.Value +
+           ", @Cash = " + spCashType.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @Todate = '" + sptoDate.Value + "'" +
            ", @BalType = " + spBalType.Value +
            ", @orderby = " + sporderby.Value;
 
-            List<IProc_Rpt_AccCustomerSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerSummary_Result>(_Query).ToList();
+            List<IProc_Rpt_AccCustomerSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerSummaryVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
         //كشف حساب عميل تفصيلي
-        public IEnumerable<IProc_Rpt_AccCustomerDetail_Result> Rpt_AccCustomerDetail()
+        public IEnumerable<IProc_Rpt_AccCustomerDetailVer2_Result> Rpt_AccCustomerDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2229,6 +2233,11 @@ namespace RS.WebUI.Reports.Forms
             int SalesmanID = int.Parse(RepPar.SalesmanID.ToString());
             SqlParameter spSalesmanID = new SqlParameter("@SalesmanID", SalesmanID == -1 ? System.Data.SqlTypes.SqlInt32.Null : SalesmanID);
 
+
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@Cash", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+
+
             Rep = OpenReport("Rpt_AccCustomerSummary_detail");
 
             string _Query = "execute " + Rep.dataSource +
@@ -2245,11 +2254,12 @@ namespace RS.WebUI.Reports.Forms
            ", @CustomerID = " + spCustomerID.Value +
            ", @SalesManID = " + spSalesmanID.Value +
            ", @status = " + spStatus.Value +
+           ", @Cash = " + spCashType.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @Todate = '" + sptoDate.Value + "'" +
            ", @BalType = " + spBalType.Value;
 
-            List<IProc_Rpt_AccCustomerDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_AccCustomerDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccCustomerDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -2325,7 +2335,7 @@ namespace RS.WebUI.Reports.Forms
 
 
         //كشف حساب مورد تفصيلي
-        public IEnumerable<IProc_Rpt_AccVendorDetail_Result> Rpt_AccVendorDetail()
+        public IEnumerable<IProc_Rpt_AccVendorDetailVer2_Result> Rpt_AccVendorDetail()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2361,6 +2371,9 @@ namespace RS.WebUI.Reports.Forms
             int VendorId = int.Parse(RepPar.VendorId.ToString());
             SqlParameter spVendorId = new SqlParameter("@CustomerID", VendorId == -1 ? System.Data.SqlTypes.SqlInt32.Null : VendorId);
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@Cash", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+
 
             Rep = OpenReport("Rpt_AccVendorDetail");
 
@@ -2381,11 +2394,12 @@ namespace RS.WebUI.Reports.Forms
            ", @CustomerID = " + spVendorId.Value +
            ", @VendType = " + spVendType.Value +
            ", @status = " + spStatus.Value +
+           ", @Cash = " + spCashType.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @Todate = '" + sptoDate.Value + "'" +
            ", @BalType = " + spBalType.Value;
 
-            List<IProc_Rpt_AccVendorDetail_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorDetail_Result>(_Query).ToList();
+            List<IProc_Rpt_AccVendorDetailVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorDetailVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -2393,7 +2407,7 @@ namespace RS.WebUI.Reports.Forms
         }
 
         //كشف حساب مورد ملخص
-        public IEnumerable<IProc_Rpt_AccVendorSummary_Result> Rpt_AccVendorSummary()
+        public IEnumerable<IProc_Rpt_AccVendorSummaryVer2_Result> Rpt_AccVendorSummary()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2432,6 +2446,9 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter sporderby = new SqlParameter("@orderby", orderby == -1 ? System.Data.SqlTypes.SqlInt32.Null : orderby);
 
 
+            int CashType = int.Parse(RepPar.CashType.ToString());
+            SqlParameter spCashType = new SqlParameter("@Cash", CashType == -1 ? System.Data.SqlTypes.SqlInt32.Null : CashType);
+
             Rep = OpenReport("Rpt_AccVendorSummary");
 
 
@@ -2450,12 +2467,13 @@ namespace RS.WebUI.Reports.Forms
            ", @CustomerID = " + spVendorId.Value +
            ", @VendType = " + spVendType.Value +
            ", @status = " + spStatus.Value +
+           ", @Cash = " + spCashType.Value +
            ", @BalType = " + spBalType.Value+
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @Todate = '" + sptoDate.Value + "'" +
             ", @orderby = " + sporderby.Value;
 
-            List<IProc_Rpt_AccVendorSummary_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorSummary_Result>(_Query).ToList();
+            List<IProc_Rpt_AccVendorSummaryVer2_Result> query = db.Database.SqlQuery<IProc_Rpt_AccVendorSummaryVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -3152,6 +3170,57 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
+
+        public IEnumerable<IProc_Rpt_StkOpenList_Result> Rpt_StkOpenList()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+            //ReportInfo Rep;
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+            string formDate = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", formDate);
+
+            string toDate = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", toDate);
+
+            int TrType = int.Parse(RepPar.TrType.ToString());
+            SqlParameter spTrType = new SqlParameter("@TrType", TrType == -1 ? System.Data.SqlTypes.SqlInt32.Null : TrType);
+
+            int storeID = int.Parse(RepPar.storeID.ToString());
+            SqlParameter spstoreID = new SqlParameter("@storeID", storeID == -1 ? System.Data.SqlTypes.SqlInt32.Null : storeID);
+
+            int Status = int.Parse(RepPar.Status.ToString());
+            SqlParameter spStatus = new SqlParameter("@Status", Status == -1 ? System.Data.SqlTypes.SqlInt32.Null : Status);
+
+                
+            Rep = OpenReport("Rpt_StkOpenList");
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value + 
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @Todate = '" + sptoDate.Value + "'" +
+           ", @storeID = " + spstoreID.Value + "" +
+           ", @Status =" + spStatus.Value + "";
+
+            List<IProc_Rpt_StkOpenList_Result> query = db.Database.SqlQuery<IProc_Rpt_StkOpenList_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         public IEnumerable<IProc_Rpt_StkTransferList_Result> Rpt_StkTransferListdirect()
         {
             ReportStandardParameters StandPar = getStandardParameters();

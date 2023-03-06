@@ -76,7 +76,7 @@ var STKOpeningbalance;
     function InitalizeComponent() {
         //System
         //debugger
-        $('#btnPrintTransaction').addClass('hidden_Control');
+        //$('#btnPrintTransaction').addClass('hidden_Control');
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "الرصيد الافتتاحي" : document.getElementById('Screen_name').innerHTML = "Opening balance";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         Branch = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -286,6 +286,7 @@ var STKOpeningbalance;
                                 CountGrid++;
                                 i++;
                             }
+                            ComputeTotals();
                         }
                     }
                 });
@@ -339,6 +340,7 @@ var STKOpeningbalance;
                                     $("#div_Data").html("");
                                     DisplayMassage('لا توجد اصناف', 'No items', MessageType.Error);
                                 }
+                                ComputeTotals();
                             }
                         }
                     });
@@ -393,8 +395,8 @@ var STKOpeningbalance;
         });
     }
     function btnDeleteOpen_onclick() {
-        var query = "select * from [dbo].[G_AlertType]";
-        WorningMessage("هل تريد  مسـح الرصيد الافتتاحي؟", "Do you want to delete?", "تحذير", "worning", function () {
+        var query = " Iproc_UpdateStockOpenbalance  " + compcode + "," + Branch + "," + FinYear + "," + 2 + " ";
+        WorningMessage("هل تريد  اعادة ضبط الرصيد الافتتاحي ؟", "Do you want to delete?", "تحذير", "worning", function () {
             Ajax.Callsync({
                 type: "Get",
                 url: sys.apiUrl("DirectTransfer", "DeleteStockOpen"),
@@ -403,7 +405,7 @@ var STKOpeningbalance;
                     var result = d;
                     if (result.IsSuccess == true) {
                         var res = result.Response;
-                        DisplayMassage("تم  مسـح الرصيد الافتتاحي بنجاح ", 'Edited Successfully ' + res.Tr_No, MessageType.Succeed);
+                        DisplayMassage("تم اعادة ضبط الرصيد الافتتاحي  بنجاح ", 'Edited Successfully ' + res.Tr_No, MessageType.Succeed);
                         $("#div_hedr").removeClass("disabledDiv");
                         $("#divShow").removeClass("display_none");
                         $("#divShow").removeClass("disabledDiv");
@@ -445,7 +447,6 @@ var STKOpeningbalance;
                     return txt;
                 }
             },
-            { title: res.App_ReferenceNumber, name: "RefNO", type: "text", width: "100px" },
             //{ title: res.App_date, name: "TrDate", type: "text", width: "100px" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
@@ -455,6 +456,7 @@ var STKOpeningbalance;
                     return txt;
                 }
             },
+            { title: "الاجمالي", name: "TotalCost", type: "text", width: "100px" },
             {
                 title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
                 itemTemplate: function (s, item) {
@@ -543,6 +545,7 @@ var STKOpeningbalance;
                             totalRow(i);
                             CountGrid++;
                         }
+                        ComputeTotals();
                         //CountGrid = StockDetailModelFiltered.length;
                         DisableControls();
                     }
@@ -819,41 +822,41 @@ var STKOpeningbalance;
                     var res = false;
                     debugger;
                     var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
-                    res = checkRepeatedItems(id, NumberRowid);
-                    if (res == false) {
-                        if ($("#txt_StatusFlag" + cnt).val() != "i")
-                            $("#txt_StatusFlag" + cnt).val("u");
-                        var SrcItem = ItemsToListDetails.filter(function (s) { return s.ItemID == id; });
-                        if (SrcItem != null) {
-                            $('#txtItemNumber' + cnt).val(id);
-                            if (FlagAddOrEdit == 1)
-                                $('#txtOpenDetailID' + cnt).val(0);
-                            $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
-                            (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
-                            $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
-                            $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                            $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
-                            $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
-                            //$('#txtUnitCost' + cnt).val(SrcItem[0].GlobalCost);
-                            if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                                $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
-                            }
-                            else {
-                                $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
-                            }
+                    //res = checkRepeatedItems(id, NumberRowid);
+                    //if (res == false) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i")
+                        $("#txt_StatusFlag" + cnt).val("u");
+                    var SrcItem = ItemsToListDetails.filter(function (s) { return s.ItemID == id; });
+                    if (SrcItem != null) {
+                        $('#txtItemNumber' + cnt).val(id);
+                        if (FlagAddOrEdit == 1)
+                            $('#txtOpenDetailID' + cnt).val(0);
+                        $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
+                        (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
+                        $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
+                        $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
+                        $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
+                        $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
+                        //$('#txtUnitCost' + cnt).val(SrcItem[0].GlobalCost);
+                        if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
+                            $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
+                        }
+                        else {
+                            $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
                         }
                     }
-                    else {
-                        DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
-                        $('#txtItemNumber' + cnt).val("");
-                        $('#txtItemCode' + cnt).val("");
-                        $('#txtItemName' + cnt).val("");
-                        $('#txtUntitName' + cnt).val("");
-                        $('#txtItemCode' + cnt).val("");
-                        $('#txtSrcQty' + cnt).val("");
-                        $('#txtToQty' + cnt).val("");
-                        $('#txtUnitID' + cnt).val("");
-                    }
+                    totalRow(cnt);
+                    //} else {
+                    //    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
+                    //    $('#txtItemNumber' + cnt).val("");
+                    //    $('#txtItemCode' + cnt).val("");
+                    //    $('#txtItemName' + cnt).val("");
+                    //    $('#txtUntitName' + cnt).val("");
+                    //    $('#txtItemCode' + cnt).val("");
+                    //    $('#txtSrcQty' + cnt).val("");
+                    //    $('#txtToQty' + cnt).val("");
+                    //    $('#txtUnitID' + cnt).val("");
+                    //}
                 });
             }
         });
@@ -873,40 +876,39 @@ var STKOpeningbalance;
                 $("#txt_StatusFlag" + cnt).val("u");
             var ItemCode = $('#txtItemCode' + cnt).val();
             var SrcItem = ItemsToListDetails.filter(function (s) { return s.ItemCode == ItemCode; });
-            if (SrcItem.length > 0) {
-                var res = false;
-                var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
-                var id = Number(SrcItem[0].ItemID);
-                res = checkRepeatedItems(id, NumberRowid);
-                if (res == false) {
-                    if (FlagAddOrEdit == 1)
-                        $('#txtOpenDetailID' + cnt).val(0);
-                    $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
-                    (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
-                    $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
-                    $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
-                    $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
-                    $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
-                    if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
-                        $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
-                    }
-                    else {
-                        $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
-                    }
-                    //$("#txtUnitCost" + cnt).removeAttr("disabled");
+            //if (SrcItem.length > 0) {
+            var res = false;
+            var NumberRowid = Number($("#txtOpenDetailID" + cnt).val());
+            var id = Number(SrcItem[0].ItemID);
+            res = checkRepeatedItems(id, NumberRowid);
+            if (res == false) {
+                if (FlagAddOrEdit == 1)
+                    $('#txtOpenDetailID' + cnt).val(0);
+                $('#txtItemNumber' + cnt).val(SrcItem[0].ItemID);
+                (lang == "ar" ? $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescA) : $('#txtItemName' + cnt).val(SrcItem[0].Itm_DescE));
+                $('#txtItemCode' + cnt).val(SrcItem[0].ItemCode);
+                $('#txtUnitID' + cnt).val(SrcItem[0].UomID);
+                $('#txtUntitName' + cnt).val(SrcItem[0].Uom_DescA);
+                $('#txtOnhandQty' + cnt).val(SrcItem[0].OnhandQty);
+                if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
+                    $("#txtUnitCost" + cnt).prop("value", SrcItem[0].GlobalCost);
                 }
                 else {
-                    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
-                    $('#txtItemNumber' + cnt).val("");
-                    $('#txtItemCode' + cnt).val("");
-                    $('#txtItemName' + cnt).val("");
-                    $('#txtUntitName' + cnt).val("");
-                    $('#txtOnhandQty' + cnt).val("");
-                    $('#txtItemCode' + cnt).val("");
-                    $('#txtSrcQty' + cnt).val("");
-                    $('#txtToQty' + cnt).val("");
-                    $('#txtUnitID' + cnt).val("");
+                    $("#txtUnitCost" + cnt).prop("value", SrcItem[0].LocalCost);
                 }
+                //$("#txtUnitCost" + cnt).removeAttr("disabled");
+                //} else {
+                //    DisplayMassage('( لايمكن تكرار نفس الاصناف في الحركه )', 'The same items can be repeated in the adjustment', MessageType.Error);
+                //    $('#txtItemNumber' + cnt).val("");
+                //    $('#txtItemCode' + cnt).val("");
+                //    $('#txtItemName' + cnt).val("");
+                //    $('#txtUntitName' + cnt).val("");
+                //    $('#txtOnhandQty' + cnt).val("");
+                //    $('#txtItemCode' + cnt).val("");
+                //    $('#txtSrcQty' + cnt).val("");
+                //    $('#txtToQty' + cnt).val("");
+                //    $('#txtUnitID' + cnt).val("");
+                //}
             }
             else {
                 $('#txtItemNumber' + cnt).val("");
@@ -944,6 +946,28 @@ var STKOpeningbalance;
         var Qty = Number($("#txtOnhandQty" + cnt).val());
         var Cost = Number($("#txtUnitCost" + cnt).val());
         $("#txtTotal" + cnt).val((Qty * Cost).RoundToSt(2));
+        debugger;
+        ComputeTotals();
+    }
+    function ComputeTotals() {
+        var CountItems = 0;
+        var PackageCount = 0;
+        var txtUnitCosts = 0;
+        var CountTotal = 0;
+        debugger;
+        for (var i = 0; i < CountGrid; i++) {
+            var flagvalue = $("#txt_StatusFlag" + i).val();
+            if (flagvalue != "d" && flagvalue != "m") {
+                PackageCount += Number($("#txtOnhandQty" + i).val());
+                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
+                CountTotal += Number($("#txtTotal" + i).val());
+                CountItems++;
+            }
+        }
+        $("#txtItemCount").val(CountItems.RoundToSt(2));
+        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
+        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
+        $("#txtTotal").val(CountTotal.RoundToSt(2));
     }
     function DeleteRow(RecNo) {
         if (!SysSession.CurrentPrivileges.Remove)
@@ -1020,6 +1044,7 @@ var STKOpeningbalance;
         StockHeaderModel.BranchCode = Number(Branch);
         StockHeaderModel.TrDate = txtTransferDate.value;
         StockHeaderModel.RefNO = txtRefNumber.value;
+        StockHeaderModel.TotalCost = Number($("#txtTotal").val());
         if (chkApproved.checked == true) {
             StockHeaderModel.Status = 1;
         }
@@ -1243,7 +1268,7 @@ var STKOpeningbalance;
             rp.storeID = storeID;
         }
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_StkAdjustList", "GeneralReports"),
+            url: Url.Action("IProc_Rpt_StkOpenList", "GeneralReports"),
             data: rp,
             success: function (d) {
                 var result = d.result;
@@ -1261,7 +1286,7 @@ var STKOpeningbalance;
         rp.ToDate = DateFormatRep(txtToDate.value);
         rp.TRId = GlobalOpenID;
         rp.Type = 0;
-        rp.Name_function = "IProc_Prnt_StkAdjust";
+        rp.Name_function = "IProc_Prnt_StkOpen";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');

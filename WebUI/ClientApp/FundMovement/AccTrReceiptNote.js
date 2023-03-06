@@ -258,8 +258,8 @@ var AccTrReceiptNote;
                         DocumentActions.FillCombowithdefult(Details_GCodes_ChckType, txtCashTypeNew, "CodeValue", "DescE", "Type of constraint");
                     }
                     else {
-                        DocumentActions.FillCombowithdefult(Details_GCodes_ChckType, txtCashType, "CodeValue", "DescA", "اختر نوع القيد");
-                        DocumentActions.FillCombowithdefult(Details_GCodes_ChckType, txtCashTypeNew, "CodeValue", "DescA", "اختر نوع القيد");
+                        DocumentActions.FillCombowithdefult(Details_GCodes_ChckType, txtCashType, "CodeValue", "DescA", "اختر نوع النقد");
+                        DocumentActions.FillCombowithdefult(Details_GCodes_ChckType, txtCashTypeNew, "CodeValue", "DescA", "اختر نوع النقد");
                     }
                 }
             }
@@ -1168,6 +1168,7 @@ var AccTrReceiptNote;
             Model.CustomerID = custId;
             Model.VendorID = vndid;
             Model.BankAccountCode = BankCode == null ? null : BankCode.toString();
+            Model.BankAccountCode = Model.BankAccountCode == "undefined" ? null : Model.BankAccountCode;
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1248,6 +1249,7 @@ var AccTrReceiptNote;
             Model.CustomerID = custId;
             Model.VendorID = vndid;
             Model.BankAccountCode = BankCode == null ? null : BankCode.toString();
+            Model.BankAccountCode = Model.BankAccountCode == "undefined" ? null : Model.BankAccountCode;
             Model.FromCashBoxID = fromBoxid;
             Model.TrType = IQ_TrType;
             Model.TrDateH = "1";
@@ -1290,6 +1292,7 @@ var AccTrReceiptNote;
                     Valid = 0;
                     Update_claenData = 0;
                     $('#txt_D_CashBox').val('Null');
+                    Save_Succ_But();
                     Display();
                     IsSuccess();
                     //DriverDoubleClick();     
@@ -1319,6 +1322,7 @@ var AccTrReceiptNote;
                     DateSetsSccess("txtDateNew", "txtDateFrom", "txtDateTo");
                     Update_claenData = 0;
                     $('#txt_D_CashBox').val('Null');
+                    Save_Succ_But();
                     Display();
                     DriverDoubleClick();
                     $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);

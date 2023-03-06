@@ -325,8 +325,8 @@ namespace AccDefReceipts{
 
     function Assign() {
         var StatusFlag: String;
-        for (var i = 0; i < CountGrid; i++) {
             DetailsModel = new Array<A_RecPay_D_Accounts>();
+        for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Accounts();
 
             StatusFlag = $("#txt_StatusFlag" + i).val();

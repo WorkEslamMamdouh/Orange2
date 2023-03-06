@@ -2159,6 +2159,41 @@ namespace Inv.WebUI.Controllers
             return query;
         } 
 
+         public IEnumerable<IProc_Prnt_StkOpen_Result> Prnt_StkOpen(RepFinancials RepPar)
+        {
+            ReportStandardParameters StandPar = getStandardParameters(RepPar);
+            
+
+
+            var TRId = int.Parse(RepPar.TRId.ToString());
+            SqlParameter spTRId = new SqlParameter("@TRId", TRId);
+
+
+            Rep = OpenReport("Prnt_StkOpen");
+            int Type = int.Parse(RepPar.Type.ToString());
+            if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+
+            string _Query = "execute " + Rep.dataSource +
+                " @comp = '" + StandPar.spComCode.Value + "'" +
+                ", @bra = '" + StandPar.spbra.Value + "'" +
+                ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+                ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+                ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+                ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+                ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+                ", @RepType = " + spRepType.Value + "  " +
+                 ",@TRId = " + spTRId.Value;
+
+            var query = db.Database.SqlQuery<IProc_Prnt_StkOpen_Result>(_Query).ToList();
+
+            ReportsDetails();
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
+            DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
+            return query;
+        } 
+
         public IEnumerable<IProc_Prnt_OerationTf_Result> Prnt_OerationTf(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
