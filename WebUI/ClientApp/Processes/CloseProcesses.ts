@@ -919,6 +919,7 @@ namespace CloseProcesses {
         $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
+		debugger
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
             Processes_under_preparing();
         }
@@ -1516,7 +1517,9 @@ namespace CloseProcesses {
 
     }
     function Disbly_BuildControls(cnt: number, OperationItemInfo: Array<IQ_GetOperationItemInfo>) {
-        // 
+		// 														
+
+		debugger
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus" + cnt).addClass("display_none");
         $("#txt_StatusFlag" + cnt).val("");
@@ -1537,11 +1540,20 @@ namespace CloseProcesses {
         //$("#txtAvailableQty" + cnt).prop("value", (AvailableQty));
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
-        });
-        $("#No_Row" + cnt).on('click', function () {
+		});
+
+		$("#No_Row" + cnt).on('dblclick', function () {
+			debugger
+			//alert('100')
             golabelcnt = cnt;
             DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
-        });
+		});
+		$("#No_Row" + cnt).on('click', function () {
+			debugger
+			//alert('100')
+			golabelcnt = cnt;
+			DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
+		});
         $("#txtClose_SoldQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_SoldQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_SoldQty);
         $("#txtClose_ScrapQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_ScrapQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_ScrapQty);
         $("#txtClose_TotalSales" + cnt).prop("value", (OperationItemInfo[cnt].Close_TotalSales == null || undefined) ? 0 : OperationItemInfo[cnt].Close_TotalSales);
@@ -2535,7 +2547,8 @@ namespace CloseProcesses {
         $("#Remarks" + cnt).val(I_TR_OperationDeposit[cnt].Remarks);
 
     }
-    function AddNewRowlebel() {
+	function AddNewRowlebel() {
+		debugger
         if (!SysSession.CurrentPrivileges.AddNew) return;
         var CanAddDeposit: boolean = true;
         if (CountGridDeposit > 0) {
