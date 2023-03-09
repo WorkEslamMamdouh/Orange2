@@ -359,7 +359,6 @@
     <Content Include="Newtemplate\template\gulp-tasks\serve.js" />
     <Content Include="Newtemplate\template\gulp-tasks\vendors.js" />
     <Content Include="Newtemplate\template\gulpfile.js" />
-    <Content Include="OnBarcode.Barcode.WinForms.dll" />
     <Content Include="Reports\Forms\ReportsForm.aspx" />
     <Content Include="Style_design\bootstrap-rtl.css" />
     <Content Include="Style_design\bootstrap.js" />
@@ -1913,7 +1912,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9_Old.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsReturnSimpleComp9Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
