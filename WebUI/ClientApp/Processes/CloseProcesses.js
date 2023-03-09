@@ -785,6 +785,7 @@ var CloseProcesses;
         $("#div_Master_Hedr").removeClass("display_none");
         $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
+        debugger;
         if (Selected_Data[0].Status == 0) { // تحت التجهيز
             Processes_under_preparing();
         }
@@ -1216,7 +1217,8 @@ var CloseProcesses;
         return;
     }
     function Disbly_BuildControls(cnt, OperationItemInfo) {
-        // 
+        // 														
+        debugger;
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus" + cnt).addClass("display_none");
         $("#txt_StatusFlag" + cnt).val("");
@@ -1237,7 +1239,15 @@ var CloseProcesses;
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
         });
+        $("#No_Row" + cnt).on('dblclick', function () {
+            debugger;
+            //alert('100')
+            golabelcnt = cnt;
+            DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
+        });
         $("#No_Row" + cnt).on('click', function () {
+            debugger;
+            //alert('100')
             golabelcnt = cnt;
             DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
         });
@@ -1896,6 +1906,7 @@ var CloseProcesses;
         $("#Remarks" + cnt).val(I_TR_OperationDeposit[cnt].Remarks);
     }
     function AddNewRowlebel() {
+        debugger;
         if (!SysSession.CurrentPrivileges.AddNew)
             return;
         var CanAddDeposit = true;
