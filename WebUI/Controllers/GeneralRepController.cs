@@ -11,6 +11,8 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 using Microsoft.Win32;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 
 namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
@@ -23,27 +25,64 @@ namespace Inv.WebUI.Controllers
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
 
+        //public static string BuildConnectionString()
+        //{
+
+
+        //    string DbName = "";
+        //    try
+        //    {
+        //        ClassPrint ListInformation = new ClassPrint();
+        //        string[] ListUserInformation = ListInformation.GetUserInformation();
+        //        DbName = ListUserInformation[2];
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        DbName = "";
+        //    }
+
+        //    var httpClient = new HttpClient();
+        //    var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
+        //    return res;
+        //}
+
         public static string BuildConnectionString()
         {
-
-
-            string DbName = "";
             try
             {
-                ClassPrint ListInformation = new ClassPrint();
-                string[] ListUserInformation = ListInformation.GetUserInformation();
-                DbName = ListUserInformation[2];
 
+                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+                EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
+
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerNameReportsForm"];
+                bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+                if (singleDb == false)
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+                else
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+
+                sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
+                sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
+                sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
+                sqlBuilder.MultipleActiveResultSets = true;
+
+                string providerString = sqlBuilder.ToString();
+
+                entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
+                entityBuilder.Provider = "System.Data.SqlClient";
+                entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+                return entityBuilder.ConnectionString;
             }
             catch (Exception ex)
             {
 
-                DbName = "";
             }
-
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
-            return res;
+            return "";
         }
 
         public string GetHtml(string DocPDFFolder, int success)

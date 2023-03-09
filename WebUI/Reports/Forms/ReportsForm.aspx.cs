@@ -26,6 +26,7 @@ using Inv.DAL.Repository;
 using Inv.API.Tools;
 using Inv.DAL.Domain;
 using Microsoft.Reporting.WebForms;
+using System.Data.Entity.Core.EntityClient;
 
 namespace RS.WebUI.Reports.Forms
 {//eslam 1 dec 2020
@@ -50,28 +51,66 @@ namespace RS.WebUI.Reports.Forms
         int? branCode = 0;
         string LoginUser = "";
         string ScreenLanguage = "";
+        //public static string BuildConnectionString()
+        //{
+
+
+        //    string DbName = "";
+        //    try
+        //    {
+        //        ClassPrint ListInformation = new ClassPrint();
+        //        string[] ListUserInformation = ListInformation.GetUserInformationFromReport();
+        //        DbName = ListUserInformation[2];
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        DbName = "";
+        //    }
+
+        //    var httpClient = new HttpClient();
+        //    var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
+        //    return res;
+        //}
+
         public static string BuildConnectionString()
         {
-
-
-            string DbName = "";
             try
             {
-                ClassPrint ListInformation = new ClassPrint();
-                string[] ListUserInformation = ListInformation.GetUserInformationFromReport();
-                DbName = ListUserInformation[2];
 
+                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+                EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
+
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerNameReportsForm"];
+                bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+                if (singleDb == false)
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"] + Shared.Session.SelectedYear;
+                else
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+
+                sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
+                sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
+                sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
+                sqlBuilder.MultipleActiveResultSets = true;
+
+                string providerString = sqlBuilder.ToString();
+
+                entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
+                entityBuilder.Provider = "System.Data.SqlClient";
+                entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+                return entityBuilder.ConnectionString;
             }
             catch (Exception ex)
             {
 
-                DbName = "";
             }
-
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
-            return res;
+            return "";
         }
+
         public Boolean CheckUser(string Guid, string uCode)
 
         {
