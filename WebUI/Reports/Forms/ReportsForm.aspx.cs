@@ -19,8 +19,7 @@ using Inv.WebUI.Reports.Models;
 using Inv.WebUI.Reports.Forms;
 
 
-using System.Net.Http;
-using OnBarcode.Barcode;
+using System.Net.Http; 
 using QRCoder;
 using Inv.DAL.Repository;
 using Inv.API.Tools;
