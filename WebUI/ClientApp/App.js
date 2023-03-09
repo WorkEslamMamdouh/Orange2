@@ -415,7 +415,7 @@ function ChangePassword(OldPassword, NewPassword) {
         Errorinput($('#txtNewPassword'));
         return;
     }
-    $.ajax({
+    Ajax.Callsync({
         url: sys.apiUrl("SystemTools", "ChangePassword"),
         data: { OldPassword: OldPassword, NewPassword: NewPassword, UserCode: UserCode },
         success: function (response) {
@@ -457,6 +457,11 @@ function NavigateToSearchResult(Navigate) {
 var Url = {
     Action: function (actionName, controllerName) { return (location.origin + "/" + controllerName + "/" + actionName); }
 };
+function isObject(obj, keys) {
+    if (typeof obj[keys] === 'object' && obj[keys] !== null) {
+        return true;
+    }
+}
 var Ajax = {
     Call: function (settings) {
         try {
@@ -478,14 +483,31 @@ var Ajax = {
     },
     CallAsync: function (settings) {
         CheckTime();
-        //run_waitMe();
+        //debugger
+        //if (typeof settings.data == "undefined") {
+        //    var data = [];
+        //    settings.data = data;
+        //}
+        //debugger
+        //let Address = $('#GetIPAddress').val();
+        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
+        //if (isObject(settings, 'data')) {
+        //    //alert('Object');
+        //    settings.data["Address"] = '' + Address + '';
+        //}
+        //else {
+        //    //alert('Json');
+        //    //alert(settings.data)
+        //    //debugger 
+        //    //settings.data = 'Address=' + Address + '' + settings.data; 
+        //}
         $.ajax({
             type: settings.type,
             url: settings.url,
             data: settings.data,
             cache: false,
             headers: {
-                'Accept': 'application/json; charset=utf-8',
+                'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
             success: function (d) {
@@ -497,13 +519,31 @@ var Ajax = {
     },
     Callsync: function (settings) {
         CheckTime();
-        //run_waitMe();
+        //debugger
+        //if (typeof settings.data == "undefined") {
+        //    var data = [];
+        //    settings.data = data;
+        //}
+        //debugger
+        //let Address = $('#GetIPAddress').val();
+        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
+        //if (isObject(settings, 'data')) {
+        //    //alert('Object');
+        //    settings.data["Address"] = '' + Address + '';
+        //}
+        //else {
+        //    //alert('Json');
+        //    //alert(settings.data)
+        //    //debugger
+        //    //settings.data = 'Address=' + Address + '' + settings.data;
+        //}
+        //debugger  
         $.ajax({
             type: settings.type,
             url: settings.url,
             data: settings.data,
             headers: {
-                'Accept': 'application/json; charset=utf-8',
+                'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
             cache: false,
@@ -1484,7 +1524,7 @@ function CreateDropdownListWithDefaultValue(arr, Name_Ar, Name_En, Key, DefaultV
 //    return element;
 //}
 function OpenPopUp(moduleCode, PopupBody, PopupDialog) {
-    var json = $.ajax({
+    var json = Ajax.Callsync({
         type: "GET",
         url: "OpenView",
         data: { ModuleCode: moduleCode },
@@ -1635,7 +1675,7 @@ function Get_PriceWithVAT(item_unitprice, VatPRc, flag_PriceWithVAT) {
 }
 function ScreenHelp(ModuleCode) {
     var sys = new SystemTools();
-    $.ajax({
+    Ajax.Callsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "GetHelp"),
         data: { ModuleCode: ModuleCode },
@@ -1719,6 +1759,7 @@ function Cheak_UserTokenlog() {
                 document.cookie = "Inv1_Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                 document.cookie = "Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                 window.open(Url.Action("HomePage", "Login"), "_self");
+                $('#GetIPAddress').val("");
                 return;
             }
         }
@@ -1991,7 +2032,7 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     return '';
 }
 function GetSerialNumber() {
-    $.ajax({
+    Ajax.Callsync({
         type: "GET",
         url: Url.Action("GetSerialNumber", "Home"),
         success: function (d) {

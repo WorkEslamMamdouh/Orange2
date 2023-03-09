@@ -19,6 +19,31 @@ namespace Inv.WebUI.Reports.Forms
         private static List<Stream> m_streams;
         private static int m_currentPageIndex;
 
+        public  string[] GetUserInformation()
+        {
+            string IPAddress = "";
+            IPAddress = HttpContext.Current.Request.Params.Get("DbName");
+
+            string Line = IPAddress;
+
+            string[] ListAddress = Line.Split('_');
+
+            return ListAddress;
+        }
+
+
+        public string[] GetUserInformationFromReport()
+        {
+            string IPAddress = "";
+            IPAddress = HttpContext.Current.Request.QueryString.Get("Address");
+
+            string Line = IPAddress;
+
+            string[] ListAddress = Line.Split('_');
+
+            return ListAddress;
+        }
+
         public void PrintToPrinter(LocalReport report, ReportsDetails ReportsDetail)
         {
             Export(report, ReportsDetail);

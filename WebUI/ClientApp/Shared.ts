@@ -36,7 +36,7 @@ class SharedWork {
 
             var result: number = 0;
             var sys: SystemTools = new SystemTools();
-            $.ajax({
+            Ajax.Callsync({
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "GetModelCount"),
                 data: { TableName: _Table, Condition: _Cond },
@@ -196,6 +196,7 @@ class SystemEnvironment {
     public CompanyName: string;
     public CompanyNameAr: string;
     public BranchCode: string;
+    public DbName: string;
     public BranchName: string;
     public BranchNameEn: string;
     public SingleDatabase: boolean;
@@ -360,12 +361,20 @@ function GetSystemSession(Mod: string): SystemSession {
 
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
+
+        let compCode = SysSession.CurrentEnvironment.CompCode;
+        let UserCode = SysSession.CurrentEnvironment.UserCode;
+        let DbName = SysSession.CurrentEnvironment.DbName;
+
+        $('#GetIPAddress').val(compCode + "_" + UserCode + "_" + DbName) 
+
         if (Mod == "Home")
             return SysSession;
 
         var sys: SystemTools = new SystemTools();
 
-        let compCode = SysSession.CurrentEnvironment.CompCode;
+  
+
         if (!(compCode == "Undefied")) {
 
 

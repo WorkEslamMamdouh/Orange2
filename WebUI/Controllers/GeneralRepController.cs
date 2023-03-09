@@ -25,8 +25,24 @@ namespace Inv.WebUI.Controllers
 
         public static string BuildConnectionString()
         {
-            HttpClient httpClient = new HttpClient();
-            string res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
+
+
+            string DbName = "";
+            try
+            {
+                ClassPrint ListInformation = new ClassPrint();
+                string[] ListUserInformation = ListInformation.GetUserInformation();
+                DbName = ListUserInformation[2];
+
+            }
+            catch (Exception ex)
+            {
+
+                DbName = "";
+            }
+
+            var httpClient = new HttpClient();
+            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
             return res;
         }
 
@@ -94,6 +110,7 @@ namespace Inv.WebUI.Controllers
 
         public string rptInvoiceNote(RepFinancials rp)
         {
+       
             IEnumerable<IProc_Prnt_SlsInvoiceVer2_Result> que = Rpt_Prnt_SlsInvoice(rp);
             return buildReport(que);
 

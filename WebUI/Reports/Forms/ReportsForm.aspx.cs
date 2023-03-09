@@ -52,8 +52,24 @@ namespace RS.WebUI.Reports.Forms
         string ScreenLanguage = "";
         public static string BuildConnectionString()
         {
+
+
+            string DbName = "";
+            try
+            {
+                ClassPrint ListInformation = new ClassPrint();
+                string[] ListUserInformation = ListInformation.GetUserInformationFromReport();
+                DbName = ListUserInformation[2];
+
+            }
+            catch (Exception ex)
+            {
+
+                DbName = "";
+            }
+
             var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
+            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
             return res;
         }
         public Boolean CheckUser(string Guid, string uCode)

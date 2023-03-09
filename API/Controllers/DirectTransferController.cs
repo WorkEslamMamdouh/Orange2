@@ -119,6 +119,17 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetAllItemsInStoreNew(int branch, int comp, int Store,int FinYear, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                List<IQ_GetItemStoreInfo> itemsList = IItemDefService.GetAll(s => s.CompCode == comp && s.BraCode == branch && s.StoreId == Store && s.FinYear == FinYear).ToList();
+                return Ok(new BaseResponse(itemsList));
+            }
+            return BadRequest(ModelState);
+        }
+
         [HttpPost, AllowAnonymous]
         public IHttpActionResult InsertDirectTransferMasterDetail([FromBody]DirectTransferMasterDetails obj)
         {

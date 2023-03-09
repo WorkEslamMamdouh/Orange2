@@ -1150,6 +1150,7 @@ namespace STKAdjust {
                             $("#txt_StatusFlag" + cnt).val("u");
 
                         var SrcItem = ItemsToListDetails.filter(s => s.ItemID == id);
+
                         if (SrcItem != null) {
                             $('#txtItemNumber' + cnt).val(id);
                             if (FlagAddOrEdit == 1)
@@ -1358,13 +1359,14 @@ namespace STKAdjust {
     function GetAllStoreItems(StoreID: number) {
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("DirectTransfer", "GetAllItemsInStore"),
-            data: { branch: Branch, comp: compcode, Store: StoreID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            url: sys.apiUrl("DirectTransfer", "GetAllItemsInStoreNew"),
+            data: { branch: Branch, comp: compcode, Store: StoreID, FinYear: FinYear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
+
                     ItemsToListDetails = result.Response as Array<IQ_GetItemStoreInfo>;
-                    ItemsToListDetails = ItemsToListDetails.filter(x => x.IsStock == true);
+                    ItemsToListDetails = ItemsToListDetails.filter(x => x.IsStock == true );
                 }
             }
         });

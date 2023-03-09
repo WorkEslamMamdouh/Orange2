@@ -1458,7 +1458,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1482,7 +1482,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1539,7 +1539,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1564,7 +1564,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1771,6 +1771,7 @@ var JournalVoucher;
                     $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+                    FlagAddOrEdit = 2;
                     Save_Succ_But();
                 }
                 else {
@@ -1866,6 +1867,7 @@ var JournalVoucher;
                     $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+                    FlagAddOrEdit = 2;
                     Save_Succ_But();
                 }
                 else {

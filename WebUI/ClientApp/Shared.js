@@ -31,7 +31,7 @@ var SharedWork = /** @class */ (function () {
                 var _Cond = localStorage.getItem("ModelCount");
                 var result = 0;
                 var sys = new SystemTools();
-                $.ajax({
+                Ajax.Callsync({
                     type: "GET",
                     url: sys.apiUrl("SystemTools", "GetModelCount"),
                     data: { TableName: _Table, Condition: _Cond },
@@ -242,13 +242,16 @@ function GetSystemSession(Mod) {
     if (document.cookie.length > 0) {
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));
+        var compCode = SysSession.CurrentEnvironment.CompCode;
+        var UserCode = SysSession.CurrentEnvironment.UserCode;
+        var DbName = SysSession.CurrentEnvironment.DbName;
+        $('#GetIPAddress').val(compCode + "_" + UserCode + "_" + DbName);
         if (Mod == "Home")
             return SysSession;
         var sys = new SystemTools();
-        var compCode = SysSession.CurrentEnvironment.CompCode;
         if (!(compCode == "Undefied")) {
             var branchCode = SysSession.CurrentEnvironment.BranchCode;
-            var UserCode = SysSession.CurrentEnvironment.UserCode;
+            var UserCode_1 = SysSession.CurrentEnvironment.UserCode;
             var SystemCode = SysSession.CurrentEnvironment.SystemCode;
             var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
             var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
@@ -256,7 +259,7 @@ function GetSystemSession(Mod) {
             Ajax.Callsync({
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
-                data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode, SystemCode: SystemCode, Modulecode: Mod },
+                data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode_1, SystemCode: SystemCode, Modulecode: Mod },
                 success: function (d) {
                     var result = JSON.parse(d);
                     if (result == null || result.Access != true) {

@@ -46,6 +46,9 @@ namespace Inv.WebUI.Controllers
         ReportInfo Rep = new ReportInfo();
         ClassPrint Printer = new ClassPrint();
 
+        HttpContext Context;
+
+
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
         string NameAr;
         string NameEn;
@@ -70,8 +73,24 @@ namespace Inv.WebUI.Controllers
         ReportViewer reportViewer = new ReportViewer();
         public static string BuildConnectionString()
         {
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
+
+           
+            string DbName = "";
+            try
+            {
+                ClassPrint ListInformation = new ClassPrint();                
+                string[] ListUserInformation = ListInformation.GetUserInformation();
+                DbName = ListUserInformation[2];
+
+            }
+            catch (Exception ex)
+            {
+
+                DbName = "";
+            }
+
+            var httpClient = new HttpClient(); 
+            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress="+ DbName + "").Result;
             return res;
         }
 
@@ -91,6 +110,8 @@ namespace Inv.WebUI.Controllers
         }
         public ReportService getStandardParameters(StdParamters sr)
         {
+             
+
             ReportService rep = new ReportService();
 
 

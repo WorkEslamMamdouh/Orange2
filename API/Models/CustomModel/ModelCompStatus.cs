@@ -18,6 +18,6 @@ namespace Inv.API.Models.CustomModel
         public Nullable<int> MembershipAllanceDays { get; set; }
         public Nullable<int> MembershipreadOnlyDays { get; set; }
         public Nullable<int> CompStatus { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsActive { get; set; } 
     }
 }

@@ -30,13 +30,17 @@ class SystemParameters {
 class APISessionRecord {
 
     public SetAPISessionAPI(key: string, value: string) {
-        var sys: SystemTools = new SystemTools();
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: key, value: value },
-            async: false
-        });
+        debugger
+        //var sys: SystemTools = new SystemTools();
+        //let compCode = sys.SysSession.CurrentEnvironment.CompCode;
+        //let UserCode = sys.SysSession.CurrentEnvironment.UserCode;
+        //key = key + compCode + '_' + UserCode;
+        //$.ajax({
+        //    //url: Url.Action("SetSessionRecordValue", "Session"),
+        //    url: sys.apiUrl("Session", "SetSessionRecordValue"),
+        //    data: { propertyName: key, value: value },
+        //    async: false
+        //});
 
     }
     private SetAPISession(key: string, value: string) {
@@ -148,6 +152,7 @@ class BaseResponse {
 
 class ReportParameters {
 
+    public DbName: string;
     public Name_function: string;
     public CompCode: string;
     public CompNameA: string;
@@ -676,6 +681,7 @@ class I_VW_GetCompStatus extends SecurityClass {
         this.MembershipAllanceDays = 0;
         this.MembershipreadOnlyDays = 0;
         this.MembeshipEndDate = "";
+        this.DbName = "";
 
     }
     public CompCode: number;
@@ -694,6 +700,7 @@ class I_VW_GetCompStatus extends SecurityClass {
     public MembershipAllanceDays: number;
     public MembershipreadOnlyDays: number;
     public MembeshipEndDate: string;
+    public DbName: string;
 }
 
 

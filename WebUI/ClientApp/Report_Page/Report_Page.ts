@@ -105,6 +105,7 @@ namespace Report_Page {
         var data_New: ReportParameters = JSON.parse(ReportData);
         if (ReportData != null) {
 
+
             data_New.CompCode = SysSession.CurrentEnvironment.CompCode;
             data_New.BranchCode = SysSession.CurrentEnvironment.BranchCode;
             data_New.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
@@ -118,12 +119,14 @@ namespace Report_Page {
             data_New.BraNameE = SysSession.CurrentEnvironment.BranchName;
             data_New.DocPDFFolder = SysSession.CurrentEnvironment.I_Control[0].DocPDFFolder;
             data_New.LoginUser = SysSession.CurrentEnvironment.UserCode;   
+            data_New.DbName = $('#GetIPAddress').val();   
             if (data_New.BraNameA == null || data_New.BraNameE == null) {
 
                 data_New.BraNameA = " ";
                 data_New.BraNameE = " ";
             }
 
+            debugger
 
             Ajax.CallAsync({
                 url: Url.Action("" + data_New.Name_function + "", "GeneralRep"),

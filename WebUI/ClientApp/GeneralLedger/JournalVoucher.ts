@@ -1759,7 +1759,7 @@ namespace JournalVoucher {
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1785,7 +1785,7 @@ namespace JournalVoucher {
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1844,7 +1844,7 @@ namespace JournalVoucher {
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1870,7 +1870,7 @@ namespace JournalVoucher {
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -2100,6 +2100,7 @@ namespace JournalVoucher {
 
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+                    FlagAddOrEdit = 2;
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -2204,6 +2205,9 @@ namespace JournalVoucher {
                     $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+
+                    FlagAddOrEdit = 2;
+
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);

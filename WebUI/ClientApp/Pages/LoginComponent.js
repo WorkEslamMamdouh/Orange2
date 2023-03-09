@@ -73,18 +73,6 @@ var LoginComponent;
         catch (e) {
             localStorage.setItem("OutUesr", "");
         }
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: "CompCode", value: "" },
-            async: false
-        });
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: "ConnectionString", value: "" },
-            async: false
-        });
     }
     LoginComponent.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {
@@ -147,12 +135,14 @@ var LoginComponent;
         localStorage.setItem("LastAccess", timenow);
         //localStorage.setItem("startTimeOut", vSysTimeOut);
         //SysSession.CurrentEnvironment.I_Control[0].SysTimeOut = vSysTimeOut;
+        debugger;
         Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("G_USERS", "UserLogin"),
             data: { UserCode: user.USER_CODE, Password: user.USER_PASSWORD },
             success: function (d) {
                 var res = d;
+                debugger;
                 if (res.IsSuccess == true) {
                     var result = res.Response;
                     if (result != null && result.USER_CODE != null) {
@@ -215,6 +205,7 @@ var LoginComponent;
         });
     }
     function ShowMessg(CompanyStatus) {
+        SystemEnv.DbName = CompanyStatus.DbName;
         var MembeshipEndDate = CompanyStatus.MembeshipEndDate;
         var status = CompanyStatus.CompStatus;
         var masg = CompanyStatus.LoginMsg;
@@ -248,7 +239,7 @@ var LoginComponent;
             var isActive = company.IsActive;
             SystemEnv = GetSystemEnvironment();
             if (isActive) {
-                $.ajax({
+                Ajax.Callsync({
                     type: "GET",
                     url: sys.apiUrl("I_VW_GetCompStatus", "GetStat"),
                     data: { Compcode: compCode, yr: Number(txtYear.value) },
@@ -262,7 +253,7 @@ var LoginComponent;
                             ShowMessg(CompanyStatus);
                             if (status == 0 || status == 1 || status == 2) {
                                 setTimeout(function () {
-                                    $.ajax({
+                                    Ajax.Callsync({
                                         type: "GET",
                                         url: sys.apiUrl("I_Control", "GetAll"),
                                         data: { Compcode: compCode },
@@ -306,7 +297,7 @@ var LoginComponent;
                                                     debugger;
                                                     var IsLocalSalePrice = false;
                                                     IsLocalSalePrice = CompanyService[0].IsLocalSalePrice;
-                                                    $.ajax({
+                                                    Ajax.Callsync({
                                                         type: "GET",
                                                         url: sys.apiUrl("G_Branch", "GetBranch"),
                                                         data: { CompCode: Number(compCode), BRA_CODE: Number(braCode) },
@@ -340,7 +331,7 @@ var LoginComponent;
                                                             }
                                                         }
                                                     });
-                                                    //$.ajax({
+                                                    //Ajax.Callsync({
                                                     //    type: "GET",
                                                     //    url: Url.Action("GetSerialNumber", "Home"),
                                                     //    success: (d) => {
@@ -366,7 +357,7 @@ var LoginComponent;
                                 //    MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, ""); 
                                 //    //setTimeout(function ()
                                 //    { 
-                                //        $.ajax({
+                                //        Ajax.Callsync({
                                 //            type: "GET",
                                 //            url: sys.apiUrl("I_Control", "GetAll"),
                                 //            data: { Compcode: compCode },
@@ -430,7 +421,7 @@ var LoginComponent;
         APiSession.Session.UserCode = SystemEnv.UserCode;
         APiSession.Session.CurrentYear = $("#txtYear").val();
         InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true); //if success
-        $.ajax({
+        Ajax.Callsync({
             url: OnLoggedUrl,
             success: function (result) {
                 var obj = result.result;

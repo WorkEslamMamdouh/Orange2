@@ -72,6 +72,7 @@ namespace Inv.API.Controllers
                     ctr.MembeshipEndDate = Ic[0].MembeshipEndDate;
                     ctr.MembershipAllanceDays = Ic[0].MembershipAllanceDays;
                     ctr.MembershipreadOnlyDays = Ic[0].MembershipreadOnlyDays;
+                    ctr.DbName = "Orange2021";
                 }
                 else
                 {
