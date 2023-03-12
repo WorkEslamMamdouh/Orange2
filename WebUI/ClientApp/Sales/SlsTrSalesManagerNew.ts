@@ -255,7 +255,8 @@ namespace SlsTrSalesManagerNew {
         FillddlFamily();
         fillddlSalesman();
         FillddlStore();
-        txtStartDate.value = DateStartMonth();
+        //txtStartDate.value = DateStartMonth();
+        txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         FillddlStateType();
@@ -4617,9 +4618,9 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
                     IsSuccess = true;
 
-                    if (res.Status == 1) {
-                        setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    }
+                    //if (res.Status == 1) {
+                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
+                    //}
 
 
                     Save_Succ_But();
@@ -4673,9 +4674,9 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
 
                     IsSuccess = true;
-                    if (res.Status == 1) {
-                        setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    }
+                    //if (res.Status == 1) {
+                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
+                    //}
 
                     Save_Succ_But();
 

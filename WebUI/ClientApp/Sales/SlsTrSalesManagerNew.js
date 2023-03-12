@@ -197,7 +197,8 @@ var SlsTrSalesManagerNew;
         FillddlFamily();
         fillddlSalesman();
         FillddlStore();
-        txtStartDate.value = DateStartMonth();
+        //txtStartDate.value = DateStartMonth();
+        txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         FillddlStateType();
         FillddlInvoiceType();
@@ -3490,9 +3491,9 @@ var SlsTrSalesManagerNew;
                     displayDate_speed(invoiceID, res);
                     success_insert();
                     IsSuccess = true;
-                    if (res.Status == 1) {
-                        setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    }
+                    //if (res.Status == 1) {
+                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
+                    //}
                     Save_Succ_But();
                 }
                 else {
@@ -3533,9 +3534,9 @@ var SlsTrSalesManagerNew;
                     displayDate_speed(invoiceID, res);
                     success_insert();
                     IsSuccess = true;
-                    if (res.Status == 1) {
-                        setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    }
+                    //if (res.Status == 1) {
+                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
+                    //}
                     Save_Succ_But();
                 }
                 else {
