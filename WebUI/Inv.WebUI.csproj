@@ -198,6 +198,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientApp\Processes\OperationRepScrap.js" />
     <Content Include="ClientApp\Report_Page\Report_Page.js" />
     <Content Include="ClientApp\Tools\TranPosting\TranPosting.js" />
     <Content Include="ClientApp\Tools\USERS\USERS.js" />
@@ -1100,6 +1101,7 @@
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-Medium.ttf" />
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-Regular.ttf" />
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-SemiBold.ttf" />
+    <Content Include="ClientApp\Processes\OperationRepScrap.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\add.png" />
     <Content Include="images\add_icon.png" />
@@ -1572,6 +1574,8 @@
     <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <Content Include="Views\AdminSetting\AdminColseCompIndex.cshtml" />
     <Content Include="Views\Inventory\STKOpeningbalanceIndex.cshtml" />
+    <Content Include="Views\Login\ErrorIndex.cshtml" />
+    <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1627,6 +1631,7 @@
     <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
+    <TypeScriptCompile Include="ClientApp\Processes\OperationRepScrap.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturnNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />

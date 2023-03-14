@@ -26,6 +26,19 @@ namespace Inv.WebUI.Controllers
             return View();
         }
 
+        public ActionResult ErrorIndex()
+        {
+            string MassError = HttpContext.Session["MessageError"].ToString(); ;
+            SessionRecord ses = new SessionRecord();
+            ses.SystemName = MassError;
+            SessionManager.SessionRecord = ses;
+
+            Session["MessageError"] = MassError;
+
+            //return Content(MassError, "text/xml");
+            return View("~/Views/Login/ErrorIndex.cshtml");
+        }
+
         public ActionResult updatesIndex()
         {
             return View(/*"~/Views/Login/updates.cshtml"*/);

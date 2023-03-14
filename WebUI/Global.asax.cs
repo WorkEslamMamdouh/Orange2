@@ -23,13 +23,26 @@ namespace Inv.WebUI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_Error(object sender,EventArgs e)
+        //protected void Application_Error(object sender,EventArgs e)
+        //{
+        //    Exception ex = Server.GetLastError();
+        //    Server.ClearError();
+        //    string url = "/Login/HomePage";  // HttpContext.Current.Session["ErrorUrl"].ToString();
+        //    // url = url + "?err=" + ex.Message + "      " + ex.InnerException;
+        //    Response.Redirect(url);
+        //}
+
+        protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError();
             Server.ClearError();
-            string url = "/Login/HomePage";  // HttpContext.Current.Session["ErrorUrl"].ToString();
-            // url = url + "?err=" + ex.Message + "      " + ex.InnerException;
+            string url = "/Login/ErrorIndex";  // HttpContext.Current.Session["ErrorUrl"].ToString();
+                                               //url = url + "/?MassError={" + ex.Message + "" + ex.InnerException+"}";
+            Session["MessageError"] = "Message:" + ex.Message.ToString() + ex.InnerException;
+
             Response.Redirect(url);
+
+            //return url; 
         }
 
         //protected void Session_Start()

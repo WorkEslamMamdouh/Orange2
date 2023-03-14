@@ -2435,6 +2435,7 @@ var CloseProcesses;
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == OperationID; });
         $("#div_Master_Hedr").removeClass("display_none");
         DisplayData(Selected_Data);
+        debugger;
         if (Selected_Data[0].Status == 0) { // تحت التجهيز
             Processes_under_preparing();
         }
@@ -2446,8 +2447,11 @@ var CloseProcesses;
         else if (Selected_Data[0].Status == 3) { //مغلق
             Processes_Close();
         }
-        flag_Add = false;
+        else if (Selected_Data[0].Status == 4) { //مغلق 
+            Processes_Open();
+        }
         Calculation_Close();
+        flag_Add = false;
     }
     //-----------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------- Div_items-------------------------------------------------------
@@ -2885,7 +2889,7 @@ var CloseProcesses;
         //$('#lepMoney').addClass('showdiv');
         //$('#spanlepMoney_4').toggleClass('fa-angle-double-left');
         //$('#spanlepMoney_4').toggleClass('fa-angle-double-down');
-        btnUpdate_1.classList.add('display_none');
+        btnUpdate_1.classList.remove('display_none');
         btnUpdate_3.classList.remove('display_none');
         btnUpdate_4.classList.add('display_none');
         btnUpdate_5.classList.remove('display_none');
@@ -3145,6 +3149,7 @@ var CloseProcesses;
             }
             btnBack_3_onclick();
             btnBack_5_onclick();
+            btnUpdate_1.disabled = true;
             btnUpdate_2.disabled = true;
             btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
@@ -3256,7 +3261,6 @@ var CloseProcesses;
         FlagIns_Operation = false;
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
-        $("#div_MasterGird").attr("disabled", "disabled").off('click');
         $("#div_MasterGird").addClass("disabledDiv");
         //$("#txtNumber").removeAttr("disabled");
         $("#txtDate").removeAttr("disabled");
@@ -3270,22 +3274,24 @@ var CloseProcesses;
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
         $("#txtPolice_num").removeAttr("disabled");
-        $(".undisebel").attr("disabled", "disabled");
         flag_Add = false;
         Update_1 = true;
-        btnBack_3_onclick();
-        btnBack_2_onclick();
-        if (Status == 2) { //مفتوحة 
-            btnBack_5_onclick();
-        }
-        if (Status == 0) { //تحت التجهيز 
-        }
+        //btnBack_3_onclick();
+        //btnBack_2_onclick();
+        //if (Status == 2) {//مفتوحة 
+        //    btnBack_5_onclick();
+        //}
+        //if (Status == 0) {//تحت التجهيز 
+        //}
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
         DisabledToolBar();
     }
     function btnBack_1_onclick() {
+        debugger;
         if (flag_Add == true) {
+            debugger;
             if (flag_succ_insert == true) {
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
@@ -3300,14 +3306,18 @@ var CloseProcesses;
                 $('#divlepRentdata_2').removeClass('display_none');
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
+                //Update_2_onclick();
+                //Update_3_onclick();
+                //btnUpdate_3.focus();
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
-                //$("#btnClose").attr("style", "")
+                //   $("#btnPresent").attr("style", "background-color: #198754")
                 $("#btnPresent").addClass("btn-green");
-                $("#btnClose").removeClass("btn-red");
+                //  $("#btnClose").attr("style", "")
+                $("#btnClose").addClass("btn-red");
             }
             else {
+                debugger;
                 $("#div_Master_Hedr").addClass("display_none");
                 $('#div_Master').addClass('disabledDiv');
                 btnUpdate_1.classList.remove("display_none");
@@ -3315,10 +3325,13 @@ var CloseProcesses;
                 btnBack_1.classList.add("display_none");
             }
             flag_succ_insert = false;
+            RemoveDisabledToolBar();
         }
         else {
+            debugger;
             if (flag_Back == true) {
-                // 
+                //  debugger
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
@@ -3329,32 +3342,31 @@ var CloseProcesses;
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
                 MasterGridBiuld();
+                //Update_1 = false;
+                //Update_2 = false;
+                //Update_3 = false;
+                //Update_4 = false;
+                //Update_5 = false;
+                //disabled_divMasterGridiv();
             }
             else {
+                debugger;
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv");
                 btnUpdate_1.classList.remove("display_none");
                 btnSave_1.classList.add("display_none");
                 btnBack_1.classList.add("display_none");
-                DocumentActions.RenderFromModel(Selected_Data[0]);
-                Status = Selected_Data[0].Status;
-                var OpenAt = DateFormat(Selected_Data[0].OpenAt);
-                if (OpenAt != null) {
-                    $('#txtdateopening').val(OpenAt);
-                }
-                else {
-                    $('#txtdateopening').val(GetDate());
-                }
-                $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
-                $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
-                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
-                $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
+                MasterGridBiuld();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+            debugger;
+            RemoveDisabledToolBar();
         }
+        debugger;
         Update_1 = false;
         disabled_divMasterGridiv();
+        //divGridDetails_onclick();
     }
     function btnSave_1_onclick() {
         loading('btnsave');
@@ -3375,15 +3387,15 @@ var CloseProcesses;
             //console.log(Model_I_TR_Operation);
             btnBack_1_onclick();
             flag_Back = false;
-            //btnSave_2.classList.add("display_none");
-            //btnBack_2.classList.add("display_none");
-            //btnSave_3.classList.add("display_none");
-            //btnBack_3.classList.add("display_none");
-            //btnSave_4.classList.add("display_none");
-            //btnBack_4.classList.add("display_none");
-            //btnSave_5.classList.add("display_none");
-            //btnBack_5.classList.add("display_none");
         }, 100);
+        //btnSave_2.classList.add("display_none");
+        //btnBack_2.classList.add("display_none");
+        //btnSave_3.classList.add("display_none");
+        //btnBack_3.classList.add("display_none");
+        //btnSave_4.classList.add("display_none");
+        //btnBack_4.classList.add("display_none");
+        //btnSave_5.classList.add("display_none");
+        //btnBack_5.classList.add("display_none");
     }
     function Update_2_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -3611,6 +3623,7 @@ var CloseProcesses;
             Display();
             MasterGridBiuld();
             flag_Back = false;
+            btnUpdate_1.disabled = false;
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnReCalculation.disabled = false;
@@ -3656,6 +3669,7 @@ var CloseProcesses;
             //$('#divlepRentdata_3').addClass('display_none');
             //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
+            btnUpdate_1.disabled = false;
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnUpdate_5.disabled = false;

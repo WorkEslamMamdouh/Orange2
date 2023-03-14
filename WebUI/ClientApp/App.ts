@@ -666,8 +666,13 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    //debugger 
-        //    //settings.data = 'Address=' + Address + '' + settings.data; 
+        //    debugger
+        //    settings.data = JsonAddValue(settings.data, Address)
+
+        //    console.log(settings.data);
+
+        //    //settings.data = 'Address=' + Address + '' + settings.data;
+
         //}
         $.ajax({
             type: settings.type,
@@ -711,12 +716,15 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    //debugger
+        //    debugger
+        //    settings.data = JsonAddValue(settings.data, Address)
+
+        //    console.log(settings.data);
 
         //    //settings.data = 'Address=' + Address + '' + settings.data;
 
         //}
-        //debugger  
+        debugger  
         $.ajax({
 
             type: settings.type,
@@ -741,6 +749,17 @@ var Ajax = {
 };
 
 
+function JsonAddValue(data: string, Address): string {
+
+    debugger
+
+    var obj = JSON.parse(data);
+
+    obj["Address"] = '' + Address + '';
+
+
+    return JSON.stringify(obj);
+}
 
 function GetView(controllerName: string, ModuleCode: string) {
     ////// ;

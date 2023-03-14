@@ -64,6 +64,8 @@ var VATReport;
         $("#btnShow").addClass("d-none");
         $("#btnAdd").addClass("d-none");
         $("#icon-bar").addClass("d-none");
+        $('#btnPrintTrPDF').addClass('display_none');
+        $('#btnPrintTrEXEL').addClass('display_none');
     }
     VATReport.InitializeComponent = InitializeComponent;
     function InitializeControls() {

@@ -2352,6 +2352,7 @@ var Processes;
         if (!CheckDate(DateFormat(txtDateHeader.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
             DisplayMassage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'The date is not identical with the date of the year(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', MessageType.Worning);
             Errorinput(txtDateHeader);
+            flag_succ_insert = false;
             return;
         }
         Ajax.Callsync({
@@ -2446,6 +2447,33 @@ var Processes;
         }
         else if (Selected_Data[0].Status == 3) { //مغلق
             Processes_Close();
+            if (ddlTrtype.value == '1') {
+                $('#btnClose').attr('disabled', 'disabled');
+                $("#btnClose").attr("disabled", "disabled");
+                //$("#btnClose").attr("style", "")
+                $("#btnClose").removeClass("btn-red");
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").removeClass("btn-green");
+                //$("#btnPresent").attr("style", "")
+            }
+            else {
+                $("#btnOpen").attr("disabled", "disabled");
+                $("#btnOpen").removeClass("btn-dark-green");
+                $("#btnClose").attr("disabled", "disabled");
+                $("#btnClose").attr("style", "");
+                $("#btnPresent").attr("disabled", "disabled");
+                $("#btnPresent").attr("style", "");
+            }
+        }
+        else if (Selected_Data[0].Status == 4) { //تحت الاغلاق
+            Processes_Close();
+            $('#btnClose').attr('disabled', 'disabled');
+            $("#btnClose").attr("disabled", "disabled");
+            //$("#btnClose").attr("style", "")
+            $("#btnClose").removeClass("btn-red");
+            $("#btnPresent").attr("disabled", "disabled");
+            $("#btnPresent").removeClass("btn-green");
+            //$("#btnPresent").attr("style", "")
         }
         flag_Add = false;
     }
@@ -3541,22 +3569,7 @@ var Processes;
                 btnUpdate_1.classList.remove("display_none");
                 btnSave_1.classList.add("display_none");
                 btnBack_1.classList.add("display_none");
-                DocumentActions.RenderFromModel(Selected_Data[0]);
-                var trDate = DateFormat(Selected_Data[0].TrDate);
-                $('#txtDate').val(trDate);
-                Status = Selected_Data[0].Status;
-                var OpenAt = DateFormat(Selected_Data[0].OpenAt);
-                if (OpenAt != null) {
-                    $('#txtdateopening').val(OpenAt);
-                }
-                else {
-                    $('#txtdateopening').val(GetDate());
-                }
-                //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
-                $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
-                $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
-                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
-                $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
+                MasterGridBiuld();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }

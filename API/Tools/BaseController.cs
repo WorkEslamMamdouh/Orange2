@@ -90,36 +90,23 @@ namespace Inv.API.Tools
 
         public static string[] GetUserInformation()
         {
-            string IPAddress = "";
-            IPAddress = HttpContext.Current.Request.AcceptTypes[0];
-            IPAddress = HttpContext.Current.Request.ReadEntityBodyMode.ToString(); 
-            IPAddress = HttpContext.Current.Request.Form.ToString();
-            IPAddress = HttpContext.Current.Request.Params.Get("APPL_PHYSICAL_PATH"); 
-            IPAddress = HttpContext.Current.Request.Params.Get("AUTH_TYPE"); 
-            IPAddress = HttpContext.Current.Request.Params.Get("AUTH_USER"); 
-            IPAddress = HttpContext.Current.Request.Params.Get("AUTH_PASSWORD"); 
-            IPAddress = HttpContext.Current.Request.Params.Get("LOGON_USER"); 
-            IPAddress = HttpContext.Current.Request.Params.Get("REMOTE_USER");
-
-            IPAddress = HttpContext.Current.Request["I_Sls_TR_Invoice"];
+            string IPAddress = ""; 
+            IPAddress = HttpContext.Current.Request.Params.Get("Address");  
 
             try
             {
-                var request = HttpContext.Current.Request;
 
-                var body = request.InputStream;
-                var encoding = request.ContentEncoding;
-                var reader = new StreamReader(body, encoding);
-                var json = reader.ReadToEnd();
+                string param = HttpContext.Current.Request["parameter"];
 
-                var ser = new JavaScriptSerializer();
+                //// Do something with it    
+                //MyObject output = DoSomethingWithPAram(param);
 
-                // you can read the json data from here
-                var jsonDictionary = ser.Deserialize<Dictionary<string, string>>(json);
+                //// Use Json.NET to get a nice JSON string
+                //string json = Newtonsoft.Json.JsonConvert.SerializeObject(output);
 
-                // i'm resetting the position back to 0, else the value of product in the action  
-                // method will  be null.
-                request.InputStream.Position = 0;
+                //// Output new stuff
+                //context.Response.ContentType = "text/plain";
+                //context.Response.Write(json);
 
             }
             catch (Exception ex)
@@ -151,7 +138,8 @@ namespace Inv.API.Tools
             //    DbName = "";
             //}
 
-              
+
+            DbName = "";
 
             return BuildConnectionString(DbName);
         }
