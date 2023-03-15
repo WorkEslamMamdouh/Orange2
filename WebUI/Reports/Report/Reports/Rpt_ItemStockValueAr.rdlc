@@ -1090,7 +1090,7 @@
   <Width>11.25082in</Width>
   <Page>
     <PageHeader>
-      <Height>4.8218cm</Height>
+      <Height>5.22316cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1485,7 +1485,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>26.9514cm</Left>
               <Height>0.6cm</Height>
               <Width>1.54721cm</Width>
@@ -1519,7 +1519,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>16.53858cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -1553,7 +1553,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>26.9514cm</Left>
               <Height>0.6cm</Height>
               <Width>1.54721cm</Width>
@@ -1587,7 +1587,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>6.7984cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -1621,7 +1621,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>6.7984cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -1655,7 +1655,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>16.53858cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -1687,7 +1687,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_FromDate</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>21.93786cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -1719,7 +1719,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_Todate</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>11.51121cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -1751,7 +1751,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_CatDSA</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>21.92988cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -1783,7 +1783,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_FamilyDSA</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>11.51121cm</Left>
               <Height>0.6cm</Height>
               <Width>4.99209cm</Width>
@@ -1815,7 +1815,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_ItemDSA</rd:DefaultName>
-              <Top>3.85587cm</Top>
+              <Top>4.49087cm</Top>
               <Left>1.7479cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -1847,7 +1847,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
-              <Top>3.04253cm</Top>
+              <Top>3.67753cm</Top>
               <Left>1.7479cm</Left>
               <Height>0.6cm</Height>
               <Width>5.01354cm</Width>
@@ -1896,9 +1896,75 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Par_FromDate2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!BraNameA.Value, "Rpt_ItemStockValueAr")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Par_FromDate</rd:DefaultName>
+              <Top>2.97469cm</Top>
+              <Left>21.93786cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.05228cm</Width>
+              <ZIndex>24</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox28">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>الفرع</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox13</rd:DefaultName>
+              <Top>2.97469cm</Top>
+              <Left>27.02987cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.54721cm</Width>
+              <ZIndex>25</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>4.8218cm</Height>
+          <Height>5.22316cm</Height>
           <Width>28.57708cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>

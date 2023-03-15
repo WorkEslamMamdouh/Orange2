@@ -242,6 +242,9 @@ function GetSystemSession(Mod) {
     if (document.cookie.length > 0) {
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties"));
+        if (SysSession.CurrentEnvironment == null) {
+            return;
+        }
         var compCode = SysSession.CurrentEnvironment.CompCode;
         var UserCode = SysSession.CurrentEnvironment.UserCode;
         var DbName = SysSession.CurrentEnvironment.DbName;

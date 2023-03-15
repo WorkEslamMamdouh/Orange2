@@ -362,6 +362,9 @@ function GetSystemSession(Mod: string): SystemSession {
         var SysSession = new SystemSession;
         SysSession.CurrentEnvironment = JSON.parse(readCookie("Inv1_systemProperties")) as SystemEnvironment;
 
+        if (SysSession.CurrentEnvironment == null) {
+            return 
+        }
         let compCode = SysSession.CurrentEnvironment.CompCode;
         let UserCode = SysSession.CurrentEnvironment.UserCode;
         let DbName = SysSession.CurrentEnvironment.DbName;

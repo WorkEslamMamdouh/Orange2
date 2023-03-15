@@ -2225,7 +2225,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.02531cm</Top>
-              <Left>3.53267cm</Left>
+              <Left>3.89854cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
               <ZIndex>14</ZIndex>
@@ -2485,9 +2485,9 @@
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
               <Top>2.02531cm</Top>
-              <Left>0.33007cm</Left>
+              <Left>0.09525cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.20262cm</Width>
+              <Width>3.80331cm</Width>
               <ZIndex>22</ZIndex>
               <Style>
                 <Border>
@@ -2585,7 +2585,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.7382cm</Top>
-              <Left>3.53267cm</Left>
+              <Left>3.89854cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
               <ZIndex>25</ZIndex>
@@ -2617,10 +2617,76 @@
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
               <Top>2.7382cm</Top>
-              <Left>0.33007cm</Left>
+              <Left>0.09525cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.20262cm</Width>
+              <Width>3.80331cm</Width>
               <ZIndex>26</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Par_FromDate2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!BraNameA.Value, "Rpt_ItemSalesDetailByItemAr")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Par_FromDate</rd:DefaultName>
+              <Top>3.51459cm</Top>
+              <Left>0.07938cm</Left>
+              <Height>0.6cm</Height>
+              <Width>3.917cm</Width>
+              <ZIndex>27</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox30">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>الفرع</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox13</rd:DefaultName>
+              <Top>3.51107cm</Top>
+              <Left>4.09516cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.54721cm</Width>
+              <ZIndex>28</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
