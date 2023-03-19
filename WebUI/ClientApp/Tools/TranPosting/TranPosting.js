@@ -410,38 +410,44 @@ var TranPosting;
             var Desc = txtDesc.value;
             var VoucherDate = DateFormatRep(txtVoucherDate.value);
             var lstTrans = JSON.stringify(LnkTransDetails);
-            Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("TranPosting", "GenerateVoucher"),
-                data: {
-                    comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
-                },
-                success: function (d) {
-                    var result = d;
-                    if (result.IsSuccess) {
-                        if (result.Response != -1) {
-                            //  lblVoucherNum.innerText = result.Response;
-                            DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
-                            setTimeout(function () {
-                                Clear();
-                                $("#VoucherDetailGrid").html("");
-                                $("#btndiv_1").addClass("btn-active");
-                                $("#btndiv_2").removeClass("btn-active");
-                                $("#btndiv_3").removeClass("btn-active");
-                                $("#btndiv_11").removeClass("btn-main");
-                                $("#btndiv_22").addClass("btn-main");
-                                $("#btndiv_33").addClass("btn-main");
-                                $("#div_1").removeClass("display_none");
-                                $("#div_3").addClass("display_none");
-                                $("#div_2").addClass("display_none");
-                            }, 5000);
-                            RefreshTransactions();
+            $('#btnCreateVoucher').html(' جاري انشاء القيد <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+            $('#btnCreateVoucher').attr('disabled', 'disabled');
+            setTimeout(function () {
+                Ajax.Callsync({
+                    type: "Get",
+                    url: sys.apiUrl("TranPosting", "GenerateVoucher"),
+                    data: {
+                        comp: compcode, branch: branch, Desc: Desc, VoucherDate: VoucherDate, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: Modules.TranPosting
+                    },
+                    success: function (d) {
+                        var result = d;
+                        if (result.IsSuccess) {
+                            if (result.Response != -1) {
+                                //  lblVoucherNum.innerText = result.Response;
+                                DisplayMassage("تم اصدار  سند قيد رقم  " + result.Response, "jouranl voucher number " + result.Response + "has been issued", MessageType.Succeed);
+                                $('#btnCreateVoucher').html('انشاء القيد فى الحسابات');
+                                $('#btnCreateVoucher').removeAttr('disabled');
+                                setTimeout(function () {
+                                    Clear();
+                                    $("#VoucherDetailGrid").html("");
+                                    $("#btndiv_1").addClass("btn-active");
+                                    $("#btndiv_2").removeClass("btn-active");
+                                    $("#btndiv_3").removeClass("btn-active");
+                                    $("#btndiv_11").removeClass("btn-main");
+                                    $("#btndiv_22").addClass("btn-main");
+                                    $("#btndiv_33").addClass("btn-main");
+                                    $("#div_1").removeClass("display_none");
+                                    $("#div_3").addClass("display_none");
+                                    $("#div_2").addClass("display_none");
+                                }, 5000);
+                                RefreshTransactions();
+                            }
+                            else
+                                DisplayMassage("لم تتم عملية الترحيل راجع اعدادات الربط  ", "Transposting process not accomplished please review connection settings", MessageType.Error);
                         }
-                        else
-                            DisplayMassage("لم تتم عملية الترحيل راجع اعدادات الربط  ", "Transposting process not accomplished please review connection settings", MessageType.Error);
                     }
-                }
-            });
+                });
+            }, 300);
         }
         IsUpdated = false;
     }

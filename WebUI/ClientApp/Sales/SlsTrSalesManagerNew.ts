@@ -3803,7 +3803,7 @@ namespace SlsTrSalesManagerNew {
         var total = (Number(txtQuantityValue) * Number(txtPriceValue)).RoundToNum(2);
         VatPrc = $("#txtTax_Rate" + cnt).val();
         var vatAmount = (Number(total) * VatPrc / 100).RoundToNum(2);
-        $("#txtTax" + cnt).val(vatAmount); 
+        $("#txtTax" + cnt).val(vatAmount);
         $("#txtTotal" + cnt).val(total);
 
         var totalAfterVat = ((vatAmount) + (total)).RoundToNum(2);
@@ -3952,9 +3952,9 @@ namespace SlsTrSalesManagerNew {
                 PackageCount += Number($("#txtQuantity" + i).val());
                 PackageCount = Number(PackageCount.RoundToSt(2).toString());
 
-                Totalbefore += (Number($("#txtTotal" + i).val())); 
+                Totalbefore += (Number($("#txtTotal" + i).val()));
 
-                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val())); 
+                TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
 
                 CountTotal += Number($("#txtTotal" + i).val());
                 CountTotal = Number(CountTotal);
@@ -3981,7 +3981,7 @@ namespace SlsTrSalesManagerNew {
             if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
                 $("#txtCardMoney").val('')
                 $("#txtCashMoney").val(txtNet.value.toString());
-            } 
+            }
         }
 
     }
@@ -4487,7 +4487,7 @@ namespace SlsTrSalesManagerNew {
                 invoiceItemSingleModel.UnitpriceWithVat = Number($("#txtUnitpriceWithVat" + i).val());
                 invoiceItemSingleModel.DiscountPrc = Number($("#txtDiscountPrc" + i).val());
                 invoiceItemSingleModel.DiscountAmount = Number($("#txtDiscountAmount" + i).val());
-                 
+
                 invoiceItemSingleModel.SoldQty = $('#txtQuantity' + i).val();
                 invoiceItemSingleModel.NetUnitPrice = Number($("#txtNetUnitPrice" + i).val());
                 //-----------------------------------------------------
@@ -4503,7 +4503,7 @@ namespace SlsTrSalesManagerNew {
                 VatPrc = $("#txtTax_Rate" + i).val();
                 let VatNatID = Number($("#txtTax_Rate" + i).attr('data-VatNatID'));
                 invoiceItemSingleModel.VatPrc = VatPrc;//$("#txtTax" + i).val();
-                invoiceItemSingleModel.VatNatID = VatNatID; 
+                invoiceItemSingleModel.VatNatID = VatNatID;
                 invoiceItemSingleModel.TotRetQty = $("#txtReturnQuantity" + i).val();
                 invoiceItemSingleModel.StatusFlag = StatusFlag.toString();
 
@@ -4595,6 +4595,15 @@ namespace SlsTrSalesManagerNew {
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             return
         }
+
+        if (MasterDetailsModel.I_Sls_TR_Invoice.IsCash == true) {
+            if (MasterDetailsModel.I_Sls_TR_Invoice.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return
+            }
+        }
+
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         MasterDetailsModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
@@ -4653,6 +4662,14 @@ namespace SlsTrSalesManagerNew {
             }
 
             return
+        }
+
+        if (MasterDetailsModel.I_Sls_TR_Invoice.IsCash == true) {
+            if (MasterDetailsModel.I_Sls_TR_Invoice.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return
+            }
         }
 
         Ajax.Callsync({
