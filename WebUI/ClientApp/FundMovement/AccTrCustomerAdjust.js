@@ -555,7 +555,7 @@ var AccTrCustomerAdjust;
                         $('#txt_CustName').val(AccountDetails[0].NAMEA);
                         $('#txt_Openbalance').val(AccountDetails[0].Openbalance);
                         GLOBALopenbalance = AccountDetails[0].Openbalance;
-                        PurchaserId = custId;
+                        PurchaserId = AccountDetails[0].CustomerId;
                     }
                 }
             }

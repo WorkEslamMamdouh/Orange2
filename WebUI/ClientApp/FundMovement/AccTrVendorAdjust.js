@@ -1089,7 +1089,7 @@ var AccTrVendorAdjust;
                         $('#txt_VndName').val(AccountDetails[0].NAMEA);
                         $('#txt_Openbalance').val(AccountDetails[0].Openbalance);
                         GLOBALopenbalance = AccountDetails[0].Openbalance;
-                        PurchaserId = custId;
+                        PurchaserId = AccountDetails[0].VendorID;
                     }
                 }
             }

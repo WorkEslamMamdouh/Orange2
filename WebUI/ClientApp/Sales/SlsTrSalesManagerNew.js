@@ -3470,6 +3470,13 @@ var SlsTrSalesManagerNew;
             WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             return;
         }
+        if (MasterDetailsModel.I_Sls_TR_Invoice.IsCash == true) {
+            if (MasterDetailsModel.I_Sls_TR_Invoice.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return;
+            }
+        }
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         MasterDetailsModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
@@ -3517,6 +3524,13 @@ var SlsTrSalesManagerNew;
                     $("#txt_StatusFlag" + i).val('i');
             }
             return;
+        }
+        if (MasterDetailsModel.I_Sls_TR_Invoice.IsCash == true) {
+            if (MasterDetailsModel.I_Sls_TR_Invoice.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return;
+            }
         }
         Ajax.Callsync({
             type: "POST",
