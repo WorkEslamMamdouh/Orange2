@@ -2099,6 +2099,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2188,7 +2189,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Net Amount Due</Value>
+                              <Value>Net Amount Due SAR</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
