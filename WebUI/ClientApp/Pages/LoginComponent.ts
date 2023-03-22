@@ -88,8 +88,20 @@ var LoginComponent;
         }
 
 
+        Event_key('Enter', 'txtUserName', 'btnLogin');
+
+        Event_key('Enter', 'txtUserPassword', 'btnLogin');
+
+        Event_key('Enter', 'cmbCompany', 'btnOk');
+
+        Event_key('Enter', 'cmbBranch', 'btnOk');
+
+        Event_key('Enter', 'txtYear', 'btnOk');
 
     }
+
+
+
     LoginComponent.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {
         // Get the user-agent string
@@ -131,6 +143,7 @@ var LoginComponent;
     LoginComponent.checkBrowser = checkBrowser;
     function Login() {
 
+
         var userName = txtUserName.value;
         var userPassword = txtUserPassword.value;
         var user = new G_USERS();
@@ -157,79 +170,87 @@ var LoginComponent;
 
         //SysSession.CurrentEnvironment.I_Control[0].SysTimeOut = vSysTimeOut;
         debugger
-        Ajax.Callsync({
-            type: "GET",
-            url: sys.apiUrl("G_USERS", "UserLogin"),
-            data: { UserCode: user.USER_CODE, Password: user.USER_PASSWORD },
-            success: function (d) {
-                var res = d;
-                debugger
-                if (res.IsSuccess == true) {
-                    var result = <G_USERS>res.Response;
-                    if (result != null && result.USER_CODE != null) {
-                        // $("#divLogin").css("display", "none");
-                        $("#div_pass").css("display", "none");
-                        $("#divCompanies").css("display", "block");
-                        $("#divCompanies").removeClass("display_none ");
-                        $("#btn_login_1").addClass("display_none");
-                        $("#btn_login_2").addClass("display_none");
-                        $("#btn_login_3").removeClass("display_none");
 
-                        SystemEnv.Token = result.Tokenid;
-                        SystemEnv.UserType = result.USER_TYPE;
-                        SystemEnv.SalesManID = result.SalesManID;
-                        SystemEnv.CashBoxID = result.CashBoxID;
-                        SystemEnv.StoreID = result.StoreID;
+        $('#btnLogin').html(' Enter <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnLogin').attr('disabled', 'disabled')
+        setTimeout(function () {
 
-                        document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                        Ajax.Callsync({
-                            type: "GET",
-                            url: sys.apiUrl("SystemTools", "GetAppSettings"),
-                            data: { userCode: user.USER_CODE, SystemCode: 'I', SubSystemCode: 'I' },
-                            success: function (d) {
+            Ajax.Callsync({
+                type: "GET",
+                url: sys.apiUrl("G_USERS", "UserLogin"),
+                data: { UserCode: user.USER_CODE, Password: user.USER_PASSWORD },
+                success: function (d) {
+                    var res = d;
+                    debugger
+                    if (res.IsSuccess == true) {
+                        var result = <G_USERS>res.Response;
+                        if (result != null && result.USER_CODE != null) {
+                            // $("#divLogin").css("display", "none");
+                            $("#div_pass").css("display", "none");
+                            $("#divCompanies").css("display", "block");
+                            $("#divCompanies").removeClass("display_none ");
+                            $("#btn_login_1").addClass("display_none");
+                            $("#btn_login_2").addClass("display_none");
+                            $("#btn_login_3").removeClass("display_none");
 
-                                compData = d;
-                                cmbCompany.innerHTML = "";
-                                if (user.USER_CODE == "safe") {
-                                    compData.forEach(function (comp, index) {
-                                        cmbCompany.add(new Option(lang == "en" ? (index + 1) + " - " + comp.CompanyNameE.toString() : (index + 1) + " - " + comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
-                                    });
+                            SystemEnv.Token = result.Tokenid;
+                            SystemEnv.UserType = result.USER_TYPE;
+                            SystemEnv.SalesManID = result.SalesManID;
+                            SystemEnv.CashBoxID = result.CashBoxID;
+                            SystemEnv.StoreID = result.StoreID;
+
+                            document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                            Ajax.Callsync({
+                                type: "GET",
+                                url: sys.apiUrl("SystemTools", "GetAppSettings"),
+                                data: { userCode: user.USER_CODE, SystemCode: 'I', SubSystemCode: 'I' },
+                                success: function (d) {
+
+                                    compData = d;
+                                    cmbCompany.innerHTML = "";
+                                    if (user.USER_CODE == "safe") {
+                                        compData.forEach(function (comp, index) {
+                                            cmbCompany.add(new Option(lang == "en" ? (index + 1) + " - " + comp.CompanyNameE.toString() : (index + 1) + " - " + comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
+                                        });
+                                    }
+                                    else {
+                                        compData.forEach(function (comp, index) {
+                                            cmbCompany.add(new Option(lang == "en" ? comp.CompanyNameE.toString() : comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
+                                        });
+                                    }
                                 }
-                                else {
-                                    compData.forEach(function (comp, index) {
-                                        cmbCompany.add(new Option(lang == "en" ? comp.CompanyNameE.toString() : comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
-                                    });
-                                }
+                            });
+                            var compCode = Number(cmbCompany.value);
+
+                            localStorage.setItem("comCode", cmbCompany.value);
+                            cmbCompany_Onchange(compCode, lang);
+                            if (chkRemember.checked == true) {
+
+                                var loginData = {
+                                    USER_CODE: userName,
+                                    Year: txtYear.value,
+                                    Language: cmbLanguage.value,
+                                };
+                                localStorage.setItem("Inv1_Login_Data", JSON.stringify(loginData));
+
                             }
-                        });
-                        var compCode = Number(cmbCompany.value);
-
-                        localStorage.setItem("comCode", cmbCompany.value);
-                        cmbCompany_Onchange(compCode, lang);
-                        if (chkRemember.checked == true) {
-
-                            var loginData = {
-                                USER_CODE: userName,
-                                Year: txtYear.value,
-                                Language: cmbLanguage.value,
-                            };
-                            localStorage.setItem("Inv1_Login_Data", JSON.stringify(loginData));
-
+                            hLoggedName.innerText = user.USER_CODE;
+                            GoToCompanySelect();
+                            cmbCompany.focus();
                         }
-                        hLoggedName.innerText = user.USER_CODE;
-                        GoToCompanySelect();
+                        else {  // Error in user or pass or active 
+                            txtUserName.style.borderColor = "red";
+                            txtUserPassword.style.borderColor = "red";
+                        }
                     }
-                    else {  // Error in user or pass or active 
-                        txtUserName.style.borderColor = "red";
-                        txtUserPassword.style.borderColor = "red";
+                    else { // Error in API 
+                        alert(res.ErrorMessage);
+                        return;
                     }
                 }
-                else { // Error in API 
-                    alert(res.ErrorMessage);
-                    return;
-                }
-            }
-        });
+            });
+
+        }, 300);
     }
 
 
@@ -251,13 +272,13 @@ var LoginComponent;
         if (status == 0 || status == 1 || status == 2) {
             debugger
             if (status == 1) {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم", "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم" + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', '');
             }
             else if (status == 2) {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم", "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم" + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', "");
             }
             else {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', "");
             }
 
         }
@@ -267,7 +288,13 @@ var LoginComponent;
     function GoToCompanySelect() {
         $("#tblLogin").css("display", "none");
         $("#tblCompany").css("display", "block");
+        $('#btnLogin').html('Enter');
+        $('#btnLogin').removeAttr('disabled');
         (document.getElementById("btnOk") as HTMLInputElement).addEventListener("click", () => {
+
+            $('#btnOk').html(' Enter <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+            $('#btnOk').attr('disabled', 'disabled')
+            setTimeout(function () {
             let compCode = $("#cmbCompany").val();
             let braCode = $("#cmbBranch").val();
             let company = compData.filter(x => x.CompanyCode == cmbCompany.value)[0];
@@ -458,6 +485,10 @@ var LoginComponent;
                                 //    //, 1000);
                                 //}
 
+
+                           
+
+
                             }
                             else /*if (status == 3)*/ {
                                 MessageBox.Show(CompanyStatus.LoginMsg, "", function () {
@@ -473,7 +504,11 @@ var LoginComponent;
             else {
                 let mg = SystemEnv.ScreenLanguage == "ar" ? "هذه الشركة غير متاحة" : "This company is not Active";
                 MessageBox.Show(mg, "");
-            }
+                }
+
+                $('#btnOk').html('Enter');
+                $('#btnOk').removeAttr('disabled');
+            }, 300);
         });
     }
     function OnLogged() {

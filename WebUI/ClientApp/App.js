@@ -2186,4 +2186,13 @@ function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRI
         }
     });
 }
+function Event_key(key, Nameinput, NameBtnEvent) {
+    var input = document.getElementById(Nameinput);
+    input.addEventListener("keypress", function (event) {
+        if (event.key === key) {
+            event.preventDefault();
+            document.getElementById(NameBtnEvent).click();
+        }
+    });
+}
 //# sourceMappingURL=App.js.map
