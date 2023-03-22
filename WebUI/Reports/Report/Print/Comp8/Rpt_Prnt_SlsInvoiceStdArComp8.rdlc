@@ -937,7 +937,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.97385cm</Top>
+        <Top>16.60885cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -971,7 +971,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.9668cm</Top>
+        <Top>16.6018cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1005,7 +1005,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.58416cm</Top>
+        <Top>17.21916cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1039,7 +1039,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.58416cm</Top>
+        <Top>17.21916cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1073,7 +1073,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.58416cm</Top>
+        <Top>17.21916cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1107,7 +1107,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.25472cm</Top>
+        <Top>17.88972cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1141,7 +1141,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.58416cm</Top>
+        <Top>17.21916cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1175,7 +1175,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.25472cm</Top>
+        <Top>17.88972cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1209,7 +1209,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.25472cm</Top>
+        <Top>17.88972cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1243,7 +1243,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.25472cm</Top>
+        <Top>17.88972cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1449,7 +1449,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>15.54671cm</Top>
+        <Top>15.86421cm</Top>
         <Left>18.14558cm</Left>
         <Height>0.6cm</Height>
         <Width>2.01872cm</Width>
@@ -1483,7 +1483,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>15.22921cm</Top>
+        <Top>15.86421cm</Top>
         <Left>0.16956cm</Left>
         <Height>0.6cm</Height>
         <Width>17.97602cm</Width>
@@ -2152,7 +2152,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Net Amount Due</Value>
+                              <Value>Net Amount Due SAR</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2250,6 +2250,52 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
                 <TablixCell />
               </TablixCells>
             </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="AmountinWords">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!AmountinWords.Value</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>AmountinWords</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>Gainsboro</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <ColSpan>5</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -2269,12 +2315,13 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8</DataSetName>
         <Top>11.42949cm</Top>
         <Left>0.06676in</Left>
-        <Height>3.6cm</Height>
+        <Height>4.2cm</Height>
         <Width>20.07491cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
@@ -4325,7 +4372,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>7.15442in</Height>
+    <Height>7.27942in</Height>
     <Style>
       <Border>
         <Style>None</Style>
@@ -4724,6 +4771,10 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <DataField>Status</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="Inv_RefNo">
+          <DataField>Inv_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="op_TrNo">
           <DataField>op_TrNo</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -4738,6 +4789,58 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Field>
         <Field Name="Op_RefNo">
           <DataField>Op_RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AmountinWords">
+          <DataField>AmountinWords</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_code">
+          <DataField>Sper_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SPer_NameA">
+          <DataField>SPer_NameA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sper_nameE">
+          <DataField>Sper_nameE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dt_Src">
+          <DataField>dt_Src</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dt_Storeid">
+          <DataField>dt_Storeid</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dt_Operationid">
+          <DataField>dt_Operationid</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtop_TrNo">
+          <DataField>dtop_TrNo</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtStore_code">
+          <DataField>dtStore_code</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="dtStore_DescA">
+          <DataField>dtStore_DescA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_code">
+          <DataField>Salesman_code</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_NameA">
+          <DataField>Salesman_NameA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Salesman_nameE">
+          <DataField>Salesman_nameE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

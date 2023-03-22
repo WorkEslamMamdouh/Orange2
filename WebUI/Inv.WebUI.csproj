@@ -22,14 +22,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1865,6 +1861,27 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsReturnStdComp7Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleRetComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleRetComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetstdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetstdComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoicestdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoicestdComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccPaymentComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccPaymentComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccReceiveComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccReceiveComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceStdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_SlsInvoiceStdArComp8br2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_SlsReturnStdComp8ArBr2.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleRetComp8Ar.rdlc" />
