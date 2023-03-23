@@ -21,6 +21,7 @@ using System.Web;
 using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
 using System.Windows.Documents;
 using Inv.WebUI.Models;
+using System.Data.Entity.Core.EntityClient;
 
 namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
@@ -54,12 +55,51 @@ namespace Inv.WebUI.Controllers
         object[] query;
         int TRId;
         ReportViewer reportViewer = new ReportViewer();
+        //public static string BuildConnectionString()
+        //{
+        //    var httpClient = new HttpClient();
+        //    var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
+        //    return res;
+        //}
+
+
         public static string BuildConnectionString()
         {
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
-            return res;
+            try
+            {
+
+                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+                EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
+
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerNameReportsForm"];
+                bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+                if (singleDb == false)
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+                else
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+
+                sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
+                sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
+                sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
+                sqlBuilder.MultipleActiveResultSets = true;
+
+                string providerString = sqlBuilder.ToString();
+
+                entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
+                entityBuilder.Provider = "System.Data.SqlClient";
+                entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+                return entityBuilder.ConnectionString;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "";
         }
+
 
         public void ReportsDetails()
         {

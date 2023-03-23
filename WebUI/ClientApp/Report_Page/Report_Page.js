@@ -85,10 +85,12 @@ var Report_Page;
             data_New.BraNameE = SysSession.CurrentEnvironment.BranchName;
             data_New.DocPDFFolder = SysSession.CurrentEnvironment.I_Control[0].DocPDFFolder;
             data_New.LoginUser = SysSession.CurrentEnvironment.UserCode;
+            data_New.DbName = $('#GetIPAddress').val();
             if (data_New.BraNameA == null || data_New.BraNameE == null) {
                 data_New.BraNameA = " ";
                 data_New.BraNameE = " ";
             }
+            debugger;
             Ajax.CallAsync({
                 url: Url.Action("" + data_New.Name_function + "", "GeneralRep"),
                 data: data_New,

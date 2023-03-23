@@ -241,6 +241,7 @@ var HomeComponent;
             }
         });
         Cheak_UserTokenlog();
+        //alert(SysSession.CurrentEnvironment.DbName);
     }
     HomeComponent.InitalizeComponent = InitalizeComponent;
     function Getbranch() {
@@ -284,7 +285,7 @@ var HomeComponent;
         var SystemCode = SysSession.CurrentEnvironment.SystemCode;
         var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
-        $.ajax({
+        Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
             async: false,
@@ -352,7 +353,7 @@ var HomeComponent;
         var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         var yearid = SysSession.CurrentEnvironment.CurrentYear;
         var PeriodinSec = SysSession.CurrentEnvironment.I_Control[0].NotePeriodinSec;
-        $.ajax({
+        Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetNotifications"),
             data: { comCode: comCode, BraCode: BraCode, yearid: yearid, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
@@ -414,7 +415,7 @@ var HomeComponent;
             var BraCode = SysSession.CurrentEnvironment.BranchCode;
             var SystemCode = SysSession.CurrentEnvironment.SystemCode;
             var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-            $.ajax({
+            Ajax.Callsync({
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "UpdateNotificationAndSndMsg"),
                 data: { comCode: comCode, BraCode: BraCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
@@ -705,7 +706,7 @@ var HomeComponent;
         var BraCode = SysSession.CurrentEnvironment.BranchCode;
         var SystemCode = SysSession.CurrentEnvironment.SystemCode;
         var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-        $.ajax({
+        Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetNotifications_Message"),
             // data: { comCode: comCode, SystemCode: SystemCode },
@@ -805,7 +806,7 @@ var HomeComponent;
     function ScreenHelp() {
         var ModuleCode = SysSession.CurrentPrivileges.MODULE_CODE;
         // 
-        $.ajax({
+        Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetHelp"),
             data: { ModuleCode: ModuleCode },

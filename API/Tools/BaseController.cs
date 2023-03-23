@@ -1,9 +1,9 @@
 using Inv.API.Models.CustomEntities;
 using Inv.DAL.Domain;
 using Inv.DAL.Repository;
-using Newtonsoft.Json;
+using Newtonsoft.Json; 
 using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using System.Data;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
@@ -14,6 +14,7 @@ using System.Threading;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace Inv.API.Tools
 {
@@ -86,26 +87,94 @@ namespace Inv.API.Tools
 
             return Name;
         }
-         
+
+        public static string[] GetUserInformation()
+        {
+            string IPAddress = ""; 
+            IPAddress = HttpContext.Current.Request.Params.Get("Address");  
+
+            try
+            {
+
+                string param = HttpContext.Current.Request["parameter"];
+
+                //// Do something with it    
+                //MyObject output = DoSomethingWithPAram(param);
+
+                //// Use Json.NET to get a nice JSON string
+                //string json = Newtonsoft.Json.JsonConvert.SerializeObject(output);
+
+                //// Output new stuff
+                //context.Response.ContentType = "text/plain";
+                //context.Response.Write(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                  
+            }
+
+            string Line = IPAddress;
+
+            string[] ListAddress = Line.Split('_');
+ 
+            return ListAddress;
+        }
+
         public static string BuildConnectionString()
-        { 
-
-   
+        {
 
 
+            string DbName = "";
+            //try
+            //{
+            //    string[] ListUserInformation = GetUserInformation();
+            //    DbName = ListUserInformation[2];
+            //}
+            //catch (Exception ex)
+            //{
 
+            //    DbName = "";
+            //}
+
+
+            DbName = "";
+
+            return BuildConnectionString(DbName);
+        }
+
+
+        public static string BuildConnectionString(string DbName)
+        {
+
+  
             SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
             EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
 
             // Set the properties for the data source.
             sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerName"];
             bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+ 
 
-            if (singleDb == false)
-                sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"] + Shared.Session.SelectedYear;
-            else
+            try
+            {
+
+                if (DbName.Trim() == "")
+                {
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"];
+
+                }
+                else
+                {
+                    sqlBuilder.InitialCatalog = DbName;
+
+                }
+            }
+            catch (Exception ex)
+            {
                 sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbName"];
-
+            }
 
 
             sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserName"];
@@ -119,11 +188,12 @@ namespace Inv.API.Tools
             entityBuilder.Provider = "System.Data.SqlClient";
             entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
 
- 
-             
+
+
 
             return entityBuilder.ConnectionString;
         }
+
 
         protected IEnumerable<T> Get<T>(string SqlStatement)
         {

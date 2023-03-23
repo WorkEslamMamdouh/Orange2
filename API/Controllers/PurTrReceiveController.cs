@@ -231,6 +231,24 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             obj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
+
+
+                            //*********************************************************************************************************
+                            var displayItems = db.I_Pur_TR_ReceiveItems.Where(x => x.ReceiveID == Pur_TR_Invoice.ReceiveID).ToList();
+                            var displayData1 = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == Pur_TR_Invoice.ReceiveID).FirstOrDefault();
+                            if (displayItems.Count == 0)
+                            {
+                                dbTransaction.Rollback();                                
+                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                            }
+                            if (displayData1.SalesmanId == 0 || displayData1.SalesmanId == null)
+                            {
+                                dbTransaction.Rollback();                                
+                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                            }
+                            //*********************************************************************************************************
+
+
                             dbTransaction.Commit();
 
                             var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == Pur_TR_Invoice.ReceiveID).FirstOrDefault();
@@ -391,6 +409,16 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             updatedObj.I_Pur_TR_Receive.TrNo = int.Parse(res.ResponseData.ToString());
+
+                            //*********************************************************************************************************                            
+                            var displayData1 = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();                            
+                            if (displayData1.SalesmanId == 0 || displayData1.SalesmanId == null)
+                            {
+                                dbTransaction.Rollback();
+                                return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                            }
+                            //*********************************************************************************************************
+
                             dbTransaction.Commit();
                             var displayData = db.IQ_GetPurReceiveStaistic.Where(x => x.ReceiveID == updatedObj.I_Pur_TR_Receive.ReceiveID).FirstOrDefault();
                             LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, null, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
@@ -455,7 +483,8 @@ namespace Inv.API.Controllers
                     try
                     {
                         // update master
-                        PurTrReceiveService.Update(updatedObj.I_Pur_TR_Receive);
+                        //PurTrReceiveService.Update(updatedObj.I_Pur_TR_Receive);
+                        db.Database.ExecuteSqlCommand("update I_Pur_TR_Receive set Status = 0 where [ReceiveID] ="+ updatedObj.I_Pur_TR_Receive.ReceiveID+ "");
                            
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(updatedObj.I_Pur_TR_Receive.CompCode), Convert.ToInt32(updatedObj.I_Pur_TR_Receive.BranchCode), updatedObj.I_Pur_TR_Receive.ReceiveID, "PurInvoice", "Open", db);
                         if (res.ResponseState == true)

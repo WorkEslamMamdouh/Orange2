@@ -181,7 +181,8 @@ namespace SlsTrSalesManager {
         FillddlFamily();
         fillddlSalesman();
         FillddlStore();
-        txtStartDate.value = DateStartMonth();
+        //txtStartDate.value = DateStartMonth();
+        txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
         FillddlStateType(); DisplayMassage

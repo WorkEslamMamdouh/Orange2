@@ -33,7 +33,7 @@ namespace AccDefExpenses {
     export function InitalizeComponent() {
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "  حسابات إلايراد ";
+            document.getElementById('Screen_name').innerHTML = "  حسابات المصروف ";
 
         } else {
             document.getElementById('Screen_name').innerHTML = "Revenue Accounts";
@@ -291,7 +291,7 @@ namespace AccDefExpenses {
     function Update() {
         Assign();
 
-
+        debugger
         if (DetailsModel.length > 0) {
             DetailsModel[0].Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -301,6 +301,7 @@ namespace AccDefExpenses {
             DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
 
+        debugger
         Ajax.Callsync({
 
             type: "POST",
@@ -324,9 +325,11 @@ namespace AccDefExpenses {
     }
 
     function Assign() {
+
+        debugger
         var StatusFlag: String;
-        for (var i = 0; i < CountGrid; i++) {
             DetailsModel = new Array<A_RecPay_D_Accounts>();
+        for (var i = 0; i < CountGrid; i++) {
             Model = new A_RecPay_D_Accounts();
 
             StatusFlag = $("#txt_StatusFlag" + i).val();
@@ -426,6 +429,8 @@ namespace AccDefExpenses {
 
 
         }
+
+
     }
 
     function Display() {

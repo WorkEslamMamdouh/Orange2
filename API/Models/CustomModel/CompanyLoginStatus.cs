@@ -12,6 +12,7 @@ namespace Inv.API.Models.CustomModel
         public Nullable<bool> Editable { get; set; }
         public int CompStatus { get; set; }
         public string LoginMsg { get; set; }
+        public string DbName { get; set; }
 
         public int FIN_YEAR { get; set; }
         public Nullable<short> ACC_STATUS { get; set; }

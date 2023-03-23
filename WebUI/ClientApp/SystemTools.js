@@ -40,7 +40,7 @@ var SystemTools = /** @class */ (function () {
         var UserCode = this.SysSession.CurrentEnvironment.UserCode;
         var SystemCode = this.SysSession.CurrentEnvironment.SystemCode;
         var SubSystemCode = this.SysSession.CurrentEnvironment.SubSystemCode;
-        $.ajax({
+        Ajax.Callsync({
             url: this.apiUrl("SystemTools", "GetFavorites"),
             data: { UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
             success: function (response) {

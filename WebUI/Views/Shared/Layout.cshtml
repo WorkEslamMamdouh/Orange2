@@ -135,6 +135,7 @@
     <div class="container-scroller">
         <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
         <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
+        <input type="hidden" id="GetIPAddress" name="name" value="" />
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas scroll" id="sidebar">
             <div id="logOrg" class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top animate__animated animate__backInDown">
@@ -276,10 +277,7 @@
                                 <a class="new-tab-link" id="btnDirecttransferT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnDirecttransfer" class="nav-link" href="#">@SystemResource.Directtransfer</a>
                             </li>
-                            <li id="" key="STKOpeningbalance" class="nav-item d-flex  mb-1">
-                                <a class="new-tab-link" id="btnSTKOpeningbalanceT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
-                                <a id="btnSTKOpeningbalance" class="nav-link" href="#">الرصيد الافتتاحي</a>
-                            </li> 
+
                             <li id="" key="STKAdjust" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnSTKAdjustT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnSTKAdjust" class="nav-link" href="#">@SystemResource.Stocksettlement</a>
@@ -319,6 +317,10 @@
                             <li id="" key="IssueToCC" class="nav-item d-flex  mb-1">
                                 <a class="new-tab-link" id="btnIssueToCCT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
                                 <a id="btnIssueToCC" class="nav-link" href="#">@SystemResource.PaymentOrder</a>
+                            </li>
+                            <li id="" key="STKOpeningbalance" class="nav-item d-flex  mb-1">
+                                <a class="new-tab-link" id="btnSTKOpeningbalanceT"><i class="fas fa-external-link-alt new-tab pe-3"></i> </a>
+                                <a id="btnSTKOpeningbalance" class="nav-link" href="#">الرصيد الافتتاحي</a>
                             </li>
                         </ul>
                     </div>

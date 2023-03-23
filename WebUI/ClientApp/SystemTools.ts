@@ -54,7 +54,7 @@
         let SystemCode = this.SysSession.CurrentEnvironment.SystemCode;
         let SubSystemCode = this.SysSession.CurrentEnvironment.SubSystemCode;
 
-        $.ajax({
+        Ajax.Callsync({
             url: this.apiUrl("SystemTools", "GetFavorites"),
             data: { UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
             success: (response) => {

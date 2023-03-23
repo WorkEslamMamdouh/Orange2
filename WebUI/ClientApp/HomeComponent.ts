@@ -302,6 +302,9 @@ namespace HomeComponent {
 
 
         Cheak_UserTokenlog();
+
+        //alert(SysSession.CurrentEnvironment.DbName);
+
     }
 
 
@@ -352,7 +355,7 @@ namespace HomeComponent {
         let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
 
-        $.ajax({
+         Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetAllUserPrivilage"),
             async: false,
@@ -438,7 +441,7 @@ namespace HomeComponent {
         let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         let yearid = SysSession.CurrentEnvironment.CurrentYear;
         var PeriodinSec = SysSession.CurrentEnvironment.I_Control[0].NotePeriodinSec;
-        $.ajax({
+         Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetNotifications"),
             data: { comCode: comCode, BraCode: BraCode, yearid: yearid, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
@@ -499,7 +502,7 @@ namespace HomeComponent {
             let BraCode = SysSession.CurrentEnvironment.BranchCode;
             let SystemCode = SysSession.CurrentEnvironment.SystemCode;
             let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-            $.ajax({
+             Ajax.Callsync({
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "UpdateNotificationAndSndMsg"),
                 data: { comCode: comCode, BraCode: BraCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode },
@@ -812,7 +815,7 @@ namespace HomeComponent {
         let SystemCode = SysSession.CurrentEnvironment.SystemCode;
         let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
 
-        $.ajax({
+         Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetNotifications_Message"),
             // data: { comCode: comCode, SystemCode: SystemCode },
@@ -918,7 +921,7 @@ namespace HomeComponent {
         let ModuleCode = SysSession.CurrentPrivileges.MODULE_CODE;
         // 
 
-        $.ajax({
+         Ajax.Callsync({
             type: "GET",
             url: sys.apiUrl("SystemTools", "GetHelp"),
             data: { ModuleCode: ModuleCode },

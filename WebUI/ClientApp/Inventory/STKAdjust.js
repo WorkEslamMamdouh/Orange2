@@ -1160,8 +1160,8 @@ var STKAdjust;
     function GetAllStoreItems(StoreID) {
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("DirectTransfer", "GetAllItemsInStore"),
-            data: { branch: Branch, comp: compcode, Store: StoreID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            url: sys.apiUrl("DirectTransfer", "GetAllItemsInStoreNew"),
+            data: { branch: Branch, comp: compcode, Store: StoreID, FinYear: FinYear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {

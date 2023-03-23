@@ -151,7 +151,12 @@ var AccTrVendorAdjust;
         }
     }
     function Open() {
+        IsNew = false;
         Assign();
+        Model.CreatedAt = $('#txtCreatedAt').val();
+        Model.CreatedBy = $('#txtCreatedBy').val();
+        Model.UpdatedAt = DateTimeFormat(Date().toString());
+        Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccTrAdjust", "Open"),
@@ -824,12 +829,14 @@ var AccTrVendorAdjust;
             else {
                 Model.Status = 0;
             }
+            Model.CreatedAt = $('#txtCreatedAt').val();
+            Model.CreatedBy = $('#txtCreatedBy').val();
+            Model.UpdatedAt = DateTimeFormat(Date().toString());
+            Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
             Model.CompCode = Number(compcode);
             Model.BranchCode = Number(branchcode);
             Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-            Model.UpdatedAt = DateTimeFormat(Date().toString());
-            Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
             Model.AdjustmentID = AdjustmentID;
             Model.IsDebit = $('#txt_Movement_typeNew').val();
             Model.AdustmentTypeID = $('#txt_Settlement_typeNew').val();
@@ -1082,7 +1089,7 @@ var AccTrVendorAdjust;
                         $('#txt_VndName').val(AccountDetails[0].NAMEA);
                         $('#txt_Openbalance').val(AccountDetails[0].Openbalance);
                         GLOBALopenbalance = AccountDetails[0].Openbalance;
-                        PurchaserId = custId;
+                        PurchaserId = AccountDetails[0].VendorID;
                     }
                 }
             }

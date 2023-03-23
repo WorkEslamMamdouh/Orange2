@@ -22,14 +22,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -94,34 +90,27 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.2.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="OnBarcode.Barcode.WinForms, Version=7.1.0.20511, Culture=neutral, PublicKeyToken=4da8d7f865f70e30, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Administrator\Downloads\Microsoft.SkypeApp_kzf8qxf38zg5c!App\All\OnBarcode.Barcode.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="QRCoder, Version=1.3.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.3.9\lib\net40\QRCoder.dll</HintPath>
-    </Reference>
-    <Reference Include="Security">
-      <HintPath>..\packages\Security\Security.dll</HintPath>
     </Reference>
     <Reference Include="Spire.Barcode, Version=3.2.0.14040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <HintPath>..\packages\FreeSpire.Office.4.3.1\lib\net40\Spire.Barcode.dll</HintPath>
@@ -205,6 +194,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientApp\Processes\OperationRepScrap.js" />
     <Content Include="ClientApp\Report_Page\Report_Page.js" />
     <Content Include="ClientApp\Tools\TranPosting\TranPosting.js" />
     <Content Include="ClientApp\Tools\USERS\USERS.js" />
@@ -366,7 +356,6 @@
     <Content Include="Newtemplate\template\gulp-tasks\serve.js" />
     <Content Include="Newtemplate\template\gulp-tasks\vendors.js" />
     <Content Include="Newtemplate\template\gulpfile.js" />
-    <Content Include="OnBarcode.Barcode.WinForms.dll" />
     <Content Include="Reports\Forms\ReportsForm.aspx" />
     <Content Include="Style_design\bootstrap-rtl.css" />
     <Content Include="Style_design\bootstrap.js" />
@@ -1108,6 +1097,7 @@
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-Medium.ttf" />
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-Regular.ttf" />
     <Content Include="Newtemplate\template\assets\fonts\DancingScript\DancingScript-SemiBold.ttf" />
+    <Content Include="ClientApp\Processes\OperationRepScrap.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="images\add.png" />
     <Content Include="images\add_icon.png" />
@@ -1580,6 +1570,8 @@
     <Content Include="Views\Processes\OperationExportIndex.cshtml" />
     <Content Include="Views\AdminSetting\AdminColseCompIndex.cshtml" />
     <Content Include="Views\Inventory\STKOpeningbalanceIndex.cshtml" />
+    <Content Include="Views\Login\ErrorIndex.cshtml" />
+    <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1635,6 +1627,7 @@
     <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
+    <TypeScriptCompile Include="ClientApp\Processes\OperationRepScrap.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManagerNew.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturnNew.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueType.ts" />
@@ -1868,6 +1861,27 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp7\Rpt_Prnt_SlsReturnStdComp7Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleRetComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_invoice_simpleRetComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetstdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceRetstdComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoiceSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoicestdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Prnt_VATSlsInvoicestdComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccPaymentComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccPaymentComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccReceiveComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_AccReceiveComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceSimpleComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceSimpleComp8EnBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_OPerationInvoiceStdComp8ArBr2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_SlsInvoiceStdArComp8br2.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp8\Br2\Rpt_Prnt_SlsReturnStdComp8ArBr2.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleComp8En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp8\Prnt_invoice_simpleRetComp8Ar.rdlc" />
@@ -1920,7 +1934,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsInvoiceStdArComp9_Old.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp9\Rpt_Prnt_SlsReturnSimpleComp9Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1960,6 +1973,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OperationSalesmanItemAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_PurPurchaseOrderAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_PurPurchaseOrderEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_StkOpenAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_StkIssueAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATReportAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATReportEn.rdlc" />
@@ -2160,6 +2176,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rpt_StkOpenListAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_StkIssueListAr.rdlc" />

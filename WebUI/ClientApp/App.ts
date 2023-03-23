@@ -316,34 +316,34 @@ namespace App {
     //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     //};
 
-	Number.prototype.RoundToNum = function (dec: number): number {
-		debugger
-		let num = this;
-		//let stnum = num.toString();
+    Number.prototype.RoundToNum = function (dec: number): number {
+        debugger
+        let num = this;
+        //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num);
-		} else {
-			let stfix = num.toString().substr(0, num.toString().indexOf("."));
-			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-			return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
-		}
-		//return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
-	};
+        } else {
+            let stfix = num.toString().substr(0, num.toString().indexOf("."));
+            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+        }
+        //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
+    };
 
 
 
-	Number.prototype.RoundToSt = function (dec: number): string {
-		let num = this;
-		//let stnum = num.toString();
+    Number.prototype.RoundToSt = function (dec: number): string {
+        let num = this;
+        //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num).toString();
-		} else {
-			let stfix = num.toString().substr(0, num.toString().indexOf("."));
-			let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-			return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
-		}
-		//return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
-	};
+        } else {
+            let stfix = num.toString().substr(0, num.toString().indexOf("."));
+            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+        }
+        //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
+    };
 
     Number.prototype.setVal = function (value: any): any {
 
@@ -568,7 +568,7 @@ function ChangePassword(OldPassword: string, NewPassword: string) {
     }
 
 
-    $.ajax({
+    Ajax.Callsync({
         url: sys.apiUrl("SystemTools", "ChangePassword"),
         data: { OldPassword: OldPassword, NewPassword: NewPassword, UserCode: UserCode },
         success: (response) => {
@@ -615,6 +615,14 @@ var Url = {
         location.origin + "/" + controllerName + "/" + actionName
     )
 };
+function isObject(obj, keys) {
+
+    if (typeof obj[keys] === 'object' && obj[keys] !== null) {
+        return true
+    }
+
+}
+
 
 var Ajax = {
     Call: <T>(settings: JQueryAjaxSettings): T => {
@@ -636,14 +644,43 @@ var Ajax = {
     },
     CallAsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
-        //run_waitMe();
+
+        //debugger
+
+
+
+        //if (typeof settings.data == "undefined") {
+        //    var data = [];
+        //    settings.data = data;
+        //}
+        //debugger
+        //let Address = $('#GetIPAddress').val();
+        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
+
+        //if (isObject(settings, 'data')) {
+        //    //alert('Object');
+
+        //    settings.data["Address"] = '' + Address + '';
+
+        //}
+        //else {
+        //    //alert('Json');
+        //    //alert(settings.data)
+        //    debugger
+        //    settings.data = JsonAddValue(settings.data, Address)
+
+        //    console.log(settings.data);
+
+        //    //settings.data = 'Address=' + Address + '' + settings.data;
+
+        //}
         $.ajax({
             type: settings.type,
             url: settings.url,
             data: settings.data,
             cache: false,
             headers: {
-                'Accept': 'application/json; charset=utf-8',
+                'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
             success: (d) => {
@@ -658,14 +695,43 @@ var Ajax = {
     },
     Callsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
-        //run_waitMe();
+         
+        //debugger
+
+
+        //if (typeof settings.data == "undefined") {
+        //    var data = [];
+        //    settings.data = data;
+        //}
+        //debugger
+        //let Address = $('#GetIPAddress').val();
+        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
+
+        //if (isObject(settings, 'data')) {
+        //    //alert('Object');
+
+        //    settings.data["Address"] = '' + Address + '';
+
+        //}
+        //else {
+        //    //alert('Json');
+        //    //alert(settings.data)
+        //    debugger
+        //    settings.data = JsonAddValue(settings.data, Address)
+
+        //    console.log(settings.data);
+
+        //    //settings.data = 'Address=' + Address + '' + settings.data;
+
+        //}
+        debugger  
         $.ajax({
 
             type: settings.type,
             url: settings.url,
             data: settings.data,
             headers: {
-                'Accept': 'application/json; charset=utf-8',
+                'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
             cache: false,
@@ -683,6 +749,17 @@ var Ajax = {
 };
 
 
+function JsonAddValue(data: string, Address): string {
+
+    debugger
+
+    var obj = JSON.parse(data);
+
+    obj["Address"] = '' + Address + '';
+
+
+    return JSON.stringify(obj);
+}
 
 function GetView(controllerName: string, ModuleCode: string) {
     ////// ;
@@ -706,17 +783,18 @@ function GetView(controllerName: string, ModuleCode: string) {
 }
 function OpenPartial(ModuleCode: string, DivName: string) {
 
-    let jsonf = $.ajax({
-        type: "GET", //HTTP POST Method
-        url: "OpenView", // Controller/View 
-        data: { ModuleCode: ModuleCode },
-        cache: false,
-        async: false,
-        success: function (response) {
+    let jsonf =
+        $.ajax({
+            type: "GET", //HTTP POST Method
+            url: "OpenView", // Controller/View 
+            data: { ModuleCode: ModuleCode },
+            cache: false,
+            async: false,
+            success: function (response) {
 
-            $("#" + DivName).html(response);
-        }
-    }).responseJSON;
+                $("#" + DivName).html(response);
+            }
+        }).responseJSON;
 }
 function loading(NameBtn: string) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
@@ -1812,25 +1890,26 @@ function CreateDropdownListWithDefaultValue<T>(arr: Array<T>, Name_Ar: string, N
 
 function OpenPopUp(moduleCode: string, PopupBody: string, PopupDialog: string) {
 
-    let json = $.ajax({
+    let json =
+        Ajax.Callsync({
 
-        type: "GET",
-        url: "OpenView",
-        data: { ModuleCode: moduleCode },
-        cache: false,
-        async: false,
-        success: function (response) {
-            $("#" + PopupBody).html(response);
-            //$("#PopupDialog").modal("show");
-            $("#" + PopupDialog).modal('show');
-            $("#" + PopupDialog).modal({
-                refresh: true
-            });
+            type: "GET",
+            url: "OpenView",
+            data: { ModuleCode: moduleCode },
+            cache: false,
+            async: false,
+            success: function (response) {
+                $("#" + PopupBody).html(response);
+                //$("#PopupDialog").modal("show");
+                $("#" + PopupDialog).modal('show');
+                $("#" + PopupDialog).modal({
+                    refresh: true
+                });
 
-            //var val = $("#rpTitle").text();
-            //$("#TitleSpanRep").html(val);
-        }
-    });
+                //var val = $("#rpTitle").text();
+                //$("#TitleSpanRep").html(val);
+            }
+        });
 
 }
 //to be validated  in insert / update all trnasacations 
@@ -2012,7 +2091,7 @@ function Get_PriceWithVAT(item_unitprice: number, VatPRc: number, flag_PriceWith
 function ScreenHelp(ModuleCode: string) {
     var sys: SystemTools = new SystemTools();
 
-    $.ajax({
+    Ajax.Callsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "GetHelp"),
         data: { ModuleCode: ModuleCode },
@@ -2131,6 +2210,8 @@ function Cheak_UserTokenlog() {
                 document.cookie = "Inv1_Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                 document.cookie = "Privilage=" + null + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                 window.open(Url.Action("HomePage", "Login"), "_self");
+
+                $('#GetIPAddress').val("");
 
                 return;
             }
@@ -2280,7 +2361,7 @@ function OnClick_Tree() {
             $('' + ul + '').attr("class", "children nav-child unstyled small ---")
             $('' + ul + '').attr("aria-expanded", "true")
             $('' + ul + '').attr("style", "")
-             
+
         }
         if (expanded == 'true') {
 
@@ -2550,12 +2631,12 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 function GetSerialNumber(): string {
 
-    $.ajax({
+    Ajax.Callsync({
         type: "GET",
-        url: Url.Action("GetSerialNumber", "Home"), 
+        url: Url.Action("GetSerialNumber", "Home"),
         success: (d) => {
             debugger
-            let result = d;  
+            let result = d;
             return result
 
         }
@@ -2621,11 +2702,11 @@ function SendInv_to_Cust(data_New: ReportParameters) {
                 UrlPdf = UrlPdf.replace('www.', '');
             }
             //else if (true) {
- 
+
             //    //var index2 = UrlPdf.indexOf('.');
             //    //UrlPdf = UrlPdf.substring(index2 + 1, index1);
             //}
- 
+
             alert(UrlPdf);
 
             //UrlPdf = location.protocol +'//'+ UrlPdf
@@ -2742,3 +2823,13 @@ function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, 
     });
 }
 
+function Event_key(key: string, Nameinput: string, NameBtnEvent: string) {
+
+    var input = document.getElementById(Nameinput);
+    input.addEventListener("keypress", function (event) {
+        if (event.key === key) {
+            event.preventDefault();
+            document.getElementById(NameBtnEvent).click();
+        }
+    });
+}

@@ -987,6 +987,10 @@ namespace Processes {
         }
         $('#txtDate').val(trDate);
 
+        txt_tax.value = Selected_Data[0].VatType == 0 ? 'null' : Selected_Data[0].VatType.toString();
+        txtVatPrc.value = Selected_Data[0].VatPrc.toString();
+        txtVatAmount.value = Selected_Data[0].VatAmount.toString();
+
         $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
         $('#txtdateopening').val(DateFormat(Selected_Data[0].OpenAt));
         //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
@@ -1069,9 +1073,7 @@ namespace Processes {
         txtTotalValueCharge.value = "0";
         txtTotalVatCharge.value = "0";
         txtTotalAfterVatCharge.value = "0";
-        txt_tax.value = Selected_Data[0].VatType == 0 ? 'null' : Selected_Data[0].VatType.toString();
-        txtVatPrc.value = Selected_Data[0].VatPrc.toString();
-        txtVatAmount.value = Selected_Data[0].VatAmount.toString();
+
         Totaltax();
         ComputeTotals();
         ComputeTotalsCharge();
@@ -2850,7 +2852,7 @@ namespace Processes {
             Errorinput($("#txtMinPrice" + rowcount));
             return false
         }
-        
+
 
 
         return true;
@@ -4270,7 +4272,7 @@ namespace Processes {
                 btnUpdate_5.focus();
                 Update_5_onclick();
 
-            }  
+            }
             else {
 
 
@@ -4590,15 +4592,22 @@ namespace Processes {
                 btnUpdate_1.classList.remove("display_none");
                 btnSave_1.classList.add("display_none");
                 btnBack_1.classList.add("display_none");
-
+                //*************************************************************************************
                 DocumentActions.RenderFromModel(Selected_Data[0]);
+                debugger
                 var trDate: string = DateFormat(Selected_Data[0].TrDate);
                 $('#txtDate').val(trDate);
+
+                txt_tax.value = Selected_Data[0].VatType == 0 ? 'null' : Selected_Data[0].VatType.toString();
+                txtVatPrc.value = Selected_Data[0].VatPrc.toString();
+                txtVatAmount.value = Selected_Data[0].VatAmount.toString();
+
                 Status = Selected_Data[0].Status;
                 var OpenAt: string = DateFormat(Selected_Data[0].OpenAt);
                 if (OpenAt != null) { $('#txtdateopening').val(OpenAt); } else {
                     $('#txtdateopening').val(GetDate());
                 }
+                $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate)); 
                 //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
                 $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);

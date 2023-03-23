@@ -31,6 +31,7 @@ using Microsoft.Win32;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Data.Entity.Core.EntityClient;
 
 //using Spire.Xls;
 
@@ -45,6 +46,9 @@ namespace Inv.WebUI.Controllers
         ReportsDetails ReportsDetail = new ReportsDetails();
         ReportInfo Rep = new ReportInfo();
         ClassPrint Printer = new ClassPrint();
+
+        HttpContext Context;
+
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
         string NameAr;
@@ -68,11 +72,63 @@ namespace Inv.WebUI.Controllers
         object[] query;
         int TRId;
         ReportViewer reportViewer = new ReportViewer();
+        //public static string BuildConnectionString()
+        //{
+
+
+        //    string DbName = "";
+        //    try
+        //    {
+        //        ClassPrint ListInformation = new ClassPrint();                
+        //        string[] ListUserInformation = ListInformation.GetUserInformation();
+        //        DbName = ListUserInformation[2];
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        DbName = "";
+        //    }
+
+        //    var httpClient = new HttpClient(); 
+        //    var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress="+ DbName + "").Result;
+        //    return res;
+        //}
         public static string BuildConnectionString()
         {
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
-            return res;
+            try
+            {
+
+                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+                EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
+
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerNameReportsForm"];
+                bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+                if (singleDb == false)
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+                else
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+
+                sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
+                sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
+                sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
+                sqlBuilder.MultipleActiveResultSets = true;
+
+                string providerString = sqlBuilder.ToString();
+
+                entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
+                entityBuilder.Provider = "System.Data.SqlClient";
+                entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+                return entityBuilder.ConnectionString;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "";
         }
 
         public void ReportsDetails()
@@ -91,6 +147,8 @@ namespace Inv.WebUI.Controllers
         }
         public ReportService getStandardParameters(StdParamters sr)
         {
+             
+
             ReportService rep = new ReportService();
 
 
@@ -2152,6 +2210,41 @@ namespace Inv.WebUI.Controllers
                  ",@TRId = " + spTRId.Value;
 
             var query = db.Database.SqlQuery<IProc_Prnt_StkAdjust_Result>(_Query).ToList();
+
+            ReportsDetails();
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
+            DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
+            return query;
+        } 
+
+         public IEnumerable<IProc_Prnt_StkOpen_Result> Prnt_StkOpen(RepFinancials RepPar)
+        {
+            ReportStandardParameters StandPar = getStandardParameters(RepPar);
+            
+
+
+            var TRId = int.Parse(RepPar.TRId.ToString());
+            SqlParameter spTRId = new SqlParameter("@TRId", TRId);
+
+
+            Rep = OpenReport("Prnt_StkOpen");
+            int Type = int.Parse(RepPar.Type.ToString());
+            if (Type == 0) { Type = int.Parse(Rep.OutputTypeNo); }
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+
+            string _Query = "execute " + Rep.dataSource +
+                " @comp = '" + StandPar.spComCode.Value + "'" +
+                ", @bra = '" + StandPar.spbra.Value + "'" +
+                ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+                ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+                ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+                ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+                ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+                ", @RepType = " + spRepType.Value + "  " +
+                 ",@TRId = " + spTRId.Value;
+
+            var query = db.Database.SqlQuery<IProc_Prnt_StkOpen_Result>(_Query).ToList();
 
             ReportsDetails();
             reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;

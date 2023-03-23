@@ -919,6 +919,7 @@ namespace CloseProcesses {
         $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
+		debugger
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
             Processes_under_preparing();
         }
@@ -1516,7 +1517,9 @@ namespace CloseProcesses {
 
     }
     function Disbly_BuildControls(cnt: number, OperationItemInfo: Array<IQ_GetOperationItemInfo>) {
-        // 
+		// 														
+
+		debugger
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus" + cnt).addClass("display_none");
         $("#txt_StatusFlag" + cnt).val("");
@@ -1537,11 +1540,20 @@ namespace CloseProcesses {
         //$("#txtAvailableQty" + cnt).prop("value", (AvailableQty));
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
-        });
-        $("#No_Row" + cnt).on('click', function () {
+		});
+
+		$("#No_Row" + cnt).on('dblclick', function () {
+			debugger
+			//alert('100')
             golabelcnt = cnt;
             DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
-        });
+		});
+		$("#No_Row" + cnt).on('click', function () {
+			debugger
+			//alert('100')
+			golabelcnt = cnt;
+			DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
+		});
         $("#txtClose_SoldQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_SoldQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_SoldQty);
         $("#txtClose_ScrapQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_ScrapQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_ScrapQty);
         $("#txtClose_TotalSales" + cnt).prop("value", (OperationItemInfo[cnt].Close_TotalSales == null || undefined) ? 0 : OperationItemInfo[cnt].Close_TotalSales);
@@ -2535,7 +2547,8 @@ namespace CloseProcesses {
         $("#Remarks" + cnt).val(I_TR_OperationDeposit[cnt].Remarks);
 
     }
-    function AddNewRowlebel() {
+	function AddNewRowlebel() {
+		debugger
         if (!SysSession.CurrentPrivileges.AddNew) return;
         var CanAddDeposit: boolean = true;
         if (CountGridDeposit > 0) {
@@ -3198,6 +3211,7 @@ namespace CloseProcesses {
         $("#div_Master_Hedr").removeClass("display_none");
         DisplayData(Selected_Data);
 
+        debugger
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
             Processes_under_preparing();
         }
@@ -3210,9 +3224,13 @@ namespace CloseProcesses {
         else if (Selected_Data[0].Status == 3) { //مغلق
             Processes_Close();
         }
+        else if (Selected_Data[0].Status == 4) { //مغلق 
+            Processes_Open();
+        }
+         
+        Calculation_Close();
 
         flag_Add = false;
-        Calculation_Close();
     }
     //-----------------------------------------------------------------------------------------------------------------------
 
@@ -3759,7 +3777,7 @@ namespace CloseProcesses {
         //$('#spanlepMoney_4').toggleClass('fa-angle-double-left');
         //$('#spanlepMoney_4').toggleClass('fa-angle-double-down');
 
-        btnUpdate_1.classList.add('display_none');
+        btnUpdate_1.classList.remove('display_none');
 
         btnUpdate_3.classList.remove('display_none');
         btnUpdate_4.classList.add('display_none');
@@ -4129,6 +4147,7 @@ namespace CloseProcesses {
             btnBack_3_onclick();
             btnBack_5_onclick();
 
+            btnUpdate_1.disabled = true;
             btnUpdate_2.disabled = true;
             btnUpdate_3.disabled = true;
             btnUpdate_5.disabled = true;
@@ -4273,7 +4292,6 @@ namespace CloseProcesses {
 
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
-        $("#div_MasterGird").attr("disabled", "disabled").off('click');
         $("#div_MasterGird").addClass("disabledDiv");
 
 
@@ -4289,7 +4307,6 @@ namespace CloseProcesses {
         $("#txtCustomNo").removeAttr("disabled");
         $("#txtPaperPurchaseValue").removeAttr("disabled");
         $("#txtPolice_num").removeAttr("disabled");
-        $(".undisebel").attr("disabled", "disabled");
 
 
 
@@ -4297,14 +4314,14 @@ namespace CloseProcesses {
         Update_1 = true;
 
 
-        btnBack_3_onclick();
-        btnBack_2_onclick();
+        //btnBack_3_onclick();
+        //btnBack_2_onclick();
 
-        if (Status == 2) {//مفتوحة 
-            btnBack_5_onclick();
-        }
-        if (Status == 0) {//تحت التجهيز 
-        }
+        //if (Status == 2) {//مفتوحة 
+        //    btnBack_5_onclick();
+        //}
+        //if (Status == 0) {//تحت التجهيز 
+        //}
 
 
         //(x1 == true) ?  : $("#div_Master").addClass("disabledDiv");
@@ -4312,10 +4329,11 @@ namespace CloseProcesses {
         DisabledToolBar();
     }
     function btnBack_1_onclick() {
+        debugger
         if (flag_Add == true) {
-
+            debugger
             if (flag_succ_insert == true) {
-
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
@@ -4333,16 +4351,20 @@ namespace CloseProcesses {
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-left');
                 $('#spanlepRentdata_2').toggleClass('fa-angle-double-down');
 
+                //Update_2_onclick();
+                //Update_3_onclick();
+                //btnUpdate_3.focus();
 
                 $("#btnPresent").removeAttr("disabled");
                 $("#btnClose").attr("disabled", "disabled").off('click');
-                //$("#btnPresent").attr("style", "background-color: #b0fdc8; margin-right: 8%;")
-                //$("#btnClose").attr("style", "")
+                //   $("#btnPresent").attr("style", "background-color: #198754")
                 $("#btnPresent").addClass("btn-green");
-                $("#btnClose").removeClass("btn-red");
+                //  $("#btnClose").attr("style", "")
+                $("#btnClose").addClass("btn-red");
 
             }
             else {
+                debugger
                 $("#div_Master_Hedr").addClass("display_none");
                 $('#div_Master').addClass('disabledDiv');
 
@@ -4352,11 +4374,14 @@ namespace CloseProcesses {
 
             }
             flag_succ_insert = false;
+
+            RemoveDisabledToolBar();
         }
         else {
-
+            debugger
             if (flag_Back == true) {
-                // 
+                //  debugger
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
@@ -4368,35 +4393,33 @@ namespace CloseProcesses {
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
                 MasterGridBiuld();
-
+                //Update_1 = false;
+                //Update_2 = false;
+                //Update_3 = false;
+                //Update_4 = false;
+                //Update_5 = false;
+                //disabled_divMasterGridiv();
             }
             else {
+                debugger
                 $("#div_Master").attr("disabled", "disabled").off('click');
                 $("#div_Master").addClass("disabledDiv")
                 btnUpdate_1.classList.remove("display_none");
                 btnSave_1.classList.add("display_none");
                 btnBack_1.classList.add("display_none");
-
-                DocumentActions.RenderFromModel(Selected_Data[0]);
-                Status = Selected_Data[0].Status;
-                var OpenAt: string = DateFormat(Selected_Data[0].OpenAt);
-                if (OpenAt != null) { $('#txtdateopening').val(OpenAt); } else {
-                    $('#txtdateopening').val(GetDate());
-                }
-                $('#ddlVendor').prop("value", Selected_Data[0].VendorID);
-                $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
-                $('#ddlTrtype').prop("value", Selected_Data[0].Trtype);
-                $('#ddlSalesman option[value=' + Selected_Data[0].SalesmanId + ']').prop('selected', 'selected').change();
-
+                MasterGridBiuld();
                 $("#open_Trill").attr("disabled", "disabled").off('click');
                 $("#open_Trill").addClass("disabledDiv");
             }
+            debugger
+            RemoveDisabledToolBar();
         }
 
-
+        debugger
 
         Update_1 = false;
         disabled_divMasterGridiv();
+        //divGridDetails_onclick();
 
     }
     function btnSave_1_onclick() {
@@ -4425,15 +4448,15 @@ namespace CloseProcesses {
             btnBack_1_onclick();
             flag_Back = false;
 
-            //btnSave_2.classList.add("display_none");
-            //btnBack_2.classList.add("display_none");
-            //btnSave_3.classList.add("display_none");
-            //btnBack_3.classList.add("display_none");
-            //btnSave_4.classList.add("display_none");
-            //btnBack_4.classList.add("display_none");
-            //btnSave_5.classList.add("display_none");
-            //btnBack_5.classList.add("display_none");
         }, 100);
+        //btnSave_2.classList.add("display_none");
+        //btnBack_2.classList.add("display_none");
+        //btnSave_3.classList.add("display_none");
+        //btnBack_3.classList.add("display_none");
+        //btnSave_4.classList.add("display_none");
+        //btnBack_4.classList.add("display_none");
+        //btnSave_5.classList.add("display_none");
+        //btnBack_5.classList.add("display_none");
     }
 
     function Update_2_onclick() {
@@ -4734,6 +4757,7 @@ namespace CloseProcesses {
 
             flag_Back = false;
 
+            btnUpdate_1.disabled = false;
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnReCalculation.disabled = false;
@@ -4794,6 +4818,7 @@ namespace CloseProcesses {
             //$('#spanlepRentdata_3').toggleClass('fa-angle-double-left');
             //$('#spanlepRentdata_3').toggleClass('fa-angle-double-down');
 
+            btnUpdate_1.disabled = false;
             btnUpdate_2.disabled = false;
             btnUpdate_3.disabled = false;
             btnUpdate_5.disabled = false;

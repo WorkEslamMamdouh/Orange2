@@ -30,13 +30,17 @@ var APISessionRecord = /** @class */ (function () {
     function APISessionRecord() {
     }
     APISessionRecord.prototype.SetAPISessionAPI = function (key, value) {
-        var sys = new SystemTools();
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: key, value: value },
-            async: false
-        });
+        debugger;
+        //var sys: SystemTools = new SystemTools();
+        //let compCode = sys.SysSession.CurrentEnvironment.CompCode;
+        //let UserCode = sys.SysSession.CurrentEnvironment.UserCode;
+        //key = key + compCode + '_' + UserCode;
+        //$.ajax({
+        //    //url: Url.Action("SetSessionRecordValue", "Session"),
+        //    url: sys.apiUrl("Session", "SetSessionRecordValue"),
+        //    data: { propertyName: key, value: value },
+        //    async: false
+        //});
     };
     APISessionRecord.prototype.SetAPISession = function (key, value) {
         $.ajax({
@@ -399,6 +403,7 @@ var I_VW_GetCompStatus = /** @class */ (function (_super) {
         _this.MembershipAllanceDays = 0;
         _this.MembershipreadOnlyDays = 0;
         _this.MembeshipEndDate = "";
+        _this.DbName = "";
         return _this;
     }
     return I_VW_GetCompStatus;

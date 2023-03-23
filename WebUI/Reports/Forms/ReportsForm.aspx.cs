@@ -19,13 +19,13 @@ using Inv.WebUI.Reports.Models;
 using Inv.WebUI.Reports.Forms;
 
 
-using System.Net.Http;
-using OnBarcode.Barcode;
+using System.Net.Http; 
 using QRCoder;
 using Inv.DAL.Repository;
 using Inv.API.Tools;
 using Inv.DAL.Domain;
 using Microsoft.Reporting.WebForms;
+using System.Data.Entity.Core.EntityClient;
 
 namespace RS.WebUI.Reports.Forms
 {//eslam 1 dec 2020
@@ -50,12 +50,66 @@ namespace RS.WebUI.Reports.Forms
         int? branCode = 0;
         string LoginUser = "";
         string ScreenLanguage = "";
+        //public static string BuildConnectionString()
+        //{
+
+
+        //    string DbName = "";
+        //    try
+        //    {
+        //        ClassPrint ListInformation = new ClassPrint();
+        //        string[] ListUserInformation = ListInformation.GetUserInformationFromReport();
+        //        DbName = ListUserInformation[2];
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        DbName = "";
+        //    }
+
+        //    var httpClient = new HttpClient();
+        //    var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
+        //    return res;
+        //}
+
         public static string BuildConnectionString()
         {
-            var httpClient = new HttpClient();
-            var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection").Result;
-            return res;
+            try
+            {
+
+                SqlConnectionStringBuilder sqlBuilder = new SqlConnectionStringBuilder();
+                EntityConnectionStringBuilder entityBuilder = new EntityConnectionStringBuilder();
+
+                // Set the properties for the data source.
+                sqlBuilder.DataSource = WebConfigurationManager.AppSettings["ServerNameReportsForm"];
+                bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
+
+                if (singleDb == false)
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"] + Shared.Session.SelectedYear;
+                else
+                    sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+
+                sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
+                sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
+                sqlBuilder.IntegratedSecurity = Convert.ToBoolean(WebConfigurationManager.AppSettings["UseIntegratedSecurity"]);
+                sqlBuilder.MultipleActiveResultSets = true;
+
+                string providerString = sqlBuilder.ToString();
+
+                entityBuilder.ProviderConnectionString = "Persist Security Info=True;" + providerString;
+                entityBuilder.Provider = "System.Data.SqlClient";
+                entityBuilder.Metadata = @"res://*/Domain.InvModel.csdl|res://*/Domain.InvModel.ssdl|res://*/Domain.InvModel.msl";
+
+                return entityBuilder.ConnectionString;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "";
         }
+
         public Boolean CheckUser(string Guid, string uCode)
 
         {
@@ -3170,6 +3224,57 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
+
+        public IEnumerable<IProc_Rpt_StkOpenList_Result> Rpt_StkOpenList()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+            //ReportInfo Rep;
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+            string formDate = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", formDate);
+
+            string toDate = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", toDate);
+
+            int TrType = int.Parse(RepPar.TrType.ToString());
+            SqlParameter spTrType = new SqlParameter("@TrType", TrType == -1 ? System.Data.SqlTypes.SqlInt32.Null : TrType);
+
+            int storeID = int.Parse(RepPar.storeID.ToString());
+            SqlParameter spstoreID = new SqlParameter("@storeID", storeID == -1 ? System.Data.SqlTypes.SqlInt32.Null : storeID);
+
+            int Status = int.Parse(RepPar.Status.ToString());
+            SqlParameter spStatus = new SqlParameter("@Status", Status == -1 ? System.Data.SqlTypes.SqlInt32.Null : Status);
+
+                
+            Rep = OpenReport("Rpt_StkOpenList");
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value + 
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @Todate = '" + sptoDate.Value + "'" +
+           ", @storeID = " + spstoreID.Value + "" +
+           ", @Status =" + spStatus.Value + "";
+
+            List<IProc_Rpt_StkOpenList_Result> query = db.Database.SqlQuery<IProc_Rpt_StkOpenList_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         public IEnumerable<IProc_Rpt_StkTransferList_Result> Rpt_StkTransferListdirect()
         {
             ReportStandardParameters StandPar = getStandardParameters();

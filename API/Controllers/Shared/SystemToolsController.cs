@@ -1027,6 +1027,24 @@ namespace Inv.API.Controllers
                 )
             };
         }
+
+        [HttpGet]
+        public HttpResponseMessage BuildConnection(string ListAddress)
+        {
+
+            string DbName = "";
+            //string DbName = ListAddress; 
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(
+                    BuildConnectionString(DbName),
+                    Encoding.UTF8,
+                    "text/html"
+                )
+            };
+        }
+
         [HttpGet]
         public IHttpActionResult getBackgroundImage(int CompCode)
         {

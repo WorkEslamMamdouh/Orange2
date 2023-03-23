@@ -86,22 +86,22 @@ var LoginComponent;
             localStorage.setItem("OutUesr", "");
 
         }
-         
 
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: "CompCode", value: "" },
-            async: false
-        });
-        $.ajax({
-            //url: Url.Action("SetSessionRecordValue", "Session"),
-            url: sys.apiUrl("Session", "SetSessionRecordValue"),
-            data: { propertyName: "ConnectionString", value: "" },
-            async: false
-        });
+
+        Event_key('Enter', 'txtUserName', 'btnLogin');
+
+        Event_key('Enter', 'txtUserPassword', 'btnLogin');
+
+        Event_key('Enter', 'cmbCompany', 'btnOk');
+
+        Event_key('Enter', 'cmbBranch', 'btnOk');
+
+        Event_key('Enter', 'txtYear', 'btnOk');
 
     }
+
+
+
     LoginComponent.InitalizeComponent = InitalizeComponent;
     function checkBrowser() {
         // Get the user-agent string
@@ -143,6 +143,7 @@ var LoginComponent;
     LoginComponent.checkBrowser = checkBrowser;
     function Login() {
 
+
         var userName = txtUserName.value;
         var userPassword = txtUserPassword.value;
         var user = new G_USERS();
@@ -168,84 +169,94 @@ var LoginComponent;
         //localStorage.setItem("startTimeOut", vSysTimeOut);
 
         //SysSession.CurrentEnvironment.I_Control[0].SysTimeOut = vSysTimeOut;
+        debugger
 
-        Ajax.Callsync({
-            type: "GET",
-            url: sys.apiUrl("G_USERS", "UserLogin"),
-            data: { UserCode: user.USER_CODE, Password: user.USER_PASSWORD },
-            success: function (d) {
-                var res = d;
-                if (res.IsSuccess == true) {
-                    var result = <G_USERS>res.Response;
-                    if (result != null && result.USER_CODE != null) {
-                        // $("#divLogin").css("display", "none");
-                        $("#div_pass").css("display", "none");
-                        $("#divCompanies").css("display", "block");
-                        $("#divCompanies").removeClass("display_none ");
-                        $("#btn_login_1").addClass("display_none");
-                        $("#btn_login_2").addClass("display_none");
-                        $("#btn_login_3").removeClass("display_none");
+        $('#btnLogin').html(' Enter <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+        $('#btnLogin').attr('disabled', 'disabled')
+        setTimeout(function () {
 
-                        SystemEnv.Token = result.Tokenid;
-                        SystemEnv.UserType = result.USER_TYPE;
-                        SystemEnv.SalesManID = result.SalesManID;
-                        SystemEnv.CashBoxID = result.CashBoxID;
-                        SystemEnv.StoreID = result.StoreID;
-              
-                        document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                        Ajax.Callsync({
-                            type: "GET",
-                            url: sys.apiUrl("SystemTools", "GetAppSettings"),
-                            data: { userCode: user.USER_CODE, SystemCode: 'I', SubSystemCode: 'I' },
-                            success: function (d) {
+            Ajax.Callsync({
+                type: "GET",
+                url: sys.apiUrl("G_USERS", "UserLogin"),
+                data: { UserCode: user.USER_CODE, Password: user.USER_PASSWORD },
+                success: function (d) {
+                    var res = d;
+                    debugger
+                    if (res.IsSuccess == true) {
+                        var result = <G_USERS>res.Response;
+                        if (result != null && result.USER_CODE != null) {
+                            // $("#divLogin").css("display", "none");
+                            $("#div_pass").css("display", "none");
+                            $("#divCompanies").css("display", "block");
+                            $("#divCompanies").removeClass("display_none ");
+                            $("#btn_login_1").addClass("display_none");
+                            $("#btn_login_2").addClass("display_none");
+                            $("#btn_login_3").removeClass("display_none");
 
-                                compData = d;
-                                cmbCompany.innerHTML = "";
-                                if (user.USER_CODE == "safe") {
-                                    compData.forEach(function (comp, index) {
-                                        cmbCompany.add(new Option(lang == "en" ? (index + 1) + " - " + comp.CompanyNameE.toString() : (index + 1) + " - " + comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
-                                    });
+                            SystemEnv.Token = result.Tokenid;
+                            SystemEnv.UserType = result.USER_TYPE;
+                            SystemEnv.SalesManID = result.SalesManID;
+                            SystemEnv.CashBoxID = result.CashBoxID;
+                            SystemEnv.StoreID = result.StoreID;
+
+                            document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                            Ajax.Callsync({
+                                type: "GET",
+                                url: sys.apiUrl("SystemTools", "GetAppSettings"),
+                                data: { userCode: user.USER_CODE, SystemCode: 'I', SubSystemCode: 'I' },
+                                success: function (d) {
+
+                                    compData = d;
+                                    cmbCompany.innerHTML = "";
+                                    if (user.USER_CODE == "safe") {
+                                        compData.forEach(function (comp, index) {
+                                            cmbCompany.add(new Option(lang == "en" ? (index + 1) + " - " + comp.CompanyNameE.toString() : (index + 1) + " - " + comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
+                                        });
+                                    }
+                                    else {
+                                        compData.forEach(function (comp, index) {
+                                            cmbCompany.add(new Option(lang == "en" ? comp.CompanyNameE.toString() : comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
+                                        });
+                                    }
                                 }
-                                else {
-                                    compData.forEach(function (comp, index) {
-                                        cmbCompany.add(new Option(lang == "en" ? comp.CompanyNameE.toString() : comp.CompanyNameA.toString(), comp.CompanyCode.toString()));
-                                    });
-                                }
+                            });
+                            var compCode = Number(cmbCompany.value);
+
+                            localStorage.setItem("comCode", cmbCompany.value);
+                            cmbCompany_Onchange(compCode, lang);
+                            if (chkRemember.checked == true) {
+
+                                var loginData = {
+                                    USER_CODE: userName,
+                                    Year: txtYear.value,
+                                    Language: cmbLanguage.value,
+                                };
+                                localStorage.setItem("Inv1_Login_Data", JSON.stringify(loginData));
+
                             }
-                        });
-                        var compCode = Number(cmbCompany.value);
-
-                        localStorage.setItem("comCode", cmbCompany.value);
-                        cmbCompany_Onchange(compCode, lang);
-                        if (chkRemember.checked == true) {
-
-                            var loginData = {
-                                USER_CODE: userName,
-                                Year: txtYear.value,
-                                Language: cmbLanguage.value,
-                            };
-                            localStorage.setItem("Inv1_Login_Data", JSON.stringify(loginData));
-
+                            hLoggedName.innerText = user.USER_CODE;
+                            GoToCompanySelect();
+                            cmbCompany.focus();
                         }
-                        hLoggedName.innerText = user.USER_CODE;
-                        GoToCompanySelect();
+                        else {  // Error in user or pass or active 
+                            txtUserName.style.borderColor = "red";
+                            txtUserPassword.style.borderColor = "red";
+                        }
                     }
-                    else {  // Error in user or pass or active 
-                        txtUserName.style.borderColor = "red";
-                        txtUserPassword.style.borderColor = "red";
+                    else { // Error in API 
+                        alert(res.ErrorMessage);
+                        return;
                     }
                 }
-                else { // Error in API 
-                    alert(res.ErrorMessage);
-                    return;
-                }
-            }
-        });
+            });
+
+        }, 300);
     }
 
 
     function ShowMessg(CompanyStatus: I_VW_GetCompStatus) {
 
+        SystemEnv.DbName = CompanyStatus.DbName;
         var MembeshipEndDate = CompanyStatus.MembeshipEndDate;
         var status = CompanyStatus.CompStatus;
         var masg = CompanyStatus.LoginMsg;
@@ -261,13 +272,13 @@ var LoginComponent;
         if (status == 0 || status == 1 || status == 2) {
             debugger
             if (status == 1) {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم", "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + Day_1 + " ) يوم" + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', '');
             }
             else if (status == 2) {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم", "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + "<br/>  عدد الايام المتبقية ( " + NumDay + " ) يوم" + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', "");
             }
             else {
-                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, "");
+                MessageBox.Showwithoutclick(CompanyStatus.LoginMsg + ' <br/> <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>', "");
             }
 
         }
@@ -277,14 +288,20 @@ var LoginComponent;
     function GoToCompanySelect() {
         $("#tblLogin").css("display", "none");
         $("#tblCompany").css("display", "block");
+        $('#btnLogin').html('Enter');
+        $('#btnLogin').removeAttr('disabled');
         (document.getElementById("btnOk") as HTMLInputElement).addEventListener("click", () => {
+
+            $('#btnOk').html(' Enter <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+            $('#btnOk').attr('disabled', 'disabled')
+            setTimeout(function () {
             let compCode = $("#cmbCompany").val();
             let braCode = $("#cmbBranch").val();
             let company = compData.filter(x => x.CompanyCode == cmbCompany.value)[0];
             let isActive = company.IsActive;
             SystemEnv = GetSystemEnvironment();
             if (isActive) {
-                $.ajax({
+                Ajax.Callsync({
                     type: "GET",
                     url: sys.apiUrl("I_VW_GetCompStatus", "GetStat"),
                     data: { Compcode: compCode, yr: Number(txtYear.value) },
@@ -299,122 +316,123 @@ var LoginComponent;
                             ShowMessg(CompanyStatus);
 
                             if (status == 0 || status == 1 || status == 2) {
-                            
+
                                 setTimeout(function () {
-                                $.ajax({
-                                    type: "GET",
-                                    url: sys.apiUrl("I_Control", "GetAll"),
-                                    data: { Compcode: compCode },
-                                    async: false,
-                                    success: (d) => {
-                                        let res = d as BaseResponse;
-                                        if (res.IsSuccess) {
-                                            var CompanyService = res.Response as I_Control;
-                                            if (CompanyService != null) {
+                                    Ajax.Callsync({
+                                        type: "GET",
+                                        url: sys.apiUrl("I_Control", "GetAll"),
+                                        data: { Compcode: compCode },
+                                        async: false,
+                                        success: (d) => {
+                                            let res = d as BaseResponse;
+                                            if (res.IsSuccess) {
+                                                var CompanyService = res.Response as I_Control;
+                                                if (CompanyService != null) {
 
 
-                                                SystemEnv.I_Control = CompanyService;
-                                                SystemEnv.CompCode = compCode;
-                                                SystemEnv.BranchCode = braCode;
-                                                SystemEnv.CompanyName = company.CompanyNameE;
-                                                SystemEnv.CompanyNameAr = company.CompanyNameA;
-                                                SystemEnv.CurrentYear = txtYear.value;
-                                                SystemEnv.IsBiLingual = true;
-                                                SystemEnv.Language = cmbLanguage.value;
-                                                SystemEnv.ScreenLanguage = cmbLanguage.value;
-                                                SystemEnv.SystemCode = 'I';
-                                                SystemEnv.SubSystemCode = 'I';
-                                                SystemEnv.UserCode = txtUserName.value;
-                                                SystemEnv.StartDate = CompanyStatus.FirstDate.substr(0, 10);
-                                                SystemEnv.EndDate = CompanyStatus.LastDate.substr(0, 10);
-                                                //SystemEnv.I_Control.SysTimeOut = CompanyService.SysTimeOut; 
-                                                //SystemEnv.SysTimeOut = CompanyService.SysTimeOut; 
-                                                //SystemEnv.NationalityID = CompanyService[0].NationalityID; 
-                                                SystemEnv.InvoiceTypeCode = CompanyService[0].InvoiceTypeCode;
-                                                SystemEnv.InvoiceTransCode = CompanyService[0].InvoiceTransCode;
-                                                //SystemEnv.InvoiceWithoutCust = CompanyService[0].InvoiceWithoutCust; 
-                                                //SystemEnv.IvoiceDateEditable = CompanyService[0].IvoiceDateEditable; 
-                                                //SystemEnv.InvoiceLineDiscount = CompanyService[0].InvoiceLineDiscount; 
-                                                //SystemEnv.InvoiceLineAllowance = CompanyService[0].InvoiceLineAllowance; 
-                                                //SystemEnv.InvoiceTotalAllowance = CompanyService[0].InvoiceTotalAllowance; 
-                                                //SystemEnv.InvoiceTotalCharge = CompanyService[0].InvoiceTotalCharge; 
-                                                //SystemEnv.OperationPriceWithVAT = CompanyService[0].OperationPriceWithVAT; 
-                                                //SystemEnv.SalesPriceWithVAT = CompanyService[0].SalesPriceWithVAT; 
-                                                //SystemEnv.IsLocalBranchCustomer = CompanyService[0].IsLocalBranchCustomer; 
-                                                //SystemEnv.GL_VoucherCCDT_Type = CompanyService[0].GL_VoucherCCDT_Type; 
-                                                debugger
-                                                //SystemEnv.SerialNumber = GetSerialNumber();
-                                                debugger
-                                                let IsLocalSalePrice = false; 
-                                                IsLocalSalePrice = CompanyService[0].IsLocalSalePrice 
-                                                 
-                                                $.ajax({
-                                                    type: "GET",
-                                                    url: sys.apiUrl("G_Branch", "GetBranch"),
-                                                    data: { CompCode: Number(compCode), BRA_CODE: Number(braCode)},
-                                                    async: false,
-                                                    success: (d) => {
-                                                        let res = d as BaseResponse;
-                                                        if (res.IsSuccess) {
-                                                            var G_BRANCHService = res.Response as G_BRANCH;
-                                                            if (G_BRANCHService != null) {
+                                                    SystemEnv.I_Control = CompanyService;
 
-                                                                document.cookie = "Inv1_systemG_BRANCH=" + JSON.stringify(G_BRANCHsSYS).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                    SystemEnv.CompCode = compCode;
+                                                    SystemEnv.BranchCode = braCode;
+                                                    SystemEnv.CompanyName = company.CompanyNameE;
+                                                    SystemEnv.CompanyNameAr = company.CompanyNameA;
+                                                    SystemEnv.CurrentYear = txtYear.value;
+                                                    SystemEnv.IsBiLingual = true;
+                                                    SystemEnv.Language = cmbLanguage.value;
+                                                    SystemEnv.ScreenLanguage = cmbLanguage.value;
+                                                    SystemEnv.SystemCode = 'I';
+                                                    SystemEnv.SubSystemCode = 'I';
+                                                    SystemEnv.UserCode = txtUserName.value;
+                                                    SystemEnv.StartDate = CompanyStatus.FirstDate.substr(0, 10);
+                                                    SystemEnv.EndDate = CompanyStatus.LastDate.substr(0, 10);
+                                                    //SystemEnv.I_Control.SysTimeOut = CompanyService.SysTimeOut; 
+                                                    //SystemEnv.SysTimeOut = CompanyService.SysTimeOut; 
+                                                    //SystemEnv.NationalityID = CompanyService[0].NationalityID; 
+                                                    SystemEnv.InvoiceTypeCode = CompanyService[0].InvoiceTypeCode;
+                                                    SystemEnv.InvoiceTransCode = CompanyService[0].InvoiceTransCode;
+                                                    //SystemEnv.InvoiceWithoutCust = CompanyService[0].InvoiceWithoutCust; 
+                                                    //SystemEnv.IvoiceDateEditable = CompanyService[0].IvoiceDateEditable; 
+                                                    //SystemEnv.InvoiceLineDiscount = CompanyService[0].InvoiceLineDiscount; 
+                                                    //SystemEnv.InvoiceLineAllowance = CompanyService[0].InvoiceLineAllowance; 
+                                                    //SystemEnv.InvoiceTotalAllowance = CompanyService[0].InvoiceTotalAllowance; 
+                                                    //SystemEnv.InvoiceTotalCharge = CompanyService[0].InvoiceTotalCharge; 
+                                                    //SystemEnv.OperationPriceWithVAT = CompanyService[0].OperationPriceWithVAT; 
+                                                    //SystemEnv.SalesPriceWithVAT = CompanyService[0].SalesPriceWithVAT; 
+                                                    //SystemEnv.IsLocalBranchCustomer = CompanyService[0].IsLocalBranchCustomer; 
+                                                    //SystemEnv.GL_VoucherCCDT_Type = CompanyService[0].GL_VoucherCCDT_Type; 
+                                                    debugger
+                                                    //SystemEnv.SerialNumber = GetSerialNumber();
+                                                    debugger
+                                                    let IsLocalSalePrice = false;
+                                                    IsLocalSalePrice = CompanyService[0].IsLocalSalePrice
 
-                                                                SystemEnv.NationalityID = G_BRANCHService[0].NationalityID;
-                                                                SystemEnv.InvoiceWithoutCust = G_BRANCHService[0].InvoiceWithoutCust;
-                                                                SystemEnv.IvoiceDateEditable = G_BRANCHService[0].IvoiceDateEditable;
-                                                                SystemEnv.InvoiceLineDiscount = G_BRANCHService[0].InvoiceLineDiscount;
-                                                                SystemEnv.InvoiceLineAllowance = G_BRANCHService[0].InvoiceLineAllowance;
-                                                                SystemEnv.InvoiceTotalAllowance = G_BRANCHService[0].InvoiceTotalAllowance;
-                                                                SystemEnv.InvoiceTotalCharge = G_BRANCHService[0].InvoiceTotalCharge;
-                                                                SystemEnv.OperationPriceWithVAT = G_BRANCHService[0].OperationPriceWithVAT;
-                                                                SystemEnv.SalesPriceWithVAT = G_BRANCHService[0].SalesPriceWithVAT;
-                                                                SystemEnv.IsLocalBranchCustomer = G_BRANCHService[0].IsLocalBranchCustomer;
-                                                                SystemEnv.GL_VoucherCCDT_Type = G_BRANCHService[0].GL_VoucherCCDT_Type;
-                                                                SystemEnv.VatNo = G_BRANCHService[0].GroupVatNo;
-                                                                SystemEnv.I_Control[0].ExceedMinPricePassword = G_BRANCHService[0].ExceedMinPricePassword;
-                                                                SystemEnv.I_Control[0].RetailInvoicePaymentDef = G_BRANCHService[0].RetailInvoicePaymentDef;
-                                                                SystemEnv.I_Control[0].OperationInvoicePaymentDef = G_BRANCHService[0].OperationInvoicePaymentDef;
-                                                             
+                                                    Ajax.Callsync({
+                                                        type: "GET",
+                                                        url: sys.apiUrl("G_Branch", "GetBranch"),
+                                                        data: { CompCode: Number(compCode), BRA_CODE: Number(braCode) },
+                                                        async: false,
+                                                        success: (d) => {
+                                                            let res = d as BaseResponse;
+                                                            if (res.IsSuccess) {
+                                                                var G_BRANCHService = res.Response as G_BRANCH;
+                                                                if (G_BRANCHService != null) {
 
-                                                                 
-                                                              
-                                                            } else {
-                                                                var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول الفرع" : "You are not allowed to login";
-                                                                MessageBox.Show(msg, ""); 
+                                                                    document.cookie = "Inv1_systemG_BRANCH=" + JSON.stringify(G_BRANCHsSYS).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+
+                                                                    SystemEnv.NationalityID = G_BRANCHService[0].NationalityID;
+                                                                    SystemEnv.InvoiceWithoutCust = G_BRANCHService[0].InvoiceWithoutCust;
+                                                                    SystemEnv.IvoiceDateEditable = G_BRANCHService[0].IvoiceDateEditable;
+                                                                    SystemEnv.InvoiceLineDiscount = G_BRANCHService[0].InvoiceLineDiscount;
+                                                                    SystemEnv.InvoiceLineAllowance = G_BRANCHService[0].InvoiceLineAllowance;
+                                                                    SystemEnv.InvoiceTotalAllowance = G_BRANCHService[0].InvoiceTotalAllowance;
+                                                                    SystemEnv.InvoiceTotalCharge = G_BRANCHService[0].InvoiceTotalCharge;
+                                                                    SystemEnv.OperationPriceWithVAT = G_BRANCHService[0].OperationPriceWithVAT;
+                                                                    SystemEnv.SalesPriceWithVAT = G_BRANCHService[0].SalesPriceWithVAT;
+                                                                    SystemEnv.IsLocalBranchCustomer = G_BRANCHService[0].IsLocalBranchCustomer;
+                                                                    SystemEnv.GL_VoucherCCDT_Type = G_BRANCHService[0].GL_VoucherCCDT_Type;
+                                                                    SystemEnv.VatNo = G_BRANCHService[0].GroupVatNo;
+                                                                    SystemEnv.I_Control[0].ExceedMinPricePassword = G_BRANCHService[0].ExceedMinPricePassword;
+                                                                    SystemEnv.I_Control[0].RetailInvoicePaymentDef = G_BRANCHService[0].RetailInvoicePaymentDef;
+                                                                    SystemEnv.I_Control[0].OperationInvoicePaymentDef = G_BRANCHService[0].OperationInvoicePaymentDef;
+
+
+
+
+                                                                } else {
+                                                                    var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول الفرع" : "You are not allowed to login";
+                                                                    MessageBox.Show(msg, "");
+                                                                }
                                                             }
                                                         }
-                                                    }
-                                                });
+                                                    });
 
 
 
-                                                //$.ajax({
-                                                //    type: "GET",
-                                                //    url: Url.Action("GetSerialNumber", "Home"),
-                                                //    success: (d) => {
-                                                //        debugger
-                                                //        let result = d.trim();
-                                                //        let res = result.replace("SerialNumber", "");
-                                                //        SystemEnv.SerialNumber = res.trim();
-                                                   
+                                                    //Ajax.Callsync({
+                                                    //    type: "GET",
+                                                    //    url: Url.Action("GetSerialNumber", "Home"),
+                                                    //    success: (d) => {
+                                                    //        debugger
+                                                    //        let result = d.trim();
+                                                    //        let res = result.replace("SerialNumber", "");
+                                                    //        SystemEnv.SerialNumber = res.trim();
 
-                                                //    }
-                                                //})
 
-                                                document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
-                                                OnLogged();
-                                             
-                                            }
-                                            else {
-                                                var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول للنظام" : "You are not allowed to login";
-                                                MessageBox.Show(msg, "");
+                                                    //    }
+                                                    //})
 
+                                                    document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                    OnLogged();
+
+                                                }
+                                                else {
+                                                    var msg = SystemEnv.ScreenLanguage == "ar" ? "غير مصرح لك الدخول للنظام" : "You are not allowed to login";
+                                                    MessageBox.Show(msg, "");
+
+                                                }
                                             }
                                         }
-                                    }
-                                });
+                                    });
 
 
                                 }, 1000 + 1000 * status);
@@ -425,7 +443,7 @@ var LoginComponent;
                                 //    MessageBox.Showwithoutclick(CompanyStatus.LoginMsg, ""); 
                                 //    //setTimeout(function ()
                                 //    { 
-                                //        $.ajax({
+                                //        Ajax.Callsync({
                                 //            type: "GET",
                                 //            url: sys.apiUrl("I_Control", "GetAll"),
                                 //            data: { Compcode: compCode },
@@ -467,6 +485,10 @@ var LoginComponent;
                                 //    //, 1000);
                                 //}
 
+
+                           
+
+
                             }
                             else /*if (status == 3)*/ {
                                 MessageBox.Show(CompanyStatus.LoginMsg, "", function () {
@@ -482,7 +504,11 @@ var LoginComponent;
             else {
                 let mg = SystemEnv.ScreenLanguage == "ar" ? "هذه الشركة غير متاحة" : "This company is not Active";
                 MessageBox.Show(mg, "");
-            }
+                }
+
+                $('#btnOk').html('Enter');
+                $('#btnOk').removeAttr('disabled');
+            }, 300);
         });
     }
     function OnLogged() {
@@ -497,7 +523,7 @@ var LoginComponent;
         APiSession.Session.CurrentYear = $("#txtYear").val();
         InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true);//if success
 
-        $.ajax({
+        Ajax.Callsync({
             url: OnLoggedUrl,
             success: function (result) {
 
@@ -509,11 +535,11 @@ var LoginComponent;
     }
     function GoBack() {
         $("#divCompanies").addClass("display_none");
-        $("#div_pass").removeClass("display_none");       
-        $("#btn_login_2").removeClass("display_none");          
-        $("#btnLogin").removeClass("display_none");          
-        $("#divCompanies").attr("style" ,"");
-        $("#div_pass").attr("style" ,"");
+        $("#div_pass").removeClass("display_none");
+        $("#btn_login_2").removeClass("display_none");
+        $("#btnLogin").removeClass("display_none");
+        $("#divCompanies").attr("style", "");
+        $("#div_pass").attr("style", "");
 
     }
     function Gologin() {

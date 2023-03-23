@@ -226,8 +226,8 @@ var AccDefReceipts;
     }
     function Assign() {
         var StatusFlag;
+        DetailsModel = new Array();
         for (var i = 0; i < CountGrid; i++) {
-            DetailsModel = new Array();
             Model = new A_RecPay_D_Accounts();
             StatusFlag = $("#txt_StatusFlag" + i).val();
             if (StatusFlag == "i") {

@@ -51,6 +51,8 @@ namespace Inv.WebUI.Reports.Models
 
             string url = uri + "/Reports/Forms/ReportsForm.aspx?" + "rpt=" + ReportName + "&par="+EnPar;
 
+            url = url + "&Address=" + HttpContext.Current.Request.AcceptTypes[0];
+
             return url;
         }
 

@@ -1458,7 +1458,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1482,7 +1482,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1539,7 +1539,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + (i - 1)).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1564,7 +1564,7 @@ var JournalVoucher;
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
-                    else if (StatusFlag == "u") {
+                    else if (StatusFlag == "u" || StatusFlag == "d") {
                         AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
@@ -1710,6 +1710,13 @@ var JournalVoucher;
                 JournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                 JournalDetailSingleModel.DESCA = $("#Notes" + i).val();
                 JournalDetailSingleModel.CCDT_CODE = $("#txtCCDtCostCntrNum" + i).val();
+                //****************************************************************************
+                JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
                 JournalDetailModel.push(JournalDetailSingleModel);
             }
             else if (StatusFlag == "u") {
@@ -1771,6 +1778,7 @@ var JournalVoucher;
                     $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+                    FlagAddOrEdit = 2;
                     Save_Succ_But();
                 }
                 else {
@@ -1866,6 +1874,7 @@ var JournalVoucher;
                     $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
+                    FlagAddOrEdit = 2;
                     Save_Succ_But();
                 }
                 else {

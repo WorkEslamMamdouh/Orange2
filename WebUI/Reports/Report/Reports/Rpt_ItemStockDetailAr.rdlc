@@ -1727,7 +1727,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!Par_BraDSA.Value, "Rpt_ItemStockDetailAr")</Value>
+                      <Value>=First(Fields!BraNameA.Value, "Rpt_ItemStockDetailAr")</Value>
                       <Style />
                     </TextRun>
                   </TextRuns>
