@@ -3093,6 +3093,7 @@ namespace CloseProcesses {
             Model_I_TR_Operation.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
 
+        Model_I_TR_Operation.Close_Coolingandstorage = Number(textClose_Coolingandstorage.value);
 
     }
     function Insert_1_Processes() {

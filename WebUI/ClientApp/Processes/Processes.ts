@@ -3084,6 +3084,7 @@ namespace Processes {
 
         }
 
+        Model_I_TR_Operation.Close_Coolingandstorage = Number(textClose_Coolingandstorage.value);
 
     }
     function Insert_1_Processes() {

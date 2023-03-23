@@ -15576,6 +15576,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
     overflow-x: hidden;
     overflow-y: auto;
     outline: 0;
+    background-color: #0000005e;
 }
 .modal-open {
     padding-right: 0 !important;
