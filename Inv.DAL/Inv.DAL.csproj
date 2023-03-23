@@ -74,6 +74,9 @@
     <Compile Include="Domain\AProc_Rpt_GLFinancialStatment_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AProc_Rpt_GLGeneralLedgerVer2_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AProc_Rpt_GLGeneralLedger_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
