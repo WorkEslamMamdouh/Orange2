@@ -3839,7 +3839,7 @@ warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransComp' does not have a
           <Property Name="BASE_TABLE_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
           <Property Name="COMP_CODE" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Expr1" Type="bit" />
+          <Property Name="Comp_INTEGRATE" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8402,7 +8402,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [GQ_GetLnkTransComp].[BASE_TABLE_NAME] AS [BASE_TABLE_NAME], 
     [GQ_GetLnkTransComp].[FN_POSTED] AS [FN_POSTED], 
     [GQ_GetLnkTransComp].[COMP_CODE] AS [COMP_CODE], 
-    [GQ_GetLnkTransComp].[Expr1] AS [Expr1]
+    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE]
     FROM [dbo].[GQ_GetLnkTransComp] AS [GQ_GetLnkTransComp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="GQ_GetLnkTransVoucher" EntityType="Self.GQ_GetLnkTransVoucher" store:Type="Views" store:Schema="dbo">
@@ -22802,7 +22802,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="BASE_TABLE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Expr1" Type="Boolean" />
+          <Property Name="Comp_INTEGRATE" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -33914,7 +33914,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="GQ_GetLnkTransComp">
             <EntityTypeMapping TypeName="InvModel.GQ_GetLnkTransComp">
               <MappingFragment StoreEntitySet="GQ_GetLnkTransComp">
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Comp_INTEGRATE" ColumnName="Comp_INTEGRATE" />
                 <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
                 <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
                 <ScalarProperty Name="BASE_TABLE_NAME" ColumnName="BASE_TABLE_NAME" />

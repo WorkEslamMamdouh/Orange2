@@ -38,6 +38,6 @@ namespace Inv.DAL.Domain
         public string BASE_TABLE_NAME { get; set; }
         public string FN_POSTED { get; set; }
         public string COMP_CODE { get; set; }
-        public Nullable<bool> Expr1 { get; set; }
+        public Nullable<bool> Comp_INTEGRATE { get; set; }
     }
 }
