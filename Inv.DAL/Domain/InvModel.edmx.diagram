@@ -202,6 +202,8 @@
         <EntityTypeShape EntityType="InvModel.I_Stk_TR_Open" Width="1.5" PointX="25.75" PointY="26.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.I_Stk_Tr_OpenDetails" Width="1.5" PointX="27.75" PointY="26.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.IQ_GetStkOpenDetail" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.G_LnkTrans_Comp" Width="1.5" PointX="3.375" PointY="28.75" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransComp" Width="1.5" PointX="5.375" PointY="28.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1310,6 +1310,19 @@
           <Property Name="BASE_TABLE_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="G_LnkTrans_Comp">
+          <Key>
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="TR_CODE" />
+            <PropertyRef Name="COMP_CODE" />
+          </Key>
+          <Property Name="SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SUB_SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TR_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="COMP_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="INTEGRATE" Type="bit" />
+        </EntityType>
         <EntityType Name="G_LnkTrans_Temp">
           <Key>
             <PropertyRef Name="ROW_ID" />
@@ -3792,6 +3805,41 @@ warning 6002: The table/view 'Orange2021.dbo.AQVAT_GetSrvCategory' does not have
           <Property Name="Ret_Acc_DescE" Type="nvarchar" MaxLength="100" />
           <Property Name="Dis_Acc_DescA" Type="nvarchar" MaxLength="100" />
           <Property Name="Dis_Acc_DescE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransComp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GQ_GetLnkTransComp">
+          <Key>
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="TR_CODE" />
+            <PropertyRef Name="COMP_CODE" />
+          </Key>
+          <Property Name="SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SUB_SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TR_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TR_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TR_DESCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="VOUCHER_TYPE" Type="tinyint" />
+          <Property Name="VOUCHER_SOURCE_TYPE" Type="int" />
+          <Property Name="TABLE_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="TABLE_CONDITION" Type="nvarchar" MaxLength="100" />
+          <Property Name="FN_COMP_CODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_BRA_CODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_DATE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_USER" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_AMOUNT" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_TR_DESCA" Type="nvarchar" MaxLength="200" />
+          <Property Name="FN_TR_DESCE" Type="nvarchar" MaxLength="200" />
+          <Property Name="FN_VOUCHER_CODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="INTEGRATE" Type="bit" />
+          <Property Name="BASE_TABLE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
+          <Property Name="COMP_CODE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Comp_INTEGRATE" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7635,6 +7683,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="G_COST_CENTER" EntityType="Self.G_COST_CENTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_Currency" EntityType="Self.G_Currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_LnkTrans" EntityType="Self.G_LnkTrans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="G_LnkTrans_Comp" EntityType="Self.G_LnkTrans_Comp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_LnkTrans_Temp" EntityType="Self.G_LnkTrans_Temp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_LnkTrans_TempVchr" EntityType="Self.G_LnkTrans_TempVchr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_LnkTransVariable" EntityType="Self.G_LnkTransVariable" Schema="dbo" store:Type="Tables" />
@@ -8326,6 +8375,35 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [AQVAT_GetSrvCategory].[Dis_Acc_DescA] AS [Dis_Acc_DescA], 
     [AQVAT_GetSrvCategory].[Dis_Acc_DescE] AS [Dis_Acc_DescE]
     FROM [dbo].[AQVAT_GetSrvCategory] AS [AQVAT_GetSrvCategory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GQ_GetLnkTransComp" EntityType="Self.GQ_GetLnkTransComp" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GQ_GetLnkTransComp].[SYSTEM_CODE] AS [SYSTEM_CODE], 
+    [GQ_GetLnkTransComp].[SUB_SYSTEM_CODE] AS [SUB_SYSTEM_CODE], 
+    [GQ_GetLnkTransComp].[TR_CODE] AS [TR_CODE], 
+    [GQ_GetLnkTransComp].[TR_DESCA] AS [TR_DESCA], 
+    [GQ_GetLnkTransComp].[TR_DESCE] AS [TR_DESCE], 
+    [GQ_GetLnkTransComp].[VOUCHER_TYPE] AS [VOUCHER_TYPE], 
+    [GQ_GetLnkTransComp].[VOUCHER_SOURCE_TYPE] AS [VOUCHER_SOURCE_TYPE], 
+    [GQ_GetLnkTransComp].[TABLE_NAME] AS [TABLE_NAME], 
+    [GQ_GetLnkTransComp].[TABLE_CONDITION] AS [TABLE_CONDITION], 
+    [GQ_GetLnkTransComp].[FN_COMP_CODE] AS [FN_COMP_CODE], 
+    [GQ_GetLnkTransComp].[FN_BRA_CODE] AS [FN_BRA_CODE], 
+    [GQ_GetLnkTransComp].[FN_TR_ID] AS [FN_TR_ID], 
+    [GQ_GetLnkTransComp].[FN_TR_NO] AS [FN_TR_NO], 
+    [GQ_GetLnkTransComp].[FN_TR_TYPE] AS [FN_TR_TYPE], 
+    [GQ_GetLnkTransComp].[FN_TR_DATE] AS [FN_TR_DATE], 
+    [GQ_GetLnkTransComp].[FN_USER] AS [FN_USER], 
+    [GQ_GetLnkTransComp].[FN_TR_AMOUNT] AS [FN_TR_AMOUNT], 
+    [GQ_GetLnkTransComp].[FN_TR_DESCA] AS [FN_TR_DESCA], 
+    [GQ_GetLnkTransComp].[FN_TR_DESCE] AS [FN_TR_DESCE], 
+    [GQ_GetLnkTransComp].[FN_VOUCHER_CODE] AS [FN_VOUCHER_CODE], 
+    [GQ_GetLnkTransComp].[INTEGRATE] AS [INTEGRATE], 
+    [GQ_GetLnkTransComp].[BASE_TABLE_NAME] AS [BASE_TABLE_NAME], 
+    [GQ_GetLnkTransComp].[FN_POSTED] AS [FN_POSTED], 
+    [GQ_GetLnkTransComp].[COMP_CODE] AS [COMP_CODE], 
+    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE]
+    FROM [dbo].[GQ_GetLnkTransComp] AS [GQ_GetLnkTransComp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="GQ_GetLnkTransVoucher" EntityType="Self.GQ_GetLnkTransVoucher" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -12013,6 +12091,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="PrdType" Mode="In" Type="Int32" />
             <Parameter Name="IncludeInvTR" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="G_LnkTrans_Comp" EntityType="InvModel.G_LnkTrans_Comp" />
+          <EntitySet Name="GQ_GetLnkTransComp" EntityType="InvModel.GQ_GetLnkTransComp" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -22678,6 +22758,52 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="acc_descA" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="acc_descL" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="G_LnkTrans_Comp">
+          <Key>
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="TR_CODE" />
+            <PropertyRef Name="COMP_CODE" />
+          </Key>
+          <Property Name="SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SUB_SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TR_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="INTEGRATE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GQ_GetLnkTransComp">
+          <Key>
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="TR_CODE" />
+            <PropertyRef Name="COMP_CODE" />
+          </Key>
+          <Property Name="SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SUB_SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TR_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VOUCHER_TYPE" Type="Byte" />
+          <Property Name="VOUCHER_SOURCE_TYPE" Type="Int32" />
+          <Property Name="TABLE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TABLE_CONDITION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FN_COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_BRA_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_USER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_AMOUNT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_DESCA" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FN_TR_DESCE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FN_VOUCHER_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="INTEGRATE" Type="Boolean" />
+          <Property Name="BASE_TABLE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Comp_INTEGRATE" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -33774,6 +33900,48 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="G_LnkTrans_Comp">
+            <EntityTypeMapping TypeName="InvModel.G_LnkTrans_Comp">
+              <MappingFragment StoreEntitySet="G_LnkTrans_Comp">
+                <ScalarProperty Name="INTEGRATE" ColumnName="INTEGRATE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="TR_CODE" ColumnName="TR_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GQ_GetLnkTransComp">
+            <EntityTypeMapping TypeName="InvModel.GQ_GetLnkTransComp">
+              <MappingFragment StoreEntitySet="GQ_GetLnkTransComp">
+                <ScalarProperty Name="Comp_INTEGRATE" ColumnName="Comp_INTEGRATE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
+                <ScalarProperty Name="BASE_TABLE_NAME" ColumnName="BASE_TABLE_NAME" />
+                <ScalarProperty Name="INTEGRATE" ColumnName="INTEGRATE" />
+                <ScalarProperty Name="FN_VOUCHER_CODE" ColumnName="FN_VOUCHER_CODE" />
+                <ScalarProperty Name="FN_TR_DESCE" ColumnName="FN_TR_DESCE" />
+                <ScalarProperty Name="FN_TR_DESCA" ColumnName="FN_TR_DESCA" />
+                <ScalarProperty Name="FN_TR_AMOUNT" ColumnName="FN_TR_AMOUNT" />
+                <ScalarProperty Name="FN_USER" ColumnName="FN_USER" />
+                <ScalarProperty Name="FN_TR_DATE" ColumnName="FN_TR_DATE" />
+                <ScalarProperty Name="FN_TR_TYPE" ColumnName="FN_TR_TYPE" />
+                <ScalarProperty Name="FN_TR_NO" ColumnName="FN_TR_NO" />
+                <ScalarProperty Name="FN_TR_ID" ColumnName="FN_TR_ID" />
+                <ScalarProperty Name="FN_BRA_CODE" ColumnName="FN_BRA_CODE" />
+                <ScalarProperty Name="FN_COMP_CODE" ColumnName="FN_COMP_CODE" />
+                <ScalarProperty Name="TABLE_CONDITION" ColumnName="TABLE_CONDITION" />
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="VOUCHER_SOURCE_TYPE" ColumnName="VOUCHER_SOURCE_TYPE" />
+                <ScalarProperty Name="VOUCHER_TYPE" ColumnName="VOUCHER_TYPE" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_CODE" ColumnName="TR_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

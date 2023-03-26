@@ -266,6 +266,9 @@
     <Compile Include="Domain\GFun_UserCompanyBranch_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\GQ_GetLnkTransComp.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\GQ_GetLnkTransVoucher.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -336,6 +339,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_LnkTransVoucher.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\G_LnkTrans_Comp.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\G_LnkTrans_Temp.cs">
