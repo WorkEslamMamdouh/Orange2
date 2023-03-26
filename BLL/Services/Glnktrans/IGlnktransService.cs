@@ -11,8 +11,8 @@ namespace Inv.BLL.Services.Glnktrans
 {
     public interface IGlnktransService
     {
-        G_LnkTrans GetById(int id);
-        List<G_LnkTrans> GetAll();
-        List<G_LnkTrans> GetAll(Expression<Func<G_LnkTrans, bool>> predicate);
+        GQ_GetLnkTransComp GetById(int id);
+        List<GQ_GetLnkTransComp> GetAll();
+        List<GQ_GetLnkTransComp> GetAll(Expression<Func<GQ_GetLnkTransComp, bool>> predicate);
     }
 }

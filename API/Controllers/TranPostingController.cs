@@ -38,8 +38,8 @@ namespace Inv.API.Controllers
         public IHttpActionResult GetAllTransactions(int CompCode, string UserCode, string Token, string sec_FinYear, string MODULE_CODE, string BranchCode)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
-            {
-                var GenVatTypeList = IGlnktransService.GetAll(x => x.INTEGRATE == true).OrderBy(s => s.SUB_SYSTEM_CODE).ThenBy(a => a.TR_CODE).ToList();
+            { 
+                var GenVatTypeList = IGlnktransService.GetAll(x => x.INTEGRATE == true && x.COMP_CODE == CompCode.ToString() && x.Comp_INTEGRATE == true).OrderBy(s => s.SUB_SYSTEM_CODE).ThenBy(a => a.TR_CODE).ToList();
                 LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, "GetAllTransactions");
 
                 return Ok(new BaseResponse(GenVatTypeList));
