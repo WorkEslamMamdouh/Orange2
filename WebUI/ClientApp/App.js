@@ -128,7 +128,6 @@ var Keys = {
     Enter: "Enter"
 };
 var setVal = function (value) {
-    debugger;
     var Input = this;
     value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
@@ -214,7 +213,6 @@ var App;
     //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     //};
     Number.prototype.RoundToNum = function (dec) {
-        debugger;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
@@ -228,6 +226,7 @@ var App;
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
     Number.prototype.RoundToSt = function (dec) {
+        debugger;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
@@ -235,8 +234,14 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            if (stfix < 0) {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            }
+            else {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
@@ -483,12 +488,12 @@ var Ajax = {
     },
     CallAsync: function (settings) {
         CheckTime();
-        //debugger
+        //
         //if (typeof settings.data == "undefined") {
         //    var data = [];
         //    settings.data = data;
         //}
-        //debugger
+        //
         //let Address = $('#GetIPAddress').val();
         //Address = '' + typeof Address == "undefined" ? '' : Address + '';
         //if (isObject(settings, 'data')) {
@@ -498,7 +503,7 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    debugger
+        //    
         //    settings.data = JsonAddValue(settings.data, Address)
         //    console.log(settings.data);
         //    //settings.data = 'Address=' + Address + '' + settings.data;
@@ -521,12 +526,12 @@ var Ajax = {
     },
     Callsync: function (settings) {
         CheckTime();
-        //debugger
+        //
         //if (typeof settings.data == "undefined") {
         //    var data = [];
         //    settings.data = data;
         //}
-        //debugger
+        //
         //let Address = $('#GetIPAddress').val();
         //Address = '' + typeof Address == "undefined" ? '' : Address + '';
         //if (isObject(settings, 'data')) {
@@ -536,12 +541,11 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    debugger
+        //    
         //    settings.data = JsonAddValue(settings.data, Address)
         //    console.log(settings.data);
         //    //settings.data = 'Address=' + Address + '' + settings.data;
         //}
-        debugger;
         $.ajax({
             type: settings.type,
             url: settings.url,
@@ -561,7 +565,6 @@ var Ajax = {
     }
 };
 function JsonAddValue(data, Address) {
-    debugger;
     var obj = JSON.parse(data);
     obj["Address"] = '' + Address + '';
     return JSON.stringify(obj);
@@ -1637,7 +1640,6 @@ function convertToG(date) {
 //    }
 //}
 function daysDifference(dateI1, dateI2) {
-    debugger;
     //define two date object variables to store the date values
     var date1 = new Date(dateI1);
     var date2 = new Date(dateI2);
@@ -1810,7 +1812,6 @@ function printDiv(divName) {
     //document.body.innerHTML = printContents;
     //window.print();
     //document.body.innerHTML = originalContents;
-    debugger;
     var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
     sOption += "scrollbars=yes,width=775,height=600,left=10,top=25";
     var mywindow = window.open('', 'PRINT', sOption);
@@ -1853,7 +1854,6 @@ function OnClick_Tree() {
     $('span').on('click', function () {
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-        debugger;
         var expanded = $(this).attr("aria-expanded");
         if (expanded == 'false') {
             $(this).attr("aria-expanded", "true");
@@ -2031,7 +2031,7 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
             $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
             $('#btnPrintsFrom_To').removeAttr('disabled');
             //alert(result);
-            //debugger
+            //
             //window.open(result, "blank");
             var x = Url.Action("OpenPdfS", "Home");
             var UrlPdf = x + "/" + "?" + "path=" + result + "";
@@ -2046,7 +2046,6 @@ function GetSerialNumber() {
         type: "GET",
         url: Url.Action("GetSerialNumber", "Home"),
         success: function (d) {
-            debugger;
             var result = d;
             return result;
         }
@@ -2116,7 +2115,6 @@ function SendInv_to_Cust(data_New) {
     });
 }
 function SendMessg(CompCode, HdMsg, DetMsg, ContactMobile, TrID) {
-    debugger;
     var sys = new SystemTools;
     Ajax.Callsync({
         type: "Get",
@@ -2125,7 +2123,6 @@ function SendMessg(CompCode, HdMsg, DetMsg, ContactMobile, TrID) {
         success: function (d) {
             var result = d;
             if (result.IsSuccess) {
-                debugger;
                 var res = result.Response;
                 MessageBox.Show(res, "الرساله");
                 //alert(res)
@@ -2144,7 +2141,6 @@ function PrintTransactionLog(UserCode, compcode, BranchCode, ModuleCode, FinYear
     });
 }
 function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2155,7 +2151,6 @@ function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
     });
 }
 function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, FinYear, ExtraData) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2166,7 +2161,6 @@ function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, Fin
     });
 }
 function OpenScreen(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",

@@ -19,6 +19,7 @@ namespace Accountbalances {
      
     var chk_Certified: HTMLInputElement
     var chk_New: HTMLInputElement
+    var chk_IncludeInvTR: HTMLInputElement
     var IsMoveEnable: HTMLInputElement
     var IsE_termEnable: HTMLInputElement
     var IsF_termEnable: HTMLInputElement
@@ -70,6 +71,7 @@ namespace Accountbalances {
         
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
 
                     
         IsF_AEnable.checked = true;
@@ -101,6 +103,7 @@ namespace Accountbalances {
         txtCenter_Cost_DESC = document.getElementById("txtCenter_Cost_DESC") as HTMLInputElement;
         chk_Certified = document.getElementById("chk_Certified") as HTMLInputElement;
         chk_New = document.getElementById("chk_New") as HTMLInputElement;
+        chk_IncludeInvTR = document.getElementById("chk_IncludeInvTR") as HTMLInputElement;
 
 
 
@@ -257,6 +260,7 @@ namespace Accountbalances {
         discharge();
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         IsF_AEnable.checked = true;
         IsM_AEnable.checked = true;
         IsE_AEnable.checked = true;
@@ -330,6 +334,14 @@ namespace Accountbalances {
         }
         else {
             rp.IsNewVchr = 0;
+        }
+
+        if (chk_IncludeInvTR.checked == true)       //-------------------------------------( Inclusion of new restrictions )
+        {
+            rp.IncludeInvTR = 1;
+        }
+        else {
+            rp.IncludeInvTR = 0;
         }
 
 

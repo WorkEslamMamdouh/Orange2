@@ -133,7 +133,7 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-    debugger
+
     let Input = this;
     value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
@@ -317,7 +317,7 @@ namespace App {
     //};
 
     Number.prototype.RoundToNum = function (dec: number): number {
-        debugger
+
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
@@ -333,14 +333,23 @@ namespace App {
 
 
     Number.prototype.RoundToSt = function (dec: number): string {
+        debugger
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num).toString();
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            if (stfix < 0) {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+
+            }
+            else {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
@@ -645,7 +654,7 @@ var Ajax = {
     CallAsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
 
-        //debugger
+        //
 
 
 
@@ -653,7 +662,7 @@ var Ajax = {
         //    var data = [];
         //    settings.data = data;
         //}
-        //debugger
+        //
         //let Address = $('#GetIPAddress').val();
         //Address = '' + typeof Address == "undefined" ? '' : Address + '';
 
@@ -666,7 +675,7 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    debugger
+        //    
         //    settings.data = JsonAddValue(settings.data, Address)
 
         //    console.log(settings.data);
@@ -695,15 +704,15 @@ var Ajax = {
     },
     Callsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
-         
-        //debugger
+
+        //
 
 
         //if (typeof settings.data == "undefined") {
         //    var data = [];
         //    settings.data = data;
         //}
-        //debugger
+        //
         //let Address = $('#GetIPAddress').val();
         //Address = '' + typeof Address == "undefined" ? '' : Address + '';
 
@@ -716,7 +725,7 @@ var Ajax = {
         //else {
         //    //alert('Json');
         //    //alert(settings.data)
-        //    debugger
+        //    
         //    settings.data = JsonAddValue(settings.data, Address)
 
         //    console.log(settings.data);
@@ -724,7 +733,7 @@ var Ajax = {
         //    //settings.data = 'Address=' + Address + '' + settings.data;
 
         //}
-        debugger  
+
         $.ajax({
 
             type: settings.type,
@@ -751,7 +760,7 @@ var Ajax = {
 
 function JsonAddValue(data: string, Address): string {
 
-    debugger
+
 
     var obj = JSON.parse(data);
 
@@ -2022,7 +2031,7 @@ function convertToG(date: string) {
 //}
 
 function daysDifference(dateI1, dateI2) {
-    debugger
+
     //define two date object variables to store the date values
     var date1 = new Date(dateI1);
     var date2 = new Date(dateI2);
@@ -2265,7 +2274,7 @@ function printDiv(divName: string) {
     //window.print();
 
     //document.body.innerHTML = originalContents;
-    debugger
+
 
 
     var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
@@ -2346,7 +2355,7 @@ function OnClick_Tree() {
 
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-        debugger
+
         let expanded = $(this).attr("aria-expanded");
 
         if (expanded == 'false') {
@@ -2607,7 +2616,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 
             //alert(result);
-            //debugger
+            //
             //window.open(result, "blank");
 
             let x = Url.Action("OpenPdfS", "Home");
@@ -2635,7 +2644,7 @@ function GetSerialNumber(): string {
         type: "GET",
         url: Url.Action("GetSerialNumber", "Home"),
         success: (d) => {
-            debugger
+
             let result = d;
             return result
 
@@ -2738,7 +2747,7 @@ function SendInv_to_Cust(data_New: ReportParameters) {
 
 function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobile: string, TrID: number) {
 
-    debugger
+
     let sys = new SystemTools;
     Ajax.Callsync({
         type: "Get",
@@ -2747,7 +2756,7 @@ function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobil
         success: (d) => {//(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
             let result = d as BaseResponse;
             if (result.IsSuccess) {
-                debugger
+
                 let res = result.Response;
 
                 MessageBox.Show(res, "الرساله");
@@ -2775,7 +2784,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 
 }
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2787,7 +2796,7 @@ function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, 
     });
 }
 function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2799,7 +2808,7 @@ function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode:
     });
 }
 function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
