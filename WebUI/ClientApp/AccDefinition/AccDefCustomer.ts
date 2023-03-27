@@ -1572,6 +1572,13 @@ namespace AccDefCustomer {
     function Insert() {
 
         Assign();
+
+        if (Model.A_Rec_D_Customer.GroupId == null) {
+            DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
+            Errorinput(txt_Grop);
+            return ;
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Insert"),
@@ -1593,6 +1600,13 @@ namespace AccDefCustomer {
     function Update() {
         Assign();
         debugger
+
+        if (Model.A_Rec_D_Customer.GroupId == null) {
+            DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
+            Errorinput(txt_Grop);
+            return;
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Update"),

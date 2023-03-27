@@ -110,16 +110,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.25704cm</Width>
+              <Width>1.92986cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.25704cm</Width>
+              <Width>2.27808cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.25704cm</Width>
+              <Width>2.331cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.25704cm</Width>
+              <Width>6.53002cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>3.25704cm</Width>
@@ -243,7 +243,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>التاريخ</Value>
+                              <Value>الملاحظات</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -443,14 +443,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="TrDateH">
+                    <Textbox Name="Remark">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TrDateH.Value</Value>
+                              <Value>=Fields!Remark.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -459,7 +459,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>TrDateH</rd:DefaultName>
+                      <rd:DefaultName>Remark</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -567,7 +567,7 @@
         <Top>2.18971cm</Top>
         <Left>0cm</Left>
         <Height>1.2cm</Height>
-        <Width>19.54224cm</Width>
+        <Width>19.58304cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>

@@ -226,7 +226,6 @@ var App;
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
     Number.prototype.RoundToSt = function (dec) {
-        debugger;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {

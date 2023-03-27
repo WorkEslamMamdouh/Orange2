@@ -114,7 +114,7 @@ var MessageType = {
     Succeed: '1',
     Worning: '3',
 }
-
+ 
 var TransType = {
     Invoice: 'Inv',
     InvoiceReturn: 'Inv_Ret',
@@ -333,7 +333,7 @@ namespace App {
 
 
     Number.prototype.RoundToSt = function (dec: number): string {
-        debugger
+         
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
