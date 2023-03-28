@@ -2951,7 +2951,7 @@ namespace RS.WebUI.Reports.Forms
         //    return query;
         //}
 
-        public IEnumerable<AProc_Rpt_GLGeneralLedger_Result> Rpt_GLGeneralLedger()
+        public IEnumerable<AProc_Rpt_GLGeneralLedgerVer2_Result> Rpt_GLGeneralLedger()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2978,6 +2978,9 @@ namespace RS.WebUI.Reports.Forms
             int IsNewVchr = int.Parse(RepPar.IsNewVchr.ToString());
             SqlParameter spIsNewVchr = new SqlParameter("@IsNewVchr", IsNewVchr);
 
+            int IncludeInvTR = int.Parse(RepPar.IncludeInvTR.ToString());
+            SqlParameter spIncludeInvTR = new SqlParameter("@IncludeInvTR", IncludeInvTR);
+
             int OpenType = int.Parse(RepPar.OpenType.ToString());
             SqlParameter spOpenType = new SqlParameter("@OpenType", OpenType == -1 ? System.Data.SqlTypes.SqlInt32.Null : OpenType);
 
@@ -2987,7 +2990,8 @@ namespace RS.WebUI.Reports.Forms
             int EndType = int.Parse(RepPar.EndType.ToString());
             SqlParameter spEndType = new SqlParameter("@EndType", EndType);
 
-            Rep = OpenReport("Rpt_GLGeneralLedger");
+            //Rep = OpenReport("Rpt_GLGeneralLedger");
+            Rep = OpenReport("Rpt_GLGeneralLedgerVer2");
 
 
             string _Query = "execute " + Rep.dataSource +
@@ -3007,10 +3011,11 @@ namespace RS.WebUI.Reports.Forms
            ", @IsNewVchr = " + spIsNewVchr.Value +
            ", @PrdType = " + spPrdType.Value +
            ", @OpenType = " + spOpenType.Value +
-           ", @EndType = " + spEndType.Value;
+           ", @EndType = " + spEndType.Value +
+           ", @IncludeInvTR = " + spIncludeInvTR.Value;
 
 
-            List<AProc_Rpt_GLGeneralLedger_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedger_Result>(_Query).ToList();
+            List<AProc_Rpt_GLGeneralLedgerVer2_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedgerVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);

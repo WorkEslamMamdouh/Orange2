@@ -6702,7 +6702,69 @@ class G_LnkTrans extends SecurityClass {
     public BASE_TABLE_NAME: string;
     public FN_POSTED: string;
     public Selected: boolean;
-} class G_LnkTransVariable extends SecurityClass {
+    
+}
+
+class GQ_GetLnkTransComp {
+    constructor() {
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.TR_CODE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = 0;
+        this.TABLE_NAME = "";
+        this.TABLE_CONDITION = "";
+        this.FN_COMP_CODE = "";
+        this.FN_BRA_CODE = "";
+        this.FN_TR_ID = "";
+        this.FN_TR_NO = "";
+        this.FN_TR_TYPE = "";
+        this.FN_TR_DATE = "";
+        this.FN_USER = "";
+        this.FN_TR_AMOUNT = "";
+        this.FN_TR_DESCA = "";
+        this.FN_TR_DESCE = "";
+        this.FN_VOUCHER_CODE = "";
+        this.INTEGRATE = false;
+        this.BASE_TABLE_NAME = "";
+        this.FN_POSTED = "";
+        this.COMP_CODE
+        this.Comp_INTEGRATE = false;
+        this.Selected = false;
+    }
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public TR_CODE: string;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public VOUCHER_TYPE: number;
+    public VOUCHER_SOURCE_TYPE: number;
+    public TABLE_NAME: string;
+    public TABLE_CONDITION: string;
+    public FN_COMP_CODE: string;
+    public FN_BRA_CODE: string;
+    public FN_TR_ID: string;
+    public FN_TR_NO: string;
+    public FN_TR_TYPE: string;
+    public FN_TR_DATE: string;
+    public FN_USER: string;
+    public FN_TR_AMOUNT: string;
+    public FN_TR_DESCA: string;
+    public FN_TR_DESCE: string;
+    public FN_VOUCHER_CODE: string;
+    public INTEGRATE: boolean;
+    public BASE_TABLE_NAME: string;
+    public FN_POSTED: string;
+    public COMP_CODE: any;
+    public Comp_INTEGRATE: boolean;
+    public Selected: boolean;
+}
+
+
+
+class G_LnkTransVariable extends SecurityClass {
     constructor() {
         super();
         this.SYSTEM_CODE = "";

@@ -121,6 +121,11 @@ var JournalVoucher;
     var Events = 0;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
+        //debugger
+        //let Difference = 541745.06 - 936391.96;
+        //alert(Difference.RoundToSt(2))
+        //let x = (Difference.toFixed(2));
+        //alert(x);
         //System
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "سند قيد" : document.getElementById('Screen_name').innerHTML = "Journal Voucher";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -1272,6 +1277,7 @@ var JournalVoucher;
         clickEventsVisible();
     }
     function ComputeTotals() {
+        debugger;
         DepitTotal = 0;
         CreditTotal = 0;
         var Difference = 0;
@@ -1282,10 +1288,12 @@ var JournalVoucher;
                 CreditTotal += Number($("#txtCredit" + i).val());
             }
         }
-        txtTotalDebit.value = DepitTotal.RoundToNum(2).toLocaleString();
-        txtTotalCredit.value = CreditTotal.RoundToNum(2).toLocaleString();
-        Difference = ((DepitTotal).RoundToNum(2) - (CreditTotal).RoundToNum(2)).RoundToNum(2);
-        txtDifference.value = Difference.toLocaleString();
+        DepitTotal = DepitTotal.RoundToNum(2);
+        CreditTotal = CreditTotal.RoundToNum(2);
+        txtTotalDebit.value = DepitTotal.toLocaleString();
+        txtTotalCredit.value = CreditTotal.toLocaleString();
+        Difference = DepitTotal - CreditTotal;
+        txtDifference.value = Difference.RoundToSt(2);
     }
     function DeleteRow(RecNo) {
         if (!SysSession.CurrentPrivileges.Remove)

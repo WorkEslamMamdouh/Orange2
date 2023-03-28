@@ -61,7 +61,7 @@ var TranPosting;
     var selectedLnkTransDetails = new Array();
     var GetLnkVoucherDetail = new Array();
     var SearchDetails = new Array();
-    //var SelectedModuleCodes: Array<G_LnkTrans> = new Array<G_LnkTrans>();
+    //var SelectedModuleCodes: Array<GQ_GetLnkTransComp> = new Array<GQ_GetLnkTransComp>();
     // global
     var debitTot = 0;
     var cerditTot = 0;

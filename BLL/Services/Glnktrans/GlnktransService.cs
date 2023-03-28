@@ -19,19 +19,19 @@ namespace Inv.BLL.Services.Glnktrans
         }
         #region VoucherTypeService Service
 
-        public G_LnkTrans GetById(int id)
+        public GQ_GetLnkTransComp GetById(int id)
         {
-            return unitOfWork.Repository<G_LnkTrans>().GetById(id);
+            return unitOfWork.Repository<GQ_GetLnkTransComp>().GetById(id);
         }
 
-        public List<G_LnkTrans> GetAll()
+        public List<GQ_GetLnkTransComp> GetAll()
         {
-            return unitOfWork.Repository<G_LnkTrans>().GetAll();
+            return unitOfWork.Repository<GQ_GetLnkTransComp>().GetAll();
         }
 
-        public List<G_LnkTrans> GetAll(Expression<Func<G_LnkTrans, bool>> predicate)
+        public List<GQ_GetLnkTransComp> GetAll(Expression<Func<GQ_GetLnkTransComp, bool>> predicate)
         {
-            return unitOfWork.Repository<G_LnkTrans>().Get(predicate);
+            return unitOfWork.Repository<GQ_GetLnkTransComp>().Get(predicate);
         }
         #endregion
     }

@@ -3893,6 +3893,37 @@ var G_LnkTrans = /** @class */ (function (_super) {
     }
     return G_LnkTrans;
 }(SecurityClass));
+var GQ_GetLnkTransComp = /** @class */ (function () {
+    function GQ_GetLnkTransComp() {
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.TR_CODE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = 0;
+        this.TABLE_NAME = "";
+        this.TABLE_CONDITION = "";
+        this.FN_COMP_CODE = "";
+        this.FN_BRA_CODE = "";
+        this.FN_TR_ID = "";
+        this.FN_TR_NO = "";
+        this.FN_TR_TYPE = "";
+        this.FN_TR_DATE = "";
+        this.FN_USER = "";
+        this.FN_TR_AMOUNT = "";
+        this.FN_TR_DESCA = "";
+        this.FN_TR_DESCE = "";
+        this.FN_VOUCHER_CODE = "";
+        this.INTEGRATE = false;
+        this.BASE_TABLE_NAME = "";
+        this.FN_POSTED = "";
+        this.COMP_CODE;
+        this.Comp_INTEGRATE = false;
+        this.Selected = false;
+    }
+    return GQ_GetLnkTransComp;
+}());
 var G_LnkTransVariable = /** @class */ (function (_super) {
     __extends(G_LnkTransVariable, _super);
     function G_LnkTransVariable() {
