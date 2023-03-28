@@ -110,13 +110,6 @@ var CollectUnit;
         $("#txt_OUT_ItemCode").on('change', function () {
             txt_OUT_search_onchange();
         });
-        $("#txt_OUT_CostFactorPrc").on('keyup', function () {
-            if (Number($("#txt_OUT_CostFactorPrc").val()) > 100) {
-                DisplayMassage("لابد ان يكون مجموع نسبة التكلفة للمخرجات بساوى 100", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
-                Errorinput($("#txt_OUT_CostFactorPrc").val());
-                $("#txt_OUT_CostFactorPrc").val('100');
-            }
-        });
     }
     function InitializeGrid() {
         var res = GetResourceList("");
@@ -181,6 +174,7 @@ var CollectUnit;
                 UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
             success: function (d) {
+                debugger;
                 var result = d;
                 if (result.IsSuccess) {
                     CollectList = result.Response;
@@ -464,7 +458,6 @@ var CollectUnit;
             $("#txt_OUT_StockOnhandQty").val("");
             $("#txt_OUT_StkUnitCost").val("");
             $("#txt_OUT_Quantity").val("");
-            $("#txt_OUT_CostFactorPrc").val("");
             return;
         }
         Ajax.Callsync({
@@ -504,7 +497,6 @@ var CollectUnit;
                         $("#txt_OUT_StockOnhandQty").val("");
                         $("#txt_OUT_StkUnitCost").val("");
                         $("#txt_OUT_Quantity").val("");
-                        $("#txt_OUT_CostFactorPrc").val("");
                     }
                 }
             }
@@ -611,7 +603,6 @@ var CollectUnit;
             $("#txt_OUT_StockOnhandQty").val(CollectDet_Output[cnt].StockOnhandQty);
             $("#txt_OUT_StkUnitCost").val(CollectDet_Output[cnt].StkUnitCost);
             $("#txt_OUT_Quantity").val(CollectDet_Output[cnt].Qty);
-            $("#txt_OUT_CostFactorPrc").val(CollectDet_Output[cnt].CostFactorPrc);
         }
     }
     //***********************************************Grid Controls*******************************************//
@@ -692,11 +683,6 @@ var CollectUnit;
         if (Number($("#txt_OUT_Quantity").val()) == 0) {
             DisplayMassage("برجاء ادخال كمية المخرجات ", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
             Errorinput($("#txt_OUT_Quantity"));
-            return false;
-        }
-        if (Number($("#txt_OUT_CostFactorPrc").val()) != 100) {
-            DisplayMassage("لابد ان يكون مجموع نسبة التكلفة للمخرجات بساوى 100", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
-            Errorinput($("#txt_OUT_CostFactorPrc"));
             return false;
         }
         //********************
@@ -864,7 +850,7 @@ var CollectUnit;
         det.StkUnitCost = Number($("#txt_OUT_StkUnitCost").val());
         det.StockQty = Number($("#txt_OUT_Quantity").val());
         det.Qty = Number($("#txt_OUT_Quantity").val());
-        det.CostFactorPrc = Number($("#txt_OUT_CostFactorPrc").val());
+        det.CostFactorPrc = 100;
         det.CollectDetailID = Number($("#txt_OUT_CollectDetailID").val());
         det.CollectID = Number(hd_CollectID.value);
         det.StatusFlag = hd_CollectID.value == "0" ? 'i' : 'u';

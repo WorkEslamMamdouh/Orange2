@@ -2,18 +2,14 @@
 using Inv.DAL.Repository;
 using Inv.WebUI.Reports.Forms;
 using Inv.WebUI.Reports.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Configuration;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
-using System.IO;
-using Microsoft.Win32;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
-using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using System.Web.Configuration;
 
 namespace Inv.WebUI.Controllers
 {//eslam 1 dec 2020
@@ -26,6 +22,7 @@ namespace Inv.WebUI.Controllers
 
         protected InvEntities db = UnitOfWork.context(BuildConnectionString());
 
+        private Dictionary<string, object> _parameters = new Dictionary<string, object>();
         //public static string BuildConnectionString()
         //{
 
@@ -62,9 +59,13 @@ namespace Inv.WebUI.Controllers
                 bool singleDb = Convert.ToBoolean(WebConfigurationManager.AppSettings["singleDb"]);
 
                 if (singleDb == false)
+                {
                     sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+                }
                 else
+                {
                     sqlBuilder.InitialCatalog = WebConfigurationManager.AppSettings["AbsoluteSysDbNameReportsForm"];
+                }
 
                 sqlBuilder.UserID = WebConfigurationManager.AppSettings["DbUserNameReportsForm"];
                 sqlBuilder.Password = WebConfigurationManager.AppSettings["DbPasswordReportsForm"];
@@ -129,17 +130,65 @@ namespace Inv.WebUI.Controllers
         public string AccessApi(string data)
         {
 
+            string NewData = "";
+
             Ajax_Data Ajaxdata = JsonConvert.DeserializeObject<Ajax_Data>(data);
-            string type = Ajaxdata.type;
-            string url = Ajaxdata.url;
-            string dat = Ajaxdata.data;
-            var httpClient = new HttpClient();
-            //var res = httpClient.GetStringAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "SystemTools/BuildConnection/?ListAddress=" + DbName + "").Result;
+            HttpClient httpClient = new HttpClient();
+              NewData = Ajaxdata.data;
+            if (Ajaxdata.ISObject)
+            {
+                NewData = ConvertDateStr(NewData); 
+            }
+
+            if (Ajaxdata.type == "Post")
+            {
+
+                //string res = httpClient.PostAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "?" + _parameters + "");
+            }
+            else
+            {
+
+                string url = WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "" + NewData + "";
+
+                string res = httpClient.GetStringAsync(url).Result;
+                return res;
+            }
+
+
+
+            //
             return "";
+        }
+
+        public string ConvertDateStr(string data)
+        {
+            StringBuilder models = new StringBuilder();
+            _parameters = System.Web.Helpers.Json.Decode(data);
+            int falgfrist = 0;
+            foreach (var item in _parameters)
+            {
+                var Key = item.Key;
+                var Value = item.Value;
+
+
+                if (falgfrist == 0)
+                {
+                    models.Append("?" + Key + "=" + Value);
+                }
+                else
+                {
+                    models.Append("&"+Key + "=" + Value);
+                }
+
+                falgfrist = 1;
+            }
+
+
+            return models.ToString();
         }
 
         //-----------------------------------------------------*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*----
 
-             
+
     }
 }

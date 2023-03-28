@@ -224,6 +224,7 @@ namespace Inv.WebUI.Reports.Models
         public string type { get; set; }
         public string url { get; set; }
         public string data { get; set; }
+        public bool ISObject { get; set; }
     }
   
 

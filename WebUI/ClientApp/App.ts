@@ -540,11 +540,13 @@ function GetBranchs() {
 class Ajax_Data {
     public type: string; 
     public url: string;
-    public data: any; 
+    public data: string;
+    public ISObject: boolean; 
     constructor() {
         this.type = "";  
         this.url = "";
-        this.data = ""; 
+        this.data = "";
+        this.ISObject = false; 
     }
 } 
 class GQ_GetUserBranch {
@@ -785,15 +787,17 @@ var Ajax = {
             var data = [];
             settings.data = data;
             alert('لا يوجد ');
+            settings.data = "";
         }
-         
-        if (isObject(settings, 'data')) {
-            alert('Object');
+        else if (isObject(settings, 'data')) {
+            //alert('Object');
              
             settings.data = JSON.stringify(settings.data);
+
+            AD.ISObject = true;
         }
         else {
-            alert('Json'); 
+            //alert('Json'); 
 
         }
 
@@ -812,7 +816,9 @@ var Ajax = {
             cache: false,
             async: false,
             success: (d) => {
-                settings.success(d, "", null);
+                debugger
+                var result = JSON.parse(d);
+                settings.success(result, "", null);
                 $(".waitMe").removeAttr("style").fadeOut(2500);
 
 

@@ -392,6 +392,7 @@ var Ajax_Data = /** @class */ (function () {
         this.type = "";
         this.url = "";
         this.data = "";
+        this.ISObject = false;
     }
     return Ajax_Data;
 }());
@@ -585,13 +586,15 @@ var Ajax = {
             var data = [];
             settings.data = data;
             alert('لا يوجد ');
+            settings.data = "";
         }
-        if (isObject(settings, 'data')) {
-            alert('Object');
+        else if (isObject(settings, 'data')) {
+            //alert('Object');
             settings.data = JSON.stringify(settings.data);
+            AD.ISObject = true;
         }
         else {
-            alert('Json');
+            //alert('Json'); 
         }
         AD.type = settings.type;
         var URL = settings.url.replace($("#GetAPIUrl").val(), "");
@@ -607,7 +610,9 @@ var Ajax = {
             cache: false,
             async: false,
             success: function (d) {
-                settings.success(d, "", null);
+                debugger;
+                var result = JSON.parse(d);
+                settings.success(result, "", null);
                 $(".waitMe").removeAttr("style").fadeOut(2500);
             },
             error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
