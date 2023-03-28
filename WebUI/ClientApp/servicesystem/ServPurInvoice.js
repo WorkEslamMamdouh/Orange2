@@ -560,6 +560,7 @@ var ServPurInvoice;
         //***new
         DetailList = HeaderWithDetailModel.AQVAT_GetPurInvoiceDetail;
         EditModeFlag = false;
+        isNew = false;
     }
     function DisplayInvoicesHeader(invoiceID) {
         ModelPurInvoiceHeader = new Array();
@@ -2226,6 +2227,7 @@ var ServPurInvoice;
         var DetailForSelectedVendorSR = DetailList.filter(function (x) { return x.VND_SERIAL == CurrentVendorSerial; });
         DisplayDetail(DetailForSelectedVendorSR);
         //******
+        debugger;
         if (EditModeFlag == false) {
             DisableControls();
         }

@@ -606,6 +606,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
         DetailList = HeaderWithDetailModel.AQVAT_GetPurInvoiceDetail;
         EditModeFlag = false;
+        isNew = false;
     }
     function DisplayInvoicesHeader(invoiceID: number) {
         ModelPurInvoiceHeader = new Array<AQVAT_GetPurInvoiceHeader>();
@@ -2757,6 +2758,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         DisplayDetail(DetailForSelectedVendorSR);
         //******
 
+        debugger
         if (EditModeFlag == false) {
             DisableControls();
         }
