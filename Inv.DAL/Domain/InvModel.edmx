@@ -2913,6 +2913,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="LabourCost" Type="numeric" Precision="18" Scale="2" />
           <Property Name="MaterialCost" Type="numeric" Precision="18" Scale="2" />
           <Property Name="InputItemCost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="TrType" Type="int" />
         </EntityType>
         <EntityType Name="I_TR_CollectDetail">
           <Key>
@@ -4433,6 +4434,52 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetCollectDetail' does not have 
           <Property Name="UomCode" Type="nvarchar" MaxLength="25" />
           <Property Name="u_DescA" Type="nvarchar" MaxLength="100" />
           <Property Name="u_DescE" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.IQ_GetCollectList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="IQ_GetCollectList">
+          <Key>
+            <PropertyRef Name="CollectID" />
+            <PropertyRef Name="ItemFamilyID" />
+          </Key>
+          <Property Name="CollectID" Type="int" Nullable="false" />
+          <Property Name="TrNo" Type="int" />
+          <Property Name="RefNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrDate" Type="smalldatetime" />
+          <Property Name="TrDateH" Type="nvarchar" MaxLength="20" />
+          <Property Name="StoreID" Type="int" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="VoucherNo" Type="int" />
+          <Property Name="VoucherType" Type="tinyint" />
+          <Property Name="CreatedAt" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="25" />
+          <Property Name="UpdatedAt" Type="smalldatetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="25" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="LabourCost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MaterialCost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="InputItemCost" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Qty" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="NewUnitCost" Type="numeric" Precision="19" Scale="2" />
+          <Property Name="OutValue" Type="numeric" Precision="38" Scale="4" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="25" />
+          <Property Name="Itm_DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Itm_DescE" Type="nvarchar" MaxLength="100" />
+          <Property Name="UomCode" Type="nvarchar" MaxLength="25" />
+          <Property Name="Uom_DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Uom_DescE" Type="nvarchar" MaxLength="100" />
+          <Property Name="ItemFamilyID" Type="int" Nullable="false" />
+          <Property Name="FamilyCode" Type="nvarchar" MaxLength="25" />
+          <Property Name="fmly_DescA" Type="nvarchar" MaxLength="100" />
+          <Property Name="fmly_DescE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CatID" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="TrType" Type="int" />
+          <Property Name="Typ_DescA" Type="nvarchar" MaxLength="50" />
+          <Property Name="Typ_DescE" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6663,6 +6710,9 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
           <Parameter Name="RepType" Type="int" Mode="In" />
           <Parameter Name="TrType" Type="int" Mode="In" />
+          <Parameter Name="CatID" Type="int" Mode="In" />
+          <Parameter Name="ItemFamId" Type="int" Mode="In" />
+          <Parameter Name="ItemID" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
           <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
           <Parameter Name="Status" Type="int" Mode="In" />
@@ -8890,6 +8940,48 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetCollectDetail].[u_DescA] AS [u_DescA], 
     [IQ_GetCollectDetail].[u_DescE] AS [u_DescE]
     FROM [dbo].[IQ_GetCollectDetail] AS [IQ_GetCollectDetail]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="IQ_GetCollectList" EntityType="Self.IQ_GetCollectList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [IQ_GetCollectList].[CollectID] AS [CollectID], 
+    [IQ_GetCollectList].[TrNo] AS [TrNo], 
+    [IQ_GetCollectList].[RefNO] AS [RefNO], 
+    [IQ_GetCollectList].[TrDate] AS [TrDate], 
+    [IQ_GetCollectList].[TrDateH] AS [TrDateH], 
+    [IQ_GetCollectList].[StoreID] AS [StoreID], 
+    [IQ_GetCollectList].[Remark] AS [Remark], 
+    [IQ_GetCollectList].[IsPosted] AS [IsPosted], 
+    [IQ_GetCollectList].[VoucherNo] AS [VoucherNo], 
+    [IQ_GetCollectList].[VoucherType] AS [VoucherType], 
+    [IQ_GetCollectList].[CreatedAt] AS [CreatedAt], 
+    [IQ_GetCollectList].[CreatedBy] AS [CreatedBy], 
+    [IQ_GetCollectList].[UpdatedAt] AS [UpdatedAt], 
+    [IQ_GetCollectList].[UpdatedBy] AS [UpdatedBy], 
+    [IQ_GetCollectList].[CompCode] AS [CompCode], 
+    [IQ_GetCollectList].[BranchCode] AS [BranchCode], 
+    [IQ_GetCollectList].[Status] AS [Status], 
+    [IQ_GetCollectList].[LabourCost] AS [LabourCost], 
+    [IQ_GetCollectList].[MaterialCost] AS [MaterialCost], 
+    [IQ_GetCollectList].[InputItemCost] AS [InputItemCost], 
+    [IQ_GetCollectList].[Qty] AS [Qty], 
+    [IQ_GetCollectList].[NewUnitCost] AS [NewUnitCost], 
+    [IQ_GetCollectList].[OutValue] AS [OutValue], 
+    [IQ_GetCollectList].[ItemCode] AS [ItemCode], 
+    [IQ_GetCollectList].[Itm_DescA] AS [Itm_DescA], 
+    [IQ_GetCollectList].[Itm_DescE] AS [Itm_DescE], 
+    [IQ_GetCollectList].[UomCode] AS [UomCode], 
+    [IQ_GetCollectList].[Uom_DescA] AS [Uom_DescA], 
+    [IQ_GetCollectList].[Uom_DescE] AS [Uom_DescE], 
+    [IQ_GetCollectList].[ItemFamilyID] AS [ItemFamilyID], 
+    [IQ_GetCollectList].[FamilyCode] AS [FamilyCode], 
+    [IQ_GetCollectList].[fmly_DescA] AS [fmly_DescA], 
+    [IQ_GetCollectList].[fmly_DescE] AS [fmly_DescE], 
+    [IQ_GetCollectList].[CatID] AS [CatID], 
+    [IQ_GetCollectList].[ItemID] AS [ItemID], 
+    [IQ_GetCollectList].[TrType] AS [TrType], 
+    [IQ_GetCollectList].[Typ_DescA] AS [Typ_DescA], 
+    [IQ_GetCollectList].[Typ_DescE] AS [Typ_DescE]
+    FROM [dbo].[IQ_GetCollectList] AS [IQ_GetCollectList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetCustomer" EntityType="Self.IQ_GetCustomer" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -11250,31 +11342,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="I_TR_Collect" EntityType="InvModel.I_TR_Collect" />
           <EntitySet Name="I_TR_CollectDetail" EntityType="InvModel.I_TR_CollectDetail" />
           <EntitySet Name="IQ_GetCollectDetail" EntityType="InvModel.IQ_GetCollectDetail" />
-          <FunctionImport Name="IProc_Prnt_Collect" ReturnType="Collection(InvModel.IProc_Prnt_Collect_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="TRId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="IProc_Rep_CollectList" ReturnType="Collection(InvModel.IProc_Rep_CollectList_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="TrType" Mode="In" Type="Int32" />
-            <Parameter Name="FromDate" Mode="In" Type="String" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
-            <Parameter Name="Status" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="IProc_Rpt_AccBankDetail" ReturnType="Collection(InvModel.IProc_Rpt_AccBankDetail_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
             <Parameter Name="bra" Mode="In" Type="Int32" />
@@ -12093,6 +12160,35 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           </FunctionImport>
           <EntitySet Name="G_LnkTrans_Comp" EntityType="InvModel.G_LnkTrans_Comp" />
           <EntitySet Name="GQ_GetLnkTransComp" EntityType="InvModel.GQ_GetLnkTransComp" />
+          <EntitySet Name="IQ_GetCollectList" EntityType="InvModel.IQ_GetCollectList" />
+          <FunctionImport Name="IProc_Prnt_Collect" ReturnType="Collection(InvModel.IProc_Prnt_Collect_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IProc_Rep_CollectList" ReturnType="Collection(InvModel.IProc_Rep_CollectList_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="TrType" Mode="In" Type="Int32" />
+            <Parameter Name="CatID" Mode="In" Type="Int32" />
+            <Parameter Name="ItemFamId" Mode="In" Type="Int32" />
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -19701,6 +19797,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="LabourCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="MaterialCost" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="InputItemCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TrType" Type="Int32" />
         </EntityType>
         <EntityType Name="I_TR_CollectDetail">
           <Key>
@@ -19746,97 +19843,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="u_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="u_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="IProc_Prnt_Collect_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="Boolean" Name="IsInput" Nullable="true" />
-          <Property Type="Int32" Name="ItemID" Nullable="true" />
-          <Property Type="Int32" Name="UnitID" Nullable="true" />
-          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="OnhandQty" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="UnitCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="NewUnitCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="StkUnitCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="StockOnhandQty" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="Decimal" Name="CostFactorPrc" Nullable="true" Precision="19" Scale="5" />
-          <Property Type="Decimal" Name="NewStockUnitCost" Nullable="true" Precision="19" Scale="2" />
-          <Property Type="String" Name="ItemCode" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="itm_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="itm_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="UomCode" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="u_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="u_DescE" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="CollectID" Nullable="false" />
-          <Property Type="Int32" Name="TrNo" Nullable="true" />
-          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="StoreID" Nullable="true" />
-          <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
-          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
-          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
-          <Property Type="Byte" Name="VoucherType" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="Int32" Name="CompCode" Nullable="true" />
-          <Property Type="Int32" Name="BranchCode" Nullable="true" />
-          <Property Type="Int32" Name="Status" Nullable="true" />
-          <Property Type="Decimal" Name="LabourCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="MaterialCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="InputItemCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="CollectDetailID" Nullable="false" />
-          <Property Type="String" Name="store_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="STORE_CODE" Nullable="true" />
-          <Property Type="String" Name="store_DescE" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="IProc_Rep_CollectList_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="CollectID" Nullable="false" />
-          <Property Type="Int32" Name="TrNo" Nullable="true" />
-          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
-          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="StoreID" Nullable="true" />
-          <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
-          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
-          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
-          <Property Type="Byte" Name="VoucherType" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
-          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
-          <Property Type="Int32" Name="CompCode" Nullable="true" />
-          <Property Type="Int32" Name="BranchCode" Nullable="true" />
-          <Property Type="Int32" Name="Status" Nullable="true" />
-          <Property Type="Decimal" Name="LabourCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="MaterialCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="InputItemCost" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="store_DescA" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="STORE_CODE" Nullable="true" />
-          <Property Type="String" Name="store_DescE" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="IProc_Rpt_AccBankDetail_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
           <Property Type="Int32" Name="Bra" Nullable="true" />
@@ -22804,6 +22810,170 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Comp_INTEGRATE" Type="Boolean" />
         </EntityType>
+        <EntityType Name="IQ_GetCollectList">
+          <Key>
+            <PropertyRef Name="CollectID" />
+            <PropertyRef Name="ItemFamilyID" />
+          </Key>
+          <Property Name="CollectID" Type="Int32" Nullable="false" />
+          <Property Name="TrNo" Type="Int32" />
+          <Property Name="RefNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrDate" Type="DateTime" Precision="0" />
+          <Property Name="TrDateH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StoreID" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="VoucherNo" Type="Int32" />
+          <Property Name="VoucherType" Type="Byte" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LabourCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MaterialCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="InputItemCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Qty" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="NewUnitCost" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="OutValue" Type="Decimal" Precision="38" Scale="4" />
+          <Property Name="ItemCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Itm_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Itm_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UomCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Uom_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemFamilyID" Type="Int32" Nullable="false" />
+          <Property Name="FamilyCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="fmly_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fmly_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CatID" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="TrType" Type="Int32" />
+          <Property Name="Typ_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Typ_DescE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="IProc_Prnt_Collect_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="Boolean" Name="IsInput" Nullable="true" />
+          <Property Type="Int32" Name="ItemID" Nullable="true" />
+          <Property Type="Int32" Name="UnitID" Nullable="true" />
+          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="OnhandQty" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="UnitCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NewUnitCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="StkUnitCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="StockOnhandQty" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="CostFactorPrc" Nullable="true" Precision="19" Scale="5" />
+          <Property Type="Decimal" Name="NewStockUnitCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="String" Name="ItemCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="itm_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="itm_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UomCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="u_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="u_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CollectID" Nullable="false" />
+          <Property Type="Int32" Name="TrNo" Nullable="true" />
+          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="StoreID" Nullable="true" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
+          <Property Type="Byte" Name="VoucherType" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Decimal" Name="LabourCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MaterialCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="InputItemCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="CollectDetailID" Nullable="false" />
+          <Property Type="String" Name="store_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="STORE_CODE" Nullable="true" />
+          <Property Type="String" Name="store_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="TrType" Nullable="true" />
+          <Property Type="String" Name="Typ_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Typ_DescE" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="IProc_Rep_CollectList_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CatDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_FamilyDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_FamilyDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ItemDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ItemDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="CollectID" Nullable="false" />
+          <Property Type="Int32" Name="TrNo" Nullable="true" />
+          <Property Type="String" Name="RefNO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="TrDateH" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="StoreID" Nullable="true" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+          <Property Type="Int32" Name="VoucherNo" Nullable="true" />
+          <Property Type="Byte" Name="VoucherType" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="UpdatedAt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="UpdatedBy" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Decimal" Name="LabourCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MaterialCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="InputItemCost" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Qty" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="NewUnitCost" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="OutValue" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="String" Name="ItemCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Itm_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Itm_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UomCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Uom_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Uom_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ItemFamilyID" Nullable="false" />
+          <Property Type="String" Name="FamilyCode" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="fmly_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="fmly_DescE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CatID" Nullable="true" />
+          <Property Type="Int32" Name="ItemID" Nullable="true" />
+          <Property Type="Int32" Name="TrType" Nullable="true" />
+          <Property Type="String" Name="Typ_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Typ_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="store_DescA" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="STORE_CODE" Nullable="true" />
+          <Property Type="String" Name="store_DescE" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -30606,6 +30776,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_TR_Collect">
             <EntityTypeMapping TypeName="InvModel.I_TR_Collect">
               <MappingFragment StoreEntitySet="I_TR_Collect">
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
                 <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
                 <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
                 <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
@@ -30675,105 +30846,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Prnt_Collect" FunctionName="InvModel.Store.IProc_Prnt_Collect">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Prnt_Collect_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="IsInput" ColumnName="IsInput" />
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="OnhandQty" ColumnName="OnhandQty" />
-                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
-                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
-                <ScalarProperty Name="StkUnitCost" ColumnName="StkUnitCost" />
-                <ScalarProperty Name="StockQty" ColumnName="StockQty" />
-                <ScalarProperty Name="StockOnhandQty" ColumnName="StockOnhandQty" />
-                <ScalarProperty Name="CostFactorPrc" ColumnName="CostFactorPrc" />
-                <ScalarProperty Name="NewStockUnitCost" ColumnName="NewStockUnitCost" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="itm_DescA" ColumnName="itm_DescA" />
-                <ScalarProperty Name="itm_DescE" ColumnName="itm_DescE" />
-                <ScalarProperty Name="UomCode" ColumnName="UomCode" />
-                <ScalarProperty Name="u_DescA" ColumnName="u_DescA" />
-                <ScalarProperty Name="u_DescE" ColumnName="u_DescE" />
-                <ScalarProperty Name="CollectID" ColumnName="CollectID" />
-                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
-                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
-                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
-                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
-                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
-                <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
-                <ScalarProperty Name="CollectDetailID" ColumnName="CollectDetailID" />
-                <ScalarProperty Name="store_DescA" ColumnName="store_DescA" />
-                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
-                <ScalarProperty Name="store_DescE" ColumnName="store_DescE" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="IProc_Rep_CollectList" FunctionName="InvModel.Store.IProc_Rep_CollectList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.IProc_Rep_CollectList_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
-                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
-                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="CollectID" ColumnName="CollectID" />
-                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
-                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
-                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
-                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
-                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
-                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
-                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
-                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
-                <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
-                <ScalarProperty Name="store_DescA" ColumnName="store_DescA" />
-                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
-                <ScalarProperty Name="store_DescE" ColumnName="store_DescE" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="IProc_Rpt_AccBankDetail" FunctionName="InvModel.Store.IProc_Rpt_AccBankDetail">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InvModel.IProc_Rpt_AccBankDetail_Result">
@@ -33942,6 +34014,178 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="IQ_GetCollectList">
+            <EntityTypeMapping TypeName="InvModel.IQ_GetCollectList">
+              <MappingFragment StoreEntitySet="IQ_GetCollectList">
+                <ScalarProperty Name="Typ_DescE" ColumnName="Typ_DescE" />
+                <ScalarProperty Name="Typ_DescA" ColumnName="Typ_DescA" />
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="fmly_DescE" ColumnName="fmly_DescE" />
+                <ScalarProperty Name="fmly_DescA" ColumnName="fmly_DescA" />
+                <ScalarProperty Name="FamilyCode" ColumnName="FamilyCode" />
+                <ScalarProperty Name="ItemFamilyID" ColumnName="ItemFamilyID" />
+                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
+                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
+                <ScalarProperty Name="UomCode" ColumnName="UomCode" />
+                <ScalarProperty Name="Itm_DescE" ColumnName="Itm_DescE" />
+                <ScalarProperty Name="Itm_DescA" ColumnName="Itm_DescA" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="OutValue" ColumnName="OutValue" />
+                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
+                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
+                <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="CollectID" ColumnName="CollectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Prnt_Collect" FunctionName="InvModel.Store.IProc_Prnt_Collect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Prnt_Collect_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="IsInput" ColumnName="IsInput" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="OnhandQty" ColumnName="OnhandQty" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
+                <ScalarProperty Name="StkUnitCost" ColumnName="StkUnitCost" />
+                <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+                <ScalarProperty Name="StockOnhandQty" ColumnName="StockOnhandQty" />
+                <ScalarProperty Name="CostFactorPrc" ColumnName="CostFactorPrc" />
+                <ScalarProperty Name="NewStockUnitCost" ColumnName="NewStockUnitCost" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="itm_DescA" ColumnName="itm_DescA" />
+                <ScalarProperty Name="itm_DescE" ColumnName="itm_DescE" />
+                <ScalarProperty Name="UomCode" ColumnName="UomCode" />
+                <ScalarProperty Name="u_DescA" ColumnName="u_DescA" />
+                <ScalarProperty Name="u_DescE" ColumnName="u_DescE" />
+                <ScalarProperty Name="CollectID" ColumnName="CollectID" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
+                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
+                <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
+                <ScalarProperty Name="CollectDetailID" ColumnName="CollectDetailID" />
+                <ScalarProperty Name="store_DescA" ColumnName="store_DescA" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="store_DescE" ColumnName="store_DescE" />
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
+                <ScalarProperty Name="Typ_DescA" ColumnName="Typ_DescA" />
+                <ScalarProperty Name="Typ_DescE" ColumnName="Typ_DescE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IProc_Rep_CollectList" FunctionName="InvModel.Store.IProc_Rep_CollectList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.IProc_Rep_CollectList_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_CatDSA" ColumnName="Par_CatDSA" />
+                <ScalarProperty Name="Par_CatDSE" ColumnName="Par_CatDSE" />
+                <ScalarProperty Name="Par_FamilyDSA" ColumnName="Par_FamilyDSA" />
+                <ScalarProperty Name="Par_FamilyDSE" ColumnName="Par_FamilyDSE" />
+                <ScalarProperty Name="Par_ItemDSA" ColumnName="Par_ItemDSA" />
+                <ScalarProperty Name="Par_ItemDSE" ColumnName="Par_ItemDSE" />
+                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
+                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="CollectID" ColumnName="CollectID" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="RefNO" ColumnName="RefNO" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrDateH" ColumnName="TrDateH" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+                <ScalarProperty Name="VoucherType" ColumnName="VoucherType" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LabourCost" ColumnName="LabourCost" />
+                <ScalarProperty Name="MaterialCost" ColumnName="MaterialCost" />
+                <ScalarProperty Name="InputItemCost" ColumnName="InputItemCost" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="NewUnitCost" ColumnName="NewUnitCost" />
+                <ScalarProperty Name="OutValue" ColumnName="OutValue" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="Itm_DescA" ColumnName="Itm_DescA" />
+                <ScalarProperty Name="Itm_DescE" ColumnName="Itm_DescE" />
+                <ScalarProperty Name="UomCode" ColumnName="UomCode" />
+                <ScalarProperty Name="Uom_DescA" ColumnName="Uom_DescA" />
+                <ScalarProperty Name="Uom_DescE" ColumnName="Uom_DescE" />
+                <ScalarProperty Name="ItemFamilyID" ColumnName="ItemFamilyID" />
+                <ScalarProperty Name="FamilyCode" ColumnName="FamilyCode" />
+                <ScalarProperty Name="fmly_DescA" ColumnName="fmly_DescA" />
+                <ScalarProperty Name="fmly_DescE" ColumnName="fmly_DescE" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="TrType" ColumnName="TrType" />
+                <ScalarProperty Name="Typ_DescA" ColumnName="Typ_DescA" />
+                <ScalarProperty Name="Typ_DescE" ColumnName="Typ_DescE" />
+                <ScalarProperty Name="store_DescA" ColumnName="store_DescA" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="store_DescE" ColumnName="store_DescE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

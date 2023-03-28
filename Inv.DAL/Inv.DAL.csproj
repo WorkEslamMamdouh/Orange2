@@ -719,6 +719,9 @@
     <Compile Include="Domain\IQ_GetCollectDetail.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\IQ_GetCollectList.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\IQ_GetCustomer.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
