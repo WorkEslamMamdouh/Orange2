@@ -324,8 +324,16 @@ namespace App {
             return Number(num);
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+            if (stfix < 0) {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+
+            }
+            else {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
@@ -529,6 +537,16 @@ function GetBranchs() {
     });
 }
 
+class Ajax_Data {
+    public type: string; 
+    public url: string;
+    public data: any; 
+    constructor() {
+        this.type = "";  
+        this.url = "";
+        this.data = ""; 
+    }
+} 
 class GQ_GetUserBranch {
     public USER_CODE: string;
     public COMP_CODE: number;
@@ -739,6 +757,54 @@ var Ajax = {
             type: settings.type,
             url: settings.url,
             data: settings.data,
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: (d) => {
+                settings.success(d, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+
+
+
+            },
+            error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        })
+    },
+    CallsyncUi: <T>(settings: JQueryAjaxSettings) => {
+        CheckTime();
+
+        //
+        debugger
+
+        let AD: Ajax_Data = new Ajax_Data();
+
+        if (typeof settings.data == "undefined") {
+            var data = [];
+            settings.data = data;
+            alert('لا يوجد ');
+        }
+         
+        if (isObject(settings, 'data')) {
+            alert('Object');
+             
+            settings.data = JSON.stringify(settings.data);
+        }
+        else {
+            alert('Json'); 
+
+        }
+
+        AD.type = settings.type;
+        let URL = settings.url.replace($("#GetAPIUrl").val(), "");
+        AD.url = URL;
+        AD.data = settings.data;
+
+        $.ajax({ 
+            url: Url.Action("AccessApi", "GeneralAPI"),
+            data: { data: JSON.stringify(AD) },
             headers: {
                 'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
@@ -2841,4 +2907,41 @@ function Event_key(key: string, Nameinput: string, NameBtnEvent: string) {
             document.getElementById(NameBtnEvent).click();
         }
     });
+}
+
+
+function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> {
+
+    debugger
+
+    let flagNewH;
+    flagNewH = false
+    let NewModel = new Array<any>();
+    for (var i = 0; i < DataList.length; i++) {
+        debugger;
+        NewModel.push(DataList[i])
+        if (flagNewH == true) {
+            if (NewModel[i].StatusFlag != 'i' && NewModel[i].StatusFlag != 'd' && NewModel[i].StatusFlag != 'm') {
+                NewModel[i].StatusFlag = 'u';
+            }
+        }
+        let List = DataList[i];
+        if (List[Key] == value) {
+
+            let ModelPur = JSON.parse(JSON.stringify(DataList[i]));
+
+            ModelPur[Key] = Number(DataList.length + 20)
+            ModelPur.StatusFlag = 'i';
+            NewModel.push(ModelPur);
+            flagNewH = true;
+
+
+        }
+
+
+
+    }
+
+    return NewModel;
+
 }

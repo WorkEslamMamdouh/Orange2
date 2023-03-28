@@ -12,7 +12,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var sys: SystemTools = new SystemTools();
     var VatPrc;
     //****controls
-    var btnAdd: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement; 
     var btnShow: HTMLButtonElement;
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
@@ -40,6 +40,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var List_StatusEn: Array<string> = new Array<string>();
     var GetPurInvoiceDet: AQ_ServPurInvoiceMasterDetail = new AQ_ServPurInvoiceMasterDetail();
     var Menu: AVAT_TR_PurInvoice = new AVAT_TR_PurInvoice();
+    var ModelPurInvSingleModel: AQVAT_GetPurInvoiceHeader = new AQVAT_GetPurInvoiceHeader();
+    var ModelPurInvHeader: Array<AQVAT_GetPurInvoiceHeader> = new Array<AQVAT_GetPurInvoiceHeader>();
     var ModelPurInvoiceHeader: Array<AQVAT_GetPurInvoiceHeader> = new Array<AQVAT_GetPurInvoiceHeader>();
     var ModelPurInvoiceDetail: Array<AQVAT_GetPurInvoiceDetail> = new Array<AQVAT_GetPurInvoiceDetail>();
     var SalesmanDetails: Array<I_Sls_D_Salesman> = new Array<I_Sls_D_Salesman>();
@@ -52,9 +54,11 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var CategorDetails: Array<AVAT_D_SrvCategory> = new Array<AVAT_D_SrvCategory>();
     var DetailsVatNature: Array<G_VatNature> = new Array<G_VatNature>();
     var Tax_Type_Model: Tax_Type = new Tax_Type();
+    var CostCentreDetailsCCDTIst: Array<A_CCDT_COSTCENTERS> = new Array<A_CCDT_COSTCENTERS>();
     var CostCentreDetailsIst: Array<G_COST_CENTER> = new Array<G_COST_CENTER>();
     var CostCenterDetails: G_COST_CENTER = new G_COST_CENTER();
     var HeaderWithDetailModel: AQ_ServPurInvoiceMasterDetail = new AQ_ServPurInvoiceMasterDetail();
+    var CostCentreDetailsCCDT: A_CCDT_COSTCENTERS = new A_CCDT_COSTCENTERS();
 
     var InvHeaderAssign: Array<AVAT_TR_PurInvoiceHeader> = new Array<AVAT_TR_PurInvoiceHeader>();
     var InvHeaderAssignSingle: AVAT_TR_PurInvoiceHeader = new AVAT_TR_PurInvoiceHeader();
@@ -62,7 +66,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var InvDetailAssignSingle: AVAT_TR_PurInvoiceDetail = new AVAT_TR_PurInvoiceDetail();
 
     var MasterDetailModel: ServPurchseInvoiceMasterDetail = new ServPurchseInvoiceMasterDetail();
-
+    var AD_VatTypeDetails: A_D_VAT_TYPE = new A_D_VAT_TYPE();
     // ------------- global Variables
     var CountGrid1: number = 0;
     var CountGrid2: number = 0;
@@ -70,7 +74,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var Tax_Rate = 0;
     var vatType: number;
-    var GlobalMenuID: number;
+    var GlobalInvoiceId: number;
     var FlagAfterInsertOrUpdate: boolean = false;
     //****************************New****************************************//
     var CurrentVendorSerial = 0;
@@ -98,7 +102,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
-    //var btnPrint: HTMLButtonElement;
+    var btnPrint: HTMLButtonElement;
+    var DoubleClicked = false;
+    var Show: boolean = true;
+    var ccdtype;
+    var FinYear;
+    let flag_Click = false;
     //------------------------------------------------------ Main Region------------------------
     export function InitializeComponent() {
         //     system
@@ -107,12 +116,14 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         }
         else {
             document.getElementById('Screen_name').innerHTML = "Purchaes";
-        }
+        } 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
+        FinYear = Number(SysSession.CurrentEnvironment.CurrentYear);
         vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
         // calling functions
         InitializeControls();
+
         InitializeEvents();
         FillStatus();
         FilldrpImportInvoiceFilter();
@@ -124,12 +135,16 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         FillddlFamily();
         GetAllCostCenters();
         GetAllVendors();
+
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear);
+
         GetAllVatDetails();
+
     }
     function InitializeControls() {
         drpSrchStatus = document.getElementById("drpSrchStatus") as HTMLSelectElement;
         drpImportInvoiceFilter = document.getElementById("drpImportInvoiceFilter") as HTMLSelectElement;
-        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
+        btnAdd = document.getElementById("btnAdd") as HTMLButtonElement; 
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
@@ -166,13 +181,13 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        //   btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
+        btnPrint = document.getElementById("btnPrint") as HTMLInputElement;
 
 
     }
-    function InitializeEvents() {
+    function InitializeEvents() { 
         btnShow.onclick = btnShow_onclick;
-        btnAdd.onclick = btnadd_onclick;
+        btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onclick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
@@ -185,19 +200,21 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-        // btnPrint.onclick = () => { PrintReport(4); }
-        btnPrintTransaction.onclick = btnPrintReceive_onclick;
+        btnPrint.onclick = () => { PrintReport(4); }
+        btnPrintTransaction.onclick = btnPrintTransaction_onclick;
 
 
     }
     //--------------------------------------------------- butttons Region----------------------------------------------
     function btnShow_onclick() {
+        $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
         InitializeGrid();
         $("#divDetails").addClass("display_none");
         $("#divEdit").addClass("display_none");
         $("#divMasterGridiv").removeClass("display_none");
     }
-    function btnadd_onclick() {
+    function btnAdd_onclick() {
+        debugger
         if (!SysSession.CurrentPrivileges.AddNew) return;
         isNew = true;
         EditModeFlag = false
@@ -210,38 +227,14 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         EnableControls();
         AddNewRow_Header();
         $("#divEdit").removeClass("display_none");
+        ///////////////////////////Donia
+        debugger
+        if (!SysSession.CurrentPrivileges.CUSTOM1) { $("#chkClosed").removeAttr("disabled"); }
+        else { $("#chkClosed").attr("disabled", "disabled"); }
+
+        Selected_Data = new Array<AVAT_TR_PurInvoice>();
     }
-
-
-    //function btnSave_onclick() {
-    //    Assign();
-    //    if (!ValidationMenu())
-    //        return;
-
-    //    for (let i = 0; i < CountGrid1; i++) {
-    //        if (!ValidationHeaderWithDetail(i))
-    //            return;
-    //    }
-
-    //    for (let i = 0; i < CountGrid1; i++) {
-    //        if (!Validation_Grid_Header(i))
-    //            return;
-    //    }
-
-    //    for (let i = 0; i < DetailList.length; i++) {
-    //        if (!ValidationDetailBeforeSave(i))
-    //            return;
-    //    }
-
-    //    if (isNew == true) {
-    //        Insert();
-    //    } else {
-    //        Update();
-    //    }
-    //    EditModeFlag = false;
-    //    isNew = false;
-    //}
-
+     
 
     function btnBack_onclick() {
 
@@ -272,11 +265,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         EnableControls();
         txtUpdatedBy.value = SysSession.CurrentEnvironment.UserCode;
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
+
+
     }
     function txtSearch_Change() {
 
         $("#divMasterGrid").jsGrid("option", "pageIndex", 1);
-
 
         if (txtSearch.value != "") {
 
@@ -291,54 +285,28 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             MasterGrid.Bind();
         }
     }
-    //-------------------------------------------------------main functions ----------------------------------------------//
-    //function Assign() {
-    //    MasterDetailModel = new ServPurchseInvoiceMasterDetail();
-    //    // Header
-    //    Menu = new AVAT_TR_PurInvoice();
-    //    Menu.CompCode = compcode;
-    //    Menu.BranchCode = BranchCode;
-    //    Menu.InvoiceId = 0;
-    //    Menu.TR_NO = 0;
-    //    Menu.DocNo = "";
-    //    Menu.TR_DATE = txtTR_DATE.value;
-    //    Menu.PERSON = txtPerson.value;
-    //    Menu.TOTAL = Number(txtInvTotal.value);
-    //    Menu.DISCOUNT = Number(txtDiscountValue.value);
-    //    Menu.PAID = 0;
-    //    Menu.JOURNAL_NO = 0;
-    //    Menu.JOURNAL_RET_NO = 0;
-    //    Menu.CLOSED = chkClosed.checked;
-    //    Menu.CANCEL = false;
-    //    Menu.Remark = txtRemark.value;
-
-    //    Menu.IsPosted = false;
-    //    Menu.ACTUAL_DATE = "";
-    //    Menu.PrntNo = "";
-    //    Menu.Ref_No = txtRefNum.value;
-    //    Menu.Vat = Number(txtVat.value);
-    //    Menu.NetATax = Number(txtNet.value);
-    //    Menu.InvoiceDate = "";
-    //    Menu.ImportInvoice = chk_ImportInvoiceDetail.checked;
-    //    Menu.CCDT_CODE = "";
-    //    Menu.ImportInvoiceDesc = "";
-
-    //    // Invoices Headers
-    //    for (var i = 0; i < InvHeaderAssign.length; i++) {
-    //        AssignForGrids(InvHeaderAssign[i].VND_SERIAL, i);
-    //    }
-    //    MasterDetailModel.AVAT_TR_PurInvoiceHeader = InvHeaderAssign;
-
-    //    // Invoices Details
-    //    MasterDetailModel.AVAT_TR_PurInvoiceDetail = DetailList;
 
 
-    //}
+    function GetAllVatDetails() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GenVatType", "GetAll"),
+            data: {
+                CompCode: compcode, VatType: 2, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
 
-
+                    VatDetails = result.Response as Array<A_D_VAT_TYPE>;
+                }
+            }
+        });
+    }
 
     function Insert() {
         debugger
+
         Menu.CreatedAt = DateTimeFormat(Date().toString());
         Menu.CreatedBy = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -353,13 +321,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let res = result.Response as AVAT_TR_PurInvoice;
-                    GlobalMenuID = res.InvoiceId;
+                    GlobalInvoiceId = res.InvoiceId;
+                    MasterGrid.SelectedKey = GlobalInvoiceId.toString();
                     updateDocNumber();
                     FlagAfterInsertOrUpdate = true;
                     InitializeGrid();
                     MasterGridDoubleClick();
                     FlagAfterInsertOrUpdate = false;
                     DisplayMassage(" تم اصدار  قائمة رقم  " + res.TR_NO + " ", "An Menu " + res.TR_NO + "number has been issued ", MessageType.Succeed);
+                    EditModeFlag = false;
+                    isNew = false;
+                    CurrentVendorSerial = 0;
+                    $("#btnPrintTransaction").removeClass("display_none");
                     Save_Succ_But();
                 }
             }
@@ -367,6 +340,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
     }
     function Update() {
+
 
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
@@ -379,10 +353,17 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             Menu.InvoiceId = Selected_Data[0].InvoiceId;
             Menu.DocNo = Selected_Data[0].DocNo;
             Menu.TR_NO = Selected_Data[0].TR_NO;
+            Menu.IsPosted = Selected_Data[0].IsPosted;
+            Menu.JOURNAL_NO = Selected_Data[0].JOURNAL_NO;
+
         }
         MasterDetailModel.AVAT_TR_PurInvoice = Menu;
         hd_InvoiceId.value = "0";
-
+        if (chkClosed.checked == true) {
+            if (Selected_Data[0].IsPosted == true) {
+                MessageBox.Show('يرجئ تعديل قيد رقم (' + Selected_Data[0].JOURNAL_NO + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+            }
+        }
         Ajax.Callsync({
             type: "Post",
             url: sys.apiUrl("ServPurInvoice", "UpdatePurchaseInvoice"),
@@ -391,63 +372,80 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let res = result.Response as AVAT_TR_PurInvoice;
-                    GlobalMenuID = res.InvoiceId;
+                    GlobalInvoiceId = res.InvoiceId;
                     FlagAfterInsertOrUpdate = true;
                     InitializeGrid();
                     MasterGridDoubleClick();
                     FlagAfterInsertOrUpdate = false;
                     DisplayMassage(" تم تعديل  قائمة رقم  " + res.TR_NO + " ", "The Menu " + res.TR_NO + "menu number has been editied ", MessageType.Succeed);
+                    EditModeFlag = false;
+                    isNew = false;
+                    CurrentVendorSerial = 0;
+                    $("#btnPrintTransaction").removeClass("display_none");
                     Save_Succ_But();
                 }
             }
         });
     }
     function Open() {
-        if (Selected_Data[0].CLOSED == true && chkClosed.checked == false) {
-            if (txtPerson.disabled == true) {
-                if (!SysSession.CurrentPrivileges.CUSTOM2) return;
-                Assign();
-                for (var i = 0; i < InvHeaderAssign.length; i++) {
-                    DisplayInvoicesDetails(InvHeaderAssign[i].InvoiceHeaderID);
-                }
-                MasterDetailModel.AVAT_TR_PurInvoiceDetail = DetailList;
-                MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-                MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-                Menu.UpdatedAt = DateTimeFormat(Date().toString());
-                Menu.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+        debugger
+        if (isNew != true) {
+            if (Selected_Data[0].CLOSED == true && chkClosed.checked == false) {
+                if (txtPerson.disabled == true) {
+                    if (!SysSession.CurrentPrivileges.CUSTOM2) return;
+                    Assign();
+                    for (var i = 0; i < InvHeaderAssign.length; i++) {
+                        DisplayInvoicesDetails(InvHeaderAssign[i].InvoiceHeaderID);
+                    }
+                    MasterDetailModel.AVAT_TR_PurInvoiceDetail = DetailList;
+                    MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+                    MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
+                    Menu.UpdatedAt = DateTimeFormat(Date().toString());
+                    Menu.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
 
-                Menu.CLOSED = false;
-                if (Selected_Data.length > 0) {
-                    Menu.CreatedAt = Selected_Data[0].CreatedAt;
-                    Menu.CreatedBy = Selected_Data[0].CreatedBy;
-                    Menu.InvoiceId = Selected_Data[0].InvoiceId;
-                    Menu.DocNo = Selected_Data[0].DocNo;
-                    Menu.TR_NO = Selected_Data[0].TR_NO;
-                }
-                MasterDetailModel.AVAT_TR_PurInvoice = Menu;
-                hd_InvoiceId.value = "0";
 
-                Ajax.Callsync({
-                    type: "Post",
-                    url: sys.apiUrl("ServPurInvoice", "OpenPurchaseInvoice"),
-                    data: JSON.stringify(MasterDetailModel),
-                    success: (d) => {
-                        let result = d as BaseResponse;
-                        if (result.IsSuccess) {
-                            let res = result.Response as AVAT_TR_PurInvoice;
-                            GlobalMenuID = res.InvoiceId;
-                            FlagAfterInsertOrUpdate = true;
-                            InitializeGrid();
-                            MasterGridDoubleClick();
-                            FlagAfterInsertOrUpdate = false;
-                            DisplayMassage(" تم فك اعتماد  قائمة رقم  " + res.TR_NO + " ", "The Menu " + res.TR_NO + "menu number has been unauthorized ", MessageType.Succeed);
+                    Menu.CLOSED = false;
+                    if (Selected_Data.length > 0) {
+                        Menu.CreatedAt = Selected_Data[0].CreatedAt;
+                        Menu.CreatedBy = Selected_Data[0].CreatedBy;
+                        Menu.InvoiceId = Selected_Data[0].InvoiceId;
+                        Menu.DocNo = Selected_Data[0].DocNo;
+                        Menu.TR_NO = Selected_Data[0].TR_NO;
+
+                        Menu.IsPosted = Selected_Data[0].IsPosted;
+                        Menu.JOURNAL_NO = Selected_Data[0].JOURNAL_NO;
+
+                        if (Selected_Data[0].IsPosted == true) {
+                            MessageBox.Show('يرجئ تعديل قيد رقم (' + Selected_Data[0].JOURNAL_NO + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
                         }
                     }
-                });
-            }
-            if (!SysSession.CurrentPrivileges.CUSTOM1) {
-                DisplayMassage(" لا يوجد لديك صلاحيه للاعتماد ", "there is no prevelge for authorize", MessageType.Error);
+                    MasterDetailModel.AVAT_TR_PurInvoice = Menu;
+                    hd_InvoiceId.value = "0";
 
+
+
+                    Ajax.Callsync({
+                        type: "Post",
+                        url: sys.apiUrl("ServPurInvoice", "OpenPurchaseInvoice"),
+                        data: JSON.stringify(MasterDetailModel),
+                        success: (d) => {
+                            let result = d as BaseResponse;
+                            if (result.IsSuccess) {
+                                let res = result.Response as AVAT_TR_PurInvoice;
+                                GlobalInvoiceId = res.InvoiceId;
+                                FlagAfterInsertOrUpdate = true;
+                                InitializeGrid();
+                                MasterGridDoubleClick();
+                                FlagAfterInsertOrUpdate = false;
+                                DisplayMassage(" تم فك اعتماد  قائمة رقم  " + res.TR_NO + " ", "The Menu " + res.TR_NO + "menu number has been unauthorized ", MessageType.Succeed);
+                            }
+                        }
+                    });
+                }
+                if (!SysSession.CurrentPrivileges.CUSTOM1) {
+                    DisplayMassage(" لا يوجد لديك صلاحيه للاعتماد ", "there is no prevelge for authorize", MessageType.Error);
+
+                }
             }
         }
     }
@@ -512,12 +510,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         MasterGrid.Columns = [
             { title: "Id", name: "InvoiceId", type: "number", width: "05%", css: "display_none" },
             { title: res.Inv_MenuNo, name: "TR_NO", type: "number", width: "10%" },
-            { title: res.App_DocumentNo, name: "DocNo", type: "number", width: "20%" },
+            { title: res.App_DocumentNo, name: "DocNo", type: "text", width: "20%" },
             { title: res.App_date, name: "TR_DATE", type: "text", width: "12%" },
             { title: res.App_Salesman, name: "PERSON", type: "text", width: "30%" },
-            { title: res.I_Total, name: "TOTAL", type: "text", width: "10%" },
-            { title: res.App_Tax, name: "Vat", type: "text", width: "10%" },
-            { title: res.net, name: "NetATax", type: "text", width: "10%" },
+            { title: res.App_total, name: "TOTAL", type: "number", width: "10%" },
+            { title: res.App_Tax, name: "Vat", type: "number", width: "10%" },
+            { title: res.net, name: "NetATax", type: "number", width: "10%" },
             { title: res.Inv_ImportInvoice, name: "ImportInvoiceDesc", type: "text", width: "8%" },
             { title: res.App_State, name: "CLOSEDDesc", type: "text", width: "8%" },
             { title: res.App_Notes, name: "Remark", type: "text", width: "40%" },
@@ -558,22 +556,20 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         clear();
         $("#divDetails").removeClass("display_none");
         $("#divEdit").removeClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
+        $("#btnUpdate").removeClass("display_none"); 
         // Bind Menu
         showFlag = true;
         Selected_Data = new Array<AVAT_TR_PurInvoice>();
-        //DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
-
         if (FlagAfterInsertOrUpdate == true) {
-            Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(x => x.InvoiceId == GlobalMenuID);
+            Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(x => x.InvoiceId == GlobalInvoiceId);
             txtMenuNum.value = Selected_Data[0].TR_NO.toString();
         } else {
             Selected_Data = AQ_ServPurInvoiceMasterDetailModel.filter(x => x.InvoiceId == Number(MasterGrid.SelectedKey));
         }
         if (Selected_Data.length > 0) {
-            GlobalMenuID = Selected_Data[0].InvoiceId
+            GlobalInvoiceId = Selected_Data[0].InvoiceId
             txtMenuNum.value = Selected_Data[0].TR_NO.toString();
-            txtRefNum.value = Selected_Data[0].Ref_No.toString();
+            txtRefNum.value = Selected_Data[0].Ref_No;
             chk_ImportInvoiceDetail.checked = Selected_Data[0].ImportInvoice;
             txtTR_DATE.value = Selected_Data[0].TR_DATE.toString();
 
@@ -593,7 +589,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         }
 
         // Bind Invoices Header
-        DisplayInvoicesHeader(GlobalMenuID);
+        DisplayInvoicesHeader(GlobalInvoiceId);
 
         // Bind Invoices Details
         DisableControls();
@@ -609,6 +605,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         //***new
 
         DetailList = HeaderWithDetailModel.AQVAT_GetPurInvoiceDetail;
+        EditModeFlag = false;
     }
     function DisplayInvoicesHeader(invoiceID: number) {
         ModelPurInvoiceHeader = new Array<AQVAT_GetPurInvoiceHeader>();
@@ -627,6 +624,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             }
         });
 
+        debugger
         ModelPurInvoiceHeader = HeaderWithDetailModel.AQVAT_GetPurInvoiceHeader.filter(s => s.InvoiceId == invoiceID);
         CountGrid1 = ModelPurInvoiceHeader.length;
         for (var i = 0; i < CountGrid1; i++) {
@@ -775,28 +773,25 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
 		            <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
                 </tr>`;
-        $("#divData_Header").append(html);
 
+        $("#divData_Header").append(html);
         //// Vendor Search
         $('#btnVendorSrch' + cnt).click(function (e) {
             let sys: SystemTools = new SystemTools();
-
             sys.FindKey(Modules.Ser_Purchasing, "btnVndorSearch", "CompCode=" + compcode + "and Isactive = 'True' ", () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey;
                 GetVendorByID(id);
                 $('#txtVndrCode' + cnt).val(VendorDetail.VendorCode);
                 $('#txtVendoeName' + cnt).val((lang == "ar" ? VendorDetail.NAMEA : VendorDetail.NAMEL));
+
                 if ($("#txt_StatusFlag1" + cnt).val() != "i")
                     $("#txt_StatusFlag1" + cnt).val("u");
-
-
 
                 GlobalVendorNum = $("#VND_SERIAL" + cnt).val();
                 AssignForGrids(GlobalVendorNum, cnt);
 
                 btn_arrowdown_onclick(cnt);
                 OnChangServCode(cnt);
-
 
             });
         });
@@ -814,8 +809,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $('#txtVendoeName' + cnt).val("");
                 DisplayMassage("كود المورد غير صحيح ", "Wrong vendor code ", MessageType.Error);
             }
-            btn_arrowdown_onclick(cnt);
 
+            btn_arrowdown_onclick(cnt);
             OnChangServCode(cnt);
 
         });
@@ -841,18 +836,35 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#txtAccCode" + cnt).on('change', function () {
             if ($("#txt_StatusFlag1" + cnt).val() != "i")
                 $("#txt_StatusFlag1" + cnt).val("u");
-
-            var code = $('#txtAccCode' + cnt).val();
-            if (GetAccByCode(code)) {
-                $('#txtAccCode' + cnt).val(AccountDetails.ACC_CODE);
-                $('#txtAccDesc' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                GlobalVendorNum = $("#VND_SERIAL" + cnt).val();
-                AssignForGrids(GlobalVendorNum, cnt);
-            }
-            else {
+            if ($('#txtAccCode' + cnt).val().trim() == "") {
                 $('#txtAccCode' + cnt).val("");
                 $('#txtAccDesc' + cnt).val("");
                 DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account code ", MessageType.Error);
+            } else {
+
+                var code = $('#txtAccCode' + cnt).val();
+                debugger
+                GetAccByCode(code);
+                if (AccountDetails != null) {
+                    if (AccountDetails.ACC_CODE != "") {
+                        $('#txtAccCode' + cnt).val(AccountDetails.ACC_CODE);
+                        $('#txtAccDesc' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                        GlobalVendorNum = $("#VND_SERIAL" + cnt).val();
+                        AssignForGrids(GlobalVendorNum, cnt);
+                    }
+                    else {
+                        $('#txtAccCode' + cnt).val("");
+                        $('#txtAccDesc' + cnt).val("");
+                        DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account code ", MessageType.Error);
+                    }
+
+                }
+                else {
+                    $('#txtAccCode' + cnt).val("");
+                    $('#txtAccDesc' + cnt).val("");
+                    DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account code ", MessageType.Error);
+                }
+
             }
         });
 
@@ -880,7 +892,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             AssignForGrids(GlobalVendorNum, cnt);
         });
 
-        $("#txtInvoiceDesc" + cnt).on('change', function () {
+        $("#txtInvoiceDesc" + cnt).on('keyup', function () {
             if ($("#txt_StatusFlag1" + cnt).val() != "i")
                 $("#txt_StatusFlag1" + cnt).val("u");
 
@@ -908,6 +920,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     DisplayInvoicesDetails(headDI);
                     DisplayGridDetails(GlobalVendorNum);
                 }
+
                 var NetVal = (totalVal + VatVal) - DisVal;
                 $("#txtInvNet" + cnt).val(NetVal.RoundToSt(2).toString());
                 ComputeTotals();
@@ -941,9 +954,70 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         //});
 
         //***new
-        $("#btn_arrowdown" + cnt).on('click', function () {
 
+
+
+        $("#txtInvoiceDate" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtInvoiceDate" + cnt).focus() }, 500);
+        });
+
+        $("#txtInvoiceDesc" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtInvoiceDesc" + cnt).focus() }, 500);
+        });
+
+        $("#txtInvTrNO" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtInvTrNO" + cnt).focus() }, 500);
+        });
+
+        $("#txtVndrCode" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtVndrCode" + cnt).focus() }, 500);
+        });
+
+        $("#txtDiscoutnval" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtDiscoutnval" + cnt).focus() }, 500);
+        });
+        $("#txtAccCode" + cnt).on('click', function () {
+
+            flag_Click = true;
+            setTimeout(function () { $("#txtAccCode" + cnt).focus() }, 500);
+        });
+
+        $("#No_Row1" + cnt).on('click', function () {
+            debugger
+
+            //if (flag_Click == false) {
+            //alert("No_Row1");
+            $(".ArrowDetail").addClass('display_none');
+            $("#ArrowDet" + cnt).removeClass('display_none');
             btn_arrowdown_onclick(cnt);
+            $('#DivChargesShow2').scrollLeft(3);
+
+            //}
+
+        });
+        //$("#btn_arrowdown" + cnt).on('click', function () {
+
+        //	btn_arrowdown_onclick(cnt);
+        //});
+        $("#btn_Copy" + cnt).on('click', function () {
+            CopyNewRowNew(Number($("#VND_SERIAL" + cnt).val()));
+
+            $(".ArrowDetail").addClass('display_none');
+
+            $("#ArrowDet" + cnt).removeClass('display_none');
+            btn_arrowdown_onclick(cnt);
+
+            ComputeTotals();
         });
         //******
 
@@ -952,10 +1026,13 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             //$("#txtInvSerial" + cnt).val(ModelPurInvoiceHeader[cnt].VND_SERIAL);
             $("#txtInvSerial" + cnt).val(cnt + 1);//***new
             $("#VND_SERIAL" + cnt).val(ModelPurInvoiceHeader[cnt].VND_SERIAL);
+            CurrentVendorSerial = 0;
             $("#txtInvTrNO" + cnt).val(ModelPurInvoiceHeader[cnt].Ref_No);
             $("#txtDocNum" + cnt).val(ModelPurInvoiceHeader[cnt].DocNo);
+            $("#txtVndrCode" + cnt).val(ModelPurInvoiceHeader[cnt].VendorID);
             $("#txtVndrCode" + cnt).val(ModelPurInvoiceHeader[cnt].VendorCode);
-            $("#txtVendoeName" + cnt).val(ModelPurInvoiceHeader[cnt].vnd_NameA);
+            $("#txtVendoeName" + cnt).val(ModelPurInvoiceHeader[cnt].VENDOR_NAME);
+
 
             if (ModelPurInvoiceHeader[cnt].TR_TYPE == 0) {
                 $("#chkCash" + cnt).prop("checked", false);
@@ -970,7 +1047,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtInvtotal" + cnt).val(ModelPurInvoiceHeader[cnt].TOTAL);
 
             $("#txtInvVat" + cnt).attr('data-VndVatType', ModelPurInvoiceHeader[cnt].VndVatType);
-
+            ModelPurInvoiceHeader[cnt].VatPrc
             //alert(ModelPurInvoiceHeader[cnt].VndVatType);
 
             $("#txtInvVat" + cnt).val(ModelPurInvoiceHeader[cnt].Vat);
@@ -978,113 +1055,446 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtAccCode" + cnt).val(ModelPurInvoiceHeader[cnt].PAY_ACC_CODE);
             $("#txtAccDesc" + cnt).val(ModelPurInvoiceHeader[cnt].ACC_DESCA);
             $("#txtInvoiceDesc" + cnt).val(ModelPurInvoiceHeader[cnt].REMARK);
-            $("#txt_StatusFlag1" + cnt).val("");
+            //$("#txt_StatusFlag1" + cnt).val("");
+
+            if (DoubleClicked == true) {
+                $('#txt_StatusFlag1' + cnt).val("");
+
+            }
+            else {
+                //$("#btnAddDetails").removeClass("display_none");
+                let StatusFl = ModelPurInvoiceHeader[cnt].StatusFlag == null ? 'u' : ModelPurInvoiceHeader[cnt].StatusFlag
+                $('#txt_StatusFlag1' + cnt).val(StatusFl);
+
+                if (StatusFl == 'd') {
+                    Delete_Row(cnt);
+                }
+            }
         }
         return;
 
     }
-    //function AddNewRow_Header() {
+    function OnChangServCode(Index: number) {
 
-    //    if (!SysSession.CurrentPrivileges.AddNew) return;
-    //    var CanAddCharge: boolean = true;
-    //    if (CountGrid1 > 0) {
+        //*****تحديث الرقم الحالي برقم الفاتورة الجديدة
+        CurrentVendorSerial = $("#VND_SERIAL" + Index).val();
 
-    //        for (var i = 0; i < CountGrid1; i++) {
+        //*****عرض خدمات الفاتورة المختارة
+        let DetailForSelectedVendorSR = DetailList.filter(x => x.VND_SERIAL == CurrentVendorSerial);
 
-    //            CanAddCharge = Validation_Grid_Header(i);
-    //            if (CanAddCharge == false) {
-    //                break;
-    //            }
-    //        }
-    //    }
-    //    if (CanAddCharge) {
-
-    //        BuildControls_Header(CountGrid1);
-    //        $("#txt_StatusFlag1" + CountGrid1).val("i"); //In Insert mode
-    //        $("#txtInvSerial" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtInvTrNO" + CountGrid1).removeAttr("disabled");
-    //        $("#btnVendorSrch" + CountGrid1).removeAttr("disabled");
-    //        $("#txtVndrCode" + CountGrid1).removeAttr("disabled");
-    //        $("#txtVendoeName" + CountGrid1).attr("disabled", "disabled");
-    //        $("#chkCash" + CountGrid1).removeAttr("disabled");
-    //        $("#txtDiscoutnval" + CountGrid1).removeAttr("disabled");
-    //        $("#txtInvoiceDate" + CountGrid1).removeAttr("disabled");
-    //        $("#txtInvtotal" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtDocNum" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtInvVat" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtInvNet" + CountGrid1).attr("disabled", "disabled");
-    //        $("#btnAccSearch" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtAccCode" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtAccDesc" + CountGrid1).attr("disabled", "disabled");
-    //        $("#txtInvoiceDesc" + CountGrid1).removeAttr("disabled");
-
-    //        $("#VND_SERIAL" + CountGrid1).val(CountGrid1 + 1);
-
-    //        GlobalVendorNum = CountGrid1 + 1;
-    //        // can delete new inserted record  without need for delete privilage
-    //        $("#btn_minus1" + CountGrid1).removeClass("display_none");
-    //        $("#btn_minus1" + CountGrid1).removeAttr("disabled");
-
-    //        var count = InvHeaderAssign.filter(s => s.VND_SERIAL == GlobalVendorNum)
-    //        if (count.length > 0) {
-    //            var count2 = count.length - 1;
-    //            AssignForGrids(GlobalVendorNum, count2);
-    //        }
-    //        ////***new
-    //        // 
-    //        //InvHeaderAssignSingle.VND_SERIAL = GetMaxVendorSerial();
-    //        //$("#VND_SERIAL" + CountGrid1).val(GetMaxVendorSerial().toString());
-    //        ////*********
-    //        CountGrid1 += 1;
-    //        Insert_Serial_Header();
-
-    //    }
-    //    $("#DivChargesShow2").addClass("display_none");
-    //}
-    //function DeleteRowCharge(RecNo: number) {
-    //    // 
-    //    if (!SysSession.CurrentPrivileges.Remove) return;
-    //    WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
-
-    //        $("#txt_StatusFlag1" + RecNo).val() == 'i' ? $("#txt_StatusFlag1" + RecNo).val('m') : $("#txt_StatusFlag1" + RecNo).val('d');
+        for (var cnt = 0; cnt < DetailForSelectedVendorSR.length; cnt++) {
 
 
-    //        $("#txtInvTrNO" + RecNo).val("22");
-    //        $("#txtVndrCode" + RecNo).val("22");
-    //        $("#txtVendoeName" + RecNo).val("22");
-    //        $("#txtInvoiceDate" + RecNo).val("22");
-    //        $("#txtDiscoutnval" + RecNo).val("22");
-    //        $("#txtInvtotal" + RecNo).val("22");
-    //        $("#txtInvVat" + RecNo).val("22");
-    //        $("#txtAccCode" + RecNo).val("22");
-    //        $("#txtAccDesc" + RecNo).val("22");
-    //        $("#txtInvoiceDesc" + RecNo).val("22");
-    //        GlobalVendorNum = $("#VND_SERIAL" + RecNo).val();
-    //        AssignForGrids(GlobalVendorNum, RecNo);
-    //        $("#No_Row1" + RecNo).attr("hidden", "true");
-    //        $("#div_Data").html("");
-    //        $("#DivChargesShow2").addClass("display_none");
-    //        Insert_Serial_Header();
-    //        ComputeTotals();
+            if ($("#txt_StatusFlag2" + cnt).val() != "i")
+                $("#txt_StatusFlag2" + cnt).val("u");
 
-    //    });
-    //}
-    function GetAllVatDetails() {
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("GenVatType", "GetAll"),
-            data: {
-                CompCode: compcode, VatType: 2, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
 
-                    VatDetails = result.Response as Array<A_D_VAT_TYPE>; 
+
+
+            var code = $('#txtServCode' + cnt).val();
+            var NumberSelect = ServicesDetails.filter(s => s.ItemCode == code);
+
+            if (NumberSelect.length > 0) {
+                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
+
+                var itemPrice = NumberSelect[0].UnitPrice;
+                $("#txtPrice" + cnt).val(itemPrice);
+                var txtQuantityValue = $("#txtQty" + cnt).val();
+                var txtPriceValue = $("#txtPrice" + cnt).val();
+
+                var catID = NumberSelect[0].SrvCategoryID;
+                var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
+                let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
+                Tax_Rate = Cat_Tax[0].VatPrc;
+
+                let Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
+                var code = $('#txtVndrCode' + Cnt_Vnd).val();
+                var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
+                //Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
+
+                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
+
+                Tax_Rate = Tax_Type_Model.Prc;
+
+
+
+                $('#txtVatPrc' + cnt).val(Tax_Rate);
+                var total = Number(txtQuantityValue) * Number(txtPriceValue);
+                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
+                VatPrc = Tax_Rate;
+                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
+
+                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
+                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
+                var totalAfterVat = Number(vatAmount) + Number(total);
+                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+
+            } else {
+                $("#txtQuantity" + cnt).val("1");
+                $("#txtPrice" + cnt).val("1");
+                $("#txtDetailTotal" + cnt).val("0");
+                $("#txtVatAmount" + cnt).val("0");
+                $("#txtDetailNet" + cnt).val("0");
+                $('#txtServCode' + cnt).val("");
+                $('#txtServName' + cnt).val("");
+                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
+            }
+
+        }
+
+        ComputeTotals();
+
+    }
+
+    function CopyNewRowNew(RecNo: number) {
+        debugger;
+        //-------------------------------------------------------------------Assign_Header---------------------
+        AssignGridControlsForCopyNew(RecNo);
+        debugger;
+        //-------------------------------------------------------------------Add_Row_In_Header--------------------- 
+        let NewModelPurInvHeader = new Array<AQVAT_GetPurInvoiceHeader>();
+        NewModelPurInvHeader = CopyRowGrid(ModelPurInvoiceHeader, 'VND_SERIAL', RecNo);
+        //-------------------------------------------------------------------Add_Row_In_Detail---------------------
+        debugger;
+        let NewDetailList = new Array<AVAT_TR_PurInvoiceDetail>();
+        NewDetailList = CopyRowGrid(DetailList, 'VND_SERIAL', RecNo);
+
+        ModelPurInvoiceHeader = NewModelPurInvHeader;
+        DetailList = NewDetailList;
+        //---------------------------------------------------Display---------------------------------------- 
+        debugger;
+
+        CountGrid1++;
+        $("#divData_Header").html("");
+        $(".Acc").show();
+        $(".costcntr").show();
+        $(".costcntrCCDt").show();
+        showFlag = true;
+        DoubleClicked = false;
+        InvHeaderAssign = new Array<AVAT_TR_PurInvoiceHeader>();
+        for (var i = 0; i < CountGrid1; i++) {
+            BuildControls_Header(i);
+            AssignForGrids(ModelPurInvoiceHeader[i].VND_SERIAL, i);
+        }
+
+        Insert_Serial_Header();
+
+
+    }
+    function AssignGridControlsForCopyNew(RecNum: number) {
+        ModelPurInvoiceHeader = new Array<AQVAT_GetPurInvoiceHeader>();
+        ModelPurInvHeader = new Array<AQVAT_GetPurInvoiceHeader>();
+        var StatusFlag: String;
+
+        // Details
+        debugger
+
+        for (var i = 0; i < CountGrid1; i++) {
+            ModelPurInvSingleModel = new AQVAT_GetPurInvoiceHeader();
+            StatusFlag = $("#txt_StatusFlag1" + i).val();
+
+
+            if (StatusFlag == "i") {
+                StatusFlag = $("#txt_StatusFlag1" + i).val();
+                CurrentVendorSerial = $("#VND_SERIAL" + i).val();
+                ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i)).val();
+                ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+                ModelPurInvSingleModel.DocNo = $("#txtDocNum" + (i)).val();
+                var vndCode = $("#txtVndrCode" + (i)).val();
+                var vndObj = VendorDetailList.filter(s => s.VendorCode == vndCode);
+                if (vndObj.length > 0)
+                    ModelPurInvSingleModel.VendorID = vndObj[0].VendorID;
+                var checked: boolean = $("#chkCash" + (i)).prop("checked");
+                if (checked == true) {
+                    ModelPurInvSingleModel.TR_TYPE = 1;
+                } else {
+                    ModelPurInvSingleModel.TR_TYPE = 0;
+                }
+                ModelPurInvSingleModel.VendorCode = vndCode;
+                ModelPurInvSingleModel.VENDOR_NAME = $("#txtVendoeName" + (i)).val();
+                ModelPurInvSingleModel.TOTAL = $("#txtInvtotal" + (i)).val();
+                ModelPurInvSingleModel.DISCOUNT = $("#txtDiscoutnval" + (i)).val();
+                ModelPurInvSingleModel.PAID = 0;
+                ModelPurInvSingleModel.VndVatType = vatType;
+                ModelPurInvSingleModel.Vat = $("#txtInvVat" + (i)).val();
+                ModelPurInvSingleModel.NetATax = $("#txtInvNet" + (i)).val();
+                ModelPurInvSingleModel.VatApplied = false;
+                //ModelPurInvSingleModel.VndVatType = 0;
+                ModelPurInvSingleModel.VatPrc = VatPrc;
+                ModelPurInvSingleModel.SalesType = 0;
+                ModelPurInvSingleModel.PAY_ACC_CODE = $("#txtAccCode" + (i)).val();
+                ModelPurInvSingleModel.ACC_DESCA = $("#txtAccDesc" + (i)).val();
+                ModelPurInvSingleModel.REMARK = $("#txtInvoiceDesc" + (i)).val();
+                ModelPurInvSingleModel.COMPCODE = Number(compcode);
+                ModelPurInvSingleModel.BranchCode = BranchCode;
+                ModelPurInvSingleModel.InvoiceDate = $("#txtInvoiceDate" + (i)).val();
+                ModelPurInvSingleModel.Ref_No = $("#txtInvTrNO" + (i)).val();
+
+                ModelPurInvHeader.push(ModelPurInvSingleModel);
+
+            }
+            if (StatusFlag == "u") {
+                StatusFlag = $("#txt_StatusFlag1" + i).val();
+                CurrentVendorSerial = $("#VND_SERIAL" + i).val();
+                ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i)).val();
+                ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+                ModelPurInvSingleModel.DocNo = $("#txtDocNum" + (i)).val();
+                var vndCode = $("#txtVndrCode" + (i)).val();
+                var vndObj = VendorDetailList.filter(s => s.VendorCode == vndCode);
+                if (vndObj.length > 0)
+                    ModelPurInvSingleModel.VendorID = vndObj[0].VendorID;
+                var checked: boolean = $("#chkCash" + (i)).prop("checked");
+                if (checked == true) {
+                    ModelPurInvSingleModel.TR_TYPE = 1;
+                } else {
+                    ModelPurInvSingleModel.TR_TYPE = 0;
+                }
+                ModelPurInvSingleModel.VendorCode = vndCode;
+                ModelPurInvSingleModel.VENDOR_NAME = $("#txtVendoeName" + (i)).val();
+                ModelPurInvSingleModel.TOTAL = $("#txtInvtotal" + (i)).val();
+                ModelPurInvSingleModel.DISCOUNT = $("#txtDiscoutnval" + (i)).val();
+                ModelPurInvSingleModel.PAID = 0;
+                ModelPurInvSingleModel.VndVatType = vatType;
+                ModelPurInvSingleModel.Vat = $("#txtInvVat" + (i)).val();
+                ModelPurInvSingleModel.NetATax = $("#txtInvNet" + (i)).val();
+                ModelPurInvSingleModel.VatApplied = false;
+                //ModelPurInvSingleModel.VndVatType = 0;
+                ModelPurInvSingleModel.VatPrc = VatPrc;
+                ModelPurInvSingleModel.SalesType = 0;
+                ModelPurInvSingleModel.PAY_ACC_CODE = $("#txtAccCode" + (i)).val();
+                ModelPurInvSingleModel.ACC_DESCA = $("#txtAccDesc" + (i)).val();
+                ModelPurInvSingleModel.REMARK = $("#txtInvoiceDesc" + (i)).val();
+                ModelPurInvSingleModel.COMPCODE = Number(compcode);
+                ModelPurInvSingleModel.BranchCode = BranchCode;
+                ModelPurInvSingleModel.InvoiceDate = $("#txtInvoiceDate" + (i)).val();
+                ModelPurInvSingleModel.Ref_No = $("#txtInvTrNO" + (i)).val();
+
+                ModelPurInvHeader.push(ModelPurInvSingleModel);
+
+            }
+            if (StatusFlag == "d") {
+                StatusFlag = $("#txt_StatusFlag1" + i).val();
+                CurrentVendorSerial = $("#VND_SERIAL" + i).val();
+                ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i)).val();
+                ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+
+                ModelPurInvHeader.push(ModelPurInvSingleModel);
+            }
+        }
+
+        ModelPurInvoiceHeader = ModelPurInvHeader;
+
+
+    }
+
+
+
+    function CopyNewRow(RecNo: number) {
+        //debugger;
+        CountGrid1++;
+        AssignGridControlsForCopy(RecNo);
+        $("#divData_Header").html("");
+        $(".Acc").show();
+        $(".costcntr").show();
+        $(".costcntrCCDt").show();
+
+        DoubleClicked = false;
+        showFlag = true;
+
+
+        var counter = 0;
+        debugger
+        for (let i = 0; i < CountGrid1; i++) {
+            debugger
+            var statusFlag = ModelPurInvoiceHeader[i].StatusFlag;
+            BuildControls_Header(i);
+
+            if (statusFlag == "d" || statusFlag == "m") {
+                $("#No_Row1" + i).attr("hidden", "true");
+            }
+
+            $("#btnSearchCostCenter" + i).removeAttr("disabled");
+            $("#btnSearchService" + i).removeAttr("disabled");
+            $("#txtServiceCode" + i).removeAttr("disabled");
+            $("#txtCostCntrNum" + i).removeAttr("disabled");
+            $("#txtRemarks" + i).removeAttr("disabled");
+
+            $("#txtQuantity" + i).removeAttr("disabled");
+            $("#txtPrice" + i).removeAttr("disabled");
+            $("#txtDiscountPrc" + i).removeAttr("disabled");
+            $("#txtDiscountAmount" + i).removeAttr("disabled");
+            $('#txtWorkOrderType' + i).removeAttr('disabled');
+            $('#txtWorkOrderNo' + i).removeAttr('disabled');
+
+            $("#btn_minus1" + i).removeClass("display_none");
+            $("#btn_minus1" + i).removeAttr("disabled");
+            $("#btn_Copy" + i).removeClass("display_none");
+            $("#btn_Copy" + i).removeAttr("disabled");
+
+            // counter
+            if (statusFlag != "d" && statusFlag != "m") {
+                $("#txtInvSerial" + i).prop("value", counter + 1);
+                counter = counter + 1;
+                $("#btn_minus" + i).removeClass("display_none");
+                $("#btn_minus" + i).removeAttr("disabled");
+                //$("#btn_Insert" + i).removeClass("display_none");
+                $("#btn_Copy" + i).removeClass("display_none");
+            }
+
+        }
+
+    }
+    function AssignGridControlsForCopy(RecNum: number) {
+        ModelPurInvoiceHeader = new Array<AQVAT_GetPurInvoiceHeader>();
+        ModelPurInvHeader = new Array<AQVAT_GetPurInvoiceHeader>();
+        var StatusFlag: String;
+        var flagNewRecord: boolean = false;
+
+        // Details
+        debugger
+        for (var i = 0; i < CountGrid1; i++) {
+            ModelPurInvSingleModel = new AQVAT_GetPurInvoiceHeader();
+            debugger
+            if (i == RecNum + 1) {
+
+                ModelPurInvSingleModel.StatusFlag = "i";
+                //ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                CurrentVendorSerial = $("#VND_SERIAL" + (i - 1)).val();
+                ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i - 1)).val();
+                ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+                ModelPurInvSingleModel.DocNo = $("#txtDocNum" + (i - 1)).val();
+                var vndCode = $("#txtVndrCode" + (i - 1)).val();
+                var vndObj = VendorDetailList.filter(s => s.VendorCode == vndCode);
+                if (vndObj.length > 0)
+                    ModelPurInvSingleModel.VendorID = vndObj[0].VendorID;
+
+                var checked: boolean = $("#chkCash" + (i - 1)).prop("checked");
+                if (checked == true) {
+                    ModelPurInvSingleModel.TR_TYPE = 1;
+                } else {
+                    ModelPurInvSingleModel.TR_TYPE = 0;
+                }
+                ModelPurInvSingleModel.VENDOR_NAME = $("#txtVendoeName" + (i - 1)).val();
+                ModelPurInvSingleModel.TOTAL = $("#txtInvtotal" + (i - 1)).val();
+                ModelPurInvSingleModel.DISCOUNT = $("#txtDiscoutnval" + (i - 1)).val();
+                ModelPurInvSingleModel.PAID = 0;
+                ModelPurInvSingleModel.VndVatType = vatType;
+                ModelPurInvSingleModel.Vat = $("#txtInvVat" + (i - 1)).val();
+                ModelPurInvSingleModel.NetATax = $("#txtInvNet" + (i - 1)).val();
+                ModelPurInvSingleModel.VatApplied = false;
+                //ModelPurInvSingleModel.VndVatType = 0; 
+                ModelPurInvSingleModel.VatPrc = VatPrc;
+                ModelPurInvSingleModel.SalesType = 0;
+                ModelPurInvSingleModel.PAY_ACC_CODE = $("#txtAccCode" + (i - 1)).val();
+                ModelPurInvSingleModel.REMARK = $("#txtInvoiceDesc" + (i - 1)).val();
+                ModelPurInvSingleModel.COMPCODE = Number(compcode);
+                ModelPurInvSingleModel.BranchCode = BranchCode;
+                ModelPurInvSingleModel.InvoiceDate = $("#txtInvoiceDate" + (i - 1)).val();
+                ModelPurInvSingleModel.Ref_No = $("#txtInvTrNO" + (i - 1)).val();
+
+                ModelPurInvHeader.push(ModelPurInvSingleModel);
+                flagNewRecord = true;
+            }
+            else {
+                if (flagNewRecord == true) {
+                    debugger
+                    StatusFlag = $("#txt_StatusFlag1" + (i - 1)).val();
+                    ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                    CurrentVendorSerial = $("#VND_SERIAL" + (i - 1)).val();
+                    ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                    ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i - 1)).val();
+                    ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+                    ModelPurInvSingleModel.DocNo = $("#txtDocNum" + (i - 1)).val();
+                    var vndCode = $("#txtVndrCode" + (i - 1)).val();
+                    var vndObj = VendorDetailList.filter(s => s.VendorCode == vndCode);
+                    if (vndObj.length > 0)
+                        ModelPurInvSingleModel.VendorID = vndObj[0].VendorID;
+                    var checked: boolean = $("#chkCash" + (i - 1)).prop("checked");
+                    if (checked == true) {
+                        ModelPurInvSingleModel.TR_TYPE = 1;
+                    } else {
+                        ModelPurInvSingleModel.TR_TYPE = 0;
+                    }
+                    ModelPurInvSingleModel.VENDOR_NAME = $("#txtVendoeName" + (i - 1)).val();
+                    ModelPurInvSingleModel.TOTAL = $("#txtInvtotal" + (i - 1)).val();
+                    ModelPurInvSingleModel.DISCOUNT = $("#txtDiscoutnval" + (i - 1)).val();
+                    ModelPurInvSingleModel.PAID = 0;
+                    ModelPurInvSingleModel.VndVatType = vatType;
+                    ModelPurInvSingleModel.Vat = $("#txtInvVat" + (i - 1)).val();
+                    ModelPurInvSingleModel.NetATax = $("#txtInvNet" + (i - 1)).val();
+                    ModelPurInvSingleModel.VatApplied = false;
+                    //ModelPurInvSingleModel.VndVatType = 0;
+                    ModelPurInvSingleModel.VatPrc = VatPrc;
+                    ModelPurInvSingleModel.SalesType = 0;
+                    ModelPurInvSingleModel.PAY_ACC_CODE = $("#txtAccCode" + (i - 1)).val();
+                    ModelPurInvSingleModel.REMARK = $("#txtInvoiceDesc" + (i - 1)).val();
+                    ModelPurInvSingleModel.COMPCODE = Number(compcode);
+                    ModelPurInvSingleModel.BranchCode = BranchCode;
+                    ModelPurInvSingleModel.InvoiceDate = $("#txtInvoiceDate" + (i - 1)).val();
+                    ModelPurInvSingleModel.Ref_No = $("#txtInvTrNO" + (i - 1)).val();
+
+                    ModelPurInvHeader.push(ModelPurInvSingleModel);
+
+                } else {
+                    debugger
+                    StatusFlag = $("#txt_StatusFlag1" + i).val();
+                    CurrentVendorSerial = $("#VND_SERIAL" + i).val();
+                    ModelPurInvSingleModel.StatusFlag = StatusFlag.toString();
+                    ModelPurInvSingleModel.VND_SERIAL = CurrentVendorSerial;
+
+                    ModelPurInvSingleModel.InvoiceHeaderID = $("#txtInvoiceHeaderID" + (i)).val();
+                    ModelPurInvSingleModel.InvoiceId = GlobalInvoiceId;
+                    ModelPurInvSingleModel.DocNo = $("#txtDocNum" + (i)).val();
+                    var vndCode = $("#txtVndrCode" + (i)).val();
+                    var vndObj = VendorDetailList.filter(s => s.VendorCode == vndCode);
+                    if (vndObj.length > 0)
+                        ModelPurInvSingleModel.VendorID = vndObj[0].VendorID;
+                    var checked: boolean = $("#chkCash" + (i)).prop("checked");
+                    if (checked == true) {
+                        ModelPurInvSingleModel.TR_TYPE = 1;
+                    } else {
+                        ModelPurInvSingleModel.TR_TYPE = 0;
+                    }
+                    ModelPurInvSingleModel.VENDOR_NAME = $("#txtVendoeName" + (i)).val();
+                    ModelPurInvSingleModel.TOTAL = $("#txtInvtotal" + (i)).val();
+                    ModelPurInvSingleModel.DISCOUNT = $("#txtDiscoutnval" + (i)).val();
+                    ModelPurInvSingleModel.PAID = 0;
+                    ModelPurInvSingleModel.VndVatType = vatType;
+                    ModelPurInvSingleModel.Vat = $("#txtInvVat" + (i)).val();
+                    ModelPurInvSingleModel.NetATax = $("#txtInvNet" + (i)).val();
+                    ModelPurInvSingleModel.VatApplied = false;
+                    //ModelPurInvSingleModel.VndVatType = 0;
+                    ModelPurInvSingleModel.VatPrc = VatPrc;
+                    ModelPurInvSingleModel.SalesType = 0;
+                    ModelPurInvSingleModel.PAY_ACC_CODE = $("#txtAccCode" + (i)).val();
+                    ModelPurInvSingleModel.REMARK = $("#txtInvoiceDesc" + (i)).val();
+                    ModelPurInvSingleModel.COMPCODE = Number(compcode);
+                    ModelPurInvSingleModel.BranchCode = BranchCode;
+                    ModelPurInvSingleModel.InvoiceDate = $("#txtInvoiceDate" + (i)).val();
+                    ModelPurInvSingleModel.Ref_No = $("#txtInvTrNO" + (i)).val();
+
+                    ModelPurInvHeader.push(ModelPurInvSingleModel);
                 }
             }
-        });
+        }
+
+        ModelPurInvoiceHeader = ModelPurInvHeader;
+        flagNewRecord = false;
     }
+
+
     function Validation_Grid_Header(rowcount: number) {
         if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m") {
             return true;
@@ -1105,51 +1515,73 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
     function Insert_Serial_Header() {
 
+
+        let Chack_Flag = false;
+        let flagval = "";
         let Ser = 1;
         for (let i = 0; i < CountGrid1; i++) {
-            var flagvalue = $("#txt_StatusFlag1" + i).val();
-            if (flagvalue != "d" && flagvalue != "m") {
+            flagval = $("#txt_StatusFlag1" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtInvSerial" + i).val(Ser);
                 Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag1" + i).val() != 'i' && $("#txt_StatusFlag1" + i).val() != 'm' && $("#txt_StatusFlag1" + i).val() != 'd') {
+                    $("#txt_StatusFlag1" + i).val('u');
+                }
             }
         }
 
     }
     function ComputeTotals() {
+        var lineamount = 0
+        var linevatAmount = 0
+        var lineNet = 0
+        var lineDiscount = 0
         var vatAmount = 0;
         var totalAmount = 0;
+
         var DiscountAmount = 0;
         var netAmount = 0;
         let VaType = 0;
-        // Total Detail
+        // Total Detail		 
+        //if (GlobalVendorNum == Number($("#VND_SERIALDetail" + i).val())) {
         for (let i = 0; i < CountGrid2; i++) {
-            if (GlobalVendorNum == Number($("#VND_SERIALDetail" + i).val())) {
-                var flagvalue = $("#txt_StatusFlag2" + i).val();
-                if (flagvalue != "d" && flagvalue != "m") {
-                    vatAmount += Number($("#txtVatAmount" + i).val());
-                    vatAmount = Number(vatAmount.RoundToSt(2).toString());
 
-                    totalAmount += Number($("#txtDetailTotal" + i).val());
-                    totalAmount = Number(totalAmount.RoundToSt(2).toString());
+            var flagvalue = $("#txt_StatusFlag2" + i).val();
+            if (flagvalue != "d" && flagvalue != "m") {
+                linevatAmount = Number($("#txtVatAmount" + i).val());
+                vatAmount += linevatAmount.RoundToNum(2);
 
-                    netAmount += Number($("#txtDetailNet" + i).val());
-                    netAmount = Number(netAmount.RoundToSt(2).toString());
-                    VaType = Number($("#txtVatAmount" + i).attr('data-vatType'));
-                }
+                lineamount = Number($("#txtDetailTotal" + i).val());
+                totalAmount += lineamount.RoundToNum(2);
+
+                lineNet = Number($("#txtDetailNet" + i).val());
+                netAmount += lineNet.RoundToNum(2);
+                VaType = Number($("#txtVatAmount" + i).attr('data-vatType'));
             }
         }
+
         var ID = GlobalVendorNum - 1
         $("#txtInvtotal" + ID).val(totalAmount.RoundToSt(2));
         $("#txtInvVat" + ID).val(vatAmount.RoundToSt(2));
         $("#txtInvVat" + ID).attr('data-VndVatType', VaType);
 
+        $("#txtInvNet" + ID).val(netAmount - Number($("#txtDiscoutnval" + ID).val()));
 
-        //ID = (Number($("#VND_SERIALDetail" + i).val())) - 1);
-        //$("#txtInvNet" + ID).val(netAmount.RoundToSt(2));
+        //}
+
         //****new
-        if ($("#txt_StatusFlag1" + ID).val() != 'i' && $("#txt_StatusFlag1" + ID).val() != 'd')
-            $("#txt_StatusFlag1" + ID).val("u");
+        //if ($("#txt_StatusFlag1" + ID).val() != 'i' && $("#txt_StatusFlag1" + ID).val() != 'd')
+        //    $("#txt_StatusFlag1" + ID).val("u");
+
         //totalHeaders
+        lineamount = 0
+        linevatAmount = 0
+        lineNet = 0
         vatAmount = 0;
         totalAmount = 0;
         DiscountAmount = 0;
@@ -1157,24 +1589,24 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         for (let i = 0; i < CountGrid1; i++) {
             var flagvalue = $("#txt_StatusFlag1" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
-                vatAmount += Number($("#txtInvVat" + i).val());
-                vatAmount = Number(vatAmount.RoundToSt(2).toString());
+                linevatAmount = Number($("#txtInvVat" + i).val());
+                vatAmount += linevatAmount.RoundToNum(2);
 
-                totalAmount += Number($("#txtInvtotal" + i).val());
-                totalAmount = Number(totalAmount.RoundToSt(2).toString());
+                lineamount = Number($("#txtInvtotal" + i).val());
+                totalAmount += lineamount.RoundToNum(2);
 
-                DiscountAmount += Number($("#txtDiscoutnval" + i).val());
-                DiscountAmount = Number(DiscountAmount.RoundToSt(2).toString());
+                lineDiscount = Number($("#txtDiscoutnval" + i).val());
+                DiscountAmount += lineDiscount.RoundToNum(2);
 
-                netAmount += Number($("#txtInvNet" + i).val());
-                netAmount = Number(netAmount.RoundToSt(2).toString());
+                lineNet = Number($("#txtInvNet" + i).val());
+                netAmount += lineNet.RoundToNum(2);
 
             }
         }
+
         txtInvTotal.value = totalAmount.RoundToSt(2);
         txtVat.value = vatAmount.RoundToSt(2);
         txtDiscountValue.value = DiscountAmount.RoundToSt(2);
-        $('#txtInvNet' + ID).val(((totalAmount + vatAmount) - DiscountAmount).RoundToSt(2));
         txtNet.value = (totalAmount + vatAmount - DiscountAmount).RoundToSt(2);
 
     }
@@ -1185,7 +1617,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     <input id="txtInvoiceDetailID${cnt}" type="hidden" class="form-control display_none"  />
                     <input id="VND_SERIALDetail${cnt}" type="hidden" class="form-control display_none"  /> 
                     <input id="txtTR_SERIAL${cnt}" type="hidden" class="form-control display_none"/>    
-<td>
+                    <td>
 		                <div class="form-group">
 			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
 		                </div>
@@ -1264,51 +1696,9 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 			                <input id="txtCRemarks${cnt}" name="" disabled type="text" class="form-control"/>
 		                </div>
 	                </td>
-                    <input id="txt_StatusFlag2${cnt}" name = " " type = "hidden" class="form-control"/>
-		<input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
+                      <input id="txt_StatusFlag2${cnt}" name = " " type = "hidden" class="form-control"/>
+		                <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
                 </tr>`;
-
-        //html = '<div id= "No_Row2' + cnt + '" class="container-fluid style_border" > <div class="row" > <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 " > ' +
-        //    '<span id="btn_minus2' + cnt + '" class="fa fa-minus-circle fontitm4PurTrReceive display_none"></span>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtInvoiceDetailID' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-        //    '<input id="VND_SERIALDetail' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-        //    //**new
-        //    '<input id="txtTR_SERIAL' + cnt + '" type="hidden" class="form-control input-sm right2 display_none"/>' +
-        //    //***
-        //    '<input id="txtDetailSerial' + cnt + '" type="text" class="form-control input-sm right2" disabled value="' + cnt + '"/></div>' +
-
-        //    '<div class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 p-0">' +
-        //    '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm  btn-warning " id="btnServicSrch' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search  "></i></button>' +
-        //    '<input id="txtServCode' + cnt + '" name="" disabled type="text" class="col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3 form-control input-sm  text_Display  "/>' +
-        //    '<input id="txtServName' + cnt + '" name="" disabled type="text" class="form-control col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8 input-sm  text_Display"/>' +
-        //    '</div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtQty' + cnt + '" type="number" class="form-control input-sm right2" disabled value="1 "/></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtPrice' + cnt + '" type="text" disabled  class="form-control input-sm right2"  value="0"/></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtDetailTotal' + cnt + '" type="text"  disabled class="form-control input-sm right2"  value="0"/></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtVatPrc' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtVatAmount' + cnt + '" type="text" disabled value="0" class="form-control input-sm right2"/></div>' +
-        //    '<div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 p-0">' +
-        //    '<input id="txtDetailNet' + cnt + '" type="text" disabled class="form-control input-sm right2"   value="0"/></div>' +
-        //    "<div class='col-lg-8 col-md-8 col-sm-8 col-xl-8 col-xs-8' style='position: absolute; right: 82% '>" +
-        //    '<button type="button" class="col-lg-1 col-md-1 col-sm-1 col-xl-1 col-xs-1 src-btn btn btn-search input-sm btn-warning " id="btnCostCntrSrch' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search  "></i></button>' +
-        //    '<input id="txtCCcode' + cnt + '" name="" disabled type="text" class="col-lg-2 col-md-2 col-sm-2 col-xl-2 col-xs-2 form-control input-sm  text_Display  "/>' +
-        //    '<input id="txtCCName' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-3 col-md-3 col-sm-3 col-xl-3 col-xs-3  text_Display"/>' +
-        //    '<input id="txtCRemarks' + cnt + '" name="" disabled type="text" class="form-control input-sm col-lg-5 col-md-5 col-sm-5 col-xl-5 col-xs-5  text_Display"/>' +
-        //    "</div>" +
-
-        //    '</div>' +
-
-        //    ' </div></div>' +
-        //    '<input id="txt_StatusFlag2' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/><input id="txt_ID1' + cnt + '" name = " " type = "hidden" class="form-control input-sm"/>';
-
         $("#div_Data").append(html);
 
         //// service Search
@@ -1344,12 +1734,11 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
                     Tax_Rate = Cat_Tax[0].VatPrc;
 
-                  
                     let Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
                     var code = $('#txtVndrCode' + Cnt_Vnd).val();
                     var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
-                     
-                    Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
+
+                    //Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
 
                     Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
 
@@ -1364,8 +1753,24 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     var totalAfterVat = Number(vatAmount) + Number(total);
                     $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
 
+                    let SALES_ACC_CODE = catObj[0].SALES_ACC_CODE;
+                    debugger
+                    if (GetAccByCode(SALES_ACC_CODE)) {
+                        if (AccountDetails == null) {
+                            $("#btnCCDT_CODESrch" + cnt).attr("disabled", "disabled");
+                            ccdtype = "";
+                        }
+                        if (AccountDetails.CCDT_TYPE == null || AccountDetails.CCDT_TYPE == "") {
+                            $("#btnCCDT_CODESrch" + cnt).attr("disabled", "disabled");
+                            ccdtype = AccountDetails.CCDT_TYPE;
+                        }
+                        else {
+                            $("#btnCCDT_CODESrch" + cnt).removeAttr("disabled");
+                            ccdtype = AccountDetails.CCDT_TYPE;
+                        }
+                    }
                 }
-                //ComputeTotals();
+                ComputeTotals();
                 GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
                 ComputeTotals();
                 var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1379,6 +1784,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $("#txt_StatusFlag2" + cnt).val("u");
 
             OnChangServCode(cnt);
+
 
             GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
             ComputeTotals();
@@ -1402,6 +1808,28 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 var Serial = $("#txtDetailSerial" + cnt).val();
                 AssignDetailsForGrids(GlobalVendorNum, cnt, Serial);
             });
+        });
+        $('#btnCCDT_CODESrch' + cnt).click(function (e) {/*-------------------------------------CCDT_TYPE----------------------------*/
+            let sys: SystemTools = new SystemTools();
+
+            //alert(ccdtype)
+            sys.FindKey(Modules.JournalVoucher, "btnSearchCCdtTypes", "COMP_CODE=" + compcode + "and CCDT_TYPE ='" + ccdtype + "'", () => {
+                let id = SearchGrid.SearchDataGrid.SelectedKey
+
+                $('#txtCCDT_CODE' + cnt).val(id);
+                if (GetCostCenterCCDTByCode(id)) {
+                    $('#txtCCDTCostCntrName' + cnt).val((lang == "ar" ? CostCentreDetailsCCDT.CCDT_DESCA : CostCentreDetailsCCDT.CCDT_DESCE));
+
+                }
+
+                if ($("#txt_StatusFlag2" + cnt).val() != "i")
+                    $("#txt_StatusFlag2" + cnt).val("u");
+                GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
+                var Serial = $("#txtDetailSerial" + cnt).val();
+                AssignDetailsForGrids(GlobalVendorNum, cnt, Serial);
+
+            });
+
         });
         $("#txtCCcode" + cnt).on('change', function () {
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
@@ -1428,20 +1856,21 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
                 $("#txt_StatusFlag2" + cnt).val("u");
 
+
             var txtQuantityValue = $("#txtQty" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
-            var total = 0;
 
-            var quntity = Number(Number(txtQuantityValue).RoundToSt(2));
-            if ($("#txtPrice" + cnt).val() == 0) { total = quntity * 1; }
-            else { total = quntity * Number(txtPriceValue); }
+            var total = (Number(txtQuantityValue) * Number(txtPriceValue)).RoundToNum(2);
+            $("#txtDetailTotal" + cnt).val(total);
 
-            $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
             VatPrc = $("#txtVatPrc" + cnt).val();
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
-            var totalAfterVat = Number(vatAmount.RoundToSt(2)) + Number(total.RoundToSt(2));
+            var vatAmount = (Number(total) * VatPrc / 100).RoundToNum(2);
+            $("#txtVatAmount" + cnt).val(vatAmount);
+
+
+            var totalAfterVat = total + vatAmount;
             $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+
 
             GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
             var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1450,21 +1879,54 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         });
 
         $("#txtPrice" + cnt).on('keyup', function () {
+
             if ($("#txt_StatusFlag2" + cnt).val() != "i")
                 $("#txt_StatusFlag2" + cnt).val("u");
+            debugger
+            var txtQuantityValue = $("#txtQty" + cnt).val();
+            var txtPriceValue = $("#txtPrice" + cnt).val();
+
+            var total = (Number(txtQuantityValue) * Number(txtPriceValue)).RoundToNum(2);
+            $("#txtDetailTotal" + cnt).val(total);
+
+            VatPrc = $("#txtVatPrc" + cnt).val();
+            var vatAmount = (Number(total) * VatPrc / 100).RoundToNum(2);
+
+            $("#txtVatAmount" + cnt).val(vatAmount);
+
+            var totalAfterVat = total + vatAmount;
+            $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+
+            GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
+            var Serial = $("#txtDetailSerial" + cnt).val();
+            AssignDetailsForGrids(GlobalVendorNum, cnt, Serial);
+            ComputeTotals();
+        });
+
+        $("#txtDetailNet" + cnt).on('keyup', function () {
+
+            if ($("#txt_StatusFlag2" + cnt).val() != "i")
+                $("#txt_StatusFlag2" + cnt).val("u");
+
+            debugger
+            var NetPrice = Number($("#txtDetailNet" + cnt).val());
+            let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NetPrice, Number($("#txtVatPrc" + cnt).val()), true);
+
+            $("#txtPrice" + cnt).val((GetUnitprice.unitprice / Number($("#txtQty" + cnt).val())).RoundToSt(2));
 
             var txtQuantityValue = $("#txtQty" + cnt).val();
             var txtPriceValue = $("#txtPrice" + cnt).val();
 
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            VatPrc = $("#txtVatPrc" + cnt).val();
-            var vatAmount = Number(total) * VatPrc / 100;
-            $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
-            var total = Number(txtQuantityValue) * Number(txtPriceValue);
-            $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
+            var total = (Number(txtQuantityValue) * Number(txtPriceValue)).RoundToNum(2);
+            $("#txtDetailTotal" + cnt).val(total);
 
-            var totalAfterVat = Number(vatAmount.RoundToSt(2)) + Number(total.RoundToSt(2));
-            $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
+            VatPrc = $("#txtVatPrc" + cnt).val();
+            var vatAmount = (Number(total) * VatPrc / 100).RoundToNum(2);
+
+            $("#txtVatAmount" + cnt).val(vatAmount);
+
+            var totalAfterVat = total + vatAmount;
+            //$("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
 
             GlobalVendorNum = $("#VND_SERIALDetail" + cnt).val();
             var Serial = $("#txtDetailSerial" + cnt).val();
@@ -1495,127 +1957,19 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         return;
 
     }
-    function OnChangServCode(Index: number) {
-
-        //*****تحديث الرقم الحالي برقم الفاتورة الجديدة
-        CurrentVendorSerial = $("#VND_SERIAL" + Index).val();
-
-        //*****عرض خدمات الفاتورة المختارة
-        let DetailForSelectedVendorSR = DetailList.filter(x => x.VND_SERIAL == CurrentVendorSerial);
-
-        for (var cnt = 0; cnt < DetailForSelectedVendorSR.length; cnt++) {
 
 
-            if ($("#txt_StatusFlag2" + cnt).val() != "i")
-                $("#txt_StatusFlag2" + cnt).val("u");
+    function GetCostCenterCCDTByCode(CC_Code: string): boolean {
+        var flag: boolean = true;
 
-
-
-
-            var code = $('#txtServCode' + cnt).val();
-            var NumberSelect = ServicesDetails.filter(s => s.ItemCode == code);
-
-            if (NumberSelect.length > 0) {
-                $('#txtServName' + cnt).val((lang == "ar" ? NumberSelect[0].Itm_DescA : NumberSelect[0].Itm_DescE));
-
-                var itemPrice = NumberSelect[0].UnitPrice;
-                $("#txtPrice" + cnt).val(itemPrice);
-                var txtQuantityValue = $("#txtQty" + cnt).val();
-                var txtPriceValue = $("#txtPrice" + cnt).val();
-
-                var catID = NumberSelect[0].SrvCategoryID;
-                var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
-                let Cat_Tax = DetailsVatNature.filter(s => s.VatNatID == catObj[0].VatNatID);
-                Tax_Rate = Cat_Tax[0].VatPrc;
-
-                let Cnt_Vnd = (Number($("#VND_SERIALDetail" + cnt).val()) - 1);
-                var code = $('#txtVndrCode' + Cnt_Vnd).val();
-                var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
-                Tax_Rate = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
-
-                Tax_Type_Model = GetVat(Cat_Tax[0].VatNatID, Tax_Rate, VendObj[0].VATType);
-
-                Tax_Rate = Tax_Type_Model.Prc;
-
-
-
-                $('#txtVatPrc' + cnt).val(Tax_Rate);
-                var total = Number(txtQuantityValue) * Number(txtPriceValue);
-                $("#txtDetailTotal" + cnt).val(total.RoundToSt(2));
-                VatPrc = Tax_Rate;
-                var vatAmount = Number(total.RoundToSt(2)) * VatPrc / 100;
-
-                $("#txtVatAmount" + cnt).attr('data-vatType', Tax_Type_Model.VatType);
-                $("#txtVatAmount" + cnt).val(vatAmount.RoundToSt(2));
-                var totalAfterVat = Number(vatAmount) + Number(total);
-                $("#txtDetailNet" + cnt).val(totalAfterVat.RoundToSt(2));
-
-            } else {
-                $("#txtQuantity" + cnt).val("1");
-                $("#txtPrice" + cnt).val("1");
-                $("#txtDetailTotal" + cnt).val("0");
-                $("#txtVatAmount" + cnt).val("0");
-                $("#txtDetailNet" + cnt).val("0");
-                $('#txtServCode' + cnt).val("");
-                $('#txtServName' + cnt).val("");
-                DisplayMassage("كود الخدمه غير صحيح ", "Wrong service code ", MessageType.Error);
-            }
-
+        var ccObj = CostCentreDetailsCCDTIst.filter(s => s.CCDT_CODE == CC_Code);
+        if (ccObj.length > 0) {
+            CostCentreDetailsCCDT = ccObj[0];
+        } else {
+            flag = false;
         }
-
-        ComputeTotals();
-
+        return flag;
     }
-
-    //function AddNewRow_Details() {
-
-    //    if (!SysSession.CurrentPrivileges.AddNew) return;
-    //    var CanAddCharge: boolean = true;
-    //    if (CountGrid2 > 0) {
-
-    //        for (var i = 0; i < CountGrid2; i++) {
-    //            CanAddCharge = Validation_Grid_Detail(i);
-    //            if (CanAddCharge == false) {
-    //                break;
-    //            }
-    //        }
-    //    }
-    //    if (CanAddCharge) {
-    //        BuildControls_Details(CountGrid2);
-    //        $("#txt_StatusFlag2" + CountGrid2).val("i"); //In Insert mode
-    //        $("#txtDetailSerial" + CountGrid2).attr("disabled", "disabled");
-    //        $("#btnServicSrch" + CountGrid2).removeAttr("disabled");
-    //        $("#txtServCode" + CountGrid2).removeAttr("disabled");
-    //        $("#txtServName" + CountGrid2).attr("disabled", "disabled");
-    //        $("#txtQty" + CountGrid2).removeAttr("disabled");
-    //        $("#txtPrice" + CountGrid2).removeAttr("disabled");
-    //        $("#txtDetailTotal" + CountGrid2).attr("disabled", "disabled");
-    //        $("#txtVatPrc" + CountGrid2).attr("disabled", "disabled");
-    //        $("#txtVatAmount" + CountGrid2).attr("disabled", "disabled");
-    //        $("#txtDetailNet" + CountGrid2).attr("disabled", "disabled");
-
-    //        $("#VND_SERIALDetail" + CountGrid2).val(GlobalVendorNum);
-
-    //        $("#btnCostCntrSrch" + CountGrid2).removeAttr("disabled");
-    //        $("#txtCCcode" + CountGrid2).removeAttr("disabled");
-    //        $("#txtCCName" + CountGrid2).attr("disabled", "disabled");
-
-    //        // can delete new inserted record  without need for delete privilage
-    //        $("#btn_minus2" + CountGrid2).removeClass("display_none");
-    //        $("#btn_minus2" + CountGrid2).removeAttr("disabled");
-
-    //         
-    //        CountGrid2 += 1;
-    //        Insert_Serial_Detail(GlobalVendorNum);
-    //        var count = DetailList.filter(s => s.VND_SERIAL == GlobalVendorNum)
-    //        if (count.length > 0) {
-    //            var count2 = count.length - 1;
-    //            var x = CountGrid2 - 1;
-    //            var Serial = $("#txtDetailSerial" + x).val();
-    //            AssignDetailsForGrids(GlobalVendorNum, count2, Serial);
-    //        }
-    //    }
-    //}
     function Validation_Grid_Detail(rowcount: number) {
         if ($("#txt_StatusFlag2" + rowcount).val() == "d" || $("#txt_StatusFlag2" + rowcount).val() == "m") {
             return true;
@@ -1695,19 +2049,22 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
             if (DetailList[rowcount].ItemID == 0) {
                 DisplayMassage(" برجاء  التأكد من ادخال جميع الخدمات", "Please enter the service", MessageType.Error);
+
                 return false
             }
             else if (DetailList[rowcount].CC_CODE == "") {
                 DisplayMassage(" برجاء  التأكد من ادخال جميع  مراكز التكلفة", "Please enter  Cost center ", MessageType.Error);
+
                 return false
             }
             else if (Qty == 0) {
                 DisplayMassage(" برجاءالتأكد من ادخال جميع الكميات ", "Please enter the Quantity ", MessageType.Error);
-
+                Errorinput($('txtQty' + rowcount))
                 return false
             }
             else if (Price == 0) {
                 DisplayMassage(" برجاء التأكد من ادخال جميع الاسعار", "Please enter the Price", MessageType.Error);
+                Errorinput($('txtPrice' + rowcount))
 
                 return false
             }
@@ -1716,6 +2073,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
     //------------------------------------------------------ Assigns Region------------------------
     function AssignForGrids(GlobalVendorNum: number, cnt: number) {
+        debugger
         var HeaderObj = InvHeaderAssign.filter(s => s.VND_SERIAL == GlobalVendorNum);
         InvHeaderAssignSingle = new AVAT_TR_PurInvoiceHeader;
         InvHeaderAssignSingle.InvoiceHeaderID = Number($("#txtInvoiceHeaderID" + cnt).val());
@@ -1735,22 +2093,23 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         }
         InvHeaderAssignSingle.VENDOR_NAME = $("#txtVendoeName" + cnt).val();
         InvHeaderAssignSingle.TOTAL = $("#txtInvtotal" + cnt).val();
-        InvHeaderAssignSingle.DISCOUNT = $("#txtDiscoutnval" + cnt).val();
+        InvHeaderAssignSingle.DISCOUNT = Number($("#txtDiscoutnval" + cnt).val());
         InvHeaderAssignSingle.PAID = 0;
-
-        //InvHeaderAssignSingle.VndVatType = Number($("#txtInvVat" + cnt).attr('data-VndVatType'));
 
         var code = $('#txtVndrCode' + cnt).val();
         var VendObj = VendorDetailList.filter(s => s.VendorCode == code && s.Isactive == true && s.CompCode == compcode);
 
-        InvHeaderAssignSingle.VndVatType = VendObj[0].VATType;
+        if (VendObj.length > 0) {
+            InvHeaderAssignSingle.VatPrc = VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc;
+            InvHeaderAssignSingle.VndVatType = VendObj[0].VATType;
+        }
+
         InvHeaderAssignSingle.Vat = $("#txtInvVat" + cnt).val();
         InvHeaderAssignSingle.NetATax = $("#txtInvNet" + cnt).val();
         InvHeaderAssignSingle.VatApplied = false;
 
-        //InvHeaderAssignSingle.VndVatType = 0;
-
-        InvHeaderAssignSingle.VatPrc =  VatDetails.filter(x => x.CODE == VendObj[0].VATType)[0].VatPerc; 
+        ////InvHeaderAssignSingle.VndVatType = 0;
+        //VatPrc = (Number($("#txtInvVat" + cnt).val())  /  Number($("#txtInvtotal" + cnt).val()))*100
         InvHeaderAssignSingle.SalesType = 0;
         InvHeaderAssignSingle.PAY_ACC_CODE = $("#txtAccCode" + cnt).val();
         InvHeaderAssignSingle.REMARK = $("#txtInvoiceDesc" + cnt).val();
@@ -1807,6 +2166,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         InvDetailAssignSingle.ACTUAL_DATE = "";
         InvDetailAssignSingle.QTY_RET = 0;
         InvDetailAssignSingle.CC_CODE = $("#txtCCcode" + cnt).val();
+        InvDetailAssignSingle.CCDT_CODE = $("#txtCCDT_CODE" + cnt).val();
         InvDetailAssignSingle.REMARK = $("#txtCRemarks" + cnt).val();
         InvDetailAssignSingle.CompCode = Number(compcode);
         InvDetailAssignSingle.BranchCode = BranchCode;
@@ -1828,7 +2188,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         var DetailArray = new Array<AVAT_TR_PurInvoiceDetail>();
         var DetailArrayShow = new Array<AQVAT_GetPurInvoiceDetail>();
         if (showFlag == true) {
-            DetailArrayShow = HeaderWithDetailModel.AQVAT_GetPurInvoiceDetail.filter(x => x.VND_SERIAL == GlobalVendorNum && x.InvoiceId == GlobalMenuID)
+            DetailArrayShow = HeaderWithDetailModel.AQVAT_GetPurInvoiceDetail.filter(x => x.VND_SERIAL == GlobalVendorNum && x.InvoiceId == GlobalInvoiceId)
             CountGrid2 = DetailArrayShow.length;
             for (var i = 0; i < DetailArrayShow.length; i++) {
                 BuildControls_Details(i);
@@ -1837,6 +2197,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $("#VND_SERIALDetail" + i).val(GlobalVendorNum);
                 var itemobj = ServicesDetails.filter(s => s.Itemid == DetailArrayShow[i].ItemID);
                 if (itemobj.length > 0) {
+
+                    var catID = itemobj[0].SrvCategoryID;
+                    var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
+
+                    let SALES_ACC_CODE = catObj[0].SALES_ACC_CODE;
+
+                    if (GetAccByCode(SALES_ACC_CODE)) {
+
+
+                        ccdtype = AccountDetails.CCDT_TYPE;
+                    }
+
                     $("#txtServCode" + i).val(itemobj[0].ItemCode);
                     $("#txtServName" + i).val(itemobj[0].Itm_DescA);
                 }
@@ -1848,11 +2220,17 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $("#txtDetailNet" + i).val(DetailArrayShow[i].NetAfterVat);
                 $("#txtCRemarks" + i).val(DetailArrayShow[i].REMARK);
 
+                $("#txtCCDT_CODE" + i).val(DetailArrayShow[i].CCDT_CODE);
+
                 $("#txtCCcode" + i).val(DetailArrayShow[i].CC_CODE);
                 var costCntrObj = CostCentreDetailsIst.filter(s => s.CC_CODE == DetailArrayShow[i].CC_CODE)
                 if (costCntrObj.length > 0) {
                     $("#txtCCName" + i).val(costCntrObj[0].CC_DESCA);
                 }
+
+
+
+
 
 
                 $("#txt_StatusFlag2" + i).val("");
@@ -1871,6 +2249,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $("#VND_SERIALDetail" + i).val(GlobalVendorNum);
                 var itemobj = ServicesDetails.filter(s => s.Itemid == DetailArray[i].ItemID);
                 if (itemobj.length > 0) {
+
+                    var catID = itemobj[0].SrvCategoryID;
+                    var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
+
+                    let SALES_ACC_CODE = catObj[0].SALES_ACC_CODE;
+
+                    if (GetAccByCode(SALES_ACC_CODE)) {
+
+
+                        ccdtype = AccountDetails.CCDT_TYPE;
+                    }
+
                     $("#txtServCode" + i).val(itemobj[0].ItemCode);
                     $("#txtServName" + i).val(itemobj[0].Itm_DescA);
                 }
@@ -1882,6 +2272,9 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 $("#txtDetailNet" + i).val(DetailArray[i].NetAfterVat);
                 $("#txtCCcode" + i).val(DetailArray[i].CC_CODE);
                 $("#txtCRemarks" + i).val(DetailArray[i].REMARK);
+
+                $("#txtCCDT_CODE" + i).val(DetailArray[i].CCDT_CODE);
+
 
                 var costCntrObj = CostCentreDetailsIst.filter(s => s.CC_CODE == DetailArray[i].CC_CODE)
                 if (costCntrObj.length > 0) {
@@ -1897,6 +2290,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
     //------------------------------------------------------ Search && Clear &&Validation  Region------------------------
     function ValidationMenu() {
+        debugger
         var newCount: number = 0;
         for (let i = 0; i < CountGrid1; i++) {
             if ($("#txt_StatusFlag1" + i).val() != "d" && $("#txt_StatusFlag1" + i).val() != "m") {
@@ -1918,35 +2312,15 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         }
         return true;
     }
-    //function ValidationHeaderWithDetail(cnt: number) {
-    //    var newCount: number = 0;
-    //    if (isNew == false) {
-    //        DisplayInvoicesDetails($("#txtInvoiceHeaderID" + cnt).val())
-    //    }
-    //    if ($("#txt_StatusFlag1" + cnt).val() != "d" && $("#txt_StatusFlag1" + cnt).val() != "m") {
-    //        for (let j = 0; j < DetailList.length; j++) {
-    //            if ((InvHeaderAssign[cnt].VND_SERIAL == DetailList[j].VND_SERIAL) && DetailList[j].StatusFlag != "m") {
-    //                newCount++;
-    //            }
-    //        }
-    //        if (newCount == 0) {
-    //            var ser = $("#txtInvSerial" + cnt).val();
-    //            DisplayMassage('الفاتورة مسلسل  ' + ser + 'لا يوجد لها تفاصيل ', 'invoice Number ' + ser + ' have no details', MessageType.Error);
-    //            Errorinput($("#txtInvSerial" + cnt));
-    //            return false;
-    //        }
-    //    }
 
-    //    return true;
-    //}
     function clear() {
         $("#div_Master :input").val("");
-        $("#divData_Header :input").val("");
+
         $("#divData_Header").html("");
-        $("#div_Data :input").val("");
         $("#div_Data").html("");
 
         txtTR_DATE.value = GetDate();
+        //txtTR_DATE.disabled = true;
 
         txtPerson.value = "";
 
@@ -1974,7 +2348,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#div_Master :input").prop("disabled", false);
         $("#btnSave").removeClass("display_none");
         $("#btnBack").removeClass("display_none");
-        $("#btnUpdate").addClass("display_none");
+        $("#btnUpdate").addClass("display_none"); 
 
         $("#btnAddHeaderControls").removeClass("display_none");
         $("#btnAddChildControls").removeClass("display_none");
@@ -2003,9 +2377,11 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtInvNet" + i).attr("disabled", "disabled");
 
             $("#txtAccDesc" + i).attr("disabled", "disabled");
+
             $("#txtInvoiceDesc" + i).removeAttr("disabled");
 
             $("#btn_minus1" + i).removeClass("display_none");
+            $("#btn_Copy" + i).removeClass("display_none");
         }
         for (let i = 0; i < CountGrid2; i++) {
             $("#txtDetailSerial" + i).attr("disabled", "disabled");
@@ -2014,30 +2390,52 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtServName" + i).attr("disabled", "disabled");
             $("#txtQty" + i).removeAttr("disabled");
             $("#txtPrice" + i).removeAttr("disabled");
+            $("#txtDetailNet" + i).removeAttr("disabled");
             $("#txtDetailTotal" + i).attr("disabled", "disabled");
             $("#txtVatPrc" + i).attr("disabled", "disabled");
             $("#txtVatAmount" + i).attr("disabled", "disabled");
-            $("#txtDetailNet" + i).attr("disabled", "disabled");
+            //$("#txtDetailNet" + i).attr("disabled", "disabled");
             $("#btnCostCntrSrch" + i).removeAttr("disabled");
+            //$("#btnCCDT_CODESrch" + i).removeAttr("disabled");
             $("#txtCCcode" + i).removeAttr("disabled");
             $("#txtCRemarks" + i).removeAttr("disabled");
             $("#txtCCName" + i).attr("disabled", "disabled");
 
             $("#btn_minus2" + i).removeClass("display_none");
+
+            //$("#btnCCDT_CODESrch" + i).attr("disabled", "disabled");
+
+
+            if (ccdtype == null || ccdtype == "") {
+                $("#btnCCDT_CODESrch" + i).attr("disabled", "disabled");
+            }
+            else {
+                $("#btnCCDT_CODESrch" + i).removeAttr("disabled");
+
+            }
+
         }
         txtCreatedAt.disabled = true;
         txtCreatedBy.disabled = true;
         txtUpdatedAt.disabled = true;
         txtUpdatedBy.disabled = true;
         $("#txtVoucherNo").attr("disabled", "disabled");
-
+        debugger
 
         txtInvTotal.disabled = true;
         txtVat.disabled = true;
         txtDiscountValue.disabled = true;
         txtNet.disabled = true;
-        chkClosed.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+        txtTR_DATE.disabled = false;
         txtMenuNum.disabled = true;
+        //alert(SysSession.CurrentPrivileges.CUSTOM1);
+        //chkClosed.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+        if (SysSession.CurrentPrivileges.CUSTOM1) {
+            $("#chkClosed").removeAttr("disabled");
+        }
+        else {
+            $("#chkClosed").attr("disabled", "disabled");
+        }
     }
     function DisableControls() {
         $("#DivFilter").removeClass("disabledDiv");
@@ -2046,8 +2444,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         $("#div_Master :input").prop("disabled", true);
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#TR_DATE").attr("disabled", "disabled");
+        $("#btnUpdate").removeClass("display_none"); 
+
         $("#btnAddHeaderControls").addClass("display_none");
         $("#btnAddChildControls").addClass("display_none");
         for (let i = 0; i < CountGrid1; i++) {
@@ -2069,6 +2467,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtInvoiceDesc" + i).attr("disabled", "disabled");
 
             $("#btn_minus1" + i).addClass("display_none");
+            $("#btn_Copy" + i).addClass("display_none");
         }
         for (let i = 0; i < CountGrid2; i++) {
             $("#txtDetailSerial" + i).attr("disabled", "disabled");
@@ -2077,11 +2476,13 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtServName" + i).attr("disabled", "disabled");
             $("#txtQty" + i).attr("disabled", "disabled");
             $("#txtPrice" + i).attr("disabled", "disabled");
+            $("#txtDetailNet" + i).attr("disabled", "disabled");
             $("#txtDetailTotal" + i).attr("disabled", "disabled");
             $("#txtVatPrc" + i).attr("disabled", "disabled");
             $("#txtVatAmount" + i).attr("disabled", "disabled");
-            $("#txtDetailNet" + i).attr("disabled", "disabled");
+            //$("#txtDetailNet" + i).attr("disabled", "disabled");
             $("#btnCostCntrSrch" + i).attr("disabled", "disabled");
+            $("#btnCCDT_CODESrch" + i).attr("disabled", "disabled");
             $("#txtCCcode" + i).attr("disabled", "disabled");
             $("#txtCRemarks" + i).attr("disabled", "disabled");
             $("#txtCCName" + i).attr("disabled", "disabled");
@@ -2094,7 +2495,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         Ajax.Callsync({
             type: "Get",//GetAll(int CompCode
             url: sys.apiUrl("AccDefVendor", "GetAll"),
-            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, FinYear: sys.SysSession.CurrentEnvironment.CurrentYear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -2108,14 +2509,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         VendorDetail = VendObj[0];
     }
     function GetAccByCode(AccCode: string): boolean {
+        debugger
+        AccountDetails = new A_ACCOUNT;
         var flag: boolean = true;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("GLDefAccount", "GetActivAccByCode"),
             data: { CompCode: compcode, AccCode: AccCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
+                debugger
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
+
                     AccountDetails = result.Response as A_ACCOUNT;
                 }
             }
@@ -2182,16 +2587,31 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             }
         });
     }
+    function GetAllCostCentersCCDT() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDtCostCenters", "GetAll"),
+            data: { compCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    CostCentreDetailsCCDTIst = result.Response as Array<A_CCDT_COSTCENTERS>;
+                }
+            }
+        });
+    }
     function GetCostCenterByCode(CC_Code: string) {
         var obj = CostCentreDetailsIst.filter(s => s.CC_CODE == CC_Code && s.ACTIVE == true);
-        CostCenterDetails = obj[0];
+        if (obj.length > 0) {
+            CostCenterDetails = obj[0];
+        }
     }
     function updateDocNumber() {
         /// updateDocNumber
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("ServPurInvoice", "updateHeadersDocNum"),
-            data: { IvnoiceID: GlobalMenuID },
+            data: { IvnoiceID: GlobalInvoiceId },
             success: (d) => {
             }
         });
@@ -2225,13 +2645,14 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
 
 
-        rp.CashType = -1;
+        rp.CashType = 2;
+        rp.Status = Number($("#drpSrchStatus").val());
 
-        if (drpSrchStatus.selectedIndex > 0)
+        if (drpImportInvoiceFilter.value != "2")
 
-            rp.Status = Number($("#drpSrchStatus").val());
+            rp.ISimport = Number($("#drpImportInvoiceFilter").val());
         else
-            rp.Status = -1;
+            rp.ISimport = -1;
 
         Ajax.Callsync({
             url: Url.Action("IProc_Rpt_VATPurInvoiceList", "GeneralReports"),
@@ -2239,64 +2660,44 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             success: (d) => {
 
                 let result = d.result as string;
-
-
                 window.open(result, "_blank");
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear);
+
+
             }
         })
     }
-    function btnPrintReceive_onclick() {
+    function btnPrintTransaction_onclick() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
 
         let rp: ReportParameters = new ReportParameters();
 
-        rp.CompCode = SysSession.CurrentEnvironment.CompCode;
-        rp.BranchCode = SysSession.CurrentEnvironment.BranchCode;
-        rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
-        rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
-        rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-        rp.Tokenid = SysSession.CurrentEnvironment.Token;
-        rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;
-        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
-        rp.SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-        var BranchNameA = SysSession.CurrentEnvironment.BranchName;
-        var BranchNameE = SysSession.CurrentEnvironment.BranchName;
-        if (BranchNameA == null || BranchNameE == null) {
 
-            BranchNameA = " ";
-            BranchNameE = " ";
-        }
-        rp.BraNameA = BranchNameA;
-        rp.BraNameE = BranchNameE;
         rp.Type = 0;
         rp.Repdesign = 1;
-        rp.TRId = GlobalMenuID;
-
-        Ajax.CallAsync({
-            url: Url.Action("IProc_Prnt_VATPurInvoice", "GeneralReports"),
-            data: rp,
-            success: (d) => {
+        rp.TRId = GlobalInvoiceId;
 
 
-                //let result = d as BaseResponse;
-                // window.open(Url.Action("ReportsPopup", "Home"), "_blank");
-                //localStorage.setItem("result", "" + result + "");
+        rp.Name_function = "IProc_Prnt_VATPurInvoice";
+        localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-                let result = d.result as string;
-                window.open(result, "_blank");
-            }
-        })
+        localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+        window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+
+
+
+
     }
     //***************************************New********************************//
     function btn_arrowdown_onclick(index: number) {
         //*****لو يوجد خدمات للفاتورة الحالية
-
+        debugger
         var CurrentDetailObj: AVAT_TR_PurInvoiceDetail = new AVAT_TR_PurInvoiceDetail();
         var CurrentHeaderId: number = 0;
         var CurrentInvoiceId: number = 0;
         if (CurrentVendorSerial != 0) {
             let x = DetailList.filter(x => x.VND_SERIAL == CurrentVendorSerial);
-            if (x != null) {
+            if (x.length > 0) {
                 CurrentInvoiceId = x[0].InvoiceId;
                 CurrentHeaderId = x[0].InvoiceHeaderID;
             }
@@ -2340,6 +2741,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 CurrentDetailObj.QTY_RET = 0;
                 CurrentDetailObj.CC_CODE = $("#txtCCcode" + i).val();
                 CurrentDetailObj.REMARK = $("#txtCRemarks" + i).val();
+                CurrentDetailObj.CCDT_CODE = $("#txtCCDT_CODE" + i).val();
                 CurrentDetailObj.CompCode = Number(compcode);
                 CurrentDetailObj.BranchCode = BranchCode;
                 CurrentDetailObj.StatusFlag = $("#txt_StatusFlag2" + i).val();
@@ -2354,9 +2756,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         let DetailForSelectedVendorSR = DetailList.filter(x => x.VND_SERIAL == CurrentVendorSerial);
         DisplayDetail(DetailForSelectedVendorSR);
         //******
-        EnableControls();
+
         if (EditModeFlag == false) {
             DisableControls();
+        }
+        if (EditModeFlag == true) {
+            EnableControls();
         }
         if (isNew == true) {
             EnableControls();
@@ -2384,6 +2789,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             if (itemobj.length > 0) {
                 $("#txtServCode" + i).val(itemobj[0].ItemCode);
                 $("#txtServName" + i).val(itemobj[0].Itm_DescA);
+                var catID = itemobj[0].SrvCategoryID;
+                var catObj = CategorDetails.filter(s => s.SrvCategoryID == catID);
+
+                let SALES_ACC_CODE = catObj[0].SALES_ACC_CODE;
+
+                debugger
+                if (GetAccByCode(SALES_ACC_CODE)) {
+                    debugger
+                    if (AccountDetails != null) {
+                        ccdtype = AccountDetails.CCDT_TYPE;
+                    }
+                }
             }
             $("#txtQty" + i).val(DetailForSelectedVendorSR[i].SoldQty);
             $("#txtPrice" + i).val(DetailForSelectedVendorSR[i].NetUnitPrice);
@@ -2393,6 +2810,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtDetailNet" + i).val(DetailForSelectedVendorSR[i].NetAfterVat);
             $("#txtCCcode" + i).val(DetailForSelectedVendorSR[i].CC_CODE);
             $("#txtCRemarks" + i).val(DetailForSelectedVendorSR[i].REMARK);
+            $("#txtCCDT_CODE" + i).val(DetailForSelectedVendorSR[i].CCDT_CODE);
+
             var costCntrObj = CostCentreDetailsIst.filter(s => s.CC_CODE == DetailForSelectedVendorSR[i].CC_CODE)
             if (costCntrObj.length > 0) {
                 $("#txtCCName" + i).val(costCntrObj[0].CC_DESCA);
@@ -2432,7 +2851,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             Header.NetATax = $("#txtInvNet" + i).val();
             Header.VatApplied = false;
             Header.VndVatType = 0;
-            Header.VatPrc = VatPrc;
+            Header.VatPrc = Tax_Rate;
+            alert(Tax_Rate);
             Header.SalesType = 0;
             Header.PAY_ACC_CODE = $("#txtAccCode" + i).val();
             Header.REMARK = $("#txtInvoiceDesc" + i).val();
@@ -2446,6 +2866,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
 
     function Assign() {
+
+        debugger
         MasterDetailModel = new ServPurchseInvoiceMasterDetail();
         // Header
         Menu = new AVAT_TR_PurInvoice();
@@ -2459,13 +2881,12 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         Menu.TOTAL = Number(txtInvTotal.value);
         Menu.DISCOUNT = Number(txtDiscountValue.value);
         Menu.PAID = 0;
-        Menu.JOURNAL_NO = 0;
         Menu.JOURNAL_RET_NO = 0;
         Menu.CLOSED = chkClosed.checked;
         Menu.CANCEL = false;
         Menu.Remark = txtRemark.value;
 
-        Menu.IsPosted = false;
+
         Menu.ACTUAL_DATE = "";
         Menu.PrntNo = "";
         Menu.Ref_No = txtRefNum.value;
@@ -2475,6 +2896,18 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         Menu.ImportInvoice = chk_ImportInvoiceDetail.checked;
         Menu.CCDT_CODE = "";
         Menu.ImportInvoiceDesc = "";
+
+        if (Selected_Data.length > 0) {
+            Menu.IsPosted = Selected_Data[0].IsPosted;
+            Menu.JOURNAL_NO = Selected_Data[0].JOURNAL_NO;
+
+            if (Selected_Data[0].IsPosted == true && Selected_Data[0].CLOSED == true) {
+                MessageBox.Show('يرجئ تعديل قيد رقم (' + Selected_Data[0].JOURNAL_NO + ')  يدوياً   ', 'تحذير');
+            }
+        }
+
+        //Menu.JOURNAL_NO = 0;
+        //Menu.IsPosted = false;
 
         // Invoices Headers
         for (var i = 0; i < InvHeaderAssign.length; i++) {
@@ -2489,6 +2922,8 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
         // Invoices Details
         MasterDetailModel.AVAT_TR_PurInvoiceDetail = DetailList;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
 
 
     }
@@ -2515,14 +2950,16 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             $("#txtServName" + CountGrid2).attr("disabled", "disabled");
             $("#txtQty" + CountGrid2).removeAttr("disabled");
             $("#txtPrice" + CountGrid2).removeAttr("disabled");
+            $("#txtDetailNet" + CountGrid2).removeAttr("disabled");
             $("#txtDetailTotal" + CountGrid2).attr("disabled", "disabled");
             $("#txtVatPrc" + CountGrid2).attr("disabled", "disabled");
             $("#txtVatAmount" + CountGrid2).attr("disabled", "disabled");
-            $("#txtDetailNet" + CountGrid2).attr("disabled", "disabled");
+            //$("#txtDetailNet" + CountGrid2).attr("disabled", "disabled");
 
             $("#VND_SERIALDetail" + CountGrid2).val(GlobalVendorNum);
 
             $("#btnCostCntrSrch" + CountGrid2).removeAttr("disabled");
+            $("#btnCCDT_CODESrch" + CountGrid2).removeAttr("disabled");
             $("#txtCCcode" + CountGrid2).removeAttr("disabled");
             $("#txtCRemarks" + CountGrid2).removeAttr("disabled");
             $("#txtCCName" + CountGrid2).attr("disabled", "disabled");
@@ -2566,6 +3003,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
     function btnSave_onclick() {
         //****to collect the detail data 
+
         loading('btnsave');
 
         setTimeout(function () {
@@ -2577,15 +3015,23 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                 return
             }
 
+            debugger
 
+            //btn_arrowdown_onclick(0);
 
-            btn_arrowdown_onclick(0);
+            debugger
 
+            ComputeTotals();
+
+            debugger
 
             Assign();
+            debugger
 
             if (!ValidationMenu())
                 return;
+
+            debugger
 
 
             for (let i = 0; i < CountGrid1; i++) {
@@ -2593,25 +3039,39 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
                     return;
             }
 
+            debugger
+
             for (let i = 0; i < CountGrid1; i++) {
                 if (!Validation_Grid_Header(i))
                     return;
             }
+
+            debugger
+
 
             for (let i = 0; i < DetailList.length; i++) {
                 if (!ValidationDetailBeforeSave(i))
                     return;
             }
 
+            debugger
+
+
+            if (!CheckDate(DateFormat(txtTR_DATE.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+                Errorinput(txtTR_DATE);
+                return
+            }
+
+            debugger
+
+
             if (isNew == true) {
                 Insert();
             } else {
                 Update();
             }
-            EditModeFlag = false;
-            isNew = false;
-            CurrentVendorSerial = 0;
-            $("#btnPrintTransaction").removeClass("display_none");
+
 
         }, 100);
     }
@@ -2630,31 +3090,35 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
             //$("#txt_StatusFlag1" + RecNo).val() == 'i' ? $("#txt_StatusFlag1" + RecNo).val('m') : $("#txt_StatusFlag1" + RecNo).val('d');
 
-            $("#txt_StatusFlag1" + RecNo).val("d");
-
-            $("#txtInvTrNO" + RecNo).val("22");
-            $("#txtVndrCode" + RecNo).val("22");
-            $("#txtVendoeName" + RecNo).val("22");
-            $("#txtInvoiceDate" + RecNo).val("22");
-            $("#txtDiscoutnval" + RecNo).val("22");
-            $("#txtInvtotal" + RecNo).val("22");
-            $("#txtInvVat" + RecNo).val("22");
-            $("#txtAccCode" + RecNo).val("22");
-            $("#txtAccDesc" + RecNo).val("22");
-            $("#txtInvoiceDesc" + RecNo).val("22");
-            GlobalVendorNum = $("#VND_SERIAL" + RecNo).val();
-            AssignForGrids(GlobalVendorNum, RecNo);
-            $("#No_Row1" + RecNo).attr("hidden", "true");
-            $("#div_Data").html("");
-            $("#DivChargesShow2").addClass("display_none");
-            Insert_Serial_Header();
-            ComputeTotals();
-            //****new
-            CurrentVendorSerial = 0;
-            CountGrid1 = CountGrid1 - 1;
+            Delete_Row(RecNo);
 
 
         });
+    }
+
+    function Delete_Row(RecNo: number) {
+        $("#txt_StatusFlag1" + RecNo).val() == 'i' ? $("#txt_StatusFlag1" + RecNo).val('m') : $("#txt_StatusFlag1" + RecNo).val('d');
+        //$("#txt_StatusFlag1" + RecNo).val("d");
+
+        $("#txtInvTrNO" + RecNo).val("22");
+        //$("#txtVndrCode" + RecNo).val("22");
+        $("#txtVendoeName" + RecNo).val("22");
+        $("#txtInvoiceDate" + RecNo).val("22");
+        $("#txtDiscoutnval" + RecNo).val("22");
+        $("#txtInvtotal" + RecNo).val("22");
+        $("#txtInvVat" + RecNo).val("22");
+        $("#txtAccCode" + RecNo).val("22");
+        $("#txtAccDesc" + RecNo).val("22");
+        $("#txtInvoiceDesc" + RecNo).val("22");
+        GlobalVendorNum = $("#VND_SERIAL" + RecNo).val();
+        AssignForGrids(GlobalVendorNum, RecNo);
+        $("#No_Row1" + RecNo).attr("hidden", "true");
+        $("#div_Data").html("");
+        $("#DivChargesShow2").addClass("display_none");
+        Insert_Serial_Header();
+        ComputeTotals();
+        //****new
+        CurrentVendorSerial = 0;
     }
 
     function GetMaxVendorSerial() {
@@ -2711,8 +3175,10 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
             //****
             GlobalVendorNum = CountGrid1 + 1;
             // can delete new inserted record  without need for delete privilage
+            $("#btn_Copy" + CountGrid1).removeClass("display_none");
             $("#btn_minus1" + CountGrid1).removeClass("display_none");
             $("#btn_minus1" + CountGrid1).removeAttr("disabled");
+            $("#btn_Copy" + CountGrid1).removeAttr("disabled");
 
             var count = InvHeaderAssign.filter(s => s.VND_SERIAL == GlobalVendorNum)
             if (count.length > 0) {
@@ -2732,6 +3198,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
     }
 
     function ValidationHeaderWithDetail(cnt: number) {
+        debugger
         var newCount: number = 0;
         if ($("#txt_StatusFlag1" + cnt).val() != "d" && $("#txt_StatusFlag1" + cnt).val() != "m") {
             for (let j = 0; j < DetailList.length; j++) {
@@ -2749,5 +3216,6 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
         return true;
     }
+
 
 }

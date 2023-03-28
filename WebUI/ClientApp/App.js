@@ -220,8 +220,14 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+            if (stfix < 0) {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+            }
+            else {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
@@ -381,6 +387,14 @@ function GetBranchs() {
         }
     });
 }
+var Ajax_Data = /** @class */ (function () {
+    function Ajax_Data() {
+        this.type = "";
+        this.url = "";
+        this.data = "";
+    }
+    return Ajax_Data;
+}());
 var GQ_GetUserBranch = /** @class */ (function () {
     function GQ_GetUserBranch() {
         this.USER_CODE = "";
@@ -549,6 +563,43 @@ var Ajax = {
             type: settings.type,
             url: settings.url,
             data: settings.data,
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: function (d) {
+                settings.success(d, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+            },
+            error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        });
+    },
+    CallsyncUi: function (settings) {
+        CheckTime();
+        //
+        debugger;
+        var AD = new Ajax_Data();
+        if (typeof settings.data == "undefined") {
+            var data = [];
+            settings.data = data;
+            alert('لا يوجد ');
+        }
+        if (isObject(settings, 'data')) {
+            alert('Object');
+            settings.data = JSON.stringify(settings.data);
+        }
+        else {
+            alert('Json');
+        }
+        AD.type = settings.type;
+        var URL = settings.url.replace($("#GetAPIUrl").val(), "");
+        AD.url = URL;
+        AD.data = settings.data;
+        $.ajax({
+            url: Url.Action("AccessApi", "GeneralAPI"),
+            data: { data: JSON.stringify(AD) },
             headers: {
                 'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
@@ -2187,5 +2238,29 @@ function Event_key(key, Nameinput, NameBtnEvent) {
             document.getElementById(NameBtnEvent).click();
         }
     });
+}
+function CopyRowGrid(DataList, Key, value) {
+    debugger;
+    var flagNewH;
+    flagNewH = false;
+    var NewModel = new Array();
+    for (var i = 0; i < DataList.length; i++) {
+        debugger;
+        NewModel.push(DataList[i]);
+        if (flagNewH == true) {
+            if (NewModel[i].StatusFlag != 'i' && NewModel[i].StatusFlag != 'd' && NewModel[i].StatusFlag != 'm') {
+                NewModel[i].StatusFlag = 'u';
+            }
+        }
+        var List = DataList[i];
+        if (List[Key] == value) {
+            var ModelPur = JSON.parse(JSON.stringify(DataList[i]));
+            ModelPur[Key] = Number(DataList.length + 20);
+            ModelPur.StatusFlag = 'i';
+            NewModel.push(ModelPur);
+            flagNewH = true;
+        }
+    }
+    return NewModel;
 }
 //# sourceMappingURL=App.js.map
