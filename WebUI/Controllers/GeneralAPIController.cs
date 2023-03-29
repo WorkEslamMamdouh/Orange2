@@ -142,8 +142,8 @@ namespace Inv.WebUI.Controllers
 
             if (Ajaxdata.type == "Post")
             {
-
-                //string res = httpClient.PostAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "?" + _parameters + "");
+                //httpClient.
+                //string res = httpClient.SendAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "?" + _parameters + "");
             }
             else
             {
