@@ -224,9 +224,9 @@ namespace Inv.API.Controllers
                         condition = condition + " and TrDate>='" + strtdt + "'";
                     if (Enddt != null)
                         condition = condition + " and TrDate<='" + Enddt + "'";
-                    string s = "select * from I_TR_Collect where ";
+                    string s = "select * from IQ_GetCollectList where ";
                     s = s + condition;
-                    var res = db.Database.SqlQuery<I_TR_Collect>(s).ToList();
+                    var res = db.Database.SqlQuery<IQ_GetCollectList>(s).ToList();
                     return Ok(new BaseResponse(res));
                 }
             }

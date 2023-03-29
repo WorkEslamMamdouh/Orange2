@@ -5354,20 +5354,29 @@ namespace RS.WebUI.Reports.Forms
             int RepType = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", RepType);
 
-            int TrType = int.Parse(RepPar.TrType.ToString());
-            SqlParameter spTrType = new SqlParameter("@TrType", TrType);
+            int TrType = int.Parse(RepPar.TrType.ToString()); 
+            SqlParameter spTrType = new SqlParameter("@TrType", TrType == -1 ? System.Data.SqlTypes.SqlInt32.Null : TrType);
 
+            int CatId = int.Parse(RepPar.CatId.ToString());
+            SqlParameter spCatId = new SqlParameter("@CatID", CatId == -1 ? System.Data.SqlTypes.SqlInt32.Null : CatId);
+
+              int ItemFamId = int.Parse(RepPar.ItemFamId.ToString());
+            SqlParameter spItemFamId = new SqlParameter("@ItemFamId", ItemFamId == -1 ? System.Data.SqlTypes.SqlInt32.Null : ItemFamId);
+
+            int ItemID = int.Parse(RepPar.ItemID.ToString());
+            SqlParameter spItemID = new SqlParameter("@ItemID", ItemID == -1 ? System.Data.SqlTypes.SqlInt32.Null : ItemID);
+              
             string dateForm = RepPar.FromDate.ToString();
             SqlParameter spformDate = new SqlParameter("@FromDate", dateForm);
 
             string dateTo = RepPar.ToDate.ToString();
             SqlParameter sptoDate = new SqlParameter("@ToDate", dateTo);
 
-          
 
-           
+      
 
-          
+
+
 
             //int storeID = int.Parse(RepPar.storeID.ToString());
             //SqlParameter spStore_Code = new SqlParameter("@Store_Code", Store_Code == -1 ? System.Data.SqlTypes.SqlInt32.Null : Store_Code);
@@ -5390,8 +5399,11 @@ namespace RS.WebUI.Reports.Forms
            ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
            ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
            ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
-           ", @RepType = " + spTrType.Value +
+           ", @RepType = " + spRepType.Value +
            ", @TrType = " + spTrType.Value +
+           ", @CatID = " + spCatId.Value +
+           ", @ItemFamId = " + spItemFamId.Value +
+           ", @ItemID = " + spItemID.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @ToDate = '" + sptoDate.Value + "'" +
           

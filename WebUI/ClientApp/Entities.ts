@@ -10249,6 +10249,7 @@ class I_TR_Collect extends SecurityClass {
         this.LabourCost = 0;
         this.MaterialCost = 0;
         this.InputItemCost = 0;
+        this.TrType = 0;
         this.status_txt = "";
     }
     public CollectID: number;
@@ -10271,6 +10272,7 @@ class I_TR_Collect extends SecurityClass {
     public LabourCost: number;
     public MaterialCost: number;
     public InputItemCost: number;
+    public TrType: number;
     public status_txt: string;
 }
 
@@ -11269,3 +11271,84 @@ class IQ_GetStkOpenDetail {
     public UomCode: string;
 }
 
+class IQ_GetCollectList {
+    constructor() {
+        this.CollectID = 0;
+        this.TrNo = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+        this.LabourCost = 0;
+        this.MaterialCost = 0;
+        this.InputItemCost = 0;
+        this.Qty = 0;
+        this.NewUnitCost = 0;
+        this.OutValue = 0;
+        this.ItemCode = "";
+        this.Itm_DescA = "";
+        this.Itm_DescE = "";
+        this.UomCode = "";
+        this.Uom_DescA = "";
+        this.Uom_DescE = "";
+        this.ItemFamilyID = 0;
+        this.FamilyCode = "";
+        this.fmly_DescA = "";
+        this.fmly_DescE = "";
+        this.CatID = 0;
+        this.ItemID = 0;
+        this.TrType = 0;
+        this.Typ_DescA = "";
+        this.Typ_DescE = "";
+    }
+    public CollectID: number;
+    public TrNo: number;
+    public RefNO: string;
+    public TrDate: string;
+    public TrDateH: string;
+    public StoreID: number;
+    public Remark: string;
+    public IsPosted: boolean;
+    public VoucherNo: number;
+    public VoucherType: number;
+    public CreatedAt: string;
+    public CreatedBy: string;
+    public UpdatedAt: string;
+    public UpdatedBy: string;
+    public CompCode: number;
+    public BranchCode: number;
+    public Status: number;
+    public LabourCost: number;
+    public MaterialCost: number;
+    public InputItemCost: number;
+    public Qty: number;
+    public NewUnitCost: number;
+    public OutValue: number;
+    public ItemCode: string;
+    public Itm_DescA: string;
+    public Itm_DescE: string;
+    public UomCode: string;
+    public Uom_DescA: string;
+    public Uom_DescE: string;
+    public ItemFamilyID: number;
+    public FamilyCode: string;
+    public fmly_DescA: string;
+    public fmly_DescE: string;
+    public CatID: number;
+    public ItemID: number;
+    public TrType: number;
+    public Typ_DescA: string;
+    public Typ_DescE: string;
+}
+ 

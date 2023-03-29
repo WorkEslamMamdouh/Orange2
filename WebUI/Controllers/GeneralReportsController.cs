@@ -1613,8 +1613,11 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("TrType", rp.TrType);
+            rep.AddParameter("CatId", rp.CatId);
+            rep.AddParameter("ItemFamId", rp.ItemFamId);
+            rep.AddParameter("ItemID", rp.ItemID);
             string url = rep.GetReportUrl("Rep_CollectList");
-
+              
             return Shared.JsonObject(url);
         }
 

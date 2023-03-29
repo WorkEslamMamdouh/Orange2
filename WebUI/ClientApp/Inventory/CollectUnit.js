@@ -38,8 +38,17 @@ var CollectUnit;
     var btnPrint;
     var btnPrintTransaction;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var drp_CollType;
+    var Filtr_CollType;
+    var drpPaymentType;
+    var drpitem_family;
+    var txt_ID_APP_Type;
     var drp_Store;
     var ddlstatus;
+    var Display_ItemFamily = new Array();
+    var Display_ItemFamilyFill = new Array();
+    var Details = new Array();
+    var CodesTypes = new Array();
     var CollectList = new Array();
     var SearchDetails = new Array();
     var hd_CollectID;
@@ -65,8 +74,12 @@ var CollectUnit;
         InitalizeEvents();
         InitializeGrid();
         FillStore();
+        GetCardTypes();
         drp_Store.selectedIndex = 1;
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
+        Display_DrpPaymentType();
+        Display_I_ItemFamily();
+        txt_ID_APP_Type.innerHTML = '<option value="null">اختر الصنف</option>';
     }
     CollectUnit.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -83,6 +96,11 @@ var CollectUnit;
         btnAddDetails = DocumentActions.GetElementById("btnAddDetails");
         btnShow = DocumentActions.GetElementById("btnShow");
         drp_Store = DocumentActions.GetElementById("drp_Store");
+        drpPaymentType = DocumentActions.GetElementById("drpPaymentType");
+        drpitem_family = DocumentActions.GetElementById("drpitem_family");
+        txt_ID_APP_Type = DocumentActions.GetElementById("txt_ID_APP_Type");
+        drp_CollType = DocumentActions.GetElementById("drp_CollType");
+        Filtr_CollType = DocumentActions.GetElementById("Filtr_CollType");
         hd_CollectID = DocumentActions.GetElementById("hd_CollectID");
         chkStatus = document.getElementById("chkStatus");
         ddlstatus = document.getElementById("ddlstatus");
@@ -110,6 +128,8 @@ var CollectUnit;
         $("#txt_OUT_ItemCode").on('change', function () {
             txt_OUT_search_onchange();
         });
+        drpPaymentType.onchange = drpPaymentType_onchange;
+        drpitem_family.onchange = itemDisplay;
     }
     function InitializeGrid() {
         var res = GetResourceList("");
@@ -126,20 +146,22 @@ var CollectUnit;
         Grid.PrimaryKey = "CollectID";
         Grid.Columns = [
             { title: res.App_Number, name: "CollectID", type: "text", width: "0%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
+            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
             {
-                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "10%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
                     txt.innerHTML = DateFormat(item.TrDate);
                     return txt;
                 }
             },
-            { title: res.TransExplain, name: "Remark", type: "text", width: "20%" },
-            { title: res.Inv_LabourCost, name: "LabourCost", type: "text", width: "13%" },
-            { title: " تكلفة المواد", name: "MaterialCost", type: "text", width: "13%" },
+            { title: 'نوع الحركه', name: "Typ_DescA", type: "text", width: "10%" },
+            { title: 'المخرجات', name: "Itm_DescA", type: "text", width: "25%" },
+            { title: 'الكمية', name: "Qty", type: "text", width: "13%" },
+            { title: res.Inv_LabourCost, name: "LabourCost", type: "text", width: "10%" },
+            { title: " تكلفة المواد", name: "MaterialCost", type: "text", width: "10%" },
             {
-                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "10%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
                     txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
@@ -157,10 +179,18 @@ var CollectUnit;
         var condition = " CompCode=" + Number(SysSession.CurrentEnvironment.CompCode) + " and BranchCode=" + Number(SysSession.CurrentEnvironment.BranchCode);
         var startdate = "";
         var Enddate = "";
+        if (Filtr_CollType.value != "null" && Filtr_CollType.value != "")
+            condition = condition + " and TrType=" + Filtr_CollType.value + "";
         if (drp_Store.value != "null" && drp_Store.value != "")
             condition = condition + " and StoreID=" + drp_Store.value + "";
         if (ddlstatus.value != "null" && ddlstatus.value != "")
             condition = condition + " and Status=" + ddlstatus.value;
+        if (drpPaymentType.value != "null" && drpPaymentType.value != "")
+            condition = condition + " and CatID=" + drpPaymentType.value + "";
+        if (drpitem_family.value != "null" && drpitem_family.value != "")
+            condition = condition + " and ItemFamilyID=" + drpitem_family.value + "";
+        if (txt_ID_APP_Type.value != "null" && txt_ID_APP_Type.value != "")
+            condition = condition + " and ItemID=" + txt_ID_APP_Type.value + "";
         if (txtFromDate.value != "")
             startdate = DateFormatRep(txtFromDate.value);
         if (txtToDate.value != "")
@@ -558,6 +588,7 @@ var CollectUnit;
         Model.Status = collectMaster.Status;
         DocumentActions.RenderFromModel(collectMaster);
         txtTransferDate.value = DateFormat(collectMaster.TrDate);
+        drp_CollType.value = collectMaster.TrType.toString();
     }
     function DisplayDetails(CollectDet) {
         debugger;
@@ -669,6 +700,11 @@ var CollectUnit;
             Errorinput(drp_Store);
             return false;
         }
+        if ($("#drp_CollType").val() == "" || $("#drp_CollType").val() == "null") {
+            DisplayMassage(" برجاء اختيار نوع الحركة ", "Please Enter Store", MessageType.Worning);
+            Errorinput(drp_CollType);
+            return false;
+        }
         if ($("#txtTransferDate").val() == "") {
             DisplayMassage(" برجاء ادخال تاريخ الحركة ", "Please Enter Date", MessageType.Worning);
             Errorinput(txtTransferDate);
@@ -761,6 +797,135 @@ var CollectUnit;
             }
         });
     }
+    function GetCardTypes() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GCodes", "GetAll"),
+            data: { codeType: 'CollType', UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess == true) {
+                    CodesTypes = result.Response;
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillComboFirstvalue(CodesTypes, Filtr_CollType, "CodeValue", "DescA", " اختار  نوع الحركه", null);
+                        DocumentActions.FillComboFirstvalue(CodesTypes, drp_CollType, "CodeValue", "DescA", " اختار  نوع الحركه", null);
+                    }
+                    else {
+                        DocumentActions.FillComboFirstvalue(CodesTypes, Filtr_CollType, "CodeValue", "DescE", "- Select -", null);
+                        DocumentActions.FillComboFirstvalue(CodesTypes, drp_CollType, "CodeValue", "DescE", "- Select -", null);
+                    }
+                }
+            }
+        });
+    }
+    //----------------------------------------------------( Get Item_Cat )
+    function Display_DrpPaymentType() {
+        var Display_Type = new Array();
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefCategory", "GetAll"),
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    Display_Type = result.Response;
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillCombowithdefult(Display_Type, drpPaymentType, "CatID", "DescA", "اختر الفئة");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(Display_Type, drpPaymentType, "CatID", "DescL", "Select Category");
+                    }
+                }
+            }
+        });
+    }
+    //----------------------------------------------------( Get item familly )
+    function Display_I_ItemFamily() {
+        Display_ItemFamily = new Array();
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefItemType", "GetAll"),
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    Display_ItemFamily = result.Response;
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+                    }
+                    if (drpitem_family.value != 'null') {
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').removeAttr("disabled");
+                    }
+                    else {
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').attr("disabled");
+                    }
+                }
+            }
+        });
+    }
+    function drpPaymentType_onchange() {
+        if (drpPaymentType.value != 'null') {
+            Display_ItemFamilyFill = Display_ItemFamily.filter(function (x) { return x.CatID == Number(drpPaymentType.value); });
+            if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                DocumentActions.FillCombowithdefult(Display_ItemFamilyFill, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+            }
+            else {
+                DocumentActions.FillCombowithdefult(Display_ItemFamilyFill, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+            }
+        }
+        else {
+            if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+            }
+            else {
+                DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+            }
+        }
+        $('#txt_ID_APP_Type').attr("disabled", "disabled");
+        txt_ID_APP_Type.innerHTML = '<option value="null">اختر الصنف</option>';
+    }
+    //----------------------------------------------------( Item Desc )
+    function itemDisplay() {
+        if (drpitem_family.value != 'null') {
+            Details = new Array();
+            var ItemFamilyID = Number($("#drpitem_family").val());
+            var finyear = sys.SysSession.CurrentEnvironment.CurrentYear;
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("StkDefItemType", "GetI_ItemByFamilyIdOrdered"),
+                data: {
+                    CompCode: compcode, FinYear: finyear, familyid: ItemFamilyID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        Details = result.Response;
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').removeAttr("disabled");
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "DescA", "اختر الصنف");
+                        }
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "DescL", "Select Item");
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            $('#txt_ID_APP_Type').attr("disabled", "disabled");
+            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "Itm_DescA", "اختر الصنف");
+        }
+    }
     //*********************************************functions*******************************************//
     function chkprivialgesToEditApprovedInvoice() {
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
@@ -825,6 +990,7 @@ var CollectUnit;
         hd_CollectID.value = "0";
         $("#div_Data").html('');
         CountGrid = 0;
+        drp_CollType.value = 'null';
     }
     //******************************************Assign**********************************************//
     function Assign() {
@@ -837,7 +1003,8 @@ var CollectUnit;
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.TrDate = txtTransferDate.value;
-        Model.TrDateH = convertToH(txtTransferDate.value); //==========???error
+        Model.TrType = Number(drp_CollType.value);
+        //Model.TrDateH = convertToH(txtTransferDate.value);//==========???error
         //*****************************AssignOutputdetails
         ModelCollectDet = new Array();
         var det = new I_TR_CollectDetail();
@@ -1059,6 +1226,10 @@ var CollectUnit;
         else {
             rp.Status = $("#ddlstatus").val();
         }
+        rp.TrType = Filtr_CollType.value == "null" ? -1 : Number(Filtr_CollType.value);
+        rp.CatId = drpPaymentType.value == "null" ? -1 : Number(drpPaymentType.value);
+        rp.ItemFamId = drpitem_family.value == "null" ? -1 : Number(drpitem_family.value);
+        rp.ItemID = txt_ID_APP_Type.value == "null" ? -1 : Number(txt_ID_APP_Type.value);
         Ajax.Callsync({
             url: Url.Action("IProc_Rep_CollectList", "GeneralReports"),
             data: rp,

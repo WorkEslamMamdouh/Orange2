@@ -6005,6 +6005,7 @@ var I_TR_Collect = /** @class */ (function (_super) {
         _this.LabourCost = 0;
         _this.MaterialCost = 0;
         _this.InputItemCost = 0;
+        _this.TrType = 0;
         _this.status_txt = "";
         return _this;
     }
@@ -6629,5 +6630,48 @@ var IQ_GetStkOpenDetail = /** @class */ (function () {
         this.UomCode = "";
     }
     return IQ_GetStkOpenDetail;
+}());
+var IQ_GetCollectList = /** @class */ (function () {
+    function IQ_GetCollectList() {
+        this.CollectID = 0;
+        this.TrNo = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+        this.LabourCost = 0;
+        this.MaterialCost = 0;
+        this.InputItemCost = 0;
+        this.Qty = 0;
+        this.NewUnitCost = 0;
+        this.OutValue = 0;
+        this.ItemCode = "";
+        this.Itm_DescA = "";
+        this.Itm_DescE = "";
+        this.UomCode = "";
+        this.Uom_DescA = "";
+        this.Uom_DescE = "";
+        this.ItemFamilyID = 0;
+        this.FamilyCode = "";
+        this.fmly_DescA = "";
+        this.fmly_DescE = "";
+        this.CatID = 0;
+        this.ItemID = 0;
+        this.TrType = 0;
+        this.Typ_DescA = "";
+        this.Typ_DescE = "";
+    }
+    return IQ_GetCollectList;
 }());
 //# sourceMappingURL=Entities.js.map
