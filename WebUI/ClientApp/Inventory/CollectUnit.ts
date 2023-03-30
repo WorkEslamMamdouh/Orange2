@@ -1132,7 +1132,7 @@ namespace CollectUnit {
         CountGrid = 0;
         drp_CollType.value = 'null';
     }
-    //******************************************Assign**********************************************//
+    //**********************************************Assign**********************************************//
     function Assign() {
         DocumentActions.AssignToModel(Model);
         Model.CollectID = Number(hd_CollectID.value);
@@ -1276,7 +1276,7 @@ namespace CollectUnit {
         CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
         CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
-            type: "post",
+            type: "Post",
             url: sys.apiUrl("Collect", "UpdateALL"),
             data: JSON.stringify(CollectMasterDetail),
             success: (d) => {

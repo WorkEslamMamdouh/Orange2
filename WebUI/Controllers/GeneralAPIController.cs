@@ -3,10 +3,12 @@ using Inv.DAL.Repository;
 using Inv.WebUI.Reports.Forms;
 using Inv.WebUI.Reports.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Configuration;
@@ -134,30 +136,22 @@ namespace Inv.WebUI.Controllers
 
             Ajax_Data Ajaxdata = JsonConvert.DeserializeObject<Ajax_Data>(data);
             HttpClient httpClient = new HttpClient();
-              NewData = Ajaxdata.data;
+            NewData = Ajaxdata.data;
+            string url = WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url;
             if (Ajaxdata.ISObject)
             {
-                NewData = ConvertDateStr(NewData); 
-            }
+                NewData = ConvertDateStr(NewData);
 
-            if (Ajaxdata.type == "Post")
-            {
-                //httpClient.
-                //string res = httpClient.SendAsync(WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "?" + _parameters + "");
-            }
-            else
-            {
-
-                string url = WebConfigurationManager.AppSettings["ServiceUrl"] + "" + Ajaxdata.url + "" + NewData + "";
-
+                url = url + "" + NewData + "";
                 string res = httpClient.GetStringAsync(url).Result;
                 return res;
+            } 
+            else
+            {
+                string res = PostRequest(url, NewData);
+                return res;
             }
-
-
-
-            //
-            return "";
+             
         }
 
         public string ConvertDateStr(string data)
@@ -165,10 +159,10 @@ namespace Inv.WebUI.Controllers
             StringBuilder models = new StringBuilder();
             _parameters = System.Web.Helpers.Json.Decode(data);
             int falgfrist = 0;
-            foreach (var item in _parameters)
+            foreach (KeyValuePair<string, object> item in _parameters)
             {
-                var Key = item.Key;
-                var Value = item.Value;
+                string Key = item.Key;
+                object Value = item.Value;
 
 
                 if (falgfrist == 0)
@@ -177,7 +171,7 @@ namespace Inv.WebUI.Controllers
                 }
                 else
                 {
-                    models.Append("&"+Key + "=" + Value);
+                    models.Append("&" + Key + "=" + Value);
                 }
 
                 falgfrist = 1;
@@ -185,6 +179,20 @@ namespace Inv.WebUI.Controllers
 
 
             return models.ToString();
+        }
+
+
+        public string PostRequest(string url, string oJsonObject)
+        {
+             
+            HttpClient oHttpClient = new HttpClient();
+
+            var content = new StringContent(oJsonObject, Encoding.UTF8, "application/json");
+            var result = oHttpClient.PostAsync(url, content).Result;
+             
+            string resultContent = result.Content.ReadAsStringAsync().Result;
+            return resultContent;
+             
         }
 
         //-----------------------------------------------------*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*----
