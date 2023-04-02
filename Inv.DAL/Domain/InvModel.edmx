@@ -459,7 +459,7 @@
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdatedAt" Type="smalldatetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CodePrefex" Type="nvarchar" MaxLength="5" />
+          <Property Name="CodePrefex" Type="nvarchar" MaxLength="25" />
           <Property Name="LastNumber" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="A_RecPay_D_Group">
@@ -10417,7 +10417,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="A_RecPay_D_Accounts" EntityType="InvModel.A_RecPay_D_Accounts" />
           <EntitySet Name="A_RecPay_D_AjustmentType" EntityType="InvModel.A_RecPay_D_AjustmentType" />
           <EntitySet Name="A_RecPay_D_CashBox" EntityType="InvModel.A_RecPay_D_CashBox" />
-          <EntitySet Name="A_RecPay_D_Category" EntityType="InvModel.A_RecPay_D_Category" />
           <EntitySet Name="A_RecPay_D_Group" EntityType="InvModel.A_RecPay_D_Group" />
           <EntitySet Name="A_RecPay_Tr_Adjustment" EntityType="InvModel.A_RecPay_Tr_Adjustment" />
           <EntitySet Name="A_RecPay_Tr_ReceiptNote" EntityType="InvModel.A_RecPay_Tr_ReceiptNote" />
@@ -12189,6 +12188,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="ToDate" Mode="In" Type="String" />
             <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="A_RecPay_D_Category" EntityType="InvModel.A_RecPay_D_Category" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -12289,25 +12289,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="MaxDailyExpenses" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OpenBalance" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OpenBalanceDate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="A_RecPay_D_Category">
-          <Key>
-            <PropertyRef Name="CatID" />
-          </Key>
-          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AccountType" Type="Int32" />
-          <Property Name="CatCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Cat_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Cat_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="REMARKS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CompCode" Type="Int32" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CodePrefex" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="A_RecPay_D_Group">
           <Key>
@@ -22974,6 +22955,25 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Int32" Name="STORE_CODE" Nullable="true" />
           <Property Type="String" Name="store_DescE" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="A_RecPay_D_Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountType" Type="Int32" />
+          <Property Name="CatCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_DescA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="REMARKS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AccountCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="0" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodePrefex" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="LastNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23080,26 +23080,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="CashBox_DescE" ColumnName="CashBox_DescE" />
                 <ScalarProperty Name="CashBox_DescA" ColumnName="CashBox_DescA" />
                 <ScalarProperty Name="CashBoxID" ColumnName="CashBoxID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="A_RecPay_D_Category">
-            <EntityTypeMapping TypeName="InvModel.A_RecPay_D_Category">
-              <MappingFragment StoreEntitySet="A_RecPay_D_Category">
-                <ScalarProperty Name="CodePrefex" ColumnName="CodePrefex" />
-                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
-                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
-                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
-                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
-                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
-                <ScalarProperty Name="CatCode" ColumnName="CatCode" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -34186,6 +34166,26 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="A_RecPay_D_Category">
+            <EntityTypeMapping TypeName="InvModel.A_RecPay_D_Category">
+              <MappingFragment StoreEntitySet="A_RecPay_D_Category">
+                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
+                <ScalarProperty Name="CodePrefex" ColumnName="CodePrefex" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="Cat_DescE" ColumnName="Cat_DescE" />
+                <ScalarProperty Name="Cat_DescA" ColumnName="Cat_DescA" />
+                <ScalarProperty Name="CatCode" ColumnName="CatCode" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -34,7 +34,6 @@ namespace Inv.DAL.Domain
         public virtual DbSet<A_RecPay_D_Accounts> A_RecPay_D_Accounts { get; set; }
         public virtual DbSet<A_RecPay_D_AjustmentType> A_RecPay_D_AjustmentType { get; set; }
         public virtual DbSet<A_RecPay_D_CashBox> A_RecPay_D_CashBox { get; set; }
-        public virtual DbSet<A_RecPay_D_Category> A_RecPay_D_Category { get; set; }
         public virtual DbSet<A_RecPay_D_Group> A_RecPay_D_Group { get; set; }
         public virtual DbSet<A_RecPay_Tr_Adjustment> A_RecPay_Tr_Adjustment { get; set; }
         public virtual DbSet<A_RecPay_Tr_ReceiptNote> A_RecPay_Tr_ReceiptNote { get; set; }
@@ -228,6 +227,7 @@ namespace Inv.DAL.Domain
         public virtual DbSet<G_LnkTrans_Comp> G_LnkTrans_Comp { get; set; }
         public virtual DbSet<GQ_GetLnkTransComp> GQ_GetLnkTransComp { get; set; }
         public virtual DbSet<IQ_GetCollectList> IQ_GetCollectList { get; set; }
+        public virtual DbSet<A_RecPay_D_Category> A_RecPay_D_Category { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
