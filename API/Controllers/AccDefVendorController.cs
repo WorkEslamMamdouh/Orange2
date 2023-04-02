@@ -7,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Inv.API.Controllers;
 
 namespace Inv.API.Controllers
 {
@@ -20,46 +18,58 @@ namespace Inv.API.Controllers
 
         public AccDefVendorController(IAccDefVendorService _IAccDefVendorService, G_USERSController _Control)
         {
-            this.AccDefVendorService = _IAccDefVendorService;
-            this.UserControl = _Control;
+            AccDefVendorService = _IAccDefVendorService;
+            UserControl = _Control;
         }
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAll(int CompCode, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefVendorList = AccDefVendorService.GetAll(x => x.CompCode == CompCode).ToList();
+                List<A_Pay_D_Vendor> AccDefVendorList = AccDefVendorService.GetAll(x => x.CompCode == CompCode).ToList();
                 return Ok(new BaseResponse(AccDefVendorList));
             }
             return BadRequest(ModelState);
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllVendorType(int CompCode,int VendorType ,  string UserCode, string Token)
+        public IHttpActionResult GetAllVendorType(int CompCode, int VendorType, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefVendorList = AccDefVendorService.GetAll(x => x.CompCode == CompCode && x.VendorType == VendorType).ToList();
+                List<A_Pay_D_Vendor> AccDefVendorList = AccDefVendorService.GetAll(x => x.CompCode == CompCode && x.VendorType == VendorType).ToList();
                 return Ok(new BaseResponse(AccDefVendorList));
             }
             return BadRequest(ModelState);
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetFiltered(int CompCode, int? Catid, int? Groupid,int? CreditType ,int? VendorType, string BalType, string UserCode, string Token)
+        public IHttpActionResult GetFiltered(int CompCode, int? Catid, int? Groupid, int? CreditType, int? VendorType, string BalType, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 string s = "select * from IQ_GetVendor where CompCode = " + CompCode;
                 string condition = "";
                 if (Catid != 0)
+                {
                     condition = condition + " and CatID =" + Catid;
+                }
+
                 if (Groupid != 0)
+                {
                     condition = condition + " and GroupId =" + Groupid;
+                }
+
                 if (CreditType != 2)
+                {
                     condition = condition + " and IsCreditVendor =" + CreditType;
+                }
+
                 if (VendorType != 0)
+                {
                     condition = condition + " and VendorType =" + VendorType;
+                }
+
                 if (BalType != "All")
                 {
                     if (BalType == ">")
@@ -78,12 +88,14 @@ namespace Inv.API.Controllers
                 }
                 string query = s + condition;
 
-                var res = db.Database.SqlQuery<IQ_GetVendor>(query).ToList();
-                var res2 = db.AQ_GetVendorDoc.ToList();
+                List<IQ_GetVendor> res = db.Database.SqlQuery<IQ_GetVendor>(query).ToList();
+                List<AQ_GetVendorDoc> res2 = db.AQ_GetVendorDoc.ToList();
 
-                IQVendorMasterDetail model = new IQVendorMasterDetail();
-                model.IQ_GetVendor = res;
-                model.AQ_GetVendorDoc = res2;
+                IQVendorMasterDetail model = new IQVendorMasterDetail
+                {
+                    IQ_GetVendor = res,
+                    AQ_GetVendorDoc = res2
+                };
                 return Ok(new BaseResponse(model));
             }
             return BadRequest(ModelState);
@@ -96,7 +108,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefVendor = AccDefVendorService.GetById(id);
+                A_Pay_D_Vendor AccDefVendor = AccDefVendorService.GetById(id);
 
                 return Ok(new BaseResponse(AccDefVendor));
             }
@@ -144,7 +156,7 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
-        
+
 
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Update([FromBody]VendorMasterDetail obj)
@@ -153,32 +165,53 @@ namespace Inv.API.Controllers
             {
                 try
                 {
-                    var AccDefVen = AccDefVendorService.Update(obj.A_Pay_D_Vendor);
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, AccDefVen.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                    using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+                    {
 
-                    //update Details
-                    var insertedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'i').ToList();
-                    var updatedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'u').ToList();
-                    var deletedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'd').ToList();
+                        A_Pay_D_Vendor AccDefVen = AccDefVendorService.Update(obj.A_Pay_D_Vendor);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, AccDefVen.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
 
-                    foreach (var item in insertedObjects)
-                    {
-                        item.VendorId = obj.A_Pay_D_Vendor.VendorID;
-                        AccDefVendorService.Insert(item);
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                        //update Details
+                        List<A_Pay_D_VendorDoc> insertedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'i').ToList();
+                        List<A_Pay_D_VendorDoc> updatedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'u').ToList();
+                        List<A_Pay_D_VendorDoc> deletedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'd').ToList();
+
+                        foreach (A_Pay_D_VendorDoc item in insertedObjects)
+                        {
+                            item.VendorId = obj.A_Pay_D_Vendor.VendorID;
+                            AccDefVendorService.Insert(item);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                        }
+                        foreach (A_Pay_D_VendorDoc item in updatedObjects)
+                        {
+                            item.VendorId = obj.A_Pay_D_Vendor.VendorID;
+                            AccDefVendorService.Update(item);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                        }
+                        foreach (A_Pay_D_VendorDoc item in deletedObjects)
+                        {
+                            AccDefVendorService.Delete(item.VendorDocID);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                        }
+
+
+
+                        ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccDefVen.CompCode), 0, AccDefVen.VendorID, "VendDef", "Update", db);
+                        if (res.ResponseState == true)
+                        {
+                            dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                            return Ok(new BaseResponse(obj.A_Pay_D_Vendor));
+                        }
+                        else
+                        {
+                            dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                        }
                     }
-                    foreach (var item in updatedObjects)
-                    {
-                        item.VendorId = obj.A_Pay_D_Vendor.VendorID;
-                        AccDefVendorService.Update(item);
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "VendorDocID");
-                    }
-                    foreach (var item in deletedObjects)
-                    {
-                        AccDefVendorService.Delete(item.VendorDocID);
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, "VendorDocID");
-                    }
-                    return Ok(new BaseResponse(AccDefVen));
+
+
                 }
                 catch (Exception ex)
                 {
@@ -204,11 +237,11 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult CodeFounBefore(string code,int compCode, string UserCode, string Token)
+        public IHttpActionResult CodeFounBefore(string code, int compCode, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefVendor = AccDefVendorService.GetAll(x=>x.CompCode==compCode&&x.VendorCode==code);
+                List<A_Pay_D_Vendor> AccDefVendor = AccDefVendorService.GetAll(x => x.CompCode == compCode && x.VendorCode == code);
 
                 return Ok(new BaseResponse(AccDefVendor));
             }
@@ -219,7 +252,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                var AccDefCustomerList = AccDefVendorService.GetAll(x => x.CompCode == CompCode && x.IsCreditVendor == isCredit).ToList();
+                List<A_Pay_D_Vendor> AccDefCustomerList = AccDefVendorService.GetAll(x => x.CompCode == CompCode && x.IsCreditVendor == isCredit).ToList();
 
                 return Ok(new BaseResponse(AccDefCustomerList));
             }
@@ -228,11 +261,11 @@ namespace Inv.API.Controllers
 
         // Currency
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetAllCurrency( string UserCode, string Token)
+        public IHttpActionResult GetAllCurrency(string UserCode, string Token)
         {
             if (ModelState.IsValid /*&& UserControl.CheckUser(Token, UserCode)*/)
             {
-                var AccDefCustomerList = db.G_Currency.ToList();
+                List<G_Currency> AccDefCustomerList = db.G_Currency.ToList();
 
                 return Ok(new BaseResponse(AccDefCustomerList));
             }
@@ -256,7 +289,7 @@ namespace Inv.API.Controllers
                 try
                 {
                     string query = s;
-                    var res = db.Database.SqlQuery<A_Pay_D_Vendor>(query).ToList();
+                    List<A_Pay_D_Vendor> res = db.Database.SqlQuery<A_Pay_D_Vendor>(query).ToList();
                     return Ok(new BaseResponse(res));
 
                 }
@@ -275,11 +308,11 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                 
+
                 string query = "select * from  IQ_GetVendor  where VendorCode = " + code + "and CompCode = " + Compcode;
-                var res = db.Database.SqlQuery<IQ_GetVendor>(query).FirstOrDefault();
+                IQ_GetVendor res = db.Database.SqlQuery<IQ_GetVendor>(query).FirstOrDefault();
                 return Ok(new BaseResponse(res));
-  
+
             }
             return BadRequest(ModelState);
 
@@ -287,11 +320,11 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetVendorById(int id, string UserCode, string Token)
         {
-            
+
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                string query = "select * from  IQ_GetVendor  where VendorID = " + id ;
-                var res = db.Database.SqlQuery<IQ_GetVendor>(query).FirstOrDefault();
+                string query = "select * from  IQ_GetVendor  where VendorID = " + id;
+                IQ_GetVendor res = db.Database.SqlQuery<IQ_GetVendor>(query).FirstOrDefault();
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);

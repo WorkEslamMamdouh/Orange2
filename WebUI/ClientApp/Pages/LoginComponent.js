@@ -443,6 +443,7 @@ var LoginComponent;
         Ajax.Callsync({
             url: Url.Action("OnLogged", "Login"),
             success: function (result) {
+                localStorage.setItem("Show_News", 'false');
                 var obj = result.result;
                 window.location.href = obj.url;
             }

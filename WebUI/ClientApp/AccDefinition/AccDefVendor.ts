@@ -521,7 +521,7 @@ namespace AccDefVendor {
             return false;
         }
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '' && IsAutoCode == false) {
             //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '' ) {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_ACCCode'));
@@ -847,7 +847,16 @@ namespace AccDefVendor {
             $("#txtIDIssueDate" + i).removeAttr("disabled");
             $("#txtIDExpireDate" + i).removeAttr("disabled");
         }
-		$('#Div_ADDRESS :input').removeAttr('disabled')
+        $('#Div_ADDRESS :input').removeAttr('disabled')
+
+
+
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+
+        }
+
     }
     function btnAdd_onclick() {
         ShowFlag = false;
@@ -882,10 +891,13 @@ namespace AccDefVendor {
 
 
 
+		$('#Div_ADDRESS :input').removeAttr('disabled')
+
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+
         }
-		$('#Div_ADDRESS :input').removeAttr('disabled')
 
     }
     function btnsave_onClick() {
@@ -1510,7 +1522,7 @@ namespace AccDefVendor {
 
 
 
-        if ($("#txt_ID_APP_Type").val() == "Null") {
+        if ($("#txt_ID_APP_Type").val() == "null") {
 
             rp.IsCredit = -1;
         }

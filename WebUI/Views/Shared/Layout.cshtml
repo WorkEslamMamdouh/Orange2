@@ -1142,46 +1142,54 @@
         </div>
     </div>
 
+    <style>
+        .modal-News {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 160%;
+            pointer-events: auto;
+            background-color: #143f6be0;
+            background-clip: padding-box;
+            border: 4px solid #2c2e33;
+            border-radius: 1.3rem;
+            /* outline: 0; */
+            left: 27%;
+            margin-top: 11%;
+        }
+    </style>
 
     <!--   Setting News Modal -->
     <div class="modal fade details-model" id="News_Model" tabindex="-1" aria-labelledby="News_ModelSet" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-blue">
-                    <h5 class="modal-title" id="News_ModelSet">@SystemResource.App_UserSetting</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group row">
-                                <label for="inputEmail3" class="col-3  align-self-center p-md-0">@SystemResource.App_OldPassword</label>
-                                <div class="col-9  ">
-                                    <input type="password" class="form-control" id="txtOldPassword">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group row">
-                                <label for="inputPassword3" class="col-3  align-self-center p-md-0">@SystemResource.App_NewPassword</label>
-                                <div class="col-9  ">
-                                    <input type="password" class="form-control" id="txtNewPassword">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer ">
-                    <div class="row flex-grow-1 flex-row-reverse">
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                            <button id="btnChangePassword" type="button" class="btn btn-green w-100"> @SystemResource.App_Confirm</button>
-                        </div>
-                        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                            <button id="" type="button" class="btn btn-red w-100" data-bs-dismiss="modal">@SystemResource.App_Close</button>
-                        </div>
+            <div class="modal-News" id="Div_News">
+                <h3 class="card-title" style="text-align: center;margin-top: 0.5rem;" >News</h3>
 
+                @*<div id="" style="margin-top: 1%;" class="col-lg-12 grid-margin stretch-card animate__animated animate__lightSpeedInRight">
+                    <div class="card ">
+                        <div class="card-body">
+
+
+                            <h4 class="card-title">أشتركات الشركات  </h4>
+                            <div class="table-responsive">
+                                <p>
+                                    Ekdjfklshjfksdhfjsdhfljhdsfs
+                                    sdlsdlkjfskldjfkldsjfldsdsfsdjfsdjsdfdsfsdfsdf
+                                    sdljfsdkljfkdsjfkjsdkjflkdsjfdksjfddfdsfsdfsdfsdfsdfsdfhsdjhfsdjdslkjfsdkljfsdkljfs
+                                </p>
+
+                                <p>
+                                    asaaaaaaaaaaaaaaaa
+                                    sdlsdlkjfskldjfkldsjfldsdsfsdjfsdjsdfdsfsdfsdf
+                                    sdljfsdkljfkdsjfkjsdkjflkdsjfdksjfddfdsfsdfsdfsdfsdfsdfhsdjhfsdjdslkjfsdkljfsdkljfs
+                                </p>
+
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>*@
+
+
             </div>
         </div>
     </div>

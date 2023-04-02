@@ -525,13 +525,13 @@ var LoginComponent;
         InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true);//if success
 
 
-
+        
 
 
         Ajax.Callsync({
             url: Url.Action("OnLogged", "Login"),
             success: function (result) {
-
+                localStorage.setItem("Show_News", 'false');
                 var obj = result.result;
                 window.location.href = obj.url;
             }

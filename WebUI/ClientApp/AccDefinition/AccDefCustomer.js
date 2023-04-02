@@ -288,6 +288,10 @@ var AccDefCustomer;
         else {
             $(".fa-minus-circle").addClass("display_none");
         }
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+        }
     }
     function btnAdd_onclick() {
         IsNew = true;
@@ -329,6 +333,7 @@ var AccDefCustomer;
         }
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
         }
     }
     function btnsave_onClick() {
@@ -770,7 +775,7 @@ var AccDefCustomer;
             Errorinput(txt_NAME);
             return false;
         }
-        if (Is_cust == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
+        if (Is_cust == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '' && IsAutoCode == false) {
             DisplayMassage("يجب ادخال  حساب العميل  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_CustCode'));
             return false;

@@ -3760,6 +3760,17 @@ class I_Item_Year_Details extends SecurityClass {
     public I_ItemYear: Array<I_ItemYear>;
 
 }
+ 
+class NewsDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.G_News = new Array<G_News>();
+        this.G_Codes = new Array<G_Codes>();
+    }
+    public G_News: Array<G_News>;
+    public G_Codes: Array<G_Codes>;
+
+}
 
 
 

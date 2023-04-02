@@ -2228,6 +2228,16 @@ var I_Item_Year_Details = /** @class */ (function (_super) {
     }
     return I_Item_Year_Details;
 }(SecurityClass));
+var NewsDetails = /** @class */ (function (_super) {
+    __extends(NewsDetails, _super);
+    function NewsDetails() {
+        var _this = _super.call(this) || this;
+        _this.G_News = new Array();
+        _this.G_Codes = new Array();
+        return _this;
+    }
+    return NewsDetails;
+}(SecurityClass));
 var IQ_GetPurReceiveMasterDisplay = /** @class */ (function (_super) {
     __extends(IQ_GetPurReceiveMasterDisplay, _super);
     function IQ_GetPurReceiveMasterDisplay() {
