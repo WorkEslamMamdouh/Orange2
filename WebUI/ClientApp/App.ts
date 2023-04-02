@@ -674,85 +674,29 @@ var Ajax = {
     CallAsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
 
-        //
-
-
-
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-
-        //    settings.data["Address"] = '' + Address + '';
-
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    
-        //    settings.data = JsonAddValue(settings.data, Address)
-
-        //    console.log(settings.data);
-
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-
-        //}
         $.ajax({
+
             type: settings.type,
             url: settings.url,
             data: settings.data,
-            cache: false,
             headers: {
                 'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
+            cache: false,
+            async: false,
             success: (d) => {
                 settings.success(d, "", null);
-                $(".waitMe").removeAttr("style").fadeOut(200);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
 
 
 
             },
-            error: () => { $(".waitMe").removeAttr("style").fadeOut(200); }
+            error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
         })
     },
     Callsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
-
-        //
-
-
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-
-        //    settings.data["Address"] = '' + Address + '';
-
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    
-        //    settings.data = JsonAddValue(settings.data, Address)
-
-        //    console.log(settings.data);
-
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-
-        //}
 
         $.ajax({
 
@@ -779,19 +723,47 @@ var Ajax = {
         CheckTime();
 
         //
+        //
         debugger
+
+        if (cheakUrl(settings.url)) {
+
+            $.ajax({
+
+                type: settings.type,
+                url: settings.url,
+                data: settings.data,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8  ',
+                    'Content-Type': 'application/json'
+                },
+                cache: false,
+                async: false,
+                success: (d) => {
+                    settings.success(d, "", null);
+                    $(".waitMe").removeAttr("style").fadeOut(2500);
+
+
+
+                },
+                error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
+            })
+
+            return
+        }
 
         let AD: Ajax_Data = new Ajax_Data();
 
         if (typeof settings.data == "undefined") {
             var data = [];
             settings.data = data;
-            alert('لا يوجد ');
+            //alert('لا يوجد ');
             settings.data = "";
+            AD.ISObject = true;
         }
         else if (isObject(settings, 'data')) {
             //alert('Object');
-             
+
             settings.data = JSON.stringify(settings.data);
 
             AD.ISObject = true;
@@ -806,7 +778,7 @@ var Ajax = {
         AD.url = URL;
         AD.data = settings.data;
 
-        $.ajax({ 
+        $.ajax({
             url: Url.Action("AccessApi", "GeneralAPI"),
             data: { data: JSON.stringify(AD) },
             headers: {
@@ -829,6 +801,20 @@ var Ajax = {
     }
 };
 
+
+function cheakUrl(url: string): boolean {
+
+    let Nurl = url.replace(location.origin, "");
+    let ChUrl = url.replace(Nurl, "");
+
+    let islocal = false;
+
+    if (ChUrl == location.origin) {
+        islocal = true;
+    }
+
+    return islocal
+}
 
 function JsonAddValue(data: string, Address): string {
 

@@ -430,6 +430,7 @@ var LoginComponent;
         });
     }
     function OnLogged() {
+        debugger;
         // set api session values 
         APiSession.Session.BranchCode = SystemEnv.BranchCode;
         APiSession.Session.CompCode = SystemEnv.CompCode;
@@ -440,7 +441,7 @@ var LoginComponent;
         APiSession.Session.CurrentYear = $("#txtYear").val();
         InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true); //if success
         Ajax.Callsync({
-            url: OnLoggedUrl,
+            url: Url.Action("OnLogged", "Login"),
             success: function (result) {
                 var obj = result.result;
                 window.location.href = obj.url;
