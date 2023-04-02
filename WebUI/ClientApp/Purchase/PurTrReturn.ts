@@ -586,6 +586,7 @@ namespace PurTrReturn {
         ddlCashBox.disabled = true;
         txtCashAmount.disabled = true;
         IsNew = false;
+        $("#txtInvoiceDate").removeAttr("disabled");
     }
     function btnRecieveSearch_onclick() {
         InvoiceFlag = true;
@@ -734,6 +735,8 @@ namespace PurTrReturn {
         $("#txtCreatedAt").prop("value", DateTimeFormat(Date().toString()));
         $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         IsNew = true;
+        $("#txtInvoiceDate").removeAttr("disabled");
+
     }
     function btnAddReturn_onclick(recID: number) {
         txtInvoiceDate.value = GetDate();

@@ -60,6 +60,7 @@ namespace CollectUnit {
     var btnSave: HTMLButtonElement;
     var txtMaterialCost: HTMLInputElement;
     var gloplCollectID = 0;
+    var IsPosted = false;
     //*************************************************Initialization*************************************************//
     export function InitalizeComponent() {
         //System
@@ -266,6 +267,8 @@ namespace CollectUnit {
         $(".text_off").prop("disabled", true);
         $("#btnAddDetails").removeClass("display_none");
         AddNewRow();
+
+        IsPosted = false;
     }
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
@@ -635,6 +638,7 @@ namespace CollectUnit {
         DocumentActions.RenderFromModel(collectMaster);
         txtTransferDate.value = DateFormat(collectMaster.TrDate);
         drp_CollType.value = collectMaster.TrType.toString();
+        IsPosted = collectMaster.IsPosted;
     }
     function DisplayDetails(CollectDet: Array<IQ_GetCollectDetail>) {
         debugger
@@ -1108,6 +1112,7 @@ namespace CollectUnit {
         $("#txtUpdatedBy").attr("disabled", "disabled");
         $("#txtUpdatedAt").attr("disabled", "disabled");
 
+        $("#VoucherNo").attr("disabled", "disabled");
         $("#txt_OUT_ItemName").attr("disabled", "disabled");
         $(".condisa").attr("disabled", "disabled");
     }
@@ -1117,6 +1122,7 @@ namespace CollectUnit {
         $("#divInputs :input").val("");
         txtLabourCost.value = "0";
         $("#txtMaterialCost").val("0");
+        $("#VoucherNo").val("");
         txtTransferDate.value = DateFormat(Date().toString());
         Model = new I_TR_Collect();
         ModelCollectDet = new Array<I_TR_CollectDetail>();
@@ -1126,7 +1132,7 @@ namespace CollectUnit {
         CountGrid = 0;
         drp_CollType.value = 'null';
     }
-    //******************************************Assign**********************************************//
+    //**********************************************Assign**********************************************//
     function Assign() {
         DocumentActions.AssignToModel(Model);
         Model.CollectID = Number(hd_CollectID.value);
@@ -1138,6 +1144,8 @@ namespace CollectUnit {
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.TrDate = txtTransferDate.value;
         Model.TrType = Number(drp_CollType.value);
+        Model.VoucherNo = Number($('#VoucherNo').val());
+        Model.IsPosted = IsPosted;
         //Model.TrDateH = convertToH(txtTransferDate.value);//==========???error
 
         //*****************************AssignOutputdetails
@@ -1268,7 +1276,7 @@ namespace CollectUnit {
         CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
         CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
-            type: "post",
+            type: "Post",
             url: sys.apiUrl("Collect", "UpdateALL"),
             data: JSON.stringify(CollectMasterDetail),
             success: (d) => {

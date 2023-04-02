@@ -558,6 +558,7 @@ var PurTrReturn;
         ddlCashBox.disabled = true;
         txtCashAmount.disabled = true;
         IsNew = false;
+        $("#txtInvoiceDate").removeAttr("disabled");
     }
     function btnRecieveSearch_onclick() {
         InvoiceFlag = true;
@@ -700,6 +701,7 @@ var PurTrReturn;
         $("#txtCreatedAt").prop("value", DateTimeFormat(Date().toString()));
         $("#txtCreatedBy").prop("value", SysSession.CurrentEnvironment.UserCode);
         IsNew = true;
+        $("#txtInvoiceDate").removeAttr("disabled");
     }
     function btnAddReturn_onclick(recID) {
         txtInvoiceDate.value = GetDate();

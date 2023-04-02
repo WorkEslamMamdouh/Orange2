@@ -502,64 +502,25 @@ var Ajax = {
     },
     CallAsync: function (settings) {
         CheckTime();
-        //
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-        //    settings.data["Address"] = '' + Address + '';
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    
-        //    settings.data = JsonAddValue(settings.data, Address)
-        //    console.log(settings.data);
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-        //}
         $.ajax({
             type: settings.type,
             url: settings.url,
             data: settings.data,
-            cache: false,
             headers: {
                 'Accept': 'application/json; charset=utf-8  ',
                 'Content-Type': 'application/json'
             },
+            cache: false,
+            async: false,
             success: function (d) {
                 settings.success(d, "", null);
-                $(".waitMe").removeAttr("style").fadeOut(200);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
             },
-            error: function () { $(".waitMe").removeAttr("style").fadeOut(200); }
+            error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
         });
     },
     Callsync: function (settings) {
         CheckTime();
-        //
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-        //    settings.data["Address"] = '' + Address + '';
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    
-        //    settings.data = JsonAddValue(settings.data, Address)
-        //    console.log(settings.data);
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-        //}
         $.ajax({
             type: settings.type,
             url: settings.url,
@@ -580,13 +541,34 @@ var Ajax = {
     CallsyncUi: function (settings) {
         CheckTime();
         //
+        //
         debugger;
+        if (cheakUrl(settings.url)) {
+            $.ajax({
+                type: settings.type,
+                url: settings.url,
+                data: settings.data,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8  ',
+                    'Content-Type': 'application/json'
+                },
+                cache: false,
+                async: false,
+                success: function (d) {
+                    settings.success(d, "", null);
+                    $(".waitMe").removeAttr("style").fadeOut(2500);
+                },
+                error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
+            });
+            return;
+        }
         var AD = new Ajax_Data();
         if (typeof settings.data == "undefined") {
             var data = [];
             settings.data = data;
-            alert('لا يوجد ');
+            //alert('لا يوجد ');
             settings.data = "";
+            AD.ISObject = true;
         }
         else if (isObject(settings, 'data')) {
             //alert('Object');
@@ -619,6 +601,15 @@ var Ajax = {
         });
     }
 };
+function cheakUrl(url) {
+    var Nurl = url.replace(location.origin, "");
+    var ChUrl = url.replace(Nurl, "");
+    var islocal = false;
+    if (ChUrl == location.origin) {
+        islocal = true;
+    }
+    return islocal;
+}
 function JsonAddValue(data, Address) {
     var obj = JSON.parse(data);
     obj["Address"] = '' + Address + '';

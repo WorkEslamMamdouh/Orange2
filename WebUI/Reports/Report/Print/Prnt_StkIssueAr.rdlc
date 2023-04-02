@@ -737,14 +737,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Type_DescA1">
+                    <Textbox Name="itm_DescA">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Type_DescA.Value</Value>
+                              <Value>=Fields!itm_DescA.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -753,7 +753,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Type_DescA1</rd:DefaultName>
+                      <rd:DefaultName>itm_DescA</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -856,9 +856,8 @@
         </TablixRowHierarchy>
         <DataSetName>Prnt_StkIssueAr</DataSetName>
         <Top>0.98383in</Top>
-        <Left>0in</Left>
         <Height>0.5in</Height>
-        <Width>7.86685in</Width>
+        <Width>7.86686in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -870,7 +869,7 @@
     <Height>3.89594cm</Height>
     <Style />
   </Body>
-  <Width>19.98181cm</Width>
+  <Width>19.98182cm</Width>
   <Page>
     <PageHeader>
       <Height>1.96766cm</Height>

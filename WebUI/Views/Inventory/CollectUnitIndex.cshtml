@@ -133,11 +133,21 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-12 col-md-2 ">
                             <div class="form-group row g-0">
                                 <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_approved</label>
                                 <div class="col-2 col-md-8">
                                     <input type="checkbox" class="checkbox" id="chkStatus">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2">
+                            <div class="form-group row g-0">
+                                <label class="col-3 col-md-4 align-self-center p-md-0">رقم القيد </label>
+                                <div class="col-9 col-md-8">
+                                    <input disabled type="text" class="form-control" id="VoucherNo" name="VoucherNo">
                                 </div>
                             </div>
                         </div>
@@ -185,7 +195,7 @@
                                 <th style="width: 3%"></th>
                                 <th style="width: 10%"> رقم الصنف</th>
                                 <th style="width: 15%"> الوصف </th>
-                                <th style="width: 10%"> الكمية</th> 
+                                <th style="width: 10%"> الكمية</th>
                             </tr>
                         </thead>
                         <tbody id="">
@@ -215,7 +225,7 @@
                                         <input id="txt_OUT_Quantity" type="number" class="form-control" name="" fdprocessedid="8mctqi">
                                     </div>
                                 </td>
-                               
+
 
                                 <td class="display_none">
                                     <div class="form-group">
@@ -287,7 +297,7 @@
                 </div>
             </div>
 
-          
+
             <!-- Editors Details -->
             <div class="insettext row editor-details mt-2">
                 <div class="col-12 col-md-6">
@@ -319,6 +329,25 @@
 </div>
 
 @section Script{
+    <script>
+        $(document).ready(function () {
+            // Initialize select2
+            $("#drpitem_family").select2();
+            $("#txt_ID_APP_Type").select2();
+
+            // Read selected option
+            $('#but_read').click(function () {
+                var username = $('#drpitem_family option:selected').text();
+                var userid = $('#drpitem_family').val();
+
+                var username = $('#txt_ID_APP_Type option:selected').text();
+                var userid = $('#txt_ID_APP_Type').val();
+
+
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
     <script src="~/ClientApp/Inventory/CollectUnit.js"></script>
 }
 
