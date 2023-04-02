@@ -345,12 +345,12 @@ var AccDefCustomer;
             debugger;
             Newcount = 0;
             var CanAdd = true;
-            if (CountGrid == 0) {
-                DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
-                Errorinput(btnAddDetails);
-                AddNewRow();
-                return false;
-            }
+            //if (CountGrid == 0) {
+            //    DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
+            //    Errorinput(btnAddDetails);
+            //    AddNewRow();
+            //    return false;
+            //}
             if (CountGrid > 0) {
                 for (var i = 0; i < CountGrid; i++) {
                     CanAdd = Validation_Grid(i);

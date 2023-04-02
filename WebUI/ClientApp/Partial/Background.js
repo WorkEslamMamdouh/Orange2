@@ -27,7 +27,7 @@ var BackgroundImage;
         });
         var isNews = localStorage.getItem("Show_News");
         //if (isNews == 'false') {
-        Show_News();
+        //Show_News(); 
         //}
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
