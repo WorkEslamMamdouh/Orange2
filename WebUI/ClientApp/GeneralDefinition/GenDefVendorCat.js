@@ -22,6 +22,7 @@ var GenDefVendorCat;
     var compcode; //SharedSession.CurrentEnvironment.CompCode;
     var btnBack_Def;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     function InitalizeComponent() {
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فئات الموردين";
@@ -150,6 +151,8 @@ var GenDefVendorCat;
         $("#txtAcount_Code" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            $("#CodePrefex" + cnt).val($("#txtAcount_Code" + cnt).val());
+            $("#LastNumber" + cnt).val('1');
         });
         if (SysSession.CurrentPrivileges.Remove) {
             //$("#btn_minus" + cnt).removeClass("display_none");
@@ -167,7 +170,7 @@ var GenDefVendorCat;
         //var StkDefCategory: Array<G_USERS> = new Array<G_USERS>();
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("GLDefAccount", "GetByType"),
+            url: sys.apiUrl("GLDefAccount", "GetByTypeAuto"),
             data: {
                 CompCode: compcode, AccType: AccType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
@@ -175,7 +178,9 @@ var GenDefVendorCat;
                 var result = d;
                 if (result.IsSuccess) {
                     Details_Acount = result.Response;
-                    //DisplayStkG_USERS();
+                    if (!IsAutoCode) {
+                        Details_Acount = Details_Acount.filter(function (x) { return x.DETAIL == true; });
+                    }
                 }
             }
         });

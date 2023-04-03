@@ -146,7 +146,7 @@ namespace Inv.API.Controllers
         //**asmaa 14-12
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetAllItembyItemCode(int CompCode, int BranchCode, string UserCode, string Token, string itemcode)
-        {
+                                {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var res = db.IQ_GetItemStoreInfo.Where(x => x.CompCode == CompCode && x.BraCode == BranchCode && x.ItemCode == itemcode).FirstOrDefault();

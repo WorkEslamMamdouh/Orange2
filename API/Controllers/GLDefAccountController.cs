@@ -244,6 +244,20 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetByTypeAuto(int CompCode, int AccType, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                var AccList = GLDefAccountService.GetAll(x => x.COMP_CODE == CompCode && x.ACC_TYPE == AccType && x.ACC_ACTIVE == true).ToList();
+
+                return Ok(new BaseResponse(AccList));
+            }
+            return BadRequest(ModelState);
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetByTypeForBoxes(int CompCode, int AccType, string UserCode, string Token)
         {

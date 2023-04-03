@@ -2951,7 +2951,7 @@ namespace RS.WebUI.Reports.Forms
         //    return query;
         //}
 
-        public IEnumerable<AProc_Rpt_GLGeneralLedger_Result> Rpt_GLGeneralLedger()
+        public IEnumerable<AProc_Rpt_GLGeneralLedgerVer2_Result> Rpt_GLGeneralLedger()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -2978,6 +2978,9 @@ namespace RS.WebUI.Reports.Forms
             int IsNewVchr = int.Parse(RepPar.IsNewVchr.ToString());
             SqlParameter spIsNewVchr = new SqlParameter("@IsNewVchr", IsNewVchr);
 
+            int IncludeInvTR = int.Parse(RepPar.IncludeInvTR.ToString());
+            SqlParameter spIncludeInvTR = new SqlParameter("@IncludeInvTR", IncludeInvTR);
+
             int OpenType = int.Parse(RepPar.OpenType.ToString());
             SqlParameter spOpenType = new SqlParameter("@OpenType", OpenType == -1 ? System.Data.SqlTypes.SqlInt32.Null : OpenType);
 
@@ -2987,7 +2990,8 @@ namespace RS.WebUI.Reports.Forms
             int EndType = int.Parse(RepPar.EndType.ToString());
             SqlParameter spEndType = new SqlParameter("@EndType", EndType);
 
-            Rep = OpenReport("Rpt_GLGeneralLedger");
+            //Rep = OpenReport("Rpt_GLGeneralLedger");
+            Rep = OpenReport("Rpt_GLGeneralLedgerVer2");
 
 
             string _Query = "execute " + Rep.dataSource +
@@ -3007,10 +3011,11 @@ namespace RS.WebUI.Reports.Forms
            ", @IsNewVchr = " + spIsNewVchr.Value +
            ", @PrdType = " + spPrdType.Value +
            ", @OpenType = " + spOpenType.Value +
-           ", @EndType = " + spEndType.Value;
+           ", @EndType = " + spEndType.Value +
+           ", @IncludeInvTR = " + spIncludeInvTR.Value;
 
 
-            List<AProc_Rpt_GLGeneralLedger_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedger_Result>(_Query).ToList();
+            List<AProc_Rpt_GLGeneralLedgerVer2_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedgerVer2_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
@@ -5349,20 +5354,29 @@ namespace RS.WebUI.Reports.Forms
             int RepType = int.Parse(RepPar.RepType.ToString());
             SqlParameter spRepType = new SqlParameter("@RepType", RepType);
 
-            int TrType = int.Parse(RepPar.TrType.ToString());
-            SqlParameter spTrType = new SqlParameter("@TrType", TrType);
+            int TrType = int.Parse(RepPar.TrType.ToString()); 
+            SqlParameter spTrType = new SqlParameter("@TrType", TrType == -1 ? System.Data.SqlTypes.SqlInt32.Null : TrType);
 
+            int CatId = int.Parse(RepPar.CatId.ToString());
+            SqlParameter spCatId = new SqlParameter("@CatID", CatId == -1 ? System.Data.SqlTypes.SqlInt32.Null : CatId);
+
+              int ItemFamId = int.Parse(RepPar.ItemFamId.ToString());
+            SqlParameter spItemFamId = new SqlParameter("@ItemFamId", ItemFamId == -1 ? System.Data.SqlTypes.SqlInt32.Null : ItemFamId);
+
+            int ItemID = int.Parse(RepPar.ItemID.ToString());
+            SqlParameter spItemID = new SqlParameter("@ItemID", ItemID == -1 ? System.Data.SqlTypes.SqlInt32.Null : ItemID);
+              
             string dateForm = RepPar.FromDate.ToString();
             SqlParameter spformDate = new SqlParameter("@FromDate", dateForm);
 
             string dateTo = RepPar.ToDate.ToString();
             SqlParameter sptoDate = new SqlParameter("@ToDate", dateTo);
 
-          
 
-           
+      
 
-          
+
+
 
             //int storeID = int.Parse(RepPar.storeID.ToString());
             //SqlParameter spStore_Code = new SqlParameter("@Store_Code", Store_Code == -1 ? System.Data.SqlTypes.SqlInt32.Null : Store_Code);
@@ -5385,8 +5399,11 @@ namespace RS.WebUI.Reports.Forms
            ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
            ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
            ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
-           ", @RepType = " + spTrType.Value +
+           ", @RepType = " + spRepType.Value +
            ", @TrType = " + spTrType.Value +
+           ", @CatID = " + spCatId.Value +
+           ", @ItemFamId = " + spItemFamId.Value +
+           ", @ItemID = " + spItemID.Value +
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @ToDate = '" + sptoDate.Value + "'" +
           

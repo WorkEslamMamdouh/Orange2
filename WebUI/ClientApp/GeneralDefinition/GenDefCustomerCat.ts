@@ -29,8 +29,9 @@ namespace GenDefCustomerCat {
     var btnBack_Def: HTMLButtonElement;
 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
     export function InitalizeComponent() {
+
 
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "فئات العملاء";
@@ -58,7 +59,7 @@ namespace GenDefCustomerCat {
     }
 
     $('#btnUpdate_Def').on('click', function () {
-
+        debugger 
         if (SysSession.CurrentPrivileges.EDIT) {
             $('#btnSave_Def').removeClass("display_none");
             $('#btnBack_Def').removeClass("display_none");
@@ -220,6 +221,11 @@ namespace GenDefCustomerCat {
         $("#txtAcount_Code" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+             
+            $("#CodePrefex" + cnt).val($("#txtAcount_Code" + cnt).val());
+
+            $("#LastNumber" + cnt).val('1');
+
         });
         if (SysSession.CurrentPrivileges.Remove) {
             //$("#btn_minus" + cnt).removeClass("display_none");
@@ -243,7 +249,7 @@ namespace GenDefCustomerCat {
           
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("GLDefAccount", "GetByType"),
+            url: sys.apiUrl("GLDefAccount", "GetByTypeAuto"),
             data: {
                 CompCode: compcode, AccType: AccType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
@@ -252,6 +258,10 @@ namespace GenDefCustomerCat {
                 if (result.IsSuccess) {
                      
                     Details_Acount = result.Response as Array<A_ACCOUNT>;
+
+                    if (!IsAutoCode) {
+                        Details_Acount = Details_Acount.filter(x => x.DETAIL == true)
+                    }
 
                     //DisplayStkG_USERS();
                 }

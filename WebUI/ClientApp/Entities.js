@@ -2228,6 +2228,16 @@ var I_Item_Year_Details = /** @class */ (function (_super) {
     }
     return I_Item_Year_Details;
 }(SecurityClass));
+var NewsDetails = /** @class */ (function (_super) {
+    __extends(NewsDetails, _super);
+    function NewsDetails() {
+        var _this = _super.call(this) || this;
+        _this.G_News = new Array();
+        _this.G_Codes = new Array();
+        return _this;
+    }
+    return NewsDetails;
+}(SecurityClass));
 var IQ_GetPurReceiveMasterDisplay = /** @class */ (function (_super) {
     __extends(IQ_GetPurReceiveMasterDisplay, _super);
     function IQ_GetPurReceiveMasterDisplay() {
@@ -3893,6 +3903,37 @@ var G_LnkTrans = /** @class */ (function (_super) {
     }
     return G_LnkTrans;
 }(SecurityClass));
+var GQ_GetLnkTransComp = /** @class */ (function () {
+    function GQ_GetLnkTransComp() {
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.TR_CODE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = 0;
+        this.TABLE_NAME = "";
+        this.TABLE_CONDITION = "";
+        this.FN_COMP_CODE = "";
+        this.FN_BRA_CODE = "";
+        this.FN_TR_ID = "";
+        this.FN_TR_NO = "";
+        this.FN_TR_TYPE = "";
+        this.FN_TR_DATE = "";
+        this.FN_USER = "";
+        this.FN_TR_AMOUNT = "";
+        this.FN_TR_DESCA = "";
+        this.FN_TR_DESCE = "";
+        this.FN_VOUCHER_CODE = "";
+        this.INTEGRATE = false;
+        this.BASE_TABLE_NAME = "";
+        this.FN_POSTED = "";
+        this.COMP_CODE;
+        this.Comp_INTEGRATE = false;
+        this.Selected = false;
+    }
+    return GQ_GetLnkTransComp;
+}());
 var G_LnkTransVariable = /** @class */ (function (_super) {
     __extends(G_LnkTransVariable, _super);
     function G_LnkTransVariable() {
@@ -5974,6 +6015,7 @@ var I_TR_Collect = /** @class */ (function (_super) {
         _this.LabourCost = 0;
         _this.MaterialCost = 0;
         _this.InputItemCost = 0;
+        _this.TrType = 0;
         _this.status_txt = "";
         return _this;
     }
@@ -6598,5 +6640,48 @@ var IQ_GetStkOpenDetail = /** @class */ (function () {
         this.UomCode = "";
     }
     return IQ_GetStkOpenDetail;
+}());
+var IQ_GetCollectList = /** @class */ (function () {
+    function IQ_GetCollectList() {
+        this.CollectID = 0;
+        this.TrNo = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+        this.LabourCost = 0;
+        this.MaterialCost = 0;
+        this.InputItemCost = 0;
+        this.Qty = 0;
+        this.NewUnitCost = 0;
+        this.OutValue = 0;
+        this.ItemCode = "";
+        this.Itm_DescA = "";
+        this.Itm_DescE = "";
+        this.UomCode = "";
+        this.Uom_DescA = "";
+        this.Uom_DescE = "";
+        this.ItemFamilyID = 0;
+        this.FamilyCode = "";
+        this.fmly_DescA = "";
+        this.fmly_DescE = "";
+        this.CatID = 0;
+        this.ItemID = 0;
+        this.TrType = 0;
+        this.Typ_DescA = "";
+        this.Typ_DescE = "";
+    }
+    return IQ_GetCollectList;
 }());
 //# sourceMappingURL=Entities.js.map

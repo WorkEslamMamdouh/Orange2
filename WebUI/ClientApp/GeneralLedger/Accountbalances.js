@@ -14,6 +14,7 @@ var Accountbalances;
     var btnReset;
     var chk_Certified;
     var chk_New;
+    var chk_IncludeInvTR;
     var IsMoveEnable;
     var IsE_termEnable;
     var IsF_termEnable;
@@ -53,6 +54,7 @@ var Accountbalances;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         IsF_AEnable.checked = true;
         IsM_AEnable.checked = true;
         IsE_AEnable.checked = true;
@@ -78,6 +80,7 @@ var Accountbalances;
         txtCenter_Cost_DESC = document.getElementById("txtCenter_Cost_DESC");
         chk_Certified = document.getElementById("chk_Certified");
         chk_New = document.getElementById("chk_New");
+        chk_IncludeInvTR = document.getElementById("chk_IncludeInvTR");
         //---------------------------------------------------------------------- Print Buttons
         btnPrint = document.getElementById("btnPrint");
         btnPrintTrview = document.getElementById("btnPrintTrview");
@@ -194,6 +197,7 @@ var Accountbalances;
         discharge();
         chk_Certified.checked = false;
         chk_New.checked = false;
+        chk_IncludeInvTR.checked = false;
         IsF_AEnable.checked = true;
         IsM_AEnable.checked = true;
         IsE_AEnable.checked = true;
@@ -258,6 +262,13 @@ var Accountbalances;
         }
         else {
             rp.IsNewVchr = 0;
+        }
+        if (chk_IncludeInvTR.checked == true) //-------------------------------------( Inclusion of new restrictions )
+         {
+            rp.IncludeInvTR = 1;
+        }
+        else {
+            rp.IncludeInvTR = 0;
         }
         Details_IsF_termEnable = document.querySelector("input[name=IsF_termEnable]:checked");
         if (Details_IsF_termEnable.value == "D") {

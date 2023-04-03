@@ -34,5 +34,6 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> LabourCost { get; set; }
         public Nullable<decimal> MaterialCost { get; set; }
         public Nullable<decimal> InputItemCost { get; set; }
+        public Nullable<int> TrType { get; set; }
     }
 }

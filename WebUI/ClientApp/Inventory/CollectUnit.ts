@@ -11,7 +11,6 @@ namespace CollectUnit {
     var startDate: string;
     var EndDate: string;
     var FinYear: number;
-    var backflag: boolean = false;
     var Grid: JsGrid = new JsGrid();
     var MasterDetailModel: StockAdjustMasterDetails = new StockAdjustMasterDetails();
     var txtFromDate: HTMLInputElement;
@@ -19,6 +18,7 @@ namespace CollectUnit {
     var txtTransferDate: HTMLInputElement;
     var txtTrNo: HTMLInputElement;
     var txtLabourCost: HTMLInputElement;
+    var searchbutmemreport: HTMLInputElement;
     var txtCreatedBy: HTMLInputElement;
     var txtCreatedAt: HTMLInputElement;
     var txtUpdatedBy: HTMLInputElement;
@@ -31,19 +31,27 @@ namespace CollectUnit {
     var btnSave: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnAddDetails: HTMLButtonElement;
-    var btnAddDetails2: HTMLButtonElement;
     var btnLoad: HTMLButtonElement;
     var CountGrid: number = 0;
-    var CountGrid2: number = 0;
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
     var btnPrint: HTMLButtonElement;
     var btnPrintTransaction: HTMLButtonElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var drp_CollType: HTMLSelectElement;
+    var Filtr_CollType: HTMLSelectElement;
+    var drpPaymentType: HTMLSelectElement;
+    var drpitem_family: HTMLSelectElement;
+    var txt_ID_APP_Type: HTMLSelectElement;
     var drp_Store: HTMLSelectElement;
     var ddlstatus: HTMLSelectElement;
-    var CollectList: Array<I_TR_Collect> = new Array<I_TR_Collect>();
+    var Display_ItemFamily: Array<I_ItemFamily> = new Array<I_ItemFamily>();
+    var Display_ItemFamilyFill: Array<I_ItemFamily> = new Array<I_ItemFamily>();
+    var Details: Array<I_Item> = new Array<I_Item>();
+    var CodesTypes: Array<G_Codes> = new Array<G_Codes>();
+    var CollectList: Array<IQ_GetCollectList> = new Array<IQ_GetCollectList>();
+    var SearchDetails: Array<IQ_GetCollectList> = new Array<IQ_GetCollectList>();
     var hd_CollectID: HTMLInputElement;
     var chkStatus: HTMLInputElement;
     var Model: I_TR_Collect = new I_TR_Collect();
@@ -51,9 +59,8 @@ namespace CollectUnit {
     var CollectMasterDetail: ICollectMasterDetails = new ICollectMasterDetails();
     var btnSave: HTMLButtonElement;
     var txtMaterialCost: HTMLInputElement;
-    var btndiv_1: HTMLButtonElement;
-    var btndiv_2: HTMLButtonElement;
     var gloplCollectID = 0;
+    var IsPosted = false;
     //*************************************************Initialization*************************************************//
     export function InitalizeComponent() {
         //System
@@ -69,26 +76,33 @@ namespace CollectUnit {
         InitalizeEvents();
         InitializeGrid();
         FillStore();
+        GetCardTypes();
         drp_Store.selectedIndex = 1;
         OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
 
-
+        Display_DrpPaymentType();
+        Display_I_ItemFamily();
+        txt_ID_APP_Type.innerHTML = '<option value="null">اختر الصنف</option>';
     }
-
     function InitalizeControls() {
         txtFromDate = document.getElementById("txtFromDate") as HTMLInputElement;
         txtToDate = document.getElementById("txtToDate") as HTMLInputElement;
         txtTrNo = document.getElementById("txtTrNo") as HTMLInputElement;
         txtTransferDate = document.getElementById("txtTransferDate") as HTMLInputElement;
         txtLabourCost = document.getElementById("txtLabourCost") as HTMLInputElement;
+        searchbutmemreport = document.getElementById("searchbutmemreport") as HTMLInputElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnAddDetails = DocumentActions.GetElementById<HTMLButtonElement>("btnAddDetails");
-        btnAddDetails2 = DocumentActions.GetElementById<HTMLButtonElement>("btnAddDetails2");
         btnShow = DocumentActions.GetElementById<HTMLButtonElement>("btnShow");
         drp_Store = DocumentActions.GetElementById<HTMLSelectElement>("drp_Store");
+        drpPaymentType = DocumentActions.GetElementById<HTMLSelectElement>("drpPaymentType");
+        drpitem_family = DocumentActions.GetElementById<HTMLSelectElement>("drpitem_family");
+        txt_ID_APP_Type = DocumentActions.GetElementById<HTMLSelectElement>("txt_ID_APP_Type");
+        drp_CollType = DocumentActions.GetElementById<HTMLSelectElement>("drp_CollType");
+        Filtr_CollType = DocumentActions.GetElementById<HTMLSelectElement>("Filtr_CollType");
         hd_CollectID = DocumentActions.GetElementById<HTMLInputElement>("hd_CollectID");
         chkStatus = document.getElementById("chkStatus") as HTMLInputElement;
         ddlstatus = document.getElementById("ddlstatus") as HTMLSelectElement;
@@ -96,27 +110,34 @@ namespace CollectUnit {
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        btndiv_1 = document.getElementById("btndiv_1") as HTMLButtonElement;
-        btndiv_2 = document.getElementById("btndiv_2") as HTMLButtonElement;
     }
-
     function InitalizeEvents() {
         btnAdd.onclick = btnAdd_onclick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
         btnAddDetails.onclick = AddNewRow;
-        btnAddDetails2.onclick = AddNewRow2;
         btnShow.onclick = btnShow_onclick;
         btnSave.onclick = btnSave_onclick;
         chkStatus.onchange = chkStatus_onchange;
+        searchbutmemreport.onkeyup = _SearchBox_Change;
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         btnPrintTransaction.onclick = PrintTransaction;
-        btndiv_1.onclick = btndiv_1_onclick;
-        btndiv_2.onclick = btndiv_2_onclick;
-    }
 
+        $("#btn_OUT_SearchItems").on('click', function () {
+            btn_OUT_SrchItem_onclick();
+        });
+
+        $("#txt_OUT_ItemCode").on('change', function () {
+            txt_OUT_search_onchange();
+        });
+ 
+
+        drpPaymentType.onchange = drpPaymentType_onchange;
+        drpitem_family.onchange = itemDisplay;
+
+    }
     function InitializeGrid() {
         let res: any = GetResourceList("");
         Grid.ElementName = "divGridDetails";
@@ -127,306 +148,80 @@ namespace CollectUnit {
         Grid.Editing = false;
         Grid.Inserting = false;
         Grid.SelectedIndex = 1;
-        Grid.OnRowDoubleClicked = Grid_RowDoubleClicked;
+        Grid.OnRowDoubleClicked = () => { Grid_RowDoubleClicked(Grid.SelectedKey) };
         Grid.OnItemEditing = () => { };
         Grid.PrimaryKey = "CollectID";
         Grid.Columns = [
             { title: res.App_Number, name: "CollectID", type: "text", width: "0%", visible: false },
-            { title: res.App_Number, name: "TrNo", type: "text", width: "13%" },
-            { title: res.App_date, name: "TrDate", type: "text", width: "20%" },
-            { title: res.TransExplain, name: "Remark", type: "text", width: "20%" },
-            { title: res.Inv_LabourCost, name: "LabourCost", type: "text", width: "13%" },
-            { title: " تكلفة المواد", name: "MaterialCost", type: "text", width: "13%" },
-            { title: res.App_Certified, name: "status_txt", type: "text", width: "17%" }
+            { title: res.App_Number, name: "TrNo", type: "text", width: "10%" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "10%",
+                itemTemplate: (s: string, item: IQ_GetCollectList): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.TrDate);
+                    return txt;
+                }
+            }, 
+            { title:'نوع الحركه', name: "Typ_DescA", type: "text", width: "10%" },
+            { title: 'المخرجات', name: "Itm_DescA", type: "text", width: "25%" },
+            { title: 'الكمية', name: "Qty", type: "text", width: "13%" },
+            { title: res.Inv_LabourCost, name: "LabourCost", type: "text", width: "10%" },
+            { title: " تكلفة المواد", name: "MaterialCost", type: "text", width: "10%" },
+            {
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "10%",
+                itemTemplate: (s: string, item: IQ_GetCollectList): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");;
+                    return txt;
+                }
+            },
         ];
         Grid.Bind();
     }
-    //***********************************************Grid Controls*******************************************//
-    function BuildControls(cnt: number) {
+    //***************************************************Main function************************************//
+    function btnShow_onclick() {
+        debugger;
+        $('#divTransferDetails').addClass('display_none');
 
-        var html = "";
-        html = `<tr id= "No_Row${cnt}">
-                    <input id="txtCollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
-                    <td>
-		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus display_none"></i></span>
-		                </div>
-	                </td>
-                    <td>
-	                    <div class="form-group">
-		                    <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" name="ColSearch">
-		                    <i class="fa fa-search  "></i>
-		                     </button>
-	                    </div>
-                    </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txtItemCode${cnt}" type="text" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txtItemName${cnt}" type="text" class="form-control" name="" disabled />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txt_u_DescA${cnt}" type="text" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txtQuantity${cnt}" type="number" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    
-               <input id="txt_StatusFlag${cnt}" type="hidden"   />
-               <input id="txt_ItemID${cnt}" type="hidden"   />
-               <input id="txt_OnhandQty${cnt}" type="hidden"   />
-               <input id="txt_GlobalCost${cnt}" type="hidden"   />
-               <input id="txt_UnitID${cnt}" type="hidden"   />
-               <input id="txt_StockOnhandQty${cnt}" type="hidden"   />
-               <input id="txt_StkUnitCost${cnt}" type="hidden"   />
-                </tr>`;
-        $("#div_Data").append(html);
+        var condition = " CompCode=" + Number(SysSession.CurrentEnvironment.CompCode) + " and BranchCode=" + Number(SysSession.CurrentEnvironment.BranchCode);
+        var startdate = "";
+        var Enddate = "";
+        if (Filtr_CollType.value != "null" && Filtr_CollType.value != "") condition = condition + " and TrType=" + Filtr_CollType.value + "";
+        if (drp_Store.value != "null" && drp_Store.value != "") condition = condition + " and StoreID=" + drp_Store.value + "";
+        if (ddlstatus.value != "null" && ddlstatus.value != "") condition = condition + " and Status=" + ddlstatus.value;
 
-        $("#btnSearchItems" + cnt).on('click', function () {
-            btnSrchItem_onclick(cnt);
-        });
+        if (drpPaymentType.value != "null" && drpPaymentType.value != "") condition = condition + " and CatID=" + drpPaymentType.value + "";
+        if (drpitem_family.value != "null" && drpitem_family.value != "") condition = condition + " and ItemFamilyID=" + drpitem_family.value + "";
+        if (txt_ID_APP_Type.value != "null" && txt_ID_APP_Type.value != "") condition = condition + " and ItemID=" + txt_ID_APP_Type.value + "";
 
-        $("#txtItemCode" + cnt).on('change', function () {
-            txt_search_onchange(cnt);
-        });
+        if (txtFromDate.value != "") startdate = DateFormatRep(txtFromDate.value);
+        if (txtToDate.value != "") Enddate = DateFormatRep(txtToDate.value);
 
-        $("#btn_minus" + cnt).on('click', function () {
-            DeleteRow(cnt);
-        });
-
-        $("#txtQuantity" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            if (Number($("#txtQuantity" + cnt).val()) > Number($("#txt_OnhandQty" + cnt).val())) {
-                DisplayMassage("يجب ان تكون الكمبةالمدخلة اصغر من الكمية الفعلية (" + Number($("#txt_OnhandQty" + cnt).val()) + ") ", "Quantity must be less than On hand Quantity", MessageType.Worning);
-
-                //Errorinput($("#txtQuantity" + cnt));
-                //$("#txtQuantity" + cnt).val(Number($("#txt_OnhandQty" + cnt).val()));
-            }
-        });
-
-
-    }
-
-    function AddNewRow() {
-        if (!SysSession.CurrentPrivileges.AddNew) return;
-        var CanAdd: boolean = true;
-        if (CountGrid > 0) {
-            var LastRowNo = CountGrid - 1;
-            CanAdd = Validation_Grid(LastRowNo);
-        }
-        if (CanAdd) {
-            BuildControls(CountGrid);
-            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
-            // can delete new inserted record  without need for delete privilage
-            CountGrid++;
-        }
-    }    
-
-    function validationitem(id: number, idRow: number) {
-        for (var i = 0; i < CountGrid; i++) {
-
-            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
-                if ($("#txt_ItemID" + i + "").val() == id && $("#txt_ItemID" + i + "").val() != idRow) {
-                    DisplayMassage("الصنف موجود من قبل", "Item found before", MessageType.Error);
-                    Errorinput($("#txtItemCode" + i + ""));
-                    return false
-                }
-            }
-
-        }
-        return true;
-    }
-
-    function validationitem2(id: number, idRow: number) {
-        for (var i = 0; i < CountGrid2; i++) {
-
-            if ($("#txt_OUT_StatusFlag" + i).val() != "d" && $("#txt_OUT_StatusFlag" + i).val() != "m") {
-                if ($("#txt_OUT_ItemID" + i + "").val() == id && $("#txt_OUT_ItemID" + i + "").val() != idRow) {
-                    DisplayMassage("الصنف موجود من قبل", "Item found before", MessageType.Error);
-                    Errorinput($("#txt_OUT_ItemCode" + i + ""));
-                    return false
-                }
-            }
-
-        }
-        return true;
-    }
-
-    function DeleteRow(RecNo: number) {
-        if (!SysSession.CurrentPrivileges.Remove) return;
-        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
-            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
-            if (statusFlag == "i")
-                $("#txt_StatusFlag" + RecNo).val("m");
-            else
-                $("#txt_StatusFlag" + RecNo).val("d");
-
-            $("#No_Row" + RecNo).attr("hidden", "true");
-        });
-
-    }
-
-    function DeleteRow2(RecNo: number) {
-        if (!SysSession.CurrentPrivileges.Remove) return;
-        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
-            var statusFlag = $("#txt_OUT_StatusFlag" + RecNo).val();
-            if (statusFlag == "i")
-                $("#txt_OUT_StatusFlag" + RecNo).val("m");
-            else
-                $("#txt_OUT_StatusFlag" + RecNo).val("d");
-            $("#No_OUT_Row" + RecNo).attr("hidden", "true");
-        });
-    }
-
-    function AddNewRow2() {
-        if (!SysSession.CurrentPrivileges.AddNew) return;
-        var CanAdd: boolean = true;
-        if (CountGrid2 > 0) {
-            var LastRowNo = CountGrid2 - 1;
-            CanAdd = Validation_Grid(LastRowNo);
-        }
-        if (CanAdd) {
-            BuildControls2(CountGrid2);
-            $("#txt_OUT_StatusFlag" + CountGrid2).val("i"); //In Insert mode
-            //// can delete new inserted record  without need for delete privilage
-          
-            CountGrid2++;
-        }
-    }
-
-    function BuildControls2(cnt: number) {
-        var html = "";
-        html = `<tr id= "No_OUT_Row${cnt}">
-                    <input id="txt_OUT_CollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
-                    <td>
-		                <div class="form-group">
-			                <span id="btn_minus2${cnt}"><i class="fas fa-minus-circle  btn-minus display_none"></i></span>
-		                </div>
-	                </td>
-                    <td>
-	                    <div class="form-group">
-		                    <button type="button" class="style_ButSearch" id="btn_OUT_SearchItems${cnt}" name="ColSearch">
-		                    <i class="fa fa-search  "></i>
-		                     </button>
-	                    </div>
-                    </td>
-                   
-                    <td>
-		                <div class="form-group">
-                            <input id="txt_OUT_ItemCode${cnt}" type="text" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txt_OUT_ItemName${cnt}" type="text" class="form-control" name="" disabled />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txt_OUT_Quantity${cnt}" type="number" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-                            <input id="txt_OUT_CostFactorPrc${cnt}" type="number" class="form-control" name=""  />
-		                </div>
-	                </td>
-                    
-               <input id="txt_OUT_StatusFlag${cnt}" type="hidden"   />
-               <input id="txt_OUT_ItemID${cnt}" type="hidden"   />
-               <input id="txt_OUT_GlobalCost${cnt}" type="hidden"   />
-               <input id="txt_OUT_UnitID${cnt}" type="hidden"   />
-               <input id="txt_OUT_StockOnhandQty${cnt}" type="hidden"   />
-               <input id="txt_OUT_StkUnitCost${cnt}" type="hidden"   />
-                </tr>`;
-  
-        $("#div_Data2").append(html);
-
-        $("#btn_OUT_SearchItems" + cnt).on('click', function () {
-            btn_OUT_SrchItem_onclick(cnt);
-        });
-
-        $("#txt_OUT_ItemCode" + cnt).on('change', function () {
-            txt_OUT_search_onchange(cnt);
-        });
-
-        $("#btn_minus2" + cnt).on('click', function () {
-            DeleteRow2(cnt);
-        });
-
-        $("#txt_OUT_Quantity" + cnt).on('change', function () {
-            if ($("#txt_OUT_StatusFlag" + cnt).val() != "i")
-                $("#txt_OUT_StatusFlag" + cnt).val("u");
-
-            //if (Number($("#txt_OUT_Quantity" + cnt).val()) > Number($("#txt_OUT_OnhandQty" + cnt).val())) {
-            //    DisplayMassage("يجب ان تكون الكمبةالمدخلة اصغر من الكمية الفعلية ", "Quantity must be less than On hand Quantity", MessageType.Worning);
-            //    Errorinput($("#txt_OUT_Quantity" + cnt));
-            //    $("#txt_OUT_Quantity" + cnt).val("0");
-            //}
-
-
-
-
-        });
-
-        $("#txt_OUT_CostFactorPrc" + cnt).on('change', function () {
-            if ($("#txt_OUT_StatusFlag" + cnt).val() != "i")
-                $("#txt_OUT_StatusFlag" + cnt).val("u");
-        });
-
-    }
-
-    function Validation_Grid(rowcount: number): boolean {
-        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
-            return true;
-        }
-        else {
-            if ($("#txtItemName" + rowcount).val() == "") {
-                DisplayMassage('برجاء ادخال الصنف', 'Please enter the item', MessageType.Error);
-                Errorinput($("#txtItemName" + rowcount));
-                return false;
-            }
-            return true;
-        }
-
-    }
-    //******************************************************Load*****************************************//
-    function FillStore() {
-        debugger
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("DefStore", "GetAll"),
+            url: sys.apiUrl("Collect", "Search"),
             data: {
-                CompCode: Number(SysSession.CurrentEnvironment.CompCode),
-                BranchCode: Number(SysSession.CurrentEnvironment.BranchCode),
+                condition: condition,
+                strtdt: startdate, Enddt: Enddate,
                 UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
             },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess == true) {
-                    let Store = result.Response as Array<G_STORE>;
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-                        DocumentActions.FillComboFirstvalue(Store, drp_Store, "StoreId", "DescA", "- اختر -", null);
-                    }
-                    else {
-                        DocumentActions.FillComboFirstvalue(Store, drp_Store, "StoreId", "DescL", "- Select -", null);
-                    }
+            success: function (d) {                
+                debugger
+                var result = d;
+                if (result.IsSuccess) {
+                    CollectList = result.Response as Array<IQ_GetCollectList>;
+                    CollectList = CollectList.sort(dynamicSort("TrNo"));
+                    Grid.DataSource = CollectList;
+                    Grid.Bind();
+                    $("#searchtext").removeClass("display_none");
+                    $("#divShow").removeClass("display_none");
+                    $("#cotrolDiv").removeClass("disabledDiv");
+                    $("#btnUpdate").addClass("display_none");
+                    $("#btnPrintTransaction").addClass("display_none");
                 }
             }
         });
     }
-
-    //***************************************************Main function************************************//
     function btnSave_onclick() {
         loading('btnsave');
 
@@ -436,15 +231,27 @@ namespace CollectUnit {
             debugger;
             if (!Validation())
                 return;
-            if (hd_CollectID.value == "0")
-                Insert();
-            else
-                Update();
+
+
+            var CanAdd: boolean = true;
+            if (CountGrid > 0) {
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
+                }
+            }
+            if (CanAdd) {
+                if (hd_CollectID.value == "0")
+                    Insert();
+                else
+                    Update();
+            }
 
 
         }, 100);
     }
-
     function btnAdd_onclick() {
         debugger
         if (!SysSession.CurrentPrivileges.AddNew) return;
@@ -458,12 +265,11 @@ namespace CollectUnit {
         $("#btnBack").removeClass("display_none");
         chkStatus.disabled = false;
         $(".text_off").prop("disabled", true);
-        btndiv_1_onclick();
         $("#btnAddDetails").removeClass("display_none");
-        $("#btnAddDetails2").removeClass("display_none");
+        AddNewRow();
 
+        IsPosted = false;
     }
-
     function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         EnableControls();
@@ -476,98 +282,51 @@ namespace CollectUnit {
 
 
         $("#btnAddDetails").removeClass("display_none");
-        $("#btnAddDetails2").removeClass("display_none");
-
-
     }
-
     function btnBack_onclick() {
 
-        backflag = true;
+        debugger
+
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
+        disabledControls();
         if (hd_CollectID.value != "0") {
-            let selectedid = hd_CollectID.value;
-            Clear();
-            hd_CollectID.value = selectedid;
-            Display();
-            QueryMode();
-            btnUpdate.disabled = false;
+
+            Grid_RowDoubleClicked(hd_CollectID.value)
         }
         else {
             Clear();
-            Searchprocess();
-            $("#btnSave").addClass("display_none");
-            $("#btnBack").addClass("display_none");
-            $("#btnUpdate").addClass("display_none");
-            $("#btnPrintTransaction").addClass("display_none");
-
+            $('#divTransferDetails').addClass('display_none');
         }
-        $("#div_hedr").removeClass("disabledDiv");
-        $("#div_hedr").removeAttr("disabled").off('click');
-        $("#divIconbar").removeClass("disabledIconbar");
-        $("#divIconbar").removeAttr("disabled").off('click');
-
-
-        $("#btnAddDetails").addClass("display_none");
-        $("#btnAddDetails2").addClass("display_none");
 
 
     }
-
     function chkStatus_onchange() {
         if (Model.Status == 1)
             open();
     }
+    //***************************************************Search******************************************// 
 
-    //***************************************************Search******************************************//
-    function btnShow_onclick() {
-        debugger;
-        Search();
+    function _SearchBox_Change() {
+
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+
+        if (searchbutmemreport.value != "") {
+
+            let search: string = searchbutmemreport.value.toLowerCase();
+            SearchDetails = CollectList.filter(x => x.TrNo.toString().search(search) >= 0);
+
+            Grid.DataSource = SearchDetails;
+            Grid.Bind();
+        } else {
+            Grid.DataSource = CollectList;
+            Grid.Bind();
+        }
+
     }
-
-    function Search() {
-        $('#divTransferDetails').addClass('display_none');
-
-        var condition = " CompCode=" + Number(SysSession.CurrentEnvironment.CompCode) + " and BranchCode=" + Number(SysSession.CurrentEnvironment.BranchCode);
-        var startdate = "";
-        var Enddate = "";
-        if (drp_Store.value != "null" && drp_Store.value != "") condition = condition + " and StoreID=" + drp_Store.value + "";
-        if (ddlstatus.value != "null" && ddlstatus.value != "") condition = condition + " and Status=" + ddlstatus.value;
-        if (txtFromDate.value != "") startdate = DateFormatRep(txtFromDate.value);
-        if (txtToDate.value != "") Enddate = DateFormatRep(txtToDate.value);
-
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Collect", "Search"),
-            data: {
-                condition: condition,
-                strtdt: startdate, Enddt: Enddate,
-                UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    CollectList = result.Response as Array<I_TR_Collect>;
-                    for (var i = 0; i < CollectList.length; i++) {
-                        CollectList[i].TrDate = DateFormat(CollectList[i].TrDate);
-                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                            if (CollectList[i].Status == 1) CollectList[i].status_txt = "معتمد";
-                            else if (CollectList[i].Status == 0) CollectList[i].status_txt = "غير معتمد";
-                        if (SysSession.CurrentEnvironment.ScreenLanguage == "en")
-                            if (CollectList[i].Status == 1) CollectList[i].status_txt = "Authorized";
-                            else if (CollectList[i].Status == 0) CollectList[i].status_txt = "UnAuthorized";
-                    }
-                    Grid.DataSource = CollectList;
-                    Grid.Bind();
-                    $("#searchtext").removeClass("display_none");
-                    $("#divShow").removeClass("display_none");
-                    $("#cotrolDiv").removeClass("disabledDiv");
-                    $("#btnUpdate").addClass("display_none");
-                    $("#btnPrintTransaction").addClass("display_none");
-                }
-            }
-        });
-    }
-
     function btnSrchItem_onclick(cnt: number) {
         debugger
         var cond: string;
@@ -619,7 +378,8 @@ namespace CollectUnit {
                         else {
                             $("#txt_StkUnitCost" + cnt).prop("value", res.LocalCost);
                         }
-                         
+                        $("#txtQuantity" + cnt).focus();
+
                         if ($("#txt_StatusFlag" + cnt).val() != "i")
                             $("#txt_StatusFlag" + cnt).val("u");
                     }
@@ -627,60 +387,24 @@ namespace CollectUnit {
             });
         });
     }
-
-    function btn_OUT_SrchItem_onclick(cnt: number) {
-        debugger
-        var cond: string;
-        cond = "";
-        cond = " CompCode=" + SysSession.CurrentEnvironment.CompCode + " and BraCode=" + SysSession.CurrentEnvironment.BranchCode;
-        cond = cond + " and StoreId=" + drp_Store.value + " and  FinYear= " + SysSession.CurrentEnvironment.CurrentYear;
-        sys.FindKey(Modules.CollectUnit, "btn_OUT_SrchItem", cond, () => {
-            let id = SearchGrid.SearchDataGrid.SelectedKey;
-
-            if (!validationitem2(id, Number($("#txt_OUT_ItemID" + cnt + "").val()))) {
-                $("#txt_OUT_ItemCode" + cnt).val('');
-                return
-            }
-
-
-            Ajax.Callsync({
-                type: "Get",
-                //url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
-                //data: {
-                //    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
-                //    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
-                //},
-                url: sys.apiUrl("StkDefItems", "GetItem"),
-                data: {
-                    CompCode: compcode, BraCode: Number(SysSession.CurrentEnvironment.BranchCode), FinYear: Number(SysSession.CurrentEnvironment.CurrentYear), ItemID: id, StoreId: Number(drp_Store.value), Show: false, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-                },
-                success: (d) => {
-                    let result = d as BaseResponse;
-                    if (result.IsSuccess) {
-
-                        //let res = result.Response as Array<IQ_GetItemStoreInfo> ;
-                        let res = result.Response[0] as IQ_GetItemStoreInfo;
-                        $("#txt_OUT_ItemCode" + cnt).val(res.ItemCode);
-                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                            $("#txt_OUT_ItemName" + cnt).val(res.Itm_DescA);
-                        else
-                            $("#txt_OUT_ItemName" + cnt).val(res.Itm_DescE);
-                        //**hidden values
-                        $("#txt_OUT_ItemID" + cnt).val(res.ItemID);
-                        $("#txt_OUT_OnhandQty" + cnt).val(res.OnhandQty);
-                        $("#txt_OUT_GlobalCost" + cnt).val(res.GlobalCost);
-                        $("#txt_OUT_UnitID" + cnt).val(res.UomID);
-                        $("#txt_OUT_StockOnhandQty" + cnt).val(res.OnhandQty);
-                        $("#txt_OUT_StkUnitCost" + cnt).val(res.GlobalCost);
-                        if ($("#txt_OUT_StatusFlag" + cnt).val() != "i")
-                            $("#txt_OUT_StatusFlag" + cnt).val("u");
-                    }
-                }
-            });
-        });
-    }
-
     function txt_search_onchange(cnt: number) {
+        if ($("#txtItemCode" + cnt).val().trim() == '') {
+
+            $("#txtItemCode" + cnt).val("");
+            $("#txtItemName" + cnt).val("");
+            $("#txt_ItemID" + cnt).val("");
+            $("#txt_OnhandQty" + cnt).val("");
+            $("#txt_GlobalCost" + cnt).val("");
+            $("#txt_UnitID" + cnt).val("");
+            $("#txt_StockOnhandQty" + cnt).val("");
+            $("#txt_StkUnitCost" + cnt).val("");
+            $("#txt_u_DescA" + cnt).val("");
+            $("#txtQuantity" + cnt).val("");
+            $("#txt_StatusFlag" + cnt).val("");
+
+            return
+        }
+
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefItemType", "GetAllItembyItemCode"),
@@ -711,13 +435,13 @@ namespace CollectUnit {
                         }
                         //**hidden values
 
-                         
+
 
                         $("#txt_ItemID" + cnt).val(res.ItemID);
                         $("#txt_OnhandQty" + cnt).val(res.OnhandQty);
                         $("#txt_GlobalCost" + cnt).val(res.GlobalCost);
                         $("#txt_UnitID" + cnt).val(res.UomID);
-                        $("#txt_StockOnhandQty" + cnt).val(res.OnhandQty); 
+                        $("#txt_StockOnhandQty" + cnt).val(res.OnhandQty);
                         if (SysSession.CurrentEnvironment.I_Control[0].IsLocalCost == false) {
                             $("#txt_StkUnitCost" + cnt).prop("value", res.GlobalCost);
                         }
@@ -726,6 +450,9 @@ namespace CollectUnit {
                         }
                         if ($("#txt_StatusFlag" + cnt).val() != "i")
                             $("#txt_StatusFlag" + cnt).val("u");
+
+                        $("#txtQuantity" + cnt).focus();
+
                     }
                     else {
                         $("#txtItemCode" + cnt).val("");
@@ -736,22 +463,81 @@ namespace CollectUnit {
                         $("#txt_UnitID" + cnt).val("");
                         $("#txt_StockOnhandQty" + cnt).val("");
                         $("#txt_StkUnitCost" + cnt).val("");
-                        if ($("#txt_StatusFlag" + cnt).val() != "i")
-                            $("#txt_StatusFlag" + cnt).val("u");
+                        $("#txt_u_DescA" + cnt).val("");
+                        $("#txtQuantity" + cnt).val("");
+                        $("#txt_StatusFlag" + cnt).val("");
                     }
                 }
             }
         });
     }
 
-    function txt_OUT_search_onchange(cnt: number) {
+    function btn_OUT_SrchItem_onclick() {
+        debugger
+        var cond: string;
+        cond = "";
+        cond = " CompCode=" + SysSession.CurrentEnvironment.CompCode + " and BraCode=" + SysSession.CurrentEnvironment.BranchCode;
+        cond = cond + " and StoreId=" + drp_Store.value + " and  FinYear= " + SysSession.CurrentEnvironment.CurrentYear;
+        sys.FindKey(Modules.CollectUnit, "btn_OUT_SrchItem", cond, () => {
+            let id = SearchGrid.SearchDataGrid.SelectedKey;
 
+
+
+            Ajax.Callsync({
+                type: "Get",
+                //url: sys.apiUrl("StkDefItemType", "GetAllItembyItemId"),
+                //data: {
+                //    CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
+                //    itemid: id, BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                //},
+                url: sys.apiUrl("StkDefItems", "GetItem"),
+                data: {
+                    CompCode: compcode, BraCode: Number(SysSession.CurrentEnvironment.BranchCode), FinYear: Number(SysSession.CurrentEnvironment.CurrentYear), ItemID: id, StoreId: Number(drp_Store.value), Show: false, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                },
+                success: (d) => {
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+
+                        //let res = result.Response as Array<IQ_GetItemStoreInfo> ;
+                        let res = result.Response[0] as IQ_GetItemStoreInfo;
+                        $("#txt_OUT_ItemCode").val(res.ItemCode);
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
+                            $("#txt_OUT_ItemName").val(res.Itm_DescA);
+                        else
+                            $("#txt_OUT_ItemName").val(res.Itm_DescE);
+                        //**hidden values
+                        $("#txt_OUT_ItemID").val(res.ItemID);
+                        $("#txt_OUT_OnhandQty").val(res.OnhandQty);
+                        $("#txt_OUT_GlobalCost").val(res.GlobalCost);
+                        $("#txt_OUT_UnitID").val(res.UomID);
+                        $("#txt_OUT_StockOnhandQty").val(res.OnhandQty);
+                        $("#txt_OUT_StkUnitCost").val(res.GlobalCost);
+                        $("#txt_OUT_Quantity").focus();
+
+                    }
+                }
+            });
+        });
+    }
+    function txt_OUT_search_onchange() {
+        if ($("#txt_OUT_ItemCode").val().trim() == '') {
+            $("#txt_OUT_ItemCode").val("");
+            $("#txt_OUT_ItemName").val("");
+            $("#txt_OUT_ItemID").val("");
+            $("#txt_OUT_OnhandQty").val("");
+            $("#txt_OUT_GlobalCost").val("");
+            $("#txt_OUT_UnitID").val("");
+            $("#txt_OUT_StockOnhandQty").val("");
+            $("#txt_OUT_StkUnitCost").val("");
+            $("#txt_OUT_Quantity").val(""); 
+            return
+        }
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("StkDefItemType", "GetAllItembyItemCode"),
             data: {
                 CompCode: Number(SysSession.CurrentEnvironment.CompCode), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token,
-                itemcode: $("#txt_OUT_ItemCode" + cnt).val(), BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
+                itemcode: $("#txt_OUT_ItemCode").val(), BranchCode: Number(SysSession.CurrentEnvironment.BranchCode)
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -760,58 +546,48 @@ namespace CollectUnit {
                     debugger
                     if (res != null) {
 
-                        if (!validationitem2(res.ItemID, cnt)) {
-                            $("#txt_OUT_ItemCode" + cnt).val('');
 
-                            return
-                        }
 
-                        $("#txt_OUT_ItemCode" + cnt).val(res.ItemCode);
+                        $("#txt_OUT_ItemCode").val(res.ItemCode);
                         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                            $("#txt_OUT_ItemName" + cnt).val(res.Itm_DescA);
+                            $("#txt_OUT_ItemName").val(res.Itm_DescA);
                         else
-                            $("#txt_OUT_ItemName" + cnt).val(res.Itm_DescE);
+                            $("#txt_OUT_ItemName").val(res.Itm_DescE);
                         //**hidden values
-                        $("#txt_OUT_ItemID" + cnt).val(res.ItemID);
-                        $("#txt_OUT_OnhandQty" + cnt).val(res.OnhandQty);
-                        $("#txt_OUT_GlobalCost" + cnt).val(res.GlobalCost);
-                        $("#txt_OUT_UnitID" + cnt).val(res.UomID);
-                        $("#txt_OUT_StockOnhandQty" + cnt).val(res.OnhandQty);
-                        $("#txt_OUT_StkUnitCost" + cnt).val(res.GlobalCost);
-                        if ($("#txt_OUT_StatusFlag" + cnt).val() != "i")
-                            $("#txt_OUT_StatusFlag" + cnt).val("u");
+                        $("#txt_OUT_ItemID").val(res.ItemID);
+                        $("#txt_OUT_OnhandQty").val(res.OnhandQty);
+                        $("#txt_OUT_GlobalCost").val(res.GlobalCost);
+                        $("#txt_OUT_UnitID").val(res.UomID);
+                        $("#txt_OUT_StockOnhandQty").val(res.OnhandQty);
+                        $("#txt_OUT_StkUnitCost").val(res.GlobalCost);
+                        $("#txt_OUT_Quantity").focus();
                     }
                     else {
-                        $("#txt_OUT_ItemCode" + cnt).val("");
-                        $("#txt_OUT_ItemName" + cnt).val("");
-                        $("#txt_OUT_ItemID" + cnt).val("");
-                        $("#txt_OUT_OnhandQty" + cnt).val("");
-                        $("#txt_OUT_GlobalCost" + cnt).val("");
-                        $("#txt_OUT_UnitID" + cnt).val("");
-                        $("#txt_OUT_StockOnhandQty" + cnt).val("");
-                        $("#txt_OUT_StkUnitCost" + cnt).val("");
-                        if ($("#txt_OUT_StatusFlag" + cnt).val() != "i")
-                            $("#txt_OUT_StatusFlag" + cnt).val("u");
+                        $("#txt_OUT_ItemCode").val("");
+                        $("#txt_OUT_ItemName").val("");
+                        $("#txt_OUT_ItemID").val("");
+                        $("#txt_OUT_OnhandQty").val("");
+                        $("#txt_OUT_GlobalCost").val("");
+                        $("#txt_OUT_UnitID").val("");
+                        $("#txt_OUT_StockOnhandQty").val("");
+                        $("#txt_OUT_StkUnitCost").val("");
+                        $("#txt_OUT_Quantity").val(""); 
                     }
                 }
             }
         });
 
     }
-
     //*************************************************Display******************************************//
-    function Grid_RowDoubleClicked() {
+    function Grid_RowDoubleClicked(CollectID: string) {
         $("#DivInvoiceData").removeClass("display_none");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, CollectID);
 
-        hd_CollectID.value = Grid.SelectedKey;
-        //GlobalInvoiceID = Number(Grid.SelectedKey);
-        backflag = false;
+        hd_CollectID.value = CollectID;
         btnPrintTransaction.disabled = false;
         Display();
-        QueryMode();
-        //*****Privillage
-        checkprivialges();
+        disabledControls();
+        //*****Privillage 
         if (Model.Status == 1) {
             chkStatus.checked = true;
             chkprivialgesToEditApprovedInvoice();
@@ -823,11 +599,7 @@ namespace CollectUnit {
 
 
         $("#btnAddDetails").addClass("display_none");
-        $("#btnAddDetails2").addClass("display_none");
-
-
     }
-
     function Display() {
         Ajax.Callsync({
             type: "Get",
@@ -845,13 +617,9 @@ namespace CollectUnit {
                     DisplayMaster(res.I_TR_Collect);
                     DisplayDetails(res.IQ_GetCollectDetail);
                     $('#divTransferDetails').removeClass('display_none');
-                    if (backflag == false) {
-                        btndiv_1_onclick();
-                    }
 
 
-                    //*****Privillage
-                    checkprivialges();
+                    //*****Privillage 
                     if (Model.Status == 1) {
                         chkStatus.checked = true;
                         chkprivialgesToEditApprovedInvoice();
@@ -865,17 +633,16 @@ namespace CollectUnit {
         });
         btnUpdate.disabled = false;
     }
-
     function DisplayMaster(collectMaster: I_TR_Collect) {
         Model.Status = collectMaster.Status;
         DocumentActions.RenderFromModel(collectMaster);
         txtTransferDate.value = DateFormat(collectMaster.TrDate);
+        drp_CollType.value = collectMaster.TrType.toString();
+        IsPosted = collectMaster.IsPosted;
     }
-
     function DisplayDetails(CollectDet: Array<IQ_GetCollectDetail>) {
         debugger
         CountGrid = 0;
-        CountGrid2 = 0;
         $("#div_Data").html("");
         $("#div_Data2").html("");
         var CollectDet_Input = CollectDet.filter(x => x.IsInput == true);
@@ -903,96 +670,134 @@ namespace CollectUnit {
         }
         //**********Output Details
         for (var cnt = 0; cnt < CollectDet_Output.length; cnt++) {
-            BuildControls2(cnt);
-            $("#txt_OUT_CollectDetailID" + cnt).val(CollectDet_Output[cnt].CollectDetailID);
-            $("#txt_OUT_ItemCode" + cnt).val(CollectDet_Output[cnt].ItemCode);
+
+            $("#txt_OUT_CollectDetailID").val(CollectDet_Output[cnt].CollectDetailID);
+            $("#txt_OUT_ItemCode").val(CollectDet_Output[cnt].ItemCode);
             if (SysSession.CurrentEnvironment.ScreenLanguage == "ar")
-                $("#txt_OUT_ItemName" + cnt).val(CollectDet_Output[cnt].itm_DescA);
+                $("#txt_OUT_ItemName").val(CollectDet_Output[cnt].itm_DescA);
             else
-                $("#txt_OUT_ItemName" + cnt).val(CollectDet_Output[cnt].itm_DescA);
+                $("#txt_OUT_ItemName").val(CollectDet_Output[cnt].itm_DescA);
             //**hidden values
-            $("#txt_OUT_ItemID" + cnt).val(CollectDet_Output[cnt].ItemID);
-            $("#txt_OUT_StatusFlag" + cnt).val("");
-            $("#txt_OUT_OnhandQty" + cnt).val(CollectDet_Output[cnt].OnhandQty);
-            $("#txt_OUT_GlobalCost" + cnt).val(CollectDet_Output[cnt].UnitCost);
-            $("#txt_OUT_UnitID" + cnt).val(CollectDet_Output[cnt].UnitID);
-            $("#txt_OUT_StockOnhandQty" + cnt).val(CollectDet_Output[cnt].StockOnhandQty);
-            $("#txt_OUT_StkUnitCost" + cnt).val(CollectDet_Output[cnt].StkUnitCost);
-            $("#txt_OUT_Quantity" + cnt).val(CollectDet_Output[cnt].Qty);
-            $("#txt_OUT_CostFactorPrc" + cnt).val(CollectDet_Output[cnt].CostFactorPrc);
-            CountGrid2++;
+            $("#txt_OUT_ItemID").val(CollectDet_Output[cnt].ItemID);
+            $("#txt_OUT_OnhandQty").val(CollectDet_Output[cnt].OnhandQty);
+            $("#txt_OUT_GlobalCost").val(CollectDet_Output[cnt].UnitCost);
+            $("#txt_OUT_UnitID").val(CollectDet_Output[cnt].UnitID);
+            $("#txt_OUT_StockOnhandQty").val(CollectDet_Output[cnt].StockOnhandQty);
+            $("#txt_OUT_StkUnitCost").val(CollectDet_Output[cnt].StkUnitCost);
+            $("#txt_OUT_Quantity").val(CollectDet_Output[cnt].Qty); 
         }
     }
+    //***********************************************Grid Controls*******************************************//
+    function BuildControls(cnt: number) {
 
-    //*********************************************functions*******************************************//
-    function checkprivialges() {
-        debugger
-        // لو ليه صلاحية او فك الاعتماد هيكون مفنوح
-        if (SysSession.CurrentPrivileges.CUSTOM1 || SysSession.CurrentPrivileges.CUSTOM2) {
-            chkStatus.disabled = false;
-        } else {
-            chkStatus.disabled = true;
+        var html = "";
+        html = `<tr id= "No_Row${cnt}">
+                    <input id="txtCollectDetailID${cnt}" type="hidden" class="form-control display_none"  />
+                    <td>
+		                <div class="form-group">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus display_none"></i></span>
+		                </div>
+	                </td>
+                    <td>
+	                    <div class="form-group">
+		                    <button type="button" class="style_ButSearch" id="btnSearchItems${cnt}" name="ColSearch">
+		                    <i class="fa fa-search  "></i>
+		                     </button>
+	                    </div>
+                    </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtItemCode${cnt}" type="text" class="form-control" name=""  />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtItemName${cnt}" type="text" class="form-control condisa" name="" disabled />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txt_u_DescA${cnt}" type="text" class="form-control condisa" name="" disabled  />
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+                            <input id="txtQuantity${cnt}" type="number" class="form-control" name=""  />
+		                </div>
+	                </td>
+                    
+               <input id="txt_StatusFlag${cnt}" type="hidden"   />
+               <input id="txt_ItemID${cnt}" type="hidden"   />
+               <input id="txt_OnhandQty${cnt}" type="hidden"   />
+               <input id="txt_GlobalCost${cnt}" type="hidden"   />
+               <input id="txt_UnitID${cnt}" type="hidden"   />
+               <input id="txt_StockOnhandQty${cnt}" type="hidden"   />
+               <input id="txt_StkUnitCost${cnt}" type="hidden"   />
+                </tr>`;
+        $("#div_Data").append(html);
+
+        $("#btnSearchItems" + cnt).on('click', function () {
+            btnSrchItem_onclick(cnt);
+        });
+
+        $("#txtItemCode" + cnt).on('change', function () {
+            txt_search_onchange(cnt);
+        });
+
+        $("#btn_minus" + cnt).on('click', function () {
+            DeleteRow(cnt);
+        });
+
+        $("#txtQuantity" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            if (Number($("#txtQuantity" + cnt).val()) > Number($("#txt_OnhandQty" + cnt).val())) {
+                DisplayMassage("يجب ان تكون الكمبةالمدخلة اصغر من الكمية الفعلية (" + Number($("#txt_OnhandQty" + cnt).val()) + ") ", "Quantity must be less than On hand Quantity", MessageType.Worning);
+
+                //Errorinput($("#txtQuantity" + cnt));
+                //$("#txtQuantity" + cnt).val(Number($("#txt_OnhandQty" + cnt).val()));
+            }
+        });
+
+
+    }
+    function AddNewRow() {
+        if (!SysSession.CurrentPrivileges.AddNew) return;
+
+        var CanAdd: boolean = true;
+        if (CountGrid > 0) {
+            for (var i = 0; i < CountGrid; i++) {
+                CanAdd = Validation_Grid(i);
+                if (CanAdd == false) {
+                    break;
+                }
+            }
         }
+        if (CanAdd) {
 
-    }
+            BuildControls(CountGrid);
+            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
 
-    function QueryMode() {
-        debugger
-        $("#divTransferDetails :input").prop("disabled", true);
-        $("#divInputs :input").prop("disabled", true);
-        $("#divGridDetails").removeClass("disabledDiv");
-        $("#btnAddDetails").addClass("disabledplus");
-        $("#btnAddDetails2").addClass("disabledplus");
-        $("#btnSave").addClass("display_none");
-        $("#btnUpdate").removeClass("display_none");
-        $("#btnPrintTransaction").removeClass("display_none");
-        $("#btnBack").addClass("display_none");
-        $(".glyphicon-minus-sign").addClass("display_none");
-        $("#divOutputs :input").prop("disabled", true);
-        $("#div_Data2 :input").prop("disabled", true);
-        $(".text_off").prop("disabled", true);
-        btnUpdate.disabled = false;
-    }
-
-    function Searchprocess() {
-        Clear();
-        Search();
-        QueryMode();
-    }
-
-    function Clear() {
-        $("#divTransferDetails :input").val("");
-        $("#div_Data2 :input").val("");
-        $("#divInputs :input").val("");
-        txtLabourCost.value = "0";
-        $("#txtMaterialCost").val("0");
-        txtTransferDate.value = DateFormat(Date().toString());
-        Model = new I_TR_Collect();
-        ModelCollectDet = new Array<I_TR_CollectDetail>();
-        CollectMasterDetail = new ICollectMasterDetails();
-        hd_CollectID.value = "0";
-    }
-
-    function EnableControls() {
-        $("#divTransferDetails :input").prop("disabled", false);
-        $("#divGridDetails").addClass("disabledDiv");
-        $("#divGridDetails").attr("disabled", "disabled").off('click');
-        $("#div_hedr").addClass("disabledDiv");
-        $("#div_hedr").attr("disabled", "disabled").off('click');
-        $("#divIconbar").addClass("disabledIconbar");
-        $("#divIconbar").attr("disabled", "disabled").off('click');
-        $("#btnAddDetails").removeClass("disabledplus");
-        $("#btnAddDetails2").removeClass("disabledplus");
-        $("#divInputs :input").prop("disabled", false);
-        $("#divOutputs :input").prop("disabled", false);
-        txtTrNo.disabled = true;
+            // can delete new inserted record  without need for delete privilage
+            CountGrid++;
+        }
         $(".btn-minus").removeClass("display_none");
-        $("#txtCreatedBy").attr("disabled", "disabled");
-        $("#txtCreatedAt").attr("disabled", "disabled");
-        $("#txtUpdatedBy").attr("disabled", "disabled");
-        $("#txtUpdatedAt").attr("disabled", "disabled");
     }
+    function DeleteRow(RecNo: number) {
+        if (!SysSession.CurrentPrivileges.Remove) return;
+        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
+            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
+            if (statusFlag == "i")
+                $("#txt_StatusFlag" + RecNo).val("m");
+            else
+                $("#txt_StatusFlag" + RecNo).val("d");
 
+            $("#No_Row" + RecNo).attr("hidden", "true");
+        });
+
+    }
+    //******************************************************validation*****************************************//
     function Validation() {
         debugger
         if ($("#drp_Store").val() == "" || $("#drp_Store").val() == "null") {
@@ -1000,31 +805,39 @@ namespace CollectUnit {
             Errorinput(drp_Store);
             return false
         }
+        if ($("#drp_CollType").val() == "" || $("#drp_CollType").val() == "null") {
+            DisplayMassage(" برجاء اختيار نوع الحركة ", "Please Enter Store", MessageType.Worning);
+            Errorinput(drp_CollType);
+            return false
+        }
         if ($("#txtTransferDate").val() == "") {
             DisplayMassage(" برجاء ادخال تاريخ الحركة ", "Please Enter Date", MessageType.Worning);
             Errorinput(txtTransferDate);
             return false
         }
-        if ($("#txtLabourCost").val() == "") {
-            DisplayMassage(" برجاء ادخال تكلفة العمالة", "Please Enter Labour Cost", MessageType.Worning);
-            Errorinput(txtLabourCost);
+        if (Number($("#txt_OUT_ItemCode").val()) == 0) {
+            DisplayMassage("برجاء ادخال الصنف المخرجات ", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
+            Errorinput($("#txt_OUT_ItemCode"));
+            Errorinput($("#txt_OUT_ItemName"));
             return false
         }
-        if ($("#txtMaterialCost").val() == "") {
-            DisplayMassage(" برجاء ادخال تكلفة المواد ", "Please Enter Material Cost", MessageType.Worning);
-            Errorinput(txtMaterialCost);
+        if (Number($("#txt_OUT_Quantity").val()) == 0) {
+            DisplayMassage("برجاء ادخال كمية المخرجات ", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
+            Errorinput($("#txt_OUT_Quantity"));
             return false
-        }
+        } 
         //********************
-        if (CountGrid == 0) {
+        let FlagCount = false;
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                FlagCount = true;
+            }
+        }
+        if (!FlagCount) {
             DisplayMassage("ادخل بيانات المدخلات", "Enter Inputs Data", MessageType.Error);
             return false
         }
-        //********************
-        if (CountGrid2 == 0) {
-            DisplayMassage("ادخل بيانات المخرجات", "Enter Outputs Data", MessageType.Error);
-            return false
-        }
+
         //******************
         if (!CheckPeriodDate(txtTransferDate.value, "I")) {
             debugger
@@ -1033,20 +846,225 @@ namespace CollectUnit {
             return false
         }
 
-        let Prc = 0;
-        for (var i = 0; i < CountGrid2; i++) {
-            if ($("#txt_OUT_StatusFlag" + i).val() != "d" && $("#txt_OUT_StatusFlag" + i).val() != "m") {
-                Prc = Prc + Number($("#txt_OUT_CostFactorPrc" + i + "").val());
+
+        return true;
+    }
+    function validationitem(id: number, idRow: number) {
+        for (var i = 0; i < CountGrid; i++) {
+
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+                if ($("#txt_ItemID" + i + "").val() == id && $("#txt_ItemID" + i + "").val() != idRow) {
+                    DisplayMassage("الصنف موجود من قبل", "Item found before", MessageType.Error);
+                    Errorinput($("#txtItemCode" + i + ""));
+                    return false
+                }
             }
-        }
-        if (Prc != 100) {
-            DisplayMassage("لابد ان يكون مجموع نسبة التكلفة للمخرجات بساوى 100", "The Summetion of Cost Prescentage must equal 100", MessageType.Error);
-            Errorinput($("#txt_OUT_CostFactorPrc" + i + "").val());
-            return false
+
         }
         return true;
     }
+    function Validation_Grid(rowcount: number): boolean {
+        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+            return true;
+        }
+        else {
+            if ($("#txtItemName" + rowcount).val() == "") {
+                DisplayMassage('برجاء ادخال الصنف', 'Please enter the item', MessageType.Error);
+                Errorinput($("#txtItemName" + rowcount));
+                Errorinput($("#txtItemCode" + rowcount));
+                return false;
+            }
+            if (Number($("#txtQuantity" + rowcount).val()) == 0) {
+                DisplayMassage('برجاء ادخال الكميه', 'Please enter the item', MessageType.Error);
+                Errorinput($("#txtQuantity" + rowcount));
+                return false;
+            }
+            return true;
+        }
 
+    }
+    //******************************************************Load*****************************************//
+    function FillStore() {
+        debugger
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("DefStore", "GetAll"),
+            data: {
+                CompCode: Number(SysSession.CurrentEnvironment.CompCode),
+                BranchCode: Number(SysSession.CurrentEnvironment.BranchCode),
+                UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess == true) {
+                    let Store = result.Response as Array<G_STORE>;
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillComboFirstvalue(Store, drp_Store, "StoreId", "DescA", "- اختر -", null);
+                    }
+                    else {
+                        DocumentActions.FillComboFirstvalue(Store, drp_Store, "StoreId", "DescL", "- Select -", null);
+                    }
+                }
+            }
+        });
+    } 
+    function GetCardTypes() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GCodes", "GetAll"),
+            data: { codeType: 'CollType', UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess == true) {
+                    CodesTypes = result.Response as Array<G_Codes>;
+
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillComboFirstvalue(CodesTypes, Filtr_CollType, "CodeValue", "DescA", " اختار  نوع الحركه", null);
+                        DocumentActions.FillComboFirstvalue(CodesTypes, drp_CollType, "CodeValue", "DescA", " اختار  نوع الحركه", null);
+                    }
+                    else {
+                        DocumentActions.FillComboFirstvalue(CodesTypes, Filtr_CollType, "CodeValue", "DescE", "- Select -", null);
+                        DocumentActions.FillComboFirstvalue(CodesTypes, drp_CollType, "CodeValue", "DescE", "- Select -", null);
+                    }
+
+                }
+            }
+        });
+    } 
+    //----------------------------------------------------( Get Item_Cat )
+    function Display_DrpPaymentType() {
+
+        var Display_Type: Array<I_D_Category> = new Array<I_D_Category>();
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefCategory", "GetAll"),
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    Display_Type = result.Response as Array<I_D_Category>;
+
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillCombowithdefult(Display_Type, drpPaymentType, "CatID", "DescA", "اختر الفئة");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(Display_Type, drpPaymentType, "CatID", "DescL", "Select Category");
+                    }
+
+
+
+                }
+            }
+        });
+    }
+
+    //----------------------------------------------------( Get item familly )
+    function Display_I_ItemFamily() {
+
+        Display_ItemFamily = new Array<I_ItemFamily>();
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("StkDefItemType", "GetAll"),
+            data: {
+                CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+
+                    Display_ItemFamily = result.Response as Array<I_ItemFamily>;
+
+
+                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                        DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+                    }
+                    else {
+                        DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+                    }
+
+                    if (drpitem_family.value != 'null') {
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').removeAttr("disabled")
+                    } else {
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').attr("disabled")
+                    }
+
+                }
+            }
+        });
+    }
+    function drpPaymentType_onchange() {
+        if (drpPaymentType.value != 'null') {
+            Display_ItemFamilyFill = Display_ItemFamily.filter(x => x.CatID == Number(drpPaymentType.value))
+            if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                DocumentActions.FillCombowithdefult(Display_ItemFamilyFill, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+            }
+            else {
+                DocumentActions.FillCombowithdefult(Display_ItemFamilyFill, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+            }
+        } else {
+            if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescA", "اختر النوع");
+            }
+            else {
+                DocumentActions.FillCombowithdefult(Display_ItemFamily, drpitem_family, "ItemFamilyID", "DescL", "Select Type");
+            }
+        }
+
+        $('#txt_ID_APP_Type').attr("disabled", "disabled");
+        txt_ID_APP_Type.innerHTML = '<option value="null">اختر الصنف</option>';
+
+    }
+
+    //----------------------------------------------------( Item Desc )
+    function itemDisplay() {
+
+        if (drpitem_family.value != 'null') {
+            Details = new Array<I_Item>();
+
+
+            var ItemFamilyID = Number($("#drpitem_family").val());
+            var finyear = sys.SysSession.CurrentEnvironment.CurrentYear;
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("StkDefItemType", "GetI_ItemByFamilyIdOrdered"),
+                data: {
+                    CompCode: compcode, FinYear: finyear, familyid: ItemFamilyID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                },
+                success: (d) => {
+
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+
+                        Details = result.Response as Array<I_Item>;
+
+
+                        $('#txt_ID_APP_Type').html('');
+                        $('#txt_ID_APP_Type').removeAttr("disabled")
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "DescA", "اختر الصنف");
+                        }
+                        if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
+                            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "DescL", "Select Item");
+                        }
+
+                    }
+                }
+            });
+        } else {
+            $('#txt_ID_APP_Type').attr("disabled", "disabled");
+            DocumentActions.FillCombowithdefult(Details, txt_ID_APP_Type, "ItemID", "Itm_DescA", "اختر الصنف");
+        }
+
+
+    }
+
+    //*********************************************functions*******************************************//
     function chkprivialgesToEditApprovedInvoice() {
         if (SysSession.CurrentPrivileges.CUSTOM2 == false) {
             chkStatus.disabled = true;
@@ -1056,9 +1074,68 @@ namespace CollectUnit {
             btnUpdate.disabled = true;
         }
     }
+    function disabledControls() {
+        debugger
+        $("#divTransferDetails :input").prop("disabled", true);
+        $("#divInputs :input").prop("disabled", true);
+        $("#searchbutmemreport").removeClass("disabledDiv");
+        $("#divGridDetails").removeClass("disabledDiv");
+        $("#btnAddDetails").addClass("disabledplus");
+        $("#btnSave").addClass("display_none");
+        $("#btnUpdate").removeClass("display_none");
+        $("#btnPrintTransaction").removeClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $(".glyphicon-minus-sign").addClass("display_none");
+        $("#divOutputs :input").prop("disabled", true);
+        $("#div_Data2 :input").prop("disabled", true);
+        $(".text_off").prop("disabled", true);
+        btnUpdate.disabled = false;
+        $("#divGridDetails").removeClass("disabledDiv");
+        $("#divGridDetails").removeAttr("disabled");
+        $("#div_hedr").removeClass("disabledDiv");
+        $("#div_hedr").removeAttr("disabled").off('click');
+    }
+    function EnableControls() {
+        $("#divTransferDetails :input").prop("disabled", false);
+        $("#searchbutmemreport").addClass("disabledDiv");
+        $("#divGridDetails").addClass("disabledDiv");
+        $("#divGridDetails").attr("disabled", "disabled").off('click');
+        $("#div_hedr").addClass("disabledDiv");
+        $("#div_hedr").attr("disabled", "disabled").off('click');
+        $("#btnAddDetails").removeClass("disabledplus");
+        $("#divInputs :input").prop("disabled", false);
+        $("#divOutputs :input").prop("disabled", false);
+        txtTrNo.disabled = true;
+        $(".btn-minus").removeClass("display_none");
+        $("#txtCreatedBy").attr("disabled", "disabled");
+        $("#txtCreatedAt").attr("disabled", "disabled");
+        $("#txtUpdatedBy").attr("disabled", "disabled");
+        $("#txtUpdatedAt").attr("disabled", "disabled");
 
+        $("#VoucherNo").attr("disabled", "disabled");
+        $("#txt_OUT_ItemName").attr("disabled", "disabled");
+        $(".condisa").attr("disabled", "disabled");
+    }
+    function Clear() {
+        $("#divTransferDetails :input").val("");
+        $("#div_Data2 :input").val("");
+        $("#divInputs :input").val("");
+        txtLabourCost.value = "0";
+        $("#txtMaterialCost").val("0");
+        $("#VoucherNo").val("");
+        txtTransferDate.value = DateFormat(Date().toString());
+        Model = new I_TR_Collect();
+        ModelCollectDet = new Array<I_TR_CollectDetail>();
+        CollectMasterDetail = new ICollectMasterDetails();
+        hd_CollectID.value = "0";
+        $("#div_Data").html('');
+        CountGrid = 0;
+        drp_CollType.value = 'null';
+    }
+    //**********************************************Assign**********************************************//
     function Assign() {
         DocumentActions.AssignToModel(Model);
+        Model.CollectID = Number(hd_CollectID.value);
         Model.StoreID = Number(drp_Store.value);
         Model.Status = Number(chkStatus.checked);
         Model.CompCode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -1066,13 +1143,38 @@ namespace CollectUnit {
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.TrDate = txtTransferDate.value;
-        Model.TrDateH = convertToH(txtTransferDate.value);//==========???error
-    }
+        Model.TrType = Number(drp_CollType.value);
+        Model.VoucherNo = Number($('#VoucherNo').val());
+        Model.IsPosted = IsPosted;
+        //Model.TrDateH = convertToH(txtTransferDate.value);//==========???error
 
+        //*****************************AssignOutputdetails
+
+        ModelCollectDet = new Array<I_TR_CollectDetail>();
+
+        var det = new I_TR_CollectDetail();
+        det.ItemID = Number($("#txt_OUT_ItemID").val());
+        det.IsInput = false;
+        det.UnitID = Number($("#txt_OUT_UnitID").val());
+        det.OnhandQty = Number($("#txt_OUT_OnhandQty").val());
+        det.UnitCost = Number($("#txt_OUT_GlobalCost").val());
+        det.StockOnhandQty = Number($("#txt_OUT_StockOnhandQty").val());
+        det.StkUnitCost = Number($("#txt_OUT_StkUnitCost").val());
+        det.StockQty = Number($("#txt_OUT_Quantity").val());
+        det.Qty = Number($("#txt_OUT_Quantity").val());
+        det.CostFactorPrc =100;
+        det.CollectDetailID = Number($("#txt_OUT_CollectDetailID").val());
+        det.CollectID = Number(hd_CollectID.value);
+        det.StatusFlag = hd_CollectID.value == "0" ? 'i' : 'u';
+        ModelCollectDet.push(det);
+
+        AssignInputdetails();
+
+    }
     function AssignInputdetails() {
         debugger
-        ModelCollectDet == new Array<I_TR_CollectDetail>();
-        var det: I_TR_CollectDetail; 
+
+        var det: I_TR_CollectDetail;
         var StatusFlag: string;
 
         // Details
@@ -1080,11 +1182,11 @@ namespace CollectUnit {
             det = new I_TR_CollectDetail();
             StatusFlag = $("#txt_StatusFlag" + i).val();
 
-         
+
             if (StatusFlag == "i") {
                 det.ItemID = Number($("#txt_ItemID" + i).val());
                 det.IsInput = true;
-                det.UnitID = Number($("#txt_UnitID" + i).val()); 
+                det.UnitID = Number($("#txt_UnitID" + i).val());
                 det.OnhandQty = Number($("#txt_OnhandQty" + i).val());
                 det.UnitCost = Number($("#txt_GlobalCost" + i).val());
                 det.StockOnhandQty = Number($("#txt_StockOnhandQty" + i).val());
@@ -1100,7 +1202,7 @@ namespace CollectUnit {
             if (StatusFlag == "u") {
                 det.ItemID = Number($("#txt_ItemID" + i).val());
                 det.IsInput = true;
-                det.UnitID = Number($("#txt_UnitID" + i).val()); 
+                det.UnitID = Number($("#txt_UnitID" + i).val());
                 det.OnhandQty = Number($("#txt_OnhandQty" + i).val());
                 det.UnitCost = Number($("#txt_GlobalCost" + i).val());
                 det.StockOnhandQty = Number($("#txt_StockOnhandQty" + i).val());
@@ -1115,8 +1217,8 @@ namespace CollectUnit {
             }
             if (StatusFlag == "d") {
                 if ($("#txt_ItemID" + i).val() != "") {
-                    det.ItemID = Number($("#txt_ItemID" + i).val()); 
-                    det.UnitID = Number($("#txt_UnitID" + i).val());  
+                    det.ItemID = Number($("#txt_ItemID" + i).val());
+                    det.UnitID = Number($("#txt_UnitID" + i).val());
                     det.CollectDetailID = Number($("#txtCollectDetailID" + i).val());
                     det.CollectID = Number(hd_CollectID.value);
                     det.StatusFlag = StatusFlag;
@@ -1128,81 +1230,8 @@ namespace CollectUnit {
 
 
     }
-
-    function AssignOutputdetails() {
-        debugger;
-
-        var det: I_TR_CollectDetail;
-        
-        var StatusFlag: string;
-
-        // Details
-        for (var i = 0; i < CountGrid2; i++) {
-            det = new I_TR_CollectDetail();
-            StatusFlag = $("#txt_OUT_StatusFlag" + i).val();
-
-
-            if (StatusFlag == "i") {
-                det.ItemID = Number($("#txt_OUT_ItemID" + i).val());
-                det.IsInput = false;
-                det.UnitID = Number($("#txt_OUT_UnitID" + i).val());
-                det.OnhandQty = Number($("#txt_OUT_OnhandQty" + i).val());
-                det.UnitCost = Number($("#txt_OUT_GlobalCost" + i).val());
-                det.StockOnhandQty = Number($("#txt_OUT_StockOnhandQty" + i).val());
-                det.StkUnitCost = Number($("#txt_OUT_StkUnitCost" + i).val());
-                det.StockQty = Number($("#txt_OUT_Quantity" + i).val());
-                det.Qty = Number($("#txt_OUT_Quantity" + i).val());
-                det.CostFactorPrc = Number($("#txt_OUT_CostFactorPrc" + i).val());
-                det.CollectDetailID = Number($("#txt_OUT_CollectDetailID" + i).val());
-                det.CollectID = Number(hd_CollectID.value);
-                det.StatusFlag = StatusFlag;
-                ModelCollectDet.push(det);
-            }
-            if (StatusFlag == "u") {
-                det.ItemID = Number($("#txt_OUT_ItemID" + i).val());
-                det.IsInput = false;
-                det.UnitID = Number($("#txt_OUT_UnitID" + i).val());
-                det.OnhandQty = Number($("#txt_OUT_OnhandQty" + i).val());
-                det.UnitCost = Number($("#txt_OUT_GlobalCost" + i).val());
-                det.StockOnhandQty = Number($("#txt_OUT_StockOnhandQty" + i).val());
-                det.StkUnitCost = Number($("#txt_OUT_StkUnitCost" + i).val());
-                det.StockQty = Number($("#txt_OUT_Quantity" + i).val());
-                det.Qty = Number($("#txt_OUT_Quantity" + i).val());
-                det.CostFactorPrc = Number($("#txt_OUT_CostFactorPrc" + i).val());
-                det.CollectDetailID = Number($("#txt_OUT_CollectDetailID" + i).val());
-                det.CollectID = Number(hd_CollectID.value);
-                det.StatusFlag = StatusFlag;
-                ModelCollectDet.push(det);
-            }
-            if (StatusFlag == "d") {
-                if ($("#txt_OUT_ItemID" + i).val() != "") {
-                    det.ItemID = Number($("#txt_OUT_ItemID" + i).val());
-                    det.IsInput = false;
-                    det.UnitID = Number($("#txt_OUT_UnitID" + i).val());
-                    det.OnhandQty = Number($("#txt_OUT_OnhandQty" + i).val());
-                    det.UnitCost = Number($("#txt_OUT_GlobalCost" + i).val());
-                    det.StockOnhandQty = Number($("#txt_OUT_StockOnhandQty" + i).val());
-                    det.StkUnitCost = Number($("#txt_OUT_StkUnitCost" + i).val());
-                    det.StockQty = Number($("#txt_OUT_Quantity" + i).val());
-                    det.Qty = Number($("#txt_OUT_Quantity" + i).val());
-                    det.CostFactorPrc = Number($("#txt_OUT_CostFactorPrc" + i).val());
-                    det.CollectDetailID = Number($("#txt_OUT_CollectDetailID" + i).val());
-                    det.CollectID = Number(hd_CollectID.value);
-                    det.StatusFlag = StatusFlag;
-                    ModelCollectDet.push(det);
-                }
-            }
-        }
-
-
-
-
-    }
-
     function Insert() {
         Assign();
-        AssignInputdetails();
-        AssignOutputdetails();
         Model.CollectID = 0;
         Model.CreatedAt = DateTimeFormat(Date().toString());
         Model.CreatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1222,22 +1251,19 @@ namespace CollectUnit {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    Model = result.Response as I_TR_Collect; 
+                    Model = result.Response as I_TR_Collect;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم الحفظ", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
-                    Success();
+                    Success(Model.CollectID.toString());
                     Save_Succ_But();
                 }
             }
         });
     }
-
     function Update() {
         debugger
         Assign();
-        AssignInputdetails();
-        AssignOutputdetails();
         Model.CollectID = Number(hd_CollectID.value);
         Model.UpdatedAt = DateTimeFormat(Date().toString());
         Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
@@ -1250,7 +1276,7 @@ namespace CollectUnit {
         CollectMasterDetail.UserCode = SysSession.CurrentEnvironment.UserCode;
         CollectMasterDetail.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
-            type: "post",
+            type: "Post",
             url: sys.apiUrl("Collect", "UpdateALL"),
             data: JSON.stringify(CollectMasterDetail),
             success: (d) => {
@@ -1258,46 +1284,15 @@ namespace CollectUnit {
                 if (result.IsSuccess) {
                     Model = result.Response as I_TR_Collect;
                     DateSetsSccess("txtTransferDate", "txtFromDate", "txtToDate");
-                    DisplayMassage("تم التعديل", "Saved Succesfully", MessageType.Succeed); 
+                    DisplayMassage("تم التعديل", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
-                    Success();
+                    Success(Model.CollectID.toString());
                     Save_Succ_But();
-            
+
                 }
             }
         });
     }
-
-    function Success() {
-        Searchprocess();
-        $("#DivInvoiceData").removeClass("display_none");
-        hd_CollectID.value = gloplCollectID.toString();
-        //GlobalInvoiceID = Number(Grid.SelectedKey);
-        backflag = false;
-        btnPrintTransaction.disabled = false;
-        Display();
-        QueryMode();
-        //*****Privillage
-        checkprivialges();
-        if (Model.Status == 1) {
-            chkStatus.checked = true;
-            chkprivialgesToEditApprovedInvoice();
-        } else {
-            chkStatus.checked = false;
-            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
-            chkStatus.disabled = true;
-        }
-
-        $("#btnAddDetails").addClass("display_none");
-        $("#btnAddDetails2").addClass("display_none");
-
-        $("#div_hedr").removeClass("disabledDiv");
-        $("#div_hedr").removeAttr("disabled").off('click');
-        $("#divIconbar").removeClass("disabledIconbar");
-        $("#divIconbar").removeAttr("disabled").off('click');
-
-    }
-
     function open() {
         if (!CheckPeriodDate(txtTransferDate.value, "I")) {
             debugger
@@ -1307,15 +1302,17 @@ namespace CollectUnit {
             return false
         }
 
-       Assign();
-       Model.Status = 0;
-       Model.UpdatedAt = DateTimeFormat(Date().toString());
-       Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
-       Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-       Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        //Assign();
+        Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        Model.CollectID = Number(hd_CollectID.value);
+        Model.Status = 0;
+        Model.UpdatedAt = DateTimeFormat(Date().toString());
+        Model.UpdatedBy = SysSession.CurrentEnvironment.UserCode;
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Model.MODULE_CODE = Modules.CollectUnit;
-       Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-       Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("Collect", "Open"),
@@ -1323,17 +1320,26 @@ namespace CollectUnit {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    Model = result.Response as I_TR_Collect; 
+                    Model = result.Response as I_TR_Collect;
                     DisplayMassage("تم فك الاعتماد", "Saved Succesfully", MessageType.Succeed);
                     gloplCollectID = Model.CollectID;
-                    Success();
+                    Success(Model.CollectID.toString());
                 }
             }
         });
     }
+    function Success(CollectID: string) {
 
+        btnShow_onclick();
+
+        $("#btnSave").addClass("display_none");
+        $("#btnBack").addClass("display_none");
+        $("#btnUpdate").addClass("display_none");
+        $("#btnPrintTransaction").addClass("display_none");
+        disabledControls();
+        Grid_RowDoubleClicked(CollectID)
+    }
     //******************************************Print**********************************************//
-
     function PrintTransaction() {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
@@ -1348,7 +1354,6 @@ namespace CollectUnit {
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
     }
-
     export function PrintReport(OutType: number) {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
@@ -1375,12 +1380,18 @@ namespace CollectUnit {
         else { rp.storeID = Number($("#drp_Store").val()); }
         if (ddlstatus.value == "null") { rp.Status = 2; }
         else { rp.Status = $("#ddlstatus").val(); }
+
+        rp.TrType = Filtr_CollType.value == "null" ? -1 : Number(Filtr_CollType.value);
+        rp.CatId = drpPaymentType.value == "null" ? -1 : Number(drpPaymentType.value);
+        rp.ItemFamId = drpitem_family.value == "null" ? -1 : Number(drpitem_family.value);
+        rp.ItemID = txt_ID_APP_Type.value == "null" ? -1 : Number(txt_ID_APP_Type.value);
+
         Ajax.Callsync({
             url: Url.Action("IProc_Rep_CollectList", "GeneralReports"),
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-              
+
                 PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
@@ -1388,25 +1399,4 @@ namespace CollectUnit {
         })
     }
 
-    function btndiv_1_onclick() {
-        $("#btndiv_1").addClass("btn-active");
-        $("#btndiv_11").removeClass("btn-main");
-        //Edit
-        $("#btndiv_2").removeClass("btn-active");
-        $("#btndiv_22").addClass("btn-main");
-        //Edit
-        $("#div_1").removeClass("display_none");
-        $("#div_2").addClass("display_none");
-    }
-
-    function btndiv_2_onclick() {
-        $("#btndiv_1").removeClass("btn-active");
-        $("#btndiv_11").addClass("btn-main");
-        //Edit
-        $("#btndiv_2").addClass("btn-active");
-        $("#btndiv_22").removeClass("btn-main");
-        //Edit
-        $("#div_1").addClass("display_none");
-        $("#div_2").removeClass("display_none");
-    }
 } 

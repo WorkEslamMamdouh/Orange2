@@ -939,6 +939,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("AccCode", rp.AccCode);
             rep.AddParameter("IsAuthVchr", rp.IsAuthVchr);
             rep.AddParameter("IsNewVchr", rp.IsNewVchr);
+            rep.AddParameter("IncludeInvTR", rp.IncludeInvTR);
             rep.AddParameter("OpenType", rp.OpenType);
             rep.AddParameter("PrdType", rp.PrdType);
             rep.AddParameter("EndType", rp.EndType);
@@ -1612,8 +1613,11 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("TrType", rp.TrType);
+            rep.AddParameter("CatId", rp.CatId);
+            rep.AddParameter("ItemFamId", rp.ItemFamId);
+            rep.AddParameter("ItemID", rp.ItemID);
             string url = rep.GetReportUrl("Rep_CollectList");
-
+              
             return Shared.JsonObject(url);
         }
 

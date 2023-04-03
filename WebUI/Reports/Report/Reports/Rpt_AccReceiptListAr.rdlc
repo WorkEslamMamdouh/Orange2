@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.40021cm</Width>
+              <Width>1.05625cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.12443cm</Width>
@@ -33,7 +33,7 @@
               <Width>2.0468cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.97984cm</Width>
+              <Width>1.32377cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -348,14 +348,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox83">
+                    <Textbox Name="Textbox19">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الرقم</Value>
+                              <Value>رقم السند</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -366,7 +366,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox83</rd:DefaultName>
+                      <rd:DefaultName>Textbox19</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -693,9 +693,7 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!TrNo.Value</Value>
-                              <Style>
-                                <Format>0</Format>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -926,13 +924,47 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>5</ColSpan>
+                    <ColSpan>4</ColSpan>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
                 <TablixCell />
                 <TablixCell />
-                <TablixCell />
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox21">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
@@ -971,9 +1003,14 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_AccReceiptListAr</DataSetName>
+        <SortExpressions>
+          <SortExpression>
+            <Value>=Fields!TrNo.Value</Value>
+          </SortExpression>
+        </SortExpressions>
         <Top>0.02328cm</Top>
         <Height>1.8cm</Height>
-        <Width>19.46205cm</Width>
+        <Width>19.46202cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -984,7 +1021,7 @@
     <Height>0.78194in</Height>
     <Style />
   </Body>
-  <Width>7.66222in</Width>
+  <Width>7.71905in</Width>
   <Page>
     <PageHeader>
       <Height>3.77399cm</Height>

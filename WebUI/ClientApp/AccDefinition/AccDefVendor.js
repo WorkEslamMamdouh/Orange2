@@ -468,7 +468,7 @@ var AccDefVendor;
             return false;
         }
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
-        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '') {
+        if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_ACCCode').val().trim() == '' && IsAutoCode == false) {
             //if (Is_Vendor == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '' ) {
             DisplayMassage("يجب ادخال  حساب المورد  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_ACCCode'));
@@ -764,6 +764,10 @@ var AccDefVendor;
             $("#txtIDExpireDate" + i).removeAttr("disabled");
         }
         $('#Div_ADDRESS :input').removeAttr('disabled');
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+        }
     }
     function btnAdd_onclick() {
         ShowFlag = false;
@@ -789,10 +793,11 @@ var AccDefVendor;
             Errorinput($('#txt_CustCode'));
             return false;
         }
+        $('#Div_ADDRESS :input').removeAttr('disabled');
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
         }
-        $('#Div_ADDRESS :input').removeAttr('disabled');
     }
     function btnsave_onClick() {
         loading('btnSave');
@@ -1347,7 +1352,7 @@ var AccDefVendor;
         if ($("#txtVendorType").val() == "null") { //--------الجميع
             rp.VendType = -1;
         }
-        if ($("#txt_ID_APP_Type").val() == "Null") {
+        if ($("#txt_ID_APP_Type").val() == "null") {
             rp.IsCredit = -1;
         }
         if (Number($("#txt_ID_APP_Type").val()) == 0) {

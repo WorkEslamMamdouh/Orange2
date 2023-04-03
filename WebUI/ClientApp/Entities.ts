@@ -3760,6 +3760,17 @@ class I_Item_Year_Details extends SecurityClass {
     public I_ItemYear: Array<I_ItemYear>;
 
 }
+ 
+class NewsDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.G_News = new Array<G_News>();
+        this.G_Codes = new Array<G_Codes>();
+    }
+    public G_News: Array<G_News>;
+    public G_Codes: Array<G_Codes>;
+
+}
 
 
 
@@ -6702,7 +6713,69 @@ class G_LnkTrans extends SecurityClass {
     public BASE_TABLE_NAME: string;
     public FN_POSTED: string;
     public Selected: boolean;
-} class G_LnkTransVariable extends SecurityClass {
+    
+}
+
+class GQ_GetLnkTransComp {
+    constructor() {
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.TR_CODE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = 0;
+        this.TABLE_NAME = "";
+        this.TABLE_CONDITION = "";
+        this.FN_COMP_CODE = "";
+        this.FN_BRA_CODE = "";
+        this.FN_TR_ID = "";
+        this.FN_TR_NO = "";
+        this.FN_TR_TYPE = "";
+        this.FN_TR_DATE = "";
+        this.FN_USER = "";
+        this.FN_TR_AMOUNT = "";
+        this.FN_TR_DESCA = "";
+        this.FN_TR_DESCE = "";
+        this.FN_VOUCHER_CODE = "";
+        this.INTEGRATE = false;
+        this.BASE_TABLE_NAME = "";
+        this.FN_POSTED = "";
+        this.COMP_CODE
+        this.Comp_INTEGRATE = false;
+        this.Selected = false;
+    }
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public TR_CODE: string;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public VOUCHER_TYPE: number;
+    public VOUCHER_SOURCE_TYPE: number;
+    public TABLE_NAME: string;
+    public TABLE_CONDITION: string;
+    public FN_COMP_CODE: string;
+    public FN_BRA_CODE: string;
+    public FN_TR_ID: string;
+    public FN_TR_NO: string;
+    public FN_TR_TYPE: string;
+    public FN_TR_DATE: string;
+    public FN_USER: string;
+    public FN_TR_AMOUNT: string;
+    public FN_TR_DESCA: string;
+    public FN_TR_DESCE: string;
+    public FN_VOUCHER_CODE: string;
+    public INTEGRATE: boolean;
+    public BASE_TABLE_NAME: string;
+    public FN_POSTED: string;
+    public COMP_CODE: any;
+    public Comp_INTEGRATE: boolean;
+    public Selected: boolean;
+}
+
+
+
+class G_LnkTransVariable extends SecurityClass {
     constructor() {
         super();
         this.SYSTEM_CODE = "";
@@ -10187,6 +10260,7 @@ class I_TR_Collect extends SecurityClass {
         this.LabourCost = 0;
         this.MaterialCost = 0;
         this.InputItemCost = 0;
+        this.TrType = 0;
         this.status_txt = "";
     }
     public CollectID: number;
@@ -10209,6 +10283,7 @@ class I_TR_Collect extends SecurityClass {
     public LabourCost: number;
     public MaterialCost: number;
     public InputItemCost: number;
+    public TrType: number;
     public status_txt: string;
 }
 
@@ -11207,3 +11282,84 @@ class IQ_GetStkOpenDetail {
     public UomCode: string;
 }
 
+class IQ_GetCollectList {
+    constructor() {
+        this.CollectID = 0;
+        this.TrNo = 0;
+        this.RefNO = "";
+        this.TrDate = "";
+        this.TrDateH = "";
+        this.StoreID = 0;
+        this.Remark = "";
+        this.IsPosted = false;
+        this.VoucherNo = 0;
+        this.VoucherType = 0;
+        this.CreatedAt = "";
+        this.CreatedBy = "";
+        this.UpdatedAt = "";
+        this.UpdatedBy = "";
+        this.CompCode = 0;
+        this.BranchCode = 0;
+        this.Status = 0;
+        this.LabourCost = 0;
+        this.MaterialCost = 0;
+        this.InputItemCost = 0;
+        this.Qty = 0;
+        this.NewUnitCost = 0;
+        this.OutValue = 0;
+        this.ItemCode = "";
+        this.Itm_DescA = "";
+        this.Itm_DescE = "";
+        this.UomCode = "";
+        this.Uom_DescA = "";
+        this.Uom_DescE = "";
+        this.ItemFamilyID = 0;
+        this.FamilyCode = "";
+        this.fmly_DescA = "";
+        this.fmly_DescE = "";
+        this.CatID = 0;
+        this.ItemID = 0;
+        this.TrType = 0;
+        this.Typ_DescA = "";
+        this.Typ_DescE = "";
+    }
+    public CollectID: number;
+    public TrNo: number;
+    public RefNO: string;
+    public TrDate: string;
+    public TrDateH: string;
+    public StoreID: number;
+    public Remark: string;
+    public IsPosted: boolean;
+    public VoucherNo: number;
+    public VoucherType: number;
+    public CreatedAt: string;
+    public CreatedBy: string;
+    public UpdatedAt: string;
+    public UpdatedBy: string;
+    public CompCode: number;
+    public BranchCode: number;
+    public Status: number;
+    public LabourCost: number;
+    public MaterialCost: number;
+    public InputItemCost: number;
+    public Qty: number;
+    public NewUnitCost: number;
+    public OutValue: number;
+    public ItemCode: string;
+    public Itm_DescA: string;
+    public Itm_DescE: string;
+    public UomCode: string;
+    public Uom_DescA: string;
+    public Uom_DescE: string;
+    public ItemFamilyID: number;
+    public FamilyCode: string;
+    public fmly_DescA: string;
+    public fmly_DescE: string;
+    public CatID: number;
+    public ItemID: number;
+    public TrType: number;
+    public Typ_DescA: string;
+    public Typ_DescE: string;
+}
+ 

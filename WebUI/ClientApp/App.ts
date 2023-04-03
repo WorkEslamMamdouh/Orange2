@@ -114,7 +114,7 @@ var MessageType = {
     Succeed: '1',
     Worning: '3',
 }
-
+ 
 var TransType = {
     Invoice: 'Inv',
     InvoiceReturn: 'Inv_Ret',
@@ -133,7 +133,7 @@ var Keys = {
 
 
 var setVal = function (value: any): any {
-    debugger
+
     let Input = this;
     value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
@@ -317,15 +317,23 @@ namespace App {
     //};
 
     Number.prototype.RoundToNum = function (dec: number): number {
-        debugger
+
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num);
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+            if (stfix < 0) {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+
+            }
+            else {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
@@ -333,14 +341,23 @@ namespace App {
 
 
     Number.prototype.RoundToSt = function (dec: number): string {
+         
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num).toString();
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            if (stfix < 0) {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+
+            }
+            else {
+                let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
@@ -520,6 +537,18 @@ function GetBranchs() {
     });
 }
 
+class Ajax_Data {
+    public type: string; 
+    public url: string;
+    public data: string;
+    public ISObject: boolean; 
+    constructor() {
+        this.type = "";  
+        this.url = "";
+        this.data = "";
+        this.ISObject = false; 
+    }
+} 
 class GQ_GetUserBranch {
     public USER_CODE: string;
     public COMP_CODE: number;
@@ -645,86 +674,6 @@ var Ajax = {
     CallAsync: <T>(settings: JQueryAjaxSettings) => {
         CheckTime();
 
-        //debugger
-
-
-
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //debugger
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-
-        //    settings.data["Address"] = '' + Address + '';
-
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    debugger
-        //    settings.data = JsonAddValue(settings.data, Address)
-
-        //    console.log(settings.data);
-
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-
-        //}
-        $.ajax({
-            type: settings.type,
-            url: settings.url,
-            data: settings.data,
-            cache: false,
-            headers: {
-                'Accept': 'application/json; charset=utf-8  ',
-                'Content-Type': 'application/json'
-            },
-            success: (d) => {
-                settings.success(d, "", null);
-                $(".waitMe").removeAttr("style").fadeOut(200);
-
-
-
-            },
-            error: () => { $(".waitMe").removeAttr("style").fadeOut(200); }
-        })
-    },
-    Callsync: <T>(settings: JQueryAjaxSettings) => {
-        CheckTime();
-         
-        //debugger
-
-
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //debugger
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-
-        //    settings.data["Address"] = '' + Address + '';
-
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    debugger
-        //    settings.data = JsonAddValue(settings.data, Address)
-
-        //    console.log(settings.data);
-
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-
-        //}
-        debugger  
         $.ajax({
 
             type: settings.type,
@@ -745,13 +694,131 @@ var Ajax = {
             },
             error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
         })
+    },
+    Callsync: <T>(settings: JQueryAjaxSettings) => {
+        CheckTime();
+
+        $.ajax({
+
+            type: settings.type,
+            url: settings.url,
+            data: settings.data,
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: (d) => {
+                settings.success(d, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+
+
+
+            },
+            error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        })
+    },
+    CallsyncUi: <T>(settings: JQueryAjaxSettings) => {
+        CheckTime();
+
+        //
+        //
+        debugger
+
+        if (cheakUrl(settings.url)) {
+
+            $.ajax({
+
+                type: settings.type,
+                url: settings.url,
+                data: settings.data,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8  ',
+                    'Content-Type': 'application/json'
+                },
+                cache: false,
+                async: false,
+                success: (d) => {
+                    settings.success(d, "", null);
+                    $(".waitMe").removeAttr("style").fadeOut(2500);
+
+
+
+                },
+                error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
+            })
+
+            return
+        }
+
+        let AD: Ajax_Data = new Ajax_Data();
+
+        if (typeof settings.data == "undefined") {
+            var data = [];
+            settings.data = data;
+            //alert('لا يوجد ');
+            settings.data = "";
+            AD.ISObject = true;
+        }
+        else if (isObject(settings, 'data')) {
+            //alert('Object');
+
+            settings.data = JSON.stringify(settings.data);
+
+            AD.ISObject = true;
+        }
+        else {
+            //alert('Json'); 
+
+        }
+
+        AD.type = settings.type;
+        let URL = settings.url.replace($("#GetAPIUrl").val(), "");
+        AD.url = URL;
+        AD.data = settings.data;
+
+        $.ajax({
+            url: Url.Action("AccessApi", "GeneralAPI"),
+            data: { data: JSON.stringify(AD) },
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: (d) => {
+                debugger
+                var result = JSON.parse(d);
+                settings.success(result, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+
+
+
+            },
+            error: () => { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        })
     }
 };
 
 
+function cheakUrl(url: string): boolean {
+
+    let Nurl = url.replace(location.origin, "");
+    let ChUrl = url.replace(Nurl, "");
+
+    let islocal = false;
+
+    if (ChUrl == location.origin) {
+        islocal = true;
+    }
+
+    return islocal
+}
+
 function JsonAddValue(data: string, Address): string {
 
-    debugger
+
 
     var obj = JSON.parse(data);
 
@@ -2022,7 +2089,7 @@ function convertToG(date: string) {
 //}
 
 function daysDifference(dateI1, dateI2) {
-    debugger
+
     //define two date object variables to store the date values
     var date1 = new Date(dateI1);
     var date2 = new Date(dateI2);
@@ -2265,7 +2332,7 @@ function printDiv(divName: string) {
     //window.print();
 
     //document.body.innerHTML = originalContents;
-    debugger
+
 
 
     var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
@@ -2346,7 +2413,7 @@ function OnClick_Tree() {
 
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-        debugger
+
         let expanded = $(this).attr("aria-expanded");
 
         if (expanded == 'false') {
@@ -2607,7 +2674,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
 
             //alert(result);
-            //debugger
+            //
             //window.open(result, "blank");
 
             let x = Url.Action("OpenPdfS", "Home");
@@ -2635,7 +2702,7 @@ function GetSerialNumber(): string {
         type: "GET",
         url: Url.Action("GetSerialNumber", "Home"),
         success: (d) => {
-            debugger
+
             let result = d;
             return result
 
@@ -2738,7 +2805,7 @@ function SendInv_to_Cust(data_New: ReportParameters) {
 
 function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobile: string, TrID: number) {
 
-    debugger
+
     let sys = new SystemTools;
     Ajax.Callsync({
         type: "Get",
@@ -2747,7 +2814,7 @@ function SendMessg(CompCode: number, HdMsg: string, DetMsg: string, ContactMobil
         success: (d) => {//(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
             let result = d as BaseResponse;
             if (result.IsSuccess) {
-                debugger
+
                 let res = result.Response;
 
                 MessageBox.Show(res, "الرساله");
@@ -2775,7 +2842,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
 
 }
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2787,7 +2854,7 @@ function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, 
     });
 }
 function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2799,7 +2866,7 @@ function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode:
     });
 }
 function OpenScreen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
-    debugger
+
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2823,3 +2890,50 @@ function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, 
     });
 }
 
+function Event_key(key: string, Nameinput: string, NameBtnEvent: string) {
+
+    var input = document.getElementById(Nameinput);
+    input.addEventListener("keypress", function (event) {
+        if (event.key === key) {
+            event.preventDefault();
+            document.getElementById(NameBtnEvent).click();
+        }
+    });
+}
+
+
+function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> {
+
+    debugger
+
+    let flagNewH;
+    flagNewH = false
+    let NewModel = new Array<any>();
+    for (var i = 0; i < DataList.length; i++) {
+        debugger;
+        NewModel.push(DataList[i])
+        if (flagNewH == true) {
+            if (NewModel[i].StatusFlag != 'i' && NewModel[i].StatusFlag != 'd' && NewModel[i].StatusFlag != 'm') {
+                NewModel[i].StatusFlag = 'u';
+            }
+        }
+        let List = DataList[i];
+        if (List[Key] == value) {
+
+            let ModelPur = JSON.parse(JSON.stringify(DataList[i]));
+
+            ModelPur[Key] = Number(DataList.length + 20)
+            ModelPur.StatusFlag = 'i';
+            NewModel.push(ModelPur);
+            flagNewH = true;
+
+
+        }
+
+
+
+    }
+
+    return NewModel;
+
+}

@@ -219,6 +219,14 @@ namespace Inv.WebUI.Reports.Models
         public int InvoiceID { get; set; }
     }
 
+    public class Ajax_Data
+    {
+        public string type { get; set; }
+        public string url { get; set; }
+        public string data { get; set; }
+        public bool ISObject { get; set; }
+    }
+  
 
     public class RepFinancials : StdParamters // Mona Adding  class 
     {

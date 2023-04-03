@@ -24,6 +24,14 @@ namespace Inv.DAL.Domain
         public Nullable<int> Par_RepType { get; set; }
         public string Par_StatusDSA { get; set; }
         public string Par_StatusDSE { get; set; }
+        public string Par_CatDSA { get; set; }
+        public string Par_CatDSE { get; set; }
+        public string Par_FamilyDSA { get; set; }
+        public string Par_FamilyDSE { get; set; }
+        public string Par_ItemDSA { get; set; }
+        public string Par_ItemDSE { get; set; }
+        public string Par_TypeDSA { get; set; }
+        public string Par_TypeDSE { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
         public int CollectID { get; set; }
@@ -46,6 +54,24 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> LabourCost { get; set; }
         public Nullable<decimal> MaterialCost { get; set; }
         public Nullable<decimal> InputItemCost { get; set; }
+        public Nullable<decimal> Qty { get; set; }
+        public Nullable<decimal> NewUnitCost { get; set; }
+        public Nullable<decimal> OutValue { get; set; }
+        public string ItemCode { get; set; }
+        public string Itm_DescA { get; set; }
+        public string Itm_DescE { get; set; }
+        public string UomCode { get; set; }
+        public string Uom_DescA { get; set; }
+        public string Uom_DescE { get; set; }
+        public int ItemFamilyID { get; set; }
+        public string FamilyCode { get; set; }
+        public string fmly_DescA { get; set; }
+        public string fmly_DescE { get; set; }
+        public Nullable<int> CatID { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        public Nullable<int> TrType { get; set; }
+        public string Typ_DescA { get; set; }
+        public string Typ_DescE { get; set; }
         public string store_DescA { get; set; }
         public Nullable<int> STORE_CODE { get; set; }
         public string store_DescE { get; set; }

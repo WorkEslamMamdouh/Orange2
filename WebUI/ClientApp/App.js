@@ -128,7 +128,6 @@ var Keys = {
     Enter: "Enter"
 };
 var setVal = function (value) {
-    debugger;
     var Input = this;
     value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
     return value;
@@ -214,7 +213,6 @@ var App;
     //    return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     //};
     Number.prototype.RoundToNum = function (dec) {
-        debugger;
         var num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
@@ -222,8 +220,14 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return (Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec));
+            if (stfix < 0) {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+            }
+            else {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
     };
@@ -235,8 +239,14 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-            return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            if (stfix < 0) {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            }
+            else {
+                var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
+                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+            }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
     };
@@ -377,6 +387,15 @@ function GetBranchs() {
         }
     });
 }
+var Ajax_Data = /** @class */ (function () {
+    function Ajax_Data() {
+        this.type = "";
+        this.url = "";
+        this.data = "";
+        this.ISObject = false;
+    }
+    return Ajax_Data;
+}());
 var GQ_GetUserBranch = /** @class */ (function () {
     function GQ_GetUserBranch() {
         this.USER_CODE = "";
@@ -483,65 +502,6 @@ var Ajax = {
     },
     CallAsync: function (settings) {
         CheckTime();
-        //debugger
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //debugger
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-        //    settings.data["Address"] = '' + Address + '';
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    debugger
-        //    settings.data = JsonAddValue(settings.data, Address)
-        //    console.log(settings.data);
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-        //}
-        $.ajax({
-            type: settings.type,
-            url: settings.url,
-            data: settings.data,
-            cache: false,
-            headers: {
-                'Accept': 'application/json; charset=utf-8  ',
-                'Content-Type': 'application/json'
-            },
-            success: function (d) {
-                settings.success(d, "", null);
-                $(".waitMe").removeAttr("style").fadeOut(200);
-            },
-            error: function () { $(".waitMe").removeAttr("style").fadeOut(200); }
-        });
-    },
-    Callsync: function (settings) {
-        CheckTime();
-        //debugger
-        //if (typeof settings.data == "undefined") {
-        //    var data = [];
-        //    settings.data = data;
-        //}
-        //debugger
-        //let Address = $('#GetIPAddress').val();
-        //Address = '' + typeof Address == "undefined" ? '' : Address + '';
-        //if (isObject(settings, 'data')) {
-        //    //alert('Object');
-        //    settings.data["Address"] = '' + Address + '';
-        //}
-        //else {
-        //    //alert('Json');
-        //    //alert(settings.data)
-        //    debugger
-        //    settings.data = JsonAddValue(settings.data, Address)
-        //    console.log(settings.data);
-        //    //settings.data = 'Address=' + Address + '' + settings.data;
-        //}
-        debugger;
         $.ajax({
             type: settings.type,
             url: settings.url,
@@ -558,10 +518,99 @@ var Ajax = {
             },
             error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
         });
+    },
+    Callsync: function (settings) {
+        CheckTime();
+        $.ajax({
+            type: settings.type,
+            url: settings.url,
+            data: settings.data,
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: function (d) {
+                settings.success(d, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+            },
+            error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        });
+    },
+    CallsyncUi: function (settings) {
+        CheckTime();
+        //
+        //
+        debugger;
+        if (cheakUrl(settings.url)) {
+            $.ajax({
+                type: settings.type,
+                url: settings.url,
+                data: settings.data,
+                headers: {
+                    'Accept': 'application/json; charset=utf-8  ',
+                    'Content-Type': 'application/json'
+                },
+                cache: false,
+                async: false,
+                success: function (d) {
+                    settings.success(d, "", null);
+                    $(".waitMe").removeAttr("style").fadeOut(2500);
+                },
+                error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
+            });
+            return;
+        }
+        var AD = new Ajax_Data();
+        if (typeof settings.data == "undefined") {
+            var data = [];
+            settings.data = data;
+            //alert('لا يوجد ');
+            settings.data = "";
+            AD.ISObject = true;
+        }
+        else if (isObject(settings, 'data')) {
+            //alert('Object');
+            settings.data = JSON.stringify(settings.data);
+            AD.ISObject = true;
+        }
+        else {
+            //alert('Json'); 
+        }
+        AD.type = settings.type;
+        var URL = settings.url.replace($("#GetAPIUrl").val(), "");
+        AD.url = URL;
+        AD.data = settings.data;
+        $.ajax({
+            url: Url.Action("AccessApi", "GeneralAPI"),
+            data: { data: JSON.stringify(AD) },
+            headers: {
+                'Accept': 'application/json; charset=utf-8  ',
+                'Content-Type': 'application/json'
+            },
+            cache: false,
+            async: false,
+            success: function (d) {
+                debugger;
+                var result = JSON.parse(d);
+                settings.success(result, "", null);
+                $(".waitMe").removeAttr("style").fadeOut(2500);
+            },
+            error: function () { $(".waitMe").removeAttr("style").fadeOut(2500); }
+        });
     }
 };
+function cheakUrl(url) {
+    var Nurl = url.replace(location.origin, "");
+    var ChUrl = url.replace(Nurl, "");
+    var islocal = false;
+    if (ChUrl == location.origin) {
+        islocal = true;
+    }
+    return islocal;
+}
 function JsonAddValue(data, Address) {
-    debugger;
     var obj = JSON.parse(data);
     obj["Address"] = '' + Address + '';
     return JSON.stringify(obj);
@@ -1637,7 +1686,6 @@ function convertToG(date) {
 //    }
 //}
 function daysDifference(dateI1, dateI2) {
-    debugger;
     //define two date object variables to store the date values
     var date1 = new Date(dateI1);
     var date2 = new Date(dateI2);
@@ -1810,7 +1858,6 @@ function printDiv(divName) {
     //document.body.innerHTML = printContents;
     //window.print();
     //document.body.innerHTML = originalContents;
-    debugger;
     var sOption = "toolbar=no,location=no,directories=yes,menubar=no,";
     sOption += "scrollbars=yes,width=775,height=600,left=10,top=25";
     var mywindow = window.open('', 'PRINT', sOption);
@@ -1853,7 +1900,6 @@ function OnClick_Tree() {
     $('span').on('click', function () {
         //let ul = $(this).attr("href");
         //alert($('' + ul + '').attr("class"))
-        debugger;
         var expanded = $(this).attr("aria-expanded");
         if (expanded == 'false') {
             $(this).attr("aria-expanded", "true");
@@ -2031,7 +2077,7 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
             $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
             $('#btnPrintsFrom_To').removeAttr('disabled');
             //alert(result);
-            //debugger
+            //
             //window.open(result, "blank");
             var x = Url.Action("OpenPdfS", "Home");
             var UrlPdf = x + "/" + "?" + "path=" + result + "";
@@ -2046,7 +2092,6 @@ function GetSerialNumber() {
         type: "GET",
         url: Url.Action("GetSerialNumber", "Home"),
         success: function (d) {
-            debugger;
             var result = d;
             return result;
         }
@@ -2116,7 +2161,6 @@ function SendInv_to_Cust(data_New) {
     });
 }
 function SendMessg(CompCode, HdMsg, DetMsg, ContactMobile, TrID) {
-    debugger;
     var sys = new SystemTools;
     Ajax.Callsync({
         type: "Get",
@@ -2125,7 +2169,6 @@ function SendMessg(CompCode, HdMsg, DetMsg, ContactMobile, TrID) {
         success: function (d) {
             var result = d;
             if (result.IsSuccess) {
-                debugger;
                 var res = result.Response;
                 MessageBox.Show(res, "الرساله");
                 //alert(res)
@@ -2144,7 +2187,6 @@ function PrintTransactionLog(UserCode, compcode, BranchCode, ModuleCode, FinYear
     });
 }
 function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2155,7 +2197,6 @@ function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
     });
 }
 function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, FinYear, ExtraData) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2166,7 +2207,6 @@ function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, Fin
     });
 }
 function OpenScreen(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
-    debugger;
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
@@ -2185,5 +2225,38 @@ function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRI
         success: function (response) {
         }
     });
+}
+function Event_key(key, Nameinput, NameBtnEvent) {
+    var input = document.getElementById(Nameinput);
+    input.addEventListener("keypress", function (event) {
+        if (event.key === key) {
+            event.preventDefault();
+            document.getElementById(NameBtnEvent).click();
+        }
+    });
+}
+function CopyRowGrid(DataList, Key, value) {
+    debugger;
+    var flagNewH;
+    flagNewH = false;
+    var NewModel = new Array();
+    for (var i = 0; i < DataList.length; i++) {
+        debugger;
+        NewModel.push(DataList[i]);
+        if (flagNewH == true) {
+            if (NewModel[i].StatusFlag != 'i' && NewModel[i].StatusFlag != 'd' && NewModel[i].StatusFlag != 'm') {
+                NewModel[i].StatusFlag = 'u';
+            }
+        }
+        var List = DataList[i];
+        if (List[Key] == value) {
+            var ModelPur = JSON.parse(JSON.stringify(DataList[i]));
+            ModelPur[Key] = Number(DataList.length + 20);
+            ModelPur.StatusFlag = 'i';
+            NewModel.push(ModelPur);
+            flagNewH = true;
+        }
+    }
+    return NewModel;
 }
 //# sourceMappingURL=App.js.map

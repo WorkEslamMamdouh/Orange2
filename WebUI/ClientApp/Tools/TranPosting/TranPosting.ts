@@ -49,14 +49,14 @@ namespace TranPosting {
 
     //Arrays
     var BranchDetails: Array<G_BRANCH> = new Array<G_BRANCH>();
-    var SubSystemDetails: Array<G_LnkTrans> = new Array<G_LnkTrans>();
-    var SubSystemDetailsRefreshed: Array<G_LnkTrans> = new Array<G_LnkTrans>();
+    var SubSystemDetails: Array<GQ_GetLnkTransComp> = new Array<GQ_GetLnkTransComp>();
+    var SubSystemDetailsRefreshed: Array<GQ_GetLnkTransComp> = new Array<GQ_GetLnkTransComp>();
     var LnkTransDetails: Array<G_LnkTrans_Temp> = new Array<G_LnkTrans_Temp>();
     var SearchDetailsTrans: Array<G_LnkTrans_Temp> = new Array<G_LnkTrans_Temp>();
     var selectedLnkTransDetails: Array<G_LnkTrans_Temp> = new Array<G_LnkTrans_Temp>();
     var GetLnkVoucherDetail: Array<GQ_GetLnkVoucherDetail> = new Array<GQ_GetLnkVoucherDetail>();
     var SearchDetails: Array<GQ_GetLnkVoucherDetail> = new Array<GQ_GetLnkVoucherDetail>();
-    //var SelectedModuleCodes: Array<G_LnkTrans> = new Array<G_LnkTrans>();
+    //var SelectedModuleCodes: Array<GQ_GetLnkTransComp> = new Array<GQ_GetLnkTransComp>();
 
     // global
     var debitTot: number = 0;
@@ -726,7 +726,7 @@ namespace TranPosting {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    SubSystemDetails = result.Response as Array<G_LnkTrans>;
+                    SubSystemDetails = result.Response as Array<GQ_GetLnkTransComp>;
                     SubSystemGrid.DataSource = SubSystemDetails;
                     SubSystemGrid.Bind();
                 }

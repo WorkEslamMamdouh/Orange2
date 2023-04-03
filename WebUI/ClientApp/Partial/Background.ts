@@ -12,8 +12,12 @@ namespace BackgroundImage {
     var SysSession: SystemSession = GetSystemSession('Home');
 
     var GetCompStatus: Array<ModelCompStatus> = new Array<ModelCompStatus>();
+    var News_Details: NewsDetails = new NewsDetails();
 
     var CountGrid = 0;
+
+    var CompCode = Number(SysSession.CurrentEnvironment.CompCode)
+    var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode)
 
     export function GetBackgroundImage() {
 
@@ -33,14 +37,20 @@ namespace BackgroundImage {
         });
 
 
-        if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam' ) {
-            BiuldComp(); 
+        let isNews = localStorage.getItem("Show_News");
+         
+        //if (isNews == 'false') {
+            //Show_News(); 
+        //}
+
+        if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
+            BiuldComp();
         }
 
 
 
     }
-     
+
     function InitializeGrid(cnt: number) {
 
         var html;
@@ -129,7 +139,7 @@ namespace BackgroundImage {
         $('#MembeshipEndDate' + i).html(DateFormat(GetCompStatus[i].MembeshipEndDate));
 
         if (GetCompStatus[i].CompStatus == 1) {
-            $('#CompStatus' + i).html('فى مهلة التجديد '); 
+            $('#CompStatus' + i).html('فى مهلة التجديد ');
         }
         else if (GetCompStatus[i].CompStatus == 2) {
             $('#CompStatus' + i).html('استطلاع فقط');
@@ -143,13 +153,13 @@ namespace BackgroundImage {
         $('#CBprogress_' + i).attr('style', 'width: 100%');
 
 
-        $('#CBBalance_' + i).html((GetNumDay(GetCompStatus[i],i)).toString());
+        $('#CBBalance_' + i).html((GetNumDay(GetCompStatus[i], i)).toString());
 
 
 
-       
 
-      
+
+
 
 
 
@@ -176,23 +186,23 @@ namespace BackgroundImage {
         if (status == 0 || status == 1 || status == 2) {
             debugger
             if (status == 1) {
-                Progres(1,i);
+                Progres(1, i);
                 return Day_1
             }
             if (status == 2) {
-                Progres(2,i); 
+                Progres(2, i);
                 return NumDay
             }
 
         }
 
-        Progres(3, i); 
+        Progres(3, i);
         return Day_1
 
     }
 
     function Progres(progress: number, i: number) {
-         
+
 
 
 
@@ -205,13 +215,13 @@ namespace BackgroundImage {
             $('#CBBalance_' + i).attr('class', 'text-warning');
         }
 
-        if (progress == 2 ) { // احمر
-          
+        if (progress == 2) { // احمر
+
             $('#CBprogress_' + i).attr('class', 'progress-bar bg-danger');
             $('#CBBalance_' + i).attr('class', 'text-danger');
         }
 
-        if (progress == 3 ) {//لبني
+        if (progress == 3) {//لبني
             $('#CBprogress_' + i).attr('class', 'progress-bar bg-info');
             $('#CBBalance_' + i).attr('class', 'text-info');
 
@@ -224,6 +234,75 @@ namespace BackgroundImage {
 
         //}
 
+
+    }
+
+
+    //***********************************************News******************************************
+
+
+    function Show_News() {
+
+        let DateNow = DateFormatRep(GetDate());
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
+            data: { CompCode: CompCode, BranchCode: BranchCode, DateNow: DateNow },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    News_Details = result.Response as NewsDetails;
+                    if (News_Details.G_News.length > 0) {
+
+                        for (var i = 0; i < News_Details.G_Codes.length; i++) {
+                            BuildNews(i);
+                        }
+
+                        $("#News_Model").modal("show");
+                        localStorage.setItem("Show_News", 'true');
+                    }
+
+                }
+            }
+        });
+
+    }
+
+    function BuildNews(cnt) {
+        debugger
+        let html_News = `
+                    <div id="" style="margin-top: 1%;" class="col-lg-12 grid-margin stretch-card animate__animated animate__lightSpeedInRight">
+                        <div class="card " style="background-color: ${News_Details.G_Codes[cnt].SubCode};">
+                            <div class="card-body">
+
+
+                                <h4 id="Titel_TypeNews${cnt}" class="card-title">${News_Details.G_Codes[cnt].DescA}  </h4>
+                                <div id="Prag_News${News_Details.G_Codes[cnt].CodeValue}" style="margin-right: 5%;" class="table-responsive">
+                                  
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   `;
+
+        let Pragraph = News_Details.G_News.filter(x => x.NewsTypeCode == News_Details.G_Codes[cnt].CodeValue)
+        if (Pragraph.length == 0) {
+            return
+        }
+        $("#Div_News").append(html_News);
+        let htmlPrag = '';
+        for (var i = 0; i < Pragraph.length; i++) {
+
+            htmlPrag = htmlPrag + '<li style="font-weight: bold;">' + Pragraph[i].NewsText + '</li>';
+
+        }
+        debugger
+        $("#Prag_News" + News_Details.G_Codes[cnt].CodeValue).html(htmlPrag);
+         
 
     }
 

@@ -224,9 +224,9 @@ namespace Inv.API.Controllers
                         condition = condition + " and TrDate>='" + strtdt + "'";
                     if (Enddt != null)
                         condition = condition + " and TrDate<='" + Enddt + "'";
-                    string s = "select * from I_TR_Collect where ";
+                    string s = "select * from IQ_GetCollectList where ";
                     s = s + condition;
-                    var res = db.Database.SqlQuery<I_TR_Collect>(s).ToList();
+                    var res = db.Database.SqlQuery<IQ_GetCollectList>(s).ToList();
                     return Ok(new BaseResponse(res));
                 }
             }
@@ -247,13 +247,15 @@ namespace Inv.API.Controllers
                     try
                     {
                         //***save  
-                        var result = I_TR_CollectService.Update(obj);
+
+                        db.Database.ExecuteSqlCommand("update [dbo].[I_TR_Collect] set [Status] = 0 where CollectID = "+ obj.CollectID + "");
+                        //var result = I_TR_CollectService.Update(obj);
                         //*****Run TransProcess
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.CompCode), Convert.ToInt32(obj.BranchCode), obj.CollectID, "collect", "Open", db);
                         dbTransaction.Commit();
                         LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
-                        return Ok(new BaseResponse(result));
+                        return Ok(new BaseResponse(obj));
                     }
                     catch (Exception ex)
                     {

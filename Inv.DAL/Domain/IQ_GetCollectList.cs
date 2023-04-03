@@ -10,36 +10,10 @@
 namespace Inv.DAL.Domain
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class IProc_Prnt_Collect_Result
+    public partial class IQ_GetCollectList
     {
-        public Nullable<int> Comp { get; set; }
-        public Nullable<int> Bra { get; set; }
-        public string CompNameA { get; set; }
-        public string CompNameE { get; set; }
-        public string BraNameA { get; set; }
-        public string BraNameE { get; set; }
-        public string LoginUser { get; set; }
-        public System.DateTime PrintDate { get; set; }
-        public Nullable<int> Par_RepType { get; set; }
-        public Nullable<bool> IsInput { get; set; }
-        public Nullable<int> ItemID { get; set; }
-        public Nullable<int> UnitID { get; set; }
-        public Nullable<decimal> Qty { get; set; }
-        public Nullable<decimal> OnhandQty { get; set; }
-        public Nullable<decimal> UnitCost { get; set; }
-        public Nullable<decimal> NewUnitCost { get; set; }
-        public Nullable<decimal> StkUnitCost { get; set; }
-        public Nullable<decimal> StockQty { get; set; }
-        public Nullable<decimal> StockOnhandQty { get; set; }
-        public Nullable<decimal> CostFactorPrc { get; set; }
-        public Nullable<decimal> NewStockUnitCost { get; set; }
-        public string ItemCode { get; set; }
-        public string itm_DescA { get; set; }
-        public string itm_DescE { get; set; }
-        public string UomCode { get; set; }
-        public string u_DescA { get; set; }
-        public string u_DescE { get; set; }
         public int CollectID { get; set; }
         public Nullable<int> TrNo { get; set; }
         public string RefNO { get; set; }
@@ -60,10 +34,21 @@ namespace Inv.DAL.Domain
         public Nullable<decimal> LabourCost { get; set; }
         public Nullable<decimal> MaterialCost { get; set; }
         public Nullable<decimal> InputItemCost { get; set; }
-        public int CollectDetailID { get; set; }
-        public string store_DescA { get; set; }
-        public Nullable<int> STORE_CODE { get; set; }
-        public string store_DescE { get; set; }
+        public Nullable<decimal> Qty { get; set; }
+        public Nullable<decimal> NewUnitCost { get; set; }
+        public Nullable<decimal> OutValue { get; set; }
+        public string ItemCode { get; set; }
+        public string Itm_DescA { get; set; }
+        public string Itm_DescE { get; set; }
+        public string UomCode { get; set; }
+        public string Uom_DescA { get; set; }
+        public string Uom_DescE { get; set; }
+        public int ItemFamilyID { get; set; }
+        public string FamilyCode { get; set; }
+        public string fmly_DescA { get; set; }
+        public string fmly_DescE { get; set; }
+        public Nullable<int> CatID { get; set; }
+        public Nullable<int> ItemID { get; set; }
         public Nullable<int> TrType { get; set; }
         public string Typ_DescA { get; set; }
         public string Typ_DescE { get; set; }

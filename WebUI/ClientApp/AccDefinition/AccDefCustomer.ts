@@ -324,6 +324,15 @@ namespace AccDefCustomer {
             $(".fa-minus-circle").addClass("display_none");
         }
 
+
+        if (IsAutoCode == true) {
+            txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+
+        }
+
+
+
     }
     function btnAdd_onclick() {
         IsNew = true;
@@ -378,6 +387,8 @@ namespace AccDefCustomer {
          
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
+            $("#ONAccount").addClass("disabledDiv");
+            
         }
 
 
@@ -392,12 +403,12 @@ namespace AccDefCustomer {
         debugger
         Newcount = 0;
         var CanAdd: boolean = true;
-        if (CountGrid == 0) {
-            DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
-            Errorinput(btnAddDetails);
-            AddNewRow();
-            return false;
-        }
+        //if (CountGrid == 0) {
+        //    DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
+        //    Errorinput(btnAddDetails);
+        //    AddNewRow();
+        //    return false;
+        //}
         if (CountGrid > 0) {
 
             for (var i = 0; i < CountGrid; i++) { 
@@ -946,7 +957,7 @@ namespace AccDefCustomer {
             return false;
 
         }
-        if (Is_cust == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '') {
+        if (Is_cust == true && $('#txt_Cust_Type').val() == 1 && $('#txt_CustCode').val().trim() == '' && IsAutoCode == false) {
             DisplayMassage("يجب ادخال  حساب العميل  ", "please enter district", MessageType.Worning);
             Errorinput($('#txt_CustCode'));
             return false;
@@ -1572,6 +1583,13 @@ namespace AccDefCustomer {
     function Insert() {
 
         Assign();
+
+        if (Model.A_Rec_D_Customer.GroupId == null) {
+            DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
+            Errorinput(txt_Grop);
+            return ;
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Insert"),
@@ -1593,6 +1611,13 @@ namespace AccDefCustomer {
     function Update() {
         Assign();
         debugger
+
+        if (Model.A_Rec_D_Customer.GroupId == null) {
+            DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
+            Errorinput(txt_Grop);
+            return;
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("AccDefCustomer", "Update"),

@@ -29,7 +29,7 @@ namespace GenDefVendorCat {
 
 
 	var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-
+    var IsAutoCode = SysSession.CurrentEnvironment.I_Control[0].IsAutoNoCustVendor;
 
 	export function InitalizeComponent() {
 
@@ -232,7 +232,12 @@ namespace GenDefVendorCat {
 		});
 		$("#txtAcount_Code" + cnt).on('change', function () {
 			if ($("#txt_StatusFlag" + cnt).val() != "i")
-				$("#txt_StatusFlag" + cnt).val("u");
+                $("#txt_StatusFlag" + cnt).val("u");
+
+            $("#CodePrefex" + cnt).val($("#txtAcount_Code" + cnt).val());
+
+            $("#LastNumber" + cnt).val('1');
+
 		});
 		if (SysSession.CurrentPrivileges.Remove) {
 			//$("#btn_minus" + cnt).removeClass("display_none");
@@ -255,7 +260,7 @@ namespace GenDefVendorCat {
 
 		Ajax.Callsync({
 			type: "Get",
-			url: sys.apiUrl("GLDefAccount", "GetByType"),
+            url: sys.apiUrl("GLDefAccount", "GetByTypeAuto"),
 			data: {
 				CompCode: compcode, AccType: AccType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
 			},
@@ -263,9 +268,11 @@ namespace GenDefVendorCat {
 				let result = d as BaseResponse;
 				if (result.IsSuccess) {
 
-					Details_Acount = result.Response as Array<A_ACCOUNT>;
+                    Details_Acount = result.Response as Array<A_ACCOUNT>;
 
-					//DisplayStkG_USERS();
+                    if (!IsAutoCode) {
+                        Details_Acount = Details_Acount.filter(x => x.DETAIL == true)
+                    }
 				}
 			}
 		});

@@ -8,7 +8,10 @@ var BackgroundImage;
     var sys = new SystemTools();
     var SysSession = GetSystemSession('Home');
     var GetCompStatus = new Array();
+    var News_Details = new NewsDetails();
     var CountGrid = 0;
+    var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+    var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     function GetBackgroundImage() {
         $.ajax({
             type: "GET",
@@ -22,6 +25,10 @@ var BackgroundImage;
                 //$("#cont").html(' <img id="img_divcont" style="background-repeat: no-repeat;max-width: 104.9%;height: auto;margin: -15px -29px 0px -14px;" src="/images/Background/' + response + '" alt="Alternate Text" /> ');
             }
         });
+        var isNews = localStorage.getItem("Show_News");
+        //if (isNews == 'false') {
+        //Show_News(); 
+        //}
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
         }
@@ -137,6 +144,43 @@ var BackgroundImage;
         //    $('#CBprogress_' + i).attr('class', 'progress-bar bg-primary');
         //    $('#CBBalance_' + i).attr('class', 'text-primary');
         //}
+    }
+    //***********************************************News******************************************
+    function Show_News() {
+        var DateNow = DateFormatRep(GetDate());
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
+            data: { CompCode: CompCode, BranchCode: BranchCode, DateNow: DateNow },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    News_Details = result.Response;
+                    if (News_Details.G_News.length > 0) {
+                        for (var i = 0; i < News_Details.G_Codes.length; i++) {
+                            BuildNews(i);
+                        }
+                        $("#News_Model").modal("show");
+                        localStorage.setItem("Show_News", 'true');
+                    }
+                }
+            }
+        });
+    }
+    function BuildNews(cnt) {
+        debugger;
+        var html_News = "\n                    <div id=\"\" style=\"margin-top: 1%;\" class=\"col-lg-12 grid-margin stretch-card animate__animated animate__lightSpeedInRight\">\n                        <div class=\"card \" style=\"background-color: " + News_Details.G_Codes[cnt].SubCode + ";\">\n                            <div class=\"card-body\">\n\n\n                                <h4 id=\"Titel_TypeNews" + cnt + "\" class=\"card-title\">" + News_Details.G_Codes[cnt].DescA + "  </h4>\n                                <div id=\"Prag_News" + News_Details.G_Codes[cnt].CodeValue + "\" style=\"margin-right: 5%;\" class=\"table-responsive\">\n                                  \n\n\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                   ";
+        var Pragraph = News_Details.G_News.filter(function (x) { return x.NewsTypeCode == News_Details.G_Codes[cnt].CodeValue; });
+        if (Pragraph.length == 0) {
+            return;
+        }
+        $("#Div_News").append(html_News);
+        var htmlPrag = '';
+        for (var i = 0; i < Pragraph.length; i++) {
+            htmlPrag = htmlPrag + '<li style="font-weight: bold;">' + Pragraph[i].NewsText + '</li>';
+        }
+        debugger;
+        $("#Prag_News" + News_Details.G_Codes[cnt].CodeValue).html(htmlPrag);
     }
 })(BackgroundImage || (BackgroundImage = {}));
 //# sourceMappingURL=Background.js.map
