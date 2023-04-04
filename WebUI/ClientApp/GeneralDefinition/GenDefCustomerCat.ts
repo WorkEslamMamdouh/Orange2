@@ -224,7 +224,7 @@ namespace GenDefCustomerCat {
              
             $("#CodePrefex" + cnt).val($("#txtAcount_Code" + cnt).val());
 
-            $("#LastNumber" + cnt).val('1');
+            $("#LastNumber" + cnt).val('0001');
 
         });
         if (SysSession.CurrentPrivileges.Remove) {

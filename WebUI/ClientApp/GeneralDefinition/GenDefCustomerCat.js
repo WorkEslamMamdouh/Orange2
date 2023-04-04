@@ -141,7 +141,7 @@ var GenDefCustomerCat;
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
             $("#CodePrefex" + cnt).val($("#txtAcount_Code" + cnt).val());
-            $("#LastNumber" + cnt).val('1');
+            $("#LastNumber" + cnt).val('0001');
         });
         if (SysSession.CurrentPrivileges.Remove) {
             //$("#btn_minus" + cnt).removeClass("display_none");

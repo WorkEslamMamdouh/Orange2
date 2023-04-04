@@ -12,6 +12,11 @@ var BackgroundImage;
     var CountGrid = 0;
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
+    var Style_New = /** @class */ (function () {
+        function Style_New() {
+        }
+        return Style_New;
+    }());
     function GetBackgroundImage() {
         $.ajax({
             type: "GET",
@@ -26,8 +31,9 @@ var BackgroundImage;
             }
         });
         var isNews = localStorage.getItem("Show_News");
+        //$("#News_Model").modal("show");
         //if (isNews == 'false') {
-        //Show_News(); 
+        Show_News();
         //}
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
@@ -147,6 +153,7 @@ var BackgroundImage;
     }
     //***********************************************News******************************************
     function Show_News() {
+        debugger;
         var DateNow = DateFormatRep(GetDate());
         Ajax.Callsync({
             type: "Get",
@@ -157,7 +164,7 @@ var BackgroundImage;
                 if (result.IsSuccess) {
                     News_Details = result.Response;
                     if (News_Details.G_News.length > 0) {
-                        for (var i = 0; i < News_Details.G_Codes.length; i++) {
+                        for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i);
                         }
                         $("#News_Model").modal("show");
@@ -169,18 +176,30 @@ var BackgroundImage;
     }
     function BuildNews(cnt) {
         debugger;
-        var html_News = "\n                    <div id=\"\" style=\"margin-top: 1%;\" class=\"col-lg-12 grid-margin stretch-card animate__animated animate__lightSpeedInRight\">\n                        <div class=\"card \" style=\"background-color: " + News_Details.G_Codes[cnt].SubCode + ";\">\n                            <div class=\"card-body\">\n\n\n                                <h4 id=\"Titel_TypeNews" + cnt + "\" class=\"card-title\">" + News_Details.G_Codes[cnt].DescA + "  </h4>\n                                <div id=\"Prag_News" + News_Details.G_Codes[cnt].CodeValue + "\" style=\"margin-right: 5%;\" class=\"table-responsive\">\n                                  \n\n\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                   ";
-        var Pragraph = News_Details.G_News.filter(function (x) { return x.NewsTypeCode == News_Details.G_Codes[cnt].CodeValue; });
-        if (Pragraph.length == 0) {
-            return;
-        }
+        var class_News = GetClass(cnt);
+        var html_News = "\n                      <div class=\"alert alert-" + class_News.class_title + " alert-white animate__animated animate__fadeInTopRight\">\n                        <div class=\"icon\">" + class_News.class_icon + "</div>\n                        <h5 class=\"news-date\"> " + DateFormat(News_Details.G_News[cnt].NewsDate) + "</h5>\n                        <strong>" + class_News.Type_Text + " :</strong>\n                        <span> " + News_Details.G_News[cnt].NewsText + " </span>\n                      </div>\n\n                   ";
         $("#Div_News").append(html_News);
-        var htmlPrag = '';
-        for (var i = 0; i < Pragraph.length; i++) {
-            htmlPrag = htmlPrag + '<li style="font-weight: bold;">' + Pragraph[i].NewsText + '</li>';
-        }
+    }
+    function GetClass(cnt) {
         debugger;
-        $("#Prag_News" + News_Details.G_Codes[cnt].CodeValue).html(htmlPrag);
+        var StyleNew = new Style_New();
+        var TypeCode = News_Details.G_News[cnt].NewsTypeCode;
+        var NewsType = News_Details.G_Codes.filter(function (x) { return x.CodeValue == TypeCode; });
+        StyleNew.class_title = NewsType[0].SubCode;
+        if (StyleNew.class_title == "success") {
+            StyleNew.class_icon = '<i class="fa-solid fa-check-to-slot"></i>';
+        }
+        if (StyleNew.class_title == "info") {
+            StyleNew.class_icon = '<i class="fa fa-info-circle"></i>';
+        }
+        if (StyleNew.class_title == "warning") {
+            StyleNew.class_icon = '<i class="fa fa-warning"></i>';
+        }
+        if (StyleNew.class_title == "danger") {
+            StyleNew.class_icon = '<i class="fa-sharp fa-solid fa-ban"></i>';
+        }
+        StyleNew.Type_Text = NewsType[0].DescA;
+        return StyleNew;
     }
 })(BackgroundImage || (BackgroundImage = {}));
 //# sourceMappingURL=Background.js.map

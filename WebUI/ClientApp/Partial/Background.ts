@@ -19,6 +19,13 @@ namespace BackgroundImage {
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode)
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode)
 
+
+    class Style_New  { 
+        public class_title: string;
+        public class_icon: string;
+        public Type_Text: string; 
+    }
+
     export function GetBackgroundImage() {
 
 
@@ -38,9 +45,11 @@ namespace BackgroundImage {
 
 
         let isNews = localStorage.getItem("Show_News");
-         
+
+        //$("#News_Model").modal("show");
+
         //if (isNews == 'false') {
-            //Show_News(); 
+            Show_News(); 
         //}
 
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
@@ -239,9 +248,9 @@ namespace BackgroundImage {
 
 
     //***********************************************News******************************************
-
-
+    
     function Show_News() {
+        debugger
 
         let DateNow = DateFormatRep(GetDate());
 
@@ -254,8 +263,8 @@ namespace BackgroundImage {
                 if (result.IsSuccess) {
                     News_Details = result.Response as NewsDetails;
                     if (News_Details.G_News.length > 0) {
-
-                        for (var i = 0; i < News_Details.G_Codes.length; i++) {
+ 
+                        for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i);
                         }
 
@@ -268,41 +277,56 @@ namespace BackgroundImage {
         });
 
     }
+     
+    function BuildNews(cnt: number) {
 
-    function BuildNews(cnt) {
         debugger
+
+        let class_News = GetClass(cnt);
+
         let html_News = `
-                    <div id="" style="margin-top: 1%;" class="col-lg-12 grid-margin stretch-card animate__animated animate__lightSpeedInRight">
-                        <div class="card " style="background-color: ${News_Details.G_Codes[cnt].SubCode};">
-                            <div class="card-body">
-
-
-                                <h4 id="Titel_TypeNews${cnt}" class="card-title">${News_Details.G_Codes[cnt].DescA}  </h4>
-                                <div id="Prag_News${News_Details.G_Codes[cnt].CodeValue}" style="margin-right: 5%;" class="table-responsive">
-                                  
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="alert alert-${class_News.class_title} alert-white animate__animated animate__fadeInTopRight">
+                        <div class="icon">${class_News.class_icon}</div>
+                        <h5 class="news-date"> ${DateFormat(News_Details.G_News[cnt].NewsDate)}</h5>
+                        <strong>${class_News.Type_Text} :</strong>
+                        <span> ${News_Details.G_News[cnt].NewsText} </span>
+                      </div>
 
                    `;
 
-        let Pragraph = News_Details.G_News.filter(x => x.NewsTypeCode == News_Details.G_Codes[cnt].CodeValue)
-        if (Pragraph.length == 0) {
-            return
-        }
         $("#Div_News").append(html_News);
-        let htmlPrag = '';
-        for (var i = 0; i < Pragraph.length; i++) {
+          
 
-            htmlPrag = htmlPrag + '<li style="font-weight: bold;">' + Pragraph[i].NewsText + '</li>';
+    }
 
-        }
+    function GetClass(cnt: number): Style_New {
+
         debugger
-        $("#Prag_News" + News_Details.G_Codes[cnt].CodeValue).html(htmlPrag);
+        let StyleNew: Style_New = new Style_New();
+
+        let TypeCode = News_Details.G_News[cnt].NewsTypeCode;
          
+        let NewsType = News_Details.G_Codes.filter(x => x.CodeValue == TypeCode);
+
+
+        StyleNew.class_title = NewsType[0].SubCode;
+
+        if (StyleNew.class_title == "success") {
+            StyleNew.class_icon ='<i class="fa-solid fa-check-to-slot"></i>';
+        }
+        if (StyleNew.class_title == "info") {
+            StyleNew.class_icon = '<i class="fa fa-info-circle"></i>';
+        }
+        if (StyleNew.class_title == "warning") {
+            StyleNew.class_icon = '<i class="fa fa-warning"></i>';
+        }
+        if (StyleNew.class_title == "danger") {
+            StyleNew.class_icon = '<i class="fa-sharp fa-solid fa-ban"></i>';
+        }
+         
+        StyleNew.Type_Text = NewsType[0].DescA;
+
+        return StyleNew;
 
     }
 

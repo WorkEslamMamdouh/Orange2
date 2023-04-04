@@ -255,6 +255,7 @@ namespace DefStore {
     //---------------------------------------------------------------------------Edit button
     function btnEdit_onclick() {
         debugger
+        if (!SysSession.CurrentPrivileges.EDIT) return;
         flag = true;
         $('#btnSave').removeClass('display_none');
         $('#btnBack').removeClass('display_none');
@@ -283,6 +284,8 @@ namespace DefStore {
     }                                           
     //---------------------------------------------------------------------------Add button
     function btnadd_onclick() {
+        if (!SysSession.CurrentPrivileges.AddNew) return;
+
         flag = false;
         $('#btnShow').addClass('display_none');
         $('#btnSave').removeClass('display_none');

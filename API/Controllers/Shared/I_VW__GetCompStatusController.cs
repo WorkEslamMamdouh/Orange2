@@ -195,7 +195,7 @@ namespace Inv.API.Controllers
         {
             
             string Query = @"select * from G_News where
-                             '"+ DateNow + "' >= NewsDate and '" + DateNow + "' <= NewsExpiry and CompCode ="+ CompCode + " and BranchCode = "+ BranchCode + "";
+                             '"+ DateNow + "' >= NewsDate and '" + DateNow + "' <= NewsExpiry and (CompCode ="+ CompCode + " or ISNULL(CompCode,0) =0 ) and (BranchCode = "+ BranchCode + " or ISNULL(BranchCode,0) = 0  )";
 
             List<G_News> News = db.Database.SqlQuery<G_News>(Query).ToList();
  
