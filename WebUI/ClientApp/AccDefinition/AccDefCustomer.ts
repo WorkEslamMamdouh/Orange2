@@ -327,7 +327,7 @@ namespace AccDefCustomer {
 
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
-            //$("#ONAccount").addClass("disabledDiv");
+            $("#ONAccount").addClass("disabledDiv");
 
         }
 

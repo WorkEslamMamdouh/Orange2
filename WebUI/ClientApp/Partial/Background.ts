@@ -49,7 +49,7 @@ namespace BackgroundImage {
         //$("#News_Model").modal("show");
 
         //if (isNews == 'false') {
-            Show_News(); 
+            //Show_News(); 
         //}
 
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
