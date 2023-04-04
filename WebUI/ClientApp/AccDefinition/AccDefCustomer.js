@@ -785,16 +785,16 @@ var AccDefCustomer;
             Errorinput(txt_Cust_Type);
             return false;
         }
-        if (txt_Category.selectedIndex == 0) {
-            DisplayMassage("يجب اختيار الفئة ", "Category must be selected", MessageType.Worning);
-            Errorinput(txt_Category);
-            return false;
-        }
-        if (txt_Grop.selectedIndex == 0) {
-            DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
-            Errorinput(txt_Grop);
-            return false;
-        }
+        //if (txt_Category.selectedIndex == 0) {
+        //    DisplayMassage("يجب اختيار الفئة ", "Category must be selected", MessageType.Worning);
+        //    Errorinput(txt_Category);
+        //    return false;
+        //}
+        //if (txt_Grop.selectedIndex == 0) {
+        //    DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
+        //    Errorinput(txt_Grop);
+        //    return false;
+        //}
         if (ddlSalesman_New.selectedIndex == 0 && txt_Cust_Type.value == "0") {
             DisplayMassage("يجب اختيار المندوب ", "The delegate must be selected", MessageType.Worning);
             Errorinput(ddlSalesman_New);
