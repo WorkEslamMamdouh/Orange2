@@ -222,7 +222,7 @@ namespace AccDefCustomer {
                         DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
                     }
                     else {
-                        $('#txt_CustCode').val(AccountDeta[0].ACC_CODE);
+                        $('#txt_CustCode').val(AccountDeta[0].ACC_CODE); 
                         $('#txt_CustName').val(AccountDeta[0].ACC_DESCA);
                     }
                 }

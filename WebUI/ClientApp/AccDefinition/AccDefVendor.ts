@@ -249,8 +249,8 @@ namespace AccDefVendor {
                     if (AccountDeta.length == 0) {
                         txt_ACCCode.value = "";
                         txt_ACCName.value = "";
-                        Errorinput(txt_ACCCode);
-                        DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
+                        //Errorinput(txt_ACCCode);
+                        //DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
                     }
                     else {
                         $('#txt_ACCCode').val(AccountDeta[0].ACC_CODE);
@@ -353,6 +353,7 @@ namespace AccDefVendor {
         if (txt_Cust_Type.value == "1" || txt_Cust_Type.value == "Null") {
             $('#div_Balance').removeClass("display_none");
             Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
+            //alert(Is_Vendor)
             if (Is_Vendor == true) {
                 $('#divAccount').removeClass('display_none');
             }
@@ -854,6 +855,7 @@ namespace AccDefVendor {
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
             $("#ONAccount").addClass("disabledDiv");
+            $("#divAccount").addClass("disabledDiv");
 
         }
 
@@ -896,6 +898,7 @@ namespace AccDefVendor {
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
             $("#ONAccount").addClass("disabledDiv");
+            $("#divAccount").addClass("disabledDiv");
 
         }
 

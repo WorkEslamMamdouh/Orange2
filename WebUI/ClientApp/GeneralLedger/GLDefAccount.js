@@ -530,7 +530,12 @@ var GLDefAccount;
         span_2.setAttribute('data-UpdatedBy', DetAccList.UPDATED_BY == null ? ' ' : DetAccList.UPDATED_BY.toString());
         span_2.setAttribute('data-UpdatedAt', DetAccList.LAST_UPDATE == null ? ' ' : DetAccList.LAST_UPDATE.toString());
         document.getElementById('a_' + Node).appendChild(span_2);
-        document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
+        try {
+            document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
+        }
+        catch (e) {
+            alert(Node);
+        }
         try {
             //$('#' + Node + '').click(click_in_labl);
             $("#" + Node + "").on('click', function () {

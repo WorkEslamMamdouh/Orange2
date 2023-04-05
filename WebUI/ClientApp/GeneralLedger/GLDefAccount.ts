@@ -30,7 +30,7 @@ namespace GLDefAccount {
     var btnback: HTMLButtonElement;
     var Refrash: HTMLButtonElement;
 
-    var txt_Search: HTMLInputElement; 
+    var txt_Search: HTMLInputElement;
     var Name_Acc: HTMLLabelElement;
     var txt_ACC_CODE: HTMLInputElement;
     var txt_NAME_A: HTMLInputElement;
@@ -64,15 +64,15 @@ namespace GLDefAccount {
     export function InitalizeComponent() {
         $("body").addClass("sidebar-icon-only");
 
-       $('#cont').toggleClass('colapsdivcont');
+        $('#cont').toggleClass('colapsdivcont');
         //$('#sidebar').toggleClass('active');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-           $("body").toggleClass("mini-navbar_Arbec");
+            $("body").toggleClass("mini-navbar_Arbec");
         }
         else {
             $("body").toggleClass("mini-navbar");
         }
-         ;
+        ;
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "الحسابات";
 
@@ -97,10 +97,10 @@ namespace GLDefAccount {
         OnClick_TreeData();
 
 
-        
 
-         
-    } 
+
+
+    }
     function InitalizeControls() {
         //--- Print Buttons
 
@@ -170,7 +170,7 @@ namespace GLDefAccount {
         //txt_Openbalance.onkeyup = balance_onchange;
         //txt_Cust_Type.onchange = txt_Cust_Type_onchange;
 
-      
+
     }
     function OnClick_TreeData() {
         $('span').on('click', function () {
@@ -232,9 +232,9 @@ namespace GLDefAccount {
         }
 
     }
-    
+
     function Refrash_onclick() {
-        txt_Search.value = ''; 
+        txt_Search.value = '';
         $('#menu-group-1').html('');
         GetAll_Account();
         Display();
@@ -324,7 +324,7 @@ namespace GLDefAccount {
 
 
     }
-    
+
     function Biuld_TreeOpen(Node: string, NodeName: string, NodeParent: string, Detail: number, LVL: number, DetAccList: AQ_GetAccount) {
 
         var class_Plus;
@@ -392,7 +392,7 @@ namespace GLDefAccount {
         span_1.setAttribute('class', 'sign collapsed');
         span_1.setAttribute('aria-expanded', 'true');
         span_1.setAttribute('Data_I', 'i_' + Node);
-        span_1.setAttribute('Node',  Node);
+        span_1.setAttribute('Node', Node);
         span_1.setAttribute('style', style_Plus);
         try {
             document.getElementById('a_' + Node).appendChild(span_1);
@@ -438,7 +438,7 @@ namespace GLDefAccount {
         document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
 
         try {
-             
+
             //$('#' + Node + '').click(click_in_labl);
 
             $("#" + Node + "").on('click', function () {
@@ -592,7 +592,7 @@ namespace GLDefAccount {
         }
         else {
             class_Plus = 'fa-plus-circle fs-6';
-          //  class_Plus = 'glyphicon-plusicon-white';
+            //  class_Plus = 'glyphicon-plusicon-white';
             style_Plus = 'height: 1rem;width:1rem; background-color: var(--dark-blue); border-radius:50%; margin:auto; margin-right: 5px;';
         }
         //---------------------------------------------------------li---------------------
@@ -619,7 +619,7 @@ namespace GLDefAccount {
             alert(Node);
         }
 
-        
+
         var span_1 = document.createElement('span');     // span زرار الفتح +
         span_1.setAttribute('id', 'span_1' + Node);
         span_1.setAttribute('data-toggle', 'collapse');
@@ -671,10 +671,16 @@ namespace GLDefAccount {
         span_2.setAttribute('data-UpdatedAt', DetAccList.LAST_UPDATE == null ? ' ' : DetAccList.LAST_UPDATE.toString());
 
         document.getElementById('a_' + Node).appendChild(span_2);
-        document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
+
+        try {
+            document.getElementById(Node).innerHTML = "" + NodeName + " ( " + Node + " )";
+
+        } catch (e) {
+            alert(Node)
+        }
 
 
- 
+
 
 
         try {
@@ -684,7 +690,7 @@ namespace GLDefAccount {
             $("#" + Node + "").on('click', function () {
                 click_in_labl(Node);
             });
-             
+
         } catch (e) {
 
             alert(Node);
@@ -992,11 +998,11 @@ namespace GLDefAccount {
             try {
 
                 if (x.length > 0) {
-                   
+
                     txt_ACC_CODE.value = Sub_ACC_CODE(x[x.length - 1].ACC_CODE);
                 }
                 else {
-                    txt_ACC_CODE.value = ACC_CODE+"01";
+                    txt_ACC_CODE.value = ACC_CODE + "01";
                 }
 
             } catch (e) {
@@ -1015,18 +1021,18 @@ namespace GLDefAccount {
             StatusFlag = 'i';
         }
     }
-    function Sub_ACC_CODE(ACC_CODE_Str: string): string{
+    function Sub_ACC_CODE(ACC_CODE_Str: string): string {
 
-        let First_ACC_CODE = ACC_CODE_Str.substr(0, ACC_CODE_Str.length - 2); 
+        let First_ACC_CODE = ACC_CODE_Str.substr(0, ACC_CODE_Str.length - 2);
 
-        let Last_ACC_CODE = ACC_CODE_Str.substr(ACC_CODE_Str.length - 2, ACC_CODE_Str.length); 
+        let Last_ACC_CODE = ACC_CODE_Str.substr(ACC_CODE_Str.length - 2, ACC_CODE_Str.length);
 
         if (Number(Last_ACC_CODE) >= 9) {
 
             Last_ACC_CODE = (Number(Last_ACC_CODE) + 1).toString()
         }
         else {
-            Last_ACC_CODE = ('0'+(Number(Last_ACC_CODE) + 1)).toString()
+            Last_ACC_CODE = ('0' + (Number(Last_ACC_CODE) + 1)).toString()
         }
 
         let New_ACC_CODE = (First_ACC_CODE + Last_ACC_CODE)
@@ -1110,30 +1116,30 @@ namespace GLDefAccount {
     }
     function btnsave_onClick() {
 
-        loading('btnsave');     
+        loading('btnsave');
 
         setTimeout(function () {
 
             finishSave('btnsave');
 
-        if (!ValidationHeader()) return
+            if (!ValidationHeader()) return
 
-        if (txt_NAME_E.value == "") {
-            txt_NAME_E.value = txt_NAME_A.value;
-        }
-        if (txt_CreditLimit.value == "") {
-            txt_CreditLimit.value = '0';
+            if (txt_NAME_E.value == "") {
+                txt_NAME_E.value = txt_NAME_A.value;
+            }
+            if (txt_CreditLimit.value == "") {
+                txt_CreditLimit.value = '0';
 
-        }
+            }
 
-        if (StatusFlag == 'i') {
+            if (StatusFlag == 'i') {
 
-            Save_Insert();
-        }
-        else if (StatusFlag == 'u') {
-            Save_update();
-        }
-    }, 100);
+                Save_Insert();
+            }
+            else if (StatusFlag == 'u') {
+                Save_update();
+            }
+        }, 100);
     }
     function clear() {
 
@@ -1342,12 +1348,12 @@ namespace GLDefAccount {
                 Singl_Details.A_ACCOUNT_YEAR = AccList_YEAR;
             }
         }
-        
 
-       Singl_Details.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+
+        Singl_Details.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Singl_Details.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Singl_Details.MODULE_CODE = Modules.GLDefAccount;
-       Singl_Details.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        Singl_Details.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
     }
     function Insert() {
