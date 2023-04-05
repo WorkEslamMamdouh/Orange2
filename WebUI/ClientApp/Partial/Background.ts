@@ -265,15 +265,14 @@ namespace BackgroundImage {
                     if (News_Details.G_News.length > 0) {
  
                         for (var i = 0; i < News_Details.G_News.length; i++) {
-                            BuildNews(i);
+                            BuildNews(i, false);
                         }
 
                       
-
-                        $('#success').click(function (e) { SetActiv_History('success','#264051b3') });
-                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3') });
-                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3') });
-                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3') });
+                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
+                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
+                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
+                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3',4) });
 
                         $("#News_Model").modal("show");
                         localStorage.setItem("Show_News", 'true');
@@ -284,20 +283,49 @@ namespace BackgroundImage {
         });
 
     }
-    function SetActiv_History(Mode: string, color: string) {
+    function SetActiv_History(Mode: string, color: string, News_Type: number) {
 
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
 
-        
-        $('.modal-History').removeClass('display_none');
-
-        $('#' + Mode + '').attr('style', 'box-shadow: inset 0 0 0 60px ' + color + ' ; color: #FFF;');
-         
-        $('.' + Mode + '').removeClass('display_none');
+        Show_History(Mode, color, News_Type);
 
     }
-    function BuildNews(cnt: number) {
+
+    function Show_History(Mode: string, color: string, News_Type: number) {
+
+      
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_VW_GetCompStatus", "GetHistory"),
+            data: { CompCode: CompCode, BranchCode: BranchCode, News_Type: News_Type },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    News_Details = result.Response as NewsDetails;
+                    if (News_Details.G_News.length > 0) {
+                        $("#Div_History").html(''); 
+                        for (var i = 0; i < News_Details.G_News.length; i++) {
+                            BuildNews(i, true);
+                        }
+
+
+                        $('.modal-History').removeClass('display_none');
+                        $('#' + Mode + '').attr('style', 'box-shadow: inset 0 0 0 60px ' + color + ' ; color: #FFF;');
+                        $('.' + Mode + '').removeClass('display_none');
+
+
+                    }
+
+                }
+            }
+        });
+
+    }
+
+
+    function BuildNews(cnt: number, IsHistory: boolean) {
 
         debugger
 
@@ -313,7 +341,16 @@ namespace BackgroundImage {
 
                    `;
 
-        $("#Div_News").append(html_News);
+
+        if (IsHistory) {
+           
+            $("#Div_History").append(html_News);  
+        }
+        else {
+            $("#Div_News").append(html_News); 
+
+        }
+
           
 
     }

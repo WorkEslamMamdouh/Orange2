@@ -211,5 +211,25 @@ namespace Inv.API.Controllers
         }
 
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetHistory(int CompCode, int BranchCode, int News_Type)
+        {
+
+            string Query = @"select * from G_News where NewsTypeCode = "+ News_Type + " and (CompCode =" + CompCode + " or ISNULL(CompCode,0) =0 ) and (BranchCode = " + BranchCode + " or ISNULL(BranchCode,0) = 0  )";
+
+            List<G_News> News = db.Database.SqlQuery<G_News>(Query).ToList();
+
+            List<G_Codes> NewsType = db.Database.SqlQuery<G_Codes>("select * from [dbo].[G_Codes] where CodeType = 'NewsType'").ToList();
+
+            NewsDetails News_Details = new NewsDetails();
+
+            News_Details.G_News = News;
+            News_Details.G_Codes = NewsType;
+
+            return Ok(new BaseResponse(News_Details));
+
+        }
+
+
     }
 }
