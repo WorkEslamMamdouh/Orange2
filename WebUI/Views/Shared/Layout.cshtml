@@ -1151,10 +1151,32 @@
                 <h3 class="card-title animate__animated animate__flipInX">News</h3>
                 <div class="history-content mb-3">
                     <span class="history-title animate__animated animate__fadeInLeft">History</span>
-                    <span class="history-icon history-add animate__animated animate__fadeInDown"><i class="fa-solid fa-check-to-slot"></i></span>
-                    <span class="history-icon history-info animate__animated animate__fadeInDown"><i class="fa fa-info-circle"></i></span>
-                    <span class="history-icon history-warning animate__animated animate__fadeInDown"><i class="fa fa-warning"></i></span>
-                    <span class="history-icon history-error animate__animated animate__fadeInDown"><i class="fa-sharp fa-solid fa-ban"></i></span>
+                    <div class="d-inline-flex flex-column position-relative">
+                        <span id="success" class=" history-icon history-add animate__animated animate__fadeInDown">
+                            <i class="fa-solid fa-check-to-slot"></i>
+                        </span>
+                        <i class="success display_none fa-solid fa-caret-down down-arrow"></i>
+                    </div>
+                    <div class="d-inline-flex flex-column position-relative">
+                        <span id="info" class="history-icon history-info animate__animated animate__fadeInDown">
+                            <i class="  fa fa-info-circle"></i>
+                        </span>
+                        <i class="info  display_none fa-solid fa-caret-down down-arrow"></i>
+                    </div>
+                    <div class="d-inline-flex flex-column position-relative">
+                        <span id="warning" class="history-icon history-warning animate__animated animate__fadeInDown">
+                            <i class="fa fa-warning"></i>
+                        </span>
+                        <i class="warning display_none fa-solid fa-caret-down down-arrow"></i>
+                    </div>
+                    <div class="d-inline-flex flex-column position-relative">
+                        <span id="error" class="history-icon history-error animate__animated animate__fadeInDown">
+                            <i class="fa-sharp fa-solid fa-ban"></i>
+                        </span>
+                        <i class="error display_none fa-solid fa-caret-down down-arrow"></i>
+                    </div>
+
+
                 </div>
 
 
@@ -1162,30 +1184,7 @@
                     @************************************************News*********************************************@
 
 
-                    @*<div class="alert alert-success alert-white animate__animated animate__fadeInTopRight">
-                    <div class="icon"><i class="fa-solid fa-check-to-slot"></i></div>
-                    <h5 class="news-date">30/12/2023</h5>
-                    <strong>اضافة:</strong>
-                    <span>لللللللللللللللللللل لللللللللللللللللللللعععععععععععع ععععععععععع ععععععععععععععععععععععععععععععع  ععلللللللللللللللللللللللللللللللللللللللللللللللللللعععععععععععععععععععلللل تم اضافه </span>
-                </div>
-                <div class="alert alert-info alert-white animate__animated animate__fadeInTopRight">
-                    <div class="icon"><i class="fa fa-info-circle"></i></div>
-                    <h5 class="news-date">30/12/2023</h5>
-                    <strong>Info!</strong>
-                    <span>  The server is not responding, try again later gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.</span>
-                </div>
-                <div class="alert alert-warning alert-white animate__animated animate__fadeInTopRight">
-                    <div class="icon"><i class="fa fa-warning"></i></div>
-                    <h5 class="news-date">30/12/2023</h5>
-                    <strong>Alert!</strong>
-                    <span>  The server is not responding, try again later gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.</span>
-                </div>
-                <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
-                    <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
-                    <h5 class="news-date">30/12/2023</h5>
-                    <strong>Error!</strong>
-                    <span>  The server is not responding, try .</span>
-                </div>*@
+                  
 
 
                 </div>
@@ -1195,40 +1194,63 @@
             </div>
 
             @************************************************History*********************************************@
+       
 
-            <div class="modal-History">
-                <h3 class="card-title animate__animated animate__flipInX" style="text-align:center;">History</h3>
-                <div class='news-content'>
-
-
-                    <div class="alert alert-success alert-white animate__animated animate__fadeInTopRight">
-                        <div class="icon"><i class="fa-solid fa-check-to-slot"></i></div>
-                        <h5 class="news-date">30/12/2023</h5>
-                        <strong>اضافة:</strong>
-                        <span>لللللللللللللللللللل لللللللللللللللللللللعععععععععععع ععععععععععع ععععععععععععععععععععععععععععععع  ععلللللللللللللللللللللللللللللللللللللللللللللللللللعععععععععععععععععععلللل تم اضافه </span>
-                    </div>
-                    <div class="alert alert-info alert-white animate__animated animate__fadeInTopRight">
-                        <div class="icon"><i class="fa fa-info-circle"></i></div>
-                        <h5 class="news-date">30/12/2023</h5>
-                        <strong>Info!</strong>
-                        <span>  The server is not responding, try again later gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.</span>
-                    </div>
-                    <div class="alert alert-warning alert-white animate__animated animate__fadeInTopRight">
-                        <div class="icon"><i class="fa fa-warning"></i></div>
-                        <h5 class="news-date">30/12/2023</h5>
-                        <strong>Alert!</strong>
-                        <span>  The server is not responding, try again later gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg.</span>
-                    </div>
-                    <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
-                        <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
-                        <h5 class="news-date">30/12/2023</h5>
-                        <strong>Error!</strong>
-                        <span>  The server is not responding, try .</span>
-                    </div>
+                    <div class="modal-History display_none">
+                        <div class="d-flex align-items-center justify-content-center pt-3">
+                            <i id="Close_History" class="fa-solid fa-circle-xmark"></i>
+                            <h3 class="card-title animate__animated animate__flipInX">History</h3>
+                        </div>
+                        <div class='news-content'>
 
 
-                </div>
-            </div>
+                            <div class="alert alert-success alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa-solid fa-check-to-slot"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>اضافة:</strong>
+                                <span>لللللللللللللللللللل لللللللللللللللللللللعععععععععععع ععععععععععع ععععععععععععععععععععععععععععععع  ععللللللللللللللل للللللللللللللللللللللللللللللللللللعععععععععععععععععععلللل تم اضافه </span>
+                            </div>
+                            <div class="alert alert-info alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa fa-info-circle"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Info!</strong>
+                                <span>  The server is not responding, try again later ggggggggggggggggggggggggg ggggggggggggggggggggggggggggggggg.</span>
+                            </div>
+                            <div class="alert alert-warning alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa fa-warning"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Alert!</strong>
+                                <span>  The server is not responding, try again later ggggggggggggggggggggggggggggg ggggggggggggggggggggggggggggg.</span>
+                            </div>
+
+                            <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Error!</strong>
+                                <span>  The server is not responding, try .</span>
+                            </div>
+                            <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Error!</strong>
+                                <span>  The server is not responding, try .</span>
+                            </div>
+                            <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Error!</strong>
+                                <span>  The server is not responding, try .</span>
+                            </div>
+                            <div class="alert alert-danger alert-white animate__animated animate__fadeInTopRight">
+                                <div class="icon"><i class="fa-sharp fa-solid fa-ban"></i></div>
+                                <h5 class="news-date">30/12/2023</h5>
+                                <strong>Error!</strong>
+                                <span>  The server is not responding, try .</span>
+                            </div>
+
+
+                        </div>
+                    </div> 
 
 
         </div>
@@ -1287,6 +1309,12 @@
     @*@Scripts.Render("~/Bundles/AppScript2")*@
     @*//------------------------------------------------------ Side Icons Controllers---------------------------------------*@
     <script>
+        $('#Close_History').click(function (e) {
+            $('.history-icon').attr('style', '');
+            $('.down-arrow').addClass('display_none');
+            $('.modal-History').addClass('display_none');
+        });
+
         $("#NewAdd_Falg").val(0);
         $("#Mod_Flag").val(0);
 

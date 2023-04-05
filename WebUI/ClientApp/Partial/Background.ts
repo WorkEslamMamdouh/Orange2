@@ -268,6 +268,13 @@ namespace BackgroundImage {
                             BuildNews(i);
                         }
 
+                      
+
+                        $('#success').click(function (e) { SetActiv_History('success','#264051b3') });
+                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3') });
+                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3') });
+                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3') });
+
                         $("#News_Model").modal("show");
                         localStorage.setItem("Show_News", 'true');
                     }
@@ -277,7 +284,19 @@ namespace BackgroundImage {
         });
 
     }
-     
+    function SetActiv_History(Mode: string, color: string) {
+
+        $('.history-icon').attr('style', '');
+        $('.down-arrow').addClass('display_none');
+
+        
+        $('.modal-History').removeClass('display_none');
+
+        $('#' + Mode + '').attr('style', 'box-shadow: inset 0 0 0 60px ' + color + ' ; color: #FFF;');
+         
+        $('.' + Mode + '').removeClass('display_none');
+
+    }
     function BuildNews(cnt: number) {
 
         debugger
