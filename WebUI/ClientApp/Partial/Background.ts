@@ -12,24 +12,18 @@ namespace BackgroundImage {
     var SysSession: SystemSession = GetSystemSession('Home');
 
     var GetCompStatus: Array<ModelCompStatus> = new Array<ModelCompStatus>();
-    var News_Details: NewsDetails = new NewsDetails();
+    
 
     var CountGrid = 0;
 
-    var CompCode = Number(SysSession.CurrentEnvironment.CompCode)
-    var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode)
 
 
-    class Style_New  { 
-        public class_title: string;
-        public class_icon: string;
-        public Type_Text: string; 
-    }
+  
 
     export function GetBackgroundImage() {
 
 
-        $.ajax({
+        Ajax.Callsync({
             type: "GET",
             async: false,
             url: sys.apiUrl("SystemTools", "getBackgroundImage"),
@@ -44,19 +38,13 @@ namespace BackgroundImage {
         });
 
 
-        let isNews = localStorage.getItem("Show_News");
-
-        //$("#News_Model").modal("show");
-
-        //if (isNews == 'false') {
-            Show_News(); 
-        //}
+ 
 
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
         }
 
-
+     
 
     }
 
@@ -246,144 +234,5 @@ namespace BackgroundImage {
 
     }
 
-
-    //***********************************************News******************************************
-    
-    function Show_News() {
-        debugger
-
-        let DateNow = DateFormatRep(GetDate());
-
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
-            data: { CompCode: CompCode, BranchCode: BranchCode, DateNow: DateNow },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    News_Details = result.Response as NewsDetails;
-                    if (News_Details.G_News.length > 0) {
- 
-                        for (var i = 0; i < News_Details.G_News.length; i++) {
-                            BuildNews(i, false);
-                        }
-
-                      
-                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
-                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
-                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
-                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3',4) });
-
-                        $("#News_Model").modal("show");
-                        localStorage.setItem("Show_News", 'true');
-                    }
-
-                }
-            }
-        });
-
-    }
-    function SetActiv_History(Mode: string, color: string, News_Type: number) {
-
-        $('.history-icon').attr('style', '');
-        $('.down-arrow').addClass('display_none');
-
-        Show_History(Mode, color, News_Type);
-
-    }
-
-    function Show_History(Mode: string, color: string, News_Type: number) {
-
-      
-
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("I_VW_GetCompStatus", "GetHistory"),
-            data: { CompCode: CompCode, BranchCode: BranchCode, News_Type: News_Type },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    News_Details = result.Response as NewsDetails;
-                    if (News_Details.G_News.length > 0) {
-                        $("#Div_History").html(''); 
-                        for (var i = 0; i < News_Details.G_News.length; i++) {
-                            BuildNews(i, true);
-                        }
-
-
-                        $('.modal-History').removeClass('display_none');
-                        $('#' + Mode + '').attr('style', 'box-shadow: inset 0 0 0 60px ' + color + ' ; color: #FFF;');
-                        $('.' + Mode + '').removeClass('display_none');
-
-
-                    }
-
-                }
-            }
-        });
-
-    }
-
-
-    function BuildNews(cnt: number, IsHistory: boolean) {
-
-        debugger
-
-        let class_News = GetClass(cnt);
-
-        let html_News = `
-                      <div class="alert alert-${class_News.class_title} alert-white animate__animated animate__fadeInTopRight">
-                        <div class="icon">${class_News.class_icon}</div>
-                        <h5 class="news-date"> ${DateFormat(News_Details.G_News[cnt].NewsDate)}</h5>
-                        <strong>${class_News.Type_Text} :</strong>
-                        <span> ${News_Details.G_News[cnt].NewsText} </span>
-                      </div>
-
-                   `;
-
-
-        if (IsHistory) {
-           
-            $("#Div_History").append(html_News);  
-        }
-        else {
-            $("#Div_News").append(html_News); 
-
-        }
-
-          
-
-    }
-
-    function GetClass(cnt: number): Style_New {
-
-        debugger
-        let StyleNew: Style_New = new Style_New();
-
-        let TypeCode = News_Details.G_News[cnt].NewsTypeCode;
-         
-        let NewsType = News_Details.G_Codes.filter(x => x.CodeValue == TypeCode);
-
-
-        StyleNew.class_title = NewsType[0].SubCode;
-
-        if (StyleNew.class_title == "success") {
-            StyleNew.class_icon ='<i class="fa-solid fa-check-to-slot"></i>';
-        }
-        if (StyleNew.class_title == "info") {
-            StyleNew.class_icon = '<i class="fa fa-info-circle"></i>';
-        }
-        if (StyleNew.class_title == "warning") {
-            StyleNew.class_icon = '<i class="fa fa-warning"></i>';
-        }
-        if (StyleNew.class_title == "danger") {
-            StyleNew.class_icon = '<i class="fa-sharp fa-solid fa-ban"></i>';
-        }
-         
-        StyleNew.Type_Text = NewsType[0].DescA;
-
-        return StyleNew;
-
-    }
 
 }

@@ -224,6 +224,8 @@ namespace SlsTrSalesManagerNew {
 
     var flagControldbOrSerch = false;
 
+    var IsPosted = false;
+
 
     //flagInvItemDiscount = true;
     //flagInvMulti = true;
@@ -2068,7 +2070,7 @@ namespace SlsTrSalesManagerNew {
         $("#txtPriceshow").val("");
         $("#txtPriceshowID").val("");
 
-
+        IsPosted = false;
     }
     function btnShow_onclick() {
 
@@ -2638,7 +2640,7 @@ namespace SlsTrSalesManagerNew {
             txtTax.value = InvoiceStatisticsModel[0].VatAmount.RoundToSt(2);
             txtNet.value = InvoiceStatisticsModel[0].NetAfterVat == null ? '' : InvoiceStatisticsModel[0].NetAfterVat.RoundToSt(2);
 
-
+            
 
             txtCommission.value = InvoiceStatisticsModel[0].CommitionAmount.RoundToSt(2);
             commissionCount = InvoiceStatisticsModel[0].CommitionAmount;
@@ -2809,6 +2811,8 @@ namespace SlsTrSalesManagerNew {
         $("#btnpriceSrch").attr("disabled", "disabled")
         $("#txtPriceshow").val(InvoiceStatisticsModel[0].RefTrID)
         $("#txtPriceshowID").val(InvoiceStatisticsModel[0].RefTrID)
+
+        IsPosted = InvoiceStatisticsModel[0].IsPosted;
 
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
@@ -4393,6 +4397,11 @@ namespace SlsTrSalesManagerNew {
         InvoiceModel.InvoiceTypeCode = Number(SysSession.CurrentEnvironment.InvoiceTypeCode);
         InvoiceModel.DocNo = GlobalDocNo;
 
+        InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
+        InvoiceModel.IsPosted = IsPosted;
+
+
+
         if (SysSession.CurrentEnvironment.InvoiceTransCode == 3) {
 
             if ((Number(ddlInvoiceCustomer.value) == 0 || ddlInvoiceCustomer.value.trim() == "")) {
@@ -4607,6 +4616,15 @@ namespace SlsTrSalesManagerNew {
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         MasterDetailsModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
+
+
+        if (InvoiceModel.Status == 1) {
+            if (InvoiceModel.IsPosted == true) {
+                MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+            }
+        }
+
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "updateInvoiceMasterDetail"),
@@ -4709,6 +4727,7 @@ namespace SlsTrSalesManagerNew {
     }
     function success_insert() {
 
+       
         //NewAdd = true;
         //btnBack_onclick();
         //btnShow_onclick();
@@ -4905,6 +4924,9 @@ namespace SlsTrSalesManagerNew {
         $("#btnpriceSrch").attr("disabled", "disabled")
         $("#txtPriceshow").val(InvoiceStatisticsModel[0].RefTrID)
         $("#txtPriceshowID").val(InvoiceStatisticsModel[0].RefTrID)
+
+        IsPosted = InvoiceStatisticsModel[0].IsPosted;
+
     }
     function displayDate_speed(invID: number, res: IQ_GetSlsInvoiceStatisticVer2) {
 
@@ -5155,7 +5177,13 @@ namespace SlsTrSalesManagerNew {
             return false
         }
 
+
+
         Assign();
+
+        if (InvoiceModel.IsPosted == true) {
+            MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        }
         //InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         //InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         //let Selecteditem

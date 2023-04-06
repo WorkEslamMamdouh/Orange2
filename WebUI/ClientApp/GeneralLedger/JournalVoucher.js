@@ -956,7 +956,7 @@ var JournalVoucher;
     }
     function BuildControls(cnt) {
         var html = "";
-        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"" + (CountGrid + 1) + "\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t\t                <span id=\"btn_Copy" + cnt + "\"><i class=\"fas fa-clone  btn-copy\"></i></span>\n                            <span id=\"btn_Insert" + cnt + "\"><i class=\"fas fa-share fa-rotate-180 btn-insert\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCCdtTypes" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCCDtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td class=\"display_none costcntrCCDt\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCCDTCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n\n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        html = "<tr id=\"No_Row" + cnt + "\">\n                    <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"" + (CountGrid + 1) + "\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t\t                <span id=\"btn_Copy" + cnt + "\"><i class=\"fas fa-clone  btn-copy\"></i></span>\n                            <span id=\"btn_Insert" + cnt + "\"><i class=\"fas fa-share fa-rotate-180 btn-insert\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"0\"  min=\"0\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\"  id=\"btnSearchCCdtTypes" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td class=\"display_none\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCCDtCostCntrNum" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    <td class=\"display_none costcntrCCDt\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCCDTCostCntrName" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n\n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n\n                    <input id=\"INVOICE_NO" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"BOOK_TR_NO" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_SYSTEM_CODE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_SUB_SYSTEM_CODE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_BRA_CODE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_CODE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_NO" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_TYPE" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
         //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
         //    '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
         //    '<div class="col-lg-1" style="width:6%">' +
@@ -1230,6 +1230,14 @@ var JournalVoucher;
             $('#txtCCDTCostCntrName' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].CCDT_DESCA : JournalDetailModelFiltered[cnt].CCDT_DESCE);
             $('#Notes' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].DESCA : JournalDetailModelFiltered[cnt].DESCL);
             var StatusFl = JournalDetailModelFiltered[cnt].StatusFlag == null ? 'u' : JournalDetailModelFiltered[cnt].StatusFlag;
+            $('#INVOICE_NO' + cnt).val(JournalDetailModelFiltered[cnt].INVOICE_NO);
+            $('#BOOK_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].BOOK_TR_NO);
+            $('#SRC_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SYSTEM_CODE);
+            $('#SRC_SUB_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SUB_SYSTEM_CODE);
+            $('#SRC_BRA_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_BRA_CODE);
+            $('#SRC_TR_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_CODE);
+            $('#SRC_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_NO);
+            $('#SRC_TR_TYPE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_TYPE);
             $('#txt_StatusFlag' + cnt).val(StatusFl);
         }
         if (TempshowFlag == true) {
@@ -1461,6 +1469,14 @@ var JournalVoucher;
                     AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + (i - 1)).val();
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + (i - 1)).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
                     if (StatusFlag == "i") {
@@ -1485,6 +1501,14 @@ var JournalVoucher;
                     AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + i).val();
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i)).val();
                     if (StatusFlag == "i") {
@@ -1523,6 +1547,14 @@ var JournalVoucher;
                 AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
                 AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                 AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
+                AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
                 AQJournalDetailModel.push(AQJournalDetailSingleModel);
                 flagNewRecord = true;
             }
@@ -1544,6 +1576,14 @@ var JournalVoucher;
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
@@ -1567,6 +1607,14 @@ var JournalVoucher;
                     AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + i).val();
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i)).val();
                     if (StatusFlag == "i") {
@@ -1720,11 +1768,13 @@ var JournalVoucher;
                 JournalDetailSingleModel.CCDT_CODE = $("#txtCCDtCostCntrNum" + i).val();
                 //****************************************************************************
                 JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + i).val();
                 JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
                 JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
                 JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
                 JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
                 JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + i).val();
                 JournalDetailModel.push(JournalDetailSingleModel);
             }
             else if (StatusFlag == "u") {
@@ -1737,6 +1787,15 @@ var JournalVoucher;
                 JournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                 JournalDetailSingleModel.DESCA = $("#Notes" + i).val();
                 JournalDetailSingleModel.CCDT_CODE = $("#txtCCDtCostCntrNum" + i).val();
+                //****************************************************************************
+                JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + i).val();
                 JournalDetailModel.push(JournalDetailSingleModel);
             }
             else if (StatusFlag == "d") {

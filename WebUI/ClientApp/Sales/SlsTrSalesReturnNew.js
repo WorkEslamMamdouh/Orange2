@@ -86,6 +86,7 @@ var SlsTrSalesReturnNew;
     var btnPrintsFrom_To;
     // giedView
     var Grid = new JsGrid();
+    var IsPosted = false;
     //global
     var CountGrid = 0;
     var CountItems = 0;
@@ -737,6 +738,8 @@ var SlsTrSalesReturnNew;
         $('#txt_OperationId').val('');
         $('#txt_Operation').val('');
         $('#ddlStore').val('null');
+        $('#VoucherNo').val('');
+        IsPosted = false;
         InvoiceItemsDetailsModelDelete = new Array();
     }
     function btnAdd_onclick() {
@@ -1249,6 +1252,8 @@ var SlsTrSalesReturnNew;
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         $('#ddlStore').val(setVal(InvoiceStatisticsModel[0].StoreId));
         $('#ddlStore').val() == null ? $('#ddlStore').val('null') : null;
+        $('#VoucherNo').val(setVal(InvoiceStatisticsModel[0].VoucherNo));
+        IsPosted = InvoiceStatisticsModel[0].IsPosted;
         EditFlag = true;
         txtInvoiceDate.disabled = true;
         InvoiceItemsDetailsModelDelete = new Array();
@@ -1968,6 +1973,8 @@ var SlsTrSalesReturnNew;
         InvoiceModel.TotalAmount = Number(txtTotal.value);
         InvoiceModel.CashAmount = Number(txtNet.value);
         InvoiceModel.CardAmount = 0;
+        InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
+        InvoiceModel.IsPosted = IsPosted;
         if (chkActive.checked == true) {
             InvoiceModel.Status = 1;
         }
@@ -2234,6 +2241,8 @@ var SlsTrSalesReturnNew;
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
         $('#ddlStore').val(setVal(InvoiceStatisticsModel[0].StoreId));
+        $('#VoucherNo').val(setVal(InvoiceStatisticsModel[0].VoucherNo));
+        IsPosted = InvoiceStatisticsModel[0].IsPosted;
         $('#ddlStore').val() == null ? $('#ddlStore').val('null') : null;
         EditFlag = true;
         InvoiceItemsDetailsModelDelete = new Array();
@@ -2254,6 +2263,11 @@ var SlsTrSalesReturnNew;
         InvoiceModel.DocNo = GlobalDocNo;
         InvoiceModel.RefTrID = Number(globalRefTrID);
         MasterDetailModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
+        if (InvoiceModel.Status == 1) {
+            if (InvoiceModel.IsPosted == true) {
+                MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+            }
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "updateReturnMasterDetail"),
@@ -2303,6 +2317,9 @@ var SlsTrSalesReturnNew;
         InvoiceModel.RefTrID = Number(globalRefTrID);
         InvoiceModel.Status = 0;
         MasterDetailModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
+        if (InvoiceModel.IsPosted == true) {
+            MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "OpenReturn"),

@@ -140,7 +140,7 @@
         <nav class="sidebar sidebar-offcanvas scroll" id="sidebar">
             <div id="logOrg" class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top animate__animated animate__backInDown">
 
-                <a class="sidebar-brand brand-logo" href="#">
+                <a class="sidebar-brand brand-logo" href="~/Home/">
                     <span class="logo-text">range</span>
                     <img src="~/Newtemplate/template/assets/images/logo.png" alt="logo" />
                 </a>
@@ -794,10 +794,16 @@
                             @*---------------------------------------------------------------------------------------------------------------*@
                         </li>
                         <li class="nav-item nav-settings  d-block">
-                            <a class="nav-link display_none mes" href="#">
+                            <a class="nav-link   mes" href="#" title="News">
+                                <i class="fa-solid fa-newspaper" id="btnNews"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-settings  d-block">
+                            <a class="nav-link display_none mes" href="#" title="Dashboard">
                                 <i class="fas fa-chart-bar" id="btnDashboard"></i>
                             </a>
                         </li>
+
                         <li class="nav-item dropdown border-left">
                             <a class="nav-link count-indicator dropdown-toggle display_none mes" id="tol_messagestoppar" href="#" data-bs-toggle="dropdown" aria-expanded="true">
                                 <i class="fas fa-envelope"></i>
@@ -806,32 +812,32 @@
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="tol_messagestoppar">
                                 <h6 class="p-3 mb-0">Messages</h6>
                                 @*<a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src="~/Newtemplate/template/assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                                            <p class="text-muted mb-0"> 1 Minutes ago </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src="~/Newtemplate/template/assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                                            <p class="text-muted mb-0"> 15 Minutes ago </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <img src="~/Newtemplate/template/assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                                            <p class="text-muted mb-0"> 18 Minutes ago </p>
-                                        </div>
-                                    </a>*@
+                    <div class="preview-thumbnail">
+                        <img src="~/Newtemplate/template/assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
+                        <p class="text-muted mb-0"> 1 Minutes ago </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <img src="~/Newtemplate/template/assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
+                        <p class="text-muted mb-0"> 15 Minutes ago </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <img src="~/Newtemplate/template/assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
+                        <p class="text-muted mb-0"> 18 Minutes ago </p>
+                    </div>
+                </a>*@
                                 <p class="p-3 mb-0 text-center">4 new messages</p>
                             </div>
                         </li>
@@ -843,82 +849,82 @@
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="tol_allnotification">
                                 <h6 class="p-3 mb-0">Notifications</h6>
                                 @*<a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark-blue rounded-circle">
-                                                <i class="mdi mdi-calendar text-light-blue"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Event today</p>
-                                            <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark-blue rounded-circle">
-                                                <i class="mdi mdi-settings text-light-blue"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1" id=""></p>
-                                            <p class="text-muted ellipsis mb-0"> Update dashboard </p>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark-blue rounded-circle">
-                                                <i class="mdi mdi-link-variant text-light-blue"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Launch Admin</p>
-                                            <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                                        </div>
-                                    </a>*@
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark-blue rounded-circle">
+                            <i class="mdi mdi-calendar text-light-blue"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Event today</p>
+                        <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark-blue rounded-circle">
+                            <i class="mdi mdi-settings text-light-blue"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1" id=""></p>
+                        <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                    </div>
+                </a>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark-blue rounded-circle">
+                            <i class="mdi mdi-link-variant text-light-blue"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Launch Admin</p>
+                        <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                    </div>
+                </a>*@
                                 <p class="p-3 mb-0 text-center">See all notifications</p>
                             </div>
                         </li>
                         <li class="nav-item nav-settings d-block display_none mes">
-                            <a class="nav-link" alt="Help" id="btnHelpRep" data-toggle="modal" data-target="#myModal">
+                            <a class="nav-link" alt="Help" id="btnHelpRep" title="Help" data-toggle="modal" data-target="#myModal">
                                 <i class="fas fa-info"></i>
                             </a>
                         </li>
                         @*<li class="nav-item dropdown">
-                                <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                                    <div class="navbar-profile">
-                                        <i class="fas fa-caret-down fa-xs"></i>
-                                        <p class="mb-0 d-none d-sm-block pe-2 navbar-profile-name" id="Admin_name"></p>
-                                        <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                                    <h6 class="p-3 mb-0">Profile</h6>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="mdi mdi-settings text-success"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1">Settings</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item preview-item">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon bg-dark rounded-circle">
-                                                <i class="fas fa-sign-out-alt text-danger"></i>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item-content">
-                                            <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
-                                        </div>
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <p class="p-3 mb-0 text-center">Advanced settings</p>
-                                </div>
-                            </li>*@
+            <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                <div class="navbar-profile">
+                    <i class="fas fa-caret-down fa-xs"></i>
+                    <p class="mb-0 d-none d-sm-block pe-2 navbar-profile-name" id="Admin_name"></p>
+                    <img class="img-xs rounded-circle" src="~/Newtemplate/template/assets/images/faces/face15.jpg" alt="">
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                <h6 class="p-3 mb-0">Profile</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="mdi mdi-settings text-success"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Settings</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="fas fa-sign-out-alt text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject mb-1" id="btn_loguotuser">Log out</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <p class="p-3 mb-0 text-center">Advanced settings</p>
+            </div>
+        </li>*@
                     </ul>
 
                 </div>

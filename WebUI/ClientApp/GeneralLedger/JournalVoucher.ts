@@ -1185,7 +1185,20 @@ namespace JournalVoucher {
                     
                   
                     <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
+
+                    <input id="INVOICE_NO${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="BOOK_TR_NO${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_SYSTEM_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_SUB_SYSTEM_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_BRA_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_NO${cnt}" name = " " type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_TYPE${cnt}" name = " " type = "hidden" class="form-control"/>
                 </tr>`;
+
+          
+       
+
 
         //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
         //    '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
@@ -1495,6 +1508,16 @@ namespace JournalVoucher {
             $('#Notes' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].DESCA : JournalDetailModelFiltered[cnt].DESCL);
             let StatusFl = JournalDetailModelFiltered[cnt].StatusFlag == null ? 'u' : JournalDetailModelFiltered[cnt].StatusFlag
 
+
+            $('#INVOICE_NO' + cnt).val(JournalDetailModelFiltered[cnt].INVOICE_NO)
+            $('#BOOK_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].BOOK_TR_NO)
+            $('#SRC_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SYSTEM_CODE)
+            $('#SRC_SUB_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SUB_SYSTEM_CODE)
+            $('#SRC_BRA_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_BRA_CODE)
+            $('#SRC_TR_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_CODE)
+            $('#SRC_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_NO)
+            $('#SRC_TR_TYPE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_TYPE)
+             
             $('#txt_StatusFlag' + cnt).val(StatusFl);
         }
         if (TempshowFlag == true) {
@@ -1528,6 +1551,11 @@ namespace JournalVoucher {
 
             $('#Notes' + cnt).val(lang == "ar" ? TemplateDetailModelFiltered[cnt].DESCA : TemplateDetailModelFiltered[cnt].DESCL);
             $('#txt_StatusFlag' + cnt).val("u");
+
+
+
+           
+
 
             ChackCCDT_TYPE(cnt);
         }
@@ -1762,6 +1790,17 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + (i - 1)).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
 
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
+                     
+
+
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
 
@@ -1787,6 +1826,16 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + i).val();
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
+
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i )).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i)).val();
+
 
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i)).val();
@@ -1829,6 +1878,18 @@ namespace JournalVoucher {
                 AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
                 AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                 AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
+
+                AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
+
+
+
                 AQJournalDetailModel.push(AQJournalDetailSingleModel);
                 flagNewRecord = true;
             }
@@ -1850,6 +1911,16 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
+
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
+
                     if (StatusFlag == "i") {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
@@ -1873,6 +1944,15 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + i).val();
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
+
+                    AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i)).val();
+                    AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i)).val();
 
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i)).val();
@@ -2038,11 +2118,13 @@ namespace JournalVoucher {
 
                 //****************************************************************************
                 JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + i).val();
                 JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
                 JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
                 JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
                 JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
                 JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + i).val();
 
                 JournalDetailModel.push(JournalDetailSingleModel);
 
@@ -2056,6 +2138,17 @@ namespace JournalVoucher {
                 JournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                 JournalDetailSingleModel.DESCA = $("#Notes" + i).val();
                 JournalDetailSingleModel.CCDT_CODE = $("#txtCCDtCostCntrNum" + i).val();
+
+                //****************************************************************************
+                JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + i).val();
+
                 JournalDetailModel.push(JournalDetailSingleModel);
 
             }

@@ -143,34 +143,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.47053cm</Width>
+              <Width>2.45231cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.70786cm</Width>
+              <Width>1.68964cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.99526cm</Width>
+              <Width>1.97704cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.31739cm</Width>
+              <Width>1.29917cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.41056cm</Width>
+              <Width>1.39234cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.3406cm</Width>
+              <Width>1.32238cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.92205cm</Width>
+              <Width>0.90383cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.53059cm</Width>
+              <Width>1.51237cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>5.60526cm</Width>
+              <Width>5.58704cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.55705cm</Width>
+              <Width>1.53883cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1219,12 +1219,11 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp7</DataSetName>
         <Top>9.91964cm</Top>
         <Left>0cm</Left>
         <Height>1.8cm</Height>
-        <Width>19.85712cm</Width>
+        <Width>19.67499cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -1766,7 +1765,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Top>15.54671cm</Top>
         <Left>18.08185cm</Left>
         <Height>0.6cm</Height>
-        <Width>1.8482cm</Width>
+        <Width>1.66604cm</Width>
         <ZIndex>20</ZIndex>
         <Style>
           <Border>
@@ -1817,19 +1816,19 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>7.50219cm</Width>
+              <Width>7.46576cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.51208cm</Width>
+              <Width>3.47565cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.22645cm</Width>
+              <Width>4.19002cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.54646cm</Width>
+              <Width>2.51003cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.12313cm</Width>
+              <Width>2.0867cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -2588,7 +2587,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp7</DataSetName>
         <Top>11.74699cm</Top>
         <Height>3.6cm</Height>
-        <Width>19.9103cm</Width>
+        <Width>19.72815cm</Width>
         <ZIndex>22</ZIndex>
         <Style>
           <Border>
@@ -2636,7 +2635,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Height>0.6cm</Height>
-            <Width>9.76762cm</Width>
+            <Width>9.55569cm</Width>
             <Style>
               <Border>
                 <Color>Gray</Color>
@@ -3543,7 +3542,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Top>4.28545cm</Top>
         <Left>10.14268cm</Left>
         <Height>5.50558cm</Height>
-        <Width>9.76762cm</Width>
+        <Width>9.59163cm</Width>
         <ZIndex>24</ZIndex>
         <Style>
           <Border>
@@ -4658,7 +4657,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
     <Height>7.15442in</Height>
     <Style />
   </Body>
-  <Width>7.84648in</Width>
+  <Width>7.80386in</Width>
   <Page>
     <PageHeader>
       <Height>3.48545cm</Height>
@@ -5028,7 +5027,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>3.43253cm</Height>
-          <Width>19.93005cm</Width>
+          <Width>19.8218cm</Width>
           <Style>
             <Border>
               <Style>None</Style>

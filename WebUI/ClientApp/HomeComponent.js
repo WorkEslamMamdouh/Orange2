@@ -242,6 +242,11 @@ var HomeComponent;
         });
         Cheak_UserTokenlog();
         //alert(SysSession.CurrentEnvironment.DbName);
+        var isNews = localStorage.getItem("Show_News");
+        if (isNews == 'false') {
+            Show_News();
+        }
+        $('#btnNews').click(function (e) { Show_News(); });
     }
     HomeComponent.InitalizeComponent = InitalizeComponent;
     function Getbranch() {
@@ -825,6 +830,107 @@ var HomeComponent;
                 }
             }
         });
+    }
+    //***********************************************News******************************************
+    var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
+    var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
+    var News_Details = new NewsDetails();
+    var Style_New = /** @class */ (function () {
+        function Style_New() {
+        }
+        return Style_New;
+    }());
+    function Show_News() {
+        debugger;
+        $("#Div_History").html('');
+        $("#Div_News").html('');
+        $('.history-icon').attr('style', '');
+        $('.down-arrow').addClass('display_none');
+        $('.modal-History').addClass('display_none');
+        var DateNow = DateFormatRep(GetDate());
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
+            data: { CompCode: CompCode, BranchCode: BranchCode, DateNow: DateNow },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    News_Details = result.Response;
+                    if (News_Details.G_News.length > 0) {
+                        for (var i = 0; i < News_Details.G_News.length; i++) {
+                            BuildNews(i, false);
+                        }
+                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1); });
+                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2); });
+                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3); });
+                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4); });
+                        $("#News_Model").modal("show");
+                        localStorage.setItem("Show_News", 'true');
+                    }
+                }
+            }
+        });
+    }
+    function SetActiv_History(Mode, color, News_Type) {
+        $('.history-icon').attr('style', '');
+        $('.down-arrow').addClass('display_none');
+        Show_History(Mode, color, News_Type);
+    }
+    function Show_History(Mode, color, News_Type) {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_VW_GetCompStatus", "GetHistory"),
+            data: { CompCode: CompCode, BranchCode: BranchCode, News_Type: News_Type, yr: Number(SysSession.CurrentEnvironment.CurrentYear) },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    News_Details = result.Response;
+                    if (News_Details.G_News.length > 0) {
+                        $("#Div_History").html('');
+                        for (var i = 0; i < News_Details.G_News.length; i++) {
+                            BuildNews(i, true);
+                        }
+                        $('.modal-History').removeClass('display_none');
+                        $('#' + Mode + '').attr('style', 'box-shadow: inset 0 0 0 60px ' + color + ' ; color: #FFF;');
+                        $('.' + Mode + '').addClass('animate__animated animate__fadeInDown');
+                        $('.' + Mode + '').removeClass('display_none');
+                        setTimeout(function () { $('.down-arrow').removeAttr('animate__animated animate__fadeInDown'); }, 600);
+                    }
+                }
+            }
+        });
+    }
+    function BuildNews(cnt, IsHistory) {
+        debugger;
+        var class_News = GetClass(cnt);
+        var html_News = "\n                      <div class=\"alert alert-" + class_News.class_title + " alert-white animate__animated animate__fadeInTopRight\">\n                        <div class=\"icon\">" + class_News.class_icon + "</div>\n                        <h5 class=\"news-date\"> " + DateFormat(News_Details.G_News[cnt].NewsDate) + "</h5>\n                        <strong>" + class_News.Type_Text + " :</strong>\n                        <span> " + News_Details.G_News[cnt].NewsText + " </span>\n                      </div>\n\n                   ";
+        if (IsHistory) {
+            $("#Div_History").append(html_News);
+        }
+        else {
+            $("#Div_News").append(html_News);
+        }
+    }
+    function GetClass(cnt) {
+        debugger;
+        var StyleNew = new Style_New();
+        var TypeCode = News_Details.G_News[cnt].NewsTypeCode;
+        var NewsType = News_Details.G_Codes.filter(function (x) { return x.CodeValue == TypeCode; });
+        StyleNew.class_title = NewsType[0].SubCode;
+        if (StyleNew.class_title == "success") {
+            StyleNew.class_icon = '<i class="fa-solid fa-check-to-slot"></i>';
+        }
+        if (StyleNew.class_title == "info") {
+            StyleNew.class_icon = '<i class="fa fa-info-circle"></i>';
+        }
+        if (StyleNew.class_title == "warning") {
+            StyleNew.class_icon = '<i class="fa fa-warning"></i>';
+        }
+        if (StyleNew.class_title == "danger") {
+            StyleNew.class_icon = '<i class="fa-sharp fa-solid fa-ban"></i>';
+        }
+        StyleNew.Type_Text = NewsType[0].DescA;
+        return StyleNew;
     }
 })(HomeComponent || (HomeComponent = {}));
 //# sourceMappingURL=HomeComponent.js.map

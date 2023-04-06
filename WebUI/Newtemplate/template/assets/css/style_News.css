@@ -168,7 +168,7 @@
 
 .news-content .alert {
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     border: 1px solid transparent;
     border-radius: .75rem;
 }
@@ -383,10 +383,12 @@
     float: left;
     border: 1px solid var(--main-blue);
     color: var(--main-blue);
-    padding: 0.4rem;
+    padding: 0.2rem;
     border-radius: 0.5rem;
     width: fit-content;
     margin-top: -2%;
+    font-size: 13px;
+    font-weight: bold;
 }
 /*Start Scroll Bar*/
 .modal-News::-webkit-scrollbar {

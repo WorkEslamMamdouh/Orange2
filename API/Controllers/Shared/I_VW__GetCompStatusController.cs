@@ -212,10 +212,10 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetHistory(int CompCode, int BranchCode, int News_Type)
+        public IHttpActionResult GetHistory(int CompCode, int BranchCode, int News_Type, int yr)
         {
 
-            string Query = @"select * from G_News where NewsTypeCode = "+ News_Type + " and (CompCode =" + CompCode + " or ISNULL(CompCode,0) =0 ) and (BranchCode = " + BranchCode + " or ISNULL(BranchCode,0) = 0  )";
+            string Query = @"select * from G_News where  year(NewsDate) = "+ yr + " and NewsTypeCode = " + News_Type + " and (CompCode =" + CompCode + " or ISNULL(CompCode,0) =0 ) and (BranchCode = " + BranchCode + " or ISNULL(BranchCode,0) = 0  )  order by NewsDate desc ";
 
             List<G_News> News = db.Database.SqlQuery<G_News>(Query).ToList();
 
