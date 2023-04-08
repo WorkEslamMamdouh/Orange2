@@ -1882,6 +1882,12 @@ namespace PurTrReturn {
             DisplayMassage("يجب ان تكون في كمية في الارجاع", '(Error)', MessageType.Error);
         }
 
+        
+
+        if (MasterDetailModel.I_Pur_TR_Receive.SalesmanId == null || MasterDetailModel.I_Pur_TR_Receive.SalesmanId == 0) {
+            MasterDetailModel.I_Pur_TR_Receive.SalesmanId = InvoiceStatisticsModel[0].SalesmanId
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertReturnPurchaseReceiveMasterDetail"),
