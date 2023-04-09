@@ -1717,7 +1717,7 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
               </Paragraphs>
               <rd:DefaultName>Par_StNewDSA</rd:DefaultName>
               <Top>3.70082cm</Top>
-              <Left>0.15379cm</Left>
+              <Left>0.45003cm</Left>
               <Height>0.6cm</Height>
               <Width>5.18953cm</Width>
               <ZIndex>17</ZIndex>
@@ -1863,6 +1863,41 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Par_StNewDSA4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Par_incinvDSA.Value, "Rpt_GLAccountStatmentAr")</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Par_StNewDSA</rd:DefaultName>
+              <Top>2.14804cm</Top>
+              <Left>0.45003cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.18953cm</Width>
+              <ZIndex>22</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
           <Height>4.58352cm</Height>
@@ -1972,6 +2007,14 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
           <DataField>Par_StAuthDSE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_incinvDSA">
+          <DataField>Par_incinvDSA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_incinvDSE">
+          <DataField>Par_incinvDSE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Par_ZeroDSA">
           <DataField>Par_ZeroDSA</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1998,7 +2041,15 @@ RunningValue(Fields!debit.Value-Fields!credit.Value,sum,"Acc_Code") ,
         </Field>
         <Field Name="typ">
           <DataField>typ</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="typ_DESCA">
+          <DataField>typ_DESCA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="typ_DESCE">
+          <DataField>typ_DESCE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="VOUCHER_CODE">
           <DataField>VOUCHER_CODE</DataField>

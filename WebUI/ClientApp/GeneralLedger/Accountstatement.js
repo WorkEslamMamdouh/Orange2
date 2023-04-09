@@ -100,6 +100,8 @@ var Accountstatement;
             $('#txtFromAcc_ID').val(id);
             GetAccByCode(id);
             $('#txtFromAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+            $('#txtToAcc_ID').val(id);
+            $('#txtToAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
         });
     }
     function btnToAccSearch_onclick() {

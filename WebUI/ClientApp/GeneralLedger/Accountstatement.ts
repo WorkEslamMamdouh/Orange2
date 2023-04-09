@@ -9,7 +9,7 @@ namespace Accountstatement {
     var SysSession: SystemSession = GetSystemSession(Modules.Accountstatement);
     var txtFromDate: HTMLInputElement;
     var txtToDate: HTMLInputElement;
-   
+
     var AccountDetails: A_ACCOUNT = new A_ACCOUNT();
     var CostCenterDetails: G_COST_CENTER = new G_COST_CENTER();
 
@@ -18,7 +18,7 @@ namespace Accountstatement {
     var chk_New: HTMLInputElement
     var chk_IncludeInvTR: HTMLInputElement
 
-     var btnReset;
+    var btnReset;
     // Print Buttons
     var btnPrint: HTMLButtonElement;
     var btnPrintTrview: HTMLButtonElement;
@@ -49,7 +49,7 @@ namespace Accountstatement {
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
         $("#btnPrintTrview span").text("عرض تقرير");
-         
+
         InitalizeControls();
         InitalizeEvents();
         txtFromDate.value = DateStartMonth();
@@ -60,7 +60,7 @@ namespace Accountstatement {
         chk_Certified.checked = false;
         chk_New.checked = false;
         chk_IncludeInvTR.checked = false;
-        $('#btnPrint').addClass('display_none');     
+        $('#btnPrint').addClass('display_none');
         txtFromAcc_ID.disabled = false;
         txtToAcc_ID.disabled = false;
         txtCenter_Cost_ID.disabled = false;
@@ -128,12 +128,15 @@ namespace Accountstatement {
 
     function btnFromAccSearch_onclick() {
 
-         
+
         sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1 ", () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey
             $('#txtFromAcc_ID').val(id);
             GetAccByCode(id);
-            $('#txtFromAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA: AccountDetails.ACC_DESCL));
+            $('#txtFromAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+
+            $('#txtToAcc_ID').val(id);
+            $('#txtToAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
 
 
 
@@ -143,12 +146,12 @@ namespace Accountstatement {
     }
     function btnToAccSearch_onclick() {
 
-         
+
         sys.FindKey(Modules.Accountstatement, "btnFromAccSearch", "COMP_CODE= " + compcode + " and DETAIL = 1 ", () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey
             $('#txtToAcc_ID').val(id);
             GetAccByCode(id);
-            $('#txtToAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA: AccountDetails.ACC_DESCL));
+            $('#txtToAcc_DESC').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
 
 
 
@@ -158,17 +161,17 @@ namespace Accountstatement {
     }
     function btnCCostSearch_onclick() {
 
-         
+
 
         let sys: SystemTools = new SystemTools();
         sys.FindKey(Modules.Accountstatement, "btnCCostSearch", "COMP_CODE=" + compcode + " ", () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey
             $('#txtCenter_Cost_ID').val(id);
             GetCostCenterByCode(id);
-            $('#txtCenter_Cost_DESC').val((lang == "ar" ? CostCenterDetails.CC_DESCA: CostCenterDetails.CC_DESCE));
+            $('#txtCenter_Cost_DESC').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
         });
 
-    }    
+    }
     function GetCostCenterByCode(CC_Code: string) {
         Ajax.Callsync({
             type: "Get",
@@ -197,7 +200,7 @@ namespace Accountstatement {
                 }
             }
         });
-    }   
+    }
     function GetAccByCode(AccCode: string) {
         Ajax.Callsync({
             type: "Get",
@@ -225,7 +228,7 @@ namespace Accountstatement {
                 }
             }
         });
-    } 
+    }
 
     function txtFromAcc_ID_onchange() {
         GetAccByCode(txtFromAcc_ID.value);
@@ -283,10 +286,10 @@ namespace Accountstatement {
     }
 
     function btnReset_onclick() {
-         
+
         txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-      
+
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         discharge();
         chkview.checked = false;
@@ -395,12 +398,12 @@ namespace Accountstatement {
             MessageBox.Show("يجب اختيار الحساب", "تنبيه")
             return;
         }
-         
+
         Ajax.Callsync({
             url: Url.Action("AProc_Rpt_GLAccountStatment", "GeneralReports"),
             data: rp,
             success: (d) => {
-                let result = d.result as string; 
+                let result = d.result as string;
                 PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Accountstatement, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }

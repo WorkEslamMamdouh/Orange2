@@ -321,8 +321,8 @@ var AccDefVendor;
                 $('#divAccount').removeClass('display_none');
             }
             else {
-                $('#txt_ACCCode').val('');
-                $('#txt_ACCName').val('');
+                //$('#txt_ACCCode').val('');
+                //$('#txt_ACCName').val('');
                 $('#divAccount').addClass('display_none');
             }
         }
@@ -335,8 +335,8 @@ var AccDefVendor;
             txt_balance.value = "0";
             Debit = 0;
             Credit = 0;
-            $('#txt_ACCCode').val('');
-            $('#txt_ACCName').val('');
+            //$('#txt_ACCCode').val('');
+            //$('#txt_ACCName').val('');
             $('#divAccount').addClass('display_none');
         }
     }
@@ -1032,16 +1032,12 @@ var AccDefVendor;
         $('#txt_Debit').val(setVal(Selecteditem[0].Debit));
         $('#txt_DebitFC').val(setVal(Selecteditem[0].Credit));
         debugger;
+        if (Selecteditem[0].BankAccountNo.trim() != '' && Selecteditem[0].BankAccountNo.trim() != null) {
+            getAccountvenById(Selecteditem[0].BankAccountNo);
+        }
         Is_Vendor = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
         if (Is_Vendor == true && Selecteditem[0].IsCreditVendor == true) {
             debugger;
-            if (Selecteditem[0].VendorID != null && Selecteditem[0].BankAccountNo != "0" && Selecteditem[0].BankAccountNo != "") {
-                getAccountvenById(Selecteditem[0].BankAccountNo);
-            }
-            else {
-                $('#txt_ACCCode').val('');
-                $('#txt_ACCName').val('');
-            }
             $('#divAccount').removeClass('display_none');
         }
         else {
@@ -1193,9 +1189,7 @@ var AccDefVendor;
         Model.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
         Model.VendorCode = $('#txt_CustomerCODE').val();
         Model.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
-        if (txt_Cust_Type.value == "1") {
-            Model.BankAccountNo = $("#txt_ACCCode").val();
-        }
+        Model.BankAccountNo = $("#txt_ACCCode").val();
         if (IsNew == true) {
             //var code: string = $('#txt_CustomerCODE').val();
             //if (code.length == 2) {

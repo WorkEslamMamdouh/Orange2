@@ -1417,7 +1417,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
   <Width>7.87121in</Width>
   <Page>
     <PageHeader>
-      <Height>4.45474cm</Height>
+      <Height>5.04091cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1814,7 +1814,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.16443cm</Top>
+              <Top>2.83118cm</Top>
               <Left>18.24751cm</Left>
               <Height>0.6cm</Height>
               <Width>1.48371cm</Width>
@@ -1848,7 +1848,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.16443cm</Top>
+              <Top>2.83118cm</Top>
               <Left>11.16253cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -1882,7 +1882,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>18.24751cm</Left>
               <Height>0.6cm</Height>
               <Width>1.48371cm</Width>
@@ -1916,7 +1916,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.16443cm</Top>
+              <Top>2.83118cm</Top>
               <Left>4.0044cm</Left>
               <Height>0.6cm</Height>
               <Width>1.1768cm</Width>
@@ -1950,7 +1950,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>4.0044cm</Left>
               <Height>0.6cm</Height>
               <Width>1.1768cm</Width>
@@ -1984,7 +1984,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.74241cm</Top>
+              <Top>4.40916cm</Top>
               <Left>18.24751cm</Left>
               <Height>0.6cm</Height>
               <Width>1.48371cm</Width>
@@ -2018,7 +2018,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>11.16253cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -2052,7 +2052,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
-              <Top>3.74241cm</Top>
+              <Top>4.40916cm</Top>
               <Left>7.98753cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
@@ -2084,8 +2084,8 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
-              <Top>2.16443cm</Top>
-              <Left>0.1709cm</Left>
+              <Top>2.83118cm</Top>
+              <Left>0.18521cm</Left>
               <Height>0.6cm</Height>
               <Width>3.71708cm</Width>
               <ZIndex>19</ZIndex>
@@ -2138,7 +2138,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_BalTypeDSA</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>0.1709cm</Left>
               <Height>0.6cm</Height>
               <Width>3.71708cm</Width>
@@ -2192,7 +2192,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_CatDSA</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>15.07251cm</Left>
               <Height>0.6cm</Height>
               <Width>3.1115cm</Width>
@@ -2246,7 +2246,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_GroupDSA</rd:DefaultName>
-              <Top>2.94602cm</Top>
+              <Top>3.61277cm</Top>
               <Left>7.98753cm</Left>
               <Height>0.6cm</Height>
               <Width>3.13972cm</Width>
@@ -2300,7 +2300,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_CustDSA</rd:DefaultName>
-              <Top>3.74241cm</Top>
+              <Top>4.40916cm</Top>
               <Left>0.18521cm</Left>
               <Height>0.6cm</Height>
               <Width>7.80232cm</Width>
@@ -2354,7 +2354,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_SalesmanDSA</rd:DefaultName>
-              <Top>3.74241cm</Top>
+              <Top>4.40916cm</Top>
               <Left>11.16253cm</Left>
               <Height>0.6cm</Height>
               <Width>7.02148cm</Width>
@@ -2410,7 +2410,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_FromDate</rd:DefaultName>
-              <Top>2.16443cm</Top>
+              <Top>2.83118cm</Top>
               <Left>15.07251cm</Left>
               <Height>0.6cm</Height>
               <Width>3.1115cm</Width>
@@ -2466,7 +2466,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_Todate</rd:DefaultName>
-              <Top>2.16443cm</Top>
+              <Top>2.83118cm</Top>
               <Left>7.98753cm</Left>
               <Height>0.6cm</Height>
               <Width>3.13972cm</Width>
@@ -2520,8 +2520,8 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
-              <Top>1.50595cm</Top>
-              <Left>1.58445cm</Left>
+              <Top>2.1727cm</Top>
+              <Left>0.3175cm</Left>
               <Height>0.6cm</Height>
               <Width>6.13703cm</Width>
               <ZIndex>27</ZIndex>
@@ -2559,7 +2559,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>4.45474cm</Height>
+          <Height>5.04091cm</Height>
           <Width>19.79472cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>

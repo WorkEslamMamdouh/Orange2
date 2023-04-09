@@ -248,7 +248,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-4" >
+                            <div class="col-12 col-md-4">
                                 <div class="form-group row  d-flex justify-content-center align-items-center">
                                     <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_AccCust </label>
                                     <div class="col-9 col-md-8">
@@ -362,24 +362,28 @@
 
 
                             @* Edit *@
-                            <div class="col-12 col-md-4 display_none" id="divAccount">
-                                <div class="form-group row  d-flex justify-content-center align-items-center">
-                                    <label class="col-3 col-md-4 align-self-center p-md-0">حساب المورد </label>
-                                    <div class="col-9 col-md-8">
-                                        <div class="search-content">
-                                            <input id="txt_ACCCode" name="ACC_CODE" disabled="disabled" type="text" class="form-control">
-                                            <button type="button" id="btnsearchACC" name="ColSearch" class="btn btn-main btn-search" disabled>
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                            <div class="col-12 display_none" id="divAccount">
+                                <div class="row">
+                                    <div class="col-12 col-md-4 " >
+                                        <div class="form-group row  d-flex justify-content-center align-items-center">
+                                            <label class="col-3 col-md-4 align-self-center p-md-0">حساب المورد </label>
+                                            <div class="col-9 col-md-8">
+                                                <div class="search-content">
+                                                    <input id="txt_ACCCode" name="ACC_CODE" disabled="disabled" type="text" class="form-control">
+                                                    <button type="button" id="btnsearchACC" name="ColSearch" class="btn btn-main btn-search" disabled>
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="form-group row ">
-                                    <label class="align-self-center p-md-0"></label>
-                                    <div class="col-8">
-                                        <input id="txt_ACCName" name="ACC_DESCA" disabled type="text" class="form-control">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group row ">
+                                            <label class="align-self-center p-md-0"></label>
+                                            <div class="col-8">
+                                                <input id="txt_ACCName" name="ACC_DESCA" disabled type="text" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +533,7 @@
         </div>
     </div>
 </div>
-    
+
 @section Script{
     <script>
         $(document).ready(function () {

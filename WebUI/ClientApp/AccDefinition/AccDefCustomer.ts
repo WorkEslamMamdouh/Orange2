@@ -85,7 +85,7 @@ namespace AccDefCustomer {
     var Newcount = 0;
 
     //--- Print Buttons
-   // var btnPrint: HTMLButtonElement;
+    // var btnPrint: HTMLButtonElement;
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
@@ -115,7 +115,7 @@ namespace AccDefCustomer {
         FillddlNationality();
         GetCardTypes();
         GetAllCurrency();
-      //  $('#btnPrint').addClass('display_none');   
+        //  $('#btnPrint').addClass('display_none');   
     }
     function reference_Page() {
         if (!SysSession.CurrentPrivileges.EDIT) {
@@ -192,7 +192,7 @@ namespace AccDefCustomer {
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-       // btnPrint.onclick = () => { PrintReport(4); } 
+        // btnPrint.onclick = () => { PrintReport(4); } 
 
         txt_CustCode.onchange = txt_CustCode_onchange;
         btnsearchCust.onclick = btnsearchCust_onclick;
@@ -212,7 +212,7 @@ namespace AccDefCustomer {
             data: { Id: custId, COMP_CODE: SysSession.CurrentEnvironment.CompCode, FIN_YEAR: FinYear, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {
                 let result = d as BaseResponse;
-               
+
                 if (result.IsSuccess) {
                     var AccountDeta: Array<AQ_GetAccount> = result.Response as Array<AQ_GetAccount>;
                     if (AccountDeta.length == 0) {
@@ -222,7 +222,7 @@ namespace AccDefCustomer {
                         DisplayMassage("كود العميل غير صحيح", "Customer code is wrong", MessageType.Error);
                     }
                     else {
-                        $('#txt_CustCode').val(AccountDeta[0].ACC_CODE); 
+                        $('#txt_CustCode').val(AccountDeta[0].ACC_CODE);
                         $('#txt_CustName').val(AccountDeta[0].ACC_DESCA);
                     }
                 }
@@ -243,8 +243,8 @@ namespace AccDefCustomer {
                 $('#divAccount').removeClass('display_none');
             }
             else {
-                $('#txt_CustCode').val('');
-                $('#txt_CustName').val('');
+                //$('#txt_CustCode').val('');
+                //$('#txt_CustName').val('');
                 $('#divAccount').addClass('display_none');
             }
         }
@@ -258,8 +258,8 @@ namespace AccDefCustomer {
             txt_balance.value = "0";
             Debit = 0;
             Credit = 0;
-            $('#txt_CustCode').val('');
-            $('#txt_CustName').val('');
+            //$('#txt_CustCode').val('');
+            //$('#txt_CustName').val('');
             $('#divAccount').addClass('display_none');
         }
 
@@ -292,13 +292,15 @@ namespace AccDefCustomer {
 
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
 
+            $("#id_ReportGrid").addClass("disabledDiv");
+
             $("#Div_DOC :input").removeAttr("disabled");
             $("#Div_ADDRESS :input").removeAttr("disabled");
 
             for (var i = 0; i < CountGrid; i++) {
 
                 $("#IDIssueDateH" + i).attr("disabled", "disabled");
-                $("#IDExpireDateH" + i).attr("disabled", "disabled"); 
+                $("#IDExpireDateH" + i).attr("disabled", "disabled");
             }
 
         }
@@ -338,7 +340,7 @@ namespace AccDefCustomer {
         IsNew = true;
         EnableControls();
         removedisabled();
-      
+
         $("#txt_Debit").attr("disabled", "disabled");
         $("#txt_DebitFC").attr("disabled", "disabled");
         $("#txt_balance").attr("disabled", "disabled");
@@ -346,6 +348,8 @@ namespace AccDefCustomer {
         $("#id_div_Add").attr("disabled", "disabled").off('click');
         var x1 = $("#id_div_Add").hasClass("disabledDiv");
         (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+
+        $("#id_ReportGrid").addClass("disabledDiv");
         reference_Page();
 
         $("#data_lebel").html('');
@@ -384,11 +388,11 @@ namespace AccDefCustomer {
             $('#divAccount').addClass('display_none');
         }
 
-         
+
         if (IsAutoCode == true) {
             txt_CustomerCODE.disabled = true;
             $("#ONAccount").addClass("disabledDiv");
-            
+
         }
 
 
@@ -399,37 +403,37 @@ namespace AccDefCustomer {
         setTimeout(function () {
 
             finishSave('btnSave');
-        if (!Validation()) return
-        debugger
-        Newcount = 0;
-        var CanAdd: boolean = true;
-        //if (CountGrid == 0) {
-        //    DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
-        //    Errorinput(btnAddDetails);
-        //    AddNewRow();
-        //    return false;
-        //}
-        if (CountGrid > 0) {
+            if (!Validation()) return
+            debugger
+            Newcount = 0;
+            var CanAdd: boolean = true;
+            //if (CountGrid == 0) {
+            //    DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
+            //    Errorinput(btnAddDetails);
+            //    AddNewRow();
+            //    return false;
+            //}
+            if (CountGrid > 0) {
 
-            for (var i = 0; i < CountGrid; i++) { 
-                CanAdd = Validation_Grid(i);
-                if (CanAdd == false) {
-                    break;
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
                 }
             }
-        }
-        if (CanAdd) {
+            if (CanAdd) {
 
-            if (IsNew == true) {
-                Assign_CustomerDoc();
-                Insert();
+                if (IsNew == true) {
+                    Assign_CustomerDoc();
+                    Insert();
 
-            }
-            else {
-                Assign_CustomerDoc();
-                Update();
+                }
+                else {
+                    Assign_CustomerDoc();
+                    Update();
 
-            }
+                }
             }
         }, 100);
     }
@@ -489,7 +493,7 @@ namespace AccDefCustomer {
         $("#txt_CreditLimit").removeAttr("disabled");
         $("#txt_Currency").removeAttr("disabled");
     }
-        
+
     function CustomerFoundBefore() {
         var res: boolean = true;
         var code = txt_CustomerCODE.value;
@@ -538,6 +542,7 @@ namespace AccDefCustomer {
             txt_disabled();
             $("#Div_control").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
             $('#Div_DOC').addClass("display_none");
             $('#Div_ADDRESS').addClass("display_none");
 
@@ -560,6 +565,7 @@ namespace AccDefCustomer {
 
             $("#id_div_Add").attr("disabled", "");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
         }
 
         $("#Div_ADDRESS :input").attr("disabled", "disabled");
@@ -567,14 +573,14 @@ namespace AccDefCustomer {
     }
     function back_Details() {
 
-        Selecteditem = Details.filter(x => x.CustomerId == Number(CustomerId)); 
+        Selecteditem = Details.filter(x => x.CustomerId == Number(CustomerId));
         for (var item of Selecteditem) {
             if (item.Isactive) { chkActive.checked = true; }
             else chkActive.checked = false;
         }
         DisplayData(Selecteditem);
         reference_Page();
-    }           
+    }
     function FillddlNationality() {
         Ajax.Callsync({
             type: "Get",
@@ -618,7 +624,7 @@ namespace AccDefCustomer {
                 }
             }
         });
-    }     
+    }
     function GetCardTypes() {
         Ajax.Callsync({
             type: "Get",
@@ -631,7 +637,7 @@ namespace AccDefCustomer {
                 }
             }
         });
-    } 
+    }
     function DriverDoubleClick() {
 
         DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
@@ -657,7 +663,7 @@ namespace AccDefCustomer {
         $('#btnSave').addClass("display_none");
         $('#btnBack').addClass("display_none");
         reference_Page();
-       
+
     }
     function DisplayData(Selecteditem: Array<IQ_GetCustomer>) {
         DocumentActions.RenderFromModel(Selecteditem[0]);
@@ -701,15 +707,17 @@ namespace AccDefCustomer {
 
         Is_cust = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
         debugger
-        if (Selecteditem[0].CustomerId != null && Selecteditem[0].CustomerId != 0 && Is_cust == true && Selecteditem[0].IsCreditCustomer == true) {
+        if (Selecteditem[0].AccountNo.trim() != '' && Selecteditem[0].AccountNo.trim() != null) {
             getAccountById(Selecteditem[0].AccountNo);
+        }
+      
+
+        if (Selecteditem[0].CustomerId != null && Selecteditem[0].CustomerId != 0 && Is_cust == true && Selecteditem[0].IsCreditCustomer == true) {
+           
             $('#divAccount').removeClass('display_none');
         }
-        else {
-            $('#txt_CustCode').val('');
-            $('#txt_CustName').val('');
-            $('#divAccount').addClass('display_none');
-            //PurchaserId = null;
+        else { 
+            $('#divAccount').addClass('display_none'); 
         }
 
     }
@@ -750,7 +758,7 @@ namespace AccDefCustomer {
                     <td>
 		                <div class="form-group">
                            	<select disabled id="CusIDTypeCode${cnt}" class="form-control"> 
-		                        <option value="null">${ (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type") }</option> 
+		                        <option value="null">${ (lang == "ar" ? "اختار نوع الهويه" : "Choose Identity Type")}</option> 
 		                     </select >
 		                </div>
 	                </td>
@@ -829,7 +837,7 @@ namespace AccDefCustomer {
                 $("#txt_StatusFlag" + cnt).val("u");
 
 
-            $("#IDIssueDateH" + cnt).val(convertToH($("#IDIssueDate" + cnt).val())); 
+            $("#IDIssueDateH" + cnt).val(convertToH($("#IDIssueDate" + cnt).val()));
 
         });
         $("#IDIssueDateH" + cnt).on('change', function () {
@@ -840,7 +848,7 @@ namespace AccDefCustomer {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
-            $("#IDExpireDateH" + cnt).val(convertToH($("#IDExpireDate" + cnt).val())); 
+            $("#IDExpireDateH" + cnt).val(convertToH($("#IDExpireDate" + cnt).val()));
 
         });
         $("#IDExpireDateH" + cnt).on('change', function () {
@@ -853,14 +861,14 @@ namespace AccDefCustomer {
         debugger
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus3" + cnt).addClass("display_none");
-        $("#txt_StatusFlag" + cnt).val(""); 
+        $("#txt_StatusFlag" + cnt).val("");
         $("#CustomerDocID" + cnt).val(AQ_GetCustomerDoc[cnt].CustomerDocID);
         $("#CusIDTypeCode" + cnt).prop('value', AQ_GetCustomerDoc[cnt].CusIDTypeCode == null ? 'null' : AQ_GetCustomerDoc[cnt].CusIDTypeCode);
         $("#IDNo" + cnt).val(AQ_GetCustomerDoc[cnt].IDNo);
         $("#IDIssuePlace" + cnt).val(AQ_GetCustomerDoc[cnt].IDIssuePlace);
-        $("#IDIssueDate" + cnt).val(DateFormat(AQ_GetCustomerDoc[cnt].IDIssueDate)); 
+        $("#IDIssueDate" + cnt).val(DateFormat(AQ_GetCustomerDoc[cnt].IDIssueDate));
         $("#IDIssueDateH" + cnt).val(AQ_GetCustomerDoc[cnt].IDIssueDateH);
-        $("#IDExpireDate" + cnt).val(DateFormat(AQ_GetCustomerDoc[cnt].IDExpireDate)); 
+        $("#IDExpireDate" + cnt).val(DateFormat(AQ_GetCustomerDoc[cnt].IDExpireDate));
         $("#IDExpireDateH" + cnt).val(AQ_GetCustomerDoc[cnt].IDExpireDateH);
 
 
@@ -879,10 +887,10 @@ namespace AccDefCustomer {
         }
         if (CanAdd) {
 
-         
+
 
             BuildControls(CountGrid);
-             
+
             $("#Div_ADDRESS :input").removeAttr("disabled");
 
             $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
@@ -896,23 +904,23 @@ namespace AccDefCustomer {
             $("#IDExpireDateH" + CountGrid).val(convertToH(GetDate()));
 
 
-            $("#CusIDTypeCode" + CountGrid).removeAttr("disabled"); 
-            $("#IDNo" + CountGrid).removeAttr("disabled"); 
-            $("#IDIssuePlace" + CountGrid).removeAttr("disabled"); 
-            $("#IDIssueDate" + CountGrid).removeAttr("disabled"); 
-            $("#IDExpireDate" + CountGrid).removeAttr("disabled"); 
+            $("#CusIDTypeCode" + CountGrid).removeAttr("disabled");
+            $("#IDNo" + CountGrid).removeAttr("disabled");
+            $("#IDIssuePlace" + CountGrid).removeAttr("disabled");
+            $("#IDIssueDate" + CountGrid).removeAttr("disabled");
+            $("#IDExpireDate" + CountGrid).removeAttr("disabled");
 
             $("#IDIssueDateH" + CountGrid).attr("disabled", "disabled");
-            $("#IDExpireDateH" + CountGrid).attr("disabled", "disabled"); 
-          
-          
-          
-          
+            $("#IDExpireDateH" + CountGrid).attr("disabled", "disabled");
+
+
+
+
 
             CountGrid++;
         }
-    
-    
+
+
 
 
 
@@ -938,13 +946,13 @@ namespace AccDefCustomer {
     }
 
     function Validation() {
-         
+
         if (txt_CustomerCODE.value.trim() == "" && IsAutoCode == false) {
             DisplayMassage("يجب ادخال رقم العميل", "Vendor number must be entered", MessageType.Worning);
             Errorinput(txt_CustomerCODE);
             return false;
-        } 
-        if (IsNew == true && txt_CustomerCODE.value != '' ) {
+        }
+        if (IsNew == true && txt_CustomerCODE.value != '') {
             if (CustomerFoundBefore() == false) {
                 DisplayMassage("رقم العميل موجود من قبل ", "The customer number already exists", MessageType.Worning);
                 Errorinput(txt_CustomerCODE);
@@ -994,7 +1002,7 @@ namespace AccDefCustomer {
             Errorinput(txt_tax);
             return false;
         }
-        if (txt_VatNo.value.trim() == ""  ) {
+        if (txt_VatNo.value.trim() == "") {
             DisplayMassage("يجب ادخال الرقم الضريبي ", "Must insert Vat Number", MessageType.Worning);
             Errorinput(txt_VatNo);
             return false;
@@ -1011,7 +1019,7 @@ namespace AccDefCustomer {
         }
 
         var Openbalance = Number($('#txt_Openbalance').val());
-        if ((txt_Openbalance.value.trim() == "" ) && txt_Cust_Type.value == "1") {
+        if ((txt_Openbalance.value.trim() == "") && txt_Cust_Type.value == "1") {
             DisplayMassage("يجب ادخال الرصيد الافتتاحى ", "You must enter Open Balance", MessageType.Worning);
             Errorinput(txt_Openbalance);
             return false;
@@ -1029,7 +1037,7 @@ namespace AccDefCustomer {
                 Errorinput($('#txt_Email'));
                 return false;
             }
-        } 
+        }
         //if (txt_ADDRESS.value.trim() == "") {
         //    DisplayMassage("يجب ادخال العنوان", "Must insert Address", MessageType.Worning);
         //    Errorinput(txt_ADDRESS);
@@ -1322,7 +1330,7 @@ namespace AccDefCustomer {
                             if (Details[i].Balance > 0) Details[i].Balance = Number(Details[i].Balance.RoundToSt(2));
                             else Details[i].Balance = Number(Details[i].Balance.RoundToSt(2));
                         }
-                    }             
+                    }
                     $('#ddlSalesman').prop("value", value_list_Salesman);
                     InitializeGrid();
                     ReportGrid.DataSource = Details;
@@ -1393,7 +1401,7 @@ namespace AccDefCustomer {
         for (var i = 0; i < CountGrid; i++) {
             singleModel = new A_Rec_D_CustomerDoc();
 
-            StatusFlag = $("#txt_StatusFlag" + i).val(); 
+            StatusFlag = $("#txt_StatusFlag" + i).val();
             singleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             singleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -1440,7 +1448,7 @@ namespace AccDefCustomer {
     }
 
     function Assign() {
-      
+
         debugger
         if (txt_NAME.value == "") {
             txt_NAME.value = txt_NAMEE.value;
@@ -1484,10 +1492,9 @@ namespace AccDefCustomer {
             Model.A_Rec_D_Customer.Debit = Number(txt_Debit.value) == null ? 0 : Number(txt_Debit.value);
             Model.A_Rec_D_Customer.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
             Model.A_Rec_D_Customer.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
-            
-            if ($("#txt_Cust_Type").val() == "1") {
-                Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
-            }
+
+
+            Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
 
         }
         else {
@@ -1516,9 +1523,7 @@ namespace AccDefCustomer {
             Model.A_Rec_D_Customer.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
             Model.A_Rec_D_Customer.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
 
-            if ($("#txt_Cust_Type").val() == "1") {
-                Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
-            }
+            Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
 
         }
 
@@ -1587,7 +1592,7 @@ namespace AccDefCustomer {
         if (Model.A_Rec_D_Customer.GroupId == null) {
             DisplayMassage("يجب اختيار المجموعه ", "The group must be selected", MessageType.Worning);
             Errorinput(txt_Grop);
-            return ;
+            return;
         }
 
         Ajax.Callsync({
@@ -1644,10 +1649,10 @@ namespace AccDefCustomer {
 
         DriverDoubleClick();
 
-    } 
+    }
     function success_Insert() {
 
-        Display(); 
+        Display();
         $('#btnAddDetails').addClass("display_none");
         $('#btnSave').addClass("display_none");
         $('#btnBack').addClass("display_none");
@@ -1658,6 +1663,7 @@ namespace AccDefCustomer {
         txt_disabled();
         $("#id_div_Add").attr("disabled", "");
         $("#id_div_Add").removeClass("disabledDiv");
+        $("#id_ReportGrid").removeClass("disabledDiv");
         $('#Div_DOC').addClass("display_none");
         $('#Div_ADDRESS').addClass("display_none");
 
@@ -1777,7 +1783,7 @@ namespace AccDefCustomer {
 
                 let result = d.result as string;
                 PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear);
-               
+
 
                 window.open(result, "_blank");
             }

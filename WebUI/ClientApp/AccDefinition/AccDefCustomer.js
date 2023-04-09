@@ -220,8 +220,8 @@ var AccDefCustomer;
                 $('#divAccount').removeClass('display_none');
             }
             else {
-                $('#txt_CustCode').val('');
-                $('#txt_CustName').val('');
+                //$('#txt_CustCode').val('');
+                //$('#txt_CustName').val('');
                 $('#divAccount').addClass('display_none');
             }
         }
@@ -235,8 +235,8 @@ var AccDefCustomer;
             txt_balance.value = "0";
             Debit = 0;
             Credit = 0;
-            $('#txt_CustCode').val('');
-            $('#txt_CustName').val('');
+            //$('#txt_CustCode').val('');
+            //$('#txt_CustName').val('');
             $('#divAccount').addClass('display_none');
         }
     }
@@ -263,6 +263,7 @@ var AccDefCustomer;
             $("#id_div_Add").attr("disabled", "disabled").off('click');
             var x1 = $("#id_div_Add").hasClass("disabledDiv");
             (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+            $("#id_ReportGrid").addClass("disabledDiv");
             $("#Div_DOC :input").removeAttr("disabled");
             $("#Div_ADDRESS :input").removeAttr("disabled");
             for (var i = 0; i < CountGrid; i++) {
@@ -303,6 +304,7 @@ var AccDefCustomer;
         $("#id_div_Add").attr("disabled", "disabled").off('click');
         var x1 = $("#id_div_Add").hasClass("disabledDiv");
         (x1 == true) ? $("#id_div_Add").removeClass("disabledDiv") : $("#id_div_Add").addClass("disabledDiv");
+        $("#id_ReportGrid").addClass("disabledDiv");
         reference_Page();
         $("#data_lebel").html('');
         CountGrid = 0;
@@ -474,6 +476,7 @@ var AccDefCustomer;
             txt_disabled();
             $("#Div_control").addClass("display_none");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
             $('#Div_DOC').addClass("display_none");
             $('#Div_ADDRESS').addClass("display_none");
         }
@@ -492,6 +495,7 @@ var AccDefCustomer;
             Update_claenData = 0;
             $("#id_div_Add").attr("disabled", "");
             $("#id_div_Add").removeClass("disabledDiv");
+            $("#id_ReportGrid").removeClass("disabledDiv");
         }
         $("#Div_ADDRESS :input").attr("disabled", "disabled");
     }
@@ -619,15 +623,14 @@ var AccDefCustomer;
         txt_CustName.value = "";
         Is_cust = SysSession.CurrentEnvironment.I_Control[0].ISCustVendorInGL;
         debugger;
-        if (Selecteditem[0].CustomerId != null && Selecteditem[0].CustomerId != 0 && Is_cust == true && Selecteditem[0].IsCreditCustomer == true) {
+        if (Selecteditem[0].AccountNo.trim() != '' && Selecteditem[0].AccountNo.trim() != null) {
             getAccountById(Selecteditem[0].AccountNo);
+        }
+        if (Selecteditem[0].CustomerId != null && Selecteditem[0].CustomerId != 0 && Is_cust == true && Selecteditem[0].IsCreditCustomer == true) {
             $('#divAccount').removeClass('display_none');
         }
         else {
-            $('#txt_CustCode').val('');
-            $('#txt_CustName').val('');
             $('#divAccount').addClass('display_none');
-            //PurchaserId = null;
         }
     }
     function BindGetCustomerDocGridData(CustomerId) {
@@ -1244,9 +1247,7 @@ var AccDefCustomer;
             Model.A_Rec_D_Customer.Debit = Number(txt_Debit.value) == null ? 0 : Number(txt_Debit.value);
             Model.A_Rec_D_Customer.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
             Model.A_Rec_D_Customer.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
-            if ($("#txt_Cust_Type").val() == "1") {
-                Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
-            }
+            Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
         }
         else {
             DocumentActions.AssignToModel(Model.A_Rec_D_Customer); //Insert Update
@@ -1276,9 +1277,7 @@ var AccDefCustomer;
             Model.A_Rec_D_Customer.Debit = Number(txt_Debit.value) == null ? 0 : Number(txt_Debit.value);
             Model.A_Rec_D_Customer.Openbalance = Number(txt_Openbalance.value) == null ? 0 : Number(txt_Openbalance.value);
             Model.A_Rec_D_Customer.OpenbalanceAt = $('#txt_OpenbalanceAt').val();
-            if ($("#txt_Cust_Type").val() == "1") {
-                Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
-            }
+            Model.A_Rec_D_Customer.AccountNo = $("#txt_CustCode").val();
         }
         //debugger
         ////Model.A_Rec_D_CustomerDoc = new Array<A_Rec_D_CustomerDoc>();
@@ -1400,6 +1399,7 @@ var AccDefCustomer;
         txt_disabled();
         $("#id_div_Add").attr("disabled", "");
         $("#id_div_Add").removeClass("disabledDiv");
+        $("#id_ReportGrid").removeClass("disabledDiv");
         $('#Div_DOC').addClass("display_none");
         $('#Div_ADDRESS').addClass("display_none");
         Selecteditem = Details.filter(function (x) { return x.CustomerId == Number(CustomerId); });
