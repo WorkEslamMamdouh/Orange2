@@ -23,6 +23,7 @@ var AgingCust;
     var btnCust;
     var txt_CustCode;
     var txt_CustName;
+    var CheckboxStatus;
     var GLOBALopenbalance;
     var custIdfilter;
     ;
@@ -68,6 +69,7 @@ var AgingCust;
         btnCust = document.getElementById("btnCust");
         txt_CustCode = document.getElementById("txt_CustCode");
         txt_CustName = document.getElementById("txt_CustName");
+        CheckboxStatus = document.getElementById("CheckboxStatus");
         //---------------------------------------------------------------------- Print Buttons
         btnPrint = document.getElementById("btnPrint");
         btnPrintTrview = document.getElementById("btnPrintTrview");
@@ -192,10 +194,10 @@ var AgingCust;
         else {
             rp.CustomerID = customerId;
         }
-        if ($("#txt_ID_APP_Type").val() == 3) { //-------------جميع الانواع
+        if (CheckboxStatus.checked == true) {
             rp.Status = 3;
         }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) { //-------------منفذ 
+        else {
             rp.Status = 1;
         }
         if ($("#txt_indebtedness").val() == 0) { //******الجميع 

@@ -16,7 +16,6 @@ var Supplieraccstat;
     var VatTypeDetails = new Array();
     //------------------------------------------------------------
     var txt_ID_APP_Category;
-    var txt_ID_APP_Type;
     var txtVendorType;
     var Rddetails;
     var Rd_sum;
@@ -24,6 +23,7 @@ var Supplieraccstat;
     var txtDateFrom;
     var txtDateTo;
     var btnReset;
+    var CheckboxStatus;
     var checkboxCash;
     var Rd_Code;
     var Rd_Name;
@@ -58,14 +58,12 @@ var Supplieraccstat;
         Display_SupplierCat();
         Display_SupplierGroup();
         Display_Salesman();
-        Display();
         Rddetails.checked = true;
         Rd_Bal.checked = true;
     }
     Supplieraccstat.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category");
-        txt_ID_APP_Type = document.getElementById("txt_ID_APP_Type");
         txtVendorType = document.getElementById("txtVendorType");
         txtDateFrom = document.getElementById("txtFromDate");
         txtDateTo = document.getElementById("txtToDate");
@@ -75,6 +73,7 @@ var Supplieraccstat;
         btnReset = document.getElementById("btnReset");
         Rd_Code = document.getElementById("Rd_Code");
         checkboxCash = document.getElementById("checkboxCash");
+        CheckboxStatus = document.getElementById("CheckboxStatus");
         Rd_Name = document.getElementById("Rd_Name");
         Rd_Bal = document.getElementById("Rd_Bal");
         //---------------------------------------------------------------------- Print Buttons
@@ -182,51 +181,6 @@ var Supplieraccstat;
         return ReturnedDate;
     }
     //----------------------------------------------------( Data )
-    function Display() {
-        indebtedness = $('#txt_indebtedness').val();
-        var IsCredit_Type;
-        if ($('#txt_ID_APP_Type').val() == "Null") {
-            IsCredit_Type = 2;
-        }
-        else {
-            IsCredit_Type = Number($('#txt_ID_APP_Type').val());
-        }
-        var catid;
-        if ($('#txt_ID_APP_Category').val() == "Null") {
-            catid = 0;
-        }
-        else {
-            catid = Number($('#txt_ID_APP_Category').val());
-        }
-        var Groupid;
-        if ($('#txt_ID_APP_Group').val() == "Null") {
-            Groupid = 0;
-        }
-        else {
-            Groupid = Number($('#txt_ID_APP_Group').val());
-        }
-        var VendorType;
-        if ($('#txtVendorType').val() == "Null") {
-            VendorType = 0;
-        }
-        else {
-            VendorType = Number($('#txtVendorType').val());
-        }
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("AccDefVendor", "GetFiltered"),
-            data: {
-                CompCode: compcode, Catid: catid, Groupid: Groupid, CreditType: IsCredit_Type, VendorType: VendorType, BalType: indebtedness, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: function (d) {
-                debugger;
-                var result = d;
-                if (result.IsSuccess) {
-                    Details = result.Response;
-                }
-            }
-        });
-    }
     //----------------------------------------------------(Get Vendor )
     function DisplayAccDefVendor() {
         debugger;
@@ -262,7 +216,6 @@ var Supplieraccstat;
         $('#ddlSalesman option[value=Null]').prop('selected', 'selected').change();
         $('#txt_ID_APP_Group option[value=Null]').prop('selected', 'selected').change();
         $('#ddlCustomer option[value=null]').prop('selected', 'selected').change();
-        $('#txt_ID_APP_Type option[value=Null]').prop('selected', 'selected').change();
         $('#txtVendorType option[value=Null]').prop('selected', 'selected').change();
         $('#txt_indebtedness option[value=All]').prop('selected', 'selected').change();
         $('#txt_ID_Vendor option[value=Null]').prop('selected', 'selected').change();
@@ -313,12 +266,6 @@ var Supplieraccstat;
         if ($("#txtVendorType").val() == "2") {
             rp.VendType = 1;
         }
-        if ($("#txt_ID_APP_Type").val() == "Null") { //-------------جميع الانواع
-            rp.Status = 3;
-        }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) { //-------------منفذ 
-            rp.Status = 1;
-        }
         if ($("#txt_indebtedness").val() == ">") { //******عليه مديونيه
             rp.BalType = 1;
         }
@@ -346,6 +293,12 @@ var Supplieraccstat;
         }
         else {
             rp.orderby = 3;
+        }
+        if (CheckboxStatus.checked == true) {
+            rp.Status = 3;
+        }
+        else {
+            rp.Status = 1;
         }
         if (checkboxCash.checked == true) {
             rp.CashType = 1;

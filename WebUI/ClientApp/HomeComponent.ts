@@ -1014,8 +1014,7 @@ namespace HomeComponent {
 
     function SetActiv_History(Mode: string, color: string, News_Type: number) {
 
-        $('.history-icon').attr('style', '');
-        $('.down-arrow').addClass('display_none');
+       
 
         Show_History(Mode, color, News_Type);
 
@@ -1033,6 +1032,10 @@ namespace HomeComponent {
                 if (result.IsSuccess) {
                     News_Details = result.Response as NewsDetails;
                     if (News_Details.G_News.length > 0) {
+
+                        $('.history-icon').attr('style', '');
+                        $('.down-arrow').addClass('display_none');
+
                         $("#Div_History").html('');
                         for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i, true);
@@ -1046,6 +1049,9 @@ namespace HomeComponent {
 
                         setTimeout(function () { $('.down-arrow').removeAttr('animate__animated animate__fadeInDown'); }, 600);
 
+                    }
+                    else {
+                        Errorinput($('#' + Mode + ''))
                     }
 
                 }

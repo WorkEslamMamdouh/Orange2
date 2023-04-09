@@ -30,6 +30,7 @@ var AgingVend;
     var btnVnd;
     var txt_VndCode;
     var txt_VndName;
+    var CheckboxStatus;
     var VndIdfilter;
     ;
     var VendorId;
@@ -81,6 +82,7 @@ var AgingVend;
         btnVnd = document.getElementById("btnVnd");
         txt_VndCode = document.getElementById("txt_VndCode");
         txt_VndName = document.getElementById("txt_VndName");
+        CheckboxStatus = document.getElementById("CheckboxStatus");
         //---------------------------------------------------------------------- Print Buttons
         btnPrint = document.getElementById("btnPrint");
         btnPrintTrview = document.getElementById("btnPrintTrview");
@@ -217,12 +219,6 @@ var AgingVend;
         else {
             rp.CustomerID = VendorId;
         }
-        if ($("#txt_ID_APP_Type").val() == 3) { //-------------جميع الانواع
-            rp.Status = 3;
-        }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) { //-------------منفذ 
-            rp.Status = 1;
-        }
         if ($("#txt_indebtedness").val() == 0) { //******الجميع 
             rp.BalType = 0;
         }
@@ -234,6 +230,12 @@ var AgingVend;
         }
         if ($("#txt_indebtedness").val() == 3) { //******صفري
             rp.BalType = 3;
+        }
+        if (CheckboxStatus.checked == true) {
+            rp.Status = 3;
+        }
+        else {
+            rp.Status = 1;
         }
         rp.Agtype = 1;
         rp.typedata = 2;

@@ -29,6 +29,7 @@ namespace AgingCust {
     var btnCust: HTMLButtonElement;
     var txt_CustCode: HTMLInputElement;
     var txt_CustName: HTMLInputElement;
+    var CheckboxStatus: HTMLInputElement;
     var GLOBALopenbalance;
     var custIdfilter;;
 
@@ -89,6 +90,7 @@ namespace AgingCust {
          btnCust = document.getElementById("btnCust") as HTMLButtonElement;
         txt_CustCode = document.getElementById("txt_CustCode") as HTMLInputElement;
         txt_CustName = document.getElementById("txt_CustName") as HTMLInputElement;
+        CheckboxStatus = document.getElementById("CheckboxStatus") as HTMLInputElement;
          
         //---------------------------------------------------------------------- Print Buttons
 
@@ -231,14 +233,16 @@ namespace AgingCust {
         } else {
             rp.CustomerID = customerId;
         }
-        if ($("#txt_ID_APP_Type").val() == 3) {//-------------جميع الانواع
+     
 
+
+        if (CheckboxStatus.checked == true) {
             rp.Status = 3;
         }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) {//-------------منفذ 
+        else {
             rp.Status = 1;
-
         }
+
        
         if ($("#txt_indebtedness").val() == 0) {//******الجميع 
             rp.BalType = 0;

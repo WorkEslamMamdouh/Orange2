@@ -18,11 +18,11 @@ var Clientaccstat;
     //------------------------------------------------------------
     var txt_ID_APP_Category;
     var txt_ID_APP_Group;
-    var txt_ID_APP_Type;
     var ddlCustomer;
     var txtDateFrom;
     var txtDateTo;
     var Rddetails;
+    var CheckboxStatus;
     var checkboxCash;
     var Rd_sum;
     var Rd_custmastr;
@@ -60,18 +60,17 @@ var Clientaccstat;
         FillddlCustomer();
         Rddetails.checked = true;
         Rd_Bal.checked = true;
-        //Display();
-        txt_ID_APP_Type.value = "1";
+        //Display(); 
     }
     Clientaccstat.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category");
         txt_ID_APP_Group = document.getElementById("txt_ID_APP_Group");
-        txt_ID_APP_Type = document.getElementById("txt_ID_APP_Type");
         ddlCustomer = document.getElementById("ddlCustomer");
         txtDateFrom = document.getElementById("txtFromDate");
         txtDateTo = document.getElementById("txtToDate");
         Rddetails = document.getElementById("Rd_detail");
+        CheckboxStatus = document.getElementById("CheckboxStatus");
         checkboxCash = document.getElementById("checkboxCash");
         Rd_sum = document.getElementById("Rd_sum");
         Rd_custmastr = document.getElementById("Rd_custmastr");
@@ -238,55 +237,6 @@ var Clientaccstat;
         return ReturnedDate;
     }
     //----------------------------------------------------( Data )
-    function Display() {
-        var SalesmanId = 0;
-        var NAME_Salesman;
-        var value_list_Salesman = $('#ddlSalesman').find('option:selected').val();
-        indebtedness = $('#txt_indebtedness').val();
-        var IsCredit_Type;
-        if ($('#txt_ID_APP_Type').val() == "Null") {
-            IsCredit_Type = 2;
-        }
-        else {
-            IsCredit_Type = Number($('#txt_ID_APP_Type').val());
-        }
-        var catid;
-        if ($('#txt_ID_APP_Category').val() == "Null") {
-            catid = 0;
-        }
-        else {
-            catid = Number($('#txt_ID_APP_Category').val());
-        }
-        var Groupid;
-        if ($('#txt_ID_APP_Group').val() == "Null") {
-            Groupid = 0;
-        }
-        else {
-            Groupid = Number($('#txt_ID_APP_Group').val());
-        }
-        var slsid;
-        if ($('#ddlSalesman').val() == "Null") {
-            slsid = 0;
-        }
-        else {
-            slsid = Number($('#ddlSalesman').val());
-        }
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("AccDefCustomer", "GetFiltered"),
-            data: {
-                CompCode: compcode, BranchCode: SysSession.CurrentEnvironment.BranchCode, Catid: catid, Groupid: Groupid, Slsid: slsid, CreditType: IsCredit_Type, BalType: indebtedness, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: function (d) {
-                //
-                var result = d;
-                if (result.IsSuccess) {
-                    Details = result.Response;
-                    $('#ddlSalesman').prop("value", value_list_Salesman);
-                }
-            }
-        });
-    }
     function btnReset_onclick() {
         txtDateFrom.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
@@ -298,7 +248,6 @@ var Clientaccstat;
         $('#ddlSalesman option[value=Null]').prop('selected', 'selected').change();
         $('#txt_ID_APP_Group option[value=Null]').prop('selected', 'selected').change();
         $('#ddlCustomer option[value=null]').prop('selected', 'selected').change();
-        $('#txt_ID_APP_Type option[value=Null]').prop('selected', 'selected').change();
         $('#txt_indebtedness option[value=All]').prop('selected', 'selected').change();
     }
     //----------------------------------------------------( Report )
@@ -349,12 +298,12 @@ var Clientaccstat;
         else {
             rp.CustomerID = Number($("#ddlCustomer").val());
         }
-        if ($("#txt_ID_APP_Type").val() == 'Null') { //-------------غير منفذ///الجميع
-            rp.Status = 3;
-        }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) { //------------- منفذ
-            rp.Status = 1;
-        }
+        //if ($("#txt_ID_APP_Type").val() == 'Null') {//-------------غير منفذ///الجميع
+        //    rp.Status = 3;
+        //}
+        //if (Number($("#txt_ID_APP_Type").val()) == 1) {//------------- منفذ
+        //    rp.Status = 1;
+        //}
         if ($("#txt_indebtedness").val() == ">") { //******عليه مديونيه
             rp.BalType = 1;
         }
@@ -376,6 +325,12 @@ var Clientaccstat;
         }
         else {
             rp.orderby = 3;
+        }
+        if (CheckboxStatus.checked == true) {
+            rp.Status = 3;
+        }
+        else {
+            rp.Status = 1;
         }
         if (checkboxCash.checked == true) {
             rp.CashType = 1;

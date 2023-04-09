@@ -19,8 +19,7 @@ namespace Collectedaccstat {
     var ddl_CustomerFilter: Array<A_Rec_D_Customer> = new Array<A_Rec_D_Customer>();
      
     //------------------------------------------------------------
-    var txt_ID_APP_Category: HTMLSelectElement;
-    var txt_ID_APP_Type: HTMLSelectElement;
+    var txt_ID_APP_Category: HTMLSelectElement; 
     var txtVendorType: HTMLSelectElement;
     var Rddetails: HTMLInputElement;
     var Rd_sum: HTMLInputElement;
@@ -28,6 +27,7 @@ namespace Collectedaccstat {
     var txtDateTo: HTMLInputElement;
     var btnReset;
 
+    var CheckboxStatus: HTMLInputElement;
     var ddl_Customer: HTMLSelectElement;
     //-------------------------------------------------------------
     var indebtedness;
@@ -62,18 +62,15 @@ namespace Collectedaccstat {
         DisplayAccDefVendor();
         Display_SupplierCat();
         Display_SupplierGroup();
-        Display_Salesman();
-        Display();
+        Display_Salesman(); 
          Rddetails.checked = true;
          Fillddl_Customer();
-         $('#btnPrint').addClass('display_none');
-         txt_ID_APP_Type.value = '1'
+         $('#btnPrint').addClass('display_none'); 
     }
      
     function InitalizeControls() {
 
-        txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category") as HTMLSelectElement;
-        txt_ID_APP_Type = document.getElementById("txt_ID_APP_Type") as HTMLSelectElement;
+        txt_ID_APP_Category = document.getElementById("txt_ID_APP_Category") as HTMLSelectElement; 
         txtVendorType = document.getElementById("txtVendorType") as HTMLSelectElement;
         txtDateFrom = document.getElementById("txtFromDate") as HTMLInputElement;
         txtDateTo = document.getElementById("txtToDate") as HTMLInputElement;
@@ -85,7 +82,7 @@ namespace Collectedaccstat {
         
 
         ddl_Customer = document.getElementById("ddl_Customer") as HTMLSelectElement;
-
+        CheckboxStatus = document.getElementById("CheckboxStatus") as HTMLInputElement;
         //---------------------------------------------------------------------- Print Buttons
 
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
@@ -218,71 +215,7 @@ namespace Collectedaccstat {
         return ReturnedDate;
     }
     //----------------------------------------------------( Data )
-    function Display() {
-        indebtedness = $('#txt_indebtedness').val();
-
-        var IsCredit_Type: number;
-        if ($('#txt_ID_APP_Type').val() == "Null") {
-            IsCredit_Type = 2;
-        }
-        else {
-            IsCredit_Type = Number($('#txt_ID_APP_Type').val());
-
-        }
-
-        var catid: number;
-        if ($('#txt_ID_APP_Category').val() == "Null") {
-            catid = 0;
-        }
-        else {
-            catid = Number($('#txt_ID_APP_Category').val());
-
-        }
-        var Groupid: number;
-        if ($('#txt_ID_APP_Group').val() == "Null") {
-            Groupid = 0;
-        }
-        else {
-            Groupid = Number($('#txt_ID_APP_Group').val());
-
-        }
-        var VendorType: number;
-        if ($('#txtVendorType').val() == "Null") {
-            VendorType = 0;
-        }
-        else {
-            VendorType = Number($('#txtVendorType').val());
-
-        }
-
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("AccDefVendor", "GetFiltered"),
-            data: {
-                CompCode: compcode, Catid: catid, Groupid: Groupid, CreditType: IsCredit_Type, VendorType: VendorType, BalType: indebtedness, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
-            },
-            success: (d) => {
-                debugger;
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    Details = result.Response as Array<IQ_GetVendor>;
-
-
-                    //for (var i = 0; i < Details.length; i++) {
-
-                    //    Details[i].Isbalance = Number((Number(Details[i].Openbalance) - Number(Details[i].Debit) + Number(Details[i].Credit)).RoundToSt(2));
-
-                    //}
-                    debugger
-
-
-
-                }
-
-            }
-        });
-    }
-     
+   
     //----------------------------------------------------(Get Vendor )
     function DisplayAccDefVendor() {
          
@@ -330,8 +263,7 @@ namespace Collectedaccstat {
         $('#txt_ID_APP_Category option[value=Null]').prop('selected', 'selected').change();
         $('#ddlSalesman option[value=Null]').prop('selected', 'selected').change();
         $('#txt_ID_APP_Group option[value=Null]').prop('selected', 'selected').change();
-        $('#ddlCustomer option[value=null]').prop('selected', 'selected').change();
-        $('#txt_ID_APP_Type option[value=Null]').prop('selected', 'selected').change();
+        $('#ddlCustomer option[value=null]').prop('selected', 'selected').change(); 
         $('#txtVendorType option[value=Null]').prop('selected', 'selected').change();
         $('#txt_indebtedness option[value=All]').prop('selected', 'selected').change();
         $('#txt_ID_Vendor option[value=Null]').prop('selected', 'selected').change();
@@ -407,12 +339,7 @@ namespace Collectedaccstat {
         } if ($("#txtVendorType").val() == "2") {//---------------مورد خدمات
             rp.VendType = 1;
         }
-        if ($("#txt_ID_APP_Type").val() == "Null") {//-------------جميع الانواع
-            rp.Status =3;
-        }
-        else {
-            rp.Status = 1;
-        }//-------------منفذ 
+ 
 
         if ($("#txt_indebtedness").val() == ">") {//******عليه مديونيه
             rp.BalType = 1;
@@ -430,6 +357,16 @@ namespace Collectedaccstat {
 
             rp.BalType = 0;
         }
+
+
+        if (CheckboxStatus.checked == true) {
+            rp.Status = 3;
+        }
+        else {
+            rp.Status = 1;
+        }
+
+
 
         if ($("#txt_ID_Vendor").val() == "Null") {//-------------جميع الفئات
             rp.VendorId = -1;

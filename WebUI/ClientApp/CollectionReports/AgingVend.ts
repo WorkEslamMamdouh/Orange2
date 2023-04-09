@@ -35,6 +35,7 @@ namespace AgingVend {
     var btnVnd: HTMLButtonElement;
     var txt_VndCode: HTMLInputElement;
     var txt_VndName: HTMLInputElement;
+    var CheckboxStatus: HTMLInputElement;
     var VndIdfilter;;
     var VendorId: number;
 
@@ -106,6 +107,7 @@ namespace AgingVend {
         btnVnd = document.getElementById("btnVnd") as HTMLButtonElement;
         txt_VndCode = document.getElementById("txt_VndCode") as HTMLInputElement;
         txt_VndName = document.getElementById("txt_VndName") as HTMLInputElement;
+        CheckboxStatus = document.getElementById("CheckboxStatus") as HTMLInputElement;
 
 
         //---------------------------------------------------------------------- Print Buttons
@@ -277,14 +279,7 @@ namespace AgingVend {
         } else {
             rp.CustomerID = VendorId;
         }
-        if ($("#txt_ID_APP_Type").val() == 3) {//-------------جميع الانواع
-
-            rp.Status = 3;
-        }
-        if (Number($("#txt_ID_APP_Type").val()) == 1) {//-------------منفذ 
-            rp.Status = 1;
-
-        }
+ 
 
         if ($("#txt_indebtedness").val() == 0) {//******الجميع 
             rp.BalType = 0;
@@ -302,6 +297,17 @@ namespace AgingVend {
 
             rp.BalType = 3;
         }
+
+
+
+        if (CheckboxStatus.checked == true) {
+            rp.Status = 3;
+        }
+        else {
+            rp.Status = 1;
+        }
+
+
 
         rp.Agtype = 1;
         rp.typedata = 2;
