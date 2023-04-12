@@ -194,6 +194,9 @@
     <Compile Include="Domain\A_D_VAT_TYPE.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\A_G_Vendor.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\A_JOURNAL_DETAIL.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>

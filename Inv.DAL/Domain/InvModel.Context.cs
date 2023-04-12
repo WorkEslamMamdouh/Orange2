@@ -228,6 +228,7 @@ namespace Inv.DAL.Domain
         public virtual DbSet<GQ_GetLnkTransComp> GQ_GetLnkTransComp { get; set; }
         public virtual DbSet<IQ_GetCollectList> IQ_GetCollectList { get; set; }
         public virtual DbSet<A_RecPay_D_Category> A_RecPay_D_Category { get; set; }
+        public virtual DbSet<A_G_Vendor> A_G_Vendor { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
