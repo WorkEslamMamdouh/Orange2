@@ -1578,6 +1578,7 @@
     <Content Include="Views\Inventory\STKOpeningbalanceIndex.cshtml" />
     <Content Include="Views\Login\ErrorIndex.cshtml" />
     <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
+    <Content Include="Views\FundMovement\AccTrReceiptNoteNewIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1630,6 +1631,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\CashBoxAccount.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Clientaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
+    <TypeScriptCompile Include="ClientApp\FundMovement\AccTrReceiptNoteNew.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />

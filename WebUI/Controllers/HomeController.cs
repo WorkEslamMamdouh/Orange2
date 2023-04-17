@@ -294,6 +294,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/FundMovement/AccTrReceiptNoteIndex.cshtml");
         }
+        public ActionResult AccTrReceiptNoteNewIndex()
+        {
+            return View("~/Views/FundMovement/AccTrReceiptNoteNewIndex.cshtml");
+        }
         public ActionResult AccTrPaymentNoteIndex()
         {
             return View("~/Views/FundMovement/AccTrPaymentNoteIndex.cshtml");

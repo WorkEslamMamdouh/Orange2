@@ -31,6 +31,7 @@ var Modules = {
     GenDefVendorAdjust: "GenDefVendorAdjust",
     AccTrInvReceipt: "AccTrInvReceipt",
     AccTrReceiptNote: "AccTrReceiptNote",
+    AccTrReceiptNoteNew: "AccTrReceiptNoteNew",
     AccTrPaymentNote: "AccTrPaymentNote",
     AccTrCustomerAdjust: "AccTrCustomerAdjust",
     AccTrVendorAdjust: "AccTrVendorAdjust",

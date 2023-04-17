@@ -120,6 +120,80 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
 
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetBoxReceiveListNew(int comp, int BenID, int TrType, int? Boxid, int? RecPayTypeId, string Status, string FromDate, string Todate, int? CashType, string UserCode, string Token, string FinYear, string MODULE_CODE, string BranchCode)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+           
+
+                if (Boxid == 0) { Boxid = null; }
+                if (RecPayTypeId == 0) { RecPayTypeId = null; }
+                if (CashType == -1) { CashType = null; }
+                if (Status == "All") { Status = null; }
+
+                string s = "select * from IQ_GetBoxReceiveList where TrType=" + TrType + " and CompCode= " + comp + "";
+                string condition = "";
+
+                if (CashType != null)
+                    condition = condition + " and CashType=" + CashType;
+
+                if (Boxid != null)
+                    condition = condition + " and CashBoxID=" + Boxid;
+                if (RecPayTypeId != null)
+                    condition = condition + " and RecPayTypeId=" + RecPayTypeId;
+                if (BenID != 0)
+                {
+                    if (RecPayTypeId == 1)
+                    {
+                        condition = condition + " and CustomerID =" + BenID;
+                    }
+                    else if (RecPayTypeId == 2)
+                    {
+                        condition = condition + " and VendorID =" + BenID;
+                    }
+                    else if (RecPayTypeId == 3)
+                    {
+                        condition = condition + " and BankAccountCode ='" + BenID + "'";
+                    }
+                    else if (RecPayTypeId == 4)
+                    {
+                        condition = condition + " and ExpenseID =" + BenID;
+                    }
+                    else if (RecPayTypeId == 5)
+                    {
+                        condition = condition + " and FromCashBoxID =" + BenID;
+                    }
+                }
+                if (Status != null)
+                    condition = condition + " and Status=" + Convert.ToInt16(Status);
+                 
+                if (FromDate != "")
+                    condition = condition + " and TrDate>='" + FromDate + "'";
+                if (Todate != "")
+                    condition = condition + " and TrDate<='" + Todate + "'";
+
+                try
+                {
+                    string query = s + condition + " ORDER BY [TrNo] ";
+                    var AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList();
+                    LogUser.InsertPrint(db, comp.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+
+                    return Ok(new BaseResponse(AccTrReceipList));
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
+            }
+            return BadRequest(ModelState);
+        }
+
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetById(int id, string UserCode, string Token)
         {
