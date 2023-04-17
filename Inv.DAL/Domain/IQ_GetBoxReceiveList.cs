@@ -72,5 +72,26 @@ namespace Inv.DAL.Domain
         public Nullable<int> CashType { get; set; }
         public string Bnk_acc_DescE { get; set; }
         public string ACC_DESCL { get; set; }
+        public Nullable<decimal> Charges { get; set; }
+        public Nullable<decimal> ChargeProviderID { get; set; }
+        public Nullable<decimal> ChargesVat { get; set; }
+        public Nullable<decimal> ChargeWithVat { get; set; }
+        public Nullable<int> ChargeVatType { get; set; }
+        public Nullable<decimal> ChargesVatPrc { get; set; }
+        public string ProviderName { get; set; }
+        public Nullable<int> ProviderID { get; set; }
+        public string ProviderVatNo { get; set; }
+        public Nullable<int> ProviderVatType { get; set; }
+        public Nullable<int> ProviderVatPrc { get; set; }
+        public Nullable<decimal> ProviderVatAmount { get; set; }
+        public string ProviderInvoiceNo { get; set; }
+        public Nullable<System.DateTime> ProviderIndDate { get; set; }
+        public Nullable<decimal> ProviderAmountBeforeVat { get; set; }
+        public string CC_Code { get; set; }
+        public string ChrgPrv_NameA { get; set; }
+        public string Chrgprv_NameE { get; set; }
+        public string Prov_Code { get; set; }
+        public string Prov_NameA { get; set; }
+        public string Prov_NameE { get; set; }
     }
 }

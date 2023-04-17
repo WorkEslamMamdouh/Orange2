@@ -127,6 +127,18 @@
           <Property Name="VatPerc" Type="numeric" Precision="18" Scale="2" />
           <Property Name="LineOrder" Type="int" />
         </EntityType>
+        <EntityType Name="A_G_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorCode" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="NAMEA" Type="nvarchar" MaxLength="100" />
+          <Property Name="NAMEL" Type="nvarchar" MaxLength="100" />
+          <Property Name="VATType" Type="tinyint" />
+          <Property Name="VATNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="A_JOURNAL_DETAIL">
           <Key>
             <PropertyRef Name="VoucherDetailID" />
@@ -560,6 +572,22 @@
           <Property Name="IsDeffered" Type="bit" />
           <Property Name="DueDate" Type="smalldatetime" />
           <Property Name="CashType" Type="int" />
+          <Property Name="Charges" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeProviderID" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargesVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeWithVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeVatType" Type="int" />
+          <Property Name="ChargesVatPrc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="ProviderName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProviderVatNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProviderVatType" Type="int" />
+          <Property Name="ProviderVatPrc" Type="int" />
+          <Property Name="ProviderVatAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ProviderInvoiceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProviderIndDate" Type="smalldatetime" />
+          <Property Name="ProviderAmountBeforeVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="A_TmpVoucherProcess">
           <Key>
@@ -4407,6 +4435,27 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetBoxReceiveList' does not have
           <Property Name="CashType" Type="int" />
           <Property Name="Bnk_acc_DescE" Type="nvarchar" MaxLength="100" />
           <Property Name="ACC_DESCL" Type="nvarchar" MaxLength="100" />
+          <Property Name="Charges" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeProviderID" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargesVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeWithVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ChargeVatType" Type="int" />
+          <Property Name="ChargesVatPrc" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ProviderName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="ProviderVatNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ProviderVatType" Type="int" />
+          <Property Name="ProviderVatPrc" Type="int" />
+          <Property Name="ProviderVatAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ProviderInvoiceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProviderIndDate" Type="smalldatetime" />
+          <Property Name="ProviderAmountBeforeVat" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="ChrgPrv_NameA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Chrgprv_NameE" Type="nvarchar" MaxLength="100" />
+          <Property Name="Prov_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="Prov_NameA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Prov_NameE" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetCollectDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7689,6 +7738,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="A_CCDT_COSTCENTERS" EntityType="Self.A_CCDT_COSTCENTERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_CCDT_Types" EntityType="Self.A_CCDT_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_D_VAT_TYPE" EntityType="Self.A_D_VAT_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_G_Vendor" EntityType="Self.A_G_Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_DETAIL" EntityType="Self.A_JOURNAL_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_HEADER" EntityType="Self.A_JOURNAL_HEADER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Pay_D_Vendor" EntityType="Self.A_Pay_D_Vendor" Schema="dbo" store:Type="Tables" />
@@ -8914,7 +8964,28 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetBoxReceiveList].[DueDate] AS [DueDate], 
     [IQ_GetBoxReceiveList].[CashType] AS [CashType], 
     [IQ_GetBoxReceiveList].[Bnk_acc_DescE] AS [Bnk_acc_DescE], 
-    [IQ_GetBoxReceiveList].[ACC_DESCL] AS [ACC_DESCL]
+    [IQ_GetBoxReceiveList].[ACC_DESCL] AS [ACC_DESCL], 
+    [IQ_GetBoxReceiveList].[Charges] AS [Charges], 
+    [IQ_GetBoxReceiveList].[ChargeProviderID] AS [ChargeProviderID], 
+    [IQ_GetBoxReceiveList].[ChargesVat] AS [ChargesVat], 
+    [IQ_GetBoxReceiveList].[ChargeWithVat] AS [ChargeWithVat], 
+    [IQ_GetBoxReceiveList].[ChargeVatType] AS [ChargeVatType], 
+    [IQ_GetBoxReceiveList].[ChargesVatPrc] AS [ChargesVatPrc], 
+    [IQ_GetBoxReceiveList].[ProviderName] AS [ProviderName], 
+    [IQ_GetBoxReceiveList].[ProviderID] AS [ProviderID], 
+    [IQ_GetBoxReceiveList].[ProviderVatNo] AS [ProviderVatNo], 
+    [IQ_GetBoxReceiveList].[ProviderVatType] AS [ProviderVatType], 
+    [IQ_GetBoxReceiveList].[ProviderVatPrc] AS [ProviderVatPrc], 
+    [IQ_GetBoxReceiveList].[ProviderVatAmount] AS [ProviderVatAmount], 
+    [IQ_GetBoxReceiveList].[ProviderInvoiceNo] AS [ProviderInvoiceNo], 
+    [IQ_GetBoxReceiveList].[ProviderIndDate] AS [ProviderIndDate], 
+    [IQ_GetBoxReceiveList].[ProviderAmountBeforeVat] AS [ProviderAmountBeforeVat], 
+    [IQ_GetBoxReceiveList].[CC_Code] AS [CC_Code], 
+    [IQ_GetBoxReceiveList].[ChrgPrv_NameA] AS [ChrgPrv_NameA], 
+    [IQ_GetBoxReceiveList].[Chrgprv_NameE] AS [Chrgprv_NameE], 
+    [IQ_GetBoxReceiveList].[Prov_Code] AS [Prov_Code], 
+    [IQ_GetBoxReceiveList].[Prov_NameA] AS [Prov_NameA], 
+    [IQ_GetBoxReceiveList].[Prov_NameE] AS [Prov_NameE]
     FROM [dbo].[IQ_GetBoxReceiveList] AS [IQ_GetBoxReceiveList]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetCollectDetail" EntityType="Self.IQ_GetCollectDetail" store:Type="Views" store:Schema="dbo">
@@ -12189,6 +12260,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="A_RecPay_D_Category" EntityType="InvModel.A_RecPay_D_Category" />
+          <EntitySet Name="A_G_Vendor" EntityType="InvModel.A_G_Vendor" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -12388,6 +12460,22 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsDeffered" Type="Boolean" />
           <Property Name="DueDate" Type="DateTime" Precision="0" />
           <Property Name="CashType" Type="Int32" />
+          <Property Name="Charges" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeProviderID" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargesVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeWithVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeVatType" Type="Int32" />
+          <Property Name="ChargesVatPrc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="ProviderName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderVatNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderVatType" Type="Int32" />
+          <Property Name="ProviderVatPrc" Type="Int32" />
+          <Property Name="ProviderVatAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProviderInvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderIndDate" Type="DateTime" Precision="0" />
+          <Property Name="ProviderAmountBeforeVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="G_AlertControl">
           <Key>
@@ -13559,6 +13647,27 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="CashType" Type="Int32" />
           <Property Name="Bnk_acc_DescE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ACC_DESCL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Charges" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeProviderID" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargesVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeWithVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ChargeVatType" Type="Int32" />
+          <Property Name="ChargesVatPrc" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProviderName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="ProviderVatNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderVatType" Type="Int32" />
+          <Property Name="ProviderVatPrc" Type="Int32" />
+          <Property Name="ProviderVatAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProviderInvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderIndDate" Type="DateTime" Precision="0" />
+          <Property Name="ProviderAmountBeforeVat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ChrgPrv_NameA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Chrgprv_NameE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prov_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Prov_NameA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prov_NameE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="IQ_GetPurChargeInfo">
           <Key>
@@ -22974,6 +23083,18 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="CodePrefex" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="LastNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="A_G_Vendor">
+          <Key>
+            <PropertyRef Name="VendorID" />
+          </Key>
+          <Property Name="VendorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="NAMEA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMEL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VATType" Type="Byte" />
+          <Property Name="VATNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23147,6 +23268,22 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="A_RecPay_Tr_ReceiptNote">
             <EntityTypeMapping TypeName="InvModel.A_RecPay_Tr_ReceiptNote">
               <MappingFragment StoreEntitySet="A_RecPay_Tr_ReceiptNote">
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="ProviderAmountBeforeVat" ColumnName="ProviderAmountBeforeVat" />
+                <ScalarProperty Name="ProviderIndDate" ColumnName="ProviderIndDate" />
+                <ScalarProperty Name="ProviderInvoiceNo" ColumnName="ProviderInvoiceNo" />
+                <ScalarProperty Name="ProviderVatAmount" ColumnName="ProviderVatAmount" />
+                <ScalarProperty Name="ProviderVatPrc" ColumnName="ProviderVatPrc" />
+                <ScalarProperty Name="ProviderVatType" ColumnName="ProviderVatType" />
+                <ScalarProperty Name="ProviderVatNo" ColumnName="ProviderVatNo" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ChargesVatPrc" ColumnName="ChargesVatPrc" />
+                <ScalarProperty Name="ChargeVatType" ColumnName="ChargeVatType" />
+                <ScalarProperty Name="ChargeWithVat" ColumnName="ChargeWithVat" />
+                <ScalarProperty Name="ChargesVat" ColumnName="ChargesVat" />
+                <ScalarProperty Name="ChargeProviderID" ColumnName="ChargeProviderID" />
+                <ScalarProperty Name="Charges" ColumnName="Charges" />
                 <ScalarProperty Name="CashType" ColumnName="CashType" />
                 <ScalarProperty Name="DueDate" ColumnName="DueDate" />
                 <ScalarProperty Name="IsDeffered" ColumnName="IsDeffered" />
@@ -24284,6 +24421,27 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetBoxReceiveList">
             <EntityTypeMapping TypeName="InvModel.IQ_GetBoxReceiveList">
               <MappingFragment StoreEntitySet="IQ_GetBoxReceiveList">
+                <ScalarProperty Name="Prov_NameE" ColumnName="Prov_NameE" />
+                <ScalarProperty Name="Prov_NameA" ColumnName="Prov_NameA" />
+                <ScalarProperty Name="Prov_Code" ColumnName="Prov_Code" />
+                <ScalarProperty Name="Chrgprv_NameE" ColumnName="Chrgprv_NameE" />
+                <ScalarProperty Name="ChrgPrv_NameA" ColumnName="ChrgPrv_NameA" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="ProviderAmountBeforeVat" ColumnName="ProviderAmountBeforeVat" />
+                <ScalarProperty Name="ProviderIndDate" ColumnName="ProviderIndDate" />
+                <ScalarProperty Name="ProviderInvoiceNo" ColumnName="ProviderInvoiceNo" />
+                <ScalarProperty Name="ProviderVatAmount" ColumnName="ProviderVatAmount" />
+                <ScalarProperty Name="ProviderVatPrc" ColumnName="ProviderVatPrc" />
+                <ScalarProperty Name="ProviderVatType" ColumnName="ProviderVatType" />
+                <ScalarProperty Name="ProviderVatNo" ColumnName="ProviderVatNo" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ChargesVatPrc" ColumnName="ChargesVatPrc" />
+                <ScalarProperty Name="ChargeVatType" ColumnName="ChargeVatType" />
+                <ScalarProperty Name="ChargeWithVat" ColumnName="ChargeWithVat" />
+                <ScalarProperty Name="ChargesVat" ColumnName="ChargesVat" />
+                <ScalarProperty Name="ChargeProviderID" ColumnName="ChargeProviderID" />
+                <ScalarProperty Name="Charges" ColumnName="Charges" />
                 <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
                 <ScalarProperty Name="Bnk_acc_DescE" ColumnName="Bnk_acc_DescE" />
                 <ScalarProperty Name="CashType" ColumnName="CashType" />
@@ -34183,6 +34341,19 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="CatCode" ColumnName="CatCode" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
                 <ScalarProperty Name="CatID" ColumnName="CatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_G_Vendor">
+            <EntityTypeMapping TypeName="InvModel.A_G_Vendor">
+              <MappingFragment StoreEntitySet="A_G_Vendor">
+                <ScalarProperty Name="VATNo" ColumnName="VATNo" />
+                <ScalarProperty Name="VATType" ColumnName="VATType" />
+                <ScalarProperty Name="NAMEL" ColumnName="NAMEL" />
+                <ScalarProperty Name="NAMEA" ColumnName="NAMEA" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
