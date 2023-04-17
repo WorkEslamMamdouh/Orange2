@@ -18,16 +18,7 @@ namespace AccTrReceiptNoteNew {
     var ReportGrid: JsGrid = new JsGrid(); 
     var Details: Array<IQ_GetBoxReceiveList> = new Array<IQ_GetBoxReceiveList>(); 
     var Model: A_RecPay_Tr_ReceiptNote = new A_RecPay_Tr_ReceiptNote();
-
      
-    var btnBack: HTMLButtonElement;
-    var btnShow: HTMLButtonElement;
-    var btnAdd: HTMLButtonElement;
-    var btnUpdate: HTMLButtonElement;
-    var btnSave: HTMLButtonElement; 
-    var btnBenF: HTMLButtonElement;
-    var btnBenH: HTMLButtonElement;
-
     var searchbutmemreport: HTMLInputElement; 
     var txt_BenCodeF: HTMLInputElement;
     var txt_BenCodeH: HTMLInputElement; 
@@ -37,8 +28,7 @@ namespace AccTrReceiptNoteNew {
     var txtDateTo: HTMLInputElement;
     var chkStatus: HTMLInputElement;
     var chkIsDeffered: HTMLInputElement;
-
-
+     
     var txtCashTypeF: HTMLSelectElement;
     var txtCashTypeH: HTMLSelectElement;
     var txt_ReceiptNoteF: HTMLSelectElement;
@@ -48,16 +38,14 @@ namespace AccTrReceiptNoteNew {
     var txt_D_CashBoxF: HTMLSelectElement;
     var txt_D_CashBoxH: HTMLSelectElement;
 
-
-    var Flag_IsNew = false;
-    //------------------------------------------------------------------------------------------------
-
-     
-     
-    //////////////////////////////////////////print buttons////////////////////////////////////////////
-
-
-
+    var btnBack: HTMLButtonElement;
+    var btnShow: HTMLButtonElement;
+    var btnAdd: HTMLButtonElement;
+    var btnUpdate: HTMLButtonElement;
+    var btnSave: HTMLButtonElement;
+    var btnBenF: HTMLButtonElement;
+    var btnBenH: HTMLButtonElement;
+    //////////////////////////////////////////print buttons////////////////////////////////////////////     
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
     var btnPrintTrEXEL: HTMLButtonElement;
@@ -66,17 +54,11 @@ namespace AccTrReceiptNoteNew {
     var btnPrintslip: HTMLButtonElement;
     var btnPrintsFrom_To: HTMLButtonElement;
 
+    var Flag_IsNew = false;
 
     export function InitalizeComponent() {
-
-        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "سند " + Name_Not + "";
-
-        } else {
-            document.getElementById('Screen_name').innerHTML = "" + Name_Not + "";
-
-        }
          
+        document.getElementById('Screen_name').innerHTML = (lang == "ar" ? "سند " + Name_Not + "" : " " + Name_Not + "");         
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -85,7 +67,6 @@ namespace AccTrReceiptNoteNew {
         fillddlCashBox();
         fillddlG_Codes();
         fillddlAcount_Code();
-
     }
     function InitalizeControls() {
         ////////  
@@ -119,9 +100,7 @@ namespace AccTrReceiptNoteNew {
         txt_Status = document.getElementById("txt_Status") as HTMLSelectElement;
 
         //---------------------------------------------------------------------------------------------------
-         
-
-
+          
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
@@ -253,8 +232,7 @@ namespace AccTrReceiptNoteNew {
 
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
-                     
-
+                      
                 }
             }
         });
@@ -296,8 +274,7 @@ namespace AccTrReceiptNoteNew {
         if ($('#txt_ReceiptNote' + Type).val() == "4") { getAccountAccById(Type, $('#txt_BenCode' + Type).val(), true); }
         if ($('#txt_ReceiptNote' + Type).val() == "5") { getAccountBoxById(Type, $('#txt_BenCode' + Type).val(), true); }
          
-    }
-     
+    } 
     function btnShow_onclick() {
 
         let BenID = Number($('#txt_BenIDF').val())
@@ -828,9 +805,7 @@ namespace AccTrReceiptNoteNew {
             }
         });
 
-    }
-
-
+    } 
     //***************************************************************************Print*********************************************************     
     export function PrintReport(OutType: number) {
         // 
@@ -964,6 +939,5 @@ namespace AccTrReceiptNoteNew {
             }
         })
     }
-
-
+     
 } 

@@ -14,13 +14,6 @@ var AccTrReceiptNoteNew;
     var ReportGrid = new JsGrid();
     var Details = new Array();
     var Model = new A_RecPay_Tr_ReceiptNote();
-    var btnBack;
-    var btnShow;
-    var btnAdd;
-    var btnUpdate;
-    var btnSave;
-    var btnBenF;
-    var btnBenH;
     var searchbutmemreport;
     var txt_BenCodeF;
     var txt_BenCodeH;
@@ -38,9 +31,14 @@ var AccTrReceiptNoteNew;
     var txt_Status;
     var txt_D_CashBoxF;
     var txt_D_CashBoxH;
-    var Flag_IsNew = false;
-    //------------------------------------------------------------------------------------------------
-    //////////////////////////////////////////print buttons////////////////////////////////////////////
+    var btnBack;
+    var btnShow;
+    var btnAdd;
+    var btnUpdate;
+    var btnSave;
+    var btnBenF;
+    var btnBenH;
+    //////////////////////////////////////////print buttons////////////////////////////////////////////     
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
@@ -48,13 +46,9 @@ var AccTrReceiptNoteNew;
     var btnSend;
     var btnPrintslip;
     var btnPrintsFrom_To;
+    var Flag_IsNew = false;
     function InitalizeComponent() {
-        if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
-            document.getElementById('Screen_name').innerHTML = "سند " + Name_Not + "";
-        }
-        else {
-            document.getElementById('Screen_name').innerHTML = "" + Name_Not + "";
-        }
+        document.getElementById('Screen_name').innerHTML = (lang == "ar" ? "سند " + Name_Not + "" : " " + Name_Not + "");
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
