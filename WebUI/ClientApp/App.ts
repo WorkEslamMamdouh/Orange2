@@ -2621,15 +2621,10 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     let rp: ReportParameters = new ReportParameters();
 
 
-    $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
-    $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
+    //$('#btnPrintsFrom_To').attr('style', 'width: 104%;')
+    //$('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
 
-    setTimeout(function () {
-
-        $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
-        $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
-        $('#btnPrintsFrom_To').attr('disabled', 'disabled')
-    }, 200);
+ 
 
 
     rp.CompCode = SysSession.CompCode;
@@ -2662,14 +2657,22 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
     rp.FinYear = Number(SysSession.CurrentYear);
 
+
+
+    $('#btnPrintsFrom_To').attr('style', 'width: 104%;')
+    $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+    $('#btnPrintsFrom_To').attr('disabled', 'disabled')
+
+    setTimeout(function () {
+         
     Ajax.CallAsync({
         url: Url.Action("Prnt_From_To", "GeneralRep"),
         data: rp,
         success: (d) => {
-
+            
             let result = d;
             $('#btnPrintsFrom_To').attr('style', '')
-            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
+            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية ');
             $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
@@ -2691,7 +2694,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
 
         }
     })
-
+    }, 150);
     return '';
 }
 

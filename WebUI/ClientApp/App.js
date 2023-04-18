@@ -2038,13 +2038,8 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
     }
     var SysSession = GetSystemEnvironment();
     var rp = new ReportParameters();
-    $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
-    $('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
-    setTimeout(function () {
-        $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
-        $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
-        $('#btnPrintsFrom_To').attr('disabled', 'disabled');
-    }, 200);
+    //$('#btnPrintsFrom_To').attr('style', 'width: 104%;')
+    //$('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
     rp.CompCode = SysSession.CompCode;
     rp.BranchCode = SysSession.BranchCode;
     rp.CompNameA = SysSession.CompanyNameAr;
@@ -2069,23 +2064,28 @@ function PrintsFrom_To(Type_Trans, Name_ID, NameTable, Condation, length) {
         rp.Repdesign = 2;
     }
     rp.FinYear = Number(SysSession.CurrentYear);
-    Ajax.CallAsync({
-        url: Url.Action("Prnt_From_To", "GeneralRep"),
-        data: rp,
-        success: function (d) {
-            var result = d;
-            $('#btnPrintsFrom_To').attr('style', '');
-            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية PDF');
-            $('#btnPrintsFrom_To').removeAttr('disabled');
-            //alert(result);
-            //
-            //window.open(result, "blank");
-            var x = Url.Action("OpenPdfS", "Home");
-            var UrlPdf = x + "/" + "?" + "path=" + result + "";
-            window.open(UrlPdf, "blank");
-            return result;
-        }
-    });
+    $('#btnPrintsFrom_To').attr('style', 'width: 104%;');
+    $('#btnPrintsFrom_To').html(' جاري تنزيل الفواتير <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195% !important;z-index: 99999;"></i>');
+    $('#btnPrintsFrom_To').attr('disabled', 'disabled');
+    setTimeout(function () {
+        Ajax.CallAsync({
+            url: Url.Action("Prnt_From_To", "GeneralRep"),
+            data: rp,
+            success: function (d) {
+                var result = d;
+                $('#btnPrintsFrom_To').attr('style', '');
+                $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية ');
+                $('#btnPrintsFrom_To').removeAttr('disabled');
+                //alert(result);
+                //
+                //window.open(result, "blank");
+                var x = Url.Action("OpenPdfS", "Home");
+                var UrlPdf = x + "/" + "?" + "path=" + result + "";
+                window.open(UrlPdf, "blank");
+                return result;
+            }
+        });
+    }, 150);
     return '';
 }
 function GetSerialNumber() {
