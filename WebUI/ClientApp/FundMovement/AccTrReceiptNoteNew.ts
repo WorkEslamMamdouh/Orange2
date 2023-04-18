@@ -4,7 +4,6 @@ $(document).ready(() => {
 })
 
 namespace AccTrReceiptNoteNew {
-
     var sys: SystemTools = new SystemTools();
     var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNote);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -57,11 +56,8 @@ namespace AccTrReceiptNoteNew {
     var btnSend: HTMLButtonElement;
     var btnPrintslip: HTMLButtonElement;
     var btnPrintsFrom_To: HTMLButtonElement;
-
     var Flag_IsNew = false;
-
     export function InitalizeComponent() {
-         
         document.getElementById('Screen_name').innerHTML = (lang == "ar" ? "سند " + Name_Not + "" : " " + Name_Not + "");         
         InitalizeControls();
         InitalizeEvents();
@@ -73,22 +69,22 @@ namespace AccTrReceiptNoteNew {
         fillddlAcount_Code();
     }
     function InitalizeControls() {
-        ////////  
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnBenF = document.getElementById("btnBenF") as HTMLButtonElement;
+        btnBenH = document.getElementById("btnBenH") as HTMLButtonElement;
         ////////  
         txtCashTypeF = document.getElementById("txtCashTypeF") as HTMLSelectElement;
         txtCashTypeH = document.getElementById("txtCashTypeH") as HTMLSelectElement;
         txt_ReceiptNoteF = document.getElementById("txt_ReceiptNoteF") as HTMLSelectElement;
         txt_ReceiptNoteH = document.getElementById("txt_ReceiptNoteH") as HTMLSelectElement;
         txt_D_CashBoxH = document.getElementById("txt_D_CashBoxH") as HTMLSelectElement;
-        txt_D_CashBoxF = document.getElementById("txt_D_CashBoxF") as HTMLSelectElement;
-        ////////  
-        btnBenF = document.getElementById("btnBenF") as HTMLButtonElement;
-        btnBenH = document.getElementById("btnBenH") as HTMLButtonElement;
+        txt_D_CashBoxF = document.getElementById("txt_D_CashBoxF") as HTMLSelectElement; 
+        txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code") as HTMLSelectElement;
+        txt_Status = document.getElementById("txt_Status") as HTMLSelectElement;
         ////////
         txt_BenCodeF = document.getElementById("txt_BenCodeF") as HTMLInputElement;
         txt_BenCodeH = document.getElementById("txt_BenCodeH") as HTMLInputElement;
@@ -102,61 +98,44 @@ namespace AccTrReceiptNoteNew {
         chkIsDeffered = document.getElementById("chkIsDeffered") as HTMLInputElement;
         searchbutmemreport = document.getElementById("searchbutmemreport") as HTMLInputElement;
         txtDateFrom = document.getElementById("txtDateFrom") as HTMLInputElement;
-        txtDateTo = document.getElementById("txtDateTo") as HTMLInputElement;
-
-        txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code") as HTMLSelectElement;
-        txt_Status = document.getElementById("txt_Status") as HTMLSelectElement;
-
-        //---------------------------------------------------------------------------------------------------
-          
+        txtDateTo = document.getElementById("txtDateTo") as HTMLInputElement; 
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL") as HTMLButtonElement;
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
-        btnSend = document.getElementById("btnSend") as HTMLButtonElement;
-        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
+        btnSend = document.getElementById("btnSend") as HTMLButtonElement; 
         btnPrintslip = document.getElementById("btnPrintslip") as HTMLButtonElement;
-        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement;
-         
+        btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To") as HTMLButtonElement; 
     }
-    function InitalizeEvents() {
-        //////  
+    function InitalizeEvents() { 
         //********************************Btn****************************
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnUpdate.onclick = btnUpdate_onclick;
-
+        btnUpdate.onclick = btnUpdate_onclick; 
         btnBenF.onclick = () => { btnBen_onclick('F') }
         btnBenH.onclick = () => { btnBen_onclick('H') }
-
+        //********************************onchange****************************
         txt_BenCodeF.onchange = () => { BenCode_onchange('F') }
-        txt_BenCodeH.onchange = () => { BenCode_onchange('H') }
-
+        txt_BenCodeH.onchange = () => { BenCode_onchange('H') } 
         txt_ReceiptNoteF.onchange = () => { CleanBen('F')}
-        txt_ReceiptNoteH.onchange = () => { CleanBen('H') }
-
+        txt_ReceiptNoteH.onchange = () => { CleanBen('H') } 
         txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
-        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
-
+        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); } 
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
-        chkStatus.onchange = chkStatus_onchange;
-
+        chkStatus.onchange = chkStatus_onchange; 
         //*******************************print*****************************
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         btnPrintTransaction.onclick = PrintTransaction;
-        btnPrintslip.onclick = btnPrintslip_onclick;
-
-
+        btnPrintslip.onclick = btnPrintslip_onclick; 
     } 
-    function InitializeGrid() {
-         
+    function InitializeGrid() { 
         let res: any = GetResourceList("");  
         ReportGrid.OnRowDoubleClicked = GridDoubleClick;
         ReportGrid.ElementName = "ReportGrid";
@@ -199,14 +178,12 @@ namespace AccTrReceiptNoteNew {
         ReportGrid.Bind();
     }
     //************************************************fillddl**************************************
-    function fillddlCashBox() {
-        //// 
+    function fillddlCashBox() { 
         let CashBoxID = 0;
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
 
             CashBoxID = SysSession.CurrentEnvironment.CashBoxID == null ? 0 : SysSession.CurrentEnvironment.CashBoxID;
-        }
-
+        } 
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefBox", "GetAllRec"),
@@ -215,13 +192,9 @@ namespace AccTrReceiptNoteNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) { 
                     let fillModel_CashBox = result.Response as Array<A_RecPay_D_CashBox>;
-                    let box = fillModel_CashBox.filter(x => x.BranchCode == BranchCode)
-
-                    DocumentActions.FillCombowithdefult(box, txt_D_CashBoxF, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
-                     
-                    DocumentActions.FillCombowithdefult(fillModel_CashBox, txt_D_CashBoxH, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
-                     
-
+                    let box = fillModel_CashBox.filter(x => x.BranchCode == BranchCode) 
+                    DocumentActions.FillCombowithdefult(box, txt_D_CashBoxF, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));                     
+                    DocumentActions.FillCombowithdefult(fillModel_CashBox, txt_D_CashBoxH, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));                      
                 }
             }
         });
@@ -276,8 +249,7 @@ namespace AccTrReceiptNoteNew {
         if ($('#txt_ReceiptNote' + Type).val() == "2") { BenVnd(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "3") { BenBank(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "4") { BenAcc(Type); }
-        if ($('#txt_ReceiptNote' + Type).val() == "5") { BenBox(Type); }
-
+        if ($('#txt_ReceiptNote' + Type).val() == "5") { BenBox(Type); } 
     }
     function BenCode_onchange(Type: string) {
         debugger
@@ -1007,8 +979,7 @@ namespace AccTrReceiptNoteNew {
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     } 
-    function btnPrintslip_onclick() {
-
+    function btnPrintslip_onclick() { 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
@@ -1045,5 +1016,4 @@ namespace AccTrReceiptNoteNew {
             }
         })
     }
-     
 } 

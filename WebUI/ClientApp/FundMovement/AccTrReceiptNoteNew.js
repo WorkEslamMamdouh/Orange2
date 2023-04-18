@@ -64,12 +64,13 @@ var AccTrReceiptNoteNew;
     }
     AccTrReceiptNoteNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
-        ////////  
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
         btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
+        btnBenF = document.getElementById("btnBenF");
+        btnBenH = document.getElementById("btnBenH");
         ////////  
         txtCashTypeF = document.getElementById("txtCashTypeF");
         txtCashTypeH = document.getElementById("txtCashTypeH");
@@ -77,9 +78,8 @@ var AccTrReceiptNoteNew;
         txt_ReceiptNoteH = document.getElementById("txt_ReceiptNoteH");
         txt_D_CashBoxH = document.getElementById("txt_D_CashBoxH");
         txt_D_CashBoxF = document.getElementById("txt_D_CashBoxF");
-        ////////  
-        btnBenF = document.getElementById("btnBenF");
-        btnBenH = document.getElementById("btnBenH");
+        txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code");
+        txt_Status = document.getElementById("txt_Status");
         ////////
         txt_BenCodeF = document.getElementById("txt_BenCodeF");
         txt_BenCodeH = document.getElementById("txt_BenCodeH");
@@ -94,21 +94,16 @@ var AccTrReceiptNoteNew;
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtDateFrom = document.getElementById("txtDateFrom");
         txtDateTo = document.getElementById("txtDateTo");
-        txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code");
-        txt_Status = document.getElementById("txt_Status");
-        //---------------------------------------------------------------------------------------------------
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
         btnPrintTrEXEL = document.getElementById("btnPrintTrEXEL");
         btnPrintTransaction = document.getElementById("btnPrintTransaction");
         btnSend = document.getElementById("btnSend");
-        //btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
         btnPrintslip = document.getElementById("btnPrintslip");
         btnPrintsFrom_To = document.getElementById("btnPrintsFrom_To");
     }
     function InitalizeEvents() {
-        //////  
         //********************************Btn****************************
         btnShow.onclick = btnShow_onclick;
         btnAdd.onclick = btnAdd_onclick;
@@ -117,6 +112,7 @@ var AccTrReceiptNoteNew;
         btnUpdate.onclick = btnUpdate_onclick;
         btnBenF.onclick = function () { btnBen_onclick('F'); };
         btnBenH.onclick = function () { btnBen_onclick('H'); };
+        //********************************onchange****************************
         txt_BenCodeF.onchange = function () { BenCode_onchange('F'); };
         txt_BenCodeH.onchange = function () { BenCode_onchange('H'); };
         txt_ReceiptNoteF.onchange = function () { CleanBen('F'); };
@@ -178,7 +174,6 @@ var AccTrReceiptNoteNew;
     }
     //************************************************fillddl**************************************
     function fillddlCashBox() {
-        //// 
         var CashBoxID = 0;
         if (SysSession.CurrentEnvironment.UserType == 2 || SysSession.CurrentEnvironment.UserType == 3) {
             CashBoxID = SysSession.CurrentEnvironment.CashBoxID == null ? 0 : SysSession.CurrentEnvironment.CashBoxID;
