@@ -23,6 +23,10 @@ var AccTrReceiptNoteNew;
     var txtDateTo;
     var chkStatus;
     var chkIsDeffered;
+    var txt_CashAmount;
+    var txt_CardAmount;
+    var txt_Amount;
+    var txt_note;
     var txtCashTypeF;
     var txtCashTypeH;
     var txt_ReceiptNoteF;
@@ -79,6 +83,10 @@ var AccTrReceiptNoteNew;
         ////////
         txt_BenCodeF = document.getElementById("txt_BenCodeF");
         txt_BenCodeH = document.getElementById("txt_BenCodeH");
+        txt_CashAmount = document.getElementById("txt_CashAmount");
+        txt_CardAmount = document.getElementById("txt_CardAmount");
+        txt_Amount = document.getElementById("txt_Amount");
+        txt_note = document.getElementById("txt_note");
         txtTrDate = document.getElementById("txtTrDate");
         txtDueDate = document.getElementById("txtDueDate");
         chkStatus = document.getElementById("chkStatus");
@@ -113,7 +121,11 @@ var AccTrReceiptNoteNew;
         txt_BenCodeH.onchange = function () { BenCode_onchange('H'); };
         txt_ReceiptNoteF.onchange = function () { CleanBen('F'); };
         txt_ReceiptNoteH.onchange = function () { CleanBen('H'); };
+        txt_CashAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); };
+        txt_CardAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); };
         searchbutmemreport.onkeyup = _SearchBox_Change;
+        txtCashTypeH.onchange = txtCashTypeH_onchange;
+        chkIsDeffered.onchange = chkIsDeffered_onchange;
         //*******************************print*****************************
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
@@ -345,6 +357,46 @@ var AccTrReceiptNoteNew;
             ReportGrid.Bind();
         }
     }
+    function txtCashTypeH_onchange() {
+        if (txtCashTypeH.value == '0') {
+            $('#Bank_Div').addClass('display_none');
+            $('#La_CashAmount').removeClass('display_none');
+            $('#La_CardAmount').removeClass('display_none');
+            $('#txt_CashAmount').removeClass('display_none');
+            $('#txt_CardAmount').removeClass('display_none');
+            $('#txt_CheckNo').val('');
+            $('#txt_TransferNo').val('');
+            $('#txt_CardAmount').val('0');
+            $('#txt_CashAmount').val('0');
+            $('#txt_Amount').val('');
+            $('#txt_BankName').val('');
+            $('#txt_BankAcc_Code').val('null');
+            chkIsDeffered.checked = false;
+            txtDueDate.value = GetDate();
+            $('#txt_Amount').attr('disabled', 'disabled');
+        }
+        else {
+            $('#Bank_Div').removeClass('display_none');
+            $('#La_CashAmount').addClass('display_none');
+            $('#La_CardAmount').addClass('display_none');
+            $('#txt_CashAmount').addClass('display_none');
+            $('#txt_CardAmount').addClass('display_none');
+            $('#txt_TransferNo').removeClass('display_none');
+            $('#txt_CheckNo').addClass('display_none');
+            $('#txt_CashAmount').val('0');
+            $('#txt_CardAmount').val('0');
+            $('#txt_Amount').removeAttr('disabled');
+            $('#txtDueDate').attr('disabled', 'disabled');
+        }
+    }
+    function chkIsDeffered_onchange() {
+        if (chkIsDeffered.checked == true) {
+            txt_note.disabled == false ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
+        }
+        else {
+            $('#txtDueDate').attr('disabled', 'disabled');
+        }
+    }
     //****************************************************Customer*********************************************
     function BenCust(Type) {
         var cond = Type == 'H' ? "and Isactive = 1" : "";
@@ -572,14 +624,15 @@ var AccTrReceiptNoteNew;
         $('#Div_control').removeClass('display_none');
         CleanBen('H');
         $("#Div_control :input").val("");
-        txt_D_CashBoxH.value = 'null';
-        txtCashTypeH.value = 'null';
+        txt_D_CashBoxH.selectedIndex = 1;
+        txtCashTypeH.value = '0';
         txt_ReceiptNoteH.value = 'null';
         txt_BankAcc_Code.value = 'null';
         txtTrDate.value = GetDate();
         txtDueDate.value = GetDate();
         chkIsDeffered.checked = false;
         chkStatus.checked = false;
+        txtCashTypeH_onchange();
     }
     //****************************************************DisplayDetails*********************************************
     function GridDoubleClick() {
@@ -612,68 +665,58 @@ var AccTrReceiptNoteNew;
     }
     //****************************************************Validation*********************************************
     function Validation() {
-        //if (txtCashTypeNew.selectedIndex == 0) {
-        //    DisplayMassage("يجب اختيار نوع القيد ", "Choose the type of constraint", MessageType.Worning);
-        //    Errorinput(txtCashTypeNew);
-        //    return false;
-        //}
-        //if (txt_ReceiptNoteNew.selectedIndex == 0) {
-        //    DisplayMassage("يجب اختيار نوع الاستلام ", " The type of receipt must be selected", MessageType.Worning);
-        //    Errorinput(txt_ReceiptNoteNew);
-        //    return false;
-        //}
-        ////if (txt_ID_beneficiaryNew.selectedIndex == 0) {
-        ////    DisplayMassage("يجب اختيار المستفيد ", "The beneficiary must be chosen", MessageType.Worning);
-        ////    Errorinput(txt_ID_beneficiaryNew);
-        ////    return false;
-        ////}
-        //if (txt_BenCode.value == "") {
-        //    DisplayMassage("يجب اختيار المستفيد ", "The beneficiary must be chosen", MessageType.Worning);
-        //    Errorinput(txt_BenCode);
-        //    return false;
-        //}
-        //if (txtDateNew.value == "") {
-        //    DisplayMassage("يجب اختيار التاريخ ", "The date must be chosen ", MessageType.Worning);
-        //    Errorinput(txtDateNew);
-        //    return false;
-        //}
-        //if (txt_Receiving_Fund.value == "Null") {
-        //    DisplayMassage("يجب اختيار سند الصندوق  ", "A fund bond must be selected ", MessageType.Worning);
-        //    Errorinput(txt_Receiving_Fund);
-        //    return false;
-        //}
-        //if ((txt_CashAmount.value == "0" && txt_CardAmount.value == "0") && txtCashTypeNew.value == "0") {
-        //    DisplayMassage("يجب ادخال نقدي او كارت", "You must enter cash or card ", MessageType.Worning);
-        //    Errorinput(txt_CashAmount);
-        //    Errorinput(txt_CardAmount);
-        //    return false;
-        //}
-        //if (txt_Amount.value == "0" || txt_Amount.value.trim() == "") {
-        //    DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
-        //    Errorinput($('#txt_Amount'));
-        //    return false;
-        //}
-        //if ((txtCashTypeNew.value == "1" || txtCashTypeNew.value == "2") && $('#txt_TransferNo').val() == '') {
-        //    DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
-        //    Errorinput($('#txt_TransferNo'));
-        //    return false;
-        //}
-        //if (txtCashTypeNew.value != "0" && txtCashTypeNew.value != "1" && txtCashTypeNew.value != "2" && $('#txt_CheckNo').val() == '') {
-        //    DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
-        //    Errorinput($('#txt_CheckNo').val());
-        //    return false;
-        //}
-        //if (txtCashTypeNew.value != "0" && $('#txt_BankName').val().trim() == '') {
-        //    DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
-        //    Errorinput($('#txt_BankName'));
-        //    return false;
-        //}
-        //if (txtCashTypeNew.value != "0" && txt_BankAcc_Code.selectedIndex == 0) {
-        //    DisplayMassage("يجب اختيار  رقم الحساب الايداع  ", "You must choose the deposit account number", MessageType.Worning);
-        //    Errorinput(txt_BankAcc_Code);
-        //    return false;
-        //}
-        //$(".btn-group").removeClass("display_none");
+        if (txt_D_CashBoxH.value == 'null') {
+            DisplayMassage("يجب اختيار نوع الصندوق ", "Choose the type of constraint", MessageType.Worning);
+            Errorinput(txt_D_CashBoxH);
+            return false;
+        }
+        if (txtCashTypeH.value == 'null') {
+            DisplayMassage("يجب اختيار نوع القيد ", "Choose the type of constraint", MessageType.Worning);
+            Errorinput(txtCashTypeH);
+            return false;
+        }
+        if (txt_ReceiptNoteH.value == 'null') {
+            DisplayMassage("يجب اختيار نوع " + Name_Not + " ", "Choose the type of constraint", MessageType.Worning);
+            Errorinput(txt_ReceiptNoteH);
+            return false;
+        }
+        if (txt_BenCodeH.value.trim() == '') {
+            DisplayMassage("يجب اختيار المستفيد ", "Choose the type of constraint", MessageType.Worning);
+            Errorinput(txt_BenCodeH);
+            Errorinput(btnBenH);
+            return false;
+        }
+        if ((Number(txt_CashAmount.value) == 0 && Number(txt_CardAmount.value) == 0) && txtCashTypeH.value == "0") {
+            DisplayMassage("يجب ادخال نقدي او كارت", "You must enter cash or card ", MessageType.Worning);
+            Errorinput(txt_CardAmount);
+            Errorinput(txt_CashAmount);
+            return false;
+        }
+        if (Number($('#txt_Amount').val()) == 0) {
+            DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
+            Errorinput($('#txt_Amount'));
+            return false;
+        }
+        if ((txtCashTypeH.value == "1" || txtCashTypeH.value == "2") && $('#txt_TransferNo').val() == '') {
+            DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
+            Errorinput($('#txt_TransferNo'));
+            return false;
+        }
+        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val() == '') {
+            DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
+            Errorinput($('#txt_CheckNo').val());
+            return false;
+        }
+        if (txtCashTypeH.value != "0" && $('#txt_BankName').val().trim() == '') {
+            DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
+            Errorinput($('#txt_BankName'));
+            return false;
+        }
+        if (txtCashTypeH.value != "0" && txt_BankAcc_Code.selectedIndex == 0) {
+            DisplayMassage("يجب اختيار  رقم الحساب الايداع  ", "You must choose the deposit account number", MessageType.Worning);
+            Errorinput(txt_BankAcc_Code);
+            return false;
+        }
         return true;
     }
     //****************************************************Assign_Data*********************************************
@@ -707,6 +750,12 @@ var AccTrReceiptNoteNew;
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
         Model.CompCode = CompCode;
         Model.BranchCode = BranchCode;
+        Model.TrType = TrType;
+        Model.TrNo = Number($('#txt_CODE').val());
+        Model.ReceiptID = Number($('#ReceiptID').val());
+        Model.Comp_Code = CompCode.toString();
+        Model.Branch_Code = BranchCode.toString();
+        Model.TrDateH = '1';
     }
     function Insert() {
         debugger;
