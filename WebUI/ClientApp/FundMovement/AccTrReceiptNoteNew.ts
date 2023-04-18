@@ -377,10 +377,7 @@ namespace AccTrReceiptNoteNew {
     function txtCashTypeH_onchange() {
         if (txtCashTypeH.value == '0') {
             $('#Bank_Div').addClass('display_none');
-            $('#La_CashAmount').removeClass('display_none');
-            $('#La_CardAmount').removeClass('display_none');
-            $('#txt_CashAmount').removeClass('display_none');
-            $('#txt_CardAmount').removeClass('display_none'); 
+            $('._Cash').removeClass('display_none');   
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_CardAmount').val('0');
@@ -394,10 +391,7 @@ namespace AccTrReceiptNoteNew {
         }
         else {
             $('#Bank_Div').removeClass('display_none');
-            $('#La_CashAmount').addClass('display_none');
-            $('#La_CardAmount').addClass('display_none');
-            $('#txt_CashAmount').addClass('display_none');
-            $('#txt_CardAmount').addClass('display_none');
+            $('._Cash').addClass('display_none');   
             $('#txt_TransferNo').removeClass('display_none');
             $('#txt_CheckNo').addClass('display_none');
             $('#txt_CashAmount').val('0');
@@ -660,7 +654,6 @@ namespace AccTrReceiptNoteNew {
         });
 
     } 
-
     //****************************************************CleanInput*********************************************
     function CleanBen(Type: string) {
 
@@ -698,9 +691,9 @@ namespace AccTrReceiptNoteNew {
     }
     //****************************************************DisplayDetails*********************************************
     function GridDoubleClick() {
-        CleanDetails();
+        CleanDetails();         
         DisplayDetails(ReportGrid.SelectedItem)
-        disabled(); 
+        disabled();
     }
     function DisplayDetails(Selecteditem: IQ_GetBoxReceiveList) {  
         DocumentActions.RenderFromModel(Selecteditem);
@@ -714,8 +707,15 @@ namespace AccTrReceiptNoteNew {
         if (Selecteditem.RecPayTypeId == 4) { getAccountAccById('H',Selecteditem.ExpenseID.toString(), false); }
         if (Selecteditem.RecPayTypeId == 5) { getAccountBoxById('H', Selecteditem.FromCashBoxID.toString(), false); }
         Flag_IsNew = false;
+        if (txtCashTypeH.value == '0') {
+            $('#Bank_Div').addClass('display_none'); 
+            $('._Cash').removeClass('display_none');  
+        }
+        else {
+             $('#Bank_Div').removeClass('display_none'); 
+            $('._Cash').addClass('display_none'); 
+        }
     }
-
     //****************************************************Validation*********************************************
     function Validation() {
 
@@ -762,7 +762,7 @@ namespace AccTrReceiptNoteNew {
             Errorinput($('#txt_TransferNo'));
             return false;
         }
-        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val() == '') {
+        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val().trim() == '') {
             DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
             Errorinput($('#txt_CheckNo').val());
             return false;
@@ -782,7 +782,6 @@ namespace AccTrReceiptNoteNew {
         return true;
 
     }
-
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger
@@ -829,9 +828,10 @@ namespace AccTrReceiptNoteNew {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let res = result.Response as A_RecPay_Tr_ReceiptNote
-                    DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
-
+                    let res = result.Response as IQ_GetBoxReceiveList
+                    DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed); 
+                    Success(res.ReceiptID, res); 
+                    Save_Succ_But(); 
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
@@ -851,13 +851,27 @@ namespace AccTrReceiptNoteNew {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
+                    let res = result.Response as IQ_GetBoxReceiveList
+                    DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
+                    Success(res.ReceiptID, res); 
+                    Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
             }
         });
 
+    } 
+    function Success(ReceiptID: number, res: IQ_GetBoxReceiveList) { 
+        Details = Details.filter(x => x.ReceiptID != ReceiptID);
+        Details.push(res);
+        Details = Details.sort(dynamicSort("TrNo"));
+        ReportGrid.SelectedItem = res;
+        ReportGrid.DataSource = Details;
+        ReportGrid.Bind();
+        CleanDetails();
+        DisplayDetails(ReportGrid.SelectedItem)
+        disabled();
     } 
     //***************************************************************************Print*********************************************************     
     export function PrintReport(OutType: number) {

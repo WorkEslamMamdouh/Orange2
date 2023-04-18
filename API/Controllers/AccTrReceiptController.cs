@@ -230,7 +230,9 @@ namespace Inv.API.Controllers
                             dbTransaction.Commit();
                             res.TrNo = int.Parse(result.ResponseData.ToString());
                             LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
-                            return Ok(new BaseResponse(res));
+
+                            var displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -274,7 +276,9 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             res.TrNo = int.Parse(result.ResponseData.ToString());
-                            return Ok(new BaseResponse(res));
+
+                            var displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
@@ -337,7 +341,8 @@ namespace Inv.API.Controllers
                             res.TrNo = int.Parse(result.ResponseData.ToString());
                             LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, true, null, null, null);
 
-                            return Ok(new BaseResponse(res));
+                            var displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
+                            return Ok(new BaseResponse(displayData));
                         }
                         else
                         {

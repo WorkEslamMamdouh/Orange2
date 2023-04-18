@@ -360,10 +360,7 @@ var AccTrReceiptNoteNew;
     function txtCashTypeH_onchange() {
         if (txtCashTypeH.value == '0') {
             $('#Bank_Div').addClass('display_none');
-            $('#La_CashAmount').removeClass('display_none');
-            $('#La_CardAmount').removeClass('display_none');
-            $('#txt_CashAmount').removeClass('display_none');
-            $('#txt_CardAmount').removeClass('display_none');
+            $('._Cash').removeClass('display_none');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_CardAmount').val('0');
@@ -377,10 +374,7 @@ var AccTrReceiptNoteNew;
         }
         else {
             $('#Bank_Div').removeClass('display_none');
-            $('#La_CashAmount').addClass('display_none');
-            $('#La_CardAmount').addClass('display_none');
-            $('#txt_CashAmount').addClass('display_none');
-            $('#txt_CardAmount').addClass('display_none');
+            $('._Cash').addClass('display_none');
             $('#txt_TransferNo').removeClass('display_none');
             $('#txt_CheckNo').addClass('display_none');
             $('#txt_CashAmount').val('0');
@@ -662,6 +656,14 @@ var AccTrReceiptNoteNew;
             getAccountBoxById('H', Selecteditem.FromCashBoxID.toString(), false);
         }
         Flag_IsNew = false;
+        if (txtCashTypeH.value == '0') {
+            $('#Bank_Div').addClass('display_none');
+            $('._Cash').removeClass('display_none');
+        }
+        else {
+            $('#Bank_Div').removeClass('display_none');
+            $('._Cash').addClass('display_none');
+        }
     }
     //****************************************************Validation*********************************************
     function Validation() {
@@ -702,7 +704,7 @@ var AccTrReceiptNoteNew;
             Errorinput($('#txt_TransferNo'));
             return false;
         }
-        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val() == '') {
+        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val().trim() == '') {
             DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
             Errorinput($('#txt_CheckNo').val());
             return false;
@@ -773,6 +775,8 @@ var AccTrReceiptNoteNew;
                 if (result.IsSuccess) {
                     var res = result.Response;
                     DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
+                    Success(res.ReceiptID, res);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -793,13 +797,27 @@ var AccTrReceiptNoteNew;
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
-                    DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
+                    var res = result.Response;
+                    DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
+                    Success(res.ReceiptID, res);
+                    Save_Succ_But();
                 }
                 else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
                 }
             }
         });
+    }
+    function Success(ReceiptID, res) {
+        Details = Details.filter(function (x) { return x.ReceiptID != ReceiptID; });
+        Details.push(res);
+        Details = Details.sort(dynamicSort("TrNo"));
+        ReportGrid.SelectedItem = res;
+        ReportGrid.DataSource = Details;
+        ReportGrid.Bind();
+        CleanDetails();
+        DisplayDetails(ReportGrid.SelectedItem);
+        disabled();
     }
     //***************************************************************************Print*********************************************************     
     function PrintReport(OutType) {
