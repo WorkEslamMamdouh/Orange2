@@ -144,6 +144,7 @@ namespace AccTrReceiptNoteNew {
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
+        chkStatus.onchange = chkStatus_onchange;
 
         //*******************************print*****************************
         btnPrintTrview.onclick = () => { PrintReport(1); }
@@ -414,6 +415,11 @@ namespace AccTrReceiptNoteNew {
         }
 
     }
+    function chkStatus_onchange() {
+        if (chkStatus.checked == false) {
+            txt_note.disabled == true ? Open() : null; 
+        }
+    }
     //****************************************************Customer*********************************************
     function BenCust(Type: string) {
          
@@ -665,14 +671,13 @@ namespace AccTrReceiptNoteNew {
     }
     function Enabled() {
         $('._dis').removeAttr('disabled')
-        $('#chkIsDeffered').removeAttr('disabled')
-        $('#chkStatus').removeAttr('disabled')
+        $('#chkIsDeffered').removeAttr('disabled') 
         $('#id_div_Filter').addClass('disabledDiv') 
+        chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2; 
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled')
-        $('#chkIsDeffered').attr('disabled', 'disabled')
-        $('#chkStatus').attr('disabled', 'disabled')
+        $('#chkIsDeffered').attr('disabled', 'disabled') 
         $('#id_div_Filter').removeClass('disabledDiv') 
     }
     function CleanDetails() {
@@ -687,7 +692,7 @@ namespace AccTrReceiptNoteNew {
         txtDueDate.value = GetDate();
         chkIsDeffered.checked = false;
         chkStatus.checked = false;
-        txtCashTypeH_onchange();
+        txtCashTypeH_onchange(); 
     }
     //****************************************************DisplayDetails*********************************************
     function GridDoubleClick() {
@@ -714,6 +719,15 @@ namespace AccTrReceiptNoteNew {
         else {
              $('#Bank_Div').removeClass('display_none'); 
             $('._Cash').addClass('display_none'); 
+        }
+
+        if (chkStatus.checked == true) {
+            btnUpdate.disabled = true;
+            chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+        }
+        else {
+            btnUpdate.disabled = false;
+            chkStatus.disabled = true;
         }
     }
     //****************************************************Validation*********************************************
@@ -854,6 +868,31 @@ namespace AccTrReceiptNoteNew {
                     let res = result.Response as IQ_GetBoxReceiveList
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
                     Success(res.ReceiptID, res); 
+                    Save_Succ_But();
+                } else {
+                    DisplayMassage("خطأء", "Error", MessageType.Error);
+                }
+            }
+        });
+
+    } 
+    function Open() {
+        debugger
+        if (!CheckDate(DateFormat(txtTrDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+            WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
+            return
+        }
+        Assign();
+        Ajax.Callsync({
+            type: "POST",
+            url: sys.apiUrl("AccTrReceipt", "Open"),
+            data: JSON.stringify(Model),
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    let res = result.Response as IQ_GetBoxReceiveList
+                    DisplayMassage("تم فك الاعتماد بنجاح", "Success", MessageType.Succeed);
+                    Success(res.ReceiptID, res);
                     Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
