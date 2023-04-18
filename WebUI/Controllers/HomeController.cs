@@ -302,6 +302,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/FundMovement/AccTrPaymentNoteIndex.cshtml");
         }
+        public ActionResult AccTrPaymentNoteNewIndex()
+        {
+            return View("~/Views/FundMovement/AccTrPaymentNoteNewIndex.cshtml");
+        }
         public ActionResult AccTrCustomerAdjustIndex()
         {
             return View("~/Views/FundMovement/AccTrCustomerAdjustIndex.cshtml");

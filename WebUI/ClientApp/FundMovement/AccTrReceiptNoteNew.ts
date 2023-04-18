@@ -372,7 +372,7 @@ namespace AccTrReceiptNoteNew {
             $('#txt_CardAmount').val('0'); 
             $('#txt_Amount').removeAttr('disabled');
             $('#txtDueDate').attr('disabled', 'disabled'); 
-
+            chkIsDeffered.checked = false;
         }
     }
     function chkIsDeffered_onchange() {
@@ -647,6 +647,7 @@ namespace AccTrReceiptNoteNew {
         $('#chkIsDeffered').removeAttr('disabled') 
         $('#id_div_Filter').addClass('disabledDiv') 
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2; 
+        chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled'); 
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled')
@@ -713,7 +714,7 @@ namespace AccTrReceiptNoteNew {
 
         }
         if (txtCashTypeH.value == 'null') {
-            DisplayMassage("يجب اختيار نوع القيد ", "Choose the type of constraint", MessageType.Worning);
+            DisplayMassage("يجب اختيار نوع النقد ", "Choose the type of constraint", MessageType.Worning);
             Errorinput(txtCashTypeH);
             return false;
 
@@ -879,6 +880,8 @@ namespace AccTrReceiptNoteNew {
         Details.push(res);
         Details = Details.sort(dynamicSort("TrNo"));
         ReportGrid.SelectedItem = res;
+        $('#id_ReportGrid').removeClass('display_none');
+        $('#Div_control').addClass('display_none');
         ReportGrid.DataSource = Details;
         ReportGrid.Bind();
         CleanDetails();

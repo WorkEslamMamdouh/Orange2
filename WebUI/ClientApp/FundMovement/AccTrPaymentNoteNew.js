@@ -1,14 +1,14 @@
 $(document).ready(function () {
-    AccTrReceiptNoteNew.InitalizeComponent();
+    AccTrPaymentNoteNew.InitalizeComponent();
 });
-var AccTrReceiptNoteNew;
-(function (AccTrReceiptNoteNew) {
+var AccTrPaymentNoteNew;
+(function (AccTrPaymentNoteNew) {
     var sys = new SystemTools();
     var SysSession = GetSystemSession(Modules.AccTrReceiptNote);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-    var TrType = 1;
-    var codeType = "RecType";
-    var Name_Not = (lang == "ar" ? 'الاستلام' : 'Receipt');
+    var TrType = 2;
+    var codeType = "PayType";
+    var Name_Not = (lang == "ar" ? 'صرف' : 'Receipt');
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     var ReportGrid = new JsGrid();
@@ -62,7 +62,7 @@ var AccTrReceiptNoteNew;
         fillddlG_Codes();
         fillddlAcount_Code();
     }
-    AccTrReceiptNoteNew.InitalizeComponent = InitalizeComponent;
+    AccTrPaymentNoteNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow");
         btnAdd = document.getElementById("btnAdd");
@@ -358,6 +358,22 @@ var AccTrReceiptNoteNew;
         if (txtCashTypeH.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('._Cash').removeClass('display_none');
+            $('._Card').addClass('display_none');
+            $('#txt_CheckNo').val('');
+            $('#txt_TransferNo').val('');
+            $('#txt_CardAmount').val('0');
+            $('#txt_CashAmount').val('0');
+            $('#txt_Amount').val('');
+            $('#txt_BankName').val('');
+            $('#txt_BankAcc_Code').val('null');
+            chkIsDeffered.checked = false;
+            txtDueDate.value = GetDate();
+            $('#txt_Amount').attr('disabled', 'disabled');
+        }
+        else if (txtCashTypeH.value == '8') {
+            $('#Bank_Div').addClass('display_none');
+            $('._Card').removeClass('display_none');
+            $('._Cash').addClass('display_none');
             $('#txt_CheckNo').val('');
             $('#txt_TransferNo').val('');
             $('#txt_CardAmount').val('0');
@@ -372,6 +388,7 @@ var AccTrReceiptNoteNew;
         else {
             $('#Bank_Div').removeClass('display_none');
             $('._Cash').addClass('display_none');
+            $('._Card').addClass('display_none');
             $('#txt_TransferNo').removeClass('display_none');
             $('#txt_CheckNo').addClass('display_none');
             $('#txt_CashAmount').val('0');
@@ -662,10 +679,17 @@ var AccTrReceiptNoteNew;
         if (txtCashTypeH.value == '0') {
             $('#Bank_Div').addClass('display_none');
             $('._Cash').removeClass('display_none');
+            $('._Card').addClass('display_none');
+        }
+        else if (txtCashTypeH.value == '8') {
+            $('#Bank_Div').addClass('display_none');
+            $('._Card').removeClass('display_none');
+            $('._Cash').addClass('display_none');
         }
         else {
             $('#Bank_Div').removeClass('display_none');
             $('._Cash').addClass('display_none');
+            $('._Card').addClass('display_none');
         }
         if (chkStatus.checked == true) {
             btnUpdate.disabled = true;
@@ -699,8 +723,14 @@ var AccTrReceiptNoteNew;
             Errorinput(btnBenH);
             return false;
         }
-        if ((Number(txt_CashAmount.value) == 0 && Number(txt_CardAmount.value) == 0) && txtCashTypeH.value == "0") {
-            DisplayMassage("يجب ادخال نقدي او كارت", "You must enter cash or card ", MessageType.Worning);
+        if ((Number(txt_CashAmount.value) == 0) && txtCashTypeH.value == "0") {
+            DisplayMassage("يجب ادخال نقدي ", "You must enter cash or card ", MessageType.Worning);
+            Errorinput(txt_CardAmount);
+            Errorinput(txt_CashAmount);
+            return false;
+        }
+        if ((Number(txt_CardAmount.value) == 0) && txtCashTypeH.value == "8") {
+            DisplayMassage("يجب ادخال الشبكه", "You must enter cash or card ", MessageType.Worning);
             Errorinput(txt_CardAmount);
             Errorinput(txt_CashAmount);
             return false;
@@ -715,17 +745,17 @@ var AccTrReceiptNoteNew;
             Errorinput($('#txt_TransferNo'));
             return false;
         }
-        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val().trim() == '') {
+        if (txtCashTypeH.value != "8" && txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val().trim() == '') {
             DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
             Errorinput($('#txt_CheckNo').val());
             return false;
         }
-        if (txtCashTypeH.value != "0" && $('#txt_BankName').val().trim() == '') {
+        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && $('#txt_BankName').val().trim() == '') {
             DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
             Errorinput($('#txt_BankName'));
             return false;
         }
-        if (txtCashTypeH.value != "0" && txt_BankAcc_Code.selectedIndex == 0) {
+        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && txt_BankAcc_Code.selectedIndex == 0) {
             DisplayMassage("يجب اختيار  رقم الحساب الايداع  ", "You must choose the deposit account number", MessageType.Worning);
             Errorinput(txt_BankAcc_Code);
             return false;
@@ -928,14 +958,14 @@ var AccTrReceiptNoteNew;
             }
         });
     }
-    AccTrReceiptNoteNew.PrintReport = PrintReport;
+    AccTrPaymentNoteNew.PrintReport = PrintReport;
     function PrintTransaction() {
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
         var rp = new ReportParameters();
         rp.Type = 0;
         rp.slip = 0;
-        rp.Repdesign = 1;
+        rp.Repdesign = 2;
         rp.TRId = Number($('#ReceiptID').val());
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
@@ -966,7 +996,7 @@ var AccTrReceiptNoteNew;
         rp.BraNameE = BranchNameE;
         rp.Type = 0;
         rp.slip = 1;
-        rp.Repdesign = 1;
+        rp.Repdesign = 2;
         rp.TRId = Number($('#ReceiptID').val());
         Ajax.CallAsync({
             url: Url.Action("rptReceiptNote", "GeneralReports"),
@@ -1019,11 +1049,11 @@ var AccTrReceiptNoteNew;
             if (Status != null)
                 Condation2 = Condation2 + " and Status=" + Status;
             var Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
-            PrintsFrom_To(TransType.AccReceive, Name_ID, NameTable, Condation3, Details.length);
+            PrintsFrom_To(TransType.AccPayment, Name_ID, NameTable, Condation3, Details.length);
         }
         catch (e) {
             return;
         }
     }
-})(AccTrReceiptNoteNew || (AccTrReceiptNoteNew = {}));
-//# sourceMappingURL=AccTrReceiptNoteNew.js.map
+})(AccTrPaymentNoteNew || (AccTrPaymentNoteNew = {}));
+//# sourceMappingURL=AccTrPaymentNoteNew.js.map

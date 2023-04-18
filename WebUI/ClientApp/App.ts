@@ -33,6 +33,7 @@ var Modules = {
     AccTrReceiptNote: "AccTrReceiptNote",
     AccTrReceiptNoteNew: "AccTrReceiptNoteNew",
     AccTrPaymentNote: "AccTrPaymentNote",
+    AccTrPaymentNoteNew: "AccTrPaymentNoteNew",
     AccTrCustomerAdjust: "AccTrCustomerAdjust",
     AccTrVendorAdjust: "AccTrVendorAdjust",
     SlsTrSales: "SlsTrSales",
