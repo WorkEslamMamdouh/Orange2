@@ -134,6 +134,7 @@ namespace AccTrReceiptNoteNew {
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
         btnPrintTransaction.onclick = PrintTransaction;
         btnPrintslip.onclick = btnPrintslip_onclick; 
+        btnPrintsFrom_To.onclick = btnPrintsFrom_To_onclick;
     } 
     function InitializeGrid() { 
         let res: any = GetResourceList("");  
@@ -1004,16 +1005,76 @@ namespace AccTrReceiptNoteNew {
         rp.Type = 0;
         rp.slip = 1;
         rp.Repdesign = 1;
-        rp.TRId = 0//ReceiptID;
+        rp.TRId = Number($('#ReceiptID').val());
         Ajax.CallAsync({
             url: Url.Action("rptReceiptNote", "GeneralReports"),
             data: rp,
             success: (d) => {
                 let result = d.result as string;
                 PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
-
                 window.open(result, "_blank");
             }
         })
     }
+    function btnPrintsFrom_To_onclick() {
+        btnShow_onclick();
+
+        let BenID = Number($('#txt_BenIDF').val())
+        let Boxid = txt_D_CashBoxF.value == 'null' ? null : Number(txt_D_CashBoxF.value);
+        let Status = txt_Status.value == 'All' ? null : txt_Status.value;
+        let RecPayTypeId = txt_ReceiptNoteF.value == 'null' ? null : Number(txt_ReceiptNoteF.value);
+        let DateFrom = DateFormatRep(txtDateFrom.value);
+        let DateTo = DateFormatRep(txtDateTo.value);
+        let CashType = txtCashTypeF.value == "null" ? -1 : Number(txtCashTypeF.value);
+         
+        try {
+
+            let Name_ID = 'ReceiptID'
+            let NameTable = 'IQ_GetBoxReceiveList'
+            let Condation1 = "  TrType=" + TrType + " and CompCode = " + CompCode + " and BranchCode =" + BranchCode + " " +
+                " and TrDate >=' " + DateFrom + "' and TrDate <= ' " + DateTo + " ' ";
+            let Condation2 = " ";
+
+
+            if (CashType != -1)
+                Condation2 = Condation2 + " and CashType=" + CashType;
+
+            if (Boxid != null)
+                Condation2 = Condation2 + " and CashBoxID=" + Boxid;
+            if (RecPayTypeId != null)
+                Condation2 = Condation2 + " and RecPayTypeId=" + RecPayTypeId;
+            if (BenID != 0) {
+                if (RecPayTypeId == 1) {
+                    Condation2 = Condation2 + " and CustomerID =" + BenID;
+                }
+                else if (RecPayTypeId == 2) {
+                    Condation2 = Condation2 + " and VendorID =" + BenID;
+                }
+                else if (RecPayTypeId == 3) {
+                    Condation2 = Condation2 + " and BankAccountCode ='" + BenID + "'";
+                }
+                else if (RecPayTypeId == 4) {
+                    Condation2 = Condation2 + " and ExpenseID =" + BenID;
+                }
+                else if (RecPayTypeId == 5) {
+                    Condation2 = Condation2 + " and FromCashBoxID =" + BenID;
+                }
+            }
+            if (Status != null)
+                Condation2 = Condation2 + " and Status=" + Status;
+
+         
+            let Condation3 = Condation1 + Condation2 + " ORDER BY TrNo ASC;";
+             
+
+            PrintsFrom_To(TransType.AccReceive, Name_ID, NameTable, Condation3, Details.length)
+
+             
+        } catch (e) {
+
+            return
+        }
+
+    }
+     
 } 
