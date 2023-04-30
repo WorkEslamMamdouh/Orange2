@@ -407,7 +407,7 @@ namespace PurTrReceive {
         }
     }
     function InitializeGrid() {
-        $("#divMasterGridiv").removeClass("display_none");
+        //$("#divMasterGridiv").removeClass("display_none");
         let res: any = GetResourceList("");
         divMasterGrid.ElementName = "divMasterGrid";
         divMasterGrid.Paging = true;
@@ -659,6 +659,7 @@ namespace PurTrReceive {
     //---------------------------------------------------------------- buttons region----------------------------------------------------
     function btnShow_onclick() {
         ShowFlag = true;
+        //alert(1)
         $("#divMasterGridiv").removeClass("display_none");
 
         BindStatisticGridData();
@@ -746,7 +747,7 @@ namespace PurTrReceive {
         ddlTaxTypeHeader.value = DefVatType;
         ddlTaxTypeHeader.disabled = true;
         TaxTypeOnchange();
-        AddNewRow();
+        //AddNewRow();
         txtPurOrderNum.disabled = false;
 
         PurOrderShowFlag = false;
@@ -758,6 +759,9 @@ namespace PurTrReceive {
         }
 
         VoucherNo.disabled = true;
+
+        btnVendorSearch_onclick();
+
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
@@ -791,6 +795,7 @@ namespace PurTrReceive {
             let id = SearchGrid.SearchDataGrid.SelectedKey
             globalVendorID = id;
             getVendorByID();
+            VendorRecieptID.focus();
         });
     }
     //---------------------------------------------------------------- Events region----------------------------------------------------
@@ -1411,10 +1416,15 @@ namespace PurTrReceive {
         $("#btn_minus" + CountGrid).removeAttr("disabled");
 
 
+        SearchItems(CountGrid);
+
         CountGrid++;
 
         Insert_Serial();
         ComputeTotals();
+
+
+        
 
     }
     function BuildControls(cnt: number) {
@@ -1455,7 +1465,7 @@ namespace PurTrReceive {
 	                </td>
                      <td>
 		                <div class="form-group">
-			                <input type="number"  id="txtQuantity${cnt}" name="quant[10]" class="form-control" value="1" min="1" max="1000" step="1">
+			                <input type="number"  id="txtQuantity${cnt}" name="quant[10]" class="form-control" value="" min="1" max="1000" step="1">
 		                </div>
 	                </td>
                     <td>
@@ -1674,65 +1684,11 @@ namespace PurTrReceive {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
-            debugger
-            let sys: SystemTools = new SystemTools();
 
-            var storeId = Number(ddlStoreHeader.value);//and OnhandQty > 0
-            var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
-            let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
-
-            ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
-
-            sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
-                let id = SearchGrid.SearchDataGrid.SelectedKey
-                debugger
-                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
-
-                //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
-
-                $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
-
-                ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
-                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+            SearchItems(cnt);
 
 
-                let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
-
-                FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
-                $('#ddlItem' + cnt).empty();
-                $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
-                for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
-                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
-                }
-
-                $('#ddlItem' + cnt).val(searchItemID);
-
-
-
-                var selectedItem = $(dropddlItem + ' option:selected').attr('value');
-                var selectedFamily = $(drop + ' option:selected').attr('value');
-
-                var itemID = Number(selectedItem);
-                var FamilyID = Number(selectedFamily);
-                var res = false;
-                var NumberRowid = $("#ReciveDetailsID" + cnt).val();
-                res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
-                $("#txtPrice" + cnt).val("1");
-                $("#txtPriceFc" + cnt).val("1");
-                $("#txtQuantity" + cnt).val("1");
-                $("#txtDiscountPrc" + cnt).val("0");
-                $("#txtDiscountAmount" + cnt).val("0");
-                //if (res == true) {
-                //    $("#ddlItem" + cnt).val("null");
-                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                //}
-
-                totalRow(cnt, true);
-
-
-
-
-            });
+             
         });
 
 
@@ -2041,6 +1997,70 @@ namespace PurTrReceive {
         $(".select_").select2();
         return;
 
+    }
+
+    function SearchItems(cnt: number) {
+
+        debugger
+        let sys: SystemTools = new SystemTools();
+
+        var storeId = Number(ddlStoreHeader.value);//and OnhandQty > 0
+        var FinYear = SysSession.CurrentEnvironment.CurrentYear;//and OnhandQty > 0
+        let qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
+
+        ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
+
+        sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, () => {
+            let id = SearchGrid.SearchDataGrid.SelectedKey
+            debugger
+            ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+
+            //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+
+            $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
+
+            ItemBaesdFamilyDetails = new Array<IQ_GetItemStoreInfo>();
+            ItemBaesdFamilyDetails = ItemFamilyDetails.filter(x => x.ItemID == id);
+
+
+            let searchItemID = ItemBaesdFamilyDetails[0].ItemID;
+
+            FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
+            $('#ddlItem' + cnt).empty();
+            $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
+            for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
+                $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
+            }
+
+            $('#ddlItem' + cnt).val(searchItemID);
+
+
+            var dropddlItem = '#ddlItem' + cnt;
+            var drop = '#ddlFamily' + cnt;
+
+            var selectedItem = $(dropddlItem + ' option:selected').attr('value');
+            var selectedFamily = $(drop + ' option:selected').attr('value');
+
+            var itemID = Number(selectedItem);
+            var FamilyID = Number(selectedFamily);
+            var res = false;
+            var NumberRowid = $("#ReciveDetailsID" + cnt).val();
+            res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+            $("#txtPrice" + cnt).val("");
+            $("#txtPriceFc" + cnt).val("");
+            $("#txtQuantity" + cnt).val("");
+            $("#txtDiscountPrc" + cnt).val("0");
+            $("#txtDiscountAmount" + cnt).val("0");
+            //if (res == true) {
+            //    $("#ddlItem" + cnt).val("null");
+            //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+            //}
+
+            totalRow(cnt, true);
+
+            $("#txtQuantity" + cnt).focus();
+
+        });
     }
 
     function totalRow(cnt: number, flagDiscountAmount: boolean) {
@@ -2614,6 +2634,9 @@ namespace PurTrReceive {
             }
             ComputeTotalsCharge();
         }
+
+
+        $('#txtAddonsCharge' + cnt).focus();
 
         return;
 

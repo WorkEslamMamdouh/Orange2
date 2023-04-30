@@ -353,7 +353,7 @@ var PurTrReceive;
         }
     }
     function InitializeGrid() {
-        $("#divMasterGridiv").removeClass("display_none");
+        //$("#divMasterGridiv").removeClass("display_none");
         var res = GetResourceList("");
         divMasterGrid.ElementName = "divMasterGrid";
         divMasterGrid.Paging = true;
@@ -570,6 +570,7 @@ var PurTrReceive;
     //---------------------------------------------------------------- buttons region----------------------------------------------------
     function btnShow_onclick() {
         ShowFlag = true;
+        //alert(1)
         $("#divMasterGridiv").removeClass("display_none");
         BindStatisticGridData();
         $("#divDetails").addClass("display_none");
@@ -645,7 +646,7 @@ var PurTrReceive;
         ddlTaxTypeHeader.value = DefVatType;
         ddlTaxTypeHeader.disabled = true;
         TaxTypeOnchange();
-        AddNewRow();
+        //AddNewRow();
         txtPurOrderNum.disabled = false;
         PurOrderShowFlag = false;
         ShowFlag = false;
@@ -654,6 +655,7 @@ var PurTrReceive;
             ddlSalesmanHeader.value = '21';
         }
         VoucherNo.disabled = true;
+        btnVendorSearch_onclick();
     }
     function btnupdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)
@@ -684,6 +686,7 @@ var PurTrReceive;
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             globalVendorID = id;
             getVendorByID();
+            VendorRecieptID.focus();
         });
     }
     //---------------------------------------------------------------- Events region----------------------------------------------------
@@ -1228,13 +1231,14 @@ var PurTrReceive;
         // can delete new inserted record  without need for delete privilage
         $("#btn_minus" + CountGrid).removeClass("display_none");
         $("#btn_minus" + CountGrid).removeAttr("disabled");
+        SearchItems(CountGrid);
         CountGrid++;
         Insert_Serial();
         ComputeTotals();
     }
     function BuildControls(cnt) {
         var html;
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n \n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                            <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"1\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc" + cnt + "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtDiscountAmount" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtNetUnitPrice" + cnt + "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc" + cnt + "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax" + cnt + "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"" + ((VatPrc == null || undefined) ? 0 : VatPrc) + "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    <input id=\"ReciveDetailsID" + cnt + "\" type=\"hidden\" class=\"form-control display_none\"  />\n\t                <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minus\"></i></span>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch\" id=\"btnSearchItems" + cnt + "\" disabled>\n                            <i class=\"fa fa-search  \"></i>\n                             </button>\n \n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtSerialH" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n                            <select id=\"ddlFamily" + cnt + "\" class=\"form-control select_\">\n                                <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                            </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n                        <select id=\"ddlItem" + cnt + "\" class=\"form-control select_\">\n                            <option value=\"null\">" + (lang == "ar" ? "اختر" : "Choose") + "</option>\n                        </select>\n\t\t                </div>\n\t                </td>\n                     <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtQuantity" + cnt + "\" name=\"quant[10]\" class=\"form-control\" value=\"\" min=\"1\" max=\"1000\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtQuantityReturnValue" + cnt + "\" type=\"number\" class=\"form-control\"  disabled value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input type=\"number\"  id=\"txtPriceFc" + cnt + "\" name=\"quant[20]\" class=\"form-control\" value=\"1\" min=\"0\" max=\"1000\" step=\"0.5\">\n\t\t                </div>\n\t                </td>\n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\" >\n\t\t\t               <input id=\"txtDiscountPrc" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtDiscountAmount" + cnt + "\" type=\"text\"  class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>  \n                    <td class=\" " + (flagInvItemDiscount == false ? display_none : Remove_display_none) + " \" >\n\t\t                <div class=\"form-group\"style=\"width: 84px;\" >\n\t\t\t               <input id=\"txtNetUnitPrice" + cnt + "\" type=\"text\" disabled class=\"form-control\"  name=\"quant[3]\" class=\"form-control\" value=\"0\" min=\"0\" step=\"1\">\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotalFc" + cnt + "\" type=\"number\" disabled class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtPrice" + cnt + "\" disabled type=\"text\" class=\"form-control\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"txtTotal" + cnt + "\" type=\"text\" class=\"form-control\" disabled />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtTax" + cnt + "\" type=\"text\" disabled class=\"form-control\" data_VatPrc=\"" + ((VatPrc == null || undefined) ? 0 : VatPrc) + "\"  value=\"0\"/>\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtTotAfterTax" + cnt + "\" type=\"text\" disabled value=\"0\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t             <input id=\"txtTotAddons" + cnt + "\" type=\"text\" disabled class=\"form-control\"  value=\"0\" />\n\t\t                </div>\n\t                </td>\n                <input id=\"UnitCost" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control \"/>\n                <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\"/>\n                <input id=\"txt_ID" + cnt + "\" name = \" \" type = \"hidden\" class=\"form-control input-sm\" />';\n                </tr>";
         $("#div_Data").append(html);
         $('.btn-number1' + cnt).click(function (e) {
             e.preventDefault();
@@ -1373,46 +1377,7 @@ var PurTrReceive;
         $('#btnSearchItems' + cnt).click(function (e) {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
-            debugger;
-            var sys = new SystemTools();
-            var storeId = Number(ddlStoreHeader.value); //and OnhandQty > 0
-            var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
-            var qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
-            ItemBaesdFamilyDetails = new Array();
-            sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, function () {
-                var id = SearchGrid.SearchDataGrid.SelectedKey;
-                debugger;
-                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
-                //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
-                $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
-                ItemBaesdFamilyDetails = new Array();
-                ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
-                var searchItemID = ItemBaesdFamilyDetails[0].ItemID;
-                FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
-                $('#ddlItem' + cnt).empty();
-                $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
-                for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
-                    $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
-                }
-                $('#ddlItem' + cnt).val(searchItemID);
-                var selectedItem = $(dropddlItem + ' option:selected').attr('value');
-                var selectedFamily = $(drop + ' option:selected').attr('value');
-                var itemID = Number(selectedItem);
-                var FamilyID = Number(selectedFamily);
-                var res = false;
-                var NumberRowid = $("#ReciveDetailsID" + cnt).val();
-                res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
-                $("#txtPrice" + cnt).val("1");
-                $("#txtPriceFc" + cnt).val("1");
-                $("#txtQuantity" + cnt).val("1");
-                $("#txtDiscountPrc" + cnt).val("0");
-                $("#txtDiscountAmount" + cnt).val("0");
-                //if (res == true) {
-                //    $("#ddlItem" + cnt).val("null");
-                //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
-                //}
-                totalRow(cnt, true);
-            });
+            SearchItems(cnt);
         });
         //script
         //fill dropdownlist
@@ -1635,6 +1600,51 @@ var PurTrReceive;
         }
         $(".select_").select2();
         return;
+    }
+    function SearchItems(cnt) {
+        debugger;
+        var sys = new SystemTools();
+        var storeId = Number(ddlStoreHeader.value); //and OnhandQty > 0
+        var FinYear = SysSession.CurrentEnvironment.CurrentYear; //and OnhandQty > 0
+        var qury = "CompCode = " + compcode + " and  StoreId=" + storeId + " and IsPurchase = 1 and FinYear = " + FinYear;
+        ItemBaesdFamilyDetails = new Array();
+        sys.FindKey(Modules.IssueToCC, "btnSearchItems", qury, function () {
+            var id = SearchGrid.SearchDataGrid.SelectedKey;
+            debugger;
+            ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
+            //$('#ddlFamily' + cnt).val(ItemBaesdFamilyDetails[0].ItemFamilyID);
+            $('#ddlFamily' + cnt + ' option[value=' + ItemBaesdFamilyDetails[0].ItemFamilyID + ']').prop('selected', 'selected').change();
+            ItemBaesdFamilyDetails = new Array();
+            ItemBaesdFamilyDetails = ItemFamilyDetails.filter(function (x) { return x.ItemID == id; });
+            var searchItemID = ItemBaesdFamilyDetails[0].ItemID;
+            FillddlItems(Number($('#ddlFamily' + cnt).val()), Number(ddlStoreHeader.value));
+            $('#ddlItem' + cnt).empty();
+            $('#ddlItem' + cnt).append('<option value="' + null + '">' + "اختر الصنف" + '</option>');
+            for (var i = 0; i < ItemBaesdFamilyDetails.length; i++) {
+                $('#ddlItem' + cnt).append('<option data-MinUnitPrice="' + ItemBaesdFamilyDetails[i].MinUnitPrice + '" data-OnhandQty="' + ItemBaesdFamilyDetails[i].OnhandQty + '" value="' + ItemBaesdFamilyDetails[i].ItemID + '">' + (lang == "ar" ? ItemBaesdFamilyDetails[i].Itm_DescA : ItemBaesdFamilyDetails[i].Itm_DescE) + '</option>');
+            }
+            $('#ddlItem' + cnt).val(searchItemID);
+            var dropddlItem = '#ddlItem' + cnt;
+            var drop = '#ddlFamily' + cnt;
+            var selectedItem = $(dropddlItem + ' option:selected').attr('value');
+            var selectedFamily = $(drop + ' option:selected').attr('value');
+            var itemID = Number(selectedItem);
+            var FamilyID = Number(selectedFamily);
+            var res = false;
+            var NumberRowid = $("#ReciveDetailsID" + cnt).val();
+            res = checkRepeatedItems(itemID, FamilyID, NumberRowid);
+            $("#txtPrice" + cnt).val("");
+            $("#txtPriceFc" + cnt).val("");
+            $("#txtQuantity" + cnt).val("");
+            $("#txtDiscountPrc" + cnt).val("0");
+            $("#txtDiscountAmount" + cnt).val("0");
+            //if (res == true) {
+            //    $("#ddlItem" + cnt).val("null");
+            //    DisplayMassage('( لايمكن تكرار نفس الاصناف علي الفاتورة )', 'The same items cannot be repeated on the invoice', MessageType.Error);
+            //}
+            totalRow(cnt, true);
+            $("#txtQuantity" + cnt).focus();
+        });
     }
     function totalRow(cnt, flagDiscountAmount) {
         var txtPrice = Number($("#txtPriceFc" + cnt).val());
@@ -2041,6 +2051,7 @@ var PurTrReceive;
             }
             ComputeTotalsCharge();
         }
+        $('#txtAddonsCharge' + cnt).focus();
         return;
     }
     function DeleteRowCharge(RecNo) {
