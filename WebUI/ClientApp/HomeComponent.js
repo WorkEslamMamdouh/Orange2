@@ -9,7 +9,6 @@ $(document).ready(function () {
 var HomeComponent;
 (function (HomeComponent) {
     //let res: any = GetResourceList("");d
-    debugger;
     var sys = new SystemTools();
     var ddbra;
     ddbra = document.getElementById("ddbra");
@@ -22,7 +21,6 @@ var HomeComponent;
     var selectedbar;
     var newtap = false;
     G_BRANCHService = GetSystemG_BRANCH();
-    debugger;
     $('Li').addClass('animate__animated animate__fadeInTopRight');
     $('#logOrg').addClass('animate__animated animate__backInDown');
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
@@ -845,7 +843,6 @@ var HomeComponent;
         return Style_New;
     }());
     function Show_News() {
-        debugger;
         $("#Div_History").html('');
         $("#Div_News").html('');
         $('.history-icon').attr('style', '');
@@ -908,7 +905,6 @@ var HomeComponent;
         });
     }
     function BuildNews(cnt, IsHistory) {
-        debugger;
         var class_News = GetClass(cnt);
         var html_News = "\n                      <div class=\"alert alert-" + class_News.class_title + " alert-white animate__animated animate__fadeInTopRight\">\n                        <div class=\"icon\">" + class_News.class_icon + "</div>\n                        <h5 class=\"news-date\"> " + DateFormat(News_Details.G_News[cnt].NewsDate) + "</h5>\n                        <strong>" + class_News.Type_Text + " :</strong>\n                        <span> " + News_Details.G_News[cnt].NewsText + " </span>\n                      </div>\n\n                   ";
         if (IsHistory) {
@@ -919,7 +915,6 @@ var HomeComponent;
         }
     }
     function GetClass(cnt) {
-        debugger;
         var StyleNew = new Style_New();
         var TypeCode = News_Details.G_News[cnt].NewsTypeCode;
         var NewsType = News_Details.G_Codes.filter(function (x) { return x.CodeValue == TypeCode; });

@@ -3,6 +3,7 @@ using Inv.API.Models.CustomModel;
 using Inv.API.Tools;
 using Inv.BLL.Services.AccDefVendor;
 using Inv.DAL.Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -329,6 +330,17 @@ namespace Inv.API.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetA_G_Vendor(string query ,string NameTable)
+        {
+
+            var res = Get_Model(query, NameTable);
+            return Ok(new BaseResponse(res));
+              
+
+        }
+
 
 
     }

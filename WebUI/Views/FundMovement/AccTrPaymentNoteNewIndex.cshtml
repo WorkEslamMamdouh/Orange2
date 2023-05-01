@@ -197,7 +197,7 @@
                                     <div class="form-group row ">
                                         <label class="col-4 col-md-4 align-self-center p-md-0">@SystemResource.App_Drainage_Type</label>
                                         <div class="col-8 col-md-8 ">
-                                            <select id="txt_ReceiptNoteH" name="RecPayTypeId" class="form-control _dis text_Display">
+                                            <select id="txt_ReceiptNoteH" name="RecPayTypeId" class="_dbd form-control _dis text_Display">
                                                 <option value="Null">   @SystemResource.App_Drainage_Type </option>
                                             </select>
                                         </div>
@@ -300,8 +300,8 @@
                                     <div class="form-group row ">
                                         <label class="col-4 col-md-3 col-lg-4 align-self-center p-md-0">@SystemResource.transfer_check </label>
                                         <div class="col-8 col-md-9 col-lg-7 ">
-                                            <input id="txt_CheckNo" disabled name="CheckNo" type="number" class="_dis form-control" placeholder="   @SystemResource.check">
-                                            <input id="txt_TransferNo" disabled name="TransferNo" type="number" class="_dis form-control display_none" placeholder="  @SystemResource.transfer">
+                                            <input id="txt_CheckNo" disabled name="CheckNo" type="number" class="_dis form-control display_none" placeholder="   @SystemResource.check">
+                                            <input id="txt_TransferNo" disabled name="TransferNo" type="number" class="_dis form-control  " placeholder="  @SystemResource.transfer">
                                         </div>
                                     </div>
                                 </div>
@@ -317,7 +317,7 @@
                                     <div class="form-group row ">
                                         <label class="col-4 col-md-3 align-self-center p-md-0">@SystemResource.App_account_numbe11 </label>
                                         <div class="col-8 col-md-9 ">
-                                            <select id="txt_BankAcc_Code" disabled name="BankAcc_Code" class="_dis form-control">
+                                            <select id="txt_BankAcc_Code" disabled name="BankAcc_Code" class="_dbd _dis form-control">
                                                 <option value="Null">@SystemResource.Deposit_account</option>
                                             </select>
                                         </div>
@@ -345,7 +345,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mt-3" id="">
+                        <div class="col-12 mt-3"  id="Charge_Div">
                             <div class="div-label">رسوم بنكية </div>
                             <div class="row div-border py-3">
                                 <div class="col-12">
@@ -354,7 +354,7 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0">البنك </label>
                                                 <div class="col-8  ">
-                                                    <select id="" disabled name="" class=" form-control">
+                                                    <select id="dbChargeBank" disabled name="ChargeProviderID" class="_dbd _dis form-control">
                                                         <option value="Null"></option>
                                                     </select>
                                                 </div>
@@ -364,7 +364,7 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0">رقم الفاتورة </label>
                                                 <div class="col-8  ">
-                                                    <input id="" disabled name="" type="text" class=" form-control" placeholder="">
+                                                    <input id="txtChargesTrNo" disabled name="" type="number" class="_dis form-control" placeholder="رقم الفاتورة">
                                                 </div>
                                             </div>
                                         </div>
@@ -376,7 +376,7 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0">المبلغ </label>
                                                 <div class="col-8  ">
-                                                    <input id="" disabled name="" type="text" class=" form-control" placeholder="">
+                                                    <input id="txtCharges" disabled name="Charges" type="number" class="_dis form-control" placeholder="المبلغ">
                                                 </div>
                                             </div>
                                         </div>
@@ -384,9 +384,10 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0">نوع الضريبة  </label>
                                                 <div class="col-8  ">
-                                                    <select id="" disabled name="" class=" form-control">
-                                                        <option value="Null"></option>
+                                                    <select id="dbChargeVatType" disabled name="ChargeVatType" class="_dbd _dis form-control">
+                                                        <option value="null">اختر النوع</option>
                                                     </select>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -394,7 +395,8 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0"> الضريبة  </label>
                                                 <div class="col-8  ">
-                                                    <input id="" disabled name="" type="text" class=" form-control" placeholder="">
+                                                    <input id="txtChargesVatPrc" disabled name="ChargesVatPrc" type="number" class="  form-control display_none" placeholder="">
+                                                    <input id="txtChargesVat" disabled name="ChargesVat" type="number" class=" form-control" placeholder="الضريبة">
                                                 </div>
                                             </div>
                                         </div>
@@ -403,7 +405,7 @@
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0"> الصافى  </label>
                                                 <div class="col-8  ">
-                                                    <input id="" disabled name="" type="text" class=" form-control" placeholder="">
+                                                    <input id="txtChargeWithVat" disabled name="ChargeWithVat" type="number" class="_dis form-control" placeholder="الصافى">
                                                 </div>
                                             </div>
                                         </div>
@@ -412,7 +414,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 mt-3" id="">
+                        <div class="col-12 mt-3" id="Provider_Div">
                             <div class="div-label"> مزود الخدمة </div>
                             <div class="row div-border py-3">
                                 <div class="col-12">
@@ -450,8 +452,10 @@
                                         <div class="col-12 col-md-6 col-lg-3">
                                             <div class="form-group row ">
                                                 <label class="col-4  align-self-center p-md-0"> نوع الضريبة  </label>
-                                                <div class="col-8  ">
-                                                    <input id="" disabled name="" type="text" class=" form-control" placeholder="">
+                                                <div class="col-8  "> 
+                                                    <select id="dbProviderVatType" disabled name="ProviderVatType" class="_dbd _dis form-control">
+                                                        <option value="null">اختر النوع</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

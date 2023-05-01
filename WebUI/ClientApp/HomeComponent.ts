@@ -11,7 +11,7 @@ $(document).ready(() => {
 
 namespace HomeComponent {
     //let res: any = GetResourceList("");d
-    debugger
+    
     var sys: SystemTools = new SystemTools();
     var ddbra: HTMLSelectElement;
     ddbra = document.getElementById("ddbra") as HTMLSelectElement;
@@ -26,7 +26,7 @@ namespace HomeComponent {
     var newtap = false;
 
     G_BRANCHService = GetSystemG_BRANCH();
-    debugger
+    
     $('Li').addClass('animate__animated animate__fadeInTopRight');
     $('#logOrg').addClass('animate__animated animate__backInDown');
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
@@ -974,7 +974,7 @@ namespace HomeComponent {
     }
 
     function Show_News() {
-        debugger
+        
 
         $("#Div_History").html('');
         $("#Div_News").html('');
@@ -1066,7 +1066,7 @@ namespace HomeComponent {
 
     function BuildNews(cnt: number, IsHistory: boolean) {
 
-        debugger
+        
 
         let class_News = GetClass(cnt);
 
@@ -1096,7 +1096,7 @@ namespace HomeComponent {
 
     function GetClass(cnt: number): Style_New {
 
-        debugger
+        
         let StyleNew: Style_New = new Style_New();
 
         let TypeCode = News_Details.G_News[cnt].NewsTypeCode;

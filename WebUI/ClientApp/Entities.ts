@@ -1261,6 +1261,28 @@ class A_D_VAT_TYPE extends SecurityClass {
     public LineOrder: number;
 }
 
+class A_G_Vendor extends SecurityClass {
+    constructor() {
+        super();
+        this.VendorID = 0;
+        this.VendorCode = "";
+        this.TypeId = 0;
+        this.NAMEA = "";
+        this.NAMEL = "";
+        this.VATType = 0;
+        this.VATNo = "";
+    }
+    public VendorID: number;
+    public VendorCode: string;
+    public TypeId: number;
+    public NAMEA: string;
+    public NAMEL: string;
+    public VATType: number;
+    public VATNo: string;
+}
+
+
+
 class I_D_Category extends SecurityClass {
     constructor() {
         super();
@@ -2990,6 +3012,22 @@ class A_RecPay_Tr_ReceiptNote extends SecurityClass {
         this.IsDeffered = false;
         this.DueDate = "";
         this.CashType = 0;
+        this.Charges = 0;
+        this.ChargeProviderID = 0;
+        this.ChargesVat = 0;
+        this.ChargeWithVat = 0;
+        this.ChargeVatType = 0;
+        this.ChargesVatPrc = 0;
+        this.ProviderID = 0;
+        this.ProviderName = "";
+        this.ProviderVatNo = "";
+        this.ProviderVatType = 0;
+        this.ProviderVatPrc = 0;
+        this.ProviderVatAmount = 0;
+        this.ProviderInvoiceNo = "";
+        this.ProviderIndDate = "";
+        this.ProviderAmountBeforeVat = 0;
+        this.CC_Code = "";
     }
     public ReceiptID: number;
     public CashBoxID: number;
@@ -3026,7 +3064,24 @@ class A_RecPay_Tr_ReceiptNote extends SecurityClass {
     public IsDeffered: boolean;
     public DueDate: string;
     public CashType: number;
+    public Charges: number;
+    public ChargeProviderID: number;
+    public ChargesVat: number;
+    public ChargeWithVat: number;
+    public ChargeVatType: number;
+    public ChargesVatPrc: number;
+    public ProviderID: number;
+    public ProviderName: string;
+    public ProviderVatNo: string;
+    public ProviderVatType: number;
+    public ProviderVatPrc: number;
+    public ProviderVatAmount: number;
+    public ProviderInvoiceNo: string;
+    public ProviderIndDate: string;
+    public ProviderAmountBeforeVat: number;
+    public CC_Code: string;
 }
+
 
 
 class GQ_GetUserBarnchAccess extends SecurityClass {
@@ -3253,10 +3308,8 @@ class A_RecPay_Tr_Adjustment extends SecurityClass {
 
 
 
-
-class IQ_GetBoxReceiveList extends SecurityClass {
+class IQ_GetBoxReceiveList {
     constructor() {
-        super();
         this.ReceiptID = 0;
         this.CashBoxID = 0;
         this.TrType = 0;
@@ -3315,7 +3368,27 @@ class IQ_GetBoxReceiveList extends SecurityClass {
         this.CashType = 0;
         this.Bnk_acc_DescE = "";
         this.ACC_DESCL = "";
-        this.Status_New = "";
+        this.Charges = 0;
+        this.ChargeProviderID = 0;
+        this.ChargesVat = 0;
+        this.ChargeWithVat = 0;
+        this.ChargeVatType = 0;
+        this.ChargesVatPrc = 0;
+        this.ProviderName = "";
+        this.ProviderID = 0;
+        this.ProviderVatNo = "";
+        this.ProviderVatType = 0;
+        this.ProviderVatPrc = 0;
+        this.ProviderVatAmount = 0;
+        this.ProviderInvoiceNo = "";
+        this.ProviderIndDate = "";
+        this.ProviderAmountBeforeVat = 0;
+        this.CC_Code = "";
+        this.ChrgPrv_NameA = "";
+        this.Chrgprv_NameE = "";
+        this.Prov_Code = "";
+        this.Prov_NameA = "";
+        this.Prov_NameE = "";
     }
     public ReceiptID: number;
     public CashBoxID: number;
@@ -3375,8 +3448,29 @@ class IQ_GetBoxReceiveList extends SecurityClass {
     public CashType: number;
     public Bnk_acc_DescE: string;
     public ACC_DESCL: string;
-    public Status_New: string;
+    public Charges: number;
+    public ChargeProviderID: number;
+    public ChargesVat: number;
+    public ChargeWithVat: number;
+    public ChargeVatType: number;
+    public ChargesVatPrc: number;
+    public ProviderName: string;
+    public ProviderID: number;
+    public ProviderVatNo: string;
+    public ProviderVatType: number;
+    public ProviderVatPrc: number;
+    public ProviderVatAmount: number;
+    public ProviderInvoiceNo: string;
+    public ProviderIndDate: string;
+    public ProviderAmountBeforeVat: number;
+    public CC_Code: string;
+    public ChrgPrv_NameA: string;
+    public Chrgprv_NameE: string;
+    public Prov_Code: string;
+    public Prov_NameA: string;
+    public Prov_NameE: string;
 }
+
 
 
 class IQ_GetPurchaseOrder extends SecurityClass {

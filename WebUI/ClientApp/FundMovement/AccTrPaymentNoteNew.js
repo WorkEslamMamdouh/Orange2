@@ -14,6 +14,8 @@ var AccTrPaymentNoteNew;
     var ReportGrid = new JsGrid();
     var Details = new Array();
     var Model = new A_RecPay_Tr_ReceiptNote();
+    var txtChargeWithVat;
+    var txtCharges;
     var searchbutmemreport;
     var txt_BenCodeF;
     var txt_BenCodeH;
@@ -32,9 +34,11 @@ var AccTrPaymentNoteNew;
     var txt_ReceiptNoteF;
     var txt_ReceiptNoteH;
     var txt_BankAcc_Code;
+    var dbChargeBank;
     var txt_Status;
     var txt_D_CashBoxF;
     var txt_D_CashBoxH;
+    var dbChargeVatType;
     var btnBack;
     var btnShow;
     var btnAdd;
@@ -61,6 +65,8 @@ var AccTrPaymentNoteNew;
         fillddlCashBox();
         fillddlG_Codes();
         fillddlAcount_Code();
+        fillddlVatType();
+        fillddlChargeBank();
     }
     AccTrPaymentNoteNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -78,7 +84,9 @@ var AccTrPaymentNoteNew;
         txt_ReceiptNoteH = document.getElementById("txt_ReceiptNoteH");
         txt_D_CashBoxH = document.getElementById("txt_D_CashBoxH");
         txt_D_CashBoxF = document.getElementById("txt_D_CashBoxF");
+        dbChargeVatType = document.getElementById("dbChargeVatType");
         txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code");
+        dbChargeBank = document.getElementById("dbChargeBank");
         txt_Status = document.getElementById("txt_Status");
         ////////
         txt_BenCodeF = document.getElementById("txt_BenCodeF");
@@ -91,6 +99,8 @@ var AccTrPaymentNoteNew;
         txtDueDate = document.getElementById("txtDueDate");
         chkStatus = document.getElementById("chkStatus");
         chkIsDeffered = document.getElementById("chkIsDeffered");
+        txtCharges = document.getElementById("txtCharges");
+        txtChargeWithVat = document.getElementById("txtChargeWithVat");
         searchbutmemreport = document.getElementById("searchbutmemreport");
         txtDateFrom = document.getElementById("txtDateFrom");
         txtDateTo = document.getElementById("txtDateTo");
@@ -123,6 +133,10 @@ var AccTrPaymentNoteNew;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
         chkStatus.onchange = chkStatus_onchange;
+        //dbChargeBank.onchange = () => { dbChargeVatType.value = dbChargeBank }
+        dbChargeVatType.onchange = function () { CalculatorCharges(false); };
+        txtCharges.onkeyup = function () { CalculatorCharges(false); };
+        txtChargeWithVat.onkeyup = function () { CalculatorCharges(true); };
         //*******************************print*****************************
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
@@ -231,6 +245,43 @@ var AccTrPaymentNoteNew;
             }
         });
     }
+    function fillddlVatType() {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("GenVatType", "GetAll"),
+            data: {
+                CompCode: CompCode, VatType: 1, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    var VatTypeDetails = result.Response;
+                    for (var i = 0; i < VatTypeDetails.length; i++) {
+                        $('#dbChargeVatType').append('<option data_VatPerc="' + VatTypeDetails[i].VatPerc + '" value="' + VatTypeDetails[i].CODE + '">' + VatTypeDetails[i].DESCRIPTION + '</option>');
+                        $('#dbProviderVatType').append('<option data_VatPerc="' + VatTypeDetails[i].VatPerc + '" value="' + VatTypeDetails[i].CODE + '">' + VatTypeDetails[i].DESCRIPTION + '</option>');
+                    }
+                }
+            }
+        });
+    }
+    function fillddlChargeBank() {
+        var query = "select * from [dbo].[A_G_Vendor]";
+        var NameTable = "A_G_Vendor";
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefVendor", "GetA_G_Vendor"),
+            data: {
+                query: query, NameTable: NameTable
+            },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    var ListBank = result.Response;
+                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'اختر البنك' : 'Bank'));
+                }
+            }
+        });
+    }
     //************************************************Btn_Events**********************************
     function btnBen_onclick(Type) {
         debugger;
@@ -252,28 +303,6 @@ var AccTrPaymentNoteNew;
         }
         if ($('#txt_ReceiptNote' + Type).val() == "5") {
             BenBox(Type);
-        }
-    }
-    function BenCode_onchange(Type) {
-        debugger;
-        if ($('#txt_ReceiptNote' + Type).val() == "null") {
-            DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning);
-            Errorinput($('#txt_ReceiptNote' + Type));
-        }
-        if ($('#txt_ReceiptNote' + Type).val() == "1") {
-            getAccountCustById(Type, $('#txt_BenCode' + Type).val(), true);
-        }
-        if ($('#txt_ReceiptNote' + Type).val() == "2") {
-            getAccountVndById(Type, $('#txt_BenCode' + Type).val(), true);
-        }
-        if ($('#txt_ReceiptNote' + Type).val() == "3") {
-            getAccountBankById(Type, $('#txt_BenCode' + Type).val(), true);
-        }
-        if ($('#txt_ReceiptNote' + Type).val() == "4") {
-            getAccountAccById(Type, $('#txt_BenCode' + Type).val(), true);
-        }
-        if ($('#txt_ReceiptNote' + Type).val() == "5") {
-            getAccountBoxById(Type, $('#txt_BenCode' + Type).val(), true);
         }
     }
     function btnShow_onclick() {
@@ -341,6 +370,29 @@ var AccTrPaymentNoteNew;
     function btnUpdate_onclick() {
         Enabled();
     }
+    //************************************************Change_Events**********************************
+    function BenCode_onchange(Type) {
+        debugger;
+        if ($('#txt_ReceiptNote' + Type).val() == "null") {
+            DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning);
+            Errorinput($('#txt_ReceiptNote' + Type));
+        }
+        if ($('#txt_ReceiptNote' + Type).val() == "1") {
+            getAccountCustById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
+        if ($('#txt_ReceiptNote' + Type).val() == "2") {
+            getAccountVndById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
+        if ($('#txt_ReceiptNote' + Type).val() == "3") {
+            getAccountBankById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
+        if ($('#txt_ReceiptNote' + Type).val() == "4") {
+            getAccountAccById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
+        if ($('#txt_ReceiptNote' + Type).val() == "5") {
+            getAccountBoxById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
+    }
     function _SearchBox_Change() {
         $("#ReportGrid").jsGrid("option", "pageIndex", 1);
         if (searchbutmemreport.value != "") {
@@ -355,47 +407,35 @@ var AccTrPaymentNoteNew;
         }
     }
     function txtCashTypeH_onchange() {
-        if (txtCashTypeH.value == '0') {
-            $('#Bank_Div').addClass('display_none');
+        $('#Bank_Div').addClass('display_none');
+        $('#Charge_Div').addClass('display_none');
+        $('#Provider_Div').addClass('display_none');
+        $('._Card').addClass('display_none');
+        $('._Cash').addClass('display_none');
+        $('#txt_CheckNo').val('');
+        $('#txt_TransferNo').val('');
+        $('#txt_CardAmount').val('0');
+        $('#txt_CashAmount').val('0');
+        $('#txt_Amount').val('');
+        $('#txt_BankName').val('');
+        $('#txt_BankAcc_Code').val('null');
+        chkIsDeffered.checked = false;
+        txtDueDate.value = GetDate();
+        $('#txt_Amount').attr('disabled', 'disabled');
+        $('#txtDueDate').attr('disabled', 'disabled');
+        if (txtCashTypeH.value == '0') { // نقدي 
             $('._Cash').removeClass('display_none');
-            $('._Card').addClass('display_none');
-            $('#txt_CheckNo').val('');
-            $('#txt_TransferNo').val('');
-            $('#txt_CardAmount').val('0');
-            $('#txt_CashAmount').val('0');
-            $('#txt_Amount').val('');
-            $('#txt_BankName').val('');
-            $('#txt_BankAcc_Code').val('null');
-            chkIsDeffered.checked = false;
-            txtDueDate.value = GetDate();
-            $('#txt_Amount').attr('disabled', 'disabled');
         }
-        else if (txtCashTypeH.value == '8') {
-            $('#Bank_Div').addClass('display_none');
+        else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
             $('._Card').removeClass('display_none');
-            $('._Cash').addClass('display_none');
-            $('#txt_CheckNo').val('');
-            $('#txt_TransferNo').val('');
-            $('#txt_CardAmount').val('0');
-            $('#txt_CashAmount').val('0');
-            $('#txt_Amount').val('');
-            $('#txt_BankName').val('');
-            $('#txt_BankAcc_Code').val('null');
-            chkIsDeffered.checked = false;
-            txtDueDate.value = GetDate();
-            $('#txt_Amount').attr('disabled', 'disabled');
         }
-        else {
+        else { // الجميع
             $('#Bank_Div').removeClass('display_none');
-            $('._Cash').addClass('display_none');
-            $('._Card').addClass('display_none');
-            $('#txt_TransferNo').removeClass('display_none');
-            $('#txt_CheckNo').addClass('display_none');
-            $('#txt_CashAmount').val('0');
-            $('#txt_CardAmount').val('0');
+            $('#Charge_Div').removeClass('display_none');
             $('#txt_Amount').removeAttr('disabled');
-            $('#txtDueDate').attr('disabled', 'disabled');
-            chkIsDeffered.checked = false;
+            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
     }
     function chkIsDeffered_onchange() {
@@ -409,6 +449,29 @@ var AccTrPaymentNoteNew;
     function chkStatus_onchange() {
         if (chkStatus.checked == false) {
             txt_note.disabled == true ? Open() : null;
+        }
+    }
+    function CalculatorCharges(Calculat_WithVAT) {
+        debugger;
+        if (dbChargeVatType.value == 'null') {
+            $("#txtCharges").val('');
+            $("#txtChargesVat").val('');
+            $("#txtChargeWithVat").val('');
+            Errorinput(dbChargeVatType);
+            return;
+        }
+        var VatPrc = $('option:selected', $("#dbChargeVatType")).attr('data_VatPerc');
+        $("#txtChargesVatPrc").val(VatPrc);
+        if (Calculat_WithVAT) { // تجميع مع الضريبه
+            var NetPrice = Number($("#txtChargeWithVat").val());
+            var GetUnitprice = Get_PriceWithVAT(NetPrice, Number(VatPrc), true);
+            $("#txtCharges").val((GetUnitprice.unitprice).RoundToSt(2));
+        }
+        var Vat = (Number($("#txtCharges").val()) * Number(VatPrc)) / 100;
+        $("#txtChargesVat").val(Vat.RoundToSt(2));
+        if (!Calculat_WithVAT) {
+            var Net = (Number($("#txtCharges").val()) + Number($("#txtChargesVat").val())).RoundToSt(2);
+            $("#txtChargeWithVat").val(Net);
         }
     }
     //****************************************************Customer*********************************************
@@ -621,6 +684,12 @@ var AccTrPaymentNoteNew;
         $('#txt_BenName' + Type).val("");
         $('#txt_Openbalance' + Type).val("");
         $('#txt_BenID' + Type).val("");
+        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+            $('#Provider_Div').removeClass('display_none');
+        }
+        else {
+            $('#Provider_Div').addClass('display_none');
+        }
     }
     function Enabled() {
         $('._dis').removeAttr('disabled');
@@ -628,6 +697,9 @@ var AccTrPaymentNoteNew;
         $('#id_div_Filter').addClass('disabledDiv');
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
+        if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8') { // نقدي  او تحصيل شبكة  
+            $('#txt_Amount').removeAttr('disabled');
+        }
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled');
@@ -640,8 +712,7 @@ var AccTrPaymentNoteNew;
         $("#Div_control :input").val("");
         txt_D_CashBoxH.selectedIndex = 1;
         txtCashTypeH.value = '0';
-        txt_ReceiptNoteH.value = 'null';
-        txt_BankAcc_Code.value = 'null';
+        $("._dbd").val("null");
         txtTrDate.value = GetDate();
         txtDueDate.value = GetDate();
         chkIsDeffered.checked = false;
@@ -676,21 +747,6 @@ var AccTrPaymentNoteNew;
             getAccountBoxById('H', Selecteditem.FromCashBoxID.toString(), false);
         }
         Flag_IsNew = false;
-        if (txtCashTypeH.value == '0') {
-            $('#Bank_Div').addClass('display_none');
-            $('._Cash').removeClass('display_none');
-            $('._Card').addClass('display_none');
-        }
-        else if (txtCashTypeH.value == '8') {
-            $('#Bank_Div').addClass('display_none');
-            $('._Card').removeClass('display_none');
-            $('._Cash').addClass('display_none');
-        }
-        else {
-            $('#Bank_Div').removeClass('display_none');
-            $('._Cash').addClass('display_none');
-            $('._Card').addClass('display_none');
-        }
         if (chkStatus.checked == true) {
             btnUpdate.disabled = true;
             chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
@@ -698,6 +754,29 @@ var AccTrPaymentNoteNew;
         else {
             btnUpdate.disabled = false;
             chkStatus.disabled = true;
+        }
+        Mode_CashType();
+    }
+    function Mode_CashType() {
+        $('#Bank_Div').addClass('display_none');
+        $('#Charge_Div').addClass('display_none');
+        $('#Provider_Div').addClass('display_none');
+        $('._Cash').addClass('display_none');
+        $('._Card').addClass('display_none');
+        if (txtCashTypeH.value == '0') { // نقدي 
+            $('._Cash').removeClass('display_none');
+        }
+        else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
+            $('._Card').removeClass('display_none');
+        }
+        else {
+            $('#Bank_Div').removeClass('display_none');
+            if (txt_ReceiptNoteH.value != 'مصروف مستحق') {
+                $('#Charge_Div').removeClass('display_none');
+            }
+            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
     }
     //****************************************************Validation*********************************************
@@ -798,6 +877,7 @@ var AccTrPaymentNoteNew;
         Model.ReceiptID = Number($('#ReceiptID').val());
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
+        Model.CheckNo = Model.TransferNo;
         Model.TrDateH = '1';
     }
     function Insert() {
