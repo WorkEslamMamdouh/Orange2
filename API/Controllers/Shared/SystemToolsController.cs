@@ -1951,5 +1951,16 @@ namespace Inv.API.Controllers
         }
 
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult Get_Table(string query, string NameTable)
+        {
+
+            var res = Get_Model(query, NameTable);
+            return Ok(new BaseResponse(res));
+
+
+        }
+
+
     }
 }

@@ -250,54 +250,51 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Insert([FromBody]A_RecPay_Tr_ReceiptNote Entity)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(Entity.Token, Entity.UserCode))
+
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
-                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+                try
                 {
-                    try
+                    Entity.BankName = "";
+                    A_RecPay_Tr_ReceiptNote res = AccTrReceiptService.Insert(Entity);
+                    string Typ;
+                    if (res.TrType == 1)
                     {
-                        Entity.BankName = "";
-                        A_RecPay_Tr_ReceiptNote res = AccTrReceiptService.Insert(Entity);
-                        string Typ;
-                        if (res.TrType == 1)
-                        {
-                            Typ = "BoxReceipt";
-                        }
-                        else if (res.TrType == 2)
-                        {
-                            Typ = "BoxPayment";
-                        }
-                        else
-                        {
-                            Typ = "BoxTransfer";
-                        }
-
-                        ResponseResult result = Shared.TransactionProcess(int.Parse(res.CompCode.ToString()), int.Parse(res.BranchCode.ToString()), res.ReceiptID, Typ, "Add", db);
-                        if (result.ResponseState == true)
-                        {
-                            dbTransaction.Commit();
-                            res.TrNo = int.Parse(result.ResponseData.ToString());
-                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
-
-                            IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
-                            return Ok(new BaseResponse(displayData));
-                        }
-                        else
-                        {
-                            dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
-                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
-                        }
+                        Typ = "BoxReceipt";
                     }
-                    catch (Exception ex)
+                    else if (res.TrType == 2)
+                    {
+                        Typ = "BoxPayment";
+                    }
+                    else
+                    {
+                        Typ = "BoxTransfer";
+                    }
+
+                    ResponseResult result = Shared.TransactionProcess(int.Parse(res.CompCode.ToString()), int.Parse(res.BranchCode.ToString()), res.ReceiptID, Typ, "Add", db);
+                    if (result.ResponseState == true)
+                    {
+                        dbTransaction.Commit();
+                        res.TrNo = int.Parse(result.ResponseData.ToString());
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
+
+                        IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
+                        return Ok(new BaseResponse(displayData));
+                    }
+                    else
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
                 }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                }
             }
-            return BadRequest(ModelState);
         }
 
         [HttpPost, AllowAnonymous]

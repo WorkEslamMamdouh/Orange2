@@ -23,7 +23,9 @@ namespace AccTrPaymentNoteNew {
     var searchbutmemreport: HTMLInputElement;
     var txt_BenCodeF: HTMLInputElement;
     var txt_BenCodeH: HTMLInputElement;
+    var txtProviderCode: HTMLInputElement;
     var txtTrDate: HTMLInputElement;
+    var txtProviderIndDate: HTMLInputElement;
     var txtDueDate: HTMLInputElement;
     var txtDateFrom: HTMLInputElement;
     var txtDateTo: HTMLInputElement;
@@ -33,6 +35,7 @@ namespace AccTrPaymentNoteNew {
     var txt_CardAmount: HTMLInputElement;
     var txt_Amount: HTMLInputElement;
     var txt_note: HTMLInputElement;
+    var txtProviderName: HTMLInputElement;
 
     var txtCashTypeF: HTMLSelectElement;
     var txtCashTypeH: HTMLSelectElement;
@@ -40,10 +43,12 @@ namespace AccTrPaymentNoteNew {
     var txt_ReceiptNoteH: HTMLSelectElement;
     var txt_BankAcc_Code: HTMLSelectElement;
     var dbChargeBank: HTMLSelectElement;
+    var dbCC_Code: HTMLSelectElement;
     var txt_Status: HTMLSelectElement;
     var txt_D_CashBoxF: HTMLSelectElement;
     var txt_D_CashBoxH: HTMLSelectElement;
     var dbChargeVatType: HTMLSelectElement;
+    var dbProviderVatType: HTMLSelectElement;
 
     var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
@@ -52,6 +57,7 @@ namespace AccTrPaymentNoteNew {
     var btnSave: HTMLButtonElement;
     var btnBenF: HTMLButtonElement;
     var btnBenH: HTMLButtonElement;
+    var btnProv: HTMLButtonElement;
     //////////////////////////////////////////print buttons////////////////////////////////////////////     
     var btnPrintTrview: HTMLButtonElement;
     var btnPrintTrPDF: HTMLButtonElement;
@@ -61,6 +67,7 @@ namespace AccTrPaymentNoteNew {
     var btnPrintslip: HTMLButtonElement;
     var btnPrintsFrom_To: HTMLButtonElement;
     var Flag_IsNew = false;
+    var ProviderName = "";
     export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = (lang == "ar" ? "سند " + Name_Not + "" : " " + Name_Not + "");
         InitalizeControls();
@@ -73,6 +80,7 @@ namespace AccTrPaymentNoteNew {
         fillddlAcount_Code();
         fillddlVatType();
         fillddlChargeBank();
+        fillddlCOST_CENTER();
     }
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
@@ -82,6 +90,7 @@ namespace AccTrPaymentNoteNew {
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
         btnBenF = document.getElementById("btnBenF") as HTMLButtonElement;
         btnBenH = document.getElementById("btnBenH") as HTMLButtonElement;
+        btnProv = document.getElementById("btnProv") as HTMLButtonElement;
         ////////  
         txtCashTypeF = document.getElementById("txtCashTypeF") as HTMLSelectElement;
         txtCashTypeH = document.getElementById("txtCashTypeH") as HTMLSelectElement;
@@ -90,17 +99,22 @@ namespace AccTrPaymentNoteNew {
         txt_D_CashBoxH = document.getElementById("txt_D_CashBoxH") as HTMLSelectElement;
         txt_D_CashBoxF = document.getElementById("txt_D_CashBoxF") as HTMLSelectElement;
         dbChargeVatType = document.getElementById("dbChargeVatType") as HTMLSelectElement;
+        dbProviderVatType = document.getElementById("dbProviderVatType") as HTMLSelectElement;
         txt_BankAcc_Code = document.getElementById("txt_BankAcc_Code") as HTMLSelectElement;
         dbChargeBank = document.getElementById("dbChargeBank") as HTMLSelectElement;
+        dbCC_Code = document.getElementById("dbCC_Code") as HTMLSelectElement;
         txt_Status = document.getElementById("txt_Status") as HTMLSelectElement;
         ////////
         txt_BenCodeF = document.getElementById("txt_BenCodeF") as HTMLInputElement;
         txt_BenCodeH = document.getElementById("txt_BenCodeH") as HTMLInputElement;
+        txtProviderCode = document.getElementById("txtProviderCode") as HTMLInputElement;
         txt_CashAmount = document.getElementById("txt_CashAmount") as HTMLInputElement;
         txt_CardAmount = document.getElementById("txt_CardAmount") as HTMLInputElement;
         txt_Amount = document.getElementById("txt_Amount") as HTMLInputElement;
         txt_note = document.getElementById("txt_note") as HTMLInputElement;
+        txtProviderName = document.getElementById("txtProviderName") as HTMLInputElement;
         txtTrDate = document.getElementById("txtTrDate") as HTMLInputElement;
+        txtProviderIndDate = document.getElementById("txtProviderIndDate") as HTMLInputElement;
         txtDueDate = document.getElementById("txtDueDate") as HTMLInputElement;
         chkStatus = document.getElementById("chkStatus") as HTMLInputElement;
         chkIsDeffered = document.getElementById("chkIsDeffered") as HTMLInputElement;
@@ -127,21 +141,25 @@ namespace AccTrPaymentNoteNew {
         btnUpdate.onclick = btnUpdate_onclick;
         btnBenF.onclick = () => { btnBen_onclick('F') }
         btnBenH.onclick = () => { btnBen_onclick('H') }
+        btnProv.onclick = btnProv_onclick;
         //********************************onchange****************************
         txt_BenCodeF.onchange = () => { BenCode_onchange('F') }
         txt_BenCodeH.onchange = () => { BenCode_onchange('H') }
         txt_ReceiptNoteF.onchange = () => { CleanBen('F') }
-        txt_ReceiptNoteH.onchange = () => { CleanBen('H') }
+        txt_ReceiptNoteH.onchange = () => { CleanBen('H'); CleanDiv_Charge_Provider(); }
         txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
         txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
         chkStatus.onchange = chkStatus_onchange;
-        //dbChargeBank.onchange = () => { dbChargeVatType.value = dbChargeBank }
+        txtProviderName.onchange = txtProviderName_onchange;
         dbChargeVatType.onchange = () => { CalculatorCharges(false) }
         txtCharges.onkeyup = () => { CalculatorCharges(false) }
         txtChargeWithVat.onkeyup = () => { CalculatorCharges(true) }
+        dbProviderVatType.onchange = CalculatorProvider;
+        txtProviderCode.onchange = () => { getProVndById($('#txtProviderCode').val(), true); }
+        txt_Amount.onkeyup = () => { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
         //*******************************print*****************************
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
@@ -250,7 +268,7 @@ namespace AccTrPaymentNoteNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let Model_Acount = result.Response as Array<A_ACCOUNT>;
-                    DocumentActions.FillCombowithdefult(Model_Acount, txt_BankAcc_Code, "ACC_CODE", (lang == "ar" ? 'ACC_DESCA' : 'ACC_DESCL'), (lang == "ar" ? 'اختر حساب الايداع' : 'Type of constraint'));
+                    DocumentActions.FillCombowithdefult(Model_Acount, txt_BankAcc_Code, "ACC_CODE", (lang == "ar" ? 'ACC_DESCA' : 'ACC_DESCL'), (lang == "ar" ? 'اختر حساب الصرف' : 'Type of constraint'));
 
                 }
             }
@@ -266,8 +284,8 @@ namespace AccTrPaymentNoteNew {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let VatTypeDetails = result.Response as Array<A_D_VAT_TYPE>; 
-                    for (var i = 0; i < VatTypeDetails.length; i++) { 
+                    let VatTypeDetails = result.Response as Array<A_D_VAT_TYPE>;
+                    for (var i = 0; i < VatTypeDetails.length; i++) {
                         $('#dbChargeVatType').append('<option data_VatPerc="' + VatTypeDetails[i].VatPerc + '" value="' + VatTypeDetails[i].CODE + '">' + VatTypeDetails[i].DESCRIPTION + '</option>');
                         $('#dbProviderVatType').append('<option data_VatPerc="' + VatTypeDetails[i].VatPerc + '" value="' + VatTypeDetails[i].CODE + '">' + VatTypeDetails[i].DESCRIPTION + '</option>');
                     }
@@ -281,15 +299,34 @@ namespace AccTrPaymentNoteNew {
         let NameTable = "A_G_Vendor";
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("AccDefVendor", "GetA_G_Vendor"),
+            url: sys.apiUrl("SystemTools", "Get_Table"),
             data: {
                 query: query, NameTable: NameTable
             },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let ListBank = result.Response as Array<A_G_Vendor>;                   
+                    let ListBank = result.Response as Array<A_G_Vendor>;
                     DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'اختر البنك' : 'Bank'));
+
+                }
+            }
+        });
+    }
+    function fillddlCOST_CENTER() {
+        let query = "select * from G_COST_CENTER where COMP_CODE = " + CompCode + "";
+        let NameTable = "G_COST_CENTER";
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("SystemTools", "Get_Table"),
+            data: {
+                query: query, NameTable: NameTable
+            },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    let ListCOST = result.Response as Array<G_COST_CENTER>;
+                    DocumentActions.FillCombowithdefult(ListCOST, dbCC_Code, "CC_CODE", (lang == "ar" ? 'CC_DESCA' : 'CC_DESCE'), (lang == "ar" ? 'اختر التكلفة' : 'COST'));
 
                 }
             }
@@ -304,7 +341,14 @@ namespace AccTrPaymentNoteNew {
         if ($('#txt_ReceiptNote' + Type).val() == "3") { BenBank(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "4") { BenAcc(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "5") { BenBox(Type); }
-    } 
+    }
+    function btnProv_onclick() {
+        let cond = " CompCode= " + CompCode + "and IsCreditVendor = 1 and Isactive = 1";
+        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", cond, () => {
+            let id = SearchGrid.SearchDataGrid.SelectedKey;
+            getProVndById(id, false);
+        });
+    }
     function btnShow_onclick() {
 
         let BenID = Number($('#txt_BenIDF').val())
@@ -348,8 +392,7 @@ namespace AccTrPaymentNoteNew {
             if (!Validation()) {
                 return;
             }
-
-            Assign();
+             
             if (Flag_IsNew == true) {
                 $("#txtCreatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtCreatedAt").val(DateTimeFormat(Date().toString()));
@@ -405,11 +448,11 @@ namespace AccTrPaymentNoteNew {
     }
     function txtCashTypeH_onchange() {
 
-        $('#Bank_Div').addClass('display_none');
+        $('._dis_Bank').attr('disabled', 'disabled');
         $('#Charge_Div').addClass('display_none');
         $('#Provider_Div').addClass('display_none');
         $('._Card').addClass('display_none');
-        $('._Cash').addClass('display_none'); 
+        $('._Cash').addClass('display_none');
         $('#txt_CheckNo').val('');
         $('#txt_TransferNo').val('');
         $('#txt_CardAmount').val('0');
@@ -420,22 +463,27 @@ namespace AccTrPaymentNoteNew {
         chkIsDeffered.checked = false;
         txtDueDate.value = GetDate();
         $('#txt_Amount').attr('disabled', 'disabled');
-        $('#txtDueDate').attr('disabled', 'disabled'); 
+        $('#txtDueDate').attr('disabled', 'disabled');
 
         if (txtCashTypeH.value == '0') {  // نقدي 
-            $('._Cash').removeClass('display_none'); 
+            $('._Cash').removeClass('display_none');
         }
         else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
-            $('._Card').removeClass('display_none'); 
+            $('._Card').removeClass('display_none');
         }
-        else { // الجميع
-            $('#Bank_Div').removeClass('display_none');
-            $('#Charge_Div').removeClass('display_none');  
+        else { // الجميع 
+
+            $('._dis_Bank').removeAttr('disabled');
+            $('#Charge_Div').removeClass('display_none');
             $('#txt_Amount').removeAttr('disabled');
-            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
-                $('#Provider_Div').removeClass('display_none');
-            }
+
         }
+
+        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+            $('#Provider_Div').removeClass('display_none');
+        }
+
+        CleanDiv_Charge_Provider();
     }
     function chkIsDeffered_onchange() {
 
@@ -474,18 +522,56 @@ namespace AccTrPaymentNoteNew {
             var NetPrice = Number($("#txtChargeWithVat").val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NetPrice, Number(VatPrc), true);
 
-            $("#txtCharges").val((GetUnitprice.unitprice).RoundToSt(2)); 
+            $("#txtCharges").val((GetUnitprice.unitprice).RoundToSt(2));
         }
-         
+
         let Vat = (Number($("#txtCharges").val()) * Number(VatPrc)) / 100;
         $("#txtChargesVat").val(Vat.RoundToSt(2));
 
         if (!Calculat_WithVAT) {
             let Net = (Number($("#txtCharges").val()) + Number($("#txtChargesVat").val())).RoundToSt(2);
-            $("#txtChargeWithVat").val(Net);
+            $("#txtChargeWithVat").val(Number(Net));
         }
-       
 
+
+
+    }
+    function CalculatorProvider() {
+        debugger
+
+        if ($("#dbProviderVatType").val() == 'null') {
+            $("#txtProviderVatPrc").val('');
+            $("#txtProviderVatAmount").val('');
+            $("#txtProviderAmountBeforeVat").val('');
+            return;
+        }
+
+        if (Number($("#txt_Amount").val()) == 0) {
+            Errorinput($("#txt_Amount"));
+        }
+
+        let VatPrc = $('option:selected', $("#dbProviderVatType")).attr('data_VatPerc')
+        $("#txtProviderVatPrc").val(VatPrc);
+
+
+        var NetPrice = Number($("#txt_Amount").val());
+        let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NetPrice, Number(VatPrc), true);
+
+        $("#txtProviderAmountBeforeVat").val((GetUnitprice.unitprice).RoundToSt(2));
+
+
+        let Vat = (Number($("#txtProviderAmountBeforeVat").val()) * Number(VatPrc)) / 100;
+        $("#txtProviderVatAmount").val(Vat.RoundToSt(2));
+
+
+    }
+    function txtProviderName_onchange() {
+
+        if (txtProviderName.value.trim() != ProviderName.trim()) {
+            $('#txtProviderCode').val('');
+            $('#txtProviderID').val('');
+            $('#txtProviderVatNo').val('');
+        }
 
     }
     //****************************************************Customer*********************************************
@@ -549,11 +635,11 @@ namespace AccTrPaymentNoteNew {
         });
     }
     function getAccountVndById(Type: string, VenId: string, code: boolean) {
-        debugger
+
         if (VenId.toString().trim() == '') {
             CleanBen(Type)
             Errorinput($('#txt_BenCode' + Type));
-            DisplayMassage("كود العميل غير صحيح", "Wrong Customer code", MessageType.Error);
+            DisplayMassage("كود المورد غير صحيح", "Wrong Customer code", MessageType.Error);
             return
         }
 
@@ -571,7 +657,7 @@ namespace AccTrPaymentNoteNew {
 
                         CleanBen(Type)
                         Errorinput($('#txt_BenCode' + Type));
-                        DisplayMassage("كود العميل غير صحيح", "Wrong Customer code", MessageType.Error);
+                        DisplayMassage("كود المورد غير صحيح", "Wrong Customer code", MessageType.Error);
                     }
                     else {
                         $('#txt_BenCode' + Type).val(Model_Vnd[0].VendorCode);
@@ -728,6 +814,53 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
+    //****************************************************Provider********************************************* 
+    function getProVndById(VenId: string, code: boolean) {
+
+        $('#txtProviderCode').val('');
+        $('#txtProviderName').val('');
+        $('#txtProviderID').val('');
+        $('#txtProviderVatNo').val('');
+
+
+        if (VenId.toString().trim() == '') {
+            Errorinput($('#txtProviderCode'));
+            DisplayMassage("كود المورد غير صحيح", "Wrong Customer code", MessageType.Error);
+            return
+        }
+
+
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("AccDefVendor", "GetVendorByvndId_code"),
+            data: { Compcode: CompCode, code: code, VendorID: VenId.toString().trim(), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            success: (d) => {
+
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    let Model_Vnd = result.Response as Array<A_Pay_D_Vendor>;
+                    if (Model_Vnd.length == 0) {
+
+                        Errorinput($('#txtProviderCode'));
+                        DisplayMassage("كود المورد غير صحيح", "Wrong Customer code", MessageType.Error);
+                    }
+                    else {
+                        $('#txtProviderCode').val(Model_Vnd[0].VendorCode);
+                        $('#txtProviderName').val(Model_Vnd[0].NAMEA);
+                        ProviderName = Model_Vnd[0].NAMEA;
+                        $('#txtProviderID').val(Model_Vnd[0].VendorID);
+                        $('#txtProviderVatNo').val(Model_Vnd[0].VATNo);
+                        $('#dbProviderVatType').val(Model_Vnd[0].VATType);
+                        CalculatorProvider();
+
+                    }
+
+                }
+
+            }
+        });
+
+    }
     //****************************************************CleanInput*********************************************
     function CleanBen(Type: string) {
 
@@ -749,10 +882,11 @@ namespace AccTrPaymentNoteNew {
         $('#id_div_Filter').addClass('disabledDiv')
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
-         
+
         if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8') {  // نقدي  او تحصيل شبكة  
-            $('#txt_Amount').removeAttr('disabled'); 
-        } 
+            $('#txt_Amount').removeAttr('disabled');
+            $('._dis_Bank').removeAttr('disabled');
+        }
 
     }
     function disabled() {
@@ -764,15 +898,30 @@ namespace AccTrPaymentNoteNew {
         $('#Div_control').removeClass('display_none');
         CleanBen('H');
         $("#Div_control :input").val("");
-        
+
         txt_D_CashBoxH.selectedIndex = 1;
-        txtCashTypeH.value = '0';  
+        txtCashTypeH.value = '0';
         $("._dbd").val("null");
         txtTrDate.value = GetDate();
+        txtProviderIndDate.value = GetDate();
         txtDueDate.value = GetDate();
         chkIsDeffered.checked = false;
         chkStatus.checked = false;
         txtCashTypeH_onchange();
+
+    }
+    function CleanDiv_Charge_Provider() {
+
+        if ($('#Charge_Div').is(":hidden") == true) { //Charge_____Validation
+            $("#Charge_Div :input").val("");
+            $(".Charge_db").val("null"); 
+        }
+
+        if ($('#Provider_Div').is(":hidden") == true) { //Provider_____Validation
+            $("#Provider_Div :input").val("");
+            $(".Prov_db").val("null");
+            txtProviderIndDate.value = GetDate();
+        }
 
     }
     //****************************************************DisplayDetails*********************************************
@@ -785,6 +934,7 @@ namespace AccTrPaymentNoteNew {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TrDate);
         txtDueDate.value = DateFormat(Selecteditem.DueDate);
+        txtProviderIndDate.value = DateFormat(Selecteditem.ProviderIndDate);
         chkStatus.checked = Selecteditem.Status == 1 ? true : false;
         chkIsDeffered.checked = Selecteditem.IsDeffered == true ? true : false;
         if (Selecteditem.RecPayTypeId == 1) { getAccountCustById('H', Selecteditem.CustomerID.toString(), false); }
@@ -804,13 +954,21 @@ namespace AccTrPaymentNoteNew {
             chkStatus.disabled = true;
         }
 
+
+        if (Number(Selecteditem.ProviderID) != 0) {
+            getProVndById(Selecteditem.ProviderID.toString(), false);
+            $('#txtProviderVatNo').val(Selecteditem.ProviderVatNo);
+            $('#dbProviderVatType').val(Selecteditem.ProviderVatType);
+            CalculatorProvider();
+        }
+
+
         Mode_CashType();
 
 
     }
     function Mode_CashType() {
 
-        $('#Bank_Div').addClass('display_none');
         $('#Charge_Div').addClass('display_none');
         $('#Provider_Div').addClass('display_none');
         $('._Cash').addClass('display_none');
@@ -824,7 +982,6 @@ namespace AccTrPaymentNoteNew {
         }
         else {
 
-            $('#Bank_Div').removeClass('display_none');
             if (txt_ReceiptNoteH.value != 'مصروف مستحق') {
                 $('#Charge_Div').removeClass('display_none');
             }
@@ -886,12 +1043,7 @@ namespace AccTrPaymentNoteNew {
             DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
             Errorinput($('#txt_TransferNo'));
             return false;
-        }
-        if (txtCashTypeH.value != "8" && txtCashTypeH.value != "0" && txtCashTypeH.value != "1" && txtCashTypeH.value != "2" && $('#txt_CheckNo').val().trim() == '') {
-            DisplayMassage("يجب ادخال  رقم الشيك   ", " The check number must be entered", MessageType.Worning);
-            Errorinput($('#txt_CheckNo').val());
-            return false;
-        }
+        } 
 
         if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && $('#txt_BankName').val().trim() == '') {
             DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
@@ -899,9 +1051,57 @@ namespace AccTrPaymentNoteNew {
             return false;
         }
         if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && txt_BankAcc_Code.selectedIndex == 0) {
-            DisplayMassage("يجب اختيار  رقم الحساب الايداع  ", "You must choose the deposit account number", MessageType.Worning);
+            DisplayMassage("يجب اختيار  حساب الصرف  ", "You must choose the deposit account number", MessageType.Worning);
             Errorinput(txt_BankAcc_Code);
             return false;
+        }
+
+        if ($('#Charge_Div').is(":hidden") == false) { //Charge_____Validation
+
+            if (dbChargeBank.value == 'null') {
+                DisplayMassage("يجب اختيار البنك  ", "Choose the type of Bank", MessageType.Worning);
+                Errorinput(dbChargeBank);
+                return false;
+            }
+
+            if (dbChargeVatType.value == 'null') {
+                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
+                Errorinput(dbChargeVatType);
+                return false;
+            }
+
+            if (Number($('#txtCharges').val()) == 0) {
+                DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
+                Errorinput($('#txtCharges'));
+                return false;
+            }
+
+
+        }
+
+
+        if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
+
+            if (txtProviderName.value.trim() == '') {
+                DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
+                Errorinput(txtProviderName);
+                return false;
+            }
+
+            if (dbProviderVatType.value == 'null') {
+                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
+                Errorinput(dbChargeVatType);
+                return false;
+            }
+
+            if (dbCC_Code.value == 'null') {
+                DisplayMassage("يجب اختيار مركز التكلفة  ", "Choose the type of Cost", MessageType.Worning);
+                Errorinput(dbChargeVatType);
+                return false;
+            }
+
+
+
         }
 
         return true;

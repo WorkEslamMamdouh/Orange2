@@ -331,15 +331,7 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetA_G_Vendor(string query ,string NameTable)
-        {
 
-            var res = Get_Model(query, NameTable);
-            return Ok(new BaseResponse(res));
-              
-
-        }
 
 
 
