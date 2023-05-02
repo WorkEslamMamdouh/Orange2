@@ -300,53 +300,49 @@ namespace Inv.API.Controllers
         [HttpPost, AllowAnonymous]
         public IHttpActionResult Open([FromBody] A_RecPay_Tr_ReceiptNote obj)
         {
-            if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
-                using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+                try
                 {
-                    try
+                    db.Database.ExecuteSqlCommand("update A_RecPay_Tr_ReceiptNote set [Status] = 0 where ReceiptID = " + obj.ReceiptID + "");
+                    A_RecPay_Tr_ReceiptNote res = obj;
+                    //var res = AccTrReceiptService.Update(obj);
+                    string Typ;
+                    if (res.TrType == 1)
                     {
-                        db.Database.ExecuteSqlCommand("update A_RecPay_Tr_ReceiptNote set [Status] = 0 where ReceiptID = " + obj.ReceiptID + "");
-                        A_RecPay_Tr_ReceiptNote res = obj;
-                        //var res = AccTrReceiptService.Update(obj);
-                        string Typ;
-                        if (res.TrType == 1)
-                        {
-                            Typ = "BoxReceipt";
-                        }
-                        else if (res.TrType == 2)
-                        {
-                            Typ = "BoxPayment";
-                        }
-                        else
-                        {
-                            Typ = "BoxTransfer";
-                        }
-
-                        ResponseResult result = Shared.TransactionProcess(int.Parse(res.CompCode.ToString()), int.Parse(res.BranchCode.ToString()), res.ReceiptID, Typ, "Open", db);
-                        if (result.ResponseState == true)
-                        {
-                            dbTransaction.Commit();
-                            res.TrNo = int.Parse(result.ResponseData.ToString());
-
-                            IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
-                            return Ok(new BaseResponse(displayData));
-                        }
-                        else
-                        {
-                            dbTransaction.Rollback();
-                            return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
-                        }
-
+                        Typ = "BoxReceipt";
                     }
-                    catch (Exception ex)
+                    else if (res.TrType == 2)
+                    {
+                        Typ = "BoxPayment";
+                    }
+                    else
+                    {
+                        Typ = "BoxTransfer";
+                    }
+
+                    ResponseResult result = Shared.TransactionProcess(int.Parse(res.CompCode.ToString()), int.Parse(res.BranchCode.ToString()), res.ReceiptID, Typ, "Open", db);
+                    if (result.ResponseState == true)
+                    {
+                        dbTransaction.Commit();
+                        res.TrNo = int.Parse(result.ResponseData.ToString());
+
+                        IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
+                        return Ok(new BaseResponse(displayData));
+                    }
+                    else
                     {
                         dbTransaction.Rollback();
-                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
+
+                }
+                catch (Exception ex)
+                {
+                    dbTransaction.Rollback();
+                    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
-            return BadRequest(ModelState);
         }
 
         public IHttpActionResult Delete(int ID, string UserCode, string Token)
