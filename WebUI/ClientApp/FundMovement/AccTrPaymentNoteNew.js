@@ -340,6 +340,9 @@ var AccTrPaymentNoteNew;
         if ($('#txt_ReceiptNote' + Type).val() == "5") {
             BenBox(Type);
         }
+        if ($('#txt_ReceiptNote' + Type).val() == "6") {
+            BenAcc(Type);
+        }
     }
     function btnProv_onclick() {
         var cond = " CompCode= " + CompCode + "and IsCreditVendor = 1 and Isactive = 1";
@@ -434,6 +437,9 @@ var AccTrPaymentNoteNew;
         if ($('#txt_ReceiptNote' + Type).val() == "5") {
             getAccountBoxById(Type, $('#txt_BenCode' + Type).val(), true);
         }
+        if ($('#txt_ReceiptNote' + Type).val() == "6") {
+            getAccountAccById(Type, $('#txt_BenCode' + Type).val(), true);
+        }
     }
     function _SearchBox_Change() {
         $("#ReportGrid").jsGrid("option", "pageIndex", 1);
@@ -473,11 +479,17 @@ var AccTrPaymentNoteNew;
         }
         else { // الجميع 
             $('._dis_Bank').removeAttr('disabled');
-            $('#Charge_Div').removeClass('display_none');
             $('#txt_Amount').removeAttr('disabled');
+            if (txtCashTypeH.value != '9') {
+                $('#Charge_Div').removeClass('display_none');
+            }
         }
-        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
             $('#Provider_Div').removeClass('display_none');
+        }
+        if (txtCashTypeH.value == '9') {
+            txt_ReceiptNoteH.value = '6';
+            Mode_CashType();
         }
         CleanDiv_Charge_Provider();
     }
@@ -788,7 +800,7 @@ var AccTrPaymentNoteNew;
         $('#txt_BenName' + Type).val("");
         $('#txt_Openbalance' + Type).val("");
         $('#txt_BenID' + Type).val("");
-        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+        if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
             $('#Provider_Div').removeClass('display_none');
         }
         else {
@@ -864,6 +876,9 @@ var AccTrPaymentNoteNew;
         if (Selecteditem.RecPayTypeId == 5) {
             getAccountBoxById('H', Selecteditem.FromCashBoxID.toString(), false);
         }
+        if (Selecteditem.RecPayTypeId == 6) {
+            getAccountAccById('H', Selecteditem.ExpenseID.toString(), false);
+        }
         Flag_IsNew = false;
         if (chkStatus.checked == true) {
             btnUpdate.disabled = true;
@@ -893,10 +908,10 @@ var AccTrPaymentNoteNew;
             $('._Card').removeClass('display_none');
         }
         else {
-            if (txt_ReceiptNoteH.value != 'مصروف مستحق') {
+            if (txt_ReceiptNoteH.value != '6') {
                 $('#Charge_Div').removeClass('display_none');
             }
-            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == 'مصروف مستحق') {
+            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
                 $('#Provider_Div').removeClass('display_none');
             }
         }
@@ -941,20 +956,22 @@ var AccTrPaymentNoteNew;
             Errorinput($('#txt_Amount'));
             return false;
         }
-        if ((txtCashTypeH.value == "1" || txtCashTypeH.value == "2") && $('#txt_TransferNo').val() == '') {
-            DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
-            Errorinput($('#txt_TransferNo'));
-            return false;
-        }
-        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && $('#txt_BankName').val().trim() == '') {
-            DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
-            Errorinput($('#txt_BankName'));
-            return false;
-        }
-        if (txtCashTypeH.value != "0" && txtCashTypeH.value != "8" && txt_BankAcc_Code.selectedIndex == 0) {
-            DisplayMassage("يجب اختيار  حساب الصرف  ", "You must choose the deposit account number", MessageType.Worning);
-            Errorinput(txt_BankAcc_Code);
-            return false;
+        if ($('#txt_BankName').is(":disabled") == false) { //Bank_____Validation
+            if (Number($('#txt_TransferNo').val()) == 0) {
+                DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
+                Errorinput($('#txt_TransferNo'));
+                return false;
+            }
+            if ($('#txt_BankName').val().trim() == '') {
+                DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
+                Errorinput($('#txt_BankName'));
+                return false;
+            }
+            if (txt_BankAcc_Code.selectedIndex == 0) {
+                DisplayMassage("يجب اختيار  حساب الصرف  ", "You must choose the deposit account number", MessageType.Worning);
+                Errorinput(txt_BankAcc_Code);
+                return false;
+            }
         }
         if ($('#Charge_Div').is(":hidden") == false) { //Charge_____Validation
             if (dbChargeBank.value == 'null') {
@@ -981,12 +998,12 @@ var AccTrPaymentNoteNew;
             }
             if (dbProviderVatType.value == 'null') {
                 DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
-                Errorinput(dbChargeVatType);
+                Errorinput(dbProviderVatType);
                 return false;
             }
             if (dbCC_Code.value == 'null') {
                 DisplayMassage("يجب اختيار مركز التكلفة  ", "Choose the type of Cost", MessageType.Worning);
-                Errorinput(dbChargeVatType);
+                Errorinput(dbCC_Code);
                 return false;
             }
         }
@@ -1019,6 +1036,9 @@ var AccTrPaymentNoteNew;
         if (Model.RecPayTypeId == 5) {
             Model.FromCashBoxID = Number($('#txt_BenIDH').val());
         }
+        if (Model.RecPayTypeId == 6) {
+            Model.ExpenseID = Number($('#txt_BenIDH').val());
+        }
         Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         Model.UserCode = SysSession.CurrentEnvironment.UserCode;
         Model.CompCode = CompCode;
@@ -1046,7 +1066,7 @@ var AccTrPaymentNoteNew;
                 var result = d;
                 if (result.IsSuccess) {
                     var res = result.Response;
-                    DisplayMassage("تم الحفظ بنجاح", "Saved successfully", MessageType.Succeed);
+                    DisplayMassage("تم اصدار سند رقم ( " + res.TrNo + " ) بنجاح", "Saved successfully", MessageType.Succeed);
                     Success(res.ReceiptID, res);
                     Save_Succ_But();
                 }
@@ -1070,7 +1090,7 @@ var AccTrPaymentNoteNew;
                 var result = d;
                 if (result.IsSuccess) {
                     var res = result.Response;
-                    DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
+                    DisplayMassage("تم تعديل سند رقم ( " + res.TrNo + " ) بنجاح", "Saved successfully", MessageType.Succeed);
                     Success(res.ReceiptID, res);
                     Save_Succ_But();
                 }
@@ -1095,7 +1115,7 @@ var AccTrPaymentNoteNew;
                 var result = d;
                 if (result.IsSuccess) {
                     var res = result.Response;
-                    DisplayMassage("تم فك الاعتماد بنجاح", "Success", MessageType.Succeed);
+                    DisplayMassage("تم فك سند رقم ( " + res.TrNo + " ) بنجاح", "Saved successfully", MessageType.Succeed);
                     Success(res.ReceiptID, res);
                     Save_Succ_But();
                 }
