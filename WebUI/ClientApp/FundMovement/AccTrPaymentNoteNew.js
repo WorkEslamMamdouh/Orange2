@@ -193,10 +193,10 @@ var AccTrPaymentNoteNew;
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "11%" },
             { title: res.App_beneficiary, name: "Bef_DescA", type: "text", width: "11%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "11%" },
-            { title: res.App_Cash, name: "CashAmount", type: "text", width: "11%" },
-            { title: res.App_Card, name: "CardAmount", type: "text", width: "11%" },
+            { title: 'مورد الخدمه', name: "ProviderName", type: "text", width: "17%" },
+            { title: 'رسوم بنكية', name: "ChargeWithVat", type: "Number", width: "11%" },
             {
-                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "17%",
+                title: res.App_Certified, css: "ColumPadding", name: "statusDesciption", width: "7%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
                     txt.innerHTML = item.Status == 1 ? (lang == "ar" ? "معتمد" : "A certified") : (lang == "ar" ? "غير معتمد" : "Not supported");
