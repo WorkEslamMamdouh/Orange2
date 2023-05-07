@@ -36,7 +36,6 @@ namespace Inv.DAL.Domain
         public virtual DbSet<A_RecPay_D_CashBox> A_RecPay_D_CashBox { get; set; }
         public virtual DbSet<A_RecPay_D_Group> A_RecPay_D_Group { get; set; }
         public virtual DbSet<A_RecPay_Tr_Adjustment> A_RecPay_Tr_Adjustment { get; set; }
-        public virtual DbSet<A_RecPay_Tr_ReceiptNote> A_RecPay_Tr_ReceiptNote { get; set; }
         public virtual DbSet<G_AlertControl> G_AlertControl { get; set; }
         public virtual DbSet<G_AlertLog> G_AlertLog { get; set; }
         public virtual DbSet<G_AlertType> G_AlertType { get; set; }
@@ -84,7 +83,6 @@ namespace Inv.DAL.Domain
         public virtual DbSet<I_VW_GetCompStatus> I_VW_GetCompStatus { get; set; }
         public virtual DbSet<IQ_GetBoxAdjustmentList> IQ_GetBoxAdjustmentList { get; set; }
         public virtual DbSet<IQ_GetBoxAdjustmentVat> IQ_GetBoxAdjustmentVat { get; set; }
-        public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
         public virtual DbSet<IQ_GetPurChargeInfo> IQ_GetPurChargeInfo { get; set; }
         public virtual DbSet<IQ_GetPurReceiveCharge> IQ_GetPurReceiveCharge { get; set; }
         public virtual DbSet<IQ_GetPurReceiveChargeSum> IQ_GetPurReceiveChargeSum { get; set; }
@@ -229,6 +227,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetCollectList> IQ_GetCollectList { get; set; }
         public virtual DbSet<A_RecPay_D_Category> A_RecPay_D_Category { get; set; }
         public virtual DbSet<A_G_Vendor> A_G_Vendor { get; set; }
+        public virtual DbSet<A_RecPay_Tr_ReceiptNote> A_RecPay_Tr_ReceiptNote { get; set; }
+        public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -2703,79 +2703,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_VATListSummary_Result>("IProc_Rpt_VATListSummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, braCodeParameter, sysCodeParameter, transCodeParameter, fromDateParameter, toDateParameter, vattypeParameter, groupByParameter);
         }
     
-        public virtual ObjectResult<IProc_Rpt_AccReceiptList_Result> IProc_Rpt_AccReceiptList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> trType, string fromDate, string toDate, Nullable<int> boxId, Nullable<int> recType, string bnfID, string bnfDesc, Nullable<int> status, Nullable<int> cashType)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var trTypeParameter = trType.HasValue ?
-                new ObjectParameter("TrType", trType) :
-                new ObjectParameter("TrType", typeof(int));
-    
-            var fromDateParameter = fromDate != null ?
-                new ObjectParameter("FromDate", fromDate) :
-                new ObjectParameter("FromDate", typeof(string));
-    
-            var toDateParameter = toDate != null ?
-                new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(string));
-    
-            var boxIdParameter = boxId.HasValue ?
-                new ObjectParameter("BoxId", boxId) :
-                new ObjectParameter("BoxId", typeof(int));
-    
-            var recTypeParameter = recType.HasValue ?
-                new ObjectParameter("RecType", recType) :
-                new ObjectParameter("RecType", typeof(int));
-    
-            var bnfIDParameter = bnfID != null ?
-                new ObjectParameter("BnfID", bnfID) :
-                new ObjectParameter("BnfID", typeof(string));
-    
-            var bnfDescParameter = bnfDesc != null ?
-                new ObjectParameter("BnfDesc", bnfDesc) :
-                new ObjectParameter("BnfDesc", typeof(string));
-    
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("Status", status) :
-                new ObjectParameter("Status", typeof(int));
-    
-            var cashTypeParameter = cashType.HasValue ?
-                new ObjectParameter("CashType", cashType) :
-                new ObjectParameter("CashType", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccReceiptList_Result>("IProc_Rpt_AccReceiptList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, fromDateParameter, toDateParameter, boxIdParameter, recTypeParameter, bnfIDParameter, bnfDescParameter, statusParameter, cashTypeParameter);
-        }
-    
         public virtual ObjectResult<IProc_Prnt_PurPurchaseOrder_Result> IProc_Prnt_PurPurchaseOrder(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
@@ -3000,47 +2927,6 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("TRId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_AccAdjust_Result>("IProc_Prnt_AccAdjust", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
-        }
-    
-        public virtual ObjectResult<IProc_Prnt_AccReceive_Result> IProc_Prnt_AccReceive(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var tRIdParameter = tRId.HasValue ?
-                new ObjectParameter("TRId", tRId) :
-                new ObjectParameter("TRId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_AccReceive_Result>("IProc_Prnt_AccReceive", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
         }
     
         public virtual ObjectResult<IProc_Rpt_AccBankDetail_Result> IProc_Rpt_AccBankDetail(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string accCode, Nullable<int> status, string fromDate, string todate)
@@ -6101,6 +5987,120 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("Status", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rep_CollectList_Result>("IProc_Rep_CollectList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, catIDParameter, itemFamIdParameter, itemIDParameter, fromDateParameter, toDateParameter, statusParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Prnt_AccReceive_Result> IProc_Prnt_AccReceive(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_AccReceive_Result>("IProc_Prnt_AccReceive", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tRIdParameter);
+        }
+    
+        public virtual ObjectResult<IProc_Rpt_AccReceiptList_Result> IProc_Rpt_AccReceiptList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> trType, string fromDate, string toDate, Nullable<int> boxId, Nullable<int> recType, string bnfID, string bnfDesc, Nullable<int> status, Nullable<int> cashType)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var trTypeParameter = trType.HasValue ?
+                new ObjectParameter("TrType", trType) :
+                new ObjectParameter("TrType", typeof(int));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var boxIdParameter = boxId.HasValue ?
+                new ObjectParameter("BoxId", boxId) :
+                new ObjectParameter("BoxId", typeof(int));
+    
+            var recTypeParameter = recType.HasValue ?
+                new ObjectParameter("RecType", recType) :
+                new ObjectParameter("RecType", typeof(int));
+    
+            var bnfIDParameter = bnfID != null ?
+                new ObjectParameter("BnfID", bnfID) :
+                new ObjectParameter("BnfID", typeof(string));
+    
+            var bnfDescParameter = bnfDesc != null ?
+                new ObjectParameter("BnfDesc", bnfDesc) :
+                new ObjectParameter("BnfDesc", typeof(string));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(int));
+    
+            var cashTypeParameter = cashType.HasValue ?
+                new ObjectParameter("CashType", cashType) :
+                new ObjectParameter("CashType", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccReceiptList_Result>("IProc_Rpt_AccReceiptList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, fromDateParameter, toDateParameter, boxIdParameter, recTypeParameter, bnfIDParameter, bnfDescParameter, statusParameter, cashTypeParameter);
         }
     }
 }

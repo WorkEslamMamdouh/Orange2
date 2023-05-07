@@ -55,12 +55,12 @@ namespace Inv.DAL.Domain
         public Nullable<int> ExpCode { get; set; }
         public string Exp_DescA { get; set; }
         public string Exp_DescE { get; set; }
+        public Nullable<int> Bef_ID { get; set; }
         public Nullable<int> Bef_Code { get; set; }
         public string Bef_DescA { get; set; }
         public string Bef_DescE { get; set; }
         public string Type_DescA { get; set; }
         public string Type_DescE { get; set; }
-        public Nullable<int> Bef_ID { get; set; }
         public string CashT_DescA { get; set; }
         public string CashT_DescE { get; set; }
         public string CheckNo { get; set; }
@@ -73,7 +73,7 @@ namespace Inv.DAL.Domain
         public string Bnk_acc_DescE { get; set; }
         public string ACC_DESCL { get; set; }
         public Nullable<decimal> Charges { get; set; }
-        public Nullable<decimal> ChargeProviderID { get; set; }
+        public Nullable<int> ChargeProviderID { get; set; }
         public Nullable<decimal> ChargesVat { get; set; }
         public Nullable<decimal> ChargeWithVat { get; set; }
         public Nullable<int> ChargeVatType { get; set; }
@@ -93,5 +93,6 @@ namespace Inv.DAL.Domain
         public string Prov_Code { get; set; }
         public string Prov_NameA { get; set; }
         public string Prov_NameE { get; set; }
+        public string ChargeInvoiceNo { get; set; }
     }
 }
