@@ -3013,6 +3013,7 @@ class A_RecPay_Tr_ReceiptNote extends SecurityClass {
         this.DueDate = "";
         this.CashType = 0;
         this.Charges = 0;
+        this.ChargeInvoiceNo = "";
         this.ChargeProviderID = 0;
         this.ChargesVat = 0;
         this.ChargeWithVat = 0;
@@ -3065,6 +3066,7 @@ class A_RecPay_Tr_ReceiptNote extends SecurityClass {
     public DueDate: string;
     public CashType: number;
     public Charges: number;
+    public ChargeInvoiceNo: string;
     public ChargeProviderID: number;
     public ChargesVat: number;
     public ChargeWithVat: number;
@@ -3081,6 +3083,7 @@ class A_RecPay_Tr_ReceiptNote extends SecurityClass {
     public ProviderAmountBeforeVat: number;
     public CC_Code: string;
 }
+
 
 
 
@@ -3306,10 +3309,9 @@ class A_RecPay_Tr_Adjustment extends SecurityClass {
 }
 
 
-
-
-class IQ_GetBoxReceiveList {
+class IQ_GetBoxReceiveList extends SecurityClass {
     constructor() {
+        super();
         this.ReceiptID = 0;
         this.CashBoxID = 0;
         this.TrType = 0;
@@ -3389,6 +3391,7 @@ class IQ_GetBoxReceiveList {
         this.Prov_Code = "";
         this.Prov_NameA = "";
         this.Prov_NameE = "";
+        this.ChargeInvoiceNo = "";
     }
     public ReceiptID: number;
     public CashBoxID: number;
@@ -3469,6 +3472,7 @@ class IQ_GetBoxReceiveList {
     public Prov_Code: string;
     public Prov_NameA: string;
     public Prov_NameE: string;
+    public ChargeInvoiceNo: string;
 }
 
 

@@ -155,6 +155,7 @@ var AccTrPaymentNoteNew;
         txtChargeWithVat.onkeyup = function () { CalculatorCharges(true); };
         dbProviderVatType.onchange = CalculatorProvider;
         txtProviderCode.onchange = function () { getProVndById($('#txtProviderCode').val(), true); };
+        dbChargeBank.onchange = function () { Mode_Charge(); };
         txt_Amount.onkeyup = function () { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""; };
         //*******************************print*****************************
         btnPrintTrview.onclick = function () { PrintReport(1); };
@@ -296,7 +297,7 @@ var AccTrPaymentNoteNew;
                 var result = d;
                 if (result.IsSuccess) {
                     var ListBank = result.Response;
-                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'اختر البنك' : 'Bank'));
+                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'نفس بنك الحساب' : 'Bank'));
                 }
             }
         });
@@ -459,6 +460,8 @@ var AccTrPaymentNoteNew;
         $('._dis_Bank').attr('disabled', 'disabled');
         $('#Charge_Div').addClass('display_none');
         $('#Provider_Div').addClass('display_none');
+        $('#txt_CheckNo').removeClass('display_none');
+        $('#txt_TransferNo').addClass('display_none');
         $('._Card').addClass('display_none');
         $('._Cash').addClass('display_none');
         $('#txt_CheckNo').val('');
@@ -485,6 +488,10 @@ var AccTrPaymentNoteNew;
             $('#txt_Amount').removeAttr('disabled');
             if (txtCashTypeH.value != '9') {
                 $('#Charge_Div').removeClass('display_none');
+            }
+            if (txtCashTypeH.value == '1' || txtCashTypeH.value == '2') {
+                $('#txt_CheckNo').addClass('display_none');
+                $('#txt_TransferNo').removeClass('display_none');
             }
         }
         if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
@@ -826,6 +833,7 @@ var AccTrPaymentNoteNew;
             $('#txt_Amount').removeAttr('disabled');
             $('._dis_Bank').removeAttr('disabled');
         }
+        Mode_Charge();
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled');
@@ -851,11 +859,26 @@ var AccTrPaymentNoteNew;
         if ($('#Charge_Div').is(":hidden") == true) { //Charge_____Validation
             $("#Charge_Div :input").val("");
             $(".Charge_db").val("null");
+            $("#dbChargeVatType").val("7");
         }
         if ($('#Provider_Div').is(":hidden") == true) { //Provider_____Validation
             $("#Provider_Div :input").val("");
             $(".Prov_db").val("null");
+            $("#dbProviderVatType").val("7");
             txtProviderIndDate.value = GetDate();
+        }
+        Mode_Charge();
+    }
+    function Mode_Charge() {
+        if (dbChargeBank.value == 'null') {
+            $("#Charge_Div :input").attr('disabled', 'disabled');
+            $('#dbChargeBank').removeAttr('disabled');
+            $("#Charge_Div :input").val("");
+            $(".Charge_db").val("null");
+            $("#dbChargeVatType").val("7");
+        }
+        else {
+            $("#Charge_Div :input").removeAttr('disabled');
         }
     }
     //****************************************************DisplayDetails*********************************************
@@ -865,6 +888,7 @@ var AccTrPaymentNoteNew;
         disabled();
     }
     function DisplayDetails(Selecteditem) {
+        debugger;
         if (Selecteditem.CashType == 9) { // مصروف مستحق  
             $('#txt_ReceiptNoteH').html('');
             $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
@@ -975,9 +999,14 @@ var AccTrPaymentNoteNew;
             return false;
         }
         if ($('#txt_BankName').is(":disabled") == false) { //Bank_____Validation
-            if (Number($('#txt_TransferNo').val()) == 0) {
+            if (Number($('#txt_TransferNo').val()) == 0 && ($('#txt_TransferNo').is(":hidden") == false)) {
                 DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
                 Errorinput($('#txt_TransferNo'));
+                return false;
+            }
+            if (Number($('#txt_CheckNo').val()) == 0 && ($('#txt_CheckNo').is(":hidden") == false)) {
+                DisplayMassage("يجب ادخال  رقم الشيك ", " Check number must be entered", MessageType.Worning);
+                Errorinput($('#txt_CheckNo'));
                 return false;
             }
             if ($('#txt_BankName').val().trim() == '') {
@@ -992,26 +1021,28 @@ var AccTrPaymentNoteNew;
             }
         }
         if ($('#Charge_Div').is(":hidden") == false) { //Charge_____Validation
-            if (dbChargeBank.value == 'null') {
-                DisplayMassage("يجب اختيار البنك  ", "Choose the type of Bank", MessageType.Worning);
-                Errorinput(dbChargeBank);
-                return false;
-            }
-            if (dbChargeVatType.value == 'null') {
-                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
-                Errorinput(dbChargeVatType);
-                return false;
-            }
-            if (Number($('#txtCharges').val()) == 0) {
-                DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
-                Errorinput($('#txtCharges'));
-                return false;
+            if (dbChargeBank.value != 'null') {
+                if (dbChargeVatType.value == 'null') {
+                    DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
+                    Errorinput(dbChargeVatType);
+                    return false;
+                }
+                if (Number($('#txtCharges').val()) == 0) {
+                    DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
+                    Errorinput($('#txtCharges'));
+                    return false;
+                }
             }
         }
         if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
             if (txtProviderName.value.trim() == '') {
                 DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
                 Errorinput(txtProviderName);
+                return false;
+            }
+            if ($('#txtProviderVatNo').val().trim() == '') {
+                DisplayMassage("يجب ادخال الرقم الضريبى   ", "Choose the type of Vat No", MessageType.Worning);
+                Errorinput($('#txtProviderVatNo'));
                 return false;
             }
             if (dbProviderVatType.value == 'null') {
@@ -1066,7 +1097,6 @@ var AccTrPaymentNoteNew;
         Model.ReceiptID = Number($('#ReceiptID').val());
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
-        Model.CheckNo = Model.TransferNo;
         Model.TrDateH = '1';
     }
     function Insert() {

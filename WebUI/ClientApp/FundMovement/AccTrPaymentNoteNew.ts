@@ -160,6 +160,7 @@ namespace AccTrPaymentNoteNew {
         txtChargeWithVat.onkeyup = () => { CalculatorCharges(true) }
         dbProviderVatType.onchange = CalculatorProvider;
         txtProviderCode.onchange = () => { getProVndById($('#txtProviderCode').val(), true); }
+        dbChargeBank.onchange = () => { Mode_Charge();}
         txt_Amount.onkeyup = () => { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
         //*******************************print*****************************
         btnPrintTrview.onclick = () => { PrintReport(1); }
@@ -249,7 +250,7 @@ namespace AccTrPaymentNoteNew {
                     DocumentActions.FillCombowithdefult(ChckType, txtCashTypeF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(ChckType, txtCashTypeH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
 
-                      Type = fillModel_GCodes.filter(x => x.CodeType == codeType);
+                    Type = fillModel_GCodes.filter(x => x.CodeType == codeType);
 
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
@@ -308,7 +309,7 @@ namespace AccTrPaymentNoteNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let ListBank = result.Response as Array<A_G_Vendor>;
-                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'اختر البنك' : 'Bank'));
+                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'نفس بنك الحساب' : 'Bank'));
 
                 }
             }
@@ -453,6 +454,8 @@ namespace AccTrPaymentNoteNew {
         $('._dis_Bank').attr('disabled', 'disabled');
         $('#Charge_Div').addClass('display_none');
         $('#Provider_Div').addClass('display_none');
+        $('#txt_CheckNo').removeClass('display_none');
+        $('#txt_TransferNo').addClass('display_none');
         $('._Card').addClass('display_none');
         $('._Cash').addClass('display_none');
         $('#txt_CheckNo').val('');
@@ -468,7 +471,7 @@ namespace AccTrPaymentNoteNew {
         $('#txtDueDate').attr('disabled', 'disabled');
 
         DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
-        $('#txt_ReceiptNoteH option[value="6"]').remove() 
+        $('#txt_ReceiptNoteH option[value="6"]').remove()
 
         if (txtCashTypeH.value == '0') {  // نقدي 
             $('._Cash').removeClass('display_none');
@@ -485,6 +488,11 @@ namespace AccTrPaymentNoteNew {
                 $('#Charge_Div').removeClass('display_none');
             }
 
+            if (txtCashTypeH.value == '1' || txtCashTypeH.value == '2') {
+                $('#txt_CheckNo').addClass('display_none');
+                $('#txt_TransferNo').removeClass('display_none');
+            }
+
         }
 
 
@@ -494,7 +502,7 @@ namespace AccTrPaymentNoteNew {
 
         if (txtCashTypeH.value == '9') {
             $('#txt_ReceiptNoteH').html('');
-            $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');            
+            $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
             txt_ReceiptNoteH.value = '6';
             Mode_CashType();
         }
@@ -503,7 +511,7 @@ namespace AccTrPaymentNoteNew {
         }
 
 
-        CleanBen('H'); CleanDiv_Charge_Provider(); 
+        CleanBen('H'); CleanDiv_Charge_Provider();
     }
     function chkIsDeffered_onchange() {
 
@@ -908,7 +916,7 @@ namespace AccTrPaymentNoteNew {
             $('._dis_Bank').removeAttr('disabled');
         }
 
-
+        Mode_Charge();
 
     }
     function disabled() {
@@ -930,20 +938,35 @@ namespace AccTrPaymentNoteNew {
         chkIsDeffered.checked = false;
         chkStatus.checked = false;
         txtCashTypeH_onchange();
-        $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');      
-         
+        $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
+
     }
     function CleanDiv_Charge_Provider() {
 
         if ($('#Charge_Div').is(":hidden") == true) { //Charge_____Validation
             $("#Charge_Div :input").val("");
             $(".Charge_db").val("null");
+            $("#dbChargeVatType").val("7");
         }
 
         if ($('#Provider_Div').is(":hidden") == true) { //Provider_____Validation
             $("#Provider_Div :input").val("");
             $(".Prov_db").val("null");
+            $("#dbProviderVatType").val("7");
             txtProviderIndDate.value = GetDate();
+        }
+
+        Mode_Charge();
+    }
+    function Mode_Charge() {
+
+        if (dbChargeBank.value == 'null') {
+            $("#Charge_Div :input").attr('disabled', 'disabled')
+            $('#dbChargeBank').removeAttr('disabled');
+            $("#Charge_Div :input").val(""); $(".Charge_db").val("null"); $("#dbChargeVatType").val("7"); 
+        }
+        else {
+            $("#Charge_Div :input").removeAttr('disabled');
         }
 
     }
@@ -954,6 +977,7 @@ namespace AccTrPaymentNoteNew {
         disabled();
     }
     function DisplayDetails(Selecteditem: IQ_GetBoxReceiveList) {
+        debugger
         if (Selecteditem.CashType == 9) {  // مصروف مستحق  
             $('#txt_ReceiptNoteH').html('');
             $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
@@ -1075,9 +1099,15 @@ namespace AccTrPaymentNoteNew {
 
         if ($('#txt_BankName').is(":disabled") == false) {//Bank_____Validation
 
-            if (Number($('#txt_TransferNo').val()) == 0) {
+            if (Number($('#txt_TransferNo').val()) == 0 && ($('#txt_TransferNo').is(":hidden") == false)) {
                 DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
                 Errorinput($('#txt_TransferNo'));
+                return false;
+            }
+
+            if (Number($('#txt_CheckNo').val()) == 0 && ($('#txt_CheckNo').is(":hidden") == false)) {
+                DisplayMassage("يجب ادخال  رقم الشيك ", " Check number must be entered", MessageType.Worning);
+                Errorinput($('#txt_CheckNo'));
                 return false;
             }
 
@@ -1094,28 +1124,24 @@ namespace AccTrPaymentNoteNew {
 
         }
 
-         
+
         if ($('#Charge_Div').is(":hidden") == false) { //Charge_____Validation
 
-            if (dbChargeBank.value == 'null') {
-                DisplayMassage("يجب اختيار البنك  ", "Choose the type of Bank", MessageType.Worning);
-                Errorinput(dbChargeBank);
-                return false;
+            if (dbChargeBank.value != 'null') {
+
+                if (dbChargeVatType.value == 'null') {
+                    DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
+                    Errorinput(dbChargeVatType);
+                    return false;
+                }
+
+                if (Number($('#txtCharges').val()) == 0) {
+                    DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
+                    Errorinput($('#txtCharges'));
+                    return false;
+                }
+
             }
-
-            if (dbChargeVatType.value == 'null') {
-                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
-                Errorinput(dbChargeVatType);
-                return false;
-            }
-
-            if (Number($('#txtCharges').val()) == 0) {
-                DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
-                Errorinput($('#txtCharges'));
-                return false;
-            }
-
-
         }
 
 
@@ -1124,6 +1150,12 @@ namespace AccTrPaymentNoteNew {
             if (txtProviderName.value.trim() == '') {
                 DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
                 Errorinput(txtProviderName);
+                return false;
+            }
+
+            if ($('#txtProviderVatNo').val().trim() == '') {
+                DisplayMassage("يجب ادخال الرقم الضريبى   ", "Choose the type of Vat No", MessageType.Worning);
+                Errorinput($('#txtProviderVatNo'));
                 return false;
             }
 
@@ -1177,7 +1209,6 @@ namespace AccTrPaymentNoteNew {
         Model.ReceiptID = Number($('#ReceiptID').val());
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
-        Model.CheckNo = Model.TransferNo;
         Model.TrDateH = '1';
     }
     function Insert() {
