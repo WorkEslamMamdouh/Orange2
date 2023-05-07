@@ -62,6 +62,7 @@ var AccTrPaymentNoteNew;
     var btnPrintsFrom_To;
     var Flag_IsNew = false;
     var ProviderName = "";
+    var Type;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = (lang == "ar" ? "سند " + Name_Not + "" : " " + Name_Not + "");
         InitalizeControls();
@@ -240,7 +241,7 @@ var AccTrPaymentNoteNew;
                     var ChckType = fillModel_GCodes.filter(function (x) { return x.CodeType == 'ChckType'; });
                     DocumentActions.FillCombowithdefult(ChckType, txtCashTypeF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(ChckType, txtCashTypeH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
-                    var Type = fillModel_GCodes.filter(function (x) { return x.CodeType == codeType; });
+                    Type = fillModel_GCodes.filter(function (x) { return x.CodeType == codeType; });
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                 }
@@ -471,6 +472,8 @@ var AccTrPaymentNoteNew;
         txtDueDate.value = GetDate();
         $('#txt_Amount').attr('disabled', 'disabled');
         $('#txtDueDate').attr('disabled', 'disabled');
+        DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+        $('#txt_ReceiptNoteH option[value="6"]').remove();
         if (txtCashTypeH.value == '0') { // نقدي 
             $('._Cash').removeClass('display_none');
         }
@@ -488,9 +491,15 @@ var AccTrPaymentNoteNew;
             $('#Provider_Div').removeClass('display_none');
         }
         if (txtCashTypeH.value == '9') {
+            $('#txt_ReceiptNoteH').html('');
+            $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
             txt_ReceiptNoteH.value = '6';
             Mode_CashType();
         }
+        else {
+            txt_ReceiptNoteH.value = 'null';
+        }
+        CleanBen('H');
         CleanDiv_Charge_Provider();
     }
     function chkIsDeffered_onchange() {
@@ -836,6 +845,7 @@ var AccTrPaymentNoteNew;
         chkIsDeffered.checked = false;
         chkStatus.checked = false;
         txtCashTypeH_onchange();
+        $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
     }
     function CleanDiv_Charge_Provider() {
         if ($('#Charge_Div').is(":hidden") == true) { //Charge_____Validation
@@ -855,6 +865,14 @@ var AccTrPaymentNoteNew;
         disabled();
     }
     function DisplayDetails(Selecteditem) {
+        if (Selecteditem.CashType == 9) { // مصروف مستحق  
+            $('#txt_ReceiptNoteH').html('');
+            $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
+        }
+        else {
+            DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+            $('#txt_ReceiptNoteH option[value="6"]').remove();
+        }
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TrDate);
         txtDueDate.value = DateFormat(Selecteditem.DueDate);
@@ -963,7 +981,7 @@ var AccTrPaymentNoteNew;
                 return false;
             }
             if ($('#txt_BankName').val().trim() == '') {
-                DisplayMassage("يجب ادخال  صادر من بنك  ", " The entry must be issued by a bank", MessageType.Worning);
+                DisplayMassage("يجب ادخال صرف الي بنك  ", " The entry must be issued by a bank", MessageType.Worning);
                 Errorinput($('#txt_BankName'));
                 return false;
             }
