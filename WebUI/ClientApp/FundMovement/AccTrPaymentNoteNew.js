@@ -30,6 +30,7 @@ var AccTrPaymentNoteNew;
     var txt_CashAmount;
     var txt_CardAmount;
     var txt_Amount;
+    var txtProviderInvoiceNo;
     var txt_note;
     var txtProviderName;
     var txtCashTypeF;
@@ -107,6 +108,7 @@ var AccTrPaymentNoteNew;
         txt_CashAmount = document.getElementById("txt_CashAmount");
         txt_CardAmount = document.getElementById("txt_CardAmount");
         txt_Amount = document.getElementById("txt_Amount");
+        txtProviderInvoiceNo = document.getElementById("txtProviderInvoiceNo");
         txt_note = document.getElementById("txt_note");
         txtProviderName = document.getElementById("txtProviderName");
         txtTrDate = document.getElementById("txtTrDate");
@@ -157,6 +159,8 @@ var AccTrPaymentNoteNew;
         txtProviderCode.onchange = function () { getProVndById($('#txtProviderCode').val(), true); };
         dbChargeBank.onchange = function () { Mode_Charge(); };
         txt_Amount.onkeyup = function () { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""; };
+        txtProviderInvoiceNo.onkeyup = function () { CalculatorProvider(); };
+        dbCC_Code.onchange = function () { CalculatorProvider(); };
         //*******************************print*****************************
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
@@ -943,18 +947,30 @@ var AccTrPaymentNoteNew;
         $('#Provider_Div').addClass('display_none');
         $('._Cash').addClass('display_none');
         $('._Card').addClass('display_none');
+        $('#txt_CheckNo').removeClass('display_none'); //الشيك
+        $('#txt_TransferNo').addClass('display_none'); //التحويل
         if (txtCashTypeH.value == '0') { // نقدي 
             $('._Cash').removeClass('display_none');
+            if (txt_ReceiptNoteH.value == '4') { //صرف لحساب
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
         else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
             $('._Card').removeClass('display_none');
+            if (txt_ReceiptNoteH.value == '4') { //صرف لحساب
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
         else {
-            if (txt_ReceiptNoteH.value != '6') {
+            if (txt_ReceiptNoteH.value != '6') { //مصروف مستحق
                 $('#Charge_Div').removeClass('display_none');
             }
-            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
+            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') { //صرف لحساب و مصروف مستحق
                 $('#Provider_Div').removeClass('display_none');
+            }
+            if (txtCashTypeH.value == '1' || txtCashTypeH.value == '2') {
+                $('#txt_CheckNo').addClass('display_none'); //الشيك
+                $('#txt_TransferNo').removeClass('display_none'); //التحويل
             }
         }
     }
@@ -1214,11 +1230,11 @@ var AccTrPaymentNoteNew;
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
         if (txt_ReceiptNoteF.selectedIndex > 0)
-            rp.RecType = Number($("#txt_ReceiptNote").val());
+            rp.RecType = Number($("#txt_ReceiptNoteF").val());
         else
             rp.RecType = -1;
         if (txt_D_CashBoxF.selectedIndex > 0)
-            rp.BoxId = Number($("#txt_D_CashBox").val());
+            rp.BoxId = Number($("#txt_D_CashBoxF").val());
         else
             rp.BoxId = -1;
         /////////////////////////doniaH
@@ -1226,9 +1242,9 @@ var AccTrPaymentNoteNew;
         //    rp.BnfID = $("#txt_ID_beneficiary").val();
         //    rp.BnfDesc = txt_ID_beneficiary.value;
         //}
-        if ($("#txt_BenCodeH").val() != "") {
-            rp.BnfID = $("#txt_BenCodeH").val();
-            rp.BnfDesc = $("#txt_BenNameH").val();
+        if ($("#txt_BenCodeF").val() != "") {
+            rp.BnfID = $("#txt_BenCodeF").val();
+            rp.BnfDesc = $("#txt_BenNameF").val();
         }
         else {
             rp.BnfID = "";
@@ -1239,12 +1255,12 @@ var AccTrPaymentNoteNew;
             rp.Status = Number($("#txt_Status").val());
         else
             rp.Status = 2;
-        rp.TrType = 1;
-        if ($("#txtCashType").val() == "null") {
+        rp.TrType = TrType;
+        if ($("#txtCashTypeF").val() == "null") {
             rp.CashType = -1;
         }
         else {
-            rp.CashType = $("#txtCashType").val();
+            rp.CashType = $("#txtCashTypeF").val();
         }
         Ajax.Callsync({
             url: Url.Action("IProc_Rpt_AccReceiptList", "GeneralReports"),

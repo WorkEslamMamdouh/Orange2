@@ -254,8 +254,7 @@ namespace Inv.API.Controllers
             using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
             {
                 try
-                {
-                    Entity.BankName = "";
+                { 
                     A_RecPay_Tr_ReceiptNote res = AccTrReceiptService.Insert(Entity);
                     string Typ;
                     if (res.TrType == 1)

@@ -34,6 +34,7 @@ namespace AccTrPaymentNoteNew {
     var txt_CashAmount: HTMLInputElement;
     var txt_CardAmount: HTMLInputElement;
     var txt_Amount: HTMLInputElement;
+    var txtProviderInvoiceNo: HTMLInputElement;
     var txt_note: HTMLInputElement;
     var txtProviderName: HTMLInputElement;
 
@@ -112,6 +113,7 @@ namespace AccTrPaymentNoteNew {
         txt_CashAmount = document.getElementById("txt_CashAmount") as HTMLInputElement;
         txt_CardAmount = document.getElementById("txt_CardAmount") as HTMLInputElement;
         txt_Amount = document.getElementById("txt_Amount") as HTMLInputElement;
+        txtProviderInvoiceNo = document.getElementById("txtProviderInvoiceNo") as HTMLInputElement;
         txt_note = document.getElementById("txt_note") as HTMLInputElement;
         txtProviderName = document.getElementById("txtProviderName") as HTMLInputElement;
         txtTrDate = document.getElementById("txtTrDate") as HTMLInputElement;
@@ -162,6 +164,8 @@ namespace AccTrPaymentNoteNew {
         txtProviderCode.onchange = () => { getProVndById($('#txtProviderCode').val(), true); }
         dbChargeBank.onchange = () => { Mode_Charge();}
         txt_Amount.onkeyup = () => { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
+        txtProviderInvoiceNo.onkeyup = () => { CalculatorProvider() }
+        dbCC_Code.onchange = () => { CalculatorProvider() }
         //*******************************print*****************************
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
@@ -1030,21 +1034,38 @@ namespace AccTrPaymentNoteNew {
         $('#Provider_Div').addClass('display_none');
         $('._Cash').addClass('display_none');
         $('._Card').addClass('display_none');
+        $('#txt_CheckNo').removeClass('display_none');//الشيك
+        $('#txt_TransferNo').addClass('display_none');//التحويل
 
         if (txtCashTypeH.value == '0') {// نقدي 
             $('._Cash').removeClass('display_none');
+
+            if (txt_ReceiptNoteH.value == '4') {//صرف لحساب
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
         else if (txtCashTypeH.value == '8') {//تحصيل شبكة  
             $('._Card').removeClass('display_none');
+
+            if (txt_ReceiptNoteH.value == '4') {//صرف لحساب
+                $('#Provider_Div').removeClass('display_none');
+            }
         }
         else {
 
-            if (txt_ReceiptNoteH.value != '6') {
+            if (txt_ReceiptNoteH.value != '6') {//مصروف مستحق
                 $('#Charge_Div').removeClass('display_none');
             }
-            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {
+            if (txt_ReceiptNoteH.value == '4' || txt_ReceiptNoteH.value == '6') {//صرف لحساب و مصروف مستحق
                 $('#Provider_Div').removeClass('display_none');
             }
+
+
+            if (txtCashTypeH.value == '1' || txtCashTypeH.value == '2') {
+                $('#txt_CheckNo').addClass('display_none'); //الشيك
+                $('#txt_TransferNo').removeClass('display_none'); //التحويل
+            }
+
         }
 
     }
@@ -1328,12 +1349,12 @@ namespace AccTrPaymentNoteNew {
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
 
         if (txt_ReceiptNoteF.selectedIndex > 0)
-            rp.RecType = Number($("#txt_ReceiptNote").val());
+            rp.RecType = Number($("#txt_ReceiptNoteF").val());
         else
             rp.RecType = -1;
 
         if (txt_D_CashBoxF.selectedIndex > 0)
-            rp.BoxId = Number($("#txt_D_CashBox").val());
+            rp.BoxId = Number($("#txt_D_CashBoxF").val());
         else
             rp.BoxId = -1;
         /////////////////////////doniaH
@@ -1342,9 +1363,9 @@ namespace AccTrPaymentNoteNew {
         //    rp.BnfDesc = txt_ID_beneficiary.value;
         //}
 
-        if ($("#txt_BenCodeH").val() != "") {
-            rp.BnfID = $("#txt_BenCodeH").val();
-            rp.BnfDesc = $("#txt_BenNameH").val();
+        if ($("#txt_BenCodeF").val() != "") {
+            rp.BnfID = $("#txt_BenCodeF").val();
+            rp.BnfDesc = $("#txt_BenNameF").val();
         }
         else {
             rp.BnfID = "";
@@ -1355,11 +1376,11 @@ namespace AccTrPaymentNoteNew {
             rp.Status = Number($("#txt_Status").val());
         else
             rp.Status = 2;
-        rp.TrType = 1;
-        if ($("#txtCashType").val() == "null") {
+        rp.TrType = TrType;
+        if ($("#txtCashTypeF").val() == "null") {
             rp.CashType = -1;
         } else {
-            rp.CashType = $("#txtCashType").val();
+            rp.CashType = $("#txtCashTypeF").val();
         }
 
         Ajax.Callsync({
