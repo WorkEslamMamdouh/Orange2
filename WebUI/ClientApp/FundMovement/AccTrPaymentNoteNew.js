@@ -1015,12 +1015,12 @@ var AccTrPaymentNoteNew;
             return false;
         }
         if ($('#txt_BankName').is(":disabled") == false) { //Bank_____Validation
-            if (Number($('#txt_TransferNo').val()) == 0 && ($('#txt_TransferNo').is(":hidden") == false)) {
+            if ($('#txt_TransferNo').val().trim() == '' && $('#txt_TransferNo').is(":hidden") == false) {
                 DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
                 Errorinput($('#txt_TransferNo'));
                 return false;
             }
-            if (Number($('#txt_CheckNo').val()) == 0 && ($('#txt_CheckNo').is(":hidden") == false)) {
+            if ($('#txt_CheckNo').val().trim() == '' && $('#txt_CheckNo').is(":hidden") == false) {
                 DisplayMassage("يجب ادخال  رقم الشيك ", " Check number must be entered", MessageType.Worning);
                 Errorinput($('#txt_CheckNo'));
                 return false;

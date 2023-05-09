@@ -713,6 +713,16 @@ namespace AccTrReceiptNoteNew {
             btnUpdate.disabled = false;
             chkStatus.disabled = true;
         }
+
+
+        $('#txt_CheckNo').removeClass('display_none');//الشيك
+        $('#txt_TransferNo').addClass('display_none');//التحويل
+
+        if (txtCashTypeH.value == '1' || txtCashTypeH.value == '2') {
+            $('#txt_CheckNo').addClass('display_none'); //الشيك
+            $('#txt_TransferNo').removeClass('display_none'); //التحويل
+        }
+
     }
     //****************************************************Validation*********************************************
     function Validation() {
@@ -765,13 +775,13 @@ namespace AccTrReceiptNoteNew {
 
         if ($('#Bank_Div').is(":hidden") == false) {//Bank_____Validation
 
-            if (Number($('#txt_TransferNo').val()) == 0 && ($('#txt_TransferNo').is(":hidden") == false)) {
+            if ($('#txt_TransferNo').val().trim() == '' && $('#txt_TransferNo').is(":hidden") == false) {
                 DisplayMassage("يجب ادخال  رقم التحويله ", " Transfer number must be entered", MessageType.Worning);
                 Errorinput($('#txt_TransferNo'));
                 return false;
             }
 
-            if (Number($('#txt_CheckNo').val()) == 0 && ($('#txt_CheckNo').is(":hidden") == false)) {
+            if ($('#txt_CheckNo').val().trim() == '' && $('#txt_CheckNo').is(":hidden") == false) {
                 DisplayMassage("يجب ادخال  رقم الشيك ", " Check number must be entered", MessageType.Worning);
                 Errorinput($('#txt_CheckNo'));
                 return false;
