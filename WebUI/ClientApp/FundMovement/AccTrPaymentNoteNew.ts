@@ -314,7 +314,7 @@ namespace AccTrPaymentNoteNew {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     let ListBank = result.Response as Array<A_G_Vendor>;
-                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'نفس بنك الحساب' : 'Bank'));
+                    DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'بدون رسوم بنكية' : 'Bank'));
 
                 }
             }
@@ -510,6 +510,7 @@ namespace AccTrPaymentNoteNew {
             $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
             txt_ReceiptNoteH.value = '6';
             Mode_CashType();
+            $('._dis_Bank').attr('disabled', 'disabled');  
         }
         else {
             txt_ReceiptNoteH.value = 'null';
@@ -916,7 +917,7 @@ namespace AccTrPaymentNoteNew {
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
 
-        if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8') {  // نقدي  او تحصيل شبكة  
+        if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8' && txtCashTypeH.value != '6') {  // نقدي  او تحصيل شبكة  
             $('#txt_Amount').removeAttr('disabled');
             $('._dis_Bank').removeAttr('disabled');
         }
