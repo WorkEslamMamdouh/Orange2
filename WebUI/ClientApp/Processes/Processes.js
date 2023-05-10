@@ -3436,6 +3436,7 @@ var Processes;
         $('#ddlSalesman').prop('selectedIndex', 0);
         Back();
         DisabledToolBar();
+        btnfinish.classList.add("display_none");
     }
     function Update_1_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT)

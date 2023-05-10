@@ -4464,6 +4464,8 @@ namespace Processes {
         Back();
 
         DisabledToolBar();
+        btnfinish.classList.add("display_none");
+
     }
 
     function Update_1_onclick() {
