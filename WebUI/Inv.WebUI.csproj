@@ -1770,7 +1770,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoiceSimpleComp3En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicestdComp3Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicestdComp3En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentArComp3.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentArComp3.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentEnComp3.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccReceiveArComp3.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccReceiveEnComp3.rdlc" />

@@ -141,6 +141,27 @@ namespace Inv.API.Controllers
         }
 
         [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetPayByCode_and_byid(int CompCode, string id, bool code, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                string query = "";
+                if (code == true)
+                {
+                    query = "select * from A_RecPay_D_Accounts where ExpCode = " + id + "  and CompCode =" + CompCode + " and TrType = 2   ";
+                }
+                else
+                {
+                    query = "select * from A_RecPay_D_Accounts where ExpenseID = " + id + "  and CompCode =" + CompCode + " and TrType = 2   ";
+                }
+
+                var AccDefAccount = db.Database.SqlQuery<A_RecPay_D_Accounts>(query).ToList();
+                return Ok(new BaseResponse(AccDefAccount));
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpGet, AllowAnonymous]
         public IHttpActionResult GetByCode_and_byidPay(int CompCode, string id, bool code, string UserCode, string Token)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))

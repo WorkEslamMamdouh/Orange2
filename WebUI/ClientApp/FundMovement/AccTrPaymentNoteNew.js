@@ -186,7 +186,7 @@ var AccTrPaymentNoteNew;
             { title: "الرقم", name: "ReceiptID", type: "text", width: " ", visible: false },
             { title: "رقم السند", name: "TrNo", type: "text", width: "11%" },
             {
-                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "20%",
+                title: res.App_date, css: "ColumPadding", name: "TrDate", width: "10%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
                     txt.innerHTML = DateFormat(item.TrDate);
@@ -195,7 +195,7 @@ var AccTrPaymentNoteNew;
             },
             { title: res.App_Receipt_Type, name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "11%" },
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "11%" },
-            { title: res.App_beneficiary, name: "Bef_DescA", type: "text", width: "11%" },
+            { title: res.App_beneficiary, name: "Bef_DescA", type: "text", width: "20%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "11%" },
             { title: 'مورد الخدمه', name: "ProviderName", type: "text", width: "17%" },
             { title: 'رسوم بنكية', name: "ChargeWithVat", type: "Number", width: "11%" },
@@ -701,7 +701,7 @@ var AccTrPaymentNoteNew;
     }
     //****************************************************Bank*********************************************
     function BenAcc(Type) {
-        sys.FindKey(Modules.AccTrReceiptNote, "btnAccBen", "CompCode= " + CompCode + " and TrType = 1 ", function () {
+        sys.FindKey(Modules.AccTrReceiptNote, "btnAccBen", "CompCode= " + CompCode + " and TrType = 2 ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountAccById(Type, id, false);
         });
@@ -716,7 +716,7 @@ var AccTrPaymentNoteNew;
         }
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("AccDefAccounts", "GetByCode_and_byid"),
+            url: sys.apiUrl("AccDefAccounts", "GetPayByCode_and_byid"),
             data: { CompCode: CompCode, id: AccId.toString().trim(), code: code, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;

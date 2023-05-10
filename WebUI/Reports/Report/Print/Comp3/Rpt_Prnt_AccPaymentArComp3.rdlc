@@ -21,7 +21,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>3.44269cm</Top>
+        <Top>3.73837cm</Top>
         <Left>17.43636cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -42,7 +42,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!Amount.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style>
                   <Format>#,0.00</Format>
                 </Style>
@@ -54,7 +54,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Amount</rd:DefaultName>
-        <Top>3.44269cm</Top>
+        <Top>3.73837cm</Top>
         <Left>13.2824cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -89,7 +89,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>17.43636cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -123,7 +123,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>11.10564cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -157,7 +157,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>5.04548cm</Top>
+        <Top>5.34116cm</Top>
         <Left>17.49762cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -191,7 +191,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>6.51234cm</Top>
+        <Top>6.80802cm</Top>
         <Left>17.46764cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -213,7 +213,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!TrNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -225,7 +225,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>13.2824cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -248,7 +248,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!Type_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -258,7 +258,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>6.925cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -301,7 +301,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!Remarks.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -311,7 +311,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Remarks</rd:DefaultName>
-        <Top>6.51234cm</Top>
+        <Top>6.80802cm</Top>
         <Left>0.32682cm</Left>
         <Height>1.26146cm</Height>
         <Width>17.14082cm</Width>
@@ -366,7 +366,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>11.10564cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.15265cm</Width>
@@ -400,7 +400,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>2.69805cm</Top>
+        <Top>2.99372cm</Top>
         <Left>17.43636cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.15265cm</Width>
@@ -434,7 +434,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>2.69805cm</Top>
+        <Top>2.99372cm</Top>
         <Left>4.4987cm</Left>
         <Height>0.58942cm</Height>
         <Width>2.1434cm</Width>
@@ -456,7 +456,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!TrDate.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style>
                   <Format>dd/MM/yyy</Format>
                 </Style>
@@ -468,7 +468,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>6.925cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -491,7 +491,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!Bef_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -501,7 +501,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Bef_DescA</rd:DefaultName>
-        <Top>2.69805cm</Top>
+        <Top>2.99372cm</Top>
         <Left>6.925cm</Left>
         <Height>0.58942cm</Height>
         <Width>6.24392cm</Width>
@@ -544,7 +544,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!VoucherNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style>
                   <Format>0;(0)</Format>
                 </Style>
@@ -556,7 +556,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>VoucherNo</rd:DefaultName>
-        <Top>2.69805cm</Top>
+        <Top>2.99372cm</Top>
         <Left>0.32682cm</Left>
         <Height>0.6cm</Height>
         <Width>4.17188cm</Width>
@@ -591,7 +591,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>4.48946cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -625,7 +625,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>4.48946cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
@@ -647,7 +647,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!ReceiptDescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -657,7 +657,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ReceiptDescA</rd:DefaultName>
-        <Top>5.0745cm</Top>
+        <Top>5.37018cm</Top>
         <Left>0.32682cm</Left>
         <Height>1.26146cm</Height>
         <Width>17.14082cm</Width>
@@ -700,7 +700,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!Bef_Code.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -710,7 +710,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Bef_Code</rd:DefaultName>
-        <Top>2.69805cm</Top>
+        <Top>2.99372cm</Top>
         <Left>13.2824cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -733,7 +733,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=IIF(first(Fields!Status.Value, "Rpt_Prnt_AccPaymentComp3Ar")=0,"غير معتمد","معتمد")</Value>
+                <Value>=IIF(first(Fields!Status.Value, "Rpt_Prnt_AccPaymentArComp3")=0,"غير معتمد","معتمد")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -743,7 +743,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Status1</rd:DefaultName>
-        <Top>1.14174cm</Top>
+        <Top>1.43742cm</Top>
         <Left>0.32682cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
@@ -779,346 +779,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox46">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>المستفيد</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.39746cm</Top>
-        <Left>14.63825cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.16383cm</Width>
-        <ZIndex>20</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox48">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>المحاسب</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.42216cm</Top>
-        <Left>4.41323cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.16383cm</Width>
-        <ZIndex>21</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox49">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>........</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.97602cm</Top>
-        <Left>14.63825cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>22</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox50">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>........</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.97602cm</Top>
-        <Left>4.41323cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>23</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox51">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>الاسم</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.97602cm</Top>
-        <Left>15.7668cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>24</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox52">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>التوقيع</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.64658cm</Top>
-        <Left>15.7668cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>25</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox53">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>الاسم</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>14.97602cm</Top>
-        <Left>5.56294cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>26</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox54">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>التوقيع</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.64658cm</Top>
-        <Left>5.56294cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>27</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox55">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>........</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.64658cm</Top>
-        <Left>14.63825cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>28</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox56">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>........</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>15.64658cm</Top>
-        <Left>4.41323cm</Left>
-        <Height>0.6cm</Height>
-        <Width>1.07916cm</Width>
-        <ZIndex>29</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="NetAfterVAT2">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1126,7 +786,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!AmountinWords.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style>
                   <Format>#,0.00</Format>
                 </Style>
@@ -1138,11 +798,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>NetAfterVAT</rd:DefaultName>
-        <Top>3.44269cm</Top>
+        <Top>3.73837cm</Top>
         <Left>0.32682cm</Left>
         <Height>0.6cm</Height>
         <Width>10.78476cm</Width>
-        <ZIndex>30</ZIndex>
+        <ZIndex>20</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1174,11 +834,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>3.44269cm</Top>
+        <Top>3.73837cm</Top>
         <Left>11.10564cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
-        <ZIndex>31</ZIndex>
+        <ZIndex>21</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1210,11 +870,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0cm</Top>
+        <Top>0.29568cm</Top>
         <Left>0.45382cm</Left>
         <Height>0.68819cm</Height>
         <Width>19.32079cm</Width>
-        <ZIndex>32</ZIndex>
+        <ZIndex>22</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1232,7 +892,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!CashBox_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1242,11 +902,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>0.32682cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16263cm</Width>
-        <ZIndex>33</ZIndex>
+        <ZIndex>23</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1297,11 +957,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>17.43636cm</Left>
         <Height>0.6cm</Height>
         <Width>2.15265cm</Width>
-        <ZIndex>34</ZIndex>
+        <ZIndex>24</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1319,7 +979,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                <Value>=First(Fields!CashT_DescA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1329,11 +989,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrType</rd:DefaultName>
-        <Top>1.92166cm</Top>
+        <Top>2.21734cm</Top>
         <Left>13.2824cm</Left>
         <Height>0.6cm</Height>
         <Width>4.16262cm</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>25</ZIndex>
         <Style>
           <Border>
             <Color>Gray</Color>
@@ -1374,7 +1034,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!Bnk_acc_DescE.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>0;(0)</Format>
                     </Style>
@@ -1442,7 +1102,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!BankName.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1529,7 +1189,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!CheckNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1600,7 +1260,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!TransferNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1631,11 +1291,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.09361cm</Top>
+        <Top>4.38929cm</Top>
         <Left>0.32682cm</Left>
         <Height>0.83898cm</Height>
         <Width>19.37761cm</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>26</ZIndex>
         <Visibility>
           <Hidden>=IIF(Fields!BankName.Value.ToString()="",true,false)</Hidden>
         </Visibility>
@@ -1676,7 +1336,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Charge_VendNameA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!Charge_VendNameA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1762,7 +1422,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ChargeInvoiceNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ChargeInvoiceNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -1849,7 +1509,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ChargesVatPrc.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ChargesVatPrc.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -1918,7 +1578,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Charges.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!Charges.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -1987,7 +1647,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ChargesVat.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ChargesVat.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -2056,7 +1716,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ChargeWithVat.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ChargeWithVat.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -2177,11 +1837,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>7.86784cm</Top>
+        <Top>8.16351cm</Top>
         <Left>0.32682cm</Left>
         <Height>2.22581cm</Height>
         <Width>19.356cm</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>27</ZIndex>
         <Visibility>
           <Hidden>=IIF(String.IsNullOrEmpty(Fields!Charges.Value),true,false)</Hidden>
         </Visibility>
@@ -2222,7 +1882,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderName.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderName.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2308,7 +1968,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderVatNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderVatNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2375,7 +2035,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderInvoiceNo.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderInvoiceNo.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2442,7 +2102,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderVatAmount.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderVatAmount.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -2511,7 +2171,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderAmountBeforeVat.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderAmountBeforeVat.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>#,0.00</Format>
                     </Style>
@@ -2614,7 +2274,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ProviderIndDate.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!ProviderIndDate.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style>
                       <Format>d</Format>
                     </Style>
@@ -2649,7 +2309,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CC_DESCA.Value, "Rpt_Prnt_AccPaymentComp3Ar")</Value>
+                    <Value>=First(Fields!CC_DESCA.Value, "Rpt_Prnt_AccPaymentArComp3")</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2768,11 +2428,11 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>10.20041cm</Top>
+        <Top>10.49608cm</Top>
         <Left>0.29319cm</Left>
         <Height>2.91482cm</Height>
         <Width>19.35707cm</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>28</ZIndex>
         <Visibility>
           <Hidden>=IIF(Fields!ProviderName.Value.ToString() = "" , True, False)</Hidden>
         </Visibility>
@@ -2805,7 +2465,7 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>6.39629in</Height>
+    <Height>5.39629in</Height>
     <Style />
   </Body>
   <Width>7.90071in</Width>
