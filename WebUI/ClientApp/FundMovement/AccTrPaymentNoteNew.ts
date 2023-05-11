@@ -163,7 +163,7 @@ namespace AccTrPaymentNoteNew {
         txtChargeWithVat.onkeyup = () => { CalculatorCharges(true) }
         dbProviderVatType.onchange = CalculatorProvider;
         txtProviderCode.onchange = () => { getProVndById($('#txtProviderCode').val(), true); }
-        dbChargeBank.onchange = () => { Mode_Charge();}
+        dbChargeBank.onchange = () => { Mode_Charge(); }
         txt_Amount.onkeyup = () => { $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
         txtProviderInvoiceNo.onkeyup = () => { CalculatorProvider() }
         dbCC_Code.onchange = () => { CalculatorProvider() }
@@ -216,7 +216,7 @@ namespace AccTrPaymentNoteNew {
 
         ];
         ReportGrid.Bind();
-        
+
     }
     //************************************************fillddl**************************************
     function fillddlCashBox() {
@@ -398,22 +398,60 @@ namespace AccTrPaymentNoteNew {
 
         setTimeout(function () {
 
+
+
+
+
             finishSave('btnSave');
             if (!Validation()) {
                 return;
             }
 
+
+
+
             if (Flag_IsNew == true) {
                 $("#txtCreatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtCreatedAt").val(DateTimeFormat(Date().toString()));
-                Assign();
-                Insert();
+                if ($('#dbChargeBank').is(":disabled") == false) {
+                    if ($('#dbChargeBank').val() == 'null') {
+                        Errorinput($('#dbChargeBank'))
+                        WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", () => {
+                            loading('btnSave');
+                            setTimeout(function () {
+                                Assign();
+                                Insert(); 
+                                finishSave('btnSave');
+                            }, 100);
+                        });
+                    }
+                }
+                else {
+                    Assign();
+                    Insert();
+                }
+
             }
             else {
                 $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-                Assign();
-                Update();
+                if ($('#dbChargeBank').is(":disabled") == false) {
+                    if ($('#dbChargeBank').val() == 'null') {
+                        Errorinput($('#dbChargeBank'))
+                        WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", () => {
+                            loading('btnSave');
+                            setTimeout(function () {
+                                Assign();
+                                Update(); 
+                                finishSave('btnSave');
+                            }, 100);
+                        });
+                    }
+                }
+                else {
+                    Assign();
+                    Update();
+                }
             }
         }, 100);
     }
@@ -457,18 +495,18 @@ namespace AccTrPaymentNoteNew {
         }
     }
     function txtCashTypeF_onchange() {
-         
+
         DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
         $('#txt_ReceiptNoteF option[value="6"]').remove()
-          
+
         if (txtCashTypeF.value == '9') {
             $('#txt_ReceiptNoteF').html('');
             $('#txt_ReceiptNoteF').append('<option value="6">مصروف مستحق</option>');
-            txt_ReceiptNoteF.value = '6'; 
+            txt_ReceiptNoteF.value = '6';
         }
         else {
             txt_ReceiptNoteF.value = 'null';
-        } 
+        }
     }
     function txtCashTypeH_onchange() {
 
@@ -526,7 +564,7 @@ namespace AccTrPaymentNoteNew {
             $('#txt_ReceiptNoteH').append('<option value="6">مصروف مستحق</option>');
             txt_ReceiptNoteH.value = '6';
             Mode_CashType();
-            $('._dis_Bank').attr('disabled', 'disabled');  
+            $('._dis_Bank').attr('disabled', 'disabled');
         }
         else {
             txt_ReceiptNoteH.value = 'null';
@@ -678,8 +716,8 @@ namespace AccTrPaymentNoteNew {
     function BenVnd(Type: string) {
         //var cond = " CompCode= " + CompCode.toString() + " and IsCreditVendor = 1";
         //cond = cond + Type == 'H' ? "and Isactive = 1" : "";
-        debugger;  
-        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", " CompCode= " + CompCode + " and IsCreditVendor = 1 " + (Type =='H' ? "and Isactive = 1" : "") , () => {
+        debugger;
+        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", " CompCode= " + CompCode + " and IsCreditVendor = 1 " + (Type == 'H' ? "and Isactive = 1" : ""), () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountVndById(Type, id, false);
         });
@@ -986,7 +1024,7 @@ namespace AccTrPaymentNoteNew {
         if (dbChargeBank.value == 'null') {
             $("#Charge_Div :input").attr('disabled', 'disabled')
             $('#dbChargeBank').removeAttr('disabled');
-            $("#Charge_Div :input").val(""); $(".Charge_db").val("null"); $("#dbChargeVatType").val("7"); 
+            $("#Charge_Div :input").val(""); $(".Charge_db").val("null"); $("#dbChargeVatType").val("7");
         }
         else {
             $("#Charge_Div :input").removeAttr('disabled');

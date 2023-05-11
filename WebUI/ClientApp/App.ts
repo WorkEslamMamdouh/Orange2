@@ -1630,11 +1630,26 @@ function WorningMessage(msg_Ar: string, msg_En: string, tit_ar: string = "تنب
     switch (Env.ScreenLanguage) {
 
         case "ar":
-            MessageBox.Show(msg_Ar, tit_ar, OnOk);
+            MessageBox.Ask(msg_Ar, tit_ar, OnOk);
             focus();
             break;
         case "en":
-            MessageBox.Show(msg_En, tit_en, OnOk);
+            MessageBox.Ask(msg_En, tit_en, OnOk);
+            focus();
+            break;
+    }
+}
+
+function WorningMessageOnCancel(msg_Ar: string, msg_En: string, tit_ar: string = "تنبيه", tit_en: string = "Worning", OnCancel?: () => void) {
+    var Env = GetSystemEnvironment();
+    switch (Env.ScreenLanguage) {
+
+        case "ar":
+            MessageBox.Ask(msg_Ar, tit_ar, null, OnCancel);
+            focus();
+            break;
+        case "en":
+            MessageBox.Ask(msg_En, tit_en, null, OnCancel);
             focus();
             break;
     }

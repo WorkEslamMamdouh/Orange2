@@ -1276,11 +1276,26 @@ function WorningMessage(msg_Ar, msg_En, tit_ar, tit_en, OnOk) {
     var Env = GetSystemEnvironment();
     switch (Env.ScreenLanguage) {
         case "ar":
-            MessageBox.Show(msg_Ar, tit_ar, OnOk);
+            MessageBox.Ask(msg_Ar, tit_ar, OnOk);
             focus();
             break;
         case "en":
-            MessageBox.Show(msg_En, tit_en, OnOk);
+            MessageBox.Ask(msg_En, tit_en, OnOk);
+            focus();
+            break;
+    }
+}
+function WorningMessageOnCancel(msg_Ar, msg_En, tit_ar, tit_en, OnCancel) {
+    if (tit_ar === void 0) { tit_ar = "تنبيه"; }
+    if (tit_en === void 0) { tit_en = "Worning"; }
+    var Env = GetSystemEnvironment();
+    switch (Env.ScreenLanguage) {
+        case "ar":
+            MessageBox.Ask(msg_Ar, tit_ar, null, OnCancel);
+            focus();
+            break;
+        case "en":
+            MessageBox.Ask(msg_En, tit_en, null, OnCancel);
             focus();
             break;
     }

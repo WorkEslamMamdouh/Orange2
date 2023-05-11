@@ -400,14 +400,44 @@ var AccTrPaymentNoteNew;
             if (Flag_IsNew == true) {
                 $("#txtCreatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtCreatedAt").val(DateTimeFormat(Date().toString()));
-                Assign();
-                Insert();
+                if ($('#dbChargeBank').is(":disabled") == false) {
+                    if ($('#dbChargeBank').val() == 'null') {
+                        Errorinput($('#dbChargeBank'));
+                        WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", function () {
+                            loading('btnSave');
+                            setTimeout(function () {
+                                Assign();
+                                Insert();
+                                finishSave('btnSave');
+                            }, 100);
+                        });
+                    }
+                }
+                else {
+                    Assign();
+                    Insert();
+                }
             }
             else {
                 $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-                Assign();
-                Update();
+                if ($('#dbChargeBank').is(":disabled") == false) {
+                    if ($('#dbChargeBank').val() == 'null') {
+                        Errorinput($('#dbChargeBank'));
+                        WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", function () {
+                            loading('btnSave');
+                            setTimeout(function () {
+                                Assign();
+                                Update();
+                                finishSave('btnSave');
+                            }, 100);
+                        });
+                    }
+                }
+                else {
+                    Assign();
+                    Update();
+                }
             }
         }, 100);
     }
