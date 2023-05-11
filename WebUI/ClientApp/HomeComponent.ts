@@ -312,6 +312,10 @@ namespace HomeComponent {
         }
         $('#btnNews').click(function (e) { Show_News(); });
 
+        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
+        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
+        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
+        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4) });
 
 
     }
@@ -999,16 +1003,12 @@ namespace HomeComponent {
                             BuildNews(i, false);
                         }
 
-
-                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
-                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
-                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
-                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4) });
-
-
                         $("#News_Model").modal("show");
                         localStorage.setItem("Show_News", 'true');
+                       
                     }
+
+                     
 
                 }
             }

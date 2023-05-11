@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 namespace AccTrPaymentNoteNew {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNote);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -150,8 +150,8 @@ namespace AccTrPaymentNoteNew {
         txt_BenCodeH.onchange = () => { BenCode_onchange('H') }
         txt_ReceiptNoteF.onchange = () => { CleanBen('F') }
         txt_ReceiptNoteH.onchange = () => { CleanBen('H'); CleanDiv_Charge_Provider(); }
-        txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
-        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
+        txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""}
+        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""}
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         txtCashTypeF.onchange = txtCashTypeF_onchange;
@@ -413,7 +413,7 @@ namespace AccTrPaymentNoteNew {
             if (Flag_IsNew == true) {
                 $("#txtCreatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtCreatedAt").val(DateTimeFormat(Date().toString()));
-                if ($('#dbChargeBank').is(":disabled") == false) {
+                if ($('#dbChargeBank').is(":hidden") == false) {
                     if ($('#dbChargeBank').val() == 'null') {
                         Errorinput($('#dbChargeBank'))
                         WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", () => {
@@ -425,6 +425,10 @@ namespace AccTrPaymentNoteNew {
                             }, 100);
                         });
                     }
+                    else {
+                        Assign();
+                        Insert();
+                    }
                 }
                 else {
                     Assign();
@@ -435,7 +439,7 @@ namespace AccTrPaymentNoteNew {
             else {
                 $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-                if ($('#dbChargeBank').is(":disabled") == false) {
+                if ($('#dbChargeBank').is(":hidden") == false) {
                     if ($('#dbChargeBank').val() == 'null') {
                         Errorinput($('#dbChargeBank'))
                         WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", () => {
@@ -446,6 +450,10 @@ namespace AccTrPaymentNoteNew {
                                 finishSave('btnSave');
                             }, 100);
                         });
+                    }
+                    else {
+                        Assign();
+                        Update();
                     }
                 }
                 else {
@@ -1225,23 +1233,24 @@ namespace AccTrPaymentNoteNew {
 
         if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
 
-            if (txtProviderName.value.trim() == '') {
-                DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
-                Errorinput(txtProviderName);
-                return false;
-            }
-
-            if ($('#txtProviderVatNo').val().trim() == '') {
-                DisplayMassage("يجب ادخال الرقم الضريبى   ", "Choose the type of Vat No", MessageType.Worning);
-                Errorinput($('#txtProviderVatNo'));
-                return false;
-            }
-
             if (dbProviderVatType.value == 'null') {
                 DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
                 Errorinput(dbProviderVatType);
                 return false;
             }
+
+            if (txtProviderName.value.trim() == '' && dbProviderVatType.value != '10') {
+                DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
+                Errorinput(txtProviderName);
+                return false;
+            }
+
+            if ($('#txtProviderVatNo').val().trim() == '' && dbProviderVatType.value != '10') {
+                DisplayMassage("يجب ادخال الرقم الضريبى   ", "Choose the type of Vat No", MessageType.Worning);
+                Errorinput($('#txtProviderVatNo'));
+                return false;
+            }
+             
 
             if (dbCC_Code.value == 'null') {
                 DisplayMassage("يجب اختيار مركز التكلفة  ", "Choose the type of Cost", MessageType.Worning);
@@ -1259,6 +1268,9 @@ namespace AccTrPaymentNoteNew {
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger
+        if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
+            CalculatorProvider();
+        }
         Model = new A_RecPay_Tr_ReceiptNote();
 
         DocumentActions.AssignToModel(Model);//Insert Update
@@ -1288,6 +1300,7 @@ namespace AccTrPaymentNoteNew {
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+
     }
     function Insert() {
         debugger

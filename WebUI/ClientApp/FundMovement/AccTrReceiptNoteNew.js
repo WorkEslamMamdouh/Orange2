@@ -4,7 +4,7 @@ $(document).ready(function () {
 var AccTrReceiptNoteNew;
 (function (AccTrReceiptNoteNew) {
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AccTrReceiptNote);
+    var SysSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";

@@ -4,7 +4,7 @@ $(document).ready(function () {
 var AccTrPaymentNoteNew;
 (function (AccTrPaymentNoteNew) {
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AccTrReceiptNote);
+    var SysSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -145,8 +145,8 @@ var AccTrPaymentNoteNew;
         txt_BenCodeH.onchange = function () { BenCode_onchange('H'); };
         txt_ReceiptNoteF.onchange = function () { CleanBen('F'); };
         txt_ReceiptNoteH.onchange = function () { CleanBen('H'); CleanDiv_Charge_Provider(); };
-        txt_CashAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); };
-        txt_CardAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); };
+        txt_CashAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""; };
+        txt_CardAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""; };
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         txtCashTypeF.onchange = txtCashTypeF_onchange;
@@ -400,7 +400,7 @@ var AccTrPaymentNoteNew;
             if (Flag_IsNew == true) {
                 $("#txtCreatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtCreatedAt").val(DateTimeFormat(Date().toString()));
-                if ($('#dbChargeBank').is(":disabled") == false) {
+                if ($('#dbChargeBank').is(":hidden") == false) {
                     if ($('#dbChargeBank').val() == 'null') {
                         Errorinput($('#dbChargeBank'));
                         WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", function () {
@@ -412,6 +412,10 @@ var AccTrPaymentNoteNew;
                             }, 100);
                         });
                     }
+                    else {
+                        Assign();
+                        Insert();
+                    }
                 }
                 else {
                     Assign();
@@ -421,7 +425,7 @@ var AccTrPaymentNoteNew;
             else {
                 $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
                 $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-                if ($('#dbChargeBank').is(":disabled") == false) {
+                if ($('#dbChargeBank').is(":hidden") == false) {
                     if ($('#dbChargeBank').val() == 'null') {
                         Errorinput($('#dbChargeBank'));
                         WorningMessage("لا يوجد رسوم بنكية لعملية الصرف ، هل انت متأكد الحفظ ؟ ", "Do you want to delete?", "تنبيه", "worning", function () {
@@ -432,6 +436,10 @@ var AccTrPaymentNoteNew;
                                 finishSave('btnSave');
                             }, 100);
                         });
+                    }
+                    else {
+                        Assign();
+                        Update();
                     }
                 }
                 else {
@@ -1097,19 +1105,19 @@ var AccTrPaymentNoteNew;
             }
         }
         if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
-            if (txtProviderName.value.trim() == '') {
+            if (dbProviderVatType.value == 'null') {
+                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
+                Errorinput(dbProviderVatType);
+                return false;
+            }
+            if (txtProviderName.value.trim() == '' && dbProviderVatType.value != '10') {
                 DisplayMassage("يجب ادخال المورد   ", "Choose the type of Ven", MessageType.Worning);
                 Errorinput(txtProviderName);
                 return false;
             }
-            if ($('#txtProviderVatNo').val().trim() == '') {
+            if ($('#txtProviderVatNo').val().trim() == '' && dbProviderVatType.value != '10') {
                 DisplayMassage("يجب ادخال الرقم الضريبى   ", "Choose the type of Vat No", MessageType.Worning);
                 Errorinput($('#txtProviderVatNo'));
-                return false;
-            }
-            if (dbProviderVatType.value == 'null') {
-                DisplayMassage("يجب اختيار نوع الضريبة  ", "Choose the type of Vat", MessageType.Worning);
-                Errorinput(dbProviderVatType);
                 return false;
             }
             if (dbCC_Code.value == 'null') {
@@ -1123,6 +1131,9 @@ var AccTrPaymentNoteNew;
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger;
+        if ($('#Provider_Div').is(":hidden") == false) { //Provider____Validation
+            CalculatorProvider();
+        }
         Model = new A_RecPay_Tr_ReceiptNote();
         DocumentActions.AssignToModel(Model); //Insert Update
         Model.Status = chkStatus.checked == true ? 1 : 0;

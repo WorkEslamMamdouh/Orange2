@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 namespace AccTrReceiptNoteNew {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNote);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
