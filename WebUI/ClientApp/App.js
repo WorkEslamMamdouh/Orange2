@@ -1541,6 +1541,39 @@ function GetDateAndTime() {
     ReturnedDate = dd + '/' + M + '/' + yyyy + ' ' + HH + ':' + MM + ':' + SS;
     return ReturnedDate;
 }
+function GetDateAndTimeNew() {
+    var today = new Date();
+    var dd = today.getDate().toString();
+    var ReturnedDate;
+    var M = (today.getMonth() + 1).toString();
+    var yyyy = today.getFullYear();
+    if (Number(dd) < 10) {
+        dd = ('0' + dd);
+    }
+    if (Number(M) < 10) {
+        M = ('0' + M);
+    }
+    var d = new Date();
+    var hour = d.getHours();
+    var MM = d.getMinutes().toString();
+    var fulltime = "";
+    // create a 24 elements(0-23) array containing following values
+    var arrayHrs = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    // since getMinutes() returns 0 to 9 for upto 9 minutes, not 00 to 09, we can do this
+    if (MM < '10') {
+        MM = "0" + MM.toString();
+    }
+    if (hour < 12) {
+        // Just for an example, if hour = 11 and minute = 29
+        fulltime = arrayHrs[hour] + ":" + MM + " AM"; // fulltime = 11:29 AM
+    }
+    else {
+        // similarly, if hour = 22 and minute = 8
+        fulltime = arrayHrs[hour] + ":" + MM + " PM"; // fulltime = 10:08 PM
+    }
+    ReturnedDate = dd + '/' + M + '/' + yyyy + ' ' + fulltime;
+    return ReturnedDate;
+}
 function CreateDropdownList(arr, Name_Ar, Name_En, Key, IsSelectNull) {
     if (IsSelectNull === void 0) { IsSelectNull = false; }
     var Env = GetSystemEnvironment();

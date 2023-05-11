@@ -310,7 +310,9 @@ namespace HomeComponent {
         if (isNews == 'false') {
             Show_News();
         }
-        $('#btnNews').click(function (e) { Show_News(); });
+        $('#btnNews').click(function (e) {
+            Show_News(); $("#News_Model").modal("show");
+            localStorage.setItem("Show_News", 'true');});
 
         $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
         $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
@@ -979,9 +981,9 @@ namespace HomeComponent {
 
     function Show_News() {
         
-
+        $("#Div_News").html('<label class="Not_Found"> ...There is no news at this time</label>');
         $("#Div_History").html('');
-        $("#Div_News").html('');
+
 
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
@@ -998,7 +1000,7 @@ namespace HomeComponent {
                 if (result.IsSuccess) {
                     News_Details = result.Response as NewsDetails;
                     if (News_Details.G_News.length > 0) {
-
+                        $("#Div_News").html('');
                         for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i, false);
                         }

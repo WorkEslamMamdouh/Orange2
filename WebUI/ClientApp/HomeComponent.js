@@ -244,7 +244,11 @@ var HomeComponent;
         if (isNews == 'false') {
             Show_News();
         }
-        $('#btnNews').click(function (e) { Show_News(); });
+        $('#btnNews').click(function (e) {
+            Show_News();
+            $("#News_Model").modal("show");
+            localStorage.setItem("Show_News", 'true');
+        });
         $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1); });
         $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2); });
         $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3); });
@@ -847,8 +851,8 @@ var HomeComponent;
         return Style_New;
     }());
     function Show_News() {
+        $("#Div_News").html('<label class="Not_Found"> ...There is no news at this time</label>');
         $("#Div_History").html('');
-        $("#Div_News").html('');
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
         $('.modal-History').addClass('display_none');
@@ -862,6 +866,7 @@ var HomeComponent;
                 if (result.IsSuccess) {
                     News_Details = result.Response;
                     if (News_Details.G_News.length > 0) {
+                        $("#Div_News").html('');
                         for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i, false);
                         }

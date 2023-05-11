@@ -241,6 +241,8 @@ var LoginComponent;
                         else {  // Error in user or pass or active 
                             txtUserName.style.borderColor = "red";
                             txtUserPassword.style.borderColor = "red";
+                            $('#btnLogin').html('Enter');
+                            $('#btnLogin').removeAttr('disabled');
                         }
                     }
                     else { // Error in API 
