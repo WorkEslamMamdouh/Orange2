@@ -454,9 +454,10 @@ namespace AccTrReceiptNoteNew {
 
     }      
     //****************************************************Vendors*********************************************
-    function BenVnd(Type: string) { 
+    function BenVnd(Type: string) {
+        debugger
         let cond = " CompCode= " + CompCode + "and IsCreditVendor = 1"  ; 
-        cond = cond + Type == 'H' ? "and Isactive = 1" : "";  
+        cond = cond + (Type == 'H' ? " and Isactive = 1" : "");  
 
         sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", cond, () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey; 

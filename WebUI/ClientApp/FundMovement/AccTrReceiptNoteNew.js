@@ -443,8 +443,9 @@ var AccTrReceiptNoteNew;
     }
     //****************************************************Vendors*********************************************
     function BenVnd(Type) {
+        debugger;
         var cond = " CompCode= " + CompCode + "and IsCreditVendor = 1";
-        cond = cond + Type == 'H' ? "and Isactive = 1" : "";
+        cond = cond + (Type == 'H' ? " and Isactive = 1" : "");
         sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", cond, function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountVndById(Type, id, false);
