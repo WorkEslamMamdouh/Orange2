@@ -328,7 +328,7 @@ var AccTrPaymentNoteNew;
     function btnBen_onclick(Type) {
         debugger;
         if ($('#txt_ReceiptNote' + Type).val() == "null") {
-            DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning);
+            DisplayMassage("برجاء اختيار نوع الصرف", "", MessageType.Worning);
             Errorinput($('#txt_ReceiptNote' + Type));
         }
         if ($('#txt_ReceiptNote' + Type).val() == "1") {
@@ -425,7 +425,7 @@ var AccTrPaymentNoteNew;
     function BenCode_onchange(Type) {
         debugger;
         if ($('#txt_ReceiptNote' + Type).val() == "null") {
-            DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning);
+            DisplayMassage("برجاء اختيار نوع الصرف", "", MessageType.Worning);
             Errorinput($('#txt_ReceiptNote' + Type));
         }
         if ($('#txt_ReceiptNote' + Type).val() == "1") {
@@ -621,9 +621,10 @@ var AccTrPaymentNoteNew;
     }
     //****************************************************Vendors*********************************************
     function BenVnd(Type) {
-        var cond = " CompCode= " + CompCode + "and IsCreditVendor = 1";
-        cond = cond + Type == 'H' ? "and Isactive = 1" : "";
-        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", cond, function () {
+        //var cond = " CompCode= " + CompCode.toString() + " and IsCreditVendor = 1";
+        //cond = cond + Type == 'H' ? "and Isactive = 1" : "";
+        debugger;
+        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", " CompCode= " + CompCode + " and IsCreditVendor = 1 " + (Type == 'H' ? "and Isactive = 1" : ""), function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountVndById(Type, id, false);
         });

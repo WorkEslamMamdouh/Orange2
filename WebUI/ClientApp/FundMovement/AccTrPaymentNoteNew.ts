@@ -342,7 +342,7 @@ namespace AccTrPaymentNoteNew {
     //************************************************Btn_Events**********************************
     function btnBen_onclick(Type: string) {
         debugger
-        if ($('#txt_ReceiptNote' + Type).val() == "null") { DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning); Errorinput($('#txt_ReceiptNote' + Type)) }
+        if ($('#txt_ReceiptNote' + Type).val() == "null") { DisplayMassage("برجاء اختيار نوع الصرف", "", MessageType.Worning); Errorinput($('#txt_ReceiptNote' + Type)) }
         if ($('#txt_ReceiptNote' + Type).val() == "1") { BenCust(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "2") { BenVnd(Type); }
         if ($('#txt_ReceiptNote' + Type).val() == "3") { BenBank(Type); }
@@ -432,7 +432,7 @@ namespace AccTrPaymentNoteNew {
     //************************************************Change_Events**********************************
     function BenCode_onchange(Type: string) {
         debugger
-        if ($('#txt_ReceiptNote' + Type).val() == "null") { DisplayMassage("برجاء اختيار نوع الاستلام", "", MessageType.Worning); Errorinput($('#txt_ReceiptNote' + Type)) }
+        if ($('#txt_ReceiptNote' + Type).val() == "null") { DisplayMassage("برجاء اختيار نوع الصرف", "", MessageType.Worning); Errorinput($('#txt_ReceiptNote' + Type)) }
         if ($('#txt_ReceiptNote' + Type).val() == "1") { getAccountCustById(Type, $('#txt_BenCode' + Type).val(), true); }
         if ($('#txt_ReceiptNote' + Type).val() == "2") { getAccountVndById(Type, $('#txt_BenCode' + Type).val(), true); }
         if ($('#txt_ReceiptNote' + Type).val() == "3") { getAccountBankById(Type, $('#txt_BenCode' + Type).val(), true); }
@@ -658,15 +658,16 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
-    //****************************************************Vendors*********************************************
+    //****************************************************Vendors**********************************************
     function BenVnd(Type: string) {
-        let cond = " CompCode= " + CompCode + "and IsCreditVendor = 1";
-        cond = cond + Type == 'H' ? "and Isactive = 1" : "";
-
-        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", cond, () => {
+        //var cond = " CompCode= " + CompCode.toString() + " and IsCreditVendor = 1";
+        //cond = cond + Type == 'H' ? "and Isactive = 1" : "";
+        debugger; 
+        sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", " CompCode= " + CompCode + " and IsCreditVendor = 1 " + (Type =='H' ? "and Isactive = 1" : "") , () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountVndById(Type, id, false);
         });
+
     }
     function getAccountVndById(Type: string, VenId: string, code: boolean) {
 
@@ -707,7 +708,7 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
-    //****************************************************Bank*********************************************
+    //****************************************************Bank*************************************************
     function BenBank(Type: string) {
         debugger
         let cond = " COMP_CODE= " + CompCode + "and ACC_TYPE = 3";
@@ -754,7 +755,7 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
-    //****************************************************Bank*********************************************
+    //****************************************************Bank*************************************************
     function BenAcc(Type: string) {
 
         sys.FindKey(Modules.AccTrReceiptNote, "btnAccBen", "CompCode= " + CompCode + " and TrType = 2 ", () => {
@@ -800,7 +801,7 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
-    //****************************************************Box*********************************************
+    //****************************************************Box**************************************************
     function BenBox(Type: string) {
         debugger
         let cond = "CompCode= " + CompCode;
@@ -895,7 +896,7 @@ namespace AccTrPaymentNoteNew {
         });
 
     }
-    //****************************************************CleanInput*********************************************
+    //****************************************************CleanInput*******************************************
     function CleanBen(Type: string) {
 
         $('#txt_BenCode' + Type).val("");
