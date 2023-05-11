@@ -154,6 +154,7 @@ namespace AccTrPaymentNoteNew {
         txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); }
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
+        txtCashTypeF.onchange = txtCashTypeF_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
         chkStatus.onchange = chkStatus_onchange;
         txtProviderName.onchange = txtProviderName_onchange;
@@ -198,7 +199,7 @@ namespace AccTrPaymentNoteNew {
                     return txt;
                 }
             },
-            { title: res.App_Receipt_Type, name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "11%" },
+            { title: 'نوع الصرف', name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "11%" },
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "11%" },
             { title: res.App_beneficiary, name: "Bef_DescA", type: "text", width: "20%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "11%" },
@@ -260,6 +261,7 @@ namespace AccTrPaymentNoteNew {
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
 
+                    $('#txt_ReceiptNoteF option[value="6"]').remove()
                 }
             }
         });
@@ -454,6 +456,20 @@ namespace AccTrPaymentNoteNew {
             ReportGrid.Bind();
         }
     }
+    function txtCashTypeF_onchange() {
+         
+        DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+        $('#txt_ReceiptNoteF option[value="6"]').remove()
+          
+        if (txtCashTypeF.value == '9') {
+            $('#txt_ReceiptNoteF').html('');
+            $('#txt_ReceiptNoteF').append('<option value="6">مصروف مستحق</option>');
+            txt_ReceiptNoteF.value = '6'; 
+        }
+        else {
+            txt_ReceiptNoteF.value = 'null';
+        } 
+    }
     function txtCashTypeH_onchange() {
 
         $('._dis_Bank').attr('disabled', 'disabled');
@@ -591,10 +607,10 @@ namespace AccTrPaymentNoteNew {
         var NetPrice = Number($("#txt_Amount").val());
         let GetUnitprice: IGetunitprice = Get_PriceWithVAT(NetPrice, Number(VatPrc), true);
 
-        $("#txtProviderAmountBeforeVat").val((GetUnitprice.unitprice).RoundToSt(2));
+        $("#txtProviderAmountBeforeVat").val((GetUnitprice.unitprice.RoundToSt(2)));
 
 
-        let Vat = (Number($("#txtProviderAmountBeforeVat").val()) * Number(VatPrc)) / 100;
+        let Vat = (GetUnitprice.unitprice * Number(VatPrc)) / 100;
         $("#txtProviderVatAmount").val(Vat.RoundToSt(2));
 
 

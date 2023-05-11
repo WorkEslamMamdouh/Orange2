@@ -149,6 +149,7 @@ var AccTrPaymentNoteNew;
         txt_CardAmount.onkeyup = function () { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); };
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
+        txtCashTypeF.onchange = txtCashTypeF_onchange;
         chkIsDeffered.onchange = chkIsDeffered_onchange;
         chkStatus.onchange = chkStatus_onchange;
         txtProviderName.onchange = txtProviderName_onchange;
@@ -193,7 +194,7 @@ var AccTrPaymentNoteNew;
                     return txt;
                 }
             },
-            { title: res.App_Receipt_Type, name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "11%" },
+            { title: 'نوع الصرف', name: (lang == "ar" ? "Type_DescA" : "Type_DescE"), type: "text", width: "11%" },
             { title: res.App_beneficiary_no, name: "Bef_Code", type: "text", width: "11%" },
             { title: res.App_beneficiary, name: "Bef_DescA", type: "text", width: "20%" },
             { title: res.App_Amount, name: "Amount", type: "text", width: "11%" },
@@ -249,6 +250,7 @@ var AccTrPaymentNoteNew;
                     Type = fillModel_GCodes.filter(function (x) { return x.CodeType == codeType; });
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
                     DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+                    $('#txt_ReceiptNoteF option[value="6"]').remove();
                 }
             }
         });
@@ -460,6 +462,18 @@ var AccTrPaymentNoteNew;
             ReportGrid.Bind();
         }
     }
+    function txtCashTypeF_onchange() {
+        DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+        $('#txt_ReceiptNoteF option[value="6"]').remove();
+        if (txtCashTypeF.value == '9') {
+            $('#txt_ReceiptNoteF').html('');
+            $('#txt_ReceiptNoteF').append('<option value="6">مصروف مستحق</option>');
+            txt_ReceiptNoteF.value = '6';
+        }
+        else {
+            txt_ReceiptNoteF.value = 'null';
+        }
+    }
     function txtCashTypeH_onchange() {
         $('._dis_Bank').attr('disabled', 'disabled');
         $('#Charge_Div').addClass('display_none');
@@ -565,8 +579,8 @@ var AccTrPaymentNoteNew;
         $("#txtProviderVatPrc").val(VatPrc);
         var NetPrice = Number($("#txt_Amount").val());
         var GetUnitprice = Get_PriceWithVAT(NetPrice, Number(VatPrc), true);
-        $("#txtProviderAmountBeforeVat").val((GetUnitprice.unitprice).RoundToSt(2));
-        var Vat = (Number($("#txtProviderAmountBeforeVat").val()) * Number(VatPrc)) / 100;
+        $("#txtProviderAmountBeforeVat").val((GetUnitprice.unitprice.RoundToSt(2)));
+        var Vat = (GetUnitprice.unitprice * Number(VatPrc)) / 100;
         $("#txtProviderVatAmount").val(Vat.RoundToSt(2));
     }
     function txtProviderName_onchange() {
@@ -619,7 +633,7 @@ var AccTrPaymentNoteNew;
             }
         });
     }
-    //****************************************************Vendors*********************************************
+    //****************************************************Vendors**********************************************
     function BenVnd(Type) {
         //var cond = " CompCode= " + CompCode.toString() + " and IsCreditVendor = 1";
         //cond = cond + Type == 'H' ? "and Isactive = 1" : "";
@@ -659,7 +673,7 @@ var AccTrPaymentNoteNew;
             }
         });
     }
-    //****************************************************Bank*********************************************
+    //****************************************************Bank*************************************************
     function BenBank(Type) {
         debugger;
         var cond = " COMP_CODE= " + CompCode + "and ACC_TYPE = 3";
@@ -701,7 +715,7 @@ var AccTrPaymentNoteNew;
             }
         });
     }
-    //****************************************************Bank*********************************************
+    //****************************************************Bank*************************************************
     function BenAcc(Type) {
         sys.FindKey(Modules.AccTrReceiptNote, "btnAccBen", "CompCode= " + CompCode + " and TrType = 2 ", function () {
             var id = SearchGrid.SearchDataGrid.SelectedKey;
@@ -739,7 +753,7 @@ var AccTrPaymentNoteNew;
             }
         });
     }
-    //****************************************************Box*********************************************
+    //****************************************************Box**************************************************
     function BenBox(Type) {
         debugger;
         var cond = "CompCode= " + CompCode;
@@ -816,7 +830,7 @@ var AccTrPaymentNoteNew;
             }
         });
     }
-    //****************************************************CleanInput*********************************************
+    //****************************************************CleanInput*******************************************
     function CleanBen(Type) {
         $('#txt_BenCode' + Type).val("");
         $('#txt_BenName' + Type).val("");
