@@ -1508,6 +1508,24 @@ function GetDate() {
     ReturnedDate = yyyy + '-' + mm + '-' + dd;
     return ReturnedDate;
 }
+function GetDateAndTime() {
+    var today = new Date();
+    var dd = today.getDate().toString();
+    var ReturnedDate;
+    var M = (today.getMonth() + 1).toString();
+    var yyyy = today.getFullYear();
+    if (Number(dd) < 10) {
+        dd = ('0' + dd);
+    }
+    if (Number(M) < 10) {
+        M = ('0' + M);
+    }
+    var HH = today.getHours();
+    var MM = today.getMinutes();
+    var SS = today.getSeconds();
+    ReturnedDate = dd + '/' + M + '/' + yyyy + ' ' + HH + ':' + MM + ':' + SS;
+    return ReturnedDate;
+}
 function CreateDropdownList(arr, Name_Ar, Name_En, Key, IsSelectNull) {
     if (IsSelectNull === void 0) { IsSelectNull = false; }
     var Env = GetSystemEnvironment();

@@ -983,7 +983,7 @@ namespace HomeComponent {
         $('.down-arrow').addClass('display_none');
         $('.modal-History').addClass('display_none');
 
-        let DateNow = DateFormatRep(GetDate());
+        let DateNow = GetDateAndTime();
 
         Ajax.Callsync({
             type: "Get",

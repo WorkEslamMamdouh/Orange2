@@ -678,7 +678,7 @@ namespace AccTrPaymentNoteNew {
     function BenVnd(Type: string) {
         //var cond = " CompCode= " + CompCode.toString() + " and IsCreditVendor = 1";
         //cond = cond + Type == 'H' ? "and Isactive = 1" : "";
-        debugger; 
+        debugger;  
         sys.FindKey(Modules.AccTrReceiptNote, "btnVndSrch", " CompCode= " + CompCode + " and IsCreditVendor = 1 " + (Type =='H' ? "and Isactive = 1" : "") , () => {
             let id = SearchGrid.SearchDataGrid.SelectedKey;
             getAccountVndById(Type, id, false);

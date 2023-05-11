@@ -1884,6 +1884,31 @@ function GetDate() {
     return ReturnedDate;
 }
 
+
+function GetDateAndTime() {
+    var today: Date = new Date();
+    var dd: string = today.getDate().toString();
+    var ReturnedDate: string;
+    var M: string = (today.getMonth() + 1).toString();
+    var yyyy = today.getFullYear();
+     
+    if (Number(dd) < 10) {
+        dd = ('0' + dd);
+    }
+    if (Number(M) < 10) {
+        M = ('0' + M);
+    }
+
+    var HH = today.getHours();
+    var MM = today.getMinutes();
+    var SS = today.getSeconds(); 
+
+    ReturnedDate = dd + '/' + M + '/' + yyyy + ' ' + HH + ':' + MM + ':' + SS;
+     
+
+    return ReturnedDate;
+}
+
 function CreateDropdownList<T>(arr: Array<T>, Name_Ar: string, Name_En: string, Key: string, IsSelectNull: Boolean = false): HTMLSelectElement {
     var Env = GetSystemEnvironment();
     let element = document.createElement("select") as HTMLSelectElement;

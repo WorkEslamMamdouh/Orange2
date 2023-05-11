@@ -848,7 +848,7 @@ var HomeComponent;
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
         $('.modal-History').addClass('display_none');
-        var DateNow = DateFormatRep(GetDate());
+        var DateNow = GetDateAndTime();
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
