@@ -164,6 +164,16 @@ var GenDefVendorCat;
             $("#btn_minus" + cnt).addClass("display_none");
             $("#btn_minus" + cnt).attr("disabled", "disabled");
         }
+        $(document).ready(function () {
+            // Initialize select2
+            $("#txtAcount_Code" + cnt).select2();
+            // Read selected option
+            $('#but_read' + cnt).click(function () {
+                var username = $('#txtAcount_Code' + cnt + ' option:selected').text();
+                var userid = $('#txtAcount_Code' + cnt + '').val();
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
         return;
     }
     function Display_Acount_Code() {
@@ -347,20 +357,7 @@ var GenDefVendorCat;
             $("#txtDescL" + i).val(Details[i].Cat_DescE);
             $("#CodePrefex" + i).val(Details[i].CodePrefex);
             $("#LastNumber" + i).val(Details[i].LastNumber);
-            try {
-                for (var u = 0; u < Details_Acount.length; u++) {
-                    if (Details[i].AccountCode == Details_Acount[u].ACC_CODE) {
-                        $("#txtAcount_Code" + i).prop("value", Details[i].AccountCode);
-                        break;
-                    }
-                    else {
-                        $("#txtAcount_Code" + i).prop("value", "Null");
-                    }
-                }
-            }
-            catch (e) {
-                $("#txtAcount_Code" + i).prop("value", "Null");
-            }
+            $('#txtAcount_Code' + i + ' option[value=' + Details[i].AccountCode + ']').prop('selected', 'selected').change();
             $("#txt_StatusFlag" + i).val("");
         }
         $(document).ready(function () {

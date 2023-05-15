@@ -904,11 +904,11 @@ var AccTrReceiptNoteNew;
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
         if (txt_ReceiptNoteF.selectedIndex > 0)
-            rp.RecType = Number($("#txt_ReceiptNote").val());
+            rp.RecType = Number($("#txt_ReceiptNoteF").val());
         else
             rp.RecType = -1;
         if (txt_D_CashBoxF.selectedIndex > 0)
-            rp.BoxId = Number($("#txt_D_CashBox").val());
+            rp.BoxId = Number($("#txt_D_CashBoxF").val());
         else
             rp.BoxId = -1;
         /////////////////////////doniaH
@@ -916,9 +916,9 @@ var AccTrReceiptNoteNew;
         //    rp.BnfID = $("#txt_ID_beneficiary").val();
         //    rp.BnfDesc = txt_ID_beneficiary.value;
         //}
-        if ($("#txt_BenCodeH").val() != "") {
-            rp.BnfID = $("#txt_BenCodeH").val();
-            rp.BnfDesc = $("#txt_BenNameH").val();
+        if ($("#txt_BenCodeF").val() != "") {
+            rp.BnfID = $("#txt_BenCodeF").val();
+            rp.BnfDesc = $("#txt_BenNameF").val();
         }
         else {
             rp.BnfID = "";
@@ -929,12 +929,12 @@ var AccTrReceiptNoteNew;
             rp.Status = Number($("#txt_Status").val());
         else
             rp.Status = 2;
-        rp.TrType = 1;
-        if ($("#txtCashType").val() == "null") {
+        rp.TrType = TrType;
+        if ($("#txtCashTypeF").val() == "null") {
             rp.CashType = -1;
         }
         else {
-            rp.CashType = $("#txtCashType").val();
+            rp.CashType = $("#txtCashTypeF").val();
         }
         Ajax.Callsync({
             url: Url.Action("IProc_Rpt_AccReceiptList", "GeneralReports"),
