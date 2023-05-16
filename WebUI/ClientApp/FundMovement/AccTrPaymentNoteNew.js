@@ -71,13 +71,13 @@ var AccTrPaymentNoteNew;
         InitializeGrid();
         txtDateFrom.value = DateStartMonth();
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        GetData_Header_loader();
-        //fillddlCashBox();
-        //fillddlG_Codes();
-        //fillddlAcount_Code();
-        //fillddlVatType();
-        //fillddlChargeBank();
-        //fillddlCOST_CENTER();
+        //GetData_Header_loaderTest();
+        fillddlCashBox();
+        fillddlG_Codes();
+        fillddlAcount_Code();
+        fillddlVatType();
+        fillddlChargeBank();
+        fillddlCOST_CENTER();
     }
     AccTrPaymentNoteNew.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -213,7 +213,7 @@ var AccTrPaymentNoteNew;
         ];
         ReportGrid.Bind();
     }
-    function GetData_Header_loader() {
+    function GetData_Header_loaderTest() {
         var Table;
         Table =
             [

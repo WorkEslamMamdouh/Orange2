@@ -616,6 +616,10 @@ var AccTrReceiptNoteNew;
         $('#id_div_Filter').addClass('disabledDiv');
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
+        if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8') { // نقدي  او تحصيل شبكة  
+            $('#txt_Amount').removeAttr('disabled');
+            $('._dis_Bank').removeAttr('disabled');
+        }
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled');
