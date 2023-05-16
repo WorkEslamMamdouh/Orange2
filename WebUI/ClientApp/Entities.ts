@@ -11460,4 +11460,23 @@ class IQ_GetCollectList {
     public Typ_DescA: string;
     public Typ_DescE: string;
 }
+
+
+
+class Table {
+    constructor() {
+        this.NameTable = "";
+        this.Condition = "";
+    }
+    public NameTable: string;
+    public Condition: string;
+
+}
+
+class Table_Result {
+    constructor() {
+        this.Table_Res = new Array<any>();
+    }
+    public Table_Res: Array<any>;
+} 
  

@@ -2327,4 +2327,22 @@ function CopyRowGrid(DataList, Key, value) {
     }
     return NewModel;
 }
+function GetAllData(Table) {
+    var sys = new SystemTools;
+    var List_Table = new Array();
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: function (d) {
+            var result = d;
+            if (result.IsSuccess) {
+                List_Table = result.Response;
+                console.log(List_Table);
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+}
 //# sourceMappingURL=App.js.map

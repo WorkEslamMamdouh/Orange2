@@ -3027,3 +3027,25 @@ function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> 
     return NewModel;
 
 }
+
+
+
+function GetAllData(Table: Array<Table>): Array<Table_Result> {
+    let sys = new SystemTools;
+    let List_Table: Array<Table_Result> = new Array<Table_Result>();
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: (d) => {
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                List_Table = result.Response as Array<Table_Result>;
+                console.log(List_Table);
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+
+}

@@ -6737,4 +6737,17 @@ var IQ_GetCollectList = /** @class */ (function () {
     }
     return IQ_GetCollectList;
 }());
+var Table = /** @class */ (function () {
+    function Table() {
+        this.NameTable = "";
+        this.Condition = "";
+    }
+    return Table;
+}());
+var Table_Result = /** @class */ (function () {
+    function Table_Result() {
+        this.Table_Res = new Array();
+    }
+    return Table_Result;
+}());
 //# sourceMappingURL=Entities.js.map

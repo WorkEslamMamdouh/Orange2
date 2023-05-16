@@ -1962,5 +1962,30 @@ namespace Inv.API.Controllers
         }
 
 
+        [HttpPost, AllowAnonymous]
+        public IHttpActionResult Get_TableNew([FromBody]List<Table> Entity)
+        {
+
+            List<object> Res = new List<object>();
+
+            foreach (var item in Entity)
+            {
+                List<object> Table_Res = new List<object>();
+
+
+                string query = "select * from " + item.NameTable + " " + (item.Condition.Trim() == "" ? "" : " Where " + item.Condition);
+                object res = Get_Model(query, item.NameTable);
+
+                Table_Res.Add(res);
+                Res.AddRange(Table_Res);
+
+            }
+
+            return Ok(new BaseResponse(Res));
+
+
+        }
+         
+
     }
 }

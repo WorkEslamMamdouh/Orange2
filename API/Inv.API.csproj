@@ -15,12 +15,15 @@
     <AssemblyName>Inv.API</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -351,6 +354,8 @@
     <Compile Include="Models\CustomModel\DashBalances.cs" />
     <Compile Include="Models\CustomModel\StockOpenMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SystemClass.cs" />
+    <Compile Include="Models\CustomModel\Table.cs" />
+    <Compile Include="Models\CustomModel\Table_Result.cs" />
     <Compile Include="Models\CustomModel\VendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\ListOperationDepositDetail.cs" />
     <Compile Include="Models\CustomModel\OPerationSalesmanTransferWithDetail.cs" />
