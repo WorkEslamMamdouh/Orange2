@@ -341,7 +341,11 @@ namespace Supplieraccstat {
 
             rp.BalType = 0;
         }
- 
+        if ($("#txt_indebtedness").val() == "!") {//******رصيد غير صفري 
+
+            rp.BalType = 4;
+        }
+
         if ($("#txt_ID_Vendor").val() == "Null") {//-------------جميع الفئات
             rp.VendorId = -1;
         } else {
