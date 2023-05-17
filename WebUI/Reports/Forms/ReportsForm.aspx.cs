@@ -195,13 +195,11 @@ namespace RS.WebUI.Reports.Forms
 
 
             reportViewer1.LocalReport.DataSources.Clear();
-            foreach (var model in models)
-            {
-                ReportDataSource source = new ReportDataSource(reportName, model);
 
-                reportViewer1.LocalReport.DataSources.Add(source);
-
-            }
+            string[] broken_str = reportName.Split('/');
+            ReportDataSource source = new ReportDataSource(broken_str[broken_str.Length - 1], models[0]);
+            reportViewer1.LocalReport.DataSources.Add(source);
+             
 
 
             if (OutputTypeNo == 1)

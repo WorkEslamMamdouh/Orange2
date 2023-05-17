@@ -2028,6 +2028,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Comp4\Rep_OperationSummaryComp4Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Comp7\Rep_OperationSummaryComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListEn.rdlc">
       <SubType>Designer</SubType>
