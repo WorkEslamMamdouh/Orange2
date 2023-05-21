@@ -6102,5 +6102,78 @@ namespace Inv.DAL.Domain
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccReceiptList_Result>("IProc_Rpt_AccReceiptList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, fromDateParameter, toDateParameter, boxIdParameter, recTypeParameter, bnfIDParameter, bnfDescParameter, statusParameter, cashTypeParameter);
         }
+    
+        public virtual ObjectResult<GProc_Rep_UserActivityLog_Result> GProc_Rep_UserActivityLog(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> grpType, string fromDate, string toDate, Nullable<int> finYear, string sys, string module, string usr, Nullable<int> opStatus, Nullable<int> opid)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var grpTypeParameter = grpType.HasValue ?
+                new ObjectParameter("GrpType", grpType) :
+                new ObjectParameter("GrpType", typeof(int));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var finYearParameter = finYear.HasValue ?
+                new ObjectParameter("finYear", finYear) :
+                new ObjectParameter("finYear", typeof(int));
+    
+            var sysParameter = sys != null ?
+                new ObjectParameter("sys", sys) :
+                new ObjectParameter("sys", typeof(string));
+    
+            var moduleParameter = module != null ?
+                new ObjectParameter("module", module) :
+                new ObjectParameter("module", typeof(string));
+    
+            var usrParameter = usr != null ?
+                new ObjectParameter("usr", usr) :
+                new ObjectParameter("usr", typeof(string));
+    
+            var opStatusParameter = opStatus.HasValue ?
+                new ObjectParameter("OpStatus", opStatus) :
+                new ObjectParameter("OpStatus", typeof(int));
+    
+            var opidParameter = opid.HasValue ?
+                new ObjectParameter("opid", opid) :
+                new ObjectParameter("opid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_Rep_UserActivityLog_Result>("GProc_Rep_UserActivityLog", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, grpTypeParameter, fromDateParameter, toDateParameter, finYearParameter, sysParameter, moduleParameter, usrParameter, opStatusParameter, opidParameter);
+        }
     }
 }
