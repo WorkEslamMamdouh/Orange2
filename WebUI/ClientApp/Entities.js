@@ -3617,6 +3617,7 @@ var A_JOURNAL_DETAIL = /** @class */ (function (_super) {
         _this.DEBIT_FC = 0;
         _this.CREDIT_FC = 0;
         _this.StatusFlag = "";
+        _this.FlagUpdate = "";
         return _this;
     }
     return A_JOURNAL_DETAIL;

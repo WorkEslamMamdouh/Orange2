@@ -14,6 +14,7 @@ namespace JournalVoucher {
     var GL_JournalSaveUnbalanced: boolean = false;
     var startDate: string;
     var EndDate: string;
+    var FinYear = (SysSession.CurrentEnvironment.CurrentYear);
 
     //GridView
     var Grid: JsGrid = new JsGrid();
@@ -104,7 +105,7 @@ namespace JournalVoucher {
     var btnReverseVoucher: HTMLButtonElement;
     var btnLoadTemplate: HTMLButtonElement;
     var btnCreateTemplate: HTMLButtonElement;
-    var btnEditTemplate: HTMLButtonElement;
+    var btnUpdateTemplate: HTMLButtonElement;
     var btnDeleteTemplate: HTMLButtonElement;
 
 
@@ -120,6 +121,7 @@ namespace JournalVoucher {
     var rdNew: HTMLInputElement;
     var rdAuthorized: HTMLInputElement;
     var rdPosted: HTMLInputElement;
+    //var rdPosted: HTMLInputElement;
     var rdSaveValue: HTMLInputElement;
     var rdSaveDesc: HTMLInputElement;
 
@@ -140,24 +142,21 @@ namespace JournalVoucher {
     var DepitTotal: number = 0;
     var CreditTotal: number = 0;
     var btnPrintTransaction;
-    var Events = 0;
+    var GlobalNum = 0;
+    var Events = 0; 
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
     export function InitalizeComponent() {
-
-        //debugger
-        //let Difference = 541745.06 - 936391.96;
-
-        //alert(Difference.RoundToSt(2))
-        //let x = (Difference.toFixed(2));
-        //alert(x);
         //System
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
+
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "سند قيد" : document.getElementById('Screen_name').innerHTML = "Journal Voucher";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
         GL_JournalSaveUnbalanced = SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced;
         VoucherCCDtType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCDT_Type;
         InitalizeControls();
+
 
 
         // Call Fill Dropdownlists Functions
@@ -178,6 +177,7 @@ namespace JournalVoucher {
         btnAddDetails.onclick = AddNewRow;
         InitalizeEvents();
 
+        InitializeGrid();
     }
 
     //------------------------------------------------------ Main Region -----------------------------------
@@ -231,7 +231,7 @@ namespace JournalVoucher {
 
         btnLoadTemplate = DocumentActions.GetElementById<HTMLButtonElement>("btnLoadTemplate");
         btnCreateTemplate = document.getElementById("btnCreateTemplate") as HTMLButtonElement;
-        btnEditTemplate = document.getElementById("btnEditTemplate") as HTMLButtonElement;
+        btnUpdateTemplate = document.getElementById("btnEditTemplate") as HTMLButtonElement;
         btnDeleteTemplate = DocumentActions.GetElementById<HTMLButtonElement>("btnDeleteTemplate");
 
         btnPrint = document.getElementById("btnPrint") as HTMLButtonElement;
@@ -241,9 +241,10 @@ namespace JournalVoucher {
         btnPrintTransaction = document.getElementById("btnPrintTransaction") as HTMLButtonElement;
 
         //Radio buttons
+        rdPosted = document.getElementById("rdPosted") as HTMLInputElement;
         rdNew = document.getElementById("rdNew") as HTMLInputElement;
         rdAuthorized = document.getElementById("rdAuthorized") as HTMLInputElement;
-        rdPosted = document.getElementById("rdPosted") as HTMLInputElement;
+        //rdPosted = document.getElementById("rdPosted") as HTMLInputElement;
         rdSaveValue = document.getElementById("rdSaveValue") as HTMLInputElement;
         rdSaveDesc = document.getElementById("rdSaveDesc") as HTMLInputElement;
 
@@ -255,16 +256,16 @@ namespace JournalVoucher {
         btnAdd.onclick = btnAdd_onclick;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
-        btnUpdate.onclick = btnEdit_onclick;
+        btnUpdate.onclick = btnUpdate_onclick;
         btnAddDetails.onclick = AddNewRow;
         txtSearch.onkeyup = txtSearch_onKeyup;
         btnAuthorize.onclick = btnAuthorize_onclick;
         btnUnAuthorize.onclick = btnUnAuthorize_onclick;
         btnPost.onclick = btnPost_onclick;
         btnReverseVoucher.onclick = btnReverseVoucher_onclick;
-
+        clickEventsVisible();
         btnCreateTemplate.onclick = btnCreateTemplate_onclick;
-        btnEditTemplate.onclick = btnEditTemplate_onclick;
+        btnUpdateTemplate.onclick = btnUpdateTemplate_onclick;
         btnLoadTemplate.onclick = btnLoadTemplate_onclick;
         btnDeleteTemplate.onclick = btnDeleteTemplate_onclick;
 
@@ -278,16 +279,32 @@ namespace JournalVoucher {
         btnBackTemp.onclick = btnBackTemp_onclick;
     }
     //------------------------------------------------------ Buttons Region -----------------------------------
-    function btnEdit_onclick() {
+    function btnCopyRemark_onclick() {
+        debugger
+        for (var i = 0; i < CountGrid; i++) {
+            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
+
+                $("#Notes" + i).val(txtJournalDescripton.value);
+
+
+                if ($("#txt_StatusFlag" + i).val() == "") {
+                    $("#txt_StatusFlag" + i).val("u");
+
+                }
+            }
+        }
+    }
+    function btnUpdate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
         FlagAddOrEdit = 2;
 
         txtUpdatedAt.value = DateTimeFormat(Date().toString());
         txtUpdatedBy.value = SysSession.CurrentEnvironment.UserCode;
 
+        rdPosted.disabled = true;
         rdNew.disabled = true;
         rdAuthorized.disabled = true;
-        rdPosted.disabled = true;
+        //rdPosted.disabled = true;
 
         DisableDiv();
         EnableControls();
@@ -297,16 +314,14 @@ namespace JournalVoucher {
         $('#spandiv_contentliest').removeClass('fa-caret-left');
         $('#spandiv_contentliest').addClass('fa-caret-down');
 
-        $("#divTemplateData").removeClass("display_none");
-
-
-
         $(".BtnHide").removeAttr("disabled");
-
 
         $("#btnSaveTemp").addClass("display_none");
         $("#btnBackTemp").addClass("display_none");
         $("#txtTempName").attr("disabled", "disabled");
+        $("#rdPosted").attr("disabled", "disabled");
+
+        $("._dis").attr("disabled", "disabled");
 
     }
     function btnAdd_onclick() {
@@ -333,12 +348,11 @@ namespace JournalVoucher {
         $("#btnAuthorize").attr("disabled", "disabled");
         $("#btnUnAuthorize").addClass("display_none");
         $("#btnPost").attr("disabled", "disabled");
+        $("#rdPosted").attr("disabled", "disabled");
         $("#btnUpdate").attr("disabled", "disabled");
 
 
         $('#DivTemplate').removeClass('showdiv');
-        $("#divTemplateData").removeClass("display_none");
-
         $('#spandiv_contentliest').removeClass('fa-caret-left');
         $('#spandiv_contentliest').addClass('fa-caret-down');
 
@@ -348,31 +362,15 @@ namespace JournalVoucher {
         $("#btnBackTemp").addClass("display_none");
         $("#txtTempName").attr("disabled", "disabled");
 
+        $("._dis").attr("disabled", "disabled");
+
     }
     function btnShow_onclick() {
         $("#divGridShow").removeClass("display_none");
         $("#divTempHeader").removeClass("display_none");
         $("#divJournalDetail").addClass("display_none");
         Back();
-        InitializeGrid();
-    }
-    function btnCopyRemark_onclick() {
-
-
-
-        for (var i = 0; i < CountGrid; i++) {
-            if ($("#txt_StatusFlag" + i).val() != "d" && $("#txt_StatusFlag" + i).val() != "m") {
-
-                $("#Notes" + i).val(txtJournalDescripton.value);
-
-
-                if ($("#txt_StatusFlag" + i).val() == "") {
-                    $("#txt_StatusFlag" + i).val("u");
-
-                }
-            }
-        }
-
+        BindGridData();
     }
     function btnBack_onclick() {
         //if (TempFlagAddOrEdit == 1 || TempFlagAddOrEdit == 2) {
@@ -399,17 +397,21 @@ namespace JournalVoucher {
         $("#divGridShow").removeClass("disabledDiv");
 
         $('#DivTemplate').addClass('showdiv');
-        $("#divTemplateData").addClass("display_none");
-
         $('#spandiv_contentliest').addClass('fa-caret-left');
         $('#spandiv_contentliest').removeClass('fa-caret-down');
         GlobalTemplateID = 0;
     }
     function btnSave_onClick() {
+
+        //if (TempFlagAddOrEdit == 1 || TempFlagAddOrEdit == 2) {
+        //    btnTempSave_onclick();
+
+        //}
+        //else {
+
+
         loading('btnsave');
-
         setTimeout(function () {
-
             finishSave('btnsave');
 
             if (!Validation_Header())
@@ -427,8 +429,8 @@ namespace JournalVoucher {
                 Save();
             }
 
+            //}
         }, 100);
-
     }
     function btnAuthorize_onclick() {
         if (!SysSession.CurrentPrivileges.CUSTOM1) return;
@@ -455,10 +457,10 @@ namespace JournalVoucher {
         PostFlag = true;
         Assign();
         Update();
-        InitializeGrid();
+        BindGridData();
         txtPostedBy.value = SysSession.CurrentEnvironment.UserCode;
         txtPostedAt.value = DateTimeFormat(Date().toString());
-        rdPosted.checked = true;
+        //rdPosted.checked = true;
     }
     function btnReverseVoucher_onclick() {
         if (!SysSession.CurrentPrivileges.AddNew) return;
@@ -469,7 +471,7 @@ namespace JournalVoucher {
                     type: "Get",
                     url: sys.apiUrl("GLTrVoucher", "ReverseVoucher"),
                     data: {
-                        comp: compcode, VoucherId: GlobalVoucherID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
+                        comp: compcode, Branch_Code: SysSession.CurrentEnvironment.BranchCode, sec_FinYear: SysSession.CurrentEnvironment.CurrentYear, MODULE_CODE: SysSession.CurrentEnvironment.ModuleCode, VoucherId: GlobalVoucherID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token
                     },
                     success: (d) => {
                         let result = d as BaseResponse;
@@ -506,16 +508,23 @@ namespace JournalVoucher {
         Grid.SelectedIndex = 1;
         Grid.OnItemEditing = () => { };
         Grid.Columns = [
-            { title: res.App_Registration_Number, name: "VoucherID", type: "text", width: "0px", visible: false },
-            { title: res.App_Registration_Number, name: "VOUCHER_CODE", type: "text", width: "50px" },
-            { title: res.App_date, name: "VOUCHER_DATE", type: "text", width: "100px" },
+            { title: "رقم القيد", name: "VoucherID", type: "text", width: "0px", visible: false },
+            { title: res.App_Registration_Number, name: "VOUCHER_CODE", type: "number", width: "50px" },
+            {
+                title: res.App_date, css: "ColumPadding", name: "VOUCHER_DATE", width: "100px",
+                itemTemplate: (s: string, item: AQ_GetJournalHeader): HTMLLabelElement => {
+                    let txt: HTMLLabelElement = document.createElement("label");
+                    txt.innerHTML = DateFormat(item.VOUCHER_DATE);
+                    return txt;
+                }
+            },
             { title: res.App_desc, name: "VOUCHER_DESC", type: "text", width: "200px" },
             { title: res.source, name: (lang == "ar" ? "Src_DescA" : "Src_DescB"), type: "text", width: "100px" },
             { title: res.App_Type, name: (lang == "ar" ? "TYPE_DESCA" : "TYPE_DESCE"), type: "text", width: "100px" },
-            { title: res.Registration_Total, name: "TotalDebit", type: "text", width: "100px" },
+            { title: "اجمالي القيد", name: "TotalDebit", type: "number", width: "100px" },
             { title: res.App_State, name: (lang == "ar" ? "St_DescA" : "St_DescE"), type: "text", width: "100px" },
         ];
-        BindGridData();
+
     }
     function BindGridData() {
         AQJournalHeaderWithDetails = new Array<AQ_GetJournalHeader>();
@@ -544,9 +553,9 @@ namespace JournalVoucher {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {//AQ_GetJournalDetail
                     AQJournalHeaderWithDetails = result.Response as Array<AQ_GetJournalHeader>;
-                    for (let i = 0; i < AQJournalHeaderWithDetails.length; i++) {
-                        AQJournalHeaderWithDetails[i].VOUCHER_DATE = DateFormat(AQJournalHeaderWithDetails[i].VOUCHER_DATE.toString());
-                    }
+                    //for (let i = 0; i < AQJournalHeaderWithDetails.length; i++) {
+                    //    AQJournalHeaderWithDetails[i].VOUCHER_DATE = DateFormat(AQJournalHeaderWithDetails[i].VOUCHER_DATE.toString());
+                    //}
                     Grid.DataSource = AQJournalHeaderWithDetails;
                     Grid.Bind();
                 }
@@ -559,10 +568,9 @@ namespace JournalVoucher {
         TempshowFlag = false;
         AuthorizeFlag = false;
         PostFlag = false;
+        rdPosted.checked = false;
         Clear();
         $("#divJournalDetail").removeClass("display_none");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
-
         if (ReverseFlag == true) {
             SelectedJournalModel = ReversedJournalMasterDetailModel.AQ_GetJournalHeader;
         } else {
@@ -575,7 +583,7 @@ namespace JournalVoucher {
             GlobalVoucherID = Number(SelectedJournalModel[0].VoucherID);
             txtJouranlNumber.value = SelectedJournalModel[0].VOUCHER_CODE.toString();
             txtJournalDescripton.value = SelectedJournalModel[0].VOUCHER_DESC;
-            txtJouranlDate.value = SelectedJournalModel[0].VOUCHER_DATE;
+            txtJouranlDate.value = DateFormat(SelectedJournalModel[0].VOUCHER_DATE);
             if (SelectedJournalModel[0].REF_CODE != null)
                 txtRefNumber.value = SelectedJournalModel[0].REF_CODE.toString();
 
@@ -614,19 +622,80 @@ namespace JournalVoucher {
         }
 
         JournalDetailModelFiltered = JournalDetailModelFiltered.filter(x => x.VOUCHER_SERIAL != null).sort(function (a, b) { return a.VOUCHER_SERIAL - b.VOUCHER_SERIAL; });
-        for (let i = 0; i < JournalDetailModelFiltered.length; i++) {
-            BuildControls(i);
-            $('#txt_StatusFlag' + i).val('u');
-        }
 
-        CountGrid = JournalDetailModelFiltered.length;
-        ComputeTotals();
-        DisableControls();
+        debugger
+        $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading"  ></i>');
+        document.body.scrollTop = 800;
+        document.documentElement.scrollTop = 800;
+
+        setTimeout(function () {
+            debugger
+            var fragment = document.createDocumentFragment();
+            for (var i = 0; i < JournalDetailModelFiltered.length; ++i) {
+                fragment.appendChild(BuildControlsGrid(i)); // Append to the DocumentFragment
+            }
+            document.getElementById("div_Data").appendChild(fragment); // Append the DocumentFragment to the div
+
+
+            // costCenter Type 
+            if (VoucherCCType == 0) {
+                $(".ccType").hide();
+            }
+            // costCenterCCDT Type
+            if (VoucherCCDtType == 1) {
+                $(".ccTypeBranch").show();
+            } else {
+                $(".ccTypeBranch").hide();
+            }
+
+
+            var show2 = $(".costcntr").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show2 == false) {
+
+                $(".costcntr").addClass("display_none");
+            }
+            else {
+                $(".costcntr").removeClass("display_none");
+            }
+
+            var show1 = $(".Acc").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show1 == false) {
+
+                $(".Acc").addClass("display_none");
+            }
+            else {
+                $(".Acc").removeClass("display_none");
+            }
+
+            var show3 = $(".costcntrCCDt").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show3 == false) {
+
+                $(".costcntrCCDt").addClass("display_none");
+            }
+            else {
+                $(".costcntrCCDt").removeClass("display_none");
+            }
+
+
+            CountGrid = JournalDetailModelFiltered.length;
+            ComputeTotals();
+            DisableControls();
+
+            $('#Loading_Div').html('');
+
+
+
+        }, 1);
+
 
         // جديد
         if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
             rdNew.checked = true;
             $("#btnUnAuthorize").addClass("display_none");
+            $("#btnPost").addClass("display_none");
             $("#btnAuthorize").removeClass("display_none");
 
             $("#btnPost").attr("disabled", "disabled");
@@ -648,12 +717,15 @@ namespace JournalVoucher {
             txtAuthorizedAt.value = SelectedJournalModel[0].AUTHORISED_AT;
 
             $("#btnUnAuthorize").removeClass("display_none");
+            $("#btnPost").removeClass("display_none");
             btnUnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM3;
 
             $("#btnAuthorize").addClass("display_none");
             btnPost.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
 
             $("#btnUpdate").attr("disabled", "disabled");
+
+            
 
             txtPostedBy.value = "";
             txtPostedAt.value = "";
@@ -669,76 +741,14 @@ namespace JournalVoucher {
 
             $("#btnAuthorize").attr("disabled", "disabled");
             $("#btnUnAuthorize").addClass("display_none");
-            $("#btnAuthorize").removeClass("display_none");
+            $("#btnAuthorize").addClass("display_none");
+            $("#btnPost").addClass("display_none");
+
             $("#btnPost").attr("disabled", "disabled");
             $("#btnUpdate").attr("disabled", "disabled");
         }
     }
-    function clickEventsVisible() {
-        
-        $("#divCostCnterName").on('click', function () {
-            debugger
-            if (Events == 0) {
-                var show1 = $(".costcntr").is(":visible");
-                //var show2 = $(".Acc").is(":visible");
-                if (show1 == true) {
 
-                    $(".costcntr").addClass("display_none");
-                }
-                else {
-                    $(".costcntr").removeClass("display_none");
-                }
-                Events = 1;
-                setTimeout(function () { Events = 0 }, 700);
-            }
-
-        });
-
-        $("#divAccNumber").on('click', function () {
-            debugger
-            if (Events == 0) {
-                //$(".Acc").toggle();
-                /////////////////////////
-                var show1 = $(".Acc").is(":visible");
-                //var show2 = $(".Acc").is(":visible");
-                if (show1 == true) {
-
-                    $(".Acc").addClass("display_none");
-                }
-                else {
-                    $(".Acc").removeClass("display_none");
-                }
-                Events = 1;
-                setTimeout(function () { Events = 0 }, 700);
-            }
-
-        });
-
-        //divJouralHide
-        $("#divCostCnterNameCCDT").on('click', function () {
-            debugger
-
-            //$(".costcntrCCDt").toggle();
-            /////////////////////////
-            if (Events == 0) {
-
-                var show1 = $(".costcntrCCDt").is(":visible");
-                //var show2 = $(".Acc").is(":visible");
-                if (show1 == true) {
-
-                    $(".costcntrCCDt").addClass("display_none");
-                }
-                else {
-                    $(".costcntrCCDt").removeClass("display_none");
-                }
-
-                Events = 1;
-                setTimeout(function () {   Events = 0 }, 700);
-            }
-
-        });
-
-    }
     //------------------------------------------------------ Validation Region -----------------------------------
     function Validation_Header() {
         var newCount: number = 0;
@@ -749,7 +759,7 @@ namespace JournalVoucher {
         }
 
         if (!CheckDate(DateFormat(txtJouranlDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage(' لا توجد صلاحيه للاضافة في هذا التاريخ (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'There is no salakhiyah to add on this date(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+            WorningMessage(' لا توجد صلاخيه للاضافة في هذا التاريخ (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', 'There is no salakhiyah to add on this date(' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
             txtJournalDescripton.focus();
             return false
         } else if (txtJournalDescripton.value == "") {
@@ -772,16 +782,21 @@ namespace JournalVoucher {
 
             return false
         }
+        else if (!CheckPeriodDate(txtJouranlDate.value, "A")) {
+            debugger
+            DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
+            Errorinput(txtJouranlDate);
+            return false
+        }
         return true;
     }
     function Validation_Grid(rowcount: number): boolean {
-        debugger;
         var AccNum = $("#txtAccNumber" + rowcount).val()
         var AccObject = AccountDetailsIst.filter(s => s.COMP_CODE == compcode && s.ACC_CODE == AccNum);
         var Debit = Number($("#txtDebit" + rowcount).val());
         var credit = Number($("#txtCredit" + rowcount).val());
 
-        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "") {
             return true;
         }
         else {
@@ -806,13 +821,13 @@ namespace JournalVoucher {
                 Errorinput($("#txtCostCntrNum" + rowcount));
                 return false
             }
-            //else if (AccObject.length > 0) {
-            //    if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
-            //        DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
-            //        Errorinput($("#txtCCDtCostCntrNum" + rowcount));
-            //        return false
-            //    }
-            //}
+            else if (AccObject.length > 0) {
+                if ($("#txtCCDtCostCntrNum" + rowcount).val() == "" && VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
+                    DisplayMassage('برجاء ادخال  مركز التكلفه الفرعي', '(Please enter the CCDT cost center)', MessageType.Error);
+                    Errorinput($("#txtCCDtCostCntrNum" + rowcount));
+                    return false
+                }
+            }
 
 
             return true;
@@ -929,8 +944,6 @@ namespace JournalVoucher {
     }
     function txtSearch_onKeyup() {
         //BindGridData();
-        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
-
         if (txtSearch.value != "") {
             let search: string = txtSearch.value.toLowerCase();
             SearchDetails = AQJournalHeaderWithDetails.filter(x => x.VOUCHER_CODE.toString().toLowerCase().search(search) >= 0 || x.VOUCHER_DESC.toLowerCase().search(search) >= 0 || x.SOURCE_TYPE.toLowerCase().search(search) >= 0
@@ -975,7 +988,7 @@ namespace JournalVoucher {
         }
         rdNew.disabled = true;
         rdAuthorized.disabled = true;
-        rdPosted.disabled = true;
+        //rdPosted.disabled = true;
 
         txtResource.disabled = true;
         txtJouranlNumber.disabled = true;
@@ -987,6 +1000,8 @@ namespace JournalVoucher {
 
         txtCostCntrNameFooter.disabled = true;
         txtAccountNameFooter.disabled = true;
+        $("._dis_non").removeClass("display_none");
+
     }
     function DisableControls() {
         $("#div_BasicData :input").attr("disabled", "disabled");
@@ -995,17 +1010,22 @@ namespace JournalVoucher {
 
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
-        for (let i = 0; i < CountGrid; i++) {
-            $("#btnSearchAcc" + i).attr("disabled", "disabled");
-            $("#txtCostCntrName" + i).attr("disabled", "disabled");
-            $("#btn_minus" + i).addClass("display_none");
-            $("#btn_Insert" + i).addClass("display_none");
-            $("#btn_Copy" + i).addClass("display_none");
 
-            $("#txtCCDtCostCntrNum" + i).attr("disabled", "disabled");
-            $("#btnSearchCCdtTypes" + i).attr("disabled", "disabled");
-            $("#txtCCDTCostCntrName" + i).attr("disabled", "disabled");
-        }
+
+        $("._dis_non").addClass("display_none");
+        $("._dise").attr("disabled", "disabled");
+
+        //for (let i = 0; i < CountGrid; i++) {
+        //    $("#btnSearchAcc" + i).attr("disabled", "disabled");
+        //    $("#txtCostCntrName" + i).attr("disabled", "disabled");
+        //    $("#btn_minus" + i).addClass("display_none");
+        //    $("#btn_Insert" + i).addClass("display_none");
+        //    $("#btn_Copy" + i).addClass("display_none");
+
+        //    $("#txtCCDtCostCntrNum" + i).attr("disabled", "disabled");
+        //    $("#btnSearchCCdtTypes" + i).attr("disabled", "disabled");
+        //    $("#txtCCDTCostCntrName" + i).attr("disabled", "disabled");
+        //}
         txtResource.disabled = true;
         txtJouranlNumber.disabled = true;
         //txtJouranlDate.disabled = true;
@@ -1063,403 +1083,19 @@ namespace JournalVoucher {
         //if (CanAdd) {
         $(".Acc").show();
         $(".costcntr").show();
-        BuildControls(CountGrid);
-        $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
-        $("#txtSerial" + CountGrid).attr("disabled", "disabled");
-        $("#btnSearchAcc" + CountGrid).removeAttr("disabled");
-        $("#txtAccNumber" + CountGrid).removeAttr("disabled");
-        $("#txtAccName" + CountGrid).attr("disabled", "disabled");
-        $("#txtDebit" + CountGrid).removeAttr("disabled");
-        $("#txtCredit" + CountGrid).removeAttr("disabled");
-        $("#txtCostCntrNum" + CountGrid).removeAttr("disabled");
-        $("#btnSearchCostCenter" + CountGrid).removeAttr("disabled");
-        $("#txtCostCntrName" + CountGrid).attr("disabled", "disabled");
-
-        $("#txtCCDtCostCntrNum" + CountGrid).removeAttr("disabled");
-        $("#btnSearchCCdtTypes" + CountGrid).removeAttr("disabled");
-        $("#txtCCDTCostCntrName" + CountGrid).attr("disabled", "disabled");
-
-        $("#Notes" + CountGrid).removeAttr("disabled");
-
-        var counter = 0;
-        for (let i = 0; i <= CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
-            if (flagvalue != "d" && flagvalue != "") {
-                if ($("#txt_StatusFlag" + i).val() != "i")
-                    $("#txt_StatusFlag" + i).val("u");
-                $("#txtSerial" + i).prop("value", counter + 1);
-                counter = counter + 1;
-            }
+        $("#div_Data").append(BuildControlsGrid(CountGrid));
+        // costCenter Type 
+        if (VoucherCCType == 0) {
+            $(".ccType").hide();
         }
-        // can delete new inserted record  without need for delete privilage
-        $("#btn_minus" + CountGrid).removeClass("display_none");
-        $("#btn_minus" + CountGrid).removeAttr("disabled");
-        $("#btn_Insert" + CountGrid).removeClass("display_none");
-        $("#btn_Copy" + CountGrid).removeClass("display_none");
-
-        CountGrid++;
-        //}
-    }
-    function BuildControls(cnt: number) {
-        var html = "";
-        html = `<tr id="No_Row${cnt}">
-                    <input id="VoucherDetailID${cnt}" type="hidden" class="form-control display_none"  />
-                    <input id="txtSerial${cnt}" name="FromDate" disabled type="hidden" value="${(CountGrid + 1)}" class="form-control" />
-	                <td>
-		                <div class="form-group">
-			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
-			                <span id="btn_Copy${cnt}"><i class="fas fa-clone  btn-copy"></i></span>
-                            <span id="btn_Insert${cnt}"><i class="fas fa-share fa-rotate-180 btn-insert"></i></span>
-		                </div>
-	                </td>
-                    <td>
-		                <div class="form-group">
-			                <button type="button" class="style_ButSearch"  id="btnSearchAcc${cnt}" name="ColSearch" disabled>
-                                <i class="fa fa-search"></i>
-                             </button>
-		                </div>
-	                </td>
-                     <td style="width:9%;">
-		                <div class="form-group">
-			                 <input id="txtAccNumber${cnt}" name="" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-                    <td style="width:17%;" class="Acc">
-		                <div class="form-group">
-			                  <input id="txtAccName${cnt}" name="" disabled type="text" class="form-control"  />
-		                </div>
-	                </td>
-                    <td style="width:9%;">
-		                <div class="form-group">
-			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
-		                </div>
-	                </td>
-                    <td style="width:9%;">
-		                <div class="form-group">
-			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value="0"  min="0" class="form-control" />
-		                </div>
-	                </td>
-
-                    <td>
-		                <div class="form-group">
-			                <button type="button" class="style_ButSearch"  id="btnSearchCostCenter${cnt}" name="ColSearch" disabled>
-                                <i class="fa fa-search"></i>
-                             </button>
-		                </div>
-	                </td>
-                     <td style="width:9%;">
-		                <div class="form-group">
-			                <input id="txtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-                    <td style="width:17%;" class="costcntr">
-		                <div class="form-group">
-			                  <input id="txtCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-
-                    <td class="display_none">
-		                <div class="form-group">
-			                <button type="button" class="style_ButSearch"  id="btnSearchCCdtTypes${cnt}" name="ColSearch" disabled>
-                                <i class="fa fa-search"></i>
-                             </button>
-		                </div>
-	                </td>
-                     <td class="display_none">
-		                <div class="form-group">
-			               <input id="txtCCDtCostCntrNum${cnt}" name="FromDate" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-                    <td class="display_none costcntrCCDt">
-		                <div class="form-group">
-			                  <input id="txtCCDTCostCntrName${cnt}" name="FromDate" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
+        // costCenterCCDT Type
+        if (VoucherCCDtType == 1) {
+            $(".ccTypeBranch").show();
+        } else {
+            $(".ccTypeBranch").hide();
+        }
 
 
-                    <td style="width:22%;">
-		                <div class="form-group">
-			              <input id="Notes${cnt}" name="FromDate" disabled type="text" class="form-control" />
-		                </div>
-	                </td>
-                    
-                  
-                    <input id="txt_StatusFlag${cnt}" name = " " type = "hidden" class="form-control"/>
-
-                    <input id="INVOICE_NO${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="BOOK_TR_NO${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_SYSTEM_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_SUB_SYSTEM_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_BRA_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_CODE${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_NO${cnt}" name = " " type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_TYPE${cnt}" name = " " type = "hidden" class="form-control"/>
-                </tr>`;
-
-          
-       
-
-
-        //html = '<div id= "No_Row' + cnt + '" class="container-fluid style_border" > <div class="row" ><div class="col-lg-12">' +
-        //    '<input id="VoucherDetailID' + cnt + '" name="" disabled type="hidden" value=" " class="form-control  text_Display" />' +
-        //    '<div class="col-lg-1" style="width:6%">' +
-        //    '<span title="حذف(Delete) " id="btn_minus' + cnt + '" class=" glyphicon glyphicon-minus-sign fontitm3 "></span>' +
-        //    '<span title="نسخ(Copy)" id=btn_Copy' + cnt + ' class=" glyphicon  glyphicon-duplicate fontitm5 hover1JournalVoucher"></span>' +
-        //    '<span title="ادراج(Add)" id=btn_Insert' + cnt + ' class=" glyphicon  glyphicon-share	 fontitm5 hover1JournalVoucher "></span>' +
-        //    '</div>' +
-        //    '<input id="txtSerial' + cnt + '" name="FromDate" disabled type="hidden" value="' + (CountGrid + 1) + '" class="form-control  text_Display" />' +
-        //    '<div class="col-lg-1" style="width:11.5%;">' +
-        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm" id="btnSearchAcc' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search"></i></button>' +
-        //    '<input id="txtAccNumber' + cnt + '" name="" disabled type="text" class="col-lg-9 form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-2 Acc" style=" ">' +
-        //    '<input id="txtAccName' + cnt + '" name="" disabled type="text" class="form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-1" style="width:11.5%;">' +
-        //    '<input id="txtDebit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-1" style="width:11.5%;">' +
-        //    '<input id="txtCredit' + cnt + '" name="FromDate" disabled type="number" value="0"  min="0" class="form-control  text_Display" /></div>' +
-        //    '<div class="col-lg-1 ccType" style="width: 11%;">' +
-        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCostCenter' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search ccType "></i></button>' +
-        //    '<input id="txtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
-        //    '</div>' +
-        //    '<div class="col-lg-2 ccType costcntr ">' +
-        //    '<input id="txtCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
-        //    ////////////
-        //    '<div id="divJouralHide' + cnt + '" class="col-lg-9 JournalVouchergred">' +
-        //    '<div class="col-lg-2 ccTypeBranch">' +
-        //    '<button type="button" class="col-lg-3 src-btn btn btn-search input-sm " id="btnSearchCCdtTypes' + cnt + '" name="ColSearch">   ' +
-        //    '<i class="fa fa-search ccTypeBranch "></i></button>' +
-        //    '<input id="txtCCDtCostCntrNum' + cnt + '" name="FromDate" disabled type="text" class="col-lg-9 form-control  text_Display  " />' +
-        //    '</div>' +
-        //    '<div class="col-lg-4 p-0 ccTypeBranch costcntrCCDt ">' +
-        //    '<input id="txtCCDTCostCntrName' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display  " /></div>' +
-
-        //    '<div class="col-lg-6 p-0">' +
-        //    '<input id="Notes' + cnt + '" name="FromDate" disabled type="text" class="form-control  text_Display" /></div>' +
-        //    '</div>' +
-        //    '<input  id="txt_StatusFlag' + cnt + '" name = " " type ="hidden"  />' +
-        //    '</div>';
-        $("#div_Data").append(html);
-
-        //// First Search
-        $('#btnSearchAcc' + cnt).click(function (e) {
-            let sys: SystemTools = new SystemTools();
-
-            sys.FindKey(Modules.JournalVoucher, "btnAccountSearch", "COMP_CODE=" + compcode + "and ACC_ACTIVE = 1 and DETAIL =1  ", () => {
-                let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtAccNumber' + cnt).val(id);
-                if (GetAccByCode(id)) {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                    $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-
-                    ChackCCDT_TYPE(cnt);
-
-                }
-
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
-            });
-
-        });
-        $("#txtAccNumber" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            var id = $('#txtAccNumber' + cnt).val();
-            if (GetAccByCode(id)) {
-                if (VoucherCCDtType == 1) {
-                    if (AccountDetails.CCDT_TYPE != null && AccountDetails.CCDT_TYPE != "") {
-                        $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                        $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                        $("#divAccountNameFooter").removeClass("display_none");
-                    } else {
-                        $('#txtAccNumber' + cnt).val("");
-                        $('#txtAccName' + cnt).val("");
-                        $('#txtAccountNameFooter').val("");
-                        $('#txtCredit' + cnt).val("");
-                        DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
-                    }
-                } else {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                    $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
-                    $("#divAccountNameFooter").removeClass("display_none");
-                }
-                ChackCCDT_TYPE(cnt);
-            }
-            else {
-                $('#txtAccNumber' + cnt).val("");
-                $('#txtAccName' + cnt).val("");
-                $('#txtAccountNameFooter').val("");
-                $('#txtCredit' + cnt).val("");
-                DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
-            }
-        });
-
-        //// Second Search
-        $('#btnSearchCostCenter' + cnt).click(function (e) {
-            let sys: SystemTools = new SystemTools();
-
-            sys.FindKey(Modules.JournalVoucher, "btnCostCenterSearch", "COMP_CODE=" + compcode + "and ACTIVE = 1 ", () => {
-                let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtCostCntrNum' + cnt).val(id);
-                GetCostCenterByCode(id);
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
-            });
-        });
-        $("#txtCostCntrNum" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            var id = $('#txtCostCntrNum' + cnt).val();
-
-            if (GetCostCenterByCode(id)) {
-
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $("#divCostCntrNameFooter").removeClass("display_none");
-
-            }
-            else {
-                $('#txtCostCntrNum' + cnt).val("");
-                $('#txtCostCntrName' + cnt).val("");
-                $('#txtCostCntrNameFooter').val("");
-                //  $("#divCostCntrNameFooter").addClass("display_none"); 
-                DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
-            }
-        });
-
-        //// third Search
-        $('#btnSearchCCdtTypes' + cnt).click(function (e) {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            let sys: SystemTools = new SystemTools();
-            //getAccount CCDtype
-            var Account = $("#txtAccNumber" + cnt).val();
-            var accObj = AccountDetailsIst.filter(s => s.ACC_CODE == Account);
-
-            if (accObj.length > 0) {
-                var ccdtype = accObj[0].CCDT_TYPE;
-                sys.FindKey(Modules.JournalVoucher, "btnSearchCCdtTypes", "COMP_CODE=" + compcode + "and CCDT_TYPE ='" + ccdtype + "'", () => {
-                    let id = SearchGrid.SearchDataGrid.SelectedKey
-                    $('#txtCCDtCostCntrNum' + cnt).val(id);
-                    if (GetCostCenterCCDTByCode(id)) {
-                        $('#txtCCDTCostCntrName' + cnt).val((lang == "ar" ? CostCentreDetailsCCDT.CCDT_DESCA : CostCentreDetailsCCDT.CCDT_DESCE));
-
-                    }
-                });
-            } else {
-                DisplayMassage("يجب اختيار الحساب اولا", "you must choose Account ", MessageType.Worning);
-            }
-        });
-        $("#txtCCDtCostCntrNum" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-            var Account = $("#txtAccNumber" + cnt).val();
-            var accObj = AccountDetailsIst.filter(s => s.ACC_CODE == Account);
-
-            if (accObj.length > 0) {
-                var ccdtype = accObj[0].CCDT_TYPE;
-                var id = $('#txtCCDtCostCntrNum' + cnt).val();
-
-                if (GetCostCenterCCDTByCode(id) && ccdtype == CostCentreDetailsCCDT.CCDT_TYPE) {
-                    $('#txtCCDTCostCntrName' + cnt).val((lang == "ar" ? CostCentreDetailsCCDT.CCDT_DESCA : CostCentreDetailsCCDT.CCDT_DESCE));
-
-                }
-                else {
-                    $('#txtCCDtCostCntrNum' + cnt).val("");
-                    $('#txtCCDTCostCntrName' + cnt).val("");
-                    DisplayMassage("مركز التكلفة الفرعي غير صحيح ", "Wrong CCDt Cost Center ", MessageType.Error);
-                }
-            } else {
-                $('#txtCCDtCostCntrNum' + cnt).val("");
-                DisplayMassage("يجب اختيار الحساب اولا", "you must choose Account ", MessageType.Worning);
-            }
-        });
-
-        //Depit on change  
-        $("#txtDebit" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtDebitVal == 0) {
-                if (txtCreditVal == 0) {
-                    DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtCredit' + cnt).val("0");
-                }
-            }
-            $("#txtCredit" + cnt).val('0');
-            ComputeTotals();
-        });
-
-        //Credit on change   
-        $("#txtCredit" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtCreditVal == 0) {
-                if (txtDebitVal == 0) {
-                    DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtDebit' + cnt).val("0");
-                }
-            }
-            $("#txtDebit" + cnt).val('0');
-            ComputeTotals();
-        });
-
-        // Notes change
-        $("#Notes" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
-
-        });
-
-        $("#btn_minus" + cnt).on('click', function () {
-            DeleteRow(cnt);
-        });
-
-        //copy  Row
-        $("#btn_Copy" + cnt).on('click', function () {
-            CopyNewRow(cnt);
-            ComputeTotals();
-        });
-
-        //Insert empty Row
-        $("#btn_Insert" + cnt).on('click', function () {
-            InsertNewRow(cnt);
-        });
-
-        // on click Region to display Account And Cost Centers Names in Footer
-        $("#No_Row" + cnt).on('click', function () {
-            var AccCodeVal = $('#txtAccNumber' + cnt).val();
-            var AccObj = AccountDetailsIst.filter(s => s.COMP_CODE == compcode && s.ACC_CODE == AccCodeVal);
-            if (AccObj.length > 0) {
-                $("#divAccountNameFooter").removeClass("display_none");
-                $("#txtAccountNameFooter").prop("value", (lang == "ar" ? AccObj[0].ACC_DESCA : AccObj[0].ACC_DESCL));
-            } else {
-                $("#txtAccountNameFooter").prop("value", "");
-            }
-            //GetAllCostCenters CostCentreDetailsIst
-            var CC_CodeVal = $('#txtCostCntrNum' + cnt).val();
-            var CCObj = CostCentreDetailsIst.filter(s => s.COMP_CODE == compcode && s.CC_CODE == CC_CodeVal);
-            if (CCObj.length > 0) {
-                $("#divCostCntrNameFooter").removeClass("display_none");
-                $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
-            } else {
-                //   $("#divCostCntrNameFooter").addClass("display_none");
-                $("#txtCostCntrNameFooter").prop("value", "");
-            }
-        });
-
-        debugger
         var show2 = $(".costcntr").is(":visible");
         //var show2 = $(".Acc").is(":visible");
         if (show2 == false) {
@@ -1491,124 +1127,671 @@ namespace JournalVoucher {
         }
 
 
+        //BuildControls(CountGrid);
+        $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode
+        $("#txtSerial" + CountGrid).attr("disabled", "disabled");
+        $("#btnSearchAcc" + CountGrid).removeAttr("disabled");
+        $("#txtAccNumber" + CountGrid).removeAttr("disabled");
+        $("#txtAccName" + CountGrid).attr("disabled", "disabled");
+        $("#txtDebit" + CountGrid).removeAttr("disabled");
+        $("#txtCredit" + CountGrid).removeAttr("disabled");
+        $("#txtCostCntrNum" + CountGrid).removeAttr("disabled");
+        $("#btnSearchCostCenter" + CountGrid).removeAttr("disabled");
+        $("#txtCostCntrName" + CountGrid).attr("disabled", "disabled");
+
+        $("#txtCCDtCostCntrNum" + CountGrid).removeAttr("disabled");
+        $("#btnSearchCCdtTypes" + CountGrid).removeAttr("disabled");
+        $("#txtCCDTCostCntrName" + CountGrid).attr("disabled", "disabled");
+
+        $("#Notes" + CountGrid).removeAttr("disabled");
+
+        //var counter = 0;
+        //for (let i = 0; i <= CountGrid; i++) {
+        //    var flagvalue = $("#txt_StatusFlag" + i).val();
+        //    if (flagvalue != "d" && flagvalue != "") {
+        //        if ($("#txt_StatusFlag" + i).val() != "i")
+        //            $("#txt_StatusFlag" + i).val("u");
+        //        $("#txtSerial" + i).prop("value", counter + 1);
+        //        counter = counter + 1;
+        //    }
+        //}
+
+        Insert_Serial();
+
+        // can delete new inserted record  without need for delete privilage
+        $("#btn_minus" + CountGrid).removeClass("display_none");
+        $("#btn_minus" + CountGrid).removeAttr("disabled");
+        $("#btn_Insert" + CountGrid).removeClass("display_none");
+        $("#btn_Copy" + CountGrid).removeClass("display_none");
+
+        CountGrid++;
+        //}
+    }
+    function Insert_Serial() {
+
+        let Chack_Flag = false;
+        let flagval = "";
+        let Ser = 1;
+        for (let i = 0; i < CountGrid; i++) {
+            flagval = $("#txt_StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#txtSerial" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag" + i).val() != 'i' && $("#txt_StatusFlag" + i).val() != 'm' && $("#txt_StatusFlag" + i).val() != 'd') {
+                    $("#txt_StatusFlag" + i).val('u');
+                }
+            }
+        }
+
+    }
+    
+    function BuildControlsGrid(cnt: number): HTMLDivElement {
+
+        var tr = document.createElement("tr");
+        tr.id = 'No_Row' + cnt + '';
+        tr.setAttribute('class', 'container-fluid style_border');
+
+        let txtSerial = CountGrid + 1;
+        let VoucherDetailID = "";
+        let txtAccNumber = "";
+        let txtAccName = "";
+        let txtDebit = "";
+        let txtCredit = "";
+        let txtCostCntrNum = "";
+        let txtCostCntrName = "";
+        let txtCCDtCostCntrNum = "";
+        let txtCCDTCostCntrName = "";
+        let Notes = "";
+        let INVOICE_NO = "";
+        let BOOK_TR_NO = "";
+        let SRC_SYSTEM_CODE = "";
+        let SRC_SUB_SYSTEM_CODE = "";
+        let SRC_BRA_CODE = "";
+        let SRC_TR_CODE = "";
+        let SRC_TR_NO = "";
+        let SRC_TR_TYPE = "";
+        let txt_StatusFlag = "";
+        let ChackCCDT_dis = "";
         if (showFlag == true) {
 
-            $('#txtSerial' + cnt).val(JournalDetailModelFiltered[cnt].VOUCHER_SERIAL);
-            $('#VoucherDetailID' + cnt).val(JournalDetailModelFiltered[cnt].VoucherDetailID);
-            $('#txtAccNumber' + cnt).val(JournalDetailModelFiltered[cnt].ACC_CODE);
-            $('#txtAccName' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].ACC_DESCA : JournalDetailModelFiltered[cnt].ACC_DESCL);
-            if (JournalDetailModelFiltered[cnt].DEBIT != null) $('#txtDebit' + cnt).val(JournalDetailModelFiltered[cnt].DEBIT.toString());
-            if (JournalDetailModelFiltered[cnt].CREDIT != null) $('#txtCredit' + cnt).val(JournalDetailModelFiltered[cnt].CREDIT.toString());
-            $('#txtCostCntrNum' + cnt).val(JournalDetailModelFiltered[cnt].CC_CODE);
-            $('#txtCostCntrName' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].CC_DESCA : JournalDetailModelFiltered[cnt].CC_DESCE);
+            txtSerial = (JournalDetailModelFiltered[cnt].VOUCHER_SERIAL);
+            VoucherDetailID = setVal(JournalDetailModelFiltered[cnt].VoucherDetailID).toString()
+            txtAccNumber = (JournalDetailModelFiltered[cnt].ACC_CODE);
+            txtAccName = (lang == "ar" ? JournalDetailModelFiltered[cnt].ACC_DESCA : JournalDetailModelFiltered[cnt].ACC_DESCL);
+            if (JournalDetailModelFiltered[cnt].DEBIT != null) txtDebit = setVal(JournalDetailModelFiltered[cnt].DEBIT.toString());
+            if (JournalDetailModelFiltered[cnt].CREDIT != null) txtCredit = setVal(JournalDetailModelFiltered[cnt].CREDIT.toString());
+            txtCostCntrNum = (JournalDetailModelFiltered[cnt].CC_CODE);
+            txtCostCntrName = (lang == "ar" ? JournalDetailModelFiltered[cnt].CC_DESCA : JournalDetailModelFiltered[cnt].CC_DESCE);
 
-            $('#txtCCDtCostCntrNum' + cnt).val(JournalDetailModelFiltered[cnt].CCDT_CODE);
-            $('#txtCCDTCostCntrName' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].CCDT_DESCA : JournalDetailModelFiltered[cnt].CCDT_DESCE);
+            txtCCDtCostCntrNum = (JournalDetailModelFiltered[cnt].CCDT_CODE);
+            txtCCDTCostCntrName = (lang == "ar" ? JournalDetailModelFiltered[cnt].CCDT_DESCA : JournalDetailModelFiltered[cnt].CCDT_DESCE);
 
-            $('#Notes' + cnt).val(lang == "ar" ? JournalDetailModelFiltered[cnt].DESCA : JournalDetailModelFiltered[cnt].DESCL);
+            txtCostCntrName = txtCostCntrName == null ? '' : txtCostCntrName
+            txtCostCntrNum = txtCostCntrNum == null ? '' : txtCostCntrNum
+
+            txtCCDtCostCntrNum = txtCCDtCostCntrNum == null ? '' : txtCCDtCostCntrNum
+            txtCCDTCostCntrName = txtCCDTCostCntrName == null ? '' : txtCCDTCostCntrName
+
+            Notes = (lang == "ar" ? JournalDetailModelFiltered[cnt].DESCA : JournalDetailModelFiltered[cnt].DESCL);
             let StatusFl = JournalDetailModelFiltered[cnt].StatusFlag == null ? 'u' : JournalDetailModelFiltered[cnt].StatusFlag
 
+            INVOICE_NO = setVal(JournalDetailModelFiltered[cnt].INVOICE_NO).toString()
+            BOOK_TR_NO = setVal(JournalDetailModelFiltered[cnt].BOOK_TR_NO).toString()
+            SRC_SYSTEM_CODE = (JournalDetailModelFiltered[cnt].SRC_SYSTEM_CODE)
+            SRC_SUB_SYSTEM_CODE = (JournalDetailModelFiltered[cnt].SRC_SUB_SYSTEM_CODE)
+            SRC_BRA_CODE = setVal(JournalDetailModelFiltered[cnt].SRC_BRA_CODE).toString()
+            SRC_TR_CODE = (JournalDetailModelFiltered[cnt].SRC_TR_CODE)
+            SRC_TR_NO = setVal(JournalDetailModelFiltered[cnt].SRC_TR_NO).toString()
+            SRC_TR_TYPE = (JournalDetailModelFiltered[cnt].SRC_TR_TYPE)
 
-            $('#INVOICE_NO' + cnt).val(JournalDetailModelFiltered[cnt].INVOICE_NO)
-            $('#BOOK_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].BOOK_TR_NO)
-            $('#SRC_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SYSTEM_CODE)
-            $('#SRC_SUB_SYSTEM_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_SUB_SYSTEM_CODE)
-            $('#SRC_BRA_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_BRA_CODE)
-            $('#SRC_TR_CODE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_CODE)
-            $('#SRC_TR_NO' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_NO)
-            $('#SRC_TR_TYPE' + cnt).val(JournalDetailModelFiltered[cnt].SRC_TR_TYPE)
-             
-            $('#txt_StatusFlag' + cnt).val(StatusFl);
+            txt_StatusFlag = (StatusFl);
         }
         if (TempshowFlag == true) {
-            $('#txtSerial' + cnt).val(TemplateDetailModelFiltered[cnt].VOUCHER_SERIAL);
-            $('#VoucherDetailID' + cnt).val(TemplateDetailModelFiltered[cnt].VoucherDetailID);
-            $('#txtAccNumber' + cnt).val(TemplateDetailModelFiltered[cnt].ACC_CODE);
+            txtSerial = (TemplateDetailModelFiltered[cnt].VOUCHER_SERIAL);
+            VoucherDetailID = setVal(TemplateDetailModelFiltered[cnt].VoucherDetailID).toString();
+            txtAccNumber = (TemplateDetailModelFiltered[cnt].ACC_CODE);
             var AccObj = AccountDetailsIst.filter(s => s.ACC_CODE == TemplateDetailModelFiltered[cnt].ACC_CODE && s.COMP_CODE == compcode);
-            $('#txtAccName' + cnt).val(lang == "ar" ? AccObj[0].ACC_DESCA : AccObj[0].ACC_DESCL);
-            if (TemplateDetailModelFiltered[cnt].DEBIT != null) $('#txtDebit' + cnt).val(TemplateDetailModelFiltered[cnt].DEBIT.toString());
-            if (TemplateDetailModelFiltered[cnt].CREDIT != null) $('#txtCredit' + cnt).val(TemplateDetailModelFiltered[cnt].CREDIT.toString());
-            debugger
-            $('#txtCostCntrNum' + cnt).val(TemplateDetailModelFiltered[cnt].CC_CODE);
+            txtAccName = (lang == "ar" ? AccObj[0].ACC_DESCA : AccObj[0].ACC_DESCL);
+            if (TemplateDetailModelFiltered[cnt].DEBIT != null) txtDebit = setVal(TemplateDetailModelFiltered[cnt].DEBIT.toString());
+            if (TemplateDetailModelFiltered[cnt].CREDIT != null) txtCredit = setVal(TemplateDetailModelFiltered[cnt].CREDIT.toString());
+
+            txtCostCntrNum = (TemplateDetailModelFiltered[cnt].CC_CODE);
             var CCobj = CostCentreDetailsIst.filter(s => s.CC_CODE == TemplateDetailModelFiltered[cnt].CC_CODE && s.COMP_CODE == compcode);
             if (CCobj.length > 0) {
 
-                $('#txtCostCntrName' + cnt).val(lang == "ar" ? CCobj[0].CC_DESCA : CCobj[0].CC_DESCE);
+                txtCostCntrName = (lang == "ar" ? CCobj[0].CC_DESCA : CCobj[0].CC_DESCE);
             } else {
-                $('#txtCostCntrName' + cnt).val("");
+                txtCostCntrName = ("");
 
             }
 
-            $('#txtCCDtCostCntrNum' + cnt).val(TemplateDetailModelFiltered[cnt].CCDT_CODE);
+            txtCCDtCostCntrNum = (TemplateDetailModelFiltered[cnt].CCDT_CODE);
             var CCDtobj = CostCentreDetailsCCDTIst.filter(s => s.CCDT_CODE == TemplateDetailModelFiltered[cnt].CCDT_CODE && s.COMP_CODE == compcode);
             if (CCDtobj.length > 0) {
 
-                $('#txtCCDTCostCntrName' + cnt).val(lang == "ar" ? CCDtobj[0].CCDT_DESCA : CCDtobj[0].CCDT_DESCE);
+                txtCCDTCostCntrName = (lang == "ar" ? CCDtobj[0].CCDT_DESCA : CCDtobj[0].CCDT_DESCE);
             } else {
-                $('#txtCCDTCostCntrName' + cnt).val("");
+                txtCCDTCostCntrName = ("");
 
             }
 
-            $('#Notes' + cnt).val(lang == "ar" ? TemplateDetailModelFiltered[cnt].DESCA : TemplateDetailModelFiltered[cnt].DESCL);
-            $('#txt_StatusFlag' + cnt).val("u");
+            txtCostCntrName = txtCostCntrName == null ? '' : txtCostCntrName
+            txtCostCntrNum = txtCostCntrNum == null ? '' : txtCostCntrNum
 
+            txtCCDtCostCntrNum = txtCCDtCostCntrNum == null ? '' : txtCCDtCostCntrNum
+            txtCCDTCostCntrName = txtCCDTCostCntrName == null ? '' : txtCCDTCostCntrName
 
+            Notes = (lang == "ar" ? TemplateDetailModelFiltered[cnt].DESCA : TemplateDetailModelFiltered[cnt].DESCL);
+            txt_StatusFlag = ("u");
 
-           
-
-
-            ChackCCDT_TYPE(cnt);
+            ChackCCDT_dis = Chack_disabled(cnt, TemplateDetailModelFiltered[cnt].ACC_CODE.toString());
         }
 
 
-        // costCenter Type 
-        if (VoucherCCType == 0) {
-            $(".ccType").hide();
-        }
-        // costCenterCCDT Type
-        if (VoucherCCDtType == 1) {
-            $(".ccTypeBranch").show();
-        } else {
-            $(".ccTypeBranch").hide();
-        }
+        var html =  
 
-        clickEventsVisible();
+        ` 
+                    <input id="VoucherDetailID${cnt}" type="hidden" value="${VoucherDetailID}" class="form-control display_none"  />
+                    <input id="txtSerial${cnt}" name="FromDate" disabled type="hidden" value="${txtSerial}" class="form-control" />
+	                <td>
+		                <div class="form-group _dis_non">
+			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minus"></i></span>
+			                <span id="btn_Copy${cnt}"><i class="fas fa-clone  btn-copy"></i></span>
+                            <span id="btn_Insert${cnt}"><i class="fas fa-share fa-rotate-180 btn-insert"></i></span>
+		                </div>
+	                </td>
+                    <td>
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch"  id="btnSearchAcc${cnt}" name="ColSearch" disabled>
+                                <i class="fa fa-search"></i>
+                             </button>
+		                </div>
+	                </td>
+                     <td style="width:9%;">
+		                <div class="form-group">
+			                 <input id="txtAccNumber${cnt}" value="${txtAccNumber}" name="" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td style="width:17%;" class="Acc">
+		                <div class="form-group">
+			                  <input id="txtAccName${cnt}" value="${txtAccName}" name="" disabled type="text" class="form-control"  />
+		                </div>
+	                </td>
+                    <td style="width:9%;">
+		                <div class="form-group">
+			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value="${txtDebit}"  min="0" class="form-control" />
+		                </div>
+	                </td>
+                    <td style="width:9%;">
+		                <div class="form-group">
+			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value="${txtCredit}"  min="0" class="form-control" />
+		                </div>
+	                </td>
+
+                    <td>
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch"  id="btnSearchCostCenter${cnt}" name="ColSearch" disabled>
+                                <i class="fa fa-search"></i>
+                             </button>
+		                </div>
+	                </td>
+                     <td style="width:9%;">
+		                <div class="form-group">
+			                <input id="txtCostCntrNum${cnt}" name="FromDate" value="${txtCostCntrNum}" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td style="width:17%;" class="costcntr">
+		                <div class="form-group">
+			                  <input id="txtCostCntrName${cnt}" name="FromDate" value="${txtCostCntrName}" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+
+                    <td class="display_none">
+		                <div class="form-group">
+			                <button type="button" class="style_ButSearch"   id="btnSearchCCdtTypes${cnt}" ${ChackCCDT_dis} name="ColSearch" disabled>
+                                <i class="fa fa-search"></i>
+                             </button>
+		                </div>
+	                </td>
+                     <td class="display_none">
+		                <div class="form-group">
+			               <input id="txtCCDtCostCntrNum${cnt}" value="${txtCCDtCostCntrNum}" name="FromDate" disabled ${ChackCCDT_dis} type="text" class="form-control" />
+		                </div>
+	                </td>
+                    <td class="display_none costcntrCCDt">
+		                <div class="form-group">
+			                  <input id="txtCCDTCostCntrName${cnt}" value="${txtCCDTCostCntrName}" name="FromDate" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+
+
+                    <td style="width:22%;">
+		                <div class="form-group">
+			              <input id="Notes${cnt}" name="FromDate" value="${Notes}" disabled type="text" class="form-control" />
+		                </div>
+	                </td>
+                    
+                  
+                    <input id="txt_StatusFlag${cnt}" name = " " value="${txt_StatusFlag}" type = "hidden" class="form-control"/>
+                    <input id="FlagUpdate${cnt}" name = " " value="" type = "hidden" class="form-control"/>
+
+                    <input id="INVOICE_NO${cnt}" name = " " value="${INVOICE_NO}" type = "hidden" class="form-control"/>
+                    <input id="BOOK_TR_NO${cnt}" name = " " value="${BOOK_TR_NO}" type = "hidden" class="form-control"/>
+                    <input id="SRC_SYSTEM_CODE${cnt}" name = " " value="${SRC_SYSTEM_CODE}" type = "hidden" class="form-control"/>
+                    <input id="SRC_SUB_SYSTEM_CODE${cnt}" name = " " value="${SRC_SUB_SYSTEM_CODE}" type = "hidden" class="form-control"/>
+                    <input id="SRC_BRA_CODE${cnt}" name = " " value="${SRC_BRA_CODE}" type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_CODE${cnt}" name = " " value="${SRC_TR_CODE}" type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_NO${cnt}" name = " " value="${SRC_TR_NO}" type = "hidden" class="form-control"/>
+                    <input id="SRC_TR_TYPE${cnt}" name = " " value="${SRC_TR_TYPE}" type = "hidden" class="form-control"/>
+                 `;
+
+
+
+
+
+
+        tr.innerHTML = html;
+
+        AddEventControls(cnt, tr)
+
+        return tr;
+
     }
+    function AddEventControls(cnt: number, div: HTMLDivElement) {
+
+        var elements = div.querySelectorAll('#No_Row' + cnt + ' [id^="btn_"],#No_Row' + cnt + ' [id^="btn"], #No_Row' + cnt + ' [class^="form-control"], #No_Row' + cnt + ' input');
+        elements.forEach(function (element) {
+            // Add event listeners to the elements as needed
+            debugger
+            if (element.id.toString() == "btnSearchAcc" + cnt) {
+                element.addEventListener('click', function (event) {
+
+                    let sys: SystemTools = new SystemTools();
+
+                    sys.FindKey(Modules.JournalVoucher, "btnAccountSearch", "COMP_CODE=" + compcode + "and ACC_ACTIVE = 1 and DETAIL =1   ", () => {
+                        let id = SearchGrid.SearchDataGrid.SelectedKey
+                        $('#txtAccNumber' + cnt).val(id);
+                        if (GetAccByCode(id)) {
+                            $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                            $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+
+                            ChackCCDT_TYPE(cnt);
+
+                        }
+
+                        if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                            $("#txt_StatusFlag" + cnt).val("u");
+                            $("#FlagUpdate" + cnt).val("s");
+                        }
+
+
+
+
+                    });
+
+                });
+            }
+
+
+            if (element.id.toString() == "btnSearchCostCenter" + cnt) {
+                element.addEventListener('click', function (event) {
+
+                    let sys: SystemTools = new SystemTools();
+
+                    sys.FindKey(Modules.JournalVoucher, "btnCostCenterSearch", "COMP_CODE=" + compcode + "and ACTIVE = 1 ", () => {
+                        let id = SearchGrid.SearchDataGrid.SelectedKey
+                        $('#txtCostCntrNum' + cnt).val(id);
+                        GetCostCenterByCode(id);
+                        $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                        $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                        if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                            $("#txt_StatusFlag" + cnt).val("u");
+                            $("#FlagUpdate" + cnt).val("s");
+                        }
+                    });
+
+                });
+            }
+
+
+            if (element.id.toString() == "btnSearchCCdtTypes" + cnt) {
+                element.addEventListener('click', function (event) {
+
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    let sys: SystemTools = new SystemTools();
+                    //getAccount CCDtype
+                    var Account = $("#txtAccNumber" + cnt).val();
+                    var accObj = AccountDetailsIst.filter(s => s.ACC_CODE == Account);
+
+                    if (accObj.length > 0) {
+                        var ccdtype = accObj[0].CCDT_TYPE;
+                        sys.FindKey(Modules.JournalVoucher, "btnSearchCCdtTypes", "COMP_CODE=" + compcode + "and CCDT_TYPE ='" + ccdtype + "'", () => {
+                            let id = SearchGrid.SearchDataGrid.SelectedKey
+                            $('#txtCCDtCostCntrNum' + cnt).val(id);
+                            if (GetCostCenterCCDTByCode(id)) {
+                                $('#txtCCDTCostCntrName' + cnt).val((lang == "ar" ? CostCentreDetailsCCDT.CCDT_DESCA : CostCentreDetailsCCDT.CCDT_DESCE));
+
+                            }
+                        });
+                    } else {
+                        DisplayMassage("يجب اختيار الحساب اولا", "you must choose Account ", MessageType.Worning);
+                    }
+
+                });
+            }
+
+            if (element.id.toString() == "btn_minus" + cnt) {
+                element.addEventListener('click', function (event) {
+                    DeleteRow(cnt);
+                });
+            }
+
+            if (element.id.toString() == "btn_Copy" + cnt) {
+                element.addEventListener('click', function (event) {
+                    CopyNewRow(cnt);
+                    ComputeTotals();
+                });
+            }
+
+            if (element.id.toString() == "btn_Insert" + cnt) {
+                element.addEventListener('click', function (event) {
+                    InsertNewRow(cnt);
+                });
+            }
+
+            if (element.id.toString() == "No_Row" + cnt) {
+                element.addEventListener('click', function (event) {
+                    var AccCodeVal = $('#txtAccNumber' + cnt).val();
+                    var AccObj = AccountDetailsIst.filter(s => s.COMP_CODE == compcode && s.ACC_CODE == AccCodeVal);
+                    if (AccObj.length > 0) {
+                        $("#divAccountNameFooter").removeClass("display_none");
+                        $("#txtAccountNameFooter").prop("value", (lang == "ar" ? AccObj[0].ACC_DESCA : AccObj[0].ACC_DESCL));
+                    } else {
+                        $("#txtAccountNameFooter").prop("value", "");
+                    }
+                    //GetAllCostCenters CostCentreDetailsIst
+                    var CC_CodeVal = $('#txtCostCntrNum' + cnt).val();
+                    var CCObj = CostCentreDetailsIst.filter(s => s.COMP_CODE == compcode && s.CC_CODE == CC_CodeVal);
+                    if (CCObj.length > 0) {
+                        $("#divCostCntrNameFooter").removeClass("display_none");
+                        $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
+                    } else {
+                        //   $("#divCostCntrNameFooter").addClass("display_none");
+                        $("#txtCostCntrNameFooter").prop("value", "");
+                    }
+                });
+            }
+
+            if (element.id.toString() == "txtAccNumber" + cnt) {
+                element.addEventListener('change', function (event) {
+                    debugger
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    var id = $('#txtAccNumber' + cnt).val();
+                    if (GetAccByCode(id)) {
+                        if (VoucherCCDtType == 1) {
+                            if (AccountDetails.CCDT_TYPE != null && AccountDetails.CCDT_TYPE != "") {
+                                $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                                $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                                $("#divAccountNameFooter").removeClass("display_none");
+                            } else {
+                                $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                                $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                                $("#divAccountNameFooter").addClass("display_none");
+                            }
+                        } else {
+                            $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                            $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                            $("#divAccountNameFooter").removeClass("display_none");
+                        }
+                        ChackCCDT_TYPE(cnt);
+                    }
+                    else {
+                        $('#txtAccNumber' + cnt).val("");
+                        $('#txtAccName' + cnt).val("");
+                        $('#txtAccountNameFooter').val("");
+                        $('#txtCredit' + cnt).val("");
+                        DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
+                    }
+
+                });
+            }
+            if (element.id.toString() == "txtCostCntrNum" + cnt) {
+                element.addEventListener('change', function (event) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    var id = $('#txtCostCntrNum' + cnt).val();
+
+                    if (GetCostCenterByCode(id)) {
+
+                        $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                        $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                        $("#divCostCntrNameFooter").removeClass("display_none");
+
+                    }
+                    else {
+                        $('#txtCostCntrNum' + cnt).val("");
+                        $('#txtCostCntrName' + cnt).val("");
+                        $('#txtCostCntrNameFooter').val("");
+                        //  $("#divCostCntrNameFooter").addClass("display_none"); 
+                        DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
+                    }
+                });
+            }
+            if (element.id.toString() == "txtCCDtCostCntrNum" + cnt) {
+                element.addEventListener('change', function (event) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    var Account = $("#txtAccNumber" + cnt).val();
+                    var accObj = AccountDetailsIst.filter(s => s.ACC_CODE == Account);
+
+                    if (accObj.length > 0) {
+                        var ccdtype = accObj[0].CCDT_TYPE;
+                        var id = $('#txtCCDtCostCntrNum' + cnt).val();
+
+                        if (GetCostCenterCCDTByCode(id) && ccdtype == CostCentreDetailsCCDT.CCDT_TYPE) {
+                            $('#txtCCDTCostCntrName' + cnt).val((lang == "ar" ? CostCentreDetailsCCDT.CCDT_DESCA : CostCentreDetailsCCDT.CCDT_DESCE));
+
+                        }
+                        else {
+                            $('#txtCCDtCostCntrNum' + cnt).val("");
+                            $('#txtCCDTCostCntrName' + cnt).val("");
+                            DisplayMassage("مركز التكلفة الفرعي غير صحيح ", "Wrong CCDt Cost Center ", MessageType.Error);
+                        }
+                    } else {
+                        $('#txtCCDtCostCntrNum' + cnt).val("");
+                        DisplayMassage("يجب اختيار الحساب اولا", "you must choose Account ", MessageType.Worning);
+                    }
+                });
+            }
+            if (element.id.toString() == "txtDebit" + cnt) {
+                element.addEventListener('change', function (event) {
+                    debugger
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    var txtDebitVal = Number($('#txtDebit' + cnt).val());
+                    var txtCreditVal = Number($('#txtCredit' + cnt).val());
+                    if (txtDebitVal == 0) {
+                        if (txtCreditVal == 0) {
+                            DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
+                            $('#txtCredit' + cnt).val("0");
+                        }
+                    }
+                    $("#txtCredit" + cnt).val('0');
+                    ComputeTotals();
+                });
+            }
+            if (element.id.toString() == "txtCredit" + cnt) {
+                debugger
+                element.addEventListener('change', function (event) {
+                    debugger
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                    var txtDebitVal = Number($('#txtDebit' + cnt).val());
+                    var txtCreditVal = Number($('#txtCredit' + cnt).val());
+                    if (txtCreditVal == 0) {
+                        if (txtDebitVal == 0) {
+                            DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
+                            $('#txtDebit' + cnt).val("0");
+                        }
+                    }
+                    $("#txtDebit" + cnt).val('0');
+                    ComputeTotals();
+                });
+            }
+            if (element.id.toString() == "Notes" + cnt) {
+                element.addEventListener('change', function (event) {
+                    if ($("#txt_StatusFlag" + cnt).val() != "i") {
+                        $("#txt_StatusFlag" + cnt).val("u");
+                        $("#FlagUpdate" + cnt).val("s");
+                    }
+
+                });
+            }
+            if (element.id.toString() == "txtAccNumber" + cnt) {
+                element.addEventListener('change', function (event) {
+
+                });
+            }
+
+
+        });
+
+
+    }
+
+
+
+    function clickEventsVisible() {
+
+        $("#divCostCnterName").on('click', function () {
+            debugger
+            if (Events == 0) {
+                var show1 = $(".costcntr").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+
+                    $(".costcntr").addClass("display_none");
+                }
+                else {
+                    $(".costcntr").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0 }, 700);
+            }
+
+        });
+
+        $("#divAccNumber").on('click', function () {
+            debugger
+            if (Events == 0) {
+                //$(".Acc").toggle();
+                /////////////////////////
+                var show1 = $(".Acc").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+
+                    $(".Acc").addClass("display_none");
+                }
+                else {
+                    $(".Acc").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0 }, 700);
+            }
+
+        });
+
+        //divJouralHide
+        $("#divCostCnterNameCCDT").on('click', function () {
+            debugger
+
+            //$(".costcntrCCDt").toggle();
+            /////////////////////////
+            if (Events == 0) {
+
+                var show1 = $(".costcntrCCDt").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+
+                    $(".costcntrCCDt").addClass("display_none");
+                }
+                else {
+                    $(".costcntrCCDt").removeClass("display_none");
+                }
+
+                Events = 1;
+                setTimeout(function () { Events = 0 }, 700);
+            }
+
+        });
+
+    }
+
+
+     
     function ComputeTotals() {
-        debugger
+
         DepitTotal = 0;
         CreditTotal = 0;
         var Difference: number = 0;
 
-        for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
+        for (let f = 0; f < CountGrid; f++) {
+            var flagvalue = $("#txt_StatusFlag" + f).val();
             if (flagvalue != "d" && flagvalue != "m") {
-                DepitTotal += Number($("#txtDebit" + i).val());
-                CreditTotal += Number($("#txtCredit" + i).val());
+                DepitTotal += Number($("#txtDebit" + f).val());
+                CreditTotal += Number($("#txtCredit" + f).val());
             }
         }
-
         DepitTotal = DepitTotal.RoundToNum(2);
         CreditTotal = CreditTotal.RoundToNum(2);
         txtTotalDebit.value = DepitTotal.toLocaleString();
         txtTotalCredit.value = CreditTotal.toLocaleString();
 
-        Difference = DepitTotal - CreditTotal
-
-        txtDifference.value = Difference.RoundToSt(2);
+        Difference = (DepitTotal - CreditTotal).RoundToNum(2);
+        txtDifference.value = Difference.toLocaleString();
 
     }
     function DeleteRow(RecNo: number) {
+        debugger
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
 
             var statusFlag = $("#txt_StatusFlag" + RecNo).val();
-            if (statusFlag == "i")
+            if (statusFlag == "i") {
                 $("#txt_StatusFlag" + RecNo).val("m");
-            else
+                $("#FlagUpdate" + RecNo).val("m");
+            }
+            else {
                 $("#txt_StatusFlag" + RecNo).val("d");
+                $("#FlagUpdate" + RecNo).val("d");
+            }
 
-            ComputeTotals();
+
             $("#txtAccNumber" + RecNo).val("99");
             $("#txtAccName" + RecNo).val("1");
             $("#txtDebit" + RecNo).val("1");
@@ -1621,22 +1804,11 @@ namespace JournalVoucher {
 
             $("#No_Row" + RecNo).attr("hidden", "true");
 
-            var counter = 0;
-            for (let i = 0; i < CountGrid; i++) {
-                var flagvalue = $("#txt_StatusFlag" + i).val();
-                if (flagvalue != "d" && flagvalue != "m") {
-                    if ($("#txt_StatusFlag" + i).val() != "i")
-                        $("#txt_StatusFlag" + i).val("u");
-
-                    $("#txtSerial" + i).prop("value", counter + 1);
-                    counter = counter + 1;
-                }
-            }
-
+            Insert_Serial();
+        ComputeTotals();
         });
 
 
-        ComputeTotals();
 
     }
     function CopyNewRow(RecNo: number) {
@@ -1654,7 +1826,51 @@ namespace JournalVoucher {
         var counter = 0;
         for (let i = 0; i < CountGrid; i++) {
             var statusFlag = JournalDetailModelFiltered[i].StatusFlag;
-            BuildControls(i);
+            $("#div_Data").append(BuildControlsGrid(i));
+            // costCenter Type 
+            if (VoucherCCType == 0) {
+                $(".ccType").hide();
+            }
+            // costCenterCCDT Type
+            if (VoucherCCDtType == 1) {
+                $(".ccTypeBranch").show();
+            } else {
+                $(".ccTypeBranch").hide();
+            }
+
+
+            var show2 = $(".costcntr").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show2 == false) {
+
+                $(".costcntr").addClass("display_none");
+            }
+            else {
+                $(".costcntr").removeClass("display_none");
+            }
+
+            var show1 = $(".Acc").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show1 == false) {
+
+                $(".Acc").addClass("display_none");
+            }
+            else {
+                $(".Acc").removeClass("display_none");
+            }
+
+            var show3 = $(".costcntrCCDt").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show3 == false) {
+
+                $(".costcntrCCDt").addClass("display_none");
+            }
+            else {
+                $(".costcntrCCDt").removeClass("display_none");
+            }
+
+
+            //BuildControls(i);
             //alert(statusFlag + ' ---> Row =' +i )
             if (statusFlag == "d" || statusFlag == "m") {
                 $("#No_Row" + i).attr("hidden", "true");
@@ -1693,6 +1909,7 @@ namespace JournalVoucher {
                 $("#btn_Insert" + i).removeClass("display_none");
                 $("#btn_Copy" + i).removeClass("display_none");
             }
+            ChackCCDT_TYPE(i);
         }
 
     }
@@ -1713,8 +1930,51 @@ namespace JournalVoucher {
                 showFlag = true;
             }
             var statusFlag = JournalDetailModelFiltered[i].StatusFlag;
+            $("#div_Data").append(BuildControlsGrid(i));
+            // costCenter Type 
+            if (VoucherCCType == 0) {
+                $(".ccType").hide();
+            }
+            // costCenterCCDT Type
+            if (VoucherCCDtType == 1) {
+                $(".ccTypeBranch").show();
+            } else {
+                $(".ccTypeBranch").hide();
+            }
 
-            BuildControls(i);
+
+            var show2 = $(".costcntr").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show2 == false) {
+
+                $(".costcntr").addClass("display_none");
+            }
+            else {
+                $(".costcntr").removeClass("display_none");
+            }
+
+            var show1 = $(".Acc").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show1 == false) {
+
+                $(".Acc").addClass("display_none");
+            }
+            else {
+                $(".Acc").removeClass("display_none");
+            }
+
+            var show3 = $(".costcntrCCDt").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show3 == false) {
+
+                $(".costcntrCCDt").addClass("display_none");
+            }
+            else {
+                $(".costcntrCCDt").removeClass("display_none");
+            }
+
+
+            //BuildControls(i);
 
             if (statusFlag == 'i') {
                 $("#txt_StatusFlag" + (i)).val("i");
@@ -1758,10 +2018,10 @@ namespace JournalVoucher {
                 $("#btn_Insert" + i).removeClass("display_none");
                 $("#btn_Copy" + i).removeClass("display_none");
             }
+            ChackCCDT_TYPE(i);
         }
     }
     function AssignGridControlsForInsert(RecNum: number) {
-        debugger
         AQJournalDetailModel = new Array<AQ_GetJournalDetail>();
         var StatusFlag: String;
         var flagNewRecord: boolean = false;
@@ -1798,8 +2058,6 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i - 1)).val();
                     AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
                     AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
-                     
-
 
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
@@ -1828,14 +2086,13 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
 
                     AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
-                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i )).val();
+                    AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i)).val();
                     AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
                     AQJournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + (i)).val();
                     AQJournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + (i)).val();
                     AQJournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + (i)).val();
                     AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i)).val();
                     AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i)).val();
-
 
                     AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i)).val();
                     AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i)).val();
@@ -1844,7 +2101,7 @@ namespace JournalVoucher {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
                     else if (StatusFlag == "u" || StatusFlag == "d") {
-                        AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
+                        AQJournalDetailSingleModel.VoucherDetailID = Number($("#VoucherDetailID" + i).val());
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
                 }
@@ -1854,7 +2111,6 @@ namespace JournalVoucher {
         flagNewRecord = false;
     }
     function AssignGridControlsForCopy(RecNum: number) {
-        debugger
         AQJournalDetailModel = new Array<AQ_GetJournalDetail>();
         var StatusFlag: String;
         var flagNewRecord: boolean = false;
@@ -1876,8 +2132,6 @@ namespace JournalVoucher {
                 AQJournalDetailSingleModel.CREDIT = $("#txtCredit" + (i - 1)).val();
                 AQJournalDetailSingleModel.DESCL = $("#Notes" + (i - 1)).val();
                 AQJournalDetailSingleModel.DESCA = $("#Notes" + (i - 1)).val();
-                AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
-                AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
 
                 AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i - 1)).val();
                 AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i - 1)).val();
@@ -1888,8 +2142,8 @@ namespace JournalVoucher {
                 AQJournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + (i - 1)).val();
                 AQJournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + (i - 1)).val();
 
-
-
+                AQJournalDetailSingleModel.CCDT_TYPE = $("#txtCCDtCostCntrNum" + (i - 1)).val();
+                AQJournalDetailSingleModel.CCDT_DESCA = $("#txtCCDTCostCntrName" + (i - 1)).val();
                 AQJournalDetailModel.push(AQJournalDetailSingleModel);
                 flagNewRecord = true;
             }
@@ -1945,6 +2199,7 @@ namespace JournalVoucher {
                     AQJournalDetailSingleModel.DESCL = $("#Notes" + i).val();
                     AQJournalDetailSingleModel.DESCA = $("#Notes" + i).val();
 
+
                     AQJournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + (i)).val();
                     AQJournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + (i)).val();
                     AQJournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + (i)).val();
@@ -1960,18 +2215,18 @@ namespace JournalVoucher {
                         AQJournalDetailSingleModel.VoucherDetailID = 0;
                     }
                     else if (StatusFlag == "u" || StatusFlag == "d") {
-                        AQJournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
+                        AQJournalDetailSingleModel.VoucherDetailID = Number($("#VoucherDetailID" + i).val());
                     }
                     AQJournalDetailModel.push(AQJournalDetailSingleModel);
                 }
             }
         }
         JournalDetailModelFiltered = AQJournalDetailModel;
-        console.log(JournalDetailModelFiltered);
         flagNewRecord = false;
     }
     //---------------------------------------------- get By id  functions ----------------------------------------
     function GetAccByCode(AccCode: string): boolean {
+        debugger
         var flag: boolean = true;
         var accObj = AccountDetailsIst.filter(s => s.ACC_CODE == AccCode);
         if (accObj.length > 0) {
@@ -2006,6 +2261,28 @@ namespace JournalVoucher {
         }
 
     }
+
+    function Chack_disabled(cnt: number, AccNumber: string) {
+
+        var AccNum = AccNumber;
+        var AccObject = AccountDetailsIst.filter(s => s.COMP_CODE == compcode && s.ACC_CODE == AccNum);
+        if (AccObject.length > 0) {
+
+            if (VoucherCCDtType == 1 && (AccObject[0].CCDT_TYPE != null && AccObject[0].CCDT_TYPE != "")) {
+
+                return ""
+            }
+            else {
+
+                return "disabled"
+            }
+
+        }
+
+        return ""
+
+    }
+
     function GetCostCenterByCode(CC_Code: string): boolean {
         var flag: boolean = true;
 
@@ -2081,18 +2358,25 @@ namespace JournalVoucher {
         JournalHeaderModel.VOUCHER_DATE = txtJouranlDate.value;
         JournalHeaderModel.VOUCHER_DESC = txtJournalDescripton.value;
         if (txtTotalDebit.value != "") {
-            JournalHeaderModel.TotalDebit = DepitTotal;
+            JournalHeaderModel.TotalDebit = DepitTotal.RoundToNum(2);
         }
         if (txtTotalCredit.value != "") {
-            JournalHeaderModel.TotalCredit = CreditTotal;
+            JournalHeaderModel.TotalCredit = CreditTotal.RoundToNum(2);
         }
 
         if (rdNew.checked == true) { JournalHeaderModel.VOUCHER_STATUS = 0; }
         else if (rdAuthorized.checked == true) { JournalHeaderModel.VOUCHER_STATUS = 1; }
-        else if (rdPosted.checked == true) { JournalHeaderModel.VOUCHER_STATUS = 2; }
+        //else if (rdPosted.checked == true) { JournalHeaderModel.VOUCHER_STATUS = 2; }
 
         JournalHeaderModel.TYPE_CODE = Number(ddlJournalType.value);
         JournalHeaderModel.REF_CODE = txtRefNumber.value;
+
+        JournalHeaderModel.CREATED_BY = txtCreatedBy.value;
+        JournalHeaderModel.CREATED_AT = txtCreatedAt.value;
+
+        JournalHeaderModel.UPDATED_BY = txtUpdatedBy.value;
+        JournalHeaderModel.UPDATED_AT = txtUpdatedAt.value;
+
 
         var StatusFlag: String;
         // Details
@@ -2102,8 +2386,10 @@ namespace JournalVoucher {
             if (GlobalTemplateID != 0 && StatusFlag != "d" && StatusFlag != "m") {
                 StatusFlag = "i";
             }
+
             JournalDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             JournalDetailSingleModel.StatusFlag = StatusFlag.toString();
+
 
             if (StatusFlag == "i") {
                 JournalDetailSingleModel.VoucherDetailID = 0;
@@ -2154,28 +2440,50 @@ namespace JournalVoucher {
             }
             else if (StatusFlag == "d") {
                 if (FlagAddOrEdit == 2) {
-                    if ($("#VoucherDetailID" + i).val() != "") {
-                        var deletedID = $("#VoucherDetailID" + i).val();
-                        JournalDetailSingleModel.VoucherDetailID = deletedID;
-                        JournalDetailModel.push(JournalDetailSingleModel);
-                    }
+                    var deletedID = Number($("#VoucherDetailID" + i).val());
+                    JournalDetailSingleModel.VoucherDetailID = deletedID;
+                    JournalDetailModel.push(JournalDetailSingleModel);
                 }
             }
 
+            let FlagUpdate = $("#FlagUpdate" + i).val();
+            if (FlagUpdate == "s") {
+                JournalDetailSingleModel = new A_JOURNAL_DETAIL();
+                JournalDetailSingleModel.FlagUpdate = FlagUpdate.toString();
+                JournalDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
+                JournalDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
+                JournalDetailSingleModel.VOUCHER_SERIAL = $("#txtSerial" + i).val();
+                JournalDetailSingleModel.ACC_CODE = $("#txtAccNumber" + i).val();
+                JournalDetailSingleModel.CC_CODE = $("#txtCostCntrNum" + i).val();
+                JournalDetailSingleModel.DEBIT = $("#txtDebit" + i).val();
+                JournalDetailSingleModel.CREDIT = $("#txtCredit" + i).val();
+                JournalDetailSingleModel.DESCL = $("#Notes" + i).val();
+                JournalDetailSingleModel.DESCA = $("#Notes" + i).val();
+                JournalDetailSingleModel.CCDT_CODE = $("#txtCCDtCostCntrNum" + i).val();
+
+                //****************************************************************************
+                JournalDetailSingleModel.INVOICE_NO = $("#INVOICE_NO" + i).val();
+                JournalDetailSingleModel.BOOK_TR_NO = $("#BOOK_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_SYSTEM_CODE = $("#SRC_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_SUB_SYSTEM_CODE = $("#SRC_SUB_SYSTEM_CODE" + i).val();
+                JournalDetailSingleModel.SRC_BRA_CODE = $("#SRC_BRA_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_CODE = $("#SRC_TR_CODE" + i).val();
+                JournalDetailSingleModel.SRC_TR_NO = $("#SRC_TR_NO" + i).val();
+                JournalDetailSingleModel.SRC_TR_TYPE = $("#SRC_TR_TYPE" + i).val();
+
+                JournalDetailModel.push(JournalDetailSingleModel);
+
+            }
         }
+        MasterDetailModel.A_JOURNAL_HEADER.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
+        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        MasterDetailModel.MODULE_CODE = SysSession.CurrentEnvironment.ModuleCode;
+        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         MasterDetailModel.A_JOURNAL_HEADER = JournalHeaderModel;
         MasterDetailModel.A_JOURNAL_DETAIL = JournalDetailModel;
 
         MasterDetailModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
-
-        MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
-        MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.JournalVoucher;
-        MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
-
-
-
     }
     function Insert() {
         MasterDetailModel.A_JOURNAL_HEADER.SOURCE_TYPE = "1";
@@ -2183,7 +2491,7 @@ namespace JournalVoucher {
         MasterDetailModel.A_JOURNAL_HEADER.CREATED_AT = DateTimeFormat(Date().toString());
         MasterDetailModel.A_JOURNAL_HEADER.VoucherID = 0;
 
-
+        console.log(MasterDetailModel);
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("GLTrVoucher", "InsertJournalMasterDetail"),
@@ -2191,24 +2499,24 @@ namespace JournalVoucher {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as A_JOURNAL_HEADER;
+                    let res = result.Response as AQ_GetJournalHeader;
+                    DateSetsSccess("txtJouranlDate", "txtFromDate", "txtToDate");
                     DisplayMassage("تم اصدار  سند قيد رقم " + res.VOUCHER_CODE, '(success)', MessageType.Succeed);
                     txtJouranlNumber.value = res.VOUCHER_CODE.toString();
                     GlobalVoucherID = res.VoucherID;
-                    InitializeGrid();
+                    //BindGridData();
                     AfterInsertOrUpdateFlag = true;
                     ShowButons();
-                    GridRowDoubleClick();
+                    //GridRowDoubleClick();
+                    displayDate_speed(res.VoucherID, res)
                     AfterInsertOrUpdateFlag = false;
 
 
                     $("#divFilter").removeClass("disabledDiv");
                     $("#divGridShow").removeClass("disabledDiv");
-
+                    //DisableControls();
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
-                    $('#divTemplateData').addClass('showdiv');
-
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
                     FlagAddOrEdit = 2;
@@ -2221,14 +2529,21 @@ namespace JournalVoucher {
     }
     function Update() {
         debugger
-        MasterDetailModel.A_JOURNAL_HEADER.UPDATED_BY = SysSession.CurrentEnvironment.UserCode;
-        MasterDetailModel.A_JOURNAL_HEADER.UPDATED_AT = DateTimeFormat(Date().toString());
+        try {
 
-        MasterDetailModel.A_JOURNAL_HEADER.SOURCE_TYPE = SelectedJournalModel[0].SOURCE_TYPE;
-        MasterDetailModel.A_JOURNAL_HEADER.VoucherID = GlobalVoucherID;
-        // creation
-        MasterDetailModel.A_JOURNAL_HEADER.CREATED_BY = SelectedJournalModel[0].CREATED_BY;
-        MasterDetailModel.A_JOURNAL_HEADER.CREATED_AT = SelectedJournalModel[0].CREATED_AT;
+            MasterDetailModel.A_JOURNAL_HEADER.UPDATED_BY = SysSession.CurrentEnvironment.UserCode;
+            MasterDetailModel.A_JOURNAL_HEADER.UPDATED_AT = DateTimeFormat(Date().toString());
+
+            MasterDetailModel.A_JOURNAL_HEADER.SOURCE_TYPE = SelectedJournalModel[0].SOURCE_TYPE;
+            MasterDetailModel.A_JOURNAL_HEADER.VoucherID = GlobalVoucherID;
+            // creation
+            MasterDetailModel.A_JOURNAL_HEADER.CREATED_BY = SelectedJournalModel[0].CREATED_BY;
+            MasterDetailModel.A_JOURNAL_HEADER.CREATED_AT = SelectedJournalModel[0].CREATED_AT;
+
+        } catch (e) {
+
+        }
+
 
         // Edit
         if (SelectedJournalModel[0].UPDATED_BY != null) {
@@ -2268,6 +2583,7 @@ namespace JournalVoucher {
             txtPostedAt.value = DateTimeFormat(Date().toString());
         }
         debugger
+        console.log(MasterDetailModel);
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("GLTrVoucher", "UpdateJournalMasterDetail"),
@@ -2275,8 +2591,8 @@ namespace JournalVoucher {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as A_JOURNAL_HEADER;
-
+                    let res = result.Response as AQ_GetJournalHeader;
+                    DateSetsSccess("txtJouranlDate", "txtFromDate", "txtToDate");
                     if (AuthorizeFlag == true) {
                         DisplayMassage('تم التصديق بنجاح', '(Success)', MessageType.Succeed);
                         $("#btnUpdate").attr("disabled", "disabled");
@@ -2302,23 +2618,25 @@ namespace JournalVoucher {
                         $("#btnUnAuthorize").addClass("display_none");
                     }
                     GlobalVoucherID = res.VoucherID;
-                    InitializeGrid();
+
+                    //Success();
+
+                    //BindGridData();
                     AfterInsertOrUpdateFlag = true;
                     ShowButons();
-                    GridRowDoubleClick();
+                    //GridRowDoubleClick(); 
+                    displayDate_speed(res.VoucherID, res)
                     AfterInsertOrUpdateFlag = false;
 
 
                     $("#divFilter").removeClass("disabledDiv");
                     $("#divGridShow").removeClass("disabledDiv");
+                    //DisableControls();
                     GlobalTemplateID = 0;
                     $('#DivTemplate').addClass('showdiv');
-                    $('#divTemplateData').addClass('showdiv');
                     $('#spandiv_contentliest').addClass('fa-caret-left');
                     $('#spandiv_contentliest').removeClass('fa-caret-down');
-
                     FlagAddOrEdit = 2;
-
                     Save_Succ_But();
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -2328,6 +2646,21 @@ namespace JournalVoucher {
 
     }
     function Open() {
+
+        if (!CheckDate(DateFormat(txtJouranlDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+            Errorinput(txtJouranlDate);
+            return
+        }
+
+        if (!CheckPeriodDate(txtJouranlDate.value, "A")) {
+            debugger
+            DisplayMassage("لا يمكنك الاضافه او التعديل في هذة الفتره المغلقه ", "Please select a Invoice data", MessageType.Error);
+            Errorinput(txtJouranlDate);
+            return false
+        }
+
+
         MasterDetailModel.A_JOURNAL_HEADER.UPDATED_BY = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.A_JOURNAL_HEADER.UPDATED_AT = DateTimeFormat(Date().toString());
 
@@ -2361,7 +2694,7 @@ namespace JournalVoucher {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                    let res = result.Response as A_JOURNAL_HEADER;
+                    let res = result.Response as AQ_GetJournalHeader;
                     GlobalVoucherID = res.VoucherID;
                     DisplayMassage('تم فك الاعتماد بنجاح', '(Success)', MessageType.Succeed);
                     rdNew.checked = true;
@@ -2370,9 +2703,10 @@ namespace JournalVoucher {
                     $("#btnPost").attr("disabled", "disabled");
                     $("#btnAuthorize").removeClass("display_none");
                     $("#btnUnAuthorize").addClass("display_none");
-                    InitializeGrid();
+                    //BindGridData();
                     AfterInsertOrUpdateFlag = true;
-                    GridRowDoubleClick();
+                    //GridRowDoubleClick();
+                    displayDate_speed(res.VoucherID, res)
                     AfterInsertOrUpdateFlag = false;
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
@@ -2381,7 +2715,212 @@ namespace JournalVoucher {
         });
 
     }
+
+    function displayDate_speed(VouchID: number, res: AQ_GetJournalHeader) {
+
+
+
+        AQJournalHeaderWithDetails = AQJournalHeaderWithDetails.filter(x => x.VoucherID != VouchID);
+
+        AQJournalHeaderWithDetails.push(res);
+        AQJournalHeaderWithDetails = AQJournalHeaderWithDetails.sort(dynamicSortNew("VOUCHER_CODE"));
+        Grid.DataSource = AQJournalHeaderWithDetails;
+        Grid.Bind();
+        $("#divGridDetails").jsGrid("option", "pageIndex", 1);
+
+        Success(VouchID);
+
+    }
+
+    function Success(VouchID: number) {
+        debugger
+        showFlag = true;
+        TempshowFlag = false;
+        AuthorizeFlag = false;
+        PostFlag = false;
+        Clear();
+        $("#divJournalDetail").removeClass("display_none");
+
+        SelectedJournalModel = AQJournalHeaderWithDetails.filter(x => x.VoucherID == VouchID);
+
+        if (SelectedJournalModel.length > 0) {
+            GlobalVoucherID = Number(SelectedJournalModel[0].VoucherID);
+            txtJouranlNumber.value = SelectedJournalModel[0].VOUCHER_CODE.toString();
+            txtJournalDescripton.value = SelectedJournalModel[0].VOUCHER_DESC;
+            txtJouranlDate.value = DateFormat(SelectedJournalModel[0].VOUCHER_DATE);
+            if (SelectedJournalModel[0].REF_CODE != null)
+                txtRefNumber.value = SelectedJournalModel[0].REF_CODE.toString();
+
+            txtResource.value = txtResource.value = (lang == "ar" ? SelectedJournalModel[0].Src_DescA.toString() : SelectedJournalModel[0].Src_DescE.toString());
+
+            if (SelectedJournalModel[0].TYPE_CODE != null)
+                ddlJournalType.value = SelectedJournalModel[0].TYPE_CODE.toString();
+
+            // creation
+            txtCreatedBy.value = SelectedJournalModel[0].CREATED_BY;
+            txtCreatedAt.value = SelectedJournalModel[0].CREATED_AT;
+
+            // Edit
+            if (SelectedJournalModel[0].UPDATED_BY != null) {
+                txtUpdatedBy.value = SelectedJournalModel[0].UPDATED_BY;
+                txtUpdatedAt.value = SelectedJournalModel[0].UPDATED_AT;
+            }
+        }
+        JournalDetailModelFiltered = new Array<AQ_GetJournalDetail>();
+        if (ReverseFlag == true) {
+            JournalDetailModelFiltered = ReversedJournalMasterDetailModel.AQ_GetJournalDetail;
+        } else {
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("GLTrVoucher", "GetAllJournalDetail"),
+                data: { VoucherID: GlobalVoucherID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+                success: (d) => {
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+                        JournalDetailModelFiltered = result.Response as Array<AQ_GetJournalDetail>;
+
+                    }
+                }
+            });
+
+        }
+
+        JournalDetailModelFiltered = JournalDetailModelFiltered.filter(x => x.VOUCHER_SERIAL != null).sort(function (a, b) { return a.VOUCHER_SERIAL - b.VOUCHER_SERIAL; });
+
+        debugger
+        $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading"  ></i>');
+        document.body.scrollTop = 800;
+        document.documentElement.scrollTop = 800;
+
+        setTimeout(function () {
+            debugger
+            var fragment = document.createDocumentFragment();
+            for (var i = 0; i < JournalDetailModelFiltered.length; ++i) {
+                fragment.appendChild(BuildControlsGrid(i)); // Append to the DocumentFragment
+            }
+            document.getElementById("div_Data").appendChild(fragment); // Append the DocumentFragment to the div
+
+
+            // costCenter Type 
+            if (VoucherCCType == 0) {
+                $(".ccType").hide();
+            }
+            // costCenterCCDT Type
+            if (VoucherCCDtType == 1) {
+                $(".ccTypeBranch").show();
+            } else {
+                $(".ccTypeBranch").hide();
+            }
+
+
+            var show2 = $(".costcntr").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show2 == false) {
+
+                $(".costcntr").addClass("display_none");
+            }
+            else {
+                $(".costcntr").removeClass("display_none");
+            }
+
+            var show1 = $(".Acc").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show1 == false) {
+
+                $(".Acc").addClass("display_none");
+            }
+            else {
+                $(".Acc").removeClass("display_none");
+            }
+
+            var show3 = $(".costcntrCCDt").is(":visible");
+            //var show2 = $(".Acc").is(":visible");
+            if (show3 == false) {
+
+                $(".costcntrCCDt").addClass("display_none");
+            }
+            else {
+                $(".costcntrCCDt").removeClass("display_none");
+            }
+
+
+            CountGrid = JournalDetailModelFiltered.length;
+            ComputeTotals();
+            DisableControls();
+
+            $('#Loading_Div').html('');
+
+
+
+        }, 1);
+
+
+        // جديد
+        if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
+            rdNew.checked = true;
+            $("#btnUnAuthorize").addClass("display_none");
+            $("#btnPost").addClass("display_none");
+            $("#btnAuthorize").removeClass("display_none");
+
+            $("#btnPost").attr("disabled", "disabled");
+            $("#btnUpdate").removeAttr("disabled");
+
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
+            btnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+
+            txtAuthorizedBy.value = "";
+            txtAuthorizedAt.value = "";
+            txtPostedBy.value = "";
+            txtPostedAt.value = "";
+
+        }
+        // معتمد
+        if (SelectedJournalModel[0].VOUCHER_STATUS == 1) {
+            rdAuthorized.checked = true;
+            txtAuthorizedBy.value = SelectedJournalModel[0].AUTHORISED_BY;
+            txtAuthorizedAt.value = SelectedJournalModel[0].AUTHORISED_AT;
+
+            $("#btnUnAuthorize").removeClass("display_none");
+            $("#btnPost").removeClass("display_none");
+            btnUnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM3;
+
+            $("#btnAuthorize").addClass("display_none");
+            btnPost.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
+
+            $("#btnUpdate").attr("disabled", "disabled");
+
+            txtPostedBy.value = "";
+            txtPostedAt.value = "";
+        }
+        // مرحل
+        if (SelectedJournalModel[0].VOUCHER_STATUS == 2) {
+            rdPosted.checked = true;
+            txtPostedBy.value = SelectedJournalModel[0].POSTED_BY;
+            txtPostedAt.value = SelectedJournalModel[0].POSTED_AT;
+
+            txtAuthorizedBy.value = SelectedJournalModel[0].AUTHORISED_BY;
+            txtAuthorizedAt.value = SelectedJournalModel[0].AUTHORISED_AT;
+
+            $("#btnAuthorize").attr("disabled", "disabled");
+            $("#btnUnAuthorize").addClass("display_none");
+            $("#btnAuthorize").addClass("display_none");
+            $("#btnPost").addClass("display_none");
+
+            $("#btnPost").attr("disabled", "disabled");
+            $("#btnUpdate").attr("disabled", "disabled");
+        }
+
+
+    }
+
     function Save() {
+
+
+        if (!CheckDate(DateFormat(txtJouranlDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
+            Errorinput(txtJouranlDate);
+            return
+        }
 
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
@@ -2408,7 +2947,7 @@ namespace JournalVoucher {
     //------------------------------------------------------ Template Region -----------------------------------
     function btnLoadTemplate_onclick() {
         let sys: SystemTools = new SystemTools();
-        sys.FindKey(Modules.JournalVoucher, "btnLoadTemplate", "COMP_CODE=" + compcode, () => {
+        sys.FindKey(Modules.JournalVoucher, "btnLoadTemplate", "COMP_CODE=" + compcode + " and VOUCHER_TYPE =1", () => {
             Clear();
             GlobalTemplateID = SearchGrid.SearchDataGrid.SelectedKey
             GetTemplateByID();
@@ -2430,7 +2969,11 @@ namespace JournalVoucher {
 
             $("#btnBackTemp").removeClass("display_none");
             $("#btnBackTemp").removeAttr("disabled");
+
             $("#btnCreateTemplate").removeAttr("disabled");
+            $("#btnDeleteTemplate").removeAttr("disabled");
+            $("#btnEditTemplate").removeAttr("disabled");
+            $("#btnLoadTemplate").removeAttr("disabled");
 
 
         });
@@ -2450,11 +2993,9 @@ namespace JournalVoucher {
         $("#btnSaveTemp").removeClass("display_none");
         $("#btnBackTemp").removeClass("display_none");
     }
-    function btnEditTemplate_onclick() {
+    function btnUpdateTemplate_onclick() {
         if (!SysSession.CurrentPrivileges.EDIT) return;
-        debugger
         sys.FindKey(Modules.JournalVoucher, "btnLoadTemplate", "COMP_CODE=" + compcode, () => {
-            debugger
             Clear();
             TempshowFlag = true;
             GlobalTemplateID = SearchGrid.SearchDataGrid.SelectedKey
@@ -2519,7 +3060,7 @@ namespace JournalVoucher {
 
         } else if (FlagAddOrEdit == 2) {  //update
             GridRowDoubleClick();
-            btnEdit_onclick();
+            btnUpdate_onclick();
         }
 
 
@@ -2585,12 +3126,22 @@ namespace JournalVoucher {
         TempHeaderModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
         TempHeaderModel.TEMPLATE_DESC = txtTempName.value;
 
-        TempHeaderModel.VOUCHER_DESC = txtJournalDescripton.value;
+        if (rdSaveDesc.checked == true) {
+            TempHeaderModel.VOUCHER_DESC = txtJournalDescripton.value;
+        } else {
+            TempHeaderModel.VOUCHER_DESC = "";
+        }
 
-        if (rdNew.checked == true) { TempHeaderModel.VOUCHER_TYPE = 0; }
-        else if (rdAuthorized.checked == true) { TempHeaderModel.VOUCHER_TYPE = 1; }
-        else if (rdPosted.checked == true) { TempHeaderModel.VOUCHER_TYPE = 2; }
 
+        if (rdSaveValue.checked == true) {
+            TempHeaderModel.IsSaveValue = true
+        }
+
+        //if (rdNew.checked == true) { TempHeaderModel.VOUCHER_TYPE = 0; }
+        //else if (rdAuthorized.checked == true) { TempHeaderModel.VOUCHER_TYPE = 1; }
+        //else if (rdPosted.checked == true) { TempHeaderModel.VOUCHER_TYPE = 2; }
+
+        TempHeaderModel.VOUCHER_TYPE = 1;
         TempHeaderModel.TYPE_CODE = Number(ddlJournalType.value);
 
         var StatusFlag: String;
@@ -2602,8 +3153,11 @@ namespace JournalVoucher {
             } else {
                 StatusFlag = $("#txt_StatusFlag" + i).val();
             }
+            $("#txt_StatusFlag" + i).val("");
             TempDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             TempDetailSingleModel.StatusFlag = StatusFlag.toString();
+
+
 
             if (StatusFlag == "i") {
                 TempDetailSingleModel.VoucherDetailID = 0;
@@ -2623,7 +3177,7 @@ namespace JournalVoucher {
                 TempDetailModel.push(TempDetailSingleModel);
 
             } else if (StatusFlag == "u") {
-                TempDetailSingleModel.VoucherDetailID = $("#VoucherDetailID" + i).val();
+                TempDetailSingleModel.VoucherDetailID = Number($("#VoucherDetailID" + i).val());
                 TempDetailSingleModel.VOUCHER_SERIAL = $("#txtSerial" + i).val();
                 TempDetailSingleModel.ACC_CODE = $("#txtAccNumber" + i).val();
                 TempDetailSingleModel.CC_CODE = $("#txtCostCntrNum" + i).val();
@@ -2642,11 +3196,9 @@ namespace JournalVoucher {
             }
             else if (StatusFlag == "d") {
                 if (TempFlagAddOrEdit == 2) {
-                    if ($("#VoucherDetailID" + i).val() != "") {
-                        var deletedID = $("#VoucherDetailID" + i).val();
-                        TempDetailSingleModel.VoucherDetailID = deletedID;
-                        TempDetailModel.push(TempDetailSingleModel);
-                    }
+                    var deletedID = Number($("#VoucherDetailID" + i).val());
+                    TempDetailSingleModel.VoucherDetailID = deletedID;
+                    TempDetailModel.push(TempDetailSingleModel);
                 }
             }
 
@@ -2674,7 +3226,24 @@ namespace JournalVoucher {
                     DisplayMassage("تم اصدار  نموذج رقم " + res.VOUCHER_CODE, '(success)', MessageType.Succeed);
                     txtTempNumber.value = res.VOUCHER_CODE.toString();
                     GlobalTemplateID = res.TemplateID;
-                    btnBackTemp_onclick();
+                    //btnBackTemp_onclick();
+
+
+                    $(".BtnHide").removeAttr("disabled");
+                    HideButtons();
+                    $("#btnSaveTemp").addClass("display_none");
+                    $("#btnBackTemp").addClass("display_none");
+
+                    $("#txtTempName").attr("disabled", "disabled");
+                    $("#txtTempName").val("");
+                    $("#txtTempNumber").val("");
+
+                    rdSaveDesc.checked = false;
+                    rdSaveValue.checked = false;
+
+                    rdSaveDesc.disabled = true;
+                    rdSaveValue.disabled = true;
+
                 } else {
                     DisplayMassage("هناك خطــأ ", '(Error)', MessageType.Error);
                 }
@@ -2723,7 +3292,6 @@ namespace JournalVoucher {
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    debugger
                     TempHeaderWithDetail = result.Response as VchrTemplatMasterDetail;
 
                     TempshowFlag = true;
@@ -2739,10 +3307,11 @@ namespace JournalVoucher {
                     txtTempName.value = selectedTemplateModel.TEMPLATE_DESC;
                     if (selectedTemplateModel.IsSaveValue == true) {
                         rdSaveValue.checked = true;
-                    } else {
-                        rdSaveDesc.checked = true;
-
                     }
+
+                    rdSaveDesc.checked = true;
+
+
                     if (selectedTemplateModel.TYPE_CODE != null)
                         ddlJournalType.value = selectedTemplateModel.TYPE_CODE.toString();
 
@@ -2759,12 +3328,59 @@ namespace JournalVoucher {
                     TemplateDetailModelFiltered = new Array<A_TR_VchrTemplateDetail>();
 
                     TemplateDetailModelFiltered = TempHeaderWithDetail.A_TR_VchrTemplateDetail.filter(s => s.TemplateID == GlobalTemplateID);
-                    for (let i = 0; i < TemplateDetailModelFiltered.length; i++) {
-                        BuildControls(i);
+
+                    var fragment = document.createDocumentFragment();
+                    for (var i = 0; i < TemplateDetailModelFiltered.length; ++i) {
+                        fragment.appendChild(BuildControlsGrid(i)); // Append to the DocumentFragment
                     }
+                    document.getElementById("div_Data").appendChild(fragment); // Append the DocumentFragment to the div
+
+                    // costCenter Type 
+                    if (VoucherCCType == 0) {
+                        $(".ccType").hide();
+                    }
+                    // costCenterCCDT Type
+                    if (VoucherCCDtType == 1) {
+                        $(".ccTypeBranch").show();
+                    } else {
+                        $(".ccTypeBranch").hide();
+                    }
+
+
+                    var show2 = $(".costcntr").is(":visible");
+                    //var show2 = $(".Acc").is(":visible");
+                    if (show2 == false) {
+
+                        $(".costcntr").addClass("display_none");
+                    }
+                    else {
+                        $(".costcntr").removeClass("display_none");
+                    }
+
+                    var show1 = $(".Acc").is(":visible");
+                    //var show2 = $(".Acc").is(":visible");
+                    if (show1 == false) {
+
+                        $(".Acc").addClass("display_none");
+                    }
+                    else {
+                        $(".Acc").removeClass("display_none");
+                    }
+
+                    var show3 = $(".costcntrCCDt").is(":visible");
+                    //var show2 = $(".Acc").is(":visible");
+                    if (show3 == false) {
+
+                        $(".costcntrCCDt").addClass("display_none");
+                    }
+                    else {
+                        $(".costcntrCCDt").removeClass("display_none");
+                    }
+
 
                     CountGrid = TemplateDetailModelFiltered.length;
                     ComputeTotals();
+                    $('#Loading_Div').html('');
                     EnableControls();
 
                 }
@@ -2848,22 +3464,28 @@ namespace JournalVoucher {
 
                 let result = d.result as string;
 
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result, "_blank");
             }
         })
     }
     function btnPrintTransaction_onclick() {
-        //debugger;
+
         let rp: ReportParameters = new ReportParameters();
 
         rp.RepType = 0;
         rp.TRId = GlobalVoucherID;
 
+
         rp.Name_function = "AProc_Prnt_JournalVoucher";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
+
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+
+
     }
 }

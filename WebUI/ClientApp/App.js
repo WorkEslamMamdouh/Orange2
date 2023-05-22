@@ -1285,6 +1285,7 @@ function WorningMessage(msg_Ar, msg_En, tit_ar, tit_en, OnOk) {
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 function WorningMessageOnCancel(msg_Ar, msg_En, tit_ar, tit_en, OnCancel) {
     if (tit_ar === void 0) { tit_ar = "تنبيه"; }
@@ -2327,6 +2328,35 @@ function CopyRowGrid(DataList, Key, value) {
         }
     }
     return NewModel;
+}
+var List_Table = new Array();
+var globle_Table = new Array();
+function DataResult(Table) {
+    var sys = new SystemTools;
+    globle_Table = Table;
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: function (d) {
+            var result = d;
+            if (result.IsSuccess) {
+                List_Table = result.Response;
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+}
+function GetDataTable(NameTable) {
+    var table;
+    for (var i = 0; i < globle_Table.length; i++) {
+        if (globle_Table[i].NameTable == NameTable) {
+            table = List_Table[i];
+            break;
+        }
+    }
+    return table;
 }
 function GetAllData(Table) {
     var sys = new SystemTools;
