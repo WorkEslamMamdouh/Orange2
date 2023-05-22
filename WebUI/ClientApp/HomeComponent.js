@@ -592,6 +592,7 @@ var HomeComponent;
         $("#btnAccountbalances").click(function () { newtap = false; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreports").click(function () { newtap = false; OpenPage(Modules.financialreports); }); //
         $("#btnUSERS").click(function () { newtap = false; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLog").click(function () { newtap = false; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPosting").click(function () { newtap = false; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranch").click(function () { newtap = false; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucher").click(function () { newtap = false; OpenPage(Modules.LnkTransVoucher); }); // 
@@ -691,6 +692,7 @@ var HomeComponent;
         $("#btnAccountbalancesT").click(function () { newtap = true; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreportsT").click(function () { newtap = true; OpenPage(Modules.financialreports); }); //
         $("#btnUSERST").click(function () { newtap = true; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLogT").click(function () { newtap = true; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPostingT").click(function () { newtap = true; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranchT").click(function () { newtap = true; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkTransVoucher); }); // 

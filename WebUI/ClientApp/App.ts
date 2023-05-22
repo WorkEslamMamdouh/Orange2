@@ -78,6 +78,7 @@ var Modules = {
     Accountbalances: "Accountbalances",
 
     USERS: "USERS",
+	UserActLog: "UserActLog",
     TranPosting: "TranPosting",
     LnkvarBranch: "LnkvarBranch",
     LnkTransVoucher: "LnkTransVoucher",
@@ -1638,6 +1639,7 @@ function WorningMessage(msg_Ar: string, msg_En: string, tit_ar: string = "تنب
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 
 function WorningMessageOnCancel(msg_Ar: string, msg_En: string, tit_ar: string = "تنبيه", tit_en: string = "Worning", OnCancel?: () => void) {
@@ -3028,6 +3030,42 @@ function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> 
 
 }
 
+var List_Table: Array<Table_Result> = new Array<Table_Result>();
+var globle_Table: Array<Table> = new Array<Table>();
+
+function DataResult(Table: Array<Table>): Array<Table_Result> {
+    let sys = new SystemTools;
+    globle_Table = Table;
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: (d) => {
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                List_Table = result.Response as Array<Table_Result>; 
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+
+}
+
+function GetDataTable(NameTable: string): Array<any>{
+
+    let table; 
+    for (var i = 0; i < globle_Table.length; i++) {
+
+        if (globle_Table[i].NameTable == NameTable) {
+            table = List_Table[i];
+            break;
+        }
+
+    }
+
+    return table;
+}
 
 
 function GetAllData(Table: Array<Table>): Array<Table_Result> {

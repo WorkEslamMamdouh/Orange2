@@ -6247,6 +6247,7 @@ class A_JOURNAL_DETAIL extends SecurityClass {
         this.DEBIT_FC = 0;
         this.CREDIT_FC = 0;
         this.StatusFlag = "";
+        this.FlagUpdate = "";
     }
     public VoucherDetailID: number;
     public VoucherID: number;
@@ -6271,6 +6272,7 @@ class A_JOURNAL_DETAIL extends SecurityClass {
     public DEBIT_FC: number;
     public CREDIT_FC: number;
     public StatusFlag: string;
+    public FlagUpdate: string;
 }
 
 class A_JOURNAL_HEADER extends SecurityClass {

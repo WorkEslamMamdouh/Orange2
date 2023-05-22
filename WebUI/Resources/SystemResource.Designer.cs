@@ -3184,6 +3184,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed Operation.
+        /// </summary>
+        public static string FailedOpr {
+            get {
+                return ResourceManager.GetString("FailedOpr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial situation.
         /// </summary>
         public static string Financial_situation {
@@ -5929,6 +5938,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Success Operation.
+        /// </summary>
+        public static string SuccessOpr {
+            get {
+                return ResourceManager.GetString("SuccessOpr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Summary.
         /// </summary>
         public static string Summary {
@@ -6573,6 +6591,15 @@ namespace Inv.WebUI.Resources {
         public static string Update_Sales {
             get {
                 return ResourceManager.GetString("Update_Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjustments for the year.
+        /// </summary>
+        public static string UpgOnYear {
+            get {
+                return ResourceManager.GetString("UpgOnYear", resourceCulture);
             }
         }
         

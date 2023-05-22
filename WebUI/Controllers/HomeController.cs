@@ -501,6 +501,10 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/GeneralLedgerMenu/financialreportsIndex.cshtml");
         }
 
+        public ActionResult UserActLogIndex()
+        {
+            return View("~/Views/Tools/USERS/UserActLogIndex.cshtml");
+        }
         public ActionResult USERSIndex()
         {
             return View("~/Views/Tools/USERS/USERSIndex.cshtml");
