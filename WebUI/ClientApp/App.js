@@ -2330,7 +2330,7 @@ function CopyRowGrid(DataList, Key, value) {
 }
 var List_Table = new Array();
 var globle_Table = new Array();
-function BindData(Table) {
+function DataResult(Table) {
     var sys = new SystemTools;
     globle_Table = Table;
     Ajax.Callsync({

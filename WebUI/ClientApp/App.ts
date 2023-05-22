@@ -3032,7 +3032,7 @@ function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> 
 var List_Table: Array<Table_Result> = new Array<Table_Result>();
 var globle_Table: Array<Table> = new Array<Table>();
 
-function BindData(Table: Array<Table>): Array<Table_Result> {
+function DataResult(Table: Array<Table>): Array<Table_Result> {
     let sys = new SystemTools;
     globle_Table = Table;
     Ajax.Callsync({

@@ -224,7 +224,7 @@ var AccTrPaymentNoteNew;
                 { NameTable: 'A_G_Vendor', Condition: "" },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ];
-        BindData(Table);
+        DataResult(Table);
         debugger;
         //**************************************************************************************************************
         var Listbox = GetDataTable('A_RecPay_D_CashBox');

@@ -232,7 +232,7 @@ namespace AccTrPaymentNoteNew {
             ]
 
 
-        BindData(Table);
+        DataResult(Table);
 
         debugger
         //**************************************************************************************************************
