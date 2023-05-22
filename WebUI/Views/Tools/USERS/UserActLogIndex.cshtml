@@ -1,0 +1,122 @@
+﻿
+@using Inv.WebUI.Resources
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<label for="rpTitle" style="display:none" id="rpTitle">@*@SystemResource.Rep_PayRecieptList*@</label>
+
+<div class="row gy-3" id="content_report">
+    <!-- Filter Container -->
+    <div id="div_dis" class="col-12">
+        <div class="card bg-light-blue" id="informtionReserved">
+            <div class="card-body" id="id_div_Add">
+				<div class="row">
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label for="txtFromDate" class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+							<div class="col-9 col-md-8">
+								<input type="date" class="form-control" name="txtFromDate" id="txtFromDate">
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label for="txtToDate" class="col-3 col-md-4 align-self-center p-md-0"> @SystemResource.App_ToDate</label>
+							<div class="col-9 col-md-8">
+								<input type="date" class="form-control" name="txtToDate" id="txtToDate">
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="row mt-n3"style="border: 3px solid #143f6b;border-radius: 12px;padding: 0% 2% 0% 2%;">
+							<label class="col-4 col-md-2 align-self-center p-md-0 text-blue fw-bold fs-7"> @SystemResource.CollectedBy</label>
+							<div class="form-group col-8 col-md-10">
+								<div class="row">
+									<div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+										<div class="form-check d-inline-flex">
+											<input class="form-check-input form-radio special-radio" type="radio" id="repUser" name="reptp" value="3" checked>
+											<label class="form-check-label my-auto me-3" for="reptp1">@SystemResource.User</label>
+										</div>
+									</div>
+									<div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+										<div class="form-check  d-inline-flex">
+											<input class="form-check-input form-radio special-radio" type="radio" id="repTitle" name="reptp" value="2">
+											<label class="form-check-label my-auto me-3" for="reptp2">@SystemResource.Job</label>
+										</div>
+									</div>
+									<div class="col-12  col-xl-4">
+										<div class="form-check d-inline-flex">
+											<input class="form-check-input form-radio special-radio" type="radio" id="repDate" name="reptp" value="1">
+											<label class="form-check-label my-auto me-3" for="reptp3">@SystemResource.App_date</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label class="col-3 col-md-4 align-self-center p-md-0 fs-7">@SystemResource.User</label>
+							<div class="col-9 col-md-8 ">
+								<select id="drpUser" name="" class="form-control">
+									<option value="All">@SystemResource.App_All</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.Job</label>
+							<div class="col-9 col-md-8 ">
+								<select id="drpTitle" name="" class="form-control"></select>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.process  </label>
+							<div class="col-9 col-md-8 ">
+								<select id="drpOpr" name="" class="form-control"></select>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.UpgOnYear</label>
+							<div class="col-9 col-md-8 ">
+								<select id="drpFinYear" name="" class="form-control"> 
+								</select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-12 col-md-4">
+						<div class="form-group row">
+							<label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_Status</label>
+							<div class="col-9 col-md-8 ">
+								<select id="drpstatus" name="" class="form-control">
+									<option value="All">@SystemResource.App_All</option>
+									<option value="1">@SystemResource.SuccessOpr</option>
+									<option value="0">@SystemResource.FailedOpr</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					    
+
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{ 
+    <script src="~/ClientApp/Tools/USERS/UserActLog.js"></script> 
+}
+
+
+
+
