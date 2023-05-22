@@ -229,6 +229,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<A_G_Vendor> A_G_Vendor { get; set; }
         public virtual DbSet<A_RecPay_Tr_ReceiptNote> A_RecPay_Tr_ReceiptNote { get; set; }
         public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
+        public virtual DbSet<A_LnkVoucher> A_LnkVoucher { get; set; }
+        public virtual DbSet<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
