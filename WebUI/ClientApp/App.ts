@@ -1638,6 +1638,7 @@ function WorningMessage(msg_Ar: string, msg_En: string, tit_ar: string = "تنب
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 
 function WorningMessageOnCancel(msg_Ar: string, msg_En: string, tit_ar: string = "تنبيه", tit_en: string = "Worning", OnCancel?: () => void) {

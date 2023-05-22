@@ -28,6 +28,7 @@ namespace Inv.DAL.Domain
     }
     public class SecurityandUpdateFlagClass
     {
+        public char FlagUpdate { get; set; }
         public char StatusFlag { get; set; }
         public string UserCode { get; set; }
         public string Token { get; set; } 

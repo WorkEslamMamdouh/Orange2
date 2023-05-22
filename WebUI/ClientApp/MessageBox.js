@@ -76,6 +76,10 @@ var MessageBox;
             if (OnCancel != null)
                 OnCancel();
         });
+        debugger;
+        setTimeout(function () {
+            $('#MessageBoxOk').focus();
+        }, 700);
     }
     MessageBox.Ask = Ask;
 })(MessageBox || (MessageBox = {}));

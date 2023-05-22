@@ -1284,6 +1284,7 @@ function WorningMessage(msg_Ar, msg_En, tit_ar, tit_en, OnOk) {
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 function WorningMessageOnCancel(msg_Ar, msg_En, tit_ar, tit_en, OnCancel) {
     if (tit_ar === void 0) { tit_ar = "تنبيه"; }
