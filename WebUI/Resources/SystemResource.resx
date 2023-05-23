@@ -2382,4 +2382,13 @@
   <data name="Zero_stock" xml:space="preserve">
     <value>Zero Stock</value>
   </data>
+  <data name="FailedOpr" xml:space="preserve">
+    <value>Failed Operation</value>
+  </data>
+  <data name="SuccessOpr" xml:space="preserve">
+    <value>Success Operation</value>
+  </data>
+  <data name="UpgOnYear" xml:space="preserve">
+    <value>Adjustments for the year</value>
+  </data>
 </root>

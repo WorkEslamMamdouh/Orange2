@@ -192,6 +192,28 @@
           <Property Name="AUTHORISED_BY" Type="nvarchar" MaxLength="20" />
           <Property Name="AUTHORISED_AT" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="A_LnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="bracode" Type="int" />
+          <Property Name="System_Code" Type="varchar" MaxLength="10" />
+          <Property Name="Tr_Code" Type="varchar" MaxLength="50" />
+          <Property Name="TrID" Type="bigint" />
+          <Property Name="TrNo" Type="bigint" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="Acc_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="Line_DescA" Type="nvarchar" MaxLength="300" />
+          <Property Name="Line_DescE" Type="nvarchar" MaxLength="300" />
+          <Property Name="Voucher_No" Type="int" />
+          <Property Name="SOURCE_TYPE" Type="int" />
+          <Property Name="TYPE_CODE" Type="int" />
+        </EntityType>
         <EntityType Name="A_Pay_D_Vendor">
           <Key>
             <PropertyRef Name="VendorID" />
@@ -3364,6 +3386,40 @@ warning 6002: The table/view 'Orange2021.dbo.AQ_GetJournalHeader' does not have 
           <Property Name="TotalDebit" Type="numeric" Precision="18" Scale="2" />
           <Property Name="TotalCredit" Type="numeric" Precision="18" Scale="2" />
           <Property Name="VoucherID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.AQ_GetLnkVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ_GetLnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="bracode" Type="int" />
+          <Property Name="System_Code" Type="varchar" MaxLength="10" />
+          <Property Name="Tr_Code" Type="varchar" MaxLength="50" />
+          <Property Name="TrID" Type="bigint" />
+          <Property Name="TrNo" Type="bigint" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="Acc_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="Line_DescA" Type="nvarchar" MaxLength="300" />
+          <Property Name="Line_DescE" Type="nvarchar" MaxLength="300" />
+          <Property Name="Voucher_No" Type="int" />
+          <Property Name="SOURCE_TYPE" Type="int" />
+          <Property Name="TYPE_CODE" Type="int" />
+          <Property Name="ACC_DESCA" Type="nvarchar" MaxLength="100" />
+          <Property Name="ACC_DESCL" Type="nvarchar" MaxLength="100" />
+          <Property Name="CC_DESCA" Type="nvarchar" MaxLength="100" />
+          <Property Name="CC_DESCE" Type="nvarchar" MaxLength="100" />
+          <Property Name="TR_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TR_DESCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="Src_DescA" Type="nvarchar" MaxLength="50" />
+          <Property Name="Src_DescE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TYPE_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TYPE_DESCE" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.AQ_GetVchrTemplateDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7762,6 +7818,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="A_G_Vendor" EntityType="Self.A_G_Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_DETAIL" EntityType="Self.A_JOURNAL_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_HEADER" EntityType="Self.A_JOURNAL_HEADER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_LnkVoucher" EntityType="Self.A_LnkVoucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Pay_D_Vendor" EntityType="Self.A_Pay_D_Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Pay_D_VendorDoc" EntityType="Self.A_Pay_D_VendorDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_PERIOD" EntityType="Self.A_PERIOD" Schema="dbo" store:Type="Tables" />
@@ -8068,6 +8125,37 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [AQ_GetJournalHeader].[TotalCredit] AS [TotalCredit], 
     [AQ_GetJournalHeader].[VoucherID] AS [VoucherID]
     FROM [dbo].[AQ_GetJournalHeader] AS [AQ_GetJournalHeader]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ_GetLnkVoucher" EntityType="Self.AQ_GetLnkVoucher" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AQ_GetLnkVoucher].[ID] AS [ID], 
+    [AQ_GetLnkVoucher].[CompCode] AS [CompCode], 
+    [AQ_GetLnkVoucher].[bracode] AS [bracode], 
+    [AQ_GetLnkVoucher].[System_Code] AS [System_Code], 
+    [AQ_GetLnkVoucher].[Tr_Code] AS [Tr_Code], 
+    [AQ_GetLnkVoucher].[TrID] AS [TrID], 
+    [AQ_GetLnkVoucher].[TrNo] AS [TrNo], 
+    [AQ_GetLnkVoucher].[Serial] AS [Serial], 
+    [AQ_GetLnkVoucher].[Acc_Code] AS [Acc_Code], 
+    [AQ_GetLnkVoucher].[Debit] AS [Debit], 
+    [AQ_GetLnkVoucher].[Credit] AS [Credit], 
+    [AQ_GetLnkVoucher].[CC_Code] AS [CC_Code], 
+    [AQ_GetLnkVoucher].[Line_DescA] AS [Line_DescA], 
+    [AQ_GetLnkVoucher].[Line_DescE] AS [Line_DescE], 
+    [AQ_GetLnkVoucher].[Voucher_No] AS [Voucher_No], 
+    [AQ_GetLnkVoucher].[SOURCE_TYPE] AS [SOURCE_TYPE], 
+    [AQ_GetLnkVoucher].[TYPE_CODE] AS [TYPE_CODE], 
+    [AQ_GetLnkVoucher].[ACC_DESCA] AS [ACC_DESCA], 
+    [AQ_GetLnkVoucher].[ACC_DESCL] AS [ACC_DESCL], 
+    [AQ_GetLnkVoucher].[CC_DESCA] AS [CC_DESCA], 
+    [AQ_GetLnkVoucher].[CC_DESCE] AS [CC_DESCE], 
+    [AQ_GetLnkVoucher].[TR_DESCA] AS [TR_DESCA], 
+    [AQ_GetLnkVoucher].[TR_DESCE] AS [TR_DESCE], 
+    [AQ_GetLnkVoucher].[Src_DescA] AS [Src_DescA], 
+    [AQ_GetLnkVoucher].[Src_DescE] AS [Src_DescE], 
+    [AQ_GetLnkVoucher].[TYPE_DESCA] AS [TYPE_DESCA], 
+    [AQ_GetLnkVoucher].[TYPE_DESCE] AS [TYPE_DESCE]
+    FROM [dbo].[AQ_GetLnkVoucher] AS [AQ_GetLnkVoucher]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="AQ_GetVchrTemplateDetail" EntityType="Self.AQ_GetVchrTemplateDetail" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -12302,6 +12390,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="OpStatus" Mode="In" Type="Int32" />
             <Parameter Name="opid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="A_LnkVoucher" EntityType="InvModel.A_LnkVoucher" />
+          <EntitySet Name="AQ_GetLnkVoucher" EntityType="InvModel.AQ_GetLnkVoucher" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -23208,6 +23298,60 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="Int32" Name="COMP_CODE" Nullable="true" />
           <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="false" MaxLength="10" />
         </ComplexType>
+        <EntityType Name="A_LnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="bracode" Type="Int32" />
+          <Property Name="System_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tr_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrID" Type="Int64" />
+          <Property Name="TrNo" Type="Int64" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="Acc_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescA" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher_No" Type="Int32" />
+          <Property Name="SOURCE_TYPE" Type="Int32" />
+          <Property Name="TYPE_CODE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AQ_GetLnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="bracode" Type="Int32" />
+          <Property Name="System_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tr_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrID" Type="Int64" />
+          <Property Name="TrNo" Type="Int64" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="Acc_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescA" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher_No" Type="Int32" />
+          <Property Name="SOURCE_TYPE" Type="Int32" />
+          <Property Name="TYPE_CODE" Type="Int32" />
+          <Property Name="ACC_DESCA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ACC_DESCL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CC_DESCA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CC_DESCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Src_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Src_DescE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -34546,6 +34690,62 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="A_LnkVoucher">
+            <EntityTypeMapping TypeName="InvModel.A_LnkVoucher">
+              <MappingFragment StoreEntitySet="A_LnkVoucher">
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ_GetLnkVoucher">
+            <EntityTypeMapping TypeName="InvModel.AQ_GetLnkVoucher">
+              <MappingFragment StoreEntitySet="AQ_GetLnkVoucher">
+                <ScalarProperty Name="TYPE_DESCE" ColumnName="TYPE_DESCE" />
+                <ScalarProperty Name="TYPE_DESCA" ColumnName="TYPE_DESCA" />
+                <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
+                <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
+                <ScalarProperty Name="CC_DESCA" ColumnName="CC_DESCA" />
+                <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+                <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

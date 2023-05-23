@@ -78,6 +78,7 @@ var Modules = {
     Accountbalances: "Accountbalances",
 
     USERS: "USERS",
+	UserActLog: "UserActLog",
     TranPosting: "TranPosting",
     LnkvarBranch: "LnkvarBranch",
     LnkTransVoucher: "LnkTransVoucher",
