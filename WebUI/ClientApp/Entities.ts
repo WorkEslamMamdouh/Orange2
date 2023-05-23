@@ -309,6 +309,7 @@ class ReportParameters {
     public Agtype: number;
     public typedata: number;
     public IssueTypeID: number;
+	public OprStatus: number;
 }
 
 class G_BRANCH extends SecurityClass {

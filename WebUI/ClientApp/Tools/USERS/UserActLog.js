@@ -37,10 +37,10 @@ var UserActLog;
         $("#btnPrintTrview").addClass("print-report");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(sys.SysSession.CurrentEnvironment.BranchCode);
-        Screen_name.innerHTML = lang == "ar" ? "فاتورة جزئية" : "Partial Invoice";
-        document.title = "Safe Student 1.0-" + (lang == "ar" ? "فاتورة جزئية" : "Partial Invoice");
-        txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
-        txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        Screen_name.innerHTML = lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report";
+        document.title = "Safe Student 1.0-" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");
+        txtFromDate.value = DateTimeFormat2(SysSession.CurrentEnvironment.StartDate);
+        txtToDate.value = DateTimeFormat2(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
         GetData_Header_loader();
     }
     UserActLog.InitalizeComponent = InitalizeComponent;
@@ -90,22 +90,12 @@ var UserActLog;
                 { NameTable: 'G_Codes', Condition: "CodeType = 'UserLog'" },
                 { NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
             ];
-        var listData = GetAllData(Table);
-        for (var i = 0; i < listData.length; i++) {
-            var Data_Table = listData[i];
-            if (i == 0) { //filldrpUser				 
-                DocumentActions.FillCombowithdefult(Data_Table, drpUser, "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 1) { //filldrpTitle
-                DocumentActions.FillCombowithdefult(Data_Table, drpTitle, "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 2) { //filldrpOperation
-                DocumentActions.FillCombowithdefult(Data_Table, drpOpr, "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 3) { //filldrpFinYear		 
-                DocumentActions.FillCombowithdefult(Data_Table, drpFinYear, "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"));
-            }
-        }
+        DataResult(Table);
+        debugger;
+        FillDrop(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"), "", "");
+        FillDrop(GetDataTable('G_MODULES'), "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "SysCode", "SYSTEM_CODE");
+        FillDrop(GetDataTable('G_Codes'), "drpOpr", "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
+        FillDrop(GetDataTable('G_CONTROL'), "drpFinYear", "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"), "", "");
     }
     /*----------------------------------------------------------------- Rep Func------------------------------------------------------------------ */
     function PrintReport(OutType) {
@@ -129,8 +119,27 @@ var UserActLog;
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
         rp.RepType = OutType;
+        //--------------------GroupType
+        if (repUser.checked) {
+            rp.Typ = 1;
+        }
+        else if (repTitle.checked) {
+            rp.Typ = 2;
+        }
+        else {
+            rp.Typ = 3;
+        }
+        debugger;
+        rp.FromDate = DateTimeFormatRep(txtFromDate.value);
+        rp.ToDate = DateTimeFormatRep(txtToDate.value);
+        rp.FinYear = drpFinYear.value == "Null" ? -1 : Number(drpFinYear.value);
+        rp.SysCode = drpTitle.value == "Null" ? "-1" : $('option:selected', $("#drpTitle")).attr('data-syscode');
+        rp.Module = drpTitle.value == "Null" ? "-1" : drpTitle.value;
+        rp.User_Code = drpUser.value == "Null" ? "-1" : drpUser.value;
+        rp.OperationId = drpOpr.value == "Null" ? -1 : Number(drpOpr.value);
+        rp.OprStatus = drpstatus.value == "Null" ? -1 : Number(drpstatus.value);
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_ItemStockDetail", "GeneralReports"),
+            url: Url.Action("Rep_UserActivityLog", "GeneralReports"),
             data: rp,
             success: function (d) {
                 var result = d.result;

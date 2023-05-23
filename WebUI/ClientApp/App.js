@@ -939,6 +939,31 @@ var DocumentActions = {
         return element;
     }
 };
+function FillDrop(Datasource, InputID, Value, TextField, DefaultText, Attrname, AttrValue) {
+    if (DefaultText === void 0) { DefaultText = ""; }
+    debugger;
+    $('#' + InputID + '').empty();
+    if (DefaultText != "No") {
+        if (DefaultText != "") {
+            $('#' + InputID + '').append("<option value=Null>" + DefaultText + "</option>");
+        }
+    }
+    if (Attrname != "") {
+        for (var i = 0; i < Datasource.length; i++) {
+            var Code = Datasource[i][Value];
+            var Text_1 = Datasource[i][TextField];
+            var attrval = Datasource[i][AttrValue];
+            $('#' + InputID + '').append("<option value=" + Code + " data-" + Attrname + "=" + attrval + " >" + Text_1 + "</option>");
+        }
+    }
+    else {
+        for (var i = 0; i < Datasource.length; i++) {
+            var Code = Datasource[i][Value];
+            var Text_2 = Datasource[i][TextField];
+            $('#' + InputID + '').append("<option value=" + Code + ">" + Text_2 + "</option>");
+        }
+    }
+}
 function DateFormatddmmyyyy(dateForm) {
     try {
         var date = new Date();
@@ -1047,6 +1072,37 @@ function GetVat(Nature, Prc, VatType) {
         Tax_Type_Model.Prc = 0;
         Tax_Type_Model.VatType = VatType;
         return Tax_Type_Model;
+    }
+}
+function DateTimeFormatRep(dateForm) {
+    try {
+        var date = new Date();
+        var myDate = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+        var yy = date.getFullYear();
+        var mm = (date.getMonth() + 1);
+        var dd = date.getDate();
+        var hh = (date.getHours());
+        var mn = (date.getMinutes());
+        var ss = (date.getSeconds());
+        var year = yy;
+        var month = (mm < 10) ? ("0" + mm.toString()) : mm.toString();
+        var day = (dd < 10) ? ("0" + dd.toString()) : dd.toString();
+        var hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        var Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        var Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+        var startDate = year + "-" + month + "-" + day + " " + hour + ":" + Minute + ":" + Second; //+ ":" + Second;
+        var form_date = startDate;
+        return form_date;
+    }
+    catch (e) {
+        return DateFormat((new Date()).toString());
     }
 }
 function DateTimeFormat2(dateForm) {
