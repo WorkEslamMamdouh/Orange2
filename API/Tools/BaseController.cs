@@ -252,8 +252,13 @@ namespace Inv.API.Tools
                    .SelectMany(x => x.GetTypes())
                    .FirstOrDefault(x => x.Name == "" + NameClass + "");
 
-            var res = db.Database.SqlQuery(type, query);
+            if (type == null)
+            {
+                List<object> NewObjClass = new List<object>();
+                return NewObjClass;
+            }
 
+            var res = db.Database.SqlQuery(type, query);
             string DataJson = JsonConvert.SerializeObject(res, Formatting.None);
 
             return GetObjectClass(DataJson, NameClass);
