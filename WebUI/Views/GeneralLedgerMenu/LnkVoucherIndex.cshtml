@@ -1,0 +1,425 @@
+﻿@using Inv.WebUI.Resources
+@{
+    ViewBag.Title = "PaymentIndex";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<style>
+
+    .showdiv {
+        display: none !important;
+    }
+
+</style>
+<div class="row gy-3 ">
+    <!-- Filter Container -->
+    <div class="col-12">
+        <div class="card bg-light-blue">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_BranchName</label>
+                                    <div class="col-9 col-md-10 ">
+                                        <select id="ddlBranch" class="form-control">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_FromDate</label>
+                            <div class="col-9 col-md-8">
+                                <input id="txtFromDate" name="" type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-8">
+                                <input id="txtToDate" name="" type="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.fromnum</label>
+                            <div class="col-9 col-md-8 ">
+                                <input id="txtFromNumber" name="" type="number" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.tonum</label>
+                            <div class="col-9 col-md-8 ">
+                                <input id="txtToNumber" name="" type="number" class="form-control ">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Container -->
+    <div class="col-12">
+        <!-- Search Table -->
+        <div class="display_none" id="divGridShow">
+            <div class="card bg-light-blue">
+                <div class="card-body">
+                    <div class="form-group row col-lg-6 col-md-8 col-12 mb-2">
+                        <label class="col-4 col-lg-2 col-md-2 align-self-center p-md-0">بحث</label>
+                        <div class="col-8 col-lg-8 col-md-10">
+                            <input id="txtSearch" name="" type="text" class="form-control" placeholder=" @SystemResource.Search ">
+                        </div>
+                    </div>
+                    <!-- Table  -->
+                    <table id="divGridDetails"></table>
+                </div>
+                <div class="d-flex justify-content-center text-blue text-center fw-bold mb-3">
+                    @SystemResource.App_DoubleDisplay
+                </div>
+            </div>
+        </div>
+        <!-- Restriction form  -->
+        <div class="card bg-light-blue display_none mt-2" id="divTempHeader">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <label id="div_contentliest" class="text-blue fs-6 fw-bold">
+                            <span id="spandiv_contentliest"></span>
+                            @SystemResource.Restriction_form
+                        </label>
+                    </div>
+                    <div class="col-12 service-content showdiv" id="DivTemplate">
+                        <div class="serviceBox  " id="divTemplateData">
+                            <div class="row g-0 ">
+                                @* Screen Button *@
+                                <div class="d-flex justify-content-start mb-2">
+                                    <div class="">
+                                        <button id="btnCreateTemplate" type="button" class="btn btn-main me-3  ">
+                                            @SystemResource.Create_form
+                                        </button>
+                                        <button id="btnDeleteTemplate" type="button" class="btn btn-main me-3  ">
+                                            @SystemResource.Delete_form
+                                        </button>
+                                        <button id="btnEditTemplate" type="button" class="btn btn-main me-3  ">
+                                            @SystemResource.Modify_form
+                                        </button>
+                                        <button id="btnLoadTemplate" type="button" class="btn btn-main  ">
+                                            @SystemResource.Download_form
+                                        </button>
+                                    </div>
+                                    @* Screen Button Controll *@
+                                    <div class="ms-auto">
+                                        <button id="btnBackTemp" type="button" class="btn btn-main me-3 ">
+                                            @SystemResource.App_back
+                                        </button>
+                                        <button id="btnSaveTemp" type="button" class="btn btn-main ">
+                                            @SystemResource.App_save
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Form_name  </label>
+                                        <div class="col-8">
+                                            <input id="txtTempName" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row g-0">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.Form_num  </label>
+                                        <div class="col-8">
+                                            <input id="txtTempNumber" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="form-check d-inline-flex">
+                                        <input type="radio" class="form-check-input form-radio" id="rdSaveValue" name="rd" checked>
+                                        <label class="form-check-label label-radio" for="reptp1"> @SystemResource.Save_vale </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <div class="form-check d-inline-flex">
+                                        <input type="radio" class="form-check-input form-radio" id="rdSaveDesc" name="rd">
+                                        <label class="form-check-label label-radio" for="reptp1"> @SystemResource.Save_desc </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Details  -->
+        <div class="row">
+            <div class="col-12 service-content">
+                <div class="serviceBox">
+                    <div class="row g-0 display_none" id="divJournalDetail">
+                        <div class="col-12" id="div_BasicData">
+                            <div class="row g-0">
+                                @* Screen Button *@
+                                <div class="d-flex justify-content-start mb-2">
+                                    <button id="btnUnAuthorize" type="button" class="btn btn-main me-3 ">
+                                        @SystemResource.Decode_adoption
+                                    </button>
+                                    <button id="btnAuthorize" type="button" class="btn btn-main me-3 ">
+                                        @SystemResource.App_approved
+                                    </button>
+                                    <button id="btnPost" type="button" style="display:none" class="btn btn-main me-3 display_none">
+                                        @SystemResource.relay
+                                    </button>
+                                    <button id="btnReverseVoucher" type="button" class="btn btn-main me-3">
+                                        @SystemResource.opposite_current_restriction
+                                    </button>
+                                </div>
+                                @* Details *@
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Number  </label>
+                                        <div class="col-8">
+                                            <input id="txtJouranlNumber" name="" disabled type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_date  </label>
+                                        <div class="col-8">
+                                            <input id="txtJouranlDate" name="" disabled type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Type  </label>
+                                        <div class="col-8">
+                                            <select id="ddlJournalType" name="" disabled type="text" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-3">
+                                    <div class="row">
+                                        <div class="form-group col-4 col-md-2">
+                                            <label class="align-self-center p-md-0 text-blue fw-bold"> @SystemResource.App_Status</label>
+
+                                        </div>
+                                        <div class="form-group col-8 col-md-10 mt-n3">
+                                            <div class="row">
+                                                <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                    <div class="form-check d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdNew" checked>
+                                                        <label class="form-check-label my-auto me-3" for="reptp1"> @SystemResource.App_new </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-n3 mb-xl-0 col-xl-4">
+                                                    <div class="form-check  d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdAuthorized">
+                                                        <label class="form-check-label my-auto me-3" for="reptp2"> @SystemResource.Certified</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12  col-xl-4">
+                                                    <div class="form-check d-inline-flex">
+                                                        <input class="form-check-input form-radio special-radio" type="radio" id="rdPosted">
+                                                        <label class="form-check-label my-auto me-3" for="reptp3"> @SystemResource.deported</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-5">
+                                    <div class="form-group row">
+                                        <label class="col-4 col-md-2 align-self-center p-md-0"> @SystemResource.App_desc  </label>
+                                        <div class="col-8 col-md-10">
+                                            <textarea id="txtJournalDescripton" name="" disabled type="text" class="form-control  h-100"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-1">
+                                    <div class="form-group row">
+                                        <button id="btnCopyRemark" type="button" class="btn btn-main me-3">
+                                            نسخ الوصف في الملاحظات الجدول
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.refTrTransNo  </label>
+                                        <div class="col-8">
+                                            <input id="txtRefNumber" name="" disabled type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0"> @SystemResource.source  </label>
+                                        <div class="col-8">
+                                            <input id="txtResource" name="" disabled type="text" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Inside Table  -->
+                                <div class="inside-table my-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless " style="width:140%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="3%"></th>
+                                                    <th></th>
+                                                    <th class="cursor-pointer text-right" id="divAccNumber">@SystemResource.p_account_number <i class="fas fa-arrows-alt-h"></i></th>
+                                                    <th class="Acc">@SystemResource.SHT_Name</th>
+                                                    <th>@SystemResource.App_Debtor</th>
+                                                    <th>@SystemResource.App_Creditor</th>
+                                                    <th></th>
+                                                    <th class="cursor-pointer" id="divCostCnterName">@SystemResource.menu_Costcenter <i class="fas fa-arrows-alt-h"></i></th>
+                                                    <th class="costcntr">@SystemResource.SHT_Name</th>
+                                                    <th class="display_none"></th>
+                                                    <th class="cursor-pointer display_none" id="divCostCnterNameCCDT">@SystemResource.BU <i class="fas fa-arrows-alt-h"></i></th>
+                                                    <th class="display_none costcntrCCDt">@SystemResource.SHT_Name</th>
+                                                    <th>@SystemResource.App_Notes</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="div_Data"></tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th width="5%"> <span id="btnAddDetails" class="mb-3"><i class="fas fa-plus-circle fs-2 btn-plus"></i></span></th>
+                                                    <th></th>
+                                                    <th class="Acc"></th>
+                                                    <th>
+                                                        <label class="text-blue"> @SystemResource.App_total  </label>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group">
+                                                            <input id="txtTotalDebit" name="" disabled type="text" class="form-control" />
+                                                        </div>
+                                                    </th>
+                                                    <th>
+                                                        <div class="form-group">
+                                                            <input id="txtTotalCredit" name="" disabled type="text" class="form-control" />
+                                                        </div>
+                                                    </th>
+                                                    <th><label class="text-blue"> @SystemResource.Itm_Diff  </label></th>
+                                                    <th>
+                                                        <div class="form-group">
+                                                            <input id="txtDifference" name="" disabled type="text" class="form-control" />
+                                                        </div>
+                                                    </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="row">
+                                            <div class="col-12 col-md-" id="divAccountNameFooter">
+                                                <div class="form-group row g-0">
+                                                    <label class="col-2 align-self-center p-md-0"> @SystemResource.p_account_number  </label>
+                                                    <div class="col-10">
+                                                        <input id="txtAccountNameFooter" name="" value="" disabled type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12" id="divCostCntrNameFooter">
+                                                <div class="form-group row g-0">
+                                                    <label class="col-2 align-self-center p-md-0"> @SystemResource.menu_Costcenter  </label>
+                                                    <div class="col-10">
+                                                        <input id="txtCostCntrNameFooter" name="" value="" disabled type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Editors Details -->
+                                <div class="insettext row editor-details mt-2">
+                                    <div class="col-12 col-lg-6">
+
+                                        <div class="form-group row g-0">
+                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
+                                            <div class="col-4 col-xl-4 editor-input">
+                                                <input id="txtCreatedBy" class="_dis" name="CREATED_BY" type="text" disabled>
+                                            </div>
+                                            <div class="col-4 col-xl-6 editor-input">
+                                                <input id="txtCreatedAt" class="_dis" name="CREATED_AT" type="text" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
+                                            <div class="col-4 col-xl-4  editor-input">
+                                                <input id="txtUpdatedBy" class="_dis" name="UPDATED_BY" type="text" disabled>
+                                            </div>
+                                            <div class="col-4 col-xl-6 editor-input">
+
+                                                <input id="txtUpdatedAt" class="_dis" name="UPDATED_AT" type="text" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Editors Details -->
+                                <div class="insettext row editor-details mt-2">
+                                    <div class="col-12 col-lg-6">
+
+                                        <div class="form-group row g-0">
+                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.confirmation</label>
+                                            <div class="col-4 col-xl-4 editor-input">
+                                                <input id="txtAuthorizedBy" class="_dis" name="CREATED_BY" type="text" disabled>
+                                            </div>
+                                            <div class="col-4 col-xl-6 editor-input">
+                                                <input id="txtAuthorizedAt" class="_dis" name="CREATED_AT" type="text" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="form-group row g-0">
+                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.relay</label>
+                                            <div class="col-4 col-xl-4  editor-input">
+                                                <input id="txtPostedBy" class="_dis" name="UPDATED_BY" type="text" disabled>
+                                            </div>
+                                            <div class="col-4 col-xl-6 editor-input">
+                                                <input id="txtPostedAt" class="_dis" name="UPDATED_AT" type="text" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script{ 
+    <script src="~/ClientApp/GeneralLedger/LnkVoucher.js"></script>
+}
+

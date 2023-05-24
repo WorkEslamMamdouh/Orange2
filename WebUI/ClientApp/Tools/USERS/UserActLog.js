@@ -90,22 +90,11 @@ var UserActLog;
                 { NameTable: 'G_Codes', Condition: "CodeType = 'UserLog'" },
                 { NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
             ];
-        var listData = GetAllData(Table);
-        for (var i = 0; i < listData.length; i++) {
-            var Data_Table = listData[i];
-            if (i == 0) { //filldrpUser				 
-                DocumentActions.FillCombowithdefult(Data_Table, drpUser, "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 1) { //filldrpTitle
-                DocumentActions.FillCombowithdefult(Data_Table, drpTitle, "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 2) { //filldrpOperation
-                DocumentActions.FillCombowithdefult(Data_Table, drpOpr, "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"));
-            }
-            if (i == 3) { //filldrpFinYear		 
-                DocumentActions.FillCombowithdefult(Data_Table, drpFinYear, "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"));
-            }
-        }
+        DataResult(Table);
+        DocumentActions.FillCombowithdefult(GetDataTable('G_USERS'), drpUser, "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"));
+        DocumentActions.FillCombowithdefult(GetDataTable('G_MODULES'), drpTitle, "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"));
+        DocumentActions.FillCombowithdefult(GetDataTable('G_Codes'), drpOpr, "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"));
+        DocumentActions.FillCombowithdefult(GetDataTable('G_CONTROL'), drpFinYear, "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"));
     }
     /*----------------------------------------------------------------- Rep Func------------------------------------------------------------------ */
     function PrintReport(OutType) {

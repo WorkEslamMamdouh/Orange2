@@ -69,6 +69,7 @@ var Modules = {
 
     Dashboard: "Dashboard",
 
+    LnkVoucher: "LnkVoucher",
     JournalVoucher: "JournalVoucher",
     ReceiptVoucher: "ReceiptVoucher",
     PaymentVoucher: "PaymentVoucher",

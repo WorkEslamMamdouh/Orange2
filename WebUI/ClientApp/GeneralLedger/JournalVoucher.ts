@@ -2389,6 +2389,7 @@ namespace JournalVoucher {
 
             JournalDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             JournalDetailSingleModel.StatusFlag = StatusFlag.toString();
+            JournalDetailSingleModel.FlagUpdate ='T';
 
 
             if (StatusFlag == "i") {
