@@ -686,6 +686,7 @@ namespace HomeComponent {
         $("#btnIssueType").click(() => { newtap = false; OpenPage(Modules.IssueType); })//
         $("#btnIssueToCC").click(() => { newtap = false; OpenPage(Modules.IssueToCC); })// 
         $("#btnGLDefAccount").click(() => { newtap = false; OpenPage(Modules.GLDefAccount); })//
+        $("#btnLnkVoucher").click(() => { newtap = false; OpenPage(Modules.LnkVoucher); })
         $("#btnJournalVoucher").click(() => { newtap = false; OpenPage(Modules.JournalVoucher); })
         $("#btnReceiptVoucher").click(() => { newtap = false; OpenPage(Modules.ReceiptVoucher); })
         $("#btnPaymentVoucher").click(() => { newtap = false; OpenPage(Modules.PaymentVoucher); })
@@ -790,6 +791,7 @@ namespace HomeComponent {
         $("#btnIssueTypeT").click(() => { newtap = true; OpenPage(Modules.IssueType); })//
         $("#btnIssueToCCT").click(() => { newtap = true; OpenPage(Modules.IssueToCC); })// 
         $("#btnGLDefAccountT").click(() => { newtap = true; OpenPage(Modules.GLDefAccount); })//
+        $("#btnLnkVoucherT").click(() => { newtap = true; OpenPage(Modules.LnkVoucher); })
         $("#btnJournalVoucherT").click(() => { newtap = true; OpenPage(Modules.JournalVoucher); })
         $("#btnReceiptVoucherT").click(() => { newtap = true; OpenPage(Modules.ReceiptVoucher); })
         $("#btnPaymentVoucherT").click(() => { newtap = true; OpenPage(Modules.PaymentVoucher); })

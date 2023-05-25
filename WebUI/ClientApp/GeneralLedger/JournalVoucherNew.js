@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    JournalVoucher.InitalizeComponent();
+    JournalVoucherNew.InitalizeComponent();
 });
-var JournalVoucher;
-(function (JournalVoucher) {
+var JournalVoucherNew;
+(function (JournalVoucherNew) {
     //System
     var sys = new SystemTools();
     var SysSession = GetSystemSession(Modules.JournalVoucher);
@@ -148,7 +148,7 @@ var JournalVoucher;
         InitalizeEvents();
         InitializeGrid();
     }
-    JournalVoucher.InitalizeComponent = InitalizeComponent;
+    JournalVoucherNew.InitalizeComponent = InitalizeComponent;
     //------------------------------------------------------ Main Region -----------------------------------
     function InitalizeControls() {
         //textboxs
@@ -1968,7 +1968,6 @@ var JournalVoucher;
             }
             JournalDetailSingleModel.COMP_CODE = Number(SysSession.CurrentEnvironment.CompCode);
             JournalDetailSingleModel.StatusFlag = StatusFlag.toString();
-            JournalDetailSingleModel.FlagUpdate = 'T';
             if (StatusFlag == "i") {
                 JournalDetailSingleModel.VoucherDetailID = 0;
                 JournalDetailSingleModel.VOUCHER_SERIAL = $("#txtSerial" + i).val();
@@ -2887,5 +2886,5 @@ var JournalVoucher;
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
         PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
     }
-})(JournalVoucher || (JournalVoucher = {}));
-//# sourceMappingURL=JournalVoucher.js.map
+})(JournalVoucherNew || (JournalVoucherNew = {}));
+//# sourceMappingURL=JournalVoucherNew.js.map
