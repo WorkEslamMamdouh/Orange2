@@ -6492,6 +6492,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="GrpType" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
           <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToTime" Type="nvarchar" Mode="In" />
           <Parameter Name="finYear" Type="int" Mode="In" />
           <Parameter Name="sys" Type="nvarchar" Mode="In" />
           <Parameter Name="module" Type="nvarchar" Mode="In" />
@@ -12382,25 +12384,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="CashType" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GProc_Rep_UserActivityLog" ReturnType="Collection(InvModel.GProc_Rep_UserActivityLog_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="GrpType" Mode="In" Type="Int32" />
-            <Parameter Name="FromDate" Mode="In" Type="String" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
-            <Parameter Name="finYear" Mode="In" Type="Int32" />
-            <Parameter Name="sys" Mode="In" Type="String" />
-            <Parameter Name="module" Mode="In" Type="String" />
-            <Parameter Name="usr" Mode="In" Type="String" />
-            <Parameter Name="OpStatus" Mode="In" Type="Int32" />
-            <Parameter Name="opid" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="A_LnkVoucher" EntityType="InvModel.A_LnkVoucher" />
           <EntitySet Name="AQ_GetLnkVoucher" EntityType="InvModel.AQ_GetLnkVoucher" />
           <FunctionImport Name="AProc_LnkGenerateTrans" ReturnType="Collection(InvModel.AProc_LnkGenerateTrans_Result)">
@@ -12413,6 +12396,27 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="ToDate" Mode="In" Type="String" />
             <Parameter Name="Fromno" Mode="In" Type="Int32" />
             <Parameter Name="ToNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GProc_Rep_UserActivityLog" ReturnType="Collection(InvModel.GProc_Rep_UserActivityLog_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="GrpType" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="FromTime" Mode="In" Type="String" />
+            <Parameter Name="ToTime" Mode="In" Type="String" />
+            <Parameter Name="finYear" Mode="In" Type="Int32" />
+            <Parameter Name="sys" Mode="In" Type="String" />
+            <Parameter Name="module" Mode="In" Type="String" />
+            <Parameter Name="usr" Mode="In" Type="String" />
+            <Parameter Name="OpStatus" Mode="In" Type="Int32" />
+            <Parameter Name="opid" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -23281,45 +23285,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="ChargeInvoiceNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CC_Code" Nullable="true" MaxLength="25" />
         </ComplexType>
-        <ComplexType Name="GProc_Rep_UserActivityLog_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_OprDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_OprDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_ModuleDsA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_ModuleDsE" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="Par_FinYear" Nullable="true" />
-          <Property Type="String" Name="Par_SystemCode" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="USER_CODE" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="USER_ACTIVE" Nullable="false" />
-          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="16" />
-          <Property Type="DateTime" Name="FirstLogin" Nullable="true" Precision="16" />
-          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="5" />
-          <Property Type="Int32" Name="BranchCode" Nullable="true" />
-          <Property Type="Int16" Name="FinYear" Nullable="true" />
-          <Property Type="String" Name="MODULE_CODE" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="DescA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="DescE" Nullable="true" MaxLength="50" />
-          <Property Type="Int64" Name="DataID" Nullable="true" />
-          <Property Type="Boolean" Name="ISSucceed" Nullable="true" />
-          <Property Type="String" Name="ExtraData" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="COMP_CODE" Nullable="true" />
-          <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="false" MaxLength="10" />
-        </ComplexType>
         <EntityType Name="A_LnkVoucher">
           <Key>
             <PropertyRef Name="ID" />
@@ -23394,6 +23359,49 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="VOUCHER_DESCA" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="VOUCHER_DESCE" Nullable="true" MaxLength="200" />
           <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GProc_Rep_UserActivityLog_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OprDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OprDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ModuleDsA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ModuleDsE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Par_FinYear" Nullable="true" />
+          <Property Type="String" Name="Par_SystemCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_userCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_FromTime" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Par_ToTime" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="USER_CODE" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="USER_ACTIVE" Nullable="false" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FirstLogin" Nullable="true" Precision="16" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int16" Name="FinYear" Nullable="true" />
+          <Property Type="String" Name="MODULE_CODE" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescE" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="DataID" Nullable="true" />
+          <Property Type="Boolean" Name="ISSucceed" Nullable="true" />
+          <Property Type="String" Name="ExtraData" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="COMP_CODE" Nullable="true" />
+          <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="LogDateTime" Nullable="true" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -34690,49 +34698,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GProc_Rep_UserActivityLog" FunctionName="InvModel.Store.GProc_Rep_UserActivityLog">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.GProc_Rep_UserActivityLog_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
-                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
-                <ScalarProperty Name="Par_OprDSA" ColumnName="Par_OprDSA" />
-                <ScalarProperty Name="Par_OprDSE" ColumnName="Par_OprDSE" />
-                <ScalarProperty Name="Par_ModuleDsA" ColumnName="Par_ModuleDsA" />
-                <ScalarProperty Name="Par_ModuleDsE" ColumnName="Par_ModuleDsE" />
-                <ScalarProperty Name="Par_FinYear" ColumnName="Par_FinYear" />
-                <ScalarProperty Name="Par_SystemCode" ColumnName="Par_SystemCode" />
-                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
-                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
-                <ScalarProperty Name="USER_ACTIVE" ColumnName="USER_ACTIVE" />
-                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
-                <ScalarProperty Name="FirstLogin" ColumnName="FirstLogin" />
-                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
-                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
-                <ScalarProperty Name="FinYear" ColumnName="FinYear" />
-                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
-                <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
-                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
-                <ScalarProperty Name="DescA" ColumnName="DescA" />
-                <ScalarProperty Name="DescE" ColumnName="DescE" />
-                <ScalarProperty Name="DataID" ColumnName="DataID" />
-                <ScalarProperty Name="ISSucceed" ColumnName="ISSucceed" />
-                <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
-                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
-                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="A_LnkVoucher">
             <EntityTypeMapping TypeName="InvModel.A_LnkVoucher">
               <MappingFragment StoreEntitySet="A_LnkVoucher">
@@ -34811,6 +34776,53 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="VOUCHER_DESCA" ColumnName="VOUCHER_DESCA" />
                 <ScalarProperty Name="VOUCHER_DESCE" ColumnName="VOUCHER_DESCE" />
                 <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GProc_Rep_UserActivityLog" FunctionName="InvModel.Store.GProc_Rep_UserActivityLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.GProc_Rep_UserActivityLog_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_OprDSA" ColumnName="Par_OprDSA" />
+                <ScalarProperty Name="Par_OprDSE" ColumnName="Par_OprDSE" />
+                <ScalarProperty Name="Par_ModuleDsA" ColumnName="Par_ModuleDsA" />
+                <ScalarProperty Name="Par_ModuleDsE" ColumnName="Par_ModuleDsE" />
+                <ScalarProperty Name="Par_FinYear" ColumnName="Par_FinYear" />
+                <ScalarProperty Name="Par_SystemCode" ColumnName="Par_SystemCode" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_userCode" ColumnName="Par_userCode" />
+                <ScalarProperty Name="Par_FromTime" ColumnName="Par_FromTime" />
+                <ScalarProperty Name="Par_ToTime" ColumnName="Par_ToTime" />
+                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_ACTIVE" ColumnName="USER_ACTIVE" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="FirstLogin" ColumnName="FirstLogin" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="FinYear" ColumnName="FinYear" />
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="DescA" ColumnName="DescA" />
+                <ScalarProperty Name="DescE" ColumnName="DescE" />
+                <ScalarProperty Name="DataID" ColumnName="DataID" />
+                <ScalarProperty Name="ISSucceed" ColumnName="ISSucceed" />
+                <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

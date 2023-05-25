@@ -50,6 +50,21 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
+        public IHttpActionResult LoadLnkVouchTransactions(int Comp, int branchCode, string TrType, string StartDate, string EndDate, int? FromNum, int? ToNum, string UserCode, string Token, string Modules, string FinYear)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+
+                var Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+
+                return Ok(new BaseResponse(Arrays));
+            }
+            return BadRequest(ModelState);
+        }
+
+
+        [HttpGet, AllowAnonymous]
         public IHttpActionResult LoadTransactions(int Comp, int branchCode, string TrType, string StartDate, string EndDate, int? FromNum, int? ToNum, string UserCode, string Token, string Modules, string FinYear)
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))

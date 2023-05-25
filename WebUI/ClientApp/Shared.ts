@@ -421,11 +421,13 @@ function GetSystemSession(Mod: string): SystemSession {
                         if (!result.EDIT) {
                             $('#btnUpdate').addClass('hidden_Control');
                         }
-
+                        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
                     }
                     else {
                         MessageBox.Show("No Inv1_Privilage", Mod);
                     }
+                    
+                    
                 }
             });
         }
