@@ -32,6 +32,9 @@ namespace Inv.DAL.Domain
         public string Par_SystemCode { get; set; }
         public string Par_FromDate { get; set; }
         public string Par_Todate { get; set; }
+        public string Par_userCode { get; set; }
+        public string Par_FromTime { get; set; }
+        public string Par_ToTime { get; set; }
         public string USER_CODE { get; set; }
         public string USER_NAME { get; set; }
         public bool USER_ACTIVE { get; set; }
@@ -50,5 +53,6 @@ namespace Inv.DAL.Domain
         public string ExtraData { get; set; }
         public Nullable<int> COMP_CODE { get; set; }
         public string SUB_SYSTEM_CODE { get; set; }
+        public Nullable<System.DateTime> LogDateTime { get; set; }
     }
 }
