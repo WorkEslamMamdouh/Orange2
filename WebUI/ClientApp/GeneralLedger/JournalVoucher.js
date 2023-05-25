@@ -596,6 +596,7 @@ var JournalVoucher;
             $('#Loading_Div').html('');
         }, 1);
         // جديد
+        debugger;
         if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
             rdNew.checked = true;
             $("#btnUnAuthorize").addClass("display_none");
@@ -893,6 +894,16 @@ var JournalVoucher;
         txtTotalCredit.disabled = true;
         txtTotalDebit.disabled = true;
         txtDifference.disabled = true;
+        try {
+            if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
+                btnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+            }
+            if (SelectedJournalModel[0].VOUCHER_STATUS == 1) {
+                btnUnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM3;
+            }
+        }
+        catch (e) {
+        }
     }
     function HideButtons() {
         $("#btnReverseVoucher").addClass("display_none");

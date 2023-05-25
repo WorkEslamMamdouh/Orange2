@@ -6738,6 +6738,30 @@ var IQ_GetCollectList = /** @class */ (function () {
     }
     return IQ_GetCollectList;
 }());
+var AProc_LnkGenerateTrans_Result = /** @class */ (function () {
+    function AProc_LnkGenerateTrans_Result() {
+        this.TRID = 0;
+        this.TR_CODE = '';
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = '';
+        this.SUB_SYSTEM_CODE = "";
+        this.VOUCHER_CODE = 0;
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = '';
+        this.TR_NO = 0;
+        this.TR_TYPE = '';
+        this.TR_DATE = '';
+        this.TR_AMOUNT = 0;
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.TR_USER_CODE = "";
+        this.VOUCHER_DESCA = "";
+        this.VOUCHER_DESCE = "";
+        this.IsPosted = false;
+    }
+    return AProc_LnkGenerateTrans_Result;
+}());
 var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";
