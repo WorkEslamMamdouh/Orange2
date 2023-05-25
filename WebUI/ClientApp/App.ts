@@ -68,7 +68,7 @@ var Modules = {
 	IssueToCC: "IssueToCC",
 
 	Dashboard: "Dashboard",
-
+	LnkVoucher: "LnkVoucher",
 	JournalVoucher: "JournalVoucher",
 	ReceiptVoucher: "ReceiptVoucher",
 	PaymentVoucher: "PaymentVoucher",

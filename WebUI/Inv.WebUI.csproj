@@ -22,10 +22,14 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1577,6 +1581,7 @@
     <Content Include="Views\FundMovement\AccTrReceiptNoteNewIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrPaymentNoteNewIndex.cshtml" />
     <Content Include="Views\Tools\USERS\UserActLogIndex.cshtml" />
+    <Content Include="Views\GeneralLedgerMenu\LnkVoucherIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1631,6 +1636,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrPaymentNoteNew.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrReceiptNoteNew.ts" />
+    <TypeScriptCompile Include="ClientApp\GeneralLedger\LnkVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />

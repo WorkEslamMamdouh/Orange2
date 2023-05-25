@@ -219,8 +219,8 @@ var AccTrPaymentNoteNew;
             [
                 { NameTable: 'A_RecPay_D_CashBox', Condition: " CompCode = " + CompCode + " " },
                 { NameTable: 'G_Codes', Condition: "" },
-                { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = 4 and ACC_TYPE = 3 and DETAIL = 1 " },
-                { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = 4 and TYPE = 1" },
+                { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " and ACC_TYPE = 3 and DETAIL = 1 " },
+                { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
                 { NameTable: 'A_G_Vendor', Condition: "" },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ];

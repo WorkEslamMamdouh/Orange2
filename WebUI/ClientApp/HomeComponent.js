@@ -583,6 +583,7 @@ var HomeComponent;
         $("#btnIssueType").click(function () { newtap = false; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCC").click(function () { newtap = false; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccount").click(function () { newtap = false; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucher").click(function () { newtap = false; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucher").click(function () { newtap = false; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucher").click(function () { newtap = false; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucher").click(function () { newtap = false; OpenPage(Modules.PaymentVoucher); });
@@ -683,6 +684,7 @@ var HomeComponent;
         $("#btnIssueTypeT").click(function () { newtap = true; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCCT").click(function () { newtap = true; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccountT").click(function () { newtap = true; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucherT").click(function () { newtap = true; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucherT").click(function () { newtap = true; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucherT").click(function () { newtap = true; OpenPage(Modules.PaymentVoucher); });

@@ -465,6 +465,13 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/GeneralLedgerMenu/GLDefAccountIndex.cshtml");
         }
+
+        public ActionResult LnkVoucherIndex()
+        {
+            return View("~/Views/GeneralLedgerMenu/LnkVoucherIndex.cshtml");
+
+        }
+
         public ActionResult JournalVoucherIndex()
         {
             return View("~/Views/GeneralLedgerMenu/JournalVoucherIndex.cshtml");
