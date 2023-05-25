@@ -1754,6 +1754,8 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("Typ", rp.Typ); 
             rep.AddParameter("FromDate", rp.FromDate); 
             rep.AddParameter("ToDate", rp.ToDate); 
+            rep.AddParameter("FromTime", rp.FromTime); 
+            rep.AddParameter("ToTime", rp.ToTime); 
             rep.AddParameter("FinYear", rp.FinYear); 
             rep.AddParameter("SysCode", rp.SysCode); 
             rep.AddParameter("Module", rp.Module); 

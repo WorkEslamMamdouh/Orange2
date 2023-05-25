@@ -142,7 +142,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Job Title</Value>
+                              <Value>Module</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -210,7 +210,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Statement</Value>
+                              <Value>Tr Ref.</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -376,14 +376,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox69">
+                    <Textbox Name="MODULE_DESCE">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=First(Fields!MODULE_DESCE.Value, "Rep_UserActivityLogByDateEn")</Value>
+                              <Value>=Fields!MODULE_DESCE.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -392,7 +392,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox69</rd:DefaultName>
+                      <rd:DefaultName>MODULE_DESCE</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1094,39 +1094,6 @@
             <Style>Solid</Style>
             <Width>1pt</Width>
           </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox35">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.8948cm</Top>
-        <Left>6.84664cm</Left>
-        <Height>0.6cm</Height>
-        <Width>12.67441cm</Width>
-        <ZIndex>15</ZIndex>
-        <Style>
-          <Border>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>

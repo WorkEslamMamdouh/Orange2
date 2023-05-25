@@ -6065,6 +6065,12 @@ namespace RS.WebUI.Reports.Forms
             string ToDate = RepPar.ToDate;
             SqlParameter spToDate = new SqlParameter("@ToDate", ToDate);
 
+            string FromTime = RepPar.FromTime;
+            SqlParameter spFromTime = new SqlParameter("@FromTime", FromTime);
+
+            string ToTime = RepPar.ToTime;
+            SqlParameter spToTime = new SqlParameter("@ToTime", ToTime);
+
             int FinYear =RepPar.FinYear;
             SqlParameter spFinYear = new SqlParameter("@FinYear", FinYear == -1 ? System.Data.SqlTypes.SqlInt32.Null : FinYear);
 
@@ -6114,6 +6120,8 @@ namespace RS.WebUI.Reports.Forms
            ",  @GrpType= " + spTyp.Value +
            ",  @FromDate = '" + spFromDate.Value +
            "', @ToDate= '" + spToDate.Value +
+           "', @FromTime '" + spFromTime.Value +
+           "', @ToTime= '" + spToTime.Value +
            "', @finYear= " + spFinYear.Value +
            ",  @sys = '" + spSysCode.Value +
            "', @module= '" + spModule.Value +

@@ -303,6 +303,8 @@ class ReportParameters {
     public ItemTypeID: number;
 
 
+	public FromTime: string;
+	public ToTime: string;
     public DocPDFFolder: string;
     public BankCode: string;
     public orderby: number;

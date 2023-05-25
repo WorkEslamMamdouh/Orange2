@@ -2391,4 +2391,10 @@
   <data name="UpgOnYear" xml:space="preserve">
     <value>Adjustments for the year</value>
   </data>
+  <data name="FromTime" xml:space="preserve">
+    <value>From Time</value>
+  </data>
+  <data name="ToTime" xml:space="preserve">
+    <value>To Time</value>
+  </data>
 </root>

@@ -1004,7 +1004,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Job Title</Value>
+                              <Value>Module</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1123,7 +1123,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Statement</Value>
+                              <Value>Tr Ref.</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1486,7 +1486,7 @@
         <Top>2.66912cm</Top>
         <Left>0cm</Left>
         <Height>1.8cm</Height>
-        <Width>20.01757cm</Width>
+        <Width>20.0176cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1531,7 +1531,7 @@
     <Height>4.56641cm</Height>
     <Style />
   </Body>
-  <Width>20.01757cm</Width>
+  <Width>20.0176cm</Width>
   <Page>
     <PageHeader>
       <Height>2.1285cm</Height>

@@ -1178,13 +1178,156 @@
   <Width>20.00563cm</Width>
   <Page>
     <PageHeader>
-      <Height>2.54cm</Height>
+      <Height>2.28725cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Rectangle Name="Rectangle1">
+        <Rectangle Name="Rectangle2">
           <ReportItems>
-            <Textbox Name="Textbox7">
+            <Textbox Name="Textbox32">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>تاريخ الطباعة</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.70936cm</Top>
+              <Left>17.88814cm</Left>
+              <Height>0.50355cm</Height>
+              <Width>2.04108cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox33">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>المستخدم </Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>1.31289cm</Top>
+              <Left>17.88814cm</Left>
+              <Height>0.50355cm</Height>
+              <Width>2.04108cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="CompNameA2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value xml:space="preserve">   </Value>
+                      <Style>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Fields!CompNameA.Value</Value>
+                      <Style>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>CompNameA</rd:DefaultName>
+              <Top>0cm</Top>
+              <Left>10.47067cm</Left>
+              <Height>0.6cm</Height>
+              <Width>9.45855cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="CompNameE">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!CompNameE.Value</Value>
+                      <Style>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>CompNameE</rd:DefaultName>
+              <Top>0cm</Top>
+              <Height>0.6cm</Height>
+              <Width>9.45855cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox1">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1220,146 +1363,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.99162cm</Top>
-              <Left>7.01288cm</Left>
-              <Height>1.43023cm</Height>
-              <Width>5.18781cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="CompNameA">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CompNameA.Value, "Rep_UserActivityLogByDateAr")</Value>
-                      <Style>
-                        <FontSize>12pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>CompNameA</rd:DefaultName>
-              <Left>4.76245in</Left>
-              <Height>0.23622in</Height>
-              <Width>3.03546in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox13">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>:تاريخ الطباعة</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.70583cm</Top>
-              <Left>17.24737cm</Left>
-              <Height>0.6cm</Height>
-              <Width>2.55932cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox23">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>:مطبوعة بواسطة</Value>
-                      <Style>
-                        <FontStyle>Normal</FontStyle>
-                        <FontSize>11pt</FontSize>
-                        <TextDecoration>None</TextDecoration>
-                        <Color>#000000</Color>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>1.41519cm</Top>
-              <Left>17.24737cm</Left>
-              <Height>0.6cm</Height>
-              <Width>2.55932cm</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="PrintDate">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!PrintDate.Value, "Rep_UserActivityLogByDateAr")</Value>
-                      <Style>
-                        <Format>g</Format>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>PrintDate</rd:DefaultName>
-              <Top>0.7411cm</Top>
-              <Left>13.7067cm</Left>
-              <Height>0.61243cm</Height>
-              <Width>3.5407cm</Width>
+              <Top>0.73025cm</Top>
+              <Left>7.00609cm</Left>
+              <Height>1.46719cm</Height>
+              <Width>5.06134cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1371,15 +1378,18 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="LoginUser">
+            <Textbox Name="Textbox12">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!LoginUser.Value, "Rep_UserActivityLogByDateAr")</Value>
-                      <Style />
+                      <Value>رقم الصفحه</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1387,11 +1397,11 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>LoginUser</rd:DefaultName>
-              <Top>1.38883cm</Top>
-              <Left>13.73845cm</Left>
-              <Height>0.6cm</Height>
-              <Width>3.43487cm</Width>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.70936cm</Top>
+              <Left>2.84056cm</Left>
+              <Height>0.50698cm</Height>
+              <Width>1.6716cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1403,27 +1413,27 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox11">
+            <Textbox Name="PageNumber2">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>صفحة رقم</Value>
-                      <Style />
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.75239cm</Top>
-              <Left>2.77925cm</Left>
-              <Height>0.63527cm</Height>
-              <Width>1.74512cm</Width>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
+              <Top>0.70936cm</Top>
+              <Left>1.77573cm</Left>
+              <Height>0.50698cm</Height>
+              <Width>0.9125cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -1435,7 +1445,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox16">
+            <Textbox Name="Textbox34">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -1443,16 +1453,18 @@
                   <TextRuns>
                     <TextRun>
                       <Value>من</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style />
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.78767cm</Top>
-              <Left>0.97423cm</Left>
-              <Height>0.6cm</Height>
+              <Top>0.70936cm</Top>
+              <Left>1.03079cm</Left>
+              <Height>0.50698cm</Height>
               <Width>0.56855cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
@@ -1465,27 +1477,26 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="PageNumber">
+            <Textbox Name="TotalPages2">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Globals!PageNumber</Value>
-                      <Style />
+                      <Value>=Globals!TotalPages</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>0.78767cm</Top>
-              <Left>1.69036cm</Left>
-              <Height>0.6cm</Height>
-              <Width>0.9125cm</Width>
+              <rd:DefaultName>TotalPages</rd:DefaultName>
+              <Top>0.70936cm</Top>
+              <Height>0.50698cm</Height>
+              <Width>0.83312cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -1497,15 +1508,18 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="TotalPages">
+            <Textbox Name="ExecutionTime">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Globals!TotalPages</Value>
-                      <Style />
+                      <Value>=Format(Fields!PrintDate.Value, "dd/MM/yyyy hh:mm tt")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>dd/MM/yyyy hh:mm </Format>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1513,10 +1527,11 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>TotalPages</rd:DefaultName>
-              <Top>0.75239cm</Top>
-              <Height>0.63527cm</Height>
-              <Width>0.83312cm</Width>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.70936cm</Top>
+              <Left>13.18358cm</Left>
+              <Height>0.50355cm</Height>
+              <Width>4.67457cm</Width>
               <ZIndex>9</ZIndex>
               <Style>
                 <Border>
@@ -1528,27 +1543,29 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="BraNameA">
+            <Textbox Name="ExecutionTime2">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=First(Fields!BraNameA.Value, "Rep_UserActivityLogByDateAr")</Value>
+                      <Value>=Fields!LoginUser.Value</Value>
                       <Style>
-                        <FontSize>12pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
+                        <FontSize>8pt</FontSize>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style />
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>BraNameA</rd:DefaultName>
-              <Top>0cm</Top>
-              <Height>0.6cm</Height>
-              <Width>6.87177cm</Width>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>1.31289cm</Top>
+              <Left>15.38844cm</Left>
+              <Height>0.50355cm</Height>
+              <Width>2.46971cm</Width>
               <ZIndex>10</ZIndex>
               <Style>
                 <Border>
@@ -1562,13 +1579,16 @@
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Top>0.02cm</Top>
-          <Left>0cm</Left>
-          <Height>2.5cm</Height>
-          <Width>19.80669cm</Width>
+          <Left>0.00462in</Left>
+          <Height>2.28725cm</Height>
+          <Width>19.98214cm</Width>
+          <Visibility>
+            <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
+          </Visibility>
           <Style>
             <Border>
-              <Style>None</Style>
+              <Color>Gray</Color>
+              <Style>Solid</Style>
             </Border>
           </Style>
         </Rectangle>
