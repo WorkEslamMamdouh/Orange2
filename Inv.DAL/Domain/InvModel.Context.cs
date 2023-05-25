@@ -229,6 +229,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<A_G_Vendor> A_G_Vendor { get; set; }
         public virtual DbSet<A_RecPay_Tr_ReceiptNote> A_RecPay_Tr_ReceiptNote { get; set; }
         public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
+        public virtual DbSet<A_LnkVoucher> A_LnkVoucher { get; set; }
+        public virtual DbSet<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -6174,6 +6176,47 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("opid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_Rep_UserActivityLog_Result>("GProc_Rep_UserActivityLog", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, grpTypeParameter, fromDateParameter, toDateParameter, finYearParameter, sysParameter, moduleParameter, usrParameter, opStatusParameter, opidParameter);
+        }
+    
+        public virtual ObjectResult<AProc_LnkGenerateTrans_Result> AProc_LnkGenerateTrans(Nullable<int> comp, Nullable<int> bra, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("Bra", bra) :
+                new ObjectParameter("Bra", typeof(int));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("User", user) :
+                new ObjectParameter("User", typeof(string));
+    
+            var sysParameter = sys != null ?
+                new ObjectParameter("Sys", sys) :
+                new ObjectParameter("Sys", typeof(string));
+    
+            var tRTypeParameter = tRType != null ?
+                new ObjectParameter("TRType", tRType) :
+                new ObjectParameter("TRType", typeof(string));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var fromnoParameter = fromno.HasValue ?
+                new ObjectParameter("Fromno", fromno) :
+                new ObjectParameter("Fromno", typeof(int));
+    
+            var toNoParameter = toNo.HasValue ?
+                new ObjectParameter("ToNo", toNo) :
+                new ObjectParameter("ToNo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_LnkGenerateTrans_Result>("AProc_LnkGenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
         }
     }
 }
