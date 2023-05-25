@@ -177,7 +177,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.18427cm</Top>
+        <Top>0.92502cm</Top>
         <Left>3.85865cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
@@ -279,7 +279,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
+        <Top>0.92502cm</Top>
         <Left>11.07353cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
@@ -313,7 +313,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
+        <Top>0.18427cm</Top>
         <Left>3.85865cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
@@ -345,7 +345,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
+        <Top>0.92502cm</Top>
         <Left>7.55047cm</Left>
         <Height>0.6cm</Height>
         <Width>3.52437cm</Width>
@@ -398,7 +398,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
+        <Top>0.18427cm</Top>
         <Left>0.3175cm</Left>
         <Height>0.6cm</Height>
         <Width>3.54246cm</Width>
@@ -451,7 +451,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.18427cm</Top>
+        <Top>0.92502cm</Top>
         <Left>0.32808cm</Left>
         <Height>0.6cm</Height>
         <Width>3.53188cm</Width>
@@ -1467,10 +1467,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
-        <Left>13.65596cm</Left>
+        <Top>1.66974cm</Top>
+        <Left>7.55047cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.91599cm</Width>
+        <Width>10.02148cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -1522,7 +1522,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.63799cm</Top>
+        <Top>1.66974cm</Top>
         <Left>17.55422cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
@@ -1531,59 +1531,6 @@
           <Border>
             <Style>None</Style>
           </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox23">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.6cm</Height>
-        <Width>13.01214cm</Width>
-        <ZIndex>15</ZIndex>
-        <Style>
-          <Border>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Silver</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>

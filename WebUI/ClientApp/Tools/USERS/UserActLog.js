@@ -90,7 +90,6 @@ var UserActLog;
                 { NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
             ];
         DataResult(Table);
-        debugger;
         FillDropwithAttr(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"), "", "");
         FillDropwithAttr(GetDataTable('G_MODULES'), "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "SysCode", "SYSTEM_CODE");
         FillDropwithAttr(GetDataTable('G_Codes'), "drpOpr", "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
@@ -131,8 +130,8 @@ var UserActLog;
         debugger;
         rp.FromDate = DateFormatRep(txtFromDate.value);
         rp.ToDate = DateFormatRep(txtToDate.value);
-        rp.FromTime = DateFormatRep(txtFromTime.value);
-        rp.ToTime = DateFormatRep(txtToTime.value);
+        rp.FromTime = txtFromTime.value;
+        rp.ToTime = txtToTime.value;
         rp.FinYear = drpFinYear.value == "Null" ? -1 : Number(drpFinYear.value);
         rp.SysCode = drpTitle.value == "Null" ? "-1" : $('option:selected', $("#drpTitle")).attr('data-syscode');
         rp.Module = drpTitle.value == "Null" ? "-1" : drpTitle.value;

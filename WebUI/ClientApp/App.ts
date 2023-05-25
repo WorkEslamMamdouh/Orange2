@@ -1450,7 +1450,33 @@ function DateTimeFormat2(dateForm: string): string {
 		return DateFormat((new Date()).toString());
 	}
 }
+function TimeFormat(dateForm: string): string {
+	try {
 
+		var date: Date = new Date();
+		let myDate: string = "";
+		if (dateForm.indexOf("Date(") > -1) {
+			myDate = dateForm.split('(')[1].split(')')[0];
+			date = new Date(Number(myDate));
+		}
+		else {
+			date = new Date(dateForm);
+		}									 
+		let hh = (date.getHours());
+		let mn = (date.getMinutes());
+		let ss = (date.getSeconds());
+																			  
+		let hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+		let Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+		let Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+					    
+		var Time = hour + ":" + Minute + ":" + Second; 
+		return Time;
+
+	} catch (e) {
+		return "23:59:00";
+	}
+}
 function DateTimeFormat(dateForm: string): string {
 	try {
 

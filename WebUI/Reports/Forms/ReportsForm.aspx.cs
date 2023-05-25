@@ -6119,8 +6119,8 @@ namespace RS.WebUI.Reports.Forms
            "', @RepType= " + spRepType.Value +
            ",  @GrpType= " + spTyp.Value +
            ",  @FromDate = '" + spFromDate.Value +
-           "', @ToDate= '" + spToDate.Value +
-           "', @FromTime '" + spFromTime.Value +
+           "', @ToDate = '" + spToDate.Value +
+           "', @FromTime='" + spFromTime.Value +
            "', @ToTime= '" + spToTime.Value +
            "', @finYear= " + spFinYear.Value +
            ",  @sys = '" + spSysCode.Value +

@@ -1137,6 +1137,30 @@ function DateTimeFormat2(dateForm) {
         return DateFormat((new Date()).toString());
     }
 }
+function TimeFormat(dateForm) {
+    try {
+        var date = new Date();
+        var myDate = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+        var hh = (date.getHours());
+        var mn = (date.getMinutes());
+        var ss = (date.getSeconds());
+        var hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        var Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        var Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+        var Time = hour + ":" + Minute + ":" + Second;
+        return Time;
+    }
+    catch (e) {
+        return "23:59:00";
+    }
+}
 function DateTimeFormat(dateForm) {
     try {
         var date = new Date();
