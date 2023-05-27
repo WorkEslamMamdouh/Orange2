@@ -264,9 +264,10 @@ function GetSystemSession(Mod) {
                 url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
                 data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode_1, SystemCode: SystemCode, Modulecode: Mod },
                 success: function (d) {
+                    debugger;
                     var result = JSON.parse(d);
                     if (result == null || result.Access != true) {
-                        MessageBox.Show("Access denied", Mod);
+                        alert("Access denied  ( " + Mod + " )");
                         return;
                     }
                     if (result.Access == true) {
@@ -291,7 +292,7 @@ function GetSystemSession(Mod) {
                         setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
                     }
                     else {
-                        MessageBox.Show("No Inv1_Privilage", Mod);
+                        alert("No Inv1_Privilage  ( " + Mod + " )");
                     }
                 }
             });

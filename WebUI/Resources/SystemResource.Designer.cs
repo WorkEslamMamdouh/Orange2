@@ -3292,6 +3292,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From Time.
+        /// </summary>
+        public static string FromTime {
+            get {
+                return ResourceManager.GetString("FromTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General Professor Report.
         /// </summary>
         public static string general_tech_Rep {
@@ -6258,6 +6267,15 @@ namespace Inv.WebUI.Resources {
         public static string TotDebit {
             get {
                 return ResourceManager.GetString("TotDebit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Time.
+        /// </summary>
+        public static string ToTime {
+            get {
+                return ResourceManager.GetString("ToTime", resourceCulture);
             }
         }
         

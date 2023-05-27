@@ -303,12 +303,15 @@ class ReportParameters {
     public ItemTypeID: number;
 
 
+	public FromTime: string;
+	public ToTime: string;
     public DocPDFFolder: string;
     public BankCode: string;
     public orderby: number;
     public Agtype: number;
     public typedata: number;
     public IssueTypeID: number;
+	public OprStatus: number;
 }
 
 class G_BRANCH extends SecurityClass {
@@ -11462,6 +11465,56 @@ class IQ_GetCollectList {
     public Typ_DescA: string;
     public Typ_DescE: string;
 }
+
+
+
+class AProc_LnkGenerateTrans_Result {
+    constructor() {
+        this.TRID = 0;
+        this.TR_CODE = '';
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = '';
+        this.SUB_SYSTEM_CODE = "";
+        this.VOUCHER_CODE = 0;
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = '';
+        this.TR_NO = 0;
+        this.TR_TYPE = '';
+        this.TR_DATE = '';
+        this.TR_AMOUNT = 0;
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.TR_USER_CODE = "";
+        this.VOUCHER_DESCA = "";
+        this.VOUCHER_DESCE = "";
+        this.IsPosted = false;
+
+    }
+    public TRID: number;
+    public TR_CODE: string;
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public VOUCHER_CODE: number;
+    public VOUCHER_TYPE: number;
+    public VOUCHER_SOURCE_TYPE: string;
+    public TR_NO: number;
+    public TR_TYPE: string;
+    public TR_DATE: string;
+    public TR_AMOUNT: number;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public TR_USER_CODE: string;
+    public VOUCHER_DESCA: string;
+    public VOUCHER_DESCE: string;
+    public IsPosted: boolean;
+}
+
+
+
+  
 
 
 

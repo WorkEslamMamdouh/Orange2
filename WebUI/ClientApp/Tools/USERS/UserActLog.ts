@@ -10,6 +10,8 @@ namespace UserActLog {
 	var Screen_name: HTMLInputElement;
 	var txtFromDate: HTMLInputElement;
 	var txtToDate: HTMLInputElement;
+	var txtFromTime: HTMLInputElement;
+	var txtToTime: HTMLInputElement;
 	var repUser: HTMLInputElement;
 	var repTitle: HTMLInputElement;
 	var repTitle: HTMLInputElement;
@@ -29,6 +31,7 @@ namespace UserActLog {
 	/*----------------------------------------------------------------- Variable --------------------------------------------------------------------- */
 	var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 	export function InitalizeComponent() {
+		 
 		InitalizeControls();
 		InitalizeEvents();
 		$("#iconMainPages").addClass("d-none");
@@ -36,10 +39,13 @@ namespace UserActLog {
 		$("#btnPrintTrview").addClass("print-report");
 		compcode = Number(SysSession.CurrentEnvironment.CompCode);
 		BranchCode = Number(sys.SysSession.CurrentEnvironment.BranchCode);
-		Screen_name.innerHTML = lang == "ar" ? "فاتورة جزئية" : "Partial Invoice";
-		document.title = "Safe Student 1.0-" + (lang == "ar" ? "فاتورة جزئية" : "Partial Invoice");
+		Screen_name.innerHTML = lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report";
+		document.title = "Safe Student 1.0-" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");	    
 		txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
-		txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+		txtToDate.value = DateFormat(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
+		txtFromTime.value = "00:00:00";
+		txtToTime.value = "23:59:00";
+
 		GetData_Header_loader();
 	}
 	function InitalizeControls() {
@@ -47,6 +53,8 @@ namespace UserActLog {
 		Screen_name = document.getElementById("Screen_name") as HTMLInputElement;
 		txtFromDate = document.getElementById("txtFromDate") as HTMLInputElement;
 		txtToDate = document.getElementById("txtToDate") as HTMLInputElement;
+		txtFromTime = document.getElementById("txtFromTime") as HTMLInputElement;
+		txtToTime = document.getElementById("txtToTime") as HTMLInputElement;
 		repUser = document.getElementById("repUser") as HTMLInputElement;
 		repTitle = document.getElementById("repTitle") as HTMLInputElement;
 		repTitle = document.getElementById("repTitle") as HTMLInputElement;
@@ -70,15 +78,8 @@ namespace UserActLog {
 		btnPrintTrview.onclick = () => { PrintReport(1); }
 		btnPrintTrPDF.onclick = () => { PrintReport(2); }
 		btnPrintTrEXEL.onclick = () => { PrintReport(3); }
-		btnPrint.onclick = () => { PrintReport(4); }
-		btnReset.onclick = btnReset_onclick;
-	}
-	/*----------------------------------------------------------------- General Func------------------------------------------------------------------ */
-	function btnReset_onclick() {
-		txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
-		txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-		compcode = Number(SysSession.CurrentEnvironment.CompCode);
-	}
+		btnPrint.onclick = () => { PrintReport(4); }		 
+	}					   
 	/*----------------------------------------------------------------- Get Func------------------------------------------------------------------ */
 	function GetData_Header_loader() {
 		var Table: Array<Table>;
@@ -90,14 +91,13 @@ namespace UserActLog {
 				{ NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
 
 			]
-		DataResult(Table);
-		DocumentActions.FillCombowithdefult(GetDataTable('G_USERS'), drpUser, "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"));
-		DocumentActions.FillCombowithdefult(GetDataTable('G_MODULES'), drpTitle, "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"));
-		DocumentActions.FillCombowithdefult(GetDataTable('G_Codes'), drpOpr, "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"));
-		DocumentActions.FillCombowithdefult(GetDataTable('G_CONTROL'), drpFinYear, "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"));
-
-							  
+		DataResult(Table);  
+		FillDropwithAttr(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"),"","");
+		FillDropwithAttr(GetDataTable('G_MODULES'), "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "SysCode", "SYSTEM_CODE");
+		FillDropwithAttr(GetDataTable('G_Codes'), "drpOpr", "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
+		FillDropwithAttr(GetDataTable('G_CONTROL'), "drpFinYear", "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"), "", "");			   
 	}
+
 	/*----------------------------------------------------------------- Rep Func------------------------------------------------------------------ */
 	function PrintReport(OutType: number) {
 		let rp: ReportParameters = new ReportParameters();
@@ -121,9 +121,29 @@ namespace UserActLog {
 		rp.BraNameE = BranchNameE;
 		rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
 		rp.RepType = OutType;
-
+		//--------------------GroupType
+		if (repUser.checked) {
+			rp.Typ = 1;
+		} else if (repTitle.checked) {
+			rp.Typ = 2;
+		}
+		else {
+			rp.Typ = 3;
+		}
+		debugger
+		rp.FromDate = DateFormatRep(txtFromDate.value);
+		rp.ToDate = DateFormatRep(txtToDate.value);
+		rp.FromTime = txtFromTime.value;
+		rp.ToTime = txtToTime.value;
+		rp.FinYear = drpFinYear.value == "Null" ? -1 : Number(drpFinYear.value);
+		rp.SysCode = drpTitle.value == "Null" ? "-1" : $('option:selected', $("#drpTitle")).attr('data-syscode');
+		rp.Module = drpTitle.value == "Null" ? "-1" : drpTitle.value;
+		rp.User_Code = drpUser.value == "Null" ? "-1" : drpUser.value;
+		rp.OperationId = drpOpr.value == "Null" ? -1 : Number(drpOpr.value);
+		rp.OprStatus = drpstatus.value == "Null" ? -1 : Number(drpstatus.value);
+		  
 		Ajax.Callsync({
-			url: Url.Action("IProc_Rpt_ItemStockDetail", "GeneralReports"),
+			url: Url.Action("Rep_UserActivityLog", "GeneralReports"),
 			data: rp,
 			success: (d) => {
 				let result = d.result as string;

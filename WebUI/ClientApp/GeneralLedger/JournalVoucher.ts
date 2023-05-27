@@ -692,6 +692,7 @@ namespace JournalVoucher {
 
 
         // جديد
+        debugger
         if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
             rdNew.checked = true;
             $("#btnUnAuthorize").addClass("display_none");
@@ -701,7 +702,7 @@ namespace JournalVoucher {
             $("#btnPost").attr("disabled", "disabled");
             $("#btnUpdate").removeAttr("disabled");
 
-            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT;
+            btnUpdate.disabled = !SysSession.CurrentPrivileges.EDIT; 
             btnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
 
             txtAuthorizedBy.value = "";
@@ -1033,6 +1034,17 @@ namespace JournalVoucher {
         txtTotalCredit.disabled = true;
         txtTotalDebit.disabled = true;
         txtDifference.disabled = true;
+        try {
+            if (SelectedJournalModel[0].VOUCHER_STATUS == 0) {
+                btnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
+            }
+            if (SelectedJournalModel[0].VOUCHER_STATUS ==1) {
+                btnUnAuthorize.disabled = !SysSession.CurrentPrivileges.CUSTOM3;
+            }
+        } catch (e) {
+
+        }
+
     }
     function HideButtons() {
 
