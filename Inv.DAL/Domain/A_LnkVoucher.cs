@@ -31,5 +31,6 @@ namespace Inv.DAL.Domain
         public Nullable<int> Voucher_No { get; set; }
         public Nullable<int> SOURCE_TYPE { get; set; }
         public Nullable<int> TYPE_CODE { get; set; }
+        public Nullable<System.DateTime> TrDate { get; set; }
     }
 }
