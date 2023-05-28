@@ -184,7 +184,6 @@ var SlsTrSalesManagerNew;
     //flagInvMulti = true;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
-        //alert()
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -192,15 +191,18 @@ var SlsTrSalesManagerNew;
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
         InitalizeControls();
         InitializeEvents();
-        //fillddlCustomer();
+        InitializeGrid();
+        //txtStartDate.value = DateStartMonth();
+        txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+        //*******************************************************************************************************************************
         Display_Category();
         FillddlVatNature();
         FillddlFamily();
         fillddlSalesman();
         FillddlStore();
-        //txtStartDate.value = DateStartMonth();
-        txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
+        FillddlCashBox();
         FillddlStateType();
         FillddlInvoiceType();
         FillddlType();
@@ -214,11 +216,7 @@ var SlsTrSalesManagerNew;
         txtTax.value = TaxCount.toString();
         txtNet.value = NetCount.toString();
         txtCommission.value = commissionCount.toString();
-        FillddlCashBox();
         $('#btnPrint').addClass('display_none');
-        //GetLastPrice(3236)
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
-        InitializeGrid();
         DisplayMod();
         flagInvMulti == false ? $('.InvMulti').addClass('display_none') : $('.InvMulti').removeClass('display_none');
         flagInvItemDiscount == false ? $('.InvDiscount').addClass('display_none') : $('.InvDiscount').removeClass('display_none');

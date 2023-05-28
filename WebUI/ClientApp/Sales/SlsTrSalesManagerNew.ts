@@ -233,37 +233,37 @@ namespace SlsTrSalesManagerNew {
     //------------------------------------------------------ Main Region------------------------
 
     export function InitalizeComponent() {
-
-        //alert()
-
-
-
-        document.getElementById('Screen_name').innerHTML = Screen_name;
-
-        document.title = Screen_name;
-
+         
+        document.getElementById('Screen_name').innerHTML = Screen_name; 
+        document.title = Screen_name; 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
 
         InitalizeControls();
-        InitializeEvents();
-        //fillddlCustomer();
-        Display_Category();
-        FillddlVatNature();
+        InitializeEvents(); 
+        InitializeGrid();
 
 
-
-        FillddlFamily();
-        fillddlSalesman();
-        FillddlStore();
         //txtStartDate.value = DateStartMonth();
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+
+        //*******************************************************************************************************************************
+
+        Display_Category();
+        FillddlVatNature(); 
+        FillddlFamily();
+        fillddlSalesman();
+        FillddlStore();
+        FillddlCashBox();
         FillddlStateType();
         FillddlInvoiceType();
         FillddlType();
+      
+
         vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
 
         GetVatPercentage();
@@ -276,14 +276,10 @@ namespace SlsTrSalesManagerNew {
         txtNet.value = NetCount.toString();
         txtCommission.value = commissionCount.toString();
 
-        FillddlCashBox();
         $('#btnPrint').addClass('display_none');
 
+         
 
-        //GetLastPrice(3236)
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
-
-        InitializeGrid();
 
         DisplayMod();
 
