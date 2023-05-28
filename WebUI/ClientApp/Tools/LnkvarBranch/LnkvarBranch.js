@@ -28,7 +28,10 @@ var LnkvarBranch;
     var btnAddDetails;
     var drpuserType;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
+    var flagUpdate = false;
     function InitalizeComponent() {
+        $("#NoDubleclick").val('1');
+        $("#Mod_Flag").val('1');
         if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
             document.getElementById('Screen_name').innerHTML = "حسابات ربط الفروع";
         }
@@ -141,6 +144,7 @@ var LnkvarBranch;
             $('#btnUpdate_Def').addClass('display_none');
             $('.dis').removeAttr('disabled');
             $(".acc_Cod").removeAttr('disabled');
+            flagUpdate = true;
         }
         else {
             WorningMessage("يجب اختيار الفرع!", "Must choose Type!", "تحذير", "worning");
@@ -265,6 +269,7 @@ var LnkvarBranch;
         else {
             gridempty();
         }
+        flagUpdate = false;
     }
     function gridempty() {
         InitializeGridACC();
@@ -321,7 +326,7 @@ var LnkvarBranch;
                     //txt.disabled = false;
                     txt.id = "text_AccountCode" + item.Ser;
                     txt.name = "GLAccountCode";
-                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main  display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
+                    if ($('#btnUpdate_Def').is(":hidden")) {
                         txt.disabled = false;
                     }
                     else {
@@ -358,7 +363,7 @@ var LnkvarBranch;
                     txt.value = (lang == "ar" ? "بحث" : "Search");
                     txt.id = "but" + item.Ser;
                     txt.className = "btn btn-main dis";
-                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
+                    if ($('#btnUpdate_Def').is(":hidden")) {
                         txt.disabled = false;
                     }
                     else {
@@ -447,7 +452,7 @@ var LnkvarBranch;
                     txt.disabled = true;
                     txt.name = "CC_Code";
                     txt.value = item.CC_Code;
-                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
+                    if ($('#btnUpdate_Def').is(":hidden")) {
                         txt.disabled = false;
                     }
                     else {
@@ -484,7 +489,7 @@ var LnkvarBranch;
                     txt.id = "but" + item.Ser;
                     txt.disabled = true;
                     txt.className = "btn btn-main dis";
-                    if (btnUpdate_Def.getAttribute('class') == 'btn btn-main   display_none' || btnUpdate_Def.getAttribute('class') == 'btn btn-main display_none') {
+                    if ($('#btnUpdate_Def').is(":hidden")) {
                         txt.disabled = false;
                     }
                     else {

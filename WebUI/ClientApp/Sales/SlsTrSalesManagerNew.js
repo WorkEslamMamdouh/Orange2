@@ -2969,7 +2969,6 @@ var SlsTrSalesManagerNew;
                 Totalbefore += (Number($("#txtTotal" + i).val()));
                 TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
                 CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal);
                 //var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
                 TaxCount += Number($("#txtTax" + i).val());
                 //TaxCount += vatAmount;
@@ -2980,7 +2979,7 @@ var SlsTrSalesManagerNew;
         txtItemCount.value = CountItems.toString();
         txtPackageCount.value = PackageCount.toString();
         txtTotalDiscount.value = TotalDiscount.toString();
-        txtTotalbefore.value = Totalbefore.RoundToSt(2);
+        txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
         txtNet.value = (NetCount.RoundToSt(2));
@@ -3508,9 +3507,9 @@ var SlsTrSalesManagerNew;
                     displayDate_speed(invoiceID, res);
                     success_insert();
                     IsSuccess = true;
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
                     Save_Succ_But();
                 }
                 else {
@@ -3558,9 +3557,9 @@ var SlsTrSalesManagerNew;
                     displayDate_speed(invoiceID, res);
                     success_insert();
                     IsSuccess = true;
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
                     Save_Succ_But();
                 }
                 else {

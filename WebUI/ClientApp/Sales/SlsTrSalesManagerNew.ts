@@ -3960,8 +3960,7 @@ namespace SlsTrSalesManagerNew {
 
                 TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
 
-                CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal);
+                CountTotal += Number($("#txtTotal" + i).val()); 
 
                 //var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
                 TaxCount += Number($("#txtTax" + i).val());
@@ -3975,7 +3974,7 @@ namespace SlsTrSalesManagerNew {
         txtItemCount.value = CountItems.toString();
         txtPackageCount.value = PackageCount.toString();
         txtTotalDiscount.value = TotalDiscount.toString();
-        txtTotalbefore.value = Totalbefore.RoundToSt(2);
+        txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
         txtNet.value = (NetCount.RoundToSt(2));
@@ -4645,9 +4644,9 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
                     IsSuccess = true;
 
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
 
 
                     Save_Succ_But();
@@ -4709,9 +4708,10 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
 
                     IsSuccess = true;
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
 
                     Save_Succ_But();
 
