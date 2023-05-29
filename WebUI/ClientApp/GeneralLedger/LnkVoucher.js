@@ -14,6 +14,10 @@ var LnkVoucher;
     var TransactionsGrid = new JsGrid();
     var LnkTransDetails = new Array();
     var Model = new A_RecPay_Tr_ReceiptNote();
+    var AccountDetails = new A_ACCOUNT();
+    var AccountDetailsIst = new Array();
+    var CostCentreDetailsIst = new Array();
+    var CostCenterDetails = new G_COST_CENTER();
     var txtSearch;
     var txtTrDate;
     var txtFromDate;
@@ -27,11 +31,14 @@ var LnkVoucher;
     var btnAdd;
     var btnUpdate;
     var btnSave;
+    var btnAddDetails;
     //////////////////////////////////////////print buttons////////////////////////////////////////////     
     var btnPrintTrview;
     var btnPrintTrPDF;
     var btnPrintTrEXEL;
     var btnPrintTransaction;
+    var Events = 0;
+    var CountGrid = 0;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -49,6 +56,7 @@ var LnkVoucher;
         btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
+        btnAddDetails = document.getElementById("btnAddDetails");
         ////////  
         ddlBranch = document.getElementById("ddlBranch");
         ddlTypeTrans = document.getElementById("ddlTypeTrans");
@@ -72,6 +80,7 @@ var LnkVoucher;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
+        btnAddDetails.onclick = AddNewRow;
         //********************************onchange****************************    
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = function () { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); };
@@ -80,12 +89,13 @@ var LnkVoucher;
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
         btnPrintTransaction.onclick = PrintTransaction;
+        clickEventsVisible();
     }
     function InitializeGrid() {
         var res = GetResourceList("");
         TransactionsGrid.ElementName = "TransactionsGrid";
         TransactionsGrid.OnRowDoubleClicked = GridDoubleClick;
-        TransactionsGrid.PrimaryKey = "ROW_ID";
+        TransactionsGrid.PrimaryKey = "TRID";
         TransactionsGrid.Paging = true;
         TransactionsGrid.PageSize = 15;
         TransactionsGrid.Sorting = true;
@@ -95,7 +105,7 @@ var LnkVoucher;
         TransactionsGrid.SelectedIndex = 1;
         TransactionsGrid.OnItemEditing = function () { };
         TransactionsGrid.Columns = [
-            { title: "ROW_ID", name: "ROW_ID", type: "text", width: "5%", visible: false },
+            { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
             { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
             //{ title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
@@ -123,6 +133,58 @@ var LnkVoucher;
         ];
         TransactionsGrid.Bind();
     }
+    function clickEventsVisible() {
+        $("#divCostCnterName").on('click', function () {
+            debugger;
+            if (Events == 0) {
+                var show1 = $(".costcntr").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+                    $(".costcntr").addClass("display_none");
+                }
+                else {
+                    $(".costcntr").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0; }, 700);
+            }
+        });
+        $("#divAccNumber").on('click', function () {
+            debugger;
+            if (Events == 0) {
+                //$(".Acc").toggle();
+                /////////////////////////
+                var show1 = $(".Acc").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+                    $(".Acc").addClass("display_none");
+                }
+                else {
+                    $(".Acc").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0; }, 700);
+            }
+        });
+        //divJouralHide
+        $("#divCostCnterNameCCDT").on('click', function () {
+            debugger;
+            //$(".costcntrCCDt").toggle();
+            /////////////////////////
+            if (Events == 0) {
+                var show1 = $(".costcntrCCDt").is(":visible");
+                //var show2 = $(".Acc").is(":visible");
+                if (show1 == true) {
+                    $(".costcntrCCDt").addClass("display_none");
+                }
+                else {
+                    $(".costcntrCCDt").removeClass("display_none");
+                }
+                Events = 1;
+                setTimeout(function () { Events = 0; }, 700);
+            }
+        });
+    }
     //************************************************fillddl**************************************
     function GetData_Header() {
         var Table;
@@ -130,13 +192,39 @@ var LnkVoucher;
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
                 { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
+                { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ];
         DataResult(Table);
         //**************************************************************************************************************
         DocumentActions.FillCombowithdefult(GetDataTable('G_BRANCH'), ddlBranch, "BRA_CODE", "BRA_DESC", (lang == "ar" ? ' اختر الفرع' : 'Branch'));
         DocumentActions.FillCombowithdefult(GetDataTable('GQ_GetLnkTransComp'), ddlTypeTrans, "TR_CODE", "TR_DESCA", (lang == "ar" ? ' اختر الحركة' : 'TypeTrans'));
         ddlBranch.value = $('#ddbra').val();
-        //ListLnkTrans = GetDataTable('GQ_GetLnkTransComp') as Array<GQ_GetLnkTransComp>;
+        AccountDetailsIst = GetDataTable('A_ACCOUNT');
+        CostCentreDetailsIst = GetDataTable('G_COST_CENTER');
+    }
+    function GetAccByCode(AccCode) {
+        debugger;
+        var flag = true;
+        var accObj = AccountDetailsIst.filter(function (s) { return s.ACC_CODE == AccCode; });
+        if (accObj.length > 0) {
+            AccountDetails = accObj[0];
+        }
+        else {
+            flag = false;
+        }
+        return flag;
+    }
+    function GetCostCenterByCode(CC_Code) {
+        var flag = true;
+        var ccObj = CostCentreDetailsIst.filter(function (s) { return s.CC_CODE == CC_Code; });
+        if (ccObj.length > 0) {
+            CostCenterDetails = ccObj[0];
+        }
+        else {
+            flag = false;
+        }
+        return flag;
     }
     //************************************************Btn_Events**********************************
     function btnShow_onclick() {
@@ -228,14 +316,15 @@ var LnkVoucher;
     //****************************************************CleanInput********************************************* 
     function Enabled() {
         $('._dis').removeAttr('disabled');
+        $('.btn_minus_non').removeClass('display_none');
         $('#id_div_Filter').addClass('disabledDiv');
         $('._None_Input').removeClass('display_none');
-        //chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;  
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled');
         $('#id_div_Filter').removeClass('disabledDiv');
         $('._None_Input').addClass('display_none');
+        $('.btn_minus_non').addClass('display_none');
     }
     function CleanDetails() {
         $('#Div_control').removeClass('display_none');
@@ -243,26 +332,239 @@ var LnkVoucher;
         txtTrDate.value = GetDate();
         //chkStatus.checked = false; 
     }
-    //****************************************************DisplayDetails*********************************************
+    //****************************************************DisplayData*********************************************
     function GridDoubleClick() {
         CleanDetails();
-        DisplayDetails(TransactionsGrid.SelectedItem);
+        DisplayData(TransactionsGrid.SelectedItem);
         disabled();
     }
-    function DisplayDetails(Selecteditem) {
+    function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
-        //chkStatus.checked = Selecteditem.Status == 1 ? true : false;   
-        //if (chkStatus.checked == true) {
-        //    btnUpdate.disabled = true;
-        //    chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM1;
-        //}
-        //else {
-        //    btnUpdate.disabled = false;
-        //    chkStatus.disabled = true;
-        //}
+        DisplayDetails(59212);
+    }
+    function DisplayDetails(TrID) {
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
+            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    var List = result.Response;
+                    CountGrid = 0;
+                    $("#div_Data").html('');
+                    for (var i = 0; i < List.length; i++) {
+                        BuildControls(i);
+                        CountGrid++;
+                    }
+                }
+            }
+        });
+    }
+    ////**************************************************** Controls Grid Region //****************************************************
+    function BuildControls(cnt) {
+        var html = "";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                     <input id=\"VoucherDetailID" + cnt + "\" type=\"hidden\" value=\"\" class=\"form-control display_none\"  />\n                    <input id=\"txtSerial" + cnt + "\" name=\"FromDate\" disabled type=\"hidden\" value=\"\" class=\"form-control\" />\n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"txtAccNumber" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtAccName" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtDebit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"txtCredit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"txtCostCntrNum" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"txtCostCntrName" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Notes" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    \n                  \n                    <input id=\"txt_StatusFlag" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"FlagUpdate" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n\n                    <input id=\"INVOICE_NO" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"BOOK_TR_NO" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_SYSTEM_CODE" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_SUB_SYSTEM_CODE" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_BRA_CODE" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_CODE" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_NO" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                    <input id=\"SRC_TR_TYPE" + cnt + "\" name = \" \" value=\"\" type = \"hidden\" class=\"form-control\"/>\n                </tr>";
+        $("#div_Data").append(html);
+        $('#btnSearchAcc' + cnt).click(function (e) {
+            var sys = new SystemTools();
+            sys.FindKey(Modules.JournalVoucher, "btnAccountSearch", "COMP_CODE=" + CompCode + "and ACC_ACTIVE = 1 and DETAIL =1  ", function () {
+                var id = SearchGrid.SearchDataGrid.SelectedKey;
+                $('#txtAccNumber' + cnt).val(id);
+                if (GetAccByCode(id)) {
+                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                }
+                if ($("#txt_StatusFlag" + cnt).val() != "i")
+                    $("#txt_StatusFlag" + cnt).val("u");
+            });
+        });
+        $("#txtAccNumber" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+            var id = $('#txtAccNumber' + cnt).val();
+            if (GetAccByCode(id)) {
+                if (AccountDetails != null) {
+                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $("#divAccountNameFooter").removeClass("display_none");
+                }
+                else {
+                    $('#txtAccNumber' + cnt).val("");
+                    $('#txtAccName' + cnt).val("");
+                    $('#txtAccountNameFooter').val("");
+                    $('#txtCredit' + cnt).val("");
+                    DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
+                }
+            }
+            else {
+                $('#txtAccNumber' + cnt).val("");
+                $('#txtAccName' + cnt).val("");
+                $('#txtAccountNameFooter').val("");
+                $('#txtCredit' + cnt).val("");
+                DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
+            }
+        });
+        //// Second Search
+        $('#btnSearchCostCenter' + cnt).click(function (e) {
+            var sys = new SystemTools();
+            sys.FindKey(Modules.JournalVoucher, "btnCostCenterSearch", "COMP_CODE=" + CompCode + "and ACTIVE = 1 ", function () {
+                var id = SearchGrid.SearchDataGrid.SelectedKey;
+                $('#txtCostCntrNum' + cnt).val(id);
+                GetCostCenterByCode(id);
+                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                if ($("#txt_StatusFlag" + cnt).val() != "i")
+                    $("#txt_StatusFlag" + cnt).val("u");
+            });
+        });
+        $("#txtCostCntrNum" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+            var id = $('#txtCostCntrNum' + cnt).val();
+            if (GetCostCenterByCode(id)) {
+                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $("#divCostCntrNameFooter").removeClass("display_none");
+            }
+            else {
+                $('#txtCostCntrNum' + cnt).val("");
+                $('#txtCostCntrName' + cnt).val("");
+                $('#txtCostCntrNameFooter').val("");
+                //  $("#divCostCntrNameFooter").addClass("display_none"); 
+                DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
+            }
+        });
+        //Depit on change  
+        $("#txtDebit" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+            var txtDebitVal = Number($('#txtDebit' + cnt).val());
+            var txtCreditVal = Number($('#txtCredit' + cnt).val());
+            if (txtDebitVal == 0) {
+                if (txtCreditVal == 0) {
+                    DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
+                    $('#txtCredit' + cnt).val("0");
+                }
+            }
+            $("#txtCredit" + cnt).val('0');
+            ComputeTotals();
+        });
+        //Credit on change   
+        $("#txtCredit" + cnt).on('keyup', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+            var txtDebitVal = Number($('#txtDebit' + cnt).val());
+            var txtCreditVal = Number($('#txtCredit' + cnt).val());
+            if (txtCreditVal == 0) {
+                if (txtDebitVal == 0) {
+                    DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
+                    $('#txtDebit' + cnt).val("0");
+                }
+            }
+            $("#txtDebit" + cnt).val('0');
+            ComputeTotals();
+        });
+        // Notes change
+        $("#Notes" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#btn_minus" + cnt).on('click', function () {
+            DeleteRow(cnt);
+        });
+        // on click Region to display Account And Cost Centers Names in Footer
+        $("#No_Row" + cnt).on('click', function () {
+            var AccCodeVal = $('#txtAccNumber' + cnt).val();
+            var AccObj = AccountDetailsIst.filter(function (s) { return s.COMP_CODE == CompCode && s.ACC_CODE == AccCodeVal; });
+            if (AccObj.length > 0) {
+                $("#divAccountNameFooter").removeClass("display_none");
+                $("#txtAccountNameFooter").prop("value", (lang == "ar" ? AccObj[0].ACC_DESCA : AccObj[0].ACC_DESCL));
+            }
+            else {
+                $("#txtAccountNameFooter").prop("value", "");
+            }
+            //GetAllCostCenters CostCentreDetailsIst
+            var CC_CodeVal = $('#txtCostCntrNum' + cnt).val();
+            var CCObj = CostCentreDetailsIst.filter(function (s) { return s.COMP_CODE == CompCode && s.CC_CODE == CC_CodeVal; });
+            if (CCObj.length > 0) {
+                $("#divCostCntrNameFooter").removeClass("display_none");
+                $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
+            }
+            else {
+                //   $("#divCostCntrNameFooter").addClass("display_none");
+                $("#txtCostCntrNameFooter").prop("value", "");
+            }
+        });
+    }
+    function DisplayBuildControls() {
+    }
+    function ComputeTotals() {
+        var CountItems = 0;
+        var PackageCount = 0;
+        var txtUnitCosts = 0;
+        var CountTotal = 0;
+        debugger;
+        for (var i = 0; i < CountGrid; i++) {
+            var flagvalue = $("#txt_StatusFlag" + i).val();
+            if (flagvalue != "d" && flagvalue != "m") {
+                PackageCount += Number($("#txtOnhandQty" + i).val());
+                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
+                CountTotal += Number($("#txtTotal" + i).val());
+                CountItems++;
+            }
+        }
+        $("#txtItemCount").val(CountItems.RoundToSt(2));
+        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
+        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
+        $("#txtTotal").val(CountTotal.RoundToSt(2));
+    }
+    function DeleteRow(RecNo) {
+        if (!SysSession.CurrentPrivileges.Remove)
+            return;
+        WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", function () {
+            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
+            if (statusFlag == "i")
+                $("#txt_StatusFlag" + RecNo).val("m");
+            else
+                $("#txt_StatusFlag" + RecNo).val("d");
+            // ComputeTotals();
+            $("#txtItemNumber" + RecNo).val("99");
+            $("#txtItemName" + RecNo).val("1");
+            $("#txtOnhandQty" + RecNo).val("1");
+            $("#No_Row" + RecNo).attr("hidden", "true");
+        });
+    }
+    function AddNewRow() {
+        if (!SysSession.CurrentPrivileges.AddNew)
+            return;
+        var CanAdd = true;
+        if (CountGrid > 0) {
+            for (var i = 0; i < CountGrid; i++) {
+                CanAdd = Validation_Grid(i);
+                if (CanAdd == false) {
+                    break;
+                }
+            }
+        }
+        if (CanAdd) {
+            BuildControls(CountGrid);
+            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode    
+            $('._dis').removeAttr('disabled');
+            $('.btn_minus_non').removeClass('display_none');
+            CountGrid++;
+        }
     }
     //****************************************************Validation*********************************************
+    function Validation_Grid(rowcount) {
+        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+            return true;
+        }
+        else {
+            return true;
+        }
+    }
     function Validation() {
         return true;
     }
@@ -361,7 +663,7 @@ var LnkVoucher;
         TransactionsGrid.DataSource = LnkTransDetails;
         TransactionsGrid.Bind();
         CleanDetails();
-        DisplayDetails(TransactionsGrid.SelectedItem);
+        DisplayData(TransactionsGrid.SelectedItem);
         disabled();
     }
     //***************************************************************************Print*********************************************************     

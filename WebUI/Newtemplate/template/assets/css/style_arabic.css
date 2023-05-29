@@ -29502,6 +29502,11 @@ div.tagsinput {
     justify-content: center;
     width:100%;
 }
+.btn-minusNew {
+    transition: all 0.2s ease-in-out;
+    color: var(--bs-gray);
+    font-size: 1.4rem !important;
+}
 .btn-minus,
 .btn-minus-CCDt,
 .btn-plus,
