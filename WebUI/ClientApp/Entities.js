@@ -6762,6 +6762,40 @@ var AProc_LnkGenerateTrans_Result = /** @class */ (function () {
     }
     return AProc_LnkGenerateTrans_Result;
 }());
+var AQ_GetLnkVoucher = /** @class */ (function () {
+    function AQ_GetLnkVoucher() {
+        this.ID;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code;
+        this.Tr_Code;
+        this.TrID;
+        this.TrNo;
+        this.Serial = 0;
+        this.Acc_Code;
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    return AQ_GetLnkVoucher;
+}());
 var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";

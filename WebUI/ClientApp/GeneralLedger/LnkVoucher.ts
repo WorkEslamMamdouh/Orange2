@@ -328,7 +328,7 @@ namespace LnkVoucher {
             $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
             $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
             Assign();
-            Update();
+            //Update();
 
         }, 100);
     }
@@ -390,11 +390,12 @@ namespace LnkVoucher {
             success: (d) => {//(int TrID, int CompCode, int branchCode)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let List = result.Response as Array<IQ_GetSlsInvoiceItemVer2>; 
+                    let List = result.Response as Array<AQ_GetLnkVoucher>; 
                     CountGrid = 0;
                     $("#div_Data").html('');
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
+                        DisplayBuildControls(List[i], i);
                         CountGrid++
                     } 
                 }
@@ -405,8 +406,7 @@ namespace LnkVoucher {
     function BuildControls(cnt: number) {
         var html = "";
         html = `<tr id= "No_Row${cnt}">
-                     <input id="VoucherDetailID${cnt}" type="hidden" value="" class="form-control display_none"  />
-                    <input id="txtSerial${cnt}" name="FromDate" disabled type="hidden" value="" class="form-control" />
+                    
 	                <td>
 		                <div class="form-group display_none btn_minus_non">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minusNew"></i></span> 
@@ -421,22 +421,22 @@ namespace LnkVoucher {
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                 <input id="txtAccNumber${cnt}" value="" name="" disabled type="text" class="form-control _dis" />
+			                 <input id="Acc_Code${cnt}" value="" name="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="Acc">
 		                <div class="form-group">
-			                  <input id="txtAccName${cnt}" value="" name="" disabled type="text" class="form-control"  />
+			                  <input id="ACC_DESCA${cnt}" value="" name="" disabled type="text" class="form-control"  />
 		                </div>
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Debit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Credit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
 
@@ -449,34 +449,43 @@ namespace LnkVoucher {
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                <input id="txtCostCntrNum${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			                <input id="CC_Code${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="costcntr">
 		                <div class="form-group">
-			                  <input id="txtCostCntrName${cnt}" name="FromDate" value="" disabled type="text" class="form-control" />
+			                  <input id="CC_DESCA${cnt}" name="FromDate" value="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 
                     
                     <td style="width:22%;">
 		                <div class="form-group">
-			              <input id="Notes${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			              <input id="Line_DescA${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     
                   
-                    <input id="txt_StatusFlag${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="FlagUpdate${cnt}" name = " " value="" type = "hidden" class="form-control"/>
+                    <input id="StatusFlag${cnt}" name = " " value="" type = "hidden" class="form-control"/>
 
-                    <input id="INVOICE_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="BOOK_TR_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_SYSTEM_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_SUB_SYSTEM_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_BRA_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_TYPE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
+                   <input id="ID${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="CompCode${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="bracode${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="System_Code${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="Tr_Code${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="TrID${cnt}" type="hidden" value="" class="form-control "  />
+                     <input id="TrNo${cnt}" type="hidden" value="" class="form-control "  />
+                    <input id="Serial${cnt}"  type="hidden" value="" class="form-control" />
+                    <input id="Voucher_No${cnt}" type="hidden" value="" class="form-control" /> 
+                    <input id="Line_DescAE${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="SOURCE_TYPE${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TYPE_CODE${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TR_DESCA${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TR_DESCE${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="Src_DescA${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TYPE_DESCA${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TYPE_DESCE${cnt}" type="hidden" value="" class="form-control" />
+                    <input id="TrDate${cnt}" type="hidden" value="" class="form-control" />
                 </tr>`;
         $("#div_Data").append(html);
 
@@ -486,42 +495,42 @@ namespace LnkVoucher {
 
             sys.FindKey(Modules.JournalVoucher, "btnAccountSearch", "COMP_CODE=" + CompCode + "and ACC_ACTIVE = 1 and DETAIL =1  ", () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtAccNumber' + cnt).val(id);
+                $('#Acc_Code' + cnt).val(id);
                 if (GetAccByCode(id)) {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#ACC_DESCA' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
 
                 }
 
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
             });
 
         });
-        $("#txtAccNumber" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Acc_Code" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
-            var id = $('#txtAccNumber' + cnt).val();
+            var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
 
                 if (AccountDetails != null) {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#ACC_DESCA' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $("#divAccountNameFooter").removeClass("display_none");
                 } else {
-                    $('#txtAccNumber' + cnt).val("");
-                    $('#txtAccName' + cnt).val("");
+                    $('#Acc_Code' + cnt).val("");
+                    $('#ACC_DESCA' + cnt).val("");
                     $('#txtAccountNameFooter').val("");
-                    $('#txtCredit' + cnt).val("");
+                    $('#Credit' + cnt).val("");
                     DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
                 } 
             }
             else {
-                $('#txtAccNumber' + cnt).val("");
-                $('#txtAccName' + cnt).val("");
+                $('#Acc_Code' + cnt).val("");
+                $('#ACC_DESCA' + cnt).val("");
                 $('#txtAccountNameFooter').val("");
-                $('#txtCredit' + cnt).val("");
+                $('#Credit' + cnt).val("");
                 DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
             }
         });
@@ -532,74 +541,74 @@ namespace LnkVoucher {
 
             sys.FindKey(Modules.JournalVoucher, "btnCostCenterSearch", "COMP_CODE=" + CompCode + "and ACTIVE = 1 ", () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtCostCntrNum' + cnt).val(id);
+                $('#CC_Code' + cnt).val(id);
                 GetCostCenterByCode(id);
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
+                $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
             });
         });
-        $("#txtCostCntrNum" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#CC_Code" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
-            var id = $('#txtCostCntrNum' + cnt).val();
+            var id = $('#CC_Code' + cnt).val();
 
             if (GetCostCenterByCode(id)) {
 
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $("#divCostCntrNameFooter").removeClass("display_none");
 
             }
             else {
-                $('#txtCostCntrNum' + cnt).val("");
-                $('#txtCostCntrName' + cnt).val("");
-                $('#txtCostCntrNameFooter').val("");
+                $('#CC_Code' + cnt).val("");
+                $('#CC_DESCA' + cnt).val("");
+                $('#CC_DESCAFooter').val("");
                 //  $("#divCostCntrNameFooter").addClass("display_none"); 
                 DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
             }
         });
 
         //Depit on change  
-        $("#txtDebit" + cnt).on('keyup', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Debit" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtDebitVal == 0) {
-                if (txtCreditVal == 0) {
+            var DebitVal = Number($('#Debit' + cnt).val());
+            var CreditVal = Number($('#Credit' + cnt).val());
+            if (DebitVal == 0) {
+                if (CreditVal == 0) {
                     DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtCredit' + cnt).val("0");
+                    $('#Credit' + cnt).val("0");
                 }
             }
-            $("#txtCredit" + cnt).val('0');
+            $("#Credit" + cnt).val('0');
             ComputeTotals();
         });
 
         //Credit on change   
-        $("#txtCredit" + cnt).on('keyup', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Credit" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtCreditVal == 0) {
-                if (txtDebitVal == 0) {
+            var DebitVal = Number($('#Debit' + cnt).val());
+            var CreditVal = Number($('#Credit' + cnt).val());
+            if (CreditVal == 0) {
+                if (DebitVal == 0) {
                     DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtDebit' + cnt).val("0");
+                    $('#Debit' + cnt).val("0");
                 }
             }
-            $("#txtDebit" + cnt).val('0');
+            $("#Debit" + cnt).val('0');
             ComputeTotals();
         });
 
-        // Notes change
-        $("#Notes" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        // Line_DescA change
+        $("#Line_DescA" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
         });
 
@@ -609,7 +618,7 @@ namespace LnkVoucher {
 
         // on click Region to display Account And Cost Centers Names in Footer
         $("#No_Row" + cnt).on('click', function () {
-            var AccCodeVal = $('#txtAccNumber' + cnt).val();
+            var AccCodeVal = $('#Acc_Code' + cnt).val();
             var AccObj = AccountDetailsIst.filter(s => s.COMP_CODE == CompCode && s.ACC_CODE == AccCodeVal);
             if (AccObj.length > 0) {
                 $("#divAccountNameFooter").removeClass("display_none");
@@ -618,22 +627,30 @@ namespace LnkVoucher {
                 $("#txtAccountNameFooter").prop("value", "");
             }
             //GetAllCostCenters CostCentreDetailsIst
-            var CC_CodeVal = $('#txtCostCntrNum' + cnt).val();
+            var CC_CodeVal = $('#CC_Code' + cnt).val();
             var CCObj = CostCentreDetailsIst.filter(s => s.COMP_CODE == CompCode && s.CC_CODE == CC_CodeVal);
             if (CCObj.length > 0) {
                 $("#divCostCntrNameFooter").removeClass("display_none");
-                $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
+                $("#CC_DESCAFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
             } else {
                 //   $("#divCostCntrNameFooter").addClass("display_none");
-                $("#txtCostCntrNameFooter").prop("value", "");
+                $("#CC_DESCAFooter").prop("value", "");
             }
         });
 
 
     }
-    function DisplayBuildControls() {
-         
+    function DisplayBuildControls(dataSource: any, cnt: number) {
+
+        debugger
+        let properties = Object.getOwnPropertyNames(dataSource);
+        for (var property of properties) {
+        debugger
+            $("#" + property + cnt).val(setVal(dataSource[property]))
+        }
+
     }
+    
     function ComputeTotals() {
 
         let CountItems = 0;
@@ -642,7 +659,7 @@ namespace LnkVoucher {
         let CountTotal = 0;
         debugger
         for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
+            var flagvalue = $("#StatusFlag" + i).val();
             if (flagvalue != "d" && flagvalue != "m") {
 
                 PackageCount += Number($("#txtOnhandQty" + i).val());
@@ -667,11 +684,11 @@ namespace LnkVoucher {
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
 
-            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
+            var statusFlag = $("#StatusFlag" + RecNo).val();
             if (statusFlag == "i")
-                $("#txt_StatusFlag" + RecNo).val("m");
+                $("#StatusFlag" + RecNo).val("m");
             else
-                $("#txt_StatusFlag" + RecNo).val("d");
+                $("#StatusFlag" + RecNo).val("d");
 
             // ComputeTotals();
             $("#txtItemNumber" + RecNo).val("99");
@@ -698,7 +715,7 @@ namespace LnkVoucher {
         }
         if (CanAdd) { 
             BuildControls(CountGrid);
-            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode    
+            $("#StatusFlag" + CountGrid).val("i"); //In Insert mode    
             $('._dis').removeAttr('disabled')
             $('.btn_minus_non').removeClass('display_none')
             CountGrid++; 
@@ -708,7 +725,7 @@ namespace LnkVoucher {
     //****************************************************Validation*********************************************
     function Validation_Grid(rowcount: number) {
          
-        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+        if ($("#StatusFlag" + rowcount).val() == "d" || $("#StatusFlag" + rowcount).val() == "m") {
             return true;
         } else {
              
@@ -723,34 +740,38 @@ namespace LnkVoucher {
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger
-        Model = new A_RecPay_Tr_ReceiptNote();
 
-        DocumentActions.AssignToModel(Model);//Insert Update
-        //Model.Status = chkStatus.checked == true ? 1 : 0;
+        let modle = new AQ_GetLnkVoucher;
+        let xx = AssignBuildControls(modle, CountGrid);
+        console.log(xx);
+        //Model = new A_RecPay_Tr_ReceiptNote();
+
+        //DocumentActions.AssignToModel(Model);//Insert Update
+        ////Model.Status = chkStatus.checked == true ? 1 : 0;
 
 
-        Model.CustomerID = null;
-        Model.VendorID = null;
-        Model.ExpenseID = null;
-        Model.FromCashBoxID = null;
-        Model.BankAccountCode = null;
+        //Model.CustomerID = null;
+        //Model.VendorID = null;
+        //Model.ExpenseID = null;
+        //Model.FromCashBoxID = null;
+        //Model.BankAccountCode = null;
 
-        if (Model.RecPayTypeId == 1) { Model.CustomerID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 2) { Model.VendorID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 3) { Model.BankAccountCode = $('#txt_BenIDH').val() }
-        if (Model.RecPayTypeId == 4) { Model.ExpenseID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 5) { Model.FromCashBoxID = Number($('#txt_BenIDH').val()) }
+        //if (Model.RecPayTypeId == 1) { Model.CustomerID = Number($('#txt_BenIDH').val()) }
+        //if (Model.RecPayTypeId == 2) { Model.VendorID = Number($('#txt_BenIDH').val()) }
+        //if (Model.RecPayTypeId == 3) { Model.BankAccountCode = $('#txt_BenIDH').val() }
+        //if (Model.RecPayTypeId == 4) { Model.ExpenseID = Number($('#txt_BenIDH').val()) }
+        //if (Model.RecPayTypeId == 5) { Model.FromCashBoxID = Number($('#txt_BenIDH').val()) }
 
-        Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        Model.CompCode = CompCode;
-        Model.BranchCode = BranchCode;
-        Model.TrType = TrType;
-        Model.TrNo = Number($('#txt_CODE').val());
-        Model.ReceiptID = Number($('#ReceiptID').val());
-        Model.Comp_Code = CompCode.toString();
-        Model.Branch_Code = BranchCode.toString();
-        Model.TrDateH = '1';
+        //Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
+        //Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        //Model.CompCode = CompCode;
+        //Model.BranchCode = BranchCode;
+        //Model.TrType = TrType;
+        //Model.TrNo = Number($('#txt_CODE').val());
+        //Model.ReceiptID = Number($('#ReceiptID').val());
+        //Model.Comp_Code = CompCode.toString();
+        //Model.Branch_Code = BranchCode.toString();
+        //Model.TrDateH = '1';
     }
     function Update() {
         debugger

@@ -224,13 +224,15 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return Number(stfix + fix.toString().substr(1, 3));
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
@@ -243,13 +245,15 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return (stfix + fix.toString().substr(1, 3)).toString();
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
@@ -2456,5 +2460,32 @@ function GetAllData(Table) {
         }
     });
     return List_Table;
+}
+function AssignBuildControls(dataSource, CountGrid) {
+    debugger;
+    var DetailsModel = new Array();
+    var StatusFlag = "StatusFlag";
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var i = 0; i < CountGrid; i++) {
+        var Model = JSON.parse(JSON.stringify(dataSource));
+        debugger;
+        var Status = $('#' + StatusFlag + i).val();
+        if (Status != 'i' && Status != 'u' && Status != 'd') {
+            continue;
+        }
+        for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
+            var property = properties_3[_i];
+            var NameID = "" + property + "" + i + "";
+            var element = document.getElementById(NameID);
+            if (element != null) {
+                if (element.type == "checkbox")
+                    Model[property] = element.checked;
+                else
+                    Model[property] = setVal(element.value);
+            }
+        }
+        DetailsModel.push(Model);
+    }
+    return DetailsModel;
 }
 //# sourceMappingURL=App.js.map

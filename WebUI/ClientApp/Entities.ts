@@ -11514,7 +11514,70 @@ class AProc_LnkGenerateTrans_Result {
 
 
 
-  
+class AQ_GetLnkVoucher {
+    constructor() {
+        this.ID
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code
+        this.Tr_Code
+        this.TrID
+        this.TrNo
+        this.Serial = 0;
+        this.Acc_Code
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public ACC_DESCA: string;
+    public ACC_DESCL: string;
+    public CC_DESCA: string;
+    public CC_DESCE: string;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public Src_DescA: string;
+    public Src_DescE: string;
+    public TYPE_DESCA: string;
+    public TYPE_DESCE: string;
+    public TrDate: string;
+    public StatusFlag: string;
+}
+
+
 
 
 

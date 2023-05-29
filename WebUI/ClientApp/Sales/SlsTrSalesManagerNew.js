@@ -184,6 +184,7 @@ var SlsTrSalesManagerNew;
     //flagInvMulti = true;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
+        debugger;
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -2980,7 +2981,7 @@ var SlsTrSalesManagerNew;
         txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
-        txtNet.value = (NetCount.RoundToSt(2));
+        txtNet.value = ((NetCount.RoundToNum(2)) - Number(txtCommission.value)).RoundToSt(2);
         if (ddlType.value == "1") {
             if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
                 $("#txtCardMoney").val('');
