@@ -41,5 +41,6 @@ namespace Inv.DAL.Domain
         public string Src_DescE { get; set; }
         public string TYPE_DESCA { get; set; }
         public string TYPE_DESCE { get; set; }
+        public Nullable<System.DateTime> TrDate { get; set; }
     }
 }

@@ -62,6 +62,12 @@
     <Compile Include="Domain\AProc_Prnt_JournalVoucher_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AProc_Prnt_LnkVoucher_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AProc_Rep_LnkVoucherList_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AProc_Rpt_CashVoucherList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
