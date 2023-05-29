@@ -346,7 +346,7 @@ namespace App {
 
 
     Number.prototype.RoundToSt = function (dec: number): string {
-         
+
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
@@ -361,7 +361,7 @@ namespace App {
             else {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 let Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
-                let fix = Math_round / Math.pow(10, dec); 
+                let fix = Math_round / Math.pow(10, dec);
                 return (stfix + fix.toString().substr(1, 3)).toString();
 
             }
@@ -3188,13 +3188,53 @@ function GetAllData(Table: Array<Table>): Array<Table_Result> {
 }
 
 
+var getClass = function (constructor) {
+    return new constructor()
+};
+
+
+function BuildAllFild(dataSource: any, cnt: number, NameRow: string) {
+
+    debugger
+    dataSource = getClass(dataSource);
+    let properties = Object.getOwnPropertyNames(dataSource);
+    let html = ``;
+    for (var property of properties) {
+        debugger
+        if (document.getElementById(property + cnt) == null) {
+            html += `<input id="${property + cnt}" type="hidden" value="" class="form-control "/>`;
+        }
+        else {
+            $("#"+ property + cnt).on('change', function () {
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
+            });
+        }
+    }
+    debugger
+    $("#" + NameRow + cnt).append(html);
+}
+
+
+
+function DisplayBuildControls(dataSource: any, cnt: number) {
+
+    debugger
+    let properties = Object.getOwnPropertyNames(dataSource);
+    for (var property of properties) {
+        debugger
+        $("#" + property + cnt).val(setVal(dataSource[property]))
+    }
+
+}
+
 function AssignBuildControls(dataSource: any, CountGrid: number) {
 
     debugger
     let DetailsModel = new Array<any>();
     let StatusFlag = "StatusFlag";
     let properties = Object.getOwnPropertyNames(dataSource);
-    for (var i = 0; i < CountGrid; i++) { 
+    for (var i = 0; i < CountGrid; i++) {
         let Model = JSON.parse(JSON.stringify(dataSource));
         debugger
         let Status = $('#' + StatusFlag + i).val();

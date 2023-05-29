@@ -464,30 +464,12 @@ namespace LnkVoucher {
 			              <input id="Line_DescA${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
-                    
-                  
-                    <input id="StatusFlag${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-
-                   <input id="ID${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="CompCode${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="bracode${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="System_Code${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="Tr_Code${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="TrID${cnt}" type="hidden" value="" class="form-control "  />
-                     <input id="TrNo${cnt}" type="hidden" value="" class="form-control "  />
-                    <input id="Serial${cnt}"  type="hidden" value="" class="form-control" />
-                    <input id="Voucher_No${cnt}" type="hidden" value="" class="form-control" /> 
-                    <input id="Line_DescAE${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="SOURCE_TYPE${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TYPE_CODE${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TR_DESCA${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TR_DESCE${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="Src_DescA${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TYPE_DESCA${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TYPE_DESCE${cnt}" type="hidden" value="" class="form-control" />
-                    <input id="TrDate${cnt}" type="hidden" value="" class="form-control" />
+                     
                 </tr>`;
         $("#div_Data").append(html);
+
+        let dataFild = new AQ_GetLnkVoucher;
+        BuildAllFild(AQ_GetLnkVoucher, cnt, "No_Row");
 
 
         $('#btnSearchAcc' + cnt).click(function (e) {
@@ -573,8 +555,7 @@ namespace LnkVoucher {
 
         //Depit on change  
         $("#Debit" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+ 
 
             var DebitVal = Number($('#Debit' + cnt).val());
             var CreditVal = Number($('#Credit' + cnt).val());
@@ -590,8 +571,7 @@ namespace LnkVoucher {
 
         //Credit on change   
         $("#Credit" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+ 
 
             var DebitVal = Number($('#Debit' + cnt).val());
             var CreditVal = Number($('#Credit' + cnt).val());
@@ -640,16 +620,7 @@ namespace LnkVoucher {
 
 
     }
-    function DisplayBuildControls(dataSource: any, cnt: number) {
 
-        debugger
-        let properties = Object.getOwnPropertyNames(dataSource);
-        for (var property of properties) {
-        debugger
-            $("#" + property + cnt).val(setVal(dataSource[property]))
-        }
-
-    }
     
     function ComputeTotals() {
 

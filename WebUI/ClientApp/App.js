@@ -2461,6 +2461,35 @@ function GetAllData(Table) {
     });
     return List_Table;
 }
+function BuildAllFild(dataSource, cnt, NameRow) {
+    debugger;
+    var properties = Object.getOwnPropertyNames(dataSource);
+    var html = "";
+    for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
+        var property = properties_3[_i];
+        debugger;
+        if (document.getElementById(property + cnt) == null) {
+            html += "<input id=\"" + (property + cnt) + "\" type=\"hidden\" value=\"\" class=\"form-control \"/>";
+        }
+        else {
+            $("#" + property + cnt).on('change', function () {
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
+            });
+        }
+    }
+    debugger;
+    $("#" + NameRow + cnt).append(html);
+}
+function DisplayBuildControls(dataSource, cnt) {
+    debugger;
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var _i = 0, properties_4 = properties; _i < properties_4.length; _i++) {
+        var property = properties_4[_i];
+        debugger;
+        $("#" + property + cnt).val(setVal(dataSource[property]));
+    }
+}
 function AssignBuildControls(dataSource, CountGrid) {
     debugger;
     var DetailsModel = new Array();
@@ -2473,8 +2502,8 @@ function AssignBuildControls(dataSource, CountGrid) {
         if (Status != 'i' && Status != 'u' && Status != 'd') {
             continue;
         }
-        for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
-            var property = properties_3[_i];
+        for (var _i = 0, properties_5 = properties; _i < properties_5.length; _i++) {
+            var property = properties_5[_i];
             var NameID = "" + property + "" + i + "";
             var element = document.getElementById(NameID);
             if (element != null) {

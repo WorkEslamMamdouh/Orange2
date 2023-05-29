@@ -6767,12 +6767,12 @@ var AQ_GetLnkVoucher = /** @class */ (function () {
         this.ID;
         this.CompCode = 0;
         this.bracode = 0;
-        this.System_Code;
-        this.Tr_Code;
-        this.TrID;
-        this.TrNo;
+        this.System_Code = '';
+        this.Tr_Code = '';
+        this.TrID = 0;
+        this.TrNo = 0;
         this.Serial = 0;
-        this.Acc_Code;
+        this.Acc_Code = '';
         this.Debit = 0;
         this.Credit = 0;
         this.CC_Code = "";
