@@ -467,8 +467,7 @@ namespace LnkVoucher {
                      
                 </tr>`;
         $("#div_Data").append(html);
-
-        let dataFild = new AQ_GetLnkVoucher;
+ 
         BuildAllFild(AQ_GetLnkVoucher, cnt, "No_Row");
 
 

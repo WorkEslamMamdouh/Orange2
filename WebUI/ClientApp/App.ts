@@ -3188,19 +3188,14 @@ function GetAllData(Table: Array<Table>): Array<Table_Result> {
 }
 
 
-var getClass = function (constructor) {
-    return new constructor()
-};
 
 
 function BuildAllFild(dataSource: any, cnt: number, NameRow: string) {
-
-    debugger
-    dataSource = getClass(dataSource);
+     
+    dataSource = getClass(dataSource.name);
     let properties = Object.getOwnPropertyNames(dataSource);
     let html = ``;
-    for (var property of properties) {
-        debugger
+    for (var property of properties) { 
         if (document.getElementById(property + cnt) == null) {
             html += `<input id="${property + cnt}" type="hidden" value="" class="form-control "/>`;
         }
@@ -3210,33 +3205,28 @@ function BuildAllFild(dataSource: any, cnt: number, NameRow: string) {
                     $("#StatusFlag" + cnt).val("u");
             });
         }
-    }
-    debugger
+    } 
     $("#" + NameRow + cnt).append(html);
 }
 
 
 
 function DisplayBuildControls(dataSource: any, cnt: number) {
-
-    debugger
+     
     let properties = Object.getOwnPropertyNames(dataSource);
-    for (var property of properties) {
-        debugger
+    for (var property of properties) { 
         $("#" + property + cnt).val(setVal(dataSource[property]))
     }
 
 }
 
 function AssignBuildControls(dataSource: any, CountGrid: number) {
-
-    debugger
+     
     let DetailsModel = new Array<any>();
     let StatusFlag = "StatusFlag";
     let properties = Object.getOwnPropertyNames(dataSource);
     for (var i = 0; i < CountGrid; i++) {
-        let Model = JSON.parse(JSON.stringify(dataSource));
-        debugger
+        let Model = JSON.parse(JSON.stringify(dataSource)); 
         let Status = $('#' + StatusFlag + i).val();
         if (Status != 'i' && Status != 'u' && Status != 'd') {
             continue;
@@ -3253,9 +3243,17 @@ function AssignBuildControls(dataSource: any, CountGrid: number) {
         }
 
         DetailsModel.push(Model);
-    }
-
-
-    return DetailsModel;
-
+    } 
+    return DetailsModel; 
 }
+
+
+
+var getClass = function (className) {
+    var constructorFunc = window[className]
+    if (typeof constructorFunc === 'function') {
+        return new constructorFunc();
+    } else {
+        throw new Error('Invalid class name: ' + className);
+    }
+};

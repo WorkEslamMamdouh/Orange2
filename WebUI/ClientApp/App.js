@@ -2462,12 +2462,11 @@ function GetAllData(Table) {
     return List_Table;
 }
 function BuildAllFild(dataSource, cnt, NameRow) {
-    debugger;
+    dataSource = getClass(dataSource.name);
     var properties = Object.getOwnPropertyNames(dataSource);
     var html = "";
     for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
         var property = properties_3[_i];
-        debugger;
         if (document.getElementById(property + cnt) == null) {
             html += "<input id=\"" + (property + cnt) + "\" type=\"hidden\" value=\"\" class=\"form-control \"/>";
         }
@@ -2478,26 +2477,21 @@ function BuildAllFild(dataSource, cnt, NameRow) {
             });
         }
     }
-    debugger;
     $("#" + NameRow + cnt).append(html);
 }
 function DisplayBuildControls(dataSource, cnt) {
-    debugger;
     var properties = Object.getOwnPropertyNames(dataSource);
     for (var _i = 0, properties_4 = properties; _i < properties_4.length; _i++) {
         var property = properties_4[_i];
-        debugger;
         $("#" + property + cnt).val(setVal(dataSource[property]));
     }
 }
 function AssignBuildControls(dataSource, CountGrid) {
-    debugger;
     var DetailsModel = new Array();
     var StatusFlag = "StatusFlag";
     var properties = Object.getOwnPropertyNames(dataSource);
     for (var i = 0; i < CountGrid; i++) {
         var Model = JSON.parse(JSON.stringify(dataSource));
-        debugger;
         var Status = $('#' + StatusFlag + i).val();
         if (Status != 'i' && Status != 'u' && Status != 'd') {
             continue;
@@ -2517,4 +2511,13 @@ function AssignBuildControls(dataSource, CountGrid) {
     }
     return DetailsModel;
 }
+var getClass = function (className) {
+    var constructorFunc = window[className];
+    if (typeof constructorFunc === 'function') {
+        return new constructorFunc();
+    }
+    else {
+        throw new Error('Invalid class name: ' + className);
+    }
+};
 //# sourceMappingURL=App.js.map

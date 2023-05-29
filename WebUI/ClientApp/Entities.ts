@@ -11516,7 +11516,7 @@ class AProc_LnkGenerateTrans_Result {
 
 class AQ_GetLnkVoucher {
     constructor() {
-        this.ID
+        this.ID = 0;
         this.CompCode = 0;
         this.bracode = 0;
         this.System_Code = ''

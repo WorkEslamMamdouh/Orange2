@@ -6764,7 +6764,7 @@ var AProc_LnkGenerateTrans_Result = /** @class */ (function () {
 }());
 var AQ_GetLnkVoucher = /** @class */ (function () {
     function AQ_GetLnkVoucher() {
-        this.ID;
+        this.ID = 0;
         this.CompCode = 0;
         this.bracode = 0;
         this.System_Code = '';
