@@ -6336,5 +6336,22 @@ namespace Inv.DAL.Domain
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rep_LnkVoucherList_Result>("AProc_Rep_LnkVoucherList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
         }
+    
+        public virtual ObjectResult<AProc_GetLnkVoucher_Result> AProc_GetLnkVoucher(Nullable<int> comp, string tr_code, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var tr_codeParameter = tr_code != null ?
+                new ObjectParameter("tr_code", tr_code) :
+                new ObjectParameter("tr_code", typeof(string));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_GetLnkVoucher_Result>("AProc_GetLnkVoucher", compParameter, tr_codeParameter, tRIdParameter);
+        }
     }
 }
