@@ -232,7 +232,7 @@ var App;
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
                 var fix = Math_round / Math.pow(10, dec);
-                return Number(stfix + fix.toString().substr(1, 3));
+                return (Number(stfix) + Number(fix));
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
@@ -253,7 +253,8 @@ var App;
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
                 var fix = Math_round / Math.pow(10, dec);
-                return (stfix + fix.toString().substr(1, 3)).toString();
+                return (Number(stfix) + Number(fix)).toString();
+                //return (stfix + fix.toString().substr(1, 3)).toString();
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
@@ -2487,6 +2488,7 @@ function DisplayBuildControls(dataSource, cnt) {
     }
 }
 function AssignBuildControls(dataSource, CountGrid) {
+    dataSource = getClass(dataSource.name);
     var DetailsModel = new Array();
     var StatusFlag = "StatusFlag";
     var properties = Object.getOwnPropertyNames(dataSource);

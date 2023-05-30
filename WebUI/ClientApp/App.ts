@@ -336,7 +336,7 @@ namespace App {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 let Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
                 let fix = Math_round / Math.pow(10, dec);
-                return Number(stfix + fix.toString().substr(1, 3));
+                return (Number(stfix) + Number(fix));
 
             }
         }
@@ -362,7 +362,8 @@ namespace App {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 let Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
                 let fix = Math_round / Math.pow(10, dec);
-                return (stfix + fix.toString().substr(1, 3)).toString();
+                return (Number(stfix) + Number(fix)).toString();
+                //return (stfix + fix.toString().substr(1, 3)).toString();
 
             }
         }
@@ -3221,7 +3222,8 @@ function DisplayBuildControls(dataSource: any, cnt: number) {
 }
 
 function AssignBuildControls(dataSource: any, CountGrid: number) {
-     
+
+    dataSource = getClass(dataSource.name);
     let DetailsModel = new Array<any>();
     let StatusFlag = "StatusFlag";
     let properties = Object.getOwnPropertyNames(dataSource);

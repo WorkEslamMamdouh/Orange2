@@ -2606,6 +2606,7 @@ var SlsTrSalesManagerNew;
         $("#txtPrice" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            debugger;
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             var GetUnitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
@@ -2614,6 +2615,7 @@ var SlsTrSalesManagerNew;
         $("#txtPrice" + cnt).on('keyup', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            debugger;
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             var GetUnitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);

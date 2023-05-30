@@ -3454,6 +3454,8 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
+
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
@@ -3465,6 +3467,7 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 

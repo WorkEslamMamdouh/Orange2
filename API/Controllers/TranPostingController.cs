@@ -3,6 +3,7 @@ using Inv.API.Tools;
 using Inv.BLL.Services.GBRANCH;
 using Inv.BLL.Services.Glnktrans;
 using Inv.BLL.Services.GlnktransTemp;
+using Inv.BLL.Services.LnkVoucherDetail;
 using Inv.BLL.Services.VchrTemplateDetail;
 using Inv.DAL.Domain;
 using System;
@@ -21,14 +22,16 @@ namespace Inv.API.Controllers
         private readonly IGlnktransService IGlnktransService;
         private readonly G_USERSController UserControl;
         private readonly IVchrTemplateDetailService IVchrTemplateDetailService;
+        private readonly ILnkVoucherDetailService ILnkVoucherService;
 
-        public TranPostingController(IGBRANCHService _IGBRANCHService, GlnktransTempService _GlnktransTempService, IGlnktransService _IGlnktransService, G_USERSController _Control, IVchrTemplateDetailService _IVchrTemplateDetailService)
+        public TranPostingController(IGBRANCHService _IGBRANCHService, GlnktransTempService _GlnktransTempService, IGlnktransService _IGlnktransService, G_USERSController _Control, IVchrTemplateDetailService _IVchrTemplateDetailService , ILnkVoucherDetailService _ILnkVoucherDetailService)
         {
             IGBRANCHService = _IGBRANCHService;
             GlnktransTempService = _GlnktransTempService;
             IGlnktransService = _IGlnktransService;
             IVchrTemplateDetailService = _IVchrTemplateDetailService;
             UserControl = _Control;
+            ILnkVoucherService = _ILnkVoucherDetailService;
         }
 
         [HttpGet, AllowAnonymous]
@@ -60,6 +63,73 @@ namespace Inv.API.Controllers
             return BadRequest(ModelState);
         }
 
+
+        [HttpPost, AllowAnonymous]
+        public IHttpActionResult UpdateDetail([FromBody]List<AQ_GetLnkVoucher> obj)
+        {
+            //if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
+            //{
+            using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+
+                     
+                    //update Details
+                    List<AQ_GetLnkVoucher> insertedObjects = obj.Where(x => x.StatusFlag == 'i').ToList();
+                    List<AQ_GetLnkVoucher> deletedObjects = obj.Where(x => x.StatusFlag == 'd').ToList();
+                    List<AQ_GetLnkVoucher> updatedObjects = obj.Where(x => x.StatusFlag == 'u').ToList();
+
+                    foreach (AQ_GetLnkVoucher item in insertedObjects)
+                    { 
+                        ILnkVoucherService.Insert(item);
+                    }
+
+                    foreach (AQ_GetLnkVoucher item in updatedObjects)
+                    { 
+                        ILnkVoucherService.Update(item);
+                    }
+
+                    foreach (AQ_GetLnkVoucher item in deletedObjects)
+                    {
+                        ILnkVoucherService.Delete(item.ID);
+                    }
+
+                    dbTransaction.Commit();
+
+
+                    //ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
+                    //return Ok(new BaseResponse(Arrays));
+
+                    return Ok(new BaseResponse(obj));
+
+                    ////// call process trans 
+                    //int br = 1;
+                    //ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.A_JOURNAL_HEADER.COMP_CODE), br, jouranalHeader.VoucherID, "JourVouchr", "Update", db);
+                    //if (res.ResponseState == true)
+                    //{
+
+                    //    dbTransaction.Commit();
+                    //    LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, res.ResponseData.ToString(), null);
+
+                    //    var displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
+                    //    return Ok(new BaseResponse(displayData));
+                    //}
+                    //else
+                    //{
+                    //    LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), res.ResponseData.ToString(), null);
+                    //    dbTransaction.Rollback();
+                    //    return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
+                    //}
+                }
+                catch (Exception ex)
+                {
+                    
+                    dbTransaction.Rollback();
+                    return Ok(new BaseResponse(ex.Message));
+                }
+            }
+        }
 
 
 

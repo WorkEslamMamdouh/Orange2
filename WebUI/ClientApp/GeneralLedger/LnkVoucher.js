@@ -13,7 +13,7 @@ var LnkVoucher;
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     var TransactionsGrid = new JsGrid();
     var LnkTransDetails = new Array();
-    var Model = new A_RecPay_Tr_ReceiptNote();
+    var Model = new Array();
     var AccountDetails = new A_ACCOUNT();
     var AccountDetailsIst = new Array();
     var CostCentreDetailsIst = new Array();
@@ -24,6 +24,9 @@ var LnkVoucher;
     var txtToDate;
     var txtFromNumber;
     var txtToNumber;
+    var txtDifference;
+    var txtTotalCredit;
+    var txtTotalDebit;
     var ddlBranch;
     var ddlTypeTrans;
     var btnBack;
@@ -67,6 +70,9 @@ var LnkVoucher;
         txtToDate = document.getElementById("txtToDate");
         txtFromNumber = document.getElementById("txtFromNumber");
         txtToNumber = document.getElementById("txtToNumber");
+        txtTotalDebit = document.getElementById("txtTotalDebit");
+        txtTotalCredit = document.getElementById("txtTotalCredit");
+        txtDifference = document.getElementById("txtDifference");
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview");
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF");
@@ -366,7 +372,7 @@ var LnkVoucher;
     ////**************************************************** Controls Grid Region //****************************************************
     function BuildControls(cnt) {
         var html = "";
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    \n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"Acc_Code" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"ACC_DESCA" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Debit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Credit" + cnt + "\" name=\"FromDate\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"CC_Code" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"CC_DESCA" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Line_DescA" + cnt + "\" name=\"FromDate\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                     \n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    \n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"Acc_Code" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"ACC_DESCA" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Debit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Credit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"CC_Code" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"CC_DESCA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Line_DescA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                     \n                </tr>";
         $("#div_Data").append(html);
         BuildAllFild(AQ_GetLnkVoucher, cnt, "No_Row");
         $('#btnSearchAcc' + cnt).click(function (e) {
@@ -416,7 +422,7 @@ var LnkVoucher;
                 $('#CC_Code' + cnt).val(id);
                 GetCostCenterByCode(id);
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 if ($("#StatusFlag" + cnt).val() != "i")
                     $("#StatusFlag" + cnt).val("u");
             });
@@ -427,13 +433,13 @@ var LnkVoucher;
             var id = $('#CC_Code' + cnt).val();
             if (GetCostCenterByCode(id)) {
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $("#divCostCntrNameFooter").removeClass("display_none");
             }
             else {
                 $('#CC_Code' + cnt).val("");
                 $('#CC_DESCA' + cnt).val("");
-                $('#CC_DESCAFooter').val("");
+                $('#txtCostCntrNameFooter').val("");
                 //  $("#divCostCntrNameFooter").addClass("display_none"); 
                 DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
             }
@@ -488,33 +494,31 @@ var LnkVoucher;
             var CCObj = CostCentreDetailsIst.filter(function (s) { return s.COMP_CODE == CompCode && s.CC_CODE == CC_CodeVal; });
             if (CCObj.length > 0) {
                 $("#divCostCntrNameFooter").removeClass("display_none");
-                $("#CC_DESCAFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
+                $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
             }
             else {
                 //   $("#divCostCntrNameFooter").addClass("display_none");
-                $("#CC_DESCAFooter").prop("value", "");
+                $("#txtCostCntrNameFooter").prop("value", "");
             }
         });
     }
     function ComputeTotals() {
-        var CountItems = 0;
-        var PackageCount = 0;
-        var txtUnitCosts = 0;
-        var CountTotal = 0;
-        debugger;
-        for (var i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#StatusFlag" + i).val();
+        var DepitTotal = 0;
+        var CreditTotal = 0;
+        var Difference = 0;
+        for (var f = 0; f < CountGrid; f++) {
+            var flagvalue = $("#StatusFlag" + f).val();
             if (flagvalue != "d" && flagvalue != "m") {
-                PackageCount += Number($("#txtOnhandQty" + i).val());
-                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
-                CountTotal += Number($("#txtTotal" + i).val());
-                CountItems++;
+                DepitTotal += Number($("#Debit" + f).val());
+                CreditTotal += Number($("#Credit" + f).val());
             }
         }
-        $("#txtItemCount").val(CountItems.RoundToSt(2));
-        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
-        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
-        $("#txtTotal").val(CountTotal.RoundToSt(2));
+        DepitTotal = DepitTotal.RoundToNum(2);
+        CreditTotal = CreditTotal.RoundToNum(2);
+        txtTotalDebit.value = DepitTotal.toLocaleString();
+        txtTotalCredit.value = CreditTotal.toLocaleString();
+        Difference = (DepitTotal - CreditTotal).RoundToNum(2);
+        txtDifference.value = Difference.toLocaleString();
     }
     function DeleteRow(RecNo) {
         if (!SysSession.CurrentPrivileges.Remove)
@@ -567,32 +571,9 @@ var LnkVoucher;
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger;
-        var modle = new AQ_GetLnkVoucher;
-        var xx = AssignBuildControls(modle, CountGrid);
-        console.log(xx);
-        //Model = new A_RecPay_Tr_ReceiptNote();
-        //DocumentActions.AssignToModel(Model);//Insert Update
-        ////Model.Status = chkStatus.checked == true ? 1 : 0;
-        //Model.CustomerID = null;
-        //Model.VendorID = null;
-        //Model.ExpenseID = null;
-        //Model.FromCashBoxID = null;
-        //Model.BankAccountCode = null;
-        //if (Model.RecPayTypeId == 1) { Model.CustomerID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 2) { Model.VendorID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 3) { Model.BankAccountCode = $('#txt_BenIDH').val() }
-        //if (Model.RecPayTypeId == 4) { Model.ExpenseID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 5) { Model.FromCashBoxID = Number($('#txt_BenIDH').val()) }
-        //Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        //Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        //Model.CompCode = CompCode;
-        //Model.BranchCode = BranchCode;
-        //Model.TrType = TrType;
-        //Model.TrNo = Number($('#txt_CODE').val());
-        //Model.ReceiptID = Number($('#ReceiptID').val());
-        //Model.Comp_Code = CompCode.toString();
-        //Model.Branch_Code = BranchCode.toString();
-        //Model.TrDateH = '1';
+        Model = new Array();
+        Model = AssignBuildControls(AQ_GetLnkVoucher, CountGrid);
+        console.log(Model);
     }
     function Update() {
         debugger;
@@ -602,14 +583,14 @@ var LnkVoucher;
         }
         Ajax.Callsync({
             type: "POST",
-            url: sys.apiUrl("AccTrReceipt", "Update"),
+            url: sys.apiUrl("TranPosting", "UpdateDetail"),
             data: JSON.stringify(Model),
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
                     var res = result.Response;
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
-                    Success(res.TRID, res);
+                    //Success(res.TRID, res);
                     Save_Succ_But();
                 }
                 else {

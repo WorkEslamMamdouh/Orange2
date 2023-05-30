@@ -16,7 +16,7 @@ namespace LnkVoucher {
 
     var TransactionsGrid: JsGrid = new JsGrid();
     var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>();
-    var Model: A_RecPay_Tr_ReceiptNote = new A_RecPay_Tr_ReceiptNote();
+    var Model: Array<AQ_GetLnkVoucher> = new Array<AQ_GetLnkVoucher>(); 
     var AccountDetails: A_ACCOUNT = new A_ACCOUNT();
     var AccountDetailsIst: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var CostCentreDetailsIst: Array<G_COST_CENTER> = new Array<G_COST_CENTER>();
@@ -28,6 +28,9 @@ namespace LnkVoucher {
     var txtToDate: HTMLInputElement;
     var txtFromNumber: HTMLInputElement;
     var txtToNumber: HTMLInputElement;
+    var txtDifference: HTMLInputElement;
+    var txtTotalCredit: HTMLInputElement;
+    var txtTotalDebit: HTMLInputElement;
 
     var ddlBranch: HTMLSelectElement;
     var ddlTypeTrans: HTMLSelectElement;
@@ -72,6 +75,9 @@ namespace LnkVoucher {
         txtToDate = document.getElementById("txtToDate") as HTMLInputElement;
         txtFromNumber = document.getElementById("txtFromNumber") as HTMLInputElement;
         txtToNumber = document.getElementById("txtToNumber") as HTMLInputElement;
+        txtTotalDebit = document.getElementById("txtTotalDebit") as HTMLInputElement;
+        txtTotalCredit = document.getElementById("txtTotalCredit") as HTMLInputElement;
+        txtDifference = document.getElementById("txtDifference") as HTMLInputElement;
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
@@ -431,12 +437,12 @@ namespace LnkVoucher {
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="Debit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Debit${cnt}" name="" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="Credit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Credit${cnt}" name="" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
 
@@ -449,19 +455,19 @@ namespace LnkVoucher {
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                <input id="CC_Code${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			                <input id="CC_Code${cnt}" name="" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="costcntr">
 		                <div class="form-group">
-			                  <input id="CC_DESCA${cnt}" name="FromDate" value="" disabled type="text" class="form-control" />
+			                  <input id="CC_DESCA${cnt}" name="" value="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 
                     
                     <td style="width:22%;">
 		                <div class="form-group">
-			              <input id="Line_DescA${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			              <input id="Line_DescA${cnt}" name="" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                      
@@ -525,7 +531,7 @@ namespace LnkVoucher {
                 $('#CC_Code' + cnt).val(id);
                 GetCostCenterByCode(id);
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 if ($("#StatusFlag" + cnt).val() != "i")
                     $("#StatusFlag" + cnt).val("u");
             });
@@ -539,14 +545,14 @@ namespace LnkVoucher {
             if (GetCostCenterByCode(id)) {
 
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                $('#CC_DESCAFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $("#divCostCntrNameFooter").removeClass("display_none");
 
             }
             else {
                 $('#CC_Code' + cnt).val("");
                 $('#CC_DESCA' + cnt).val("");
-                $('#CC_DESCAFooter').val("");
+                $('#txtCostCntrNameFooter').val("");
                 //  $("#divCostCntrNameFooter").addClass("display_none"); 
                 DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
             }
@@ -610,10 +616,10 @@ namespace LnkVoucher {
             var CCObj = CostCentreDetailsIst.filter(s => s.COMP_CODE == CompCode && s.CC_CODE == CC_CodeVal);
             if (CCObj.length > 0) {
                 $("#divCostCntrNameFooter").removeClass("display_none");
-                $("#CC_DESCAFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
+                $("#txtCostCntrNameFooter").prop("value", lang == "ar" ? CCObj[0].CC_DESCA : CCObj[0].CC_DESCE);
             } else {
                 //   $("#divCostCntrNameFooter").addClass("display_none");
-                $("#CC_DESCAFooter").prop("value", "");
+                $("#txtCostCntrNameFooter").prop("value", "");
             }
         });
 
@@ -623,30 +629,24 @@ namespace LnkVoucher {
     
     function ComputeTotals() {
 
-        let CountItems = 0;
-        let PackageCount = 0;
-        let txtUnitCosts = 0;
-        let CountTotal = 0;
-        debugger
-        for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#StatusFlag" + i).val();
+        let DepitTotal = 0;
+        let CreditTotal = 0;
+        var Difference: number = 0;
+
+        for (let f = 0; f < CountGrid; f++) {
+            var flagvalue = $("#StatusFlag" + f).val();
             if (flagvalue != "d" && flagvalue != "m") {
-
-                PackageCount += Number($("#txtOnhandQty" + i).val());
-
-                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
-
-                CountTotal += Number($("#txtTotal" + i).val());
-
-
-                CountItems++
+                DepitTotal += Number($("#Debit" + f).val());
+                CreditTotal += Number($("#Credit" + f).val());
             }
         }
+        DepitTotal = DepitTotal.RoundToNum(2);
+        CreditTotal = CreditTotal.RoundToNum(2);
+        txtTotalDebit.value = DepitTotal.toLocaleString();
+        txtTotalCredit.value = CreditTotal.toLocaleString();
 
-        $("#txtItemCount").val(CountItems.RoundToSt(2));
-        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
-        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
-        $("#txtTotal").val(CountTotal.RoundToSt(2));
+        Difference = (DepitTotal - CreditTotal).RoundToNum(2);
+        txtDifference.value = Difference.toLocaleString();
 
 
     }
@@ -710,38 +710,10 @@ namespace LnkVoucher {
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger
-
-        let modle = new AQ_GetLnkVoucher;
-        let xx = AssignBuildControls(modle, CountGrid);
-        console.log(xx);
-        //Model = new A_RecPay_Tr_ReceiptNote();
-
-        //DocumentActions.AssignToModel(Model);//Insert Update
-        ////Model.Status = chkStatus.checked == true ? 1 : 0;
-
-
-        //Model.CustomerID = null;
-        //Model.VendorID = null;
-        //Model.ExpenseID = null;
-        //Model.FromCashBoxID = null;
-        //Model.BankAccountCode = null;
-
-        //if (Model.RecPayTypeId == 1) { Model.CustomerID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 2) { Model.VendorID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 3) { Model.BankAccountCode = $('#txt_BenIDH').val() }
-        //if (Model.RecPayTypeId == 4) { Model.ExpenseID = Number($('#txt_BenIDH').val()) }
-        //if (Model.RecPayTypeId == 5) { Model.FromCashBoxID = Number($('#txt_BenIDH').val()) }
-
-        //Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        //Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        //Model.CompCode = CompCode;
-        //Model.BranchCode = BranchCode;
-        //Model.TrType = TrType;
-        //Model.TrNo = Number($('#txt_CODE').val());
-        //Model.ReceiptID = Number($('#ReceiptID').val());
-        //Model.Comp_Code = CompCode.toString();
-        //Model.Branch_Code = BranchCode.toString();
-        //Model.TrDateH = '1';
+          
+        Model = new Array<AQ_GetLnkVoucher>(); 
+        Model = AssignBuildControls(AQ_GetLnkVoucher, CountGrid);
+        console.log(Model);
     }
     function Update() {
         debugger
@@ -751,14 +723,14 @@ namespace LnkVoucher {
         }
         Ajax.Callsync({
             type: "POST",
-            url: sys.apiUrl("AccTrReceipt", "Update"),
+            url: sys.apiUrl("TranPosting", "UpdateDetail"),
             data: JSON.stringify(Model),
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let res = result.Response as AProc_LnkGenerateTrans_Result
+                    let res = result.Response as AQ_GetLnkVoucher
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
-                    Success(res.TRID, res);
+                    //Success(res.TRID, res);
                     Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
