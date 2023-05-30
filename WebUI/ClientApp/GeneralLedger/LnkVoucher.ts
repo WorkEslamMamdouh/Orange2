@@ -50,6 +50,7 @@ namespace LnkVoucher {
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
+    var Flag_Enabled_All = false;
     export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -210,9 +211,7 @@ namespace LnkVoucher {
 
         });
 
-    }
-
-
+    } 
     //************************************************fillddl**************************************
     function GetData_Header() {
         var Table: Array<Table>;
@@ -380,13 +379,21 @@ namespace LnkVoucher {
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
-        $('._dis').removeAttr('disabled')
-        $('.btn_minus_non').removeClass('display_none')
+        if (Flag_Enabled_All) {
+            $('._dis').removeAttr('disabled')
+            $('.btn_minus_non').removeClass('display_none')
+            $('._None_Input').removeClass('display_none')
+        }
+        else {
+            $('._Remarks').removeAttr('disabled')
+            $('.table-responsive').scrollLeft(-500);
+        }
+        
         $('#id_div_Filter').addClass('disabledDiv')
-        $('._None_Input').removeClass('display_none')
     }
     function disabled() {
         $('._dis').attr('disabled', 'disabled')
+        $('._Remarks').attr('disabled', 'disabled')
         $('#id_div_Filter').removeClass('disabledDiv')
         $('._None_Input').addClass('display_none')
         $('.btn_minus_non').addClass('display_none')
@@ -489,7 +496,7 @@ namespace LnkVoucher {
                     
                     <td style="width:22%;">
 		                <div class="form-group">
-			              <input id="Line_DescA${cnt}" name="" value="" disabled type="text" class="form-control _dis" />
+			              <input id="Line_DescA${cnt}" name="" value="" disabled type="text" class="_Remarks form-control _dis" />
 		                </div>
 	                </td>
                      
