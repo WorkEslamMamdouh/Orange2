@@ -14,6 +14,7 @@ var LnkVoucher;
     var TransactionsGrid = new JsGrid();
     var LnkTransDetails = new Array();
     var Model = new Array();
+    var LnkVoucherlMastDet = new LnkVoucherlMasterDetails();
     var AccountDetails = new A_ACCOUNT();
     var AccountDetailsIst = new Array();
     var CostCentreDetailsIst = new Array();
@@ -42,6 +43,7 @@ var LnkVoucher;
     var btnPrintTransaction;
     var Events = 0;
     var CountGrid = 0;
+    var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -294,10 +296,29 @@ var LnkVoucher;
             if (!Validation()) {
                 return;
             }
-            $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
-            $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-            Assign();
-            //Update();
+            var CanAdd = true;
+            if (CountGrid > 0) {
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
+                }
+            }
+            if (CanAdd) {
+                $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                if (Number(txtDifference.value) != 0 && SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced == true) {
+                    WorningMessage("القيد غير متوازن هل تريد الحفظ ؟؟", "The constraint is unbalanced Do you want to save", "تحذير", "worning", function () {
+                        Assign();
+                        Update();
+                    });
+                }
+                else {
+                    Assign();
+                    Update();
+                }
+            }
         }, 100);
     }
     function btnBack_onclick() {
@@ -365,6 +386,7 @@ var LnkVoucher;
                         DisplayBuildControls(List[i], i);
                         CountGrid++;
                     }
+                    ComputeTotals();
                 }
             }
         });
@@ -558,10 +580,34 @@ var LnkVoucher;
     }
     //****************************************************Validation*********************************************
     function Validation_Grid(rowcount) {
-        if ($("#StatusFlag" + rowcount).val() == "d" || $("#StatusFlag" + rowcount).val() == "m") {
+        var AccNum = $("#Acc_Code" + rowcount).val();
+        var AccObject = AccountDetailsIst.filter(function (s) { return s.COMP_CODE == CompCode && s.ACC_CODE == AccNum; });
+        var Debit = Number($("#Debit" + rowcount).val());
+        var credit = Number($("#Credit" + rowcount).val());
+        if ($("#StatusFlag" + rowcount).val() == "d" || $("#StatusFlag" + rowcount).val() == "") {
             return true;
         }
         else {
+            if ($("#Acc_Code" + rowcount).val() == "") {
+                DisplayMassage('برجاء ادخال رقم الحساب', '(Please enter account number)', MessageType.Error);
+                Errorinput($("#Acc_Code" + rowcount));
+                return false;
+            }
+            else if (Debit == 0 && credit == 0) {
+                DisplayMassage('برجاء ادخال مبلغ المدين او الدائن', '(Please enter the debit or credit amount)', MessageType.Error);
+                Errorinput($("#Debit" + rowcount));
+                return false;
+            }
+            else if ($("#txtCostCntrNum" + rowcount).val() == "" && (AccObject[0].ACC_GROUP == 4 || AccObject[0].ACC_GROUP == 5) && VoucherCCType == 1) {
+                DisplayMassage('برجاء ادخال  مركز التكلفه', '(Please enter the cost center)', MessageType.Error);
+                Errorinput($("#txtCostCntrNum" + rowcount));
+                return false;
+            }
+            else if ($("#txtCostCntrNum" + rowcount).val() == "" && VoucherCCType == 2) {
+                DisplayMassage('برجاء ادخال  مركز التكلفه', '(Please enter the cost center)', MessageType.Error);
+                Errorinput($("#txtCostCntrNum" + rowcount));
+                return false;
+            }
             return true;
         }
     }
@@ -574,6 +620,17 @@ var LnkVoucher;
         Model = new Array();
         Model = AssignBuildControls(AQ_GetLnkVoucher, CountGrid);
         console.log(Model);
+        var Filter = new FilterLnkVoucher;
+        Filter.Comp = CompCode;
+        Filter.branchCode = Number(ddlBranch.value);
+        Filter.FromNum = Number(txtFromNumber.value);
+        Filter.ToNum = Number(txtToNumber.value);
+        Filter.TrType = "" + ddlTypeTrans.value + ",";
+        Filter.StartDate = DateFormatRep(txtFromDate.value);
+        Filter.EndDate = DateFormatRep(txtToDate.value);
+        Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
+        LnkVoucherlMastDet.AQ_GetLnkVoucher = Model;
+        LnkVoucherlMastDet.FilterLnkVoucher = Filter;
     }
     function Update() {
         debugger;
@@ -584,13 +641,15 @@ var LnkVoucher;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("TranPosting", "UpdateDetail"),
-            data: JSON.stringify(Model),
+            data: JSON.stringify(LnkVoucherlMastDet),
             success: function (d) {
+                debugger;
                 var result = d;
                 if (result.IsSuccess) {
+                    debugger;
                     var res = result.Response;
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
-                    //Success(res.TRID, res);
+                    Success(0, res);
                     Save_Succ_But();
                 }
                 else {
@@ -599,35 +658,10 @@ var LnkVoucher;
             }
         });
     }
-    function Open() {
-        if (!CheckDate(DateFormat(txtTrDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
-            return;
-        }
-        Assign();
-        Ajax.Callsync({
-            type: "POST",
-            url: sys.apiUrl("AccTrReceipt", "Open"),
-            data: JSON.stringify(Model),
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    var res = result.Response;
-                    DisplayMassage("تم فك الاعتماد بنجاح", "Success", MessageType.Succeed);
-                    Success(res.TRID, res);
-                    Save_Succ_But();
-                }
-                else {
-                    DisplayMassage("خطأء", "Error", MessageType.Error);
-                }
-            }
-        });
-    }
-    function Success(ReceiptID, res) {
-        LnkTransDetails = LnkTransDetails.filter(function (x) { return x.TRID != ReceiptID; });
-        LnkTransDetails.push(res);
+    function Success(ID, res) {
+        debugger;
+        LnkTransDetails = res;
         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
-        TransactionsGrid.SelectedItem = res;
         $('#divGridShow').removeClass('display_none');
         $('#Div_control').addClass('display_none');
         TransactionsGrid.DataSource = LnkTransDetails;

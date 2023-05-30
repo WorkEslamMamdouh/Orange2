@@ -1921,7 +1921,30 @@ class Custom_Items {
     public ItemCode: string;
     public ItemDesc: string; 
 }
-                   
+
+
+class FilterLnkVoucher {
+    constructor() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    
+    }
+    public Comp: number;
+    public branchCode: number;
+    public FromNum: number;
+    public ToNum: number;
+    public TrType: string;
+    public StartDate: string; 
+    public EndDate: string; 
+    public UserCode: string; 
+}
+ 
 
 class I_ItemStore {
     constructor() {
@@ -6215,6 +6238,17 @@ class JournalMasterDetails extends SecurityClass {
     public A_JOURNAL_DETAIL: Array<A_JOURNAL_DETAIL>;
 }
 
+
+class LnkVoucherlMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.FilterLnkVoucher = new FilterLnkVoucher();
+        this.AQ_GetLnkVoucher = new Array<AQ_GetLnkVoucher>();
+    }
+    public FilterLnkVoucher: FilterLnkVoucher;
+    public AQ_GetLnkVoucher: Array<AQ_GetLnkVoucher>;
+}
+
 class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     constructor() {
         super();
@@ -6224,6 +6258,9 @@ class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     public AQ_GetJournalHeader: Array<AQ_GetJournalHeader>;
     public AQ_GetJournalDetail: Array<AQ_GetJournalDetail>;
 }
+
+
+
 class A_JOURNAL_DETAIL extends SecurityClass {
     constructor() {
         super();

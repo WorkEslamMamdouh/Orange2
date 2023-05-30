@@ -1,4 +1,5 @@
 ﻿using Inv.API.Models;
+using Inv.API.Models.CustomModel;
 using Inv.API.Tools;
 using Inv.BLL.Services.GBRANCH;
 using Inv.BLL.Services.Glnktrans;
@@ -6,6 +7,7 @@ using Inv.BLL.Services.GlnktransTemp;
 using Inv.BLL.Services.LnkVoucherDetail;
 using Inv.BLL.Services.VchrTemplateDetail;
 using Inv.DAL.Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -65,7 +67,7 @@ namespace Inv.API.Controllers
 
 
         [HttpPost, AllowAnonymous]
-        public IHttpActionResult UpdateDetail([FromBody]List<AQ_GetLnkVoucher> obj)
+        public IHttpActionResult UpdateDetail([FromBody]LnkVoucherlMasterDetails  obj)
         {
             //if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
             //{
@@ -76,32 +78,37 @@ namespace Inv.API.Controllers
 
                      
                     //update Details
-                    List<AQ_GetLnkVoucher> insertedObjects = obj.Where(x => x.StatusFlag == 'i').ToList();
-                    List<AQ_GetLnkVoucher> deletedObjects = obj.Where(x => x.StatusFlag == 'd').ToList();
-                    List<AQ_GetLnkVoucher> updatedObjects = obj.Where(x => x.StatusFlag == 'u').ToList();
+                    List<AQ_GetLnkVoucher> insertedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'i').ToList();
+                    List<AQ_GetLnkVoucher> deletedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'd').ToList();
+                    List<AQ_GetLnkVoucher> updatedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'u').ToList();
 
-                    foreach (AQ_GetLnkVoucher item in insertedObjects)
-                    { 
-                        ILnkVoucherService.Insert(item);
-                    }
+                    //foreach (AQ_GetLnkVoucher item in insertedObjects)
+                    //{
+                    //    ILnkVoucherService.Insert(item);
+                    //}
 
-                    foreach (AQ_GetLnkVoucher item in updatedObjects)
-                    { 
-                        ILnkVoucherService.Update(item);
-                    }
+                    //foreach (AQ_GetLnkVoucher item in updatedObjects)
+                    //{
+                    //    ILnkVoucherService.Update(item);
+                    //}
 
-                    foreach (AQ_GetLnkVoucher item in deletedObjects)
-                    {
-                        ILnkVoucherService.Delete(item.ID);
-                    }
+                    //foreach (AQ_GetLnkVoucher item in deletedObjects)
+                    //{
+                    //    ILnkVoucherService.Delete(item.ID);
+                    //}
 
                     dbTransaction.Commit();
 
 
-                    //ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
-                    //return Ok(new BaseResponse(Arrays));
+                    List<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(obj.FilterLnkVoucher.Comp, obj.FilterLnkVoucher.branchCode, obj.FilterLnkVoucher.UserCode, "I", obj.FilterLnkVoucher.TrType, obj.FilterLnkVoucher.StartDate, obj.FilterLnkVoucher.EndDate, obj.FilterLnkVoucher.FromNum, obj.FilterLnkVoucher.ToNum).ToList();
 
-                    return Ok(new BaseResponse(obj));
+                    //string DataJson = JsonConvert.SerializeObject(Arrays, Formatting.None);
+
+                    //return GetObjectClass(DataJson, Arrays.GetType());
+
+                    return Ok(new BaseResponse(Arrays));
+
+
 
                     ////// call process trans 
                     //int br = 1;

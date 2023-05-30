@@ -1104,6 +1104,19 @@ var Custom_Items = /** @class */ (function () {
     }
     return Custom_Items;
 }());
+var FilterLnkVoucher = /** @class */ (function () {
+    function FilterLnkVoucher() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    }
+    return FilterLnkVoucher;
+}());
 var I_ItemStore = /** @class */ (function () {
     function I_ItemStore() {
         this.ItemStoreID = 0;
@@ -3579,6 +3592,16 @@ var JournalMasterDetails = /** @class */ (function (_super) {
         return _this;
     }
     return JournalMasterDetails;
+}(SecurityClass));
+var LnkVoucherlMasterDetails = /** @class */ (function (_super) {
+    __extends(LnkVoucherlMasterDetails, _super);
+    function LnkVoucherlMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.FilterLnkVoucher = new FilterLnkVoucher();
+        _this.AQ_GetLnkVoucher = new Array();
+        return _this;
+    }
+    return LnkVoucherlMasterDetails;
 }(SecurityClass));
 var AQ_GetJournalHeaderWithDetail = /** @class */ (function (_super) {
     __extends(AQ_GetJournalHeaderWithDetail, _super);

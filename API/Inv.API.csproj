@@ -330,6 +330,8 @@
     <Compile Include="Models\CustomModel\Account_CCDT_CCDTTP_MasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
+    <Compile Include="Models\CustomModel\FilterLnkVoucher.cs" />
+    <Compile Include="Models\CustomModel\LnkVoucherlMasterDetails.cs" />
     <Compile Include="Models\CustomModel\NewsDetails.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SessionManager.cs" />
