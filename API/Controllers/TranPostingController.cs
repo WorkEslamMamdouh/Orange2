@@ -78,24 +78,24 @@ namespace Inv.API.Controllers
 
                      
                     //update Details
-                    List<AQ_GetLnkVoucher> insertedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'i').ToList();
-                    List<AQ_GetLnkVoucher> deletedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'd').ToList();
-                    List<AQ_GetLnkVoucher> updatedObjects = obj.AQ_GetLnkVoucher.Where(x => x.StatusFlag == 'u').ToList();
+                    List<A_LnkVoucher> insertedObjects = obj.A_LnkVoucher.Where(x => x.StatusFlag == 'i').ToList();
+                    List<A_LnkVoucher> deletedObjects = obj.A_LnkVoucher.Where(x => x.StatusFlag == 'd').ToList();
+                    List<A_LnkVoucher> updatedObjects = obj.A_LnkVoucher.Where(x => x.StatusFlag == 'u').ToList();
 
-                    //foreach (AQ_GetLnkVoucher item in insertedObjects)
-                    //{
-                    //    ILnkVoucherService.Insert(item);
-                    //}
+                    foreach (A_LnkVoucher item in insertedObjects)
+                    {
+                        ILnkVoucherService.Insert(item);
+                    }
 
-                    //foreach (AQ_GetLnkVoucher item in updatedObjects)
-                    //{
-                    //    ILnkVoucherService.Update(item);
-                    //}
+                    foreach (A_LnkVoucher item in updatedObjects)
+                    {
+                        ILnkVoucherService.Update(item);
+                    }
 
-                    //foreach (AQ_GetLnkVoucher item in deletedObjects)
-                    //{
-                    //    ILnkVoucherService.Delete(item.ID);
-                    //}
+                    foreach (A_LnkVoucher item in deletedObjects)
+                    {
+                        ILnkVoucherService.Delete(item.ID);
+                    }
 
                     dbTransaction.Commit();
 

@@ -10,8 +10,8 @@ namespace Inv.BLL.Services.LnkVoucherDetail
 {
     public interface ILnkVoucherDetailService
     {
-        AQ_GetLnkVoucher Insert(AQ_GetLnkVoucher entity);
-        AQ_GetLnkVoucher Update(AQ_GetLnkVoucher entity);
+        A_LnkVoucher Insert(A_LnkVoucher entity);
+        A_LnkVoucher Update(A_LnkVoucher entity);
         void Delete(long id);
     }
 }

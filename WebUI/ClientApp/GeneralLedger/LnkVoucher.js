@@ -13,7 +13,6 @@ var LnkVoucher;
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     var TransactionsGrid = new JsGrid();
     var LnkTransDetails = new Array();
-    var Model = new Array();
     var LnkVoucherlMastDet = new LnkVoucherlMasterDetails();
     var AccountDetails = new A_ACCOUNT();
     var AccountDetailsIst = new Array();
@@ -626,8 +625,8 @@ var LnkVoucher;
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger;
-        Model = new Array();
-        Model = AssignBuildControls(AQ_GetLnkVoucher, CountGrid);
+        var Model = new Array();
+        Model = AssignBuildControls(A_LnkVoucher, CountGrid);
         console.log(Model);
         var Filter = new FilterLnkVoucher;
         Filter.Comp = CompCode;
@@ -638,7 +637,7 @@ var LnkVoucher;
         Filter.StartDate = DateFormatRep(txtFromDate.value);
         Filter.EndDate = DateFormatRep(txtToDate.value);
         Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
-        LnkVoucherlMastDet.AQ_GetLnkVoucher = Model;
+        LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
     }
     function Update() {

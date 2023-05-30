@@ -6243,10 +6243,10 @@ class LnkVoucherlMasterDetails extends SecurityClass {
     constructor() {
         super();
         this.FilterLnkVoucher = new FilterLnkVoucher();
-        this.AQ_GetLnkVoucher = new Array<AQ_GetLnkVoucher>();
+        this.A_LnkVoucher = new Array<A_LnkVoucher>();
     }
     public FilterLnkVoucher: FilterLnkVoucher;
-    public AQ_GetLnkVoucher: Array<AQ_GetLnkVoucher>;
+    public A_LnkVoucher: Array<A_LnkVoucher>;
 }
 
 class AQ_GetJournalHeaderWithDetail extends SecurityClass {
@@ -11615,7 +11615,49 @@ class AQ_GetLnkVoucher {
 }
 
 
+class A_LnkVoucher {
+    constructor() {
+        this.ID = 0
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = ''
+        this.Tr_Code = ''
+        this.TrDate = "";
+        this.TrID = 0
+        this.TrNo = 0
+        this.Serial = 0;
+        this.Acc_Code = "";
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrDate: string;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public StatusFlag: string;
 
+}
 
 
 class Table {

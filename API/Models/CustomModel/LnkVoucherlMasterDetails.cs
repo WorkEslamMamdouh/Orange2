@@ -10,6 +10,6 @@ namespace Inv.API.Models.CustomModel
     public class LnkVoucherlMasterDetails : SecurityandUpdateFlagClass
     {
         public FilterLnkVoucher FilterLnkVoucher { get; set; }
-        public List<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
+        public List<A_LnkVoucher> A_LnkVoucher { get; set; }
     }
 }
