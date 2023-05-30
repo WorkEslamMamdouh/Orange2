@@ -18,24 +18,24 @@ namespace Inv.BLL.Services.LnkVoucherDetail
             this.unitOfWork = _unitOfWork;
         }
      
-        public AQ_GetLnkVoucher Insert(AQ_GetLnkVoucher entity)
+        public A_LnkVoucher Insert(A_LnkVoucher entity)
         {
-            var AccDefAccount = unitOfWork.Repository<AQ_GetLnkVoucher>().Insert(entity);
+            var AccDefAccount = unitOfWork.Repository<A_LnkVoucher>().Insert(entity);
             unitOfWork.Save();
             return AccDefAccount;
         }
 
-        public AQ_GetLnkVoucher Update(AQ_GetLnkVoucher entity)
+        public A_LnkVoucher Update(A_LnkVoucher entity)
         {
 
-            var AccDefAccount = unitOfWork.Repository<AQ_GetLnkVoucher>().Update(entity);
+            var AccDefAccount = unitOfWork.Repository<A_LnkVoucher>().Update(entity);
             unitOfWork.Save();
             return AccDefAccount;
         }
 
         public void Delete(long id)
         {
-            unitOfWork.Repository<AQ_GetLnkVoucher>().Deletelong(id);
+            unitOfWork.Repository<A_LnkVoucher>().Deletelong(id);
             unitOfWork.Save();
         }
 

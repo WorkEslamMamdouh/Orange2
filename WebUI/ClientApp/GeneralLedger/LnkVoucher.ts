@@ -15,8 +15,7 @@ namespace LnkVoucher {
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 
     var TransactionsGrid: JsGrid = new JsGrid();
-    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>();
-    var Model: Array<AQ_GetLnkVoucher> = new Array<AQ_GetLnkVoucher>();
+    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>(); 
     var LnkVoucherlMastDet: LnkVoucherlMasterDetails = new LnkVoucherlMasterDetails();
     var AccountDetails: A_ACCOUNT = new A_ACCOUNT();
     var AccountDetailsIst: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
@@ -764,8 +763,8 @@ namespace LnkVoucher {
     function Assign() {
         debugger
 
-        Model = new Array<AQ_GetLnkVoucher>();
-        Model = AssignBuildControls(AQ_GetLnkVoucher, CountGrid);
+        let Model = new Array<A_LnkVoucher>();
+        Model = AssignBuildControls(A_LnkVoucher, CountGrid);
         console.log(Model);
 
         let Filter = new FilterLnkVoucher;
@@ -778,7 +777,7 @@ namespace LnkVoucher {
         Filter.EndDate = DateFormatRep(txtToDate.value);
         Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
 
-        LnkVoucherlMastDet.AQ_GetLnkVoucher = Model;
+        LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
 
     }

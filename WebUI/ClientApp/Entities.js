@@ -3598,7 +3598,7 @@ var LnkVoucherlMasterDetails = /** @class */ (function (_super) {
     function LnkVoucherlMasterDetails() {
         var _this = _super.call(this) || this;
         _this.FilterLnkVoucher = new FilterLnkVoucher();
-        _this.AQ_GetLnkVoucher = new Array();
+        _this.A_LnkVoucher = new Array();
         return _this;
     }
     return LnkVoucherlMasterDetails;
@@ -6818,6 +6818,30 @@ var AQ_GetLnkVoucher = /** @class */ (function () {
         this.StatusFlag = "";
     }
     return AQ_GetLnkVoucher;
+}());
+var A_LnkVoucher = /** @class */ (function () {
+    function A_LnkVoucher() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = '';
+        this.Tr_Code = '';
+        this.TrDate = "";
+        this.TrID = 0;
+        this.TrNo = 0;
+        this.Serial = 0;
+        this.Acc_Code = "";
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.StatusFlag = "";
+    }
+    return A_LnkVoucher;
 }());
 var Table = /** @class */ (function () {
     function Table() {
