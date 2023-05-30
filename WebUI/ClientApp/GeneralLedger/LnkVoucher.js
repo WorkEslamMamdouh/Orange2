@@ -43,10 +43,11 @@ var LnkVoucher;
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = true;
+    var Flag_Enabled_All = false;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
+        $('._None_Input').addClass('hidden_Control');
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -350,6 +351,7 @@ var LnkVoucher;
         else {
             $('._Remarks').removeAttr('disabled');
             $('.table-responsive').scrollLeft(-500);
+            $('#Line_DescA0').focus();
         }
         $('#id_div_Filter').addClass('disabledDiv');
     }
