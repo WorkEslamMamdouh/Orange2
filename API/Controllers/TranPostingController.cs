@@ -142,9 +142,11 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetLnkVoucherById(int TrID, int CompCode, int branchCode)
-        { 
-            var list = db.Database.SqlQuery<AQ_GetLnkVoucher>("select * from [dbo].[AQ_GetLnkVoucher] where TrID = "+ TrID + "").ToList();
+        public IHttpActionResult GetLnkVoucherById(int TrID, int CompCode, string tr_code)
+        {
+
+            var list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
+            //var list = db.Database.SqlQuery<AQ_GetLnkVoucher>("select * from [dbo].[AQ_GetLnkVoucher] where TrID = " + TrID + "").ToList();
             return Ok(new BaseResponse(list));
         }
 

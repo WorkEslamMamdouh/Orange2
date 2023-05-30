@@ -43,7 +43,7 @@ var LnkVoucher;
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = false;
+    var Flag_Enabled_All = true;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -199,7 +199,7 @@ var LnkVoucher;
         Table =
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
-                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1  and isview = 1  order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ];
@@ -375,13 +375,14 @@ var LnkVoucher;
     function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
-        DisplayDetails(59212);
+        //DisplayDetails(59212,)
+        DisplayDetails(Selecteditem.TRID, Selecteditem.TR_CODE);
     }
-    function DisplayDetails(TrID) {
+    function DisplayDetails(TrID, tr_code) {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
-            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            data: { TrID: TrID, CompCode: CompCode, tr_code: tr_code },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
@@ -419,8 +420,6 @@ var LnkVoucher;
             });
         });
         $("#Acc_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
             var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
                 if (AccountDetails != null) {
@@ -458,8 +457,6 @@ var LnkVoucher;
             });
         });
         $("#CC_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
             var id = $('#CC_Code' + cnt).val();
             if (GetCostCenterByCode(id)) {
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));

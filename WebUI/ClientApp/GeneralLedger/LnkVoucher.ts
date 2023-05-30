@@ -49,7 +49,7 @@ namespace LnkVoucher {
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = false;
+    var Flag_Enabled_All = true;
     export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -217,7 +217,7 @@ namespace LnkVoucher {
         Table =
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
-                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1  and isview = 1  order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ]
@@ -412,13 +412,14 @@ namespace LnkVoucher {
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
-        DisplayDetails(59212)
+        //DisplayDetails(59212,)
+        DisplayDetails(Selecteditem.TRID, Selecteditem.TR_CODE);
     }
-    function DisplayDetails(TrID: number) {
+    function DisplayDetails(TrID: number, tr_code: string) {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
-            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            data: { TrID: TrID, CompCode: CompCode, tr_code: tr_code },
             success: (d) => {//(int TrID, int CompCode, int branchCode)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -523,8 +524,7 @@ namespace LnkVoucher {
 
         });
         $("#Acc_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+ 
 
             var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
@@ -565,8 +565,7 @@ namespace LnkVoucher {
             });
         });
         $("#CC_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+      
 
             var id = $('#CC_Code' + cnt).val();
 
