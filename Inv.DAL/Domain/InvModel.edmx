@@ -23582,6 +23582,12 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="CC_DESCE" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Line_DescA" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="Line_DescE" Nullable="true" MaxLength="300" />
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="Int32" Name="bracode" Nullable="true" />
+          <Property Type="String" Name="System_Code" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="SOURCE_TYPE" Nullable="true" />
+          <Property Type="Int32" Name="TYPE_CODE" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -35116,6 +35122,12 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
                 <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
                 <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -35,5 +35,11 @@ namespace Inv.DAL.Domain
         public string CC_DESCE { get; set; }
         public string Line_DescA { get; set; }
         public string Line_DescE { get; set; }
+        public long ID { get; set; }
+        public Nullable<int> CompCode { get; set; }
+        public Nullable<int> bracode { get; set; }
+        public string System_Code { get; set; }
+        public Nullable<int> SOURCE_TYPE { get; set; }
+        public Nullable<int> TYPE_CODE { get; set; }
     }
 }
