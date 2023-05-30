@@ -37,5 +37,6 @@ namespace Inv.DAL.Domain
         public Nullable<bool> INTEGRATE { get; set; }
         public string BASE_TABLE_NAME { get; set; }
         public string FN_POSTED { get; set; }
+        public Nullable<bool> IsView { get; set; }
     }
 }

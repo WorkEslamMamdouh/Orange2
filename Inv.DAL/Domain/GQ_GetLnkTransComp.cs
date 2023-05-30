@@ -39,5 +39,6 @@ namespace Inv.DAL.Domain
         public string FN_POSTED { get; set; }
         public string COMP_CODE { get; set; }
         public Nullable<bool> Comp_INTEGRATE { get; set; }
+        public Nullable<bool> IsView { get; set; }
     }
 }

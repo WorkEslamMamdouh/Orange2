@@ -109,5 +109,6 @@ namespace Inv.DAL.Domain
         public Nullable<int> Item_Count { get; set; }
         public Nullable<int> Line_Count { get; set; }
         public Nullable<int> Op_TrNo { get; set; }
+        public Nullable<bool> ISCostPosted { get; set; }
     }
 }

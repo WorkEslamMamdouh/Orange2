@@ -1361,6 +1361,7 @@
           <Property Name="INTEGRATE" Type="bit" />
           <Property Name="BASE_TABLE_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsView" Type="bit" />
         </EntityType>
         <EntityType Name="G_LnkTrans_Comp">
           <Key>
@@ -2699,6 +2700,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="QtyTotal" Type="numeric" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="int" />
           <Property Name="LineCount" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <EntityType Name="I_Sls_TR_InvoiceItems">
           <Key>
@@ -3928,6 +3930,7 @@ warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransComp' does not have a
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
           <Property Name="COMP_CODE" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Comp_INTEGRATE" Type="bit" />
+          <Property Name="IsView" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5725,6 +5728,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceListVer2' does not 
           <Property Name="QtyTotal" Type="numeric" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="int" />
           <Property Name="LineCount" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceStatisticVer2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5827,6 +5831,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceStatisticVer2' does
           <Property Name="Item_Count" Type="int" />
           <Property Name="Line_Count" Type="int" />
           <Property Name="Op_TrNo" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetStkAdjust' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6164,6 +6169,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </RowType>
             </CollectionType>
           </ReturnType>
+        </Function>
+        <Function Name="AProc_GetLnkVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="tr_code" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRId" Type="int" Mode="In" />
         </Function>
         <Function Name="AProc_LnkGenerateTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
@@ -8656,7 +8666,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [GQ_GetLnkTransComp].[BASE_TABLE_NAME] AS [BASE_TABLE_NAME], 
     [GQ_GetLnkTransComp].[FN_POSTED] AS [FN_POSTED], 
     [GQ_GetLnkTransComp].[COMP_CODE] AS [COMP_CODE], 
-    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE]
+    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE], 
+    [GQ_GetLnkTransComp].[IsView] AS [IsView]
     FROM [dbo].[GQ_GetLnkTransComp] AS [GQ_GetLnkTransComp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="GQ_GetLnkTransVoucher" EntityType="Self.GQ_GetLnkTransVoucher" store:Type="Views" store:Schema="dbo">
@@ -10242,7 +10253,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceListVer2].[SPer_NameA] AS [SPer_NameA], 
     [IQ_GetSlsInvoiceListVer2].[QtyTotal] AS [QtyTotal], 
     [IQ_GetSlsInvoiceListVer2].[ItemCount] AS [ItemCount], 
-    [IQ_GetSlsInvoiceListVer2].[LineCount] AS [LineCount]
+    [IQ_GetSlsInvoiceListVer2].[LineCount] AS [LineCount], 
+    [IQ_GetSlsInvoiceListVer2].[ISCostPosted] AS [ISCostPosted]
     FROM [dbo].[IQ_GetSlsInvoiceListVer2] AS [IQ_GetSlsInvoiceListVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetSlsInvoiceStatisticVer2" EntityType="Self.IQ_GetSlsInvoiceStatisticVer2" store:Type="Views" store:Schema="dbo">
@@ -10341,7 +10353,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceStatisticVer2].[Tot_Qty] AS [Tot_Qty], 
     [IQ_GetSlsInvoiceStatisticVer2].[Item_Count] AS [Item_Count], 
     [IQ_GetSlsInvoiceStatisticVer2].[Line_Count] AS [Line_Count], 
-    [IQ_GetSlsInvoiceStatisticVer2].[Op_TrNo] AS [Op_TrNo]
+    [IQ_GetSlsInvoiceStatisticVer2].[Op_TrNo] AS [Op_TrNo], 
+    [IQ_GetSlsInvoiceStatisticVer2].[ISCostPosted] AS [ISCostPosted]
     FROM [dbo].[IQ_GetSlsInvoiceStatisticVer2] AS [IQ_GetSlsInvoiceStatisticVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetStkAdjust" EntityType="Self.IQ_GetStkAdjust" store:Type="Views" store:Schema="dbo">
@@ -12479,6 +12492,11 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="Fromno" Mode="In" Type="Int32" />
             <Parameter Name="ToNo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AProc_GetLnkVoucher" ReturnType="Collection(InvModel.AProc_GetLnkVoucher_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="tr_code" Mode="In" Type="String" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -13495,6 +13513,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="QtyTotal" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="Int32" />
           <Property Name="LineCount" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <EntityType Name="I_Sls_TR_InvoiceItems">
           <Key>
@@ -15092,6 +15111,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="INTEGRATE" Type="Boolean" />
           <Property Name="BASE_TABLE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsView" Type="Boolean" />
         </EntityType>
         <EntityType Name="G_LnkTrans_TempVchr">
           <Key>
@@ -21421,6 +21441,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="QtyTotal" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="Int32" />
           <Property Name="LineCount" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <EntityType Name="IQ_GetSlsInvoiceStatisticVer2">
           <Key>
@@ -21521,6 +21542,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Item_Count" Type="Int32" />
           <Property Name="Line_Count" Type="Int32" />
           <Property Name="Op_TrNo" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <ComplexType Name="IProc_Rpt_SlsInvoiceListVer2_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
@@ -22840,6 +22862,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Comp_INTEGRATE" Type="Boolean" />
+          <Property Name="IsView" Type="Boolean" />
         </EntityType>
         <EntityType Name="IQ_GetCollectList">
           <Key>
@@ -23535,6 +23558,30 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="VOUCHER_DESCA" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="VOUCHER_DESCE" Nullable="true" MaxLength="200" />
           <Property Type="Boolean" Name="isposted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AProc_GetLnkVoucher_Result">
+          <Property Type="Int64" Name="TrID" Nullable="true" />
+          <Property Type="String" Name="Tr_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Voucher_No" Nullable="true" />
+          <Property Type="String" Name="TYPE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TYPE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="Int64" Name="TrNo" Nullable="true" />
+          <Property Type="Int32" Name="Serial" Nullable="true" />
+          <Property Type="String" Name="Acc_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ACC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ACC_DESCL" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Debit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Credit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CC_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CC_DESCE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Line_DescA" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Line_DescE" Nullable="true" MaxLength="300" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -24482,6 +24529,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Sls_TR_Invoice">
             <EntityTypeMapping TypeName="InvModel.I_Sls_TR_Invoice">
               <MappingFragment StoreEntitySet="I_Sls_TR_Invoice">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="LineCount" ColumnName="LineCount" />
                 <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
                 <ScalarProperty Name="QtyTotal" ColumnName="QtyTotal" />
@@ -26140,6 +26188,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="G_LnkTrans">
             <EntityTypeMapping TypeName="InvModel.G_LnkTrans">
               <MappingFragment StoreEntitySet="G_LnkTrans">
+                <ScalarProperty Name="IsView" ColumnName="IsView" />
                 <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
                 <ScalarProperty Name="BASE_TABLE_NAME" ColumnName="BASE_TABLE_NAME" />
                 <ScalarProperty Name="INTEGRATE" ColumnName="INTEGRATE" />
@@ -32694,6 +32743,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetSlsInvoiceListVer2">
             <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceListVer2">
               <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceListVer2">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="LineCount" ColumnName="LineCount" />
                 <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
                 <ScalarProperty Name="QtyTotal" ColumnName="QtyTotal" />
@@ -32794,6 +32844,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetSlsInvoiceStatisticVer2">
             <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceStatisticVer2">
               <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceStatisticVer2">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="Op_TrNo" ColumnName="Op_TrNo" />
                 <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
                 <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
@@ -34278,6 +34329,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="GQ_GetLnkTransComp">
             <EntityTypeMapping TypeName="InvModel.GQ_GetLnkTransComp">
               <MappingFragment StoreEntitySet="GQ_GetLnkTransComp">
+                <ScalarProperty Name="IsView" ColumnName="IsView" />
                 <ScalarProperty Name="Comp_INTEGRATE" ColumnName="Comp_INTEGRATE" />
                 <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
                 <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
@@ -35036,6 +35088,34 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="VOUCHER_DESCA" ColumnName="VOUCHER_DESCA" />
                 <ScalarProperty Name="VOUCHER_DESCE" ColumnName="VOUCHER_DESCE" />
                 <ScalarProperty Name="isposted" ColumnName="isposted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AProc_GetLnkVoucher" FunctionName="InvModel.Store.AProc_GetLnkVoucher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_GetLnkVoucher_Result">
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="TYPE_DESCA" ColumnName="TYPE_DESCA" />
+                <ScalarProperty Name="TYPE_DESCE" ColumnName="TYPE_DESCE" />
+                <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
+                <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
+                <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="CC_DESCA" ColumnName="CC_DESCA" />
+                <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
