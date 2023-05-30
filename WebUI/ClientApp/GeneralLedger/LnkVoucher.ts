@@ -296,8 +296,8 @@ namespace LnkVoucher {
                     debugger
                     LnkTransDetails = result.Response as Array<AProc_LnkGenerateTrans_Result>;
 
-                    if (LnkTransDetails.length > 0) {
-                        LnkTransDetails = LnkTransDetails.filter(x => x.TR_NO != null).sort(function (a, b) { return a.TR_NO - b.TR_NO });
+                    if (LnkTransDetails.length > 0) {                        
+                        LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
 
                         TransactionsGrid.DataSource = LnkTransDetails;
                         TransactionsGrid.Bind();

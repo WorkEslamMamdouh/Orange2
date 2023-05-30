@@ -271,7 +271,7 @@ var LnkVoucher;
                     debugger;
                     LnkTransDetails = result.Response;
                     if (LnkTransDetails.length > 0) {
-                        LnkTransDetails = LnkTransDetails.filter(function (x) { return x.TR_NO != null; }).sort(function (a, b) { return a.TR_NO - b.TR_NO; });
+                        LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
                         TransactionsGrid.DataSource = LnkTransDetails;
                         TransactionsGrid.Bind();
                         $('#divGridShow').removeClass('display_none');
