@@ -431,7 +431,7 @@ namespace LnkVoucher {
                         DisplayBuildControls(List[i], i);
                         CountGrid++
                     }
-
+                    $('.table-responsive').scrollLeft(3);
                     ComputeTotals();
                 }
             }
