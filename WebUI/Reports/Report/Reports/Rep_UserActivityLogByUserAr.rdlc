@@ -42,7 +42,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=First(Fields!Par_userCode.Value, "Rep_UserActivityLogByUserAr")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -52,7 +52,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
+        <Top>1.59177cm</Top>
         <Left>13.65596cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91599cm</Width>
@@ -143,7 +143,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
-        <Left>7.55047cm</Left>
+        <Left>7.23297cm</Left>
         <Height>0.6cm</Height>
         <Width>3.53188cm</Width>
         <ZIndex>3</ZIndex>
@@ -178,7 +178,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.92502cm</Top>
-        <Left>3.85865cm</Left>
+        <Left>4.17615cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>4</ZIndex>
@@ -212,7 +212,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
-        <Left>11.07353cm</Left>
+        <Left>10.75603cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>5</ZIndex>
@@ -245,7 +245,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
+        <Top>1.59177cm</Top>
         <Left>17.57064cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
@@ -279,8 +279,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
-        <Left>11.07353cm</Left>
+        <Top>1.59177cm</Top>
+        <Left>10.75603cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>7</ZIndex>
@@ -314,7 +314,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
-        <Left>3.85865cm</Left>
+        <Left>4.17615cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>8</ZIndex>
@@ -345,8 +345,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
-        <Left>7.55047cm</Left>
+        <Top>1.59177cm</Top>
+        <Left>7.24048cm</Left>
         <Height>0.6cm</Height>
         <Width>3.52437cm</Width>
         <ZIndex>9</ZIndex>
@@ -399,7 +399,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
-        <Left>0.3175cm</Left>
+        <Left>0.635cm</Left>
         <Height>0.6cm</Height>
         <Width>3.54246cm</Width>
         <ZIndex>10</ZIndex>
@@ -452,7 +452,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.92502cm</Top>
-        <Left>0.32808cm</Left>
+        <Left>0.64558cm</Left>
         <Height>0.6cm</Height>
         <Width>3.53188cm</Width>
         <ZIndex>11</ZIndex>
@@ -491,28 +491,28 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>2.70483cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>2.4667cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>2.28149cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>2.70483cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>2.70483cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.49446cm</Width>
+              <Width>2.46671cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.83841cm</Width>
+              <Width>2.95334cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.44154cm</Width>
+              <Width>1.69941cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -953,7 +953,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>البيان</Value>
+                              <Value>مرجع الحركة</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -981,10 +981,8 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell />
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="Textbox68">
@@ -1033,7 +1031,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الاسم</Value>
+                              <Value>الوظيفة</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1067,14 +1065,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox66">
+                    <Textbox Name="Textbox7">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>الوظيفة</Value>
+                              <Value>الفرع</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1085,7 +1083,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox66</rd:DefaultName>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1146,8 +1144,10 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
               </TablixCells>
             </TablixRow>
             <TablixRow>
@@ -1162,7 +1162,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIf(Fields!ISSucceed.Value= 1, "عملية ناجحة","عملية فاشلة")</Value>
+                              <Value>=IIf(Fields!ISSucceed.Value= true, "عملية ناجحة","عملية فاشلة")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1230,10 +1230,8 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
-                <TablixCell />
                 <TablixCell>
                   <CellContents>
                     <Textbox Name="DescA">
@@ -1312,14 +1310,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="MODULE_CODE">
+                    <Textbox Name="BranchCode">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!MODULE_CODE.Value</Value>
+                              <Value>=Fields!BranchCode.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1328,7 +1326,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>MODULE_CODE</rd:DefaultName>
+                      <rd:DefaultName>BranchCode</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1349,16 +1347,16 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="FirstLogin1">
+                    <Textbox Name="LogDateTime">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!LogDateTime.Value</Value>
                               <Style>
-                                <Format>dd/MM/yyyy</Format>
+                                <Format>dd/MM/yyyy hh:mm:ss</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1367,7 +1365,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>FirstLogin1</rd:DefaultName>
+                      <rd:DefaultName>LogDateTime</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1375,12 +1373,10 @@
                         </Border>
                         <BottomBorder>
                           <Color>Gray</Color>
-                          <Style>Solid</Style>
                           <Width>0.25pt</Width>
                         </BottomBorder>
                         <RightBorder>
                           <Color>Gray</Color>
-                          <Style>Solid</Style>
                           <Width>0.25pt</Width>
                         </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
@@ -1389,8 +1385,10 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <ColSpan>2</ColSpan>
                   </CellContents>
                 </TablixCell>
+                <TablixCell />
               </TablixCells>
             </TablixRow>
           </TablixRows>
@@ -1439,10 +1437,10 @@
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rep_UserActivityLogByUserAr</DataSetName>
-        <Top>2.45439cm</Top>
+        <Top>3.12114cm</Top>
         <Left>0cm</Left>
         <Height>1.77354cm</Height>
-        <Width>19.98211cm</Width>
+        <Width>19.98214cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -1467,10 +1465,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.66974cm</Top>
-        <Left>7.55047cm</Left>
+        <Top>2.33649cm</Top>
+        <Left>7.24048cm</Left>
         <Height>0.6cm</Height>
-        <Width>10.02148cm</Width>
+        <Width>10.33147cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -1522,8 +1520,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.66974cm</Top>
-        <Left>17.55422cm</Left>
+        <Top>2.33649cm</Top>
+        <Left>17.57064cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>14</ZIndex>
@@ -1537,8 +1535,146 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox16">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>من وقت</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>0.89321cm</Top>
+        <Left>17.57064cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.2561cm</Width>
+        <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox23">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Par_FromTime.Value, "Rep_UserActivityLogByUserAr")</Value>
+                <Style>
+                  <Format>dd/MM/yyyy</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>0.89321cm</Top>
+        <Left>13.65596cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.91599cm</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Color>Silver</Color>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox34">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Par_ToTime.Value, "Rep_UserActivityLogByUserAr")</Value>
+                <Style>
+                  <Format>dd/MM/yyyy</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>0.89321cm</Top>
+        <Left>7.23297cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.53188cm</Width>
+        <ZIndex>17</ZIndex>
+        <Style>
+          <Border>
+            <Color>Silver</Color>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox35">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>الى وقت</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>0.89321cm</Top>
+        <Left>10.75603cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.2561cm</Width>
+        <ZIndex>18</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>4.53743cm</Height>
+    <Height>5.49793cm</Height>
     <Style />
   </Body>
   <Width>19.98214cm</Width>
@@ -2076,6 +2212,18 @@
           <DataField>Par_Todate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Par_userCode">
+          <DataField>Par_userCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_FromTime">
+          <DataField>Par_FromTime</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_ToTime">
+          <DataField>Par_ToTime</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="USER_CODE">
           <DataField>USER_CODE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2148,13 +2296,17 @@
           <DataField>SUB_SYSTEM_CODE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="LogDateTime">
+          <DataField>LogDateTime</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>PMS.DAL.Domain</rd:DataSetName>
-        <rd:TableName>PMSEntities</rd:TableName>
+        <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
+        <rd:TableName>InvEntities</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>GProc_Rep_UserActivityLog</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[PMS.DAL.Domain.GProc_Rep_UserActivityLog_Result] GProc_Rep_UserActivityLog(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.Nullable`1[System.Int32], System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
-        <rd:ObjectDataSourceType>PMS.DAL.Domain.PMSEntities, PMS.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.GProc_Rep_UserActivityLog_Result] GProc_Rep_UserActivityLog(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

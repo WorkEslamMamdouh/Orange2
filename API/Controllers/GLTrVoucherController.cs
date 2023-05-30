@@ -233,6 +233,9 @@ namespace Inv.API.Controllers
         }
 
 
+       
+
+
         [HttpPost, AllowAnonymous]
         public IHttpActionResult InsertJournalMasterDetail([FromBody]JournalMasterDetails obj)
         {
@@ -257,7 +260,7 @@ namespace Inv.API.Controllers
                         dbTransaction.Commit();
                         LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Insert, "JournalVoucher", true, null, res.ResponseData.ToString(), null);
 
-                        var displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
+                        AQ_GetJournalHeader displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
                     }
                     else
@@ -318,7 +321,7 @@ namespace Inv.API.Controllers
                     }
 
                     //*************************************************Update************************
-                    foreach (var item in updatedRowObjects)
+                    foreach (A_JOURNAL_DETAIL item in updatedRowObjects)
                     {
                         item.VoucherID = obj.A_JOURNAL_HEADER.VoucherID;
                         IJournalDetailService.Update(item);
@@ -338,7 +341,7 @@ namespace Inv.API.Controllers
 
 
                     if (obj.A_JOURNAL_HEADER.VOUCHER_STATUS == 2)
-                    {                      
+                    {
                         //db.A_ProcessVouchers("", obj.A_JOURNAL_HEADER.COMP_CODE, 1, 3);
                     }
 
@@ -351,7 +354,7 @@ namespace Inv.API.Controllers
                         dbTransaction.Commit();
                         LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, res.ResponseData.ToString(), null);
 
-                        var displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
+                        AQ_GetJournalHeader displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
                     }
                     else
@@ -396,7 +399,7 @@ namespace Inv.API.Controllers
 
                             dbTransaction.Commit();
 
-                            var displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
+                            AQ_GetJournalHeader displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
@@ -447,7 +450,7 @@ namespace Inv.API.Controllers
 
                         ITmpVoucherProcessService.InsertLst(A_TmpVouProList);
 
-                        
+
                         int res = db.A_ProcessVouchers(A_TmpVouProList[0].UserCode, A_TmpVouProList[0].COMP_CODE, 1, A_TmpVouProList[0].OpCode);
                         if (res > 0)
                         {

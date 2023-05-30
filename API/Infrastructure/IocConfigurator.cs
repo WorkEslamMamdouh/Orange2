@@ -95,6 +95,7 @@ using Inv.BLL.Services.ITRCollect;
 using Inv.BLL.Services.I_PeriodSer;
 using Inv.BLL.Services.Stk_TR_IssueToCC;
 using Inv.BLL.Services.STKOpen;
+using Inv.BLL.Services.LnkVoucherDetail;
 
 namespace Inv.API.Infrastructure
 {
@@ -196,6 +197,7 @@ namespace Inv.API.Infrastructure
             container.RegisterType<II_TR_CollectService, I_TR_CollectService>();
             container.RegisterType<II_PeriodService, I_PeriodService>();
             container.RegisterType<IStk_TR_IssueToCCService, Stk_TR_IssueToCCService>();
+            container.RegisterType<ILnkVoucherDetailService, LnkVoucherDetailService>();
         }
     }
 }

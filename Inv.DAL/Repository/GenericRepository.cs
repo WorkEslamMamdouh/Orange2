@@ -62,6 +62,11 @@ namespace Inv.DAL.Repository
             return this.Entities.Find(id);
         }
 
+        public virtual T GetByIdlong(long id)
+        {
+            return this.Entities.Find(id);
+        }
+
         /// <summary>
         /// Get first or default By predicate
         /// </summary>
@@ -217,6 +222,19 @@ namespace Inv.DAL.Repository
             try
             {
                 var entity = GetById(id);
+                this.Delete(entity);
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                throw new Exception(GetFullErrorText(dbEx), dbEx);
+            }
+        }
+
+        public virtual void Deletelong(long id)
+        {
+            try
+            {
+                var entity = GetByIdlong(id);
                 this.Delete(entity);
             }
             catch (DbEntityValidationException dbEx)

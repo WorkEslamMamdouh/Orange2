@@ -377,7 +377,7 @@ namespace StkDefItems {
 
         }
 
-        $('#txt_UOM' + cnt).append('<option value="null">' + (lang == "ar" ? "وحدة القياس" : "Choose unit") + '</option>');
+     //   $('#txt_UOM' + cnt).append('<option value="null">' + (lang == "ar" ? "وحدة القياس" : "Choose unit") + '</option>');
         for (var i = 0; i < Display_D_UOM.length; i++) {
 
             $('#txt_UOM' + cnt).append('<option value="' + Display_D_UOM[i].UomID + '">' + (lang == "ar" ? Display_D_UOM[i].DescA : Display_D_UOM[i].DescE) + '</option>');

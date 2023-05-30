@@ -1104,6 +1104,19 @@ var Custom_Items = /** @class */ (function () {
     }
     return Custom_Items;
 }());
+var FilterLnkVoucher = /** @class */ (function () {
+    function FilterLnkVoucher() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    }
+    return FilterLnkVoucher;
+}());
 var I_ItemStore = /** @class */ (function () {
     function I_ItemStore() {
         this.ItemStoreID = 0;
@@ -3579,6 +3592,16 @@ var JournalMasterDetails = /** @class */ (function (_super) {
         return _this;
     }
     return JournalMasterDetails;
+}(SecurityClass));
+var LnkVoucherlMasterDetails = /** @class */ (function (_super) {
+    __extends(LnkVoucherlMasterDetails, _super);
+    function LnkVoucherlMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.FilterLnkVoucher = new FilterLnkVoucher();
+        _this.AQ_GetLnkVoucher = new Array();
+        return _this;
+    }
+    return LnkVoucherlMasterDetails;
 }(SecurityClass));
 var AQ_GetJournalHeaderWithDetail = /** @class */ (function (_super) {
     __extends(AQ_GetJournalHeaderWithDetail, _super);
@@ -6761,6 +6784,40 @@ var AProc_LnkGenerateTrans_Result = /** @class */ (function () {
         this.IsPosted = false;
     }
     return AProc_LnkGenerateTrans_Result;
+}());
+var AQ_GetLnkVoucher = /** @class */ (function () {
+    function AQ_GetLnkVoucher() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = '';
+        this.Tr_Code = '';
+        this.TrID = 0;
+        this.TrNo = 0;
+        this.Serial = 0;
+        this.Acc_Code = '';
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    return AQ_GetLnkVoucher;
 }());
 var Table = /** @class */ (function () {
     function Table() {
