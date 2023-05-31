@@ -171,6 +171,8 @@ class ReportParameters {
     public Tokenid: String;
     public LoginUser: string;
 
+    public TrTypeSt: string;
+
     public Send_Pdf: number;
     public TrNo: string;
     public ContactMobile: string;

@@ -1977,6 +1977,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CashVoucherEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_LnkVoucherAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OerationTfEn.rdlc" />
@@ -2207,6 +2210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_LnkVoucherListAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_OperationExportListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListAr.rdlc">
       <SubType>Designer</SubType>

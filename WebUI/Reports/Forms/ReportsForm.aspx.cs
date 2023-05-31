@@ -723,6 +723,65 @@ namespace RS.WebUI.Reports.Forms
             return query;
         }
 
+
+        //IProc_Prnt_AccReceive
+        public IEnumerable<AProc_Rep_LnkVoucherList_Result> Rep_LnkVoucherList()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+             
+            string SystemCode = RepPar.SystemCode;
+            SqlParameter spSys = new SqlParameter("@Sys", SystemCode);
+             
+            string TrTypeSt = RepPar.TrTypeSt;
+            SqlParameter spTrType = new SqlParameter("@TRType", TrTypeSt);
+            
+            string dateForm = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", dateForm);
+
+            string dateTo = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", dateTo);
+
+            int fromNum = int.Parse(RepPar.fromNum.ToString());
+            SqlParameter spfromNum = new SqlParameter("@Fromno", fromNum);
+
+            int ToNum = int.Parse(RepPar.ToNum.ToString());
+            SqlParameter spToNum = new SqlParameter("@ToNo", ToNum);
+
+         
+            Rep = OpenReport("Rep_LnkVoucherList");
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value +
+           ", @User = '" + StandPar.spLoginUser.Value + "'" +
+           ", @Sys = '" + spSys.Value + "'" +
+           ", @TRType= '" + spTrType.Value + "'" +
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @ToDate = '" + sptoDate.Value + "'" +
+           ", @Fromno = " + spfromNum.Value +
+           ", @ToNo = " + spToNum.Value;
+
+
+            var query = db.Database.SqlQuery<AProc_Rep_LnkVoucherList_Result>(_Query).ToList();
+             
+            ReportsDetails();
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
+
         //R_Rpt_AccAdjustList
         public IEnumerable<IProc_Rep_AccAdjustList_Result> R_Rpt_AccAdjustList()
         {
