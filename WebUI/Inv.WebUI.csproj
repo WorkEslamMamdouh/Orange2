@@ -1580,6 +1580,7 @@
     <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrReceiptNoteNewIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrPaymentNoteNewIndex.cshtml" />
+    <Content Include="Views\AdminSetting\AdminRoleBranchIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1619,6 +1620,7 @@
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefSalesmen.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefVendor.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\DefStore.ts" />
+    <TypeScriptCompile Include="ClientApp\Admin\AdminRoleBranch.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminCloseComp.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminCompData.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminComp.ts" />
