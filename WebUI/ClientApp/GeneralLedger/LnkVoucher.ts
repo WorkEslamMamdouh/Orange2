@@ -342,8 +342,8 @@ namespace LnkVoucher {
             }
             if (CanAdd) {
 
-                $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
-                $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                //$("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                //$("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
                 if (Number(txtDifference.value) != 0 && SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced == true) {
                     WorningMessage("القيد غير متوازن هل تريد الحفظ ؟؟", "The constraint is unbalanced Do you want to save", "تحذير", "worning", () => {
                         Assign();
