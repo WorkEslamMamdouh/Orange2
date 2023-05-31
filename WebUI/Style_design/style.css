@@ -5072,5 +5072,63 @@ ul.breadcome-menu {
     color: #333;
 }
 
- 
-  
+
+/*=============== BUTTONS ===============*/
+.btn-main {
+    width:100%;
+    display: inline-block;
+    color: #FFF;
+    padding: 1rem;
+    border-radius: .5rem;
+    font-weight: bold;
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #034f84;
+    border-color: #034f84;
+}
+
+    .btn-main:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #034f84;
+        border-radius: .5rem;
+        z-index: -2;
+    }
+
+    .btn-main:after {
+        background-color: #034f84;
+    }
+
+    .btn-main:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: #034f84;
+        transition: all 0.3s;
+        border-radius: .5rem;
+        z-index: -1;
+    }
+
+    .btn-main:before {
+        background-color: #081a2b;
+    }
+
+    .btn-main:hover {
+        color: #fff;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+        .btn-main:hover:before {
+            width: 100%;
+        }
+

@@ -142,9 +142,23 @@ namespace Inv.API.Controllers
 
 
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult GetLnkVoucherById(int TrID, int CompCode, int branchCode)
-        { 
-            var list = db.Database.SqlQuery<AQ_GetLnkVoucher>("select * from [dbo].[AQ_GetLnkVoucher] where TrID = "+ TrID + "").ToList();
+        public IHttpActionResult GetLnkVoucherById(int TrID, int CompCode, string tr_code)
+        {
+             
+            var list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
+            //var list = db.Database.SqlQuery<AQ_GetLnkVoucher>("select * from [dbo].[AQ_GetLnkVoucher] where TrID = " + TrID + "").ToList();
+            return Ok(new BaseResponse(list));
+        }
+
+
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult LnkVoucherGenerate(int TrID, int CompCode, int BranchCode, string tr_code)
+        {
+            string Quy = "DECLARE @ok INT; exec  [Aproc_LnkVoucherGenerate] " + CompCode + " , " + BranchCode + " ,'I','" + tr_code + "',"+ TrID + " ,'admin',1,@ok output";
+            db.Database.ExecuteSqlCommand(Quy);
+
+            var list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
             return Ok(new BaseResponse(list));
         }
 

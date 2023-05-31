@@ -187,7 +187,10 @@ namespace Inv.WebUI.Controllers
             return sb.ToString();
 
         }
-
+        public ActionResult AdminRoleBranch()
+        {
+            return View("~/Views/AdminSetting/AdminRoleBranchIndex.cshtml");
+        }
 
         public ActionResult AdminColseComp()
         {

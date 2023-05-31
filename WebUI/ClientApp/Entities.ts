@@ -171,6 +171,8 @@ class ReportParameters {
     public Tokenid: String;
     public LoginUser: string;
 
+    public TrTypeSt: string;
+
     public Send_Pdf: number;
     public TrNo: string;
     public ContactMobile: string;
@@ -3979,6 +3981,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4066,6 +4069,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;
@@ -4272,6 +4276,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4371,6 +4376,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;

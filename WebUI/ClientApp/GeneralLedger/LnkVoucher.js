@@ -8,7 +8,7 @@ var LnkVoucher;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
-    var Name_Screen = (lang == "ar" ? ' ربط القيود' : 'LnkVoucher');
+    var Name_Screen = (lang == "ar" ? ' أستعراض قيود الربط' : 'LnkVoucher');
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     var TransactionsGrid = new JsGrid();
@@ -29,6 +29,7 @@ var LnkVoucher;
     var txtTotalDebit;
     var ddlBranch;
     var ddlTypeTrans;
+    var btnGenerationVoucher;
     var btnBack;
     var btnShow;
     var btnAdd;
@@ -47,6 +48,7 @@ var LnkVoucher;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
+        $('._None_Input').addClass('hidden_Control');
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -61,6 +63,7 @@ var LnkVoucher;
         btnUpdate = document.getElementById("btnUpdate");
         btnSave = document.getElementById("btnSave");
         btnBack = document.getElementById("btnBack");
+        btnGenerationVoucher = document.getElementById("btnGenerationVoucher");
         btnAddDetails = document.getElementById("btnAddDetails");
         ////////  
         ddlBranch = document.getElementById("ddlBranch");
@@ -88,6 +91,7 @@ var LnkVoucher;
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
+        btnGenerationVoucher.onclick = btnGenerationVoucher_onclick;
         btnAddDetails.onclick = AddNewRow;
         //********************************onchange****************************    
         txtSearch.onkeyup = _SearchBox_Change;
@@ -199,7 +203,7 @@ var LnkVoucher;
         Table =
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
-                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1  and isview = 1  order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ];
@@ -234,7 +238,20 @@ var LnkVoucher;
         }
         return flag;
     }
-    //************************************************Btn_Events**********************************
+    function _SearchBox_Change() {
+        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+        if (txtSearch.value != "") {
+            var search_1 = txtSearch.value.toLowerCase();
+            var SearchDetails = LnkTransDetails.filter(function (x) { return x.TR_NO.toString().search(search_1) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search_1) >= 0 || x.TR_DESCA.toLowerCase().search(search_1) >= 0; });
+            TransactionsGrid.DataSource = SearchDetails;
+            TransactionsGrid.Bind();
+        }
+        else {
+            TransactionsGrid.DataSource = LnkTransDetails;
+            TransactionsGrid.Bind();
+        }
+    }
+    //************************************************Btn_Events**********************************    
     function btnShow_onclick() {
         if (ddlBranch.value == 'null') {
             DisplayMassage("يجب أختيار الفرع", "The type of movement must be selected", MessageType.Error);
@@ -306,8 +323,8 @@ var LnkVoucher;
                 }
             }
             if (CanAdd) {
-                $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
-                $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                //$("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                //$("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
                 if (Number(txtDifference.value) != 0 && SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced == true) {
                     WorningMessage("القيد غير متوازن هل تريد الحفظ ؟؟", "The constraint is unbalanced Do you want to save", "تحذير", "worning", function () {
                         Assign();
@@ -327,18 +344,30 @@ var LnkVoucher;
     function btnUpdate_onclick() {
         Enabled();
     }
-    function _SearchBox_Change() {
-        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
-        if (txtSearch.value != "") {
-            var search_1 = txtSearch.value.toLowerCase();
-            var SearchDetails = LnkTransDetails.filter(function (x) { return x.TR_NO.toString().search(search_1) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search_1) >= 0 || x.TR_DESCA.toLowerCase().search(search_1) >= 0; });
-            TransactionsGrid.DataSource = SearchDetails;
-            TransactionsGrid.Bind();
-        }
-        else {
-            TransactionsGrid.DataSource = LnkTransDetails;
-            TransactionsGrid.Bind();
-        }
+    function btnGenerationVoucher_onclick() {
+        var TrID = Number($('#TRID').val());
+        var TR_CODE = $('#TR_CODE').val();
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    var List = result.Response;
+                    CountGrid = 0;
+                    $("#div_Data").html('');
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
+                    for (var i = 0; i < List.length; i++) {
+                        BuildControls(i);
+                        DisplayBuildControls(List[i], i);
+                        CountGrid++;
+                    }
+                    $('.table-responsive').scrollLeft(3);
+                    ComputeTotals();
+                }
+            }
+        });
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
@@ -350,6 +379,7 @@ var LnkVoucher;
         else {
             $('._Remarks').removeAttr('disabled');
             $('.table-responsive').scrollLeft(-500);
+            $('#Line_DescA0').focus();
         }
         $('#id_div_Filter').addClass('disabledDiv');
     }
@@ -375,19 +405,23 @@ var LnkVoucher;
     function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
-        DisplayDetails(59212);
+        $('#TRID').val(Selecteditem.TRID);
+        $('#TR_CODE').val(Selecteditem.TR_CODE);
+        DisplayDetails(Selecteditem.TRID, Selecteditem.TR_CODE);
     }
-    function DisplayDetails(TrID) {
+    function DisplayDetails(TrID, tr_code) {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
-            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            data: { TrID: TrID, CompCode: CompCode, tr_code: tr_code },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
+                    debugger;
                     var List = result.Response;
                     CountGrid = 0;
                     $("#div_Data").html('');
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
                     for (var i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
@@ -419,8 +453,6 @@ var LnkVoucher;
             });
         });
         $("#Acc_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
             var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
                 if (AccountDetails != null) {
@@ -458,8 +490,6 @@ var LnkVoucher;
             });
         });
         $("#CC_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
             var id = $('#CC_Code' + cnt).val();
             if (GetCostCenterByCode(id)) {
                 $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
@@ -680,7 +710,6 @@ var LnkVoucher;
     }
     //***************************************************************************Print*********************************************************     
     function PrintReport(OutType) {
-        // 
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
         var rp = new ReportParameters();
@@ -705,8 +734,16 @@ var LnkVoucher;
         rp.BraNameA = BranchNameA;
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
+        //**************************************************************
+        rp.User = SysSession.CurrentEnvironment.UserCode;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.TrTypeSt = "" + ddlTypeTrans.value + ",";
+        rp.FromDate = DateFormatRep(txtFromDate.value);
+        rp.ToDate = DateFormatRep(txtToDate.value);
+        rp.fromNum = Number(txtFromNumber.value);
+        rp.ToNum = Number(txtToNumber.value);
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_AccReceiptList", "GeneralReports"),
+            url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
             success: function (d) {
                 var result = d.result;
@@ -721,11 +758,11 @@ var LnkVoucher;
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
         var rp = new ReportParameters();
+        rp.TRId = Number($('#TRID').val());
+        rp.TrTypeSt = $('#TR_CODE').val();
         rp.Type = 0;
-        rp.slip = 0;
-        rp.Repdesign = 1;
-        rp.TRId = Number($('#ReceiptID').val());
-        rp.Name_function = "rptReceiptNote";
+        rp.Name_function = "rptPrnt_LnkVoucher";
+        //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');

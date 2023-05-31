@@ -9,7 +9,7 @@ namespace LnkVoucher {
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
-    var Name_Screen = (lang == "ar" ? ' ربط القيود' : 'LnkVoucher');
+    var Name_Screen = (lang == "ar" ? ' أستعراض قيود الربط' : 'LnkVoucher');
 
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -35,6 +35,7 @@ namespace LnkVoucher {
     var ddlBranch: HTMLSelectElement;
     var ddlTypeTrans: HTMLSelectElement;
 
+    var btnGenerationVoucher: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
@@ -50,9 +51,10 @@ namespace LnkVoucher {
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
     var Flag_Enabled_All = false;
-    export function InitalizeComponent() {
+    export function InitalizeComponent() { 
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
+        $('._None_Input').addClass('hidden_Control');
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -66,6 +68,7 @@ namespace LnkVoucher {
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnGenerationVoucher = document.getElementById("btnGenerationVoucher") as HTMLButtonElement;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
         ////////  
         ddlBranch = document.getElementById("ddlBranch") as HTMLSelectElement;
@@ -93,6 +96,7 @@ namespace LnkVoucher {
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
+        btnGenerationVoucher.onclick = btnGenerationVoucher_onclick;
         btnAddDetails.onclick = AddNewRow;
         //********************************onchange****************************    
         txtSearch.onkeyup = _SearchBox_Change;
@@ -217,7 +221,7 @@ namespace LnkVoucher {
         Table =
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
-                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1  and isview = 1  order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ]
@@ -257,7 +261,21 @@ namespace LnkVoucher {
         }
         return flag;
     }
-    //************************************************Btn_Events**********************************
+    function _SearchBox_Change() {
+        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+
+        if (txtSearch.value != "") {
+            let search: string = txtSearch.value.toLowerCase();
+            let SearchDetails = LnkTransDetails.filter(x => x.TR_NO.toString().search(search) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search) >= 0 || x.TR_DESCA.toLowerCase().search(search) >= 0);
+
+            TransactionsGrid.DataSource = SearchDetails;
+            TransactionsGrid.Bind();
+        } else {
+            TransactionsGrid.DataSource = LnkTransDetails;
+            TransactionsGrid.Bind();
+        }
+    }
+    //************************************************Btn_Events**********************************    
     function btnShow_onclick() {
 
         if (ddlBranch.value == 'null') {
@@ -341,8 +359,8 @@ namespace LnkVoucher {
             }
             if (CanAdd) {
 
-                $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
-                $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                //$("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                //$("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
                 if (Number(txtDifference.value) != 0 && SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced == true) {
                     WorningMessage("القيد غير متوازن هل تريد الحفظ ؟؟", "The constraint is unbalanced Do you want to save", "تحذير", "worning", () => {
                         Assign();
@@ -361,20 +379,35 @@ namespace LnkVoucher {
     }
     function btnUpdate_onclick() {
         Enabled();
-    }
-    function _SearchBox_Change() {
-        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+    } 
+    function btnGenerationVoucher_onclick() {
+        let TrID = Number($('#TRID').val())
+        let TR_CODE = $('#TR_CODE').val()
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+            success: (d) => {//(int TrID, int CompCode, int branchCode)
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    let List = result.Response as Array<AQ_GetLnkVoucher>;
+                    CountGrid = 0;
+                    $("#div_Data").html('');
 
-        if (txtSearch.value != "") {
-            let search: string = txtSearch.value.toLowerCase();
-            let SearchDetails = LnkTransDetails.filter(x => x.TR_NO.toString().search(search) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search) >= 0 || x.TR_DESCA.toLowerCase().search(search) >= 0);
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
 
-            TransactionsGrid.DataSource = SearchDetails;
-            TransactionsGrid.Bind();
-        } else {
-            TransactionsGrid.DataSource = LnkTransDetails;
-            TransactionsGrid.Bind();
-        }
+
+                    for (let i = 0; i < List.length; i++) {
+                        BuildControls(i);
+                        DisplayBuildControls(List[i], i);
+                        CountGrid++
+                    }
+                    $('.table-responsive').scrollLeft(3);
+                    ComputeTotals();
+                }
+            }
+        });
+
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
@@ -386,6 +419,7 @@ namespace LnkVoucher {
         else {
             $('._Remarks').removeAttr('disabled')
             $('.table-responsive').scrollLeft(-500);
+            $('#Line_DescA0').focus();
         }
         
         $('#id_div_Filter').addClass('disabledDiv')
@@ -412,19 +446,24 @@ namespace LnkVoucher {
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
         txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
-        DisplayDetails(59212)
+        $('#TRID').val(Selecteditem.TRID);
+        $('#TR_CODE').val(Selecteditem.TR_CODE);
+        DisplayDetails(Selecteditem.TRID, Selecteditem.TR_CODE);
     }
-    function DisplayDetails(TrID: number) {
+    function DisplayDetails(TrID: number, tr_code: string) {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
-            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            data: { TrID: TrID, CompCode: CompCode, tr_code: tr_code },
             success: (d) => {//(int TrID, int CompCode, int branchCode)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
+                    debugger
                     let List = result.Response as Array<AQ_GetLnkVoucher>;
                     CountGrid = 0;
                     $("#div_Data").html('');
+                     
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
@@ -523,8 +562,7 @@ namespace LnkVoucher {
 
         });
         $("#Acc_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+ 
 
             var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
@@ -565,8 +603,7 @@ namespace LnkVoucher {
             });
         });
         $("#CC_Code" + cnt).on('change', function () {
-            if ($("#StatusFlag" + cnt).val() != "i")
-                $("#StatusFlag" + cnt).val("u");
+      
 
             var id = $('#CC_Code' + cnt).val();
 
@@ -823,8 +860,7 @@ namespace LnkVoucher {
         disabled();
     }
     //***************************************************************************Print*********************************************************     
-    export function PrintReport(OutType: number) {
-        // 
+    export function PrintReport(OutType: number) { 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
@@ -851,8 +887,18 @@ namespace LnkVoucher {
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
 
+        //**************************************************************
+        rp.User = SysSession.CurrentEnvironment.UserCode;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.TrTypeSt = "" + ddlTypeTrans.value + ",";
+        rp.FromDate = DateFormatRep(txtFromDate.value);
+        rp.ToDate = DateFormatRep(txtToDate.value);
+        rp.fromNum = Number(txtFromNumber.value);
+        rp.ToNum = Number(txtToNumber.value);
+  
+
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_AccReceiptList", "GeneralReports"),
+            url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
             success: (d) => {
 
@@ -869,12 +915,13 @@ namespace LnkVoucher {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
+       
+        rp.TRId = Number($('#TRID').val())
+        rp.TrTypeSt = $('#TR_CODE').val()
         rp.Type = 0;
-        rp.slip = 0;
-        rp.Repdesign = 1;
-        rp.TRId = Number($('#ReceiptID').val());
 
-        rp.Name_function = "rptReceiptNote";
+        rp.Name_function = "rptPrnt_LnkVoucher";
+        //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 

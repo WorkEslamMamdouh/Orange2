@@ -109,7 +109,7 @@
                 <div class="serviceBox ">
                     <div class="row g-0 ">
                         <div class="col-12" id="div_BasicData">
-                            <div class="row g-0"> 
+                            <div class="row g-0">
                                 @* Details *@
                                 <div class="col-12 col-md-4">
                                     <div class="form-group row">
@@ -130,12 +130,14 @@
                                 <div class="col-12 col-md-4">
                                     <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0" style="width: 25%;"> @SystemResource.App_Type  </label>
-                                        <div class="col-8"> 
+                                        <div class="col-8">
                                             <input id="txtJournalType" name="TR_DESCA" disabled type="text" class="form-control">
+                                            <input id="TR_CODE" name=""  type="hidden" class="form-control">
+                                            <input id="TRID" name=""  type="hidden" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                 
+
 
                                 <div class="col-12 col-md-8">
                                     <div class="form-group row">
@@ -144,7 +146,19 @@
                                             <textarea id="txtJournalDescripton" name="VOUCHER_DESCA" disabled="" type="text" class="form-control  h-100"></textarea>
                                         </div>
                                     </div>
-                                </div>   
+                                </div>
+
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group row ">
+                                        <label class="col-4 align-self-center p-md-0" style="width: 25%;">   </label>
+                                        <div class="col-8">
+                                            <button id="btnGenerationVoucher" type="button" class="btn btn-main" fdprocessedid="3kjrd9" style="width: 100%;">
+                                                <span class="adminpro-icon adminpro-refresh-button"></span>
+                                                اعادة توليد القيد
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Inside Table  -->
                                 <div class="inside-table my-4">
@@ -160,7 +174,7 @@
                                                     <th>@SystemResource.App_Creditor</th>
                                                     <th></th>
                                                     <th class="cursor-pointer" id="divCostCnterName">@SystemResource.menu_Costcenter <i class="fas fa-arrows-alt-h"></i></th>
-                                                    <th class="costcntr">@SystemResource.SHT_Name</th>                                                
+                                                    <th class="costcntr">@SystemResource.SHT_Name</th>
                                                     <th>@SystemResource.App_Notes</th>
                                                 </tr>
                                             </thead>
@@ -224,33 +238,33 @@
 
                                 </div>
                                 <!-- Editors Details -->
-                                <div class="insettext row editor-details mt-2">
-                                    <div class="col-12 col-lg-6">
+                                @*<div class="insettext row editor-details mt-2">
+            <div class="col-12 col-lg-6">
 
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
-                                            <div class="col-4 col-xl-4 editor-input">
-                                                <input id="txtCreatedBy" class=" " name="CREATED_BY" type="text" disabled>
-                                            </div>
-                                            <div class="col-4 col-xl-6 editor-input">
-                                                <input id="txtCreatedAt" class=" " name="CREATED_AT" type="text" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <div class="form-group row g-0">
-                                            <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
-                                            <div class="col-4 col-xl-4  editor-input">
-                                                <input id="txtUpdatedBy" class=" " name="UPDATED_BY" type="text" disabled>
-                                            </div>
-                                            <div class="col-4 col-xl-6 editor-input">
+                <div class="form-group row g-0">
+                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
+                    <div class="col-4 col-xl-4 editor-input">
+                        <input id="txtCreatedBy" class=" " name="CREATED_BY" type="text" disabled>
+                    </div>
+                    <div class="col-4 col-xl-6 editor-input">
+                        <input id="txtCreatedAt" class=" " name="CREATED_AT" type="text" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group row g-0">
+                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
+                    <div class="col-4 col-xl-4  editor-input">
+                        <input id="txtUpdatedBy" class=" " name="UPDATED_BY" type="text" disabled>
+                    </div>
+                    <div class="col-4 col-xl-6 editor-input">
 
-                                                <input id="txtUpdatedAt" class=" " name="UPDATED_AT" type="text" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <input id="txtUpdatedAt" class=" " name="UPDATED_AT" type="text" disabled>
+                    </div>
+                </div>
+            </div>
 
-                                </div> 
+        </div>*@
                             </div>
                         </div>
                     </div>

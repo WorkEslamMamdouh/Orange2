@@ -133,6 +133,12 @@ namespace Inv.WebUI.Controllers
             return buildReport(que);
         }
 
+        public string rptPrnt_LnkVoucher(RepFinancials rp)
+        {
+            IEnumerable<AProc_Prnt_LnkVoucher_Result> que = Prnt_LnkVoucher(rp);
+            return buildReport(que);
+        }
+
         public string rptAdjustNote(RepFinancials rp)
         {
             IEnumerable<IProc_Prnt_AccAdjust_Result> que = Rpt_Prnt_AccAdjust(rp);

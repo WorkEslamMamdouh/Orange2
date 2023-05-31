@@ -702,7 +702,49 @@ namespace Inv.WebUI.Controllers
             return query;
         } 
 
-        public IEnumerable<IProc_Prnt_AccAdjust_Result> Rpt_Prnt_AccAdjust(RepFinancials RepPar)
+        public IEnumerable<AProc_Prnt_LnkVoucher_Result> Prnt_LnkVoucher(RepFinancials RepPar)
+        {
+            ReportStandardParameters StandPar = getStandardParameters(RepPar);
+
+
+            int Type = int.Parse(RepPar.Type.ToString()); 
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+
+
+            var TRId = int.Parse(RepPar.TRId.ToString());
+            SqlParameter spTRId = new SqlParameter("@TRId", TRId);
+
+            var TR_CODE = RepPar.TrTypeSt;
+            SqlParameter spTR_CODE  = new SqlParameter("@tr_code", TR_CODE);
+
+            int Repdesign = RepPar.Repdesign;
+
+            Rep = OpenReport("Prnt_LnkVoucher");
+
+     
+
+            string _Query = "execute " + Rep.dataSource +
+                " @comp = '" + StandPar.spComCode.Value + "'" +
+                ", @bra = '" + StandPar.spbra.Value + "'" +
+                ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+                ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+                ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+                ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+                ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+                 ",@RepType = " + spRepType.Value +
+                ", @tr_code = '" + spTR_CODE.Value + "'" +
+                 ",@TRId = " + spTRId.Value;
+
+            var query = db.Database.SqlQuery<AProc_Prnt_LnkVoucher_Result>(_Query).ToList();
+
+            ReportsDetails();
+
+            reportName = Rep.reportName; Send_Pdf = RepPar.Send_Pdf; DocUUID = RepPar.DocUUID;
+            DocPDFFolder = RepPar.DocPDFFolder == null ? "/SavePath/" : RepPar.DocPDFFolder.ToString();
+            return query;
+        }
+
+           public IEnumerable<IProc_Prnt_AccAdjust_Result> Rpt_Prnt_AccAdjust(RepFinancials RepPar)
         {
             ReportStandardParameters StandPar = getStandardParameters(RepPar);
             
