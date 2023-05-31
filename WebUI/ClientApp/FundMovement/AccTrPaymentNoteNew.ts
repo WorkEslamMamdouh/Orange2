@@ -77,12 +77,13 @@ namespace AccTrPaymentNoteNew {
         InitializeGrid();
         txtDateFrom.value = DateStartMonth();
         txtDateTo.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        fillddlCashBox();
-        fillddlG_Codes();
-        fillddlAcount_Code();
-        fillddlVatType();
-        fillddlChargeBank();
-        fillddlCOST_CENTER();
+        GetData_Header_loader();
+        //fillddlCashBox();
+        //fillddlG_Codes();
+        //fillddlAcount_Code();
+        //fillddlVatType();
+        //fillddlChargeBank();
+        //fillddlCOST_CENTER();
     }
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
@@ -150,8 +151,8 @@ namespace AccTrPaymentNoteNew {
         txt_BenCodeH.onchange = () => { BenCode_onchange('H') }
         txt_ReceiptNoteF.onchange = () => { CleanBen('F') }
         txt_ReceiptNoteH.onchange = () => { CleanBen('H'); CleanDiv_Charge_Provider(); }
-        txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""}
-        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : ""}
+        txt_CashAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
+        txt_CardAmount.onkeyup = () => { txt_Amount.value = (Number(txt_CashAmount.value) + Number(txt_CardAmount.value)).RoundToSt(2); $('#Provider_Div').is(":hidden") == false ? CalculatorProvider() : "" }
         searchbutmemreport.onkeyup = _SearchBox_Change;
         txtCashTypeH.onchange = txtCashTypeH_onchange;
         txtCashTypeF.onchange = txtCashTypeF_onchange;
@@ -217,6 +218,62 @@ namespace AccTrPaymentNoteNew {
         ];
         ReportGrid.Bind();
 
+    }
+    function GetData_Header_loader() {
+
+       
+        var Table: Array<Table>; 
+        Table =
+            [
+                { NameTable: 'A_RecPay_D_CashBox', Condition: " CompCode = " + CompCode + " " },
+                { NameTable: 'G_Codes', Condition: "" },
+                { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " and ACC_TYPE = 3 and DETAIL = 1 " },
+                { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
+                { NameTable: 'A_G_Vendor', Condition: "" },
+                { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+            ]
+
+
+        DataResult(Table);
+
+        debugger
+        //**************************************************************************************************************
+        let Listbox = GetDataTable('A_RecPay_D_CashBox') as Array<A_RecPay_D_CashBox>;
+        DocumentActions.FillCombowithdefult(Listbox, txt_D_CashBoxF, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
+        DocumentActions.FillCombowithdefult(Listbox, txt_D_CashBoxH, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
+
+        //**************************************************************************************************************
+        let ListAcc = GetDataTable('A_ACCOUNT') as Array<A_ACCOUNT>;
+        DocumentActions.FillCombowithdefult(ListAcc, txt_BankAcc_Code, "ACC_CODE", (lang == "ar" ? 'ACC_DESCA' : 'ACC_DESCL'), (lang == "ar" ? 'اختر حساب الصرف' : 'Type of constraint'));
+
+        //**************************************************************************************************************
+        let ListCodes = GetDataTable('G_Codes') as Array<G_Codes>;
+        let fillModel_GCodes = ListCodes;
+        let ChckType = fillModel_GCodes.filter(x => x.CodeType == 'ChckType');
+
+        DocumentActions.FillCombowithdefult(ChckType, txtCashTypeF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
+        DocumentActions.FillCombowithdefult(ChckType, txtCashTypeH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? 'اختر نوع النقد' : 'Type of constraint'));
+
+        Type = fillModel_GCodes.filter(x => x.CodeType == codeType);
+
+        DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteF, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+        DocumentActions.FillCombowithdefult(Type, txt_ReceiptNoteH, "CodeValue", (lang == "ar" ? 'DescA' : 'DescE'), (lang == "ar" ? "اختر نوع " + Name_Not + "" : 'Type of constraint'));
+
+        $('#txt_ReceiptNoteF option[value="6"]').remove()
+        //**************************************************************************************************************
+        let ListVat = GetDataTable('A_D_VAT_TYPE') as Array<A_D_VAT_TYPE>;
+        for (var i = 0; i < ListVat.length; i++) {
+            $('#dbChargeVatType').append('<option data_VatPerc="' + ListVat[i].VatPerc + '" value="' + ListVat[i].CODE + '">' + ListVat[i].DESCRIPTION + '</option>');
+            $('#dbProviderVatType').append('<option data_VatPerc="' + ListVat[i].VatPerc + '" value="' + ListVat[i].CODE + '">' + ListVat[i].DESCRIPTION + '</option>');
+        }
+        //**************************************************************************************************************
+        let ListBank = GetDataTable('A_G_Vendor') as Array<A_G_Vendor>;
+        DocumentActions.FillCombowithdefult(ListBank, dbChargeBank, "VendorID", (lang == "ar" ? 'NAMEA' : 'NAMEL'), (lang == "ar" ? 'بدون رسوم بنكية' : 'Bank'));
+        //**************************************************************************************************************
+        let ListCOST = GetDataTable('G_COST_CENTER') as Array<G_COST_CENTER>;
+        DocumentActions.FillCombowithdefult(ListCOST, dbCC_Code, "CC_CODE", (lang == "ar" ? 'CC_DESCA' : 'CC_DESCE'), (lang == "ar" ? 'اختر التكلفة' : 'COST'));
+
+ 
     }
     //************************************************fillddl**************************************
     function fillddlCashBox() {
@@ -420,7 +477,7 @@ namespace AccTrPaymentNoteNew {
                             loading('btnSave');
                             setTimeout(function () {
                                 Assign();
-                                Insert(); 
+                                Insert();
                                 finishSave('btnSave');
                             }, 100);
                         });
@@ -446,7 +503,7 @@ namespace AccTrPaymentNoteNew {
                             loading('btnSave');
                             setTimeout(function () {
                                 Assign();
-                                Update(); 
+                                Update();
                                 finishSave('btnSave');
                             }, 100);
                         });
@@ -1250,7 +1307,7 @@ namespace AccTrPaymentNoteNew {
                 Errorinput($('#txtProviderVatNo'));
                 return false;
             }
-             
+
 
             if (dbCC_Code.value == 'null') {
                 DisplayMassage("يجب اختيار مركز التكلفة  ", "Choose the type of Cost", MessageType.Worning);

@@ -316,6 +316,9 @@ var Clientaccstat;
         if ($("#txt_indebtedness").val() == "All") { //******الجميع
             rp.BalType = 0;
         }
+        if ($("#txt_indebtedness").val() == "!") { //******رصيد غير صفري 
+            rp.BalType = 4;
+        }
         //  OrderBy
         if (Rd_Code.checked == true) {
             rp.orderby = 1;

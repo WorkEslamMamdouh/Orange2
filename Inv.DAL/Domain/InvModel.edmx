@@ -192,6 +192,29 @@
           <Property Name="AUTHORISED_BY" Type="nvarchar" MaxLength="20" />
           <Property Name="AUTHORISED_AT" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="A_LnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="bracode" Type="int" />
+          <Property Name="System_Code" Type="varchar" MaxLength="10" />
+          <Property Name="Tr_Code" Type="varchar" MaxLength="50" />
+          <Property Name="TrDate" Type="smalldatetime" />
+          <Property Name="TrID" Type="bigint" />
+          <Property Name="TrNo" Type="bigint" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="Acc_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="Line_DescA" Type="nvarchar" MaxLength="300" />
+          <Property Name="Line_DescE" Type="nvarchar" MaxLength="300" />
+          <Property Name="Voucher_No" Type="int" />
+          <Property Name="SOURCE_TYPE" Type="int" />
+          <Property Name="TYPE_CODE" Type="int" />
+        </EntityType>
         <EntityType Name="A_Pay_D_Vendor">
           <Key>
             <PropertyRef Name="VendorID" />
@@ -1338,6 +1361,7 @@
           <Property Name="INTEGRATE" Type="bit" />
           <Property Name="BASE_TABLE_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsView" Type="bit" />
         </EntityType>
         <EntityType Name="G_LnkTrans_Comp">
           <Key>
@@ -2676,6 +2700,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="QtyTotal" Type="numeric" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="int" />
           <Property Name="LineCount" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <EntityType Name="I_Sls_TR_InvoiceItems">
           <Key>
@@ -3366,6 +3391,41 @@ warning 6002: The table/view 'Orange2021.dbo.AQ_GetJournalHeader' does not have 
           <Property Name="VoucherID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.AQ_GetLnkVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AQ_GetLnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CompCode" Type="int" />
+          <Property Name="bracode" Type="int" />
+          <Property Name="System_Code" Type="varchar" MaxLength="10" />
+          <Property Name="Tr_Code" Type="varchar" MaxLength="50" />
+          <Property Name="TrID" Type="bigint" />
+          <Property Name="TrNo" Type="bigint" />
+          <Property Name="Serial" Type="int" />
+          <Property Name="Acc_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Debit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="nvarchar" MaxLength="25" />
+          <Property Name="Line_DescA" Type="nvarchar" MaxLength="300" />
+          <Property Name="Line_DescE" Type="nvarchar" MaxLength="300" />
+          <Property Name="Voucher_No" Type="int" />
+          <Property Name="SOURCE_TYPE" Type="int" />
+          <Property Name="TYPE_CODE" Type="int" />
+          <Property Name="ACC_DESCA" Type="nvarchar" MaxLength="100" />
+          <Property Name="ACC_DESCL" Type="nvarchar" MaxLength="100" />
+          <Property Name="CC_DESCA" Type="nvarchar" MaxLength="100" />
+          <Property Name="CC_DESCE" Type="nvarchar" MaxLength="100" />
+          <Property Name="TR_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TR_DESCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="Src_DescA" Type="nvarchar" MaxLength="50" />
+          <Property Name="Src_DescE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TYPE_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="TYPE_DESCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrDate" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.AQ_GetVchrTemplateDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AQ_GetVchrTemplateDetail">
           <Key>
@@ -3870,6 +3930,7 @@ warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransComp' does not have a
           <Property Name="FN_POSTED" Type="nvarchar" MaxLength="50" />
           <Property Name="COMP_CODE" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Comp_INTEGRATE" Type="bit" />
+          <Property Name="IsView" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkTransVoucher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5667,6 +5728,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceListVer2' does not 
           <Property Name="QtyTotal" Type="numeric" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="int" />
           <Property Name="LineCount" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceStatisticVer2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -5769,6 +5831,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetSlsInvoiceStatisticVer2' does
           <Property Name="Item_Count" Type="int" />
           <Property Name="Line_Count" Type="int" />
           <Property Name="Op_TrNo" Type="int" />
+          <Property Name="ISCostPosted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetStkAdjust' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6107,6 +6170,22 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="AProc_GetLnkVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="tr_code" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AProc_LnkGenerateTrans" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="Bra" Type="int" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sys" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRType" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fromno" Type="int" Mode="In" />
+          <Parameter Name="ToNo" Type="int" Mode="In" />
+        </Function>
         <Function Name="AProc_Prnt_CashVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
           <Parameter Name="bra" Type="int" Mode="In" />
@@ -6128,6 +6207,35 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
           <Parameter Name="RepType" Type="int" Mode="In" />
           <Parameter Name="TRId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AProc_Prnt_LnkVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="tr_code" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AProc_Rep_LnkVoucherList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="User" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sys" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRType" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fromno" Type="int" Mode="In" />
+          <Parameter Name="ToNo" Type="int" Mode="In" />
         </Function>
         <Function Name="AProc_ReverseVoucher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Comp" Type="int" Mode="In" />
@@ -6412,6 +6520,27 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
         <Function Name="GProc_CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="nvarchar" Mode="In" />
           <Parameter Name="LikeUser" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GProc_Rep_UserActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="GrpType" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="ToTime" Type="nvarchar" Mode="In" />
+          <Parameter Name="finYear" Type="int" Mode="In" />
+          <Parameter Name="sys" Type="nvarchar" Mode="In" />
+          <Parameter Name="module" Type="nvarchar" Mode="In" />
+          <Parameter Name="usr" Type="nvarchar" Mode="In" />
+          <Parameter Name="OpStatus" Type="int" Mode="In" />
+          <Parameter Name="opid" Type="int" Mode="In" />
         </Function>
         <Function Name="GProc_SecCreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="nvarchar" Mode="In" />
@@ -7743,6 +7872,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="A_G_Vendor" EntityType="Self.A_G_Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_DETAIL" EntityType="Self.A_JOURNAL_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_JOURNAL_HEADER" EntityType="Self.A_JOURNAL_HEADER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_LnkVoucher" EntityType="Self.A_LnkVoucher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Pay_D_Vendor" EntityType="Self.A_Pay_D_Vendor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Pay_D_VendorDoc" EntityType="Self.A_Pay_D_VendorDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_PERIOD" EntityType="Self.A_PERIOD" Schema="dbo" store:Type="Tables" />
@@ -8049,6 +8179,38 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [AQ_GetJournalHeader].[TotalCredit] AS [TotalCredit], 
     [AQ_GetJournalHeader].[VoucherID] AS [VoucherID]
     FROM [dbo].[AQ_GetJournalHeader] AS [AQ_GetJournalHeader]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AQ_GetLnkVoucher" EntityType="Self.AQ_GetLnkVoucher" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AQ_GetLnkVoucher].[ID] AS [ID], 
+    [AQ_GetLnkVoucher].[CompCode] AS [CompCode], 
+    [AQ_GetLnkVoucher].[bracode] AS [bracode], 
+    [AQ_GetLnkVoucher].[System_Code] AS [System_Code], 
+    [AQ_GetLnkVoucher].[Tr_Code] AS [Tr_Code], 
+    [AQ_GetLnkVoucher].[TrID] AS [TrID], 
+    [AQ_GetLnkVoucher].[TrNo] AS [TrNo], 
+    [AQ_GetLnkVoucher].[Serial] AS [Serial], 
+    [AQ_GetLnkVoucher].[Acc_Code] AS [Acc_Code], 
+    [AQ_GetLnkVoucher].[Debit] AS [Debit], 
+    [AQ_GetLnkVoucher].[Credit] AS [Credit], 
+    [AQ_GetLnkVoucher].[CC_Code] AS [CC_Code], 
+    [AQ_GetLnkVoucher].[Line_DescA] AS [Line_DescA], 
+    [AQ_GetLnkVoucher].[Line_DescE] AS [Line_DescE], 
+    [AQ_GetLnkVoucher].[Voucher_No] AS [Voucher_No], 
+    [AQ_GetLnkVoucher].[SOURCE_TYPE] AS [SOURCE_TYPE], 
+    [AQ_GetLnkVoucher].[TYPE_CODE] AS [TYPE_CODE], 
+    [AQ_GetLnkVoucher].[ACC_DESCA] AS [ACC_DESCA], 
+    [AQ_GetLnkVoucher].[ACC_DESCL] AS [ACC_DESCL], 
+    [AQ_GetLnkVoucher].[CC_DESCA] AS [CC_DESCA], 
+    [AQ_GetLnkVoucher].[CC_DESCE] AS [CC_DESCE], 
+    [AQ_GetLnkVoucher].[TR_DESCA] AS [TR_DESCA], 
+    [AQ_GetLnkVoucher].[TR_DESCE] AS [TR_DESCE], 
+    [AQ_GetLnkVoucher].[Src_DescA] AS [Src_DescA], 
+    [AQ_GetLnkVoucher].[Src_DescE] AS [Src_DescE], 
+    [AQ_GetLnkVoucher].[TYPE_DESCA] AS [TYPE_DESCA], 
+    [AQ_GetLnkVoucher].[TYPE_DESCE] AS [TYPE_DESCE], 
+    [AQ_GetLnkVoucher].[TrDate] AS [TrDate]
+    FROM [dbo].[AQ_GetLnkVoucher] AS [AQ_GetLnkVoucher]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="AQ_GetVchrTemplateDetail" EntityType="Self.AQ_GetVchrTemplateDetail" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -8504,7 +8666,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [GQ_GetLnkTransComp].[BASE_TABLE_NAME] AS [BASE_TABLE_NAME], 
     [GQ_GetLnkTransComp].[FN_POSTED] AS [FN_POSTED], 
     [GQ_GetLnkTransComp].[COMP_CODE] AS [COMP_CODE], 
-    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE]
+    [GQ_GetLnkTransComp].[Comp_INTEGRATE] AS [Comp_INTEGRATE], 
+    [GQ_GetLnkTransComp].[IsView] AS [IsView]
     FROM [dbo].[GQ_GetLnkTransComp] AS [GQ_GetLnkTransComp]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="GQ_GetLnkTransVoucher" EntityType="Self.GQ_GetLnkTransVoucher" store:Type="Views" store:Schema="dbo">
@@ -10090,7 +10253,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceListVer2].[SPer_NameA] AS [SPer_NameA], 
     [IQ_GetSlsInvoiceListVer2].[QtyTotal] AS [QtyTotal], 
     [IQ_GetSlsInvoiceListVer2].[ItemCount] AS [ItemCount], 
-    [IQ_GetSlsInvoiceListVer2].[LineCount] AS [LineCount]
+    [IQ_GetSlsInvoiceListVer2].[LineCount] AS [LineCount], 
+    [IQ_GetSlsInvoiceListVer2].[ISCostPosted] AS [ISCostPosted]
     FROM [dbo].[IQ_GetSlsInvoiceListVer2] AS [IQ_GetSlsInvoiceListVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetSlsInvoiceStatisticVer2" EntityType="Self.IQ_GetSlsInvoiceStatisticVer2" store:Type="Views" store:Schema="dbo">
@@ -10189,7 +10353,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetSlsInvoiceStatisticVer2].[Tot_Qty] AS [Tot_Qty], 
     [IQ_GetSlsInvoiceStatisticVer2].[Item_Count] AS [Item_Count], 
     [IQ_GetSlsInvoiceStatisticVer2].[Line_Count] AS [Line_Count], 
-    [IQ_GetSlsInvoiceStatisticVer2].[Op_TrNo] AS [Op_TrNo]
+    [IQ_GetSlsInvoiceStatisticVer2].[Op_TrNo] AS [Op_TrNo], 
+    [IQ_GetSlsInvoiceStatisticVer2].[ISCostPosted] AS [ISCostPosted]
     FROM [dbo].[IQ_GetSlsInvoiceStatisticVer2] AS [IQ_GetSlsInvoiceStatisticVer2]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetStkAdjust" EntityType="Self.IQ_GetStkAdjust" store:Type="Views" store:Schema="dbo">
@@ -12264,6 +12429,74 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="CashType" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="A_LnkVoucher" EntityType="InvModel.A_LnkVoucher" />
+          <EntitySet Name="AQ_GetLnkVoucher" EntityType="InvModel.AQ_GetLnkVoucher" />
+          <FunctionImport Name="AProc_LnkGenerateTrans" ReturnType="Collection(InvModel.AProc_LnkGenerateTrans_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="Bra" Mode="In" Type="Int32" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="Sys" Mode="In" Type="String" />
+            <Parameter Name="TRType" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="Fromno" Mode="In" Type="Int32" />
+            <Parameter Name="ToNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GProc_Rep_UserActivityLog" ReturnType="Collection(InvModel.GProc_Rep_UserActivityLog_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="GrpType" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="FromTime" Mode="In" Type="String" />
+            <Parameter Name="ToTime" Mode="In" Type="String" />
+            <Parameter Name="finYear" Mode="In" Type="Int32" />
+            <Parameter Name="sys" Mode="In" Type="String" />
+            <Parameter Name="module" Mode="In" Type="String" />
+            <Parameter Name="usr" Mode="In" Type="String" />
+            <Parameter Name="OpStatus" Mode="In" Type="Int32" />
+            <Parameter Name="opid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AProc_Prnt_LnkVoucher" ReturnType="Collection(InvModel.AProc_Prnt_LnkVoucher_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="tr_code" Mode="In" Type="String" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AProc_Rep_LnkVoucherList" ReturnType="Collection(InvModel.AProc_Rep_LnkVoucherList_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="User" Mode="In" Type="String" />
+            <Parameter Name="Sys" Mode="In" Type="String" />
+            <Parameter Name="TRType" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="Fromno" Mode="In" Type="Int32" />
+            <Parameter Name="ToNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AProc_GetLnkVoucher" ReturnType="Collection(InvModel.AProc_GetLnkVoucher_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="tr_code" Mode="In" Type="String" />
+            <Parameter Name="TRId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -13280,6 +13513,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="QtyTotal" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="Int32" />
           <Property Name="LineCount" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <EntityType Name="I_Sls_TR_InvoiceItems">
           <Key>
@@ -14877,6 +15111,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="INTEGRATE" Type="Boolean" />
           <Property Name="BASE_TABLE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsView" Type="Boolean" />
         </EntityType>
         <EntityType Name="G_LnkTrans_TempVchr">
           <Key>
@@ -21206,6 +21441,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="QtyTotal" Type="Decimal" Precision="19" Scale="2" />
           <Property Name="ItemCount" Type="Int32" />
           <Property Name="LineCount" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <EntityType Name="IQ_GetSlsInvoiceStatisticVer2">
           <Key>
@@ -21306,6 +21542,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Item_Count" Type="Int32" />
           <Property Name="Line_Count" Type="Int32" />
           <Property Name="Op_TrNo" Type="Int32" />
+          <Property Name="ISCostPosted" Type="Boolean" />
         </EntityType>
         <ComplexType Name="IProc_Rpt_SlsInvoiceListVer2_Result">
           <Property Type="Int32" Name="Comp" Nullable="true" />
@@ -22625,6 +22862,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="FN_POSTED" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="COMP_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Comp_INTEGRATE" Type="Boolean" />
+          <Property Name="IsView" Type="Boolean" />
         </EntityType>
         <EntityType Name="IQ_GetCollectList">
           <Key>
@@ -23130,6 +23368,226 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="Prov_NameE" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="ChargeInvoiceNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CC_Code" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <EntityType Name="A_LnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="bracode" Type="Int32" />
+          <Property Name="System_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tr_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrID" Type="Int64" />
+          <Property Name="TrNo" Type="Int64" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="Acc_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescA" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher_No" Type="Int32" />
+          <Property Name="SOURCE_TYPE" Type="Int32" />
+          <Property Name="TYPE_CODE" Type="Int32" />
+          <Property Name="TrDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="AQ_GetLnkVoucher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CompCode" Type="Int32" />
+          <Property Name="bracode" Type="Int32" />
+          <Property Name="System_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tr_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrID" Type="Int64" />
+          <Property Name="TrNo" Type="Int64" />
+          <Property Name="Serial" Type="Int32" />
+          <Property Name="Acc_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CC_Code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescA" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Line_DescE" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Voucher_No" Type="Int32" />
+          <Property Name="SOURCE_TYPE" Type="Int32" />
+          <Property Name="TYPE_CODE" Type="Int32" />
+          <Property Name="ACC_DESCA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ACC_DESCL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CC_DESCA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CC_DESCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Src_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Src_DescE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TYPE_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <ComplexType Name="AProc_LnkGenerateTrans_Result">
+          <Property Type="Int64" Name="TRID" Nullable="false" />
+          <Property Type="String" Name="TR_CODE" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="COMP_CODE" Nullable="true" />
+          <Property Type="Int32" Name="BRA_CODE" Nullable="true" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="VOUCHER_CODE" Nullable="true" />
+          <Property Type="Byte" Name="VOUCHER_TYPE" Nullable="true" />
+          <Property Type="String" Name="VOUCHER_SOURCE_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TR_NO" Nullable="true" />
+          <Property Type="String" Name="TR_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TR_DATE" Nullable="true" Precision="16" />
+          <Property Type="Decimal" Name="TR_AMOUNT" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="TR_DESCA" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TR_DESCE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TR_USER_CODE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="VOUCHER_DESCA" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VOUCHER_DESCE" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="IsPosted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GProc_Rep_UserActivityLog_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StatusDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_StatusDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OprDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OprDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ModuleDsA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_ModuleDsE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Par_FinYear" Nullable="true" />
+          <Property Type="String" Name="Par_SystemCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_userCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_FromTime" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Par_ToTime" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="USER_CODE" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="USER_ACTIVE" Nullable="false" />
+          <Property Type="DateTime" Name="LastLogin" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FirstLogin" Nullable="true" Precision="16" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="BranchCode" Nullable="true" />
+          <Property Type="Int16" Name="FinYear" Nullable="true" />
+          <Property Type="String" Name="MODULE_CODE" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescE" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="DataID" Nullable="true" />
+          <Property Type="Boolean" Name="ISSucceed" Nullable="true" />
+          <Property Type="String" Name="ExtraData" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="COMP_CODE" Nullable="true" />
+          <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="LogDateTime" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="AProc_Prnt_LnkVoucher_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="Int64" Name="TrID" Nullable="true" />
+          <Property Type="String" Name="Tr_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Voucher_No" Nullable="true" />
+          <Property Type="String" Name="TYPE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TYPE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="Int64" Name="TrNo" Nullable="true" />
+          <Property Type="Int32" Name="Serial" Nullable="true" />
+          <Property Type="String" Name="Acc_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ACC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ACC_DESCL" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Debit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Credit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CC_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CC_DESCE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Line_DescA" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Line_DescE" Nullable="true" MaxLength="300" />
+        </ComplexType>
+        <ComplexType Name="AProc_Rep_LnkVoucherList_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_BraDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_BraDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_TypeDSA" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Par_TypeDSE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Par_FromTrNo" Nullable="true" />
+          <Property Type="Int32" Name="Par_ToTrNo" Nullable="true" />
+          <Property Type="Int64" Name="TRID" Nullable="false" />
+          <Property Type="Int32" Name="BRA_CODE" Nullable="true" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="SUB_SYSTEM_CODE" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TR_CODE" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="VOUCHER_CODE" Nullable="true" />
+          <Property Type="Byte" Name="VOUCHER_TYPE" Nullable="true" />
+          <Property Type="String" Name="VOUCHER_SOURCE_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TR_NO" Nullable="true" />
+          <Property Type="String" Name="TR_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TR_DATE" Nullable="true" Precision="16" />
+          <Property Type="Decimal" Name="TR_AMOUNT" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="TR_DESCA" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TR_DESCE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TR_USER_CODE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="VOUCHER_DESCA" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VOUCHER_DESCE" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="isposted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AProc_GetLnkVoucher_Result">
+          <Property Type="Int64" Name="TrID" Nullable="true" />
+          <Property Type="String" Name="Tr_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TR_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Voucher_No" Nullable="true" />
+          <Property Type="String" Name="TYPE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TYPE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Src_DescA" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="TrDate" Nullable="true" Precision="16" />
+          <Property Type="Int64" Name="TrNo" Nullable="true" />
+          <Property Type="Int32" Name="Serial" Nullable="true" />
+          <Property Type="String" Name="Acc_Code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ACC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ACC_DESCL" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Debit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Credit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CC_Code" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CC_DESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CC_DESCE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Line_DescA" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Line_DescE" Nullable="true" MaxLength="300" />
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="CompCode" Nullable="true" />
+          <Property Type="Int32" Name="bracode" Nullable="true" />
+          <Property Type="String" Name="System_Code" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="SOURCE_TYPE" Nullable="true" />
+          <Property Type="Int32" Name="TYPE_CODE" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -24077,6 +24535,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_Sls_TR_Invoice">
             <EntityTypeMapping TypeName="InvModel.I_Sls_TR_Invoice">
               <MappingFragment StoreEntitySet="I_Sls_TR_Invoice">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="LineCount" ColumnName="LineCount" />
                 <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
                 <ScalarProperty Name="QtyTotal" ColumnName="QtyTotal" />
@@ -25735,6 +26194,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="G_LnkTrans">
             <EntityTypeMapping TypeName="InvModel.G_LnkTrans">
               <MappingFragment StoreEntitySet="G_LnkTrans">
+                <ScalarProperty Name="IsView" ColumnName="IsView" />
                 <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
                 <ScalarProperty Name="BASE_TABLE_NAME" ColumnName="BASE_TABLE_NAME" />
                 <ScalarProperty Name="INTEGRATE" ColumnName="INTEGRATE" />
@@ -32289,6 +32749,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetSlsInvoiceListVer2">
             <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceListVer2">
               <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceListVer2">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="LineCount" ColumnName="LineCount" />
                 <ScalarProperty Name="ItemCount" ColumnName="ItemCount" />
                 <ScalarProperty Name="QtyTotal" ColumnName="QtyTotal" />
@@ -32389,6 +32850,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetSlsInvoiceStatisticVer2">
             <EntityTypeMapping TypeName="InvModel.IQ_GetSlsInvoiceStatisticVer2">
               <MappingFragment StoreEntitySet="IQ_GetSlsInvoiceStatisticVer2">
+                <ScalarProperty Name="ISCostPosted" ColumnName="ISCostPosted" />
                 <ScalarProperty Name="Op_TrNo" ColumnName="Op_TrNo" />
                 <ScalarProperty Name="Line_Count" ColumnName="Line_Count" />
                 <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
@@ -33873,6 +34335,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="GQ_GetLnkTransComp">
             <EntityTypeMapping TypeName="InvModel.GQ_GetLnkTransComp">
               <MappingFragment StoreEntitySet="GQ_GetLnkTransComp">
+                <ScalarProperty Name="IsView" ColumnName="IsView" />
                 <ScalarProperty Name="Comp_INTEGRATE" ColumnName="Comp_INTEGRATE" />
                 <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
                 <ScalarProperty Name="FN_POSTED" ColumnName="FN_POSTED" />
@@ -34423,6 +34886,248 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="Prov_NameE" ColumnName="Prov_NameE" />
                 <ScalarProperty Name="ChargeInvoiceNo" ColumnName="ChargeInvoiceNo" />
                 <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="A_LnkVoucher">
+            <EntityTypeMapping TypeName="InvModel.A_LnkVoucher">
+              <MappingFragment StoreEntitySet="A_LnkVoucher">
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AQ_GetLnkVoucher">
+            <EntityTypeMapping TypeName="InvModel.AQ_GetLnkVoucher">
+              <MappingFragment StoreEntitySet="AQ_GetLnkVoucher">
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TYPE_DESCE" ColumnName="TYPE_DESCE" />
+                <ScalarProperty Name="TYPE_DESCA" ColumnName="TYPE_DESCA" />
+                <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
+                <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
+                <ScalarProperty Name="CC_DESCA" ColumnName="CC_DESCA" />
+                <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+                <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AProc_LnkGenerateTrans" FunctionName="InvModel.Store.AProc_LnkGenerateTrans">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_LnkGenerateTrans_Result">
+                <ScalarProperty Name="TRID" ColumnName="TRID" />
+                <ScalarProperty Name="TR_CODE" ColumnName="TR_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="BRA_CODE" ColumnName="BRA_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="VOUCHER_CODE" ColumnName="VOUCHER_CODE" />
+                <ScalarProperty Name="VOUCHER_TYPE" ColumnName="VOUCHER_TYPE" />
+                <ScalarProperty Name="VOUCHER_SOURCE_TYPE" ColumnName="VOUCHER_SOURCE_TYPE" />
+                <ScalarProperty Name="TR_NO" ColumnName="TR_NO" />
+                <ScalarProperty Name="TR_TYPE" ColumnName="TR_TYPE" />
+                <ScalarProperty Name="TR_DATE" ColumnName="TR_DATE" />
+                <ScalarProperty Name="TR_AMOUNT" ColumnName="TR_AMOUNT" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="TR_USER_CODE" ColumnName="TR_USER_CODE" />
+                <ScalarProperty Name="VOUCHER_DESCA" ColumnName="VOUCHER_DESCA" />
+                <ScalarProperty Name="VOUCHER_DESCE" ColumnName="VOUCHER_DESCE" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GProc_Rep_UserActivityLog" FunctionName="InvModel.Store.GProc_Rep_UserActivityLog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.GProc_Rep_UserActivityLog_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StatusDSA" ColumnName="Par_StatusDSA" />
+                <ScalarProperty Name="Par_StatusDSE" ColumnName="Par_StatusDSE" />
+                <ScalarProperty Name="Par_OprDSA" ColumnName="Par_OprDSA" />
+                <ScalarProperty Name="Par_OprDSE" ColumnName="Par_OprDSE" />
+                <ScalarProperty Name="Par_ModuleDsA" ColumnName="Par_ModuleDsA" />
+                <ScalarProperty Name="Par_ModuleDsE" ColumnName="Par_ModuleDsE" />
+                <ScalarProperty Name="Par_FinYear" ColumnName="Par_FinYear" />
+                <ScalarProperty Name="Par_SystemCode" ColumnName="Par_SystemCode" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_userCode" ColumnName="Par_userCode" />
+                <ScalarProperty Name="Par_FromTime" ColumnName="Par_FromTime" />
+                <ScalarProperty Name="Par_ToTime" ColumnName="Par_ToTime" />
+                <ScalarProperty Name="USER_CODE" ColumnName="USER_CODE" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_ACTIVE" ColumnName="USER_ACTIVE" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="FirstLogin" ColumnName="FirstLogin" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="FinYear" ColumnName="FinYear" />
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="DescA" ColumnName="DescA" />
+                <ScalarProperty Name="DescE" ColumnName="DescE" />
+                <ScalarProperty Name="DataID" ColumnName="DataID" />
+                <ScalarProperty Name="ISSucceed" ColumnName="ISSucceed" />
+                <ScalarProperty Name="ExtraData" ColumnName="ExtraData" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AProc_Prnt_LnkVoucher" FunctionName="InvModel.Store.AProc_Prnt_LnkVoucher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_Prnt_LnkVoucher_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="TYPE_DESCA" ColumnName="TYPE_DESCA" />
+                <ScalarProperty Name="TYPE_DESCE" ColumnName="TYPE_DESCE" />
+                <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
+                <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
+                <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="CC_DESCA" ColumnName="CC_DESCA" />
+                <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AProc_Rep_LnkVoucherList" FunctionName="InvModel.Store.AProc_Rep_LnkVoucherList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_Rep_LnkVoucherList_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_BraDSA" ColumnName="Par_BraDSA" />
+                <ScalarProperty Name="Par_BraDSE" ColumnName="Par_BraDSE" />
+                <ScalarProperty Name="Par_TypeDSA" ColumnName="Par_TypeDSA" />
+                <ScalarProperty Name="Par_TypeDSE" ColumnName="Par_TypeDSE" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_FromTrNo" ColumnName="Par_FromTrNo" />
+                <ScalarProperty Name="Par_ToTrNo" ColumnName="Par_ToTrNo" />
+                <ScalarProperty Name="TRID" ColumnName="TRID" />
+                <ScalarProperty Name="BRA_CODE" ColumnName="BRA_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="TR_CODE" ColumnName="TR_CODE" />
+                <ScalarProperty Name="VOUCHER_CODE" ColumnName="VOUCHER_CODE" />
+                <ScalarProperty Name="VOUCHER_TYPE" ColumnName="VOUCHER_TYPE" />
+                <ScalarProperty Name="VOUCHER_SOURCE_TYPE" ColumnName="VOUCHER_SOURCE_TYPE" />
+                <ScalarProperty Name="TR_NO" ColumnName="TR_NO" />
+                <ScalarProperty Name="TR_TYPE" ColumnName="TR_TYPE" />
+                <ScalarProperty Name="TR_DATE" ColumnName="TR_DATE" />
+                <ScalarProperty Name="TR_AMOUNT" ColumnName="TR_AMOUNT" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="TR_USER_CODE" ColumnName="TR_USER_CODE" />
+                <ScalarProperty Name="VOUCHER_DESCA" ColumnName="VOUCHER_DESCA" />
+                <ScalarProperty Name="VOUCHER_DESCE" ColumnName="VOUCHER_DESCE" />
+                <ScalarProperty Name="isposted" ColumnName="isposted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AProc_GetLnkVoucher" FunctionName="InvModel.Store.AProc_GetLnkVoucher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_GetLnkVoucher_Result">
+                <ScalarProperty Name="TrID" ColumnName="TrID" />
+                <ScalarProperty Name="Tr_Code" ColumnName="Tr_Code" />
+                <ScalarProperty Name="TR_DESCA" ColumnName="TR_DESCA" />
+                <ScalarProperty Name="TR_DESCE" ColumnName="TR_DESCE" />
+                <ScalarProperty Name="Voucher_No" ColumnName="Voucher_No" />
+                <ScalarProperty Name="TYPE_DESCA" ColumnName="TYPE_DESCA" />
+                <ScalarProperty Name="TYPE_DESCE" ColumnName="TYPE_DESCE" />
+                <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
+                <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
+                <ScalarProperty Name="TrDate" ColumnName="TrDate" />
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
+                <ScalarProperty Name="Serial" ColumnName="Serial" />
+                <ScalarProperty Name="Acc_Code" ColumnName="Acc_Code" />
+                <ScalarProperty Name="ACC_DESCA" ColumnName="ACC_DESCA" />
+                <ScalarProperty Name="ACC_DESCL" ColumnName="ACC_DESCL" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="CC_Code" ColumnName="CC_Code" />
+                <ScalarProperty Name="CC_DESCA" ColumnName="CC_DESCA" />
+                <ScalarProperty Name="CC_DESCE" ColumnName="CC_DESCE" />
+                <ScalarProperty Name="Line_DescA" ColumnName="Line_DescA" />
+                <ScalarProperty Name="Line_DescE" ColumnName="Line_DescE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompCode" ColumnName="CompCode" />
+                <ScalarProperty Name="bracode" ColumnName="bracode" />
+                <ScalarProperty Name="System_Code" ColumnName="System_Code" />
+                <ScalarProperty Name="SOURCE_TYPE" ColumnName="SOURCE_TYPE" />
+                <ScalarProperty Name="TYPE_CODE" ColumnName="TYPE_CODE" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

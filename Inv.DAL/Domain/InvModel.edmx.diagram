@@ -203,9 +203,11 @@
         <EntityTypeShape EntityType="InvModel.GQ_GetLnkTransComp" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.IQ_GetCollectList" Width="1.5" PointX="28.75" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.A_RecPay_D_Category" Width="1.5" PointX="2.75" PointY="28.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="InvModel.A_G_Vendor" Width="1.5" PointX="5.375" PointY="28.75" />
-        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_ReceiptNote" Width="1.5" PointX="7.375" PointY="28.75" />
-        <EntityTypeShape EntityType="InvModel.IQ_GetBoxReceiveList" Width="1.5" PointX="9.375" PointY="28.75" />
+        <EntityTypeShape EntityType="InvModel.A_G_Vendor" Width="1.5" PointX="5.375" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_RecPay_Tr_ReceiptNote" Width="1.5" PointX="7.375" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.IQ_GetBoxReceiveList" Width="1.5" PointX="9.375" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.A_LnkVoucher" Width="1.5" PointX="11.375" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.AQ_GetLnkVoucher" Width="1.5" PointX="13.375" PointY="28.75" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

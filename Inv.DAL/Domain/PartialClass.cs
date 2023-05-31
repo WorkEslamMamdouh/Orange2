@@ -28,6 +28,7 @@ namespace Inv.DAL.Domain
     }
     public class SecurityandUpdateFlagClass
     {
+        public char FlagUpdate { get; set; }
         public char StatusFlag { get; set; }
         public string UserCode { get; set; }
         public string Token { get; set; } 
@@ -328,6 +329,12 @@ namespace Inv.DAL.Domain
     {
     }
     public partial class I_Stk_TR_IssueToCCDetails : SecurityandUpdateFlagClass_FIN_YEAR
+    {
+    }
+        public partial class AQ_GetLnkVoucher : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_LnkVoucher : SecurityandUpdateFlagClass
     {
     }
     

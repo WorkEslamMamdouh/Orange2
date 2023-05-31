@@ -97,6 +97,13 @@
 
 
         });
+
+        debugger
+        setTimeout(function () {
+            $('#MessageBoxOk').focus();
+        }, 700);
+        
+
     }
 
 }

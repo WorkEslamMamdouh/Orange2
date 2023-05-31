@@ -13,6 +13,7 @@ namespace Report_Page {
     var succes;
 
     export function InitalizeComponent() {
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 500);
         document.title = "الطباعة";
 
         $('#div_Reports').removeClass('display_none');

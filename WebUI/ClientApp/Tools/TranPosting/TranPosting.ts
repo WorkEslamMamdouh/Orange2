@@ -151,9 +151,38 @@ namespace TranPosting {
 
     }
     function InitializeEvents() {
-        btnLoad.onclick = btnLoad_onclick;
-        btnShowVouchers.onclick = btnShowVouchers_onclick;
-        btnCreateVoucher.onclick = btnCreateVoucher_onclick;
+        btnLoad.onclick = () => {
+            if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true || !CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true) {
+                WorningMessage('   التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "هل انت متأكد ؟ ", "worning", () => {
+                    btnLoad_onclick();
+                });
+            }
+            else {
+                btnLoad_onclick();
+            }
+        };
+        btnShowVouchers.onclick = () => {
+            if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true || !CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true) {
+                WorningMessage('   التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "هل انت متأكد ؟ ", "worning", () => {
+                    btnShowVouchers_onclick();
+                });
+            }
+            else {
+                btnShowVouchers_onclick();
+            }
+        };
+        btnCreateVoucher.onclick = () => {
+            if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true || !CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString()) == true) {
+                WorningMessage('   التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "هل انت متأكد ؟ ", "worning", () => {
+                    btnCreateVoucher_onclick();
+                });
+            }
+            else {
+                btnCreateVoucher_onclick();
+            }
+        };
+        //btnShowVouchers.onclick = btnShowVouchers_onclick;
+        //btnCreateVoucher.onclick = btnCreateVoucher_onclick;
         btnSelectAll.onclick = btnSelectAll_onclick;
         btnReverseSelection.onclick = btnReverseSelection_onclick;
         btnUnSelectAll.onclick = btnUnSelectAll_onclick;
@@ -169,18 +198,7 @@ namespace TranPosting {
     //------------------------------------------------------ ButtonsRegion ----------------------------------
     function btnLoad_onclick() {
 
-        if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtFromDate);
-            return
-        }
-
-        if (!CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtToDate);
-            return
-        }
-
+         
         var SelectFalg: boolean = false;
         if (ddlBranch.value == "null") {
             DisplayMassage("يجب اختيار الفرع", "you must Select Branch", MessageType.Error);
@@ -277,18 +295,7 @@ namespace TranPosting {
     }
 
     function btnShowVouchers_onclick() {
-
-        if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtFromDate);
-            return
-        }
-
-        if (!CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-            Errorinput(txtToDate);
-            return
-        }
+ 
 
         debitTot = 0;
         cerditTot = 0;
@@ -450,19 +457,7 @@ namespace TranPosting {
                 return;
             }
 
-            if (!CheckDate(DateFormat(txtFromDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-                Errorinput(txtFromDate);
-                return
-            }
-
-            if (!CheckDate(DateFormat(txtToDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-                WorningMessage('  التاريخ ليس متطابق مع تاريخ السنه (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', '  The date is not identical with the date of the year (' + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ')', "تحذير", "worning");
-                Errorinput(txtToDate);
-                return
-            }
-
-
+      
             var Desc: string = txtDesc.value;
             var VoucherDate: string = DateFormatRep(txtVoucherDate.value);
             let lstTrans = JSON.stringify(LnkTransDetails);
@@ -896,10 +891,17 @@ namespace TranPosting {
         txtVoucherDate.value = txtToDate.value;
     }
     function txtVoucherDate_onchange() {
-        if (txtVoucherDate.value > txtToDate.value || txtVoucherDate.value < txtFromDate.value) {
-            DisplayMassage("يجب ادخال تاريخ القيد بين تاريخين الادخال", "you must Enter the date between 'From Date' & 'To Date'", MessageType.Error);
-            txtVoucherDate.value = txtToDate.value;
+
+        if (!CheckDate(DateFormat(txtVoucherDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
+            DisplayMassage("يجب ادخال تاريخ القيد بين السنة المالية ", "you must Enter the date between 'From Date' & 'To Date'", MessageType.Error);
+            txtVoucherDate.value = GetDate();
+            Errorinput(txtVoucherDate);
         }
+
+        //if (txtVoucherDate.value > txtToDate.value || txtVoucherDate.value < txtFromDate.value) {
+        //    DisplayMassage("يجب ادخال تاريخ القيد بين تاريخين الادخال", "you must Enter the date between 'From Date' & 'To Date'", MessageType.Error);
+        //    txtVoucherDate.value = txtToDate.value;
+        //}
 
     }
 

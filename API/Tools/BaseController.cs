@@ -244,21 +244,7 @@ namespace Inv.API.Tools
             object objResult = (object)obj;
             T result = JsonConvert.DeserializeObject<T>(objResult.ToString(), settings);
             return result;
-        }
-
-        public object Get_Model(string query, string NameClass)
-        {
-            Type type = AppDomain.CurrentDomain.GetAssemblies()
-                   .SelectMany(x => x.GetTypes())
-                   .FirstOrDefault(x => x.Name == "" + NameClass + "");
-
-            var res = db.Database.SqlQuery(type, query);
-
-            string DataJson = JsonConvert.SerializeObject(res, Formatting.None);
-
-            return GetObjectClass(DataJson, NameClass);
-
-        }
+        } 
 
         public object GetObjectClass(string jsonData, string NameClass)
         {
@@ -275,7 +261,24 @@ namespace Inv.API.Tools
 
             return ObjClass;
         }
+        public object Get_Model(string query, string NameClass)
+        {
+            Type type = AppDomain.CurrentDomain.GetAssemblies()
+                   .SelectMany(x => x.GetTypes())
+                   .FirstOrDefault(x => x.Name == "" + NameClass + "");
 
+            if (type == null)
+            {
+                List<object> NewObjClass = new List<object>();
+                return NewObjClass;
+            }
+
+            var res = db.Database.SqlQuery(type, query);
+            string DataJson = JsonConvert.SerializeObject(res, Formatting.None);
+
+            return GetObjectClass(DataJson, NameClass);
+
+        }
 
 
         //public DateTime GetCurrentDate(int comcode)

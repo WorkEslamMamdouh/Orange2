@@ -225,6 +225,7 @@ namespace SlsTrSalesManagerNew {
     var flagControldbOrSerch = false;
 
     var IsPosted = false;
+    var ISCostPosted = false;
 
 
     //flagInvItemDiscount = true;
@@ -233,37 +234,38 @@ namespace SlsTrSalesManagerNew {
     //------------------------------------------------------ Main Region------------------------
 
     export function InitalizeComponent() {
-
-        //alert()
-
-
-
-        document.getElementById('Screen_name').innerHTML = Screen_name;
-
-        document.title = Screen_name;
-
+        debugger 
+         
+        document.getElementById('Screen_name').innerHTML = Screen_name; 
+        document.title = Screen_name; 
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Finyear = Number(SysSession.CurrentEnvironment.CurrentYear);
 
         InitalizeControls();
-        InitializeEvents();
-        //fillddlCustomer();
-        Display_Category();
-        FillddlVatNature();
+        InitializeEvents(); 
+        InitializeGrid();
 
 
-
-        FillddlFamily();
-        fillddlSalesman();
-        FillddlStore();
         //txtStartDate.value = DateStartMonth();
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+
+        //*******************************************************************************************************************************
+
+        Display_Category();
+        FillddlVatNature(); 
+        FillddlFamily();
+        fillddlSalesman();
+        FillddlStore();
+        FillddlCashBox();
         FillddlStateType();
         FillddlInvoiceType();
         FillddlType();
+      
+
         vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
 
         GetVatPercentage();
@@ -276,14 +278,10 @@ namespace SlsTrSalesManagerNew {
         txtNet.value = NetCount.toString();
         txtCommission.value = commissionCount.toString();
 
-        FillddlCashBox();
         $('#btnPrint').addClass('display_none');
 
+         
 
-        //GetLastPrice(3236)
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
-
-        InitializeGrid();
 
         DisplayMod();
 
@@ -2071,6 +2069,7 @@ namespace SlsTrSalesManagerNew {
         $("#txtPriceshowID").val("");
 
         IsPosted = false;
+        ISCostPosted = false;
     }
     function btnShow_onclick() {
 
@@ -2813,6 +2812,7 @@ namespace SlsTrSalesManagerNew {
         $("#txtPriceshowID").val(InvoiceStatisticsModel[0].RefTrID)
 
         IsPosted = InvoiceStatisticsModel[0].IsPosted;
+        ISCostPosted = InvoiceStatisticsModel[0].ISCostPosted;
 
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
@@ -3457,6 +3457,8 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
+
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
@@ -3468,6 +3470,7 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
@@ -3960,8 +3963,7 @@ namespace SlsTrSalesManagerNew {
 
                 TotalDiscount += (Number($("#txtQuantity" + i).val()) * Number($("#txtDiscountAmount" + i).val()));
 
-                CountTotal += Number($("#txtTotal" + i).val());
-                CountTotal = Number(CountTotal);
+                CountTotal += Number($("#txtTotal" + i).val()); 
 
                 //var vatAmount = Number($("#txtTotal" + i).val()) * Number($("#txtTax_Rate" + i).val()) / 100;
                 TaxCount += Number($("#txtTax" + i).val());
@@ -3975,10 +3977,10 @@ namespace SlsTrSalesManagerNew {
         txtItemCount.value = CountItems.toString();
         txtPackageCount.value = PackageCount.toString();
         txtTotalDiscount.value = TotalDiscount.toString();
-        txtTotalbefore.value = Totalbefore.RoundToSt(2);
+        txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
-        txtNet.value = (NetCount.RoundToSt(2));
+        txtNet.value = ((NetCount.RoundToNum(2)) - Number(txtCommission.value)).RoundToSt(2);
 
 
         if (ddlType.value == "1") {
@@ -4399,6 +4401,7 @@ namespace SlsTrSalesManagerNew {
 
         InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
         InvoiceModel.IsPosted = IsPosted;
+        InvoiceModel.ISCostPosted = ISCostPosted;
 
 
 
@@ -4645,9 +4648,9 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
                     IsSuccess = true;
 
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
 
 
                     Save_Succ_But();
@@ -4709,9 +4712,10 @@ namespace SlsTrSalesManagerNew {
                     success_insert();
 
                     IsSuccess = true;
-                    //if (res.Status == 1) {
-                    //    setTimeout(function () { DownloadInvoicePdf(); }, 500);
-                    //}
+
+                    if (res.Status == 1) {
+                        setTimeout(function () { DownloadInvoicePdf(); }, 1000);
+                    }
 
                     Save_Succ_But();
 

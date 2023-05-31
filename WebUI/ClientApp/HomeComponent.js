@@ -583,6 +583,7 @@ var HomeComponent;
         $("#btnIssueType").click(function () { newtap = false; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCC").click(function () { newtap = false; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccount").click(function () { newtap = false; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucher").click(function () { newtap = false; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucher").click(function () { newtap = false; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucher").click(function () { newtap = false; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucher").click(function () { newtap = false; OpenPage(Modules.PaymentVoucher); });
@@ -592,6 +593,7 @@ var HomeComponent;
         $("#btnAccountbalances").click(function () { newtap = false; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreports").click(function () { newtap = false; OpenPage(Modules.financialreports); }); //
         $("#btnUSERS").click(function () { newtap = false; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLog").click(function () { newtap = false; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPosting").click(function () { newtap = false; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranch").click(function () { newtap = false; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucher").click(function () { newtap = false; OpenPage(Modules.LnkTransVoucher); }); // 
@@ -682,6 +684,7 @@ var HomeComponent;
         $("#btnIssueTypeT").click(function () { newtap = true; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCCT").click(function () { newtap = true; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccountT").click(function () { newtap = true; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucherT").click(function () { newtap = true; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucherT").click(function () { newtap = true; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucherT").click(function () { newtap = true; OpenPage(Modules.PaymentVoucher); });
@@ -691,6 +694,7 @@ var HomeComponent;
         $("#btnAccountbalancesT").click(function () { newtap = true; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreportsT").click(function () { newtap = true; OpenPage(Modules.financialreports); }); //
         $("#btnUSERST").click(function () { newtap = true; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLogT").click(function () { newtap = true; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPostingT").click(function () { newtap = true; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranchT").click(function () { newtap = true; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkTransVoucher); }); // 

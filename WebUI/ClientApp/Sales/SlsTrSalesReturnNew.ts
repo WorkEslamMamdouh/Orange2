@@ -380,7 +380,7 @@ namespace SlsTrSalesReturnNew {
         }
     }
     function DeleteAllRow() {
-        
+
         for (var RecNo = 0; RecNo < CountGrid; RecNo++) {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
 
@@ -414,7 +414,7 @@ namespace SlsTrSalesReturnNew {
         txtTotal.value = "";
         txtTax.value = "";
         txtNet.value = "";
-         
+
         txtInvoiceDate.value = "";
         ddlInvoiceCustomer.value = "null";
         ddlReturnTypeShow.value = "0";
@@ -529,7 +529,7 @@ namespace SlsTrSalesReturnNew {
                                 CountGrid++;
 
                             }
-                             
+
                         }
 
 
@@ -542,7 +542,7 @@ namespace SlsTrSalesReturnNew {
                         }
 
 
-                        CountItems = CountGrid; 
+                        CountItems = CountGrid;
                         ComputeTotals();
 
                     }
@@ -763,9 +763,7 @@ namespace SlsTrSalesReturnNew {
             try {
                 if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
                     var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
-                    var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
                     ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID.toString();
-                    $("#txtCashAmount").prop("value", cashAmount);
                 } else {
                     $("#txtCashAmount").val('');
                 }
@@ -773,6 +771,8 @@ namespace SlsTrSalesReturnNew {
 
             }
 
+            var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
+            $("#txtCashAmount").prop("value", cashAmount);
 
             $("#div_Data").html('');
             for (let i = 0; i < SlsInvoiceItemsDetails.length; i++) {
@@ -2091,7 +2091,7 @@ namespace SlsTrSalesReturnNew {
 
         $("#btn_minus" + cnt).addClass("display_none");
         $("#btn_minus" + cnt).attr("disabled", "disabled");
-         
+
 
 
 
@@ -2222,7 +2222,7 @@ namespace SlsTrSalesReturnNew {
             $('#div_Data').html("");
         }
         else {
-            DeleteAllRow(); 
+            DeleteAllRow();
         }
         txtItemCount.value = "";
         txtPackageCount.value = "";
@@ -2393,11 +2393,14 @@ namespace SlsTrSalesReturnNew {
         if (ddlReturnTypeShow.value == "0") {
             InvoiceModel.IsCash = false;
             InvoiceModel.CustomerName = $("#ddlInvoiceCustomer option:selected").text();
+
+            InvoiceModel.CashAmount = 0;
         }
         else {
             InvoiceModel.IsCash = true;
             InvoiceModel.CustomerName = $("#txtCustomerName").val();
             InvoiceModel.CashAmount = $("#txtCashAmount").val();
+            InvoiceModel.CashAmount = Number(txtNet.value);
         }
         InvoiceModel.CashBoxID = Number(ddlCashBox.value);
         InvoiceModel.CustomerId = Number(ddlInvoiceCustomer.value);
@@ -2413,7 +2416,7 @@ namespace SlsTrSalesReturnNew {
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
 
-        InvoiceModel.CashAmount = Number(txtNet.value);
+      
         InvoiceModel.CardAmount = 0;
 
         InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
@@ -2507,7 +2510,7 @@ namespace SlsTrSalesReturnNew {
                 invoiceItemSingleModel.OperationId = Number($("#txt_OperationId" + i).val())
 
                 //if (Qty != 0) {
-                    invoiceItemsModel.push(invoiceItemSingleModel);
+                invoiceItemsModel.push(invoiceItemSingleModel);
                 //}
             }
             if (StatusFlag == "d") {
@@ -2737,7 +2740,7 @@ namespace SlsTrSalesReturnNew {
             }
         });
 
-        $('#btnPrintTransaction').removeClass("display_none"); 
+        $('#btnPrintTransaction').removeClass("display_none");
         debugger
         $('#txt_OperationId').val(setVal(InvoiceStatisticsModel[0].OperationId));
         $('#txt_Operation').val(setVal(InvoiceStatisticsModel[0].Op_TrNo));
@@ -2788,7 +2791,7 @@ namespace SlsTrSalesReturnNew {
                     DisplayMassage("تم تعديل المرتجع بنجاح  ", 'Return number ' + res.TrNo + ' modified Successfully', MessageType.Succeed);
                     $('#txtUpdatedBy').prop("value", res.UpdatedBy);
                     $('#txtUpdatedAt').prop("value", res.UpdatedAt);
-                     
+
                     displayDate_speed(GlobalReturnID, res);
                     Success();
                     EditFlag = true;
@@ -2797,7 +2800,7 @@ namespace SlsTrSalesReturnNew {
                     DisplayMassage("هناك خطـأ", '(Error)', MessageType.Error);
                 }
             }
-        });  
+        });
     }
     function openReturn() {
 

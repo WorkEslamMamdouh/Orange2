@@ -639,9 +639,7 @@ var SlsTrSalesReturnNew;
             try {
                 if (InvoiceStatisticsModel[0].CashBoxID != null && InvoiceStatisticsModel[0].CashBoxID != 0) {
                     var BoxID = InvoiceStatisticsModel[0].CashBoxID.toString();
-                    var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
                     ddlCashBox.value = InvoiceStatisticsModel[0].CashBoxID.toString();
-                    $("#txtCashAmount").prop("value", cashAmount);
                 }
                 else {
                     $("#txtCashAmount").val('');
@@ -649,6 +647,8 @@ var SlsTrSalesReturnNew;
             }
             catch (e) {
             }
+            var cashAmount = InvoiceStatisticsModel[0].CashAmount.toString();
+            $("#txtCashAmount").prop("value", cashAmount);
             $("#div_Data").html('');
             for (var i = 0; i < SlsInvoiceItemsDetails.length; i++) {
                 BuildControls(i);
@@ -1954,11 +1954,13 @@ var SlsTrSalesReturnNew;
         if (ddlReturnTypeShow.value == "0") {
             InvoiceModel.IsCash = false;
             InvoiceModel.CustomerName = $("#ddlInvoiceCustomer option:selected").text();
+            InvoiceModel.CashAmount = 0;
         }
         else {
             InvoiceModel.IsCash = true;
             InvoiceModel.CustomerName = $("#txtCustomerName").val();
             InvoiceModel.CashAmount = $("#txtCashAmount").val();
+            InvoiceModel.CashAmount = Number(txtNet.value);
         }
         InvoiceModel.CashBoxID = Number(ddlCashBox.value);
         InvoiceModel.CustomerId = Number(ddlInvoiceCustomer.value);
@@ -1971,7 +1973,6 @@ var SlsTrSalesReturnNew;
         InvoiceModel.ItemDiscountTotal = Number(txtTotalDiscount.value);
         InvoiceModel.NetAfterVat = Number(txtNet.value);
         InvoiceModel.TotalAmount = Number(txtTotal.value);
-        InvoiceModel.CashAmount = Number(txtNet.value);
         InvoiceModel.CardAmount = 0;
         InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
         InvoiceModel.IsPosted = IsPosted;

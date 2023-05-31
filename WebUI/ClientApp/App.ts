@@ -68,7 +68,7 @@ var Modules = {
     IssueToCC: "IssueToCC",
 
     Dashboard: "Dashboard",
-
+    LnkVoucher: "LnkVoucher",
     JournalVoucher: "JournalVoucher",
     ReceiptVoucher: "ReceiptVoucher",
     PaymentVoucher: "PaymentVoucher",
@@ -78,6 +78,7 @@ var Modules = {
     Accountbalances: "Accountbalances",
 
     USERS: "USERS",
+    UserActLog: "UserActLog",
     TranPosting: "TranPosting",
     LnkvarBranch: "LnkvarBranch",
     LnkTransVoucher: "LnkTransVoucher",
@@ -116,7 +117,7 @@ var MessageType = {
     Succeed: '1',
     Worning: '3',
 }
- 
+
 var TransType = {
     Invoice: 'Inv',
     InvoiceReturn: 'Inv_Ret',
@@ -137,7 +138,7 @@ var Keys = {
 var setVal = function (value: any): any {
 
     let Input = this;
-    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
+    value == null || value == undefined ? value = '' : value = value;
     return value;
 };
 
@@ -326,14 +327,16 @@ namespace App {
             return Number(num);
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
 
             }
             else {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+                let Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                let fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix));
 
             }
         }
@@ -343,21 +346,24 @@ namespace App {
 
 
     Number.prototype.RoundToSt = function (dec: number): string {
-         
+
         let num = this;
         //let stnum = num.toString();
         if (num.toString().indexOf(".") == -1) {
             return Number(num).toString();
         } else {
             let stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
 
             }
             else {
                 let stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+                let Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                let fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix)).toString();
+                //return (stfix + fix.toString().substr(1, 3)).toString();
 
             }
         }
@@ -540,17 +546,17 @@ function GetBranchs() {
 }
 
 class Ajax_Data {
-    public type: string; 
+    public type: string;
     public url: string;
     public data: string;
-    public ISObject: boolean; 
+    public ISObject: boolean;
     constructor() {
-        this.type = "";  
+        this.type = "";
         this.url = "";
         this.data = "";
-        this.ISObject = false; 
+        this.ISObject = false;
     }
-} 
+}
 class GQ_GetUserBranch {
     public USER_CODE: string;
     public COMP_CODE: number;
@@ -1076,6 +1082,9 @@ var DocumentActions = {
         return model;
     },
     //eslam elassal
+
+
+
     FillComboSingular: (dataSource: Array<any>, combo: HTMLSelectElement) => {
         if (combo != null) {
             for (let i: number = combo.length; i >= 0; i--) {
@@ -1174,6 +1183,8 @@ var DocumentActions = {
 
         }
     },
+
+
     //Filldefult: (combo: HTMLSelectElement, codeField: any, textField: any, NameDefult: any) => {
     //    if (combo != null) {
     //        for (let i: number = combo.length; i >= 0; i--) {
@@ -1204,6 +1215,36 @@ var DocumentActions = {
         return element;
     }
 };
+
+function FillDropwithAttr(Datasource: Array<any>, InputID: string, Value: string, TextField, DefaultText = "", Attrname: string, AttrValue: string) {
+    debugger
+    $('#' + InputID + '').empty();
+    if (DefaultText != "No") {
+        if (DefaultText != "") {
+            $('#' + InputID + '').append("<option value=Null>" + DefaultText + "</option>");
+        }
+    }
+    if (Attrname != "") {
+        for (var i = 0; i < Datasource.length; i++) {
+            let Code = Datasource[i][Value];
+            let Text = Datasource[i][TextField];
+            let attrval = Datasource[i][AttrValue];
+
+            $('#' + InputID + '').append("<option value=" + Code + " data-" + Attrname + "=" + attrval + " >" + Text + "</option>");
+        }
+    } else {
+
+        for (var i = 0; i < Datasource.length; i++) {
+            let Code = Datasource[i][Value];
+            let Text = Datasource[i][TextField];
+            $('#' + InputID + '').append("<option value=" + Code + ">" + Text + "</option>");
+        }
+    }
+}
+
+
+
+
 
 function DateFormatddmmyyyy(dateForm: string): string {
     try {
@@ -1345,7 +1386,41 @@ function GetVat(Nature: number, Prc: number, VatType: number) {
 
 }
 
+function DateTimeFormatRep(dateForm: string): string {
+    try {
 
+        var date: Date = new Date();
+        let myDate: string = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+
+
+        let yy = date.getFullYear();
+        let mm = (date.getMonth() + 1);
+        let dd = date.getDate();
+
+        let hh = (date.getHours());
+        let mn = (date.getMinutes());
+        let ss = (date.getSeconds());
+
+        let year = yy;
+        let month = (mm < 10) ? ("0" + mm.toString()) : mm.toString();
+        let day = (dd < 10) ? ("0" + dd.toString()) : dd.toString();
+        let hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        let Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        let Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+        var startDate = year + "-" + month + "-" + day + " " + hour + ":" + Minute + ":" + Second; //+ ":" + Second;
+        let form_date = startDate;
+        return form_date;
+    } catch (e) {
+        return DateFormat((new Date()).toString());
+    }
+}
 function DateTimeFormat2(dateForm: string): string {
     try {
 
@@ -1383,7 +1458,33 @@ function DateTimeFormat2(dateForm: string): string {
         return DateFormat((new Date()).toString());
     }
 }
+function TimeFormat(dateForm: string): string {
+    try {
 
+        var date: Date = new Date();
+        let myDate: string = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+        let hh = (date.getHours());
+        let mn = (date.getMinutes());
+        let ss = (date.getSeconds());
+
+        let hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        let Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        let Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+
+        var Time = hour + ":" + Minute + ":" + Second;
+        return Time;
+
+    } catch (e) {
+        return "23:59:00";
+    }
+}
 function DateTimeFormat(dateForm: string): string {
     try {
 
@@ -1638,6 +1739,7 @@ function WorningMessage(msg_Ar: string, msg_En: string, tit_ar: string = "تنب
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 
 function WorningMessageOnCancel(msg_Ar: string, msg_En: string, tit_ar: string = "تنبيه", tit_en: string = "Worning", OnCancel?: () => void) {
@@ -1906,7 +2008,7 @@ function GetDateAndTime() {
     var ReturnedDate: string;
     var M: string = (today.getMonth() + 1).toString();
     var yyyy = today.getFullYear();
-     
+
     if (Number(dd) < 10) {
         dd = ('0' + dd);
     }
@@ -1916,10 +2018,10 @@ function GetDateAndTime() {
 
     var HH = today.getHours();
     var MM = today.getMinutes();
-    var SS = today.getSeconds(); 
+    var SS = today.getSeconds();
 
     ReturnedDate = dd + '/' + M + '/' + yyyy + ' ' + HH + ':' + MM + ':' + SS;
-     
+
 
     return ReturnedDate;
 }
@@ -2710,7 +2812,7 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     //$('#btnPrintsFrom_To').attr('style', 'width: 104%;')
     //$('#btnPrintsFrom_To').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 195%;z-index: 99999;"></i>');
 
- 
+
 
 
     rp.CompCode = SysSession.CompCode;
@@ -2750,36 +2852,36 @@ function PrintsFrom_To(Type_Trans: string, Name_ID: string, NameTable: string, C
     $('#btnPrintsFrom_To').attr('disabled', 'disabled')
 
     setTimeout(function () {
-         
-    Ajax.CallAsync({
-        url: Url.Action("Prnt_From_To", "GeneralRep"),
-        data: rp,
-        success: (d) => {
-            
-            let result = d;
-            $('#btnPrintsFrom_To').attr('style', '')
-            $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية ');
-            $('#btnPrintsFrom_To').removeAttr('disabled')
+
+        Ajax.CallAsync({
+            url: Url.Action("Prnt_From_To", "GeneralRep"),
+            data: rp,
+            success: (d) => {
+
+                let result = d;
+                $('#btnPrintsFrom_To').attr('style', '')
+                $('#btnPrintsFrom_To').html(' <span class="glyphicon glyphicon-file"></span>    تنزيل ملف بطباعة الحركة المختارية ');
+                $('#btnPrintsFrom_To').removeAttr('disabled')
 
 
 
-            //alert(result);
-            //
-            //window.open(result, "blank");
+                //alert(result);
+                //
+                //window.open(result, "blank");
 
-            let x = Url.Action("OpenPdfS", "Home");
+                let x = Url.Action("OpenPdfS", "Home");
 
-            let UrlPdf = x + "/" + "?" + "path=" + result + "";
-
-
-            window.open(UrlPdf, "blank");
+                let UrlPdf = x + "/" + "?" + "path=" + result + "";
 
 
+                window.open(UrlPdf, "blank");
 
-            return result
 
-        }
-    })
+
+                return result
+
+            }
+        })
     }, 150);
     return '';
 }
@@ -3027,3 +3129,133 @@ function CopyRowGrid(DataList: Array<any>, Key: string, value: any): Array<any> 
     return NewModel;
 
 }
+
+var List_Table: Array<Table_Result> = new Array<Table_Result>();
+var globle_Table: Array<Table> = new Array<Table>();
+
+function DataResult(Table: Array<Table>): Array<Table_Result> {
+    let sys = new SystemTools;
+    globle_Table = Table;
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: (d) => {
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                List_Table = result.Response as Array<Table_Result>;
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+
+}
+
+function GetDataTable(NameTable: string): Array<any> {
+
+    let table;
+    for (var i = 0; i < globle_Table.length; i++) {
+
+        if (globle_Table[i].NameTable == NameTable) {
+            table = List_Table[i];
+            break;
+        }
+
+    }
+
+    return table;
+}
+
+
+function GetAllData(Table: Array<Table>): Array<Table_Result> {
+    let sys = new SystemTools;
+    let List_Table: Array<Table_Result> = new Array<Table_Result>();
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: (d) => {
+            let result = d as BaseResponse;
+            if (result.IsSuccess) {
+                List_Table = result.Response as Array<Table_Result>;
+                console.log(List_Table);
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+
+}
+
+
+
+
+function BuildAllFild(dataSource: any, cnt: number, NameRow: string) {
+     
+    dataSource = getClass(dataSource.name);
+    let properties = Object.getOwnPropertyNames(dataSource);
+    let html = ``;
+    for (var property of properties) { 
+        if (document.getElementById(property + cnt) == null) {
+            html += `<input id="${property + cnt}" type="hidden" value="" class="form-control "/>`;
+        }
+        else {
+            $("#"+ property + cnt).on('change', function () {
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
+            });
+        }
+    } 
+    $("#" + NameRow + cnt).append(html);
+}
+
+
+
+function DisplayBuildControls(dataSource: any, cnt: number) {
+     
+    let properties = Object.getOwnPropertyNames(dataSource);
+    for (var property of properties) { 
+        $("#" + property + cnt).val(setVal(dataSource[property]))
+    }
+
+}
+
+function AssignBuildControls(dataSource: any, CountGrid: number) {
+
+    dataSource = getClass(dataSource.name);
+    let DetailsModel = new Array<any>();
+    let StatusFlag = "StatusFlag";
+    let properties = Object.getOwnPropertyNames(dataSource);
+    for (var i = 0; i < CountGrid; i++) {
+        let Model = JSON.parse(JSON.stringify(dataSource)); 
+        let Status = $('#' + StatusFlag + i).val();
+        if (Status != 'i' && Status != 'u' && Status != 'd') {
+            continue;
+        }
+        for (var property of properties) {
+            let NameID = "" + property + "" + i + "";
+            let element = document.getElementById(NameID) as HTMLInputElement;
+            if (element != null) {
+                if (element.type == "checkbox")
+                    Model[property] = element.checked;
+                else
+                    Model[property] = setVal(element.value);
+            }
+        }
+
+        DetailsModel.push(Model);
+    } 
+    return DetailsModel; 
+}
+
+
+
+var getClass = function (className) {
+    var constructorFunc = window[className]
+    if (typeof constructorFunc === 'function') {
+        return new constructorFunc();
+    } else {
+        throw new Error('Invalid class name: ' + className);
+    }
+};

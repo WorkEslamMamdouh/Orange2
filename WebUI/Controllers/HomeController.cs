@@ -468,6 +468,13 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/GeneralLedgerMenu/GLDefAccountIndex.cshtml");
         }
+
+        public ActionResult LnkVoucherIndex()
+        {
+            return View("~/Views/GeneralLedgerMenu/LnkVoucherIndex.cshtml");
+
+        }
+
         public ActionResult JournalVoucherIndex()
         {
             return View("~/Views/GeneralLedgerMenu/JournalVoucherIndex.cshtml");
@@ -504,6 +511,10 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/GeneralLedgerMenu/financialreportsIndex.cshtml");
         }
 
+        public ActionResult UserActLogIndex()
+        {
+            return View("~/Views/Tools/USERS/UserActLogIndex.cshtml");
+        }
         public ActionResult USERSIndex()
         {
             return View("~/Views/Tools/USERS/USERSIndex.cshtml");

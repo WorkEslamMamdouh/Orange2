@@ -71,6 +71,7 @@ var Modules = {
     IssueType: "IssueType",
     IssueToCC: "IssueToCC",
     Dashboard: "Dashboard",
+    LnkVoucher: "LnkVoucher",
     JournalVoucher: "JournalVoucher",
     ReceiptVoucher: "ReceiptVoucher",
     PaymentVoucher: "PaymentVoucher",
@@ -79,6 +80,7 @@ var Modules = {
     Accountstatement: "Accountstatement",
     Accountbalances: "Accountbalances",
     USERS: "USERS",
+    UserActLog: "UserActLog",
     TranPosting: "TranPosting",
     LnkvarBranch: "LnkvarBranch",
     LnkTransVoucher: "LnkTransVoucher",
@@ -131,7 +133,7 @@ var Keys = {
 };
 var setVal = function (value) {
     var Input = this;
-    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
+    value == null || value == undefined ? value = '' : value = value;
     return value;
 };
 function IsNullOrEmpty(value) {
@@ -222,13 +224,15 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix));
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
@@ -241,13 +245,16 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix)).toString();
+                //return (stfix + fix.toString().substr(1, 3)).toString();
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
@@ -938,6 +945,31 @@ var DocumentActions = {
         return element;
     }
 };
+function FillDropwithAttr(Datasource, InputID, Value, TextField, DefaultText, Attrname, AttrValue) {
+    if (DefaultText === void 0) { DefaultText = ""; }
+    debugger;
+    $('#' + InputID + '').empty();
+    if (DefaultText != "No") {
+        if (DefaultText != "") {
+            $('#' + InputID + '').append("<option value=Null>" + DefaultText + "</option>");
+        }
+    }
+    if (Attrname != "") {
+        for (var i = 0; i < Datasource.length; i++) {
+            var Code = Datasource[i][Value];
+            var Text_1 = Datasource[i][TextField];
+            var attrval = Datasource[i][AttrValue];
+            $('#' + InputID + '').append("<option value=" + Code + " data-" + Attrname + "=" + attrval + " >" + Text_1 + "</option>");
+        }
+    }
+    else {
+        for (var i = 0; i < Datasource.length; i++) {
+            var Code = Datasource[i][Value];
+            var Text_2 = Datasource[i][TextField];
+            $('#' + InputID + '').append("<option value=" + Code + ">" + Text_2 + "</option>");
+        }
+    }
+}
 function DateFormatddmmyyyy(dateForm) {
     try {
         var date = new Date();
@@ -1048,6 +1080,37 @@ function GetVat(Nature, Prc, VatType) {
         return Tax_Type_Model;
     }
 }
+function DateTimeFormatRep(dateForm) {
+    try {
+        var date = new Date();
+        var myDate = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+        var yy = date.getFullYear();
+        var mm = (date.getMonth() + 1);
+        var dd = date.getDate();
+        var hh = (date.getHours());
+        var mn = (date.getMinutes());
+        var ss = (date.getSeconds());
+        var year = yy;
+        var month = (mm < 10) ? ("0" + mm.toString()) : mm.toString();
+        var day = (dd < 10) ? ("0" + dd.toString()) : dd.toString();
+        var hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        var Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        var Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+        var startDate = year + "-" + month + "-" + day + " " + hour + ":" + Minute + ":" + Second; //+ ":" + Second;
+        var form_date = startDate;
+        return form_date;
+    }
+    catch (e) {
+        return DateFormat((new Date()).toString());
+    }
+}
 function DateTimeFormat2(dateForm) {
     try {
         var date = new Date();
@@ -1077,6 +1140,30 @@ function DateTimeFormat2(dateForm) {
     }
     catch (e) {
         return DateFormat((new Date()).toString());
+    }
+}
+function TimeFormat(dateForm) {
+    try {
+        var date = new Date();
+        var myDate = "";
+        if (dateForm.indexOf("Date(") > -1) {
+            myDate = dateForm.split('(')[1].split(')')[0];
+            date = new Date(Number(myDate));
+        }
+        else {
+            date = new Date(dateForm);
+        }
+        var hh = (date.getHours());
+        var mn = (date.getMinutes());
+        var ss = (date.getSeconds());
+        var hour = (hh < 10) ? ("0" + hh.toString()) : hh.toString();
+        var Minute = (mn < 10) ? ("0" + mn.toString()) : mn.toString();
+        var Second = (ss < 10) ? ("0" + ss.toString()) : ss.toString();
+        var Time = hour + ":" + Minute + ":" + Second;
+        return Time;
+    }
+    catch (e) {
+        return "23:59:00";
     }
 }
 function DateTimeFormat(dateForm) {
@@ -1284,6 +1371,7 @@ function WorningMessage(msg_Ar, msg_En, tit_ar, tit_en, OnOk) {
             focus();
             break;
     }
+    $('#MessageBoxOk').focus();
 }
 function WorningMessageOnCancel(msg_Ar, msg_En, tit_ar, tit_en, OnCancel) {
     if (tit_ar === void 0) { tit_ar = "تنبيه"; }
@@ -2327,4 +2415,111 @@ function CopyRowGrid(DataList, Key, value) {
     }
     return NewModel;
 }
+var List_Table = new Array();
+var globle_Table = new Array();
+function DataResult(Table) {
+    var sys = new SystemTools;
+    globle_Table = Table;
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: function (d) {
+            var result = d;
+            if (result.IsSuccess) {
+                List_Table = result.Response;
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+}
+function GetDataTable(NameTable) {
+    var table;
+    for (var i = 0; i < globle_Table.length; i++) {
+        if (globle_Table[i].NameTable == NameTable) {
+            table = List_Table[i];
+            break;
+        }
+    }
+    return table;
+}
+function GetAllData(Table) {
+    var sys = new SystemTools;
+    var List_Table = new Array();
+    Ajax.Callsync({
+        type: "Post",
+        url: sys.apiUrl("SystemTools", "Get_TableNew"),
+        data: JSON.stringify(Table),
+        success: function (d) {
+            var result = d;
+            if (result.IsSuccess) {
+                List_Table = result.Response;
+                console.log(List_Table);
+                return List_Table;
+            }
+        }
+    });
+    return List_Table;
+}
+function BuildAllFild(dataSource, cnt, NameRow) {
+    dataSource = getClass(dataSource.name);
+    var properties = Object.getOwnPropertyNames(dataSource);
+    var html = "";
+    for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
+        var property = properties_3[_i];
+        if (document.getElementById(property + cnt) == null) {
+            html += "<input id=\"" + (property + cnt) + "\" type=\"hidden\" value=\"\" class=\"form-control \"/>";
+        }
+        else {
+            $("#" + property + cnt).on('change', function () {
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
+            });
+        }
+    }
+    $("#" + NameRow + cnt).append(html);
+}
+function DisplayBuildControls(dataSource, cnt) {
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var _i = 0, properties_4 = properties; _i < properties_4.length; _i++) {
+        var property = properties_4[_i];
+        $("#" + property + cnt).val(setVal(dataSource[property]));
+    }
+}
+function AssignBuildControls(dataSource, CountGrid) {
+    dataSource = getClass(dataSource.name);
+    var DetailsModel = new Array();
+    var StatusFlag = "StatusFlag";
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var i = 0; i < CountGrid; i++) {
+        var Model = JSON.parse(JSON.stringify(dataSource));
+        var Status = $('#' + StatusFlag + i).val();
+        if (Status != 'i' && Status != 'u' && Status != 'd') {
+            continue;
+        }
+        for (var _i = 0, properties_5 = properties; _i < properties_5.length; _i++) {
+            var property = properties_5[_i];
+            var NameID = "" + property + "" + i + "";
+            var element = document.getElementById(NameID);
+            if (element != null) {
+                if (element.type == "checkbox")
+                    Model[property] = element.checked;
+                else
+                    Model[property] = setVal(element.value);
+            }
+        }
+        DetailsModel.push(Model);
+    }
+    return DetailsModel;
+}
+var getClass = function (className) {
+    var constructorFunc = window[className];
+    if (typeof constructorFunc === 'function') {
+        return new constructorFunc();
+    }
+    else {
+        throw new Error('Invalid class name: ' + className);
+    }
+};
 //# sourceMappingURL=App.js.map

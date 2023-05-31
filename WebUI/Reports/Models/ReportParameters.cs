@@ -328,6 +328,12 @@ namespace Inv.WebUI.Reports.Models
 
         public int orderby { get; set; }
         public int IssueTypeID { get; set; }
+        public string User_Code { get; set; }
+        public string Module { get; set; }
+        public string FromTime { get; set; }
+        public string ToTime { get; set; }
+        public int OprStatus { get; set; }
+
     }
 
 }

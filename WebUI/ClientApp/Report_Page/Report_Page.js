@@ -11,6 +11,7 @@ var Report_Page;
     var result;
     var succes;
     function InitalizeComponent() {
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 500);
         document.title = "الطباعة";
         $('#div_Reports').removeClass('display_none');
         $('.main-iconbar').addClass('display_none');

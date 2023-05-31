@@ -303,12 +303,15 @@ class ReportParameters {
     public ItemTypeID: number;
 
 
+	public FromTime: string;
+	public ToTime: string;
     public DocPDFFolder: string;
     public BankCode: string;
     public orderby: number;
     public Agtype: number;
     public typedata: number;
     public IssueTypeID: number;
+	public OprStatus: number;
 }
 
 class G_BRANCH extends SecurityClass {
@@ -1918,7 +1921,30 @@ class Custom_Items {
     public ItemCode: string;
     public ItemDesc: string; 
 }
-                   
+
+
+class FilterLnkVoucher {
+    constructor() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    
+    }
+    public Comp: number;
+    public branchCode: number;
+    public FromNum: number;
+    public ToNum: number;
+    public TrType: string;
+    public StartDate: string; 
+    public EndDate: string; 
+    public UserCode: string; 
+}
+ 
 
 class I_ItemStore {
     constructor() {
@@ -3953,6 +3979,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4040,6 +4067,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;
@@ -4246,6 +4274,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4345,6 +4374,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;
@@ -6212,6 +6242,17 @@ class JournalMasterDetails extends SecurityClass {
     public A_JOURNAL_DETAIL: Array<A_JOURNAL_DETAIL>;
 }
 
+
+class LnkVoucherlMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.FilterLnkVoucher = new FilterLnkVoucher();
+        this.A_LnkVoucher = new Array<A_LnkVoucher>();
+    }
+    public FilterLnkVoucher: FilterLnkVoucher;
+    public A_LnkVoucher: Array<A_LnkVoucher>;
+}
+
 class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     constructor() {
         super();
@@ -6221,6 +6262,9 @@ class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     public AQ_GetJournalHeader: Array<AQ_GetJournalHeader>;
     public AQ_GetJournalDetail: Array<AQ_GetJournalDetail>;
 }
+
+
+
 class A_JOURNAL_DETAIL extends SecurityClass {
     constructor() {
         super();
@@ -6247,6 +6291,7 @@ class A_JOURNAL_DETAIL extends SecurityClass {
         this.DEBIT_FC = 0;
         this.CREDIT_FC = 0;
         this.StatusFlag = "";
+        this.FlagUpdate = "";
     }
     public VoucherDetailID: number;
     public VoucherID: number;
@@ -6271,6 +6316,7 @@ class A_JOURNAL_DETAIL extends SecurityClass {
     public DEBIT_FC: number;
     public CREDIT_FC: number;
     public StatusFlag: string;
+    public FlagUpdate: string;
 }
 
 class A_JOURNAL_HEADER extends SecurityClass {
@@ -11460,4 +11506,178 @@ class IQ_GetCollectList {
     public Typ_DescA: string;
     public Typ_DescE: string;
 }
+
+
+
+class AProc_LnkGenerateTrans_Result {
+    constructor() {
+        this.TRID = 0;
+        this.TR_CODE = '';
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = '';
+        this.SUB_SYSTEM_CODE = "";
+        this.VOUCHER_CODE = 0;
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = '';
+        this.TR_NO = 0;
+        this.TR_TYPE = '';
+        this.TR_DATE = '';
+        this.TR_AMOUNT = 0;
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.TR_USER_CODE = "";
+        this.VOUCHER_DESCA = "";
+        this.VOUCHER_DESCE = "";
+        this.IsPosted = false;
+
+    }
+    public TRID: number;
+    public TR_CODE: string;
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public VOUCHER_CODE: number;
+    public VOUCHER_TYPE: number;
+    public VOUCHER_SOURCE_TYPE: string;
+    public TR_NO: number;
+    public TR_TYPE: string;
+    public TR_DATE: string;
+    public TR_AMOUNT: number;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public TR_USER_CODE: string;
+    public VOUCHER_DESCA: string;
+    public VOUCHER_DESCE: string;
+    public IsPosted: boolean;
+}
+
+
+
+class AQ_GetLnkVoucher {
+    constructor() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = ''
+        this.Tr_Code = ''
+        this.TrID =0
+        this.TrNo =0
+        this.Serial = 0;
+        this.Acc_Code =''
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public ACC_DESCA: string;
+    public ACC_DESCL: string;
+    public CC_DESCA: string;
+    public CC_DESCE: string;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public Src_DescA: string;
+    public Src_DescE: string;
+    public TYPE_DESCA: string;
+    public TYPE_DESCE: string;
+    public TrDate: string;
+    public StatusFlag: string;
+}
+
+
+class A_LnkVoucher {
+    constructor() {
+        this.ID = 0
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = ''
+        this.Tr_Code = ''
+        this.TrDate = "";
+        this.TrID = 0
+        this.TrNo = 0
+        this.Serial = 0;
+        this.Acc_Code = "";
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrDate: string;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public StatusFlag: string;
+
+}
+
+
+class Table {
+    constructor() {
+        this.NameTable = "";
+        this.Condition = "";
+    }
+    public NameTable: string;
+    public Condition: string;
+
+}
+
+class Table_Result {
+    constructor() {
+        this.Table_Res = new Array<any>();
+    }
+    public Table_Res: Array<any>;
+} 
  
