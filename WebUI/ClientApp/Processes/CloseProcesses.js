@@ -1560,6 +1560,7 @@ var CloseProcesses;
             }
         }
         if (CanAddCharge) {
+            debugger;
             BuildControlsCharges(CountGridCharge);
             $("#txt_StatusFlag1" + CountGridCharge).val("i"); //In Insert mode
             $("#btn_minus1" + CountGridCharge).removeClass("display_none");
@@ -1589,14 +1590,6 @@ var CloseProcesses;
             $("#txtVendorCharge" + RecNo).val("Null");
             $("#No_Row1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
-            var counter = 1;
-            for (var i = 0; i < CountGridCharge; i++) { //$("#txt_StatusFlag" + cnt).val() != "i"
-                var flagvalue = $("#txt_StatusFlag1" + i).val();
-                if (flagvalue != "d") {
-                    $("#txtSerial" + i).prop("value", counter);
-                    counter = counter + 1;
-                }
-            }
             Insert_Serial();
             ComputeTotalsCharge();
         });
@@ -1617,12 +1610,22 @@ var CloseProcesses;
         txtTotalAfterVatCharge.value = TotalAfterVatCharge.RoundToSt(2).toString();
     }
     function Insert_Serial() {
+        var Chack_Flag = false;
+        var flagval = "";
         var Ser = 1;
         for (var i = 0; i < CountGridCharge; i++) {
-            var flagvalue = $("#txt_StatusFlag1" + i).val();
-            if (flagvalue != "d" && flagvalue != "m" && flagvalue != "" && flagvalue != null) {
+            flagval = $("#txt_StatusFlag1" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true;
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag1" + i).val() != 'i' && $("#txt_StatusFlag1" + i).val() != 'm' && $("#txt_StatusFlag1" + i).val() != 'd') {
+                    $("#txt_StatusFlag1" + i).val('u');
+                }
             }
         }
     }
@@ -4510,7 +4513,7 @@ var CloseProcesses;
             $("#txtOperationID" + CountGridItemsData).prop("value", ((bramterOperationID == null || undefined) ? 0 : bramterOperationID));
             $("#txtOperationItemID" + CountGridItemsData).prop("value", ((bramterOperationItemID == null || undefined) ? 0 : bramterOperationItemID));
             CountGridItemsData += 1;
-            //Insert_Serial();
+            Insert_Serial();
             ComputeTotals();
         }
     }
