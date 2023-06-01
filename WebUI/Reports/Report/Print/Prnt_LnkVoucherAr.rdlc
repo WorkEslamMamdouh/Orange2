@@ -769,7 +769,7 @@
   <Width>7.84721in</Width>
   <Page>
     <PageHeader>
-      <Height>3.19341cm</Height>
+      <Height>3.2253cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -952,7 +952,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>سند قيد</Value>
+                      <Value>="قيد "+First(Fields!TR_DESCA.Value, "Prnt_LnkVoucherAr")</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -967,9 +967,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.65081cm</Top>
-              <Left>7.12616cm</Left>
+              <Left>6.66578cm</Left>
               <Height>0.68819cm</Height>
-              <Width>5.73256cm</Width>
+              <Width>6.44694cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1015,9 +1015,45 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="( " + format(First(Fields!Voucher_No.Value, "Prnt_LnkVoucherAr"),"00000") + " )"</Value>
+                      <Style>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>1.36902cm</Top>
+              <Left>6.55199cm</Left>
+              <Height>0.68819cm</Height>
+              <Width>6.44694cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>2.02924cm</Height>
+          <Height>2.19477cm</Height>
           <Width>19.93191cm</Width>
           <Style>
             <Border>
@@ -1054,7 +1090,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>رقم الفاتورة</Value>
+                  <Value>رقم الحركة</Value>
                   <Style>
                     <FontSize>11pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -1073,74 +1109,6 @@
           <Height>0.6cm</Height>
           <Width>1.79766cm</Width>
           <ZIndex>1</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="TYPE_DESCA">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=First(Fields!TYPE_DESCA.Value, "Prnt_LnkVoucherAr")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>TYPE_DESCA</rd:DefaultName>
-          <Top>2.3006cm</Top>
-          <Left>0.3296cm</Left>
-          <Height>0.6cm</Height>
-          <Width>4.405cm</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox17">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>النوع</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Right</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox15</rd:DefaultName>
-          <Top>2.3006cm</Top>
-          <Left>4.91099cm</Left>
-          <Height>0.6cm</Height>
-          <Width>1.79767cm</Width>
-          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1171,10 +1139,10 @@
           </Paragraphs>
           <rd:DefaultName>VOUCHER_DATE</rd:DefaultName>
           <Top>2.3006cm</Top>
-          <Left>7.69998cm</Left>
+          <Left>8.13185cm</Left>
           <Height>0.6cm</Height>
           <Width>3.13328cm</Width>
-          <ZIndex>4</ZIndex>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1207,10 +1175,10 @@
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
           <Top>2.3006cm</Top>
-          <Left>10.85908cm</Left>
+          <Left>11.29095cm</Left>
           <Height>0.6cm</Height>
-          <Width>1.56695cm</Width>
-          <ZIndex>5</ZIndex>
+          <Width>1.44402cm</Width>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1239,10 +1207,112 @@
           </Paragraphs>
           <rd:DefaultName>VOUCHER_CODE</rd:DefaultName>
           <Top>2.3006cm</Top>
-          <Left>13.40583cm</Left>
+          <Left>14.70229cm</Left>
           <Height>0.6cm</Height>
-          <Width>4.20892cm</Width>
+          <Width>2.91246cm</Width>
+          <ZIndex>4</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox17">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>الفرع</Value>
+                  <Style>
+                    <FontSize>11pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>2.3006cm</Top>
+          <Left>5.99017cm</Left>
+          <Height>0.6cm</Height>
+          <Width>1.50668cm</Width>
+          <ZIndex>5</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="VOUCHER_CODE2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!BraNameA.Value, "Prnt_LnkVoucherAr")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>VOUCHER_CODE</rd:DefaultName>
+          <Top>2.3006cm</Top>
+          <Left>0.07938cm</Left>
+          <Height>0.6cm</Height>
+          <Width>4.57928cm</Width>
           <ZIndex>6</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="VOUCHER_CODE3">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!Bra.Value, "Prnt_LnkVoucherAr")</Value>
+                  <Style>
+                    <Format>0;(0)</Format>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Right</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>VOUCHER_CODE</rd:DefaultName>
+          <Top>2.3006cm</Top>
+          <Left>4.70936cm</Left>
+          <Height>0.6cm</Height>
+          <Width>1.24553cm</Width>
+          <ZIndex>7</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

@@ -752,7 +752,10 @@ namespace RS.WebUI.Reports.Forms
             int ToNum = int.Parse(RepPar.ToNum.ToString());
             SqlParameter spToNum = new SqlParameter("@ToNo", ToNum);
 
-         
+            int IsGenerated = int.Parse(RepPar.IsGenerated.ToString()); 
+            SqlParameter spIsGenerated = new SqlParameter("@IsGenerated", IsGenerated == -1 ? System.Data.SqlTypes.SqlInt32.Null : IsGenerated);
+
+
             Rep = OpenReport("Rep_LnkVoucherList");
 
 
@@ -771,7 +774,8 @@ namespace RS.WebUI.Reports.Forms
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @ToDate = '" + sptoDate.Value + "'" +
            ", @Fromno = " + spfromNum.Value +
-           ", @ToNo = " + spToNum.Value;
+           ", @ToNo = " + spToNum.Value+
+            ", @IsGenerated = " + spIsGenerated.Value;
 
 
             var query = db.Database.SqlQuery<AProc_Rep_LnkVoucherList_Result>(_Query).ToList();

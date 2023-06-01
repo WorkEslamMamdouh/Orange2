@@ -57,7 +57,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
 
-                ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
+                ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum,1);
                 LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
@@ -100,7 +100,7 @@ namespace Inv.API.Controllers
                     dbTransaction.Commit();
 
 
-                    List<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(obj.FilterLnkVoucher.Comp, obj.FilterLnkVoucher.branchCode, obj.FilterLnkVoucher.UserCode, "I", obj.FilterLnkVoucher.TrType, obj.FilterLnkVoucher.StartDate, obj.FilterLnkVoucher.EndDate, obj.FilterLnkVoucher.FromNum, obj.FilterLnkVoucher.ToNum).ToList();
+                    List<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(obj.FilterLnkVoucher.Comp, obj.FilterLnkVoucher.branchCode, obj.FilterLnkVoucher.UserCode, "I", obj.FilterLnkVoucher.TrType, obj.FilterLnkVoucher.StartDate, obj.FilterLnkVoucher.EndDate, obj.FilterLnkVoucher.FromNum, obj.FilterLnkVoucher.ToNum,1).ToList();
 
                     //string DataJson = JsonConvert.SerializeObject(Arrays, Formatting.None);
 
