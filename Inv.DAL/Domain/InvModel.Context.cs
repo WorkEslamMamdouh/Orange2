@@ -6142,8 +6142,10 @@ namespace Inv.DAL.Domain
             var toNoParameter = toNo.HasValue ?
                 new ObjectParameter("ToNo", toNo) :
                 new ObjectParameter("ToNo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_LnkGenerateTrans_Result>("AProc_LnkGenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
+
+            var DirectParameter = new ObjectParameter("Direct", 1);
+                   
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_LnkGenerateTrans_Result>("AProc_LnkGenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter, DirectParameter);
         }
     
         public virtual ObjectResult<GProc_Rep_UserActivityLog_Result> GProc_Rep_UserActivityLog(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> grpType, string fromDate, string toDate, string fromTime, string toTime, Nullable<int> finYear, string sys, string module, string usr, Nullable<int> opStatus, Nullable<int> opid)
