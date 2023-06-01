@@ -220,6 +220,7 @@ namespace Inv.WebUI.Controllers
         {
             ReportService rep = getStandardParameters(rp);
              
+            rep.AddParameter("RepType", rp.RepType);
             rep.AddParameter("SystemCode", rp.SystemCode);
             rep.AddParameter("TrTypeSt", rp.TrTypeSt);
             rep.AddParameter("FromDate", rp.FromDate);
