@@ -53,8 +53,7 @@ namespace LnkVoucher {
     var Flag_Enabled_All = true;
     export function InitalizeComponent() { 
         document.getElementById('Screen_name').innerHTML = Name_Screen;
-        $('#btnAdd').addClass('hidden_Control');
-        $('._None_Input').addClass('hidden_Control');
+        $('#btnAdd').addClass('hidden_Control'); 
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -729,10 +728,7 @@ namespace LnkVoucher {
             else
                 $("#StatusFlag" + RecNo).val("d");
 
-            // ComputeTotals();
-            $("#txtItemNumber" + RecNo).val("99");
-            $("#txtItemName" + RecNo).val("1");
-            $("#txtOnhandQty" + RecNo).val("1");
+ 
 
             $("#No_Row" + RecNo).attr("hidden", "true");
 
@@ -755,6 +751,20 @@ namespace LnkVoucher {
         if (CanAdd) {
             BuildControls(CountGrid);
             $("#StatusFlag" + CountGrid).val("i"); //In Insert mode    
+
+            $("#ID" + CountGrid).val($("#ID" + (CountGrid - 1)).val()); 
+            $("#CompCode" + CountGrid).val($("#CompCode" + (CountGrid - 1)).val());    
+            $("#bracode" + CountGrid).val($("#bracode" + (CountGrid - 1)).val());    
+            $("#System_Code" + CountGrid).val($("#System_Code" + (CountGrid - 1)).val());    
+            $("#Tr_Code" + CountGrid).val($("#Tr_Code" + (CountGrid - 1)).val());    
+            $("#TrID" + CountGrid).val($("#TrID" + (CountGrid - 1)).val());    
+            $("#TrNo" + CountGrid).val($("#TrNo" + (CountGrid - 1)).val());    
+            $("#Serial" + CountGrid).val((CountGrid + 1));    
+            $("#Voucher_No" + CountGrid).val($("#Voucher_No" + (CountGrid - 1)).val());    
+            $("#SOURCE_TYPE" + CountGrid).val($("#SOURCE_TYPE" + (CountGrid - 1)).val());    
+            $("#TYPE_CODE" + CountGrid).val($("#TYPE_CODE" + (CountGrid - 1)).val());    
+            $("#TrDate" + CountGrid).val(txtTrDate.value);    
+
             $('._dis').removeAttr('disabled')
             $('.btn_minus_non').removeClass('display_none')
             CountGrid++;
