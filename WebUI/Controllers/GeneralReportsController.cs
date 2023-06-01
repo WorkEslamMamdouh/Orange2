@@ -227,6 +227,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("fromNum", rp.fromNum);
             rep.AddParameter("ToNum", rp.ToNum);
+            rep.AddParameter("IsGenerated", rp.IsGenerated);
 
               
             string url = rep.GetReportUrl("Rep_LnkVoucherList");

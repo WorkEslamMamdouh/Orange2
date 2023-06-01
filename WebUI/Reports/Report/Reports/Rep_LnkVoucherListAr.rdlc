@@ -40,7 +40,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>تم التوليد</Value>
+                              <Value>الحاله</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -283,7 +283,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!isposted.Value</Value>
+                              <Value>=IIf(Fields!isposted.Value = False,"لم يتم التوليد","تم التوليد")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -988,8 +988,29 @@
               <ZIndex>12</ZIndex>
               <Style>
                 <Border>
-                  <Style>None</Style>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
                 </Border>
+                <TopBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </TopBorder>
+                <BottomBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </BottomBorder>
+                <LeftBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </LeftBorder>
+                <RightBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </RightBorder>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1017,7 +1038,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>2.18861cm</Top>
-              <Left>9.47209cm</Left>
+              <Left>10.10709cm</Left>
               <Height>0.6cm</Height>
               <Width>1.71878cm</Width>
               <ZIndex>13</ZIndex>
@@ -1052,9 +1073,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>2.18861cm</Top>
-              <Left>3.39226cm</Left>
+              <Left>4.55886cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.71878cm</Width>
+              <Width>1.20545cm</Width>
               <ZIndex>14</ZIndex>
               <Style>
                 <Border>
@@ -1086,9 +1107,9 @@
               </Paragraphs>
               <rd:DefaultName>Par_FromDate</rd:DefaultName>
               <Top>2.18861cm</Top>
-              <Left>6.50156cm</Left>
+              <Left>6.50391cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.96879cm</Width>
+              <Width>3.60144cm</Width>
               <ZIndex>15</ZIndex>
               <Style>
                 <Border>
@@ -1123,7 +1144,7 @@
               <Top>2.18861cm</Top>
               <Left>0.14195cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.20691cm</Width>
+              <Width>4.38516cm</Width>
               <ZIndex>16</ZIndex>
               <Style>
                 <Border>
@@ -1194,8 +1215,29 @@
               <ZIndex>18</ZIndex>
               <Style>
                 <Border>
-                  <Style>None</Style>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
                 </Border>
+                <TopBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </TopBorder>
+                <BottomBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </BottomBorder>
+                <LeftBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </LeftBorder>
+                <RightBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </RightBorder>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1223,9 +1265,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>2.99675cm</Top>
-              <Left>9.47209cm</Left>
+              <Left>4.52711cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.71878cm</Width>
+              <Width>1.07316cm</Width>
               <ZIndex>19</ZIndex>
               <Style>
                 <Border>
@@ -1258,9 +1300,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
               <Top>2.99675cm</Top>
-              <Left>3.39226cm</Left>
+              <Left>1.86821cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.71878cm</Width>
+              <Width>0.96423cm</Width>
               <ZIndex>20</ZIndex>
               <Style>
                 <Border>
@@ -1281,7 +1323,7 @@
                     <TextRun>
                       <Value>=First(Fields!Par_FromTrNo.Value, "Rep_LnkVoucherListAr")</Value>
                       <Style>
-                        <Format>dd/MM/yyy</Format>
+                        <Format>0;(0)</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1292,9 +1334,9 @@
               </Paragraphs>
               <rd:DefaultName>Par_FromDate</rd:DefaultName>
               <Top>2.99675cm</Top>
-              <Left>6.50156cm</Left>
+              <Left>2.91005cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.96879cm</Width>
+              <Width>1.61706cm</Width>
               <ZIndex>21</ZIndex>
               <Style>
                 <Border>
@@ -1316,7 +1358,7 @@
                     <TextRun>
                       <Value>=First(Fields!Par_ToTrNo.Value, "Rep_LnkVoucherListAr")</Value>
                       <Style>
-                        <Format>dd/MM/yyy</Format>
+                        <Format>0;(0)</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1329,13 +1371,100 @@
               <Top>2.99675cm</Top>
               <Left>0.16947cm</Left>
               <Height>0.6cm</Height>
-              <Width>3.18046cm</Width>
+              <Width>1.61706cm</Width>
               <ZIndex>22</ZIndex>
               <Style>
                 <Border>
                   <Color>Gray</Color>
                   <Style>Solid</Style>
                 </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox21">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>الحالة</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>2.99675cm</Top>
+              <Left>10.11771cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.72276cm</Width>
+              <ZIndex>23</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!par_StatusDsa.Value, "Rep_LnkVoucherListAr")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>2.99675cm</Top>
+              <Left>6.50391cm</Left>
+              <Height>0.6cm</Height>
+              <Width>3.54324cm</Width>
+              <ZIndex>24</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                </Border>
+                <TopBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </TopBorder>
+                <BottomBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </BottomBorder>
+                <LeftBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </LeftBorder>
+                <RightBorder>
+                  <Color>Gray</Color>
+                  <Style>Solid</Style>
+                  <Width>1pt</Width>
+                </RightBorder>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1384,18 +1513,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="RSWebUIReportsForms">
+    <DataSource Name="InvDALDomain">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>240a9ecc-3ade-4d49-9874-275477878723</rd:DataSourceID>
+      <rd:DataSourceID>11726d7a-2d4c-4d36-8925-43c22e4ba481</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Rep_LnkVoucherListAr">
       <Query>
-        <DataSourceName>RSWebUIReportsForms</DataSourceName>
+        <DataSourceName>InvDALDomain</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1466,6 +1595,14 @@
         <Field Name="Par_ToTrNo">
           <DataField>Par_ToTrNo</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="par_StatusDsa">
+          <DataField>par_StatusDsa</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Par_StatusDsE">
+          <DataField>Par_StatusDsE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="TRID">
           <DataField>TRID</DataField>
@@ -1541,10 +1678,11 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>RS.WebUI.Reports.Forms</rd:DataSetName>
-        <rd:TableName>ReportsForm</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>Rep_LnkVoucherList</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>RS.WebUI.Reports.Forms.ReportsForm, Inv.WebUI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>Inv.DAL.Domain</rd:DataSetName>
+        <rd:TableName>InvEntities</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>AProc_Rep_LnkVoucherList</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceSelectMethodSignature>System.Data.Entity.Core.Objects.ObjectResult`1[Inv.DAL.Domain.AProc_Rep_LnkVoucherList_Result] AProc_Rep_LnkVoucherList(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.String, System.String, System.String, System.String, System.String, System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.Nullable`1[System.Int32])</rd:ObjectDataSourceSelectMethodSignature>
+        <rd:ObjectDataSourceType>Inv.DAL.Domain.InvEntities, Inv.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

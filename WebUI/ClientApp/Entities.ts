@@ -195,6 +195,7 @@ class ReportParameters {
 
     public fromNum: number;
     public ToNum: number;
+    public IsGenerated: number;
 
      
 

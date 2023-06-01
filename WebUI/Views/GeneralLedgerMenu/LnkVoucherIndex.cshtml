@@ -38,8 +38,8 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-group row">
-                            <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.App_ToDate</label>
-                            <div class="col-9 col-md-8">
+                            <label class="col-3 col-md-2 align-self-center p-md-0">@SystemResource.App_ToDate</label>
+                            <div class="col-9 col-md-10">
                                 <input id="txtToDate" name="" type="date" class="form-control">
                             </div>
                         </div>
@@ -54,7 +54,22 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-4">
+                        <div class="form-group row">
+                            <label class="col-3 col-md-4 align-self-center p-md-0">الحاله  </label>
+                            <div class="col-9 col-md-8">
+                                <select id="ddlStatus" class="form-control">
+                                    <option value="-1">الجميع</option>
+                                    <option value="1"> تم التوليد </option>
+                                    <option value="0">لم يتم التوليد</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+ 
+
+                    <div class="col-12 col-md-2">
                         <div class="form-group row">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.fromnum</label>
                             <div class="col-9 col-md-8 ">
@@ -63,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-2">
                         <div class="form-group row">
                             <label class="col-3 col-md-4 align-self-center p-md-0">@SystemResource.tonum</label>
                             <div class="col-9 col-md-8 ">

@@ -279,6 +279,7 @@ namespace Inv.WebUI.Reports.Models
         public string cc_code { get; set; }
         public int exzero { get; set; }
         public int IsAuthVchr { get; set; }
+        public int IsGenerated { get; set; }
         public int IsNewVchr { get; set; }
         public int Level { get; set; }
         public string AccCode { get; set; }

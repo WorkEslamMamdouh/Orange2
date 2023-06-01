@@ -44,7 +44,7 @@ var LnkVoucher;
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = false;
+    var Flag_Enabled_All = true;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -130,15 +130,15 @@ var LnkVoucher;
                 }
             },
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
-            { title: "النوع", name: "VOUCHER_SOURCE_TYPE", type: "text", width: "15%" },
+            { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
             { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
             //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
             {
-                title: res.Trans_Generate, css: "ColumPadding", name: "IsGenerated", width: "4%",
+                title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
-                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم" : "Done") : "";
+                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم التوليد" : "Generated") : (lang == "ar" ? "لم يتم التوليد" : "Not Generated");
                     return txt;
                 }
             },
@@ -275,6 +275,7 @@ var LnkVoucher;
         if (txtToNumber.value != "") {
             ToNum = Number(txtToNumber.value);
         }
+        var IsPosted = Number($('#ddlStatus').val());
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "LoadLnkVouchTransactions"),
@@ -286,6 +287,7 @@ var LnkVoucher;
                 if (result.IsSuccess) {
                     debugger;
                     LnkTransDetails = result.Response;
+                    IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsPosted == Boolean(IsPosted); }) : null;
                     if (LnkTransDetails.length > 0) {
                         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
                         TransactionsGrid.DataSource = LnkTransDetails;
@@ -382,8 +384,10 @@ var LnkVoucher;
             $('#Line_DescA0').focus();
         }
         $('#id_div_Filter').addClass('disabledDiv');
+        $('#btnGenerationVoucher').attr('disabled', 'disabled');
     }
     function disabled() {
+        $('#btnGenerationVoucher').removeAttr('disabled');
         $('._dis').attr('disabled', 'disabled');
         $('._Remarks').attr('disabled', 'disabled');
         $('#id_div_Filter').removeClass('disabledDiv');
@@ -699,6 +703,8 @@ var LnkVoucher;
     function Success(ID, res) {
         debugger;
         LnkTransDetails = res;
+        var IsPosted = Number($('#ddlStatus').val());
+        IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsPosted == Boolean(IsPosted); }) : null;
         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
         $('#divGridShow').removeClass('display_none');
         $('#Div_control').addClass('display_none');
@@ -742,6 +748,7 @@ var LnkVoucher;
         rp.ToDate = DateFormatRep(txtToDate.value);
         rp.fromNum = Number(txtFromNumber.value);
         rp.ToNum = Number(txtToNumber.value);
+        rp.IsGenerated = Number($('#ddlStatus').val());
         Ajax.Callsync({
             url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
