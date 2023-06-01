@@ -731,8 +731,9 @@ namespace LnkVoucher {
  
 
             $("#No_Row" + RecNo).attr("hidden", "true");
+            Insert_Serial();
 
-
+            ComputeTotals();
         });
 
     }
@@ -768,8 +769,32 @@ namespace LnkVoucher {
             $('._dis').removeAttr('disabled')
             $('.btn_minus_non').removeClass('display_none')
             CountGrid++;
+            Insert_Serial();
         }
     } 
+
+    function Insert_Serial() {
+
+        let Chack_Flag = false;
+        let flagval = "";
+        let Ser = 1;
+        for (let i = 0; i < CountGrid; i++) {
+            flagval = $("#StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#Serial" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#StatusFlag" + i).val() != 'i' && $("#StatusFlag" + i).val() != 'm' && $("#StatusFlag" + i).val() != 'd') {
+                    $("#StatusFlag" + i).val('u');
+                }
+            }
+        }
+
+    }
     //****************************************************Validation*********************************************
     function Validation_Grid(rowcount: number) {
         var AccNum = $("#Acc_Code" + rowcount).val()
