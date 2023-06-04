@@ -11683,4 +11683,118 @@ class Table_Result {
     }
     public Table_Res: Array<any>;
 } 
+
+class G_RoleBranch extends SecurityClass {
+    constructor() {
+        super();
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.RoleId = 0;
+        this.StatusFlag = "";
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public RoleId: number;
+    public StatusFlag: string;
+
+ }
+
+class G_RoleModule {
+    constructor() {
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+    }
+    public RoleId: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public MODULE_CODE: string;
+    public EXECUTE: boolean;
+    public CREATE: boolean;
+    public EDIT: boolean;
+    public DELETE: boolean;
+    public PRINT: boolean;
+    public VIEW: boolean;
+    public CUSTOM1: boolean;
+    public CUSTOM2: boolean;
+    public CUSTOM3: boolean;
+    public CUSTOM4: boolean;
+    public CUSTOM5: boolean;
+    public CUSTOM6: boolean;
+    public CUSTOM7: boolean;
+    public CUSTOM8: boolean;
+    public CUSTOM9: boolean;
+    public ViewImages: boolean;
+    public EditImages: boolean;
+}
  
+  
+class G_ReportWebSetting {
+    constructor() {
+        this.ReportSettingID = 0;
+        this.SystemCode = "";
+        this.SubSystemCode = "";
+        this.ReportID = "";
+        this.NameA = "";
+        this.NameE = "";
+        this.COMP_CODE = 0;
+        this.BRA_Code = 0;
+        this.USER_CODE = "";
+        this.ReportDesignNameEn = "";
+        this.ReportDesignNameAr = "";
+        this.ReportDataSouce = "";
+        this.RightMarginMM = 0;
+        this.LeftMarginMM = 0;
+        this.TopMarginMM = 0;
+        this.BottomMarginMM = 0;
+        this.IsLandScape = false;
+        this.PageSizeID = 0;
+        this.PageHightCM = 0;
+        this.PageWidthCM = 0;
+        this.PrinterName = "";
+        this.OutputTypeNo = 0;
+        this.OutputType
+    }
+    public ReportSettingID: number;
+    public SystemCode: string;
+    public SubSystemCode: string;
+    public ReportID: string;
+    public NameA: string;
+    public NameE: string;
+    public COMP_CODE: number;
+    public BRA_Code: number;
+    public USER_CODE: string;
+    public ReportDesignNameEn: string;
+    public ReportDesignNameAr: string;
+    public ReportDataSouce: string;
+    public RightMarginMM: number;
+    public LeftMarginMM: number;
+    public TopMarginMM: number;
+    public BottomMarginMM: number;
+    public IsLandScape: boolean;
+    public PageSizeID: number;
+    public PageHightCM: number;
+    public PageWidthCM: number;
+    public PrinterName: string;
+    public OutputTypeNo: number;
+    public OutputType: any;
+}
+

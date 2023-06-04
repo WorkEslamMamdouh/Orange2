@@ -2,10 +2,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -65,7 +67,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("SystemCode", value);
             //this.SetAPISessionAPI("SystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "SubSystemCode", {
@@ -76,7 +78,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("SubSystemCode", value);
             //this.SetAPISessionAPI("SubSystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Modulecode", {
@@ -87,7 +89,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("Modulecode", value);
             //this.SetAPISessionAPI("Modulecode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "UserCode", {
@@ -98,7 +100,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("UserCode", value);
             this.SetAPISessionAPI("UserCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Token", {
@@ -108,7 +110,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("Token", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CompCode", {
@@ -119,7 +121,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("CompCode", value);
             this.SetAPISessionAPI("CompCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "BranchCode", {
@@ -130,7 +132,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("BranchCode", value);
             this.SetAPISessionAPI("BranchCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CurrentYear", {
@@ -141,7 +143,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("CurrentYear", value);
             this.SetAPISessionAPI("CurrentYear", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "ScreenLanguage", {
@@ -151,7 +153,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("ScreenLanguage", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return APISessionRecord;
@@ -6857,5 +6859,71 @@ var Table_Result = /** @class */ (function () {
         this.Table_Res = new Array();
     }
     return Table_Result;
+}());
+var G_RoleBranch = /** @class */ (function (_super) {
+    __extends(G_RoleBranch, _super);
+    function G_RoleBranch() {
+        var _this = _super.call(this) || this;
+        _this.COMP_CODE = 0;
+        _this.BRA_CODE = 0;
+        _this.RoleId = 0;
+        _this.StatusFlag = "";
+        return _this;
+    }
+    return G_RoleBranch;
+}(SecurityClass));
+var G_RoleModule = /** @class */ (function () {
+    function G_RoleModule() {
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+    }
+    return G_RoleModule;
+}());
+var G_ReportWebSetting = /** @class */ (function () {
+    function G_ReportWebSetting() {
+        this.ReportSettingID = 0;
+        this.SystemCode = "";
+        this.SubSystemCode = "";
+        this.ReportID = "";
+        this.NameA = "";
+        this.NameE = "";
+        this.COMP_CODE = 0;
+        this.BRA_Code = 0;
+        this.USER_CODE = "";
+        this.ReportDesignNameEn = "";
+        this.ReportDesignNameAr = "";
+        this.ReportDataSouce = "";
+        this.RightMarginMM = 0;
+        this.LeftMarginMM = 0;
+        this.TopMarginMM = 0;
+        this.BottomMarginMM = 0;
+        this.IsLandScape = false;
+        this.PageSizeID = 0;
+        this.PageHightCM = 0;
+        this.PageWidthCM = 0;
+        this.PrinterName = "";
+        this.OutputTypeNo = 0;
+        this.OutputType;
+    }
+    return G_ReportWebSetting;
 }());
 //# sourceMappingURL=Entities.js.map

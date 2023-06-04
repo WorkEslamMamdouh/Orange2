@@ -53,7 +53,29 @@ namespace Inv.API.Controllers
 
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetAllCOMP()
+        {
+            if (ModelState.IsValid)
+            {
+                var COMPANY = db.G_COMPANY.ToList();
+                List<G_COMPANY> companiesList = new List<G_COMPANY>();
 
+                foreach (G_COMPANY company in COMPANY)
+                {
+                    G_COMPANY comp = new G_COMPANY
+                    {
+                        COMP_CODE = company.COMP_CODE,
+                        NameA = SecuritySystem.Decrypt(company.NameA),
+                        NameE = SecuritySystem.Decrypt(company.NameE),
+                        IsActive = Convert.ToBoolean(company.IsActive)
+                    };
+                    companiesList.Add(comp);
+                };
+                return Ok(companiesList);
+             }
+            return BadRequest(ModelState);
+        }
     }
 }
 
