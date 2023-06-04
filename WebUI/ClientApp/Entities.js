@@ -3902,37 +3902,6 @@ var GQ_GetUsers = /** @class */ (function (_super) {
     }
     return GQ_GetUsers;
 }(SecurityClass));
-var GQ_GetUserRole = /** @class */ (function (_super) {
-    __extends(GQ_GetUserRole, _super);
-    function GQ_GetUserRole() {
-        var _this = _super.call(this) || this;
-        _this.USER_CODE = "";
-        _this.ISActive = false;
-        _this.DescA = "";
-        _this.DescE = "";
-        _this.Remarks = "";
-        _this.RoleId = 0;
-        _this.IsActiveDesc = "";
-        _this.IsAvailable = false;
-        _this.IsShowable = false;
-        return _this;
-    }
-    return GQ_GetUserRole;
-}(SecurityClass));
-var G_Role = /** @class */ (function (_super) {
-    __extends(G_Role, _super);
-    function G_Role() {
-        var _this = _super.call(this) || this;
-        _this.RoleId = 0;
-        _this.DescA = "";
-        _this.DescE = "";
-        _this.Remarks = "";
-        _this.IsAvailable = false;
-        _this.IsShowable = false;
-        return _this;
-    }
-    return G_Role;
-}(SecurityClass));
 var G_CONTROL = /** @class */ (function (_super) {
     __extends(G_CONTROL, _super);
     function G_CONTROL() {
@@ -6845,6 +6814,73 @@ var A_LnkVoucher = /** @class */ (function () {
     }
     return A_LnkVoucher;
 }());
+var G_RoleBranch = /** @class */ (function () {
+    function G_RoleBranch() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.RoleId = 0;
+    }
+    return G_RoleBranch;
+}());
+var G_BranchModules = /** @class */ (function () {
+    function G_BranchModules() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+    }
+    return G_BranchModules;
+}());
+var GQ_GetUserRole = /** @class */ (function (_super) {
+    __extends(GQ_GetUserRole, _super);
+    function GQ_GetUserRole() {
+        var _this = _super.call(this) || this;
+        _this.USER_CODE = "";
+        _this.ISActive = false;
+        _this.DescA = "";
+        _this.DescE = "";
+        _this.Remarks = "";
+        _this.RoleId = 0;
+        _this.IsAvailable = false;
+        _this.IsShowable = false;
+        _this.RoleType = 0;
+        return _this;
+    }
+    return GQ_GetUserRole;
+}(SecurityClass));
+var G_Role = /** @class */ (function (_super) {
+    __extends(G_Role, _super);
+    function G_Role() {
+        var _this = _super.call(this) || this;
+        _this.RoleId = 0;
+        _this.DescA = "";
+        _this.DescE = "";
+        _this.Remarks = "";
+        _this.IsAvailable = false;
+        _this.IsShowable = false;
+        _this.RoleType = 0;
+        return _this;
+    }
+    return G_Role;
+}(SecurityClass));
 var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";
