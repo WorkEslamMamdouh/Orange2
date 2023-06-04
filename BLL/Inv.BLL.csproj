@@ -84,6 +84,8 @@
     <Compile Include="Services\G_Branch\G_BranchService.cs" />
     <Compile Include="Services\ITRCollectDetail\II_TR_CollectDetailService.cs" />
     <Compile Include="Services\ITRCollectDetail\I_TR_CollectDetailService.cs" />
+    <Compile Include="Services\LnkVoucherDetail\ILnkVoucherDetailService.cs" />
+    <Compile Include="Services\LnkVoucherDetail\LnkVoucherDetailService.cs" />
     <Compile Include="Services\operationItemsSum\IOperationItemsSum.cs" />
     <Compile Include="Services\operationItemsSum\OperationItemsSum.cs" />
     <Compile Include="Services\ServiceTRInvoice\IServiceTRInvoiceService.cs" />

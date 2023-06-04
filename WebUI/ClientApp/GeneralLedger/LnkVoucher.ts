@@ -5,18 +5,18 @@ $(document).ready(() => {
 
 namespace LnkVoucher {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession: SystemSession = GetSystemSession(Modules.LnkVoucher);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
-    var Name_Screen = (lang == "ar" ? ' ربط القيود' : 'LnkVoucher');
+    var Name_Screen = (lang == "ar" ? '  قيود الربط' : 'LnkVoucher');
 
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 
     var TransactionsGrid: JsGrid = new JsGrid();
-    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>();
-    var Model: A_RecPay_Tr_ReceiptNote = new A_RecPay_Tr_ReceiptNote();
+    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>(); 
+    var LnkVoucherlMastDet: LnkVoucherlMasterDetails = new LnkVoucherlMasterDetails();
     var AccountDetails: A_ACCOUNT = new A_ACCOUNT();
     var AccountDetailsIst: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
     var CostCentreDetailsIst: Array<G_COST_CENTER> = new Array<G_COST_CENTER>();
@@ -28,10 +28,14 @@ namespace LnkVoucher {
     var txtToDate: HTMLInputElement;
     var txtFromNumber: HTMLInputElement;
     var txtToNumber: HTMLInputElement;
+    var txtDifference: HTMLInputElement;
+    var txtTotalCredit: HTMLInputElement;
+    var txtTotalDebit: HTMLInputElement;
 
     var ddlBranch: HTMLSelectElement;
     var ddlTypeTrans: HTMLSelectElement;
 
+    var btnGenerationVoucher: HTMLButtonElement;
     var btnBack: HTMLButtonElement;
     var btnShow: HTMLButtonElement;
     var btnAdd: HTMLButtonElement;
@@ -45,9 +49,11 @@ namespace LnkVoucher {
     var btnPrintTransaction: HTMLButtonElement;
     var Events = 0;
     var CountGrid = 0;
-    export function InitalizeComponent() {
+    var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
+    var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
+    export function InitalizeComponent() { 
         document.getElementById('Screen_name').innerHTML = Name_Screen;
-        $('#btnAdd').addClass('hidden_Control');
+        $('#btnAdd').addClass('hidden_Control'); 
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -61,6 +67,7 @@ namespace LnkVoucher {
         btnUpdate = document.getElementById("btnUpdate") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
+        btnGenerationVoucher = document.getElementById("btnGenerationVoucher") as HTMLButtonElement;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
         ////////  
         ddlBranch = document.getElementById("ddlBranch") as HTMLSelectElement;
@@ -72,6 +79,9 @@ namespace LnkVoucher {
         txtToDate = document.getElementById("txtToDate") as HTMLInputElement;
         txtFromNumber = document.getElementById("txtFromNumber") as HTMLInputElement;
         txtToNumber = document.getElementById("txtToNumber") as HTMLInputElement;
+        txtTotalDebit = document.getElementById("txtTotalDebit") as HTMLInputElement;
+        txtTotalCredit = document.getElementById("txtTotalCredit") as HTMLInputElement;
+        txtDifference = document.getElementById("txtDifference") as HTMLInputElement;
         //print 
         btnPrintTrview = document.getElementById("btnPrintTrview") as HTMLButtonElement;
         btnPrintTrPDF = document.getElementById("btnPrintTrPDF") as HTMLButtonElement;
@@ -85,6 +95,7 @@ namespace LnkVoucher {
         btnSave.onclick = btnSave_onClick;
         btnBack.onclick = btnBack_onclick;
         btnUpdate.onclick = btnUpdate_onclick;
+        btnGenerationVoucher.onclick = btnGenerationVoucher_onclick;
         btnAddDetails.onclick = AddNewRow;
         //********************************onchange****************************    
         txtSearch.onkeyup = _SearchBox_Change;
@@ -123,15 +134,15 @@ namespace LnkVoucher {
                 }
             },
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
-            { title: "النوع", name: "VOUCHER_SOURCE_TYPE", type: "text", width: "15%" },
+            { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
             { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
             //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
             {
-                title: res.Trans_Generate, css: "ColumPadding", name: "IsGenerated", width: "4%",
+                title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
                     let txt: HTMLLabelElement = document.createElement("label");
-                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم" : "Done") : "";
+                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم التوليد" : "Generated") : (lang == "ar" ? "لم يتم التوليد" : "Not Generated");
                     return txt;
                 }
             },
@@ -202,18 +213,16 @@ namespace LnkVoucher {
 
         });
 
-    }
-
-
+    } 
     //************************************************fillddl**************************************
     function GetData_Header() {
         var Table: Array<Table>;
         Table =
             [
                 { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + CompCode + " " },
-                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1 order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
+                { NameTable: 'GQ_GetLnkTransComp', Condition: " COMP_CODE = " + CompCode + " and INTEGRATE = 1 and Comp_INTEGRATE = 1  and isview = 1  order by  SUB_SYSTEM_CODE Asc ,TR_CODE Asc " },
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " " },
-            { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+                { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
             ]
 
         DataResult(Table);
@@ -251,7 +260,21 @@ namespace LnkVoucher {
         }
         return flag;
     }
-    //************************************************Btn_Events**********************************
+    function _SearchBox_Change() {
+        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+
+        if (txtSearch.value != "") {
+            let search: string = txtSearch.value.toLowerCase();
+            let SearchDetails = LnkTransDetails.filter(x => x.TR_NO.toString().search(search) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search) >= 0 || x.TR_DESCA.toLowerCase().search(search) >= 0);
+
+            TransactionsGrid.DataSource = SearchDetails;
+            TransactionsGrid.Bind();
+        } else {
+            TransactionsGrid.DataSource = LnkTransDetails;
+            TransactionsGrid.Bind();
+        }
+    }
+    //************************************************Btn_Events**********************************    
     function btnShow_onclick() {
 
         if (ddlBranch.value == 'null') {
@@ -277,20 +300,24 @@ namespace LnkVoucher {
         if (txtToNumber.value != "") {
             ToNum = Number(txtToNumber.value);
         }
+
+        let IsPosted = Number($('#ddlStatus').val());
+        
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "LoadLnkVouchTransactions"),
             data: {
-                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.LnkVoucher, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
                     debugger
                     LnkTransDetails = result.Response as Array<AProc_LnkGenerateTrans_Result>;
-
-                    if (LnkTransDetails.length > 0) {
-                        LnkTransDetails = LnkTransDetails.filter(x => x.TR_NO != null).sort(function (a, b) { return a.TR_NO - b.TR_NO });
+                    IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(x => x.IsPosted == Boolean(IsPosted)) : null;
+                    
+                    if (LnkTransDetails.length > 0) {                        
+                        LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
 
                         TransactionsGrid.DataSource = LnkTransDetails;
                         TransactionsGrid.Bind();
@@ -324,12 +351,30 @@ namespace LnkVoucher {
                 return;
             }
 
+            var CanAdd: boolean = true;
+            if (CountGrid > 0) {
+                for (var i = 0; i < CountGrid; i++) {
+                    CanAdd = Validation_Grid(i);
+                    if (CanAdd == false) {
+                        break;
+                    }
+                }
+            }
+            if (CanAdd) {
 
-            $("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
-            $("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
-            Assign();
-            Update();
+                //$("#txtUpdatedBy").val(SysSession.CurrentEnvironment.UserCode);
+                //$("#txtUpdatedAt").val(DateTimeFormat(Date().toString()));
+                if (Number(txtDifference.value) != 0 && SysSession.CurrentEnvironment.I_Control[0].GL_JournalSaveUnbalanced == true) {
+                    WorningMessage("القيد غير متوازن هل تريد الحفظ ؟؟", "The constraint is unbalanced Do you want to save", "تحذير", "worning", () => {
+                        Assign();
+                        Update();
+                    });
+                } else {
+                    Assign();
+                    Update();
+                }
 
+            }
         }, 100);
     }
     function btnBack_onclick() {
@@ -337,30 +382,56 @@ namespace LnkVoucher {
     }
     function btnUpdate_onclick() {
         Enabled();
-    }
-    function _SearchBox_Change() {
-        $("#TransactionsGrid").jsGrid("option", "pageIndex", 1);
+    } 
+    function btnGenerationVoucher_onclick() {
+        let TrID = Number($('#TRID').val())
+        let TR_CODE = $('#TR_CODE').val()
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+            success: (d) => {//(int TrID, int CompCode, int branchCode)
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    let List = result.Response as Array<AQ_GetLnkVoucher>;
+                    CountGrid = 0;
+                    $("#div_Data").html('');
 
-        if (txtSearch.value != "") {
-            let search: string = txtSearch.value.toLowerCase();
-            let SearchDetails = LnkTransDetails.filter(x => x.TR_NO.toString().search(search) >= 0 || x.VOUCHER_DESCA.toLowerCase().search(search) >= 0 || x.TR_DESCA.toLowerCase().search(search) >= 0);
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
 
-            TransactionsGrid.DataSource = SearchDetails;
-            TransactionsGrid.Bind();
-        } else {
-            TransactionsGrid.DataSource = LnkTransDetails;
-            TransactionsGrid.Bind();
-        }
+
+                    for (let i = 0; i < List.length; i++) {
+                        BuildControls(i);
+                        DisplayBuildControls(List[i], i);
+                        CountGrid++
+                    }
+                    $('.table-responsive').scrollLeft(3);
+                    ComputeTotals();
+                }
+            }
+        });
+
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
-        $('._dis').removeAttr('disabled')
-        $('.btn_minus_non').removeClass('display_none')
-        $('#id_div_Filter').addClass('disabledDiv')
-        $('._None_Input').removeClass('display_none') 
+        if (Flag_Enabled_All) {
+            $('._dis').removeAttr('disabled')
+            $('.btn_minus_non').removeClass('display_none')
+            $('._None_Input').removeClass('display_none')
+        }
+        else {
+            $('._Remarks').removeAttr('disabled')
+            $('.table-responsive').scrollLeft(-500);
+            $('#Line_DescA0').focus();
+        }
+        
+        $('#id_div_Filter').addClass('disabledDiv') 
+        $('#btnGenerationVoucher').attr('disabled', 'disabled')
     }
     function disabled() {
+        $('#btnGenerationVoucher').removeAttr('disabled')
         $('._dis').attr('disabled', 'disabled')
+        $('._Remarks').attr('disabled', 'disabled')
         $('#id_div_Filter').removeClass('disabledDiv')
         $('._None_Input').addClass('display_none')
         $('.btn_minus_non').addClass('display_none')
@@ -379,24 +450,32 @@ namespace LnkVoucher {
     }
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
-        txtTrDate.value = DateFormat(Selecteditem.TR_DATE); 
-        DisplayDetails(59212)
+        txtTrDate.value = DateFormat(Selecteditem.TR_DATE);
+        $('#TRID').val(Selecteditem.TRID);
+        $('#TR_CODE').val(Selecteditem.TR_CODE);
+        DisplayDetails(Selecteditem.TRID, Selecteditem.TR_CODE);
     }
-    function DisplayDetails(TrID: number) {
+    function DisplayDetails(TrID: number, tr_code: string) {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "GetLnkVoucherById"),
-            data: { TrID: TrID, CompCode: CompCode, branchCode: BranchCode },
+            data: { TrID: TrID, CompCode: CompCode, tr_code: tr_code },
             success: (d) => {//(int TrID, int CompCode, int branchCode)
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let List = result.Response as Array<IQ_GetSlsInvoiceItemVer2>; 
+                    debugger
+                    let List = result.Response as Array<AQ_GetLnkVoucher>;
                     CountGrid = 0;
                     $("#div_Data").html('');
+                     
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin')  }, 20) : $('#icon-bar').removeClass('display_none');  $('#btnGenerationVoucher').addClass('Grin')
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
+                        DisplayBuildControls(List[i], i);
                         CountGrid++
-                    } 
+                    }
+                    $('.table-responsive').scrollLeft(3);
+                    ComputeTotals();
                 }
             }
         });
@@ -405,8 +484,7 @@ namespace LnkVoucher {
     function BuildControls(cnt: number) {
         var html = "";
         html = `<tr id= "No_Row${cnt}">
-                     <input id="VoucherDetailID${cnt}" type="hidden" value="" class="form-control display_none"  />
-                    <input id="txtSerial${cnt}" name="FromDate" disabled type="hidden" value="" class="form-control" />
+                    
 	                <td>
 		                <div class="form-group display_none btn_minus_non">
 			                <span id="btn_minus${cnt}"><i class="fas fa-minus-circle  btn-minusNew"></i></span> 
@@ -421,22 +499,22 @@ namespace LnkVoucher {
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                 <input id="txtAccNumber${cnt}" value="" name="" disabled type="text" class="form-control _dis" />
+			                 <input id="Acc_Code${cnt}" value="" name="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="Acc">
 		                <div class="form-group">
-			                  <input id="txtAccName${cnt}" value="" name="" disabled type="text" class="form-control"  />
+			                  <input id="ACC_DESCA${cnt}" value="" name="" disabled type="text" class="form-control"  />
 		                </div>
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="txtDebit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Debit${cnt}" name="" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:9%;">
 		                <div class="form-group">
-			               <input id="txtCredit${cnt}" name="FromDate" disabled type="number" value=""  min="0" class="form-control _dis" />
+			               <input id="Credit${cnt}" name="" disabled type="number" value=""  min="0" class="form-control _dis" />
 		                </div>
 	                </td>
 
@@ -449,36 +527,26 @@ namespace LnkVoucher {
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                <input id="txtCostCntrNum${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			                <input id="CC_Code${cnt}" name="" value="" disabled type="text" class="form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="costcntr">
 		                <div class="form-group">
-			                  <input id="txtCostCntrName${cnt}" name="FromDate" value="" disabled type="text" class="form-control" />
+			                  <input id="CC_DESCA${cnt}" name="" value="" disabled type="text" class="form-control" />
 		                </div>
 	                </td>
 
                     
                     <td style="width:22%;">
 		                <div class="form-group">
-			              <input id="Notes${cnt}" name="FromDate" value="" disabled type="text" class="form-control _dis" />
+			              <input id="Line_DescA${cnt}" name="" value="" disabled type="text" class="_Remarks form-control _dis" />
 		                </div>
 	                </td>
-                    
-                  
-                    <input id="txt_StatusFlag${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="FlagUpdate${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-
-                    <input id="INVOICE_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="BOOK_TR_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_SYSTEM_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_SUB_SYSTEM_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_BRA_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_CODE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_NO${cnt}" name = " " value="" type = "hidden" class="form-control"/>
-                    <input id="SRC_TR_TYPE${cnt}" name = " " value="" type = "hidden" class="form-control"/>
+                     
                 </tr>`;
         $("#div_Data").append(html);
+
+        BuildAllFild(AQ_GetLnkVoucher, cnt, "No_Row");
 
 
         $('#btnSearchAcc' + cnt).click(function (e) {
@@ -486,42 +554,41 @@ namespace LnkVoucher {
 
             sys.FindKey(Modules.JournalVoucher, "btnAccountSearch", "COMP_CODE=" + CompCode + "and ACC_ACTIVE = 1 and DETAIL =1  ", () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtAccNumber' + cnt).val(id);
+                $('#Acc_Code' + cnt).val(id);
                 if (GetAccByCode(id)) {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#ACC_DESCA' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
 
                 }
 
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
             });
 
         });
-        $("#txtAccNumber" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Acc_Code" + cnt).on('change', function () {
+ 
 
-            var id = $('#txtAccNumber' + cnt).val();
+            var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
 
                 if (AccountDetails != null) {
-                    $('#txtAccName' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
+                    $('#ACC_DESCA' + cnt).val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $('#txtAccountNameFooter').val((lang == "ar" ? AccountDetails.ACC_DESCA : AccountDetails.ACC_DESCL));
                     $("#divAccountNameFooter").removeClass("display_none");
                 } else {
-                    $('#txtAccNumber' + cnt).val("");
-                    $('#txtAccName' + cnt).val("");
+                    $('#Acc_Code' + cnt).val("");
+                    $('#ACC_DESCA' + cnt).val("");
                     $('#txtAccountNameFooter').val("");
-                    $('#txtCredit' + cnt).val("");
+                    $('#Credit' + cnt).val("");
                     DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
-                } 
+                }
             }
             else {
-                $('#txtAccNumber' + cnt).val("");
-                $('#txtAccName' + cnt).val("");
+                $('#Acc_Code' + cnt).val("");
+                $('#ACC_DESCA' + cnt).val("");
                 $('#txtAccountNameFooter').val("");
-                $('#txtCredit' + cnt).val("");
+                $('#Credit' + cnt).val("");
                 DisplayMassage("رقم الحساب غير صحيح ", "Wrong Account number ", MessageType.Error);
             }
         });
@@ -532,30 +599,29 @@ namespace LnkVoucher {
 
             sys.FindKey(Modules.JournalVoucher, "btnCostCenterSearch", "COMP_CODE=" + CompCode + "and ACTIVE = 1 ", () => {
                 let id = SearchGrid.SearchDataGrid.SelectedKey
-                $('#txtCostCntrNum' + cnt).val(id);
+                $('#CC_Code' + cnt).val(id);
                 GetCostCenterByCode(id);
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
-                if ($("#txt_StatusFlag" + cnt).val() != "i")
-                    $("#txt_StatusFlag" + cnt).val("u");
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
             });
         });
-        $("#txtCostCntrNum" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#CC_Code" + cnt).on('change', function () {
+      
 
-            var id = $('#txtCostCntrNum' + cnt).val();
+            var id = $('#CC_Code' + cnt).val();
 
             if (GetCostCenterByCode(id)) {
 
-                $('#txtCostCntrName' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
+                $('#CC_DESCA' + cnt).val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $('#txtCostCntrNameFooter').val((lang == "ar" ? CostCenterDetails.CC_DESCA : CostCenterDetails.CC_DESCE));
                 $("#divCostCntrNameFooter").removeClass("display_none");
 
             }
             else {
-                $('#txtCostCntrNum' + cnt).val("");
-                $('#txtCostCntrName' + cnt).val("");
+                $('#CC_Code' + cnt).val("");
+                $('#CC_DESCA' + cnt).val("");
                 $('#txtCostCntrNameFooter').val("");
                 //  $("#divCostCntrNameFooter").addClass("display_none"); 
                 DisplayMassage("مركز التكلفة غير صحيح ", "Wrong Cost Center ", MessageType.Error);
@@ -563,43 +629,41 @@ namespace LnkVoucher {
         });
 
         //Depit on change  
-        $("#txtDebit" + cnt).on('keyup', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Debit" + cnt).on('change', function () {
 
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtDebitVal == 0) {
-                if (txtCreditVal == 0) {
+
+            var DebitVal = Number($('#Debit' + cnt).val());
+            var CreditVal = Number($('#Credit' + cnt).val());
+            if (DebitVal == 0) {
+                if (CreditVal == 0) {
                     DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtCredit' + cnt).val("0");
+                    $('#Credit' + cnt).val("0");
                 }
             }
-            $("#txtCredit" + cnt).val('0');
+            $("#Credit" + cnt).val('0');
             ComputeTotals();
         });
 
         //Credit on change   
-        $("#txtCredit" + cnt).on('keyup', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        $("#Credit" + cnt).on('change', function () {
 
-            var txtDebitVal = Number($('#txtDebit' + cnt).val());
-            var txtCreditVal = Number($('#txtCredit' + cnt).val());
-            if (txtCreditVal == 0) {
-                if (txtDebitVal == 0) {
+
+            var DebitVal = Number($('#Debit' + cnt).val());
+            var CreditVal = Number($('#Credit' + cnt).val());
+            if (CreditVal == 0) {
+                if (DebitVal == 0) {
                     DisplayMassage("يجب اضافه قيمه للمدين او الدائن فقط ", '(The value must be added to the debtor or creditors only)', MessageType.Error);
-                    $('#txtDebit' + cnt).val("0");
+                    $('#Debit' + cnt).val("0");
                 }
             }
-            $("#txtDebit" + cnt).val('0');
+            $("#Debit" + cnt).val('0');
             ComputeTotals();
         });
 
-        // Notes change
-        $("#Notes" + cnt).on('change', function () {
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u");
+        // Line_DescA change
+        $("#Line_DescA" + cnt).on('change', function () {
+            if ($("#StatusFlag" + cnt).val() != "i")
+                $("#StatusFlag" + cnt).val("u");
 
         });
 
@@ -609,7 +673,7 @@ namespace LnkVoucher {
 
         // on click Region to display Account And Cost Centers Names in Footer
         $("#No_Row" + cnt).on('click', function () {
-            var AccCodeVal = $('#txtAccNumber' + cnt).val();
+            var AccCodeVal = $('#Acc_Code' + cnt).val();
             var AccObj = AccountDetailsIst.filter(s => s.COMP_CODE == CompCode && s.ACC_CODE == AccCodeVal);
             if (AccObj.length > 0) {
                 $("#divAccountNameFooter").removeClass("display_none");
@@ -618,7 +682,7 @@ namespace LnkVoucher {
                 $("#txtAccountNameFooter").prop("value", "");
             }
             //GetAllCostCenters CostCentreDetailsIst
-            var CC_CodeVal = $('#txtCostCntrNum' + cnt).val();
+            var CC_CodeVal = $('#CC_Code' + cnt).val();
             var CCObj = CostCentreDetailsIst.filter(s => s.COMP_CODE == CompCode && s.CC_CODE == CC_CodeVal);
             if (CCObj.length > 0) {
                 $("#divCostCntrNameFooter").removeClass("display_none");
@@ -630,36 +694,27 @@ namespace LnkVoucher {
         });
 
 
-    }
-    function DisplayBuildControls() {
-         
-    }
+    } 
     function ComputeTotals() {
 
-        let CountItems = 0;
-        let PackageCount = 0;
-        let txtUnitCosts = 0;
-        let CountTotal = 0;
-        debugger
-        for (let i = 0; i < CountGrid; i++) {
-            var flagvalue = $("#txt_StatusFlag" + i).val();
+        let DepitTotal = 0;
+        let CreditTotal = 0;
+        var Difference: number = 0;
+
+        for (let f = 0; f < CountGrid; f++) {
+            var flagvalue = $("#StatusFlag" + f).val();
             if (flagvalue != "d" && flagvalue != "m") {
-
-                PackageCount += Number($("#txtOnhandQty" + i).val());
-
-                txtUnitCosts += (Number($("#txtUnitCost" + i).val()));
-
-                CountTotal += Number($("#txtTotal" + i).val());
-
-
-                CountItems++
+                DepitTotal += Number($("#Debit" + f).val());
+                CreditTotal += Number($("#Credit" + f).val());
             }
         }
+        DepitTotal = DepitTotal.RoundToNum(2);
+        CreditTotal = CreditTotal.RoundToNum(2);
+        txtTotalDebit.value = DepitTotal.toLocaleString();
+        txtTotalCredit.value = CreditTotal.toLocaleString();
 
-        $("#txtItemCount").val(CountItems.RoundToSt(2));
-        $("#txtPackageCount").val(PackageCount.RoundToSt(2));
-        $("#txtUnitCosts").val(txtUnitCosts.RoundToSt(2));
-        $("#txtTotal").val(CountTotal.RoundToSt(2));
+        Difference = (DepitTotal - CreditTotal).RoundToNum(2);
+        txtDifference.value = Difference.toLocaleString();
 
 
     }
@@ -667,20 +722,18 @@ namespace LnkVoucher {
         if (!SysSession.CurrentPrivileges.Remove) return;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
 
-            var statusFlag = $("#txt_StatusFlag" + RecNo).val();
+            var statusFlag = $("#StatusFlag" + RecNo).val();
             if (statusFlag == "i")
-                $("#txt_StatusFlag" + RecNo).val("m");
+                $("#StatusFlag" + RecNo).val("m");
             else
-                $("#txt_StatusFlag" + RecNo).val("d");
+                $("#StatusFlag" + RecNo).val("d");
 
-            // ComputeTotals();
-            $("#txtItemNumber" + RecNo).val("99");
-            $("#txtItemName" + RecNo).val("1");
-            $("#txtOnhandQty" + RecNo).val("1");
+ 
 
             $("#No_Row" + RecNo).attr("hidden", "true");
+            Insert_Serial();
 
-
+            ComputeTotals();
         });
 
     }
@@ -696,22 +749,86 @@ namespace LnkVoucher {
                 }
             }
         }
-        if (CanAdd) { 
+        if (CanAdd) {
             BuildControls(CountGrid);
-            $("#txt_StatusFlag" + CountGrid).val("i"); //In Insert mode    
+            $("#StatusFlag" + CountGrid).val("i"); //In Insert mode    
+
+            $("#ID" + CountGrid).val($("#ID" + (CountGrid - 1)).val()); 
+            $("#CompCode" + CountGrid).val($("#CompCode" + (CountGrid - 1)).val());    
+            $("#bracode" + CountGrid).val($("#bracode" + (CountGrid - 1)).val());    
+            $("#System_Code" + CountGrid).val($("#System_Code" + (CountGrid - 1)).val());    
+            $("#Tr_Code" + CountGrid).val($("#Tr_Code" + (CountGrid - 1)).val());    
+            $("#TrID" + CountGrid).val($("#TrID" + (CountGrid - 1)).val());    
+            $("#TrNo" + CountGrid).val($("#TrNo" + (CountGrid - 1)).val());    
+            $("#Serial" + CountGrid).val((CountGrid + 1));    
+            $("#Voucher_No" + CountGrid).val($("#Voucher_No" + (CountGrid - 1)).val());    
+            $("#SOURCE_TYPE" + CountGrid).val($("#SOURCE_TYPE" + (CountGrid - 1)).val());    
+            $("#TYPE_CODE" + CountGrid).val($("#TYPE_CODE" + (CountGrid - 1)).val());    
+            $("#TrDate" + CountGrid).val(txtTrDate.value);    
+
             $('._dis').removeAttr('disabled')
             $('.btn_minus_non').removeClass('display_none')
-            CountGrid++; 
+            CountGrid++;
+            Insert_Serial();
         }
-    }
+    } 
 
+    function Insert_Serial() {
+
+        let Chack_Flag = false;
+        let flagval = "";
+        let Ser = 1;
+        for (let i = 0; i < CountGrid; i++) {
+            flagval = $("#StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#Serial" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#StatusFlag" + i).val() != 'i' && $("#StatusFlag" + i).val() != 'm' && $("#StatusFlag" + i).val() != 'd') {
+                    $("#StatusFlag" + i).val('u');
+                }
+            }
+        }
+
+    }
     //****************************************************Validation*********************************************
     function Validation_Grid(rowcount: number) {
-         
-        if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
+        var AccNum = $("#Acc_Code" + rowcount).val()
+        var AccObject = AccountDetailsIst.filter(s => s.COMP_CODE == CompCode && s.ACC_CODE == AccNum);
+        var Debit = Number($("#Debit" + rowcount).val());
+        var credit = Number($("#Credit" + rowcount).val());
+
+        if ($("#StatusFlag" + rowcount).val() == "d" || $("#StatusFlag" + rowcount).val() == "") {
             return true;
-        } else {
-             
+        }
+        else {
+            if ($("#Acc_Code" + rowcount).val() == "") {
+                DisplayMassage('برجاء ادخال رقم الحساب', '(Please enter account number)', MessageType.Error);
+                Errorinput($("#Acc_Code" + rowcount));
+                return false;
+            }
+            else if (Debit == 0 && credit == 0) {
+                DisplayMassage('برجاء ادخال مبلغ المدين او الدائن', '(Please enter the debit or credit amount)', MessageType.Error);
+                Errorinput($("#Debit" + rowcount));
+                return false
+            }
+            else if ($("#txtCostCntrNum" + rowcount).val() == "" && (AccObject[0].ACC_GROUP == 4 || AccObject[0].ACC_GROUP == 5) && VoucherCCType == 1) {
+                DisplayMassage('برجاء ادخال  مركز التكلفه', '(Please enter the cost center)', MessageType.Error);
+                Errorinput($("#txtCostCntrNum" + rowcount));
+                return false
+            }
+            else if ($("#txtCostCntrNum" + rowcount).val() == "" && VoucherCCType == 2) {
+                DisplayMassage('برجاء ادخال  مركز التكلفه', '(Please enter the cost center)', MessageType.Error);
+                Errorinput($("#txtCostCntrNum" + rowcount));
+                return false
+            }
+
+
+
             return true;
         }
     }
@@ -723,34 +840,24 @@ namespace LnkVoucher {
     //****************************************************Assign_Data*********************************************
     function Assign() {
         debugger
-        Model = new A_RecPay_Tr_ReceiptNote();
 
-        DocumentActions.AssignToModel(Model);//Insert Update
-        //Model.Status = chkStatus.checked == true ? 1 : 0;
+        let Model = new Array<A_LnkVoucher>();
+        Model = AssignBuildControls(A_LnkVoucher, CountGrid);
+        console.log(Model);
 
+        let Filter = new FilterLnkVoucher;
+        Filter.Comp = CompCode;
+        Filter.branchCode = Number(ddlBranch.value);
+        Filter.FromNum = Number(txtFromNumber.value);
+        Filter.ToNum = Number(txtToNumber.value);
+        Filter.TrType = "" + ddlTypeTrans.value + ","
+        Filter.StartDate = DateFormatRep(txtFromDate.value);
+        Filter.EndDate = DateFormatRep(txtToDate.value);
+        Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
 
-        Model.CustomerID = null;
-        Model.VendorID = null;
-        Model.ExpenseID = null;
-        Model.FromCashBoxID = null;
-        Model.BankAccountCode = null;
+        LnkVoucherlMastDet.A_LnkVoucher = Model;
+        LnkVoucherlMastDet.FilterLnkVoucher = Filter;
 
-        if (Model.RecPayTypeId == 1) { Model.CustomerID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 2) { Model.VendorID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 3) { Model.BankAccountCode = $('#txt_BenIDH').val() }
-        if (Model.RecPayTypeId == 4) { Model.ExpenseID = Number($('#txt_BenIDH').val()) }
-        if (Model.RecPayTypeId == 5) { Model.FromCashBoxID = Number($('#txt_BenIDH').val()) }
-
-        Model.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
-        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
-        Model.CompCode = CompCode;
-        Model.BranchCode = BranchCode;
-        Model.TrType = TrType;
-        Model.TrNo = Number($('#txt_CODE').val());
-        Model.ReceiptID = Number($('#ReceiptID').val());
-        Model.Comp_Code = CompCode.toString();
-        Model.Branch_Code = BranchCode.toString();
-        Model.TrDateH = '1';
     }
     function Update() {
         debugger
@@ -760,14 +867,16 @@ namespace LnkVoucher {
         }
         Ajax.Callsync({
             type: "POST",
-            url: sys.apiUrl("AccTrReceipt", "Update"),
-            data: JSON.stringify(Model),
+            url: sys.apiUrl("TranPosting", "UpdateDetail"),
+            data: JSON.stringify(LnkVoucherlMastDet),
             success: (d) => {
+                debugger
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
-                    let res = result.Response as AProc_LnkGenerateTrans_Result
+                    debugger
+                    let res = result.Response as Array<AProc_LnkGenerateTrans_Result>;
                     DisplayMassage("تم التعديل بنجاح", "Success", MessageType.Succeed);
-                    Success(res.TRID, res);
+                    Success(0, res);
                     Save_Succ_But();
                 } else {
                     DisplayMassage("خطأء", "Error", MessageType.Error);
@@ -776,35 +885,16 @@ namespace LnkVoucher {
         });
 
     }
-    function Open() {
-        if (!CheckDate(DateFormat(txtTrDate.value).toString(), DateFormat(SysSession.CurrentEnvironment.StartDate).toString(), DateFormat(SysSession.CurrentEnvironment.EndDate).toString())) {
-            WorningMessage("  التاريخ ليس متطابق مع تاريخ المتاح (" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "Date does not match available date(" + DateFormat(SysSession.CurrentEnvironment.StartDate).toString() + ")", "تحذير", "worning");
-            return
-        }
-        Assign();
-        Ajax.Callsync({
-            type: "POST",
-            url: sys.apiUrl("AccTrReceipt", "Open"),
-            data: JSON.stringify(Model),
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    let res = result.Response as AProc_LnkGenerateTrans_Result
-                    DisplayMassage("تم فك الاعتماد بنجاح", "Success", MessageType.Succeed);
-                    Success(res.TRID, res);
-                    Save_Succ_But();
-                } else {
-                    DisplayMassage("خطأء", "Error", MessageType.Error);
-                }
-            }
-        });
+    function Success(ID: number, res: Array<AProc_LnkGenerateTrans_Result>) {
 
-    }
-    function Success(ReceiptID: number, res: AProc_LnkGenerateTrans_Result) {
-        LnkTransDetails = LnkTransDetails.filter(x => x.TRID != ReceiptID);
-        LnkTransDetails.push(res);
+        debugger
+        LnkTransDetails = res;
+
+        let IsPosted = Number($('#ddlStatus').val());
+        IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(x => x.IsPosted == Boolean(IsPosted)) : null;
+
         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
-        TransactionsGrid.SelectedItem = res;
+
         $('#divGridShow').removeClass('display_none');
         $('#Div_control').addClass('display_none');
         TransactionsGrid.DataSource = LnkTransDetails;
@@ -814,8 +904,7 @@ namespace LnkVoucher {
         disabled();
     }
     //***************************************************************************Print*********************************************************     
-    export function PrintReport(OutType: number) {
-        // 
+    export function PrintReport(OutType: number) { 
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
@@ -842,14 +931,24 @@ namespace LnkVoucher {
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
 
+        //**************************************************************
+        rp.User = SysSession.CurrentEnvironment.UserCode;
+        rp.SystemCode = SysSession.CurrentEnvironment.SystemCode;
+        rp.TrTypeSt = "" + ddlTypeTrans.value + ",";
+        rp.FromDate = DateFormatRep(txtFromDate.value);
+        rp.ToDate = DateFormatRep(txtToDate.value);
+        rp.fromNum = Number(txtFromNumber.value);
+        rp.ToNum = Number(txtToNumber.value);
+        rp.IsGenerated = Number($('#ddlStatus').val());
+   
         Ajax.Callsync({
-            url: Url.Action("IProc_Rpt_AccReceiptList", "GeneralReports"),
+            url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
             success: (d) => {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result);
                 // window.close(result)
@@ -860,14 +959,15 @@ namespace LnkVoucher {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
+       
+        rp.TRId = Number($('#TRID').val())
+        rp.TrTypeSt = $('#TR_CODE').val()
         rp.Type = 0;
-        rp.slip = 0;
-        rp.Repdesign = 1;
-        rp.TRId = Number($('#ReceiptID').val());
 
-        rp.Name_function = "rptReceiptNote";
+        rp.Name_function = "rptPrnt_LnkVoucher";
+        //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

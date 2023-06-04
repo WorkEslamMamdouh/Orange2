@@ -216,6 +216,26 @@ namespace Inv.WebUI.Controllers
             return Shared.JsonObject(url);
         }
 
+        public JsonResult Rep_LnkVoucherList(RepFinancials rp)
+        {
+            ReportService rep = getStandardParameters(rp);
+             
+            rep.AddParameter("RepType", rp.RepType);
+            rep.AddParameter("SystemCode", rp.SystemCode);
+            rep.AddParameter("TrTypeSt", rp.TrTypeSt);
+            rep.AddParameter("FromDate", rp.FromDate);
+            rep.AddParameter("ToDate", rp.ToDate);
+            rep.AddParameter("fromNum", rp.fromNum);
+            rep.AddParameter("ToNum", rp.ToNum);
+            rep.AddParameter("IsGenerated", rp.IsGenerated);
+
+              
+            string url = rep.GetReportUrl("Rep_LnkVoucherList");
+
+
+            return Shared.JsonObject(url);
+        }
+
         // print CustomerAdjustlist //IProc_Rep_AccAdjustList
         public JsonResult IProc_Rep_AccAdjustList(RepFinancials rp)
         {

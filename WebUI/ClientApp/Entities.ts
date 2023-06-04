@@ -171,6 +171,8 @@ class ReportParameters {
     public Tokenid: String;
     public LoginUser: string;
 
+    public TrTypeSt: string;
+
     public Send_Pdf: number;
     public TrNo: string;
     public ContactMobile: string;
@@ -193,6 +195,7 @@ class ReportParameters {
 
     public fromNum: number;
     public ToNum: number;
+    public IsGenerated: number;
 
      
 
@@ -1921,7 +1924,30 @@ class Custom_Items {
     public ItemCode: string;
     public ItemDesc: string; 
 }
-                   
+
+
+class FilterLnkVoucher {
+    constructor() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    
+    }
+    public Comp: number;
+    public branchCode: number;
+    public FromNum: number;
+    public ToNum: number;
+    public TrType: string;
+    public StartDate: string; 
+    public EndDate: string; 
+    public UserCode: string; 
+}
+ 
 
 class I_ItemStore {
     constructor() {
@@ -3956,6 +3982,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4043,6 +4070,7 @@ class I_Sls_TR_Invoice extends SecurityClass {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;
@@ -4249,6 +4277,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -4348,6 +4377,7 @@ class IQ_GetSlsInvoiceStatisticVer2 {
     public Remark: string;
     public Status: number;
     public IsPosted: boolean;
+    public ISCostPosted: boolean;
     public VoucherNo: number;
     public VoucherType: number;
     public CreatedAt: string;
@@ -6215,6 +6245,17 @@ class JournalMasterDetails extends SecurityClass {
     public A_JOURNAL_DETAIL: Array<A_JOURNAL_DETAIL>;
 }
 
+
+class LnkVoucherlMasterDetails extends SecurityClass {
+    constructor() {
+        super();
+        this.FilterLnkVoucher = new FilterLnkVoucher();
+        this.A_LnkVoucher = new Array<A_LnkVoucher>();
+    }
+    public FilterLnkVoucher: FilterLnkVoucher;
+    public A_LnkVoucher: Array<A_LnkVoucher>;
+}
+
 class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     constructor() {
         super();
@@ -6224,6 +6265,9 @@ class AQ_GetJournalHeaderWithDetail extends SecurityClass {
     public AQ_GetJournalHeader: Array<AQ_GetJournalHeader>;
     public AQ_GetJournalDetail: Array<AQ_GetJournalDetail>;
 }
+
+
+
 class A_JOURNAL_DETAIL extends SecurityClass {
     constructor() {
         super();
@@ -6700,47 +6744,7 @@ class GQ_GetUsers extends SecurityClass {
     public IsActiveDesc: string;
     public Flag_Mastr: string;
     public StoreID: number;
-}
-class GQ_GetUserRole extends SecurityClass {
-    constructor() {
-        super();
-        this.USER_CODE = "";
-        this.ISActive = false;
-        this.DescA = "";
-        this.DescE = "";
-        this.Remarks = "";
-        this.RoleId = 0;
-        this.IsActiveDesc = "";
-        this.IsAvailable = false;
-        this.IsShowable = false;
-    }
-    public USER_CODE: string;
-    public ISActive: boolean;
-    public DescA: string;
-    public DescE: string;
-    public Remarks: string;
-    public RoleId: number;
-    public IsActiveDesc: string;
-    public IsAvailable: boolean;
-    public IsShowable: boolean;
-}
-class G_Role extends SecurityClass {
-    constructor() {
-        super();
-        this.RoleId = 0;
-        this.DescA = "";
-        this.DescE = "";
-        this.Remarks = "";
-        this.IsAvailable = false;
-        this.IsShowable = false;
-    }
-    public RoleId: number;
-    public DescA: string;
-    public DescE: string;
-    public Remarks: string;
-    public IsAvailable: boolean;
-    public IsShowable: boolean;
-}
+}  
 class G_CONTROL extends SecurityClass {
     constructor() {
         super();
@@ -11514,7 +11518,223 @@ class AProc_LnkGenerateTrans_Result {
 
 
 
-  
+class AQ_GetLnkVoucher {
+    constructor() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = ''
+        this.Tr_Code = ''
+        this.TrID =0
+        this.TrNo =0
+        this.Serial = 0;
+        this.Acc_Code =''
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public ACC_DESCA: string;
+    public ACC_DESCL: string;
+    public CC_DESCA: string;
+    public CC_DESCE: string;
+    public TR_DESCA: string;
+    public TR_DESCE: string;
+    public Src_DescA: string;
+    public Src_DescE: string;
+    public TYPE_DESCA: string;
+    public TYPE_DESCE: string;
+    public TrDate: string;
+    public StatusFlag: string;
+}
+
+
+class A_LnkVoucher {
+    constructor() {
+        this.ID = 0
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = ''
+        this.Tr_Code = ''
+        this.TrDate = "";
+        this.TrID = 0
+        this.TrNo = 0
+        this.Serial = 0;
+        this.Acc_Code = "";
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.StatusFlag = "";
+    }
+    public ID: any;
+    public CompCode: number;
+    public bracode: number;
+    public System_Code: any;
+    public Tr_Code: any;
+    public TrDate: string;
+    public TrID: any;
+    public TrNo: any;
+    public Serial: number;
+    public Acc_Code: any;
+    public Debit: number;
+    public Credit: number;
+    public CC_Code: string;
+    public Line_DescA: string;
+    public Line_DescE: string;
+    public Voucher_No: number;
+    public SOURCE_TYPE: number;
+    public TYPE_CODE: number;
+    public StatusFlag: string;
+
+}
+
+
+
+class G_RoleBranch {
+    constructor() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.RoleId = 0;
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public RoleId: number;
+}
+
+class G_BranchModules {
+    constructor() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public MODULE_CODE: string;
+    public EXECUTE: boolean;
+    public CREATE: boolean;
+    public EDIT: boolean;
+    public DELETE: boolean;
+    public PRINT: boolean;
+    public VIEW: boolean;
+    public CUSTOM1: boolean;
+    public CUSTOM2: boolean;
+    public CUSTOM3: boolean;
+    public CUSTOM4: boolean;
+    public CUSTOM5: boolean;
+    public CUSTOM6: boolean;
+    public CUSTOM7: boolean;
+    public CUSTOM8: boolean;
+    public CUSTOM9: boolean;
+    public ViewImages: boolean;
+    public EditImages: boolean;
+}
+ 
+class GQ_GetUserRole extends SecurityClass {
+    constructor() {
+        super();
+        this.USER_CODE = "";
+        this.ISActive = false;
+        this.DescA = "";
+        this.DescE = "";
+        this.Remarks = "";
+        this.IsActiveDesc = "";
+        this.RoleId = 0;
+        this.IsAvailable = false;
+        this.IsShowable = false;
+        this.RoleType = 0;
+    }
+    public USER_CODE: string;
+    public ISActive: boolean;
+    public DescA: string;
+    public DescE: string;
+    public Remarks: string;
+    public IsActiveDesc: string;
+    public RoleId: number;
+    public IsAvailable: boolean;
+    public IsShowable: boolean;
+    public RoleType: number;
+}
+class G_Role extends SecurityClass {
+    constructor() {
+        super();
+        this.RoleId = 0;
+        this.DescA = "";
+        this.DescE = "";
+        this.Remarks = "";
+        this.IsActiveDesc = "";
+        this.IsAvailable = false;
+        this.IsShowable = false;
+        this.RoleType = 0;
+    }
+    public RoleId: number;
+    public DescA: string;
+    public DescE: string;
+    public Remarks: string;
+    public IsActiveDesc: string;
+    public IsAvailable: boolean;
+    public IsShowable: boolean;
+    public RoleType: number;
+}
+
 
 
 

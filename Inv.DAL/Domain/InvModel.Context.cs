@@ -231,6 +231,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
         public virtual DbSet<A_LnkVoucher> A_LnkVoucher { get; set; }
         public virtual DbSet<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
+        public virtual DbSet<G_BranchModules> G_BranchModules { get; set; }
+        public virtual DbSet<G_RoleBranch> G_RoleBranch { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -6105,7 +6107,7 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Rpt_AccReceiptList_Result>("IProc_Rpt_AccReceiptList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, trTypeParameter, fromDateParameter, toDateParameter, boxIdParameter, recTypeParameter, bnfIDParameter, bnfDescParameter, statusParameter, cashTypeParameter);
         }
     
-        public virtual ObjectResult<AProc_LnkGenerateTrans_Result> AProc_LnkGenerateTrans(Nullable<int> comp, Nullable<int> bra, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo)
+        public virtual ObjectResult<AProc_LnkGenerateTrans_Result> AProc_LnkGenerateTrans(Nullable<int> comp, Nullable<int> bra, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo, Nullable<int> direct)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -6143,7 +6145,11 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("ToNo", toNo) :
                 new ObjectParameter("ToNo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_LnkGenerateTrans_Result>("AProc_LnkGenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
+            var directParameter = direct.HasValue ?
+                new ObjectParameter("direct", direct) :
+                new ObjectParameter("direct", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_LnkGenerateTrans_Result>("AProc_LnkGenerateTrans", compParameter, braParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter, directParameter);
         }
     
         public virtual ObjectResult<GProc_Rep_UserActivityLog_Result> GProc_Rep_UserActivityLog(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> grpType, string fromDate, string toDate, string fromTime, string toTime, Nullable<int> finYear, string sys, string module, string usr, Nullable<int> opStatus, Nullable<int> opid)
@@ -6272,7 +6278,24 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Prnt_LnkVoucher_Result>("AProc_Prnt_LnkVoucher", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, tr_codeParameter, tRIdParameter);
         }
     
-        public virtual ObjectResult<AProc_Rep_LnkVoucherList_Result> AProc_Rep_LnkVoucherList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo)
+        public virtual ObjectResult<AProc_GetLnkVoucher_Result> AProc_GetLnkVoucher(Nullable<int> comp, string tr_code, Nullable<int> tRId)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var tr_codeParameter = tr_code != null ?
+                new ObjectParameter("tr_code", tr_code) :
+                new ObjectParameter("tr_code", typeof(string));
+    
+            var tRIdParameter = tRId.HasValue ?
+                new ObjectParameter("TRId", tRId) :
+                new ObjectParameter("TRId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_GetLnkVoucher_Result>("AProc_GetLnkVoucher", compParameter, tr_codeParameter, tRIdParameter);
+        }
+    
+        public virtual ObjectResult<AProc_Rep_LnkVoucherList_Result> AProc_Rep_LnkVoucherList(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string user, string sys, string tRType, string fromDate, string toDate, Nullable<int> fromno, Nullable<int> toNo, Nullable<int> isGenerated)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -6334,7 +6357,37 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("ToNo", toNo) :
                 new ObjectParameter("ToNo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rep_LnkVoucherList_Result>("AProc_Rep_LnkVoucherList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter);
+            var isGeneratedParameter = isGenerated.HasValue ?
+                new ObjectParameter("IsGenerated", isGenerated) :
+                new ObjectParameter("IsGenerated", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rep_LnkVoucherList_Result>("AProc_Rep_LnkVoucherList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter, isGeneratedParameter);
+        }
+    
+        public virtual int GProc_GenerateBranchModules(Nullable<int> compCode, Nullable<int> braCode)
+        {
+            var compCodeParameter = compCode.HasValue ?
+                new ObjectParameter("CompCode", compCode) :
+                new ObjectParameter("CompCode", typeof(int));
+    
+            var braCodeParameter = braCode.HasValue ?
+                new ObjectParameter("BraCode", braCode) :
+                new ObjectParameter("BraCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_GenerateBranchModules", compCodeParameter, braCodeParameter);
+        }
+    
+        public virtual ObjectResult<GProc_GetBranchModules_Result> GProc_GetBranchModules(Nullable<int> compCode, Nullable<int> braCode)
+        {
+            var compCodeParameter = compCode.HasValue ?
+                new ObjectParameter("CompCode", compCode) :
+                new ObjectParameter("CompCode", typeof(int));
+    
+            var braCodeParameter = braCode.HasValue ?
+                new ObjectParameter("BraCode", braCode) :
+                new ObjectParameter("BraCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_GetBranchModules_Result>("GProc_GetBranchModules", compCodeParameter, braCodeParameter);
         }
     }
 }

@@ -133,7 +133,7 @@ var Keys = {
 };
 var setVal = function (value) {
     var Input = this;
-    value == null || Number(value) == 0 || value == undefined ? value = '' : value = value;
+    value == null || value == undefined ? value = '' : value = value;
     return value;
 };
 function IsNullOrEmpty(value) {
@@ -224,13 +224,15 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)));
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix));
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec));
@@ -243,13 +245,16 @@ var App;
         }
         else {
             var stfix = num.toString().substr(0, num.toString().indexOf("."));
-            if (stfix < 0) {
+            if (Number(stfix) < 0) {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
                 return ((Number(stfix) - Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
             }
             else {
                 var stfrac = num.toString().substr(num.toString().indexOf(".") + 1, num.toString().length);
-                return ((Number(stfix) + Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec))) / Math.pow(10, dec)).toString());
+                var Math_round = Math.round(Number(stfrac) / Math.pow(10, (stfrac.length - dec)));
+                var fix = Math_round / Math.pow(10, dec);
+                return (Number(stfix) + Number(fix)).toString();
+                //return (stfix + fix.toString().substr(1, 3)).toString();
             }
         }
         //return (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toString();
@@ -2249,6 +2254,17 @@ function GetSerialNumber() {
     });
     return "";
 }
+function isDateValidInYear(dateString, year) {
+    debugger;
+    var date = new Date(dateString);
+    // Check if the date is valid
+    var isValidDate = /*!isNaN(date) &&*/ date.toString() !== "Invalid Date" && date.toISOString().slice(0, 10) === dateString;
+    // Check if the year matches
+    var isValidYear = date.getFullYear() === year;
+    // Check if the date falls within the valid range of the year
+    var isValidDateInYear = date.getFullYear() === year && date.getMonth() < 12 && date.getDate() <= new Date(year, date.getMonth() + 1, 0).getDate();
+    return isValidDate && isValidYear && isValidDateInYear;
+}
 function SendInv_to_Cust(data_New) {
     var SysSession = GetSystemEnvironment();
     data_New.CompCode = SysSession.CompCode;
@@ -2457,4 +2473,64 @@ function GetAllData(Table) {
     });
     return List_Table;
 }
+function BuildAllFild(dataSource, cnt, NameRow) {
+    dataSource = getClass(dataSource.name);
+    var properties = Object.getOwnPropertyNames(dataSource);
+    var html = "";
+    for (var _i = 0, properties_3 = properties; _i < properties_3.length; _i++) {
+        var property = properties_3[_i];
+        if (document.getElementById(property + cnt) == null) {
+            html += "<input id=\"" + (property + cnt) + "\" type=\"hidden\" value=\"\" class=\"form-control \"/>";
+        }
+        else {
+            $("#" + property + cnt).on('change', function () {
+                if ($("#StatusFlag" + cnt).val() != "i")
+                    $("#StatusFlag" + cnt).val("u");
+            });
+        }
+    }
+    $("#" + NameRow + cnt).append(html);
+}
+function DisplayBuildControls(dataSource, cnt) {
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var _i = 0, properties_4 = properties; _i < properties_4.length; _i++) {
+        var property = properties_4[_i];
+        $("#" + property + cnt).val(setVal(dataSource[property]));
+    }
+}
+function AssignBuildControls(dataSource, CountGrid) {
+    dataSource = getClass(dataSource.name);
+    var DetailsModel = new Array();
+    var StatusFlag = "StatusFlag";
+    var properties = Object.getOwnPropertyNames(dataSource);
+    for (var i = 0; i < CountGrid; i++) {
+        var Model = JSON.parse(JSON.stringify(dataSource));
+        var Status = $('#' + StatusFlag + i).val();
+        if (Status != 'i' && Status != 'u' && Status != 'd') {
+            continue;
+        }
+        for (var _i = 0, properties_5 = properties; _i < properties_5.length; _i++) {
+            var property = properties_5[_i];
+            var NameID = "" + property + "" + i + "";
+            var element = document.getElementById(NameID);
+            if (element != null) {
+                if (element.type == "checkbox")
+                    Model[property] = element.checked;
+                else
+                    Model[property] = setVal(element.value);
+            }
+        }
+        DetailsModel.push(Model);
+    }
+    return DetailsModel;
+}
+var getClass = function (className) {
+    var constructorFunc = window[className];
+    if (typeof constructorFunc === 'function') {
+        return new constructorFunc();
+    }
+    else {
+        throw new Error('Invalid class name: ' + className);
+    }
+};
 //# sourceMappingURL=App.js.map

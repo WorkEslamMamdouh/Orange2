@@ -331,5 +331,11 @@ namespace Inv.DAL.Domain
     public partial class I_Stk_TR_IssueToCCDetails : SecurityandUpdateFlagClass_FIN_YEAR
     {
     }
+        public partial class AQ_GetLnkVoucher : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class A_LnkVoucher : SecurityandUpdateFlagClass
+    {
+    }
     
 }

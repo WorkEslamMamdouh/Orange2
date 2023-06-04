@@ -225,6 +225,7 @@ namespace SlsTrSalesManagerNew {
     var flagControldbOrSerch = false;
 
     var IsPosted = false;
+    var ISCostPosted = false;
 
 
     //flagInvItemDiscount = true;
@@ -233,6 +234,7 @@ namespace SlsTrSalesManagerNew {
     //------------------------------------------------------ Main Region------------------------
 
     export function InitalizeComponent() {
+        debugger 
          
         document.getElementById('Screen_name').innerHTML = Screen_name; 
         document.title = Screen_name; 
@@ -2067,6 +2069,7 @@ namespace SlsTrSalesManagerNew {
         $("#txtPriceshowID").val("");
 
         IsPosted = false;
+        ISCostPosted = false;
     }
     function btnShow_onclick() {
 
@@ -2809,6 +2812,7 @@ namespace SlsTrSalesManagerNew {
         $("#txtPriceshowID").val(InvoiceStatisticsModel[0].RefTrID)
 
         IsPosted = InvoiceStatisticsModel[0].IsPosted;
+        ISCostPosted = InvoiceStatisticsModel[0].ISCostPosted;
 
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
@@ -3453,6 +3457,8 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
+
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
@@ -3464,6 +3470,7 @@ namespace SlsTrSalesManagerNew {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
 
+            debugger
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             let GetUnitprice: IGetunitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
 
@@ -3973,7 +3980,7 @@ namespace SlsTrSalesManagerNew {
         txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
-        txtNet.value = (NetCount.RoundToSt(2));
+        txtNet.value = ((NetCount.RoundToNum(2)) - Number(txtCommission.value)).RoundToSt(2);
 
 
         if (ddlType.value == "1") {
@@ -4394,6 +4401,7 @@ namespace SlsTrSalesManagerNew {
 
         InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
         InvoiceModel.IsPosted = IsPosted;
+        InvoiceModel.ISCostPosted = ISCostPosted;
 
 
 

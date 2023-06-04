@@ -80,8 +80,9 @@
     <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
-    <Reference Include="Security">
-      <HintPath>..\packages\Security\Security.dll</HintPath>
+    <Reference Include="Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
@@ -330,6 +331,8 @@
     <Compile Include="Models\CustomModel\Account_CCDT_CCDTTP_MasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
+    <Compile Include="Models\CustomModel\FilterLnkVoucher.cs" />
+    <Compile Include="Models\CustomModel\LnkVoucherlMasterDetails.cs" />
     <Compile Include="Models\CustomModel\NewsDetails.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SessionManager.cs" />

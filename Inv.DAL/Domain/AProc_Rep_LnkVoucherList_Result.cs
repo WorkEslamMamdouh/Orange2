@@ -30,6 +30,8 @@ namespace Inv.DAL.Domain
         public string Par_Todate { get; set; }
         public Nullable<int> Par_FromTrNo { get; set; }
         public Nullable<int> Par_ToTrNo { get; set; }
+        public string par_StatusDsa { get; set; }
+        public string Par_StatusDsE { get; set; }
         public long TRID { get; set; }
         public Nullable<int> BRA_CODE { get; set; }
         public string SYSTEM_CODE { get; set; }

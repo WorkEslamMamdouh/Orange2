@@ -180,10 +180,12 @@ var SlsTrSalesManagerNew;
     var Remove_display_none = "";
     var flagControldbOrSerch = false;
     var IsPosted = false;
+    var ISCostPosted = false;
     //flagInvItemDiscount = true;
     //flagInvMulti = true;
     //------------------------------------------------------ Main Region------------------------
     function InitalizeComponent() {
+        debugger;
         document.getElementById('Screen_name').innerHTML = Screen_name;
         document.title = Screen_name;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -1567,6 +1569,7 @@ var SlsTrSalesManagerNew;
         $("#txtPriceshow").val("");
         $("#txtPriceshowID").val("");
         IsPosted = false;
+        ISCostPosted = false;
     }
     function btnShow_onclick() {
         BindStatisticGridData();
@@ -2200,6 +2203,7 @@ var SlsTrSalesManagerNew;
         $("#txtPriceshow").val(InvoiceStatisticsModel[0].RefTrID);
         $("#txtPriceshowID").val(InvoiceStatisticsModel[0].RefTrID);
         IsPosted = InvoiceStatisticsModel[0].IsPosted;
+        ISCostPosted = InvoiceStatisticsModel[0].ISCostPosted;
         //alert("  " + SysSession.CurrentEnvironment.CompanyNameAr + " فاتورة مبيعات ( " + lblInvoiceNumber.value + " ) ");
     }
     //------------------------------------------------------ Controls Grid Region------------------------
@@ -2605,6 +2609,7 @@ var SlsTrSalesManagerNew;
         $("#txtPrice" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            debugger;
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             var GetUnitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
@@ -2613,6 +2618,7 @@ var SlsTrSalesManagerNew;
         $("#txtPrice" + cnt).on('keyup', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
+            debugger;
             var SalesPrice = Number($("#txtPrice" + cnt).val());
             var GetUnitprice = Get_PriceWithVAT(SalesPrice, Number(VatPrc), false);
             $("#txtUnitpriceWithVat" + cnt).val(GetUnitprice.unitpricewithvat);
@@ -2980,7 +2986,7 @@ var SlsTrSalesManagerNew;
         txtTotalbefore.value = (Totalbefore - TotalDiscount).RoundToSt(2);
         txtTotal.value = CountTotal.RoundToSt(2);
         txtTax.value = TaxCount.RoundToSt(2);
-        txtNet.value = (NetCount.RoundToSt(2));
+        txtNet.value = ((NetCount.RoundToNum(2)) - Number(txtCommission.value)).RoundToSt(2);
         if (ddlType.value == "1") {
             if ($("#txtCardMoney").val().trim() == '' || $("#txtCardMoney").val() == '0') {
                 $("#txtCardMoney").val('');
@@ -3309,6 +3315,7 @@ var SlsTrSalesManagerNew;
         InvoiceModel.DocNo = GlobalDocNo;
         InvoiceModel.VoucherNo = Number($('#VoucherNo').val());
         InvoiceModel.IsPosted = IsPosted;
+        InvoiceModel.ISCostPosted = ISCostPosted;
         if (SysSession.CurrentEnvironment.InvoiceTransCode == 3) {
             if ((Number(ddlInvoiceCustomer.value) == 0 || ddlInvoiceCustomer.value.trim() == "")) {
                 InvoiceModel.InvoiceTransCode = 2;

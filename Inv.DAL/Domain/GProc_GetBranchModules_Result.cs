@@ -10,16 +10,12 @@
 namespace Inv.DAL.Domain
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class G_Role
+    public partial class GProc_GetBranchModules_Result
     {
-        public int RoleId { get; set; }
-        public string DescA { get; set; }
-        public string DescE { get; set; }
-        public string Remarks { get; set; }
-        public Nullable<bool> IsAvailable { get; set; }
-        public Nullable<bool> IsShowable { get; set; }
-        public Nullable<int> RoleType { get; set; }
+        public string MODULE_CODE { get; set; }
+        public string MODULE_DESCE { get; set; }
+        public string MODULE_DESCA { get; set; }
+        public string MENU_NO { get; set; }
     }
 }
