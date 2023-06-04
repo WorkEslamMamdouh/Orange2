@@ -468,7 +468,7 @@ namespace LnkVoucher {
                     CountGrid = 0;
                     $("#div_Data").html('');
                      
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin')  }, 20) : $('#icon-bar').removeClass('display_none');  $('#btnGenerationVoucher').addClass('Grin')
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
