@@ -16,5 +16,6 @@ namespace Inv.DAL.Domain
         public string MODULE_CODE { get; set; }
         public string MODULE_DESCE { get; set; }
         public string MODULE_DESCA { get; set; }
+        public string MENU_NO { get; set; }
     }
 }
