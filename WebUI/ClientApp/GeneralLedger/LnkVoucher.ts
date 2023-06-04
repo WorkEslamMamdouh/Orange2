@@ -5,11 +5,11 @@ $(document).ready(() => {
 
 namespace LnkVoucher {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession: SystemSession = GetSystemSession(Modules.LnkVoucher);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
-    var Name_Screen = (lang == "ar" ? ' أستعراض قيود الربط' : 'LnkVoucher');
+    var Name_Screen = (lang == "ar" ? '  قيود الربط' : 'LnkVoucher');
 
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
@@ -50,7 +50,7 @@ namespace LnkVoucher {
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = true;
+    var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
     export function InitalizeComponent() { 
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control'); 
@@ -307,7 +307,7 @@ namespace LnkVoucher {
             type: "Get",
             url: sys.apiUrl("TranPosting", "LoadLnkVouchTransactions"),
             data: {
-                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.LnkVoucher, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: (d) => {
                 let result = d as BaseResponse;
@@ -948,7 +948,7 @@ namespace LnkVoucher {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
 
                 window.open(result);
                 // window.close(result)
@@ -967,7 +967,7 @@ namespace LnkVoucher {
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

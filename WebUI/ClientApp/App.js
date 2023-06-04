@@ -2254,6 +2254,17 @@ function GetSerialNumber() {
     });
     return "";
 }
+function isDateValidInYear(dateString, year) {
+    debugger;
+    var date = new Date(dateString);
+    // Check if the date is valid
+    var isValidDate = /*!isNaN(date) &&*/ date.toString() !== "Invalid Date" && date.toISOString().slice(0, 10) === dateString;
+    // Check if the year matches
+    var isValidYear = date.getFullYear() === year;
+    // Check if the date falls within the valid range of the year
+    var isValidDateInYear = date.getFullYear() === year && date.getMonth() < 12 && date.getDate() <= new Date(year, date.getMonth() + 1, 0).getDate();
+    return isValidDate && isValidYear && isValidDateInYear;
+}
 function SendInv_to_Cust(data_New) {
     var SysSession = GetSystemEnvironment();
     data_New.CompCode = SysSession.CompCode;

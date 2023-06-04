@@ -2903,7 +2903,21 @@ function GetSerialNumber(): string {
     return "";
 }
 
+function isDateValidInYear(dateString, year) {
+    debugger
+    const date = new Date(dateString);
 
+    // Check if the date is valid
+    const isValidDate = /*!isNaN(date) &&*/ date.toString() !== "Invalid Date" && date.toISOString().slice(0, 10) === dateString;
+
+    // Check if the year matches
+    const isValidYear = date.getFullYear() === year;
+
+    // Check if the date falls within the valid range of the year
+    const isValidDateInYear = date.getFullYear() === year && date.getMonth() < 12 && date.getDate() <= new Date(year, date.getMonth() + 1, 0).getDate();
+
+    return isValidDate && isValidYear && isValidDateInYear;
+}
 
 function SendInv_to_Cust(data_New: ReportParameters) {
 
@@ -3259,3 +3273,5 @@ var getClass = function (className) {
         throw new Error('Invalid class name: ' + className);
     }
 };
+
+

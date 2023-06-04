@@ -199,6 +199,9 @@ namespace CloseProcesses {
 
 
     export function InitalizeComponent() {
+
+         
+
         $("#NoDubleclick").val('1');
 
 
@@ -4849,6 +4852,15 @@ namespace CloseProcesses {
 
             FlagIns_Operation = false;
             Status = 3;
+
+            debugger
+            let Date = $('#txtClose_TrDate').val();
+            if (!isDateValidInYear(Date, Finyear)) {
+                DisplayMassage(" برجاء ادخال تاريخ الاغلاق صحيح", "Please enter financial data", MessageType.Worning);
+                Errorinput($('#txtClose_TrDate'))
+                return false
+            }  
+
             Assign_1_Processes();
             Update_1_Processes();
             btnBack_4_onclick();
