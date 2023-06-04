@@ -3,6 +3,13 @@
     ViewBag.Title = "PaymentIndex";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
+<style>
+
+    .showdiv {
+        display: none !important;
+    }
+
+</style>
 <div class="row gy-3 ">
     <div class="col-12" id="divFilter">
         <div class="card bg-light-blue">
@@ -82,8 +89,8 @@
                             @SystemResource.Restriction_form
                         </label>
                     </div>
-                    <div class="col-12 service-content" id="DivTemplate">
-                        <div class="serviceBox display_none" id="divTemplateData">
+                    <div class="col-12 service-content showdiv" id="DivTemplate">
+                        <div class="serviceBox  " id="divTemplateData">
                             <div class="row g-0 ">
                                 @* Screen Button *@
                                 <div class="d-flex justify-content-start mb-2">
@@ -190,7 +197,9 @@
                                     <div class="form-group row ">
                                         <label class="col-4 align-self-center p-md-0"> @SystemResource.App_Type  </label>
                                         <div class="col-8">
-                                            <select id="ddlJournalType" name="" disabled type="text" class="form-control"></select>
+                                            <select id="ddlJournalType" name="" disabled type="text" class="form-control">
+                                                <option value="null">اختر النوع</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -345,10 +354,10 @@
                                         <div class="form-group row g-0">
                                             <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
                                             <div class="col-4 col-xl-4 editor-input">
-                                                <input id="txtCreatedBy" name="CREATED_BY" type="text" disabled>
+                                                <input id="txtCreatedBy" class="_dis" name="CREATED_BY" type="text" disabled>
                                             </div>
                                             <div class="col-4 col-xl-6 editor-input">
-                                                <input id="txtCreatedAt" name="CREATED_AT" type="text" disabled>
+                                                <input id="txtCreatedAt" class="_dis" name="CREATED_AT" type="text" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -356,11 +365,11 @@
                                         <div class="form-group row g-0">
                                             <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
                                             <div class="col-4 col-xl-4  editor-input">
-                                                <input id="txtUpdatedBy" name="UPDATED_BY" type="text" disabled>
+                                                <input id="txtUpdatedBy" class="_dis" name="UPDATED_BY" type="text" disabled>
                                             </div>
                                             <div class="col-4 col-xl-6 editor-input">
 
-                                                <input id="txtUpdatedAt" name="UPDATED_AT" type="text" disabled>
+                                                <input id="txtUpdatedAt" class="_dis" name="UPDATED_AT" type="text" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -373,10 +382,10 @@
                                         <div class="form-group row g-0">
                                             <label class="col-4 col-xl-2 align-self-center"> @SystemResource.confirmation</label>
                                             <div class="col-4 col-xl-4 editor-input">
-                                                <input id="txtAuthorizedBy" name="CREATED_BY" type="text" disabled>
+                                                <input id="txtAuthorizedBy" class="_dis" name="CREATED_BY" type="text" disabled>
                                             </div>
                                             <div class="col-4 col-xl-6 editor-input">
-                                                <input id="txtAuthorizedAt" name="CREATED_AT" type="text" disabled>
+                                                <input id="txtAuthorizedAt" class="_dis" name="CREATED_AT" type="text" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -384,10 +393,10 @@
                                         <div class="form-group row g-0">
                                             <label class="col-4 col-xl-2 align-self-center"> @SystemResource.relay</label>
                                             <div class="col-4 col-xl-4  editor-input">
-                                                <input id="txtPostedBy" name="UPDATED_BY" type="text" disabled>
+                                                <input id="txtPostedBy" class="_dis" name="UPDATED_BY" type="text" disabled>
                                             </div>
                                             <div class="col-4 col-xl-6 editor-input">
-                                                <input id="txtPostedAt" name="UPDATED_AT" type="text" disabled>
+                                                <input id="txtPostedAt" class="_dis" name="UPDATED_AT" type="text" disabled>
                                             </div>
                                         </div>
                                     </div>

@@ -9,7 +9,6 @@ $(document).ready(function () {
 var HomeComponent;
 (function (HomeComponent) {
     //let res: any = GetResourceList("");d
-    debugger;
     var sys = new SystemTools();
     var ddbra;
     ddbra = document.getElementById("ddbra");
@@ -22,7 +21,6 @@ var HomeComponent;
     var selectedbar;
     var newtap = false;
     G_BRANCHService = GetSystemG_BRANCH();
-    debugger;
     $('Li').addClass('animate__animated animate__fadeInTopRight');
     $('#logOrg').addClass('animate__animated animate__backInDown');
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
@@ -246,7 +244,15 @@ var HomeComponent;
         if (isNews == 'false') {
             Show_News();
         }
-        $('#btnNews').click(function (e) { Show_News(); });
+        $('#btnNews').click(function (e) {
+            Show_News();
+            $("#News_Model").modal("show");
+            localStorage.setItem("Show_News", 'true');
+        });
+        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1); });
+        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2); });
+        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3); });
+        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4); });
     }
     HomeComponent.InitalizeComponent = InitalizeComponent;
     function Getbranch() {
@@ -577,6 +583,7 @@ var HomeComponent;
         $("#btnIssueType").click(function () { newtap = false; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCC").click(function () { newtap = false; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccount").click(function () { newtap = false; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucher").click(function () { newtap = false; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucher").click(function () { newtap = false; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucher").click(function () { newtap = false; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucher").click(function () { newtap = false; OpenPage(Modules.PaymentVoucher); });
@@ -586,6 +593,7 @@ var HomeComponent;
         $("#btnAccountbalances").click(function () { newtap = false; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreports").click(function () { newtap = false; OpenPage(Modules.financialreports); }); //
         $("#btnUSERS").click(function () { newtap = false; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLog").click(function () { newtap = false; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPosting").click(function () { newtap = false; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranch").click(function () { newtap = false; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucher").click(function () { newtap = false; OpenPage(Modules.LnkTransVoucher); }); // 
@@ -676,6 +684,7 @@ var HomeComponent;
         $("#btnIssueTypeT").click(function () { newtap = true; OpenPage(Modules.IssueType); }); //
         $("#btnIssueToCCT").click(function () { newtap = true; OpenPage(Modules.IssueToCC); }); // 
         $("#btnGLDefAccountT").click(function () { newtap = true; OpenPage(Modules.GLDefAccount); }); //
+        $("#btnLnkVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkVoucher); });
         $("#btnJournalVoucherT").click(function () { newtap = true; OpenPage(Modules.JournalVoucher); });
         $("#btnReceiptVoucherT").click(function () { newtap = true; OpenPage(Modules.ReceiptVoucher); });
         $("#btnPaymentVoucherT").click(function () { newtap = true; OpenPage(Modules.PaymentVoucher); });
@@ -685,6 +694,7 @@ var HomeComponent;
         $("#btnAccountbalancesT").click(function () { newtap = true; OpenPage(Modules.Accountbalances); }); // 
         $("#btnfinancialreportsT").click(function () { newtap = true; OpenPage(Modules.financialreports); }); //
         $("#btnUSERST").click(function () { newtap = true; OpenPage(Modules.USERS); }); //
+        $("#btnUserActLogT").click(function () { newtap = true; OpenPage(Modules.UserActLog); }); //
         $("#btnTranPostingT").click(function () { newtap = true; OpenPage(Modules.TranPosting); }); //
         $("#btnLnkvarBranchT").click(function () { newtap = true; OpenPage(Modules.LnkvarBranch); }); //
         $("#btnLnkTransVoucherT").click(function () { newtap = true; OpenPage(Modules.LnkTransVoucher); }); // 
@@ -845,13 +855,12 @@ var HomeComponent;
         return Style_New;
     }());
     function Show_News() {
-        debugger;
+        $("#Div_News").html('<label class="Not_Found"> ...There is no news at this time</label>');
         $("#Div_History").html('');
-        $("#Div_News").html('');
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
         $('.modal-History').addClass('display_none');
-        var DateNow = DateFormatRep(GetDate());
+        var DateNow = GetDateAndTime();
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("I_VW_GetCompStatus", "GetNews"),
@@ -861,13 +870,10 @@ var HomeComponent;
                 if (result.IsSuccess) {
                     News_Details = result.Response;
                     if (News_Details.G_News.length > 0) {
+                        $("#Div_News").html('');
                         for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i, false);
                         }
-                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1); });
-                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2); });
-                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3); });
-                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4); });
                         $("#News_Model").modal("show");
                         localStorage.setItem("Show_News", 'true');
                     }
@@ -908,7 +914,6 @@ var HomeComponent;
         });
     }
     function BuildNews(cnt, IsHistory) {
-        debugger;
         var class_News = GetClass(cnt);
         var html_News = "\n                      <div class=\"alert alert-" + class_News.class_title + " alert-white animate__animated animate__fadeInTopRight\">\n                        <div class=\"icon\">" + class_News.class_icon + "</div>\n                        <h5 class=\"news-date\"> " + DateFormat(News_Details.G_News[cnt].NewsDate) + "</h5>\n                        <strong>" + class_News.Type_Text + " :</strong>\n                        <span> " + News_Details.G_News[cnt].NewsText + " </span>\n                      </div>\n\n                   ";
         if (IsHistory) {
@@ -919,7 +924,6 @@ var HomeComponent;
         }
     }
     function GetClass(cnt) {
-        debugger;
         var StyleNew = new Style_New();
         var TypeCode = News_Details.G_News[cnt].NewsTypeCode;
         var NewsType = News_Details.G_Codes.filter(function (x) { return x.CodeValue == TypeCode; });

@@ -20,5 +20,6 @@ namespace Inv.DAL.Domain
         public string Remarks { get; set; }
         public Nullable<bool> IsAvailable { get; set; }
         public Nullable<bool> IsShowable { get; set; }
+        public Nullable<int> RoleType { get; set; }
     }
 }

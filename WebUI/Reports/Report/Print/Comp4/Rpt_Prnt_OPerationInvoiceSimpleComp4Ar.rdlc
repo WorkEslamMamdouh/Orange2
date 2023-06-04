@@ -6,34 +6,34 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.1785cm</Width>
+              <Width>2.17215cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.64191cm</Width>
+              <Width>1.63556cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.23142cm</Width>
+              <Width>2.22507cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.05586cm</Width>
+              <Width>2.04951cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.79671cm</Width>
+              <Width>1.79036cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.99588cm</Width>
+              <Width>0.98953cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.78629cm</Width>
+              <Width>4.77994cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88578cm</Width>
+              <Width>1.87943cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.75123cm</Width>
+              <Width>1.74488cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.63998cm</Width>
+              <Width>0.63363cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -895,9 +895,9 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rpt_Prnt_OPerationInvoiceSimpleComp4Ar</DataSetName>
         <Top>3.64537cm</Top>
-        <Left>0.06342in</Left>
+        <Left>0.02592in</Left>
         <Height>1.64979cm</Height>
-        <Width>19.96356cm</Width>
+        <Width>19.90006cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -925,7 +925,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>7.96013cm</Top>
-        <Left>18.64489cm</Left>
+        <Left>18.32739cm</Left>
         <Height>0.6cm</Height>
         <Width>1.46686cm</Width>
         <ZIndex>1</ZIndex>
@@ -957,7 +957,7 @@
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
         <Top>7.96013cm</Top>
-        <Left>0.66358cm</Left>
+        <Left>0.34608cm</Left>
         <Height>0.6cm</Height>
         <Width>17.945cm</Width>
         <ZIndex>2</ZIndex>
@@ -1441,7 +1441,7 @@
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_OPerationInvoiceSimpleComp4Ar</DataSetName>
         <Top>5.38848cm</Top>
-        <Left>0.26125in</Left>
+        <Left>0.13625in</Left>
         <Height>2.4cm</Height>
         <Width>19.44819cm</Width>
         <ZIndex>3</ZIndex>
@@ -1472,7 +1472,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>1.40329cm</Top>
-        <Left>18.30596cm</Left>
+        <Left>18.14721cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80579cm</Width>
         <ZIndex>4</ZIndex>
@@ -1507,7 +1507,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>2.1444cm</Top>
-        <Left>18.30596cm</Left>
+        <Left>18.14721cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80579cm</Width>
         <ZIndex>5</ZIndex>
@@ -1541,7 +1541,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>2.85376cm</Top>
-        <Left>18.24232cm</Left>
+        <Left>18.08357cm</Left>
         <Height>0.6cm</Height>
         <Width>1.86943cm</Width>
         <ZIndex>6</ZIndex>
@@ -1575,7 +1575,7 @@
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
         <Top>1.40329cm</Top>
-        <Left>11.61237cm</Left>
+        <Left>11.45362cm</Left>
         <Height>0.6cm</Height>
         <Width>6.68728cm</Width>
         <ZIndex>7</ZIndex>
@@ -1610,7 +1610,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>1.40329cm</Top>
-        <Left>9.29023cm</Left>
+        <Left>9.13148cm</Left>
         <Height>0.6cm</Height>
         <Width>2.2163cm</Width>
         <ZIndex>8</ZIndex>
@@ -1644,7 +1644,7 @@
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>1.40329cm</Top>
-        <Left>6.44266cm</Left>
+        <Left>6.28391cm</Left>
         <Height>0.6cm</Height>
         <Width>2.84757cm</Width>
         <ZIndex>9</ZIndex>
@@ -1676,7 +1676,7 @@
         </Paragraphs>
         <rd:DefaultName>Cus_NameA</rd:DefaultName>
         <Top>2.1444cm</Top>
-        <Left>10.52674cm</Left>
+        <Left>10.36799cm</Left>
         <Height>0.6cm</Height>
         <Width>7.7729cm</Width>
         <ZIndex>10</ZIndex>
@@ -1708,7 +1708,7 @@
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
         <Top>2.85376cm</Top>
-        <Left>14.608cm</Left>
+        <Left>14.44925cm</Left>
         <Height>0.6cm</Height>
         <Width>3.59904cm</Width>
         <ZIndex>11</ZIndex>
@@ -1743,7 +1743,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrDate</rd:DefaultName>
         <Top>1.40329cm</Top>
-        <Left>4.45176cm</Left>
+        <Left>4.29301cm</Left>
         <Height>0.6cm</Height>
         <Width>1.9909cm</Width>
         <ZIndex>12</ZIndex>
@@ -1777,7 +1777,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>2.1444cm</Top>
-        <Left>8.42092cm</Left>
+        <Left>8.26217cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80576cm</Width>
         <ZIndex>13</ZIndex>
@@ -1809,7 +1809,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
         <Top>2.1444cm</Top>
-        <Left>4.45176cm</Left>
+        <Left>4.29301cm</Left>
         <Height>0.6cm</Height>
         <Width>3.96916cm</Width>
         <ZIndex>14</ZIndex>
@@ -2201,7 +2201,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>18.30596cm</Left>
+        <Left>18.14721cm</Left>
         <Height>0.6cm</Height>
         <Width>1.80579cm</Width>
         <ZIndex>26</ZIndex>
@@ -2235,7 +2235,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>15.80067cm</Left>
+        <Left>15.64192cm</Left>
         <Height>0.6cm</Height>
         <Width>2.46027cm</Width>
         <ZIndex>27</ZIndex>
@@ -2270,7 +2270,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>14.02592cm</Left>
+        <Left>13.86717cm</Left>
         <Height>0.6cm</Height>
         <Width>1.64701cm</Width>
         <ZIndex>28</ZIndex>
@@ -2304,7 +2304,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>11.54222cm</Left>
+        <Left>11.38347cm</Left>
         <Height>0.6cm</Height>
         <Width>2.48267cm</Width>
         <ZIndex>29</ZIndex>
@@ -2340,7 +2340,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>10.18977cm</Left>
+        <Left>10.03102cm</Left>
         <Height>0.63175cm</Height>
         <Width>1.17606cm</Width>
         <ZIndex>30</ZIndex>
@@ -2374,7 +2374,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
         <Top>0.73025cm</Top>
-        <Left>4.45176cm</Left>
+        <Left>4.29301cm</Left>
         <Height>0.6cm</Height>
         <Width>5.70273cm</Width>
         <ZIndex>31</ZIndex>
@@ -2424,7 +2424,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
         <Top>2.7444cm</Top>
-        <Left>4.45176cm</Left>
+        <Left>4.29301cm</Left>
         <Height>0.6cm</Height>
         <Width>2.69455cm</Width>
         <ZIndex>33</ZIndex>
@@ -2458,7 +2458,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>2.78673cm</Top>
-        <Left>7.28742cm</Left>
+        <Left>7.12867cm</Left>
         <Height>0.6cm</Height>
         <Width>1.77048cm</Width>
         <ZIndex>34</ZIndex>
@@ -2492,7 +2492,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>2.81496cm</Top>
-        <Left>12.73405cm</Left>
+        <Left>12.5753cm</Left>
         <Height>0.6cm</Height>
         <Width>1.86943cm</Width>
         <ZIndex>35</ZIndex>
@@ -2524,7 +2524,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         </Paragraphs>
         <rd:DefaultName>Slsm_DescA</rd:DefaultName>
         <Top>2.85023cm</Top>
-        <Left>9.29023cm</Left>
+        <Left>9.13148cm</Left>
         <Height>0.6cm</Height>
         <Width>3.44382cm</Width>
         <ZIndex>36</ZIndex>
@@ -2561,7 +2561,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.01735cm</Top>
         <Height>0.74111cm</Height>
-        <Width>20.0373cm</Width>
+        <Width>19.94205cm</Width>
         <ZIndex>37</ZIndex>
         <Style>
           <Border>
@@ -2577,7 +2577,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
     <Height>4.12968in</Height>
     <Style />
   </Body>
-  <Width>7.9231in</Width>
+  <Width>7.86059in</Width>
   <Page>
     <PageHeader>
       <Height>2.7512cm</Height>
@@ -2622,7 +2622,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
               <Top>0cm</Top>
-              <Left>12.02626cm</Left>
+              <Left>11.83576cm</Left>
               <Height>0.67938cm</Height>
               <Width>8.01104cm</Width>
               <ZIndex>1</ZIndex>
@@ -2889,7 +2889,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox41</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>17.82912cm</Left>
+              <Left>17.63862cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>9</ZIndex>
@@ -2924,7 +2924,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>17.82911cm</Left>
+              <Left>17.63861cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>10</ZIndex>
@@ -2959,7 +2959,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>2.1512cm</Top>
-              <Left>17.82911cm</Left>
+              <Left>17.63861cm</Left>
               <Height>0.6cm</Height>
               <Width>2.13428cm</Width>
               <ZIndex>11</ZIndex>
@@ -2994,7 +2994,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>0.79227cm</Top>
-              <Left>13.58174cm</Left>
+              <Left>13.39124cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>12</ZIndex>
@@ -3029,7 +3029,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>1.46282cm</Top>
-              <Left>13.58173cm</Left>
+              <Left>13.39123cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>13</ZIndex>
@@ -3064,7 +3064,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox42</rd:DefaultName>
               <Top>2.1512cm</Top>
-              <Left>13.58174cm</Left>
+              <Left>13.39124cm</Left>
               <Height>0.6cm</Height>
               <Width>4.2121cm</Width>
               <ZIndex>14</ZIndex>
@@ -3083,7 +3083,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <Top>0cm</Top>
           <Left>0cm</Left>
           <Height>2.7512cm</Height>
-          <Width>20.12467cm</Width>
+          <Width>19.8468cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -3123,9 +3123,9 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>0cm</Top>
-          <Left>0.0796cm</Left>
+          <Left>0.0161cm</Left>
           <Height>0.6cm</Height>
-          <Width>19.96547cm</Width>
+          <Width>18.79072cm</Width>
           <Style>
             <Border>
               <Style>None</Style>

@@ -2386,4 +2386,19 @@
   <data name="Zero_stock" xml:space="preserve">
     <value>رصيد صفري</value>
   </data>
+  <data name="FailedOpr" xml:space="preserve">
+    <value>عملية فاشلة</value>
+  </data>
+  <data name="SuccessOpr" xml:space="preserve">
+    <value>عملية ناجحة</value>
+  </data>
+  <data name="UpgOnYear" xml:space="preserve">
+    <value>التعديلات علي السنه</value>
+  </data>
+  <data name="FromTime" xml:space="preserve">
+    <value>من وقت</value>
+  </data>
+  <data name="ToTime" xml:space="preserve">
+    <value>الي وقت</value>
+  </data>
 </root>

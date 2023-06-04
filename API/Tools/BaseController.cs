@@ -9,6 +9,7 @@ using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Web;
@@ -243,7 +244,42 @@ namespace Inv.API.Tools
             object objResult = (object)obj;
             T result = JsonConvert.DeserializeObject<T>(objResult.ToString(), settings);
             return result;
+        } 
+
+        public object GetObjectClass(string jsonData, string NameClass)
+        {
+            Type type = AppDomain.CurrentDomain.GetAssemblies()
+                     .SelectMany(x => x.GetTypes())
+                     .FirstOrDefault(x => x.Name == "" + NameClass + "");
+
+            object NewObj = JsonConvert.DeserializeObject("{}", type,
+            new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Objects });
+
+            var genericListType = typeof(List<>).MakeGenericType(new[] { NewObj.GetType() });
+
+            object ObjClass = JsonConvert.DeserializeObject(jsonData, genericListType);
+
+            return ObjClass;
         }
+        public object Get_Model(string query, string NameClass)
+        {
+            Type type = AppDomain.CurrentDomain.GetAssemblies()
+                   .SelectMany(x => x.GetTypes())
+                   .FirstOrDefault(x => x.Name == "" + NameClass + "");
+
+            if (type == null)
+            {
+                List<object> NewObjClass = new List<object>();
+                return NewObjClass;
+            }
+
+            var res = db.Database.SqlQuery(type, query);
+            string DataJson = JsonConvert.SerializeObject(res, Formatting.None);
+
+            return GetObjectClass(DataJson, NameClass);
+
+        }
+
 
         //public DateTime GetCurrentDate(int comcode)
         //{

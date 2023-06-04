@@ -195,13 +195,11 @@ namespace RS.WebUI.Reports.Forms
 
 
             reportViewer1.LocalReport.DataSources.Clear();
-            foreach (var model in models)
-            {
-                ReportDataSource source = new ReportDataSource(reportName, model);
 
-                reportViewer1.LocalReport.DataSources.Add(source);
-
-            }
+            string[] broken_str = reportName.Split('/');
+            ReportDataSource source = new ReportDataSource(broken_str[broken_str.Length - 1], models[0]);
+            reportViewer1.LocalReport.DataSources.Add(source);
+             
 
 
             if (OutputTypeNo == 1)
@@ -724,6 +722,69 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
+
+
+        //IProc_Prnt_AccReceive
+        public IEnumerable<AProc_Rep_LnkVoucherList_Result> Rep_LnkVoucherList()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+
+            int Type = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", Type);
+             
+            string SystemCode = RepPar.SystemCode;
+            SqlParameter spSys = new SqlParameter("@Sys", SystemCode);
+             
+            string TrTypeSt = RepPar.TrTypeSt;
+            SqlParameter spTrType = new SqlParameter("@TRType", TrTypeSt);
+            
+            string dateForm = RepPar.FromDate.ToString();
+            SqlParameter spformDate = new SqlParameter("@FromDate", dateForm);
+
+            string dateTo = RepPar.ToDate.ToString();
+            SqlParameter sptoDate = new SqlParameter("@ToDate", dateTo);
+
+            int fromNum = int.Parse(RepPar.fromNum.ToString());
+            SqlParameter spfromNum = new SqlParameter("@Fromno", fromNum);
+
+            int ToNum = int.Parse(RepPar.ToNum.ToString());
+            SqlParameter spToNum = new SqlParameter("@ToNo", ToNum);
+
+            int IsGenerated = int.Parse(RepPar.IsGenerated.ToString()); 
+            SqlParameter spIsGenerated = new SqlParameter("@IsGenerated", IsGenerated == -1 ? System.Data.SqlTypes.SqlInt32.Null : IsGenerated);
+
+
+            Rep = OpenReport("Rep_LnkVoucherList");
+
+
+            string _Query = "execute " + Rep.dataSource +
+           " @comp = '" + StandPar.spComCode.Value + "'" +
+           ", @bra = '" + StandPar.spbra.Value + "'" +
+           ", @CompNameA = '" + StandPar.spComNameA.Value + "'" +
+           ", @CompNameE = '" + StandPar.spComNameE.Value + "'" +
+           ", @BraNameA = '" + StandPar.spBraNameA.Value + "'" +
+           ", @BraNameE = '" + StandPar.braNameE.Value + "'" +
+           ", @LoginUser = '" + StandPar.spLoginUser.Value + "'" +
+           ", @RepType = " + spRepType.Value +
+           ", @User = '" + StandPar.spLoginUser.Value + "'" +
+           ", @Sys = '" + spSys.Value + "'" +
+           ", @TRType= '" + spTrType.Value + "'" +
+           ", @FromDate = '" + spformDate.Value + "'" +
+           ", @ToDate = '" + sptoDate.Value + "'" +
+           ", @Fromno = " + spfromNum.Value +
+           ", @ToNo = " + spToNum.Value+
+            ", @IsGenerated = " + spIsGenerated.Value;
+
+
+            var query = db.Database.SqlQuery<AProc_Rep_LnkVoucherList_Result>(_Query).ToList();
+             
+            ReportsDetails();
+            BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+
 
         //R_Rpt_AccAdjustList
         public IEnumerable<IProc_Rep_AccAdjustList_Result> R_Rpt_AccAdjustList()
@@ -6052,7 +6113,92 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName, Type, Rep.OutputType, ReportsDetail, query);
             return query;
         }
+        public IEnumerable<GProc_Rep_UserActivityLog_Result> Rep_UserActivityLog()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+             
+      
+            int Typ = RepPar.Typ;
+            SqlParameter spTyp = new SqlParameter("@GrpType", Typ);
 
+            string FromDate = RepPar.FromDate;
+            SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
+
+            string ToDate = RepPar.ToDate;
+            SqlParameter spToDate = new SqlParameter("@ToDate", ToDate);
+
+            string FromTime = RepPar.FromTime;
+            SqlParameter spFromTime = new SqlParameter("@FromTime", FromTime);
+
+            string ToTime = RepPar.ToTime;
+            SqlParameter spToTime = new SqlParameter("@ToTime", ToTime);
+
+            int FinYear =RepPar.FinYear;
+            SqlParameter spFinYear = new SqlParameter("@FinYear", FinYear == -1 ? System.Data.SqlTypes.SqlInt32.Null : FinYear);
+
+            string SysCode = RepPar.SysCode;
+            SqlParameter spSysCode = new SqlParameter("@sys", SysCode == "-1" ? null : SysCode);
+
+            string Module = RepPar.Module;
+            SqlParameter spModule = new SqlParameter("@module", Module == "-1" ? null : Module);
+
+            string UserCode = RepPar.User_Code;
+            SqlParameter spUserCode = new SqlParameter("@usr", UserCode == "-1" ? null : UserCode);
+
+            int OprStatus = RepPar.OprStatus;
+            SqlParameter spOprStatus = new SqlParameter("@OpStatus", OprStatus == -1 ? System.Data.SqlTypes.SqlInt32.Null : OprStatus);
+             
+            int OperationId = RepPar.OperationId;
+            SqlParameter spOperationId = new SqlParameter("@opid", OperationId == -1 ? System.Data.SqlTypes.SqlInt32.Null : OperationId);
+
+            if (Typ == 1)
+            {
+
+            Rep = OpenReport("Rep_UserActivityLogByUser");
+            }else if (Typ == 2)
+            {
+                Rep = OpenReport("Rep_UserActivityLogByTitle");
+
+            }
+            else
+            {
+                Rep = OpenReport("Rep_UserActivityLogByDate");
+
+            }
+
+
+            int RepType = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", RepType);
+
+            string _Query = "execute " + Rep.dataSource +
+           "   @comp = '" + StandPar.spComCode.Value +
+           "', @bra = '" + StandPar.spbra.Value+
+           "', @CompNameA = '" + StandPar.spComNameA.Value +
+           "', @CompNameE = '" + StandPar.spComNameE.Value +
+           "', @BraNameA = '" + StandPar.spBraNameA.Value +
+           "', @BraNameE = '" + StandPar.braNameE.Value +
+           "', @LoginUser = '" + StandPar.spLoginUser.Value + 
+           "', @RepType= " + spRepType.Value +
+           ",  @GrpType= " + spTyp.Value +
+           ",  @FromDate = '" + spFromDate.Value +
+           "', @ToDate = '" + spToDate.Value +
+           "', @FromTime='" + spFromTime.Value +
+           "', @ToTime= '" + spToTime.Value +
+           "', @finYear= " + spFinYear.Value +
+           ",  @sys = '" + spSysCode.Value +
+           "', @module= '" + spModule.Value +
+           "', @usr= '" + spUserCode.Value +
+           "', @OpStatus= " + spOprStatus.Value +
+           ",  @opid= " + spOperationId.Value;
+
+
+    List <GProc_Rep_UserActivityLog_Result> query = db.Database.SqlQuery<GProc_Rep_UserActivityLog_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName,RepType, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
     }
 
 }

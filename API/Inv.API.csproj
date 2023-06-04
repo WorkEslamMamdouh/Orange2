@@ -15,12 +15,15 @@
     <AssemblyName>Inv.API</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
-    <IISExpressSSLPort>44322</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -77,8 +80,9 @@
     <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
-    <Reference Include="Security">
-      <HintPath>..\packages\Security\Security.dll</HintPath>
+    <Reference Include="Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
@@ -327,6 +331,8 @@
     <Compile Include="Models\CustomModel\Account_CCDT_CCDTTP_MasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQPurInvoiceRetMasterDetails.cs" />
     <Compile Include="Models\CustomModel\AQ_GetCashVoucherHeaderWithDetail.cs" />
+    <Compile Include="Models\CustomModel\FilterLnkVoucher.cs" />
+    <Compile Include="Models\CustomModel\LnkVoucherlMasterDetails.cs" />
     <Compile Include="Models\CustomModel\NewsDetails.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SessionManager.cs" />
@@ -351,6 +357,8 @@
     <Compile Include="Models\CustomModel\DashBalances.cs" />
     <Compile Include="Models\CustomModel\StockOpenMasterDetails.cs" />
     <Compile Include="Models\CustomModel\SystemClass.cs" />
+    <Compile Include="Models\CustomModel\Table.cs" />
+    <Compile Include="Models\CustomModel\Table_Result.cs" />
     <Compile Include="Models\CustomModel\VendorMasterDetail.cs" />
     <Compile Include="Models\CustomModel\ListOperationDepositDetail.cs" />
     <Compile Include="Models\CustomModel\OPerationSalesmanTransferWithDetail.cs" />

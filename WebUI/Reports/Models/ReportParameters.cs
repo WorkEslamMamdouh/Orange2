@@ -233,6 +233,7 @@ namespace Inv.WebUI.Reports.Models
         public string DbName { get; set; }
         public string FromDate { get; set; }
         public string FromDt { get; set; }
+        public string TrTypeSt { get; set; }
         public string ToDate { get; set; }
         public int BoxId { get; set; }
         public string BankCode { get; set; }
@@ -278,6 +279,7 @@ namespace Inv.WebUI.Reports.Models
         public string cc_code { get; set; }
         public int exzero { get; set; }
         public int IsAuthVchr { get; set; }
+        public int IsGenerated { get; set; }
         public int IsNewVchr { get; set; }
         public int Level { get; set; }
         public string AccCode { get; set; }
@@ -328,6 +330,12 @@ namespace Inv.WebUI.Reports.Models
 
         public int orderby { get; set; }
         public int IssueTypeID { get; set; }
+        public string User_Code { get; set; }
+        public string Module { get; set; }
+        public string FromTime { get; set; }
+        public string ToTime { get; set; }
+        public int OprStatus { get; set; }
+
     }
 
 }

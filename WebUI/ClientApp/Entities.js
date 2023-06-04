@@ -729,6 +729,21 @@ var A_D_VAT_TYPE = /** @class */ (function (_super) {
     }
     return A_D_VAT_TYPE;
 }(SecurityClass));
+var A_G_Vendor = /** @class */ (function (_super) {
+    __extends(A_G_Vendor, _super);
+    function A_G_Vendor() {
+        var _this = _super.call(this) || this;
+        _this.VendorID = 0;
+        _this.VendorCode = "";
+        _this.TypeId = 0;
+        _this.NAMEA = "";
+        _this.NAMEL = "";
+        _this.VATType = 0;
+        _this.VATNo = "";
+        return _this;
+    }
+    return A_G_Vendor;
+}(SecurityClass));
 var I_D_Category = /** @class */ (function (_super) {
     __extends(I_D_Category, _super);
     function I_D_Category() {
@@ -1088,6 +1103,19 @@ var Custom_Items = /** @class */ (function () {
         this.ItemDesc = "";
     }
     return Custom_Items;
+}());
+var FilterLnkVoucher = /** @class */ (function () {
+    function FilterLnkVoucher() {
+        this.Comp = 0;
+        this.branchCode = 0;
+        this.FromNum = 0;
+        this.ToNum = 0;
+        this.TrType = "";
+        this.StartDate = "";
+        this.EndDate = "";
+        this.UserCode = "";
+    }
+    return FilterLnkVoucher;
 }());
 var I_ItemStore = /** @class */ (function () {
     function I_ItemStore() {
@@ -1782,6 +1810,23 @@ var A_RecPay_Tr_ReceiptNote = /** @class */ (function (_super) {
         _this.IsDeffered = false;
         _this.DueDate = "";
         _this.CashType = 0;
+        _this.Charges = 0;
+        _this.ChargeInvoiceNo = "";
+        _this.ChargeProviderID = 0;
+        _this.ChargesVat = 0;
+        _this.ChargeWithVat = 0;
+        _this.ChargeVatType = 0;
+        _this.ChargesVatPrc = 0;
+        _this.ProviderID = 0;
+        _this.ProviderName = "";
+        _this.ProviderVatNo = "";
+        _this.ProviderVatType = 0;
+        _this.ProviderVatPrc = 0;
+        _this.ProviderVatAmount = 0;
+        _this.ProviderInvoiceNo = "";
+        _this.ProviderIndDate = "";
+        _this.ProviderAmountBeforeVat = 0;
+        _this.CC_Code = "";
         return _this;
     }
     return A_RecPay_Tr_ReceiptNote;
@@ -1972,7 +2017,28 @@ var IQ_GetBoxReceiveList = /** @class */ (function (_super) {
         _this.CashType = 0;
         _this.Bnk_acc_DescE = "";
         _this.ACC_DESCL = "";
-        _this.Status_New = "";
+        _this.Charges = 0;
+        _this.ChargeProviderID = 0;
+        _this.ChargesVat = 0;
+        _this.ChargeWithVat = 0;
+        _this.ChargeVatType = 0;
+        _this.ChargesVatPrc = 0;
+        _this.ProviderName = "";
+        _this.ProviderID = 0;
+        _this.ProviderVatNo = "";
+        _this.ProviderVatType = 0;
+        _this.ProviderVatPrc = 0;
+        _this.ProviderVatAmount = 0;
+        _this.ProviderInvoiceNo = "";
+        _this.ProviderIndDate = "";
+        _this.ProviderAmountBeforeVat = 0;
+        _this.CC_Code = "";
+        _this.ChrgPrv_NameA = "";
+        _this.Chrgprv_NameE = "";
+        _this.Prov_Code = "";
+        _this.Prov_NameA = "";
+        _this.Prov_NameE = "";
+        _this.ChargeInvoiceNo = "";
         return _this;
     }
     return IQ_GetBoxReceiveList;
@@ -2308,6 +2374,7 @@ var I_Sls_TR_Invoice = /** @class */ (function (_super) {
         _this.Remark = "";
         _this.Status = 0;
         _this.IsPosted = false;
+        _this.ISCostPosted = false;
         _this.VoucherNo = 0;
         _this.VoucherType = 0;
         _this.CreatedAt = "";
@@ -2461,6 +2528,7 @@ var IQ_GetSlsInvoiceStatisticVer2 = /** @class */ (function () {
         this.Remark = "";
         this.Status = 0;
         this.IsPosted = false;
+        this.ISCostPosted = false;
         this.VoucherNo = 0;
         this.VoucherType = 0;
         this.CreatedAt = "";
@@ -3527,6 +3595,16 @@ var JournalMasterDetails = /** @class */ (function (_super) {
     }
     return JournalMasterDetails;
 }(SecurityClass));
+var LnkVoucherlMasterDetails = /** @class */ (function (_super) {
+    __extends(LnkVoucherlMasterDetails, _super);
+    function LnkVoucherlMasterDetails() {
+        var _this = _super.call(this) || this;
+        _this.FilterLnkVoucher = new FilterLnkVoucher();
+        _this.A_LnkVoucher = new Array();
+        return _this;
+    }
+    return LnkVoucherlMasterDetails;
+}(SecurityClass));
 var AQ_GetJournalHeaderWithDetail = /** @class */ (function (_super) {
     __extends(AQ_GetJournalHeaderWithDetail, _super);
     function AQ_GetJournalHeaderWithDetail() {
@@ -3564,6 +3642,7 @@ var A_JOURNAL_DETAIL = /** @class */ (function (_super) {
         _this.DEBIT_FC = 0;
         _this.CREDIT_FC = 0;
         _this.StatusFlag = "";
+        _this.FlagUpdate = "";
         return _this;
     }
     return A_JOURNAL_DETAIL;
@@ -6683,5 +6762,100 @@ var IQ_GetCollectList = /** @class */ (function () {
         this.Typ_DescE = "";
     }
     return IQ_GetCollectList;
+}());
+var AProc_LnkGenerateTrans_Result = /** @class */ (function () {
+    function AProc_LnkGenerateTrans_Result() {
+        this.TRID = 0;
+        this.TR_CODE = '';
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = '';
+        this.SUB_SYSTEM_CODE = "";
+        this.VOUCHER_CODE = 0;
+        this.VOUCHER_TYPE = 0;
+        this.VOUCHER_SOURCE_TYPE = '';
+        this.TR_NO = 0;
+        this.TR_TYPE = '';
+        this.TR_DATE = '';
+        this.TR_AMOUNT = 0;
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.TR_USER_CODE = "";
+        this.VOUCHER_DESCA = "";
+        this.VOUCHER_DESCE = "";
+        this.IsPosted = false;
+    }
+    return AProc_LnkGenerateTrans_Result;
+}());
+var AQ_GetLnkVoucher = /** @class */ (function () {
+    function AQ_GetLnkVoucher() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = '';
+        this.Tr_Code = '';
+        this.TrID = 0;
+        this.TrNo = 0;
+        this.Serial = 0;
+        this.Acc_Code = '';
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.ACC_DESCA = "";
+        this.ACC_DESCL = "";
+        this.CC_DESCA = "";
+        this.CC_DESCE = "";
+        this.TR_DESCA = "";
+        this.TR_DESCE = "";
+        this.Src_DescA = "";
+        this.Src_DescE = "";
+        this.TYPE_DESCA = "";
+        this.TYPE_DESCE = "";
+        this.TrDate = "";
+        this.StatusFlag = "";
+    }
+    return AQ_GetLnkVoucher;
+}());
+var A_LnkVoucher = /** @class */ (function () {
+    function A_LnkVoucher() {
+        this.ID = 0;
+        this.CompCode = 0;
+        this.bracode = 0;
+        this.System_Code = '';
+        this.Tr_Code = '';
+        this.TrDate = "";
+        this.TrID = 0;
+        this.TrNo = 0;
+        this.Serial = 0;
+        this.Acc_Code = "";
+        this.Debit = 0;
+        this.Credit = 0;
+        this.CC_Code = "";
+        this.Line_DescA = "";
+        this.Line_DescE = "";
+        this.Voucher_No = 0;
+        this.SOURCE_TYPE = 0;
+        this.TYPE_CODE = 0;
+        this.StatusFlag = "";
+    }
+    return A_LnkVoucher;
+}());
+var Table = /** @class */ (function () {
+    function Table() {
+        this.NameTable = "";
+        this.Condition = "";
+    }
+    return Table;
+}());
+var Table_Result = /** @class */ (function () {
+    function Table_Result() {
+        this.Table_Res = new Array();
+    }
+    return Table_Result;
 }());
 //# sourceMappingURL=Entities.js.map

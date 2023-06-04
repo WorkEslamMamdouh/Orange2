@@ -392,12 +392,12 @@ function GetSystemSession(Mod: string): SystemSession {
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
                 data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode, SystemCode: SystemCode, Modulecode: Mod },
-                success: (d) => {
-
+				success: (d) => {
+					debugger
                     let result = JSON.parse(d) as UserPrivilege;
 
-                    if (result == null || result.Access != true) {
-                        MessageBox.Show("Access denied", Mod);
+					if (result == null || result.Access != true) {
+						alert("Access denied  ( " + Mod+" )");
                         return;
                     }
                     if (result.Access == true) {
@@ -421,11 +421,14 @@ function GetSystemSession(Mod: string): SystemSession {
                         if (!result.EDIT) {
                             $('#btnUpdate').addClass('hidden_Control');
                         }
-
+                        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
                     }
                     else {
-                        MessageBox.Show("No Inv1_Privilage", Mod);
+ 
+						alert("No Inv1_Privilage  ( " + Mod + " )");
                     }
+                    
+                    
                 }
             });
         }

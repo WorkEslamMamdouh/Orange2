@@ -29502,6 +29502,11 @@ div.tagsinput {
     justify-content: center;
     width:100%;
 }
+.btn-minusNew {
+    transition: all 0.2s ease-in-out;
+    color: var(--bs-gray);
+    font-size: 1.4rem !important;
+}
 .btn-minus,
 .btn-minus-CCDt,
 .btn-plus,
@@ -30486,4 +30491,24 @@ input[class=checkbox]:checked:before {
     font-size: .9rem;
 }
 
+/*div-label*/
+.div-label {
+    background-color: var(--dark-blue);
+    color: #fff;
+    padding: 0.25rem;
+    font-size: .9rem;
+    text-align: center;
+    width: 20%;
+    border-top-left-radius: 17rem;
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+}
 
+.table-label.margin-label {
+    margin-right: 2rem;
+}
+.div-border {
+    border: 2px solid var(--dark-blue);
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    
+}

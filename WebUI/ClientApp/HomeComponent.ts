@@ -11,7 +11,7 @@ $(document).ready(() => {
 
 namespace HomeComponent {
     //let res: any = GetResourceList("");d
-    debugger
+    
     var sys: SystemTools = new SystemTools();
     var ddbra: HTMLSelectElement;
     ddbra = document.getElementById("ddbra") as HTMLSelectElement;
@@ -26,7 +26,7 @@ namespace HomeComponent {
     var newtap = false;
 
     G_BRANCHService = GetSystemG_BRANCH();
-    debugger
+    
     $('Li').addClass('animate__animated animate__fadeInTopRight');
     $('#logOrg').addClass('animate__animated animate__backInDown');
     //$('#PageLodes').addClass('animate__animated animate__bounceInUp');
@@ -310,8 +310,14 @@ namespace HomeComponent {
         if (isNews == 'false') {
             Show_News();
         }
-        $('#btnNews').click(function (e) { Show_News(); });
+        $('#btnNews').click(function (e) {
+            Show_News(); $("#News_Model").modal("show");
+            localStorage.setItem("Show_News", 'true');});
 
+        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
+        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
+        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
+        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4) });
 
 
     }
@@ -680,6 +686,7 @@ namespace HomeComponent {
         $("#btnIssueType").click(() => { newtap = false; OpenPage(Modules.IssueType); })//
         $("#btnIssueToCC").click(() => { newtap = false; OpenPage(Modules.IssueToCC); })// 
         $("#btnGLDefAccount").click(() => { newtap = false; OpenPage(Modules.GLDefAccount); })//
+        $("#btnLnkVoucher").click(() => { newtap = false; OpenPage(Modules.LnkVoucher); })
         $("#btnJournalVoucher").click(() => { newtap = false; OpenPage(Modules.JournalVoucher); })
         $("#btnReceiptVoucher").click(() => { newtap = false; OpenPage(Modules.ReceiptVoucher); })
         $("#btnPaymentVoucher").click(() => { newtap = false; OpenPage(Modules.PaymentVoucher); })
@@ -689,6 +696,7 @@ namespace HomeComponent {
         $("#btnAccountbalances").click(() => { newtap = false; OpenPage(Modules.Accountbalances); })// 
         $("#btnfinancialreports").click(() => { newtap = false; OpenPage(Modules.financialreports); })//
         $("#btnUSERS").click(() => { newtap = false; OpenPage(Modules.USERS); })//
+		$("#btnUserActLog").click(() => { newtap = false; OpenPage(Modules.UserActLog); })//
         $("#btnTranPosting").click(() => { newtap = false; OpenPage(Modules.TranPosting); })//
         $("#btnLnkvarBranch").click(() => { newtap = false; OpenPage(Modules.LnkvarBranch); })//
         $("#btnLnkTransVoucher").click(() => { newtap = false; OpenPage(Modules.LnkTransVoucher); })// 
@@ -783,6 +791,7 @@ namespace HomeComponent {
         $("#btnIssueTypeT").click(() => { newtap = true; OpenPage(Modules.IssueType); })//
         $("#btnIssueToCCT").click(() => { newtap = true; OpenPage(Modules.IssueToCC); })// 
         $("#btnGLDefAccountT").click(() => { newtap = true; OpenPage(Modules.GLDefAccount); })//
+        $("#btnLnkVoucherT").click(() => { newtap = true; OpenPage(Modules.LnkVoucher); })
         $("#btnJournalVoucherT").click(() => { newtap = true; OpenPage(Modules.JournalVoucher); })
         $("#btnReceiptVoucherT").click(() => { newtap = true; OpenPage(Modules.ReceiptVoucher); })
         $("#btnPaymentVoucherT").click(() => { newtap = true; OpenPage(Modules.PaymentVoucher); })
@@ -792,6 +801,7 @@ namespace HomeComponent {
         $("#btnAccountbalancesT").click(() => { newtap = true; OpenPage(Modules.Accountbalances); })// 
         $("#btnfinancialreportsT").click(() => { newtap = true; OpenPage(Modules.financialreports); })//
         $("#btnUSERST").click(() => { newtap = true; OpenPage(Modules.USERS); })//
+		$("#btnUserActLogT").click(() => { newtap = true; OpenPage(Modules.UserActLog); })//
         $("#btnTranPostingT").click(() => { newtap = true; OpenPage(Modules.TranPosting); })//
         $("#btnLnkvarBranchT").click(() => { newtap = true; OpenPage(Modules.LnkvarBranch); })//
         $("#btnLnkTransVoucherT").click(() => { newtap = true; OpenPage(Modules.LnkTransVoucher); })// 
@@ -974,16 +984,16 @@ namespace HomeComponent {
     }
 
     function Show_News() {
-        debugger
-
+        
+        $("#Div_News").html('<label class="Not_Found"> ...There is no news at this time</label>');
         $("#Div_History").html('');
-        $("#Div_News").html('');
+
 
         $('.history-icon').attr('style', '');
         $('.down-arrow').addClass('display_none');
         $('.modal-History').addClass('display_none');
 
-        let DateNow = DateFormatRep(GetDate());
+        let DateNow = GetDateAndTime();
 
         Ajax.Callsync({
             type: "Get",
@@ -994,21 +1004,17 @@ namespace HomeComponent {
                 if (result.IsSuccess) {
                     News_Details = result.Response as NewsDetails;
                     if (News_Details.G_News.length > 0) {
-
+                        $("#Div_News").html('');
                         for (var i = 0; i < News_Details.G_News.length; i++) {
                             BuildNews(i, false);
                         }
 
-
-                        $('#success').click(function (e) { SetActiv_History('success', '#264051b3', 1) });
-                        $('#info').click(function (e) { SetActiv_History('info', '#264051b3', 2) });
-                        $('#warning').click(function (e) { SetActiv_History('warning', '#264051b3', 3) });
-                        $('#error').click(function (e) { SetActiv_History('error', '#264051b3', 4) });
-
-
                         $("#News_Model").modal("show");
                         localStorage.setItem("Show_News", 'true');
+                       
                     }
+
+                     
 
                 }
             }
@@ -1066,7 +1072,7 @@ namespace HomeComponent {
 
     function BuildNews(cnt: number, IsHistory: boolean) {
 
-        debugger
+        
 
         let class_News = GetClass(cnt);
 
@@ -1096,7 +1102,7 @@ namespace HomeComponent {
 
     function GetClass(cnt: number): Style_New {
 
-        debugger
+        
         let StyleNew: Style_New = new Style_New();
 
         let TypeCode = News_Details.G_News[cnt].NewsTypeCode;

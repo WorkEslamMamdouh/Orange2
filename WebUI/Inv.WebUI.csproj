@@ -94,19 +94,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>bin\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <HintPath>bin\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.2.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <HintPath>bin\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\SafePack\SafePack\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <HintPath>bin\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -1580,6 +1580,9 @@
     <Content Include="Views\Processes\OperationRepScrapIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrReceiptNoteNewIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrPaymentNoteNewIndex.cshtml" />
+    <Content Include="Views\AdminSetting\AdminRoleBranchIndex.cshtml" />
+    <Content Include="Views\Tools\USERS\UserActLogIndex.cshtml" />
+    <Content Include="Views\GeneralLedgerMenu\LnkVoucherIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1619,6 +1622,7 @@
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefSalesmen.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\AccDefVendor.ts" />
     <TypeScriptCompile Include="ClientApp\AccDefinition\DefStore.ts" />
+    <TypeScriptCompile Include="ClientApp\Admin\AdminRoleBranch.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminCloseComp.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminCompData.ts" />
     <TypeScriptCompile Include="ClientApp\Admin\AdminComp.ts" />
@@ -1634,6 +1638,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Incomeoperations.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrPaymentNoteNew.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrReceiptNoteNew.ts" />
+    <TypeScriptCompile Include="ClientApp\GeneralLedger\LnkVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\STKOpeningbalance.ts" />
     <TypeScriptCompile Include="ClientApp\Dashboard\Dashboard.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationExport.ts" />
@@ -1715,6 +1720,7 @@
     <TypeScriptCompile Include="ClientApp\Tools\LnkTransVoucher\LnkTransVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\LnkvarBranch\LnkvarBranch.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\TranPosting\TranPosting.ts" />
+    <TypeScriptCompile Include="ClientApp\Tools\USERS\UserActLog.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\USERS\USERS.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\AccTrInvReceipt.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSales.ts" />
@@ -1770,7 +1776,9 @@
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoiceSimpleComp3En.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicestdComp3Ar.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Prnt_VATSlsInvoicestdComp3En.rdlc" />
-    <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentArComp3.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentArComp3.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccPaymentEnComp3.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccReceiveArComp3.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Comp3\Rpt_Prnt_AccReceiveEnComp3.rdlc" />
@@ -1971,6 +1979,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CashVoucherEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Print\Prnt_LnkVoucherAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_JournalVoucherEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_OerationTfEn.rdlc" />
@@ -2026,6 +2037,12 @@
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_VATSlsInvoiceSimpleEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Print\Prnt_CollectAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Comp4\Rep_OperationSummaryComp4Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Comp7\Rep_OperationSummaryComp7Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_CollectListEn.rdlc">
       <SubType>Designer</SubType>
@@ -2110,6 +2127,20 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rep_OperationSummaryAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByDateAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByDateEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankDetailAr.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2181,6 +2212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_ItemStockDetailEn.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_LnkVoucherListAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_OperationExportListAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_QutationListAr.rdlc">
       <SubType>Designer</SubType>

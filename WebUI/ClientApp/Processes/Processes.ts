@@ -988,7 +988,7 @@ namespace Processes {
         $('#txtDate').val(trDate);
 
         txt_tax.value = Selected_Data[0].VatType == 0 ? 'null' : Selected_Data[0].VatType.toString();
-        txtVatPrc.value = Selected_Data[0].VatPrc.toString();
+        txtVatPrc.value = setVal(Selected_Data[0].VatPrc.toString());
         txtVatAmount.value = Selected_Data[0].VatAmount.toString();
 
         $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
@@ -2116,7 +2116,7 @@ namespace Processes {
             }
         }
         if (CanAddCharge) {
-
+            debugger
 
 
             BuildControlsCharges(CountGridCharge);
@@ -2125,7 +2125,7 @@ namespace Processes {
             $("#btn_minus1" + CountGridCharge).removeAttr("disabled");
             $(".minusCharges").removeClass("display_none");
             CountGridCharge += 1;
-
+            debugger
             Insert_Serial();
             ComputeTotalsCharge();
         }
@@ -2154,14 +2154,7 @@ namespace Processes {
             $("#No_Row1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
 
-            var counter = 1;
-            for (let i = 0; i < CountGridCharge; i++) {//$("#txt_StatusFlag" + cnt).val() != "i"
-                var flagvalue = $("#txt_StatusFlag1" + i).val();
-                if (flagvalue != "d") {
-                    $("#txtSerial" + i).prop("value", counter);
-                    counter = counter + 1;
-                }
-            }
+        
 
             Insert_Serial();
             ComputeTotalsCharge();
@@ -2188,18 +2181,30 @@ namespace Processes {
         txtTotalVatCharge.value = TotalVatCharge.RoundToSt(2).toString();
         txtTotalAfterVatCharge.value = TotalAfterVatCharge.RoundToSt(2).toString();
     }
+   
     function Insert_Serial() {
 
+        let Chack_Flag = false;
+        let flagval = "";
         let Ser = 1;
         for (let i = 0; i < CountGridCharge; i++) {
-            var flagvalue = $("#txt_StatusFlag1" + i).val();
-            if (flagvalue != "d" && flagvalue != "m" && flagvalue != "" && flagvalue != null) {
+            flagval = $("#txt_StatusFlag1" + i).val();
+            if (flagval != "d" && flagval != "m") {
                 $("#txtSerial" + i).val(Ser);
                 Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true
+            }
+            if (Chack_Flag) {
+                if ($("#txt_StatusFlag1" + i).val() != 'i' && $("#txt_StatusFlag1" + i).val() != 'm' && $("#txt_StatusFlag1" + i).val() != 'd') {
+                    $("#txt_StatusFlag1" + i).val('u');
+                }
             }
         }
 
     }
+
 
     function _searchOerSalesmanMaste_Change() {
 
@@ -4464,6 +4469,8 @@ namespace Processes {
         Back();
 
         DisabledToolBar();
+        btnfinish.classList.add("display_none");
+
     }
 
     function Update_1_onclick() {
@@ -4600,7 +4607,7 @@ namespace Processes {
                 $('#txtDate').val(trDate);
 
                 txt_tax.value = Selected_Data[0].VatType == 0 ? 'null' : Selected_Data[0].VatType.toString();
-                txtVatPrc.value = Selected_Data[0].VatPrc.toString();
+                txtVatPrc.value = setVal(Selected_Data[0].VatPrc.toString());
                 txtVatAmount.value = Selected_Data[0].VatAmount.toString();
 
                 Status = Selected_Data[0].Status;
