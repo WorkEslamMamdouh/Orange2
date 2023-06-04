@@ -11696,6 +11696,7 @@ class GQ_GetUserRole extends SecurityClass {
         this.DescA = "";
         this.DescE = "";
         this.Remarks = "";
+        this.IsActiveDesc = "";
         this.RoleId = 0;
         this.IsAvailable = false;
         this.IsShowable = false;
@@ -11706,6 +11707,7 @@ class GQ_GetUserRole extends SecurityClass {
     public DescA: string;
     public DescE: string;
     public Remarks: string;
+    public IsActiveDesc: string;
     public RoleId: number;
     public IsAvailable: boolean;
     public IsShowable: boolean;
@@ -11718,6 +11720,7 @@ class G_Role extends SecurityClass {
         this.DescA = "";
         this.DescE = "";
         this.Remarks = "";
+        this.IsActiveDesc = "";
         this.IsAvailable = false;
         this.IsShowable = false;
         this.RoleType = 0;
@@ -11726,6 +11729,7 @@ class G_Role extends SecurityClass {
     public DescA: string;
     public DescE: string;
     public Remarks: string;
+    public IsActiveDesc: string;
     public IsAvailable: boolean;
     public IsShowable: boolean;
     public RoleType: number;
