@@ -39,8 +39,7 @@ namespace HomeComponent {
 
     export function OpenPage(moduleCode: string) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
-
-        // // ;
+				 
         let compCode = SysSession.CurrentEnvironment.CompCode;
         let branchCode = SysSession.CurrentEnvironment.BranchCode;
         let UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -538,7 +537,7 @@ namespace HomeComponent {
         let SystemCode = SysSession.CurrentEnvironment.SystemCode;
         let SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         let Modulecode = SysSession.CurrentEnvironment.ModuleCode;
-
+						debugger
         Ajax.Callsync({
             url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: moduleCode },

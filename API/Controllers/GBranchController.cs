@@ -80,5 +80,17 @@ namespace Inv.API.Controllers
             return Ok(new BaseResponse(AccDefAcc));
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult GetBranchModules(int CompCode, string UserCode, string Token)
+        {
+            if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
+            {
+                var GenVatTypeList = IGBRANCHService.GetAll(x => x.COMP_CODE == CompCode).ToList();
+
+                return Ok(new BaseResponse(GenVatTypeList));
+            }
+            return BadRequest(ModelState);
+        }
+
     }
 }

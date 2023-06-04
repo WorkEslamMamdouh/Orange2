@@ -1752,6 +1752,7 @@ namespace Inv.WebUI.Controllers
 
             rep.AddParameter("RepType", rp.RepType); 
             rep.AddParameter("Typ", rp.Typ); 
+            rep.AddParameter("braCode", rp.braCode); 
             rep.AddParameter("FromDate", rp.FromDate); 
             rep.AddParameter("ToDate", rp.ToDate); 
             rep.AddParameter("FromTime", rp.FromTime); 

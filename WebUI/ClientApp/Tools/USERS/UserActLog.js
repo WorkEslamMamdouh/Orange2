@@ -7,6 +7,7 @@ var UserActLog;
     var BranchCode;
     var sys = new SystemTools();
     var SysSession = GetSystemSession(Modules.UserActLog);
+    //var BranchModules: Array<GProc_GetBranchModules> = new Array<GProc_GetBranchModules>;
     /*----------------------------------------------------------------- Input Control------------------------------------------------------------------ */
     var Screen_name;
     var txtFromDate;
@@ -19,6 +20,7 @@ var UserActLog;
     var repDate;
     var drpUser;
     var drpTitle;
+    var drpBranch;
     var drpOpr;
     var drpFinYear;
     var drpstatus;
@@ -38,14 +40,15 @@ var UserActLog;
         $("#iconReportPages").removeClass("d-none");
         $("#btnPrintTrview").addClass("print-report");
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
-        BranchCode = Number(sys.SysSession.CurrentEnvironment.BranchCode);
+        BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Screen_name.innerHTML = lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report";
-        document.title = "Safe Student 1.0-" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");
+        document.title = "نظام اورانج" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");
         txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtToDate.value = DateFormat(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
         txtFromTime.value = "00:00:00";
         txtToTime.value = "23:59:00";
         GetData_Header_loader();
+        drpFinYear.value = SysSession.CurrentEnvironment.CurrentYear;
     }
     UserActLog.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -61,6 +64,7 @@ var UserActLog;
         repDate = document.getElementById("repDate");
         drpUser = document.getElementById("drpUser");
         drpTitle = document.getElementById("drpTitle");
+        drpBranch = document.getElementById("drpBranch");
         drpOpr = document.getElementById("drpOpr");
         drpFinYear = document.getElementById("drpFinYear");
         drpstatus = document.getElementById("drpstatus");
@@ -88,12 +92,28 @@ var UserActLog;
                 { NameTable: 'G_MODULES', Condition: "" },
                 { NameTable: 'G_Codes', Condition: "CodeType = 'UserLog'" },
                 { NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
+                { NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + compcode + "" },
             ];
         DataResult(Table);
         FillDropwithAttr(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"), "", "");
         FillDropwithAttr(GetDataTable('G_MODULES'), "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "SysCode", "SYSTEM_CODE");
         FillDropwithAttr(GetDataTable('G_Codes'), "drpOpr", "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-        FillDropwithAttr(GetDataTable('G_CONTROL'), "drpFinYear", "FIN_YEAR", "FIN_YEAR", (lang == "ar" ? "الجميع" : "All"), "", "");
+        FillDropwithAttr(GetDataTable('G_CONTROL'), "drpFinYear", "FIN_YEAR", "FIN_YEAR", "No", "", "");
+        FillDropwithAttr(GetDataTable('G_BRANCH'), "drpBranch", "BRA_CODE", "BRA_DESC", (lang == "ar" ? "الجميع" : "All"), "", "");
+    }
+    function GetBranchModules() {
+        var BraCode = drpBranch.value == "Null" ? -1 : Number(drpBranch.value);
+        Ajax.Callsync({
+            type: "Post",
+            url: sys.apiUrl("GBranch", "GetBranchModules"),
+            data: { CompCode: compcode, BranchCode: BraCode },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    //BranchModules = result.Response as Array<GProc_GetBranchModules>;
+                }
+            }
+        });
     }
     /*----------------------------------------------------------------- Rep Func------------------------------------------------------------------ */
     function PrintReport(OutType) {
@@ -117,6 +137,7 @@ var UserActLog;
         rp.BraNameE = BranchNameE;
         rp.LoginUser = SysSession.CurrentEnvironment.UserCode;
         rp.RepType = OutType;
+        rp.braCode = drpBranch.value == "Null" ? -1 : Number(drpBranch.value);
         //--------------------GroupType
         if (repUser.checked) {
             rp.Typ = 1;
