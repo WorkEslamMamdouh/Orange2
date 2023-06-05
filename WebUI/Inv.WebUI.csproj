@@ -258,6 +258,7 @@
     <Content Include="Newtemplate\template\assets\images\home\slider\4.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\5.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\new.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\wave.png" />
     <Content Include="Newtemplate\template\assets\images\logo.ico" />
     <Content Include="Newtemplate\template\assets\images\logo.png" />
     <Content Include="Newtemplate\template\assets\js\ace.js" />
@@ -1497,7 +1498,6 @@
     <Content Include="Views\Purchase\PurTrReceiveIndex.cshtml" />
     <Content Include="Views\Purchase\PurTrReturnIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrSalesManagerIndex.cshtml" />
-    <Content Include="Views\Sales\SlsTrReturnIndex.cshtml" />
     <Content Include="Views\Processes\Processesindex.cshtml" />
     <Content Include="Views\Processes\ProcSalesRetIndex.cshtml" />
     <Content Include="Views\Processes\ProcSalesInvoiceIndex.cshtml" />

@@ -208,10 +208,6 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/StkDefinition/StkDefItemsIndex.cshtml");
         }
-        public ActionResult StkDefItemsNewIndex()
-        {
-            return View("~/Views/StkDefinition/StkDefItemsNewIndex.cshtml");
-        }
         public ActionResult StkDefCategoryIndex()
         {
             return View("~/Views/StkDefinition/StkDefCategoryIndex.cshtml");
@@ -288,22 +284,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/GeneralDefinition/GendefVendorGroupIndex.cshtml");
         }
-        public ActionResult AccTrInvReceiptIndex()
-        {
-            return View("~/Views/FundMovement/AccTrInvReceiptIndex.cshtml");
-        }
 
-        public ActionResult AccTrReceiptNoteIndex()
-        {
-            return View("~/Views/FundMovement/AccTrReceiptNoteIndex.cshtml");
-        }
         public ActionResult AccTrReceiptNoteNewIndex()
         {
             return View("~/Views/FundMovement/AccTrReceiptNoteNewIndex.cshtml");
-        }
-        public ActionResult AccTrPaymentNoteIndex()
-        {
-            return View("~/Views/FundMovement/AccTrPaymentNoteIndex.cshtml");
         }
         public ActionResult AccTrPaymentNoteNewIndex()
         {
@@ -321,10 +305,6 @@ namespace Inv.WebUI.Controllers
         public ActionResult SlsTrSalesIndex()
         {
             return View("~/Views/Sales/SlsTrSalesIndex.cshtml");
-        }
-        public ActionResult SlsTrReturnIndex()
-        {
-            return View("~/Views/Sales/SlsTrReturnIndex.cshtml");
         }
 
         public ActionResult SlsTrReturnNewIndex()
@@ -347,11 +327,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Sales/SlsTrSalesOperationIndex.cshtml");
         }
-
-        public ActionResult SlsTrSalesManagerIndex()
-        {
-            return View("~/Views/Sales/SlsTrSalesManagerIndex.cshtml");
-        }
+        
         public ActionResult SlsTrShowPriceIndex()
         {
             return View("~/Views/Sales/SlsTrShowPriceIndex.cshtml");
@@ -369,12 +345,6 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Purchase/PurTrReturnIndex.cshtml");
         }
-        public ActionResult PurTrpaymemtIndex()
-        {
-            return View("~/Views/Purchase/PurTrpaymemtIndex.cshtml");
-        }
-
-
         public ActionResult Processesindex()
         {
             return View("~/Views/Processes/Processesindex.cshtml");
@@ -383,20 +353,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Processes/CloseProcessesindex.cshtml");
         }
-        public ActionResult SalesTransIndex()
-        {
-            return View("~/Views/Processes/SalesTransIndex.cshtml");
-        }
-        public ActionResult ProcSalesMgrIndex()
-        {
-            return View("~/Views/Processes/ProcSalesMgrIndex.cshtml");
-        }
-        //
-        public ActionResult ProcSalesRetIndex()
-        {
-            return View("~/Views/Processes/ProcSalesRetIndex.cshtml");
-        }
-
+       
         public ActionResult OperationScrapIndex()
         {
             return View("~/Views/Processes/OperationScrapIndex.cshtml");
@@ -411,13 +368,7 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Processes/OperationExportIndex.cshtml");
         }
-
-
-        //ProcSalesInvoice
-        public ActionResult ProcSalesInvoiceIndex()
-        {
-            return View("~/Views/Processes/ProcSalesInvoiceIndex.cshtml");
-        }
+        
 
         public ActionResult ClientaccstatIndex()
         {
@@ -478,16 +429,6 @@ namespace Inv.WebUI.Controllers
         public ActionResult JournalVoucherIndex()
         {
             return View("~/Views/GeneralLedgerMenu/JournalVoucherIndex.cshtml");
-
-        }
-        public ActionResult ReceiptVoucherIndex()
-        {
-            return View("~/Views/GeneralLedgerMenu/ReceiptVoucherIndex.cshtml");
-
-        }
-        public ActionResult PaymentVoucherIndex()
-        {
-            return View("~/Views/GeneralLedgerMenu/PaymentVoucherIndex.cshtml");
 
         }
         public ActionResult ManagementVoucherIndex()
@@ -553,14 +494,6 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Inventory/STKOpeningbalanceIndex.cshtml");
         }
-        public ActionResult sendTransferIndex()
-        {
-            return View("~/Views/Inventory/sendTransferIndex.cshtml");
-        }
-        public ActionResult ReceiveTransferIndex()
-        {
-            return View("~/Views/Inventory/ReceiveTransferIndex.cshtml");
-        }
         public ActionResult GenDefAddIndex()
         {
             return View("~/Views/GeneralDefinition/GenDefAddIndex.cshtml");
@@ -619,10 +552,6 @@ namespace Inv.WebUI.Controllers
         public ActionResult DtcostcenterIndex()
         {
             return View("~/Views/costcenter/DtcostcenterIndex.cshtml");
-        }
-        public ActionResult CcdtAccStateIndex()
-        {
-            return View("~/Views/costcenter/CcdtAccStateIndex.cshtml");
         }
 
         public ActionResult VatReportIndex()
