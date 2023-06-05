@@ -1971,10 +1971,30 @@ namespace Inv.API.Controllers
             foreach (var item in Entity)
             {
                 List<object> Table_Res = new List<object>();
+                string query = "";
+                object res;
+                if (item.IsProc == false || item.IsProc == null)
+                {
+                    query = "select * from " + item.NameTable + " " + (item.Condition.Trim() == "" ? "" : " Where " + item.Condition);
+                      res = Get_Model(query, item.NameTable);
 
+                }
+                else
+                {
+                    query = "" + item.NameTable + " " + (item.Condition);
 
-                string query = "select * from " + item.NameTable + " " + (item.Condition.Trim() == "" ? "" : " Where " + item.Condition);
-                object res = Get_Model(query, item.NameTable);
+                    if (item.IsExec == true)
+                    {
+                        db.Database.ExecuteSqlCommand(" exec " + query + "");
+                        res = new List<object>();
+                    }
+                    else
+                    {
+                        res = Get_Model(query, item.NameTable + "_Result"); 
+                    }
+
+                }
+
 
                 Table_Res.Add(res);
                 Res.AddRange(Table_Res);

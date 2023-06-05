@@ -6899,6 +6899,8 @@ var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";
         this.Condition = "";
+        this.IsProc = false;
+        this.IsExec = false;
     }
     return Table;
 }());

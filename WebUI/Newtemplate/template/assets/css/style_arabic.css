@@ -28341,6 +28341,7 @@ div.tagsinput {
     font-size: .9rem;
     line-height: 1;
     vertical-align: middle;
+    padding-left: 0.5rem;
 }
 
 .sidebar .nav .nav-item .nav-link .badge {
