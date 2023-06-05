@@ -3,6 +3,7 @@ using Inv.API.Tools;
 using Inv.BLL.Services.GBRANCH;
 using Inv.DAL.Domain;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Http;
 
@@ -81,7 +82,10 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                List<GProc_GetBranchModules_Result> BranchModules = db.Database.SqlQuery<GProc_GetBranchModules_Result>("Exec GProc_GetBranchModules " + CompCode + " , " + BranchCode + "").ToList();
+                int BraCode = BranchCode;
+                SqlParameter spBraCode = new SqlParameter("@BraCode", BraCode == -1 ? System.Data.SqlTypes.SqlInt32.Null : BraCode);
+                 
+                List<GProc_GetBranchModules_Result> BranchModules = db.Database.SqlQuery<GProc_GetBranchModules_Result>("Exec GProc_GetBranchModules " + CompCode + " , " + spBraCode.Value + "").ToList();
 
                 return Ok(new BaseResponse(BranchModules));
             }
