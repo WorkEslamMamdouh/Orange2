@@ -11755,9 +11755,13 @@ class Table {
     constructor() {
         this.NameTable = "";
         this.Condition = "";
+        this.IsProc = false;
+        this.IsExec = false;
     }
     public NameTable: string;
     public Condition: string;
+    public IsProc?: boolean;
+    public IsExec?: boolean;
 
 }
 

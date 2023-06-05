@@ -42,7 +42,7 @@ var UserActLog;
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         Screen_name.innerHTML = lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report";
-        document.title = "نظام اورانج" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");
+        document.title = " نظام اورانج " + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");
         txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
         txtToDate.value = DateFormat(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
         txtFromTime.value = "00:00:00";
@@ -106,10 +106,11 @@ var UserActLog;
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("GBranch", "GetBranchModules"),
-            data: { CompCode: compcode, BranchCode: BraCode, UserCode: SysSession.CurrentEnvironment.UserCode, Tokenid: SysSession.CurrentEnvironment.Token },
+            data: { CompCode: compcode, BranchCode: BraCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
+                    debugger;
                     BranchModules = result.Response;
                     FillDropwithAttr(BranchModules, "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "", "");
                 }
@@ -124,7 +125,7 @@ var UserActLog;
         rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
         rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
         rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-        rp.Tokenid = SysSession.CurrentEnvironment.Token;
+        rp.Tokenid = "HGFD-" + SysSession.CurrentEnvironment.Token;
         var BranchNameA = SysSession.CurrentEnvironment.BranchName;
         var BranchNameE = SysSession.CurrentEnvironment.BranchNameEn;
         rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;

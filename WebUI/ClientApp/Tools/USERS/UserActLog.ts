@@ -42,7 +42,7 @@ namespace UserActLog {
 		compcode = Number(SysSession.CurrentEnvironment.CompCode);
 		BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 		Screen_name.innerHTML = lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report";
-		document.title = "نظام اورانج" + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");	    
+		document.title = " نظام اورانج " + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");	    
 		txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
 		txtToDate.value = DateFormat(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
 		txtFromTime.value = "00:00:00";
@@ -102,14 +102,15 @@ namespace UserActLog {
 		FillDropwithAttr(GetDataTable('G_BRANCH'), "drpBranch", "BRA_CODE", "BRA_DESC", (lang == "ar" ? "الجميع" : "All"), "", "");		 
 	}
 	function GetBranchModules() {
-		let BraCode = drpBranch.value == "Null" ? -1 : Number(drpBranch.value);
+		let BraCode = drpBranch.value == "Null" ? -1 : Number(drpBranch.value);	 
 		Ajax.Callsync({
-			type: "Get",								    
+			type: "Get",
 			url: sys.apiUrl("GBranch", "GetBranchModules"),
-			data: { CompCode: compcode, BranchCode: BraCode, UserCode: SysSession.CurrentEnvironment.UserCode, Tokenid: SysSession.CurrentEnvironment.Token}	,
-			success: (d) => {
+			data: { CompCode: compcode, BranchCode: BraCode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token},
+			success: (d) => {	  
 				let result = d as BaseResponse;
 				if (result.IsSuccess) {
+					debugger
 					BranchModules = result.Response as Array<GProc_GetBranchModules_Result>;
 					FillDropwithAttr(BranchModules, "drpTitle", "MODULE_CODE", (lang == "ar" ? "MODULE_DESCA" : "MODULE_DESCE"), (lang == "ar" ? "الجميع" : "All"), "", "");
 				}
@@ -125,7 +126,7 @@ namespace UserActLog {
 		rp.CompNameA = SysSession.CurrentEnvironment.CompanyNameAr;
 		rp.CompNameE = SysSession.CurrentEnvironment.CompanyName;
 		rp.UserCode = SysSession.CurrentEnvironment.UserCode;
-		rp.Tokenid = SysSession.CurrentEnvironment.Token;
+		rp.Tokenid = "HGFD-" +SysSession.CurrentEnvironment.Token;
 		var BranchNameA = SysSession.CurrentEnvironment.BranchName;
 		var BranchNameE = SysSession.CurrentEnvironment.BranchNameEn;
 		rp.ScreenLanguage = SysSession.CurrentEnvironment.ScreenLanguage;

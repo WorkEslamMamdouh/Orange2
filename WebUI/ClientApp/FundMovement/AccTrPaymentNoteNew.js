@@ -226,6 +226,7 @@ var AccTrPaymentNoteNew;
             ];
         DataResult(Table);
         debugger;
+        //alert(GetDataTable('GProc_GetBranchModules'))
         //**************************************************************************************************************
         var Listbox = GetDataTable('A_RecPay_D_CashBox');
         DocumentActions.FillCombowithdefult(Listbox, txt_D_CashBoxF, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
