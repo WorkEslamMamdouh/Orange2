@@ -22,6 +22,7 @@ namespace BackgroundImage {
 
     export function GetBackgroundImage() {
 
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
 
         Ajax.Callsync({
             type: "GET",
