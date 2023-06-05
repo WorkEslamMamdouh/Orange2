@@ -220,12 +220,14 @@ namespace Inv.WebUI.Controllers
         {
             ReportService rep = getStandardParameters(rp);
              
+            rep.AddParameter("RepType", rp.RepType);
             rep.AddParameter("SystemCode", rp.SystemCode);
             rep.AddParameter("TrTypeSt", rp.TrTypeSt);
             rep.AddParameter("FromDate", rp.FromDate);
             rep.AddParameter("ToDate", rp.ToDate);
             rep.AddParameter("fromNum", rp.fromNum);
             rep.AddParameter("ToNum", rp.ToNum);
+            rep.AddParameter("IsGenerated", rp.IsGenerated);
 
               
             string url = rep.GetReportUrl("Rep_LnkVoucherList");
@@ -1770,6 +1772,7 @@ namespace Inv.WebUI.Controllers
 
             rep.AddParameter("RepType", rp.RepType); 
             rep.AddParameter("Typ", rp.Typ); 
+            rep.AddParameter("braCode", rp.braCode); 
             rep.AddParameter("FromDate", rp.FromDate); 
             rep.AddParameter("ToDate", rp.ToDate); 
             rep.AddParameter("FromTime", rp.FromTime); 

@@ -231,6 +231,8 @@ namespace Inv.DAL.Domain
         public virtual DbSet<IQ_GetBoxReceiveList> IQ_GetBoxReceiveList { get; set; }
         public virtual DbSet<A_LnkVoucher> A_LnkVoucher { get; set; }
         public virtual DbSet<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
+        public virtual DbSet<G_BranchModules> G_BranchModules { get; set; }
+        public virtual DbSet<G_RoleBranch> G_RoleBranch { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
@@ -6360,6 +6362,32 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("IsGenerated", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rep_LnkVoucherList_Result>("AProc_Rep_LnkVoucherList", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, sysParameter, tRTypeParameter, fromDateParameter, toDateParameter, fromnoParameter, toNoParameter, isGeneratedParameter);
+        }
+    
+        public virtual int GProc_GenerateBranchModules(Nullable<int> compCode, Nullable<int> braCode)
+        {
+            var compCodeParameter = compCode.HasValue ?
+                new ObjectParameter("CompCode", compCode) :
+                new ObjectParameter("CompCode", typeof(int));
+    
+            var braCodeParameter = braCode.HasValue ?
+                new ObjectParameter("BraCode", braCode) :
+                new ObjectParameter("BraCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GProc_GenerateBranchModules", compCodeParameter, braCodeParameter);
+        }
+    
+        public virtual ObjectResult<GProc_GetBranchModules_Result> GProc_GetBranchModules(Nullable<int> compCode, Nullable<int> braCode)
+        {
+            var compCodeParameter = compCode.HasValue ?
+                new ObjectParameter("CompCode", compCode) :
+                new ObjectParameter("CompCode", typeof(int));
+    
+            var braCodeParameter = braCode.HasValue ?
+                new ObjectParameter("BraCode", braCode) :
+                new ObjectParameter("BraCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_GetBranchModules_Result>("GProc_GetBranchModules", compCodeParameter, braCodeParameter);
         }
     }
 }

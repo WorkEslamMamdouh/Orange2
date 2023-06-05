@@ -752,7 +752,10 @@ namespace RS.WebUI.Reports.Forms
             int ToNum = int.Parse(RepPar.ToNum.ToString());
             SqlParameter spToNum = new SqlParameter("@ToNo", ToNum);
 
-         
+            int IsGenerated = int.Parse(RepPar.IsGenerated.ToString()); 
+            SqlParameter spIsGenerated = new SqlParameter("@IsGenerated", IsGenerated == -1 ? System.Data.SqlTypes.SqlInt32.Null : IsGenerated);
+
+
             Rep = OpenReport("Rep_LnkVoucherList");
 
 
@@ -771,7 +774,8 @@ namespace RS.WebUI.Reports.Forms
            ", @FromDate = '" + spformDate.Value + "'" +
            ", @ToDate = '" + sptoDate.Value + "'" +
            ", @Fromno = " + spfromNum.Value +
-           ", @ToNo = " + spToNum.Value;
+           ", @ToNo = " + spToNum.Value+
+            ", @IsGenerated = " + spIsGenerated.Value;
 
 
             var query = db.Database.SqlQuery<AProc_Rep_LnkVoucherList_Result>(_Query).ToList();
@@ -6118,6 +6122,9 @@ namespace RS.WebUI.Reports.Forms
             int Typ = RepPar.Typ;
             SqlParameter spTyp = new SqlParameter("@GrpType", Typ);
 
+            int braCode = RepPar.braCode;
+            SqlParameter spbraCode = new SqlParameter("@bra", braCode == -1 ? System.Data.SqlTypes.SqlInt32.Null : braCode);
+
             string FromDate = RepPar.FromDate;
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
@@ -6168,9 +6175,9 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spRepType = new SqlParameter("@RepType", RepType);
 
             string _Query = "execute " + Rep.dataSource +
-           "   @comp = '" + StandPar.spComCode.Value +
-           "', @bra = '" + StandPar.spbra.Value+
-           "', @CompNameA = '" + StandPar.spComNameA.Value +
+           "   @comp = " + StandPar.spComCode.Value +
+           ", @bra = " + spbraCode.Value+
+           ", @CompNameA = '" + StandPar.spComNameA.Value +
            "', @CompNameE = '" + StandPar.spComNameE.Value +
            "', @BraNameA = '" + StandPar.spBraNameA.Value +
            "', @BraNameE = '" + StandPar.braNameE.Value +

@@ -195,6 +195,7 @@ class ReportParameters {
 
     public fromNum: number;
     public ToNum: number;
+    public IsGenerated: number;
 
      
 
@@ -6743,47 +6744,7 @@ class GQ_GetUsers extends SecurityClass {
     public IsActiveDesc: string;
     public Flag_Mastr: string;
     public StoreID: number;
-}
-class GQ_GetUserRole extends SecurityClass {
-    constructor() {
-        super();
-        this.USER_CODE = "";
-        this.ISActive = false;
-        this.DescA = "";
-        this.DescE = "";
-        this.Remarks = "";
-        this.RoleId = 0;
-        this.IsActiveDesc = "";
-        this.IsAvailable = false;
-        this.IsShowable = false;
-    }
-    public USER_CODE: string;
-    public ISActive: boolean;
-    public DescA: string;
-    public DescE: string;
-    public Remarks: string;
-    public RoleId: number;
-    public IsActiveDesc: string;
-    public IsAvailable: boolean;
-    public IsShowable: boolean;
-}
-class G_Role extends SecurityClass {
-    constructor() {
-        super();
-        this.RoleId = 0;
-        this.DescA = "";
-        this.DescE = "";
-        this.Remarks = "";
-        this.IsAvailable = false;
-        this.IsShowable = false;
-    }
-    public RoleId: number;
-    public DescA: string;
-    public DescE: string;
-    public Remarks: string;
-    public IsAvailable: boolean;
-    public IsShowable: boolean;
-}
+}  
 class G_CONTROL extends SecurityClass {
     constructor() {
         super();
@@ -11664,6 +11625,130 @@ class A_LnkVoucher {
     public StatusFlag: string;
 
 }
+
+
+
+class G_RoleBranch {
+    constructor() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.RoleId = 0;
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public RoleId: number;
+}
+
+class G_BranchModules {
+    constructor() {
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public MODULE_CODE: string;
+    public EXECUTE: boolean;
+    public CREATE: boolean;
+    public EDIT: boolean;
+    public DELETE: boolean;
+    public PRINT: boolean;
+    public VIEW: boolean;
+    public CUSTOM1: boolean;
+    public CUSTOM2: boolean;
+    public CUSTOM3: boolean;
+    public CUSTOM4: boolean;
+    public CUSTOM5: boolean;
+    public CUSTOM6: boolean;
+    public CUSTOM7: boolean;
+    public CUSTOM8: boolean;
+    public CUSTOM9: boolean;
+    public ViewImages: boolean;
+    public EditImages: boolean;
+}
+ 
+class GQ_GetUserRole extends SecurityClass {
+    constructor() {
+        super();
+        this.USER_CODE = "";
+        this.ISActive = false;
+        this.DescA = "";
+        this.DescE = "";
+        this.Remarks = "";
+        this.IsActiveDesc = "";
+        this.RoleId = 0;
+        this.IsAvailable = false;
+        this.IsShowable = false;
+        this.RoleType = 0;
+    }
+    public USER_CODE: string;
+    public ISActive: boolean;
+    public DescA: string;
+    public DescE: string;
+    public Remarks: string;
+    public IsActiveDesc: string;
+    public RoleId: number;
+    public IsAvailable: boolean;
+    public IsShowable: boolean;
+    public RoleType: number;
+}
+class G_Role extends SecurityClass {
+    constructor() {
+        super();
+        this.RoleId = 0;
+        this.DescA = "";
+        this.DescE = "";
+        this.Remarks = "";
+        this.IsActiveDesc = "";
+        this.IsAvailable = false;
+        this.IsShowable = false;
+        this.RoleType = 0;
+    }
+    public RoleId: number;
+    public DescA: string;
+    public DescE: string;
+    public Remarks: string;
+    public IsActiveDesc: string;
+    public IsAvailable: boolean;
+    public IsShowable: boolean;
+    public RoleType: number;
+}
+class GProc_GetBranchModules_Result extends SecurityClass {
+    constructor() {
+        super();			 
+		this.MODULE_CODE = "";
+		this.MODULE_DESCE = "";
+		this.MODULE_DESCA = "";
+		this.MENU_NO = "";		    
+    }							  
+	public MODULE_CODE: string;
+	public MODULE_DESCE: string;
+	public MODULE_DESCA: string;
+	public MENU_NO: string;   
+}
+
+
 
 
 class Table {

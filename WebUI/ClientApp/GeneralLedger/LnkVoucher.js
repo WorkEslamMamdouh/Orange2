@@ -4,11 +4,11 @@ $(document).ready(function () {
 var LnkVoucher;
 (function (LnkVoucher) {
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession = GetSystemSession(Modules.LnkVoucher);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 1;
     var codeType = "RecType";
-    var Name_Screen = (lang == "ar" ? ' أستعراض قيود الربط' : 'LnkVoucher');
+    var Name_Screen = (lang == "ar" ? '  قيود الربط' : 'LnkVoucher');
     var CompCode = Number(SysSession.CurrentEnvironment.CompCode);
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
     var TransactionsGrid = new JsGrid();
@@ -44,11 +44,10 @@ var LnkVoucher;
     var Events = 0;
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
-    var Flag_Enabled_All = false;
+    var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
-        $('._None_Input').addClass('hidden_Control');
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
@@ -130,15 +129,15 @@ var LnkVoucher;
                 }
             },
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
-            { title: "النوع", name: "VOUCHER_SOURCE_TYPE", type: "text", width: "15%" },
+            { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
             { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
             //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
             {
-                title: res.Trans_Generate, css: "ColumPadding", name: "IsGenerated", width: "4%",
+                title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: function (s, item) {
                     var txt = document.createElement("label");
-                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم" : "Done") : "";
+                    txt.innerHTML = item.IsPosted == true ? (lang == "ar" ? "تم التوليد" : "Generated") : (lang == "ar" ? "لم يتم التوليد" : "Not Generated");
                     return txt;
                 }
             },
@@ -275,17 +274,19 @@ var LnkVoucher;
         if (txtToNumber.value != "") {
             ToNum = Number(txtToNumber.value);
         }
+        var IsPosted = Number($('#ddlStatus').val());
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "LoadLnkVouchTransactions"),
             data: {
-                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.TranPosting, FinYear: SysSession.CurrentEnvironment.CurrentYear
+                Comp: CompCode, branchCode: branchCode, TrType: trType, StartDate: StartDate, EndDate: EndDate, FromNum: FromNum, ToNum: ToNum, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, Modules: Modules.LnkVoucher, FinYear: SysSession.CurrentEnvironment.CurrentYear
             },
             success: function (d) {
                 var result = d;
                 if (result.IsSuccess) {
                     debugger;
                     LnkTransDetails = result.Response;
+                    IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsPosted == Boolean(IsPosted); }) : null;
                     if (LnkTransDetails.length > 0) {
                         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
                         TransactionsGrid.DataSource = LnkTransDetails;
@@ -382,8 +383,10 @@ var LnkVoucher;
             $('#Line_DescA0').focus();
         }
         $('#id_div_Filter').addClass('disabledDiv');
+        $('#btnGenerationVoucher').attr('disabled', 'disabled');
     }
     function disabled() {
+        $('#btnGenerationVoucher').removeAttr('disabled');
         $('._dis').attr('disabled', 'disabled');
         $('._Remarks').attr('disabled', 'disabled');
         $('#id_div_Filter').removeClass('disabledDiv');
@@ -421,7 +424,8 @@ var LnkVoucher;
                     var List = result.Response;
                     CountGrid = 0;
                     $("#div_Data").html('');
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin'); }, 20) : $('#icon-bar').removeClass('display_none');
+                    $('#btnGenerationVoucher').addClass('Grin');
                     for (var i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
@@ -589,11 +593,9 @@ var LnkVoucher;
                 $("#StatusFlag" + RecNo).val("m");
             else
                 $("#StatusFlag" + RecNo).val("d");
-            // ComputeTotals();
-            $("#txtItemNumber" + RecNo).val("99");
-            $("#txtItemName" + RecNo).val("1");
-            $("#txtOnhandQty" + RecNo).val("1");
             $("#No_Row" + RecNo).attr("hidden", "true");
+            Insert_Serial();
+            ComputeTotals();
         });
     }
     function AddNewRow() {
@@ -611,9 +613,42 @@ var LnkVoucher;
         if (CanAdd) {
             BuildControls(CountGrid);
             $("#StatusFlag" + CountGrid).val("i"); //In Insert mode    
+            $("#ID" + CountGrid).val($("#ID" + (CountGrid - 1)).val());
+            $("#CompCode" + CountGrid).val($("#CompCode" + (CountGrid - 1)).val());
+            $("#bracode" + CountGrid).val($("#bracode" + (CountGrid - 1)).val());
+            $("#System_Code" + CountGrid).val($("#System_Code" + (CountGrid - 1)).val());
+            $("#Tr_Code" + CountGrid).val($("#Tr_Code" + (CountGrid - 1)).val());
+            $("#TrID" + CountGrid).val($("#TrID" + (CountGrid - 1)).val());
+            $("#TrNo" + CountGrid).val($("#TrNo" + (CountGrid - 1)).val());
+            $("#Serial" + CountGrid).val((CountGrid + 1));
+            $("#Voucher_No" + CountGrid).val($("#Voucher_No" + (CountGrid - 1)).val());
+            $("#SOURCE_TYPE" + CountGrid).val($("#SOURCE_TYPE" + (CountGrid - 1)).val());
+            $("#TYPE_CODE" + CountGrid).val($("#TYPE_CODE" + (CountGrid - 1)).val());
+            $("#TrDate" + CountGrid).val(txtTrDate.value);
             $('._dis').removeAttr('disabled');
             $('.btn_minus_non').removeClass('display_none');
             CountGrid++;
+            Insert_Serial();
+        }
+    }
+    function Insert_Serial() {
+        var Chack_Flag = false;
+        var flagval = "";
+        var Ser = 1;
+        for (var i = 0; i < CountGrid; i++) {
+            flagval = $("#StatusFlag" + i).val();
+            if (flagval != "d" && flagval != "m") {
+                $("#Serial" + i).val(Ser);
+                Ser++;
+            }
+            if (flagval == 'd' || flagval == 'm' || flagval == 'i') {
+                Chack_Flag = true;
+            }
+            if (Chack_Flag) {
+                if ($("#StatusFlag" + i).val() != 'i' && $("#StatusFlag" + i).val() != 'm' && $("#StatusFlag" + i).val() != 'd') {
+                    $("#StatusFlag" + i).val('u');
+                }
+            }
         }
     }
     //****************************************************Validation*********************************************
@@ -699,6 +734,8 @@ var LnkVoucher;
     function Success(ID, res) {
         debugger;
         LnkTransDetails = res;
+        var IsPosted = Number($('#ddlStatus').val());
+        IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(function (x) { return x.IsPosted == Boolean(IsPosted); }) : null;
         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
         $('#divGridShow').removeClass('display_none');
         $('#Div_control').addClass('display_none');
@@ -742,12 +779,13 @@ var LnkVoucher;
         rp.ToDate = DateFormatRep(txtToDate.value);
         rp.fromNum = Number(txtFromNumber.value);
         rp.ToNum = Number(txtToNumber.value);
+        rp.IsGenerated = Number($('#ddlStatus').val());
         Ajax.Callsync({
             url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result);
                 // window.close(result)
             }
@@ -764,7 +802,7 @@ var LnkVoucher;
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

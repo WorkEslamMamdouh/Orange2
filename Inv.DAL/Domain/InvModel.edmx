@@ -1215,6 +1215,37 @@
           <Property Name="RetailInvoicePaymentDef" Type="int" />
           <Property Name="OperationInvoicePaymentDef" Type="int" />
         </EntityType>
+        <EntityType Name="G_BranchModules">
+          <Key>
+            <PropertyRef Name="COMP_CODE" />
+            <PropertyRef Name="BRA_CODE" />
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="MODULE_CODE" />
+          </Key>
+          <Property Name="COMP_CODE" Type="int" Nullable="false" />
+          <Property Name="BRA_CODE" Type="int" Nullable="false" />
+          <Property Name="SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SUB_SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MODULE_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXECUTE" Type="bit" />
+          <Property Name="CREATE" Type="bit" />
+          <Property Name="EDIT" Type="bit" />
+          <Property Name="DELETE" Type="bit" />
+          <Property Name="PRINT" Type="bit" />
+          <Property Name="VIEW" Type="bit" />
+          <Property Name="CUSTOM1" Type="bit" />
+          <Property Name="CUSTOM2" Type="bit" />
+          <Property Name="CUSTOM3" Type="bit" />
+          <Property Name="CUSTOM4" Type="bit" />
+          <Property Name="CUSTOM5" Type="bit" />
+          <Property Name="CUSTOM6" Type="bit" />
+          <Property Name="CUSTOM7" Type="bit" />
+          <Property Name="CUSTOM8" Type="bit" />
+          <Property Name="CUSTOM9" Type="bit" />
+          <Property Name="ViewImages" Type="bit" />
+          <Property Name="EditImages" Type="bit" />
+        </EntityType>
         <EntityType Name="G_Codes">
           <Key>
             <PropertyRef Name="ID" />
@@ -1692,6 +1723,17 @@
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="IsAvailable" Type="bit" />
           <Property Name="IsShowable" Type="bit" />
+          <Property Name="RoleType" Type="int" />
+        </EntityType>
+        <EntityType Name="G_RoleBranch">
+          <Key>
+            <PropertyRef Name="COMP_CODE" />
+            <PropertyRef Name="BRA_CODE" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="COMP_CODE" Type="int" Nullable="false" />
+          <Property Name="BRA_CODE" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="G_RoleModule">
           <Key>
@@ -4245,6 +4287,7 @@ warning 6002: The table/view 'Orange2021.dbo.GQ_GetUserRole' does not have a pri
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="IsAvailable" Type="bit" />
           <Property Name="IsShowable" Type="bit" />
+          <Property Name="RoleType" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6523,6 +6566,14 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="User" Type="nvarchar" Mode="In" />
           <Parameter Name="LikeUser" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GProc_GenerateBranchModules" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompCode" Type="int" Mode="In" />
+          <Parameter Name="BraCode" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GProc_GetBranchModules" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompCode" Type="int" Mode="In" />
+          <Parameter Name="BraCode" Type="int" Mode="In" />
+        </Function>
         <Function Name="GProc_Rep_UserActivityLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
           <Parameter Name="bra" Type="int" Mode="In" />
@@ -7911,6 +7962,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="G_AlertLog" EntityType="Self.G_AlertLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_AlertType" EntityType="Self.G_AlertType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_BRANCH" EntityType="Self.G_BRANCH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="G_BranchModules" EntityType="Self.G_BranchModules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_Codes" EntityType="Self.G_Codes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_COMPANY" EntityType="Self.G_COMPANY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_CONTROL" EntityType="Self.G_CONTROL" Schema="dbo" store:Type="Tables" />
@@ -7934,6 +7986,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySet Name="G_REGION_BRANCH" EntityType="Self.G_REGION_BRANCH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_ReportWebSetting" EntityType="Self.G_ReportWebSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_Role" EntityType="Self.G_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="G_RoleBranch" EntityType="Self.G_RoleBranch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_RoleModule" EntityType="Self.G_RoleModule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_RoleUsers" EntityType="Self.G_RoleUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="G_SearchForm" EntityType="Self.G_SearchForm" Schema="dbo" store:Type="Tables" />
@@ -8911,7 +8964,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [GQ_GetUserRole].[Remarks] AS [Remarks], 
     [GQ_GetUserRole].[RoleId] AS [RoleId], 
     [GQ_GetUserRole].[IsAvailable] AS [IsAvailable], 
-    [GQ_GetUserRole].[IsShowable] AS [IsShowable]
+    [GQ_GetUserRole].[IsShowable] AS [IsShowable], 
+    [GQ_GetUserRole].[RoleType] AS [RoleType]
     FROM [dbo].[GQ_GetUserRole] AS [GQ_GetUserRole]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="GQ_GetUsers" EntityType="Self.GQ_GetUsers" store:Type="Views" store:Schema="dbo">
@@ -12501,6 +12555,16 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="ToNo" Mode="In" Type="Int32" />
             <Parameter Name="IsGenerated" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="G_BranchModules" EntityType="InvModel.G_BranchModules" />
+          <EntitySet Name="G_RoleBranch" EntityType="InvModel.G_RoleBranch" />
+          <FunctionImport Name="GProc_GenerateBranchModules">
+            <Parameter Name="CompCode" Mode="In" Type="Int32" />
+            <Parameter Name="BraCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GProc_GetBranchModules" ReturnType="Collection(InvModel.GProc_GetBranchModules_Result)">
+            <Parameter Name="CompCode" Mode="In" Type="Int32" />
+            <Parameter Name="BraCode" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -14445,6 +14509,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsAvailable" Type="Boolean" />
           <Property Name="IsShowable" Type="Boolean" />
+          <Property Name="RoleType" Type="Int32" />
         </EntityType>
         <EntityType Name="G_RoleModule">
           <Key>
@@ -14533,6 +14598,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="IsAvailable" Type="Boolean" />
           <Property Name="IsShowable" Type="Boolean" />
+          <Property Name="RoleType" Type="Int32" />
         </EntityType>
         <EntityType Name="GQ_GetUsers">
           <Key>
@@ -23595,6 +23661,53 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="VOUCHER_DESCE" Nullable="true" MaxLength="200" />
           <Property Type="Boolean" Name="isposted" Nullable="true" />
         </ComplexType>
+        <EntityType Name="G_BranchModules">
+          <Key>
+            <PropertyRef Name="COMP_CODE" />
+            <PropertyRef Name="BRA_CODE" />
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="MODULE_CODE" />
+          </Key>
+          <Property Name="COMP_CODE" Type="Int32" Nullable="false" />
+          <Property Name="BRA_CODE" Type="Int32" Nullable="false" />
+          <Property Name="SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SUB_SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MODULE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXECUTE" Type="Boolean" />
+          <Property Name="CREATE" Type="Boolean" />
+          <Property Name="EDIT" Type="Boolean" />
+          <Property Name="DELETE" Type="Boolean" />
+          <Property Name="PRINT" Type="Boolean" />
+          <Property Name="VIEW" Type="Boolean" />
+          <Property Name="CUSTOM1" Type="Boolean" />
+          <Property Name="CUSTOM2" Type="Boolean" />
+          <Property Name="CUSTOM3" Type="Boolean" />
+          <Property Name="CUSTOM4" Type="Boolean" />
+          <Property Name="CUSTOM5" Type="Boolean" />
+          <Property Name="CUSTOM6" Type="Boolean" />
+          <Property Name="CUSTOM7" Type="Boolean" />
+          <Property Name="CUSTOM8" Type="Boolean" />
+          <Property Name="CUSTOM9" Type="Boolean" />
+          <Property Name="ViewImages" Type="Boolean" />
+          <Property Name="EditImages" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="G_RoleBranch">
+          <Key>
+            <PropertyRef Name="COMP_CODE" />
+            <PropertyRef Name="BRA_CODE" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="COMP_CODE" Type="Int32" Nullable="false" />
+          <Property Name="BRA_CODE" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="GProc_GetBranchModules_Result">
+          <Property Type="String" Name="MODULE_CODE" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MENU_NO" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25535,6 +25648,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="G_Role">
             <EntityTypeMapping TypeName="InvModel.G_Role">
               <MappingFragment StoreEntitySet="G_Role">
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
                 <ScalarProperty Name="IsShowable" ColumnName="IsShowable" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -25620,6 +25734,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="GQ_GetUserRole">
             <EntityTypeMapping TypeName="InvModel.GQ_GetUserRole">
               <MappingFragment StoreEntitySet="GQ_GetUserRole">
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
                 <ScalarProperty Name="IsShowable" ColumnName="IsShowable" />
                 <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -35136,6 +35251,54 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="VOUCHER_DESCA" ColumnName="VOUCHER_DESCA" />
                 <ScalarProperty Name="VOUCHER_DESCE" ColumnName="VOUCHER_DESCE" />
                 <ScalarProperty Name="isposted" ColumnName="isposted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="G_BranchModules">
+            <EntityTypeMapping TypeName="InvModel.G_BranchModules">
+              <MappingFragment StoreEntitySet="G_BranchModules">
+                <ScalarProperty Name="EditImages" ColumnName="EditImages" />
+                <ScalarProperty Name="ViewImages" ColumnName="ViewImages" />
+                <ScalarProperty Name="CUSTOM9" ColumnName="CUSTOM9" />
+                <ScalarProperty Name="CUSTOM8" ColumnName="CUSTOM8" />
+                <ScalarProperty Name="CUSTOM7" ColumnName="CUSTOM7" />
+                <ScalarProperty Name="CUSTOM6" ColumnName="CUSTOM6" />
+                <ScalarProperty Name="CUSTOM5" ColumnName="CUSTOM5" />
+                <ScalarProperty Name="CUSTOM4" ColumnName="CUSTOM4" />
+                <ScalarProperty Name="CUSTOM3" ColumnName="CUSTOM3" />
+                <ScalarProperty Name="CUSTOM2" ColumnName="CUSTOM2" />
+                <ScalarProperty Name="CUSTOM1" ColumnName="CUSTOM1" />
+                <ScalarProperty Name="VIEW" ColumnName="VIEW" />
+                <ScalarProperty Name="PRINT" ColumnName="PRINT" />
+                <ScalarProperty Name="DELETE" ColumnName="DELETE" />
+                <ScalarProperty Name="EDIT" ColumnName="EDIT" />
+                <ScalarProperty Name="CREATE" ColumnName="CREATE" />
+                <ScalarProperty Name="EXECUTE" ColumnName="EXECUTE" />
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="BRA_CODE" ColumnName="BRA_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="G_RoleBranch">
+            <EntityTypeMapping TypeName="InvModel.G_RoleBranch">
+              <MappingFragment StoreEntitySet="G_RoleBranch">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="BRA_CODE" ColumnName="BRA_CODE" />
+                <ScalarProperty Name="COMP_CODE" ColumnName="COMP_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GProc_GenerateBranchModules" FunctionName="InvModel.Store.GProc_GenerateBranchModules" />
+          <FunctionImportMapping FunctionImportName="GProc_GetBranchModules" FunctionName="InvModel.Store.GProc_GetBranchModules">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.GProc_GetBranchModules_Result">
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="MENU_NO" ColumnName="MENU_NO" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
