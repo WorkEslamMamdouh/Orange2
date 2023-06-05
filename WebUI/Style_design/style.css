@@ -10,25 +10,6 @@ html, body {
         background-color: white /*linear-gradient(to right, rgb(22, 58, 71) 0%, #457198 100%)*/;
     }
 
-/*.floatleft {
-    float: right
-}
-
-.floatright {
-    float: right
-}
-
-.alignleft {
-    float: left;
-    margin-right: 15px;
-    margin-bottom: 15px
-}
-
-.alignright {
-    float: right;
-    margin-left: 15px;
-    margin-bottom: 15px
-}*/
 
 .aligncenter {
     display: block;
@@ -5132,3 +5113,20 @@ ul.breadcome-menu {
             width: 100%;
         }
 
+.admin-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+    .admin-container i {
+        color:#fff;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .admin-container span {
+        color: #fff;
+        font-size: 1.75rem;
+    }
