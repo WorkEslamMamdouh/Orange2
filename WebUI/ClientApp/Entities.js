@@ -6883,6 +6883,18 @@ var G_Role = /** @class */ (function (_super) {
     }
     return G_Role;
 }(SecurityClass));
+var GProc_GetBranchModules_Result = /** @class */ (function (_super) {
+    __extends(GProc_GetBranchModules_Result, _super);
+    function GProc_GetBranchModules_Result() {
+        var _this = _super.call(this) || this;
+        _this.MODULE_CODE = "";
+        _this.MODULE_DESCE = "";
+        _this.MODULE_DESCA = "";
+        _this.MENU_NO = "";
+        return _this;
+    }
+    return GProc_GetBranchModules_Result;
+}(SecurityClass));
 var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";

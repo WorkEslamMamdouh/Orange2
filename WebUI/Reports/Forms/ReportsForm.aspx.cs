@@ -6122,6 +6122,9 @@ namespace RS.WebUI.Reports.Forms
             int Typ = RepPar.Typ;
             SqlParameter spTyp = new SqlParameter("@GrpType", Typ);
 
+            int braCode = RepPar.braCode;
+            SqlParameter spbraCode = new SqlParameter("@bra", braCode == -1 ? System.Data.SqlTypes.SqlInt32.Null : braCode);
+
             string FromDate = RepPar.FromDate;
             SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
 
@@ -6172,9 +6175,9 @@ namespace RS.WebUI.Reports.Forms
             SqlParameter spRepType = new SqlParameter("@RepType", RepType);
 
             string _Query = "execute " + Rep.dataSource +
-           "   @comp = '" + StandPar.spComCode.Value +
-           "', @bra = '" + StandPar.spbra.Value+
-           "', @CompNameA = '" + StandPar.spComNameA.Value +
+           "   @comp = " + StandPar.spComCode.Value +
+           ", @bra = " + spbraCode.Value+
+           ", @CompNameA = '" + StandPar.spComNameA.Value +
            "', @CompNameE = '" + StandPar.spComNameE.Value +
            "', @BraNameA = '" + StandPar.spBraNameA.Value +
            "', @BraNameE = '" + StandPar.braNameE.Value +

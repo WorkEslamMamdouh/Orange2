@@ -23,7 +23,7 @@
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
         <Left>17.57064cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <Style>
           <Border>
@@ -52,10 +52,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59177cm</Top>
-        <Left>13.65596cm</Left>
+        <Top>1.52827cm</Top>
+        <Left>7.23297cm</Left>
         <Height>0.6cm</Height>
-        <Width>3.91599cm</Width>
+        <Width>3.53188cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -177,9 +177,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
+        <Top>0.86152cm</Top>
         <Left>4.17615cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
@@ -213,7 +213,7 @@
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
         <Left>10.75603cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -245,9 +245,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59177cm</Top>
-        <Left>17.57064cm</Left>
-        <Height>0.6cm</Height>
+        <Top>1.52827cm</Top>
+        <Left>10.75603cm</Left>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -279,9 +279,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59177cm</Top>
-        <Left>10.75603cm</Left>
-        <Height>0.6cm</Height>
+        <Top>1.52827cm</Top>
+        <Left>4.17615cm</Left>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -315,7 +315,7 @@
         <rd:DefaultName>Textbox15</rd:DefaultName>
         <Top>0.18427cm</Top>
         <Left>4.17615cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -345,8 +345,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>1.59177cm</Top>
-        <Left>7.24048cm</Left>
+        <Top>1.52827cm</Top>
+        <Left>0.65309cm</Left>
         <Height>0.6cm</Height>
         <Width>3.52437cm</Width>
         <ZIndex>9</ZIndex>
@@ -451,7 +451,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.92502cm</Top>
+        <Top>0.86152cm</Top>
         <Left>0.64558cm</Left>
         <Height>0.6cm</Height>
         <Width>3.53188cm</Width>
@@ -1437,7 +1437,7 @@
         <FixedColumnHeaders>true</FixedColumnHeaders>
         <FixedRowHeaders>true</FixedRowHeaders>
         <DataSetName>Rep_UserActivityLogByUserAr</DataSetName>
-        <Top>3.12114cm</Top>
+        <Top>2.93064cm</Top>
         <Left>0cm</Left>
         <Height>1.77354cm</Height>
         <Width>19.98214cm</Width>
@@ -1465,10 +1465,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.33649cm</Top>
-        <Left>7.24048cm</Left>
+        <Top>2.20949cm</Top>
+        <Left>7.23297cm</Left>
         <Height>0.6cm</Height>
-        <Width>10.33147cm</Width>
+        <Width>10.33898cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -1520,9 +1520,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>2.33649cm</Top>
+        <Top>2.20949cm</Top>
         <Left>17.57064cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>14</ZIndex>
         <Style>
@@ -1554,9 +1554,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.89321cm</Top>
+        <Top>0.86152cm</Top>
         <Left>17.57064cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>15</ZIndex>
         <Style>
@@ -1588,7 +1588,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.89321cm</Top>
+        <Top>0.86152cm</Top>
         <Left>13.65596cm</Left>
         <Height>0.6cm</Height>
         <Width>3.91599cm</Width>
@@ -1623,7 +1623,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.89321cm</Top>
+        <Top>0.86152cm</Top>
         <Left>7.23297cm</Left>
         <Height>0.6cm</Height>
         <Width>3.53188cm</Width>
@@ -1658,9 +1658,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.89321cm</Top>
+        <Top>0.86152cm</Top>
         <Left>10.75603cm</Left>
-        <Height>0.6cm</Height>
+        <Height>0.56436cm</Height>
         <Width>2.2561cm</Width>
         <ZIndex>18</ZIndex>
         <Style>
@@ -1673,8 +1673,75 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox36">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>الفرع</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>1.52827cm</Top>
+        <Left>17.57064cm</Left>
+        <Height>0.56436cm</Height>
+        <Width>2.2561cm</Width>
+        <ZIndex>19</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox37">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!BraNameA.Value, "Rep_UserActivityLogByUserAr")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox15</rd:DefaultName>
+        <Top>1.52827cm</Top>
+        <Left>13.65596cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.91599cm</Width>
+        <ZIndex>20</ZIndex>
+        <Style>
+          <Border>
+            <Color>Silver</Color>
+            <Style>Solid</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>5.49793cm</Height>
+    <Height>4.70418cm</Height>
     <Style />
   </Body>
   <Width>19.98214cm</Width>

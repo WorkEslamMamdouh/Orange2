@@ -394,7 +394,7 @@
     <value>Open Balance</value>
   </data>
   <data name="Men_Sales" xml:space="preserve">
-    <value>Sales</value>
+    <value>Retail Sales</value>
   </data>
   <data name="Men_SlsSales" xml:space="preserve">
     <value>Sales Invoice</value>
@@ -523,7 +523,7 @@
     <value>Vendor Adjustment</value>
   </data>
   <data name="Men_FundMovement" xml:space="preserve">
-    <value>Fund Movement</value>
+    <value>CashBox Movement</value>
   </data>
   <data name="Btn_Execute" xml:space="preserve">
     <value>Execute</value>
@@ -724,7 +724,7 @@
     <value>Account  Vendor Statment</value>
   </data>
   <data name="Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>Stock Reports</value>
   </data>
   <data name="Inventorymove" xml:space="preserve">
     <value>Item Movement</value>
@@ -736,19 +736,19 @@
     <value>Operation Revenue</value>
   </data>
   <data name="Inventoryvalue" xml:space="preserve">
-    <value>Stock Value</value>
+    <value>Inventory Value</value>
   </data>
   <data name="Men_ReceiptVoucher" xml:space="preserve">
     <value>Receipt Voucher</value>
   </data>
   <data name="Branch_accounts" xml:space="preserve">
-    <value>Branch interconnect accounts</value>
+    <value>Branch Link Accounts</value>
   </data>
   <data name="Designconstraints" xml:space="preserve">
     <value>Link Restrictions Design</value>
   </data>
   <data name="Directtransfer" xml:space="preserve">
-    <value>Direct transfer</value>
+    <value>Direct Transfer</value>
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
@@ -760,7 +760,7 @@
     <value>Accounts</value>
   </data>
   <data name="mnue_Accountstatement" xml:space="preserve">
-    <value>Leadger</value>
+    <value>General Leadger</value>
   </data>
   <data name="mnue_Bondmanagement" xml:space="preserve">
     <value>Voucher Management</value>
@@ -775,10 +775,10 @@
     <value>Tools</value>
   </data>
   <data name="operationsmanagment" xml:space="preserve">
-    <value>operations managment</value>
+    <value>Consignment Management</value>
   </data>
   <data name="Processes" xml:space="preserve">
-    <value>Processes</value>
+    <value>Consignments</value>
   </data>
   <data name="Receipttransfer" xml:space="preserve">
     <value>Receipt of transfer</value>
@@ -1825,7 +1825,7 @@
     <value>Cash to Delegate</value>
   </data>
   <data name="Inv_ImportInvoice" xml:space="preserve">
-    <value>Import Invoice</value>
+    <value>Consignment Invoice</value>
   </data>
   <data name="Inv_MenuNo" xml:space="preserve">
     <value>Menu No</value>
@@ -1873,10 +1873,10 @@
     <value>Bussiness Unit</value>
   </data>
   <data name="Box_Report" xml:space="preserve">
-    <value>Box Reports</value>
+    <value>CashBox Reports</value>
   </data>
   <data name="Combined_account" xml:space="preserve">
-    <value>Account Combined Statement </value>
+    <value>Combined Statement </value>
   </data>
   <data name="general_tech_Rep" xml:space="preserve">
     <value>General Professor Report</value>
@@ -2396,5 +2396,86 @@
   </data>
   <data name="ToTime" xml:space="preserve">
     <value>To Time</value>
+  </data>
+  <data name="Men_AccountsChart" xml:space="preserve">
+    <value>Accounts Chart</value>
+  </data>
+  <data name="Men_CashBoxSettings" xml:space="preserve">
+    <value>CashBox Settings</value>
+  </data>
+  <data name="Men_CollectUnit" xml:space="preserve">
+    <value>Packaging</value>
+  </data>
+  <data name="Men_ConsignmentClosing" xml:space="preserve">
+    <value>Consignment Closing</value>
+  </data>
+  <data name="Men_ConsignmentInvoice" xml:space="preserve">
+    <value>Consignment Invoice</value>
+  </data>
+  <data name="Men_ConsignmentManagement" xml:space="preserve">
+    <value>Consignment Management</value>
+  </data>
+  <data name="Men_ConsignmentReturn" xml:space="preserve">
+    <value>Consignment Return</value>
+  </data>
+  <data name="Men_Consignments" xml:space="preserve">
+    <value>Consignments</value>
+  </data>
+  <data name="Men_CostCenter" xml:space="preserve">
+    <value>Cost Center</value>
+  </data>
+  <data name="Men_CustomersVendors" xml:space="preserve">
+    <value>Customers and Vendors</value>
+  </data>
+  <data name="Men_GeneralLeadger" xml:space="preserve">
+    <value>General Leadger</value>
+  </data>
+  <data name="Men_GenerateLinkVouchers" xml:space="preserve">
+    <value>Generate Link Vouchers</value>
+  </data>
+  <data name="Men_ImportsReport" xml:space="preserve">
+    <value>Imports Report</value>
+  </data>
+  <data name="Men_Incomeoperations" xml:space="preserve">
+    <value>Sales Revenue</value>
+  </data>
+  <data name="Men_IssueToCC" xml:space="preserve">
+    <value>Issue Stock</value>
+  </data>
+  <data name="Men_IssueType" xml:space="preserve">
+    <value>Issue Type</value>
+  </data>
+  <data name="Men_LinkVouchers" xml:space="preserve">
+    <value>Link Vouchers</value>
+  </data>
+  <data name="Men_Purchase" xml:space="preserve">
+    <value>Retail Purchase</value>
+  </data>
+  <data name="Men_PurchaseInvoice" xml:space="preserve">
+    <value>Purchase Invoice</value>
+  </data>
+  <data name="Men_ResidualsList" xml:space="preserve">
+    <value>Residuals List</value>
+  </data>
+  <data name="Men_ResidualsReport" xml:space="preserve">
+    <value>Residuals Report</value>
+  </data>
+  <data name="Men_RetailSales" xml:space="preserve">
+    <value>Retail Sales</value>
+  </data>
+  <data name="Men_SlsTrSales" xml:space="preserve">
+    <value>Point of Sales</value>
+  </data>
+  <data name="Men_STKOpeningbalance" xml:space="preserve">
+    <value>Opening Balance</value>
+  </data>
+  <data name="Men_StockControl" xml:space="preserve">
+    <value>Stock Control</value>
+  </data>
+  <data name="Men_UserLog" xml:space="preserve">
+    <value>User Log</value>
+  </data>
+  <data name="Men_VoucherManagement" xml:space="preserve">
+    <value>Voucher Management</value>
   </data>
 </root>

@@ -394,7 +394,7 @@
     <value>الرصيد الافتتاحى</value>
   </data>
   <data name="Men_Sales" xml:space="preserve">
-    <value>المبيعات</value>
+    <value>المبيعات التجزئة</value>
   </data>
   <data name="Men_SlsSales" xml:space="preserve">
     <value>فاتورة المبيعات</value>
@@ -2400,5 +2400,86 @@
   </data>
   <data name="ToTime" xml:space="preserve">
     <value>الي وقت</value>
+  </data>
+  <data name="Men_AccountsChart" xml:space="preserve">
+    <value>دليل الحسابات</value>
+  </data>
+  <data name="Men_CashBoxSettings" xml:space="preserve">
+    <value>اعدادت الصندوق</value>
+  </data>
+  <data name="Men_CollectUnit" xml:space="preserve">
+    <value>تجميع الاصناف</value>
+  </data>
+  <data name="Men_ConsignmentClosing" xml:space="preserve">
+    <value>اغلاق الارساليات</value>
+  </data>
+  <data name="Men_ConsignmentInvoice" xml:space="preserve">
+    <value>فواتير الارساليات</value>
+  </data>
+  <data name="Men_ConsignmentManagement" xml:space="preserve">
+    <value>ادارة الارساليات</value>
+  </data>
+  <data name="Men_ConsignmentReturn" xml:space="preserve">
+    <value>مرتجع الارساليات</value>
+  </data>
+  <data name="Men_Consignments" xml:space="preserve">
+    <value>ارساليات</value>
+  </data>
+  <data name="Men_CostCenter" xml:space="preserve">
+    <value>مراكز التكلفة</value>
+  </data>
+  <data name="Men_CustomersVendors" xml:space="preserve">
+    <value>العملاء و الموردين</value>
+  </data>
+  <data name="Men_GeneralLeadger" xml:space="preserve">
+    <value>الأستاذ العام</value>
+  </data>
+  <data name="Men_GenerateLinkVouchers" xml:space="preserve">
+    <value>توليد قيود الربط</value>
+  </data>
+  <data name="Men_ImportsReport" xml:space="preserve">
+    <value>تقرير الاستيراد</value>
+  </data>
+  <data name="Men_Incomeoperations" xml:space="preserve">
+    <value>ايراد مبيعات</value>
+  </data>
+  <data name="Men_IssueToCC" xml:space="preserve">
+    <value>أمر صرف</value>
+  </data>
+  <data name="Men_IssueType" xml:space="preserve">
+    <value>انواع الصرف</value>
+  </data>
+  <data name="Men_LinkVouchers" xml:space="preserve">
+    <value>قيود الربط</value>
+  </data>
+  <data name="Men_Purchase" xml:space="preserve">
+    <value>مشتريات التجزئة</value>
+  </data>
+  <data name="Men_PurchaseInvoice" xml:space="preserve">
+    <value>فاتورة مشتريات</value>
+  </data>
+  <data name="Men_ResidualsList" xml:space="preserve">
+    <value>سجل البواقي</value>
+  </data>
+  <data name="Men_ResidualsReport" xml:space="preserve">
+    <value>تقرير البواقي</value>
+  </data>
+  <data name="Men_RetailSales" xml:space="preserve">
+    <value>مبيعات التجزئة</value>
+  </data>
+  <data name="Men_SlsTrSales" xml:space="preserve">
+    <value>نقاط البيع</value>
+  </data>
+  <data name="Men_STKOpeningbalance" xml:space="preserve">
+    <value>الرصيد الافتتاحى</value>
+  </data>
+  <data name="Men_StockControl" xml:space="preserve">
+    <value>المخزون</value>
+  </data>
+  <data name="Men_UserLog" xml:space="preserve">
+    <value>تقرير نشاط المستخدمين</value>
+  </data>
+  <data name="Men_VoucherManagement" xml:space="preserve">
+    <value>ادارة السندات</value>
   </data>
 </root>

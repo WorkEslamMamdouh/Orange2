@@ -11734,6 +11734,19 @@ class G_Role extends SecurityClass {
     public IsShowable: boolean;
     public RoleType: number;
 }
+class GProc_GetBranchModules_Result extends SecurityClass {
+    constructor() {
+        super();			 
+		this.MODULE_CODE = "";
+		this.MODULE_DESCE = "";
+		this.MODULE_DESCA = "";
+		this.MENU_NO = "";		    
+    }							  
+	public MODULE_CODE: string;
+	public MODULE_DESCE: string;
+	public MODULE_DESCA: string;
+	public MENU_NO: string;   
+}
 
 
 

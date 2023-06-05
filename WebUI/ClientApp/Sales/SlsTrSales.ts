@@ -1,5 +1,4 @@
 ﻿$(document).ready(() => {
-
     SlsTrSales.InitalizeComponent();
 })
 namespace SlsTrSales {
