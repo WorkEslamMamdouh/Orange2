@@ -10,6 +10,7 @@ var BackgroundImage;
     var GetCompStatus = new Array();
     var CountGrid = 0;
     function GetBackgroundImage() {
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
         Ajax.Callsync({
             type: "GET",
             async: false,
