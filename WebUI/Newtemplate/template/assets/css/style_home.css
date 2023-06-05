@@ -618,6 +618,9 @@ background-color: var(--dark-blue);
     align-self: center;
     color: var(--main-blue);
 }
+.col-slide .home-sub-title {
+    font-size: 4rem;
+}
 .home-details {
     font-size: 1.25rem;
     transition-delay: 0.4s;
@@ -747,7 +750,9 @@ background-color: var(--dark-blue);
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
 }
-
+.col-slide{
+    flex-direction:column;
+}
 /* Media Query  */
 @media only screen and (max-width: 1200px) {
     .home-details {
@@ -1302,13 +1307,22 @@ background-color: var(--dark-blue);
 .modal .modal-header {
     background-color: #143F6B;
     color: #fff;
+    padding: 0rem 1rem;
 }
 
 .modal .btn-close {
-    color: #fff;
-    background-color: #fff;
+    background: var(--main-orange);
+    width: 2rem;
+    height: 2rem;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    padding: 0;
 }
-
+    .modal .btn-close span {
+        color: var(--main-blue);
+        line-height: 1;
+        font-size: 2rem;
+    }
 .modal .modal-body {
     text-align: center;
     margin: 2rem 0;
@@ -1418,3 +1432,43 @@ background-color: var(--dark-blue);
     }
 }
 /*End Down Arrow Style*/
+/*Start New text Effect*/
+.text-effect {
+    font-family: 'Calligraffitti', cursive;
+    font-weight: 700;
+    font-size: 13rem;
+    position: absolute;
+    text-shadow: -15px 5px 20px #ced0d3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #F9f1cc;
+    text-shadow: 5px 5px 0px #FFB650, 10px 10px 0px #FFD662, 15px 15px 0px #fa7809, 20px 20px 0px #7d3c03, 25px 25px 0px #143F6B, 30px 30px 0px #93bfeb;
+}
+
+/*End New text Effect*/
+/*Start button*/
+
+.btn-login {
+ 
+    transform: skewX(-10deg);
+    height: 45px;
+    width: 160px;
+    color:#fff;
+    border-radius: 20px 5px 20px 0px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font: 15px sans-serif;
+    font-weight: 300;
+    -webkit-animation: breath2 2s 0.5s infinite alternate;
+    animation: breath2 2s 0.5s infinite alternate;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/*End scrolldown*/
