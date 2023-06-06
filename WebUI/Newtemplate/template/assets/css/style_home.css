@@ -1591,3 +1591,39 @@ background-color: var(--dark-blue);
         border-radius: 50%;
     }
 }
+/*Start Top Button*/
+.top-container {
+    position: relative;
+}
+
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 99999;
+    transition: all 0.4s;
+}
+
+.sidebar-icon-only .page-body-wrapper .back-to-top {
+    right: 5rem;
+}
+
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.back-to-top i {
+    color: var(--main-orange);
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 992px) {
+    .back-to-top {
+        z-index: 9;
+        right: 1rem;
+    }
+}
+/*End Top Button*/

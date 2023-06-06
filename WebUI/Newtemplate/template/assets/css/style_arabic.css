@@ -28322,6 +28322,7 @@ div.tagsinput {
 
 .sidebar .nav .nav-item .nav-link i.menu-arrow {
     font: normal normal normal 24px/1 "Material Design Icons";
+    padding-right:.5rem;
     line-height: 1;
     font-size: 1rem;
     margin-right: auto;
@@ -28573,19 +28574,17 @@ div.tagsinput {
     margin-left: 0.5rem;
     font-size: 0.8125rem;
     line-height: 1;
-    /*background: rgba(255, 255, 255, 0.5);*/
-    background: var(--dark-blue);
+    background: var(--Light-blue);
     width: 25px;
     height: 25px;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
 }
 
     .sidebar .nav .nav-item .menu-icon i {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
     }
 
 .sidebar .nav.sub-menu {
@@ -28630,7 +28629,7 @@ div.tagsinput {
 }
 
 .sidebar .nav .menu-items .nav-link .menu-icon i {
-    color: var(--Lighter-blue);
+    color: var(--dark-blue);
 }
 
 /* style for off-canvas menu*/
@@ -30532,7 +30531,8 @@ input[class=checkbox]:checked:before {
         left: 0;
         width: 100%;
         height: 100px;
-        background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);
+        /*background: url(https://1.bp.blogspot.com/-xQUc-TovqDk/XdxogmMqIRI/AAAAAAAACvI/AizpnE509UMGBcTiLJ58BC6iViPYGYQfQCLcBGAsYHQ/s1600/wave.png);*/
+        background: url(../images/home/wave.png);
         background-size: 1000px 100px
     }
 
