@@ -30603,7 +30603,7 @@ input[class=checkbox]:checked:before {
 }
     .company-name h1 {
         color: var(--main-blue);
-        font-size: calc(1em + 5vw);
+        font-size: calc(1em + 4vw);
         font-weight: 900;
         text-align:center;
         text-shadow: -0.0075em 0.0075em 0 #fff, 0.005em 0.005em 0 #fff, 0.01em 0.01em 0 #fff, 0.015em 0.015em #fff, 0.02em 0.02em 0 #fff, 0.025em 0.025em 0 #fff, 0.03em 0.03em 0 #fff, 0.035em 0.035em 0 #fff;

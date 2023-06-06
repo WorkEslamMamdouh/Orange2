@@ -96,6 +96,7 @@ var LnkVoucher;
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = function () { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); };
         //*******************************print*****************************
+        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' ? txtFromNumber.value : txtToNumber.value; };
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
@@ -346,29 +347,37 @@ var LnkVoucher;
         Enabled();
     }
     function btnGenerationVoucher_onclick() {
-        var TrID = Number($('#TRID').val());
-        var TR_CODE = $('#TR_CODE').val();
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
-            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    var List = result.Response;
-                    CountGrid = 0;
-                    $("#div_Data").html('');
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
-                    for (var i = 0; i < List.length; i++) {
-                        BuildControls(i);
-                        DisplayBuildControls(List[i], i);
-                        CountGrid++;
+        btnGenerationVoucher.innerHTML = ' جاري التوليد <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 140% !important;z-index: 99999;"></i> ';
+        btnGenerationVoucher.disabled = true;
+        setTimeout(function () {
+            var TrID = Number($('#TRID').val());
+            var TR_CODE = $('#TR_CODE').val();
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+                data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        var List = result.Response;
+                        CountGrid = 0;
+                        $("#div_Data").html('');
+                        List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
+                        $("#btnGenerationVoucher").addClass('animate__animated animate__fadeOutBottomRight');
+                        for (var i = 0; i < List.length; i++) {
+                            BuildControls(i);
+                            DisplayBuildControls(List[i], i);
+                            CountGrid++;
+                        }
+                        $('.table-responsive').scrollLeft(3);
+                        ComputeTotals();
+                        btnGenerationVoucher.disabled = false;
+                        setTimeout(function () { $("#btnGenerationVoucher").attr('class', 'btn btn-main Grin animate__animated   animate__fadeInBottomRight'); }, 1000);
+                        btnGenerationVoucher.innerHTML = "<i class=\"fa-solid fa-arrow-left fa-fade\"></i>\u0627\u0639\u0627\u062F\u0629 \u062A\u0648\u0644\u064A\u062F \u0627\u0644\u0642\u064A\u062F<i class=\"fa-solid fa-arrow-right fa-fade\"></i>";
                     }
-                    $('.table-responsive').scrollLeft(3);
-                    ComputeTotals();
                 }
-            }
-        });
+            });
+        }, 500);
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
