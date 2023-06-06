@@ -243,12 +243,14 @@ var JsGrid = /** @class */ (function () {
                     _this_1.OnRefreshed();
             },
             rowDoubleClick: function (e) {
+                debugger;
                 var _this = _this_1;
                 var e_item = e.item;
                 var _this_PrimaryKey = _this_1.PrimaryKey;
                 var e_item_PrimaryKey = e_item[_this_PrimaryKey];
                 if ($("#Mod_Flag").val() != 1) {
-                    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+                    $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>');
+                    //$('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
                 }
                 setTimeout(function () {
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item); // e.itemIndex;

@@ -248,6 +248,7 @@
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Newtemplate\template\assets\css\Loder.css" />
     <Content Include="Newtemplate\template\assets\css\style_News.css" />
     <Content Include="Newtemplate\template\assets\css\style_arabic.css" />
     <Content Include="Newtemplate\template\assets\css\style_home.css" />

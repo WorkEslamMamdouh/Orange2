@@ -655,7 +655,8 @@ function OpenPartial(ModuleCode, DivName) {
 }
 function loading(NameBtn) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
-    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+    $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>');
+    //$('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
     $('.iconbar-container').attr('style', 'display : none');
     setTimeout(function () {
         $('#Loading_Div').html('');
