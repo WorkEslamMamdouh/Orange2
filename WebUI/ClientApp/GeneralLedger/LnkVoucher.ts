@@ -911,7 +911,7 @@ namespace LnkVoucher {
         DisplayData(TransactionsGrid.SelectedItem)
         disabled();
     }
-    //***************************************************************************Print*********************************************************     
+    //*******************************************************Print*********************************************************     
     export function PrintReport(OutType: number) {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();

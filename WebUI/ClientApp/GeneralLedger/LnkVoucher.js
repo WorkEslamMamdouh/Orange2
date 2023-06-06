@@ -754,7 +754,7 @@ var LnkVoucher;
         DisplayData(TransactionsGrid.SelectedItem);
         disabled();
     }
-    //***************************************************************************Print*********************************************************     
+    //*******************************************************Print*********************************************************     
     function PrintReport(OutType) {
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
