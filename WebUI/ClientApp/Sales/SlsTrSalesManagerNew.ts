@@ -743,7 +743,7 @@ namespace SlsTrSalesManagerNew {
     function GetItems(id: number, Type: number, cnt: number) {
 
 
-
+        debugger
         let ItemID = id;
 
         if (Type == 1) {
