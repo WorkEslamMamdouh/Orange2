@@ -3120,6 +3120,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="IsPosted" Type="bit" />
           <Property Name="VoucherNo" Type="int" />
           <Property Name="ChRemarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrNo" Type="int" />
         </EntityType>
         <EntityType Name="I_TR_OperationDeposit">
           <Key>
@@ -4964,6 +4965,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperationCharges' does not ha
           <Property Name="IsPosted" Type="bit" />
           <Property Name="VoucherNo" Type="int" />
           <Property Name="ChRemarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrNo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperationDepsit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -9575,7 +9577,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetOperationCharges].[CashBoxID] AS [CashBoxID], 
     [IQ_GetOperationCharges].[IsPosted] AS [IsPosted], 
     [IQ_GetOperationCharges].[VoucherNo] AS [VoucherNo], 
-    [IQ_GetOperationCharges].[ChRemarks] AS [ChRemarks]
+    [IQ_GetOperationCharges].[ChRemarks] AS [ChRemarks], 
+    [IQ_GetOperationCharges].[TrNo] AS [TrNo]
     FROM [dbo].[IQ_GetOperationCharges] AS [IQ_GetOperationCharges]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetOperationDepsit" EntityType="Self.IQ_GetOperationDepsit" store:Type="Views" store:Schema="dbo">
@@ -14498,6 +14501,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsPosted" Type="Boolean" />
           <Property Name="VoucherNo" Type="Int32" />
           <Property Name="ChRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrNo" Type="Int32" />
         </EntityType>
         <EntityType Name="G_Role">
           <Key>
@@ -14701,6 +14705,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsPosted" Type="Boolean" />
           <Property Name="VoucherNo" Type="Int32" />
           <Property Name="ChRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrNo" Type="Int32" />
         </EntityType>
         <EntityType Name="A_Voucher_Types">
           <Key>
@@ -25616,6 +25621,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetOperationCharges">
             <EntityTypeMapping TypeName="InvModel.IQ_GetOperationCharges">
               <MappingFragment StoreEntitySet="IQ_GetOperationCharges">
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
                 <ScalarProperty Name="ChRemarks" ColumnName="ChRemarks" />
                 <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
                 <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
@@ -25834,6 +25840,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_TR_OperationCharges">
             <EntityTypeMapping TypeName="InvModel.I_TR_OperationCharges">
               <MappingFragment StoreEntitySet="I_TR_OperationCharges">
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
                 <ScalarProperty Name="ChRemarks" ColumnName="ChRemarks" />
                 <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
                 <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
