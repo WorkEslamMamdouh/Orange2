@@ -1871,7 +1871,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.PrintList, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)

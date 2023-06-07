@@ -53,6 +53,10 @@
                 OnOk();
 
         });
+
+        setTimeout(function () {
+            $('#MessageBoxOk').focus();
+        }, 700);
     }
     export function Showwithoutclick(Message: string, Title: string) {
         if (Initalized == false)
@@ -97,8 +101,7 @@
 
 
         });
-
-        debugger
+         
         setTimeout(function () {
             $('#MessageBoxOk').focus();
         }, 700);

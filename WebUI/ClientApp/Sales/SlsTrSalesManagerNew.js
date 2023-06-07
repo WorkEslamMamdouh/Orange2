@@ -12,6 +12,7 @@ var SlsTrSalesManagerNew;
     var SalesmanId = 'null';
     var InvoicePaymentDef;
     var CashInvoiceDefAuth;
+    var ModulesScreen = "";
     if (SlsInvSrc == "1") { //  1:Retail invoice  
         var SysSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -20,6 +21,7 @@ var SlsTrSalesManagerNew;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
         InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].RetailInvoicePaymentDef;
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
+        ModulesScreen = Modules.SlsTrSalesManagerNew;
     }
     else { //2: opration invoice 
         var SysSession = GetSystemSession(Modules.SlsTrSalesOperation);
@@ -30,6 +32,7 @@ var SlsTrSalesManagerNew;
         InvoicePaymentDef = SysSession.CurrentEnvironment.I_Control[0].OperationInvoicePaymentDef;
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
         $('#Div_Priceshow').addClass('display_none');
+        ModulesScreen = Modules.SlsTrSalesOperation;
     }
     var compcode;
     var BranchCode;
@@ -197,7 +200,7 @@ var SlsTrSalesManagerNew;
         //txtStartDate.value = DateStartMonth();
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
         //*******************************************************************************************************************************
         Display_Category();
         FillddlVatNature();
@@ -849,7 +852,7 @@ var SlsTrSalesManagerNew;
                 if (result.IsSuccess) {
                     AccountDetails = result.Response;
                     $('#txt_CustNameFilter').val(AccountDetails[0].NAMEA);
-                    //$('#txt_CustCode').val(AccountDetails.CustomerCODE);
+                    //$('#txt_CustCode').val(AccountDetails[0].CustomerCODE);
                     ddlCustomer.value = AccountDetails[0].CustomerId.toString();
                 }
             }
@@ -866,10 +869,20 @@ var SlsTrSalesManagerNew;
         });
     }
     function getCustomerById(custId, iscode) {
+        debugger;
+        if (custId.toString().trim() == '') {
+            DisplayMassage('العميل غير صحيح', '(Please select a customer)', MessageType.Error);
+            $('#txtInvoiceCustomerName').val('');
+            $('#txt_CustCode').val('');
+            ddlInvoiceCustomer.value = '';
+            vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
+            txtCustomerMobile.value = '';
+            return;
+        }
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
-            data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId.toString().trim(), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: function (d) {
                 var result = d;
                 ;
@@ -2046,7 +2059,7 @@ var SlsTrSalesManagerNew;
         $("#btnSave").addClass("display_none");
         InvoiceStatisticsModel = new Array();
         Selecteditem = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         GlobalDocNo = Selecteditem[0].DocNo;
         try {
@@ -3121,9 +3134,15 @@ var SlsTrSalesManagerNew;
         ////}, 1500);
     }
     function ValidationHeader() {
+        debugger;
         if (ddlInvoiceCustomer.value.trim() == "" && SysSession.CurrentEnvironment.InvoiceTransCode == 1) {
             DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
             Errorinput(txt_CustCode);
+            return false;
+        }
+        else if (txtInvoiceCustomerName.value.trim() == "") {
+            DisplayMassage('(برجاء ادخال العميل)', '(Please select a customer)', MessageType.Error);
+            Errorinput(txtInvoiceCustomerName);
             return false;
         }
         else if (ddlStore.value == "null" && SlsInvSrc == "1") {
@@ -3285,8 +3304,7 @@ var SlsTrSalesManagerNew;
             InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         }
         InvoiceModel.TrType = 0; //0 invoice 1 return
-        InvoiceModel.SlsInvType = 1; //  retail 
-        InvoiceModel.StoreId = ddlStore.value == 'null' ? null : Number(ddlStore.value); //main store
+        InvoiceModel.SlsInvType = 1; //  retail  
         InvoiceModel.RefTrID = null;
         InvoiceModel.SlsInvSrc = Number(ddlTypeInv.value); // 1 from store 2 from van 
         InvoiceModel.OperationId = Number($('#txt_OperationId').val());
@@ -3341,7 +3359,7 @@ var SlsTrSalesManagerNew;
         InvoiceModel.TaxNotes = $('#txtTerms_of_Payment').val();
         InvoiceModel.QtyTotal = $('#txtPackageCount').val();
         InvoiceModel.LineCount = $('#txtItemCount').val();
-        InvoiceModel.CashBoxID = Number($('#ddlCashBox').val()) == 0 ? null : Number($('#ddlCashBox').val());
+        InvoiceModel.CashBoxID = $('#ddlCashBox').val() == 'null' ? null : Number($('#ddlCashBox').val());
         InvoiceModel.RefTrID = $("#txtPriceshow").val();
         InvoiceModel.RefTrID = $("#txtPriceshowID").val();
         //InvoiceModel.CashBoxID = Number($('#ddlCashBox').val());
@@ -3470,7 +3488,7 @@ var SlsTrSalesManagerNew;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
         MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.MODULE_CODE = ModulesScreen;
         MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -3489,9 +3507,23 @@ var SlsTrSalesManagerNew;
         InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
         InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
         MasterDetailsModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
-        if (InvoiceModel.Status == 1) {
-            if (InvoiceModel.IsPosted == true) {
-                MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //if (InvoiceModel.Status == 1) {
+        //    if (InvoiceModel.IsPosted == true) {
+        //        MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //    }
+        //}
+        if (SlsInvSrc == "1") {
+            if (InvoiceModel.StoreId == 0 || InvoiceModel.StoreId == null) {
+                DisplayMassage(" برجاء اختيار المستودع", "Please select a Store", MessageType.Error);
+                Errorinput(ddlStore);
+                return false;
+            }
+        }
+        if (ddlType.value == '1') {
+            if (InvoiceModel.CashBoxID == 0 || InvoiceModel.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return false;
             }
         }
         Ajax.Callsync({
@@ -3544,6 +3576,20 @@ var SlsTrSalesManagerNew;
                 DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
                 Errorinput(ddlCashBox);
                 return;
+            }
+        }
+        if (SlsInvSrc == "1") {
+            if (InvoiceModel.StoreId == 0 || InvoiceModel.StoreId == null) {
+                DisplayMassage(" برجاء اختيار المستودع", "Please select a Store", MessageType.Error);
+                Errorinput(ddlStore);
+                return false;
+            }
+        }
+        if (ddlType.value == '1') {
+            if (InvoiceModel.CashBoxID == 0 || InvoiceModel.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return false;
             }
         }
         Ajax.Callsync({
@@ -3940,19 +3986,9 @@ var SlsTrSalesManagerNew;
             return false;
         }
         Assign();
-        if (InvoiceModel.IsPosted == true) {
-            MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
-        }
-        //InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
-        //InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
-        //let Selecteditem
-        //Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
-        //try {
-        //    GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
-        //} catch (e) {
-        //    Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(invoiceID));
-        //    GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
-        //}
+        //if (InvoiceModel.IsPosted == true) {
+        //    MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //} 
         InvoiceModel.InvoiceID = GlobalinvoiceID;
         InvoiceModel.CompCode = Number(compcode);
         InvoiceModel.BranchCode = Number(BranchCode);
@@ -4098,7 +4134,7 @@ var SlsTrSalesManagerNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear);
+                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -4124,7 +4160,7 @@ var SlsTrSalesManagerNew;
         //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {
@@ -4186,7 +4222,7 @@ var SlsTrSalesManagerNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });

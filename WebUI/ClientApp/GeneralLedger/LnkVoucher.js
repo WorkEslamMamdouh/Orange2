@@ -54,6 +54,7 @@ var LnkVoucher;
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         GetData_Header();
+        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
     }
     LnkVoucher.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -96,7 +97,7 @@ var LnkVoucher;
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = function () { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); };
         //*******************************print*****************************
-        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' ? txtFromNumber.value : txtToNumber.value; };
+        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value) ? txtFromNumber.value : txtToNumber.value; };
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
@@ -341,7 +342,9 @@ var LnkVoucher;
         }, 100);
     }
     function btnBack_onclick() {
-        GridDoubleClick();
+        CleanDetails();
+        DisplayData(TransactionsGrid.SelectedItem);
+        disabled();
     }
     function btnUpdate_onclick() {
         Enabled();
@@ -413,6 +416,9 @@ var LnkVoucher;
         CleanDetails();
         DisplayData(TransactionsGrid.SelectedItem);
         disabled();
+        setTimeout(function () {
+            DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, TransactionsGrid.SelectedItem.TRID);
+        }, 1000);
     }
     function DisplayData(Selecteditem) {
         DocumentActions.RenderFromModel(Selecteditem);
@@ -713,6 +719,11 @@ var LnkVoucher;
         Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
         LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
+        LnkVoucherlMastDet.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        LnkVoucherlMastDet.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
+        LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
+        LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         debugger;

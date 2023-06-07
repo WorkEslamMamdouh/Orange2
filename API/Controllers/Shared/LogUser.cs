@@ -47,8 +47,10 @@ namespace Inv.API.Controllers
             Query = 20,
             print = 21,
             Open= 22,
-            AllSuccess = 23,
-            OpenScreen = 5
+            //AllSuccess = 23,
+            OpenScreen = 5,
+            View = 24 ,
+            PrintList = 25 
         }
         public enum PageName
         {

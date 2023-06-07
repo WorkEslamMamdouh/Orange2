@@ -7,7 +7,6 @@ using Inv.BLL.Services.GlnktransTemp;
 using Inv.BLL.Services.LnkVoucherDetail;
 using Inv.BLL.Services.VchrTemplateDetail;
 using Inv.DAL.Domain;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -26,7 +25,7 @@ namespace Inv.API.Controllers
         private readonly IVchrTemplateDetailService IVchrTemplateDetailService;
         private readonly ILnkVoucherDetailService ILnkVoucherService;
 
-        public TranPostingController(IGBRANCHService _IGBRANCHService, GlnktransTempService _GlnktransTempService, IGlnktransService _IGlnktransService, G_USERSController _Control, IVchrTemplateDetailService _IVchrTemplateDetailService , ILnkVoucherDetailService _ILnkVoucherDetailService)
+        public TranPostingController(IGBRANCHService _IGBRANCHService, GlnktransTempService _GlnktransTempService, IGlnktransService _IGlnktransService, G_USERSController _Control, IVchrTemplateDetailService _IVchrTemplateDetailService, ILnkVoucherDetailService _ILnkVoucherDetailService)
         {
             IGBRANCHService = _IGBRANCHService;
             GlnktransTempService = _GlnktransTempService;
@@ -57,7 +56,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
 
-                ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum,1);
+                ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum, 1);
                 LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
@@ -67,7 +66,7 @@ namespace Inv.API.Controllers
 
 
         [HttpPost, AllowAnonymous]
-        public IHttpActionResult UpdateDetail([FromBody]LnkVoucherlMasterDetails  obj)
+        public IHttpActionResult UpdateDetail([FromBody]LnkVoucherlMasterDetails obj)
         {
             //if (ModelState.IsValid && UserControl.CheckUser(obj.Token, obj.UserCode))
             //{
@@ -76,7 +75,7 @@ namespace Inv.API.Controllers
                 try
                 {
 
-                     
+
                     //update Details
                     List<A_LnkVoucher> insertedObjects = obj.A_LnkVoucher.Where(x => x.StatusFlag == 'i').ToList();
                     List<A_LnkVoucher> deletedObjects = obj.A_LnkVoucher.Where(x => x.StatusFlag == 'd').ToList();
@@ -100,7 +99,16 @@ namespace Inv.API.Controllers
                     dbTransaction.Commit();
 
 
-                    List<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(obj.FilterLnkVoucher.Comp, obj.FilterLnkVoucher.branchCode, obj.FilterLnkVoucher.UserCode, "I", obj.FilterLnkVoucher.TrType, obj.FilterLnkVoucher.StartDate, obj.FilterLnkVoucher.EndDate, obj.FilterLnkVoucher.FromNum, obj.FilterLnkVoucher.ToNum,1).ToList();
+                    List<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(obj.FilterLnkVoucher.Comp, obj.FilterLnkVoucher.branchCode, obj.FilterLnkVoucher.UserCode, "I", obj.FilterLnkVoucher.TrType, obj.FilterLnkVoucher.StartDate, obj.FilterLnkVoucher.EndDate, obj.FilterLnkVoucher.FromNum, obj.FilterLnkVoucher.ToNum, 1).ToList();
+
+
+                    if (obj.A_LnkVoucher.Count() > 0)
+                    {
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, Convert.ToInt32(obj.A_LnkVoucher[0].TrID), LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                    }
+
+
+
 
                     //string DataJson = JsonConvert.SerializeObject(Arrays, Formatting.None);
 
@@ -131,7 +139,7 @@ namespace Inv.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    
+
                     dbTransaction.Rollback();
                     return Ok(new BaseResponse(ex.Message));
                 }
@@ -144,8 +152,8 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult GetLnkVoucherById(int TrID, int CompCode, string tr_code)
         {
-             
-            var list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
+
+            List<AProc_GetLnkVoucher_Result> list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
             //var list = db.Database.SqlQuery<AQ_GetLnkVoucher>("select * from [dbo].[AQ_GetLnkVoucher] where TrID = " + TrID + "").ToList();
             return Ok(new BaseResponse(list));
         }
@@ -155,10 +163,10 @@ namespace Inv.API.Controllers
         [HttpGet, AllowAnonymous]
         public IHttpActionResult LnkVoucherGenerate(int TrID, int CompCode, int BranchCode, string tr_code)
         {
-            string Quy = "DECLARE @ok INT; exec  [Aproc_LnkVoucherGenerate] " + CompCode + " , " + BranchCode + " ,'I','" + tr_code + "',"+ TrID + " ,'admin',1,@ok output";
+            string Quy = "DECLARE @ok INT; exec  [Aproc_LnkVoucherGenerate] " + CompCode + " , " + BranchCode + " ,'I','" + tr_code + "'," + TrID + " ,'admin',1,@ok output";
             db.Database.ExecuteSqlCommand(Quy);
 
-            var list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
+            List<AProc_GetLnkVoucher_Result> list = db.AProc_GetLnkVoucher(CompCode, tr_code, TrID).ToList();
             return Ok(new BaseResponse(list));
         }
 

@@ -597,6 +597,7 @@ namespace AccDefBox {
             DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
             DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+            DetailsModel[0].MODULE_CODE = Modules.AccDefBox;
         }
         
 
