@@ -5056,6 +5056,7 @@ class I_TR_OperationCharges extends SecurityClass {
         this.CashBoxID = 0;
         this.IsPosted = false;
         this.VoucherNo = 0; 
+        this.TrNo = 0; 
     }
     public OperationExpensesID: number;
     public OperationID: number;
@@ -5075,6 +5076,7 @@ class I_TR_OperationCharges extends SecurityClass {
     public CashBoxID: number;
     public IsPosted: boolean;
     public VoucherNo: number; 
+    public TrNo: number; 
 
 }
 
@@ -5342,6 +5344,7 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.ChRemarks = "";
         this.IsPosted = false;
         this.VoucherNo = 0;
+        this.TrNo = 0;
 
 
     }
@@ -5370,6 +5373,7 @@ class IQ_GetOperationCharges extends SecurityClass {
     public ChRemarks: string;
     public IsPosted: boolean; 
     public VoucherNo: number;
+    public TrNo: number;
 
 }
 
