@@ -4,7 +4,7 @@
 })
 namespace SlsTrSalesReturnNew {
     //system varables
-    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrReturn);
+    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrReturnNew);
     var compcode: Number;
     var BranchCode: number;
     var sys: SystemTools = new SystemTools();

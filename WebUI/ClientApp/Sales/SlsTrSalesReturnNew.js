@@ -4,7 +4,7 @@ $(document).ready(function () {
 var SlsTrSalesReturnNew;
 (function (SlsTrSalesReturnNew) {
     //system varables
-    var SysSession = GetSystemSession(Modules.SlsTrReturn);
+    var SysSession = GetSystemSession(Modules.SlsTrReturnNew);
     var compcode;
     var BranchCode;
     var sys = new SystemTools();

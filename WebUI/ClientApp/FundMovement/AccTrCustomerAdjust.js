@@ -122,15 +122,15 @@ var AccTrCustomerAdjust;
     AccTrCustomerAdjust.InitalizeComponent = InitalizeComponent;
     function chkStatus_onchange() {
         if (IsNew != true) {
-            if (Selecteditem[0].IsPosted != true) {
-                if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
-                    Open();
-                }
+            //if (Selecteditem[0].IsPosted != true) {
+            if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
+                Open();
             }
-            else {
-                chkActive.checked = true;
-                DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
-            }
+            //}
+            //else {
+            //    chkActive.checked = true;
+            //    DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
+            //}
         }
     }
     function Open() {
