@@ -29,6 +29,7 @@ var AccDefExpenses;
         else {
             document.getElementById('Screen_name').innerHTML = "Revenue Accounts";
         }
+        document.title = "  حسابات المصروف ";
         $('#icon-bar').addClass('hidden_Control');
         $('#divIconbar').addClass('hidden_Control');
         $('#divIconbar').addClass('d-none');
@@ -202,7 +203,7 @@ var AccDefExpenses;
             DetailsModel[0].UserCode = SysSession.CurrentEnvironment.UserCode;
             DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            DetailsModel[0].MODULE_CODE = Modules.AccDefReceipts;
+            DetailsModel[0].MODULE_CODE = Modules.AccDefExpenses;
             DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
         debugger;

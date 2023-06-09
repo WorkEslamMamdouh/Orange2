@@ -580,6 +580,7 @@ var SlsTrSalesManagerNew;
         }
     }
     function GetItems(id, Type, cnt) {
+        debugger;
         var ItemID = id;
         if (Type == 1) {
             var StoreId = Number($('#ddlStore' + cnt).val());

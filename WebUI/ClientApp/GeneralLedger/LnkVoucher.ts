@@ -878,6 +878,7 @@ namespace LnkVoucher {
         LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
         LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
         LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        
 
     }
     function Update() {

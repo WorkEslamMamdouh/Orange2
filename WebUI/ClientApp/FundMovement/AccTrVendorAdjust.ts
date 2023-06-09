@@ -155,7 +155,7 @@ namespace AccTrVendorAdjust {
 
 
         if (IsNew != true) {
-            if (Selecteditem[0].IsPosted != true) {
+            //if (Selecteditem[0].IsPosted != true) {
 
                 if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
                     Open();
@@ -175,11 +175,11 @@ namespace AccTrVendorAdjust {
                         btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
                     }
                 }
-            }
-            else {
-                chkActive.checked = true;
-                DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
-            }
+            //}
+            //else {
+            //    chkActive.checked = true;
+            //    DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
+            //}
         }
 
     }

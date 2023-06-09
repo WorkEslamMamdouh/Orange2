@@ -1808,6 +1808,7 @@ namespace Processes {
 			              <textarea id="RemarksCharge${cnt}" type="text" class="form-control"  value=""></textarea>
 		                </div>
 	                </td>
+                    <input id="TrNo${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="IsPosted${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
@@ -2057,6 +2058,7 @@ namespace Processes {
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
         $("#RemarksCharge" + cnt).prop("value", (OperationCharges[cnt].ChRemarks == null || undefined) ? '' : OperationCharges[cnt].ChRemarks);
         $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
+        $("#TrNo" + cnt).prop("value", (OperationCharges[cnt].TrNo == null || undefined) ? 0 : OperationCharges[cnt].TrNo);
 
         $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
 
@@ -3402,6 +3404,7 @@ namespace Processes {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.TrNo = $("#TrNo" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
@@ -3429,6 +3432,7 @@ namespace Processes {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.TrNo = $("#TrNo" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
