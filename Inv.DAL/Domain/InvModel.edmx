@@ -6597,6 +6597,21 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="OpStatus" Type="int" Mode="In" />
           <Parameter Name="opid" Type="int" Mode="In" />
         </Function>
+        <Function Name="Gproc_Rep_UserActivitySummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="bracode" Type="int" Mode="In" />
+          <Parameter Name="fromdate" Type="nvarchar" Mode="In" />
+          <Parameter Name="todate" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GProc_SecCreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="nvarchar" Mode="In" />
           <Parameter Name="Comp" Type="int" Mode="In" />
@@ -12567,6 +12582,21 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <FunctionImport Name="GProc_GetBranchModules" ReturnType="Collection(InvModel.GProc_GetBranchModules_Result)">
             <Parameter Name="CompCode" Mode="In" Type="Int32" />
             <Parameter Name="BraCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Gproc_Rep_UserActivitySummary" ReturnType="Collection(InvModel.Gproc_Rep_UserActivitySummary_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="bracode" Mode="In" Type="Int32" />
+            <Parameter Name="fromdate" Mode="In" Type="String" />
+            <Parameter Name="todate" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
@@ -23712,6 +23742,37 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MENU_NO" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Gproc_Rep_UserActivitySummary_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_fromdate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_userCode" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="PAr_BraCode" Nullable="true" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="user_code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mODULE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="menu_no" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="OpenScr" Nullable="true" />
+          <Property Type="Int32" Name="ADD" Nullable="true" />
+          <Property Type="Int32" Name="Update" Nullable="true" />
+          <Property Type="Int32" Name="delete" Nullable="true" />
+          <Property Type="Int32" Name="query" Nullable="true" />
+          <Property Type="Int32" Name="print" Nullable="true" />
+          <Property Type="Int32" Name="OpenTr" Nullable="true" />
+          <Property Type="Int32" Name="ViewList" Nullable="true" />
+          <Property Type="Int32" Name="PrintList" Nullable="true" />
+          <Property Type="Int32" Name="total" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -35306,6 +35367,41 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
                 <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
                 <ScalarProperty Name="MENU_NO" ColumnName="MENU_NO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Gproc_Rep_UserActivitySummary" FunctionName="InvModel.Store.Gproc_Rep_UserActivitySummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.Gproc_Rep_UserActivitySummary_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_fromdate" ColumnName="Par_fromdate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_userCode" ColumnName="Par_userCode" />
+                <ScalarProperty Name="PAr_BraCode" ColumnName="PAr_BraCode" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="mODULE_DESCE" ColumnName="mODULE_DESCE" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="menu_no" ColumnName="menu_no" />
+                <ScalarProperty Name="OpenScr" ColumnName="OpenScr" />
+                <ScalarProperty Name="ADD" ColumnName="ADD" />
+                <ScalarProperty Name="Update" ColumnName="Update" />
+                <ScalarProperty Name="delete" ColumnName="delete" />
+                <ScalarProperty Name="query" ColumnName="query" />
+                <ScalarProperty Name="print" ColumnName="print" />
+                <ScalarProperty Name="OpenTr" ColumnName="OpenTr" />
+                <ScalarProperty Name="ViewList" ColumnName="ViewList" />
+                <ScalarProperty Name="PrintList" ColumnName="PrintList" />
+                <ScalarProperty Name="total" ColumnName="total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

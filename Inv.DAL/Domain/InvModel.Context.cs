@@ -6389,5 +6389,62 @@ namespace Inv.DAL.Domain
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_GetBranchModules_Result>("GProc_GetBranchModules", compCodeParameter, braCodeParameter);
         }
+    
+        public virtual ObjectResult<Gproc_Rep_UserActivitySummary_Result> Gproc_Rep_UserActivitySummary(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string user, string module, Nullable<int> bracode, string fromdate, string todate)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var userParameter = user != null ?
+                new ObjectParameter("user", user) :
+                new ObjectParameter("user", typeof(string));
+    
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
+            var bracodeParameter = bracode.HasValue ?
+                new ObjectParameter("bracode", bracode) :
+                new ObjectParameter("bracode", typeof(int));
+    
+            var fromdateParameter = fromdate != null ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(string));
+    
+            var todateParameter = todate != null ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gproc_Rep_UserActivitySummary_Result>("Gproc_Rep_UserActivitySummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, moduleParameter, bracodeParameter, fromdateParameter, todateParameter);
+        }
     }
 }
