@@ -6390,7 +6390,7 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GProc_GetBranchModules_Result>("GProc_GetBranchModules", compCodeParameter, braCodeParameter);
         }
     
-        public virtual ObjectResult<Gproc_Rep_UserActivitySummary_Result> Gproc_Rep_UserActivitySummary(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string user, Nullable<int> bracode, string fromdate, string todate)
+        public virtual ObjectResult<Gproc_Rep_UserActivitySummary_Result> Gproc_Rep_UserActivitySummary(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string user, string module, Nullable<int> bracode, string fromdate, string todate)
         {
             var compParameter = comp.HasValue ?
                 new ObjectParameter("comp", comp) :
@@ -6428,6 +6428,10 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("user", user) :
                 new ObjectParameter("user", typeof(string));
     
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
             var bracodeParameter = bracode.HasValue ?
                 new ObjectParameter("bracode", bracode) :
                 new ObjectParameter("bracode", typeof(int));
@@ -6440,7 +6444,7 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("todate", todate) :
                 new ObjectParameter("todate", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gproc_Rep_UserActivitySummary_Result>("Gproc_Rep_UserActivitySummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, bracodeParameter, fromdateParameter, todateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gproc_Rep_UserActivitySummary_Result>("Gproc_Rep_UserActivitySummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, moduleParameter, bracodeParameter, fromdateParameter, todateParameter);
         }
     }
 }

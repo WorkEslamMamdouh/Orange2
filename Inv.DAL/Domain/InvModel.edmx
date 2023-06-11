@@ -6607,6 +6607,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
           <Parameter Name="RepType" Type="int" Mode="In" />
           <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
           <Parameter Name="bracode" Type="int" Mode="In" />
           <Parameter Name="fromdate" Type="nvarchar" Mode="In" />
           <Parameter Name="todate" Type="nvarchar" Mode="In" />
@@ -12592,6 +12593,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="RepType" Mode="In" Type="Int32" />
             <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
             <Parameter Name="bracode" Mode="In" Type="Int32" />
             <Parameter Name="fromdate" Mode="In" Type="String" />
             <Parameter Name="todate" Mode="In" Type="String" />
