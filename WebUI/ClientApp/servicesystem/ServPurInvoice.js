@@ -130,7 +130,6 @@ var ServPurInvoice;
         FillddlFamily();
         GetAllCostCenters();
         GetAllVendors();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear);
         GetAllVatDetails();
     }
     ServPurInvoice.InitializeComponent = InitializeComponent;
@@ -2145,7 +2144,6 @@ var ServPurInvoice;
             success: function (d) {
                 var result = d.result;
                 window.open(result, "_blank");
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear);
             }
         });
     }

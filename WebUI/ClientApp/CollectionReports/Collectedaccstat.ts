@@ -384,7 +384,7 @@ namespace Collectedaccstat {
 
                     let result = d.result as string;
 
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Collectedaccstat, SysSession.CurrentEnvironment.CurrentYear);
+                    
  
                     window.open(result, "_blank");
                 }
@@ -399,7 +399,7 @@ namespace Collectedaccstat {
 
                     let result = d.result as string;
 
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Collectedaccstat, SysSession.CurrentEnvironment.CurrentYear);
+                    
 
                     window.open(result, "_blank");
                 }

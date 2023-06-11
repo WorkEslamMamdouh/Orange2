@@ -214,7 +214,6 @@ var SlsTrShowPrice;
         FillddlCashBox();
         $('#btnPrint').addClass('display_none');
         //GetLastPrice(3236)
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
         InitializeGrid();
         DisplayMod();
         flagInvMulti == false ? $('.InvMulti').addClass('display_none') : $('.InvMulti').removeClass('display_none');
@@ -1909,7 +1908,6 @@ var SlsTrShowPrice;
         $("#btnSave").addClass("display_none");
         InvoiceStatisticsModel = new Array();
         Selecteditem = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         GlobalDocNo = Selecteditem[0].DocNo;
         try {
@@ -3875,7 +3873,6 @@ var SlsTrShowPrice;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -3899,10 +3896,9 @@ var SlsTrShowPrice;
         else {
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {

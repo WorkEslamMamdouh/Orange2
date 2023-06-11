@@ -387,7 +387,7 @@ namespace Supplieraccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
+                    
                     window.open(result, "_blank");
                 }
             })
@@ -400,7 +400,7 @@ namespace Supplieraccstat {
                 data: rp,
                 success: (d) => {
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
+                    
                     window.open(result, "_blank");
                 }
             })
@@ -414,7 +414,7 @@ namespace Supplieraccstat {
                 success: (d) => {
 
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Supplieraccstat, SysSession.CurrentEnvironment.CurrentYear);
+                    
                     window.open(result, "_blank");
                 }
             })

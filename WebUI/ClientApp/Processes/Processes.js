@@ -768,7 +768,6 @@ var Processes;
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
         $("#txtVoucherNo").val("");
@@ -4243,7 +4242,6 @@ var Processes;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

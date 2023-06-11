@@ -895,7 +895,7 @@ namespace Processes {
     function MasterGridDoubleClick() {
         Selected_Data = new Array<IQ_GetOperation>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+        
 
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
@@ -5474,7 +5474,7 @@ namespace Processes {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }

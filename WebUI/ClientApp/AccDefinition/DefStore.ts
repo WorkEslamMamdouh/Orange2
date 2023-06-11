@@ -212,7 +212,7 @@ namespace DefStore {
         $('#btnSave').addClass('display_none');
         Selected_Data = new Array<GQ_GetStore>();
         Selected_Data = detailstore.filter(x => x.StoreId == Number(ReportGrid.SelectedKey));
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode,Modules.DefStore, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
+        
 
         $('#StoreDetail').removeClass('display_none');
 

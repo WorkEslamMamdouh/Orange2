@@ -1520,7 +1520,7 @@ namespace AccTrPaymentNoteNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result);
                 // window.close(result)
@@ -1539,7 +1539,7 @@ namespace AccTrPaymentNoteNew {
 
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

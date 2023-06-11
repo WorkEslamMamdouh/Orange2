@@ -474,7 +474,6 @@ var VATReport;
         rp.prdcode = Number(drpVatPeriod.value);
         rp.Name_function = "IProc_Prnt_VATReport";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.VatReport, SysSession.CurrentEnvironment.CurrentYear);
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

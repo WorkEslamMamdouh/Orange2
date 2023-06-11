@@ -612,7 +612,7 @@ namespace ServPurInvoiceRet {
     }
     function Display() {
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
+        
 
         DocumentActions.RenderFromModel(selecteditem);
 
@@ -1102,7 +1102,7 @@ namespace ServPurInvoiceRet {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -1119,7 +1119,7 @@ namespace ServPurInvoiceRet {
                                                                                
             rp.Name_function = "IProc_Prnt_VATPurReturn";
             localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
             localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
              window.open(Url.Action("ReportsPopup", "Home"), "_blank");

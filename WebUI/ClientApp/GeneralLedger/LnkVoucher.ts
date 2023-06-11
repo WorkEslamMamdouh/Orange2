@@ -60,7 +60,7 @@ namespace LnkVoucher {
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         GetData_Header();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
+ 
     }
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
@@ -124,9 +124,8 @@ namespace LnkVoucher {
         TransactionsGrid.OnItemEditing = () => { };
         TransactionsGrid.Columns = [
             { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
-            //{ title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false }, 
             {
                 title: res.App_date, css: "ColumPadding", name: "TR_DATE", width: "8%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -138,8 +137,7 @@ namespace LnkVoucher {
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
             { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
-            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
-            //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
+            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" }, 
             {
                 title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -459,11 +457,7 @@ namespace LnkVoucher {
     function GridDoubleClick() {
         CleanDetails();
         DisplayData(TransactionsGrid.SelectedItem)
-        disabled();
-
-        setTimeout(function () { 
-            DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, TransactionsGrid.SelectedItem.TRID);
-        }, 1000);
+        disabled(); 
     }
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
@@ -970,10 +964,9 @@ namespace LnkVoucher {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
+                
 
-                window.open(result);
-                // window.close(result)
+                window.open(result); 
             }
         })
     }
@@ -989,7 +982,7 @@ namespace LnkVoucher {
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

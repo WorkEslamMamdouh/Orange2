@@ -38,7 +38,7 @@ namespace IssueType {
         InitalizeEvents();     
         GetddlAcc();
         Display();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueType, SysSession.CurrentEnvironment.CurrentYear);
+        
     }
      
     function InitalizeControls() {

@@ -238,6 +238,7 @@ function GetSystemEnvironment() {
 function GetSystemSession(Mod) {
     if (Mod != "Home") {
         $('#divIconbar').removeClass('hidden_Control');
+        localStorage.setItem("Model_Screen", Mod);
     }
     if (document.cookie.length > 0) {
         var SysSession = new SystemSession;
@@ -245,10 +246,16 @@ function GetSystemSession(Mod) {
         if (SysSession.CurrentEnvironment == null) {
             return;
         }
+        var DbName = SysSession.CurrentEnvironment.DbName;
         var compCode = SysSession.CurrentEnvironment.CompCode;
         var UserCode = SysSession.CurrentEnvironment.UserCode;
-        var DbName = SysSession.CurrentEnvironment.DbName;
+        var BranchCode = SysSession.CurrentEnvironment.BranchCode;
+        var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
         $('#GetIPAddress').val(compCode + "_" + UserCode + "_" + DbName);
+        localStorage.setItem("UserCode", UserCode);
+        localStorage.setItem("compCode", compCode);
+        localStorage.setItem("BranchCode", BranchCode);
+        localStorage.setItem("CurrentYear", CurrentYear);
         if (Mod == "Home")
             return SysSession;
         var sys = new SystemTools();
@@ -257,12 +264,12 @@ function GetSystemSession(Mod) {
             var UserCode_1 = SysSession.CurrentEnvironment.UserCode;
             var SystemCode = SysSession.CurrentEnvironment.SystemCode;
             var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
-            var CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
+            var CurrentYear_1 = SysSession.CurrentEnvironment.CurrentYear;
             //var apiUrl = $("#GetAPIUrl").val() + "SystemTools" + "/" + "GetUserPrivilage";
             Ajax.Callsync({
                 type: "GET",
                 url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
-                data: { year: Number(CurrentYear), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode_1, SystemCode: SystemCode, Modulecode: Mod },
+                data: { year: Number(CurrentYear_1), compCode: Number(compCode), branchCode: Number(branchCode), UserCode: UserCode_1, SystemCode: SystemCode, Modulecode: Mod },
                 success: function (d) {
                     debugger;
                     var result = JSON.parse(d);
@@ -290,6 +297,9 @@ function GetSystemSession(Mod) {
                             $('#btnUpdate').addClass('hidden_Control');
                         }
                         setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
+                        setTimeout(function () {
+                            OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Mod, SysSession.CurrentEnvironment.CurrentYear);
+                        }, 3000);
                     }
                     else {
                         alert("No Inv1_Privilage  ( " + Mod + " )");

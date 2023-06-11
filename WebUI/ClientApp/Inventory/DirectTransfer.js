@@ -97,7 +97,6 @@ var DirectTransfer;
         txtTransferDate.value = GetDate();
         InitalizeEvents();
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear);
     }
     DirectTransfer.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -1214,7 +1213,6 @@ var DirectTransfer;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1231,7 +1229,6 @@ var DirectTransfer;
         rp.Name_function = "IProc_Prnt_StkTransfer";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Directtransfer, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
 })(DirectTransfer || (DirectTransfer = {}));

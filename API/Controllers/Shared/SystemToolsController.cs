@@ -1837,11 +1837,11 @@ namespace Inv.API.Controllers
             }
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId , string TrNo)
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, TrNo, null);
 
                 return Ok(new BaseResponse());
             }
@@ -1866,6 +1866,35 @@ namespace Inv.API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult ViewListLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.View, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult UpdateListLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.UpdateList, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult PrintliestLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
         {
@@ -1895,6 +1924,28 @@ namespace Inv.API.Controllers
             }
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult LoginOpen(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode , int InOrOut)
+        {
+                var TypeLog = LogUser.UserLog.Login;
+            try
+            {
+
+                if (InOrOut != 1)
+                {
+                    TypeLog = LogUser.UserLog.Logout;
+                }
+
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, TypeLog, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, TypeLog, ModuleCode, false, ex.Message, null, null);
+
+                return BadRequest();
+            }
+        }
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult SendMessage(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)

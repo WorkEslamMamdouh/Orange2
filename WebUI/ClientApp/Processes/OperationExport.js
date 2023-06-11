@@ -85,7 +85,6 @@ var OperationExport;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

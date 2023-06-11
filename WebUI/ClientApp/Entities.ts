@@ -5345,6 +5345,7 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.IsPosted = false;
         this.VoucherNo = 0;
         this.TrNo = 0;
+        this.CashBoxID = 0;
 
 
     }
@@ -5374,6 +5375,7 @@ class IQ_GetOperationCharges extends SecurityClass {
     public IsPosted: boolean; 
     public VoucherNo: number;
     public TrNo: number;
+    public CashBoxID: number;
 
 }
 

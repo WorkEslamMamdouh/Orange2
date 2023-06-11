@@ -336,7 +336,6 @@ var USERS;
         $("#btnBack").addClass("display_none");
         $("#btnSave").addClass("display_none");
         $("#div_Data").addClass("disabledDiv");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.USERS, SysSession.CurrentEnvironment.CurrentYear, UserGrid.SelectedKey.toString());
         var Selecte = List_Userdetails.filter(function (x) { return x.USER_CODE == UserGrid.SelectedKey; });
         Selecteditem = Selecte[0];
         DisplayData_Header();

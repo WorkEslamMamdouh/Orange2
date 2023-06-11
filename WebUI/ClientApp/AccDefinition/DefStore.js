@@ -167,7 +167,6 @@ var DefStore;
         $('#btnSave').addClass('display_none');
         Selected_Data = new Array();
         Selected_Data = detailstore.filter(function (x) { return x.StoreId == Number(ReportGrid.SelectedKey); });
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.DefStore, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
         $('#StoreDetail').removeClass('display_none');
         DisplayData(Selected_Data);
     }

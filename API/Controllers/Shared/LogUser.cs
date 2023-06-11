@@ -91,7 +91,7 @@ namespace Inv.API.Controllers
 
                 string sql = @"INSERT INTO  G_USER_LOG( USER_CODE, SYSTEM_CODE, COMP_CODE, BranchCode, FinYear, TimeStamp, MODULE_CODE, OperationId, DataID, ISSucceed, ErrorMessage, ExtraData) 
                             VALUES ('" + USER_CODE + "','I' ," + Convert.ToInt32(COMP_CODE) + "," + Convert.ToInt32(BranchCode) + ", " + short.Parse(FinYear) + ",'" + dateValue + "' ," + @"
-                                   '" + PageName + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '') ";
+                                   '" + PageName + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '"+ ErrorNo + "') ";
 
                 _db.Database.ExecuteSqlCommand(sql);
                 //G_USER_LOG obj = new G_USER_LOG();
@@ -133,7 +133,7 @@ namespace Inv.API.Controllers
 
                 string sql = @"INSERT INTO  G_USER_LOG( USER_CODE, SYSTEM_CODE, COMP_CODE, BranchCode, FinYear, TimeStamp, MODULE_CODE, OperationId, DataID, ISSucceed, ErrorMessage, ExtraData) 
                             VALUES ('" + USER_CODE + "','I' ," + Convert.ToInt32(COMP_CODE) + "," + Convert.ToInt32(BranchCode) + ", " + short.Parse(FinYear) + ",'" + dateValue + "' ," + @"
-                                   '" + ModuleCode + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '') ";
+                                   '" + ModuleCode + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '"+ ErrorNo + "') ";
 
                 _db.Database.ExecuteSqlCommand(sql);
 
