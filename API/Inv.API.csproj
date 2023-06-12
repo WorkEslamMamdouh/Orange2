@@ -15,7 +15,8 @@
     <AssemblyName>Inv.API</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>true</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort>
     </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>
@@ -335,6 +336,7 @@
     <Compile Include="Models\CustomModel\LnkVoucherlMasterDetails.cs" />
     <Compile Include="Models\CustomModel\NewsDetails.cs" />
     <Compile Include="Models\CustomModel\CashVoucherMasterDetails.cs" />
+    <Compile Include="Models\CustomModel\G_RoleModuleMaste.cs" />
     <Compile Include="Models\CustomModel\SessionManager.cs" />
     <Compile Include="Models\CustomModel\Custom_Items.cs" />
     <Compile Include="Models\CustomModel\Exec_Proc_Status.cs" />

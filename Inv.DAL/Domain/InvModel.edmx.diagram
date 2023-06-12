@@ -210,6 +210,7 @@
         <EntityTypeShape EntityType="InvModel.AQ_GetLnkVoucher" Width="1.5" PointX="13.375" PointY="28.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.G_BranchModules" Width="1.5" PointX="15.375" PointY="28.75" IsExpanded="false" />
         <EntityTypeShape EntityType="InvModel.G_RoleBranch" Width="1.5" PointX="17.375" PointY="28.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="InvModel.GQ_GetRoleModule" Width="1.5" PointX="19.375" PointY="28.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

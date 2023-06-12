@@ -3,6 +3,100 @@
 @{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<style>
+
+    .fontitm4user {
+        right: 6px;
+        float: left;
+        font-size: 23px;
+        margin: 7px 0px 0px -16px;
+        position: absolute;
+        z-index: 99
+    }
+    .borderred {
+        border: solid 1px #f3f3f3 !important;
+        border-radius: 30px;
+        padding: 12px 11px;
+        width: 98% !important;
+        margin: 0.5%;
+        background-color: #e9d8c7 !important;
+        box-shadow: 0px 4px 6px 0px #cabfbf;
+    }
+</style>
+<!-- Filter Container -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12 margingred  borderred">
+    <div class="card bg-light-blue">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-4">
+
+                    <label class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">@SystemResource.App_Company</label>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+                        <select id="txtComp" name="" class="form-control input-sm addable editable">
+                            <option value="null"> @SystemResource.App_Company </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-4">
+                    <label class="col-lg-2 col-md-1 col-sm-1 col-xl-1 col-xs-1 pading_2Processes2 ">@SystemResource.Branch</label>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+                        <select id="txtBranch" name="" class="form-control input-sm addable editable">
+                            <option value="null"> @SystemResource.Branch </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-1"> </div>
+<div id="DivMassage"  style="background-color: #1d2920!important; margin: 1%;color:#ffffff; text-align: center; font-weight: bold;" class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10  margingred  borderred display_none">
+    <h4 id="Text_Massage" style="">@SystemResource.App_Print</h4>
+</div>
+<div class="col-lg-12 margingred  borderred  display_none" id="Div_DOC">
+    <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
+            <button id="btnSave" type="button" class="btn btn-success display_none  ">
+                @SystemResource.App_save   <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+            <button id="btnBack" type="button" class="btn btn-warning  display_none ">
+                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
+            </button>
+            <button id="btnEdit" type="button" class="btn btn-primary    float_left_right">
+                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
+            </button>
+            @*<button id="btnAdd" type="button" class="btn btn-success   float_left_right ">
+                    <span class="glyphicon glyphicon-plus"></span> @SystemResource.App_Add
+                </button>*@
+
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <br />
+    </div>
+    <div id=" " class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">
+        <br />
+        <div class="col-lg-1  text-center" style="width: 3%;"><span class="">   </span></div>
+        <div class="col-lg-1  text-center" style="width: 30%;"><span class="">Role </span></div>
+        <div class="col-lg-5 text-center"></div>
+        <div class="col-lg-2  text-center">
+
+            <button id="btnPermissionsrole" disabled type="button" class="btn btn-success display_none  ">
+                تطبيق الصلاحيات   <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+
+        </div>
+
+    </div>
+    <div id="data_lebel" class="col-lg-12">
 
 
+    </div>
+
+    <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  display_none" style="font-size: 33px;"></span>
+
+</div>
 <script src="~/ClientApp/Admin/AdminRoleBranch.js"></script>

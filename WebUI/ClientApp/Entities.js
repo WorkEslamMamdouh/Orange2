@@ -2,10 +2,12 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -65,7 +67,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("SystemCode", value);
             //this.SetAPISessionAPI("SystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "SubSystemCode", {
@@ -76,7 +78,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("SubSystemCode", value);
             //this.SetAPISessionAPI("SubSystemCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Modulecode", {
@@ -87,7 +89,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("Modulecode", value);
             //this.SetAPISessionAPI("Modulecode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "UserCode", {
@@ -98,7 +100,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("UserCode", value);
             this.SetAPISessionAPI("UserCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "Token", {
@@ -108,7 +110,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("Token", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CompCode", {
@@ -119,7 +121,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("CompCode", value);
             this.SetAPISessionAPI("CompCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "BranchCode", {
@@ -130,7 +132,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("BranchCode", value);
             this.SetAPISessionAPI("BranchCode", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "CurrentYear", {
@@ -141,7 +143,7 @@ var APISessionRecord = /** @class */ (function () {
             this.SetAPISession("CurrentYear", value);
             this.SetAPISessionAPI("CurrentYear", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(APISessionRecord.prototype, "ScreenLanguage", {
@@ -151,7 +153,7 @@ var APISessionRecord = /** @class */ (function () {
         set: function (value) {
             this.SetAPISession("ScreenLanguage", value);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     return APISessionRecord;
@@ -6817,14 +6819,6 @@ var A_LnkVoucher = /** @class */ (function () {
     }
     return A_LnkVoucher;
 }());
-var G_RoleBranch = /** @class */ (function () {
-    function G_RoleBranch() {
-        this.COMP_CODE = 0;
-        this.BRA_CODE = 0;
-        this.RoleId = 0;
-    }
-    return G_RoleBranch;
-}());
 var G_BranchModules = /** @class */ (function () {
     function G_BranchModules() {
         this.COMP_CODE = 0;
@@ -6912,5 +6906,85 @@ var Table_Result = /** @class */ (function () {
         this.Table_Res = new Array();
     }
     return Table_Result;
+}());
+var G_RoleBranch = /** @class */ (function (_super) {
+    __extends(G_RoleBranch, _super);
+    function G_RoleBranch() {
+        var _this = _super.call(this) || this;
+        _this.COMP_CODE = 0;
+        _this.BRA_CODE = 0;
+        _this.RoleId = 0;
+        _this.StatusFlag = "";
+        return _this;
+    }
+    return G_RoleBranch;
+}(SecurityClass));
+var G_RoleModuleMaste = /** @class */ (function (_super) {
+    __extends(G_RoleModuleMaste, _super);
+    function G_RoleModuleMaste() {
+        var _this = _super.call(this) || this;
+        _this.G_Role = new G_Role();
+        _this.G_RoleModule = new Array();
+        return _this;
+    }
+    return G_RoleModuleMaste;
+}(SecurityClass));
+var G_RoleModule = /** @class */ (function (_super) {
+    __extends(G_RoleModule, _super);
+    function G_RoleModule() {
+        var _this = _super.call(this) || this;
+        _this.RoleId = 0;
+        _this.SYSTEM_CODE = "";
+        _this.SUB_SYSTEM_CODE = "";
+        _this.MODULE_CODE = "";
+        _this.EXECUTE = false;
+        _this.CREATE = false;
+        _this.EDIT = false;
+        _this.DELETE = false;
+        _this.PRINT = false;
+        _this.VIEW = false;
+        _this.CUSTOM1 = false;
+        _this.CUSTOM2 = false;
+        _this.CUSTOM3 = false;
+        _this.CUSTOM4 = false;
+        _this.CUSTOM5 = false;
+        _this.CUSTOM6 = false;
+        _this.CUSTOM7 = false;
+        _this.CUSTOM8 = false;
+        _this.CUSTOM9 = false;
+        _this.ViewImages = false;
+        _this.EditImages = false;
+        _this.StatusFlag = "";
+        return _this;
+    }
+    return G_RoleModule;
+}(SecurityClass));
+var G_ReportWebSetting = /** @class */ (function () {
+    function G_ReportWebSetting() {
+        this.ReportSettingID = 0;
+        this.SystemCode = "";
+        this.SubSystemCode = "";
+        this.ReportID = "";
+        this.NameA = "";
+        this.NameE = "";
+        this.COMP_CODE = 0;
+        this.BRA_Code = 0;
+        this.USER_CODE = "";
+        this.ReportDesignNameEn = "";
+        this.ReportDesignNameAr = "";
+        this.ReportDataSouce = "";
+        this.RightMarginMM = 0;
+        this.LeftMarginMM = 0;
+        this.TopMarginMM = 0;
+        this.BottomMarginMM = 0;
+        this.IsLandScape = false;
+        this.PageSizeID = 0;
+        this.PageHightCM = 0;
+        this.PageWidthCM = 0;
+        this.PrinterName = "";
+        this.OutputTypeNo = 0;
+        this.OutputType;
+    }
+    return G_ReportWebSetting;
 }());
 //# sourceMappingURL=Entities.js.map
