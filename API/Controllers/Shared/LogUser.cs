@@ -82,10 +82,14 @@ namespace Inv.API.Controllers
 
         }
         public static void Insert(InvEntities _db, string COMP_CODE, string BranchCode, string FinYear, string USER_CODE,
-        int? DataId, UserLog OperationId, PageName PageName, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
+        int? DataId, string TrNo, UserLog OperationId, PageName PageName, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
         {
             try
             {
+                if (TrNo.Trim() != "" && TrNo != null)
+                {
+                    ErrorNo = TrNo;
+                }
 
                 string dateValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
 
@@ -125,10 +129,15 @@ namespace Inv.API.Controllers
         }
 
         public static void InsertPrint(InvEntities _db, string COMP_CODE, string BranchCode, string FinYear, string USER_CODE,
-       int? DataId, UserLog OperationId, string ModuleCode, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
+       int? DataId, string TrNo, UserLog OperationId, string ModuleCode, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
         {
             try
             {
+                if (TrNo.Trim() != "" && TrNo != null)
+                {
+                    ErrorNo = TrNo;
+                }
+
                 string dateValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
 
                 string sql = @"INSERT INTO  G_USER_LOG( USER_CODE, SYSTEM_CODE, COMP_CODE, BranchCode, FinYear, TimeStamp, MODULE_CODE, OperationId, DataID, ISSucceed, ErrorMessage, ExtraData) 

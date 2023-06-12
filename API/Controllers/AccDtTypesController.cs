@@ -99,16 +99,12 @@ namespace Inv.API.Controllers
                             obj.A_CCDT_COSTCENTERS[i].CCDT_TYPE = res.CCDT_TYPE;
                             A_CCDT_COSTCENTERSService.Update(obj.A_CCDT_COSTCENTERS[i]);
                         }
-                        dbTransaction.Commit();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
-
+                        dbTransaction.Commit(); 
                         return Ok(new BaseResponse(obj));
                     }
                     catch (Exception ex)
                     {
-                        dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
-
+                        dbTransaction.Rollback(); 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

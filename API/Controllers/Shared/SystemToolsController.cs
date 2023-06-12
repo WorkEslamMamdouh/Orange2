@@ -1826,7 +1826,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId),"", LogUser.UserLog.print, ModuleCode, true, null, null, null);
 
                 return Ok(new BaseResponse());
             }
@@ -1841,7 +1841,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, TrNo, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), TrNo, LogUser.UserLog.Query, ModuleCode, true, null, TrNo, null);
 
                 return Ok(new BaseResponse());
             }
@@ -1856,7 +1856,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), ExtraData, LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
 
                 return Ok(new BaseResponse());
             }
@@ -1872,7 +1872,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.View, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.View, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
@@ -1886,7 +1886,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.UpdateList, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.UpdateList, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
@@ -1900,7 +1900,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.PrintList, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.PrintList, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
@@ -1913,12 +1913,12 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "",  LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
 
                 return BadRequest();
             }
@@ -1936,12 +1936,12 @@ namespace Inv.API.Controllers
                     TypeLog = LogUser.UserLog.Logout;
                 }
 
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, TypeLog, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", TypeLog, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, TypeLog, ModuleCode, false, ex.Message, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", TypeLog, ModuleCode, false, ex.Message, null, null);
 
                 return BadRequest();
             }

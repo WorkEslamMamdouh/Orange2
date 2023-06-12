@@ -79,7 +79,7 @@ namespace Inv.API.Controllers
                     cond = cond + " and CC_CODE = '" + CC_CODE + "'";
                 }
                 List<IQ_GetStkIssueCC> StkIssueCC = db.Database.SqlQuery<IQ_GetStkIssueCC>(cond).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+                
 
                 return Ok(new BaseResponse(StkIssueCC));
             }
@@ -138,21 +138,21 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             IssueToCC.Tr_No = int.Parse(res.ResponseData.ToString());
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Insert, Obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID,Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Insert, Obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(IssueToCC));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Insert, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Insert, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ""));
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Update, Obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -196,7 +196,7 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Update, Obj.MODULE_CODE, true, null, null, null);
                           
                             IssueToCC.Tr_No = int.Parse(res.ResponseData.ToString());
                             return Ok(new BaseResponse(IssueToCC));
@@ -204,14 +204,14 @@ namespace Inv.API.Controllers
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Update, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ""));
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, Obj.I_Stk_TR_IssueToCC.Tr_No.ToString(), LogUser.UserLog.Update, Obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -230,7 +230,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 List<I_D_IssueType> category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+                LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear, UserCode, null,null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
 
                 return Ok(new BaseResponse(category));
             }
@@ -267,20 +267,17 @@ namespace Inv.API.Controllers
                 {
                     I_D_IssueType Obj2 = new I_D_IssueType(); 
                     Obj2 = Stk_TR_IssueToCCService.InsertIssueTypes(item);
-                    LogUser.InsertPrint(db, Obj[0].Comp_Code.ToString(), Obj[0].Branch_Code, Obj[0].sec_FinYear, Obj[0].UserCode, Obj2.IssueTypeID, LogUser.UserLog.Insert, Obj[0].MODULE_CODE, true, null, null, null);
-
+                    
                 }
                 foreach (I_D_IssueType item in updatedObjects)
                 {
                     Stk_TR_IssueToCCService.UpdateIssueTypes(item);
-                    LogUser.InsertPrint(db, Obj[0].Comp_Code.ToString(), Obj[0].Branch_Code, Obj[0].sec_FinYear, Obj[0].UserCode, item.IssueTypeID, LogUser.UserLog.Update, Obj[0].MODULE_CODE, true, null, null, null);
-
+                   
                 }
                 foreach (I_D_IssueType item in deletedObjects)
                 {
                     Stk_TR_IssueToCCService.DeleteIssueTypes(item.IssueTypeID);
-                    LogUser.InsertPrint(db, Obj[0].Comp_Code.ToString(), Obj[0].Branch_Code, Obj[0].sec_FinYear, Obj[0].UserCode, item.IssueTypeID, LogUser.UserLog.Delete, Obj[0].MODULE_CODE, true, null, null, null);
-
+                   
                 }
 
 
@@ -288,7 +285,7 @@ namespace Inv.API.Controllers
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, Obj[0].Comp_Code.ToString(), Obj[0].Branch_Code, Obj[0].sec_FinYear, Obj[0].UserCode, null, LogUser.UserLog.Insert, Obj[0].MODULE_CODE, false, ex.Message, null, null);
+                
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
 
             }

@@ -145,13 +145,13 @@ namespace Inv.API.Controllers
                                     GCostCenterService.Update(item3);
                                 }
                             }
-                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, InsertedRec.CC_CODE);
+                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, item.CC_CODE, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, InsertedRec.CC_CODE);
                         }
                         //loop Update 
                         foreach (var item in updatedRecords)
                         {                            
                             var updatedRec = GCostCenterService.Update(item);
-                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, updatedRec.CC_CODE);                          
+                            LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, item.CC_CODE, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null, updatedRec.CC_CODE);                          
                         }
                         //loop Delete 
                         foreach (var item in deletedRecords)
@@ -174,7 +174,7 @@ namespace Inv.API.Controllers
                             string Q = "DELETE FROM G_COST_CENTER WHERE COMP_CODE = " + item.COMP_CODE + " and CC_CODE ='" + item.CC_CODE + "'";
                             string query = Q;
                             var de = db.Database.ExecuteSqlCommand(query);
-                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Delete, COST_CENTER_List[0].MODULE_CODE, true, null, null, item.CC_CODE);
+                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, item.CC_CODE, LogUser.UserLog.Delete, COST_CENTER_List[0].MODULE_CODE, true, null, null, item.CC_CODE);
                         }
                         dbTransaction.Commit();
                         return Ok(new BaseResponse(100)); 
@@ -182,7 +182,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null,null);
+                        LogUser.InsertPrint(db, COST_CENTER_List[0].Comp_Code.ToString(), COST_CENTER_List[0].Branch_Code, COST_CENTER_List[0].sec_FinYear, COST_CENTER_List[0].UserCode, null,null, LogUser.UserLog.Update, COST_CENTER_List[0].MODULE_CODE, true, null, null,null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }

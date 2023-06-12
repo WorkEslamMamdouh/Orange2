@@ -27,7 +27,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 var AccDefBoxList = AccDefBoxService.GetAll(s => s.CompCode == compCode && s.BranchCode == BranchCode).ToList();
-                LogUser.InsertPrint(db, compCode.ToString(), BranchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compCode.ToString(), BranchCode.ToString(), FinYear, UserCode, null,"", LogUser.UserLog.Query, ModuleCode, true, null, null, null);
 
                 return Ok(new BaseResponse(AccDefBoxList));
             }

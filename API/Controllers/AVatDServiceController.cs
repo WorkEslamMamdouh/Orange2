@@ -111,13 +111,13 @@ namespace Inv.API.Controllers
 
                     var res = IAVatDServiceService.Insert(obj);
 
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID, res.ItemCode, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                     return Ok(new BaseResponse(res));
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID, null, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
@@ -153,13 +153,13 @@ namespace Inv.API.Controllers
                 try
                 {
                     var res = IAVatDServiceService.Update(obj);
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, res.SrvCategoryID,res.ItemCode,  LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
 
                     return Ok(new BaseResponse(res));
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.SrvCategoryID,null, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
