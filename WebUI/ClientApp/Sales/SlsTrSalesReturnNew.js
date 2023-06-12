@@ -4,7 +4,6 @@ $(document).ready(function () {
 var SlsTrSalesReturnNew;
 (function (SlsTrSalesReturnNew) {
     //system varables
-    var SysSession = GetSystemSession(Modules.SlsTrReturnNew);
     var compcode;
     var BranchCode;
     var sys = new SystemTools();
@@ -107,8 +106,6 @@ var SlsTrSalesReturnNew;
     var InsertFlag = false;
     var btnPrint;
     var AfterInsertOrUpdateFlag = false;
-    var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
-    var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].SalesPriceWithVAT);
     var display_none = "display_none";
     var Remove_display_none = "";
     var flagInvItemDiscount = false;
@@ -116,16 +113,26 @@ var SlsTrSalesReturnNew;
     var Screen_name = "";
     var SlsInvSrc = $('#Flag_SlsInvSrc').val();
     debugger;
+    var SysSession;
+    var model = "";
+    var lang = "";
     if (SlsInvSrc == "1") { //  1:Retail invoice  
+        SysSession = GetSystemSession(Modules.SlsTrReturnNew);
+        model = Modules.SlsTrReturnNew;
+        lang = (SysSession.CurrentEnvironment.ScreenLanguage);
         (lang == "ar" ? Screen_name = 'مرتجع فواتير التجزئه' : Screen_name = 'Retail invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvMultiStore;
     }
     else { //2: opration invoice 
+        SysSession = GetSystemSession(Modules.SlsTrReturnOperation);
+        model = Modules.SlsTrReturnOperation;
+        lang = (SysSession.CurrentEnvironment.ScreenLanguage);
         (lang == "ar" ? Screen_name = 'مرتجع فواتير العمليات' : Screen_name = 'opration invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
         flagInvMulti = SysSession.CurrentEnvironment.I_Control[0].IsOprInvMultiOper;
     }
+    var flag_PriceWithVAT = (SysSession.CurrentEnvironment.I_Control[0].SalesPriceWithVAT);
     //------------------------------------------------------ Main Region -----------------------------------
     function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Screen_name;
@@ -2069,7 +2076,7 @@ var SlsTrSalesReturnNew;
         MasterDetailModel.VatNo = SysSession.CurrentEnvironment.VatNo;
         MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.SlsTrReturnNew;
+        MasterDetailModel.MODULE_CODE = model;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -2262,11 +2269,11 @@ var SlsTrSalesReturnNew;
         InvoiceModel.DocNo = GlobalDocNo;
         InvoiceModel.RefTrID = Number(globalRefTrID);
         MasterDetailModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
-        if (InvoiceModel.Status == 1) {
-            if (InvoiceModel.IsPosted == true) {
-                MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
-            }
-        }
+        //if (InvoiceModel.Status == 1) {
+        //    if (InvoiceModel.IsPosted == true) {
+        //        MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //    }
+        //}
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "updateReturnMasterDetail"),
@@ -2316,9 +2323,9 @@ var SlsTrSalesReturnNew;
         InvoiceModel.RefTrID = Number(globalRefTrID);
         InvoiceModel.Status = 0;
         MasterDetailModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
-        if (InvoiceModel.IsPosted == true) {
-            MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
-        }
+        //if (InvoiceModel.IsPosted == true) {
+        //    MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //}
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("SlsTrSales", "OpenReturn"),

@@ -7,7 +7,7 @@ $(document).ready(() => {
 namespace CloseProcesses {
     //system varables
     var AccType = 3; //نوع الحساب
-    var SysSession: SystemSession = GetSystemSession(Modules.Processes);
+    var SysSession: SystemSession = GetSystemSession(Modules.CloseProcesses);
     var compcode: Number;
     var BranchCode: number;//SharedSession.CurrentEnvironment.BranchCode;
     var sys: SystemTools = new SystemTools();
@@ -5336,7 +5336,7 @@ namespace CloseProcesses {
 
                 let result = d.result as string;
 
-                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "print operation costs");
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, "print operation costs");
 
                 window.open(result, "_blank");
             }
@@ -5375,7 +5375,7 @@ namespace CloseProcesses {
 
                 let result = d.result as string;
 
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }
@@ -5413,7 +5413,7 @@ namespace CloseProcesses {
             success: (d) => {
 
                 let result = d.result as string;
-                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor stock printing");
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, "Distributor stock printing");
                 window.open(result, "_blank");
             }
         })
@@ -5449,7 +5449,7 @@ namespace CloseProcesses {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, "Distributor's Deposit Printing");
+                PrintReportLogOperation(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, "Distributor's Deposit Printing");
 
                 window.open(result, "_blank");
             }
@@ -5487,7 +5487,7 @@ namespace CloseProcesses {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }
@@ -5531,7 +5531,7 @@ namespace CloseProcesses {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }
@@ -5567,7 +5567,7 @@ namespace CloseProcesses {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Processes, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }

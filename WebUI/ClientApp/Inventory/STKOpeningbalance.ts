@@ -573,7 +573,7 @@ namespace STKOpeningbalance {
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("DirectTransfer", "GetAllStockOpenHeaderWithDetail"),
-            data: { CompCode: compcode, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.STKAdjust, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
+            data: { CompCode: compcode, State: state, FromDate: FromDate, toDate: toDate, Store: storeID, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.STKOpeningbalance, FinYear: SysSession.CurrentEnvironment.CurrentYear, Branch_Code: SysSession.CurrentEnvironment.BranchCode },
             success: (d) => {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
@@ -1330,7 +1330,7 @@ namespace STKOpeningbalance {
 
         MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.STKAdjust;
+        MasterDetailModel.MODULE_CODE = Modules.STKOpeningbalance;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }

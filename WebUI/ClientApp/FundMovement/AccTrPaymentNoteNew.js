@@ -4,7 +4,7 @@ $(document).ready(function () {
 var AccTrPaymentNoteNew;
 (function (AccTrPaymentNoteNew) {
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession = GetSystemSession(Modules.AccTrPaymentNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -1216,6 +1216,11 @@ var AccTrPaymentNoteNew;
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         debugger;

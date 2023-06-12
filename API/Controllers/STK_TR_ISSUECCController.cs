@@ -229,8 +229,7 @@ namespace Inv.API.Controllers
         {
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
-                List<I_D_IssueType> category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear, UserCode, null,null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+                List<I_D_IssueType> category = Stk_TR_IssueToCCService.GetIssueTypes(x => x.CompCode == CompCode).ToList(); 
 
                 return Ok(new BaseResponse(category));
             }

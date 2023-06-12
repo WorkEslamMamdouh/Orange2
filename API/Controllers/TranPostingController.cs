@@ -41,7 +41,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 List<GQ_GetLnkTransComp> GenVatTypeList = IGlnktransService.GetAll(x => x.INTEGRATE == true && x.COMP_CODE == CompCode.ToString() && x.Comp_INTEGRATE == true).OrderBy(s => s.SUB_SYSTEM_CODE).ThenBy(a => a.TR_CODE).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, "", LogUser.UserLog.Query, MODULE_CODE, true, null, null, "GetAllTransactions");
+                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, "", LogUser.UserLog.View, MODULE_CODE, true, null, null, "GetAllTransactions");
 
                 return Ok(new BaseResponse(GenVatTypeList));
             }
@@ -57,7 +57,7 @@ namespace Inv.API.Controllers
             {
 
                 ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum, 1);
-                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, "", LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, "", LogUser.UserLog.View, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
             }
@@ -179,7 +179,7 @@ namespace Inv.API.Controllers
             {
                 db.GLnk_GenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
                 List<G_LnkTrans_Temp> Arrays = GlnktransTempService.GetAll(s => s.User_Code == UserCode).ToList();
-                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null,  null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null,  null, LogUser.UserLog.View, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
             }

@@ -288,7 +288,7 @@ var AccTrReceiptNoteNew;
             type: "Get",
             url: sys.apiUrl("AccTrReceipt", "GetBoxReceiveListNew"),
             data: {
-                comp: CompCode, BenID: BenID, TrType: TrType, Boxid: Boxid, RecPayTypeId: RecPayTypeId, Status: Status, FromDate: DateFrom, Todate: DateTo, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrReceiptNote, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
+                comp: CompCode, BenID: BenID, TrType: TrType, Boxid: Boxid, RecPayTypeId: RecPayTypeId, Status: Status, FromDate: DateFrom, Todate: DateTo, CashType: CashType, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token, MODULE_CODE: Modules.AccTrReceiptNoteNew, FinYear: SysSession.CurrentEnvironment.CurrentYear, BranchCode: SysSession.CurrentEnvironment.BranchCode
             },
             success: function (d) {
                 var result = d;
@@ -792,6 +792,11 @@ var AccTrReceiptNoteNew;
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrReceiptNoteNew;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         debugger;
@@ -994,7 +999,7 @@ var AccTrReceiptNoteNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNoteNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
