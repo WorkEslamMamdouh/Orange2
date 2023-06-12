@@ -233,6 +233,7 @@ namespace Inv.DAL.Domain
         public virtual DbSet<AQ_GetLnkVoucher> AQ_GetLnkVoucher { get; set; }
         public virtual DbSet<G_BranchModules> G_BranchModules { get; set; }
         public virtual DbSet<G_RoleBranch> G_RoleBranch { get; set; }
+        public virtual DbSet<GQ_GetRoleModule> GQ_GetRoleModule { get; set; }
     
         public virtual int G_TOL_GetCounter(string system, Nullable<int> comp, Nullable<int> branch, Nullable<System.DateTime> dt, string trType, ObjectParameter trNo)
         {
