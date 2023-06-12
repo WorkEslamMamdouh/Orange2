@@ -268,17 +268,20 @@ namespace Inv.API.Controllers
                     {
                         AccTrReceipt.TrNo = res.ResponseData.ToString();
                         dbTransaction.Commit();
+                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Open, AccTrReceipt.MODULE_CODE, true, null, null, null);
                         return Ok(new BaseResponse(AccTrReceipt.TrNo));
                     }
                     else
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Open, AccTrReceipt.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
                 }
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Open, AccTrReceipt.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }

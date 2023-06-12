@@ -325,13 +325,14 @@ namespace Inv.API.Controllers
                     {
                         dbTransaction.Commit();
                         res.TrNo = int.Parse(result.ResponseData.ToString());
-
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.ReceiptID, LogUser.UserLog.Open, obj.MODULE_CODE, true, null, null, null);
                         IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
                     }
                     else
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
 
@@ -339,6 +340,7 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }

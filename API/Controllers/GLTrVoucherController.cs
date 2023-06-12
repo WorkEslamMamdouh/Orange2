@@ -395,26 +395,26 @@ namespace Inv.API.Controllers
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.A_JOURNAL_HEADER.COMP_CODE), br, jouranalHeader.VoucherID, "JourVouchr", "Open", db);
                         if (res.ResponseState == true)
                         {
-                            LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, res.ResponseData.ToString(), null);
 
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Open, obj.MODULE_CODE, true, null, res.ResponseData.ToString(), null);
 
                             AQ_GetJournalHeader displayData = db.AQ_GetJournalHeader.Where(x => x.VoucherID == jouranalHeader.VoucherID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
-                            LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), res.ResponseData.ToString(), null);
 
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Open, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), res.ResponseData.ToString(), null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message, ex.Message, null);
 
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.A_JOURNAL_HEADER.COMP_CODE.ToString(), obj.Branch_Code.ToString(), obj.sec_FinYear.ToString(), obj.UserCode, obj.A_JOURNAL_HEADER.VOUCHER_CODE, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message, ex.Message, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

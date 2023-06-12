@@ -240,6 +240,10 @@ namespace Inv.API.Controllers
 
                 db.Database.ExecuteSqlCommand(query);
 
+
+                var Oper = db.I_TR_Operation.Where(x => x.OperationID == OperationID).FirstOrDefault();
+                LogUser.InsertPrint(db, Oper.CompCode.ToString(), Oper.BranchCode.ToString(), Oper.FIN_YEAR.ToString(), UserCode, OperationID, LogUser.UserLog.Open, "Processes", true, null, null, null);
+
                 return Ok(new BaseResponse(100));
             }
             return BadRequest(ModelState);
@@ -253,6 +257,11 @@ namespace Inv.API.Controllers
                 string query = "update I_TR_Operation set [Status] =4   where OperationID =" + OperationID + " ";
 
                 db.Database.ExecuteSqlCommand(query);
+
+
+                var Oper = db.I_TR_Operation.Where(x => x.OperationID == OperationID).FirstOrDefault();
+                LogUser.InsertPrint(db, Oper.CompCode.ToString(), Oper.BranchCode.ToString(), Oper.FIN_YEAR.ToString(), UserCode, OperationID, LogUser.UserLog.Open, "Processes", true, null, null, null);
+
 
                 return Ok(new BaseResponse(100));
             }
@@ -1122,17 +1131,20 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Open, obj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(obj.I_TR_OperationTF));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Open, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_TR_OperationTF.OperationID, LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

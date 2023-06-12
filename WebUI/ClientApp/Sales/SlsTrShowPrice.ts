@@ -22,7 +22,7 @@ namespace SlsTrShowPrice {
 
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
-        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
+        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrShowPrice);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
         (lang == "ar" ? Screen_name = ' عرض سعر' : Screen_name = 'Retail invoice')
@@ -37,7 +37,7 @@ namespace SlsTrShowPrice {
     }
     else {       //2: opration invoice 
 
-        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesOperation);
+        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrShowPrice);
 
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -4346,7 +4346,7 @@ namespace SlsTrShowPrice {
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
         MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.MODULE_CODE = Modules.SlsTrShowPrice;
         MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -5197,7 +5197,7 @@ namespace SlsTrShowPrice {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }

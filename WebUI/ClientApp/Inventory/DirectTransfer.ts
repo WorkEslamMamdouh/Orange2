@@ -1247,7 +1247,7 @@ namespace DirectTransfer {
 
         MasterDetailModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailModel.MODULE_CODE = Modules.PurTrReceive;
+        MasterDetailModel.MODULE_CODE = Modules.Directtransfer;
         MasterDetailModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }

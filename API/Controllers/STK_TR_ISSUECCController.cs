@@ -138,14 +138,14 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             IssueToCC.Tr_No = int.Parse(res.ResponseData.ToString());
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Insert, Obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(IssueToCC));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Update, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, Obj.Comp_Code.ToString(), Obj.Branch_Code, Obj.sec_FinYear, Obj.UserCode, Obj.I_Stk_TR_IssueToCC.IssueToCcID, LogUser.UserLog.Insert, Obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ""));
                         }

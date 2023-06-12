@@ -13,7 +13,7 @@ var SlsTrShowPrice;
     var InvoicePaymentDef;
     var CashInvoiceDefAuth;
     if (SlsInvSrc == "1") { //  1:Retail invoice  
-        var SysSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
+        var SysSession = GetSystemSession(Modules.SlsTrShowPrice);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
         (lang == "ar" ? Screen_name = ' عرض سعر' : Screen_name = 'Retail invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsRetailInvItemDiscount;
@@ -22,7 +22,7 @@ var SlsTrShowPrice;
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
     }
     else { //2: opration invoice 
-        var SysSession = GetSystemSession(Modules.SlsTrSalesOperation);
+        var SysSession = GetSystemSession(Modules.SlsTrShowPrice);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
         (lang == "ar" ? Screen_name = 'عرض سعر الارساليات' : Screen_name = 'opration invoice');
         flagInvItemDiscount = SysSession.CurrentEnvironment.I_Control[0].IsOprInvItemDiscount;
@@ -3280,7 +3280,7 @@ var SlsTrShowPrice;
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
         MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.MODULE_CODE = Modules.SlsTrShowPrice;
         MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -3960,7 +3960,7 @@ var SlsTrShowPrice;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
                 window.open(result, "_blank");
             }
         });
