@@ -758,7 +758,7 @@ namespace SlsTrServicesReturn {
         clear();
         InvoiceStatisticsModel = new Array<AQVAT_GetSlsInvoiceList>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Sales ,SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         if (FlagAfterInsertOrUpdate == true) {
             Selecteditem = AQ_ServSlsInvoiceDetails.filter(x => x.InvoiceID == Number(GlobalReturnID));

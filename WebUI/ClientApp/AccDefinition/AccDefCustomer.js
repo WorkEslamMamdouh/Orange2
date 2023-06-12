@@ -566,7 +566,6 @@ var AccDefCustomer;
         });
     }
     function DriverDoubleClick() {
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
         Selecteditem = Details.filter(function (x) { return x.CustomerId == Number(ReportGrid.SelectedKey); });
         for (var _i = 0, Selecteditem_2 = Selecteditem; _i < Selecteditem_2.length; _i++) {
             var item = Selecteditem_2[_i];

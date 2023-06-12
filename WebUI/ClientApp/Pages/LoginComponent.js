@@ -434,19 +434,19 @@ var LoginComponent;
     function OnLogged() {
         debugger;
         // set api session values 
-        APiSession.Session.BranchCode = SystemEnv.BranchCode;
-        APiSession.Session.CompCode = SystemEnv.CompCode;
-        APiSession.Session.SystemCode = SystemEnv.SystemCode;
-        APiSession.Session.SubSystemCode = SystemEnv.SubSystemCode;
-        APiSession.Session.ScreenLanguage = SystemEnv.ScreenLanguage;
-        APiSession.Session.UserCode = SystemEnv.UserCode;
-        APiSession.Session.CurrentYear = $("#txtYear").val();
-        InsertLog(SystemEnv.UserCode, Number(SystemEnv.CompCode), SystemEnv.BranchCode, txtYear.value, true); //if success
+        //APiSession.Session.BranchCode = SystemEnv.BranchCode;
+        //APiSession.Session.CompCode = SystemEnv.CompCode;
+        //APiSession.Session.SystemCode = SystemEnv.SystemCode;
+        //APiSession.Session.SubSystemCode = SystemEnv.SubSystemCode;
+        //APiSession.Session.ScreenLanguage = SystemEnv.ScreenLanguage;
+        //APiSession.Session.UserCode = SystemEnv.UserCode;
+        //APiSession.Session.CurrentYear = $("#txtYear").val();
         Ajax.Callsync({
             url: Url.Action("OnLogged", "Login"),
             success: function (result) {
                 localStorage.setItem("Show_News", 'false');
                 var obj = result.result;
+                LoginOpen(SystemEnv.UserCode, SystemEnv.CompCode, SystemEnv.BranchCode, Modules.Home, SystemEnv.CurrentYear, 1);
                 window.location.href = obj.url;
             }
         });

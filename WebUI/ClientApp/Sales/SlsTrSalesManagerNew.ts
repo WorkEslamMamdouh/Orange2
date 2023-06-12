@@ -253,7 +253,7 @@ namespace SlsTrSalesManagerNew {
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         //*******************************************************************************************************************************
 
@@ -2634,7 +2634,7 @@ namespace SlsTrSalesManagerNew {
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -5436,7 +5436,7 @@ namespace SlsTrSalesManagerNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -5463,12 +5463,12 @@ namespace SlsTrSalesManagerNew {
 
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //
 
 
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {

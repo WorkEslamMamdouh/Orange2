@@ -200,7 +200,6 @@ var SlsTrSalesManagerNew;
         //txtStartDate.value = DateStartMonth();
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
         //*******************************************************************************************************************************
         Display_Category();
         FillddlVatNature();
@@ -2060,7 +2059,6 @@ var SlsTrSalesManagerNew;
         $("#btnSave").addClass("display_none");
         InvoiceStatisticsModel = new Array();
         Selecteditem = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         Selecteditem = SlsInvoiceStatisticsDetails.filter(function (x) { return x.InvoiceID == Number(Grid.SelectedKey); });
         GlobalDocNo = Selecteditem[0].DocNo;
         try {
@@ -4135,7 +4133,6 @@ var SlsTrSalesManagerNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -4158,10 +4155,9 @@ var SlsTrSalesManagerNew;
         else {
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {

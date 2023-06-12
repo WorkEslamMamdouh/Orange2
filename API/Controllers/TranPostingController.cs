@@ -41,7 +41,7 @@ namespace Inv.API.Controllers
             if (ModelState.IsValid && UserControl.CheckUser(Token, UserCode))
             {
                 List<GQ_GetLnkTransComp> GenVatTypeList = IGlnktransService.GetAll(x => x.INTEGRATE == true && x.COMP_CODE == CompCode.ToString() && x.Comp_INTEGRATE == true).OrderBy(s => s.SUB_SYSTEM_CODE).ThenBy(a => a.TR_CODE).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, "GetAllTransactions");
+                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode, sec_FinYear, UserCode, null, "", LogUser.UserLog.Query, MODULE_CODE, true, null, null, "GetAllTransactions");
 
                 return Ok(new BaseResponse(GenVatTypeList));
             }
@@ -57,7 +57,7 @@ namespace Inv.API.Controllers
             {
 
                 ObjectResult<AProc_LnkGenerateTrans_Result> Arrays = db.AProc_LnkGenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum, 1);
-                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, "", LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
             }
@@ -104,7 +104,7 @@ namespace Inv.API.Controllers
 
                     if (obj.A_LnkVoucher.Count() > 0)
                     {
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, Convert.ToInt32(obj.A_LnkVoucher[0].TrID), LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, Convert.ToInt32(obj.A_LnkVoucher[0].TrID), obj.A_LnkVoucher[0].TrNo.ToString(), LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
                     }
 
 
@@ -179,7 +179,7 @@ namespace Inv.API.Controllers
             {
                 db.GLnk_GenerateTrans(Comp, branchCode, UserCode, "I", TrType, StartDate, EndDate, FromNum, ToNum);
                 List<G_LnkTrans_Temp> Arrays = GlnktransTempService.GetAll(s => s.User_Code == UserCode).ToList();
-                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
+                LogUser.InsertPrint(db, Comp.ToString(), branchCode.ToString(), FinYear, UserCode, null,  null, LogUser.UserLog.Query, Modules, true, null, null, "LoadTransactions");
 
                 return Ok(new BaseResponse(Arrays));
             }
@@ -216,7 +216,7 @@ namespace Inv.API.Controllers
                 string userCode = lnkTempList[0].User_Code;
                 List<GQ_GetLnkVoucherDetail> VchDeatilList = IVchrTemplateDetailService.GetAllFromView(s => s.User_Code == userCode).ToList();
 
-                LogUser.InsertPrint(db, lnkTempList[0].Comp_Code.ToString(), lnkTempList[0].Branch_Code.ToString(), lnkTempList[0].sec_FinYear, lnkTempList[0].UserCode, null, LogUser.UserLog.Update, lnkTempList[0].MODULE_CODE, true, null, null, null);
+                LogUser.InsertPrint(db, lnkTempList[0].Comp_Code.ToString(), lnkTempList[0].Branch_Code.ToString(), lnkTempList[0].sec_FinYear, lnkTempList[0].UserCode, null,null, LogUser.UserLog.Update, lnkTempList[0].MODULE_CODE, true, null, null, null);
 
                 return Ok(new BaseResponse(VchDeatilList));
             }
@@ -259,7 +259,7 @@ namespace Inv.API.Controllers
                     Trno = -1;
                 }
 
-                LogUser.InsertPrint(db, comp.ToString(), branch.ToString(), sec_FinYear, UserCode, null, LogUser.UserLog.Update, MODULE_CODE, true, null, null, "GenerateVoucher" + Desc);
+                LogUser.InsertPrint(db, comp.ToString(), branch.ToString(), sec_FinYear, UserCode, null,"", LogUser.UserLog.Update, MODULE_CODE, true, null, null, "GenerateVoucher" + Desc);
 
                 return Ok(new BaseResponse(Trno));
             }

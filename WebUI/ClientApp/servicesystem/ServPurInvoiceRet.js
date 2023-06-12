@@ -495,7 +495,6 @@ var ServPurInvoiceRet;
         return flag;
     }
     function Display() {
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, MasterGrid.SelectedKey.toString());
         DocumentActions.RenderFromModel(selecteditem);
         drpVendor.value = selecteditem.VendorID.toString();
         drpTrType.value = selecteditem.TR_TYPE.toString();
@@ -940,7 +939,6 @@ var ServPurInvoiceRet;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -955,7 +953,6 @@ var ServPurInvoiceRet;
         rp.TRId = hd_InvoiceRetID;
         rp.Name_function = "IProc_Prnt_VATPurReturn";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Return_Pur, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

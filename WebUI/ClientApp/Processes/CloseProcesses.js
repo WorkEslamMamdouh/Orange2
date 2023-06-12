@@ -780,7 +780,6 @@ var CloseProcesses;
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         Selected_Data = Get_IQ_GetOperation.filter(function (x) { return x.OperationID == Number(divMasterGrid.SelectedKey); });
         $("#div_Master_Hedr").removeClass("display_none");
         $("#txtVoucherNo").val("");
@@ -1526,7 +1525,12 @@ var CloseProcesses;
         $("#txtVatType" + cnt).attr('data-VatPerc', OperationCharges[cnt].VatPrc);
         if (OperationCharges[cnt].CashBox_DescA != null) {
             Cashbox_DescA = CashboxDetails.filter(function (x) { return x.CashBox_DescA == OperationCharges[cnt].CashBox_DescA; });
-            //$("#txt_D_CashBox" + cnt).val(Cashbox_DescA[0].CashBoxID);
+        }
+        if (Number(OperationCharges[cnt].CashBoxID) > 0) {
+            $("#txt_D_CashBox" + cnt).val(OperationCharges[cnt].CashBoxID);
+        }
+        else {
+            $("#txt_D_CashBox" + cnt).val('Null');
         }
         //IsCash
         $("#txtVendorIsCheckCharge" + cnt).val(OperationCharges[cnt].isPaidByVendor ? "0" : "1");
@@ -2385,6 +2389,7 @@ var CloseProcesses;
         //    return
         //}
         console.log(Model_I_TR_Operation);
+        Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("Processes", "Update_Processes"),
@@ -4009,7 +4014,6 @@ var CloseProcesses;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });

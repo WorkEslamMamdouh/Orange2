@@ -94,7 +94,6 @@ var STKOpeningbalance;
         InitalizeEvents();
         InitializeGrid();
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
     }
     STKOpeningbalance.InitalizeComponent = InitalizeComponent;
     //------------------------------------------------------ Main Region -----------------------------------
@@ -1272,7 +1271,6 @@ var STKOpeningbalance;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1288,7 +1286,6 @@ var STKOpeningbalance;
         rp.Type = 0;
         rp.Name_function = "IProc_Prnt_StkOpen";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.STKAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

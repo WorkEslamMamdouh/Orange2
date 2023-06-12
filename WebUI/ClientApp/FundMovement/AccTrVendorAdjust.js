@@ -817,7 +817,7 @@ var AccTrVendorAdjust;
             Model.IsCustomer = isCustomer;
             Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
+            Model.MODULE_CODE = Modules.AccTrVendorAdjust;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
             Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
@@ -1021,7 +1021,6 @@ var AccTrVendorAdjust;
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrVendorAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

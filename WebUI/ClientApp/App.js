@@ -2364,6 +2364,26 @@ function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
         }
     });
 }
+function ViewListLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "ViewListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
+function UpdateListLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "UpdateListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
 function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, FinYear, ExtraData) {
     var sys = new SystemTools();
     Ajax.CallAsync({
@@ -2384,12 +2404,23 @@ function OpenScreen(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
         }
     });
 }
-function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId) {
+function LoginOpen(UserCode, compcode, BranchCode, ModuleCode, FinYear, InOrOut) {
+    debugger;
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "LoginOpen"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, InOrOut: InOrOut },
+        success: function (response) {
+        }
+    });
+}
+function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId, TrNo) {
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
-        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId, TrNo: TrNo },
         success: function (response) {
         }
     });

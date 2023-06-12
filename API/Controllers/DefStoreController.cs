@@ -80,7 +80,7 @@ namespace Inv.API.Controllers
             //if (ModelState.IsValid && UserControl.CheckUser(AccTrReceipt.Token, AccTrReceipt.UserCode))
             //{
             G_STORE res = DefStoreService.Update(STORE);
-            LogUser.InsertPrint(db, STORE.Comp_Code.ToString(), STORE.Branch_Code, STORE.sec_FinYear, STORE.UserCode, res.StoreId, LogUser.UserLog.Update, STORE.MODULE_CODE, true, null, null, res.DescA);
+            LogUser.InsertPrint(db, STORE.Comp_Code.ToString(), STORE.Branch_Code, STORE.sec_FinYear, STORE.UserCode, res.StoreId, res.STORE_CODE.ToString(), LogUser.UserLog.Update, STORE.MODULE_CODE, true, null, null, res.DescA);
 
             return Ok(new BaseResponse(res.StoreId));
 
@@ -102,14 +102,14 @@ namespace Inv.API.Controllers
                         obj.STORE_CODE = int.Parse(res.ResponseData.ToString());
                         dbTransaction.Commit();
 
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId,result.STORE_CODE.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
 
                         return Ok(new BaseResponse(obj));
                     }
                     else
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, result.StoreId, result.STORE_CODE.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, result.DescA);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
@@ -117,7 +117,7 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, null, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }

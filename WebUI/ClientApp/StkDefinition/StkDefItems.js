@@ -65,7 +65,6 @@ var StkDefItems;
         //$('#drp_G_Store').prop("value", 1);
         $("#drp_G_Store").attr("disabled", "disabled");
         //Display_I_ItemFamily();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItems, SysSession.CurrentEnvironment.CurrentYear);
     }
     StkDefItems.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {

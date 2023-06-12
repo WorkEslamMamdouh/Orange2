@@ -125,7 +125,6 @@ var JournalVoucher;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     function InitalizeComponent() {
         //System
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "سند قيد" : document.getElementById('Screen_name').innerHTML = "Journal Voucher";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
@@ -2883,7 +2882,6 @@ var JournalVoucher;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2896,7 +2894,6 @@ var JournalVoucher;
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
     }
 })(JournalVoucher || (JournalVoucher = {}));
 //# sourceMappingURL=JournalVoucher.js.map

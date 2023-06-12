@@ -145,7 +145,6 @@ var PurTrReturn;
         $("#divMasterGridiv").removeClass("display_none");
         //btnShow_onclick();
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
     }
     PurTrReturn.InitalizeComponent = InitalizeComponent;
     function IntializeEvents() {
@@ -824,7 +823,6 @@ var PurTrReturn;
         clear();
         $("#ddlCashBox").prop("value", "null");
         $("#txtCashAmount").prop("value", "");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = GetPurReceiveStaisticData.filter(function (x) { return x.ReceiveID == Number(divMasterGrid.SelectedKey); });
         TxtReceiveID.value = setVal(Selecteditem[0].ReceiveID);
         InvoiceStatisticsModel = Selecteditem;
@@ -2050,7 +2048,6 @@ var PurTrReturn;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -2067,7 +2064,6 @@ var PurTrReturn;
         rp.Name_function = "IProc_Prnt_PurReceiveRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReturn, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
     function btnPrintsFrom_To_onclick() {

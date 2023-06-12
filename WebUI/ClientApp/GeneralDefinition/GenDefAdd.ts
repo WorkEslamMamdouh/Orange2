@@ -46,14 +46,14 @@ namespace GenDefAdd {
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
         InitalizeControls();
         InitalizeEvents();
+
         GetVatType();
-        GetddlAcc();
-        GetddlAcccod();
+        GetddlAcc(); 
         Display();
     }
 
     $('#btnUpdate_Def').on('click', function () {
-
+        debugger
         if (SysSession.CurrentPrivileges.EDIT) {
             $('#btnSave_Def').removeClass("display_none");
             $('#btnBack_Def').removeClass("display_none");
@@ -87,8 +87,7 @@ namespace GenDefAdd {
 
     function InitalizeControls() {
         // ;
-        btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnUpdate_Def") as HTMLButtonElement;
+        btnAddDetails = document.getElementById("btnAddDetails") as HTMLButtonElement; 
         btnSave_Def = document.getElementById("btnSave_Def") as HTMLButtonElement;
         btnBack_Def = document.getElementById("btnBack_Def") as HTMLButtonElement;
 
@@ -223,6 +222,9 @@ namespace GenDefAdd {
             DeleteRow(cnt);
         });
         $("#txtCode" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+
             Validate_code(cnt);
         });
         $("#txtDescA" + cnt).on('change', function () {
@@ -242,6 +244,10 @@ namespace GenDefAdd {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         }); $("#ddlAccop" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#Defaultperc" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
@@ -486,6 +492,7 @@ namespace GenDefAdd {
 
     function DisplayGenDefCategory() {
 
+        debugger
         for (var i = 0; i < Details.length; i++) {
 
             BuildControls(CountGrid);
@@ -548,21 +555,10 @@ namespace GenDefAdd {
             success: (d) => {
                 let result = d as BaseResponse;
                 AccDataData = result.Response as Array<A_ACCOUNT>;
-            }
-        });
-    }
-    function GetddlAcccod() {
-
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
-            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            success: (d) => {
-                let result = d as BaseResponse;
                 AccDataDatacode = result.Response as Array<A_ACCOUNT>;
             }
         });
-    }
+    } 
 
     function DeleteRow(RecNo: number) {
 

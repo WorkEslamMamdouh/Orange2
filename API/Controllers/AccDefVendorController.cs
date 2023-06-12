@@ -129,29 +129,27 @@ namespace Inv.API.Controllers
                         foreach (A_Pay_D_VendorDoc item in obj.A_Pay_D_VendorDoc)
                         {
                             item.VendorId = AccDefVen.VendorID;
-                            AccDefVendorService.Insert(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
-
+                            AccDefVendorService.Insert(item); 
                         }
 
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(AccDefVen.CompCode), 0, AccDefVen.VendorID, "VendDef", "Add", db);
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(obj.A_Pay_D_Vendor));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
@@ -169,9 +167,7 @@ namespace Inv.API.Controllers
                     using (System.Data.Entity.DbContextTransaction dbTransaction = db.Database.BeginTransaction())
                     {
 
-                        A_Pay_D_Vendor AccDefVen = AccDefVendorService.Update(obj.A_Pay_D_Vendor);
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, AccDefVen.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
-
+                        A_Pay_D_Vendor AccDefVen = AccDefVendorService.Update(obj.A_Pay_D_Vendor); 
                         //update Details
                         List<A_Pay_D_VendorDoc> insertedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'i').ToList();
                         List<A_Pay_D_VendorDoc> updatedObjects = obj.A_Pay_D_VendorDoc.Where(x => x.StatusFlag == 'u').ToList();
@@ -181,18 +177,18 @@ namespace Inv.API.Controllers
                         {
                             item.VendorId = obj.A_Pay_D_Vendor.VendorID;
                             AccDefVendorService.Insert(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                             
                         }
                         foreach (A_Pay_D_VendorDoc item in updatedObjects)
                         {
                             item.VendorId = obj.A_Pay_D_Vendor.VendorID;
                             AccDefVendorService.Update(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                            
                         }
                         foreach (A_Pay_D_VendorDoc item in deletedObjects)
                         {
                             AccDefVendorService.Delete(item.VendorDocID);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.VendorDocID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                            
                         }
 
 
@@ -201,13 +197,13 @@ namespace Inv.API.Controllers
                         if (res.ResponseState == true)
                         {
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID,obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(obj.A_Pay_D_Vendor));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
@@ -216,7 +212,7 @@ namespace Inv.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "VendorDocID");
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Pay_D_Vendor.VendorID, obj.A_Pay_D_Vendor.VendorCode, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "VendorDocID");
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }

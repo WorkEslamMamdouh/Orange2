@@ -131,8 +131,7 @@ namespace Inv.API.Controllers
                 try
                 {
                     string query = s + condition + " ORDER BY [TrNo] ";
-                    List<IQ_GetBoxReceiveList> AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList();
-                    LogUser.InsertPrint(db, comp.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+                    List<IQ_GetBoxReceiveList> AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList(); 
 
                     return Ok(new BaseResponse(AccTrReceipList));
                 }
@@ -219,8 +218,7 @@ namespace Inv.API.Controllers
                 try
                 {
                     string query = s + condition + " ORDER BY [TrNo] ";
-                    List<IQ_GetBoxReceiveList> AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList();
-                    LogUser.InsertPrint(db, comp.ToString(), BranchCode, FinYear, UserCode, null, LogUser.UserLog.Query, MODULE_CODE, true, null, null, null);
+                    List<IQ_GetBoxReceiveList> AccTrReceipList = db.Database.SqlQuery<IQ_GetBoxReceiveList>(query).ToList(); 
 
                     return Ok(new BaseResponse(AccTrReceipList));
                 }
@@ -275,7 +273,7 @@ namespace Inv.API.Controllers
                     {
                         dbTransaction.Commit();
                         res.TrNo = int.Parse(result.ResponseData.ToString());
-                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, Entity.TrNo.ToString(), LogUser.UserLog.Insert, Entity.MODULE_CODE, true, null, null, null);
 
                         IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
@@ -283,14 +281,14 @@ namespace Inv.API.Controllers
                     else
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
+                        LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, Entity.TrNo.ToString(), LogUser.UserLog.Insert, Entity.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
                 }
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
-                    LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, null, LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, Entity.Comp_Code.ToString(), Entity.Branch_Code, Entity.sec_FinYear, Entity.UserCode, Entity.ReceiptID, Entity.TrNo.ToString(), LogUser.UserLog.Insert, Entity.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
@@ -325,13 +323,14 @@ namespace Inv.API.Controllers
                     {
                         dbTransaction.Commit();
                         res.TrNo = int.Parse(result.ResponseData.ToString());
-
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.ReceiptID, obj.TrNo.ToString(), LogUser.UserLog.Open, obj.MODULE_CODE, true, null, null, null);
                         IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
                     }
                     else
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.ReceiptID, obj.TrNo.ToString(), LogUser.UserLog.Open, obj.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
 
@@ -339,6 +338,7 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.ReceiptID, obj.TrNo.ToString(), LogUser.UserLog.Open, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
             }
@@ -391,7 +391,7 @@ namespace Inv.API.Controllers
                     {
                         dbTransaction.Commit();
                         res.TrNo = int.Parse(result.ResponseData.ToString());
-                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, true, null, null, null);
+                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, AccTrReceipt.TrNo.ToString(), LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, true, null, null, null);
 
                         IQ_GetBoxReceiveList displayData = db.IQ_GetBoxReceiveList.Where(x => x.ReceiptID == res.ReceiptID).FirstOrDefault();
                         return Ok(new BaseResponse(displayData));
@@ -399,7 +399,7 @@ namespace Inv.API.Controllers
                     else
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
+                        LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, AccTrReceipt.TrNo.ToString(), LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                     }
@@ -408,7 +408,7 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
-                    LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, null, LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, AccTrReceipt.Comp_Code.ToString(), AccTrReceipt.Branch_Code, AccTrReceipt.sec_FinYear, AccTrReceipt.UserCode, AccTrReceipt.ReceiptID, AccTrReceipt.TrNo.ToString(), LogUser.UserLog.Update, AccTrReceipt.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }

@@ -49,7 +49,7 @@ namespace AccDefBox {
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
         InitalizeEvents();     
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefBox, SysSession.CurrentEnvironment.CurrentYear);
+        
         Display_Acount_Code();
         Display_Network_account_Code();
         Display();

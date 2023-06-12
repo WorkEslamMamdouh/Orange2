@@ -406,7 +406,7 @@ namespace Accountbalances {
             success: (d) => {
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Accountbalances, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }

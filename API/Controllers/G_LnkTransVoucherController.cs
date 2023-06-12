@@ -149,9 +149,7 @@ namespace Inv.API.Controllers
                 {
                      
                     var InsertedRec = G_LnkTransVoucherService.Insert(item);
-
-                    LogUser.InsertPrint(db, G_LnkTransVoucher[0].COMP_CODE.ToString(), G_LnkTransVoucher[0].Branch_Code, G_LnkTransVoucher[0].FIN_YEAR.ToString(), G_LnkTransVoucher[0].UserCode, null, LogUser.UserLog.Insert, G_LnkTransVoucher[0].MODULE_CODE, true, null, null, InsertedRec.TR_CODE.ToString());
-
+ 
                 }
 
                 //loop Update  I_Pur_TR_ReceiveItems
@@ -162,10 +160,7 @@ namespace Inv.API.Controllers
 
                     string query = "update G_LnkTransVoucher set COMP_CODE=" + item.COMP_CODE + " ,SYSTEM_CODE='" + item.SYSTEM_CODE + "',SUB_SYSTEM_CODE='" + item.SUB_SYSTEM_CODE + "',TR_CODE='" + item.TR_CODE + "',SERIAL =" + item.SERIAL + ",LineRemarkA = N'"+ item.LineRemarkA+ "' ,LineRemarkE = N'" + item.LineRemarkE + "',VarCode ='" + item.VarCode + "',ISDebit='" + item.ISDebit + "',AccType =" + item.AccType + ",AccFixedCode='" + item.AccFixedCode + "',AccVarCode='" + item.AccVarCode + "',AccBraCode='" + item.AccBraCode + "',CCType ='" + item.CCType + "',CCFixedCode='" + item.CCFixedCode + "',CCVarCode='" + item.VarCode + "',CCBraCode ='" + item.CCBraCode + "',IsCollective ='" + item.IsCollective + "'where COMP_CODE = " + item.COMP_CODE + " and SYSTEM_CODE = '" + item.SYSTEM_CODE + "' and SUB_SYSTEM_CODE = '" + item.SUB_SYSTEM_CODE + "'  and TR_CODE = '" + item.TR_CODE + "' and SERIAL = " + item.serial_num + "";
                     var de = db.Database.ExecuteSqlCommand(query);
-
-                    LogUser.InsertPrint(db, G_LnkTransVoucher[0].COMP_CODE.ToString(), G_LnkTransVoucher[0].Branch_Code, G_LnkTransVoucher[0].FIN_YEAR.ToString(), G_LnkTransVoucher[0].UserCode, null, LogUser.UserLog.Update, G_LnkTransVoucher[0].MODULE_CODE, true, null, null, item.TR_CODE.ToString());
-
-
+                     
                 }
 
                 //loop Delete  I_Pur_TR_ReceiveItems
@@ -177,17 +172,13 @@ namespace Inv.API.Controllers
                     string TR_CODE = item.TR_CODE;
                     int SERIAL = item.SERIAL;
                     G_LnkTransVoucherService.DeleteLnkTransVoucher(COMP_CODE, SYSTEM_CODE, SUB_SYSTEM_CODE, TR_CODE, SERIAL);
-
-                    LogUser.InsertPrint(db, G_LnkTransVoucher[0].COMP_CODE.ToString(), G_LnkTransVoucher[0].Branch_Code, G_LnkTransVoucher[0].FIN_YEAR.ToString(), G_LnkTransVoucher[0].UserCode, null, LogUser.UserLog.Delete, G_LnkTransVoucher[0].MODULE_CODE, true, null, null, item.TR_CODE.ToString());
-
+                     
                 }
                 return Ok(new BaseResponse("ok"));
 
             }
             catch (Exception ex)
-            {
-                LogUser.InsertPrint(db, G_LnkTransVoucher[0].COMP_CODE.ToString(), G_LnkTransVoucher[0].Branch_Code, G_LnkTransVoucher[0].FIN_YEAR.ToString(), G_LnkTransVoucher[0].UserCode, null, LogUser.UserLog.Delete, G_LnkTransVoucher[0].MODULE_CODE, false, ex.Message.ToString(), null,null);
-
+            { 
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
 

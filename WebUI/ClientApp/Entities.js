@@ -3096,6 +3096,7 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.IsPosted = false;
         _this.VoucherNo = 0;
         _this.TrNo = 0;
+        _this.CashBoxID = 0;
         return _this;
     }
     return IQ_GetOperationCharges;
