@@ -1826,7 +1826,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId),"", LogUser.UserLog.print, ModuleCode, true, null, null, null);
 
                 return Ok(new BaseResponse());
             }
@@ -1837,11 +1837,11 @@ namespace Inv.API.Controllers
             }
         }
         [HttpGet, AllowAnonymous]
-        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId)
+        public IHttpActionResult InsertLogDoubleClick(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode, string TRId , string TrNo)
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.Query, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), TrNo, LogUser.UserLog.Query, ModuleCode, true, null, TrNo, null);
 
                 return Ok(new BaseResponse());
             }
@@ -1856,7 +1856,7 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, Convert.ToInt32(TRId), ExtraData, LogUser.UserLog.print, ModuleCode, true, null, null, ExtraData);
 
                 return Ok(new BaseResponse());
             }
@@ -1866,12 +1866,41 @@ namespace Inv.API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult ViewListLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.View, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult UpdateListLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
+        {
+            try
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.UpdateList, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet, AllowAnonymous]
         public IHttpActionResult PrintliestLog(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode)
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.print, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.PrintList, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
@@ -1884,17 +1913,39 @@ namespace Inv.API.Controllers
         {
             try
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "",  LogUser.UserLog.OpenScreen, ModuleCode, true, null, null, null);
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", LogUser.UserLog.OpenScreen, ModuleCode, false, ex.Message, null, null);
 
                 return BadRequest();
             }
         }
 
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult LoginOpen(string UserCode, string compcode, string BranchCode, string FinYear, string ModuleCode , int InOrOut)
+        {
+                var TypeLog = LogUser.UserLog.Login;
+            try
+            {
+
+                if (InOrOut != 1)
+                {
+                    TypeLog = LogUser.UserLog.Logout;
+                }
+
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", TypeLog, ModuleCode, true, null, null, null);
+                return Ok(new BaseResponse());
+            }
+            catch (Exception ex)
+            {
+                LogUser.InsertPrint(db, compcode, BranchCode, FinYear, UserCode, null, "", TypeLog, ModuleCode, false, ex.Message, null, null);
+
+                return BadRequest();
+            }
+        }
 
         [HttpGet, AllowAnonymous]
         public IHttpActionResult SendMessage(int CompCode, string HdMsg, string DetMsg, string ContactMobile, int TrID)
@@ -1971,10 +2022,30 @@ namespace Inv.API.Controllers
             foreach (var item in Entity)
             {
                 List<object> Table_Res = new List<object>();
+                string query = "";
+                object res;
+                if (item.IsProc == false || item.IsProc == null)
+                {
+                    query = "select * from " + item.NameTable + " " + (item.Condition.Trim() == "" ? "" : " Where " + item.Condition);
+                      res = Get_Model(query, item.NameTable);
 
+                }
+                else
+                {
+                    query = "" + item.NameTable + " " + (item.Condition);
 
-                string query = "select * from " + item.NameTable + " " + (item.Condition.Trim() == "" ? "" : " Where " + item.Condition);
-                object res = Get_Model(query, item.NameTable);
+                    if (item.IsExec == true)
+                    {
+                        db.Database.ExecuteSqlCommand(" exec " + query + "");
+                        res = new List<object>();
+                    }
+                    else
+                    {
+                        res = Get_Model(query, item.NameTable + "_Result"); 
+                    }
+
+                }
+
 
                 Table_Res.Add(res);
                 Res.AddRange(Table_Res);

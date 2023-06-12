@@ -518,7 +518,6 @@ var ServiceCategories;
         }
         $("#Div_control").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ServiceCategories, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         SelecteData = SlsInvoiceStatisticsDetails.filter(function (x) { return x.SrvCategoryID == Number(Grid.SelectedKey); });
         getAccountById(SelecteData[0].SALES_ACC_CODE, 1);
         getAccountById(SelecteData[0].RETURN_ACC_CODE, 2);

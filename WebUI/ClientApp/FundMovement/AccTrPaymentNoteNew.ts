@@ -221,8 +221,8 @@ namespace AccTrPaymentNoteNew {
     }
     function GetData_Header_loader() {
 
-       
-        var Table: Array<Table>; 
+
+        var Table: Array<Table>;
         Table =
             [
                 { NameTable: 'A_RecPay_D_CashBox', Condition: " CompCode = " + CompCode + " " },
@@ -230,13 +230,17 @@ namespace AccTrPaymentNoteNew {
                 { NameTable: 'A_ACCOUNT', Condition: " COMP_CODE = " + CompCode + " and ACC_TYPE = 3 and DETAIL = 1 " },
                 { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
                 { NameTable: 'A_G_Vendor', Condition: "" },
-                { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+            { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+            //{ NameTable: 'GProc_GetBranchModules', Condition: " 1, 1 ", IsProc: true, IsExec: true },
             ]
 
 
         DataResult(Table);
 
+        
+
         debugger
+        //alert(GetDataTable('GProc_GetBranchModules'))
         //**************************************************************************************************************
         let Listbox = GetDataTable('A_RecPay_D_CashBox') as Array<A_RecPay_D_CashBox>;
         DocumentActions.FillCombowithdefult(Listbox, txt_D_CashBoxF, "CashBoxID", (lang == "ar" ? 'CashBox_DescA' : 'CashBox_DescE'), (lang == "ar" ? 'اختر الصندوق' : 'Box'));
@@ -273,7 +277,7 @@ namespace AccTrPaymentNoteNew {
         let ListCOST = GetDataTable('G_COST_CENTER') as Array<G_COST_CENTER>;
         DocumentActions.FillCombowithdefult(ListCOST, dbCC_Code, "CC_CODE", (lang == "ar" ? 'CC_DESCA' : 'CC_DESCE'), (lang == "ar" ? 'اختر التكلفة' : 'COST'));
 
- 
+
     }
     //************************************************fillddl**************************************
     function fillddlCashBox() {
@@ -1516,7 +1520,7 @@ namespace AccTrPaymentNoteNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result);
                 // window.close(result)
@@ -1535,7 +1539,7 @@ namespace AccTrPaymentNoteNew {
 
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

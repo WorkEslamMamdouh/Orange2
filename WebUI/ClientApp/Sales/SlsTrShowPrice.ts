@@ -22,7 +22,7 @@ namespace SlsTrShowPrice {
 
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
-        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesManagerNew);
+        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrShowPrice);
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
         (lang == "ar" ? Screen_name = ' عرض سعر' : Screen_name = 'Retail invoice')
@@ -37,7 +37,7 @@ namespace SlsTrShowPrice {
     }
     else {       //2: opration invoice 
 
-        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrSalesOperation);
+        var SysSession: SystemSession = GetSystemSession(Modules.SlsTrShowPrice);
 
         var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
 
@@ -276,7 +276,7 @@ namespace SlsTrShowPrice {
         $('#btnPrint').addClass('display_none');
 
         //GetLastPrice(3236)
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         InitializeGrid();
 
@@ -2434,7 +2434,7 @@ namespace SlsTrShowPrice {
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -4346,7 +4346,7 @@ namespace SlsTrShowPrice {
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
         MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.MODULE_CODE = Modules.SlsTrShowPrice;
         MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -5087,7 +5087,7 @@ namespace SlsTrShowPrice {
 
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -5115,12 +5115,12 @@ namespace SlsTrShowPrice {
 
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //
 
 
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {
@@ -5197,7 +5197,7 @@ namespace SlsTrShowPrice {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrShowPrice, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }

@@ -247,10 +247,23 @@ var JsGrid = /** @class */ (function () {
                 var e_item = e.item;
                 var _this_PrimaryKey = _this_1.PrimaryKey;
                 var e_item_PrimaryKey = e_item[_this_PrimaryKey];
+                //***************************************TrNo*******************************
+                var _this_PrimaryTrNo = "";
+                var e_item_PrimaryTrNo = "";
+                try {
+                    _this_PrimaryTrNo = _this_1.Columns[1].name;
+                    e_item_PrimaryTrNo = e_item[_this_PrimaryTrNo];
+                }
+                catch (e) {
+                    _this_PrimaryTrNo = "";
+                    e_item_PrimaryTrNo = "";
+                }
+                //**********************************************************************
                 if ($("#Mod_Flag").val() != 1) {
-                    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+                    $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>');
                 }
                 setTimeout(function () {
+                    debugger;
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item); // e.itemIndex;
                     _this.SelectedItem = e_item;
                     _this.SelectedKey = e_item_PrimaryKey;
@@ -258,7 +271,6 @@ var JsGrid = /** @class */ (function () {
                         _this.OnRowDoubleClicked();
                     if ($("#Mod_Flag").val() != 1) {
                         $('#icon-bar').removeClass('display_none');
-                        //$("#footer_1").animate({ "left": "-85%", });
                         $("#divIconbar").fadeIn(3000);
                         $("#NewAdd_Falg").val(0);
                         $('#btnPrintTransaction').removeClass('display_none');
@@ -266,6 +278,16 @@ var JsGrid = /** @class */ (function () {
                         $('#btnBack').addClass('display_none');
                         $('#btnSave').addClass('display_none');
                         $('#Loading_Div').html('');
+                        debugger;
+                        setTimeout(function () {
+                            debugger;
+                            var compCode = localStorage.getItem("compCode");
+                            var UserCode = localStorage.getItem("UserCode");
+                            var BranchCode = localStorage.getItem("BranchCode");
+                            var CurrentYear = localStorage.getItem("CurrentYear");
+                            var Model_Screen = localStorage.getItem("Model_Screen");
+                            DoubleClickLog(UserCode, compCode, BranchCode, Model_Screen, CurrentYear, e_item_PrimaryKey, e_item_PrimaryTrNo);
+                        }, 5000);
                     }
                     if ($("#NoDubleclick").val() == 0) {
                         document.body.scrollTop = 800;

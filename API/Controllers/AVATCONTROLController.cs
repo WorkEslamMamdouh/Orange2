@@ -106,7 +106,7 @@ namespace Inv.API.Controllers
                     {
                         var res = AVAT_CONTROLService.Update(obj);
 
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, obj.VAT_SETTING.ToString());
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, null,null, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, obj.VAT_SETTING.ToString());
 
                     return Ok(new BaseResponse(res));
                     }

@@ -635,7 +635,7 @@ namespace AccDefCustomer {
     }
     function DriverDoubleClick() {
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
+        
 
         Selecteditem = Details.filter(x => x.CustomerId == Number(ReportGrid.SelectedKey));
         for (var item of Selecteditem) {

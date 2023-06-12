@@ -34,7 +34,9 @@
                 </a>
                 <div id="btn_login_1" hidden> </div>
                 <div class="me-5">
-                    <a id="login_" class="btn btn-main">دخول/Login</a>
+                    <a id="login_" class="btn btn-main btn-login">دخول/Login</a>
+
+
                 </div>
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
@@ -76,9 +78,22 @@
 
             <div class="home" id="home">
                 <div class="home-slider">
+                    <!-- Slide item New -->
+                    <div class="col-slide home-slide active">
+                        <div class="home-img left-right">
+                            <div class="text-effect-container">
+                                <div class="text-effect">New</div>
+                            </div>
+                        </div>
+                        <div class="text-container">
+                            <h2 class="home-sub-title slide-animation">
+                                حاليا الاصدار الثالث من نظام اورانج
+                            </h2>
 
+                        </div>
+                    </div>
                     <!-- Slide item NO.1 -->
-                    <div class="home-slide active ">
+                    <div class="home-slide  ">
                         <div class="text-container">
                             <h2 class="home-sub-title slide-animation text-center">
                                 حالياً بالمملكة نظام أورانج
@@ -125,8 +140,6 @@
                         <div class="home-img left-right">
                             <img src="~/Newtemplate/template/assets/images/home/slider/3.png">
                         </div>
-
-
                     </div>
                     <!-- Slide item NO.4 -->
                     <div class="home-slide home-slide-reverse">
@@ -168,6 +181,7 @@
                         <div class="arrow-down"></div>
                     </div>
 
+
                     <div class="slide-control slide-next">
                         <i class="fas fa-chevron-circle-right"></i>
                     </div>
@@ -192,7 +206,7 @@
                         <div class="services-content">
                             <div class="services-content-header">
                                 <div class="services-text">
-                                    <span class="text">مشتريات</span>
+                                    <span class="text">المشتريات</span>
                                 </div>
                             </div>
                             <ul class="services-content-list text-right">
@@ -212,7 +226,7 @@
                         <div class="services-content orange">
                             <div class="services-content-header">
                                 <div class="services-text">
-                                    <span class="text">مبيعات</span>
+                                    <span class="text">المبيعات</span>
                                 </div>
                             </div>
                             <ul class="services-content-list">
@@ -231,17 +245,18 @@
                         <div class="services-content red">
                             <div class="services-content-header">
                                 <div class="services-text">
-                                    <span class="text">مخزون</span>
+                                    <span class="text">المخزون</span>
                                 </div>
                             </div>
                             <ul class="services-content-list">
-                                <li><i class="far fa-check-circle ps-1"></i>استلام المشتريات بناء علي امر شراء أو استلام مباشرة بدون امر شراء   </li>
-                                <li><i class="far fa-check-circle ps-1"></i>الاستلام الجزئي لأمر الشراء</li>
-                                <li><i class="far fa-check-circle ps-1"></i>استلام بالعملة المحلية او العملة اجنبية وإدخال معامل التحويل</li>
-                                <li><i class="far fa-check-circle ps-1"></i>حساب التكاليف المضافة علي المشتريات و ادخال الصنف بالتكلفة شاملة المصاريف</li>
-                                <li><i class="far fa-check-circle ps-1"></i>توليد قيد محاسبي واحد يشمل المشتريات و المصاريف المرتبطة به </li>
-                                <li><i class="far fa-check-circle ps-1"></i>توزيع التكاليف الاضافة علي الاصناف و حساب متوسط تكلفة جديد بناء علي اسلوب التكلفة المتبع في النظام  </li>
-                                <li><i class="far fa-check-circle ps-1"></i>يتم تثبيت السعر في حالة ارجاع المشتريات بسعر الشراء، ولا يمكن ارجاع كمية اكبر من الكمية المستلمة</li>
+                                <li><i class="far fa-check-circle ps-1"></i>تحديد العمليات المتاحة لكل فئة اصناف ( بيع - شراء - تخزين - منتج)     </li>
+                                <li><i class="far fa-check-circle ps-1"></i>تقسيم الفئات الي انواع الاصناف </li>
+                                <li><i class="far fa-check-circle ps-1"></i>اظهار الكميات المتاحة في الفرع في شاشة بيانات الاصناف  - اسعار البيع  </li>
+                                <li><i class="far fa-check-circle ps-1"></i>تحويل بين المستودعات  تحويل مباشر </li>
+                                <li><i class="far fa-check-circle ps-1"></i>تسوية الجردية مع أكثر من طريقة للطباعة والتقييم  </li>
+                                <li><i class="far fa-check-circle ps-1"></i>اكثر من طريقة لحساب التكلفة (متوسط عام - متوسط للمستودع)   </li>
+                                <li><i class="far fa-check-circle ps-1"></i>حركات لتجميع الاصناف لعمل العروض والاصناف المجمعة </li>
+                                <li><i class="far fa-check-circle ps-1"></i>تقارير متنوعة للمخزون و المبيعات والمشتريات </li>
                             </ul>
                             <div class="services-content-footer">
                             </div>
@@ -251,7 +266,7 @@
                         <div class="services-content cyan">
                             <div class="services-content-header">
                                 <div class="services-text">
-                                    <span class="text">عمليات</span>
+                                    <span class="text">العمليات</span>
                                 </div>
                             </div>
                             <ul class="services-content-list">
@@ -305,7 +320,7 @@
                             <li class="item">اضافة خصم علي الصنف في استلام مشتريات  </li>
                             <li class="item">اضافة خصم علي الصنف في فاتورة المبيعات   </li>
                             <li class="item">السماح بتكرار الصنف في فاتورة المبيعات </li>
-                            <li class="item">النظام يدعم جميع الاجهزه اللوحيه </li> 
+                            <li class="item">النظام يدعم جميع الاجهزه اللوحيه </li>
                             <li class="item">اضافة البائع في فاتورة المبيعات الي جانب المندوب </li>
                             <li class="item">في تقرير مبيعات العملاء ، نفسيم التقرير الي  تقرير المبيعات، تقرير المرتجعات ، تقرير بالصافي </li>
                             <li class="item">في تقرير مشتريات الموردين تقسيم التقرير الى  تقرير المشتريات ، تقرير المرتجعات ، و تقرير بالصافي </li>
@@ -512,9 +527,11 @@
     </footer>
 
     <!--=============== SCROLL UP ===============-->
-    <a href="#" class="scrollup" id="scroll-up">
-        <i class="fas fa-angle-double-up scrollup__icon"></i>
-    </a>
+    <div class="top-container">
+        <a href="#" class="back-to-top active">
+            <i class="fas fa-arrow-circle-up"></i>
+        </a>
+    </div>
     <!--=============== pop Up Login===============-->
     <section id="hero">
         <section id="cta" class="login-section pop-up display_none">
@@ -539,7 +556,7 @@
                                 <div class="form-group d-flex">
                                     <input id="txtUserPassword" type="password" name="name" class="form-control rounded-left" placeholder="Password - كلمه السر">
                                 </div>
-                                <div id="btn_login_2" class="form-group  ">
+                                <div id="btn_login_2" class="form-group">
                                     <a id="btnLogin" class="form-control btn btn-main rounded submit px-3">Enter</a>
                                 </div>
                                 <div class="form-group d-flex justify-content-start">
@@ -609,14 +626,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="MessageBoxTitlewithoutclick">حذف</h4>
                 </div>
                 <div class="modal-body" style="max-height:200px; overflow:auto; text-align: center;">
                     <div class="col-xs-12"> <h3 id="MessageBoxMessagewithoutclick"></h3></div>
-                    <div class="col-xs-5 text-center">
-                        <i class="glyphicon btn-danger"></i>
-                    </div>
+                    @*<div class="col-xs-5 text-center">
+                            <i class="glyphicon btn-danger"></i>
+                        </div>*@
 
                 </div>
 
@@ -651,7 +668,7 @@
     @* Old JavaScript *@
     <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
 
-  
+
 
 </body>
 

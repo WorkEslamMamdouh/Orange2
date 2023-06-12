@@ -41,6 +41,9 @@ var MessageBox;
             if (OnOk != null)
                 OnOk();
         });
+        setTimeout(function () {
+            $('#MessageBoxOk').focus();
+        }, 700);
     }
     MessageBox.Show = Show;
     function Showwithoutclick(Message, Title) {
@@ -76,7 +79,6 @@ var MessageBox;
             if (OnCancel != null)
                 OnCancel();
         });
-        debugger;
         setTimeout(function () {
             $('#MessageBoxOk').focus();
         }, 700);

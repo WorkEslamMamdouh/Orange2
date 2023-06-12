@@ -89,13 +89,13 @@ namespace Inv.API.Controllers
             try
             {
                 var Catg = StkDefCategoryService.Insert(category);
-                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID, LogUser.UserLog.Insert, category.MODULE_CODE, true, null, null, null);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID, category.CatCode, LogUser.UserLog.Insert, category.MODULE_CODE, true, null, null, null);
 
                 return Ok(new BaseResponse(Catg));
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID, LogUser.UserLog.Insert, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID,  category.CatCode, LogUser.UserLog.Insert, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
@@ -131,13 +131,13 @@ namespace Inv.API.Controllers
             try
             {
                 var Catg = StkDefCategoryService.Update(category);
-                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID, LogUser.UserLog.Update, category.MODULE_CODE, true, null, null, null);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, Catg.CatID,Catg.CatCode, LogUser.UserLog.Update, category.MODULE_CODE, true, null, null, null);
 
                 return Ok(new BaseResponse(Catg));
             }
             catch (Exception ex)
             {
-                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID, LogUser.UserLog.Update, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                LogUser.InsertPrint(db, category.Comp_Code.ToString(), category.Branch_Code, category.sec_FinYear, category.UserCode, category.CatID, category.CatCode, LogUser.UserLog.Update, category.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }

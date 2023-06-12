@@ -31,7 +31,6 @@ var HomeComponent;
     }, 1000);
     function OpenPage(moduleCode) {
         SysSession.CurrentEnvironment.ModuleCode = moduleCode;
-        // // ;
         var compCode = SysSession.CurrentEnvironment.CompCode;
         var branchCode = SysSession.CurrentEnvironment.BranchCode;
         var UserCode = SysSession.CurrentEnvironment.UserCode;
@@ -125,12 +124,41 @@ var HomeComponent;
         });
     }
     HomeComponent.OpenReportsPopup = OpenReportsPopup;
+    function LogUser() {
+        var Model = localStorage.getItem("Model_Screen");
+        $("#btnPrintTrview").on('click', function () {
+            setTimeout(function () {
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Model, SysSession.CurrentEnvironment.CurrentYear);
+            }, 4000);
+        });
+        $("#btnPrintTrPDF").on('click', function () {
+            setTimeout(function () {
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Model, SysSession.CurrentEnvironment.CurrentYear);
+            }, 4000);
+        });
+        $("#btnPrintTrEXEL").on('click', function () {
+            setTimeout(function () {
+                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Model, SysSession.CurrentEnvironment.CurrentYear);
+            }, 4000);
+        });
+        $("#btnShow").on('click', function () {
+            setTimeout(function () {
+                ViewListLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Model, SysSession.CurrentEnvironment.CurrentYear);
+            }, 4000);
+        });
+        $("#btnSave_Def").on('click', function () {
+            setTimeout(function () {
+                UpdateListLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Model, SysSession.CurrentEnvironment.CurrentYear);
+            }, 4000);
+        });
+    }
     function OutSessionTimer() {
         if (SelectSession.value == '2') {
             LogoutUserApi();
         }
     }
     function InitalizeComponent() {
+        LogUser();
         $("#ddbra").on('change', function () {
             selectedbar = $('#ddbra').val();
             systemEnv.BranchCode = selectedbar;
@@ -271,6 +299,7 @@ var HomeComponent;
             success: function (d) {
                 // // ;
                 if (d !== undefined) {
+                    LoginOpen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Home, SysSession.CurrentEnvironment.CurrentYear, 3);
                     window.open(Url.Action("HomePage", "Login"), "_self");
                     return;
                 }
@@ -445,6 +474,7 @@ var HomeComponent;
         var SystemCode = SysSession.CurrentEnvironment.SystemCode;
         var SubSystemCode = SysSession.CurrentEnvironment.SubSystemCode;
         var Modulecode = SysSession.CurrentEnvironment.ModuleCode;
+        debugger;
         Ajax.Callsync({
             url: sys.apiUrl("SystemTools", "GetUserPrivilage"),
             data: { compCode: compCode, branchCode: branchCode, UserCode: UserCode, SystemCode: SystemCode, SubSystemCode: SubSystemCode, Modulecode: moduleCode },

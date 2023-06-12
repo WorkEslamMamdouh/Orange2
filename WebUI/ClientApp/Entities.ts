@@ -5056,6 +5056,7 @@ class I_TR_OperationCharges extends SecurityClass {
         this.CashBoxID = 0;
         this.IsPosted = false;
         this.VoucherNo = 0; 
+        this.TrNo = 0; 
     }
     public OperationExpensesID: number;
     public OperationID: number;
@@ -5075,6 +5076,7 @@ class I_TR_OperationCharges extends SecurityClass {
     public CashBoxID: number;
     public IsPosted: boolean;
     public VoucherNo: number; 
+    public TrNo: number; 
 
 }
 
@@ -5342,6 +5344,8 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.ChRemarks = "";
         this.IsPosted = false;
         this.VoucherNo = 0;
+        this.TrNo = 0;
+        this.CashBoxID = 0;
 
 
     }
@@ -5370,6 +5374,8 @@ class IQ_GetOperationCharges extends SecurityClass {
     public ChRemarks: string;
     public IsPosted: boolean; 
     public VoucherNo: number;
+    public TrNo: number;
+    public CashBoxID: number;
 
 }
 
@@ -11724,6 +11730,19 @@ class G_Role extends SecurityClass {
     public IsShowable: boolean;
     public RoleType: number;
 }
+class GProc_GetBranchModules_Result extends SecurityClass {
+    constructor() {
+        super();			 
+		this.MODULE_CODE = "";
+		this.MODULE_DESCE = "";
+		this.MODULE_DESCA = "";
+		this.MENU_NO = "";		    
+    }							  
+	public MODULE_CODE: string;
+	public MODULE_DESCE: string;
+	public MODULE_DESCA: string;
+	public MENU_NO: string;   
+}
 
 
 
@@ -11732,9 +11751,13 @@ class Table {
     constructor() {
         this.NameTable = "";
         this.Condition = "";
+        this.IsProc = false;
+        this.IsExec = false;
     }
     public NameTable: string;
     public Condition: string;
+    public IsProc?: boolean;
+    public IsExec?: boolean;
 
 }
 

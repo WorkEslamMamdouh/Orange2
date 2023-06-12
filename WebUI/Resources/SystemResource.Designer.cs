@@ -1951,7 +1951,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Box Reports.
+        ///   Looks up a localized string similar to CashBox Reports.
         /// </summary>
         public static string Box_Report {
             get {
@@ -1969,7 +1969,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Branch interconnect accounts.
+        ///   Looks up a localized string similar to Branch Link Accounts.
         /// </summary>
         public static string Branch_accounts {
             get {
@@ -2581,7 +2581,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Combined Statement .
+        ///   Looks up a localized string similar to Combined Statement .
         /// </summary>
         public static string Combined_account {
             get {
@@ -2914,7 +2914,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Direct transfer.
+        ///   Looks up a localized string similar to Direct Transfer.
         /// </summary>
         public static string Directtransfer {
             get {
@@ -3571,7 +3571,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import Invoice.
+        ///   Looks up a localized string similar to Consignment Invoice.
         /// </summary>
         public static string Inv_ImportInvoice {
             get {
@@ -3724,7 +3724,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stock Value.
+        ///   Looks up a localized string similar to Inventory Value.
         /// </summary>
         public static string Inventoryvalue {
             get {
@@ -4165,6 +4165,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accounts Chart.
+        /// </summary>
+        public static string Men_AccountsChart {
+            get {
+                return ResourceManager.GetString("Men_AccountsChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Adjustment.
         /// </summary>
         public static string Men_AccTrCustomerAdjust {
@@ -4219,6 +4228,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CashBox Settings.
+        /// </summary>
+        public static string Men_CashBoxSettings {
+            get {
+                return ResourceManager.GetString("Men_CashBoxSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BU Leadger.
         /// </summary>
         public static string Men_CcdtAccState {
@@ -4228,7 +4246,79 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fund Movement.
+        ///   Looks up a localized string similar to Packaging.
+        /// </summary>
+        public static string Men_CollectUnit {
+            get {
+                return ResourceManager.GetString("Men_CollectUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consignment Closing.
+        /// </summary>
+        public static string Men_ConsignmentClosing {
+            get {
+                return ResourceManager.GetString("Men_ConsignmentClosing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consignment Invoice.
+        /// </summary>
+        public static string Men_ConsignmentInvoice {
+            get {
+                return ResourceManager.GetString("Men_ConsignmentInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consignment Management.
+        /// </summary>
+        public static string Men_ConsignmentManagement {
+            get {
+                return ResourceManager.GetString("Men_ConsignmentManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consignment Return.
+        /// </summary>
+        public static string Men_ConsignmentReturn {
+            get {
+                return ResourceManager.GetString("Men_ConsignmentReturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consignments.
+        /// </summary>
+        public static string Men_Consignments {
+            get {
+                return ResourceManager.GetString("Men_Consignments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost Center.
+        /// </summary>
+        public static string Men_CostCenter {
+            get {
+                return ResourceManager.GetString("Men_CostCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customers and Vendors.
+        /// </summary>
+        public static string Men_CustomersVendors {
+            get {
+                return ResourceManager.GetString("Men_CustomersVendors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CashBox Movement.
         /// </summary>
         public static string Men_FundMovement {
             get {
@@ -4300,6 +4390,24 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Leadger.
+        /// </summary>
+        public static string Men_GeneralLeadger {
+            get {
+                return ResourceManager.GetString("Men_GeneralLeadger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate Link Vouchers.
+        /// </summary>
+        public static string Men_GenerateLinkVouchers {
+            get {
+                return ResourceManager.GetString("Men_GenerateLinkVouchers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Men_Home {
@@ -4309,11 +4417,56 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Imports Report.
+        /// </summary>
+        public static string Men_ImportsReport {
+            get {
+                return ResourceManager.GetString("Men_ImportsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales Revenue.
+        /// </summary>
+        public static string Men_Incomeoperations {
+            get {
+                return ResourceManager.GetString("Men_Incomeoperations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Stock.
+        /// </summary>
+        public static string Men_IssueToCC {
+            get {
+                return ResourceManager.GetString("Men_IssueToCC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Issue Type.
+        /// </summary>
+        public static string Men_IssueType {
+            get {
+                return ResourceManager.GetString("Men_IssueType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Journal Voucher.
         /// </summary>
         public static string Men_JournalVoucher {
             get {
                 return ResourceManager.GetString("Men_JournalVoucher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link Vouchers.
+        /// </summary>
+        public static string Men_LinkVouchers {
+            get {
+                return ResourceManager.GetString("Men_LinkVouchers", resourceCulture);
             }
         }
         
@@ -4363,6 +4516,24 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retail Purchase.
+        /// </summary>
+        public static string Men_Purchase {
+            get {
+                return ResourceManager.GetString("Men_Purchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase Invoice.
+        /// </summary>
+        public static string Men_PurchaseInvoice {
+            get {
+                return ResourceManager.GetString("Men_PurchaseInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Purchase Order.
         /// </summary>
         public static string Men_PurOrder {
@@ -4390,7 +4561,34 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sales.
+        ///   Looks up a localized string similar to Residuals List.
+        /// </summary>
+        public static string Men_ResidualsList {
+            get {
+                return ResourceManager.GetString("Men_ResidualsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Residuals Report.
+        /// </summary>
+        public static string Men_ResidualsReport {
+            get {
+                return ResourceManager.GetString("Men_ResidualsReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retail Sales.
+        /// </summary>
+        public static string Men_RetailSales {
+            get {
+                return ResourceManager.GetString("Men_RetailSales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retail Sales.
         /// </summary>
         public static string Men_Sales {
             get {
@@ -4440,6 +4638,15 @@ namespace Inv.WebUI.Resources {
         public static string Men_SlsTrReturn {
             get {
                 return ResourceManager.GetString("Men_SlsTrReturn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point of Sales.
+        /// </summary>
+        public static string Men_SlsTrSales {
+            get {
+                return ResourceManager.GetString("Men_SlsTrSales", resourceCulture);
             }
         }
         
@@ -4507,11 +4714,38 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opening Balance.
+        /// </summary>
+        public static string Men_STKOpeningbalance {
+            get {
+                return ResourceManager.GetString("Men_STKOpeningbalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock Control.
+        /// </summary>
+        public static string Men_StockControl {
+            get {
+                return ResourceManager.GetString("Men_StockControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tax System.
         /// </summary>
         public static string Men_TaxSystem {
             get {
                 return ResourceManager.GetString("Men_TaxSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Log.
+        /// </summary>
+        public static string Men_UserLog {
+            get {
+                return ResourceManager.GetString("Men_UserLog", resourceCulture);
             }
         }
         
@@ -4552,6 +4786,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voucher Management.
+        /// </summary>
+        public static string Men_VoucherManagement {
+            get {
+                return ResourceManager.GetString("Men_VoucherManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cost Centers.
         /// </summary>
         public static string menu_Costcenter {
@@ -4570,7 +4813,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leadger.
+        ///   Looks up a localized string similar to General Leadger.
         /// </summary>
         public static string mnue_Accountstatement {
             get {
@@ -4831,7 +5074,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to operations managment.
+        ///   Looks up a localized string similar to Consignment Management.
         /// </summary>
         public static string operationsmanagment {
             get {
@@ -5155,7 +5398,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Processes.
+        ///   Looks up a localized string similar to Consignments.
         /// </summary>
         public static string Processes {
             get {
@@ -5488,7 +5731,7 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reports.
+        ///   Looks up a localized string similar to Stock Reports.
         /// </summary>
         public static string Reports {
             get {

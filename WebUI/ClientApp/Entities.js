@@ -2934,6 +2934,7 @@ var I_TR_OperationCharges = /** @class */ (function (_super) {
         _this.CashBoxID = 0;
         _this.IsPosted = false;
         _this.VoucherNo = 0;
+        _this.TrNo = 0;
         return _this;
     }
     return I_TR_OperationCharges;
@@ -3096,6 +3097,8 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.ChRemarks = "";
         _this.IsPosted = false;
         _this.VoucherNo = 0;
+        _this.TrNo = 0;
+        _this.CashBoxID = 0;
         return _this;
     }
     return IQ_GetOperationCharges;
@@ -6877,10 +6880,24 @@ var G_Role = /** @class */ (function (_super) {
     }
     return G_Role;
 }(SecurityClass));
+var GProc_GetBranchModules_Result = /** @class */ (function (_super) {
+    __extends(GProc_GetBranchModules_Result, _super);
+    function GProc_GetBranchModules_Result() {
+        var _this = _super.call(this) || this;
+        _this.MODULE_CODE = "";
+        _this.MODULE_DESCE = "";
+        _this.MODULE_DESCA = "";
+        _this.MENU_NO = "";
+        return _this;
+    }
+    return GProc_GetBranchModules_Result;
+}(SecurityClass));
 var Table = /** @class */ (function () {
     function Table() {
         this.NameTable = "";
         this.Condition = "";
+        this.IsProc = false;
+        this.IsExec = false;
     }
     return Table;
 }());

@@ -200,7 +200,7 @@ namespace CloseProcesses {
 
     export function InitalizeComponent() {
 
-         
+
 
         $("#NoDubleclick").val('1');
 
@@ -885,7 +885,7 @@ namespace CloseProcesses {
                     }
                     return txt;
                 }
-            }, 
+            },
             { title: res.App_Salesman, name: (lang == "ar" ? "Sls_NameA" : "Sls_NameE"), type: "text", width: "16%" },
             {
                 title: res.App_date, css: "ColumPadding", name: "TrDate", width: "13%",
@@ -902,8 +902,8 @@ namespace CloseProcesses {
                     txt.innerHTML = DateFormat(item.ClearanceDate);
                     return txt;
                 }
-            }, 
-           
+            },
+
             { title: res.Name_port_entry, name: "PortName", type: "text", width: "16%" },
             { title: res.State, name: (lang == "ar" ? "Nat_DescA" : "Nat_DescE"), type: "text", width: "12%" },
             { title: res.goods_value, name: "PaperPurchaseValue", type: "text", width: "10%" },
@@ -914,7 +914,7 @@ namespace CloseProcesses {
     }
     function MasterGridDoubleClick() {
         Selected_Data = new Array<IQ_GetOperation>();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+        
 
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
@@ -922,7 +922,7 @@ namespace CloseProcesses {
         $("#txtVoucherNo").val("");
         DisplayData(Selected_Data);
 
-		debugger
+        debugger
         if (Selected_Data[0].Status == 0) {// تحت التجهيز
             Processes_under_preparing();
         }
@@ -1520,9 +1520,9 @@ namespace CloseProcesses {
 
     }
     function Disbly_BuildControls(cnt: number, OperationItemInfo: Array<IQ_GetOperationItemInfo>) {
-		// 														
+        // 														
 
-		debugger
+        debugger
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus" + cnt).addClass("display_none");
         $("#txt_StatusFlag" + cnt).val("");
@@ -1543,20 +1543,20 @@ namespace CloseProcesses {
         //$("#txtAvailableQty" + cnt).prop("value", (AvailableQty));
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
-		});
+        });
 
-		$("#No_Row" + cnt).on('dblclick', function () {
-			debugger
-			//alert('100')
+        $("#No_Row" + cnt).on('dblclick', function () {
+            debugger
+            //alert('100')
             golabelcnt = cnt;
             DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
-		});
-		$("#No_Row" + cnt).on('click', function () {
-			debugger
-			//alert('100')
-			golabelcnt = cnt;
-			DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
-		});
+        });
+        $("#No_Row" + cnt).on('click', function () {
+            debugger
+            //alert('100')
+            golabelcnt = cnt;
+            DisplayItemsData(OperationItemInfo[cnt].OperationItemID, OperationItemInfo[cnt].OperationID, cnt, OperationItemInfo[cnt].Itm_DescA);
+        });
         $("#txtClose_SoldQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_SoldQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_SoldQty);
         $("#txtClose_ScrapQty" + cnt).prop("value", (OperationItemInfo[cnt].Close_ScrapQty == null || undefined) ? 0 : OperationItemInfo[cnt].Close_ScrapQty);
         $("#txtClose_TotalSales" + cnt).prop("value", (OperationItemInfo[cnt].Close_TotalSales == null || undefined) ? 0 : OperationItemInfo[cnt].Close_TotalSales);
@@ -1713,6 +1713,7 @@ namespace CloseProcesses {
 			              <textarea id="RemarksCharge${cnt}" type="text" class="form-control"  value=""></textarea>
 		                </div>
 	                </td>
+                    <input id="TrNo${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="IsPosted${cnt}" name = " " type ="hidden" class="form-control"/>
                     <input id="txt_StatusFlag1${cnt}" name = " " type = "hidden" class="form-control"/>
                     <input id="txt_ID1${cnt}" name = " " type = "hidden" class="form-control"/>
@@ -1964,6 +1965,7 @@ namespace CloseProcesses {
         $("#txtInvoiceNumberCharge" + cnt).prop("value", (OperationCharges[cnt].RefInvoiceNo == null || undefined) ? 0 : OperationCharges[cnt].RefInvoiceNo);
         $("#RemarksCharge" + cnt).prop("value", (OperationCharges[cnt].ChRemarks == null || undefined) ? '' : OperationCharges[cnt].ChRemarks);
         $("#VoucherNoCharge" + cnt).prop("value", (OperationCharges[cnt].VoucherNo == null || undefined) ? 0 : OperationCharges[cnt].VoucherNo);
+        $("#TrNo" + cnt).prop("value", (OperationCharges[cnt].TrNo == null || undefined) ? 0 : OperationCharges[cnt].TrNo);
         $("#IsPosted" + cnt).prop("checked", (OperationCharges[cnt].IsPosted == null || undefined ? false : OperationCharges[cnt].IsPosted));
 
         $("#txtAddonsCharge" + cnt).val(OperationCharges[cnt].ChargeID);
@@ -1975,9 +1977,16 @@ namespace CloseProcesses {
 
         if (OperationCharges[cnt].CashBox_DescA != null) {
             Cashbox_DescA = CashboxDetails.filter(x => x.CashBox_DescA == OperationCharges[cnt].CashBox_DescA);
-            //$("#txt_D_CashBox" + cnt).val(Cashbox_DescA[0].CashBoxID);
         }
 
+
+        if (Number(OperationCharges[cnt].CashBoxID) > 0) {
+
+        $("#txt_D_CashBox" + cnt).val(OperationCharges[cnt].CashBoxID);
+        }
+        else {
+            $("#txt_D_CashBox" + cnt).val('Null');
+        }
 
         //IsCash
 
@@ -2060,7 +2069,7 @@ namespace CloseProcesses {
             $("#No_Row1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
 
-      
+
 
             Insert_Serial();
             ComputeTotalsCharge();
@@ -2087,7 +2096,7 @@ namespace CloseProcesses {
         txtTotalVatCharge.value = TotalVatCharge.RoundToSt(2).toString();
         txtTotalAfterVatCharge.value = TotalAfterVatCharge.RoundToSt(2).toString();
     }
-    
+
     function Insert_Serial() {
 
         let Chack_Flag = false;
@@ -2554,8 +2563,8 @@ namespace CloseProcesses {
         $("#Remarks" + cnt).val(I_TR_OperationDeposit[cnt].Remarks);
 
     }
-	function AddNewRowlebel() {
-		debugger
+    function AddNewRowlebel() {
+        debugger
         if (!SysSession.CurrentPrivileges.AddNew) return;
         var CanAddDeposit: boolean = true;
         if (CountGridDeposit > 0) {
@@ -2634,7 +2643,7 @@ namespace CloseProcesses {
         //    //var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
         //    //$('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
 
-            
+
         //    $('#txtClose_NetProfit').val(Netsales);
 
         //    //قيمة الشراء = صافي المبيعات - عمولة الشركة
@@ -2646,25 +2655,25 @@ namespace CloseProcesses {
         //}
         //else { //عموله
 
-          
 
-            //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
-            var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
-            $('#txtNetsales').val(Netsales);
-          
 
-            //نسبة العمولة  
-            var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
-            $('#txtClose_CompanyCommitionPrc').val(prc);
+        //صافي المبيعات = اجمالي المصروفات  + التسويه  - اجمالي المبيعات
+        var Netsales = (Number($('#txtClose_TotalSalesCash').val()) - (Number(txtClose_Adjustment.value) + Number($('#txtClose_TotalExpenses').val()) + Number($('#textClose_Coolingandstorage').val()))).RoundToSt(2);
+        $('#txtNetsales').val(Netsales);
 
-            //صافي الارباح = عمولة الشركة - عمولة البائع
-            var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
-            $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
 
-            //قيمة الشراء = صافي المبيعات - عمولة الشركة
-            var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
-            purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
-            $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
+        //نسبة العمولة  
+        var prc = ((Number($('#txtClose_CompanyCommition').val()) * 100) / Number($('#txtClose_TotalSalesCash').val())).RoundToSt(2)
+        $('#txtClose_CompanyCommitionPrc').val(prc);
+
+        //صافي الارباح = عمولة الشركة - عمولة البائع
+        var NetProfit = ((Number($('#txtClose_CompanyCommition').val()) + Number($('#txtClose_Marketting').val())) - Number($('#txtClose_SalesManCommition').val()));
+        $('#txtClose_NetProfit').val(NetProfit.RoundToSt(2).toString());
+
+        //قيمة الشراء = صافي المبيعات - عمولة الشركة
+        var purchaseValue = (Number($('#txtNetsales').val()) - Number($('#txtClose_CompanyCommition').val()));
+        purchaseValue = (Number(purchaseValue) - Number($('#txtClose_Marketting').val()));
+        $('#txtClose_purchaseValue').val(purchaseValue.RoundToSt(2).toString());
         //}
 
 
@@ -2997,8 +3006,8 @@ namespace CloseProcesses {
             Model_I_TR_Operation.Close_Marketting = Number($('#txtClose_Marketting').val());
 
             Model_I_TR_Operation.PurVoucherNo = Number($('#txtPurVoucherNo').val());
-                Model_I_TR_Operation.IsPurPosted = false;
-          
+            Model_I_TR_Operation.IsPurPosted = false;
+
 
             Model_I_TR_Operation.Close_AdjTotalSales = Number($('#textClose_AdjTotalSales').val());
             Model_I_TR_Operation.Close_Adjustment = Number($('#txtClose_Adjustment').val());
@@ -3145,6 +3154,7 @@ namespace CloseProcesses {
         //    return
         //}
         console.log(Model_I_TR_Operation);
+        Model_I_TR_Operation.UserCode = SysSession.CurrentEnvironment.UserCode;
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("Processes", "Update_Processes"),
@@ -3235,7 +3245,7 @@ namespace CloseProcesses {
         else if (Selected_Data[0].Status == 4) { //مغلق 
             Processes_Open();
         }
-         
+
         Calculation_Close();
 
         flag_Add = false;
@@ -3394,7 +3404,7 @@ namespace CloseProcesses {
         for (var i = 0; i < CountGridCharge; i++) {
             chargesingleModel = new I_TR_OperationCharges();
             StatusFlag = $("#txt_StatusFlag1" + i).val();
-   
+
             chargesingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             chargesingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -3417,6 +3427,7 @@ namespace CloseProcesses {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.TrNo = $("#TrNo" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
@@ -3444,6 +3455,7 @@ namespace CloseProcesses {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
+                chargesingleModel.TrNo = $("#TrNo" + i).val();
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
@@ -3512,7 +3524,7 @@ namespace CloseProcesses {
         for (var i = 0; i < CountGridDeposit; i++) {
             DepositsingleModel = new I_TR_OperationDeposit();
             StatusFlag = $("#txt_StatusFlag2" + i).val();
-     
+
             DepositsingleModel.Token = "HGFD-" + SysSession.CurrentEnvironment.Token;
             DepositsingleModel.UserCode = SysSession.CurrentEnvironment.UserCode;
             if (StatusFlag == "i") {
@@ -4165,7 +4177,7 @@ namespace CloseProcesses {
 
 
             Calculation_Close();
-             
+
         }
         else {
             DisplayMassage("يجب ان تكون العمليه مفتوحه", "The process must be open!", MessageType.Worning);
@@ -4859,7 +4871,7 @@ namespace CloseProcesses {
                 DisplayMassage(" برجاء ادخال تاريخ الاغلاق صحيح", "Please enter financial data", MessageType.Worning);
                 Errorinput($('#txtClose_TrDate'))
                 return false
-            }  
+            }
 
             Assign_1_Processes();
             Update_1_Processes();
@@ -5240,7 +5252,7 @@ namespace CloseProcesses {
             success: (d) => {
 
                 let result = d.result as string;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CloseProcesses, SysSession.CurrentEnvironment.CurrentYear);
+
 
 
                 window.open(result, "_blank");
@@ -5442,7 +5454,7 @@ namespace CloseProcesses {
                 window.open(result, "_blank");
             }
         })
-         
+
     }
     function btnPrintStock_onclick() {
 
@@ -5940,7 +5952,7 @@ namespace CloseProcesses {
                 let result = d as BaseResponse;
                 if (result.IsSuccess) {
 
-                    
+
 
                     if (Save_Add == true) {
 
@@ -5976,7 +5988,7 @@ namespace CloseProcesses {
                     $("#nameitem").text(nameGlopl);
                     flag_Success_2 = false;
                     $("#DivHederMaster").removeClass("disabledDiv");
-                    $("#div_MasterGird").removeClass("disabledDiv"); 
+                    $("#div_MasterGird").removeClass("disabledDiv");
                     Update_2 = false;
                 }
                 else {

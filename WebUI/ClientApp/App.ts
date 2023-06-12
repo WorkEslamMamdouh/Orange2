@@ -876,7 +876,8 @@ function OpenPartial(ModuleCode: string, DivName: string) {
 function loading(NameBtn: string) {
     $('#' + NameBtn + '').attr('disabled', 'disabled');
 
-    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+    $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>');
+    //$('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
     $('.iconbar-container').attr('style', 'display : none');
 
     setTimeout(function () {
@@ -3047,6 +3048,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
     });
 
 }
+
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
 
     var sys: SystemTools = new SystemTools();
@@ -3059,6 +3061,33 @@ function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, 
         }
     });
 }
+
+function ViewListLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "ViewListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+
+function UpdateListLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "UpdateListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+
 function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
 
     var sys: SystemTools = new SystemTools();
@@ -3083,13 +3112,25 @@ function OpenScreen(UserCode: string, compcode: string, BranchCode: string, Modu
         }
     });
 }
-function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+function LoginOpen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, InOrOut: number) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "LoginOpen"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, InOrOut: InOrOut },
+        success: (response) => {
+
+        }
+    });
+}
+function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string, TrNo: string) {
 
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
-        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId , TrNo: TrNo},
         success: (response) => {
 
         }

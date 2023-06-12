@@ -212,7 +212,7 @@ namespace DefStore {
         $('#btnSave').addClass('display_none');
         Selected_Data = new Array<GQ_GetStore>();
         Selected_Data = detailstore.filter(x => x.StoreId == Number(ReportGrid.SelectedKey));
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode,Modules.DefStore, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
+        
 
         $('#StoreDetail').removeClass('display_none');
 
@@ -347,7 +347,7 @@ namespace DefStore {
 
         Modelstore.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Modelstore.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Modelstore.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        Modelstore.MODULE_CODE = Modules.DefStore;
         Modelstore.UserCode = SysSession.CurrentEnvironment.UserCode;
         Modelstore.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
@@ -378,7 +378,7 @@ namespace DefStore {
 
         Modelstore.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Modelstore.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        Modelstore.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        Modelstore.MODULE_CODE = Modules.DefStore;
         Modelstore.UserCode = SysSession.CurrentEnvironment.UserCode;
         Modelstore.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
@@ -477,12 +477,12 @@ namespace DefStore {
 
         }
 
-        if ($('#drpinventoryAccount').val() == "null") {
-            WorningMessage("يجب اختيار  حساب المخزون  !", "The Inventory Account must be selected!", "تحذير", "worning");
-            Errorinput($('#drpinventoryAccount'));
-            return false;
+        //if ($('#drpinventoryAccount').val() == "null") {
+        //    WorningMessage("يجب اختيار  حساب المخزون  !", "The Inventory Account must be selected!", "تحذير", "worning");
+        //    Errorinput($('#drpinventoryAccount'));
+        //    return false;
 
-        }
+        //}
         if ($('#drpuserType_new').val() == "Null") {
             WorningMessage("يجب اختيار اسم الفرع!", "The Branch Name must be selected!", "تحذير", "worning");
             Errorinput($('#drpuserType_new'));

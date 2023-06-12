@@ -193,7 +193,7 @@ namespace Inv.API.Controllers
                         {
                             item.CustomerId = AccDefCust.CustomerId;
                             AccDefCustomerService.Insert(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.CustomerDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            
 
                         }
 
@@ -202,14 +202,14 @@ namespace Inv.API.Controllers
                         {
                             //AccDefCust.CustomerCODE = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(AccDefCust.CustomerId));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -217,7 +217,7 @@ namespace Inv.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }
@@ -237,7 +237,7 @@ namespace Inv.API.Controllers
                     {
 
                         A_Rec_D_Customer AccDefCust = AccDefCustomerService.Update(obj.A_Rec_D_Customer);
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, AccDefCust.CustomerId, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                         
 
                         List<A_Rec_D_CustomerDoc> insertedObjects = obj.A_Rec_D_CustomerDoc.Where(x => x.StatusFlag == 'i').ToList();
                         List<A_Rec_D_CustomerDoc> updatedObjects = obj.A_Rec_D_CustomerDoc.Where(x => x.StatusFlag == 'u').ToList();
@@ -248,18 +248,17 @@ namespace Inv.API.Controllers
                             A_Rec_D_CustomerDoc A_Rec_D_CustomerDoc_ = new A_Rec_D_CustomerDoc();
                             item.CustomerId = obj.A_Rec_D_Customer.CustomerId;
                             A_Rec_D_CustomerDoc_ = AccDefCustomerService.Insert(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, A_Rec_D_CustomerDoc_.CustomerDocID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, "CustomerDocID");
+                             
                         }
                         foreach (A_Rec_D_CustomerDoc item in updatedObjects)
                         {
                             item.CustomerId = obj.A_Rec_D_Customer.CustomerId;
                             AccDefCustomerService.Update(item);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.CustomerDocID, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, "CustomerDocID");
+                             
                         }
                         foreach (A_Rec_D_CustomerDoc item in deletedObjects)
                         {
-                            AccDefCustomerService.Delete(item.CustomerDocID);
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, item.CustomerDocID, LogUser.UserLog.Delete, obj.MODULE_CODE, true, null, null, "CustomerDocID");
+                            AccDefCustomerService.Delete(item.CustomerDocID); 
                         }
 
 
@@ -271,14 +270,14 @@ namespace Inv.API.Controllers
                         {
                             //AccDefCust.CustomerCODE = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId,obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(AccDefCust.CustomerId));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -287,7 +286,7 @@ namespace Inv.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.A_Rec_D_Customer.CustomerId, obj.A_Rec_D_Customer.CustomerCODE, LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }

@@ -148,7 +148,7 @@ namespace JournalVoucher {
 
     export function InitalizeComponent() {
         //System
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
+         
 
         (SysSession.CurrentEnvironment.ScreenLanguage == "ar") ? document.getElementById('Screen_name').innerHTML = "سند قيد" : document.getElementById('Screen_name').innerHTML = "Journal Voucher";
         compcode = Number(SysSession.CurrentEnvironment.CompCode);
@@ -3477,7 +3477,7 @@ namespace JournalVoucher {
 
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -3497,7 +3497,7 @@ namespace JournalVoucher {
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
 
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.JournalVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
 
     }

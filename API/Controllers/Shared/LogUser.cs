@@ -47,8 +47,10 @@ namespace Inv.API.Controllers
             Query = 20,
             print = 21,
             Open= 22,
-            AllSuccess = 23,
-            OpenScreen = 5
+            //AllSuccess = 23,
+            OpenScreen = 5,
+            View = 24 ,
+            PrintList = 25 
         }
         public enum PageName
         {
@@ -80,16 +82,20 @@ namespace Inv.API.Controllers
 
         }
         public static void Insert(InvEntities _db, string COMP_CODE, string BranchCode, string FinYear, string USER_CODE,
-        int? DataId, UserLog OperationId, PageName PageName, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
+        int? DataId, string TrNo, UserLog OperationId, PageName PageName, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
         {
             try
             {
+                if (TrNo.Trim() != "" && TrNo != null)
+                {
+                    ErrorNo = TrNo;
+                }
 
                 string dateValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
 
                 string sql = @"INSERT INTO  G_USER_LOG( USER_CODE, SYSTEM_CODE, COMP_CODE, BranchCode, FinYear, TimeStamp, MODULE_CODE, OperationId, DataID, ISSucceed, ErrorMessage, ExtraData) 
                             VALUES ('" + USER_CODE + "','I' ," + Convert.ToInt32(COMP_CODE) + "," + Convert.ToInt32(BranchCode) + ", " + short.Parse(FinYear) + ",'" + dateValue + "' ," + @"
-                                   '" + PageName + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '') ";
+                                   '" + PageName + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '"+ ErrorNo + "') ";
 
                 _db.Database.ExecuteSqlCommand(sql);
                 //G_USER_LOG obj = new G_USER_LOG();
@@ -123,15 +129,20 @@ namespace Inv.API.Controllers
         }
 
         public static void InsertPrint(InvEntities _db, string COMP_CODE, string BranchCode, string FinYear, string USER_CODE,
-       int? DataId, UserLog OperationId, string ModuleCode, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
+       int? DataId, string TrNo, UserLog OperationId, string ModuleCode, bool ISSucceed, string ErrorMessage, string ErrorNo, string Info)
         {
             try
             {
+                if (TrNo.Trim() != "" && TrNo != null)
+                {
+                    ErrorNo = TrNo;
+                }
+
                 string dateValue = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss");
 
                 string sql = @"INSERT INTO  G_USER_LOG( USER_CODE, SYSTEM_CODE, COMP_CODE, BranchCode, FinYear, TimeStamp, MODULE_CODE, OperationId, DataID, ISSucceed, ErrorMessage, ExtraData) 
                             VALUES ('" + USER_CODE + "','I' ," + Convert.ToInt32(COMP_CODE) + "," + Convert.ToInt32(BranchCode) + ", " + short.Parse(FinYear) + ",'" + dateValue + "' ," + @"
-                                   '" + ModuleCode + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '') ";
+                                   '" + ModuleCode + "','" + Convert.ToByte(OperationId) + "', '" + DataId + "' ,'" + ISSucceed + "', '" + ErrorMessage + "' , '"+ ErrorNo + "') ";
 
                 _db.Database.ExecuteSqlCommand(sql);
 

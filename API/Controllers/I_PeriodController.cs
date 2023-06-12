@@ -93,13 +93,13 @@ namespace Inv.API.Controllers
                 {
                     db.Database.ExecuteSqlCommand("update I_Period set Status =1 , Closed_BY = '" + UserCode + "' , Closed_AT =GETDATE() where PERIOD_CODE =" + PERIOD_CODE + " and CompCode =" + CompCode + " and FinYear = " + FinYear + "");
                     db.Database.ExecuteSqlCommand("IProc_PeriodClose " + CompCode + " , " + PERIOD_CODE + " ," + FinYear + "");
-                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, LogUser.UserLog.Update, Modules, true, null, null, " Close_ReOpen Closed_AT ");
+                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, PERIOD_CODE.ToString(), LogUser.UserLog.Update, Modules, true, null, null, " Close_ReOpen Closed_AT ");
 
                 }
                 else
                 {
                     db.Database.ExecuteSqlCommand("update I_Period set Status =0 , ReOpen_BY = '" + UserCode + "' , ReOpen_AT =GETDATE() where PERIOD_CODE =" + PERIOD_CODE + " and CompCode =" + CompCode + " and FinYear = " + FinYear + "");
-                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, LogUser.UserLog.Update, Modules, true, null, null, " Close_ReOpen ReOpen_AT ");
+                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, PERIOD_CODE.ToString(), LogUser.UserLog.Update, Modules, true, null, null, " Close_ReOpen ReOpen_AT ");
 
                 }
                 return Ok(new BaseResponse(1));
@@ -125,13 +125,13 @@ namespace Inv.API.Controllers
                 {
 
                     db.Database.ExecuteSqlCommand("update I_Period set FixQty = " + checke + " where PERIOD_CODE =" + PERIOD_CODE + " and CompCode =" + CompCode + " and FinYear = " + FinYear + "");
-                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, LogUser.UserLog.Update, Modules, true, null, null, "PERIOD_CODE");
+                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, PERIOD_CODE.ToString(), LogUser.UserLog.Update, Modules, true, null, null, "PERIOD_CODE");
 
                 }
                 else
                 {
                     db.Database.ExecuteSqlCommand("update I_Period set FixCost = " + checke + " where PERIOD_CODE =" + PERIOD_CODE + " and CompCode =" + CompCode + " and FinYear = " + FinYear + "");
-                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE, LogUser.UserLog.Update, Modules, true, null, null, "PERIOD_CODE");
+                    LogUser.InsertPrint(db, CompCode.ToString(), Branch_Code, FinYear.ToString(), UserCode, PERIOD_CODE,PERIOD_CODE.ToString(), LogUser.UserLog.Update, Modules, true, null, null, "PERIOD_CODE");
 
                 }
                 return Ok(new BaseResponse(1));

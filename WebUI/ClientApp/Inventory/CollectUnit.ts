@@ -78,7 +78,7 @@ namespace CollectUnit {
         FillStore();
         GetCardTypes();
         drp_Store.selectedIndex = 1;
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         Display_DrpPaymentType();
         Display_I_ItemFamily();
@@ -581,7 +581,7 @@ namespace CollectUnit {
     //*************************************************Display******************************************//
     function Grid_RowDoubleClicked(CollectID: string) {
         $("#DivInvoiceData").removeClass("display_none");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, CollectID);
+        
 
         hd_CollectID.value = CollectID;
         btnPrintTransaction.disabled = false;
@@ -1349,7 +1349,7 @@ namespace CollectUnit {
         rp.Name_function = "IProc_Prnt_Collect";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
 
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
 
@@ -1392,7 +1392,7 @@ namespace CollectUnit {
             success: (d) => {
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.CollectUnit, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }

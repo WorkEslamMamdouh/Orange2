@@ -268,7 +268,7 @@ namespace Inv.API.Controllers
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(displayData));
                         }
@@ -277,7 +277,7 @@ namespace Inv.API.Controllers
                             dbTransaction.Rollback();
                             db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
                             db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -288,7 +288,7 @@ namespace Inv.API.Controllers
                         dbTransaction.Rollback();
                         db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
                         db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -436,7 +436,7 @@ namespace Inv.API.Controllers
                             obj.I_Sls_TR_Invoice.DocNo = db.Database.SqlQuery<string>("select DocNo from I_Sls_TR_Invoice where InvoiceID = " + obj.I_Sls_TR_Invoice.InvoiceID + "").FirstOrDefault();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(displayData));
                         }
@@ -445,7 +445,7 @@ namespace Inv.API.Controllers
                             dbTransaction.Rollback();
                             db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
                             db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -456,7 +456,7 @@ namespace Inv.API.Controllers
                         dbTransaction.Rollback();
                         db.Database.ExecuteSqlCommand("delete I_Sls_TR_InvoiceItems where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + " ");
                         db.Database.ExecuteSqlCommand("delete [dbo].[I_Sls_TR_Invoice] where invoiceid = " + obj.I_Sls_TR_Invoice.InvoiceID + "");
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -549,14 +549,14 @@ namespace Inv.API.Controllers
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
 
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -564,7 +564,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -741,14 +741,14 @@ namespace Inv.API.Controllers
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
 
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -756,7 +756,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -791,7 +791,9 @@ namespace Inv.API.Controllers
                         if (result.ResponseState == true)
                         {
                             //Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
-                            dbTransaction.Commit(); 
+                            dbTransaction.Commit();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, true, null, null, null);
+                             
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         
@@ -799,6 +801,7 @@ namespace Inv.API.Controllers
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
 
@@ -806,6 +809,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -984,14 +988,14 @@ namespace Inv.API.Controllers
                             obj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == obj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -1000,7 +1004,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -1141,13 +1145,13 @@ namespace Inv.API.Controllers
                             dbTransaction.Commit();
 
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -1155,7 +1159,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -1207,12 +1211,14 @@ namespace Inv.API.Controllers
                         {
                             dbTransaction.Commit();
                             // Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, true, null, null, null);
                             var displayData = db.IQ_GetSlsInvoiceStatisticVer2.Where(x => x.InvoiceID == updatedObj.I_Sls_TR_Invoice.InvoiceID).FirstOrDefault();
                             return Ok(new BaseResponse(displayData));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
 
@@ -1220,6 +1226,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -1259,8 +1266,7 @@ namespace Inv.API.Controllers
                 ///////////
                 string query = s + condition;
                 var res = db.Database.SqlQuery<IQ_GetSlsInvoiceStatisticVer2>(query).ToList();
-                LogUser.InsertPrint(db, CompCode.ToString(), BranchCode.ToString(), FinYear, UserCode,0, LogUser.UserLog.Query,MODULE_CODE, true, null, null, null);
-
+               
                 return Ok(new BaseResponse(res));
             }
             return BadRequest(ModelState);
@@ -1316,14 +1322,14 @@ namespace Inv.API.Controllers
                         {
                             updatedObj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(),updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(),updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(updatedObj.I_Sls_TR_Invoice));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -1331,7 +1337,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Update, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
@@ -1385,11 +1391,13 @@ namespace Inv.API.Controllers
                            
                            // Sls_TR_Invoice.TrNo = int.Parse(result.ResponseData.ToString());
                             dbTransaction.Commit();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(Sls_TR_Invoice));
                         }
                         else
                         {
                             dbTransaction.Rollback();
+                            LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, result.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, result.ResponseMessage));
                         }
 
@@ -1397,6 +1405,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
+                        LogUser.InsertPrint(db, updatedObj.Comp_Code.ToString(), updatedObj.Branch_Code, updatedObj.sec_FinYear, updatedObj.UserCode, updatedObj.I_Sls_TR_Invoice.InvoiceID, updatedObj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Open, updatedObj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }
@@ -1433,14 +1442,14 @@ namespace Inv.API.Controllers
                         {
                             obj.I_Sls_TR_Invoice.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
 
                             return Ok(new BaseResponse(obj.I_Sls_TR_Invoice));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseState.ToString(), null, null);
 
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
@@ -1449,7 +1458,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Sls_TR_Invoice.InvoiceID, obj.I_Sls_TR_Invoice.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }

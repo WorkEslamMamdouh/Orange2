@@ -248,6 +248,7 @@
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Newtemplate\template\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Newtemplate\template\assets\css\Loder.css" />
     <Content Include="Newtemplate\template\assets\css\style_News.css" />
     <Content Include="Newtemplate\template\assets\css\style_arabic.css" />
     <Content Include="Newtemplate\template\assets\css\style_home.css" />
@@ -258,6 +259,7 @@
     <Content Include="Newtemplate\template\assets\images\home\slider\4.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\5.png" />
     <Content Include="Newtemplate\template\assets\images\home\slider\new.svg" />
+    <Content Include="Newtemplate\template\assets\images\home\wave.png" />
     <Content Include="Newtemplate\template\assets\images\logo.ico" />
     <Content Include="Newtemplate\template\assets\images\logo.png" />
     <Content Include="Newtemplate\template\assets\js\ace.js" />
@@ -843,7 +845,6 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Views\Login\HomePage1.cshtml" />
     <Content Include="Views\Purchase\PurOrderIndex.cshtml" />
-    <Content Include="Views\Purchase\PurTrpaymemtIndex.cshtml" />
     <Content Include="Website\assets\css\style.css" />
     <Content Include="Website\assets\img\apple-touch-icon.png" />
     <Content Include="Website\assets\img\favicon.png" />
@@ -1489,24 +1490,16 @@
     <Content Include="Views\GeneralDefinition\GenDefVendorCatIndex.cshtml" />
     <Content Include="Views\GeneralDefinition\GendefVendorGroupIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrSalesIndex.cshtml" />
-    <Content Include="Views\FundMovement\AccTrInvReceiptIndex.cshtml" />
-    <Content Include="Views\FundMovement\AccTrPaymentNoteIndex.cshtml" />
-    <Content Include="Views\FundMovement\AccTrReceiptNoteIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrCustomerAdjustIndex.cshtml" />
     <Content Include="Views\FundMovement\AccTrVendorAdjustIndex.cshtml" />
     <Content Include="Views\Purchase\PurTrReceiveIndex.cshtml" />
     <Content Include="Views\Purchase\PurTrReturnIndex.cshtml" />
-    <Content Include="Views\Sales\SlsTrSalesManagerIndex.cshtml" />
-    <Content Include="Views\Sales\SlsTrReturnIndex.cshtml" />
     <Content Include="Views\Processes\Processesindex.cshtml" />
-    <Content Include="Views\Processes\ProcSalesRetIndex.cshtml" />
-    <Content Include="Views\Processes\ProcSalesInvoiceIndex.cshtml" />
     <Content Include="Views\CollectionReports\ClientaccstatIndex.cshtml" />
     <Content Include="Views\CollectionReports\SupplieraccstatIndex.cshtml" />
     <Content Include="Views\CollectionReports\InventorymoveIndex.cshtml" />
     <Content Include="Views\CollectionReports\IncomeoperationsIndex.cshtml" />
     <Content Include="Views\CollectionReports\InventoryvalueIndex.cshtml" />
-    <Content Include="Views\Processes\ProcSalesMgrIndex.cshtml" />
     <Content Include="Views\GeneralLedgerMenu\GLDefAccountIndex.cshtml" />
     <Content Include="Views\GeneralLedgerMenu\ManagementVoucherIndex.cshtml" />
     <Content Include="Views\GeneralLedgerMenu\CostCenterIndex.cshtml" />
@@ -1520,14 +1513,11 @@
     <Content Include="Views\Tools\LnkTransVoucher\LnkTransVoucherIndex.cshtml" />
     <Content Include="Views\Inventory\DirecttransferIndex.cshtml" />
     <Content Include="Views\Inventory\STKAdjustIndex.cshtml" />
-    <Content Include="Views\Inventory\sendTransferIndex.cshtml" />
-    <Content Include="Views\Inventory\ReceiveTransferIndex.cshtml" />
     <Content Include="Views\GeneralDefinition\GenDefAddIndex.cshtml" />
     <Content Include="Views\Partial\Report_page.cshtml" />
     <Content Include="Views\Login\HomePage.cshtml" />
     <Content Include="Views\AccDefinition\DefStoreIndex.cshtml" />
     <Content Include="Views\Sales\SlsTrShowPriceIndex.cshtml" />
-    <Content Include="Views\Processes\SalesTransIndex.cshtml" />
     <Content Include="Views\servicesystem\ServiceCategoriesIndex.cshtml" />
     <Content Include="Views\servicesystem\ServicesIndex.cshtml" />
     <Content Include="Views\servicesystem\Sales_ServicesIndex.cshtml" />
@@ -1542,14 +1532,9 @@
     <Content Include="Views\AdminSetting\AdminCompIndex.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
-    <Content Include="Views\costcenter\DtcostcenterIndex.cshtml" />
-    <Content Include="Views\costcenter\CcdtAccStateIndex.cshtml" />
     <Content Include="Views\TaxSystem\VatReportIndex.cshtml" />
     <Content Include="Views\TaxSystem\VatListsIndex.cshtml" />
     <Content Include="Views\TaxSystem\VatSettingIndex.cshtml" />
-    <Content Include="Views\GeneralLedgerMenu\ReceiptVoucherIndex.cshtml" />
-    <Content Include="Views\GeneralLedgerMenu\PaymentVoucherIndex.cshtml" />
-    <Content Include="Views\StkDefinition\StkDefItemsNewIndex.cshtml" />
     <Content Include="Views\AdminSetting\AdminCompDataIndex.cshtml" />
     <Content Include="Views\CollectionReports\CashBoxAccountIndex.cshtml" />
     <Content Include="Views\Processes\OperationScrapIndex.cshtml" />
@@ -1594,6 +1579,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ClientApp\Component\" />
+    <Folder Include="ClientApp\costcenter\" />
     <Folder Include="Newtemplate\documentation\" />
     <Folder Include="Newtemplate\template\assets\images\auth\" />
     <Folder Include="Newtemplate\template\assets\images\carousel\" />
@@ -1613,6 +1599,7 @@
     <Folder Include="Style_design\img\message\" />
     <Folder Include="Style_design\img\notification\" />
     <Folder Include="Style_design\img\profile\" />
+    <Folder Include="Views\costcenter\" />
     <Folder Include="Views\Site\UnderConstruction\" />
   </ItemGroup>
   <ItemGroup>
@@ -1655,12 +1642,7 @@
     <TypeScriptCompile Include="ClientApp\CollectionReports\Inventoryvalue.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Collectedaccstat.ts" />
     <TypeScriptCompile Include="ClientApp\CollectionReports\Supplieraccstat.ts" />
-    <TypeScriptCompile Include="ClientApp\costcenter\CcdtAccState.ts" />
-    <TypeScriptCompile Include="ClientApp\costcenter\Dtcostcenter.ts" />
-    <TypeScriptCompile Include="ClientApp\FundMovement\PurTrpaymemt.ts" />
-    <TypeScriptCompile Include="ClientApp\FundMovement\AccTrPaymentNote.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrCustomerAdjust.ts" />
-    <TypeScriptCompile Include="ClientApp\FundMovement\AccTrReceiptNote.ts" />
     <TypeScriptCompile Include="ClientApp\FundMovement\AccTrVendorAdjust.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralDefinition\GenDefCustomerAdjust.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralDefinition\GenDefCustomerCat.ts" />
@@ -1673,15 +1655,11 @@
     <TypeScriptCompile Include="ClientApp\GeneralLedger\Accountstatement.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralLedger\CostCenter.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralLedger\financialreports.ts" />
-    <TypeScriptCompile Include="ClientApp\GeneralLedger\PaymentVoucher.ts" />
-    <TypeScriptCompile Include="ClientApp\GeneralLedger\ReceiptVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralLedger\JournalVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralLedger\ManagementVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\GeneralLedger\GLDefAccount.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\CollectUnit.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\DirectTransfer.ts" />
-    <TypeScriptCompile Include="ClientApp\Inventory\sendTransfer.ts" />
-    <TypeScriptCompile Include="ClientApp\Inventory\ReceiveTransfer.ts" />
     <TypeScriptCompile Include="ClientApp\Inventory\STKAdjust.ts" />
     <TypeScriptCompile Include="ClientApp\Pages\LoginAdmin.ts" />
     <TypeScriptCompile Include="ClientApp\Pages\LoginComponent.ts" />
@@ -1694,10 +1672,6 @@
     <TypeScriptCompile Include="ClientApp\MessageBox.ts" />
     <TypeScriptCompile Include="ClientApp\Partial\Background.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\CloseProcesses.ts" />
-    <TypeScriptCompile Include="ClientApp\Processes\SalesTrans.ts" />
-    <TypeScriptCompile Include="ClientApp\Processes\ProcSalesInvoice.ts" />
-    <TypeScriptCompile Include="ClientApp\Processes\ProcSalesMgr.ts" />
-    <TypeScriptCompile Include="ClientApp\Processes\ProcSalesRet.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\Processes.ts" />
     <TypeScriptCompile Include="ClientApp\Processes\OperationScrap.ts" />
     <TypeScriptCompile Include="ClientApp\Purchase\PurOrder.ts" />
@@ -1715,7 +1689,6 @@
     <TypeScriptCompile Include="ClientApp\servicesystem\SlsTrServices.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\PeriodManagement.ts" />
     <TypeScriptCompile Include="ClientApp\StkDefinition\IssueToCC.ts" />
-    <TypeScriptCompile Include="ClientApp\StkDefinition\StkDefItemsNew.ts" />
     <TypeScriptCompile Include="ClientApp\TaxSystem\AVATCONTROL.ts" />
     <TypeScriptCompile Include="ClientApp\TaxSystem\VatReport.ts" />
     <TypeScriptCompile Include="ClientApp\TaxSystem\VatLists.ts" />
@@ -1724,7 +1697,6 @@
     <TypeScriptCompile Include="ClientApp\Tools\TranPosting\TranPosting.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\USERS\UserActLog.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\USERS\USERS.ts" />
-    <TypeScriptCompile Include="ClientApp\Sales\AccTrInvReceipt.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSales.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesManager.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSalesReturn.ts" />

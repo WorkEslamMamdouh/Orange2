@@ -15,7 +15,7 @@ namespace LnkVoucher {
     var BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
 
     var TransactionsGrid: JsGrid = new JsGrid();
-    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>(); 
+    var LnkTransDetails: Array<AProc_LnkGenerateTrans_Result> = new Array<AProc_LnkGenerateTrans_Result>();
     var LnkVoucherlMastDet: LnkVoucherlMasterDetails = new LnkVoucherlMasterDetails();
     var AccountDetails: A_ACCOUNT = new A_ACCOUNT();
     var AccountDetailsIst: Array<A_ACCOUNT> = new Array<A_ACCOUNT>();
@@ -51,15 +51,16 @@ namespace LnkVoucher {
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
     var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
-    export function InitalizeComponent() { 
+    export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
-        $('#btnAdd').addClass('hidden_Control'); 
+        $('#btnAdd').addClass('hidden_Control');
         InitalizeControls();
         InitalizeEvents();
         InitializeGrid();
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         GetData_Header();
+ 
     }
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
@@ -101,6 +102,7 @@ namespace LnkVoucher {
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = () => { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); }
         //*******************************print*****************************
+        txtFromNumber.onchange = () => { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value ) ? txtFromNumber.value : txtToNumber.value }
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
@@ -122,9 +124,8 @@ namespace LnkVoucher {
         TransactionsGrid.OnItemEditing = () => { };
         TransactionsGrid.Columns = [
             { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
-            //{ title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false }, 
             {
                 title: res.App_date, css: "ColumPadding", name: "TR_DATE", width: "8%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -136,8 +137,7 @@ namespace LnkVoucher {
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
             { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
-            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
-            //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
+            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" }, 
             {
                 title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -213,7 +213,7 @@ namespace LnkVoucher {
 
         });
 
-    } 
+    }
     //************************************************fillddl**************************************
     function GetData_Header() {
         var Table: Array<Table>;
@@ -302,7 +302,7 @@ namespace LnkVoucher {
         }
 
         let IsPosted = Number($('#ddlStatus').val());
-        
+
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("TranPosting", "LoadLnkVouchTransactions"),
@@ -315,8 +315,8 @@ namespace LnkVoucher {
                     debugger
                     LnkTransDetails = result.Response as Array<AProc_LnkGenerateTrans_Result>;
                     IsPosted != -1 ? LnkTransDetails = LnkTransDetails.filter(x => x.IsPosted == Boolean(IsPosted)) : null;
-                    
-                    if (LnkTransDetails.length > 0) {                        
+
+                    if (LnkTransDetails.length > 0) {
                         LnkTransDetails = LnkTransDetails.sort(dynamicSort("TrNo"));
 
                         TransactionsGrid.DataSource = LnkTransDetails;
@@ -378,39 +378,50 @@ namespace LnkVoucher {
         }, 100);
     }
     function btnBack_onclick() {
-        GridDoubleClick();
+        CleanDetails();
+        DisplayData(TransactionsGrid.SelectedItem)
+        disabled();
     }
     function btnUpdate_onclick() {
         Enabled();
-    } 
+    }
     function btnGenerationVoucher_onclick() {
-        let TrID = Number($('#TRID').val())
-        let TR_CODE = $('#TR_CODE').val()
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
-            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
-            success: (d) => {//(int TrID, int CompCode, int branchCode)
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    let List = result.Response as Array<AQ_GetLnkVoucher>;
-                    CountGrid = 0;
-                    $("#div_Data").html('');
+        btnGenerationVoucher.innerHTML = ' جاري التوليد <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 140% !important;z-index: 99999;"></i> ';
+        btnGenerationVoucher.disabled = true;
+        setTimeout(function () {
+            let TrID = Number($('#TRID').val())
+            let TR_CODE = $('#TR_CODE').val()
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+                data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+                success: (d) => {//(int TrID, int CompCode, int branchCode)
+                    let result = d as BaseResponse;
+                    if (result.IsSuccess) {
+                        let List = result.Response as Array<AQ_GetLnkVoucher>;
+                        CountGrid = 0;
+                        $("#div_Data").html('');
 
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
+                        List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
 
+                          $("#btnGenerationVoucher").addClass('animate__animated animate__fadeOutBottomRight');
+                        for (let i = 0; i < List.length; i++) {
+                            BuildControls(i);
+                            DisplayBuildControls(List[i], i);
+                            CountGrid++
+                        }
+                        $('.table-responsive').scrollLeft(3);
+                        ComputeTotals();
 
-                    for (let i = 0; i < List.length; i++) {
-                        BuildControls(i);
-                        DisplayBuildControls(List[i], i);
-                        CountGrid++
+                        btnGenerationVoucher.disabled = false;
+                      
+                        setTimeout(function () { $("#btnGenerationVoucher").attr('class', 'btn btn-main Grin animate__animated   animate__fadeInBottomRight')}, 1000);                         
+                        btnGenerationVoucher.innerHTML = `<i class="fa-solid fa-arrow-left fa-fade"></i>اعادة توليد القيد<i class="fa-solid fa-arrow-right fa-fade"></i>`;
                     }
-                    $('.table-responsive').scrollLeft(3);
-                    ComputeTotals();
                 }
-            }
-        });
+            });
 
+        }, 500);
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
@@ -424,8 +435,8 @@ namespace LnkVoucher {
             $('.table-responsive').scrollLeft(-500);
             $('#Line_DescA0').focus();
         }
-        
-        $('#id_div_Filter').addClass('disabledDiv') 
+
+        $('#id_div_Filter').addClass('disabledDiv')
         $('#btnGenerationVoucher').attr('disabled', 'disabled')
     }
     function disabled() {
@@ -446,7 +457,7 @@ namespace LnkVoucher {
     function GridDoubleClick() {
         CleanDetails();
         DisplayData(TransactionsGrid.SelectedItem)
-        disabled();
+        disabled(); 
     }
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
@@ -466,9 +477,8 @@ namespace LnkVoucher {
                     debugger
                     let List = result.Response as Array<AQ_GetLnkVoucher>;
                     CountGrid = 0;
-                    $("#div_Data").html('');
-                     
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
+                    $("#div_Data").html(''); 
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin') }, 20) : $('#icon-bar').removeClass('display_none'); $('#btnGenerationVoucher').addClass('Grin')
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
@@ -480,7 +490,7 @@ namespace LnkVoucher {
             }
         });
     }
-    ////**************************************************** Controls Grid Region //****************************************************
+    ////****************************************************Controls Grid Region****************************************************
     function BuildControls(cnt: number) {
         var html = "";
         html = `<tr id= "No_Row${cnt}">
@@ -567,7 +577,7 @@ namespace LnkVoucher {
 
         });
         $("#Acc_Code" + cnt).on('change', function () {
- 
+
 
             var id = $('#Acc_Code' + cnt).val();
             if (GetAccByCode(id)) {
@@ -608,7 +618,7 @@ namespace LnkVoucher {
             });
         });
         $("#CC_Code" + cnt).on('change', function () {
-      
+
 
             var id = $('#CC_Code' + cnt).val();
 
@@ -694,7 +704,7 @@ namespace LnkVoucher {
         });
 
 
-    } 
+    }
     function ComputeTotals() {
 
         let DepitTotal = 0;
@@ -728,7 +738,7 @@ namespace LnkVoucher {
             else
                 $("#StatusFlag" + RecNo).val("d");
 
- 
+
 
             $("#No_Row" + RecNo).attr("hidden", "true");
             Insert_Serial();
@@ -753,18 +763,18 @@ namespace LnkVoucher {
             BuildControls(CountGrid);
             $("#StatusFlag" + CountGrid).val("i"); //In Insert mode    
 
-            $("#ID" + CountGrid).val($("#ID" + (CountGrid - 1)).val()); 
-            $("#CompCode" + CountGrid).val($("#CompCode" + (CountGrid - 1)).val());    
-            $("#bracode" + CountGrid).val($("#bracode" + (CountGrid - 1)).val());    
-            $("#System_Code" + CountGrid).val($("#System_Code" + (CountGrid - 1)).val());    
-            $("#Tr_Code" + CountGrid).val($("#Tr_Code" + (CountGrid - 1)).val());    
-            $("#TrID" + CountGrid).val($("#TrID" + (CountGrid - 1)).val());    
-            $("#TrNo" + CountGrid).val($("#TrNo" + (CountGrid - 1)).val());    
-            $("#Serial" + CountGrid).val((CountGrid + 1));    
-            $("#Voucher_No" + CountGrid).val($("#Voucher_No" + (CountGrid - 1)).val());    
-            $("#SOURCE_TYPE" + CountGrid).val($("#SOURCE_TYPE" + (CountGrid - 1)).val());    
-            $("#TYPE_CODE" + CountGrid).val($("#TYPE_CODE" + (CountGrid - 1)).val());    
-            $("#TrDate" + CountGrid).val(txtTrDate.value);    
+            $("#ID" + CountGrid).val($("#ID" + (CountGrid - 1)).val());
+            $("#CompCode" + CountGrid).val($("#CompCode" + (CountGrid - 1)).val());
+            $("#bracode" + CountGrid).val($("#bracode" + (CountGrid - 1)).val());
+            $("#System_Code" + CountGrid).val($("#System_Code" + (CountGrid - 1)).val());
+            $("#Tr_Code" + CountGrid).val($("#Tr_Code" + (CountGrid - 1)).val());
+            $("#TrID" + CountGrid).val($("#TrID" + (CountGrid - 1)).val());
+            $("#TrNo" + CountGrid).val($("#TrNo" + (CountGrid - 1)).val());
+            $("#Serial" + CountGrid).val((CountGrid + 1));
+            $("#Voucher_No" + CountGrid).val($("#Voucher_No" + (CountGrid - 1)).val());
+            $("#SOURCE_TYPE" + CountGrid).val($("#SOURCE_TYPE" + (CountGrid - 1)).val());
+            $("#TYPE_CODE" + CountGrid).val($("#TYPE_CODE" + (CountGrid - 1)).val());
+            $("#TrDate" + CountGrid).val(txtTrDate.value);
 
             $('._dis').removeAttr('disabled')
             $('.btn_minus_non').removeClass('display_none')
@@ -772,7 +782,6 @@ namespace LnkVoucher {
             Insert_Serial();
         }
     } 
-
     function Insert_Serial() {
 
         let Chack_Flag = false;
@@ -857,6 +866,13 @@ namespace LnkVoucher {
 
         LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
+         
+        LnkVoucherlMastDet.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        LnkVoucherlMastDet.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
+        LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
+        LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        
 
     }
     function Update() {
@@ -903,8 +919,8 @@ namespace LnkVoucher {
         DisplayData(TransactionsGrid.SelectedItem)
         disabled();
     }
-    //***************************************************************************Print*********************************************************     
-    export function PrintReport(OutType: number) { 
+    //*******************************************************Print*********************************************************     
+    export function PrintReport(OutType: number) {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
@@ -940,7 +956,7 @@ namespace LnkVoucher {
         rp.fromNum = Number(txtFromNumber.value);
         rp.ToNum = Number(txtToNumber.value);
         rp.IsGenerated = Number($('#ddlStatus').val());
-   
+
         Ajax.Callsync({
             url: Url.Action("Rep_LnkVoucherList", "GeneralReports"),
             data: rp,
@@ -948,10 +964,9 @@ namespace LnkVoucher {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
+                
 
-                window.open(result);
-                // window.close(result)
+                window.open(result); 
             }
         })
     }
@@ -959,7 +974,7 @@ namespace LnkVoucher {
         if (!SysSession.CurrentPrivileges.PrintOut) return;
         let rp: ReportParameters = new ReportParameters();
 
-       
+
         rp.TRId = Number($('#TRID').val())
         rp.TrTypeSt = $('#TR_CODE').val()
         rp.Type = 0;
@@ -967,7 +982,7 @@ namespace LnkVoucher {
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

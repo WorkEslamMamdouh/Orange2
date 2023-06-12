@@ -848,7 +848,7 @@ namespace SlsTrServices {
         clear();
         InvoiceStatisticsModel = new Array<AQVAT_GetSlsInvoiceList>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         if (FlagAfterInsertOrUpdate == true) {
             Selecteditem = AQ_ServSlsInvoiceDetails.filter(x => x.InvoiceID == Number(GlobalinvoiceID));
@@ -2024,7 +2024,7 @@ namespace SlsTrServices {
             success: (d) => {
 
                 let result = d.result as string;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear);
+                
                 window.open(result, "_blank");
             }
         })
@@ -2054,7 +2054,7 @@ namespace SlsTrServices {
                                  
             rp.Name_function = "IProc_Prnt_VATSlsInvoice";
             localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
             localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
              window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -2070,7 +2070,7 @@ namespace SlsTrServices {
 
         rp.Name_function = "IProc_Prnt_VATSlsInvoice";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
@@ -2108,7 +2108,7 @@ namespace SlsTrServices {
             url: Url.Action("Prnt_VATSlsInvoice", "Reports_pdf"),
             data: rp,
             success: (d) => {
-                PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                
 
             }
         })

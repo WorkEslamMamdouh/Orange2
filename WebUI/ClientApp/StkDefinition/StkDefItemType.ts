@@ -54,7 +54,7 @@ namespace StkDefItemType {
 
         Display_DrpPaymentType();
         //Display();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItemType, SysSession.CurrentEnvironment.CurrentYear);
+        
 
     }
 

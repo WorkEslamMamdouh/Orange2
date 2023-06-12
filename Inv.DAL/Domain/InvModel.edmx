@@ -3120,6 +3120,7 @@ warning 6002: The table/view 'Orange2021.dbo.HIJRA_CONVERT' does not have a prim
           <Property Name="IsPosted" Type="bit" />
           <Property Name="VoucherNo" Type="int" />
           <Property Name="ChRemarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrNo" Type="int" />
         </EntityType>
         <EntityType Name="I_TR_OperationDeposit">
           <Key>
@@ -4126,6 +4127,74 @@ warning 6002: The table/view 'Orange2021.dbo.GQ_GetLnkVoucherDetail' does not ha
           <Property Name="CC_DESCE" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'Orange2021.dbo.GQ_GetRoleModule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GQ_GetRoleModule">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="MODULE_CODE" />
+            <PropertyRef Name="md_Create" />
+            <PropertyRef Name="md_edit" />
+            <PropertyRef Name="md_delete" />
+            <PropertyRef Name="md_print" />
+            <PropertyRef Name="md_view" />
+            <PropertyRef Name="md_custom1" />
+            <PropertyRef Name="md_custom2" />
+            <PropertyRef Name="md_custom3" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SUB_SYSTEM_CODE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MODULE_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXECUTE" Type="bit" />
+          <Property Name="CREATE" Type="bit" />
+          <Property Name="EDIT" Type="bit" />
+          <Property Name="DELETE" Type="bit" />
+          <Property Name="PRINT" Type="bit" />
+          <Property Name="VIEW" Type="bit" />
+          <Property Name="CUSTOM1" Type="bit" />
+          <Property Name="CUSTOM2" Type="bit" />
+          <Property Name="CUSTOM3" Type="bit" />
+          <Property Name="CUSTOM4" Type="bit" />
+          <Property Name="CUSTOM5" Type="bit" />
+          <Property Name="CUSTOM6" Type="bit" />
+          <Property Name="CUSTOM7" Type="bit" />
+          <Property Name="CUSTOM8" Type="bit" />
+          <Property Name="CUSTOM9" Type="bit" />
+          <Property Name="ViewImages" Type="bit" />
+          <Property Name="EditImages" Type="bit" />
+          <Property Name="MENU_NO" Type="nvarchar" MaxLength="10" />
+          <Property Name="MODULE_DESCE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MODULE_DESCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="md_Create" Type="bit" Nullable="false" />
+          <Property Name="md_edit" Type="bit" Nullable="false" />
+          <Property Name="md_delete" Type="bit" Nullable="false" />
+          <Property Name="md_print" Type="bit" Nullable="false" />
+          <Property Name="md_view" Type="bit" Nullable="false" />
+          <Property Name="md_custom1" Type="bit" Nullable="false" />
+          <Property Name="md_custom2" Type="bit" Nullable="false" />
+          <Property Name="md_custom3" Type="bit" Nullable="false" />
+          <Property Name="CUSTOM1_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM2_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM3_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="md_custom4" Type="bit" />
+          <Property Name="md_custom5" Type="bit" />
+          <Property Name="md_custom6" Type="bit" />
+          <Property Name="CUSTOM4_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM5_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM6_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="md_custom7" Type="bit" />
+          <Property Name="md_custom8" Type="bit" />
+          <Property Name="md_custom9" Type="bit" />
+          <Property Name="CUSTOM7_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM8_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUSTOM9_DESC" Type="nvarchar" MaxLength="50" />
+          <Property Name="AVAILABLE" Type="bit" />
+          <Property Name="MODULE_TYPE" Type="nchar" MaxLength="1" />
+          <Property Name="Images_Enabled" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.GQ_GetStore' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GQ_GetStore">
           <Key>
@@ -4964,6 +5033,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperationCharges' does not ha
           <Property Name="IsPosted" Type="bit" />
           <Property Name="VoucherNo" Type="int" />
           <Property Name="ChRemarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrNo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Orange2021.dbo.IQ_GetOperationDepsit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -6594,6 +6664,21 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="usr" Type="nvarchar" Mode="In" />
           <Parameter Name="OpStatus" Type="int" Mode="In" />
           <Parameter Name="opid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Gproc_Rep_UserActivitySummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="comp" Type="int" Mode="In" />
+          <Parameter Name="bra" Type="int" Mode="In" />
+          <Parameter Name="CompNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameA" Type="nvarchar" Mode="In" />
+          <Parameter Name="BraNameE" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoginUser" Type="nvarchar" Mode="In" />
+          <Parameter Name="RepType" Type="int" Mode="In" />
+          <Parameter Name="user" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="bracode" Type="int" Mode="In" />
+          <Parameter Name="fromdate" Type="nvarchar" Mode="In" />
+          <Parameter Name="todate" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GProc_SecCreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="User" Type="nvarchar" Mode="In" />
@@ -8849,6 +8934,60 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [GQ_GetLnkVoucherDetail].[CC_DESCE] AS [CC_DESCE]
     FROM [dbo].[GQ_GetLnkVoucherDetail] AS [GQ_GetLnkVoucherDetail]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="GQ_GetRoleModule" EntityType="Self.GQ_GetRoleModule" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GQ_GetRoleModule].[RoleId] AS [RoleId], 
+    [GQ_GetRoleModule].[SYSTEM_CODE] AS [SYSTEM_CODE], 
+    [GQ_GetRoleModule].[SUB_SYSTEM_CODE] AS [SUB_SYSTEM_CODE], 
+    [GQ_GetRoleModule].[MODULE_CODE] AS [MODULE_CODE], 
+    [GQ_GetRoleModule].[EXECUTE] AS [EXECUTE], 
+    [GQ_GetRoleModule].[CREATE] AS [CREATE], 
+    [GQ_GetRoleModule].[EDIT] AS [EDIT], 
+    [GQ_GetRoleModule].[DELETE] AS [DELETE], 
+    [GQ_GetRoleModule].[PRINT] AS [PRINT], 
+    [GQ_GetRoleModule].[VIEW] AS [VIEW], 
+    [GQ_GetRoleModule].[CUSTOM1] AS [CUSTOM1], 
+    [GQ_GetRoleModule].[CUSTOM2] AS [CUSTOM2], 
+    [GQ_GetRoleModule].[CUSTOM3] AS [CUSTOM3], 
+    [GQ_GetRoleModule].[CUSTOM4] AS [CUSTOM4], 
+    [GQ_GetRoleModule].[CUSTOM5] AS [CUSTOM5], 
+    [GQ_GetRoleModule].[CUSTOM6] AS [CUSTOM6], 
+    [GQ_GetRoleModule].[CUSTOM7] AS [CUSTOM7], 
+    [GQ_GetRoleModule].[CUSTOM8] AS [CUSTOM8], 
+    [GQ_GetRoleModule].[CUSTOM9] AS [CUSTOM9], 
+    [GQ_GetRoleModule].[ViewImages] AS [ViewImages], 
+    [GQ_GetRoleModule].[EditImages] AS [EditImages], 
+    [GQ_GetRoleModule].[MENU_NO] AS [MENU_NO], 
+    [GQ_GetRoleModule].[MODULE_DESCE] AS [MODULE_DESCE], 
+    [GQ_GetRoleModule].[MODULE_DESCA] AS [MODULE_DESCA], 
+    [GQ_GetRoleModule].[md_Create] AS [md_Create], 
+    [GQ_GetRoleModule].[md_edit] AS [md_edit], 
+    [GQ_GetRoleModule].[md_delete] AS [md_delete], 
+    [GQ_GetRoleModule].[md_print] AS [md_print], 
+    [GQ_GetRoleModule].[md_view] AS [md_view], 
+    [GQ_GetRoleModule].[md_custom1] AS [md_custom1], 
+    [GQ_GetRoleModule].[md_custom2] AS [md_custom2], 
+    [GQ_GetRoleModule].[md_custom3] AS [md_custom3], 
+    [GQ_GetRoleModule].[CUSTOM1_DESC] AS [CUSTOM1_DESC], 
+    [GQ_GetRoleModule].[CUSTOM2_DESC] AS [CUSTOM2_DESC], 
+    [GQ_GetRoleModule].[CUSTOM3_DESC] AS [CUSTOM3_DESC], 
+    [GQ_GetRoleModule].[md_custom4] AS [md_custom4], 
+    [GQ_GetRoleModule].[md_custom5] AS [md_custom5], 
+    [GQ_GetRoleModule].[md_custom6] AS [md_custom6], 
+    [GQ_GetRoleModule].[CUSTOM4_DESC] AS [CUSTOM4_DESC], 
+    [GQ_GetRoleModule].[CUSTOM5_DESC] AS [CUSTOM5_DESC], 
+    [GQ_GetRoleModule].[CUSTOM6_DESC] AS [CUSTOM6_DESC], 
+    [GQ_GetRoleModule].[md_custom7] AS [md_custom7], 
+    [GQ_GetRoleModule].[md_custom8] AS [md_custom8], 
+    [GQ_GetRoleModule].[md_custom9] AS [md_custom9], 
+    [GQ_GetRoleModule].[CUSTOM7_DESC] AS [CUSTOM7_DESC], 
+    [GQ_GetRoleModule].[CUSTOM8_DESC] AS [CUSTOM8_DESC], 
+    [GQ_GetRoleModule].[CUSTOM9_DESC] AS [CUSTOM9_DESC], 
+    [GQ_GetRoleModule].[AVAILABLE] AS [AVAILABLE], 
+    [GQ_GetRoleModule].[MODULE_TYPE] AS [MODULE_TYPE], 
+    [GQ_GetRoleModule].[Images_Enabled] AS [Images_Enabled]
+    FROM [dbo].[GQ_GetRoleModule] AS [GQ_GetRoleModule]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="GQ_GetStore" EntityType="Self.GQ_GetStore" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [GQ_GetStore].[StoreId] AS [StoreId], 
@@ -9575,7 +9714,8 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
     [IQ_GetOperationCharges].[CashBoxID] AS [CashBoxID], 
     [IQ_GetOperationCharges].[IsPosted] AS [IsPosted], 
     [IQ_GetOperationCharges].[VoucherNo] AS [VoucherNo], 
-    [IQ_GetOperationCharges].[ChRemarks] AS [ChRemarks]
+    [IQ_GetOperationCharges].[ChRemarks] AS [ChRemarks], 
+    [IQ_GetOperationCharges].[TrNo] AS [TrNo]
     FROM [dbo].[IQ_GetOperationCharges] AS [IQ_GetOperationCharges]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="IQ_GetOperationDepsit" EntityType="Self.IQ_GetOperationDepsit" store:Type="Views" store:Schema="dbo">
@@ -12565,6 +12705,22 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="CompCode" Mode="In" Type="Int32" />
             <Parameter Name="BraCode" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Gproc_Rep_UserActivitySummary" ReturnType="Collection(InvModel.Gproc_Rep_UserActivitySummary_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="bracode" Mode="In" Type="Int32" />
+            <Parameter Name="fromdate" Mode="In" Type="String" />
+            <Parameter Name="todate" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="GQ_GetRoleModule" EntityType="InvModel.GQ_GetRoleModule" />
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -14498,6 +14654,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsPosted" Type="Boolean" />
           <Property Name="VoucherNo" Type="Int32" />
           <Property Name="ChRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrNo" Type="Int32" />
         </EntityType>
         <EntityType Name="G_Role">
           <Key>
@@ -14701,6 +14858,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="IsPosted" Type="Boolean" />
           <Property Name="VoucherNo" Type="Int32" />
           <Property Name="ChRemarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrNo" Type="Int32" />
         </EntityType>
         <EntityType Name="A_Voucher_Types">
           <Key>
@@ -23708,6 +23866,103 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MENU_NO" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <ComplexType Name="Gproc_Rep_UserActivitySummary_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_fromdate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_userCode" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="PAr_BraCode" Nullable="true" />
+          <Property Type="String" Name="SYSTEM_CODE" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="user_code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mODULE_DESCE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="menu_no" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="OpenScr" Nullable="true" />
+          <Property Type="Int32" Name="ADD" Nullable="true" />
+          <Property Type="Int32" Name="Update" Nullable="true" />
+          <Property Type="Int32" Name="delete" Nullable="true" />
+          <Property Type="Int32" Name="query" Nullable="true" />
+          <Property Type="Int32" Name="print" Nullable="true" />
+          <Property Type="Int32" Name="OpenTr" Nullable="true" />
+          <Property Type="Int32" Name="ViewList" Nullable="true" />
+          <Property Type="Int32" Name="PrintList" Nullable="true" />
+          <Property Type="Int32" Name="total" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="GQ_GetRoleModule">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="SYSTEM_CODE" />
+            <PropertyRef Name="SUB_SYSTEM_CODE" />
+            <PropertyRef Name="MODULE_CODE" />
+            <PropertyRef Name="md_Create" />
+            <PropertyRef Name="md_edit" />
+            <PropertyRef Name="md_delete" />
+            <PropertyRef Name="md_print" />
+            <PropertyRef Name="md_view" />
+            <PropertyRef Name="md_custom1" />
+            <PropertyRef Name="md_custom2" />
+            <PropertyRef Name="md_custom3" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SUB_SYSTEM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MODULE_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXECUTE" Type="Boolean" />
+          <Property Name="CREATE" Type="Boolean" />
+          <Property Name="EDIT" Type="Boolean" />
+          <Property Name="DELETE" Type="Boolean" />
+          <Property Name="PRINT" Type="Boolean" />
+          <Property Name="VIEW" Type="Boolean" />
+          <Property Name="CUSTOM1" Type="Boolean" />
+          <Property Name="CUSTOM2" Type="Boolean" />
+          <Property Name="CUSTOM3" Type="Boolean" />
+          <Property Name="CUSTOM4" Type="Boolean" />
+          <Property Name="CUSTOM5" Type="Boolean" />
+          <Property Name="CUSTOM6" Type="Boolean" />
+          <Property Name="CUSTOM7" Type="Boolean" />
+          <Property Name="CUSTOM8" Type="Boolean" />
+          <Property Name="CUSTOM9" Type="Boolean" />
+          <Property Name="ViewImages" Type="Boolean" />
+          <Property Name="EditImages" Type="Boolean" />
+          <Property Name="MENU_NO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MODULE_DESCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MODULE_DESCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="md_Create" Type="Boolean" Nullable="false" />
+          <Property Name="md_edit" Type="Boolean" Nullable="false" />
+          <Property Name="md_delete" Type="Boolean" Nullable="false" />
+          <Property Name="md_print" Type="Boolean" Nullable="false" />
+          <Property Name="md_view" Type="Boolean" Nullable="false" />
+          <Property Name="md_custom1" Type="Boolean" Nullable="false" />
+          <Property Name="md_custom2" Type="Boolean" Nullable="false" />
+          <Property Name="md_custom3" Type="Boolean" Nullable="false" />
+          <Property Name="CUSTOM1_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM2_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM3_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="md_custom4" Type="Boolean" />
+          <Property Name="md_custom5" Type="Boolean" />
+          <Property Name="md_custom6" Type="Boolean" />
+          <Property Name="CUSTOM4_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM5_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM6_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="md_custom7" Type="Boolean" />
+          <Property Name="md_custom8" Type="Boolean" />
+          <Property Name="md_custom9" Type="Boolean" />
+          <Property Name="CUSTOM7_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM8_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUSTOM9_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AVAILABLE" Type="Boolean" />
+          <Property Name="MODULE_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Images_Enabled" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -25616,6 +25871,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="IQ_GetOperationCharges">
             <EntityTypeMapping TypeName="InvModel.IQ_GetOperationCharges">
               <MappingFragment StoreEntitySet="IQ_GetOperationCharges">
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
                 <ScalarProperty Name="ChRemarks" ColumnName="ChRemarks" />
                 <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
                 <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
@@ -25834,6 +26090,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="I_TR_OperationCharges">
             <EntityTypeMapping TypeName="InvModel.I_TR_OperationCharges">
               <MappingFragment StoreEntitySet="I_TR_OperationCharges">
+                <ScalarProperty Name="TrNo" ColumnName="TrNo" />
                 <ScalarProperty Name="ChRemarks" ColumnName="ChRemarks" />
                 <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
                 <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
@@ -35302,6 +35559,97 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Gproc_Rep_UserActivitySummary" FunctionName="InvModel.Store.Gproc_Rep_UserActivitySummary">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.Gproc_Rep_UserActivitySummary_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_fromdate" ColumnName="Par_fromdate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="Par_userCode" ColumnName="Par_userCode" />
+                <ScalarProperty Name="PAr_BraCode" ColumnName="PAr_BraCode" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="user_code" ColumnName="user_code" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="mODULE_DESCE" ColumnName="mODULE_DESCE" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="menu_no" ColumnName="menu_no" />
+                <ScalarProperty Name="OpenScr" ColumnName="OpenScr" />
+                <ScalarProperty Name="ADD" ColumnName="ADD" />
+                <ScalarProperty Name="Update" ColumnName="Update" />
+                <ScalarProperty Name="delete" ColumnName="delete" />
+                <ScalarProperty Name="query" ColumnName="query" />
+                <ScalarProperty Name="print" ColumnName="print" />
+                <ScalarProperty Name="OpenTr" ColumnName="OpenTr" />
+                <ScalarProperty Name="ViewList" ColumnName="ViewList" />
+                <ScalarProperty Name="PrintList" ColumnName="PrintList" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="GQ_GetRoleModule">
+            <EntityTypeMapping TypeName="InvModel.GQ_GetRoleModule">
+              <MappingFragment StoreEntitySet="GQ_GetRoleModule">
+                <ScalarProperty Name="Images_Enabled" ColumnName="Images_Enabled" />
+                <ScalarProperty Name="MODULE_TYPE" ColumnName="MODULE_TYPE" />
+                <ScalarProperty Name="AVAILABLE" ColumnName="AVAILABLE" />
+                <ScalarProperty Name="CUSTOM9_DESC" ColumnName="CUSTOM9_DESC" />
+                <ScalarProperty Name="CUSTOM8_DESC" ColumnName="CUSTOM8_DESC" />
+                <ScalarProperty Name="CUSTOM7_DESC" ColumnName="CUSTOM7_DESC" />
+                <ScalarProperty Name="md_custom9" ColumnName="md_custom9" />
+                <ScalarProperty Name="md_custom8" ColumnName="md_custom8" />
+                <ScalarProperty Name="md_custom7" ColumnName="md_custom7" />
+                <ScalarProperty Name="CUSTOM6_DESC" ColumnName="CUSTOM6_DESC" />
+                <ScalarProperty Name="CUSTOM5_DESC" ColumnName="CUSTOM5_DESC" />
+                <ScalarProperty Name="CUSTOM4_DESC" ColumnName="CUSTOM4_DESC" />
+                <ScalarProperty Name="md_custom6" ColumnName="md_custom6" />
+                <ScalarProperty Name="md_custom5" ColumnName="md_custom5" />
+                <ScalarProperty Name="md_custom4" ColumnName="md_custom4" />
+                <ScalarProperty Name="CUSTOM3_DESC" ColumnName="CUSTOM3_DESC" />
+                <ScalarProperty Name="CUSTOM2_DESC" ColumnName="CUSTOM2_DESC" />
+                <ScalarProperty Name="CUSTOM1_DESC" ColumnName="CUSTOM1_DESC" />
+                <ScalarProperty Name="md_custom3" ColumnName="md_custom3" />
+                <ScalarProperty Name="md_custom2" ColumnName="md_custom2" />
+                <ScalarProperty Name="md_custom1" ColumnName="md_custom1" />
+                <ScalarProperty Name="md_view" ColumnName="md_view" />
+                <ScalarProperty Name="md_print" ColumnName="md_print" />
+                <ScalarProperty Name="md_delete" ColumnName="md_delete" />
+                <ScalarProperty Name="md_edit" ColumnName="md_edit" />
+                <ScalarProperty Name="md_Create" ColumnName="md_Create" />
+                <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
+                <ScalarProperty Name="MENU_NO" ColumnName="MENU_NO" />
+                <ScalarProperty Name="EditImages" ColumnName="EditImages" />
+                <ScalarProperty Name="ViewImages" ColumnName="ViewImages" />
+                <ScalarProperty Name="CUSTOM9" ColumnName="CUSTOM9" />
+                <ScalarProperty Name="CUSTOM8" ColumnName="CUSTOM8" />
+                <ScalarProperty Name="CUSTOM7" ColumnName="CUSTOM7" />
+                <ScalarProperty Name="CUSTOM6" ColumnName="CUSTOM6" />
+                <ScalarProperty Name="CUSTOM5" ColumnName="CUSTOM5" />
+                <ScalarProperty Name="CUSTOM4" ColumnName="CUSTOM4" />
+                <ScalarProperty Name="CUSTOM3" ColumnName="CUSTOM3" />
+                <ScalarProperty Name="CUSTOM2" ColumnName="CUSTOM2" />
+                <ScalarProperty Name="CUSTOM1" ColumnName="CUSTOM1" />
+                <ScalarProperty Name="VIEW" ColumnName="VIEW" />
+                <ScalarProperty Name="PRINT" ColumnName="PRINT" />
+                <ScalarProperty Name="DELETE" ColumnName="DELETE" />
+                <ScalarProperty Name="EDIT" ColumnName="EDIT" />
+                <ScalarProperty Name="CREATE" ColumnName="CREATE" />
+                <ScalarProperty Name="EXECUTE" ColumnName="EXECUTE" />
+                <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
+                <ScalarProperty Name="SUB_SYSTEM_CODE" ColumnName="SUB_SYSTEM_CODE" />
+                <ScalarProperty Name="SYSTEM_CODE" ColumnName="SYSTEM_CODE" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

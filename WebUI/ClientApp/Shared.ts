@@ -351,11 +351,13 @@ function GetSystemEnvironment(): SystemEnvironment {
 
 
 function GetSystemSession(Mod: string): SystemSession {
+
     
+
     if (Mod != "Home") {
 
         $('#divIconbar').removeClass('hidden_Control');
-        
+        localStorage.setItem("Model_Screen", Mod);
     }
     if (document.cookie.length > 0) {
 
@@ -365,11 +367,20 @@ function GetSystemSession(Mod: string): SystemSession {
         if (SysSession.CurrentEnvironment == null) {
             return 
         }
+        let DbName = SysSession.CurrentEnvironment.DbName;
         let compCode = SysSession.CurrentEnvironment.CompCode;
         let UserCode = SysSession.CurrentEnvironment.UserCode;
-        let DbName = SysSession.CurrentEnvironment.DbName;
+        let BranchCode = SysSession.CurrentEnvironment.BranchCode;
+        let CurrentYear = SysSession.CurrentEnvironment.CurrentYear;
 
         $('#GetIPAddress').val(compCode + "_" + UserCode + "_" + DbName) 
+
+        localStorage.setItem("UserCode", UserCode);
+        localStorage.setItem("compCode", compCode);
+        localStorage.setItem("BranchCode", BranchCode);
+        localStorage.setItem("CurrentYear", CurrentYear);
+
+ 
 
         if (Mod == "Home")
             return SysSession;
@@ -422,6 +433,13 @@ function GetSystemSession(Mod: string): SystemSession {
                             $('#btnUpdate').addClass('hidden_Control');
                         }
                         setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
+
+                        setTimeout(function () {
+                            OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Mod, SysSession.CurrentEnvironment.CurrentYear);
+                        }, 3000);
+
+
+
                     }
                     else {
  

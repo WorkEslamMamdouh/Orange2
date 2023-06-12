@@ -354,7 +354,7 @@ namespace USERS {
         $("#btnSave").addClass("display_none");
         $("#div_Data").addClass("disabledDiv");
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.USERS, SysSession.CurrentEnvironment.CurrentYear, UserGrid.SelectedKey.toString());
+        
 
         var Selecte = List_Userdetails.filter(x => x.USER_CODE == UserGrid.SelectedKey);
         Selecteditem = Selecte[0];

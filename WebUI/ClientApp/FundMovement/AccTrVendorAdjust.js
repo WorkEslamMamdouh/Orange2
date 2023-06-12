@@ -124,30 +124,30 @@ var AccTrVendorAdjust;
     AccTrVendorAdjust.InitalizeComponent = InitalizeComponent;
     function chkStatus_onchange() {
         if (IsNew != true) {
-            if (Selecteditem[0].IsPosted != true) {
-                if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
-                    Open();
-                    Display();
-                    $('#Div_control').removeClass("display_none");
-                    Selecteditem = Details.filter(function (x) { return x.AdjustmentID == Number(ReportGrid.SelectedKey); });
-                    AdjustmentID = Selecteditem[0].AdjustmentID;
-                    if (Selecteditem[0].Status == 1) {
-                        chkActive.checked = true;
-                        btnEdit.disabled = true;
-                        chkActive.disabled = false;
-                        chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
-                    }
-                    else {
-                        chkActive.checked = false;
-                        chkActive.disabled = true;
-                        btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
-                    }
+            //if (Selecteditem[0].IsPosted != true) {
+            if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
+                Open();
+                Display();
+                $('#Div_control').removeClass("display_none");
+                Selecteditem = Details.filter(function (x) { return x.AdjustmentID == Number(ReportGrid.SelectedKey); });
+                AdjustmentID = Selecteditem[0].AdjustmentID;
+                if (Selecteditem[0].Status == 1) {
+                    chkActive.checked = true;
+                    btnEdit.disabled = true;
+                    chkActive.disabled = false;
+                    chkActive.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
+                }
+                else {
+                    chkActive.checked = false;
+                    chkActive.disabled = true;
+                    btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT;
                 }
             }
-            else {
-                chkActive.checked = true;
-                DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
-            }
+            //}
+            //else {
+            //    chkActive.checked = true;
+            //    DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
+            //}
         }
     }
     function Open() {
@@ -817,7 +817,7 @@ var AccTrVendorAdjust;
             Model.IsCustomer = isCustomer;
             Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
+            Model.MODULE_CODE = Modules.AccTrVendorAdjust;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
             Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
         }
@@ -1021,7 +1021,6 @@ var AccTrVendorAdjust;
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrVendorAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

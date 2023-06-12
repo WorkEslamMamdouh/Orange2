@@ -103,6 +103,9 @@ var Report_Page;
                     var UrlPdf = x + "/" + "?" + "path=" + result + "";
                     $('#printableAreaNew').attr("style", "direction: ltr!important;height: 90%;overflow: scroll;margin-right: 4%;width: 90%;  overflow: hidden; ");
                     $('#printableAreaNew').append('<iframe src="' + UrlPdf + '" frameBorder="0"scrolling="auto"height="100%" width="100%"></iframe>');
+                    setTimeout(function () {
+                        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, data_New.TRId.toString());
+                    }, 4000);
                 }
             });
         }

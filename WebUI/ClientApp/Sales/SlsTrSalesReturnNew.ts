@@ -4,7 +4,7 @@
 })
 namespace SlsTrSalesReturnNew {
     //system varables
-    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrReturn);
+    var SysSession: SystemSession = GetSystemSession(Modules.SlsTrReturnNew);
     var compcode: Number;
     var BranchCode: number;
     var sys: SystemTools = new SystemTools();
@@ -180,7 +180,7 @@ namespace SlsTrSalesReturnNew {
 
         SysSession.CurrentEnvironment.I_Control[0].IvoiceDateEditable == true ? $('#txtInvoiceDate').removeAttr("disabled") : $('#txtInvoiceDate').attr("disabled", "disabled");
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         InitializeGrid();
         DisplayMod();
@@ -1322,7 +1322,7 @@ namespace SlsTrSalesReturnNew {
         Show = true;
         $("#divReturnDetails").removeClass("display_none");
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         if (AfterInsertOrUpdateFlag == true) {
@@ -2952,7 +2952,7 @@ namespace SlsTrSalesReturnNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -2969,7 +2969,7 @@ namespace SlsTrSalesReturnNew {
 
         rp.Name_function = "rptInvoiceNoteRet";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

@@ -24,7 +24,9 @@
     //});
 
 
-    $('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+    //$('#Loading_Div').html('<i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 465%;z-index: 99999;"></i>');
+    $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>'); 
+
     $('.iconbar-container').attr('style', 'display : none');
     //$('.iconbar-container').addClass('hidden_Control');
     setTimeout(function () {

@@ -402,7 +402,7 @@ namespace IssueToCC {
     }
     function Grid_RowDoubleClicked() {
         IsNew = false;
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         DocumentActions.RenderFromModel(Grid.SelectedItem);
         IssueToCcID = Number(Grid.SelectedKey);
@@ -895,7 +895,7 @@ namespace IssueToCC {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -910,7 +910,7 @@ namespace IssueToCC {
 
         rp.Name_function = "IProc_Prnt_StkIssue";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

@@ -16,12 +16,18 @@ namespace BackgroundImage {
 
     var CountGrid = 0;
 
-
+    function ShowCompanyName() {
+        var comp = SysSession.CurrentEnvironment.CompanyNameAr;
+        let compName = document.getElementById("comp-name");
+        compName.classList.remove("d-none");
+        compName.innerHTML = `<h1>${comp}</h1>`;
+    }
 
   
 
     export function GetBackgroundImage() {
 
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
 
         Ajax.Callsync({
             type: "GET",
@@ -42,6 +48,9 @@ namespace BackgroundImage {
 
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
+        }
+        else {
+            ShowCompanyName();
         }
 
      

@@ -313,8 +313,7 @@ namespace Inv.API.Controllers
                                 itemDefList.I_ItemYear[i].MinUnitPrice = 0;
                                 yearrec = ItemDefYearService.Update(itemDefList.I_ItemYear[i]);
                             }
-                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, InsertedRec.ItemID, LogUser.UserLog.Insert, itemDefList.MODULE_CODE, true, null, null, null);
-
+                            
                         }
                         else if (item.StatusFlag == 'u')
                         {
@@ -339,8 +338,7 @@ namespace Inv.API.Controllers
                                 AllSuccess = false;
                                 break;
                             }
-                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, UpdateedRec.ItemID, LogUser.UserLog.Update, itemDefList.MODULE_CODE, true, null, null, null);
-
+                         
                         }
                         else if (item.StatusFlag == 'd')
                         {
@@ -353,8 +351,7 @@ namespace Inv.API.Controllers
                                 Delet_Item = false;
                                 break;
                             }
-                            LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, item.ItemID, LogUser.UserLog.Delete, itemDefList.MODULE_CODE, true, null, null, null);
-
+                          
 
                         }
                         i++;
@@ -382,8 +379,7 @@ namespace Inv.API.Controllers
                     else
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, null, LogUser.UserLog.Update, itemDefList.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
-
+                      
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                     }
 
@@ -392,7 +388,7 @@ namespace Inv.API.Controllers
                 catch (Exception ex)
                 {
                     dbTransaction.Rollback();
-                    LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, null, LogUser.UserLog.Update, itemDefList.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                    LogUser.InsertPrint(db, itemDefList.Comp_Code.ToString(), itemDefList.Branch_Code, itemDefList.sec_FinYear, itemDefList.UserCode, null,null, LogUser.UserLog.Update, itemDefList.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                     return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                 }

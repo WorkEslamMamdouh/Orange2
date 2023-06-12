@@ -9,7 +9,14 @@ var BackgroundImage;
     var SysSession = GetSystemSession('Home');
     var GetCompStatus = new Array();
     var CountGrid = 0;
+    function ShowCompanyName() {
+        var comp = SysSession.CurrentEnvironment.CompanyNameAr;
+        var compName = document.getElementById("comp-name");
+        compName.classList.remove("d-none");
+        compName.innerHTML = "<h1>" + comp + "</h1>";
+    }
     function GetBackgroundImage() {
+        setTimeout(function () { $('._Loding').removeClass('Btn_Loder'); }, 1000);
         Ajax.Callsync({
             type: "GET",
             async: false,
@@ -24,6 +31,9 @@ var BackgroundImage;
         });
         if (SysSession.CurrentEnvironment.UserCode == 'safe' || SysSession.CurrentEnvironment.UserCode == 'SAFE' || SysSession.CurrentEnvironment.UserCode == 'islam') {
             BiuldComp();
+        }
+        else {
+            ShowCompanyName();
         }
     }
     BackgroundImage.GetBackgroundImage = GetBackgroundImage;

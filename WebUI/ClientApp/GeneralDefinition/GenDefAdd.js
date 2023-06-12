@@ -40,11 +40,11 @@ var GenDefAdd;
         InitalizeEvents();
         GetVatType();
         GetddlAcc();
-        GetddlAcccod();
         Display();
     }
     GenDefAdd.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {
+        debugger;
         if (SysSession.CurrentPrivileges.EDIT) {
             $('#btnSave_Def').removeClass("display_none");
             $('#btnBack_Def').removeClass("display_none");
@@ -71,7 +71,6 @@ var GenDefAdd;
     function InitalizeControls() {
         // ;
         btnAddDetails = document.getElementById("btnAddDetails");
-        btnEdit = document.getElementById("btnUpdate_Def");
         btnSave_Def = document.getElementById("btnSave_Def");
         btnBack_Def = document.getElementById("btnBack_Def");
         // Buton privialges for single record page
@@ -134,6 +133,8 @@ var GenDefAdd;
             DeleteRow(cnt);
         });
         $("#txtCode" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
             Validate_code(cnt);
         });
         $("#txtDescA" + cnt).on('change', function () {
@@ -153,6 +154,10 @@ var GenDefAdd;
                 $("#txt_StatusFlag" + cnt).val("u");
         });
         $("#ddlAccop" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#Defaultperc" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
@@ -342,6 +347,7 @@ var GenDefAdd;
         });
     }
     function DisplayGenDefCategory() {
+        debugger;
         for (var i = 0; i < Details.length; i++) {
             BuildControls(CountGrid);
             $("#txt_ID" + i).val(Details[i].ChargeID);
@@ -392,16 +398,6 @@ var GenDefAdd;
             success: function (d) {
                 var result = d;
                 AccDataData = result.Response;
-            }
-        });
-    }
-    function GetddlAcccod() {
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("GLDefAccount", "GetAccDetailByComp"),
-            data: { CompCode: compcode, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
-            success: function (d) {
-                var result = d;
                 AccDataDatacode = result.Response;
             }
         });

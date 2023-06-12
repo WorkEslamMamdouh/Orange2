@@ -41,7 +41,6 @@ var StkDefItemType;
         InitalizeEvents();
         Display_DrpPaymentType();
         //Display();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefItemType, SysSession.CurrentEnvironment.CurrentYear);
     }
     StkDefItemType.InitalizeComponent = InitalizeComponent;
     $('#btnUpdate_Def').on('click', function () {

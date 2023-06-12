@@ -96,6 +96,7 @@ var LnkVoucher;
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = function () { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); };
         //*******************************print*****************************
+        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value) ? txtFromNumber.value : txtToNumber.value; };
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
@@ -117,9 +118,8 @@ var LnkVoucher;
         TransactionsGrid.OnItemEditing = function () { };
         TransactionsGrid.Columns = [
             { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
-            //{ title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             {
                 title: res.App_date, css: "ColumPadding", name: "TR_DATE", width: "8%",
                 itemTemplate: function (s, item) {
@@ -132,7 +132,6 @@ var LnkVoucher;
             { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
             { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
-            //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
             {
                 title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: function (s, item) {
@@ -340,35 +339,45 @@ var LnkVoucher;
         }, 100);
     }
     function btnBack_onclick() {
-        GridDoubleClick();
+        CleanDetails();
+        DisplayData(TransactionsGrid.SelectedItem);
+        disabled();
     }
     function btnUpdate_onclick() {
         Enabled();
     }
     function btnGenerationVoucher_onclick() {
-        var TrID = Number($('#TRID').val());
-        var TR_CODE = $('#TR_CODE').val();
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
-            data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    var List = result.Response;
-                    CountGrid = 0;
-                    $("#div_Data").html('');
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
-                    for (var i = 0; i < List.length; i++) {
-                        BuildControls(i);
-                        DisplayBuildControls(List[i], i);
-                        CountGrid++;
+        btnGenerationVoucher.innerHTML = ' جاري التوليد <span class="glyphicon glyphicon-file"></span>  <i class="fa fa-spinner fa-spin lod  Loading" style="font-size: 140% !important;z-index: 99999;"></i> ';
+        btnGenerationVoucher.disabled = true;
+        setTimeout(function () {
+            var TrID = Number($('#TRID').val());
+            var TR_CODE = $('#TR_CODE').val();
+            Ajax.Callsync({
+                type: "Get",
+                url: sys.apiUrl("TranPosting", "LnkVoucherGenerate"),
+                data: { TrID: TrID, CompCode: CompCode, BranchCode: BranchCode, tr_code: TR_CODE },
+                success: function (d) {
+                    var result = d;
+                    if (result.IsSuccess) {
+                        var List = result.Response;
+                        CountGrid = 0;
+                        $("#div_Data").html('');
+                        List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
+                        $("#btnGenerationVoucher").addClass('animate__animated animate__fadeOutBottomRight');
+                        for (var i = 0; i < List.length; i++) {
+                            BuildControls(i);
+                            DisplayBuildControls(List[i], i);
+                            CountGrid++;
+                        }
+                        $('.table-responsive').scrollLeft(3);
+                        ComputeTotals();
+                        btnGenerationVoucher.disabled = false;
+                        setTimeout(function () { $("#btnGenerationVoucher").attr('class', 'btn btn-main Grin animate__animated   animate__fadeInBottomRight'); }, 1000);
+                        btnGenerationVoucher.innerHTML = "<i class=\"fa-solid fa-arrow-left fa-fade\"></i>\u0627\u0639\u0627\u062F\u0629 \u062A\u0648\u0644\u064A\u062F \u0627\u0644\u0642\u064A\u062F<i class=\"fa-solid fa-arrow-right fa-fade\"></i>";
                     }
-                    $('.table-responsive').scrollLeft(3);
-                    ComputeTotals();
                 }
-            }
-        });
+            });
+        }, 500);
     }
     //****************************************************CleanInput********************************************* 
     function Enabled() {
@@ -424,7 +433,8 @@ var LnkVoucher;
                     var List = result.Response;
                     CountGrid = 0;
                     $("#div_Data").html('');
-                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); }, 20) : $('#icon-bar').removeClass('display_none');
+                    List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin'); }, 20) : $('#icon-bar').removeClass('display_none');
+                    $('#btnGenerationVoucher').addClass('Grin');
                     for (var i = 0; i < List.length; i++) {
                         BuildControls(i);
                         DisplayBuildControls(List[i], i);
@@ -436,7 +446,7 @@ var LnkVoucher;
             }
         });
     }
-    ////**************************************************** Controls Grid Region //****************************************************
+    ////****************************************************Controls Grid Region****************************************************
     function BuildControls(cnt) {
         var html = "";
         html = "<tr id= \"No_Row" + cnt + "\">\n                    \n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"Acc_Code" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"ACC_DESCA" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Debit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Credit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"CC_Code" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"CC_DESCA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Line_DescA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"_Remarks form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                     \n                </tr>";
@@ -703,6 +713,11 @@ var LnkVoucher;
         Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
         LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
+        LnkVoucherlMastDet.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        LnkVoucherlMastDet.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
+        LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
+        LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         debugger;
@@ -744,7 +759,7 @@ var LnkVoucher;
         DisplayData(TransactionsGrid.SelectedItem);
         disabled();
     }
-    //***************************************************************************Print*********************************************************     
+    //*******************************************************Print*********************************************************     
     function PrintReport(OutType) {
         if (!SysSession.CurrentPrivileges.PrintOut)
             return;
@@ -784,9 +799,7 @@ var LnkVoucher;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result);
-                // window.close(result)
             }
         });
     }
@@ -801,7 +814,6 @@ var LnkVoucher;
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }
