@@ -210,6 +210,20 @@ var AdminBar;
         chk_AutoupdateSalesPrice.onclick = chk_AutoupdateSalesPrice_onchange;
         chk_AutoupdateSalesPrice2.onclick = chk_AutoupdateSalesPrice2_onchange;
     }
+    function ddlCompFilter_onchange() {
+        InitializeGrid();
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("I_Control", "GetAll"),
+            data: { CompCode: Number(ddlCompFilter.value) },
+            success: function (d) {
+                var result = d;
+                if (result.IsSuccess) {
+                    ControlDet = result.Response;
+                }
+            }
+        });
+    }
     function BindGrid() {
         Clear();
         ClearStr();
@@ -231,20 +245,6 @@ var AdminBar;
                     BRANCH = result.Response;
                     Grid.DataSource = BRANCH;
                     Grid.Bind();
-                }
-            }
-        });
-    }
-    function ddlCompFilter_onchange() {
-        InitializeGrid();
-        Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("I_Control", "GetAll"),
-            data: { CompCode: Number(ddlCompFilter.value) },
-            success: function (d) {
-                var result = d;
-                if (result.IsSuccess) {
-                    ControlDet = result.Response;
                 }
             }
         });

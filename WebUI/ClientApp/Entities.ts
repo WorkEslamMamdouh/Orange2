@@ -11627,17 +11627,7 @@ class A_LnkVoucher {
 }
 
 
-
-class G_RoleBranch {
-    constructor() {
-        this.COMP_CODE = 0;
-        this.BRA_CODE = 0;
-        this.RoleId = 0;
-    }
-    public COMP_CODE: number;
-    public BRA_CODE: number;
-    public RoleId: number;
-}
+ 
 
 class G_BranchModules {
     constructor() {
@@ -11769,9 +11759,20 @@ class G_RoleBranch extends SecurityClass {
     public StatusFlag: string;
 
  }
-
-class G_RoleModule {
+class G_RoleModuleMaste extends SecurityClass {
     constructor() {
+        super();
+        this.G_Role = new G_Role();
+        this.G_RoleModule = new Array<G_RoleModule>();
+    }
+    public G_Role: G_Role;
+    public G_RoleModule: Array<G_RoleModule>;
+
+
+}
+class G_RoleModule extends SecurityClass {
+    constructor() {
+        super();
         this.RoleId = 0;
         this.SYSTEM_CODE = "";
         this.SUB_SYSTEM_CODE = "";
@@ -11793,7 +11794,12 @@ class G_RoleModule {
         this.CUSTOM9 = false;
         this.ViewImages = false;
         this.EditImages = false;
-    }
+        this.StatusFlag = "";
+       
+
+}
+    public StatusFlag: string;
+
     public RoleId: number;
     public SYSTEM_CODE: string;
     public SUB_SYSTEM_CODE: string;

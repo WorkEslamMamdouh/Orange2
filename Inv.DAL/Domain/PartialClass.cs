@@ -337,5 +337,12 @@ namespace Inv.DAL.Domain
     public partial class A_LnkVoucher : SecurityandUpdateFlagClass
     {
     }
+    public partial class G_RoleBranch : SecurityandUpdateFlagClass
+    {
+    }
+    public partial class G_RoleModule : SecurityandUpdateFlagClass
+    {
+    }
+     
     
 }
