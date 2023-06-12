@@ -23706,6 +23706,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="MODULE_CODE" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="MODULE_DESCE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="MODULE_DESCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MENU_NO" Nullable="true" MaxLength="10" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -35297,6 +35298,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
                 <ScalarProperty Name="MODULE_CODE" ColumnName="MODULE_CODE" />
                 <ScalarProperty Name="MODULE_DESCE" ColumnName="MODULE_DESCE" />
                 <ScalarProperty Name="MODULE_DESCA" ColumnName="MODULE_DESCA" />
+                <ScalarProperty Name="MENU_NO" ColumnName="MENU_NO" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
