@@ -61,7 +61,7 @@ namespace AdminRoleBranch {
 
         for (var i = 0; i < CountGrid; i++) {
 
-            $("#txtRole" + i).removeAttr("disabled");
+           // $("#txtRole" + i).removeAttr("disabled");
             $("#btn_minus" + i).removeClass("display_none");
 
         }
@@ -359,14 +359,13 @@ namespace AdminRoleBranch {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
 
-                    DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                         DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
-                    }
-                    else {
+                      }
+                     else {
                         DisplayMassage('( Done )', '(success)', MessageType.Succeed);
-                    }
-                    btnBack_Def_onclick();
+                     }
+                     btnBack_Def_onclick();
                     refresh();
                     Display();
 

@@ -6987,4 +6987,59 @@ var G_ReportWebSetting = /** @class */ (function () {
     }
     return G_ReportWebSetting;
 }());
+var GQ_GetRoleModule = /** @class */ (function () {
+    function GQ_GetRoleModule() {
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+        this.MENU_NO = "";
+        this.MODULE_DESCE = "";
+        this.MODULE_DESCA = "";
+        this.md_Create = false;
+        this.md_edit = false;
+        this.md_delete = false;
+        this.md_print = false;
+        this.md_view = false;
+        this.md_custom1 = false;
+        this.md_custom2 = false;
+        this.md_custom3 = false;
+        this.CUSTOM1_DESC = "";
+        this.CUSTOM2_DESC = "";
+        this.CUSTOM3_DESC = "";
+        this.md_custom4 = false;
+        this.md_custom5 = false;
+        this.md_custom6 = false;
+        this.CUSTOM4_DESC = "";
+        this.CUSTOM5_DESC = "";
+        this.CUSTOM6_DESC = "";
+        this.md_custom7 = false;
+        this.md_custom8 = false;
+        this.md_custom9 = false;
+        this.CUSTOM7_DESC = "";
+        this.CUSTOM8_DESC = "";
+        this.CUSTOM9_DESC = "";
+        this.AVAILABLE = false;
+        this.MODULE_TYPE;
+        this.Images_Enabled = false;
+    }
+    return GQ_GetRoleModule;
+}());
 //# sourceMappingURL=Entities.js.map

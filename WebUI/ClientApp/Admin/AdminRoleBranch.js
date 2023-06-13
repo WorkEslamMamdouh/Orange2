@@ -56,7 +56,7 @@ var AdminRoleBranch;
         txtComp.disabled = true;
         txtBranch.disabled = true;
         for (var i = 0; i < CountGrid; i++) {
-            $("#txtRole" + i).removeAttr("disabled");
+            // $("#txtRole" + i).removeAttr("disabled");
             $("#btn_minus" + i).removeClass("display_none");
         }
     }
@@ -291,7 +291,6 @@ var AdminRoleBranch;
                 debugger;
                 var result = d;
                 if (result.IsSuccess == true) {
-                    DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                         DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
                     }
