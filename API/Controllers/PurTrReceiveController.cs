@@ -889,20 +889,20 @@ namespace Inv.API.Controllers
                         {
                             obj.I_Pur_Tr_PurchaseOrder.TrNo = int.Parse(res.ResponseData.ToString());
                             dbTransaction.Commit();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Update, obj.MODULE_CODE, true, null, null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, true, null, null, null);
                             return Ok(new BaseResponse(obj.I_Pur_Tr_PurchaseOrder));
                         }
                         else
                         {
                             dbTransaction.Rollback();
-                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Update, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
+                            LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, res.ResponseMessage.ToString(), null, null);
                             return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, res.ResponseMessage));
                         }
                     }
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Update, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, obj.Comp_Code.ToString(), obj.Branch_Code, obj.sec_FinYear, obj.UserCode, obj.I_Pur_Tr_PurchaseOrder.PurOrderID, obj.I_Pur_Tr_PurchaseOrder.TrNo.ToString(), LogUser.UserLog.Insert, obj.MODULE_CODE, false, ex.Message.ToString(), null, null);
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }
                 }

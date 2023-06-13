@@ -459,8 +459,7 @@ var PurOrder;
     function chkActive_onchecked() {
         if (btnUpdate.disabled == true) {
             if (chkActive.checked == false) {
-                chkActive.disabled = true;
-                btnUpdate.disabled = false;
+                openInvoice();
             }
         }
     }

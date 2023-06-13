@@ -533,9 +533,7 @@ namespace PurOrder {
         if (btnUpdate.disabled == true) {
             if (chkActive.checked == false) {
 
-
-                chkActive.disabled = true;
-                btnUpdate.disabled = false;
+                openInvoice() 
             }
         }
     }
@@ -1523,7 +1521,8 @@ namespace PurOrder {
                     $("#btnUpdate").removeClass("display_none");
                     GlobalPurOrderID = res.PurOrderID;
                     InitializeGrid();
-                    BindAfterInsertorUpdate();
+                BindAfterInsertorUpdate();
+                 
             }
         });
     }

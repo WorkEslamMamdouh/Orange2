@@ -344,7 +344,7 @@ class JsGrid {
                     $('#Loading_Div').html('<span class="loader" style="font-size: 465%;z-index: 99999;"></span>');                    
                 }
                 setTimeout(function () {
-                    debugger
+                     
                     _this.SelectedIndex = _this.DataSource.indexOf(e_item);// e.itemIndex;
                     _this.SelectedItem = e_item;
                     _this.SelectedKey = e_item_PrimaryKey;
@@ -360,9 +360,9 @@ class JsGrid {
                         $('#btnBack').addClass('display_none');
                         $('#btnSave').addClass('display_none'); 
                         $('#Loading_Div').html(''); 
-                        debugger
+                         
                         setTimeout(function () {
-                            debugger
+                             
                             let compCode = localStorage.getItem("compCode");
                             let UserCode = localStorage.getItem("UserCode");
                             let BranchCode = localStorage.getItem("BranchCode");

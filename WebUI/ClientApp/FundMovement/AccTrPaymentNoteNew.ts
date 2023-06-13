@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 namespace AccTrPaymentNoteNew {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccTrPaymentNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -1361,6 +1361,12 @@ namespace AccTrPaymentNoteNew {
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
     }
     function Insert() {
