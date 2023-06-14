@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 namespace AccTrPaymentNoteNew {
     var sys: SystemTools = new SystemTools();
-    var SysSession: SystemSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession: SystemSession = GetSystemSession(Modules.AccTrPaymentNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -1362,6 +1362,12 @@ namespace AccTrPaymentNoteNew {
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
 
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+
     }
     function Insert() {
         debugger
@@ -1520,7 +1526,7 @@ namespace AccTrPaymentNoteNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result);
                 // window.close(result)
@@ -1539,7 +1545,7 @@ namespace AccTrPaymentNoteNew {
 
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

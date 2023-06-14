@@ -192,6 +192,15 @@ namespace Inv.WebUI.Controllers
             return View("~/Views/AdminSetting/AdminRoleBranchIndex.cshtml");
         }
 
+        public ActionResult RoleIndex()
+        {
+            return View("~/Views/AdminSetting/RoleIndex.cshtml");
+        }
+        public ActionResult G_ModuleIndex()
+        {
+            return View("~/Views/AdminSetting/G_ModuleIndex.cshtml");
+        }
+
         public ActionResult AdminColseComp()
         {
             return View("~/Views/AdminSetting/AdminColseCompIndex.cshtml");

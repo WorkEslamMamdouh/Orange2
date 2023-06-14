@@ -82,7 +82,6 @@ var StkDefCategory;
         GetGLAccount();
         GetItemType();
         FillDrpItemType();
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefCategory, SysSession.CurrentEnvironment.CurrentYear);
     }
     StkDefCategory.InitalizeComponent = InitalizeComponent;
     function InitalizeControls() {
@@ -293,7 +292,6 @@ var StkDefCategory;
         });
     }
     function Grid_RowDoubleClicked() {
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.StkDefCategory, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         SelectedItem = Details.filter(function (x) { return x.CatID == Number(Grid.SelectedKey); });
         GlobalCatID = Number(Grid.SelectedKey);
         BindDetail();

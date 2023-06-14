@@ -1089,7 +1089,7 @@ namespace AccDefVendor {
 
         }
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefVendor, SysSession.CurrentEnvironment.CurrentYear, Selecteditem[0].VendorID);
+        
 
         DisplayData(Selecteditem);
         $('#btnUpdate').removeClass("display_none");

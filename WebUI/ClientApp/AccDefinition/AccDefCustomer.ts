@@ -407,12 +407,7 @@ namespace AccDefCustomer {
             debugger
             Newcount = 0;
             var CanAdd: boolean = true;
-            //if (CountGrid == 0) {
-            //    DisplayMassage("يجب ادخال  بينات  الهويه   ", "You must enter credit limit", MessageType.Worning);
-            //    Errorinput(btnAddDetails);
-            //    AddNewRow();
-            //    return false;
-            //}
+             
             if (CountGrid > 0) {
 
                 for (var i = 0; i < CountGrid; i++) {
@@ -640,7 +635,7 @@ namespace AccDefCustomer {
     }
     function DriverDoubleClick() {
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefCustomer, SysSession.CurrentEnvironment.CurrentYear, ReportGrid.SelectedKey.toString());
+        
 
         Selecteditem = Details.filter(x => x.CustomerId == Number(ReportGrid.SelectedKey));
         for (var item of Selecteditem) {

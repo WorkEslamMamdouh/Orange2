@@ -124,15 +124,11 @@ namespace Inv.API.Controllers
             try
             {
                 GenDefAdjustmentService.UpdateList(AdjustmentType);
-
-                LogUser.InsertPrint(db, AdjustmentType[0].Comp_Code.ToString(), AdjustmentType[0].Branch_Code, AdjustmentType[0].sec_FinYear, AdjustmentType[0].UserCode, null, LogUser.UserLog.Insert, AdjustmentType[0].MODULE_CODE, true, null, null, null);
-
+                 
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
-            {
-                LogUser.InsertPrint(db, AdjustmentType[0].Comp_Code.ToString(), AdjustmentType[0].Branch_Code, AdjustmentType[0].sec_FinYear, AdjustmentType[0].UserCode, null, LogUser.UserLog.Insert, AdjustmentType[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
-
+            { 
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }

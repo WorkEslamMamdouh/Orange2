@@ -289,17 +289,10 @@
     <script src="~/ClientApp/Purchase/PurOrder.js"></script>
     <script>
         $(document).ready(function () {
-
-            // Initialize select2
-            $("#ddlVendorMaster").select2();
-            $("#ddlSalesmanMaster").select2();
-            $("#ddlVendorHeader").select2();
-            $("#ddlSalesmanHeader").select2();
+             
 
 
-
-            $("#ddlCashBox").select2();
-            $("#ddlSalesman").select2();
+            $("#ddlCashBox").select2(); 
             //  $("#ddlStateType").select2();
             $("#ddlSeller").select2();
             $("#ddlCustomer").select2();
@@ -309,10 +302,7 @@
             $('#but_read').click(function () {
                 var username = $('#ddlCashBox option:selected').text();
                 var userid = $('#ddlCashBox').val();
-
-                var username = $('#ddlSalesman option:selected').text();
-                var userid = $('#ddlSalesman').val();
-
+                 
                 var username = $('#ddlSeller option:selected').text();
                 var userid = $('#ddlSeller').val();
 

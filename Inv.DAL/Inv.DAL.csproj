@@ -293,6 +293,9 @@
     <Compile Include="Domain\GProc_Rep_UserActivityLog_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Gproc_Rep_UserActivitySummary_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\GQ_GetLnkTransComp.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
@@ -306,6 +309,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\GQ_GetLnkVoucherDetail.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\GQ_GetRoleModule.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\GQ_GetStore.cs">

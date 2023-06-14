@@ -111,15 +111,11 @@ namespace Inv.API.Controllers
         {
             try
             {
-                IGenDefCategoryService.UpdateList(RecPayCategoryList);
-                LogUser.InsertPrint(db, RecPayCategoryList[0].Comp_Code.ToString(), RecPayCategoryList[0].Branch_Code, RecPayCategoryList[0].sec_FinYear, RecPayCategoryList[0].UserCode, null, LogUser.UserLog.Update, RecPayCategoryList[0].MODULE_CODE, true, null, null, null);
-
+                IGenDefCategoryService.UpdateList(RecPayCategoryList); 
                 return Ok(new BaseResponse());
             }
             catch (Exception ex)
-            {
-                LogUser.InsertPrint(db, RecPayCategoryList[0].Comp_Code.ToString(), RecPayCategoryList[0].Branch_Code, RecPayCategoryList[0].sec_FinYear, RecPayCategoryList[0].UserCode, null, LogUser.UserLog.Update, RecPayCategoryList[0].MODULE_CODE, false, ex.Message.ToString(), null, null);
-
+            { 
                 return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
             }
         }

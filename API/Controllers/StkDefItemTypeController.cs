@@ -208,7 +208,7 @@ namespace Inv.API.Controllers
                                 AllSuccess = false;
                                 break;
                             }
-                            LogUser.InsertPrint(db, itemFamilyList[0].Comp_Code.ToString(), itemFamilyList[0].Branch_Code, itemFamilyList[0].sec_FinYear, itemFamilyList[0].UserCode, Convert.ToInt32(InsertedRec.ItemFamilyID), LogUser.UserLog.Insert, itemFamilyList[0].MODULE_CODE, true, null, null, null);
+                            
 
                         }
 
@@ -224,7 +224,7 @@ namespace Inv.API.Controllers
                                 AllSuccess = false;
                                 break;
                             }
-                            LogUser.InsertPrint(db, itemFamilyList[0].Comp_Code.ToString(), itemFamilyList[0].Branch_Code, itemFamilyList[0].sec_FinYear, itemFamilyList[0].UserCode, Convert.ToInt32(updatedRec.ItemFamilyID), LogUser.UserLog.Update, itemFamilyList[0].MODULE_CODE, true, null, null, null);
+                        
 
                         }
 
@@ -242,7 +242,7 @@ namespace Inv.API.Controllers
                                 AllSuccess = false;
                                 break;
                             }
-                            LogUser.InsertPrint(db, itemFamilyList[0].Comp_Code.ToString(), itemFamilyList[0].Branch_Code, itemFamilyList[0].sec_FinYear, itemFamilyList[0].UserCode, Convert.ToInt32(item.ItemFamilyID), LogUser.UserLog.Delete, itemFamilyList[0].MODULE_CODE, true, null, null, null);
+                           
                           
                         }
 

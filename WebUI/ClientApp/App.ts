@@ -110,6 +110,8 @@ var Modules = {
     CcdtAccState: "CcdtAccState",
     CashBankAccount: "CashBankAccount",
     CloseProcesses: "CloseProcesses",
+    AdminRoleBranch: "AdminRoleBranch",
+    Role: "Role",
     CollectUnit: "CollectUnit"
 
 };
@@ -1729,6 +1731,7 @@ class CodeDesciptionModel {
 }
 
 function WorningMessage(msg_Ar: string, msg_En: string, tit_ar: string = "تنبيه", tit_en: string = "Worning", OnOk?: () => void) {
+    debugger
     var Env = GetSystemEnvironment();
     switch (Env.ScreenLanguage) {
 
@@ -1768,17 +1771,14 @@ function DisplayMassage(msg_Ar: string, msg_En: string, msg_type: string, OnOk?:
         $('#Text_Massage').html(msg_Ar);
     $('#DivMassage').removeClass("display_none");
     if (msg_type == '1') {
-        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-success");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-check-circle pe-3");
-    }
+        $('#DivMassage .alert-message').attr("style", "background-color: #1d712f!important;");
+     }
     else if (msg_type == '2') {
-        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-danger");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-times-circle pe-3");
-    }
+        $('#DivMassage .alert-message').attr("style", "background-color: #eee!important;");
+     }
     else if (msg_type == '3') {
         $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-orange");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-exclamation-triangle pe-3");
-    }
+     }
     setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
 }
 
@@ -3049,6 +3049,7 @@ function PrintTransactionLog(UserCode: string, compcode: string, BranchCode: str
     });
 
 }
+
 function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
 
     var sys: SystemTools = new SystemTools();
@@ -3061,6 +3062,33 @@ function PrintReportLog(UserCode: string, compcode: string, BranchCode: string, 
         }
     });
 }
+
+function ViewListLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "ViewListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+
+function UpdateListLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string) {
+
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "UpdateListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: (response) => {
+
+        }
+    });
+}
+
 function PrintReportLogOperation(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, ExtraData: string) {
 
     var sys: SystemTools = new SystemTools();
@@ -3085,13 +3113,25 @@ function OpenScreen(UserCode: string, compcode: string, BranchCode: string, Modu
         }
     });
 }
-function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string) {
+function LoginOpen(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, InOrOut: number) {
+    debugger
+    var sys: SystemTools = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "LoginOpen"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, InOrOut: InOrOut },
+        success: (response) => {
+
+        }
+    });
+}
+function DoubleClickLog(UserCode: string, compcode: string, BranchCode: string, ModuleCode: string, FinYear: string, TRId: string, TrNo: string) {
 
     var sys: SystemTools = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
-        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId , TrNo: TrNo},
         success: (response) => {
 
         }
@@ -3150,6 +3190,7 @@ var List_Table: Array<Table_Result> = new Array<Table_Result>();
 var globle_Table: Array<Table> = new Array<Table>();
 
 function DataResult(Table: Array<Table>): Array<Table_Result> {
+    debugger
     let sys = new SystemTools;
     globle_Table = Table;
     Ajax.Callsync({
@@ -3169,7 +3210,7 @@ function DataResult(Table: Array<Table>): Array<Table_Result> {
 }
 
 function GetDataTable(NameTable: string): Array<any> {
-
+    debugger
     let table;
     for (var i = 0; i < globle_Table.length; i++) {
 
@@ -3185,6 +3226,7 @@ function GetDataTable(NameTable: string): Array<any> {
 
 
 function GetAllData(Table: Array<Table>): Array<Table_Result> {
+    debugger
     let sys = new SystemTools;
     let List_Table: Array<Table_Result> = new Array<Table_Result>();
     Ajax.Callsync({
@@ -3208,7 +3250,7 @@ function GetAllData(Table: Array<Table>): Array<Table_Result> {
 
 
 function BuildAllFild(dataSource: any, cnt: number, NameRow: string) {
-     
+    debugger
     dataSource = getClass(dataSource.name);
     let properties = Object.getOwnPropertyNames(dataSource);
     let html = ``;
@@ -3270,7 +3312,7 @@ function AssignBuildControls(dataSource: any, CountGrid: number) {
 var getClass = function (className) {
     var constructorFunc = window[className]
     if (typeof constructorFunc === 'function') {
-        return new constructorFunc();
+        return  constructorFunc;
     } else {
         throw new Error('Invalid class name: ' + className);
     }

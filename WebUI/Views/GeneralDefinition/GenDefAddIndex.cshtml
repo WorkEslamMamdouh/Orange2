@@ -40,24 +40,6 @@
 
 
 
-@section Script{
-    <script>
-        $(document).ready(function () {
-            // Initialize select2
-            $(".ddlAcc").select2();
-            $(".ddlAccop").select2();
-
-            // Read selected option
-            $('#but_read').click(function () {
-                var username = $('.ddlAcc option:selected').text();
-                var userid = $('.ddlAcc').val();
-
-                var username = $('.ddlAccop option:selected').text();
-                var userid = $('.ddlAccop').val();
-
-                $('#result').html("id : " + userid + ", name : " + username);
-            });
-        });
-    </script>
+@section Script{ 
     <script src="~/ClientApp/GeneralDefinition/GenDefAdd.js"></script>
 }

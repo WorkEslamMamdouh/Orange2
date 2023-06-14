@@ -354,7 +354,7 @@ namespace Inv.API.Controllers
 
                              
                            var InsertedRec_in_A_ACCOUNT_YEAR = GLDefAccount_yearService.Insert(AccountList.A_ACCOUNT_YEAR);
-                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, LogUser.UserLog.Insert, AccountList.MODULE_CODE, true, null, null, InsertedRec.ACC_CODE);
+                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, item.ACC_CODE, LogUser.UserLog.Insert, AccountList.MODULE_CODE, true, null, null, InsertedRec.ACC_CODE);
 
 
                         }
@@ -366,7 +366,7 @@ namespace Inv.API.Controllers
                             var updatedRec = GLDefAccountService.Update(item);
 
                             var updatedRec_in_A_ACCOUNT_YEAR = GLDefAccount_yearService.Update(AccountList.A_ACCOUNT_YEAR);
-                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, LogUser.UserLog.Update, AccountList.MODULE_CODE, true, null, null, updatedRec.ACC_CODE);
+                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, item.ACC_CODE, LogUser.UserLog.Update, AccountList.MODULE_CODE, true, null, null, updatedRec.ACC_CODE);
 
                         }
 
@@ -398,7 +398,7 @@ namespace Inv.API.Controllers
                             string Q_YEAR = "DELETE FROM A_ACCOUNT_YEAR WHERE COMP_CODE = " + item.COMP_CODE + " and ACC_CODE ='" + item.ACC_CODE + "'";                            
                             var YEAR = db.Database.ExecuteSqlCommand(Q_YEAR);
 
-                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, LogUser.UserLog.Delete, AccountList.MODULE_CODE, true, null, null, item.ACC_CODE);
+                            LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, item.ACC_CODE, LogUser.UserLog.Delete, AccountList.MODULE_CODE, true, null, null, item.ACC_CODE);
 
 
                         }
@@ -414,7 +414,7 @@ namespace Inv.API.Controllers
                     catch (Exception ex)
                     {
                         dbTransaction.Rollback();
-                        LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null, LogUser.UserLog.Update, AccountList.MODULE_CODE, false, ex.Message.ToString(), null, null);
+                        LogUser.InsertPrint(db, AccountList.Comp_Code.ToString(), AccountList.Branch_Code, AccountList.sec_FinYear, AccountList.UserCode, null,null, LogUser.UserLog.Update, AccountList.MODULE_CODE, false, ex.Message.ToString(), null, null);
 
                         return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
                     }

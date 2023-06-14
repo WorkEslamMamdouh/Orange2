@@ -18,7 +18,7 @@ namespace SlsTrSalesManagerNew {
     var CashInvoiceDefAuth;
 
 
-
+    var ModulesScreen = "";
 
     if (SlsInvSrc == "1") {  //  1:Retail invoice  
 
@@ -33,7 +33,7 @@ namespace SlsTrSalesManagerNew {
 
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsRetailCashInvoiceDefAuth;
 
-
+        ModulesScreen = Modules.SlsTrSalesManagerNew;
     }
     else {       //2: opration invoice 
 
@@ -50,6 +50,8 @@ namespace SlsTrSalesManagerNew {
         CashInvoiceDefAuth = SysSession.CurrentEnvironment.I_Control[0].IsProcessCashInvoiceDefAuth;
 
         $('#Div_Priceshow').addClass('display_none');
+
+        ModulesScreen = Modules.SlsTrSalesOperation;
     }
 
 
@@ -251,7 +253,7 @@ namespace SlsTrSalesManagerNew {
         txtStartDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtEndDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
 
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSalesManager, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         //*******************************************************************************************************************************
 
@@ -741,7 +743,7 @@ namespace SlsTrSalesManagerNew {
     function GetItems(id: number, Type: number, cnt: number) {
 
 
-
+        debugger
         let ItemID = id;
 
         if (Type == 1) {
@@ -1115,6 +1117,7 @@ namespace SlsTrSalesManagerNew {
 
     }
     function getCustomerByIdFilter(custId: string, iscode: boolean) {
+         
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
@@ -1125,9 +1128,10 @@ namespace SlsTrSalesManagerNew {
                 if (result.IsSuccess) {
                     AccountDetails = result.Response as Array<IQ_GetCustomer>;
                     $('#txt_CustNameFilter').val(AccountDetails[0].NAMEA);
-                    //$('#txt_CustCode').val(AccountDetails.CustomerCODE);
+                    //$('#txt_CustCode').val(AccountDetails[0].CustomerCODE);
                     ddlCustomer.value = AccountDetails[0].CustomerId.toString();
                 }
+                
 
             }
         });
@@ -1145,10 +1149,27 @@ namespace SlsTrSalesManagerNew {
 
     }
     function getCustomerById(custId: string, iscode: boolean) {
+
+        debugger
+        if (custId.toString().trim() == '') {
+
+            DisplayMassage('العميل غير صحيح', '(Please select a customer)', MessageType.Error);
+
+            $('#txtInvoiceCustomerName').val('');
+            $('#txt_CustCode').val('');
+            ddlInvoiceCustomer.value = '';
+
+            vatType = SysSession.CurrentEnvironment.I_Control[0].DefSlsVatType;
+            txtCustomerMobile.value = '';
+
+            return
+
+        }
+
         Ajax.Callsync({
             type: "Get",
             url: sys.apiUrl("AccDefCustomer", "GetCustomerByCustomerId_code"),
-            data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId, UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
+            data: { Compcode: compcode, BranchCode: BranchCode, code: iscode, CustomerId: custId.toString().trim(), UserCode: SysSession.CurrentEnvironment.UserCode, Token: "HGFD-" + SysSession.CurrentEnvironment.Token },
             success: (d) => {//int Compcode,int BranchCode, bool code, string CustomerId, string UserCode, string Token
                 let result = d as BaseResponse;
                 ;
@@ -2613,7 +2634,7 @@ namespace SlsTrSalesManagerNew {
         InvoiceStatisticsModel = new Array<IQ_GetSlsInvoiceStatisticVer2>();
         Selecteditem = new Array<IQ_GetSlsInvoiceStatisticVer2>();
 
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.SlsTrSales, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
+        
 
         Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
         GlobalDocNo = Selecteditem[0].DocNo;
@@ -4178,9 +4199,15 @@ namespace SlsTrSalesManagerNew {
     }
     function ValidationHeader() {
 
+        debugger
         if (ddlInvoiceCustomer.value.trim() == "" && SysSession.CurrentEnvironment.InvoiceTransCode == 1) {
             DisplayMassage('(برجاء اختيار العميل)', '(Please select a customer)', MessageType.Error);
             Errorinput(txt_CustCode);
+            return false
+        }
+        else if (txtInvoiceCustomerName.value.trim() == "" ) {
+            DisplayMassage('(برجاء ادخال العميل)', '(Please select a customer)', MessageType.Error);
+            Errorinput(txtInvoiceCustomerName);
             return false
         }
         else if (ddlStore.value == "null" && SlsInvSrc == "1") {
@@ -4233,6 +4260,8 @@ namespace SlsTrSalesManagerNew {
             Errorinput(txtInvoiceDate);
             return false
         }
+
+
 
         else if (ddlType.value == '1') {
 
@@ -4369,8 +4398,7 @@ namespace SlsTrSalesManagerNew {
 
 
         InvoiceModel.TrType = 0//0 invoice 1 return
-        InvoiceModel.SlsInvType = 1 //  retail 
-        InvoiceModel.StoreId = ddlStore.value == 'null' ? null : Number(ddlStore.value);//main store
+        InvoiceModel.SlsInvType = 1 //  retail  
 
         InvoiceModel.RefTrID = null;
         InvoiceModel.SlsInvSrc = Number(ddlTypeInv.value)   // 1 from store 2 from van 
@@ -4439,7 +4467,7 @@ namespace SlsTrSalesManagerNew {
         InvoiceModel.LineCount = $('#txtItemCount').val();
 
 
-        InvoiceModel.CashBoxID = Number($('#ddlCashBox').val()) == 0 ? null : Number($('#ddlCashBox').val());
+        InvoiceModel.CashBoxID = $('#ddlCashBox').val() == 'null' ? null : Number($('#ddlCashBox').val());
 
         InvoiceModel.RefTrID = $("#txtPriceshow").val()
         InvoiceModel.RefTrID = $("#txtPriceshowID").val()
@@ -4595,7 +4623,7 @@ namespace SlsTrSalesManagerNew {
         MasterDetailsModel.I_Sls_TR_InvoiceItems = InvoiceItemsDetailsModel;
         MasterDetailsModel.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         MasterDetailsModel.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-        MasterDetailsModel.MODULE_CODE = Modules.SlsTrSalesManagerNew;
+        MasterDetailsModel.MODULE_CODE = ModulesScreen;
         MasterDetailsModel.UserCode = SysSession.CurrentEnvironment.UserCode;
         MasterDetailsModel.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
@@ -4621,12 +4649,28 @@ namespace SlsTrSalesManagerNew {
         MasterDetailsModel.I_Sls_TR_Invoice.TrTime = InvoiceStatisticsModel[0].TrTime;
 
 
-        if (InvoiceModel.Status == 1) {
-            if (InvoiceModel.IsPosted == true) {
-                MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
-            }
+        //if (InvoiceModel.Status == 1) {
+        //    if (InvoiceModel.IsPosted == true) {
+        //        MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //    }
+        //}
+
+
+        if (SlsInvSrc == "1") {
+            if (InvoiceModel.StoreId == 0 || InvoiceModel.StoreId == null) {
+                DisplayMassage(" برجاء اختيار المستودع", "Please select a Store", MessageType.Error);
+                Errorinput(ddlStore);
+                return false
+            } 
         }
 
+        if (ddlType.value == '1') {
+            if (InvoiceModel.CashBoxID == 0 || InvoiceModel.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return false
+            }  
+        }
 
         Ajax.Callsync({
             type: "POST",
@@ -4690,6 +4734,23 @@ namespace SlsTrSalesManagerNew {
                 DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
                 Errorinput(ddlCashBox);
                 return
+            }
+        }
+
+
+        if (SlsInvSrc == "1") {
+            if (InvoiceModel.StoreId == 0 || InvoiceModel.StoreId == null) {
+                DisplayMassage(" برجاء اختيار المستودع", "Please select a Store", MessageType.Error);
+                Errorinput(ddlStore);
+                return false
+            }
+        }
+
+        if (ddlType.value == '1') {
+            if (InvoiceModel.CashBoxID == 0 || InvoiceModel.CashBoxID == null) {
+                DisplayMassage(" برجاء اختيار الصندوق", "Please select a Invoice data", MessageType.Error);
+                Errorinput(ddlCashBox);
+                return false
             }
         }
 
@@ -5185,21 +5246,9 @@ namespace SlsTrSalesManagerNew {
 
         Assign();
 
-        if (InvoiceModel.IsPosted == true) {
-            MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
-        }
-        //InvoiceModel.CreatedAt = InvoiceStatisticsModel[0].CreatedAt;
-        //InvoiceModel.CreatedBy = InvoiceStatisticsModel[0].CreatedBy;
-        //let Selecteditem
-        //Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(Grid.SelectedKey));
-        //try {
-        //    GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
-
-        //} catch (e) {
-        //    Selecteditem = SlsInvoiceStatisticsDetails.filter(x => x.InvoiceID == Number(invoiceID));
-        //    GlobalinvoiceID = Number(Selecteditem[0].InvoiceID);
-        //}
-
+        //if (InvoiceModel.IsPosted == true) {
+        //    MessageBox.Show('يرجئ تعديل قيد رقم (' + InvoiceModel.VoucherNo + ')  يدوياً بعد أعتماد الفاتوره ', 'تحذير');
+        //} 
         InvoiceModel.InvoiceID = GlobalinvoiceID;
 
         InvoiceModel.CompCode = Number(compcode);
@@ -5387,7 +5436,7 @@ namespace SlsTrSalesManagerNew {
 
                 let result = d.result as string;
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear);
+                
 
                 window.open(result, "_blank");
             }
@@ -5414,12 +5463,12 @@ namespace SlsTrSalesManagerNew {
 
             rp.Name_function = "Prnt_OperationInvoice";
         }
-        //PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrReturnNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        //
 
 
         localStorage.setItem("Report_Data", JSON.stringify(rp));
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
         window.open(Url.Action("ReportsPopup", "Home"), "blank");
     }
     function btnPrintInvoicePrice_onclick() {
@@ -5496,7 +5545,7 @@ namespace SlsTrSalesManagerNew {
             data: rp,
             success: (d) => {
                 let result = d.result as string;
-                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.SlsTrSalesManagerNew, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+                PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, ModulesScreen, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
 
                 window.open(result, "_blank");
             }

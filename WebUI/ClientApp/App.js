@@ -112,6 +112,8 @@ var Modules = {
     CcdtAccState: "CcdtAccState",
     CashBankAccount: "CashBankAccount",
     CloseProcesses: "CloseProcesses",
+    AdminRoleBranch: "AdminRoleBranch",
+    Role: "Role",
     CollectUnit: "CollectUnit"
 };
 var MessageType = {
@@ -1362,6 +1364,7 @@ var CodeDesciptionModel = /** @class */ (function () {
 function WorningMessage(msg_Ar, msg_En, tit_ar, tit_en, OnOk) {
     if (tit_ar === void 0) { tit_ar = "تنبيه"; }
     if (tit_en === void 0) { tit_en = "Worning"; }
+    debugger;
     var Env = GetSystemEnvironment();
     switch (Env.ScreenLanguage) {
         case "ar":
@@ -1399,16 +1402,13 @@ function DisplayMassage(msg_Ar, msg_En, msg_type, OnOk) {
         $('#Text_Massage').html(msg_Ar);
     $('#DivMassage').removeClass("display_none");
     if (msg_type == '1') {
-        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-success");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-check-circle pe-3");
+        $('#DivMassage .alert-message').attr("style", "background-color: #1d712f!important;");
     }
     else if (msg_type == '2') {
-        $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-danger");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-times-circle pe-3");
+        $('#DivMassage .alert-message').attr("style", "background-color: #eee!important;");
     }
     else if (msg_type == '3') {
         $('#DivMassage .alert-message').attr("Class", "toast align-items-center text-white border-0 alert-message show bg-orange");
-        $('#DivMassage #icon_Massage').attr("Class", "fas fa-exclamation-triangle pe-3");
     }
     setTimeout(function () { $('#DivMassage').addClass("display_none"); }, 6000);
 }
@@ -2365,6 +2365,26 @@ function PrintReportLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
         }
     });
 }
+function ViewListLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "ViewListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
+function UpdateListLog(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "UpdateListLog"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode },
+        success: function (response) {
+        }
+    });
+}
 function PrintReportLogOperation(UserCode, compcode, BranchCode, ModuleCode, FinYear, ExtraData) {
     var sys = new SystemTools();
     Ajax.CallAsync({
@@ -2385,12 +2405,23 @@ function OpenScreen(UserCode, compcode, BranchCode, ModuleCode, FinYear) {
         }
     });
 }
-function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId) {
+function LoginOpen(UserCode, compcode, BranchCode, ModuleCode, FinYear, InOrOut) {
+    debugger;
+    var sys = new SystemTools();
+    Ajax.CallAsync({
+        type: "GET",
+        url: sys.apiUrl("SystemTools", "LoginOpen"),
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, FinYear: FinYear, ModuleCode: ModuleCode, InOrOut: InOrOut },
+        success: function (response) {
+        }
+    });
+}
+function DoubleClickLog(UserCode, compcode, BranchCode, ModuleCode, FinYear, TRId, TrNo) {
     var sys = new SystemTools();
     Ajax.CallAsync({
         type: "GET",
         url: sys.apiUrl("SystemTools", "InsertLogDoubleClick"),
-        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId },
+        data: { UserCode: UserCode, compcode: compcode, BranchCode: BranchCode, ModuleCode: ModuleCode, FinYear: FinYear, TRId: TRId, TrNo: TrNo },
         success: function (response) {
         }
     });
@@ -2431,6 +2462,7 @@ function CopyRowGrid(DataList, Key, value) {
 var List_Table = new Array();
 var globle_Table = new Array();
 function DataResult(Table) {
+    debugger;
     var sys = new SystemTools;
     globle_Table = Table;
     Ajax.Callsync({
@@ -2448,6 +2480,7 @@ function DataResult(Table) {
     return List_Table;
 }
 function GetDataTable(NameTable) {
+    debugger;
     var table;
     for (var i = 0; i < globle_Table.length; i++) {
         if (globle_Table[i].NameTable == NameTable) {
@@ -2458,6 +2491,7 @@ function GetDataTable(NameTable) {
     return table;
 }
 function GetAllData(Table) {
+    debugger;
     var sys = new SystemTools;
     var List_Table = new Array();
     Ajax.Callsync({
@@ -2476,6 +2510,7 @@ function GetAllData(Table) {
     return List_Table;
 }
 function BuildAllFild(dataSource, cnt, NameRow) {
+    debugger;
     dataSource = getClass(dataSource.name);
     var properties = Object.getOwnPropertyNames(dataSource);
     var html = "";
@@ -2529,7 +2564,7 @@ function AssignBuildControls(dataSource, CountGrid) {
 var getClass = function (className) {
     var constructorFunc = window[className];
     if (typeof constructorFunc === 'function') {
-        return new constructorFunc();
+        return constructorFunc;
     }
     else {
         throw new Error('Invalid class name: ' + className);

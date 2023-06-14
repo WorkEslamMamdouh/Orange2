@@ -155,7 +155,7 @@ namespace AccTrVendorAdjust {
 
 
         if (IsNew != true) {
-            if (Selecteditem[0].IsPosted != true) {
+            //if (Selecteditem[0].IsPosted != true) {
 
                 if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
                     Open();
@@ -175,11 +175,11 @@ namespace AccTrVendorAdjust {
                         btnEdit.disabled = !SysSession.CurrentPrivileges.EDIT
                     }
                 }
-            }
-            else {
-                chkActive.checked = true;
-                DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
-            }
+            //}
+            //else {
+            //    chkActive.checked = true;
+            //    DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
+            //}
         }
 
     }
@@ -1021,7 +1021,7 @@ namespace AccTrVendorAdjust {
 
             Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
-            Model.MODULE_CODE = Modules.AccTrCustomerAdjust;
+            Model.MODULE_CODE = Modules.AccTrVendorAdjust;
             Model.UserCode = SysSession.CurrentEnvironment.UserCode;
             Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
 
@@ -1273,7 +1273,7 @@ namespace AccTrVendorAdjust {
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrVendorAdjust, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

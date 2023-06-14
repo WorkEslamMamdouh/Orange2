@@ -501,6 +501,7 @@ var G_MODULES = /** @class */ (function (_super) {
         _this.Images_Enabled = false;
         _this.SYSTEM_CODE_Desc = "";
         _this.SUB_SYSTEM_CODE_Desc = "";
+        _this.StatusFlag = "";
         return _this;
     }
     return G_MODULES;
@@ -2932,6 +2933,7 @@ var I_TR_OperationCharges = /** @class */ (function (_super) {
         _this.CashBoxID = 0;
         _this.IsPosted = false;
         _this.VoucherNo = 0;
+        _this.TrNo = 0;
         return _this;
     }
     return I_TR_OperationCharges;
@@ -3094,6 +3096,8 @@ var IQ_GetOperationCharges = /** @class */ (function (_super) {
         _this.ChRemarks = "";
         _this.IsPosted = false;
         _this.VoucherNo = 0;
+        _this.TrNo = 0;
+        _this.CashBoxID = 0;
         return _this;
     }
     return IQ_GetOperationCharges;
@@ -6814,14 +6818,6 @@ var A_LnkVoucher = /** @class */ (function () {
     }
     return A_LnkVoucher;
 }());
-var G_RoleBranch = /** @class */ (function () {
-    function G_RoleBranch() {
-        this.COMP_CODE = 0;
-        this.BRA_CODE = 0;
-        this.RoleId = 0;
-    }
-    return G_RoleBranch;
-}());
 var G_BranchModules = /** @class */ (function () {
     function G_BranchModules() {
         this.COMP_CODE = 0;
@@ -6909,5 +6905,140 @@ var Table_Result = /** @class */ (function () {
         this.Table_Res = new Array();
     }
     return Table_Result;
+}());
+var G_RoleBranch = /** @class */ (function (_super) {
+    __extends(G_RoleBranch, _super);
+    function G_RoleBranch() {
+        var _this = _super.call(this) || this;
+        _this.COMP_CODE = 0;
+        _this.BRA_CODE = 0;
+        _this.RoleId = 0;
+        _this.StatusFlag = "";
+        return _this;
+    }
+    return G_RoleBranch;
+}(SecurityClass));
+var G_RoleModuleMaste = /** @class */ (function (_super) {
+    __extends(G_RoleModuleMaste, _super);
+    function G_RoleModuleMaste() {
+        var _this = _super.call(this) || this;
+        _this.G_Role = new G_Role();
+        _this.G_RoleModule = new Array();
+        return _this;
+    }
+    return G_RoleModuleMaste;
+}(SecurityClass));
+var G_RoleModule = /** @class */ (function (_super) {
+    __extends(G_RoleModule, _super);
+    function G_RoleModule() {
+        var _this = _super.call(this) || this;
+        _this.RoleId = 0;
+        _this.SYSTEM_CODE = "";
+        _this.SUB_SYSTEM_CODE = "";
+        _this.MODULE_CODE = "";
+        _this.EXECUTE = false;
+        _this.CREATE = false;
+        _this.EDIT = false;
+        _this.DELETE = false;
+        _this.PRINT = false;
+        _this.VIEW = false;
+        _this.CUSTOM1 = false;
+        _this.CUSTOM2 = false;
+        _this.CUSTOM3 = false;
+        _this.CUSTOM4 = false;
+        _this.CUSTOM5 = false;
+        _this.CUSTOM6 = false;
+        _this.CUSTOM7 = false;
+        _this.CUSTOM8 = false;
+        _this.CUSTOM9 = false;
+        _this.ViewImages = false;
+        _this.EditImages = false;
+        _this.StatusFlag = "";
+        return _this;
+    }
+    return G_RoleModule;
+}(SecurityClass));
+var G_ReportWebSetting = /** @class */ (function () {
+    function G_ReportWebSetting() {
+        this.ReportSettingID = 0;
+        this.SystemCode = "";
+        this.SubSystemCode = "";
+        this.ReportID = "";
+        this.NameA = "";
+        this.NameE = "";
+        this.COMP_CODE = 0;
+        this.BRA_Code = 0;
+        this.USER_CODE = "";
+        this.ReportDesignNameEn = "";
+        this.ReportDesignNameAr = "";
+        this.ReportDataSouce = "";
+        this.RightMarginMM = 0;
+        this.LeftMarginMM = 0;
+        this.TopMarginMM = 0;
+        this.BottomMarginMM = 0;
+        this.IsLandScape = false;
+        this.PageSizeID = 0;
+        this.PageHightCM = 0;
+        this.PageWidthCM = 0;
+        this.PrinterName = "";
+        this.OutputTypeNo = 0;
+        this.OutputType;
+    }
+    return G_ReportWebSetting;
+}());
+var GQ_GetRoleModule = /** @class */ (function () {
+    function GQ_GetRoleModule() {
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+        this.MENU_NO = "";
+        this.MODULE_DESCE = "";
+        this.MODULE_DESCA = "";
+        this.md_Create = false;
+        this.md_edit = false;
+        this.md_delete = false;
+        this.md_print = false;
+        this.md_view = false;
+        this.md_custom1 = false;
+        this.md_custom2 = false;
+        this.md_custom3 = false;
+        this.CUSTOM1_DESC = "";
+        this.CUSTOM2_DESC = "";
+        this.CUSTOM3_DESC = "";
+        this.md_custom4 = false;
+        this.md_custom5 = false;
+        this.md_custom6 = false;
+        this.CUSTOM4_DESC = "";
+        this.CUSTOM5_DESC = "";
+        this.CUSTOM6_DESC = "";
+        this.md_custom7 = false;
+        this.md_custom8 = false;
+        this.md_custom9 = false;
+        this.CUSTOM7_DESC = "";
+        this.CUSTOM8_DESC = "";
+        this.CUSTOM9_DESC = "";
+        this.AVAILABLE = false;
+        this.MODULE_TYPE;
+        this.Images_Enabled = false;
+    }
+    return GQ_GetRoleModule;
 }());
 //# sourceMappingURL=Entities.js.map

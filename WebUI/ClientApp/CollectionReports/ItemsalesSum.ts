@@ -442,7 +442,7 @@ namespace ItemsalesSum {
                 data: rp,
                 success: (d) => {     
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ItemsalesSum, SysSession.CurrentEnvironment.CurrentYear);
+                    
 
                     window.open(result, "_blank");
                 }
@@ -454,7 +454,7 @@ namespace ItemsalesSum {
                 data: rp,
                 success: (d) => {     
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.ItemsalesSum, SysSession.CurrentEnvironment.CurrentYear);
+                    
 
                     window.open(result, "_blank");
                 }

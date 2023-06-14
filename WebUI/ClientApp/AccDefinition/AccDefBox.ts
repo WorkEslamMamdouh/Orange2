@@ -49,7 +49,7 @@ namespace AccDefBox {
         BranchCode = Number(SysSession.CurrentEnvironment.BranchCode);
         InitalizeControls();
         InitalizeEvents();     
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccDefBox, SysSession.CurrentEnvironment.CurrentYear);
+        
         Display_Acount_Code();
         Display_Network_account_Code();
         Display();
@@ -597,6 +597,7 @@ namespace AccDefBox {
             DetailsModel[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
             DetailsModel[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
             DetailsModel[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+            DetailsModel[0].MODULE_CODE = Modules.AccDefBox;
         }
         
 

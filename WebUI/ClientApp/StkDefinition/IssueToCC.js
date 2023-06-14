@@ -374,7 +374,6 @@ var IssueToCC;
     }
     function Grid_RowDoubleClicked() {
         IsNew = false;
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, Grid.SelectedKey.toString());
         DocumentActions.RenderFromModel(Grid.SelectedItem);
         IssueToCcID = Number(Grid.SelectedKey);
         bindDetails();
@@ -802,7 +801,6 @@ var IssueToCC;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -814,7 +812,6 @@ var IssueToCC;
         rp.TRId = IssueToCcID;
         rp.Name_function = "IProc_Prnt_StkIssue";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.IssueToCC, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

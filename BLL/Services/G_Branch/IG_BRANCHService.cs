@@ -15,8 +15,21 @@ namespace Inv.BLL.Services.G_Branch
         List<G_BRANCH> GetAll(Expression<Func<G_BRANCH, bool>> predicate);
         G_BRANCH Insert(G_BRANCH iControl);
         G_BRANCH Update(G_BRANCH iControl);
-     
-
         void Delete(int id);
+
+
+
+        G_Role InsertG_Role(G_Role iControl);
+        G_Role UpdateG_Role(G_Role iControl);
+        void DeleteG_Role(int id);
+
+        G_RoleModule InsertG_RoleModule(G_RoleModule iControl);
+        G_RoleModule UpdateG_RoleModule(G_RoleModule iControl);
+        void DeleteG_RoleModule(int id);
+
+
+        G_MODULES InsertG_MODULES(G_MODULES iControl);
+        G_MODULES UpdateG_MODULES(G_MODULES iControl);
+        void DeleteG_MODULES(int id);
     }
 }

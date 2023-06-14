@@ -191,7 +191,7 @@ namespace CashBankAccount {
                 success: (d) => {
 
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBankAccount, SysSession.CurrentEnvironment.CurrentYear);
+                    
 
 
                     window.open(result, "_blank");
@@ -209,7 +209,7 @@ namespace CashBankAccount {
                 success: (d) => {
 
                     let result = d.result as string;
-                    PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.CashBankAccount, SysSession.CurrentEnvironment.CurrentYear);
+                    
 
 
                     window.open(result, "_blank");

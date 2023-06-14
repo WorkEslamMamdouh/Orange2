@@ -250,6 +250,21 @@ namespace AdminBar {
         chk_AutoupdateSalesPrice2.onclick = chk_AutoupdateSalesPrice2_onchange;
     }
 
+    function ddlCompFilter_onchange() {
+        InitializeGrid();
+        Ajax.Callsync({// GetAll( string UserCode, string Token)
+            type: "Get",
+            url: sys.apiUrl("I_Control", "GetAll"),
+            data: { CompCode: Number(ddlCompFilter.value) },
+            success: (d) => {
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    ControlDet = result.Response as Array<I_Control>;
+                }
+            }
+        });
+
+    }
     function BindGrid() {
         Clear();
         ClearStr();
@@ -277,21 +292,6 @@ namespace AdminBar {
                     Grid.Bind();
 
 
-                }
-            }
-        });
-
-    }
-    function ddlCompFilter_onchange() {
-        InitializeGrid();
-        Ajax.Callsync({// GetAll( string UserCode, string Token)
-            type: "Get",
-            url: sys.apiUrl("I_Control", "GetAll"),
-            data: { CompCode: Number(ddlCompFilter.value) },
-            success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    ControlDet = result.Response as Array<I_Control>;
                 }
             }
         });

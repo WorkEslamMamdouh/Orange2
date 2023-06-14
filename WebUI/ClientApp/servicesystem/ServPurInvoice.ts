@@ -136,7 +136,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
         GetAllCostCenters();
         GetAllVendors();
 
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.Ser_Purchasing, SysSession.CurrentEnvironment.CurrentYear);
+        
 
         GetAllVatDetails();
 
@@ -2662,7 +2662,7 @@ namespace ServPurInvoice {//----------------- from 1-9 12:00 Pm
 
                 let result = d.result as string;
                 window.open(result, "_blank");
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.Sales_Services, SysSession.CurrentEnvironment.CurrentYear);
+                
 
 
             }

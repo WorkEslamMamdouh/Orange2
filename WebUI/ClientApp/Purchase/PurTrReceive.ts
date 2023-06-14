@@ -166,7 +166,7 @@ namespace PurTrReceive {
         txtFromDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         $('#btnPrint').addClass('display_none');
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
+        
 
 
         InitializeGrid();
@@ -508,7 +508,7 @@ namespace PurTrReceive {
         debugger
         ShowFlag = true;
         $('#ddlCurrency').prop("value", "null");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
+        
 
         let Selecteditem = GetPurReceiveStaisticData.filter(x => x.ReceiveID == Number(divMasterGrid.SelectedKey));
         GlobalReceiveID = Number(Selecteditem[0].ReceiveID);
@@ -3543,7 +3543,7 @@ namespace PurTrReceive {
                 let result = d.result as string;
 
 
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear);
+                
 
 
                 window.open(result, "_blank");
@@ -3561,7 +3561,7 @@ namespace PurTrReceive {
 
         rp.Name_function = "IProc_Prnt_PurReceive";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurTrReceive, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
+        
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

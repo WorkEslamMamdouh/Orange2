@@ -96,7 +96,7 @@ var LnkVoucher;
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = function () { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); };
         //*******************************print*****************************
-        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' ? txtFromNumber.value : txtToNumber.value; };
+        txtFromNumber.onchange = function () { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value) ? txtFromNumber.value : txtToNumber.value; };
         btnPrintTrview.onclick = function () { PrintReport(1); };
         btnPrintTrPDF.onclick = function () { PrintReport(2); };
         btnPrintTrEXEL.onclick = function () { PrintReport(3); };
@@ -118,9 +118,8 @@ var LnkVoucher;
         TransactionsGrid.OnItemEditing = function () { };
         TransactionsGrid.Columns = [
             { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
-            //{ title: res.App_date, name: "TR_DATE", type: "text", width: "8%" },
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             {
                 title: res.App_date, css: "ColumPadding", name: "TR_DATE", width: "8%",
                 itemTemplate: function (s, item) {
@@ -133,7 +132,6 @@ var LnkVoucher;
             { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
             { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
-            //{ title: res.Trans_Generate, name: "IsGeneratedDesc", type: "text", width: "4%" },
             {
                 title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: function (s, item) {
@@ -341,7 +339,9 @@ var LnkVoucher;
         }, 100);
     }
     function btnBack_onclick() {
-        GridDoubleClick();
+        CleanDetails();
+        DisplayData(TransactionsGrid.SelectedItem);
+        disabled();
     }
     function btnUpdate_onclick() {
         Enabled();
@@ -713,6 +713,11 @@ var LnkVoucher;
         Filter.UserCode = SysSession.CurrentEnvironment.UserCode;
         LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
+        LnkVoucherlMastDet.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        LnkVoucherlMastDet.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
+        LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
+        LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Update() {
         debugger;
@@ -794,9 +799,7 @@ var LnkVoucher;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result);
-                // window.close(result)
             }
         });
     }
@@ -811,7 +814,6 @@ var LnkVoucher;
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.LnkVoucher, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

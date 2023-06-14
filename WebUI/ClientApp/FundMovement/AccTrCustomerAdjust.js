@@ -122,15 +122,15 @@ var AccTrCustomerAdjust;
     AccTrCustomerAdjust.InitalizeComponent = InitalizeComponent;
     function chkStatus_onchange() {
         if (IsNew != true) {
-            if (Selecteditem[0].IsPosted != true) {
-                if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
-                    Open();
-                }
+            //if (Selecteditem[0].IsPosted != true) {
+            if (Selecteditem[0].Status == 1 && chkActive.checked == false) {
+                Open();
             }
-            else {
-                chkActive.checked = true;
-                DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
-            }
+            //}
+            //else {
+            //    chkActive.checked = true;
+            //    DisplayMassage(" تم ترحيل الحسبات لا يمكنك فك الاعتماد ", "You can't de-IsPosted", MessageType.Worning);
+            //}
         }
     }
     function Open() {
@@ -1024,7 +1024,6 @@ var AccTrCustomerAdjust;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1039,7 +1038,6 @@ var AccTrCustomerAdjust;
         rp.TRId = AdjustmentID;
         rp.Name_function = "rptAdjustNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

@@ -118,7 +118,6 @@ var PurOrder;
         GetAllItems();
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
-        OpenScreen(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
         //  $('#btnPrint').addClass('display_none');
     }
     PurOrder.InitalizeComponent = InitalizeComponent;
@@ -276,7 +275,6 @@ var PurOrder;
         $("#PurOrderDetails").removeClass("display_none");
         $("#divDetails").removeClass("display_none");
         $("#btnUpdate").removeClass("display_none");
-        DoubleClickLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, divMasterGrid.SelectedKey.toString());
         var Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(divMasterGrid.SelectedKey); });
         if (AfterInsertOrUpdateFlag == true) {
             Selecteditem = PurchaseOrderViewWithDetail.IQ_GetPurchaseOrder.filter(function (x) { return x.PurOrderID == Number(GlobalPurOrderID); });
@@ -461,8 +459,7 @@ var PurOrder;
     function chkActive_onchecked() {
         if (btnUpdate.disabled == true) {
             if (chkActive.checked == false) {
-                chkActive.disabled = true;
-                btnUpdate.disabled = false;
+                openInvoice();
             }
         }
     }
@@ -1403,7 +1400,6 @@ var PurOrder;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result, "_blank");
             }
         });
@@ -1418,7 +1414,6 @@ var PurOrder;
         rp.TRId = GlobalPurOrderID;
         rp.Name_function = "IProc_Prnt_PurPurchaseOrder";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(rp.UserCode, rp.CompCode, rp.BranchCode, Modules.PurOrder, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

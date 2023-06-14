@@ -4,7 +4,7 @@ $(document).ready(function () {
 var AccTrPaymentNoteNew;
 (function (AccTrPaymentNoteNew) {
     var sys = new SystemTools();
-    var SysSession = GetSystemSession(Modules.AccTrReceiptNoteNew);
+    var SysSession = GetSystemSession(Modules.AccTrPaymentNoteNew);
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
     var TrType = 2;
     var codeType = "PayType";
@@ -223,6 +223,7 @@ var AccTrPaymentNoteNew;
                 { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
                 { NameTable: 'A_G_Vendor', Condition: "" },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+                //{ NameTable: 'GProc_GetBranchModules', Condition: " 1, 1 ", IsProc: true, IsExec: true },
             ];
         DataResult(Table);
         debugger;
@@ -1216,6 +1217,11 @@ var AccTrPaymentNoteNew;
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+        Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
+        Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
+        Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;
+        Model.UserCode = SysSession.CurrentEnvironment.UserCode;
+        Model.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
     }
     function Insert() {
         debugger;
@@ -1369,7 +1375,6 @@ var AccTrPaymentNoteNew;
             data: rp,
             success: function (d) {
                 var result = d.result;
-                PrintReportLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear);
                 window.open(result);
                 // window.close(result)
             }
@@ -1386,7 +1391,6 @@ var AccTrPaymentNoteNew;
         rp.TRId = Number($('#ReceiptID').val());
         rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        PrintTransactionLog(SysSession.CurrentEnvironment.UserCode, SysSession.CurrentEnvironment.CompCode, SysSession.CurrentEnvironment.BranchCode, Modules.AccTrReceiptNote, SysSession.CurrentEnvironment.CurrentYear, rp.TRId.toString());
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");
     }

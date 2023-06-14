@@ -846,6 +846,7 @@ class G_MODULES extends SecurityClass {
         this.Images_Enabled = false;
         this.SYSTEM_CODE_Desc = "";
         this.SUB_SYSTEM_CODE_Desc = "";
+        this.StatusFlag = "";
     }
     public SYSTEM_CODE: string;
     public SUB_SYSTEM_CODE: string;
@@ -882,6 +883,8 @@ class G_MODULES extends SecurityClass {
     public Images_Enabled: boolean;
     public SYSTEM_CODE_Desc: string;
     public SUB_SYSTEM_CODE_Desc: string;
+    public StatusFlag: string;
+
 }
 
 class G_Nationality extends SecurityClass {
@@ -5056,6 +5059,7 @@ class I_TR_OperationCharges extends SecurityClass {
         this.CashBoxID = 0;
         this.IsPosted = false;
         this.VoucherNo = 0; 
+        this.TrNo = 0; 
     }
     public OperationExpensesID: number;
     public OperationID: number;
@@ -5075,6 +5079,7 @@ class I_TR_OperationCharges extends SecurityClass {
     public CashBoxID: number;
     public IsPosted: boolean;
     public VoucherNo: number; 
+    public TrNo: number; 
 
 }
 
@@ -5342,6 +5347,8 @@ class IQ_GetOperationCharges extends SecurityClass {
         this.ChRemarks = "";
         this.IsPosted = false;
         this.VoucherNo = 0;
+        this.TrNo = 0;
+        this.CashBoxID = 0;
 
 
     }
@@ -5370,6 +5377,8 @@ class IQ_GetOperationCharges extends SecurityClass {
     public ChRemarks: string;
     public IsPosted: boolean; 
     public VoucherNo: number;
+    public TrNo: number;
+    public CashBoxID: number;
 
 }
 
@@ -11627,17 +11636,7 @@ class A_LnkVoucher {
 }
 
 
-
-class G_RoleBranch {
-    constructor() {
-        this.COMP_CODE = 0;
-        this.BRA_CODE = 0;
-        this.RoleId = 0;
-    }
-    public COMP_CODE: number;
-    public BRA_CODE: number;
-    public RoleId: number;
-}
+ 
 
 class G_BranchModules {
     constructor() {
@@ -11771,4 +11770,239 @@ class Table_Result {
     }
     public Table_Res: Array<any>;
 } 
+
+class G_RoleBranch extends SecurityClass {
+    constructor() {
+        super();
+        this.COMP_CODE = 0;
+        this.BRA_CODE = 0;
+        this.RoleId = 0;
+        this.StatusFlag = "";
+    }
+    public COMP_CODE: number;
+    public BRA_CODE: number;
+    public RoleId: number;
+    public StatusFlag: string;
+
+ }
+class G_RoleModuleMaste extends SecurityClass {
+    constructor() {
+        super();
+        this.G_Role = new G_Role();
+        this.G_RoleModule = new Array<G_RoleModule>();
+    }
+    public G_Role: G_Role;
+    public G_RoleModule: Array<G_RoleModule>;
+
+
+}
+class G_RoleModule extends SecurityClass {
+    constructor() {
+        super();
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+        this.StatusFlag = "";
+       
+
+}
+    public StatusFlag: string;
+
+    public RoleId: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public MODULE_CODE: string;
+    public EXECUTE: boolean;
+    public CREATE: boolean;
+    public EDIT: boolean;
+    public DELETE: boolean;
+    public PRINT: boolean;
+    public VIEW: boolean;
+    public CUSTOM1: boolean;
+    public CUSTOM2: boolean;
+    public CUSTOM3: boolean;
+    public CUSTOM4: boolean;
+    public CUSTOM5: boolean;
+    public CUSTOM6: boolean;
+    public CUSTOM7: boolean;
+    public CUSTOM8: boolean;
+    public CUSTOM9: boolean;
+    public ViewImages: boolean;
+    public EditImages: boolean;
+}
  
+  
+class G_ReportWebSetting {
+    constructor() {
+        this.ReportSettingID = 0;
+        this.SystemCode = "";
+        this.SubSystemCode = "";
+        this.ReportID = "";
+        this.NameA = "";
+        this.NameE = "";
+        this.COMP_CODE = 0;
+        this.BRA_Code = 0;
+        this.USER_CODE = "";
+        this.ReportDesignNameEn = "";
+        this.ReportDesignNameAr = "";
+        this.ReportDataSouce = "";
+        this.RightMarginMM = 0;
+        this.LeftMarginMM = 0;
+        this.TopMarginMM = 0;
+        this.BottomMarginMM = 0;
+        this.IsLandScape = false;
+        this.PageSizeID = 0;
+        this.PageHightCM = 0;
+        this.PageWidthCM = 0;
+        this.PrinterName = "";
+        this.OutputTypeNo = 0;
+        this.OutputType
+    }
+    public ReportSettingID: number;
+    public SystemCode: string;
+    public SubSystemCode: string;
+    public ReportID: string;
+    public NameA: string;
+    public NameE: string;
+    public COMP_CODE: number;
+    public BRA_Code: number;
+    public USER_CODE: string;
+    public ReportDesignNameEn: string;
+    public ReportDesignNameAr: string;
+    public ReportDataSouce: string;
+    public RightMarginMM: number;
+    public LeftMarginMM: number;
+    public TopMarginMM: number;
+    public BottomMarginMM: number;
+    public IsLandScape: boolean;
+    public PageSizeID: number;
+    public PageHightCM: number;
+    public PageWidthCM: number;
+    public PrinterName: string;
+    public OutputTypeNo: number;
+    public OutputType: any;
+}
+
+class GQ_GetRoleModule {
+    constructor() {
+        this.RoleId = 0;
+        this.SYSTEM_CODE = "";
+        this.SUB_SYSTEM_CODE = "";
+        this.MODULE_CODE = "";
+        this.EXECUTE = false;
+        this.CREATE = false;
+        this.EDIT = false;
+        this.DELETE = false;
+        this.PRINT = false;
+        this.VIEW = false;
+        this.CUSTOM1 = false;
+        this.CUSTOM2 = false;
+        this.CUSTOM3 = false;
+        this.CUSTOM4 = false;
+        this.CUSTOM5 = false;
+        this.CUSTOM6 = false;
+        this.CUSTOM7 = false;
+        this.CUSTOM8 = false;
+        this.CUSTOM9 = false;
+        this.ViewImages = false;
+        this.EditImages = false;
+        this.MENU_NO = "";
+        this.MODULE_DESCE = "";
+        this.MODULE_DESCA = "";
+        this.md_Create = false;
+        this.md_edit = false;
+        this.md_delete = false;
+        this.md_print = false;
+        this.md_view = false;
+        this.md_custom1 = false;
+        this.md_custom2 = false;
+        this.md_custom3 = false;
+        this.CUSTOM1_DESC = "";
+        this.CUSTOM2_DESC = "";
+        this.CUSTOM3_DESC = "";
+        this.md_custom4 = false;
+        this.md_custom5 = false;
+        this.md_custom6 = false;
+        this.CUSTOM4_DESC = "";
+        this.CUSTOM5_DESC = "";
+        this.CUSTOM6_DESC = "";
+        this.md_custom7 = false;
+        this.md_custom8 = false;
+        this.md_custom9 = false;
+        this.CUSTOM7_DESC = "";
+        this.CUSTOM8_DESC = "";
+        this.CUSTOM9_DESC = "";
+        this.AVAILABLE = false;
+        this.MODULE_TYPE
+        this.Images_Enabled = false;
+    }
+    public RoleId: number;
+    public SYSTEM_CODE: string;
+    public SUB_SYSTEM_CODE: string;
+    public MODULE_CODE: string;
+    public EXECUTE: boolean;
+    public CREATE: boolean;
+    public EDIT: boolean;
+    public DELETE: boolean;
+    public PRINT: boolean;
+    public VIEW: boolean;
+    public CUSTOM1: boolean;
+    public CUSTOM2: boolean;
+    public CUSTOM3: boolean;
+    public CUSTOM4: boolean;
+    public CUSTOM5: boolean;
+    public CUSTOM6: boolean;
+    public CUSTOM7: boolean;
+    public CUSTOM8: boolean;
+    public CUSTOM9: boolean;
+    public ViewImages: boolean;
+    public EditImages: boolean;
+    public MENU_NO: string;
+    public MODULE_DESCE: string;
+    public MODULE_DESCA: string;
+    public md_Create: boolean;
+    public md_edit: boolean;
+    public md_delete: boolean;
+    public md_print: boolean;
+    public md_view: boolean;
+    public md_custom1: boolean;
+    public md_custom2: boolean;
+    public md_custom3: boolean;
+    public CUSTOM1_DESC: string;
+    public CUSTOM2_DESC: string;
+    public CUSTOM3_DESC: string;
+    public md_custom4: boolean;
+    public md_custom5: boolean;
+    public md_custom6: boolean;
+    public CUSTOM4_DESC: string;
+    public CUSTOM5_DESC: string;
+    public CUSTOM6_DESC: string;
+    public md_custom7: boolean;
+    public md_custom8: boolean;
+    public md_custom9: boolean;
+    public CUSTOM7_DESC: string;
+    public CUSTOM8_DESC: string;
+    public CUSTOM9_DESC: string;
+    public AVAILABLE: boolean;
+    public MODULE_TYPE: any;
+    public Images_Enabled: boolean;
+}
+

@@ -1,0 +1,151 @@
+﻿
+@using Inv.WebUI.Resources
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+
+    .fontitm4user {
+        right: 6px;
+        float: left;
+        font-size: 23px;
+        margin: 7px 0px 0px -16px;
+        position: absolute;
+        z-index: 99
+    }
+
+    .borderred {
+        border: solid 1px #f3f3f3 !important;
+        border-radius: 30px;
+        padding: 12px 11px;
+        width: 98% !important;
+        margin: 0.5%;
+        background-color: #e9d8c7 !important;
+        box-shadow: 0px 4px 6px 0px #cabfbf;
+    }
+
+    .disabledDiv {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+    input[type=checkbox] {
+        margin: 9px 0 0 !important;
+        margin-top: 9px !important;
+        margin-right: 0px !important;
+        margin-bottom: 0px !important;
+        margin-left: 0px !important;
+    }
+    .stylecollg1 {
+        padding: 0px!important;
+        font-size: 11px!important;
+    }
+    .stylepadding {
+        padding: 0px !important;
+    }
+</style>
+<!-- Filter Container --> 
+
+ 
+<div class="col-lg-1"> </div>
+<div id="DivMassage" style="background-color: #1d2920!important; margin: 1%;color:#ffffff; text-align: center; font-weight: bold;" class="col-lg-10 col-md-10 col-sm-10 col-xl-10 col-xs-10  margingred  borderred display_none">
+    <h4 id="Text_Massage" style="">@SystemResource.App_Print</h4>
+</div>
+
+<div class="col-lg-12 margingred  borderred   " id="">
+
+    <div class="col-lg-12 col-md-6 col-sm-6 col-xl-6 col-xs-6 ">
+
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 col-xs-4 float_left_right">
+            <button id="btnSave" type="button" class="btn btn-success display_none  ">
+                @SystemResource.App_save   <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+            <button id="btnBack" type="button" class="btn btn-warning  display_none ">
+                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_back
+            </button>
+            <button id="btnEdit" type="button" class="btn btn-primary    float_left_right">
+                <span class="glyphicon glyphicon-save"></span> @SystemResource.App_Update
+            </button>
+
+
+        </div>
+    </div>
+    <div class="col-lg-12   display_none" id="data_lebel2" style="height: 750px;overflow: scroll;overflow-x: unset;">
+
+
+        <div id=" " class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">
+            <br />
+            <div class="col-lg-1 text-center" style="width: 3%;"><span class="">   </span></div>
+            <div class="col-lg-3 text-center" style="margin-left: -5%;"><span class="">MODULE_CODE </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">SYSTEM </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">SUB SYSTEM </span></div>
+            <div class="col-lg-1 text-center" style=""><span class=""> MENU NO </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">MODULE_TYPE</span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">AVAILABLE </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">VIEW </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">PRINT </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">CREATE </span></div>
+            <div class="col-lg-1 text-center" style=""><span class="">EDIT </span></div>
+
+
+            <div id=" " class="col-lg-12" style="position: absolute;right: 94%;">
+            <div class="col-lg-1 text-center" style=""><span class="">DELETE </span></div>
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM1 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM1 DESC </span></div>
+
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM2 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM2 DESC </span></div>
+
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM3 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM3 DESC </span></div>
+
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM4 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM4 DESC </span></div>
+
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM5 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM5 DESC </span></div>
+
+
+            </div>
+
+            <div id=" " class="col-lg-12" style="position: absolute;right: 185%;">
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM6 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM6 DESC </span></div>
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM7 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM7 DESC </span></div>
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM7 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM7 DESC </span></div>
+                <div class="col-lg-1 text-center" style=""><span class="">CUSTOM7 </span></div>
+                <div class="col-lg-1 text-center stylepadding" style=""><span class="">CUSTOM7 DESC </span></div>
+
+            </div>
+        </div>
+
+        <div id="DataDetails" class="col-lg-12">
+
+
+        </div>
+        <span id="btnAddDetails" class="glyphicon glyphicon-plus-sign  display_none" style="font-size: 33px;"></span>
+
+
+    </div>
+</div>
+
+<div class="col-lg-12 margingred  borderred  display_none" id="data_lebel3">
+
+    <div id=" " class="col-lg-12 font_header" style="bottom: 5px;font-weight:bold">
+        <br />
+        <div class="col-lg-1 text-center" style="width: 3%;"><span class="">   </span></div>
+        <div class="col-lg-2 text-center" style=""><span class="">MODULE_CODE </span></div>
+        <div class="col-lg-2 text-center" style=""><span class="">ControlCode </span></div>
+        <div class="col-lg-2 text-center" style=""><span class="">SearchFormCode </span></div> 
+    </div>
+
+    <div id="DataDetails3" class="col-lg-12" style="height: 200px;overflow: scroll;overflow-x: unset;">
+
+
+    </div>
+    <span id="btnAddDetails3" class="glyphicon glyphicon-plus-sign  display_none" style="font-size: 33px;"></span>
+
+
+</div>
+<script src="~/ClientApp/Admin/G_Module.js"></script>
