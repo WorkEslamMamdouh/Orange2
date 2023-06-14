@@ -138,12 +138,7 @@ namespace AdminRoleBranch {
         txtComp.disabled = false;
         txtBranch.disabled = false;
         $("#btnAddDetails").addClass("display_none");
-        for (var i = 0; i < CountGrid; i++) {
-
-            $("#txtRole" + i).attr("disabled","disabled");
-            $("#btn_minus" + i).addClass("display_none");
-
-        }
+        Display();
     }
 
     function txtComp_onchange() {
