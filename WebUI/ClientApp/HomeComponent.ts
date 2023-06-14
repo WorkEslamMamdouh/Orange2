@@ -696,6 +696,7 @@ namespace HomeComponent {
         $("#btnfinancialreports").click(() => { newtap = false; OpenPage(Modules.financialreports); })//
         $("#btnUSERS").click(() => { newtap = false; OpenPage(Modules.USERS); })//
 		$("#btnUserActLog").click(() => { newtap = false; OpenPage(Modules.UserActLog); })//
+		$("#btnUserActLogSum").click(() => { newtap = false; OpenPage(Modules.UserActLogSum); })//
         $("#btnTranPosting").click(() => { newtap = false; OpenPage(Modules.TranPosting); })//
         $("#btnLnkvarBranch").click(() => { newtap = false; OpenPage(Modules.LnkvarBranch); })//
         $("#btnLnkTransVoucher").click(() => { newtap = false; OpenPage(Modules.LnkTransVoucher); })// 
@@ -801,6 +802,7 @@ namespace HomeComponent {
         $("#btnfinancialreportsT").click(() => { newtap = true; OpenPage(Modules.financialreports); })//
         $("#btnUSERST").click(() => { newtap = true; OpenPage(Modules.USERS); })//
 		$("#btnUserActLogT").click(() => { newtap = true; OpenPage(Modules.UserActLog); })//
+		$("#btnUserActLogSumT").click(() => { newtap = true; OpenPage(Modules.UserActLogSum); })//
         $("#btnTranPostingT").click(() => { newtap = true; OpenPage(Modules.TranPosting); })//
         $("#btnLnkvarBranchT").click(() => { newtap = true; OpenPage(Modules.LnkvarBranch); })//
         $("#btnLnkTransVoucherT").click(() => { newtap = true; OpenPage(Modules.LnkTransVoucher); })// 
