@@ -48,6 +48,12 @@ namespace Inv.BLL.Services.G_Branch
             return Control;
         }
 
+        public void Delete(int id)
+        {
+            unitOfWork.Repository<G_BRANCH>().Delete(id);
+            unitOfWork.Save();
+        }
+
         public G_Role InsertG_Role(G_Role KControl)
         {
             var Control = unitOfWork.Repository<G_Role>().Insert(KControl);
@@ -89,10 +95,26 @@ namespace Inv.BLL.Services.G_Branch
         }
 
 
-        public void Delete(int id)
+
+        public G_MODULES InsertG_MODULES(G_MODULES KControl)
         {
-            unitOfWork.Repository<G_BRANCH>().Delete(id);
+            var Control = unitOfWork.Repository<G_MODULES>().Insert(KControl);
+            unitOfWork.Save();
+            return Control;
+        }
+
+        public G_MODULES UpdateG_MODULES(G_MODULES KControl)
+        {
+            var Control = unitOfWork.Repository<G_MODULES>().Update(KControl);
+            unitOfWork.Save();
+            return Control;
+        }
+
+        public void DeleteG_MODULES(int id)
+        {
+            unitOfWork.Repository<G_MODULES>().Delete(id);
             unitOfWork.Save();
         }
+
     }
 }

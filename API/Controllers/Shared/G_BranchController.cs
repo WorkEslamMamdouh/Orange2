@@ -241,6 +241,57 @@ namespace Inv.API.Controllers
             List<G_RoleModule> ItemList = db.Database.SqlQuery<G_RoleModule>(SQL).ToList();
             return Ok(new BaseResponse(ItemList.Count));
         }
+        [HttpGet, AllowAnonymous]
+        public IHttpActionResult chackModule(string MODULE_CODE)
+        {
+            string SQL = "select * from [dbo].[G_MODULES]   where  MODULE_CODE='" + MODULE_CODE + "' ";
+
+            List<G_MODULES> ItemList = db.Database.SqlQuery<G_MODULES>(SQL).ToList();
+            return Ok(new BaseResponse(ItemList.Count));
+        }
+
+        [HttpPost, AllowAnonymous]
+        public IHttpActionResult updateG_ModuleMasteh(List<G_MODULES>  obj)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var insert = obj.Where(x => x.StatusFlag == 'i').ToList();
+                        var update = obj.Where(x => x.StatusFlag == 'u').ToList();
+                        var delete = obj.Where(x => x.StatusFlag == 'd').ToList();
+                        for (int i = 0; i < insert.Count; i++)
+                        {
+                            
+                            G_BranchService.InsertG_MODULES(insert[i]);
+                        }
+                        for (int i = 0; i < update.Count; i++)
+                        {
+                             G_BranchService.UpdateG_MODULES(update[i]);
+                        }
+
+                        for (int i = 0; i < delete.Count; i++)
+                        {
+                            db.Database.ExecuteSqlCommand("delete[dbo].[G_MODULES] where  MODULE_CODE ='" + delete[i].MODULE_CODE + "'");
+
+                        }
+
+                        dbTransaction.Commit();
+                        return Ok(new BaseResponse(1));
+                    }
+                    catch (Exception ex)
+                    {
+                        dbTransaction.Rollback();
+                        return Ok(new BaseResponse(HttpStatusCode.ExpectationFailed, ex.Message));
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+
+        }
+
     }
 }
 

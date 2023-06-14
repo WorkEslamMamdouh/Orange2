@@ -343,6 +343,9 @@ namespace Inv.DAL.Domain
     public partial class G_RoleModule : SecurityandUpdateFlagClass
     {
     }
+    public partial class G_MODULES : SecurityandUpdateFlagClass
+    {
+    }
      
     
 }

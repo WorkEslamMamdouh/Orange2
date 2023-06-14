@@ -503,6 +503,7 @@ var G_MODULES = /** @class */ (function (_super) {
         _this.Images_Enabled = false;
         _this.SYSTEM_CODE_Desc = "";
         _this.SUB_SYSTEM_CODE_Desc = "";
+        _this.StatusFlag = "";
         return _this;
     }
     return G_MODULES;

@@ -846,6 +846,7 @@ class G_MODULES extends SecurityClass {
         this.Images_Enabled = false;
         this.SYSTEM_CODE_Desc = "";
         this.SUB_SYSTEM_CODE_Desc = "";
+        this.StatusFlag = "";
     }
     public SYSTEM_CODE: string;
     public SUB_SYSTEM_CODE: string;
@@ -882,6 +883,8 @@ class G_MODULES extends SecurityClass {
     public Images_Enabled: boolean;
     public SYSTEM_CODE_Desc: string;
     public SUB_SYSTEM_CODE_Desc: string;
+    public StatusFlag: string;
+
 }
 
 class G_Nationality extends SecurityClass {

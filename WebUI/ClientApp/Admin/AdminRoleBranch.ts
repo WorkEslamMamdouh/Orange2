@@ -24,7 +24,6 @@ namespace AdminRoleBranch {
         InitalizeControls();
         InitializeEvents();
         GetData_Header_loader();
-        GRole = GetDataTable('G_Role') as Array<G_Role>;
         GetComp();
     }
 
@@ -420,16 +419,12 @@ namespace AdminRoleBranch {
     function GetData_Header_loader() {
         var Table: Array<Table>;
         Table =
-            [
-                //{ NameTable: 'G_COMPANY', Condition: "" },
-                //{ NameTable: 'G_BRANCH', Condition: "COMP_CODE = '" + txtComp.value + "'" },
-                { NameTable: 'G_Role', Condition: "RoleType=3" },
+            [ 
+                 { NameTable: 'G_Role', Condition: "RoleType=3" },
 
             ]
         DataResult(Table);
-        //FillDropwithAttr(GetDataTable('G_COMPANY'), "txtComp", "COMP_CODE", "NameA", (lang == "ar" ? "الجميع" : "All"), "", "");
-        //FillDropwithAttr(GetDataTable('G_BRANCH'), "txtBranch", "Branch_Code", (lang == "ar" ? "BRA_DESCE" : "BRA_DESCE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-        FillDropwithAttr(GetDataTable('G_Role'), "txtBranch", "RoleId", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
+        GRole = GetDataTable('G_Role') as Array<G_Role>;
 
     }
 

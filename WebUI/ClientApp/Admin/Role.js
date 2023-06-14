@@ -28,7 +28,6 @@ var Role;
     var IsNew = true;
     var txtRoleId;
     var txtComp;
-    var txtBranch;
     var btnAddDetails;
     var btnAddDetails3;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -236,20 +235,6 @@ var Role;
             return false;
         }
         return true;
-    }
-    function succes() {
-        Disabled();
-        $("#btnEdit").removeClass("display_none");
-        $("#btnBack").addClass("display_none");
-        $("#btnSave").addClass("display_none");
-        if (IsNew == false) {
-        }
-        else {
-            $("#btnEdit").removeClass("display_none");
-            $("#btnSave").addClass("display_none");
-            $("#btnBack").addClass("display_none");
-            Disabled();
-        }
     }
     function Display() {
         debugger;
@@ -803,7 +788,6 @@ var Role;
             ];
         DataResult(Table);
         GModule = GetDataTable('G_MODULES');
-        // FillDropwithAttr(GetDataTable('G_Role'), "txtBranch", "RoleId", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
     }
     function Validate_Role(rowno) {
         debugger;
