@@ -114,6 +114,7 @@ var Role;
             $("#txtIsShowable").val("1");
         }
         Display();
+        Display3(txtRoleId.value);
     }
     function btnAdd_onclick() {
         IsNew = true;
@@ -551,10 +552,6 @@ var Role;
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
-        //$("#No_Row" + cnt).on('dblclick', function () {
-        //    debugger
-        //    Display3($("#MODULE_CODE" + cnt).val());
-        //});
         $("#SYSTEM_CODE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
@@ -863,10 +860,10 @@ var Role;
             $("#CUSTOM7_DESC" + i).removeAttr("disabled");
         }
     }
-    function Display3(UserCode) {
+    function Display3(RoleId) {
         GRoleUsers = GetDataTable('G_RoleUsers');
         debugger;
-        RoleUsers = GRoleUsers.filter(function (x) { return x.UserCode == UserCode; });
+        RoleUsers = GRoleUsers.filter(function (x) { return x.RoleId == Number(RoleId); });
         $("#DataDetails3").html('');
         CountGrid3 = 0;
         for (var i = 0; i < RoleUsers.length; i++) {

@@ -128,6 +128,9 @@ namespace Role {
         }
         Display();
 
+        Display3(txtRoleId.value);
+
+
     }
 
     function btnAdd_onclick() {
@@ -627,10 +630,7 @@ namespace Role {
                 $("#txt_StatusFlag" + cnt).val("u");
         });
 
-        //$("#No_Row" + cnt).on('dblclick', function () {
-        //    debugger
-        //    Display3($("#MODULE_CODE" + cnt).val());
-        //});
+        
 
         $("#SYSTEM_CODE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
@@ -1001,12 +1001,11 @@ namespace Role {
 
     }
 
-    function Display3(UserCode: string) {
-
-
+    function Display3(RoleId: string) {
+         
         GRoleUsers = GetDataTable('G_RoleUsers') as Array<G_RoleUsers>;
         debugger
-        RoleUsers = GRoleUsers.filter(x => x.UserCode == UserCode);
+        RoleUsers = GRoleUsers.filter(x => x.RoleId == Number(RoleId));
         $("#DataDetails3").html('');
         CountGrid3 = 0;
         for (var i = 0; i < RoleUsers.length; i++) {
@@ -1053,9 +1052,7 @@ namespace Role {
 
             '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm4user lebelminus display_none"></span>' +
             '<div class="col-lg-2" style="width: 22%;"> <select disabled id="ModuleCodeSearchForm' + cnt + '" class="form-control"><option value="null">  MODULE_CODE اختر   </option> </select>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="ControlCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="SearchFormCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
-
+             
             '<div class="col-lg-1" style=""><input id="txt_StatusFlag3' + cnt + '" name = " " type = "hidden" class="form-control"/> </div></div>';
 
         $("#DataDetails3").append(html);
