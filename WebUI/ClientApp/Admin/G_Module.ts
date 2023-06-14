@@ -824,25 +824,33 @@ namespace G_Module {
             $("#MODULE_CODE" + i).attr("disabled", "disabled");
             $("#SYSTEM_CODE" + i).attr("disabled", "disabled");
             $("#SUB_SYSTEM_CODE" + i).attr("disabled", "disabled");
+            $("#MENU_NO" + i).attr("disabled");
+            $("#AVAILABLE" + i).attr("disabled");
+            $("#MODULE_TYPE" + i).attr("disabled");
             $("#VIEW" + i).attr("disabled", "disabled");
-            $("#EXECUTE" + i).attr("disabled", "disabled");
             $("#CREATE" + i).attr("disabled", "disabled");
             $("#EDIT" + i).attr("disabled", "disabled");
             $("#DELETE" + i).attr("disabled", "disabled");
+
             $("#CUSTOM1" + i).attr("disabled", "disabled");
             $("#CUSTOM2" + i).attr("disabled", "disabled");
+            $("#CUSTOM3" + i).attr("disabled");
+            $("#CUSTOM4" + i).attr("disabled");
+            $("#CUSTOM5" + i).attr("disabled");
+            $("#CUSTOM6" + i).attr("disabled");
+            $("#CUSTOM7" + i).attr("disabled");
+            $("#CUSTOM8" + i).attr("disabled");
+            $("#CUSTOM9" + i).attr("disabled");
 
-            $("#CUSTOM3" + i).removeAttr("disabled");
-            $("#CUSTOM4" + i).removeAttr("disabled");
-            $("#CUSTOM5" + i).removeAttr("disabled");
-            $("#CUSTOM6" + i).removeAttr("disabled");
-            $("#CUSTOM7" + i).removeAttr("disabled");
-
-            $("#CUSTOM3_DESC" + i).removeAttr("disabled");
-            $("#CUSTOM4_DESC" + i).removeAttr("disabled");
-            $("#CUSTOM5_DESC" + i).removeAttr("disabled");
-            $("#CUSTOM6_DESC" + i).removeAttr("disabled");
-            $("#CUSTOM7_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM1_DESC" + i).attr("disabled");
+            $("#CUSTOM2_DESC" + i).attr("disabled");
+            $("#CUSTOM3_DESC" + i).attr("disabled");
+            $("#CUSTOM4_DESC" + i).attr("disabled");
+            $("#CUSTOM5_DESC" + i).attr("disabled");
+            $("#CUSTOM6_DESC" + i).attr("disabled");
+            $("#CUSTOM7_DESC" + i).attr("disabled");
+            $("#CUSTOM8_DESC" + i).attr("disabled");
+            $("#CUSTOM9_DESC" + i).attr("disabled");
         }
 
     }
