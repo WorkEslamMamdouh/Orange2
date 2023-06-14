@@ -10,9 +10,12 @@ namespace Role {
     var Detail_Model = new Array<G_RoleModule>();
     var GetRoleBranch = new Array<G_RoleModule>();
     var GRole = new Array<G_Role>();
-    var GSearchFormModule = new Array<G_SearchFormModule>();
-    var GSearchForm = new Array<G_SearchFormModule>();
+    var GModule = new Array<G_MODULES>();
+    var GRoleUsers = new Array<G_RoleUsers>();
+    var RoleUsers = new Array<G_RoleUsers>();
     var GRoleModule = new Array<G_RoleModule>();
+    var GQGetRoleModule = new Array<GQ_GetRoleModule>();
+    var GetRoleModule = new Array<GQ_GetRoleModule>();
     var RoleModule = new Array<G_RoleModule>();
     var SelecteData = new Array<G_Role>();
     var GBRANCH = new Array<G_BRANCH>();
@@ -22,8 +25,8 @@ namespace Role {
     var btnBack: HTMLButtonElement;
     var btnEdit: HTMLButtonElement;
     var IsNew = true;
-    var txtComp: HTMLInputElement;
-    var txtBranch: HTMLInputElement;
+    var txtRoleId: HTMLInputElement;
+    var txtComp: HTMLInputElement; 
     var btnAddDetails: HTMLButtonElement;
     var btnAddDetails3: HTMLButtonElement;
     var lang = (SysSession.CurrentEnvironment.ScreenLanguage);
@@ -31,14 +34,14 @@ namespace Role {
     var CountGrid3 = 0;
     var Newcount = 0;
     var Newcount3 = 0;
-    var RoleId_ ;
+    var RoleId_;
 
     export function InitalizeComponent() {
         InitalizeControls();
         InitializeEvents();
         GetData_Header_loader();
         GRole = GetDataTable('G_Role') as Array<G_Role>;
-         BindGrid();
+        BindGrid();
         InitializeGrid();
         // GetComp();
     }
@@ -47,8 +50,9 @@ namespace Role {
         btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
         btnSave = document.getElementById("btnSave") as HTMLButtonElement;
         btnBack = document.getElementById("btnBack") as HTMLButtonElement;
-        btnEdit = document.getElementById("btnEdit") as HTMLButtonElement; 
+        btnEdit = document.getElementById("btnEdit") as HTMLButtonElement;
         btnAddDetails = document.getElementById("btnAddDetails") as HTMLInputElement;
+        txtRoleId = document.getElementById("txtRoleId") as HTMLInputElement;
     }
 
     function InitializeEvents() {
@@ -59,7 +63,7 @@ namespace Role {
         btnBack.onclick = btnBack_onclick;
         btnEdit.onclick = btnEdit_onclick;
     }
-     
+
     function BindGrid() {
         debugger
         Grid.DataSource = GRole;
@@ -123,7 +127,10 @@ namespace Role {
             $("#txtIsShowable").val("1");
         }
         Display();
-        
+
+        Display3(txtRoleId.value);
+
+
     }
 
     function btnAdd_onclick() {
@@ -137,21 +144,21 @@ namespace Role {
         $('#data_lebel').removeClass("display_none");
         $('#data_lebel2').removeClass("display_none");
         $('#div_BasicData').removeClass("display_none");
-        $("#div_BasicData :input").val(""); 
+        $("#div_BasicData :input").val("");
         $("#div_BasicData :input").removeAttr("disabled");
-
         $("#DataDetails :input").removeAttr("disabled");
-        
+        AddNewRow()
+        Enabel()
     }
-         
+
     function EnableControls() {
-         
+
         $("#Div_control").removeClass("display_none");
         $('#btnSave').removeClass("display_none");
         $('#btnBack').removeClass("display_none");
         $('#btnEdit').addClass("display_none");
-        $('#txt_Category').prop("selectedIndex", 0); 
-          
+        $('#txt_Category').prop("selectedIndex", 0);
+
     }
 
     function btnEdit_onclick() {
@@ -160,16 +167,32 @@ namespace Role {
         $("#btnSave").removeClass("display_none");
         $("#btnEdit").addClass("display_none");
         $("#btnEdit").addClass("display_none");
-        $("#btnAddDetails").removeClass("display_none"); 
+        $("#btnAddDetails").removeClass("display_none");
         $("#GridDetails").attr("disabled", "disabled").off('click');
-        $("#GridDetails").addClass("disabledDiv"); 
-        $("#div_BasicData :input").removeAttr("disabled"); 
+        $("#GridDetails").addClass("disabledDiv");
+        $("#div_BasicData :input").removeAttr("disabled");
+        $("#txtRoleId").attr("disabled", "disabled");
+
         Enabel()
-         
+        for (var i = 0; i < CountGrid; i++) {
+
+            CUSTOMChange("DELETE", i);
+            CUSTOMChange("EXECUTE", i);
+            CUSTOMChange("VIEW", i);
+            CUSTOMChange("CREATE", i);
+            CUSTOMChange("EDIT", i);
+            CUSTOMChange("CUSTOM1", i);
+            CUSTOMChange("CUSTOM2", i);
+            CUSTOMChange("CUSTOM3", i);
+            CUSTOMChange("CUSTOM4", i);
+            CUSTOMChange("CUSTOM5", i);
+            CUSTOMChange("CUSTOM6", i);
+            CUSTOMChange("CUSTOM7", i);
+        }
     }
 
     function btnSave_onclick() {
-        
+
         setTimeout(function () {
 
             finishSave('btnSave');
@@ -201,7 +224,7 @@ namespace Role {
                 }
             }
         }, 100);
-         
+
     }
 
     function btnBack_onclick() {
@@ -235,11 +258,11 @@ namespace Role {
             Disabled();
         }
 
-        
+
     }
 
     function validation() {
-         
+
         if ($("#txtDescA").val() == "" || $("#txtDescA").val() == "") {
             DisplayMassage(" يجب ادخال اسم عربي  ", "Please, Enter The CompCode!", MessageType.Worning);
             Errorinput($("#txtDescA"));
@@ -255,42 +278,27 @@ namespace Role {
             Errorinput($("#txtRemarks"));
             return false;
         }
-        
+
         return true;
-    }
-
-    function succes() { 
-        Disabled(); 
-        $("#btnEdit").removeClass("display_none");
-        $("#btnBack").addClass("display_none");
-        $("#btnSave").addClass("display_none");
-        if (IsNew == false) { 
-        }
-        else {
-
-            $("#btnEdit").removeClass("display_none");
-            $("#btnSave").addClass("display_none");
-            $("#btnBack").addClass("display_none");
-            Disabled();
-        }
-
     }
      
     function Display() {
+        debugger
 
-        GRoleModule = GetDataTable('G_RoleModule') as Array<G_RoleModule>;
-        RoleModule = GRoleModule.filter(x => x.RoleId == SelecteData[0].RoleId); 
+
+        GQGetRoleModule = GetDataTable('GQ_GetRoleModule') as Array<GQ_GetRoleModule>;
+        debugger
+        GetRoleModule = GQGetRoleModule.filter(x => x.RoleId == SelecteData[0].RoleId).sort(dynamicSort("MENU_NO"));
         $("#DataDetails").html('');
         CountGrid = 0;
-        for (var i = 0; i < RoleModule.length; i++) {
+        for (var i = 0; i < GetRoleModule.length; i++) {
             BuildControls(i);
-            Disbly_BuildControls(i, RoleModule);
+            Disbly_BuildControls(i, GetRoleModule);
             CountGrid += 1;
-        } 
+        }
     }
-   
 
-    function Disbly_BuildControls(cnt: number, GetRoleModule: Array<G_RoleModule>) {
+    function Disbly_BuildControls(cnt: number, GetRoleModule: Array<GQ_GetRoleModule>) {
         debugger
         $("#btnAddDetails").addClass("display_none");
         $("#btn_minus3" + cnt).addClass("display_none");
@@ -299,53 +307,104 @@ namespace Role {
         $("#txtRole" + cnt).val(GetRoleModule[cnt].RoleId);
         $("#SYSTEM_CODE" + cnt).val(GetRoleModule[cnt].SYSTEM_CODE);
         $("#SUB_SYSTEM_CODE" + cnt).val(GetRoleModule[cnt].SUB_SYSTEM_CODE);
+        $("#CUSTOM1_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM1_DESC);
+        $("#CUSTOM2_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM2_DESC);
+        $("#CUSTOM3_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM3_DESC);
+        $("#CUSTOM4_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM4_DESC);
+        $("#CUSTOM5_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM5_DESC);
+        $("#CUSTOM6_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM6_DESC);
+        $("#CUSTOM7_DESC" + cnt).val(GetRoleModule[cnt].CUSTOM7_DESC);
 
-        var EXECUTE = document.getElementById("EXECUTE" + cnt) as HTMLInputElement; 
-        if (GetRoleModule[cnt].EXECUTE == true) { 
+        var EXECUTE = document.getElementById("EXECUTE" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].EXECUTE == true) {
             EXECUTE.checked = true;
         } else {
             EXECUTE.checked = false;
+            EXECUTE.disabled = true;
         }
         var VIEW = document.getElementById("VIEW" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].VIEW == true) {
+        if (GetRoleModule[cnt].md_view == true) {
             VIEW.checked = true;
         } else {
             VIEW.checked = false;
+            VIEW.disabled = true;
         }
         var CREATE = document.getElementById("CREATE" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].CREATE == true) {
+        if (GetRoleModule[cnt].md_Create == true) {
             CREATE.checked = true;
         } else {
             CREATE.checked = false;
+            CREATE.disabled = true;
         }
 
         var EDIT = document.getElementById("EDIT" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].EDIT == true) {
+        if (GetRoleModule[cnt].md_edit == true) {
             EDIT.checked = true;
         } else {
             EDIT.checked = false;
+            EDIT.disabled = true;
         }
 
         var DELETE = document.getElementById("DELETE" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].DELETE == true) {
+        if (GetRoleModule[cnt].md_delete == true) {
             DELETE.checked = true;
         } else {
             DELETE.checked = false;
+            DELETE.disabled = true;
         }
 
         var CUSTOM1 = document.getElementById("CUSTOM1" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].CUSTOM1 == true) {
+        if (GetRoleModule[cnt].md_custom1 == true) {
             CUSTOM1.checked = true;
         } else {
             CUSTOM1.checked = false;
+            CUSTOM1.disabled = true;
         }
         var CUSTOM2 = document.getElementById("CUSTOM2" + cnt) as HTMLInputElement;
-        if (GetRoleModule[cnt].CUSTOM2 == true) {
+        if (GetRoleModule[cnt].md_custom2 == true) {
             CUSTOM2.checked = true;
         } else {
             CUSTOM2.checked = false;
+            CUSTOM2.disabled = true;
         }
-        
+
+        var CUSTOM3 = document.getElementById("CUSTOM3" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].md_custom3 == true) {
+            CUSTOM3.checked = true;
+        } else {
+            CUSTOM2.checked = false;
+            CUSTOM2.disabled = true;
+        }
+
+        var CUSTOM4 = document.getElementById("CUSTOM4" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].md_custom4 == true) {
+            CUSTOM4.checked = true;
+        } else {
+            CUSTOM4.checked = false;
+            CUSTOM4.disabled = true;
+        }
+
+        var CUSTOM5 = document.getElementById("CUSTOM5" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].md_custom5 == true) {
+            CUSTOM5.checked = true;
+        } else {
+            CUSTOM5.checked = false;
+        }
+        var CUSTOM6 = document.getElementById("CUSTOM6" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].md_custom6 == true) {
+            CUSTOM6.checked = true;
+        } else {
+            CUSTOM6.checked = false;
+            CUSTOM6.disabled = true;
+        }
+
+        var CUSTOM7 = document.getElementById("CUSTOM7" + cnt) as HTMLInputElement;
+        if (GetRoleModule[cnt].md_custom7 == true) {
+            CUSTOM7.checked = true;
+        } else {
+            CUSTOM7.checked = false;
+            CUSTOM7.disabled = true;
+        }
     }
 
     function AddNewRow() {
@@ -354,7 +413,7 @@ namespace Role {
         var CanAdd: boolean = true;
         if (CountGrid > 0) {
             for (var i = 0; i < CountGrid; i++) {
-        
+
                 CanAdd = Validation_Grid(i);
                 if (CanAdd == false) {
                     break;
@@ -363,7 +422,7 @@ namespace Role {
         }
         if (CanAdd) {
             BuildControls(CountGrid);
-            $("#txt_StatusFlag" + CountGrid).val("i");   
+            $("#txt_StatusFlag" + CountGrid).val("i");
             $("#btn_minus" + CountGrid).removeClass("display_none");
             $("#btn_minus" + CountGrid).removeAttr("disabled");
             $("#MODULE_CODE" + i).removeAttr("disabled");
@@ -376,17 +435,142 @@ namespace Role {
             $("#DELETE" + i).removeAttr("disabled");
             $("#CUSTOM1" + i).removeAttr("disabled");
             $("#CUSTOM2" + i).removeAttr("disabled");
+
             CountGrid++;
-        } 
+        }
     }
-    
+
+    function Disbly_NewBuildControls(cnt: number, Module: string) {
+        debugger
+
+
+
+        var newGModule = GModule.filter(x => x.MODULE_CODE == Module).sort(dynamicSort("MENU_NO"));;
+
+        $("#btnAddDetails").addClass("display_none");
+        $("#btn_minus3" + cnt).addClass("display_none");
+        $("#txt_StatusFlag" + cnt).val("");
+        $("#MODULE_CODE" + cnt).val(newGModule[0].MODULE_CODE);
+        $("#SYSTEM_CODE" + cnt).val(newGModule[0].SYSTEM_CODE);
+        $("#SUB_SYSTEM_CODE" + cnt).val(newGModule[0].SUB_SYSTEM_CODE);
+
+        $("#CUSTOM1_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM1_DESC : newGModule[0].CUSTOM1_DESC);
+        $("#CUSTOM2_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM2_DESC : newGModule[0].CUSTOM2_DESC);
+        $("#CUSTOM3_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM3_DESC : newGModule[0].CUSTOM3_DESC);
+        $("#CUSTOM4_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM4_DESC : newGModule[0].CUSTOM4_DESC);
+        $("#CUSTOM5_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM5_DESC : newGModule[0].CUSTOM5_DESC);
+        $("#CUSTOM6_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM6_DESC : newGModule[0].CUSTOM6_DESC);
+        $("#CUSTOM7_DESC" + cnt).val(lang == "ar" ? newGModule[0].CUSTOM7_DESC : newGModule[0].CUSTOM7_DESC);
+
+        var EXECUTE = document.getElementById("EXECUTE" + cnt) as HTMLInputElement;
+        EXECUTE.checked = true;
+
+        var VIEW = document.getElementById("VIEW" + cnt) as HTMLInputElement;
+        if (newGModule[0].VIEW == true) {
+            VIEW.checked = true;
+        } else {
+            VIEW.checked = false;
+            VIEW.disabled = true
+        }
+        var CREATE = document.getElementById("CREATE" + cnt) as HTMLInputElement;
+        if (newGModule[0].CREATE == true) {
+            CREATE.checked = true;
+        } else {
+            CREATE.checked = false;
+            VIEW.disabled = true
+
+        }
+
+        var EDIT = document.getElementById("EDIT" + cnt) as HTMLInputElement;
+        if (newGModule[0].EDIT == true) {
+            EDIT.checked = true;
+        } else {
+            EDIT.checked = false;
+            VIEW.disabled = true
+
+        }
+
+        var DELETE = document.getElementById("DELETE" + cnt) as HTMLInputElement;
+        if (newGModule[0].DELETE == true) {
+            DELETE.checked = true;
+        } else {
+            DELETE.checked = false;
+            VIEW.disabled = true
+
+        }
+
+        var CUSTOM1 = document.getElementById("CUSTOM1" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM1 == true) {
+            CUSTOM1.checked = true;
+        } else {
+            CUSTOM1.checked = false;
+            VIEW.disabled = true
+
+        }
+
+        var CUSTOM2 = document.getElementById("CUSTOM2" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM2 == true) {
+            CUSTOM2.checked = true;
+        } else {
+            CUSTOM2.checked = false;
+            VIEW.disabled = true
+
+        }
+
+        var CUSTOM3 = document.getElementById("CUSTOM3" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM3 == true) {
+            CUSTOM3.checked = true;
+        } else {
+            CUSTOM3.checked = false;
+            CUSTOM3.disabled = true
+
+        }
+
+        var CUSTOM4 = document.getElementById("CUSTOM4" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM4 == true) {
+            CUSTOM4.checked = true;
+        } else {
+            CUSTOM4.checked = false;
+            CUSTOM4.disabled = true
+
+        }
+
+        var CUSTOM5 = document.getElementById("CUSTOM5" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM5 == true) {
+            CUSTOM5.checked = true;
+        } else {
+            CUSTOM5.checked = false;
+            CUSTOM5.disabled = true
+
+        }
+
+        var CUSTOM6 = document.getElementById("CUSTOM6" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM2 == true) {
+            CUSTOM6.checked = true;
+        } else {
+            CUSTOM6.checked = false;
+            CUSTOM6.disabled = true
+
+        }
+
+        var CUSTOM7 = document.getElementById("CUSTOM7" + cnt) as HTMLInputElement;
+        if (newGModule[0].CUSTOM7 == true) {
+            CUSTOM7.checked = true;
+        } else {
+            CUSTOM7.checked = false;
+            CUSTOM7.disabled = true
+
+        }
+
+    }
+
     function BuildControls(cnt: number) {
 
         var html;
         html = '<div id="No_Row' + cnt + '" class=" font_header col-lg-12" style="bottom: 5px;font-weight:bold;padding-top: 9px;">' +
- 
+
             '<span id="btn_minus' + cnt + '" class="fa fa-minus-circle fontitm4user lebelminus display_none"></span>' +
-             '<div class="col-lg-2" style="width: 22%;"> <select disabled id="MODULE_CODE' + cnt + '" class="form-control"><option value="null">  MODULE_CODE اختر   </option> </select>  </div>' +
+            '<div class="col-lg-2" style="width: 22%;"> <select disabled id="MODULE_CODE' + cnt + '" class="form-control"><option value="null">  MODULE_CODE اختر   </option> </select>  </div>' +
             '<div class="col-lg-1" style=""> <input id="SYSTEM_CODE' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
             '<div class="col-lg-1" style=""> <input id="SUB_SYSTEM_CODE' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
             '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="VIEW' + cnt + '" disabled name="">  </div>' +
@@ -395,25 +579,43 @@ namespace Role {
             '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="EDIT' + cnt + '" disabled name="">  </div>' +
             '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="DELETE' + cnt + '" disabled name="">  </div>' +
             '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM1' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style="left: 1%;"> <input id="CUSTOM1_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+            '<div id =" " class="col-lg-12" style = "position: absolute;right: 94%;">' +
             '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM2' + cnt + '" disabled name="">  </div>' +
- 
-            '<div class="col-lg-1" style=""><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txtRole' + cnt + '" name = " " type = "hidden" class="form-control" /><input id="BRA_CODE' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM2_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM3' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM3_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM4' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM4_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM5' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM5_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM6' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM6_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '<div class="col-lg-1" style=""> <input type="checkbox" class="checkbox" id="CUSTOM7' + cnt + '" disabled name="">  </div>' +
+            '<div class="col-lg-1 stylecollg1" style=""> <input id="CUSTOM7_DESC' + cnt + '" disabled name=" " type="text" class="form-control" />  </div>' +
+
+            '</div>' +
+            '<div class="col-lg-1" style=""><input id="UserCode' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txt_StatusFlag' + cnt + '" name = " " type = "hidden" class="form-control"/><input id="txtRole' + cnt + '" name = " " type = "hidden" class="form-control" /><input id="BRA_CODE' + cnt + '" name = " " type = "hidden" class="form-control" /></div></div>';
 
         $("#DataDetails").append(html);
-         
-         
+
+        debugger
+
         for (var i = 0; i < GRole.length; i++) {
             $('#txtRole' + cnt).append('<option value="' + GRole[i].RoleId + '">' + (lang == "ar" ? GRole[i].DescA : GRole[i].DescE) + '</option>');
-
         }
-
-        for (var i = 0; i < GRoleModule.length; i++) { 
-            $('#MODULE_CODE' + cnt).append('<option value="' + GRoleModule[i].MODULE_CODE + '">' + (lang == "ar" ? GRoleModule[i].MODULE_CODE : GRoleModule[i].MODULE_CODE) + '</option>');
+        for (var i = 0; i < GModule.length; i++) {
+            $('#MODULE_CODE' + cnt).append('<option value="' + GModule[i].MODULE_CODE + '">' + (lang == "ar" ? GModule[i].MODULE_DESCA : GModule[i].MODULE_DESCE) + '</option>');
         }
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
         });
-         
+
         $("#MODULE_CODE" + cnt).on('change', function () {
             debugger
             if (Validate_Role(cnt) == false) {
@@ -421,41 +623,46 @@ namespace Role {
                 Errorinput($("#MODULE_CODE" + cnt));
                 $("#MODULE_CODE" + cnt).val('null')
                 return false;
-            } 
-            if ($("#txt_StatusFlag" + cnt).val() != "i")
-                $("#txt_StatusFlag" + cnt).val("u"); 
-        });
+            }
+            Disbly_NewBuildControls(cnt, $("#MODULE_CODE" + cnt).val())
 
-        $("#No_Row" + cnt).on('click', function () {
-            debugger
-            Display3($("#MODULE_CODE" + cnt).val());
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
         });
 
         
+
         $("#SYSTEM_CODE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
         $("#SUB_SYSTEM_CODE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
         $("#VIEW" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
         $("#EXECUTE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
         $("#CREATE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
         $("#EDIT" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+
+
         $("#DELETE" + cnt).on('change', function () {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
@@ -468,7 +675,42 @@ namespace Role {
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
+        $("#CUSTOM3" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CUSTOM4" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CUSTOM5" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CUSTOM6" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
+        $("#CUSTOM7" + cnt).on('change', function () {
+            if ($("#txt_StatusFlag" + cnt).val() != "i")
+                $("#txt_StatusFlag" + cnt).val("u");
+        });
         return;
+    }
+
+    function CUSTOMChange(CUSTOM: string, cnt: number) {
+        debugger
+        var CUSTOM1checked = $("#" + CUSTOM + "" + cnt).prop("checked");
+
+        if (CUSTOM1checked == false) {
+            $("#" + CUSTOM + "" + cnt).attr("disabled", "disabled");
+            $("#" + CUSTOM + "" + cnt).prop("checked", false);
+            $("#" + CUSTOM + "_DESC" + cnt).attr("disabled", "disabled");
+
+        } else {
+            $("#" + CUSTOM + "" + cnt).removeAttr("disabled");
+
+        }
     }
 
     function DeleteRow(RecNo: number) {
@@ -483,12 +725,12 @@ namespace Role {
 
     function Validation_Grid(rowcount: number) {
         if ($("#txt_StatusFlag" + rowcount).val() == "d" || $("#txt_StatusFlag" + rowcount).val() == "m") {
-            Newcount++; 
-             
+            Newcount++;
+
         }
         else {
             if ($("#MODULE_CODE" + rowcount).val() == "null") {
-                DisplayMassage("اختر الصلاحية", "Choose validity", MessageType.Error); 
+                DisplayMassage("اختر الصلاحية", "Choose validity", MessageType.Error);
                 Errorinput($("#txtRole" + rowcount));
                 return false;
             }
@@ -501,89 +743,75 @@ namespace Role {
                 DisplayMassage("اختر الصلاحية", "Choose validity", MessageType.Error);
                 Errorinput($("#txtRole" + rowcount));
                 return false;
-            } 
+            }
         }
         return true;
     }
 
-    function btnBack_Def_onclick() {
-
-        $('#btnBack_Def').addClass("display_none");
-        $('#btnSave_Def').addClass("display_none");
-        $('#btnAddDetails').attr('class', 'glyphicon glyphicon-plus-sign  display_none')
-        $(".fa-minus-circle").addClass("display_none");
-        CountGrid = 0;
-        $("#DataDetails").html("");
-    }
-
-    function refresh() {
-
-        $('#DataDetails').html("");
-        CountGrid = 0;
-
-    }
-     
     function Assign() {
         debugger
 
-        masterDetail = new  G_RoleModuleMaste();
+        masterDetail = new G_RoleModuleMaste();
         Detail_Model = new Array<G_RoleModule>();
         ModelGRole = DocumentActions.AssignToModel<G_Role>(ModelGRole);
+
         debugger
-        
+
         ModelGRole.IsAvailable = $("#txtIsAvailable").prop("checked");
         ModelGRole.IsShowable = $("#txtIsShowable").prop("checked");
-         
- 
+
+
         var StatusFlag: String;
         for (var i = 0; i < CountGrid; i++) {
             Model = new G_RoleModule();
             StatusFlag = $("#txt_StatusFlag" + i).val();
-            $("#txt_StatusFlag" + i).val("");
+
             if (StatusFlag == "i") {
+                debugger
+
                 Model.StatusFlag = StatusFlag.toString();
-                 Model.RoleId = Number(Grid.SelectedKey);
+                Model.RoleId = Number(txtRoleId.value);
                 Model.MODULE_CODE = $("#MODULE_CODE" + i).val();
                 Model.SYSTEM_CODE = $("#SYSTEM_CODE" + i).val();
                 Model.SUB_SYSTEM_CODE = $("#SUB_SYSTEM_CODE" + i).val();
 
-                Model.VIEW =$("#VIEW" + i).val();
-                Model.EXECUTE =$("#EXECUTE" + i).val();
-                Model.CREATE =$("#CREATE" + i).val();
-                Model.EDIT =$("#EDIT" + i).val();
-                Model.DELETE =$("#DELETE" + i).val();
-                Model.CUSTOM1 =$("#CUSTOM1" + i).val();
-                Model.CUSTOM2 =$("#CUSTOM2" + i).val();
+                Model.VIEW = $("#VIEW" + i).prop("checked");
+                Model.EXECUTE = $("#EXECUTE" + i).prop("checked");
+                Model.CREATE = $("#CREATE" + i).prop("checked");
+                Model.EDIT = $("#EDIT" + i).prop("checked");
+                Model.DELETE = $("#DELETE" + i).prop("checked");
+                Model.CUSTOM1 = $("#CUSTOM1" + i).prop("checked");
+                Model.CUSTOM2 = $("#CUSTOM2" + i).prop("checked");
 
-                 Detail_Model.push(Model);
+                Detail_Model.push(Model);
             }
             if (StatusFlag == "u") {
-
-                Model.RoleId = Number(Grid.SelectedKey);
+                Model.StatusFlag = StatusFlag.toString();
+                Model.RoleId = Number(txtRoleId.value);
                 Model.MODULE_CODE = $("#MODULE_CODE" + i).val();
                 Model.SYSTEM_CODE = $("#SYSTEM_CODE" + i).val();
                 Model.SUB_SYSTEM_CODE = $("#SUB_SYSTEM_CODE" + i).val();
 
-                Model.VIEW = $("#VIEW" + i).val();
-                Model.EXECUTE = $("#EXECUTE" + i).val();
-                Model.CREATE = $("#CREATE" + i).val();
-                Model.EDIT = $("#EDIT" + i).val();
-                Model.DELETE = $("#DELETE" + i).val();
-                Model.CUSTOM1 = $("#CUSTOM1" + i).val();
-                Model.CUSTOM2 = $("#CUSTOM2" + i).val();
+                Model.VIEW = $("#VIEW" + i).prop("checked");
+                Model.EXECUTE = $("#EXECUTE" + i).prop("checked");
+                Model.CREATE = $("#CREATE" + i).prop("checked");
+                Model.EDIT = $("#EDIT" + i).prop("checked");
+                Model.DELETE = $("#DELETE" + i).prop("checked");
+                Model.CUSTOM1 = $("#CUSTOM1" + i).prop("checked");
+                Model.CUSTOM2 = $("#CUSTOM2" + i).prop("checked");
 
                 Detail_Model.push(Model);
 
             }
             if (StatusFlag == "d") {
                 debugger
-                 
-                 Model.StatusFlag = StatusFlag.toString();
-                 Model.RoleId = Number(Grid.SelectedKey); 
-                 Model.MODULE_CODE = $("#MODULE_CODE" + i).val();
-                 Detail_Model.push(Model);
-                
-                
+
+                Model.StatusFlag = StatusFlag.toString();
+                Model.RoleId = Number(txtRoleId.value);
+                Model.MODULE_CODE = $("#MODULE_CODE" + i).val();
+                Detail_Model.push(Model);
+
+
             }
         }
         masterDetail.G_Role = ModelGRole;
@@ -593,6 +821,7 @@ namespace Role {
 
     function Insert() {
         debugger
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("G_Branch", "InsertRoleModuleMasteh"),
@@ -601,7 +830,7 @@ namespace Role {
                 debugger
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
-                     
+
                     RoleId_ = result.Response as G_Role;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
                     success_Insert(Number(RoleId_));
@@ -615,13 +844,13 @@ namespace Role {
         });
     }
 
-    function success_Insert( id:number) {
-        debugger 
+    function success_Insert(id: number) {
+        debugger
         GetData_Header_loader();
         GRole = GetDataTable('G_Role') as Array<G_Role>;
         $("#GridDetails").removeAttr("disabled").off('click');
-        $("#GridDetails").removeClass("disabledDiv"); 
-        $("#div_BasicData :input").attr("disabled", "disabled"); 
+        $("#GridDetails").removeClass("disabledDiv");
+        $("#div_BasicData :input").attr("disabled", "disabled");
         $("#btnEdit").removeClass("display_none");
         $("#btnSave").addClass("display_none");
         $("#btnBack").addClass("display_none");
@@ -639,7 +868,7 @@ namespace Role {
         } else {
             $("#txtIsShowable").val("1");
         }
-        Display(); 
+        Display();
     }
 
     function Update() {
@@ -650,16 +879,16 @@ namespace Role {
             data: JSON.stringify(masterDetail),
             success: (d) => {
                 debugger
-              
+
                 let result = d as BaseResponse;
-                if (result.IsSuccess == true) { 
+                if (result.IsSuccess == true) {
                     RoleId_ = result.Response as G_Role;
                     DisplayMassage("تم الحفظ بنجاح", "Success", MessageType.Succeed);
-                    success_Insert(Number(RoleId_)); 
+                    success_Insert(Number(RoleId_));
                 }
                 else {
                     MessageBox.Show(result.ErrorMessage, "خطأ");
-                } 
+                }
             }
         });
     }
@@ -669,15 +898,16 @@ namespace Role {
         Table =
             [
 
+                { NameTable: 'G_MODULES', Condition: "" },
                 { NameTable: 'G_Role', Condition: "" },
                 { NameTable: 'G_RoleModule', Condition: "" },
-                { NameTable: 'G_SearchFormModule', Condition: "" },
+                { NameTable: 'GQ_GetRoleModule', Condition: "" },
+                { NameTable: 'G_RoleUsers', Condition: "" }
 
             ]
         DataResult(Table);
-
-        FillDropwithAttr(GetDataTable('G_Role'), "txtBranch", "RoleId", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-
+        GModule = GetDataTable('G_MODULES') as Array<G_MODULES>;
+ 
     }
 
     function Validate_Role(rowno: number) {
@@ -706,31 +936,45 @@ namespace Role {
     function Disabled() {
 
 
-
         for (var i = 0; i < CountGrid; i++) {
-             
+
             $("#btn_minus" + i).addClass("display_none");
-            $("#MODULE_CODE" + i).attr("disabled","disabled");
-            $("#SYSTEM_CODE" + i).attr("disabled","disabled");
-            $("#SUB_SYSTEM_CODE" + i).attr("disabled","disabled");
-            $("#VIEW" + i).attr("disabled","disabled");
-            $("#EXECUTE" + i).attr("disabled","disabled");
+            $("#MODULE_CODE" + i).attr("disabled", "disabled");
+            $("#SYSTEM_CODE" + i).attr("disabled", "disabled");
+            $("#SUB_SYSTEM_CODE" + i).attr("disabled", "disabled");
+            $("#VIEW" + i).attr("disabled", "disabled");
+            $("#EXECUTE" + i).attr("disabled", "disabled");
             $("#CREATE" + i).attr("disabled", "disabled");
             $("#EDIT" + i).attr("disabled", "disabled");
             $("#DELETE" + i).attr("disabled", "disabled");
-            $("#CUSTOM1" + i).attr("disabled","disabled");
+            $("#CUSTOM1" + i).attr("disabled", "disabled");
             $("#CUSTOM2" + i).attr("disabled", "disabled");
 
+            $("#CUSTOM3" + i).removeAttr("disabled");
+            $("#CUSTOM4" + i).removeAttr("disabled");
+            $("#CUSTOM5" + i).removeAttr("disabled");
+            $("#CUSTOM6" + i).removeAttr("disabled");
+            $("#CUSTOM7" + i).removeAttr("disabled");
 
+            $("#CUSTOM3_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM4_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM5_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM6_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM7_DESC" + i).removeAttr("disabled");
         }
 
     }
 
     function Enabel() {
-
+        debugger
         for (var i = 0; i < CountGrid; i++) {
-            $("#btn_minus" + i).removeClass("display_none");  
-            $("#MODULE_CODE" + i).removeAttr("disabled");
+            if (IsNew == true) {
+                $("#MODULE_CODE" + i).removeAttr("disabled");
+
+            }
+
+            $("#btn_minus" + i).removeClass("display_none");
+            //$("#MODULE_CODE" + i).removeAttr("disabled");
             $("#SYSTEM_CODE" + i).removeAttr("disabled");
             $("#SUB_SYSTEM_CODE" + i).removeAttr("disabled");
             $("#VIEW" + i).removeAttr("disabled");
@@ -739,27 +983,38 @@ namespace Role {
             $("#EDIT" + i).removeAttr("disabled");
             $("#DELETE" + i).removeAttr("disabled");
             $("#CUSTOM1" + i).removeAttr("disabled");
-            $("#CUSTOM2" + i).removeAttr("disabled"); 
+            $("#CUSTOM2" + i).removeAttr("disabled");
+
+            $("#CUSTOM3" + i).removeAttr("disabled");
+            $("#CUSTOM4" + i).removeAttr("disabled");
+            $("#CUSTOM5" + i).removeAttr("disabled");
+            $("#CUSTOM6" + i).removeAttr("disabled");
+            $("#CUSTOM7" + i).removeAttr("disabled");
+
+            $("#CUSTOM3_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM4_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM5_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM6_DESC" + i).removeAttr("disabled");
+            $("#CUSTOM7_DESC" + i).removeAttr("disabled");
+
         }
 
     }
 
-
-    function Display3(MODULE: string) {
-
-        
-        GSearchFormModule = GetDataTable('G_SearchFormModule') as Array<G_SearchFormModule>;
+    function Display3(RoleId: string) {
+         
+        GRoleUsers = GetDataTable('G_RoleUsers') as Array<G_RoleUsers>;
         debugger
-        GSearchForm = GSearchFormModule.filter(x => x.ModuleCode == MODULE);
+        RoleUsers = GRoleUsers.filter(x => x.RoleId == Number(RoleId));
         $("#DataDetails3").html('');
         CountGrid3 = 0;
-        for (var i = 0; i < GSearchForm.length; i++) {
+        for (var i = 0; i < RoleUsers.length; i++) {
             BuildControls3(i);
-            Disbly_BuildControls3(i, GSearchForm);
+            Disbly_BuildControls3(i, RoleUsers);
             CountGrid3 += 1;
         }
 
-       $("#data_lebel3").removeClass("display_none");
+        $("#data_lebel3").removeClass("display_none");
 
     }
 
@@ -797,27 +1052,25 @@ namespace Role {
 
             '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm4user lebelminus display_none"></span>' +
             '<div class="col-lg-2" style="width: 22%;"> <select disabled id="ModuleCodeSearchForm' + cnt + '" class="form-control"><option value="null">  MODULE_CODE اختر   </option> </select>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="ControlCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="SearchFormCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
-                             
+             
             '<div class="col-lg-1" style=""><input id="txt_StatusFlag3' + cnt + '" name = " " type = "hidden" class="form-control"/> </div></div>';
 
         $("#DataDetails3").append(html);
-         
-        for (var i = 0; i < GSearchForm.length; i++) {
-            $('#ModuleCodeSearchForm' + cnt).append('<option value="' + GSearchForm[i].ModuleCode + '">' + (lang == "ar" ? GSearchForm[i].ModuleCode : GSearchForm[i].ModuleCode) + '</option>');
+
+        for (var i = 0; i < RoleUsers.length; i++) {
+            $('#ModuleCodeSearchForm' + cnt).append('<option value="' + RoleUsers[i].USER_CODE + '">' + (lang == "ar" ? RoleUsers[i].USER_CODE : RoleUsers[i].USER_CODE) + '</option>');
         }
 
         $("#btn_minus3" + cnt).on('click', function () {
             DeleteRow3(cnt);
         });
 
-        $("#ControlCode" + cnt).on('change', function () { 
-            
+        $("#ControlCode" + cnt).on('change', function () {
+
             if ($("#txt_StatusFlag" + cnt).val() != "i")
                 $("#txt_StatusFlag" + cnt).val("u");
         });
-        $("#SearchFormCode" + cnt).on('change', function () { 
+        $("#SearchFormCode" + cnt).on('change', function () {
             if ($("#txt_StatusFlag3" + cnt).val() != "i")
                 $("#txt_StatusFlag3" + cnt).val("u");
         });
@@ -835,8 +1088,8 @@ namespace Role {
         });
 
 
-      
-        
+
+
         return;
     }
 
@@ -875,15 +1128,15 @@ namespace Role {
         return true;
     }
 
-    function Disbly_BuildControls3(cnt: number, GetG_SearchForm: Array<G_SearchFormModule>) {
+    function Disbly_BuildControls3(cnt: number, RoleUsers: Array<G_RoleUsers>) {
         debugger
         $("#btnAddDetails3").addClass("display_none");
         $("#btn_minus3" + cnt).addClass("display_none");
         $("#txt_StatusFlag3" + cnt).val("");
-        $("#ModuleCodeSearchForm" + cnt).val(GetG_SearchForm[cnt].ModuleCode);
-        $("#ControlCode" + cnt).val(GetG_SearchForm[cnt].ControlCode);
-        $("#SearchFormCode" + cnt).val(GetG_SearchForm[cnt].SearchFormCode);
-          
+        $("#ModuleCodeSearchForm" + cnt).val(RoleUsers[cnt].USER_CODE);
+        $("#ControlCode" + cnt).val(RoleUsers[cnt].Comp_Code);
+        $("#SearchFormCode" + cnt).val(RoleUsers[cnt].Branch_Code);
+
     }
 
-} 
+}

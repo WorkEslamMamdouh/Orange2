@@ -24,7 +24,6 @@ var AdminRoleBranch;
         InitalizeControls();
         InitializeEvents();
         GetData_Header_loader();
-        GRole = GetDataTable('G_Role');
         GetComp();
     }
     AdminRoleBranch.InitalizeComponent = InitalizeComponent;
@@ -56,7 +55,7 @@ var AdminRoleBranch;
         txtComp.disabled = true;
         txtBranch.disabled = true;
         for (var i = 0; i < CountGrid; i++) {
-            $("#txtRole" + i).removeAttr("disabled");
+            // $("#txtRole" + i).removeAttr("disabled");
             $("#btn_minus" + i).removeClass("display_none");
         }
     }
@@ -118,10 +117,7 @@ var AdminRoleBranch;
         txtComp.disabled = false;
         txtBranch.disabled = false;
         $("#btnAddDetails").addClass("display_none");
-        for (var i = 0; i < CountGrid; i++) {
-            $("#txtRole" + i).attr("disabled", "disabled");
-            $("#btn_minus" + i).addClass("display_none");
-        }
+        Display();
     }
     function txtComp_onchange() {
         $("#Div_DOC").removeClass("display_none");
@@ -291,7 +287,6 @@ var AdminRoleBranch;
                 debugger;
                 var result = d;
                 if (result.IsSuccess == true) {
-                    DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                         DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
                     }
@@ -348,14 +343,10 @@ var AdminRoleBranch;
         var Table;
         Table =
             [
-                //{ NameTable: 'G_COMPANY', Condition: "" },
-                //{ NameTable: 'G_BRANCH', Condition: "COMP_CODE = '" + txtComp.value + "'" },
                 { NameTable: 'G_Role', Condition: "RoleType=3" },
             ];
         DataResult(Table);
-        //FillDropwithAttr(GetDataTable('G_COMPANY'), "txtComp", "COMP_CODE", "NameA", (lang == "ar" ? "الجميع" : "All"), "", "");
-        //FillDropwithAttr(GetDataTable('G_BRANCH'), "txtBranch", "Branch_Code", (lang == "ar" ? "BRA_DESCE" : "BRA_DESCE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-        FillDropwithAttr(GetDataTable('G_Role'), "txtBranch", "RoleId", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
+        GRole = GetDataTable('G_Role');
     }
     function Validate_Role(rowno) {
         var res = true;

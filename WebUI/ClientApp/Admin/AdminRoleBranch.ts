@@ -24,7 +24,6 @@ namespace AdminRoleBranch {
         InitalizeControls();
         InitializeEvents();
         GetData_Header_loader();
-        GRole = GetDataTable('G_Role') as Array<G_Role>;
         GetComp();
     }
 
@@ -61,7 +60,7 @@ namespace AdminRoleBranch {
 
         for (var i = 0; i < CountGrid; i++) {
 
-            $("#txtRole" + i).removeAttr("disabled");
+           // $("#txtRole" + i).removeAttr("disabled");
             $("#btn_minus" + i).removeClass("display_none");
 
         }
@@ -139,12 +138,7 @@ namespace AdminRoleBranch {
         txtComp.disabled = false;
         txtBranch.disabled = false;
         $("#btnAddDetails").addClass("display_none");
-        for (var i = 0; i < CountGrid; i++) {
-
-            $("#txtRole" + i).attr("disabled","disabled");
-            $("#btn_minus" + i).addClass("display_none");
-
-        }
+        Display();
     }
 
     function txtComp_onchange() {
@@ -359,14 +353,13 @@ namespace AdminRoleBranch {
                 let result = d as BaseResponse;
                 if (result.IsSuccess == true) {
 
-                    DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
-                    if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
+                     if (SysSession.CurrentEnvironment.ScreenLanguage == "ar") {
                         DisplayMassage('( تم تعديل بنجاح )', '(success)', MessageType.Succeed);
-                    }
-                    else {
+                      }
+                     else {
                         DisplayMassage('( Done )', '(success)', MessageType.Succeed);
-                    }
-                    btnBack_Def_onclick();
+                     }
+                     btnBack_Def_onclick();
                     refresh();
                     Display();
 
@@ -421,16 +414,12 @@ namespace AdminRoleBranch {
     function GetData_Header_loader() {
         var Table: Array<Table>;
         Table =
-            [
-                //{ NameTable: 'G_COMPANY', Condition: "" },
-                //{ NameTable: 'G_BRANCH', Condition: "COMP_CODE = '" + txtComp.value + "'" },
-                { NameTable: 'G_Role', Condition: "RoleType=3" },
+            [ 
+                 { NameTable: 'G_Role', Condition: "RoleType=3" },
 
             ]
         DataResult(Table);
-        //FillDropwithAttr(GetDataTable('G_COMPANY'), "txtComp", "COMP_CODE", "NameA", (lang == "ar" ? "الجميع" : "All"), "", "");
-        //FillDropwithAttr(GetDataTable('G_BRANCH'), "txtBranch", "Branch_Code", (lang == "ar" ? "BRA_DESCE" : "BRA_DESCE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-        FillDropwithAttr(GetDataTable('G_Role'), "txtBranch", "RoleId", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
+        GRole = GetDataTable('G_Role') as Array<G_Role>;
 
     }
 
