@@ -223,7 +223,6 @@ var AccTrPaymentNoteNew;
                 { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
                 { NameTable: 'A_G_Vendor', Condition: "" },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
-                //{ NameTable: 'GProc_GetBranchModules', Condition: " 1, 1 ", IsProc: true, IsExec: true },
             ];
         DataResult(Table);
         debugger;

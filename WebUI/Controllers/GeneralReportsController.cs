@@ -1789,5 +1789,22 @@ namespace Inv.WebUI.Controllers
             return Shared.JsonObject(url);
 
         }
+        public JsonResult Rep_UserActivitySummary(RepFinancials rp)
+        {
+            ReportService rep = getStandardParameters(rp);
+
+            rep.AddParameter("RepType", rp.RepType); 
+            rep.AddParameter("braCode", rp.braCode);
+            rep.AddParameter("FromDate", rp.FromDate);
+            rep.AddParameter("ToDate", rp.ToDate);  
+            rep.AddParameter("Module", rp.Module);
+            rep.AddParameter("User_Code", rp.User_Code); 
+            rep.AddParameter("Typ", rp.Typ);
+
+            string url = rep.GetReportUrl("Rep_UserActivitySummary");
+
+            return Shared.JsonObject(url);
+
+        }
     }
 }

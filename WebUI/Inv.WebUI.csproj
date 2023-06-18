@@ -2107,13 +2107,23 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByDateEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByModuleAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByModuleEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByUserAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByUserEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankDetailAr.rdlc">
       <SubType>Designer</SubType>

@@ -10,19 +10,12 @@ namespace UserActLogSum {
 	/*----------------------------------------------------------------- Input Control------------------------------------------------------------------ */
 	var Screen_name: HTMLInputElement;
 	var txtFromDate: HTMLInputElement;
-	var txtToDate: HTMLInputElement;
-	var txtFromTime: HTMLInputElement;
-	var txtToTime: HTMLInputElement;
-	var repUser: HTMLInputElement;
-	var repTitle: HTMLInputElement;
-	var repTitle: HTMLInputElement;
-	var repDate: HTMLInputElement;
+	var txtToDate: HTMLInputElement;	  
+	var repUser: HTMLInputElement;		  
+	var repTitle: HTMLInputElement;		  
 	var drpUser: HTMLSelectElement;
 	var drpTitle: HTMLSelectElement;
-	var drpBranch: HTMLSelectElement;
-	var drpOpr: HTMLSelectElement;
-	var drpFinYear: HTMLSelectElement;
-	var drpstatus: HTMLSelectElement;
+	var drpBranch: HTMLSelectElement;	  
 	/*----------------------------------------------------------------- Button Control------------------------------------------------------------------ */
 	var btnReset;
 	//--- Print Buttons
@@ -45,30 +38,20 @@ namespace UserActLogSum {
 		document.title = " نظام اورانج " + (lang == "ar" ? "تقرير نشاط المستخدمين" : "User Activity Report");	    
 		txtFromDate.value = DateFormat(SysSession.CurrentEnvironment.StartDate);
 		txtToDate.value = DateFormat(ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate);
-		txtFromTime.value = "00:00:00";
-		txtToTime.value = "23:59:00";
 		GetData_Header_loader();
-		GetBranchModules();
-		drpFinYear.value = SysSession.CurrentEnvironment.CurrentYear;	 
+		GetBranchModules();											     
 	}
 	function InitalizeControls() {
 		/*----------------------------------------------------------------- Input Control------------------------------------------------------------------ */
 		Screen_name = document.getElementById("Screen_name") as HTMLInputElement;
 		txtFromDate = document.getElementById("txtFromDate") as HTMLInputElement;
-		txtToDate = document.getElementById("txtToDate") as HTMLInputElement;
-		txtFromTime = document.getElementById("txtFromTime") as HTMLInputElement;
-		txtToTime = document.getElementById("txtToTime") as HTMLInputElement;
+		txtToDate = document.getElementById("txtToDate") as HTMLInputElement;	 
 		repUser = document.getElementById("repUser") as HTMLInputElement;
 		repTitle = document.getElementById("repTitle") as HTMLInputElement;
-		repTitle = document.getElementById("repTitle") as HTMLInputElement;
-		repDate = document.getElementById("repDate") as HTMLInputElement;
-
+		repTitle = document.getElementById("repTitle") as HTMLInputElement;	    
 		drpUser = document.getElementById("drpUser") as HTMLSelectElement;
 		drpTitle = document.getElementById("drpTitle") as HTMLSelectElement;
-		drpBranch = document.getElementById("drpBranch") as HTMLSelectElement;
-		drpOpr = document.getElementById("drpOpr") as HTMLSelectElement;
-		drpFinYear = document.getElementById("drpFinYear") as HTMLSelectElement;
-		drpstatus = document.getElementById("drpstatus") as HTMLSelectElement;
+		drpBranch = document.getElementById("drpBranch") as HTMLSelectElement;	 
 		/*----------------------------------------------------------------- Button Control------------------------------------------------------------------ */
 		btnReset = document.getElementById("btnReset") as HTMLButtonElement;
 		//--- Print Buttons
@@ -90,15 +73,11 @@ namespace UserActLogSum {
 		var Table: Array<Table>;
 		Table =
 			[
-				{ NameTable: 'G_USERS', Condition: " CompCode = " + compcode + " " },	 
-				{ NameTable: 'G_Codes', Condition: "CodeType = 'UserLog'" },
-				{ NameTable: 'G_CONTROL', Condition: " COMP_CODE = " + compcode + "" },
+				{ NameTable: 'G_USERS', Condition: " CompCode = " + compcode + " " },	 	  
 				{ NameTable: 'G_BRANCH', Condition: " COMP_CODE = " + compcode + "" },		 
 			]
 		DataResult(Table);  
-		FillDropwithAttr(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"),"","");
-		FillDropwithAttr(GetDataTable('G_Codes'), "drpOpr", "CodeValue", (lang == "ar" ? "DescA" : "DescE"), (lang == "ar" ? "الجميع" : "All"), "", "");
-		FillDropwithAttr(GetDataTable('G_CONTROL'), "drpFinYear", "FIN_YEAR", "FIN_YEAR","No", "", "");			   
+		FillDropwithAttr(GetDataTable('G_USERS'), "drpUser", "USER_CODE", "USER_CODE", (lang == "ar" ? "الجميع" : "All"),"","");	 
 		FillDropwithAttr(GetDataTable('G_BRANCH'), "drpBranch", "BRA_CODE", "BRA_DESC", (lang == "ar" ? "الجميع" : "All"), "", "");		 
 	}
 	function GetBranchModules() {
@@ -153,18 +132,14 @@ namespace UserActLogSum {
 		}
 		debugger
 		rp.FromDate = DateFormatRep(txtFromDate.value);
-		rp.ToDate = DateFormatRep(txtToDate.value);
-		rp.FromTime = txtFromTime.value;
-		rp.ToTime = txtToTime.value;
-		rp.FinYear = drpFinYear.value == "Null" ? -1 : Number(drpFinYear.value);
+		rp.ToDate = DateFormatRep(txtToDate.value);		  						    
 		rp.SysCode = drpTitle.value == "Null" ? "-1" : $('option:selected', $("#drpTitle")).attr('data-syscode');
 		rp.Module = drpTitle.value == "Null" ? "-1" : drpTitle.value;
 		rp.User_Code = drpUser.value == "Null" ? "-1" : drpUser.value;
-		rp.OperationId = drpOpr.value == "Null" ? -1 : Number(drpOpr.value);
-		rp.OprStatus = drpstatus.value == "Null" ? -1 : Number(drpstatus.value);
+		rp.Typ = repUser.checked == true ? 1 : 0;				  
 		  
 		Ajax.Callsync({
-			url: Url.Action("Rep_UserActivityLog", "GeneralReports"),
+			url: Url.Action("Rep_UserActivitySummary", "GeneralReports"),
 			data: rp,
 			success: (d) => {
 				let result = d.result as string;

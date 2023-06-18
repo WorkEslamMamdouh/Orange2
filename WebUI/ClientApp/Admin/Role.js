@@ -901,8 +901,6 @@ var Role;
         html = '<div id="No_Row3' + cnt + '" class=" font_header col-lg-12" style="bottom: 5px;font-weight:bold;padding-top: 9px;">' +
             '<span id="btn_minus3' + cnt + '" class="fa fa-minus-circle fontitm4user lebelminus display_none"></span>' +
             '<div class="col-lg-2" style="width: 22%;"> <select disabled id="ModuleCodeSearchForm' + cnt + '" class="form-control"><option value="null">  MODULE_CODE اختر   </option> </select>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="ControlCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
-            '<div class="col-lg-2" style=""> <input id="SearchFormCode' + cnt + '" disabled name=" " type="text" class="form-control"/>  </div>' +
             '<div class="col-lg-1" style=""><input id="txt_StatusFlag3' + cnt + '" name = " " type = "hidden" class="form-control"/> </div></div>';
         $("#DataDetails3").append(html);
         for (var i = 0; i < RoleUsers.length; i++) {
