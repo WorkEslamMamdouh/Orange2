@@ -156,10 +156,10 @@ namespace RS.WebUI.Reports.Forms
                     CurrentReportParameters = JsonConvert.DeserializeObject<StdParamters>(Par);
                 }
                 //add api call returns boolean mahroos 
-                if (!CheckUser(CurrentReportParameters.Tokenid, CurrentReportParameters.UserCode))
-                {
-                    return;
-                }
+                //if (!CheckUser(CurrentReportParameters.Tokenid, CurrentReportParameters.UserCode))
+                //{
+                //    return;
+                //}
 
                 reportViewer1.ShowPrintButton = true;
 
@@ -6202,7 +6202,7 @@ namespace RS.WebUI.Reports.Forms
             BindReport(Rep.reportName,RepType, Rep.OutputType, ReportsDetail, query);
             return query;
         }
-        public IEnumerable<GProc_Rep_UserActivityLog_Result> Rep_UserActivitySummary()
+        public IEnumerable<Gproc_Rep_UserActivitySummary_Result> Rep_UserActivitySummary()
         {
             ReportStandardParameters StandPar = getStandardParameters();
             RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
@@ -6253,7 +6253,7 @@ namespace RS.WebUI.Reports.Forms
            "', @bracode= " + spbraCode.Value;
 
 
-            List<GProc_Rep_UserActivityLog_Result> query = db.Database.SqlQuery<GProc_Rep_UserActivityLog_Result>(_Query).ToList();
+            List<Gproc_Rep_UserActivitySummary_Result> query = db.Database.SqlQuery<Gproc_Rep_UserActivitySummary_Result>(_Query).ToList();
             ReportsDetails();
 
             BindReport(Rep.reportName, RepType, Rep.OutputType, ReportsDetail, query);
