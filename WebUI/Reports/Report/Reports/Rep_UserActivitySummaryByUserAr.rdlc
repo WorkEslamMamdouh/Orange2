@@ -497,7 +497,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>عرض حركة</Value>
+                              <Value>فك حركة</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>

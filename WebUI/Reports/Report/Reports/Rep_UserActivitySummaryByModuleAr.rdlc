@@ -213,19 +213,19 @@
               <Width>1.46596cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.73183cm</Width>
+              <Width>1.67891cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.65117cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.70409cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.67763cm</Width>
-            </TablixColumn>
-            <TablixColumn>
               <Width>1.04264cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.99215cm</Width>
+              <Width>1.07152cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.04264cm</Width>
@@ -410,7 +410,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>عرض حركة</Value>
+                              <Value>فك حركة</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -478,7 +478,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Query</Value>
+                              <Value>استعلام</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
