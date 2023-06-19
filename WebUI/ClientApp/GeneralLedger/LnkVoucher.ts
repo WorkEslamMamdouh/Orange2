@@ -60,7 +60,7 @@ namespace LnkVoucher {
         txtFromDate.value = DateStartMonth();
         txtToDate.value = ConvertToDateDash(GetDate()) <= ConvertToDateDash(SysSession.CurrentEnvironment.EndDate) ? GetDate() : SysSession.CurrentEnvironment.EndDate;
         GetData_Header();
- 
+
     }
     function InitalizeControls() {
         btnShow = document.getElementById("btnShow") as HTMLButtonElement;
@@ -102,7 +102,7 @@ namespace LnkVoucher {
         txtSearch.onkeyup = _SearchBox_Change;
         ddlTypeTrans.onchange = () => { Back(); $('#divGridShow').addClass('display_none'); $('#Div_control').addClass('display_none'); }
         //*******************************print*****************************
-        txtFromNumber.onchange = () => { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value ) ? txtFromNumber.value : txtToNumber.value }
+        txtFromNumber.onchange = () => { txtToNumber.value = txtToNumber.value.trim() == '' || Number(txtToNumber.value) < Number(txtFromNumber.value) ? txtFromNumber.value : txtToNumber.value }
         btnPrintTrview.onclick = () => { PrintReport(1); }
         btnPrintTrPDF.onclick = () => { PrintReport(2); }
         btnPrintTrEXEL.onclick = () => { PrintReport(3); }
@@ -125,7 +125,7 @@ namespace LnkVoucher {
         TransactionsGrid.Columns = [
             { title: "TRID", name: "TRID", type: "text", width: "5%", visible: false },
             { title: res.App_Number, name: "TR_NO", type: "text", width: "5%" },
-            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false }, 
+            { title: res.TransTrType, name: "TR_CODE", type: "text", width: "5%", visible: false },
             {
                 title: res.App_date, css: "ColumPadding", name: "TR_DATE", width: "8%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -137,7 +137,7 @@ namespace LnkVoucher {
             { title: 'الحركة', name: (lang == "ar" ? "TR_DESCA" : "TR_DESCE"), type: "text", width: "10%" },
             { title: "النوع", name: "TR_TYPE", type: "text", width: "15%" },
             { title: res.value, name: "TR_AMOUNT", type: "text", width: "5%" },
-            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" }, 
+            { title: res.TransDesc, name: (lang == "ar" ? "VOUCHER_DESCA" : "VOUCHER_DESCE"), type: "text", width: "20%" },
             {
                 title: 'الحاله', css: "ColumPadding", name: "IsGenerated", width: "4%",
                 itemTemplate: (s: string, item: AProc_LnkGenerateTrans_Result): HTMLLabelElement => {
@@ -150,7 +150,8 @@ namespace LnkVoucher {
         TransactionsGrid.Bind();
     }
     function clickEventsVisible() {
-
+        var clickEventCost = 0;
+        var clickEventAcc = 0;
         $("#divCostCnterName").on('click', function () {
             debugger
             if (Events == 0) {
@@ -159,9 +160,16 @@ namespace LnkVoucher {
                 if (show1 == true) {
 
                     $(".costcntr").addClass("display_none");
+                    $("#IdTable").attr("style", "width: 110%;");
+
+                    clickEventCost = 1;
                 }
                 else {
+                    clickEventCost = 0;
                     $(".costcntr").removeClass("display_none");
+                    if (clickEventCost == 0 && clickEventAcc == 0) {
+                        $("#IdTable").attr("style", "width: 125%;");
+                    }
                 }
                 Events = 1;
                 setTimeout(function () { Events = 0 }, 700);
@@ -179,9 +187,15 @@ namespace LnkVoucher {
                 if (show1 == true) {
 
                     $(".Acc").addClass("display_none");
+                    $("#IdTable").attr("style", "width: 110%;");
+                    clickEventAcc = 1;
                 }
                 else {
+                    clickEventAcc = 0;
                     $(".Acc").removeClass("display_none");
+                    if (clickEventCost == 0 && clickEventAcc == 0) {
+                        $("#IdTable").attr("style", "width: 125%;");
+                    }
                 }
                 Events = 1;
                 setTimeout(function () { Events = 0 }, 700);
@@ -404,7 +418,7 @@ namespace LnkVoucher {
 
                         List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none') }, 20) : $('#icon-bar').removeClass('display_none')
 
-                          $("#btnGenerationVoucher").addClass('animate__animated animate__fadeOutBottomRight');
+                        $("#btnGenerationVoucher").addClass('animate__animated animate__fadeOutBottomRight');
                         for (let i = 0; i < List.length; i++) {
                             BuildControls(i);
                             DisplayBuildControls(List[i], i);
@@ -414,8 +428,8 @@ namespace LnkVoucher {
                         ComputeTotals();
 
                         btnGenerationVoucher.disabled = false;
-                      
-                        setTimeout(function () { $("#btnGenerationVoucher").attr('class', 'btn btn-main Grin animate__animated   animate__fadeInBottomRight')}, 1000);                         
+
+                        setTimeout(function () { $("#btnGenerationVoucher").attr('class', 'btn btn-main Grin animate__animated   animate__fadeInBottomRight') }, 1000);
                         btnGenerationVoucher.innerHTML = `<i class="fa-solid fa-arrow-left fa-fade"></i>اعادة توليد القيد<i class="fa-solid fa-arrow-right fa-fade"></i>`;
                     }
                 }
@@ -457,7 +471,7 @@ namespace LnkVoucher {
     function GridDoubleClick() {
         CleanDetails();
         DisplayData(TransactionsGrid.SelectedItem)
-        disabled(); 
+        disabled();
     }
     function DisplayData(Selecteditem: AProc_LnkGenerateTrans_Result) {
         DocumentActions.RenderFromModel(Selecteditem);
@@ -477,7 +491,7 @@ namespace LnkVoucher {
                     debugger
                     let List = result.Response as Array<AQ_GetLnkVoucher>;
                     CountGrid = 0;
-                    $("#div_Data").html(''); 
+                    $("#div_Data").html('');
                     List.length == 0 ? setTimeout(function () { $('#icon-bar').addClass('display_none'); $('#btnGenerationVoucher').removeClass('Grin') }, 20) : $('#icon-bar').removeClass('display_none'); $('#btnGenerationVoucher').addClass('Grin')
                     for (let i = 0; i < List.length; i++) {
                         BuildControls(i);
@@ -547,9 +561,9 @@ namespace LnkVoucher {
 	                </td>
 
                     
-                    <td style="width:22%;">
+                    <td style="width:28%;">
 		                <div class="form-group">
-			              <input id="Line_DescA${cnt}" name="" value="" disabled type="text" class="_Remarks form-control _dis" />
+			              <textarea id="Line_DescA${cnt}" name="" value="" disabled type="text" class="_Remarks form-control _dis"></textarea>
 		                </div>
 	                </td>
                      
@@ -701,6 +715,9 @@ namespace LnkVoucher {
                 //   $("#divCostCntrNameFooter").addClass("display_none");
                 $("#txtCostCntrNameFooter").prop("value", "");
             }
+
+            $('#txtRemark').val($('#Line_DescA' + cnt).val());
+
         });
 
 
@@ -781,7 +798,7 @@ namespace LnkVoucher {
             CountGrid++;
             Insert_Serial();
         }
-    } 
+    }
     function Insert_Serial() {
 
         let Chack_Flag = false;
@@ -866,13 +883,13 @@ namespace LnkVoucher {
 
         LnkVoucherlMastDet.A_LnkVoucher = Model;
         LnkVoucherlMastDet.FilterLnkVoucher = Filter;
-         
+
         LnkVoucherlMastDet.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         LnkVoucherlMastDet.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         LnkVoucherlMastDet.MODULE_CODE = Modules.LnkVoucher;
         LnkVoucherlMastDet.UserCode = SysSession.CurrentEnvironment.UserCode;
         LnkVoucherlMastDet.sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
-        
+
 
     }
     function Update() {
@@ -964,9 +981,9 @@ namespace LnkVoucher {
 
                 let result = d.result as string;
 
-                
 
-                window.open(result); 
+
+                window.open(result);
             }
         })
     }
@@ -982,7 +999,7 @@ namespace LnkVoucher {
         rp.Name_function = "rptPrnt_LnkVoucher";
         //rp.Name_function = "rptReceiptNote";
         localStorage.setItem("Report_Data", JSON.stringify(rp));
-        
+
 
         localStorage.setItem("result", '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>');
         window.open(Url.Action("ReportsPopup", "Home"), "_blank");

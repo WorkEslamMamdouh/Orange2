@@ -2536,12 +2536,12 @@ function DisplayBuildControls(dataSource, cnt) {
     }
 }
 function AssignBuildControls(dataSource, CountGrid) {
-    dataSource = getClass(dataSource.name);
+    var dataSourceName = getClass(dataSource.name);
     var DetailsModel = new Array();
     var StatusFlag = "StatusFlag";
-    var properties = Object.getOwnPropertyNames(dataSource);
+    var properties = Object.getOwnPropertyNames(dataSourceName);
     for (var i = 0; i < CountGrid; i++) {
-        var Model = JSON.parse(JSON.stringify(dataSource));
+        var Model = JSON.parse(JSON.stringify(dataSourceName));
         var Status = $('#' + StatusFlag + i).val();
         if (Status != 'i' && Status != 'u' && Status != 'd') {
             continue;
@@ -2564,7 +2564,7 @@ function AssignBuildControls(dataSource, CountGrid) {
 var getClass = function (className) {
     var constructorFunc = window[className];
     if (typeof constructorFunc === 'function') {
-        return constructorFunc;
+        return new constructorFunc();
     }
     else {
         throw new Error('Invalid class name: ' + className);

@@ -3279,14 +3279,13 @@ function DisplayBuildControls(dataSource: any, cnt: number) {
 
 }
 
-function AssignBuildControls(dataSource: any, CountGrid: number) {
-
-    dataSource = getClass(dataSource.name);
+function AssignBuildControls(dataSource: any, CountGrid: number) { 
+     let dataSourceName = getClass(dataSource.name);
     let DetailsModel = new Array<any>();
     let StatusFlag = "StatusFlag";
-    let properties = Object.getOwnPropertyNames(dataSource);
-    for (var i = 0; i < CountGrid; i++) {
-        let Model = JSON.parse(JSON.stringify(dataSource)); 
+    let properties = Object.getOwnPropertyNames(dataSourceName);
+    for (var i = 0; i < CountGrid; i++) { 
+        let Model = JSON.parse(JSON.stringify(dataSourceName));  
         let Status = $('#' + StatusFlag + i).val();
         if (Status != 'i' && Status != 'u' && Status != 'd') {
             continue;
@@ -3300,22 +3299,19 @@ function AssignBuildControls(dataSource: any, CountGrid: number) {
                 else
                     Model[property] = setVal(element.value);
             }
-        }
-
+        } 
         DetailsModel.push(Model);
     } 
     return DetailsModel; 
 }
 
 
-
 var getClass = function (className) {
     var constructorFunc = window[className]
     if (typeof constructorFunc === 'function') {
-        return  constructorFunc;
+        return new constructorFunc();
     } else {
         throw new Error('Invalid class name: ' + className);
     }
 };
-
 
