@@ -156,10 +156,10 @@ namespace RS.WebUI.Reports.Forms
                     CurrentReportParameters = JsonConvert.DeserializeObject<StdParamters>(Par);
                 }
                 //add api call returns boolean mahroos 
-                if (!CheckUser(CurrentReportParameters.Tokenid, CurrentReportParameters.UserCode))
-                {
-                    return;
-                }
+                //if (!CheckUser(CurrentReportParameters.Tokenid, CurrentReportParameters.UserCode))
+                //{
+                //    return;
+                //}
 
                 reportViewer1.ShowPrintButton = true;
 
@@ -6200,6 +6200,63 @@ namespace RS.WebUI.Reports.Forms
             ReportsDetails();
 
             BindReport(Rep.reportName,RepType, Rep.OutputType, ReportsDetail, query);
+            return query;
+        }
+        public IEnumerable<Gproc_Rep_UserActivitySummary_Result> Rep_UserActivitySummary()
+        {
+            ReportStandardParameters StandPar = getStandardParameters();
+            RepFinancials RepPar = JsonConvert.DeserializeObject<RepFinancials>(Par);
+
+
+            
+            string UserCode = RepPar.User_Code;
+            SqlParameter spUserCode = new SqlParameter("@usr", UserCode == "-1" ? null : UserCode);
+
+            int braCode = RepPar.braCode;
+            SqlParameter spbraCode = new SqlParameter("@bra", braCode == -1 ? System.Data.SqlTypes.SqlInt32.Null : braCode);
+
+            string FromDate = RepPar.FromDate;
+            SqlParameter spFromDate = new SqlParameter("@FromDate", FromDate);
+
+            string ToDate = RepPar.ToDate;
+            SqlParameter spToDate = new SqlParameter("@ToDate", ToDate); 
+
+            string Module = RepPar.Module;
+            SqlParameter spModule = new SqlParameter("@module", Module == "-1" ? null : Module);
+              
+            int Typ = RepPar.Typ; 
+            if (Typ == 1)
+            { 
+                Rep = OpenReport("Rep_UserActivitySummaryByUser");
+            } 
+            else
+            {
+                Rep = OpenReport("Rep_UserActivitySummaryByModule"); 
+            }
+             
+            int RepType = int.Parse(RepPar.RepType.ToString());
+            SqlParameter spRepType = new SqlParameter("@RepType", RepType);
+
+            string _Query = "execute " + Rep.dataSource +
+           "   @comp = " + StandPar.spComCode.Value +
+           ", @bra = " + spbraCode.Value +
+           ", @CompNameA = '" + StandPar.spComNameA.Value +
+           "', @CompNameE = '" + StandPar.spComNameE.Value +
+           "', @BraNameA = '" + StandPar.spBraNameA.Value +
+           "', @BraNameE = '" + StandPar.braNameE.Value +
+           "', @LoginUser = '" + StandPar.spLoginUser.Value +
+           "', @RepType= " + spRepType.Value +
+           ",  @user= '" + spUserCode.Value +
+           "',  @FromDate = '" + spFromDate.Value +
+           "', @ToDate = '" + spToDate.Value +
+           "', @Module='" + spModule.Value +
+           "', @bracode= " + spbraCode.Value;
+
+
+            List<Gproc_Rep_UserActivitySummary_Result> query = db.Database.SqlQuery<Gproc_Rep_UserActivitySummary_Result>(_Query).ToList();
+            ReportsDetails();
+
+            BindReport(Rep.reportName, RepType, Rep.OutputType, ReportsDetail, query);
             return query;
         }
     }

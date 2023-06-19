@@ -2478,4 +2478,7 @@
   <data name="Men_VoucherManagement" xml:space="preserve">
     <value>Voucher Management</value>
   </data>
+  <data name="Men_UserLogSum" xml:space="preserve">
+    <value>User Log Summary Report</value>
+  </data>
 </root>

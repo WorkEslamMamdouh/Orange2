@@ -22,14 +22,10 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode>
-    </IISExpressUseClassicPipelineMode>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -1568,6 +1564,7 @@
     <Content Include="Views\AdminSetting\AdminRoleBranchIndex.cshtml" />
     <Content Include="Views\Tools\USERS\UserActLogIndex.cshtml" />
     <Content Include="Views\GeneralLedgerMenu\LnkVoucherIndex.cshtml" />
+    <Content Include="Views\Tools\USERS\UserActLogSumIndex.cshtml" />
     <Content Include="Views\AdminSetting\RoleIndex.cshtml" />
     <Content Include="Views\AdminSetting\G_ModuleIndex.cshtml" />
     <None Include="Web.Debug.config">
@@ -1697,6 +1694,7 @@
     <TypeScriptCompile Include="ClientApp\Tools\LnkTransVoucher\LnkTransVoucher.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\LnkvarBranch\LnkvarBranch.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\TranPosting\TranPosting.ts" />
+    <TypeScriptCompile Include="ClientApp\Tools\USERS\UserActLogSum.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\USERS\UserActLog.ts" />
     <TypeScriptCompile Include="ClientApp\Tools\USERS\USERS.ts" />
     <TypeScriptCompile Include="ClientApp\Sales\SlsTrSales.ts" />
@@ -2109,13 +2107,23 @@
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByDateEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByModuleAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleAr.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByModuleEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByTitleEn.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByUserAr.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserAr.rdlc" />
+    <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivitySummaryByUserEn.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Rep_UserActivityLogByUserEn.rdlc" />
     <EmbeddedResource Include="Reports\Report\Reports\Rpt_AccBankDetailAr.rdlc">
       <SubType>Designer</SubType>

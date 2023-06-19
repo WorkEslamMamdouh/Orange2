@@ -465,6 +465,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/Tools/USERS/UserActLogIndex.cshtml");
         }
+        public ActionResult UserActLogSumIndex()
+        {
+            return View("~/Views/Tools/USERS/UserActLogSumIndex.cshtml");
+        }
         public ActionResult USERSIndex()
         {
             return View("~/Views/Tools/USERS/USERSIndex.cshtml");

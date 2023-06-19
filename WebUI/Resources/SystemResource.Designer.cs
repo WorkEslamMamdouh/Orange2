@@ -4750,6 +4750,15 @@ namespace Inv.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Log Summary Report.
+        /// </summary>
+        public static string Men_UserLogSum {
+            get {
+                return ResourceManager.GetString("Men_UserLogSum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vat List.
         /// </summary>
         public static string Men_VatList {

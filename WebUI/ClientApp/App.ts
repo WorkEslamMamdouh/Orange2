@@ -79,6 +79,7 @@ var Modules = {
 
     USERS: "USERS",
     UserActLog: "UserActLog",
+	UserActLogSum: "UserActLogSum",
     TranPosting: "TranPosting",
     LnkvarBranch: "LnkvarBranch",
     LnkTransVoucher: "LnkTransVoucher",

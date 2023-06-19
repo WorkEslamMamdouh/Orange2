@@ -2482,4 +2482,7 @@
   <data name="Men_VoucherManagement" xml:space="preserve">
     <value>ادارة السندات</value>
   </data>
+  <data name="Men_UserLogSum" xml:space="preserve">
+    <value>تقرير ملخص نشاط المستخدمين</value>
+  </data>
 </root>
