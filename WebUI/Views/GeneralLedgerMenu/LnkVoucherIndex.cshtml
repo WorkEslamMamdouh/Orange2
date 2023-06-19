@@ -9,11 +9,10 @@
         display: none !important;
     }
 
-    .Grin { 
+    .Grin {
         background-color: #bebebe;
         color: black;
     }
-
 </style>
 <div class="row gy-3 ">
     <!-- Filter Container -->
@@ -72,7 +71,7 @@
                             </div>
                         </div>
                     </div>
- 
+
 
                     <div class="col-12 col-md-2">
                         <div class="form-group row">
@@ -120,9 +119,7 @@
     <!-- Details Container -->
     <div class="col-12">
         <!-- Search Table -->
-
         <!-- Restriction form  -->
-   
         <!-- Details  -->
         <div class="row ">
             <div class="col-12 service-content card bg-light-blue display_none" id="Div_control">
@@ -185,7 +182,7 @@
                                 <!-- Inside Table  -->
                                 <div class="inside-table my-4">
                                     <div class="table-responsive">
-                                        <table class="table table-borderless " style="width:125%">
+                                        <table id="IdTable" class="table table-borderless " style="width:125%">
                                             <thead>
                                                 <tr>
                                                     <th width="3%"></th>
@@ -238,55 +235,69 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <div class="row">
-                                            <div class="col-12 col-md-" id="divAccountNameFooter">
-                                                <div class="form-group row g-0">
-                                                    <label class="col-2 align-self-center p-md-0"> @SystemResource.p_account_number  </label>
-                                                    <div class="col-10">
-                                                        <input id="txtAccountNameFooter" name="" value="" disabled type="text" class="form-control" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12" id="divCostCntrNameFooter">
-                                                <div class="form-group row g-0">
-                                                    <label class="col-2 align-self-center p-md-0"> @SystemResource.menu_Costcenter  </label>
-                                                    <div class="col-10">
-                                                        <input id="txtCostCntrNameFooter" name="" value="" disabled type="text" class="form-control" />
-                                                    </div>
+                                        <div class="col-12 col-md-" id="divAccountNameFooter">
+                                            <div class="form-group row g-0">
+                                                <label class="col-2 align-self-center p-md-0"> @SystemResource.p_account_number  </label>
+                                                <div class="col-10">
+                                                    <input id="txtAccountNameFooter" name="" value="" disabled type="text" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="col-12 col-md-6">
+                                        <div class="col-12" id="divCostCntrNameFooter">
+                                            <div class="form-group row g-0">
+                                                <label class="col-2 align-self-center p-md-0"> @SystemResource.menu_Costcenter  </label>
+                                                <div class="col-10">
+                                                    <input id="txtCostCntrNameFooter" name="" value="" disabled type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="row">
+                                        <div class="col-12 col-md-" id="divAccountNameFooter">
+                                            <div class="form-group row g-0">
+                                                <label class="col-1 align-self-center p-md-0"> الملاحظات  </label>
+                                                <div class="col-11" style="width: 89.5%;">
+                                                    <input id="txtRemark" name="" value="" disabled type="text" class="form-control" />
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <!-- Editors Details -->
                                 @*<div class="insettext row editor-details mt-2">
-            <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-6">
 
-                <div class="form-group row g-0">
-                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
-                    <div class="col-4 col-xl-4 editor-input">
-                        <input id="txtCreatedBy" class=" " name="CREATED_BY" type="text" disabled>
-                    </div>
-                    <div class="col-4 col-xl-6 editor-input">
-                        <input id="txtCreatedAt" class=" " name="CREATED_AT" type="text" disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="form-group row g-0">
-                    <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
-                    <div class="col-4 col-xl-4  editor-input">
-                        <input id="txtUpdatedBy" class=" " name="UPDATED_BY" type="text" disabled>
-                    </div>
-                    <div class="col-4 col-xl-6 editor-input">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Seller</label>
+                                                <div class="col-4 col-xl-4 editor-input">
+                                                    <input id="txtCreatedBy" class=" " name="CREATED_BY" type="text" disabled>
+                                                </div>
+                                                <div class="col-4 col-xl-6 editor-input">
+                                                    <input id="txtCreatedAt" class=" " name="CREATED_AT" type="text" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="form-group row g-0">
+                                                <label class="col-4 col-xl-2 align-self-center"> @SystemResource.App_Update</label>
+                                                <div class="col-4 col-xl-4  editor-input">
+                                                    <input id="txtUpdatedBy" class=" " name="UPDATED_BY" type="text" disabled>
+                                                </div>
+                                                <div class="col-4 col-xl-6 editor-input">
 
-                        <input id="txtUpdatedAt" class=" " name="UPDATED_AT" type="text" disabled>
-                    </div>
-                </div>
-            </div>
+                                                    <input id="txtUpdatedAt" class=" " name="UPDATED_AT" type="text" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        </div>*@
+                                    </div>*@
                             </div>
                         </div>
                     </div>
@@ -295,7 +306,7 @@
         </div>
     </div>
 </div>
-@section Script{ 
+@section Script{
     <script src="~/ClientApp/GeneralLedger/LnkVoucher.js"></script>
 }
 

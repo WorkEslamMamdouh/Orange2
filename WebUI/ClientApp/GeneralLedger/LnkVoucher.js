@@ -144,6 +144,8 @@ var LnkVoucher;
         TransactionsGrid.Bind();
     }
     function clickEventsVisible() {
+        var clickEventCost = 0;
+        var clickEventAcc = 0;
         $("#divCostCnterName").on('click', function () {
             debugger;
             if (Events == 0) {
@@ -151,9 +153,15 @@ var LnkVoucher;
                 //var show2 = $(".Acc").is(":visible");
                 if (show1 == true) {
                     $(".costcntr").addClass("display_none");
+                    $("#IdTable").attr("style", "width: 110%;");
+                    clickEventCost = 1;
                 }
                 else {
+                    clickEventCost = 0;
                     $(".costcntr").removeClass("display_none");
+                    if (clickEventCost == 0 && clickEventAcc == 0) {
+                        $("#IdTable").attr("style", "width: 125%;");
+                    }
                 }
                 Events = 1;
                 setTimeout(function () { Events = 0; }, 700);
@@ -168,9 +176,15 @@ var LnkVoucher;
                 //var show2 = $(".Acc").is(":visible");
                 if (show1 == true) {
                     $(".Acc").addClass("display_none");
+                    $("#IdTable").attr("style", "width: 110%;");
+                    clickEventAcc = 1;
                 }
                 else {
+                    clickEventAcc = 0;
                     $(".Acc").removeClass("display_none");
+                    if (clickEventCost == 0 && clickEventAcc == 0) {
+                        $("#IdTable").attr("style", "width: 125%;");
+                    }
                 }
                 Events = 1;
                 setTimeout(function () { Events = 0; }, 700);
@@ -449,7 +463,7 @@ var LnkVoucher;
     ////****************************************************Controls Grid Region****************************************************
     function BuildControls(cnt) {
         var html = "";
-        html = "<tr id= \"No_Row" + cnt + "\">\n                    \n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"Acc_Code" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"ACC_DESCA" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Debit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Credit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"CC_Code" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"CC_DESCA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:22%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <input id=\"Line_DescA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"_Remarks form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                     \n                </tr>";
+        html = "<tr id= \"No_Row" + cnt + "\">\n                    \n\t                <td>\n\t\t                <div class=\"form-group display_none btn_minus_non\">\n\t\t\t                <span id=\"btn_minus" + cnt + "\"><i class=\"fas fa-minus-circle  btn-minusNew\"></i></span> \n\t\t                </div>\n\t                </td>\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchAcc" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                 <input id=\"Acc_Code" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"Acc\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"ACC_DESCA" + cnt + "\" value=\"\" name=\"\" disabled type=\"text\" class=\"form-control\"  />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Debit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t               <input id=\"Credit" + cnt + "\" name=\"\" disabled type=\"number\" value=\"\"  min=\"0\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n\n                    <td>\n\t\t                <div class=\"form-group\">\n\t\t\t                <button type=\"button\" class=\"style_ButSearch _dis\"  id=\"btnSearchCostCenter" + cnt + "\" name=\"ColSearch\" disabled>\n                                <i class=\"fa fa-search\"></i>\n                             </button>\n\t\t                </div>\n\t                </td>\n                     <td style=\"width:9%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t                <input id=\"CC_Code" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control _dis\" />\n\t\t                </div>\n\t                </td>\n                    <td style=\"width:17%;\" class=\"costcntr\">\n\t\t                <div class=\"form-group\">\n\t\t\t                  <input id=\"CC_DESCA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"form-control\" />\n\t\t                </div>\n\t                </td>\n\n                    \n                    <td style=\"width:28%;\">\n\t\t                <div class=\"form-group\">\n\t\t\t              <textarea id=\"Line_DescA" + cnt + "\" name=\"\" value=\"\" disabled type=\"text\" class=\"_Remarks form-control _dis\"></textarea>\n\t\t                </div>\n\t                </td>\n                     \n                </tr>";
         $("#div_Data").append(html);
         BuildAllFild(AQ_GetLnkVoucher, cnt, "No_Row");
         $('#btnSearchAcc' + cnt).click(function (e) {
@@ -573,6 +587,7 @@ var LnkVoucher;
                 //   $("#divCostCntrNameFooter").addClass("display_none");
                 $("#txtCostCntrNameFooter").prop("value", "");
             }
+            $('#txtRemark').val($('#Line_DescA' + cnt).val());
         });
     }
     function ComputeTotals() {

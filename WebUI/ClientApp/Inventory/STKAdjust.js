@@ -484,6 +484,7 @@ var STKAdjust;
                 if (result.IsSuccess) {
                     IQ_GetStkAdjustDetailModel = new Array();
                     IQ_GetStkAdjustDetailModel = result.Response;
+                    IQ_GetStkAdjustDetailModel = IQ_GetStkAdjustDetailModel.filter(function (x) { return x.BranchCode == Branch; });
                     for (var i = 0; i < IQ_GetStkAdjustDetailModel.length; i++) {
                         IQ_GetStkAdjustDetailModel[i].TrDate = DateFormat(IQ_GetStkAdjustDetailModel[i].TrDate.toString());
                         IQ_GetStkAdjustDetailModel[i].Status_Desc = IQ_GetStkAdjustDetailModel[i].Status == 1 ? (lang == "ar" ? "معتمد" : "Approved") : (lang == "ar" ? "غير معتمد" : "Not Approved");
@@ -665,7 +666,7 @@ var STKAdjust;
         }
     }
     function fillddlStatusAdd() {
-        StatesFilterDetailsAr = ["كمية", " تكلفة", "	تسوية كمية و تكلفة"];
+        StatesFilterDetailsAr = ["كمية"];
         StatesFilterDetailsEn = ["quantity", " Cost", "Quantity + Cost"];
         if (SysSession.CurrentEnvironment.ScreenLanguage == "en") {
             for (var i = 0; i < StatesFilterDetailsEn.length; i++) {
