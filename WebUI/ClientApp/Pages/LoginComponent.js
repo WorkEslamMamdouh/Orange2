@@ -166,7 +166,7 @@ var LoginComponent;
                             SystemEnv.SalesManID = result.SalesManID;
                             SystemEnv.CashBoxID = result.CashBoxID;
                             SystemEnv.StoreID = result.StoreID;
-                            document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                            document.cookie = "Inv1_systemProperties=" + encodeURIComponent(JSON.stringify(SystemEnv).toString()) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                             Ajax.Callsync({
                                 type: "GET",
                                 url: sys.apiUrl("SystemTools", "GetAppSettings"),
@@ -324,7 +324,7 @@ var LoginComponent;
                                                                 if (res.IsSuccess) {
                                                                     var G_BRANCHService = res.Response;
                                                                     if (G_BRANCHService != null) {
-                                                                        document.cookie = "Inv1_systemG_BRANCH=" + JSON.stringify(G_BRANCHsSYS).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                                        document.cookie = "Inv1_systemG_BRANCH=" + encodeURIComponent(JSON.stringify(G_BRANCHsSYS).toString()) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                                                                         SystemEnv.NationalityID = G_BRANCHService[0].NationalityID;
                                                                         SystemEnv.InvoiceWithoutCust = G_BRANCHService[0].InvoiceWithoutCust;
                                                                         SystemEnv.IvoiceDateEditable = G_BRANCHService[0].IvoiceDateEditable;
@@ -358,7 +358,7 @@ var LoginComponent;
                                                         //        SystemEnv.SerialNumber = res.trim();
                                                         //    }
                                                         //})
-                                                        document.cookie = "Inv1_systemProperties=" + JSON.stringify(SystemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                                                        document.cookie = "Inv1_systemProperties=" + encodeURIComponent(JSON.stringify(SystemEnv).toString()) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
                                                         OnLogged();
                                                     }
                                                     else {

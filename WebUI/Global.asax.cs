@@ -58,7 +58,7 @@ namespace Inv.WebUI
            
             if (HttpContext.Current.Request.Cookies["Inv1_systemProperties"] != null && HttpContext.Current.Request.Cookies["Inv1_systemProperties"].Value != "null")
             {
-                string systemProperties = HttpContext.Current.Request.Cookies["Inv1_systemProperties"].Value.ToString();
+                string systemProperties = Uri.UnescapeDataString(HttpContext.Current.Request.Cookies["Inv1_systemProperties"].Value.ToString());
 
                 var Lang = JsonConvert.DeserializeObject<SystemEnvironment>(systemProperties).ScreenLanguage;
 
