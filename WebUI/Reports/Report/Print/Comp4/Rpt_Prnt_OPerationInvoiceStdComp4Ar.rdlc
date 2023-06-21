@@ -4283,7 +4283,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
               <Top>0cm</Top>
               <Left>12.18501cm</Left>
               <Height>0.67938cm</Height>
-              <Width>8.01104cm</Width>
+              <Width>7.8132cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

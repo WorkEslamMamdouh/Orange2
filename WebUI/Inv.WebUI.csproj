@@ -2018,6 +2018,9 @@
     <EmbeddedResource Include="Reports\Report\Reports\Comp4\Rep_OperationSummaryComp4Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report\Reports\Comp4\Rep_OperationSummaryIntComp4Ar.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Report\Reports\Comp7\Rep_OperationSummaryComp7Ar.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
