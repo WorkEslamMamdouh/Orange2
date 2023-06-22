@@ -690,6 +690,12 @@ var AccTrReceiptNoteNew;
             $('#txt_CheckNo').addClass('display_none'); //الشيك
             $('#txt_TransferNo').removeClass('display_none'); //التحويل
         }
+        else if (txtCashTypeH.value == '0') { // نقدي 
+            $('._Cash').removeClass('display_none');
+        }
+        else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
+            $('._Card').removeClass('display_none');
+        }
     }
     //****************************************************Validation*********************************************
     function Validation() {

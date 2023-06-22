@@ -51,6 +51,7 @@ namespace LnkVoucher {
     var CountGrid = 0;
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
     var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
+    var CostCenter_Enabled = SysSession.CurrentPrivileges.CUSTOM1;
     export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');
@@ -448,6 +449,10 @@ namespace LnkVoucher {
             $('._Remarks').removeAttr('disabled')
             $('.table-responsive').scrollLeft(-500);
             $('#Line_DescA0').focus();
+            if (CostCenter_Enabled) {
+                $('._Cost').removeAttr('disabled') 
+            }
+        
         }
 
         $('#id_div_Filter').addClass('disabledDiv')
@@ -457,6 +462,7 @@ namespace LnkVoucher {
         $('#btnGenerationVoucher').removeAttr('disabled')
         $('._dis').attr('disabled', 'disabled')
         $('._Remarks').attr('disabled', 'disabled')
+        $('._Cost').attr('disabled', 'disabled')
         $('#id_div_Filter').removeClass('disabledDiv')
         $('._None_Input').addClass('display_none')
         $('.btn_minus_non').addClass('display_none')
@@ -544,14 +550,14 @@ namespace LnkVoucher {
 
                     <td>
 		                <div class="form-group">
-			                <button type="button" class="style_ButSearch _dis"  id="btnSearchCostCenter${cnt}" name="ColSearch" disabled>
+			                <button type="button" class="_Cost style_ButSearch _dis"  id="btnSearchCostCenter${cnt}" name="ColSearch" disabled>
                                 <i class="fa fa-search"></i>
                              </button>
 		                </div>
 	                </td>
                      <td style="width:9%;">
 		                <div class="form-group">
-			                <input id="CC_Code${cnt}" name="" value="" disabled type="text" class="form-control _dis" />
+			                <input id="CC_Code${cnt}" name="" value="" disabled type="text" class="_Cost form-control _dis" />
 		                </div>
 	                </td>
                     <td style="width:17%;" class="costcntr">

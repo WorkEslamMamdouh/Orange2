@@ -200,7 +200,7 @@ namespace HomeComponent {
         $("#ddbra").on('change', function () {
             selectedbar = $('#ddbra').val();
             systemEnv.BranchCode = selectedbar;
-            document.cookie = "Inv1_systemProperties=" + JSON.stringify(systemEnv).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+            document.cookie = "Inv1_systemProperties=" + encodeURIComponent(JSON.stringify(systemEnv).toString() )+ ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
             newtap = false;
             OpenPage(Modules.Home);
 
@@ -296,7 +296,7 @@ namespace HomeComponent {
                 $('#LanguageButtonHome').text(" تغير اللغة  ");
 
 
-                document.cookie = "Inv1_systemProperties=" + JSON.stringify(SysSession.CurrentEnvironment) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                document.cookie = "Inv1_systemProperties=" + encodeURIComponent(JSON.stringify(SysSession.CurrentEnvironment)) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
             }
             else { // Arabic Mode
 
@@ -316,7 +316,7 @@ namespace HomeComponent {
 
                 $('#LanguageButtonHome').text("Change Language");
 
-                document.cookie = "Inv1_systemProperties=" + JSON.stringify(SysSession.CurrentEnvironment) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                document.cookie = "Inv1_systemProperties=" + encodeURIComponent(JSON.stringify(SysSession.CurrentEnvironment)) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
             }
 
             window.location.reload();
@@ -597,7 +597,7 @@ namespace HomeComponent {
                         $("#spnFav").css("display", "inline-block");
                         SysSession.CurrentPrivileges = result;
                         SysSession.CurrentPrivileges.MODULE_CODE = SysSession.CurrentEnvironment.ModuleCode;
-                        document.cookie = "Inv1_Privilage=" + JSON.stringify(result).toString() + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
+                        document.cookie = "Inv1_Privilage=" + encodeURIComponent(JSON.stringify(result).toString()) + ";expires=Fri, 31 Dec 2030 23:59:59 GMT;path=/";
 
                     }
                     else {
