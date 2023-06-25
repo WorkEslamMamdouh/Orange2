@@ -4355,7 +4355,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Textbox>
       <Image Name="Image1">
         <Source>Database</Source>
-        <Value>=First(Fields!QRSTR.Value, "Prnt_invoice_simpleComp8ArBr2")</Value>
+        <Value>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp8Br2")</Value>
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
         <Top>0.20004cm</Top>
@@ -4363,7 +4363,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Height>2.91755cm</Height>
         <Width>3.78388cm</Width>
         <ZIndex>28</ZIndex>
-        <ToolTip>=First(Fields!QRSTR.Value, "Prnt_invoice_simpleComp8ArBr2")</ToolTip>
+        <ToolTip>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp8Br2")</ToolTip>
         <Style>
           <Border>
             <Style>None</Style>
