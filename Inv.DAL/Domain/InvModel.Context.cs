@@ -2745,27 +2745,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_PurPurchaseOrder_Result>("IProc_Prnt_PurPurchaseOrder", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, tRIdParameter);
         }
     
-        public virtual int A_ProcessVouchers(string userCode, Nullable<int> comp, Nullable<int> vchrType, Nullable<int> opCode)
-        {
-            var userCodeParameter = userCode != null ?
-                new ObjectParameter("userCode", userCode) :
-                new ObjectParameter("userCode", typeof(string));
-    
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var vchrTypeParameter = vchrType.HasValue ?
-                new ObjectParameter("VchrType", vchrType) :
-                new ObjectParameter("VchrType", typeof(int));
-    
-            var opCodeParameter = opCode.HasValue ?
-                new ObjectParameter("OpCode", opCode) :
-                new ObjectParameter("OpCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("A_ProcessVouchers", userCodeParameter, compParameter, vchrTypeParameter, opCodeParameter);
-        }
-    
         public virtual ObjectResult<IProc_Rep_OperationItemSales_Result> IProc_Rep_OperationItemSales(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
@@ -6446,6 +6425,31 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("todate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gproc_Rep_UserActivitySummary_Result>("Gproc_Rep_UserActivitySummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, moduleParameter, bracodeParameter, fromdateParameter, todateParameter);
+        }
+    
+        public virtual int A_ProcessVouchers(string userCode, Nullable<int> comp, Nullable<int> finYear, Nullable<int> vchrType, Nullable<int> opCode)
+        {
+            var userCodeParameter = userCode != null ?
+                new ObjectParameter("userCode", userCode) :
+                new ObjectParameter("userCode", typeof(string));
+    
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("Comp", comp) :
+                new ObjectParameter("Comp", typeof(int));
+    
+            var finYearParameter = finYear.HasValue ?
+                new ObjectParameter("FinYear", finYear) :
+                new ObjectParameter("FinYear", typeof(int));
+    
+            var vchrTypeParameter = vchrType.HasValue ?
+                new ObjectParameter("VchrType", vchrType) :
+                new ObjectParameter("VchrType", typeof(int));
+    
+            var opCodeParameter = opCode.HasValue ?
+                new ObjectParameter("OpCode", opCode) :
+                new ObjectParameter("OpCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("A_ProcessVouchers", userCodeParameter, compParameter, finYearParameter, vchrTypeParameter, opCodeParameter);
         }
     }
 }

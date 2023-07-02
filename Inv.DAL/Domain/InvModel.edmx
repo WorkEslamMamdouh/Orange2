@@ -643,6 +643,7 @@
           <Property Name="St_DescA" Type="nvarchar" MaxLength="50" />
           <Property Name="Src_DescE" Type="nvarchar" MaxLength="50" />
           <Property Name="Src_DescA" Type="nvarchar" MaxLength="50" />
+          <Property Name="voucherid" Type="int" />
         </EntityType>
         <EntityType Name="A_TR_VchrTemplate">
           <Key>
@@ -6261,6 +6262,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
         <Function Name="A_ProcessVouchers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userCode" Type="nvarchar" Mode="In" />
           <Parameter Name="Comp" Type="int" Mode="In" />
+          <Parameter Name="FinYear" Type="int" Mode="In" />
           <Parameter Name="VchrType" Type="int" Mode="In" />
           <Parameter Name="OpCode" Type="int" Mode="In" />
         </Function>
@@ -11690,12 +11692,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="A_ProcessVouchers">
-            <Parameter Name="userCode" Mode="In" Type="String" />
-            <Parameter Name="Comp" Mode="In" Type="Int32" />
-            <Parameter Name="VchrType" Mode="In" Type="Int32" />
-            <Parameter Name="OpCode" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="IProc_Rep_OperationItemSales" ReturnType="Collection(InvModel.IProc_Rep_OperationItemSales_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
             <Parameter Name="bra" Mode="In" Type="Int32" />
@@ -12721,6 +12717,13 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="todate" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="GQ_GetRoleModule" EntityType="InvModel.GQ_GetRoleModule" />
+          <FunctionImport Name="A_ProcessVouchers">
+            <Parameter Name="userCode" Mode="In" Type="String" />
+            <Parameter Name="Comp" Mode="In" Type="Int32" />
+            <Parameter Name="FinYear" Mode="In" Type="Int32" />
+            <Parameter Name="VchrType" Mode="In" Type="Int32" />
+            <Parameter Name="OpCode" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -14936,6 +14939,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="St_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Src_DescE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Src_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="voucherid" Type="Int32" />
         </EntityType>
         <EntityType Name="A_JOURNAL_HEADER">
           <Key>
@@ -26158,6 +26162,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="A_TmpVoucherProcess">
             <EntityTypeMapping TypeName="InvModel.A_TmpVoucherProcess">
               <MappingFragment StoreEntitySet="A_TmpVoucherProcess">
+                <ScalarProperty Name="voucherid" ColumnName="voucherid" />
                 <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
                 <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
                 <ScalarProperty Name="St_DescA" ColumnName="St_DescA" />
@@ -31244,7 +31249,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="A_ProcessVouchers" FunctionName="InvModel.Store.A_ProcessVouchers" />
           <FunctionImportMapping FunctionImportName="IProc_Rep_OperationItemSales" FunctionName="InvModel.Store.IProc_Rep_OperationItemSales">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InvModel.IProc_Rep_OperationItemSales_Result">
@@ -35650,6 +35654,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="A_ProcessVouchers" FunctionName="InvModel.Store.A_ProcessVouchers" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

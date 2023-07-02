@@ -40,5 +40,6 @@ namespace Inv.DAL.Domain
         public string St_DescA { get; set; }
         public string Src_DescE { get; set; }
         public string Src_DescA { get; set; }
+        public Nullable<int> voucherid { get; set; }
     }
 }
