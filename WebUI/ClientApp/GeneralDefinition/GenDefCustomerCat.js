@@ -353,9 +353,9 @@ var GenDefCustomerCat;
             $("#txtCode" + i).val(Details[i].CatCode);
             $("#txtDescA" + i).val(Details[i].Cat_DescA);
             $("#txtDescL" + i).val(Details[i].Cat_DescE);
+            $('#txtAcount_Code' + i + ' option[value=' + Details[i].AccountCode + ']').prop('selected', 'selected').change();
             $("#CodePrefex" + i).val(Details[i].CodePrefex);
             $("#LastNumber" + i).val(Details[i].LastNumber);
-            $('#txtAcount_Code' + i + ' option[value=' + Details[i].AccountCode + ']').prop('selected', 'selected').change();
             $("#txt_StatusFlag" + i).val("");
         }
     }
