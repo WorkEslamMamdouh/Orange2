@@ -1,8 +1,4 @@
 ﻿@using Inv.WebUI.Resources
-@{
-    ViewBag.Title = @SystemResource.Purchase_Recieve;
-    Layout = "~/Views/Shared/Layout.cshtml";
-}
  
 <div class="row gy-3">
     <!-- Filter Container -->
@@ -497,8 +493,7 @@
 
 </div>
 
-
-@section Script{
+ 
     <script src="~/ClientApp/Purchase/purtrreceive.js"></script>
     <script>
         $(document).ready(function () {
@@ -529,6 +524,5 @@
                 $('#result').html("id : " + userid + ", name : " + username);
             });
         });
-    </script>
-}
+    </script> 
 

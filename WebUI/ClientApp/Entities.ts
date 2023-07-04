@@ -2515,6 +2515,7 @@ class A_TmpVoucherProcess extends SecurityClass {
         this.Src_DescE = "";
         this.Src_DescA = "";
         this.OpCode = 0;
+        this.VoucherID = 0;
     }
     public id: number;
     public CurrentUserCode: string;
@@ -2543,6 +2544,7 @@ class A_TmpVoucherProcess extends SecurityClass {
     public Src_DescE: string;
     public Src_DescA: string;
     public OpCode: number;
+    public VoucherID: number;
 }
 
 
