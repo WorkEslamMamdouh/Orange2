@@ -237,6 +237,7 @@ var Accountbalances;
         rp.RepType = OutType; //output report as View
         rp.FromDate = DateFormatRep(txtFromDate.value);
         rp.ToDate = DateFormatRep(txtToDate.value);
+        rp.orderby = $('#dbOrderBy').val();
         if ($('#txtCenter_Cost_ID').val() == "") {
             rp.cc_code = "-1";
         }

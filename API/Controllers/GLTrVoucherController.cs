@@ -451,7 +451,7 @@ namespace Inv.API.Controllers
                         ITmpVoucherProcessService.InsertLst(A_TmpVouProList);
 
 
-                        int res = db.A_ProcessVouchers(A_TmpVouProList[0].UserCode, A_TmpVouProList[0].COMP_CODE, 1, A_TmpVouProList[0].OpCode);
+                        int res = db.A_ProcessVouchers(A_TmpVouProList[0].UserCode, A_TmpVouProList[0].COMP_CODE,Convert.ToInt16(A_TmpVouProList[0].sec_FinYear), 1, A_TmpVouProList[0].OpCode);
                         if (res > 0)
                         {
                             dbTransaction.Commit();
