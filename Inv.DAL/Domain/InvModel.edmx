@@ -643,6 +643,7 @@
           <Property Name="St_DescA" Type="nvarchar" MaxLength="50" />
           <Property Name="Src_DescE" Type="nvarchar" MaxLength="50" />
           <Property Name="Src_DescA" Type="nvarchar" MaxLength="50" />
+          <Property Name="voucherid" Type="int" />
         </EntityType>
         <EntityType Name="A_TR_VchrTemplate">
           <Key>
@@ -6261,6 +6262,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
         <Function Name="A_ProcessVouchers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userCode" Type="nvarchar" Mode="In" />
           <Parameter Name="Comp" Type="int" Mode="In" />
+          <Parameter Name="FinYear" Type="int" Mode="In" />
           <Parameter Name="VchrType" Type="int" Mode="In" />
           <Parameter Name="OpCode" Type="int" Mode="In" />
         </Function>
@@ -6483,6 +6485,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Parameter Name="EndType" Type="int" Mode="In" />
           <Parameter Name="PrdType" Type="int" Mode="In" />
           <Parameter Name="IncludeInvTR" Type="int" Mode="In" />
+          <Parameter Name="OrderBy" Type="int" Mode="In" />
         </Function>
         <Function Name="AProc_Rpt_JournalVoucherList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="comp" Type="int" Mode="In" />
@@ -11690,12 +11693,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="LoginUser" Mode="In" Type="String" />
             <Parameter Name="TRId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="A_ProcessVouchers">
-            <Parameter Name="userCode" Mode="In" Type="String" />
-            <Parameter Name="Comp" Mode="In" Type="Int32" />
-            <Parameter Name="VchrType" Mode="In" Type="Int32" />
-            <Parameter Name="OpCode" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="IProc_Rep_OperationItemSales" ReturnType="Collection(InvModel.IProc_Rep_OperationItemSales_Result)">
             <Parameter Name="comp" Mode="In" Type="Int32" />
             <Parameter Name="bra" Mode="In" Type="Int32" />
@@ -12540,26 +12537,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="year" Mode="In" Type="Int32" />
             <Parameter Name="mode" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AProc_Rpt_GLGeneralLedgerVer2" ReturnType="Collection(InvModel.AProc_Rpt_GLGeneralLedgerVer2_Result)">
-            <Parameter Name="comp" Mode="In" Type="Int32" />
-            <Parameter Name="bra" Mode="In" Type="Int32" />
-            <Parameter Name="CompNameA" Mode="In" Type="String" />
-            <Parameter Name="CompNameE" Mode="In" Type="String" />
-            <Parameter Name="BraNameA" Mode="In" Type="String" />
-            <Parameter Name="BraNameE" Mode="In" Type="String" />
-            <Parameter Name="LoginUser" Mode="In" Type="String" />
-            <Parameter Name="RepType" Mode="In" Type="Int32" />
-            <Parameter Name="FromDate" Mode="In" Type="String" />
-            <Parameter Name="ToDate" Mode="In" Type="String" />
-            <Parameter Name="cc_Code" Mode="In" Type="String" />
-            <Parameter Name="AccCode" Mode="In" Type="String" />
-            <Parameter Name="IsAuthVchr" Mode="In" Type="Int32" />
-            <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
-            <Parameter Name="OpenType" Mode="In" Type="Int32" />
-            <Parameter Name="EndType" Mode="In" Type="Int32" />
-            <Parameter Name="PrdType" Mode="In" Type="Int32" />
-            <Parameter Name="IncludeInvTR" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="G_LnkTrans_Comp" EntityType="InvModel.G_LnkTrans_Comp" />
           <EntitySet Name="GQ_GetLnkTransComp" EntityType="InvModel.GQ_GetLnkTransComp" />
           <EntitySet Name="IQ_GetCollectList" EntityType="InvModel.IQ_GetCollectList" />
@@ -12721,6 +12698,34 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             <Parameter Name="todate" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="GQ_GetRoleModule" EntityType="InvModel.GQ_GetRoleModule" />
+          <FunctionImport Name="A_ProcessVouchers">
+            <Parameter Name="userCode" Mode="In" Type="String" />
+            <Parameter Name="Comp" Mode="In" Type="Int32" />
+            <Parameter Name="FinYear" Mode="In" Type="Int32" />
+            <Parameter Name="VchrType" Mode="In" Type="Int32" />
+            <Parameter Name="OpCode" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AProc_Rpt_GLGeneralLedgerVer2" ReturnType="Collection(InvModel.AProc_Rpt_GLGeneralLedgerVer2_Result)">
+            <Parameter Name="comp" Mode="In" Type="Int32" />
+            <Parameter Name="bra" Mode="In" Type="Int32" />
+            <Parameter Name="CompNameA" Mode="In" Type="String" />
+            <Parameter Name="CompNameE" Mode="In" Type="String" />
+            <Parameter Name="BraNameA" Mode="In" Type="String" />
+            <Parameter Name="BraNameE" Mode="In" Type="String" />
+            <Parameter Name="LoginUser" Mode="In" Type="String" />
+            <Parameter Name="RepType" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="String" />
+            <Parameter Name="ToDate" Mode="In" Type="String" />
+            <Parameter Name="cc_Code" Mode="In" Type="String" />
+            <Parameter Name="AccCode" Mode="In" Type="String" />
+            <Parameter Name="IsAuthVchr" Mode="In" Type="Int32" />
+            <Parameter Name="IsNewVchr" Mode="In" Type="Int32" />
+            <Parameter Name="OpenType" Mode="In" Type="Int32" />
+            <Parameter Name="EndType" Mode="In" Type="Int32" />
+            <Parameter Name="PrdType" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeInvTR" Mode="In" Type="Int32" />
+            <Parameter Name="OrderBy" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="A_D_VAT_TYPE">
           <Key>
@@ -14936,6 +14941,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="St_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Src_DescE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Src_DescA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="voucherid" Type="Int32" />
         </EntityType>
         <EntityType Name="A_JOURNAL_HEADER">
           <Key>
@@ -23002,49 +23008,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Type="String" Name="Store_DescA" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Store_DescE" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="AProc_Rpt_GLGeneralLedgerVer2_Result">
-          <Property Type="Int32" Name="Comp" Nullable="true" />
-          <Property Type="Int32" Name="Bra" Nullable="true" />
-          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
-          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
-          <Property Type="String" Name="Par_StNewDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StNewDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StAuthDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_StAuthDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_incinvDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_incinvDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CCDESCA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_CCDESCE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_AccDSA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_AccDSE" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Par_OpenDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_OpenDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_EndDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_EndDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_PrdDSA" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_PrdDSE" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="AccCode" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="AccLEvel" Nullable="true" />
-          <Property Type="Int32" Name="AccGroup" Nullable="true" />
-          <Property Type="String" Name="ParentAcc" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="detail" Nullable="true" />
-          <Property Type="Decimal" Name="PrevDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Prevcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="PrdDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Prdcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="EndDebit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Endcredit" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="acc_descA" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="acc_descL" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <EntityType Name="G_LnkTrans_Comp">
           <Key>
             <PropertyRef Name="SYSTEM_CODE" />
@@ -23963,6 +23926,51 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <Property Name="MODULE_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="Images_Enabled" Type="Boolean" />
         </EntityType>
+        <ComplexType Name="AProc_Rpt_GLGeneralLedgerVer2_Result">
+          <Property Type="Int32" Name="Comp" Nullable="true" />
+          <Property Type="Int32" Name="Bra" Nullable="true" />
+          <Property Type="String" Name="CompNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CompNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BraNameE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LoginUser" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="PrintDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Par_RepType" Nullable="true" />
+          <Property Type="String" Name="Par_StNewDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StNewDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StAuthDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_StAuthDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_incinvDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_incinvDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CCDESCA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_CCDESCE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_AccDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_AccDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OrderDSA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OrderDSE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Par_OpenDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_OpenDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_EndDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_EndDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_PrdDSA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_PrdDSE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Par_FromDate" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Par_Todate" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="AccCode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="AccLEvel" Nullable="true" />
+          <Property Type="Int32" Name="AccGroup" Nullable="true" />
+          <Property Type="String" Name="ParentAcc" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="detail" Nullable="true" />
+          <Property Type="Decimal" Name="PrevDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Prevcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PrdDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Prdcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="EndDebit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Endcredit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="acc_descA" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="acc_descL" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -26158,6 +26166,7 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
           <EntitySetMapping Name="A_TmpVoucherProcess">
             <EntityTypeMapping TypeName="InvModel.A_TmpVoucherProcess">
               <MappingFragment StoreEntitySet="A_TmpVoucherProcess">
+                <ScalarProperty Name="voucherid" ColumnName="voucherid" />
                 <ScalarProperty Name="Src_DescA" ColumnName="Src_DescA" />
                 <ScalarProperty Name="Src_DescE" ColumnName="Src_DescE" />
                 <ScalarProperty Name="St_DescA" ColumnName="St_DescA" />
@@ -31244,7 +31253,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="A_ProcessVouchers" FunctionName="InvModel.Store.A_ProcessVouchers" />
           <FunctionImportMapping FunctionImportName="IProc_Rep_OperationItemSales" FunctionName="InvModel.Store.IProc_Rep_OperationItemSales">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InvModel.IProc_Rep_OperationItemSales_Result">
@@ -34652,53 +34660,6 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Iproc_UpdateStockOpenbalance" FunctionName="InvModel.Store.Iproc_UpdateStockOpenbalance" />
-          <FunctionImportMapping FunctionImportName="AProc_Rpt_GLGeneralLedgerVer2" FunctionName="InvModel.Store.AProc_Rpt_GLGeneralLedgerVer2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InvModel.AProc_Rpt_GLGeneralLedgerVer2_Result">
-                <ScalarProperty Name="Comp" ColumnName="Comp" />
-                <ScalarProperty Name="Bra" ColumnName="Bra" />
-                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
-                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
-                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
-                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
-                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
-                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
-                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
-                <ScalarProperty Name="Par_StNewDSA" ColumnName="Par_StNewDSA" />
-                <ScalarProperty Name="Par_StNewDSE" ColumnName="Par_StNewDSE" />
-                <ScalarProperty Name="Par_StAuthDSA" ColumnName="Par_StAuthDSA" />
-                <ScalarProperty Name="Par_StAuthDSE" ColumnName="Par_StAuthDSE" />
-                <ScalarProperty Name="Par_incinvDSA" ColumnName="Par_incinvDSA" />
-                <ScalarProperty Name="Par_incinvDSE" ColumnName="Par_incinvDSE" />
-                <ScalarProperty Name="Par_CCDESCA" ColumnName="Par_CCDESCA" />
-                <ScalarProperty Name="Par_CCDESCE" ColumnName="Par_CCDESCE" />
-                <ScalarProperty Name="Par_AccDSA" ColumnName="Par_AccDSA" />
-                <ScalarProperty Name="Par_AccDSE" ColumnName="Par_AccDSE" />
-                <ScalarProperty Name="Par_OpenDSA" ColumnName="Par_OpenDSA" />
-                <ScalarProperty Name="Par_OpenDSE" ColumnName="Par_OpenDSE" />
-                <ScalarProperty Name="Par_EndDSA" ColumnName="Par_EndDSA" />
-                <ScalarProperty Name="Par_EndDSE" ColumnName="Par_EndDSE" />
-                <ScalarProperty Name="Par_PrdDSA" ColumnName="Par_PrdDSA" />
-                <ScalarProperty Name="Par_PrdDSE" ColumnName="Par_PrdDSE" />
-                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
-                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="AccCode" ColumnName="AccCode" />
-                <ScalarProperty Name="AccLEvel" ColumnName="AccLEvel" />
-                <ScalarProperty Name="AccGroup" ColumnName="AccGroup" />
-                <ScalarProperty Name="ParentAcc" ColumnName="ParentAcc" />
-                <ScalarProperty Name="detail" ColumnName="detail" />
-                <ScalarProperty Name="PrevDebit" ColumnName="PrevDebit" />
-                <ScalarProperty Name="Prevcredit" ColumnName="Prevcredit" />
-                <ScalarProperty Name="PrdDebit" ColumnName="PrdDebit" />
-                <ScalarProperty Name="Prdcredit" ColumnName="Prdcredit" />
-                <ScalarProperty Name="EndDebit" ColumnName="EndDebit" />
-                <ScalarProperty Name="Endcredit" ColumnName="Endcredit" />
-                <ScalarProperty Name="acc_descA" ColumnName="acc_descA" />
-                <ScalarProperty Name="acc_descL" ColumnName="acc_descL" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="G_LnkTrans_Comp">
             <EntityTypeMapping TypeName="InvModel.G_LnkTrans_Comp">
               <MappingFragment StoreEntitySet="G_LnkTrans_Comp">
@@ -35650,6 +35611,56 @@ warning 6002: The table/view 'Orange2021.dbo.IQ_GetVendor' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="A_ProcessVouchers" FunctionName="InvModel.Store.A_ProcessVouchers" />
+          <FunctionImportMapping FunctionImportName="AProc_Rpt_GLGeneralLedgerVer2" FunctionName="InvModel.Store.AProc_Rpt_GLGeneralLedgerVer2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InvModel.AProc_Rpt_GLGeneralLedgerVer2_Result">
+                <ScalarProperty Name="Comp" ColumnName="Comp" />
+                <ScalarProperty Name="Bra" ColumnName="Bra" />
+                <ScalarProperty Name="CompNameA" ColumnName="CompNameA" />
+                <ScalarProperty Name="CompNameE" ColumnName="CompNameE" />
+                <ScalarProperty Name="BraNameA" ColumnName="BraNameA" />
+                <ScalarProperty Name="BraNameE" ColumnName="BraNameE" />
+                <ScalarProperty Name="LoginUser" ColumnName="LoginUser" />
+                <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+                <ScalarProperty Name="Par_RepType" ColumnName="Par_RepType" />
+                <ScalarProperty Name="Par_StNewDSA" ColumnName="Par_StNewDSA" />
+                <ScalarProperty Name="Par_StNewDSE" ColumnName="Par_StNewDSE" />
+                <ScalarProperty Name="Par_StAuthDSA" ColumnName="Par_StAuthDSA" />
+                <ScalarProperty Name="Par_StAuthDSE" ColumnName="Par_StAuthDSE" />
+                <ScalarProperty Name="Par_incinvDSA" ColumnName="Par_incinvDSA" />
+                <ScalarProperty Name="Par_incinvDSE" ColumnName="Par_incinvDSE" />
+                <ScalarProperty Name="Par_CCDESCA" ColumnName="Par_CCDESCA" />
+                <ScalarProperty Name="Par_CCDESCE" ColumnName="Par_CCDESCE" />
+                <ScalarProperty Name="Par_AccDSA" ColumnName="Par_AccDSA" />
+                <ScalarProperty Name="Par_AccDSE" ColumnName="Par_AccDSE" />
+                <ScalarProperty Name="Par_OrderDSA" ColumnName="Par_OrderDSA" />
+                <ScalarProperty Name="Par_OrderDSE" ColumnName="Par_OrderDSE" />
+                <ScalarProperty Name="Par_OpenDSA" ColumnName="Par_OpenDSA" />
+                <ScalarProperty Name="Par_OpenDSE" ColumnName="Par_OpenDSE" />
+                <ScalarProperty Name="Par_EndDSA" ColumnName="Par_EndDSA" />
+                <ScalarProperty Name="Par_EndDSE" ColumnName="Par_EndDSE" />
+                <ScalarProperty Name="Par_PrdDSA" ColumnName="Par_PrdDSA" />
+                <ScalarProperty Name="Par_PrdDSE" ColumnName="Par_PrdDSE" />
+                <ScalarProperty Name="Par_FromDate" ColumnName="Par_FromDate" />
+                <ScalarProperty Name="Par_Todate" ColumnName="Par_Todate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccCode" ColumnName="AccCode" />
+                <ScalarProperty Name="AccLEvel" ColumnName="AccLEvel" />
+                <ScalarProperty Name="AccGroup" ColumnName="AccGroup" />
+                <ScalarProperty Name="ParentAcc" ColumnName="ParentAcc" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="PrevDebit" ColumnName="PrevDebit" />
+                <ScalarProperty Name="Prevcredit" ColumnName="Prevcredit" />
+                <ScalarProperty Name="PrdDebit" ColumnName="PrdDebit" />
+                <ScalarProperty Name="Prdcredit" ColumnName="Prdcredit" />
+                <ScalarProperty Name="EndDebit" ColumnName="EndDebit" />
+                <ScalarProperty Name="Endcredit" ColumnName="Endcredit" />
+                <ScalarProperty Name="acc_descA" ColumnName="acc_descA" />
+                <ScalarProperty Name="acc_descL" ColumnName="acc_descL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

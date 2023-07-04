@@ -557,6 +557,10 @@ namespace Inv.WebUI.Controllers
         {
             return View("~/Views/AdminSetting/AdminCompDataIndex.cshtml");
         }
+        public ActionResult AdminReportIndex()
+        {
+            return View("~/Views/AdminSetting/AdminReportIndex.cshtml");
+        }
         public ActionResult AdminCompIndex()
         {
             return View("~/Views/AdminSetting/AdminCompIndex.cshtml");

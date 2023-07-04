@@ -2745,27 +2745,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IProc_Prnt_PurPurchaseOrder_Result>("IProc_Prnt_PurPurchaseOrder", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, tRIdParameter);
         }
     
-        public virtual int A_ProcessVouchers(string userCode, Nullable<int> comp, Nullable<int> vchrType, Nullable<int> opCode)
-        {
-            var userCodeParameter = userCode != null ?
-                new ObjectParameter("userCode", userCode) :
-                new ObjectParameter("userCode", typeof(string));
-    
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("Comp", comp) :
-                new ObjectParameter("Comp", typeof(int));
-    
-            var vchrTypeParameter = vchrType.HasValue ?
-                new ObjectParameter("VchrType", vchrType) :
-                new ObjectParameter("VchrType", typeof(int));
-    
-            var opCodeParameter = opCode.HasValue ?
-                new ObjectParameter("OpCode", opCode) :
-                new ObjectParameter("OpCode", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("A_ProcessVouchers", userCodeParameter, compParameter, vchrTypeParameter, opCodeParameter);
-        }
-    
         public virtual ObjectResult<IProc_Rep_OperationItemSales_Result> IProc_Rep_OperationItemSales(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
@@ -5811,83 +5790,6 @@ namespace Inv.DAL.Domain
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Iproc_UpdateStockOpenbalance", compParameter, braParameter, yearParameter, modeParameter);
         }
     
-        public virtual ObjectResult<AProc_Rpt_GLGeneralLedgerVer2_Result> AProc_Rpt_GLGeneralLedgerVer2(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string fromDate, string toDate, string cc_Code, string accCode, Nullable<int> isAuthVchr, Nullable<int> isNewVchr, Nullable<int> openType, Nullable<int> endType, Nullable<int> prdType, Nullable<int> includeInvTR)
-        {
-            var compParameter = comp.HasValue ?
-                new ObjectParameter("comp", comp) :
-                new ObjectParameter("comp", typeof(int));
-    
-            var braParameter = bra.HasValue ?
-                new ObjectParameter("bra", bra) :
-                new ObjectParameter("bra", typeof(int));
-    
-            var compNameAParameter = compNameA != null ?
-                new ObjectParameter("CompNameA", compNameA) :
-                new ObjectParameter("CompNameA", typeof(string));
-    
-            var compNameEParameter = compNameE != null ?
-                new ObjectParameter("CompNameE", compNameE) :
-                new ObjectParameter("CompNameE", typeof(string));
-    
-            var braNameAParameter = braNameA != null ?
-                new ObjectParameter("BraNameA", braNameA) :
-                new ObjectParameter("BraNameA", typeof(string));
-    
-            var braNameEParameter = braNameE != null ?
-                new ObjectParameter("BraNameE", braNameE) :
-                new ObjectParameter("BraNameE", typeof(string));
-    
-            var loginUserParameter = loginUser != null ?
-                new ObjectParameter("LoginUser", loginUser) :
-                new ObjectParameter("LoginUser", typeof(string));
-    
-            var repTypeParameter = repType.HasValue ?
-                new ObjectParameter("RepType", repType) :
-                new ObjectParameter("RepType", typeof(int));
-    
-            var fromDateParameter = fromDate != null ?
-                new ObjectParameter("FromDate", fromDate) :
-                new ObjectParameter("FromDate", typeof(string));
-    
-            var toDateParameter = toDate != null ?
-                new ObjectParameter("ToDate", toDate) :
-                new ObjectParameter("ToDate", typeof(string));
-    
-            var cc_CodeParameter = cc_Code != null ?
-                new ObjectParameter("cc_Code", cc_Code) :
-                new ObjectParameter("cc_Code", typeof(string));
-    
-            var accCodeParameter = accCode != null ?
-                new ObjectParameter("AccCode", accCode) :
-                new ObjectParameter("AccCode", typeof(string));
-    
-            var isAuthVchrParameter = isAuthVchr.HasValue ?
-                new ObjectParameter("IsAuthVchr", isAuthVchr) :
-                new ObjectParameter("IsAuthVchr", typeof(int));
-    
-            var isNewVchrParameter = isNewVchr.HasValue ?
-                new ObjectParameter("IsNewVchr", isNewVchr) :
-                new ObjectParameter("IsNewVchr", typeof(int));
-    
-            var openTypeParameter = openType.HasValue ?
-                new ObjectParameter("OpenType", openType) :
-                new ObjectParameter("OpenType", typeof(int));
-    
-            var endTypeParameter = endType.HasValue ?
-                new ObjectParameter("EndType", endType) :
-                new ObjectParameter("EndType", typeof(int));
-    
-            var prdTypeParameter = prdType.HasValue ?
-                new ObjectParameter("PrdType", prdType) :
-                new ObjectParameter("PrdType", typeof(int));
-    
-            var includeInvTRParameter = includeInvTR.HasValue ?
-                new ObjectParameter("IncludeInvTR", includeInvTR) :
-                new ObjectParameter("IncludeInvTR", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rpt_GLGeneralLedgerVer2_Result>("AProc_Rpt_GLGeneralLedgerVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter, cc_CodeParameter, accCodeParameter, isAuthVchrParameter, isNewVchrParameter, openTypeParameter, endTypeParameter, prdTypeParameter, includeInvTRParameter);
-        }
-    
         public virtual ObjectResult<IProc_Prnt_Collect_Result> IProc_Prnt_Collect(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, Nullable<int> tRId)
         {
             var compParameter = comp.HasValue ?
@@ -6446,6 +6348,112 @@ namespace Inv.DAL.Domain
                 new ObjectParameter("todate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Gproc_Rep_UserActivitySummary_Result>("Gproc_Rep_UserActivitySummary", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, userParameter, moduleParameter, bracodeParameter, fromdateParameter, todateParameter);
+        }
+    
+        public virtual int A_ProcessVouchers(string userCode, Nullable<int> comp, Nullable<int> finYear, Nullable<int> vchrType, Nullable<int> opCode)
+        {
+            var userCodeParameter = userCode != null ?
+                new ObjectParameter("userCode", userCode) :
+                new ObjectParameter("userCode", typeof(string));
+    
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("Comp", comp) :
+                new ObjectParameter("Comp", typeof(int));
+    
+            var finYearParameter = finYear.HasValue ?
+                new ObjectParameter("FinYear", finYear) :
+                new ObjectParameter("FinYear", typeof(int));
+    
+            var vchrTypeParameter = vchrType.HasValue ?
+                new ObjectParameter("VchrType", vchrType) :
+                new ObjectParameter("VchrType", typeof(int));
+    
+            var opCodeParameter = opCode.HasValue ?
+                new ObjectParameter("OpCode", opCode) :
+                new ObjectParameter("OpCode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("A_ProcessVouchers", userCodeParameter, compParameter, finYearParameter, vchrTypeParameter, opCodeParameter);
+        }
+    
+        public virtual ObjectResult<AProc_Rpt_GLGeneralLedgerVer2_Result> AProc_Rpt_GLGeneralLedgerVer2(Nullable<int> comp, Nullable<int> bra, string compNameA, string compNameE, string braNameA, string braNameE, string loginUser, Nullable<int> repType, string fromDate, string toDate, string cc_Code, string accCode, Nullable<int> isAuthVchr, Nullable<int> isNewVchr, Nullable<int> openType, Nullable<int> endType, Nullable<int> prdType, Nullable<int> includeInvTR, Nullable<int> orderBy)
+        {
+            var compParameter = comp.HasValue ?
+                new ObjectParameter("comp", comp) :
+                new ObjectParameter("comp", typeof(int));
+    
+            var braParameter = bra.HasValue ?
+                new ObjectParameter("bra", bra) :
+                new ObjectParameter("bra", typeof(int));
+    
+            var compNameAParameter = compNameA != null ?
+                new ObjectParameter("CompNameA", compNameA) :
+                new ObjectParameter("CompNameA", typeof(string));
+    
+            var compNameEParameter = compNameE != null ?
+                new ObjectParameter("CompNameE", compNameE) :
+                new ObjectParameter("CompNameE", typeof(string));
+    
+            var braNameAParameter = braNameA != null ?
+                new ObjectParameter("BraNameA", braNameA) :
+                new ObjectParameter("BraNameA", typeof(string));
+    
+            var braNameEParameter = braNameE != null ?
+                new ObjectParameter("BraNameE", braNameE) :
+                new ObjectParameter("BraNameE", typeof(string));
+    
+            var loginUserParameter = loginUser != null ?
+                new ObjectParameter("LoginUser", loginUser) :
+                new ObjectParameter("LoginUser", typeof(string));
+    
+            var repTypeParameter = repType.HasValue ?
+                new ObjectParameter("RepType", repType) :
+                new ObjectParameter("RepType", typeof(int));
+    
+            var fromDateParameter = fromDate != null ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(string));
+    
+            var cc_CodeParameter = cc_Code != null ?
+                new ObjectParameter("cc_Code", cc_Code) :
+                new ObjectParameter("cc_Code", typeof(string));
+    
+            var accCodeParameter = accCode != null ?
+                new ObjectParameter("AccCode", accCode) :
+                new ObjectParameter("AccCode", typeof(string));
+    
+            var isAuthVchrParameter = isAuthVchr.HasValue ?
+                new ObjectParameter("IsAuthVchr", isAuthVchr) :
+                new ObjectParameter("IsAuthVchr", typeof(int));
+    
+            var isNewVchrParameter = isNewVchr.HasValue ?
+                new ObjectParameter("IsNewVchr", isNewVchr) :
+                new ObjectParameter("IsNewVchr", typeof(int));
+    
+            var openTypeParameter = openType.HasValue ?
+                new ObjectParameter("OpenType", openType) :
+                new ObjectParameter("OpenType", typeof(int));
+    
+            var endTypeParameter = endType.HasValue ?
+                new ObjectParameter("EndType", endType) :
+                new ObjectParameter("EndType", typeof(int));
+    
+            var prdTypeParameter = prdType.HasValue ?
+                new ObjectParameter("PrdType", prdType) :
+                new ObjectParameter("PrdType", typeof(int));
+    
+            var includeInvTRParameter = includeInvTR.HasValue ?
+                new ObjectParameter("IncludeInvTR", includeInvTR) :
+                new ObjectParameter("IncludeInvTR", typeof(int));
+    
+            var orderByParameter = orderBy.HasValue ?
+                new ObjectParameter("OrderBy", orderBy) :
+                new ObjectParameter("OrderBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AProc_Rpt_GLGeneralLedgerVer2_Result>("AProc_Rpt_GLGeneralLedgerVer2", compParameter, braParameter, compNameAParameter, compNameEParameter, braNameAParameter, braNameEParameter, loginUserParameter, repTypeParameter, fromDateParameter, toDateParameter, cc_CodeParameter, accCodeParameter, isAuthVchrParameter, isNewVchrParameter, openTypeParameter, endTypeParameter, prdTypeParameter, includeInvTRParameter, orderByParameter);
         }
     }
 }

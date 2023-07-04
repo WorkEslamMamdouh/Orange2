@@ -32,6 +32,8 @@ namespace Inv.DAL.Domain
         public string Par_CCDESCE { get; set; }
         public string Par_AccDSA { get; set; }
         public string Par_AccDSE { get; set; }
+        public string Par_OrderDSA { get; set; }
+        public string Par_OrderDSE { get; set; }
         public string Par_OpenDSA { get; set; }
         public string Par_OpenDSE { get; set; }
         public string Par_EndDSA { get; set; }

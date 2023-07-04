@@ -907,7 +907,7 @@
         <FixedRowHeaders>true</FixedRowHeaders>
         <KeepTogether>true</KeepTogether>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8Br2</DataSetName>
-        <Top>9.91964cm</Top>
+        <Top>8.96714cm</Top>
         <Left>0cm</Left>
         <Height>1.2cm</Height>
         <Width>20.51355cm</Width>
@@ -937,7 +937,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.60885cm</Top>
+        <Top>15.65635cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -971,7 +971,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>16.6018cm</Top>
+        <Top>15.6493cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1005,7 +1005,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.21916cm</Top>
+        <Top>16.26666cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1039,7 +1039,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.21916cm</Top>
+        <Top>16.26666cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1073,7 +1073,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.21916cm</Top>
+        <Top>16.26666cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1107,7 +1107,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.88972cm</Top>
+        <Top>16.93722cm</Top>
         <Left>14.7886cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1141,7 +1141,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.21916cm</Top>
+        <Top>16.26666cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1175,7 +1175,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.88972cm</Top>
+        <Top>16.93722cm</Top>
         <Left>5.69144cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1209,7 +1209,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.88972cm</Top>
+        <Top>16.93722cm</Top>
         <Left>13.66005cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1243,7 +1243,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox29</rd:DefaultName>
-        <Top>17.88972cm</Top>
+        <Top>16.93722cm</Top>
         <Left>4.54173cm</Left>
         <Height>0.6cm</Height>
         <Width>1.07916cm</Width>
@@ -1449,7 +1449,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>15.86421cm</Top>
+        <Top>14.91171cm</Top>
         <Left>18.14558cm</Left>
         <Height>0.6cm</Height>
         <Width>2.01872cm</Width>
@@ -1483,7 +1483,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TrNo</rd:DefaultName>
-        <Top>15.86421cm</Top>
+        <Top>14.91171cm</Top>
         <Left>0.16956cm</Left>
         <Height>0.6cm</Height>
         <Width>17.97602cm</Width>
@@ -2319,7 +2319,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>Rpt_Prnt_SlsInvoiceStdArComp8Br2</DataSetName>
-        <Top>11.42949cm</Top>
+        <Top>10.47699cm</Top>
         <Left>0.06676in</Left>
         <Height>4.2cm</Height>
         <Width>20.07491cm</Width>
@@ -3257,7 +3257,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.28545cm</Top>
+        <Top>3.33295cm</Top>
         <Left>10.39668cm</Left>
         <Height>5.50558cm</Height>
         <Width>9.76762cm</Width>
@@ -4217,7 +4217,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>4.28545cm</Top>
+        <Top>3.33295cm</Top>
         <Left>0.34922cm</Left>
         <Height>5.50558cm</Height>
         <Width>9.94163cm</Width>
@@ -4317,24 +4317,6 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Image Name="Image9">
-        <Source>Embedded</Source>
-        <Value>draft21</Value>
-        <Sizing>Fit</Sizing>
-        <Top>0.84314cm</Top>
-        <Left>0.34025cm</Left>
-        <Height>3.24475cm</Height>
-        <Width>4.48037cm</Width>
-        <ZIndex>27</ZIndex>
-        <Visibility>
-          <Hidden>=iif(Fields!Status.Value=0,false,true)</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
       <Textbox Name="Textbox1">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -4360,7 +4342,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
         <Left>4.48014cm</Left>
         <Height>0.68819cm</Height>
         <Width>11.00662cm</Width>
-        <ZIndex>28</ZIndex>
+        <ZIndex>27</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -4371,8 +4353,43 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Image Name="Image1">
+        <Source>Database</Source>
+        <Value>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp8Br2")</Value>
+        <MIMEType>image/jpeg</MIMEType>
+        <Sizing>FitProportional</Sizing>
+        <Top>0.20004cm</Top>
+        <Left>0.58719cm</Left>
+        <Height>2.91755cm</Height>
+        <Width>3.78388cm</Width>
+        <ZIndex>28</ZIndex>
+        <ToolTip>=First(Fields!QRSTR.Value, "Rpt_Prnt_SlsInvoiceStdArComp8Br2")</ToolTip>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="Image9">
+        <Source>Embedded</Source>
+        <Value>draft21</Value>
+        <Sizing>Fit</Sizing>
+        <Top>0.07056cm</Top>
+        <Left>0.16956cm</Left>
+        <Height>3.07349cm</Height>
+        <Width>4.25443cm</Width>
+        <ZIndex>29</ZIndex>
+        <Visibility>
+          <Hidden>=iif(Fields!Status.Value=0,false,true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
-    <Height>7.34192in</Height>
+    <Height>6.93567in</Height>
     <Style>
       <Border>
         <Style>None</Style>
@@ -4412,7 +4429,7 @@ Format(Fields!TrTime.Value.TotalMinutes Mod 60, "00")</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.78562cm</Height>
+      <Height>0.4152cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <Style>
