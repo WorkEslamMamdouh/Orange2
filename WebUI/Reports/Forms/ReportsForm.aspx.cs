@@ -3042,6 +3042,9 @@ namespace RS.WebUI.Reports.Forms
             int IncludeInvTR = int.Parse(RepPar.IncludeInvTR.ToString());
             SqlParameter spIncludeInvTR = new SqlParameter("@IncludeInvTR", IncludeInvTR);
 
+            int orderby = int.Parse(RepPar.orderby.ToString());
+            SqlParameter spOrderBy = new SqlParameter("@OrderBy ", orderby);
+
             int OpenType = int.Parse(RepPar.OpenType.ToString());
             SqlParameter spOpenType = new SqlParameter("@OpenType", OpenType == -1 ? System.Data.SqlTypes.SqlInt32.Null : OpenType);
 
@@ -3070,10 +3073,11 @@ namespace RS.WebUI.Reports.Forms
            ", @AccCode ='" + spAccCode.Value + "'" +
            ", @IsAuthVchr = " + spIsAuthVchr.Value +
            ", @IsNewVchr = " + spIsNewVchr.Value +
-           ", @PrdType = " + spPrdType.Value +
-           ", @OpenType = " + spOpenType.Value +
+           ", @OpenType = " + spOpenType.Value + 
            ", @EndType = " + spEndType.Value +
-           ", @IncludeInvTR = " + spIncludeInvTR.Value;
+           ", @PrdType = " + spPrdType.Value +
+           ", @IncludeInvTR = " + spIncludeInvTR.Value +
+            ",@OrderBy = " + spOrderBy.Value;
 
 
             List<AProc_Rpt_GLGeneralLedgerVer2_Result> query = db.Database.SqlQuery<AProc_Rpt_GLGeneralLedgerVer2_Result>(_Query).ToList();

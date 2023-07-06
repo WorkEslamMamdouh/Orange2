@@ -1483,6 +1483,7 @@ var A_TmpVoucherProcess = /** @class */ (function (_super) {
         _this.Src_DescE = "";
         _this.Src_DescA = "";
         _this.OpCode = 0;
+        _this.VoucherID = 0;
         return _this;
     }
     return A_TmpVoucherProcess;

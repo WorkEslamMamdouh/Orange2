@@ -350,7 +350,9 @@ namespace ManagementVoucher {
             { title: res.source, name: (lang == "ar" ? "Src_DescA" : "Src_DescE"), type: "text", width: "5%"},
             { title: res.App_Type, name: (lang == "ar" ? "TYPE_DESCA" : "TYPE_DESCE"), type: "text", width: "5%" },
             //  { title: "الاجمالي", name: "Openbalance", type: "text", width: "100px" },
-            { title: res.App_State, name: (lang == "ar" ? "St_DescA" : "St_DescE"), type: "text", width: "5%"},
+            { title: res.App_State, name: (lang == "ar" ? "St_DescA" : "St_DescE"), type: "text", width: "5%" },
+            { title: 'VoucherID', name: "VoucherID", type: "text", width: "20%", visible: false },
+
 
         ];
  
@@ -557,6 +559,7 @@ namespace ManagementVoucher {
             TmpVoucherProcessSingl.Src_DescE = AQJournalHeaderDetails[i].Src_DescE;
             TmpVoucherProcessSingl.St_DescA = AQJournalHeaderDetails[i].St_DescA;
             TmpVoucherProcessSingl.Src_DescA = AQJournalHeaderDetails[i].Src_DescA;
+            TmpVoucherProcessSingl.VoucherID = AQJournalHeaderDetails[i].VoucherID;
 
             TmpVoucherProcessDetails.push(TmpVoucherProcessSingl);
 
@@ -577,7 +580,8 @@ namespace ManagementVoucher {
          Newtmp[0].Branch_Code = SysSession.CurrentEnvironment.BranchCode;
          Newtmp[0].Comp_Code = SysSession.CurrentEnvironment.CompCode;
          Newtmp[0].MODULE_CODE = Modules.ManagementVoucher;
-         Newtmp[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        Newtmp[0].sec_FinYear = SysSession.CurrentEnvironment.CurrentYear;
+        
 
         //debugger
         Ajax.Callsync({

@@ -960,6 +960,7 @@ namespace Inv.WebUI.Controllers
             rep.AddParameter("IsAuthVchr", rp.IsAuthVchr);
             rep.AddParameter("IsNewVchr", rp.IsNewVchr);
             rep.AddParameter("IncludeInvTR", rp.IncludeInvTR);
+            rep.AddParameter("orderby", rp.orderby);
             rep.AddParameter("OpenType", rp.OpenType);
             rep.AddParameter("PrdType", rp.PrdType);
             rep.AddParameter("EndType", rp.EndType);
