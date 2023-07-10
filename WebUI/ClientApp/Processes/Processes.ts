@@ -895,7 +895,7 @@ namespace Processes {
     function MasterGridDoubleClick() {
         Selected_Data = new Array<IQ_GetOperation>();
 
-        
+
 
         Selected_Data = Get_IQ_GetOperation.filter(x => x.OperationID == Number(divMasterGrid.SelectedKey));
 
@@ -2156,7 +2156,7 @@ namespace Processes {
             $("#No_Row1" + RecNo).attr("hidden", "true");
             $("#txtCode1" + RecNo).val("000");
 
-        
+
 
             Insert_Serial();
             ComputeTotalsCharge();
@@ -2183,7 +2183,7 @@ namespace Processes {
         txtTotalVatCharge.value = TotalVatCharge.RoundToSt(2).toString();
         txtTotalAfterVatCharge.value = TotalAfterVatCharge.RoundToSt(2).toString();
     }
-   
+
     function Insert_Serial() {
 
         let Chack_Flag = false;
@@ -2868,54 +2868,59 @@ namespace Processes {
     function ValidationCharge_Grid(rowcount: number) {
         //else
 
-
-
-        if ($("#txtAddonsCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاء اختيار الإضافة!", "must choose addition!", MessageType.Worning);
-            Errorinput($("#txtAddonsCharge" + rowcount));
-
-            return false
+        if ($("#txt_StatusFlag1" + rowcount).val() == 'd' || $("#txt_StatusFlag1" + rowcount).val() == 'm') {
+            return true
         }
-        else if ($("#txtAddonsTypeCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاء اختيار نوع الإضافة!", "must choose a type addition !", MessageType.Worning);
-            Errorinput($("#txtAddonsTypeCharge" + rowcount));
-            return false
-        }
-        else if (($("#txtValueCharge" + rowcount).val() == "") || $("#txtValueCharge" + rowcount).val() == "0" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاءادخال القيمة!", "must enter value !", MessageType.Worning);
-            Errorinput($("#txtValueCharge" + rowcount));
-            return false
-        }
-        else if ($("#txtVatType" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاء اختيار نوع الضريبة!", "must choose a type of tax  !", MessageType.Worning);
-            Errorinput($("#txtVatType" + rowcount));
-            return false
-        }
+        else {
 
-        else if ($("#txtVendorIsCheckCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage("  برجاءاختيار نقدى ام علي الحساب!", "must choose cash or debit !", MessageType.Worning);
-            Errorinput($("#txtVendorIsCheckCharge" + rowcount));
 
-            return false
-        }
-        else if (($("#txtInvoiceNumberCharge" + rowcount).val() == "" || $("#txtInvoiceNumberCharge" + rowcount).val() == "0") && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاء ادخال رقم الفاتورة!", "must enter number of invoice  !", MessageType.Worning);
-            Errorinput($("#txtInvoiceNumberCharge" + rowcount));
+            if ($("#txtAddonsCharge" + rowcount).val() == "null") {
+                DisplayMassage(" برجاء اختيار الإضافة!", "must choose addition!", MessageType.Worning);
+                Errorinput($("#txtAddonsCharge" + rowcount));
 
-            return false
-        }
-        else if ($("#txtVendorCharge" + rowcount).val() == "null" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage("برجاءاختيارالمورد!", "must choose vendor !", MessageType.Worning);
-            Errorinput($("#txtVendorCharge" + rowcount));
+                return false
+            }
+            else if ($("#txtAddonsTypeCharge" + rowcount).val() == "null") {
+                DisplayMassage(" برجاء اختيار نوع الإضافة!", "must choose a type addition !", MessageType.Worning);
+                Errorinput($("#txtAddonsTypeCharge" + rowcount));
+                return false
+            }
+            else if (($("#txtValueCharge" + rowcount).val() == "") || $("#txtValueCharge" + rowcount).val() == "0") {
+                DisplayMassage(" برجاءادخال القيمة!", "must enter value !", MessageType.Worning);
+                Errorinput($("#txtValueCharge" + rowcount));
+                return false
+            }
+            else if ($("#txtVatType" + rowcount).val() == "null") {
+                DisplayMassage(" برجاء اختيار نوع الضريبة!", "must choose a type of tax  !", MessageType.Worning);
+                Errorinput($("#txtVatType" + rowcount));
+                return false
+            }
 
-            return false
-        }
+            else if ($("#txtVendorIsCheckCharge" + rowcount).val() == "null") {
+                DisplayMassage("  برجاءاختيار نقدى ام علي الحساب!", "must choose cash or debit !", MessageType.Worning);
+                Errorinput($("#txtVendorIsCheckCharge" + rowcount));
 
-        else if ($("#txt_D_CashBox" + rowcount).val() == "Null" && $("#txtVendorIsCheckCharge" + rowcount).val() == "1" && ($("#txt_StatusFlag1" + rowcount).val() != 'd' || $("#txt_StatusFlag1" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاء اختيار الصندوق!", "must Choose a box  !", MessageType.Worning);
-            Errorinput($("#txt_D_CashBox" + rowcount));
+                return false
+            }
+            else if (($("#txtInvoiceNumberCharge" + rowcount).val() == "" || $("#txtInvoiceNumberCharge" + rowcount).val() == "0")) {
+                DisplayMassage(" برجاء ادخال رقم الفاتورة!", "must enter number of invoice  !", MessageType.Worning);
+                Errorinput($("#txtInvoiceNumberCharge" + rowcount));
 
-            return false
+                return false
+            }
+            else if ($("#txtVendorCharge" + rowcount).val() == "null") {
+                DisplayMassage("برجاءاختيارالمورد!", "must choose vendor !", MessageType.Worning);
+                Errorinput($("#txtVendorCharge" + rowcount));
+
+                return false
+            }
+
+            else if ($("#txt_D_CashBox" + rowcount).val() == "Null" && $("#txtVendorIsCheckCharge" + rowcount).val() == "1") {
+                DisplayMassage(" برجاء اختيار الصندوق!", "must Choose a box  !", MessageType.Worning);
+                Errorinput($("#txt_D_CashBox" + rowcount));
+
+                return false
+            }
         }
 
         return true;
@@ -4619,7 +4624,7 @@ namespace Processes {
                 if (OpenAt != null) { $('#txtdateopening').val(OpenAt); } else {
                     $('#txtdateopening').val(GetDate());
                 }
-                $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate)); 
+                $('#txtClearanceDate').val(DateFormat(Selected_Data[0].ClearanceDate));
                 //$('#ddlVendor').prop("value", Selected_Data[0].VendorID);
                 $('#ddlVendor option[value=' + Selected_Data[0].VendorID + ']').prop('selected', 'selected').change();
                 $('#txtNationality').prop("value", Selected_Data[0].NationalityID);
@@ -5474,7 +5479,7 @@ namespace Processes {
 
                 let result = d.result as string;
 
-                
+
 
                 window.open(result, "_blank");
             }
