@@ -1163,7 +1163,7 @@
   <Width>11.24052in</Width>
   <Page>
     <PageHeader>
-      <Height>4.52884cm</Height>
+      <Height>5.2251cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1635,7 +1635,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>3.6726cm</Top>
+              <Top>4.4346cm</Top>
               <Left>26.16059cm</Left>
               <Height>0.6cm</Height>
               <Width>2.08725cm</Width>
@@ -1672,10 +1672,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>2.11982cm</Top>
-              <Left>5.98232cm</Left>
+              <Top>2.88182cm</Top>
+              <Left>15.87774cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.76968cm</Width>
+              <Width>2.08718cm</Width>
               <ZIndex>14</ZIndex>
               <Style>
                 <Border>
@@ -1706,7 +1706,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>3.6726cm</Top>
+              <Top>4.4346cm</Top>
               <Left>15.87767cm</Left>
               <Height>0.6cm</Height>
               <Width>2.08725cm</Width>
@@ -1809,8 +1809,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_CCDESCA</rd:DefaultName>
-              <Top>2.11982cm</Top>
-              <Left>0.93174cm</Left>
+              <Top>2.88182cm</Top>
+              <Left>10.82716cm</Left>
               <Height>0.6cm</Height>
               <Width>5.04001cm</Width>
               <ZIndex>18</ZIndex>
@@ -1841,7 +1841,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StAuthDSA</rd:DefaultName>
-              <Top>3.6726cm</Top>
+              <Top>4.4346cm</Top>
               <Left>21.08532cm</Left>
               <Height>0.6cm</Height>
               <Width>5.04001cm</Width>
@@ -1873,7 +1873,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StNewDSA</rd:DefaultName>
-              <Top>3.6726cm</Top>
+              <Top>4.4346cm</Top>
               <Left>10.8024cm</Left>
               <Height>0.6cm</Height>
               <Width>5.0465cm</Width>
@@ -1907,7 +1907,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>26.00184cm</Left>
               <Height>0.6cm</Height>
               <Width>2.246cm</Width>
@@ -1941,7 +1941,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>15.71892cm</Left>
               <Height>0.6cm</Height>
               <Width>2.246cm</Width>
@@ -1975,7 +1975,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>5.66475cm</Left>
               <Height>0.6cm</Height>
               <Width>2.08725cm</Width>
@@ -2007,7 +2007,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_OpenDSA</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>21.08532cm</Left>
               <Height>0.6cm</Height>
               <Width>4.91653cm</Width>
@@ -2039,7 +2039,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_PrdDSA</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>10.8024cm</Left>
               <Height>0.6cm</Height>
               <Width>4.88126cm</Width>
@@ -2071,7 +2071,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_EndDSA</rd:DefaultName>
-              <Top>2.89621cm</Top>
+              <Top>3.65821cm</Top>
               <Left>0.93174cm</Left>
               <Height>0.6cm</Height>
               <Width>4.69075cm</Width>
@@ -2103,8 +2103,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StAuthDSA1</rd:DefaultName>
-              <Top>3.63732cm</Top>
-              <Left>0.93174cm</Left>
+              <Top>2.88182cm</Top>
+              <Left>0.94225cm</Left>
               <Height>0.6cm</Height>
               <Width>4.69075cm</Width>
               <ZIndex>27</ZIndex>
@@ -2137,8 +2137,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>3.64085cm</Top>
-              <Left>5.65424cm</Left>
+              <Top>2.88535cm</Top>
+              <Left>5.66475cm</Left>
               <Height>0.6cm</Height>
               <Width>2.08725cm</Width>
               <ZIndex>28</ZIndex>
@@ -2169,10 +2169,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Par_StAuthDSA</rd:DefaultName>
-              <Top>1.41598cm</Top>
-              <Left>3.34456cm</Left>
+              <Top>2.11982cm</Top>
+              <Left>1.10924cm</Left>
               <Height>0.6cm</Height>
-              <Width>2.70235cm</Width>
+              <Width>4.498cm</Width>
               <ZIndex>29</ZIndex>
               <Style>
                 <Border>
@@ -2203,11 +2203,77 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox12</rd:DefaultName>
-              <Top>1.41598cm</Top>
-              <Left>6.02341cm</Left>
+              <Top>2.11982cm</Top>
+              <Left>5.60724cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.491cm</Width>
+              <Width>2.13425cm</Width>
               <ZIndex>30</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Par_AccDSA">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Par_AccDSA.Value, "Rpt_GLGeneralLedgerAr")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Par_AccDSA</rd:DefaultName>
+              <Top>2.88182cm</Top>
+              <Left>21.08532cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.04001cm</Width>
+              <ZIndex>31</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox17">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>حساب الأستاذ</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox12</rd:DefaultName>
+              <Top>2.88182cm</Top>
+              <Left>26.16059cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.08725cm</Width>
+              <ZIndex>32</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -2220,7 +2286,7 @@
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>4.40537cm</Height>
+          <Height>5.2251cm</Height>
           <Width>28.55092cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
