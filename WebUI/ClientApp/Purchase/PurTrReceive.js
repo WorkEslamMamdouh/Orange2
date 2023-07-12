@@ -2256,7 +2256,7 @@ var PurTrReceive;
             }
             else if (PriceVal == 0) {
                 DisplayMassage(" برجاءادخال السعر", "Please enter the price", MessageType.Error);
-                Errorinput($("#txtPrice" + rowcount));
+                Errorinput($("#txtPriceFc" + rowcount));
                 return false;
             }
             return true;
@@ -2329,6 +2329,8 @@ var PurTrReceive;
             $("#txtPrice" + i).prop("disabled", true);
             $("#txtTax" + i).prop("disabled", true);
             $("#txtTotAfterTax" + i).prop("disabled", true);
+            $("#txtNetUnitPrice" + i).prop("disabled", true);
+            $("#txtSerialH" + i).prop("disabled", true);
             $("#btn_minus" + i).removeClass("display_none");
             $("#btn_minus" + i).removeAttr("disabled");
             $("#btnSearchItems" + CountGrid).removeAttr("disabled");

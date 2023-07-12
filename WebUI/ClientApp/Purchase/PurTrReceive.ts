@@ -2862,14 +2862,14 @@ namespace PurTrReceive {
             }
             else if (PriceVal == 0) {
                 DisplayMassage(" برجاءادخال السعر", "Please enter the price", MessageType.Error);
-                Errorinput($("#txtPrice" + rowcount));
+                Errorinput($("#txtPriceFc" + rowcount));
                 return false
             }
             return true;
         }
     }
     function ValidationCharge_Grid(rowcount: number) {
-        if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m" || $("#txt_StatusFlag1" + rowcount).val().trim() == "") {
+        if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m"  ) {
             return true;
         }
         else {
@@ -2943,6 +2943,8 @@ namespace PurTrReceive {
             $("#txtPrice" + i).prop("disabled", true);
             $("#txtTax" + i).prop("disabled", true);
             $("#txtTotAfterTax" + i).prop("disabled", true);
+            $("#txtNetUnitPrice" + i).prop("disabled", true);
+            $("#txtSerialH" + i).prop("disabled", true);
 
             $("#btn_minus" + i).removeClass("display_none");
             $("#btn_minus" + i).removeAttr("disabled");
