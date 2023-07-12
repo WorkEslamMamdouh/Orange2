@@ -226,7 +226,8 @@ namespace Inv.API.Controllers
                         PurTRReceiveItemsService.InsertLst(obj.I_Pur_TR_ReceiveItems);
                         PurTRChargesService.InsertLst(obj.I_Pur_Tr_ReceiveCharges);
 
-                        
+                        db.Database.ExecuteSqlCommand("delete [dbo].[I_Pur_TR_ReceiveItems] where ItemID is null and ReceiveID = " + Pur_TR_Invoice.ReceiveID + "");
+
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(obj.I_Pur_TR_Receive.CompCode), Convert.ToInt32(obj.I_Pur_TR_Receive.BranchCode), Pur_TR_Invoice.ReceiveID, "PurInvoice", "Add", db);
                         if (res.ResponseState == true)
                         {
@@ -404,7 +405,8 @@ namespace Inv.API.Controllers
                             PurTRReceiveItemsService.Delete(deletedId);
                         }
 
-                        
+                        db.Database.ExecuteSqlCommand("delete [dbo].[I_Pur_TR_ReceiveItems] where ItemID is null and ReceiveID = " + updatedObj.I_Pur_TR_Receive.ReceiveID + "");
+
                         ResponseResult res = Shared.TransactionProcess(Convert.ToInt32(updatedObj.I_Pur_TR_Receive.CompCode), Convert.ToInt32(updatedObj.I_Pur_TR_Receive.BranchCode), updatedObj.I_Pur_TR_Receive.ReceiveID, "PurInvoice", "Update", db);
                         if (res.ResponseState == true)
                         {

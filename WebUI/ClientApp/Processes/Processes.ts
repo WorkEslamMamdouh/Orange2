@@ -1562,17 +1562,7 @@ namespace Processes {
         $("#btn_minus" + cnt).on('click', function () {
             DeleteRow(cnt);
         });
-        if (SysSession.CurrentPrivileges.Remove) {
-            //$("#btn_minus" + cnt).removeClass("display_none");
-            //$("#btn_minus" + cnt).removeAttr("disabled");
 
-            $("#btn_minus" + cnt).addClass("display_none");
-            $("#btn_minus" + cnt).attr("disabled", "disabled");
-        }
-        else {
-            $("#btn_minus" + cnt).addClass("display_none");
-            $("#btn_minus" + cnt).attr("disabled", "disabled");
-        }
         $("#txtQuantity" + cnt).click(() => {
 
 
@@ -1676,8 +1666,7 @@ namespace Processes {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
 
             CountItems = CountItems - 1;
-            $("#ddlFamily" + RecNo).val("1");
-            $("#ddlItem" + RecNo).val("2");
+            $("#ddlFamily" + RecNo).val("1"); 
             $("#txtQuantity" + RecNo).val("1");
             $("#txtPrice" + RecNo).val("1");
             $("#txtQuantityReturnValue" + RecNo).val("1111");
@@ -2832,34 +2821,40 @@ namespace Processes {
     }
     function Validation_Grid(rowcount: number) {
 
-        if ($("#ddlFamily" + rowcount).val() == "null" && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage("  برجاءادخال النوع!", "must enter Type !", MessageType.Worning);
-            Errorinput($("#ddlFamily" + rowcount));
-            return false
+        if (($("#txt_StatusFlag" + rowcount).val() == 'd' || $("#txt_StatusFlag" + rowcount).val() == 'm')) {
+            return true
         }
-        else if (($("#ddlItem" + rowcount).val() == "null") && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage("برجاءادخال الصنف!", "must enter item !", MessageType.Worning);
-            Errorinput($("#ddlItem" + rowcount));
+        else {
 
-            return false
-        }
-        else if ((Number($("#txtQuantity" + rowcount).val()) < Number($("#txtSoldQty" + rowcount).val())) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage(" يجب تكون الكميه اكبر من الكمبه المباعه!", "must enter Quantity !", MessageType.Worning);
-            Errorinput($("#txtQuantity" + rowcount));
-            return false
-        }
-        else if (($("#txtPrice" + rowcount).val() == "" || $("#txtPrice" + rowcount).val() == 0) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage("  برجاءادخال السعر!", "must enter Price !", MessageType.Worning);
-            Errorinput($("#txtPrice" + rowcount));
 
-            return false
-        }
-        else if (($("#txtMinPrice" + rowcount).val() == "" || $("#txtMinPrice" + rowcount).val() == 0) && ($("#txt_StatusFlag" + rowcount).val() != 'd' || $("#txt_StatusFlag" + rowcount).val() != 'm')) {
-            DisplayMassage(" برجاءادخال اقل سعر!", "must enter lowest price !", MessageType.Worning);
-            Errorinput($("#txtMinPrice" + rowcount));
-            return false
-        }
+            if ($("#ddlFamily" + rowcount).val() == "null" ) {
+                DisplayMassage("  برجاءادخال النوع!", "must enter Type !", MessageType.Worning);
+                Errorinput($("#ddlFamily" + rowcount));
+                return false
+            }
+            else if (($("#ddlItem" + rowcount).val() == "null")) {
+                DisplayMassage("برجاءادخال الصنف!", "must enter item !", MessageType.Worning);
+                Errorinput($("#ddlItem" + rowcount));
 
+                return false
+            }
+            else if ((Number($("#txtQuantity" + rowcount).val()) < Number($("#txtSoldQty" + rowcount).val()))) {
+                DisplayMassage(" يجب تكون الكميه اكبر من الكمبه المباعه!", "must enter Quantity !", MessageType.Worning);
+                Errorinput($("#txtQuantity" + rowcount));
+                return false
+            }
+            else if (($("#txtPrice" + rowcount).val() == "" || $("#txtPrice" + rowcount).val() == 0)) {
+                DisplayMassage("  برجاءادخال السعر!", "must enter Price !", MessageType.Worning);
+                Errorinput($("#txtPrice" + rowcount));
+
+                return false
+            }
+            else if (($("#txtMinPrice" + rowcount).val() == "" || $("#txtMinPrice" + rowcount).val() == 0)) {
+                DisplayMassage(" برجاءادخال اقل سعر!", "must enter lowest price !", MessageType.Worning);
+                Errorinput($("#txtMinPrice" + rowcount));
+                return false
+            }
+        }
 
 
         return true;
@@ -3283,13 +3278,14 @@ namespace Processes {
                 }
             }
             if (StatusFlag == "d") {
-                if ($("#ReciveDetailsID" + i).val() != "") {
-                    var OperationItemID = $("#txt_ID" + i).val();
-                    OperationItemSingleModel.StatusFlag = StatusFlag.toString();
-                    OperationItemSingleModel.OperationID = OperationID;
-                    OperationItemSingleModel.OperationItemID = OperationItemID;
-                    OperationItemModel.push(OperationItemSingleModel);
-                }
+
+                var OperationItemID = $("#txt_ID" + i).val();
+                OperationItemSingleModel.StatusFlag = StatusFlag.toString();
+                OperationItemSingleModel.OperationID = OperationID;
+                OperationItemSingleModel.ItemID = $("#ddlItem" + i).val();
+                OperationItemSingleModel.OperationItemID = OperationItemID;
+                OperationItemModel.push(OperationItemSingleModel);
+
             }
         }
     }
@@ -4692,6 +4688,7 @@ namespace Processes {
         $("#DivHederMaster").attr("disabled", "disabled").off('click');
         $("#DivHederMaster").addClass("disabledDiv");
         $("#div_MasterGird").addClass("disabledDiv");
+
         if (Status == 2) {
             $("#btnAddDetails").addClass("display_none");
             $(".fontitm6Processes").addClass("display_none");
@@ -4702,7 +4699,7 @@ namespace Processes {
                 $("#txtRemark_item" + i).removeAttr("disabled");
                 //$("#txtScrapQty" + i).removeAttr("disabled");
                 $("#btnAddDetails").removeClass("display_none");
-
+                $("#btn_minus" + i).removeClass("display_none");
             }
         }
         else {

@@ -518,8 +518,14 @@ namespace Inv.API.Controllers
                         //loop Delete  I_Pur_TR_ReceiveItems
                         foreach (I_TR_OperationItems item in deletedOperationItems)
                         {
-                            int deletedId = item.OperationItemID;
-                            OperationItems.Delete(deletedId);
+                            string query= @"DECLARE	 @res int SELECT   @res = 0
+                                                            EXEC	 [dbo].[IProc_OperationItemDelete]
+		                                                            @Operationitemid = " + item.OperationItemID + @",
+		                                                            @itemid = " + item.ItemID + @",
+		                                                            @Operationid = " + item.OperationID + @",
+		                                                            @res = @res OUTPUT
+                                                            SELECT	@res as N'@res'";
+                            int res_ = db.Database.SqlQuery<int>(query).FirstOrDefault();
                         }
                         int val = updatedObj[0].OperationID;
                         I_TR_Operation operObj = db.I_TR_Operation.Where(s => s.OperationID == val).FirstOrDefault();
@@ -668,9 +674,14 @@ namespace Inv.API.Controllers
 
                         //loop Delete  I_Pur_TR_ReceiveItems
                         foreach (I_TR_OperationItems item in deletedOperationItems)
-                        {
-                            int deletedId = item.OperationItemID;
-                            OperationItems.Delete(deletedId);
+                        { 
+                            int res_ = db.Database.SqlQuery<int>(@"DECLARE	 @res int SELECT   @res = 0
+                                                            EXEC	 [dbo].[IProc_OperationItemDelete]
+		                                                            @Operationitemid = "+ item.OperationItemID + @",
+		                                                            @itemid = "+ item.ItemID + @",
+		                                                            @Operationid = "+ item.OperationID + @",
+		                                                            @res = @res OUTPUT
+                                                            SELECT	@res as N'@res'").FirstOrDefault();
                         }
                         int val = updatedObj[0].OperationID;
                         I_TR_Operation operObj = db.I_TR_Operation.Where(s => s.OperationID == val).FirstOrDefault();

@@ -2198,9 +2198,7 @@ namespace PurTrReceive {
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", () => {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
             CountItems = CountItems - 1;
-
-            $("#ddlFamily" + RecNo).val("Null");
-            $("#ddlItem" + RecNo).val("Null");
+             
             $("#txtQuantity" + RecNo).val("1");
             $("#txtPrice" + RecNo).val("1");
             $("#txtQuantityReturnValue" + RecNo).val("0");
@@ -3151,12 +3149,13 @@ namespace PurTrReceive {
 
             }
             if (StatusFlag == "d") {
-                if ($("#ReciveDetailsID" + i).val() != "") {
+           
                     var deletedID = $("#ReciveDetailsID" + i).val();
                     ReceiveItemSingleModel.StatusFlag = StatusFlag.toString();
-                    ReceiveItemSingleModel.ReciveDetailsID = deletedID;
+                ReceiveItemSingleModel.ReciveDetailsID = deletedID;
+                ReceiveItemSingleModel.ItemID = $("#ddlItem" + i).val();
                     ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
-                }
+              
             }
         }
 
@@ -3261,6 +3260,11 @@ namespace PurTrReceive {
             return false
         }
 
+        var ChakItemID = MasterDetailModel.I_Pur_TR_ReceiveItems.filter(x => x.ItemID == null);
+        if (ChakItemID.length > 0) {
+            DisplayMassage(" برجاء مراجعه علي  الاصناف", "Please select the salesman", MessageType.Error);
+        }
+
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertPurchaseReceiveMasterDetail"),
@@ -3302,6 +3306,11 @@ namespace PurTrReceive {
             DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
             Errorinput(ddlSalesmanHeader);
             return false
+        }
+
+        var ChakItemID = MasterDetailModel.I_Pur_TR_ReceiveItems.filter(x => x.ItemID == null);
+        if (ChakItemID.length > 0) {
+            DisplayMassage(" برجاء مراجعه علي  الاصناف", "Please select the salesman", MessageType.Error);
         }
 
         Ajax.Callsync({

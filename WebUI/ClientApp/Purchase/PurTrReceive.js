@@ -1748,8 +1748,6 @@ var PurTrReceive;
         WorningMessage("هل تريد الحذف؟", "Do you want to delete?", "تحذير", "worning", function () {
             $("#txt_StatusFlag" + RecNo).val() == 'i' ? $("#txt_StatusFlag" + RecNo).val('m') : $("#txt_StatusFlag" + RecNo).val('d');
             CountItems = CountItems - 1;
-            $("#ddlFamily" + RecNo).val("Null");
-            $("#ddlItem" + RecNo).val("Null");
             $("#txtQuantity" + RecNo).val("1");
             $("#txtPrice" + RecNo).val("1");
             $("#txtQuantityReturnValue" + RecNo).val("0");
@@ -2502,12 +2500,11 @@ var PurTrReceive;
                 ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
             }
             if (StatusFlag == "d") {
-                if ($("#ReciveDetailsID" + i).val() != "") {
-                    var deletedID = $("#ReciveDetailsID" + i).val();
-                    ReceiveItemSingleModel.StatusFlag = StatusFlag.toString();
-                    ReceiveItemSingleModel.ReciveDetailsID = deletedID;
-                    ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
-                }
+                var deletedID = $("#ReciveDetailsID" + i).val();
+                ReceiveItemSingleModel.StatusFlag = StatusFlag.toString();
+                ReceiveItemSingleModel.ReciveDetailsID = deletedID;
+                ReceiveItemSingleModel.ItemID = $("#ddlItem" + i).val();
+                ReceiveItemsDetailsModel.push(ReceiveItemSingleModel);
             }
         }
         // Details Receive charges
@@ -2615,6 +2612,10 @@ var PurTrReceive;
             }
             return false;
         }
+        var ChakItemID = MasterDetailModel.I_Pur_TR_ReceiveItems.filter(function (x) { return x.ItemID == null; });
+        if (ChakItemID.length > 0) {
+            DisplayMassage(" برجاء مراجعه علي  الاصناف", "Please select the salesman", MessageType.Error);
+        }
         Ajax.Callsync({
             type: "POST",
             url: sys.apiUrl("PurTrReceive", "InsertPurchaseReceiveMasterDetail"),
@@ -2650,6 +2651,10 @@ var PurTrReceive;
             DisplayMassage(" برجاء اختيار المندوب", "Please select the salesman", MessageType.Error);
             Errorinput(ddlSalesmanHeader);
             return false;
+        }
+        var ChakItemID = MasterDetailModel.I_Pur_TR_ReceiveItems.filter(function (x) { return x.ItemID == null; });
+        if (ChakItemID.length > 0) {
+            DisplayMassage(" برجاء مراجعه علي  الاصناف", "Please select the salesman", MessageType.Error);
         }
         Ajax.Callsync({
             type: "POST",
