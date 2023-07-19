@@ -2263,7 +2263,7 @@ var PurTrReceive;
         }
     }
     function ValidationCharge_Grid(rowcount) {
-        if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m" || $("#txt_StatusFlag1" + rowcount).val().trim() == "") {
+        if ($("#txt_StatusFlag1" + rowcount).val() == "d" || $("#txt_StatusFlag1" + rowcount).val() == "m") {
             return true;
         }
         else {

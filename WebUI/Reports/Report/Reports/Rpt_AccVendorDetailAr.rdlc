@@ -806,6 +806,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"Vendorcode") ,
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -852,7 +853,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"Vendorcode") ,
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=sum(Fields!Credit.Value)</Value>
+                              <Value>=Sum(Fields!Credit.Value, "Vendorcode") -  First(Fields!Credit.Value, "Vendorcode")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00</Format>
@@ -888,7 +889,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"Vendorcode") ,
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=sum(Fields!debit.Value)</Value>
+                              <Value>=Sum(Fields!debit.Value, "Vendorcode") -  First(Fields!debit.Value, "Vendorcode")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00</Format>

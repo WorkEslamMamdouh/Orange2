@@ -979,7 +979,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=SUM(Fields!Credit.Value)</Value>
+                              <Value>=Sum(Fields!Credit.Value, "customercode") -  First(Fields!Credit.Value, "customercode")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>
@@ -1009,6 +1009,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1020,7 +1021,7 @@ RunningValue(Fields!debit.Value-Fields!Credit.Value,sum,"customercode") ,
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=SUM(Fields!debit.Value)</Value>
+                              <Value>=Sum(Fields!debit.Value, "customercode") -  First(Fields!debit.Value, "customercode")</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00)</Format>

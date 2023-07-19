@@ -52,6 +52,7 @@ namespace LnkVoucher {
     var VoucherCCType = SysSession.CurrentEnvironment.I_Control[0].GL_VoucherCCType;
     var Flag_Enabled_All = SysSession.CurrentPrivileges.CUSTOM2;
     var CostCenter_Enabled = SysSession.CurrentPrivileges.CUSTOM1;
+
     export function InitalizeComponent() {
         document.getElementById('Screen_name').innerHTML = Name_Screen;
         $('#btnAdd').addClass('hidden_Control');

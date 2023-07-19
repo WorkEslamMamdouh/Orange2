@@ -3405,7 +3405,8 @@ namespace Processes {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
-                chargesingleModel.TrNo = $("#TrNo" + i).val();
+                //chargesingleModel.TrNo = $("#TrNo" + i).val();
+                chargesingleModel.TrNo = Number($('#txtNumber').val())
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
@@ -3433,7 +3434,8 @@ namespace Processes {
                 chargesingleModel.RefInvoiceNo = $("#txtInvoiceNumberCharge" + i).val();
                 chargesingleModel.ChRemarks = $("#RemarksCharge" + i).val();
                 chargesingleModel.VoucherNo = $("#VoucherNoCharge" + i).val();
-                chargesingleModel.TrNo = $("#TrNo" + i).val();
+                //chargesingleModel.TrNo = $("#TrNo" + i).val();
+                chargesingleModel.TrNo = Number($('#txtNumber').val())
                 chargesingleModel.IsPosted = $("#IsPosted" + i).prop("checked")
                 chargesingleModel.RefInvoiceDate = $("#txtInvoiceDateCharge" + i).val();
                 chargesingleModel.VendorID = $("#txtVendorCharge" + i).val();
