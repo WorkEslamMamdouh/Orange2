@@ -6,37 +6,37 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.03651cm</Width>
+              <Width>1.99418cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63964cm</Width>
+              <Width>1.59731cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.90422cm</Width>
+              <Width>1.86189cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.48089cm</Width>
+              <Width>1.43856cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.48089cm</Width>
+              <Width>1.43856cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.47956cm</Width>
+              <Width>3.43723cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.90547cm</Width>
+              <Width>1.86314cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.42798cm</Width>
+              <Width>1.38565cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.29568cm</Width>
+              <Width>1.25335cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.6543cm</Width>
+              <Width>1.61197cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.63963cm</Width>
+              <Width>1.5973cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1623,9 +1623,9 @@
             <Value>=Fields!TrNo.Value</Value>
           </SortExpression>
         </SortExpressions>
-        <Top>0.19176cm</Top>
+        <Top>0.17942cm</Top>
         <Height>3.13229cm</Height>
-        <Width>19.94477cm</Width>
+        <Width>19.4791cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1633,13 +1633,13 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>3.40343cm</Height>
+    <Height>3.4881cm</Height>
     <Style />
   </Body>
-  <Width>19.95193cm</Width>
+  <Width>19.53202cm</Width>
   <Page>
     <PageHeader>
-      <Height>5.01027cm</Height>
+      <Height>5.01028cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1666,7 +1666,7 @@
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
               <Top>0.54562cm</Top>
-              <Left>12.84634cm</Left>
+              <Left>12.68759cm</Left>
               <Height>0.50355cm</Height>
               <Width>4.74513cm</Width>
               <Style>
@@ -1700,7 +1700,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.54562cm</Top>
-              <Left>17.61794cm</Left>
+              <Left>17.45919cm</Left>
               <Height>0.50355cm</Height>
               <Width>2.04108cm</Width>
               <ZIndex>1</ZIndex>
@@ -1735,7 +1735,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>1.21617cm</Top>
-              <Left>17.64969cm</Left>
+              <Left>17.49094cm</Left>
               <Height>0.50355cm</Height>
               <Width>2.04108cm</Width>
               <ZIndex>2</ZIndex>
@@ -1767,7 +1767,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
-              <Left>0.07938cm</Left>
+              <Left>0cm</Left>
               <Height>0.6cm</Height>
               <Width>8.13563cm</Width>
               <ZIndex>3</ZIndex>
@@ -1801,7 +1801,7 @@
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
               <Top>1.24439cm</Top>
-              <Left>15.12175cm</Left>
+              <Left>14.963cm</Left>
               <Height>0.50355cm</Height>
               <Width>2.46971cm</Width>
               <ZIndex>4</ZIndex>
@@ -1837,7 +1837,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>1.02333cm</Top>
-              <Left>5.58037cm</Left>
+              <Left>5.42162cm</Left>
               <Height>0.83924cm</Height>
               <Width>8.08089cm</Width>
               <ZIndex>5</ZIndex>
@@ -1871,7 +1871,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>CompNameE</rd:DefaultName>
-              <Left>11.65755cm</Left>
+              <Left>11.4988cm</Left>
               <Height>0.6cm</Height>
               <Width>8.00147cm</Width>
               <ZIndex>6</ZIndex>
@@ -1906,7 +1906,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.77639cm</Top>
-              <Left>2.91993cm</Left>
+              <Left>2.76118cm</Left>
               <Height>0.50698cm</Height>
               <Width>1.6716cm</Width>
               <ZIndex>7</ZIndex>
@@ -1938,7 +1938,7 @@
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
               <Top>0.77639cm</Top>
-              <Left>1.8551cm</Left>
+              <Left>1.69635cm</Left>
               <Height>0.50698cm</Height>
               <Width>0.9125cm</Width>
               <ZIndex>8</ZIndex>
@@ -1970,7 +1970,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.77639cm</Top>
-              <Left>1.11016cm</Left>
+              <Left>0.95141cm</Left>
               <Height>0.50698cm</Height>
               <Width>0.56855cm</Width>
               <ZIndex>9</ZIndex>
@@ -2036,7 +2036,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>17.79078cm</Left>
+              <Left>17.63203cm</Left>
               <Height>0.6cm</Height>
               <Width>1.79416cm</Width>
               <ZIndex>11</ZIndex>
@@ -2070,7 +2070,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.75572cm</Top>
-              <Left>17.81976cm</Left>
+              <Left>17.66101cm</Left>
               <Height>0.6cm</Height>
               <Width>1.75888cm</Width>
               <ZIndex>12</ZIndex>
@@ -2104,7 +2104,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>12.62992cm</Left>
+              <Left>12.47117cm</Left>
               <Height>0.6cm</Height>
               <Width>1.83389cm</Width>
               <ZIndex>13</ZIndex>
@@ -2138,7 +2138,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>4.16065cm</Left>
+              <Left>4.0019cm</Left>
               <Height>0.6cm</Height>
               <Width>1.54721cm</Width>
               <ZIndex>14</ZIndex>
@@ -2172,7 +2172,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>3.45422cm</Top>
-              <Left>18.03143cm</Left>
+              <Left>17.87268cm</Left>
               <Height>0.6cm</Height>
               <Width>1.54721cm</Width>
               <ZIndex>15</ZIndex>
@@ -2206,7 +2206,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>2.75572cm</Top>
-              <Left>12.72815cm</Left>
+              <Left>12.5694cm</Left>
               <Height>0.6cm</Height>
               <Width>1.73566cm</Width>
               <ZIndex>16</ZIndex>
@@ -2238,7 +2238,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_FromDate</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>14.82274cm</Left>
+              <Left>14.66399cm</Left>
               <Height>0.6cm</Height>
               <Width>2.96804cm</Width>
               <ZIndex>17</ZIndex>
@@ -2270,7 +2270,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_Todate</rd:DefaultName>
               <Top>2.75572cm</Top>
-              <Left>14.82274cm</Left>
+              <Left>14.66399cm</Left>
               <Height>0.6cm</Height>
               <Width>2.96006cm</Width>
               <ZIndex>18</ZIndex>
@@ -2302,7 +2302,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_CatDSA</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>6.01514cm</Left>
+              <Left>5.85639cm</Left>
               <Height>0.6cm</Height>
               <Width>6.61478cm</Width>
               <ZIndex>19</ZIndex>
@@ -2334,7 +2334,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_FamilyDSA</rd:DefaultName>
               <Top>2.75572cm</Top>
-              <Left>6.01514cm</Left>
+              <Left>5.85639cm</Left>
               <Height>0.6cm</Height>
               <Width>6.61478cm</Width>
               <ZIndex>20</ZIndex>
@@ -2366,7 +2366,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_ItemDSA</rd:DefaultName>
               <Top>3.45422cm</Top>
-              <Left>6.01514cm</Left>
+              <Left>5.85639cm</Left>
               <Height>0.6cm</Height>
               <Width>12.01632cm</Width>
               <ZIndex>21</ZIndex>
@@ -2398,7 +2398,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_StatusDSA</rd:DefaultName>
               <Top>2.07458cm</Top>
-              <Left>0.63086cm</Left>
+              <Left>0.47211cm</Left>
               <Height>0.6cm</Height>
               <Width>3.52981cm</Width>
               <ZIndex>22</ZIndex>
@@ -2432,7 +2432,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox13</rd:DefaultName>
               <Top>4.13536cm</Top>
-              <Left>18.03143cm</Left>
+              <Left>17.87268cm</Left>
               <Height>0.6cm</Height>
               <Width>1.54721cm</Width>
               <ZIndex>23</ZIndex>
@@ -2464,7 +2464,7 @@
               </Paragraphs>
               <rd:DefaultName>Par_CatDSA</rd:DefaultName>
               <Top>4.13536cm</Top>
-              <Left>6.01514cm</Left>
+              <Left>5.85639cm</Left>
               <Height>0.6cm</Height>
               <Width>12.01632cm</Width>
               <ZIndex>24</ZIndex>
@@ -2482,7 +2482,7 @@
           <KeepTogether>true</KeepTogether>
           <Top>0.03092in</Top>
           <Height>4.93174cm</Height>
-          <Width>19.94477cm</Width>
+          <Width>19.53202cm</Width>
           <Visibility>
             <Hidden>=IIf(Fields!Par_RepType.Value = 3, True, False)</Hidden>
           </Visibility>
@@ -2502,7 +2502,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.44979cm</Height>
+      <Height>0.51329cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <Style>

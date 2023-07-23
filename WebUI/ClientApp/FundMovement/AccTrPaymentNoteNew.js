@@ -223,6 +223,7 @@ var AccTrPaymentNoteNew;
                 { NameTable: 'A_D_VAT_TYPE', Condition: " COMP_CODE = " + CompCode + " and TYPE = 1" },
                 { NameTable: 'A_G_Vendor', Condition: "" },
                 { NameTable: 'G_COST_CENTER', Condition: " COMP_CODE = " + CompCode + " " },
+                //{ NameTable: 'GProc_GetBranchModules', Condition: " 1, 1 ", IsProc: true, IsExec: true },
             ];
         DataResult(Table);
         debugger;
@@ -1216,6 +1217,12 @@ var AccTrPaymentNoteNew;
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+        if ($('#txt_BankAcc_Code').val() == 'null') {
+            Model.BankAcc_Code = null;
+        }
+        else {
+            Model.BankAcc_Code = $('#txt_BankAcc_Code').val();
+        }
         Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;

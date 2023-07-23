@@ -373,9 +373,9 @@ var AccTrReceiptNoteNew;
         if (txtCashTypeH.value == '0') { // نقدي 
             $('._Cash').removeClass('display_none');
         }
-        else if (txtCashTypeH.value == '8') { //تحصيل شبكة 
-            $('._Card').removeClass('display_none');
-        }
+        //else if (txtCashTypeH.value == '8') { //تحصيل شبكة 
+        //    $('._Card').removeClass('display_none');
+        //}
         else { // الجميع 
             $('#Bank_Div').removeClass('display_none');
             $('#txt_Amount').removeAttr('disabled');
@@ -616,7 +616,7 @@ var AccTrReceiptNoteNew;
         $('#id_div_Filter').addClass('disabledDiv');
         chkStatus.disabled = !SysSession.CurrentPrivileges.CUSTOM2;
         chkIsDeffered.checked == true ? $('#txtDueDate').removeAttr('disabled') : $('#txtDueDate').attr('disabled', 'disabled');
-        if (txtCashTypeH.value != '0' && txtCashTypeH.value != '8') { // نقدي  او تحصيل شبكة  
+        if (txtCashTypeH.value != '0') { // نقدي  او تحصيل شبكة  
             $('#txt_Amount').removeAttr('disabled');
             $('._dis_Bank').removeAttr('disabled');
         }
@@ -693,9 +693,9 @@ var AccTrReceiptNoteNew;
         else if (txtCashTypeH.value == '0') { // نقدي 
             $('._Cash').removeClass('display_none');
         }
-        else if (txtCashTypeH.value == '8') { //تحصيل شبكة  
-            $('._Card').removeClass('display_none');
-        }
+        //else if (txtCashTypeH.value == '8') {//تحصيل شبكة  
+        //    $('._Card').removeClass('display_none');
+        //}
     }
     //****************************************************Validation*********************************************
     function Validation() {
@@ -726,12 +726,12 @@ var AccTrReceiptNoteNew;
             Errorinput(txt_CashAmount);
             return false;
         }
-        if ((Number(txt_CardAmount.value) == 0) && txtCashTypeH.value == "8") {
-            DisplayMassage("يجب ادخال الشبكه", "You must enter cash or card ", MessageType.Worning);
-            Errorinput(txt_CardAmount);
-            Errorinput(txt_CashAmount);
-            return false;
-        }
+        //if ((Number(txt_CardAmount.value) == 0) && txtCashTypeH.value == "8") {
+        //    DisplayMassage("يجب ادخال الشبكه", "You must enter cash or card ", MessageType.Worning);
+        //    Errorinput(txt_CardAmount);
+        //    Errorinput(txt_CashAmount);
+        //    return false;
+        //}
         if (Number($('#txt_Amount').val()) == 0) {
             DisplayMassage("يجب ادخال  البلغ   ", " Amount must be entered", MessageType.Worning);
             Errorinput($('#txt_Amount'));
@@ -798,6 +798,12 @@ var AccTrReceiptNoteNew;
         Model.Comp_Code = CompCode.toString();
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
+        if ($('#txt_BankAcc_Code').val() == 'null') {
+            Model.BankAcc_Code = null;
+        }
+        else {
+            Model.BankAcc_Code = $('#txt_BankAcc_Code').val();
+        }
         Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Model.MODULE_CODE = Modules.AccTrReceiptNoteNew;

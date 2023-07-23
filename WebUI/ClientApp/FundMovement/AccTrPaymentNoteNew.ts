@@ -1362,6 +1362,13 @@ namespace AccTrPaymentNoteNew {
         Model.Branch_Code = BranchCode.toString();
         Model.TrDateH = '1';
 
+        if ($('#txt_BankAcc_Code').val() == 'null') {
+            Model.BankAcc_Code = null;
+        }
+        else {
+            Model.BankAcc_Code = $('#txt_BankAcc_Code').val();
+        }
+
         Model.Branch_Code = SysSession.CurrentEnvironment.BranchCode;
         Model.Comp_Code = SysSession.CurrentEnvironment.CompCode;
         Model.MODULE_CODE = Modules.AccTrPaymentNoteNew;
