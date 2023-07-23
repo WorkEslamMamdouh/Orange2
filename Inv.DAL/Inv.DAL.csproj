@@ -74,7 +74,16 @@
     <Compile Include="Domain\AProc_Rpt_CashVoucherList_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Domain\AProc_Rpt_GLAccountGroupStatmentEach_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AProc_Rpt_GLAccountGroupStatmentsum_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Domain\AProc_Rpt_GLAccountStatment_Result.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AProc_Rpt_GLAging_Result.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AProc_Rpt_GLDtCCenterStatmentDetail_Result.cs">
@@ -123,6 +132,9 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AQ_GetAccount.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\AQ_GetAccountGroupDetail.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\AQ_GetCashVoucherDetail.cs">
@@ -189,6 +201,12 @@
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\A_ACCOUNT.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\A_ACCOUNT_GROUP.cs">
+      <DependentUpon>InvModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\A_ACCOUNT_GROUP_DETAIL.cs">
       <DependentUpon>InvModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Domain\A_ACCOUNT_YEAR.cs">
